@@ -54,7 +54,7 @@
         Collection item widgets that are added to an instance of the =Uize.Widget.Collection= class as child widgets are named using one of two available schemes: `Explicit Naming of Collection Item Widgets`, and `Automatic Naming of Collection Item Widgets`.
 
         Explicit Naming of Collection Item Widgets
-          When a collection item widget is added as a child widget of the collection, the element out of the =items= array that corresponds to the collection item being added is supplied as the value of the collection item widget's =properties= set-get property.
+          When a collection item widget is added as a child widget of the collection, the element out of the =items= array that corresponds to the collection item being added is supplied as the value of the collection item widget's =properties= state property.
 
           The =itemPropertyForItemWidgetName= property lets you specify a property out of the collection item properties object that should be used for the name of the collection item child widget. This is best illustrated with a simple example...
 
@@ -82,10 +82,10 @@
           );
           .................................................
 
-          In the above example, the newly created collection widget will have two collection item child widgets: one named ='bravingTheOnslaught'=, and the other named ='flockOfClouds'=. The =items= set-get property specifies the array of data for the items in the collection. The value of each element is passed to the corresponding collection item child widget, through its =properties= set-get property. But the =widgetName= property is treated specially in this example. That's because the =itemPropertyForItemWidgetName= set-get property calls out the =widgetName= property as the property that should determine the name of the collection item widgets.
+          In the above example, the newly created collection widget will have two collection item child widgets: one named ='bravingTheOnslaught'=, and the other named ='flockOfClouds'=. The =items= state property specifies the array of data for the items in the collection. The value of each element is passed to the corresponding collection item child widget, through its =properties= state property. But the =widgetName= property is treated specially in this example. That's because the =itemPropertyForItemWidgetName= state property calls out the =widgetName= property as the property that should determine the name of the collection item widgets.
 
         Automatic Naming of Collection Item Widgets
-          When =itemPropertyForItemWidgetName= is set to the value =null=, =undefined=, or =''= (empty string), or if the value of the item property specified by =itemPropertyForItemWidgetName= is =null=, =undefined=, or =''= (empty string), then the name of the child widget for a collection item will be generated using the value of the =itemWidgetNamePrefix= set-get property as a prefix and appending an automatically incremented uniquifier.
+          When =itemPropertyForItemWidgetName= is set to the value =null=, =undefined=, or =''= (empty string), or if the value of the item property specified by =itemPropertyForItemWidgetName= is =null=, =undefined=, or =''= (empty string), then the name of the child widget for a collection item will be generated using the value of the =itemWidgetNamePrefix= state property as a prefix and appending an automatically incremented uniquifier.
 
           EXAMPLE
           .................................................
@@ -110,7 +110,7 @@
           );
           .................................................
 
-          In the above example, the newly created collection widget will have two collection item child widgets: one named ='photoItem0'=, and the other named ='photoItem1'=. This is because the =itemPropertyForItemWidgetName= set-get property is set to =null=, thereby defeating the `Explicit Naming of Collection Item Widgets`, and because the =itemWidgetNamePrefix= set-get property is set to ='photoItem'=. The uniqifier value starts at =0=, and is incremented for each item added to the collection. This results in the collection item widget names ='photoItem0'= and ='photoItem1'=.
+          In the above example, the newly created collection widget will have two collection item child widgets: one named ='photoItem0'=, and the other named ='photoItem1'=. This is because the =itemPropertyForItemWidgetName= state property is set to =null=, thereby defeating the `Explicit Naming of Collection Item Widgets`, and because the =itemWidgetNamePrefix= state property is set to ='photoItem'=. The uniqifier value starts at =0=, and is incremented for each item added to the collection. This results in the collection item widget names ='photoItem0'= and ='photoItem1'=.
 */
 
 Uize.module ({
@@ -148,7 +148,7 @@ Uize.module ({
 
                     NOTES
                     - this property is read-only
-                    - see the related =items= set-get property
+                    - see the related =items= state property
                     - the initial value is =[]= (empty array)
               */
 
@@ -186,9 +186,9 @@ Uize.module ({
 
                       This button is *disabled* whenever...
 
-                      - the value of the =allSelected= set-get property is =true=
-                      - the value of the =isEmpty= set-get property is =true=
-                      - the value of the =selectionMode= set-get property is ='single'= and the value of the =totalItems= set-get property is not =1=
+                      - the value of the =allSelected= state property is =true=
+                      - the value of the =isEmpty= state property is =true=
+                      - the value of the =selectionMode= state property is ='single'= and the value of the =totalItems= state property is not =1=
 
                       NOTES
                       - the markup for this child widget is optional, and a given implementation of a collection widget's HTML does not need to offer this button
@@ -205,7 +205,7 @@ Uize.module ({
                     selectNone Child Widget
                       An instance of =Uize.Widget.Button=, that is wired up to call the =selectAll= instance method when clicked, with the value =false= specified for the =selectAll= method's =selectedBOOL= parameter.
 
-                      This button is disabled whenever the value of the =someSelected= set-get property is =false=. Put another way, this button is only enabled when the value of =someSelected= is =true=.
+                      This button is disabled whenever the value of the =someSelected= state property is =false=. Put another way, this button is only enabled when the value of =someSelected= is =true=.
 
                       NOTES
                       - the markup for this child widget is optional, and a given implementation of a collection widget's HTML does not need to offer this button
@@ -222,7 +222,7 @@ Uize.module ({
                     remove Child Widget
                       An instance of =Uize.Widget.Button=, that is wired up so that clicking it will prompt the user to confirm that they wish to remove the selected items, and will then remove the selected items if the user agrees.
 
-                      This button is disabled whenever the value of the =someSelected= set-get property is =false=. Put another way, this button is only enabled when the value of =someSelected= is =true=.
+                      This button is disabled whenever the value of the =someSelected= state property is =false=. Put another way, this button is only enabled when the value of =someSelected= is =true=.
 
                       NOTES
                       - the markup for this child widget is optional, and a given implementation of a collection widget's HTML does not need to offer this button
@@ -287,7 +287,7 @@ Uize.module ({
               enabledWhenSTRorOBJ
                 A string or object, specifying a rule that should be used for determining when the button is enabled and when it is not.
 
-                The value of this parameter can be of type string or type object. When a string value is specified for this parameter, then the value should be the name of a set-get property of the collection widget whose value will determine the button's enabled state. An optional "!" (exclamation mark) prefix allows you to not the value of the set-get property specified in the =enabledWhenSTRorOBJ= parameter.
+                The value of this parameter can be of type string or type object. When a string value is specified for this parameter, then the value should be the name of a state property of the collection widget whose value will determine the button's enabled state. An optional "!" (exclamation mark) prefix allows you to not the value of the state property specified in the =enabledWhenSTRorOBJ= parameter.
 
                 A much more versatile way of declaring the enabled state rule for the button is to specify an object type value for the =enabledWhenSTRorOBJ= parameter. An object specified for this parameter should have the following structure...
 
@@ -298,9 +298,9 @@ Uize.module ({
                 }
                 .......................................................................................
 
-                The value of the =affectedBy= property of this object allows you to declare the name of a single set-get property of the collection widget instance that affects the enabled state of the button, or an array of the names of multiple set-get properties of the instance that affect the button's enabled state. The collection widget instance will watch on a change in the value of this property or properties, and will execute the state evaluator function specified in the =stateEvaluator= property each time there is such a change.
+                The value of the =affectedBy= property of this object allows you to declare the name of a single state property of the collection widget instance that affects the enabled state of the button, or an array of the names of multiple state properties of the instance that affect the button's enabled state. The collection widget instance will watch on a change in the value of this property or properties, and will execute the state evaluator function specified in the =stateEvaluator= property each time there is such a change.
 
-                The function you specify in the =stateEvaluator= property should return a boolean value, indicating whether or not the button should be enabled. Your function will not receive any parameters, but it *will* be called as an instance method on the collection instance, so it will be able to access the values of the set-get properties that affect the button's enabled state by using the =get= instance method. For good examples of how the =addControlButton= method can be used in the creation of your own subclasses, look at the implementation of this class.
+                The function you specify in the =stateEvaluator= property should return a boolean value, indicating whether or not the button should be enabled. Your function will not receive any parameters, but it *will* be called as an instance method on the collection instance, so it will be able to access the values of the state properties that affect the button's enabled state by using the =get= instance method. For good examples of how the =addControlButton= method can be used in the creation of your own subclasses, look at the implementation of this class.
 
               VARIATION 1
               .........................................................................................
@@ -342,10 +342,10 @@ Uize.module ({
             totalItems Implied Node
               A node that will be used to display the total number of items in the collection.
 
-              Whenever the value of the =totalItems= set-get property changes, this node will be updated using the =setNodeValue= instance method of the =Uize.Widget= class. Because the =setNodeValue= method is used for displaying the value of the =totalItems= property, the =totalItems Implied Node= can be of any type supported by the =setNodeValue= method - it can be a =div= tag, a =span= tag, a =p= tag, a text =input= tag, a =textarea= tag, etc.
+              Whenever the value of the =totalItems= state property changes, this node will be updated using the =setNodeValue= instance method of the =Uize.Widget= class. Because the =setNodeValue= method is used for displaying the value of the =totalItems= property, the =totalItems Implied Node= can be of any type supported by the =setNodeValue= method - it can be a =div= tag, a =span= tag, a =p= tag, a text =input= tag, a =textarea= tag, etc.
 
               NOTES
-              - see the related =totalItems= set-get property
+              - see the related =totalItems= state property
               - the markup for this implied node is optional, and a given implementation of a collection widget's HTML does not need to offer this node
         */
       };
@@ -455,7 +455,7 @@ Uize.module ({
 
               The value of the =itemWidgetNameSTR= parameter should be the widget name for the item widget that will be added as a child of the collection widget. The value of this parameter can be any string, so long as it doesn't collide with the names of existing child widgets of the collection widget, including the various button widgets of the class, and other existing item widgets. A value for this parameter can be generated using the =makeItemWidgetName= hook method.
 
-              The value of the =itemWidgetPropertiesOBJ= parameter should be an object containing the values for set-get properties of the item widget to be created. This object will be modified by the =addItemWidget= method, by copying in the properties of the object returned by the =getItemWidgetProperties= hook method.
+              The value of the =itemWidgetPropertiesOBJ= parameter should be an object containing the values for state properties of the item widget to be created. This object will be modified by the =addItemWidget= method, by copying in the properties of the object returned by the =getItemWidgetProperties= hook method.
 
               NOTES
               - see the related =makeItemWidgetName= hook method
@@ -576,7 +576,7 @@ Uize.module ({
               )
               .....................................
 
-              In the above example, the =forAll= method is being used to iterate through the item widgets in the collection to find the one (if any) that the user is currently mousing over. If the item handler function finds an item that the user is over, where the value of the item widget's =over= set-get property is =true=, then the handler sets the =itemUserIsOver= variable to this item widget and then returns the special value =false=, indicating to the =forAll= iterator that it should break out of the iteration (after all, the item handler function can't use the =break= statement to accomplish that in this case).
+              In the above example, the =forAll= method is being used to iterate through the item widgets in the collection to find the one (if any) that the user is currently mousing over. If the item handler function finds an item that the user is over, where the value of the item widget's =over= state property is =true=, then the handler sets the =itemUserIsOver= variable to this item widget and then returns the special value =false=, indicating to the =forAll= iterator that it should break out of the iteration (after all, the item handler function can't use the =break= statement to accomplish that in this case).
         */
       };
 
@@ -586,14 +586,14 @@ Uize.module ({
         /*?
           Instance Methods
             getItemWidgetProperties
-              For advanced developers only, this is a subclassing hook that lets you override the default use of the =itemWidgetProperties= set-get property in the =addItemWidget= instance method.
+              For advanced developers only, this is a subclassing hook that lets you override the default use of the =itemWidgetProperties= state property in the =addItemWidget= instance method.
 
               SYNTAX
               ................................................................
               itemWidgetPropertiesOBJ = myInstance.getItemWidgetProperties ();
               ................................................................
 
-              The implementation of this method by this base class simply returns a reference to the =itemWidgetProperties= set-get property. By overriding this method in a subclass, you can provide your own logic for generating the item widget properties that will be used when adding item widgets in the =addItemWidget= instance method. One thing you can do with your own override of this method is to stitch in additional properties at the time of adding an item widget. You can look for an example of this in the implementation of the =Uize.Widget.Collection.Dynamic= class.
+              The implementation of this method by this base class simply returns a reference to the =itemWidgetProperties= state property. By overriding this method in a subclass, you can provide your own logic for generating the item widget properties that will be used when adding item widgets in the =addItemWidget= instance method. One thing you can do with your own override of this method is to stitch in additional properties at the time of adding an item widget. You can look for an example of this in the implementation of the =Uize.Widget.Collection.Dynamic= class.
 
               NOTES
               - this is a hook method, intended to be overrided in a subclass
@@ -621,7 +621,7 @@ Uize.module ({
 
               This method is not intended to be overrided by a subclass, but is intended instead to be used as part of the implementation of a subclass method that adds items to the collection. The method will be called first in order to generate a widget name for the item widget about to be added, and the generated name will then be used when adding the new item widget.
 
-              The =itemOBJ= parameter can be used to supply a reference to the =properties= "bucket" for additional item data. When an object is specified for the =itemOBJ= parameter, and when the =itemPropertyForItemWidgetName= set-get property is set to a non-empty string, and when the value of the property in the =itemOBJ= object specified by the =itemPropertyForItemWidgetName= property is a non-empty string, then that property will be returned as the item widget name. Otherwise, the item widget name will be generated by concatenating the value of the =itemWidgetNamePrefix= set-get property with a dynamically generated and automatically incremented uniquifier value.
+              The =itemOBJ= parameter can be used to supply a reference to the =properties= "bucket" for additional item data. When an object is specified for the =itemOBJ= parameter, and when the =itemPropertyForItemWidgetName= state property is set to a non-empty string, and when the value of the property in the =itemOBJ= object specified by the =itemPropertyForItemWidgetName= property is a non-empty string, then that property will be returned as the item widget name. Otherwise, the item widget name will be generated by concatenating the value of the =itemWidgetNamePrefix= state property with a dynamically generated and automatically incremented uniquifier value.
 
               VARIATION
               .....................................................
@@ -632,7 +632,7 @@ Uize.module ({
 
               NOTES
               - this is a hook method that can be used by a subclass
-              - see the related =itemPropertyForItemWidgetName= and =itemWidgetNamePrefix= set-get properties
+              - see the related =itemPropertyForItemWidgetName= and =itemWidgetNamePrefix= state properties
         */
       };
 
@@ -682,7 +682,7 @@ Uize.module ({
               propertyValuesARRAY = myInstance.getPropertyForItems (propertyNameSTR,itemWidgetsARRAY);
               ........................................................................................
 
-              Items in the collection are represented by item widgets, and each item widget for an item should have a =properties= set-get property, which serves as a "bucket" for additional item data. The =getPropertyForItems= method lets you get an array of the values for a specific property in this =properties= "bucket" for all of the specified items, where the items are specified by an array containing item widgets that correspond to items in the collection.
+              Items in the collection are represented by item widgets, and each item widget for an item should have a =properties= state property, which serves as a "bucket" for additional item data. The =getPropertyForItems= method lets you get an array of the values for a specific property in this =properties= "bucket" for all of the specified items, where the items are specified by an array containing item widgets that correspond to items in the collection.
 
               For All Items
                 To get the value of a specific =properties= "bucket" property for all the items in the collection, supply the value of the =itemWidgets= instance property as the value of the =itemWidgetsARRAY= parameter, as in...
@@ -737,7 +737,7 @@ Uize.module ({
                 ................................................................
 
               Getting All Properties
-                When the special value =null= or =undefined= is specified for the =propertyNameSTR= parameter, then the =getPropertyForItems= method will return an array containing the values of the =properties= set-get property for all of the specified items.
+                When the special value =null= or =undefined= is specified for the =propertyNameSTR= parameter, then the =getPropertyForItems= method will return an array containing the values of the =properties= state property for all of the specified items.
 
                 EXAMPLE
                 ..................................................................................
@@ -765,7 +765,7 @@ Uize.module ({
 
                 IMPORTANT
 
-                Note that the elements of the returned array will be the values of the =properties= set-get property for the specified items. Given that the =properties= set-get property for collection item widgets is an object, the elements array returned by the =getPropertyForItems= method will contain references to the same objects shared by the item widgets. Therefore, modifying the values of the objects in the returned array will have an affect on the item widgets. In cases where you wish to modify the returned data, you should probably use the =Uize.clone= static method to create your own clone of this data before modifying it.
+                Note that the elements of the returned array will be the values of the =properties= state property for the specified items. Given that the =properties= state property for collection item widgets is an object, the elements array returned by the =getPropertyForItems= method will contain references to the same objects shared by the item widgets. Therefore, modifying the values of the objects in the returned array will have an affect on the item widgets. In cases where you wish to modify the returned data, you should probably use the =Uize.clone= static method to create your own clone of this data before modifying it.
 
               NOTES
               - see the related =getPropertyForSelected= instance method
@@ -956,7 +956,7 @@ Uize.module ({
               myInstance.selectAll ();
               ........................
 
-              Calling this method has the effect of setting the value of the =selected= set-get property of all collection item widgets to =true=. Calling this method will also result in the values of the =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= set-get properties being updated, upon which some of these properties may change value.
+              Calling this method has the effect of setting the value of the =selected= state property of all collection item widgets to =true=. Calling this method will also result in the values of the =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= state properties being updated, upon which some of these properties may change value.
 
               VARIATION 1
               ....................................
@@ -974,7 +974,7 @@ Uize.module ({
 
               NOTES
               - see the related =selectNone= and =selectRange= instance methods
-              - see the related =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= set-get properties
+              - see the related =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= state properties
         */
       };
 
@@ -1000,13 +1000,13 @@ Uize.module ({
               myInstance.selectRange (itemWidgetAOBJ,itemWidgetBOBJ);
               .......................................................
 
-              Calling this method has the effect of setting the value of the =selected= set-get property of all collection item widgets within the specified range to =true=, and all collection item widgets outside of the specified range to =false=. The range is specified by the =itemWidgetAOBJ= and =itemWidgetBOBJ= parameters, and is inclusive of the two item widgets that are specified by these parameters. The order of the range bounds is unimportant - the item specified by =itemWidgetAOBJ= can be before or after the item specified by =itemWidgetBOBJ= in the =itemWidgets= array.
+              Calling this method has the effect of setting the value of the =selected= state property of all collection item widgets within the specified range to =true=, and all collection item widgets outside of the specified range to =false=. The range is specified by the =itemWidgetAOBJ= and =itemWidgetBOBJ= parameters, and is inclusive of the two item widgets that are specified by these parameters. The order of the range bounds is unimportant - the item specified by =itemWidgetAOBJ= can be before or after the item specified by =itemWidgetBOBJ= in the =itemWidgets= array.
 
-              Calling this method will result in the values of the =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= set-get properties being updated, upon which some of these properties may change value. Calling this method will have no effect if the values of either - or both - of the =itemWidgetAOBJ= or =itemWidgetBOBJ= parameters is =null= or =undefined=, or if the value of the =selectionMode= set-get property is ='single'= and the values of the =itemWidgetAOBJ= and =itemWidgetBOBJ= parameters are not identical (ie. you can only select a range of one item when =selectionMode= is set to ='single'=, and trying to select a range of more than one item will result in no action).
+              Calling this method will result in the values of the =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= state properties being updated, upon which some of these properties may change value. Calling this method will have no effect if the values of either - or both - of the =itemWidgetAOBJ= or =itemWidgetBOBJ= parameters is =null= or =undefined=, or if the value of the =selectionMode= state property is ='single'= and the values of the =itemWidgetAOBJ= and =itemWidgetBOBJ= parameters are not identical (ie. you can only select a range of one item when =selectionMode= is set to ='single'=, and trying to select a range of more than one item will result in no action).
 
               NOTES
               - see the related =selectAll= and =selectNone= instance methods
-              - see the related =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= set-get properties
+              - see the related =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= state properties
         */
       };
 
@@ -1022,11 +1022,11 @@ Uize.module ({
               myInstance.selectNone ();
               .........................
 
-              Calling this method has the effect of setting the value of the =selected= set-get property of all collection item widgets to =false=, and is equivalent to calling the =selectAll= instance method and specifying the value =false= for the =selectedBOOL= parameter. Calling this method will also result in the values of the =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= set-get properties being updated, upon which some of these properties may change value.
+              Calling this method has the effect of setting the value of the =selected= state property of all collection item widgets to =false=, and is equivalent to calling the =selectAll= instance method and specifying the value =false= for the =selectedBOOL= parameter. Calling this method will also result in the values of the =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= state properties being updated, upon which some of these properties may change value.
 
               NOTES
               - see the related =selectAll= and =selectRange= instance methods
-              - see the related =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= set-get properties
+              - see the related =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= state properties
         */
       };
 
@@ -1036,17 +1036,17 @@ Uize.module ({
           name:'allSelected',
           value:_false
           /*?
-            Set-get Properties
+            State Properties
               allSelected
                 A read-only boolean, indicating whether or not all the items in the collection are selected.
 
-                Whenever the value of the =totalSelected= set-get property changes, the value of this property will be updated to be kept current and correct. Whenever the value of this property is =true=, the value of the =someSelected= set-get property will also be =true=.
+                Whenever the value of the =totalSelected= state property changes, the value of this property will be updated to be kept current and correct. Whenever the value of this property is =true=, the value of the =someSelected= state property will also be =true=.
 
-                The =Changed.allSelected= instance event can be wired in order to maintain enabled state of any UI elements whose enabled state is affected by whether or not all items are selected. For example, whenever this property is set to =true=, the =selectAll= child widget will be disabled. Conversely, whenever =allSelected= is set to =false=, the =selectAll= child widget will be enabled (provided that the =isEmpty= set-get property is not set to =true=).
+                The =Changed.allSelected= instance event can be wired in order to maintain enabled state of any UI elements whose enabled state is affected by whether or not all items are selected. For example, whenever this property is set to =true=, the =selectAll= child widget will be disabled. Conversely, whenever =allSelected= is set to =false=, the =selectAll= child widget will be enabled (provided that the =isEmpty= state property is not set to =true=).
 
                 NOTES
                 - this property is read-only
-                - see the related =oneSelected=, =someSelected=, and =totalSelected= set-get properties
+                - see the related =oneSelected=, =someSelected=, and =totalSelected= state properties
                 - the initial value is =false=
           */
         },
@@ -1054,11 +1054,11 @@ Uize.module ({
           name:'isEmpty',
           value:_true
           /*?
-            Set-get Properties
+            State Properties
               isEmpty
                 A read-only boolean, indicating whether or not the collection is empty (ie. has no items).
 
-                Whenever the value of the =totalItems= set-get property changes, the value of the =isEmpty= set-get property will be updated to be kept current and correct. When the =isEmpty= property is set to =true=, then the =selectAll Child Widget= will be disabled.
+                Whenever the value of the =totalItems= state property changes, the value of the =isEmpty= state property will be updated to be kept current and correct. When the =isEmpty= property is set to =true=, then the =selectAll Child Widget= will be disabled.
 
                 NOTES
                 - this property is read-only
@@ -1069,14 +1069,14 @@ Uize.module ({
           name:'itemPropertyForItemWidgetName',
           value:'id'
           /*?
-            Set-get Properties
+            State Properties
               itemPropertyForItemWidgetName
                 A string, specifying the name of a property in an item's properties object that should be used as the name of the item's widget in the collection.
 
                 For a detailed discussion, see the section `Explicit Naming of Collection Item Widgets`.
 
                 NOTES
-                - see the related =itemWidgetNamePrefix= set-get property
+                - see the related =itemWidgetNamePrefix= state property
                 - the initial value is ='id'=
           */
         },
@@ -1084,7 +1084,7 @@ Uize.module ({
           name:'itemRemoveActsOnSelection',
           value:_false
           /*?
-            Set-get Properties
+            State Properties
               itemRemoveActsOnSelection
                 A boolean, specifying whether or not a =Remove= event fired by a selected collection item (as a result of the user clicking the item's remove button) should act on the rest of the selected items.
 
@@ -1114,11 +1114,11 @@ Uize.module ({
             _this._fireItemsChangedEvent ();
           }
           /*?
-            Set-get Properties
+            State Properties
               items
                 An array of objects, representing the item data corresponding to the items in the collection.
 
-                Each element of the =items= array should be an object, which serves as a "bucket" for additional data for an item. When a collection item widget is created for an item in the =items= array, the element from the =items= array is used as the value of the item widget's =properties= set-get property.
+                Each element of the =items= array should be an object, which serves as a "bucket" for additional data for an item. When a collection item widget is created for an item in the =items= array, the element from the =items= array is used as the value of the item widget's =properties= state property.
 
                 Whenever the value of the =items= property is changed, the following actions will be taken...
 
@@ -1132,7 +1132,7 @@ Uize.module ({
         },
         _itemWidgetClass:'itemWidgetClass',
           /*?
-            Set-get Properties
+            State Properties
               itemWidgetClass
                 An object reference, specifying the =Uize.Widget.CollectionItem= subclass that should be used for creating item widget instances.
 
@@ -1145,22 +1145,22 @@ Uize.module ({
           name:'itemWidgetNamePrefix',
           value:'item'
           /*?
-            Set-get Properties
+            State Properties
               itemWidgetNamePrefix
                 A string, specifying a prefix that should be used in collection item widget names when automatic widget naming is employed.
 
                 For a detailed discussion, see the section `Automatic Naming of Collection Item Widgets`.
 
                 NOTES
-                - see the related =itemPropertyForItemWidgetName= set-get property
+                - see the related =itemPropertyForItemWidgetName= state property
                 - the initial value is ='item'=
           */
         },
         _itemWidgetProperties:'itemWidgetProperties',
           /*?
-            Set-get Properties
+            State Properties
               itemWidgetProperties
-                An object reference, specifying the values for any set-get properties that are common for all collection item widgets that are created by this class.
+                An object reference, specifying the values for any state properties that are common for all collection item widgets that are created by this class.
 
                 The =Uize.Widget.Collection= class will use this property when creating new collection item widget instances as child widgets. Consider the following example...
 
@@ -1189,7 +1189,7 @@ Uize.module ({
                 );
                 .........................................................
 
-                In the above example, we're setting the =itemWidgetProperties= set-get property to the value ={previewClickAction:'Select'}=. This means that the two collection item child widgets that are created will both have their =previewClickAction= set-get property set to the value ='Select'=, which means that clicking on them will change their selected state.
+                In the above example, we're setting the =itemWidgetProperties= state property to the value ={previewClickAction:'Select'}=. This means that the two collection item child widgets that are created will both have their =previewClickAction= state property set to the value ='Select'=, which means that clicking on them will change their selected state.
 
                 NOTES
                 - the initial value is =undefined=
@@ -1198,17 +1198,17 @@ Uize.module ({
           name:'oneSelected',
           value:_false
           /*?
-            Set-get Properties
+            State Properties
               oneSelected
                 A read-only boolean, indicating whether or not just one item is selected.
 
-                Whenever the value of the =totalSelected= set-get property changes, the value of this property will be updated to be kept current and correct. Whenever the value of this property is =true=, the value of the =someSelected= set-get property will also be =true=.
+                Whenever the value of the =totalSelected= state property changes, the value of this property will be updated to be kept current and correct. Whenever the value of this property is =true=, the value of the =someSelected= state property will also be =true=.
 
                 The =Changed.oneSelected= instance event can be wired in order to maintain enabled state of any UI elements that trigger action on a single item and that are, therefore, not applicable when more than one item or no items are selected, but where it is still desirable to permit multiple selection for the sake of other actions that *can* operate on more than one item.
 
                 NOTES
                 - this property is read-only
-                - see the related =allSelected=, =someSelected=, and =totalSelected= set-get properties
+                - see the related =allSelected=, =someSelected=, and =totalSelected= state properties
                 - the initial value is =false=
           */
         },
@@ -1216,7 +1216,7 @@ Uize.module ({
           name:'selectionMode',
           value:'multi'
           /*?
-            Set-get Properties
+            State Properties
               selectionMode
                 A string, specifying the mode (='single'= or ='multi'=) for selecting items in the collection.
 
@@ -1232,17 +1232,17 @@ Uize.module ({
           name:'someSelected',
           value:_false
           /*?
-            Set-get Properties
+            State Properties
               someSelected
                 A read-only boolean, indicating whether or not there are any items selected.
 
-                Whenever the value of the =totalSelected= set-get property changes, the value of this property will be updated to be kept current and correct. The value of this property will be =true= when the value of the =oneSelected= set-get property is =true=.
+                Whenever the value of the =totalSelected= state property changes, the value of this property will be updated to be kept current and correct. The value of this property will be =true= when the value of the =oneSelected= state property is =true=.
 
                 The =Changed.someSelected= instance event can be wired in order to maintain enabled state of any UI elements that trigger action on a selection and that are, therefore, not applicable when no items are selected. For example, whenever this property is set to =true=, the =selectNone= child widget will be enabled. Conversely, whenever =someSelected= is set to =false=, the =selectNone= child widget will be disabled.
 
                 NOTES
                 - this property is read-only
-                - see the related =allSelected=, =oneSelected=, and =totalSelected= set-get properties
+                - see the related =allSelected=, =oneSelected=, and =totalSelected= state properties
                 - the initial value is =false=
           */
         },
@@ -1253,15 +1253,15 @@ Uize.module ({
             this._updateUiTotalItems ();
           }
           /*?
-            Set-get Properties
+            State Properties
               totalItems
                 A read-only integer, indicating the total number of items in the collection.
 
-                Whenever the total number of items in the collection changes, either as a result of adding new items or removing items, the value of the =isEmpty= set-get property will be updated to be kept current and correct, and the =totalItems Implied Node= will be updated to reflect the new number of items in the collection.
+                Whenever the total number of items in the collection changes, either as a result of adding new items or removing items, the value of the =isEmpty= state property will be updated to be kept current and correct, and the =totalItems Implied Node= will be updated to reflect the new number of items in the collection.
 
                 NOTES
                 - this property is read-only
-                - see the related =isEmpty= set-get property
+                - see the related =isEmpty= state property
                 - the initial value is =0=
           */
         },
@@ -1280,15 +1280,15 @@ Uize.module ({
             });
           }
           /*?
-            Set-get Properties
+            State Properties
               totalSelected
                 An read-only integer, indicating the total number of items that are selected.
 
-                Whenever the selection is changed, either by the user or programmatically, the value of this property will be updated. Whenever its value changes, the values of the =oneSelected=, =someSelected=, and =allSelected= set-get properties will be updated to be kept current and correct.
+                Whenever the selection is changed, either by the user or programmatically, the value of this property will be updated. Whenever its value changes, the values of the =oneSelected=, =someSelected=, and =allSelected= state properties will be updated to be kept current and correct.
 
                 NOTES
                 - this property is read-only
-                - see the related =allSelected=, =oneSelected=, and =someSelected= set-get properties
+                - see the related =allSelected=, =oneSelected=, and =someSelected= state properties
                 - the initial value is =0=
           */
         }

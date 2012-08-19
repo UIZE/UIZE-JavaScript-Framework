@@ -91,7 +91,7 @@ Uize.module({
 					name:'callbackMode',
 					value:'server'
 					/*?
-						Set-get Properties
+						State Properties
 							callbackMode
 								A string, indicating whether the callback function should be handled by the server or client.
 
@@ -102,7 +102,7 @@ Uize.module({
 								This does place some restrictions on the callback function. Unlike most callbacks in the =Uize.Comm= class and subclasses, the callback in ='client'= mode does not receive any parameters. Once the ='client'= callback is called, the only certainty that exists with regard to the server request is that it completed. It is the responsibility of the callback developer to know the nature of that data.
 
 								Values
-									The possible values for the =callbackMode= set-get property are ='client'= or ='server'=. ='server'= mode means that the callback function will be passed to the server and it is the server's responsibility to call it upon completion of the task. If ='client'= mode is set, =Uize.Comm.Script= will call the callback function after each request is made.
+									The possible values for the =callbackMode= state property are ='client'= or ='server'=. ='server'= mode means that the callback function will be passed to the server and it is the server's responsibility to call it upon completion of the task. If ='client'= mode is set, =Uize.Comm.Script= will call the callback function after each request is made.
 
 								NOTES
 								- the initial value is ='server'=

@@ -3,7 +3,7 @@
 <head>
 	<title>Uize.Util.PropertyAdapter | Documentation | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Util.PropertyAdapter module reference documentation"/>
-	<meta name="description" content="The Uize.Util.PropertyAdapter class implements a mechanism for connecting two set-get properties together, with optional bi-directional value adapter code."/>
+	<meta name="description" content="The Uize.Util.PropertyAdapter class implements a mechanism for connecting two state properties together, with optional bi-directional value adapter code."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -29,21 +29,21 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The Uize.Util.PropertyAdapter class implements a mechanism for connecting two set-get properties together, with optional bi-directional value adapter code.">1. Introduction</a>
+			<li><a href="#1" title="The Uize.Util.PropertyAdapter class implements a mechanism for connecting two state properties together, with optional bi-directional value adapter code.">1. Introduction</a>
 				<ul>
-					<li><a href="#1_1" title="The Uize.Util.PropertyAdapter class makes it easy to connect two set-get properties in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.">1.1. In a Nutshell</a>
+					<li><a href="#1_1" title="The Uize.Util.PropertyAdapter class makes it easy to connect two state properties in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.">1.1. In a Nutshell</a>
 						<ul>
 							<li><a href="#1_1_1" title="To connect two properties of any two instances together through a property adapter is as easy as creating an instance of the Uize.Util.PropertyAdapter class.">1.1.1. A Basic Example</a></li>
 							<li><a href="#1_1_2" title="While elegant in its simplicity (and not involving all that much code), the Uize.Util.PropertyAdapter class is quite powerful and versatile with the small set of features it has.">1.1.2. Features</a>
 								<ul>
-									<li><a href="#1_1_2_1" title="Each instance of the Uize.Util.PropertyAdapter class can connect two set-get properties together: property A and property B.">1.1.2.1. Two Set-get Properties</a>
+									<li><a href="#1_1_2_1" title="Each instance of the Uize.Util.PropertyAdapter class can connect two state properties together: property A and property B.">1.1.2.1. Two State Properties</a>
 										<ul>
-											<li><a href="#1_1_2_1_1" title="Property A is one of the two set-get properties that can be connected together via an instance of the Uize.Util.PropertyAdapter class.">1.1.2.1.1. Property A</a>
+											<li><a href="#1_1_2_1_1" title="Property A is one of the two state properties that can be connected together via an instance of the Uize.Util.PropertyAdapter class.">1.1.2.1.1. Property A</a>
 												<ul>
 													<li><a href="#1_1_2_1_1_1" title="While both property A and property B are kept synchronized by a property adapter, and affecting any one will affect the other, property A is given special treatment and is regarded as the primary property of the pair.">1.1.2.1.1.1. Property A Is Primary</a></li>
 												</ul>
 											</li>
-											<li><a href="#1_1_2_1_2" title="Property B is one of the two set-get properties that can be connected together via an instance of the Uize.Util.PropertyAdapter class.">1.1.2.1.2. Property B</a>
+											<li><a href="#1_1_2_1_2" title="Property B is one of the two state properties that can be connected together via an instance of the Uize.Util.PropertyAdapter class.">1.1.2.1.2. Property B</a>
 												<ul>
 													<li><a href="#1_1_2_1_2_1" title="While property A is primary, property B is secondary in the connection of two properties (for an explanation of what this means in practical terms, refer to the section Property A is Primary).">1.1.2.1.2.1. Property B Is Secondary</a></li>
 												</ul>
@@ -53,7 +53,7 @@
 													<li><a href="#1_1_2_1_3_1" title="The canonical form of a property specifier is an object, containing the properties instance and property.">1.1.2.1.3.1. Property Specifier Object Form</a></li>
 													<li><a href="#1_1_2_1_3_2" title="As a convenience, a property can be specified using the concise array form, in which a property is specified as a two element array.">1.1.2.1.3.2. Property Specifier Array Form</a></li>
 													<li><a href="#1_1_2_1_3_3" title="In the special case where one wishes to specify the value property of an instance of a Uize.Class subclass, the property can be specified simply by specifying a reference to the instance.">1.1.2.1.3.3. Property Specifier Instance Form</a></li>
-													<li><a href="#1_1_2_1_3_4" title="When using a property specifier to specify a value for either of the propertyA or propertyB set-get properties, the property specifier is resolved to the canonical property specifier object form using a versatile conformer.">1.1.2.1.3.4. Versatile Conformer</a></li>
+													<li><a href="#1_1_2_1_3_4" title="When using a property specifier to specify a value for either of the propertyA or propertyB state properties, the property specifier is resolved to the canonical property specifier object form using a versatile conformer.">1.1.2.1.3.4. Versatile Conformer</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -63,35 +63,35 @@
 											<li><a href="#1_1_2_2_1" title="The aToB property of a value adapter object specifies a value transformer function that should be used to transform a value for property A to produce a value for property B.">1.1.2.2.1. aToB</a></li>
 											<li><a href="#1_1_2_2_2" title="The bToA property specifies a value transformer function that should be used to transform a value for property B to produce a value for property A.">1.1.2.2.2. bToA</a></li>
 											<li><a href="#1_1_2_2_3" title="A value transformer specified for either of the properties aToB or bToA should be a function that expects to receive a single parameter representing the value to be transformed, and that should return the transformed value.">1.1.2.2.3. Value Transformer</a></li>
-											<li><a href="#1_1_2_2_4" title="A value adapter allows the values of the two set-get properties that are connected through a property adapter to be encoded or serialized differently, or to have some other form of relationship to one another (such as a mathematical relationship, for example).">1.1.2.2.4. Use Cases for a Value Adapter</a>
+											<li><a href="#1_1_2_2_4" title="A value adapter allows the values of the two state properties that are connected through a property adapter to be encoded or serialized differently, or to have some other form of relationship to one another (such as a mathematical relationship, for example).">1.1.2.2.4. Use Cases for a Value Adapter</a>
 												<ul>
-													<li><a href="#1_1_2_2_4_1" title="A value adapter can be used in the context of a property adapter to maintain a mathematical relationship between two set-get properties.">1.1.2.2.4.1. Value Adapter for Mathematical Relationships</a></li>
-													<li><a href="#1_1_2_2_4_2" title="A value adapter can be used in the context of a property adapter to maintain an encoding relationship between two set-get properties.">1.1.2.2.4.2. Value Adapter for Different Encodings</a></li>
+													<li><a href="#1_1_2_2_4_1" title="A value adapter can be used in the context of a property adapter to maintain a mathematical relationship between two state properties.">1.1.2.2.4.1. Value Adapter for Mathematical Relationships</a></li>
+													<li><a href="#1_1_2_2_4_2" title="A value adapter can be used in the context of a property adapter to maintain an encoding relationship between two state properties.">1.1.2.2.4.2. Value Adapter for Different Encodings</a></li>
 												</ul>
 											</li>
-											<li><a href="#1_1_2_2_5" title="If a value adapter is specified for a property adapter instance, it is used whenever synchronization needs to be performed between the set-get properties that are connected through the property adapter.">1.1.2.2.5. How a Value Adapter is Used</a></li>
+											<li><a href="#1_1_2_2_5" title="If a value adapter is specified for a property adapter instance, it is used whenever synchronization needs to be performed between the state properties that are connected through the property adapter.">1.1.2.2.5. How a Value Adapter is Used</a></li>
 										</ul>
 									</li>
-									<li><a href="#1_1_2_3" title="The two set-get properties specified for an instance of the Uize.Util.PropertyAdapter class are connected and disconnected under different conditions.">1.1.2.3. Connection and Disconnection</a>
+									<li><a href="#1_1_2_3" title="The two state properties specified for an instance of the Uize.Util.PropertyAdapter class are connected and disconnected under different conditions.">1.1.2.3. Connection and Disconnection</a>
 										<ul>
-											<li><a href="#1_1_2_3_1" title="Initial connection is when the two set-get properties are either connected for the very first time, or are reconnected after having been disconnected.">1.1.2.3.1. Initial Connection</a></li>
-											<li><a href="#1_1_2_3_2" title="Disconnection is when two set-get properties that were previously connected through a property adapter instance become disconnected so that their values are no longer kept synchronized.">1.1.2.3.2. Disconnection</a></li>
+											<li><a href="#1_1_2_3_1" title="Initial connection is when the two state properties are either connected for the very first time, or are reconnected after having been disconnected.">1.1.2.3.1. Initial Connection</a></li>
+											<li><a href="#1_1_2_3_2" title="Disconnection is when two state properties that were previously connected through a property adapter instance become disconnected so that their values are no longer kept synchronized.">1.1.2.3.2. Disconnection</a></li>
 										</ul>
 									</li>
-									<li><a href="#1_1_2_4" title="Synchronization is when the value of one of the two set-get properties that are connected through a property adapter instance changes, and the value of the other property in the pair is updated in order to keep it synchronized with the one that changed.">1.1.2.4. Synchronization</a>
+									<li><a href="#1_1_2_4" title="Synchronization is when the value of one of the two state properties that are connected through a property adapter instance changes, and the value of the other property in the pair is updated in order to keep it synchronized with the one that changed.">1.1.2.4. Synchronization</a>
 										<ul>
-											<li><a href="#1_1_2_4_1" title="Once initial connection has occured between two set-get properties specified for a property adapter instance, a change in the value of property A will result in the value of property B being synchronized to the new value of property A.">1.1.2.4.1. Property A to Property B Synchronization</a>
+											<li><a href="#1_1_2_4_1" title="Once initial connection has occured between two state properties specified for a property adapter instance, a change in the value of property A will result in the value of property B being synchronized to the new value of property A.">1.1.2.4.1. Property A to Property B Synchronization</a>
 												<ul>
-													<li><a href="#1_1_2_4_1_1" title="Unlike property B to property A synchronization, synchronization from property A to property B is also performed upon initial connection of the two set-get properties.">1.1.2.4.1.1. Property A to Property B Synchronization on Initial Connection</a></li>
+													<li><a href="#1_1_2_4_1_1" title="Unlike property B to property A synchronization, synchronization from property A to property B is also performed upon initial connection of the two state properties.">1.1.2.4.1.1. Property A to Property B Synchronization on Initial Connection</a></li>
 												</ul>
 											</li>
-											<li><a href="#1_1_2_4_2" title="Once initial connection has occured between two set-get properties specified for a property adapter instance, a change in the value of property B will result in the value of property A being synchronized to the new value of property B.">1.1.2.4.2. Property B to Property A Synchronization</a></li>
+											<li><a href="#1_1_2_4_2" title="Once initial connection has occured between two state properties specified for a property adapter instance, a change in the value of property B will result in the value of property A being synchronized to the new value of property B.">1.1.2.4.2. Property B to Property A Synchronization</a></li>
 										</ul>
 									</li>
-									<li><a href="#1_1_2_5" title="The Uize.Util.PropertyAdapter class supports dynamic updating of all of its set-get properties.">1.1.2.5. Dynamically Updatable</a>
+									<li><a href="#1_1_2_5" title="The Uize.Util.PropertyAdapter class supports dynamic updating of all of its state properties.">1.1.2.5. Dynamically Updatable</a>
 										<ul>
-											<li><a href="#1_1_2_5_1" title="The Uize.Util.PropertyAdapter class supports dynamically connecting and disconnecting the two set-get properties that are connected through a property adapter instance.">1.1.2.5.1. Dynamically Connect and Disconnect</a></li>
-											<li><a href="#1_1_2_5_2" title="Any or both of the two set-get properties that are connected through a property adapter instance can be changed midstream, simply by setting the value of either or both of the property adapter instance&apos;s propertyA and propertyB set-get properties.">1.1.2.5.2. Dynamically Change the Properties</a></li>
+											<li><a href="#1_1_2_5_1" title="The Uize.Util.PropertyAdapter class supports dynamically connecting and disconnecting the two state properties that are connected through a property adapter instance.">1.1.2.5.1. Dynamically Connect and Disconnect</a></li>
+											<li><a href="#1_1_2_5_2" title="Any or both of the two state properties that are connected through a property adapter instance can be changed midstream, simply by setting the value of either or both of the property adapter instance&apos;s propertyA and propertyB state properties.">1.1.2.5.2. Dynamically Change the Properties</a></li>
 											<li><a href="#1_1_2_5_3" title="The Uize.Util.PropertyAdapter class supports dynamically changing the value adapter that is used to transform values when performing synchronization from property A to property B, and vice versa.">1.1.2.5.3. Dynamically Change the Value Adapter</a></li>
 										</ul>
 									</li>
@@ -126,9 +126,9 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#2">2. Set-get Properties</a>
+			<li><a href="#2">2. State Properties</a>
 				<ul>
-					<li><a href="#2_1" title="A boolean, indicating whether or not the connection is active and the properties specified by the propertyA and propertyB set-get properties are connected together.">2.1. connected</a></li>
+					<li><a href="#2_1" title="A boolean, indicating whether or not the connection is active and the properties specified by the propertyA and propertyB state properties are connected together.">2.1. connected</a></li>
 					<li><a href="#2_2" title="A property specifier, specifying the instance and the property for property A.">2.2. propertyA</a></li>
 					<li><a href="#2_3" title="A property specifier, specifying the instance and the property for property B.">2.3. propertyB</a></li>
 					<li><a href="#2_4" title="An object, specifying a value adapter that should be used to translate the value of property A to a value for property B, or vice versa.">2.4. valueAdapter</a></li>
@@ -177,16 +177,16 @@
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
 	<div class="contents1">
-		<p>The <code>Uize.Util.PropertyAdapter</code> class implements a mechanism for connecting <a href="#1_1_2_1">two set-get properties</a> together, with optional bi-directional value adapter code.</p>
+		<p>The <code>Uize.Util.PropertyAdapter</code> class implements a mechanism for connecting <a href="#1_1_2_1">two state properties</a> together, with optional bi-directional value adapter code.</p>
 		
 		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
 		
 		<a name="1_1"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.1. In a Nutshell"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
 		<div class="contents2">
-			<p>The <code>Uize.Util.PropertyAdapter</code> class makes it easy to connect <a href="#1_1_2_1">two set-get properties</a> in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.</p>
+			<p>The <code>Uize.Util.PropertyAdapter</code> class makes it easy to connect <a href="#1_1_2_1">two state properties</a> in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.</p>
 			
-			<p>Any two set-get properties can be connected to each other using a property adapter instance. It can be two properties of the same instance, or it can be properties of two different instances. The properties being connected can belong to widget instances (ie. instances of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> subclasses), but the instances owning the properties do not have to be widgets. The instances owning the two properties being connected do not even have to be of the same class. And the two properties do not even have to be of the same type or have the same value range - the <code>Uize.Util.PropertyAdapter</code> class provides a way to specify a <a href="#1_1_2_2">value adapter</a> that should be used to adapt the value in either direction.</p>
+			<p>Any two state properties can be connected to each other using a property adapter instance. It can be two properties of the same instance, or it can be properties of two different instances. The properties being connected can belong to widget instances (ie. instances of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> subclasses), but the instances owning the properties do not have to be widgets. The instances owning the two properties being connected do not even have to be of the same class. And the two properties do not even have to be of the same type or have the same value range - the <code>Uize.Util.PropertyAdapter</code> class provides a way to specify a <a href="#1_1_2_2">value adapter</a> that should be used to adapt the value in either direction.</p>
 			
 			<a name="1_1_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. A Basic Example"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. A Basic Example">1</a>. </span>A Basic Example</h3>
@@ -208,7 +208,7 @@
 });
 </pre>
 				
-				<p>In the above example, the <code>minValue</code> set-get properties of two sliders (instances of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class) are being connected through a property adapter, so that if the value of the <code>minValue</code> property is modified in <code>sliderA</code>, the value of the <code>minValue</code> property of <code>sliderB</code> is automatically synchronized to that new value, and vice versa.</p>
+				<p>In the above example, the <code>minValue</code> state properties of two sliders (instances of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class) are being connected through a property adapter, so that if the value of the <code>minValue</code> property is modified in <code>sliderA</code>, the value of the <code>minValue</code> property of <code>sliderB</code> is automatically synchronized to that new value, and vice versa.</p>
 			</div>
 			
 			<a name="1_1_2"></a>
@@ -217,19 +217,19 @@
 				<p>While elegant in its simplicity (and not involving all that much code), the <code>Uize.Util.PropertyAdapter</code> class is quite powerful and versatile with the small set of features it has.</p>
 				
 				<a name="1_1_2_1"></a>
-				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>. </span>Two Set-get Properties</h4>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>. </span>Two State Properties</h4>
 				<div class="contents4">
-					<p>Each instance of the <code>Uize.Util.PropertyAdapter</code> class can connect two set-get properties together: <a href="#1_1_2_1_1">property A</a> and <a href="#1_1_2_1_2">property B</a>.</p>
+					<p>Each instance of the <code>Uize.Util.PropertyAdapter</code> class can connect two state properties together: <a href="#1_1_2_1_1">property A</a> and <a href="#1_1_2_1_2">property B</a>.</p>
 					
 					<a name="1_1_2_1_1"></a>
-					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.1. Property A"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.1. Property A">1</a>. </span>Property A</h5>
+					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.1. Property A"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.1. Property A">1</a>. </span>Property A</h5>
 					<div class="contents5">
-						<p>Property A is one of the <a href="#1_1_2_1">two set-get properties</a> that can be connected together via an instance of the <code>Uize.Util.PropertyAdapter</code> class.</p>
+						<p>Property A is one of the <a href="#1_1_2_1">two state properties</a> that can be connected together via an instance of the <code>Uize.Util.PropertyAdapter</code> class.</p>
 						
-						<p>To set the instance and property for <a href="#1_1_2_1_1">property A</a>, set the value of the <code><a href="#2_2">propertyA</a></code> set-get property of the <code>Uize.Util.PropertyAdapter</code> instance to a valid <a href="#1_1_2_1_3">property specifier</a> (see <a href="#1_1_1">A Basic Example</a>).</p>
+						<p>To set the instance and property for <a href="#1_1_2_1_1">property A</a>, set the value of the <code><a href="#2_2">propertyA</a></code> state property of the <code>Uize.Util.PropertyAdapter</code> instance to a valid <a href="#1_1_2_1_3">property specifier</a> (see <a href="#1_1_1">A Basic Example</a>).</p>
 						
 						<a name="1_1_2_1_1_1"></a>
-						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.1. Property A -&gt; 1.1.2.1.1.1. Property A Is Primary"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.1. Property A">1</a>.<a href="#1_1_2_1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.1. Property A -&gt; 1.1.2.1.1.1. Property A Is Primary">1</a>. </span>Property A Is Primary</h5>
+						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.1. Property A -&gt; 1.1.2.1.1.1. Property A Is Primary"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.1. Property A">1</a>.<a href="#1_1_2_1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.1. Property A -&gt; 1.1.2.1.1.1. Property A Is Primary">1</a>. </span>Property A Is Primary</h5>
 						<div class="contents6">
 							<p>While both <a href="#1_1_2_1_1">property A</a> and <a href="#1_1_2_1_2">property B</a> are kept synchronized by a property adapter, and affecting any one will affect the other, <a href="#1_1_2_1_1">property A</a> is given special treatment and is regarded as the primary property of the pair.</p>
 							
@@ -238,28 +238,28 @@
 					</div>
 					
 					<a name="1_1_2_1_2"></a>
-					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.2. Property B"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.2. Property B">2</a>. </span>Property B</h5>
+					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.2. Property B"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.2. Property B">2</a>. </span>Property B</h5>
 					<div class="contents5">
-						<p>Property B is one of the <a href="#1_1_2_1">two set-get properties</a> that can be connected together via an instance of the <code>Uize.Util.PropertyAdapter</code> class.</p>
+						<p>Property B is one of the <a href="#1_1_2_1">two state properties</a> that can be connected together via an instance of the <code>Uize.Util.PropertyAdapter</code> class.</p>
 						
-						<p>To set the instance and property for <a href="#1_1_2_1_2">property B</a>, set the value of the <code><a href="#2_3">propertyB</a></code> set-get property of the <code>Uize.Util.PropertyAdapter</code> instance to a valid <a href="#1_1_2_1_3">property specifier</a> (see <a href="#1_1_1">A Basic Example</a>).</p>
+						<p>To set the instance and property for <a href="#1_1_2_1_2">property B</a>, set the value of the <code><a href="#2_3">propertyB</a></code> state property of the <code>Uize.Util.PropertyAdapter</code> instance to a valid <a href="#1_1_2_1_3">property specifier</a> (see <a href="#1_1_1">A Basic Example</a>).</p>
 						
 						<a name="1_1_2_1_2_1"></a>
-						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.2. Property B -&gt; 1.1.2.1.2.1. Property B Is Secondary"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.2. Property B">2</a>.<a href="#1_1_2_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.2. Property B -&gt; 1.1.2.1.2.1. Property B Is Secondary">1</a>. </span>Property B Is Secondary</h5>
+						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.2. Property B -&gt; 1.1.2.1.2.1. Property B Is Secondary"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.2. Property B">2</a>.<a href="#1_1_2_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.2. Property B -&gt; 1.1.2.1.2.1. Property B Is Secondary">1</a>. </span>Property B Is Secondary</h5>
 						<div class="contents6">
 							<p>While <a href="#1_1_2_1_1_1">property A is primary</a>, <a href="#1_1_2_1_2">property B</a> is secondary in the connection of two properties (for an explanation of what this means in practical terms, refer to the section <a href="#1_1_2_1_1_1">Property A is Primary</a>).</p>
 						</div>
 					</div>
 					
 					<a name="1_1_2_1_3"></a>
-					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>. </span>Property Specifier</h5>
+					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>. </span>Property Specifier</h5>
 					<div class="contents5">
 						<p>Specifying the instance and property for either <a href="#1_1_2_1_1">property A</a> or <a href="#1_1_2_1_2">property B</a> is done using a property specifier.</p>
 						
 						<p>A property specifier can take one of several forms, as outlined below...</p>
 						
 						<a name="1_1_2_1_3_1"></a>
-						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.1. Property Specifier Object Form"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.1. Property Specifier Object Form">1</a>. </span>Property Specifier Object Form</h5>
+						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.1. Property Specifier Object Form"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.1. Property Specifier Object Form">1</a>. </span>Property Specifier Object Form</h5>
 						<div class="contents6">
 							<p>The canonical form of a <a href="#1_1_2_1_3">property specifier</a> is an object, containing the properties <code>instance</code> and <code>property</code>.</p>
 							
@@ -268,17 +268,17 @@
 							
 <pre class="sample-code">{
   instance : instanceOBJ,     // reference to an instance of a Uize subclass
-  property : propertyNameSTR  // name of a set-get property on the specified instance
+  property : propertyNameSTR  // name of a state property on the specified instance
 }
 </pre>
 							
-							<p>The value of the <code>instance</code> property should be a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, and the value of the <code>property</code> property should be a string specifying the name of a set-get property on the instance specified by the <code>instance</code> property. If the value of the <code>property</code> property is <code>null</code> or <code>undefined</code>, then the property name will be defaulted to <code>'value'</code>.</p>
+							<p>The value of the <code>instance</code> property should be a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, and the value of the <code>property</code> property should be a string specifying the name of a state property on the instance specified by the <code>instance</code> property. If the value of the <code>property</code> property is <code>null</code> or <code>undefined</code>, then the property name will be defaulted to <code>'value'</code>.</p>
 							
 							<p>Because the <a href="#1_1_2_1_3_1">property specifier object form</a> is the canonical form for a <a href="#1_1_2_1_3">property specifier</a>, when a property is specified using either the <a href="#1_1_2_1_3_2">property specifier array form</a> or the <a href="#1_1_2_1_3_3">property specifier instance form</a>, the property specifier is resolved to the object form.</p>
 						</div>
 						
 						<a name="1_1_2_1_3_2"></a>
-						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.2. Property Specifier Array Form"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.2. Property Specifier Array Form">2</a>. </span>Property Specifier Array Form</h5>
+						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.2. Property Specifier Array Form"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.2. Property Specifier Array Form">2</a>. </span>Property Specifier Array Form</h5>
 						<div class="contents6">
 							<p>As a convenience, a property can be specified using the concise array form, in which a property is specified as a two element array.</p>
 							
@@ -287,15 +287,15 @@
 							
 <pre class="sample-code">[
   instanceOBJ,     // reference to an instance of a Uize subclass
-  propertyNameSTR  // name of a set-get property on the specified instance
+  propertyNameSTR  // name of a state property on the specified instance
 ]
 </pre>
 							
-							<p>The value of the first element of the array should be a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, and the value of the second element of the array should be a string specifying the name of a set-get property on the instance specified by the <code>instance</code> property. If the value of the second element is <code>null</code> or <code>undefined</code>, then the property name will be defaulted to <code>'value'</code>.</p>
+							<p>The value of the first element of the array should be a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, and the value of the second element of the array should be a string specifying the name of a state property on the instance specified by the <code>instance</code> property. If the value of the second element is <code>null</code> or <code>undefined</code>, then the property name will be defaulted to <code>'value'</code>.</p>
 						</div>
 						
 						<a name="1_1_2_1_3_3"></a>
-						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.3. Property Specifier Instance Form"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.3. Property Specifier Instance Form">3</a>. </span>Property Specifier Instance Form</h5>
+						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.3. Property Specifier Instance Form"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.3. Property Specifier Instance Form">3</a>. </span>Property Specifier Instance Form</h5>
 						<div class="contents6">
 							<p>In the special case where one wishes to specify the <code>value</code> property of an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, the property can be specified simply by specifying a reference to the instance.</p>
 							
@@ -309,11 +309,11 @@
 						</div>
 						
 						<a name="1_1_2_1_3_4"></a>
-						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.4. Versatile Conformer"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.4. Versatile Conformer">4</a>. </span>Versatile Conformer</h5>
+						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.4. Versatile Conformer"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two State Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.4. Versatile Conformer">4</a>. </span>Versatile Conformer</h5>
 						<div class="contents6">
-							<p>When using a <a href="#1_1_2_1_3">property specifier</a> to specify a value for either of the <code><a href="#2_2">propertyA</a></code> or <code><a href="#2_3">propertyB</a></code> set-get properties, the <a href="#1_1_2_1_3">property specifier</a> is resolved to the canonical <a href="#1_1_2_1_3_1">property specifier object form</a> using a versatile conformer.</p>
+							<p>When using a <a href="#1_1_2_1_3">property specifier</a> to specify a value for either of the <code><a href="#2_2">propertyA</a></code> or <code><a href="#2_3">propertyB</a></code> state properties, the <a href="#1_1_2_1_3">property specifier</a> is resolved to the canonical <a href="#1_1_2_1_3_1">property specifier object form</a> using a versatile conformer.</p>
 							
-							<p>Because the values of the <code><a href="#2_2">propertyA</a></code> or <code><a href="#2_3">propertyB</a></code> set-get properties are conformed, a <a href="#1_1_2_1_3">property specifier</a> expressed in either the <a href="#1_1_2_1_3_2">property specifier array form</a> or the <a href="#1_1_2_1_3_3">property specifier instance form</a> will not be stored internally in those alternate forms, but will instead be conformed to the canonical <a href="#1_1_2_1_3_1">property specifier object form</a>.</p>
+							<p>Because the values of the <code><a href="#2_2">propertyA</a></code> or <code><a href="#2_3">propertyB</a></code> state properties are conformed, a <a href="#1_1_2_1_3">property specifier</a> expressed in either the <a href="#1_1_2_1_3_2">property specifier array form</a> or the <a href="#1_1_2_1_3_3">property specifier instance form</a> will not be stored internally in those alternate forms, but will instead be conformed to the canonical <a href="#1_1_2_1_3_1">property specifier object form</a>.</p>
 						</div>
 					</div>
 				</div>
@@ -366,12 +366,12 @@
 					<a name="1_1_2_2_4"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.4. Use Cases for a Value Adapter"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter">2</a>.<a href="#1_1_2_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.4. Use Cases for a Value Adapter">4</a>. </span>Use Cases for a Value Adapter</h5>
 					<div class="contents5">
-						<p>A value adapter allows the values of the <a href="#1_1_2_1">two set-get properties</a> that are connected through a property adapter to be encoded or serialized differently, or to have some other form of relationship to one another (such as a mathematical relationship, for example).</p>
+						<p>A value adapter allows the values of the <a href="#1_1_2_1">two state properties</a> that are connected through a property adapter to be encoded or serialized differently, or to have some other form of relationship to one another (such as a mathematical relationship, for example).</p>
 						
 						<a name="1_1_2_2_4_1"></a>
 						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.4. Use Cases for a Value Adapter -&gt; 1.1.2.2.4.1. Value Adapter for Mathematical Relationships"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter">2</a>.<a href="#1_1_2_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.4. Use Cases for a Value Adapter">4</a>.<a href="#1_1_2_2_4_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.4. Use Cases for a Value Adapter -&gt; 1.1.2.2.4.1. Value Adapter for Mathematical Relationships">1</a>. </span>Value Adapter for Mathematical Relationships</h5>
 						<div class="contents6">
-							<p>A <a href="#1_1_2_2">value adapter</a> can be used in the context of a property adapter to maintain a mathematical relationship between <a href="#1_1_2_1">two set-get properties</a>.</p>
+							<p>A <a href="#1_1_2_2">value adapter</a> can be used in the context of a property adapter to maintain a mathematical relationship between <a href="#1_1_2_1">two state properties</a>.</p>
 							
 							<p><span class="allCaps">EXAMPLE</span></p>
 							
@@ -386,13 +386,13 @@
 });
 </pre>
 							
-							<p>In the above example, a property adapter is being used to connect the <code>value</code> set-get properties of two text input widgets (instances of the <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code> class): <code>numberTextInput</code> and <code>numberSquaredTextInput</code>. A value adapter is specified to maintain a relationship where the value of the <code>numberSquaredTextInput</code> instance is the square of the value of the <code>numberTextInput</code> instance and, conversely, where the value of the <code>numberTextInput</code> instance is the square root of the <code>numberSquaredTextInput</code> instance.</p>
+							<p>In the above example, a property adapter is being used to connect the <code>value</code> state properties of two text input widgets (instances of the <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code> class): <code>numberTextInput</code> and <code>numberSquaredTextInput</code>. A value adapter is specified to maintain a relationship where the value of the <code>numberSquaredTextInput</code> instance is the square of the value of the <code>numberTextInput</code> instance and, conversely, where the value of the <code>numberTextInput</code> instance is the square root of the <code>numberSquaredTextInput</code> instance.</p>
 						</div>
 						
 						<a name="1_1_2_2_4_2"></a>
 						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.4. Use Cases for a Value Adapter -&gt; 1.1.2.2.4.2. Value Adapter for Different Encodings"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter">2</a>.<a href="#1_1_2_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.4. Use Cases for a Value Adapter">4</a>.<a href="#1_1_2_2_4_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.4. Use Cases for a Value Adapter -&gt; 1.1.2.2.4.2. Value Adapter for Different Encodings">2</a>. </span>Value Adapter for Different Encodings</h5>
 						<div class="contents6">
-							<p>A <a href="#1_1_2_2">value adapter</a> can be used in the context of a property adapter to maintain an encoding relationship between <a href="#1_1_2_1">two set-get properties</a>.</p>
+							<p>A <a href="#1_1_2_2">value adapter</a> can be used in the context of a property adapter to maintain an encoding relationship between <a href="#1_1_2_1">two state properties</a>.</p>
 							
 							<p><span class="allCaps">EXAMPLE</span></p>
 							
@@ -404,14 +404,14 @@
 });
 </pre>
 							
-							<p>In the above example, a property adapter is being used to connect the <code>value</code> set-get properties of two text input widgets (instances of the <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code> class): <code>colorAsHexTextInput</code> and <code>colorAsRgbTextInput</code>. A value adapter is specified to maintain a relationship where the values of the <code>colorAsHexTextInput</code> and <code>colorAsRgbTextInput</code> instances represent the same color, but where the value of the <code>colorAsHexTextInput</code> instance is the color encoded in hex format (eg. <code>#ffa500</code> for orange), and the value of the the <code>colorAsRgbTextInput</code> instance is the color encoded in RGB tuple format (eg. <code>rgb(255,165,0)</code> for orange). In this example, we're fortunate enough to be able to use the <code>Uize.Color.adapter</code> static method of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object to generate a <a href="#1_1_2_2">value adapter</a> that will adapt a color value between the two encodings <code>'#hex'</code> and <code>'RGB string'</code>.</p>
+							<p>In the above example, a property adapter is being used to connect the <code>value</code> state properties of two text input widgets (instances of the <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code> class): <code>colorAsHexTextInput</code> and <code>colorAsRgbTextInput</code>. A value adapter is specified to maintain a relationship where the values of the <code>colorAsHexTextInput</code> and <code>colorAsRgbTextInput</code> instances represent the same color, but where the value of the <code>colorAsHexTextInput</code> instance is the color encoded in hex format (eg. <code>#ffa500</code> for orange), and the value of the the <code>colorAsRgbTextInput</code> instance is the color encoded in RGB tuple format (eg. <code>rgb(255,165,0)</code> for orange). In this example, we're fortunate enough to be able to use the <code>Uize.Color.adapter</code> static method of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object to generate a <a href="#1_1_2_2">value adapter</a> that will adapt a color value between the two encodings <code>'#hex'</code> and <code>'RGB string'</code>.</p>
 						</div>
 					</div>
 					
 					<a name="1_1_2_2_5"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.5. How a Value Adapter is Used"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter">2</a>.<a href="#1_1_2_2_5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.2. Value Adapter -&gt; 1.1.2.2.5. How a Value Adapter is Used">5</a>. </span>How a Value Adapter is Used</h5>
 					<div class="contents5">
-						<p>If a <a href="#1_1_2_2">value adapter</a> is specified for a property adapter instance, it is used whenever <a href="#1_1_2_4">synchronization</a> needs to be performed between the set-get properties that are connected through the property adapter.</p>
+						<p>If a <a href="#1_1_2_2">value adapter</a> is specified for a property adapter instance, it is used whenever <a href="#1_1_2_4">synchronization</a> needs to be performed between the state properties that are connected through the property adapter.</p>
 						
 						<p>When <a href="#1_1_2_4_1">property A to property B synchronization</a> is performed, the <a href="#1_1_2_2_3">value transformer</a> function specified by the <code><a href="#1_1_2_2_1">aToB</a></code> property of the value adapter object is applied to the value of <a href="#1_1_2_1_1">property A</a> to produce a new value for <a href="#1_1_2_1_2">property B</a>. Conversely, when <a href="#1_1_2_4_2">property B to property A synchronization</a> is performed, the <a href="#1_1_2_2_3">value transformer</a> function specified by the <code><a href="#1_1_2_2_2">bToA</a></code> property of the value adapter object is applied to the value of <a href="#1_1_2_1_2">property B</a> to produce a new value for <a href="#1_1_2_1_1">property A</a>.</p>
 					</div>
@@ -420,32 +420,32 @@
 				<a name="1_1_2_3"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.3. Connection and Disconnection"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.3. Connection and Disconnection">3</a>. </span>Connection and Disconnection</h4>
 				<div class="contents4">
-					<p>The <a href="#1_1_2_1">two set-get properties</a> specified for an instance of the <code>Uize.Util.PropertyAdapter</code> class are connected and disconnected under different conditions.</p>
+					<p>The <a href="#1_1_2_1">two state properties</a> specified for an instance of the <code>Uize.Util.PropertyAdapter</code> class are connected and disconnected under different conditions.</p>
 					
 					<a name="1_1_2_3_1"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.3. Connection and Disconnection -&gt; 1.1.2.3.1. Initial Connection"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.3. Connection and Disconnection">3</a>.<a href="#1_1_2_3_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.3. Connection and Disconnection -&gt; 1.1.2.3.1. Initial Connection">1</a>. </span>Initial Connection</h5>
 					<div class="contents5">
-						<p>Initial connection is when the <a href="#1_1_2_1">two set-get properties</a> are either connected for the very first time, or are reconnected after having been disconnected.</p>
+						<p>Initial connection is when the <a href="#1_1_2_1">two state properties</a> are either connected for the very first time, or are reconnected after having been disconnected.</p>
 						
 						<p>Specifically, initial connection occurs when...</p>
 						
 						<table class="list">
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#2_1">connected</a></code> set-get property becomes <code>true</code>, and the value of neither the <code><a href="#2_2">propertyA</a></code> nor <code><a href="#2_3">propertyB</a></code> set-get property is <code>null</code> or <code>undefined</code></td></tr>
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>immediately after either of <a href="#1_1_2_1_1">property A</a> or <a href="#1_1_2_1_2">property B</a> are changed or the <a href="#1_1_2_2">value adapter</a> is changed, and the value of neither the <code><a href="#2_2">propertyA</a></code> nor <code><a href="#2_3">propertyB</a></code> set-get property is <code>null</code> or <code>undefined</code></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#2_1">connected</a></code> state property becomes <code>true</code>, and the value of neither the <code><a href="#2_2">propertyA</a></code> nor <code><a href="#2_3">propertyB</a></code> state property is <code>null</code> or <code>undefined</code></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>immediately after either of <a href="#1_1_2_1_1">property A</a> or <a href="#1_1_2_1_2">property B</a> are changed or the <a href="#1_1_2_2">value adapter</a> is changed, and the value of neither the <code><a href="#2_2">propertyA</a></code> nor <code><a href="#2_3">propertyB</a></code> state property is <code>null</code> or <code>undefined</code></td></tr>
 						</table>
-						<p>Whenever <a href="#1_1_2_3_1">initial connection</a> occurs, the propery adapter instance performs <a href="#1_1_2_4_1">property A to property B synchronization</a>, and value change event handlers are wired on the instances that own the <a href="#1_1_2_1">two set-get properties</a> in order to ensure that the appropriate <a href="#1_1_2_4">synchronization</a> is performed when the value of either <a href="#1_1_2_1_1">property A</a> or <a href="#1_1_2_1_2">property B</a> is modified.</p>
+						<p>Whenever <a href="#1_1_2_3_1">initial connection</a> occurs, the propery adapter instance performs <a href="#1_1_2_4_1">property A to property B synchronization</a>, and value change event handlers are wired on the instances that own the <a href="#1_1_2_1">two state properties</a> in order to ensure that the appropriate <a href="#1_1_2_4">synchronization</a> is performed when the value of either <a href="#1_1_2_1_1">property A</a> or <a href="#1_1_2_1_2">property B</a> is modified.</p>
 					</div>
 					
 					<a name="1_1_2_3_2"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.3. Connection and Disconnection -&gt; 1.1.2.3.2. Disconnection"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.3. Connection and Disconnection">3</a>.<a href="#1_1_2_3_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.3. Connection and Disconnection -&gt; 1.1.2.3.2. Disconnection">2</a>. </span>Disconnection</h5>
 					<div class="contents5">
-						<p>Disconnection is when <a href="#1_1_2_1">two set-get properties</a> that were previously connected through a property adapter instance become disconnected so that their values are no longer kept synchronized.</p>
+						<p>Disconnection is when <a href="#1_1_2_1">two state properties</a> that were previously connected through a property adapter instance become disconnected so that their values are no longer kept synchronized.</p>
 						
-						<p>Specifically, disconnection occurs when two set-get properties were previously connected and then ...</p>
+						<p>Specifically, disconnection occurs when two state properties were previously connected and then ...</p>
 						
 						<table class="list">
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#2_1">connected</a></code> set-get property becomes <code>false</code></td></tr>
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of any of the <code><a href="#2_2">propertyA</a></code>, <code><a href="#2_3">propertyB</a></code>, or <code><a href="#2_4">valueAdapter</a></code> set-get properties is changed (if the value of neither the <code><a href="#2_2">propertyA</a></code> nor <code><a href="#2_3">propertyB</a></code> set-get property is <code>null</code> or <code>undefined</code> after the change, then disconnection will occur right before the <a href="#1_1_2_3_1">initial connection</a> that occurs for the new configuration of connected properties and/or <a href="#1_1_2_2">value adapter</a>)</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#2_1">connected</a></code> state property becomes <code>false</code></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of any of the <code><a href="#2_2">propertyA</a></code>, <code><a href="#2_3">propertyB</a></code>, or <code><a href="#2_4">valueAdapter</a></code> state properties is changed (if the value of neither the <code><a href="#2_2">propertyA</a></code> nor <code><a href="#2_3">propertyB</a></code> state property is <code>null</code> or <code>undefined</code> after the change, then disconnection will occur right before the <a href="#1_1_2_3_1">initial connection</a> that occurs for the new configuration of connected properties and/or <a href="#1_1_2_2">value adapter</a>)</td></tr>
 						</table>
 					</div>
 				</div>
@@ -453,21 +453,21 @@
 				<a name="1_1_2_4"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization">4</a>. </span>Synchronization</h4>
 				<div class="contents4">
-					<p>Synchronization is when the value of one of the <a href="#1_1_2_1">two set-get properties</a> that are connected through a property adapter instance changes, and the value of the other property in the pair is updated in order to keep it synchronized with the one that changed.</p>
+					<p>Synchronization is when the value of one of the <a href="#1_1_2_1">two state properties</a> that are connected through a property adapter instance changes, and the value of the other property in the pair is updated in order to keep it synchronized with the one that changed.</p>
 					
-					<p>When <a href="#1_1_2_1">two set-get properties</a> are specified for a property adapter instance, but that instance's <code><a href="#2_1">connected</a></code> set-get property is set to <code>false</code>, then synchronization will not be performed if the value of either of the <a href="#1_1_2_1">two set-get properties</a> is modified. Whenever synchronization is performed, the value of the <code><a href="#2_4">valueAdapter</a></code> set-get property is taken into consideration (see <a href="#1_1_2_2_5">How a Value Adapter is Used</a>).</p>
+					<p>When <a href="#1_1_2_1">two state properties</a> are specified for a property adapter instance, but that instance's <code><a href="#2_1">connected</a></code> state property is set to <code>false</code>, then synchronization will not be performed if the value of either of the <a href="#1_1_2_1">two state properties</a> is modified. Whenever synchronization is performed, the value of the <code><a href="#2_4">valueAdapter</a></code> state property is taken into consideration (see <a href="#1_1_2_2_5">How a Value Adapter is Used</a>).</p>
 					
 					<a name="1_1_2_4_1"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.1. Property A to Property B Synchronization"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization">4</a>.<a href="#1_1_2_4_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.1. Property A to Property B Synchronization">1</a>. </span>Property A to Property B Synchronization</h5>
 					<div class="contents5">
-						<p>Once <a href="#1_1_2_3_1">initial connection</a> has occured between <a href="#1_1_2_1">two set-get properties</a> specified for a property adapter instance, a change in the value of <a href="#1_1_2_1_1">property A</a> will result in the value of <a href="#1_1_2_1_2">property B</a> being synchronized to the new value of <a href="#1_1_2_1_1">property A</a>.</p>
+						<p>Once <a href="#1_1_2_3_1">initial connection</a> has occured between <a href="#1_1_2_1">two state properties</a> specified for a property adapter instance, a change in the value of <a href="#1_1_2_1_1">property A</a> will result in the value of <a href="#1_1_2_1_2">property B</a> being synchronized to the new value of <a href="#1_1_2_1_1">property A</a>.</p>
 						
 						<p>When the value of <a href="#1_1_2_1_2">property B</a> is synchronized to the value of <a href="#1_1_2_1_1">property A</a>, any <a href="#1_1_2_2">value adapter</a> specified for the property adapter instance is taken into account (see <a href="#1_1_2_2_5">How a Value Adapter is Used</a>).</p>
 						
 						<a name="1_1_2_4_1_1"></a>
 						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.1. Property A to Property B Synchronization -&gt; 1.1.2.4.1.1. Property A to Property B Synchronization on Initial Connection"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization">4</a>.<a href="#1_1_2_4_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.1. Property A to Property B Synchronization">1</a>.<a href="#1_1_2_4_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.1. Property A to Property B Synchronization -&gt; 1.1.2.4.1.1. Property A to Property B Synchronization on Initial Connection">1</a>. </span>Property A to Property B Synchronization on Initial Connection</h5>
 						<div class="contents6">
-							<p>Unlike <a href="#1_1_2_4_2">property B to property A synchronization</a>, synchronization from property A to property B is also performed upon <a href="#1_1_2_3_1">initial connection</a> of the <a href="#1_1_2_1">two set-get properties</a>.</p>
+							<p>Unlike <a href="#1_1_2_4_2">property B to property A synchronization</a>, synchronization from property A to property B is also performed upon <a href="#1_1_2_3_1">initial connection</a> of the <a href="#1_1_2_1">two state properties</a>.</p>
 							
 							<p>This ensures that the values of <a href="#1_1_2_1_1">property A</a> and <a href="#1_1_2_1_2">property B</a> are in agreement immediately upon connecting the two properties through the property adapter.</p>
 						</div>
@@ -476,7 +476,7 @@
 					<a name="1_1_2_4_2"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.2. Property B to Property A Synchronization"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization">4</a>.<a href="#1_1_2_4_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.2. Property B to Property A Synchronization">2</a>. </span>Property B to Property A Synchronization</h5>
 					<div class="contents5">
-						<p>Once <a href="#1_1_2_3_1">initial connection</a> has occured between <a href="#1_1_2_1">two set-get properties</a> specified for a property adapter instance, a change in the value of <a href="#1_1_2_1_2">property B</a> will result in the value of <a href="#1_1_2_1_1">property A</a> being synchronized to the new value of <a href="#1_1_2_1_2">property B</a>.</p>
+						<p>Once <a href="#1_1_2_3_1">initial connection</a> has occured between <a href="#1_1_2_1">two state properties</a> specified for a property adapter instance, a change in the value of <a href="#1_1_2_1_2">property B</a> will result in the value of <a href="#1_1_2_1_1">property A</a> being synchronized to the new value of <a href="#1_1_2_1_2">property B</a>.</p>
 						
 						<p>When the value of <a href="#1_1_2_1_1">property A</a> is synchronized to the value of <a href="#1_1_2_1_2">property B</a>, any <a href="#1_1_2_2">value adapter</a> specified for the property adapter instance is taken into account (see <a href="#1_1_2_2_5">How a Value Adapter is Used</a>).</p>
 					</div>
@@ -485,22 +485,22 @@
 				<a name="1_1_2_5"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.5. Dynamically Updatable"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.5. Dynamically Updatable">5</a>. </span>Dynamically Updatable</h4>
 				<div class="contents4">
-					<p>The <code>Uize.Util.PropertyAdapter</code> class supports dynamic updating of all of its set-get properties.</p>
+					<p>The <code>Uize.Util.PropertyAdapter</code> class supports dynamic updating of all of its state properties.</p>
 					
 					<p>This means that one can <a href="#1_1_2_5_1">dynamically connect and disconnect</a> the properties connected through an instance, one can <a href="#1_1_2_5_2">dynamically change the properties</a> connected through an instance, and one can <a href="#1_1_2_5_3">dynamically change the value adapter</a> being used by an instance.</p>
 					
 					<a name="1_1_2_5_1"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.5. Dynamically Updatable -&gt; 1.1.2.5.1. Dynamically Connect and Disconnect"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.5. Dynamically Updatable">5</a>.<a href="#1_1_2_5_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.5. Dynamically Updatable -&gt; 1.1.2.5.1. Dynamically Connect and Disconnect">1</a>. </span>Dynamically Connect and Disconnect</h5>
 					<div class="contents5">
-						<p>The <code>Uize.Util.PropertyAdapter</code> class supports dynamically connecting and disconnecting the <a href="#1_1_2_1">two set-get properties</a> that are connected through a property adapter instance.</p>
+						<p>The <code>Uize.Util.PropertyAdapter</code> class supports dynamically connecting and disconnecting the <a href="#1_1_2_1">two state properties</a> that are connected through a property adapter instance.</p>
 						
-						<p>The properties can be connected or disconneced at any time, simply by setting the value of the property adapter instance's <code><a href="#2_1">connected</a></code> set-get property.</p>
+						<p>The properties can be connected or disconneced at any time, simply by setting the value of the property adapter instance's <code><a href="#2_1">connected</a></code> state property.</p>
 					</div>
 					
 					<a name="1_1_2_5_2"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.5. Dynamically Updatable -&gt; 1.1.2.5.2. Dynamically Change the Properties"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.5. Dynamically Updatable">5</a>.<a href="#1_1_2_5_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.5. Dynamically Updatable -&gt; 1.1.2.5.2. Dynamically Change the Properties">2</a>. </span>Dynamically Change the Properties</h5>
 					<div class="contents5">
-						<p>Any or both of the <a href="#1_1_2_1">two set-get properties</a> that are connected through a property adapter instance can be changed midstream, simply by setting the value of either or both of the property adapter instance's <code><a href="#2_2">propertyA</a></code> and <code><a href="#2_3">propertyB</a></code> set-get properties.</p>
+						<p>Any or both of the <a href="#1_1_2_1">two state properties</a> that are connected through a property adapter instance can be changed midstream, simply by setting the value of either or both of the property adapter instance's <code><a href="#2_2">propertyA</a></code> and <code><a href="#2_3">propertyB</a></code> state properties.</p>
 						
 						<p>When dynamically changing the properties that are connected through a property adapter, <a href="#1_1_2_3_2">disconnection</a> will occur for any previously connected properties, after which <a href="#1_1_2_3_1">initial connection</a> will occur for the new configuration of properties.</p>
 					</div>
@@ -510,7 +510,7 @@
 					<div class="contents5">
 						<p>The <code>Uize.Util.PropertyAdapter</code> class supports dynamically changing the <a href="#1_1_2_2">value adapter</a> that is used to transform values when performing <a href="#1_1_2_4">synchronization</a> from <a href="#1_1_2_1_1">property A</a> to <a href="#1_1_2_1_2">property B</a>, and vice versa.</p>
 						
-						<p>Changing the <a href="#1_1_2_2">value adapter</a> that is used by a property adapter instance is as simple as setting the value of the instance's <code><a href="#2_4">valueAdapter</a></code> set-get property. When dynamically changing the <a href="#1_1_2_2">value adapter</a>, <a href="#1_1_2_3_2">disconnection</a> will occur for any previously connected properties, after which <a href="#1_1_2_3_1">initial connection</a> will occur for the new configuration of properties and value adapter.</p>
+						<p>Changing the <a href="#1_1_2_2">value adapter</a> that is used by a property adapter instance is as simple as setting the value of the instance's <code><a href="#2_4">valueAdapter</a></code> state property. When dynamically changing the <a href="#1_1_2_2">value adapter</a>, <a href="#1_1_2_3_2">disconnection</a> will occur for any previously connected properties, after which <a href="#1_1_2_3_1">initial connection</a> will occur for the new configuration of properties and value adapter.</p>
 					</div>
 				</div>
 				
@@ -563,7 +563,7 @@
 					<p>While the <code>Uize.Util.PropertyAdapter</code> and <code><a href="../reference/Uize.Util.Coupler.html">Uize.Util.Coupler</a></code> classes are similar in spirit, there are some key differences to note.</p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>Uize.Util.PropertyAdapter</code> class supports connecting any two set-get properties of any two instances (eg. the <code>textColor</code> property of some instance with the <code>bgColor</code> property of some other instance), while the <code><a href="../reference/Uize.Util.Coupler.html">Uize.Util.Coupler</a></code> class supports connecting the same set of any number of set-get properties across two or more instances (eg. the <code>minValue</code> and <code>maxValue</code> properties of three different slider widget instances)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>Uize.Util.PropertyAdapter</code> class supports connecting any two state properties of any two instances (eg. the <code>textColor</code> property of some instance with the <code>bgColor</code> property of some other instance), while the <code><a href="../reference/Uize.Util.Coupler.html">Uize.Util.Coupler</a></code> class supports connecting the same set of any number of state properties across two or more instances (eg. the <code>minValue</code> and <code>maxValue</code> properties of three different slider widget instances)</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="../reference/Uize.Util.Coupler.html">Uize.Util.Coupler</a></code> class supports only exact synchronization of the values of the various connected properties, while the <code>Uize.Util.PropertyAdapter</code> class supports an optional <a href="#1_1_2_2">value adapter</a> object that allows for the connected properties to have different value ranges or encodings</td></tr>
 					</table>
 					<a name="1_1_2_7_1"></a>
@@ -622,7 +622,7 @@
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#2_1">connected</a></code> | <code><a href="#2_2">propertyA</a></code> | <code><a href="#2_3">propertyB</a></code> | <code><a href="#2_4">valueAdapter</a></code></p>
 			</div>
@@ -670,12 +670,12 @@
 	</div>
 	
 	<a name="2"></a>
-	<h1 class="heading1" title="2. Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="2. State Properties"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.1. connected"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_1" title="2. Set-get Properties -&gt; 2.1. connected">1</a>. </span>connected</h2>
+		<h2 class="heading2" title="2. State Properties -&gt; 2.1. connected"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_1" title="2. State Properties -&gt; 2.1. connected">1</a>. </span>connected</h2>
 		<div class="contents2">
-			<p>A boolean, indicating whether or not the connection is active and the properties specified by the <code><a href="#2_2">propertyA</a></code> and <code><a href="#2_3">propertyB</a></code> set-get properties are connected together.</p>
+			<p>A boolean, indicating whether or not the connection is active and the properties specified by the <code><a href="#2_2">propertyA</a></code> and <code><a href="#2_3">propertyB</a></code> state properties are connected together.</p>
 			
 			<p>If this property is set to <code>false</code> after properties have already been connected, then they will be disconnected. They can be reconnected again later by setting the value of this property back to <code>true</code>. Whenever the value of this property changes from <code>false</code> to <code>true</code> and properties are specified for both <a href="#1_1_2_1_1">property A</a> and <a href="#1_1_2_1_2">property B</a>, then <a href="#1_1_2_3_1">initial connection</a> will be established.</p>
 			
@@ -692,7 +692,7 @@
 		</div>
 		
 		<a name="2_2"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.2. propertyA"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_2" title="2. Set-get Properties -&gt; 2.2. propertyA">2</a>. </span>propertyA</h2>
+		<h2 class="heading2" title="2. State Properties -&gt; 2.2. propertyA"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_2" title="2. State Properties -&gt; 2.2. propertyA">2</a>. </span>propertyA</h2>
 		<div class="contents2">
 			<p>A <a href="#1_1_2_1_3">property specifier</a>, specifying the instance and the property for <a href="#1_1_2_1_1">property A</a>.</p>
 			
@@ -701,7 +701,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_3">propertyB</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_3">propertyB</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -712,7 +712,7 @@
 		</div>
 		
 		<a name="2_3"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.3. propertyB"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_3" title="2. Set-get Properties -&gt; 2.3. propertyB">3</a>. </span>propertyB</h2>
+		<h2 class="heading2" title="2. State Properties -&gt; 2.3. propertyB"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_3" title="2. State Properties -&gt; 2.3. propertyB">3</a>. </span>propertyB</h2>
 		<div class="contents2">
 			<p>A <a href="#1_1_2_1_3">property specifier</a>, specifying the instance and the property for <a href="#1_1_2_1_2">property B</a>.</p>
 			
@@ -721,7 +721,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_2">propertyA</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_2">propertyA</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -732,7 +732,7 @@
 		</div>
 		
 		<a name="2_4"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.4. valueAdapter"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_4" title="2. Set-get Properties -&gt; 2.4. valueAdapter">4</a>. </span>valueAdapter</h2>
+		<h2 class="heading2" title="2. State Properties -&gt; 2.4. valueAdapter"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_4" title="2. State Properties -&gt; 2.4. valueAdapter">4</a>. </span>valueAdapter</h2>
 		<div class="contents2">
 			<p>An object, specifying a <a href="#1_1_2_2">value adapter</a> that should be used to translate the value of <a href="#1_1_2_1_1">property A</a> to a value for <a href="#1_1_2_1_2">property B</a>, or vice versa.</p>
 			
@@ -741,7 +741,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_2">propertyA</a></code> and <code><a href="#2_3">propertyB</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_2">propertyA</a></code> and <code><a href="#2_3">propertyB</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>

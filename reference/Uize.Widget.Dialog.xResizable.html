@@ -36,7 +36,7 @@
 							<li><a href="#1_1_1" title="It is not sufficient to merely require the Uize.Widget.Dialog.xResizable module in order for dialogs to be resizable.">1.1.1. Must Set Resizable To True</a></li>
 							<li><a href="#1_1_2" title="If one requires the Uize.Widget.Dialog.xResizable extension module, it is not essential to require the Uize.Widget.Dialog module, since it is implicit by requiring Uize.Widget.Dialog.xResizable.">1.1.2. Requiring Uize.Widget.Dialog Optional</a></li>
 							<li><a href="#1_1_3" title="Because the Uize.Widget.Dialog.xResizable module extends the Uize.Widget.Dialog module, instances of all subclasses of Uize.Widget.Dialog will also be able to be resizable.">1.1.3. All Subclasses Resizable</a></li>
-							<li><a href="#1_1_4" title="A dialog subclass can be made resizable so that all newly created instances of that subclass will be resizable right off the bat. This is done by setting the value of the resizable set-get property to true on the class, as in the following example...">1.1.4. Forced Resizable Subclasses</a></li>
+							<li><a href="#1_1_4" title="A dialog subclass can be made resizable so that all newly created instances of that subclass will be resizable right off the bat. This is done by setting the value of the resizable state property to true on the class, as in the following example...">1.1.4. Forced Resizable Subclasses</a></li>
 						</ul>
 					</li>
 					<li><a href="#1_2" title="The following example pages are good showcases for the Uize.Widget.Dialog.xResizable module...">1.2. Examples</a></li>
@@ -56,7 +56,7 @@
 					<li><a href="#2_1" title="An instance of the Uize.Widget.Resizer class, that is used to wire up the resize functionality for the dialog.">2.1. resizer</a></li>
 				</ul>
 			</li>
-			<li><a href="#3">3. Set-get Properties</a>
+			<li><a href="#3">3. State Properties</a>
 				<ul>
 					<li><a href="#3_1" title="A boolean, specifying whether or not the dialog should be resizable.">3.1. resizable</a></li>
 				</ul>
@@ -79,7 +79,7 @@
 		
 		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
 		
-		<p>The <code>Uize.Widget.Dialog.xResizable</code> module is an extension module that extends the <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> class. In a Rich Internet Application, many dialogs will not need to be resizable by the user. Therefore, the resizability functionality is not implemented in the <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> class - in order to reduce the need for loading the extra code. Instead, in order to make dialogs resizable one needs to require the <code>Uize.Widget.Dialog.xResizable</code> extension module and set the <code><a href="#3_1">resizable</a></code> set-get property that it adds to the <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> class to <code>true</code> for any dialogs that you want to be resizable. Consider the following example...</p>
+		<p>The <code>Uize.Widget.Dialog.xResizable</code> module is an extension module that extends the <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> class. In a Rich Internet Application, many dialogs will not need to be resizable by the user. Therefore, the resizability functionality is not implemented in the <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> class - in order to reduce the need for loading the extra code. Instead, in order to make dialogs resizable one needs to require the <code>Uize.Widget.Dialog.xResizable</code> extension module and set the <code><a href="#3_1">resizable</a></code> state property that it adds to the <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> class to <code>true</code> for any dialogs that you want to be resizable. Consider the following example...</p>
 		
 		<p><span class="allCaps">EXAMPLE</span></p>
 		
@@ -129,7 +129,7 @@
 			<a name="1_1_4"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Things to Note -&gt; 1.1.4. Forced Resizable Subclasses"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Things to Note">1</a>.<a href="#1_1_4" title="1. Introduction -&gt; 1.1. Things to Note -&gt; 1.1.4. Forced Resizable Subclasses">4</a>. </span>Forced Resizable Subclasses</h3>
 			<div class="contents3">
-				<p>A dialog subclass can be made resizable so that all newly created instances of that subclass will be resizable right off the bat. This is done by setting the value of the <code><a href="#3_1">resizable</a></code> set-get property to <code>true</code> on the class, as in the following example...</p>
+				<p>A dialog subclass can be made resizable so that all newly created instances of that subclass will be resizable right off the bat. This is done by setting the value of the <code><a href="#3_1">resizable</a></code> state property to <code>true</code> on the class, as in the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -235,17 +235,17 @@
 });
 </pre>
 			
-			<p>In the above example, notice how the <code><a href="#2_1">resizer</a></code> child widget is being dereferenced off the <code>children</code> property immediately after adding the dialog child widget. This is possible because the <code>addChild</code> instance method returns a reference to the child widget being added (the dialog in this case). Setting the <code>fixedX</code> set-get property of the <code><a href="#2_1">resizer</a></code> instance to <code>true</code> causes the dialog to be resizable only in the Y-axis (vertically).</p>
+			<p>In the above example, notice how the <code><a href="#2_1">resizer</a></code> child widget is being dereferenced off the <code>children</code> property immediately after adding the dialog child widget. This is possible because the <code>addChild</code> instance method returns a reference to the child widget being added (the dialog in this case). Setting the <code>fixedX</code> state property of the <code><a href="#2_1">resizer</a></code> instance to <code>true</code> causes the dialog to be resizable only in the Y-axis (vertically).</p>
 			
-			<p><b>NOTE:</b> For optimization, the <code><a href="#2_1">resizer</a></code> child widget is only created if a dialog is made resizable by setting its <code><a href="#3_1">resizable</a></code> set-get property to <code>true</code>. Therefore, be careful to first set a dialog to be resizable before attempting to access the <code><a href="#2_1">resizer</a></code> child widget for modifying its state.</p>
+			<p><b>NOTE:</b> For optimization, the <code><a href="#2_1">resizer</a></code> child widget is only created if a dialog is made resizable by setting its <code><a href="#3_1">resizable</a></code> state property to <code>true</code>. Therefore, be careful to first set a dialog to be resizable before attempting to access the <code><a href="#2_1">resizer</a></code> child widget for modifying its state.</p>
 		</div>
 	</div>
 	
 	<a name="3"></a>
-	<h1 class="heading1" title="3. Set-get Properties"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="3. State Properties"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.1. resizable"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_1" title="3. Set-get Properties -&gt; 3.1. resizable">1</a>. </span>resizable</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.1. resizable"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_1" title="3. State Properties -&gt; 3.1. resizable">1</a>. </span>resizable</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not the dialog should be resizable.</p>
 			

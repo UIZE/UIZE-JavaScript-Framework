@@ -94,14 +94,14 @@ Uize.module ({
 				name:'isValid',
 				value:false
 				/*?
-					Set-get properties
+					State properties
 						isValid
 							A boolean indicating whether or not the user has correctly solved the captcha challenge. Initially set to false as solving a captcha requires input from the user.
 				*/
 			},
 			_value:'value'
 			/*?
-				Set-get properties
+				State properties
 					value
 						An object representing the user response to the captcha's challenge. While generally a string (see reCaptcha's implementation), it can also represent other values, such as an option in a dropdown (ESP-PIX, http://server251.theory.cs.cmu.edu/cgi-bin/esp-pix/esp-pix).
 			*/

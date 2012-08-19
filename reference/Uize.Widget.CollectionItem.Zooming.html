@@ -49,7 +49,7 @@
 					<li><a href="#2_2" title="A node that is used for displaying a low resolution version of the zoomed in preview image.">2.2. previewZoomLowRes</a></li>
 				</ul>
 			</li>
-			<li><a href="#3">3. Set-get Properties</a>
+			<li><a href="#3">3. State Properties</a>
 				<ul>
 					<li><a href="#3_1" title="A floating point number in the range of 0 to 1, representing the horizontal alignment of the zoomed in image.">3.1. alignX</a></li>
 					<li><a href="#3_2" title="A floating point number in the range of 0 to 1, representing the vertical alignment of the zoomed in image.">3.2. alignY</a></li>
@@ -63,8 +63,8 @@
 					<li><a href="#3_10" title="Inherited from Uize.Widget.CollectionItem.">3.10. cssClassImage</a></li>
 					<li><a href="#3_11" title="Inherited from Uize.Widget.CollectionItem.">3.11. cssClassImageOver</a></li>
 					<li><a href="#3_12" title="Inherited from Uize.Widget.CollectionItem.">3.12. cssClassOver</a></li>
-					<li><a href="#3_13" title="An integer, specifying the thickness of the margin at the edges of the preview image where moving the mouse will produce no change in the values of either - or both - of the alignX and alignY set-get properties.">3.13. deadMargin</a></li>
-					<li><a href="#3_14" title="A read-only floating point number, in the range of 1 to the value of the zoomPower set-get property, indicating the currently displayed zoom power.">3.14. displayedZoomPower</a></li>
+					<li><a href="#3_13" title="An integer, specifying the thickness of the margin at the edges of the preview image where moving the mouse will produce no change in the values of either - or both - of the alignX and alignY state properties.">3.13. deadMargin</a></li>
+					<li><a href="#3_14" title="A read-only floating point number, in the range of 1 to the value of the zoomPower state property, indicating the currently displayed zoom power.">3.14. displayedZoomPower</a></li>
 					<li><a href="#3_15" title="Inherited from Uize.Widget.">3.15. enabled</a></li>
 					<li><a href="#3_16" title="Inherited from Uize.Widget.">3.16. enabledInherited</a></li>
 					<li><a href="#3_17" title="Inherited from Uize.Widget.">3.17. html</a></li>
@@ -213,7 +213,7 @@
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#3_1">alignX</a></code> | <code><a href="#3_2">alignY</a></code> | <code><a href="#3_13">deadMargin</a></code> | <code><a href="#3_14">displayedZoomPower</a></code> | <code><a href="#3_20">inUse</a></code> | <code><a href="#3_29">previewUrl</a></code> | <code><a href="#3_30">previewZoomUrl</a></code> | <code><a href="#3_33">showingPreview</a></code> | <code><a href="#3_36">zoomFadeProperties</a></code> | <code><a href="#3_37">zoomPower</a></code></p>
 			</div>
@@ -249,7 +249,7 @@
 				
 				<p><code><a href="#5_1">showConfirm</a></code> | <code><a href="#5_2">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#3_3">built</a></code> | <code><a href="#3_4">busy</a></code> | <code><a href="#3_5">busyInherited</a></code> | <code><a href="#3_6">children</a></code> | <code><a href="#3_7">container</a></code> | <code><a href="#3_8">cssClassActive</a></code> | <code><a href="#3_9">cssClassBase</a></code> | <code><a href="#3_10">cssClassImage</a></code> | <code><a href="#3_11">cssClassImageOver</a></code> | <code><a href="#3_12">cssClassOver</a></code> | <code><a href="#3_15">enabled</a></code> | <code><a href="#3_16">enabledInherited</a></code> | <code><a href="#3_17">html</a></code> | <code><a href="#3_18">idPrefix</a></code> | <code><a href="#3_19">idPrefixConstruction</a></code> | <code><a href="#3_21">insertionMode</a></code> | <code><a href="#3_22">localized</a></code> | <code><a href="#3_23">locked</a></code> | <code><a href="#3_24">name</a></code> | <code><a href="#3_25">nodeMap</a></code> | <code><a href="#3_26">over</a></code> | <code><a href="#3_27">previewClickAction</a></code> | <code><a href="#3_28">previewTooltip</a></code> | <code><a href="#3_31">properties</a></code> | <code><a href="#3_32">selected</a></code> | <code><a href="#3_34">title</a></code> | <code><a href="#3_35">wired</a></code></p>
 				
@@ -309,21 +309,21 @@
 	</div>
 	
 	<a name="3"></a>
-	<h1 class="heading1" title="3. Set-get Properties"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="3. State Properties"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.1. alignX"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_1" title="3. Set-get Properties -&gt; 3.1. alignX">1</a>. </span>alignX</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.1. alignX"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_1" title="3. State Properties -&gt; 3.1. alignX">1</a>. </span>alignX</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, representing the horizontal alignment of the zoomed in image.</p>
 			
-			<p>A value of <code>0</code> indicates that the zoomed in image is aligned so that its leftmost side is visible, a value of <code>1</code> indicates that the zoomed in image is aligned so that its rightmost side is visible, and a value of <code>.5</code> indicates that the zoomed in image is aligned so that its center horizontally is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the <code><a href="#3_20">inUse</a></code> set-get property is set to <code>true</code>).</p>
+			<p>A value of <code>0</code> indicates that the zoomed in image is aligned so that its leftmost side is visible, a value of <code>1</code> indicates that the zoomed in image is aligned so that its rightmost side is visible, and a value of <code>.5</code> indicates that the zoomed in image is aligned so that its center horizontally is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the <code><a href="#3_20">inUse</a></code> state property is set to <code>true</code>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_2">alignY</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_20">inUse</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_2">alignY</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_20">inUse</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -333,18 +333,18 @@
 		</div>
 		
 		<a name="3_2"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.2. alignY"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_2" title="3. Set-get Properties -&gt; 3.2. alignY">2</a>. </span>alignY</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.2. alignY"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_2" title="3. State Properties -&gt; 3.2. alignY">2</a>. </span>alignY</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, representing the vertical alignment of the zoomed in image.</p>
 			
-			<p>A value of <code>0</code> indicates that the zoomed in image is aligned so that its topmost side is visible, a value of <code>1</code> indicates that the zoomed in image is aligned so that its bottommost side is visible, and a value of <code>.5</code> indicates that the zoomed in image is aligned so that its center vertically is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the <code><a href="#3_20">inUse</a></code> set-get property is set to <code>true</code>).</p>
+			<p>A value of <code>0</code> indicates that the zoomed in image is aligned so that its topmost side is visible, a value of <code>1</code> indicates that the zoomed in image is aligned so that its bottommost side is visible, and a value of <code>.5</code> indicates that the zoomed in image is aligned so that its center vertically is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the <code><a href="#3_20">inUse</a></code> state property is set to <code>true</code>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">alignX</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_20">inUse</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">alignX</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_20">inUse</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -354,7 +354,7 @@
 		</div>
 		
 		<a name="3_3"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.3. built"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_3" title="3. Set-get Properties -&gt; 3.3. built">3</a>. </span>built</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.3. built"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_3" title="3. State Properties -&gt; 3.3. built">3</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -366,7 +366,7 @@
 		</div>
 		
 		<a name="3_4"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.4. busy"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_4" title="3. Set-get Properties -&gt; 3.4. busy">4</a>. </span>busy</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.4. busy"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_4" title="3. State Properties -&gt; 3.4. busy">4</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -378,7 +378,7 @@
 		</div>
 		
 		<a name="3_5"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.5. busyInherited"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_5" title="3. Set-get Properties -&gt; 3.5. busyInherited">5</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.5. busyInherited"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_5" title="3. State Properties -&gt; 3.5. busyInherited">5</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -390,7 +390,7 @@
 		</div>
 		
 		<a name="3_6"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.6. children"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_6" title="3. Set-get Properties -&gt; 3.6. children">6</a>. </span>children</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.6. children"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_6" title="3. State Properties -&gt; 3.6. children">6</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -402,7 +402,7 @@
 		</div>
 		
 		<a name="3_7"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.7. container"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_7" title="3. Set-get Properties -&gt; 3.7. container">7</a>. </span>container</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.7. container"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_7" title="3. State Properties -&gt; 3.7. container">7</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -414,7 +414,7 @@
 		</div>
 		
 		<a name="3_8"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.8. cssClassActive"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_8" title="3. Set-get Properties -&gt; 3.8. cssClassActive">8</a>. </span>cssClassActive</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.8. cssClassActive"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_8" title="3. State Properties -&gt; 3.8. cssClassActive">8</a>. </span>cssClassActive</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -426,7 +426,7 @@
 		</div>
 		
 		<a name="3_9"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.9. cssClassBase"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_9" title="3. Set-get Properties -&gt; 3.9. cssClassBase">9</a>. </span>cssClassBase</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.9. cssClassBase"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_9" title="3. State Properties -&gt; 3.9. cssClassBase">9</a>. </span>cssClassBase</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -438,7 +438,7 @@
 		</div>
 		
 		<a name="3_10"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.10. cssClassImage"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_10" title="3. Set-get Properties -&gt; 3.10. cssClassImage">10</a>. </span>cssClassImage</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.10. cssClassImage"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_10" title="3. State Properties -&gt; 3.10. cssClassImage">10</a>. </span>cssClassImage</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -450,7 +450,7 @@
 		</div>
 		
 		<a name="3_11"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.11. cssClassImageOver"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_11" title="3. Set-get Properties -&gt; 3.11. cssClassImageOver">11</a>. </span>cssClassImageOver</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.11. cssClassImageOver"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_11" title="3. State Properties -&gt; 3.11. cssClassImageOver">11</a>. </span>cssClassImageOver</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -462,7 +462,7 @@
 		</div>
 		
 		<a name="3_12"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.12. cssClassOver"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_12" title="3. Set-get Properties -&gt; 3.12. cssClassOver">12</a>. </span>cssClassOver</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.12. cssClassOver"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_12" title="3. State Properties -&gt; 3.12. cssClassOver">12</a>. </span>cssClassOver</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -474,11 +474,11 @@
 		</div>
 		
 		<a name="3_13"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.13. deadMargin"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_13" title="3. Set-get Properties -&gt; 3.13. deadMargin">13</a>. </span>deadMargin</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.13. deadMargin"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_13" title="3. State Properties -&gt; 3.13. deadMargin">13</a>. </span>deadMargin</h2>
 		<div class="contents2">
-			<p>An integer, specifying the thickness of the margin at the edges of the preview image where moving the mouse will produce no change in the values of either - or both - of the <code><a href="#3_1">alignX</a></code> and <code><a href="#3_2">alignY</a></code> set-get properties.</p>
+			<p>An integer, specifying the thickness of the margin at the edges of the preview image where moving the mouse will produce no change in the values of either - or both - of the <code><a href="#3_1">alignX</a></code> and <code><a href="#3_2">alignY</a></code> state properties.</p>
 			
-			<p>When the <code><a href="#3_13">deadMargin</a></code> property is set to a value greater than <code>0</code>, there will be a dead margin around the edges of the preview image. When the mouse moves into this dead margin, further mouse movements may produce no change in the values of the <code><a href="#3_1">alignX</a></code> and <code><a href="#3_2">alignY</a></code> set-get properties. In other words, panning may be inactive inside this margin. When inside the horizontal dead margin (near the left and right edges), horizontal panning becomes inactive. Similarly, when inside the vertical dead margin (near the top and bottom edges), vertical panning becomes inactive.</p>
+			<p>When the <code><a href="#3_13">deadMargin</a></code> property is set to a value greater than <code>0</code>, there will be a dead margin around the edges of the preview image. When the mouse moves into this dead margin, further mouse movements may produce no change in the values of the <code><a href="#3_1">alignX</a></code> and <code><a href="#3_2">alignY</a></code> state properties. In other words, panning may be inactive inside this margin. When inside the horizontal dead margin (near the left and right edges), horizontal panning becomes inactive. Similarly, when inside the vertical dead margin (near the top and bottom edges), vertical panning becomes inactive.</p>
 			
 			<p>The purpose of the dead margin is to allow the user to pan horizontally and vertically around the zoomed in image without having to move the mouse perilously close to the edge of the preview image and risk snapping out of the zoomed in experience because the mouse accidentally moves outside of the preview image. When there is a dead margin set, the effective region for controlling the panning is smaller than the actual preview image port, by twice the amount of the <code><a href="#3_13">deadMargin</a></code> property's value - for each axis.</p>
 			
@@ -497,18 +497,18 @@
 		</div>
 		
 		<a name="3_14"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.14. displayedZoomPower"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_14" title="3. Set-get Properties -&gt; 3.14. displayedZoomPower">14</a>. </span>displayedZoomPower</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.14. displayedZoomPower"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_14" title="3. State Properties -&gt; 3.14. displayedZoomPower">14</a>. </span>displayedZoomPower</h2>
 		<div class="contents2">
-			<p>A read-only floating point number, in the range of <code>1</code> to the value of the <code><a href="#3_37">zoomPower</a></code> set-get property, indicating the currently displayed zoom power.</p>
+			<p>A read-only floating point number, in the range of <code>1</code> to the value of the <code><a href="#3_37">zoomPower</a></code> state property, indicating the currently displayed zoom power.</p>
 			
-			<p>When the zoom in effect is initiated, the value of this property will be faded from <code>1</code> to the value of the <code><a href="#3_37">zoomPower</a></code> set-get property, over the duration specified by the <code>duration</code> property of the <code><a href="#3_36">zoomFadeProperties</a></code> object.</p>
+			<p>When the zoom in effect is initiated, the value of this property will be faded from <code>1</code> to the value of the <code><a href="#3_37">zoomPower</a></code> state property, over the duration specified by the <code>duration</code> property of the <code><a href="#3_36">zoomFadeProperties</a></code> object.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>1</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_33">showingPreview</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_33">showingPreview</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -518,7 +518,7 @@
 		</div>
 		
 		<a name="3_15"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.15. enabled"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_15" title="3. Set-get Properties -&gt; 3.15. enabled">15</a>. </span>enabled</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.15. enabled"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_15" title="3. State Properties -&gt; 3.15. enabled">15</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -530,7 +530,7 @@
 		</div>
 		
 		<a name="3_16"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.16. enabledInherited"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_16" title="3. Set-get Properties -&gt; 3.16. enabledInherited">16</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.16. enabledInherited"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_16" title="3. State Properties -&gt; 3.16. enabledInherited">16</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -542,7 +542,7 @@
 		</div>
 		
 		<a name="3_17"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.17. html"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_17" title="3. Set-get Properties -&gt; 3.17. html">17</a>. </span>html</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.17. html"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_17" title="3. State Properties -&gt; 3.17. html">17</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -554,7 +554,7 @@
 		</div>
 		
 		<a name="3_18"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.18. idPrefix"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_18" title="3. Set-get Properties -&gt; 3.18. idPrefix">18</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.18. idPrefix"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_18" title="3. State Properties -&gt; 3.18. idPrefix">18</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -566,7 +566,7 @@
 		</div>
 		
 		<a name="3_19"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.19. idPrefixConstruction"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_19" title="3. Set-get Properties -&gt; 3.19. idPrefixConstruction">19</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.19. idPrefixConstruction"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_19" title="3. State Properties -&gt; 3.19. idPrefixConstruction">19</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -578,7 +578,7 @@
 		</div>
 		
 		<a name="3_20"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.20. inUse"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_20" title="3. Set-get Properties -&gt; 3.20. inUse">20</a>. </span>inUse</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.20. inUse"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_20" title="3. State Properties -&gt; 3.20. inUse">20</a>. </span>inUse</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not the zoom in effect is in use.</p>
 			
@@ -588,7 +588,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_33">showingPreview</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_33">showingPreview</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -598,7 +598,7 @@
 		</div>
 		
 		<a name="3_21"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.21. insertionMode"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_21" title="3. Set-get Properties -&gt; 3.21. insertionMode">21</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.21. insertionMode"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_21" title="3. State Properties -&gt; 3.21. insertionMode">21</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -610,7 +610,7 @@
 		</div>
 		
 		<a name="3_22"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.22. localized"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_22" title="3. Set-get Properties -&gt; 3.22. localized">22</a>. </span>localized</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.22. localized"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_22" title="3. State Properties -&gt; 3.22. localized">22</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -622,7 +622,7 @@
 		</div>
 		
 		<a name="3_23"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.23. locked"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_23" title="3. Set-get Properties -&gt; 3.23. locked">23</a>. </span>locked</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.23. locked"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_23" title="3. State Properties -&gt; 3.23. locked">23</a>. </span>locked</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -634,7 +634,7 @@
 		</div>
 		
 		<a name="3_24"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.24. name"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_24" title="3. Set-get Properties -&gt; 3.24. name">24</a>. </span>name</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.24. name"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_24" title="3. State Properties -&gt; 3.24. name">24</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -646,7 +646,7 @@
 		</div>
 		
 		<a name="3_25"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.25. nodeMap"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_25" title="3. Set-get Properties -&gt; 3.25. nodeMap">25</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.25. nodeMap"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_25" title="3. State Properties -&gt; 3.25. nodeMap">25</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -658,7 +658,7 @@
 		</div>
 		
 		<a name="3_26"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.26. over"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_26" title="3. Set-get Properties -&gt; 3.26. over">26</a>. </span>over</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.26. over"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_26" title="3. State Properties -&gt; 3.26. over">26</a>. </span>over</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -670,7 +670,7 @@
 		</div>
 		
 		<a name="3_27"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.27. previewClickAction"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_27" title="3. Set-get Properties -&gt; 3.27. previewClickAction">27</a>. </span>previewClickAction</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.27. previewClickAction"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_27" title="3. State Properties -&gt; 3.27. previewClickAction">27</a>. </span>previewClickAction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -682,7 +682,7 @@
 		</div>
 		
 		<a name="3_28"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.28. previewTooltip"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_28" title="3. Set-get Properties -&gt; 3.28. previewTooltip">28</a>. </span>previewTooltip</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.28. previewTooltip"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_28" title="3. State Properties -&gt; 3.28. previewTooltip">28</a>. </span>previewTooltip</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -694,7 +694,7 @@
 		</div>
 		
 		<a name="3_29"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.29. previewUrl"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_29" title="3. Set-get Properties -&gt; 3.29. previewUrl">29</a>. </span>previewUrl</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.29. previewUrl"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_29" title="3. State Properties -&gt; 3.29. previewUrl">29</a>. </span>previewUrl</h2>
 		<div class="contents2">
 			<p>A string, specifying the URL for the preview image.</p>
 			
@@ -704,7 +704,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_30">previewZoomUrl</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_30">previewZoomUrl</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -714,11 +714,11 @@
 		</div>
 		
 		<a name="3_30"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.30. previewZoomUrl"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_30" title="3. Set-get Properties -&gt; 3.30. previewZoomUrl">30</a>. </span>previewZoomUrl</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.30. previewZoomUrl"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_30" title="3. State Properties -&gt; 3.30. previewZoomUrl">30</a>. </span>previewZoomUrl</h2>
 		<div class="contents2">
 			<p>A string or function, specifying the URL of the image that should be used for the zoomed in preview.</p>
 			
-			<p>When a function reference is specified for this property, then the function will be called as an instance method on the instance, each time before the zoom in effect is initiated. This gives the function the opportunity to calculate a URL based upon the state of the instance - especially the value of the <code><a href="#3_29">previewUrl</a></code> set-get property, which may have been modified since the last time that the zoom in effect was initiated. Consider the following example...</p>
+			<p>When a function reference is specified for this property, then the function will be called as an instance method on the instance, each time before the zoom in effect is initiated. This gives the function the opportunity to calculate a URL based upon the state of the instance - especially the value of the <code><a href="#3_29">previewUrl</a></code> state property, which may have been modified since the last time that the zoom in effect was initiated. Consider the following example...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -734,13 +734,13 @@
 );
 </pre>
 			
-			<p>In the above example, the zoomed in preview URL is being derived from the value of the <code><a href="#3_29">previewUrl</a></code> set-get property. By specifying a function for <code><a href="#3_30">previewZoomUrl</a></code>, the code that derives the zoomed in preview URL will be executed each time the zoom in effect is initiated. In this case, the code is expecting the value of the <code><a href="#3_29">previewUrl</a></code> property to always contain the dimensions string <code>'100x100'</code>, which is replaced with the string <code>'250x250'</code> to produce the URL for the zoomed in preview.</p>
+			<p>In the above example, the zoomed in preview URL is being derived from the value of the <code><a href="#3_29">previewUrl</a></code> state property. By specifying a function for <code><a href="#3_30">previewZoomUrl</a></code>, the code that derives the zoomed in preview URL will be executed each time the zoom in effect is initiated. In this case, the code is expecting the value of the <code><a href="#3_29">previewUrl</a></code> property to always contain the dimensions string <code>'100x100'</code>, which is replaced with the string <code>'250x250'</code> to produce the URL for the zoomed in preview.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_29">previewUrl</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_29">previewUrl</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -750,7 +750,7 @@
 		</div>
 		
 		<a name="3_31"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.31. properties"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_31" title="3. Set-get Properties -&gt; 3.31. properties">31</a>. </span>properties</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.31. properties"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_31" title="3. State Properties -&gt; 3.31. properties">31</a>. </span>properties</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -762,7 +762,7 @@
 		</div>
 		
 		<a name="3_32"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.32. selected"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_32" title="3. Set-get Properties -&gt; 3.32. selected">32</a>. </span>selected</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.32. selected"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_32" title="3. State Properties -&gt; 3.32. selected">32</a>. </span>selected</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -774,7 +774,7 @@
 		</div>
 		
 		<a name="3_33"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.33. showingPreview"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_33" title="3. Set-get Properties -&gt; 3.33. showingPreview">33</a>. </span>showingPreview</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.33. showingPreview"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_33" title="3. State Properties -&gt; 3.33. showingPreview">33</a>. </span>showingPreview</h2>
 		<div class="contents2">
 			<p>A read-only boolean, indicating whether or not the zoomed in preview is being shown.</p>
 			
@@ -783,7 +783,7 @@
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_14">displayedZoomPower</a></code> and <code><a href="#3_20">inUse</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_14">displayedZoomPower</a></code> and <code><a href="#3_20">inUse</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -793,7 +793,7 @@
 		</div>
 		
 		<a name="3_34"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.34. title"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_34" title="3. Set-get Properties -&gt; 3.34. title">34</a>. </span>title</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.34. title"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_34" title="3. State Properties -&gt; 3.34. title">34</a>. </span>title</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code>.</p>
 			
@@ -805,7 +805,7 @@
 		</div>
 		
 		<a name="3_35"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.35. wired"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_35" title="3. Set-get Properties -&gt; 3.35. wired">35</a>. </span>wired</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.35. wired"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_35" title="3. State Properties -&gt; 3.35. wired">35</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -817,11 +817,11 @@
 		</div>
 		
 		<a name="3_36"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.36. zoomFadeProperties"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_36" title="3. Set-get Properties -&gt; 3.36. zoomFadeProperties">36</a>. </span>zoomFadeProperties</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.36. zoomFadeProperties"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_36" title="3. State Properties -&gt; 3.36. zoomFadeProperties">36</a>. </span>zoomFadeProperties</h2>
 		<div class="contents2">
 			<p>An object, specifying properties that should be used for the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that drives the zoom in effect's animation.</p>
 			
-			<p>The properties of the <code><a href="#3_36">zoomFadeProperties</a></code> object can be any of the set-get properties supported by the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class. For example, if you wanted a zoom in animation that had some bounce, then you could specify a value for this property that was an object with a <code>curve</code> property whose value was a curve function, as in the following example...</p>
+			<p>The properties of the <code><a href="#3_36">zoomFadeProperties</a></code> object can be any of the state properties supported by the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class. For example, if you wanted a zoom in animation that had some bounce, then you could specify a value for this property that was an object with a <code>curve</code> property whose value was a curve function, as in the following example...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -854,13 +854,13 @@
 		</div>
 		
 		<a name="3_37"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.37. zoomPower"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_37" title="3. Set-get Properties -&gt; 3.37. zoomPower">37</a>. </span>zoomPower</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.37. zoomPower"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_37" title="3. State Properties -&gt; 3.37. zoomPower">37</a>. </span>zoomPower</h2>
 		<div class="contents2">
 			<p>A floating point number, specifying the number of times larger the zoomed in image is than the normal preview.</p>
 			
 			<p><span class="allCaps">A NOTE ON RESIZING</span></p>
 			
-			<p>Ideally, for whatever value is specified for this property, the image specified by the <code><a href="#3_30">previewZoomUrl</a></code> set-get property should be the same number of times bigger than the image specified by the <code><a href="#3_29">previewUrl</a></code> set-get property.</p>
+			<p>Ideally, for whatever value is specified for this property, the image specified by the <code><a href="#3_30">previewZoomUrl</a></code> state property should be the same number of times bigger than the image specified by the <code><a href="#3_29">previewUrl</a></code> state property.</p>
 			
 			<p>So, for example, if <code><a href="#3_37">zoomPower</a></code> is set to the value <code>2</code>, and if the image specified by the <code><a href="#3_29">previewUrl</a></code> property has dimensions of 200x150, then the image specified by <code><a href="#3_30">previewZoomUrl</a></code> should ideally be 400x300. When this is not the case, then the browser will be scaling the zoomed in image to dimensions that are not its natural dimensions, and the quality of the shrinking or stretching will depend on the image resizing mechanism of the browser. Some browsers do a better job than others, but resizing done in the browser never looks all that great in the best of cases.</p>
 			

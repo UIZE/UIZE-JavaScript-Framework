@@ -108,10 +108,10 @@ Safe Privates
 	- "lookup" of private names involves accessing variables in a higher scope than point of access, so performance cost
 	- names must be generated for all privates, which adds setup code
 	- makes it a little bit harder to do impromptu assignments of privates
-	- accessing set-get properties via their private names becomes rather inconvenient, and their private names must be registered in an extra step
+	- accessing state properties via their private names becomes rather inconvenient, and their private names must be registered in an extra step
 
 	QUESTIONS
-	- how does one provide private names for set-get properties? Provide an example.
+	- how does one provide private names for state properties? Provide an example.
 	- should multiple calls to the =priv= method on the same class for the same named private always return the same result? If so, this would suggest that external code could probe around and easily discover the internal name for a private.
 	- how is the mapping / registry of privates for a class inherited by a subclass? Does it have to be?
 
@@ -121,7 +121,7 @@ Mixins
 	Mixing in would...
 	- copy all properties of the prototype
 	- copy all static properties
-	- copy in all information of registered set-get properties
+	- copy in all information of registered state properties
 
 	ISSUES
 	- namespace conflict for all instance properties
@@ -718,9 +718,9 @@ Value Transformer Function
 		.........................................................
 
 	Behavior
-		- for any set-get property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property
-		- for any set-get property that is defined in its property profile as allowing function type values, but that is not defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property
-		- for any set-get property that is defined in its property profile as allowing function type values and that is also defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will simply be set as the new value for that property
+		- for any state property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property
+		- for any state property that is defined in its property profile as allowing function type values, but that is not defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property
+		- for any state property that is defined in its property profile as allowing function type values and that is also defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will simply be set as the new value for that property
 
 	Possible Implementation
 		................................................................................
@@ -947,7 +947,7 @@ Generic Solution for Tracking
 	- in most cases, should not require code changes
 	- ability, from the outside of code, to track any event of any type of widget
 	- whether or not to track an event is determined by a configurable rule
-	- with tracked events, ability to log any aspects of set-get state that might be interesting
+	- with tracked events, ability to log any aspects of state state that might be interesting
 	- tracking is basically just logging by a different name
 	- tracking and logging as good candidates for Aspect Oriented Programming
 
@@ -1153,7 +1153,7 @@ Code Development (in order of priority)
 		- a codified system for registering optimized handlers for batch property changes (eg. when value and value set are changed in one action)
 
 	- memory usage optimizations
-		- use prototype for set-get properties?
+		- use prototype for state properties?
 
 	- performance optimizations
 		- a way to avoid calling onChange handlers at construction time

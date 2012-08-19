@@ -19,7 +19,7 @@
 
 /*
 	OPTIONAL
-		- Uize.Widget.Beam.js (only if showBeam set-get property is true)
+		- Uize.Widget.Beam.js (only if showBeam state property is true)
 */
 
 /*?
@@ -447,7 +447,7 @@ Uize.module ({
 						- this node is required
 
 					magImageHighRes
-						An image node whose src will be set to the value of the =magImageHighResUrl= set-get property when the mag view mode is activated.
+						An image node whose src will be set to the value of the =magImageHighResUrl= state property when the mag view mode is activated.
 
 						NOTES
 						- this node is required
@@ -459,7 +459,7 @@ Uize.module ({
 					name:'cursorAlignX',
 					value:.5
 					/*?
-						Set-get Properties
+						State Properties
 							cursorAlignX
 								A floating point number in the range of =0= to =1=, specifying the horizontal position of the cursor in relation to the =highlight= box.
 
@@ -473,7 +473,7 @@ Uize.module ({
 					name:'cursorAlignY',
 					value:.75
 					/*?
-						Set-get Properties
+						State Properties
 							cursorAlignY
 								A floating point number in the range of =0= to =1=, specifying the vertical position of the cursor in relation to the =highlight= box.
 
@@ -485,7 +485,7 @@ Uize.module ({
 				},
 				_magImageLowResUrl:'magImageLowResUrl',
 					/*?
-						Set-get Properties
+						State Properties
 							magImageLowResUrl
 								A string, specifying the URL for the low resolution image.
 
@@ -496,7 +496,7 @@ Uize.module ({
 					name:'magImageHighResUrl',
 					onChange:_classPrototype._updateUiUrls
 						/*?
-							Set-get Properties
+							State Properties
 								magImageHighResUrl
 									A string, specifying the URL of the high resolution image, or a function that should return the URL of the high resolution image.
 
@@ -509,7 +509,7 @@ Uize.module ({
 					value:1,
 					onChange:_classPrototype._updateUiMagPower
 					/*?
-						Set-get Properties
+						State Properties
 							magPower
 								A number, specifying the current magnification power.
 
@@ -521,7 +521,7 @@ Uize.module ({
 					name:'magPowers',
 					onChange:function () {this.set ({_magPower:this._magPowers [0]})}
 					/*?
-						Set-get Properties
+						State Properties
 							magPowers
 								An array, specifying the magnification powers that should be available.
 
@@ -533,7 +533,7 @@ Uize.module ({
 					name:'resetMagPowerOnOut',
 					value:_true
 					/*?
-						Set-get Properties
+						State Properties
 							resetMagPowerOnOut
 								A boolean, specifying whether or not the current magnification power should be reset to the lowest available magnification power when the user mouses out of the image.
 

@@ -3,7 +3,7 @@
 <head>
 	<title>2012-07-22 - New once Instances Method for Classes | News | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework News "/>
-	<meta name="description" content="The Uize.Class module, that implements the class mechanism for the UIZE JavaScript Framework, has been improved with the addition of a once instance method for set-get properties."/>
+	<meta name="description" content="The Uize.Class module, that implements the class mechanism for the UIZE JavaScript Framework, has been improved with the addition of a once instance method for state properties."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -33,7 +33,7 @@
 </div>
 
 <div class="contents0">
-	<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module, that implements the class mechanism for the UIZE JavaScript Framework, has been improved with the addition of a <code>once</code> instance method for set-get properties.</p>
+	<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module, that implements the class mechanism for the UIZE JavaScript Framework, has been improved with the addition of a <code>once</code> instance method for state properties.</p>
 	
 	<p><span class="allCaps">SYNTAX</span></p>
 	
@@ -43,7 +43,7 @@
 	
 	<p>If the value of the property specified by the <code>propertyNameSTR</code> parameter is truthy when the <code>once</code> method is called, then the handler specified by the <code>handlerFUNC</code> parameter will be executed immediately. Otherwise, the value of the property will be watched and the handler will be executed once the property's value becomes truthy, upon which the property watcher will be removed and the property will no longer be watched. By design, the handler is only executed for the first time that the property's value becomes truthy.</p>
 	
-	<p>The <code>once</code> method is useful when using a set-get property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the <code>once</code> method is called. Consider the following example...</p>
+	<p>The <code>once</code> method is useful when using a state property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the <code>once</code> method is called. Consider the following example...</p>
 	
 	<p><span class="allCaps">EXAMPLE</span></p>
 	
@@ -56,7 +56,7 @@
 );
 </pre>
 	
-	<p>In the above example, a handler is being registered to be executed once the widget <code>myWidget</code> has been wired (ie. the value of its <code>wired</code> set-get property hecomes <code>true</code>).</p>
+	<p>In the above example, a handler is being registered to be executed once the widget <code>myWidget</code> has been wired (ie. the value of its <code>wired</code> state property hecomes <code>true</code>).</p>
 	
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Return Value"><span class="headingNumber"><a href="#1" title="1. Return Value">1</a>. </span>Return Value</h1>

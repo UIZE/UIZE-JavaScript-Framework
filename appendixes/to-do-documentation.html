@@ -27,7 +27,7 @@
 				<ul>
 					<li><a href="#1_1" title="Static properties whose values are functions are regarded as static methods.">1.1. Function Type Static Properties Regarded as Static Methods</a></li>
 					<li><a href="#1_2" title="Documenting extension modules can mess things up.">1.2. Extension Modules Mess Things Up</a></li>
-					<li><a href="#1_3" title="Set-get properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature.">1.3. Set-get Properties With Object Initial Values Treated as Overridden</a></li>
+					<li><a href="#1_3" title="State properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature.">1.3. State Properties With Object Initial Values Treated as Overridden</a></li>
 				</ul>
 			</li>
 			<li><a href="#2" title="- polling to watch the window and detect when the window has been reloaded, and then auto-refresh view">2. DELVE tool improvements</a>
@@ -38,7 +38,7 @@
 							<li><a href="#2_2_1" title="- currently breaks on some pages because of presence of global variable named page that is not page widget">2.2.1. - improve page widget detection method</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_3" title="- to be an inspector UI, with form elements for viewing and modifying values of set-get properties">2.3. State Tab</a></li>
+					<li><a href="#2_3" title="- to be an inspector UI, with form elements for viewing and modifying values of state properties">2.3. State Tab</a></li>
 					<li><a href="#2_4" title="- possibly provide percentage results (eg. % of widgets that are missing all DOM nodes)">2.4. Uber Report Improvements</a></li>
 					<li><a href="#2_5" title="- serialize the other properties of the event object">2.5. Events Log Improvements</a></li>
 					<li><a href="#2_6" title="- maintain sort state across rewirings (ie. sort should be a property)">2.6. Features Tab</a></li>
@@ -75,7 +75,7 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#3" title="Kill acceleration and deceleration set-get properties of Uize.Fade class.">3. Kill acceleration and deceleration</a></li>
+			<li><a href="#3" title="Kill acceleration and deceleration state properties of Uize.Fade class.">3. Kill acceleration and deceleration</a></li>
 			<li><a href="#4">4. Explainers to Update</a>
 				<ul>
 					<li><a href="#4_1">4.1. JavaScript Build Scripts</a>
@@ -272,7 +272,7 @@
 			<li><a href="#30">30. UIZE guidelines</a>
 				<ul>
 					<li><a href="#30_1" title="- only source in JavaScript files that are actually used on a page (same applies to CSS files)">30.1. Development Practices</a></li>
-					<li><a href="#30_2" title="- UIZE-specific: Leave Set-get Property Initial Values undefined, where possible. don&apos;t define an initial value for a set-get property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)">30.2. Code Size Optimization</a>
+					<li><a href="#30_2" title="- UIZE-specific: Leave State Property Initial Values undefined, where possible. don&apos;t define an initial value for a state property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)">30.2. Code Size Optimization</a>
 						<ul>
 							<li><a href="#30_2_1" title="if (!_param) _param = _lastValue;&#10;if (_param) {&#10;	// do stuff&#10;}&#10;_lastValue = _param;&#10;">30.2.1. - lazy assignment combined with conditional execution</a></li>
 						</ul>
@@ -413,9 +413,9 @@
 		</div>
 		
 		<a name="1_3"></a>
-		<h2 class="heading2" title="1. Issues With Auto-generated Documentation -&gt; 1.3. Set-get Properties With Object Initial Values Treated as Overridden"><span class="headingNumber"><a href="#1" title="1. Issues With Auto-generated Documentation">1</a>.<a href="#1_3" title="1. Issues With Auto-generated Documentation -&gt; 1.3. Set-get Properties With Object Initial Values Treated as Overridden">3</a>. </span>Set-get Properties With Object Initial Values Treated as Overridden</h2>
+		<h2 class="heading2" title="1. Issues With Auto-generated Documentation -&gt; 1.3. State Properties With Object Initial Values Treated as Overridden"><span class="headingNumber"><a href="#1" title="1. Issues With Auto-generated Documentation">1</a>.<a href="#1_3" title="1. Issues With Auto-generated Documentation -&gt; 1.3. State Properties With Object Initial Values Treated as Overridden">3</a>. </span>State Properties With Object Initial Values Treated as Overridden</h2>
 		<div class="contents2">
-			<p>Set-get properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature.</p>
+			<p>State properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature.</p>
 			
 			<p>This is simply because the initial value in the subclass is a clone of the initial value in the base class and not a shared reference. The initial value is a clone because the whole property definition is a clone. Not sure what the solution is.</p>
 		</div>
@@ -456,12 +456,12 @@
 		<h2 class="heading2" title="2. DELVE tool improvements -&gt; 2.3. State Tab"><span class="headingNumber"><a href="#2" title="2. DELVE tool improvements">2</a>.<a href="#2_3" title="2. DELVE tool improvements -&gt; 2.3. State Tab">3</a>. </span>State Tab</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to be an inspector UI, with form elements for viewing and modifying values of set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to be an inspector UI, with form elements for viewing and modifying values of state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to be wired to observe object's Changed.* event in order to keep values synchronized</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>yellow fade effect (or equivalent) for highlighting set-get properties that have recently changed value</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>link to documentation for every set-get property (link to class that introduces property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>yellow fade effect (or equivalent) for highlighting state properties that have recently changed value</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>link to documentation for every state property (link to class that introduces property)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>count of the number of times the value has changed since being watched (good for judging volume of activity)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>property name linked to get summary (as with current behavior with set-get properties table in summary tab)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>property name linked to get summary (as with current behavior with state properties table in summary tab)</td></tr>
 			</table>
 		</div>
 		
@@ -633,7 +633,7 @@
 	<a name="3"></a>
 	<h1 class="heading1" title="3. Kill acceleration and deceleration"><span class="headingNumber"><a href="#3" title="3. Kill acceleration and deceleration">3</a>. </span>Kill acceleration and deceleration</h1>
 	<div class="contents1">
-		<p>Kill acceleration and deceleration set-get properties of Uize.Fade class.</p>
+		<p>Kill acceleration and deceleration state properties of Uize.Fade class.</p>
 		
 		<p>Pages still to update...</p>
 		
@@ -1547,7 +1547,7 @@ Uize.module {{
 		<h2 class="heading2" title="30. UIZE guidelines -&gt; 30.2. Code Size Optimization"><span class="headingNumber"><a href="#30" title="30. UIZE guidelines">30</a>.<a href="#30_2" title="30. UIZE guidelines -&gt; 30.2. Code Size Optimization">2</a>. </span>Code Size Optimization</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>UIZE-specific: Leave Set-get Property Initial Values undefined, where possible. don't define an initial value for a set-get property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>UIZE-specific: Leave State Property Initial Values undefined, where possible. don't define an initial value for a state property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use slice instead of substring (or substr when just one parameter) method, wherever possible</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>omit parentheses after constructor when constructor doesn't take any parameters</td></tr>
 			</table>
@@ -1702,9 +1702,9 @@ _lastValue = _param;
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>an example that demonstrates the Changed.* event</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a widget that updates a lot of set-get properties during user interaction</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a log pane that fills with notifications of set-get properties changed during user interaction</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possibly a listing (to the right of the widget) of all the widget's set-get properties, with the most recently changed properties highlighted in red and bolded</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a widget that updates a lot of state properties during user interaction</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a log pane that fills with notifications of state properties changed during user interaction</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possibly a listing (to the right of the widget) of all the widget's state properties, with the most recently changed properties highlighted in red and bolded</td></tr>
 				</table>
 			</div>
 		</div>

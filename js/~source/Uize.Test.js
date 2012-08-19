@@ -1216,7 +1216,7 @@ Uize.module ({
 							This method is useful when providing a report for a test, especially if the test fails. The synopsis provides an indication of whether the test passed or failed, breadcrumbs to indicate where the test is in a test tree, when the test started and ended and its duration, and the reason for failure if the test failed.
 
 							NOTES
-							- see also the =reasonForFailure= and =result= set-get properties
+							- see also the =reasonForFailure= and =result= state properties
 				*/
 			};
 
@@ -1234,17 +1234,17 @@ Uize.module ({
 							myTest.stop ();
 							...............
 
-							Upon calling the =stop= method, the =stop= method will first be called on any child tests belonging to the test, after which the =inProgress= set-get property for the instance will be set to =false=. If the instance is not running its test(s) at the time that this method is called, then calling it will have no effect.
+							Upon calling the =stop= method, the =stop= method will first be called on any child tests belonging to the test, after which the =inProgress= state property for the instance will be set to =false=. If the instance is not running its test(s) at the time that this method is called, then calling it will have no effect.
 
 							NOTES
 							- see the companion =run= instance method
-							- see the related =inProgress= set-get property
+							- see the related =inProgress= state property
 				*/
 			};
 
 			_classPrototype.run = function (_callback) {
 				/* NOTE:
-					Ultimately, this code should find its way into the onChange handler for the inProgress set-get property, and then this method can be supplanted by a simple start method that only stops the test and then sets the inProgress property to true, making the interface for this class more in line with the Uize.Fade class.
+					Ultimately, this code should find its way into the onChange handler for the inProgress state property, and then this method can be supplanted by a simple start method that only stops the test and then sets the inProgress property to true, making the interface for this class more in line with the Uize.Fade class.
 				*/
 				var
 					_this = this,
@@ -1373,7 +1373,7 @@ Uize.module ({
 							resultBOOL = myTest.run ();
 							...........................
 
-							In the event that running of the instance's test(s) is asynchronous, the =run= method will return the value =Uize.Test.isAsync=, and the instance's =isAsync= set-get property will be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer.
+							In the event that running of the instance's test(s) is asynchronous, the =run= method will return the value =Uize.Test.isAsync=, and the instance's =isAsync= state property will be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer.
 
 							Callback Function For Asynchronous Tests
 								When the optional =callbackFUNC= parameter is specified, a callback function can be specified that will be called once running of the instance's test(s) is complete, in the event that running of the instance's test(s) is asynchronous.
@@ -1403,7 +1403,7 @@ Uize.module ({
 							.................................
 
 							NOTES
-							- see the related =log= set-get property
+							- see the related =log= state property
 				*/
 			};
 
@@ -1414,10 +1414,10 @@ Uize.module ({
 					Uize.Test.isAsync
 						A read-only special value that is used to indicate that running of a test instance's test(s) is asynchronous.
 
-						When a test instance is known to be asynchronous, the instance's =result= set-get property will be set to the value =Uize.Test.isAsync=. In this situation, the instance's =isAsync= set-get property will also be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer.
+						When a test instance is known to be asynchronous, the instance's =result= state property will be set to the value =Uize.Test.isAsync=. In this situation, the instance's =isAsync= state property will also be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer.
 
 						NOTES
-						- see the related =isAsync= and =result= set-get properties
+						- see the related =isAsync= and =result= state properties
 			*/
 
 		/*** Public Static Methods ***/
@@ -1495,9 +1495,9 @@ Uize.module ({
 								........................................
 
 								testOBJ
-									An object, being either a set of property values for the set-get properties of the =Uize.Test= class, or a reference to a =Uize.Test= subclass.
+									An object, being either a set of property values for the state properties of the =Uize.Test= class, or a reference to a =Uize.Test= subclass.
 
-									In the event that the =testOBJ= parameter's value is a set of property value, a new subclass of the =Uize.Test= class is created, and its set-get properties are initialized with the values contained in the =testOBJ= object. The value of the =test= property receives special handling (see `Resolving Subtests`).
+									In the event that the =testOBJ= parameter's value is a set of property value, a new subclass of the =Uize.Test= class is created, and its state properties are initialized with the values contained in the =testOBJ= object. The value of the =test= property receives special handling (see `Resolving Subtests`).
 
 								More Concise and Declarative
 									The =Uize.Test.declare= method allows for a more concise, declarative syntax for defining tests.
@@ -1538,7 +1538,7 @@ Uize.module ({
 									});
 									..................................................
 
-									The value of the =test= set-get property in this case is a function, which will be executed when an instance of the test class is run using the =run= instance method.
+									The value of the =test= state property in this case is a function, which will be executed when an instance of the test class is run using the =run= instance method.
 
 								Example 2: A Set of Tests
 									In this example, a test class is being created that serves as a wrapper for a set of child tests.
@@ -1562,7 +1562,7 @@ Uize.module ({
 									});
 									........................................................................
 
-									The value of the =test= set-get property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see `Resolving Subtests`). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, the second is declared by calling the =Uize.Test.declare= method explicitly, and the remaining child tests are declared by calling the =Uize.Test.staticPropertyTest= static method.
+									The value of the =test= state property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see `Resolving Subtests`). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, the second is declared by calling the =Uize.Test.declare= method explicitly, and the remaining child tests are declared by calling the =Uize.Test.staticPropertyTest= static method.
 
 								NOTES
 								- this method is one of the many available `Test Class Factory Methods`
@@ -1793,7 +1793,7 @@ Uize.module ({
 											Instead, you can use the object syntax accepted for the =testOBJ= parameter of the =Uize.Test.declare= static method, or you can provide a =Uize.Test= subclass (created by one of the `Test Class Factory Methods`, or otherwise created).
 
 								supplementalTestPropertiesOBJ
-									When the optional =supplementalTestPropertiesOBJ= parameter is specified, then additional values for the set-get properties of the created =Uize.Test= subclass can be specified.
+									When the optional =supplementalTestPropertiesOBJ= parameter is specified, then additional values for the state properties of the created =Uize.Test= subclass can be specified.
 
 									Among other things, this allows the =title= of the test class to be specified (rather than using the automatically generated title).
 
@@ -2058,7 +2058,7 @@ Uize.module ({
 			_class.registerProperties ({
 				_duration:'duration',
 					/*?
-						Set-get Properties
+						State Properties
 							duration
 								A number, representing how long it took for the test instance to run, measured in milliseconds.
 
@@ -2069,34 +2069,34 @@ Uize.module ({
 					*/
 				_endTime:'endTime',
 					/*?
-						Set-get Properties
+						State Properties
 							endTime
 								An instance of JavaScript's =Date= object, that is set to the time at which running of the test instance ended.
 
 								Before a test instance has been run for the first time, the value of this property will be =undefined=. The value will also be reset to =undefined= each time the test is started, and will remain =undefined= while the test is in progress. The value will be reset to the current time each time the test ends running.
 
 								NOTES
-								- see also the companion =startTime= and =duration= set-get properties
+								- see also the companion =startTime= and =duration= state properties
 								- the initial value is =undefined=
 					*/
 				_inProgress:{
 					name:'inProgress',
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							inProgress
 								A boolean, indicating whether or not the test instance is busy running its test(s).
 
 								The value of this property is set to =true= each time the test is started, and is set back to =false= each time the test ends running.
 
 								NOTES
-								- see also the related =progress= set-get property
+								- see also the related =progress= state property
 								- the initial value is =false=
 					*/
 				},
 				_isAsync:'isAsync',
 					/*?
-						Set-get Properties
+						State Properties
 							isAsync
 								A boolean, indicating whether or not running the test instance's test(s) is asynchronous.
 
@@ -2108,7 +2108,7 @@ Uize.module ({
 					*/
 				_log:'log',
 					/*?
-						Set-get Properties
+						State Properties
 							log
 								An array, containing all of the messages logged using the =log Instance Method=.
 
@@ -2130,31 +2130,31 @@ Uize.module ({
 					name:'progress',
 					value:0
 					/*?
-						Set-get Properties
+						State Properties
 							progress
 								A floating point number in the range of =0= to =1=, indicating how far the test instance is in running its test(s).
 
-								Before a test instance has been run for the first time, the value of this property will be =0=. The value will also be reset to =0= each time the test is started. The value will be set to the =1= when the test ends running. During running of the test, the value will be updated periodically to reflect the progress that has been made. The =progress= is calculated by dividing the number of `Subtests` that have completed running by the total number of subtests defined in the =test= set-get property. Importantly, the value of this property does not reflect updates in the progress of individual subtests.
+								Before a test instance has been run for the first time, the value of this property will be =0=. The value will also be reset to =0= each time the test is started. The value will be set to the =1= when the test ends running. During running of the test, the value will be updated periodically to reflect the progress that has been made. The =progress= is calculated by dividing the number of `Subtests` that have completed running by the total number of subtests defined in the =test= state property. Importantly, the value of this property does not reflect updates in the progress of individual subtests.
 
 								NOTES
-								- see also the related =inProgress= set-get property
+								- see also the related =inProgress= state property
 					*/
 				},
 				_reasonForFailure:'reasonForFailure',
 					/*?
-						Set-get Properties
+						State Properties
 							reasonForFailure
 								A string, providing an explanation for why the test failed, or the value =undefined= if the test has not failed.
 
-								Before a test instance has been run for the first time, the value of this property will be =undefined=. The value will also be reset to =undefined= each time the test is started, and will remain =undefined= while the test is in progress. If the test fails, the value of this property is typically set in a call to one of the `Expectation Methods`, along with the =result= set-get property being set to =false=.
+								Before a test instance has been run for the first time, the value of this property will be =undefined=. The value will also be reset to =undefined= each time the test is started, and will remain =undefined= while the test is in progress. If the test fails, the value of this property is typically set in a call to one of the `Expectation Methods`, along with the =result= state property being set to =false=.
 
 								NOTES
-								- see also the related =result= set-get property
+								- see also the related =result= state property
 								- the initial value is =undefined=
 					*/
 				_result:'result',
 					/*?
-						Set-get Properties
+						State Properties
 							result
 								A boolean, indicating whether or not the test passed, or the value =undefined= or =Uize.Test.isAsync=.
 
@@ -2163,19 +2163,19 @@ Uize.module ({
 								Before a test instance has been run for the first time, the value of this property will be =undefined=. The value will also be reset to =undefined= each time the test is started, and will remain =undefined= until the result is determined, or will be set to the constant value =Uize.Test.isAsync= if the test is known to be asynchronous.
 
 								NOTES
-								- see also the related =reasonForFailure= set-get property
+								- see also the related =reasonForFailure= state property
 								- the initial value is =undefined=
 					*/
 				_startTime:'startTime',
 					/*?
-						Set-get Properties
+						State Properties
 							startTime
 								An instance of JavaScript's =Date= object, that is set to the time at which running of the test instance started.
 
 								Before a test instance has been run for the first time, the value of this property will be =undefined=. The value will be reset to the current time each time the test is started.
 
 								NOTES
-								- see also the companion =endTime= and =duration= set-get properties
+								- see also the companion =endTime= and =duration= state properties
 								- the initial value is =undefined=
 					*/
 				_test:{
@@ -2198,14 +2198,14 @@ Uize.module ({
 						return _value;
 					}
 					/*?
-						Set-get Properties
+						State Properties
 							test
 								A test function, or an array of child tests where each element is an instance of a =Uize.Test= subclass.
 
 								The Simple Test Case
 									In the case of a simple test that has no child tests, the value of the =test= property should be a reference to the function that performs the test action.
 
-									This function will be executed when the test is run by calling the =run= instance method. When the function is called, it will be called as an instance method of the test instance, so it will have access to the instance for the purpose of calling any of the `Expectation Methods`, or for accessing state of the instance through its various set-get properties. The function should expect to receive a single parameter, being a continuation function that can be called in case the test is asynchronous (see the section on `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer for more details). In the case of synchronous tests, the test function should return a boolean value, indicating whether the test passed or failed.
+									This function will be executed when the test is run by calling the =run= instance method. When the function is called, it will be called as an instance method of the test instance, so it will have access to the instance for the purpose of calling any of the `Expectation Methods`, or for accessing state of the instance through its various state properties. The function should expect to receive a single parameter, being a continuation function that can be called in case the test is asynchronous (see the section on `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer for more details). In the case of synchronous tests, the test function should return a boolean value, indicating whether the test passed or failed.
 
 								The Child Tests Case
 									In the case of a test that is serving as a parent for a set of child tests, the value of the =test= property will be an array of child test instances.
@@ -2215,7 +2215,7 @@ Uize.module ({
 				},
 				_title:'title'
 					/*?
-						Set-get Properties
+						State Properties
 							title
 								A string, representing the title of the test instance.
 

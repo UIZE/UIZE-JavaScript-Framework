@@ -1,9 +1,9 @@
 Various improvements have been made relating to dialog based widgets...
 
 IMPROVED MODULE: Uize.Widget.Palette
-	The =Uize.Widget.Palette= module has been updated to add support for the new =okText=, =defaultOkText=, =cancelText=, and =defaultCancelText= set-get properties.
+	The =Uize.Widget.Palette= module has been updated to add support for the new =okText=, =defaultOkText=, =cancelText=, and =defaultCancelText= state properties.
 
-	These properties allow one to programmatically modify the label text on the ok and cancel buttons through the set-get property interface of a dialog widget.
+	These properties allow one to programmatically modify the label text on the ok and cancel buttons through the state property interface of a dialog widget.
 
 IMPROVED MODULE: Uize.Widget.Page
 	The implementation of confirm/inform dialogs in the =Uize.Widget.Page= base class now supports =okText= and =cancelText= parameters for the =confirm= and =inform= instance methods of widgets.

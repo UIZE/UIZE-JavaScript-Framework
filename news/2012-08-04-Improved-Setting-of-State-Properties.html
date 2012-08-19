@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>2012-08-04 - Improved Setting of Set-get Properties | News | UIZE JavaScript Framework</title>
+	<title>2012-08-04 - Improved Setting of State Properties | News | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework News "/>
-	<meta name="description" content="Setting of set-get properties has been improved with convenient new variations for the set instance method and the Uize.Class.set static method, implemented in the Uize.Class base class module."/>
+	<meta name="description" content="Setting of state properties has been improved with convenient new variations for the set instance method and the Uize.Class.set static method, implemented in the Uize.Class base class module."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -17,7 +17,7 @@
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
 	
 	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
-	2012-08-04 - Improved Setting of Set-get Properties
+	2012-08-04 - Improved Setting of State Properties
 
 </h1>
 
@@ -26,8 +26,8 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The same value can be set for multiple set-get properties by specifying the names of the properties that should all be set to the same value in a propertyNamesARRAY parameter, and by specifying the value they should all be set to in a propertyValueANYTYPE parameter.">1. Set the Same Value for Multiple Properties</a></li>
-			<li><a href="#2" title="The same initial value can be set for multiple set-get properties by specifying the names of the properties whose initial values should all be set to the same value in a propertyNamesARRAY parameter, and by specifying the initial value that should be set for them all in a propertyValueANYTYPE parameter.">2. Set the Same Initial Value for Multiple Properties</a></li>
+			<li><a href="#1" title="The same value can be set for multiple state properties by specifying the names of the properties that should all be set to the same value in a propertyNamesARRAY parameter, and by specifying the value they should all be set to in a propertyValueANYTYPE parameter.">1. Set the Same Value for Multiple Properties</a></li>
+			<li><a href="#2" title="The same initial value can be set for multiple state properties by specifying the names of the properties whose initial values should all be set to the same value in a propertyNamesARRAY parameter, and by specifying the initial value that should be set for them all in a propertyValueANYTYPE parameter.">2. Set the Same Initial Value for Multiple Properties</a></li>
 			<li><a href="#3" title="The new variations of the set instance method and Uize.Class.set static method are comprehensively documented and unit tested.">3. Full Documentation and Unit Tests</a></li>
 		</ul>
 	</li>
@@ -35,14 +35,14 @@
 </div>
 
 <div class="contents0">
-	<p>Setting of set-get properties has been improved with convenient new variations for the <code>set</code> instance method and the <code>Uize.Class.set</code> static method, implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class module.</p>
+	<p>Setting of state properties has been improved with convenient new variations for the <code>set</code> instance method and the <code>Uize.Class.set</code> static method, implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class module.</p>
 	
 	<p>The new variation for both the <code>set</code> and <code>Uize.Class.set</code> methods provides a convenient way to set the same value or initial value, respectively, for multiple properties. Because this improvement is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class module, the benefit is conferred upon all <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses, which means all UIZE widgets and other class modules.</p>
 	
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Set the Same Value for Multiple Properties"><span class="headingNumber"><a href="#1" title="1. Set the Same Value for Multiple Properties">1</a>. </span>Set the Same Value for Multiple Properties</h1>
 	<div class="contents1">
-		<p>The same value can be set for multiple set-get properties by specifying the names of the properties that should all be set to the same value in a <code>propertyNamesARRAY</code> parameter, and by specifying the value they should all be set to in a <code>propertyValueANYTYPE</code> parameter.</p>
+		<p>The same value can be set for multiple state properties by specifying the names of the properties that should all be set to the same value in a <code>propertyNamesARRAY</code> parameter, and by specifying the value they should all be set to in a <code>propertyValueANYTYPE</code> parameter.</p>
 		
 		<p><span class="allCaps">SYNTAX</span></p>
 		
@@ -84,7 +84,7 @@ myInstance.set ({
 	<a name="2"></a>
 	<h1 class="heading1" title="2. Set the Same Initial Value for Multiple Properties"><span class="headingNumber"><a href="#2" title="2. Set the Same Initial Value for Multiple Properties">2</a>. </span>Set the Same Initial Value for Multiple Properties</h1>
 	<div class="contents1">
-		<p>The same initial value can be set for multiple set-get properties by specifying the names of the properties whose initial values should all be set to the same value in a <code>propertyNamesARRAY</code> parameter, and by specifying the initial value that should be set for them all in a <code>propertyValueANYTYPE</code> parameter.</p>
+		<p>The same initial value can be set for multiple state properties by specifying the names of the properties whose initial values should all be set to the same value in a <code>propertyNamesARRAY</code> parameter, and by specifying the initial value that should be set for them all in a <code>propertyValueANYTYPE</code> parameter.</p>
 		
 		<p><span class="allCaps">SYNTAX</span></p>
 		

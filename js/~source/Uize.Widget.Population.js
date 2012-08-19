@@ -207,7 +207,7 @@ Uize.module ({
 				/*?
 					Instance Methods
 						getOutput
-							Returns a string, being the output generated using the value of the =templateStr= set-get property and the record set contained by the =items= set-get property.
+							Returns a string, being the output generated using the value of the =templateStr= state property and the record set contained by the =items= state property.
 
 							SYNTAX
 							......................................
@@ -224,7 +224,7 @@ Uize.module ({
 				/*?
 					Instance Methods
 						getHtml
-							Returns a string, being the HTML markup generated using the template HTML contained in the =templateStr= set-get property and the record set contained by the =items= set-get property.
+							Returns a string, being the HTML markup generated using the template HTML contained in the =templateStr= state property and the record set contained by the =items= state property.
 
 							SYNTAX
 							..................................
@@ -258,7 +258,7 @@ Uize.module ({
 				/*?
 					Instance Methods
 						updateUi
-							Updates the contents of the DOM node specified by the =container= set-get property, using the =getHtml= instance method to generate the new HTML markup.
+							Updates the contents of the DOM node specified by the =container= state property, using the =getHtml= instance method to generate the new HTML markup.
 
 							SYNTAX
 							.........................
@@ -266,11 +266,11 @@ Uize.module ({
 							.........................
 
 							NOTES
-							- if the =templateStr= set-get property is undefined, null, or an empty string at the time that this method first performs its action, then this property value will be set by taking the value of the =container= node's =innerHTML= property
-							- this method is called automatically whenever there is a change in the values of the =templateStr= and =items= set-get properties
-							- if the =container= set-get property is equivalent to =false=, or if the node specified by this property does not exist in the DOM, then this method will have no action
-							- if the =enabled= set-get property is equivalent to =false=, then this method will have no action
-							- this method is optimized so that if it is called repeatedly and in that time there is no change in the values of the =templateStr= or =items= set-get properties, then its action will *not* be performed repeatedly
+							- if the =templateStr= state property is undefined, null, or an empty string at the time that this method first performs its action, then this property value will be set by taking the value of the =container= node's =innerHTML= property
+							- this method is called automatically whenever there is a change in the values of the =templateStr= and =items= state properties
+							- if the =container= state property is equivalent to =false=, or if the node specified by this property does not exist in the DOM, then this method will have no action
+							- if the =enabled= state property is equivalent to =false=, then this method will have no action
+							- this method is optimized so that if it is called repeatedly and in that time there is no change in the values of the =templateStr= or =items= state properties, then its action will *not* be performed repeatedly
 				*/
 			};
 
@@ -296,7 +296,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Widget.Population.makeTemplateItem
-							Generates a template item, using the specified item and token naming scheme, that can then be used when setting the =templateItem= set-get property of an instance.
+							Generates a template item, using the specified item and token naming scheme, that can then be used when setting the =templateItem= state property of an instance.
 
 							SYNTAX
 							................................................................................
@@ -409,7 +409,7 @@ Uize.module ({
 						this.updateUi ();
 					}
 					/*?
-						Set-get Properties
+						State Properties
 							templateStr
 								A string, representing the template that should be used when generating output in the =getOutput= and =getHtml= instance methods.
 

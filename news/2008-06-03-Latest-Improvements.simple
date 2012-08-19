@@ -5,7 +5,7 @@ Code Improvements
 		This is useful for when nodes need to be plucked out so that they can be absolutely positioned relative to the view port and so that they can appear above everything else on the page. The =Uize.Widget= class keeps track of nodes that are globalized by this method, so that they are correctly removed when the =removeUi= instance method is called.
 
 	Tree Widget Classes Updated
-		The =Uize.Widget.Tree= base class has been updated to rebuild the UI when the value of the =items= set-get property is changed.
+		The =Uize.Widget.Tree= base class has been updated to rebuild the UI when the value of the =items= state property is changed.
 
 		This allows the contents of a tree-based widget to be updated programmatically after the widget has already been wired up. This change increases the versatility of the =Uize.Widget.Tree.List= and =Uize.Widget.Tree.Menu= classes.
 

@@ -50,7 +50,7 @@
     Using the Presets
       The =Uize.Widget.Swap.xPresets= module exposes its swap effect presets through the =Uize.Widget.Swap.presets= static property.
 
-      Each property of the =Uize.Widget.Swap.presets= object is a swap effect preset, where the name of the property is the effect preset name, and where the value is an object containing values for various set-get properties of the =Uize.Widget.Swap= class.
+      Each property of the =Uize.Widget.Swap.presets= object is a swap effect preset, where the name of the property is the effect preset name, and where the value is an object containing values for various state properties of the =Uize.Widget.Swap= class.
 
       Consider the value of the =Uize.Widget.Swap.presets.fadeOutFadeIn= preset...
 
@@ -69,7 +69,7 @@
       }
       ............................
 
-      To use this preset, simply use it to set the set-get properties of an instance of a =Uize.Widget.Swap= subclass using the =set= instance method, as follows...
+      To use this preset, simply use it to set the state properties of an instance of a =Uize.Widget.Swap= subclass using the =set= instance method, as follows...
 
       .........................................................
       myImageSwap.set (Uize.Widget.Swap.presets.fadeOutFadeIn);

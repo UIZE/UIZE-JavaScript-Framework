@@ -217,32 +217,32 @@
 					<li><a href="#4_4" title="The State Tab displays the current state of the object being inspected, if the object is an instance of a Uize.Class subclass, or a Uize.Class subclass.">4.4. State Tab</a>
 						<ul>
 							<li><a href="#4_4_1" title="If the object being inspected is neither an instance of a Uize.Class subclass, nor a Uize.Class subclass, then the object is not considered to have a state interface.">4.4.1. Objects Without a State Interface</a></li>
-							<li><a href="#4_4_2" title="The Set-get Properties Table displays all the public set-get properties for the instance or class being inspected.">4.4.2. Set-get Properties Table</a></li>
-							<li><a href="#4_4_3" title="The Name column of the set-get properties table displays the name for a set-get property.">4.4.3. Name</a></li>
-							<li><a href="#4_4_4" title="The Actions column of the set-get properties table provides two useful actions for each set-get property: the get action and the set action.">4.4.4. Actions</a>
+							<li><a href="#4_4_2" title="The State Properties Table displays all the public state properties for the instance or class being inspected.">4.4.2. State Properties Table</a></li>
+							<li><a href="#4_4_3" title="The Name column of the state properties table displays the name for a state property.">4.4.3. Name</a></li>
+							<li><a href="#4_4_4" title="The Actions column of the state properties table provides two useful actions for each state property: the get action and the set action.">4.4.4. Actions</a>
 								<ul>
-									<li><a href="#4_4_4_1" title="The Get Action is an object link whose object link expression is a getter expression that can be used to query the value of the set-get property.">4.4.4.1. The Get Action</a>
+									<li><a href="#4_4_4_1" title="The Get Action is an object link whose object link expression is a getter expression that can be used to query the value of the state property.">4.4.4.1. The Get Action</a>
 										<ul>
 											<li><a href="#4_4_4_1_1" title="The getter expression linked to by the get action will be either a call to the get instance method or a call to the MyClass.get static method, depending on whether the object being inspected is an instance of a Uize.Class subclass, or an actual subclass.">4.4.4.1.1. Instance Getter or Static Getter</a></li>
-											<li><a href="#4_4_4_1_2" title="The get action can be useful when the simple toString serialization of a set-get property that is displayed in the VALUE column of the set-get properties table is less than satisfactory.">4.4.4.1.2. When the Get Action is Useful</a></li>
+											<li><a href="#4_4_4_1_2" title="The get action can be useful when the simple toString serialization of a state property that is displayed in the VALUE column of the state properties table is less than satisfactory.">4.4.4.1.2. When the Get Action is Useful</a></li>
 										</ul>
 									</li>
-									<li><a href="#4_4_4_2" title="The Set Action is an object link whose object link expression is a setter expression that can be used to set the value of the set-get property.">4.4.4.2. The Set Action</a>
+									<li><a href="#4_4_4_2" title="The Set Action is an object link whose object link expression is a setter expression that can be used to set the value of the state property.">4.4.4.2. The Set Action</a>
 										<ul>
 											<li><a href="#4_4_4_2_1" title="The setter expression linked to by the set action will be either a call to the set instance method or a call to the MyClass.set static method, depending on whether the object being inspected is an instance of a Uize.Class subclass, or an actual subclass.">4.4.4.2.1. Instance Setter or Static Setter</a></li>
-											<li><a href="#4_4_4_2_2" title="The setter expression linked to by the set action link is deliberately incapacitated by using a placeholder &quot;#&quot; (pound character) where the set-get property&apos;s new value should go.">4.4.4.2.2. Deliberately Incapacitated</a></li>
+											<li><a href="#4_4_4_2_2" title="The setter expression linked to by the set action link is deliberately incapacitated by using a placeholder &quot;#&quot; (pound character) where the state property&apos;s new value should go.">4.4.4.2.2. Deliberately Incapacitated</a></li>
 											<li><a href="#4_4_4_2_3" title="The set action can be useful when troubleshooting, or even when just experimenting with the state interface for widgets on a page.">4.4.4.2.3. When the Set Action is Useful</a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
-							<li><a href="#4_4_5" title="The Value column of the set-get properties table displays the value for a set-get property, using a simple toString serialization.">4.4.5. Value</a></li>
+							<li><a href="#4_4_5" title="The Value column of the state properties table displays the value for a state property, using a simple toString serialization.">4.4.5. Value</a></li>
 						</ul>
 					</li>
 					<li><a href="#4_5" title="The Features Tab displays the public features that can be automatically detected for a class in a sortable features table.">4.5. Features Tab</a>
 						<ul>
 							<li><a href="#4_5_1" title="The features tab always displays features of a class - even if the object being inspected is an instance of a class.">4.5.1. Always Features of a Class</a></li>
-							<li><a href="#4_5_2" title="Features that can be automatically detected for a class include: static methods, static properties, instance methods, instance properties, and set-get properties.">4.5.2. Automatically Detectable Features</a></li>
+							<li><a href="#4_5_2" title="Features that can be automatically detected for a class include: static methods, static properties, instance methods, instance properties, and state properties.">4.5.2. Automatically Detectable Features</a></li>
 							<li><a href="#4_5_3" title="The Features Table is table, whose columns are sortable, that displays all the automatically detectable features for a class.">4.5.3. Features Table</a></li>
 							<li><a href="#4_5_4" title="Each feature listed in the features table is described by information listed in a number of columns - such as Name, Access, Context, etc. - described in further detail below...">4.5.4. Features Table Columns</a>
 								<ul>
@@ -285,7 +285,7 @@
 							</li>
 							<li><a href="#4_7_2" title="The events tab can automatically log all property change events for instances of Uize.Class subclasses, as well as all instance custom events for instances of Uize.Class subclasses and all static Custom Events for Uize.Class subclasses.">4.7.2. Types of Events Logged</a>
 								<ul>
-									<li><a href="#4_7_2_1" title="Property Change Events are events that are fired whenever one or more of the set-get properties for an instance of a Uize.Class subclass are changed during a set operation.">4.7.2.1. Property Change Events</a></li>
+									<li><a href="#4_7_2_1" title="Property Change Events are events that are fired whenever one or more of the state properties for an instance of a Uize.Class subclass are changed during a set operation.">4.7.2.1. Property Change Events</a></li>
 									<li><a href="#4_7_2_2" title="Custom Events are events that are fired deliberately in the implementation for Uize.Class subclasses, and all such events are automatically logged in the events tab.">4.7.2.2. Custom Events</a>
 										<ul>
 											<li><a href="#4_7_2_2_1" title="While instance custom events are far more common than static custom events in a class&apos; implementation, a Uize.Class subclass is considered a watchable object and static custom events - if they are fired on a class that&apos;s being watched - will be logged.">4.7.2.2.1. Static Events Also Supported</a></li>
@@ -342,7 +342,7 @@
 									<li><a href="#5_2_1_13" title="Shown only for objects that are DOM nodes, the text displayed will be the value of the node&apos;s tagName property, which indicates the tag type of the node.">5.2.1.13. TAG (all DOM nodes)</a></li>
 									<li><a href="#5_2_1_14" title="Shown only for objects that are DOM nodes, the text displayed will be the full dereferencing path for the widget that &quot;owns&quot; the node.">5.2.1.14. OWNER WIDGET (all DOM nodes)</a></li>
 									<li><a href="#5_2_1_15" title="Shown only for objects that are DOM nodes, the text displayed will be the full dereferencing path for the widget class of the widget that &quot;owns&quot; the node.">5.2.1.15. OWNER WIDGET CLASS (all DOM nodes)</a></li>
-									<li><a href="#5_2_1_16" title="Shown only for objects that are instances of Uize.Class subclasses that implement the value interface, the text displayed will be a simple toString serialization of the value of the instance&apos;s value set-get property.">5.2.1.16. VALUE (all instances with value interface)</a></li>
+									<li><a href="#5_2_1_16" title="Shown only for objects that are instances of Uize.Class subclasses that implement the value interface, the text displayed will be a simple toString serialization of the value of the instance&apos;s value state property.">5.2.1.16. VALUE (all instances with value interface)</a></li>
 								</ul>
 							</li>
 							<li><a href="#5_2_2" title="Object Highlighting lets you see where widgets and DOM nodes are in the page being inspected.">5.2.2. Object Highlighting</a>
@@ -369,7 +369,7 @@
 					<li><a href="#6_2" title="Specified Localized Strings are those localized strings that are explicitly specified for a widget instance.">6.2. Specified Localized Strings</a></li>
 					<li><a href="#6_3" title="Present Accessed Widgeet DOM Nodes are accessed widget DOM nodes that were present in the page the first time the widget tried to access them, so references to them are stored in the widget&apos;s node cache.">6.3. Present Accessed Widget DOM Nodes</a></li>
 					<li><a href="#6_4" title="Missing Accessed Widgeet DOM Nodes are accessed widget DOM nodes that were not present in the page when the widget first tried to access them, so null references are stored for them in the widget&apos;s node cache.">6.4. Missing Accessed Widget DOM Nodes</a></li>
-					<li><a href="#6_5" title="DOM nodes are considered unaccessed widget DOM nodes if such a node has not been accessed by a widget (so there is no entry for the node in any widget&apos;s node cache), but the node&apos;s ID is consistent with the value of the idPrefix set-get property for some widget in the entire widget tree.">6.5. Unaccessed Widget DOM Nodes</a></li>
+					<li><a href="#6_5" title="DOM nodes are considered unaccessed widget DOM nodes if such a node has not been accessed by a widget (so there is no entry for the node in any widget&apos;s node cache), but the node&apos;s ID is consistent with the value of the idPrefix state property for some widget in the entire widget tree.">6.5. Unaccessed Widget DOM Nodes</a></li>
 					<li><a href="#6_6" title="Widget DOM Nodes is the union of all accessed widget DOM nodes and unaccessed widget DOM nodes.">6.6. Widget DOM Nodes</a></li>
 				</ul>
 			</li>
@@ -401,7 +401,7 @@
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a tree or flattened list of all the modules built for a page</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing implied node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances <b>have not</b> been created, and many more different types of lists / reports of useful information</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a summary for various objects, such as widget instances, class or package modules, DOM nodes, functions and methods, etc.</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, set-get properties, etc.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, state properties, etc.</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, implied nodes, etc.</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for widget classes, see a summary of all the instances of such classes on the page</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>easily get documentation for a widget's class, or any UIZE module (whether loaded on the page or not)</td></tr>
@@ -630,7 +630,7 @@
 				<div class="contents4">
 					<p>A flat list of all the widgets on the page that are in the disabled state, where each widget is listed with a fully qualified dereferencing path (eg. <code>page.childred.tab.children.option0</code>).</p>
 					
-					<p>Disabled widgets are widgets where the value of the <code>enabledInherited</code> set-get property is <code>false</code>. This property will be <code>false</code> if the widget's <code>enabled</code> set-get property is set to <code>false</code>, or if its <code>enabled</code> property is set to <code>'inherit'</code> and the disabled state is inherited from its parent. It might be interesting to see just how many widgets on a page are in the disabled state at any one time in the use of the page.</p>
+					<p>Disabled widgets are widgets where the value of the <code>enabledInherited</code> state property is <code>false</code>. This property will be <code>false</code> if the widget's <code>enabled</code> state property is set to <code>false</code>, or if its <code>enabled</code> property is set to <code>'inherit'</code> and the disabled state is inherited from its parent. It might be interesting to see just how many widgets on a page are in the disabled state at any one time in the use of the page.</p>
 				</div>
 				
 				<a name="3_3_1_5"></a>
@@ -670,7 +670,7 @@
 				<div class="contents4">
 					<p>A flat list of all the widgets on the page that have some remapped DOM nodes, where each widget is listed with a fully qualified dereferencing path (eg. <code>page.childred.tab.children.option0</code>).</p>
 					
-					<p>A widget is considered to have remapped DOM nodes when the value of its <code>nodeMap</code> set-get property is a non-empty object with one or more node name to remapped node mappings. This query might be useful when learning how node remapping works and how and where it used in widgets in real world applications (so, this query is probably of more academic than diagnostic value).</p>
+					<p>A widget is considered to have remapped DOM nodes when the value of its <code>nodeMap</code> state property is a non-empty object with one or more node name to remapped node mappings. This query might be useful when learning how node remapping works and how and where it used in widgets in real world applications (so, this query is probably of more academic than diagnostic value).</p>
 				</div>
 				
 				<a name="3_3_1_10"></a>
@@ -678,7 +678,7 @@
 				<div class="contents4">
 					<p>A flat list of all the widgets on the page that implement the value interface, where each widget is listed with a fully qualified dereferencing path (eg. <code>page.childred.tab.children.option0</code>).</p>
 					
-					<p>A widget is considered to implement the value interface if the class of which it is an instance registers the <code><a href="#4_4_5">value</a></code> set-get property. Widgets that implement the value interface are fun to play around with, because they most often are the widgets used in a page for obtaining input from a user. When selecting a widget from the query's results set, the actual value for the widget can be viewed in the table of set-get properties displayed in the <a href="#4_4">state tab</a>. If you then click on the "set" action in the row for the <code><a href="#4_4_5">value</a></code> set-get property, you will get a setter expression that you can use to modify the value for the widget and see how the UI responds in the page being inspected.</p>
+					<p>A widget is considered to implement the value interface if the class of which it is an instance registers the <code><a href="#4_4_5">value</a></code> state property. Widgets that implement the value interface are fun to play around with, because they most often are the widgets used in a page for obtaining input from a user. When selecting a widget from the query's results set, the actual value for the widget can be viewed in the table of state properties displayed in the <a href="#4_4">state tab</a>. If you then click on the "set" action in the row for the <code><a href="#4_4_5">value</a></code> state property, you will get a setter expression that you can use to modify the value for the widget and see how the UI responds in the page being inspected.</p>
 				</div>
 			</div>
 			
@@ -762,7 +762,7 @@
 				<div class="contents4">
 					<p>A flat list of all the accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.</p>
 					
-					<p>DOM nodes are considered accessed widget DOM nodes if some widget in the entire widget tree contains a mapping for it in its node cache (ie. the widget tried to access it). The results set for this query may contain listings for DOM nodes that are present as well as DOM nodes that are missing. For DOM nodes that are present, the ID used when listing a node in the results set will be the value of the node's <code><a href="#4_3_5_4_4">id</a></code> attribute. For DOM nodes that are <b>not</b> present, the ID used when listing a node will be constructed using the value of the <code>idPrefix</code> set-get property of the widget that owns it, and the listing will have the suffix "[MISSING]".</p>
+					<p>DOM nodes are considered accessed widget DOM nodes if some widget in the entire widget tree contains a mapping for it in its node cache (ie. the widget tried to access it). The results set for this query may contain listings for DOM nodes that are present as well as DOM nodes that are missing. For DOM nodes that are present, the ID used when listing a node in the results set will be the value of the node's <code><a href="#4_3_5_4_4">id</a></code> attribute. For DOM nodes that are <b>not</b> present, the ID used when listing a node will be constructed using the value of the <code>idPrefix</code> state property of the widget that owns it, and the listing will have the suffix "[MISSING]".</p>
 				</div>
 				
 				<a name="3_3_3_2"></a>
@@ -778,7 +778,7 @@
 				<div class="contents4">
 					<p>A flat list of all the missing accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.</p>
 					
-					<p>DOM nodes are considered missing accessed widget DOM nodes if some widget in the entire widget tree contains a null mapping for it in its node cache (ie. the widget tried to access the node and the node did not exist at the time). The ID used when listing a node will be constructed using the value of the <code>idPrefix</code> set-get property of the widget that owns it, and the listing will have the suffix "[MISSING]".</p>
+					<p>DOM nodes are considered missing accessed widget DOM nodes if some widget in the entire widget tree contains a null mapping for it in its node cache (ie. the widget tried to access the node and the node did not exist at the time). The ID used when listing a node will be constructed using the value of the <code>idPrefix</code> state property of the widget that owns it, and the listing will have the suffix "[MISSING]".</p>
 				</div>
 				
 				<a name="3_3_3_4"></a>
@@ -794,7 +794,7 @@
 				<div class="contents4">
 					<p>A flat list of all DOM nodes that have IDs but that do not appear to belong to widgets, where each node is listed by its ID with a prepended "#" (pound) character.</p>
 					
-					<p>DOM nodes are considered to <b>not</b> belong to widgets if they have not been accessed by any widget in the entire widget tree <b>and</b> their ID is also not consistent with the value of the <code>idPrefix</code> set-get property for any widget in the entire widget tree. Web developers creating the HTML for a Web page may assign IDs to DOM nodes for the sake of CSS selectors in stylesheets, and these IDs are unlikely to conform to the ID syntax for widgets.</p>
+					<p>DOM nodes are considered to <b>not</b> belong to widgets if they have not been accessed by any widget in the entire widget tree <b>and</b> their ID is also not consistent with the value of the <code>idPrefix</code> state property for any widget in the entire widget tree. Web developers creating the HTML for a Web page may assign IDs to DOM nodes for the sake of CSS selectors in stylesheets, and these IDs are unlikely to conform to the ID syntax for widgets.</p>
 					
 					<p>DOM nodes that are not recognized as belonging to widgets but that look like they are intended for widgets could be an indication of an underlying problem. This query may be useful when troubleshooting problems where widgets are not functioning as expected. A DOM node that is not considered to belong to a widget on the page, but whose ID syntax looks like the ID syntax for a widget DOM node, could be an indication of any of the following...</p>
 					
@@ -991,7 +991,7 @@
 			<div class="contents3">
 				<p>Beyond <a href="#4_2_2">entering object paths</a>, <a href="#4_2_3">entering DOM node IDs</a>, and <a href="#4_2_4">entering recognized but not loaded UIZE modules</a>, absolutely any expression can be entered into the <a href="#4_2">object entry input</a>.</p>
 				
-				<p>So, for example, the expression <code>2 + 3</code> can be entered, and the result of evaluating that expression - while not very interesting - can be inspected further in the various tabs of <a href="#4_1">the object inspector</a>. In the example of the expression <code>2 + 3</code>, the inspected object will be the result of evaluating that expression in the page being inspected, which will be the value <code>5</code>. A more compelling example of being able to enter arbitrary expressions into the <a href="#4_2">object entry input</a> is the case of entering a setter expression for a set-get property of a widget instance, such as the expression <code>page.children.colorPicker.children.sliderR.set ('value',176)</code>.</p>
+				<p>So, for example, the expression <code>2 + 3</code> can be entered, and the result of evaluating that expression - while not very interesting - can be inspected further in the various tabs of <a href="#4_1">the object inspector</a>. In the example of the expression <code>2 + 3</code>, the inspected object will be the result of evaluating that expression in the page being inspected, which will be the value <code>5</code>. A more compelling example of being able to enter arbitrary expressions into the <a href="#4_2">object entry input</a> is the case of entering a setter expression for a state property of a widget instance, such as the expression <code>page.children.colorPicker.children.sliderR.set ('value',176)</code>.</p>
 			</div>
 			
 			<a name="4_2_6"></a>
@@ -1196,7 +1196,7 @@ Uize.Widget
 				<div class="contents4">
 					<p>The HTML section displays in the <a href="#4_3">summary tab</a> for all objects that are widget instances, and displays the HTML for the widget being inspected (provided that the widget's HTML can be discovered).</p>
 					
-					<p>The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (ie. there's a valid node specified for the <code>container</code> set-get property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (ie. the implied node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (ie. the implied node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.</p>
+					<p>The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (ie. there's a valid node specified for the <code>container</code> state property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (ie. the implied node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (ie. the implied node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.</p>
 					
 					<p>If the HTML for the widget cannot be discovered by DELVE, then a message to the effect that the widget has no container node, shell node, or root node will be displayed. If DELVE can't discover the HTML for the widget being inspected, it might be that the widget's HTML is not in the page, or it might just be that the HTML is actually there but it has no shell or root node (not all widgets require that their HTML have a shell or root node) and there is no container node specified for the widget. It could also be that there is a mismatch between the <code>idPrefix</code> specified for the widget and the <code>idPrefix</code> used when generating the HTML intended for the widget.</p>
 				</div>
@@ -1294,78 +1294,78 @@ Uize.Widget
 		<div class="contents2">
 			<p>The State Tab displays the current state of the object being inspected, if the object is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, or a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 			
-			<p>The state for an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass is represented by the instance values of all of its set-get properties. The state for a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass (<b>not</b> an instance) is represented by the static values of all its set-get properties. The state for the object being inspected is displayed in the <a href="#4_4_2">set-get properties table</a>.</p>
+			<p>The state for an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass is represented by the instance values of all of its state properties. The state for a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass (<b>not</b> an instance) is represented by the static values of all its state properties. The state for the object being inspected is displayed in the <a href="#4_4_2">state properties table</a>.</p>
 			
 			<a name="4_4_1"></a>
 			<h3 class="heading3" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.1. Objects Without a State Interface"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_1" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.1. Objects Without a State Interface">1</a>. </span>Objects Without a State Interface</h3>
 			<div class="contents3">
 				<p>If the object being inspected is neither an <b>instance</b> of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, nor a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, then the object is not considered to have a state interface.</p>
 				
-				<p>For objects that do not support a state interface, the <a href="#4_4">state tab</a> will contain only a message to the effect that the object does not support a set-get properties state interface - there will be no <a href="#4_4_2">set-get properties table</a>.</p>
+				<p>For objects that do not support a state interface, the <a href="#4_4">state tab</a> will contain only a message to the effect that the object does not support a state properties state interface - there will be no <a href="#4_4_2">state properties table</a>.</p>
 			</div>
 			
 			<a name="4_4_2"></a>
-			<h3 class="heading3" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.2. Set-get Properties Table"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_2" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.2. Set-get Properties Table">2</a>. </span>Set-get Properties Table</h3>
+			<h3 class="heading3" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.2. State Properties Table"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_2" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.2. State Properties Table">2</a>. </span>State Properties Table</h3>
 			<div class="contents3">
-				<p>The Set-get Properties Table displays all the public set-get properties for the instance or class being inspected.</p>
+				<p>The State Properties Table displays all the public state properties for the instance or class being inspected.</p>
 				
-				<p>The set-get properties table is comprised of three columns: the <a href="#4_4_3">NAME</a> column, the <a href="#4_4_4">ACTIONS</a> column, and the <a href="#4_4_5">VALUE</a> column. The set-get properties listed in the table are sorted by name, in ascending alphabetical order.</p>
+				<p>The state properties table is comprised of three columns: the <a href="#4_4_3">NAME</a> column, the <a href="#4_4_4">ACTIONS</a> column, and the <a href="#4_4_5">VALUE</a> column. The state properties listed in the table are sorted by name, in ascending alphabetical order.</p>
 			</div>
 			
 			<a name="4_4_3"></a>
 			<h3 class="heading3" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.3. Name"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_3" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.3. Name">3</a>. </span>Name</h3>
 			<div class="contents3">
-				<p>The Name column of the <a href="#4_4_2">set-get properties table</a> displays the name for a set-get property.</p>
+				<p>The Name column of the <a href="#4_4_2">state properties table</a> displays the name for a state property.</p>
 				
-				<p>The name for each set-get property listed in the <a href="#4_4_2">set-get properties table</a> is an <a href="#5_1">object link</a>, where the <a href="#5_1_1">object link text</a> is the set-get property's name, and the <a href="#5_1_2">object link expression</a> is a getter expression that can be used to query the value of the set-get property - the same expression that is used for <a href="#4_4_4_1">the get action</a>.</p>
+				<p>The name for each state property listed in the <a href="#4_4_2">state properties table</a> is an <a href="#5_1">object link</a>, where the <a href="#5_1_1">object link text</a> is the state property's name, and the <a href="#5_1_2">object link expression</a> is a getter expression that can be used to query the value of the state property - the same expression that is used for <a href="#4_4_4_1">the get action</a>.</p>
 			</div>
 			
 			<a name="4_4_4"></a>
 			<h3 class="heading3" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions">4</a>. </span>Actions</h3>
 			<div class="contents3">
-				<p>The Actions column of the <a href="#4_4_2">set-get properties table</a> provides two useful actions for each set-get property: <a href="#4_4_4_1">the get action</a> and <a href="#4_4_4_2">the set action</a>.</p>
+				<p>The Actions column of the <a href="#4_4_2">state properties table</a> provides two useful actions for each state property: <a href="#4_4_4_1">the get action</a> and <a href="#4_4_4_2">the set action</a>.</p>
 				
 				<a name="4_4_4_1"></a>
 				<h4 class="heading4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.1. The Get Action"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions">4</a>.<a href="#4_4_4_1" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.1. The Get Action">1</a>. </span>The Get Action</h4>
 				<div class="contents4">
-					<p>The Get Action is an <a href="#5_1">object link</a> whose <a href="#5_1_2">object link expression</a> is a getter expression that can be used to query the value of the set-get property.</p>
+					<p>The Get Action is an <a href="#5_1">object link</a> whose <a href="#5_1_2">object link expression</a> is a getter expression that can be used to query the value of the state property.</p>
 					
 					<a name="4_4_4_1_1"></a>
 					<h5 class="heading5" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.1. The Get Action -&gt; 4.4.4.1.1. Instance Getter or Static Getter"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions">4</a>.<a href="#4_4_4_1" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.1. The Get Action">1</a>.<a href="#4_4_4_1_1" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.1. The Get Action -&gt; 4.4.4.1.1. Instance Getter or Static Getter">1</a>. </span>Instance Getter or Static Getter</h5>
 					<div class="contents5">
 						<p>The getter expression linked to by <a href="#4_4_4_1">the get action</a> will be either a call to the <code>get</code> instance method or a call to the <code>MyClass.get</code> static method, depending on whether the object being inspected is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, or an actual subclass.</p>
 						
-						<p>For example, if the object being inspected was an instance of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class that is assigned to the global variable <code>page</code>, then the getter expression for the <code>idPrefix</code> set-get property would be <code>page.get ('idPrefix')</code>. On the other hand, if the object being inspected was the actual <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class, then the getter expression for the <code>idPrefix</code> set-get property would be <code>Uize.Widget.Page.get ('idPrefix')</code>.</p>
+						<p>For example, if the object being inspected was an instance of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class that is assigned to the global variable <code>page</code>, then the getter expression for the <code>idPrefix</code> state property would be <code>page.get ('idPrefix')</code>. On the other hand, if the object being inspected was the actual <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class, then the getter expression for the <code>idPrefix</code> state property would be <code>Uize.Widget.Page.get ('idPrefix')</code>.</p>
 					</div>
 					
 					<a name="4_4_4_1_2"></a>
 					<h5 class="heading5" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.1. The Get Action -&gt; 4.4.4.1.2. When the Get Action is Useful"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions">4</a>.<a href="#4_4_4_1" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.1. The Get Action">1</a>.<a href="#4_4_4_1_2" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.1. The Get Action -&gt; 4.4.4.1.2. When the Get Action is Useful">2</a>. </span>When the Get Action is Useful</h5>
 					<div class="contents5">
-						<p><a href="#4_4_4_1">The get action</a> can be useful when the simple <code>toString</code> serialization of a set-get property that is displayed in the <a href="#4_4_5">VALUE</a> column of the <a href="#4_4_2">set-get properties table</a> is less than satisfactory.</p>
+						<p><a href="#4_4_4_1">The get action</a> can be useful when the simple <code>toString</code> serialization of a state property that is displayed in the <a href="#4_4_5">VALUE</a> column of the <a href="#4_4_2">state properties table</a> is less than satisfactory.</p>
 						
-						<p>In such cases, using the get action for a set-get property will provide a more complete (and useful) view of that property's value in the <a href="#4_3">summary tab</a>. The getter expression that is linked to by the get action is the same getter expression that is linked to by the linked set-get property names in the <a href="#4_4_3">NAME</a> column.</p>
+						<p>In such cases, using the get action for a state property will provide a more complete (and useful) view of that property's value in the <a href="#4_3">summary tab</a>. The getter expression that is linked to by the get action is the same getter expression that is linked to by the linked state property names in the <a href="#4_4_3">NAME</a> column.</p>
 					</div>
 				</div>
 				
 				<a name="4_4_4_2"></a>
 				<h4 class="heading4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.2. The Set Action"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions">4</a>.<a href="#4_4_4_2" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.2. The Set Action">2</a>. </span>The Set Action</h4>
 				<div class="contents4">
-					<p>The Set Action is an <a href="#5_1">object link</a> whose <a href="#5_1_2">object link expression</a> is a setter expression that can be used to set the value of the set-get property.</p>
+					<p>The Set Action is an <a href="#5_1">object link</a> whose <a href="#5_1_2">object link expression</a> is a setter expression that can be used to set the value of the state property.</p>
 					
 					<a name="4_4_4_2_1"></a>
 					<h5 class="heading5" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.2. The Set Action -&gt; 4.4.4.2.1. Instance Setter or Static Setter"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions">4</a>.<a href="#4_4_4_2" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.2. The Set Action">2</a>.<a href="#4_4_4_2_1" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.2. The Set Action -&gt; 4.4.4.2.1. Instance Setter or Static Setter">1</a>. </span>Instance Setter or Static Setter</h5>
 					<div class="contents5">
 						<p>The setter expression linked to by <a href="#4_4_4_2">the set action</a> will be either a call to the <code>set</code> instance method or a call to the <code>MyClass.set</code> static method, depending on whether the object being inspected is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, or an actual subclass.</p>
 						
-						<p>For example, if the object being inspected was an instance of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class that is assigned to the global variable <code>page</code>, then the getter expression for the <code>enabled</code> set-get property would be <code>page.set ('enabled',#)</code>. On the other hand, if the object being inspected was the actual <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class, then the getter expression for the <code>enabled</code> set-get property would be <code>Uize.Widget.Page.get ('enabled',#)</code>.</p>
+						<p>For example, if the object being inspected was an instance of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class that is assigned to the global variable <code>page</code>, then the getter expression for the <code>enabled</code> state property would be <code>page.set ('enabled',#)</code>. On the other hand, if the object being inspected was the actual <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class, then the getter expression for the <code>enabled</code> state property would be <code>Uize.Widget.Page.get ('enabled',#)</code>.</p>
 					</div>
 					
 					<a name="4_4_4_2_2"></a>
 					<h5 class="heading5" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.2. The Set Action -&gt; 4.4.4.2.2. Deliberately Incapacitated"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_4" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions">4</a>.<a href="#4_4_4_2" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.2. The Set Action">2</a>.<a href="#4_4_4_2_2" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.4. Actions -&gt; 4.4.4.2. The Set Action -&gt; 4.4.4.2.2. Deliberately Incapacitated">2</a>. </span>Deliberately Incapacitated</h5>
 					<div class="contents5">
-						<p>The setter expression linked to by <a href="#4_4_4_2">the set action</a> link is deliberately incapacitated by using a placeholder "#" (pound character) where the set-get property's new value should go.</p>
+						<p>The setter expression linked to by <a href="#4_4_4_2">the set action</a> link is deliberately incapacitated by using a placeholder "#" (pound character) where the state property's new value should go.</p>
 						
-						<p>This has the effect of ensuring that merely clicking on <a href="#4_4_4_2">the set action</a> doesn't actually change the value of the set-get property before you get a chance to enter your own value. Because the initial state of the setter expression is invalid, it fails. Replace the "#" with a valid value and the setter expression does its thing.</p>
+						<p>This has the effect of ensuring that merely clicking on <a href="#4_4_4_2">the set action</a> doesn't actually change the value of the state property before you get a chance to enter your own value. Because the initial state of the setter expression is invalid, it fails. Replace the "#" with a valid value and the setter expression does its thing.</p>
 					</div>
 					
 					<a name="4_4_4_2_3"></a>
@@ -1373,7 +1373,7 @@ Uize.Widget
 					<div class="contents5">
 						<p><a href="#4_4_4_2">The set action</a> can be useful when troubleshooting, or even when just experimenting with the state interface for widgets on a page.</p>
 						
-						<p>Once you've got a setter expression for the set-get property of a widget in the <a href="#4_2">object entry input</a>, then you can go to town playing with different values and seeing how the UI of the widget responds.</p>
+						<p>Once you've got a setter expression for the state property of a widget in the <a href="#4_2">object entry input</a>, then you can go to town playing with different values and seeing how the UI of the widget responds.</p>
 					</div>
 				</div>
 			</div>
@@ -1381,9 +1381,9 @@ Uize.Widget
 			<a name="4_4_5"></a>
 			<h3 class="heading3" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.5. Value"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_4" title="4. The Right Pane -&gt; 4.4. State Tab">4</a>.<a href="#4_4_5" title="4. The Right Pane -&gt; 4.4. State Tab -&gt; 4.4.5. Value">5</a>. </span>Value</h3>
 			<div class="contents3">
-				<p>The Value column of the <a href="#4_4_2">set-get properties table</a> displays the value for a set-get property, using a simple <code>toString</code> serialization.</p>
+				<p>The Value column of the <a href="#4_4_2">state properties table</a> displays the value for a state property, using a simple <code>toString</code> serialization.</p>
 				
-				<p>Because the value of a set-get property is displayed using a <code>toString</code> serialization, the displayed value can be less than satisfactory in some cases. In such cases, <a href="#4_4_4_1">the get action</a> comes in handy, since it allows you to get a more complete (and useful) view of a set-get property's value in the <a href="#4_3">summary tab</a>.</p>
+				<p>Because the value of a state property is displayed using a <code>toString</code> serialization, the displayed value can be less than satisfactory in some cases. In such cases, <a href="#4_4_4_1">the get action</a> comes in handy, since it allows you to get a more complete (and useful) view of a state property's value in the <a href="#4_3">summary tab</a>.</p>
 			</div>
 		</div>
 		
@@ -1403,9 +1403,9 @@ Uize.Widget
 			<a name="4_5_2"></a>
 			<h3 class="heading3" title="4. The Right Pane -&gt; 4.5. Features Tab -&gt; 4.5.2. Automatically Detectable Features"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_5" title="4. The Right Pane -&gt; 4.5. Features Tab">5</a>.<a href="#4_5_2" title="4. The Right Pane -&gt; 4.5. Features Tab -&gt; 4.5.2. Automatically Detectable Features">2</a>. </span>Automatically Detectable Features</h3>
 			<div class="contents3">
-				<p>Features that can be automatically detected for a class include: static methods, static properties, instance methods, instance properties, and set-get properties.</p>
+				<p>Features that can be automatically detected for a class include: static methods, static properties, instance methods, instance properties, and state properties.</p>
 				
-				<p>Features are detected by iterating through the properties of the class to discover static features (static methods and static properties), and by iterating through the properties of the class' <code>prototype</code> object to discover instance features (instance methods and instance properties). Set-get properties are detected by calling the <code>MyClass.get</code> static method with no parameter specified.</p>
+				<p>Features are detected by iterating through the properties of the class to discover static features (static methods and static properties), and by iterating through the properties of the class' <code>prototype</code> object to discover instance features (instance methods and instance properties). State properties are detected by calling the <code>MyClass.get</code> static method with no parameter specified.</p>
 			</div>
 			
 			<a name="4_5_3"></a>
@@ -1426,7 +1426,7 @@ Uize.Widget
 					
 					<p>For instance features, the name displayed in this column will be the name of the property of the <code>prototype</code> object. For example, the name displayed for the <code>wireUi</code> instance method would be simply "wireUi". For static features, the name displayed will be the full dereferencing path for the static feature. For example, the <code>registerProperties</code> static method of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class would be displayed as "Uize.Widget.Page.registerProperties".</p>
 					
-					<p>Displayed names for all features, except set-get properties, are <a href="#4_5_7">navigable values</a>. Instance features are linked to inspect the feature on the <code>prototype</code> object of the class. For example, the <a href="#5_1">object link</a> for the <code>wireUi</code> instance method of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class would have the <a href="#5_1_2">object link expression</a> of <code>Uize.Widget.Page.prototype.wireUi</code>. In this case, clicking on the feature name will let you inspect the function that implements the <code>wireUi</code> instance method for this class.</p>
+					<p>Displayed names for all features, except state properties, are <a href="#4_5_7">navigable values</a>. Instance features are linked to inspect the feature on the <code>prototype</code> object of the class. For example, the <a href="#5_1">object link</a> for the <code>wireUi</code> instance method of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class would have the <a href="#5_1_2">object link expression</a> of <code>Uize.Widget.Page.prototype.wireUi</code>. In this case, clicking on the feature name will let you inspect the function that implements the <code>wireUi</code> instance method for this class.</p>
 					
 					<p>By contrast, static features are simply linked to those features on the class object. For example, the <a href="#5_1">object link</a> for the <code>registerProperties</code> static method of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class would have the <a href="#5_1_2">object link expression</a> of <code>Uize.Widget.Page.registerProperties</code>. In this case, clicking on the feature name will let you inspect the function that implements the <code>registerProperties</code> static method for this class.</p>
 				</div>
@@ -1449,7 +1449,7 @@ Uize.Widget
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Static</b> - features that are defined and accessible on the class object, such as the <code>Uize.Widget.Page.registerProperties</code> static method of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Instance</b> - features that are defined on the <code>prototype</code> object of a class, and that are accessible on instances of the class, such as the <code>wireUi</code> instance method of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Set-get</b> - Set-get properties are considered to be neither exclusively in the <b>Instance</b> context nor exclusively in the <b>Static</b> context, since they combine aspects of both. Instead, set-get properties are given their own dedicated <b>Set-get</b> context. They are regarded as "Property" <a href="#4_5_4_4">type</a> features in the <b>Set-get</b> context.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>State</b> - State properties are considered to be neither exclusively in the <b>Instance</b> context nor exclusively in the <b>Static</b> context, since they combine aspects of both. Instead, state properties are given their own dedicated <b>State</b> context. They are regarded as "Property" <a href="#4_5_4_4">type</a> features in the <b>State</b> context.</td></tr>
 					</table>
 				</div>
 				
@@ -1479,7 +1479,7 @@ Uize.Widget
 					<div class="contents5">
 						<p>The class in which a feature was first introduced is determined according to the <a href="#4_5_4_3">context</a> of the feature.</p>
 						
-						<p>For static features, the class is determined by going up the inheritance chain towards the root class, finding the first class in which the feature is present in the class object. For instance features, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the class' <code>prototype</code> object. For set-get properties, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the object returned by a call to the <code>get</code> static method with no parameter specified (ie. a "get all").</p>
+						<p>For static features, the class is determined by going up the inheritance chain towards the root class, finding the first class in which the feature is present in the class object. For instance features, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the class' <code>prototype</code> object. For state properties, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the object returned by a call to the <code>get</code> static method with no parameter specified (ie. a "get all").</p>
 					</div>
 				</div>
 				
@@ -1495,7 +1495,7 @@ Uize.Widget
 					<div class="contents5">
 						<p>The class in which a feature was last overridden is determined by going up the inheritance chain towards the root class, and finding the earliest class in which the feature is still present and has the same value / implementation as the class being inspected.</p>
 						
-						<p>Upon each iteration up the inheritance chain, the feature's value / implementation is obtained according to the <a href="#4_5_4_3">context</a> of the feature: for static features, the feature is obtained from the class object; for instance features, the feature is obtained from the class' <code>prototype</code> object; for set-get properties, the feature is obtained by a call to the <code>get</code> static method with no parameter specified (ie. a "get all").</p>
+						<p>Upon each iteration up the inheritance chain, the feature's value / implementation is obtained according to the <a href="#4_5_4_3">context</a> of the feature: for static features, the feature is obtained from the class object; for instance features, the feature is obtained from the class' <code>prototype</code> object; for state properties, the feature is obtained by a call to the <code>get</code> static method with no parameter specified (ie. a "get all").</p>
 					</div>
 				</div>
 				
@@ -1554,7 +1554,7 @@ Uize.Widget
 					</tr>
 					<tr>
 						<td>Public</td>
-						<td>Set-get</td>
+						<td>State</td>
 						<td>Property</td>
 					</tr>
 					<tr>
@@ -1655,7 +1655,7 @@ Uize.Widget
 				<a name="4_7_2_1"></a>
 				<h4 class="heading4" title="4. The Right Pane -&gt; 4.7. Events Tab -&gt; 4.7.2. Types of Events Logged -&gt; 4.7.2.1. Property Change Events"><span class="headingNumber"><a href="#4" title="4. The Right Pane">4</a>.<a href="#4_7" title="4. The Right Pane -&gt; 4.7. Events Tab">7</a>.<a href="#4_7_2" title="4. The Right Pane -&gt; 4.7. Events Tab -&gt; 4.7.2. Types of Events Logged">2</a>.<a href="#4_7_2_1" title="4. The Right Pane -&gt; 4.7. Events Tab -&gt; 4.7.2. Types of Events Logged -&gt; 4.7.2.1. Property Change Events">1</a>. </span>Property Change Events</h4>
 				<div class="contents4">
-					<p>Property Change Events are events that are fired whenever one or more of the set-get properties for an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass are changed during a set operation.</p>
+					<p>Property Change Events are events that are fired whenever one or more of the state properties for an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass are changed during a set operation.</p>
 					
 					<p>Unlike <a href="#4_7_2_2">custom events</a>, <a href="#4_7_2_1">property change events</a> are only applicable to <b>instances</b> and not to classes. Whenever Property Change Events are logged, an object specifying all the properties that have changed value, along with their new values, is serialized to a one line JSON formatted string and appended to the log message.</p>
 					
@@ -1935,7 +1935,7 @@ Uize.Widget
 				<div class="contents4">
 					<p>Shown only for objects that are DOM nodes, the text displayed will be the full dereferencing path for the widget that "owns" the node.</p>
 					
-					<p>A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the <code>idPrefix</code> set-get property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be <b>"not owned by a widget"</b>.</p>
+					<p>A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the <code>idPrefix</code> state property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be <b>"not owned by a widget"</b>.</p>
 				</div>
 				
 				<a name="5_2_1_15"></a>
@@ -1943,13 +1943,13 @@ Uize.Widget
 				<div class="contents4">
 					<p>Shown only for objects that are DOM nodes, the text displayed will be the full dereferencing path for the widget class of the widget that "owns" the node.</p>
 					
-					<p>A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the <code>idPrefix</code> set-get property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be <b>"not owned by a widget"</b>.</p>
+					<p>A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the <code>idPrefix</code> state property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be <b>"not owned by a widget"</b>.</p>
 				</div>
 				
 				<a name="5_2_1_16"></a>
 				<h4 class="heading4" title="5. Universal Features -&gt; 5.2. Object Preview -&gt; 5.2.1. Object Info Tooltip -&gt; 5.2.1.16. VALUE (all instances with value interface)"><span class="headingNumber"><a href="#5" title="5. Universal Features">5</a>.<a href="#5_2" title="5. Universal Features -&gt; 5.2. Object Preview">2</a>.<a href="#5_2_1" title="5. Universal Features -&gt; 5.2. Object Preview -&gt; 5.2.1. Object Info Tooltip">1</a>.<a href="#5_2_1_16" title="5. Universal Features -&gt; 5.2. Object Preview -&gt; 5.2.1. Object Info Tooltip -&gt; 5.2.1.16. VALUE (all instances with value interface)">16</a>. </span>VALUE (all instances with value interface)</h4>
 				<div class="contents4">
-					<p>Shown only for objects that are instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses that implement the value interface, the text displayed will be a simple <code>toString</code> serialization of the value of the instance's <code><a href="#4_4_5">value</a></code> set-get property.</p>
+					<p>Shown only for objects that are instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses that implement the value interface, the text displayed will be a simple <code>toString</code> serialization of the value of the instance's <code><a href="#4_4_5">value</a></code> state property.</p>
 				</div>
 			</div>
 			
@@ -2051,7 +2051,7 @@ Uize.Widget
 		<div class="contents2">
 			<p>Specified Localized Strings are those localized strings that are explicitly specified for a widget instance.</p>
 			
-			<p>Localized strings can be explicitly specified for a widget by setting an object value for the widget's <code>localized</code> set-get property, so the number of localized strings specified for a widget is the number of properties in the <code>localized</code> object specified for the widget.</p>
+			<p>Localized strings can be explicitly specified for a widget by setting an object value for the widget's <code>localized</code> state property, so the number of localized strings specified for a widget is the number of properties in the <code>localized</code> object specified for the widget.</p>
 			
 			<p>Bear in mind that the system of localization in the UIZE JavaScript Framework (see the <a href="javascript-localization.html">JavaScript Localization</a> explainer) allows a widget to "inherit" localized strings from up its parent chain, so the number of localized strings specified for a widget does not always give an indication of how many localized strings the widget uses in its implementation.</p>
 		</div>
@@ -2073,7 +2073,7 @@ Uize.Widget
 		<a name="6_5"></a>
 		<h2 class="heading2" title="6. Definitions of Terms -&gt; 6.5. Unaccessed Widget DOM Nodes"><span class="headingNumber"><a href="#6" title="6. Definitions of Terms">6</a>.<a href="#6_5" title="6. Definitions of Terms -&gt; 6.5. Unaccessed Widget DOM Nodes">5</a>. </span>Unaccessed Widget DOM Nodes</h2>
 		<div class="contents2">
-			<p>DOM nodes are considered unaccessed <a href="#6_6">widget DOM nodes</a> if such a node has <b>not</b> been accessed by a widget (so there is no entry for the node in any widget's node cache), but the node's ID is consistent with the value of the <code>idPrefix</code> set-get property for some widget in the entire widget tree.</p>
+			<p>DOM nodes are considered unaccessed <a href="#6_6">widget DOM nodes</a> if such a node has <b>not</b> been accessed by a widget (so there is no entry for the node in any widget's node cache), but the node's ID is consistent with the value of the <code>idPrefix</code> state property for some widget in the entire widget tree.</p>
 			
 			<p>A node may be considered an unaccessed widget DOM node even if it is actually never addressed in the implementation of the widget instance that is considered to be its owner. This is because the person writing the code to generate the HTML for a widget may mistakenly add IDs for some DOM nodes inside that HTML that makes those nodes appear as nodes that the widget uses - even though they are not. Another possibility might be that the HTML being used for a widget is actually HTML intended for a subclass of that widget's class. In such cases, extra nodes that are addressed in the implementation of the widget subclass are not known to the base class - they will be ignored, but they will still appear to belong to instances of that base class because of their ID structure.</p>
 		</div>

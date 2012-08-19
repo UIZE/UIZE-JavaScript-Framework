@@ -13,12 +13,12 @@ SimpleDoc Improvements
 New valueOf Interface
 	A =valueOf= instance method has been implemented in the =Uize= base class. This method will be invoked automatically by JavaScript whenever an instance of a =Uize= subclass is involved in an expression.
 
-	This provides a shortcut to accessing the =value= set-get property for instances of classes that register this property. In such cases, you can use an instance reference in an expression - such as a mathematical expression, or a string concatenation - as though the object reference were a proxy for its value.
+	This provides a shortcut to accessing the =value= state property for instances of classes that register this property. In such cases, you can use an instance reference in an expression - such as a mathematical expression, or a string concatenation - as though the object reference were a proxy for its value.
 
 New toString Interface
 	A =toString= instance method has been implemented in the =Uize= base class that provides a convenient and lightweight way to gather some information about instances of =Uize= subclasses during debugging and troubleshooting.
 
-	The string returned by this method provides a summary that includes an instance's class name and the state of its set-get properties. The =toString Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the =alert= global function.
+	The string returned by this method provides a summary that includes an instance's class name and the state of its state properties. The =toString Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the =alert= global function.
 
 IMPROVED MODULE: Uize.Url
 	Support for valueOf

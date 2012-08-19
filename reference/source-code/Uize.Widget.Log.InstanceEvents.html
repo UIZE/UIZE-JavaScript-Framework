@@ -49,7 +49,7 @@
 
     In a Nutshell
       Logging an Instance's Events
-        To log instance events for an instance of the =Uize.Widget.Log.InstanceEvents= class, set the log instance's =instance= set-get property to be a reference to the instance whose events you want to log.
+        To log instance events for an instance of the =Uize.Widget.Log.InstanceEvents= class, set the log instance's =instance= state property to be a reference to the instance whose events you want to log.
 
         That may sound like a mouthful, but it's a lot simpler than it may sound. Consider the following example...
 
@@ -64,7 +64,7 @@
       All Instance Events Logged
         All instance events for an instance being watched are logged.
 
-        This includes all custom instance events that are fired using the instance's =fire= method, as well as all =Changed.&amp;#42;= property change events that result from values of the instance's various set-get properties being changed. This means that you can use a =Uize.Widget.Log.InstanceEvents= instance to watch for changes in the state of some other instance.
+        This includes all custom instance events that are fired using the instance's =fire= method, as well as all =Changed.&amp;#42;= property change events that result from values of the instance's various state properties being changed. This means that you can use a =Uize.Widget.Log.InstanceEvents= instance to watch for changes in the state of some other instance.
 
         Custom Instance Events
           When a custom instance events is logged, the log message is prefixed with the value of the =customInstanceEvent= localizable string, and the name of the custom event is appended.
@@ -75,15 +75,15 @@
       Watch Any Instance
         The instance for which instance events are logged can be an instance of any =Uize.Class= subclass - not just widget classes.
 
-        Any =Uize.Class= subclass instance can have set-get properties and can have custom instance events, so logging instance events is applicable beyond just observing widget instance's (although widget instances can be quite compelling to watch).
+        Any =Uize.Class= subclass instance can have state properties and can have custom instance events, so logging instance events is applicable beyond just observing widget instance's (although widget instances can be quite compelling to watch).
 
       Dynamic Switching
         The =Uize.Widget.Log.InstanceEvents= class supports dynamic switching of the instance for which events are being logged.
 
-        The value of a log widget's =instance= set-get property can be changed at any time. If the value of the =instance= property is changed after the log widget's UI has already been wired up, then any logged instance events from a previous instance that was being watched will be cleared from the log.
+        The value of a log widget's =instance= state property can be changed at any time. If the value of the =instance= property is changed after the log widget's UI has already been wired up, then any logged instance events from a previous instance that was being watched will be cleared from the log.
 
       Nothing to Watch
-        When a log widget's =instance= set-get property is set to the value =null= or =undefined=, then no instance will be watched.
+        When a log widget's =instance= state property is set to the value =null= or =undefined=, then no instance will be watched.
 
         If the =instance= property is set to =null= or =undefined= after the log was already wired up and watching instance events for some instance, then the log will be cleared and no more messages will be displayed until the =instance= property is once again set to an instance of a =Uize.Class= subclass.
 */
@@ -159,16 +159,16 @@ Uize.module ({
               _instance &amp;&amp; _instance.wire (_this._lastWiring._eventsToHandlersMap);
           }
           /*?
-            Set-get Properties
+            State Properties
               instance
                 An object reference, specifying the instance of a =Uize.Class= subclass for which instance events should be logged.
 
-                The value of the =instance= set-get property can be a reference to an instance of *any* =Uize.Class= subclass - not just widget classes (see `Watch Any Instance`). The value of the =instance= set-get property can be changed at any time - even after the log widget has already been wired up (see `Dynamic Switching`). When the =instance= property is set to the value =null= or =undefined=, then no instance will be watched (see `Nothing to Watch`).
+                The value of the =instance= state property can be a reference to an instance of *any* =Uize.Class= subclass - not just widget classes (see `Watch Any Instance`). The value of the =instance= state property can be changed at any time - even after the log widget has already been wired up (see `Dynamic Switching`). When the =instance= property is set to the value =null= or =undefined=, then no instance will be watched (see `Nothing to Watch`).
           */
         }
       });
 
-    /*** Override Initial Values for Inherited Set-Get Properties ***/
+    /*** Override Initial Values for Inherited State Properties ***/
       _class.set ({
         localized:{
           customInstanceEvent:'INSTANCE EVENT',
@@ -183,7 +183,7 @@ Uize.module ({
               nothingToWatch
                 A localizable string, that will be logged as a log message whenever there is no valid object to watch events on (see `Nothing to Watch`).
 
-                In order for the instance to have a valid object to watch events on, the value of the =instance= set-get property must be either a reference to an instance of a =Uize.Class= subclass, or a referece to a =Uize.Class= subclass.
+                In order for the instance to have a valid object to watch events on, the value of the =instance= state property must be either a reference to an instance of a =Uize.Class= subclass, or a referece to a =Uize.Class= subclass.
 
               propertiesChangedEvent
                 A localizable string, that will be prepended to log messages for all `Property Change Events`.

@@ -79,7 +79,7 @@ Uize.module ({
 					onChange:_classPrototype._updateUiValue,
 					value:'#000000'
 					/*?
-						Set-get Properties
+						State Properties
 							value
 								A value of any type and format supported by the =Uize.Color= module, specifying the current color for which the widget should display information.
 
@@ -91,20 +91,20 @@ Uize.module ({
 				}
 			});
 
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
+		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
 				built:false,
 				/*?
-					Set-get Properties
+					State Properties
 						built
-							This set-get property is inherited from the =Uize.Widget= base class, but its initial value is overrided to =false= in this class.
+							This state property is inherited from the =Uize.Widget= base class, but its initial value is overrided to =false= in this class.
 
 				*/
 				html:Uize.Templates.ColorInfo
 				/*?
-					Set-get Properties
+					State Properties
 						built
-							This set-get property is inherited from the =Uize.Widget= base class, but its initial value is overrided to =Uize.Templates.ColorInfo= in this class.
+							This state property is inherited from the =Uize.Widget= base class, but its initial value is overrided to =Uize.Templates.ColorInfo= in this class.
 
 				*/
 			});

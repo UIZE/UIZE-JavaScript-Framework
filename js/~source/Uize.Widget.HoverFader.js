@@ -24,7 +24,7 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		All in the Set
-			The entire interface for the =Uize.Widget.HoverFader= class is exposed through its set-get properties.
+			The entire interface for the =Uize.Widget.HoverFader= class is exposed through its state properties.
 
 			There are no special methods for this class. All methods and other properties are inherited from the =Uize.Widget= base class. All that one does in order to utilize this widget is to instantiate it with the desired settings.
 
@@ -47,7 +47,7 @@
 			- values for color style properties can be specified in single digit, three digit, or six digit hex RGB format - with or without the "#" (hash / pound sign) prefix
 			- values for position and dimension style properties can be specified as strings with the "px" suffix (eg. ='100px'=) or simply as numbers (eg. =100=)
 
-			Configurable fade properties let you control the rate of the fade-in independently of the rate of the fade-out, and any other set-get properties of the =Uize.Fade= class (such as =curve=) can be specified for both the fade-in and fade-out.
+			Configurable fade properties let you control the rate of the fade-in independently of the rate of the fade-out, and any other state properties of the =Uize.Fade= class (such as =curve=) can be specified for both the fade-in and fade-out.
 
 		Any Nodes
 			The nodes that you wire up with this widget can be of any type: links, divs, spans, etc.
@@ -77,11 +77,11 @@
 			);
 			..........................................................................
 
-			In the above example, the =Uize.Widget.HoverFader= instance is being added as a child widget to a page widget instance, so the effect will be wired up when the page widget instance is wired. The value for the =nodes= set-get property specifies the nodes that should be wired up with the effect. The nodes being supplied in this case are obtained through a call to the =Uize.Node.find= static method. Based on the options specified in the call, the =Uize.Node.find= method will find all nodes with a class name of "menuLink" that are in a node tree with a node of the id "menu" at its root.
+			In the above example, the =Uize.Widget.HoverFader= instance is being added as a child widget to a page widget instance, so the effect will be wired up when the page widget instance is wired. The value for the =nodes= state property specifies the nodes that should be wired up with the effect. The nodes being supplied in this case are obtained through a call to the =Uize.Node.find= static method. Based on the options specified in the call, the =Uize.Node.find= method will find all nodes with a class name of "menuLink" that are in a node tree with a node of the id "menu" at its root.
 
-			The =defaultStyle= set-get property specifies the color style property values for the default state of the nodes (ie. when not mousing over them), in this case light gray text on a black background with a dark gray border. The =hoverStyle= set-get property specifies the color style property values for the hover state of the nodes (ie. when mousing over them), in this case white text on a pastel blue background with a black border.
+			The =defaultStyle= state property specifies the color style property values for the default state of the nodes (ie. when not mousing over them), in this case light gray text on a black background with a dark gray border. The =hoverStyle= state property specifies the color style property values for the hover state of the nodes (ie. when mousing over them), in this case white text on a pastel blue background with a black border.
 
-			The =fadeIn= set-get property specifies properties for the fade process that is used to fade the node that is currently being moused over from the =defaultStyle= styling to the =hoverStyle= styling, in this case with a duration of =500= milliseconds and accelerating through the entire fade. The =fadeOut= set-get property specifies properties for the fade process that is used to fade the node that is currently being moused out of from the =hoverStyle= styling back to the =defaultStyle= styling, in this case with a duration of =750= milliseconds and accelerating through the entire fade. A greater duration for the fade-out will result in a lingering trail, and the acceleration will accentuate this quality.
+			The =fadeIn= state property specifies properties for the fade process that is used to fade the node that is currently being moused over from the =defaultStyle= styling to the =hoverStyle= styling, in this case with a duration of =500= milliseconds and accelerating through the entire fade. The =fadeOut= state property specifies properties for the fade process that is used to fade the node that is currently being moused out of from the =hoverStyle= styling back to the =defaultStyle= styling, in this case with a duration of =750= milliseconds and accelerating through the entire fade. A greater duration for the fade-out will result in a lingering trail, and the acceleration will accentuate this quality.
 */
 
 Uize.module ({
@@ -165,7 +165,7 @@ Uize.module ({
 							myInstance.tickle (fadePropertiesOBJ);
 							......................................
 
-							When the =fadePropertiesOBJ= parameter is specified in place of the =intervalINT= parameter, then an object containing fade properties (ie. set-get properties of the =Uize.Fade= class) can be specified to configure the fade that drives the tickling of the =nodes=.
+							When the =fadePropertiesOBJ= parameter is specified in place of the =intervalINT= parameter, then an object containing fade properties (ie. state properties of the =Uize.Fade= class) can be specified to configure the fade that drives the tickling of the =nodes=.
 
 							Among other things, this allows one to specify a =curve= property for the fade, so that the timing of the triggering of the fade-outs for the different =nodes= of the instance is not uniform. In addition, one can use the =reverse= fade property to control the order in which the tickling occurs. Specifying the value =true= for the =reverse= fade property will cause the tickling to start with the last node and end at the first node.
 
@@ -219,7 +219,7 @@ Uize.module ({
 					name:'defaultStyle',
 					value:{color:'fff',backgroundColor:'000'}
 					/*?
-						Set-get Properties
+						State Properties
 							defaultStyle
 								An object, whose properties specify the values for CSS style properties at the start of the hover fade-in (and also the end of the hover fade-out).
 
@@ -234,13 +234,13 @@ Uize.module ({
 								}
 								.......................................
 
-								The =defaultStyle= object may contain values for any of the supported CSS style properties (see the section `Fading CSS Style Properties`). The structure of the object should match the structure of the companion =hoverStyle= set-get property's value, or the effect will not work correctly. In other words, if the =defaultStyle= object contains a value for =borderColor=, then the =hoverStyle= object must also contain a value for this style property.
+								The =defaultStyle= object may contain values for any of the supported CSS style properties (see the section `Fading CSS Style Properties`). The structure of the object should match the structure of the companion =hoverStyle= state property's value, or the effect will not work correctly. In other words, if the =defaultStyle= object contains a value for =borderColor=, then the =hoverStyle= object must also contain a value for this style property.
 
-								For a more complete example of how this set-get property is used in conjunction with other set-get properties, consult the section `An Example`.
+								For a more complete example of how this state property is used in conjunction with other state properties, consult the section `An Example`.
 
 								NOTES
 								- for best effect, style property values specified in this property should match the initial style property values for the nodes (as determined by stylesheet rules for your page)
-								- see the companion =hoverStyle= set-get property
+								- see the companion =hoverStyle= state property
 								- the initial value is ={color:'fff',backgroundColor:'000'}=
 					*/
 				},
@@ -249,11 +249,11 @@ Uize.module ({
 					onChange:_updateResolvedFadeInFadeOutProperties,
 					value:{duration:250}
 					/*?
-						Set-get Properties
+						State Properties
 							fadeIn
 								An object, specifying fade properties for the fade-in phase (ie. when mousing over a node) of the hover fade effect.
 
-								If the default fade-in duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid set-get properties of the =Uize.Fade= class (such as =curve=) can be specified in the =fadeIn= object, and these values will be applied when the fade-in starts.
+								If the default fade-in duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid state properties of the =Uize.Fade= class (such as =curve=) can be specified in the =fadeIn= object, and these values will be applied when the fade-in starts.
 
 								EXAMPLE VALUE
 								...................................
@@ -264,7 +264,7 @@ Uize.module ({
 								...................................
 
 								NOTES
-								- see the companion =fadeInOut= and =fadeOut= set-get properties
+								- see the companion =fadeInOut= and =fadeOut= state properties
 								- the initial value is ={duration:250}=
 					*/
 				},
@@ -272,7 +272,7 @@ Uize.module ({
 					name:'fadeInOut',
 					onChange:_updateResolvedFadeInFadeOutProperties
 					/*?
-						Set-get Properties
+						State Properties
 							fadeInOut
 								An object, specifying fade properties that are common to both the fade-in phase (ie. when mousing over a node) and the fade-out phase (ie. when mousing out of a node) of the hover fade effect.
 
@@ -299,9 +299,9 @@ Uize.module ({
 								);
 								...................................................
 
-								In the above example, a =Uize.Widget.HoverFader= instance is being added to the page widget as a child widget named =menuHoverFader=. The =fadeInOut= set-get property is being used to specify fade properties that are common to both the fade-in and fade-out phases of the hover fade effect.
+								In the above example, a =Uize.Widget.HoverFader= instance is being added to the page widget as a child widget named =menuHoverFader=. The =fadeInOut= state property is being used to specify fade properties that are common to both the fade-in and fade-out phases of the hover fade effect.
 
-								These settings achieve a "hot" fade from black to white (and vice versa), where the background color transitions through shades of reds and yellows. This is accomplished by specifying different curve functions for the red, green, and blue components of the color tuple for the =backgroundColor= CSS style property. Now, because we want the fade-in to be faster than the fade-out, we are using the =fadeIn= and =fadeOut= set-get properties as well to provide the fade properties that are different for the two phases - in this case, the =duration= fade property values.
+								These settings achieve a "hot" fade from black to white (and vice versa), where the background color transitions through shades of reds and yellows. This is accomplished by specifying different curve functions for the red, green, and blue components of the color tuple for the =backgroundColor= CSS style property. Now, because we want the fade-in to be faster than the fade-out, we are using the =fadeIn= and =fadeOut= state properties as well to provide the fade properties that are different for the two phases - in this case, the =duration= fade property values.
 
 								Common Duration
 									If the duration of the fade-in is to be the same as the duration of the fade-out, then this common duration can be specified in the =fadeInOut= property, rather than redundantly in both the =fadeIn= and =fadeOut= properties.
@@ -309,14 +309,14 @@ Uize.module ({
 								Special Handling of reverse Fade Property
 									The =reverse= fade property has special handling in the context of this widget class.
 
-									Normally, when specifying the value =true= for the =reverse= fade property, the entire fade will be reversed. However, the =Uize.Widget.HoverFader= class guarantees that at the end of the fade-in phase the style settings for a node will be those specified by the =hoverStyle= set-get property. Similarly, at the end of the fade-out phase the style settings for a node will be those specified by the =defaultStyle= set-get property.
+									Normally, when specifying the value =true= for the =reverse= fade property, the entire fade will be reversed. However, the =Uize.Widget.HoverFader= class guarantees that at the end of the fade-in phase the style settings for a node will be those specified by the =hoverStyle= state property. Similarly, at the end of the fade-out phase the style settings for a node will be those specified by the =defaultStyle= state property.
 
 									Therefore, when specifying the value =true= for the =reverse= fade property, the =Uize.Widget.HoverFader= class swaps the values that it would normally use as the start and end values of the style fade for a node. This has the effect of only reversing the transition effect, but not the start and end style. This becomes more pronounced - and more compelling - when compound values are specified for the =curve= fade property, where reversing the effect of the curves produces interesting results.
 
-									Now, when specifying a value for the =fadeInOut= set-get property, the value of the =reverse= fade property for the fade-out is automatically defaulted to being the logical not of the value specified for this property in the =fadeInOut= object. This has the effect of making the fade-out a mirror of the fade-in - especially useful with settings that accomplish complex color transitions, where this behavior guarantees the same color transition effect for both phases of the effect. In order to override this automatic defaulting behavior, you can always explicitly specify values for the =reverse= fade property in either - or both - of the =fadeIn= and =fadeOut= objects.
+									Now, when specifying a value for the =fadeInOut= state property, the value of the =reverse= fade property for the fade-out is automatically defaulted to being the logical not of the value specified for this property in the =fadeInOut= object. This has the effect of making the fade-out a mirror of the fade-in - especially useful with settings that accomplish complex color transitions, where this behavior guarantees the same color transition effect for both phases of the effect. In order to override this automatic defaulting behavior, you can always explicitly specify values for the =reverse= fade property in either - or both - of the =fadeIn= and =fadeOut= objects.
 
 								NOTES
-								- see the companion =fadeIn= and =fadeOut= set-get properties
+								- see the companion =fadeIn= and =fadeOut= state properties
 								- the initial value is =undefined=
 					*/
 				},
@@ -325,11 +325,11 @@ Uize.module ({
 					onChange:_updateResolvedFadeInFadeOutProperties,
 					value:{duration:350}
 					/*?
-						Set-get Properties
+						State Properties
 							fadeOut
 								An object, specifying fade properties for the fade-out phase (ie. when mousing out of a node) of the hover fade effect.
 
-								If the default fade-out duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid set-get properties of the =Uize.Fade= class (such as =curve=) can be specified in the =fadeOut= object, and these values will be applied when the fade-out starts.
+								If the default fade-out duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid state properties of the =Uize.Fade= class (such as =curve=) can be specified in the =fadeOut= object, and these values will be applied when the fade-out starts.
 
 								EXAMPLE VALUE
 								.....................................
@@ -340,7 +340,7 @@ Uize.module ({
 								.....................................
 
 								NOTES
-								- see the companion =fadeIn= and =fadeInOut= set-get properties
+								- see the companion =fadeIn= and =fadeInOut= state properties
 								- the initial value is ={duration:350}=
 					*/
 				},
@@ -348,7 +348,7 @@ Uize.module ({
 					name:'hoverStyle',
 					value:{color:'000',backgroundColor:'fff'}
 					/*?
-						Set-get Properties
+						State Properties
 							hoverStyle
 								An object, whose properties specify the values for CSS style properties at the end of the hover fade-in (and also the start of the hover fade-out).
 
@@ -363,19 +363,19 @@ Uize.module ({
 								}
 								........................................
 
-								The =hoverStyle= object may contain values for any of the supported CSS style properties (see the section `Fading CSS Style Properties`). The structure of the object should match the structure of the companion =defaultStyle= set-get property's value, or the effect will not work correctly. In other words, if the =hoverStyle= object contains a value for =borderColor=, then the =defaultStyle= object must also contain a value for this style property.
+								The =hoverStyle= object may contain values for any of the supported CSS style properties (see the section `Fading CSS Style Properties`). The structure of the object should match the structure of the companion =defaultStyle= state property's value, or the effect will not work correctly. In other words, if the =hoverStyle= object contains a value for =borderColor=, then the =defaultStyle= object must also contain a value for this style property.
 
-								For a more complete example of how this set-get property is used in conjunction with other set-get properties, consult the section `An Example`.
+								For a more complete example of how this state property is used in conjunction with other state properties, consult the section `An Example`.
 
 								NOTES
 								- for best effect, style property values specified in this property should match the hover style property values for the nodes (as determined by stylesheet rules for your page)
-								- see the companion =defaultStyle= set-get property
+								- see the companion =defaultStyle= state property
 								- the initial value is ={color:'000',backgroundColor:'fff'}=
 					*/
 				},
 				_nodes:'nodes'
 				/*?
-					Set-get Properties
+					State Properties
 						nodes
 							An array or collection of nodes or a find expression object, specifying the nodes that should be wired up with the hover fade effect.
 

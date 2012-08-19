@@ -11,7 +11,7 @@ It's Easy
 Where It's Implemented
 	The power of classes built using the UIZE JavaScript Framework is derived from the =Uize.Class= base class.
 
-	All classes inherit directly - or indirectly - from this class. While the =Uize.Class= module is not tiny, the core of the inheritance mechanism itself is quite tiny. What makes the =Uize.Class= module larger is that it provides not only an inheritance mechanism, but also a [[javascript-event-system.html][JavaScript Event System]] and a [[set-get-properties.html][Set-get Properties]] system.
+	All classes inherit directly - or indirectly - from this class. While the =Uize.Class= module is not tiny, the core of the inheritance mechanism itself is quite tiny. What makes the =Uize.Class= module larger is that it provides not only an inheritance mechanism, but also a [[javascript-event-system.html][JavaScript Event System]] and a [[state-properties.html][State Properties]] system.
 
 Fleshing Out a Subclass
 	Each class that you create using the framework inherits the =subclass= static method, so you can easily make further subclasses of them.
@@ -29,10 +29,10 @@ Fleshing Out a Subclass
 
 	In this example, =MyClass= is a plain vanilla subclass of the =Uize.Class= base class. The property =foo= is assigned on its =prototype= and is shared by all instances. Now, a subclass of =MyClass= is created, by the name of =MySubclass=. An instance of =MySubclass= is created, and the value of its =foo= property is alerted. Unsurprisingly, what shows up in the alert dialog is the text "bar". Naturally, meaningful classes are a little more complex than this, but this demonstrates the basics.
 
-	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as `non-inheritable statics`), and set-get properties registered on the superclass using the =registerProperties= static method. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.
+	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as `non-inheritable statics`), and state properties registered on the superclass using the =registerProperties= static method. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.
 
 Fleshing Out a Subclass
-	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties.
+	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and registering state properties or overriding the initial values of inherited state properties.
 
 	Adding Instance Methods and Properties
 		Adding instance methods and properties to a subclass involves assigning properties on the subclass' prototype object.
@@ -64,13 +64,13 @@ Fleshing Out a Subclass
 
 		In the UIZE JavaScript Framework, static methods and properties assigned on a class are copied to a subclass when creating that subclass (unless they are registered as `non-inheritable statics`). After a subclass is created, modifying the static methods and properties of the superclass has no effect on that subclass.
 
-	Adding Set-get Properties
-		You can register one or more set-get properties for a subclass, using the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class.
+	Adding State Properties
+		You can register one or more state properties for a subclass, using the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class.
 
 		EXAMPLE
 		.................................................................................
 		var MyClass = Uize.Class.subclass ();  // create a class
-		MyClass.registerProperties ({          // register one or more set-get properties
+		MyClass.registerProperties ({          // register one or more state properties
 			_mySetGetProperty:{
 				name:'mySetGetProperty',
 				onChange:function () {
@@ -81,13 +81,13 @@ Fleshing Out a Subclass
 		});
 		.................................................................................
 
-		Inheriting Set-get Properties
-			Set-get properties registered for a class are inherited when creating a subclass.
+		Inheriting State Properties
+			State properties registered for a class are inherited when creating a subclass.
 
 			EXAMPLE
 			.............................................................................
 			var MyClass = Uize.Class.subclass ();  // create a class
-			MyClass.registerProperties ({          // register the "foo" set-get property
+			MyClass.registerProperties ({          // register the "foo" state property
 				_foo:{
 					name:'foo',
 					onChange:function () {
@@ -98,7 +98,7 @@ Fleshing Out a Subclass
 			});
 
 			var MySubclass = MyClass.subclass (); // create a subclass
-			MySubclass.registerProperties ({      // register the "bar" set-get property
+			MySubclass.registerProperties ({      // register the "bar" state property
 				_bar:{
 					name:'bar',
 					onChange:function () {
@@ -109,7 +109,7 @@ Fleshing Out a Subclass
 			});
 			.............................................................................
 
-			After the above code has executed, the class =MySubclass= will have the two set-get properties =foo= and =bar=.
+			After the above code has executed, the class =MySubclass= will have the two state properties =foo= and =bar=.
 
 Overriding a Superclass
 	Overriding Instance Methods and Properties
@@ -230,15 +230,15 @@ Overriding a Superclass
 
 				In this example, =MyClass= implements the two static methods =MyClass.myStaticMethod= and =MyClass.myOtherStaticMethod=. The implementation of =MyClass.myStaticMethod= wants to always call the subclass' version of =myOtherStaticMethod=. So, instead of calling it as =MyClass.myOtherStaticMethod ()=, it calls it as =this.myOtherStaticMethod ()=. If =myStaticMethod= is called on =MyClass=, then =this= will be a reference to =MyClass=. However, if =myStaticMethod= is called on =MySubclass=, then =this= will be a reference to =MySubclass=. Consequently, using =this= guarantees that the subclass' version will be called. In this example, =MySubclass= overrides the implementation of =myOtherStaticMethod= inherited from =MyClass=, so the statement =MySubclass.myStaticMethod ()= will result in the text "MySubclass" being displayed in the alert dialog - *not* the text "MyClass".
 
-	Overriding Set-get Property Values
-		The initial value for a set-get property inherited from a superclass can be overrided by calling the =MyClass.set= static method that is inherited from the =Uize.Class= base class.
+	Overriding State Property Values
+		The initial value for a state property inherited from a superclass can be overrided by calling the =MyClass.set= static method that is inherited from the =Uize.Class= base class.
 
-		The initial value for a set-get property is registered by specifying the =value= property in the profile for the set-get property, as follows...
+		The initial value for a state property is registered by specifying the =value= property in the profile for the state property, as follows...
 
 		EXAMPLE
 		...........................................................................
 		var MyClass = Uize.Class.subclass ();  // create a class
-		MyClass.registerProperties ({          // register the foo set-get property
+		MyClass.registerProperties ({          // register the foo state property
 			_foo:{
 				name:'foo',
 				onChange:function () {
@@ -249,17 +249,17 @@ Overriding a Superclass
 		});
 
 		var _myClassInstance = new MyClass;    // create instance of MyClass
-		alert (_myClassInstance.get ('foo'));  // alert value of foo set-get property
+		alert (_myClassInstance.get ('foo'));  // alert value of foo state property
 		.............................................................................
 
 		In the above example, the text "bar" will be displayed in the alert dialog.
 
-		Now, the initial value for the =foo= set-get property inherited from =MyClass= can be overrided in a subclass, as follows...
+		Now, the initial value for the =foo= state property inherited from =MyClass= can be overrided in a subclass, as follows...
 
 		EXAMPLE
 		.................................................................................
 		var MyClass = Uize.Class.subclass ();      // create a class
-		MyClass.registerProperties ({              // register the foo set-get property
+		MyClass.registerProperties ({              // register the foo state property
 			_foo:{
 				name:'foo',
 				onChange:function () {
@@ -273,10 +273,10 @@ Overriding a Superclass
 		MySubclass.set ({foo:'NOT BAR'});          // override initial value for foo
 
 		var _mySubclassInstance = new MySubclass;  // create instance of MySubclass
-		alert (_mySubclassInstance.get ('foo'));   // alert value of foo set-get property
+		alert (_mySubclassInstance.get ('foo'));   // alert value of foo state property
 		.................................................................................
 
-		In this example, we have now created a subclass of =MyClass= named =MySubclass=. The new subclass inherits the =foo= set-get property, along with its initial value of ='bar'= that is registered in =MyClass=. The =MySubclass.set= static method is then used to change the initial value of this set-get property to ='NOT BAR'=. Now, the fresh instance of =MySubclass= that is created, named =_mySubclassInstance=, will have the initial value ='NOT BAR'= for its =foo= set-get property, and the alert dialog will display this text.
+		In this example, we have now created a subclass of =MyClass= named =MySubclass=. The new subclass inherits the =foo= state property, along with its initial value of ='bar'= that is registered in =MyClass=. The =MySubclass.set= static method is then used to change the initial value of this state property to ='NOT BAR'=. Now, the fresh instance of =MySubclass= that is created, named =_mySubclassInstance=, will have the initial value ='NOT BAR'= for its =foo= state property, and the alert dialog will display this text.
 
 Private vs. Public
 	By convention, private methods and properties - both instance and static - are distinguished from public methods and properties by prefixing their names with an underscore.
@@ -391,10 +391,10 @@ Non-inheritable Statics
 		The inheritability of the static features of a module is noted in the IMPLEMENTATION INFO notes of the reference documentation for the features in the module's reference. So, for example, if you went to the reference documentation for the =Uize.Class.set= static method of the =Uize.Class= base class, you would see it noted that the feature is inherited by subclasses. In contrast, if you went to the reference documentation for the =Uize.Fade.blendValues= static method of the =Uize.Fade= class, you would see it noted that the feature is *not* inherited by subclasses.
 
 Phases of Construction
-	When an instance of a UIZE class is created, construction involves three phases: the =alphastructor= phase, the set-get property initialization phase, and the =omegastructor= phase.
+	When an instance of a UIZE class is created, construction involves three phases: the =alphastructor= phase, the state property initialization phase, and the =omegastructor= phase.
 
 	alphastructor
-		The alphastructor is a function that is executed before the set-get properties for an instance are initialized, and before the =omegastructor= function is executed.
+		The alphastructor is a function that is executed before the state properties for an instance are initialized, and before the =omegastructor= function is executed.
 
 		An alphastructor is registered by specifying a value for the first parameter when calling the =subclass= static method on the superclass.
 
@@ -407,9 +407,9 @@ Phases of Construction
 		);
 		...................................
 
-		Code inside the alphastructor can set up private "scaffolding" type properties that need to be already in existence by the time any of the set-get properties are initialized. This allows =onChange= handlers for the set-get properties to count on certain foundation having been built.
+		Code inside the alphastructor can set up private "scaffolding" type properties that need to be already in existence by the time any of the state properties are initialized. This allows =onChange= handlers for the state properties to count on certain foundation having been built.
 
-		Because of when it is executed, code inside the alphastructor function cannot rely on the instance's set-get properties being initialized to the values passed to the constructor.
+		Because of when it is executed, code inside the alphastructor function cannot rely on the instance's state properties being initialized to the values passed to the constructor.
 
 		EXAMPLE
 		......................................
@@ -423,10 +423,10 @@ Phases of Construction
 		;
 		......................................
 
-		In this example, when the new instance of =MyClass= is created with the value ='bar'= specified for its =foo= set-get property, the alert inside the alphastructor will display the value =undefined=. This is by design and is an important nuance to take note of.
+		In this example, when the new instance of =MyClass= is created with the value ='bar'= specified for its =foo= state property, the alert inside the alphastructor will display the value =undefined=. This is by design and is an important nuance to take note of.
 
 	omegastructor
-		The =omegastructor= is a function that is executed after the =alphastructor= function is executed, and after the set-get properties for an instance are initialized.
+		The =omegastructor= is a function that is executed after the =alphastructor= function is executed, and after the state properties for an instance are initialized.
 
 Dissecting a Subclass Module
 	An Example
@@ -536,11 +536,11 @@ Dissecting a Subclass Module
 		};
 		.....................................
 
-		...or when registering set-get properties, as in...
+		...or when registering state properties, as in...
 
 		.........................................
 		_class.registerProperties ({
-			// profiles for the set-get properties
+			// profiles for the state properties
 		});
 		.........................................
 
@@ -598,10 +598,10 @@ Dissecting a Subclass Module
 
 		For a more in-depth discussion, see the section `Non-inheritable Statics`.
 
-	Registering Set-get Properties
-		Set-get properties are registered for a class by calling the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class.
+	Registering State Properties
+		State properties are registered for a class by calling the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class.
 
-		The =MyClass.registerProperties= static method lets you register one or more set-get properties in a single call to the method. The single parameter that the =MyClass.registerProperties= static method takes is an object containing profiles for all the set-get properties being registered, where each key is the private name for a set-get property, and where each value is either the public name - or an object providing a complete profile - for the set-get property.
+		The =MyClass.registerProperties= static method lets you register one or more state properties in a single call to the method. The single parameter that the =MyClass.registerProperties= static method takes is an object containing profiles for all the state properties being registered, where each key is the private name for a state property, and where each value is either the public name - or an object providing a complete profile - for the state property.
 
 		EXAMPLE
 		.............................................................................
@@ -617,7 +617,7 @@ Dissecting a Subclass Module
 		});
 		.............................................................................
 
-		In the above example, the set-get property with the public name =property1= is being mapped to the private identifier =_property1=. It is not technically necessary that the private name be the public name prefixed with an underscore - this is simply a convention that is followed. Because no object is used to specify the profile for this set-get property, there is no =onChange= handler registered, and the initial value is =undefined=. By contrast, the =property2= set-get property is registered with a profile object that specifies an =onChange= handler function and an initial value of =0=.
+		In the above example, the state property with the public name =property1= is being mapped to the private identifier =_property1=. It is not technically necessary that the private name be the public name prefixed with an underscore - this is simply a convention that is followed. Because no object is used to specify the profile for this state property, there is no =onChange= handler registered, and the initial value is =undefined=. By contrast, the =property2= state property is registered with a profile object that specifies an =onChange= handler function and an initial value of =0=.
 
 Singletons
 	The UIZE JavaScript Framework provides support for [[http://en.wikipedia.org/wiki/Singleton_pattern][singletons]] in the form of the =Uize.Class.singleton= static method that is implemented in the =Uize.Class= base class and is inherited by all =Uize.Class= subclasses.
@@ -726,16 +726,16 @@ Singletons
 
 			Public Static Properties
 
-			Set-get Properties
+			State Properties
 
 ### OTHER NOTES
 	Adding Handlers for Instance Events on Self
 		instance event is fired in superclass' implementation
 
-	Adding Handlers for Set-get Property Changed Events on Self
-		set-get property is registered by superclass
+	Adding Handlers for State Property Changed Events on Self
+		state property is registered by superclass
 
-	Accessing Set-get Properties From Subclass
+	Accessing State Properties From Subclass
 
 	- don't expose purely static methods as instance methods just for convenience
 		example

@@ -54,12 +54,12 @@
 					<li><a href="#3_2" title="An optional node (of any type) that will be displayed when the high resolution mag image is loading and then hidden once it has completed loading.">3.2. highResLoading</a></li>
 					<li><a href="#3_3" title="A div node that is sized and positioned as the user mouses over the main image and that serves to highlight the region of the image that will appear magnified in the mag image port.">3.3. highlight</a></li>
 					<li><a href="#3_4" title="A node that is used to display the main image. This node should be contained inside and should exactly occupy the space in the root node. The node can be either a IMG node, or a DIV node with CSS background set to the image URL.">3.4. image</a></li>
-					<li><a href="#3_5" title="An image node whose src will be set to the value of the magImageHighResUrl set-get property when the mag view mode is activated.">3.5. magImageHighRes</a></li>
+					<li><a href="#3_5" title="An image node whose src will be set to the value of the magImageHighResUrl state property when the mag view mode is activated.">3.5. magImageHighRes</a></li>
 					<li><a href="#3_6" title="An image node whose src will be set to the src of the image being magnified, but that will be scaled up to provide a placeholder for the high resolution mag image while it is still loading in.">3.6. magImageLowRes</a></li>
 					<li><a href="#3_7" title="A node (of any type, but likely a DIV) that serves as a container for the magnified view&apos;s image port, and that is displayed when the user mouses over the main image and is hidden when the user mouses out of the main image.">3.7. magImagePortShell</a></li>
 				</ul>
 			</li>
-			<li><a href="#4">4. Set-get Properties</a>
+			<li><a href="#4">4. State Properties</a>
 				<ul>
 					<li><a href="#4_1" title="Inherited from Uize.Widget.">4.1. built</a></li>
 					<li><a href="#4_2" title="Inherited from Uize.Widget.">4.2. busy</a></li>
@@ -206,7 +206,7 @@
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#4_6">cursorAlignX</a></code> | <code><a href="#4_7">cursorAlignY</a></code> | <code><a href="#4_15">magImageHighResUrl</a></code> | <code><a href="#4_16">magImageLowResUrl</a></code> | <code><a href="#4_17">magPower</a></code> | <code><a href="#4_18">magPowers</a></code> | <code><a href="#4_21">resetMagPowerOnOut</a></code> | <code><a href="#4_22">showBeam</a></code></p>
 			</div>
@@ -242,7 +242,7 @@
 				
 				<p><code><a href="#6_1">showConfirm</a></code> | <code><a href="#6_2">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#4_1">built</a></code> | <code><a href="#4_2">busy</a></code> | <code><a href="#4_3">busyInherited</a></code> | <code><a href="#4_4">children</a></code> | <code><a href="#4_5">container</a></code> | <code><a href="#4_8">enabled</a></code> | <code><a href="#4_9">enabledInherited</a></code> | <code><a href="#4_10">html</a></code> | <code><a href="#4_11">idPrefix</a></code> | <code><a href="#4_12">idPrefixConstruction</a></code> | <code><a href="#4_13">insertionMode</a></code> | <code><a href="#4_14">localized</a></code> | <code><a href="#4_19">name</a></code> | <code><a href="#4_20">nodeMap</a></code> | <code><a href="#4_23">wired</a></code></p>
 				
@@ -335,7 +335,7 @@
 		<a name="3_5"></a>
 		<h2 class="heading2" title="3. Implied Nodes -&gt; 3.5. magImageHighRes"><span class="headingNumber"><a href="#3" title="3. Implied Nodes">3</a>.<a href="#3_5" title="3. Implied Nodes -&gt; 3.5. magImageHighRes">5</a>. </span>magImageHighRes</h2>
 		<div class="contents2">
-			<p>An image node whose src will be set to the value of the <code><a href="#4_15">magImageHighResUrl</a></code> set-get property when the mag view mode is activated.</p>
+			<p>An image node whose src will be set to the value of the <code><a href="#4_15">magImageHighResUrl</a></code> state property when the mag view mode is activated.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -370,10 +370,10 @@
 	</div>
 	
 	<a name="4"></a>
-	<h1 class="heading1" title="4. Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="4. State Properties"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="4_1"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.1. built"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_1" title="4. Set-get Properties -&gt; 4.1. built">1</a>. </span>built</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.1. built"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_1" title="4. State Properties -&gt; 4.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -385,7 +385,7 @@
 		</div>
 		
 		<a name="4_2"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.2. busy"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_2" title="4. Set-get Properties -&gt; 4.2. busy">2</a>. </span>busy</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.2. busy"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_2" title="4. State Properties -&gt; 4.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -397,7 +397,7 @@
 		</div>
 		
 		<a name="4_3"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.3. busyInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_3" title="4. Set-get Properties -&gt; 4.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.3. busyInherited"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_3" title="4. State Properties -&gt; 4.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -409,7 +409,7 @@
 		</div>
 		
 		<a name="4_4"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.4. children"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_4" title="4. Set-get Properties -&gt; 4.4. children">4</a>. </span>children</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.4. children"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_4" title="4. State Properties -&gt; 4.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -421,7 +421,7 @@
 		</div>
 		
 		<a name="4_5"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. container">5</a>. </span>container</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.5. container"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_5" title="4. State Properties -&gt; 4.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -433,7 +433,7 @@
 		</div>
 		
 		<a name="4_6"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. cursorAlignX"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. cursorAlignX">6</a>. </span>cursorAlignX</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.6. cursorAlignX"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_6" title="4. State Properties -&gt; 4.6. cursorAlignX">6</a>. </span>cursorAlignX</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the horizontal position of the cursor in relation to the <code><a href="#3_3">highlight</a></code> box.</p>
 			
@@ -452,7 +452,7 @@
 		</div>
 		
 		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. cursorAlignY"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. cursorAlignY">7</a>. </span>cursorAlignY</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.7. cursorAlignY"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_7" title="4. State Properties -&gt; 4.7. cursorAlignY">7</a>. </span>cursorAlignY</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the vertical position of the cursor in relation to the <code><a href="#3_3">highlight</a></code> box.</p>
 			
@@ -471,7 +471,7 @@
 		</div>
 		
 		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. enabled">8</a>. </span>enabled</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.8. enabled"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_8" title="4. State Properties -&gt; 4.8. enabled">8</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -483,7 +483,7 @@
 		</div>
 		
 		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. enabledInherited">9</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.9. enabledInherited"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_9" title="4. State Properties -&gt; 4.9. enabledInherited">9</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -495,7 +495,7 @@
 		</div>
 		
 		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. html">10</a>. </span>html</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.10. html"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_10" title="4. State Properties -&gt; 4.10. html">10</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -507,7 +507,7 @@
 		</div>
 		
 		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. idPrefix">11</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.11. idPrefix"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_11" title="4. State Properties -&gt; 4.11. idPrefix">11</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -519,7 +519,7 @@
 		</div>
 		
 		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. idPrefixConstruction">12</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.12. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_12" title="4. State Properties -&gt; 4.12. idPrefixConstruction">12</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -531,7 +531,7 @@
 		</div>
 		
 		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. insertionMode">13</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.13. insertionMode"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_13" title="4. State Properties -&gt; 4.13. insertionMode">13</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -543,7 +543,7 @@
 		</div>
 		
 		<a name="4_14"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. localized">14</a>. </span>localized</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.14. localized"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. localized">14</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -555,7 +555,7 @@
 		</div>
 		
 		<a name="4_15"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. magImageHighResUrl"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. magImageHighResUrl">15</a>. </span>magImageHighResUrl</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.15. magImageHighResUrl"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. magImageHighResUrl">15</a>. </span>magImageHighResUrl</h2>
 		<div class="contents2">
 			<p>A string, specifying the URL of the high resolution image, or a function that should return the URL of the high resolution image.</p>
 			
@@ -572,7 +572,7 @@
 		</div>
 		
 		<a name="4_16"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. magImageLowResUrl"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. magImageLowResUrl">16</a>. </span>magImageLowResUrl</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.16. magImageLowResUrl"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_16" title="4. State Properties -&gt; 4.16. magImageLowResUrl">16</a>. </span>magImageLowResUrl</h2>
 		<div class="contents2">
 			<p>A string, specifying the URL for the low resolution image.</p>
 			
@@ -589,7 +589,7 @@
 		</div>
 		
 		<a name="4_17"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. magPower"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. magPower">17</a>. </span>magPower</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.17. magPower"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_17" title="4. State Properties -&gt; 4.17. magPower">17</a>. </span>magPower</h2>
 		<div class="contents2">
 			<p>A number, specifying the current magnification power.</p>
 			
@@ -606,7 +606,7 @@
 		</div>
 		
 		<a name="4_18"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. magPowers"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. magPowers">18</a>. </span>magPowers</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.18. magPowers"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_18" title="4. State Properties -&gt; 4.18. magPowers">18</a>. </span>magPowers</h2>
 		<div class="contents2">
 			<p>An array, specifying the magnification powers that should be available.</p>
 			
@@ -623,7 +623,7 @@
 		</div>
 		
 		<a name="4_19"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. name">19</a>. </span>name</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.19. name"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_19" title="4. State Properties -&gt; 4.19. name">19</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -635,7 +635,7 @@
 		</div>
 		
 		<a name="4_20"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. nodeMap">20</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.20. nodeMap"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_20" title="4. State Properties -&gt; 4.20. nodeMap">20</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -647,7 +647,7 @@
 		</div>
 		
 		<a name="4_21"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. resetMagPowerOnOut"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. resetMagPowerOnOut">21</a>. </span>resetMagPowerOnOut</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.21. resetMagPowerOnOut"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_21" title="4. State Properties -&gt; 4.21. resetMagPowerOnOut">21</a>. </span>resetMagPowerOnOut</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not the current magnification power should be reset to the lowest available magnification power when the user mouses out of the image.</p>
 			
@@ -664,7 +664,7 @@
 		</div>
 		
 		<a name="4_22"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. showBeam"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. showBeam">22</a>. </span>showBeam</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.22. showBeam"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_22" title="4. State Properties -&gt; 4.22. showBeam">22</a>. </span>showBeam</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -674,7 +674,7 @@
 		</div>
 		
 		<a name="4_23"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.23. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_23" title="4. Set-get Properties -&gt; 4.23. wired">23</a>. </span>wired</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.23. wired"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_23" title="4. State Properties -&gt; 4.23. wired">23</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

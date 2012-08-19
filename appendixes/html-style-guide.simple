@@ -27,7 +27,7 @@ Introduction
 		- same-named private class and instance properties and methods when in non-scrunched mode (unanticipated namespace non-collisions)
 		- class and subclass sharing the same namespace prefix when scrunched (unanticipated namespace collisions)
 
-	- internal access to set-get properties
+	- internal access to state properties
 		- use of internal names in set method (eg. this.set ({_myProperty:'myValue'}) )
 
 HTML

@@ -1,4 +1,4 @@
-The =toString Intrinsic Method= that is implemented in the =Uize= base class has been improved to better support package modules and also to do a better job of representing set-get property values that are class or package references when producing summaries for instances or classes.
+The =toString Intrinsic Method= that is implemented in the =Uize= base class has been improved to better support package modules and also to do a better job of representing state property values that are class or package references when producing summaries for instances or classes.
 
 Support for Package Modules
 	The =toString Intrinsic Method= now is implemented for package modules that are declared using the =Uize.module= static method.
@@ -21,7 +21,7 @@ Support for Package Modules
 	...................
 
 Better Summaries for Instances and Classes
-	The =toString Intrinsic Method= now does a better job of representing set-get property values that are class or package references when producing summaries for instances or classes.
+	The =toString Intrinsic Method= now does a better job of representing state property values that are class or package references when producing summaries for instances or classes.
 
 	EXAMPLE
 	.........................

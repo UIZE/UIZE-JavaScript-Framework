@@ -181,30 +181,30 @@
 						</ul>
 					</li>
 					<li><a href="#3_2" title="SYNTAX">3.2. Properties Expressions</a></li>
-					<li><a href="#3_3" title="A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.">3.3. Derived Properties</a>
+					<li><a href="#3_3" title="A derived property is a special type of state property whose value is derived from the values of other state properties of the same instance.">3.3. Derived Properties</a>
 						<ul>
 							<li><a href="#3_3_1">3.3.1. Implementation Questions</a>
 								<ul>
-									<li><a href="#3_3_1_1" title="Currently, profiles for set-get properties are inherited through cloning of the definition objects.">3.3.1.1. How Are Derived Properties Inherited</a></li>
+									<li><a href="#3_3_1_1" title="Currently, profiles for state properties are inherited through cloning of the definition objects.">3.3.1.1. How Are Derived Properties Inherited</a></li>
 								</ul>
 							</li>
 							<li><a href="#3_3_2">3.3.2. Implementation Approaches</a>
 								<ul>
-									<li><a href="#3_3_2_1" title="With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.">3.3.2.1. Exploding Out the Properties Being Set</a>
+									<li><a href="#3_3_2_1" title="With this approach, setting values for derived state properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.">3.3.2.1. Exploding Out the Properties Being Set</a>
 										<ul>
 											<li><a href="#3_3_2_1_1" title="document...">3.3.2.1.1. Advantages</a></li>
 											<li><a href="#3_3_2_1_2" title="document...">3.3.2.1.2. Disadvantages</a></li>
 										</ul>
 									</li>
-									<li><a href="#3_3_2_2" title="With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before onChange handlers are executed for the set-get properties being explicitly set.">3.3.2.2. Single Level Derived Property Batching</a></li>
-									<li><a href="#3_3_2_3" title="With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.">3.3.2.3. Using onChange Handler Mechanism</a>
+									<li><a href="#3_3_2_2" title="With this approach, values for all directly affected derived state properties are set in a batch set that occurs before onChange handlers are executed for the state properties being explicitly set.">3.3.2.2. Single Level Derived Property Batching</a></li>
+									<li><a href="#3_3_2_3" title="With this approach, when a derived state property is registed, an onChange handler is registered with any property from which the derived property is derived.">3.3.2.3. Using onChange Handler Mechanism</a>
 										<ul>
 											<li><a href="#3_3_2_3_1" title="- uses the existing optimization built into the onChange handlers mechanism">3.3.2.3.1. Advantages</a></li>
-											<li><a href="#3_3_2_3_2" title="- involves a separate set for each derived set-get property whose value changes">3.3.2.3.2. Disadvantages</a></li>
+											<li><a href="#3_3_2_3_2" title="- involves a separate set for each derived state property whose value changes">3.3.2.3.2. Disadvantages</a></li>
 											<li><a href="#3_3_2_3_3">3.3.2.3.3. Issues to Deal With</a>
 												<ul>
-													<li><a href="#3_3_2_3_3_1" title="How does one deal with re-registering a set-get property that affects a derived set-get property?">3.3.2.3.3.1. Re-registering a Non-derived Set-get Property</a></li>
-													<li><a href="#3_3_2_3_3_2" title="How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?">3.3.2.3.3.2. Re-registering a Derived Set-get Property</a></li>
+													<li><a href="#3_3_2_3_3_1" title="How does one deal with re-registering a state property that affects a derived state property?">3.3.2.3.3.1. Re-registering a Non-derived State Property</a></li>
+													<li><a href="#3_3_2_3_3_2" title="How does one deal with re-registering a derived state property, where the new profile for the derived property defines a different relationship properties from which it is derived?">3.3.2.3.3.2. Re-registering a Derived State Property</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -213,8 +213,8 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#3_4" title="Provide a way in the Uize.Class base class to bind two set-get properties together, in order to keep their values synchronized.">3.4. Property Bindings</a></li>
-					<li><a href="#3_5" title="Copy ability, for initial values of set-get properties that are arrays or objects.">3.5. Copy Ability for Set-get Properties</a></li>
+					<li><a href="#3_4" title="Provide a way in the Uize.Class base class to bind two state properties together, in order to keep their values synchronized.">3.4. Property Bindings</a></li>
+					<li><a href="#3_5" title="Copy ability, for initial values of state properties that are arrays or objects.">3.5. Copy Ability for State Properties</a></li>
 					<li><a href="#3_6" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">3.6. Handle Simple Type in Place of Constructor Properties</a></li>
 					<li><a href="#3_7">3.7. Improvements to Property Mechanism</a>
 						<ul>
@@ -439,7 +439,7 @@
 						</ul>
 					</li>
 					<li><a href="#20_4" title="- nested inline formatting">20.4. - formatting issues</a></li>
-					<li><a href="#20_5" title="- no way to disambiguate for intra-document linking purposes when an instance method and a set-get property have the same name (happens with wired in doc for Uize.Widget, for example)">20.5. Problems</a></li>
+					<li><a href="#20_5" title="- no way to disambiguate for intra-document linking purposes when an instance method and a state property have the same name (happens with wired in doc for Uize.Widget, for example)">20.5. Problems</a></li>
 				</ul>
 			</li>
 			<li><a href="#21">21. Uize.Doc.Sucker</a>
@@ -491,20 +491,20 @@
 			<li><a href="#27" title="- extends support for box-radius CSS3 style property">27. Uize.Fx.xBoxRadius</a></li>
 			<li><a href="#28">28. Uize.Generator</a>
 				<ul>
-					<li><a href="#28_1" title="- you have a set of display properties (set-get properties that are reflected in the UI)">28.1. - from the widget's perspective as a user of generators</a>
+					<li><a href="#28_1" title="- you have a set of display properties (state properties that are reflected in the UI)">28.1. - from the widget's perspective as a user of generators</a>
 						<ul>
-							<li><a href="#28_1_1">28.1.1. - a widget class should be able to register which of its set-get properties affect display</a>
+							<li><a href="#28_1_1">28.1.1. - a widget class should be able to register which of its state properties affect display</a>
 								<ul>
-									<li><a href="#28_1_1_1" title="- which are updated by the client code">28.1.1.1. - of the set-get properties that affect display...</a></li>
+									<li><a href="#28_1_1_1" title="- which are updated by the client code">28.1.1.1. - of the state properties that affect display...</a></li>
 								</ul>
 							</li>
-							<li><a href="#28_1_2" title="- string, being a template into which a limited set of params are substituted">28.1.2. - html set-get property</a></li>
+							<li><a href="#28_1_2" title="- string, being a template into which a limited set of params are substituted">28.1.2. - html state property</a></li>
 						</ul>
 					</li>
 					<li><a href="#28_2" title="- a generator should be able to leverage or depend on other code modules, so it should be declared with a module declaration">28.2. - generator principles</a></li>
 					<li><a href="#28_3">28.3. Uize.Generator implements simply...</a>
 						<ul>
-							<li><a href="#28_3_1" title="- asynchronous">28.3.1. - set-get properties</a></li>
+							<li><a href="#28_3_1" title="- asynchronous">28.3.1. - state properties</a></li>
 							<li><a href="#28_3_2" title="- result can be a string, or an object of which text is a property">28.3.2. - getOutput (params,callback)</a></li>
 						</ul>
 					</li>
@@ -756,9 +756,9 @@
 					<li><a href="#42_3" title="- multi return value templates (blocks that can assign output to specific output property)">42.3. - for templates...</a></li>
 				</ul>
 			</li>
-			<li><a href="#43" title="- expectInstanceState (set-get properties values)">43. Uize.Test</a>
+			<li><a href="#43" title="- expectInstanceState (state properties values)">43. Uize.Test</a>
 				<ul>
-					<li><a href="#43_1" title="- breathe: an amount of time that the test runner should pause after completion of a test">43.1. - new set-get properties</a></li>
+					<li><a href="#43_1" title="- breathe: an amount of time that the test runner should pause after completion of a test">43.1. - new state properties</a></li>
 				</ul>
 			</li>
 			<li><a href="#44" title="- refactor tomkidding.com to no longer use Tk.Url">44. Uize.Url</a></li>
@@ -802,7 +802,7 @@
 					<li><a href="#50_4" title="- what would the impact of this change be?">50.4. - should wired be set to true only after wiring of child widgets?</a></li>
 					<li><a href="#50_5" title="- returns the name of an implied node, deduced from its id (implied node doesn&apos;t have to exist in the DOM)">50.5. - getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)</a></li>
 					<li><a href="#50_6" title="- returns the id of an implied node, built from its name (implied node doesn&apos;t have to exist in the DOM)">50.6. - getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)</a></li>
-					<li><a href="#50_7" title="- the connection is bi-directional (changing the child widget&apos;s value or node&apos;s value updates set-get property, and changing set-get property value updates child widget&apos;s or node&apos;s value)">50.7. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node</a></li>
+					<li><a href="#50_7" title="- the connection is bi-directional (changing the child widget&apos;s value or node&apos;s value updates state property, and changing state property value updates child widget&apos;s or node&apos;s value)">50.7. - a way of easily binding any state property to either a child widget (or any widget) or an implied node</a></li>
 					<li><a href="#50_8" title="- a general mechanism for widgets to have reasons registered for why they are disabled. Then, a tooltip could display this reason (or reasons) on mousing over the widget, or a dialog with the reason (or reasons) could be displayed when trying to interact with the widget (eg. clicking or mousing down on it)">50.8. - disabled reason mechanism</a></li>
 					<li><a href="#50_9">50.9. - node cache improvements</a>
 						<ul>
@@ -936,7 +936,7 @@
 					<li><a href="#71_4" title="- make sure various events are fired">71.4. - for changes in resizer position and sizing...</a></li>
 					<li><a href="#71_5" title="- when drag starts, must pick up coordinates from area node, so that window can be moved in other ways">71.5. - Uize.Widget.Resizer refactoring</a></li>
 					<li><a href="#71_6" title="when clicking a button indirectly results in a dialog being launched... or if the dialog is deferred loaded and shown is set to true long after the click happens, how does the dialog know that it was launched from a button click, or wasn&apos;t launched programmatically? Or from a mouseover event?">71.6. - positioning on click event</a></li>
-					<li><a href="#71_7" title="and perhaps defaultOkText and defaultCancelText? Either way, localization of default strings should be able to occur inside the widget module, rather than being defaulted in Uize.Widget.Page where the code to show the confirm dialog is">71.7. - support for okText and cancelText set-get properties</a></li>
+					<li><a href="#71_7" title="and perhaps defaultOkText and defaultCancelText? Either way, localization of default strings should be able to occur inside the widget module, rather than being defaulted in Uize.Widget.Page where the code to show the confirm dialog is">71.7. - support for okText and cancelText state properties</a></li>
 					<li><a href="#71_8" title="- implement support for fading to reveal and fading to hide">71.8. refactor Uize.Widget.Dialog in the following ways...</a></li>
 				</ul>
 			</li>
@@ -962,7 +962,7 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#77" title="- it should be possible to cancel drag programmatically during drag, just by setting the dragCancelled set-get property to true">77. Uize.Widget.Drag</a></li>
+			<li><a href="#77" title="- it should be possible to cancel drag programmatically during drag, just by setting the dragCancelled state property to true">77. Uize.Widget.Drag</a></li>
 			<li><a href="#78" title="Wires up a node that is being cropped by a containing node so that it automatically drifts inside its containing node in order to reveal over time all of its contents. Motion may involve some arbitrary angle and bouncing at edges, with slight randomization of reflection angle on bouncing to avoid too repetitive of an animation path.">78. Uize.Widget.Drift</a></li>
 			<li><a href="#79" title="- a module to provide a folding mechanism for any document">79. Uize.Widget.Folding</a></li>
 			<li><a href="#80">80. Uize.Widget.Form</a>
@@ -1025,7 +1025,7 @@
 			</li>
 			<li><a href="#88" title="- must allow validation ability (for things like domains and such)">88. Uize.Widget.ListEditor</a>
 				<ul>
-					<li><a href="#88_1" title="- in such cases, one may wish for performance sake to maintain a hash of values and cached conformed state, that gets flushed whenever the itemConformer is changed">88.1. - possibly have a conformer for the list set-get property that applies the item conformer to all the items</a></li>
+					<li><a href="#88_1" title="- in such cases, one may wish for performance sake to maintain a hash of values and cached conformed state, that gets flushed whenever the itemConformer is changed">88.1. - possibly have a conformer for the list state property that applies the item conformer to all the items</a></li>
 				</ul>
 			</li>
 			<li><a href="#89">89. Uize.Widget.Log</a>
@@ -1099,7 +1099,7 @@
 					<li><a href="#99_1" title="- deal with where jiggler should go">99.1. - SUBCLASSING</a></li>
 				</ul>
 			</li>
-			<li><a href="#100" title="- &apos;Position Changed&apos; event should be fired whenever the position is changed, even if it&apos;s through the set-get property interface (make sure this won&apos;t mess up any code -- especially Zazzle DT)">100. Uize.Widget.Resizer.Marquee</a>
+			<li><a href="#100" title="- &apos;Position Changed&apos; event should be fired whenever the position is changed, even if it&apos;s through the state property interface (make sure this won&apos;t mess up any code -- especially Zazzle DT)">100. Uize.Widget.Resizer.Marquee</a>
 				<ul>
 					<li><a href="#100_1" title="- consider optional tooltip feature to indicate dimensions when mousing over move node">100.1. - ideas</a></li>
 				</ul>
@@ -2371,7 +2371,7 @@ myWidget.onNext(
 		<a name="3_3"></a>
 		<h2 class="heading2" title="3. Uize.Class -&gt; 3.3. Derived Properties"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>. </span>Derived Properties</h2>
 		<div class="contents2">
-			<p>A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.</p>
+			<p>A derived property is a special type of state property whose value is derived from the values of other state properties of the same instance.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -2400,7 +2400,7 @@ myWidget.onNext(
 });
 </pre>
 			
-			<p>In the above example, the <code>allSelected</code>, <code>oneSelected</code>, and <code>someSelected</code> set-get properties are all derived properties. A set-get property is indicated as being a derived property by the presence of the <code>derived</code> property in the property profile. The <code>derived</code> property serves both to indicate that a set-get property is derived, as well to provide the deriver function that indicates from which other set-get properties the derived property is derived and how to calculate the derived value.</p>
+			<p>In the above example, the <code>allSelected</code>, <code>oneSelected</code>, and <code>someSelected</code> state properties are all derived properties. A state property is indicated as being a derived property by the presence of the <code>derived</code> property in the property profile. The <code>derived</code> property serves both to indicate that a state property is derived, as well to provide the deriver function that indicates from which other state properties the derived property is derived and how to calculate the derived value.</p>
 			
 			<a name="3_3_1"></a>
 			<h3 class="heading3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.1. Implementation Questions"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.1. Implementation Questions">1</a>. </span>Implementation Questions</h3>
@@ -2408,7 +2408,7 @@ myWidget.onNext(
 				<a name="3_3_1_1"></a>
 				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.1. Implementation Questions -&gt; 3.3.1.1. How Are Derived Properties Inherited"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.1. Implementation Questions">1</a>.<a href="#3_3_1_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.1. Implementation Questions -&gt; 3.3.1.1. How Are Derived Properties Inherited">1</a>. </span>How Are Derived Properties Inherited</h4>
 				<div class="contents4">
-					<p>Currently, profiles for set-get properties are inherited through cloning of the definition objects.</p>
+					<p>Currently, profiles for state properties are inherited through cloning of the definition objects.</p>
 					
 					<p>If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.</p>
 				</div>
@@ -2420,9 +2420,9 @@ myWidget.onNext(
 				<a name="3_3_2_1"></a>
 				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set">1</a>. </span>Exploding Out the Properties Being Set</h4>
 				<div class="contents4">
-					<p>With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.</p>
+					<p>With this approach, setting values for derived state properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.</p>
 					
-					<p>After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties <b>are</b> affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.</p>
+					<p>After setting values for the state properties that are being set explicitly, and before executing onChange handlers for any state properties whose values have changed, the registered state properties are scanned for derived state properties that may be affected by the properties being set explicitly. If any derived state properties <b>are</b> affected by any of the state properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.</p>
 					
 					<a name="3_3_2_1_1"></a>
 					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set -&gt; 3.3.2.1.1. Advantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set">1</a>.<a href="#3_3_2_1_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set -&gt; 3.3.2.1.1. Advantages">1</a>. </span>Advantages</h5>
@@ -2440,20 +2440,20 @@ myWidget.onNext(
 				<a name="3_3_2_2"></a>
 				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.2. Single Level Derived Property Batching"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.2. Single Level Derived Property Batching">2</a>. </span>Single Level Derived Property Batching</h4>
 				<div class="contents4">
-					<p>With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before <code>onChange</code> handlers are executed for the set-get properties being explicitly set.</p>
+					<p>With this approach, values for all directly affected derived state properties are set in a batch set that occurs before <code>onChange</code> handlers are executed for the state properties being explicitly set.</p>
 				</div>
 				
 				<a name="3_3_2_3"></a>
 				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>. </span>Using onChange Handler Mechanism</h4>
 				<div class="contents4">
-					<p>With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.</p>
+					<p>With this approach, when a derived state property is registed, an onChange handler is registered with any property from which the derived property is derived.</p>
 					
 					<a name="3_3_2_3_1"></a>
 					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.1. Advantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.1. Advantages">1</a>. </span>Advantages</h5>
 					<div class="contents5">
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>uses the existing optimization built into the <code>onChange</code> handlers mechanism</td></tr>
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>matches the way values for derived set-get properties are currently being updated</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>matches the way values for derived state properties are currently being updated</td></tr>
 						</table>
 					</div>
 					
@@ -2461,8 +2461,8 @@ myWidget.onNext(
 					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.2. Disadvantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.2. Disadvantages">2</a>. </span>Disadvantages</h5>
 					<div class="contents5">
 						<table class="list">
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>involves a separate set for each derived set-get property whose value changes</td></tr>
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>requires management of <code>onChange</code> handlers and dealing with situations where set-get properties are re-registered</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>involves a separate set for each derived state property whose value changes</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>requires management of <code>onChange</code> handlers and dealing with situations where state properties are re-registered</td></tr>
 						</table>
 					</div>
 					
@@ -2470,17 +2470,17 @@ myWidget.onNext(
 					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>. </span>Issues to Deal With</h5>
 					<div class="contents5">
 						<a name="3_3_2_3_3_1"></a>
-						<h5 class="heading6" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.1. Re-registering a Non-derived Set-get Property"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>.<a href="#3_3_2_3_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.1. Re-registering a Non-derived Set-get Property">1</a>. </span>Re-registering a Non-derived Set-get Property</h5>
+						<h5 class="heading6" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.1. Re-registering a Non-derived State Property"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>.<a href="#3_3_2_3_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.1. Re-registering a Non-derived State Property">1</a>. </span>Re-registering a Non-derived State Property</h5>
 						<div class="contents6">
-							<p>How does one deal with re-registering a set-get property that affects a derived set-get property?</p>
+							<p>How does one deal with re-registering a state property that affects a derived state property?</p>
 							
-							<p>Currently, everything gets blown away when re-registering a set-get property. This means that the <code>onChange</code> handler that was added to the set-get property at the time of registering the set-get property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.</p>
+							<p>Currently, everything gets blown away when re-registering a state property. This means that the <code>onChange</code> handler that was added to the state property at the time of registering the state property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.</p>
 						</div>
 						
 						<a name="3_3_2_3_3_2"></a>
-						<h5 class="heading6" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.2. Re-registering a Derived Set-get Property"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>.<a href="#3_3_2_3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.2. Re-registering a Derived Set-get Property">2</a>. </span>Re-registering a Derived Set-get Property</h5>
+						<h5 class="heading6" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.2. Re-registering a Derived State Property"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>.<a href="#3_3_2_3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.2. Re-registering a Derived State Property">2</a>. </span>Re-registering a Derived State Property</h5>
 						<div class="contents6">
-							<p>How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?</p>
+							<p>How does one deal with re-registering a derived state property, where the new profile for the derived property defines a different relationship properties from which it is derived?</p>
 						</div>
 					</div>
 				</div>
@@ -2490,7 +2490,7 @@ myWidget.onNext(
 		<a name="3_4"></a>
 		<h2 class="heading2" title="3. Uize.Class -&gt; 3.4. Property Bindings"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_4" title="3. Uize.Class -&gt; 3.4. Property Bindings">4</a>. </span>Property Bindings</h2>
 		<div class="contents2">
-			<p>Provide a way in the <code><a href="#3">Uize.Class</a></code> base class to bind two set-get properties together, in order to keep their values synchronized.</p>
+			<p>Provide a way in the <code><a href="#3">Uize.Class</a></code> base class to bind two state properties together, in order to keep their values synchronized.</p>
 			
 			<p>This would provide a more concise and lightweight way of binding properties than using an instance of the <code><a href="../reference/Uize.Util.PropertyAdapter.html">Uize.Util.PropertyAdapter</a></code> class.</p>
 			
@@ -2522,11 +2522,11 @@ myWidget.onNext(
 		</div>
 		
 		<a name="3_5"></a>
-		<h2 class="heading2" title="3. Uize.Class -&gt; 3.5. Copy Ability for Set-get Properties"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_5" title="3. Uize.Class -&gt; 3.5. Copy Ability for Set-get Properties">5</a>. </span>Copy Ability for Set-get Properties</h2>
+		<h2 class="heading2" title="3. Uize.Class -&gt; 3.5. Copy Ability for State Properties"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_5" title="3. Uize.Class -&gt; 3.5. Copy Ability for State Properties">5</a>. </span>Copy Ability for State Properties</h2>
 		<div class="contents2">
-			<p>Copy ability, for initial values of set-get properties that are arrays or objects.</p>
+			<p>Copy ability, for initial values of state properties that are arrays or objects.</p>
 			
-			<p>Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.</p>
+			<p>Have a property that can be specified in a state property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.</p>
 		</div>
 		
 		<a name="3_6"></a>
@@ -2593,7 +2593,7 @@ Uize.Widget.Bar.Slider (50);          // old form
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>support for read-only properties (how would that work, exactly? Only settable through private name?)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>problem: there's currently no way to use the set method to set the value for a set-get property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for set-get properties that have no initial value (what percentage of the overall is that?).</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>problem: there's currently no way to use the set method to set the value for a state property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for state properties that have no initial value (what percentage of the overall is that?).</td></tr>
 			</table>
 		</div>
 		
@@ -2602,7 +2602,7 @@ Uize.Widget.Bar.Slider (50);          // old form
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to indicate that the instance has been constructed</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can be used by onChange handlers for set-get properties to conditionalize actions</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can be used by onChange handlers for state properties to conditionalize actions</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>particularly compelling to widgets, since being completely constructed is a good indicator child widgets added during construction exist and can be accessed</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>some classes (maybe Zazzle.<b> or Uize.</b>) are already doing this with their own private properties</td></tr>
 			</table>
@@ -3260,7 +3260,7 @@ _target = _sourceAndTarget._target;
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can two instances of classes that support the value interface simply be compared by their respective values?</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can two instances of any Uize subclass simply be compared by the values of all their set-get properties?</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can two instances of any Uize subclass simply be compared by the values of all their state properties?</td></tr>
 				</table>
 			</div>
 		</div>
@@ -3622,7 +3622,7 @@ _target = _sourceAndTarget._target;
 		<h2 class="heading2" title="20. Uize.Doc.Simple -&gt; 20.5. Problems"><span class="headingNumber"><a href="#20" title="20. Uize.Doc.Simple">20</a>.<a href="#20_5" title="20. Uize.Doc.Simple -&gt; 20.5. Problems">5</a>. </span>Problems</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>no way to disambiguate for intra-document linking purposes when an instance method and a set-get property have the same name (happens with <code>wired</code> in doc for Uize.Widget, for example)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>no way to disambiguate for intra-document linking purposes when an instance method and a state property have the same name (happens with <code>wired</code> in doc for Uize.Widget, for example)</td></tr>
 			</table>
 		</div>
 	</div>
@@ -3649,7 +3649,7 @@ _target = _sourceAndTarget._target;
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for static features, a note regarding whether or not the static feature is inheritable</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for properties (instance properties, static properties, set-get properties), note the initial value</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for properties (instance properties, static properties, state properties), note the initial value</td></tr>
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for method features, the ability to see the implementation (not the scrunched, of course, so how???)</td></tr>
 				</table>
 			</div>
@@ -3852,18 +3852,18 @@ Uize.Fade.fadeProperty (slider,'value',null,['=',function (value) {return value 
 		<h2 class="heading2" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators"><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators">1</a>. </span>- from the widget's perspective as a user of generators</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>you have a set of display properties (set-get properties that are reflected in the UI)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>you have a set of display properties (state properties that are reflected in the UI)</td></tr>
 			</table>
 			<a name="28_1_1"></a>
-			<h3 class="heading3" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its set-get properties affect display"><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators">1</a>.<a href="#28_1_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its set-get properties affect display">1</a>. </span>- a widget class should be able to register which of its set-get properties affect display</h3>
+			<h3 class="heading3" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its state properties affect display"><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators">1</a>.<a href="#28_1_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its state properties affect display">1</a>. </span>- a widget class should be able to register which of its state properties affect display</h3>
 			<div class="contents3">
 				<a name="28_1_1_1"></a>
-				<h4 class="heading4" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its set-get properties affect display -&gt; 28.1.1.1. - of the set-get properties that affect display..."><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators">1</a>.<a href="#28_1_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its set-get properties affect display">1</a>.<a href="#28_1_1_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its set-get properties affect display -&gt; 28.1.1.1. - of the set-get properties that affect display...">1</a>. </span>- of the set-get properties that affect display...</h4>
+				<h4 class="heading4" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its state properties affect display -&gt; 28.1.1.1. - of the state properties that affect display..."><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators">1</a>.<a href="#28_1_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its state properties affect display">1</a>.<a href="#28_1_1_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.1. - a widget class should be able to register which of its state properties affect display -&gt; 28.1.1.1. - of the state properties that affect display...">1</a>. </span>- of the state properties that affect display...</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>which are updated by the client code</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>which are handled as inputs by the generator specified by the html set-get property</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>some display set-get properties may be handled by both the generator and client code</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>which are handled as inputs by the generator specified by the html state property</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>some display state properties may be handled by both the generator and client code</td></tr>
 					</table>
 				</div>
 			</div>
@@ -3886,7 +3886,7 @@ Uize.Fade.fadeProperty (slider,'value',null,['=',function (value) {return value 
 </pre>
 			
 			<a name="28_1_2"></a>
-			<h3 class="heading3" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.2. - html set-get property"><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators">1</a>.<a href="#28_1_2" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.2. - html set-get property">2</a>. </span>- html set-get property</h3>
+			<h3 class="heading3" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.2. - html state property"><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_1" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators">1</a>.<a href="#28_1_2" title="28. Uize.Generator -&gt; 28.1. - from the widget&apos;s perspective as a user of generators -&gt; 28.1.2. - html state property">2</a>. </span>- html state property</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>string, being a template into which a limited set of params are substituted</td></tr>
@@ -3910,7 +3910,7 @@ Uize.Fade.fadeProperty (slider,'value',null,['=',function (value) {return value 
 		<h2 class="heading2" title="28. Uize.Generator -&gt; 28.3. Uize.Generator implements simply..."><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_3" title="28. Uize.Generator -&gt; 28.3. Uize.Generator implements simply...">3</a>. </span>Uize.Generator implements simply...</h2>
 		<div class="contents2">
 			<a name="28_3_1"></a>
-			<h3 class="heading3" title="28. Uize.Generator -&gt; 28.3. Uize.Generator implements simply... -&gt; 28.3.1. - set-get properties"><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_3" title="28. Uize.Generator -&gt; 28.3. Uize.Generator implements simply...">3</a>.<a href="#28_3_1" title="28. Uize.Generator -&gt; 28.3. Uize.Generator implements simply... -&gt; 28.3.1. - set-get properties">1</a>. </span>- set-get properties</h3>
+			<h3 class="heading3" title="28. Uize.Generator -&gt; 28.3. Uize.Generator implements simply... -&gt; 28.3.1. - state properties"><span class="headingNumber"><a href="#28" title="28. Uize.Generator">28</a>.<a href="#28_3" title="28. Uize.Generator -&gt; 28.3. Uize.Generator implements simply...">3</a>.<a href="#28_3_1" title="28. Uize.Generator -&gt; 28.3. Uize.Generator implements simply... -&gt; 28.3.1. - state properties">1</a>. </span>- state properties</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>asynchronous</td></tr>
@@ -4730,7 +4730,7 @@ if (mustDisplay != (currentDisplay != 'none')) {
 			<p>!!!!!! store the reconstruction sequence so that it is only ever reformulated if the templateItem or templateStr are modified. This will optimize the repeat use of an instance, which is common in Zazzle's design tool attribute selectors.</p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>could theoretically move some of the optimization into the getOutput method as well as where it is right now in the updateUi method, so that if the templateStr, templateItem, and items set-get properties don't change then the output isn't generated repeatedly if the getOutput method is called repeatedly</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>could theoretically move some of the optimization into the getOutput method as well as where it is right now in the updateUi method, so that if the templateStr, templateItem, and items state properties don't change then the output isn't generated repeatedly if the getOutput method is called repeatedly</td></tr>
 			</table>
 		</div>
 		
@@ -5105,10 +5105,10 @@ _classPrototype.myMethod2 = function () {
 	<h1 class="heading1" title="43. Uize.Test"><span class="headingNumber"><a href="#43" title="43. Uize.Test">43</a>. </span>Uize.Test</h1>
 	<div class="contents1">
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>expectInstanceState (set-get properties values)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>expectInstanceState (state properties values)</td></tr>
 		</table>
 		<a name="43_1"></a>
-		<h2 class="heading2" title="43. Uize.Test -&gt; 43.1. - new set-get properties"><span class="headingNumber"><a href="#43" title="43. Uize.Test">43</a>.<a href="#43_1" title="43. Uize.Test -&gt; 43.1. - new set-get properties">1</a>. </span>- new set-get properties</h2>
+		<h2 class="heading2" title="43. Uize.Test -&gt; 43.1. - new state properties"><span class="headingNumber"><a href="#43" title="43. Uize.Test">43</a>.<a href="#43_1" title="43. Uize.Test -&gt; 43.1. - new state properties">1</a>. </span>- new state properties</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>breathe: an amount of time that the test runner should pause after completion of a test</td></tr>
@@ -5449,10 +5449,10 @@ _class.registerUiUpdater (
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>getNodeProperty (to use Uize.Node.getProperty)</td></tr>
 		</table>
 		<a name="50_7"></a>
-		<h2 class="heading2" title="50. Uize.Widget -&gt; 50.7. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node"><span class="headingNumber"><a href="#50" title="50. Uize.Widget">50</a>.<a href="#50_7" title="50. Uize.Widget -&gt; 50.7. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node">7</a>. </span>- a way of easily binding any set-get property to either a child widget (or any widget) or an implied node</h2>
+		<h2 class="heading2" title="50. Uize.Widget -&gt; 50.7. - a way of easily binding any state property to either a child widget (or any widget) or an implied node"><span class="headingNumber"><a href="#50" title="50. Uize.Widget">50</a>.<a href="#50_7" title="50. Uize.Widget -&gt; 50.7. - a way of easily binding any state property to either a child widget (or any widget) or an implied node">7</a>. </span>- a way of easily binding any state property to either a child widget (or any widget) or an implied node</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the connection is bi-directional (changing the child widget's value or node's value updates set-get property, and changing set-get property value updates child widget's or node's value)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the connection is bi-directional (changing the child widget's value or node's value updates state property, and changing state property value updates child widget's or node's value)</td></tr>
 			</table>
 		</div>
 		
@@ -5510,7 +5510,7 @@ _class.registerUiUpdater (
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>label the concept "widget providence"</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reconcile any new semantics with existing "inherit" value for set-get properties, and "enabledInherited" and "busyInherited" set-get properties for widgets</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reconcile any new semantics with existing "inherit" value for state properties, and "enabledInherited" and "busyInherited" state properties for widgets</td></tr>
 			</table>
 		</div>
 		
@@ -6043,7 +6043,7 @@ _makeNodeMethod ('get','Style'); // creates getNodeStyle
 		</div>
 		
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>previewZoomUrl set-get property should have onChange handler to handle change in URL possibly during use</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>previewZoomUrl state property should have onChange handler to handle change in URL possibly during use</td></tr>
 		</table>
 	</div>
 	
@@ -6183,7 +6183,7 @@ _makeNodeMethod ('get','Style'); // creates getNodeStyle
 		</div>
 		
 		<a name="71_7"></a>
-		<h2 class="heading2" title="71. Uize.Widget.Dialog -&gt; 71.7. - support for okText and cancelText set-get properties"><span class="headingNumber"><a href="#71" title="71. Uize.Widget.Dialog">71</a>.<a href="#71_7" title="71. Uize.Widget.Dialog -&gt; 71.7. - support for okText and cancelText set-get properties">7</a>. </span>- support for okText and cancelText set-get properties</h2>
+		<h2 class="heading2" title="71. Uize.Widget.Dialog -&gt; 71.7. - support for okText and cancelText state properties"><span class="headingNumber"><a href="#71" title="71. Uize.Widget.Dialog">71</a>.<a href="#71_7" title="71. Uize.Widget.Dialog -&gt; 71.7. - support for okText and cancelText state properties">7</a>. </span>- support for okText and cancelText state properties</h2>
 		<div class="contents2">
 			<p>and perhaps defaultOkText and defaultCancelText? Either way, localization of default strings should be able to occur inside the widget module, rather than being defaulted in Uize.Widget.Page where the code to show the confirm dialog is</p>
 		</div>
@@ -6237,7 +6237,7 @@ _makeNodeMethod ('get','Style'); // creates getNodeStyle
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>dialog widget should be able to be proxy for certain state that the iframe document's page widget cares to expose</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>exposed state could be reflected as set-get properties of the dialog widget, with corresponding set-get properties of the iframe document's page widget</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>exposed state could be reflected as state properties of the dialog widget, with corresponding state properties of the iframe document's page widget</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>property values are synchronized in both directions: if any are changed in the dialog widget, the changes are relayed to the iframe document's page widget, and if any are changed in the iframe document's page widget, the changes are relayed to the dialog widget</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>property values from dialog widget are used - somehow - during construction of iframe document's page widget, so it has its state as early as possible</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>dialog widget can become persister of state for iframe document's page widget, even with navigation across pages within the iframe</td></tr>
@@ -6289,7 +6289,7 @@ _makeNodeMethod ('get','Style'); // creates getNodeStyle
 	<h1 class="heading1" title="77. Uize.Widget.Drag"><span class="headingNumber"><a href="#77" title="77. Uize.Widget.Drag">77</a>. </span>Uize.Widget.Drag</h1>
 	<div class="contents1">
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it should be possible to cancel drag programmatically during drag, just by setting the dragCancelled set-get property to true</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it should be possible to cancel drag programmatically during drag, just by setting the dragCancelled state property to true</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>upon releasing, an event should be fired to allow an application to programmatically cancel drag</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>scroll near borders behavior</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>clicking right mouse button during drag should also cancel drag (just like hitting escape key)</td></tr>
@@ -6355,7 +6355,7 @@ _makeNodeMethod ('get','Style'); // creates getNodeStyle
 		</div>
 		
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should implement a values set-get property for select type (single and multi-select)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should implement a values state property for select type (single and multi-select)</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>support readOnly state? Pick up initial enabled value from readOnly property of input node?</td></tr>
 		</table>
 	</div>
@@ -6965,7 +6965,7 @@ _makeNodeMethod ('get','Style'); // creates getNodeStyle
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>must allow validation ability (for things like domains and such)</td></tr>
 		</table>
 		<a name="88_1"></a>
-		<h2 class="heading2" title="88. Uize.Widget.ListEditor -&gt; 88.1. - possibly have a conformer for the list set-get property that applies the item conformer to all the items"><span class="headingNumber"><a href="#88" title="88. Uize.Widget.ListEditor">88</a>.<a href="#88_1" title="88. Uize.Widget.ListEditor -&gt; 88.1. - possibly have a conformer for the list set-get property that applies the item conformer to all the items">1</a>. </span>- possibly have a conformer for the list set-get property that applies the item conformer to all the items</h2>
+		<h2 class="heading2" title="88. Uize.Widget.ListEditor -&gt; 88.1. - possibly have a conformer for the list state property that applies the item conformer to all the items"><span class="headingNumber"><a href="#88" title="88. Uize.Widget.ListEditor">88</a>.<a href="#88_1" title="88. Uize.Widget.ListEditor -&gt; 88.1. - possibly have a conformer for the list state property that applies the item conformer to all the items">1</a>. </span>- possibly have a conformer for the list state property that applies the item conformer to all the items</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>in such cases, one may wish for performance sake to maintain a hash of values and cached conformed state, that gets flushed whenever the itemConformer is changed</td></tr>
@@ -6973,7 +6973,7 @@ _makeNodeMethod ('get','Style'); // creates getNodeStyle
 		</div>
 		
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for 'a-z' and 'z-a' values for sort set-get property, sort should be case insensitive</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for 'a-z' and 'z-a' values for sort state property, sort should be case insensitive</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>configurable max number of items?</td></tr>
 		</table>
 	</div>
@@ -7375,7 +7375,7 @@ inputFormat:['YYYY-MM-DD','YYYY/MM/DD']
 	<h1 class="heading1" title="100. Uize.Widget.Resizer.Marquee"><span class="headingNumber"><a href="#100" title="100. Uize.Widget.Resizer.Marquee">100</a>. </span>Uize.Widget.Resizer.Marquee</h1>
 	<div class="contents1">
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>'Position Changed' event should be fired whenever the position is changed, even if it's through the set-get property interface (make sure this won't mess up any code -- especially Zazzle DT)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>'Position Changed' event should be fired whenever the position is changed, even if it's through the state property interface (make sure this won't mess up any code -- especially Zazzle DT)</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a mode where the middle handles are sized to the length of the axis (similar to hot area for resizing a window in one axis only)</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>consider marquee HTML implementation with no drag handles, just hot regions (for less clutter)</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>prim up built in HTML markup to allow parameters</td></tr>

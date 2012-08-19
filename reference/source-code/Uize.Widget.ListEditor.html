@@ -57,7 +57,7 @@
 
       More on Adding Items
         Conforming New Items
-          The  =itemConformer= set-get property lets you configure an optional item conformer function to "tidy up" new list items added by the user.
+          The  =itemConformer= state property lets you configure an optional item conformer function to "tidy up" new list items added by the user.
 
           An application of this would be when using the =Uize.Widget.ListEditor= class for a domain list editor, where one may wish to always remove the protocol and leave only the host name when adding new items to the list.
 
@@ -70,7 +70,7 @@
           Pressing the enter key in the text =input= field triggers the add action, but only if the =add= button enabled. Pressing the escape key in the text =input= field clears its value.
 
         New Item Placement
-          When the user adds a new item, where it shows up in the =list= array is determined by the value of the =sort= set-get property.
+          When the user adds a new item, where it shows up in the =list= array is determined by the value of the =sort= state property.
 
           The =sort= property is sufficiently configurable to allow the =list= to be kept in a sorted state, or to be unsorted with new items added either at the beginning or the end of the =list=.
 
@@ -94,12 +94,12 @@
         When removing a single item from the list, the text for that item is placed in the text =input= field and this field is then focused. The user can then make changes to the text and press the enter key to re-add the modified version. Upon not seeing an edit button, the user will figure the only way to make a change is to remove the incorrect item, and will then be pleasantly surprised to see the removed item go into the =input= field for modification and reentry in the list.
 
     Accessing and Setting the List
-      The list that is edited by the user can be accessed programmatically through the =list= set-get property, which is an array of string values.
+      The list that is edited by the user can be accessed programmatically through the =list= state property, which is an array of string values.
 
       The list can also be pre-seeded or updated programmatically by setting the value of this property.
 
       Value Interface
-        The =value= set-get property is registered as an alias to the =list= set-get property.
+        The =value= state property is registered as an alias to the =list= state property.
 
         This means that the =Uize.Widget.ListEditor= class effectively implements the =Value Interface=, so the following statements would all be equivalent...
 
@@ -110,17 +110,17 @@
         ...........................
 
     List Sorting
-      The =sort= set-get property provides a way to maintain the =list= array in a sorted state.
+      The =sort= state property provides a way to maintain the =list= array in a sorted state.
 
-      The list can be sorted ASCIIbetically, in ascending or descending order, or it can be sorted with your own custom sort function, or it can be unsorted with new items added to the beginning or the end of the =list=. When sorting is enabled, the list is kept sorted as items are added by the user, or as its items are otherwise changed - even when items are changed programmatically by setting the value of the =list= set-get property.
+      The list can be sorted ASCIIbetically, in ascending or descending order, or it can be sorted with your own custom sort function, or it can be unsorted with new items added to the beginning or the end of the =list=. When sorting is enabled, the list is kept sorted as items are added by the user, or as its items are otherwise changed - even when items are changed programmatically by setting the value of the =list= state property.
 
     Button State Management
       The =Uize.Widget.ListEditor= class manages the state of its button child widgets, so they are only enabled when appropriate.
 
       Disabled Add Button
-        When the value of the =input= child widget's =isValid= set-get property is set to =false=, then the =add= button will be disabled.
+        When the value of the =input= child widget's =isValid= state property is set to =false=, then the =add= button will be disabled.
 
-        This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= set-get property.
+        This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= state property.
 
       Disabled Remove Button
         When no options of the =list Implied Node= are selected, then the =remove= button will be disabled.
@@ -197,9 +197,9 @@ Uize.module ({
                     add
                       An instance of the =Uize.Widget.Button= class, that lets the user add the current text entered in the =input= child widget as a new item in the =list= array.
 
-                      When the value of the =input= child widget's =isValid= set-get property is set to =false=, then the =add= button will be disabled. This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= set-get property.
+                      When the value of the =input= child widget's =isValid= state property is set to =false=, then the =add= button will be disabled. This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= state property.
 
-                      When the =add= button is enabled and is clicked by the user, any text entered in the =input= child widget will first be processed by the =itemConformer= function (if specified) and will then be added to the =list= array. Where the new item appears in the =list= will depend on the value of the =sort= set-get property.
+                      When the =add= button is enabled and is clicked by the user, any text entered in the =input= child widget will first be processed by the =itemConformer= function (if specified) and will then be added to the =list= array. Where the new item appears in the =list= will depend on the value of the =sort= state property.
 
                       NOTES
                       - see the related =input= child widget
@@ -214,7 +214,7 @@ Uize.module ({
                       When no options of the =list Implied Node= are selected, then the =remove= button will be disabled. This may happen when there are no items in the =list= array, when the user has just removed the previously selected items, or if the user uses ctrl-click to deselect all selected items.
 
                       NOTES
-                      - see the related =list Implied Node= and the =list= set-get property
+                      - see the related =list Implied Node= and the =list= state property
                       - this child widget is added in the constructor
                 */
 
@@ -414,7 +414,7 @@ Uize.module ({
                   When the =list Implied Node= is focused and one or more options of the select tag are selected, then pressing the delete key will result in the selected items being removed from the list.
 
                   NOTES
-                  - see the related =list= set-get property
+                  - see the related =list= state property
             */
           );
 
@@ -426,7 +426,7 @@ Uize.module ({
       _class.registerProperties ({
         _itemConformer:'itemConformer',
           /*?
-            Set-get Properties
+            State Properties
               itemConformer
                 An optional function, that should be used to conform new items that are added to the =list= by the user.
 
@@ -457,7 +457,7 @@ Uize.module ({
           onChange:_classPrototype._updateUiList,
           value:[]
           /*?
-            Set-get Properties
+            State Properties
               list
                 An array of strings, representing the items in the list.
 
@@ -474,7 +474,7 @@ Uize.module ({
                   The above statement would result in the items ='new item 1'= and ='new item 2'= becoming the selected items (assuming that they weren't previously in the list).
 
                 Automatically Sorted
-                  When the value of the =list= property is being set and a value other than ='append'= or ='prepend'= is specified for the =sort= set-get property, then the =list= value will first be conformed by sorting it according to the current sort mode before the new value is applied.
+                  When the value of the =list= property is being set and a value other than ='append'= or ='prepend'= is specified for the =sort= state property, then the =list= value will first be conformed by sorting it according to the current sort mode before the new value is applied.
 
                   EXAMPLE
                   ......................................................................................
@@ -502,15 +502,15 @@ Uize.module ({
 
                 NOTES
                 - see the related =list Implied Node=
-                - see the related =value= set-get property
-                - when the list is changed programmatically, the item conformer specified by the =itemConformer= set-get property is not applied to the items in the list - they must already be conformed correctly
+                - see the related =value= state property
+                - when the list is changed programmatically, the item conformer specified by the =itemConformer= state property is not applied to the items in the list - they must already be conformed correctly
                 - the initial value is =[]= (an empty array)
 
               value
-                An alias to the =list= set-get property, so that this class effectively implements the =Value Interface=.
+                An alias to the =list= state property, so that this class effectively implements the =Value Interface=.
 
                 NOTES
-                - see the related =list= set-get property
+                - see the related =list= state property
           */
         },
         _sort:{
@@ -518,7 +518,7 @@ Uize.module ({
           onChange:function () {this.set ({_list:this._sortList (this._list.concat ())})},
           value:'prepend'
           /*?
-            Set-get Properties
+            State Properties
               sort
                 A string, specifying one of the supported list sort modes, or a function reference for a custom list sorter function.
 
@@ -529,7 +529,7 @@ Uize.module ({
                 - ='z-a'= - the list is sorted ASCIIbetically, in descending order
                 - =custom function= - your own custom list sorter function (the same kind of function you would supply to JavaScript's =Array= object sort method)
 
-                Whenever the value of the =sort= property is changed, the =list= array is resorted according to the new sort mode. Whenever the value of the =list= set-get property is set, it is first conformed by sorting it according to the current sort mode.
+                Whenever the value of the =sort= property is changed, the =list= array is resorted according to the new sort mode. Whenever the value of the =list= state property is set, it is first conformed by sorting it according to the current sort mode.
 
                 NOTES
                 - the initial value is ='prepend'=

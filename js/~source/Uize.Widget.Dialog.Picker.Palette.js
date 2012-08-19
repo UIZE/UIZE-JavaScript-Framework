@@ -87,7 +87,7 @@ Uize.module ({
 				_tentativeValueDetails:'tentativeValueDetails'
 			});
 
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
+		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
 				dismissOnShieldClick:true
 			});

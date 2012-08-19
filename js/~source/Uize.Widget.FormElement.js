@@ -270,7 +270,7 @@ Uize.module ({
 					var _inputNode = _this._getInputNode();
 
 					if (_inputNode) {
-						/*** Set up the read-only set-get properties (attributes of the node) ***/
+						/*** Set up the read-only state properties (attributes of the node) ***/
 							_this._type = _inputNode.type;
 							_this._elementName = _inputNode.name;
 
@@ -383,7 +383,7 @@ Uize.module ({
 			_class.registerProperties({
 				_elementName:'elementName', // read-only
 					/*?
-						Set-get Properties
+						State Properties
 							elementName
 								The name associated with the input nodes belonging to the form element.
 
@@ -392,7 +392,7 @@ Uize.module ({
 								<input id="myWidget-input" type='button' name='foobar'/>
 								........................................................
 
-								For a =Uize.Widget.FormElement= instance with the =idPrefix= of ='myWidget'= and the above HTML for its =input= implied node, the value of the =elementName= set-get property will be ='foobar'=.
+								For a =Uize.Widget.FormElement= instance with the =idPrefix= of ='myWidget'= and the above HTML for its =input= implied node, the value of the =elementName= state property will be ='foobar'=.
 					*/
 				_errorClassName:{
 					name:'errorClassName',
@@ -481,7 +481,7 @@ Uize.module ({
 				},
 				_type:'type', // read-only
 					/*?
-						Set-get Properties
+						State Properties
 							type
 								The type associated with the input node belonging to the form element.
 
@@ -490,7 +490,7 @@ Uize.module ({
 								<input id="myWidget-input" type='button' name='foobar'/>
 								........................................................
 
-								For a =Uize.Widget.FormElement= instance with the =idPrefix= of ='myWidget'= and the above HTML for its =input= implied node, the value of the =type= set-get property will be ='button'=.
+								For a =Uize.Widget.FormElement= instance with the =idPrefix= of ='myWidget'= and the above HTML for its =input= implied node, the value of the =type= state property will be ='button'=.
 					*/
 				_validateWhen:{
 					name:'validateWhen',

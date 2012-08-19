@@ -11,7 +11,7 @@
 
 /*?
 	Introduction
-		A test widget class used in examples to demonstrate the behavior of the =enabled= and =busy= set-get properties.
+		A test widget class used in examples to demonstrate the behavior of the =enabled= and =busy= state properties.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -41,7 +41,7 @@ Uize.module ({
 								}
 							);
 
-						/*** code to update UI whenever enabled and busy set-get properties change ***/
+						/*** code to update UI whenever enabled and busy state properties change ***/
 							var _updateUi = function () {_this.updateUi ()};
 							_this.wire ({
 								'Changed.enabled':_updateUi,
@@ -88,7 +88,7 @@ Uize.module ({
 				Uize.callOn (this.children,'resetEnabledAndBusy');
 			};
 
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
+		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
 				html:
 					'<div class="widgetShell">' +

@@ -31,10 +31,10 @@ Instance Methods of Uize.Widget Killed
 	myWidget.wireNodeEvents (...)   >> BECOMES >>  myWidget.wireNode (...)
 	........................................................................
 
-validDateRange Set-get Property of Uize.Widget.Calendar Killed
-	The =validDateRange= set-get property of the =Uize.Widget.Calendar= class, that was deprecated back in September of 2009, has finally been killed.
+validDateRange State Property of Uize.Widget.Calendar Killed
+	The =validDateRange= state property of the =Uize.Widget.Calendar= class, that was deprecated back in September of 2009, has finally been killed.
 
-	The =validDateRange= property was replaced with the =minValue= and =maxValue= set-get properties.
+	The =validDateRange= property was replaced with the =minValue= and =maxValue= state properties.
 
 	INSTEAD OF...
 	........................................................................

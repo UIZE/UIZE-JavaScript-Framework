@@ -173,7 +173,7 @@ Uize.module ({
 								items:[
 									_explainer ('JavaScript Modules'),
 									_explainer ('JavaScript Inheritance'),
-									_explainer ('Set-get Properties'),
+									_explainer ('State Properties'),
 									_explainer ('JavaScript Event System'),
 									_divider,
 									_explainer ('JavaScript DOM Events'),

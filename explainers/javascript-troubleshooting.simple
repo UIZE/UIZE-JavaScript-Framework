@@ -101,9 +101,9 @@ Basic Troubleshooting With Alerts
 		..................................
 
 	Alerting Values of Instances or Classes
-		The =Uize.Class= base class implements a =valueOf Intrinsic Method= that returns the value of the =value= set-get property - for instances of =Uize.Class= subclasses as well as =Uize.Class= subclasses.
+		The =Uize.Class= base class implements a =valueOf Intrinsic Method= that returns the value of the =value= state property - for instances of =Uize.Class= subclasses as well as =Uize.Class= subclasses.
 
-		Because this method is implemented in the =Uize.Class= base class, all =Uize.Class= subclasses get to inherit it. For any class that implements a =value= set-get property, the value of an instance can be displayed in an alert dialog using a convenient shorthand. This can be done by prepending a "+" (plus sign) to the instance reference for classes that implement a number type value, or by appending a =+ ''= to the instance reference for classes that implement a string type value.
+		Because this method is implemented in the =Uize.Class= base class, all =Uize.Class= subclasses get to inherit it. For any class that implements a =value= state property, the value of an instance can be displayed in an alert dialog using a convenient shorthand. This can be done by prepending a "+" (plus sign) to the instance reference for classes that implement a number type value, or by appending a =+ ''= to the instance reference for classes that implement a string type value.
 
 		EXAMPLE 1
 		..............................
@@ -123,7 +123,7 @@ Tips for Troubleshooting in Firebug
 
 		By using the DOM inspector, you can traverse the JavaScript widget tree for a page that uses the UIZE JavaScript Framework. On a typical page you will have a page widget at the root of the widget hierarchy. Finding this in the DOM inspector, you can expand it and inspect its properties. In order to dig deeper into the widget tree, you can locate the =children= property of the page widget and expand it too. For each child widget of the page widget you can do the same. You can keep sleuthing like this, digging as deep as you need to, to ultimately find the "widget of interest" that is a suspect in the code crime you are investigating.
 
-		At any stage in this process, you can inspect the values of set-get properties for a widget instance. Note that the set-get properties will be represented using their private names (ie. prefixed with an underscore).
+		At any stage in this process, you can inspect the values of state properties for a widget instance. Note that the state properties will be represented using their private names (ie. prefixed with an underscore).
 
 	Display of Types in Firebug's DOM Inspector
 		When using the DOM inspector in `Firebug` to peruse the widget tree, any property that is an instance of a =Uize.Class= subclass will have the module name for its class displayed to the right of the property.
@@ -234,12 +234,12 @@ Scrunch-related Problems
 		- a class inappropriately accesses private methods or properties of a helper class it is using
 		- a subclass inappropriately accesses private methods or properties of its superclass
 
-		Accessing a Superclass' Set-get Properties
+		Accessing a Superclass' State Properties
 			One less-than-obvious access of privates that can occur is with subclasses.
 
-			If a set-get property is registered in a superclass, with a mapping of public name to private name, then the superclass can reference that set-get property by its private name. However, a subclass of that superclass may not. Instead, it must use the public name. And, to query the value for a set-get property registered in the superclass, the subclass must use the =get= method.
+			If a state property is registered in a superclass, with a mapping of public name to private name, then the superclass can reference that state property by its private name. However, a subclass of that superclass may not. Instead, it must use the public name. And, to query the value for a state property registered in the superclass, the subclass must use the =get= method.
 
-			If you reference set-get properties, properties, or methods of a superclass by private name in the implementation of your subclass, your code will work when using source code but most likely produce errors or erratic behavior when using scrunched code.
+			If you reference state properties, properties, or methods of a superclass by private name in the implementation of your subclass, your code will work when using source code but most likely produce errors or erratic behavior when using scrunched code.
 
 	Accidental Globals and Scrunching
 		Accidentally assigning globals can have interesting interactions with the scrunching process.

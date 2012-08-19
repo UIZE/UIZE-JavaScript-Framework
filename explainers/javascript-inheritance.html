@@ -33,9 +33,9 @@
 				<ul>
 					<li><a href="#4_1" title="Adding instance methods and properties to a subclass involves assigning properties on the subclass&apos; prototype object.">4.1. Adding Instance Methods and Properties</a></li>
 					<li><a href="#4_2" title="Adding instance methods and properties to a subclass involves assigning properties on the subclass&apos; prototype object.">4.2. Adding Static Methods and Properties</a></li>
-					<li><a href="#4_3" title="You can register one or more set-get properties for a subclass, using the MyClass.registerProperties static method that is inherited from the Uize.Class base class.">4.3. Adding Set-get Properties</a>
+					<li><a href="#4_3" title="You can register one or more state properties for a subclass, using the MyClass.registerProperties static method that is inherited from the Uize.Class base class.">4.3. Adding State Properties</a>
 						<ul>
-							<li><a href="#4_3_1" title="Set-get properties registered for a class are inherited when creating a subclass.">4.3.1. Inheriting Set-get Properties</a></li>
+							<li><a href="#4_3_1" title="State properties registered for a class are inherited when creating a subclass.">4.3.1. Inheriting State Properties</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -53,7 +53,7 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#5_3" title="The initial value for a set-get property inherited from a superclass can be overrided by calling the MyClass.set static method that is inherited from the Uize.Class base class.">5.3. Overriding Set-get Property Values</a></li>
+					<li><a href="#5_3" title="The initial value for a state property inherited from a superclass can be overrided by calling the MyClass.set static method that is inherited from the Uize.Class base class.">5.3. Overriding State Property Values</a></li>
 				</ul>
 			</li>
 			<li><a href="#6" title="By convention, private methods and properties - both instance and static - are distinguished from public methods and properties by prefixing their names with an underscore.">6. Private vs. Public</a>
@@ -74,10 +74,10 @@
 					<li><a href="#7_5" title="All static features of modules of the UIZE JavaScript Framework are noted as being either inheritable or non-inheritable in the reference documentation for those features.">7.5. Inheritability of Static Features is Noted in Module References</a></li>
 				</ul>
 			</li>
-			<li><a href="#8" title="When an instance of a UIZE class is created, construction involves three phases: the alphastructor phase, the set-get property initialization phase, and the omegastructor phase.">8. Phases of Construction</a>
+			<li><a href="#8" title="When an instance of a UIZE class is created, construction involves three phases: the alphastructor phase, the state property initialization phase, and the omegastructor phase.">8. Phases of Construction</a>
 				<ul>
-					<li><a href="#8_1" title="The alphastructor is a function that is executed before the set-get properties for an instance are initialized, and before the omegastructor function is executed.">8.1. alphastructor</a></li>
-					<li><a href="#8_2" title="The omegastructor is a function that is executed after the alphastructor function is executed, and after the set-get properties for an instance are initialized.">8.2. omegastructor</a></li>
+					<li><a href="#8_1" title="The alphastructor is a function that is executed before the state properties for an instance are initialized, and before the omegastructor function is executed.">8.1. alphastructor</a></li>
+					<li><a href="#8_2" title="The omegastructor is a function that is executed after the alphastructor function is executed, and after the state properties for an instance are initialized.">8.2. omegastructor</a></li>
 				</ul>
 			</li>
 			<li><a href="#9">9. Dissecting a Subclass Module</a>
@@ -88,7 +88,7 @@
 					<li><a href="#9_4" title="A reference to the class&apos; prototype property is stored in a _classPrototype variable.">9.4. Keeping a Prototype Reference</a></li>
 					<li><a href="#9_5" title="Using the _classPrototype reference, an instance method can be assigned for the class.">9.5. Assigning an Instance Method</a></li>
 					<li><a href="#9_6" title="Using the _class reference, a static method can be assigned for the class.">9.6. Assigning a Static Method</a></li>
-					<li><a href="#9_7" title="Set-get properties are registered for a class by calling the MyClass.registerProperties static method that is inherited from the Uize.Class base class.">9.7. Registering Set-get Properties</a></li>
+					<li><a href="#9_7" title="State properties are registered for a class by calling the MyClass.registerProperties static method that is inherited from the Uize.Class base class.">9.7. Registering State Properties</a></li>
 				</ul>
 			</li>
 			<li><a href="#10" title="The UIZE JavaScript Framework provides support for singletons in the form of the Uize.Class.singleton static method that is implemented in the Uize.Class base class and is inherited by all Uize.Class subclasses.">10. Singletons</a>
@@ -134,7 +134,7 @@
 	<div class="contents1">
 		<p>The power of classes built using the UIZE JavaScript Framework is derived from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class.</p>
 		
-		<p>All classes inherit directly - or indirectly - from this class. While the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module is not tiny, the core of the inheritance mechanism itself is quite tiny. What makes the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module larger is that it provides not only an inheritance mechanism, but also a <a href="javascript-event-system.html">JavaScript Event System</a> and a <a href="set-get-properties.html">Set-get Properties</a> system.</p>
+		<p>All classes inherit directly - or indirectly - from this class. While the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module is not tiny, the core of the inheritance mechanism itself is quite tiny. What makes the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module larger is that it provides not only an inheritance mechanism, but also a <a href="javascript-event-system.html">JavaScript Event System</a> and a <a href="state-properties.html">State Properties</a> system.</p>
 	</div>
 	
 	<a name="4"></a>
@@ -156,9 +156,9 @@ alert (mySubclassInstance.foo);       // alert the subclass instance's foo prope
 		
 		<p>In this example, <code>MyClass</code> is a plain vanilla subclass of the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class. The property <code>foo</code> is assigned on its <code>prototype</code> and is shared by all instances. Now, a subclass of <code>MyClass</code> is created, by the name of <code>MySubclass</code>. An instance of <code>MySubclass</code> is created, and the value of its <code>foo</code> property is alerted. Unsurprisingly, what shows up in the alert dialog is the text "bar". Naturally, meaningful classes are a little more complex than this, but this demonstrates the basics.</p>
 		
-		<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as <a href="#7">non-inheritable statics</a>), and set-get properties registered on the superclass using the <code>registerProperties</code> static method. The inheritance system that is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.</p>
+		<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as <a href="#7">non-inheritable statics</a>), and state properties registered on the superclass using the <code>registerProperties</code> static method. The inheritance system that is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.</p>
 		
-		<p>Once you have a subclass, you can modify it by assigning values on its <code>prototype</code> object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties.</p>
+		<p>Once you have a subclass, you can modify it by assigning values on its <code>prototype</code> object, adding static methods or properties to the subclass, and registering state properties or overriding the initial values of inherited state properties.</p>
 		
 		<a name="4_1"></a>
 		<h2 class="heading2" title="4. Fleshing Out a Subclass -&gt; 4.1. Adding Instance Methods and Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_1" title="4. Fleshing Out a Subclass -&gt; 4.1. Adding Instance Methods and Properties">1</a>. </span>Adding Instance Methods and Properties</h2>
@@ -199,15 +199,15 @@ MyClass.myStaticMethod = function () {  // create a static method
 		</div>
 		
 		<a name="4_3"></a>
-		<h2 class="heading2" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties">3</a>. </span>Adding Set-get Properties</h2>
+		<h2 class="heading2" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding State Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding State Properties">3</a>. </span>Adding State Properties</h2>
 		<div class="contents2">
-			<p>You can register one or more set-get properties for a subclass, using the <code>MyClass.registerProperties</code> static method that is inherited from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class.</p>
+			<p>You can register one or more state properties for a subclass, using the <code>MyClass.registerProperties</code> static method that is inherited from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
 <pre class="sample-code">var MyClass = Uize.Class.subclass ();  // create a class
-MyClass.registerProperties ({          // register one or more set-get properties
+MyClass.registerProperties ({          // register one or more state properties
   _mySetGetProperty:{
     name:'mySetGetProperty',
     onChange:function () {
@@ -219,15 +219,15 @@ MyClass.registerProperties ({          // register one or more set-get propertie
 </pre>
 			
 			<a name="4_3_1"></a>
-			<h3 class="heading3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties -&gt; 4.3.1. Inheriting Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties">3</a>.<a href="#4_3_1" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties -&gt; 4.3.1. Inheriting Set-get Properties">1</a>. </span>Inheriting Set-get Properties</h3>
+			<h3 class="heading3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding State Properties -&gt; 4.3.1. Inheriting State Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding State Properties">3</a>.<a href="#4_3_1" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding State Properties -&gt; 4.3.1. Inheriting State Properties">1</a>. </span>Inheriting State Properties</h3>
 			<div class="contents3">
-				<p>Set-get properties registered for a class are inherited when creating a subclass.</p>
+				<p>State properties registered for a class are inherited when creating a subclass.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
 <pre class="sample-code">var MyClass = Uize.Class.subclass ();  // create a class
-MyClass.registerProperties ({          // register the "foo" set-get property
+MyClass.registerProperties ({          // register the "foo" state property
   _foo:{
     name:'foo',
     onChange:function () {
@@ -238,7 +238,7 @@ MyClass.registerProperties ({          // register the "foo" set-get property
 });
 
 var MySubclass = MyClass.subclass (); // create a subclass
-MySubclass.registerProperties ({      // register the "bar" set-get property
+MySubclass.registerProperties ({      // register the "bar" state property
   _bar:{
     name:'bar',
     onChange:function () {
@@ -249,7 +249,7 @@ MySubclass.registerProperties ({      // register the "bar" set-get property
 });
 </pre>
 				
-				<p>After the above code has executed, the class <code>MySubclass</code> will have the two set-get properties <code>foo</code> and <code>bar</code>.</p>
+				<p>After the above code has executed, the class <code>MySubclass</code> will have the two state properties <code>foo</code> and <code>bar</code>.</p>
 			</div>
 		</div>
 	</div>
@@ -395,17 +395,17 @@ MySubclass.myStaticMethod ();                   // call inherited static method
 		</div>
 		
 		<a name="5_3"></a>
-		<h2 class="heading2" title="5. Overriding a Superclass -&gt; 5.3. Overriding Set-get Property Values"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>.<a href="#5_3" title="5. Overriding a Superclass -&gt; 5.3. Overriding Set-get Property Values">3</a>. </span>Overriding Set-get Property Values</h2>
+		<h2 class="heading2" title="5. Overriding a Superclass -&gt; 5.3. Overriding State Property Values"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>.<a href="#5_3" title="5. Overriding a Superclass -&gt; 5.3. Overriding State Property Values">3</a>. </span>Overriding State Property Values</h2>
 		<div class="contents2">
-			<p>The initial value for a set-get property inherited from a superclass can be overrided by calling the <code>MyClass.set</code> static method that is inherited from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class.</p>
+			<p>The initial value for a state property inherited from a superclass can be overrided by calling the <code>MyClass.set</code> static method that is inherited from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class.</p>
 			
-			<p>The initial value for a set-get property is registered by specifying the <code>value</code> property in the profile for the set-get property, as follows...</p>
+			<p>The initial value for a state property is registered by specifying the <code>value</code> property in the profile for the state property, as follows...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
 <pre class="sample-code">var MyClass = Uize.Class.subclass ();  // create a class
-MyClass.registerProperties ({          // register the foo set-get property
+MyClass.registerProperties ({          // register the foo state property
   _foo:{
     name:'foo',
     onChange:function () {
@@ -416,18 +416,18 @@ MyClass.registerProperties ({          // register the foo set-get property
 });
 
 var _myClassInstance = new MyClass;    // create instance of MyClass
-alert (_myClassInstance.get ('foo'));  // alert value of foo set-get property
+alert (_myClassInstance.get ('foo'));  // alert value of foo state property
 </pre>
 			
 			<p>In the above example, the text "bar" will be displayed in the alert dialog.</p>
 			
-			<p>Now, the initial value for the <code>foo</code> set-get property inherited from <code>MyClass</code> can be overrided in a subclass, as follows...</p>
+			<p>Now, the initial value for the <code>foo</code> state property inherited from <code>MyClass</code> can be overrided in a subclass, as follows...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
 <pre class="sample-code">var MyClass = Uize.Class.subclass ();      // create a class
-MyClass.registerProperties ({              // register the foo set-get property
+MyClass.registerProperties ({              // register the foo state property
   _foo:{
     name:'foo',
     onChange:function () {
@@ -441,10 +441,10 @@ var MySubclass = MyClass.subclass ();      // subclass the class
 MySubclass.set ({foo:'NOT BAR'});          // override initial value for foo
 
 var _mySubclassInstance = new MySubclass;  // create instance of MySubclass
-alert (_mySubclassInstance.get ('foo'));   // alert value of foo set-get property
+alert (_mySubclassInstance.get ('foo'));   // alert value of foo state property
 </pre>
 			
-			<p>In this example, we have now created a subclass of <code>MyClass</code> named <code>MySubclass</code>. The new subclass inherits the <code>foo</code> set-get property, along with its initial value of <code>'bar'</code> that is registered in <code>MyClass</code>. The <code>MySubclass.set</code> static method is then used to change the initial value of this set-get property to <code>'NOT BAR'</code>. Now, the fresh instance of <code>MySubclass</code> that is created, named <code>_mySubclassInstance</code>, will have the initial value <code>'NOT BAR'</code> for its <code>foo</code> set-get property, and the alert dialog will display this text.</p>
+			<p>In this example, we have now created a subclass of <code>MyClass</code> named <code>MySubclass</code>. The new subclass inherits the <code>foo</code> state property, along with its initial value of <code>'bar'</code> that is registered in <code>MyClass</code>. The <code>MySubclass.set</code> static method is then used to change the initial value of this state property to <code>'NOT BAR'</code>. Now, the fresh instance of <code>MySubclass</code> that is created, named <code>_mySubclassInstance</code>, will have the initial value <code>'NOT BAR'</code> for its <code>foo</code> state property, and the alert dialog will display this text.</p>
 		</div>
 	</div>
 	
@@ -598,12 +598,12 @@ alert (blendValues (50,100,.5));  // alerts the text "75"
 	<a name="8"></a>
 	<h1 class="heading1" title="8. Phases of Construction"><span class="headingNumber"><a href="#8" title="8. Phases of Construction">8</a>. </span>Phases of Construction</h1>
 	<div class="contents1">
-		<p>When an instance of a UIZE class is created, construction involves three phases: the <code><a href="#8_1">alphastructor</a></code> phase, the set-get property initialization phase, and the <code><a href="#8_2">omegastructor</a></code> phase.</p>
+		<p>When an instance of a UIZE class is created, construction involves three phases: the <code><a href="#8_1">alphastructor</a></code> phase, the state property initialization phase, and the <code><a href="#8_2">omegastructor</a></code> phase.</p>
 		
 		<a name="8_1"></a>
 		<h2 class="heading2" title="8. Phases of Construction -&gt; 8.1. alphastructor"><span class="headingNumber"><a href="#8" title="8. Phases of Construction">8</a>.<a href="#8_1" title="8. Phases of Construction -&gt; 8.1. alphastructor">1</a>. </span>alphastructor</h2>
 		<div class="contents2">
-			<p>The alphastructor is a function that is executed before the set-get properties for an instance are initialized, and before the <code><a href="#8_2">omegastructor</a></code> function is executed.</p>
+			<p>The alphastructor is a function that is executed before the state properties for an instance are initialized, and before the <code><a href="#8_2">omegastructor</a></code> function is executed.</p>
 			
 			<p>An alphastructor is registered by specifying a value for the first parameter when calling the <code>subclass</code> static method on the superclass.</p>
 			
@@ -617,9 +617,9 @@ alert (blendValues (50,100,.5));  // alerts the text "75"
 );
 </pre>
 			
-			<p>Code inside the alphastructor can set up private "scaffolding" type properties that need to be already in existence by the time any of the set-get properties are initialized. This allows <code>onChange</code> handlers for the set-get properties to count on certain foundation having been built.</p>
+			<p>Code inside the alphastructor can set up private "scaffolding" type properties that need to be already in existence by the time any of the state properties are initialized. This allows <code>onChange</code> handlers for the state properties to count on certain foundation having been built.</p>
 			
-			<p>Because of when it is executed, code inside the alphastructor function cannot rely on the instance's set-get properties being initialized to the values passed to the constructor.</p>
+			<p>Because of when it is executed, code inside the alphastructor function cannot rely on the instance's state properties being initialized to the values passed to the constructor.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -634,13 +634,13 @@ alert (blendValues (50,100,.5));  // alerts the text "75"
 ;
 </pre>
 			
-			<p>In this example, when the new instance of <code>MyClass</code> is created with the value <code>'bar'</code> specified for its <code>foo</code> set-get property, the alert inside the alphastructor will display the value <code>undefined</code>. This is by design and is an important nuance to take note of.</p>
+			<p>In this example, when the new instance of <code>MyClass</code> is created with the value <code>'bar'</code> specified for its <code>foo</code> state property, the alert inside the alphastructor will display the value <code>undefined</code>. This is by design and is an important nuance to take note of.</p>
 		</div>
 		
 		<a name="8_2"></a>
 		<h2 class="heading2" title="8. Phases of Construction -&gt; 8.2. omegastructor"><span class="headingNumber"><a href="#8" title="8. Phases of Construction">8</a>.<a href="#8_2" title="8. Phases of Construction -&gt; 8.2. omegastructor">2</a>. </span>omegastructor</h2>
 		<div class="contents2">
-			<p>The <code><a href="#8_2">omegastructor</a></code> is a function that is executed after the <code><a href="#8_1">alphastructor</a></code> function is executed, and after the set-get properties for an instance are initialized.</p>
+			<p>The <code><a href="#8_2">omegastructor</a></code> is a function that is executed after the <code><a href="#8_1">alphastructor</a></code> function is executed, and after the state properties for an instance are initialized.</p>
 		</div>
 	</div>
 	
@@ -763,11 +763,11 @@ alert (blendValues (50,100,.5));  // alerts the text "75"
 };
 </pre>
 			
-			<p>...or when registering set-get properties, as in...</p>
+			<p>...or when registering state properties, as in...</p>
 			
 			
 <pre class="sample-code">_class.registerProperties ({
-  // profiles for the set-get properties
+  // profiles for the state properties
 });
 </pre>
 			
@@ -836,11 +836,11 @@ _class.nonInheritableStatics.myStaticMethod = 1;
 		</div>
 		
 		<a name="9_7"></a>
-		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.7. Registering Set-get Properties"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_7" title="9. Dissecting a Subclass Module -&gt; 9.7. Registering Set-get Properties">7</a>. </span>Registering Set-get Properties</h2>
+		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.7. Registering State Properties"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_7" title="9. Dissecting a Subclass Module -&gt; 9.7. Registering State Properties">7</a>. </span>Registering State Properties</h2>
 		<div class="contents2">
-			<p>Set-get properties are registered for a class by calling the <code>MyClass.registerProperties</code> static method that is inherited from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class.</p>
+			<p>State properties are registered for a class by calling the <code>MyClass.registerProperties</code> static method that is inherited from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class.</p>
 			
-			<p>The <code>MyClass.registerProperties</code> static method lets you register one or more set-get properties in a single call to the method. The single parameter that the <code>MyClass.registerProperties</code> static method takes is an object containing profiles for all the set-get properties being registered, where each key is the private name for a set-get property, and where each value is either the public name - or an object providing a complete profile - for the set-get property.</p>
+			<p>The <code>MyClass.registerProperties</code> static method lets you register one or more state properties in a single call to the method. The single parameter that the <code>MyClass.registerProperties</code> static method takes is an object containing profiles for all the state properties being registered, where each key is the private name for a state property, and where each value is either the public name - or an object providing a complete profile - for the state property.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -857,7 +857,7 @@ _class.nonInheritableStatics.myStaticMethod = 1;
 });
 </pre>
 			
-			<p>In the above example, the set-get property with the public name <code>property1</code> is being mapped to the private identifier <code>_property1</code>. It is not technically necessary that the private name be the public name prefixed with an underscore - this is simply a convention that is followed. Because no object is used to specify the profile for this set-get property, there is no <code>onChange</code> handler registered, and the initial value is <code>undefined</code>. By contrast, the <code>property2</code> set-get property is registered with a profile object that specifies an <code>onChange</code> handler function and an initial value of <code>0</code>.</p>
+			<p>In the above example, the state property with the public name <code>property1</code> is being mapped to the private identifier <code>_property1</code>. It is not technically necessary that the private name be the public name prefixed with an underscore - this is simply a convention that is followed. Because no object is used to specify the profile for this state property, there is no <code>onChange</code> handler registered, and the initial value is <code>undefined</code>. By contrast, the <code>property2</code> state property is registered with a profile object that specifies an <code>onChange</code> handler function and an initial value of <code>0</code>.</p>
 		</div>
 	</div>
 	

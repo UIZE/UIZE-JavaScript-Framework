@@ -834,7 +834,7 @@ Uize.Class
 		...................................................
 
 	Derived Properties
-		A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.
+		A derived property is a special type of state property whose value is derived from the values of other state properties of the same instance.
 
 		EXAMPLE
 		...........................................................................................................
@@ -862,19 +862,19 @@ Uize.Class
 		});
 		...........................................................................................................
 
-		In the above example, the =allSelected=, =oneSelected=, and =someSelected= set-get properties are all derived properties. A set-get property is indicated as being a derived property by the presence of the =derived= property in the property profile. The =derived= property serves both to indicate that a set-get property is derived, as well to provide the deriver function that indicates from which other set-get properties the derived property is derived and how to calculate the derived value.
+		In the above example, the =allSelected=, =oneSelected=, and =someSelected= state properties are all derived properties. A state property is indicated as being a derived property by the presence of the =derived= property in the property profile. The =derived= property serves both to indicate that a state property is derived, as well to provide the deriver function that indicates from which other state properties the derived property is derived and how to calculate the derived value.
 
 		Implementation Questions
 			How Are Derived Properties Inherited
-				Currently, profiles for set-get properties are inherited through cloning of the definition objects.
+				Currently, profiles for state properties are inherited through cloning of the definition objects.
 
 				If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.
 
 		Implementation Approaches
 			Exploding Out the Properties Being Set
-				With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.
+				With this approach, setting values for derived state properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.
 
-				After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties *are* affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
+				After setting values for the state properties that are being set explicitly, and before executing onChange handlers for any state properties whose values have changed, the registered state properties are scanned for derived state properties that may be affected by the properties being set explicitly. If any derived state properties *are* affected by any of the state properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
 
 				Advantages
 					document...
@@ -883,30 +883,30 @@ Uize.Class
 					document...
 
 			Single Level Derived Property Batching
-				With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before =onChange= handlers are executed for the set-get properties being explicitly set.
+				With this approach, values for all directly affected derived state properties are set in a batch set that occurs before =onChange= handlers are executed for the state properties being explicitly set.
 
 			Using onChange Handler Mechanism
-				With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.
+				With this approach, when a derived state property is registed, an onChange handler is registered with any property from which the derived property is derived.
 
 				Advantages
 					- uses the existing optimization built into the =onChange= handlers mechanism
-					- matches the way values for derived set-get properties are currently being updated
+					- matches the way values for derived state properties are currently being updated
 
 				Disadvantages
-					- involves a separate set for each derived set-get property whose value changes
-					- requires management of =onChange= handlers and dealing with situations where set-get properties are re-registered
+					- involves a separate set for each derived state property whose value changes
+					- requires management of =onChange= handlers and dealing with situations where state properties are re-registered
 
 				Issues to Deal With
-					Re-registering a Non-derived Set-get Property
-						How does one deal with re-registering a set-get property that affects a derived set-get property?
+					Re-registering a Non-derived State Property
+						How does one deal with re-registering a state property that affects a derived state property?
 
-						Currently, everything gets blown away when re-registering a set-get property. This means that the =onChange= handler that was added to the set-get property at the time of registering the set-get property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.
+						Currently, everything gets blown away when re-registering a state property. This means that the =onChange= handler that was added to the state property at the time of registering the state property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.
 
-					Re-registering a Derived Set-get Property
-						How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?
+					Re-registering a Derived State Property
+						How does one deal with re-registering a derived state property, where the new profile for the derived property defines a different relationship properties from which it is derived?
 
 	Property Bindings
-		Provide a way in the =Uize.Class= base class to bind two set-get properties together, in order to keep their values synchronized.
+		Provide a way in the =Uize.Class= base class to bind two state properties together, in order to keep their values synchronized.
 
 		This would provide a more concise and lightweight way of binding properties than using an instance of the =Uize.Util.PropertyAdapter= class.
 
@@ -929,10 +929,10 @@ Uize.Class
 		- The =bindProperty= instance method would return an array of all the wirings created, so that they could be unwired later.
 		- The =bindProperty= instance method should ideally be implemented by factoring some code out of the =Uize.Util.PropertyAdapter= class, and then the =Uize.Util.PropertyAdapter= class could be reduced in size and made to leverage the =bindProperty= implementation in the =Uize.Class= base class.
 
-	Copy Ability for Set-get Properties
-		Copy ability, for initial values of set-get properties that are arrays or objects.
+	Copy Ability for State Properties
+		Copy ability, for initial values of state properties that are arrays or objects.
 
-		Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.
+		Have a property that can be specified in a state property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.
 
 	Handle Simple Type in Place of Constructor Properties
 		Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.
@@ -977,11 +977,11 @@ Uize.Class
 
 		- support for read-only properties (how would that work, exactly? Only settable through private name?)
 
-		- problem: there's currently no way to use the set method to set the value for a set-get property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for set-get properties that have no initial value (what percentage of the overall is that?).
+		- problem: there's currently no way to use the set method to set the value for a state property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for state properties that have no initial value (what percentage of the overall is that?).
 
 	constructed Property
 		- to indicate that the instance has been constructed
-		- can be used by onChange handlers for set-get properties to conditionalize actions
+		- can be used by onChange handlers for state properties to conditionalize actions
 		- particularly compelling to widgets, since being completely constructed is a good indicator child widgets added during construction exist and can be accessed
 		- some classes (maybe Zazzle.* or Uize.*) are already doing this with their own private properties
 
@@ -1373,7 +1373,7 @@ Uize.Data
 		- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?
 		- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?
 			- can two instances of classes that support the value interface simply be compared by their respective values?
-			- can two instances of any Uize subclass simply be compared by the values of all their set-get properties?
+			- can two instances of any Uize subclass simply be compared by the values of all their state properties?
 
 	Uize.Data.conjoined
 		- improve implementation to use object tagging technique employed in Uize.Array.Dupes
@@ -1519,7 +1519,7 @@ Uize.Doc.Simple
 		- a way to have bolded text that is not auto-linked
 
 	Problems
-		- no way to disambiguate for intra-document linking purposes when an instance method and a set-get property have the same name (happens with =wired= in doc for Uize.Widget, for example)
+		- no way to disambiguate for intra-document linking purposes when an instance method and a state property have the same name (happens with =wired= in doc for Uize.Widget, for example)
 
 Uize.Doc.Sucker
 	- automatically stitched in documentation, based on auto-detection of features and such...
@@ -1532,7 +1532,7 @@ Uize.Doc.Sucker
 
 		- feature level info
 			- for static features, a note regarding whether or not the static feature is inheritable
-			- for properties (instance properties, static properties, set-get properties), note the initial value
+			- for properties (instance properties, static properties, state properties), note the initial value
 
 			- for method features, the ability to see the implementation (not the scrunched, of course, so how???)
 
@@ -1642,12 +1642,12 @@ Uize.Fx.xBoxRadius
 
 Uize.Generator
 	- from the widget's perspective as a user of generators
-		- you have a set of display properties (set-get properties that are reflected in the UI)
-		- a widget class should be able to register which of its set-get properties affect display
-			- of the set-get properties that affect display...
+		- you have a set of display properties (state properties that are reflected in the UI)
+		- a widget class should be able to register which of its state properties affect display
+			- of the state properties that affect display...
 				- which are updated by the client code
-				- which are handled as inputs by the generator specified by the html set-get property
-				- some display set-get properties may be handled by both the generator and client code
+				- which are handled as inputs by the generator specified by the html state property
+				- some display state properties may be handled by both the generator and client code
 
 		................................................................................
 		if (property values are modified) {
@@ -1666,7 +1666,7 @@ Uize.Generator
 		}
 		................................................................................
 
-		- html set-get property
+		- html state property
 			- string, being a template into which a limited set of params are substituted
 			- a function, which can generate the HTML, and which receives no parameters but which is called as a method on the instance (so can access property values)
 			- an instance of a generator class
@@ -1677,7 +1677,7 @@ Uize.Generator
 		- a generator should not assume the context of its usage, so it should be able to operate on the server side or in a non HTML document context
 
 	Uize.Generator implements simply...
-		- set-get properties
+		- state properties
 			- asynchronous
 			- params
 		- getOutput (params,callback)
@@ -2159,7 +2159,7 @@ Uize.Widget.Population
 	- optimization
 		!!!!!! store the reconstruction sequence so that it is only ever reformulated if the templateItem or templateStr are modified. This will optimize the repeat use of an instance, which is common in Zazzle's design tool attribute selectors.
 
-		- could theoretically move some of the optimization into the getOutput method as well as where it is right now in the updateUi method, so that if the templateStr, templateItem, and items set-get properties don't change then the output isn't generated repeatedly if the getOutput method is called repeatedly
+		- could theoretically move some of the optimization into the getOutput method as well as where it is right now in the updateUi method, so that if the templateStr, templateItem, and items state properties don't change then the output isn't generated repeatedly if the getOutput method is called repeatedly
 
 	- for the replaceByToken method...
 		- add support for an array as the second param (where the tokens are of the form {elementNo})
@@ -2331,9 +2331,9 @@ Uize.Template
 		- support whitespace gobbling
 
 Uize.Test
-	- expectInstanceState (set-get properties values)
+	- expectInstanceState (state properties values)
 
-	- new set-get properties
+	- new state properties
 		- breathe: an amount of time that the test runner should pause after completion of a test
 		- cleanup: code to execute upon completion of a test (different between success or failure?)
 		- context: a context selector/filter that can be used by the test runner to determine if the test should be run in the current context (eg. browser tests vs non-browser tests, tests specific to certain browsers, etc.)
@@ -2548,8 +2548,8 @@ Uize.Widget
 
 	- getNodeProperty (to use Uize.Node.getProperty)
 
-	- a way of easily binding any set-get property to either a child widget (or any widget) or an implied node
-		- the connection is bi-directional (changing the child widget's value or node's value updates set-get property, and changing set-get property value updates child widget's or node's value)
+	- a way of easily binding any state property to either a child widget (or any widget) or an implied node
+		- the connection is bi-directional (changing the child widget's value or node's value updates state property, and changing state property value updates child widget's or node's value)
 	- disabled reason mechanism
 		- a general mechanism for widgets to have reasons registered for why they are disabled. Then, a tooltip could display this reason (or reasons) on mousing over the widget, or a dialog with the reason (or reasons) could be displayed when trying to interact with the widget (eg. clicking or mousing down on it)
 	- node cache improvements
@@ -2570,7 +2570,7 @@ Uize.Widget
 			??? enabledInherited -> enabledProvided
 			??? busyInherited -> busyProvided
 		- label the concept "widget providence"
-		- reconcile any new semantics with existing "inherit" value for set-get properties, and "enabledInherited" and "busyInherited" set-get properties for widgets
+		- reconcile any new semantics with existing "inherit" value for state properties, and "enabledInherited" and "busyInherited" state properties for widgets
 	- if wireNode is called before widget instance is fully constructed, consider throwing a warning?
 	- removeNode method: update to support removing multiple nodes
 	- flushNodeCache: update to support flushing by node reference, and for multiple nodes in a blob
@@ -2840,7 +2840,7 @@ Uize.Widget.CollectionItem.Zooming
 			- once high res image node has loaded image, it is revealed and low res image node is hidden
 		- zooming applies to either low res image node or high res image node, depending on loaded state of high res image
 
-	- previewZoomUrl set-get property should have onChange handler to handle change in URL possibly during use
+	- previewZoomUrl state property should have onChange handler to handle change in URL possibly during use
 
 Uize.Widget.ColorCube
 	- allow setting class name for swatch nodes
@@ -2905,7 +2905,7 @@ Uize.Widget.Dialog
 
 		If you remember the last click, do you remember the event position? Or the node reference of the event source? The document could be scrolled between clicking and showing the dialog. Is it a configuration of the dialog to position on
 
-	- support for okText and cancelText set-get properties
+	- support for okText and cancelText state properties
 		and perhaps defaultOkText and defaultCancelText? Either way, localization of default strings should be able to occur inside the widget module, rather than being defaulted in Uize.Widget.Page where the code to show the confirm dialog is
 
 	- the update UI method for position updates should not always resize the drag shield
@@ -2941,7 +2941,7 @@ Uize.Widget.Dialog.Confirm
 Uize.Widget.Dialog.Iframe
 	- formalize system for interface between iframe dialog widget and iframe document
 		- dialog widget should be able to be proxy for certain state that the iframe document's page widget cares to expose
-		- exposed state could be reflected as set-get properties of the dialog widget, with corresponding set-get properties of the iframe document's page widget
+		- exposed state could be reflected as state properties of the dialog widget, with corresponding state properties of the iframe document's page widget
 		- property values are synchronized in both directions: if any are changed in the dialog widget, the changes are relayed to the iframe document's page widget, and if any are changed in the iframe document's page widget, the changes are relayed to the dialog widget
 		- property values from dialog widget are used - somehow - during construction of iframe document's page widget, so it has its state as early as possible
 		- dialog widget can become persister of state for iframe document's page widget, even with navigation across pages within the iframe
@@ -2962,7 +2962,7 @@ Uize.Widget.Dialog.Picker
 		- submit value while changing behavior is exposed to user through preview checkbox (where?)
 
 Uize.Widget.Drag
-	- it should be possible to cancel drag programmatically during drag, just by setting the dragCancelled set-get property to true
+	- it should be possible to cancel drag programmatically during drag, just by setting the dragCancelled state property to true
 	- upon releasing, an event should be fired to allow an application to programmatically cancel drag
 	- scroll near borders behavior
 	- clicking right mouse button during drag should also cancel drag (just like hitting escape key)
@@ -2993,7 +2993,7 @@ Uize.Widget.FormElement
 	- possibly rename to something more concise (fewer syllables would be nice)
 		- Uize.Widget.FormField
 		- Uize.Widget.FormInput
-	- should implement a values set-get property for select type (single and multi-select)
+	- should implement a values state property for select type (single and multi-select)
 	- support readOnly state? Pick up initial enabled value from readOnly property of input node?
 
 Uize.Widget.HoverFader
@@ -3501,9 +3501,9 @@ Uize.Widget.LinkToThis
 
 Uize.Widget.ListEditor
 	- must allow validation ability (for things like domains and such)
-	- possibly have a conformer for the list set-get property that applies the item conformer to all the items
+	- possibly have a conformer for the list state property that applies the item conformer to all the items
 		- in such cases, one may wish for performance sake to maintain a hash of values and cached conformed state, that gets flushed whenever the itemConformer is changed
-	- for 'a-z' and 'z-a' values for sort set-get property, sort should be case insensitive
+	- for 'a-z' and 'z-a' values for sort state property, sort should be case insensitive
 	- configurable max number of items?
 
 Uize.Widget.Log
@@ -3755,7 +3755,7 @@ Uize.Widget.Resizer
 	- highlight current handle being dragged
 
 Uize.Widget.Resizer.Marquee
-	- 'Position Changed' event should be fired whenever the position is changed, even if it's through the set-get property interface (make sure this won't mess up any code -- especially Zazzle DT)
+	- 'Position Changed' event should be fired whenever the position is changed, even if it's through the state property interface (make sure this won't mess up any code -- especially Zazzle DT)
 	- a mode where the middle handles are sized to the length of the axis (similar to hot area for resizing a window in one axis only)
 	- consider marquee HTML implementation with no drag handles, just hot regions (for less clutter)
 	- prim up built in HTML markup to allow parameters

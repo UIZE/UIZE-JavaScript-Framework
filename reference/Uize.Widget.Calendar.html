@@ -35,9 +35,9 @@
 					<li><a href="#1_2" title="The Uize.Widget.Calendar implements the following JavaScript interfaces...">1.2. Implemented Interfaces</a></li>
 					<li><a href="#1_3" title="The Uize.Widget.Calendar module supports the ability to limit the date range within which the user can select dates.">1.3. Valid Date Range</a>
 						<ul>
-							<li><a href="#1_3_1" title="When dates are specified for both the minValue and maxValue set-get properties, then date selection can be constrained to a bounded date range - the user will not be able to select a date outside of this range.">1.3.1. Upper and Lower Bounds</a>
+							<li><a href="#1_3_1" title="When dates are specified for both the minValue and maxValue state properties, then date selection can be constrained to a bounded date range - the user will not be able to select a date outside of this range.">1.3.1. Upper and Lower Bounds</a>
 								<ul>
-									<li><a href="#1_3_1_1" title="When supplying values for the minValue and maxValue set-get properties, it may be useful to use static methods of the Uize.Date module to more easily create logical date ranges.">1.3.1.1. Using Uize.Date.getRangeAround</a></li>
+									<li><a href="#1_3_1_1" title="When supplying values for the minValue and maxValue state properties, it may be useful to use static methods of the Uize.Date module to more easily create logical date ranges.">1.3.1.1. Using Uize.Date.getRangeAround</a></li>
 								</ul>
 							</li>
 							<li><a href="#1_3_2" title="The minValue and maxValue properties are nullable.">1.3.2. Boundless Date Ranges</a>
@@ -47,16 +47,16 @@
 									<li><a href="#1_3_2_3" title="When both the minValue and maxValue properties are set to null or &apos;&apos; (empty string), then there will be no restriction on the date that the user can select.">1.3.2.3. No Lower or Upper Bounds</a></li>
 								</ul>
 							</li>
-							<li><a href="#1_3_3" title="The value of the value set-get property (ie. the selected date) may be set to null, effectively being invalidated, if the values of the minValue and/or maxValue set-get properties are modified and the selected date no longer falls within the newly set Valid Date Range.">1.3.3. Invalidation of value</a></li>
+							<li><a href="#1_3_3" title="The value of the value state property (ie. the selected date) may be set to null, effectively being invalidated, if the values of the minValue and/or maxValue state properties are modified and the selected date no longer falls within the newly set Valid Date Range.">1.3.3. Invalidation of value</a></li>
 						</ul>
 					</li>
 					<li><a href="#1_4" title="The Uize.Widget.Calendar module uses the Uize.Date.resolve static method of the Uize.Date module to conform date values to instances of JavaScript&apos;s Date object.">1.4. Specifying Date Values</a></li>
 					<li><a href="#1_5" title="The Uize.Widget.Calendar module implements support for month and year navigation in the form of navigation buttons.">1.5. Navigation Buttons</a>
 						<ul>
-							<li><a href="#1_5_1" title="The Uize.Widget.Calendar module manages the enabled state of the Navigation Buttons so that they are disabled when their action would take the view outside of a Valid Date Range specified by the minValue and maxValue set-get properties.">1.5.1. Navigation Button State Management</a></li>
+							<li><a href="#1_5_1" title="The Uize.Widget.Calendar module manages the enabled state of the Navigation Buttons so that they are disabled when their action would take the view outside of a Valid Date Range specified by the minValue and maxValue state properties.">1.5.1. Navigation Button State Management</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_6" title="The Uize.Widget.Calendar module implements a snap-into-view behavior, so that programmatically changing the value of the value, minValue, or maxValue set-get properties will update the month and year set-get properties - as needed - in order to ensure that the date is in view and that the view is not outside of the Valid Date Range.">1.6. Snap View Behavior</a></li>
+					<li><a href="#1_6" title="The Uize.Widget.Calendar module implements a snap-into-view behavior, so that programmatically changing the value of the value, minValue, or maxValue state properties will update the month and year state properties - as needed - in order to ensure that the date is in view and that the view is not outside of the Valid Date Range.">1.6. Snap View Behavior</a></li>
 					<li><a href="#1_7" title="The Uize.Widget.Calendar module implements a date grid, with links for every day of the month, which lets the user select a date.">1.7. Date Grid</a></li>
 					<li><a href="#1_8" title="The following example pages are good showcases for the Uize.Widget.Calendar module...">1.8. Examples</a></li>
 					<li><a href="#1_9" title="The Uize.Widget.Calendar module defines the Uize.Widget.Calendar class, which is a subclass of Uize.Widget.">1.9. Implementation Info</a>
@@ -72,21 +72,21 @@
 			</li>
 			<li><a href="#2">2. Child Widgets</a>
 				<ul>
-					<li><a href="#2_1" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Buttons, and that increments the value of the month set-get property.">2.1. nextMonth</a></li>
-					<li><a href="#2_2" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Buttons, and that increments the value of the year set-get property.">2.2. nextYear</a></li>
-					<li><a href="#2_3" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Buttons, and that decrements the value of the month set-get property.">2.3. previousMonth</a></li>
-					<li><a href="#2_4" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Buttons, and that decrements the value of the year set-get property.">2.4. previousYear</a></li>
+					<li><a href="#2_1" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Buttons, and that increments the value of the month state property.">2.1. nextMonth</a></li>
+					<li><a href="#2_2" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Buttons, and that increments the value of the year state property.">2.2. nextYear</a></li>
+					<li><a href="#2_3" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Buttons, and that decrements the value of the month state property.">2.3. previousMonth</a></li>
+					<li><a href="#2_4" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Buttons, and that decrements the value of the year state property.">2.4. previousYear</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Implied Nodes</a>
 				<ul>
 					<li><a href="#3_1" title="One of a number of nodes in the Date Grid that are used to indicate the days of the month of the year currently in view by the instance and that may be wired up to let the user select the corresponding date.">3.1. day[dayNo]</a></li>
 					<li><a href="#3_2" title="A node, whose contents will be replaced with the dynamically generated grid HTML for the month of the year currently in view by the instance.">3.2. grid</a></li>
-					<li><a href="#3_3" title="A node that is used to display the name of the current month in view (ie. the value of the month set-get property, displayed as a month name).">3.3. month Implied Node</a></li>
-					<li><a href="#3_4" title="A node that is used to display the current year in view (ie. the value of the year set-get property).">3.4. year Implied Node</a></li>
+					<li><a href="#3_3" title="A node that is used to display the name of the current month in view (ie. the value of the month state property, displayed as a month name).">3.3. month Implied Node</a></li>
+					<li><a href="#3_4" title="A node that is used to display the current year in view (ie. the value of the year state property).">3.4. year Implied Node</a></li>
 				</ul>
 			</li>
-			<li><a href="#4">4. Set-get Properties</a>
+			<li><a href="#4">4. State Properties</a>
 				<ul>
 					<li><a href="#4_1" title="Inherited from Uize.Widget.">4.1. built</a></li>
 					<li><a href="#4_2" title="Inherited from Uize.Widget.">4.2. busy</a></li>
@@ -101,21 +101,21 @@
 					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. idPrefixConstruction</a></li>
 					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. insertionMode</a></li>
 					<li><a href="#4_13" title="Inherited from Uize.Widget.">4.13. localized</a></li>
-					<li><a href="#4_14" title="An instance of JavaScript&apos;s Date object, representing the latest date that can be selected by the user (ie. the maximum value for the value set-get property).">4.14. maxValue</a>
+					<li><a href="#4_14" title="An instance of JavaScript&apos;s Date object, representing the latest date that can be selected by the user (ie. the maximum value for the value state property).">4.14. maxValue</a>
 						<ul>
 							<li><a href="#4_14_1" title="When setting the maxValue property, the date can be specified in a variety of different manners (for more info, see the section Specifying Date Values).">4.14.1. Flexibility in Specifying Value</a></li>
 							<li><a href="#4_14_2" title="The maxValue property can be set to null or &apos;&apos; (empty string), to indicate that there is no upper bound to the Valid Date Range (for more info, see the section Boundless Date Ranges).">4.14.2. Nullable</a></li>
-							<li><a href="#4_14_3" title="When the maxValue property is modified, the values of the year and month set-get properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set Valid Date Range (for more info, see the section Snap View Behavior).">4.14.3. Snapping into View</a></li>
-							<li><a href="#4_14_4" title="When the maxValue property is modified, the value set-get property may be set to null if the selected date lies outside of the newly set Valid Date Range (for more info, see the section Invalidation of value).">4.14.4. Value Invalidation</a></li>
+							<li><a href="#4_14_3" title="When the maxValue property is modified, the values of the year and month state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set Valid Date Range (for more info, see the section Snap View Behavior).">4.14.3. Snapping into View</a></li>
+							<li><a href="#4_14_4" title="When the maxValue property is modified, the value state property may be set to null if the selected date lies outside of the newly set Valid Date Range (for more info, see the section Invalidation of value).">4.14.4. Value Invalidation</a></li>
 							<li><a href="#4_14_5" title="When the value of the maxValue property is modified, the state of the year and month navigation buttons will be updated, so that buttons will only be enabled if their action would not take the view outside of the newly set Valid Date Range (for more info, see the section Navigation Button State Management).">4.14.5. Updating Navigation Button State</a></li>
 						</ul>
 					</li>
-					<li><a href="#4_15" title="An instance of JavaScript&apos;s Date object, representing the earliest date that can be selected by the user (ie. the minimum value for the value set-get property).">4.15. minValue</a>
+					<li><a href="#4_15" title="An instance of JavaScript&apos;s Date object, representing the earliest date that can be selected by the user (ie. the minimum value for the value state property).">4.15. minValue</a>
 						<ul>
 							<li><a href="#4_15_1" title="When setting the minValue property, the date can be specified in a variety of different manners (for more info, see the section Specifying Date Values).">4.15.1. Flexibility in Specifying Value</a></li>
 							<li><a href="#4_15_2" title="The minValue property can be set to null or &apos;&apos; (empty string), to indicate that there is no lower bound to the Valid Date Range (for more info, see the section Boundless Date Ranges).">4.15.2. Nullable</a></li>
-							<li><a href="#4_15_3" title="When the minValue property is modified, the values of the year and month set-get properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set Valid Date Range (for more info, see the section Snap View Behavior).">4.15.3. Snapping into View</a></li>
-							<li><a href="#4_15_4" title="When the minValue property is modified, the value set-get property may be set to null if the selected date lies outside of the newly set Valid Date Range (for more info, see the section Invalidation of value).">4.15.4. Value Invalidation</a></li>
+							<li><a href="#4_15_3" title="When the minValue property is modified, the values of the year and month state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set Valid Date Range (for more info, see the section Snap View Behavior).">4.15.3. Snapping into View</a></li>
+							<li><a href="#4_15_4" title="When the minValue property is modified, the value state property may be set to null if the selected date lies outside of the newly set Valid Date Range (for more info, see the section Invalidation of value).">4.15.4. Value Invalidation</a></li>
 							<li><a href="#4_15_5" title="When the value of the minValue property is modified, the state of the year and month navigation buttons will be updated, so that buttons will only be enabled if their action would not take the view outside of the newly set Valid Date Range (for more info, see the section Navigation Button State Management).">4.15.5. Updating Navigation Button State</a></li>
 						</ul>
 					</li>
@@ -126,12 +126,12 @@
 					</li>
 					<li><a href="#4_17" title="Inherited from Uize.Widget.">4.17. name</a></li>
 					<li><a href="#4_18" title="Inherited from Uize.Widget.">4.18. nodeMap</a></li>
-					<li><a href="#4_19" title="A boolean, specifying whether or not the values of the month and year set-get properties should automatically be set when the value of the value set-get property changes.">4.19. snapViewOnValueChange</a></li>
+					<li><a href="#4_19" title="A boolean, specifying whether or not the values of the month and year state properties should automatically be set when the value of the value state property changes.">4.19. snapViewOnValueChange</a></li>
 					<li><a href="#4_20" title="An instance of JavaScript&apos;s Date object, representing the currently selected date value for the instance.">4.20. value</a>
 						<ul>
 							<li><a href="#4_20_1" title="When setting the value property, the date can be specified in a variety of different manners (for more info, see the section Specifying Date Values).">4.20.1. Flexibility in Specifying Value</a></li>
 							<li><a href="#4_20_2" title="The value property can be set to null or &apos;&apos; (empty string), to indicate that no date has been selected.">4.20.2. Nullable</a></li>
-							<li><a href="#4_20_3" title="If the snapViewOnValueChange set-get property is set to true at the time that the value property is modified, then the values of the year and month set-get properties will be updated as needed in order to ensure that the newly selected date is in view.">4.20.3. Snapping Into View</a></li>
+							<li><a href="#4_20_3" title="If the snapViewOnValueChange state property is set to true at the time that the value property is modified, then the values of the year and month state properties will be updated as needed in order to ensure that the newly selected date is in view.">4.20.3. Snapping Into View</a></li>
 						</ul>
 					</li>
 					<li><a href="#4_21" title="Inherited from Uize.Widget.">4.21. wired</a></li>
@@ -239,8 +239,8 @@
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="#1_5">Navigation Buttons</a> - Month and year navigation buttons let the user navigate the calendar to a different month or year in order to select a date.</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="#1_5_1">Navigation Button State Management</a> - The enabled states of the month and year navigation buttons are managed so that they are disabled when their action would take the view outside of a configured <a href="#1_3">Valid Date Range</a>.</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="#1_7">Date Grid</a> - A date grid, with links for every day of the month, lets the user select a date.</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="#1_6">Snap View Behavior</a> - A snap view behavior ensures that the date is in view and that the view is not outside of the <a href="#1_3">Valid Date Range</a> after the values of the <code><a href="#4_20">value</a></code>, <code><a href="#4_15">minValue</a></code>, or <code><a href="#4_14">maxValue</a></code> set-get properties are changed programmatically.</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Flexibility in <a href="#1_4">Specifying Date Values</a> - Flexibility in how dates can be specified when setting values for the <code><a href="#4_20">value</a></code>, <code><a href="#4_15">minValue</a></code>, and <code><a href="#4_14">maxValue</a></code> set-get properties lets you specify dates in any of the ways supported by the <code>Uize.Date.resolve</code> method.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="#1_6">Snap View Behavior</a> - A snap view behavior ensures that the date is in view and that the view is not outside of the <a href="#1_3">Valid Date Range</a> after the values of the <code><a href="#4_20">value</a></code>, <code><a href="#4_15">minValue</a></code>, or <code><a href="#4_14">maxValue</a></code> state properties are changed programmatically.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Flexibility in <a href="#1_4">Specifying Date Values</a> - Flexibility in how dates can be specified when setting values for the <code><a href="#4_20">value</a></code>, <code><a href="#4_15">minValue</a></code>, and <code><a href="#4_14">maxValue</a></code> state properties lets you specify dates in any of the ways supported by the <code>Uize.Date.resolve</code> method.</td></tr>
 			</table>
 		</div>
 		
@@ -250,8 +250,8 @@
 			<p>The <code>Uize.Widget.Calendar</code> implements the following JavaScript interfaces...</p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Value Interface</b> - This class implements a <code><a href="#4_20">value</a></code> set-get property and, therefore, it implements the Value Interface.</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Value Range Interface</b> - This class implements <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> set-get properties and, therefore, it implements the Value Range Interface.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Value Interface</b> - This class implements a <code><a href="#4_20">value</a></code> state property and, therefore, it implements the Value Interface.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Value Range Interface</b> - This class implements <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> state properties and, therefore, it implements the Value Range Interface.</td></tr>
 			</table>
 		</div>
 		
@@ -260,12 +260,12 @@
 		<div class="contents2">
 			<p>The <code>Uize.Widget.Calendar</code> module supports the ability to limit the date range within which the user can select dates.</p>
 			
-			<p>It does this by providing the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> set-get properties, where the <code><a href="#4_15">minValue</a></code> property specifies the start date of the valid date range, and the <code><a href="#4_14">maxValue</a></code> property specifies the end date of the range.</p>
+			<p>It does this by providing the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> state properties, where the <code><a href="#4_15">minValue</a></code> property specifies the start date of the valid date range, and the <code><a href="#4_14">maxValue</a></code> property specifies the end date of the range.</p>
 			
 			<a name="1_3_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Valid Date Range -&gt; 1.3.1. Upper and Lower Bounds"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Valid Date Range">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Valid Date Range -&gt; 1.3.1. Upper and Lower Bounds">1</a>. </span>Upper and Lower Bounds</h3>
 			<div class="contents3">
-				<p>When dates are specified for both the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> set-get properties, then date selection can be constrained to a bounded date range - the user will not be able to select a date outside of this range.</p>
+				<p>When dates are specified for both the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> state properties, then date selection can be constrained to a bounded date range - the user will not be able to select a date outside of this range.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -282,7 +282,7 @@
 				<a name="1_3_1_1"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.3. Valid Date Range -&gt; 1.3.1. Upper and Lower Bounds -&gt; 1.3.1.1. Using Uize.Date.getRangeAround"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Valid Date Range">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Valid Date Range -&gt; 1.3.1. Upper and Lower Bounds">1</a>.<a href="#1_3_1_1" title="1. Introduction -&gt; 1.3. Valid Date Range -&gt; 1.3.1. Upper and Lower Bounds -&gt; 1.3.1.1. Using Uize.Date.getRangeAround">1</a>. </span>Using Uize.Date.getRangeAround</h4>
 				<div class="contents4">
-					<p>When supplying values for the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> set-get properties, it may be useful to use static methods of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module to more easily create logical date ranges.</p>
+					<p>When supplying values for the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> state properties, it may be useful to use static methods of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module to more easily create logical date ranges.</p>
 					
 					<p>One particularly useful method of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module is the <code>Uize.Date.getRangeAround</code> method, which will generate a "neat" date range of the specified range size around the specified date, such as the week around a specified date, the month around a date, the quarter around a date, the year around a date, etc.</p>
 					
@@ -292,7 +292,7 @@
 <pre class="sample-code">page.addChild ('calendar',Uize.Widget.Calendar,Uize.Date.getRangeAround ('','week'));
 </pre>
 					
-					<p>In the above example, the user will be able to select a date in the current week (ie. the week of the date on which this calendar widget is instantiated). The result from the call to the <code>Uize.Date.getRangeAround</code> method is being supplied as the set-get property values for the <code>Uize.Widget.Calendar</code> instance. This works because the <code>Uize.Widget.Calendar</code> class implements <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> set-get properties, and because the <code>dateRangeOBJ</code> value returned by the <code>Uize.Date.getRangeAround</code> method contains <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> properties.</p>
+					<p>In the above example, the user will be able to select a date in the current week (ie. the week of the date on which this calendar widget is instantiated). The result from the call to the <code>Uize.Date.getRangeAround</code> method is being supplied as the state property values for the <code>Uize.Widget.Calendar</code> instance. This works because the <code>Uize.Widget.Calendar</code> class implements <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> state properties, and because the <code>dateRangeOBJ</code> value returned by the <code>Uize.Date.getRangeAround</code> method contains <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> properties.</p>
 				</div>
 			</div>
 			
@@ -363,7 +363,7 @@
 			<a name="1_3_3"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Valid Date Range -&gt; 1.3.3. Invalidation of value"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Valid Date Range">3</a>.<a href="#1_3_3" title="1. Introduction -&gt; 1.3. Valid Date Range -&gt; 1.3.3. Invalidation of value">3</a>. </span>Invalidation of value</h3>
 			<div class="contents3">
-				<p>The value of the <code><a href="#4_20">value</a></code> set-get property (ie. the selected date) may be set to <code>null</code>, effectively being invalidated, if the values of the <code><a href="#4_15">minValue</a></code> and/or <code><a href="#4_14">maxValue</a></code> set-get properties are modified and the selected date no longer falls within the newly set <a href="#1_3">Valid Date Range</a>.</p>
+				<p>The value of the <code><a href="#4_20">value</a></code> state property (ie. the selected date) may be set to <code>null</code>, effectively being invalidated, if the values of the <code><a href="#4_15">minValue</a></code> and/or <code><a href="#4_14">maxValue</a></code> state properties are modified and the selected date no longer falls within the newly set <a href="#1_3">Valid Date Range</a>.</p>
 			</div>
 		</div>
 		
@@ -372,7 +372,7 @@
 		<div class="contents2">
 			<p>The <code>Uize.Widget.Calendar</code> module uses the <code>Uize.Date.resolve</code> static method of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module to conform date values to instances of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object.</p>
 			
-			<p>This provides flexibility in how dates can be specified when setting values for the <code><a href="#4_20">value</a></code>, <code><a href="#4_15">minValue</a></code>, and <code><a href="#4_14">maxValue</a></code> set-get properties. Supported value types include: strings in <code>ISO 8601</code> format, instances of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, date strings that can be parsed by the <code><a href="../javascript-reference/Date.html">Date</a></code> object, and basically any value type that is supported by the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module's <code>Uize.Date.resolve</code> method.</p>
+			<p>This provides flexibility in how dates can be specified when setting values for the <code><a href="#4_20">value</a></code>, <code><a href="#4_15">minValue</a></code>, and <code><a href="#4_14">maxValue</a></code> state properties. Supported value types include: strings in <code>ISO 8601</code> format, instances of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, date strings that can be parsed by the <code><a href="../javascript-reference/Date.html">Date</a></code> object, and basically any value type that is supported by the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module's <code>Uize.Date.resolve</code> method.</p>
 		</div>
 		
 		<a name="1_5"></a>
@@ -380,20 +380,20 @@
 		<div class="contents2">
 			<p>The <code>Uize.Widget.Calendar</code> module implements support for month and year navigation in the form of navigation buttons.</p>
 			
-			<p>The navigation button child widgets, which are all instances of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, allow the user to navigate the calendar to a different month or year in order to select a date. Month navigation is offered via the <code><a href="#2_1">nextMonth</a></code> and <code><a href="#2_3">previousMonth</a></code> buttons, which are wired to control the value of the <code><a href="#4_16">month</a></code> set-get property. Year navigation is offered via the <code><a href="#2_2">nextYear</a></code> and <code><a href="#2_4">previousYear</a></code> buttons, which are wired to control the value of the <code><a href="#4_22">year</a></code> set-get property.</p>
+			<p>The navigation button child widgets, which are all instances of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, allow the user to navigate the calendar to a different month or year in order to select a date. Month navigation is offered via the <code><a href="#2_1">nextMonth</a></code> and <code><a href="#2_3">previousMonth</a></code> buttons, which are wired to control the value of the <code><a href="#4_16">month</a></code> state property. Year navigation is offered via the <code><a href="#2_2">nextYear</a></code> and <code><a href="#2_4">previousYear</a></code> buttons, which are wired to control the value of the <code><a href="#4_22">year</a></code> state property.</p>
 			
 			<p>The markup for the navigation button child widgets is optional, and a given implementation of a calendar widget's HTML does not need to offer the navigation buttons in its UI. If the navigation button markup is omitted, the application may elect to provide month and year navigation through some alternate UI. In other cases, a calendar widget's HTML may exclude just the markup for the year navigation buttons, especially in cases where the user is not likely to need to navigate to earlier or later years, or if date selection will be constrained to dates from a particular year.</p>
 			
 			<a name="1_5_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.5. Navigation Buttons -&gt; 1.5.1. Navigation Button State Management"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_5" title="1. Introduction -&gt; 1.5. Navigation Buttons">5</a>.<a href="#1_5_1" title="1. Introduction -&gt; 1.5. Navigation Buttons -&gt; 1.5.1. Navigation Button State Management">1</a>. </span>Navigation Button State Management</h3>
 			<div class="contents3">
-				<p>The <code>Uize.Widget.Calendar</code> module manages the <code><a href="#4_7">enabled</a></code> state of the <a href="#1_5">Navigation Buttons</a> so that they are disabled when their action would take the view outside of a <a href="#1_3">Valid Date Range</a> specified by the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> set-get properties.</p>
+				<p>The <code>Uize.Widget.Calendar</code> module manages the <code><a href="#4_7">enabled</a></code> state of the <a href="#1_5">Navigation Buttons</a> so that they are disabled when their action would take the view outside of a <a href="#1_3">Valid Date Range</a> specified by the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> state properties.</p>
 				
 				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a non-null value is specified for the <code><a href="#4_14">maxValue</a></code> set-get property and incrementing the value of the <code><a href="#4_16">month</a></code> set-get property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_1">nextMonth</a></code> button will be disabled.</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a non-null value is specified for the <code><a href="#4_15">minValue</a></code> set-get property and decrementing the value of the <code><a href="#4_16">month</a></code> set-get property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_3">previousMonth</a></code> button will be disabled.</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a non-null value is specified for the <code><a href="#4_14">maxValue</a></code> set-get property and incrementing the value of the <code><a href="#4_22">year</a></code> set-get property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_2">nextYear</a></code> button will be disabled.</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a non-null value is specified for the <code><a href="#4_15">minValue</a></code> set-get property and decrementing the value of the <code><a href="#4_22">year</a></code> set-get property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_4">previousYear</a></code> button will be disabled.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a non-null value is specified for the <code><a href="#4_14">maxValue</a></code> state property and incrementing the value of the <code><a href="#4_16">month</a></code> state property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_1">nextMonth</a></code> button will be disabled.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a non-null value is specified for the <code><a href="#4_15">minValue</a></code> state property and decrementing the value of the <code><a href="#4_16">month</a></code> state property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_3">previousMonth</a></code> button will be disabled.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a non-null value is specified for the <code><a href="#4_14">maxValue</a></code> state property and incrementing the value of the <code><a href="#4_22">year</a></code> state property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_2">nextYear</a></code> button will be disabled.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a non-null value is specified for the <code><a href="#4_15">minValue</a></code> state property and decrementing the value of the <code><a href="#4_22">year</a></code> state property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_4">previousYear</a></code> button will be disabled.</td></tr>
 				</table>
 			</div>
 		</div>
@@ -401,9 +401,9 @@
 		<a name="1_6"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.6. Snap View Behavior"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. Snap View Behavior">6</a>. </span>Snap View Behavior</h2>
 		<div class="contents2">
-			<p>The <code>Uize.Widget.Calendar</code> module implements a snap-into-view behavior, so that programmatically changing the value of the <code><a href="#4_20">value</a></code>, <code><a href="#4_15">minValue</a></code>, or <code><a href="#4_14">maxValue</a></code> set-get properties will update the <code><a href="#4_16">month</a></code> and <code><a href="#4_22">year</a></code> set-get properties - as needed - in order to ensure that the date is in view and that the view is not outside of the <a href="#1_3">Valid Date Range</a>.</p>
+			<p>The <code>Uize.Widget.Calendar</code> module implements a snap-into-view behavior, so that programmatically changing the value of the <code><a href="#4_20">value</a></code>, <code><a href="#4_15">minValue</a></code>, or <code><a href="#4_14">maxValue</a></code> state properties will update the <code><a href="#4_16">month</a></code> and <code><a href="#4_22">year</a></code> state properties - as needed - in order to ensure that the date is in view and that the view is not outside of the <a href="#1_3">Valid Date Range</a>.</p>
 			
-			<p>The Snap View behavior, as it pertains to the <code><a href="#4_20">value</a></code> set-get property, is switchable with the boolean <code><a href="#4_19">snapViewOnValueChange</a></code> set-get property. If the <code><a href="#4_19">snapViewOnValueChange</a></code> set-get property is set to <code>true</code> at the time that the <code><a href="#4_20">value</a></code> property is modified, then the values of the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> set-get properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the <a href="#1_3">Valid Date Range</a> and that the selected date is in view. If no date is selected, then the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> will be updated so that today's date is in view, unless today's date is outside of the <a href="#1_3">Valid Date Range</a>, in which case the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> will be updated so that the start or end date of the <a href="#1_3">Valid Date Range</a> is in view, with priority given to the start date, but with the end date being used if there is no lower bound to the <a href="#1_3">Valid Date Range</a>.</p>
+			<p>The Snap View behavior, as it pertains to the <code><a href="#4_20">value</a></code> state property, is switchable with the boolean <code><a href="#4_19">snapViewOnValueChange</a></code> state property. If the <code><a href="#4_19">snapViewOnValueChange</a></code> state property is set to <code>true</code> at the time that the <code><a href="#4_20">value</a></code> property is modified, then the values of the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the <a href="#1_3">Valid Date Range</a> and that the selected date is in view. If no date is selected, then the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> will be updated so that today's date is in view, unless today's date is outside of the <a href="#1_3">Valid Date Range</a>, in which case the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> will be updated so that the start or end date of the <a href="#1_3">Valid Date Range</a> is in view, with priority given to the start date, but with the end date being used if there is no lower bound to the <a href="#1_3">Valid Date Range</a>.</p>
 		</div>
 		
 		<a name="1_7"></a>
@@ -444,7 +444,7 @@
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#4_6">displayFormat</a></code> | <code><a href="#4_14">maxValue</a></code> | <code><a href="#4_15">minValue</a></code> | <code><a href="#4_16">month</a></code> | <code><a href="#4_19">snapViewOnValueChange</a></code> | <code><a href="#4_20">value</a></code> | <code><a href="#4_22">year</a></code></p>
 			</div>
@@ -480,7 +480,7 @@
 				
 				<p><code><a href="#6_1">showConfirm</a></code> | <code><a href="#6_2">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#4_1">built</a></code> | <code><a href="#4_2">busy</a></code> | <code><a href="#4_3">busyInherited</a></code> | <code><a href="#4_4">children</a></code> | <code><a href="#4_5">container</a></code> | <code><a href="#4_7">enabled</a></code> | <code><a href="#4_8">enabledInherited</a></code> | <code><a href="#4_9">html</a></code> | <code><a href="#4_10">idPrefix</a></code> | <code><a href="#4_11">idPrefixConstruction</a></code> | <code><a href="#4_12">insertionMode</a></code> | <code><a href="#4_13">localized</a></code> | <code><a href="#4_17">name</a></code> | <code><a href="#4_18">nodeMap</a></code> | <code><a href="#4_21">wired</a></code></p>
 				
@@ -513,11 +513,11 @@
 		<a name="2_1"></a>
 		<h2 class="heading2" title="2. Child Widgets -&gt; 2.1. nextMonth"><span class="headingNumber"><a href="#2" title="2. Child Widgets">2</a>.<a href="#2_1" title="2. Child Widgets -&gt; 2.1. nextMonth">1</a>. </span>nextMonth</h2>
 		<div class="contents2">
-			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up as part of the <a href="#1_5">Navigation Buttons</a>, and that increments the value of the <code><a href="#4_16">month</a></code> set-get property.</p>
+			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up as part of the <a href="#1_5">Navigation Buttons</a>, and that increments the value of the <code><a href="#4_16">month</a></code> state property.</p>
 			
-			<p>When a non-null value is specified for the <code><a href="#4_14">maxValue</a></code> set-get property and incrementing the value of the <code><a href="#4_16">month</a></code> set-get property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_1">nextMonth</a></code> button will be disabled (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
+			<p>When a non-null value is specified for the <code><a href="#4_14">maxValue</a></code> state property and incrementing the value of the <code><a href="#4_16">month</a></code> state property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_1">nextMonth</a></code> button will be disabled (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
 			
-			<p>When the <code><a href="#4_16">month</a></code> set-get property is set to the value <code>11</code> (the last month of the year), then incrementing its value will increment the value of the <code><a href="#4_22">year</a></code> set-get property and set the <code><a href="#4_16">month</a></code> property to <code>0</code>. Thus, the <code><a href="#2_1">nextMonth</a></code> button can be used to navigate across years (see <a href="#4_16_1">Month Wrapping Behavior</a>).</p>
+			<p>When the <code><a href="#4_16">month</a></code> state property is set to the value <code>11</code> (the last month of the year), then incrementing its value will increment the value of the <code><a href="#4_22">year</a></code> state property and set the <code><a href="#4_16">month</a></code> property to <code>0</code>. Thus, the <code><a href="#2_1">nextMonth</a></code> button can be used to navigate across years (see <a href="#4_16_1">Month Wrapping Behavior</a>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -532,9 +532,9 @@
 		<a name="2_2"></a>
 		<h2 class="heading2" title="2. Child Widgets -&gt; 2.2. nextYear"><span class="headingNumber"><a href="#2" title="2. Child Widgets">2</a>.<a href="#2_2" title="2. Child Widgets -&gt; 2.2. nextYear">2</a>. </span>nextYear</h2>
 		<div class="contents2">
-			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up as part of the <a href="#1_5">Navigation Buttons</a>, and that increments the value of the <code><a href="#4_22">year</a></code> set-get property.</p>
+			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up as part of the <a href="#1_5">Navigation Buttons</a>, and that increments the value of the <code><a href="#4_22">year</a></code> state property.</p>
 			
-			<p>When a non-null value is specified for the <code><a href="#4_14">maxValue</a></code> set-get property and incrementing the value of the <code><a href="#4_22">year</a></code> set-get property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_2">nextYear</a></code> button will be disabled (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
+			<p>When a non-null value is specified for the <code><a href="#4_14">maxValue</a></code> state property and incrementing the value of the <code><a href="#4_22">year</a></code> state property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_2">nextYear</a></code> button will be disabled (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -549,11 +549,11 @@
 		<a name="2_3"></a>
 		<h2 class="heading2" title="2. Child Widgets -&gt; 2.3. previousMonth"><span class="headingNumber"><a href="#2" title="2. Child Widgets">2</a>.<a href="#2_3" title="2. Child Widgets -&gt; 2.3. previousMonth">3</a>. </span>previousMonth</h2>
 		<div class="contents2">
-			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up as part of the <a href="#1_5">Navigation Buttons</a>, and that decrements the value of the <code><a href="#4_16">month</a></code> set-get property.</p>
+			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up as part of the <a href="#1_5">Navigation Buttons</a>, and that decrements the value of the <code><a href="#4_16">month</a></code> state property.</p>
 			
-			<p>When a non-null value is specified for the <code><a href="#4_15">minValue</a></code> set-get property and decrementing the value of the <code><a href="#4_16">month</a></code> set-get property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_3">previousMonth</a></code> button will be disabled (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
+			<p>When a non-null value is specified for the <code><a href="#4_15">minValue</a></code> state property and decrementing the value of the <code><a href="#4_16">month</a></code> state property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_3">previousMonth</a></code> button will be disabled (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
 			
-			<p>When the <code><a href="#4_16">month</a></code> set-get property is set to the value <code>0</code> (the first month of the year), then decrementing its value will decrement the value of the <code><a href="#4_22">year</a></code> set-get property and set the <code><a href="#4_16">month</a></code> property to <code>11</code>. Thus, the <code><a href="#2_3">previousMonth</a></code> button can be used to navigate across years (see <a href="#4_16_1">Month Wrapping Behavior</a>).</p>
+			<p>When the <code><a href="#4_16">month</a></code> state property is set to the value <code>0</code> (the first month of the year), then decrementing its value will decrement the value of the <code><a href="#4_22">year</a></code> state property and set the <code><a href="#4_16">month</a></code> property to <code>11</code>. Thus, the <code><a href="#2_3">previousMonth</a></code> button can be used to navigate across years (see <a href="#4_16_1">Month Wrapping Behavior</a>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -568,9 +568,9 @@
 		<a name="2_4"></a>
 		<h2 class="heading2" title="2. Child Widgets -&gt; 2.4. previousYear"><span class="headingNumber"><a href="#2" title="2. Child Widgets">2</a>.<a href="#2_4" title="2. Child Widgets -&gt; 2.4. previousYear">4</a>. </span>previousYear</h2>
 		<div class="contents2">
-			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up as part of the <a href="#1_5">Navigation Buttons</a>, and that decrements the value of the <code><a href="#4_22">year</a></code> set-get property.</p>
+			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up as part of the <a href="#1_5">Navigation Buttons</a>, and that decrements the value of the <code><a href="#4_22">year</a></code> state property.</p>
 			
-			<p>When a non-null value is specified for the <code><a href="#4_15">minValue</a></code> set-get property and decrementing the value of the <code><a href="#4_22">year</a></code> set-get property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_4">previousYear</a></code> button will be disabled (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
+			<p>When a non-null value is specified for the <code><a href="#4_15">minValue</a></code> state property and decrementing the value of the <code><a href="#4_22">year</a></code> state property would take the view outside of the <a href="#1_3">Valid Date Range</a>, then the <code><a href="#2_4">previousYear</a></code> button will be disabled (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -617,7 +617,7 @@
 		<a name="3_3"></a>
 		<h2 class="heading2" title="3. Implied Nodes -&gt; 3.3. month Implied Node"><span class="headingNumber"><a href="#3" title="3. Implied Nodes">3</a>.<a href="#3_3" title="3. Implied Nodes -&gt; 3.3. month Implied Node">3</a>. </span>month Implied Node</h2>
 		<div class="contents2">
-			<p>A node that is used to display the name of the current month in view (ie. the value of the <code><a href="#4_16">month</a></code> set-get property, displayed as a month name).</p>
+			<p>A node that is used to display the name of the current month in view (ie. the value of the <code><a href="#4_16">month</a></code> state property, displayed as a month name).</p>
 			
 			<p>This implied node can be of many types: <code>div</code>, <code>span</code>, <code>p</code>, <code>b</code>, <code>td</code>, <code>input</code>, etc. The month name is displayed in this implied node using the <code><a href="#5_35">setNodeValue</a></code> instance method of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class. Therefore, any features supported by the <code><a href="#5_35">setNodeValue</a></code> method are also supported for this implied node.</p>
 			
@@ -632,7 +632,7 @@
 		<a name="3_4"></a>
 		<h2 class="heading2" title="3. Implied Nodes -&gt; 3.4. year Implied Node"><span class="headingNumber"><a href="#3" title="3. Implied Nodes">3</a>.<a href="#3_4" title="3. Implied Nodes -&gt; 3.4. year Implied Node">4</a>. </span>year Implied Node</h2>
 		<div class="contents2">
-			<p>A node that is used to display the current year in view (ie. the value of the <code><a href="#4_22">year</a></code> set-get property).</p>
+			<p>A node that is used to display the current year in view (ie. the value of the <code><a href="#4_22">year</a></code> state property).</p>
 			
 			<p>This implied node can be of many types: <code>div</code>, <code>span</code>, <code>p</code>, <code>b</code>, <code>td</code>, <code>input</code>, etc. The year is displayed in this implied node using the <code><a href="#5_35">setNodeValue</a></code> instance method of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class. Therefore, any features supported by the <code><a href="#5_35">setNodeValue</a></code> method are also supported for this implied node.</p>
 			
@@ -646,10 +646,10 @@
 	</div>
 	
 	<a name="4"></a>
-	<h1 class="heading1" title="4. Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="4. State Properties"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="4_1"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.1. built"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_1" title="4. Set-get Properties -&gt; 4.1. built">1</a>. </span>built</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.1. built"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_1" title="4. State Properties -&gt; 4.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -661,7 +661,7 @@
 		</div>
 		
 		<a name="4_2"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.2. busy"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_2" title="4. Set-get Properties -&gt; 4.2. busy">2</a>. </span>busy</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.2. busy"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_2" title="4. State Properties -&gt; 4.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -673,7 +673,7 @@
 		</div>
 		
 		<a name="4_3"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.3. busyInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_3" title="4. Set-get Properties -&gt; 4.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.3. busyInherited"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_3" title="4. State Properties -&gt; 4.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -685,7 +685,7 @@
 		</div>
 		
 		<a name="4_4"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.4. children"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_4" title="4. Set-get Properties -&gt; 4.4. children">4</a>. </span>children</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.4. children"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_4" title="4. State Properties -&gt; 4.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -697,7 +697,7 @@
 		</div>
 		
 		<a name="4_5"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. container">5</a>. </span>container</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.5. container"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_5" title="4. State Properties -&gt; 4.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -709,7 +709,7 @@
 		</div>
 		
 		<a name="4_6"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. displayFormat"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. displayFormat">6</a>. </span>displayFormat</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.6. displayFormat"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_6" title="4. State Properties -&gt; 4.6. displayFormat">6</a>. </span>displayFormat</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -719,7 +719,7 @@
 		</div>
 		
 		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. enabled">7</a>. </span>enabled</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.7. enabled"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_7" title="4. State Properties -&gt; 4.7. enabled">7</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -731,7 +731,7 @@
 		</div>
 		
 		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. enabledInherited">8</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.8. enabledInherited"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_8" title="4. State Properties -&gt; 4.8. enabledInherited">8</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -743,7 +743,7 @@
 		</div>
 		
 		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. html">9</a>. </span>html</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.9. html"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_9" title="4. State Properties -&gt; 4.9. html">9</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -755,7 +755,7 @@
 		</div>
 		
 		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. idPrefix">10</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.10. idPrefix"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_10" title="4. State Properties -&gt; 4.10. idPrefix">10</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -767,7 +767,7 @@
 		</div>
 		
 		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. idPrefixConstruction">11</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.11. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_11" title="4. State Properties -&gt; 4.11. idPrefixConstruction">11</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -779,7 +779,7 @@
 		</div>
 		
 		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. insertionMode">12</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.12. insertionMode"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_12" title="4. State Properties -&gt; 4.12. insertionMode">12</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -791,7 +791,7 @@
 		</div>
 		
 		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. localized">13</a>. </span>localized</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.13. localized"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_13" title="4. State Properties -&gt; 4.13. localized">13</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -803,38 +803,38 @@
 		</div>
 		
 		<a name="4_14"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. maxValue"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. maxValue">14</a>. </span>maxValue</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.14. maxValue"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. maxValue">14</a>. </span>maxValue</h2>
 		<div class="contents2">
-			<p>An instance of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, representing the latest date that can be selected by the user (ie. the maximum value for the <code><a href="#4_20">value</a></code> set-get property).</p>
+			<p>An instance of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, representing the latest date that can be selected by the user (ie. the maximum value for the <code><a href="#4_20">value</a></code> state property).</p>
 			
 			<p>The <code><a href="#4_14">maxValue</a></code> property specifies the end date of the valid date range represented by the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> properties combined (for more info, see the section <a href="#1_3">Valid Date Range</a>).</p>
 			
 			<a name="4_14_1"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.1. Flexibility in Specifying Value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_1" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.1. Flexibility in Specifying Value">1</a>. </span>Flexibility in Specifying Value</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.1. Flexibility in Specifying Value"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_1" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.1. Flexibility in Specifying Value">1</a>. </span>Flexibility in Specifying Value</h3>
 			<div class="contents3">
 				<p>When setting the <code><a href="#4_14">maxValue</a></code> property, the date can be specified in a variety of different manners (for more info, see the section <a href="#1_4">Specifying Date Values</a>).</p>
 			</div>
 			
 			<a name="4_14_2"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.2. Nullable"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_2" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.2. Nullable">2</a>. </span>Nullable</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.2. Nullable"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_2" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.2. Nullable">2</a>. </span>Nullable</h3>
 			<div class="contents3">
 				<p>The <code><a href="#4_14">maxValue</a></code> property can be set to <code>null</code> or <code>''</code> (empty string), to indicate that there is no upper bound to the <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_3_2">Boundless Date Ranges</a>).</p>
 			</div>
 			
 			<a name="4_14_3"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.3. Snapping into View"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_3" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.3. Snapping into View">3</a>. </span>Snapping into View</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.3. Snapping into View"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_3" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.3. Snapping into View">3</a>. </span>Snapping into View</h3>
 			<div class="contents3">
-				<p>When the <code><a href="#4_14">maxValue</a></code> property is modified, the values of the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> set-get properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_6">Snap View Behavior</a>).</p>
+				<p>When the <code><a href="#4_14">maxValue</a></code> property is modified, the values of the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_6">Snap View Behavior</a>).</p>
 			</div>
 			
 			<a name="4_14_4"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.4. Value Invalidation"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_4" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.4. Value Invalidation">4</a>. </span>Value Invalidation</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.4. Value Invalidation"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_4" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.4. Value Invalidation">4</a>. </span>Value Invalidation</h3>
 			<div class="contents3">
-				<p>When the <code><a href="#4_14">maxValue</a></code> property is modified, the <code><a href="#4_20">value</a></code> set-get property may be set to <code>null</code> if the selected date lies outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_3_3">Invalidation of value</a>).</p>
+				<p>When the <code><a href="#4_14">maxValue</a></code> property is modified, the <code><a href="#4_20">value</a></code> state property may be set to <code>null</code> if the selected date lies outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_3_3">Invalidation of value</a>).</p>
 			</div>
 			
 			<a name="4_14_5"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.5. Updating Navigation Button State"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_5" title="4. Set-get Properties -&gt; 4.14. maxValue -&gt; 4.14.5. Updating Navigation Button State">5</a>. </span>Updating Navigation Button State</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.5. Updating Navigation Button State"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. maxValue">14</a>.<a href="#4_14_5" title="4. State Properties -&gt; 4.14. maxValue -&gt; 4.14.5. Updating Navigation Button State">5</a>. </span>Updating Navigation Button State</h3>
 			<div class="contents3">
 				<p>When the value of the <code><a href="#4_14">maxValue</a></code> property is modified, the state of the year and month navigation buttons will be updated, so that buttons will only be enabled if their action would not take the view outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
 			</div>
@@ -842,8 +842,8 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_15">minValue</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_19">snapViewOnValueChange</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_15">minValue</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_19">snapViewOnValueChange</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -853,38 +853,38 @@
 		</div>
 		
 		<a name="4_15"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. minValue"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. minValue">15</a>. </span>minValue</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.15. minValue"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. minValue">15</a>. </span>minValue</h2>
 		<div class="contents2">
-			<p>An instance of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, representing the earliest date that can be selected by the user (ie. the minimum value for the <code><a href="#4_20">value</a></code> set-get property).</p>
+			<p>An instance of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, representing the earliest date that can be selected by the user (ie. the minimum value for the <code><a href="#4_20">value</a></code> state property).</p>
 			
 			<p>The <code><a href="#4_15">minValue</a></code> property specifies the start date of the valid date range represented by the <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> properties combined (for more info, see the section <a href="#1_3">Valid Date Range</a>).</p>
 			
 			<a name="4_15_1"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.1. Flexibility in Specifying Value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_1" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.1. Flexibility in Specifying Value">1</a>. </span>Flexibility in Specifying Value</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.1. Flexibility in Specifying Value"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_1" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.1. Flexibility in Specifying Value">1</a>. </span>Flexibility in Specifying Value</h3>
 			<div class="contents3">
 				<p>When setting the <code><a href="#4_15">minValue</a></code> property, the date can be specified in a variety of different manners (for more info, see the section <a href="#1_4">Specifying Date Values</a>).</p>
 			</div>
 			
 			<a name="4_15_2"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.2. Nullable"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_2" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.2. Nullable">2</a>. </span>Nullable</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.2. Nullable"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_2" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.2. Nullable">2</a>. </span>Nullable</h3>
 			<div class="contents3">
 				<p>The <code><a href="#4_15">minValue</a></code> property can be set to <code>null</code> or <code>''</code> (empty string), to indicate that there is no lower bound to the <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_3_2">Boundless Date Ranges</a>).</p>
 			</div>
 			
 			<a name="4_15_3"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.3. Snapping into View"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_3" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.3. Snapping into View">3</a>. </span>Snapping into View</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.3. Snapping into View"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_3" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.3. Snapping into View">3</a>. </span>Snapping into View</h3>
 			<div class="contents3">
-				<p>When the <code><a href="#4_15">minValue</a></code> property is modified, the values of the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> set-get properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_6">Snap View Behavior</a>).</p>
+				<p>When the <code><a href="#4_15">minValue</a></code> property is modified, the values of the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_6">Snap View Behavior</a>).</p>
 			</div>
 			
 			<a name="4_15_4"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.4. Value Invalidation"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_4" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.4. Value Invalidation">4</a>. </span>Value Invalidation</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.4. Value Invalidation"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_4" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.4. Value Invalidation">4</a>. </span>Value Invalidation</h3>
 			<div class="contents3">
-				<p>When the <code><a href="#4_15">minValue</a></code> property is modified, the <code><a href="#4_20">value</a></code> set-get property may be set to <code>null</code> if the selected date lies outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_3_3">Invalidation of value</a>).</p>
+				<p>When the <code><a href="#4_15">minValue</a></code> property is modified, the <code><a href="#4_20">value</a></code> state property may be set to <code>null</code> if the selected date lies outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_3_3">Invalidation of value</a>).</p>
 			</div>
 			
 			<a name="4_15_5"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.5. Updating Navigation Button State"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_5" title="4. Set-get Properties -&gt; 4.15. minValue -&gt; 4.15.5. Updating Navigation Button State">5</a>. </span>Updating Navigation Button State</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.5. Updating Navigation Button State"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. minValue">15</a>.<a href="#4_15_5" title="4. State Properties -&gt; 4.15. minValue -&gt; 4.15.5. Updating Navigation Button State">5</a>. </span>Updating Navigation Button State</h3>
 			<div class="contents3">
 				<p>When the value of the <code><a href="#4_15">minValue</a></code> property is modified, the state of the year and month navigation buttons will be updated, so that buttons will only be enabled if their action would not take the view outside of the newly set <a href="#1_3">Valid Date Range</a> (for more info, see the section <a href="#1_5_1">Navigation Button State Management</a>).</p>
 			</div>
@@ -892,8 +892,8 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_14">maxValue</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_19">snapViewOnValueChange</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_14">maxValue</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_19">snapViewOnValueChange</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -903,14 +903,14 @@
 		</div>
 		
 		<a name="4_16"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. month"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. month">16</a>. </span>month</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.16. month"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_16" title="4. State Properties -&gt; 4.16. month">16</a>. </span>month</h2>
 		<div class="contents2">
 			<p>An integer in the range of <code>0</code> to <code>11</code>, repesenting the month of the year that should be in view in the calendar's UI.</p>
 			
-			<p>The value of this set-get property is independent of the selected date that is represented by the <code><a href="#4_20">value</a></code> set-get property.</p>
+			<p>The value of this state property is independent of the selected date that is represented by the <code><a href="#4_20">value</a></code> state property.</p>
 			
 			<a name="4_16_1"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.16. month -&gt; 4.16.1. Month Wrapping Behavior"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. month">16</a>.<a href="#4_16_1" title="4. Set-get Properties -&gt; 4.16. month -&gt; 4.16.1. Month Wrapping Behavior">1</a>. </span>Month Wrapping Behavior</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.16. month -&gt; 4.16.1. Month Wrapping Behavior"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_16" title="4. State Properties -&gt; 4.16. month">16</a>.<a href="#4_16_1" title="4. State Properties -&gt; 4.16. month -&gt; 4.16.1. Month Wrapping Behavior">1</a>. </span>Month Wrapping Behavior</h3>
 			<div class="contents3">
 				<p>The conformer of the <code><a href="#4_16">month</a></code> property supports wrapping when values are specified outside of the range of <code>0</code> to <code>11</code>.</p>
 				
@@ -940,8 +940,8 @@ alert (myCalendar.get ('month'));  // displays 11
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_22">year</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_19">snapViewOnValueChange</a></code> and <code><a href="#4_20">value</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_22">year</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_19">snapViewOnValueChange</a></code> and <code><a href="#4_20">value</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -951,7 +951,7 @@ alert (myCalendar.get ('month'));  // displays 11
 		</div>
 		
 		<a name="4_17"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. name">17</a>. </span>name</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.17. name"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_17" title="4. State Properties -&gt; 4.17. name">17</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -963,7 +963,7 @@ alert (myCalendar.get ('month'));  // displays 11
 		</div>
 		
 		<a name="4_18"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. nodeMap">18</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.18. nodeMap"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_18" title="4. State Properties -&gt; 4.18. nodeMap">18</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -975,16 +975,16 @@ alert (myCalendar.get ('month'));  // displays 11
 		</div>
 		
 		<a name="4_19"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. snapViewOnValueChange"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. snapViewOnValueChange">19</a>. </span>snapViewOnValueChange</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.19. snapViewOnValueChange"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_19" title="4. State Properties -&gt; 4.19. snapViewOnValueChange">19</a>. </span>snapViewOnValueChange</h2>
 		<div class="contents2">
-			<p>A boolean, specifying whether or not the values of the <code><a href="#4_16">month</a></code> and <code><a href="#4_22">year</a></code> set-get properties should automatically be set when the value of the <code><a href="#4_20">value</a></code> set-get property changes.</p>
+			<p>A boolean, specifying whether or not the values of the <code><a href="#4_16">month</a></code> and <code><a href="#4_22">year</a></code> state properties should automatically be set when the value of the <code><a href="#4_20">value</a></code> state property changes.</p>
 			
 			<p>When this property is set to <code>true</code>, the <code><a href="#4_16">month</a></code> and <code><a href="#4_22">year</a></code> properties will be automatically set when the value of the <code><a href="#4_20">value</a></code> property changes, to ensure that the newly selected date is in view. In this mode, the values of the <code><a href="#4_16">month</a></code> and <code><a href="#4_22">year</a></code> properties can still be changed so that the currently selected date is not in view, but whenever the <code><a href="#4_20">value</a></code> property is next modified, the <code><a href="#4_16">month</a></code> and <code><a href="#4_22">year</a></code> properties will be "snapped back" to the month and year of the selected date.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_16">month</a></code>, <code><a href="#4_22">year</a></code>, and <code><a href="#4_20">value</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_16">month</a></code>, <code><a href="#4_22">year</a></code>, and <code><a href="#4_20">value</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -994,28 +994,28 @@ alert (myCalendar.get ('month'));  // displays 11
 		</div>
 		
 		<a name="4_20"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. value">20</a>. </span>value</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.20. value"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_20" title="4. State Properties -&gt; 4.20. value">20</a>. </span>value</h2>
 		<div class="contents2">
 			<p>An instance of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, representing the currently selected date value for the instance.</p>
 			
 			<p>When the user selects a date using the instance's user interface, the <code><a href="#4_20">value</a></code> property is updated. When the <code><a href="#4_20">value</a></code> property is modified programmatically, the user interface will be updated to reflect the new value.</p>
 			
 			<a name="4_20_1"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.20. value -&gt; 4.20.1. Flexibility in Specifying Value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. value">20</a>.<a href="#4_20_1" title="4. Set-get Properties -&gt; 4.20. value -&gt; 4.20.1. Flexibility in Specifying Value">1</a>. </span>Flexibility in Specifying Value</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.20. value -&gt; 4.20.1. Flexibility in Specifying Value"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_20" title="4. State Properties -&gt; 4.20. value">20</a>.<a href="#4_20_1" title="4. State Properties -&gt; 4.20. value -&gt; 4.20.1. Flexibility in Specifying Value">1</a>. </span>Flexibility in Specifying Value</h3>
 			<div class="contents3">
 				<p>When setting the <code><a href="#4_20">value</a></code> property, the date can be specified in a variety of different manners (for more info, see the section <a href="#1_4">Specifying Date Values</a>).</p>
 			</div>
 			
 			<a name="4_20_2"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.20. value -&gt; 4.20.2. Nullable"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. value">20</a>.<a href="#4_20_2" title="4. Set-get Properties -&gt; 4.20. value -&gt; 4.20.2. Nullable">2</a>. </span>Nullable</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.20. value -&gt; 4.20.2. Nullable"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_20" title="4. State Properties -&gt; 4.20. value">20</a>.<a href="#4_20_2" title="4. State Properties -&gt; 4.20. value -&gt; 4.20.2. Nullable">2</a>. </span>Nullable</h3>
 			<div class="contents3">
 				<p>The <code><a href="#4_20">value</a></code> property can be set to <code>null</code> or <code>''</code> (empty string), to indicate that no date has been selected.</p>
 			</div>
 			
 			<a name="4_20_3"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.20. value -&gt; 4.20.3. Snapping Into View"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. value">20</a>.<a href="#4_20_3" title="4. Set-get Properties -&gt; 4.20. value -&gt; 4.20.3. Snapping Into View">3</a>. </span>Snapping Into View</h3>
+			<h3 class="heading3" title="4. State Properties -&gt; 4.20. value -&gt; 4.20.3. Snapping Into View"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_20" title="4. State Properties -&gt; 4.20. value">20</a>.<a href="#4_20_3" title="4. State Properties -&gt; 4.20. value -&gt; 4.20.3. Snapping Into View">3</a>. </span>Snapping Into View</h3>
 			<div class="contents3">
-				<p>If the <code><a href="#4_19">snapViewOnValueChange</a></code> set-get property is set to <code>true</code> at the time that the <code><a href="#4_20">value</a></code> property is modified, then the values of the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> set-get properties will be updated as needed in order to ensure that the newly selected date is in view.</p>
+				<p>If the <code><a href="#4_19">snapViewOnValueChange</a></code> state property is set to <code>true</code> at the time that the <code><a href="#4_20">value</a></code> property is modified, then the values of the <code><a href="#4_22">year</a></code> and <code><a href="#4_16">month</a></code> state properties will be updated as needed in order to ensure that the newly selected date is in view.</p>
 				
 				<p>For more information on this behavior, see the section <a href="#1_6">Snap View Behavior</a>.</p>
 			</div>
@@ -1023,8 +1023,8 @@ alert (myCalendar.get ('month'));  // displays 11
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> set-get properties</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_19">snapViewOnValueChange</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_15">minValue</a></code> and <code><a href="#4_14">maxValue</a></code> state properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_19">snapViewOnValueChange</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1034,7 +1034,7 @@ alert (myCalendar.get ('month'));  // displays 11
 		</div>
 		
 		<a name="4_21"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. wired">21</a>. </span>wired</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.21. wired"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_21" title="4. State Properties -&gt; 4.21. wired">21</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1046,17 +1046,17 @@ alert (myCalendar.get ('month'));  // displays 11
 		</div>
 		
 		<a name="4_22"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. year"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. year">22</a>. </span>year</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.22. year"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_22" title="4. State Properties -&gt; 4.22. year">22</a>. </span>year</h2>
 		<div class="contents2">
 			<p>An integer, repesenting the year that should be in view in the calendar's UI.</p>
 			
-			<p>The value of this set-get property is independent of the selected date that is represented by the <code><a href="#4_20">value</a></code> set-get property.</p>
+			<p>The value of this state property is independent of the selected date that is represented by the <code><a href="#4_20">value</a></code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_16">month</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_19">snapViewOnValueChange</a></code> and <code><a href="#4_20">value</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_16">month</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_19">snapViewOnValueChange</a></code> and <code><a href="#4_20">value</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

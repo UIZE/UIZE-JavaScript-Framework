@@ -82,28 +82,28 @@ Improvements
 		What's important to note in this example is that the stitched in properties, just like any properties specified explicitly when instantiating a widget, are not yet set on the instance - that happens between the alphastructor and omegastructor. So, using the =get= instance method to query the value of the =foo= property in the alphastructor yields the value =undefined=, while doing the same query inside the omegastructor yields the value ='bar'=.
 
 	Widget Properties Can Now Address Widget Trees
-		Widget properties specified for a widget using the declarative syntax can also contain widget properties for any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree - using `the new children set-get property`.
+		Widget properties specified for a widget using the declarative syntax can also contain widget properties for any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree - using `the new children state property`.
 
-	The New children Set-get Property
-		The =Uize.Widget= base class has always supported a =children= instance property, but this instance property now has a companion set-get property of the same name but with special handling.
+	The New children State Property
+		The =Uize.Widget= base class has always supported a =children= instance property, but this instance property now has a companion state property of the same name but with special handling.
 
-		The children Set-get Property vs the children Instance Property
-			The =Uize.Widget= class supports a =children= instance property as well as a =children= set-get property, and each has its own purpose.
+		The children State Property vs the children Instance Property
+			The =Uize.Widget= class supports a =children= instance property as well as a =children= state property, and each has its own purpose.
 
 			The children Instance Property
 				The =children= instance property is a read-only property that provides access to a widget's child widgets.
 
 				For example, a widget named =rgbSlider= that is a child widget of a page widget could be accessed by a statement like =page.children.rgbSlider=, where the =children= property of the page widget instance provides access to all of its child widgets.
 
-			The children Set-get Property
-				The =children= set-get property is a somewhat unique type of set-get property that provides a versatile way to distribute widget properties to a widget's child widgets.
+			The children State Property
+				The =children= state property is a somewhat unique type of state property that provides a versatile way to distribute widget properties to a widget's child widgets.
 
-				When the value of the =children= set-get property is set, a conformer processes the value and attempts to "consume" it. The value specified should be an object, where each property of the object is treated as providing widget properties for a child widget. The conformer attempts to distribute those widget properties objects to the corresponding child widgets. For example, the statement =page.set ({children:{rgbSlider:{value:'#ff0000'}}})= is attempting to distribute the widget properties ={value:'#ff0000'}= to the child widget named =rgbSlider= of the page widget.
+				When the value of the =children= state property is set, a conformer processes the value and attempts to "consume" it. The value specified should be an object, where each property of the object is treated as providing widget properties for a child widget. The conformer attempts to distribute those widget properties objects to the corresponding child widgets. For example, the statement =page.set ({children:{rgbSlider:{value:'#ff0000'}}})= is attempting to distribute the widget properties ={value:'#ff0000'}= to the child widget named =rgbSlider= of the page widget.
 
 				For any properties objects for which there are no corresponding child widgets, they are retained in order to potentially be used later when a child widget that does correspond is added, at which time the properties will be supplied as overrides to any properties that are specified by the code adding the child widget.
 
-		The children Set-get Property Allows Deep Setting
-			The new =children= set-get property allows properties to be distributed to any or all of a widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in a widget's widget tree.
+		The children State Property Allows Deep Setting
+			The new =children= state property allows properties to be distributed to any or all of a widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in a widget's widget tree.
 
 			Consider the following example...
 
@@ -133,10 +133,10 @@ Improvements
 				});
 			....................................................................
 
-			If the =sliderR=, =sliderG=, and =sliderB= slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse. This is admittedly not a terribly compelling example of how to use the special behavior of the =children= set-get property, but it demonstrates the basic principle.
+			If the =sliderR=, =sliderG=, and =sliderB= slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse. This is admittedly not a terribly compelling example of how to use the special behavior of the =children= state property, but it demonstrates the basic principle.
 
-		The children Set-get Children Property Allows Deferred Pickup
-			The special behavior of the =children= set-get property allows widget properties to be specified for a child widget even before that child widget has been created.
+		The children State Children Property Allows Deferred Pickup
+			The special behavior of the =children= state property allows widget properties to be specified for a child widget even before that child widget has been created.
 
 			EXAMPLE
 			.......................................................................................
@@ -161,10 +161,10 @@ Improvements
 				rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
 			.......................................................................................
 
-			In the above example, a page widget is being created and a value is being specified for its =children= set-get property that is defining widget properties for child widgets in the page widget's widget tree that have not yet been created. Then, after the fact, a widget tree is fleshed out for the page widget, with child widgets that correspond to the structure of the object specified for the =children= set-get property when the page widget instance was created. Because of the special way that the =children= set-get property works, the widget properties defined earlier are "picked up" by the child widgets when they are created.
+			In the above example, a page widget is being created and a value is being specified for its =children= state property that is defining widget properties for child widgets in the page widget's widget tree that have not yet been created. Then, after the fact, a widget tree is fleshed out for the page widget, with child widgets that correspond to the structure of the object specified for the =children= state property when the page widget instance was created. Because of the special way that the =children= state property works, the widget properties defined earlier are "picked up" by the child widgets when they are created.
 
-		The children Set-get Property is Respected in the Declarative Syntax
-			Along with using the =children= set-get property in the constructor of a widget instance, when calling the instance's =set= method, or in a widget adoption declaration, the =children= set-get property can also be used in the declarative syntax for widget properties.
+		The children State Property is Respected in the Declarative Syntax
+			Along with using the =children= state property in the constructor of a widget instance, when calling the instance's =set= method, or in a widget adoption declaration, the =children= state property can also be used in the declarative syntax for widget properties.
 
 			EXAMPLE
 			......................................................................
@@ -198,9 +198,9 @@ Improvements
 			So, the widget properties declared for a widget using the declarative syntax may contain widget properties for any or all of the child widgets of the widget - all the way down to the deepest child widgets in the widget's widget tree.
 
 		Setting Doesn't Create or Destroy Children
-			Setting the value of the =children= set-get property is handled in a special way and has no effect on the actual child widgets for a widget, nor does it affect the value or contents of the =children= instance property.
+			Setting the value of the =children= state property is handled in a special way and has no effect on the actual child widgets for a widget, nor does it affect the value or contents of the =children= instance property.
 
-			When you set a value for the =children= set-get property, the widget instance tries to distribute any specified child widget properties to the widget's current child widgets. If widget properties are specified for a child that does not yet exist, that child widget is not created. Instead, the unapplied child widget properties are remembered. If a child widget is added later and its name corresponds to the name of a child widget for which unapplied widget properties have been remembered, then those widget properties are applied at the time of creating the child widget (for more details, see the section `The children Set-get Children Property Allows Deferred Pickup`).
+			When you set a value for the =children= state property, the widget instance tries to distribute any specified child widget properties to the widget's current child widgets. If widget properties are specified for a child that does not yet exist, that child widget is not created. Instead, the unapplied child widget properties are remembered. If a child widget is added later and its name corresponds to the name of a child widget for which unapplied widget properties have been remembered, then those widget properties are applied at the time of creating the child widget (for more details, see the section `The children State Children Property Allows Deferred Pickup`).
 
 ....................................................................................
 << metadata >>

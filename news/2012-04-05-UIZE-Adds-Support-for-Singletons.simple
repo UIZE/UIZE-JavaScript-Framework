@@ -40,7 +40,7 @@ Get a Singleton for a Class for a Specific Scope
 	When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be returned. Otherwise, a singleton instance will be created for the specified scope and then returned.
 
 Get a Singleton for a Class for a Specific Scope, Specifying Initial State
-	When the optional =propertiesOBJ= parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the =propertiesOBJ= object.
+	When the optional =propertiesOBJ= parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its state properties set using the =propertiesOBJ= object.
 
 	SYNTAX
 	..........................................................

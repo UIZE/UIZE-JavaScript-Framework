@@ -184,14 +184,14 @@ Uize.module ({
 					name:'contentId',
 					value:''
 					/*?
-						Set-get Properties
+						State Properties
 							contentId
 								document...
 					*/
 				},
 				_cookieName:'cookieName',
 					/*?
-						Set-get Properties
+						State Properties
 							cookieName
 								document...
 					*/
@@ -199,7 +199,7 @@ Uize.module ({
 					name:'cookiePath',
 					value:'/'
 					/*?
-						Set-get Properties
+						State Properties
 							cookiePath
 								document...
 					*/
@@ -208,7 +208,7 @@ Uize.module ({
 					name:'edge',
 					value:'bottom' // 'top' | 'bottom' | 'left' | 'right'
 					/*?
-						Set-get Properties
+						State Properties
 							edge
 								document...
 					*/
@@ -217,7 +217,7 @@ Uize.module ({
 					name:'fadeProperties',
 					value:{duration:200,curve:Uize.Fade.celeration (0,1)}
 					/*?
-						Set-get Properties
+						State Properties
 							fadeProperties
 								document...
 					*/
@@ -233,20 +233,20 @@ Uize.module ({
 					},
 					value:_true
 					/*?
-						Set-get Properties
+						State Properties
 							maximized
 								document...
 					*/
 				},
 				_maximizedHeight:'maximizedHeight',
 					/*?
-						Set-get Properties
+						State Properties
 							maximizedHeight
 								document...
 					*/
 				_minimizedHeight:'minimizedHeight',
 					/*?
-						Set-get Properties
+						State Properties
 							minimizedHeight
 								document...
 					*/
@@ -254,7 +254,7 @@ Uize.module ({
 					name:'whenToFadeOnInit',
 					value:'first' // 'first' | 'always' | 'never'
 					/*?
-						Set-get Properties
+						State Properties
 							whenToFadeOnInit
 								document...
 					*/

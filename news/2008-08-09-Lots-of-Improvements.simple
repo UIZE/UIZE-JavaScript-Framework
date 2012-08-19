@@ -25,7 +25,7 @@ Miscellaneous Improvements
 
 	- A problem was fixed with the =Uize.Tooltip= module that was causing the tooltip to sometimes shift position very quickly on first appearing, making the browser window appear to flicker. The problem was only occasionally seen, and seemed to affect Firefox more than Internet Explorer.
 	- The =Uize.Node.wireEvent= method has been enhanced to support a new =onmouserest= virtual event.
-	- The =Uize.Widget.AutoTooltip= module has been updated to offer a =dataKeyTransformer= set-get property that allows you to override the default camelCase transformation that is performed on data keys by the built-in dataDecoder.
+	- The =Uize.Widget.AutoTooltip= module has been updated to offer a =dataKeyTransformer= state property that allows you to override the default camelCase transformation that is performed on data keys by the built-in dataDecoder.
 	- Documentation has been added for the =Uize.Node.getValue= and =Uize.Node.setValue= static methods.
 	- Various optimizations have been made to various modules.
 

@@ -93,7 +93,7 @@ Uize.module ({
 							..............................................
 
 							NOTES
-							- the =opacityFLOATorOBJ= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property)
+							- the =opacityFLOATorOBJ= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
 							- see also the =Uize.Node.Util.getOpacityStr= static method
 				*/
 			};

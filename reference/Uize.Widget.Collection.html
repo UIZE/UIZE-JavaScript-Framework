@@ -35,8 +35,8 @@
 						<ul>
 							<li><a href="#1_1_1" title="Collection item widgets that are added to an instance of the Uize.Widget.Collection class as child widgets are named using one of two available schemes: Explicit Naming of Collection Item Widgets, and Automatic Naming of Collection Item Widgets.">1.1.1. Collection Item Widget Naming</a>
 								<ul>
-									<li><a href="#1_1_1_1" title="When a collection item widget is added as a child widget of the collection, the element out of the items array that corresponds to the collection item being added is supplied as the value of the collection item widget&apos;s properties set-get property.">1.1.1.1. Explicit Naming of Collection Item Widgets</a></li>
-									<li><a href="#1_1_1_2" title="When itemPropertyForItemWidgetName is set to the value null, undefined, or &apos;&apos; (empty string), or if the value of the item property specified by itemPropertyForItemWidgetName is null, undefined, or &apos;&apos; (empty string), then the name of the child widget for a collection item will be generated using the value of the itemWidgetNamePrefix set-get property as a prefix and appending an automatically inc...">1.1.1.2. Automatic Naming of Collection Item Widgets</a></li>
+									<li><a href="#1_1_1_1" title="When a collection item widget is added as a child widget of the collection, the element out of the items array that corresponds to the collection item being added is supplied as the value of the collection item widget&apos;s properties state property.">1.1.1.1. Explicit Naming of Collection Item Widgets</a></li>
+									<li><a href="#1_1_1_2" title="When itemPropertyForItemWidgetName is set to the value null, undefined, or &apos;&apos; (empty string), or if the value of the item property specified by itemPropertyForItemWidgetName is null, undefined, or &apos;&apos; (empty string), then the name of the child widget for a collection item will be generated using the value of the itemWidgetNamePrefix state property as a prefix and appending an automatically incre...">1.1.1.2. Automatic Naming of Collection Item Widgets</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -89,7 +89,7 @@
 					<li><a href="#4_12" title="Iterates through all the collection item widgets in the collection and performs the specified handler function for each item widget.">4.12. forAll</a></li>
 					<li><a href="#4_13" title="Inherited from Uize.Class.">4.13. get</a></li>
 					<li><a href="#4_14" title="Inherited from Uize.Widget.">4.14. getInherited</a></li>
-					<li><a href="#4_15" title="For advanced developers only, this is a subclassing hook that lets you override the default use of the itemWidgetProperties set-get property in the addItemWidget instance method.">4.15. getItemWidgetProperties</a></li>
+					<li><a href="#4_15" title="For advanced developers only, this is a subclassing hook that lets you override the default use of the itemWidgetProperties state property in the addItemWidget instance method.">4.15. getItemWidgetProperties</a></li>
 					<li><a href="#4_16" title="Inherited from Uize.Widget.">4.16. getNode</a></li>
 					<li><a href="#4_17" title="Inherited from Uize.Widget.">4.17. getNodeStyle</a></li>
 					<li><a href="#4_18" title="Inherited from Uize.Widget.">4.18. getNodeValue</a></li>
@@ -97,7 +97,7 @@
 						<ul>
 							<li><a href="#4_19_1" title="To get the value of a specific properties &quot;bucket&quot; property for all the items in the collection, supply the value of the itemWidgets instance property as the value of the itemWidgetsARRAY parameter, as in...">4.19.1. For All Items</a></li>
 							<li><a href="#4_19_2" title="To better illustrate how the getPropertyForItems method behaves, let&apos;s consider an example...">4.19.2. An Example</a></li>
-							<li><a href="#4_19_3" title="When the special value null or undefined is specified for the propertyNameSTR parameter, then the getPropertyForItems method will return an array containing the values of the properties set-get property for all of the specified items.">4.19.3. Getting All Properties</a></li>
+							<li><a href="#4_19_3" title="When the special value null or undefined is specified for the propertyNameSTR parameter, then the getPropertyForItems method will return an array containing the values of the properties state property for all of the specified items.">4.19.3. Getting All Properties</a></li>
 						</ul>
 					</li>
 					<li><a href="#4_20" title="Returns an array, being the values of the specified properties &quot;bucket&quot; property for the selected items.">4.20. getPropertyForSelected</a></li>
@@ -163,7 +163,7 @@
 					<li><a href="#7_4" title="A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove multiple items from the collection.">7.4. removeItemsConfirmationTitle</a></li>
 				</ul>
 			</li>
-			<li><a href="#8">8. Set-get Properties</a>
+			<li><a href="#8">8. State Properties</a>
 				<ul>
 					<li><a href="#8_1" title="A read-only boolean, indicating whether or not all the items in the collection are selected.">8.1. allSelected</a></li>
 					<li><a href="#8_2" title="Inherited from Uize.Widget.">8.2. built</a></li>
@@ -182,7 +182,7 @@
 					<li><a href="#8_15" title="A boolean, specifying whether or not a Remove event fired by a selected collection item (as a result of the user clicking the item&apos;s remove button) should act on the rest of the selected items.">8.15. itemRemoveActsOnSelection</a></li>
 					<li><a href="#8_16" title="An object reference, specifying the Uize.Widget.CollectionItem subclass that should be used for creating item widget instances.">8.16. itemWidgetClass</a></li>
 					<li><a href="#8_17" title="A string, specifying a prefix that should be used in collection item widget names when automatic widget naming is employed.">8.17. itemWidgetNamePrefix</a></li>
-					<li><a href="#8_18" title="An object reference, specifying the values for any set-get properties that are common for all collection item widgets that are created by this class.">8.18. itemWidgetProperties</a></li>
+					<li><a href="#8_18" title="An object reference, specifying the values for any state properties that are common for all collection item widgets that are created by this class.">8.18. itemWidgetProperties</a></li>
 					<li><a href="#8_19" title="An array of objects, representing the item data corresponding to the items in the collection.">8.19. items</a></li>
 					<li><a href="#8_20" title="Inherited from Uize.Widget.">8.20. localized</a></li>
 					<li><a href="#8_21" title="Inherited from Uize.Widget.">8.21. name</a></li>
@@ -243,7 +243,7 @@
 				<a name="1_1_1_1"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Collection Item Widget Naming -&gt; 1.1.1.1. Explicit Naming of Collection Item Widgets"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Collection Item Widget Naming">1</a>.<a href="#1_1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Collection Item Widget Naming -&gt; 1.1.1.1. Explicit Naming of Collection Item Widgets">1</a>. </span>Explicit Naming of Collection Item Widgets</h4>
 				<div class="contents4">
-					<p>When a collection item widget is added as a child widget of the collection, the element out of the <code><a href="#8_19">items</a></code> array that corresponds to the collection item being added is supplied as the value of the collection item widget's <code>properties</code> set-get property.</p>
+					<p>When a collection item widget is added as a child widget of the collection, the element out of the <code><a href="#8_19">items</a></code> array that corresponds to the collection item being added is supplied as the value of the collection item widget's <code>properties</code> state property.</p>
 					
 					<p>The <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> property lets you specify a property out of the collection item properties object that should be used for the name of the collection item child widget. This is best illustrated with a simple example...</p>
 					
@@ -272,13 +272,13 @@
 );
 </pre>
 					
-					<p>In the above example, the newly created collection widget will have two collection item child widgets: one named <code>'bravingTheOnslaught'</code>, and the other named <code>'flockOfClouds'</code>. The <code><a href="#8_19">items</a></code> set-get property specifies the array of data for the items in the collection. The value of each element is passed to the corresponding collection item child widget, through its <code>properties</code> set-get property. But the <code>widgetName</code> property is treated specially in this example. That's because the <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> set-get property calls out the <code>widgetName</code> property as the property that should determine the name of the collection item widgets.</p>
+					<p>In the above example, the newly created collection widget will have two collection item child widgets: one named <code>'bravingTheOnslaught'</code>, and the other named <code>'flockOfClouds'</code>. The <code><a href="#8_19">items</a></code> state property specifies the array of data for the items in the collection. The value of each element is passed to the corresponding collection item child widget, through its <code>properties</code> state property. But the <code>widgetName</code> property is treated specially in this example. That's because the <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> state property calls out the <code>widgetName</code> property as the property that should determine the name of the collection item widgets.</p>
 				</div>
 				
 				<a name="1_1_1_2"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Collection Item Widget Naming -&gt; 1.1.1.2. Automatic Naming of Collection Item Widgets"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Collection Item Widget Naming">1</a>.<a href="#1_1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Collection Item Widget Naming -&gt; 1.1.1.2. Automatic Naming of Collection Item Widgets">2</a>. </span>Automatic Naming of Collection Item Widgets</h4>
 				<div class="contents4">
-					<p>When <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> is set to the value <code>null</code>, <code>undefined</code>, or <code>''</code> (empty string), or if the value of the item property specified by <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> is <code>null</code>, <code>undefined</code>, or <code>''</code> (empty string), then the name of the child widget for a collection item will be generated using the value of the <code><a href="#8_17">itemWidgetNamePrefix</a></code> set-get property as a prefix and appending an automatically incremented uniquifier.</p>
+					<p>When <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> is set to the value <code>null</code>, <code>undefined</code>, or <code>''</code> (empty string), or if the value of the item property specified by <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> is <code>null</code>, <code>undefined</code>, or <code>''</code> (empty string), then the name of the child widget for a collection item will be generated using the value of the <code><a href="#8_17">itemWidgetNamePrefix</a></code> state property as a prefix and appending an automatically incremented uniquifier.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -304,7 +304,7 @@
 );
 </pre>
 					
-					<p>In the above example, the newly created collection widget will have two collection item child widgets: one named <code>'photoItem0'</code>, and the other named <code>'photoItem1'</code>. This is because the <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> set-get property is set to <code>null</code>, thereby defeating the <a href="#1_1_1_1">Explicit Naming of Collection Item Widgets</a>, and because the <code><a href="#8_17">itemWidgetNamePrefix</a></code> set-get property is set to <code>'photoItem'</code>. The uniqifier value starts at <code>0</code>, and is incremented for each item added to the collection. This results in the collection item widget names <code>'photoItem0'</code> and <code>'photoItem1'</code>.</p>
+					<p>In the above example, the newly created collection widget will have two collection item child widgets: one named <code>'photoItem0'</code>, and the other named <code>'photoItem1'</code>. This is because the <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> state property is set to <code>null</code>, thereby defeating the <a href="#1_1_1_1">Explicit Naming of Collection Item Widgets</a>, and because the <code><a href="#8_17">itemWidgetNamePrefix</a></code> state property is set to <code>'photoItem'</code>. The uniqifier value starts at <code>0</code>, and is incremented for each item added to the collection. This results in the collection item widget names <code>'photoItem0'</code> and <code>'photoItem1'</code>.</p>
 				</div>
 			</div>
 		</div>
@@ -339,7 +339,7 @@
 				
 				<p><code><a href="#4_2">addControlButton</a></code> | <code><a href="#4_3">addItemWidget</a></code> | <code><a href="#4_9">finishRemove</a></code> | <code><a href="#4_12">forAll</a></code> | <code><a href="#4_15">getItemWidgetProperties</a></code> | <code><a href="#4_19">getPropertyForItems</a></code> | <code><a href="#4_20">getPropertyForSelected</a></code> | <code><a href="#4_22">getSelected</a></code> | <code><a href="#4_31">makeItemWidgetName</a></code> | <code><a href="#4_34">remove</a></code> | <code><a href="#4_38">selectAll</a></code> | <code><a href="#4_39">selectNone</a></code> | <code><a href="#4_40">selectRange</a></code> | <code><a href="#4_58">wireItemWidget</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#8_1">allSelected</a></code> | <code><a href="#8_13">isEmpty</a></code> | <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> | <code><a href="#8_15">itemRemoveActsOnSelection</a></code> | <code><a href="#8_16">itemWidgetClass</a></code> | <code><a href="#8_17">itemWidgetNamePrefix</a></code> | <code><a href="#8_18">itemWidgetProperties</a></code> | <code><a href="#8_19">items</a></code> | <code><a href="#8_23">oneSelected</a></code> | <code><a href="#8_24">selectionMode</a></code> | <code><a href="#8_25">someSelected</a></code> | <code><a href="#8_26">totalItems</a></code> | <code><a href="#8_27">totalSelected</a></code></p>
 			</div>
@@ -375,7 +375,7 @@
 				
 				<p><code><a href="#2_2">showConfirm</a></code> | <code><a href="#2_3">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#8_2">built</a></code> | <code><a href="#8_3">busy</a></code> | <code><a href="#8_4">busyInherited</a></code> | <code><a href="#8_5">children</a></code> | <code><a href="#8_6">container</a></code> | <code><a href="#8_7">enabled</a></code> | <code><a href="#8_8">enabledInherited</a></code> | <code><a href="#8_9">html</a></code> | <code><a href="#8_10">idPrefix</a></code> | <code><a href="#8_11">idPrefixConstruction</a></code> | <code><a href="#8_12">insertionMode</a></code> | <code><a href="#8_20">localized</a></code> | <code><a href="#8_21">name</a></code> | <code><a href="#8_22">nodeMap</a></code> | <code><a href="#8_28">wired</a></code></p>
 				
@@ -416,7 +416,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_19">items</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_19">items</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>[]</code> (empty array)</td></tr>
 			</table>
 		</div>
@@ -454,7 +454,7 @@
 		<div class="contents2">
 			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up so that clicking it will prompt the user to confirm that they wish to remove the selected items, and will then remove the selected items if the user agrees.</p>
 			
-			<p>This button is disabled whenever the value of the <code><a href="#8_25">someSelected</a></code> set-get property is <code>false</code>. Put another way, this button is only enabled when the value of <code><a href="#8_25">someSelected</a></code> is <code>true</code>.</p>
+			<p>This button is disabled whenever the value of the <code><a href="#8_25">someSelected</a></code> state property is <code>false</code>. Put another way, this button is only enabled when the value of <code><a href="#8_25">someSelected</a></code> is <code>true</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -473,9 +473,9 @@
 			<p>This button is <b>disabled</b> whenever...</p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#8_1">allSelected</a></code> set-get property is <code>true</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#8_13">isEmpty</a></code> set-get property is <code>true</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#8_24">selectionMode</a></code> set-get property is <code>'single'</code> and the value of the <code><a href="#8_26">totalItems</a></code> set-get property is not <code>1</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#8_1">allSelected</a></code> state property is <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#8_13">isEmpty</a></code> state property is <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#8_24">selectionMode</a></code> state property is <code>'single'</code> and the value of the <code><a href="#8_26">totalItems</a></code> state property is not <code>1</code></td></tr>
 			</table>
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -491,7 +491,7 @@
 		<div class="contents2">
 			<p>An instance of <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, that is wired up to call the <code><a href="#4_38">selectAll</a></code> instance method when clicked, with the value <code>false</code> specified for the <code><a href="#4_38">selectAll</a></code> method's <code>selectedBOOL</code> parameter.</p>
 			
-			<p>This button is disabled whenever the value of the <code><a href="#8_25">someSelected</a></code> set-get property is <code>false</code>. Put another way, this button is only enabled when the value of <code><a href="#8_25">someSelected</a></code> is <code>true</code>.</p>
+			<p>This button is disabled whenever the value of the <code><a href="#8_25">someSelected</a></code> state property is <code>false</code>. Put another way, this button is only enabled when the value of <code><a href="#8_25">someSelected</a></code> is <code>true</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -548,7 +548,7 @@
 			<div class="contents3">
 				<p>A string or object, specifying a rule that should be used for determining when the button is enabled and when it is not.</p>
 				
-				<p>The value of this parameter can be of type string or type object. When a string value is specified for this parameter, then the value should be the name of a set-get property of the collection widget whose value will determine the button's enabled state. An optional "!" (exclamation mark) prefix allows you to not the value of the set-get property specified in the <code><a href="#4_2_3">enabledWhenSTRorOBJ</a></code> parameter.</p>
+				<p>The value of this parameter can be of type string or type object. When a string value is specified for this parameter, then the value should be the name of a state property of the collection widget whose value will determine the button's enabled state. An optional "!" (exclamation mark) prefix allows you to not the value of the state property specified in the <code><a href="#4_2_3">enabledWhenSTRorOBJ</a></code> parameter.</p>
 				
 				<p>A much more versatile way of declaring the enabled state rule for the button is to specify an object type value for the <code><a href="#4_2_3">enabledWhenSTRorOBJ</a></code> parameter. An object specified for this parameter should have the following structure...</p>
 				
@@ -559,9 +559,9 @@
 }
 </pre>
 				
-				<p>The value of the <code>affectedBy</code> property of this object allows you to declare the name of a single set-get property of the collection widget instance that affects the enabled state of the button, or an array of the names of multiple set-get properties of the instance that affect the button's enabled state. The collection widget instance will watch on a change in the value of this property or properties, and will execute the state evaluator function specified in the <code>stateEvaluator</code> property each time there is such a change.</p>
+				<p>The value of the <code>affectedBy</code> property of this object allows you to declare the name of a single state property of the collection widget instance that affects the enabled state of the button, or an array of the names of multiple state properties of the instance that affect the button's enabled state. The collection widget instance will watch on a change in the value of this property or properties, and will execute the state evaluator function specified in the <code>stateEvaluator</code> property each time there is such a change.</p>
 				
-				<p>The function you specify in the <code>stateEvaluator</code> property should return a boolean value, indicating whether or not the button should be enabled. Your function will not receive any parameters, but it <b>will</b> be called as an instance method on the collection instance, so it will be able to access the values of the set-get properties that affect the button's enabled state by using the <code><a href="#4_13">get</a></code> instance method. For good examples of how the <code><a href="#4_2">addControlButton</a></code> method can be used in the creation of your own subclasses, look at the implementation of this class.</p>
+				<p>The function you specify in the <code>stateEvaluator</code> property should return a boolean value, indicating whether or not the button should be enabled. Your function will not receive any parameters, but it <b>will</b> be called as an instance method on the collection instance, so it will be able to access the values of the state properties that affect the button's enabled state by using the <code><a href="#4_13">get</a></code> instance method. For good examples of how the <code><a href="#4_2">addControlButton</a></code> method can be used in the creation of your own subclasses, look at the implementation of this class.</p>
 			</div>
 			
 			<p><span class="allCaps">VARIATION 1</span></p>
@@ -606,7 +606,7 @@ buttonOBJ = myInstance.addControlButton (buttonNameSTR,eventNameSTR);
 			
 			<p>The value of the <code>itemWidgetNameSTR</code> parameter should be the widget name for the item widget that will be added as a child of the collection widget. The value of this parameter can be any string, so long as it doesn't collide with the names of existing child widgets of the collection widget, including the various button widgets of the class, and other existing item widgets. A value for this parameter can be generated using the <code><a href="#4_31">makeItemWidgetName</a></code> hook method.</p>
 			
-			<p>The value of the <code>itemWidgetPropertiesOBJ</code> parameter should be an object containing the values for set-get properties of the item widget to be created. This object will be modified by the <code><a href="#4_3">addItemWidget</a></code> method, by copying in the properties of the object returned by the <code><a href="#4_15">getItemWidgetProperties</a></code> hook method.</p>
+			<p>The value of the <code>itemWidgetPropertiesOBJ</code> parameter should be an object containing the values for state properties of the item widget to be created. This object will be modified by the <code><a href="#4_3">addItemWidget</a></code> method, by copying in the properties of the object returned by the <code><a href="#4_15">getItemWidgetProperties</a></code> hook method.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -758,7 +758,7 @@ myCollection.forAll (
 )
 </pre>
 			
-			<p>In the above example, the <code><a href="#4_12">forAll</a></code> method is being used to iterate through the item widgets in the collection to find the one (if any) that the user is currently mousing over. If the item handler function finds an item that the user is over, where the value of the item widget's <code>over</code> set-get property is <code>true</code>, then the handler sets the <code>itemUserIsOver</code> variable to this item widget and then returns the special value <code>false</code>, indicating to the <code><a href="#4_12">forAll</a></code> iterator that it should break out of the iteration (after all, the item handler function can't use the <code>break</code> statement to accomplish that in this case).</p>
+			<p>In the above example, the <code><a href="#4_12">forAll</a></code> method is being used to iterate through the item widgets in the collection to find the one (if any) that the user is currently mousing over. If the item handler function finds an item that the user is over, where the value of the item widget's <code>over</code> state property is <code>true</code>, then the handler sets the <code>itemUserIsOver</code> variable to this item widget and then returns the special value <code>false</code>, indicating to the <code><a href="#4_12">forAll</a></code> iterator that it should break out of the iteration (after all, the item handler function can't use the <code>break</code> statement to accomplish that in this case).</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -794,7 +794,7 @@ myCollection.forAll (
 		<a name="4_15"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.15. getItemWidgetProperties"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_15" title="4. Instance Methods -&gt; 4.15. getItemWidgetProperties">15</a>. </span>getItemWidgetProperties</h2>
 		<div class="contents2">
-			<p>For advanced developers only, this is a subclassing hook that lets you override the default use of the <code><a href="#8_18">itemWidgetProperties</a></code> set-get property in the <code><a href="#4_3">addItemWidget</a></code> instance method.</p>
+			<p>For advanced developers only, this is a subclassing hook that lets you override the default use of the <code><a href="#8_18">itemWidgetProperties</a></code> state property in the <code><a href="#4_3">addItemWidget</a></code> instance method.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -802,7 +802,7 @@ myCollection.forAll (
 <pre class="sample-code">itemWidgetPropertiesOBJ = myInstance.getItemWidgetProperties ();
 </pre>
 			
-			<p>The implementation of this method by this base class simply returns a reference to the <code><a href="#8_18">itemWidgetProperties</a></code> set-get property. By overriding this method in a subclass, you can provide your own logic for generating the item widget properties that will be used when adding item widgets in the <code><a href="#4_3">addItemWidget</a></code> instance method. One thing you can do with your own override of this method is to stitch in additional properties at the time of adding an item widget. You can look for an example of this in the implementation of the <code><a href="../reference/Uize.Widget.Collection.Dynamic.html">Uize.Widget.Collection.Dynamic</a></code> class.</p>
+			<p>The implementation of this method by this base class simply returns a reference to the <code><a href="#8_18">itemWidgetProperties</a></code> state property. By overriding this method in a subclass, you can provide your own logic for generating the item widget properties that will be used when adding item widgets in the <code><a href="#4_3">addItemWidget</a></code> instance method. One thing you can do with your own override of this method is to stitch in additional properties at the time of adding an item widget. You can look for an example of this in the implementation of the <code><a href="../reference/Uize.Widget.Collection.Dynamic.html">Uize.Widget.Collection.Dynamic</a></code> class.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -863,7 +863,7 @@ myCollection.forAll (
 <pre class="sample-code">propertyValuesARRAY = myInstance.getPropertyForItems (propertyNameSTR,itemWidgetsARRAY);
 </pre>
 			
-			<p>Items in the collection are represented by item widgets, and each item widget for an item should have a <code>properties</code> set-get property, which serves as a "bucket" for additional item data. The <code><a href="#4_19">getPropertyForItems</a></code> method lets you get an array of the values for a specific property in this <code>properties</code> "bucket" for all of the specified items, where the items are specified by an array containing item widgets that correspond to items in the collection.</p>
+			<p>Items in the collection are represented by item widgets, and each item widget for an item should have a <code>properties</code> state property, which serves as a "bucket" for additional item data. The <code><a href="#4_19">getPropertyForItems</a></code> method lets you get an array of the values for a specific property in this <code>properties</code> "bucket" for all of the specified items, where the items are specified by an array containing item widgets that correspond to items in the collection.</p>
 			
 			<a name="4_19_1"></a>
 			<h3 class="heading3" title="4. Instance Methods -&gt; 4.19. getPropertyForItems -&gt; 4.19.1. For All Items"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_19" title="4. Instance Methods -&gt; 4.19. getPropertyForItems">19</a>.<a href="#4_19_1" title="4. Instance Methods -&gt; 4.19. getPropertyForItems -&gt; 4.19.1. For All Items">1</a>. </span>For All Items</h3>
@@ -927,7 +927,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			<a name="4_19_3"></a>
 			<h3 class="heading3" title="4. Instance Methods -&gt; 4.19. getPropertyForItems -&gt; 4.19.3. Getting All Properties"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_19" title="4. Instance Methods -&gt; 4.19. getPropertyForItems">19</a>.<a href="#4_19_3" title="4. Instance Methods -&gt; 4.19. getPropertyForItems -&gt; 4.19.3. Getting All Properties">3</a>. </span>Getting All Properties</h3>
 			<div class="contents3">
-				<p>When the special value <code>null</code> or <code>undefined</code> is specified for the <code>propertyNameSTR</code> parameter, then the <code><a href="#4_19">getPropertyForItems</a></code> method will return an array containing the values of the <code>properties</code> set-get property for all of the specified items.</p>
+				<p>When the special value <code>null</code> or <code>undefined</code> is specified for the <code>propertyNameSTR</code> parameter, then the <code><a href="#4_19">getPropertyForItems</a></code> method will return an array containing the values of the <code>properties</code> state property for all of the specified items.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -956,7 +956,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 				
 				<p><span class="allCaps">IMPORTANT</span></p>
 				
-				<p>Note that the elements of the returned array will be the values of the <code>properties</code> set-get property for the specified items. Given that the <code>properties</code> set-get property for collection item widgets is an object, the elements array returned by the <code><a href="#4_19">getPropertyForItems</a></code> method will contain references to the same objects shared by the item widgets. Therefore, modifying the values of the objects in the returned array will have an affect on the item widgets. In cases where you wish to modify the returned data, you should probably use the <code>Uize.clone</code> static method to create your own clone of this data before modifying it.</p>
+				<p>Note that the elements of the returned array will be the values of the <code>properties</code> state property for the specified items. Given that the <code>properties</code> state property for collection item widgets is an object, the elements array returned by the <code><a href="#4_19">getPropertyForItems</a></code> method will contain references to the same objects shared by the item widgets. Therefore, modifying the values of the objects in the returned array will have an affect on the item widgets. In cases where you wish to modify the returned data, you should probably use the <code>Uize.clone</code> static method to create your own clone of this data before modifying it.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -1160,7 +1160,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			
 			<p>This method is not intended to be overrided by a subclass, but is intended instead to be used as part of the implementation of a subclass method that adds items to the collection. The method will be called first in order to generate a widget name for the item widget about to be added, and the generated name will then be used when adding the new item widget.</p>
 			
-			<p>The <code>itemOBJ</code> parameter can be used to supply a reference to the <code>properties</code> "bucket" for additional item data. When an object is specified for the <code>itemOBJ</code> parameter, and when the <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> set-get property is set to a non-empty string, and when the value of the property in the <code>itemOBJ</code> object specified by the <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> property is a non-empty string, then that property will be returned as the item widget name. Otherwise, the item widget name will be generated by concatenating the value of the <code><a href="#8_17">itemWidgetNamePrefix</a></code> set-get property with a dynamically generated and automatically incremented uniquifier value.</p>
+			<p>The <code>itemOBJ</code> parameter can be used to supply a reference to the <code>properties</code> "bucket" for additional item data. When an object is specified for the <code>itemOBJ</code> parameter, and when the <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> state property is set to a non-empty string, and when the value of the property in the <code>itemOBJ</code> object specified by the <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> property is a non-empty string, then that property will be returned as the item widget name. Otherwise, the item widget name will be generated by concatenating the value of the <code><a href="#8_17">itemWidgetNamePrefix</a></code> state property with a dynamically generated and automatically incremented uniquifier value.</p>
 			
 			<p><span class="allCaps">VARIATION</span></p>
 			
@@ -1174,7 +1174,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is a hook method that can be used by a subclass</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> and <code><a href="#8_17">itemWidgetNamePrefix</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> and <code><a href="#8_17">itemWidgetNamePrefix</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1291,7 +1291,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 <pre class="sample-code">myInstance.selectAll ();
 </pre>
 			
-			<p>Calling this method has the effect of setting the value of the <code>selected</code> set-get property of all collection item widgets to <code>true</code>. Calling this method will also result in the values of the <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties being updated, upon which some of these properties may change value.</p>
+			<p>Calling this method has the effect of setting the value of the <code>selected</code> state property of all collection item widgets to <code>true</code>. Calling this method will also result in the values of the <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties being updated, upon which some of these properties may change value.</p>
 			
 			<p><span class="allCaps">VARIATION 1</span></p>
 			
@@ -1313,7 +1313,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_39">selectNone</a></code> and <code><a href="#4_40">selectRange</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1333,13 +1333,13 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 <pre class="sample-code">myInstance.selectNone ();
 </pre>
 			
-			<p>Calling this method has the effect of setting the value of the <code>selected</code> set-get property of all collection item widgets to <code>false</code>, and is equivalent to calling the <code><a href="#4_38">selectAll</a></code> instance method and specifying the value <code>false</code> for the <code>selectedBOOL</code> parameter. Calling this method will also result in the values of the <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties being updated, upon which some of these properties may change value.</p>
+			<p>Calling this method has the effect of setting the value of the <code>selected</code> state property of all collection item widgets to <code>false</code>, and is equivalent to calling the <code><a href="#4_38">selectAll</a></code> instance method and specifying the value <code>false</code> for the <code>selectedBOOL</code> parameter. Calling this method will also result in the values of the <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties being updated, upon which some of these properties may change value.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_38">selectAll</a></code> and <code><a href="#4_40">selectRange</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1359,15 +1359,15 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 <pre class="sample-code">myInstance.selectRange (itemWidgetAOBJ,itemWidgetBOBJ);
 </pre>
 			
-			<p>Calling this method has the effect of setting the value of the <code>selected</code> set-get property of all collection item widgets within the specified range to <code>true</code>, and all collection item widgets outside of the specified range to <code>false</code>. The range is specified by the <code>itemWidgetAOBJ</code> and <code>itemWidgetBOBJ</code> parameters, and is inclusive of the two item widgets that are specified by these parameters. The order of the range bounds is unimportant - the item specified by <code>itemWidgetAOBJ</code> can be before or after the item specified by <code>itemWidgetBOBJ</code> in the <code><a href="#2_1">itemWidgets</a></code> array.</p>
+			<p>Calling this method has the effect of setting the value of the <code>selected</code> state property of all collection item widgets within the specified range to <code>true</code>, and all collection item widgets outside of the specified range to <code>false</code>. The range is specified by the <code>itemWidgetAOBJ</code> and <code>itemWidgetBOBJ</code> parameters, and is inclusive of the two item widgets that are specified by these parameters. The order of the range bounds is unimportant - the item specified by <code>itemWidgetAOBJ</code> can be before or after the item specified by <code>itemWidgetBOBJ</code> in the <code><a href="#2_1">itemWidgets</a></code> array.</p>
 			
-			<p>Calling this method will result in the values of the <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties being updated, upon which some of these properties may change value. Calling this method will have no effect if the values of either - or both - of the <code>itemWidgetAOBJ</code> or <code>itemWidgetBOBJ</code> parameters is <code>null</code> or <code>undefined</code>, or if the value of the <code><a href="#8_24">selectionMode</a></code> set-get property is <code>'single'</code> and the values of the <code>itemWidgetAOBJ</code> and <code>itemWidgetBOBJ</code> parameters are not identical (ie. you can only select a range of one item when <code><a href="#8_24">selectionMode</a></code> is set to <code>'single'</code>, and trying to select a range of more than one item will result in no action).</p>
+			<p>Calling this method will result in the values of the <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties being updated, upon which some of these properties may change value. Calling this method will have no effect if the values of either - or both - of the <code>itemWidgetAOBJ</code> or <code>itemWidgetBOBJ</code> parameters is <code>null</code> or <code>undefined</code>, or if the value of the <code><a href="#8_24">selectionMode</a></code> state property is <code>'single'</code> and the values of the <code>itemWidgetAOBJ</code> and <code>itemWidgetBOBJ</code> parameters are not identical (ie. you can only select a range of one item when <code><a href="#8_24">selectionMode</a></code> is set to <code>'single'</code>, and trying to select a range of more than one item will result in no action).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_38">selectAll</a></code> and <code><a href="#4_39">selectNone</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1678,12 +1678,12 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		<div class="contents2">
 			<p>A node that will be used to display the total number of items in the collection.</p>
 			
-			<p>Whenever the value of the <code><a href="#8_26">totalItems</a></code> set-get property changes, this node will be updated using the <code><a href="#4_48">setNodeValue</a></code> instance method of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class. Because the <code><a href="#4_48">setNodeValue</a></code> method is used for displaying the value of the <code><a href="#8_26">totalItems</a></code> property, the <code><a href="#6_1">totalItems Implied Node</a></code> can be of any type supported by the <code><a href="#4_48">setNodeValue</a></code> method - it can be a <code>div</code> tag, a <code>span</code> tag, a <code>p</code> tag, a text <code>input</code> tag, a <code>textarea</code> tag, etc.</p>
+			<p>Whenever the value of the <code><a href="#8_26">totalItems</a></code> state property changes, this node will be updated using the <code><a href="#4_48">setNodeValue</a></code> instance method of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class. Because the <code><a href="#4_48">setNodeValue</a></code> method is used for displaying the value of the <code><a href="#8_26">totalItems</a></code> property, the <code><a href="#6_1">totalItems Implied Node</a></code> can be of any type supported by the <code><a href="#4_48">setNodeValue</a></code> method - it can be a <code>div</code> tag, a <code>span</code> tag, a <code>p</code> tag, a text <code>input</code> tag, a <code>textarea</code> tag, etc.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_26">totalItems</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_26">totalItems</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the markup for this implied node is optional, and a given implementation of a collection widget's HTML does not need to offer this node</td></tr>
 			</table>
 		</div>
@@ -1746,22 +1746,22 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 	</div>
 	
 	<a name="8"></a>
-	<h1 class="heading1" title="8. Set-get Properties"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="8. State Properties"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="8_1"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.1. allSelected"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_1" title="8. Set-get Properties -&gt; 8.1. allSelected">1</a>. </span>allSelected</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.1. allSelected"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_1" title="8. State Properties -&gt; 8.1. allSelected">1</a>. </span>allSelected</h2>
 		<div class="contents2">
 			<p>A read-only boolean, indicating whether or not all the items in the collection are selected.</p>
 			
-			<p>Whenever the value of the <code><a href="#8_27">totalSelected</a></code> set-get property changes, the value of this property will be updated to be kept current and correct. Whenever the value of this property is <code>true</code>, the value of the <code><a href="#8_25">someSelected</a></code> set-get property will also be <code>true</code>.</p>
+			<p>Whenever the value of the <code><a href="#8_27">totalSelected</a></code> state property changes, the value of this property will be updated to be kept current and correct. Whenever the value of this property is <code>true</code>, the value of the <code><a href="#8_25">someSelected</a></code> state property will also be <code>true</code>.</p>
 			
-			<p>The <code>Changed.allSelected</code> instance event can be wired in order to maintain enabled state of any UI elements whose enabled state is affected by whether or not all items are selected. For example, whenever this property is set to <code>true</code>, the <code><a href="#4_38">selectAll</a></code> child widget will be disabled. Conversely, whenever <code><a href="#8_1">allSelected</a></code> is set to <code>false</code>, the <code><a href="#4_38">selectAll</a></code> child widget will be enabled (provided that the <code><a href="#8_13">isEmpty</a></code> set-get property is not set to <code>true</code>).</p>
+			<p>The <code>Changed.allSelected</code> instance event can be wired in order to maintain enabled state of any UI elements whose enabled state is affected by whether or not all items are selected. For example, whenever this property is set to <code>true</code>, the <code><a href="#4_38">selectAll</a></code> child widget will be disabled. Conversely, whenever <code><a href="#8_1">allSelected</a></code> is set to <code>false</code>, the <code><a href="#4_38">selectAll</a></code> child widget will be enabled (provided that the <code><a href="#8_13">isEmpty</a></code> state property is not set to <code>true</code>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1772,7 +1772,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_2"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.2. built"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_2" title="8. Set-get Properties -&gt; 8.2. built">2</a>. </span>built</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.2. built"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_2" title="8. State Properties -&gt; 8.2. built">2</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1784,7 +1784,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_3"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.3. busy"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_3" title="8. Set-get Properties -&gt; 8.3. busy">3</a>. </span>busy</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.3. busy"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_3" title="8. State Properties -&gt; 8.3. busy">3</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1796,7 +1796,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_4"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.4. busyInherited"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_4" title="8. Set-get Properties -&gt; 8.4. busyInherited">4</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.4. busyInherited"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_4" title="8. State Properties -&gt; 8.4. busyInherited">4</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1808,7 +1808,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_5"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.5. children"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_5" title="8. Set-get Properties -&gt; 8.5. children">5</a>. </span>children</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.5. children"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_5" title="8. State Properties -&gt; 8.5. children">5</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1820,7 +1820,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_6"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.6. container"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_6" title="8. Set-get Properties -&gt; 8.6. container">6</a>. </span>container</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.6. container"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_6" title="8. State Properties -&gt; 8.6. container">6</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1832,7 +1832,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_7"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.7. enabled"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_7" title="8. Set-get Properties -&gt; 8.7. enabled">7</a>. </span>enabled</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.7. enabled"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_7" title="8. State Properties -&gt; 8.7. enabled">7</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1844,7 +1844,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_8"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.8. enabledInherited"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_8" title="8. Set-get Properties -&gt; 8.8. enabledInherited">8</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.8. enabledInherited"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_8" title="8. State Properties -&gt; 8.8. enabledInherited">8</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1856,7 +1856,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_9"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.9. html"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_9" title="8. Set-get Properties -&gt; 8.9. html">9</a>. </span>html</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.9. html"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_9" title="8. State Properties -&gt; 8.9. html">9</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1868,7 +1868,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_10"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.10. idPrefix"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_10" title="8. Set-get Properties -&gt; 8.10. idPrefix">10</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.10. idPrefix"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_10" title="8. State Properties -&gt; 8.10. idPrefix">10</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1880,7 +1880,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_11"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.11. idPrefixConstruction"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_11" title="8. Set-get Properties -&gt; 8.11. idPrefixConstruction">11</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.11. idPrefixConstruction"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_11" title="8. State Properties -&gt; 8.11. idPrefixConstruction">11</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1892,7 +1892,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_12"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.12. insertionMode"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_12" title="8. Set-get Properties -&gt; 8.12. insertionMode">12</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.12. insertionMode"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_12" title="8. State Properties -&gt; 8.12. insertionMode">12</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1904,11 +1904,11 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_13"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.13. isEmpty"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_13" title="8. Set-get Properties -&gt; 8.13. isEmpty">13</a>. </span>isEmpty</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.13. isEmpty"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_13" title="8. State Properties -&gt; 8.13. isEmpty">13</a>. </span>isEmpty</h2>
 		<div class="contents2">
 			<p>A read-only boolean, indicating whether or not the collection is empty (ie. has no items).</p>
 			
-			<p>Whenever the value of the <code><a href="#8_26">totalItems</a></code> set-get property changes, the value of the <code><a href="#8_13">isEmpty</a></code> set-get property will be updated to be kept current and correct. When the <code><a href="#8_13">isEmpty</a></code> property is set to <code>true</code>, then the <code><a href="#3_2">selectAll Child Widget</a></code> will be disabled.</p>
+			<p>Whenever the value of the <code><a href="#8_26">totalItems</a></code> state property changes, the value of the <code><a href="#8_13">isEmpty</a></code> state property will be updated to be kept current and correct. When the <code><a href="#8_13">isEmpty</a></code> property is set to <code>true</code>, then the <code><a href="#3_2">selectAll Child Widget</a></code> will be disabled.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1924,7 +1924,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_14"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.14. itemPropertyForItemWidgetName"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_14" title="8. Set-get Properties -&gt; 8.14. itemPropertyForItemWidgetName">14</a>. </span>itemPropertyForItemWidgetName</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.14. itemPropertyForItemWidgetName"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_14" title="8. State Properties -&gt; 8.14. itemPropertyForItemWidgetName">14</a>. </span>itemPropertyForItemWidgetName</h2>
 		<div class="contents2">
 			<p>A string, specifying the name of a property in an item's properties object that should be used as the name of the item's widget in the collection.</p>
 			
@@ -1933,7 +1933,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_17">itemWidgetNamePrefix</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_17">itemWidgetNamePrefix</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>'id'</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1944,7 +1944,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_15"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.15. itemRemoveActsOnSelection"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_15" title="8. Set-get Properties -&gt; 8.15. itemRemoveActsOnSelection">15</a>. </span>itemRemoveActsOnSelection</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.15. itemRemoveActsOnSelection"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_15" title="8. State Properties -&gt; 8.15. itemRemoveActsOnSelection">15</a>. </span>itemRemoveActsOnSelection</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not a <code><a href="#5_3">Remove</a></code> event fired by a selected collection item (as a result of the user clicking the item's remove button) should act on the rest of the selected items.</p>
 			
@@ -1965,7 +1965,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_16"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.16. itemWidgetClass"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_16" title="8. Set-get Properties -&gt; 8.16. itemWidgetClass">16</a>. </span>itemWidgetClass</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.16. itemWidgetClass"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_16" title="8. State Properties -&gt; 8.16. itemWidgetClass">16</a>. </span>itemWidgetClass</h2>
 		<div class="contents2">
 			<p>An object reference, specifying the <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code> subclass that should be used for creating item widget instances.</p>
 			
@@ -1984,7 +1984,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_17"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.17. itemWidgetNamePrefix"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_17" title="8. Set-get Properties -&gt; 8.17. itemWidgetNamePrefix">17</a>. </span>itemWidgetNamePrefix</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.17. itemWidgetNamePrefix"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_17" title="8. State Properties -&gt; 8.17. itemWidgetNamePrefix">17</a>. </span>itemWidgetNamePrefix</h2>
 		<div class="contents2">
 			<p>A string, specifying a prefix that should be used in collection item widget names when automatic widget naming is employed.</p>
 			
@@ -1993,7 +1993,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_14">itemPropertyForItemWidgetName</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>'item'</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2004,9 +2004,9 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_18"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.18. itemWidgetProperties"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_18" title="8. Set-get Properties -&gt; 8.18. itemWidgetProperties">18</a>. </span>itemWidgetProperties</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.18. itemWidgetProperties"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_18" title="8. State Properties -&gt; 8.18. itemWidgetProperties">18</a>. </span>itemWidgetProperties</h2>
 		<div class="contents2">
-			<p>An object reference, specifying the values for any set-get properties that are common for all collection item widgets that are created by this class.</p>
+			<p>An object reference, specifying the values for any state properties that are common for all collection item widgets that are created by this class.</p>
 			
 			<p>The <code>Uize.Widget.Collection</code> class will use this property when creating new collection item widget instances as child widgets. Consider the following example...</p>
 			
@@ -2036,7 +2036,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 );
 </pre>
 			
-			<p>In the above example, we're setting the <code><a href="#8_18">itemWidgetProperties</a></code> set-get property to the value <code>{previewClickAction:'Select'}</code>. This means that the two collection item child widgets that are created will both have their <code>previewClickAction</code> set-get property set to the value <code>'Select'</code>, which means that clicking on them will change their selected state.</p>
+			<p>In the above example, we're setting the <code><a href="#8_18">itemWidgetProperties</a></code> state property to the value <code>{previewClickAction:'Select'}</code>. This means that the two collection item child widgets that are created will both have their <code>previewClickAction</code> state property set to the value <code>'Select'</code>, which means that clicking on them will change their selected state.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -2051,11 +2051,11 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_19"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.19. items"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_19" title="8. Set-get Properties -&gt; 8.19. items">19</a>. </span>items</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.19. items"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_19" title="8. State Properties -&gt; 8.19. items">19</a>. </span>items</h2>
 		<div class="contents2">
 			<p>An array of objects, representing the item data corresponding to the items in the collection.</p>
 			
-			<p>Each element of the <code><a href="#8_19">items</a></code> array should be an object, which serves as a "bucket" for additional data for an item. When a collection item widget is created for an item in the <code><a href="#8_19">items</a></code> array, the element from the <code><a href="#8_19">items</a></code> array is used as the value of the item widget's <code>properties</code> set-get property.</p>
+			<p>Each element of the <code><a href="#8_19">items</a></code> array should be an object, which serves as a "bucket" for additional data for an item. When a collection item widget is created for an item in the <code><a href="#8_19">items</a></code> array, the element from the <code><a href="#8_19">items</a></code> array is used as the value of the item widget's <code>properties</code> state property.</p>
 			
 			<p>Whenever the value of the <code><a href="#8_19">items</a></code> property is changed, the following actions will be taken...</p>
 			
@@ -2077,7 +2077,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_20"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.20. localized"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_20" title="8. Set-get Properties -&gt; 8.20. localized">20</a>. </span>localized</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.20. localized"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_20" title="8. State Properties -&gt; 8.20. localized">20</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -2089,7 +2089,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_21"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.21. name"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_21" title="8. Set-get Properties -&gt; 8.21. name">21</a>. </span>name</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.21. name"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_21" title="8. State Properties -&gt; 8.21. name">21</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -2101,7 +2101,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_22"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.22. nodeMap"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_22" title="8. Set-get Properties -&gt; 8.22. nodeMap">22</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.22. nodeMap"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_22" title="8. State Properties -&gt; 8.22. nodeMap">22</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -2113,11 +2113,11 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_23"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.23. oneSelected"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_23" title="8. Set-get Properties -&gt; 8.23. oneSelected">23</a>. </span>oneSelected</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.23. oneSelected"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_23" title="8. State Properties -&gt; 8.23. oneSelected">23</a>. </span>oneSelected</h2>
 		<div class="contents2">
 			<p>A read-only boolean, indicating whether or not just one item is selected.</p>
 			
-			<p>Whenever the value of the <code><a href="#8_27">totalSelected</a></code> set-get property changes, the value of this property will be updated to be kept current and correct. Whenever the value of this property is <code>true</code>, the value of the <code><a href="#8_25">someSelected</a></code> set-get property will also be <code>true</code>.</p>
+			<p>Whenever the value of the <code><a href="#8_27">totalSelected</a></code> state property changes, the value of this property will be updated to be kept current and correct. Whenever the value of this property is <code>true</code>, the value of the <code><a href="#8_25">someSelected</a></code> state property will also be <code>true</code>.</p>
 			
 			<p>The <code>Changed.oneSelected</code> instance event can be wired in order to maintain enabled state of any UI elements that trigger action on a single item and that are, therefore, not applicable when more than one item or no items are selected, but where it is still desirable to permit multiple selection for the sake of other actions that <b>can</b> operate on more than one item.</p>
 			
@@ -2125,7 +2125,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2136,7 +2136,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_24"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.24. selectionMode"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_24" title="8. Set-get Properties -&gt; 8.24. selectionMode">24</a>. </span>selectionMode</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.24. selectionMode"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_24" title="8. State Properties -&gt; 8.24. selectionMode">24</a>. </span>selectionMode</h2>
 		<div class="contents2">
 			<p>A string, specifying the mode (<code>'single'</code> or <code>'multi'</code>) for selecting items in the collection.</p>
 			
@@ -2157,11 +2157,11 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_25"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.25. someSelected"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_25" title="8. Set-get Properties -&gt; 8.25. someSelected">25</a>. </span>someSelected</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.25. someSelected"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_25" title="8. State Properties -&gt; 8.25. someSelected">25</a>. </span>someSelected</h2>
 		<div class="contents2">
 			<p>A read-only boolean, indicating whether or not there are any items selected.</p>
 			
-			<p>Whenever the value of the <code><a href="#8_27">totalSelected</a></code> set-get property changes, the value of this property will be updated to be kept current and correct. The value of this property will be <code>true</code> when the value of the <code><a href="#8_23">oneSelected</a></code> set-get property is <code>true</code>.</p>
+			<p>Whenever the value of the <code><a href="#8_27">totalSelected</a></code> state property changes, the value of this property will be updated to be kept current and correct. The value of this property will be <code>true</code> when the value of the <code><a href="#8_23">oneSelected</a></code> state property is <code>true</code>.</p>
 			
 			<p>The <code>Changed.someSelected</code> instance event can be wired in order to maintain enabled state of any UI elements that trigger action on a selection and that are, therefore, not applicable when no items are selected. For example, whenever this property is set to <code>true</code>, the <code><a href="#4_39">selectNone</a></code> child widget will be enabled. Conversely, whenever <code><a href="#8_25">someSelected</a></code> is set to <code>false</code>, the <code><a href="#4_39">selectNone</a></code> child widget will be disabled.</p>
 			
@@ -2169,7 +2169,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, and <code><a href="#8_27">totalSelected</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2180,17 +2180,17 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_26"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.26. totalItems"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_26" title="8. Set-get Properties -&gt; 8.26. totalItems">26</a>. </span>totalItems</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.26. totalItems"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_26" title="8. State Properties -&gt; 8.26. totalItems">26</a>. </span>totalItems</h2>
 		<div class="contents2">
 			<p>A read-only integer, indicating the total number of items in the collection.</p>
 			
-			<p>Whenever the total number of items in the collection changes, either as a result of adding new items or removing items, the value of the <code><a href="#8_13">isEmpty</a></code> set-get property will be updated to be kept current and correct, and the <code><a href="#6_1">totalItems Implied Node</a></code> will be updated to reflect the new number of items in the collection.</p>
+			<p>Whenever the total number of items in the collection changes, either as a result of adding new items or removing items, the value of the <code><a href="#8_13">isEmpty</a></code> state property will be updated to be kept current and correct, and the <code><a href="#6_1">totalItems Implied Node</a></code> will be updated to reflect the new number of items in the collection.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_13">isEmpty</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_13">isEmpty</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2201,17 +2201,17 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_27"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.27. totalSelected"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_27" title="8. Set-get Properties -&gt; 8.27. totalSelected">27</a>. </span>totalSelected</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.27. totalSelected"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_27" title="8. State Properties -&gt; 8.27. totalSelected">27</a>. </span>totalSelected</h2>
 		<div class="contents2">
 			<p>An read-only integer, indicating the total number of items that are selected.</p>
 			
-			<p>Whenever the selection is changed, either by the user or programmatically, the value of this property will be updated. Whenever its value changes, the values of the <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_1">allSelected</a></code> set-get properties will be updated to be kept current and correct.</p>
+			<p>Whenever the selection is changed, either by the user or programmatically, the value of this property will be updated. Whenever its value changes, the values of the <code><a href="#8_23">oneSelected</a></code>, <code><a href="#8_25">someSelected</a></code>, and <code><a href="#8_1">allSelected</a></code> state properties will be updated to be kept current and correct.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, and <code><a href="#8_25">someSelected</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#8_1">allSelected</a></code>, <code><a href="#8_23">oneSelected</a></code>, and <code><a href="#8_25">someSelected</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2222,7 +2222,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="8_28"></a>
-		<h2 class="heading2" title="8. Set-get Properties -&gt; 8.28. wired"><span class="headingNumber"><a href="#8" title="8. Set-get Properties">8</a>.<a href="#8_28" title="8. Set-get Properties -&gt; 8.28. wired">28</a>. </span>wired</h2>
+		<h2 class="heading2" title="8. State Properties -&gt; 8.28. wired"><span class="headingNumber"><a href="#8" title="8. State Properties">8</a>.<a href="#8_28" title="8. State Properties -&gt; 8.28. wired">28</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

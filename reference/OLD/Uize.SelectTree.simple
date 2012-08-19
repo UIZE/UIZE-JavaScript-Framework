@@ -2,7 +2,7 @@
 	Features
 		[must to document]
 
-Set-get Properties
+State Properties
 	chooseText
 		A string, specifying the text that should be displayed as the first option in a =Uize.SelectTree= instance's select boxes.
 

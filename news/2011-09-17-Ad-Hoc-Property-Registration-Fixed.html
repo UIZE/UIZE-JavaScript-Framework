@@ -3,7 +3,7 @@
 <head>
 	<title>2011-09-17 - Ad Hoc Property Registration Fixed | News | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework News "/>
-	<meta name="description" content="A problem that was discovered with the set-get properties mechanism and its support for ad hoc registration of properties has been fixed."/>
+	<meta name="description" content="A problem that was discovered with the state properties mechanism and its support for ad hoc registration of properties has been fixed."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -23,9 +23,9 @@
 
 <div class="main">
 <div class="contents0">
-	<p>A problem that was discovered with the set-get properties mechanism and its support for ad hoc registration of properties has been fixed.</p>
+	<p>A problem that was discovered with the state properties mechanism and its support for ad hoc registration of properties has been fixed.</p>
 	
-	<p>Refactoring of the set-get properties mechanism a while back introduced a subtle but undesirable behavior change in the registering of ad hoc properties. This problem has been fixed and unit tests have been written to ensure that the new behavior is protected from accidental breakage going forward. According to the new behavior, when a set-get property is registered in an ad hoc fashion by setting a value for that property on a class, then that value becomes the initial value for that set-get property. On the other hand, if a set-get property is registered in an ad hoc fashion by setting a value for that property on an instance, then the initial value for that property is <code>undefined</code>, so that new instances of the class that are created do not get the instance-specific value for the instance that prompted the property registration.</p>
+	<p>Refactoring of the state properties mechanism a while back introduced a subtle but undesirable behavior change in the registering of ad hoc properties. This problem has been fixed and unit tests have been written to ensure that the new behavior is protected from accidental breakage going forward. According to the new behavior, when a state property is registered in an ad hoc fashion by setting a value for that property on a class, then that value becomes the initial value for that state property. On the other hand, if a state property is registered in an ad hoc fashion by setting a value for that property on an instance, then the initial value for that property is <code>undefined</code>, so that new instances of the class that are created do not get the instance-specific value for the instance that prompted the property registration.</p>
 	
 	<p><span class="allCaps">EXAMPLE</span></p>
 	
@@ -47,9 +47,9 @@
   alert (allPropertiesOfMyOtherInstance.hello)       // alerts the text "undefined"
 </pre>
 	
-	<p>In the above example, after we create the class <code>MyClass</code>, we register the set-get property <code>foo</code> in an ad hoc fashion by setting a value for it on the class. This has the effect of both registering the property and setting its initial value for all instances of the class that are created going forward. So, when we alert the value of the expression <code>myInstance.get ('foo')</code>, we see the text "bar" displayed.</p>
+	<p>In the above example, after we create the class <code>MyClass</code>, we register the state property <code>foo</code> in an ad hoc fashion by setting a value for it on the class. This has the effect of both registering the property and setting its initial value for all instances of the class that are created going forward. So, when we alert the value of the expression <code>myInstance.get ('foo')</code>, we see the text "bar" displayed.</p>
 	
-	<p>However, when we then register the property <code>hello</code> in an ad hoc fashion by setting a value for it on the instance <code>myInstance</code>, and we then create a new instance <code>myOtherInstance</code> of <code>MyClass</code>, we see that the new instance does have the set-get property <code>hello</code> but that its value is <code>undefined</code>. The <code>get</code> instance method returns an object containing the values of all the set-get properties when it is called with no arguments, as it was in this example.</p>
+	<p>However, when we then register the property <code>hello</code> in an ad hoc fashion by setting a value for it on the instance <code>myInstance</code>, and we then create a new instance <code>myOtherInstance</code> of <code>MyClass</code>, we see that the new instance does have the state property <code>hello</code> but that its value is <code>undefined</code>. The <code>get</code> instance method returns an object containing the values of all the state properties when it is called with no arguments, as it was in this example.</p>
 </div>
 
 </div>

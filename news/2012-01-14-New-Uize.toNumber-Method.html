@@ -36,7 +36,7 @@
 					<li><a href="#1_6" title="There are two main situations where the Uize.toNumber method comes in handy.">1.6. Using the Uize.toNumber Method</a>
 						<ul>
 							<li><a href="#1_6_1" title="The Uize.toNumber method can be used to &quot;normalize&quot; method parameter values that need to be number type.">1.6.1. Normalizing Method Parameters</a></li>
-							<li><a href="#1_6_2" title="The Uize.toNumber method can be specified as a conformer for a set-get property of a Uize.Class subclass.">1.6.2. Conforming Set-get Properties</a></li>
+							<li><a href="#1_6_2" title="The Uize.toNumber method can be specified as a conformer for a state property of a Uize.Class subclass.">1.6.2. Conforming State Properties</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -213,9 +213,9 @@ repeatStr ('Foo',undefined);               // returns "Foo"
 			</div>
 			
 			<a name="1_6_2"></a>
-			<h3 class="heading3" title="1. How a Value is Coerced to Number -&gt; 1.6. Using the Uize.toNumber Method -&gt; 1.6.2. Conforming Set-get Properties"><span class="headingNumber"><a href="#1" title="1. How a Value is Coerced to Number">1</a>.<a href="#1_6" title="1. How a Value is Coerced to Number -&gt; 1.6. Using the Uize.toNumber Method">6</a>.<a href="#1_6_2" title="1. How a Value is Coerced to Number -&gt; 1.6. Using the Uize.toNumber Method -&gt; 1.6.2. Conforming Set-get Properties">2</a>. </span>Conforming Set-get Properties</h3>
+			<h3 class="heading3" title="1. How a Value is Coerced to Number -&gt; 1.6. Using the Uize.toNumber Method -&gt; 1.6.2. Conforming State Properties"><span class="headingNumber"><a href="#1" title="1. How a Value is Coerced to Number">1</a>.<a href="#1_6" title="1. How a Value is Coerced to Number -&gt; 1.6. Using the Uize.toNumber Method">6</a>.<a href="#1_6_2" title="1. How a Value is Coerced to Number -&gt; 1.6. Using the Uize.toNumber Method -&gt; 1.6.2. Conforming State Properties">2</a>. </span>Conforming State Properties</h3>
 			<div class="contents3">
-				<p>The <code>Uize.toNumber</code> method can be specified as a conformer for a set-get property of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
+				<p>The <code>Uize.toNumber</code> method can be specified as a conformer for a state property of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -234,7 +234,7 @@ Rectangle.registerProperties ({
 });
 </pre>
 				
-				<p>In the above example, a <code>Rectangle</code> class is being defined that has two set-get properties: <code>width</code> and <code>height</code>. For the convenience of users of the class, the <code>Uize.toNumber</code> method is set as the conformer for both the <code>width</code> and <code>height</code> properties. This means that the user of the class can set the values for these properties using values that are other than number type, and the developer of the class can write the rest of the class' code with confidence that internally the values for the properties will always be number type.</p>
+				<p>In the above example, a <code>Rectangle</code> class is being defined that has two state properties: <code>width</code> and <code>height</code>. For the convenience of users of the class, the <code>Uize.toNumber</code> method is set as the conformer for both the <code>width</code> and <code>height</code> properties. This means that the user of the class can set the values for these properties using values that are other than number type, and the developer of the class can write the rest of the class' code with confidence that internally the values for the properties will always be number type.</p>
 				
 				<p>So, given the above implementation of the <code>Rectangle</code> class, we would see the following results...</p>
 				

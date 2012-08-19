@@ -52,8 +52,8 @@
 			</li>
 			<li><a href="#3">3. Instance Events</a>
 				<ul>
-					<li><a href="#3_1" title="An instance event that is fired when the user clicks on the previewShell implied node and the previewClickAction set-get property is set to &apos;Preview&apos; or null, or left undefined.">3.1. Click Preview</a></li>
-					<li><a href="#3_2" title="An instance event that is fired when the user clicks on the optional select button, or when the user clicks on the previewShell implied node and the value of the previewClickAction set-get property is set to either &apos;Select&apos; or &apos;Toggle Selected&apos;.">3.2. Click Selected</a></li>
+					<li><a href="#3_1" title="An instance event that is fired when the user clicks on the previewShell implied node and the previewClickAction state property is set to &apos;Preview&apos; or null, or left undefined.">3.1. Click Preview</a></li>
+					<li><a href="#3_2" title="An instance event that is fired when the user clicks on the optional select button, or when the user clicks on the previewShell implied node and the value of the previewClickAction state property is set to either &apos;Select&apos; or &apos;Toggle Selected&apos;.">3.2. Click Selected</a></li>
 					<li><a href="#3_3" title="A bubbling instance event that is fired when the user mouses down on the previewShell implied node.">3.3. Item Mouse Down</a></li>
 					<li><a href="#3_4" title="An instance event that is fired when the user clicks on the remove button of an instance.">3.4. Remove</a></li>
 				</ul>
@@ -62,24 +62,24 @@
 				<ul>
 					<li><a href="#4_1" title="The root node is the implied node with the name &apos;&apos; (empty string), and is required for this widget class.">4.1. Root Node</a></li>
 					<li><a href="#4_2" title="The deprecated imageLink implied node is an alternate / legacy name for the previewShell implied node.">4.2. imageLink -- DEPRECATED 2009-07-28</a></li>
-					<li><a href="#4_3" title="An optional node that should provide a preview for the item that is represented by the instance, and whose className property is updated to reflect the state of the instance&apos;s over set-get property.">4.3. preview</a></li>
+					<li><a href="#4_3" title="An optional node that should provide a preview for the item that is represented by the instance, and whose className property is updated to reflect the state of the instance&apos;s over state property.">4.3. preview</a></li>
 					<li><a href="#4_4" title="A node that serves as a shell around the preview implied node.">4.4. previewShell</a></li>
-					<li><a href="#4_5" title="An optional node whose contents will be replaced with the value of the title set-get property, if this property&apos;s value is not null or undefined.">4.5. title Implied Node</a></li>
+					<li><a href="#4_5" title="An optional node whose contents will be replaced with the value of the title state property, if this property&apos;s value is not null or undefined.">4.5. title Implied Node</a></li>
 				</ul>
 			</li>
-			<li><a href="#5">5. Set-get Properties</a>
+			<li><a href="#5">5. State Properties</a>
 				<ul>
 					<li><a href="#5_1" title="Inherited from Uize.Widget.">5.1. built</a></li>
 					<li><a href="#5_2" title="Inherited from Uize.Widget.">5.2. busy</a></li>
 					<li><a href="#5_3" title="Inherited from Uize.Widget.">5.3. busyInherited</a></li>
 					<li><a href="#5_4" title="Inherited from Uize.Widget.">5.4. children</a></li>
 					<li><a href="#5_5" title="Inherited from Uize.Widget.">5.5. container</a></li>
-					<li><a href="#5_6" title="A string, specifying the CSS class name that should be added to the className property of the Root Node when the instance is selected (ie. the selected set-get property is set to true).">5.6. cssClassActive</a></li>
+					<li><a href="#5_6" title="A string, specifying the CSS class name that should be added to the className property of the Root Node when the instance is selected (ie. the selected state property is set to true).">5.6. cssClassActive</a></li>
 					<li><a href="#5_7" title="IMPLEMENTATION INFO">5.7. cssClassBase</a></li>
 					<li><a href="#5_8" title="A string, specifying the base CSS class string that should be set as the className property of the Root Node when wiring the instance.">5.8. cssClassBase -- DEPRECATED 2011-02-03</a></li>
-					<li><a href="#5_9" title="A string, specifying the value that should be set for the className property of the preview implied node when the user is not moused over the instance (ie. the over set-get property is set to false).">5.9. cssClassImage</a></li>
-					<li><a href="#5_10" title="A string, specifying the value that should be set for the className property of the preview implied node when the user mouses over the instance (ie. the over set-get property is set to true).">5.10. cssClassImageOver</a></li>
-					<li><a href="#5_11" title="A string, specifying the CSS class name that should be added to the className property of the root node when the user is mousing over the instance and it is not already selected (ie. the over set-get property is set to true and the selected set-get property is set to false).">5.11. cssClassOver</a></li>
+					<li><a href="#5_9" title="A string, specifying the value that should be set for the className property of the preview implied node when the user is not moused over the instance (ie. the over state property is set to false).">5.9. cssClassImage</a></li>
+					<li><a href="#5_10" title="A string, specifying the value that should be set for the className property of the preview implied node when the user mouses over the instance (ie. the over state property is set to true).">5.10. cssClassImageOver</a></li>
+					<li><a href="#5_11" title="A string, specifying the CSS class name that should be added to the className property of the root node when the user is mousing over the instance and it is not already selected (ie. the over state property is set to true and the selected state property is set to false).">5.11. cssClassOver</a></li>
 					<li><a href="#5_12" title="Inherited from Uize.Widget.">5.12. enabled</a></li>
 					<li><a href="#5_13" title="Inherited from Uize.Widget.">5.13. enabledInherited</a></li>
 					<li><a href="#5_14" title="Inherited from Uize.Widget.">5.14. html</a></li>
@@ -92,7 +92,7 @@
 					<li><a href="#5_21" title="Inherited from Uize.Widget.">5.21. nodeMap</a></li>
 					<li><a href="#5_22" title="A boolean, indicating whether or not the user is mousing over the previewShell implied node of the instance.">5.22. over</a></li>
 					<li><a href="#5_23" title="A string, specifying the desired action that should be performed when the previewShell implied node is clicked.">5.23. previewClickAction</a></li>
-					<li><a href="#5_24" title="An object reference to a DOM node, or a string whose value is the id for a DOM node, that should be displayed as a tooltip for the instance when the value of the over set-get property changes to true and the instance is wired.">5.24. previewTooltip</a></li>
+					<li><a href="#5_24" title="An object reference to a DOM node, or a string whose value is the id for a DOM node, that should be displayed as a tooltip for the instance when the value of the over state property changes to true and the instance is wired.">5.24. previewTooltip</a></li>
 					<li><a href="#5_25" title="An object, acting as a &quot;bucket&quot; for additional data that may be associated to an instance.">5.25. properties</a></li>
 					<li><a href="#5_26" title="A boolean, indicating whether or not the instance is selected.">5.26. selected</a></li>
 					<li><a href="#5_27" title="A string, whose value will be used to set the value of the innerHTML property of the title Implied Node.">5.27. title</a></li>
@@ -235,7 +235,7 @@
 				
 				<p><code><a href="#6_2">addChildButton</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_6">cssClassActive</a></code> | <code><a href="#5_7">cssClassBase</a></code> | <code><a href="#5_9">cssClassImage</a></code> | <code><a href="#5_10">cssClassImageOver</a></code> | <code><a href="#5_11">cssClassOver</a></code> | <code><a href="#5_19">locked</a></code> | <code><a href="#5_22">over</a></code> | <code><a href="#5_23">previewClickAction</a></code> | <code><a href="#5_24">previewTooltip</a></code> | <code><a href="#5_25">properties</a></code> | <code><a href="#5_26">selected</a></code> | <code><a href="#5_27">title</a></code></p>
 			</div>
@@ -271,7 +271,7 @@
 				
 				<p><code><a href="#7_1">showConfirm</a></code> | <code><a href="#7_2">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_1">built</a></code> | <code><a href="#5_2">busy</a></code> | <code><a href="#5_3">busyInherited</a></code> | <code><a href="#5_4">children</a></code> | <code><a href="#5_5">container</a></code> | <code><a href="#5_12">enabled</a></code> | <code><a href="#5_13">enabledInherited</a></code> | <code><a href="#5_14">html</a></code> | <code><a href="#5_15">idPrefix</a></code> | <code><a href="#5_16">idPrefixConstruction</a></code> | <code><a href="#5_17">insertionMode</a></code> | <code><a href="#5_18">localized</a></code> | <code><a href="#5_20">name</a></code> | <code><a href="#5_21">nodeMap</a></code> | <code><a href="#5_28">wired</a></code></p>
 				
@@ -335,7 +335,7 @@
 		<a name="3_1"></a>
 		<h2 class="heading2" title="3. Instance Events -&gt; 3.1. Click Preview"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_1" title="3. Instance Events -&gt; 3.1. Click Preview">1</a>. </span>Click Preview</h2>
 		<div class="contents2">
-			<p>An instance event that is fired when the user clicks on the <code><a href="#4_4">previewShell</a></code> implied node and the <code><a href="#5_23">previewClickAction</a></code> set-get property is set to <code>'Preview'</code> or <code>null</code>, or left <code>undefined</code>.</p>
+			<p>An instance event that is fired when the user clicks on the <code><a href="#4_4">previewShell</a></code> implied node and the <code><a href="#5_23">previewClickAction</a></code> state property is set to <code>'Preview'</code> or <code>null</code>, or left <code>undefined</code>.</p>
 			
 			<p>As a bubbling event, a handler for this event can be wired by an instance of the <code><a href="../reference/Uize.Widget.Collection.html">Uize.Widget.Collection</a></code> class (or subclass) - that owns the collection items as child widgets - on itself. When this event is fired, the event object contains a <code>bubble</code> property that is set to <code>true</code>.</p>
 		</div>
@@ -343,7 +343,7 @@
 		<a name="3_2"></a>
 		<h2 class="heading2" title="3. Instance Events -&gt; 3.2. Click Selected"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_2" title="3. Instance Events -&gt; 3.2. Click Selected">2</a>. </span>Click Selected</h2>
 		<div class="contents2">
-			<p>An instance event that is fired when the user clicks on the optional <code><a href="#2_2">select</a></code> button, or when the user clicks on the <code><a href="#4_4">previewShell</a></code> implied node and the value of the <code><a href="#5_23">previewClickAction</a></code> set-get property is set to either <code>'Select'</code> or <code>'Toggle Selected'</code>.</p>
+			<p>An instance event that is fired when the user clicks on the optional <code><a href="#2_2">select</a></code> button, or when the user clicks on the <code><a href="#4_4">previewShell</a></code> implied node and the value of the <code><a href="#5_23">previewClickAction</a></code> state property is set to either <code>'Select'</code> or <code>'Toggle Selected'</code>.</p>
 			
 			<p>When this event is fired because the user clicks on the <code><a href="#4_4">previewShell</a></code> implied node and <code><a href="#5_23">previewClickAction</a></code> is set to <code>'Toggle Selected'</code>, then the event object will contain a <code>forceToggle</code> property that is set to <code>true</code>.</p>
 		</div>
@@ -381,7 +381,7 @@
 		<div class="contents2">
 			<p>The root node is the implied node with the name <code>''</code> (empty string), and is required for this widget class.</p>
 			
-			<p>The <code>className</code> property of this node is updated to reflect the state of the instance's <code><a href="#5_26">selected</a></code> and <code><a href="#5_22">over</a></code> set-get properties. If the instance is selected (i.e. <code><a href="#5_26">selected</a></code> is <code>true</code>, then the <code>className</code> property of the node is updated to contain <code><a href="#5_6">cssClassActive</a></code>. If the instance is not selected, but the user is hovering over it (i.e. <code><a href="#5_22">over</a></code> is set to <code>true</code>), then the <code>className</code> property of the node is updated to contain <code><a href="#5_11">cssClassOver</a></code>. If both <code><a href="#5_26">selected</a></code> and <code><a href="#5_22">over</a></code> are both set to <code>false</code>, then the node's <code>className</code> property will not be updated.</p>
+			<p>The <code>className</code> property of this node is updated to reflect the state of the instance's <code><a href="#5_26">selected</a></code> and <code><a href="#5_22">over</a></code> state properties. If the instance is selected (i.e. <code><a href="#5_26">selected</a></code> is <code>true</code>, then the <code>className</code> property of the node is updated to contain <code><a href="#5_6">cssClassActive</a></code>. If the instance is not selected, but the user is hovering over it (i.e. <code><a href="#5_22">over</a></code> is set to <code>true</code>), then the <code>className</code> property of the node is updated to contain <code><a href="#5_11">cssClassOver</a></code>. If both <code><a href="#5_26">selected</a></code> and <code><a href="#5_22">over</a></code> are both set to <code>false</code>, then the node's <code>className</code> property will not be updated.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -407,9 +407,9 @@
 		<a name="4_3"></a>
 		<h2 class="heading2" title="4. Implied Nodes -&gt; 4.3. preview"><span class="headingNumber"><a href="#4" title="4. Implied Nodes">4</a>.<a href="#4_3" title="4. Implied Nodes -&gt; 4.3. preview">3</a>. </span>preview</h2>
 		<div class="contents2">
-			<p>An optional node that should provide a preview for the item that is represented by the instance, and whose <code>className</code> property is updated to reflect the state of the instance's <code><a href="#5_22">over</a></code> set-get property.</p>
+			<p>An optional node that should provide a preview for the item that is represented by the instance, and whose <code>className</code> property is updated to reflect the state of the instance's <code><a href="#5_22">over</a></code> state property.</p>
 			
-			<p>When <code><a href="#5_22">over</a></code> is set to <code>true</code>, the value of this node's <code>className</code> property will be set to the value of the <code><a href="#5_10">cssClassImageOver</a></code> set-get property. When <code><a href="#5_22">over</a></code> is set to <code>false</code>, the value of this node's <code>className</code> property will be set to the value of the <code><a href="#5_9">cssClassImage</a></code> set-get property. When either of the <code><a href="#5_9">cssClassImage</a></code> or <code><a href="#5_10">cssClassImageOver</a></code> set-get properties are set to <code>null</code> or are left <code>undefined</code>, then the <code>className</code> property of this node will not be updated.</p>
+			<p>When <code><a href="#5_22">over</a></code> is set to <code>true</code>, the value of this node's <code>className</code> property will be set to the value of the <code><a href="#5_10">cssClassImageOver</a></code> state property. When <code><a href="#5_22">over</a></code> is set to <code>false</code>, the value of this node's <code>className</code> property will be set to the value of the <code><a href="#5_9">cssClassImage</a></code> state property. When either of the <code><a href="#5_9">cssClassImage</a></code> or <code><a href="#5_10">cssClassImageOver</a></code> state properties are set to <code>null</code> or are left <code>undefined</code>, then the <code>className</code> property of this node will not be updated.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -436,9 +436,9 @@
 		<a name="4_5"></a>
 		<h2 class="heading2" title="4. Implied Nodes -&gt; 4.5. title Implied Node"><span class="headingNumber"><a href="#4" title="4. Implied Nodes">4</a>.<a href="#4_5" title="4. Implied Nodes -&gt; 4.5. title Implied Node">5</a>. </span>title Implied Node</h2>
 		<div class="contents2">
-			<p>An optional node whose contents will be replaced with the value of the <code><a href="#5_27">title</a></code> set-get property, if this property's value is not <code>null</code> or <code>undefined</code>.</p>
+			<p>An optional node whose contents will be replaced with the value of the <code><a href="#5_27">title</a></code> state property, if this property's value is not <code>null</code> or <code>undefined</code>.</p>
 			
-			<p>The <code>innerHTML</code> value of the <code><a href="#4_5">title Implied Node</a></code> will be updated to reflect the value of the <code><a href="#5_27">title</a></code> set-get property whenever the value of this property is changed, is not <code>null</code> or <code>undefined</code>, and the instance is wired up.</p>
+			<p>The <code>innerHTML</code> value of the <code><a href="#4_5">title Implied Node</a></code> will be updated to reflect the value of the <code><a href="#5_27">title</a></code> state property whenever the value of this property is changed, is not <code>null</code> or <code>undefined</code>, and the instance is wired up.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -449,10 +449,10 @@
 	</div>
 	
 	<a name="5"></a>
-	<h1 class="heading1" title="5. Set-get Properties"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="5. State Properties"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="5_1"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_1" title="5. Set-get Properties -&gt; 5.1. built">1</a>. </span>built</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_1" title="5. State Properties -&gt; 5.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -464,7 +464,7 @@
 		</div>
 		
 		<a name="5_2"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_2" title="5. Set-get Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_2" title="5. State Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -476,7 +476,7 @@
 		</div>
 		
 		<a name="5_3"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_3" title="5. Set-get Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_3" title="5. State Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -488,7 +488,7 @@
 		</div>
 		
 		<a name="5_4"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_4" title="5. Set-get Properties -&gt; 5.4. children">4</a>. </span>children</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_4" title="5. State Properties -&gt; 5.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -500,7 +500,7 @@
 		</div>
 		
 		<a name="5_5"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_5" title="5. Set-get Properties -&gt; 5.5. container">5</a>. </span>container</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_5" title="5. State Properties -&gt; 5.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -512,17 +512,17 @@
 		</div>
 		
 		<a name="5_6"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.6. cssClassActive"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_6" title="5. Set-get Properties -&gt; 5.6. cssClassActive">6</a>. </span>cssClassActive</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.6. cssClassActive"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_6" title="5. State Properties -&gt; 5.6. cssClassActive">6</a>. </span>cssClassActive</h2>
 		<div class="contents2">
-			<p>A string, specifying the CSS class name that should be added to the <code>className</code> property of the <a href="#4_1">Root Node</a> when the instance is selected (ie. the <code><a href="#5_26">selected</a></code> set-get property is set to <code>true</code>).</p>
+			<p>A string, specifying the CSS class name that should be added to the <code>className</code> property of the <a href="#4_1">Root Node</a> when the instance is selected (ie. the <code><a href="#5_26">selected</a></code> state property is set to <code>true</code>).</p>
 			
 			<p>For a more in-depth discussion of the interaction between this property and the companion <code><a href="#5_11">cssClassOver</a></code> property, consult the reference for the <a href="#4_1">Root Node</a>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_11">cssClassOver</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_9">cssClassImage</a></code> and <code><a href="#5_10">cssClassImageOver</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_11">cssClassOver</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_9">cssClassImage</a></code> and <code><a href="#5_10">cssClassImageOver</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -533,7 +533,7 @@
 		</div>
 		
 		<a name="5_7"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.7. cssClassBase"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_7" title="5. Set-get Properties -&gt; 5.7. cssClassBase">7</a>. </span>cssClassBase</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.7. cssClassBase"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_7" title="5. State Properties -&gt; 5.7. cssClassBase">7</a>. </span>cssClassBase</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -543,32 +543,32 @@
 		</div>
 		
 		<a name="5_8"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.8. cssClassBase -- DEPRECATED 2011-02-03"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_8" title="5. Set-get Properties -&gt; 5.8. cssClassBase -- DEPRECATED 2011-02-03">8</a>. </span>cssClassBase -- DEPRECATED 2011-02-03</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.8. cssClassBase -- DEPRECATED 2011-02-03"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_8" title="5. State Properties -&gt; 5.8. cssClassBase -- DEPRECATED 2011-02-03">8</a>. </span>cssClassBase -- DEPRECATED 2011-02-03</h2>
 		<div class="contents2">
 			<p>A string, specifying the base CSS class string that should be set as the <code>className</code> property of the <a href="#4_1">Root Node</a> when wiring the instance.</p>
 			
-			<p>This set-get property, now deprecated, was originally used to aid in constructing the <code>className</code> property for the <a href="#4_1">Root Node</a> to reflect the <code><a href="#5_26">selected</a></code> and <code><a href="#5_22">over</a></code> states of the instance.</p>
+			<p>This state property, now deprecated, was originally used to aid in constructing the <code>className</code> property for the <a href="#4_1">Root Node</a> to reflect the <code><a href="#5_26">selected</a></code> and <code><a href="#5_22">over</a></code> states of the instance.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This set-get property is deprecated</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This state property is deprecated</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 		</div>
 		
 		<a name="5_9"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.9. cssClassImage"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_9" title="5. Set-get Properties -&gt; 5.9. cssClassImage">9</a>. </span>cssClassImage</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.9. cssClassImage"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_9" title="5. State Properties -&gt; 5.9. cssClassImage">9</a>. </span>cssClassImage</h2>
 		<div class="contents2">
-			<p>A string, specifying the value that should be set for the <code>className</code> property of the <code><a href="#4_3">preview</a></code> implied node when the user is not moused over the instance (ie. the <code><a href="#5_22">over</a></code> set-get property is set to <code>false</code>).</p>
+			<p>A string, specifying the value that should be set for the <code>className</code> property of the <code><a href="#4_3">preview</a></code> implied node when the user is not moused over the instance (ie. the <code><a href="#5_22">over</a></code> state property is set to <code>false</code>).</p>
 			
 			<p>For a more in-depth discussion of the interaction between this property and the companion <code><a href="#5_10">cssClassImageOver</a></code> property, consult the reference for the <code><a href="#4_3">preview</a></code> implied node.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_10">cssClassImageOver</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_6">cssClassActive</a></code>, <code><a href="#5_7">cssClassBase</a></code>, and <code><a href="#5_11">cssClassOver</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_10">cssClassImageOver</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_6">cssClassActive</a></code>, <code><a href="#5_7">cssClassBase</a></code>, and <code><a href="#5_11">cssClassOver</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -579,17 +579,17 @@
 		</div>
 		
 		<a name="5_10"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.10. cssClassImageOver"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_10" title="5. Set-get Properties -&gt; 5.10. cssClassImageOver">10</a>. </span>cssClassImageOver</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.10. cssClassImageOver"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_10" title="5. State Properties -&gt; 5.10. cssClassImageOver">10</a>. </span>cssClassImageOver</h2>
 		<div class="contents2">
-			<p>A string, specifying the value that should be set for the <code>className</code> property of the <code><a href="#4_3">preview</a></code> implied node when the user mouses over the instance (ie. the <code><a href="#5_22">over</a></code> set-get property is set to <code>true</code>).</p>
+			<p>A string, specifying the value that should be set for the <code>className</code> property of the <code><a href="#4_3">preview</a></code> implied node when the user mouses over the instance (ie. the <code><a href="#5_22">over</a></code> state property is set to <code>true</code>).</p>
 			
 			<p>For a more in-depth discussion of the interaction between this property and the companion <code><a href="#5_9">cssClassImage</a></code> property, consult the reference for the <code><a href="#4_3">preview</a></code> implied node.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_9">cssClassImage</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_6">cssClassActive</a></code>, <code><a href="#5_7">cssClassBase</a></code>, and <code><a href="#5_11">cssClassOver</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_9">cssClassImage</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_6">cssClassActive</a></code>, <code><a href="#5_7">cssClassBase</a></code>, and <code><a href="#5_11">cssClassOver</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -600,17 +600,17 @@
 		</div>
 		
 		<a name="5_11"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.11. cssClassOver"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_11" title="5. Set-get Properties -&gt; 5.11. cssClassOver">11</a>. </span>cssClassOver</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.11. cssClassOver"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_11" title="5. State Properties -&gt; 5.11. cssClassOver">11</a>. </span>cssClassOver</h2>
 		<div class="contents2">
-			<p>A string, specifying the CSS class name that should be added to the <code>className</code> property of the root node when the user is mousing over the instance and it is not already selected (ie. the <code><a href="#5_22">over</a></code> set-get property is set to <code>true</code> and the <code><a href="#5_26">selected</a></code> set-get property is set to <code>false</code>).</p>
+			<p>A string, specifying the CSS class name that should be added to the <code>className</code> property of the root node when the user is mousing over the instance and it is not already selected (ie. the <code><a href="#5_22">over</a></code> state property is set to <code>true</code> and the <code><a href="#5_26">selected</a></code> state property is set to <code>false</code>).</p>
 			
 			<p>For a more in-depth discussion of the interaction between this property and the companion <code><a href="#5_6">cssClassActive</a></code> property, consult the reference for the <a href="#4_1">Root Node</a>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_6">cssClassActive</a></code> set-get properties</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_9">cssClassImage</a></code> and <code><a href="#5_10">cssClassImageOver</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_6">cssClassActive</a></code> state properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_9">cssClassImage</a></code> and <code><a href="#5_10">cssClassImageOver</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -621,7 +621,7 @@
 		</div>
 		
 		<a name="5_12"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.12. enabled"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_12" title="5. Set-get Properties -&gt; 5.12. enabled">12</a>. </span>enabled</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.12. enabled"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_12" title="5. State Properties -&gt; 5.12. enabled">12</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -633,7 +633,7 @@
 		</div>
 		
 		<a name="5_13"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.13. enabledInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_13" title="5. Set-get Properties -&gt; 5.13. enabledInherited">13</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.13. enabledInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_13" title="5. State Properties -&gt; 5.13. enabledInherited">13</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -645,7 +645,7 @@
 		</div>
 		
 		<a name="5_14"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.14. html"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_14" title="5. Set-get Properties -&gt; 5.14. html">14</a>. </span>html</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.14. html"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_14" title="5. State Properties -&gt; 5.14. html">14</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -657,7 +657,7 @@
 		</div>
 		
 		<a name="5_15"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.15. idPrefix"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_15" title="5. Set-get Properties -&gt; 5.15. idPrefix">15</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.15. idPrefix"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_15" title="5. State Properties -&gt; 5.15. idPrefix">15</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -669,7 +669,7 @@
 		</div>
 		
 		<a name="5_16"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.16. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_16" title="5. Set-get Properties -&gt; 5.16. idPrefixConstruction">16</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.16. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_16" title="5. State Properties -&gt; 5.16. idPrefixConstruction">16</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -681,7 +681,7 @@
 		</div>
 		
 		<a name="5_17"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.17. insertionMode"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_17" title="5. Set-get Properties -&gt; 5.17. insertionMode">17</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.17. insertionMode"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_17" title="5. State Properties -&gt; 5.17. insertionMode">17</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -693,7 +693,7 @@
 		</div>
 		
 		<a name="5_18"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.18. localized"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_18" title="5. Set-get Properties -&gt; 5.18. localized">18</a>. </span>localized</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.18. localized"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_18" title="5. State Properties -&gt; 5.18. localized">18</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -705,7 +705,7 @@
 		</div>
 		
 		<a name="5_19"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.19. locked"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_19" title="5. Set-get Properties -&gt; 5.19. locked">19</a>. </span>locked</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.19. locked"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_19" title="5. State Properties -&gt; 5.19. locked">19</a>. </span>locked</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not the instance is locked.</p>
 			
@@ -722,7 +722,7 @@
 		</div>
 		
 		<a name="5_20"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.20. name"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_20" title="5. Set-get Properties -&gt; 5.20. name">20</a>. </span>name</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.20. name"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_20" title="5. State Properties -&gt; 5.20. name">20</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -734,7 +734,7 @@
 		</div>
 		
 		<a name="5_21"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.21. nodeMap"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_21" title="5. Set-get Properties -&gt; 5.21. nodeMap">21</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.21. nodeMap"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_21" title="5. State Properties -&gt; 5.21. nodeMap">21</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -746,7 +746,7 @@
 		</div>
 		
 		<a name="5_22"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.22. over"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_22" title="5. Set-get Properties -&gt; 5.22. over">22</a>. </span>over</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.22. over"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_22" title="5. State Properties -&gt; 5.22. over">22</a>. </span>over</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not the user is mousing over the <code><a href="#4_4">previewShell</a></code> implied node of the instance.</p>
 			
@@ -765,7 +765,7 @@
 		</div>
 		
 		<a name="5_23"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.23. previewClickAction"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_23" title="5. Set-get Properties -&gt; 5.23. previewClickAction">23</a>. </span>previewClickAction</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.23. previewClickAction"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_23" title="5. State Properties -&gt; 5.23. previewClickAction">23</a>. </span>previewClickAction</h2>
 		<div class="contents2">
 			<p>A string, specifying the desired action that should be performed when the <code><a href="#4_4">previewShell</a></code> implied node is clicked.</p>
 			
@@ -790,11 +790,11 @@
 		</div>
 		
 		<a name="5_24"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.24. previewTooltip"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_24" title="5. Set-get Properties -&gt; 5.24. previewTooltip">24</a>. </span>previewTooltip</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.24. previewTooltip"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_24" title="5. State Properties -&gt; 5.24. previewTooltip">24</a>. </span>previewTooltip</h2>
 		<div class="contents2">
-			<p>An object reference to a DOM node, or a string whose value is the <code>id</code> for a DOM node, that should be displayed as a tooltip for the instance when the value of the <code><a href="#5_22">over</a></code> set-get property changes to <code>true</code> and the instance is wired.</p>
+			<p>An object reference to a DOM node, or a string whose value is the <code>id</code> for a DOM node, that should be displayed as a tooltip for the instance when the value of the <code><a href="#5_22">over</a></code> state property changes to <code>true</code> and the instance is wired.</p>
 			
-			<p>Essentially, the <code><a href="#5_24">previewTooltip</a></code> set-get property can be used to specify a tooltip that should appear when the user mouses over the <code><a href="#4_4">previewShell</a></code> implied node.</p>
+			<p>Essentially, the <code><a href="#5_24">previewTooltip</a></code> state property can be used to specify a tooltip that should appear when the user mouses over the <code><a href="#4_4">previewShell</a></code> implied node.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -810,11 +810,11 @@
 		</div>
 		
 		<a name="5_25"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.25. properties"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_25" title="5. Set-get Properties -&gt; 5.25. properties">25</a>. </span>properties</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.25. properties"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_25" title="5. State Properties -&gt; 5.25. properties">25</a>. </span>properties</h2>
 		<div class="contents2">
 			<p>An object, acting as a "bucket" for additional data that may be associated to an instance.</p>
 			
-			<p>The data in the <code><a href="#5_25">properties</a></code> set-get property is used by the <code>getPropertyForItems</code> and <code>getPropertyForSelected</code> instance methods of the <code><a href="../reference/Uize.Widget.Collection.html">Uize.Widget.Collection</a></code> class. When the value of the <code><a href="#5_25">properties</a></code> set-get property is changed, the value of the <code><a href="#5_27">title</a></code> set-get property is set from the "title" property of the <code><a href="#5_25">properties</a></code> object, if it exists.</p>
+			<p>The data in the <code><a href="#5_25">properties</a></code> state property is used by the <code>getPropertyForItems</code> and <code>getPropertyForSelected</code> instance methods of the <code><a href="../reference/Uize.Widget.Collection.html">Uize.Widget.Collection</a></code> class. When the value of the <code><a href="#5_25">properties</a></code> state property is changed, the value of the <code><a href="#5_27">title</a></code> state property is set from the "title" property of the <code><a href="#5_25">properties</a></code> object, if it exists.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -829,11 +829,11 @@
 		</div>
 		
 		<a name="5_26"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.26. selected"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_26" title="5. Set-get Properties -&gt; 5.26. selected">26</a>. </span>selected</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.26. selected"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_26" title="5. State Properties -&gt; 5.26. selected">26</a>. </span>selected</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not the instance is selected.</p>
 			
-			<p>When the value of the <code><a href="#5_26">selected</a></code> set-get property changes, the selected state of the <code><a href="#2_2">select</a></code> child widget will be updated, and the CSS class of the <code><a href="#4_1">Root Node</a></code> will be updated to reflect the instance's selected state.</p>
+			<p>When the value of the <code><a href="#5_26">selected</a></code> state property changes, the selected state of the <code><a href="#2_2">select</a></code> child widget will be updated, and the CSS class of the <code><a href="#4_1">Root Node</a></code> will be updated to reflect the instance's selected state.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -848,11 +848,11 @@
 		</div>
 		
 		<a name="5_27"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.27. title"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_27" title="5. Set-get Properties -&gt; 5.27. title">27</a>. </span>title</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.27. title"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_27" title="5. State Properties -&gt; 5.27. title">27</a>. </span>title</h2>
 		<div class="contents2">
 			<p>A string, whose value will be used to set the value of the <code>innerHTML</code> property of the <code><a href="#4_5">title Implied Node</a></code>.</p>
 			
-			<p>The <code>innerHTML</code> value of the <code><a href="#4_5">title Implied Node</a></code> will be updated to reflect the value of the <code><a href="#5_27">title</a></code> set-get property whenever the value of this property is changed, is not <code>null</code> or <code>undefined</code>, and the instance is wired up. When the value of the <code><a href="#5_25">properties</a></code> set-get property is changed, the value of the <code><a href="#5_27">title</a></code> set-get property is set from the "title" property of the <code><a href="#5_25">properties</a></code> object.</p>
+			<p>The <code>innerHTML</code> value of the <code><a href="#4_5">title Implied Node</a></code> will be updated to reflect the value of the <code><a href="#5_27">title</a></code> state property whenever the value of this property is changed, is not <code>null</code> or <code>undefined</code>, and the instance is wired up. When the value of the <code><a href="#5_25">properties</a></code> state property is changed, the value of the <code><a href="#5_27">title</a></code> state property is set from the "title" property of the <code><a href="#5_25">properties</a></code> object.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -867,7 +867,7 @@
 		</div>
 		
 		<a name="5_28"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.28. wired"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_28" title="5. Set-get Properties -&gt; 5.28. wired">28</a>. </span>wired</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.28. wired"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_28" title="5. State Properties -&gt; 5.28. wired">28</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

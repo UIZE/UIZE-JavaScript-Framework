@@ -28,8 +28,8 @@
 		<ul>
 			<li><a href="#1" title="The JSON Prettifier tool has been improved to allow the configuration of serialization options, with convenient presets provided.">1. JSON Prettifier Tool - IMPROVED</a></li>
 			<li><a href="#2" title="An IE-specific bug was found with the Uize.Node.setValue static method, which also affected the setNodeValue instance method of the Uize.Widget class.">2. BUG FIX: Uize.Node.setValue and myWidget.setNodeValue</a></li>
-			<li><a href="#3" title="When no parameter is specified when calling either the MyClass.get static method or the myInstance.get instance method, then all the static or instance values, respectively, for the registered set-get properties will be returned.">3. MyClass.get () and myInstance.get ()</a></li>
-			<li><a href="#4" title="The myWidget.isBusy instance method has been KILLED in favor of the busyInherited set-get property. Similarly, the myWidget.isEnabled instance method has been KILLED in favor of the enabledInherited set-get property. The barely used myWidget.checkInherited instance method that was technically public but never used outside of the Uize.Widget base class has been KILLED.">4. Uize.Widget - Changes to busy/enabled Mechanism</a></li>
+			<li><a href="#3" title="When no parameter is specified when calling either the MyClass.get static method or the myInstance.get instance method, then all the static or instance values, respectively, for the registered state properties will be returned.">3. MyClass.get () and myInstance.get ()</a></li>
+			<li><a href="#4" title="The myWidget.isBusy instance method has been KILLED in favor of the busyInherited state property. Similarly, the myWidget.isEnabled instance method has been KILLED in favor of the enabledInherited state property. The barely used myWidget.checkInherited instance method that was technically public but never used outside of the Uize.Widget base class has been KILLED.">4. Uize.Widget - Changes to busy/enabled Mechanism</a></li>
 		</ul>
 	</li>
 </ul>
@@ -55,15 +55,15 @@
 	<a name="3"></a>
 	<h1 class="heading1" title="3. MyClass.get () and myInstance.get ()"><span class="headingNumber"><a href="#3" title="3. MyClass.get () and myInstance.get ()">3</a>. </span>MyClass.get () and myInstance.get ()</h1>
 	<div class="contents1">
-		<p>When no parameter is specified when calling either the <code>MyClass.get</code> static method or the <code>myInstance.get</code> instance method, then all the static or instance values, respectively, for the registered set-get properties will be returned.</p>
+		<p>When no parameter is specified when calling either the <code>MyClass.get</code> static method or the <code>myInstance.get</code> instance method, then all the static or instance values, respectively, for the registered state properties will be returned.</p>
 	</div>
 	
 	<a name="4"></a>
 	<h1 class="heading1" title="4. Uize.Widget - Changes to busy/enabled Mechanism"><span class="headingNumber"><a href="#4" title="4. Uize.Widget - Changes to busy/enabled Mechanism">4</a>. </span>Uize.Widget - Changes to busy/enabled Mechanism</h1>
 	<div class="contents1">
-		<p>The <code>myWidget.isBusy</code> instance method has been <b>KILLED</b> in favor of the <code>busyInherited</code> set-get property. Similarly, the <code>myWidget.isEnabled</code> instance method has been <b>KILLED</b> in favor of the <code>enabledInherited</code> set-get property. The barely used <code>myWidget.checkInherited</code> instance method that was technically public but never used outside of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class has been <b>KILLED</b>.</p>
+		<p>The <code>myWidget.isBusy</code> instance method has been <b>KILLED</b> in favor of the <code>busyInherited</code> state property. Similarly, the <code>myWidget.isEnabled</code> instance method has been <b>KILLED</b> in favor of the <code>enabledInherited</code> state property. The barely used <code>myWidget.checkInherited</code> instance method that was technically public but never used outside of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class has been <b>KILLED</b>.</p>
 		
-		<p>The new interface is more in keeping with the state interface philosophy of the UIZE JavaScript Framework, and also allows you to leverage the event system to watch on changes in the busy and enabled states by using the <code>'Changed.busyInherited'</code> and <code>'Changed.enabledInherited'</code> instance events. Additionally, the new set-get properties are more semantically correct. It was always confusing that isBusy returned a boolean, while the <code>busy</code> set-get property could have the string value of <code>'inherit'</code>.</p>
+		<p>The new interface is more in keeping with the state interface philosophy of the UIZE JavaScript Framework, and also allows you to leverage the event system to watch on changes in the busy and enabled states by using the <code>'Changed.busyInherited'</code> and <code>'Changed.enabledInherited'</code> instance events. Additionally, the new state properties are more semantically correct. It was always confusing that isBusy returned a boolean, while the <code>busy</code> state property could have the string value of <code>'inherit'</code>.</p>
 		
 		
 <pre class="sample-code">myWidget.isBusy ()     &gt;&gt; BECOMES &gt;&gt;  myWidget.get ('busyInherited')

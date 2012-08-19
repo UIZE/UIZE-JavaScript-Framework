@@ -224,17 +224,17 @@ Document Sections
 						Documentation for the children instance property.
 
 						NOTES
-						- see the companion `children set-get property`
+						- see the companion `children state property`
 
-				Set-get Properties
-					children ~~ children Set-get Property
-						Documentation for the children set-get property.
+				State Properties
+					children ~~ children State Property
+						Documentation for the children state property.
 
 						NOTES
 						- see the companion `children instance property`
 				......................................................
 
-				In the above example, there are two sections with the display title "children" - one is for the instance property and the other is for the set-get property. Because the "children Instance Property" and "children Set-get Property" aliases are specified, it is possible for the sections to cross-link to each other, simply by enclosing the aliases in `backticks`.
+				In the above example, there are two sections with the display title "children" - one is for the instance property and the other is for the state property. Because the "children Instance Property" and "children State Property" aliases are specified, it is possible for the sections to cross-link to each other, simply by enclosing the aliases in `backticks`.
 
 				HOW IT LOOKS
 					Instance Properties
@@ -242,11 +242,11 @@ Document Sections
 							Documentation for the children instance property.
 
 							NOTES
-							- see the companion `children set-get property`
+							- see the companion `children state property`
 
-					Set-get Properties
-						children ~~ children Set-get Property
-							Documentation for the children set-get property.
+					State Properties
+						children ~~ children State Property
+							Documentation for the children state property.
 
 							NOTES
 							- see the companion `children instance property`
@@ -261,11 +261,11 @@ Document Sections
 							Documentation for the children instance property.
 
 							NOTES
-							- see the companion [[children set-get property][children]] set-get property
+							- see the companion [[children state property][children]] state property
 
-					Set-get Properties
-						children ~~ children Set-get Property
-							Documentation for the children set-get property.
+					State Properties
+						children ~~ children State Property
+							Documentation for the children state property.
 
 							NOTES
 							- see the companion [[children instance property][children]] instance property
@@ -279,11 +279,11 @@ Document Sections
 								Documentation for the children instance property.
 
 								NOTES
-								- see the companion [[children set-get property][children]] set-get property
+								- see the companion [[children state property][children]] state property
 
-						Set-get Properties
-							children ~~ children Set-get Property
-								Documentation for the children set-get property.
+						State Properties
+							children ~~ children State Property
+								Documentation for the children state property.
 
 								NOTES
 								- see the companion [[children instance property][children]] instance property

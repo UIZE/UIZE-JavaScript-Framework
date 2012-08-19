@@ -41,7 +41,7 @@ Introduction
 		Dynamic Updating
 			The slider code has been designed to allow many of its properties to be updated dynamically, even after the slider UI has been generated and GLUE'd. In the most obvious example, you can dynamically change a slider's value. Not quite as obvious, though, is that you can also change a slider's range bounds and its increments setting, and the slider's UI will automatically be updated.
 
-Set-get Properties
+State Properties
 	increments
 		Specifies the increments in which the slider's value can be set between the lower and upper bounds of its range. For example, a slider with a range of 0 to 50 and with its increment set to 10 can only have its value set to 0, 10, 20, 30, 40, or 50.
 

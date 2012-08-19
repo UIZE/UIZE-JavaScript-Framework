@@ -33,7 +33,7 @@
 					<li><a href="#2_2" title="One may wish to use a syntax for named tokens other than the built-in default of curly braces.">2.2. Controlling Token Syntax</a></li>
 				</ul>
 			</li>
-			<li><a href="#3" title="The localized set-get property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.">3. The localized Set-get Property</a></li>
+			<li><a href="#3" title="The localized state property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.">3. The localized State Property</a></li>
 			<li><a href="#4" title="The localize instance method&apos;s implementation supports &quot;inheriting&quot; localized resources from the widget tree in which a widget resides.">4. Inheritance Tree</a>
 				<ul>
 					<li><a href="#4_1" title="Cases may arise where widgets are developed with an expected parent-child relationship.">4.1. Parent-child Relationships</a></li>
@@ -50,7 +50,7 @@
 				</ul>
 			</li>
 			<li><a href="#6" title="In a comprehensively internationalized Web site, there often exists a robust system for localizing resources as part of the middle tier of the application.">6. Marshalling Localized Resources</a></li>
-			<li><a href="#7" title="One means for sharing localized resources across many instances of the same widget class is to set the localized static set-get property of the class. That way, all instances created will get those localized resources. Consider the following example...">7. Static Localized Resources</a></li>
+			<li><a href="#7" title="One means for sharing localized resources across many instances of the same widget class is to set the localized static state property of the class. That way, all instances created will get those localized resources. Consider the following example...">7. Static Localized Resources</a></li>
 		</ul>
 	</li>
 </ul>
@@ -64,7 +64,7 @@
 		
 		<p>In order to achieve an effective division of responsibilities between client logic and middle tier logic, it is often desirable to make the server-side code responsible for generation of markup for widgets. In general, therefore, it is best to minimize the amount of localization that occurs inside JavaScript code. That said, it cannot always be avoided. Sometimes some markup needs to be dynamically generated on the client-side - without contacting the server - for better responsiveness and an improved user experience. Perhaps a tooltip's text needs to be updated. Perhaps a message needs to be displayed in a modal dialog. Perhaps some status text needs to be displayed.</p>
 		
-		<p>In such cases, one needs a way to retrieve and process localized resources. In the UIZE JavaScript Framework, localization of widgets is done by use of <a href="#2">The localize Instance Method</a> and <a href="#3">The localized Set-get Property</a>, both of which are discussed in more detail below.</p>
+		<p>In such cases, one needs a way to retrieve and process localized resources. In the UIZE JavaScript Framework, localization of widgets is done by use of <a href="#2">The localize Instance Method</a> and <a href="#3">The localized State Property</a>, both of which are discussed in more detail below.</p>
 	</div>
 	
 	<a name="2"></a>
@@ -174,9 +174,9 @@ var localWelcome = myWidget.localize (
 	</div>
 	
 	<a name="3"></a>
-	<h1 class="heading1" title="3. The localized Set-get Property"><span class="headingNumber"><a href="#3" title="3. The localized Set-get Property">3</a>. </span>The localized Set-get Property</h1>
+	<h1 class="heading1" title="3. The localized State Property"><span class="headingNumber"><a href="#3" title="3. The localized State Property">3</a>. </span>The localized State Property</h1>
 	<div class="contents1">
-		<p>The <code>localized</code> set-get property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.</p>
+		<p>The <code>localized</code> state property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.</p>
 		
 		<p><span class="allCaps">EXAMPLE (APPLICATION PERSPECTIVE)</span></p>
 		
@@ -209,7 +209,7 @@ var localWelcome = myWidget.localize (
 );
 </pre>
 		
-		<p>The above code illustrates registering localized resources by specifying a value for the <code>localized</code> set-get property when adding a child widget to a page widget instance. Notice how there are four localized strings being registered: <code>draggingToReorderSingular</code>, <code>draggingToReorderPlural</code>, <code>removeItemConfirmation</code>, <code>removeItemsConfirmation</code>.</p>
+		<p>The above code illustrates registering localized resources by specifying a value for the <code>localized</code> state property when adding a child widget to a page widget instance. Notice how there are four localized strings being registered: <code>draggingToReorderSingular</code>, <code>draggingToReorderPlural</code>, <code>removeItemConfirmation</code>, <code>removeItemsConfirmation</code>.</p>
 		
 		<p>The code snippet below illustrates how the <code>draggingToReorderSingular</code> and <code>draggingToReorderPlural</code> localized strings may be used in a widget's implementation. In this case, one of the two strings is being chosen to use, depending on how many items are being dragged. A string expression is constructing the name of the localized string, adding a suffix of either "Plural" or "Singular".</p>
 		
@@ -254,9 +254,9 @@ alert (
 );
 </pre>
 		
-		<p>In the above example, a child widget is being added to a page widget instance (which we assume to have already been created). Both the page widget instance and the child widget have values set for the <code>localized</code> set-get property, registering localized strings with each. Now, with this setup the first <code>alert</code> statement will display the text <b>"Are you sure you want to delete?"</b>, while the second <code>alert</code> statement will display the text <b>"Welcome, Chris of California, USA"</b>.</p>
+		<p>In the above example, a child widget is being added to a page widget instance (which we assume to have already been created). Both the page widget instance and the child widget have values set for the <code>localized</code> state property, registering localized strings with each. Now, with this setup the first <code>alert</code> statement will display the text <b>"Are you sure you want to delete?"</b>, while the second <code>alert</code> statement will display the text <b>"Welcome, Chris of California, USA"</b>.</p>
 		
-		<p>Even though the <code>deleteConfirmation</code> localized string is not registered for the <code>myChildWidget</code> instance, the call to the <code>localize</code> method on this instance results in the localized string being found in the parent page widget's <code>localized</code> set-get property. Thus, any widget anywhere in this page widget's widget tree can utilize the <code>deleteConfirmation</code> localized string that is registered with the page widget. Child widgets can still override this localized string value by registering their own localized version with different wording. If we extend on the previous example...</p>
+		<p>Even though the <code>deleteConfirmation</code> localized string is not registered for the <code>myChildWidget</code> instance, the call to the <code>localize</code> method on this instance results in the localized string being found in the parent page widget's <code>localized</code> state property. Thus, any widget anywhere in this page widget's widget tree can utilize the <code>deleteConfirmation</code> localized string that is registered with the page widget. Child widgets can still override this localized string value by registering their own localized version with different wording. If we extend on the previous example...</p>
 		
 		<p><span class="allCaps">EXAMPLE</span></p>
 		
@@ -441,7 +441,7 @@ page.addChild (
 			
 			<p>In the above example, the function type <code>buyConfirmation</code> resource would like to conditionally add in the word "customized" to the sentence (versions for different languages would construct the sentence differently, of course). Two problems: 1) the code for the <code>SomeNamespace.ProductWidgetClass</code> class was not written to pass in the value of this property as a substitution value, and 2) even if the <code>isCustomized</code> value <b>was</b> passed in, the substitution system for string type resources does not support conditional logic.</p>
 			
-			<p>Once again, the function type resource comes to the rescue. In this case, the function is using the <code>get</code> method to access the value of the instance's <code>isCustomized</code> set-get property. It can do this using the <code>this</code> keyword because the function is called as an instance method on the <code>productWidget</code> child widget.</p>
+			<p>Once again, the function type resource comes to the rescue. In this case, the function is using the <code>get</code> method to access the value of the instance's <code>isCustomized</code> state property. It can do this using the <code>this</code> keyword because the function is called as an instance method on the <code>productWidget</code> child widget.</p>
 		</div>
 		
 		<a name="5_5"></a>
@@ -478,7 +478,7 @@ page.addChild (
 );
 </pre>
 			
-			<p>In the above example, the <code>buyConfirmation</code> function type resource is accessing the <code>productType</code> set-get property of the instance for which it is producing a localized string. It uses the value of this property to form the name of a localized resource by capitalizing the first character and then prepending "buyConfirmation". It then calls the <code>localize</code> method on the instance, providing the constructed resource name. The <code>localize</code> method returns an empty string if the specified resource cannot be found, so our function uses the <code>||</code> (logical OR) operator to default the localized string using the <code>buyConfirmationGeneric</code> resource.</p>
+			<p>In the above example, the <code>buyConfirmation</code> function type resource is accessing the <code>productType</code> state property of the instance for which it is producing a localized string. It uses the value of this property to form the name of a localized resource by capitalizing the first character and then prepending "buyConfirmation". It then calls the <code>localize</code> method on the instance, providing the constructed resource name. The <code>localize</code> method returns an empty string if the specified resource cannot be found, so our function uses the <code>||</code> (logical OR) operator to default the localized string using the <code>buyConfirmationGeneric</code> resource.</p>
 		</div>
 		
 		<a name="5_6"></a>
@@ -526,7 +526,7 @@ page.addChild (
 &lt;/script&gt;
 </pre>
 		
-		<p>The above snippet of HTML represents the output of a server-side component that generates the HTML that is to be wired up on the client-side by an instance of the <code><a href="../reference/Uize.Widget.Collection.Dynamic.html">Uize.Widget.Collection.Dynamic</a></code> class. This class expects the localized resources <code>removeItemConfirmation</code> and <code>removeItemsConfirmation</code>. The server-side component marshals values for these two localized resources to the client code by means of the Declarative Syntax For Widget Data. According to this mechanism, the globally declared variable <code>$page_productsGrid</code> declares values of set-get properties that are to be "consumed" by the child widget <code>productsGrid</code> of the parent widget <code>page</code>. When a widget is instantiated with the <code>idPrefix</code> of <code>'page_productsGrid'</code>, then the set-get property values declared by the <code>$page_productsGrid</code> global variable will be scooped up.</p>
+		<p>The above snippet of HTML represents the output of a server-side component that generates the HTML that is to be wired up on the client-side by an instance of the <code><a href="../reference/Uize.Widget.Collection.Dynamic.html">Uize.Widget.Collection.Dynamic</a></code> class. This class expects the localized resources <code>removeItemConfirmation</code> and <code>removeItemsConfirmation</code>. The server-side component marshals values for these two localized resources to the client code by means of the Declarative Syntax For Widget Data. According to this mechanism, the globally declared variable <code>$page_productsGrid</code> declares values of state properties that are to be "consumed" by the child widget <code>productsGrid</code> of the parent widget <code>page</code>. When a widget is instantiated with the <code>idPrefix</code> of <code>'page_productsGrid'</code>, then the state property values declared by the <code>$page_productsGrid</code> global variable will be scooped up.</p>
 		
 		<p><b>NOTE:</b> The above example shows the <b>output</b> of a server-side component. Naturally, the resources in the component's source code wouldn't be hard-coded and there would be method calls in the appropriate spots to get the localized resources and insert them into the output that the server-side component generates.</p>
 	</div>
@@ -534,7 +534,7 @@ page.addChild (
 	<a name="7"></a>
 	<h1 class="heading1" title="7. Static Localized Resources"><span class="headingNumber"><a href="#7" title="7. Static Localized Resources">7</a>. </span>Static Localized Resources</h1>
 	<div class="contents1">
-		<p>One means for sharing localized resources across many instances of the same widget class is to set the <code>localized</code> static set-get property of the class. That way, all instances created will get those localized resources. Consider the following example...</p>
+		<p>One means for sharing localized resources across many instances of the same widget class is to set the <code>localized</code> static state property of the class. That way, all instances created will get those localized resources. Consider the following example...</p>
 		
 		<p><span class="allCaps">EXAMPLE</span></p>
 		

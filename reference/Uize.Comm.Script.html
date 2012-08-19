@@ -43,11 +43,11 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#2">2. Set-get Properties</a>
+			<li><a href="#2">2. State Properties</a>
 				<ul>
 					<li><a href="#2_1" title="A string, indicating whether the callback function should be handled by the server or client.">2.1. callbackMode</a>
 						<ul>
-							<li><a href="#2_1_1" title="The possible values for the callbackMode set-get property are &apos;client&apos; or &apos;server&apos;. &apos;server&apos; mode means that the callback function will be passed to the server and it is the server&apos;s responsibility to call it upon completion of the task. If &apos;client&apos; mode is set, Uize.Comm.Script will call the callback function after each request is made.">2.1.1. Values</a></li>
+							<li><a href="#2_1_1" title="The possible values for the callbackMode state property are &apos;client&apos; or &apos;server&apos;. &apos;server&apos; mode means that the callback function will be passed to the server and it is the server&apos;s responsibility to call it upon completion of the task. If &apos;client&apos; mode is set, Uize.Comm.Script will call the callback function after each request is made.">2.1.1. Values</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -134,7 +134,7 @@
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#2_1">callbackMode</a></code></p>
 			</div>
@@ -186,10 +186,10 @@
 	</div>
 	
 	<a name="2"></a>
-	<h1 class="heading1" title="2. Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="2. State Properties"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.1. callbackMode"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_1" title="2. Set-get Properties -&gt; 2.1. callbackMode">1</a>. </span>callbackMode</h2>
+		<h2 class="heading2" title="2. State Properties -&gt; 2.1. callbackMode"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_1" title="2. State Properties -&gt; 2.1. callbackMode">1</a>. </span>callbackMode</h2>
 		<div class="contents2">
 			<p>A string, indicating whether the callback function should be handled by the server or client.</p>
 			
@@ -200,9 +200,9 @@
 			<p>This does place some restrictions on the callback function. Unlike most callbacks in the <code><a href="../reference/Uize.Comm.html">Uize.Comm</a></code> class and subclasses, the callback in <code>'client'</code> mode does not receive any parameters. Once the <code>'client'</code> callback is called, the only certainty that exists with regard to the server request is that it completed. It is the responsibility of the callback developer to know the nature of that data.</p>
 			
 			<a name="2_1_1"></a>
-			<h3 class="heading3" title="2. Set-get Properties -&gt; 2.1. callbackMode -&gt; 2.1.1. Values"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_1" title="2. Set-get Properties -&gt; 2.1. callbackMode">1</a>.<a href="#2_1_1" title="2. Set-get Properties -&gt; 2.1. callbackMode -&gt; 2.1.1. Values">1</a>. </span>Values</h3>
+			<h3 class="heading3" title="2. State Properties -&gt; 2.1. callbackMode -&gt; 2.1.1. Values"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_1" title="2. State Properties -&gt; 2.1. callbackMode">1</a>.<a href="#2_1_1" title="2. State Properties -&gt; 2.1. callbackMode -&gt; 2.1.1. Values">1</a>. </span>Values</h3>
 			<div class="contents3">
-				<p>The possible values for the <code><a href="#2_1">callbackMode</a></code> set-get property are <code>'client'</code> or <code>'server'</code>. <code>'server'</code> mode means that the callback function will be passed to the server and it is the server's responsibility to call it upon completion of the task. If <code>'client'</code> mode is set, <code>Uize.Comm.Script</code> will call the callback function after each request is made.</p>
+				<p>The possible values for the <code><a href="#2_1">callbackMode</a></code> state property are <code>'client'</code> or <code>'server'</code>. <code>'server'</code> mode means that the callback function will be passed to the server and it is the server's responsibility to call it upon completion of the task. If <code>'client'</code> mode is set, <code>Uize.Comm.Script</code> will call the callback function after each request is made.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>

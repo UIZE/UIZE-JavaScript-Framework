@@ -1387,14 +1387,14 @@ Uize.module ({
             _propertiesHtmlChunks.push ('&lt;/table&gt;');
             _addTabContentsSection (
               _htmlChunks,
-              'SET-GET PROPERTIES',
+              'STATE PROPERTIES',
               _propertiesLength + ' properties',
               _propertiesLength
                 ? _propertiesHtmlChunks.join ('')
-                : '&lt;pre&gt;this class has no set-get properties&lt;/pre&gt;'
+                : '&lt;pre&gt;this class has no state properties&lt;/pre&gt;'
             );
           } else {
-            _htmlChunks.push ('&lt;br/&gt;' + '-- object does not support a set-get properties state interface --');
+            _htmlChunks.push ('&lt;br/&gt;' + '-- object does not support a state properties state interface --');
           }
 
           _this._rebuildTabContetsHtmlAndWireUi (_this.children.objectInspectorState,_htmlChunks);
@@ -1455,7 +1455,7 @@ Uize.module ({
                   '&lt;tr&gt;',
                     '&lt;td class="featureName"&gt;' +
                       (
-                        _feature.context == 'Set-get'
+                        _feature.context == 'State'
                           ? _feature.name
                           : _getObjectLink (
                             _feature.name,
@@ -1909,7 +1909,7 @@ Uize.module ({
           name:'baseUrl',
           value:''
           /* NOTE:
-            This set-get property is needed for IE, because even though the base tag is in the DELVE page and IE resolves relative stylesheet URLs just fine, the base tag is apparently not good enough for IE when it comes to changing the documentation IFRAME's URL by setting its src.
+            This state property is needed for IE, because even though the base tag is in the DELVE page and IE resolves relative stylesheet URLs just fine, the base tag is apparently not good enough for IE when it comes to changing the documentation IFRAME's URL by setting its src.
           */
         },
         _documentationUrl:{

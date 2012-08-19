@@ -47,7 +47,7 @@
 
     *DEVELOPERS:* `Chris van Rensburg`
 
-    As a subclass of =Uize.Widget.Swap=, this class employs the same underlying swap transition effect mechanism. Consequently, effects settings defined in the =Uize.Widget.Swap.xPresets= extension module, and that can be used with the =Uize.Widget.Swap.Html=, =Uize.Widget.Swap.Image=, and other subclasses of the =Uize.Widget.Swap= base class, can also be used with this class. The animated swap effect can be configured by set-get properties of the class to achieve a wide variety of different transition effects.
+    As a subclass of =Uize.Widget.Swap=, this class employs the same underlying swap transition effect mechanism. Consequently, effects settings defined in the =Uize.Widget.Swap.xPresets= extension module, and that can be used with the =Uize.Widget.Swap.Html=, =Uize.Widget.Swap.Image=, and other subclasses of the =Uize.Widget.Swap= base class, can also be used with this class. The animated swap effect can be configured by state properties of the class to achieve a wide variety of different transition effects.
 
     SEO-friendly
       The =Uize.Widget.Swap.Deck= module is particularly useful for slideshow type content that has to be SEO-friendly.
@@ -159,7 +159,7 @@ Uize.module ({
             item[itemNo]
               One of the several implied nodes that comprise the items of the deck.
 
-              There is an implied node name for each item in the deck, named according to the naming scheme =item[itemNo]=, where =[itemNo]= represents the number for an item. For example, an instance whose =totalItems= set-get property is set to =5= will have the five implied nodes named =item0=, =item1=, =item2=, =item3=, and =item4=. When wiring up an instance of the =Uize.Widget.Swap.Deck= class, be sure that HTML exists in the document that supplies a corresponding implied node for each item in the deck.
+              There is an implied node name for each item in the deck, named according to the naming scheme =item[itemNo]=, where =[itemNo]= represents the number for an item. For example, an instance whose =totalItems= state property is set to =5= will have the five implied nodes named =item0=, =item1=, =item2=, =item3=, and =item4=. When wiring up an instance of the =Uize.Widget.Swap.Deck= class, be sure that HTML exists in the document that supplies a corresponding implied node for each item in the deck.
         */
       };
 
@@ -199,7 +199,7 @@ Uize.module ({
           onChange:_classPrototype._updateUiItemNo,
           value:-1
           /*?
-            Set-get Properties
+            State Properties
               itemNo
                 An integer, representing the number of the currently displayed item.
 
@@ -210,7 +210,7 @@ Uize.module ({
                 - the initial value is =-1=
 
               value
-                An alias to the =itemNo= set-get property, establishing the =itemNo= property as the public Value Interface for this class.
+                An alias to the =itemNo= state property, establishing the =itemNo= property as the public Value Interface for this class.
           */
         },
         _totalItems:{
@@ -224,7 +224,7 @@ Uize.module ({
           },
           value:0
           /*?
-            Set-get Properties
+            State Properties
               totalItems
                 An integer, specifying the total number of items in the deck.
 

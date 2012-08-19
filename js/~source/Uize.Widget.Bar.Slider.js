@@ -57,7 +57,7 @@ Uize.module ({
 				/*?
 					Instance Events
 						Value Change After Rest
-							The =Value Change After Rest= event is similar to the =Changed.value= event, except that it is only fired during drag if the slider's knob has rested on the same value for the amount of time specified by the =restTime= set-get property.
+							The =Value Change After Rest= event is similar to the =Changed.value= event, except that it is only fired during drag if the slider's knob has rested on the same value for the amount of time specified by the =restTime= state property.
 
 							When a slider is not in drag mode, then the =Value Change After Rest= event fires every time the =Changed.value= event fires. The =Value Change After Rest= event also fires immediately upon releasing the slider's knob if the value has changed since the previous firing of the event (a user may in some cases release a knob after resting it for long enough to have this event fire, in which case this event will not fire again upon release).
 
@@ -178,7 +178,7 @@ Uize.module ({
 					name:'inDrag',
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							inDrag
 								A boolean value, indicating whether or not the slider's knob is being dragged by the user.
 
@@ -193,7 +193,7 @@ Uize.module ({
 					name:'restTime',
 					value:250
 					/*?
-						Set-get Properties
+						State Properties
 							restTime
 								An integer, representing the time (in milliseconds) that the user must rest the mouse - during dragging the slider's knob - before the =Value Change After Rest= instance event will be fired.
 
@@ -207,11 +207,11 @@ Uize.module ({
 					name:'valueFunc',
 					value:function (_y) {return _y}
 					/*?
-						Set-get Properties
+						State Properties
 							valueFunc
-								An optional function that can be provided to achieve a non-linear transformation of the slider's knob position to a value for the instance's =value= set-get property.
+								An optional function that can be provided to achieve a non-linear transformation of the slider's knob position to a value for the instance's =value= state property.
 
-								This property should be used in conjunction with the =scaleFunc= set-get property. In order for the slider to operate sensibly, any function specified for this property should be the inverse of a function specified for the =scaleFunc= property. For example, if the function =function (unscaled) {return Math.pow (unscaled)}= was specified for the =scaleFunc= property, then the function =function (scaled) {return Math.sqrt (scaled)}= should be specified for the =valueFunc= property.
+								This property should be used in conjunction with the =scaleFunc= state property. In order for the slider to operate sensibly, any function specified for this property should be the inverse of a function specified for the =scaleFunc= property. For example, if the function =function (unscaled) {return Math.pow (unscaled)}= was specified for the =scaleFunc= property, then the function =function (scaled) {return Math.sqrt (scaled)}= should be specified for the =valueFunc= property.
 
 								NOTES
 								- the initial value is a function that has no effect

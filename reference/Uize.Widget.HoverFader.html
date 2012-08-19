@@ -31,7 +31,7 @@
 		<ul>
 			<li><a href="#1" title="The Uize.Widget.HoverFader class wires up a set of nodes with a hover fader effect, allowing creation of menus with a wide variety of complex effects.">1. Introduction</a>
 				<ul>
-					<li><a href="#1_1" title="The entire interface for the Uize.Widget.HoverFader class is exposed through its set-get properties.">1.1. All in the Set</a></li>
+					<li><a href="#1_1" title="The entire interface for the Uize.Widget.HoverFader class is exposed through its state properties.">1.1. All in the Set</a></li>
 					<li><a href="#1_2" title="The Uize.Widget.HoverFader class is flexible enough to enable a healthy array of CSS style property fade effects.">1.2. Fading CSS Style Properties</a></li>
 					<li><a href="#1_3" title="The nodes that you wire up with this widget can be of any type: links, divs, spans, etc.">1.3. Any Nodes</a></li>
 					<li><a href="#1_4" title="The Uize.Widget.HoverFader widget class falls into the category of Progressive Enhancement (or &quot;unobtrusive JavaScript&quot;) widgets.">1.4. Progressive Enhancement</a></li>
@@ -99,7 +99,7 @@
 					<li><a href="#2_47" title="IMPLEMENTATION INFO">2.47. wireUi</a></li>
 				</ul>
 			</li>
-			<li><a href="#3">3. Set-get Properties</a>
+			<li><a href="#3">3. State Properties</a>
 				<ul>
 					<li><a href="#3_1" title="Inherited from Uize.Widget.">3.1. built</a></li>
 					<li><a href="#3_2" title="Inherited from Uize.Widget.">3.2. busy</a></li>
@@ -173,7 +173,7 @@
 		<a name="1_1"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.1. All in the Set"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. All in the Set">1</a>. </span>All in the Set</h2>
 		<div class="contents2">
-			<p>The entire interface for the <code>Uize.Widget.HoverFader</code> class is exposed through its set-get properties.</p>
+			<p>The entire interface for the <code>Uize.Widget.HoverFader</code> class is exposed through its state properties.</p>
 			
 			<p>There are no special methods for this class. All methods and other properties are inherited from the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class. All that one does in order to utilize this widget is to instantiate it with the desired settings.</p>
 		</div>
@@ -198,7 +198,7 @@
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>values for color style properties can be specified in single digit, three digit, or six digit hex RGB format - with or without the "#" (hash / pound sign) prefix</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>values for position and dimension style properties can be specified as strings with the "px" suffix (eg. <code>'100px'</code>) or simply as numbers (eg. <code>100</code>)</td></tr>
 			</table>
-			<p>Configurable fade properties let you control the rate of the fade-in independently of the rate of the fade-out, and any other set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class (such as <code>curve</code>) can be specified for both the fade-in and fade-out.</p>
+			<p>Configurable fade properties let you control the rate of the fade-in independently of the rate of the fade-out, and any other state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class (such as <code>curve</code>) can be specified for both the fade-in and fade-out.</p>
 		</div>
 		
 		<a name="1_3"></a>
@@ -238,11 +238,11 @@
 );
 </pre>
 			
-			<p>In the above example, the <code>Uize.Widget.HoverFader</code> instance is being added as a child widget to a page widget instance, so the effect will be wired up when the page widget instance is wired. The value for the <code><a href="#3_20">nodes</a></code> set-get property specifies the nodes that should be wired up with the effect. The nodes being supplied in this case are obtained through a call to the <code>Uize.Node.find</code> static method. Based on the options specified in the call, the <code>Uize.Node.find</code> method will find all nodes with a class name of "menuLink" that are in a node tree with a node of the id "menu" at its root.</p>
+			<p>In the above example, the <code>Uize.Widget.HoverFader</code> instance is being added as a child widget to a page widget instance, so the effect will be wired up when the page widget instance is wired. The value for the <code><a href="#3_20">nodes</a></code> state property specifies the nodes that should be wired up with the effect. The nodes being supplied in this case are obtained through a call to the <code>Uize.Node.find</code> static method. Based on the options specified in the call, the <code>Uize.Node.find</code> method will find all nodes with a class name of "menuLink" that are in a node tree with a node of the id "menu" at its root.</p>
 			
-			<p>The <code><a href="#3_6">defaultStyle</a></code> set-get property specifies the color style property values for the default state of the nodes (ie. when not mousing over them), in this case light gray text on a black background with a dark gray border. The <code><a href="#3_12">hoverStyle</a></code> set-get property specifies the color style property values for the hover state of the nodes (ie. when mousing over them), in this case white text on a pastel blue background with a black border.</p>
+			<p>The <code><a href="#3_6">defaultStyle</a></code> state property specifies the color style property values for the default state of the nodes (ie. when not mousing over them), in this case light gray text on a black background with a dark gray border. The <code><a href="#3_12">hoverStyle</a></code> state property specifies the color style property values for the hover state of the nodes (ie. when mousing over them), in this case white text on a pastel blue background with a black border.</p>
 			
-			<p>The <code><a href="#3_9">fadeIn</a></code> set-get property specifies properties for the fade process that is used to fade the node that is currently being moused over from the <code><a href="#3_6">defaultStyle</a></code> styling to the <code><a href="#3_12">hoverStyle</a></code> styling, in this case with a duration of <code>500</code> milliseconds and accelerating through the entire fade. The <code><a href="#3_11">fadeOut</a></code> set-get property specifies properties for the fade process that is used to fade the node that is currently being moused out of from the <code><a href="#3_12">hoverStyle</a></code> styling back to the <code><a href="#3_6">defaultStyle</a></code> styling, in this case with a duration of <code>750</code> milliseconds and accelerating through the entire fade. A greater duration for the fade-out will result in a lingering trail, and the acceleration will accentuate this quality.</p>
+			<p>The <code><a href="#3_9">fadeIn</a></code> state property specifies properties for the fade process that is used to fade the node that is currently being moused over from the <code><a href="#3_6">defaultStyle</a></code> styling to the <code><a href="#3_12">hoverStyle</a></code> styling, in this case with a duration of <code>500</code> milliseconds and accelerating through the entire fade. The <code><a href="#3_11">fadeOut</a></code> state property specifies properties for the fade process that is used to fade the node that is currently being moused out of from the <code><a href="#3_12">hoverStyle</a></code> styling back to the <code><a href="#3_6">defaultStyle</a></code> styling, in this case with a duration of <code>750</code> milliseconds and accelerating through the entire fade. A greater duration for the fade-out will result in a lingering trail, and the acceleration will accentuate this quality.</p>
 		</div>
 		
 		<a name="1_6"></a>
@@ -283,7 +283,7 @@
 				
 				<p><code><a href="#2_37">tickle</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#3_6">defaultStyle</a></code> | <code><a href="#3_9">fadeIn</a></code> | <code><a href="#3_10">fadeInOut</a></code> | <code><a href="#3_11">fadeOut</a></code> | <code><a href="#3_12">hoverStyle</a></code> | <code><a href="#3_20">nodes</a></code></p>
 			</div>
@@ -319,7 +319,7 @@
 				
 				<p><code><a href="#4_1">showConfirm</a></code> | <code><a href="#4_2">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#3_1">built</a></code> | <code><a href="#3_2">busy</a></code> | <code><a href="#3_3">busyInherited</a></code> | <code><a href="#3_4">children</a></code> | <code><a href="#3_5">container</a></code> | <code><a href="#3_7">enabled</a></code> | <code><a href="#3_8">enabledInherited</a></code> | <code><a href="#3_13">html</a></code> | <code><a href="#3_14">idPrefix</a></code> | <code><a href="#3_15">idPrefixConstruction</a></code> | <code><a href="#3_16">insertionMode</a></code> | <code><a href="#3_17">localized</a></code> | <code><a href="#3_18">name</a></code> | <code><a href="#3_19">nodeMap</a></code> | <code><a href="#3_21">wired</a></code></p>
 				
@@ -808,7 +808,7 @@
 <pre class="sample-code">myInstance.tickle (fadePropertiesOBJ);
 </pre>
 			
-			<p>When the <code>fadePropertiesOBJ</code> parameter is specified in place of the <code>intervalINT</code> parameter, then an object containing fade properties (ie. set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class) can be specified to configure the fade that drives the tickling of the <code><a href="#3_20">nodes</a></code>.</p>
+			<p>When the <code>fadePropertiesOBJ</code> parameter is specified in place of the <code>intervalINT</code> parameter, then an object containing fade properties (ie. state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class) can be specified to configure the fade that drives the tickling of the <code><a href="#3_20">nodes</a></code>.</p>
 			
 			<p>Among other things, this allows one to specify a <code>curve</code> property for the fade, so that the timing of the triggering of the fade-outs for the different <code><a href="#3_20">nodes</a></code> of the instance is not uniform. In addition, one can use the <code>reverse</code> fade property to control the order in which the tickling occurs. Specifying the value <code>true</code> for the <code>reverse</code> fade property will cause the tickling to start with the last node and end at the first node.</p>
 			
@@ -957,10 +957,10 @@
 	</div>
 	
 	<a name="3"></a>
-	<h1 class="heading1" title="3. Set-get Properties"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="3. State Properties"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.1. built"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_1" title="3. Set-get Properties -&gt; 3.1. built">1</a>. </span>built</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.1. built"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_1" title="3. State Properties -&gt; 3.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -972,7 +972,7 @@
 		</div>
 		
 		<a name="3_2"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.2. busy"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_2" title="3. Set-get Properties -&gt; 3.2. busy">2</a>. </span>busy</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.2. busy"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_2" title="3. State Properties -&gt; 3.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -984,7 +984,7 @@
 		</div>
 		
 		<a name="3_3"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.3. busyInherited"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_3" title="3. Set-get Properties -&gt; 3.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.3. busyInherited"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_3" title="3. State Properties -&gt; 3.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -996,7 +996,7 @@
 		</div>
 		
 		<a name="3_4"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.4. children"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_4" title="3. Set-get Properties -&gt; 3.4. children">4</a>. </span>children</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.4. children"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_4" title="3. State Properties -&gt; 3.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1008,7 +1008,7 @@
 		</div>
 		
 		<a name="3_5"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.5. container"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_5" title="3. Set-get Properties -&gt; 3.5. container">5</a>. </span>container</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.5. container"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_5" title="3. State Properties -&gt; 3.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1020,7 +1020,7 @@
 		</div>
 		
 		<a name="3_6"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.6. defaultStyle"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_6" title="3. Set-get Properties -&gt; 3.6. defaultStyle">6</a>. </span>defaultStyle</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.6. defaultStyle"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_6" title="3. State Properties -&gt; 3.6. defaultStyle">6</a>. </span>defaultStyle</h2>
 		<div class="contents2">
 			<p>An object, whose properties specify the values for CSS style properties at the start of the hover fade-in (and also the end of the hover fade-out).</p>
 			
@@ -1036,15 +1036,15 @@
 }
 </pre>
 			
-			<p>The <code><a href="#3_6">defaultStyle</a></code> object may contain values for any of the supported CSS style properties (see the section <a href="#1_2">Fading CSS Style Properties</a>). The structure of the object should match the structure of the companion <code><a href="#3_12">hoverStyle</a></code> set-get property's value, or the effect will not work correctly. In other words, if the <code><a href="#3_6">defaultStyle</a></code> object contains a value for <code>borderColor</code>, then the <code><a href="#3_12">hoverStyle</a></code> object must also contain a value for this style property.</p>
+			<p>The <code><a href="#3_6">defaultStyle</a></code> object may contain values for any of the supported CSS style properties (see the section <a href="#1_2">Fading CSS Style Properties</a>). The structure of the object should match the structure of the companion <code><a href="#3_12">hoverStyle</a></code> state property's value, or the effect will not work correctly. In other words, if the <code><a href="#3_6">defaultStyle</a></code> object contains a value for <code>borderColor</code>, then the <code><a href="#3_12">hoverStyle</a></code> object must also contain a value for this style property.</p>
 			
-			<p>For a more complete example of how this set-get property is used in conjunction with other set-get properties, consult the section <a href="#1_5">An Example</a>.</p>
+			<p>For a more complete example of how this state property is used in conjunction with other state properties, consult the section <a href="#1_5">An Example</a>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for best effect, style property values specified in this property should match the initial style property values for the nodes (as determined by stylesheet rules for your page)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_12">hoverStyle</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_12">hoverStyle</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>{color:'fff',backgroundColor:'000'}</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1055,7 +1055,7 @@
 		</div>
 		
 		<a name="3_7"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.7. enabled"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_7" title="3. Set-get Properties -&gt; 3.7. enabled">7</a>. </span>enabled</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.7. enabled"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_7" title="3. State Properties -&gt; 3.7. enabled">7</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1067,7 +1067,7 @@
 		</div>
 		
 		<a name="3_8"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.8. enabledInherited"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_8" title="3. Set-get Properties -&gt; 3.8. enabledInherited">8</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.8. enabledInherited"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_8" title="3. State Properties -&gt; 3.8. enabledInherited">8</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1079,11 +1079,11 @@
 		</div>
 		
 		<a name="3_9"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.9. fadeIn"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_9" title="3. Set-get Properties -&gt; 3.9. fadeIn">9</a>. </span>fadeIn</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.9. fadeIn"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_9" title="3. State Properties -&gt; 3.9. fadeIn">9</a>. </span>fadeIn</h2>
 		<div class="contents2">
 			<p>An object, specifying fade properties for the fade-in phase (ie. when mousing over a node) of the hover fade effect.</p>
 			
-			<p>If the default fade-in duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class (such as <code>curve</code>) can be specified in the <code><a href="#3_9">fadeIn</a></code> object, and these values will be applied when the fade-in starts.</p>
+			<p>If the default fade-in duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class (such as <code>curve</code>) can be specified in the <code><a href="#3_9">fadeIn</a></code> object, and these values will be applied when the fade-in starts.</p>
 			
 			<p><span class="allCaps">EXAMPLE VALUE</span></p>
 			
@@ -1097,7 +1097,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_10">fadeInOut</a></code> and <code><a href="#3_11">fadeOut</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_10">fadeInOut</a></code> and <code><a href="#3_11">fadeOut</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>{duration:250}</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1108,7 +1108,7 @@
 		</div>
 		
 		<a name="3_10"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.10. fadeInOut"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_10" title="3. Set-get Properties -&gt; 3.10. fadeInOut">10</a>. </span>fadeInOut</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.10. fadeInOut"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_10" title="3. State Properties -&gt; 3.10. fadeInOut">10</a>. </span>fadeInOut</h2>
 		<div class="contents2">
 			<p>An object, specifying fade properties that are common to both the fade-in phase (ie. when mousing over a node) and the fade-out phase (ie. when mousing out of a node) of the hover fade effect.</p>
 			
@@ -1136,32 +1136,32 @@
 );
 </pre>
 			
-			<p>In the above example, a <code>Uize.Widget.HoverFader</code> instance is being added to the page widget as a child widget named <code>menuHoverFader</code>. The <code><a href="#3_10">fadeInOut</a></code> set-get property is being used to specify fade properties that are common to both the fade-in and fade-out phases of the hover fade effect.</p>
+			<p>In the above example, a <code>Uize.Widget.HoverFader</code> instance is being added to the page widget as a child widget named <code>menuHoverFader</code>. The <code><a href="#3_10">fadeInOut</a></code> state property is being used to specify fade properties that are common to both the fade-in and fade-out phases of the hover fade effect.</p>
 			
-			<p>These settings achieve a "hot" fade from black to white (and vice versa), where the background color transitions through shades of reds and yellows. This is accomplished by specifying different curve functions for the red, green, and blue components of the color tuple for the <code>backgroundColor</code> CSS style property. Now, because we want the fade-in to be faster than the fade-out, we are using the <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_11">fadeOut</a></code> set-get properties as well to provide the fade properties that are different for the two phases - in this case, the <code>duration</code> fade property values.</p>
+			<p>These settings achieve a "hot" fade from black to white (and vice versa), where the background color transitions through shades of reds and yellows. This is accomplished by specifying different curve functions for the red, green, and blue components of the color tuple for the <code>backgroundColor</code> CSS style property. Now, because we want the fade-in to be faster than the fade-out, we are using the <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_11">fadeOut</a></code> state properties as well to provide the fade properties that are different for the two phases - in this case, the <code>duration</code> fade property values.</p>
 			
 			<a name="3_10_1"></a>
-			<h3 class="heading3" title="3. Set-get Properties -&gt; 3.10. fadeInOut -&gt; 3.10.1. Common Duration"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_10" title="3. Set-get Properties -&gt; 3.10. fadeInOut">10</a>.<a href="#3_10_1" title="3. Set-get Properties -&gt; 3.10. fadeInOut -&gt; 3.10.1. Common Duration">1</a>. </span>Common Duration</h3>
+			<h3 class="heading3" title="3. State Properties -&gt; 3.10. fadeInOut -&gt; 3.10.1. Common Duration"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_10" title="3. State Properties -&gt; 3.10. fadeInOut">10</a>.<a href="#3_10_1" title="3. State Properties -&gt; 3.10. fadeInOut -&gt; 3.10.1. Common Duration">1</a>. </span>Common Duration</h3>
 			<div class="contents3">
 				<p>If the duration of the fade-in is to be the same as the duration of the fade-out, then this common duration can be specified in the <code><a href="#3_10">fadeInOut</a></code> property, rather than redundantly in both the <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_11">fadeOut</a></code> properties.</p>
 			</div>
 			
 			<a name="3_10_2"></a>
-			<h3 class="heading3" title="3. Set-get Properties -&gt; 3.10. fadeInOut -&gt; 3.10.2. Special Handling of reverse Fade Property"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_10" title="3. Set-get Properties -&gt; 3.10. fadeInOut">10</a>.<a href="#3_10_2" title="3. Set-get Properties -&gt; 3.10. fadeInOut -&gt; 3.10.2. Special Handling of reverse Fade Property">2</a>. </span>Special Handling of reverse Fade Property</h3>
+			<h3 class="heading3" title="3. State Properties -&gt; 3.10. fadeInOut -&gt; 3.10.2. Special Handling of reverse Fade Property"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_10" title="3. State Properties -&gt; 3.10. fadeInOut">10</a>.<a href="#3_10_2" title="3. State Properties -&gt; 3.10. fadeInOut -&gt; 3.10.2. Special Handling of reverse Fade Property">2</a>. </span>Special Handling of reverse Fade Property</h3>
 			<div class="contents3">
 				<p>The <code>reverse</code> fade property has special handling in the context of this widget class.</p>
 				
-				<p>Normally, when specifying the value <code>true</code> for the <code>reverse</code> fade property, the entire fade will be reversed. However, the <code>Uize.Widget.HoverFader</code> class guarantees that at the end of the fade-in phase the style settings for a node will be those specified by the <code><a href="#3_12">hoverStyle</a></code> set-get property. Similarly, at the end of the fade-out phase the style settings for a node will be those specified by the <code><a href="#3_6">defaultStyle</a></code> set-get property.</p>
+				<p>Normally, when specifying the value <code>true</code> for the <code>reverse</code> fade property, the entire fade will be reversed. However, the <code>Uize.Widget.HoverFader</code> class guarantees that at the end of the fade-in phase the style settings for a node will be those specified by the <code><a href="#3_12">hoverStyle</a></code> state property. Similarly, at the end of the fade-out phase the style settings for a node will be those specified by the <code><a href="#3_6">defaultStyle</a></code> state property.</p>
 				
 				<p>Therefore, when specifying the value <code>true</code> for the <code>reverse</code> fade property, the <code>Uize.Widget.HoverFader</code> class swaps the values that it would normally use as the start and end values of the style fade for a node. This has the effect of only reversing the transition effect, but not the start and end style. This becomes more pronounced - and more compelling - when compound values are specified for the <code>curve</code> fade property, where reversing the effect of the curves produces interesting results.</p>
 				
-				<p>Now, when specifying a value for the <code><a href="#3_10">fadeInOut</a></code> set-get property, the value of the <code>reverse</code> fade property for the fade-out is automatically defaulted to being the logical not of the value specified for this property in the <code><a href="#3_10">fadeInOut</a></code> object. This has the effect of making the fade-out a mirror of the fade-in - especially useful with settings that accomplish complex color transitions, where this behavior guarantees the same color transition effect for both phases of the effect. In order to override this automatic defaulting behavior, you can always explicitly specify values for the <code>reverse</code> fade property in either - or both - of the <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_11">fadeOut</a></code> objects.</p>
+				<p>Now, when specifying a value for the <code><a href="#3_10">fadeInOut</a></code> state property, the value of the <code>reverse</code> fade property for the fade-out is automatically defaulted to being the logical not of the value specified for this property in the <code><a href="#3_10">fadeInOut</a></code> object. This has the effect of making the fade-out a mirror of the fade-in - especially useful with settings that accomplish complex color transitions, where this behavior guarantees the same color transition effect for both phases of the effect. In order to override this automatic defaulting behavior, you can always explicitly specify values for the <code>reverse</code> fade property in either - or both - of the <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_11">fadeOut</a></code> objects.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_11">fadeOut</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_11">fadeOut</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1172,11 +1172,11 @@
 		</div>
 		
 		<a name="3_11"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.11. fadeOut"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_11" title="3. Set-get Properties -&gt; 3.11. fadeOut">11</a>. </span>fadeOut</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.11. fadeOut"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_11" title="3. State Properties -&gt; 3.11. fadeOut">11</a>. </span>fadeOut</h2>
 		<div class="contents2">
 			<p>An object, specifying fade properties for the fade-out phase (ie. when mousing out of a node) of the hover fade effect.</p>
 			
-			<p>If the default fade-out duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class (such as <code>curve</code>) can be specified in the <code><a href="#3_11">fadeOut</a></code> object, and these values will be applied when the fade-out starts.</p>
+			<p>If the default fade-out duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class (such as <code>curve</code>) can be specified in the <code><a href="#3_11">fadeOut</a></code> object, and these values will be applied when the fade-out starts.</p>
 			
 			<p><span class="allCaps">EXAMPLE VALUE</span></p>
 			
@@ -1190,7 +1190,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_10">fadeInOut</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_9">fadeIn</a></code> and <code><a href="#3_10">fadeInOut</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>{duration:350}</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1201,7 +1201,7 @@
 		</div>
 		
 		<a name="3_12"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.12. hoverStyle"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_12" title="3. Set-get Properties -&gt; 3.12. hoverStyle">12</a>. </span>hoverStyle</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.12. hoverStyle"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_12" title="3. State Properties -&gt; 3.12. hoverStyle">12</a>. </span>hoverStyle</h2>
 		<div class="contents2">
 			<p>An object, whose properties specify the values for CSS style properties at the end of the hover fade-in (and also the start of the hover fade-out).</p>
 			
@@ -1217,15 +1217,15 @@
 }
 </pre>
 			
-			<p>The <code><a href="#3_12">hoverStyle</a></code> object may contain values for any of the supported CSS style properties (see the section <a href="#1_2">Fading CSS Style Properties</a>). The structure of the object should match the structure of the companion <code><a href="#3_6">defaultStyle</a></code> set-get property's value, or the effect will not work correctly. In other words, if the <code><a href="#3_12">hoverStyle</a></code> object contains a value for <code>borderColor</code>, then the <code><a href="#3_6">defaultStyle</a></code> object must also contain a value for this style property.</p>
+			<p>The <code><a href="#3_12">hoverStyle</a></code> object may contain values for any of the supported CSS style properties (see the section <a href="#1_2">Fading CSS Style Properties</a>). The structure of the object should match the structure of the companion <code><a href="#3_6">defaultStyle</a></code> state property's value, or the effect will not work correctly. In other words, if the <code><a href="#3_12">hoverStyle</a></code> object contains a value for <code>borderColor</code>, then the <code><a href="#3_6">defaultStyle</a></code> object must also contain a value for this style property.</p>
 			
-			<p>For a more complete example of how this set-get property is used in conjunction with other set-get properties, consult the section <a href="#1_5">An Example</a>.</p>
+			<p>For a more complete example of how this state property is used in conjunction with other state properties, consult the section <a href="#1_5">An Example</a>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for best effect, style property values specified in this property should match the hover style property values for the nodes (as determined by stylesheet rules for your page)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_6">defaultStyle</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_6">defaultStyle</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>{color:'000',backgroundColor:'fff'}</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1236,7 +1236,7 @@
 		</div>
 		
 		<a name="3_13"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.13. html"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_13" title="3. Set-get Properties -&gt; 3.13. html">13</a>. </span>html</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.13. html"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_13" title="3. State Properties -&gt; 3.13. html">13</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1248,7 +1248,7 @@
 		</div>
 		
 		<a name="3_14"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.14. idPrefix"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_14" title="3. Set-get Properties -&gt; 3.14. idPrefix">14</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.14. idPrefix"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_14" title="3. State Properties -&gt; 3.14. idPrefix">14</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1260,7 +1260,7 @@
 		</div>
 		
 		<a name="3_15"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.15. idPrefixConstruction"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_15" title="3. Set-get Properties -&gt; 3.15. idPrefixConstruction">15</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.15. idPrefixConstruction"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_15" title="3. State Properties -&gt; 3.15. idPrefixConstruction">15</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1272,7 +1272,7 @@
 		</div>
 		
 		<a name="3_16"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.16. insertionMode"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_16" title="3. Set-get Properties -&gt; 3.16. insertionMode">16</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.16. insertionMode"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_16" title="3. State Properties -&gt; 3.16. insertionMode">16</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1284,7 +1284,7 @@
 		</div>
 		
 		<a name="3_17"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.17. localized"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_17" title="3. Set-get Properties -&gt; 3.17. localized">17</a>. </span>localized</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.17. localized"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_17" title="3. State Properties -&gt; 3.17. localized">17</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1296,7 +1296,7 @@
 		</div>
 		
 		<a name="3_18"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.18. name"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_18" title="3. Set-get Properties -&gt; 3.18. name">18</a>. </span>name</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.18. name"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_18" title="3. State Properties -&gt; 3.18. name">18</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1308,7 +1308,7 @@
 		</div>
 		
 		<a name="3_19"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.19. nodeMap"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_19" title="3. Set-get Properties -&gt; 3.19. nodeMap">19</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.19. nodeMap"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_19" title="3. State Properties -&gt; 3.19. nodeMap">19</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1320,7 +1320,7 @@
 		</div>
 		
 		<a name="3_20"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.20. nodes"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_20" title="3. Set-get Properties -&gt; 3.20. nodes">20</a>. </span>nodes</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.20. nodes"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_20" title="3. State Properties -&gt; 3.20. nodes">20</a>. </span>nodes</h2>
 		<div class="contents2">
 			<p>An array or collection of nodes or a find expression object, specifying the nodes that should be wired up with the hover fade effect.</p>
 			
@@ -1371,7 +1371,7 @@
 		</div>
 		
 		<a name="3_21"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.21. wired"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_21" title="3. Set-get Properties -&gt; 3.21. wired">21</a>. </span>wired</h2>
+		<h2 class="heading2" title="3. State Properties -&gt; 3.21. wired"><span class="headingNumber"><a href="#3" title="3. State Properties">3</a>.<a href="#3_21" title="3. State Properties -&gt; 3.21. wired">21</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

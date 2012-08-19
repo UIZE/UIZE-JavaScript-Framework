@@ -1,6 +1,6 @@
 Implied Nodes
 	The Four Display States
-		There are four display states associated with a button: normal, mouseover, selected, and playing. Each display state is made up of two nodes: a general UI node and a title container. The list below indicates the special =id= attribute values for the nodes of each state, where "[idPrefix]" is the value of the =idPrefix= set-get property...
+		There are four display states associated with a button: normal, mouseover, selected, and playing. Each display state is made up of two nodes: a general UI node and a title container. The list below indicates the special =id= attribute values for the nodes of each state, where "[idPrefix]" is the value of the =idPrefix= state property...
 
 		Normal State
 
@@ -35,10 +35,10 @@ Implied Nodes
 				[must to document]
 
 	About the Title Nodes
-		Whenever the value of the =title= set-get property is modified for an instance, the title container nodes of the various display states for the button are filled with the value of the =title= property. The inner HTML of title container nodes is completely replaced, so these nodes should not contain any content that needs to persist in the button's UI. To protect from long titles spilling outside of a title container node, a clip region is set for the node using the values of the node's =width= and =height= CSS style properties.
+		Whenever the value of the =title= state property is modified for an instance, the title container nodes of the various display states for the button are filled with the value of the =title= property. The inner HTML of title container nodes is completely replaced, so these nodes should not contain any content that needs to persist in the button's UI. To protect from long titles spilling outside of a title container node, a clip region is set for the node using the values of the node's =width= and =height= CSS style properties.
 
 	General vs. Title Nodes
-		Whereas the title container nodes for a button are dynamically filled with the value of the =title= set-get property, the general UI node for each of a button's display states provides a way to have static layout nodes to embellish the various display states. The general UI nodes are not required for buttons. In UI designs where all the differentiation between a button's display states can be accomplished simply by using different CSS styles for the title container nodes of the various display states, you can just choose to not define HTML for the general UI nodes.
+		Whereas the title container nodes for a button are dynamically filled with the value of the =title= state property, the general UI node for each of a button's display states provides a way to have static layout nodes to embellish the various display states. The general UI nodes are not required for buttons. In UI designs where all the differentiation between a button's display states can be accomplished simply by using different CSS styles for the title container nodes of the various display states, you can just choose to not define HTML for the general UI nodes.
 
 	State Display Priority
 		The various button state nodes are not mutually exclusive, so multiple state nodes for a button may be displayed simultaneously under certain conditions. For example, mousing over a button will put that button into mouseover state. Clicking on the button will then put it into selected state. If clicking the button triggers some media to play, then the button may enter playing state. At this stage, the button will be in normal, mouseover, selected, and playing states simultaneously.

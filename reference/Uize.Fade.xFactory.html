@@ -47,8 +47,8 @@
 				<ul>
 					<li><a href="#2_1" title="Lets you conveniently initiate a generic fade process.">2.1. Uize.Fade.fade</a></li>
 					<li><a href="#2_2" title="Lets you conveniently initiate a method call fade process.">2.2. Uize.Fade.fadeMethod</a></li>
-					<li><a href="#2_3" title="Lets you conveniently initiate a fade process for set-get properties of an instance.">2.3. Uize.Fade.fadeProperties</a></li>
-					<li><a href="#2_4" title="Lets you conveniently initiate a fade process for a single set-get property of an instance.">2.4. Uize.Fade.fadeProperty</a></li>
+					<li><a href="#2_3" title="Lets you conveniently initiate a fade process for state properties of an instance.">2.3. Uize.Fade.fadeProperties</a></li>
+					<li><a href="#2_4" title="Lets you conveniently initiate a fade process for a single state property of an instance.">2.4. Uize.Fade.fadeProperty</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Static Properties</a>
@@ -156,7 +156,7 @@
 <pre class="sample-code">Uize.Fade.fade (slider,0,100,2000);
 </pre>
 			
-			<p>In the above example, the <code>value</code> set-get property for the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> instance <code>slider</code> would be faded from <code>0</code> to <code>100</code> over <code>2000</code> milliseconds (2 seconds).</p>
+			<p>In the above example, the <code>value</code> state property for the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> instance <code>slider</code> would be faded from <code>0</code> to <code>100</code> over <code>2000</code> milliseconds (2 seconds).</p>
 			
 			<p><span class="allCaps">EXAMPLE 2</span></p>
 			
@@ -207,7 +207,7 @@
 );
 </pre>
 			
-			<p>When the optional <code>fadePropertiesOBJ</code> parameter is specified, additional values can be specified for the set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
+			<p>When the optional <code>fadePropertiesOBJ</code> parameter is specified, additional values can be specified for the state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
 			
 			<p><span class="allCaps">VARIATION 2</span></p>
 			
@@ -255,7 +255,7 @@
 );
 </pre>
 			
-			<p>When the optional <code>fadePropertiesOBJ</code> parameter is specified, additional values can be specified for the set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
+			<p>When the optional <code>fadePropertiesOBJ</code> parameter is specified, additional values can be specified for the state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
 			
 			<p><span class="allCaps">VARIATION 2</span></p>
 			
@@ -277,7 +277,7 @@
 		<a name="2_3"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Fade.fadeProperties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Fade.fadeProperties">3</a>. </span>Uize.Fade.fadeProperties</h2>
 		<div class="contents2">
-			<p>Lets you conveniently initiate a fade process for set-get properties of an instance.</p>
+			<p>Lets you conveniently initiate a fade process for state properties of an instance.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -302,7 +302,7 @@
 );
 </pre>
 			
-			<p>When the optional <code>fadePropertiesOBJ</code> parameter is specified, additional values can be specified for the set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
+			<p>When the optional <code>fadePropertiesOBJ</code> parameter is specified, additional values can be specified for the state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
 			
 			<p><span class="allCaps">VARIATION 2</span></p>
 			
@@ -329,7 +329,7 @@
 		<a name="2_4"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.4. Uize.Fade.fadeProperty"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Fade.fadeProperty">4</a>. </span>Uize.Fade.fadeProperty</h2>
 		<div class="contents2">
-			<p>Lets you conveniently initiate a fade process for a single set-get property of an instance.</p>
+			<p>Lets you conveniently initiate a fade process for a single state property of an instance.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -356,7 +356,7 @@
 );
 </pre>
 			
-			<p>When the optional <code>fadePropertiesOBJ</code> parameter is specified, additional values can be specified for the set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
+			<p>When the optional <code>fadePropertiesOBJ</code> parameter is specified, additional values can be specified for the state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
 			
 			<p><span class="allCaps">VARIATION 2</span></p>
 			

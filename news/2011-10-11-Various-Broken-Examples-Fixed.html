@@ -26,7 +26,7 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="A number of the JavaScript examples that use slider widgets (ie. instances of the Uize.Widget.Bar.Slider class) that had been broken by a change in the set-get properties mechanism have now been fixed.">1. Broken Styling in Sliders Examples Fixed</a></li>
+			<li><a href="#1" title="A number of the JavaScript examples that use slider widgets (ie. instances of the Uize.Widget.Bar.Slider class) that had been broken by a change in the state properties mechanism have now been fixed.">1. Broken Styling in Sliders Examples Fixed</a></li>
 			<li><a href="#2" title="An issue with flickering in the 3D Rotation Viewer example that was seen in IE9 has been fixed.">2. Fixed Flickering Issue in IE9 in 3D Rotation Viewer Examples</a></li>
 			<li><a href="#3" title="A number of JavaScript examples that were displaying broken images have been fixed, including numerous slideshow examples and examples using image thumbnails.">3. Broken Images in Various Examples Fixed</a></li>
 		</ul>
@@ -40,9 +40,9 @@
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Broken Styling in Sliders Examples Fixed"><span class="headingNumber"><a href="#1" title="1. Broken Styling in Sliders Examples Fixed">1</a>. </span>Broken Styling in Sliders Examples Fixed</h1>
 	<div class="contents1">
-		<p>A number of the JavaScript examples that use slider widgets (ie. instances of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class) that had been broken by a change in the set-get properties mechanism have now been fixed.</p>
+		<p>A number of the JavaScript examples that use slider widgets (ie. instances of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class) that had been broken by a change in the state properties mechanism have now been fixed.</p>
 		
-		<p>The problem with the slider examples was manifesting as incorrect size for slider knobs and incorrect thickness of borders. The cause of the problem was a refactoring of the ad hoc registration of set-get properties that introduced a subtle but undesirable change in behavior for registering set-get properties in an ad hoc fashion by setting values for unregistering set-get properties on the class. The earlier behavior of the set-get properties mechanism has been restored and unit tests have been written to ensure compliance going forward.</p>
+		<p>The problem with the slider examples was manifesting as incorrect size for slider knobs and incorrect thickness of borders. The cause of the problem was a refactoring of the ad hoc registration of state properties that introduced a subtle but undesirable change in behavior for registering state properties in an ad hoc fashion by setting values for unregistering state properties on the class. The earlier behavior of the state properties mechanism has been restored and unit tests have been written to ensure compliance going forward.</p>
 	</div>
 	
 	<a name="2"></a>

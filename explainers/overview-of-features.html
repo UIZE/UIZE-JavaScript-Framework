@@ -75,9 +75,9 @@
 <pre class="sample-code">var MySubclass = MySuperclass.subclass ();
 </pre>
 		
-		<p>Once you have a subclass, you can modify it by assigning values on its <code>prototype</code> object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties. Each class that you create using the framework inherits the <code>subclass</code> static method, so you can easily make further subclasses of them.</p>
+		<p>Once you have a subclass, you can modify it by assigning values on its <code>prototype</code> object, adding static methods or properties to the subclass, and registering state properties or overriding the initial values of inherited state properties. Each class that you create using the framework inherits the <code>subclass</code> static method, so you can easily make further subclasses of them.</p>
 		
-		<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, set-get properties registered on the superclass using the <code>registerProperties</code> static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses, the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class also provides its subclasses with a <a href="#4">state interface</a> and an <a href="#5">event infrastructure</a>.</p>
+		<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, state properties registered on the superclass using the <code>registerProperties</code> static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses, the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class also provides its subclasses with a <a href="#4">state interface</a> and an <a href="#5">event infrastructure</a>.</p>
 		
 		<p>For a more in-depth discussion on class inheritance, consult the explainer <a href="javascript-inheritance.html">JavaScript Inheritance</a>.</p>
 	</div>
@@ -114,9 +114,9 @@
 	<div class="contents1">
 		<p>The UIZE JavaScript Framework implements a system to facilitate a state-oriented approach to software design.</p>
 		
-		<p>The state interface is provided in the form of the set-get properties system, so named because state is changed by means of the generic <code>set</code> instance and static methods, and state is queried by means of the generic <code>get</code> instance and static methods. While methods exist in many classes to modify state, an emphasis is placed on using the set-get properties system as the primary means for modifying state of instances. The framework encourages thinking of state as passive data, rather than active in the form of setter and getter methods.</p>
+		<p>The state interface is provided in the form of the state properties system, where state is changed by means of the generic <code>set</code> instance and static methods, and state is queried by means of the generic <code>get</code> instance and static methods. While methods exist in many classes to modify state, an emphasis is placed on using the state properties system as the primary means for modifying state of instances. The framework encourages creating interfaces using state properties combined with internal change handlers that respond to changes in state, rather than by creating methods for effecting changes in internal state.</p>
 		
-		<p>Features of the set-get properties system allow for registering properties, defining conformer functions to ensure values are conformed during setting in order to be kept valid, defining change handler functions to respond to changes in values, and registering listeners on the change events that are fired when values change.</p>
+		<p>Features of the state properties system allow for registering properties, defining conformer functions to ensure values are conformed during setting in order to be kept valid, defining change handler functions to respond to changes in values, and registering listeners on the change events that are fired when values change.</p>
 		
 		<p><span class="allCaps">EXAMPLE</span></p>
 		
@@ -156,9 +156,9 @@ myClassInstance4.set ({height:5});
 alert (myClassInstance4.get ('area'); // alerts 25 (width set in constructor, height after)
 </pre>
 		
-		<p>In the above example, a subclass called <code>MyClass</code> is created. The <code>registerProperties</code> static method is called on this class to register the three set-get properties <code>area</code>, <code>height</code>, and <code>width</code>. A conformer is defined for both the <code>height</code> and <code>width</code> properties that ensures that values cannot be set below zero. Moreover, a change handler is registered for both <code>height</code> and <code>width</code> that updates the value of the <code>area</code> property to be the product of the two. A few different instances of <code>MyClass</code> are created, illustrating how the set-get properties mechanism behaves under different conditions.</p>
+		<p>In the above example, a subclass called <code>MyClass</code> is created. The <code>registerProperties</code> static method is called on this class to register the three state properties <code>area</code>, <code>height</code>, and <code>width</code>. A conformer is defined for both the <code>height</code> and <code>width</code> properties that ensures that values cannot be set below zero. Moreover, a change handler is registered for both <code>height</code> and <code>width</code> that updates the value of the <code>area</code> property to be the product of the two. A few different instances of <code>MyClass</code> are created, illustrating how the state properties mechanism behaves under different conditions.</p>
 		
-		<p>For a more in-depth discussion on set-get properties, consult the explainer <a href="set-get-properties.html">Set-get Properties</a>.</p>
+		<p>For a more in-depth discussion on state properties, consult the explainer <a href="state-properties.html">State Properties</a>.</p>
 	</div>
 	
 	<a name="5"></a>
@@ -287,7 +287,7 @@ myWidget.fire ({name:'My Arbitrary Event',message:'Hello, world!'});
 	<div class="contents1">
 		<p>The UIZE JavaScript Framework provides facilities (in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>) to ease <a href="http://en.wikipedia.org/wiki/I18n" target="_blank" class="externalSiteLink">i18n</a> (internationalization) and <a href="http://en.wikipedia.org/wiki/I18n" target="_blank" class="externalSiteLink">L10n</a> (localization) of JavaScript code.</p>
 		
-		<p>The <code>localized</code> set-get property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The <code>localize</code> instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.</p>
+		<p>The <code>localized</code> state property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The <code>localize</code> instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.</p>
 		
 		<p><span class="allCaps">EXAMPLE</span></p>
 		

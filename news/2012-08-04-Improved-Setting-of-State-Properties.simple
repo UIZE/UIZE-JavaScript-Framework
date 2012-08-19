@@ -1,9 +1,9 @@
-Setting of set-get properties has been improved with convenient new variations for the =set= instance method and the =Uize.Class.set= static method, implemented in the =Uize.Class= base class module.
+Setting of state properties has been improved with convenient new variations for the =set= instance method and the =Uize.Class.set= static method, implemented in the =Uize.Class= base class module.
 
 The new variation for both the =set= and =Uize.Class.set= methods provides a convenient way to set the same value or initial value, respectively, for multiple properties. Because this improvement is implemented in the =Uize.Class= base class module, the benefit is conferred upon all =Uize.Class= subclasses, which means all UIZE widgets and other class modules.
 
 Set the Same Value for Multiple Properties
-	The same value can be set for multiple set-get properties by specifying the names of the properties that should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the value they should all be set to in a =propertyValueANYTYPE= parameter.
+	The same value can be set for multiple state properties by specifying the names of the properties that should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the value they should all be set to in a =propertyValueANYTYPE= parameter.
 
 	SYNTAX
 	.........................................................
@@ -38,7 +38,7 @@ Set the Same Value for Multiple Properties
 	.........................................................................
 
 Set the Same Initial Value for Multiple Properties
-	The same initial value can be set for multiple set-get properties by specifying the names of the properties whose initial values should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the initial value that should be set for them all in a =propertyValueANYTYPE= parameter.
+	The same initial value can be set for multiple state properties by specifying the names of the properties whose initial values should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the initial value that should be set for them all in a =propertyValueANYTYPE= parameter.
 
 	SYNTAX
 	......................................................
@@ -80,5 +80,5 @@ Full Documentation and Unit Tests
 ....................................................................................
 << metadata >>
 
-title: 2012-08-04 - Improved Setting of Set-get Properties
+title: 2012-08-04 - Improved Setting of State Properties
 ....................................................................................

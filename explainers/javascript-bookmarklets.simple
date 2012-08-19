@@ -218,7 +218,7 @@ Useful Troubleshooting Bookmarklets
 
 		+. Grab the =id= for the DOM node of interest and provide it to the bookmarklet. Copy the node's =id=, then launch the bookmarklet (which can be on your browser toolbar somewhere). Enter the node =id= in the prompt that pops up.
 
-		+. Upon entering the node's =id= and hitting enter, the bookmarklet will scan through the page's widget tree to find the widget to which the node belongs. If it finds the widget, it will display a report in a popup window. The report will contain such information as the full dereferencing path for the widget (which you can copy-and-paste into Firebug's console, or otherwise use for further debugging goodness), the widget's class, parentage information for the widget, and a summary of the state of the widget's set-get properties.
+		+. Upon entering the node's =id= and hitting enter, the bookmarklet will scan through the page's widget tree to find the widget to which the node belongs. If it finds the widget, it will display a report in a popup window. The report will contain such information as the full dereferencing path for the widget (which you can copy-and-paste into Firebug's console, or otherwise use for further debugging goodness), the widget's class, parentage information for the widget, and a summary of the state of the widget's state properties.
 
 		Page Widget Expected
 			This bookmarklet assumes that the page has a single page widget instance that contains the page's widget tree, and that the page widget instance is accessible by a global identifier named either =page= (as is the general convention) or =zPage= (as is the convention for Zazzle's Web site).

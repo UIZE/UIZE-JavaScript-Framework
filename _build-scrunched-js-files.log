@@ -1,0 +1,4560 @@
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Array.Dupes.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Array.Dupes.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 24ms
+		Unique Identifiers Scrunched: 31
+		Incidences of Identifiers Scrunched: 167
+		Savings From Scrunched Identifiers: 1537
+		Savings From Removed Whitespace: 791
+		Total Comments Removed: 7
+		Savings From Removed Comments: 3122
+		Savings From Removed Linebreaks: 269
+		Supposed Total Savings: 5719
+		Real Total Savings: 5719
+
+		FINAL SIZE: 1319
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Array.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Array.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 799
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 816
+		Real Total Savings: 816
+
+		FINAL SIZE: 33
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Array.Order.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Array.Order.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 15
+		Incidences of Identifiers Scrunched: 98
+		Savings From Scrunched Identifiers: 761
+		Savings From Removed Whitespace: 545
+		Total Comments Removed: 12
+		Savings From Removed Comments: 16978
+		Savings From Removed Linebreaks: 190
+		Supposed Total Savings: 18474
+		Real Total Savings: 18474
+
+		FINAL SIZE: 1015
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Array.Sort.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Array.Sort.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 13
+		Incidences of Identifiers Scrunched: 63
+		Savings From Scrunched Identifiers: 653
+		Savings From Removed Whitespace: 381
+		Total Comments Removed: 10
+		Savings From Removed Comments: 39031
+		Savings From Removed Linebreaks: 130
+		Supposed Total Savings: 40195
+		Real Total Savings: 40195
+
+		FINAL SIZE: 717
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Array.Util.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Array.Util.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 16
+		Incidences of Identifiers Scrunched: 69
+		Savings From Scrunched Identifiers: 596
+		Savings From Removed Whitespace: 305
+		Total Comments Removed: 8
+		Savings From Removed Comments: 8062
+		Savings From Removed Linebreaks: 134
+		Supposed Total Savings: 9097
+		Real Total Savings: 9097
+
+		FINAL SIZE: 596
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.AuditStrings.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.AuditStrings.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 30ms
+		Unique Identifiers Scrunched: 20
+		Incidences of Identifiers Scrunched: 70
+		Savings From Scrunched Identifiers: 795
+		Savings From Removed Whitespace: 1093
+		Total Comments Removed: 27
+		Savings From Removed Comments: 4692
+		Savings From Removed Linebreaks: 276
+		Supposed Total Savings: 6856
+		Real Total Savings: 6856
+
+		FINAL SIZE: 2369
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.AutoScruncher.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.AutoScruncher.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 36ms
+		Unique Identifiers Scrunched: 35
+		Incidences of Identifiers Scrunched: 142
+		Savings From Scrunched Identifiers: 2035
+		Savings From Removed Whitespace: 1710
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1190
+		Savings From Removed Linebreaks: 392
+		Supposed Total Savings: 5327
+		Real Total Savings: 5327
+
+		FINAL SIZE: 2815
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.BuildSimpleDataPages.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.BuildSimpleDataPages.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 36ms
+		Unique Identifiers Scrunched: 10
+		Incidences of Identifiers Scrunched: 33
+		Savings From Scrunched Identifiers: 470
+		Savings From Removed Whitespace: 345
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1053
+		Savings From Removed Linebreaks: 128
+		Supposed Total Savings: 1996
+		Real Total Savings: 1996
+
+		FINAL SIZE: 699
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.BuildSimpleDocPages.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.BuildSimpleDocPages.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 39ms
+		Unique Identifiers Scrunched: 52
+		Incidences of Identifiers Scrunched: 175
+		Savings From Scrunched Identifiers: 2390
+		Savings From Removed Whitespace: 1620
+		Total Comments Removed: 14
+		Savings From Removed Comments: 1701
+		Savings From Removed Linebreaks: 450
+		Supposed Total Savings: 6161
+		Real Total Savings: 6161
+
+		FINAL SIZE: 2701
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.CompileJstModules.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.CompileJstModules.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 10
+		Incidences of Identifiers Scrunched: 32
+		Savings From Scrunched Identifiers: 380
+		Savings From Removed Whitespace: 321
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1047
+		Savings From Removed Linebreaks: 120
+		Supposed Total Savings: 1868
+		Real Total Savings: 1868
+
+		FINAL SIZE: 677
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 774
+		Savings From Removed Linebreaks: 8
+		Supposed Total Savings: 783
+		Real Total Savings: 783
+
+		FINAL SIZE: 33
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.ModuleInfo.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.ModuleInfo.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 18
+		Incidences of Identifiers Scrunched: 63
+		Savings From Scrunched Identifiers: 618
+		Savings From Removed Whitespace: 328
+		Total Comments Removed: 7
+		Savings From Removed Comments: 1008
+		Savings From Removed Linebreaks: 152
+		Supposed Total Savings: 2106
+		Real Total Savings: 2106
+
+		FINAL SIZE: 777
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.NeatenJsFiles.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.NeatenJsFiles.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 8ms
+		Unique Identifiers Scrunched: 6
+		Incidences of Identifiers Scrunched: 22
+		Savings From Scrunched Identifiers: 253
+		Savings From Removed Whitespace: 342
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1046
+		Savings From Removed Linebreaks: 118
+		Supposed Total Savings: 1759
+		Real Total Savings: 1759
+
+		FINAL SIZE: 685
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.Scruncher.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.Scruncher.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 59ms
+		Unique Identifiers Scrunched: 82
+		Incidences of Identifiers Scrunched: 465
+		Savings From Scrunched Identifiers: 5308
+		Savings From Removed Whitespace: 3211
+		Total Comments Removed: 45
+		Savings From Removed Comments: 8346
+		Savings From Removed Linebreaks: 802
+		Supposed Total Savings: 17667
+		Real Total Savings: 17667
+
+		FINAL SIZE: 4204
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.UpdateCopyrightNotices.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.UpdateCopyrightNotices.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 13
+		Incidences of Identifiers Scrunched: 41
+		Savings From Scrunched Identifiers: 606
+		Savings From Removed Whitespace: 446
+		Total Comments Removed: 6
+		Savings From Removed Comments: 1108
+		Savings From Removed Linebreaks: 136
+		Supposed Total Savings: 2296
+		Real Total Savings: 2296
+
+		FINAL SIZE: 738
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Build.Util.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Build.Util.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 48ms
+		Unique Identifiers Scrunched: 59
+		Incidences of Identifiers Scrunched: 240
+		Savings From Scrunched Identifiers: 2417
+		Savings From Removed Whitespace: 2090
+		Total Comments Removed: 15
+		Savings From Removed Comments: 1657
+		Savings From Removed Linebreaks: 587
+		Supposed Total Savings: 6751
+		Real Total Savings: 6751
+
+		FINAL SIZE: 3963
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Class.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Class.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 86ms
+		Unique Identifiers Scrunched: 107
+		Incidences of Identifiers Scrunched: 736
+		Savings From Scrunched Identifiers: 7535
+		Savings From Removed Whitespace: 4352
+		Total Comments Removed: 61
+		Savings From Removed Comments: 86326
+		Savings From Removed Linebreaks: 1180
+		Supposed Total Savings: 99393
+		Real Total Savings: 99393
+
+		FINAL SIZE: 6175
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Class.Value.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Class.Value.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 3
+		Incidences of Identifiers Scrunched: 6
+		Savings From Scrunched Identifiers: 28
+		Savings From Removed Whitespace: 30
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1169
+		Savings From Removed Linebreaks: 44
+		Supposed Total Savings: 1271
+		Real Total Savings: 1271
+
+		FINAL SIZE: 159
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Color.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Color.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 65ms
+		Unique Identifiers Scrunched: 62
+		Incidences of Identifiers Scrunched: 418
+		Savings From Scrunched Identifiers: 3186
+		Savings From Removed Whitespace: 3021
+		Total Comments Removed: 67
+		Savings From Removed Comments: 63434
+		Savings From Removed Linebreaks: 842
+		Supposed Total Savings: 70483
+		Real Total Savings: 70483
+
+		FINAL SIZE: 4888
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Color.xCmyk.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Color.xCmyk.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 11
+		Incidences of Identifiers Scrunched: 74
+		Savings From Scrunched Identifiers: 536
+		Savings From Removed Whitespace: 561
+		Total Comments Removed: 10
+		Savings From Removed Comments: 7851
+		Savings From Removed Linebreaks: 174
+		Supposed Total Savings: 9122
+		Real Total Savings: 9122
+
+		FINAL SIZE: 977
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Color.xHsv.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Color.xHsv.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 20ms
+		Unique Identifiers Scrunched: 11
+		Incidences of Identifiers Scrunched: 64
+		Savings From Scrunched Identifiers: 554
+		Savings From Removed Whitespace: 484
+		Total Comments Removed: 10
+		Savings From Removed Comments: 7675
+		Savings From Removed Linebreaks: 156
+		Supposed Total Savings: 8869
+		Real Total Savings: 8869
+
+		FINAL SIZE: 812
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Color.xSvgColors.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Color.xSvgColors.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 26ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 2
+		Savings From Scrunched Identifiers: 18
+		Savings From Removed Whitespace: 2112
+		Total Comments Removed: 134
+		Savings From Removed Comments: 10165
+		Savings From Removed Linebreaks: 288
+		Supposed Total Savings: 12583
+		Real Total Savings: 12583
+
+		FINAL SIZE: 2540
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Color.xUtil.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Color.xUtil.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 45ms
+		Unique Identifiers Scrunched: 59
+		Incidences of Identifiers Scrunched: 326
+		Savings From Scrunched Identifiers: 3600
+		Savings From Removed Whitespace: 1460
+		Total Comments Removed: 19
+		Savings From Removed Comments: 31860
+		Savings From Removed Linebreaks: 480
+		Supposed Total Savings: 37400
+		Real Total Savings: 37400
+
+		FINAL SIZE: 2575
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.Ajax.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Comm.Ajax.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 17
+		Incidences of Identifiers Scrunched: 86
+		Savings From Scrunched Identifiers: 665
+		Savings From Removed Whitespace: 503
+		Total Comments Removed: 7
+		Savings From Removed Comments: 1479
+		Savings From Removed Linebreaks: 171
+		Supposed Total Savings: 2818
+		Real Total Savings: 2818
+
+		FINAL SIZE: 1258
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.Iframe.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Comm.Iframe.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 20ms
+		Unique Identifiers Scrunched: 15
+		Incidences of Identifiers Scrunched: 47
+		Savings From Scrunched Identifiers: 321
+		Savings From Removed Whitespace: 383
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1953
+		Savings From Removed Linebreaks: 159
+		Supposed Total Savings: 2816
+		Real Total Savings: 2816
+
+		FINAL SIZE: 1351
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.Iframe.Upload.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Comm.Iframe.Upload.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 12
+		Incidences of Identifiers Scrunched: 34
+		Savings From Scrunched Identifiers: 261
+		Savings From Removed Whitespace: 208
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1219
+		Savings From Removed Linebreaks: 110
+		Supposed Total Savings: 1798
+		Real Total Savings: 1798
+
+		FINAL SIZE: 608
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Comm.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 36ms
+		Unique Identifiers Scrunched: 43
+		Incidences of Identifiers Scrunched: 271
+		Savings From Scrunched Identifiers: 2545
+		Savings From Removed Whitespace: 1875
+		Total Comments Removed: 28
+		Savings From Removed Comments: 15913
+		Savings From Removed Linebreaks: 543
+		Supposed Total Savings: 20876
+		Real Total Savings: 20876
+
+		FINAL SIZE: 3052
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.Script.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Comm.Script.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 11ms
+		Unique Identifiers Scrunched: 15
+		Incidences of Identifiers Scrunched: 57
+		Savings From Scrunched Identifiers: 424
+		Savings From Removed Whitespace: 340
+		Total Comments Removed: 8
+		Savings From Removed Comments: 3312
+		Savings From Removed Linebreaks: 154
+		Supposed Total Savings: 4230
+		Real Total Savings: 4230
+
+		FINAL SIZE: 912
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Cookie.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Cookie.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 13
+		Incidences of Identifiers Scrunched: 55
+		Savings From Scrunched Identifiers: 353
+		Savings From Removed Whitespace: 319
+		Total Comments Removed: 7
+		Savings From Removed Comments: 2516
+		Savings From Removed Linebreaks: 116
+		Supposed Total Savings: 3304
+		Real Total Savings: 3304
+
+		FINAL SIZE: 679
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Curve.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Curve.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 40ms
+		Unique Identifiers Scrunched: 33
+		Incidences of Identifiers Scrunched: 221
+		Savings From Scrunched Identifiers: 1740
+		Savings From Removed Whitespace: 1400
+		Total Comments Removed: 21
+		Savings From Removed Comments: 41888
+		Savings From Removed Linebreaks: 398
+		Supposed Total Savings: 45426
+		Real Total Savings: 45426
+
+		FINAL SIZE: 2125
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Curve.Mod.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Curve.Mod.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 31ms
+		Unique Identifiers Scrunched: 44
+		Incidences of Identifiers Scrunched: 283
+		Savings From Scrunched Identifiers: 2563
+		Savings From Removed Whitespace: 1256
+		Total Comments Removed: 13
+		Savings From Removed Comments: 26553
+		Savings From Removed Linebreaks: 359
+		Supposed Total Savings: 30731
+		Real Total Savings: 30731
+
+		FINAL SIZE: 1845
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Curve.Rubber.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Curve.Rubber.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 114ms
+		Unique Identifiers Scrunched: 31
+		Incidences of Identifiers Scrunched: 126
+		Savings From Scrunched Identifiers: 1241
+		Savings From Removed Whitespace: 884
+		Total Comments Removed: 22
+		Savings From Removed Comments: 26425
+		Savings From Removed Linebreaks: 252
+		Supposed Total Savings: 28802
+		Real Total Savings: 28802
+
+		FINAL SIZE: 971
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Data.Combinations.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Data.Combinations.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 20ms
+		Unique Identifiers Scrunched: 20
+		Incidences of Identifiers Scrunched: 102
+		Savings From Scrunched Identifiers: 1144
+		Savings From Removed Whitespace: 725
+		Total Comments Removed: 16
+		Savings From Removed Comments: 40331
+		Savings From Removed Linebreaks: 228
+		Supposed Total Savings: 42428
+		Real Total Savings: 42428
+
+		FINAL SIZE: 754
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Data.Csv.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Data.Csv.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 47ms
+		Unique Identifiers Scrunched: 54
+		Incidences of Identifiers Scrunched: 279
+		Savings From Scrunched Identifiers: 3017
+		Savings From Removed Whitespace: 1429
+		Total Comments Removed: 21
+		Savings From Removed Comments: 67702
+		Savings From Removed Linebreaks: 400
+		Supposed Total Savings: 72548
+		Real Total Savings: 72548
+
+		FINAL SIZE: 2228
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Data.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Data.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 35ms
+		Unique Identifiers Scrunched: 61
+		Incidences of Identifiers Scrunched: 291
+		Savings From Scrunched Identifiers: 2568
+		Savings From Removed Whitespace: 1744
+		Total Comments Removed: 28
+		Savings From Removed Comments: 24181
+		Savings From Removed Linebreaks: 518
+		Supposed Total Savings: 29011
+		Real Total Savings: 29011
+
+		FINAL SIZE: 2387
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Data.Matches.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Data.Matches.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 20ms
+		Unique Identifiers Scrunched: 26
+		Incidences of Identifiers Scrunched: 186
+		Savings From Scrunched Identifiers: 1274
+		Savings From Removed Whitespace: 690
+		Total Comments Removed: 13
+		Savings From Removed Comments: 20002
+		Savings From Removed Linebreaks: 279
+		Supposed Total Savings: 22245
+		Real Total Savings: 22245
+
+		FINAL SIZE: 1252
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Data.NameValueRecords.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Data.NameValueRecords.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 13
+		Incidences of Identifiers Scrunched: 69
+		Savings From Scrunched Identifiers: 592
+		Savings From Removed Whitespace: 321
+		Total Comments Removed: 9
+		Savings From Removed Comments: 40317
+		Savings From Removed Linebreaks: 132
+		Supposed Total Savings: 41362
+		Real Total Savings: 41362
+
+		FINAL SIZE: 587
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Data.PathsTree.CompactString.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Data.PathsTree.CompactString.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 16ms
+		Unique Identifiers Scrunched: 26
+		Incidences of Identifiers Scrunched: 129
+		Savings From Scrunched Identifiers: 1272
+		Savings From Removed Whitespace: 671
+		Total Comments Removed: 5
+		Savings From Removed Comments: 870
+		Savings From Removed Linebreaks: 208
+		Supposed Total Savings: 3021
+		Real Total Savings: 3021
+
+		FINAL SIZE: 1006
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Data.PathsTree.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Data.PathsTree.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 17
+		Incidences of Identifiers Scrunched: 65
+		Savings From Scrunched Identifiers: 492
+		Savings From Removed Whitespace: 306
+		Total Comments Removed: 5
+		Savings From Removed Comments: 842
+		Savings From Removed Linebreaks: 126
+		Supposed Total Savings: 1766
+		Real Total Savings: 1766
+
+		FINAL SIZE: 477
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Data.Simple.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Data.Simple.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 50ms
+		Unique Identifiers Scrunched: 53
+		Incidences of Identifiers Scrunched: 283
+		Savings From Scrunched Identifiers: 2522
+		Savings From Removed Whitespace: 1913
+		Total Comments Removed: 19
+		Savings From Removed Comments: 6690
+		Savings From Removed Linebreaks: 498
+		Supposed Total Savings: 11623
+		Real Total Savings: 11623
+
+		FINAL SIZE: 2556
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Date.Formatter.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Date.Formatter.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 60ms
+		Unique Identifiers Scrunched: 31
+		Incidences of Identifiers Scrunched: 129
+		Savings From Scrunched Identifiers: 1239
+		Savings From Removed Whitespace: 1166
+		Total Comments Removed: 14
+		Savings From Removed Comments: 40032
+		Savings From Removed Linebreaks: 371
+		Supposed Total Savings: 42808
+		Real Total Savings: 42808
+
+		FINAL SIZE: 1913
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Date.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Date.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 54ms
+		Unique Identifiers Scrunched: 51
+		Incidences of Identifiers Scrunched: 270
+		Savings From Scrunched Identifiers: 1843
+		Savings From Removed Whitespace: 1592
+		Total Comments Removed: 35
+		Savings From Removed Comments: 40554
+		Savings From Removed Linebreaks: 523
+		Supposed Total Savings: 44512
+		Real Total Savings: 44512
+
+		FINAL SIZE: 3749
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Doc.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Doc.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 796
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 813
+		Real Total Savings: 813
+
+		FINAL SIZE: 31
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Doc.Simple.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Doc.Simple.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 133ms
+		Unique Identifiers Scrunched: 142
+		Incidences of Identifiers Scrunched: 690
+		Savings From Scrunched Identifiers: 6841
+		Savings From Removed Whitespace: 5375
+		Total Comments Removed: 44
+		Savings From Removed Comments: 9382
+		Savings From Removed Linebreaks: 1238
+		Supposed Total Savings: 22836
+		Real Total Savings: 22836
+
+		FINAL SIZE: 8116
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Doc.Sucker.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Doc.Sucker.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 54ms
+		Unique Identifiers Scrunched: 45
+		Incidences of Identifiers Scrunched: 219
+		Savings From Scrunched Identifiers: 2488
+		Savings From Removed Whitespace: 3691
+		Total Comments Removed: 22
+		Savings From Removed Comments: 1846
+		Savings From Removed Linebreaks: 777
+		Supposed Total Savings: 8802
+		Real Total Savings: 8802
+
+		FINAL SIZE: 5186
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Fade.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Fade.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 40ms
+		Unique Identifiers Scrunched: 54
+		Incidences of Identifiers Scrunched: 292
+		Savings From Scrunched Identifiers: 2368
+		Savings From Removed Whitespace: 1861
+		Total Comments Removed: 31
+		Savings From Removed Comments: 28709
+		Savings From Removed Linebreaks: 560
+		Supposed Total Savings: 33498
+		Real Total Savings: 33498
+
+		FINAL SIZE: 2647
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Fade.xFactory.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Fade.xFactory.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 35ms
+		Unique Identifiers Scrunched: 52
+		Incidences of Identifiers Scrunched: 287
+		Savings From Scrunched Identifiers: 2793
+		Savings From Removed Whitespace: 1677
+		Total Comments Removed: 18
+		Savings From Removed Comments: 13101
+		Savings From Removed Linebreaks: 438
+		Supposed Total Savings: 18009
+		Real Total Savings: 18009
+
+		FINAL SIZE: 2169
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Fade.xSeries.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Fade.xSeries.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 9
+		Incidences of Identifiers Scrunched: 26
+		Savings From Scrunched Identifiers: 205
+		Savings From Removed Whitespace: 131
+		Total Comments Removed: 7
+		Savings From Removed Comments: 6016
+		Savings From Removed Linebreaks: 76
+		Supposed Total Savings: 6428
+		Real Total Savings: 6428
+
+		FINAL SIZE: 347
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Fx.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Fx.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 62ms
+		Unique Identifiers Scrunched: 43
+		Incidences of Identifiers Scrunched: 218
+		Savings From Scrunched Identifiers: 2497
+		Savings From Removed Whitespace: 1445
+		Total Comments Removed: 24
+		Savings From Removed Comments: 27056
+		Savings From Removed Linebreaks: 497
+		Supposed Total Savings: 31495
+		Real Total Savings: 31495
+
+		FINAL SIZE: 3029
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Fx.xShadows.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Fx.xShadows.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 20ms
+		Unique Identifiers Scrunched: 22
+		Incidences of Identifiers Scrunched: 99
+		Savings From Scrunched Identifiers: 1345
+		Savings From Removed Whitespace: 620
+		Total Comments Removed: 6
+		Savings From Removed Comments: 20490
+		Savings From Removed Linebreaks: 221
+		Supposed Total Savings: 22676
+		Real Total Savings: 22676
+
+		FINAL SIZE: 1413
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Fx.xTextShadow.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Fx.xTextShadow.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 847
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 864
+		Real Total Savings: 864
+
+		FINAL SIZE: 70
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 180ms
+		Unique Identifiers Scrunched: 159
+		Incidences of Identifiers Scrunched: 1053
+		Savings From Scrunched Identifiers: 8155
+		Savings From Removed Whitespace: 4631
+		Total Comments Removed: 99
+		Savings From Removed Comments: 237328
+		Savings From Removed Linebreaks: 1711
+		Supposed Total Savings: 251825
+		Real Total Savings: 251825
+
+		FINAL SIZE: 9463
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Json.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Json.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 40ms
+		Unique Identifiers Scrunched: 64
+		Incidences of Identifiers Scrunched: 261
+		Savings From Scrunched Identifiers: 2612
+		Savings From Removed Whitespace: 2043
+		Total Comments Removed: 21
+		Savings From Removed Comments: 20492
+		Savings From Removed Linebreaks: 498
+		Supposed Total Savings: 25645
+		Real Total Savings: 25645
+
+		FINAL SIZE: 2884
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Node.Classes.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Node.Classes.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 25ms
+		Unique Identifiers Scrunched: 26
+		Incidences of Identifiers Scrunched: 148
+		Savings From Scrunched Identifiers: 1331
+		Savings From Removed Whitespace: 785
+		Total Comments Removed: 14
+		Savings From Removed Comments: 42145
+		Savings From Removed Linebreaks: 275
+		Supposed Total Savings: 44536
+		Real Total Savings: 44536
+
+		FINAL SIZE: 1275
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Node.Event.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Node.Event.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 17ms
+		Unique Identifiers Scrunched: 6
+		Incidences of Identifiers Scrunched: 82
+		Savings From Scrunched Identifiers: 431
+		Savings From Removed Whitespace: 434
+		Total Comments Removed: 19
+		Savings From Removed Comments: 22008
+		Savings From Removed Linebreaks: 191
+		Supposed Total Savings: 23064
+		Real Total Savings: 23064
+
+		FINAL SIZE: 1372
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Node.Form.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Node.Form.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 14
+		Incidences of Identifiers Scrunched: 59
+		Savings From Scrunched Identifiers: 331
+		Savings From Removed Whitespace: 296
+		Total Comments Removed: 9
+		Savings From Removed Comments: 11466
+		Savings From Removed Linebreaks: 132
+		Supposed Total Savings: 12225
+		Real Total Savings: 12225
+
+		FINAL SIZE: 669
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Node.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Node.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 213ms
+		Unique Identifiers Scrunched: 227
+		Incidences of Identifiers Scrunched: 1547
+		Savings From Scrunched Identifiers: 12406
+		Savings From Removed Whitespace: 9110
+		Total Comments Removed: 94
+		Savings From Removed Comments: 83446
+		Savings From Removed Linebreaks: 2372
+		Supposed Total Savings: 107334
+		Real Total Savings: 107334
+
+		FINAL SIZE: 14958
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Node.Tree.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Node.Tree.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 30ms
+		Unique Identifiers Scrunched: 33
+		Incidences of Identifiers Scrunched: 181
+		Savings From Scrunched Identifiers: 1453
+		Savings From Removed Whitespace: 973
+		Total Comments Removed: 8
+		Savings From Removed Comments: 35136
+		Savings From Removed Linebreaks: 269
+		Supposed Total Savings: 37831
+		Real Total Savings: 37831
+
+		FINAL SIZE: 1771
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Node.Util.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Node.Util.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 15
+		Incidences of Identifiers Scrunched: 52
+		Savings From Scrunched Identifiers: 401
+		Savings From Removed Whitespace: 279
+		Total Comments Removed: 10
+		Savings From Removed Comments: 6486
+		Savings From Removed Linebreaks: 132
+		Supposed Total Savings: 7298
+		Real Total Savings: 7298
+
+		FINAL SIZE: 694
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Node.VirtualEvent.Edge.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Node.VirtualEvent.Edge.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 24ms
+		Unique Identifiers Scrunched: 21
+		Incidences of Identifiers Scrunched: 62
+		Savings From Scrunched Identifiers: 530
+		Savings From Removed Whitespace: 674
+		Total Comments Removed: 21
+		Savings From Removed Comments: 17464
+		Savings From Removed Linebreaks: 204
+		Supposed Total Savings: 18872
+		Real Total Savings: 18872
+
+		FINAL SIZE: 821
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Node.VirtualEvent.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Node.VirtualEvent.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 33ms
+		Unique Identifiers Scrunched: 33
+		Incidences of Identifiers Scrunched: 188
+		Savings From Scrunched Identifiers: 1814
+		Savings From Removed Whitespace: 1281
+		Total Comments Removed: 33
+		Savings From Removed Comments: 93580
+		Savings From Removed Linebreaks: 413
+		Supposed Total Savings: 97088
+		Real Total Savings: 97088
+
+		FINAL SIZE: 1971
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Service.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Service.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 40ms
+		Unique Identifiers Scrunched: 43
+		Incidences of Identifiers Scrunched: 234
+		Savings From Scrunched Identifiers: 1965
+		Savings From Removed Whitespace: 2418
+		Total Comments Removed: 23
+		Savings From Removed Comments: 1888
+		Savings From Removed Linebreaks: 306
+		Supposed Total Savings: 6577
+		Real Total Savings: 6577
+
+		FINAL SIZE: 3866
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Services.FileSystem.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Services.FileSystem.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 6
+		Incidences of Identifiers Scrunched: 11
+		Savings From Scrunched Identifiers: 65
+		Savings From Removed Whitespace: 95
+		Total Comments Removed: 8
+		Savings From Removed Comments: 986
+		Savings From Removed Linebreaks: 37
+		Supposed Total Savings: 1183
+		Real Total Savings: 1183
+
+		FINAL SIZE: 226
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Services.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Services.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 790
+		Savings From Removed Linebreaks: 8
+		Supposed Total Savings: 799
+		Real Total Savings: 799
+
+		FINAL SIZE: 36
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.String.Builder.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.String.Builder.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 14ms
+		Unique Identifiers Scrunched: 7
+		Incidences of Identifiers Scrunched: 47
+		Savings From Scrunched Identifiers: 335
+		Savings From Removed Whitespace: 374
+		Total Comments Removed: 12
+		Savings From Removed Comments: 28706
+		Savings From Removed Linebreaks: 139
+		Supposed Total Savings: 29554
+		Real Total Savings: 29554
+
+		FINAL SIZE: 1074
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.String.Discombobulator.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.String.Discombobulator.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 43ms
+		Unique Identifiers Scrunched: 59
+		Incidences of Identifiers Scrunched: 269
+		Savings From Scrunched Identifiers: 2761
+		Savings From Removed Whitespace: 2216
+		Total Comments Removed: 16
+		Savings From Removed Comments: 2642
+		Savings From Removed Linebreaks: 645
+		Supposed Total Savings: 8264
+		Real Total Savings: 8264
+
+		FINAL SIZE: 3549
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.String.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.String.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 38ms
+		Unique Identifiers Scrunched: 44
+		Incidences of Identifiers Scrunched: 287
+		Savings From Scrunched Identifiers: 2473
+		Savings From Removed Whitespace: 1662
+		Total Comments Removed: 31
+		Savings From Removed Comments: 38300
+		Savings From Removed Linebreaks: 532
+		Supposed Total Savings: 42967
+		Real Total Savings: 42967
+
+		FINAL SIZE: 2981
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.String.Lines.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.String.Lines.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 37ms
+		Unique Identifiers Scrunched: 37
+		Incidences of Identifiers Scrunched: 217
+		Savings From Scrunched Identifiers: 1997
+		Savings From Removed Whitespace: 1206
+		Total Comments Removed: 23
+		Savings From Removed Comments: 46221
+		Savings From Removed Linebreaks: 414
+		Supposed Total Savings: 49838
+		Real Total Savings: 49838
+
+		FINAL SIZE: 2405
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Template.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Template.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 46ms
+		Unique Identifiers Scrunched: 74
+		Incidences of Identifiers Scrunched: 291
+		Savings From Scrunched Identifiers: 4063
+		Savings From Removed Whitespace: 2047
+		Total Comments Removed: 31
+		Savings From Removed Comments: 53521
+		Savings From Removed Linebreaks: 622
+		Supposed Total Savings: 60253
+		Real Total Savings: 60253
+
+		FINAL SIZE: 2964
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.Calculator.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.Calculator.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 22ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 91
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1775
+		Savings From Removed Linebreaks: 42
+		Supposed Total Savings: 1932
+		Real Total Savings: 1932
+
+		FINAL SIZE: 4816
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.Calendar.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.Calendar.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 73
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1749
+		Savings From Removed Linebreaks: 42
+		Supposed Total Savings: 1888
+		Real Total Savings: 1888
+
+		FINAL SIZE: 1166
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.Collection.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.Collection.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 71
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1769
+		Savings From Removed Linebreaks: 44
+		Supposed Total Savings: 1908
+		Real Total Savings: 1908
+
+		FINAL SIZE: 837
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.CollectionItem.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.CollectionItem.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 71
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1815
+		Savings From Removed Linebreaks: 44
+		Supposed Total Savings: 1954
+		Real Total Savings: 1954
+
+		FINAL SIZE: 1006
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.ColorInfo.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.ColorInfo.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 69
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1765
+		Savings From Removed Linebreaks: 44
+		Supposed Total Savings: 1902
+		Real Total Savings: 1902
+
+		FINAL SIZE: 947
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.HashTable.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.HashTable.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 100
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1447
+		Savings From Removed Linebreaks: 49
+		Supposed Total Savings: 1620
+		Real Total Savings: 1620
+
+		FINAL SIZE: 557
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 840
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 857
+		Real Total Savings: 857
+
+		FINAL SIZE: 37
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.JstModule.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.JstModule.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 108
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1941
+		Savings From Removed Linebreaks: 53
+		Supposed Total Savings: 2126
+		Real Total Savings: 2126
+
+		FINAL SIZE: 1102
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.List.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.List.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 12ms
+		Unique Identifiers Scrunched: 16
+		Incidences of Identifiers Scrunched: 63
+		Savings From Scrunched Identifiers: 474
+		Savings From Removed Whitespace: 452
+		Total Comments Removed: 6
+		Savings From Removed Comments: 4525
+		Savings From Removed Linebreaks: 152
+		Supposed Total Savings: 5603
+		Real Total Savings: 5603
+
+		FINAL SIZE: 787
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.Log.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.Log.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 72
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1721
+		Savings From Removed Linebreaks: 45
+		Supposed Total Savings: 1862
+		Real Total Savings: 1862
+
+		FINAL SIZE: 519
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.SevenSegmentDisplay.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.SevenSegmentDisplay.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 68
+		Total Comments Removed: 4
+		Savings From Removed Comments: 354
+		Savings From Removed Linebreaks: 41
+		Supposed Total Savings: 487
+		Real Total Savings: 487
+
+		FINAL SIZE: 2628
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.SevenSegmentDisplayDimsCss.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.SevenSegmentDisplayDimsCss.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 11ms
+		Unique Identifiers Scrunched: 7
+		Incidences of Identifiers Scrunched: 36
+		Savings From Scrunched Identifiers: 525
+		Savings From Removed Whitespace: 145
+		Total Comments Removed: 4
+		Savings From Removed Comments: 361
+		Savings From Removed Linebreaks: 63
+		Supposed Total Savings: 1094
+		Real Total Savings: 1094
+
+		FINAL SIZE: 1425
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.SimpleDoc.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Templates.SimpleDoc.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 37ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 94
+		Total Comments Removed: 3
+		Savings From Removed Comments: 195
+		Savings From Removed Linebreaks: 58
+		Supposed Total Savings: 371
+		Real Total Savings: 371
+
+		FINAL SIZE: 9806
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 101ms
+		Unique Identifiers Scrunched: 89
+		Incidences of Identifiers Scrunched: 586
+		Savings From Scrunched Identifiers: 4176
+		Savings From Removed Whitespace: 4035
+		Total Comments Removed: 82
+		Savings From Removed Comments: 93443
+		Savings From Removed Linebreaks: 1320
+		Supposed Total Savings: 102974
+		Real Total Savings: 102974
+
+		FINAL SIZE: 8348
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Performance.ArrayBuildingStyles.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Performance.ArrayBuildingStyles.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 3
+		Incidences of Identifiers Scrunched: 14
+		Savings From Scrunched Identifiers: 126
+		Savings From Removed Whitespace: 144
+		Total Comments Removed: 3
+		Savings From Removed Comments: 842
+		Savings From Removed Linebreaks: 74
+		Supposed Total Savings: 1186
+		Real Total Savings: 1186
+
+		FINAL SIZE: 571
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Performance.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Performance.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 783
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 800
+		Real Total Savings: 800
+
+		FINAL SIZE: 44
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Array.Dupes.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Array.Dupes.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1086ms
+		Unique Identifiers Scrunched: 12
+		Incidences of Identifiers Scrunched: 78
+		Savings From Scrunched Identifiers: 398
+		Savings From Removed Whitespace: 1372
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1112
+		Savings From Removed Linebreaks: 337
+		Supposed Total Savings: 3219
+		Real Total Savings: 3219
+
+		FINAL SIZE: 3313
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Array.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Array.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 29ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 25
+		Total Comments Removed: 3
+		Savings From Removed Comments: 784
+		Savings From Removed Linebreaks: 36
+		Supposed Total Savings: 845
+		Real Total Savings: 845
+
+		FINAL SIZE: 178
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Array.Order.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Array.Order.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 417ms
+		Unique Identifiers Scrunched: 10
+		Incidences of Identifiers Scrunched: 30
+		Savings From Scrunched Identifiers: 354
+		Savings From Removed Whitespace: 936
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1000
+		Savings From Removed Linebreaks: 311
+		Supposed Total Savings: 2601
+		Real Total Savings: 2601
+
+		FINAL SIZE: 3920
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Array.Sort.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Array.Sort.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 99ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 6
+		Savings From Scrunched Identifiers: 54
+		Savings From Removed Whitespace: 1153
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1123
+		Savings From Removed Linebreaks: 299
+		Supposed Total Savings: 2629
+		Real Total Savings: 2629
+
+		FINAL SIZE: 3932
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Array.Util.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Array.Util.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 166ms
+		Unique Identifiers Scrunched: 5
+		Incidences of Identifiers Scrunched: 96
+		Savings From Scrunched Identifiers: 499
+		Savings From Removed Whitespace: 2289
+		Total Comments Removed: 6
+		Savings From Removed Comments: 949
+		Savings From Removed Linebreaks: 528
+		Supposed Total Savings: 4265
+		Real Total Savings: 4265
+
+		FINAL SIZE: 6884
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Class.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Class.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1234ms
+		Unique Identifiers Scrunched: 140
+		Incidences of Identifiers Scrunched: 1594
+		Savings From Scrunched Identifiers: 15436
+		Savings From Removed Whitespace: 26830
+		Total Comments Removed: 13
+		Savings From Removed Comments: 1562
+		Savings From Removed Linebreaks: 5493
+		Supposed Total Savings: 49321
+		Real Total Savings: 49321
+
+		FINAL SIZE: 57544
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Data.Combinations.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Data.Combinations.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 374ms
+		Unique Identifiers Scrunched: 6
+		Incidences of Identifiers Scrunched: 197
+		Savings From Scrunched Identifiers: 2376
+		Savings From Removed Whitespace: 7024
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1162
+		Savings From Removed Linebreaks: 1568
+		Supposed Total Savings: 12130
+		Real Total Savings: 12130
+
+		FINAL SIZE: 19817
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Data.Csv.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Data.Csv.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 110ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 3
+		Savings From Scrunched Identifiers: 27
+		Savings From Removed Whitespace: 2691
+		Total Comments Removed: 3
+		Savings From Removed Comments: 786
+		Savings From Removed Linebreaks: 714
+		Supposed Total Savings: 4218
+		Real Total Savings: 4218
+
+		FINAL SIZE: 8183
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Data.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Data.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 345ms
+		Unique Identifiers Scrunched: 28
+		Incidences of Identifiers Scrunched: 154
+		Savings From Scrunched Identifiers: 1696
+		Savings From Removed Whitespace: 6730
+		Total Comments Removed: 26
+		Savings From Removed Comments: 2216
+		Savings From Removed Linebreaks: 1808
+		Supposed Total Savings: 12450
+		Real Total Savings: 12450
+
+		FINAL SIZE: 23914
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Data.Matches.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Data.Matches.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1575ms
+		Unique Identifiers Scrunched: 34
+		Incidences of Identifiers Scrunched: 490
+		Savings From Scrunched Identifiers: 3416
+		Savings From Removed Whitespace: 17749
+		Total Comments Removed: 87
+		Savings From Removed Comments: 4842
+		Savings From Removed Linebreaks: 4245
+		Supposed Total Savings: 30252
+		Real Total Savings: 30252
+
+		FINAL SIZE: 56205
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Data.NameValueRecords.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Data.NameValueRecords.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 202ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1147
+		Total Comments Removed: 15
+		Savings From Removed Comments: 1570
+		Savings From Removed Linebreaks: 348
+		Supposed Total Savings: 3065
+		Real Total Savings: 3065
+
+		FINAL SIZE: 6817
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Data.PathsTree.CompactString.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Data.PathsTree.CompactString.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 187ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 946
+		Total Comments Removed: 5
+		Savings From Removed Comments: 904
+		Savings From Removed Linebreaks: 304
+		Supposed Total Savings: 2154
+		Real Total Savings: 2154
+
+		FINAL SIZE: 4931
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Data.PathsTree.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Data.PathsTree.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 91ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 765
+		Total Comments Removed: 3
+		Savings From Removed Comments: 804
+		Savings From Removed Linebreaks: 247
+		Supposed Total Savings: 1816
+		Real Total Savings: 1816
+
+		FINAL SIZE: 3761
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Date.Formatter.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Date.Formatter.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1531ms
+		Unique Identifiers Scrunched: 43
+		Incidences of Identifiers Scrunched: 338
+		Savings From Scrunched Identifiers: 3505
+		Savings From Removed Whitespace: 9523
+		Total Comments Removed: 57
+		Savings From Removed Comments: 3330
+		Savings From Removed Linebreaks: 2644
+		Supposed Total Savings: 19002
+		Real Total Savings: 19002
+
+		FINAL SIZE: 34740
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Date.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Date.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 629ms
+		Unique Identifiers Scrunched: 63
+		Incidences of Identifiers Scrunched: 408
+		Savings From Scrunched Identifiers: 5150
+		Savings From Removed Whitespace: 6639
+		Total Comments Removed: 34
+		Savings From Removed Comments: 2966
+		Savings From Removed Linebreaks: 1924
+		Supposed Total Savings: 16679
+		Real Total Savings: 16679
+
+		FINAL SIZE: 24392
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Doc.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Doc.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 25
+		Total Comments Removed: 3
+		Savings From Removed Comments: 778
+		Savings From Removed Linebreaks: 36
+		Supposed Total Savings: 839
+		Real Total Savings: 839
+
+		FINAL SIZE: 172
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2078ms
+		Unique Identifiers Scrunched: 112
+		Incidences of Identifiers Scrunched: 928
+		Savings From Scrunched Identifiers: 8293
+		Savings From Removed Whitespace: 25475
+		Total Comments Removed: 66
+		Savings From Removed Comments: 4190
+		Savings From Removed Linebreaks: 6554
+		Supposed Total Savings: 44512
+		Real Total Savings: 44512
+
+		FINAL SIZE: 94830
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Node.Classes.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Node.Classes.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 555ms
+		Unique Identifiers Scrunched: 22
+		Incidences of Identifiers Scrunched: 87
+		Savings From Scrunched Identifiers: 1056
+		Savings From Removed Whitespace: 4705
+		Total Comments Removed: 37
+		Savings From Removed Comments: 3300
+		Savings From Removed Linebreaks: 1343
+		Supposed Total Savings: 10404
+		Real Total Savings: 10404
+
+		FINAL SIZE: 22962
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Node.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Node.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 25
+		Total Comments Removed: 3
+		Savings From Removed Comments: 772
+		Savings From Removed Linebreaks: 36
+		Supposed Total Savings: 833
+		Real Total Savings: 833
+
+		FINAL SIZE: 175
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Service.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Service.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 25
+		Total Comments Removed: 3
+		Savings From Removed Comments: 776
+		Savings From Removed Linebreaks: 36
+		Supposed Total Savings: 837
+		Real Total Savings: 837
+
+		FINAL SIZE: 184
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Services.FileSystem.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Services.FileSystem.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 25
+		Total Comments Removed: 3
+		Savings From Removed Comments: 814
+		Savings From Removed Linebreaks: 36
+		Supposed Total Savings: 875
+		Real Total Savings: 875
+
+		FINAL SIZE: 220
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Services.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Services.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 3ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 25
+		Total Comments Removed: 3
+		Savings From Removed Comments: 788
+		Savings From Removed Linebreaks: 36
+		Supposed Total Savings: 849
+		Real Total Savings: 849
+
+		FINAL SIZE: 187
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.String.Builder.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.String.Builder.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 413ms
+		Unique Identifiers Scrunched: 2
+		Incidences of Identifiers Scrunched: 104
+		Savings From Scrunched Identifiers: 1576
+		Savings From Removed Whitespace: 1652
+		Total Comments Removed: 3
+		Savings From Removed Comments: 804
+		Savings From Removed Linebreaks: 520
+		Supposed Total Savings: 4552
+		Real Total Savings: 4552
+
+		FINAL SIZE: 6368
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.String.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.String.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 202ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 3976
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1049
+		Savings From Removed Linebreaks: 1207
+		Supposed Total Savings: 6232
+		Real Total Savings: 6232
+
+		FINAL SIZE: 19014
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.String.Lines.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.String.Lines.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 509ms
+		Unique Identifiers Scrunched: 6
+		Incidences of Identifiers Scrunched: 50
+		Savings From Scrunched Identifiers: 212
+		Savings From Removed Whitespace: 7549
+		Total Comments Removed: 5
+		Savings From Removed Comments: 858
+		Savings From Removed Linebreaks: 2021
+		Supposed Total Savings: 10640
+		Real Total Savings: 10640
+
+		FINAL SIZE: 21559
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Template.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Template.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 16ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 74
+		Total Comments Removed: 3
+		Savings From Removed Comments: 784
+		Savings From Removed Linebreaks: 56
+		Supposed Total Savings: 914
+		Real Total Savings: 914
+
+		FINAL SIZE: 347
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.Calculator.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.Calculator.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 58
+		Total Comments Removed: 3
+		Savings From Removed Comments: 837
+		Savings From Removed Linebreaks: 48
+		Supposed Total Savings: 943
+		Real Total Savings: 943
+
+		FINAL SIZE: 430
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.Calendar.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.Calendar.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 84ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 58
+		Total Comments Removed: 3
+		Savings From Removed Comments: 975
+		Savings From Removed Linebreaks: 48
+		Supposed Total Savings: 1081
+		Real Total Savings: 1081
+
+		FINAL SIZE: 422
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.Collection.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.Collection.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 6ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 58
+		Total Comments Removed: 3
+		Savings From Removed Comments: 837
+		Savings From Removed Linebreaks: 48
+		Supposed Total Savings: 943
+		Real Total Savings: 943
+
+		FINAL SIZE: 430
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.CollectionItem.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.CollectionItem.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 58
+		Total Comments Removed: 3
+		Savings From Removed Comments: 849
+		Savings From Removed Linebreaks: 48
+		Supposed Total Savings: 955
+		Real Total Savings: 955
+
+		FINAL SIZE: 446
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.ColorInfo.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.ColorInfo.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 58
+		Total Comments Removed: 3
+		Savings From Removed Comments: 834
+		Savings From Removed Linebreaks: 48
+		Supposed Total Savings: 940
+		Real Total Savings: 940
+
+		FINAL SIZE: 426
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.HashTable.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.HashTable.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 58
+		Total Comments Removed: 3
+		Savings From Removed Comments: 980
+		Savings From Removed Linebreaks: 48
+		Supposed Total Savings: 1086
+		Real Total Savings: 1086
+
+		FINAL SIZE: 404
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 25
+		Total Comments Removed: 3
+		Savings From Removed Comments: 796
+		Savings From Removed Linebreaks: 36
+		Supposed Total Savings: 857
+		Real Total Savings: 857
+
+		FINAL SIZE: 190
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.JstModule.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.JstModule.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 17ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 121
+		Total Comments Removed: 3
+		Savings From Removed Comments: 980
+		Savings From Removed Linebreaks: 64
+		Supposed Total Savings: 1165
+		Real Total Savings: 1165
+
+		FINAL SIZE: 451
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.List.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.List.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 138
+		Total Comments Removed: 3
+		Savings From Removed Comments: 819
+		Savings From Removed Linebreaks: 68
+		Supposed Total Savings: 1025
+		Real Total Savings: 1025
+
+		FINAL SIZE: 501
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Templates.SevenSegmentDisplay.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Templates.SevenSegmentDisplay.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 58
+		Total Comments Removed: 3
+		Savings From Removed Comments: 864
+		Savings From Removed Linebreaks: 48
+		Supposed Total Savings: 970
+		Real Total Savings: 970
+
+		FINAL SIZE: 466
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Url.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Url.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 696ms
+		Unique Identifiers Scrunched: 2
+		Incidences of Identifiers Scrunched: 5
+		Savings From Scrunched Identifiers: 35
+		Savings From Removed Whitespace: 9573
+		Total Comments Removed: 3
+		Savings From Removed Comments: 771
+		Savings From Removed Linebreaks: 2592
+		Supposed Total Savings: 12971
+		Real Total Savings: 12971
+
+		FINAL SIZE: 30120
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Util.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Util.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 25
+		Total Comments Removed: 3
+		Savings From Removed Comments: 781
+		Savings From Removed Linebreaks: 36
+		Supposed Total Savings: 842
+		Real Total Savings: 842
+
+		FINAL SIZE: 175
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Util.PropertyAdapter.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Util.PropertyAdapter.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 242ms
+		Unique Identifiers Scrunched: 45
+		Incidences of Identifiers Scrunched: 383
+		Savings From Scrunched Identifiers: 3866
+		Savings From Removed Whitespace: 4148
+		Total Comments Removed: 3
+		Savings From Removed Comments: 822
+		Savings From Removed Linebreaks: 1165
+		Supposed Total Savings: 10001
+		Real Total Savings: 10001
+
+		FINAL SIZE: 13358
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Test.Uize.Xml.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Test.Uize.Xml.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 349ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 2026
+		Total Comments Removed: 3
+		Savings From Removed Comments: 771
+		Savings From Removed Linebreaks: 638
+		Supposed Total Savings: 3435
+		Real Total Savings: 3435
+
+		FINAL SIZE: 10935
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Tooltip.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Tooltip.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 18ms
+		Unique Identifiers Scrunched: 22
+		Incidences of Identifiers Scrunched: 123
+		Savings From Scrunched Identifiers: 1080
+		Savings From Removed Whitespace: 544
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1008
+		Savings From Removed Linebreaks: 223
+		Supposed Total Savings: 2855
+		Real Total Savings: 2855
+
+		FINAL SIZE: 1230
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Url.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Url.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 26ms
+		Unique Identifiers Scrunched: 36
+		Incidences of Identifiers Scrunched: 165
+		Savings From Scrunched Identifiers: 1758
+		Savings From Removed Whitespace: 943
+		Total Comments Removed: 32
+		Savings From Removed Comments: 37054
+		Savings From Removed Linebreaks: 325
+		Supposed Total Savings: 40080
+		Real Total Savings: 40080
+
+		FINAL SIZE: 1775
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Util.Coupler.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Util.Coupler.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 166ms
+		Unique Identifiers Scrunched: 28
+		Incidences of Identifiers Scrunched: 117
+		Savings From Scrunched Identifiers: 1021
+		Savings From Removed Whitespace: 785
+		Total Comments Removed: 13
+		Savings From Removed Comments: 5601
+		Savings From Removed Linebreaks: 239
+		Supposed Total Savings: 7646
+		Real Total Savings: 7646
+
+		FINAL SIZE: 1504
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Util.Cycle.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Util.Cycle.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 14ms
+		Unique Identifiers Scrunched: 20
+		Incidences of Identifiers Scrunched: 80
+		Savings From Scrunched Identifiers: 489
+		Savings From Removed Whitespace: 455
+		Total Comments Removed: 11
+		Savings From Removed Comments: 1365
+		Savings From Removed Linebreaks: 202
+		Supposed Total Savings: 2511
+		Real Total Savings: 2511
+
+		FINAL SIZE: 874
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Util.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Util.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 765
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 782
+		Real Total Savings: 782
+
+		FINAL SIZE: 32
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Util.Oop.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Util.Oop.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 42ms
+		Unique Identifiers Scrunched: 49
+		Incidences of Identifiers Scrunched: 244
+		Savings From Scrunched Identifiers: 2497
+		Savings From Removed Whitespace: 1444
+		Total Comments Removed: 13
+		Savings From Removed Comments: 3409
+		Savings From Removed Linebreaks: 458
+		Supposed Total Savings: 7808
+		Real Total Savings: 7808
+
+		FINAL SIZE: 2438
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Util.PropertyAdapter.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Util.PropertyAdapter.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 21ms
+		Unique Identifiers Scrunched: 27
+		Incidences of Identifiers Scrunched: 114
+		Savings From Scrunched Identifiers: 804
+		Savings From Removed Whitespace: 661
+		Total Comments Removed: 12
+		Savings From Removed Comments: 27129
+		Savings From Removed Linebreaks: 237
+		Supposed Total Savings: 28831
+		Real Total Savings: 28831
+
+		FINAL SIZE: 1166
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.AutoSuggest.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.AutoSuggest.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 363ms
+		Unique Identifiers Scrunched: 95
+		Incidences of Identifiers Scrunched: 641
+		Savings From Scrunched Identifiers: 4610
+		Savings From Removed Whitespace: 4481
+		Total Comments Removed: 72
+		Savings From Removed Comments: 10625
+		Savings From Removed Linebreaks: 1339
+		Supposed Total Savings: 21055
+		Real Total Savings: 21055
+
+		FINAL SIZE: 8019
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.AutoTooltip.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.AutoTooltip.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 21ms
+		Unique Identifiers Scrunched: 29
+		Incidences of Identifiers Scrunched: 126
+		Savings From Scrunched Identifiers: 939
+		Savings From Removed Whitespace: 935
+		Total Comments Removed: 13
+		Savings From Removed Comments: 5384
+		Savings From Removed Linebreaks: 305
+		Supposed Total Savings: 7563
+		Real Total Savings: 7563
+
+		FINAL SIZE: 1501
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Bar.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Bar.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 37ms
+		Unique Identifiers Scrunched: 37
+		Incidences of Identifiers Scrunched: 206
+		Savings From Scrunched Identifiers: 1367
+		Savings From Removed Whitespace: 987
+		Total Comments Removed: 27
+		Savings From Removed Comments: 5089
+		Savings From Removed Linebreaks: 367
+		Supposed Total Savings: 7810
+		Real Total Savings: 7810
+
+		FINAL SIZE: 1874
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Bar.Progress.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Bar.Progress.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 131ms
+		Unique Identifiers Scrunched: 18
+		Incidences of Identifiers Scrunched: 88
+		Savings From Scrunched Identifiers: 475
+		Savings From Removed Whitespace: 603
+		Total Comments Removed: 14
+		Savings From Removed Comments: 2202
+		Savings From Removed Linebreaks: 227
+		Supposed Total Savings: 3507
+		Real Total Savings: 3507
+
+		FINAL SIZE: 1943
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Bar.Slider.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Bar.Slider.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 29ms
+		Unique Identifiers Scrunched: 36
+		Incidences of Identifiers Scrunched: 155
+		Savings From Scrunched Identifiers: 1108
+		Savings From Removed Whitespace: 1015
+		Total Comments Removed: 15
+		Savings From Removed Comments: 4130
+		Savings From Removed Linebreaks: 327
+		Supposed Total Savings: 6580
+		Real Total Savings: 6580
+
+		FINAL SIZE: 1822
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Bar.Slider.Plus.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Bar.Slider.Plus.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 16ms
+		Unique Identifiers Scrunched: 23
+		Incidences of Identifiers Scrunched: 88
+		Savings From Scrunched Identifiers: 575
+		Savings From Removed Whitespace: 466
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1230
+		Savings From Removed Linebreaks: 171
+		Supposed Total Savings: 2442
+		Real Total Savings: 2442
+
+		FINAL SIZE: 1254
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Bar.Slider.xSkin.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Bar.Slider.xSkin.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 38ms
+		Unique Identifiers Scrunched: 28
+		Incidences of Identifiers Scrunched: 145
+		Savings From Scrunched Identifiers: 1413
+		Savings From Removed Whitespace: 1087
+		Total Comments Removed: 7
+		Savings From Removed Comments: 1116
+		Savings From Removed Linebreaks: 212
+		Supposed Total Savings: 3828
+		Real Total Savings: 3828
+
+		FINAL SIZE: 2755
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Beam.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Beam.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 100ms
+		Unique Identifiers Scrunched: 17
+		Incidences of Identifiers Scrunched: 61
+		Savings From Scrunched Identifiers: 357
+		Savings From Removed Whitespace: 352
+		Total Comments Removed: 6
+		Savings From Removed Comments: 918
+		Savings From Removed Linebreaks: 170
+		Supposed Total Savings: 1797
+		Real Total Savings: 1797
+
+		FINAL SIZE: 942
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Bevel.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Bevel.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 14
+		Incidences of Identifiers Scrunched: 55
+		Savings From Scrunched Identifiers: 332
+		Savings From Removed Whitespace: 331
+		Total Comments Removed: 8
+		Savings From Removed Comments: 990
+		Savings From Removed Linebreaks: 150
+		Supposed Total Savings: 1803
+		Real Total Savings: 1803
+
+		FINAL SIZE: 874
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Button.Checkbox.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Button.Checkbox.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 3
+		Incidences of Identifiers Scrunched: 8
+		Savings From Scrunched Identifiers: 31
+		Savings From Removed Whitespace: 69
+		Total Comments Removed: 6
+		Savings From Removed Comments: 988
+		Savings From Removed Linebreaks: 56
+		Supposed Total Savings: 1144
+		Real Total Savings: 1144
+
+		FINAL SIZE: 218
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Button.Filter.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Button.Filter.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 11ms
+		Unique Identifiers Scrunched: 12
+		Incidences of Identifiers Scrunched: 58
+		Savings From Scrunched Identifiers: 420
+		Savings From Removed Whitespace: 359
+		Total Comments Removed: 7
+		Savings From Removed Comments: 936
+		Savings From Removed Linebreaks: 182
+		Supposed Total Savings: 1897
+		Real Total Savings: 1897
+
+		FINAL SIZE: 777
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Button.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Button.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 142ms
+		Unique Identifiers Scrunched: 70
+		Incidences of Identifiers Scrunched: 419
+		Savings From Scrunched Identifiers: 3465
+		Savings From Removed Whitespace: 2648
+		Total Comments Removed: 50
+		Savings From Removed Comments: 14471
+		Savings From Removed Linebreaks: 810
+		Supposed Total Savings: 21394
+		Real Total Savings: 21394
+
+		FINAL SIZE: 4622
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Button.Toggle.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Button.Toggle.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 17ms
+		Unique Identifiers Scrunched: 18
+		Incidences of Identifiers Scrunched: 122
+		Savings From Scrunched Identifiers: 731
+		Savings From Removed Whitespace: 666
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1008
+		Savings From Removed Linebreaks: 267
+		Supposed Total Savings: 2672
+		Real Total Savings: 2672
+
+		FINAL SIZE: 1549
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Button.ValueDisplay.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Button.ValueDisplay.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 3ms
+		Unique Identifiers Scrunched: 5
+		Incidences of Identifiers Scrunched: 11
+		Savings From Scrunched Identifiers: 92
+		Savings From Removed Whitespace: 56
+		Total Comments Removed: 5
+		Savings From Removed Comments: 882
+		Savings From Removed Linebreaks: 52
+		Supposed Total Savings: 1082
+		Real Total Savings: 1082
+
+		FINAL SIZE: 248
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Button.ValueDisplay.Selector.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Button.ValueDisplay.Selector.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 20
+		Incidences of Identifiers Scrunched: 107
+		Savings From Scrunched Identifiers: 918
+		Savings From Removed Whitespace: 693
+		Total Comments Removed: 13
+		Savings From Removed Comments: 1334
+		Savings From Removed Linebreaks: 307
+		Supposed Total Savings: 3252
+		Real Total Savings: 3252
+
+		FINAL SIZE: 1656
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Calculator.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Calculator.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 164ms
+		Unique Identifiers Scrunched: 63
+		Incidences of Identifiers Scrunched: 420
+		Savings From Scrunched Identifiers: 3339
+		Savings From Removed Whitespace: 3561
+		Total Comments Removed: 44
+		Savings From Removed Comments: 50364
+		Savings From Removed Linebreaks: 864
+		Supposed Total Savings: 58128
+		Real Total Savings: 58128
+
+		FINAL SIZE: 4929
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Calendar.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Calendar.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 131ms
+		Unique Identifiers Scrunched: 55
+		Incidences of Identifiers Scrunched: 356
+		Savings From Scrunched Identifiers: 2762
+		Savings From Removed Whitespace: 1910
+		Total Comments Removed: 29
+		Savings From Removed Comments: 28400
+		Savings From Removed Linebreaks: 561
+		Supposed Total Savings: 33633
+		Real Total Savings: 33633
+
+		FINAL SIZE: 3638
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Captcha.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Captcha.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 6ms
+		Unique Identifiers Scrunched: 7
+		Incidences of Identifiers Scrunched: 18
+		Savings From Scrunched Identifiers: 107
+		Savings From Removed Whitespace: 139
+		Total Comments Removed: 11
+		Savings From Removed Comments: 3221
+		Savings From Removed Linebreaks: 100
+		Supposed Total Savings: 3567
+		Real Total Savings: 3567
+
+		FINAL SIZE: 359
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Captcha.Recaptcha.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Captcha.Recaptcha.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 12
+		Incidences of Identifiers Scrunched: 64
+		Savings From Scrunched Identifiers: 314
+		Savings From Removed Whitespace: 517
+		Total Comments Removed: 15
+		Savings From Removed Comments: 4751
+		Savings From Removed Linebreaks: 223
+		Supposed Total Savings: 5805
+		Real Total Savings: 5805
+
+		FINAL SIZE: 1366
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Collapsy.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Collapsy.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 11ms
+		Unique Identifiers Scrunched: 16
+		Incidences of Identifiers Scrunched: 85
+		Savings From Scrunched Identifiers: 553
+		Savings From Removed Whitespace: 424
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1046
+		Savings From Removed Linebreaks: 217
+		Supposed Total Savings: 2240
+		Real Total Savings: 2240
+
+		FINAL SIZE: 1203
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Collection.Dynamic.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Collection.Dynamic.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 165ms
+		Unique Identifiers Scrunched: 95
+		Incidences of Identifiers Scrunched: 496
+		Savings From Scrunched Identifiers: 4731
+		Savings From Removed Whitespace: 4240
+		Total Comments Removed: 35
+		Savings From Removed Comments: 2650
+		Savings From Removed Linebreaks: 963
+		Supposed Total Savings: 12584
+		Real Total Savings: 12584
+
+		FINAL SIZE: 5680
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Collection.Dynamic.Table.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Collection.Dynamic.Table.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 6ms
+		Unique Identifiers Scrunched: 7
+		Incidences of Identifiers Scrunched: 17
+		Savings From Scrunched Identifiers: 108
+		Savings From Removed Whitespace: 104
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1000
+		Savings From Removed Linebreaks: 66
+		Supposed Total Savings: 1278
+		Real Total Savings: 1278
+
+		FINAL SIZE: 414
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Collection.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Collection.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 162ms
+		Unique Identifiers Scrunched: 71
+		Incidences of Identifiers Scrunched: 475
+		Savings From Scrunched Identifiers: 4179
+		Savings From Removed Whitespace: 3123
+		Total Comments Removed: 58
+		Savings From Removed Comments: 52720
+		Savings From Removed Linebreaks: 1011
+		Supposed Total Savings: 61033
+		Real Total Savings: 61033
+
+		FINAL SIZE: 5807
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.CollectionItem.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.CollectionItem.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 119ms
+		Unique Identifiers Scrunched: 31
+		Incidences of Identifiers Scrunched: 168
+		Savings From Scrunched Identifiers: 1133
+		Savings From Removed Whitespace: 1238
+		Total Comments Removed: 37
+		Savings From Removed Comments: 15834
+		Savings From Removed Linebreaks: 454
+		Supposed Total Savings: 18659
+		Real Total Savings: 18659
+
+		FINAL SIZE: 2373
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.CollectionItem.Zooming.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.CollectionItem.Zooming.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 52ms
+		Unique Identifiers Scrunched: 61
+		Incidences of Identifiers Scrunched: 385
+		Savings From Scrunched Identifiers: 3911
+		Savings From Removed Whitespace: 2899
+		Total Comments Removed: 41
+		Savings From Removed Comments: 13451
+		Savings From Removed Linebreaks: 844
+		Supposed Total Savings: 21105
+		Real Total Savings: 21105
+
+		FINAL SIZE: 4770
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ColorCube.Draggable.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ColorCube.Draggable.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 115ms
+		Unique Identifiers Scrunched: 49
+		Incidences of Identifiers Scrunched: 180
+		Savings From Scrunched Identifiers: 1703
+		Savings From Removed Whitespace: 1033
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1202
+		Savings From Removed Linebreaks: 303
+		Supposed Total Savings: 4241
+		Real Total Savings: 4241
+
+		FINAL SIZE: 1831
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ColorCube.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ColorCube.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 16ms
+		Unique Identifiers Scrunched: 28
+		Incidences of Identifiers Scrunched: 136
+		Savings From Scrunched Identifiers: 1209
+		Savings From Removed Whitespace: 703
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1469
+		Savings From Removed Linebreaks: 261
+		Supposed Total Savings: 3642
+		Real Total Savings: 3642
+
+		FINAL SIZE: 1657
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ColorInfo.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ColorInfo.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 7
+		Incidences of Identifiers Scrunched: 26
+		Savings From Scrunched Identifiers: 174
+		Savings From Removed Whitespace: 172
+		Total Comments Removed: 12
+		Savings From Removed Comments: 2122
+		Savings From Removed Linebreaks: 116
+		Supposed Total Savings: 2584
+		Real Total Savings: 2584
+
+		FINAL SIZE: 569
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ColorPicker.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ColorPicker.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 18ms
+		Unique Identifiers Scrunched: 25
+		Incidences of Identifiers Scrunched: 89
+		Savings From Scrunched Identifiers: 522
+		Savings From Removed Whitespace: 983
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1092
+		Savings From Removed Linebreaks: 296
+		Supposed Total Savings: 2893
+		Real Total Savings: 2893
+
+		FINAL SIZE: 2237
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Committer.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Committer.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 166ms
+		Unique Identifiers Scrunched: 46
+		Incidences of Identifiers Scrunched: 349
+		Savings From Scrunched Identifiers: 3871
+		Savings From Removed Whitespace: 1883
+		Total Comments Removed: 34
+		Savings From Removed Comments: 17681
+		Savings From Removed Linebreaks: 695
+		Supposed Total Savings: 24130
+		Real Total Savings: 24130
+
+		FINAL SIZE: 3490
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Count.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Count.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 18
+		Incidences of Identifiers Scrunched: 117
+		Savings From Scrunched Identifiers: 552
+		Savings From Removed Whitespace: 495
+		Total Comments Removed: 7
+		Savings From Removed Comments: 1009
+		Savings From Removed Linebreaks: 225
+		Supposed Total Savings: 2281
+		Real Total Savings: 2281
+
+		FINAL SIZE: 1306
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.Confirm.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.Confirm.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 14
+		Incidences of Identifiers Scrunched: 46
+		Savings From Scrunched Identifiers: 318
+		Savings From Removed Whitespace: 388
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1381
+		Savings From Removed Linebreaks: 177
+		Supposed Total Savings: 2264
+		Real Total Savings: 2264
+
+		FINAL SIZE: 1054
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.Form.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.Form.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 106ms
+		Unique Identifiers Scrunched: 13
+		Incidences of Identifiers Scrunched: 80
+		Savings From Scrunched Identifiers: 394
+		Savings From Removed Whitespace: 482
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1015
+		Savings From Removed Linebreaks: 193
+		Supposed Total Savings: 2084
+		Real Total Savings: 2084
+
+		FINAL SIZE: 1087
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.Iframe.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.Iframe.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 13
+		Incidences of Identifiers Scrunched: 46
+		Savings From Scrunched Identifiers: 221
+		Savings From Removed Whitespace: 324
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1105
+		Savings From Removed Linebreaks: 132
+		Supposed Total Savings: 1782
+		Real Total Savings: 1782
+
+		FINAL SIZE: 660
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 138ms
+		Unique Identifiers Scrunched: 65
+		Incidences of Identifiers Scrunched: 413
+		Savings From Scrunched Identifiers: 3208
+		Savings From Removed Whitespace: 2898
+		Total Comments Removed: 51
+		Savings From Removed Comments: 23190
+		Savings From Removed Linebreaks: 871
+		Supposed Total Savings: 30167
+		Real Total Savings: 30167
+
+		FINAL SIZE: 5391
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.Picker.Date.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.Picker.Date.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 8ms
+		Unique Identifiers Scrunched: 2
+		Incidences of Identifiers Scrunched: 5
+		Savings From Scrunched Identifiers: 25
+		Savings From Removed Whitespace: 71
+		Total Comments Removed: 8
+		Savings From Removed Comments: 2123
+		Savings From Removed Linebreaks: 60
+		Supposed Total Savings: 2279
+		Real Total Savings: 2279
+
+		FINAL SIZE: 248
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.Picker.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.Picker.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 14ms
+		Unique Identifiers Scrunched: 23
+		Incidences of Identifiers Scrunched: 96
+		Savings From Scrunched Identifiers: 617
+		Savings From Removed Whitespace: 829
+		Total Comments Removed: 21
+		Savings From Removed Comments: 3550
+		Savings From Removed Linebreaks: 283
+		Supposed Total Savings: 5279
+		Real Total Savings: 5279
+
+		FINAL SIZE: 1381
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.Picker.Palette.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.Picker.Palette.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 6
+		Incidences of Identifiers Scrunched: 28
+		Savings From Scrunched Identifiers: 142
+		Savings From Removed Whitespace: 377
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1196
+		Savings From Removed Linebreaks: 156
+		Supposed Total Savings: 1871
+		Real Total Savings: 1871
+
+		FINAL SIZE: 775
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.Picker.Palette.Selector.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.Picker.Palette.Selector.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 8ms
+		Unique Identifiers Scrunched: 7
+		Incidences of Identifiers Scrunched: 14
+		Savings From Scrunched Identifiers: 141
+		Savings From Removed Whitespace: 170
+		Total Comments Removed: 8
+		Savings From Removed Comments: 986
+		Savings From Removed Linebreaks: 112
+		Supposed Total Savings: 1409
+		Real Total Savings: 1409
+
+		FINAL SIZE: 609
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Dialog.xResizable.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Dialog.xResizable.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 24ms
+		Unique Identifiers Scrunched: 13
+		Incidences of Identifiers Scrunched: 85
+		Savings From Scrunched Identifiers: 907
+		Savings From Removed Whitespace: 717
+		Total Comments Removed: 13
+		Savings From Removed Comments: 7425
+		Savings From Removed Linebreaks: 247
+		Supposed Total Savings: 9296
+		Real Total Savings: 9296
+
+		FINAL SIZE: 1423
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.DirectionalPad.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.DirectionalPad.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 108ms
+		Unique Identifiers Scrunched: 17
+		Incidences of Identifiers Scrunched: 80
+		Savings From Scrunched Identifiers: 511
+		Savings From Removed Whitespace: 583
+		Total Comments Removed: 12
+		Savings From Removed Comments: 2245
+		Savings From Removed Linebreaks: 263
+		Supposed Total Savings: 3602
+		Real Total Savings: 3602
+
+		FINAL SIZE: 1441
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Drag.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Drag.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 48ms
+		Unique Identifiers Scrunched: 72
+		Incidences of Identifiers Scrunched: 457
+		Savings From Scrunched Identifiers: 3260
+		Savings From Removed Whitespace: 2532
+		Total Comments Removed: 18
+		Savings From Removed Comments: 2920
+		Savings From Removed Linebreaks: 799
+		Supposed Total Savings: 9511
+		Real Total Savings: 9511
+
+		FINAL SIZE: 5231
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Drag.Move.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Drag.Move.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 118ms
+		Unique Identifiers Scrunched: 23
+		Incidences of Identifiers Scrunched: 90
+		Savings From Scrunched Identifiers: 627
+		Savings From Removed Whitespace: 652
+		Total Comments Removed: 7
+		Savings From Removed Comments: 971
+		Savings From Removed Linebreaks: 174
+		Supposed Total Savings: 2424
+		Real Total Savings: 2424
+
+		FINAL SIZE: 1018
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.EdgeHugger.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.EdgeHugger.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 23ms
+		Unique Identifiers Scrunched: 31
+		Incidences of Identifiers Scrunched: 154
+		Savings From Scrunched Identifiers: 1065
+		Savings From Removed Whitespace: 1093
+		Total Comments Removed: 26
+		Savings From Removed Comments: 2150
+		Savings From Removed Linebreaks: 390
+		Supposed Total Savings: 4698
+		Real Total Savings: 4698
+
+		FINAL SIZE: 2129
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.EggTimer.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.EggTimer.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 20ms
+		Unique Identifiers Scrunched: 25
+		Incidences of Identifiers Scrunched: 150
+		Savings From Scrunched Identifiers: 770
+		Savings From Removed Whitespace: 866
+		Total Comments Removed: 7
+		Savings From Removed Comments: 995
+		Savings From Removed Linebreaks: 328
+		Supposed Total Savings: 2959
+		Real Total Savings: 2959
+
+		FINAL SIZE: 2230
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.FilterGroups.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.FilterGroups.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 21ms
+		Unique Identifiers Scrunched: 27
+		Incidences of Identifiers Scrunched: 146
+		Savings From Scrunched Identifiers: 1161
+		Savings From Removed Whitespace: 861
+		Total Comments Removed: 8
+		Savings From Removed Comments: 897
+		Savings From Removed Linebreaks: 349
+		Supposed Total Savings: 3268
+		Real Total Savings: 3268
+
+		FINAL SIZE: 1644
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Fleeting.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Fleeting.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 109ms
+		Unique Identifiers Scrunched: 16
+		Incidences of Identifiers Scrunched: 103
+		Savings From Scrunched Identifiers: 429
+		Savings From Removed Whitespace: 695
+		Total Comments Removed: 12
+		Savings From Removed Comments: 2058
+		Savings From Removed Linebreaks: 273
+		Supposed Total Savings: 3455
+		Real Total Savings: 3455
+
+		FINAL SIZE: 1348
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Flip.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Flip.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 10
+		Incidences of Identifiers Scrunched: 68
+		Savings From Scrunched Identifiers: 295
+		Savings From Removed Whitespace: 483
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1046
+		Savings From Removed Linebreaks: 187
+		Supposed Total Savings: 2011
+		Real Total Savings: 2011
+
+		FINAL SIZE: 1041
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Form.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Form.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 171ms
+		Unique Identifiers Scrunched: 73
+		Incidences of Identifiers Scrunched: 507
+		Savings From Scrunched Identifiers: 3551
+		Savings From Removed Whitespace: 2974
+		Total Comments Removed: 40
+		Savings From Removed Comments: 2802
+		Savings From Removed Linebreaks: 1081
+		Supposed Total Savings: 10408
+		Real Total Savings: 10408
+
+		FINAL SIZE: 5662
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.FormDialog.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.FormDialog.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 9
+		Incidences of Identifiers Scrunched: 35
+		Savings From Scrunched Identifiers: 124
+		Savings From Removed Whitespace: 410
+		Total Comments Removed: 7
+		Savings From Removed Comments: 958
+		Savings From Removed Linebreaks: 156
+		Supposed Total Savings: 1648
+		Real Total Savings: 1648
+
+		FINAL SIZE: 795
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.FormElement.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.FormElement.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 146ms
+		Unique Identifiers Scrunched: 71
+		Incidences of Identifiers Scrunched: 531
+		Savings From Scrunched Identifiers: 3661
+		Savings From Removed Whitespace: 3358
+		Total Comments Removed: 44
+		Savings From Removed Comments: 4045
+		Savings From Removed Linebreaks: 1099
+		Supposed Total Savings: 12163
+		Real Total Savings: 12163
+
+		FINAL SIZE: 5829
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.FormElement.Select.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.FormElement.Select.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 25ms
+		Unique Identifiers Scrunched: 22
+		Incidences of Identifiers Scrunched: 136
+		Savings From Scrunched Identifiers: 861
+		Savings From Removed Whitespace: 988
+		Total Comments Removed: 23
+		Savings From Removed Comments: 1777
+		Savings From Removed Linebreaks: 337
+		Supposed Total Savings: 3963
+		Real Total Savings: 3963
+
+		FINAL SIZE: 1530
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.FormElement.Text.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.FormElement.Text.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 19ms
+		Unique Identifiers Scrunched: 23
+		Incidences of Identifiers Scrunched: 139
+		Savings From Scrunched Identifiers: 927
+		Savings From Removed Whitespace: 1004
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1055
+		Savings From Removed Linebreaks: 372
+		Supposed Total Savings: 3358
+		Real Total Savings: 3358
+
+		FINAL SIZE: 2238
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.FormElements.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.FormElements.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 8
+		Incidences of Identifiers Scrunched: 23
+		Savings From Scrunched Identifiers: 176
+		Savings From Removed Whitespace: 158
+		Total Comments Removed: 6
+		Savings From Removed Comments: 943
+		Savings From Removed Linebreaks: 86
+		Supposed Total Savings: 1363
+		Real Total Savings: 1363
+
+		FINAL SIZE: 412
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.FormWarnings.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.FormWarnings.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 106ms
+		Unique Identifiers Scrunched: 14
+		Incidences of Identifiers Scrunched: 59
+		Savings From Scrunched Identifiers: 539
+		Savings From Removed Whitespace: 347
+		Total Comments Removed: 8
+		Savings From Removed Comments: 940
+		Savings From Removed Linebreaks: 170
+		Supposed Total Savings: 1996
+		Real Total Savings: 1996
+
+		FINAL SIZE: 849
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.HoverFader.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.HoverFader.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 18ms
+		Unique Identifiers Scrunched: 23
+		Incidences of Identifiers Scrunched: 105
+		Savings From Scrunched Identifiers: 860
+		Savings From Removed Whitespace: 612
+		Total Comments Removed: 14
+		Savings From Removed Comments: 20109
+		Savings From Removed Linebreaks: 257
+		Supposed Total Savings: 21838
+		Real Total Savings: 21838
+
+		FINAL SIZE: 1478
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ImagePort.Draggable.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ImagePort.Draggable.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 19ms
+		Unique Identifiers Scrunched: 20
+		Incidences of Identifiers Scrunched: 89
+		Savings From Scrunched Identifiers: 566
+		Savings From Removed Whitespace: 1104
+		Total Comments Removed: 11
+		Savings From Removed Comments: 1713
+		Savings From Removed Linebreaks: 287
+		Supposed Total Savings: 3670
+		Real Total Savings: 3670
+
+		FINAL SIZE: 1528
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ImagePort.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ImagePort.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 129ms
+		Unique Identifiers Scrunched: 57
+		Incidences of Identifiers Scrunched: 242
+		Savings From Scrunched Identifiers: 2301
+		Savings From Removed Whitespace: 1084
+		Total Comments Removed: 12
+		Savings From Removed Comments: 1315
+		Savings From Removed Linebreaks: 396
+		Supposed Total Savings: 5096
+		Real Total Savings: 5096
+
+		FINAL SIZE: 2833
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ImageWipe.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ImageWipe.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 59ms
+		Unique Identifiers Scrunched: 103
+		Incidences of Identifiers Scrunched: 511
+		Savings From Scrunched Identifiers: 3691
+		Savings From Removed Whitespace: 3298
+		Total Comments Removed: 37
+		Savings From Removed Comments: 28921
+		Savings From Removed Linebreaks: 841
+		Supposed Total Savings: 36751
+		Real Total Savings: 36751
+
+		FINAL SIZE: 5243
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ImageWipe.xPresets.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ImageWipe.xPresets.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 277ms
+		Unique Identifiers Scrunched: 17
+		Incidences of Identifiers Scrunched: 229
+		Savings From Scrunched Identifiers: 2156
+		Savings From Removed Whitespace: 6517
+		Total Comments Removed: 832
+		Savings From Removed Comments: 41967
+		Savings From Removed Linebreaks: 1978
+		Supposed Total Savings: 52618
+		Real Total Savings: 52618
+
+		FINAL SIZE: 4776
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.InlinePicker.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.InlinePicker.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 18ms
+		Unique Identifiers Scrunched: 23
+		Incidences of Identifiers Scrunched: 98
+		Savings From Scrunched Identifiers: 992
+		Savings From Removed Whitespace: 701
+		Total Comments Removed: 12
+		Savings From Removed Comments: 1400
+		Savings From Removed Linebreaks: 257
+		Supposed Total Savings: 3350
+		Real Total Savings: 3350
+
+		FINAL SIZE: 1641
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.InlinePicker.Selector.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.InlinePicker.Selector.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 8ms
+		Unique Identifiers Scrunched: 5
+		Incidences of Identifiers Scrunched: 9
+		Savings From Scrunched Identifiers: 51
+		Savings From Removed Whitespace: 150
+		Total Comments Removed: 8
+		Savings From Removed Comments: 998
+		Savings From Removed Linebreaks: 104
+		Supposed Total Savings: 1303
+		Real Total Savings: 1303
+
+		FINAL SIZE: 608
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 269ms
+		Unique Identifiers Scrunched: 96
+		Incidences of Identifiers Scrunched: 685
+		Savings From Scrunched Identifiers: 5709
+		Savings From Removed Whitespace: 4052
+		Total Comments Removed: 81
+		Savings From Removed Comments: 86129
+		Savings From Removed Linebreaks: 1337
+		Supposed Total Savings: 97227
+		Real Total Savings: 97227
+
+		FINAL SIZE: 7694
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ListEditor.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ListEditor.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 36ms
+		Unique Identifiers Scrunched: 45
+		Incidences of Identifiers Scrunched: 306
+		Savings From Scrunched Identifiers: 2056
+		Savings From Removed Whitespace: 1700
+		Total Comments Removed: 26
+		Savings From Removed Comments: 17998
+		Savings From Removed Linebreaks: 553
+		Supposed Total Savings: 22307
+		Real Total Savings: 22307
+
+		FINAL SIZE: 3192
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Log.InstanceEvents.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Log.InstanceEvents.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 14ms
+		Unique Identifiers Scrunched: 10
+		Incidences of Identifiers Scrunched: 54
+		Savings From Scrunched Identifiers: 288
+		Savings From Removed Whitespace: 564
+		Total Comments Removed: 12
+		Savings From Removed Comments: 6328
+		Savings From Removed Linebreaks: 189
+		Supposed Total Savings: 7369
+		Real Total Savings: 7369
+
+		FINAL SIZE: 1029
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Log.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Log.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 11ms
+		Unique Identifiers Scrunched: 12
+		Incidences of Identifiers Scrunched: 62
+		Savings From Scrunched Identifiers: 445
+		Savings From Removed Whitespace: 418
+		Total Comments Removed: 16
+		Savings From Removed Comments: 10190
+		Savings From Removed Linebreaks: 199
+		Supposed Total Savings: 11252
+		Real Total Savings: 11252
+
+		FINAL SIZE: 1205
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.MagView.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.MagView.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 144ms
+		Unique Identifiers Scrunched: 81
+		Incidences of Identifiers Scrunched: 471
+		Savings From Scrunched Identifiers: 4033
+		Savings From Removed Whitespace: 2831
+		Total Comments Removed: 34
+		Savings From Removed Comments: 7013
+		Savings From Removed Linebreaks: 826
+		Supposed Total Savings: 14703
+		Real Total Savings: 14703
+
+		FINAL SIZE: 4455
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Mask.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Mask.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 114ms
+		Unique Identifiers Scrunched: 34
+		Incidences of Identifiers Scrunched: 200
+		Savings From Scrunched Identifiers: 1321
+		Savings From Removed Whitespace: 1019
+		Total Comments Removed: 12
+		Savings From Removed Comments: 1261
+		Savings From Removed Linebreaks: 371
+		Supposed Total Savings: 3972
+		Real Total Savings: 3972
+
+		FINAL SIZE: 2001
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Options.Accordion.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Options.Accordion.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 36ms
+		Unique Identifiers Scrunched: 36
+		Incidences of Identifiers Scrunched: 185
+		Savings From Scrunched Identifiers: 1390
+		Savings From Removed Whitespace: 1321
+		Total Comments Removed: 17
+		Savings From Removed Comments: 1578
+		Savings From Removed Linebreaks: 458
+		Supposed Total Savings: 4747
+		Real Total Savings: 4747
+
+		FINAL SIZE: 2380
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Options.FilterGroup.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Options.FilterGroup.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 21
+		Incidences of Identifiers Scrunched: 93
+		Savings From Scrunched Identifiers: 693
+		Savings From Removed Whitespace: 568
+		Total Comments Removed: 11
+		Savings From Removed Comments: 1106
+		Savings From Removed Linebreaks: 277
+		Supposed Total Savings: 2644
+		Real Total Savings: 2644
+
+		FINAL SIZE: 1262
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Options.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Options.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 130ms
+		Unique Identifiers Scrunched: 45
+		Incidences of Identifiers Scrunched: 270
+		Savings From Scrunched Identifiers: 1904
+		Savings From Removed Whitespace: 1844
+		Total Comments Removed: 26
+		Savings From Removed Comments: 14349
+		Savings From Removed Linebreaks: 564
+		Supposed Total Savings: 18661
+		Real Total Savings: 18661
+
+		FINAL SIZE: 3068
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Options.Popup.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Options.Popup.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 10
+		Incidences of Identifiers Scrunched: 48
+		Savings From Scrunched Identifiers: 365
+		Savings From Removed Whitespace: 423
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1367
+		Savings From Removed Linebreaks: 156
+		Supposed Total Savings: 2311
+		Real Total Savings: 2311
+
+		FINAL SIZE: 990
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Options.Selector.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Options.Selector.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 12ms
+		Unique Identifiers Scrunched: 17
+		Incidences of Identifiers Scrunched: 82
+		Savings From Scrunched Identifiers: 758
+		Savings From Removed Whitespace: 535
+		Total Comments Removed: 12
+		Savings From Removed Comments: 1433
+		Savings From Removed Linebreaks: 215
+		Supposed Total Savings: 2941
+		Real Total Savings: 2941
+
+		FINAL SIZE: 1243
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Options.Tabbed.Fading.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Options.Tabbed.Fading.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 19ms
+		Unique Identifiers Scrunched: 18
+		Incidences of Identifiers Scrunched: 89
+		Savings From Scrunched Identifiers: 545
+		Savings From Removed Whitespace: 407
+		Total Comments Removed: 7
+		Savings From Removed Comments: 985
+		Savings From Removed Linebreaks: 159
+		Supposed Total Savings: 2096
+		Real Total Savings: 2096
+
+		FINAL SIZE: 1026
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Options.Tabbed.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Options.Tabbed.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 16ms
+		Unique Identifiers Scrunched: 21
+		Incidences of Identifiers Scrunched: 120
+		Savings From Scrunched Identifiers: 1026
+		Savings From Removed Whitespace: 542
+		Total Comments Removed: 7
+		Savings From Removed Comments: 960
+		Savings From Removed Linebreaks: 227
+		Supposed Total Savings: 2755
+		Real Total Savings: 2755
+
+		FINAL SIZE: 1517
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Page.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Page.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 181ms
+		Unique Identifiers Scrunched: 81
+		Incidences of Identifiers Scrunched: 430
+		Savings From Scrunched Identifiers: 4088
+		Savings From Removed Whitespace: 2906
+		Total Comments Removed: 34
+		Savings From Removed Comments: 38010
+		Savings From Removed Linebreaks: 843
+		Supposed Total Savings: 45847
+		Real Total Savings: 45847
+
+		FINAL SIZE: 5221
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Page.xDeferredLinks.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Page.xDeferredLinks.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 11
+		Incidences of Identifiers Scrunched: 39
+		Savings From Scrunched Identifiers: 203
+		Savings From Removed Whitespace: 316
+		Total Comments Removed: 2
+		Savings From Removed Comments: 546
+		Savings From Removed Linebreaks: 128
+		Supposed Total Savings: 1193
+		Real Total Savings: 1193
+
+		FINAL SIZE: 653
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Pagination.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Pagination.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 136ms
+		Unique Identifiers Scrunched: 42
+		Incidences of Identifiers Scrunched: 270
+		Savings From Scrunched Identifiers: 1858
+		Savings From Removed Whitespace: 1154
+		Total Comments Removed: 13
+		Savings From Removed Comments: 1311
+		Savings From Removed Linebreaks: 422
+		Supposed Total Savings: 4745
+		Real Total Savings: 4745
+
+		FINAL SIZE: 2622
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Picker.Date.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Picker.Date.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 4
+		Incidences of Identifiers Scrunched: 10
+		Savings From Scrunched Identifiers: 56
+		Savings From Removed Whitespace: 115
+		Total Comments Removed: 11
+		Savings From Removed Comments: 7390
+		Savings From Removed Linebreaks: 82
+		Supposed Total Savings: 7643
+		Real Total Savings: 7643
+
+		FINAL SIZE: 409
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Picker.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Picker.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 17ms
+		Unique Identifiers Scrunched: 23
+		Incidences of Identifiers Scrunched: 109
+		Savings From Scrunched Identifiers: 766
+		Savings From Removed Whitespace: 886
+		Total Comments Removed: 16
+		Savings From Removed Comments: 2993
+		Savings From Removed Linebreaks: 307
+		Supposed Total Savings: 4952
+		Real Total Savings: 4952
+
+		FINAL SIZE: 1885
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Picker.Palette.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Picker.Palette.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 17ms
+		Unique Identifiers Scrunched: 19
+		Incidences of Identifiers Scrunched: 90
+		Savings From Scrunched Identifiers: 993
+		Savings From Removed Whitespace: 624
+		Total Comments Removed: 13
+		Savings From Removed Comments: 1377
+		Savings From Removed Linebreaks: 275
+		Supposed Total Savings: 3269
+		Real Total Savings: 3269
+
+		FINAL SIZE: 1401
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Picker.Palette.Selector.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Picker.Palette.Selector.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 104ms
+		Unique Identifiers Scrunched: 15
+		Incidences of Identifiers Scrunched: 48
+		Savings From Scrunched Identifiers: 349
+		Savings From Removed Whitespace: 385
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1027
+		Savings From Removed Linebreaks: 192
+		Supposed Total Savings: 1953
+		Real Total Savings: 1953
+
+		FINAL SIZE: 1018
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Population.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Population.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 37ms
+		Unique Identifiers Scrunched: 59
+		Incidences of Identifiers Scrunched: 311
+		Savings From Scrunched Identifiers: 2969
+		Savings From Removed Whitespace: 1950
+		Total Comments Removed: 21
+		Savings From Removed Comments: 7904
+		Savings From Removed Linebreaks: 573
+		Supposed Total Savings: 13396
+		Real Total Savings: 13396
+
+		FINAL SIZE: 3203
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.PopupPalette.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.PopupPalette.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 127ms
+		Unique Identifiers Scrunched: 43
+		Incidences of Identifiers Scrunched: 249
+		Savings From Scrunched Identifiers: 1748
+		Savings From Removed Whitespace: 1821
+		Total Comments Removed: 22
+		Savings From Removed Comments: 2504
+		Savings From Removed Linebreaks: 567
+		Supposed Total Savings: 6640
+		Real Total Savings: 6640
+
+		FINAL SIZE: 3249
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Resizer.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Resizer.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 170ms
+		Unique Identifiers Scrunched: 77
+		Incidences of Identifiers Scrunched: 582
+		Savings From Scrunched Identifiers: 3520
+		Savings From Removed Whitespace: 3971
+		Total Comments Removed: 17
+		Savings From Removed Comments: 2105
+		Savings From Removed Linebreaks: 939
+		Supposed Total Savings: 10535
+		Real Total Savings: 10535
+
+		FINAL SIZE: 5621
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Resizer.Marquee.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Resizer.Marquee.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 28ms
+		Unique Identifiers Scrunched: 37
+		Incidences of Identifiers Scrunched: 175
+		Savings From Scrunched Identifiers: 1443
+		Savings From Removed Whitespace: 1367
+		Total Comments Removed: 15
+		Savings From Removed Comments: 2117
+		Savings From Removed Linebreaks: 407
+		Supposed Total Savings: 5334
+		Real Total Savings: 5334
+
+		FINAL SIZE: 3066
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Scrolly.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Scrolly.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 28ms
+		Unique Identifiers Scrunched: 43
+		Incidences of Identifiers Scrunched: 166
+		Savings From Scrunched Identifiers: 1326
+		Savings From Removed Whitespace: 1243
+		Total Comments Removed: 27
+		Savings From Removed Comments: 19499
+		Savings From Removed Linebreaks: 430
+		Supposed Total Savings: 22498
+		Real Total Savings: 22498
+
+		FINAL SIZE: 2457
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.SegmentDisplay.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.SegmentDisplay.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 119ms
+		Unique Identifiers Scrunched: 27
+		Incidences of Identifiers Scrunched: 173
+		Savings From Scrunched Identifiers: 1714
+		Savings From Removed Whitespace: 911
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1254
+		Savings From Removed Linebreaks: 352
+		Supposed Total Savings: 4231
+		Real Total Savings: 4231
+
+		FINAL SIZE: 2743
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.SegmentDisplay.Seven.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.SegmentDisplay.Seven.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 8ms
+		Unique Identifiers Scrunched: 2
+		Incidences of Identifiers Scrunched: 5
+		Savings From Scrunched Identifiers: 25
+		Savings From Removed Whitespace: 405
+		Total Comments Removed: 48
+		Savings From Removed Comments: 2007
+		Savings From Removed Linebreaks: 132
+		Supposed Total Savings: 2569
+		Real Total Savings: 2569
+
+		FINAL SIZE: 404
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.SlideShow.AutoAdvance.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.SlideShow.AutoAdvance.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 17ms
+		Unique Identifiers Scrunched: 16
+		Incidences of Identifiers Scrunched: 105
+		Savings From Scrunched Identifiers: 751
+		Savings From Removed Whitespace: 563
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1110
+		Savings From Removed Linebreaks: 229
+		Supposed Total Savings: 2653
+		Real Total Savings: 2653
+
+		FINAL SIZE: 1301
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.SlideShow.AutoAdvance.WithSlideSelectors.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.SlideShow.AutoAdvance.WithSlideSelectors.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 8
+		Incidences of Identifiers Scrunched: 33
+		Savings From Scrunched Identifiers: 226
+		Savings From Removed Whitespace: 327
+		Total Comments Removed: 14
+		Savings From Removed Comments: 1184
+		Savings From Removed Linebreaks: 136
+		Supposed Total Savings: 1873
+		Real Total Savings: 1873
+
+		FINAL SIZE: 800
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.SlideShow.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.SlideShow.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 126ms
+		Unique Identifiers Scrunched: 40
+		Incidences of Identifiers Scrunched: 220
+		Savings From Scrunched Identifiers: 1804
+		Savings From Removed Whitespace: 1096
+		Total Comments Removed: 23
+		Savings From Removed Comments: 24317
+		Savings From Removed Linebreaks: 434
+		Supposed Total Savings: 27651
+		Real Total Savings: 27651
+
+		FINAL SIZE: 2301
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Stretchy.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Stretchy.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 15
+		Incidences of Identifiers Scrunched: 86
+		Savings From Scrunched Identifiers: 420
+		Savings From Removed Whitespace: 653
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1050
+		Savings From Removed Linebreaks: 227
+		Supposed Total Savings: 2350
+		Real Total Savings: 2350
+
+		FINAL SIZE: 1271
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Swap.Deck.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Swap.Deck.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 14
+		Incidences of Identifiers Scrunched: 72
+		Savings From Scrunched Identifiers: 442
+		Savings From Removed Whitespace: 351
+		Total Comments Removed: 11
+		Savings From Removed Comments: 8567
+		Savings From Removed Linebreaks: 164
+		Supposed Total Savings: 9524
+		Real Total Savings: 9524
+
+		FINAL SIZE: 805
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Swap.Html.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Swap.Html.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 14
+		Incidences of Identifiers Scrunched: 46
+		Savings From Scrunched Identifiers: 262
+		Savings From Removed Whitespace: 372
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1036
+		Savings From Removed Linebreaks: 150
+		Supposed Total Savings: 1820
+		Real Total Savings: 1820
+
+		FINAL SIZE: 866
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Swap.Image.Cycle.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Swap.Image.Cycle.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 17
+		Incidences of Identifiers Scrunched: 80
+		Savings From Scrunched Identifiers: 461
+		Savings From Removed Whitespace: 440
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1406
+		Savings From Removed Linebreaks: 190
+		Supposed Total Savings: 2497
+		Real Total Savings: 2497
+
+		FINAL SIZE: 923
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Swap.Image.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Swap.Image.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 114ms
+		Unique Identifiers Scrunched: 22
+		Incidences of Identifiers Scrunched: 128
+		Savings From Scrunched Identifiers: 708
+		Savings From Removed Whitespace: 1048
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1675
+		Savings From Removed Linebreaks: 277
+		Supposed Total Savings: 3708
+		Real Total Savings: 3708
+
+		FINAL SIZE: 1984
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Swap.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Swap.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 34ms
+		Unique Identifiers Scrunched: 49
+		Incidences of Identifiers Scrunched: 255
+		Savings From Scrunched Identifiers: 1710
+		Savings From Removed Whitespace: 1584
+		Total Comments Removed: 28
+		Savings From Removed Comments: 22698
+		Savings From Removed Linebreaks: 476
+		Supposed Total Savings: 26468
+		Real Total Savings: 26468
+
+		FINAL SIZE: 2616
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Swap.xPresets.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Swap.xPresets.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 141ms
+		Unique Identifiers Scrunched: 8
+		Incidences of Identifiers Scrunched: 164
+		Savings From Scrunched Identifiers: 650
+		Savings From Removed Whitespace: 3777
+		Total Comments Removed: 469
+		Savings From Removed Comments: 27445
+		Savings From Removed Linebreaks: 1176
+		Supposed Total Savings: 33048
+		Real Total Savings: 33048
+
+		FINAL SIZE: 2492
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.TableSort.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.TableSort.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 143ms
+		Unique Identifiers Scrunched: 85
+		Incidences of Identifiers Scrunched: 487
+		Savings From Scrunched Identifiers: 3413
+		Savings From Removed Whitespace: 2598
+		Total Comments Removed: 23
+		Savings From Removed Comments: 2339
+		Savings From Removed Linebreaks: 744
+		Supposed Total Savings: 9094
+		Real Total Savings: 9094
+
+		FINAL SIZE: 4238
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.TextInput.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.TextInput.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 30ms
+		Unique Identifiers Scrunched: 36
+		Incidences of Identifiers Scrunched: 272
+		Savings From Scrunched Identifiers: 1528
+		Savings From Removed Whitespace: 1725
+		Total Comments Removed: 19
+		Savings From Removed Comments: 2271
+		Savings From Removed Linebreaks: 543
+		Supposed Total Savings: 6067
+		Real Total Savings: 6067
+
+		FINAL SIZE: 3254
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.ThumbZoom.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.ThumbZoom.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 126ms
+		Unique Identifiers Scrunched: 36
+		Incidences of Identifiers Scrunched: 190
+		Savings From Scrunched Identifiers: 1451
+		Savings From Removed Whitespace: 2100
+		Total Comments Removed: 25
+		Savings From Removed Comments: 2710
+		Savings From Removed Linebreaks: 537
+		Supposed Total Savings: 6798
+		Real Total Savings: 6798
+
+		FINAL SIZE: 3137
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Tree.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Tree.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 28ms
+		Unique Identifiers Scrunched: 34
+		Incidences of Identifiers Scrunched: 197
+		Savings From Scrunched Identifiers: 1591
+		Savings From Removed Whitespace: 892
+		Total Comments Removed: 11
+		Savings From Removed Comments: 1275
+		Savings From Removed Linebreaks: 348
+		Supposed Total Savings: 4106
+		Real Total Savings: 4106
+
+		FINAL SIZE: 2140
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Tree.List.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Tree.List.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 31ms
+		Unique Identifiers Scrunched: 39
+		Incidences of Identifiers Scrunched: 198
+		Savings From Scrunched Identifiers: 1349
+		Savings From Removed Whitespace: 1990
+		Total Comments Removed: 9
+		Savings From Removed Comments: 1067
+		Savings From Removed Linebreaks: 459
+		Supposed Total Savings: 4865
+		Real Total Savings: 4865
+
+		FINAL SIZE: 3373
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Tree.Menu.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Tree.Menu.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 121ms
+		Unique Identifiers Scrunched: 37
+		Incidences of Identifiers Scrunched: 187
+		Savings From Scrunched Identifiers: 1422
+		Savings From Removed Whitespace: 1329
+		Total Comments Removed: 14
+		Savings From Removed Comments: 1416
+		Savings From Removed Linebreaks: 422
+		Supposed Total Savings: 4589
+		Real Total Savings: 4589
+
+		FINAL SIZE: 2761
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.Tree.Select.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Widget.Tree.Select.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 20ms
+		Unique Identifiers Scrunched: 38
+		Incidences of Identifiers Scrunched: 179
+		Savings From Scrunched Identifiers: 1207
+		Savings From Removed Whitespace: 887
+		Total Comments Removed: 11
+		Savings From Removed Comments: 1125
+		Savings From Removed Linebreaks: 289
+		Supposed Total Savings: 3508
+		Real Total Savings: 3508
+
+		FINAL SIZE: 1805
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Wsh.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Wsh.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 119ms
+		Unique Identifiers Scrunched: 48
+		Incidences of Identifiers Scrunched: 222
+		Savings From Scrunched Identifiers: 2129
+		Savings From Removed Whitespace: 1622
+		Total Comments Removed: 22
+		Savings From Removed Comments: 13479
+		Savings From Removed Linebreaks: 470
+		Supposed Total Savings: 17700
+		Real Total Savings: 17700
+
+		FINAL SIZE: 2670
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Xml.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Xml.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 27ms
+		Unique Identifiers Scrunched: 27
+		Incidences of Identifiers Scrunched: 98
+		Savings From Scrunched Identifiers: 1080
+		Savings From Removed Whitespace: 853
+		Total Comments Removed: 13
+		Savings From Removed Comments: 9308
+		Savings From Removed Linebreaks: 230
+		Supposed Total Savings: 11471
+		Real Total Savings: 11471
+
+		FINAL SIZE: 3650
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Build.BuildCodeSitemap.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Build.BuildCodeSitemap.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 9
+		Incidences of Identifiers Scrunched: 24
+		Savings From Scrunched Identifiers: 280
+		Savings From Removed Whitespace: 258
+		Total Comments Removed: 5
+		Savings From Removed Comments: 1095
+		Savings From Removed Linebreaks: 55
+		Supposed Total Savings: 1688
+		Real Total Savings: 1688
+
+		FINAL SIZE: 827
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Build.BuildIndexPages.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Build.BuildIndexPages.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 26ms
+		Unique Identifiers Scrunched: 28
+		Incidences of Identifiers Scrunched: 104
+		Savings From Scrunched Identifiers: 1056
+		Savings From Removed Whitespace: 987
+		Total Comments Removed: 25
+		Savings From Removed Comments: 1827
+		Savings From Removed Linebreaks: 167
+		Supposed Total Savings: 4037
+		Real Total Savings: 4037
+
+		FINAL SIZE: 2495
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Build.BuildPagesFromSourceCode.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Build.BuildPagesFromSourceCode.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 101ms
+		Unique Identifiers Scrunched: 13
+		Incidences of Identifiers Scrunched: 47
+		Savings From Scrunched Identifiers: 590
+		Savings From Removed Whitespace: 450
+		Total Comments Removed: 6
+		Savings From Removed Comments: 1041
+		Savings From Removed Linebreaks: 79
+		Supposed Total Savings: 2160
+		Real Total Savings: 2160
+
+		FINAL SIZE: 998
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Build.BuildSotu.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Build.BuildSotu.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 18ms
+		Unique Identifiers Scrunched: 26
+		Incidences of Identifiers Scrunched: 93
+		Savings From Scrunched Identifiers: 1238
+		Savings From Removed Whitespace: 845
+		Total Comments Removed: 13
+		Savings From Removed Comments: 1663
+		Savings From Removed Linebreaks: 123
+		Supposed Total Savings: 3869
+		Real Total Savings: 3869
+
+		FINAL SIZE: 1702
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Build.BuildWidgetPages.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Build.BuildWidgetPages.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 8
+		Incidences of Identifiers Scrunched: 25
+		Savings From Scrunched Identifiers: 248
+		Savings From Removed Whitespace: 262
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1165
+		Savings From Removed Linebreaks: 60
+		Supposed Total Savings: 1735
+		Real Total Savings: 1735
+
+		FINAL SIZE: 896
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Build.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Build.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 783
+		Savings From Removed Linebreaks: 8
+		Supposed Total Savings: 792
+		Real Total Savings: 792
+
+		FINAL SIZE: 39
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Build.Util.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Build.Util.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 6ms
+		Unique Identifiers Scrunched: 12
+		Incidences of Identifiers Scrunched: 38
+		Savings From Scrunched Identifiers: 322
+		Savings From Removed Whitespace: 253
+		Total Comments Removed: 4
+		Savings From Removed Comments: 628
+		Savings From Removed Linebreaks: 100
+		Supposed Total Savings: 1303
+		Real Total Savings: 1303
+
+		FINAL SIZE: 558
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Delve.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Delve.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 629ms
+		Unique Identifiers Scrunched: 223
+		Incidences of Identifiers Scrunched: 1689
+		Savings From Scrunched Identifiers: 13831
+		Savings From Removed Whitespace: 15119
+		Total Comments Removed: 59
+		Savings From Removed Comments: 3935
+		Savings From Removed Linebreaks: 3810
+		Supposed Total Savings: 36695
+		Real Total Savings: 36695
+
+		FINAL SIZE: 26350
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Delve.library.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Delve.library.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 1356
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 1373
+		Real Total Savings: 1373
+
+		FINAL SIZE: 47
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.DelvePageWriter.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.DelvePageWriter.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 3
+		Incidences of Identifiers Scrunched: 7
+		Savings From Scrunched Identifiers: 56
+		Savings From Removed Whitespace: 100
+		Total Comments Removed: 3
+		Savings From Removed Comments: 604
+		Savings From Removed Linebreaks: 64
+		Supposed Total Savings: 824
+		Real Total Savings: 824
+
+		FINAL SIZE: 544
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.DialogConfirm.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.DialogConfirm.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 6ms
+		Unique Identifiers Scrunched: 2
+		Incidences of Identifiers Scrunched: 5
+		Savings From Scrunched Identifiers: 25
+		Savings From Removed Whitespace: 43
+		Total Comments Removed: 4
+		Savings From Removed Comments: 645
+		Savings From Removed Linebreaks: 48
+		Supposed Total Savings: 761
+		Real Total Savings: 761
+
+		FINAL SIZE: 276
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.DialogDate.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.DialogDate.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 2
+		Incidences of Identifiers Scrunched: 5
+		Savings From Scrunched Identifiers: 25
+		Savings From Removed Whitespace: 47
+		Total Comments Removed: 4
+		Savings From Removed Comments: 642
+		Savings From Removed Linebreaks: 50
+		Supposed Total Savings: 764
+		Real Total Savings: 764
+
+		FINAL SIZE: 304
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Examples.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Examples.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 432ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 3616
+		Total Comments Removed: 0
+		Savings From Removed Comments: 0
+		Savings From Removed Linebreaks: 739
+		Supposed Total Savings: 4355
+		Real Total Savings: 4355
+
+		FINAL SIZE: 32253
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.ExamplesInfoForSiteMap.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.ExamplesInfoForSiteMap.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 8ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 271
+		Total Comments Removed: 0
+		Savings From Removed Comments: 0
+		Savings From Removed Linebreaks: 57
+		Supposed Total Savings: 328
+		Real Total Savings: 328
+
+		FINAL SIZE: 800
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 2
+		Savings From Removed Comments: 868
+		Savings From Removed Linebreaks: 12
+		Supposed Total Savings: 881
+		Real Total Savings: 881
+
+		FINAL SIZE: 33
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.ModulesTree.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.ModulesTree.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 33ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 2410
+		Total Comments Removed: 0
+		Savings From Removed Comments: 0
+		Savings From Removed Linebreaks: 389
+		Supposed Total Savings: 2799
+		Real Total Savings: 2799
+
+		FINAL SIZE: 3508
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Doc.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Doc.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 127ms
+		Unique Identifiers Scrunched: 29
+		Incidences of Identifiers Scrunched: 112
+		Savings From Scrunched Identifiers: 662
+		Savings From Removed Whitespace: 1890
+		Total Comments Removed: 17
+		Savings From Removed Comments: 2269
+		Savings From Removed Linebreaks: 423
+		Supposed Total Savings: 5244
+		Real Total Savings: 5244
+
+		FINAL SIZE: 3087
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Doc.library.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Doc.library.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 3ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 11
+		Total Comments Removed: 3
+		Savings From Removed Comments: 854
+		Savings From Removed Linebreaks: 24
+		Supposed Total Savings: 889
+		Real Total Savings: 889
+
+		FINAL SIZE: 121
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Example.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Example.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 20ms
+		Unique Identifiers Scrunched: 16
+		Incidences of Identifiers Scrunched: 64
+		Savings From Scrunched Identifiers: 369
+		Savings From Removed Whitespace: 1315
+		Total Comments Removed: 13
+		Savings From Removed Comments: 1080
+		Savings From Removed Linebreaks: 314
+		Supposed Total Savings: 3078
+		Real Total Savings: 3078
+
+		FINAL SIZE: 2335
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Example.library.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Example.library.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 11
+		Total Comments Removed: 3
+		Savings From Removed Comments: 838
+		Savings From Removed Linebreaks: 24
+		Supposed Total Savings: 873
+		Real Total Savings: 873
+
+		FINAL SIZE: 125
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Example.Test.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Example.Test.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 14
+		Incidences of Identifiers Scrunched: 41
+		Savings From Scrunched Identifiers: 357
+		Savings From Removed Whitespace: 527
+		Total Comments Removed: 8
+		Savings From Removed Comments: 1925
+		Savings From Removed Linebreaks: 164
+		Supposed Total Savings: 2973
+		Real Total Savings: 2973
+
+		FINAL SIZE: 966
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Example.Test.library.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Example.Test.library.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 11
+		Total Comments Removed: 3
+		Savings From Removed Comments: 833
+		Savings From Removed Linebreaks: 24
+		Supposed Total Savings: 868
+		Real Total Savings: 868
+
+		FINAL SIZE: 138
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Home.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Home.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 121ms
+		Unique Identifiers Scrunched: 4
+		Incidences of Identifiers Scrunched: 18
+		Savings From Scrunched Identifiers: 78
+		Savings From Removed Whitespace: 940
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1049
+		Savings From Removed Linebreaks: 271
+		Supposed Total Savings: 2338
+		Real Total Savings: 2338
+
+		FINAL SIZE: 1805
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Home.library.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Home.library.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 11
+		Total Comments Removed: 3
+		Savings From Removed Comments: 1008
+		Savings From Removed Linebreaks: 24
+		Supposed Total Savings: 1043
+		Real Total Savings: 1043
+
+		FINAL SIZE: 122
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.Index.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.Index.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 4
+		Incidences of Identifiers Scrunched: 9
+		Savings From Scrunched Identifiers: 43
+		Savings From Removed Whitespace: 501
+		Total Comments Removed: 6
+		Savings From Removed Comments: 1282
+		Savings From Removed Linebreaks: 152
+		Supposed Total Savings: 1978
+		Real Total Savings: 1978
+
+		FINAL SIZE: 930
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 40ms
+		Unique Identifiers Scrunched: 25
+		Incidences of Identifiers Scrunched: 87
+		Savings From Scrunched Identifiers: 716
+		Savings From Removed Whitespace: 1624
+		Total Comments Removed: 21
+		Savings From Removed Comments: 2257
+		Savings From Removed Linebreaks: 455
+		Supposed Total Savings: 5052
+		Real Total Savings: 5052
+
+		FINAL SIZE: 3820
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Page.library.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Page.library.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 1243
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 1260
+		Real Total Savings: 1260
+
+		FINAL SIZE: 46
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.ParamsInspector.InlinePresets.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.ParamsInspector.InlinePresets.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 8
+		Incidences of Identifiers Scrunched: 26
+		Savings From Scrunched Identifiers: 188
+		Savings From Removed Whitespace: 189
+		Total Comments Removed: 6
+		Savings From Removed Comments: 867
+		Savings From Removed Linebreaks: 88
+		Supposed Total Savings: 1332
+		Real Total Savings: 1332
+
+		FINAL SIZE: 509
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.ParamsInspector.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.ParamsInspector.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 137ms
+		Unique Identifiers Scrunched: 14
+		Incidences of Identifiers Scrunched: 75
+		Savings From Scrunched Identifiers: 428
+		Savings From Removed Whitespace: 686
+		Total Comments Removed: 10
+		Savings From Removed Comments: 1029
+		Savings From Removed Linebreaks: 261
+		Supposed Total Savings: 2404
+		Real Total Savings: 2404
+
+		FINAL SIZE: 1521
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.SiteMap.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.SiteMap.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 43ms
+		Unique Identifiers Scrunched: 29
+		Incidences of Identifiers Scrunched: 210
+		Savings From Scrunched Identifiers: 1641
+		Savings From Removed Whitespace: 1967
+		Total Comments Removed: 7
+		Savings From Removed Comments: 1204
+		Savings From Removed Linebreaks: 544
+		Supposed Total Savings: 5356
+		Real Total Savings: 5356
+
+		FINAL SIZE: 4440
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.DataBar.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.DataBar.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 66
+		Total Comments Removed: 3
+		Savings From Removed Comments: 199
+		Savings From Removed Linebreaks: 43
+		Supposed Total Savings: 332
+		Real Total Savings: 332
+
+		FINAL SIZE: 609
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.DelvePageHtml.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.DelvePageHtml.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 2
+		Incidences of Identifiers Scrunched: 7
+		Savings From Scrunched Identifiers: 42
+		Savings From Removed Whitespace: 71
+		Total Comments Removed: 3
+		Savings From Removed Comments: 205
+		Savings From Removed Linebreaks: 50
+		Supposed Total Savings: 368
+		Real Total Savings: 368
+
+		FINAL SIZE: 1585
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.DelveUiHtml.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.DelveUiHtml.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 111ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 49
+		Total Comments Removed: 3
+		Savings From Removed Comments: 203
+		Savings From Removed Linebreaks: 38
+		Supposed Total Savings: 314
+		Real Total Savings: 314
+
+		FINAL SIZE: 4599
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.Dialog.Confirm.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.Dialog.Confirm.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 93
+		Total Comments Removed: 3
+		Savings From Removed Comments: 206
+		Savings From Removed Linebreaks: 51
+		Supposed Total Savings: 374
+		Real Total Savings: 374
+
+		FINAL SIZE: 750
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.Dialog.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.Dialog.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 84
+		Total Comments Removed: 3
+		Savings From Removed Comments: 198
+		Savings From Removed Linebreaks: 42
+		Supposed Total Savings: 348
+		Real Total Savings: 348
+
+		FINAL SIZE: 2273
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.Dialog.Picker.Date.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.Dialog.Picker.Date.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 93
+		Total Comments Removed: 3
+		Savings From Removed Comments: 210
+		Savings From Removed Linebreaks: 56
+		Supposed Total Savings: 383
+		Real Total Savings: 383
+
+		FINAL SIZE: 489
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.Dialog.Picker.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.Dialog.Picker.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 110
+		Total Comments Removed: 3
+		Savings From Removed Comments: 205
+		Savings From Removed Linebreaks: 61
+		Supposed Total Savings: 400
+		Real Total Savings: 400
+
+		FINAL SIZE: 575
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.Footer.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.Footer.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 12ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 49
+		Total Comments Removed: 3
+		Savings From Removed Comments: 198
+		Savings From Removed Linebreaks: 38
+		Supposed Total Savings: 309
+		Real Total Savings: 309
+
+		FINAL SIZE: 3237
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.IndexPage.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.IndexPage.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 10ms
+		Unique Identifiers Scrunched: 5
+		Incidences of Identifiers Scrunched: 20
+		Savings From Scrunched Identifiers: 95
+		Savings From Removed Whitespace: 151
+		Total Comments Removed: 3
+		Savings From Removed Comments: 201
+		Savings From Removed Linebreaks: 76
+		Supposed Total Savings: 523
+		Real Total Savings: 523
+
+		FINAL SIZE: 2093
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.JavaScriptSourceSample.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.JavaScriptSourceSample.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 277ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 49
+		Total Comments Removed: 3
+		Savings From Removed Comments: 214
+		Savings From Removed Linebreaks: 38
+		Supposed Total Savings: 325
+		Real Total Savings: 325
+
+		FINAL SIZE: 15163
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 2
+		Savings From Removed Comments: 792
+		Savings From Removed Linebreaks: 12
+		Supposed Total Savings: 805
+		Real Total Savings: 805
+
+		FINAL SIZE: 43
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.ListingsPage.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.ListingsPage.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 14ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 357
+		Total Comments Removed: 3
+		Savings From Removed Comments: 204
+		Savings From Removed Linebreaks: 110
+		Supposed Total Savings: 695
+		Real Total Savings: 695
+
+		FINAL SIZE: 2924
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.ParamsInspector.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.ParamsInspector.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 6ms
+		Unique Identifiers Scrunched: 2
+		Incidences of Identifiers Scrunched: 6
+		Savings From Scrunched Identifiers: 42
+		Savings From Removed Whitespace: 102
+		Total Comments Removed: 3
+		Savings From Removed Comments: 207
+		Savings From Removed Linebreaks: 52
+		Supposed Total Savings: 403
+		Real Total Savings: 403
+
+		FINAL SIZE: 1291
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.ParamsTable.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.ParamsTable.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 8ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 265
+		Total Comments Removed: 4
+		Savings From Removed Comments: 241
+		Savings From Removed Linebreaks: 86
+		Supposed Total Savings: 616
+		Real Total Savings: 616
+
+		FINAL SIZE: 1313
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.ShareThisPanel.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.ShareThisPanel.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 23ms
+		Unique Identifiers Scrunched: 6
+		Incidences of Identifiers Scrunched: 35
+		Savings From Scrunched Identifiers: 282
+		Savings From Removed Whitespace: 1318
+		Total Comments Removed: 3
+		Savings From Removed Comments: 206
+		Savings From Removed Linebreaks: 449
+		Supposed Total Savings: 2255
+		Real Total Savings: 2255
+
+		FINAL SIZE: 2770
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.SimpleDoc.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.SimpleDoc.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 11ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 120
+		Total Comments Removed: 3
+		Savings From Removed Comments: 201
+		Savings From Removed Linebreaks: 54
+		Supposed Total Savings: 399
+		Real Total Savings: 399
+
+		FINAL SIZE: 1812
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.SimpleDocSample.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.SimpleDocSample.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 147ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 49
+		Total Comments Removed: 3
+		Savings From Removed Comments: 207
+		Savings From Removed Linebreaks: 38
+		Supposed Total Savings: 318
+		Real Total Savings: 318
+
+		FINAL SIZE: 14966
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.SlideShow.Basic.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.SlideShow.Basic.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 5ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 91
+		Total Comments Removed: 3
+		Savings From Removed Comments: 207
+		Savings From Removed Linebreaks: 51
+		Supposed Total Savings: 373
+		Real Total Savings: 373
+
+		FINAL SIZE: 596
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.SlideShow.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.SlideShow.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 68
+		Total Comments Removed: 3
+		Savings From Removed Comments: 201
+		Savings From Removed Linebreaks: 41
+		Supposed Total Savings: 334
+		Real Total Savings: 334
+
+		FINAL SIZE: 1615
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.SlideShow.Wipes.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.SlideShow.Wipes.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 91
+		Total Comments Removed: 3
+		Savings From Removed Comments: 207
+		Savings From Removed Linebreaks: 51
+		Supposed Total Savings: 373
+		Real Total Savings: 373
+
+		FINAL SIZE: 626
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.Tour.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.Tour.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 17
+		Incidences of Identifiers Scrunched: 64
+		Savings From Scrunched Identifiers: 642
+		Savings From Removed Whitespace: 429
+		Total Comments Removed: 4
+		Savings From Removed Comments: 265
+		Savings From Removed Linebreaks: 136
+		Supposed Total Savings: 1472
+		Real Total Savings: 1472
+
+		FINAL SIZE: 1501
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.WidgetToGoGadgetXml.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.WidgetToGoGadgetXml.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 104
+		Total Comments Removed: 3
+		Savings From Removed Comments: 211
+		Savings From Removed Linebreaks: 49
+		Supposed Total Savings: 388
+		Real Total Savings: 388
+
+		FINAL SIZE: 1237
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.WidgetToGoHomepage.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.WidgetToGoHomepage.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 15ms
+		Unique Identifiers Scrunched: 8
+		Incidences of Identifiers Scrunched: 30
+		Savings From Scrunched Identifiers: 279
+		Savings From Removed Whitespace: 204
+		Total Comments Removed: 4
+		Savings From Removed Comments: 338
+		Savings From Removed Linebreaks: 66
+		Supposed Total Savings: 887
+		Real Total Savings: 887
+
+		FINAL SIZE: 3657
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.WidgetToGoPage.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.WidgetToGoPage.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 3
+		Incidences of Identifiers Scrunched: 15
+		Savings From Scrunched Identifiers: 99
+		Savings From Removed Whitespace: 163
+		Total Comments Removed: 3
+		Savings From Removed Comments: 206
+		Savings From Removed Linebreaks: 70
+		Supposed Total Savings: 538
+		Real Total Savings: 538
+
+		FINAL SIZE: 1841
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.Templates.WidgetToGoTitle.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.Templates.WidgetToGoTitle.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 7ms
+		Unique Identifiers Scrunched: 1
+		Incidences of Identifiers Scrunched: 4
+		Savings From Scrunched Identifiers: 24
+		Savings From Removed Whitespace: 70
+		Total Comments Removed: 3
+		Savings From Removed Comments: 207
+		Savings From Removed Linebreaks: 41
+		Supposed Total Savings: 342
+		Real Total Savings: 342
+
+		FINAL SIZE: 1316
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.TestDataFruits.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.TestDataFruits.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 156ms
+		Unique Identifiers Scrunched: 16
+		Incidences of Identifiers Scrunched: 90
+		Savings From Scrunched Identifiers: 707
+		Savings From Removed Whitespace: 1904
+		Total Comments Removed: 3
+		Savings From Removed Comments: 130
+		Savings From Removed Linebreaks: 683
+		Supposed Total Savings: 3424
+		Real Total Savings: 3424
+
+		FINAL SIZE: 5384
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.TestDataObject.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.TestDataObject.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 9ms
+		Unique Identifiers Scrunched: 3
+		Incidences of Identifiers Scrunched: 10
+		Savings From Scrunched Identifiers: 63
+		Savings From Removed Whitespace: 285
+		Total Comments Removed: 0
+		Savings From Removed Comments: 0
+		Savings From Removed Linebreaks: 119
+		Supposed Total Savings: 467
+		Real Total Savings: 467
+
+		FINAL SIZE: 1468
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.TestDataPhotos.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.TestDataPhotos.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 50ms
+		Unique Identifiers Scrunched: 3
+		Incidences of Identifiers Scrunched: 10
+		Savings From Scrunched Identifiers: 63
+		Savings From Removed Whitespace: 1126
+		Total Comments Removed: 0
+		Savings From Removed Comments: 0
+		Savings From Removed Linebreaks: 481
+		Supposed Total Savings: 1670
+		Real Total Savings: 1670
+
+		FINAL SIZE: 13365
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.TestWidget.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.TestWidget.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 14ms
+		Unique Identifiers Scrunched: 7
+		Incidences of Identifiers Scrunched: 43
+		Savings From Scrunched Identifiers: 215
+		Savings From Removed Whitespace: 606
+		Total Comments Removed: 8
+		Savings From Removed Comments: 936
+		Savings From Removed Linebreaks: 217
+		Supposed Total Savings: 1974
+		Real Total Savings: 1974
+
+		FINAL SIZE: 1963
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.WidgetToGoPage.Calculator.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.WidgetToGoPage.Calculator.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 4ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 2
+		Savings From Removed Comments: 727
+		Savings From Removed Linebreaks: 12
+		Supposed Total Savings: 740
+		Real Total Savings: 740
+
+		FINAL SIZE: 59
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.WidgetToGoPage.Calculator.library.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.WidgetToGoPage.Calculator.library.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 1178
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 1195
+		Real Total Savings: 1195
+
+		FINAL SIZE: 67
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.WidgetToGoPage.Calendar.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.WidgetToGoPage.Calendar.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 1ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 2
+		Savings From Removed Comments: 721
+		Savings From Removed Linebreaks: 12
+		Supposed Total Savings: 734
+		Real Total Savings: 734
+
+		FINAL SIZE: 57
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.WidgetToGoPage.Calendar.library.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.WidgetToGoPage.Calendar.library.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 2ms
+		Unique Identifiers Scrunched: 0
+		Incidences of Identifiers Scrunched: 0
+		Savings From Scrunched Identifiers: 0
+		Savings From Removed Whitespace: 1
+		Total Comments Removed: 3
+		Savings From Removed Comments: 1176
+		Savings From Removed Linebreaks: 16
+		Supposed Total Savings: 1193
+		Real Total Savings: 1193
+
+		FINAL SIZE: 65
+
+***** C:\~uize\UIZE-JavaScript-Framework\js\~source\UizeDotCom.WidgetToGoPage.js
+	TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\UizeDotCom.WidgetToGoPage.js
+	BUILT (ALWAYS BUILD), BUILD DURATION: 13ms
+		Unique Identifiers Scrunched: 18
+		Incidences of Identifiers Scrunched: 65
+		Savings From Scrunched Identifiers: 420
+		Savings From Removed Whitespace: 618
+		Total Comments Removed: 8
+		Savings From Removed Comments: 896
+		Savings From Removed Linebreaks: 221
+		Supposed Total Savings: 2155
+		Real Total Savings: 2155
+
+		FINAL SIZE: 1454
+

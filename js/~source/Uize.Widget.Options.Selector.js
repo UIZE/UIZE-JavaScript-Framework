@@ -118,7 +118,7 @@ Uize.module ({
 				_valueDetails:'valueDetails'
 			});
 
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
+		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
 				optionWidgetClass:Uize.Widget.Button.ValueDisplay.Selector
 			});

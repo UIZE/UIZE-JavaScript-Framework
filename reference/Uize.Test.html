@@ -183,7 +183,7 @@
 					<li><a href="#5_1" title="Adds the specified child test to the test class and returns a reference to the test class.">5.1. Uize.Test.addTest</a></li>
 					<li><a href="#5_2" title="Returns a Uize.Test subclass, being the specified test object resolved to a test class.">5.2. Uize.Test.declare</a>
 						<ul>
-							<li><a href="#5_2_1" title="An object, being either a set of property values for the set-get properties of the Uize.Test class, or a reference to a Uize.Test subclass.">5.2.1. testOBJ</a></li>
+							<li><a href="#5_2_1" title="An object, being either a set of property values for the state properties of the Uize.Test class, or a reference to a Uize.Test subclass.">5.2.1. testOBJ</a></li>
 							<li><a href="#5_2_2" title="The Uize.Test.declare method allows for a more concise, declarative syntax for defining tests.">5.2.2. More Concise and Declarative</a></li>
 							<li><a href="#5_2_3" title="Because the Uize.Test.declare method returns a Uize.Test subclass, it can be used for declaring a child test in an array of child tests, as with all the other Test Class Factory Methods (see Example 2: A Set of Tests for an illustration of this).">5.2.3. Returns a Test Class</a></li>
 							<li><a href="#5_2_4" title="If a test properties object is specified for the testOBJ parameter (rather than a Uize.Test subclass), then the value of that object&apos;s test property is further resolved.">5.2.4. Resolving Subtests</a></li>
@@ -217,7 +217,7 @@
 									</li>
 								</ul>
 							</li>
-							<li><a href="#5_11_3" title="When the optional supplementalTestPropertiesOBJ parameter is specified, then additional values for the set-get properties of the created Uize.Test subclass can be specified.">5.11.3. supplementalTestPropertiesOBJ</a></li>
+							<li><a href="#5_11_3" title="When the optional supplementalTestPropertiesOBJ parameter is specified, then additional values for the state properties of the created Uize.Test subclass can be specified.">5.11.3. supplementalTestPropertiesOBJ</a></li>
 							<li><a href="#5_11_4" title="The optional supplementalCaseTestPropertiesOBJ parameter lets you specify supplemental test properties that should be applied to each of the cases specified by the casesARRAY parameter.">5.11.4. supplementalCaseTestPropertiesOBJ</a></li>
 							<li><a href="#5_11_5" title="In the following example, a test class is being created for the Uize.capFirstChar static method.">5.11.5. An Example</a></li>
 						</ul>
@@ -243,7 +243,7 @@
 					<li><a href="#5_19" title="Inherited from Uize.Class.">5.19. Uize.Test.wire</a></li>
 				</ul>
 			</li>
-			<li><a href="#6">6. Set-get Properties</a>
+			<li><a href="#6">6. State Properties</a>
 				<ul>
 					<li><a href="#6_1" title="A number, representing how long it took for the test instance to run, measured in milliseconds.">6.1. duration</a></li>
 					<li><a href="#6_2" title="An instance of JavaScript&apos;s Date object, that is set to the time at which running of the test instance ended.">6.2. endTime</a></li>
@@ -314,7 +314,7 @@
 				
 				<p><code><a href="#2_1">expect</a></code> | <code><a href="#2_2">expectArray</a></code> | <code><a href="#2_3">expectArrayLike</a></code> | <code><a href="#2_4">expectBoolean</a></code> | <code><a href="#2_5">expectFunction</a></code> | <code><a href="#2_6">expectInRange</a></code> | <code><a href="#2_7">expectInstanceOf</a></code> | <code><a href="#2_8">expectInteger</a></code> | <code><a href="#2_9">expectIntegerInRange</a></code> | <code><a href="#2_10">expectLengthInRange</a></code> | <code><a href="#2_11">expectNegativeInteger</a></code> | <code><a href="#2_12">expectNegativeNumber</a></code> | <code><a href="#2_13">expectNoRepeats</a></code> | <code><a href="#2_14">expectNonEmpty</a></code> | <code><a href="#2_15">expectNonEmptyArray</a></code> | <code><a href="#2_16">expectNonEmptyObject</a></code> | <code><a href="#2_17">expectNonEmptyString</a></code> | <code><a href="#2_18">expectNonNull</a></code> | <code><a href="#2_19">expectNumber</a></code> | <code><a href="#2_20">expectNumberInRange</a></code> | <code><a href="#2_21">expectObject</a></code> | <code><a href="#2_22">expectPositiveInteger</a></code> | <code><a href="#2_23">expectPositiveNumber</a></code> | <code><a href="#2_24">expectRegExp</a></code> | <code><a href="#2_25">expectSameAs</a></code> | <code><a href="#2_26">expectString</a></code> | <code><a href="#2_27">expectType</a></code> | <code><a href="#2_30">getDepth</a></code> | <code><a href="#2_31">getSynopsis</a></code> | <code><a href="#2_32">getTotalTests</a></code> | <code><a href="#2_35">log</a></code> | <code><a href="#2_39">run</a></code> | <code><a href="#2_41">stop</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#6_1">duration</a></code> | <code><a href="#6_2">endTime</a></code> | <code><a href="#6_3">inProgress</a></code> | <code><a href="#6_4">isAsync</a></code> | <code><a href="#2_35">log</a></code> | <code><a href="#6_6">progress</a></code> | <code><a href="#6_7">reasonForFailure</a></code> | <code><a href="#6_8">result</a></code> | <code><a href="#6_9">startTime</a></code> | <code><a href="#6_10">test</a></code> | <code><a href="#6_11">title</a></code></p>
 				
@@ -1679,7 +1679,7 @@ myTest.expectObject ('^\\s+$');               // returns false
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#6_7">reasonForFailure</a></code> and <code><a href="#6_8">result</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#6_7">reasonForFailure</a></code> and <code><a href="#6_8">result</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1761,7 +1761,7 @@ myTest.expectObject ('^\\s+$');               // returns false
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_35">log</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_35">log</a></code> state property</td></tr>
 			</table>
 		</div>
 		
@@ -1800,7 +1800,7 @@ myTest.expectObject ('^\\s+$');               // returns false
 <pre class="sample-code">resultBOOL = myTest.run ();
 </pre>
 			
-			<p>In the event that running of the instance's test(s) is asynchronous, the <code><a href="#2_39">run</a></code> method will return the value <code><a href="#4_1">Uize.Test.isAsync</a></code>, and the instance's <code><a href="#6_4">isAsync</a></code> set-get property will be set to the value <code>true</code>. For a more in-depth discussion, see the section Asynchronous Tests in the <a href="../explainers/javascript-testing-framework.html">JavaScript Testing Framework</a> explainer.</p>
+			<p>In the event that running of the instance's test(s) is asynchronous, the <code><a href="#2_39">run</a></code> method will return the value <code><a href="#4_1">Uize.Test.isAsync</a></code>, and the instance's <code><a href="#6_4">isAsync</a></code> state property will be set to the value <code>true</code>. For a more in-depth discussion, see the section Asynchronous Tests in the <a href="../explainers/javascript-testing-framework.html">JavaScript Testing Framework</a> explainer.</p>
 			
 			<a name="2_39_1"></a>
 			<h3 class="heading3" title="2. Instance Methods -&gt; 2.39. run -&gt; 2.39.1. Callback Function For Asynchronous Tests"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_39" title="2. Instance Methods -&gt; 2.39. run">39</a>.<a href="#2_39_1" title="2. Instance Methods -&gt; 2.39. run -&gt; 2.39.1. Callback Function For Asynchronous Tests">1</a>. </span>Callback Function For Asynchronous Tests</h3>
@@ -1851,13 +1851,13 @@ myTest.expectObject ('^\\s+$');               // returns false
 <pre class="sample-code">myTest.stop ();
 </pre>
 			
-			<p>Upon calling the <code><a href="#2_41">stop</a></code> method, the <code><a href="#2_41">stop</a></code> method will first be called on any child tests belonging to the test, after which the <code><a href="#6_3">inProgress</a></code> set-get property for the instance will be set to <code>false</code>. If the instance is not running its test(s) at the time that this method is called, then calling it will have no effect.</p>
+			<p>Upon calling the <code><a href="#2_41">stop</a></code> method, the <code><a href="#2_41">stop</a></code> method will first be called on any child tests belonging to the test, after which the <code><a href="#6_3">inProgress</a></code> state property for the instance will be set to <code>false</code>. If the instance is not running its test(s) at the time that this method is called, then calling it will have no effect.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_39">run</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_3">inProgress</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_3">inProgress</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1953,12 +1953,12 @@ myTest.expectObject ('^\\s+$');               // returns false
 		<div class="contents2">
 			<p>A read-only special value that is used to indicate that running of a test instance's test(s) is asynchronous.</p>
 			
-			<p>When a test instance is known to be asynchronous, the instance's <code><a href="#6_8">result</a></code> set-get property will be set to the value <code><a href="#4_1">Uize.Test.isAsync</a></code>. In this situation, the instance's <code><a href="#6_4">isAsync</a></code> set-get property will also be set to the value <code>true</code>. For a more in-depth discussion, see the section Asynchronous Tests in the <a href="../explainers/javascript-testing-framework.html">JavaScript Testing Framework</a> explainer.</p>
+			<p>When a test instance is known to be asynchronous, the instance's <code><a href="#6_8">result</a></code> state property will be set to the value <code><a href="#4_1">Uize.Test.isAsync</a></code>. In this situation, the instance's <code><a href="#6_4">isAsync</a></code> state property will also be set to the value <code>true</code>. For a more in-depth discussion, see the section Asynchronous Tests in the <a href="../explainers/javascript-testing-framework.html">JavaScript Testing Framework</a> explainer.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_4">isAsync</a></code> and <code><a href="#6_8">result</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_4">isAsync</a></code> and <code><a href="#6_8">result</a></code> state properties</td></tr>
 			</table>
 		</div>
 		
@@ -2021,9 +2021,9 @@ myTest.expectObject ('^\\s+$');               // returns false
 			<a name="5_2_1"></a>
 			<h3 class="heading3" title="5. Static Methods -&gt; 5.2. Uize.Test.declare -&gt; 5.2.1. testOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_2" title="5. Static Methods -&gt; 5.2. Uize.Test.declare">2</a>.<a href="#5_2_1" title="5. Static Methods -&gt; 5.2. Uize.Test.declare -&gt; 5.2.1. testOBJ">1</a>. </span>testOBJ</h3>
 			<div class="contents3">
-				<p>An object, being either a set of property values for the set-get properties of the <code>Uize.Test</code> class, or a reference to a <code>Uize.Test</code> subclass.</p>
+				<p>An object, being either a set of property values for the state properties of the <code>Uize.Test</code> class, or a reference to a <code>Uize.Test</code> subclass.</p>
 				
-				<p>In the event that the <code><a href="#5_2_1">testOBJ</a></code> parameter's value is a set of property value, a new subclass of the <code>Uize.Test</code> class is created, and its set-get properties are initialized with the values contained in the <code><a href="#5_2_1">testOBJ</a></code> object. The value of the <code><a href="#6_10">test</a></code> property receives special handling (see <a href="#5_2_4">Resolving Subtests</a>).</p>
+				<p>In the event that the <code><a href="#5_2_1">testOBJ</a></code> parameter's value is a set of property value, a new subclass of the <code>Uize.Test</code> class is created, and its state properties are initialized with the values contained in the <code><a href="#5_2_1">testOBJ</a></code> object. The value of the <code><a href="#6_10">test</a></code> property receives special handling (see <a href="#5_2_4">Resolving Subtests</a>).</p>
 			</div>
 			
 			<a name="5_2_2"></a>
@@ -2079,7 +2079,7 @@ My2Plus2Equals4TestClass.set ({
 });
 </pre>
 				
-				<p>The value of the <code><a href="#6_10">test</a></code> set-get property in this case is a function, which will be executed when an instance of the test class is run using the <code><a href="#2_39">run</a></code> instance method.</p>
+				<p>The value of the <code><a href="#6_10">test</a></code> state property in this case is a function, which will be executed when an instance of the test class is run using the <code><a href="#2_39">run</a></code> instance method.</p>
 			</div>
 			
 			<a name="5_2_6"></a>
@@ -2107,7 +2107,7 @@ My2Plus2Equals4TestClass.set ({
 });
 </pre>
 				
-				<p>The value of the <code><a href="#6_10">test</a></code> set-get property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see <a href="#5_2_4">Resolving Subtests</a>). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, the second is declared by calling the <code><a href="#5_2">Uize.Test.declare</a></code> method explicitly, and the remaining child tests are declared by calling the <code><a href="#5_13">Uize.Test.staticPropertyTest</a></code> static method.</p>
+				<p>The value of the <code><a href="#6_10">test</a></code> state property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see <a href="#5_2_4">Resolving Subtests</a>). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, the second is declared by calling the <code><a href="#5_2">Uize.Test.declare</a></code> method explicitly, and the remaining child tests are declared by calling the <code><a href="#5_13">Uize.Test.staticPropertyTest</a></code> static method.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -2367,7 +2367,7 @@ My2Plus2Equals4TestClass.set ({
 			<a name="5_11_3"></a>
 			<h3 class="heading3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.3. supplementalTestPropertiesOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.3. supplementalTestPropertiesOBJ">3</a>. </span>supplementalTestPropertiesOBJ</h3>
 			<div class="contents3">
-				<p>When the optional <code><a href="#5_11_3">supplementalTestPropertiesOBJ</a></code> parameter is specified, then additional values for the set-get properties of the created <code>Uize.Test</code> subclass can be specified.</p>
+				<p>When the optional <code><a href="#5_11_3">supplementalTestPropertiesOBJ</a></code> parameter is specified, then additional values for the state properties of the created <code>Uize.Test</code> subclass can be specified.</p>
 				
 				<p>Among other things, this allows the <code><a href="#6_11">title</a></code> of the test class to be specified (rather than using the automatically generated title).</p>
 			</div>
@@ -2743,10 +2743,10 @@ staticPropertyTest.run (
 	</div>
 	
 	<a name="6"></a>
-	<h1 class="heading1" title="6. Set-get Properties"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="6. State Properties"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="6_1"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.1. duration"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_1" title="6. Set-get Properties -&gt; 6.1. duration">1</a>. </span>duration</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.1. duration"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_1" title="6. State Properties -&gt; 6.1. duration">1</a>. </span>duration</h2>
 		<div class="contents2">
 			<p>A number, representing how long it took for the test instance to run, measured in milliseconds.</p>
 			
@@ -2765,7 +2765,7 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_2"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.2. endTime"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_2" title="6. Set-get Properties -&gt; 6.2. endTime">2</a>. </span>endTime</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.2. endTime"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_2" title="6. State Properties -&gt; 6.2. endTime">2</a>. </span>endTime</h2>
 		<div class="contents2">
 			<p>An instance of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, that is set to the time at which running of the test instance ended.</p>
 			
@@ -2774,7 +2774,7 @@ staticPropertyTest.run (
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#6_9">startTime</a></code> and <code><a href="#6_1">duration</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#6_9">startTime</a></code> and <code><a href="#6_1">duration</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2785,7 +2785,7 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_3"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.3. inProgress"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_3" title="6. Set-get Properties -&gt; 6.3. inProgress">3</a>. </span>inProgress</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.3. inProgress"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_3" title="6. State Properties -&gt; 6.3. inProgress">3</a>. </span>inProgress</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not the test instance is busy running its test(s).</p>
 			
@@ -2794,7 +2794,7 @@ staticPropertyTest.run (
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#6_6">progress</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#6_6">progress</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2805,7 +2805,7 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_4"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.4. isAsync"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_4" title="6. Set-get Properties -&gt; 6.4. isAsync">4</a>. </span>isAsync</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.4. isAsync"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_4" title="6. State Properties -&gt; 6.4. isAsync">4</a>. </span>isAsync</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not running the test instance's test(s) is asynchronous.</p>
 			
@@ -2825,7 +2825,7 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_5"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.5. log"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_5" title="6. Set-get Properties -&gt; 6.5. log">5</a>. </span>log</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.5. log"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_5" title="6. State Properties -&gt; 6.5. log">5</a>. </span>log</h2>
 		<div class="contents2">
 			<p>An array, containing all of the messages logged using the <code><a href="#2_36">log Instance Method</a></code>.</p>
 			
@@ -2854,16 +2854,16 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_6"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.6. progress"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_6" title="6. Set-get Properties -&gt; 6.6. progress">6</a>. </span>progress</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.6. progress"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_6" title="6. State Properties -&gt; 6.6. progress">6</a>. </span>progress</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, indicating how far the test instance is in running its test(s).</p>
 			
-			<p>Before a test instance has been run for the first time, the value of this property will be <code>0</code>. The value will also be reset to <code>0</code> each time the test is started. The value will be set to the <code>1</code> when the test ends running. During running of the test, the value will be updated periodically to reflect the progress that has been made. The <code><a href="#6_6">progress</a></code> is calculated by dividing the number of Subtests that have completed running by the total number of subtests defined in the <code><a href="#6_10">test</a></code> set-get property. Importantly, the value of this property does not reflect updates in the progress of individual subtests.</p>
+			<p>Before a test instance has been run for the first time, the value of this property will be <code>0</code>. The value will also be reset to <code>0</code> each time the test is started. The value will be set to the <code>1</code> when the test ends running. During running of the test, the value will be updated periodically to reflect the progress that has been made. The <code><a href="#6_6">progress</a></code> is calculated by dividing the number of Subtests that have completed running by the total number of subtests defined in the <code><a href="#6_10">test</a></code> state property. Importantly, the value of this property does not reflect updates in the progress of individual subtests.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#6_3">inProgress</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#6_3">inProgress</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2873,16 +2873,16 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_7"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.7. reasonForFailure"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_7" title="6. Set-get Properties -&gt; 6.7. reasonForFailure">7</a>. </span>reasonForFailure</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.7. reasonForFailure"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_7" title="6. State Properties -&gt; 6.7. reasonForFailure">7</a>. </span>reasonForFailure</h2>
 		<div class="contents2">
 			<p>A string, providing an explanation for why the test failed, or the value <code>undefined</code> if the test has not failed.</p>
 			
-			<p>Before a test instance has been run for the first time, the value of this property will be <code>undefined</code>. The value will also be reset to <code>undefined</code> each time the test is started, and will remain <code>undefined</code> while the test is in progress. If the test fails, the value of this property is typically set in a call to one of the Expectation Methods, along with the <code><a href="#6_8">result</a></code> set-get property being set to <code>false</code>.</p>
+			<p>Before a test instance has been run for the first time, the value of this property will be <code>undefined</code>. The value will also be reset to <code>undefined</code> each time the test is started, and will remain <code>undefined</code> while the test is in progress. If the test fails, the value of this property is typically set in a call to one of the Expectation Methods, along with the <code><a href="#6_8">result</a></code> state property being set to <code>false</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#6_8">result</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#6_8">result</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2893,7 +2893,7 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_8"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.8. result"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_8" title="6. Set-get Properties -&gt; 6.8. result">8</a>. </span>result</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.8. result"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_8" title="6. State Properties -&gt; 6.8. result">8</a>. </span>result</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not the test passed, or the value <code>undefined</code> or <code><a href="#5_5">Uize.Test.isAsync</a></code>.</p>
 			
@@ -2904,7 +2904,7 @@ staticPropertyTest.run (
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#6_7">reasonForFailure</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#6_7">reasonForFailure</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2915,7 +2915,7 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_9"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.9. startTime"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_9" title="6. Set-get Properties -&gt; 6.9. startTime">9</a>. </span>startTime</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.9. startTime"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_9" title="6. State Properties -&gt; 6.9. startTime">9</a>. </span>startTime</h2>
 		<div class="contents2">
 			<p>An instance of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object, that is set to the time at which running of the test instance started.</p>
 			
@@ -2924,7 +2924,7 @@ staticPropertyTest.run (
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#6_2">endTime</a></code> and <code><a href="#6_1">duration</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#6_2">endTime</a></code> and <code><a href="#6_1">duration</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2935,20 +2935,20 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_10"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.10. test"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_10" title="6. Set-get Properties -&gt; 6.10. test">10</a>. </span>test</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.10. test"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_10" title="6. State Properties -&gt; 6.10. test">10</a>. </span>test</h2>
 		<div class="contents2">
 			<p>A test function, or an array of child tests where each element is an instance of a <code>Uize.Test</code> subclass.</p>
 			
 			<a name="6_10_1"></a>
-			<h3 class="heading3" title="6. Set-get Properties -&gt; 6.10. test -&gt; 6.10.1. The Simple Test Case"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_10" title="6. Set-get Properties -&gt; 6.10. test">10</a>.<a href="#6_10_1" title="6. Set-get Properties -&gt; 6.10. test -&gt; 6.10.1. The Simple Test Case">1</a>. </span>The Simple Test Case</h3>
+			<h3 class="heading3" title="6. State Properties -&gt; 6.10. test -&gt; 6.10.1. The Simple Test Case"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_10" title="6. State Properties -&gt; 6.10. test">10</a>.<a href="#6_10_1" title="6. State Properties -&gt; 6.10. test -&gt; 6.10.1. The Simple Test Case">1</a>. </span>The Simple Test Case</h3>
 			<div class="contents3">
 				<p>In the case of a simple test that has no child tests, the value of the <code><a href="#6_10">test</a></code> property should be a reference to the function that performs the test action.</p>
 				
-				<p>This function will be executed when the test is run by calling the <code><a href="#2_39">run</a></code> instance method. When the function is called, it will be called as an instance method of the test instance, so it will have access to the instance for the purpose of calling any of the Expectation Methods, or for accessing state of the instance through its various set-get properties. The function should expect to receive a single parameter, being a continuation function that can be called in case the test is asynchronous (see the section on Asynchronous Tests in the <a href="../explainers/javascript-testing-framework.html">JavaScript Testing Framework</a> explainer for more details). In the case of synchronous tests, the test function should return a boolean value, indicating whether the test passed or failed.</p>
+				<p>This function will be executed when the test is run by calling the <code><a href="#2_39">run</a></code> instance method. When the function is called, it will be called as an instance method of the test instance, so it will have access to the instance for the purpose of calling any of the Expectation Methods, or for accessing state of the instance through its various state properties. The function should expect to receive a single parameter, being a continuation function that can be called in case the test is asynchronous (see the section on Asynchronous Tests in the <a href="../explainers/javascript-testing-framework.html">JavaScript Testing Framework</a> explainer for more details). In the case of synchronous tests, the test function should return a boolean value, indicating whether the test passed or failed.</p>
 			</div>
 			
 			<a name="6_10_2"></a>
-			<h3 class="heading3" title="6. Set-get Properties -&gt; 6.10. test -&gt; 6.10.2. The Child Tests Case"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_10" title="6. Set-get Properties -&gt; 6.10. test">10</a>.<a href="#6_10_2" title="6. Set-get Properties -&gt; 6.10. test -&gt; 6.10.2. The Child Tests Case">2</a>. </span>The Child Tests Case</h3>
+			<h3 class="heading3" title="6. State Properties -&gt; 6.10. test -&gt; 6.10.2. The Child Tests Case"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_10" title="6. State Properties -&gt; 6.10. test">10</a>.<a href="#6_10_2" title="6. State Properties -&gt; 6.10. test -&gt; 6.10.2. The Child Tests Case">2</a>. </span>The Child Tests Case</h3>
 			<div class="contents3">
 				<p>In the case of a test that is serving as a parent for a set of child tests, the value of the <code><a href="#6_10">test</a></code> property will be an array of child test instances.</p>
 				
@@ -2963,7 +2963,7 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="6_11"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.11. title"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_11" title="6. Set-get Properties -&gt; 6.11. title">11</a>. </span>title</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.11. title"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_11" title="6. State Properties -&gt; 6.11. title">11</a>. </span>title</h2>
 		<div class="contents2">
 			<p>A string, representing the title of the test instance.</p>
 			

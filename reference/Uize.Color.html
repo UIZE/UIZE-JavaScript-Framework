@@ -135,7 +135,7 @@
 					<li><a href="#8_5" title="An array, containing three elements for the red, green, and blue channels of an sRGB color, whose values are integers (eg. the color chartreuse is encoded as [127,255,0]).">8.5. RGB array</a>
 						<ul>
 							<li><a href="#8_5_1" title="When a color is encoded as RGB array, the resulting array is made up of three number type elements that represent the values of the source color&apos;s red, green, and blue channels, respectively.">8.5.1. Encoding</a></li>
-							<li><a href="#8_5_2" title="When a color is decoded from RGB array, the values of the array&apos;s three elements may be numbers, strings, or any object that implements a valueOf interface (such as an instance of a Uize.Class subclass that implements the value set-get property).">8.5.2. Decoding</a></li>
+							<li><a href="#8_5_2" title="When a color is decoded from RGB array, the values of the array&apos;s three elements may be numbers, strings, or any object that implements a valueOf interface (such as an instance of a Uize.Class subclass that implements the value state property).">8.5.2. Decoding</a></li>
 						</ul>
 					</li>
 					<li><a href="#8_6" title="An integer in the range of 0 to 16777215, corresponding in value to the hexadecimal RGB representation of a color (eg. the color chartreuse is encoded as 8388352, which is equivalent to the hex number representation 0x7fff00).">8.6. RGB int</a>
@@ -147,7 +147,7 @@
 					<li><a href="#8_7" title="An object, containing red, green, and blue properties for the three sRGB channels, whose values are integers (eg. the color chartreuse is encoded as {red:127,green:255,blue:0}).">8.7. RGB object</a>
 						<ul>
 							<li><a href="#8_7_1" title="When a color is encoded as RGB object, the resulting object will contain the three number type properties red, green, and blue, reflecting the values of the source color&apos;s red, green, and blue channels.">8.7.1. Encoding</a></li>
-							<li><a href="#8_7_2" title="When a color is decoded from RGB object, the values of the object&apos;s red, green, and blue properties may be numbers, strings, or any object that implements a valueOf interface interface (such as an instance of a Uize.Class subclass that implements the value set-get property).">8.7.2. Decoding</a></li>
+							<li><a href="#8_7_2" title="When a color is decoded from RGB object, the values of the object&apos;s red, green, and blue properties may be numbers, strings, or any object that implements a valueOf interface interface (such as an instance of a Uize.Class subclass that implements the value state property).">8.7.2. Decoding</a></li>
 						</ul>
 					</li>
 					<li><a href="#8_8" title="An Rgb(...) formatted CSS color style property value (eg. the color chartreuse is encoded as &apos;rgb(127,255,0)&apos;)">8.8. RGB string</a>
@@ -159,13 +159,13 @@
 					<li><a href="#8_9" title="An array, containing three elements for hue, saturation, and lightness, whose values may be floating point numbers (eg. the color chartreuse is encoded as [90.11764705882354,100,50]), and that specifies a color in the HSL color space.">8.9. HSL array</a>
 						<ul>
 							<li><a href="#8_9_1" title="When a color is encoded as HSL array, the resulting array is made up of three number type elements that represent the values of the source color&apos;s hue, saturation, and lightness, respectively.">8.9.1. Encoding</a></li>
-							<li><a href="#8_9_2" title="When a color is decoded from HSL array, the values of the array&apos;s three elements may be numbers, strings, or any object that implements a valueOf interface interface (such as an instance of a Uize.Class subclass that implements the value set-get property).">8.9.2. Decoding</a></li>
+							<li><a href="#8_9_2" title="When a color is decoded from HSL array, the values of the array&apos;s three elements may be numbers, strings, or any object that implements a valueOf interface interface (such as an instance of a Uize.Class subclass that implements the value state property).">8.9.2. Decoding</a></li>
 						</ul>
 					</li>
 					<li><a href="#8_10" title="An object, containing hue, saturation, and lightness properties, whose values may be floating point numbers (eg. the color chartreuse is encoded as {hue:90.11764705882354,saturation:100,lightness:50}), and that specifies a color in the HSL color space.">8.10. HSL object</a>
 						<ul>
 							<li><a href="#8_10_1" title="When a color is encoded as HSL object, the resulting object will contain the three number type properties hue, saturation, and lightness, reflecting the values of the source color&apos;s hue, saturation, and lightness.">8.10.1. Encoding</a></li>
-							<li><a href="#8_10_2" title="When a color is decoded from HSL object, the values of the object&apos;s hue, saturation, and lightness properties may be numbers, strings, or any object that implements a valueOf interface interface (such as an instance of a Uize.Class subclass that implements the value set-get property).">8.10.2. Decoding</a></li>
+							<li><a href="#8_10_2" title="When a color is decoded from HSL object, the values of the object&apos;s hue, saturation, and lightness properties may be numbers, strings, or any object that implements a valueOf interface interface (such as an instance of a Uize.Class subclass that implements the value state property).">8.10.2. Decoding</a></li>
 						</ul>
 					</li>
 					<li><a href="#8_11" title="An Hsl(...) formatted CSS color style property value (eg. the color chartreuse is encoded as &apos;hsl(90,100%,50%)&apos;) that specifies a color in the HSL color space.">8.11. HSL string</a>
@@ -202,7 +202,7 @@
 		<div class="contents2">
 			<p>First off, it's worth emphasizing that the <code>Uize.Color</code> object is not a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, but a very lightweight object.</p>
 			
-			<p>As such, the <code>Uize.Color</code> object does not support events, does not provide set-get properties, does not inherit subclassing facilities from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class, etc. This object is deliberately designed to be very lightweight and to have a really tiny footprint - in the spirit of JavaScript's native objects, such as <code><a href="../javascript-reference/String.html">String</a></code>, <code><a href="../javascript-reference/Number.html">Number</a></code>, <code><a href="../javascript-reference/Date.html">Date</a></code>, and the like.</p>
+			<p>As such, the <code>Uize.Color</code> object does not support events, does not provide state properties, does not inherit subclassing facilities from the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class, etc. This object is deliberately designed to be very lightweight and to have a really tiny footprint - in the spirit of JavaScript's native objects, such as <code><a href="../javascript-reference/String.html">String</a></code>, <code><a href="../javascript-reference/Number.html">Number</a></code>, <code><a href="../javascript-reference/Date.html">Date</a></code>, and the like.</p>
 		</div>
 		
 		<a name="1_2"></a>
@@ -1443,7 +1443,7 @@ whITE
 			<a name="8_5_2"></a>
 			<h3 class="heading3" title="8. Color Encodings -&gt; 8.5. RGB array -&gt; 8.5.2. Decoding"><span class="headingNumber"><a href="#8" title="8. Color Encodings">8</a>.<a href="#8_5" title="8. Color Encodings -&gt; 8.5. RGB array">5</a>.<a href="#8_5_2" title="8. Color Encodings -&gt; 8.5. RGB array -&gt; 8.5.2. Decoding">2</a>. </span>Decoding</h3>
 			<div class="contents3">
-				<p>When a color is decoded from <code><a href="#8_5">RGB array</a></code>, the values of the array's three elements may be numbers, strings, or any object that implements a <code>valueOf interface</code> (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property).</p>
+				<p>When a color is decoded from <code><a href="#8_5">RGB array</a></code>, the values of the array's three elements may be numbers, strings, or any object that implements a <code>valueOf interface</code> (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> state property).</p>
 				
 				<p><span class="allCaps">EXAMPLES</span></p>
 				
@@ -1557,7 +1557,7 @@ whITE
 			<a name="8_7_2"></a>
 			<h3 class="heading3" title="8. Color Encodings -&gt; 8.7. RGB object -&gt; 8.7.2. Decoding"><span class="headingNumber"><a href="#8" title="8. Color Encodings">8</a>.<a href="#8_7" title="8. Color Encodings -&gt; 8.7. RGB object">7</a>.<a href="#8_7_2" title="8. Color Encodings -&gt; 8.7. RGB object -&gt; 8.7.2. Decoding">2</a>. </span>Decoding</h3>
 			<div class="contents3">
-				<p>When a color is decoded from <code><a href="#8_7">RGB object</a></code>, the values of the object's <code>red</code>, <code>green</code>, and <code>blue</code> properties may be numbers, strings, or any object that implements a <code>valueOf interface</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property).</p>
+				<p>When a color is decoded from <code><a href="#8_7">RGB object</a></code>, the values of the object's <code>red</code>, <code>green</code>, and <code>blue</code> properties may be numbers, strings, or any object that implements a <code>valueOf interface</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> state property).</p>
 				
 				<p><span class="allCaps">EXAMPLES</span></p>
 				
@@ -1672,7 +1672,7 @@ RGB ( 255 , 0 , 255 )
 			<a name="8_9_2"></a>
 			<h3 class="heading3" title="8. Color Encodings -&gt; 8.9. HSL array -&gt; 8.9.2. Decoding"><span class="headingNumber"><a href="#8" title="8. Color Encodings">8</a>.<a href="#8_9" title="8. Color Encodings -&gt; 8.9. HSL array">9</a>.<a href="#8_9_2" title="8. Color Encodings -&gt; 8.9. HSL array -&gt; 8.9.2. Decoding">2</a>. </span>Decoding</h3>
 			<div class="contents3">
-				<p>When a color is decoded from <code><a href="#8_9">HSL array</a></code>, the values of the array's three elements may be numbers, strings, or any object that implements a <code>valueOf interface</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property).</p>
+				<p>When a color is decoded from <code><a href="#8_9">HSL array</a></code>, the values of the array's three elements may be numbers, strings, or any object that implements a <code>valueOf interface</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> state property).</p>
 				
 				<p><span class="allCaps">EXAMPLES</span></p>
 				
@@ -1732,7 +1732,7 @@ RGB ( 255 , 0 , 255 )
 			<a name="8_10_2"></a>
 			<h3 class="heading3" title="8. Color Encodings -&gt; 8.10. HSL object -&gt; 8.10.2. Decoding"><span class="headingNumber"><a href="#8" title="8. Color Encodings">8</a>.<a href="#8_10" title="8. Color Encodings -&gt; 8.10. HSL object">10</a>.<a href="#8_10_2" title="8. Color Encodings -&gt; 8.10. HSL object -&gt; 8.10.2. Decoding">2</a>. </span>Decoding</h3>
 			<div class="contents3">
-				<p>When a color is decoded from <code><a href="#8_10">HSL object</a></code>, the values of the object's <code>hue</code>, <code>saturation</code>, and <code>lightness</code> properties may be numbers, strings, or any object that implements a <code>valueOf interface</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property).</p>
+				<p>When a color is decoded from <code><a href="#8_10">HSL object</a></code>, the values of the object's <code>hue</code>, <code>saturation</code>, and <code>lightness</code> properties may be numbers, strings, or any object that implements a <code>valueOf interface</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> state property).</p>
 				
 				<p><span class="allCaps">EXAMPLES</span></p>
 				

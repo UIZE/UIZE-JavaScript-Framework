@@ -831,7 +831,7 @@ Uize.module ({
         test:[
           {
             title:
-              'Test that the ' + _method + ' method always sets the value of the specified set-get property to ' + _isMetTest + ', regardless of the property\'s current value',
+              'Test that the ' + _method + ' method always sets the value of the specified state property to ' + _isMetTest + ', regardless of the property\'s current value',
             test:function () {
               var _Class = Uize.Class.subclass ();
               _Class.registerProperties ({_myProperty:'myProperty'});
@@ -853,7 +853,7 @@ Uize.module ({
             }
           },
           {
-            title:'Test that the ' + _method + ' method works correctly with a set-get property that has not yet been registered',
+            title:'Test that the ' + _method + ' method works correctly with a state property that has not yet been registered',
             test:function () {
               var
                 _Class = Uize.Class.subclass (),
@@ -949,7 +949,7 @@ Uize.module ({
           },
           {
             title:
-              'Test that, when a private name for a set-get property is different from its publice name, the set method sets a value for a property using the private name of the set-get property and not its public name',
+              'Test that, when a private name for a state property is different from its publice name, the set method sets a value for a property using the private name of the state property and not its public name',
             test:function () {
               var _Subclass = Uize.Class.subclass ();
               _Subclass.registerProperties ({_property1:'property1'});
@@ -963,7 +963,7 @@ Uize.module ({
           },
           {
             title:
-              'Test that, when a private name for a set-get property is different from its publice name, a value can be set for the property by specifying its private name when calling the set method',
+              'Test that, when a private name for a state property is different from its publice name, a value can be set for the property by specifying its private name when calling the set method',
             test:function () {
               var _Subclass = Uize.Class.subclass ();
               _Subclass.registerProperties ({_property1:'property1'});
@@ -982,7 +982,7 @@ Uize.module ({
         test:[
           {
             title:
-              'Test that the value of a single set-get property can be obtained by calling the get method with a single string argument, specifying the name of the property',
+              'Test that the value of a single state property can be obtained by calling the get method with a single string argument, specifying the name of the property',
             test:function () {
               var _Subclass = Uize.Class.subclass ();
               _Subclass.registerProperties ({
@@ -1058,7 +1058,7 @@ Uize.module ({
           },
           {
             title:
-              'Test that, when a private name for a set-get property is different from its publice name, the value can be obtained for the property by specifying its private name when calling the get method',
+              'Test that, when a private name for a state property is different from its publice name, the value can be obtained for the property by specifying its private name when calling the get method',
             test:function () {
               var
                 _Subclass = Uize.Class.subclass (),
@@ -1073,7 +1073,7 @@ Uize.module ({
           },
           {
             title:
-              'Test that, when a private name for a set-get property is different from its publice name and its value is set using its private name, the value can be obtained for the property by specifying its public name when calling the get method',
+              'Test that, when a private name for a state property is different from its publice name and its value is set using its private name, the value can be obtained for the property by specifying its public name when calling the get method',
             test:function () {
               var _Subclass = Uize.Class.subclass ();
               _Subclass.registerProperties ({_property1:'property1'});
@@ -1114,7 +1114,7 @@ Uize.module ({
           ['Uize.Class.valueOf',[
             {
               title:
-                'Test that the valueOf method of a class returns the value of the special value set-get property for the class (ie. the initial value for the value set-get property)',
+                'Test that the valueOf method of a class returns the value of the special value state property for the class (ie. the initial value for the value state property)',
               test:function () {
                 var _Subclass = Uize.Class.subclass ();
                 _Subclass.registerProperties ({
@@ -1128,7 +1128,7 @@ Uize.module ({
             },
             {
               title:
-                'Test that the valueOf method of an instance returns the value of the special value set-get property for the instance',
+                'Test that the valueOf method of an instance returns the value of the special value state property for the instance',
               test:function () {
                 var _Subclass = Uize.Class.subclass ();
                 _Subclass.registerProperties ({
@@ -1144,8 +1144,8 @@ Uize.module ({
           ]],
           ['Uize.Class.subclass',[
             /*
-              - test set-get properties and inheritance
-                - test that set-get properties are inherited by subclasses
+              - test state properties and inheritance
+                - test that state properties are inherited by subclasses
             */
           ]],
           ['Uize.Class.singleton',[
@@ -1269,13 +1269,13 @@ Uize.module ({
           ]
         },
         {
-          title:'Test the set-get properties system',
+          title:'Test the state properties system',
           test:[
             {
-              title:'Test registering set-get properties',
+              title:'Test registering state properties',
               test:[
                 {
-                  title:'Test that a set-get property can be registered using the minimal profile syntax',
+                  title:'Test that a state property can be registered using the minimal profile syntax',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({_myProperty:'myProperty'});
@@ -1284,7 +1284,7 @@ Uize.module ({
                   }
                 },
                 {
-                  title:'Test that a set-get property can be registered using the complete profile syntax',
+                  title:'Test that a state property can be registered using the complete profile syntax',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({_myProperty:{name:'myProperty'}});
@@ -1307,7 +1307,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the public name of a set-get property is defaulted when no value is specified for the name property in the property profile',
+                    'Test that the public name of a state property is defaulted when no value is specified for the name property in the property profile',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({myProperty:{}});
@@ -1317,7 +1317,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that set-get properties can be registered in an ad hoc fashion, by specifying values for unregistered properties when calling the constructor',
+                    'Test that state properties can be registered in an ad hoc fashion, by specifying values for unregistered properties when calling the constructor',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1329,7 +1329,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that set-get properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set instance method',
+                    'Test that state properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set instance method',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1342,7 +1342,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that set-get properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set static method',
+                    'Test that state properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set static method',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.set ({foo:'bar'});
@@ -1352,7 +1352,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that multiple set-get properties can be registered cumulatively by calling registerProperties repeatedly',
+                    'Test that multiple state properties can be registered cumulatively by calling registerProperties repeatedly',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({_myProperty1:'myProperty1'});
@@ -1364,14 +1364,14 @@ Uize.module ({
               ]
             },
             {
-              title:'Test setting values for set-get properties for instances and classes',
+              title:'Test setting values for state properties for instances and classes',
               test:[
                 _setMethodTest ('Test that the set method works for instances',true),
                 _setMethodTest ('Test that the set method works for classes',false)
               ]
             },
             {
-              title:'Test getting values for set-get properties for instances and classes',
+              title:'Test getting values for state properties for instances and classes',
               test:[
                 _getMethodTest ('Test that the get method works for instances',true),
                 _getMethodTest ('Test that the get method works for classes',false)
@@ -1382,7 +1382,7 @@ Uize.module ({
               test:[
                 {
                   title:
-                    'Test that when no initial value is specified for a set-get property, the property\'s initial value is undefined',
+                    'Test that when no initial value is specified for a state property, the property\'s initial value is undefined',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -1394,7 +1394,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that specifying a value property in a set-get property\'s profile when registering it has the effect of setting the initial value for that property for new instances that are created',
+                    'Test that specifying a value property in a state property\'s profile when registering it has the effect of setting the initial value for that property for new instances that are created',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -1406,7 +1406,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that null is supported as an initial value for a set-get property and that it is not treated the same as undefined',
+                    'Test that null is supported as an initial value for a state property and that it is not treated the same as undefined',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -1418,7 +1418,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the initial value registered for a property is returned as the result when querying the value of that set-get property on the class',
+                    'Test that the initial value registered for a property is returned as the result when querying the value of that state property on the class',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -1429,7 +1429,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that setting the value for a set-get property on the class has the effect of setting the initial value for the property',
+                    'Test that setting the value for a state property on the class has the effect of setting the initial value for the property',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -1442,7 +1442,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that setting the value for a set-get property on the class does not affect the value of the property for instances that have already been created',
+                    'Test that setting the value for a state property on the class does not affect the value of the property for instances that have already been created',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -1460,7 +1460,7 @@ Uize.module ({
               test:[
                 {
                   title:
-                    'Test that an onChange handler for a set-get property is executed on the very first change of the value of that property that occurs during construction of the instance',
+                    'Test that an onChange handler for a state property is executed on the very first change of the value of that property that occurs during construction of the instance',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1478,7 +1478,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that an onChange handler for a set-get property is only executed once upon construction when a value specified for the property in the constructor differs from the property\'s initial value',
+                    'Test that an onChange handler for a state property is only executed once upon construction when a value specified for the property in the constructor differs from the property\'s initial value',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1496,7 +1496,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that an onChange handler is only executed when the value of a set-get property has actually changed as a result of a set - not on non-changing sets',
+                    'Test that an onChange handler is only executed when the value of a state property has actually changed as a result of a set - not on non-changing sets',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1517,7 +1517,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that an onChange handler is called as a method on the instance that owns the set-get property',
+                    'Test that an onChange handler is called as a method on the instance that owns the state property',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1535,7 +1535,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the value of the set-get property has already changed by the time that an onChange handler is called',
+                    'Test that the value of the state property has already changed by the time that an onChange handler is called',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1576,7 +1576,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that an array of multiple onChange handlers can be specified for a set-get property, and that all of them are executed, in the order in which they appear in the array',
+                    'Test that an array of multiple onChange handlers can be specified for a state property, and that all of them are executed, in the order in which they appear in the array',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1695,7 +1695,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that onChange handlers are called for all set-get properties that have changed value in the course of the same set call',
+                    'Test that onChange handlers are called for all state properties that have changed value in the course of the same set call',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1738,7 +1738,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that an onChange handler is not called for any instances of a class when the value of the set-get property is set on the class',
+                    'Test that an onChange handler is not called for any instances of a class when the value of the state property is set on the class',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1766,7 +1766,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that a set-get property\'s onChange handler is only called for an instance of the class whose value for the property has changed (ie. no contamination across instances)',
+                    'Test that a state property\'s onChange handler is only called for an instance of the class whose value for the property has changed (ie. no contamination across instances)',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1791,7 +1791,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that an onChange handler is only executed if the value of a set-get property has changed after being conformed, and not just if the pre-conformed value is different from the current value',
+                    'Test that an onChange handler is only executed if the value of a state property has changed after being conformed, and not just if the pre-conformed value is different from the current value',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1822,7 +1822,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that when the same onChange handler is registered for multiple set-get properties, it is only executed once - even if the values of all those properties change during a set',
+                    'Test that when the same onChange handler is registered for multiple state properties, it is only executed once - even if the values of all those properties change during a set',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1902,7 +1902,7 @@ Uize.module ({
               test:[
                 {
                   title:
-                    'Test that a set-get property\'s conformer function is called as an instance method on the instance for which the property values are being set',
+                    'Test that a state property\'s conformer function is called as an instance method on the instance for which the property values are being set',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1921,7 +1921,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that a set-get property\'s conformer function is called with two arguments, where the first argument is the new value being set for the property, and the second argument is the current value of the property',
+                    'Test that a state property\'s conformer function is called with two arguments, where the first argument is the new value being set for the property, and the second argument is the current value of the property',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1960,7 +1960,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that a set-get property\'s conformer function is executed before the value of the property has changed',
+                    'Test that a state property\'s conformer function is executed before the value of the property has changed',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -1985,7 +1985,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that a set-get property\'s conformer function is called before its onChange handlers are called',
+                    'Test that a state property\'s conformer function is called before its onChange handlers are called',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2008,7 +2008,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that, if a set-get property\'s value does not change as a result of the action of a conformer, then the property\'s onChange handlers are not executed',
+                    'Test that, if a state property\'s value does not change as a result of the action of a conformer, then the property\'s onChange handlers are not executed',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2070,7 +2070,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the Changed.[propertyName] events for set-get properties that have changed value are fired after all the onChange handlers for the properties have been executed',
+                    'Test that the Changed.[propertyName] events for state properties that have changed value are fired after all the onChange handlers for the properties have been executed',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2121,7 +2121,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the Changed.[propertyName] events for set-get properties that have changed value are fired in the order in which the properties are set - not the order in which they were registered',
+                    'Test that the Changed.[propertyName] events for state properties that have changed value are fired in the order in which the properties are set - not the order in which they were registered',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2257,7 +2257,7 @@ Uize.module ({
               test:[
                 {
                   title:
-                    'Test that the Changed.* event is not fired if no set-get properties have changed value during a set',
+                    'Test that the Changed.* event is not fired if no state properties have changed value during a set',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2280,7 +2280,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the Changed.* event is fired if any set-get property has changed value during a set',
+                    'Test that the Changed.* event is fired if any state property has changed value during a set',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2301,7 +2301,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the Changed.* event is fired only once when multiple set-get properties have changed value',
+                    'Test that the Changed.* event is fired only once when multiple state properties have changed value',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2349,7 +2349,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the Changed.* event is fired after all the onChange handlers for set-get properties that have changed value have been executed, but before handlers for the Changed.[propertyName] events for individual properties are executed',
+                    'Test that the Changed.* event is fired after all the onChange handlers for state properties that have changed value have been executed, but before handlers for the Changed.[propertyName] events for individual properties are executed',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2451,7 +2451,7 @@ Uize.module ({
               test:[
                 {
                   title:
-                    'Test that a set-get property can have multiple aliases, and that its value can be set through any of those aliases',
+                    'Test that a state property can have multiple aliases, and that its value can be set through any of those aliases',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2478,7 +2478,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that getting the values for all set-get properties results in the values of set-get properties with aliases being reported only through their canonical (non-alias) names',
+                    'Test that getting the values for all state properties results in the values of state properties with aliases being reported only through their canonical (non-alias) names',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -2519,7 +2519,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that a value can be set for a set-get property using any of its aliases in the constructor when creating an instance',
+                    'Test that a value can be set for a state property using any of its aliases in the constructor when creating an instance',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -2544,7 +2544,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that a set-get property\'s value can be accessed using any of its registered aliases',
+                    'Test that a state property\'s value can be accessed using any of its registered aliases',
                   test:function () {
                     var _Subclass = Uize.Class.subclass ();
                     _Subclass.registerProperties ({
@@ -2563,7 +2563,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that handlers can be wired for the Changed.[propertyName] event of a set-get property, using any one of its alias names or its canonical name',
+                    'Test that handlers can be wired for the Changed.[propertyName] event of a state property, using any one of its alias names or its canonical name',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2598,7 +2598,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that handlers can be unwired for the Changed.[propertyName] event of a set-get property, using any one of its alias names or its canonical name',
+                    'Test that handlers can be unwired for the Changed.[propertyName] event of a state property, using any one of its alias names or its canonical name',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2641,7 +2641,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the canonical name of a set-get property is used for the name of the Changed.[propertyName] event that is fired when the property\'s value is changed, regardless of which alias is used when setting the property\'s value',
+                    'Test that the canonical name of a state property is used for the name of the Changed.[propertyName] event that is fired when the property\'s value is changed, regardless of which alias is used when setting the property\'s value',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2677,7 +2677,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the canonical name of a set-get property is used for the properties-being-set object that is passed as a parameter to an onChange handler for the set-get property',
+                    'Test that the canonical name of a state property is used for the properties-being-set object that is passed as a parameter to an onChange handler for the state property',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2710,7 +2710,7 @@ Uize.module ({
                 },
                 {
                   title:
-                    'Test that the canonical names of set-get properties are used for the properties object that is provided in the event object for Changed.* events',
+                    'Test that the canonical names of state properties are used for the properties object that is provided in the event object for Changed.* events',
                   test:function () {
                     var
                       _Subclass = Uize.Class.subclass (),
@@ -2745,7 +2745,7 @@ Uize.module ({
             },
             {
               title:
-                'Test that values specified for set-get properties when calling a class\' constructor are respected',
+                'Test that values specified for state properties when calling a class\' constructor are respected',
               test:function () {
                 var _Subclass = Uize.Class.subclass ();
                 _Subclass.registerProperties ({

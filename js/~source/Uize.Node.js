@@ -295,7 +295,7 @@ Uize.module ({
 							Of course, you can use this technique to test for overlapping of any two line segments - it doesn't matter if those lines are from a vertical or horizontal axis, since we've collapsed a test in 2D space to being a test in 1D space.
 
 							NOTES
-							- any parameter of this method can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property)
+							- any parameter of this method can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
 				*/
 			};
 
@@ -1108,7 +1108,7 @@ Uize.module ({
 							Uize.Node.injectHtml (nodeBLOB,htmlSTRorOBJ);
 							.............................................
 
-							The =htmlSTRorOBJ= parameter can be a DOM node, an array of DOM nodes, a string containing the HTML you wish to inject, or it can be any object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
+							The =htmlSTRorOBJ= parameter can be a DOM node, an array of DOM nodes, a string containing the HTML you wish to inject, or it can be any object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property).
 
 							VARIATION
 							...........................................................
@@ -1533,7 +1533,7 @@ Uize.module ({
 							Uize.Node.setInnerHtml (nodeBLOB,htmlSTRorOBJ);
 							...............................................
 
-							The =htmlSTRorOBJ= parameter can be a string containing the HTML you wish to inject, or it can be any object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
+							The =htmlSTRorOBJ= parameter can be a string containing the HTML you wish to inject, or it can be any object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property).
 
 							NOTES
 							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
@@ -1559,7 +1559,7 @@ Uize.module ({
 
 							NOTES
 							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
-							- the =opacityFLOATorOBJ= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property)
+							- the =opacityFLOATorOBJ= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
 				*/
 			};
 
@@ -1675,7 +1675,7 @@ Uize.module ({
 								This feature of the =Uize.Node.setStyle= method is provided as a convenience, so that the values of number type variables can be supplied - as is - when setting style properties such as =left=, =top=, =width=, =height=, =fontSize=, etc.
 
 							Specifying Instance Values
-								When an instance of a =Uize.Class= subclass is specified for a CSS style property, the instance's =valueOf Intrinsic Method= is invoked in order to obtain the value of the instance's =value= set-get property.
+								When an instance of a =Uize.Class= subclass is specified for a CSS style property, the instance's =valueOf Intrinsic Method= is invoked in order to obtain the value of the instance's =value= state property.
 
 								So, for example, the following statement...
 
@@ -1689,7 +1689,7 @@ Uize.module ({
 								Uize.Node.setStyle ('myNodeId',{width:myWidthSlider});
 								......................................................
 
-								This feature of the =Uize.Node.setStyle= method is provided as a convenience, so that instances of =Uize.Class= subclasses that are value selectors and that implement the =value= set-get property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for `Specifying Number Values`.
+								This feature of the =Uize.Node.setStyle= method is provided as a convenience, so that instances of =Uize.Class= subclasses that are value selectors and that implement the =value= state property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for `Specifying Number Values`.
 
 							NOTES
 							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
@@ -1753,7 +1753,7 @@ Uize.module ({
 							Uize.Node.setValue (nodeBLOB,valueSTRorNUMorBOOLorOBJ);
 							.......................................................
 
-							In addition to being able to be a simple type value (like a string, boolean, or number), the =valueSTRorNUMorBOOLorOBJ= parameter can also be any object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
+							In addition to being able to be a simple type value (like a string, boolean, or number), the =valueSTRorNUMorBOOLorOBJ= parameter can also be any object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property).
 
 							This method provides a convenient abstraction that makes it easier to change a form's implementation, without having to worry about modifying the JavaScript application logic that sets values for the form's fields. For example, you could change the HTML of a form so that what was once a =select= tag becomes a =radio= button set, and the call to =Uize.Node.setValue= could remain unchanged.
 
@@ -1893,7 +1893,7 @@ Uize.module ({
 							NOTES
 							- you can use the =Uize.Node.setValue= method to set values on readonly form elements
 							- see the corresponding =Uize.Node.getValue= static method
-							- the =value= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property)
+							- the =value= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
 				*/
 			};
 

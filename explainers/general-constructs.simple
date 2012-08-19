@@ -121,7 +121,7 @@ Value Transformer
 		A `Value Transformer` can be used with any of the many methods that support a Value Transformer.
 
 		The Uize.Fade Class
-			The =Uize.Fade= class supports a `Value Transformer` with its =curve= set-get property.
+			The =Uize.Fade= class supports a `Value Transformer` with its =curve= state property.
 
 			Additionally, any of the factory methods that create instances of the =Uize.Fade= class will also support value transformers for the =curve= fade property. Examples of such factory methods are the =Uize.Fade.fade=, =Uize.Fade.fadeMethod=, =Uize.Fade.fadeProperty=, and =Uize.Fade.fadeProperties= methods implemented in the =Uize.Fade.xFactory= extension module, as well as the =Uize.Fx.fadeStyle= and =Uize.Fx.fadeStyleAcrossNodes= methods of the =Uize.Fx= module.
 
@@ -325,7 +325,7 @@ Value Conformer
 	A Value Conformer can be considered to be a specialized kind of `Value Transformer`, where the input value may be returned as is if it already conforms to the criteria, or it may be transformed in some way to force it into conformance with the criteria.
 
 	Applications of Value Conformers
-		Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as =Uize.map=).
+		Value conformers can have a variety of different uses - they can be used as conformers for state properties, or they can be supplied to map functions (such as =Uize.map=).
 
 		Among other things, value conformers can be used to...
 
@@ -361,8 +361,8 @@ Value Conformer
 
 			In the above example, the =Math.round= static method of JavaScript's built-in =Math= object is being used as a value conformer with the =Uize.map= method in order to conform all the number values in an array to integer values. The third parameter of the =Uize.map= method specifies the target for the mapped values, where the value =false= indicates that the values should *not* be populated into a new array but should replace the values in the source array.
 
-			Conformers for Set-get Properties
-				A `Value Conformer Function` can be specified for the =conformer= property in the profile of a set-get property. Consider the following example...
+			Conformers for State Properties
+				A `Value Conformer Function` can be specified for the =conformer= property in the profile of a state property. Consider the following example...
 
 				EXAMPLE
 				.......................................
@@ -380,7 +380,7 @@ Value Conformer
 				});
 				.......................................
 
-				In the above example, a =percentLoaded= set-get property is being registered for the class =MyClass=. In order to ensure that the value set for this property doesn't stray outside of the range of =0= to =100=, the `Value Conformer Function` =conformToRange0to100= is being specified for the =conformer= property inside the profile for the =percentLoaded= set-get property.
+				In the above example, a =percentLoaded= state property is being registered for the class =MyClass=. In order to ensure that the value set for this property doesn't stray outside of the range of =0= to =100=, the `Value Conformer Function` =conformToRange0to100= is being specified for the =conformer= property inside the profile for the =percentLoaded= state property.
 
 Value Validator
 	A Value Validator is code (specified as a `Value Validator Function`) that transforms an input value to a boolean value, indicating whether or not the input value is valid according to certain criteria.

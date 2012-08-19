@@ -76,7 +76,7 @@
 							</li>
 							<li><a href="#2_6_2">2.6.2. Using Date Ranges</a>
 								<ul>
-									<li><a href="#2_6_2_1" title="Because the value returned by the Uize.Date.getRangeAround method is an object containing minValue and maxValue properties, this object can be used to set the set-get properties for an instance of any class that implements the Value Range Interface.">2.6.2.1. Using Date Ranges With Classes Supporting the Value Range Interface</a></li>
+									<li><a href="#2_6_2_1" title="Because the value returned by the Uize.Date.getRangeAround method is an object containing minValue and maxValue properties, this object can be used to set the state properties for an instance of any class that implements the Value Range Interface.">2.6.2.1. Using Date Ranges With Classes Supporting the Value Range Interface</a></li>
 									<li><a href="#2_6_2_2" title="Other methods of the Uize.Date module can accept date range objects as values for certain parameters.">2.6.2.2. Using Date Ranges With Other Uize.Date Methods</a></li>
 								</ul>
 							</li>
@@ -255,7 +255,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>any parameter of this method can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>any parameter of this method can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> state property)</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -637,7 +637,7 @@ Uize.Date.getDaysInMonth (11,1989);  // returns 31 for December of any year
 				<a name="2_6_2_1"></a>
 				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges -&gt; 2.6.2.1. Using Date Ranges With Classes Supporting the Value Range Interface"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_2" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges">2</a>.<a href="#2_6_2_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges -&gt; 2.6.2.1. Using Date Ranges With Classes Supporting the Value Range Interface">1</a>. </span>Using Date Ranges With Classes Supporting the Value Range Interface</h4>
 				<div class="contents4">
-					<p>Because the value returned by the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method is an object containing <code>minValue</code> and <code>maxValue</code> properties, this object can be used to set the set-get properties for an instance of any class that implements the Value Range Interface.</p>
+					<p>Because the value returned by the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method is an object containing <code>minValue</code> and <code>maxValue</code> properties, this object can be used to set the state properties for an instance of any class that implements the Value Range Interface.</p>
 					
 					<p>An example of this is the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> class, which lets the user select a date inside a popup date dialog.</p>
 					
@@ -654,7 +654,7 @@ Uize.Date.getDaysInMonth (11,1989);  // returns 31 for December of any year
 );
 </pre>
 					
-					<p>In the above example, the date picker widget that is being added as a child of the page widget would let the user select a date in the current week. The result from the call to the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method is being supplied as the set-get property values for the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> instance. This works because the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> class implements <code>minValue</code> and <code>maxValue</code> set-get properties for constraining the range in which the user can select a date.</p>
+					<p>In the above example, the date picker widget that is being added as a child of the page widget would let the user select a date in the current week. The result from the call to the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method is being supplied as the state property values for the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> instance. This works because the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> class implements <code>minValue</code> and <code>maxValue</code> state properties for constraining the range in which the user can select a date.</p>
 				</div>
 				
 				<a name="2_6_2_2"></a>

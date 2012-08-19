@@ -127,7 +127,7 @@ Uize.module ({
 					}
 				},
 					/*?
-						Set-get Properties
+						State Properties
 							pipedProperties
 								document...
 
@@ -147,7 +147,7 @@ Uize.module ({
 				_valueDisplayWidgetProperties:'valueDisplayWidgetProperties',
 				_valueFormatter:'valueFormatter',
 					/*?
-						Set-get Properties
+						State Properties
 							valueFormatter
 								document...
 									NOTES

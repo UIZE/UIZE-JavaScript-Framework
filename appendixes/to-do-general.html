@@ -164,7 +164,7 @@
 				<ul>
 					<li><a href="#14_1" title="- myInstance.set">14.1. - good candidates for methods to support value transformers...</a></li>
 					<li><a href="#14_2" title="// plus value transformer&#10;slider.set ({value:Uize.add.x (10)});&#10;slider.set ({value:Uize.x (&apos;x + 10&apos;)});&#10;slider.set ({value:Uize.x (function (x) {return x + 10}}));&#10;&#10;// boolean toggle value transformer&#10;slider.set ({value:Uize.not})&#10;slider.set ({value:Uize.x (&apos;!x&apos;)})&#10;slider.set ({value:Uize.x (function (x) {return !x})})&#10;&#10;// multiply value transformer&#10;slider.set ({value:Uize.multiply.x (10)});&#10;sl...">14.2. Semantics</a></li>
-					<li><a href="#14_3" title="- for any set-get property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property">14.3. Behavior</a></li>
+					<li><a href="#14_3" title="- for any state property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property">14.3. Behavior</a></li>
 					<li><a href="#14_4" title="function _makeValueTransformer (_functon,_extraArguments) {&#10;	var _valueTransformer = _extraArguments &amp;&amp; _extraArguments.length&#10;		? function (x) {return _functon.apply (this,[x].concat (_extraArguments))}&#10;		: function (x) {return _functon.call (this,x)}&#10;	;&#10;	_valueTransformer.isValueTransformer = true;&#10;	return _valueTransformer;&#10;}&#10;">14.4. Possible Implementation</a></li>
 				</ul>
 			</li>
@@ -249,7 +249,7 @@
 				<ul>
 					<li><a href="#26_1" title="- some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?">26.1. **** property changed events refactoring</a></li>
 					<li><a href="#26_2" title="- drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface">26.2. - high-minded ideas</a></li>
-					<li><a href="#26_3" title="- use prototype for set-get properties?">26.3. - memory usage optimizations</a></li>
+					<li><a href="#26_3" title="- use prototype for state properties?">26.3. - memory usage optimizations</a></li>
 					<li><a href="#26_4" title="- a way to avoid calling onChange handlers at construction time">26.4. - performance optimizations</a></li>
 					<li><a href="#26_5" title="MyClass.subclass ({&#10;	alphastructor:{&#10;	},&#10;	omegastructor:{&#10;	},&#10;	instanceMethods:{&#10;	},&#10;	staticMethods:{&#10;	},&#10;	instaticMethods:{&#10;	},&#10;	setGetProperties:{&#10;	}&#10;});&#10;">26.5. - new subclassing syntax</a></li>
 					<li><a href="#26_6">26.6. widget ID scheme refactoring</a>
@@ -459,12 +459,12 @@ this [_myMethod] ();        // calling instance method
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>"lookup" of private names involves accessing variables in a higher scope than point of access, so performance cost</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>names must be generated for all privates, which adds setup code</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>makes it a little bit harder to do impromptu assignments of privates</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>accessing set-get properties via their private names becomes rather inconvenient, and their private names must be registered in an extra step</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>accessing state properties via their private names becomes rather inconvenient, and their private names must be registered in an extra step</td></tr>
 		</table>
 		<p><span class="allCaps">QUESTIONS</span></p>
 		
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>how does one provide private names for set-get properties? Provide an example.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>how does one provide private names for state properties? Provide an example.</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should multiple calls to the <code>priv</code> method on the same class for the same named private always return the same result? If so, this would suggest that external code could probe around and easily discover the internal name for a private.</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>how is the mapping / registry of privates for a class inherited by a subclass? Does it have to be?</td></tr>
 		</table>
@@ -480,7 +480,7 @@ this [_myMethod] ();        // calling instance method
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>copy all properties of the prototype</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>copy all static properties</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>copy in all information of registered set-get properties</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>copy in all information of registered state properties</td></tr>
 		</table>
 		<p><span class="allCaps">ISSUES</span></p>
 		
@@ -1297,9 +1297,9 @@ function (x) {return Math.round (x)}
 		<h2 class="heading2" title="14. Value Transformer Function -&gt; 14.3. Behavior"><span class="headingNumber"><a href="#14" title="14. Value Transformer Function">14</a>.<a href="#14_3" title="14. Value Transformer Function -&gt; 14.3. Behavior">3</a>. </span>Behavior</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any set-get property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any set-get property that is defined in its property profile as allowing function type values, but that is not defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any set-get property that is defined in its property profile as allowing function type values and that is also defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will simply be set as the new value for that property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any state property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any state property that is defined in its property profile as allowing function type values, but that is not defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any state property that is defined in its property profile as allowing function type values and that is also defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will simply be set as the new value for that property</td></tr>
 			</table>
 		</div>
 		
@@ -1593,7 +1593,7 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>in most cases, should not require code changes</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ability, from the outside of code, to track any event of any type of widget</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>whether or not to track an event is determined by a configurable rule</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>with tracked events, ability to log any aspects of set-get state that might be interesting</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>with tracked events, ability to log any aspects of state state that might be interesting</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>tracking is basically just logging by a different name</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>tracking and logging as good candidates for Aspect Oriented Programming</td></tr>
 		</table>
@@ -1903,7 +1903,7 @@ Uize.defer
 		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.3. - memory usage optimizations"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_3" title="26. Code Development (in order of priority) -&gt; 26.3. - memory usage optimizations">3</a>. </span>- memory usage optimizations</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use prototype for set-get properties?</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use prototype for state properties?</td></tr>
 			</table>
 		</div>
 		

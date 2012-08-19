@@ -303,7 +303,7 @@ Uize.module ({
 					name:'imageValidator',
 					value:/\.(jpg|jpeg|gif|png)/
 					/*?
-						Set-get Properties
+						State Properties
 							imageValidator
 								A regular expression.
 					*/
@@ -312,7 +312,7 @@ Uize.module ({
 					name:'showLoadingProgress',
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							showLoadingProgress
 								A boolean.
 					*/
@@ -321,7 +321,7 @@ Uize.module ({
 					name:'thumbNodes',
 					value:[]
 					/*?
-						Set-get Properties
+						State Properties
 							thumbNodes
 								An array.
 					*/

@@ -3,7 +3,7 @@
 <head>
 	<title>2011-03-23 - NEW MODULE: Uize.Util.PropertyAdapter | News | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework News "/>
-	<meta name="description" content="The new Uize.Util.PropertyAdapter module implements a mechanism for connecting two set-get properties together, with optional bi-directional value adapter code."/>
+	<meta name="description" content="The new Uize.Util.PropertyAdapter module implements a mechanism for connecting two state properties together, with optional bi-directional value adapter code."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -26,8 +26,8 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The Uize.Util.PropertyAdapter class makes it easy to connect two set-get properties in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.">1. An Example</a></li>
-			<li><a href="#2" title="Any two set-get properties can be connected to each other using a property adapter instance. It can be two properties of the same instance, or it can be properties of two different instances.">2. Any Two Set-get Properties</a></li>
+			<li><a href="#1" title="The Uize.Util.PropertyAdapter class makes it easy to connect two state properties in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.">1. An Example</a></li>
+			<li><a href="#2" title="Any two state properties can be connected to each other using a property adapter instance. It can be two properties of the same instance, or it can be properties of two different instances.">2. Any Two State Properties</a></li>
 			<li><a href="#3" title="The new Uize.Util.PropertyAdapter module has comprehensive reference documentation, and is comprehensively unit-tested by the Uize.Test.Uize.Util.PropertyAdapter unit test module.">3. Comprehensive Docs and Tests</a></li>
 		</ul>
 	</li>
@@ -35,12 +35,12 @@
 </div>
 
 <div class="contents0">
-	<p>The new <code><a href="../reference/Uize.Util.PropertyAdapter.html">Uize.Util.PropertyAdapter</a></code> module implements a mechanism for connecting two set-get properties together, with optional bi-directional value adapter code.</p>
+	<p>The new <code><a href="../reference/Uize.Util.PropertyAdapter.html">Uize.Util.PropertyAdapter</a></code> module implements a mechanism for connecting two state properties together, with optional bi-directional value adapter code.</p>
 	
 	<a name="1"></a>
 	<h1 class="heading1" title="1. An Example"><span class="headingNumber"><a href="#1" title="1. An Example">1</a>. </span>An Example</h1>
 	<div class="contents1">
-		<p>The <code><a href="../reference/Uize.Util.PropertyAdapter.html">Uize.Util.PropertyAdapter</a></code> class makes it easy to connect two set-get properties in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.</p>
+		<p>The <code><a href="../reference/Uize.Util.PropertyAdapter.html">Uize.Util.PropertyAdapter</a></code> class makes it easy to connect two state properties in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.</p>
 		
 		<p>Consider the following basic example...</p>
 		
@@ -59,13 +59,13 @@
 });
 </pre>
 		
-		<p>In the above example, the <code>minValue</code> set-get properties of two sliders (instances of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class) are being connected through a property adapter, so that if the value of the <code>minValue</code> property is modified in <code>sliderA</code>, the value of the <code>minValue</code> property of <code>sliderB</code> is automatically synchronized to that new value, and vice versa.</p>
+		<p>In the above example, the <code>minValue</code> state properties of two sliders (instances of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class) are being connected through a property adapter, so that if the value of the <code>minValue</code> property is modified in <code>sliderA</code>, the value of the <code>minValue</code> property of <code>sliderB</code> is automatically synchronized to that new value, and vice versa.</p>
 	</div>
 	
 	<a name="2"></a>
-	<h1 class="heading1" title="2. Any Two Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Any Two Set-get Properties">2</a>. </span>Any Two Set-get Properties</h1>
+	<h1 class="heading1" title="2. Any Two State Properties"><span class="headingNumber"><a href="#2" title="2. Any Two State Properties">2</a>. </span>Any Two State Properties</h1>
 	<div class="contents1">
-		<p>Any two set-get properties can be connected to each other using a property adapter instance. It can be two properties of the same instance, or it can be properties of two different instances.</p>
+		<p>Any two state properties can be connected to each other using a property adapter instance. It can be two properties of the same instance, or it can be properties of two different instances.</p>
 		
 		<p>The properties being connected can belong to widget instances (ie. instances of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> subclasses), but the instances owning the properties do not have to be widgets. The instances owning the two properties being connected do not even have to be of the same class. And the two properties do not even have to be of the same type or have the same value range - the <code><a href="../reference/Uize.Util.PropertyAdapter.html">Uize.Util.PropertyAdapter</a></code> class provides a way to specify a value adapter that should be used to adapt the value in either direction.</p>
 	</div>

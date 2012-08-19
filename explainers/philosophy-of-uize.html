@@ -51,7 +51,7 @@
 					<li><a href="#3_2">3.2. State Oriented Programming</a>
 						<ul>
 							<li><a href="#3_2_1" title="An invaluable feature, when using JavaScript in the context of a Web document, is reflection.">3.2.1. The Joy of Reflection</a></li>
-							<li><a href="#3_2_2" title="In a similar vein as DOM reflection, the UIZE JavaScript Framework provides a state interface through its Set-get Properties mechanism.">3.2.2. Make It So</a></li>
+							<li><a href="#3_2_2" title="In a similar vein as DOM reflection, the UIZE JavaScript Framework provides a state interface through its State Properties mechanism.">3.2.2. Make It So</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_3" title="UIZE takes the approach that the value of static typing is overestimated and is not philosophically compatible with a dynamic language like JavaScript and the Web environment in which it primarily lives - an environment which emphasizes versatility.">3.3. Type Versatility</a></li>
@@ -192,9 +192,9 @@
 			<a name="3_2_2"></a>
 			<h3 class="heading3" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming -&gt; 3.2.2. Make It So"><span class="headingNumber"><a href="#3" title="3. Inspired by the Web">3</a>.<a href="#3_2" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming">2</a>.<a href="#3_2_2" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming -&gt; 3.2.2. Make It So">2</a>. </span>Make It So</h3>
 			<div class="contents3">
-				<p>In a similar vein as DOM reflection, the UIZE JavaScript Framework provides a state interface through its <a href="set-get-properties.html">Set-get Properties</a> mechanism.</p>
+				<p>In a similar vein as DOM reflection, the UIZE JavaScript Framework provides a state interface through its <a href="state-properties.html">State Properties</a> mechanism.</p>
 				
-				<p>In spirit, a widget class should expose its state through the set-get properties, and should register <code>onChange</code> handlers for these properties, as appropriate, in order to synchronize the UI to a changed state. The application developer using the widgets then does not have to worry about a suite of updater methods and understand why two should be used in a specific order in one case, but three should be used in any order in some other case (for example). We call this the <b>"make it so"</b> principle. You tell an instance what state it should be in, and it figures out how to get all its junk into that new state.</p>
+				<p>In spirit, a widget class should expose its state through the state properties, and should register <code>onChange</code> handlers for these properties, as appropriate, in order to synchronize the UI to a changed state. The application developer using the widgets then does not have to worry about a suite of updater methods and understand why two should be used in a specific order in one case, but three should be used in any order in some other case (for example). We call this the <b>"make it so"</b> principle. You tell an instance what state it should be in, and it figures out how to get all its junk into that new state.</p>
 			</div>
 		</div>
 		

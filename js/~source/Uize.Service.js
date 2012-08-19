@@ -340,7 +340,7 @@ Uize.module ({
 					},
 					onChange:function () {this.set ({initialized:_false})}
 					/*?
-						Set-get Properties
+						State Properties
 							adapter
 								document...
 					*/
@@ -349,7 +349,7 @@ Uize.module ({
 					name:'initialized',
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							initialized
 								document...
 					*/

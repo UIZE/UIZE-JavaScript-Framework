@@ -1,9 +1,9 @@
 Various JavaScript examples on the *uize.com* Web site that had become victims to bit rot have been restored to their former glory.
 
 Broken Styling in Sliders Examples Fixed
-	A number of the JavaScript examples that use slider widgets (ie. instances of the =Uize.Widget.Bar.Slider= class) that had been broken by a change in the set-get properties mechanism have now been fixed.
+	A number of the JavaScript examples that use slider widgets (ie. instances of the =Uize.Widget.Bar.Slider= class) that had been broken by a change in the state properties mechanism have now been fixed.
 
-	The problem with the slider examples was manifesting as incorrect size for slider knobs and incorrect thickness of borders. The cause of the problem was a refactoring of the ad hoc registration of set-get properties that introduced a subtle but undesirable change in behavior for registering set-get properties in an ad hoc fashion by setting values for unregistering set-get properties on the class. The earlier behavior of the set-get properties mechanism has been restored and unit tests have been written to ensure compliance going forward.
+	The problem with the slider examples was manifesting as incorrect size for slider knobs and incorrect thickness of borders. The cause of the problem was a refactoring of the ad hoc registration of state properties that introduced a subtle but undesirable change in behavior for registering state properties in an ad hoc fashion by setting values for unregistering state properties on the class. The earlier behavior of the state properties mechanism has been restored and unit tests have been written to ensure compliance going forward.
 
 Fixed Flickering Issue in IE9 in 3D Rotation Viewer Examples
 	An issue with flickering in the [[../examples/3d-rotation-viewer.html][3D Rotation Viewer]] example that was seen in IE9 has been fixed.

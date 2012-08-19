@@ -11,8 +11,8 @@ Issues With Auto-generated Documentation
 
 		Loading extension modules in the documentation build script in order to document them can have the side effect of modifying a class, and other modules that are subclasses of the modified class that are then documented later appear to have features that they really do not have, because they've inherited the features that were extended on their base class by loading and documenting the extension module.
 
-	Set-get Properties With Object Initial Values Treated as Overridden
-		Set-get properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature.
+	State Properties With Object Initial Values Treated as Overridden
+		State properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature.
 
 		This is simply because the initial value in the subclass is a clone of the initial value in the base class and not a shared reference. The initial value is a clone because the whole property definition is a clone. Not sure what the solution is.
 
@@ -28,12 +28,12 @@ DELVE tool improvements
 		- DELVE fails during launch on iPad
 
 	State Tab
-		- to be an inspector UI, with form elements for viewing and modifying values of set-get properties
+		- to be an inspector UI, with form elements for viewing and modifying values of state properties
 		- to be wired to observe object's Changed.* event in order to keep values synchronized
-		- yellow fade effect (or equivalent) for highlighting set-get properties that have recently changed value
-		- link to documentation for every set-get property (link to class that introduces property)
+		- yellow fade effect (or equivalent) for highlighting state properties that have recently changed value
+		- link to documentation for every state property (link to class that introduces property)
 		- count of the number of times the value has changed since being watched (good for judging volume of activity)
-		- property name linked to get summary (as with current behavior with set-get properties table in summary tab)
+		- property name linked to get summary (as with current behavior with state properties table in summary tab)
 
 	- wire up a menu for the UIZE logo, as a spillover for more features
 
@@ -111,7 +111,7 @@ DELVE tool improvements
 			- all subclasses of a specific class
 
 Kill acceleration and deceleration
-	Kill acceleration and deceleration set-get properties of Uize.Fade class.
+	Kill acceleration and deceleration state properties of Uize.Fade class.
 
 	Pages still to update...
 
@@ -599,7 +599,7 @@ UIZE guidelines
 		- only source in JavaScript files that are actually used on a page (same applies to CSS files)
 
 	Code Size Optimization
-		- UIZE-specific: Leave Set-get Property Initial Values undefined, where possible. don't define an initial value for a set-get property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)
+		- UIZE-specific: Leave State Property Initial Values undefined, where possible. don't define an initial value for a state property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)
 		- use slice instead of substring (or substr when just one parameter) method, wherever possible
 		- omit parentheses after constructor when constructor doesn't take any parameters
 
@@ -680,9 +680,9 @@ New Examples to Create
 	Uize
 		- Changed.* event
 			- an example that demonstrates the Changed.* event
-			- a widget that updates a lot of set-get properties during user interaction
-			- a log pane that fills with notifications of set-get properties changed during user interaction
-			- possibly a listing (to the right of the widget) of all the widget's set-get properties, with the most recently changed properties highlighted in red and bolded
+			- a widget that updates a lot of state properties during user interaction
+			- a log pane that fills with notifications of state properties changed during user interaction
+			- possibly a listing (to the right of the widget) of all the widget's state properties, with the most recently changed properties highlighted in red and bolded
 
 	- Color Gradients
 		- demonstrates use of Uize.Fx.fadeStyleAcrossNodes

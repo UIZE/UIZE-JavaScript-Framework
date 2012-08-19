@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.Committer= class provides a way to interface between a configurable set of set-get properties, on one or more instance, and other code.
+		The =Uize.Widget.Committer= class provides a way to interface between a configurable set of state properties, on one or more instance, and other code.
 
 		*DEVELOPERS:* `Chris van Rensburg`, `Tim Carter`
 
@@ -27,20 +27,20 @@
 			The =Uize.Widget.Committer= class provides a convenient way to interface between a set of properties and other code.
 
 			Watched Properties
-				An instance of this class can be wired up to watch on any number of properties, as specified by the =watchedProperties= set-get property.
+				An instance of this class can be wired up to watch on any number of properties, as specified by the =watchedProperties= state property.
 
-				In a common case, the set of properties being watched might be the =value= set-get properties of a bunch of form input widgets. The committer instance acts as a conduit or interface between the watched properties and the code that cares about watching them.
+				In a common case, the set of properties being watched might be the =value= state properties of a bunch of form input widgets. The committer instance acts as a conduit or interface between the watched properties and the code that cares about watching them.
 
 			Convenient Buttons
 				The values of the watched properties can be committed to the watching code by the user clicking on a =commit button=, or by the =commit= instance method being called. Additionally, optional =clearAll=, =restoreInitial=, and =restorePrevious= buttons are supported.
 
 			Auto-commit
-				An auto-commit behavior allows uncommitted values to be automatically committed after a configurable period of inactivity since the last modification, as specified by the =autoCommitDelay= set-get property.
+				An auto-commit behavior allows uncommitted values to be automatically committed after a configurable period of inactivity since the last modification, as specified by the =autoCommitDelay= state property.
 
 			Logical State Summary
-				For the convenience of the watching code, a full complement of read-only boolean set-get properties provides a logical state summary of the watched properties.
+				For the convenience of the watching code, a full complement of read-only boolean state properties provides a logical state summary of the watched properties.
 
-				This state summary is provided through the =allClear=, =allValid=, =anyNotInitial=, =anyNotCommitted=, and =readyToCommit= boolean set-get properties, and the =committedValues=, =initialValues=, and =uncommittedValues= object set-get properties.
+				This state summary is provided through the =allClear=, =allValid=, =anyNotInitial=, =anyNotCommitted=, and =readyToCommit= boolean state properties, and the =committedValues=, =initialValues=, and =uncommittedValues= object state properties.
 */
 
 Uize.module ({
@@ -84,10 +84,10 @@ Uize.module ({
 										clearAll
 											An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will clear the values of all the watched properties by setting them to =''= (empty string).
 
-											The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever the values of all watched properties are empty (ie. when the value of the =allClear= set-get property is =true= and clicking this button would have no effect).
+											The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever the values of all watched properties are empty (ie. when the value of the =allClear= state property is =true= and clicking this button would have no effect).
 
 											NOTES
-											- see the related =allClear= set-get property
+											- see the related =allClear= state property
 								*/
 							;
 							_this._restoreInitialButton =
@@ -97,10 +97,10 @@ Uize.module ({
 										restoreInitial
 											An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will restore the values of all the watched properties to their initial state (ie. before a =Uize.Widget.Committer= instance is wired up).
 
-											The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever the values of all watched properties are at their initial state (ie. when the value of the =anyNotInitial= set-get property is =false= and clicking this button would have no effect). This could be right after wiring the instance, or right after using the =restoreInitial= button to retore the values of the watched properties to their initial state.
+											The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever the values of all watched properties are at their initial state (ie. when the value of the =anyNotInitial= state property is =false= and clicking this button would have no effect). This could be right after wiring the instance, or right after using the =restoreInitial= button to retore the values of the watched properties to their initial state.
 
 											NOTES
-											- see the related =anyNotInitial= set-get property
+											- see the related =anyNotInitial= state property
 								*/
 							;
 							_this._restorePreviousButton =
@@ -110,10 +110,10 @@ Uize.module ({
 										restorePrevious
 											An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will restore the values of all the watched properties to their previous committed state (ie. before any of the previously committed values were subsequently modified).
 
-											The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever there are no values to commit (ie. when the value of the =anyNotCommitted= set-get property is =false= and clicking this button would have no effect). This could be right after wiring the instance, right after using the =restorePrevious= button to retore the values of the watched properties to their previous committed state, or after editing the values of the watched properties in such a way that they return to their previously committed state.
+											The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever there are no values to commit (ie. when the value of the =anyNotCommitted= state property is =false= and clicking this button would have no effect). This could be right after wiring the instance, right after using the =restorePrevious= button to retore the values of the watched properties to their previous committed state, or after editing the values of the watched properties in such a way that they return to their previously committed state.
 
 											NOTES
-											- see the related =anyNotCommitted= set-get property
+											- see the related =anyNotCommitted= state property
 								*/
 							;
 					}
@@ -243,7 +243,7 @@ Uize.module ({
 							myCommitter.commit ();
 							......................
 
-							Calling the =commit= instance method has the same effect as the user clicking the =commit button=. Uncommitted values will only be successfully committed if they are all valid, as indicated by the =allValid= set-get property. Successfully committing values will result in the =Commit= instance event being fired. After uncommitted values are successfully committed, the values of the =uncommittedValues= and =committedValues= set-get properties will be identical.
+							Calling the =commit= instance method has the same effect as the user clicking the =commit button=. Uncommitted values will only be successfully committed if they are all valid, as indicated by the =allValid= state property. Successfully committing values will result in the =Commit= instance event being fired. After uncommitted values are successfully committed, the values of the =uncommittedValues= and =committedValues= state properties will be identical.
 
 							NOTES
 							- see the related =commit button= child widget
@@ -407,7 +407,7 @@ Uize.module ({
 					},
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							allClear
 								A read-only boolean, indicating whether or not all the watched properties are clear (ie. set to =''=).
 
@@ -422,7 +422,7 @@ Uize.module ({
 					name:'allValid',
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							allValid
 								A read-only boolean, indicating whether or not all the watched properties have valid values.
 
@@ -440,15 +440,15 @@ Uize.module ({
 					},
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							anyNotInitial
-								A read-only boolean, indicating whether or not the values of any of the watched properties are not their initial value (as stored in the =initialValues= set-get property).
+								A read-only boolean, indicating whether or not the values of any of the watched properties are not their initial value (as stored in the =initialValues= state property).
 
 								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the values of the watched properties change.
 
 								NOTES
 								- this property is read-only
-								- see the related =initialValues= set-get property
+								- see the related =initialValues= state property
 								- the initial value is =false=
 					*/
 				},
@@ -459,11 +459,11 @@ Uize.module ({
 					},
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							anyNotCommitted
 								A read-only boolean, indicating whether or not the values of any of the watched properties have been changed from their previous state and have not yet been committed.
 
-								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the values of the watched properties change. The value of this property is =true= whenever there is a difference between the values of the =committedValues= and =uncommittedValues= set-get properties.
+								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the values of the watched properties change. The value of this property is =true= whenever there is a difference between the values of the =committedValues= and =uncommittedValues= state properties.
 
 								NOTES
 								- this property is read-only
@@ -472,7 +472,7 @@ Uize.module ({
 				},
 				_autoCommitDelay:'autoCommitDelay',
 					/*?
-						Set-get Properties
+						State Properties
 							autoCommitDelay
 								An integer, specifying the amount of time (measured in milliseconds), after uncommited values become ready to commit (ie. the value of =readyToCommit= becomes =true=) and are no longer being modified, before those uncommitted values are automaticlly committed.
 
@@ -485,17 +485,17 @@ Uize.module ({
 					name:'committedValues',
 					value:{}
 					/*?
-						Set-get Properties
+						State Properties
 							committedValues
 								A read-only object, representing the committed values for all the watched properties.
 
-								The value of this property is automatically set whenever the value of the =watchedProperties= set-get property is changed. The =committedValues= object will contain a property for each watched property.
+								The value of this property is automatically set whenever the value of the =watchedProperties= state property is changed. The =committedValues= object will contain a property for each watched property.
 
-								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the uncommitted values of the watched properties (as stored in the =uncommittedValues= set-get property) are committed by calling the =commit= instance method or by the user clicking the =commit button=.
+								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the uncommitted values of the watched properties (as stored in the =uncommittedValues= state property) are committed by calling the =commit= instance method or by the user clicking the =commit button=.
 
 								NOTES
 								- this property is read-only
-								- see the related =uncommittedValues= and =watchedProperties= set-get properties
+								- see the related =uncommittedValues= and =watchedProperties= state properties
 								- the initial value is ={}= (an empty object)
 					*/
 				},
@@ -503,14 +503,14 @@ Uize.module ({
 					name:'initialValues',
 					value:{}
 					/*?
-						Set-get Properties
+						State Properties
 							initialValues
 								A read-only object, representing the initial values for all the watched properties.
 
-								The value of this property is automatically set whenever the value of the =watchedProperties= set-get property is changed. The =initialValues= object will contain a property for each watched property.
+								The value of this property is automatically set whenever the value of the =watchedProperties= state property is changed. The =initialValues= object will contain a property for each watched property.
 
 								NOTES
-								- see the related =committedValues= and =uncommittedValues= set-get properties
+								- see the related =committedValues= and =uncommittedValues= state properties
 								- the initial value is ={}= (an empty object)
 					*/
 				},
@@ -521,7 +521,7 @@ Uize.module ({
 					},
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							readyToCommit
 								A read-only boolean, indicating whether or not there are uncommitted values for watched properties that are ready to commit.
 
@@ -529,7 +529,7 @@ Uize.module ({
 
 								NOTES
 								- this property is read-only
-								- see the related =anyNotCommitted= and =allValid= set-get properties
+								- see the related =anyNotCommitted= and =allValid= state properties
 								- the initial value is =false=
 					*/
 				},
@@ -537,19 +537,19 @@ Uize.module ({
 					name:'uncommittedValues',
 					value:{}
 					/*?
-						Set-get Properties
+						State Properties
 							uncommittedValues
 								A read-only object, representing the current values of the watched properties.
 
-								The value of this property is automatically set whenever the value of the =watchedProperties= set-get property is changed. The =uncommittedValues= object will contain a property for each watched property.
+								The value of this property is automatically set whenever the value of the =watchedProperties= state property is changed. The =uncommittedValues= object will contain a property for each watched property.
 
-								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the values of the watched properties change. The value of this property represents all the current values of the watched properties and may be identical to the values of the =initialValues= and =committedValues= set-get properties.
+								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the values of the watched properties change. The value of this property represents all the current values of the watched properties and may be identical to the values of the =initialValues= and =committedValues= state properties.
 
-								The value of this property will be identical to that of the =initialValues= set-get property immediately after the value of =watchedProperties= is set and before the values of the watched properties have been modified, or right after using the =restoreInitial= button to retore the values of the watched properties. Its value will be identical to that of the =committedValues= set-get property immediately after =watchedProperties= is set and before the values of the watched properties have been modified, or right after successfully using the =commit button= or =commit= instance method to commit the uncommited values.
+								The value of this property will be identical to that of the =initialValues= state property immediately after the value of =watchedProperties= is set and before the values of the watched properties have been modified, or right after using the =restoreInitial= button to retore the values of the watched properties. Its value will be identical to that of the =committedValues= state property immediately after =watchedProperties= is set and before the values of the watched properties have been modified, or right after successfully using the =commit button= or =commit= instance method to commit the uncommited values.
 
 								NOTES
 								- this property is read-only
-								- see the related =committedValues= and =watchedProperties= set-get properties
+								- see the related =committedValues= and =watchedProperties= state properties
 								- the initial value is ={}= (an empty object)
 					*/
 				},
@@ -582,7 +582,7 @@ Uize.module ({
 						_this._updateSummaryStateProperties ();
 					}
 					/*?
-						Set-get Properties
+						State Properties
 							watchedProperties
 								An object, specifying the properties that should be watched by the instance.
 
@@ -604,10 +604,10 @@ Uize.module ({
 								}
 								........................................
 
-								Each property of the =watchedProperties= object provides a profile for a watched property, where the property name is an alias for the watched property, and where the property value is an object identifying the property. The object identifying a watched property should contain an "instance" property, identifying the instance (of a =Uize.Class= subclass) to which the property belongs, and a "name" property, identifying the name of the set-get property to watch.
+								Each property of the =watchedProperties= object provides a profile for a watched property, where the property name is an alias for the watched property, and where the property value is an object identifying the property. The object identifying a watched property should contain an "instance" property, identifying the instance (of a =Uize.Class= subclass) to which the property belongs, and a "name" property, identifying the name of the state property to watch.
 
 								NOTES
-								- see the related =committedValues= and =uncommittedValues= set-get properties
+								- see the related =committedValues= and =uncommittedValues= state properties
 								- the initial value is =undefined=
 					*/
 				}

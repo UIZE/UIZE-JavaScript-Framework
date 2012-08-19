@@ -68,7 +68,7 @@ Uize.module ({
 										shieldFade
 											An instance of the =Uize.Fade= class, that is used to fade the opacity of the =shield= implied node when hiding it.
 
-											This property lets you customize the qualities of the opacity fade for the dialog's =shield=, by letting you set values for the set-get properties of the =Uize.Fade= instance (such as =duration=, =curve=, etc.).
+											This property lets you customize the qualities of the opacity fade for the dialog's =shield=, by letting you set values for the state properties of the =Uize.Fade= instance (such as =duration=, =curve=, etc.).
 								*/
 							).wire (
 								'Changed.value',
@@ -163,7 +163,7 @@ Uize.module ({
 										drag
 											An instance of the =Uize.Widget.Drag= class, that is wired up to the =title Implied Node= to enable drag-to-move for the dialog.
 
-											Setting the =enabled= set-get property of this child widget to =false= will disable drag-to-move for the dialog.
+											Setting the =enabled= state property of this child widget to =false= will disable drag-to-move for the dialog.
 								*/
 							;
 
@@ -205,7 +205,7 @@ Uize.module ({
 										ok
 											An instance of the =Uize.Widget.Button= class, that lets the user submit the dialog.
 
-											When this button is clicked, the =Ok= event is fired on the dialog instance. The text for this button can be controlled via the =okText= and =defaultOkText= set-get properties.
+											When this button is clicked, the =Ok= event is fired on the dialog instance. The text for this button can be controlled via the =okText= and =defaultOkText= state properties.
 
 									Instance Events
 										Ok
@@ -220,7 +220,7 @@ Uize.module ({
 										cancel
 											An instance of the =Uize.Widget.Button= class, that lets the user cancel (and close) the dialog.
 
-											When this button is clicked, the =Cancel= event is fired on the dialog instance. The text for this button can be controlled via the =cancelText= and =defaultCancelText= set-get properties.
+											When this button is clicked, the =Cancel= event is fired on the dialog instance. The text for this button can be controlled via the =cancelText= and =defaultCancelText= state properties.
 
 									Instance Events
 										Cancel
@@ -254,15 +254,15 @@ Uize.module ({
 							Root Node
 								A node that is the root for all of the dialog's HTML, excluding the =shield= implied node.
 
-								When a dialog is shown, its =Root Node= and =shield= implied nodes are displayed. Conversely, when a dialog is hidden, both its =Root Node= and =shield= implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the =Root Node= is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its =width= and =height= set-get properties, the dimensions of the =Root Node= are modified through CSS. All chrome for the dialog should therefore be "pinned" to the =Root Node=, so that when the dialog is moved and resized, the chrome goes along for the ride.
+								When a dialog is shown, its =Root Node= and =shield= implied nodes are displayed. Conversely, when a dialog is hidden, both its =Root Node= and =shield= implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the =Root Node= is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its =width= and =height= state properties, the dimensions of the =Root Node= are modified through CSS. All chrome for the dialog should therefore be "pinned" to the =Root Node=, so that when the dialog is moved and resized, the chrome goes along for the ride.
 
 							shield
 								A node that will be sized to fill the entire browser view port, in order to block events to the page behind the dialog.
 
-								When the dialog is shown, the =shield= implied node is shown along with the =Root Node=. The shield can be set to hide when the user drag or resizes the dialog by setting the =hideShieldOnDrag= set-get property to =true=. When the dialog is shown, the shield can be hidden by setting the =shieldShown= set-get property to =false=. Even though the shield won't be visible, it will still block events to the page behind the dialog.
+								When the dialog is shown, the =shield= implied node is shown along with the =Root Node=. The shield can be set to hide when the user drag or resizes the dialog by setting the =hideShieldOnDrag= state property to =true=. When the dialog is shown, the shield can be hidden by setting the =shieldShown= state property to =false=. Even though the shield won't be visible, it will still block events to the page behind the dialog.
 
 								NOTES
-								- see also the =currentShieldOpacity=, =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= set-get properties
+								- see also the =currentShieldOpacity=, =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties
 								- see also the =shieldFade= instance property
 					*/
 					if (_this._autoPosition) {
@@ -317,11 +317,11 @@ Uize.module ({
 								title Implied Node
 									A node that acts as the title bar for the dialog and that is wired up by the =drag= child widget to enable drag-to-move for the dialog.
 
-									The text for the dialog's title bar can be controlled via the =title= and =defaultTitle= set-get properties.
+									The text for the dialog's title bar can be controlled via the =title= and =defaultTitle= state properties.
 
 									NOTES
 									- if no =title Implied Node= is present in the dialog's HTML, then the dialog will not be movable
-									- see also the =defaultTitle= and =title= set-get properties
+									- see also the =defaultTitle= and =title= state properties
 						*/
 				}
 			};
@@ -388,13 +388,13 @@ Uize.module ({
 					value:_true,
 					onChange:_updateUiPositionIfShown
 					/*?
-						Set-get Properties
+						State Properties
 							autoPosition
 								A boolean, indicating whether or not the dialog should be automatically positioned when it is shown, or whenever the browser window is resized.
 
-								When =autoPosition= is set to =true=, the dialog will be automatically positioned each time it is shown and each time the browser window is resized. When the dialog is positioned, the way in which it is positioned is determined by the value of the =mooringNode=, =offsetX=, and =offsetY= set-get properties.
+								When =autoPosition= is set to =true=, the dialog will be automatically positioned each time it is shown and each time the browser window is resized. When the dialog is positioned, the way in which it is positioned is determined by the value of the =mooringNode=, =offsetX=, and =offsetY= state properties.
 
-								If the value of the =mooringNode= set-get property resolves to a DOM node, then the dialog will be "moored" to the specified mooring node (for a more detailed explanation, see the reference for the =mooringNode= set-get property). On the other hand, if the value of the =mooringNode= set-get property is =null=, =undefined=, or does not resolve to a DOM node, then the dialog will be positioned so that it is centered in the browser window.
+								If the value of the =mooringNode= state property resolves to a DOM node, then the dialog will be "moored" to the specified mooring node (for a more detailed explanation, see the reference for the =mooringNode= state property). On the other hand, if the value of the =mooringNode= state property is =null=, =undefined=, or does not resolve to a DOM node, then the dialog will be positioned so that it is centered in the browser window.
 
 								NOTES
 								- the initial value is =true=
@@ -404,14 +404,14 @@ Uize.module ({
 					name:'cancelText',
 					onChange:_syncOkAndCancelText
 					/*?
-						Set-get Properties
+						State Properties
 							cancelText
 								A string, representing text that should be displayed for the dialog's =cancel= button.
 
-								Using this property, the text of the =cancel= button can be changed at any time - even when the dialog is shown. Setting a non-empty string value for this property has the effect of setting the value of the =text= set-get property for the =cancel= child widget. Leaving =cancelText= set to its initial value of =undefined= will result in the =cancel= button's text being determined by the value of the =defaultCancelText= set-get property. If the values for both the =cancelText= and =defaultCancelText= set-get properties are =undefined=, then the =cancel= button will retain whatever text was initially in its HTML markup.
+								Using this property, the text of the =cancel= button can be changed at any time - even when the dialog is shown. Setting a non-empty string value for this property has the effect of setting the value of the =text= state property for the =cancel= child widget. Leaving =cancelText= set to its initial value of =undefined= will result in the =cancel= button's text being determined by the value of the =defaultCancelText= state property. If the values for both the =cancelText= and =defaultCancelText= state properties are =undefined=, then the =cancel= button will retain whatever text was initially in its HTML markup.
 
 								NOTES
-								- see the companion =defaultCancelText= set-get property
+								- see the companion =defaultCancelText= state property
 								- the initial value is =undefined=
 					*/
 				},
@@ -419,13 +419,13 @@ Uize.module ({
 					name:'currentShieldOpacity',
 					onChange:_classPrototype._updateUiShieldOpacity
 					/*?
-						Set-get Properties
+						State Properties
 							currentShieldOpacity
 								A read-only floating point number in the range of =0= to =1=, indicating the current opacity level of the dialog's shield.
 
 								NOTES
 								- this property is read-only
-								- see the related =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= set-get properties, and the =shield= implied node
+								- see the related =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties, and the =shield= implied node
 								- the initial value is =undefined=
 					*/
 				},
@@ -433,15 +433,15 @@ Uize.module ({
 					name:'defaultCancelText',
 					onChange:_syncOkAndCancelText
 					/*?
-						Set-get Properties
+						State Properties
 							defaultCancelText
-								A string, specifying the default text for the =cancel= button, should the =cancelText= set-get property be set to =null=, =undefined=, or =''= (an empty string).
+								A string, specifying the default text for the =cancel= button, should the =cancelText= state property be set to =null=, =undefined=, or =''= (an empty string).
 
-								For a more detailed explanation of the cancel button text fallback mechanism, see the reference for the =cancelText= set-get property.
+								For a more detailed explanation of the cancel button text fallback mechanism, see the reference for the =cancelText= state property.
 
 								NOTES
-								- see the companion =cancelText= set-get property
-								- when the =cancelText= set-get property is set to a non-empty string, then =defaultCancelText= will have no effect
+								- see the companion =cancelText= state property
+								- when the =cancelText= state property is set to a non-empty string, then =defaultCancelText= will have no effect
 								- the initial value is =undefined=
 					*/
 				},
@@ -449,15 +449,15 @@ Uize.module ({
 					name:'defaultOkText',
 					onChange:_syncOkAndCancelText
 					/*?
-						Set-get Properties
+						State Properties
 							defaultOkText
-								A string, specifying the default text for the =ok= button, should the =okText= set-get property be set to =null=, =undefined=, or =''= (an empty string).
+								A string, specifying the default text for the =ok= button, should the =okText= state property be set to =null=, =undefined=, or =''= (an empty string).
 
-								For a more detailed explanation of the ok button text fallback mechanism, see the reference for the =okText= set-get property.
+								For a more detailed explanation of the ok button text fallback mechanism, see the reference for the =okText= state property.
 
 								NOTES
-								- see the companion =okText= set-get property
-								- when the =okText= set-get property is set to a non-empty string, then =defaultOkText= will have no effect
+								- see the companion =okText= state property
+								- when the =okText= state property is set to a non-empty string, then =defaultOkText= will have no effect
 								- the initial value is =undefined=
 					*/
 				},
@@ -465,15 +465,15 @@ Uize.module ({
 					name:'defaultTitle',
 					onChange:_classPrototype._updateUiTitle
 					/*?
-						Set-get Properties
+						State Properties
 							defaultTitle
-								A string, specifying the default text for the =title Implied Node= (ie. the title bar), should the =title= set-get property be set to =null=, =undefined=, or =''= (an empty string).
+								A string, specifying the default text for the =title Implied Node= (ie. the title bar), should the =title= state property be set to =null=, =undefined=, or =''= (an empty string).
 
-								For a more detailed explanation of the title text fallback mechanism, see the reference for the =title= set-get property.
+								For a more detailed explanation of the title text fallback mechanism, see the reference for the =title= state property.
 
 								NOTES
-								- see the companion =title= set-get property
-								- when the =title= set-get property is set to a non-empty string, then =defaultTitle= will have no effect
+								- see the companion =title= state property
+								- when the =title= state property is set to a non-empty string, then =defaultTitle= will have no effect
 								- the initial value is =undefined=
 					*/
 				},
@@ -481,7 +481,7 @@ Uize.module ({
 					name:'dismissOnShieldClick',
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							dismissOnShieldClick
 								An boolean, specifying whether or not clicking =shield= implied node should close the dialog.
 
@@ -498,14 +498,14 @@ Uize.module ({
 						_updateUiPositionIfShown
 					]
 					/*?
-						Set-get Properties
+						State Properties
 							height
 								An integer, specifying the height of the dialog (ie. the height of its =Root Node=).
 
-								When a dialog is resizable (by using the =Uize.Widget.Dialog.xResizable= extension), the value of the =height= and set-get property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving =height= set to its initial value of =undefined= will result in the dialog's height remaining as determined by its initial HTML markup and CSS.
+								When a dialog is resizable (by using the =Uize.Widget.Dialog.xResizable= extension), the value of the =height= and state property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving =height= set to its initial value of =undefined= will result in the dialog's height remaining as determined by its initial HTML markup and CSS.
 
 								NOTES
-								- see the companion =width= set-get property
+								- see the companion =width= state property
 								- the initial value is =undefined=
 					*/
 				},
@@ -513,11 +513,11 @@ Uize.module ({
 					name:'hideShieldOnDrag',
 					value:_true
 					/*?
-						Set-get Properties
+						State Properties
 							hideShieldOnDrag
 								A boolean, specifying whether or not the =shield= implied node should be hidden when the dialog is dragged (moved or resized).
 
-								When the user drags a dialog, it is considered that one possible reason is to see what is being obscured by it. This can be the case if the user wishes to reference what is on the page behind the dialog in order to inform what choices they make in the dialog's UI. Therefore, the =hideShieldOnDrag= set-get property is initially set to =true=. Setting this property to =false= means that the =shield= implied node will remain obscuring the page even when the user drags the dialog.
+								When the user drags a dialog, it is considered that one possible reason is to see what is being obscured by it. This can be the case if the user wishes to reference what is on the page behind the dialog in order to inform what choices they make in the dialog's UI. Therefore, the =hideShieldOnDrag= state property is initially set to =true=. Setting this property to =false= means that the =shield= implied node will remain obscuring the page even when the user drags the dialog.
 
 								NOTES
 								- the initial value is =true=
@@ -527,7 +527,7 @@ Uize.module ({
 					name:'inDrag',
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							inDrag
 								A read-only boolean, indicating whether or not the dialog is being dragged (moved or resized).
 
@@ -540,16 +540,16 @@ Uize.module ({
 					name:'mooringNode',
 					onChange:_updateUiPositionIfShown
 					/*?
-						Set-get Properties
+						State Properties
 							mooringNode
 								A node reference or node ID for a node to which the dialog should be "moored".
 
-								When the value of the =mooringNode= set-get property resolves to a DOM node *and* the =autoPosition= set-get property is set to =true=, then the dialog is considered moored to the specified mooring node. On the other hand, if the =autoPosition= set-get property is set to =false=, then the value of the =mooringNode=, =offsetX=, and =offsetY= set-get properties will have no effect.
+								When the value of the =mooringNode= state property resolves to a DOM node *and* the =autoPosition= state property is set to =true=, then the dialog is considered moored to the specified mooring node. On the other hand, if the =autoPosition= state property is set to =false=, then the value of the =mooringNode=, =offsetX=, and =offsetY= state properties will have no effect.
 
-								When in the moored state, the dialog will maintain its offset position relative to the mooring node, as specified by the =offsetX= and =offsetY= set-get properties - even as the browser window is resized. Each time it is shown or the browser window is resized, the dialog will be re-positioned so that the top left corner of its =Root Node= is offset vertically and horizontally from the top left corner of the mooring node, by the number of pixels specified by the =offsetY= and =offsetX= set-get properties, respectively.
+								When in the moored state, the dialog will maintain its offset position relative to the mooring node, as specified by the =offsetX= and =offsetY= state properties - even as the browser window is resized. Each time it is shown or the browser window is resized, the dialog will be re-positioned so that the top left corner of its =Root Node= is offset vertically and horizontally from the top left corner of the mooring node, by the number of pixels specified by the =offsetY= and =offsetX= state properties, respectively.
 
 								NOTES
-								- see the related =autoPosition=, =offsetX=, and =offsetY= set-get properties
+								- see the related =autoPosition=, =offsetX=, and =offsetY= state properties
 								- the initial value is =undefined=
 					*/
 				},
@@ -558,15 +558,15 @@ Uize.module ({
 					onChange:_updateUiPositionIfShown,
 					value:0
 					/*?
-						Set-get Properties
+						State Properties
 							offsetX
 								An integer, specifying the offset in pixels from the left edge of the =mooringNode= to the left edge of the dialog's =Root Node=.
 
-								When a dialog is "moored" to a mooring node, the =offsetX= property specifies how it is horizontally positioned in relation to the mooring node (for a more detailed explanation, see the reference for the =mooringNode= set-get property).
+								When a dialog is "moored" to a mooring node, the =offsetX= property specifies how it is horizontally positioned in relation to the mooring node (for a more detailed explanation, see the reference for the =mooringNode= state property).
 
 								NOTES
-								- when the =autoPosition= set-get property is set to =false=, then =offsetX= has no effect
-								- see the related =autoPosition=, =mooringNode=, and =offsetY= set-get properties
+								- when the =autoPosition= state property is set to =false=, then =offsetX= has no effect
+								- see the related =autoPosition=, =mooringNode=, and =offsetY= state properties
 								- the initial value is =0=
 					*/
 				},
@@ -575,15 +575,15 @@ Uize.module ({
 					onChange:_updateUiPositionIfShown,
 					value:0
 					/*?
-						Set-get Properties
+						State Properties
 							offsetY
 								An integer, specifying the offset in pixels from the top edge of the =mooringNode= to the top edge of the dialog's =Root Node=.
 
-								When a dialog is "moored" to a mooring node, the =offsetY= property specifies how it is vertically positioned in relation to the mooring node (for a more detailed explanation, see the reference for the =mooringNode= set-get property).
+								When a dialog is "moored" to a mooring node, the =offsetY= property specifies how it is vertically positioned in relation to the mooring node (for a more detailed explanation, see the reference for the =mooringNode= state property).
 
 								NOTES
-								- when the =autoPosition= set-get property is set to =false=, then =offsetY= has no effect
-								- see the related =autoPosition=, =mooringNode=, and =offsetX= set-get properties
+								- when the =autoPosition= state property is set to =false=, then =offsetY= has no effect
+								- see the related =autoPosition=, =mooringNode=, and =offsetX= state properties
 								- the initial value is =0=
 					*/
 				},
@@ -591,7 +591,7 @@ Uize.module ({
 					name:'okEnabledOnShow',
 					value:_true
 					/*?
-						Set-get Properties
+						State Properties
 							okEnabledOnShow
 								A boolean, specifying whether the dialog's =ok= button should be enabled or disabled each time the dialog is shown.
 
@@ -605,14 +605,14 @@ Uize.module ({
 					name:'okText',
 					onChange:_syncOkAndCancelText
 					/*?
-						Set-get Properties
+						State Properties
 							okText
 								A string, representing text that should be displayed for the dialog's =ok= button.
 
-								Using this property, the text of the =ok= button can be changed at any time - even when the dialog is shown. Setting a non-empty string value for this property has the effect of setting the value of the =text= set-get property for the =ok= child widget. Leaving =okText= set to its initial value of =undefined= will result in the =ok= button's text being determined by the value of the =defaultOkText= set-get property. If the values for both the =okText= and =defaultOkText= set-get properties are =undefined=, then the =ok= button will retain whatever text was initially in its HTML markup.
+								Using this property, the text of the =ok= button can be changed at any time - even when the dialog is shown. Setting a non-empty string value for this property has the effect of setting the value of the =text= state property for the =ok= child widget. Leaving =okText= set to its initial value of =undefined= will result in the =ok= button's text being determined by the value of the =defaultOkText= state property. If the values for both the =okText= and =defaultOkText= state properties are =undefined=, then the =ok= button will retain whatever text was initially in its HTML markup.
 
 								NOTES
-								- see the companion =defaultOkText= set-get property
+								- see the companion =defaultOkText= state property
 								- the initial value is =undefined=
 					*/
 				},
@@ -623,12 +623,12 @@ Uize.module ({
 					},
 					value:.3
 					/*?
-						Set-get Properties
+						State Properties
 							shieldOpacity
 								A floating point number in the range of =0= to =1=, specifying the opacity for the =shield= implied node when it is shown.
 
 								NOTES
-								- see the related =currentShieldOpacity=, =hideShieldOnDrag=, and =shieldShown= set-get properties, and the =shield= implied node
+								- see the related =currentShieldOpacity=, =hideShieldOnDrag=, and =shieldShown= state properties, and the =shield= implied node
 								- the initial value is =.3=
 					*/
 				},
@@ -661,14 +661,14 @@ Uize.module ({
 					},
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							shieldShown
 								A boolean, specifying whether or not the =shield= implied node is shown.
 
-								Whenever this property is set to =true=, the =shield= implied node will be revealed. When it is set to =false=, the =shield= will be hidden. This property is set to =true= each time the dialog is shown, and it is set to =false= the first time the dialog is dragged after being shown (provided that the =hideShieldOnDrag= set-get property is set to =true=). You can also programmatically set =shieldShown= to =false= in your dialog code if some action requires that the user be able to see the page behind the dialog.
+								Whenever this property is set to =true=, the =shield= implied node will be revealed. When it is set to =false=, the =shield= will be hidden. This property is set to =true= each time the dialog is shown, and it is set to =false= the first time the dialog is dragged after being shown (provided that the =hideShieldOnDrag= state property is set to =true=). You can also programmatically set =shieldShown= to =false= in your dialog code if some action requires that the user be able to see the page behind the dialog.
 
 								NOTES
-								- see the related =currentShieldOpacity=, =hideShieldOnDrag=, and =shieldOpacity= set-get properties, and the =shield= implied node
+								- see the related =currentShieldOpacity=, =hideShieldOnDrag=, and =shieldOpacity= state properties, and the =shield= implied node
 								- the initial value is =false=
 					*/
 				},
@@ -690,7 +690,7 @@ Uize.module ({
 												An instance event that is fired immediately before the dialog is displayed.
 
 												NOTES
-												- when this event is fired, the value of the =shown= set-get property will be =true=
+												- when this event is fired, the value of the =shown= state property will be =true=
 												- see also the =Before Hide=, =After Show=, and =After Hide= instance events
 									*/
 								_this.setNodeStyle ('',{position:'absolute'});
@@ -722,7 +722,7 @@ Uize.module ({
 												An instance event that is fired immediately before the dialog is hidden.
 
 												NOTES
-												- when this event is fired, the value of the =shown= set-get property will be =false=
+												- when this event is fired, the value of the =shown= state property will be =false=
 												- see also the =Before Show=, =After Show=, and =After Hide= instance events
 									*/
 							}
@@ -735,21 +735,21 @@ Uize.module ({
 											An instance event that is fired immediately after the dialog is shown.
 
 											NOTES
-											- when this event is fired, the value of the =shown= set-get property will be =true=
+											- when this event is fired, the value of the =shown= state property will be =true=
 											- see also the =Before Show=, =Before Hide=, and =After Hide= instance events
 
 										After Hide
 											An instance event that is fired immediately after the dialog is hidden.
 
 											NOTES
-											- when this event is fired, the value of the =shown= set-get property will be =false=
+											- when this event is fired, the value of the =shown= state property will be =false=
 											- see also the =Before Show=, =Before Hide=, and =After Show= instance events
 								*/
 						}
 					},
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							shown
 								A boolean, specifying whether or not the dialog is shown.
 
@@ -763,14 +763,14 @@ Uize.module ({
 					name:'title',
 					onChange:_classPrototype._updateUiTitle
 					/*?
-						Set-get Properties
+						State Properties
 							title
 								A string, specifying text that should be displayed in the dialog's =title Implied Node= (ie. the title bar).
 
-								Using this property, the title of a dialog can be changed at any time - even when the dialog is shown. Leaving =title= set to its initial value of =undefined= will result in the dialog's title being determined by the value of the =defaultTitle= set-get property. If the values for both the =title= and =defaultTitle= set-get properties are =undefined=, then the =title Implied Node= will retain whatever text was initially in its HTML markup.
+								Using this property, the title of a dialog can be changed at any time - even when the dialog is shown. Leaving =title= set to its initial value of =undefined= will result in the dialog's title being determined by the value of the =defaultTitle= state property. If the values for both the =title= and =defaultTitle= state properties are =undefined=, then the =title Implied Node= will retain whatever text was initially in its HTML markup.
 
 								NOTES
-								- see the companion =defaultTitle= set-get property
+								- see the companion =defaultTitle= state property
 								- the initial value is =undefined=
 					*/
 				},
@@ -781,14 +781,14 @@ Uize.module ({
 						_updateUiPositionIfShown
 					]
 					/*?
-						Set-get Properties
+						State Properties
 							width
 								An integer, specifying the width of the dialog (ie. the width of its =Root Node=).
 
-								When a dialog is resizable (by using the =Uize.Widget.Dialog.xResizable= extension), the value of the =width= and set-get property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving =width= set to its initial value of =undefined= will result in the dialog's width remaining as determined by its initial HTML markup and CSS.
+								When a dialog is resizable (by using the =Uize.Widget.Dialog.xResizable= extension), the value of the =width= and state property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving =width= set to its initial value of =undefined= will result in the dialog's width remaining as determined by its initial HTML markup and CSS.
 
 								NOTES
-								- see the companion =height= set-get property
+								- see the companion =height= state property
 								- the initial value is =undefined=
 					*/
 				}

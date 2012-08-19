@@ -1,4 +1,4 @@
-A bug has been fixed with handling of the =dissolve= set-get property that was causing opacity to get left in a bad state in certain cases when switching effect settings.
+A bug has been fixed with handling of the =dissolve= state property that was causing opacity to get left in a bad state in certain cases when switching effect settings.
 
 
 

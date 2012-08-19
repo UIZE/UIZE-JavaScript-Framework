@@ -33,7 +33,7 @@
 					<li><a href="#2_2" title="- ImageWipe - Demonstrates how the &lt;code&gt;Uize.Widget.ImageWipe&lt;/code&gt;&lt;/a&gt; class can be used to wire up a div in a document in order to provide an elaborate and highly configurable JavaScript animation wipe effect to transition from one image to another.">2.2. Slideshow Type Transition Effects</a></li>
 					<li><a href="#2_3" title="- Scrolly Carousel - Demonstrates how you can use the Uize.Widget.Scrolly widget class to create a carousel scrolly that lets you step through a series of pages, with an accompanying JavaScript animation effect.">2.3. Widgets With Animation</a></li>
 					<li><a href="#2_4" title="- Sequenced Show Using Swap - Demonstrates use of the Uize.Array.Order.jumble method of the Uize.Array.Order package in conjunction with the Uize.Node.find method in order to sequence the showing of thumbnail images in a grid, with a JavaScript animation reveal effect provided by the Uize.Widget.Swap class.">2.4. Reveal Effects</a></li>
-					<li><a href="#2_5" title="- Fading an Object - Demonstrates the use of arbitrarily complex data structures for the &lt;code&gt;startValue&lt;/code&gt; and &lt;code&gt;endValue&lt;/code&gt; set-get properties of a Uize.Fade instance.">2.5. Miscellaneous Examples</a></li>
+					<li><a href="#2_5" title="- Fading an Object - Demonstrates the use of arbitrarily complex data structures for the &lt;code&gt;startValue&lt;/code&gt; and &lt;code&gt;endValue&lt;/code&gt; state properties of a Uize.Fade instance.">2.5. Miscellaneous Examples</a></li>
 				</ul>
 			</li>
 			<li><a href="#3" title="The engine for animation and fade effects in the UIZE JavaScript Framework is the Uize.Fade class.">3. The Engine</a>
@@ -64,13 +64,13 @@
 							<li><a href="#4_3_2" title="When using the Uize.Fade.fadeMethod method, you have flexibility in how you specify the method you wish to fade.">4.3.2. Specifying Method to Fade</a></li>
 						</ul>
 					</li>
-					<li><a href="#4_4" title="The Uize.Fade.fade static method that is implemented in the Uize.Fade.xFactory extension module supports special handling when the target of a fade is an instance of a Uize.Class subclass.">4.4. Fading the value Set-Get Property</a></li>
-					<li><a href="#4_5" title="While the Uize.Fade.fade static method can be used for Fading the value Set-Get Property, fading a set-get property other than the value property can be accomplished using the Uize.Fade.fadeProperty static method.">4.5. Fading a Set-Get Property</a></li>
-					<li><a href="#4_6" title="While the Uize.Fade.fadeProperty static method can be used for Fading a Set-Get Property, fading values for multiple set-get properties of an instance in a single fade can be accomplished using the Uize.Fade.fadeProperties static method.">4.6. Fading Many Set-Get Properties</a>
+					<li><a href="#4_4" title="The Uize.Fade.fade static method that is implemented in the Uize.Fade.xFactory extension module supports special handling when the target of a fade is an instance of a Uize.Class subclass.">4.4. Fading the value State Property</a></li>
+					<li><a href="#4_5" title="While the Uize.Fade.fade static method can be used for Fading the value State Property, fading a state property other than the value property can be accomplished using the Uize.Fade.fadeProperty static method.">4.5. Fading a State Property</a></li>
+					<li><a href="#4_6" title="While the Uize.Fade.fadeProperty static method can be used for Fading a State Property, fading values for multiple state properties of an instance in a single fade can be accomplished using the Uize.Fade.fadeProperties static method.">4.6. Fading Many State Properties</a>
 						<ul>
-							<li><a href="#4_6_1" title="To fade set-get properties from their current values to new values, simply specify the value null for the Uize.Fade.fadeProperties method&apos;s propertiesStartValuesOBJ parameter, as in...">4.6.1. Fading From Current Values</a></li>
-							<li><a href="#4_6_2" title="To fade set-get properties from new values back to their current values, simply specify the value null for the Uize.Fade.fadeProperties method&apos;s propertiesEndValuesOBJ parameter, as in...">4.6.2. Fading Back To Current Values</a></li>
-							<li><a href="#4_6_3" title="The Uize.Fade.fadeProperties method also supports fading certain set-get properties from their current values to new values, and other set-get properties from new values back to their current values - in the same fade process.">4.6.3. Mixed From / Back To Current</a></li>
+							<li><a href="#4_6_1" title="To fade state properties from their current values to new values, simply specify the value null for the Uize.Fade.fadeProperties method&apos;s propertiesStartValuesOBJ parameter, as in...">4.6.1. Fading From Current Values</a></li>
+							<li><a href="#4_6_2" title="To fade state properties from new values back to their current values, simply specify the value null for the Uize.Fade.fadeProperties method&apos;s propertiesEndValuesOBJ parameter, as in...">4.6.2. Fading Back To Current Values</a></li>
+							<li><a href="#4_6_3" title="The Uize.Fade.fadeProperties method also supports fading certain state properties from their current values to new values, and other state properties from new values back to their current values - in the same fade process.">4.6.3. Mixed From / Back To Current</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -127,12 +127,12 @@
 						<ul>
 							<li><a href="#6_6_1" title="A curve function can be supplied as a parameter to the Uize.Fade.blendValues static method of the Uize.Fade class.">6.6.1. Blending Values</a></li>
 							<li><a href="#6_6_2" title="Curve functions are not blenders, so they can&apos;t alone be used to blend between two different values.">6.6.2. Curve Functions Are Not Blenders</a></li>
-							<li><a href="#6_6_3" title="A curve function can be supplied to an instance of the Uize.Fade class by setting the value of its curve set-get property, in order to control the characteristics of the fade&apos;s transition.">6.6.3. Controlling Fades</a></li>
+							<li><a href="#6_6_3" title="A curve function can be supplied to an instance of the Uize.Fade class by setting the value of its curve state property, in order to control the characteristics of the fade&apos;s transition.">6.6.3. Controlling Fades</a></li>
 							<li><a href="#6_6_4" title="Because curve functions are supported by the Uize.Fade class, any modules that use instances of this class to drive fade effects can also use curve functions and permit curve functions to be used.">6.6.4. Controlling Effects</a>
 								<ul>
 									<li><a href="#6_6_4_1" title="The various static methods defined in the Uize.Fade.xFactory extension module allow a curve function to be specified in the optional fadePropertiesOBJ parameter.">6.6.4.1. The Uize.Fade.xFactory Module</a></li>
 									<li><a href="#6_6_4_2" title="The Uize.Fx.fadeStyle static method of the Uize.Fx module allows a curve function to be specified in its optional fadePropertiesOBJ parameter.">6.6.4.2. The Uize.Fx Module</a></li>
-									<li><a href="#6_6_4_3" title="The Uize.Widget.HoverFader widget class allows a curve function to be specified in its fadeIn and fadeOut set-get properties.">6.6.4.3. The Uize.Widget.HoverFader Class</a></li>
+									<li><a href="#6_6_4_3" title="The Uize.Widget.HoverFader widget class allows a curve function to be specified in its fadeIn and fadeOut state properties.">6.6.4.3. The Uize.Widget.HoverFader Class</a></li>
 									<li><a href="#6_6_4_4" title="Some widget classes - such as the Uize.Widget.ImageWipe class, and the Uize.Widget.Swap class and its subclasses - use an instance of the Uize.Fade class to drive their animation.">6.6.4.4. Other Widget Classes</a></li>
 								</ul>
 							</li>
@@ -183,7 +183,7 @@
 		
 		<p>Many visible properties of a document can be animated, such as color style properties (eg. <code>color</code>, <code>background</code>, <code>backgroundColor</code>, <code>borderColor</code>, etc.), position style properties (eg. <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>, <code>backgroundPosition</code>), padding and margin style properties (eg. <code>padding</code>, <code>paddingTop</code>, <code>paddingRight</code>, <code>paddingBottom</code>, <code>paddingLeft</code>, <code>margin</code>, <code>marginTop</code>, etc.), dimension style properties (eg. <code>width</code>, <code>height</code>, <code>maxWidth</code>, <code>maxHeigh</code>, <code>borderWidth</code>, <code>borderTopWidth</code>, etc.), and font style properties (eg. <code>fontSize</code>, <code>letterSpacing</code>, <code>wordSpacing</code>, <code>lineHeight</code>, <code>textIndent</code>).</p>
 		
-		<p>In addition, the UIZE JavaScript Framework lets you animate the values of set-get properties for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other Non-time Based Fades.</p>
+		<p>In addition, the UIZE JavaScript Framework lets you animate the values of state properties for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other Non-time Based Fades.</p>
 		
 		<p><span class="allCaps">HOW'S THE PERFORMANCE?</span></p>
 		
@@ -253,7 +253,7 @@
 		<h2 class="heading2" title="2. Some Examples -&gt; 2.5. Miscellaneous Examples"><span class="headingNumber"><a href="#2" title="2. Some Examples">2</a>.<a href="#2_5" title="2. Some Examples -&gt; 2.5. Miscellaneous Examples">5</a>. </span>Miscellaneous Examples</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/fading-an-object.html"><b>Fading an Object</b></a> - Demonstrates the use of arbitrarily complex data structures for the <code>startValue</code> and <code>endValue</code> set-get properties of a <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/fading-an-object.html"><b>Fading an Object</b></a> - Demonstrates the use of arbitrarily complex data structures for the <code>startValue</code> and <code>endValue</code> state properties of a <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance.</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/mask.html"><b>Basic Mask</b></a> - Demonstrates how the <code><a href="../reference/Uize.Widget.Mask.html">Uize.Widget.Mask</a></code> widget class can be used to highlight a region of a layout, with an accompanying animation of the mask's coordinates when a new region is to become highlighted.</td></tr>
 			</table>
 		</div>
@@ -281,9 +281,9 @@ myFade.wire ('Changed.value',function () {Uize.Node.setValue ('testNode',myFade)
 myFade.start ();
 </pre>
 			
-			<p>In the above example, a value will be faded between <code>0</code> and <code>100</code> over a period of <code>5000</code> milliseconds (5 seconds) when the <code>start</code> instance method is called. In order to have something noticeable happen during the fade, a handler is wired to the <code>Changed.value</code> instance event - an event that is fired each time the <code>value</code> set-get property is updated (if you need a refresher on the <code>Change.[propertyName] Virtual Event</code>, consult the <a href="set-get-properties.html">Set-get Properties</a> explainer and read through the Changed Events section).</p>
+			<p>In the above example, a value will be faded between <code>0</code> and <code>100</code> over a period of <code>5000</code> milliseconds (5 seconds) when the <code>start</code> instance method is called. In order to have something noticeable happen during the fade, a handler is wired to the <code>Changed.value</code> instance event - an event that is fired each time the <code>value</code> state property is updated (if you need a refresher on the <code>Change.[propertyName] Virtual Event</code>, consult the <a href="state-properties.html">State Properties</a> explainer and read through the Changed Events section).</p>
 			
-			<p>In this case, the handler code simply displays the current value in the DOM node with the <code>id</code> of <code>'testNode'</code>, using the <code>Uize.Node.setValue</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module. We can pass just the reference to <code>myFade</code> here because the <code>Uize.Node.setValue</code> method will coerce it to a string and thereby invoke the <code>valueOf Intrinsic Method</code> which returns the value of the <code>value</code> set-get property - a nice little shorthand. Now, if we didn't wire a handler to this event, then the value would still fade when the <code>start</code> method was called, but nobody would see that anything was happening.</p>
+			<p>In this case, the handler code simply displays the current value in the DOM node with the <code>id</code> of <code>'testNode'</code>, using the <code>Uize.Node.setValue</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module. We can pass just the reference to <code>myFade</code> here because the <code>Uize.Node.setValue</code> method will coerce it to a string and thereby invoke the <code>valueOf Intrinsic Method</code> which returns the value of the <code>value</code> state property - a nice little shorthand. Now, if we didn't wire a handler to this event, then the value would still fade when the <code>start</code> method was called, but nobody would see that anything was happening.</p>
 		</div>
 		
 		<a name="3_2"></a>
@@ -305,7 +305,7 @@ myFade.start ();
 		<div class="contents2">
 			<p>In order to provide safe values for code that uses fades, and in order to improve performance, interpolated values can be quantized using the highly flexible quantization feature.</p>
 			
-			<p>The <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class provides a highly versatile mechanism for configuring aribtrary quantization. In our earlier example that displayed an interpolated number in the range of <code>0</code> to <code>100</code> in a DOM node during the fade, there was no quantization. Consequently, you would see all manner of floating point number displayed throughout the course of the fade. If we were instead using this interpolated value to set something like left position, measured in pixels, then we wouldn't have a healthy value. And even if we rounded the number in our <code>Changed.value</code> event handler code, or if the browser forgave floating point pixel measurements, we would still potentially be touching the DOM far more than we would need to - the fractional values will not be noticeable but the unnecessary updates will cost us in performance. This is where the <code><a href="#3_3">quantization</a></code> set-get property of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class comes in. Consider an updated version of the earlier example...</p>
+			<p>The <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class provides a highly versatile mechanism for configuring aribtrary quantization. In our earlier example that displayed an interpolated number in the range of <code>0</code> to <code>100</code> in a DOM node during the fade, there was no quantization. Consequently, you would see all manner of floating point number displayed throughout the course of the fade. If we were instead using this interpolated value to set something like left position, measured in pixels, then we wouldn't have a healthy value. And even if we rounded the number in our <code>Changed.value</code> event handler code, or if the browser forgave floating point pixel measurements, we would still potentially be touching the DOM far more than we would need to - the fractional values will not be noticeable but the unnecessary updates will cost us in performance. This is where the <code><a href="#3_3">quantization</a></code> state property of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class comes in. Consider an updated version of the earlier example...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -315,7 +315,7 @@ myFade.wire ('Changed.value',function () {Uize.Node.setValue ('testNode',myFade)
 myFade.start ();
 </pre>
 			
-			<p>By setting the value of the <code><a href="#3_3">quantization</a></code> set-get property to <code>1</code>, we are ensuring that the value of the <code>value</code> set-get property will always be in increments of <code>1</code>. Since the start value is an integer, this will ensure that the interpolated value at any given point in time will always be an integer. Now when the <code>start</code> method is called, you would only see integers displayed throughout the course of the fade.</p>
+			<p>By setting the value of the <code><a href="#3_3">quantization</a></code> state property to <code>1</code>, we are ensuring that the value of the <code>value</code> state property will always be in increments of <code>1</code>. Since the start value is an integer, this will ensure that the interpolated value at any given point in time will always be an integer. Now when the <code>start</code> method is called, you would only see integers displayed throughout the course of the fade.</p>
 		</div>
 		
 		<a name="3_4"></a>
@@ -341,7 +341,7 @@ positionFade.wire (
 positionFade.start ();
 </pre>
 			
-			<p>In the above example, the DOM node with the <code>id</code> of <code>'myNode'</code> is being moved and resized, starting from a position of 0,0 and a size of 10 x 10, and ending up at the position of 100,100 and a size of 200 x 200. Because the values of the <code>startValue</code> and <code>endValue</code> set-get properties are both objects containing the properties <code>left</code>, <code>top</code>, <code>width</code>, and <code>height</code>, so the value of the <code>value</code> set-get property is also an object containing these properties. The <code>Uize.Node.setStyle</code> static method conveniently accepts an object with an arbitrary number of properties for different CSS style properties, and <code>left</code>, <code>top</code>, <code>width</code>, and <code>height</code> happen to be valid names of CSS style properties. Furthermore, this method resolves numerical values for coordinate properties by appending the unit string <code>'px'</code>. So we're golden - we can just pass the value of the fade's <code>value</code> set-get property to the <code>Uize.Node.setStyle</code> method and it will position and resize the DOM node as desired.</p>
+			<p>In the above example, the DOM node with the <code>id</code> of <code>'myNode'</code> is being moved and resized, starting from a position of 0,0 and a size of 10 x 10, and ending up at the position of 100,100 and a size of 200 x 200. Because the values of the <code>startValue</code> and <code>endValue</code> state properties are both objects containing the properties <code>left</code>, <code>top</code>, <code>width</code>, and <code>height</code>, so the value of the <code>value</code> state property is also an object containing these properties. The <code>Uize.Node.setStyle</code> static method conveniently accepts an object with an arbitrary number of properties for different CSS style properties, and <code>left</code>, <code>top</code>, <code>width</code>, and <code>height</code> happen to be valid names of CSS style properties. Furthermore, this method resolves numerical values for coordinate properties by appending the unit string <code>'px'</code>. So we're golden - we can just pass the value of the fade's <code>value</code> state property to the <code>Uize.Node.setStyle</code> method and it will position and resize the DOM node as desired.</p>
 			
 			<p>Now this, of course, is <b>not</b> the most concise way to animate coordinates using the UIZE JavaScript Framework - the framework provides convenient modules for easily <a href="#5">Animating CSS Style Properties</a> - but this example illustrates the benefit of interpolating compound values. And those other, more convenient features for easily animating CSS properties rely on this mechanism, anyway.</p>
 			
@@ -379,7 +379,7 @@ positionAndBgFade.wire (
 positionAndBgFade.start ();
 </pre>
 			
-			<p>Now the values for the <code>startValue</code> and <code>endValue</code> set-get properties have even more in them - this time separate <code>coords</code> and <code>bg</code> properties, where both <code>coords</code> and <code>bg</code> are objects. No problem, the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class can handle it all. The value of the <code>value</code> set-get property, that is interpolated between <code>startValue</code> and <code>endValue</code>, will have the same structure as <code>startValue</code> and <code>endValue</code>. In the handler for the <code>Change.value</code> event, the code is indexing into this interpolated compound value to get the interpolated values for <code>coords</code> and <code>bg</code>, which it is then using separately to set the coordinates and background color for the node. With the interpolated background color tuple object it is forming a string of the form "rgb([red],[green],[blue])" for setting the <code>backgroundColor</code> CSS style property.</p>
+			<p>Now the values for the <code>startValue</code> and <code>endValue</code> state properties have even more in them - this time separate <code>coords</code> and <code>bg</code> properties, where both <code>coords</code> and <code>bg</code> are objects. No problem, the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class can handle it all. The value of the <code>value</code> state property, that is interpolated between <code>startValue</code> and <code>endValue</code>, will have the same structure as <code>startValue</code> and <code>endValue</code>. In the handler for the <code>Change.value</code> event, the code is indexing into this interpolated compound value to get the interpolated values for <code>coords</code> and <code>bg</code>, which it is then using separately to set the coordinates and background color for the node. With the interpolated background color tuple object it is forming a string of the form "rgb([red],[green],[blue])" for setting the <code>backgroundColor</code> CSS style property.</p>
 			
 			<p>Now, once again, there <b>are</b> more convient ways to do this in a single statement using the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module, but this example illustrates the versatility of <a href="#3_4">Compound Value Interpolation</a>.</p>
 			
@@ -388,7 +388,7 @@ positionAndBgFade.start ();
 			<div class="contents3">
 				<p>Along with <a href="#3_4">Compound Value Interpolation</a>, the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class also supports compound quantization.</p>
 				
-				<p>In the previous example that showed how quantization is used, the quantization value of <code>1</code> was being used for the interpolation of all components of the compound value. But, what if different parts of a compound value need different quantization? Say, for example, we wanted to use a single <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance to animate both the opacity and color of a DOM node. If we used the value <code>1</code> for quantizing the opacity value (a floating point number in the range of <code>0</code> to <code>1</code>), then it could only ever be the integers <code>0</code> or <code>1</code>. In such cases, it is possible to specify a compound value for the <code><a href="#3_3">quantization</a></code> set-get property. Consider the following example...</p>
+				<p>In the previous example that showed how quantization is used, the quantization value of <code>1</code> was being used for the interpolation of all components of the compound value. But, what if different parts of a compound value need different quantization? Say, for example, we wanted to use a single <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance to animate both the opacity and color of a DOM node. If we used the value <code>1</code> for quantizing the opacity value (a floating point number in the range of <code>0</code> to <code>1</code>), then it could only ever be the integers <code>0</code> or <code>1</code>. In such cases, it is possible to specify a compound value for the <code><a href="#3_3">quantization</a></code> state property. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -448,9 +448,9 @@ positionAndBgFade.start ();
 		
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>The first parameter is the update handler function, and it receives the interpolated value as its parameter.</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>The second and third parameters are the start and end values for the fade, respectively (ie. the values for the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance's <code>startValue</code> and <code>endValues</code> set-get properties).</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>The fourth parameter is the fade's duration (ie. the value for the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance's <code>duration</code> set-get property).</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;">4. </span></td><td>The last parameter is for additional set-get property values that should be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance before the fade is started (in this case we're using it to set <code><a href="#3_3">quantization</a></code>).</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>The second and third parameters are the start and end values for the fade, respectively (ie. the values for the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance's <code>startValue</code> and <code>endValues</code> state properties).</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>The fourth parameter is the fade's duration (ie. the value for the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance's <code>duration</code> state property).</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;">4. </span></td><td>The last parameter is for additional state property values that should be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance before the fade is started (in this case we're using it to set <code><a href="#3_3">quantization</a></code>).</td></tr>
 		</table>
 		<a name="4_1"></a>
 		<h2 class="heading2" title="4. The Fade Factory -&gt; 4.1. Non-interpolated Values"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_1" title="4. The Fade Factory -&gt; 4.1. Non-interpolated Values">1</a>. </span>Non-interpolated Values</h2>
@@ -530,7 +530,7 @@ Uize.Fade.fadeMethod (Uize.Node,'setOpacity',['myNode',1],['myNode',0],2000);
 <pre class="sample-code">Uize.Fade.fadeMethod (Uize.Widget.Bar.Slider,'set',{value:0},{value:100},2000);
 </pre>
 				
-				<p>The first example will simply not work - period. That's because the <code>Uize.Widget.Bar.Slider.set</code> method needs a class as a context, and by using the <code>Uize.Fade.fade</code> method it will simply be called as a function - without a context. The approach using the <code>Uize.Fade.fadeMethod</code> method works, because the context <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> is specified using the first parameter and this context is remembered for when the <code>set</code> method is to be called. Admittedly, you're not likely to want to fade the setting of the value for a set-get property on a class, but this example at least illustrates the point.</p>
+				<p>The first example will simply not work - period. That's because the <code>Uize.Widget.Bar.Slider.set</code> method needs a class as a context, and by using the <code>Uize.Fade.fade</code> method it will simply be called as a function - without a context. The approach using the <code>Uize.Fade.fadeMethod</code> method works, because the context <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> is specified using the first parameter and this context is remembered for when the <code>set</code> method is to be called. Admittedly, you're not likely to want to fade the setting of the value for a state property on a class, but this example at least illustrates the point.</p>
 				
 				<p>In cases where you need to animate the calling of a particular method on a particular context, you can use the <code>Uize.Fade.fadeMethod</code> static method, as discussed in the section <a href="#4_3">Fading a Method Call</a>.</p>
 			</div>
@@ -620,11 +620,11 @@ Uize.Fade.fadeMethod (slider,function (value) {this.set ({value:value})},0,100,2
 		</div>
 		
 		<a name="4_4"></a>
-		<h2 class="heading2" title="4. The Fade Factory -&gt; 4.4. Fading the value Set-Get Property"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_4" title="4. The Fade Factory -&gt; 4.4. Fading the value Set-Get Property">4</a>. </span>Fading the value Set-Get Property</h2>
+		<h2 class="heading2" title="4. The Fade Factory -&gt; 4.4. Fading the value State Property"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_4" title="4. The Fade Factory -&gt; 4.4. Fading the value State Property">4</a>. </span>Fading the value State Property</h2>
 		<div class="contents2">
 			<p>The <code>Uize.Fade.fade</code> static method that is implemented in the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> extension module supports special handling when the target of a fade is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 			
-			<p>What does it mean to fade an instance? When an instance is specified in place of an update function when calling the <code>Uize.Fade.fade</code> method, this method fades the value of the specified instance's <code>value</code> set-get property. So, if the class of your instance implements a <code>value</code> set-get property, then you can use this convenient shorthand. Consider the following example...</p>
+			<p>What does it mean to fade an instance? When an instance is specified in place of an update function when calling the <code>Uize.Fade.fade</code> method, this method fades the value of the specified instance's <code>value</code> state property. So, if the class of your instance implements a <code>value</code> state property, then you can use this convenient shorthand. Consider the following example...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -632,13 +632,13 @@ Uize.Fade.fadeMethod (slider,function (value) {this.set ({value:value})},0,100,2
 <pre class="sample-code">Uize.Fade.fade (slider,0,100,2000);
 </pre>
 			
-			<p>In the above example, <code>slider</code> is an instance of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class, and this class has a <code>value</code> set-get property. So, the statement will have the effect of fading the value of the slider widget from <code>0</code> to <code>100</code> over a period of <code>2000</code> milliseconds (2 seconds) - short 'n sweet. Of course, you could accomplish the same effect by <a href="#4_3">Fading a Method Call</a> or by <a href="#4_5">Fading a Set-Get Property</a>, as in...</p>
+			<p>In the above example, <code>slider</code> is an instance of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class, and this class has a <code>value</code> state property. So, the statement will have the effect of fading the value of the slider widget from <code>0</code> to <code>100</code> over a period of <code>2000</code> milliseconds (2 seconds) - short 'n sweet. Of course, you could accomplish the same effect by <a href="#4_3">Fading a Method Call</a> or by <a href="#4_5">Fading a State Property</a>, as in...</p>
 			
 			
 <pre class="sample-code">// fading the slider value by fading a method call
 Uize.Fade.fadeMethod (slider,'set',{value:0},{value:100},2000);
 
-// fading the slider value by fading a set-get property
+// fading the slider value by fading a state property
 Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 </pre>
 			
@@ -646,9 +646,9 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 		</div>
 		
 		<a name="4_5"></a>
-		<h2 class="heading2" title="4. The Fade Factory -&gt; 4.5. Fading a Set-Get Property"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_5" title="4. The Fade Factory -&gt; 4.5. Fading a Set-Get Property">5</a>. </span>Fading a Set-Get Property</h2>
+		<h2 class="heading2" title="4. The Fade Factory -&gt; 4.5. Fading a State Property"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_5" title="4. The Fade Factory -&gt; 4.5. Fading a State Property">5</a>. </span>Fading a State Property</h2>
 		<div class="contents2">
-			<p>While the <code>Uize.Fade.fade</code> static method can be used for <a href="#4_4">Fading the value Set-Get Property</a>, fading a set-get property other than the <code>value</code> property can be accomplished using the <code>Uize.Fade.fadeProperty</code> static method.</p>
+			<p>While the <code>Uize.Fade.fade</code> static method can be used for <a href="#4_4">Fading the value State Property</a>, fading a state property other than the <code>value</code> property can be accomplished using the <code>Uize.Fade.fadeProperty</code> static method.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -656,13 +656,13 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 <pre class="sample-code">Uize.Fade.fadeProperty (marquee,'width',10,100,2000);
 </pre>
 			
-			<p>In the above example, <code>marquee</code> is an instance of the <code><a href="../reference/Uize.Widget.Resizer.Marquee.html">Uize.Widget.Resizer.Marquee</a></code> class. The statement will fade the value of its <code>width</code> set-get property from <code>10</code> to <code>200</code> over a period of <code>2000</code> milliseconds (2 seconds).</p>
+			<p>In the above example, <code>marquee</code> is an instance of the <code><a href="../reference/Uize.Widget.Resizer.Marquee.html">Uize.Widget.Resizer.Marquee</a></code> class. The statement will fade the value of its <code>width</code> state property from <code>10</code> to <code>200</code> over a period of <code>2000</code> milliseconds (2 seconds).</p>
 		</div>
 		
 		<a name="4_6"></a>
-		<h2 class="heading2" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_6" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties">6</a>. </span>Fading Many Set-Get Properties</h2>
+		<h2 class="heading2" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_6" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties">6</a>. </span>Fading Many State Properties</h2>
 		<div class="contents2">
-			<p>While the <code>Uize.Fade.fadeProperty</code> static method can be used for <a href="#4_5">Fading a Set-Get Property</a>, fading values for multiple set-get properties of an instance in a single fade can be accomplished using the <code>Uize.Fade.fadeProperties</code> static method.</p>
+			<p>While the <code>Uize.Fade.fadeProperty</code> static method can be used for <a href="#4_5">Fading a State Property</a>, fading values for multiple state properties of an instance in a single fade can be accomplished using the <code>Uize.Fade.fadeProperties</code> static method.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -670,7 +670,7 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 <pre class="sample-code">Uize.Fade.fadeProperties (marquee,{width:10,height:10},{width:100,height:100},2000);
 </pre>
 			
-			<p>In the above example, <code>marquee</code> is an instance of the <code><a href="../reference/Uize.Widget.Resizer.Marquee.html">Uize.Widget.Resizer.Marquee</a></code> class. The statement will fade its dimensions (ie. the values of its <code>width</code> and <code>height</code> set-get properties) from 10 x 10 to 100 x 100 over a period of <code>2000</code> milliseconds (2 seconds).</p>
+			<p>In the above example, <code>marquee</code> is an instance of the <code><a href="../reference/Uize.Widget.Resizer.Marquee.html">Uize.Widget.Resizer.Marquee</a></code> class. The statement will fade its dimensions (ie. the values of its <code>width</code> and <code>height</code> state properties) from 10 x 10 to 100 x 100 over a period of <code>2000</code> milliseconds (2 seconds).</p>
 			
 			<p>Now, for what it's worth, you could also accomplish the same effect using the <code>Uize.Fade.fadeMethod</code> method, as follows...</p>
 			
@@ -681,9 +681,9 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 			<p>As you can see, using the <code>Uize.Fade.fadeProperties</code> method isn't that much shorter, so it's offered more as a semantic convenience - use whichever makes more sense to you.</p>
 			
 			<a name="4_6_1"></a>
-			<h3 class="heading3" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties -&gt; 4.6.1. Fading From Current Values"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_6" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties">6</a>.<a href="#4_6_1" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties -&gt; 4.6.1. Fading From Current Values">1</a>. </span>Fading From Current Values</h3>
+			<h3 class="heading3" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties -&gt; 4.6.1. Fading From Current Values"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_6" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties">6</a>.<a href="#4_6_1" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties -&gt; 4.6.1. Fading From Current Values">1</a>. </span>Fading From Current Values</h3>
 			<div class="contents3">
-				<p>To fade set-get properties from their current values to new values, simply specify the value <code>null</code> for the <code>Uize.Fade.fadeProperties</code> method's <code>propertiesStartValuesOBJ</code> parameter, as in...</p>
+				<p>To fade state properties from their current values to new values, simply specify the value <code>null</code> for the <code>Uize.Fade.fadeProperties</code> method's <code>propertiesStartValuesOBJ</code> parameter, as in...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -695,9 +695,9 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 			</div>
 			
 			<a name="4_6_2"></a>
-			<h3 class="heading3" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties -&gt; 4.6.2. Fading Back To Current Values"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_6" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties">6</a>.<a href="#4_6_2" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties -&gt; 4.6.2. Fading Back To Current Values">2</a>. </span>Fading Back To Current Values</h3>
+			<h3 class="heading3" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties -&gt; 4.6.2. Fading Back To Current Values"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_6" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties">6</a>.<a href="#4_6_2" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties -&gt; 4.6.2. Fading Back To Current Values">2</a>. </span>Fading Back To Current Values</h3>
 			<div class="contents3">
-				<p>To fade set-get properties from new values back to their current values, simply specify the value <code>null</code> for the <code>Uize.Fade.fadeProperties</code> method's <code>propertiesEndValuesOBJ</code> parameter, as in...</p>
+				<p>To fade state properties from new values back to their current values, simply specify the value <code>null</code> for the <code>Uize.Fade.fadeProperties</code> method's <code>propertiesEndValuesOBJ</code> parameter, as in...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -709,11 +709,11 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 			</div>
 			
 			<a name="4_6_3"></a>
-			<h3 class="heading3" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties -&gt; 4.6.3. Mixed From / Back To Current"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_6" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties">6</a>.<a href="#4_6_3" title="4. The Fade Factory -&gt; 4.6. Fading Many Set-Get Properties -&gt; 4.6.3. Mixed From / Back To Current">3</a>. </span>Mixed From / Back To Current</h3>
+			<h3 class="heading3" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties -&gt; 4.6.3. Mixed From / Back To Current"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_6" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties">6</a>.<a href="#4_6_3" title="4. The Fade Factory -&gt; 4.6. Fading Many State Properties -&gt; 4.6.3. Mixed From / Back To Current">3</a>. </span>Mixed From / Back To Current</h3>
 			<div class="contents3">
-				<p>The <code>Uize.Fade.fadeProperties</code> method also supports fading certain set-get properties from their current values to new values, and other set-get properties from new values back to their current values - in the same fade process.</p>
+				<p>The <code>Uize.Fade.fadeProperties</code> method also supports fading certain state properties from their current values to new values, and other state properties from new values back to their current values - in the same fade process.</p>
 				
-				<p>Basically, when specifying the values of set-get properties in either of the <code>propertiesStartValuesOBJ</code> or <code>propertiesEndValuesOBJ</code> parameters, specifying the value <code>null</code> for any property, or omitting that property when it is specified for the opposite end of the fade, will result in the current value of that property being used. Consider the following example...</p>
+				<p>Basically, when specifying the values of state properties in either of the <code>propertiesStartValuesOBJ</code> or <code>propertiesEndValuesOBJ</code> parameters, specifying the value <code>null</code> for any property, or omitting that property when it is specified for the opposite end of the fade, will result in the current value of that property being used. Consider the following example...</p>
 				
 				
 <pre class="sample-code">Uize.Fade.fadeProperties (marquee,{width:100},{height:100},2000);
@@ -918,7 +918,7 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 );
 </pre>
 			
-			<p>In the above example, the DOM node with the <code>id</code> of <code>'myNode'</code> is being moved and resized, starting from a position of 0,0 and a size of 10 x 10, and ending up at the position of 100,100 and a size of 200 x 200. Because the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module allows fade properties to be specified in its optional <code>fadePropertiesOBJ</code> parameter, a value can be specified for the <code>curve</code> set-get property of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that will be used to service the style fade. In this case we're using the <code>Uize.Curve.easeInOutPow</code> static method of the <code><a href="../reference/Uize.Curve.html">Uize.Curve</a></code> module to create a quartic (power of four) ease-in-out curve function. This will produce a transition that starts out slowly, picks up speed, and then slows down to end slowly.</p>
+			<p>In the above example, the DOM node with the <code>id</code> of <code>'myNode'</code> is being moved and resized, starting from a position of 0,0 and a size of 10 x 10, and ending up at the position of 100,100 and a size of 200 x 200. Because the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module allows fade properties to be specified in its optional <code>fadePropertiesOBJ</code> parameter, a value can be specified for the <code>curve</code> state property of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that will be used to service the style fade. In this case we're using the <code>Uize.Curve.easeInOutPow</code> static method of the <code><a href="../reference/Uize.Curve.html">Uize.Curve</a></code> module to create a quartic (power of four) ease-in-out curve function. This will produce a transition that starts out slowly, picks up speed, and then slows down to end slowly.</p>
 		</div>
 		
 		<a name="6_4"></a>
@@ -1087,7 +1087,7 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 			<a name="6_6_3"></a>
 			<h3 class="heading3" title="6. Curves -&gt; 6.6. Using Curve Functions -&gt; 6.6.3. Controlling Fades"><span class="headingNumber"><a href="#6" title="6. Curves">6</a>.<a href="#6_6" title="6. Curves -&gt; 6.6. Using Curve Functions">6</a>.<a href="#6_6_3" title="6. Curves -&gt; 6.6. Using Curve Functions -&gt; 6.6.3. Controlling Fades">3</a>. </span>Controlling Fades</h3>
 			<div class="contents3">
-				<p>A curve function can be supplied to an instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class by setting the value of its <code>curve</code> set-get property, in order to control the characteristics of the fade's transition.</p>
+				<p>A curve function can be supplied to an instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class by setting the value of its <code>curve</code> state property, in order to control the characteristics of the fade's transition.</p>
 				
 				<p>When not specifying a curve to a <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance, the fade's transition will be linear in nature. In other words, the rate of change will remain constant throughout the fade process. Specifying your own curve allows you to make the fade non-linear in order to emulate motion effects like bounce, springiness, wobble, elasticity, etc.</p>
 				
@@ -1108,7 +1108,7 @@ positionFade.wire (
 positionFade.start ();
 </pre>
 				
-				<p>Although there are more concise ways of <a href="#5">Animating CSS Style Properties</a> in order to fade the position of a node, the above example illustrates how a curve function can be specified as a value for the <code>curve</code> set-get property of an instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class.</p>
+				<p>Although there are more concise ways of <a href="#5">Animating CSS Style Properties</a> in order to fade the position of a node, the above example illustrates how a curve function can be specified as a value for the <code>curve</code> state property of an instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class.</p>
 			</div>
 			
 			<a name="6_6_4"></a>
@@ -1149,7 +1149,7 @@ positionFade.start ();
 				<a name="6_6_4_3"></a>
 				<h4 class="heading4" title="6. Curves -&gt; 6.6. Using Curve Functions -&gt; 6.6.4. Controlling Effects -&gt; 6.6.4.3. The Uize.Widget.HoverFader Class"><span class="headingNumber"><a href="#6" title="6. Curves">6</a>.<a href="#6_6" title="6. Curves -&gt; 6.6. Using Curve Functions">6</a>.<a href="#6_6_4" title="6. Curves -&gt; 6.6. Using Curve Functions -&gt; 6.6.4. Controlling Effects">4</a>.<a href="#6_6_4_3" title="6. Curves -&gt; 6.6. Using Curve Functions -&gt; 6.6.4. Controlling Effects -&gt; 6.6.4.3. The Uize.Widget.HoverFader Class">3</a>. </span>The Uize.Widget.HoverFader Class</h4>
 				<div class="contents4">
-					<p>The <code><a href="../reference/Uize.Widget.HoverFader.html">Uize.Widget.HoverFader</a></code> widget class allows a curve function to be specified in its <code>fadeIn</code> and <code>fadeOut</code> set-get properties.</p>
+					<p>The <code><a href="../reference/Uize.Widget.HoverFader.html">Uize.Widget.HoverFader</a></code> widget class allows a curve function to be specified in its <code>fadeIn</code> and <code>fadeOut</code> state properties.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					

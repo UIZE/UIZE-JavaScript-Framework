@@ -36,7 +36,7 @@
 							<li><a href="#1_1_1" title="Scroll position is expressed in pages, where one horizontal page is defined as the width of the view implied node, and one vertical page is defined as the height of the view implied node.">1.1.1. Scrolling in Pages</a></li>
 							<li><a href="#1_1_2" title="Scrolling is achieved by setting the values of the scrollLeft and scrollTop properties of the view implied node.">1.1.2. How Scrolling is Performed</a>
 								<ul>
-									<li><a href="#1_1_2_1" title="Whenever the values of either the pageX or pageY set-get properties are modified, a fade is initiated in order to animate the scroll position of the view implied node from its current position to the new position represented by the new pageX and pageY values.">1.1.2.1. Animation</a></li>
+									<li><a href="#1_1_2_1" title="Whenever the values of either the pageX or pageY state properties are modified, a fade is initiated in order to animate the scroll position of the view implied node from its current position to the new position represented by the new pageX and pageY values.">1.1.2.1. Animation</a></li>
 								</ul>
 							</li>
 							<li><a href="#1_1_3" title="Instances of the Uize.Widget.Scrolly class are equipped with four scroll buttons: left and right buttons for scrolling horizontally, and up and down buttons for scrolling vertically.">1.1.3. Scrolling With Buttons</a>
@@ -44,8 +44,8 @@
 									<li><a href="#1_1_3_1" title="Clicking the buttons scrolls one page at a time (see Scrolling in Pages), but holding down the shift modifier key when clicking on the buttons will scroll all the way to the extremes.">1.1.3.1. Shift-click</a></li>
 								</ul>
 							</li>
-							<li><a href="#1_1_4" title="In addition to Scrolling With Buttons, it is also possible to programmatically scroll an instance by setting the values of its pageX and pageY set-get properties.">1.1.4. Scrolling Programmatically</a></li>
-							<li><a href="#1_1_5" title="For the convenience of application code, a full complement of read-only set-get properties provides a state summary for scrolly instances.">1.1.5. State Summary</a></li>
+							<li><a href="#1_1_4" title="In addition to Scrolling With Buttons, it is also possible to programmatically scroll an instance by setting the values of its pageX and pageY state properties.">1.1.4. Scrolling Programmatically</a></li>
+							<li><a href="#1_1_5" title="For the convenience of application code, a full complement of read-only state properties provides a state summary for scrolly instances.">1.1.5. State Summary</a></li>
 							<li><a href="#1_1_6" title="The following example HTML shows a typical way that the HTML markup for an instance could be implemented.">1.1.6. The HTML</a></li>
 						</ul>
 					</li>
@@ -78,10 +78,10 @@
 			</li>
 			<li><a href="#4">4. Implied Nodes</a>
 				<ul>
-					<li><a href="#4_1" title="A node of any type, whose scrollLeft and scrollTop style properties are maintained by the Uize.Widget.Scrolly class as the values of the pageX and pageY set-get properties are modified.">4.1. view</a></li>
+					<li><a href="#4_1" title="A node of any type, whose scrollLeft and scrollTop style properties are maintained by the Uize.Widget.Scrolly class as the values of the pageX and pageY state properties are modified.">4.1. view</a></li>
 				</ul>
 			</li>
-			<li><a href="#5">5. Set-get Properties</a>
+			<li><a href="#5">5. State Properties</a>
 				<ul>
 					<li><a href="#5_1" title="Inherited from Uize.Widget.">5.1. built</a></li>
 					<li><a href="#5_2" title="Inherited from Uize.Widget.">5.2. busy</a></li>
@@ -97,8 +97,8 @@
 					<li><a href="#5_12" title="A read-only boolean (whose value is managed by the Uize.Widget.Scrolly class), indicating whether or not the contents of the view implied node is wide enough to make it horizontally scrollable.">5.12. isScrollableX</a></li>
 					<li><a href="#5_13" title="A read-only boolean (whose value is managed by the Uize.Widget.Scrolly class), indicating whether or not the contents of the view implied node is tall enough to make it vertically scrollable.">5.13. isScrollableY</a></li>
 					<li><a href="#5_14" title="Inherited from Uize.Widget.">5.14. localized</a></li>
-					<li><a href="#5_15" title="A read-only integer (whose value is managed by the Uize.Widget.Scrolly class), indicating the maximum possible value for the pageX set-get property.">5.15. maxPageX</a></li>
-					<li><a href="#5_16" title="A read-only integer (whose value is managed by the Uize.Widget.Scrolly class), indicating the maximum possible value for the pageY set-get property.">5.16. maxPageY</a></li>
+					<li><a href="#5_15" title="A read-only integer (whose value is managed by the Uize.Widget.Scrolly class), indicating the maximum possible value for the pageX state property.">5.15. maxPageX</a></li>
+					<li><a href="#5_16" title="A read-only integer (whose value is managed by the Uize.Widget.Scrolly class), indicating the maximum possible value for the pageY state property.">5.16. maxPageY</a></li>
 					<li><a href="#5_17" title="Inherited from Uize.Widget.">5.17. name</a></li>
 					<li><a href="#5_18" title="Inherited from Uize.Widget.">5.18. nodeMap</a></li>
 					<li><a href="#5_19" title="An integer, representing the current horizontal scroll position of the view implied node as a page number (see Scrolling in Pages) in the X-axis.">5.19. pageX</a>
@@ -223,11 +223,11 @@
 				<a name="1_1_2_1"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. How Scrolling is Performed -&gt; 1.1.2.1. Animation"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. How Scrolling is Performed">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. How Scrolling is Performed -&gt; 1.1.2.1. Animation">1</a>. </span>Animation</h4>
 				<div class="contents4">
-					<p>Whenever the values of either the <code><a href="#5_19">pageX</a></code> or <code><a href="#5_20">pageY</a></code> set-get properties are modified, a fade is initiated in order to animate the scroll position of the <code><a href="#4_1">view</a></code> implied node from its current position to the new position represented by the new <code><a href="#5_19">pageX</a></code> and <code><a href="#5_20">pageY</a></code> values.</p>
+					<p>Whenever the values of either the <code><a href="#5_19">pageX</a></code> or <code><a href="#5_20">pageY</a></code> state properties are modified, a fade is initiated in order to animate the scroll position of the <code><a href="#4_1">view</a></code> implied node from its current position to the new position represented by the new <code><a href="#5_19">pageX</a></code> and <code><a href="#5_20">pageY</a></code> values.</p>
 					
-					<p>The scrolly instance creates an instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class in order to drive the scroll position fade. This fade instance is accessible through the <code><a href="#2_1">fade</a></code> instance property, so the properties of the scroll fade can be configured by setting values for the various set-get properties of this <code><a href="#2_1">fade</a></code> instance, such as its <code>curve</code>, <code>duration</code>, and other set-get properties.</p>
+					<p>The scrolly instance creates an instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class in order to drive the scroll position fade. This fade instance is accessible through the <code><a href="#2_1">fade</a></code> instance property, so the properties of the scroll fade can be configured by setting values for the various state properties of this <code><a href="#2_1">fade</a></code> instance, such as its <code>curve</code>, <code>duration</code>, and other state properties.</p>
 					
-					<p>If the value of the <code><a href="#5_19">pageX</a></code> or <code><a href="#5_20">pageY</a></code> set-get properties are modified in the middle of a scroll fade - either by <a href="#1_1_3">Scrolling With Buttons</a> or by <a href="#1_1_4">Scrolling Programmatically</a> - then the current animation will be stopped and a new animation will be started to fade the scroll position from its current position to the new scroll position.</p>
+					<p>If the value of the <code><a href="#5_19">pageX</a></code> or <code><a href="#5_20">pageY</a></code> state properties are modified in the middle of a scroll fade - either by <a href="#1_1_3">Scrolling With Buttons</a> or by <a href="#1_1_4">Scrolling Programmatically</a> - then the current animation will be stopped and a new animation will be started to fade the scroll position from its current position to the new scroll position.</p>
 				</div>
 			</div>
 			
@@ -250,7 +250,7 @@
 			<a name="1_1_4"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.4. Scrolling Programmatically"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.4. Scrolling Programmatically">4</a>. </span>Scrolling Programmatically</h3>
 			<div class="contents3">
-				<p>In addition to <a href="#1_1_3">Scrolling With Buttons</a>, it is also possible to programmatically scroll an instance by setting the values of its <code><a href="#5_19">pageX</a></code> and <code><a href="#5_20">pageY</a></code> set-get properties.</p>
+				<p>In addition to <a href="#1_1_3">Scrolling With Buttons</a>, it is also possible to programmatically scroll an instance by setting the values of its <code><a href="#5_19">pageX</a></code> and <code><a href="#5_20">pageY</a></code> state properties.</p>
 				
 				<p><span class="allCaps">EXAMPLES</span></p>
 				
@@ -271,13 +271,13 @@ scrolly.set ({pageY:0});                           // scroll to first page, vert
 scrolly.set ({pageY:Infinity});                    // scroll to last page, vertically
 </pre>
 				
-				<p>When scrolling left or right by incrementing or decrementing the value of the <code><a href="#5_19">pageX</a></code> set-get property, and when scrolling up or down by incrementing or decrementing the value of the <code><a href="#5_20">pageY</a></code> set-get property, it is not necessary to worry about detecting the first and last page boundaries, since a conformer for the <code><a href="#5_19">pageX</a></code> and <code><a href="#5_20">pageY</a></code> set-get properties takes care of this for you and makes sure that the values are always within bounds. This is why it is also possible to scroll to the last page by specifying the value <code>Infinity</code>, since this value will be constrained to the value of <code><a href="#5_15">maxPageX</a></code> when setting <code><a href="#5_19">pageX</a></code> and the value of <code><a href="#5_16">maxPageY</a></code> when setting <code><a href="#5_20">pageY</a></code>.</p>
+				<p>When scrolling left or right by incrementing or decrementing the value of the <code><a href="#5_19">pageX</a></code> state property, and when scrolling up or down by incrementing or decrementing the value of the <code><a href="#5_20">pageY</a></code> state property, it is not necessary to worry about detecting the first and last page boundaries, since a conformer for the <code><a href="#5_19">pageX</a></code> and <code><a href="#5_20">pageY</a></code> state properties takes care of this for you and makes sure that the values are always within bounds. This is why it is also possible to scroll to the last page by specifying the value <code>Infinity</code>, since this value will be constrained to the value of <code><a href="#5_15">maxPageX</a></code> when setting <code><a href="#5_19">pageX</a></code> and the value of <code><a href="#5_16">maxPageY</a></code> when setting <code><a href="#5_20">pageY</a></code>.</p>
 			</div>
 			
 			<a name="1_1_5"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.5. State Summary"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.5. State Summary">5</a>. </span>State Summary</h3>
 			<div class="contents3">
-				<p>For the convenience of application code, a full complement of read-only set-get properties provides a state summary for scrolly instances.</p>
+				<p>For the convenience of application code, a full complement of read-only state properties provides a state summary for scrolly instances.</p>
 				
 				<p>This state summary is provided through the <code><a href="#5_12">isScrollableX</a></code> and <code><a href="#5_13">isScrollableY</a></code> boolean read-only properties, and the <code><a href="#5_15">maxPageX</a></code>, and <code><a href="#5_16">maxPageY</a></code> integer read-only properties. These various state properties can be used in the implementation of subclasses, in other widget classes that use the <code>Uize.Widget.Scrolly</code> class, or in application code that uses scrollies.</p>
 			</div>
@@ -333,7 +333,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_12">isScrollableX</a></code> | <code><a href="#5_13">isScrollableY</a></code> | <code><a href="#5_15">maxPageX</a></code> | <code><a href="#5_16">maxPageY</a></code> | <code><a href="#5_19">pageX</a></code> | <code><a href="#5_20">pageY</a></code> | <code><a href="#5_21">showButtonsWhenNotScrollable</a></code></p>
 			</div>
@@ -369,7 +369,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 				
 				<p><code><a href="#2_2">showConfirm</a></code> | <code><a href="#2_3">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_1">built</a></code> | <code><a href="#5_2">busy</a></code> | <code><a href="#5_3">busyInherited</a></code> | <code><a href="#5_4">children</a></code> | <code><a href="#5_5">container</a></code> | <code><a href="#5_6">enabled</a></code> | <code><a href="#5_7">enabledInherited</a></code> | <code><a href="#5_8">html</a></code> | <code><a href="#5_9">idPrefix</a></code> | <code><a href="#5_10">idPrefixConstruction</a></code> | <code><a href="#5_11">insertionMode</a></code> | <code><a href="#5_14">localized</a></code> | <code><a href="#5_17">name</a></code> | <code><a href="#5_18">nodeMap</a></code> | <code><a href="#5_22">wired</a></code></p>
 				
@@ -404,7 +404,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class that is used to animate the scrolling of the contents of the <code><a href="#4_1">view</a></code> implied node.</p>
 			
-			<p>The <code><a href="#2_1">fade</a></code> instance is created during the construction of the <code>Uize.Widget.Scrolly</code> instance, so the fade properties can be modified immediately after the scrolly is created. The behavior of the animation can be controlled by setting values for the various set-get properties of the <code><a href="#2_1">fade</a></code> instance, such as its <code>curve</code>, <code>duration</code>, and other set-get properties.</p>
+			<p>The <code><a href="#2_1">fade</a></code> instance is created during the construction of the <code>Uize.Widget.Scrolly</code> instance, so the fade properties can be modified immediately after the scrolly is created. The behavior of the animation can be controlled by setting values for the various state properties of the <code><a href="#2_1">fade</a></code> instance, such as its <code>curve</code>, <code>duration</code>, and other state properties.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -448,12 +448,12 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, that is wired up so that clicking on it will scroll the <code><a href="#4_1">view</a></code> implied node down by one page.</p>
 			
-			<p>Clicking this button has the effect of incrementing the value of the <code><a href="#5_20">pageY</a></code> set-get property. The markup for this button is optional. The enabled state of this button is managed by the <code>Uize.Widget.Scrolly</code> class, so that it is disabled whenever it is not possible to scroll down, such as when the <code><a href="#4_1">view</a></code> implied node is already scrolled all the way to the bottom (ie. the value of <code><a href="#5_20">pageY</a></code> is equal to the value of <code><a href="#5_16">maxPageY</a></code>).</p>
+			<p>Clicking this button has the effect of incrementing the value of the <code><a href="#5_20">pageY</a></code> state property. The markup for this button is optional. The enabled state of this button is managed by the <code>Uize.Widget.Scrolly</code> class, so that it is disabled whenever it is not possible to scroll down, such as when the <code><a href="#4_1">view</a></code> implied node is already scrolled all the way to the bottom (ie. the value of <code><a href="#5_20">pageY</a></code> is equal to the value of <code><a href="#5_16">maxPageY</a></code>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_20">pageY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_20">pageY</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_4">up</a></code> child widget, and the related <code><a href="#3_2">left</a></code> and <code><a href="#3_3">right</a></code> child widgets</td></tr>
 			</table>
 		</div>
@@ -463,12 +463,12 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, that is wired up so that clicking on it will scroll the <code><a href="#4_1">view</a></code> implied node left by one page.</p>
 			
-			<p>Clicking this button has the effect of decrementing the value of the <code><a href="#5_19">pageX</a></code> set-get property. The markup for this button is optional. The enabled state of this button is managed by the <code>Uize.Widget.Scrolly</code> class, so that it is disabled whenever it is not possible to scroll left, such as when the <code><a href="#4_1">view</a></code> implied node is already scrolled all the way to the left (ie. the value of <code><a href="#5_19">pageX</a></code> is <code>0</code>).</p>
+			<p>Clicking this button has the effect of decrementing the value of the <code><a href="#5_19">pageX</a></code> state property. The markup for this button is optional. The enabled state of this button is managed by the <code>Uize.Widget.Scrolly</code> class, so that it is disabled whenever it is not possible to scroll left, such as when the <code><a href="#4_1">view</a></code> implied node is already scrolled all the way to the left (ie. the value of <code><a href="#5_19">pageX</a></code> is <code>0</code>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_19">pageX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_19">pageX</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_3">right</a></code> child widget, and the related <code><a href="#3_4">up</a></code> and <code><a href="#3_1">down</a></code> child widgets</td></tr>
 			</table>
 		</div>
@@ -478,12 +478,12 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, that is wired up so that clicking on it will scroll the <code><a href="#4_1">view</a></code> implied node right by one page.</p>
 			
-			<p>Clicking this button has the effect of incrementing the value of the <code><a href="#5_19">pageX</a></code> set-get property. The markup for this button is optional. The enabled state of this button is managed by the <code>Uize.Widget.Scrolly</code> class, so that it is disabled whenever it is not possible to scroll right, such as when the <code><a href="#4_1">view</a></code> implied node is already scrolled all the way to the right (ie. the value of <code><a href="#5_19">pageX</a></code> is equal to the value of <code><a href="#5_15">maxPageX</a></code>).</p>
+			<p>Clicking this button has the effect of incrementing the value of the <code><a href="#5_19">pageX</a></code> state property. The markup for this button is optional. The enabled state of this button is managed by the <code>Uize.Widget.Scrolly</code> class, so that it is disabled whenever it is not possible to scroll right, such as when the <code><a href="#4_1">view</a></code> implied node is already scrolled all the way to the right (ie. the value of <code><a href="#5_19">pageX</a></code> is equal to the value of <code><a href="#5_15">maxPageX</a></code>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_19">pageX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_19">pageX</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_2">left</a></code> child widget, and the related <code><a href="#3_4">up</a></code> and <code><a href="#3_1">down</a></code> child widgets</td></tr>
 			</table>
 		</div>
@@ -493,12 +493,12 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, that is wired up so that clicking on it will scroll the <code><a href="#4_1">view</a></code> implied node up by one page.</p>
 			
-			<p>Clicking this button has the effect of decrementing the value of the <code><a href="#5_20">pageY</a></code> set-get property. The markup for this button is optional. The enabled state of this button is managed by the <code>Uize.Widget.Scrolly</code> class, so that it is disabled whenever it is not possible to scroll up, such as when the <code><a href="#4_1">view</a></code> implied node is already scrolled all the way to the top (ie. the value of <code><a href="#5_20">pageY</a></code> is <code>0</code>).</p>
+			<p>Clicking this button has the effect of decrementing the value of the <code><a href="#5_20">pageY</a></code> state property. The markup for this button is optional. The enabled state of this button is managed by the <code>Uize.Widget.Scrolly</code> class, so that it is disabled whenever it is not possible to scroll up, such as when the <code><a href="#4_1">view</a></code> implied node is already scrolled all the way to the top (ie. the value of <code><a href="#5_20">pageY</a></code> is <code>0</code>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_20">pageY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_20">pageY</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">down</a></code> child widget, and the related <code><a href="#3_2">left</a></code> and <code><a href="#3_3">right</a></code> child widgets</td></tr>
 			</table>
 		</div>
@@ -510,17 +510,17 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		<a name="4_1"></a>
 		<h2 class="heading2" title="4. Implied Nodes -&gt; 4.1. view"><span class="headingNumber"><a href="#4" title="4. Implied Nodes">4</a>.<a href="#4_1" title="4. Implied Nodes -&gt; 4.1. view">1</a>. </span>view</h2>
 		<div class="contents2">
-			<p>A node of any type, whose <code>scrollLeft</code> and <code>scrollTop</code> style properties are maintained by the <code>Uize.Widget.Scrolly</code> class as the values of the <code><a href="#5_19">pageX</a></code> and <code><a href="#5_20">pageY</a></code> set-get properties are modified.</p>
+			<p>A node of any type, whose <code>scrollLeft</code> and <code>scrollTop</code> style properties are maintained by the <code>Uize.Widget.Scrolly</code> class as the values of the <code><a href="#5_19">pageX</a></code> and <code><a href="#5_20">pageY</a></code> state properties are modified.</p>
 			
 			<p>The <code>overflow</code> CSS style property for this node should be set to <code>hidden</code>, either in an inline <code>style</code> attribute, an inline stylesheet, or an external stylesheet.</p>
 		</div>
 	</div>
 	
 	<a name="5"></a>
-	<h1 class="heading1" title="5. Set-get Properties"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="5. State Properties"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="5_1"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_1" title="5. Set-get Properties -&gt; 5.1. built">1</a>. </span>built</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_1" title="5. State Properties -&gt; 5.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -532,7 +532,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_2"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_2" title="5. Set-get Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_2" title="5. State Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -544,7 +544,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_3"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_3" title="5. Set-get Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_3" title="5. State Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -556,7 +556,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_4"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_4" title="5. Set-get Properties -&gt; 5.4. children">4</a>. </span>children</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_4" title="5. State Properties -&gt; 5.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -568,7 +568,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_5"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_5" title="5. Set-get Properties -&gt; 5.5. container">5</a>. </span>container</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_5" title="5. State Properties -&gt; 5.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -580,7 +580,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_6"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.6. enabled"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_6" title="5. Set-get Properties -&gt; 5.6. enabled">6</a>. </span>enabled</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.6. enabled"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_6" title="5. State Properties -&gt; 5.6. enabled">6</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -592,7 +592,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_7"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.7. enabledInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_7" title="5. Set-get Properties -&gt; 5.7. enabledInherited">7</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.7. enabledInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_7" title="5. State Properties -&gt; 5.7. enabledInherited">7</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -604,7 +604,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_8"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.8. html"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_8" title="5. Set-get Properties -&gt; 5.8. html">8</a>. </span>html</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.8. html"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_8" title="5. State Properties -&gt; 5.8. html">8</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -616,7 +616,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_9"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.9. idPrefix"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_9" title="5. Set-get Properties -&gt; 5.9. idPrefix">9</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.9. idPrefix"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_9" title="5. State Properties -&gt; 5.9. idPrefix">9</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -628,7 +628,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_10"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.10. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_10" title="5. Set-get Properties -&gt; 5.10. idPrefixConstruction">10</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.10. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_10" title="5. State Properties -&gt; 5.10. idPrefixConstruction">10</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -640,7 +640,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_11"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.11. insertionMode"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_11" title="5. Set-get Properties -&gt; 5.11. insertionMode">11</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.11. insertionMode"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_11" title="5. State Properties -&gt; 5.11. insertionMode">11</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -652,7 +652,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_12"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.12. isScrollableX"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_12" title="5. Set-get Properties -&gt; 5.12. isScrollableX">12</a>. </span>isScrollableX</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.12. isScrollableX"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_12" title="5. State Properties -&gt; 5.12. isScrollableX">12</a>. </span>isScrollableX</h2>
 		<div class="contents2">
 			<p>A read-only boolean (whose value is managed by the <code>Uize.Widget.Scrolly</code> class), indicating whether or not the contents of the <code><a href="#4_1">view</a></code> implied node is wide enough to make it horizontally scrollable.</p>
 			
@@ -660,7 +660,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_13">isScrollableY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_13">isScrollableY</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code>, and it is updated each time the value of <code><a href="#5_15">maxPageX</a></code> changes</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -671,7 +671,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_13"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.13. isScrollableY"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_13" title="5. Set-get Properties -&gt; 5.13. isScrollableY">13</a>. </span>isScrollableY</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.13. isScrollableY"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_13" title="5. State Properties -&gt; 5.13. isScrollableY">13</a>. </span>isScrollableY</h2>
 		<div class="contents2">
 			<p>A read-only boolean (whose value is managed by the <code>Uize.Widget.Scrolly</code> class), indicating whether or not the contents of the <code><a href="#4_1">view</a></code> implied node is tall enough to make it vertically scrollable.</p>
 			
@@ -679,7 +679,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_12">isScrollableX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_12">isScrollableX</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code>, and it is updated each time the value of <code><a href="#5_16">maxPageY</a></code> changes</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -690,7 +690,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_14"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.14. localized"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_14" title="5. Set-get Properties -&gt; 5.14. localized">14</a>. </span>localized</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.14. localized"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_14" title="5. State Properties -&gt; 5.14. localized">14</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -702,18 +702,18 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_15"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.15. maxPageX"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_15" title="5. Set-get Properties -&gt; 5.15. maxPageX">15</a>. </span>maxPageX</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.15. maxPageX"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_15" title="5. State Properties -&gt; 5.15. maxPageX">15</a>. </span>maxPageX</h2>
 		<div class="contents2">
-			<p>A read-only integer (whose value is managed by the <code>Uize.Widget.Scrolly</code> class), indicating the maximum possible value for the <code><a href="#5_19">pageX</a></code> set-get property.</p>
+			<p>A read-only integer (whose value is managed by the <code>Uize.Widget.Scrolly</code> class), indicating the maximum possible value for the <code><a href="#5_19">pageX</a></code> state property.</p>
 			
-			<p>The value of this property can be used as an indication of the number of horizontal pages for the contents of the <code><a href="#4_1">view</a></code> implied node. For example, a value of <code>0</code> indicates that there is only one page horizontally (ie. the maximum value for <code><a href="#5_19">pageX</a></code> is <code>0</code>). A value of <code>5</code>, on the other hand, indicates that there are six pages horizontally, where those six pages are represented by the values <code>0</code> through <code>5</code> for the <code><a href="#5_19">pageX</a></code> set-get property.</p>
+			<p>The value of this property can be used as an indication of the number of horizontal pages for the contents of the <code><a href="#4_1">view</a></code> implied node. For example, a value of <code>0</code> indicates that there is only one page horizontally (ie. the maximum value for <code><a href="#5_19">pageX</a></code> is <code>0</code>). A value of <code>5</code>, on the other hand, indicates that there are six pages horizontally, where those six pages are represented by the values <code>0</code> through <code>5</code> for the <code><a href="#5_19">pageX</a></code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code>, and it is later updated upon wiring the instance's UI, every time the <code><a href="#6_43">updateUi</a></code> instance method is called, and every time a value is set for the <code><a href="#5_19">pageX</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_16">maxPageY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code>, and it is later updated upon wiring the instance's UI, every time the <code><a href="#6_43">updateUi</a></code> instance method is called, and every time a value is set for the <code><a href="#5_19">pageX</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_16">maxPageY</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -723,18 +723,18 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_16"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.16. maxPageY"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_16" title="5. Set-get Properties -&gt; 5.16. maxPageY">16</a>. </span>maxPageY</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.16. maxPageY"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_16" title="5. State Properties -&gt; 5.16. maxPageY">16</a>. </span>maxPageY</h2>
 		<div class="contents2">
-			<p>A read-only integer (whose value is managed by the <code>Uize.Widget.Scrolly</code> class), indicating the maximum possible value for the <code><a href="#5_20">pageY</a></code> set-get property.</p>
+			<p>A read-only integer (whose value is managed by the <code>Uize.Widget.Scrolly</code> class), indicating the maximum possible value for the <code><a href="#5_20">pageY</a></code> state property.</p>
 			
-			<p>The value of this property can be used as an indication of the number of vertical pages for the contents of the <code><a href="#4_1">view</a></code> implied node. For example, a value of <code>0</code> indicates that there is only one page vertically (ie. the maximum value for <code><a href="#5_20">pageY</a></code> is <code>0</code>). A value of <code>5</code>, on the other hand, indicates that there are six pages vertically, where those six pages are represented by the values <code>0</code> through <code>5</code> for the <code><a href="#5_20">pageY</a></code> set-get property.</p>
+			<p>The value of this property can be used as an indication of the number of vertical pages for the contents of the <code><a href="#4_1">view</a></code> implied node. For example, a value of <code>0</code> indicates that there is only one page vertically (ie. the maximum value for <code><a href="#5_20">pageY</a></code> is <code>0</code>). A value of <code>5</code>, on the other hand, indicates that there are six pages vertically, where those six pages are represented by the values <code>0</code> through <code>5</code> for the <code><a href="#5_20">pageY</a></code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code>, and it is later updated upon wiring the instance's UI, every time the <code><a href="#6_43">updateUi</a></code> instance method is called, and every time a value is set for the <code><a href="#5_20">pageY</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_15">maxPageX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code>, and it is later updated upon wiring the instance's UI, every time the <code><a href="#6_43">updateUi</a></code> instance method is called, and every time a value is set for the <code><a href="#5_20">pageY</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_15">maxPageX</a></code> state property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -744,7 +744,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_17"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.17. name"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_17" title="5. Set-get Properties -&gt; 5.17. name">17</a>. </span>name</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.17. name"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_17" title="5. State Properties -&gt; 5.17. name">17</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -756,7 +756,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_18"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.18. nodeMap"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_18" title="5. Set-get Properties -&gt; 5.18. nodeMap">18</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.18. nodeMap"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_18" title="5. State Properties -&gt; 5.18. nodeMap">18</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -768,26 +768,26 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_19"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.19. pageX"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_19" title="5. Set-get Properties -&gt; 5.19. pageX">19</a>. </span>pageX</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.19. pageX"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_19" title="5. State Properties -&gt; 5.19. pageX">19</a>. </span>pageX</h2>
 		<div class="contents2">
 			<p>An integer, representing the current horizontal scroll position of the <code><a href="#4_1">view</a></code> implied node as a page number (see <a href="#1_1_1">Scrolling in Pages</a>) in the X-axis.</p>
 			
 			<a name="5_19_1"></a>
-			<h3 class="heading3" title="5. Set-get Properties -&gt; 5.19. pageX -&gt; 5.19.1. Conformed"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_19" title="5. Set-get Properties -&gt; 5.19. pageX">19</a>.<a href="#5_19_1" title="5. Set-get Properties -&gt; 5.19. pageX -&gt; 5.19.1. Conformed">1</a>. </span>Conformed</h3>
+			<h3 class="heading3" title="5. State Properties -&gt; 5.19. pageX -&gt; 5.19.1. Conformed"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_19" title="5. State Properties -&gt; 5.19. pageX">19</a>.<a href="#5_19_1" title="5. State Properties -&gt; 5.19. pageX -&gt; 5.19.1. Conformed">1</a>. </span>Conformed</h3>
 			<div class="contents3">
 				<p>When setting the value for this property, the value is conformed in a number of ways.</p>
 				
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>The value will be coerced to a number type by invoking the <code>valueOf Intrinsic Method</code>. This means that one can specify a string value that is a valid formatted number, or an object (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass) that implements the <code>value</code> interface.</td></tr>
 				<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>Values that cannot be successfully coerced to a number type (such as <code>null</code>, <code>NaN</code>, etc.) will result in the property not changing its value.</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>The value will be constrained so that it cannot go below <code>0</code> and cannot go above the value of the <code><a href="#5_15">maxPageX</a></code> set-get property.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>The value will be constrained so that it cannot go below <code>0</code> and cannot go above the value of the <code><a href="#5_15">maxPageX</a></code> state property.</td></tr>
 				</table>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_20">pageY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_20">pageY</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -798,26 +798,26 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_20"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.20. pageY"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_20" title="5. Set-get Properties -&gt; 5.20. pageY">20</a>. </span>pageY</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.20. pageY"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_20" title="5. State Properties -&gt; 5.20. pageY">20</a>. </span>pageY</h2>
 		<div class="contents2">
 			<p>An integer, representing the current vertical scroll position of the <code><a href="#4_1">view</a></code> implied node as a page number (see <a href="#1_1_1">Scrolling in Pages</a>) in the Y-axis.</p>
 			
 			<a name="5_20_1"></a>
-			<h3 class="heading3" title="5. Set-get Properties -&gt; 5.20. pageY -&gt; 5.20.1. Conformed"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_20" title="5. Set-get Properties -&gt; 5.20. pageY">20</a>.<a href="#5_20_1" title="5. Set-get Properties -&gt; 5.20. pageY -&gt; 5.20.1. Conformed">1</a>. </span>Conformed</h3>
+			<h3 class="heading3" title="5. State Properties -&gt; 5.20. pageY -&gt; 5.20.1. Conformed"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_20" title="5. State Properties -&gt; 5.20. pageY">20</a>.<a href="#5_20_1" title="5. State Properties -&gt; 5.20. pageY -&gt; 5.20.1. Conformed">1</a>. </span>Conformed</h3>
 			<div class="contents3">
 				<p>When setting the value for this property, the value is conformed in a number of ways.</p>
 				
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>The value will be coerced to a number type by invoking the <code>valueOf Intrinsic Method</code>. This means that one can specify a string value that is a valid formatted number, or an object (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass) that implements the <code>value</code> interface.</td></tr>
 				<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>Values that cannot be successfully coerced to a number type (such as <code>null</code>, <code>NaN</code>, etc.) will result in the property not changing its value.</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>The value will be constrained so that it cannot go below <code>0</code> and cannot go above the value of the <code><a href="#5_16">maxPageY</a></code> set-get property.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>The value will be constrained so that it cannot go below <code>0</code> and cannot go above the value of the <code><a href="#5_16">maxPageY</a></code> state property.</td></tr>
 				</table>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_19">pageX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_19">pageX</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -828,7 +828,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_21"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.21. showButtonsWhenNotScrollable"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_21" title="5. Set-get Properties -&gt; 5.21. showButtonsWhenNotScrollable">21</a>. </span>showButtonsWhenNotScrollable</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.21. showButtonsWhenNotScrollable"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_21" title="5. State Properties -&gt; 5.21. showButtonsWhenNotScrollable">21</a>. </span>showButtonsWhenNotScrollable</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not the scroll buttons should be displayed in a given axis when it is not possible to scroll in that axis.</p>
 			
@@ -848,7 +848,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="5_22"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.22. wired"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_22" title="5. Set-get Properties -&gt; 5.22. wired">22</a>. </span>wired</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.22. wired"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_22" title="5. State Properties -&gt; 5.22. wired">22</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

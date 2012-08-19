@@ -152,7 +152,7 @@ Uize.module ({
 					name:'allowManualEntry',
 					value:true
 					/*?
-						Set-get Properties
+						State Properties
 							allowManualEntry
 								document...
 
@@ -164,7 +164,7 @@ Uize.module ({
 				_dialogName:'dialogName',
 				_dialogWidgetClass:'dialogWidgetClass',
 					/*?
-						Set-get Properties
+						State Properties
 							dialogWidgetClass
 								document...
 
@@ -173,7 +173,7 @@ Uize.module ({
 					*/
 				_pipedProperties:'pipedProperties',
 					/*?
-						Set-get Properties
+						State Properties
 							pipedProperties
 								document...
 
@@ -193,7 +193,7 @@ Uize.module ({
 				},
 				_valueFormatter:'valueFormatter'
 					/*?
-						Set-get Properties
+						State Properties
 							valueFormatter
 								document...
 									NOTES
@@ -201,7 +201,7 @@ Uize.module ({
 					*/
 			});
 
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
+		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
 				value:_null
 			});

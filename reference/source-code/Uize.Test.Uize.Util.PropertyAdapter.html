@@ -286,7 +286,7 @@ Uize.module ({
           ]
         },
         {
-          title:'Test that the connected set-get property is observed correctly',
+          title:'Test that the connected state property is observed correctly',
           test:[
             {
               title:'Test that connecting a property adapter between two properties of different objects with the adapter not initially connected results in property B *not* being immediately synchronized to property A',
@@ -296,7 +296,7 @@ Uize.module ({
               }
             },
             {
-              title:'Test that disconnecting a property adapter by setting its connected set-get property to false results in properties no longer being synchronized',
+              title:'Test that disconnecting a property adapter by setting its connected state property to false results in properties no longer being synchronized',
               test:function () {
                 var _rig = _getRig ();
 
@@ -337,7 +337,7 @@ Uize.module ({
           ]
         },
         {
-          title:'Test that the conformer for the propertyA and propertyB set-get properties works correctly',
+          title:'Test that the conformer for the propertyA and propertyB state properties works correctly',
           test:[
             _propertyAorBConformerTest ('A'),
             _propertyAorBConformerTest ('B')

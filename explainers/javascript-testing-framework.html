@@ -64,8 +64,8 @@
 				<ul>
 					<li><a href="#6_1" title="When a test is asynchronous, it cannot return the Test Result in a return statement inside the Test Function.">6.1. Test Result Callback Function</a>
 						<ul>
-							<li><a href="#6_1_1" title="When a Test Instance is run and it becomes known that its Test Function is asynchronous in its execution, then the isAsync set-get property for the instance will be set to true.">6.1.1. isAsync Set-get Property</a></li>
-							<li><a href="#6_1_2" title="The Uize.Test module provides a Uize.Test.isAsync static property whose value is used as a placeholder value for the result set-get property when a test is asynchronous.">6.1.2. Uize.Test.isAsync Special Value</a></li>
+							<li><a href="#6_1_1" title="When a Test Instance is run and it becomes known that its Test Function is asynchronous in its execution, then the isAsync state property for the instance will be set to true.">6.1.1. isAsync State Property</a></li>
+							<li><a href="#6_1_2" title="The Uize.Test module provides a Uize.Test.isAsync static property whose value is used as a placeholder value for the result state property when a test is asynchronous.">6.1.2. Uize.Test.isAsync Special Value</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -74,7 +74,7 @@
 				<ul>
 					<li><a href="#7_1" title="A Test Tree is a hierarchical set of tests that allows a multitude tests to be organized in a meaningful way.">7.1. Test Tree</a>
 						<ul>
-							<li><a href="#7_1_1" title="When a Test Class is a wrapper for Child Tests, the value of the test set-get property for the class is an array of test classes, but the child test classes are not parented.">7.1.1. Test Parenting</a></li>
+							<li><a href="#7_1_1" title="When a Test Class is a wrapper for Child Tests, the value of the test state property for the class is an array of test classes, but the child test classes are not parented.">7.1.1. Test Parenting</a></li>
 							<li><a href="#7_1_2" title="In a Test Tree, the Root Test is the test that is not a child test of some other test on the tree.">7.1.2. Root Test</a></li>
 							<li><a href="#7_1_3" title="Because a Test Class is never parented when it is used as a child test, any test class can be used in more than one Test Tree.">7.1.3. Multiple Occurrences of a Test Class</a></li>
 							<li><a href="#7_1_4" title="When a Test Instance is deep inside a Test Tree, its depth within that tree can be determined by calling its getDepth instance method.">7.1.4. Test Instance Depth</a></li>
@@ -99,14 +99,14 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#11" title="In addition to the regular set-get property change events, the Uize.Test class supports the following custom instance events...">11. Test Events</a>
+			<li><a href="#11" title="In addition to the regular state property change events, the Uize.Test class supports the following custom instance events...">11. Test Events</a>
 				<ul>
 					<li><a href="#11_1" title="It is important to note that the Start and Done Test Events bubble.">11.1. Bubbling</a></li>
 				</ul>
 			</li>
 			<li><a href="#12" title="The Uize.Test class provides a number of Test Class Factory Methods that make the creation of new test classes more convenient and one&apos;s test code more concise.">12. Test Class Factory Methods</a>
 				<ul>
-					<li><a href="#12_1" title="While a basic Test Class can be created by subclassing the Uize.Test class and then setting values for the class&apos; set-get properties, a more convenient approach is to use the Uize.Test.declare static method.">12.1. Basic Test Declaration Factory Method</a></li>
+					<li><a href="#12_1" title="While a basic Test Class can be created by subclassing the Uize.Test class and then setting values for the class&apos; state properties, a more convenient approach is to use the Uize.Test.declare static method.">12.1. Basic Test Declaration Factory Method</a></li>
 					<li><a href="#12_2" title="Beyond the Basic Test Declaration Factory Method, factory methods also exist for creating test classes in a declarative fashion for some fancier types of tests.">12.2. Factory Methods for Fancier Test Declarations</a>
 						<ul>
 							<li><a href="#12_2_1" title="A Test Class can be created to test that one or more JavaScript modules can be required and built using the Uize.Test.requiredModulesTest method.">12.2.1. Required Modules Test</a></li>
@@ -177,7 +177,7 @@
 		<div class="contents2">
 			<p>Every <a href="#3">Test Class</a>, except test classes that serve as parents of <a href="#7">Child Tests</a>, has a test function that is responsible for executing the actual test and then calculating and reporting the <a href="#3_2">Test Result</a>.</p>
 			
-			<p>The Test Function for a Test Class is set on the <code>test</code> set-get property for the class. Consider the following example...</p>
+			<p>The Test Function for a Test Class is set on the <code>test</code> state property for the class. Consider the following example...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -193,7 +193,7 @@
 		<div class="contents2">
 			<p>The Test Result for a <a href="#4">Test Instance</a>, calculated by the <a href="#3_1">Test Function</a> for a test, indicates whether or not the test has passed.</p>
 			
-			<p>The <a href="#3_2">Test Result</a> is automatically set as the value of the <code>result</code> set-get property for the instance. The boolean value <code>true</code> indicates that a test has passed, while the boolean value <code>false</code> indicates that the test has failed. In the special case of asynchronous tests, the Test Result can be a special value indicating that the test is asynchronous and is still being executed (see <a href="#6">Asynchronous Tests</a>). The Test Result is determined by the <a href="#3_1">Test Function</a> for a test, and is calculated based upon every <a href="#5">Expectation</a> of the <a href="#3_1">Test Function</a> being met.</p>
+			<p>The <a href="#3_2">Test Result</a> is automatically set as the value of the <code>result</code> state property for the instance. The boolean value <code>true</code> indicates that a test has passed, while the boolean value <code>false</code> indicates that the test has failed. In the special case of asynchronous tests, the Test Result can be a special value indicating that the test is asynchronous and is still being executed (see <a href="#6">Asynchronous Tests</a>). The Test Result is determined by the <a href="#3_1">Test Function</a> for a test, and is calculated based upon every <a href="#5">Expectation</a> of the <a href="#3_1">Test Function</a> being met.</p>
 		</div>
 		
 		<a name="3_3"></a>
@@ -201,7 +201,7 @@
 		<div class="contents2">
 			<p>Every <a href="#3">Test Class</a> can have a unique and descriptive title that can be used to distinguish it from other tests in the log messages of a test runner application, or to help locate the test's code inside a <a href="#13">Test Module</a> when troubleshooting a test's failure.</p>
 			
-			<p>A title is set for a Test Class by setting the value of its <code>title</code> set-get property, as shown in the example below...</p>
+			<p>A title is set for a Test Class by setting the value of its <code>title</code> state property, as shown in the example below...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -209,7 +209,7 @@
 <pre class="sample-code">My2Plus2Equals4TestClass.set ({title:'Test that two plus two equals four'});
 </pre>
 			
-			<p>Now, when a <a href="#4">Test Instance</a> of <code>My2Plus2Equals4TestClass</code> is created, the value of its <code>title</code> set-get property will automatically be set to the class' value for that property. If the test is part of a <a href="#7_1">Test Tree</a> and it fails when it is run, then the <a href="#8">Test Synopsis</a> for the test will automatically contain the title for the test, along with the titles of all the tests up the test parent chain, in the <a href="#8_1">Test Breadcrumbs</a> info. Looking at the synopsis that may be logged by a test runner application, it will be evident which test failed, and where the failed test is in the <a href="#7_1">Test Tree</a>.</p>
+			<p>Now, when a <a href="#4">Test Instance</a> of <code>My2Plus2Equals4TestClass</code> is created, the value of its <code>title</code> state property will automatically be set to the class' value for that property. If the test is part of a <a href="#7_1">Test Tree</a> and it fails when it is run, then the <a href="#8">Test Synopsis</a> for the test will automatically contain the title for the test, along with the titles of all the tests up the test parent chain, in the <a href="#8_1">Test Breadcrumbs</a> info. Looking at the synopsis that may be logged by a test runner application, it will be evident which test failed, and where the failed test is in the <a href="#7_1">Test Tree</a>.</p>
 		</div>
 	</div>
 	
@@ -331,7 +331,7 @@ myTestInstance.expect ('foo',value);         // expect that value is 'foo'
 		<div class="contents2">
 			<p>Besides simply testing whether or not an expectation is met, the <a href="#5_1">Expectation Methods</a> also record the reason for a test's failure.</p>
 			
-			<p>The reason for a test's failure is recorded in the <code>reasonForFailure</code> set-get property of a <a href="#4">Test Instance</a>. While the value for this property can be set explicitly inside a <a href="#3_1">Test Function</a>, the value is automatically set when using the <a href="#5_1">Expectation Methods</a> and when an expectation is not met.</p>
+			<p>The reason for a test's failure is recorded in the <code>reasonForFailure</code> state property of a <a href="#4">Test Instance</a>. While the value for this property can be set explicitly inside a <a href="#3_1">Test Function</a>, the value is automatically set when using the <a href="#5_1">Expectation Methods</a> and when an expectation is not met.</p>
 			
 			<a name="5_3_1"></a>
 			<h3 class="heading3" title="5. Expectation -&gt; 5.3. Reason For Failure -&gt; 5.3.1. An Example"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_3" title="5. Expectation -&gt; 5.3. Reason For Failure">3</a>.<a href="#5_3_1" title="5. Expectation -&gt; 5.3. Reason For Failure -&gt; 5.3.1. An Example">1</a>. </span>An Example</h3>
@@ -362,7 +362,7 @@ myTestInstance.expect ('foo',value);         // expect that value is 'foo'
 <pre class="sample-code">AddFunctionTestClass.set ({test:function () {return this.expect (4,add (2,2))});
 </pre>
 				
-				<p>The <code>expect</code> instance method compares the expected value (the first parameter) to the actual value (the second parameter). If the values don't match, then the expectation is not met, the method returns the value <code>false</code>, and it sets a value for the <code>reasonForFailure</code> set-get property along the lines of...</p>
+				<p>The <code>expect</code> instance method compares the expected value (the first parameter) to the actual value (the second parameter). If the values don't match, then the expectation is not met, the method returns the value <code>false</code>, and it sets a value for the <code>reasonForFailure</code> state property along the lines of...</p>
 				
 				<p><span class="allCaps">REASON FOR FAILURE</span></p>
 				
@@ -424,19 +424,19 @@ ACTUAL:
 			<p>Looking at the code in this example, you should notice a few things. First, the <a href="#6_1">Test Result Callback Function</a> is passed to the <a href="#3_1">Test Function</a> as a parameter. If your test function is not asynchronous, then you don't need to declare this parameter. If you <b>do</b> choose to declare the parameter for use in an asynchronous test, you can name it however you like - just refer to it by that name when you use it inside your test function's code. Another thing you'll notice is that the <a href="#3_1">Test Function</a> has no <code>return</code> statement. Without a <code>return</code> statement, the function will return the value <code>undefined</code> by default. The <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class interprets this to mean that the test is asynchronous, so there's no need to return a special value or otherwise indicate that the test is asynchronous. Finally, you'll notice that you can still use <a href="#5_1">Expectation Methods</a> in asynchronous tests - the only difference is that the <a href="#3_2">Test Result</a> is being calculated at the end of some asynchronous code execution.</p>
 			
 			<a name="6_1_1"></a>
-			<h3 class="heading3" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.1. isAsync Set-get Property"><span class="headingNumber"><a href="#6" title="6. Asynchronous Tests">6</a>.<a href="#6_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function">1</a>.<a href="#6_1_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.1. isAsync Set-get Property">1</a>. </span>isAsync Set-get Property</h3>
+			<h3 class="heading3" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.1. isAsync State Property"><span class="headingNumber"><a href="#6" title="6. Asynchronous Tests">6</a>.<a href="#6_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function">1</a>.<a href="#6_1_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.1. isAsync State Property">1</a>. </span>isAsync State Property</h3>
 			<div class="contents3">
-				<p>When a <a href="#4">Test Instance</a> is run and it becomes known that its <a href="#3_1">Test Function</a> is asynchronous in its execution, then the <code>isAsync</code> set-get property for the instance will be set to <code>true</code>.</p>
+				<p>When a <a href="#4">Test Instance</a> is run and it becomes known that its <a href="#3_1">Test Function</a> is asynchronous in its execution, then the <code>isAsync</code> state property for the instance will be set to <code>true</code>.</p>
 				
-				<p>Whenever an instance's <code>isAsync</code> property is set to <code>true</code>, the value of its <code>result</code> set-get property will be set to <a href="#6_1_2">Uize.Test.isAsync Special Value</a>.</p>
+				<p>Whenever an instance's <code>isAsync</code> property is set to <code>true</code>, the value of its <code>result</code> state property will be set to <a href="#6_1_2">Uize.Test.isAsync Special Value</a>.</p>
 			</div>
 			
 			<a name="6_1_2"></a>
 			<h3 class="heading3" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.2. Uize.Test.isAsync Special Value"><span class="headingNumber"><a href="#6" title="6. Asynchronous Tests">6</a>.<a href="#6_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function">1</a>.<a href="#6_1_2" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.2. Uize.Test.isAsync Special Value">2</a>. </span>Uize.Test.isAsync Special Value</h3>
 			<div class="contents3">
-				<p>The <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> module provides a <code>Uize.Test.isAsync</code> static property whose value is used as a placeholder value for the <code>result</code> set-get property when a test is asynchronous.</p>
+				<p>The <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> module provides a <code>Uize.Test.isAsync</code> static property whose value is used as a placeholder value for the <code>result</code> state property when a test is asynchronous.</p>
 				
-				<p>As soon as it is known that the <a href="#3_1">Test Function</a> for a <a href="#4">Test Instance</a> will produce its <a href="#3_2">Test Result</a> asynchronously, the value of the instance's <code>result</code> property is set to the value of the <code>Uize.Test.isAsync</code> static property. You can think of the <code>Uize.Test.isAsync</code> static property as being like a constant. Whenever the <code>result</code> property is set to <code>Uize.Test.isAsync</code>, the <a href="#6_1_1">isAsync Set-get Property</a> will also be set to <code>true</code>.</p>
+				<p>As soon as it is known that the <a href="#3_1">Test Function</a> for a <a href="#4">Test Instance</a> will produce its <a href="#3_2">Test Result</a> asynchronously, the value of the instance's <code>result</code> property is set to the value of the <code>Uize.Test.isAsync</code> static property. You can think of the <code>Uize.Test.isAsync</code> static property as being like a constant. Whenever the <code>result</code> property is set to <code>Uize.Test.isAsync</code>, the <a href="#6_1_1">isAsync State Property</a> will also be set to <code>true</code>.</p>
 			</div>
 		</div>
 	</div>
@@ -446,7 +446,7 @@ ACTUAL:
 	<div class="contents1">
 		<p>A <a href="#3">Test Class</a> can either have a <a href="#3_1">Test Function</a> or it can have Child Tests.</p>
 		
-		<p>A basic <a href="#3">Test Class</a> simply has a <a href="#3_1">Test Function</a> and doesn't serve as a wrapper / container. A <a href="#3">Test Class</a> becomes a wrapper for child tests when the value of its <code>test</code> set-get property is an array, where each element of the array is a <a href="#3">Test Class</a>. Using this facility, the basic building block of the <a href="#3">Test Class</a> can be used to create an arbitrarily structured <a href="#7_1">Test Tree</a>.</p>
+		<p>A basic <a href="#3">Test Class</a> simply has a <a href="#3_1">Test Function</a> and doesn't serve as a wrapper / container. A <a href="#3">Test Class</a> becomes a wrapper for child tests when the value of its <code>test</code> state property is an array, where each element of the array is a <a href="#3">Test Class</a>. Using this facility, the basic building block of the <a href="#3">Test Class</a> can be used to create an arbitrarily structured <a href="#7_1">Test Tree</a>.</p>
 		
 		<a name="7_1"></a>
 		<h2 class="heading2" title="7. Child Tests -&gt; 7.1. Test Tree"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>.<a href="#7_1" title="7. Child Tests -&gt; 7.1. Test Tree">1</a>. </span>Test Tree</h2>
@@ -456,9 +456,9 @@ ACTUAL:
 			<a name="7_1_1"></a>
 			<h3 class="heading3" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.1. Test Parenting"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>.<a href="#7_1" title="7. Child Tests -&gt; 7.1. Test Tree">1</a>.<a href="#7_1_1" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.1. Test Parenting">1</a>. </span>Test Parenting</h3>
 			<div class="contents3">
-				<p>When a <a href="#3">Test Class</a> is a wrapper for <a href="#7">Child Tests</a>, the value of the <code>test</code> set-get property for the class is an array of test classes, but the child test classes are not parented.</p>
+				<p>When a <a href="#3">Test Class</a> is a wrapper for <a href="#7">Child Tests</a>, the value of the <code>test</code> state property for the class is an array of test classes, but the child test classes are not parented.</p>
 				
-				<p>A Test Class is never parented - only a <a href="#4">Test Instance</a> is parented. When a <a href="#3">Test Class</a> has child tests, the value of the <code>test</code> set-get property for the class is an array of test classes. When an instance is created of a test class that has child tests, then the value of the <code>test</code> set-get property for the instance is an array of instances of the child tests, and those child test instances will be parented to the instance of the test class that has the child tests. Consider the following example...</p>
+				<p>A Test Class is never parented - only a <a href="#4">Test Instance</a> is parented. When a <a href="#3">Test Class</a> has child tests, the value of the <code>test</code> state property for the class is an array of test classes. When an instance is created of a test class that has child tests, then the value of the <code>test</code> state property for the instance is an array of instances of the child tests, and those child test instances will be parented to the instance of the test class that has the child tests. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -472,7 +472,7 @@ MyTestClass3.set ({test:[MyTestClass1,MyTestClass2]});
 var myTestClass3Instance = new MyTestClass3;
 </pre>
 				
-				<p>In the above example, the test class <code>MyTestClass3</code> is serving as a wrapper that has <code>MyTestClass1</code> and <code>MyTestClass2</code> as <a href="#7">Child Tests</a>. An instance of the <code>MyTestClass3</code> class is created and assigned to the variable <code>myTestClass3Instance</code>. For this instance, the value of its <code>test</code> set-get property will be an array, where the first element is an instance of <code>MyTestClass1</code> and the second element is an instance of <code>MyTestClass2</code>, and where the value of the <code>parent</code> instance property for both of those child test instances will be a reference to the instance <code>myTestClass3Instance</code>. In contrast, the value of the <code>test</code> set-get property for the class <code>MyTestClass3</code> is an array where the first element is <code>MyTestClass1</code> and the second element is <code>MyTestClass2</code> - there is no static property on the <code>MyTestClass1</code> and <code>MyTestClass2</code> classes that links them to the <code>MyTestClass1</code> class.</p>
+				<p>In the above example, the test class <code>MyTestClass3</code> is serving as a wrapper that has <code>MyTestClass1</code> and <code>MyTestClass2</code> as <a href="#7">Child Tests</a>. An instance of the <code>MyTestClass3</code> class is created and assigned to the variable <code>myTestClass3Instance</code>. For this instance, the value of its <code>test</code> state property will be an array, where the first element is an instance of <code>MyTestClass1</code> and the second element is an instance of <code>MyTestClass2</code>, and where the value of the <code>parent</code> instance property for both of those child test instances will be a reference to the instance <code>myTestClass3Instance</code>. In contrast, the value of the <code>test</code> state property for the class <code>MyTestClass3</code> is an array where the first element is <code>MyTestClass1</code> and the second element is <code>MyTestClass2</code> - there is no static property on the <code>MyTestClass1</code> and <code>MyTestClass2</code> classes that links them to the <code>MyTestClass1</code> class.</p>
 				
 				<p>Now, when the <code>myTestClass3Instance</code> test instance is run, the instances of the child tests will be run in the order in which they appear in the array of child tests.</p>
 			</div>
@@ -605,14 +605,14 @@ ACTUAL:
 	<div class="contents1">
 		<p>When a <a href="#4">Test Instance</a> is run by calling its <code>run</code> method, the instance records certain basic metrics that can be analyzed later.</p>
 		
-		<p>The metrics are recorded in the following set-get properties...</p>
+		<p>The metrics are recorded in the following state properties...</p>
 		
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>startTime</code> - a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance, indicating the time that the test was started</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>endTime</code> - a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance, indicating the time that the test completed running</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>duration</code> - a number, indicating how long (in milliseconds) it took for the test to run</td></tr>
 		</table>
-		<p>Values for these set-get properties are set automatically by the testing framework - it is not necessary to write additional code for measuring the durations of tests. Time metrics can be useful when specifically designing performance tests. Beyond the automatically recorded time metrics, additional information can be stored in the <a href="#10">Test Log</a>.</p>
+		<p>Values for these state properties are set automatically by the testing framework - it is not necessary to write additional code for measuring the durations of tests. Time metrics can be useful when specifically designing performance tests. Beyond the automatically recorded time metrics, additional information can be stored in the <a href="#10">Test Log</a>.</p>
 	</div>
 	
 	<a name="10"></a>
@@ -620,7 +620,7 @@ ACTUAL:
 	<div class="contents1">
 		<p>Beyond the basic <a href="#9">Test Metrics</a> that are automatically recorded for every <a href="#4">Test Instance</a> by the testing framework, every Test Instance also has a log in which additional information can be stored.</p>
 		
-		<p>The test log for an instance is exposed through its <code>log</code> set-get property, which is an array where each element of the array is a <a href="#10_1">Log Message Object</a>. A message can be added to the log for an instance by calling its <code>log</code> instance method, as shown in the following example...</p>
+		<p>The test log for an instance is exposed through its <code>log</code> state property, which is an array where each element of the array is a <a href="#10_1">Log Message Object</a>. A message can be added to the log for an instance by calling its <code>log</code> instance method, as shown in the following example...</p>
 		
 		<p><span class="allCaps">EXAMPLE</span></p>
 		
@@ -635,7 +635,7 @@ ACTUAL:
 });
 </pre>
 		
-		<p>In the above example, two log messages are being added - one right before we perform our test operation (adding <code>2</code> and <code>2</code>), and the other right after the calculation. After an instance of <code>My2Plus2Equals4TestClass</code> has been run, the value of that instance's <code>log</code> set-get property will be an array containing the two logged messages. Notice that, in the call to the <code>log</code> instance method, only the text for the log message is supplied - the timestamp for each log message is recorded automatically by the testing framework and is stored in the <a href="#10_1">Log Message Object</a>.</p>
+		<p>In the above example, two log messages are being added - one right before we perform our test operation (adding <code>2</code> and <code>2</code>), and the other right after the calculation. After an instance of <code>My2Plus2Equals4TestClass</code> has been run, the value of that instance's <code>log</code> state property will be an array containing the two logged messages. Notice that, in the call to the <code>log</code> instance method, only the text for the log message is supplied - the timestamp for each log message is recorded automatically by the testing framework and is stored in the <a href="#10_1">Log Message Object</a>.</p>
 		
 		<a name="10_1"></a>
 		<h2 class="heading2" title="10. Test Log -&gt; 10.1. Log Message Object"><span class="headingNumber"><a href="#10" title="10. Test Log">10</a>.<a href="#10_1" title="10. Test Log -&gt; 10.1. Log Message Object">1</a>. </span>Log Message Object</h2>
@@ -690,7 +690,7 @@ function timeTillNextLogEntry (testInstance,entry) {
 	<a name="11"></a>
 	<h1 class="heading1" title="11. Test Events"><span class="headingNumber"><a href="#11" title="11. Test Events">11</a>. </span>Test Events</h1>
 	<div class="contents1">
-		<p>In addition to the regular set-get property change events, the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class supports the following custom instance events...</p>
+		<p>In addition to the regular state property change events, the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class supports the following custom instance events...</p>
 		
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Start</code> - fired every time a <a href="#4">Test Instance</a> is run by calling its <code>run</code> instance method</td></tr>
@@ -747,9 +747,9 @@ myTestTreeInstance.run ();
 		<a name="12_1"></a>
 		<h2 class="heading2" title="12. Test Class Factory Methods -&gt; 12.1. Basic Test Declaration Factory Method"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_1" title="12. Test Class Factory Methods -&gt; 12.1. Basic Test Declaration Factory Method">1</a>. </span>Basic Test Declaration Factory Method</h2>
 		<div class="contents2">
-			<p>While a basic <a href="#3">Test Class</a> can be created by subclassing the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class and then setting values for the class' set-get properties, a more convenient approach is to use the <code>Uize.Test.declare</code> static method.</p>
+			<p>While a basic <a href="#3">Test Class</a> can be created by subclassing the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class and then setting values for the class' state properties, a more convenient approach is to use the <code>Uize.Test.declare</code> static method.</p>
 			
-			<p>The <code>Uize.Test.declare</code> method is the most basic of the available <a href="#12">Test Class Factory Methods</a>. It accepts a single parameter, being an object that contains values for the set-get properties of the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class.</p>
+			<p>The <code>Uize.Test.declare</code> method is the most basic of the available <a href="#12">Test Class Factory Methods</a>. It accepts a single parameter, being an object that contains values for the state properties of the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class.</p>
 			
 			<p><span class="allCaps">INSTEAD OF...</span></p>
 			

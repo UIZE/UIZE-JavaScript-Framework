@@ -33,7 +33,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this basic example, an instance of <a href="../reference/Uize.Widget.Resizer.Marquee.html"><code>Uize.Widget.Resizer.Marquee</code></a> provides a very simple marquee widget. The marquee is configured so that it cannot be moved outside of its container node, by setting its <code>constrained</code> set-get property to <code>true</code>. It can be resized to an arbitrary aspect ratio, but it cannot be made smaller than 20x20, accomplished by setting the <code>minWidth</code> and <code>minHeight</code> set-get properties. A handler is registered for the <code>Position Changed</code> instance event, so that the coordinates of the marquee are displayed (in text inputs to the right) as you move and resize it. Additionally, a new marquee can be created by clicking and dragging in a fresh spot outside the marquee's current area.</p>
+		<p>In this basic example, an instance of <a href="../reference/Uize.Widget.Resizer.Marquee.html"><code>Uize.Widget.Resizer.Marquee</code></a> provides a very simple marquee widget. The marquee is configured so that it cannot be moved outside of its container node, by setting its <code>constrained</code> state property to <code>true</code>. It can be resized to an arbitrary aspect ratio, but it cannot be made smaller than 20x20, accomplished by setting the <code>minWidth</code> and <code>minHeight</code> state properties. A handler is registered for the <code>Position Changed</code> instance event, so that the coordinates of the marquee are displayed (in text inputs to the right) as you move and resize it. Additionally, a new marquee can be created by clicking and dragging in a fresh spot outside the marquee's current area.</p>
 	</div>
 
 	<!-- marquee UI wireframe -->
@@ -54,7 +54,7 @@
 			</li>
 		</ul>
 		<ul>
-			<li>Fade left Set-get Property (canonicalized to equivalent signature):
+			<li>Fade left State Property (canonicalized to equivalent signature):
 				<ul>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:marquee,handler:'set'},{left:100},{left:0},2000,{quantization:1})</a></li>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperty (marquee,'left',100,0,2000,{quantization:1})</a></li>
@@ -62,7 +62,7 @@
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (marquee,'set',{left:100},{left:0},2000,{quantization:1})</a></li>
 				</ul>
 			</li>
-			<li>Fade width Set-get Property (canonicalized to equivalent signature):
+			<li>Fade width State Property (canonicalized to equivalent signature):
 				<ul>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:marquee,handler:'set'},{width:100},{width:200},3000,{quantization:1})</a></li>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperty (marquee,'width',100,200,3000,{quantization:1})</a></li>
@@ -70,14 +70,14 @@
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (marquee,'set',{width:100},{width:200},3000,{quantization:1})</a></li>
 				</ul>
 			</li>
-			<li>Fade left & width Set-get Properties (canonicalized to equivalent signature):
+			<li>Fade left & width State Properties (canonicalized to equivalent signature):
 				<ul>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:marquee,handler:'set'},{left:100,width:100},{left:0,width:400},3000,{quantization:1})</a></li>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperties (marquee,{left:100,width:100},{left:0,width:400},3000,{quantization:1})</a></li>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (marquee,'set',{left:100,width:100},{left:0,width:400},3000,{quantization:1})</a></li>
 				</ul>
 			</li>
-			<li>Fade top & height Set-get Properties (canonicalized to equivalent signature):
+			<li>Fade top & height State Properties (canonicalized to equivalent signature):
 				<ul>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:marquee,handler:'set'},{top:100,height:50},{top:0,height:200},3000,{quantization:1})</a></li>
 					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperties (marquee,{top:100,height:50},{top:0,height:200},3000,{quantization:1})</a></li>

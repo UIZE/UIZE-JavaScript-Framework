@@ -80,7 +80,7 @@ Introduction
 			Because tables are used heavily in page layout, a document may contain many tables that it would not be appropriate to make sortable. By giving the tables you wish to sort unique =id= attribute values, you can then specify just these tables when using the =Uize.TableSort= class to make your tables sortable.
 
 		Wire Up the Table
-			There are a few ways in which you can wire up tables to be sortable. In this example, we're using the simplest approach by calling the =Uize.TableSort.spawn= static method. The =id= of the table that should be made sortable is specified by the =node= set-get property. After this method has been called, the table is now sortable. It's as easy as that. Of course, there are some more sophisticated things you can do and various ways to tweak how your sortable tables behave. All that is covered in this reference for the =Uize.TableSort= class.
+			There are a few ways in which you can wire up tables to be sortable. In this example, we're using the simplest approach by calling the =Uize.TableSort.spawn= static method. The =id= of the table that should be made sortable is specified by the =node= state property. After this method has been called, the table is now sortable. It's as easy as that. Of course, there are some more sophisticated things you can do and various ways to tweak how your sortable tables behave. All that is covered in this reference for the =Uize.TableSort= class.
 
 	### Features
 		[must to document]
@@ -90,7 +90,7 @@ Inherited Instance and Static Methods and Properties
 
 	Consequently, it inherits all the instance and static methods that comprise the mechanism for setting and getting property values, the mechanism for managing events, as well as other utility features. This class also inherits all the instance and static properties of the =Uize.Class= base class. Consult the documentation for the =Uize.Class= base class for detailed information on all these inherited features, since they are not explained again in the documentation for this class.
 
-Set-get Properties
+State Properties
 	node
 		[must to document]
 

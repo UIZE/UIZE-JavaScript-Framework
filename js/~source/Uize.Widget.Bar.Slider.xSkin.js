@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.Bar.Slider.xSkin= extension sets an initial value for the =html= set-get property so as to provide slider instances with a default skin.
+		The =Uize.Widget.Bar.Slider.xSkin= extension sets an initial value for the =html= state property so as to provide slider instances with a default skin.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

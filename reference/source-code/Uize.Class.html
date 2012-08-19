@@ -64,7 +64,7 @@
         For an in-depth discussion of events, consult the [[../explainers/javascript-event-system.html][JavaScript Event System]] explainer.
 
       Condition System
-        The =Uize.Class= module implements a condition system in the form of set-get properties combined with convenience methods that allow set-get properties to be treated semantically as conditions.
+        The =Uize.Class= module implements a condition system in the form of state properties combined with convenience methods that allow state properties to be treated semantically as conditions.
 
         Condition System Methods
           The `condition system` of the =Uize.Class= module is exposed through the following methods...
@@ -674,7 +674,7 @@ Uize.module ({
 
                 If the value of the property specified by the =propertyNameSTR= parameter is truthy when the =once= method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately. Otherwise, the value of the property will be watched and the handler will be executed once the property's value becomes truthy, upon which the property watcher will be removed and the property will no longer be watched. By design, the handler is only executed for the first time that the property's value becomes truthy.
 
-                The =once= method is useful when using a set-get property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the =once= method is called. Consider the following example...
+                The =once= method is useful when using a state property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the =once= method is called. Consider the following example...
 
                 EXAMPLE
                 ........................................................
@@ -686,7 +686,7 @@ Uize.module ({
                 );
                 ........................................................
 
-                In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= set-get property becomes =true=).
+                In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= state property becomes =true=).
 
                 Condition Inversion
                   As a convenience, the =once= method supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.
@@ -701,7 +701,7 @@ Uize.module ({
                   );
                   ................................................................
 
-                  In the above example, code is being registered to execute once the =isEmpty= condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= set-get property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the =once= method).
+                  In the above example, code is being registered to execute once the =isEmpty= condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= state property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the =once= method).
 
                 Return Value
                   The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.
@@ -718,14 +718,14 @@ Uize.module ({
           /*?
             Instance Methods
               is
-                Returns a boolean, indicating whether or not the specified condition is met (ie. the specified condition set-get property's value is truthy).
+                Returns a boolean, indicating whether or not the specified condition is met (ie. the specified condition state property's value is truthy).
 
                 SYNTAX
                 ................................
                 myInstance.is (propertyNameSTR);
                 ................................
 
-                The =is= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =get= instance method. The statement =myInstance.is ('myCondition')= is equivalent to the statement =!!myInstance.get ('myCondition')=.
+                The =is= method is offered as a convenience to improve the semantics of code that is using state properties to represent conditions, and is a very thin wrapper around the =get= instance method. The statement =myInstance.is ('myCondition')= is equivalent to the statement =!!myInstance.get ('myCondition')=.
 
                 EXAMPLE
                 ...........................................
@@ -734,7 +734,7 @@ Uize.module ({
                 }
                 ...........................................
 
-                In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The =Uize.Widget= base class provides an =enabled= set-get property, whose value is a boolean. One could use the =get= method in this code example to achieve the same effect, but using the =is= method make the code more readable.
+                In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The =Uize.Widget= base class provides an =enabled= state property, whose value is a boolean. One could use the =get= method in this code example to achieve the same effect, but using the =is= method make the code more readable.
 
                 NOTES
                 - see the other `condition system methods`
@@ -761,9 +761,9 @@ Uize.module ({
                 ....................................
 
                 For Improved Semantics
-                  The =met= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method.
+                  The =met= method is offered as a convenience to improve the semantics of code that is using state properties to represent conditions, and is a very thin wrapper around the =set= instance method.
 
-                  The statement =myInstance.met ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',true)=. When using a set-get property to represent a condition, the =met= method is a semantically elegant way to set the value of the property to =true= to indicate that the condition represented by the property has been met.
+                  The statement =myInstance.met ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',true)=. When using a state property to represent a condition, the =met= method is a semantically elegant way to set the value of the property to =true= to indicate that the condition represented by the property has been met.
 
                   EXAMPLE
                   .............................................
@@ -773,7 +773,7 @@ Uize.module ({
                   };
                   .............................................
 
-                  In the above example, an =initialize= instance method is defined for the class =MyClass=. In the method's implementation, after all the initialization has been performed, the =met= method is being called to indicate that the =initialized= condition has been met, where =initialized= is the name of a set-get property provided in =MyClass=. Now, other code can be registered to be executed only once an instance has been initialized by using the =once= instance method, as follows...
+                  In the above example, an =initialize= instance method is defined for the class =MyClass=. In the method's implementation, after all the initialization has been performed, the =met= method is being called to indicate that the =initialized= condition has been met, where =initialized= is the name of a state property provided in =MyClass=. Now, other code can be registered to be executed only once an instance has been initialized by using the =once= instance method, as follows...
 
                   .............................................................
                   myInstance.once (
@@ -836,9 +836,9 @@ Uize.module ({
                 ......................................
 
                 For Improved Semantics
-                  The =unmet= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method.
+                  The =unmet= method is offered as a convenience to improve the semantics of code that is using state properties to represent conditions, and is a very thin wrapper around the =set= instance method.
 
-                  The statement =myInstance.unmet ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',false)=. When using a set-get property to represent a condition, the =unmet= method is a semantically elegant way to set the value of the property to =false= to indicate that the condition represented by the property is not met / no longer met.
+                  The statement =myInstance.unmet ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',false)=. When using a state property to represent a condition, the =unmet= method is a semantically elegant way to set the value of the property to =false= to indicate that the condition represented by the property is not met / no longer met.
 
                   EXAMPLE
                   ..............................................
@@ -848,7 +848,7 @@ Uize.module ({
                   };
                   ..............................................
 
-                  In the above example, a =die= instance method is defined for the class =MyClass=. In the method's implementation, after all the tear down steps have been performed, the =unmet= method is being called to indicate that the =initialized= condition is no longer met, where =initialized= is the name of a set-get property provided in =MyClass=. It is assumed that some other method, such as an =initialize= instance method for the class, is responsible for setting the condition as having been met with a statement like =this.met ('initialized')=.
+                  In the above example, a =die= instance method is defined for the class =MyClass=. In the method's implementation, after all the tear down steps have been performed, the =unmet= method is being called to indicate that the =initialized= condition is no longer met, where =initialized= is the name of a state property provided in =MyClass=. It is assumed that some other method, such as an =initialize= instance method for the class, is responsible for setting the condition as having been met with a statement like =this.met ('initialized')=.
 
                 Set a Single Condition as Being Unmet
                   In its most typical usage, a single condition can be set as being unmet by specifying the name of the condition for the =propertyNameSTR= parameter.
@@ -882,7 +882,7 @@ Uize.module ({
           */
         };
 
-      /*** Set-get Property System Methods ***/
+      /*** State Property System Methods ***/
         _class.get = _classPrototype.get = function (_property) {
           if (typeof _property == _typeString) {
             /* NOTE:
@@ -896,7 +896,7 @@ Uize.module ({
             ;
             if (!_property) {
               /* NOTE:
-                Driven off of private names to ensure that there is only one property in the object for each actual set-get property, otherwise you can end up in bad situations.
+                Driven off of private names to ensure that there is only one property in the object for each actual state property, otherwise you can end up in bad situations.
               */
               var
                 _class = _getClass (_this),
@@ -924,7 +924,7 @@ Uize.module ({
           /*?
             Instance Methods
               get
-                Lets you query the value of one of an instance's set-get properties.
+                Lets you query the value of one of an instance's state properties.
 
                 DIFFERENT USAGES
 
@@ -949,7 +949,7 @@ Uize.module ({
                 .........................................
 
                 Get the Value of a Single Property
-                  In the most typical usage of the =get= instance method, a =propertyNameSTR= parameter can be specified in order to get the value of a single set-get property.
+                  In the most typical usage of the =get= instance method, a =propertyNameSTR= parameter can be specified in order to get the value of a single state property.
 
                   SYNTAX
                   ........................................................
@@ -968,7 +968,7 @@ Uize.module ({
                   ......................................................
 
                 Get Values for Multiples Properties, by Specifying a Property Names Array
-                  When a =propertyNamesARRAY= parameter is specified in place of the =propertyNameSTR= parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.
+                  When a =propertyNamesARRAY= parameter is specified in place of the =propertyNameSTR= parameter, the values for the instance state properties specified in the array will be populated into an object and returned.
 
                   SYNTAX
                   ........................................................
@@ -987,7 +987,7 @@ Uize.module ({
                   After the above code has been executed, the =sliderValueAndRange= variable would have the value ={minValue:0,maxValue:100,value:57}=.
 
                 Get Values for Multiples Properties, by Specifying a Properties Object
-                  When a =propertyNamesARRAY= parameter is specified in place of the =propertyNameSTR= parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.
+                  When a =propertyNamesARRAY= parameter is specified in place of the =propertyNameSTR= parameter, the values for the instance state properties specified in the array will be populated into an object and returned.
 
                   SYNTAX
                   ...................................................
@@ -1003,10 +1003,10 @@ Uize.module ({
                   sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
                   .....................................................................
 
-                  After the above code has been executed, the =sliderValueAndRange= variable would have the value ={minValue:0,maxValue:100,value:57}=. The values of the properties in the properties object, as specified by the =propertiesOBJ= parameter, are immaterial - for whatever properties exist in the object, the values for the corresponding set-get properties of the instance will be returned.
+                  After the above code has been executed, the =sliderValueAndRange= variable would have the value ={minValue:0,maxValue:100,value:57}=. The values of the properties in the properties object, as specified by the =propertiesOBJ= parameter, are immaterial - for whatever properties exist in the object, the values for the corresponding state properties of the instance will be returned.
 
                 Get Values for All Properties
-                  When no parameter is specified, the =get= instance method will return an object containing values for all the set-get properties of the instance.
+                  When no parameter is specified, the =get= instance method will return an object containing values for all the state properties of the instance.
 
                   SYNTAX
                   .........................................
@@ -1020,7 +1020,7 @@ Uize.module ({
                   copyOfMyFade = Uize.Fade (myFade.get ());
                   .........................................
 
-                  In this example, an instance of the class =Uize.Fade= is being created by passing the constructor all the set-get property values obtained from the =myFade= instance using the =get= method. The new instance created will then have the same state as the =myFade= instance.
+                  In this example, an instance of the class =Uize.Fade= is being created by passing the constructor all the state property values obtained from the =myFade= instance using the =get= method. The new instance created will then have the same state as the =myFade= instance.
 
                 NOTES
                 - see also the =set= instance method
@@ -1028,7 +1028,7 @@ Uize.module ({
 
             Static Methods
               Uize.Class.get
-                Lets you query the initial value for one of the class's set-get properties.
+                Lets you query the initial value for one of the class's state properties.
 
                 SYNTAX
                 ........................................................
@@ -1040,13 +1040,13 @@ Uize.module ({
                 propertyValuesOBJ = Uize.Class.get (propertyNamesARRAY);
                 ........................................................
 
-                When a =propertyNamesARRAY= parameter is specified in place of the =propertyNameSTR= parameter, the values for the class set-get properties specified in the array will be populated into an object and returned. So, for example =Uize.Widget.get (['enabled','busy','built'])= would return a result like ={enabled:'inherit',busy:'inherit',built:true}=.
+                When a =propertyNamesARRAY= parameter is specified in place of the =propertyNameSTR= parameter, the values for the class state properties specified in the array will be populated into an object and returned. So, for example =Uize.Widget.get (['enabled','busy','built'])= would return a result like ={enabled:'inherit',busy:'inherit',built:true}=.
 
                 .........................................
                 allPropertyValuesOBJ = Uize.Class.get ();
                 .........................................
 
-                When no parameter is specified, the =Uize.Class.get= static method will return an object containing values for all the registered set-get properties of the class.
+                When no parameter is specified, the =Uize.Class.get= static method will return an object containing values for all the registered state properties of the class.
 
                 NOTES
                 - see also the =Uize.Class.set= static method
@@ -1249,24 +1249,24 @@ Uize.module ({
               /*?
                 Instance Events
                   Changed.*
-                    The =Changed.*= instance event is a wildcard event that is fired whenever one or more set-get properties change value as a result of a call to the =set= instance method.
+                    The =Changed.*= instance event is a wildcard event that is fired whenever one or more state properties change value as a result of a call to the =set= instance method.
 
-                    This event will only be fired once for all set-get properties that have changed value during a call to the =set= method. The event object for this event will contain a =properties= property, which is an object indicating which set-get properties have changed value, being a mapping between the public names of set-get properties that have changed and their new values.
+                    This event will only be fired once for all state properties that have changed value during a call to the =set= method. The event object for this event will contain a =properties= property, which is an object indicating which state properties have changed value, being a mapping between the public names of state properties that have changed and their new values.
 
                     NOTES
                     - compare to the related =Changed.[propertyName]= instance event
-                    - wiring a handler for the =Changed.*= event may have a slight performance impact, since this event will be fired any time that any set-get property changes value
+                    - wiring a handler for the =Changed.*= event may have a slight performance impact, since this event will be fired any time that any state property changes value
 
                   Changed.[propertyName]
-                    The =Uize.Class= base class implements a generalized mechanism for firing events when the values of set-get properties are changed.
+                    The =Uize.Class= base class implements a generalized mechanism for firing events when the values of state properties are changed.
 
-                    This means that for any set-get property that is registered through the =Uize.Class.registerProperties= static method, a handler can be registered for a change in the value of that property without having to write any additional code to fire an event.
+                    This means that for any state property that is registered through the =Uize.Class.registerProperties= static method, a handler can be registered for a change in the value of that property without having to write any additional code to fire an event.
 
                     Event Naming
-                      The name of a changed event that fires is of the form =Changed.[propertyName]=, where =propertyName= is the primary public name of the set-get property. For example, if you registered a set-get property named =value=, then a =Changed.value= event would fire each time this property is changed.
+                      The name of a changed event that fires is of the form =Changed.[propertyName]=, where =propertyName= is the primary public name of the state property. For example, if you registered a state property named =value=, then a =Changed.value= event would fire each time this property is changed.
 
                     Property Aliases
-                      If a set-get property has aliases, handlers can be registered for the property's changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a set-get property was registered with the public names =color= and =hexRgb=, both =Changed.color= and =Changed.hexRgb= would be treated as equivalent.
+                      If a state property has aliases, handlers can be registered for the property's changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a state property was registered with the public names =color= and =hexRgb=, both =Changed.color= and =Changed.hexRgb= would be treated as equivalent.
 
                       EXAMPLE
                       ..........................................................
@@ -1277,13 +1277,13 @@ Uize.module ({
                       myColorWidget.unwire ('Changed.hexRgb',handleColorChange);
                       ..........................................................
 
-                      In this example, the =handleColorChange= function would not be executed when the value of the =color= set-get property changes, because =Changed.color= and =Changed.hexRgb= are treated as equivalent and therefore the =unwire= statement effectively removes the handler registered in the previous statement.
+                      In this example, the =handleColorChange= function would not be executed when the value of the =color= state property changes, because =Changed.color= and =Changed.hexRgb= are treated as equivalent and therefore the =unwire= statement effectively removes the handler registered in the previous statement.
 
                     Must Use the set Method
-                      The =Changed.[propertyName]= event will only fire for a particular set-get property if the value for that property is set using the =set= method, since it is within the =set= method that change detection occurs and the event is fired. If you simply assign a value by directly accessing the private name of the property, then the event will not fire.
+                      The =Changed.[propertyName]= event will only fire for a particular state property if the value for that property is set using the =set= method, since it is within the =set= method that change detection occurs and the event is fired. If you simply assign a value by directly accessing the private name of the property, then the event will not fire.
 
                     Only On Change, Not Every Set
-                      The =Changed.[propertyName]= event only fires for a particular set-get property when the value for that property is *changed* by using the =set= method. So, if the =set= method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.
+                      The =Changed.[propertyName]= event only fires for a particular state property when the value for that property is *changed* by using the =set= method. So, if the =set= method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.
 
                       Additionally, if a =conformer= is registered for the property and the action of the conformer results in the property value not being changed, then no event will be fired - even if the value specified in the =set= call is different to the current value of the property. This can be the case if the value is at an edge of its valid range, an attempt is made to set the value outside of its valid range, and the conformer has the action of constraining the value so that it remains at the same edge of its valid range.
 
@@ -1297,7 +1297,7 @@ Uize.module ({
           /*?
             Instance Methods
               set
-                Lets you set values for one or more of an instance's set-get properties.
+                Lets you set values for one or more of an instance's state properties.
 
                 DIFFERENT USAGES
 
@@ -1334,7 +1334,7 @@ Uize.module ({
                   myInstance.set (propertyNamesValuesOBJ);
                   ........................................
 
-                  Each key of the =propertyNamesValuesOBJ= object represents the name of a set-get property whose value should be set, and each corresponding value represents the value that a property should be set to.
+                  Each key of the =propertyNamesValuesOBJ= object represents the name of a state property whose value should be set, and each corresponding value represents the value that a property should be set to.
 
                   EXAMPLE 1
                   ...............................
@@ -1355,14 +1355,14 @@ Uize.module ({
                   In the above example, the =set= method is being used to set values for multiple properties - the =maxValue=, =minValue=, and =value= properties of a slider widget instance.
 
                 Set the Value for a Property with Name and Value Arguments
-                  The value of a set-get property can be set by providing two parameters to the =set= method: a string parameter specifying the name of a property, and a value parameter that can be of any type.
+                  The value of a state property can be set by providing two parameters to the =set= method: a string parameter specifying the name of a property, and a value parameter that can be of any type.
 
                   SYNTAX
                   ......................................................
                   myInstance.set (propertyNameSTR,propertyValueANYTYPE);
                   ......................................................
 
-                  This variation of the =set= method is particularly useful in cases where you wish to use a variable or an expression to determine the set-get property whose value should be set. Consider the following example...
+                  This variation of the =set= method is particularly useful in cases where you wish to use a variable or an expression to determine the state property whose value should be set. Consider the following example...
 
                   EXAMPLE
                   ..............................................................
@@ -1371,7 +1371,7 @@ Uize.module ({
                   }
                   ..............................................................
 
-                  In the above example, a generic incrementer instance method is being implemented. It receives a =propertyName= parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the =set= method.
+                  In the above example, a generic incrementer instance method is being implemented. It receives a =propertyName= parameter that specifies the state property to increment, and it passes the value of this parameter as the first parameter in the call to the =set= method.
 
                   Slightly Less Performant
                     This variation of the =set= method is very slightly less performant than the variation that accepts a single =propertyNamesValuesOBJ= parameter.
@@ -1379,7 +1379,7 @@ Uize.module ({
                     This variation is offered primarily as a convenience for when the names of properties to be set need to be supplied through variables or expressions. While there is not much cost to using this variation when not necessary, it is advised to generally use the form that accepts a =propertyNamesValuesOBJ= parameter whenever possible (see `Set Values for One or More Properties with a Names/Values Object`).
 
                 Set Values for Multiple Properties with Multiple Name and Value Arguments
-                  The values for an arbitrary number of set-get properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.
+                  The values for an arbitrary number of state properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.
 
                   SYNTAX
                   .........................................
@@ -1394,7 +1394,7 @@ Uize.module ({
                   This variation of the =set= method is an extension of the variation that lets you `set the value for a property with name and value arguments`, and has the same benefits and performance considerations.
 
                 Set the Same Value for Multiple Properties
-                  The same value can be set for multiple set-get properties by specifying the names of the properties that should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the value they should all be set to in a =propertyValueANYTYPE= parameter.
+                  The same value can be set for multiple state properties by specifying the names of the properties that should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the value they should all be set to in a =propertyValueANYTYPE= parameter.
 
                   SYNTAX
                   .........................................................
@@ -1434,7 +1434,7 @@ Uize.module ({
 
             Static Methods
               Uize.Class.set
-                Lets you set initial values for one or more of a class's set-get properties.
+                Lets you set initial values for one or more of a class's state properties.
 
                 DIFFERENT USAGES
 
@@ -1471,7 +1471,7 @@ Uize.module ({
                   MyClass.set (propertyNamesValuesOBJ);
                   .....................................
 
-                  Each key of the =propertyNamesValuesOBJ= object represents the name of a set-get property whose initial value should be set, and each corresponding value represents the initial value that should be set for a property.
+                  Each key of the =propertyNamesValuesOBJ= object represents the name of a state property whose initial value should be set, and each corresponding value represents the initial value that should be set for a property.
 
                   EXAMPLE 1
                   ....................................
@@ -1492,14 +1492,14 @@ Uize.module ({
                   In the above example, the =Uize.Class.set= method is being used to set initial values for multiple properties - the =maxValue=, =minValue=, and =value= properties of the =Uize.Widget.Bar.Slider= widget class.
 
                 Set the Initial Value for a Property with Name and Value Arguments
-                  The initial value for a set-get property can be set by providing two parameters to the =Uize.Class.set= method: a string parameter specifying the name of a property, and a value parameter that can be of any type.
+                  The initial value for a state property can be set by providing two parameters to the =Uize.Class.set= method: a string parameter specifying the name of a property, and a value parameter that can be of any type.
 
                   SYNTAX
                   ...................................................
                   MyClass.set (propertyNameSTR,propertyValueANYTYPE);
                   ...................................................
 
-                  This variation of the =Uize.Class.set= method is particularly useful in cases where you wish to use a variable or an expression to determine the set-get property whose initial value should be set. Consider the following example...
+                  This variation of the =Uize.Class.set= method is particularly useful in cases where you wish to use a variable or an expression to determine the state property whose initial value should be set. Consider the following example...
 
                   EXAMPLE
                   ............................................................
@@ -1508,7 +1508,7 @@ Uize.module ({
                   }
                   ............................................................
 
-                  In the above example, a generic incrementer static method is being implemented. It receives a =propertyName= parameter that specifies the set-get property whose initial value should be incremented, and it passes the value of this parameter as the first parameter in the call to the =Uize.Class.set= method.
+                  In the above example, a generic incrementer static method is being implemented. It receives a =propertyName= parameter that specifies the state property whose initial value should be incremented, and it passes the value of this parameter as the first parameter in the call to the =Uize.Class.set= method.
 
                   Slightly Less Performant
                     This variation of the =Uize.Class.set= method is very slightly less performant than the variation that accepts a single =propertyNamesValuesOBJ= parameter.
@@ -1516,7 +1516,7 @@ Uize.module ({
                     This variation is offered primarily as a convenience for when the names of properties whose initial values are to be set need to be supplied through variables or expressions. While there is not much cost to using this variation when not necessary, it is advised to generally use the form that accepts a =propertyNamesValuesOBJ= parameter whenever possible (see `Set Initial Values for One or More Properties with a Names/Values Object`).
 
                 Set Initial Values for Multiple Properties with Multiple Name and Value Arguments
-                  The initial values for an arbitrary number of set-get properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.
+                  The initial values for an arbitrary number of state properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.
 
                   SYNTAX
                   .........................................
@@ -1531,7 +1531,7 @@ Uize.module ({
                   This variation of the =Uize.Class.set= method is an extension of the variation that lets you `set the initial value for a property with name and value arguments`, and has the same benefits and performance considerations.
 
                 Set the Same Initial Value for Multiple Properties
-                  The same initial value can be set for multiple set-get properties by specifying the names of the properties whose initial values should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the initial value that should be set for them all in a =propertyValueANYTYPE= parameter.
+                  The same initial value can be set for multiple state properties by specifying the names of the properties whose initial values should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the initial value that should be set for them all in a =propertyValueANYTYPE= parameter.
 
                   SYNTAX
                   ......................................................
@@ -1579,7 +1579,7 @@ Uize.module ({
           /*?
             Instance Methods
               toggle
-                Toggles the value of the specified boolean instance set-get property.
+                Toggles the value of the specified boolean instance state property.
 
                 SYNTAX
                 .......................................................
@@ -1597,7 +1597,7 @@ Uize.module ({
 
             Static Methods
               Uize.Class.toggle
-                Toggles the value of the specified boolean static set-get property.
+                Toggles the value of the specified boolean static state property.
 
                 SYNTAX
                 .......................................................
@@ -1663,7 +1663,7 @@ Uize.module ({
                 instanceSummarySTR = myInstance.toString ();
                 ............................................
 
-                The string returned by this method provides a summary that includes the instance's class name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of =Uize.Class= subclasses during debugging and troubleshooting. The =toString Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the =alert= global function.
+                The string returned by this method provides a summary that includes the instance's class name and the state of its state properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of =Uize.Class= subclasses during debugging and troubleshooting. The =toString Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the =alert= global function.
 
                 EXAMPLE
                 .............................
@@ -1721,7 +1721,7 @@ Uize.module ({
                 - see also the =Uize.toString= static intrinsic method
 
               valueOf Intrinsic Method
-                Returns the value of the instance's =value= set-get property.
+                Returns the value of the instance's =value= state property.
 
                 SYNTAX
                 .............................................
@@ -1769,23 +1769,23 @@ Uize.module ({
                 NOTES
                 - compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
                 - see also the =Uize.Class.valueOf= static intrinsic method
-                - if the instance's class does not register a =value= set-get property, then this method will return the value of the instance's =value= property, and if the instance has no =value= property, then this method will simply return =undefined=
+                - if the instance's class does not register a =value= state property, then this method will return the value of the instance's =value= property, and if the instance has no =value= property, then this method will simply return =undefined=
 
             Static Methods
               Uize.Class.valueOf
-                Returns the value of the class' =value= set-get property.
+                Returns the value of the class' =value= state property.
 
                 SYNTAX
                 .......................................
                 classValueANYTYPE = MyClass.valueOf ();
                 .......................................
 
-                The =Uize.Class.valueOf= static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. =Uize.Widget.Bar.Slider + 0=). This static method is implemented primarily to provide parity with the =valueOf Intrinsic Method=. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the =value= set-get property.
+                The =Uize.Class.valueOf= static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. =Uize.Widget.Bar.Slider + 0=). This static method is implemented primarily to provide parity with the =valueOf Intrinsic Method=. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the =value= state property.
 
                 NOTES
                 - compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
                 - see also the =valueOf Intrinsic Method=
-                - if the class does not register a =value= set-get property, then this method will return the value of the class' =value= property, and if the class has no =value= property, then this method will simply return =undefined=
+                - if the class does not register a =value= state property, then this method will return the value of the class' =value= property, and if the class has no =value= property, then this method will simply return =undefined=
           */
         }
 
@@ -2011,7 +2011,7 @@ Uize.module ({
                 When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be returned. Otherwise, a singleton instance will be created for the specified scope and then returned.
 
               Get a Singleton for a Class for a Specific Scope, Specifying Initial State
-                When the optional =propertiesOBJ= parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the =propertiesOBJ= object.
+                When the optional =propertiesOBJ= parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its state properties set using the =propertiesOBJ= object.
 
                 SYNTAX
                 ..........................................................

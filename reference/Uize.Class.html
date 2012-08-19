@@ -38,7 +38,7 @@
 									<li><a href="#1_1_1_1" title="The event system of the Uize.Class module is exposed through the following methods...">1.1.1.1. Event System Methods</a></li>
 								</ul>
 							</li>
-							<li><a href="#1_1_2" title="The Uize.Class module implements a condition system in the form of set-get properties combined with convenience methods that allow set-get properties to be treated semantically as conditions.">1.1.2. Condition System</a>
+							<li><a href="#1_1_2" title="The Uize.Class module implements a condition system in the form of state properties combined with convenience methods that allow state properties to be treated semantically as conditions.">1.1.2. Condition System</a>
 								<ul>
 									<li><a href="#1_1_2_1" title="The condition system of the Uize.Class module is exposed through the following methods...">1.1.2.1. Condition System Methods</a></li>
 								</ul>
@@ -74,19 +74,19 @@
 			<li><a href="#3">3. Instance Methods</a>
 				<ul>
 					<li><a href="#3_1" title="Lets you fire an event for an instance of the class.">3.1. fire</a></li>
-					<li><a href="#3_2" title="Lets you query the value of one of an instance&apos;s set-get properties.">3.2. get</a>
+					<li><a href="#3_2" title="Lets you query the value of one of an instance&apos;s state properties.">3.2. get</a>
 						<ul>
-							<li><a href="#3_2_1" title="In the most typical usage of the get instance method, a propertyNameSTR parameter can be specified in order to get the value of a single set-get property.">3.2.1. Get the Value of a Single Property</a></li>
-							<li><a href="#3_2_2" title="When a propertyNamesARRAY parameter is specified in place of the propertyNameSTR parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.">3.2.2. Get Values for Multiples Properties, by Specifying a Property Names Array</a></li>
-							<li><a href="#3_2_3" title="When a propertyNamesARRAY parameter is specified in place of the propertyNameSTR parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.">3.2.3. Get Values for Multiples Properties, by Specifying a Properties Object</a></li>
-							<li><a href="#3_2_4" title="When no parameter is specified, the get instance method will return an object containing values for all the set-get properties of the instance.">3.2.4. Get Values for All Properties</a></li>
+							<li><a href="#3_2_1" title="In the most typical usage of the get instance method, a propertyNameSTR parameter can be specified in order to get the value of a single state property.">3.2.1. Get the Value of a Single Property</a></li>
+							<li><a href="#3_2_2" title="When a propertyNamesARRAY parameter is specified in place of the propertyNameSTR parameter, the values for the instance state properties specified in the array will be populated into an object and returned.">3.2.2. Get Values for Multiples Properties, by Specifying a Property Names Array</a></li>
+							<li><a href="#3_2_3" title="When a propertyNamesARRAY parameter is specified in place of the propertyNameSTR parameter, the values for the instance state properties specified in the array will be populated into an object and returned.">3.2.3. Get Values for Multiples Properties, by Specifying a Properties Object</a></li>
+							<li><a href="#3_2_4" title="When no parameter is specified, the get instance method will return an object containing values for all the state properties of the instance.">3.2.4. Get Values for All Properties</a></li>
 						</ul>
 					</li>
-					<li><a href="#3_3" title="Returns a boolean, indicating whether or not the specified condition is met (ie. the specified condition set-get property&apos;s value is truthy).">3.3. is</a></li>
+					<li><a href="#3_3" title="Returns a boolean, indicating whether or not the specified condition is met (ie. the specified condition state property&apos;s value is truthy).">3.3. is</a></li>
 					<li><a href="#3_4" title="Nulls out the global variable (or property of the window object) of the name instanceId.">3.4. kill</a></li>
 					<li><a href="#3_5" title="Sets the specified condition (or conditions) as having been met.">3.5. met</a>
 						<ul>
-							<li><a href="#3_5_1" title="The met method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the set instance method.">3.5.1. For Improved Semantics</a></li>
+							<li><a href="#3_5_1" title="The met method is offered as a convenience to improve the semantics of code that is using state properties to represent conditions, and is a very thin wrapper around the set instance method.">3.5.1. For Improved Semantics</a></li>
 							<li><a href="#3_5_2" title="In its most typical usage, a single condition can be set as having been met by specifying the name of the condition for the propertyNameSTR parameter.">3.5.2. Set a Single Condition as Having Been Met</a></li>
 							<li><a href="#3_5_3" title="In cases where you wish to set multiple conditions as having been met, the names of those conditions can be supplied by specifying an array for the propertyNamesARRAY parameter.">3.5.3. Set Multiple Conditions as Having Been Met</a></li>
 						</ul>
@@ -97,62 +97,62 @@
 							<li><a href="#3_6_2" title="The once method returns a wirings object that can be supplied to the unwire method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property&apos;s value has become truthy.">3.6.2. Return Value</a></li>
 						</ul>
 					</li>
-					<li><a href="#3_7" title="Lets you set values for one or more of an instance&apos;s set-get properties.">3.7. set</a>
+					<li><a href="#3_7" title="Lets you set values for one or more of an instance&apos;s state properties.">3.7. set</a>
 						<ul>
 							<li><a href="#3_7_1" title="In the standard usage, a single propertyNamesValuesOBJ parameter can be passed to the set method in order to set values for one or more properties.">3.7.1. Set Values for One or More Properties with a Names/Values Object</a></li>
-							<li><a href="#3_7_2" title="The value of a set-get property can be set by providing two parameters to the set method: a string parameter specifying the name of a property, and a value parameter that can be of any type.">3.7.2. Set the Value for a Property with Name and Value Arguments</a>
+							<li><a href="#3_7_2" title="The value of a state property can be set by providing two parameters to the set method: a string parameter specifying the name of a property, and a value parameter that can be of any type.">3.7.2. Set the Value for a Property with Name and Value Arguments</a>
 								<ul>
 									<li><a href="#3_7_2_1" title="This variation of the set method is very slightly less performant than the variation that accepts a single propertyNamesValuesOBJ parameter.">3.7.2.1. Slightly Less Performant</a></li>
 								</ul>
 							</li>
-							<li><a href="#3_7_3" title="The values for an arbitrary number of set-get properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.">3.7.3. Set Values for Multiple Properties with Multiple Name and Value Arguments</a></li>
-							<li><a href="#3_7_4" title="The same value can be set for multiple set-get properties by specifying the names of the properties that should all be set to the same value in a propertyNamesARRAY parameter, and by specifying the value they should all be set to in a propertyValueANYTYPE parameter.">3.7.4. Set the Same Value for Multiple Properties</a></li>
+							<li><a href="#3_7_3" title="The values for an arbitrary number of state properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.">3.7.3. Set Values for Multiple Properties with Multiple Name and Value Arguments</a></li>
+							<li><a href="#3_7_4" title="The same value can be set for multiple state properties by specifying the names of the properties that should all be set to the same value in a propertyNamesARRAY parameter, and by specifying the value they should all be set to in a propertyValueANYTYPE parameter.">3.7.4. Set the Same Value for Multiple Properties</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_8" title="Returns a string, providing summary info for the instance on which the method is called.">3.8. toString Intrinsic Method</a></li>
-					<li><a href="#3_9" title="Toggles the value of the specified boolean instance set-get property.">3.9. toggle</a></li>
+					<li><a href="#3_9" title="Toggles the value of the specified boolean instance state property.">3.9. toggle</a></li>
 					<li><a href="#3_10" title="Sets the specified condition (or conditions) as being unmet.">3.10. unmet</a>
 						<ul>
-							<li><a href="#3_10_1" title="The unmet method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the set instance method.">3.10.1. For Improved Semantics</a></li>
+							<li><a href="#3_10_1" title="The unmet method is offered as a convenience to improve the semantics of code that is using state properties to represent conditions, and is a very thin wrapper around the set instance method.">3.10.1. For Improved Semantics</a></li>
 							<li><a href="#3_10_2" title="In its most typical usage, a single condition can be set as being unmet by specifying the name of the condition for the propertyNameSTR parameter.">3.10.2. Set a Single Condition as Being Unmet</a></li>
 							<li><a href="#3_10_3" title="In cases where you wish to set multiple conditions as being unmet, the names of those conditions can be supplied by specifying an array for the propertyNamesARRAY parameter.">3.10.3. Set Multiple Conditions as Being Unmet</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_11" title="Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.">3.11. unwire</a></li>
-					<li><a href="#3_12" title="Returns the value of the instance&apos;s value set-get property.">3.12. valueOf Intrinsic Method</a></li>
+					<li><a href="#3_12" title="Returns the value of the instance&apos;s value state property.">3.12. valueOf Intrinsic Method</a></li>
 					<li><a href="#3_13" title="Lets you wire a handler for a specific instance event, or handlers for multiple instance events.">3.13. wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#4">4. Static Methods</a>
 				<ul>
 					<li><a href="#4_1" title="Lets you fire a static event for the class.">4.1. Uize.Class.fire</a></li>
-					<li><a href="#4_2" title="Lets you query the initial value for one of the class&apos;s set-get properties.">4.2. Uize.Class.get</a></li>
+					<li><a href="#4_2" title="Lets you query the initial value for one of the class&apos;s state properties.">4.2. Uize.Class.get</a></li>
 					<li><a href="#4_3" title="Lets you register properties for the class.">4.3. Uize.Class.registerProperties</a></li>
-					<li><a href="#4_4" title="Lets you set initial values for one or more of a class&apos;s set-get properties.">4.4. Uize.Class.set</a>
+					<li><a href="#4_4" title="Lets you set initial values for one or more of a class&apos;s state properties.">4.4. Uize.Class.set</a>
 						<ul>
 							<li><a href="#4_4_1" title="In the standard usage, a single propertyNamesValuesOBJ parameter can be passed to the Uize.Class.set method in order to set initial values for one or more properties.">4.4.1. Set Initial Values for One or More Properties with a Names/Values Object</a></li>
-							<li><a href="#4_4_2" title="The initial value for a set-get property can be set by providing two parameters to the Uize.Class.set method: a string parameter specifying the name of a property, and a value parameter that can be of any type.">4.4.2. Set the Initial Value for a Property with Name and Value Arguments</a>
+							<li><a href="#4_4_2" title="The initial value for a state property can be set by providing two parameters to the Uize.Class.set method: a string parameter specifying the name of a property, and a value parameter that can be of any type.">4.4.2. Set the Initial Value for a Property with Name and Value Arguments</a>
 								<ul>
 									<li><a href="#4_4_2_1" title="This variation of the Uize.Class.set method is very slightly less performant than the variation that accepts a single propertyNamesValuesOBJ parameter.">4.4.2.1. Slightly Less Performant</a></li>
 								</ul>
 							</li>
-							<li><a href="#4_4_3" title="The initial values for an arbitrary number of set-get properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.">4.4.3. Set Initial Values for Multiple Properties with Multiple Name and Value Arguments</a></li>
-							<li><a href="#4_4_4" title="The same initial value can be set for multiple set-get properties by specifying the names of the properties whose initial values should all be set to the same value in a propertyNamesARRAY parameter, and by specifying the initial value that should be set for them all in a propertyValueANYTYPE parameter.">4.4.4. Set the Same Initial Value for Multiple Properties</a></li>
+							<li><a href="#4_4_3" title="The initial values for an arbitrary number of state properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.">4.4.3. Set Initial Values for Multiple Properties with Multiple Name and Value Arguments</a></li>
+							<li><a href="#4_4_4" title="The same initial value can be set for multiple state properties by specifying the names of the properties whose initial values should all be set to the same value in a propertyNamesARRAY parameter, and by specifying the initial value that should be set for them all in a propertyValueANYTYPE parameter.">4.4.4. Set the Same Initial Value for Multiple Properties</a></li>
 						</ul>
 					</li>
 					<li><a href="#4_5" title="Returns a singleton for the class for the optionally specified scope (default is empty scope).">4.5. Uize.Class.singleton</a>
 						<ul>
 							<li><a href="#4_5_1" title="When no parameters are specified, this method will return a singleton for the class in the default scope.">4.5.1. Get a Singleton for a Class</a></li>
 							<li><a href="#4_5_2" title="When the optional scopeSTR parameter is specified, this method will return a singleton for the class in the specified scope.">4.5.2. Get a Singleton for a Class for a Specific Scope</a></li>
-							<li><a href="#4_5_3" title="When the optional propertiesOBJ parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the propertiesOBJ object.">4.5.3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State</a></li>
+							<li><a href="#4_5_3" title="When the optional propertiesOBJ parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its state properties set using the propertiesOBJ object.">4.5.3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State</a></li>
 							<li><a href="#4_5_4" title="As a convenience, the Uize.Class.singleton static method lets you optionally specify a scope when getting singleton instances, using the scopeSTR parameter.">4.5.4. Singleton Scope</a></li>
 						</ul>
 					</li>
 					<li><a href="#4_6" title="Lets you subclass the Uize.Class base class or any subclass of Uize.Class.">4.6. Uize.Class.subclass</a></li>
 					<li><a href="#4_7" title="IMPLEMENTATION INFO">4.7. Uize.Class.superclass</a></li>
-					<li><a href="#4_8" title="Toggles the value of the specified boolean static set-get property.">4.8. Uize.Class.toggle</a></li>
+					<li><a href="#4_8" title="Toggles the value of the specified boolean static state property.">4.8. Uize.Class.toggle</a></li>
 					<li><a href="#4_9" title="Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.">4.9. Uize.Class.unwire</a></li>
-					<li><a href="#4_10" title="Returns the value of the class&apos; value set-get property.">4.10. Uize.Class.valueOf</a></li>
+					<li><a href="#4_10" title="Returns the value of the class&apos; value state property.">4.10. Uize.Class.valueOf</a></li>
 					<li><a href="#4_11" title="Lets you wire a handler for a static event of the class, or handlers for multiple static events.">4.11. Uize.Class.wire</a></li>
 				</ul>
 			</li>
@@ -171,13 +171,13 @@
 			</li>
 			<li><a href="#6">6. Instance Events</a>
 				<ul>
-					<li><a href="#6_1" title="The Changed.* instance event is a wildcard event that is fired whenever one or more set-get properties change value as a result of a call to the set instance method.">6.1. Changed.*</a></li>
-					<li><a href="#6_2" title="The Uize.Class base class implements a generalized mechanism for firing events when the values of set-get properties are changed.">6.2. Changed.[propertyName]</a>
+					<li><a href="#6_1" title="The Changed.* instance event is a wildcard event that is fired whenever one or more state properties change value as a result of a call to the set instance method.">6.1. Changed.*</a></li>
+					<li><a href="#6_2" title="The Uize.Class base class implements a generalized mechanism for firing events when the values of state properties are changed.">6.2. Changed.[propertyName]</a>
 						<ul>
-							<li><a href="#6_2_1" title="The name of a changed event that fires is of the form Changed.[propertyName], where propertyName is the primary public name of the set-get property. For example, if you registered a set-get property named value, then a Changed.value event would fire each time this property is changed.">6.2.1. Event Naming</a></li>
-							<li><a href="#6_2_2" title="If a set-get property has aliases, handlers can be registered for the property&apos;s changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a set-get property was registered with the public names color and hexRgb, both Changed.color and Changed.hexRgb ...">6.2.2. Property Aliases</a></li>
-							<li><a href="#6_2_3" title="The Changed.[propertyName] event will only fire for a particular set-get property if the value for that property is set using the set method, since it is within the set method that change detection occurs and the event is fired. If you simply assign a value by directly accessing the private name of the property, then the event will not fire.">6.2.3. Must Use the set Method</a></li>
-							<li><a href="#6_2_4" title="The Changed.[propertyName] event only fires for a particular set-get property when the value for that property is changed by using the set method. So, if the set method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.">6.2.4. Only On Change, Not Every Set</a></li>
+							<li><a href="#6_2_1" title="The name of a changed event that fires is of the form Changed.[propertyName], where propertyName is the primary public name of the state property. For example, if you registered a state property named value, then a Changed.value event would fire each time this property is changed.">6.2.1. Event Naming</a></li>
+							<li><a href="#6_2_2" title="If a state property has aliases, handlers can be registered for the property&apos;s changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a state property was registered with the public names color and hexRgb, both Changed.color and Changed.hexRgb woul...">6.2.2. Property Aliases</a></li>
+							<li><a href="#6_2_3" title="The Changed.[propertyName] event will only fire for a particular state property if the value for that property is set using the set method, since it is within the set method that change detection occurs and the event is fired. If you simply assign a value by directly accessing the private name of the property, then the event will not fire.">6.2.3. Must Use the set Method</a></li>
+							<li><a href="#6_2_4" title="The Changed.[propertyName] event only fires for a particular state property when the value for that property is changed by using the set method. So, if the set method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.">6.2.4. Only On Change, Not Every Set</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -235,7 +235,7 @@
 			<a name="1_1_2"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. Condition System"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. Condition System">2</a>. </span>Condition System</h3>
 			<div class="contents3">
-				<p>The <code>Uize.Class</code> module implements a condition system in the form of set-get properties combined with convenience methods that allow set-get properties to be treated semantically as conditions.</p>
+				<p>The <code>Uize.Class</code> module implements a condition system in the form of state properties combined with convenience methods that allow state properties to be treated semantically as conditions.</p>
 				
 				<a name="1_1_2_1"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. Condition System -&gt; 1.1.2.1. Condition System Methods"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. Condition System">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. Condition System -&gt; 1.1.2.1. Condition System Methods">1</a>. </span>Condition System Methods</h4>
@@ -532,7 +532,7 @@ MyClass.prototype.insertButton = function () {
 		<a name="3_2"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.2. get"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>. </span>get</h2>
 		<div class="contents2">
-			<p>Lets you query the value of one of an instance's set-get properties.</p>
+			<p>Lets you query the value of one of an instance's state properties.</p>
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
@@ -563,7 +563,7 @@ MyClass.prototype.insertButton = function () {
 			<a name="3_2_1"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.1. Get the Value of a Single Property"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>.<a href="#3_2_1" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.1. Get the Value of a Single Property">1</a>. </span>Get the Value of a Single Property</h3>
 			<div class="contents3">
-				<p>In the most typical usage of the <code><a href="#3_2">get</a></code> instance method, a <code>propertyNameSTR</code> parameter can be specified in order to get the value of a single set-get property.</p>
+				<p>In the most typical usage of the <code><a href="#3_2">get</a></code> instance method, a <code>propertyNameSTR</code> parameter can be specified in order to get the value of a single state property.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -587,7 +587,7 @@ alert (mySlider.get ('value')); // alerts the text "57
 			<a name="3_2_2"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.2. Get Values for Multiples Properties, by Specifying a Property Names Array"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>.<a href="#3_2_2" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.2. Get Values for Multiples Properties, by Specifying a Property Names Array">2</a>. </span>Get Values for Multiples Properties, by Specifying a Property Names Array</h3>
 			<div class="contents3">
-				<p>When a <code>propertyNamesARRAY</code> parameter is specified in place of the <code>propertyNameSTR</code> parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.</p>
+				<p>When a <code>propertyNamesARRAY</code> parameter is specified in place of the <code>propertyNameSTR</code> parameter, the values for the instance state properties specified in the array will be populated into an object and returned.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -611,7 +611,7 @@ sliderValueAndRange = mySlider.get (['minValue','maxValue','value']);
 			<a name="3_2_3"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.3. Get Values for Multiples Properties, by Specifying a Properties Object"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>.<a href="#3_2_3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.3. Get Values for Multiples Properties, by Specifying a Properties Object">3</a>. </span>Get Values for Multiples Properties, by Specifying a Properties Object</h3>
 			<div class="contents3">
-				<p>When a <code>propertyNamesARRAY</code> parameter is specified in place of the <code>propertyNameSTR</code> parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.</p>
+				<p>When a <code>propertyNamesARRAY</code> parameter is specified in place of the <code>propertyNameSTR</code> parameter, the values for the instance state properties specified in the array will be populated into an object and returned.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -629,13 +629,13 @@ mySlider.set ('value',57);
 sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 </pre>
 				
-				<p>After the above code has been executed, the <code>sliderValueAndRange</code> variable would have the value <code>{minValue:0,maxValue:100,value:57}</code>. The values of the properties in the properties object, as specified by the <code>propertiesOBJ</code> parameter, are immaterial - for whatever properties exist in the object, the values for the corresponding set-get properties of the instance will be returned.</p>
+				<p>After the above code has been executed, the <code>sliderValueAndRange</code> variable would have the value <code>{minValue:0,maxValue:100,value:57}</code>. The values of the properties in the properties object, as specified by the <code>propertiesOBJ</code> parameter, are immaterial - for whatever properties exist in the object, the values for the corresponding state properties of the instance will be returned.</p>
 			</div>
 			
 			<a name="3_2_4"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.4. Get Values for All Properties"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>.<a href="#3_2_4" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.4. Get Values for All Properties">4</a>. </span>Get Values for All Properties</h3>
 			<div class="contents3">
-				<p>When no parameter is specified, the <code><a href="#3_2">get</a></code> instance method will return an object containing values for all the set-get properties of the instance.</p>
+				<p>When no parameter is specified, the <code><a href="#3_2">get</a></code> instance method will return an object containing values for all the state properties of the instance.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -651,7 +651,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 <pre class="sample-code">copyOfMyFade = Uize.Fade (myFade.get ());
 </pre>
 				
-				<p>In this example, an instance of the class <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> is being created by passing the constructor all the set-get property values obtained from the <code>myFade</code> instance using the <code><a href="#3_2">get</a></code> method. The new instance created will then have the same state as the <code>myFade</code> instance.</p>
+				<p>In this example, an instance of the class <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> is being created by passing the constructor all the state property values obtained from the <code>myFade</code> instance using the <code><a href="#3_2">get</a></code> method. The new instance created will then have the same state as the <code>myFade</code> instance.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -670,7 +670,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 		<a name="3_3"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.3. is"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. is">3</a>. </span>is</h2>
 		<div class="contents2">
-			<p>Returns a boolean, indicating whether or not the specified condition is met (ie. the specified condition set-get property's value is truthy).</p>
+			<p>Returns a boolean, indicating whether or not the specified condition is met (ie. the specified condition state property's value is truthy).</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -678,7 +678,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 <pre class="sample-code">myInstance.is (propertyNameSTR);
 </pre>
 			
-			<p>The <code><a href="#3_3">is</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_2">get</a></code> instance method. The statement <code>myInstance.is ('myCondition')</code> is equivalent to the statement <code>!!myInstance.get ('myCondition')</code>.</p>
+			<p>The <code><a href="#3_3">is</a></code> method is offered as a convenience to improve the semantics of code that is using state properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_2">get</a></code> instance method. The statement <code>myInstance.is ('myCondition')</code> is equivalent to the statement <code>!!myInstance.get ('myCondition')</code>.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -688,7 +688,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 }
 </pre>
 			
-			<p>In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class provides an <code>enabled</code> set-get property, whose value is a boolean. One could use the <code><a href="#3_2">get</a></code> method in this code example to achieve the same effect, but using the <code><a href="#3_3">is</a></code> method make the code more readable.</p>
+			<p>In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class provides an <code>enabled</code> state property, whose value is a boolean. One could use the <code><a href="#3_2">get</a></code> method in this code example to achieve the same effect, but using the <code><a href="#3_3">is</a></code> method make the code more readable.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -738,9 +738,9 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			<a name="3_5_1"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.1. For Improved Semantics"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>.<a href="#3_5_1" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.1. For Improved Semantics">1</a>. </span>For Improved Semantics</h3>
 			<div class="contents3">
-				<p>The <code><a href="#3_5">met</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method.</p>
+				<p>The <code><a href="#3_5">met</a></code> method is offered as a convenience to improve the semantics of code that is using state properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method.</p>
 				
-				<p>The statement <code>myInstance.met ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',true)</code>. When using a set-get property to represent a condition, the <code><a href="#3_5">met</a></code> method is a semantically elegant way to set the value of the property to <code>true</code> to indicate that the condition represented by the property has been met.</p>
+				<p>The statement <code>myInstance.met ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',true)</code>. When using a state property to represent a condition, the <code><a href="#3_5">met</a></code> method is a semantically elegant way to set the value of the property to <code>true</code> to indicate that the condition represented by the property has been met.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -751,7 +751,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 };
 </pre>
 				
-				<p>In the above example, an <code>initialize</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the initialization has been performed, the <code><a href="#3_5">met</a></code> method is being called to indicate that the <code>initialized</code> condition has been met, where <code>initialized</code> is the name of a set-get property provided in <code>MyClass</code>. Now, other code can be registered to be executed only once an instance has been initialized by using the <code><a href="#3_6">once</a></code> instance method, as follows...</p>
+				<p>In the above example, an <code>initialize</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the initialization has been performed, the <code><a href="#3_5">met</a></code> method is being called to indicate that the <code>initialized</code> condition has been met, where <code>initialized</code> is the name of a state property provided in <code>MyClass</code>. Now, other code can be registered to be executed only once an instance has been initialized by using the <code><a href="#3_6">once</a></code> instance method, as follows...</p>
 				
 				
 <pre class="sample-code">myInstance.once (
@@ -825,7 +825,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			
 			<p>If the value of the property specified by the <code>propertyNameSTR</code> parameter is truthy when the <code><a href="#3_6">once</a></code> method is called, then the handler specified by the <code>handlerFUNC</code> parameter will be executed immediately. Otherwise, the value of the property will be watched and the handler will be executed once the property's value becomes truthy, upon which the property watcher will be removed and the property will no longer be watched. By design, the handler is only executed for the first time that the property's value becomes truthy.</p>
 			
-			<p>The <code><a href="#3_6">once</a></code> method is useful when using a set-get property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the <code><a href="#3_6">once</a></code> method is called. Consider the following example...</p>
+			<p>The <code><a href="#3_6">once</a></code> method is useful when using a state property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the <code><a href="#3_6">once</a></code> method is called. Consider the following example...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -838,7 +838,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 );
 </pre>
 			
-			<p>In the above example, a handler is being registered to be executed once the widget <code>myWidget</code> has been wired (ie. the value of its <code>wired</code> set-get property becomes <code>true</code>).</p>
+			<p>In the above example, a handler is being registered to be executed once the widget <code>myWidget</code> has been wired (ie. the value of its <code>wired</code> state property becomes <code>true</code>).</p>
 			
 			<a name="3_6_1"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Condition Inversion"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Condition Inversion">1</a>. </span>Condition Inversion</h3>
@@ -856,7 +856,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 );
 </pre>
 				
-				<p>In the above example, code is being registered to execute once the <code>isEmpty</code> condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the <code>isEmpty</code> set-get property becomes <code>false</code>). The <a href="#3_6_1">condition inversion</a> facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the <code><a href="#3_6">once</a></code> method).</p>
+				<p>In the above example, code is being registered to execute once the <code>isEmpty</code> condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the <code>isEmpty</code> state property becomes <code>false</code>). The <a href="#3_6_1">condition inversion</a> facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the <code><a href="#3_6">once</a></code> method).</p>
 			</div>
 			
 			<a name="3_6_2"></a>
@@ -882,7 +882,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 		<a name="3_7"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.7. set"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. set">7</a>. </span>set</h2>
 		<div class="contents2">
-			<p>Lets you set values for one or more of an instance's set-get properties.</p>
+			<p>Lets you set values for one or more of an instance's state properties.</p>
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
@@ -926,7 +926,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 <pre class="sample-code">myInstance.set (propertyNamesValuesOBJ);
 </pre>
 				
-				<p>Each key of the <code>propertyNamesValuesOBJ</code> object represents the name of a set-get property whose value should be set, and each corresponding value represents the value that a property should be set to.</p>
+				<p>Each key of the <code>propertyNamesValuesOBJ</code> object represents the name of a state property whose value should be set, and each corresponding value represents the value that a property should be set to.</p>
 				
 				<p><span class="allCaps">EXAMPLE 1</span></p>
 				
@@ -952,7 +952,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			<a name="3_7_2"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.2. Set the Value for a Property with Name and Value Arguments"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. set">7</a>.<a href="#3_7_2" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.2. Set the Value for a Property with Name and Value Arguments">2</a>. </span>Set the Value for a Property with Name and Value Arguments</h3>
 			<div class="contents3">
-				<p>The value of a set-get property can be set by providing two parameters to the <code><a href="#3_7">set</a></code> method: a string parameter specifying the name of a property, and a value parameter that can be of any type.</p>
+				<p>The value of a state property can be set by providing two parameters to the <code><a href="#3_7">set</a></code> method: a string parameter specifying the name of a property, and a value parameter that can be of any type.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -960,7 +960,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 <pre class="sample-code">myInstance.set (propertyNameSTR,propertyValueANYTYPE);
 </pre>
 				
-				<p>This variation of the <code><a href="#3_7">set</a></code> method is particularly useful in cases where you wish to use a variable or an expression to determine the set-get property whose value should be set. Consider the following example...</p>
+				<p>This variation of the <code><a href="#3_7">set</a></code> method is particularly useful in cases where you wish to use a variable or an expression to determine the state property whose value should be set. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -970,7 +970,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 }
 </pre>
 				
-				<p>In the above example, a generic incrementer instance method is being implemented. It receives a <code>propertyName</code> parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the <code><a href="#3_7">set</a></code> method.</p>
+				<p>In the above example, a generic incrementer instance method is being implemented. It receives a <code>propertyName</code> parameter that specifies the state property to increment, and it passes the value of this parameter as the first parameter in the call to the <code><a href="#3_7">set</a></code> method.</p>
 				
 				<a name="3_7_2_1"></a>
 				<h4 class="heading4" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.2. Set the Value for a Property with Name and Value Arguments -&gt; 3.7.2.1. Slightly Less Performant"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. set">7</a>.<a href="#3_7_2" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.2. Set the Value for a Property with Name and Value Arguments">2</a>.<a href="#3_7_2_1" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.2. Set the Value for a Property with Name and Value Arguments -&gt; 3.7.2.1. Slightly Less Performant">1</a>. </span>Slightly Less Performant</h4>
@@ -984,7 +984,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			<a name="3_7_3"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.3. Set Values for Multiple Properties with Multiple Name and Value Arguments"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. set">7</a>.<a href="#3_7_3" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.3. Set Values for Multiple Properties with Multiple Name and Value Arguments">3</a>. </span>Set Values for Multiple Properties with Multiple Name and Value Arguments</h3>
 			<div class="contents3">
-				<p>The values for an arbitrary number of set-get properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.</p>
+				<p>The values for an arbitrary number of state properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -1003,7 +1003,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			<a name="3_7_4"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.4. Set the Same Value for Multiple Properties"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. set">7</a>.<a href="#3_7_4" title="3. Instance Methods -&gt; 3.7. set -&gt; 3.7.4. Set the Same Value for Multiple Properties">4</a>. </span>Set the Same Value for Multiple Properties</h3>
 			<div class="contents3">
-				<p>The same value can be set for multiple set-get properties by specifying the names of the properties that should all be set to the same value in a <code>propertyNamesARRAY</code> parameter, and by specifying the value they should all be set to in a <code>propertyValueANYTYPE</code> parameter.</p>
+				<p>The same value can be set for multiple state properties by specifying the names of the properties that should all be set to the same value in a <code>propertyNamesARRAY</code> parameter, and by specifying the value they should all be set to in a <code>propertyValueANYTYPE</code> parameter.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -1066,7 +1066,7 @@ myInstance.set ({
 <pre class="sample-code">instanceSummarySTR = myInstance.toString ();
 </pre>
 			
-			<p>The string returned by this method provides a summary that includes the instance's class name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of <code>Uize.Class</code> subclasses during debugging and troubleshooting. The <code><a href="#3_8">toString Intrinsic Method</a></code> is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the <code>alert</code> global function.</p>
+			<p>The string returned by this method provides a summary that includes the instance's class name and the state of its state properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of <code>Uize.Class</code> subclasses during debugging and troubleshooting. The <code><a href="#3_8">toString Intrinsic Method</a></code> is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the <code>alert</code> global function.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -1133,7 +1133,7 @@ Uize.Node.setInnerHtml ('sliderWidgetCurrentValue',page.children.slider);
 		<a name="3_9"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.9. toggle"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_9" title="3. Instance Methods -&gt; 3.9. toggle">9</a>. </span>toggle</h2>
 		<div class="contents2">
-			<p>Toggles the value of the specified boolean instance set-get property.</p>
+			<p>Toggles the value of the specified boolean instance state property.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -1179,9 +1179,9 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 			<a name="3_10_1"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.10. unmet -&gt; 3.10.1. For Improved Semantics"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. unmet">10</a>.<a href="#3_10_1" title="3. Instance Methods -&gt; 3.10. unmet -&gt; 3.10.1. For Improved Semantics">1</a>. </span>For Improved Semantics</h3>
 			<div class="contents3">
-				<p>The <code><a href="#3_10">unmet</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method.</p>
+				<p>The <code><a href="#3_10">unmet</a></code> method is offered as a convenience to improve the semantics of code that is using state properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method.</p>
 				
-				<p>The statement <code>myInstance.unmet ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',false)</code>. When using a set-get property to represent a condition, the <code><a href="#3_10">unmet</a></code> method is a semantically elegant way to set the value of the property to <code>false</code> to indicate that the condition represented by the property is not met / no longer met.</p>
+				<p>The statement <code>myInstance.unmet ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',false)</code>. When using a state property to represent a condition, the <code><a href="#3_10">unmet</a></code> method is a semantically elegant way to set the value of the property to <code>false</code> to indicate that the condition represented by the property is not met / no longer met.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -1192,7 +1192,7 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 };
 </pre>
 				
-				<p>In the above example, a <code>die</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the tear down steps have been performed, the <code><a href="#3_10">unmet</a></code> method is being called to indicate that the <code>initialized</code> condition is no longer met, where <code>initialized</code> is the name of a set-get property provided in <code>MyClass</code>. It is assumed that some other method, such as an <code>initialize</code> instance method for the class, is responsible for setting the condition as having been met with a statement like <code>this.met ('initialized')</code>.</p>
+				<p>In the above example, a <code>die</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the tear down steps have been performed, the <code><a href="#3_10">unmet</a></code> method is being called to indicate that the <code>initialized</code> condition is no longer met, where <code>initialized</code> is the name of a state property provided in <code>MyClass</code>. It is assumed that some other method, such as an <code>initialize</code> instance method for the class, is responsible for setting the condition as having been met with a statement like <code>this.met ('initialized')</code>.</p>
 			</div>
 			
 			<a name="3_10_2"></a>
@@ -1287,7 +1287,7 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 		<a name="3_12"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.12. valueOf Intrinsic Method"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_12" title="3. Instance Methods -&gt; 3.12. valueOf Intrinsic Method">12</a>. </span>valueOf Intrinsic Method</h2>
 		<div class="contents2">
-			<p>Returns the value of the instance's <code>value</code> set-get property.</p>
+			<p>Returns the value of the instance's <code>value</code> state property.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -1342,7 +1342,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_8">toString Intrinsic Method</a></code>, and the <code>Uize.toString</code> static intrinsic method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_10">Uize.Class.valueOf</a></code> static intrinsic method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the instance's class does not register a <code>value</code> set-get property, then this method will return the value of the instance's <code>value</code> property, and if the instance has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the instance's class does not register a <code>value</code> state property, then this method will return the value of the instance's <code>value</code> property, and if the instance has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
 			</table>
 		</div>
 		
@@ -1447,7 +1447,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 		<a name="4_2"></a>
 		<h2 class="heading2" title="4. Static Methods -&gt; 4.2. Uize.Class.get"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_2" title="4. Static Methods -&gt; 4.2. Uize.Class.get">2</a>. </span>Uize.Class.get</h2>
 		<div class="contents2">
-			<p>Lets you query the initial value for one of the class's set-get properties.</p>
+			<p>Lets you query the initial value for one of the class's state properties.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -1461,13 +1461,13 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 <pre class="sample-code">propertyValuesOBJ = Uize.Class.get (propertyNamesARRAY);
 </pre>
 			
-			<p>When a <code>propertyNamesARRAY</code> parameter is specified in place of the <code>propertyNameSTR</code> parameter, the values for the class set-get properties specified in the array will be populated into an object and returned. So, for example <code>Uize.Widget.get (['enabled','busy','built'])</code> would return a result like <code>{enabled:'inherit',busy:'inherit',built:true}</code>.</p>
+			<p>When a <code>propertyNamesARRAY</code> parameter is specified in place of the <code>propertyNameSTR</code> parameter, the values for the class state properties specified in the array will be populated into an object and returned. So, for example <code>Uize.Widget.get (['enabled','busy','built'])</code> would return a result like <code>{enabled:'inherit',busy:'inherit',built:true}</code>.</p>
 			
 			
 <pre class="sample-code">allPropertyValuesOBJ = Uize.Class.get ();
 </pre>
 			
-			<p>When no parameter is specified, the <code><a href="#4_2">Uize.Class.get</a></code> static method will return an object containing values for all the registered set-get properties of the class.</p>
+			<p>When no parameter is specified, the <code><a href="#4_2">Uize.Class.get</a></code> static method will return an object containing values for all the registered state properties of the class.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1529,7 +1529,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 		<a name="4_4"></a>
 		<h2 class="heading2" title="4. Static Methods -&gt; 4.4. Uize.Class.set"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_4" title="4. Static Methods -&gt; 4.4. Uize.Class.set">4</a>. </span>Uize.Class.set</h2>
 		<div class="contents2">
-			<p>Lets you set initial values for one or more of a class's set-get properties.</p>
+			<p>Lets you set initial values for one or more of a class's state properties.</p>
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
@@ -1573,7 +1573,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 <pre class="sample-code">MyClass.set (propertyNamesValuesOBJ);
 </pre>
 				
-				<p>Each key of the <code>propertyNamesValuesOBJ</code> object represents the name of a set-get property whose initial value should be set, and each corresponding value represents the initial value that should be set for a property.</p>
+				<p>Each key of the <code>propertyNamesValuesOBJ</code> object represents the name of a state property whose initial value should be set, and each corresponding value represents the initial value that should be set for a property.</p>
 				
 				<p><span class="allCaps">EXAMPLE 1</span></p>
 				
@@ -1599,7 +1599,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			<a name="4_4_2"></a>
 			<h3 class="heading3" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.2. Set the Initial Value for a Property with Name and Value Arguments"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_4" title="4. Static Methods -&gt; 4.4. Uize.Class.set">4</a>.<a href="#4_4_2" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.2. Set the Initial Value for a Property with Name and Value Arguments">2</a>. </span>Set the Initial Value for a Property with Name and Value Arguments</h3>
 			<div class="contents3">
-				<p>The initial value for a set-get property can be set by providing two parameters to the <code><a href="#4_4">Uize.Class.set</a></code> method: a string parameter specifying the name of a property, and a value parameter that can be of any type.</p>
+				<p>The initial value for a state property can be set by providing two parameters to the <code><a href="#4_4">Uize.Class.set</a></code> method: a string parameter specifying the name of a property, and a value parameter that can be of any type.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -1607,7 +1607,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 <pre class="sample-code">MyClass.set (propertyNameSTR,propertyValueANYTYPE);
 </pre>
 				
-				<p>This variation of the <code><a href="#4_4">Uize.Class.set</a></code> method is particularly useful in cases where you wish to use a variable or an expression to determine the set-get property whose initial value should be set. Consider the following example...</p>
+				<p>This variation of the <code><a href="#4_4">Uize.Class.set</a></code> method is particularly useful in cases where you wish to use a variable or an expression to determine the state property whose initial value should be set. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -1617,7 +1617,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 }
 </pre>
 				
-				<p>In the above example, a generic incrementer static method is being implemented. It receives a <code>propertyName</code> parameter that specifies the set-get property whose initial value should be incremented, and it passes the value of this parameter as the first parameter in the call to the <code><a href="#4_4">Uize.Class.set</a></code> method.</p>
+				<p>In the above example, a generic incrementer static method is being implemented. It receives a <code>propertyName</code> parameter that specifies the state property whose initial value should be incremented, and it passes the value of this parameter as the first parameter in the call to the <code><a href="#4_4">Uize.Class.set</a></code> method.</p>
 				
 				<a name="4_4_2_1"></a>
 				<h4 class="heading4" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.2. Set the Initial Value for a Property with Name and Value Arguments -&gt; 4.4.2.1. Slightly Less Performant"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_4" title="4. Static Methods -&gt; 4.4. Uize.Class.set">4</a>.<a href="#4_4_2" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.2. Set the Initial Value for a Property with Name and Value Arguments">2</a>.<a href="#4_4_2_1" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.2. Set the Initial Value for a Property with Name and Value Arguments -&gt; 4.4.2.1. Slightly Less Performant">1</a>. </span>Slightly Less Performant</h4>
@@ -1631,7 +1631,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			<a name="4_4_3"></a>
 			<h3 class="heading3" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.3. Set Initial Values for Multiple Properties with Multiple Name and Value Arguments"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_4" title="4. Static Methods -&gt; 4.4. Uize.Class.set">4</a>.<a href="#4_4_3" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.3. Set Initial Values for Multiple Properties with Multiple Name and Value Arguments">3</a>. </span>Set Initial Values for Multiple Properties with Multiple Name and Value Arguments</h3>
 			<div class="contents3">
-				<p>The initial values for an arbitrary number of set-get properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.</p>
+				<p>The initial values for an arbitrary number of state properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -1650,7 +1650,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			<a name="4_4_4"></a>
 			<h3 class="heading3" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.4. Set the Same Initial Value for Multiple Properties"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_4" title="4. Static Methods -&gt; 4.4. Uize.Class.set">4</a>.<a href="#4_4_4" title="4. Static Methods -&gt; 4.4. Uize.Class.set -&gt; 4.4.4. Set the Same Initial Value for Multiple Properties">4</a>. </span>Set the Same Initial Value for Multiple Properties</h3>
 			<div class="contents3">
-				<p>The same initial value can be set for multiple set-get properties by specifying the names of the properties whose initial values should all be set to the same value in a <code>propertyNamesARRAY</code> parameter, and by specifying the initial value that should be set for them all in a <code>propertyValueANYTYPE</code> parameter.</p>
+				<p>The same initial value can be set for multiple state properties by specifying the names of the properties whose initial values should all be set to the same value in a <code>propertyNamesARRAY</code> parameter, and by specifying the initial value that should be set for them all in a <code>propertyValueANYTYPE</code> parameter.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -1759,7 +1759,7 @@ MyClass.set ({
 			<a name="4_5_3"></a>
 			<h3 class="heading3" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_5" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton">5</a>.<a href="#4_5_3" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State">3</a>. </span>Get a Singleton for a Class for a Specific Scope, Specifying Initial State</h3>
 			<div class="contents3">
-				<p>When the optional <code>propertiesOBJ</code> parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the <code>propertiesOBJ</code> object.</p>
+				<p>When the optional <code>propertiesOBJ</code> parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its state properties set using the <code>propertiesOBJ</code> object.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -1841,7 +1841,7 @@ MySubclass = MyClass.subclass (
 		<a name="4_8"></a>
 		<h2 class="heading2" title="4. Static Methods -&gt; 4.8. Uize.Class.toggle"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_8" title="4. Static Methods -&gt; 4.8. Uize.Class.toggle">8</a>. </span>Uize.Class.toggle</h2>
 		<div class="contents2">
-			<p>Toggles the value of the specified boolean static set-get property.</p>
+			<p>Toggles the value of the specified boolean static state property.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -1910,7 +1910,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 		<a name="4_10"></a>
 		<h2 class="heading2" title="4. Static Methods -&gt; 4.10. Uize.Class.valueOf"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_10" title="4. Static Methods -&gt; 4.10. Uize.Class.valueOf">10</a>. </span>Uize.Class.valueOf</h2>
 		<div class="contents2">
-			<p>Returns the value of the class' <code>value</code> set-get property.</p>
+			<p>Returns the value of the class' <code>value</code> state property.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -1918,14 +1918,14 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 <pre class="sample-code">classValueANYTYPE = MyClass.valueOf ();
 </pre>
 			
-			<p>The <code><a href="#4_10">Uize.Class.valueOf</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. <code>Uize.Widget.Bar.Slider + 0</code>). This static method is implemented primarily to provide parity with the <code><a href="#3_12">valueOf Intrinsic Method</a></code>. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the <code>value</code> set-get property.</p>
+			<p>The <code><a href="#4_10">Uize.Class.valueOf</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. <code>Uize.Widget.Bar.Slider + 0</code>). This static method is implemented primarily to provide parity with the <code><a href="#3_12">valueOf Intrinsic Method</a></code>. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the <code>value</code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_8">toString Intrinsic Method</a></code>, and the <code>Uize.toString</code> static intrinsic method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_12">valueOf Intrinsic Method</a></code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the class does not register a <code>value</code> set-get property, then this method will return the value of the class' <code>value</code> property, and if the class has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the class does not register a <code>value</code> state property, then this method will return the value of the class' <code>value</code> property, and if the class has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
 			</table>
 		</div>
 		
@@ -2051,35 +2051,35 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 		<a name="6_1"></a>
 		<h2 class="heading2" title="6. Instance Events -&gt; 6.1. Changed.*"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_1" title="6. Instance Events -&gt; 6.1. Changed.*">1</a>. </span>Changed.*</h2>
 		<div class="contents2">
-			<p>The <code><a href="#6_1">Changed.*</a></code> instance event is a wildcard event that is fired whenever one or more set-get properties change value as a result of a call to the <code><a href="#3_7">set</a></code> instance method.</p>
+			<p>The <code><a href="#6_1">Changed.*</a></code> instance event is a wildcard event that is fired whenever one or more state properties change value as a result of a call to the <code><a href="#3_7">set</a></code> instance method.</p>
 			
-			<p>This event will only be fired once for all set-get properties that have changed value during a call to the <code><a href="#3_7">set</a></code> method. The event object for this event will contain a <code>properties</code> property, which is an object indicating which set-get properties have changed value, being a mapping between the public names of set-get properties that have changed and their new values.</p>
+			<p>This event will only be fired once for all state properties that have changed value during a call to the <code><a href="#3_7">set</a></code> method. The event object for this event will contain a <code>properties</code> property, which is an object indicating which state properties have changed value, being a mapping between the public names of state properties that have changed and their new values.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the related <code><a href="#6_2">Changed.[propertyName]</a></code> instance event</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>wiring a handler for the <code><a href="#6_1">Changed.*</a></code> event may have a slight performance impact, since this event will be fired any time that any set-get property changes value</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>wiring a handler for the <code><a href="#6_1">Changed.*</a></code> event may have a slight performance impact, since this event will be fired any time that any state property changes value</td></tr>
 			</table>
 		</div>
 		
 		<a name="6_2"></a>
 		<h2 class="heading2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]">2</a>. </span>Changed.[propertyName]</h2>
 		<div class="contents2">
-			<p>The <code>Uize.Class</code> base class implements a generalized mechanism for firing events when the values of set-get properties are changed.</p>
+			<p>The <code>Uize.Class</code> base class implements a generalized mechanism for firing events when the values of state properties are changed.</p>
 			
-			<p>This means that for any set-get property that is registered through the <code><a href="#4_3">Uize.Class.registerProperties</a></code> static method, a handler can be registered for a change in the value of that property without having to write any additional code to fire an event.</p>
+			<p>This means that for any state property that is registered through the <code><a href="#4_3">Uize.Class.registerProperties</a></code> static method, a handler can be registered for a change in the value of that property without having to write any additional code to fire an event.</p>
 			
 			<a name="6_2_1"></a>
 			<h3 class="heading3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.1. Event Naming"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]">2</a>.<a href="#6_2_1" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.1. Event Naming">1</a>. </span>Event Naming</h3>
 			<div class="contents3">
-				<p>The name of a changed event that fires is of the form <code><a href="#6_2">Changed.[propertyName]</a></code>, where <code>propertyName</code> is the primary public name of the set-get property. For example, if you registered a set-get property named <code>value</code>, then a <code>Changed.value</code> event would fire each time this property is changed.</p>
+				<p>The name of a changed event that fires is of the form <code><a href="#6_2">Changed.[propertyName]</a></code>, where <code>propertyName</code> is the primary public name of the state property. For example, if you registered a state property named <code>value</code>, then a <code>Changed.value</code> event would fire each time this property is changed.</p>
 			</div>
 			
 			<a name="6_2_2"></a>
 			<h3 class="heading3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.2. Property Aliases"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]">2</a>.<a href="#6_2_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.2. Property Aliases">2</a>. </span>Property Aliases</h3>
 			<div class="contents3">
-				<p>If a set-get property has aliases, handlers can be registered for the property's changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a set-get property was registered with the public names <code>color</code> and <code>hexRgb</code>, both <code>Changed.color</code> and <code>Changed.hexRgb</code> would be treated as equivalent.</p>
+				<p>If a state property has aliases, handlers can be registered for the property's changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a state property was registered with the public names <code>color</code> and <code>hexRgb</code>, both <code>Changed.color</code> and <code>Changed.hexRgb</code> would be treated as equivalent.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -2091,19 +2091,19 @@ myColorWidget.wire ('Changed.color',handleColorChange);
 myColorWidget.unwire ('Changed.hexRgb',handleColorChange);
 </pre>
 				
-				<p>In this example, the <code>handleColorChange</code> function would not be executed when the value of the <code>color</code> set-get property changes, because <code>Changed.color</code> and <code>Changed.hexRgb</code> are treated as equivalent and therefore the <code><a href="#3_11">unwire</a></code> statement effectively removes the handler registered in the previous statement.</p>
+				<p>In this example, the <code>handleColorChange</code> function would not be executed when the value of the <code>color</code> state property changes, because <code>Changed.color</code> and <code>Changed.hexRgb</code> are treated as equivalent and therefore the <code><a href="#3_11">unwire</a></code> statement effectively removes the handler registered in the previous statement.</p>
 			</div>
 			
 			<a name="6_2_3"></a>
 			<h3 class="heading3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.3. Must Use the set Method"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]">2</a>.<a href="#6_2_3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.3. Must Use the set Method">3</a>. </span>Must Use the set Method</h3>
 			<div class="contents3">
-				<p>The <code><a href="#6_2">Changed.[propertyName]</a></code> event will only fire for a particular set-get property if the value for that property is set using the <code><a href="#3_7">set</a></code> method, since it is within the <code><a href="#3_7">set</a></code> method that change detection occurs and the event is fired. If you simply assign a value by directly accessing the private name of the property, then the event will not fire.</p>
+				<p>The <code><a href="#6_2">Changed.[propertyName]</a></code> event will only fire for a particular state property if the value for that property is set using the <code><a href="#3_7">set</a></code> method, since it is within the <code><a href="#3_7">set</a></code> method that change detection occurs and the event is fired. If you simply assign a value by directly accessing the private name of the property, then the event will not fire.</p>
 			</div>
 			
 			<a name="6_2_4"></a>
 			<h3 class="heading3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.4. Only On Change, Not Every Set"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]">2</a>.<a href="#6_2_4" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.4. Only On Change, Not Every Set">4</a>. </span>Only On Change, Not Every Set</h3>
 			<div class="contents3">
-				<p>The <code><a href="#6_2">Changed.[propertyName]</a></code> event only fires for a particular set-get property when the value for that property is <b>changed</b> by using the <code><a href="#3_7">set</a></code> method. So, if the <code><a href="#3_7">set</a></code> method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.</p>
+				<p>The <code><a href="#6_2">Changed.[propertyName]</a></code> event only fires for a particular state property when the value for that property is <b>changed</b> by using the <code><a href="#3_7">set</a></code> method. So, if the <code><a href="#3_7">set</a></code> method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.</p>
 				
 				<p>Additionally, if a <code>conformer</code> is registered for the property and the action of the conformer results in the property value not being changed, then no event will be fired - even if the value specified in the <code><a href="#3_7">set</a></code> call is different to the current value of the property. This can be the case if the value is at an edge of its valid range, an attempt is made to set the value outside of its valid range, and the conformer has the action of constraining the value so that it remains at the same edge of its valid range.</p>
 			</div>

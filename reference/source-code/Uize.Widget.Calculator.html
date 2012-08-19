@@ -84,7 +84,7 @@
       Button Highlighting
         The =Uize.Widget.Calculator= class implements highlighting of the buttons that correspond to keys that are being pressed on the keyboard, to simulate the buttons being clicked.
 
-        For example, if you focus the =entry= widget's input node and press down on the "7" key, then the =digit7= button widget will highlight as if you were clicking down on it (ie. the value of its =state= set-get property will be set to ='down'=). The =digit7= button will remain in this highlighted state until the "7" key is released.
+        For example, if you focus the =entry= widget's input node and press down on the "7" key, then the =digit7= button widget will highlight as if you were clicking down on it (ie. the value of its =state= state property will be set to ='down'=). The =digit7= button will remain in this highlighted state until the "7" key is released.
 
         Some keys have less than obvious mappings. For instance, the "Enter" key is mapped to trigger calculation of a result, so pressing the "Enter" key will cause the =equals= button to highlight. This button is likely to have a "&amp;#61;" label, so highlighting of this button when the "&amp;#61;" key is pressed is more understandable. For convenience, though, both the "Enter" and "&amp;#61;" keys trigger this button's function.
 
@@ -178,7 +178,7 @@
 
       - clicking the =percent= button, or pressing the "%" key when the =entry= child widget's input field is focused
 
-      When a binary operation is completed, the value of the =activeOperand= set-get property is set to ='operandA'= and the =operandA= set-get property is used to store the result of the operation. This leaves the value of the =operandB= property unaltered so that it can be reused on subsequent compoundings of the operation. For more info, see the section `Operation Compounding`.
+      When a binary operation is completed, the value of the =activeOperand= state property is set to ='operandA'= and the =operandA= state property is used to store the result of the operation. This leaves the value of the =operandB= property unaltered so that it can be reused on subsequent compoundings of the operation. For more info, see the section `Operation Compounding`.
 
     Operation Compounding
       The =Uize.Widget.Calculator= class supports compounding of both unary *and* binary operations.
@@ -197,7 +197,7 @@
       Compounding Binary Operations
         Compounding a binary operation is done by repeatedly triggering the calculator's =equals= operation - just like with a regular physical calculator.
 
-        As soon as a binary operation is completed (see `Operation Completion`), it can then be compounded by clicking the =equals= button again. Upon each successive compounding, the new result is displayed in the =entry= field and is set as the value of the =operandA= set-get property, leaving the value of the =operandB= property unaltered so that it can be reused on subsequent compoundings of the operation.
+        As soon as a binary operation is completed (see `Operation Completion`), it can then be compounded by clicking the =equals= button again. Upon each successive compounding, the new result is displayed in the =entry= field and is set as the value of the =operandA= state property, leaving the value of the =operandB= property unaltered so that it can be reused on subsequent compoundings of the operation.
 
         So, for example, setting up the binary operation =3 x 1.25= and then clicking the =equals= button three times would be equivalent to the operation =3 x 1.25 x 1.25 x 1.25 &amp;#61;=. On each successive clicking of the =equals= button you would compound the operation of multiplying the current value in the =entry= widget by the value =1.25=. All binary operations can be compounded in this way. A compelling application of the compounding feature is compounding of percent operations (for more info, see the section `Percent Operation Compounding`).
 
@@ -222,7 +222,7 @@
       ............................................................
 
       Percent As Setup For Multiplication
-        When there is either no pending binary operation, or when there is a completed binary operation that can be compounded, then the =percent= function has the effect of dividing the current =entry= value by =100= and setting up a =multiply= operation (ie. setting the value of the =operator= set-get property to ='multiply'=).
+        When there is either no pending binary operation, or when there is a completed binary operation that can be compounded, then the =percent= function has the effect of dividing the current =entry= value by =100= and setting up a =multiply= operation (ie. setting the value of the =operator= state property to ='multiply'=).
 
         This behavior allows calculations such as...
 
@@ -303,11 +303,11 @@
 
       The following button enabling/disabling rules apply...
 
-      - the =equals= button is disabled when there is no pending or completed binary operation (ie. the value of the =operator= set-get property is =undefined=)
+      - the =equals= button is disabled when there is no pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
 
       - all buttons - except those that can be used to enter a new value, or that are not affected by the `Error State` (such as the =memoryClear= button) - will be disabled when the calculator widget is in the `Error State`
 
-      - the =memoryRecall= and =memoryClear= buttons are disabled when the memory is clear (ie. the value of the =memory= set-get property is =undefined=), and will be enabled whenever the calculator's memory is storing a value (=memory= is not =undefined=) - regardless of other state of the calculator widget
+      - the =memoryRecall= and =memoryClear= buttons are disabled when the memory is clear (ie. the value of the =memory= state property is =undefined=), and will be enabled whenever the calculator's memory is storing a value (=memory= is not =undefined=) - regardless of other state of the calculator widget
 
       - the =clear= and =clearEntry= buttons are always enabled
 
@@ -612,15 +612,15 @@ Uize.module ({
                           Clicking the =equals= button has the following effects...
 
                           - completes the pending binary operation (see the section `Operation Completion`), or compounds an already completed binary operation (see the section `Compounding Binary Operations`)
-                          - sets the value of the =activeOperand= set-get property to ='operandA'=
-                          - sets the value of the =operandA= set-get property and the value of the =entry= child widget to the result of the calculation
-                          - sets the value of the =activeOperand= set-get property to ='operandA'=
-                          - sets the value of the =clearOnNextDigit= set-get property to =true=
+                          - sets the value of the =activeOperand= state property to ='operandA'=
+                          - sets the value of the =operandA= state property and the value of the =entry= child widget to the result of the calculation
+                          - sets the value of the =activeOperand= state property to ='operandA'=
+                          - sets the value of the =clearOnNextDigit= state property to =true=
 
                           This button's function can also be triggered by a number of other interactions with the calculator widget (for more info, see the section `Operation Completion`).
 
                           NOTES
-                          - this button will be disabled if the calculator is in the `Error State`, or if there is not a pending or completed binary operation (ie. the value of the =operator= set-get property is =undefined=)
+                          - this button will be disabled if the calculator is in the `Error State`, or if there is not a pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
                     */
                   );
 
@@ -641,8 +641,8 @@ Uize.module ({
                           Clicking the =memoryPlus= button has the following effects...
 
                           - completes any pending binary operation (see the section `Operation Completion`)
-                          - sets the value of the =memory= set-get property to its current value plus the value of the =entry= child widget
-                          - sets the value of the =clearOnNextDigit= set-get property to =true=
+                          - sets the value of the =memory= state property to its current value plus the value of the =entry= child widget
+                          - sets the value of the =clearOnNextDigit= state property to =true=
 
                           NOTES
                           - see the companion =memoryMinus= child widget
@@ -661,8 +661,8 @@ Uize.module ({
                           Clicking the =memoryMinus= button has the following effects...
 
                           - completes any pending binary operation (see the section `Operation Completion`)
-                          - sets the value of the =memory= set-get property to its current value minus the value of the =entry= child widget
-                          - sets the value of the =clearOnNextDigit= set-get property to =true=
+                          - sets the value of the =memory= state property to its current value minus the value of the =entry= child widget
+                          - sets the value of the =clearOnNextDigit= state property to =true=
 
                           NOTES
                           - see the companion =memoryPlus= child widget
@@ -683,12 +683,12 @@ Uize.module ({
 
                           Clicking the =memoryRecall= button has the following effects...
 
-                          - sets the value of the =entry= child widget to the value of the =memory= set-get property
-                          - sets the value of the =clearOnNextDigit= set-get property to =true=
+                          - sets the value of the =entry= child widget to the value of the =memory= state property
+                          - sets the value of the =clearOnNextDigit= state property to =true=
 
                           NOTES
                           - see the related =memoryPlus=, =memoryMinus=, and =memoryClear= child widgets
-                          - this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= set-get property is =undefined=)
+                          - this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= state property is =undefined=)
                     */
                   );
                   _addChildButton (
@@ -704,12 +704,12 @@ Uize.module ({
 
                           Clicking the =memoryClear= button has the following effects...
 
-                          - sets the value of the =memory= set-get property to =undefined=
-                          - sets the value of the =clearOnNextDigit= set-get property to =true=
+                          - sets the value of the =memory= state property to =undefined=
+                          - sets the value of the =clearOnNextDigit= state property to =true=
 
                           NOTES
                           - see the related =memoryPlus=, =memoryMinus=, and =memoryRecall= child widgets
-                          - this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= set-get property is =undefined=)
+                          - this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= state property is =undefined=)
                     */
                   );
 
@@ -743,7 +743,7 @@ Uize.module ({
                           Clicking the =add= button has the following effects...
 
                           - completes any pending binary operation (see the section `Operation Completion`)
-                          - sets the value of the =operator= set-get property to ='add'=
+                          - sets the value of the =operator= state property to ='add'=
 
                           This button's function can also be triggered using the "+" (addition / plus character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
 
@@ -758,7 +758,7 @@ Uize.module ({
                           Clicking the =divide= button has the following effects...
 
                           - completes any pending binary operation (see the section `Operation Completion`)
-                          - sets the value of the =operator= set-get property to ='divide'=
+                          - sets the value of the =operator= state property to ='divide'=
 
                           This button's function can also be triggered using the "/" (division / forward slash character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
 
@@ -773,7 +773,7 @@ Uize.module ({
                           Clicking the =multiply= button has the following effects...
 
                           - completes any pending binary operation (see the section `Operation Completion`)
-                          - sets the value of the =operator= set-get property to ='multiply'=
+                          - sets the value of the =operator= state property to ='multiply'=
 
                           This button's function can also be triggered using the "&amp;#42;" (multiply / star / asterisk character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
 
@@ -785,12 +785,12 @@ Uize.module ({
                         subtract
                           An instance of the =Uize.Widget.Button= class, that lets the user set up the subtraction binary operation.
 
-                          If a binary operation has already been set up (ie. the value of the =operator= set-get property is no longer =undefined=) but a value has not yet been entered for the second operand (ie. the =operandB= set-get property is still set to =undefined=), then clicking this button will make it behave as a negation operation. For more info on this behavior, see the section `Subtraction as Negation`.
+                          If a binary operation has already been set up (ie. the value of the =operator= state property is no longer =undefined=) but a value has not yet been entered for the second operand (ie. the =operandB= state property is still set to =undefined=), then clicking this button will make it behave as a negation operation. For more info on this behavior, see the section `Subtraction as Negation`.
 
                           Otherwise, clicking the =subtract= button has the following effects...
 
                           - completes any pending binary operation (see the section `Operation Completion`)
-                          - sets the value of the =operator= set-get property to ='subtract'=
+                          - sets the value of the =operator= state property to ='subtract'=
 
                           This button's function can also be triggered using the "-" (minus / dash / hyphen character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
 
@@ -907,9 +907,9 @@ Uize.module ({
                           Clicking the =clear= button has the following effects...
 
                           - sets the value of the =entry= child widget to =0=
-                          - sets the value of the =operandA= set-get property to =0=
-                          - sets the value of the =operandB= set-get property to =undefined=
-                          - sets the value of the =operator= set-get property to =undefined=
+                          - sets the value of the =operandA= state property to =0=
+                          - sets the value of the =operandB= state property to =undefined=
+                          - sets the value of the =operator= state property to =undefined=
 
                           This button's function can also be triggered using the =Esc= or =Spacebar= keys on the keyboard (for more info, see the section `Using the Regular Keyboard`). To clear only the current entry in the =entry= child widget, the =clearEntry= button can be used.
 
@@ -995,15 +995,15 @@ Uize.module ({
           name:'activeOperand',
           value:'operandA'
           /*?
-            Set-get Properties
+            State Properties
               activeOperand
                 A read-only string, indicating the active operand in the currently pending binary operation.
 
-                Possible values for this property are ='operandA'= and ='operandB'=. The value of this property is automatically updated when the value of the =operator= set-get property is modified, and its value is automatically set to ='operandA'= whenever a pending binary operation is completed. The value of the =activeOperand= property determines which of the =operandA= and =operandB= set-get properties will be synchronized to the value of the =entry= child widget.
+                Possible values for this property are ='operandA'= and ='operandB'=. The value of this property is automatically updated when the value of the =operator= state property is modified, and its value is automatically set to ='operandA'= whenever a pending binary operation is completed. The value of the =activeOperand= property determines which of the =operandA= and =operandB= state properties will be synchronized to the value of the =entry= child widget.
 
                 NOTES
                 - this property is read-only
-                - see the related =operandA=, =operandB=, and =operator= set-get properties
+                - see the related =operandA=, =operandB=, and =operator= state properties
                 - the initial value is ='operandA'=
           */
         },
@@ -1011,7 +1011,7 @@ Uize.module ({
           name:'clearOnNextDigit',
           onChange:_classPrototype._updateUiPointButtonState
           /*?
-            Set-get Properties
+            State Properties
               clearOnNextDigit
                 A read-only boolean, indicating whether or not the very next entered digit should clear the current value of the =entry= child widget.
 
@@ -1031,7 +1031,7 @@ Uize.module ({
           name:'memory',
           onChange:_classPrototype._updateUiMemoryButtonsState
           /*?
-            Set-get Properties
+            State Properties
               memory
                 A number, representing the current value of the calculator's memory function.
 
@@ -1045,16 +1045,16 @@ Uize.module ({
           name:'operandA',
           conformer:_conformToNumber
           /*?
-            Set-get Properties
+            State Properties
               operandA
                 A read-only number, representing the first operand in the currently pending binary operation.
 
-                When the value of the =activeOperand= set-get property is set to ='operandA'=, then the value of the =entry= child widget will be reflected in the =operandA= property. This means that the value of =operandA= would update as the user enters a value - either using the buttons of the calculator or the keys of their keyboard.
+                When the value of the =activeOperand= state property is set to ='operandA'=, then the value of the =entry= child widget will be reflected in the =operandA= property. This means that the value of =operandA= would update as the user enters a value - either using the buttons of the calculator or the keys of their keyboard.
 
                 NOTES
                 - this property is read-only
-                - see the comapanion =operandB= set-get property
-                - see the related =activeOperand= and =operator= set-get properties
+                - see the comapanion =operandB= state property
+                - see the related =activeOperand= and =operator= state properties
                 - the initial value is =undefined=
           */
         },
@@ -1062,16 +1062,16 @@ Uize.module ({
           name:'operandB',
           conformer:_conformToNumber
           /*?
-            Set-get Properties
+            State Properties
               operandB
                 A read-only number, representing the second operand in the currently pending binary operation.
 
-                When the value of the =activeOperand= set-get property is set to ='operandB'=, then the value of the =entry= child widget will be reflected in the =operandB= property. This means that the value of =operandB= would update as the user enters a value - either using the buttons of the calculator or the keys of their keyboard.
+                When the value of the =activeOperand= state property is set to ='operandB'=, then the value of the =entry= child widget will be reflected in the =operandB= property. This means that the value of =operandB= would update as the user enters a value - either using the buttons of the calculator or the keys of their keyboard.
 
                 NOTES
                 - this property is read-only
-                - see the comapanion =operandA= set-get property
-                - see the related =activeOperand= and =operator= set-get properties
+                - see the comapanion =operandA= state property
+                - see the related =activeOperand= and =operator= state properties
                 - the initial value is =undefined=
           */
         },
@@ -1089,16 +1089,16 @@ Uize.module ({
             _classPrototype._updateUiEqualsButtonState
           ]
           /*?
-            Set-get Properties
+            State Properties
               operator
                 A string, representing the currently pending binary operation.
 
                 Possible values for this property are: ='divide'=, ='multiply'=, ='subtract'=, ='add'=, and =undefined= (no currently pending binary operation).
 
-                Whenever the value of this property is changed, the value of the =operandB= set-get property will be set to =undefined=, and the value of the =activeOperand= set-get property will be set to either ='operandA'= if =operator= is set to =undefined=, or ='operandB'= if =operator= is set to one of the supported string values.
+                Whenever the value of this property is changed, the value of the =operandB= state property will be set to =undefined=, and the value of the =activeOperand= state property will be set to either ='operandA'= if =operator= is set to =undefined=, or ='operandB'= if =operator= is set to one of the supported string values.
 
                 NOTES
-                - see the related =activeOperand=, =operandA=, and =operandB= set-get properties
+                - see the related =activeOperand=, =operandA=, and =operandB= state properties
                 - the initial value is =undefined=
           */
         },
@@ -1108,12 +1108,12 @@ Uize.module ({
           onChange:function () {this.set (this._activeOperand,this._value)},
           value:0
           /*?
-            Set-get Properties
+            State Properties
               value
                 A number, representing the result of the calculation performed by the widget.
 
                 NOTES
-                - see the related =activeOperand=, =operandA=, and =operandB= set-get properties
+                - see the related =activeOperand=, =operandA=, and =operandB= state properties
                 - the initial value is =0=
           */
         }

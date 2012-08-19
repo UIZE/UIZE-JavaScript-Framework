@@ -8,8 +8,8 @@ Wipe Presets Have Migrated
 Bug Fixes
 	The following bugs have been fixed...
 
-	- a bug with handling of the =dissolve= set-get property that was causing opacity of panes to get left in a bad state when interrupting a fade with dissolve and initiating a fade without dissolve
-	- a bug with handling of the =allToFull= set-get property that was causing crud to be left on the right and bottom edges as a result of the previous image showing through because of an off-by-one error in calculation
+	- a bug with handling of the =dissolve= state property that was causing opacity of panes to get left in a bad state when interrupting a fade with dissolve and initiating a fade without dissolve
+	- a bug with handling of the =allToFull= state property that was causing crud to be left on the right and bottom edges as a result of the previous image showing through because of an off-by-one error in calculation
 
 
 

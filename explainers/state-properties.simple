@@ -1,0 +1,1258 @@
+Introduction
+	The UIZE JavaScript Framework eases state management in complex applications by implementing state oriented features, such as its state properties.
+
+	A cornerstone of the framework's state oriented design is its state property mechanism. This mechanism provides facilities for registering and managing state interfaces for classes and their instances.
+
+	State Oriented Programming
+		The Joy of Reflection
+			An invaluable feature, when using JavaScript in the context of a Web document, is *reflection*.
+
+			The reflection of an element node's attributes and style properties to the JavaScript scripting language, combined with the ability of a document to modify itself through that language, provides an intuitive and lightweight way to modify the state of the user interface, without understanding the inner working of how state change is managed by the browser's layout / rendering engine.
+
+			This is a huge load off the mind of a Web UI engineer, since undoubtedly there are any number of very clever ways in which handling state change is optimized for different scenarios, and undoubtedly there are any number of specific updater methods that are kicked off in carefully chosen order under different circumstances. The UI engineer doesn't have to care about what the browser has to do in order to synchronize the display to a changed state. The change could be minimal, or it could be very major.
+
+		Make It So
+			The UIZE JavaScript Framework adopts a similar tack, providing a state interface through its state properties mechanism.
+
+			In spirit, a widget class should expose its state through the state properties, and should register =onChange= handlers for these properties, as appropriate, in order to synchronize the UI to a changed state. The application developer using the widgets then does not have to worry about a suite of updater methods and understand why two should be used in a specific order in one case, but three should be used in any order in some other case (for example). We call this the *"make it so"* principle. You tell an instance what state it should be in, and it figures out how to get all its junk into that new state.
+
+	Benefits of the State Property Mechanism
+		The state property mechanism provides a convenient system for managing state properties, including providing an easy way for code to...
+
+		- set defaults for a class's state properties
+		- register code to handle changes in the values of state properties
+		- register code to conform values of state properties
+		- register aliases for state properties to ease backwards compatibility
+
+	State Properties vs. Regular Properties
+		It is not uncommon for the implementation of a class to utilize a combination of regular old properties and state properties.
+
+		Regular properties are any old properties assigned on the class or its instances. State properties are specifically registered through the =MyClass.registerProperties= static method inherited from the =Uize.Class= base class.
+
+		Properties on Steroids
+			State properties are accessed through the =set= and =get= methods, unlike regular properties that are accessed normally.
+
+			In order to set a value for a registered state property, the =set= method must be used in order to obtain the benefits of =onChange= handlers, =conformer= functions, the =Change.*= virtual event, and other facilities provided in the state property mechanism. In a nutshell, state properties are properties on steroids. They have more intelligence.
+
+		### Harmonious Co-existence
+			EXAMPLE
+			...................................
+			MyClass.limit = function (_value) {
+				// code to limit value
+			};
+
+			MyClass.registerProperties () {
+				_limit:'limit'
+			};
+			...................................
+
+The Basics
+	At the most basic level, using state properties is pretty straightforward. Let's consider a few common operations...
+
+	Registering a State Property
+		State properties can be easily registered for a class, using the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class, as follows...
+
+		............................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({_propertyName:'propertyName'});
+		............................................................
+
+		The above statement registers the state property with the public name =propertyName= and the private name =_propertyName=.
+
+	Setting a State Property's Value
+		Once a state property has been registered, its value can be easily set using the =set= instance method that is inherited from the =Uize.Class= base class, as follows...
+
+		.............................................
+		var myClass = new MyClass;
+		myClass.set ({propertyName:'propertyValue'});
+		.............................................
+
+	Getting a State Property's Value
+		Once a state property has been registered, its value can be easily queried using the =get= instance method that is inherited from the =Uize.Class= base class, as follows...
+
+		.............................................
+		var myClass = new MyClass;
+		myClass.set ({propertyName:'propertyValue'});
+		alert (myClass.get ('propertyName'));
+		.............................................
+
+		In the above code, the =alert= statement will display the text =propertyValue= in the alert dialog.
+
+	Setting During Construction
+		Once a state property has been registered, its value can be easily set during construction of a new instance of your class, as follows...
+
+		.......................................................
+		var myClass = new MyClass ({propertyName:'propertyValue'});
+		alert (myClass.get ('propertyName'));
+		.......................................................
+
+		In the above code, the =alert= statement will display the text =propertyValue= in the alert dialog.
+
+	Now It Gets Interesting
+		What good is a state property mechanism if it doesn't facilitate something useful?
+
+		Conforming a value is one such thing that is facilitated by the state property mechanism of the UIZE JavaScript Framework. When registering state properties it is possible to register a =conformer= function to enforce valid values. Let's consider an example...
+
+		.........................................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({
+			_percentLoaded:{
+				name:'percentLoaded',
+				conformer:function (_value) {return Uize.constrain (_value,0,100)},
+				value:0
+			}
+		});
+		var myClass = new MyClass ({percentLoaded:200});
+		alert (myClass.get ('percentLoaded'));
+		.........................................................................
+
+		In the above code, the =alert= statement will display the text =100= in the alert dialog.
+
+		This example uses the extended form for registering a state property that lets you define the property's "profile" (but we'll get into that in more detail a bit later). In the example, a =conformer= function is registered for the =percentLoaded= state property, that conforms the property's value so that it doesn't fall outside of the range of =0= to =100=. So, even though the code is trying to set the property's value to =200= during construction of an instance, the conformer conforms the value to not fall out of bounds.
+
+		Custom conformer functions are discussed in more detail in the section `Conformer Function`.
+
+More on Setting Values
+	Always Use Set
+		Values for state properties should always be set using the =set= method.
+
+		This is the only way to ensure that =conformer= functions and =onChange= handlers registered for state properties are invoked, and that handlers registered for the `Changed.[propertyName] Virtual Event` and the `Changed.&#42; Wildcard Event` are executed.
+
+		INSTEAD OF...
+		.....................................
+		this._propertyName = 'propertyValue';
+		.....................................
+
+		USE...
+		..........................................
+		this.set ({propertyName:'propertyValue'});
+		..........................................
+
+	Setting a Value Using the Private Name
+		It is possible, within the code module that registers a particular state property, to set a value for that property using the property's private name.
+
+		For example, if a module registers a state property with the public name =propertyName= and the private name =_propertyName=, then code within that module could set a value for that property, using either the public or private name, as follows...
+
+		......................................................................
+		this.set ({propertyName:'propertyValue'});   // using the public name
+		this.set ({_propertyName:'propertyValue'});  // using the private name
+		......................................................................
+
+		Both of the above statements would have the same effect, provided that this code is within the implementation for some instance method within the code module that defines the class and all its state properties (and not some subclass or application code that uses the class). The benefit of using the private name is that it will be scrunched down by the Scruncher, thereby reducing the scrunched code size.
+
+	Setting a Value for a Dynamically Selected State Property
+		Occasionally, it becomes necessary to set the value for a state property whose name is dynamically determined by an expression, or passed as a parameter to some method.
+
+		This can be done by using the form of the =set= method that takes two parameters: the name of a state property, and the value it should be set to.
+
+		Consider the following example...
+
+		...............................................................
+		_classPrototype.increment = function (_propertyName,_amount) {
+			this.set (_propertyName,this.get (_propertyName) + _amount);
+		};
+		...............................................................
+
+		In the above example, an instance method has been defined that accepts the name of a state property as its first parameter and an increment amount as its second parameter. Once the current value for the specified property has been retrieved using the =get= method, it is then incremented and set using the form of the =set= method that takes property name and value as its two parameters. Easy.
+
+	Toggling a State Property
+		The =Uize.Class= base class provides a convenient way to toggle the value of a boolean state property, in the form of the =toggle= instance method.
+
+		INSTEAD OF...
+		...........................................................
+		myClass.set ({propertyName:!myClass.get ('propertyName')});
+		...........................................................
+
+		USE...
+		................................
+		myClass.toggle ('propertyName');
+		................................
+
+	Setting Values for Multiple State Properties
+		The =set= method lets you set values for multiple state properties in a single call.
+
+		The parameter passed to the =set= method is an object, containing values for all the state properties you wish to set.
+
+		INSTEAD OF...
+		...............................................
+		myClass.set ({property1Name:'property1Value'});
+		myClass.set ({property2Name:'property2Value'});
+		myClass.set ({property3Name:'property3Value'});
+		...............................................
+
+		USE...
+		..................................
+		myClass.set ({
+			property1Name:'property1Value',
+			property2Name:'property2Value',
+			property3Name:'property3Value'
+		});
+		..................................
+
+		In the above example, values for the =property1Name=, =property2Name=, and =property3Name= state properties are being set. There is no limit to the number of state properties that can be set in the same call to the =set= method.
+
+		The performance benefits from calling the =set= method only once include...
+
+		- you're dereferencing the instance to access the =set= method only once, so less processor overhead
+		- you're calling the method's function only once, so less processor overhead
+		- you're creating a fresh object for the property values bundle only once, so less processor overhead
+		- any =onChange= handlers registered for all of the state properties will only get executed once for changes in any or all of the state properties' values, rather than for a change in each property's value (this is a more esoteric subject that is covered in more detail later on)
+
+More on Getting Values
+	Using the Private Name
+		When accessing the value for a particular state property inside the code module that registers that property, the private name can be used.
+
+		For example, if a module registers a state property with the public name =propertyName= and the private name =_propertyName=, then code within that module could get the value for that property, using either the public or private name, as follows...
+
+		.............................................................
+		alert (this.get ('propertyName'));  // using the public name
+		alert (this._propertyName);         // using the private name
+		.............................................................
+
+		Both of the above statements would have the same effect, provided that this code is within the implementation for some instance method within the code module that defines the class and all its state properties (and not some subclass or application code that uses the class). The benefit of using the private name is that it will be scrunched down by the Scruncher, thereby reducing the scrunched code size.
+
+	Getting a Value for a Dynamically Selected State Property
+		Because the =get= method accepts a string parameter, specifying the name of the state property being accessed, getting values for properties that are dynamically determined by an expression (or passed as a parameter to some method) is easy.
+
+		Consider the following example...
+
+		...............................................................
+		_classPrototype.increment = function (_propertyName,_amount) {
+			this.set (_propertyName,this.get (_propertyName) + _amount);
+		};
+		...............................................................
+
+		In the above example, an instance method has been defined that accepts the name of a state property as its first parameter and an increment amount as its second parameter. The method then proceeds to increment the specified state property by the specified amount. Nothing special needs to be done to access the state property's value because the =get= method already takes a parameter for specifying the property's name.
+
+	Getting Values for Multiple State Properties
+		When an array of state property names is supplied to the =get= method, the method obtains the values for the specified properties and returns them in an object, where the keys of the object are the property names and the values are, well, the values.
+
+		Let's consider an example...
+
+		.............................................................................
+		myClass.set ({
+			property1Name:'property1Value',
+			property2Name:'property2Value',
+			property3Name:'property3Value',
+			property4Name:'property4Value',
+			property5Name:'property5Value'
+		});
+		var values = myClass.get (['property1Name','property2Name','property3Name']);
+		.............................................................................
+
+		In the above example, the values for five state properties are being set in the =set= method call. Then, the =get= method is being called with an array type value that specifies the names of just three of those properties, and its result is assigned to the =values= variable. After the code is executed, =values= will be an object with the contents...
+
+		..................................
+		{
+			property1Name:'property1Value',
+			property2Name:'property2Value',
+			property3Name:'property3Value'
+		}
+		..................................
+
+		Transferring State
+			The multiple state properties form of the =get= method is useful for obtaining "bundles of state" that can then be transferred to other instances using the =set= method.
+
+			This convenience provides for some code size optimization.
+
+			INSTEAD OF...
+			..............................................................
+			myClass2.set ({property1Name:myClass1.get ('property1Name')});
+			myClass2.set ({property2Name:myClass1.get ('property2Name')});
+			myClass2.set ({property3Name:myClass1.get ('property3Name')});
+			..............................................................
+
+			USE...
+			................................................................................
+			myClass2.set (myClass1.get (['property1Name','property2Name','property3Name']));
+			................................................................................
+
+			The laborious first form is calling the get and set methods three times - one for each state property - in order to transfer the state of the properties from the instance =myClass1= to =myClass2=. The more concise second form performs only one get to obtain the state for all three properties from =myClass1=, and then supplies that property values object to the set method in order to set those values on =myClass2=.
+
+			Besides just being more concise, the second form also may have performance benefits when writing classes with state properties that have sophisticated =onChange= handler code, in some cases avoiding multiple redundant updates from being triggered. The subject of =onChange= handlers and update optimization will be discussed in more detail later on.
+
+	Getting Values for All State Properties
+		When no parameter is specified in the call to the =get= method, the method obtains the values for *all* the registered properties and returns them in an object, where the keys of the object are the property names and the values are the property values.
+
+		Let's consider an example...
+
+		................................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({
+			_property1Name:{name:'property1Name',value:'property1Value'},
+			_property2Name:{name:'property2Name',value:'property2Value'},
+			_property3Name:{name:'property3Name',value:'property3Value'}
+		});
+		var
+			myClass = new MyClass,
+			values = myClass.get ()
+		;
+		................................................................
+
+		After the above code is executed, the =values= variable will be an object with the contents...
+
+		..................................
+		{
+			property1Name:'property1Value',
+			property2Name:'property2Value',
+			property3Name:'property3Value'
+		}
+		..................................
+
+More on Registering State Properties
+	As illustrated earlier, registering state properties is done by calling the =MyClass.registerProperties= static method on your class.
+
+	Property Profiles
+		The parameter passed to this method should be an object, whose properties' names are the private/internal names for the state properties being registered, and where the value for each property is a profile for each state property.
+
+		The profile for a state property can take two forms: `The Minimal Profile`, and `The Complete Profile`.
+
+	The Minimal Profile
+		The minimal profile is a shorthand for registering a state property, where the only thing being registered is a mapping between a private name and a public name.
+
+		EXAMPLE
+		............................................................
+		MyClass.registerProperties ({_propertyName:'propertyName'});
+		............................................................
+
+		In the above example, a state property is being registered, with the private name =_propertyName= and the public name =propertyName=. It can be accessed in the class' implementation in an instance method as =this._propertyName=, set in the class' implementation in an instance method as =this.set ({_propertyName:'propertyValue'})=, and set outside of the class' implementation in application code in a statement such as =myClass.set ({propertyName:'propertyValue'})= (where =myClass= is an instance of the class =MyClass=).
+
+		IMPORTANT
+
+		When registering state properties using the minimal profile, those properties cannot utilize the more advanced features of state properties, such as =onChange= handlers, =conformer= functions, =value= defaults, etc. that are available when using `The Complete Profile`. Without specifying an initial value for state properties using the =value= property of `The Complete Profile`, state properties will be initialized to the value =undefined= when creating new instances of a class.
+
+	The Complete Profile
+		Unlike `The Minimal Profile`, the complete profile lets you utilize the more advanced features of state properties, such as =onChange= handlers, =conformer= functions, =value= defaults, etc.
+
+		EXAMPLE
+		....................................................................................
+		MyClass.registerProperties ({
+			_percentLoaded:{
+				name:'percentLoaded',
+				conformer:function (_value) {return Uize.constrain (_value,0,100)},
+				onChange:function () {
+					if (this.isWired) this.setNodeValue ('percentLoaded',this._percentLoaded);
+				},
+				value:0
+			}
+		});
+		....................................................................................
+
+		In the above example, a state property with the public name =percentLoaded= and the private name =_percentLoaded= is being registered.
+
+		The =name= property in the profile specifies the property's public name. A =conformer= function is registered that is executed each time there is an attempt to set a new value for =percentLoaded=, and this function's implementation ensures that the property's value does not fall outside of the valid range of =0= to =100=. An =onChange= handler function is registered that is executed each time the value of =percentLoaded= changes, and this function's implementation displays the current value in a node in the document (we're assuming this code is transplanted from a widget class' implementation). Finally, the =value= property in the profile specifies the initial value for =percentLoaded=, for all freshly minted instances of =MyClass=.
+
+	Mixing Profile Types
+		For any state property, you can use either `The Minimal Profile` or `The Complete Profile`.
+
+		So, when registering multiple state properties in one call to the =MyClass.registerProperties= static method, you can use a combination of both profile types, as suits your needs.
+
+		EXAMPLE
+		....................................................................................
+		MyClass.registerProperties ({
+			_propertyName:'propertyName',
+			_percentLoaded:{
+				name:'percentLoaded',
+				conformer:function (_value) {return Uize.constrain (_value,0,100)},
+				onChange:function () {
+					if (this.isWired) this.setNodeValue ('percentLoaded',this._percentLoaded);
+				},
+				value:0
+			}
+		});
+		....................................................................................
+
+		In the above example, two state properties are being registered. =propertyName= is being registered using `The Minimal Profile`, while =percentLoaded= is being registered using `The Complete Profile`.
+
+	### Ad hoc Registering Through Set
+		- using the set method with an unrecognized property name results in it being auto-registered
+
+	Public Name Defaulting
+		If a public name is not specified for a state property, the public name is defaulted to be same as the private name. This offers two intriguing flavors of state properties (discussed below).
+
+		When registering a state property, one specifies a mapping between its private name and its public name. With the `The Minimal Profile`, this is done by specifying a string value for the key that represents the property's private name. With `The Complete Profile`, this is done by specifying a value for the =name= property in the profile object. Now, if the public name is =undefined=, =null=, or an empty string, then the public name will be defaulted to the private name.
+
+		Naked State Properties
+			By using an unscrunchable (effectively public) name for a state property's private name, and not specifying the public name so that it defaults to its unscrunchable private name, you end up with a "naked" state property whose value can be accessed outside of the implementation for a class (such as in application code) with a simple dereferencing.
+
+			EXAMPLE
+			.....................................................................................
+			MyClass.registerProperties ({
+				prop1:null,        // private & public name is prop1 - accessible as myClass.prop1
+				prop2:'',          // private & public name is prop2 - accessible as myClass.prop2
+				prop3:{value:10},  // private & public name is prop3 - accessible as myClass.prop3
+				prop4:'prop4',     // SILLY!!! don't specify public name here - let it default
+				prop5:{            // SILLY!!! don't specify public name here - let it default
+					name:'prop5',
+					value:10
+				}
+			});
+			.....................................................................................
+
+			In the above example, all the state properties have public names that are the same as their unscrunchable private names. While =prop1= should still be set using the =set= method, as in =myClass.set ({prop1:'value'})=, it can be accessed using a simple dereferencing, as in =myClass.prop1=.
+
+			USE WITH CAUTION
+
+			This technique doesn't offer the code size benefits of scrunching, but in certain *exceptional* cases it may offer sufficiently compelling performance benefits where it is more desirable to avoid an extra method call in order to access a state property's value. Using this technique should be the exception rather than the norm. It's not recommended, but it doesn't hurt to be aware of it.
+
+		Private State Properties
+			By using a scrunchable name for a state property's private name (this is the typical the case, of course), and by not specifying the public name so that it defaults to its private name, you end up with what is effectively a private state property that can only be used within the class that defines it.
+
+			EXAMPLE
+			..............................................................................
+			MyClass.registerProperties ({
+				_prop1:null,         // private & public name is _prop1 - will be scrunched
+				_prop2:'',           // private & public name is _prop2 - will be scrunched
+				_prop3:{value:10},   // private & public name is _prop3 - will be scrunched
+				_prop4:'_prop4',     // WRONG!!! string literal '_prop4' won't be scrunched
+				_prop5:{             // WRONG!!! string literal '_prop5' won't be scrunched
+					name:'_prop5',
+					value:10
+				}
+			});
+			..............................................................................
+
+			In the above example, the state properties =_prop1=, =_prop2=, and =_prop3= are all private. Because their names will be scrunched, these names cannot be relied upon by application code outside of the class' implementation. Code inside the class can, however, access the properties (eg. =this.set ({_prop1:'value'})= or =this._prop1=). The benefit of a private state property is that you can employ the mechanisms that come with state properties, such as =onChange= handlers and =conformer= functions.
+
+			IMPORTANT
+
+			In contrast to =_prop1=, =_prop2=, and =_prop3=, =_prop4= and =_prop5= are not correctly registered as private state properties because the public name is specified in a string literal, which is not scrunched. So, these two state properties will be accessible outside the class' implementation as =_prop4= and =_prop5=. They won't be private!
+
+	Public Aliases
+		Through a facility of the =name= property in the profile of a state property, multiple alternate public names can be specified for a state property.
+
+		Basically, when you specify the public name of a state property you can specify a pipe-separated list of public names, of the form...
+
+		.........................................
+		'publicName1|publicName2|...|publicNameN'
+		.........................................
+
+		EXAMPLE
+		...........................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({_title:'title|displayTitle'});
+		var myClass = new MyClass;
+		myClass.set ({displayTitle:'HELLO'});
+		alert (myClass.get ('title'));
+		...........................................................
+
+		In the above example, a state property is being registered for the class =MyClass=, with the two public names =title= and =displayTitle=. When creating an instance of =MyClass=, a call to set the value for =displayTitle= is equivalent to setting the value for =title=, since both public names map to the same underlying state property. So, in the above code, the =alert= statement will display the text =HELLO= in the alert dialog.
+
+		Of course, aliases can be specified also when using `The Complete Profile`, as in...
+
+		.............................................................................
+		MyClass.registerProperties ({
+			_title:{
+				name:'title|displayTitle',
+				conformer:function (_value) {
+					// coerce to a string, default to empty string for null or undefined
+					return _value == undefined ? '' : _value + '';
+				},
+				value:'untitled'
+			}
+		});
+		.............................................................................
+
+		BENEFITS
+
+		One of the benefits of public aliases for state properties is that it eases the evolution of interfaces over time. One can officially change the name of a state property, while deprecating the old name and continuing to support it for some time for backwards compatibility.
+
+	Initial Value
+		When using the `The Complete Profile` form to register a state property, an initial value for a property can be specified using the =value= property of the profile.
+
+		EXAMPLE
+		.........................................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({
+			_propertyName:'propertyName',
+			_active:{
+				name:'active',
+				onChange:function () {
+					// do something
+				}
+			},
+			_percentLoaded:{
+				name:'percentLoaded',
+				conformer:function (_value) {return Uize.constrain (_value,0,100)},
+				value:0
+			}
+		});
+		var myClass = new MyClass;
+		alert (myClass.get ('propertyName'));   // will alert the value undefined
+		alert (myClass.get ('active'));         // will alert the value undefined
+		alert (myClass.get ('percentLoaded'));  // will alert the value 0
+		.........................................................................
+
+		If a state property is registered using `The Minimal Profile`, or if it is registered using the `The Complete Profile` but no =value= property is specified in the profile, then the state property will be set to =undefined= for all freshly minted instances.
+
+	onChange
+		When using the `The Complete Profile` form to register a state property, an =onChange= handler function can be registered to respond to changes in the property's value.
+
+		EXAMPLE
+		....................................................................................
+		MyClass.registerProperties ({
+			_percentLoaded:{
+				name:'percentLoaded',
+				conformer:function (_value) {return Uize.constrain (_value,0,100)},
+				onChange:function () {
+					if (this.isWired) this.setNodeValue ('percentLoaded',this._percentLoaded);
+				},
+				value:0
+			}
+		});
+		....................................................................................
+
+		In the above example, the =_percentLoaded= state property is being registered. An =onChange= handler function is registered that is executed each time the property's value changes, and this function's implementation displays the current value in a node in the document (we're assuming this code is transplanted from a widget class' implementation).
+
+		Executed Even on First Change
+			An =onChange= handler registered for a state property is executed *every time* that the property's value changes - even when the property is initialized to an initial value during construction of an instance.
+
+			During construction of an instance of a class, the value of each registered state property starts out as =undefined=. If an initial value is specified for the property (using the =value= property of the profile), then the value is set during construction, and a change in value from =undefined= to the specified initial value will trigger any =onChange= handler registered for the property.
+
+			EXAMPLE 1
+			..........................................................
+			var MyClass = Uize.Class.subclass ();
+			function _updateArea () {
+				this.set ({area:this._width * this._height});
+			}
+			MyClass.registerProperties ({
+				_area:'area',
+				_height:{
+					name:'height',
+					value:10,
+					onChange:_updateArea
+				},
+				_width:{
+					name:'width',
+					value:10,
+					onChange:_updateArea
+				}
+			});
+			myClass = new MyClass;
+			alert (myClass.get ('area'));  // will alert the value 100
+			..........................................................
+
+			In the above example, the =area= state property is registered. An =onChange= handler registered for each of the =width= and =height= state properties updates the value of =area= to be the product of =width= and =height=. Now, even though there is no call to the =set= method to set values for =width= and =height=, the value of =area= is correct immediately after construction of the =myClass= instance. This is because the =onChange= handler for =width= and =height= is executed the first time their values change from =undefined= to their registered initial value of =10=.
+
+			This behavior can be both a good thing and a bad thing. Without a question, it's something that needs to be kept in mind when writing =onChange= handler code. In the previous example, it was actually a convenient behavior. However, in some cases it may be necessary to conditionalize some code inside an =onChange= handler in order to make sure it's not executed too early on in the setup of an instance, such as when not every aspect of the instance is fully set up and ready/safe for the =onChange= code to be executed.
+
+			EXAMPLE 2
+			....................................................................................
+			MyClass.registerProperties ({
+				_percentLoaded:{
+					name:'percentLoaded',
+					conformer:function (_value) {return Uize.constrain (_value,0,100)},
+					onChange:function () {
+						if (this.isWired) this.setNodeValue ('percentLoaded',this._percentLoaded);
+					},
+					value:0
+				}
+			});
+			....................................................................................
+
+			In the above example, an =onChange= handler function is registered that is executed each time the value of =percentLoaded= changes, and this function's implementation displays the current value in a node in the document (we're assuming this code is transplanted from a widget class' implementation).
+
+			In this particular case, we don't want to touch the DOM during construction of the instance and before the widget has been wired up, since this would drastically limit the flexibility of the widget class and how application code using the class could control setup of the application logic. So, in the =onChange= handler's implementation the code is conditionalized to check on the wired state of the instance. If the instance isn't wired yet, the DOM is not touched. Other cases like this may arise, where only certain aspects of handling a change in value of a state property should be enabled during construction.
+
+		Only Executed on Changes
+			An =onChange= handler registered for a state property is only executed when the value of the property changes - not on each attempt to set its value.
+
+			So, for example, repeated attempts to set a state property to the same value will not result in repeated execution of the =onChange= handler - only for the first set that changes the property's value.
+
+			EXAMPLE
+			.................................................................................
+			var MyClass = Uize.Class.subclass ();
+			MyClass.registerProperties ({
+				_percentLoaded:{
+					name:'percentLoaded',
+					onChange:function () {alert (this._percentLoaded)},
+					value:0
+				}
+			});
+			var myClass = new MyClass;         // will alert the text 0
+			myClass.set ({percentLoaded:10});  // will alert the text 10
+			myClass.set ({percentLoaded:10});  // does nothing (because value doesn't change)
+			myClass.set ({percentLoaded:10});  // does nothing (because value doesn't change)
+			myClass.set ({percentLoaded:10});  // does nothing (because value doesn't change)
+			.................................................................................
+
+			In the above example, there are four attempts to set the value of the =percentLoaded= state property to =10=. Only the first of those results in the property's value actually *changing* to =10=, so the =onChange= handler is only executed for the first of those sets, and you see the alert with the text "10" only once.
+
+			Similarly, if a =conformer= function is defined for the state property, then multiple attemps to set different values could still result in the value changing only once, if, for example, the registered conformer function has the effect of constraining the value of the property to a range.
+
+			EXAMPLE
+			.............................................................................
+			var MyClass = Uize.Class.subclass ();
+			MyClass.registerProperties ({
+				_percentLoaded:{
+					name:'percentLoaded',
+					conformer:function (_value) {return Uize.constrain (_value,0,100)},
+					onChange:function () {alert (this._percentLoaded)},
+					value:0
+				}
+			});
+			var myClass = new MyClass;          // will alert the text 0
+			myClass.set ({percentLoaded:100});  // will alert the text 100
+			myClass.set ({percentLoaded:200});  // does nothing (because value stays 100)
+			myClass.set ({percentLoaded:300});  // does nothing (because value stays 100)
+			myClass.set ({percentLoaded:400});  // does nothing (because value stays 100)
+			.............................................................................
+
+			In the above example, there are four attempts to set the value of the =percentLoaded= state property. Only the first of those results in the property's value actually *changing* to =100=, so the =onChange= handler is only executed for the first of those sets, and you see the alert with the text "100" only once. The other three set attempts all result in the value being constrained to the upper limit of =100= by the conformer function, and so they produce no change in the property's value.
+
+		Called as Instance Method
+			An =onChange= handler registered for a state property is called as a method on the instance to which the state property belongs, so it can access other state and methods for the instance using the =this= keyword, including the current value for the property for which the handler is registered.
+
+			EXAMPLE
+			................................................
+			var MyClass = Uize.Class.subclass ();
+			function _updateArea () {
+				this.set ({area:this._width * this._height});
+			}
+			MyClass.registerProperties ({
+				_area:'area',
+				_height:{
+					name:'height',
+					value:10,
+					onChange:_updateArea
+				},
+				_width:{
+					name:'width',
+					value:10,
+					onChange:_updateArea
+				}
+			});
+			................................................
+
+			In the above example, the =_updateArea= function is registered as the =onChange= handler for both the =width= and =height= state properties. Even though it is just a function and not registered as an instance method for the class (public *or* private), it is nevertheless called as a method of the instance whose state properties' values are changing. This is useful, because the handler code can then access state and methods for the instance. In this particular example, the handler is able to access the updated values for the =width= and =height= state properties in order to calculate a new value for the =area= state property.
+
+			Being aware of this behavior, you can avoid certain redundancies in your code. For example, you can provide direct references to instance methods in your state property profiles, rather than redundant anonymous wrapper functions that merely call the methods.
+
+			INSTEAD OF...
+			...................................................
+			MyClass.registerProperties ({
+				_title:{
+					name:'title',
+					onChange:function () {this._updateUiTitle ()}
+				}
+			});
+			...................................................
+
+			USE...
+			.............................................
+			MyClass.registerProperties ({
+				_title:{
+					name:'title',
+					onChange:_classPrototype._updateUiTitle
+				}
+			});
+			.............................................
+
+			NOTE: The variable =_classPrototype= is a common convention for a captured reference to a class' prototype object. In this case, =_classPrototype= would be equivalent to =MyClass.prototype=.
+
+		### more to discuss
+			- use string value for method name for ensuring call to subclass version of instance method
+			- all onChange handlers executed for all state properties are executed after the values for all state properties have been updated by a call to =set=
+			- types
+				- function
+				- string
+					- good for ensuring calling subclass implementations
+				- array
+					- combination of function and string values
+
+			onChange Optimization Techniques
+				- sharing reference to same onChange handler function, or using same name for instance method
+				- onChange arrays
+
+			- relationship to alphastructor
+			- propertiesBeingSet param passed to handler, and how to use it for sets on different combinations of properties
+			- re-invoking conforming of some other state property
+				EXAMPLE
+				......................................................................
+				function _invokeConformForValue () {
+					this.set ({_width:this._width});
+				}
+				MyClass.registerProperties ({
+					_minWidth:{
+						name:'minWidth',
+						value:0,
+						onChange:_invokeConformForValue
+					},
+					_maxWidth:{
+						name:'maxWidth',
+						value:Infinity,
+						onChange:_invokeConformForValue
+					},
+					_width:{
+						name:'width',
+						conformer:function (_value) {
+							return Uize.constrain (_value,this._minWidth,this._maxWidth);
+						},
+						value:0
+					}
+				});
+
+				var myClass = new MyClass ({width:100});
+				alert (myClass.get ('width'));      // will alert the text 100
+
+				myClass.set ({maxWidth:50});
+				alert (myClass.get ('width'));      // will alert the text 50
+
+				myClass.set ({minWidth:125,maxWidth:150});
+				alert (myClass.get ('width'));      // will alert the text 125
+				......................................................................
+
+	Conformer Function
+		When using the `The Complete Profile` form to register a state property, a =conformer= function can be registered to ensure that the value for the property is always conformed to be a valid value.
+
+		Normally, whatever value is specified for a state property when calling the =set= method is the new value that gets set for that property. However, specifying the optional conformer allows you to register a function that should be executed before the state property's value actually changes, providing an opportunity to constrain or correct the value, or to abort the set so that the property's value remains unchanged.
+
+		EXAMPLE
+		.........................................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({
+			_percentLoaded:{
+				name:'percentLoaded',
+				conformer:function (_value) {return Uize.constrain (_value,0,100)},
+				value:0
+			}
+		});
+		var myClass = new MyClass ({percentLoaded:200});
+		alert (myClass.get ('percentLoaded'));
+		.........................................................................
+
+		In the above code, the =alert= statement will display the text =100= in the alert dialog.
+
+		In the example, a =conformer= function is registered for the =percentLoaded= state property, that conforms the property's value so that it doesn't fall outside of the range of =0= to =100=. So, even though the code is trying to set the property's value to =200= during construction of an instance, the conformer conforms the value to not fall out of bounds.
+
+		IN A NUTSHELL
+
+		When you register a =conformer= function for a state property, that function gets executed each time there is an attempt to set a value for that property. Your conformer function should expect to receive one parameter, being the new value that is being attempted to be set. Your conformer function should do what it needs to in order to conform the new value, and then return the conformed value as its result. The conformer function is called as a method on the instance to which the state property belongs, so it can access other state and methods for the instance using the =this= keyword, including the current value for the property being set.
+
+		The Conformer and onChange Handlers
+			Your conformer function is executed before the value of the state property is changed.
+
+			If the conformer function results in the value not changing, then any =onChange= handler function that you registered for the property will not get executed.
+
+			Consider the following example...
+
+			..................................................................................
+			var MyClass = Uize.Class.subclass ();
+			MyClass.registerProperties ({
+				_percentLoaded:{
+					name:'percentLoaded',
+					conformer:function (_value) {return Uize.constrain (_value,0,100)},
+					onChange:function () {alert (this._percentLoaded)},
+					value:0
+				}
+			});
+			var myClass = new MyClass;          // will alert the text 0
+			myClass.set ({percentLoaded:200});  // will alert the text 100
+			myClass.set ({percentLoaded:200});  // does nothing (because value doesn't change)
+			myClass.set ({percentLoaded:200});  // does nothing (because value doesn't change)
+			..................................................................................
+
+			Like the previous example, the =percentLoaded= state property has a conformer function registered that ensures that its value does not fall outside of the range of =0= to =100=. Additionally, an =onChange= handler function is registered that alerts the property's new value, each time it changes.
+
+			Now, there are three calls to set the value of =percentLoaded= to =200=. Because the initial value of the property (as specified in the =value= property of the profile) is =0=, the first set will result in the value =200= being constrained to =100=, the =percentLoaded= state property will be set to this value, and the =onChange= handler will produce an alert dialog with the text =100=. However, the subsequent two calls to the =set= method will not cause the =onChange= handler to be executed, because on each occasion the value =200= will be conformed to =100=, there will be an attempt to set the property's value to =100=, and there will be no change in its value because its value was already conformed to =100= by the first set.
+
+		Abort a Set
+			A =conformer= function can be used to validate a new value and effectively abort the set if a new value fails validation. In such cases, a failed validation will result in the state property remaining unchanged.
+
+			The way this is accomplished is for the conformer function to return the current value for the state property in the event that the new value fails validation. Because the conformer function registered for a state property is called as a method on the instance to which the property belongs, the conformer can access other state and methods for the instance using the =this= keyword, including the current value for the property being set.
+
+			EXAMPLE
+			.....................................................................................
+			var _emailRegExp =
+				/^(([A-Za-z0-9])|(\w[-\w\.\+]*[\w\+]))@([-A-Za-z0-9]+\.)+[A-Za-z]{2,4}$/
+			;
+			MyClass.registerProperties ({
+				_emailAddress:{
+					name:'emailAddress',
+					conformer:function (_value) {
+						return (
+							typeof _value == 'string' && (_value == '' || _emailRegExp.test (_value))
+								? _value
+								: this._emailAddress
+						);
+					},
+					value:''
+				}
+			});
+			.....................................................................................
+
+			In the above example, the =emailAddress= state property is being registered. The value of this property should be a well formed e-mail address. It may also be empty / unset, which is its initial value as specified in the =value= property of its profile. The conformer function first tests that a new value being set is a string. Then, it tests that the string is either empty or, if not, it uses a regular expression to determine if the non-empty value is a correctly formatted e-mail address.
+
+			If the validation succeeds, the conformer returns the new value as its result. If validation fails, then the conformer returns the current value. Returning the current value results in the state property's value not changing, so this is effectively a way to abort a set.
+
+		More Uses of Conformers
+			There are any number of ways that you can conform a value, and you can basically do anything you please inside a conformer function to produce a conformed value.
+
+			That said, there are a number of typical ways that it is useful to conform the value for a state property.
+
+			Conform to a Range
+				A common use of a conformer is to keep the value of a state property within a desired range.
+
+				EXAMPLE 1
+				.........................................................................
+				MyClass.registerProperties ({
+					_percentLoaded:{
+						name:'percentLoaded',
+						conformer:function (_value) {return Uize.constrain (_value,0,100)},
+						value:0
+					}
+				});
+				.........................................................................
+
+				In the above example, the conformer for the =percentLoaded= state property keeps the value of this property within the range of =0= to =100=.
+
+				EXAMPLE 2
+				......................................................................
+				MyClass.registerProperties ({
+					_minWidth:{
+						name:'minWidth',
+						value:0
+					},
+					_maxWidth:{
+						name:'maxWidth',
+						value:Infinity
+					},
+					_width:{
+						name:'width',
+						conformer:function (_value) {
+							return Uize.constrain (_value,this._minWidth,this._maxWidth);
+						},
+						value:0
+					}
+				});
+				......................................................................
+
+				In the above example, the conformer for the =width= state property keeps the value of this property within a legal range, as defined by the =minWidth= and =maxWidth= state properties. Initially, the minimum width is =0= and he maximum width is =Infinity= (ie. there is no upper limit).
+
+			Conform to a Valid Values Set
+				A conformer function can be used to ensure that the value of a state property does not stray outside of a set of values that are valid for the property.
+
+				EXAMPLE 1
+				.....................................................................
+				var _validTimeUnits =
+					{ms:1,seconds:1,minutes:1,hours:1,days:1,weeks:1,months:1,years:1}
+				;
+				MyClass.registerProperties ({
+					_timeUnit:{
+						name:'timeUnit',
+						conformer:function (_value) {
+							return _validTimeUnits [_value] ? _value : this._timeUnit;
+						},
+						value:'hours'
+					}
+				});
+				.....................................................................
+
+				In the above example, the conformer for the =timeUnit= state property makes sure that a value being set for this property falls within the valid time units =ms=, =seconds=, =minutes=, =days=, =weeks=, =months=, and =years=. When a new value is set, the =_validTimeUnits= hash lookup object is used by the conformer to see if the new value is in the set of valid time units. If so, the new value is returned. If an invalid time unit value is specified, then the current value is returned so that the set has no effect.
+
+				EXAMPLE 2
+				................................................................................
+				MyClass.registerProperties ({
+					_fruit:{
+						name:'fruit',
+						conformer:function (_value) {
+							return Uize.isIn (this._availableFruits,_value) ? _value : this._fruit;
+						}
+					},
+					_availableFruits:{
+						name:'availableFruits',
+						value:[]
+					}
+				});
+				................................................................................
+
+				In the above example, the =fruit= state property has a companion =availableFruits= state property that allows a set of valid values to be specified for the =fruit= state property. The conformer for =fruit= uses the =Uize.isIn= static method to determine if the new value being set falls within the list of valid values specified by the =availableFruits= state property. If so, the new value is returned. If an invalid value is specified, then the current value is returned so that the set has no effect
+
+				EXAMPLE 3
+				......................................................................................
+				MyClass.registerProperties ({
+					_fruit:{
+						name:'fruit',
+						conformer:function (_value) {
+							return this._availableFruits [Uize.indexIn (this._availableFruits,_value,0)];
+						}
+					},
+					_availableFruits:{
+						name:'availableFruits',
+						value:[]
+					}
+				});
+				......................................................................................
+
+				In a variation on the previous example, a failure in validating a new value being set for the =fruit= state property results in it being defaulted to the first value from the values set specified in the =availableFruits= state property.
+
+			Enforce Type
+				A conformer function can be used to ensure that the value being set for a state property always conforms to a desired type.
+
+				ENFORCE STRING TYPE
+				......................................................
+				MyClass.registerProperties ({
+					_title:{
+						name:'title',
+						conformer:function (_value) {return _value + ''}
+						value:''
+					}
+				});
+				......................................................
+
+				In the above example, the conformer for the =title= state property is coercing the type of the value being set for it to a string. By concatenating an empty string, JavaScript automatically invokes the =valueOf Intrinsic Method= for the new value. Essentially, adding an empty string has the effect of coercing the value to a string without altering the value. With such a conformer, the value being set for the =title= state property can be of type string, number, boolean, or an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize.Class= subclass that implements the =value= state property).
+
+				ENFORCE NUMBER TYPE
+				..................................................
+				MyClass.registerProperties ({
+					_width:{
+						name:'width',
+						conformer:function (_value) {return +_value}
+						value:0
+					}
+				});
+				..................................................
+
+				In the above example, the conformer for the =width= state property is coercing the type of the value being set for it to a number. By prepending the plus operator, JavaScript automatically invokes the =valueOf Intrinsic Method= for the new value, thereby coercing the value to a number without altering the value. With such a conformer, the value being set for the =width= state property can be of type string, number, boolean, or an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize.Class= subclass that implements the =value= state property).
+
+				ENFORCE BOOLEAN TYPE - 1
+				...................................................
+				MyClass.registerProperties ({
+					_active:{
+						name:'active',
+						conformer:function (_value) {return !!_value}
+						value:false
+					}
+				});
+				...................................................
+
+				In the above example, the conformer for the =active= state property is coercing the type of the value being set for it to a boolean. By prepending the two not operators, the value is coerced to a boolean without altering the true equivalency of the original value. With such a conformer, the value being set for the =active= state property can be of type string, number, boolean, object, or function. Any non-empty string will be turned into =true=, and an empty string will be turned into =false=. Any non-zero number will be turned into =true=, and =0= or =NaN= will be turned into =false=. Any object or function will be turned into =true=, and =null= or =undefined= will be turned into =false=.
+
+				ENFORCE BOOLEAN TYPE - 2
+				......................................................................
+				var _trueValues = {1:1,true:1,yes:1,on:1,enabled:1,active:1};
+				MyClass.registerProperties ({
+					_showTitle:{
+						name:'showTitle',
+						conformer:function (_value) {return !!_trueValues [_value + '']}
+						value:false
+					}
+				});
+				......................................................................
+
+				In the above example, the conformer for the =showTitle= state property is coercing the type of the value being set for it to a boolean. Unlike the previous example, this conformer turns certain specific values into =true= and all other values into =false=. The number value =1=, string value ='1'=, boolean value =true=, string value ='true'=, and the string values ='on'=, ='enabled'=, and ='active'= are all turned into =true=.
+
+				An empty string is concatenated to the new value being set so that JavaScript invokes the =valueOf Intrinsic Method= for the value, allowing the value to be an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize.Class= subclass that implements the =value= state property). After coercing the value to a string, the =_trueValues= hash lookup object is used to test if the value is in the set of values considered equivalent to =true=.
+
+			### Conform to a Valid Syntax
+				- use regular expression, and fail if invalid
+
+			Limit Length of String
+				A conformer function can be used to ensure that a string state property's value never exceeds a desired maximum length.
+
+				EXAMPLE
+				......................................................................
+				MyClass.registerProperties ({
+					_title:{
+						name:'title',
+						conformer:function (_value) {
+							_value += '';   // coerce to a string value, invoking valueOf
+							return _value.length > 50 ? _value.slice (0,50) : _value;
+						},
+						value:''
+					}
+				});
+				......................................................................
+
+				In the above example, the conformer for the =title= state property limits the length of its value to a maximum of fifty characters. The value is first coerced to a string by concatenating an empty string.
+
+			Enforce Case
+				A conformer function can be used to ensure that a string state property's value is always in a desired case (eg. lowercase, or uppercase).
+
+				EXAMPLE
+				........................................................................
+				MyClass.registerProperties ({
+					_filename:{
+						name:'filename',
+						conformer:function (_value) {return (_value + '').toLowerCase ()},
+						value:''
+					}
+				});
+				........................................................................
+
+				In the above example, the conformer for the =filename= state property uses the =toLowerCase= string method to force the case of any new value to be lowercase. The value is first coerced to a string by concatenating an empty string.
+
+			Locking a State Property
+				A conformer function can be used to provide a locking facility for a state property, so that it is unchangeable through the =set= method while it is locked.
+
+				Locking can be based on some internal state of the instance to which the property belongs, or the state of some other dedicated locking state property.
+
+				EXAMPLE
+				..............................................................
+				MyClass.registerProperties ({
+					_title:{
+						name:'title',
+						conformer:function (_value) {
+							return this._titleLocked ? this._title : _value + '';
+						},
+						value:''
+					},
+					_titleLocked:{
+						name:'titleLocked',
+						value:false
+					}
+				});
+				..............................................................
+
+				In the above example, the conformer for the =title= state property only allows this property's value to be changed when the companion =titleLocked= state property is set to =false=.
+
+Changed Events
+	The [[javascript-event-system.html][JavaScript Event System]] implemented in the UIZE JavaScript Framework implements events that allow code to watch on changes in the value of any and all state properties.
+
+	Changed.[propertyName] Virtual Event
+		The =Changed.[propertyName]= virtual event lets you watch on changes in value for specified state properties.
+
+		EXAMPLE
+		.....................................................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({
+			_percentLoaded:{
+				name:'percentLoaded',
+				conformer:function (_value) {return Uize.constrain (_value,0,100)},
+				value:0
+			}
+		});
+		var myClass = new MyClass;
+		myClass.wire (
+			'Changed.percentLoaded',  // name of changed event for percentLoaded
+			function () {alert (myClass.get ('percentLoaded'))}
+		);
+		myClass.set ({percentLoaded:10});   // will alert the text 10
+		myClass.set ({percentLoaded:25});   // will alert the text 25
+		myClass.set ({percentLoaded:66});   // will alert the text 66
+		myClass.set ({percentLoaded:200});  // will alert the text 100 (because of conformer)
+		myClass.set ({percentLoaded:300});  // does nothing (because value doesn't change)
+		.....................................................................................
+
+		In the above example, a handler is being registered for the changed event of the =percentLoaded= state property, which is named =Changed.percentLoaded= (basically, any state property has a changed virtual event that is named after that property, with "Changed." prefixed).
+
+		Now, the handler for this event alerts the current value for the property. So, the first four of the =set= statements in the example will result in the value of =percentLoaded= changing, which will fire the =Changed.percentLoaded= virtual event, whose handler will display the current value in an alert dialog. Important to note is that the last =set= statement will not cause the value of =percentLoaded= to change. That's because the =conformer= function constrains its value to the range of =0= to =100=, and the previous attempt to set its value to =200= caused it to be constrained to the maximum in its range. Once constrained to =100=, attempting to set its value to =300= wouldn't budge it any higher from =100=. So, the last =set= statement doesn't cause the =Changed.percentLoaded= event to be fired, and no alert dialog.
+
+		### Changed.[propertyName] vs. onChange
+			- redundancy optimization with onChange, but not Changed.[propertyName]
+			- can use Changed.* in order to handle changes in properties that are often set in groups, but must check on whether affected properties are the ones you care about
+			- ability to register multiple handlers - outside of property registering - with Changed.[propertyName], and also in subclasses and application code
+
+	Changed.* Wildcard Event
+		The =Changed.&#42;= instance event is a wildcard event that is fired whenever one or more state properties change value as a result of a call to the =set= instance method.
+
+		This event will only be fired once for all state properties that have changed value during a call to the =set= method. The event object for this event will contain a =properties= property, which is an object indicating which state properties have changed value, being a mapping between the public names of state properties that have changed and their new values.
+
+		EXAMPLE
+		.....................................................................
+		var
+			marquee1 = page.addChild ('marquee1',Uize.Widget.Resizer.Marquee),
+			marquee2 = page.addChild ('marquee2',Uize.Widget.Resizer.Marquee)
+		;
+		marquee1.wire (
+			'Changed.*',
+			function (eventObj) {
+				var properties = eventObj.properties;
+				if (
+					'left' in properties || 'top' in properties ||
+					'width' in properties || 'height' in properties
+				)
+					marquee2.set (marquee1.getCoords ())
+				;
+			}
+		);
+		.....................................................................
+
+		In the above example, two instances of the =Uize.Widget.Resizer.Marquee= widget class are being added as child widgets to the page widget (which we assume to already be defined). A handler is wired to the =Changed.&#42;= wildcard event of the first instance, =marquee1=. The handler tests to see if any of the state properties =left=, =top=, =width=, or =height= have changed by checking if any of these keys are present in =properties= property of the event object for the =Changed.&#42;= event. If any of these properties have changed value, the =getCoords= instance method is used to get the values for those properties, and those values are set on the second instance, =instance2=. This code would have the effect of making =instance1= be the "driver" of =instance2=.
+
+The Special value State Property
+	The =Uize.Class= base class provides an implementation for the =valueOf Intrinsic Method=, that returns the value of the special =value= state property.
+
+	The =valueOf Intrinsic Method= is invoked automatically by Javascript in certain contexts in order to convert an object to a value, such as when using an object reference in an expression. If you register the special =value= state property for your class, then you will be able to use a reference to an instance of your class in string and mathematical expressions, and your instance reference will be automatically converted to the value of the =value= state property in such expressions. This is a handy shorthand that allows you to use a reference to a class instance as a proxy for its value in expressions.
+
+	EXAMPLE
+	..............................................................................
+	var MyClass = Uize.Class.subclass ();
+	MyClass.registerProperties ({
+		_value:{
+			name:'value',
+			value:0
+		}
+	});
+	var myClass = new MyClass ({value:123);
+	alert (+myClass);               // will alert the text 123
+	alert (myClass + '');           // will alert the text 123
+	alert (myClass.valueOf ());     // will alert the text 123
+	alert (myClass.get ('value'));  // will alert the text 123
+	..............................................................................
+
+	In the above example, the special =value= state property is being registered for the class =MyClass=. The initial value for this property is =0=, as specified in the =value= property of its profile (don't confuse the special =value= state property with the =value= property of a state property's profile that lets you specify the initial value for a property).
+
+	As illustrated in this example, the value of the special =value= state property of the instance =myClass= can be accessed as: =+myClass= (coercing its type to number), =myClass + ''= (coercing its type to string), =myClass.valueOf ()= (leaves type unchanged), or =myClass.get ('value')= (leaves type unchanged). Of the various ways that the =value= state property can be accessed, using the =get= method is the least efficient. So, using the other techniques might be helpful in very heavily hit code that calls for hardcore performance optimization measures. As with other state properties, the value of the special =value= state property can be set using the =set= method, as in =myClass.set ({value:'newValue'})=.
+
+	Watching For Value Changes
+		If a =value= state property is registered for a class, then application code can watch on changes in the value for an instance by registering a handler for the =Change.value= virtual event of the instance.
+
+		EXAMPLE
+		.........................................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({
+			_value:{
+				name:'value',
+				value:0
+			}
+		});
+		var myClass = new MyClass;
+		myClass.wire ('Changed.value',function () {alert (+myClass)});
+		myClass.set ({value:10});  // will alert the text 10
+		.........................................................................
+
+		In the above code, a handler is registered for the =Changed.value= event of the instance =myClass=. Setting the =value= state property to =10= causes its value to change from its initial value of =0= (as specified in the =value= property of its profile), thereby firing the =Changed.value= virtual event, and the handler for this event alerts the current value by prepending the plus ("+") operator to the instance reference, invoking the =valueOf Intrinsic Method=.
+
+	Any Class Can Implement Value Interface
+		The =valueOf Intrinsic Method= is implemented in the =Uize.Class= base class, so it is inherited by all subclasses of =Uize.Class=, including =Uize.Widget= and all subclasses of =Uize.Widget=, and all their subclasses, etc.
+
+		To take advantage of this facility, all you need to do is register a state property with the public name =value=.
+
+	Value as an Alias
+		By using the `Public Aliases` mechanism, it is possible to name a state property something other than =value= while still leveraging the =valueOf Intrinsic Method= provision. Simply register two public names for the property: your desired name, and the special name =value= as an alias.
+
+		EXAMPLE
+		.........................................................................
+		var MyClass = Uize.Class.subclass ();
+		MyClass.registerProperties ({
+			_percentLoaded:{
+				name:'percentLoaded|value',
+				conformer:function (_value) {return Uize.constrain (_value,0,100)},
+				value:0
+			}
+		});
+		var myClass = new MyClass ({percentLoaded:10});
+		alert (myClass.get ('percentLoaded'));  // will alert the text 10
+		alert (myClass.get ('value'));          // will alert the text 10
+		alert (+myClass);                       // will alert the text 10
+		.........................................................................
+
+		In the above example, the =percentLoaded= state property is being registered. Even though this property might represent the primary value for instances of the class, it is desirable for the property's name to be =percentLoaded= (rather than the more generic =value=) for general usability/understandability of the class' interface. However, it would be nice to still be able to get the benefit of the =valueOf Intrinsic Method=. Not a problem. This is accomplished by naming the state property both =percentLoaded= *AND* =value=. Notice how the three last statements in the example all produce the same output.
+
+Advanced Topics
+	### State Properties and Class Inheritance
+		- not possible to override =conformer=, =onChange=
+			- up to the superclass to deliberately provide hooks that subclasses can use
+		- class.set for overriding inherited initial =value=
+		- Change.property for watching on changes in value of state properties of superclass
+			- uses the regular UIZE event mechanism, so fundamentally not the same as "low level" onChange handlers
+		- there is more on state properties and inheritance in the explainer [[javascript-inheritance.html][JavaScript Inheritance]]
+		- cumulative nature of registerProperties
+
+	### State Properties And Instance Construction
+		phases of construction: alphastructor, state properties set, omegastructor
+
+	Derived State Properties
+		Cases can arise where it is desirable to register a state property whose value is derived from the values of one or more other state properties, and that acts as a kind of state summary for the instance.
+
+		EXAMPLE
+		.................................................................
+		var MyClass = Uize.Class.subclass ();
+		function _updateArea () {
+			this.set ({area:this._width * this._height});
+		}
+		MyClass.registerProperties ({
+			_area:'area',
+			_height:{
+				name:'height',
+				value:10,
+				onChange:_updateArea
+			},
+			_width:{
+				name:'width',
+				value:10,
+				onChange:_updateArea
+			}
+		});
+		myClass = new MyClass;
+		alert (myClass.get ('area'));         // will alert the value 100
+
+		myClass.set ({width:5});
+		alert (myClass.get ('area'));         // will alert the value 50
+
+		myClass.set ({height:5});
+		alert (myClass.get ('area'));         // will alert the value 25
+
+		myClass.set ({width:20,height:20});
+		alert (myClass.get ('area'));         // will alert the value 400
+		.................................................................
+
+		In the above example, the =area= state property is being registered. This property is not intended to be set by an application, since its value is derived in the class' implementation from the values of two other state properties registered for the class: =width= and =height=. An =onChange= handler function is registered in the profile for each of the =width= and =height= state properties. If the value of either (or both) of these properties changes, then the =_updateArea= function is called as a method on the instance, and this function sets a new value for the =area= state property that is the product of the =width= and =height= values.
+
+	Read-only State Properties
+		There is no formal mechanism within the UIZE JavaScript Framework for declaring a state property as being read-only.
+
+		There might be occasions when it's desirable to expose some instance state through a state property - with all the benefits that come from using state properties - without it being intended for application code to ever set the property's value. But the =Uize.Class= base class cannot distinguish between a state property's value being set from within the class' implementation, or from some application code using an instance of the class.
+
+		In the event that a state property is intended only to reflect state that is maintained within a class' implementation, the property should just be documented as intended for read-only use in the documentation for the class. Incorrect setting of the property could cause code to fail, but in the rather open JavaScript language any number of other, more damaging things could be done by application code to trip up a class' implementation.
+
+		In short, read-only state properties are more of a convention / design pattern than anything else. The many classes of the UIZE JavaScript Framework are certainly replete with examples of weakly "enforced" read-only properties.
+
+	### mention that state properties are set on instance and class, using private name, so they compete with namespace for regular properties
+
+	### explain difference between static and instance state properties
+		onChange, conformer only apply to instance
+
+	### traditional approach vs. state properties approach
+		INSTEAD OF...
+		......................................................
+		_classPrototype.setMyProperty = function (_newValue) {
+			if (_newValue != this._myProperty) {
+				this._myProperty = _newValue;
+				this.fire ('My Property Changed');
+			}
+		};
+
+		_classPrototype.getMyProperty = function () {
+			return this._myProperty;
+		};
+		......................................................
+
+		USE...
+		.......................................................
+		_class.registerProperties ({_myProperty:'myProperty'});
+		.......................................................
+
+		By registering a state property instead of your own setter and getter methods and custom event, you get the following capabilities for free...
+
+		....................................................................................
+		// setting the value
+
+		myInstance.set ('myProperty',newValue);
+		myInstance.set ({myProperty:newValue});
+
+
+		// getting the value
+
+		myInstance.get ('myProperty');
+		myInstance.get ();  // get the value of all state properties, including myProperty
+
+
+		// wiring changed events
+
+		myInstance.wire (
+			'Changed.myProperty',
+			function () {
+				// do stuff when myProperty changes value
+			}
+		);
+
+		myInstance.wire (
+			'Changed.*',
+			function () {
+				// do stuff when any registered properties, including myProperty, change value
+			}
+		);
+		....................................................................................
+

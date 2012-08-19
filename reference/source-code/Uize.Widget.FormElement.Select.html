@@ -160,7 +160,7 @@ Uize.module ({
           if (_values.length)  // values data exists so update the &lt;option&gt;s in the &lt;select&gt; tag
             _this._updateUiValues();
           else if (_selectNode &amp;&amp; _this.get('type') == 'select-one') { // build values from &lt;select&gt; tag &lt;option&gt;s
-            // iterate through each option and add to values set-get property
+            // iterate through each option and add to values state property
             for (
               var
                 _value = _this.get('value'),

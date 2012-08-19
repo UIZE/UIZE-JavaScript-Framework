@@ -143,7 +143,7 @@ Uize.module ({
 					onChange:_classPrototype._updateUiMode,
 					value:'full'
 					/*?
-						Set-get properties
+						State properties
 							mode
 								A string with (currently) two valid values: 'mini' or 'full'. 'mini' mode will only show the buttons controlling the four cardinal directions. 'full' mode will show all the buttons. =mode= is set to 'full' by default.
 

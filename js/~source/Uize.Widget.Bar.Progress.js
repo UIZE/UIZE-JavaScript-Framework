@@ -102,7 +102,7 @@ Uize.module ({
 					},
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							inProgress
 								[DOCUMENT]
 					*/
@@ -111,7 +111,7 @@ Uize.module ({
 					name:'paddingFactor',
 					value:1.5
 					/*?
-						Set-get Properties
+						State Properties
 							paddingFactor
 								[DOCUMENT]
 					*/
@@ -120,14 +120,14 @@ Uize.module ({
 					name:'vanishTime',
 					value:250
 					/*?
-						Set-get Properties
+						State Properties
 							vanishTime
 								[DOCUMENT]
 					*/
 				}
 			});
 
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
+		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
 				html:{
 					process:function (input) {

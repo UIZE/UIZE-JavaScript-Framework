@@ -28,7 +28,7 @@
 		<ul>
 			<li><a href="#1" title="The Uize.Node.setStyle method now abstracts the differences between Internet Explorer and browsers that support the standard CSS opacity property.">1. Special Handling for Opacity</a></li>
 			<li><a href="#2" title="Now, when number type values are specified for CSS style properties (other than the opacity and zIndex properties), the values are converted to strings by appending the &quot;px&quot; unit.">2. Specifying Number Values</a></li>
-			<li><a href="#3" title="Now, when an instance of a Uize subclass is specified for a CSS style property, the instance&apos;s valueOf Intrinsic Method is invoked in order to obtain the value of the instance&apos;s value set-get property.">3. Specifying Instance Values</a></li>
+			<li><a href="#3" title="Now, when an instance of a Uize subclass is specified for a CSS style property, the instance&apos;s valueOf Intrinsic Method is invoked in order to obtain the value of the instance&apos;s value state property.">3. Specifying Instance Values</a></li>
 		</ul>
 	</li>
 </ul>
@@ -83,7 +83,7 @@ Uize.Node.setStyle ('myNodeId',{width:200,height:100});
 	<a name="3"></a>
 	<h1 class="heading1" title="3. Specifying Instance Values"><span class="headingNumber"><a href="#3" title="3. Specifying Instance Values">3</a>. </span>Specifying Instance Values</h1>
 	<div class="contents1">
-		<p>Now, when an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass is specified for a CSS style property, the instance's <code>valueOf Intrinsic Method</code> is invoked in order to obtain the value of the instance's <code>value</code> set-get property.</p>
+		<p>Now, when an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass is specified for a CSS style property, the instance's <code>valueOf Intrinsic Method</code> is invoked in order to obtain the value of the instance's <code>value</code> state property.</p>
 		
 		<p>So, for example, the following statement...</p>
 		
@@ -97,7 +97,7 @@ Uize.Node.setStyle ('myNodeId',{width:200,height:100});
 <pre class="sample-code">Uize.Node.setStyle ('myNodeId',{width:myWidthSlider});
 </pre>
 		
-		<p>This feature of the <code>Uize.Node.setStyle</code> method is provided as a convenience, so that instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses that are value selectors and that implement the <code>value</code> set-get property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for <a href="#2">Specifying Number Values</a>.</p>
+		<p>This feature of the <code>Uize.Node.setStyle</code> method is provided as a convenience, so that instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses that are value selectors and that implement the <code>value</code> state property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for <a href="#2">Specifying Number Values</a>.</p>
 	</div>
 </div>
 

@@ -49,10 +49,10 @@
 						<ul>
 							<li><a href="#2_1_1">2.1.1. More on Adding Items</a>
 								<ul>
-									<li><a href="#2_1_1_1" title="The  itemConformer set-get property lets you configure an optional item conformer function to &quot;tidy up&quot; new list items added by the user.">2.1.1.1. Conforming New Items</a></li>
+									<li><a href="#2_1_1_1" title="The  itemConformer state property lets you configure an optional item conformer function to &quot;tidy up&quot; new list items added by the user.">2.1.1.1. Conforming New Items</a></li>
 									<li><a href="#2_1_1_2" title="Adding an item that is already in the list doesn&apos;t result in a duplicate entry, but simply selects only that item.">2.1.1.2. Adding Existing Items</a></li>
 									<li><a href="#2_1_1_3" title="The input child widget that is used for entering the text for new items supports special handling for the enter and escape keys.">2.1.1.3. Special Keys</a></li>
-									<li><a href="#2_1_1_4" title="When the user adds a new item, where it shows up in the list array is determined by the value of the sort set-get property.">2.1.1.4. New Item Placement</a></li>
+									<li><a href="#2_1_1_4" title="When the user adds a new item, where it shows up in the list array is determined by the value of the sort state property.">2.1.1.4. New Item Placement</a></li>
 									<li><a href="#2_1_1_5" title="An item that is added by the user immediately becomes the currently selected option in the list Implied Node.">2.1.1.5. New Item Becomes Selected</a></li>
 								</ul>
 							</li>
@@ -65,15 +65,15 @@
 							<li><a href="#2_1_3" title="The Uize.Widget.ListEditor class does not provide a dedicated way to edit existing items in the list, but the combination of the add and remove behaviors provides for a sufficiently intuitive way to make edits.">2.1.3. Editing Items</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_2" title="The list that is edited by the user can be accessed programmatically through the list set-get property, which is an array of string values.">2.2. Accessing and Setting the List</a>
+					<li><a href="#2_2" title="The list that is edited by the user can be accessed programmatically through the list state property, which is an array of string values.">2.2. Accessing and Setting the List</a>
 						<ul>
-							<li><a href="#2_2_1" title="The value set-get property is registered as an alias to the list set-get property.">2.2.1. Value Interface</a></li>
+							<li><a href="#2_2_1" title="The value state property is registered as an alias to the list state property.">2.2.1. Value Interface</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_3" title="The sort set-get property provides a way to maintain the list array in a sorted state.">2.3. List Sorting</a></li>
+					<li><a href="#2_3" title="The sort state property provides a way to maintain the list array in a sorted state.">2.3. List Sorting</a></li>
 					<li><a href="#2_4" title="The Uize.Widget.ListEditor class manages the state of its button child widgets, so they are only enabled when appropriate.">2.4. Button State Management</a>
 						<ul>
-							<li><a href="#2_4_1" title="When the value of the input child widget&apos;s isValid set-get property is set to false, then the add button will be disabled.">2.4.1. Disabled Add Button</a></li>
+							<li><a href="#2_4_1" title="When the value of the input child widget&apos;s isValid state property is set to false, then the add button will be disabled.">2.4.1. Disabled Add Button</a></li>
 							<li><a href="#2_4_2" title="When no options of the list Implied Node are selected, then the remove button will be disabled.">2.4.2. Disabled Remove Button</a></li>
 						</ul>
 					</li>
@@ -91,7 +91,7 @@
 					<li><a href="#4_1" title="A multiple select select tag (ie. where the multiple attribute is set to the value &apos;multiple&apos;), that is used to display the current items in the list array, and that allows the user to select one or more items to remove.">4.1. list Implied Node</a></li>
 				</ul>
 			</li>
-			<li><a href="#5">5. Set-get Properties</a>
+			<li><a href="#5">5. State Properties</a>
 				<ul>
 					<li><a href="#5_1" title="Inherited from Uize.Widget.">5.1. built</a></li>
 					<li><a href="#5_2" title="Inherited from Uize.Widget.">5.2. busy</a></li>
@@ -108,7 +108,7 @@
 					<li><a href="#5_13" title="An array of strings, representing the items in the list.">5.13. list</a>
 						<ul>
 							<li><a href="#5_13_1" title="Items in the new list that didn&apos;t previously exist in the list when the UI was last updated will automatically become the selected items.">5.13.1. New Items Become Selected</a></li>
-							<li><a href="#5_13_2" title="When the value of the list property is being set and a value other than &apos;append&apos; or &apos;prepend&apos; is specified for the sort set-get property, then the list value will first be conformed by sorting it according to the current sort mode before the new value is applied.">5.13.2. Automatically Sorted</a></li>
+							<li><a href="#5_13_2" title="When the value of the list property is being set and a value other than &apos;append&apos; or &apos;prepend&apos; is specified for the sort state property, then the list value will first be conformed by sorting it according to the current sort mode before the new value is applied.">5.13.2. Automatically Sorted</a></li>
 							<li><a href="#5_13_3" title="When a new value is being set for the list property, and the conformed new value is equivalent to the current value, then the conformer will return the current array and there will be no value change and no Changed.list event will be fired.">5.13.3. Ignored Sets</a></li>
 						</ul>
 					</li>
@@ -116,7 +116,7 @@
 					<li><a href="#5_15" title="Inherited from Uize.Widget.">5.15. name</a></li>
 					<li><a href="#5_16" title="Inherited from Uize.Widget.">5.16. nodeMap</a></li>
 					<li><a href="#5_17" title="A string, specifying one of the supported list sort modes, or a function reference for a custom list sorter function.">5.17. sort</a></li>
-					<li><a href="#5_18" title="An alias to the list set-get property, so that this class effectively implements the Value Interface.">5.18. value</a></li>
+					<li><a href="#5_18" title="An alias to the list state property, so that this class effectively implements the Value Interface.">5.18. value</a></li>
 					<li><a href="#5_19" title="Inherited from Uize.Widget.">5.19. wired</a></li>
 				</ul>
 			</li>
@@ -240,7 +240,7 @@
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_12">itemConformer</a></code> | <code><a href="#5_13">list</a></code> | <code><a href="#5_17">sort</a></code></p>
 			</div>
@@ -276,7 +276,7 @@
 				
 				<p><code><a href="#7_1">showConfirm</a></code> | <code><a href="#7_2">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_1">built</a></code> | <code><a href="#5_2">busy</a></code> | <code><a href="#5_3">busyInherited</a></code> | <code><a href="#5_4">children</a></code> | <code><a href="#5_5">container</a></code> | <code><a href="#5_6">enabled</a></code> | <code><a href="#5_7">enabledInherited</a></code> | <code><a href="#5_8">html</a></code> | <code><a href="#5_9">idPrefix</a></code> | <code><a href="#5_10">idPrefixConstruction</a></code> | <code><a href="#5_11">insertionMode</a></code> | <code><a href="#5_14">localized</a></code> | <code><a href="#5_15">name</a></code> | <code><a href="#5_16">nodeMap</a></code> | <code><a href="#5_19">wired</a></code></p>
 				
@@ -321,7 +321,7 @@
 				<a name="2_1_1_1"></a>
 				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.1. Editing the List -&gt; 2.1.1. More on Adding Items -&gt; 2.1.1.1. Conforming New Items"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_1" title="2. In a Nutshell -&gt; 2.1. Editing the List">1</a>.<a href="#2_1_1" title="2. In a Nutshell -&gt; 2.1. Editing the List -&gt; 2.1.1. More on Adding Items">1</a>.<a href="#2_1_1_1" title="2. In a Nutshell -&gt; 2.1. Editing the List -&gt; 2.1.1. More on Adding Items -&gt; 2.1.1.1. Conforming New Items">1</a>. </span>Conforming New Items</h4>
 				<div class="contents4">
-					<p>The  <code><a href="#5_12">itemConformer</a></code> set-get property lets you configure an optional item conformer function to "tidy up" new list items added by the user.</p>
+					<p>The  <code><a href="#5_12">itemConformer</a></code> state property lets you configure an optional item conformer function to "tidy up" new list items added by the user.</p>
 					
 					<p>An application of this would be when using the <code>Uize.Widget.ListEditor</code> class for a domain list editor, where one may wish to always remove the protocol and leave only the host name when adding new items to the list.</p>
 				</div>
@@ -343,7 +343,7 @@
 				<a name="2_1_1_4"></a>
 				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.1. Editing the List -&gt; 2.1.1. More on Adding Items -&gt; 2.1.1.4. New Item Placement"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_1" title="2. In a Nutshell -&gt; 2.1. Editing the List">1</a>.<a href="#2_1_1" title="2. In a Nutshell -&gt; 2.1. Editing the List -&gt; 2.1.1. More on Adding Items">1</a>.<a href="#2_1_1_4" title="2. In a Nutshell -&gt; 2.1. Editing the List -&gt; 2.1.1. More on Adding Items -&gt; 2.1.1.4. New Item Placement">4</a>. </span>New Item Placement</h4>
 				<div class="contents4">
-					<p>When the user adds a new item, where it shows up in the <code><a href="#5_13">list</a></code> array is determined by the value of the <code><a href="#5_17">sort</a></code> set-get property.</p>
+					<p>When the user adds a new item, where it shows up in the <code><a href="#5_13">list</a></code> array is determined by the value of the <code><a href="#5_17">sort</a></code> state property.</p>
 					
 					<p>The <code><a href="#5_17">sort</a></code> property is sufficiently configurable to allow the <code><a href="#5_13">list</a></code> to be kept in a sorted state, or to be unsorted with new items added either at the beginning or the end of the <code><a href="#5_13">list</a></code>.</p>
 				</div>
@@ -387,14 +387,14 @@
 		<a name="2_2"></a>
 		<h2 class="heading2" title="2. In a Nutshell -&gt; 2.2. Accessing and Setting the List"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_2" title="2. In a Nutshell -&gt; 2.2. Accessing and Setting the List">2</a>. </span>Accessing and Setting the List</h2>
 		<div class="contents2">
-			<p>The list that is edited by the user can be accessed programmatically through the <code><a href="#5_13">list</a></code> set-get property, which is an array of string values.</p>
+			<p>The list that is edited by the user can be accessed programmatically through the <code><a href="#5_13">list</a></code> state property, which is an array of string values.</p>
 			
 			<p>The list can also be pre-seeded or updated programmatically by setting the value of this property.</p>
 			
 			<a name="2_2_1"></a>
 			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.2. Accessing and Setting the List -&gt; 2.2.1. Value Interface"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_2" title="2. In a Nutshell -&gt; 2.2. Accessing and Setting the List">2</a>.<a href="#2_2_1" title="2. In a Nutshell -&gt; 2.2. Accessing and Setting the List -&gt; 2.2.1. Value Interface">1</a>. </span>Value Interface</h3>
 			<div class="contents3">
-				<p>The <code><a href="#5_18">value</a></code> set-get property is registered as an alias to the <code><a href="#5_13">list</a></code> set-get property.</p>
+				<p>The <code><a href="#5_18">value</a></code> state property is registered as an alias to the <code><a href="#5_13">list</a></code> state property.</p>
 				
 				<p>This means that the <code>Uize.Widget.ListEditor</code> class effectively implements the <code><a href="#2_2_1">Value Interface</a></code>, so the following statements would all be equivalent...</p>
 				
@@ -409,9 +409,9 @@ myListEditor.valueOf ();
 		<a name="2_3"></a>
 		<h2 class="heading2" title="2. In a Nutshell -&gt; 2.3. List Sorting"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_3" title="2. In a Nutshell -&gt; 2.3. List Sorting">3</a>. </span>List Sorting</h2>
 		<div class="contents2">
-			<p>The <code><a href="#5_17">sort</a></code> set-get property provides a way to maintain the <code><a href="#5_13">list</a></code> array in a sorted state.</p>
+			<p>The <code><a href="#5_17">sort</a></code> state property provides a way to maintain the <code><a href="#5_13">list</a></code> array in a sorted state.</p>
 			
-			<p>The list can be sorted ASCIIbetically, in ascending or descending order, or it can be sorted with your own custom sort function, or it can be unsorted with new items added to the beginning or the end of the <code><a href="#5_13">list</a></code>. When sorting is enabled, the list is kept sorted as items are added by the user, or as its items are otherwise changed - even when items are changed programmatically by setting the value of the <code><a href="#5_13">list</a></code> set-get property.</p>
+			<p>The list can be sorted ASCIIbetically, in ascending or descending order, or it can be sorted with your own custom sort function, or it can be unsorted with new items added to the beginning or the end of the <code><a href="#5_13">list</a></code>. When sorting is enabled, the list is kept sorted as items are added by the user, or as its items are otherwise changed - even when items are changed programmatically by setting the value of the <code><a href="#5_13">list</a></code> state property.</p>
 		</div>
 		
 		<a name="2_4"></a>
@@ -422,9 +422,9 @@ myListEditor.valueOf ();
 			<a name="2_4_1"></a>
 			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.4. Button State Management -&gt; 2.4.1. Disabled Add Button"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Button State Management">4</a>.<a href="#2_4_1" title="2. In a Nutshell -&gt; 2.4. Button State Management -&gt; 2.4.1. Disabled Add Button">1</a>. </span>Disabled Add Button</h3>
 			<div class="contents3">
-				<p>When the value of the <code><a href="#3_2">input</a></code> child widget's <code>isValid</code> set-get property is set to <code>false</code>, then the <code><a href="#3_1">add</a></code> button will be disabled.</p>
+				<p>When the value of the <code><a href="#3_2">input</a></code> child widget's <code>isValid</code> state property is set to <code>false</code>, then the <code><a href="#3_1">add</a></code> button will be disabled.</p>
 				
-				<p>This typically occurs when the <code><a href="#3_2">input</a></code> child widget's value is <code>''</code> (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its <code>validator</code> set-get property.</p>
+				<p>This typically occurs when the <code><a href="#3_2">input</a></code> child widget's value is <code>''</code> (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its <code>validator</code> state property.</p>
 			</div>
 			
 			<a name="2_4_2"></a>
@@ -445,9 +445,9 @@ myListEditor.valueOf ();
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, that lets the user add the current text entered in the <code><a href="#3_2">input</a></code> child widget as a new item in the <code><a href="#5_13">list</a></code> array.</p>
 			
-			<p>When the value of the <code><a href="#3_2">input</a></code> child widget's <code>isValid</code> set-get property is set to <code>false</code>, then the <code><a href="#3_1">add</a></code> button will be disabled. This typically occurs when the <code><a href="#3_2">input</a></code> child widget's value is <code>''</code> (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its <code>validator</code> set-get property.</p>
+			<p>When the value of the <code><a href="#3_2">input</a></code> child widget's <code>isValid</code> state property is set to <code>false</code>, then the <code><a href="#3_1">add</a></code> button will be disabled. This typically occurs when the <code><a href="#3_2">input</a></code> child widget's value is <code>''</code> (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its <code>validator</code> state property.</p>
 			
-			<p>When the <code><a href="#3_1">add</a></code> button is enabled and is clicked by the user, any text entered in the <code><a href="#3_2">input</a></code> child widget will first be processed by the <code><a href="#5_12">itemConformer</a></code> function (if specified) and will then be added to the <code><a href="#5_13">list</a></code> array. Where the new item appears in the <code><a href="#5_13">list</a></code> will depend on the value of the <code><a href="#5_17">sort</a></code> set-get property.</p>
+			<p>When the <code><a href="#3_1">add</a></code> button is enabled and is clicked by the user, any text entered in the <code><a href="#3_2">input</a></code> child widget will first be processed by the <code><a href="#5_12">itemConformer</a></code> function (if specified) and will then be added to the <code><a href="#5_13">list</a></code> array. Where the new item appears in the <code><a href="#5_13">list</a></code> will depend on the value of the <code><a href="#5_17">sort</a></code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -482,7 +482,7 @@ myListEditor.valueOf ();
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">list Implied Node</a></code> and the <code><a href="#5_13">list</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">list Implied Node</a></code> and the <code><a href="#5_13">list</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this child widget is added in the constructor</td></tr>
 			</table>
 		</div>
@@ -501,16 +501,16 @@ myListEditor.valueOf ();
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_13">list</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_13">list</a></code> state property</td></tr>
 			</table>
 		</div>
 	</div>
 	
 	<a name="5"></a>
-	<h1 class="heading1" title="5. Set-get Properties"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="5. State Properties"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="5_1"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_1" title="5. Set-get Properties -&gt; 5.1. built">1</a>. </span>built</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_1" title="5. State Properties -&gt; 5.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -522,7 +522,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_2"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_2" title="5. Set-get Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_2" title="5. State Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -534,7 +534,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_3"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_3" title="5. Set-get Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_3" title="5. State Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -546,7 +546,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_4"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_4" title="5. Set-get Properties -&gt; 5.4. children">4</a>. </span>children</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_4" title="5. State Properties -&gt; 5.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -558,7 +558,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_5"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_5" title="5. Set-get Properties -&gt; 5.5. container">5</a>. </span>container</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_5" title="5. State Properties -&gt; 5.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -570,7 +570,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_6"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.6. enabled"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_6" title="5. Set-get Properties -&gt; 5.6. enabled">6</a>. </span>enabled</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.6. enabled"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_6" title="5. State Properties -&gt; 5.6. enabled">6</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -582,7 +582,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_7"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.7. enabledInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_7" title="5. Set-get Properties -&gt; 5.7. enabledInherited">7</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.7. enabledInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_7" title="5. State Properties -&gt; 5.7. enabledInherited">7</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -594,7 +594,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_8"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.8. html"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_8" title="5. Set-get Properties -&gt; 5.8. html">8</a>. </span>html</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.8. html"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_8" title="5. State Properties -&gt; 5.8. html">8</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -606,7 +606,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_9"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.9. idPrefix"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_9" title="5. Set-get Properties -&gt; 5.9. idPrefix">9</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.9. idPrefix"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_9" title="5. State Properties -&gt; 5.9. idPrefix">9</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -618,7 +618,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_10"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.10. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_10" title="5. Set-get Properties -&gt; 5.10. idPrefixConstruction">10</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.10. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_10" title="5. State Properties -&gt; 5.10. idPrefixConstruction">10</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -630,7 +630,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_11"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.11. insertionMode"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_11" title="5. Set-get Properties -&gt; 5.11. insertionMode">11</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.11. insertionMode"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_11" title="5. State Properties -&gt; 5.11. insertionMode">11</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -642,7 +642,7 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_12"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.12. itemConformer"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_12" title="5. Set-get Properties -&gt; 5.12. itemConformer">12</a>. </span>itemConformer</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.12. itemConformer"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_12" title="5. State Properties -&gt; 5.12. itemConformer">12</a>. </span>itemConformer</h2>
 		<div class="contents2">
 			<p>An optional function, that should be used to conform new items that are added to the <code><a href="#5_13">list</a></code> by the user.</p>
 			
@@ -675,14 +675,14 @@ myListEditor.valueOf ();
 		</div>
 		
 		<a name="5_13"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.13. list"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_13" title="5. Set-get Properties -&gt; 5.13. list">13</a>. </span>list</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.13. list"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_13" title="5. State Properties -&gt; 5.13. list">13</a>. </span>list</h2>
 		<div class="contents2">
 			<p>An array of strings, representing the items in the list.</p>
 			
 			<p>Setting the value of this property programmatically will result in the instance updating its UI to reflect the new items in the list. Whenever an item is added to the list by the user, or when one or more items are removed by the user, the value of this property will be changed. Therefore, registering a handler for the <code>Changed.list</code> event will catch cases where the list is modified by the user as well as programmatically by code setting the value of this property.</p>
 			
 			<a name="5_13_1"></a>
-			<h3 class="heading3" title="5. Set-get Properties -&gt; 5.13. list -&gt; 5.13.1. New Items Become Selected"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_13" title="5. Set-get Properties -&gt; 5.13. list">13</a>.<a href="#5_13_1" title="5. Set-get Properties -&gt; 5.13. list -&gt; 5.13.1. New Items Become Selected">1</a>. </span>New Items Become Selected</h3>
+			<h3 class="heading3" title="5. State Properties -&gt; 5.13. list -&gt; 5.13.1. New Items Become Selected"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_13" title="5. State Properties -&gt; 5.13. list">13</a>.<a href="#5_13_1" title="5. State Properties -&gt; 5.13. list -&gt; 5.13.1. New Items Become Selected">1</a>. </span>New Items Become Selected</h3>
 			<div class="contents3">
 				<p>Items in the new list that didn't previously exist in the list when the UI was last updated will automatically become the selected items.</p>
 				
@@ -696,9 +696,9 @@ myListEditor.valueOf ();
 			</div>
 			
 			<a name="5_13_2"></a>
-			<h3 class="heading3" title="5. Set-get Properties -&gt; 5.13. list -&gt; 5.13.2. Automatically Sorted"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_13" title="5. Set-get Properties -&gt; 5.13. list">13</a>.<a href="#5_13_2" title="5. Set-get Properties -&gt; 5.13. list -&gt; 5.13.2. Automatically Sorted">2</a>. </span>Automatically Sorted</h3>
+			<h3 class="heading3" title="5. State Properties -&gt; 5.13. list -&gt; 5.13.2. Automatically Sorted"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_13" title="5. State Properties -&gt; 5.13. list">13</a>.<a href="#5_13_2" title="5. State Properties -&gt; 5.13. list -&gt; 5.13.2. Automatically Sorted">2</a>. </span>Automatically Sorted</h3>
 			<div class="contents3">
-				<p>When the value of the <code><a href="#5_13">list</a></code> property is being set and a value other than <code>'append'</code> or <code>'prepend'</code> is specified for the <code><a href="#5_17">sort</a></code> set-get property, then the <code><a href="#5_13">list</a></code> value will first be conformed by sorting it according to the current sort mode before the new value is applied.</p>
+				<p>When the value of the <code><a href="#5_13">list</a></code> property is being set and a value other than <code>'append'</code> or <code>'prepend'</code> is specified for the <code><a href="#5_17">sort</a></code> state property, then the <code><a href="#5_13">list</a></code> value will first be conformed by sorting it according to the current sort mode before the new value is applied.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -711,7 +711,7 @@ myListEditor.set ({list:['c','b','a']});
 			</div>
 			
 			<a name="5_13_3"></a>
-			<h3 class="heading3" title="5. Set-get Properties -&gt; 5.13. list -&gt; 5.13.3. Ignored Sets"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_13" title="5. Set-get Properties -&gt; 5.13. list">13</a>.<a href="#5_13_3" title="5. Set-get Properties -&gt; 5.13. list -&gt; 5.13.3. Ignored Sets">3</a>. </span>Ignored Sets</h3>
+			<h3 class="heading3" title="5. State Properties -&gt; 5.13. list -&gt; 5.13.3. Ignored Sets"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_13" title="5. State Properties -&gt; 5.13. list">13</a>.<a href="#5_13_3" title="5. State Properties -&gt; 5.13. list -&gt; 5.13.3. Ignored Sets">3</a>. </span>Ignored Sets</h3>
 			<div class="contents3">
 				<p>When a new value is being set for the <code><a href="#5_13">list</a></code> property, and the conformed new value is equivalent to the current value, then the conformer will return the current array and there will be no value change and <b>no</b> <code>Changed.list</code> event will be fired.</p>
 				
@@ -734,8 +734,8 @@ myListEditor.set ({list:['c','b','a']});  // STILL NO ALERT!
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">list Implied Node</a></code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_18">value</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the list is changed programmatically, the item conformer specified by the <code><a href="#5_12">itemConformer</a></code> set-get property is not applied to the items in the list - they must already be conformed correctly</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_18">value</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the list is changed programmatically, the item conformer specified by the <code><a href="#5_12">itemConformer</a></code> state property is not applied to the items in the list - they must already be conformed correctly</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>[]</code> (an empty array)</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -746,7 +746,7 @@ myListEditor.set ({list:['c','b','a']});  // STILL NO ALERT!
 		</div>
 		
 		<a name="5_14"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.14. localized"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_14" title="5. Set-get Properties -&gt; 5.14. localized">14</a>. </span>localized</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.14. localized"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_14" title="5. State Properties -&gt; 5.14. localized">14</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -758,7 +758,7 @@ myListEditor.set ({list:['c','b','a']});  // STILL NO ALERT!
 		</div>
 		
 		<a name="5_15"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.15. name"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_15" title="5. Set-get Properties -&gt; 5.15. name">15</a>. </span>name</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.15. name"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_15" title="5. State Properties -&gt; 5.15. name">15</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -770,7 +770,7 @@ myListEditor.set ({list:['c','b','a']});  // STILL NO ALERT!
 		</div>
 		
 		<a name="5_16"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.16. nodeMap"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_16" title="5. Set-get Properties -&gt; 5.16. nodeMap">16</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.16. nodeMap"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_16" title="5. State Properties -&gt; 5.16. nodeMap">16</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -782,7 +782,7 @@ myListEditor.set ({list:['c','b','a']});  // STILL NO ALERT!
 		</div>
 		
 		<a name="5_17"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.17. sort"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_17" title="5. Set-get Properties -&gt; 5.17. sort">17</a>. </span>sort</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.17. sort"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_17" title="5. State Properties -&gt; 5.17. sort">17</a>. </span>sort</h2>
 		<div class="contents2">
 			<p>A string, specifying one of the supported list sort modes, or a function reference for a custom list sorter function.</p>
 			
@@ -795,7 +795,7 @@ myListEditor.set ({list:['c','b','a']});  // STILL NO ALERT!
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'z-a'</code> - the list is sorted ASCIIbetically, in descending order</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>custom function</code> - your own custom list sorter function (the same kind of function you would supply to JavaScript's <code><a href="../javascript-reference/Array.html">Array</a></code> object sort method)</td></tr>
 			</table>
-			<p>Whenever the value of the <code><a href="#5_17">sort</a></code> property is changed, the <code><a href="#5_13">list</a></code> array is resorted according to the new sort mode. Whenever the value of the <code><a href="#5_13">list</a></code> set-get property is set, it is first conformed by sorting it according to the current sort mode.</p>
+			<p>Whenever the value of the <code><a href="#5_17">sort</a></code> property is changed, the <code><a href="#5_13">list</a></code> array is resorted according to the new sort mode. Whenever the value of the <code><a href="#5_13">list</a></code> state property is set, it is first conformed by sorting it according to the current sort mode.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -810,19 +810,19 @@ myListEditor.set ({list:['c','b','a']});  // STILL NO ALERT!
 		</div>
 		
 		<a name="5_18"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.18. value"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_18" title="5. Set-get Properties -&gt; 5.18. value">18</a>. </span>value</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.18. value"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_18" title="5. State Properties -&gt; 5.18. value">18</a>. </span>value</h2>
 		<div class="contents2">
-			<p>An alias to the <code><a href="#5_13">list</a></code> set-get property, so that this class effectively implements the <code><a href="#2_2_1">Value Interface</a></code>.</p>
+			<p>An alias to the <code><a href="#5_13">list</a></code> state property, so that this class effectively implements the <code><a href="#2_2_1">Value Interface</a></code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_13">list</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_13">list</a></code> state property</td></tr>
 			</table>
 		</div>
 		
 		<a name="5_19"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.19. wired"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_19" title="5. Set-get Properties -&gt; 5.19. wired">19</a>. </span>wired</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.19. wired"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_19" title="5. State Properties -&gt; 5.19. wired">19</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

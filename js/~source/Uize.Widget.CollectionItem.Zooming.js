@@ -337,16 +337,16 @@ Uize.module ({
 					onChange:_updateUiPreviewZoomNodePosition,
 					value:0
 					/*?
-						Set-get Properties
+						State Properties
 							alignX
 								A floating point number in the range of =0= to =1=, representing the horizontal alignment of the zoomed in image.
 
-								A value of =0= indicates that the zoomed in image is aligned so that its leftmost side is visible, a value of =1= indicates that the zoomed in image is aligned so that its rightmost side is visible, and a value of =.5= indicates that the zoomed in image is aligned so that its center horizontally is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the =inUse= set-get property is set to =true=).
+								A value of =0= indicates that the zoomed in image is aligned so that its leftmost side is visible, a value of =1= indicates that the zoomed in image is aligned so that its rightmost side is visible, and a value of =.5= indicates that the zoomed in image is aligned so that its center horizontally is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the =inUse= state property is set to =true=).
 
 								NOTES
 								- the initial value is =0=
-								- see the companion =alignY= set-get property
-								- see the related =inUse= set-get property
+								- see the companion =alignY= state property
+								- see the related =inUse= state property
 					*/
 				},
 				_alignY:{
@@ -354,27 +354,27 @@ Uize.module ({
 					onChange:_updateUiPreviewZoomNodePosition,
 					value:0
 					/*?
-						Set-get Properties
+						State Properties
 							alignY
 								A floating point number in the range of =0= to =1=, representing the vertical alignment of the zoomed in image.
 
-								A value of =0= indicates that the zoomed in image is aligned so that its topmost side is visible, a value of =1= indicates that the zoomed in image is aligned so that its bottommost side is visible, and a value of =.5= indicates that the zoomed in image is aligned so that its center vertically is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the =inUse= set-get property is set to =true=).
+								A value of =0= indicates that the zoomed in image is aligned so that its topmost side is visible, a value of =1= indicates that the zoomed in image is aligned so that its bottommost side is visible, and a value of =.5= indicates that the zoomed in image is aligned so that its center vertically is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the =inUse= state property is set to =true=).
 
 								NOTES
 								- the initial value is =0=
-								- see the companion =alignX= set-get property
-								- see the related =inUse= set-get property
+								- see the companion =alignX= state property
+								- see the related =inUse= state property
 					*/
 				},
 				_deadMargin:{
 					name:'deadMargin',
 					value:20
 					/*?
-						Set-get Properties
+						State Properties
 							deadMargin
-								An integer, specifying the thickness of the margin at the edges of the preview image where moving the mouse will produce no change in the values of either - or both - of the =alignX= and =alignY= set-get properties.
+								An integer, specifying the thickness of the margin at the edges of the preview image where moving the mouse will produce no change in the values of either - or both - of the =alignX= and =alignY= state properties.
 
-								When the =deadMargin= property is set to a value greater than =0=, there will be a dead margin around the edges of the preview image. When the mouse moves into this dead margin, further mouse movements may produce no change in the values of the =alignX= and =alignY= set-get properties. In other words, panning may be inactive inside this margin. When inside the horizontal dead margin (near the left and right edges), horizontal panning becomes inactive. Similarly, when inside the vertical dead margin (near the top and bottom edges), vertical panning becomes inactive.
+								When the =deadMargin= property is set to a value greater than =0=, there will be a dead margin around the edges of the preview image. When the mouse moves into this dead margin, further mouse movements may produce no change in the values of the =alignX= and =alignY= state properties. In other words, panning may be inactive inside this margin. When inside the horizontal dead margin (near the left and right edges), horizontal panning becomes inactive. Similarly, when inside the vertical dead margin (near the top and bottom edges), vertical panning becomes inactive.
 
 								The purpose of the dead margin is to allow the user to pan horizontally and vertically around the zoomed in image without having to move the mouse perilously close to the edge of the preview image and risk snapping out of the zoomed in experience because the mouse accidentally moves outside of the preview image. When there is a dead margin set, the effective region for controlling the panning is smaller than the actual preview image port, by twice the amount of the =deadMargin= property's value - for each axis.
 
@@ -389,16 +389,16 @@ Uize.module ({
 					onChange:_updateUiPreviewZoomNodePosition,
 					value:1
 					/*?
-						Set-get Properties
+						State Properties
 							displayedZoomPower
-								A read-only floating point number, in the range of =1= to the value of the =zoomPower= set-get property, indicating the currently displayed zoom power.
+								A read-only floating point number, in the range of =1= to the value of the =zoomPower= state property, indicating the currently displayed zoom power.
 
-								When the zoom in effect is initiated, the value of this property will be faded from =1= to the value of the =zoomPower= set-get property, over the duration specified by the =duration= property of the =zoomFadeProperties= object.
+								When the zoom in effect is initiated, the value of this property will be faded from =1= to the value of the =zoomPower= state property, over the duration specified by the =duration= property of the =zoomFadeProperties= object.
 
 								NOTES
 								- the initial value is =1=
 								- this property is read-only
-								- see the related =showingPreview= set-get property
+								- see the related =showingPreview= state property
 					*/
 				},
 				_inUse:{
@@ -453,7 +453,7 @@ Uize.module ({
 					],
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							inUse
 								A boolean, indicating whether or not the zoom in effect is in use.
 
@@ -461,7 +461,7 @@ Uize.module ({
 
 								NOTES
 								- the initial value is =false=
-								- see the related =showingPreview= set-get property
+								- see the related =showingPreview= state property
 					*/
 				},
 				_previewUrl:{
@@ -471,7 +471,7 @@ Uize.module ({
 						_classPrototype._updateUiPreview
 					]
 					/*?
-						Set-get Properties
+						State Properties
 							previewUrl
 								A string, specifying the URL for the preview image.
 
@@ -479,18 +479,18 @@ Uize.module ({
 
 								NOTES
 								- the initial value is =undefined=
-								- see the companion =previewZoomUrl= set-get property
+								- see the companion =previewZoomUrl= state property
 					*/
 				},
 				_previewZoomUrl:{
 					name:'previewZoomUrl',
 					onChange:[_updatePreviewZoomDisplayed,_updatePreviewZoomLowResDisplayed]
 					/*?
-						Set-get Properties
+						State Properties
 							previewZoomUrl
 								A string or function, specifying the URL of the image that should be used for the zoomed in preview.
 
-								When a function reference is specified for this property, then the function will be called as an instance method on the instance, each time before the zoom in effect is initiated. This gives the function the opportunity to calculate a URL based upon the state of the instance - especially the value of the =previewUrl= set-get property, which may have been modified since the last time that the zoom in effect was initiated. Consider the following example...
+								When a function reference is specified for this property, then the function will be called as an instance method on the instance, each time before the zoom in effect is initiated. This gives the function the opportunity to calculate a URL based upon the state of the instance - especially the value of the =previewUrl= state property, which may have been modified since the last time that the zoom in effect was initiated. Consider the following example...
 
 								EXAMPLE
 								....................................................................................
@@ -505,25 +505,25 @@ Uize.module ({
 								);
 								....................................................................................
 
-								In the above example, the zoomed in preview URL is being derived from the value of the =previewUrl= set-get property. By specifying a function for =previewZoomUrl=, the code that derives the zoomed in preview URL will be executed each time the zoom in effect is initiated. In this case, the code is expecting the value of the =previewUrl= property to always contain the dimensions string ='100x100'=, which is replaced with the string ='250x250'= to produce the URL for the zoomed in preview.
+								In the above example, the zoomed in preview URL is being derived from the value of the =previewUrl= state property. By specifying a function for =previewZoomUrl=, the code that derives the zoomed in preview URL will be executed each time the zoom in effect is initiated. In this case, the code is expecting the value of the =previewUrl= property to always contain the dimensions string ='100x100'=, which is replaced with the string ='250x250'= to produce the URL for the zoomed in preview.
 
 								NOTES
 								- the initial value is =undefined=
-								- see the companion =previewUrl= set-get property
+								- see the companion =previewUrl= state property
 					*/
 				},
 				_showingPreview:{
 					name:'showingPreview',
 					value:_false
 					/*?
-						Set-get Properties
+						State Properties
 							showingPreview
 								A read-only boolean, indicating whether or not the zoomed in preview is being shown.
 
 								NOTES
 								- the initial value is =false=
 								- this property is read-only
-								- see the related =displayedZoomPower= and =inUse= set-get properties
+								- see the related =displayedZoomPower= and =inUse= state properties
 					*/
 				},
 				_zoomPower:{
@@ -531,13 +531,13 @@ Uize.module ({
 					onChange:[_updatePreviewZoomDisplayed,_updatePreviewZoomLowResDisplayed],
 					value:1
 					/*?
-						Set-get Properties
+						State Properties
 							zoomPower
 								A floating point number, specifying the number of times larger the zoomed in image is than the normal preview.
 
 								A NOTE ON RESIZING
 
-								Ideally, for whatever value is specified for this property, the image specified by the =previewZoomUrl= set-get property should be the same number of times bigger than the image specified by the =previewUrl= set-get property.
+								Ideally, for whatever value is specified for this property, the image specified by the =previewZoomUrl= state property should be the same number of times bigger than the image specified by the =previewUrl= state property.
 
 								So, for example, if =zoomPower= is set to the value =2=, and if the image specified by the =previewUrl= property has dimensions of 200x150, then the image specified by =previewZoomUrl= should ideally be 400x300. When this is not the case, then the browser will be scaling the zoomed in image to dimensions that are not its natural dimensions, and the quality of the shrinking or stretching will depend on the image resizing mechanism of the browser. Some browsers do a better job than others, but resizing done in the browser never looks all that great in the best of cases.
 
@@ -550,11 +550,11 @@ Uize.module ({
 					name:'zoomFadeProperties',
 					value:{duration:600,curve:Uize.Fade.celeration (0,1)}
 					/*?
-						Set-get Properties
+						State Properties
 							zoomFadeProperties
 								An object, specifying properties that should be used for the =Uize.Fade= instance that drives the zoom in effect's animation.
 
-								The properties of the =zoomFadeProperties= object can be any of the set-get properties supported by the =Uize.Fade= class. For example, if you wanted a zoom in animation that had some bounce, then you could specify a value for this property that was an object with a =curve= property whose value was a curve function, as in the following example...
+								The properties of the =zoomFadeProperties= object can be any of the state properties supported by the =Uize.Fade= class. For example, if you wanted a zoom in animation that had some bounce, then you could specify a value for this property that was an object with a =curve= property whose value was a curve function, as in the following example...
 
 								EXAMPLE
 								....................................................................................
@@ -578,7 +578,7 @@ Uize.module ({
 					*/
 				},
 
-				/*** Private Set-get Properties ***/
+				/*** Private State Properties ***/
 					_previewZoomUrlLoaded:{ // whether or not the previewZoomUrl image is loaded in previewZoom node
 						onChange:[_updatePreviewZoomVisible,_updatePreviewZoomLowResVisible],
 						value:_false

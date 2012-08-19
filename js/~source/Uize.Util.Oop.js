@@ -50,7 +50,7 @@ Uize.module ({
 				if (_class) {
 					function _getFeaturesForContext (_contextName) {
 						var
-							_contextIsSetGet = _contextName == 'set-get',
+							_contextIsSetGet = _contextName == 'state',
 							_context = _contextIsSetGet
 								? _class.get ()
 								: _contextName == 'instance' ? _class.prototype : _class,
@@ -81,7 +81,7 @@ Uize.module ({
 					}
 					_getFeaturesForContext ('instance');
 					_getFeaturesForContext ('static');
-					_package.isUizeClass (_class) && _getFeaturesForContext ('set-get');
+					_package.isUizeClass (_class) && _getFeaturesForContext ('state');
 
 					/*** sort the features by the keys: access, context, type, name ***/
 						function _compareTwo (_valueA,_valueB) {
@@ -216,7 +216,7 @@ Uize.module ({
 				function _returnSetGetProperties () {return _class.get ()}
 				var
 					_isInstanceFeature = _contextName == 'instance',
-					_isSetGetFeature = !_isInstanceFeature && _contextName == 'set-get',
+					_isSetGetFeature = !_isInstanceFeature && _contextName == 'state',
 					_getFeatureContext = _isInstanceFeature
 						? _returnPrototype
 						: _isSetGetFeature ? _returnSetGetProperties : _returnClass,

@@ -1,6 +1,6 @@
-The =Uize= base class has been improved with the addition of the new =Changed.&#42;= instance event - a wildcard event that is fired whenever one or more set-get properties change value as a result of a call to the =set= instance method.
+The =Uize= base class has been improved with the addition of the new =Changed.&#42;= instance event - a wildcard event that is fired whenever one or more state properties change value as a result of a call to the =set= instance method.
 
-This event will only be fired once for all set-get properties that have changed value during a call to the =set= method. The event object for this event will contain a =properties= property, which is an object indicating which set-get properties have changed value, being a mapping between the public names of set-get properties that have changed and their new values.
+This event will only be fired once for all state properties that have changed value during a call to the =set= method. The event object for this event will contain a =properties= property, which is an object indicating which state properties have changed value, being a mapping between the public names of state properties that have changed and their new values.
 
 
 

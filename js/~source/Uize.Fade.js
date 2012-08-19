@@ -23,7 +23,7 @@
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		The =Uize.Fade= class implements automated interpolation of a simple or compound value, between specified start and end values, and with qualities of the fade - such as duration, curve, quantization, etc. - being configurable through the set-get properties of the class.
+		The =Uize.Fade= class implements automated interpolation of a simple or compound value, between specified start and end values, and with qualities of the fade - such as duration, curve, quantization, etc. - being configurable through the state properties of the class.
 
 		BACKGROUND READING
 
@@ -146,7 +146,7 @@ Uize.module ({
 							myInstance.start (fadePropertiesOBJ);
 							.....................................
 
-							When the optional =fadePropertiesOBJ= parameter is specified, the set-get properties specified in the =fadePropertiesOBJ= object will be set before the fade is started. This is a convenience offered because one often might want to start a fade immediately after setting its =startValue= and =endValue= properties (and sometimes other properties, such as =curve=, =quantization=, etc.).
+							When the optional =fadePropertiesOBJ= parameter is specified, the state properties specified in the =fadePropertiesOBJ= object will be set before the fade is started. This is a convenience offered because one often might want to start a fade immediately after setting its =startValue= and =endValue= properties (and sometimes other properties, such as =curve=, =quantization=, etc.).
 
 							EXAMPLE
 
@@ -362,7 +362,7 @@ Uize.module ({
 								When no parameters are specified, then a reference to =Uize.Curve.linear= (a linear curve function) will be returned - the resulting curve function will contain no acceleration or deceleration phases. The same linear curve function will be produced if the value =0= is specified for both the =acceleration0to1FLOAT= and =deceleration0to1FLOAT= parameters.
 
 							NOTES
-							- see also the =curve= set-get property
+							- see also the =curve= state property
 				*/
 			};
 			_nonInheritableStatics.celeration = 1;
@@ -389,7 +389,7 @@ Uize.module ({
 					name:'curve',
 					onChange:_forceValueUpdate
 					/*?
-						Set-get Properties
+						State Properties
 							curve
 								A function reference, being a curve function that will be used to control value interpolation for a fade process.
 
@@ -398,7 +398,7 @@ Uize.module ({
 								When setting a value for the =curve= property, you can provide your own hand-rolled curve function, or you can pick from the many convenient curve function generators provided in the =Uize.Curve= and =Uize.Curve.Rubber= modules. Even more complex curve functions can be generated using the versatile curve function modifiers provided in the =Uize.Curve.Mod= module.
 
 								Compound Curve Value
-									As with the =quantization= set-get property, a compound value can be specified for the =curve= set-get property.
+									As with the =quantization= state property, a compound value can be specified for the =curve= state property.
 
 								NOTES
 								- the initial value is =undefined=
@@ -413,13 +413,13 @@ Uize.module ({
 					name:'duration',
 					value:2000
 					/*?
-						Set-get Properties
+						State Properties
 							duration
 								An integer, representing the time (in milliseconds) that the fade process should take to complete.
 
 								NOTES
 								- the initial value is =2000= (ie. two seconds)
-								- the actual duration of the fade process is not affected by the value of the =curve= set-get property
+								- the actual duration of the fade process is not affected by the value of the =curve= state property
 					*/
 				},
 				_endValue:{
@@ -427,13 +427,13 @@ Uize.module ({
 					onChange:_forceValueUpdate,
 					value:100
 					/*?
-						Set-get Properties
+						State Properties
 							endValue
 								The value (or set of values) that should be reached at the end of the fade process.
 
 								NOTES
 								- the initial value is =100=
-								- see also the =startValue= set-get property
+								- see also the =startValue= state property
 					*/
 				},
 				_inProgress:{
@@ -463,7 +463,7 @@ Uize.module ({
 					},
 					value:false
 					/*?
-						Set-get Properties
+						State Properties
 							inProgress
 								A boolean value, indicating whether or not the fade operation is in progress.
 
@@ -479,7 +479,7 @@ Uize.module ({
 					onChange:_classPrototype._updateValue,
 					value:0
 					/*?
-						Set-get Properties
+						State Properties
 							progress
 								A floating point value in the range of 0 to 1, specifying the fraction of the full fade process that is complete. A value of =0= indicates that the fade is at the start, a value of =1= indicates that the fade is at the end, and a value of =.5= indicates that the fade is halfway through.
 
@@ -489,11 +489,11 @@ Uize.module ({
 				},
 				_reverse:'reverse',
 					/*?
-						Set-get Properties
+						State Properties
 							reverse
 								A boolean value, specifying whether or not the fade process should operate in reverse.
 
-								Because this flag complements the value of the =progress= set-get property, the =progress= property will have a value of =1= when the fade starts and =0= when the fade is done. This may also mean that the nature of the fade will not be exactly reversed and may actually be different if there is asymmetry resulting from the specific value of the =curve= set-get property.
+								Because this flag complements the value of the =progress= state property, the =progress= property will have a value of =1= when the fade starts and =0= when the fade is done. This may also mean that the nature of the fade will not be exactly reversed and may actually be different if there is asymmetry resulting from the specific value of the =curve= state property.
 
 								NOTES
 								- the initial value is =undefined=
@@ -503,22 +503,22 @@ Uize.module ({
 					onChange:_forceValueUpdate,
 					value:0
 					/*?
-						Set-get Properties
+						State Properties
 							startValue
 								The value (or set of values) at which the fade process should start.
 
 								NOTES
 								- the initial value is =0=
-								- see also the =endValue= set-get property
+								- see also the =endValue= state property
 					*/
 				},
 				_quantization:'quantization',
 				/*?
-					Set-get Properties
+					State Properties
 						quantization
 							A number or array or object, allowing one to control the quantization for the interpolated values of a fade.
 
-							When the value =0=, =undefined=, or =null= is specified for this property, then the fade's interpolated value can be a floating point number (or contain floating point numbers, if it's a compound value). This can be a problem for fading values in certain applications where an integer value is desirable, and where a floating point number may be inappropriate. In such cases, a value of =1= can be specified for the =quantization= set-get property, thereby directing the fade to interpolate its value in increments of one.
+							When the value =0=, =undefined=, or =null= is specified for this property, then the fade's interpolated value can be a floating point number (or contain floating point numbers, if it's a compound value). This can be a problem for fading values in certain applications where an integer value is desirable, and where a floating point number may be inappropriate. In such cases, a value of =1= can be specified for the =quantization= state property, thereby directing the fade to interpolate its value in increments of one.
 
 							Relative to Start Value
 								It's important to note that a quantization value of =2= doesn't mean that an interpolated value will always be even (it could also be odd), since quantization determines the step increments from the start value of a fade.
@@ -540,14 +540,14 @@ Uize.module ({
 								});
 								...................................................
 
-								In the above example, a fade instance is created for fading a color between orange and violet, over a duration of =2000= milliseconds (two seconds). The =startValue= set-get property is used to specify the starting color of orange, while the =endValue= property is used to specify the ending color of violet.
+								In the above example, a fade instance is created for fading a color between orange and violet, over a duration of =2000= milliseconds (two seconds). The =startValue= state property is used to specify the starting color of orange, while the =endValue= property is used to specify the ending color of violet.
 
 								The start and end values are specified using an object with =red=, =green=, and =blue= properties that specify the values for each of the three channels that comprise an RGB color. This approach leverages the =Uize.Fade= class' ability to interpolate arbitrarily complex, compound values. Now, the value for each of the red, green, and blue channels must be an integer - there is no meaning to floating point values for these channels.
 
-								So, if =quantization= is left to its initial value of =undefined=, then RGB colors with floating point channel values would be interpolated, and this might not be appropriate for the code that handles the fade's update, or that code would have to do its own rounding. Additionally, the value of the fade's =value= set-get property would likely change more frequently, putting more load on update handler code. Specifying a value of =1= for the =quantization= property ensures that the values for all the channels of the color will be interpolated in steps of =1= and would, therefore, always be integers.
+								So, if =quantization= is left to its initial value of =undefined=, then RGB colors with floating point channel values would be interpolated, and this might not be appropriate for the code that handles the fade's update, or that code would have to do its own rounding. Additionally, the value of the fade's =value= state property would likely change more frequently, putting more load on update handler code. Specifying a value of =1= for the =quantization= property ensures that the values for all the channels of the color will be interpolated in steps of =1= and would, therefore, always be integers.
 
 							Compound Quantization Value
-								It is possible to specify a compound value for the =quantization= set-get property, just as with the =startValue= and =endValue= properties.
+								It is possible to specify a compound value for the =quantization= state property, just as with the =startValue= and =endValue= properties.
 
 								In fact, you can specify a quantization value that matches the structure of the start and end values and that specifies granular quantization for all components of a compound value fade.
 
@@ -621,7 +621,7 @@ Uize.module ({
 								In the above example, a fade instance is created for fading two colors, =colorA= and =colorB=, where =colorA= is faded between orange and violet, and where =colorB= is faded between pure red and pure blue. A compound value is specified for =quantization=, where the structure mostly matches the structure of the start and end values, but with the key distinction that a simple number is specified for =colorB=, rather than an object with =red=, =green=, and =blue= properties as with =colorA=. This has the effect of defaulting the quantization for all components of the =colorB= subtree (ie. =red=, =green=, and =blue=) in the interpolated compound value to =1=.
 
 							Floating Point Quantization Values
-								There's nothing to say that values for the =quantization= set-get property have to be integers.
+								There's nothing to say that values for the =quantization= state property have to be integers.
 
 								You can just as well specify a floating point value for quantization. For example, a fade starting with =0= and with a quantization of =.5= would produce the interpolated values =0=, =.5=, =1=, =1.5=, =2=, =2.5=, etc. This could be useful in cases where a floating point interpolated value is acceptable, but where one wishes to limit the number of value changes that occur for performance reasons. In such cases, setting a quantization to anything other than =0= would provide a throttling effect that would reduce the number of value updates that would occur.
 
@@ -644,9 +644,9 @@ Uize.module ({
 					name:'value',
 					value:0
 					/*?
-						Set-get Properties
+						State Properties
 							value
-								The value (or set of values) at the current point in a fade that is in progress, as interpolated between the values of the =startValue= and =endValue= set-get properties.
+								The value (or set of values) at the current point in a fade that is in progress, as interpolated between the values of the =startValue= and =endValue= state properties.
 
 								NOTES
 								- the initial value is =0=
@@ -656,10 +656,10 @@ Uize.module ({
 
 		/*?
 			Deprecated Features
-				acceleration Set-get Property (DEPRECATED 2009-07-10)
+				acceleration State Property (DEPRECATED 2009-07-10)
 					A floating point value in the range of 0 to 1, specifying the fraction of the fade should be an acceleration phase.
 
-					This set-get property has been deprecated in favor of the more versatile =curve= set-get property and the =Uize.Fade.celeration= static method.
+					This state property has been deprecated in favor of the more versatile =curve= state property and the =Uize.Fade.celeration= static method.
 
 					INSTEAD OF...
 					....................................................
@@ -673,18 +673,18 @@ Uize.module ({
 
 					Setting a value for =acceleration= will have the effect of creating a curve function using the =Uize.Fade.celeration= static method and then setting the curve function created as the value of the =curve= property.
 
-					The =curve= set-get property is much more versatile than the `acceleration Set-get Property (DEPRECATED 2009-07-10)` and `deceleration Set-get Property (DEPRECATED 2009-07-10)`, and lets you specify a curve function in order to achieve a wide variety of different kinds of non-linear fade effects, including effects like bounce, springiness, wobble, elasticity. etc. When setting a value for the =curve= property, you can provide your own hand-rolled curve function, or you can pick from the many convenient curve function generators provided in the =Uize.Curve= and =Uize.Curve.Rubber= modules. Even more complex curve functions can be generated using the versatile curve function modifiers provided in the =Uize.Curve.Mod= module.
+					The =curve= state property is much more versatile than the `acceleration State Property (DEPRECATED 2009-07-10)` and `deceleration State Property (DEPRECATED 2009-07-10)`, and lets you specify a curve function in order to achieve a wide variety of different kinds of non-linear fade effects, including effects like bounce, springiness, wobble, elasticity. etc. When setting a value for the =curve= property, you can provide your own hand-rolled curve function, or you can pick from the many convenient curve function generators provided in the =Uize.Curve= and =Uize.Curve.Rubber= modules. Even more complex curve functions can be generated using the versatile curve function modifiers provided in the =Uize.Curve.Mod= module.
 
 					NOTES
 					- the initial value is =undefined=
-					- the sum of the `acceleration Set-get Property (DEPRECATED 2009-07-10)` and `deceleration Set-get Property (DEPRECATED 2009-07-10)` must not exceed =1=
-					- see also the `deceleration Set-get Property (DEPRECATED 2009-07-10)`
-					- see the =curve= set-get property and the =Uize.Fade.celeration= static method
+					- the sum of the `acceleration State Property (DEPRECATED 2009-07-10)` and `deceleration State Property (DEPRECATED 2009-07-10)` must not exceed =1=
+					- see also the `deceleration State Property (DEPRECATED 2009-07-10)`
+					- see the =curve= state property and the =Uize.Fade.celeration= static method
 
-				deceleration Set-get Property (DEPRECATED 2009-07-10)
+				deceleration State Property (DEPRECATED 2009-07-10)
 					A floating point value in the range of 0 to 1, specifying the fraction of the fade should be a deceleration phase.
 
-					This set-get property has been deprecated in favor of the more versatile =curve= set-get property and the =Uize.Fade.celeration= static method.
+					This state property has been deprecated in favor of the more versatile =curve= state property and the =Uize.Fade.celeration= static method.
 
 					INSTEAD OF...
 					....................................................
@@ -698,13 +698,13 @@ Uize.module ({
 
 					Setting a value for =deceleration= will have the effect of creating a curve function using the =Uize.Fade.celeration= static method and then setting the curve function created as the value of the =curve= property.
 
-					The =curve= set-get property is much more versatile than the deprecated `acceleration Set-get Property (DEPRECATED 2009-07-10)` and `deceleration Set-get Property (DEPRECATED 2009-07-10)`, and lets you specify a curve function in order to achieve a wide variety of different kinds of non-linear fade effects, including effects like bounce, springiness, wobble, elasticity. etc. When setting a value for the =curve= property, you can provide your own hand-rolled curve function, or you can pick from the many convenient curve function generators provided in the =Uize.Curve= and =Uize.Curve.Rubber= modules. Even more complex curve functions can be generated using the versatile curve function modifiers provided in the =Uize.Curve.Mod= module.
+					The =curve= state property is much more versatile than the deprecated `acceleration State Property (DEPRECATED 2009-07-10)` and `deceleration State Property (DEPRECATED 2009-07-10)`, and lets you specify a curve function in order to achieve a wide variety of different kinds of non-linear fade effects, including effects like bounce, springiness, wobble, elasticity. etc. When setting a value for the =curve= property, you can provide your own hand-rolled curve function, or you can pick from the many convenient curve function generators provided in the =Uize.Curve= and =Uize.Curve.Rubber= modules. Even more complex curve functions can be generated using the versatile curve function modifiers provided in the =Uize.Curve.Mod= module.
 
 					NOTES
 					- the initial value is =undefined=
-					- the sum of the `acceleration Set-get Property (DEPRECATED 2009-07-10)` and `deceleration Set-get Property (DEPRECATED 2009-07-10)` must not exceed =1=
-					- see also the `acceleration Set-get Property (DEPRECATED 2009-07-10)`
-					- see the =curve= set-get property and the =Uize.Fade.celeration= static method
+					- the sum of the `acceleration State Property (DEPRECATED 2009-07-10)` and `deceleration State Property (DEPRECATED 2009-07-10)` must not exceed =1=
+					- see also the `acceleration State Property (DEPRECATED 2009-07-10)`
+					- see the =curve= state property and the =Uize.Fade.celeration= static method
 		*/
 
 		return _class;

@@ -159,16 +159,16 @@ Uize.module ({
         /*?
           Instance Methods
             getOptionProperties
-              A hook method for subclasses to provide additional set-get properties to add to the general =optionWidgetProperties= for a specific child option button widget. The base implementation returns =null=.
+              A hook method for subclasses to provide additional state properties to add to the general =optionWidgetProperties= for a specific child option button widget. The base implementation returns =null=.
 
               SYNTAX
               ...................................................................................
               optionPropertiesOBJ = myInstance.getOptionProperties (valueNoINT, valueObjectOBJ);
               ...................................................................................
 
-              =valueNoINT= contains the child widget button index. =valueObjectOBJ= is the object in the =values= set-get property at index =valueNoINT=.
+              =valueNoINT= contains the child widget button index. =valueObjectOBJ= is the object in the =values= state property at index =valueNoINT=.
 
-              This hook method is useful when a =Uize.Widget.Options= subclass wants specific data from each value object within the =values= set-get property passed to the option button child widget when it is created. This data is added to the =optionWidgetProperties= which are common accross all option buton child widgets.
+              This hook method is useful when a =Uize.Widget.Options= subclass wants specific data from each value object within the =values= state property passed to the option button child widget when it is created. This data is added to the =optionWidgetProperties= which are common accross all option buton child widgets.
 
               EXAMPLE
               ...........................................................................................
@@ -183,7 +183,7 @@ Uize.module ({
               };
               ...........................................................................................
 
-              In the above example, the =getOptionProperties= hook method was overridden in a subclass to add =value= and =valueDetails= properties to the set-get properties that will be set on the option button child widget. These values are retrieved from the =valueObjectOBJ=.
+              In the above example, the =getOptionProperties= hook method was overridden in a subclass to add =value= and =valueDetails= properties to the state properties that will be set on the option button child widget. These values are retrieved from the =valueObjectOBJ=.
         */
 
       _classPrototype.updateUi = function () {
@@ -247,7 +247,7 @@ Uize.module ({
                         /*?
                           Instance Events
                             Before Value Change
-                              This event fires just as an option button is clicked, but before the =value= set-get property for the instance is updated.
+                              This event fires just as an option button is clicked, but before the =value= state property for the instance is updated.
 
                               This event offers the handler the opportunity to cancel the value change. The event contains a "value" property (which is the new value that would be set) and a "valueNo" property (which is the index of the new value that would be set). To cancel the set action, the handler can set the event object's "cancel" property to =true=. The handler can inspect the "value" and "valueNo" properties of the event to determine if the value change should be permitted.
                         */
@@ -340,11 +340,11 @@ Uize.module ({
           },
           value:_false
           /*?
-            Set-get Properties
+            State Properties
               ensureValueInValues
-                A boolean, indicating whether or not the value of the =value= set-get property should be one of the values within the =values= set-get property.
+                A boolean, indicating whether or not the value of the =value= state property should be one of the values within the =values= state property.
 
-                When this property is set to =true=, the =value= set-get property will be enforced to be within the =values= set-get property. If the =value= set-get property is set with a value not within the =values= set-get property, the first value within the =values= set-get property will be chosen. When this is property is set to =false=, the value is no longer restricted to be one of the values within the =values= set-get property.
+                When this property is set to =true=, the =value= state property will be enforced to be within the =values= state property. If the =value= state property is set with a value not within the =values= state property, the first value within the =values= state property will be chosen. When this is property is set to =false=, the value is no longer restricted to be one of the values within the =values= state property.
 
                 NOTES
                 - the initial value is =false=
@@ -352,7 +352,7 @@ Uize.module ({
         },
         _optionWidgetClass:'optionWidgetClass',
           /*?
-            Set-get Properties
+            State Properties
               optionWidgetClass
                 An object reference to a widget class that should be used for the option buttons.
 
@@ -360,28 +360,28 @@ Uize.module ({
 
                 NOTES
                 - when this property is set to =null= or left =undefined=, then the =Uize.Widget.Button= class will be used for option buttons
-                - see the companion =optionWidgetProperties= set-get property
+                - see the companion =optionWidgetProperties= state property
                 - the initial value is =undefined=
           */
         _optionWidgetProperties:'optionWidgetProperties',
           /*?
-            Set-get Properties
+            State Properties
               optionWidgetProperties
-                An object, specifying values for set-get properties that should be used when creating option button child widgets.
+                An object, specifying values for state properties that should be used when creating option button child widgets.
 
-                The =optionWidgetProperties= property lets you specify values for set-get properties that will be common to all option button widgets that are created. This can be useful in cases where you are using the =optionWidgetClass= set-get property to use a widget class other than =Uize.Widget.Button= for the option buttons, and where that other widget class may provide further configurability through additional set-get properties beyond what the =Uize.Widget.Button= class provides. In such cases, option button instances that are created for a particular =Uize.Widget.Options= instance can be configured for that instance by specifying set-get property values through the =optionWidgetProperties= property.
+                The =optionWidgetProperties= property lets you specify values for state properties that will be common to all option button widgets that are created. This can be useful in cases where you are using the =optionWidgetClass= state property to use a widget class other than =Uize.Widget.Button= for the option buttons, and where that other widget class may provide further configurability through additional state properties beyond what the =Uize.Widget.Button= class provides. In such cases, option button instances that are created for a particular =Uize.Widget.Options= instance can be configured for that instance by specifying state property values through the =optionWidgetProperties= property.
 
                 NOTES
-                - see the companion =optionWidgetClass= set-get property
+                - see the companion =optionWidgetClass= state property
                 - the initial value is =undefined=
           */
         _setValueOnMouseover:'setValueOnMouseover',
           /*?
-            Set-get Properties
+            State Properties
               setValueOnMouseover
-                A boolean, indicating whether or not the value of the =value= set-get property should be set when the user rests the mouse over an option, instead of the values of the =tentativeValue= and =tentativeValueNo= set-get properties.
+                A boolean, indicating whether or not the value of the =value= state property should be set when the user rests the mouse over an option, instead of the values of the =tentativeValue= and =tentativeValueNo= state properties.
 
-                When this property is set to =true=, the =value= set-get property will be set when the user rests the mouse over an option. When this property is set to =false=, =null=, =0=, or left =undefined=, then the values of the =tentativeValue= and =tentativeValueNo= properties will be set.
+                When this property is set to =true=, the =value= state property will be set when the user rests the mouse over an option. When this property is set to =false=, =null=, =0=, or left =undefined=, then the values of the =tentativeValue= and =tentativeValueNo= properties will be set.
 
                 When =setValueOnMouseover= is set to =true=, the user will not be required to click in order for a selection to be made. In such a case, if the =tentativeRestTime= property is set to =0=, then the =value= property will be set immediately on mousing over an option. When =tentativeRestTime= is set to a value greater than =0=, then the user will have to rest the mouse on the option for the amount of time specified by the =tentativeRestTime= property before the =value= property is set. Of course, the user can still click immediately after mousing over the option to expedite selection.
 
@@ -392,9 +392,9 @@ Uize.module ({
           name:'tentativeRestTime',
           value:0
           /*?
-            Set-get Properties
+            State Properties
               tentativeRestTime
-                An integer, representing the time (in milliseconds) that the user must remain moused over an option button before the =tentativeValue= set-get property will be set to the value corresponding to that button.
+                An integer, representing the time (in milliseconds) that the user must remain moused over an option button before the =tentativeValue= state property will be set to the value corresponding to that button.
 
                 NOTES
                 - the special value of =0= indicates that the =tentativeValue= mechanism should be disabled
@@ -405,21 +405,21 @@ Uize.module ({
           name:'tentativeValue',
           value:_null
           /*?
-            Set-get Properties
+            State Properties
               tentativeValue
                 A value of any type, that represents the current value that is tentatively being set / considered by the user.
 
                 NOTES
                 - the initial value is =null=
-                - whenever the =value= set-get property is set, this property is also set to the same value
-                - in "resting" state (ie. when the user is not interacting with the widget), this property will have the same value as the =value= set-get property
+                - whenever the =value= state property is set, this property is also set to the same value
+                - in "resting" state (ie. when the user is not interacting with the widget), this property will have the same value as the =value= state property
           */
         },
         _tentativeValueNo:{
           name:'tentativeValueNo',
           value:-1
           /*?
-            Set-get Properties
+            State Properties
               tentativeValueNo
                 An integer, representing the index of the current =tentativeValue= in the =values= set.
 
@@ -439,20 +439,20 @@ Uize.module ({
           },
           value:_null
           /*?
-            Set-get Properties
+            State Properties
               value
-                A simple type value (string, boolean, or number), that should either match one of the values in an array of simple type values specified by the =values= set-get property, or should match the name property of one of the objects in an array of object type values specified by the =values= set-get property.
+                A simple type value (string, boolean, or number), that should either match one of the values in an array of simple type values specified by the =values= state property, or should match the name property of one of the objects in an array of object type values specified by the =values= state property.
 
                 NOTES
                 - the initial value is =null=
-                - whenever this property is set, the =tentativeValue= set-get property is set to the same value
+                - whenever this property is set, the =tentativeValue= state property is set to the same value
           */
         },
         _valueNo:{
           name:'valueNo',
           value:-1
           /*?
-            Set-get Properties
+            State Properties
               valueNo
                 An integer, representing the index of the current =value= in the =values= set.
 
@@ -480,7 +480,7 @@ Uize.module ({
           },
           value:[]
           /*?
-            Set-get Properties
+            State Properties
               values
                 An array of simple type values (string, boolean, or number) or objects, representing the value set for the widget.
 
@@ -514,7 +514,7 @@ Uize.module ({
                 });
                 ....................................
 
-                When an array of objects is specified for the =values= set-get property, each object should contain a =name= property. Then, when setting a value for the =value= set-get property, the object from the =values= array will be selected whose =name= property matches the value of the =value= set-get property. In the above example, the =values= for =myOptions= is being set to an array of objects. In order to select the sweet potato value now, one would use the statement =myOptions.set ({value:'sweetPotato'})=.
+                When an array of objects is specified for the =values= state property, each object should contain a =name= property. Then, when setting a value for the =value= state property, the object from the =values= array will be selected whose =name= property matches the value of the =value= state property. In the above example, the =values= for =myOptions= is being set to an array of objects. In order to select the sweet potato value now, one would use the statement =myOptions.set ({value:'sweetPotato'})=.
 
                 NOTES
                 - if this property is changed once the widget is already wired, then the widget will be unwired and then wired again

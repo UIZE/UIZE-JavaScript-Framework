@@ -73,7 +73,7 @@ Uize.module({
 							_featuresPerSection = {
 								'Instance Methods':[],
 								'Instance Properties':[],
-								'Set-get Properties':[],
+								'State Properties':[],
 								'Static Methods':[],
 								'Static Properties':[]
 							},
@@ -391,7 +391,7 @@ Uize.module({
 									/*** properties ***/
 										'Instance Properties',
 										'Static Properties',
-										'Set-get Properties',
+										'State Properties',
 									/*** events ***/
 										'Instance Events',
 										'Static Events',

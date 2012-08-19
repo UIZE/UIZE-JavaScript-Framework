@@ -28,7 +28,7 @@
 		<ul>
 			<li><a href="#1" title="The toString intrinsic method is now implemented also as a static method on Uize subclasses, so the alert statement can now be used to display a summary of info for an object that is a reference to a Uize subclass. For example, the statement alert (Uize.Widget.Page) would produce an output like...">1. Uize.toString</a></li>
 			<li><a href="#2" title="Less compelling than the new Uize.toString static implementation, the valueOf intrinsic method is now also implemented as a static method on Uize subclasses.">2. Uize.valueOf</a></li>
-			<li><a href="#3" title="When registering set-get properties using the Uize.registerProperties static method, it is now possible to omit the public name for a property and it will default to the private name.">3. Name Property Optional in Set-get Property Profiles</a></li>
+			<li><a href="#3" title="When registering state properties using the Uize.registerProperties static method, it is now possible to omit the public name for a property and it will default to the private name.">3. Name Property Optional in State Property Profiles</a></li>
 			<li><a href="#4" title="A new variation of the set method that accepts the two parameters propertyNameSTR and propertyValueANYTYPE makes it possible to use an expression or the value of a variable for specifying the name of the property to set.">4. New Variation of set Method</a></li>
 		</ul>
 	</li>
@@ -63,7 +63,7 @@ nodeMap : undefined
 wired : false
 </pre>
 		
-		<p>This new behavior is similar to the existing behavior for instances of a <code><a href="../reference/Uize.html">Uize</a></code> subclass, excepting that the summary of values for set-get properties is for the class (ie. static) rather than an instance.</p>
+		<p>This new behavior is similar to the existing behavior for instances of a <code><a href="../reference/Uize.html">Uize</a></code> subclass, excepting that the summary of values for state properties is for the class (ie. static) rather than an instance.</p>
 	</div>
 	
 	<a name="2"></a>
@@ -71,15 +71,15 @@ wired : false
 	<div class="contents1">
 		<p>Less compelling than the new <code><a href="#1">Uize.toString</a></code> static implementation, the <code>valueOf</code> intrinsic method is now also implemented as a static method on <code><a href="../reference/Uize.html">Uize</a></code> subclasses.</p>
 		
-		<p>This change is more for parity than anything else. This means that you can access the static value of a class' <code>value</code> set-get property by involving the class reference in an expression, such as <code>+Uize.Widget.Bar.Slider</code>, or <code>Uize.Widget.ColorPicker + ''</code>.</p>
+		<p>This change is more for parity than anything else. This means that you can access the static value of a class' <code>value</code> state property by involving the class reference in an expression, such as <code>+Uize.Widget.Bar.Slider</code>, or <code>Uize.Widget.ColorPicker + ''</code>.</p>
 	</div>
 	
 	<a name="3"></a>
-	<h1 class="heading1" title="3. Name Property Optional in Set-get Property Profiles"><span class="headingNumber"><a href="#3" title="3. Name Property Optional in Set-get Property Profiles">3</a>. </span>Name Property Optional in Set-get Property Profiles</h1>
+	<h1 class="heading1" title="3. Name Property Optional in State Property Profiles"><span class="headingNumber"><a href="#3" title="3. Name Property Optional in State Property Profiles">3</a>. </span>Name Property Optional in State Property Profiles</h1>
 	<div class="contents1">
-		<p>When registering set-get properties using the <code>Uize.registerProperties</code> static method, it is now possible to omit the public name for a property and it will default to the private name.</p>
+		<p>When registering state properties using the <code>Uize.registerProperties</code> static method, it is now possible to omit the public name for a property and it will default to the private name.</p>
 		
-		<p>This may be useful in certain special cases, as outlined in more detail in the <a href="../explainers/set-get-properties.html">Set-get Properties explainer</a> (see the section on <code>Public Name Defaulting</code>, which talks about <code>Naked Set-get Properties</code> and <code>Private Set-get Properties</code>).</p>
+		<p>This may be useful in certain special cases, as outlined in more detail in the <a href="../explainers/state-properties.html">State Properties explainer</a> (see the section on <code>Public Name Defaulting</code>, which talks about <code>Naked State Properties</code> and <code>Private State Properties</code>).</p>
 	</div>
 	
 	<a name="4"></a>

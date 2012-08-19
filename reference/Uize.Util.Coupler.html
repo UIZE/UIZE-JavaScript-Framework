@@ -3,7 +3,7 @@
 <head>
 	<title>Uize.Util.Coupler | Documentation | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Util.Coupler module reference documentation"/>
-	<meta name="description" content="The Uize.Util.Coupler class implements a mechanism for coupling two or more instances of any Uize.Class subclass by synchronizing values of set-get properties."/>
+	<meta name="description" content="The Uize.Util.Coupler class implements a mechanism for coupling two or more instances of any Uize.Class subclass by synchronizing values of state properties."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -29,7 +29,7 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The Uize.Util.Coupler class implements a mechanism for coupling two or more instances of any Uize.Class subclass by synchronizing values of set-get properties.">1. Introduction</a>
+			<li><a href="#1" title="The Uize.Util.Coupler class implements a mechanism for coupling two or more instances of any Uize.Class subclass by synchronizing values of state properties.">1. Introduction</a>
 				<ul>
 					<li><a href="#1_1" title="The Uize.Util.Coupler class makes it easy to keep desired state synchronized between two or more instances.">1.1. In a Nutshell</a></li>
 					<li><a href="#1_2" title="Using the Uize.Util.Coupler class is easy: all you have to do is create an instance of it, specifying which properties of which instances you would like to be coupled together. Consider the following example...">1.2. An Example</a></li>
@@ -45,11 +45,11 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#2">2. Set-get Properties</a>
+			<li><a href="#2">2. State Properties</a>
 				<ul>
-					<li><a href="#2_1" title="A boolean, indicating whether or not the coupling is active and the instances specified by the instances set-get property are coupled together.">2.1. coupled</a></li>
-					<li><a href="#2_2" title="An array, specifying the instances that should be coupled together and whose properties, as specified by the properties set-get property, should be kept synchronized.">2.2. instances</a></li>
-					<li><a href="#2_3" title="An array, specifying the properties that should be kept synchronized across all instances, as specified in the instances set-get property.">2.3. properties</a></li>
+					<li><a href="#2_1" title="A boolean, indicating whether or not the coupling is active and the instances specified by the instances state property are coupled together.">2.1. coupled</a></li>
+					<li><a href="#2_2" title="An array, specifying the instances that should be coupled together and whose properties, as specified by the properties state property, should be kept synchronized.">2.2. instances</a></li>
+					<li><a href="#2_3" title="An array, specifying the properties that should be kept synchronized across all instances, as specified in the instances state property.">2.3. properties</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Instance Methods</a>
@@ -95,7 +95,7 @@
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
 	<div class="contents1">
-		<p>The <code>Uize.Util.Coupler</code> class implements a mechanism for coupling two or more instances of any <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass by synchronizing values of set-get properties.</p>
+		<p>The <code>Uize.Util.Coupler</code> class implements a mechanism for coupling two or more instances of any <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass by synchronizing values of state properties.</p>
 		
 		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
 		
@@ -104,7 +104,7 @@
 		<div class="contents2">
 			<p>The <code>Uize.Util.Coupler</code> class makes it easy to keep desired state synchronized between two or more instances.</p>
 			
-			<p>Coupled instances can be widget instances (ie. instances of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> subclasses), but they do not have to be widgets. Coupled instances do not have to be of the same class - they only need to provide the same set-get properties that are to be synchronized between them.</p>
+			<p>Coupled instances can be widget instances (ie. instances of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> subclasses), but they do not have to be widgets. Coupled instances do not have to be of the same class - they only need to provide the same state properties that are to be synchronized between them.</p>
 		</div>
 		
 		<a name="1_2"></a>
@@ -143,9 +143,9 @@
   });
 </pre>
 			
-			<p>In the above example, a custom subclass of the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> widget class is being created. This is done purely as a convenience, in order to capture some common set-get property values, and so that all instances of this subclass that are created will have those same initial values. Then, three instances of this custom subclass are added as child widgets to the page widget (which we assume in this example to already be defined).</p>
+			<p>In the above example, a custom subclass of the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> widget class is being created. This is done purely as a convenience, in order to capture some common state property values, and so that all instances of this subclass that are created will have those same initial values. Then, three instances of this custom subclass are added as child widgets to the page widget (which we assume in this example to already be defined).</p>
 			
-			<p>Finally, an instance of the <code>Uize.Util.Coupler</code> class is created in order to couple the three instances together by keeping the values of their <code>alignX</code>, <code>alignY</code>, and <code>inUse</code> set-get properties synchronized across the three of them. This has the effect of making the instance that the user is currently interacting with drive the other two instances - any instance can drive the other two. When the user rests the mouse over one of the instances, the zoom in effect will be activated for all three. And when the user moves the mouse over one in order to pan horizontally and vertically around the zoomed image, the two other instances will follow the lead of the one the user is mousing over.</p>
+			<p>Finally, an instance of the <code>Uize.Util.Coupler</code> class is created in order to couple the three instances together by keeping the values of their <code>alignX</code>, <code>alignY</code>, and <code>inUse</code> state properties synchronized across the three of them. This has the effect of making the instance that the user is currently interacting with drive the other two instances - any instance can drive the other two. When the user rests the mouse over one of the instances, the zoom in effect will be activated for all three. And when the user moves the mouse over one in order to pan horizontally and vertically around the zoomed image, the two other instances will follow the lead of the one the user is mousing over.</p>
 		</div>
 		
 		<a name="1_3"></a>
@@ -178,7 +178,7 @@
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#2_1">coupled</a></code> | <code><a href="#2_2">instances</a></code> | <code><a href="#2_3">properties</a></code></p>
 			</div>
@@ -226,12 +226,12 @@
 	</div>
 	
 	<a name="2"></a>
-	<h1 class="heading1" title="2. Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="2. State Properties"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.1. coupled"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_1" title="2. Set-get Properties -&gt; 2.1. coupled">1</a>. </span>coupled</h2>
+		<h2 class="heading2" title="2. State Properties -&gt; 2.1. coupled"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_1" title="2. State Properties -&gt; 2.1. coupled">1</a>. </span>coupled</h2>
 		<div class="contents2">
-			<p>A boolean, indicating whether or not the coupling is active and the instances specified by the <code><a href="#2_2">instances</a></code> set-get property are coupled together.</p>
+			<p>A boolean, indicating whether or not the coupling is active and the instances specified by the <code><a href="#2_2">instances</a></code> state property are coupled together.</p>
 			
 			<p>If this property is set to <code>false</code> after instances have already been coupled, then they will be uncoupled. They can be recoupled again later by setting the value of this property back to <code>true</code>.</p>
 			
@@ -248,16 +248,16 @@
 		</div>
 		
 		<a name="2_2"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.2. instances"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_2" title="2. Set-get Properties -&gt; 2.2. instances">2</a>. </span>instances</h2>
+		<h2 class="heading2" title="2. State Properties -&gt; 2.2. instances"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_2" title="2. State Properties -&gt; 2.2. instances">2</a>. </span>instances</h2>
 		<div class="contents2">
-			<p>An array, specifying the instances that should be coupled together and whose properties, as specified by the <code><a href="#2_3">properties</a></code> set-get property, should be kept synchronized.</p>
+			<p>An array, specifying the instances that should be coupled together and whose properties, as specified by the <code><a href="#2_3">properties</a></code> state property, should be kept synchronized.</p>
 			
 			<p>If the value of this property is changed after instances have already been coupled, then the previously coupled instances will be uncoupled and the newly specified instances will be coupled.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_3">properties</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_3">properties</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -268,16 +268,16 @@
 		</div>
 		
 		<a name="2_3"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.3. properties"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_3" title="2. Set-get Properties -&gt; 2.3. properties">3</a>. </span>properties</h2>
+		<h2 class="heading2" title="2. State Properties -&gt; 2.3. properties"><span class="headingNumber"><a href="#2" title="2. State Properties">2</a>.<a href="#2_3" title="2. State Properties -&gt; 2.3. properties">3</a>. </span>properties</h2>
 		<div class="contents2">
-			<p>An array, specifying the properties that should be kept synchronized across all instances, as specified in the <code><a href="#2_2">instances</a></code> set-get property.</p>
+			<p>An array, specifying the properties that should be kept synchronized across all instances, as specified in the <code><a href="#2_2">instances</a></code> state property.</p>
 			
 			<p>If the value of this property is changed after instances have already been coupled, then the previously coupled instances will be uncoupled and the current <code><a href="#2_2">instances</a></code> will be recoupled using the newly specified properties.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_2">instances</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_2">instances</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>

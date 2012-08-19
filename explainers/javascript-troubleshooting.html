@@ -31,7 +31,7 @@
 			<li><a href="#3" title="As good as tools like Firebug become, there are still times when JavaScript&apos;s tried and tested built-in alert statement provides a good fallback for quick testing across multiple different browsers.">3. Basic Troubleshooting With Alerts</a>
 				<ul>
 					<li><a href="#3_1" title="The Uize.Class base class implements a toString Intrinsic Method that returns a summary for instances of Uize.Class subclasses, and for Uize.Class subclasses.">3.1. Alerting Summary Info for Instances or Classes</a></li>
-					<li><a href="#3_2" title="The Uize.Class base class implements a valueOf Intrinsic Method that returns the value of the value set-get property - for instances of Uize.Class subclasses as well as Uize.Class subclasses.">3.2. Alerting Values of Instances or Classes</a></li>
+					<li><a href="#3_2" title="The Uize.Class base class implements a valueOf Intrinsic Method that returns the value of the value state property - for instances of Uize.Class subclasses as well as Uize.Class subclasses.">3.2. Alerting Values of Instances or Classes</a></li>
 				</ul>
 			</li>
 			<li><a href="#4" title="Firebug is an indispensable tool when troubleshooting JavaScript code. There are certain tricks specific to the UIZE JavaScript Framework that will aid in your Firebug troubleshooting.">4. Tips for Troubleshooting in Firebug</a>
@@ -47,7 +47,7 @@
 					<li><a href="#5_1" title="Missing semicolons at the end of statements can lead to JavaScript syntax errors when JavaScript code is scrunched and consecutive lines that used to be separated by linebreaks are compacted together.">5.1. Missing Semicolons</a></li>
 					<li><a href="#5_2" title="Accessing a private identifier as though it were a public identifier will work in source code but will almost certainly not work when the code is scrunched.">5.2. Accessing Private Identifiers as Publics</a>
 						<ul>
-							<li><a href="#5_2_1" title="One less-than-obvious access of privates that can occur is with subclasses.">5.2.1. Accessing a Superclass' Set-get Properties</a></li>
+							<li><a href="#5_2_1" title="One less-than-obvious access of privates that can occur is with subclasses.">5.2.1. Accessing a Superclass' State Properties</a></li>
 						</ul>
 					</li>
 					<li><a href="#5_3" title="Accidentally assigning globals can have interesting interactions with the scrunching process.">5.3. Accidental Globals and Scrunching</a></li>
@@ -215,9 +215,9 @@ wired : false
 		<a name="3_2"></a>
 		<h2 class="heading2" title="3. Basic Troubleshooting With Alerts -&gt; 3.2. Alerting Values of Instances or Classes"><span class="headingNumber"><a href="#3" title="3. Basic Troubleshooting With Alerts">3</a>.<a href="#3_2" title="3. Basic Troubleshooting With Alerts -&gt; 3.2. Alerting Values of Instances or Classes">2</a>. </span>Alerting Values of Instances or Classes</h2>
 		<div class="contents2">
-			<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class implements a <code>valueOf Intrinsic Method</code> that returns the value of the <code>value</code> set-get property - for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses as well as <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses.</p>
+			<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class implements a <code>valueOf Intrinsic Method</code> that returns the value of the <code>value</code> state property - for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses as well as <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses.</p>
 			
-			<p>Because this method is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class, all <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses get to inherit it. For any class that implements a <code>value</code> set-get property, the value of an instance can be displayed in an alert dialog using a convenient shorthand. This can be done by prepending a "+" (plus sign) to the instance reference for classes that implement a number type value, or by appending a <code>+ ''</code> to the instance reference for classes that implement a string type value.</p>
+			<p>Because this method is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class, all <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses get to inherit it. For any class that implements a <code>value</code> state property, the value of an instance can be displayed in an alert dialog using a convenient shorthand. This can be done by prepending a "+" (plus sign) to the instance reference for classes that implement a number type value, or by appending a <code>+ ''</code> to the instance reference for classes that implement a string type value.</p>
 			
 			<p><span class="allCaps">EXAMPLE 1</span></p>
 			
@@ -245,7 +245,7 @@ wired : false
 			
 			<p>By using the DOM inspector, you can traverse the JavaScript widget tree for a page that uses the UIZE JavaScript Framework. On a typical page you will have a page widget at the root of the widget hierarchy. Finding this in the DOM inspector, you can expand it and inspect its properties. In order to dig deeper into the widget tree, you can locate the <code>children</code> property of the page widget and expand it too. For each child widget of the page widget you can do the same. You can keep sleuthing like this, digging as deep as you need to, to ultimately find the "widget of interest" that is a suspect in the code crime you are investigating.</p>
 			
-			<p>At any stage in this process, you can inspect the values of set-get properties for a widget instance. Note that the set-get properties will be represented using their private names (ie. prefixed with an underscore).</p>
+			<p>At any stage in this process, you can inspect the values of state properties for a widget instance. Note that the state properties will be represented using their private names (ie. prefixed with an underscore).</p>
 		</div>
 		
 		<a name="4_2"></a>
@@ -387,13 +387,13 @@ _classPrototype.myMethod2 = function () {
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a subclass inappropriately accesses private methods or properties of its superclass</td></tr>
 			</table>
 			<a name="5_2_1"></a>
-			<h3 class="heading3" title="5. Scrunch-related Problems -&gt; 5.2. Accessing Private Identifiers as Publics -&gt; 5.2.1. Accessing a Superclass&apos; Set-get Properties"><span class="headingNumber"><a href="#5" title="5. Scrunch-related Problems">5</a>.<a href="#5_2" title="5. Scrunch-related Problems -&gt; 5.2. Accessing Private Identifiers as Publics">2</a>.<a href="#5_2_1" title="5. Scrunch-related Problems -&gt; 5.2. Accessing Private Identifiers as Publics -&gt; 5.2.1. Accessing a Superclass&apos; Set-get Properties">1</a>. </span>Accessing a Superclass' Set-get Properties</h3>
+			<h3 class="heading3" title="5. Scrunch-related Problems -&gt; 5.2. Accessing Private Identifiers as Publics -&gt; 5.2.1. Accessing a Superclass&apos; State Properties"><span class="headingNumber"><a href="#5" title="5. Scrunch-related Problems">5</a>.<a href="#5_2" title="5. Scrunch-related Problems -&gt; 5.2. Accessing Private Identifiers as Publics">2</a>.<a href="#5_2_1" title="5. Scrunch-related Problems -&gt; 5.2. Accessing Private Identifiers as Publics -&gt; 5.2.1. Accessing a Superclass&apos; State Properties">1</a>. </span>Accessing a Superclass' State Properties</h3>
 			<div class="contents3">
 				<p>One less-than-obvious access of privates that can occur is with subclasses.</p>
 				
-				<p>If a set-get property is registered in a superclass, with a mapping of public name to private name, then the superclass can reference that set-get property by its private name. However, a subclass of that superclass may not. Instead, it must use the public name. And, to query the value for a set-get property registered in the superclass, the subclass must use the <code>get</code> method.</p>
+				<p>If a state property is registered in a superclass, with a mapping of public name to private name, then the superclass can reference that state property by its private name. However, a subclass of that superclass may not. Instead, it must use the public name. And, to query the value for a state property registered in the superclass, the subclass must use the <code>get</code> method.</p>
 				
-				<p>If you reference set-get properties, properties, or methods of a superclass by private name in the implementation of your subclass, your code will work when using source code but most likely produce errors or erratic behavior when using scrunched code.</p>
+				<p>If you reference state properties, properties, or methods of a superclass by private name in the implementation of your subclass, your code will work when using source code but most likely produce errors or erratic behavior when using scrunched code.</p>
 			</div>
 		</div>
 		

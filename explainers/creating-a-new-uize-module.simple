@@ -297,7 +297,7 @@ Document the Module
 		Once you've written as much documentation as you're going to write, make sure to update the value for the =docCompleteness= meta data entry to reflect how complete the documentation is, using the following rough guide to completeness milestones...
 
 		- =docCompleteness: 2= - You only wrote the most basic "Introduction" paragraph, with no in-depth discussion of the module.
-		- =docCompleteness: 20= - You wrote the basic "Introduction" paragraph, along with a skeleton that lists all the features of the module, such as static and instance methods, static and instance properties, set-get properties, static and instance events, implied nodes (for widget classes), etc.
+		- =docCompleteness: 20= - You wrote the basic "Introduction" paragraph, along with a skeleton that lists all the features of the module, such as static and instance methods, static and instance properties, state properties, static and instance events, implied nodes (for widget classes), etc.
 		- =docCompleteness: 80= - You wrote the basic "Introduction" paragraph, along with thorough reference documentation for all the features of the modules. There is not yet a thorough introduction and explanation of the module.
 		- =docCompleteness: 100= - You wrote thorough reference documentation for all the features of the modules, and you wrote a thorough introduction and explanation of the module. Therefore, the documentation is complete! (yay)
 

@@ -3,7 +3,7 @@
 <head>
 	<title>2009-09-26 - IMPROVED MODULE: Uize.Widget.Calendar | News | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework News "/>
-	<meta name="description" content="The Uize.Widget.Calendar module has been improved with the addition of the two new minValue and maxValue set-get properties that take over from the now deprecated validDateRange set-get property."/>
+	<meta name="description" content="The Uize.Widget.Calendar module has been improved with the addition of the two new minValue and maxValue state properties that take over from the now deprecated validDateRange state property."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -23,7 +23,7 @@
 
 <div class="main">
 <div class="contents0">
-	<p>The <code><a href="../reference/Uize.Widget.Calendar.html">Uize.Widget.Calendar</a></code> module has been improved with the addition of the two new <code>minValue</code> and <code>maxValue</code> set-get properties that take over from the now deprecated <code>validDateRange</code> set-get property.</p>
+	<p>The <code><a href="../reference/Uize.Widget.Calendar.html">Uize.Widget.Calendar</a></code> module has been improved with the addition of the two new <code>minValue</code> and <code>maxValue</code> state properties that take over from the now deprecated <code>validDateRange</code> state property.</p>
 	
 	<p><span class="allCaps">INSTEAD OF...</span></p>
 	
@@ -41,7 +41,7 @@
 	
 	<p><span class="allCaps">BACKWARDS COMPATIBILITY</span></p>
 	
-	<p>For backwards compatibility, the <code>validDateRange</code> set-get property is still supported. Setting a value for this deprecated property will result in the values of the <code>minValue</code> and <code>maxValue</code> properties being set, using the <code>start</code> and <code>end</code> properties of the <code>validDateRange</code> object, respectively. Conversely, setting values for either - or both - of the <code>minValue</code> and <code>maxValue</code> properties will result in the value of the deprecated <code>validDateRange</code> property being updated. This backwards compatibility provision will not remain in forever, so if you have code using the <code>validDateRange</code> property, you should update it to use the new properties.</p>
+	<p>For backwards compatibility, the <code>validDateRange</code> state property is still supported. Setting a value for this deprecated property will result in the values of the <code>minValue</code> and <code>maxValue</code> properties being set, using the <code>start</code> and <code>end</code> properties of the <code>validDateRange</code> object, respectively. Conversely, setting values for either - or both - of the <code>minValue</code> and <code>maxValue</code> properties will result in the value of the deprecated <code>validDateRange</code> property being updated. This backwards compatibility provision will not remain in forever, so if you have code using the <code>validDateRange</code> property, you should update it to use the new properties.</p>
 </div>
 
 </div>

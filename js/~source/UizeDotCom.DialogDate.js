@@ -22,7 +22,7 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass ();
 
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
+		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
 				built:false,
 				height:145,

@@ -129,7 +129,7 @@ Example Page Requirements
 				- module links
 					- explanation should link to the module (or modules) that are the focus of the example
 					- don't need to link to all modules used by the example's code (if your example happens to use Uize.Node in a rather mundane way and merely in support of the main crux of the example, then it's not terribly compelling to call the user's attention to this)
-				- inline code, such as static and instance method names, or the names of set-get properties, etc. should be enclosed in the =code= tag
+				- inline code, such as static and instance method names, or the names of state properties, etc. should be enclosed in the =code= tag
 
 		Main Content
 			- main content of example should not be so large as to prevent the entire example from being visible inside a 1024x768 window, even if explanation has to be scrolled out of view. There can be exceptions to this guideline.

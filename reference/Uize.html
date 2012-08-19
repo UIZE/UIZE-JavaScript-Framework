@@ -326,7 +326,7 @@
 									<li><a href="#2_59_1_6" title="There are two main situations where the Uize.toNumber method comes in handy.">2.59.1.6. Using the Uize.toNumber Method</a>
 										<ul>
 											<li><a href="#2_59_1_6_1" title="The Uize.toNumber method can be used to &quot;normalize&quot; method parameter values that need to be number type.">2.59.1.6.1. Normalizing Method Parameters</a></li>
-											<li><a href="#2_59_1_6_2" title="The Uize.toNumber method can be specified as a conformer for a set-get property of a Uize.Class subclass.">2.59.1.6.2. Conforming Set-get Properties</a></li>
+											<li><a href="#2_59_1_6_2" title="The Uize.toNumber method can be specified as a conformer for a state property of a Uize.Class subclass.">2.59.1.6.2. Conforming State Properties</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -740,7 +740,7 @@ Uize.canExtend (undefined);           // returns false
 };
 </pre>
 			
-			<p>In the above example, the instance method <code>displayPropertyValue</code> is being defined for a hypothetical widget class. This method accepts a string parameter, being the name of a set-get property whose value should be displayed in the page in an implied node of the widget, and where the implied node's name is constructed from the prefix <code>'valueOf'</code> and the name of the set-get property with its first letter capitalized. Using this method to display the value of a <code>width</code> set-get property, the value of this property would be displayed in the implied node named <code>valueOfWidth</code>.</p>
+			<p>In the above example, the instance method <code>displayPropertyValue</code> is being defined for a hypothetical widget class. This method accepts a string parameter, being the name of a state property whose value should be displayed in the page in an implied node of the widget, and where the implied node's name is constructed from the prefix <code>'valueOf'</code> and the name of the state property with its first letter capitalized. Using this method to display the value of a <code>width</code> state property, the value of this property would be displayed in the implied node named <code>valueOfWidth</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -5172,7 +5172,7 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 <pre class="sample-code">'My name is Eric.'
 </pre>
 					
-					<p>In the above example, the value to substitute into is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass. Fortunately, the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class implements a <code>valueOf Intrinsic Method</code> that returns the value of the <code>value</code> set-get property. Therefore, coercing the source to a string produces the value <code>'My name is [#name].'</code>, which is then substituted into without any trouble.</p>
+					<p>In the above example, the value to substitute into is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass. Fortunately, the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class implements a <code>valueOf Intrinsic Method</code> that returns the value of the <code>value</code> state property. Therefore, coercing the source to a string produces the value <code>'My name is [#name].'</code>, which is then substituted into without any trouble.</p>
 				</div>
 			</div>
 			
@@ -5354,9 +5354,9 @@ repeatStr ('Foo',undefined);               // returns "Foo"
 					</div>
 					
 					<a name="2_59_1_6_2"></a>
-					<h5 class="heading5" title="2. Static Methods -&gt; 2.59. Uize.toNumber -&gt; 2.59.1. How a Value is Coerced to Number -&gt; 2.59.1.6. Using the Uize.toNumber Method -&gt; 2.59.1.6.2. Conforming Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_59" title="2. Static Methods -&gt; 2.59. Uize.toNumber">59</a>.<a href="#2_59_1" title="2. Static Methods -&gt; 2.59. Uize.toNumber -&gt; 2.59.1. How a Value is Coerced to Number">1</a>.<a href="#2_59_1_6" title="2. Static Methods -&gt; 2.59. Uize.toNumber -&gt; 2.59.1. How a Value is Coerced to Number -&gt; 2.59.1.6. Using the Uize.toNumber Method">6</a>.<a href="#2_59_1_6_2" title="2. Static Methods -&gt; 2.59. Uize.toNumber -&gt; 2.59.1. How a Value is Coerced to Number -&gt; 2.59.1.6. Using the Uize.toNumber Method -&gt; 2.59.1.6.2. Conforming Set-get Properties">2</a>. </span>Conforming Set-get Properties</h5>
+					<h5 class="heading5" title="2. Static Methods -&gt; 2.59. Uize.toNumber -&gt; 2.59.1. How a Value is Coerced to Number -&gt; 2.59.1.6. Using the Uize.toNumber Method -&gt; 2.59.1.6.2. Conforming State Properties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_59" title="2. Static Methods -&gt; 2.59. Uize.toNumber">59</a>.<a href="#2_59_1" title="2. Static Methods -&gt; 2.59. Uize.toNumber -&gt; 2.59.1. How a Value is Coerced to Number">1</a>.<a href="#2_59_1_6" title="2. Static Methods -&gt; 2.59. Uize.toNumber -&gt; 2.59.1. How a Value is Coerced to Number -&gt; 2.59.1.6. Using the Uize.toNumber Method">6</a>.<a href="#2_59_1_6_2" title="2. Static Methods -&gt; 2.59. Uize.toNumber -&gt; 2.59.1. How a Value is Coerced to Number -&gt; 2.59.1.6. Using the Uize.toNumber Method -&gt; 2.59.1.6.2. Conforming State Properties">2</a>. </span>Conforming State Properties</h5>
 					<div class="contents5">
-						<p>The <code><a href="#2_59">Uize.toNumber</a></code> method can be specified as a conformer for a set-get property of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
+						<p>The <code><a href="#2_59">Uize.toNumber</a></code> method can be specified as a conformer for a state property of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 						
 						<p><span class="allCaps">EXAMPLE</span></p>
 						
@@ -5375,7 +5375,7 @@ Rectangle.registerProperties ({
 });
 </pre>
 						
-						<p>In the above example, a <code>Rectangle</code> class is being defined that has two set-get properties: <code>width</code> and <code>height</code>. For the convenience of users of the class, the <code><a href="#2_59">Uize.toNumber</a></code> method is set as the conformer for both the <code>width</code> and <code>height</code> properties. This means that the user of the class can set the values for these properties using values that are other than number type, and the developer of the class can write the rest of the class' code with confidence that internally the values for the properties will always be number type.</p>
+						<p>In the above example, a <code>Rectangle</code> class is being defined that has two state properties: <code>width</code> and <code>height</code>. For the convenience of users of the class, the <code><a href="#2_59">Uize.toNumber</a></code> method is set as the conformer for both the <code>width</code> and <code>height</code> properties. This means that the user of the class can set the values for these properties using values that are other than number type, and the developer of the class can write the rest of the class' code with confidence that internally the values for the properties will always be number type.</p>
 						
 						<p>So, given the above implementation of the <code>Rectangle</code> class, we would see the following results...</p>
 						
@@ -5522,7 +5522,7 @@ Uize.toNumber (function () {return function () {return 5}},99);    // returns 99
 <pre class="sample-code">classSummarySTR = MyClass.toString ();
 </pre>
 			
-			<p>The string returned by this method provides a summary that includes the class' name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses during debugging and troubleshooting. The <code><a href="#2_60">Uize.toString</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class reference to a string form, such as when alerting a class using the <code>alert</code> global function.</p>
+			<p>The string returned by this method provides a summary that includes the class' name and the state of its state properties. Among other things, this method provides a convenient and lightweight way to gather information about <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses during debugging and troubleshooting. The <code><a href="#2_60">Uize.toString</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class reference to a string form, such as when alerting a class using the <code>alert</code> global function.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			

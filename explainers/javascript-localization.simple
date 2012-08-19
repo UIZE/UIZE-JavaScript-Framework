@@ -3,7 +3,7 @@ Introduction
 
 	In order to achieve an effective division of responsibilities between client logic and middle tier logic, it is often desirable to make the server-side code responsible for generation of markup for widgets. In general, therefore, it is best to minimize the amount of localization that occurs inside JavaScript code. That said, it cannot always be avoided. Sometimes some markup needs to be dynamically generated on the client-side - without contacting the server - for better responsiveness and an improved user experience. Perhaps a tooltip's text needs to be updated. Perhaps a message needs to be displayed in a modal dialog. Perhaps some status text needs to be displayed.
 
-	In such cases, one needs a way to retrieve and process localized resources. In the UIZE JavaScript Framework, localization of widgets is done by use of `The localize Instance Method` and `The localized Set-get Property`, both of which are discussed in more detail below.
+	In such cases, one needs a way to retrieve and process localized resources. In the UIZE JavaScript Framework, localization of widgets is done by use of `The localize Instance Method` and `The localized State Property`, both of which are discussed in more detail below.
 
 The localize Instance Method
 	Widgets can form localized strings by calling their =localize= instance method.
@@ -96,8 +96,8 @@ The localize Instance Method
 
 		The above example would also produce the result ='Welcome, Chris of California, USA'=.
 
-The localized Set-get Property
-	The =localized= set-get property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.
+The localized State Property
+	The =localized= state property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.
 
 	EXAMPLE (APPLICATION PERSPECTIVE)
 	............................................................................
@@ -129,7 +129,7 @@ The localized Set-get Property
 	);
 	............................................................................
 
-	The above code illustrates registering localized resources by specifying a value for the =localized= set-get property when adding a child widget to a page widget instance. Notice how there are four localized strings being registered: =draggingToReorderSingular=, =draggingToReorderPlural=, =removeItemConfirmation=, =removeItemsConfirmation=.
+	The above code illustrates registering localized resources by specifying a value for the =localized= state property when adding a child widget to a page widget instance. Notice how there are four localized strings being registered: =draggingToReorderSingular=, =draggingToReorderPlural=, =removeItemConfirmation=, =removeItemsConfirmation=.
 
 	The code snippet below illustrates how the =draggingToReorderSingular= and =draggingToReorderPlural= localized strings may be used in a widget's implementation. In this case, one of the two strings is being chosen to use, depending on how many items are being dragged. A string expression is constructing the name of the localized string, adding a suffix of either "Plural" or "Singular".
 
@@ -169,9 +169,9 @@ Inheritance Tree
 	);
 	.......................................................................................
 
-	In the above example, a child widget is being added to a page widget instance (which we assume to have already been created). Both the page widget instance and the child widget have values set for the =localized= set-get property, registering localized strings with each. Now, with this setup the first =alert= statement will display the text *"Are you sure you want to delete?"*, while the second =alert= statement will display the text *"Welcome, Chris of California, USA"*.
+	In the above example, a child widget is being added to a page widget instance (which we assume to have already been created). Both the page widget instance and the child widget have values set for the =localized= state property, registering localized strings with each. Now, with this setup the first =alert= statement will display the text *"Are you sure you want to delete?"*, while the second =alert= statement will display the text *"Welcome, Chris of California, USA"*.
 
-	Even though the =deleteConfirmation= localized string is not registered for the =myChildWidget= instance, the call to the =localize= method on this instance results in the localized string being found in the parent page widget's =localized= set-get property. Thus, any widget anywhere in this page widget's widget tree can utilize the =deleteConfirmation= localized string that is registered with the page widget. Child widgets can still override this localized string value by registering their own localized version with different wording. If we extend on the previous example...
+	Even though the =deleteConfirmation= localized string is not registered for the =myChildWidget= instance, the call to the =localize= method on this instance results in the localized string being found in the parent page widget's =localized= state property. Thus, any widget anywhere in this page widget's widget tree can utilize the =deleteConfirmation= localized string that is registered with the page widget. Child widgets can still override this localized string value by registering their own localized version with different wording. If we extend on the previous example...
 
 	EXAMPLE
 	.......................................................................................
@@ -333,7 +333,7 @@ Function Type Localized Resources
 
 		In the above example, the function type =buyConfirmation= resource would like to conditionally add in the word "customized" to the sentence (versions for different languages would construct the sentence differently, of course). Two problems: 1) the code for the =SomeNamespace.ProductWidgetClass= class was not written to pass in the value of this property as a substitution value, and 2) even if the =isCustomized= value *was* passed in, the substitution system for string type resources does not support conditional logic.
 
-		Once again, the function type resource comes to the rescue. In this case, the function is using the =get= method to access the value of the instance's =isCustomized= set-get property. It can do this using the =this= keyword because the function is called as an instance method on the =productWidget= child widget.
+		Once again, the function type resource comes to the rescue. In this case, the function is using the =get= method to access the value of the instance's =isCustomized= state property. It can do this using the =this= keyword because the function is called as an instance method on the =productWidget= child widget.
 
 	Forking Localized Resources
 		One compelling application of the `Function Type Localized Resources` facility is forking between different localized resources, based upon some input or instance state. Consider the following example...
@@ -366,7 +366,7 @@ Function Type Localized Resources
 		);
 		..................................................................................
 
-		In the above example, the =buyConfirmation= function type resource is accessing the =productType= set-get property of the instance for which it is producing a localized string. It uses the value of this property to form the name of a localized resource by capitalizing the first character and then prepending "buyConfirmation". It then calls the =localize= method on the instance, providing the constructed resource name. The =localize= method returns an empty string if the specified resource cannot be found, so our function uses the =||= (logical OR) operator to default the localized string using the =buyConfirmationGeneric= resource.
+		In the above example, the =buyConfirmation= function type resource is accessing the =productType= state property of the instance for which it is producing a localized string. It uses the value of this property to form the name of a localized resource by capitalizing the first character and then prepending "buyConfirmation". It then calls the =localize= method on the instance, providing the constructed resource name. The =localize= method returns an empty string if the specified resource cannot be found, so our function uses the =||= (logical OR) operator to default the localized string using the =buyConfirmationGeneric= resource.
 
 	Use With Caution
 		It should be pointed out that using `Function Type Localized Resources` is not a recommended practice.
@@ -406,12 +406,12 @@ Marshalling Localized Resources
 	</script>
 	...............................................................................
 
-	The above snippet of HTML represents the output of a server-side component that generates the HTML that is to be wired up on the client-side by an instance of the =Uize.Widget.Collection.Dynamic= class. This class expects the localized resources =removeItemConfirmation= and =removeItemsConfirmation=. The server-side component marshals values for these two localized resources to the client code by means of the `Declarative Syntax For Widget Data`. According to this mechanism, the globally declared variable =$page_productsGrid= declares values of set-get properties that are to be "consumed" by the child widget =productsGrid= of the parent widget =page=. When a widget is instantiated with the =idPrefix= of ='page_productsGrid'=, then the set-get property values declared by the =$page_productsGrid= global variable will be scooped up.
+	The above snippet of HTML represents the output of a server-side component that generates the HTML that is to be wired up on the client-side by an instance of the =Uize.Widget.Collection.Dynamic= class. This class expects the localized resources =removeItemConfirmation= and =removeItemsConfirmation=. The server-side component marshals values for these two localized resources to the client code by means of the `Declarative Syntax For Widget Data`. According to this mechanism, the globally declared variable =$page_productsGrid= declares values of state properties that are to be "consumed" by the child widget =productsGrid= of the parent widget =page=. When a widget is instantiated with the =idPrefix= of ='page_productsGrid'=, then the state property values declared by the =$page_productsGrid= global variable will be scooped up.
 
 	*NOTE:* The above example shows the *output* of a server-side component. Naturally, the resources in the component's source code wouldn't be hard-coded and there would be method calls in the appropriate spots to get the localized resources and insert them into the output that the server-side component generates.
 
 Static Localized Resources
-	One means for sharing localized resources across many instances of the same widget class is to set the =localized= static set-get property of the class. That way, all instances created will get those localized resources. Consider the following example...
+	One means for sharing localized resources across many instances of the same widget class is to set the =localized= static state property of the class. That way, all instances created will get those localized resources. Consider the following example...
 
 	EXAMPLE
 	...................................................................................

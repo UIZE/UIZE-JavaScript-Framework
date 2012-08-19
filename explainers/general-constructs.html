@@ -44,7 +44,7 @@
 					</li>
 					<li><a href="#2_3" title="A Value Transformer can be used with any of the many methods that support a Value Transformer.">2.3. Using Value Transformers</a>
 						<ul>
-							<li><a href="#2_3_1" title="The Uize.Fade class supports a Value Transformer with its curve set-get property.">2.3.1. The Uize.Fade Class</a></li>
+							<li><a href="#2_3_1" title="The Uize.Fade class supports a Value Transformer with its curve state property.">2.3.1. The Uize.Fade Class</a></li>
 							<li><a href="#2_3_2" title="The Uize.String.Lines.modify static method of the Uize.String.Lines module supports a Value Transformer for the line modifier that processes each line of a multi-line string.">2.3.2. The Uize.String.Lines.modify Method</a></li>
 							<li><a href="#2_3_3" title="A Value Transformer can always be used in place of a Value and Key Transformer.">2.3.3. Using a Value Transformer in Place of a Value and Key Transformer</a>
 								<ul>
@@ -84,12 +84,12 @@
 			</li>
 			<li><a href="#4" title="A Value Conformer is code (specified as a Value Conformer Function) that transforms a value so that it conforms to certain criteria.">4. Value Conformer</a>
 				<ul>
-					<li><a href="#4_1" title="Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as Uize.map).">4.1. Applications of Value Conformers</a></li>
+					<li><a href="#4_1" title="Value conformers can have a variety of different uses - they can be used as conformers for state properties, or they can be supplied to map functions (such as Uize.map).">4.1. Applications of Value Conformers</a></li>
 					<li><a href="#4_2" title="A Value Conformer Function is a Value Conformer specified in the form of a function.">4.2. Value Conformer Function</a>
 						<ul>
 							<li><a href="#4_2_1" title="A Value Conformer Function can be supplied as a parameter to any method that supports a Value Transformer Function, such as the Uize.map static method. Consider the following example...">4.2.1. Using a Value Conformer Function</a>
 								<ul>
-									<li><a href="#4_2_1_1" title="A Value Conformer Function can be specified for the conformer property in the profile of a set-get property. Consider the following example...">4.2.1.1. Conformers for Set-get Properties</a></li>
+									<li><a href="#4_2_1_1" title="A Value Conformer Function can be specified for the conformer property in the profile of a state property. Consider the following example...">4.2.1.1. Conformers for State Properties</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -241,7 +241,7 @@ var myValuesCubed = Uize.map (myValues,cubed);
 			<a name="2_3_1"></a>
 			<h3 class="heading3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.1. The Uize.Fade Class"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_1" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.1. The Uize.Fade Class">1</a>. </span>The Uize.Fade Class</h3>
 			<div class="contents3">
-				<p>The <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class supports a <a href="#2">Value Transformer</a> with its <code>curve</code> set-get property.</p>
+				<p>The <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class supports a <a href="#2">Value Transformer</a> with its <code>curve</code> state property.</p>
 				
 				<p>Additionally, any of the factory methods that create instances of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class will also support value transformers for the <code>curve</code> fade property. Examples of such factory methods are the <code>Uize.Fade.fade</code>, <code>Uize.Fade.fadeMethod</code>, <code>Uize.Fade.fadeProperty</code>, and <code>Uize.Fade.fadeProperties</code> methods implemented in the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> extension module, as well as the <code>Uize.Fx.fadeStyle</code> and <code>Uize.Fx.fadeStyleAcrossNodes</code> methods of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module.</p>
 				
@@ -464,7 +464,7 @@ myString = Uize.String.Lines.removeMatching (myString,isOnlyWhitespace);
 		<a name="4_1"></a>
 		<h2 class="heading2" title="4. Value Conformer -&gt; 4.1. Applications of Value Conformers"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_1" title="4. Value Conformer -&gt; 4.1. Applications of Value Conformers">1</a>. </span>Applications of Value Conformers</h2>
 		<div class="contents2">
-			<p>Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as <code>Uize.map</code>).</p>
+			<p>Value conformers can have a variety of different uses - they can be used as conformers for state properties, or they can be supplied to map functions (such as <code>Uize.map</code>).</p>
 			
 			<p>Among other things, value conformers can be used to...</p>
 			
@@ -510,9 +510,9 @@ myString = Uize.String.Lines.removeMatching (myString,isOnlyWhitespace);
 				<p>In the above example, the <code>Math.round</code> static method of JavaScript's built-in <code><a href="../javascript-reference/Math.html">Math</a></code> object is being used as a value conformer with the <code>Uize.map</code> method in order to conform all the number values in an array to integer values. The third parameter of the <code>Uize.map</code> method specifies the target for the mapped values, where the value <code>false</code> indicates that the values should <b>not</b> be populated into a new array but should replace the values in the source array.</p>
 				
 				<a name="4_2_1_1"></a>
-				<h4 class="heading4" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function -&gt; 4.2.1.1. Conformers for Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_2" title="4. Value Conformer -&gt; 4.2. Value Conformer Function">2</a>.<a href="#4_2_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function">1</a>.<a href="#4_2_1_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function -&gt; 4.2.1.1. Conformers for Set-get Properties">1</a>. </span>Conformers for Set-get Properties</h4>
+				<h4 class="heading4" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function -&gt; 4.2.1.1. Conformers for State Properties"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_2" title="4. Value Conformer -&gt; 4.2. Value Conformer Function">2</a>.<a href="#4_2_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function">1</a>.<a href="#4_2_1_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function -&gt; 4.2.1.1. Conformers for State Properties">1</a>. </span>Conformers for State Properties</h4>
 				<div class="contents4">
-					<p>A <a href="#4_2">Value Conformer Function</a> can be specified for the <code>conformer</code> property in the profile of a set-get property. Consider the following example...</p>
+					<p>A <a href="#4_2">Value Conformer Function</a> can be specified for the <code>conformer</code> property in the profile of a state property. Consider the following example...</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -531,7 +531,7 @@ MyClass.registerProperties ({
 });
 </pre>
 					
-					<p>In the above example, a <code>percentLoaded</code> set-get property is being registered for the class <code>MyClass</code>. In order to ensure that the value set for this property doesn't stray outside of the range of <code>0</code> to <code>100</code>, the <a href="#4_2">Value Conformer Function</a> <code>conformToRange0to100</code> is being specified for the <code>conformer</code> property inside the profile for the <code>percentLoaded</code> set-get property.</p>
+					<p>In the above example, a <code>percentLoaded</code> state property is being registered for the class <code>MyClass</code>. In order to ensure that the value set for this property doesn't stray outside of the range of <code>0</code> to <code>100</code>, the <a href="#4_2">Value Conformer Function</a> <code>conformToRange0to100</code> is being specified for the <code>conformer</code> property inside the profile for the <code>percentLoaded</code> state property.</p>
 				</div>
 			</div>
 		</div>

@@ -10,9 +10,9 @@ Inheritance and Object Orientation
 	var MySubclass = MySuperclass.subclass ();
 	..........................................
 
-	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties. Each class that you create using the framework inherits the =subclass= static method, so you can easily make further subclasses of them.
+	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and registering state properties or overriding the initial values of inherited state properties. Each class that you create using the framework inherits the =subclass= static method, so you can easily make further subclasses of them.
 
-	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, set-get properties registered on the superclass using the =registerProperties= static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing =Uize.Class= subclasses, the =Uize.Class= base class also provides its subclasses with a `state interface` and an `event infrastructure`.
+	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, state properties registered on the superclass using the =registerProperties= static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing =Uize.Class= subclasses, the =Uize.Class= base class also provides its subclasses with a `state interface` and an `event infrastructure`.
 
 	For a more in-depth discussion on class inheritance, consult the explainer [[javascript-inheritance.html][JavaScript Inheritance]].
 
@@ -42,9 +42,9 @@ Modules and Dependency Resolution
 State Interface
 	The UIZE JavaScript Framework implements a system to facilitate a state-oriented approach to software design.
 
-	The state interface is provided in the form of the set-get properties system, so named because state is changed by means of the generic =set= instance and static methods, and state is queried by means of the generic =get= instance and static methods. While methods exist in many classes to modify state, an emphasis is placed on using the set-get properties system as the primary means for modifying state of instances. The framework encourages thinking of state as passive data, rather than active in the form of setter and getter methods.
+	The state interface is provided in the form of the state properties system, where state is changed by means of the generic =set= instance and static methods, and state is queried by means of the generic =get= instance and static methods. While methods exist in many classes to modify state, an emphasis is placed on using the state properties system as the primary means for modifying state of instances. The framework encourages creating interfaces using state properties combined with internal change handlers that respond to changes in state, rather than by creating methods for effecting changes in internal state.
 
-	Features of the set-get properties system allow for registering properties, defining conformer functions to ensure values are conformed during setting in order to be kept valid, defining change handler functions to respond to changes in values, and registering listeners on the change events that are fired when values change.
+	Features of the state properties system allow for registering properties, defining conformer functions to ensure values are conformed during setting in order to be kept valid, defining change handler functions to respond to changes in values, and registering listeners on the change events that are fired when values change.
 
 	EXAMPLE
 	...........................................................................................
@@ -83,9 +83,9 @@ State Interface
 	alert (myClassInstance4.get ('area'); // alerts 25 (width set in constructor, height after)
 	...........................................................................................
 
-	In the above example, a subclass called =MyClass= is created. The =registerProperties= static method is called on this class to register the three set-get properties =area=, =height=, and =width=. A conformer is defined for both the =height= and =width= properties that ensures that values cannot be set below zero. Moreover, a change handler is registered for both =height= and =width= that updates the value of the =area= property to be the product of the two. A few different instances of =MyClass= are created, illustrating how the set-get properties mechanism behaves under different conditions.
+	In the above example, a subclass called =MyClass= is created. The =registerProperties= static method is called on this class to register the three state properties =area=, =height=, and =width=. A conformer is defined for both the =height= and =width= properties that ensures that values cannot be set below zero. Moreover, a change handler is registered for both =height= and =width= that updates the value of the =area= property to be the product of the two. A few different instances of =MyClass= are created, illustrating how the state properties mechanism behaves under different conditions.
 
-	For a more in-depth discussion on set-get properties, consult the explainer [[set-get-properties.html][Set-get Properties]].
+	For a more in-depth discussion on state properties, consult the explainer [[state-properties.html][State Properties]].
 
 Event Infrastructure
 	The JavaScript language does not provide a built-in system for event-driven programming, so the UIZE JavaScript Framework provides an event system.
@@ -189,7 +189,7 @@ Progressive Enhancement / Unobtrusive JavaScript
 Internationalization and Localization
 	The UIZE JavaScript Framework provides facilities (in =Uize.Widget=) to ease [[http://en.wikipedia.org/wiki/I18n][i18n]] (internationalization) and [[http://en.wikipedia.org/wiki/I18n][L10n]] (localization) of JavaScript code.
 
-	The =localized= set-get property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The =localize= instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.
+	The =localized= state property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The =localize= instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.
 
 	EXAMPLE
 	..........................................................................

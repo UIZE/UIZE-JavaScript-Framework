@@ -530,7 +530,7 @@ Uize.module ({
 								The =paramsOBJ= parameter lets you specify parameters for the =useDialog= method, and its value should be an object that may contain the following properties...
 
 								widgetProperties
-									An object, specifying the values of set-get properties of the dialog widget that will be set on the dialog widget right before it is displayed.
+									An object, specifying the values of state properties of the dialog widget that will be set on the dialog widget right before it is displayed.
 
 									The =widgetProperties= property's value should be an object of the form...
 
@@ -553,7 +553,7 @@ Uize.module ({
 
 									- The optional "idPrefix" property lets you explicitly specify the =idPrefix= for the dialog widget. Usually you will want to just leave it up to the =useDialog= method to construct the =idPrefix= for you, based upon the =idPrefix= of the dialog widget's parent and the name of the dialog widget (as specified in the "name" property mentioned earlier).
 
-									Beyond the "name", "parent", and "idPrefix" properties, values can be specified for any of the set-get properties supported by the class of the dialog widget. This is useful for reuse of dialogs, where on repeat use you may wish to change state.
+									Beyond the "name", "parent", and "idPrefix" properties, values can be specified for any of the state properties supported by the class of the dialog widget. This is useful for reuse of dialogs, where on repeat use you may wish to change state.
 
 								component
 									An object, defining the parameters for a server side component that should be accessed - through an Ajax request - for providing the HTML markup for the dialog.
@@ -633,7 +633,7 @@ Uize.module ({
 								});
 								.......................................................
 
-								In the above example, the =callInherited= instance method of the widget =myWidget= is being used to get a caller for the =useDialog= instance method of the page widget. It is assumed, in this example, that =myWidget= is somewhere on a widget tree with a page widget instance at the root. The widget class =UizeDotCom.DialogConfirm= is being used for the dialog widget, and the various widget properties that are specified in the =widgetProperties= property are set-get properties of the =UizeDotCom.DialogConfirm= class. This example is essentially using a dynamically loaded dialog widget class for displaying a decorated confirmation dialog that is implemented using HTML.
+								In the above example, the =callInherited= instance method of the widget =myWidget= is being used to get a caller for the =useDialog= instance method of the page widget. It is assumed, in this example, that =myWidget= is somewhere on a widget tree with a page widget instance at the root. The widget class =UizeDotCom.DialogConfirm= is being used for the dialog widget, and the various widget properties that are specified in the =widgetProperties= property are state properties of the =UizeDotCom.DialogConfirm= class. This example is essentially using a dynamically loaded dialog widget class for displaying a decorated confirmation dialog that is implemented using HTML.
 				*/
 			};
 
@@ -863,7 +863,7 @@ Uize.module ({
 					name:'confirmDialog',
 					value:{}
 					/*?
-						Set-get Properties
+						State Properties
 							confirmDialog
 								An object, allowing aspects of the confirm dialog to be configured by an application.
 
@@ -891,13 +891,13 @@ Uize.module ({
 				_dialogProperties:'dialogProperties'
 			});
 
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
+		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
 				idPrefix:'page'
 				/*?
-					Set-get Properties
+					State Properties
 						idPrefix
-							This class inherits the =idPrefix= set-get property from the =Uize.Widget= base class, but overrides the initial value to ='page'=.
+							This class inherits the =idPrefix= state property from the =Uize.Widget= base class, but overrides the initial value to ='page'=.
 
 							Therefore, an instance of the page widget that is created without specifying a value for this property will automatically get the value ='page'=. You will generally only create one instance of this widget per page.
 				*/

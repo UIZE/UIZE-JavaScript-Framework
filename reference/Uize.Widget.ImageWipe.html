@@ -43,7 +43,7 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#2" title="Understanding how the image wipe effect works will enable you to come up with your own unique wipes by helping you to understand how the various set-get properties affect the wipe.">2. How It Works</a>
+			<li><a href="#2" title="Understanding how the image wipe effect works will enable you to come up with your own unique wipes by helping you to understand how the various state properties affect the wipe.">2. How It Works</a>
 				<ul>
 					<li><a href="#2_1" title="The image wipe is not terribly complicated, in its essence.">2.1. In a Nutshell</a></li>
 					<li><a href="#2_2" title="Now, let&apos;s get into a more detailed description of the mechanics. For the purpose of this discussion, a number of terms and concepts are defined, as follows...">2.2. In More Detail</a>
@@ -51,12 +51,12 @@
 							<li><a href="#2_2_1" title="The &quot;port&quot; in which the wipe effect is viewed is termed the Wipe Port.">2.2.1. Wipe Port</a></li>
 							<li><a href="#2_2_2" title="A Pane Stack is a stack of image nodes that are all positioned absolutely and right on top of one another, where each image node corresponds to what is termed a Pane.">2.2.2. Pane Stack</a></li>
 							<li><a href="#2_2_3" title="One image node in a Pane Stack is termed a Pane.">2.2.3. Pane</a></li>
-							<li><a href="#2_2_4" title="The Wipe Port Matrix is a matrix of Wipe Port Matrix Cell coordinates, produced by dividing the Wipe Port into a number of rows and columns, as determined by the divisionsY and divisionsX set-get properties, respectively.">2.2.4. Wipe Port Matrix</a></li>
+							<li><a href="#2_2_4" title="The Wipe Port Matrix is a matrix of Wipe Port Matrix Cell coordinates, produced by dividing the Wipe Port into a number of rows and columns, as determined by the divisionsY and divisionsX state properties, respectively.">2.2.4. Wipe Port Matrix</a></li>
 							<li><a href="#2_2_5" title="Each cell in the Wipe Port Matrix is termed a Wipe Port Matrix Cell.">2.2.5. Wipe Port Matrix Cell</a></li>
 							<li><a href="#2_2_6" title="The Pane Seed is the initial coordinates for a Pane.">2.2.6. Pane Seed</a></li>
 							<li><a href="#2_2_7" title="The Pane Seed Context is the coordinates that provide the context for calculating the Pane Seed coordinates.">2.2.7. Pane Seed Context</a></li>
 							<li><a href="#2_2_8" title="The Pane Final is the final coordinates for a Pane.">2.2.8. Pane Final</a></li>
-							<li><a href="#2_2_9" title="The values for certain set-get properties can be specified with a Value Range Declaration that allows a range of values to be specified, so that each Pane in a Pane Stack can have a different value along a continous range.">2.2.9. Value Range Declaration</a>
+							<li><a href="#2_2_9" title="The values for certain state properties can be specified with a Value Range Declaration that allows a range of values to be specified, so that each Pane in a Pane Stack can have a different value along a continous range.">2.2.9. Value Range Declaration</a>
 								<ul>
 									<li><a href="#2_2_9_1" title="A number, specifying the start value for the range.">2.2.9.1. start</a></li>
 									<li><a href="#2_2_9_2" title="A number, specifying the end value for the range.">2.2.9.2. end</a></li>
@@ -76,7 +76,7 @@
 					<li><a href="#3_3" title="Inherited from Uize.Widget.">3.3. showInform</a></li>
 				</ul>
 			</li>
-			<li><a href="#4">4. Set-get Properties</a>
+			<li><a href="#4">4. State Properties</a>
 				<ul>
 					<li><a href="#4_1" title="A number in the range of 0 to 1, specifying the horizontal alignment of each Pane Seed.">4.1. alignX</a></li>
 					<li><a href="#4_2" title="A number in the range of 0 to 1, specifying the vertical alignment of each Pane Seed.">4.2. alignY</a></li>
@@ -108,7 +108,7 @@
 					<li><a href="#4_28" title="A number in the range of 0 to 100, specifying the width for the Pane Seed as a percentage of the width of the Pane Seed Context.">4.28. paneSeedSizeX</a></li>
 					<li><a href="#4_29" title="A number in the range of 0 to 100, specifying the height for the Pane Seed as a percentage of the height of the Pane Seed Context.">4.29. paneSeedSizeY</a></li>
 					<li><a href="#4_30" title="A string, representing the URL of the current image.">4.30. src</a></li>
-					<li><a href="#4_31" title="An alias to the src set-get property, establishing the src property as the public Value Interface for this class.">4.31. value</a></li>
+					<li><a href="#4_31" title="An alias to the src state property, establishing the src property as the public Value Interface for this class.">4.31. value</a></li>
 					<li><a href="#4_32" title="Inherited from Uize.Widget.">4.32. wired</a></li>
 				</ul>
 			</li>
@@ -234,7 +234,7 @@
 				
 				<p><code><a href="#5_25">prepareForNextItem</a></code> | <code><a href="#5_30">setCurrentItem</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#4_1">alignX</a></code> | <code><a href="#4_2">alignY</a></code> | <code><a href="#4_3">allToFull</a></code> | <code><a href="#4_4">background</a></code> | <code><a href="#4_10">dissolve</a></code> | <code><a href="#4_11">divisionsX</a></code> | <code><a href="#4_12">divisionsY</a></code> | <code><a href="#4_13">duration</a></code> | <code><a href="#4_16">firstPaneSizeX</a></code> | <code><a href="#4_17">firstPaneSizeY</a></code> | <code><a href="#4_25">paneOrderScheme</a></code> | <code><a href="#4_26">paneProgressDelay</a></code> | <code><a href="#4_27">paneSeedContext</a></code> | <code><a href="#4_28">paneSeedSizeX</a></code> | <code><a href="#4_29">paneSeedSizeY</a></code> | <code><a href="#4_30">src</a></code></p>
 			</div>
@@ -250,7 +250,7 @@
 				
 				<p><code><a href="#5_48">wireUi</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#4_18">html</a></code></p>
 				
@@ -274,7 +274,7 @@
 				
 				<p><code><a href="#3_2">showConfirm</a></code> | <code><a href="#3_3">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#4_5">built</a></code> | <code><a href="#4_6">busy</a></code> | <code><a href="#4_7">busyInherited</a></code> | <code><a href="#4_8">children</a></code> | <code><a href="#4_9">container</a></code> | <code><a href="#4_14">enabled</a></code> | <code><a href="#4_15">enabledInherited</a></code> | <code><a href="#4_19">idPrefix</a></code> | <code><a href="#4_20">idPrefixConstruction</a></code> | <code><a href="#4_21">insertionMode</a></code> | <code><a href="#4_22">localized</a></code> | <code><a href="#4_23">name</a></code> | <code><a href="#4_24">nodeMap</a></code> | <code><a href="#4_32">wired</a></code></p>
 				
@@ -304,7 +304,7 @@
 	<a name="2"></a>
 	<h1 class="heading1" title="2. How It Works"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>. </span>How It Works</h1>
 	<div class="contents1">
-		<p>Understanding how the image wipe effect works will enable you to come up with your own unique wipes by helping you to understand how the various set-get properties affect the wipe.</p>
+		<p>Understanding how the image wipe effect works will enable you to come up with your own unique wipes by helping you to understand how the various state properties affect the wipe.</p>
 		
 		<a name="2_1"></a>
 		<h2 class="heading2" title="2. How It Works -&gt; 2.1. In a Nutshell"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_1" title="2. How It Works -&gt; 2.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
@@ -334,7 +334,7 @@
 			<div class="contents3">
 				<p>A Pane Stack is a stack of image nodes that are all positioned absolutely and right on top of one another, where each image node corresponds to what is termed a <a href="#2_2_3">Pane</a>.</p>
 				
-				<p>One Pane Stack is used to display one image, even though it is comprised of many image nodes. The number of image nodes in the Pane Stack used for showing the current image is the same as the number of image nodes in the Pane Stack used for showing the next image, and is calculated as the product of the <code><a href="#4_11">divisionsX</a></code> and <code><a href="#4_12">divisionsY</a></code> set-get properties. So, for example, if <code><a href="#4_11">divisionsX</a></code> were set to the value <code>8</code> and <code><a href="#4_12">divisionsY</a></code> were set to the value <code>2</code>, then the two Pane Stacks in the <a href="#2_2_1">Wipe Port</a> would each have 16 image nodes. Moreover, a 1x16, 2x8, 4x4, 8x2, and 16x1 wipe would all produce a wipe effect using 16 image nodes per <a href="#2_2_2">Pane Stack</a>.</p>
+				<p>One Pane Stack is used to display one image, even though it is comprised of many image nodes. The number of image nodes in the Pane Stack used for showing the current image is the same as the number of image nodes in the Pane Stack used for showing the next image, and is calculated as the product of the <code><a href="#4_11">divisionsX</a></code> and <code><a href="#4_12">divisionsY</a></code> state properties. So, for example, if <code><a href="#4_11">divisionsX</a></code> were set to the value <code>8</code> and <code><a href="#4_12">divisionsY</a></code> were set to the value <code>2</code>, then the two Pane Stacks in the <a href="#2_2_1">Wipe Port</a> would each have 16 image nodes. Moreover, a 1x16, 2x8, 4x4, 8x2, and 16x1 wipe would all produce a wipe effect using 16 image nodes per <a href="#2_2_2">Pane Stack</a>.</p>
 			</div>
 			
 			<a name="2_2_3"></a>
@@ -342,13 +342,13 @@
 			<div class="contents3">
 				<p>One image node in a <a href="#2_2_2">Pane Stack</a> is termed a Pane.</p>
 				
-				<p>When a wipe is performed, initial crop rect coordinates (termed the <a href="#2_2_6">Pane Seed</a>) and final crop rect coordinates (termed the <a href="#2_2_8">Pane Final</a>) are calculated for every pane in the Pane Stack that is being used to reveal the next image. When a specific pane is being animated, its crop rect coordinates are interpolated between the Pane Seed coordinates and the Pane Final coordinates. Additionally, its opacity will be faded from completely transparent to completely opaque over the course of the animation if the <code><a href="#4_10">dissolve</a></code> set-get property is set to <code>true</code>.</p>
+				<p>When a wipe is performed, initial crop rect coordinates (termed the <a href="#2_2_6">Pane Seed</a>) and final crop rect coordinates (termed the <a href="#2_2_8">Pane Final</a>) are calculated for every pane in the Pane Stack that is being used to reveal the next image. When a specific pane is being animated, its crop rect coordinates are interpolated between the Pane Seed coordinates and the Pane Final coordinates. Additionally, its opacity will be faded from completely transparent to completely opaque over the course of the animation if the <code><a href="#4_10">dissolve</a></code> state property is set to <code>true</code>.</p>
 			</div>
 			
 			<a name="2_2_4"></a>
 			<h3 class="heading3" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.4. Wipe Port Matrix"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_2" title="2. How It Works -&gt; 2.2. In More Detail">2</a>.<a href="#2_2_4" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.4. Wipe Port Matrix">4</a>. </span>Wipe Port Matrix</h3>
 			<div class="contents3">
-				<p>The Wipe Port Matrix is a matrix of <a href="#2_2_5">Wipe Port Matrix Cell</a> coordinates, produced by dividing the <a href="#2_2_1">Wipe Port</a> into a number of rows and columns, as determined by the <code><a href="#4_12">divisionsY</a></code> and <code><a href="#4_11">divisionsX</a></code> set-get properties, respectively.</p>
+				<p>The Wipe Port Matrix is a matrix of <a href="#2_2_5">Wipe Port Matrix Cell</a> coordinates, produced by dividing the <a href="#2_2_1">Wipe Port</a> into a number of rows and columns, as determined by the <code><a href="#4_12">divisionsY</a></code> and <code><a href="#4_11">divisionsX</a></code> state properties, respectively.</p>
 				
 				<p>The coordinates of the Wipe Port Matrix are used in determining the coordinates of the <a href="#2_2_6">Pane Seed</a> and <a href="#2_2_8">Pane Final</a> for each <a href="#2_2_3">Pane</a> of the <a href="#2_2_2">Pane Stack</a>.</p>
 			</div>
@@ -358,9 +358,9 @@
 			<div class="contents3">
 				<p>Each cell in the Wipe Port Matrix is termed a Wipe Port Matrix Cell.</p>
 				
-				<p>The height of a Wipe Port Matrix Cell is influenced by the number of vertical divisions (as specified by the <code><a href="#4_12">divisionsY</a></code> set-get property), as well as the value of the <code><a href="#4_17">firstPaneSizeY</a></code> property. Similarly, the width of a Wipe Port Matrix Cell is influenced by the number of horizontal divisions (as specified by the <code><a href="#4_11">divisionsX</a></code> set-get property), as well as the value of the <code><a href="#4_16">firstPaneSizeX</a></code> property.</p>
+				<p>The height of a Wipe Port Matrix Cell is influenced by the number of vertical divisions (as specified by the <code><a href="#4_12">divisionsY</a></code> state property), as well as the value of the <code><a href="#4_17">firstPaneSizeY</a></code> property. Similarly, the width of a Wipe Port Matrix Cell is influenced by the number of horizontal divisions (as specified by the <code><a href="#4_11">divisionsX</a></code> state property), as well as the value of the <code><a href="#4_16">firstPaneSizeX</a></code> property.</p>
 				
-				<p>The coordinates of each Wipe Port Matrix Cell influences the coordinates of the <a href="#2_2_6">Pane Seed</a> and the <a href="#2_2_8">Pane Final</a> for each <a href="#2_2_3">Pane</a> of the <a href="#2_2_2">Pane Stack</a>, factoring in the effects of the <code><a href="#4_27">paneSeedContext</a></code> and <code><a href="#4_3">allToFull</a></code> set-get properties.</p>
+				<p>The coordinates of each Wipe Port Matrix Cell influences the coordinates of the <a href="#2_2_6">Pane Seed</a> and the <a href="#2_2_8">Pane Final</a> for each <a href="#2_2_3">Pane</a> of the <a href="#2_2_2">Pane Stack</a>, factoring in the effects of the <code><a href="#4_27">paneSeedContext</a></code> and <code><a href="#4_3">allToFull</a></code> state properties.</p>
 			</div>
 			
 			<a name="2_2_6"></a>
@@ -368,9 +368,9 @@
 			<div class="contents3">
 				<p>The <a href="#2_2_6">Pane Seed</a> is the initial coordinates for a <a href="#2_2_3">Pane</a>.</p>
 				
-				<p>The Pane Seed coordinates are calculated by combining the coordinates of the <a href="#2_2_7">Pane Seed Context</a> and the values of the <code><a href="#4_1">alignX</a></code>, <code><a href="#4_2">alignY</a></code>, <code><a href="#4_28">paneSeedSizeX</a></code>, and <code><a href="#4_29">paneSeedSizeY</a></code> set-get properties. Specifically, the width of the Pane Seed is calculated as a percentage of the width of the <a href="#2_2_7">Pane Seed Context</a> (as specified by the <code><a href="#4_28">paneSeedSizeX</a></code> set-get property), and the height of the Pane Seed is calculated as a percentage of the height of the <a href="#2_2_7">Pane Seed Context</a> (as specified by the <code><a href="#4_29">paneSeedSizeY</a></code> set-get property).</p>
+				<p>The Pane Seed coordinates are calculated by combining the coordinates of the <a href="#2_2_7">Pane Seed Context</a> and the values of the <code><a href="#4_1">alignX</a></code>, <code><a href="#4_2">alignY</a></code>, <code><a href="#4_28">paneSeedSizeX</a></code>, and <code><a href="#4_29">paneSeedSizeY</a></code> state properties. Specifically, the width of the Pane Seed is calculated as a percentage of the width of the <a href="#2_2_7">Pane Seed Context</a> (as specified by the <code><a href="#4_28">paneSeedSizeX</a></code> state property), and the height of the Pane Seed is calculated as a percentage of the height of the <a href="#2_2_7">Pane Seed Context</a> (as specified by the <code><a href="#4_29">paneSeedSizeY</a></code> state property).</p>
 				
-				<p>Moreover, the Pane Seed is positioned within the Pane Seed Context using the <code><a href="#4_1">alignX</a></code> and <code><a href="#4_2">alignY</a></code> set-get properties, where these properties are floating point numbers in the range of <code>0</code> to <code>1</code> and where the value <code>0</code> represents left and top alignment, the value <code>1</code> represents right and bottom alignment, and the value <code>.5</code> represents center alignment.</p>
+				<p>Moreover, the Pane Seed is positioned within the Pane Seed Context using the <code><a href="#4_1">alignX</a></code> and <code><a href="#4_2">alignY</a></code> state properties, where these properties are floating point numbers in the range of <code>0</code> to <code>1</code> and where the value <code>0</code> represents left and top alignment, the value <code>1</code> represents right and bottom alignment, and the value <code>.5</code> represents center alignment.</p>
 			</div>
 			
 			<a name="2_2_7"></a>
@@ -378,7 +378,7 @@
 			<div class="contents3">
 				<p>The Pane Seed Context is the coordinates that provide the context for calculating the <a href="#2_2_6">Pane Seed</a> coordinates.</p>
 				
-				<p>Each <a href="#2_2_3">Pane</a> is associated with a corresponding <a href="#2_2_5">Wipe Port Matrix Cell</a>. The <code><a href="#4_27">paneSeedContext</a></code> set-get property lets one specify the <a href="#2_2_7">Pane Seed Context</a> for a Pane as a blend between the coordinates of a Pane's corresponding Wipe Port Matrix Cell and the coordinates of the <a href="#2_2_1">Wipe Port</a>. When <code><a href="#4_27">paneSeedContext</a></code> is set to <code>0</code>, then the Pane Seed Context will be exactly the coordinates of Pane's corresponding Wipe Port Matrix Cell. When <code><a href="#4_27">paneSeedContext</a></code> is set to <code>100</code>, then the Pane Seed Context will be exactly the coordinates of the Wipe Port. And when <code><a href="#4_27">paneSeedContext</a></code> is set to <code>50</code>, then the Pane Seed Context will be calculated as a 50% blend between the coordinates of the Pane's corresponding Wipe Port Matrix Cell and the coordinates of the Wipe Port.</p>
+				<p>Each <a href="#2_2_3">Pane</a> is associated with a corresponding <a href="#2_2_5">Wipe Port Matrix Cell</a>. The <code><a href="#4_27">paneSeedContext</a></code> state property lets one specify the <a href="#2_2_7">Pane Seed Context</a> for a Pane as a blend between the coordinates of a Pane's corresponding Wipe Port Matrix Cell and the coordinates of the <a href="#2_2_1">Wipe Port</a>. When <code><a href="#4_27">paneSeedContext</a></code> is set to <code>0</code>, then the Pane Seed Context will be exactly the coordinates of Pane's corresponding Wipe Port Matrix Cell. When <code><a href="#4_27">paneSeedContext</a></code> is set to <code>100</code>, then the Pane Seed Context will be exactly the coordinates of the Wipe Port. And when <code><a href="#4_27">paneSeedContext</a></code> is set to <code>50</code>, then the Pane Seed Context will be calculated as a 50% blend between the coordinates of the Pane's corresponding Wipe Port Matrix Cell and the coordinates of the Wipe Port.</p>
 			</div>
 			
 			<a name="2_2_8"></a>
@@ -386,7 +386,7 @@
 			<div class="contents3">
 				<p>The <a href="#2_2_8">Pane Final</a> is the final coordinates for a <a href="#2_2_3">Pane</a>.</p>
 				
-				<p>The Pane Final coordinates are calculated by combining the coordinates of a Pane's corresponding Wipe Port Matrix Cell with the coordinates of the <a href="#2_2_1">Wipe Port</a> and the value of the <code><a href="#4_3">allToFull</a></code> set-get property. Specifically, the width of the Pane Final is calculated as the blend of the width of a Pane's corresponding Wipe Port Matrix Cell and the width of the <a href="#2_2_1">Wipe Port</a>, as specified by the <code><a href="#4_3">allToFull</a></code> set-get property. Similarly, the height of the Pane Final is calculated as the blend of the height of a Pane's corresponding Wipe Port Matrix Cell and the height of the <a href="#2_2_1">Wipe Port</a>, as specified by the <code><a href="#4_3">allToFull</a></code> set-get property.</p>
+				<p>The Pane Final coordinates are calculated by combining the coordinates of a Pane's corresponding Wipe Port Matrix Cell with the coordinates of the <a href="#2_2_1">Wipe Port</a> and the value of the <code><a href="#4_3">allToFull</a></code> state property. Specifically, the width of the Pane Final is calculated as the blend of the width of a Pane's corresponding Wipe Port Matrix Cell and the width of the <a href="#2_2_1">Wipe Port</a>, as specified by the <code><a href="#4_3">allToFull</a></code> state property. Similarly, the height of the Pane Final is calculated as the blend of the height of a Pane's corresponding Wipe Port Matrix Cell and the height of the <a href="#2_2_1">Wipe Port</a>, as specified by the <code><a href="#4_3">allToFull</a></code> state property.</p>
 				
 				<p>When <code><a href="#4_3">allToFull</a></code> is set to <code>0</code>, then the Pane Final coordinates will be exactly the coordinates of Pane's corresponding Wipe Port Matrix Cell. When <code><a href="#4_3">allToFull</a></code> is set to <code>100</code>, then the Pane Final coordinates will be exactly the coordinates of the Wipe Port. And when <code><a href="#4_3">allToFull</a></code> is set to <code>50</code>, then the Pane Final coordinates will be calculated as a 50% blend between the coordinates of the Pane's corresponding Wipe Port Matrix Cell and the coordinates of the Wipe Port.</p>
 			</div>
@@ -394,7 +394,7 @@
 			<a name="2_2_9"></a>
 			<h3 class="heading3" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.9. Value Range Declaration"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_2" title="2. How It Works -&gt; 2.2. In More Detail">2</a>.<a href="#2_2_9" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.9. Value Range Declaration">9</a>. </span>Value Range Declaration</h3>
 			<div class="contents3">
-				<p>The values for certain set-get properties can be specified with a Value Range Declaration that allows a range of values to be specified, so that each <a href="#2_2_3">Pane</a> in a <a href="#2_2_2">Pane Stack</a> can have a different value along a continous range.</p>
+				<p>The values for certain state properties can be specified with a Value Range Declaration that allows a range of values to be specified, so that each <a href="#2_2_3">Pane</a> in a <a href="#2_2_2">Pane Stack</a> can have a different value along a continous range.</p>
 				
 				<p>This facility allows for more sophisticated effects, since it allows for controlled variation in the animations of all the Panes that comprise the wipe effect. Some of the more compelling wipe effect presets available in the <code><a href="../reference/Uize.Widget.ImageWipe.xPresets.html">Uize.Widget.ImageWipe.xPresets</a></code> extension take advantage of this mechanism for some of their settings.</p>
 				
@@ -428,9 +428,9 @@
 					<p>A string, specifying what the interpolation between the <code><a href="#2_2_9_1">start</a></code> value and <code><a href="#2_2_9_2">end</a></code> value should be keyed to.</p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value <code>'row'</code> means that the interpolation will be keyed to the row number of the current <a href="#2_2_3">Pane</a> for which the value is being calculated, where the interpolated value for panes in the first row will be the specified <code><a href="#2_2_9_1">start</a></code> value, and the interpolated value for panes in the last row will be the specified <code><a href="#2_2_9_2">end</a></code> value. This is useful when specifying a value range for set-get properties that apply to the Y-axis, such as <code><a href="#4_2">alignY</a></code> and <code><a href="#4_29">paneSeedSizeY</a></code>, although there's nothing to say that you couldn't key the interpolation of an X-axis set-get property to row number.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value <code>'column'</code> means that the interpolation will be keyed to the column number of the current <a href="#2_2_3">Pane</a> for which the value is being calculated, where the interpolated value for panes in the first column will be the specified <code><a href="#2_2_9_1">start</a></code> value, and the interpolated value for panes in the last column will be the specified <code><a href="#2_2_9_2">end</a></code> value. This is useful when specifying a value range for set-get properties that apply to the X-axis, such as <code><a href="#4_1">alignX</a></code> and <code><a href="#4_28">paneSeedSizeX</a></code>, although there's nothing to say that you couldn't key the interpolation of a Y-axis set-get property to column number.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value <code>'pane'</code> means that the interpolation will be keyed to the pane number of the current <a href="#2_2_3">Pane</a> for which the value is being calculated, where the interpolated value for the first pane will be the specified <code><a href="#2_2_9_1">start</a></code> value, and the interpolated value for the last pane will be the specified <code><a href="#2_2_9_2">end</a></code> value. When the value <code>1</code> is specified for the <code><a href="#4_12">divisionsY</a></code> set-get property (ie. only one row), then the values <code>'column'</code> and <code>'pane'</code> for <code><a href="#2_2_9_3">keyedTo</a></code> will have the same effect. Similarly, when the value <code>1</code> is specified for the <code><a href="#4_11">divisionsX</a></code> set-get property (ie. only one column), then the values <code>'row'</code> and <code>'pane'</code> for <code><a href="#2_2_9_3">keyedTo</a></code> will have the same effect.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value <code>'row'</code> means that the interpolation will be keyed to the row number of the current <a href="#2_2_3">Pane</a> for which the value is being calculated, where the interpolated value for panes in the first row will be the specified <code><a href="#2_2_9_1">start</a></code> value, and the interpolated value for panes in the last row will be the specified <code><a href="#2_2_9_2">end</a></code> value. This is useful when specifying a value range for state properties that apply to the Y-axis, such as <code><a href="#4_2">alignY</a></code> and <code><a href="#4_29">paneSeedSizeY</a></code>, although there's nothing to say that you couldn't key the interpolation of an X-axis state property to row number.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value <code>'column'</code> means that the interpolation will be keyed to the column number of the current <a href="#2_2_3">Pane</a> for which the value is being calculated, where the interpolated value for panes in the first column will be the specified <code><a href="#2_2_9_1">start</a></code> value, and the interpolated value for panes in the last column will be the specified <code><a href="#2_2_9_2">end</a></code> value. This is useful when specifying a value range for state properties that apply to the X-axis, such as <code><a href="#4_1">alignX</a></code> and <code><a href="#4_28">paneSeedSizeX</a></code>, although there's nothing to say that you couldn't key the interpolation of a Y-axis state property to column number.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value <code>'pane'</code> means that the interpolation will be keyed to the pane number of the current <a href="#2_2_3">Pane</a> for which the value is being calculated, where the interpolated value for the first pane will be the specified <code><a href="#2_2_9_1">start</a></code> value, and the interpolated value for the last pane will be the specified <code><a href="#2_2_9_2">end</a></code> value. When the value <code>1</code> is specified for the <code><a href="#4_12">divisionsY</a></code> state property (ie. only one row), then the values <code>'column'</code> and <code>'pane'</code> for <code><a href="#2_2_9_3">keyedTo</a></code> will have the same effect. Similarly, when the value <code>1</code> is specified for the <code><a href="#4_11">divisionsX</a></code> state property (ie. only one column), then the values <code>'row'</code> and <code>'pane'</code> for <code><a href="#2_2_9_3">keyedTo</a></code> will have the same effect.</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value <code>'random'</code> means that the interpolation will be keyed to a random number, so that the value being calculated for each <a href="#2_2_3">Pane</a> will be some random blend between the <code><a href="#2_2_9_1">start</a></code> value and the <code><a href="#2_2_9_2">end</a></code> value. <b>NOTE:</b> When using this value, the <code><a href="#2_2_9_4">wraps</a></code> and <code><a href="#2_2_9_5">wrapMode</a></code> properties become pretty much meaningless.</td></tr>
 					</table>
 				</div>
@@ -466,7 +466,7 @@
 					</table>
 				</div>
 				
-				<p>Set-get properties of this class that support a Value Range Declaration include: <code><a href="#4_3">allToFull</a></code>, <code><a href="#4_1">alignX</a></code>, <code><a href="#4_2">alignY</a></code>, <code><a href="#4_28">paneSeedSizeX</a></code>, <code><a href="#4_29">paneSeedSizeY</a></code>, and <code><a href="#4_27">paneSeedContext</a></code>.</p>
+				<p>State properties of this class that support a Value Range Declaration include: <code><a href="#4_3">allToFull</a></code>, <code><a href="#4_1">alignX</a></code>, <code><a href="#4_2">alignY</a></code>, <code><a href="#4_28">paneSeedSizeX</a></code>, <code><a href="#4_29">paneSeedSizeY</a></code>, and <code><a href="#4_27">paneSeedContext</a></code>.</p>
 			</div>
 		</div>
 	</div>
@@ -479,7 +479,7 @@
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class that drives the animation for the image wipe effect.</p>
 			
-			<p>This property allows access to the fade instance that drives the wipe animation. This allows you to modify properties of the animation, such as the <code>curve</code> and any of the other set-get properties supported by the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class.</p>
+			<p>This property allows access to the fade instance that drives the wipe animation. This allows you to modify properties of the animation, such as the <code>curve</code> and any of the other state properties supported by the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class.</p>
 		</div>
 		
 		<a name="3_2"></a>
@@ -508,10 +508,10 @@
 	</div>
 	
 	<a name="4"></a>
-	<h1 class="heading1" title="4. Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="4. State Properties"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="4_1"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.1. alignX"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_1" title="4. Set-get Properties -&gt; 4.1. alignX">1</a>. </span>alignX</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.1. alignX"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_1" title="4. State Properties -&gt; 4.1. alignX">1</a>. </span>alignX</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>1</code>, specifying the horizontal alignment of each <a href="#2_2_6">Pane Seed</a>.</p>
 			
@@ -521,8 +521,8 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value for this property may also be a <a href="#2_2_9">Value Range Declaration</a></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value of the <code><a href="#4_28">paneSeedSizeX</a></code> set-get property is <code>100</code>, then the <code><a href="#4_1">alignX</a></code> property will have no effect</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_2">alignY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value of the <code><a href="#4_28">paneSeedSizeX</a></code> state property is <code>100</code>, then the <code><a href="#4_1">alignX</a></code> property will have no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_2">alignY</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>{start:1,end:0,keyedTo:'column'}</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -533,7 +533,7 @@
 		</div>
 		
 		<a name="4_2"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.2. alignY"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_2" title="4. Set-get Properties -&gt; 4.2. alignY">2</a>. </span>alignY</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.2. alignY"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_2" title="4. State Properties -&gt; 4.2. alignY">2</a>. </span>alignY</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>1</code>, specifying the vertical alignment of each <a href="#2_2_6">Pane Seed</a>.</p>
 			
@@ -543,8 +543,8 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value for this property may also be a <a href="#2_2_9">Value Range Declaration</a></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value of the <code><a href="#4_29">paneSeedSizeY</a></code> set-get property is <code>100</code>, then the <code><a href="#4_2">alignY</a></code> property will have no effect</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_1">alignX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value of the <code><a href="#4_29">paneSeedSizeY</a></code> state property is <code>100</code>, then the <code><a href="#4_2">alignY</a></code> property will have no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_1">alignX</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>.5</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -555,7 +555,7 @@
 		</div>
 		
 		<a name="4_3"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.3. allToFull"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_3" title="4. Set-get Properties -&gt; 4.3. allToFull">3</a>. </span>allToFull</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.3. allToFull"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_3" title="4. State Properties -&gt; 4.3. allToFull">3</a>. </span>allToFull</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>100</code>, representing the balance between the <a href="#2_2_7">Pane Seed Context</a> coordinates and the <a href="#2_2_1">Wipe Port</a> coordinates that should be used when calculating the <a href="#2_2_8">Pane Final</a> coordinates for each <a href="#2_2_3">Pane</a>.</p>
 			
@@ -575,7 +575,7 @@
 		</div>
 		
 		<a name="4_4"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.4. background"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_4" title="4. Set-get Properties -&gt; 4.4. background">4</a>. </span>background</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.4. background"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_4" title="4. State Properties -&gt; 4.4. background">4</a>. </span>background</h2>
 		<div class="contents2">
 			<p>A string, specifying an optional background style that should be used for each <a href="#2_2_3">Pane</a>.</p>
 			
@@ -592,7 +592,7 @@
 		</div>
 		
 		<a name="4_5"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. built"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. built">5</a>. </span>built</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.5. built"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_5" title="4. State Properties -&gt; 4.5. built">5</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -604,7 +604,7 @@
 		</div>
 		
 		<a name="4_6"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. busy"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. busy">6</a>. </span>busy</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.6. busy"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_6" title="4. State Properties -&gt; 4.6. busy">6</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -616,7 +616,7 @@
 		</div>
 		
 		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. busyInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. busyInherited">7</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.7. busyInherited"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_7" title="4. State Properties -&gt; 4.7. busyInherited">7</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -628,7 +628,7 @@
 		</div>
 		
 		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. children"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. children">8</a>. </span>children</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.8. children"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_8" title="4. State Properties -&gt; 4.8. children">8</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -640,7 +640,7 @@
 		</div>
 		
 		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. container">9</a>. </span>container</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.9. container"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_9" title="4. State Properties -&gt; 4.9. container">9</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -652,7 +652,7 @@
 		</div>
 		
 		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. dissolve"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. dissolve">10</a>. </span>dissolve</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.10. dissolve"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_10" title="4. State Properties -&gt; 4.10. dissolve">10</a>. </span>dissolve</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not each <a href="#2_2_3">Pane</a> should fade in opacity - from being completely transparent to being completely opaque - during the course of its animation.</p>
 			
@@ -671,14 +671,14 @@
 		</div>
 		
 		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. divisionsX"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. divisionsX">11</a>. </span>divisionsX</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.11. divisionsX"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_11" title="4. State Properties -&gt; 4.11. divisionsX">11</a>. </span>divisionsX</h2>
 		<div class="contents2">
 			<p>A positive integer, specifying the number of horizontal divisions in the <a href="#2_2_4">Wipe Port Matrix</a>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_12">divisionsY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_12">divisionsY</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>16</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -689,14 +689,14 @@
 		</div>
 		
 		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. divisionsY"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. divisionsY">12</a>. </span>divisionsY</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.12. divisionsY"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_12" title="4. State Properties -&gt; 4.12. divisionsY">12</a>. </span>divisionsY</h2>
 		<div class="contents2">
 			<p>A positive integer, specifying the number of vertical divisions in the <a href="#2_2_4">Wipe Port Matrix</a>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_11">divisionsX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_11">divisionsX</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>16</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -707,7 +707,7 @@
 		</div>
 		
 		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. duration"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. duration">13</a>. </span>duration</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.13. duration"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_13" title="4. State Properties -&gt; 4.13. duration">13</a>. </span>duration</h2>
 		<div class="contents2">
 			<p>A positive integer, specifying the duration (in milliseconds) for the wipe effect.</p>
 			
@@ -724,7 +724,7 @@
 		</div>
 		
 		<a name="4_14"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. enabled">14</a>. </span>enabled</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.14. enabled"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. enabled">14</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -736,7 +736,7 @@
 		</div>
 		
 		<a name="4_15"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. enabledInherited">15</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.15. enabledInherited"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. enabledInherited">15</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -748,13 +748,13 @@
 		</div>
 		
 		<a name="4_16"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. firstPaneSizeX"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. firstPaneSizeX">16</a>. </span>firstPaneSizeX</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.16. firstPaneSizeX"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_16" title="4. State Properties -&gt; 4.16. firstPaneSizeX">16</a>. </span>firstPaneSizeX</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>100</code>, specifying the width of the first <a href="#2_2_4">Wipe Port Matrix</a> column as a percentage of the normal column width.</p>
 			
-			<p>Normal column width is defined as the width of the <a href="#2_2_1">Wipe Port</a> divided by the number of columns (as specified by the <code><a href="#4_11">divisionsX</a></code> set-get property). If the first Wipe Port Matrix column width is smaller or greater than the normal column width, then the difference will be distributed amongst the remaining columns to compenstate - according to a sigma series distribution. This makes it possible to bias the widths towards the first column or towards the last column.</p>
+			<p>Normal column width is defined as the width of the <a href="#2_2_1">Wipe Port</a> divided by the number of columns (as specified by the <code><a href="#4_11">divisionsX</a></code> state property). If the first Wipe Port Matrix column width is smaller or greater than the normal column width, then the difference will be distributed amongst the remaining columns to compenstate - according to a sigma series distribution. This makes it possible to bias the widths towards the first column or towards the last column.</p>
 			
-			<p>For example, specifying a value of <code>10</code> for the <code><a href="#4_16">firstPaneSizeX</a></code> set-get property means that the missing 90% of the normal column width for the first Wipe Port Matrix column must be distributed across the remaining columns. In order for this distribution to look natural, the width would grow gradually from left to right. Consider the following representations...</p>
+			<p>For example, specifying a value of <code>10</code> for the <code><a href="#4_16">firstPaneSizeX</a></code> state property means that the missing 90% of the normal column width for the first Wipe Port Matrix column must be distributed across the remaining columns. In order for this distribution to look natural, the width would grow gradually from left to right. Consider the following representations...</p>
 			
 			<p><span class="allCaps">EVEN COLUMN WIDTH</span></p>
 			
@@ -785,7 +785,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_17">firstPaneSizeY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_17">firstPaneSizeY</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>100</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -796,18 +796,18 @@
 		</div>
 		
 		<a name="4_17"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. firstPaneSizeY"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. firstPaneSizeY">17</a>. </span>firstPaneSizeY</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.17. firstPaneSizeY"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_17" title="4. State Properties -&gt; 4.17. firstPaneSizeY">17</a>. </span>firstPaneSizeY</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>100</code>, specifying the height of the first <a href="#2_2_4">Wipe Port Matrix</a> row as a percentage of the normal row height.</p>
 			
-			<p>Normal row height is defined as the height of the <a href="#2_2_1">Wipe Port</a> divided by the number of rows (as specified by the <code><a href="#4_12">divisionsY</a></code> set-get property). If the first Wipe Port Matrix row height is smaller or greater than the normal row height, then the difference will be distributed amongst the remaining rows to compenstate - according to a sigma series distribution. This makes it possible to bias the heights towards the first row or towards the last row.</p>
+			<p>Normal row height is defined as the height of the <a href="#2_2_1">Wipe Port</a> divided by the number of rows (as specified by the <code><a href="#4_12">divisionsY</a></code> state property). If the first Wipe Port Matrix row height is smaller or greater than the normal row height, then the difference will be distributed amongst the remaining rows to compenstate - according to a sigma series distribution. This makes it possible to bias the heights towards the first row or towards the last row.</p>
 			
-			<p>For a more in-depth explanation, and for some illustrations, consult the reference for the <code><a href="#4_16">firstPaneSizeX</a></code> set-get property, since the <code><a href="#4_17">firstPaneSizeY</a></code> property behaves in exactly the same way as the <code><a href="#4_16">firstPaneSizeX</a></code> property, excepting that it applies to the Y-axis rather than the X-axis.</p>
+			<p>For a more in-depth explanation, and for some illustrations, consult the reference for the <code><a href="#4_16">firstPaneSizeX</a></code> state property, since the <code><a href="#4_17">firstPaneSizeY</a></code> property behaves in exactly the same way as the <code><a href="#4_16">firstPaneSizeX</a></code> property, excepting that it applies to the Y-axis rather than the X-axis.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_16">firstPaneSizeX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_16">firstPaneSizeX</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>100</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -818,7 +818,7 @@
 		</div>
 		
 		<a name="4_18"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. html">18</a>. </span>html</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.18. html"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_18" title="4. State Properties -&gt; 4.18. html">18</a>. </span>html</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -828,7 +828,7 @@
 		</div>
 		
 		<a name="4_19"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. idPrefix">19</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.19. idPrefix"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_19" title="4. State Properties -&gt; 4.19. idPrefix">19</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -840,7 +840,7 @@
 		</div>
 		
 		<a name="4_20"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. idPrefixConstruction">20</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.20. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_20" title="4. State Properties -&gt; 4.20. idPrefixConstruction">20</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -852,7 +852,7 @@
 		</div>
 		
 		<a name="4_21"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. insertionMode">21</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.21. insertionMode"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_21" title="4. State Properties -&gt; 4.21. insertionMode">21</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -864,7 +864,7 @@
 		</div>
 		
 		<a name="4_22"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. localized">22</a>. </span>localized</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.22. localized"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_22" title="4. State Properties -&gt; 4.22. localized">22</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -876,7 +876,7 @@
 		</div>
 		
 		<a name="4_23"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.23. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_23" title="4. Set-get Properties -&gt; 4.23. name">23</a>. </span>name</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.23. name"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_23" title="4. State Properties -&gt; 4.23. name">23</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -888,7 +888,7 @@
 		</div>
 		
 		<a name="4_24"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.24. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_24" title="4. Set-get Properties -&gt; 4.24. nodeMap">24</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.24. nodeMap"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_24" title="4. State Properties -&gt; 4.24. nodeMap">24</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -900,18 +900,18 @@
 		</div>
 		
 		<a name="4_25"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.25. paneOrderScheme"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_25" title="4. Set-get Properties -&gt; 4.25. paneOrderScheme">25</a>. </span>paneOrderScheme</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.25. paneOrderScheme"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_25" title="4. State Properties -&gt; 4.25. paneOrderScheme">25</a>. </span>paneOrderScheme</h2>
 		<div class="contents2">
 			<p>A string, specifying an ordering scheme for the panes that comprise the wipe effect.</p>
 			
-			<p>When a non-zero value is specified for the <code><a href="#4_26">paneProgressDelay</a></code> set-get property, then the value of the <code><a href="#4_25">paneOrderScheme</a></code> set-get property will determine the order in which the animation of the panes is started, making a wide array of interesting effects possible.</p>
+			<p>When a non-zero value is specified for the <code><a href="#4_26">paneProgressDelay</a></code> state property, then the value of the <code><a href="#4_25">paneOrderScheme</a></code> state property will determine the order in which the animation of the panes is started, making a wide array of interesting effects possible.</p>
 			
 			<p>The value for this property can be any of the values supported for the <code>reorderingModeSTR</code> parameter of the <code>Uize.Array.Order.reorder</code> static method, including <code>'normal'</code>, <code>'reverse'</code>, <code>'jumbled'</code>, <code>'inside out'</code>, and <code>'outside in'</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#4_26">paneProgressDelay</a></code> set-get property is set to <code>0</code>, then the <code><a href="#4_25">paneOrderScheme</a></code> property will have no noticeable effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#4_26">paneProgressDelay</a></code> state property is set to <code>0</code>, then the <code><a href="#4_25">paneOrderScheme</a></code> property will have no noticeable effect</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>'inside out'</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -922,15 +922,15 @@
 		</div>
 		
 		<a name="4_26"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.26. paneProgressDelay"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_26" title="4. Set-get Properties -&gt; 4.26. paneProgressDelay">26</a>. </span>paneProgressDelay</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.26. paneProgressDelay"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_26" title="4. State Properties -&gt; 4.26. paneProgressDelay">26</a>. </span>paneProgressDelay</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>100</code>, representing the percentage of the animation of a pane that should be complete before the animation of the next pane is started.</p>
 			
 			<p>When the value <code>0</code> is specified, the animation for all panes will be started at the same time. When the value <code>100</code> is specified, the animation for the next pane will only be started when the animation of the current pane is entirely complete. And when the value <code>50</code> is specified, then the animation of the next pane will be started when the animation of the current pane is 50% complete.</p>
 			
-			<p>Regardless of the value of this property, the entire wipe effect will always take the same amount of time (as specified by the <code><a href="#4_13">duration</a></code> set-get property). This means that as you increase the value of this property, the animation time per pane will be decreased. At a value of <code>0</code>, all panes will take the entire duration of the wipe to animate. And, at a value of <code>100</code>, the animation time for each pane will be the entire duration of the wipe divided by the total number of panes.</p>
+			<p>Regardless of the value of this property, the entire wipe effect will always take the same amount of time (as specified by the <code><a href="#4_13">duration</a></code> state property). This means that as you increase the value of this property, the animation time per pane will be decreased. At a value of <code>0</code>, all panes will take the entire duration of the wipe to animate. And, at a value of <code>100</code>, the animation time for each pane will be the entire duration of the wipe divided by the total number of panes.</p>
 			
-			<p>When this property is set to the value <code>0</code>, then the <code><a href="#4_25">paneOrderScheme</a></code> set-get property will have no noticeable effect. Conversely, when this property is set to a non-zero value, then the value of the <code><a href="#4_25">paneOrderScheme</a></code> property will determine the order in which the panes are animated.</p>
+			<p>When this property is set to the value <code>0</code>, then the <code><a href="#4_25">paneOrderScheme</a></code> state property will have no noticeable effect. Conversely, when this property is set to a non-zero value, then the value of the <code><a href="#4_25">paneOrderScheme</a></code> property will determine the order in which the panes are animated.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -945,7 +945,7 @@
 		</div>
 		
 		<a name="4_27"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.27. paneSeedContext"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_27" title="4. Set-get Properties -&gt; 4.27. paneSeedContext">27</a>. </span>paneSeedContext</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.27. paneSeedContext"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_27" title="4. State Properties -&gt; 4.27. paneSeedContext">27</a>. </span>paneSeedContext</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>100</code>, representing the balance between the <a href="#2_2_5">Wipe Port Matrix Cell</a> coordinates and the <a href="#2_2_1">Wipe Port</a> coordinates that should be used when calculating the <a href="#2_2_7">Pane Seed Context</a> coordinates for each <a href="#2_2_3">Pane</a>.</p>
 			
@@ -965,7 +965,7 @@
 		</div>
 		
 		<a name="4_28"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.28. paneSeedSizeX"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_28" title="4. Set-get Properties -&gt; 4.28. paneSeedSizeX">28</a>. </span>paneSeedSizeX</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.28. paneSeedSizeX"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_28" title="4. State Properties -&gt; 4.28. paneSeedSizeX">28</a>. </span>paneSeedSizeX</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>100</code>, specifying the width for the <a href="#2_2_6">Pane Seed</a> as a percentage of the width of the <a href="#2_2_7">Pane Seed Context</a>.</p>
 			
@@ -975,7 +975,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value for this property may also be a <a href="#2_2_9">Value Range Declaration</a></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_29">paneSeedSizeY</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_29">paneSeedSizeY</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -986,7 +986,7 @@
 		</div>
 		
 		<a name="4_29"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.29. paneSeedSizeY"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_29" title="4. Set-get Properties -&gt; 4.29. paneSeedSizeY">29</a>. </span>paneSeedSizeY</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.29. paneSeedSizeY"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_29" title="4. State Properties -&gt; 4.29. paneSeedSizeY">29</a>. </span>paneSeedSizeY</h2>
 		<div class="contents2">
 			<p>A number in the range of <code>0</code> to <code>100</code>, specifying the height for the <a href="#2_2_6">Pane Seed</a> as a percentage of the height of the <a href="#2_2_7">Pane Seed Context</a>.</p>
 			
@@ -996,7 +996,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value for this property may also be a <a href="#2_2_9">Value Range Declaration</a></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_28">paneSeedSizeX</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_28">paneSeedSizeX</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>100</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1007,7 +1007,7 @@
 		</div>
 		
 		<a name="4_30"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.30. src"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_30" title="4. Set-get Properties -&gt; 4.30. src">30</a>. </span>src</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.30. src"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_30" title="4. State Properties -&gt; 4.30. src">30</a>. </span>src</h2>
 		<div class="contents2">
 			<p>A string, representing the URL of the current image.</p>
 			
@@ -1027,13 +1027,13 @@
 		</div>
 		
 		<a name="4_31"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.31. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_31" title="4. Set-get Properties -&gt; 4.31. value">31</a>. </span>value</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.31. value"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_31" title="4. State Properties -&gt; 4.31. value">31</a>. </span>value</h2>
 		<div class="contents2">
-			<p>An alias to the <code><a href="#4_30">src</a></code> set-get property, establishing the <code><a href="#4_30">src</a></code> property as the public Value Interface for this class.</p>
+			<p>An alias to the <code><a href="#4_30">src</a></code> state property, establishing the <code><a href="#4_30">src</a></code> property as the public Value Interface for this class.</p>
 		</div>
 		
 		<a name="4_32"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.32. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_32" title="4. Set-get Properties -&gt; 4.32. wired">32</a>. </span>wired</h2>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.32. wired"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_32" title="4. State Properties -&gt; 4.32. wired">32</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

@@ -43,7 +43,7 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#2" title="Understanding how the swap effect works will enable you to come up with your own unique effects by helping you to understand how the various set-get properties affect the swap effect.">2. How It Works</a>
+			<li><a href="#2" title="Understanding how the swap effect works will enable you to come up with your own unique effects by helping you to understand how the various state properties affect the swap effect.">2. How It Works</a>
 				<ul>
 					<li><a href="#2_1" title="The mechanics of the swap effect are really quite simple.">2.1. In a Nutshell</a></li>
 					<li><a href="#2_2" title="Now, let&apos;s get into a more detailed description of the mechanics. For the purpose of this discussion, a number of terms and concepts are defined, as follows...">2.2. In More Detail</a>
@@ -52,19 +52,19 @@
 							<li><a href="#2_2_2" title="One item node in the Swap Port is termed a View.">2.2.2. View</a></li>
 							<li><a href="#2_2_3" title="The View Seed is the initial coordinates for a View.">2.2.3. View Seed</a>
 								<ul>
-									<li><a href="#2_2_3_1" title="View Seed Size is calculated using the viewSeedSizeX and viewSeedSizeY set-get properties.">2.2.3.1. View Seed Size</a></li>
-									<li><a href="#2_2_3_2" title="View Seed Alignment refers to the positioning of the View Seed within the Swap Port and is calculated using the viewSeedAlignX and viewSeedAlignY set-get properties.">2.2.3.2. View Seed Alignment</a></li>
+									<li><a href="#2_2_3_1" title="View Seed Size is calculated using the viewSeedSizeX and viewSeedSizeY state properties.">2.2.3.1. View Seed Size</a></li>
+									<li><a href="#2_2_3_2" title="View Seed Alignment refers to the positioning of the View Seed within the Swap Port and is calculated using the viewSeedAlignX and viewSeedAlignY state properties.">2.2.3.2. View Seed Alignment</a></li>
 								</ul>
 							</li>
 							<li><a href="#2_2_4" title="The View Final is the final coordinates for a View, being the coordinates of the Swap Port.">2.2.4. View Final</a></li>
 							<li><a href="#2_2_5" title="Crossfade refers to the process by which the current item is progressively hidden while the next item is progressively revealed.">2.2.5. Crossfade</a>
 								<ul>
-									<li><a href="#2_2_5_1" title="The crossFadeSize set-get property lets you control the size of the overlap of the current item hide and next item reveal animations.">2.2.5.1. Crossfade Size</a></li>
-									<li><a href="#2_2_5_2" title="When a value other than 1 is specified for crossFadeSize, then the value of the crossFadeAlign set-get property determines the alignment of the crossfade overlap within the overal swap effect duration.">2.2.5.2. Crossfade Alignment</a></li>
+									<li><a href="#2_2_5_1" title="The crossFadeSize state property lets you control the size of the overlap of the current item hide and next item reveal animations.">2.2.5.1. Crossfade Size</a></li>
+									<li><a href="#2_2_5_2" title="When a value other than 1 is specified for crossFadeSize, then the value of the crossFadeAlign state property determines the alignment of the crossfade overlap within the overal swap effect duration.">2.2.5.2. Crossfade Alignment</a></li>
 								</ul>
 							</li>
 							<li><a href="#2_2_6" title="View Content Alignment refers to the positioning of an item within its corresponding View.">2.2.6. View Content Alignment</a></li>
-							<li><a href="#2_2_7" title="Cycling Property Sets, as specified in the cyclingPropertySets set-get property, provide a convenient way to cycle through different swap effect settings on each transition from the current item to the next item.">2.2.7. Cycling Property Sets</a></li>
+							<li><a href="#2_2_7" title="Cycling Property Sets, as specified in the cyclingPropertySets state property, provide a convenient way to cycle through different swap effect settings on each transition from the current item to the next item.">2.2.7. Cycling Property Sets</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -129,7 +129,7 @@
 					<li><a href="#4_48" title="IMPLEMENTATION INFO">4.48. wireUi</a></li>
 				</ul>
 			</li>
-			<li><a href="#5">5. Set-get Properties</a>
+			<li><a href="#5">5. State Properties</a>
 				<ul>
 					<li><a href="#5_1" title="Inherited from Uize.Widget.">5.1. built</a></li>
 					<li><a href="#5_2" title="Inherited from Uize.Widget.">5.2. busy</a></li>
@@ -229,7 +229,7 @@
 				
 				<p><code><a href="#4_25">prepareForNextItem</a></code> | <code><a href="#4_30">setCurrentItem</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_6">crossFade</a></code> | <code><a href="#5_7">crossFadeAlign</a></code> | <code><a href="#5_8">crossFadeSize</a></code> | <code><a href="#5_9">cyclingPropertySets</a></code> | <code><a href="#5_10">dissolve</a></code> | <code><a href="#5_20">viewContentAlignX</a></code> | <code><a href="#5_21">viewContentAlignY</a></code> | <code><a href="#5_22">viewSeedAlignX</a></code> | <code><a href="#5_23">viewSeedAlignY</a></code> | <code><a href="#5_24">viewSeedSizeX</a></code> | <code><a href="#5_25">viewSeedSizeY</a></code></p>
 			</div>
@@ -265,7 +265,7 @@
 				
 				<p><code><a href="#3_2">showConfirm</a></code> | <code><a href="#3_3">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_1">built</a></code> | <code><a href="#5_2">busy</a></code> | <code><a href="#5_3">busyInherited</a></code> | <code><a href="#5_4">children</a></code> | <code><a href="#5_5">container</a></code> | <code><a href="#5_11">enabled</a></code> | <code><a href="#5_12">enabledInherited</a></code> | <code><a href="#5_13">html</a></code> | <code><a href="#5_14">idPrefix</a></code> | <code><a href="#5_15">idPrefixConstruction</a></code> | <code><a href="#5_16">insertionMode</a></code> | <code><a href="#5_17">localized</a></code> | <code><a href="#5_18">name</a></code> | <code><a href="#5_19">nodeMap</a></code> | <code><a href="#5_26">wired</a></code></p>
 				
@@ -295,7 +295,7 @@
 	<a name="2"></a>
 	<h1 class="heading1" title="2. How It Works"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>. </span>How It Works</h1>
 	<div class="contents1">
-		<p>Understanding how the swap effect works will enable you to come up with your own unique effects by helping you to understand how the various set-get properties affect the swap effect.</p>
+		<p>Understanding how the swap effect works will enable you to come up with your own unique effects by helping you to understand how the various state properties affect the swap effect.</p>
 		
 		<a name="2_1"></a>
 		<h2 class="heading2" title="2. How It Works -&gt; 2.1. In a Nutshell"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_1" title="2. How It Works -&gt; 2.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
@@ -327,9 +327,9 @@
 			<div class="contents3">
 				<p>One item node in the <a href="#2_2_1">Swap Port</a> is termed a <a href="#2_2_2">View</a>.</p>
 				
-				<p>There are two Views in the Swap Port: one View provides a view into the current item, and the other View provides a view into the next item that is being revealed. When a swap is performed, initial View coordinates (termed the <a href="#2_2_3">View Seed</a>) and final View coordinates (termed the <a href="#2_2_4">View Final</a>) are calculated. During the course of the swap effect, the View coordinates for the next item's View are interpolated between the View Seed coordinates and the View Final coordinates. Additionally, its opacity will be faded from completely transparent to completely opaque over the course of the animation if the <code><a href="#5_10">dissolve</a></code> set-get property is set to <code>true</code>.</p>
+				<p>There are two Views in the Swap Port: one View provides a view into the current item, and the other View provides a view into the next item that is being revealed. When a swap is performed, initial View coordinates (termed the <a href="#2_2_3">View Seed</a>) and final View coordinates (termed the <a href="#2_2_4">View Final</a>) are calculated. During the course of the swap effect, the View coordinates for the next item's View are interpolated between the View Seed coordinates and the View Final coordinates. Additionally, its opacity will be faded from completely transparent to completely opaque over the course of the animation if the <code><a href="#5_10">dissolve</a></code> state property is set to <code>true</code>.</p>
 				
-				<p>If the <code><a href="#5_6">crossFade</a></code> set-get property is set to <code>true</code>, then the <a href="#2_2_5">Crossfade</a> behavior is enabled and the View coordinates for the current item's View will be interpolated between the View Final coordinates and the View Seed coordinates, and its opacity will be faded from completely opaque to completely transparent over the course of the animation if the <code><a href="#5_10">dissolve</a></code> set-get property is set to <code>true</code>. The additional <code><a href="#5_8">crossFadeSize</a></code> and <code><a href="#5_7">crossFadeAlign</a></code> set-get properties govern the nature of the <a href="#2_2_5">Crossfade</a> behavior.</p>
+				<p>If the <code><a href="#5_6">crossFade</a></code> state property is set to <code>true</code>, then the <a href="#2_2_5">Crossfade</a> behavior is enabled and the View coordinates for the current item's View will be interpolated between the View Final coordinates and the View Seed coordinates, and its opacity will be faded from completely opaque to completely transparent over the course of the animation if the <code><a href="#5_10">dissolve</a></code> state property is set to <code>true</code>. The additional <code><a href="#5_8">crossFadeSize</a></code> and <code><a href="#5_7">crossFadeAlign</a></code> state properties govern the nature of the <a href="#2_2_5">Crossfade</a> behavior.</p>
 			</div>
 			
 			<a name="2_2_3"></a>
@@ -337,22 +337,22 @@
 			<div class="contents3">
 				<p>The View Seed is the initial coordinates for a <a href="#2_2_2">View</a>.</p>
 				
-				<p>The View Seed is derived by calculating <a href="#2_2_3_1">View Seed Size</a> and <a href="#2_2_3_2">View Seed Alignment</a>, in this process combining the coordinates of the <a href="#2_2_4">View Final</a> and the values of the <code><a href="#5_24">viewSeedSizeX</a></code>, <code><a href="#5_25">viewSeedSizeY</a></code>, <code><a href="#5_22">viewSeedAlignX</a></code>, and <code><a href="#5_23">viewSeedAlignY</a></code> set-get properties (discussed below).</p>
+				<p>The View Seed is derived by calculating <a href="#2_2_3_1">View Seed Size</a> and <a href="#2_2_3_2">View Seed Alignment</a>, in this process combining the coordinates of the <a href="#2_2_4">View Final</a> and the values of the <code><a href="#5_24">viewSeedSizeX</a></code>, <code><a href="#5_25">viewSeedSizeY</a></code>, <code><a href="#5_22">viewSeedAlignX</a></code>, and <code><a href="#5_23">viewSeedAlignY</a></code> state properties (discussed below).</p>
 				
 				<a name="2_2_3_1"></a>
 				<h4 class="heading4" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.3. View Seed -&gt; 2.2.3.1. View Seed Size"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_2" title="2. How It Works -&gt; 2.2. In More Detail">2</a>.<a href="#2_2_3" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.3. View Seed">3</a>.<a href="#2_2_3_1" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.3. View Seed -&gt; 2.2.3.1. View Seed Size">1</a>. </span>View Seed Size</h4>
 				<div class="contents4">
-					<p>View Seed Size is calculated using the <code><a href="#5_24">viewSeedSizeX</a></code> and <code><a href="#5_25">viewSeedSizeY</a></code> set-get properties.</p>
+					<p>View Seed Size is calculated using the <code><a href="#5_24">viewSeedSizeX</a></code> and <code><a href="#5_25">viewSeedSizeY</a></code> state properties.</p>
 					
-					<p>Specifically, the width of the View Seed is calculated as a fraction of the width of the <a href="#2_2_4">View Final</a> (as specified by the <code><a href="#5_24">viewSeedSizeX</a></code> set-get property), and the height of the View Seed is calculated as a fraction of the height of the <a href="#2_2_4">View Final</a> (as specified by the <code><a href="#5_25">viewSeedSizeY</a></code> set-get property).</p>
+					<p>Specifically, the width of the View Seed is calculated as a fraction of the width of the <a href="#2_2_4">View Final</a> (as specified by the <code><a href="#5_24">viewSeedSizeX</a></code> state property), and the height of the View Seed is calculated as a fraction of the height of the <a href="#2_2_4">View Final</a> (as specified by the <code><a href="#5_25">viewSeedSizeY</a></code> state property).</p>
 				</div>
 				
 				<a name="2_2_3_2"></a>
 				<h4 class="heading4" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.3. View Seed -&gt; 2.2.3.2. View Seed Alignment"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_2" title="2. How It Works -&gt; 2.2. In More Detail">2</a>.<a href="#2_2_3" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.3. View Seed">3</a>.<a href="#2_2_3_2" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.3. View Seed -&gt; 2.2.3.2. View Seed Alignment">2</a>. </span>View Seed Alignment</h4>
 				<div class="contents4">
-					<p>View Seed Alignment refers to the positioning of the View Seed within the <a href="#2_2_1">Swap Port</a> and is calculated using the <code><a href="#5_22">viewSeedAlignX</a></code> and <code><a href="#5_23">viewSeedAlignY</a></code> set-get properties.</p>
+					<p>View Seed Alignment refers to the positioning of the View Seed within the <a href="#2_2_1">Swap Port</a> and is calculated using the <code><a href="#5_22">viewSeedAlignX</a></code> and <code><a href="#5_23">viewSeedAlignY</a></code> state properties.</p>
 					
-					<p>The <code><a href="#5_22">viewSeedAlignX</a></code> and <code><a href="#5_23">viewSeedAlignY</a></code> set-get properties are floating point numbers in the range of <code>0</code> to <code>1</code>, where the value <code>0</code> represents left and top alignment, the value <code>1</code> represents right and bottom alignment, and the value <code>.5</code> represents center alignment.</p>
+					<p>The <code><a href="#5_22">viewSeedAlignX</a></code> and <code><a href="#5_23">viewSeedAlignY</a></code> state properties are floating point numbers in the range of <code>0</code> to <code>1</code>, where the value <code>0</code> represents left and top alignment, the value <code>1</code> represents right and bottom alignment, and the value <code>.5</code> represents center alignment.</p>
 				</div>
 			</div>
 			
@@ -367,16 +367,16 @@
 			<div class="contents3">
 				<p>Crossfade refers to the process by which the current item is progressively hidden while the next item is progressively revealed.</p>
 				
-				<p>The <code><a href="#5_6">crossFade</a></code> set-get property allows one to enable or disable the Crossfade behavior. When <code><a href="#5_6">crossFade</a></code> is set to <code>false</code>, then the Crossfade behavior is disabled and the current item will be hidden only as a side effect of the next item being revealed to fully obscure it. When <code><a href="#5_6">crossFade</a></code> is set to <code>true</code>, then the Crossfade behavior is enabled and the current item will be progressively hidden while the next item is progressively revealed.</p>
+				<p>The <code><a href="#5_6">crossFade</a></code> state property allows one to enable or disable the Crossfade behavior. When <code><a href="#5_6">crossFade</a></code> is set to <code>false</code>, then the Crossfade behavior is disabled and the current item will be hidden only as a side effect of the next item being revealed to fully obscure it. When <code><a href="#5_6">crossFade</a></code> is set to <code>true</code>, then the Crossfade behavior is enabled and the current item will be progressively hidden while the next item is progressively revealed.</p>
 				
 				<p>The way that the current item is hidden is essentially the reverse of the effect for revealing the next item. So, for example, if the exact settings for the swap effect mean that the next item will slide out from the right edge while also fading in from completely transparent to completely opaque, then the current item will hide by sliding out towards the right edge while also fading out from completely opaque to completely transparent.</p>
 				
-				<p>The additional <code><a href="#5_8">crossFadeSize</a></code> and <code><a href="#5_7">crossFadeAlign</a></code> set-get properties govern the nature of the Crossfade behavior.</p>
+				<p>The additional <code><a href="#5_8">crossFadeSize</a></code> and <code><a href="#5_7">crossFadeAlign</a></code> state properties govern the nature of the Crossfade behavior.</p>
 				
 				<a name="2_2_5_1"></a>
 				<h4 class="heading4" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.5. Crossfade -&gt; 2.2.5.1. Crossfade Size"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_2" title="2. How It Works -&gt; 2.2. In More Detail">2</a>.<a href="#2_2_5" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.5. Crossfade">5</a>.<a href="#2_2_5_1" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.5. Crossfade -&gt; 2.2.5.1. Crossfade Size">1</a>. </span>Crossfade Size</h4>
 				<div class="contents4">
-					<p>The <code><a href="#5_8">crossFadeSize</a></code> set-get property lets you control the size of the overlap of the current item hide and next item reveal animations.</p>
+					<p>The <code><a href="#5_8">crossFadeSize</a></code> state property lets you control the size of the overlap of the current item hide and next item reveal animations.</p>
 					
 					<p>The value for <code><a href="#5_8">crossFadeSize</a></code> is a floating point number, representing a fraction of the overal swap effect duration.</p>
 					
@@ -391,7 +391,7 @@
 				<a name="2_2_5_2"></a>
 				<h4 class="heading4" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.5. Crossfade -&gt; 2.2.5.2. Crossfade Alignment"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_2" title="2. How It Works -&gt; 2.2. In More Detail">2</a>.<a href="#2_2_5" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.5. Crossfade">5</a>.<a href="#2_2_5_2" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.5. Crossfade -&gt; 2.2.5.2. Crossfade Alignment">2</a>. </span>Crossfade Alignment</h4>
 				<div class="contents4">
-					<p>When a value other than <code>1</code> is specified for <code><a href="#5_8">crossFadeSize</a></code>, then the value of the <code><a href="#5_7">crossFadeAlign</a></code> set-get property determines the alignment of the crossfade overlap within the overal swap effect duration.</p>
+					<p>When a value other than <code>1</code> is specified for <code><a href="#5_8">crossFadeSize</a></code>, then the value of the <code><a href="#5_7">crossFadeAlign</a></code> state property determines the alignment of the crossfade overlap within the overal swap effect duration.</p>
 					
 					<p>A value of <code>0</code> (start-aligned) for <code><a href="#5_7">crossFadeAlign</a></code> means that the overlap will be aligned so that the start of the overlap is against the start of the effect, a value of <code>1</code> (end-aligned) means that the overlap will be aligned so that the end of the overlap is against the end of the effect, and a value of <code>.5</code> (center-aligned) means that the overlap will be aligned so that the time gap between the effect start and the overlap start is the same as the time gap between the overlap end and the effect end.</p>
 				</div>
@@ -402,7 +402,7 @@
 			<div class="contents3">
 				<p>View Content Alignment refers to the positioning of an item within its corresponding <a href="#2_2_2">View</a>.</p>
 				
-				<p>As the swap effect progresses, the coordinates of a View are animated between the <a href="#2_2_3">View Seed</a> coordinates and the <a href="#2_2_4">View Final</a> coordinates. At any one point during this transition, the way that the item is positioned within the View coordinates is determined by the <code><a href="#5_20">viewContentAlignX</a></code> and <code><a href="#5_21">viewContentAlignY</a></code> set-get properties (alignment can be controlled discretely for the X and Y axes). The values specified for these properties should be floating point numbers in the range of <code>0</code> to <code>1</code>, where the value <code>0</code> represents left and top alignment, the value <code>1</code> represents right and bottom alignment, and the value <code>.5</code> represents center alignment.</p>
+				<p>As the swap effect progresses, the coordinates of a View are animated between the <a href="#2_2_3">View Seed</a> coordinates and the <a href="#2_2_4">View Final</a> coordinates. At any one point during this transition, the way that the item is positioned within the View coordinates is determined by the <code><a href="#5_20">viewContentAlignX</a></code> and <code><a href="#5_21">viewContentAlignY</a></code> state properties (alignment can be controlled discretely for the X and Y axes). The values specified for these properties should be floating point numbers in the range of <code>0</code> to <code>1</code>, where the value <code>0</code> represents left and top alignment, the value <code>1</code> represents right and bottom alignment, and the value <code>.5</code> represents center alignment.</p>
 				
 				<p>Additionally, the special value <code>'none'</code> indicates that there should be no View Content Alignment for the axis for which the value <code>'none'</code> is specified, meaning that the item's position for that axis will be fixed with respect to the <a href="#2_2_1">Swap Port</a> for the entire duration of the effect.</p>
 				
@@ -425,21 +425,21 @@
 				
 				<p>With the <code>fadeSlideInFromRight</code> preset, the new item slides in from the right edge and also fades in as it slides into place to eventually fully cover the current item.</p>
 				
-				<p>The <a href="#2_2_3">View Seed</a> is a vertical sliver, as defined by the values for the <code><a href="#5_24">viewSeedSizeX</a></code> and <code><a href="#5_25">viewSeedSizeY</a></code> set-get properties. The value of <code>0</code> for <code><a href="#5_24">viewSeedSizeX</a></code> means that the View Seed has a width of <code>0</code>, and the value of <code>1</code> for <code><a href="#5_25">viewSeedSizeY</a></code> means that the View Seed starts out at the full height of the <a href="#2_2_1">Swap Port</a>. Moreover, the value of <code>1</code> for <code><a href="#5_22">viewSeedAlignX</a></code> means that the vertical sliver is aligned so that it is positioned at the right edge of the Swap Port. Because <code><a href="#5_25">viewSeedSizeY</a></code> is set to <code>1</code>, the value of the <code><a href="#5_23">viewSeedAlignY</a></code> set-get property (<code>0</code> in this case) has no effect on the vertical position of the View Seed.</p>
+				<p>The <a href="#2_2_3">View Seed</a> is a vertical sliver, as defined by the values for the <code><a href="#5_24">viewSeedSizeX</a></code> and <code><a href="#5_25">viewSeedSizeY</a></code> state properties. The value of <code>0</code> for <code><a href="#5_24">viewSeedSizeX</a></code> means that the View Seed has a width of <code>0</code>, and the value of <code>1</code> for <code><a href="#5_25">viewSeedSizeY</a></code> means that the View Seed starts out at the full height of the <a href="#2_2_1">Swap Port</a>. Moreover, the value of <code>1</code> for <code><a href="#5_22">viewSeedAlignX</a></code> means that the vertical sliver is aligned so that it is positioned at the right edge of the Swap Port. Because <code><a href="#5_25">viewSeedSizeY</a></code> is set to <code>1</code>, the value of the <code><a href="#5_23">viewSeedAlignY</a></code> state property (<code>0</code> in this case) has no effect on the vertical position of the View Seed.</p>
 				
 				<p>Now, as the effect progresses, the new item is revealed within an ever growing rectangle that starts out as a vertical sliver on the right, to eventually become the entire Swap Port. As this rectangle grows, how is the positioning of the view content within this rectangle determined? How does one qualify the difference between a wipe reveal and a slide in reveal?</p>
 				
-				<p>The answer is to be found in the values of the <code><a href="#5_20">viewContentAlignX</a></code> and <code><a href="#5_21">viewContentAlignY</a></code> set-get properties. In this example, <code><a href="#5_20">viewContentAlignX</a></code> is set to <code>0</code>. What this means is that the new item is positioned within the ever growing <a href="#2_2_2">View</a> rectangle so that it is aligned against its left edge. This has the effect of creating a slide in effect. Were the value of <code><a href="#5_20">viewContentAlignX</a></code> to be <code>1</code> (ie. right aligned) or <code>'none'</code>, then you would end up with a wipe reveal.</p>
+				<p>The answer is to be found in the values of the <code><a href="#5_20">viewContentAlignX</a></code> and <code><a href="#5_21">viewContentAlignY</a></code> state properties. In this example, <code><a href="#5_20">viewContentAlignX</a></code> is set to <code>0</code>. What this means is that the new item is positioned within the ever growing <a href="#2_2_2">View</a> rectangle so that it is aligned against its left edge. This has the effect of creating a slide in effect. Were the value of <code><a href="#5_20">viewContentAlignX</a></code> to be <code>1</code> (ie. right aligned) or <code>'none'</code>, then you would end up with a wipe reveal.</p>
 				
-				<p>The value <code>'none'</code> has the same effect as right alignment in this case because the View Seed starts at the right edge of the Swap Port and the right edge of the View rectangle stays against the right edge of the Swap Port as the rectangle grows during the effect. By contrast, the value <code>'none'</code> would <b>not</b> have the same effect as <code>1</code> if the <code><a href="#5_22">viewSeedAlignX</a></code> set-get property were set to <code>.5</code>.</p>
+				<p>The value <code>'none'</code> has the same effect as right alignment in this case because the View Seed starts at the right edge of the Swap Port and the right edge of the View rectangle stays against the right edge of the Swap Port as the rectangle grows during the effect. By contrast, the value <code>'none'</code> would <b>not</b> have the same effect as <code>1</code> if the <code><a href="#5_22">viewSeedAlignX</a></code> state property were set to <code>.5</code>.</p>
 			</div>
 			
 			<a name="2_2_7"></a>
 			<h3 class="heading3" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.7. Cycling Property Sets"><span class="headingNumber"><a href="#2" title="2. How It Works">2</a>.<a href="#2_2" title="2. How It Works -&gt; 2.2. In More Detail">2</a>.<a href="#2_2_7" title="2. How It Works -&gt; 2.2. In More Detail -&gt; 2.2.7. Cycling Property Sets">7</a>. </span>Cycling Property Sets</h3>
 			<div class="contents3">
-				<p>Cycling Property Sets, as specified in the <code><a href="#5_9">cyclingPropertySets</a></code> set-get property, provide a convenient way to cycle through different swap effect settings on each transition from the current item to the next item.</p>
+				<p>Cycling Property Sets, as specified in the <code><a href="#5_9">cyclingPropertySets</a></code> state property, provide a convenient way to cycle through different swap effect settings on each transition from the current item to the next item.</p>
 				
-				<p>The value of the <code><a href="#5_9">cyclingPropertySets</a></code> property should be an array, where each element of the array is an object containing values for the set-get properties of the <code>Uize.Widget.Swap</code> class. Each time, upon transitioning from the current item to the next item, the current element of the <code><a href="#5_9">cyclingPropertySets</a></code> is used to set new effect values and the array counter is advanced. Upon using the last element of the array, the counter is then reset back to <code>0</code>, thereby starting again at the first element. Consider the following example...</p>
+				<p>The value of the <code><a href="#5_9">cyclingPropertySets</a></code> property should be an array, where each element of the array is an object containing values for the state properties of the <code>Uize.Widget.Swap</code> class. Each time, upon transitioning from the current item to the next item, the current element of the <code><a href="#5_9">cyclingPropertySets</a></code> is used to set new effect values and the array counter is advanced. Upon using the last element of the array, the counter is then reset back to <code>0</code>, thereby starting again at the first element. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -459,7 +459,7 @@
 );
 </pre>
 				
-				<p>In the above example, an instance of the <code><a href="../reference/Uize.Widget.Swap.Image.html">Uize.Widget.Swap.Image</a></code> subclass is being added as a child widget to the a page widget instance (that we can assume to have already been created). The <code><a href="#5_9">cyclingPropertySets</a></code> set-get property is being set to an array containing a limited number of preset effect settings that have been cherry-picked from the presets defined in the <code><a href="../reference/Uize.Widget.Swap.xPresets.html">Uize.Widget.Swap.xPresets</a></code> extension module (which we can assume to have been previously loaded). Now, each time a new value is set for the <code>src</code> set-get property of the <code>imageSwap</code> instance (<code>src</code> is implemented in the <code><a href="../reference/Uize.Widget.Swap.Image.html">Uize.Widget.Swap.Image</a></code> subclass), the next effect settings will be picked from the <code><a href="#5_9">cyclingPropertySets</a></code> array and set on the <code>imageSwap</code> instance. So, in a nutshell, each transition will use different effect settings.</p>
+				<p>In the above example, an instance of the <code><a href="../reference/Uize.Widget.Swap.Image.html">Uize.Widget.Swap.Image</a></code> subclass is being added as a child widget to the a page widget instance (that we can assume to have already been created). The <code><a href="#5_9">cyclingPropertySets</a></code> state property is being set to an array containing a limited number of preset effect settings that have been cherry-picked from the presets defined in the <code><a href="../reference/Uize.Widget.Swap.xPresets.html">Uize.Widget.Swap.xPresets</a></code> extension module (which we can assume to have been previously loaded). Now, each time a new value is set for the <code>src</code> state property of the <code>imageSwap</code> instance (<code>src</code> is implemented in the <code><a href="../reference/Uize.Widget.Swap.Image.html">Uize.Widget.Swap.Image</a></code> subclass), the next effect settings will be picked from the <code><a href="#5_9">cyclingPropertySets</a></code> array and set on the <code>imageSwap</code> instance. So, in a nutshell, each transition will use different effect settings.</p>
 			</div>
 		</div>
 	</div>
@@ -472,7 +472,7 @@
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class that drives the animation for the swap effect.</p>
 			
-			<p>This property allows access to the fade instance that drives the swap animation. This allows you to modify properties of the animation, such as <code>duration</code>, <code>curve</code>, and any of the other set-get properties supported by the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class.</p>
+			<p>This property allows access to the fade instance that drives the swap animation. This allows you to modify properties of the animation, such as <code>duration</code>, <code>curve</code>, and any of the other state properties supported by the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class.</p>
 		</div>
 		
 		<a name="3_2"></a>
@@ -1119,10 +1119,10 @@
 	</div>
 	
 	<a name="5"></a>
-	<h1 class="heading1" title="5. Set-get Properties"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="5. State Properties"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="5_1"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_1" title="5. Set-get Properties -&gt; 5.1. built">1</a>. </span>built</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_1" title="5. State Properties -&gt; 5.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1134,7 +1134,7 @@
 		</div>
 		
 		<a name="5_2"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_2" title="5. Set-get Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_2" title="5. State Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1146,7 +1146,7 @@
 		</div>
 		
 		<a name="5_3"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_3" title="5. Set-get Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_3" title="5. State Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1158,7 +1158,7 @@
 		</div>
 		
 		<a name="5_4"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_4" title="5. Set-get Properties -&gt; 5.4. children">4</a>. </span>children</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_4" title="5. State Properties -&gt; 5.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1170,7 +1170,7 @@
 		</div>
 		
 		<a name="5_5"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_5" title="5. Set-get Properties -&gt; 5.5. container">5</a>. </span>container</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_5" title="5. State Properties -&gt; 5.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1182,16 +1182,16 @@
 		</div>
 		
 		<a name="5_6"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.6. crossFade"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_6" title="5. Set-get Properties -&gt; 5.6. crossFade">6</a>. </span>crossFade</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.6. crossFade"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_6" title="5. State Properties -&gt; 5.6. crossFade">6</a>. </span>crossFade</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not the <a href="#2_2_5">Crossfade</a> behavior should be enabled.</p>
 			
-			<p>When <code><a href="#5_6">crossFade</a></code> is set to <code>true</code>, then the related <code><a href="#5_8">crossFadeSize</a></code> and <code><a href="#5_7">crossFadeAlign</a></code> set-get properties become applicable.</p>
+			<p>When <code><a href="#5_6">crossFade</a></code> is set to <code>true</code>, then the related <code><a href="#5_8">crossFadeSize</a></code> and <code><a href="#5_7">crossFadeAlign</a></code> state properties become applicable.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_8">crossFadeSize</a></code> and <code><a href="#5_7">crossFadeAlign</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_8">crossFadeSize</a></code> and <code><a href="#5_7">crossFadeAlign</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1202,7 +1202,7 @@
 		</div>
 		
 		<a name="5_7"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.7. crossFadeAlign"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_7" title="5. Set-get Properties -&gt; 5.7. crossFadeAlign">7</a>. </span>crossFadeAlign</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.7. crossFadeAlign"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_7" title="5. State Properties -&gt; 5.7. crossFadeAlign">7</a>. </span>crossFadeAlign</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the <a href="#2_2_5_2">Crossfade Alignment</a> for the <a href="#2_2_5">Crossfade</a> behavior.</p>
 			
@@ -1211,8 +1211,8 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_8">crossFadeSize</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#5_6">crossFade</a></code> set-get property is set to <code>false</code>, then <code><a href="#5_7">crossFadeAlign</a></code> has no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_8">crossFadeSize</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#5_6">crossFade</a></code> state property is set to <code>false</code>, then <code><a href="#5_7">crossFadeAlign</a></code> has no effect</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>.5</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1223,7 +1223,7 @@
 		</div>
 		
 		<a name="5_8"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.8. crossFadeSize"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_8" title="5. Set-get Properties -&gt; 5.8. crossFadeSize">8</a>. </span>crossFadeSize</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.8. crossFadeSize"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_8" title="5. State Properties -&gt; 5.8. crossFadeSize">8</a>. </span>crossFadeSize</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying <a href="#2_2_5_1">Crossfade Size</a> for the <a href="#2_2_5">Crossfade</a> behavior as a fraction of the overal swap effect duration.</p>
 			
@@ -1232,8 +1232,8 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_7">crossFadeAlign</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#5_6">crossFade</a></code> set-get property is set to <code>false</code>, then <code><a href="#5_8">crossFadeSize</a></code> has no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#5_7">crossFadeAlign</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#5_6">crossFade</a></code> state property is set to <code>false</code>, then <code><a href="#5_8">crossFadeSize</a></code> has no effect</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1244,7 +1244,7 @@
 		</div>
 		
 		<a name="5_9"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.9. cyclingPropertySets"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_9" title="5. Set-get Properties -&gt; 5.9. cyclingPropertySets">9</a>. </span>cyclingPropertySets</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.9. cyclingPropertySets"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_9" title="5. State Properties -&gt; 5.9. cyclingPropertySets">9</a>. </span>cyclingPropertySets</h2>
 		<div class="contents2">
 			<p>An optional array, specifying <a href="#2_2_7">Cycling Property Sets</a> that should be cycled through on each transition from the current item to the next item.</p>
 			
@@ -1261,11 +1261,11 @@
 		</div>
 		
 		<a name="5_10"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.10. dissolve"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_10" title="5. Set-get Properties -&gt; 5.10. dissolve">10</a>. </span>dissolve</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.10. dissolve"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_10" title="5. State Properties -&gt; 5.10. dissolve">10</a>. </span>dissolve</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not opacity should be animated during the swap effect.</p>
 			
-			<p>When the <code><a href="#5_24">viewSeedSizeX</a></code> and <code><a href="#5_25">viewSeedSizeY</a></code> set-get properties are both set to <code>1</code>, then you will only notice the swap effect if <code><a href="#5_10">dissolve</a></code> is set to <code>true</code>, since the coordinates of each <a href="#2_2_2">View</a> will be the <a href="#2_2_4">View Final</a> coordinates throughout the duration of the effect - the only means for transitioning from the current item to the next item will be through animating the opacity.</p>
+			<p>When the <code><a href="#5_24">viewSeedSizeX</a></code> and <code><a href="#5_25">viewSeedSizeY</a></code> state properties are both set to <code>1</code>, then you will only notice the swap effect if <code><a href="#5_10">dissolve</a></code> is set to <code>true</code>, since the coordinates of each <a href="#2_2_2">View</a> will be the <a href="#2_2_4">View Final</a> coordinates throughout the duration of the effect - the only means for transitioning from the current item to the next item will be through animating the opacity.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1280,7 +1280,7 @@
 		</div>
 		
 		<a name="5_11"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.11. enabled"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_11" title="5. Set-get Properties -&gt; 5.11. enabled">11</a>. </span>enabled</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.11. enabled"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_11" title="5. State Properties -&gt; 5.11. enabled">11</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1292,7 +1292,7 @@
 		</div>
 		
 		<a name="5_12"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.12. enabledInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_12" title="5. Set-get Properties -&gt; 5.12. enabledInherited">12</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.12. enabledInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_12" title="5. State Properties -&gt; 5.12. enabledInherited">12</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1304,7 +1304,7 @@
 		</div>
 		
 		<a name="5_13"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.13. html"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_13" title="5. Set-get Properties -&gt; 5.13. html">13</a>. </span>html</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.13. html"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_13" title="5. State Properties -&gt; 5.13. html">13</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1316,7 +1316,7 @@
 		</div>
 		
 		<a name="5_14"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.14. idPrefix"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_14" title="5. Set-get Properties -&gt; 5.14. idPrefix">14</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.14. idPrefix"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_14" title="5. State Properties -&gt; 5.14. idPrefix">14</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1328,7 +1328,7 @@
 		</div>
 		
 		<a name="5_15"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.15. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_15" title="5. Set-get Properties -&gt; 5.15. idPrefixConstruction">15</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.15. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_15" title="5. State Properties -&gt; 5.15. idPrefixConstruction">15</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1340,7 +1340,7 @@
 		</div>
 		
 		<a name="5_16"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.16. insertionMode"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_16" title="5. Set-get Properties -&gt; 5.16. insertionMode">16</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.16. insertionMode"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_16" title="5. State Properties -&gt; 5.16. insertionMode">16</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1352,7 +1352,7 @@
 		</div>
 		
 		<a name="5_17"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.17. localized"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_17" title="5. Set-get Properties -&gt; 5.17. localized">17</a>. </span>localized</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.17. localized"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_17" title="5. State Properties -&gt; 5.17. localized">17</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1364,7 +1364,7 @@
 		</div>
 		
 		<a name="5_18"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.18. name"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_18" title="5. Set-get Properties -&gt; 5.18. name">18</a>. </span>name</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.18. name"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_18" title="5. State Properties -&gt; 5.18. name">18</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1376,7 +1376,7 @@
 		</div>
 		
 		<a name="5_19"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.19. nodeMap"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_19" title="5. Set-get Properties -&gt; 5.19. nodeMap">19</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.19. nodeMap"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_19" title="5. State Properties -&gt; 5.19. nodeMap">19</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1388,7 +1388,7 @@
 		</div>
 		
 		<a name="5_20"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.20. viewContentAlignX"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_20" title="5. Set-get Properties -&gt; 5.20. viewContentAlignX">20</a>. </span>viewContentAlignX</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.20. viewContentAlignX"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_20" title="5. State Properties -&gt; 5.20. viewContentAlignX">20</a>. </span>viewContentAlignX</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the horitontal <a href="#2_2_6">View Content Alignment</a> of an item in its <a href="#2_2_2">View</a>.</p>
 			
@@ -1406,7 +1406,7 @@
 		</div>
 		
 		<a name="5_21"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.21. viewContentAlignY"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_21" title="5. Set-get Properties -&gt; 5.21. viewContentAlignY">21</a>. </span>viewContentAlignY</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.21. viewContentAlignY"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_21" title="5. State Properties -&gt; 5.21. viewContentAlignY">21</a>. </span>viewContentAlignY</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the vertical <a href="#2_2_6">View Content Alignment</a> of an item in its <a href="#2_2_2">View</a>.</p>
 			
@@ -1424,7 +1424,7 @@
 		</div>
 		
 		<a name="5_22"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.22. viewSeedAlignX"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_22" title="5. Set-get Properties -&gt; 5.22. viewSeedAlignX">22</a>. </span>viewSeedAlignX</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.22. viewSeedAlignX"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_22" title="5. State Properties -&gt; 5.22. viewSeedAlignX">22</a>. </span>viewSeedAlignX</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the horizontal <a href="#2_2_3_2">View Seed Alignment</a> of the <a href="#2_2_3">View Seed</a> within the <a href="#2_2_1">Swap Port</a>.</p>
 			
@@ -1441,7 +1441,7 @@
 		</div>
 		
 		<a name="5_23"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.23. viewSeedAlignY"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_23" title="5. Set-get Properties -&gt; 5.23. viewSeedAlignY">23</a>. </span>viewSeedAlignY</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.23. viewSeedAlignY"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_23" title="5. State Properties -&gt; 5.23. viewSeedAlignY">23</a>. </span>viewSeedAlignY</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the vertical <a href="#2_2_3_2">View Seed Alignment</a> of the <a href="#2_2_3">View Seed</a> within the <a href="#2_2_1">Swap Port</a>.</p>
 			
@@ -1458,7 +1458,7 @@
 		</div>
 		
 		<a name="5_24"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.24. viewSeedSizeX"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_24" title="5. Set-get Properties -&gt; 5.24. viewSeedSizeX">24</a>. </span>viewSeedSizeX</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.24. viewSeedSizeX"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_24" title="5. State Properties -&gt; 5.24. viewSeedSizeX">24</a>. </span>viewSeedSizeX</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the horizontal <a href="#2_2_3_1">View Seed Size</a> as a fraction of the width of the <a href="#2_2_4">View Final</a>.</p>
 			
@@ -1475,7 +1475,7 @@
 		</div>
 		
 		<a name="5_25"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.25. viewSeedSizeY"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_25" title="5. Set-get Properties -&gt; 5.25. viewSeedSizeY">25</a>. </span>viewSeedSizeY</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.25. viewSeedSizeY"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_25" title="5. State Properties -&gt; 5.25. viewSeedSizeY">25</a>. </span>viewSeedSizeY</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the vertical <a href="#2_2_3_1">View Seed Size</a> as a fraction of the height of the <a href="#2_2_4">View Final</a>.</p>
 			
@@ -1492,7 +1492,7 @@
 		</div>
 		
 		<a name="5_26"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.26. wired"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_26" title="5. Set-get Properties -&gt; 5.26. wired">26</a>. </span>wired</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.26. wired"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_26" title="5. State Properties -&gt; 5.26. wired">26</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

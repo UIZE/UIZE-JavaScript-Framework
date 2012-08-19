@@ -1,10 +1,10 @@
-The =Uize.Widget.Options= class has been improved with the addition of a new =tentativeValueNo= set-get property, and also now supports a =values= array with elements that are objects (rather than just strings or numbers).
+The =Uize.Widget.Options= class has been improved with the addition of a new =tentativeValueNo= state property, and also now supports a =values= array with elements that are objects (rather than just strings or numbers).
 
-New tentativeValueNo Set-get Property
-	The new =tentativeValueNo= set-get property lets you access the index of the value that the user is considering selecting, and serves as a companion to the already existing =tentativeValue= set-get property.
+New tentativeValueNo State Property
+	The new =tentativeValueNo= state property lets you access the index of the value that the user is considering selecting, and serves as a companion to the already existing =tentativeValue= state property.
 
-Improved values Set-get Property
-	The =values= set-get property now supports an array whose elements are objects, where the special =name= property of each object is used for setting the =value= set-get property when a specific option is selected.
+Improved values State Property
+	The =values= state property now supports an array whose elements are objects, where the special =name= property of each object is used for setting the =value= state property when a specific option is selected.
 
 
 

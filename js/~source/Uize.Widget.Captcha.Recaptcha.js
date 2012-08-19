@@ -165,13 +165,13 @@ Uize.module ({
 			_class.registerProperties ({
 				_loadingUrl:'loadingUrl',
 				/*?
-					Set-get properties
+					State properties
 						loadingUrl
 							A string representing the URL that will load the Recaptcha object and all other necessary JS from reCAPTCHA.
 				*/
 				_validationUrl:'validationUrl',
 				/*?
-					Set-get properties
+					State properties
 						validationUrl
 							A string representing the URL that will contact the reCAPTCHA validation API to determine whether or not the user response was valid.
 
@@ -181,7 +181,7 @@ Uize.module ({
 				*/
 				_key:'key'
 				/*?
-					Set-get properties
+					State properties
 						key
 							A string representing the public API key provided by reCAPTCHA.
 				*/

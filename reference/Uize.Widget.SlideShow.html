@@ -48,9 +48,9 @@
 									<li><a href="#1_5_1_3" title="In the event that the naming scheme employed by the Implied Node Bindings facility does not suit your needs, you can use the implied node name remapping facility provided in the Uize.Widget base class to bind slide properties to arbitrarily named implied nodes.">1.5.1.3. Remapped Implied Node Bindings</a></li>
 								</ul>
 							</li>
-							<li><a href="#1_5_2" title="A facility is provided to explicitly declare a binding between a slide property and either an instance of a Uize.Class subclass that implements the Value Interface (ie. provides a value set-get property), or an update handler function that will be executed when the value of the slide set-get property changes.">1.5.2. Explicit Bindings</a>
+							<li><a href="#1_5_2" title="A facility is provided to explicitly declare a binding between a slide property and either an instance of a Uize.Class subclass that implements the Value Interface (ie. provides a value state property), or an update handler function that will be executed when the value of the slide state property changes.">1.5.2. Explicit Bindings</a>
 								<ul>
-									<li><a href="#1_5_2_1" title="Any slide property can be bound to an instance of a Uize.Class subclass that implements the Value Interface (ie. provides a value set-get property), simply by specifying a reference to that instance as the value for a binding.">1.5.2.1. Explicit Object Bindings</a></li>
+									<li><a href="#1_5_2_1" title="Any slide property can be bound to an instance of a Uize.Class subclass that implements the Value Interface (ie. provides a value state property), simply by specifying a reference to that instance as the value for a binding.">1.5.2.1. Explicit Object Bindings</a></li>
 									<li><a href="#1_5_2_2" title="Any slide property can be bound to a handler function, simply by specifying a reference to that function as the value for a binding.">1.5.2.2. Explicit Function Bindings</a></li>
 								</ul>
 							</li>
@@ -75,7 +75,7 @@
 					<li><a href="#2_2" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Control, and that advances the slideshow to the last slide in the set.">2.2. last</a></li>
 					<li><a href="#2_3" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Control, and that advances the slideshow to the next slide.">2.3. next</a></li>
 					<li><a href="#2_4" title="An instance of Uize.Widget.Button, that is wired up as part of the Navigation Control, and that advances the slideshow to the previous slide.">2.4. previous</a></li>
-					<li><a href="#2_5" title="An instance of any widget class that implements the Value Interface (ie. provides a value set-get property), and that will be used to represent the value for a corresponding slide property of the name propertyName.">2.5. slide[PropertyName]</a></li>
+					<li><a href="#2_5" title="An instance of any widget class that implements the Value Interface (ie. provides a value state property), and that will be used to represent the value for a corresponding slide property of the name propertyName.">2.5. slide[PropertyName]</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Implied Nodes</a>
@@ -134,7 +134,7 @@
 					<li><a href="#4_47" title="Inherited from Uize.Widget.">4.47. wireUi</a></li>
 				</ul>
 			</li>
-			<li><a href="#5">5. Set-get Properties</a>
+			<li><a href="#5">5. State Properties</a>
 				<ul>
 					<li><a href="#5_1" title="Inherited from Uize.Widget.">5.1. built</a></li>
 					<li><a href="#5_2" title="Inherited from Uize.Widget.">5.2. busy</a></li>
@@ -280,7 +280,7 @@
 					
 					<p><span class="allCaps">HOW IT'S DISPLAYED</span></p>
 					
-					<p>Now, if a child widget instance is found that corresponds to a slide property, then the <code>value</code> set-get property for that child widget will be set to the value of the slide property for the current slide. This means that child widgets that are implicitly bound to slide properties must implement the Value Interface (ie. provide a <code>value</code> set-get property). If the set-get property that logically represents the value in the child widget's class is not publicly named <code>value</code>, then one could modify the class to register <code>value</code> as a public alias for that property (for more details, consult the explainer <a href="../explainers/set-get-properties.html">Set-get Properties</a>).</p>
+					<p>Now, if a child widget instance is found that corresponds to a slide property, then the <code>value</code> state property for that child widget will be set to the value of the slide property for the current slide. This means that child widgets that are implicitly bound to slide properties must implement the Value Interface (ie. provide a <code>value</code> state property). If the state property that logically represents the value in the child widget's class is not publicly named <code>value</code>, then one could modify the class to register <code>value</code> as a public alias for that property (for more details, consult the explainer <a href="../explainers/state-properties.html">State Properties</a>).</p>
 					
 					<p>If the <a href="#1_5_1_1">Child Widget Bindings</a> facility is not successful in implicitly binding a slide property to a child widget, then the <a href="#1_5_1_2">Implied Node Bindings</a> facility will be employed.</p>
 				</div>
@@ -314,21 +314,21 @@
 });
 </pre>
 					
-					<p>In the above example, the value of the <code>imageUrl</code> slide property - that would normally be bound by the <a href="#1_5_1_2">Implied Node Bindings</a> facility to the implied node <code>slide_imageUrl</code> - is being remapped so that it is bound instead to the implied node <code>imageUrl</code>, using the <code><a href="#5_14">nodeMap</a></code> set-get property that is implemented in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class.</p>
+					<p>In the above example, the value of the <code>imageUrl</code> slide property - that would normally be bound by the <a href="#1_5_1_2">Implied Node Bindings</a> facility to the implied node <code>slide_imageUrl</code> - is being remapped so that it is bound instead to the implied node <code>imageUrl</code>, using the <code><a href="#5_14">nodeMap</a></code> state property that is implemented in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class.</p>
 				</div>
 			</div>
 			
 			<a name="1_5_2"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.5. Slide Property Bindings -&gt; 1.5.2. Explicit Bindings"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_5" title="1. Introduction -&gt; 1.5. Slide Property Bindings">5</a>.<a href="#1_5_2" title="1. Introduction -&gt; 1.5. Slide Property Bindings -&gt; 1.5.2. Explicit Bindings">2</a>. </span>Explicit Bindings</h3>
 			<div class="contents3">
-				<p>A facility is provided to explicitly declare a binding between a slide property and either an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the Value Interface (ie. provides a <code>value</code> set-get property), or an update handler function that will be executed when the value of the <code><a href="#5_16">slide</a></code> set-get property changes.</p>
+				<p>A facility is provided to explicitly declare a binding between a slide property and either an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the Value Interface (ie. provides a <code>value</code> state property), or an update handler function that will be executed when the value of the <code><a href="#5_16">slide</a></code> state property changes.</p>
 				
-				<p>This facility is implemented in the form of the <code><a href="#5_17">slideBindings</a></code> set-get property, whose value should be an object that provides mappings between slide properties and binding targets. The name of each key in the <code><a href="#5_17">slideBindings</a></code> object should correspond to the name of a property in the <code><a href="#5_16">slide</a></code> object, and its value should be either a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the Value Interface (ie. provides a <code>value</code> set-get property), or an update handler function that will be executed when the value of the <code><a href="#5_16">slide</a></code> set-get property changes. If an explicit binding is provided for a particular slide property, then the <a href="#1_5_1">Implicit Bindings</a> facility will not be employed for that slide property (the explicit binding takes precedence).</p>
+				<p>This facility is implemented in the form of the <code><a href="#5_17">slideBindings</a></code> state property, whose value should be an object that provides mappings between slide properties and binding targets. The name of each key in the <code><a href="#5_17">slideBindings</a></code> object should correspond to the name of a property in the <code><a href="#5_16">slide</a></code> object, and its value should be either a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the Value Interface (ie. provides a <code>value</code> state property), or an update handler function that will be executed when the value of the <code><a href="#5_16">slide</a></code> state property changes. If an explicit binding is provided for a particular slide property, then the <a href="#1_5_1">Implicit Bindings</a> facility will not be employed for that slide property (the explicit binding takes precedence).</p>
 				
 				<a name="1_5_2_1"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.5. Slide Property Bindings -&gt; 1.5.2. Explicit Bindings -&gt; 1.5.2.1. Explicit Object Bindings"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_5" title="1. Introduction -&gt; 1.5. Slide Property Bindings">5</a>.<a href="#1_5_2" title="1. Introduction -&gt; 1.5. Slide Property Bindings -&gt; 1.5.2. Explicit Bindings">2</a>.<a href="#1_5_2_1" title="1. Introduction -&gt; 1.5. Slide Property Bindings -&gt; 1.5.2. Explicit Bindings -&gt; 1.5.2.1. Explicit Object Bindings">1</a>. </span>Explicit Object Bindings</h4>
 				<div class="contents4">
-					<p>Any slide property can be bound to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the Value Interface (ie. provides a <code>value</code> set-get property), simply by specifying a reference to that instance as the value for a binding.</p>
+					<p>Any slide property can be bound to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the Value Interface (ie. provides a <code>value</code> state property), simply by specifying a reference to that instance as the value for a binding.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -361,7 +361,7 @@
 });
 </pre>
 					
-					<p>In the above example, the value of the <code>imageUrl</code> slide property is being represented using the hypothetical <code>myCustomImageEffectsWidget</code> instance. The explicit binding of <code>imageUrl</code> to a handler function causes this handler to be executed when the value of the <code><a href="#5_16">slide</a></code> set-get property changes. In the handler function, the hypothetical <code>chooseRandomTransition</code> instance method is called to choose a new transition effect, and then the <code>image</code> set-get property of the <code>myCustomImageEffectsWidget</code> instance is set to the new value of the <code>imageUrl</code> slide property (which is passed as the single parameter to the handler function).</p>
+					<p>In the above example, the value of the <code>imageUrl</code> slide property is being represented using the hypothetical <code>myCustomImageEffectsWidget</code> instance. The explicit binding of <code>imageUrl</code> to a handler function causes this handler to be executed when the value of the <code><a href="#5_16">slide</a></code> state property changes. In the handler function, the hypothetical <code>chooseRandomTransition</code> instance method is called to choose a new transition effect, and then the <code>image</code> state property of the <code>myCustomImageEffectsWidget</code> instance is set to the new value of the <code>imageUrl</code> slide property (which is passed as the single parameter to the handler function).</p>
 				</div>
 			</div>
 			
@@ -370,7 +370,7 @@
 			<div class="contents3">
 				<p>One may use a combination of the <a href="#1_5_1">Implicit Bindings</a> and <a href="#1_5_2">Explicit Bindings</a> facilities.</p>
 				
-				<p>You are not forced to choose one facility or the other for all slide properties. So, if a non-null value is specified for the <code><a href="#5_17">slideBindings</a></code> set-get property, it does not mean that all slide properties must be bound explicitly. Rather, any slide property for which an explicit binding is not declared in the <code><a href="#5_17">slideBindings</a></code> set-get property will be attempted to be bound using the <a href="#1_5_1">Implicit Bindings</a> facility.</p>
+				<p>You are not forced to choose one facility or the other for all slide properties. So, if a non-null value is specified for the <code><a href="#5_17">slideBindings</a></code> state property, it does not mean that all slide properties must be bound explicitly. Rather, any slide property for which an explicit binding is not declared in the <code><a href="#5_17">slideBindings</a></code> state property will be attempted to be bound using the <a href="#1_5_1">Implicit Bindings</a> facility.</p>
 			</div>
 		</div>
 		
@@ -411,7 +411,7 @@
 				
 				<p><code><a href="#4_2">advance</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_15">progress</a></code> | <code><a href="#5_16">slide</a></code> | <code><a href="#5_17">slideBindings</a></code> | <code><a href="#5_18">slideNo</a></code> | <code><a href="#5_19">slides</a></code> | <code><a href="#5_20">totalSlides</a></code> | <code><a href="#5_22">wrap</a></code></p>
 			</div>
@@ -447,7 +447,7 @@
 				
 				<p><code><a href="#6_1">showConfirm</a></code> | <code><a href="#6_2">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#5_1">built</a></code> | <code><a href="#5_2">busy</a></code> | <code><a href="#5_3">busyInherited</a></code> | <code><a href="#5_4">children</a></code> | <code><a href="#5_5">container</a></code> | <code><a href="#5_6">enabled</a></code> | <code><a href="#5_7">enabledInherited</a></code> | <code><a href="#5_8">html</a></code> | <code><a href="#5_9">idPrefix</a></code> | <code><a href="#5_10">idPrefixConstruction</a></code> | <code><a href="#5_11">insertionMode</a></code> | <code><a href="#5_12">localized</a></code> | <code><a href="#5_13">name</a></code> | <code><a href="#5_14">nodeMap</a></code> | <code><a href="#5_21">wired</a></code></p>
 				
@@ -532,7 +532,7 @@
 		<a name="2_5"></a>
 		<h2 class="heading2" title="2. Child Widgets -&gt; 2.5. slide[PropertyName]"><span class="headingNumber"><a href="#2" title="2. Child Widgets">2</a>.<a href="#2_5" title="2. Child Widgets -&gt; 2.5. slide[PropertyName]">5</a>. </span>slide[PropertyName]</h2>
 		<div class="contents2">
-			<p>An instance of any widget class that implements the Value Interface (ie. provides a <code>value</code> set-get property), and that will be used to represent the value for a corresponding slide property of the name <code>propertyName</code>.</p>
+			<p>An instance of any widget class that implements the Value Interface (ie. provides a <code>value</code> state property), and that will be used to represent the value for a corresponding slide property of the name <code>propertyName</code>.</p>
 			
 			<p>For example, a child widget that is intended to represent the value for a slide property named <code>imageUrl</code> should be named <code>slideImageUrl</code>. An arbitrary number of child widgets may be added to an instance of the <code>Uize.Widget.SlideShow</code> class, for the purpose of representing the values of slide properties through the <a href="#1_5_1_1">Child Widget Bindings</a> facility.</p>
 		</div>
@@ -583,19 +583,19 @@
 myInstance.advance (1);  // next slide
 </pre>
 			
-			<p>This method is offered merely as a convenience. There is nothing terribly special about it, and the same effect could be accomplished simply by modifying the value of the <code><a href="#5_18">slideNo</a></code> set-get property, as in...</p>
+			<p>This method is offered merely as a convenience. There is nothing terribly special about it, and the same effect could be accomplished simply by modifying the value of the <code><a href="#5_18">slideNo</a></code> state property, as in...</p>
 			
 			
 <pre class="sample-code">myInstance.set ({slideNo:myInstance.get ('slideNo') - 1}); // previous slide
 myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 </pre>
 			
-			<p>The behavior when advancing in a negative direction beyond the first slide, or advancing in a positive direction beyond the last slide is governed by the <code><a href="#5_22">wrap</a></code> set-get property.</p>
+			<p>The behavior when advancing in a negative direction beyond the first slide, or advancing in a positive direction beyond the last slide is governed by the <code><a href="#5_22">wrap</a></code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the <code><a href="#5_18">slideNo</a></code> and <code><a href="#5_22">wrap</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the <code><a href="#5_18">slideNo</a></code> and <code><a href="#5_22">wrap</a></code> state properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1144,10 +1144,10 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 	</div>
 	
 	<a name="5"></a>
-	<h1 class="heading1" title="5. Set-get Properties"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="5. State Properties"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="5_1"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_1" title="5. Set-get Properties -&gt; 5.1. built">1</a>. </span>built</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.1. built"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_1" title="5. State Properties -&gt; 5.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1159,7 +1159,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_2"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_2" title="5. Set-get Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.2. busy"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_2" title="5. State Properties -&gt; 5.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1171,7 +1171,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_3"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_3" title="5. Set-get Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.3. busyInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_3" title="5. State Properties -&gt; 5.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1183,7 +1183,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_4"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_4" title="5. Set-get Properties -&gt; 5.4. children">4</a>. </span>children</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.4. children"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_4" title="5. State Properties -&gt; 5.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1195,7 +1195,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_5"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_5" title="5. Set-get Properties -&gt; 5.5. container">5</a>. </span>container</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.5. container"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_5" title="5. State Properties -&gt; 5.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1207,7 +1207,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_6"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.6. enabled"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_6" title="5. Set-get Properties -&gt; 5.6. enabled">6</a>. </span>enabled</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.6. enabled"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_6" title="5. State Properties -&gt; 5.6. enabled">6</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1219,7 +1219,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_7"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.7. enabledInherited"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_7" title="5. Set-get Properties -&gt; 5.7. enabledInherited">7</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.7. enabledInherited"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_7" title="5. State Properties -&gt; 5.7. enabledInherited">7</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1231,7 +1231,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_8"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.8. html"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_8" title="5. Set-get Properties -&gt; 5.8. html">8</a>. </span>html</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.8. html"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_8" title="5. State Properties -&gt; 5.8. html">8</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1243,7 +1243,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_9"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.9. idPrefix"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_9" title="5. Set-get Properties -&gt; 5.9. idPrefix">9</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.9. idPrefix"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_9" title="5. State Properties -&gt; 5.9. idPrefix">9</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1255,7 +1255,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_10"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.10. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_10" title="5. Set-get Properties -&gt; 5.10. idPrefixConstruction">10</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.10. idPrefixConstruction"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_10" title="5. State Properties -&gt; 5.10. idPrefixConstruction">10</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1267,7 +1267,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_11"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.11. insertionMode"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_11" title="5. Set-get Properties -&gt; 5.11. insertionMode">11</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.11. insertionMode"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_11" title="5. State Properties -&gt; 5.11. insertionMode">11</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1279,7 +1279,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_12"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.12. localized"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_12" title="5. Set-get Properties -&gt; 5.12. localized">12</a>. </span>localized</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.12. localized"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_12" title="5. State Properties -&gt; 5.12. localized">12</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1291,7 +1291,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_13"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.13. name"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_13" title="5. Set-get Properties -&gt; 5.13. name">13</a>. </span>name</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.13. name"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_13" title="5. State Properties -&gt; 5.13. name">13</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1303,7 +1303,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_14"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.14. nodeMap"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_14" title="5. Set-get Properties -&gt; 5.14. nodeMap">14</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.14. nodeMap"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_14" title="5. State Properties -&gt; 5.14. nodeMap">14</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1315,11 +1315,11 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_15"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.15. progress"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_15" title="5. Set-get Properties -&gt; 5.15. progress">15</a>. </span>progress</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.15. progress"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_15" title="5. State Properties -&gt; 5.15. progress">15</a>. </span>progress</h2>
 		<div class="contents2">
 			<p>An integer, representing the progress (measured in percentage) through the entire set of slides.</p>
 			
-			<p>The value of this read-only property is derived from the values of the <code><a href="#5_18">slideNo</a></code> and <code><a href="#5_20">totalSlides</a></code> set-get properties and is not intended to be set by an application.</p>
+			<p>The value of this read-only property is derived from the values of the <code><a href="#5_18">slideNo</a></code> and <code><a href="#5_20">totalSlides</a></code> state properties and is not intended to be set by an application.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1335,17 +1335,17 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_16"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.16. slide"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_16" title="5. Set-get Properties -&gt; 5.16. slide">16</a>. </span>slide</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.16. slide"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_16" title="5. State Properties -&gt; 5.16. slide">16</a>. </span>slide</h2>
 		<div class="contents2">
 			<p>An object, representing the element in the <code><a href="#5_19">slides</a></code> array that corresponds to the current slide (as specified by the <code><a href="#5_18">slideNo</a></code> property).</p>
 			
-			<p>The value of this read-only property is derived from the values of the <code><a href="#5_18">slideNo</a></code> and <code><a href="#5_19">slides</a></code> set-get properties and is not intended to be set by an application. As the values of the <code><a href="#5_18">slideNo</a></code> and <code><a href="#5_19">slides</a></code> properties are modified, the <code><a href="#5_16">slide</a></code> property is automatically updated and kept current.</p>
+			<p>The value of this read-only property is derived from the values of the <code><a href="#5_18">slideNo</a></code> and <code><a href="#5_19">slides</a></code> state properties and is not intended to be set by an application. As the values of the <code><a href="#5_18">slideNo</a></code> and <code><a href="#5_19">slides</a></code> properties are modified, the <code><a href="#5_16">slide</a></code> property is automatically updated and kept current.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the <code><a href="#5_19">slides</a></code> set-get property is set to <code>null</code> or <code>undefined</code>, or if the <code><a href="#5_19">slides</a></code> array has zero elements, then the <code><a href="#5_16">slide</a></code> property will be set to <code>null</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the <code><a href="#5_19">slides</a></code> state property is set to <code>null</code> or <code>undefined</code>, or if the <code><a href="#5_19">slides</a></code> array has zero elements, then the <code><a href="#5_16">slide</a></code> property will be set to <code>null</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1356,11 +1356,11 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_17"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.17. slideBindings"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_17" title="5. Set-get Properties -&gt; 5.17. slideBindings">17</a>. </span>slideBindings</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.17. slideBindings"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_17" title="5. State Properties -&gt; 5.17. slideBindings">17</a>. </span>slideBindings</h2>
 		<div class="contents2">
 			<p>An object, representing explicit bindings between slide properties and <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass instances or handler functions.</p>
 			
-			<p>The name of each key in the <code><a href="#5_17">slideBindings</a></code> object should correspond to the name of a property in the <code><a href="#5_16">slide</a></code> object, and its value should be either a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the Value Interface (ie. provides a <code>value</code> set-get property), or an update handler function that will be executed when the value of the <code><a href="#5_16">slide</a></code> set-get property changes. It is not necessary to provide a binding for every slide property, and any slide property for which no explicit binding is provided will be bound implicitly to either a child widget or an implied mode.</p>
+			<p>The name of each key in the <code><a href="#5_17">slideBindings</a></code> object should correspond to the name of a property in the <code><a href="#5_16">slide</a></code> object, and its value should be either a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the Value Interface (ie. provides a <code>value</code> state property), or an update handler function that will be executed when the value of the <code><a href="#5_16">slide</a></code> state property changes. It is not necessary to provide a binding for every slide property, and any slide property for which no explicit binding is provided will be bound implicitly to either a child widget or an implied mode.</p>
 			
 			<p>For more details on property bindings, consult the section <a href="#1_5">Slide Property Bindings</a>.</p>
 			
@@ -1377,7 +1377,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_18"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.18. slideNo"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_18" title="5. Set-get Properties -&gt; 5.18. slideNo">18</a>. </span>slideNo</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.18. slideNo"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_18" title="5. State Properties -&gt; 5.18. slideNo">18</a>. </span>slideNo</h2>
 		<div class="contents2">
 			<p>An integer, representing the current position within the slideshow presentation.</p>
 			
@@ -1387,7 +1387,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_2">advance</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the <code><a href="#5_19">slides</a></code> set-get property is set to <code>null</code> or <code>undefined</code>, or if the <code><a href="#5_19">slides</a></code> array has zero elements, then the <code><a href="#5_18">slideNo</a></code> property will be set to <code>-1</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the <code><a href="#5_19">slides</a></code> state property is set to <code>null</code> or <code>undefined</code>, or if the <code><a href="#5_19">slides</a></code> array has zero elements, then the <code><a href="#5_18">slideNo</a></code> property will be set to <code>-1</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>-1</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1398,7 +1398,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_19"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.19. slides"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_19" title="5. Set-get Properties -&gt; 5.19. slides">19</a>. </span>slides</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.19. slides"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_19" title="5. State Properties -&gt; 5.19. slides">19</a>. </span>slides</h2>
 		<div class="contents2">
 			<p>An array, representing the set of slides for the slideshow, where each element of the array should be an object whose properties can be presented in the user interface.</p>
 			
@@ -1415,7 +1415,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_20"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.20. totalSlides"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_20" title="5. Set-get Properties -&gt; 5.20. totalSlides">20</a>. </span>totalSlides</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.20. totalSlides"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_20" title="5. State Properties -&gt; 5.20. totalSlides">20</a>. </span>totalSlides</h2>
 		<div class="contents2">
 			<p>An integer, specifying the total number of slides in the slides set.</p>
 			
@@ -1435,7 +1435,7 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_21"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.21. wired"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_21" title="5. Set-get Properties -&gt; 5.21. wired">21</a>. </span>wired</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.21. wired"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_21" title="5. State Properties -&gt; 5.21. wired">21</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1447,15 +1447,15 @@ myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
 		</div>
 		
 		<a name="5_22"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.22. wrap"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_22" title="5. Set-get Properties -&gt; 5.22. wrap">22</a>. </span>wrap</h2>
+		<h2 class="heading2" title="5. State Properties -&gt; 5.22. wrap"><span class="headingNumber"><a href="#5" title="5. State Properties">5</a>.<a href="#5_22" title="5. State Properties -&gt; 5.22. wrap">22</a>. </span>wrap</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not navigation should be allowed beyond the beginning or end of the set of slides.</p>
 			
-			<p>By default, navigation is not permitted beyond the beginning or end of the set of slides, and the previous and next buttons become disabled when reaching the beginning or end of the set, respectively. Moreover, attempting to set the value of the <code><a href="#5_18">slideNo</a></code> set-get property outside of the range of the slides set causes it to be conformed to the beginning or the end of the set.</p>
+			<p>By default, navigation is not permitted beyond the beginning or end of the set of slides, and the previous and next buttons become disabled when reaching the beginning or end of the set, respectively. Moreover, attempting to set the value of the <code><a href="#5_18">slideNo</a></code> state property outside of the range of the slides set causes it to be conformed to the beginning or the end of the set.</p>
 			
-			<p>But when the <code><a href="#5_22">wrap</a></code> set-get property is set to <code>true</code>, then the previous and next buttons will remain enabled, and navigating to the previous slide when at the first slide will cause <code><a href="#5_18">slideNo</a></code> to "wrap" around to the last slide, and navigating to the next slide when at the last slide will cause <code><a href="#5_18">slideNo</a></code> to "wrap" around to the first slide.</p>
+			<p>But when the <code><a href="#5_22">wrap</a></code> state property is set to <code>true</code>, then the previous and next buttons will remain enabled, and navigating to the previous slide when at the first slide will cause <code><a href="#5_18">slideNo</a></code> to "wrap" around to the last slide, and navigating to the next slide when at the last slide will cause <code><a href="#5_18">slideNo</a></code> to "wrap" around to the first slide.</p>
 			
-			<p>Moreoever, attempting to set the value of the <code><a href="#5_18">slideNo</a></code> set-get property outside of the range of the slides set causes it to be conformed to within the range by "wrapping" its value around as many times as needed in order to bring it into range. For example, in a set of ten slides and  when <code><a href="#5_22">wrap</a></code> is set to <code>true</code>, setting the <code><a href="#5_18">slideNo</a></code> property to <code>13</code> will cause it to be conformed to <code>3</code> (wrapped around forwards once), and setting <code><a href="#5_18">slideNo</a></code> to <code>-23</code> will cause it to be conformed to <code>7</code> (wrapped around backwards twice and then third from the end).</p>
+			<p>Moreoever, attempting to set the value of the <code><a href="#5_18">slideNo</a></code> state property outside of the range of the slides set causes it to be conformed to within the range by "wrapping" its value around as many times as needed in order to bring it into range. For example, in a set of ten slides and  when <code><a href="#5_22">wrap</a></code> is set to <code>true</code>, setting the <code><a href="#5_18">slideNo</a></code> property to <code>13</code> will cause it to be conformed to <code>3</code> (wrapped around forwards once), and setting <code><a href="#5_18">slideNo</a></code> to <code>-23</code> will cause it to be conformed to <code>7</code> (wrapped around backwards twice and then third from the end).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			

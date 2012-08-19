@@ -1,6 +1,6 @@
-It is now possible to set the value of set-get properties to =undefined= using the =set= instance method.
+It is now possible to set the value of state properties to =undefined= using the =set= instance method.
 
-It has been a long-standing shortcoming of the set-get properties mechanism that it has not been possible to "restore" properties back to an =undefined= state. It was always possible for the initial value for set-get properties to be =undefined=. However, once set to any value other than =undefined=, it was not possible to set their value back to =undefined=. The closest you could come was setting a property's value to =null=. This limitation has been fixed.
+It has been a long-standing shortcoming of the state properties mechanism that it has not been possible to "restore" properties back to an =undefined= state. It was always possible for the initial value for state properties to be =undefined=. However, once set to any value other than =undefined=, it was not possible to set their value back to =undefined=. The closest you could come was setting a property's value to =null=. This limitation has been fixed.
 
 PREVIOUSLY
 ............................................................

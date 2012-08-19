@@ -121,7 +121,7 @@ More on Widgets
 			The UIZE JavaScript Framework relies upon node ids for identifying implied nodes of widgets. The =id= system is largely orthogonal to document structure and document styling. Although ids *are* used at times for narrowly selecting very specific nodes for styling, the rather compelling benefits of reusability means that CSS style sheets tend to rely more heavily on class names, tag names, and structure relationships for selecting nodes in their style rules. By using the =id= system, widgets can minimize competition with the interests of designers and Web devs. Since id-based wiring is a core tenet of the framework, CSS selectors are not necessary for finding nodes that belong to widget instances.
 
 		Widget Namespaces and the idPrefix
-			The namespace for the implied nodes of a widget instance is controlled by the value of its =idPrefix= set-get property.
+			The namespace for the implied nodes of a widget instance is controlled by the value of its =idPrefix= state property.
 
 			The =idPrefix= is just what it sounds like it is: it's the prefix for the ids of all implied nodes that the widget may have. The ids for implied nodes of a widget are named according to the following rule...
 
@@ -232,7 +232,7 @@ More on Widgets
 			The Root Node
 				The optional root node of a widget is the implied node with the name =''= (empty string).
 
-				The =id= for the root node of a widget instance is the value of that instance's =idPrefix= set-get property - there is no "-" (hyphen) separating the =idPrefix= and the empty implied node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=. If you're looking at an implied node in the HTML and there's no hyphen character in its id, then you know you're dealing with the root node for a widget instance.
+				The =id= for the root node of a widget instance is the value of that instance's =idPrefix= state property - there is no "-" (hyphen) separating the =idPrefix= and the empty implied node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=. If you're looking at an implied node in the HTML and there's no hyphen character in its id, then you know you're dealing with the root node for a widget instance.
 
 				A reference to the root node can be obtained by either specifying the value =''= (empty string) or no =impliedNodeSTRorBLOB= parameter when calling the =getNode= instance method, as in...
 
@@ -459,8 +459,8 @@ More on Widgets
 				Such situations include...
 
 				- when the widget is unwired by calling the =unwireUi= instance method
-				- when the value of the =idPrefix= set-get property is modified
-				- when the DOM for the widget is built by explicitly calling the =buildUi= or =insertUi= instance methods, or by calling the =insertOrWireUi= instance method when the =built= set-get property is set to =false=
+				- when the value of the =idPrefix= state property is modified
+				- when the DOM for the widget is built by explicitly calling the =buildUi= or =insertUi= instance methods, or by calling the =insertOrWireUi= instance method when the =built= state property is set to =false=
 
 		### The Node Map
 			- node map registered at the class level
@@ -551,28 +551,28 @@ More on Widgets
 			What's important to note in this example is that the stitched in properties, just like any properties specified explicitly when instantiating a widget, are not yet set on the instance - that happens between the alphastructor and omegastructor. So, using the =get= instance method to query the value of the =foo= property in the alphastructor yields the value =undefined=, while doing the same query inside the omegastructor yields the value ='bar'=.
 
 		Widget Properties Can Address Widget Trees
-			Widget properties specified for a widget using the declarative syntax can also contain widget properties for any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree - using `the children set-get property`.
+			Widget properties specified for a widget using the declarative syntax can also contain widget properties for any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree - using `the children state property`.
 
-		The children Set-get Property
-			In addition to supporting a =children= instance property, the =Uize.Widget= base class also supports a companion set-get property of the same name but with special handling.
+		The children State Property
+			In addition to supporting a =children= instance property, the =Uize.Widget= base class also supports a companion state property of the same name but with special handling.
 
-			The children Set-get Property vs the children Instance Property
-				The =Uize.Widget= class supports a =children= instance property as well as a =children= set-get property, and each has its own purpose.
+			The children State Property vs the children Instance Property
+				The =Uize.Widget= class supports a =children= instance property as well as a =children= state property, and each has its own purpose.
 
 				The children Instance Property
 					The =children= instance property is a read-only property that provides access to a widget's child widgets.
 
 					For example, a widget named =rgbSlider= that is a child widget of a page widget could be accessed by a statement like =page.children.rgbSlider=, where the =children= property of the page widget instance provides access to all of its child widgets.
 
-				The children Set-get Property
-					The =children= set-get property is a somewhat unique type of set-get property that provides a versatile way to distribute widget properties to a widget's child widgets.
+				The children State Property
+					The =children= state property is a somewhat unique type of state property that provides a versatile way to distribute widget properties to a widget's child widgets.
 
-					When the value of the =children= set-get property is set, a conformer processes the value and attempts to "consume" it. The value specified should be an object, where each property of the object is treated as providing widget properties for a child widget. The conformer attempts to distribute those widget properties objects to the corresponding child widgets. For example, the statement =page.set ({children:{rgbSlider:{value:'#ff0000'}}})= is attempting to distribute the widget properties ={value:'#ff0000'}= to the child widget named =rgbSlider= of the page widget.
+					When the value of the =children= state property is set, a conformer processes the value and attempts to "consume" it. The value specified should be an object, where each property of the object is treated as providing widget properties for a child widget. The conformer attempts to distribute those widget properties objects to the corresponding child widgets. For example, the statement =page.set ({children:{rgbSlider:{value:'#ff0000'}}})= is attempting to distribute the widget properties ={value:'#ff0000'}= to the child widget named =rgbSlider= of the page widget.
 
 					For any properties objects for which there are no corresponding child widgets, they are retained in order to potentially be used later when a child widget that does correspond is added, at which time the properties will be supplied as overrides to any properties that are specified by the code adding the child widget.
 
-			The children Set-get Property Allows Deep Setting
-				The =children= set-get property allows properties to be distributed to any or all of a widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in a widget's widget tree.
+			The children State Property Allows Deep Setting
+				The =children= state property allows properties to be distributed to any or all of a widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in a widget's widget tree.
 
 				Consider the following example...
 
@@ -602,10 +602,10 @@ More on Widgets
 					});
 				....................................................................
 
-				If the =sliderR=, =sliderG=, and =sliderB= slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse. This is admittedly not a terribly compelling example of how to use the special behavior of the =children= set-get property, but it demonstrates the basic principle.
+				If the =sliderR=, =sliderG=, and =sliderB= slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse. This is admittedly not a terribly compelling example of how to use the special behavior of the =children= state property, but it demonstrates the basic principle.
 
-			The children Set-get Children Property Allows Deferred Pickup
-				The special behavior of the =children= set-get property allows widget properties to be specified for a child widget even before that child widget has been created.
+			The children State Children Property Allows Deferred Pickup
+				The special behavior of the =children= state property allows widget properties to be specified for a child widget even before that child widget has been created.
 
 				EXAMPLE
 				.......................................................................................
@@ -630,10 +630,10 @@ More on Widgets
 					rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
 				.......................................................................................
 
-				In the above example, a page widget is being created and a value is being specified for its =children= set-get property that is defining widget properties for child widgets in the page widget's widget tree that have not yet been created. Then, after the fact, a widget tree is fleshed out for the page widget, with child widgets that correspond to the structure of the object specified for the =children= set-get property when the page widget instance was created. Because of the special way that the =children= set-get property works, the widget properties defined earlier are "picked up" by the child widgets when they are created.
+				In the above example, a page widget is being created and a value is being specified for its =children= state property that is defining widget properties for child widgets in the page widget's widget tree that have not yet been created. Then, after the fact, a widget tree is fleshed out for the page widget, with child widgets that correspond to the structure of the object specified for the =children= state property when the page widget instance was created. Because of the special way that the =children= state property works, the widget properties defined earlier are "picked up" by the child widgets when they are created.
 
-			The children Set-get Property is Respected in the Declarative Syntax
-				Along with using the =children= set-get property in the constructor of a widget instance, when calling the instance's =set= method or in a widget adoption declaration, the =children= set-get property can also be used in the `declarative syntax for widget properties`.
+			The children State Property is Respected in the Declarative Syntax
+				Along with using the =children= state property in the constructor of a widget instance, when calling the instance's =set= method or in a widget adoption declaration, the =children= state property can also be used in the `declarative syntax for widget properties`.
 
 				EXAMPLE
 				......................................................................
@@ -667,9 +667,9 @@ More on Widgets
 				So, the widget properties declared for a widget using the declarative syntax may contain widget properties for any or all of the child widgets of the widget - all the way down to the deepest child widgets in the widget's widget tree.
 
 			Setting Doesn't Create or Destroy Children
-				Setting the value of the =children= set-get property is handled in a special way and has no effect on the actual child widgets for a widget, nor does it affect the value or contents of the =children= instance property.
+				Setting the value of the =children= state property is handled in a special way and has no effect on the actual child widgets for a widget, nor does it affect the value or contents of the =children= instance property.
 
-				When you set a value for the =children= set-get property, the widget instance tries to distribute any specified child widget properties to the widget's current child widgets. If widget properties are specified for a child that does not yet exist, that child widget is not created. Instead, the unapplied child widget properties are remembered. If a child widget is added later and its name corresponds to the name of a child widget for which unapplied widget properties have been remembered, then those widget properties are applied at the time of creating the child widget (for more details, see the section `The children Set-get Children Property Allows Deferred Pickup`).
+				When you set a value for the =children= state property, the widget instance tries to distribute any specified child widget properties to the widget's current child widgets. If widget properties are specified for a child that does not yet exist, that child widget is not created. Instead, the unapplied child widget properties are remembered. If a child widget is added later and its name corresponds to the name of a child widget for which unapplied widget properties have been remembered, then those widget properties are applied at the time of creating the child widget (for more details, see the section `The children State Children Property Allows Deferred Pickup`).
 
 	### Get Your Hands Off My Nodes
 		### - discuss using the node related instance methods on nodes that don't belong to a widget
@@ -713,7 +713,7 @@ More on Child Widgets
 		);
 		...................................
 
-		Notice how the child widget is not created first using its class constructor. Instead, a reference to the child widget's class is provided in the second parameter, and the values for the child widget's set-get properties are supplied in the optional third parameter. By leaving it up to the parent widget to instantiate the child widget before adding it, the parent can ensure that the child widget knows its =parent= and its =idPrefix= when its constructor is executed. This can be useful information for the code inside the constructor.
+		Notice how the child widget is not created first using its class constructor. Instead, a reference to the child widget's class is provided in the second parameter, and the values for the child widget's state properties are supplied in the optional third parameter. By leaving it up to the parent widget to instantiate the child widget before adding it, the parent can ensure that the child widget knows its =parent= and its =idPrefix= when its constructor is executed. This can be useful information for the code inside the constructor.
 
 	Referencing Child Widgets
 		After the above code has executed, the newly added child widget can be referenced using your widget's =children= instance property, as in =myWidget.children.childWidgetName=.
@@ -783,7 +783,7 @@ Widget Adoption
 
 		IN A NUTSHELL
 
-		Basically, you're assigning a property to the =window= object, where the property name is the =idPrefix= of the widget you want to have instantiated, prefixed with a "$" (dollar) sign. The dollar sign serves to minimize namespace collisions with other properties on the window object, and also to flag the property to the page widget as a candidate for adoption. The value of the property is a bundle of set-get property values for the widget that's to be instantiated and adopted. The special =widgetClass= property is a string value specifying the class name of your widget. Note that you can't just have an "open" class reference here, because the widget class is not guaranteed to be loaded and may need to be dynamically loaded.
+		Basically, you're assigning a property to the =window= object, where the property name is the =idPrefix= of the widget you want to have instantiated, prefixed with a "$" (dollar) sign. The dollar sign serves to minimize namespace collisions with other properties on the window object, and also to flag the property to the page widget as a candidate for adoption. The value of the property is a bundle of state property values for the widget that's to be instantiated and adopted. The special =widgetClass= property is a string value specifying the class name of your widget. Note that you can't just have an "open" class reference here, because the widget class is not guaranteed to be loaded and may need to be dynamically loaded.
 
 		INCORRECT
 		...................................................
@@ -941,7 +941,7 @@ Widget Adoption
 
 			In the above example, instances of the =Uize.Widget.CollectionItem.Zooming= widget class are being spawned - one for each of the nodes obtained by evaluating the find expression object ={root:'thumbnails',tagName:'A',className:'thumbnail'}=.
 
-			Besides the =idPrefix= value here that identifies the DOM nodes for which the =Uize.Widget.CollectionItem.Zooming= instances should be created, the values specified for the =previewZoomUrl= and =zoomPower= set-get properties of this widget class are common for all instances that are spawned. The =$[idPrefix]= declaration of =$page_$$= indicates that the spawned widgets are to be added as children of the page widget instance.
+			Besides the =idPrefix= value here that identifies the DOM nodes for which the =Uize.Widget.CollectionItem.Zooming= instances should be created, the values specified for the =previewZoomUrl= and =zoomPower= state properties of this widget class are common for all instances that are spawned. The =$[idPrefix]= declaration of =$page_$$= indicates that the spawned widgets are to be added as children of the page widget instance.
 
 		Spawning Using the children Property
 			In addition to being able to use `The $[parentName]_$$[childWidgetName] Syntax` for declaring widgets to be spawned, the name of child widgets can be prefixed with "$$" (two dollar signs) when declaring them using `The children Property`.
@@ -970,7 +970,7 @@ Widget Adoption
 
 			For some more insights into how this mechanism works, consult the reference documentation for this method.
 
-	Set-get Properties Merge-in
+	State Properties Merge-in
 		In the event that a widget declared for adoption is already created by the page widget code, the existing instance will be retained and the properties declared for the widget in the adoption declaration will be set on the existing instance.
 
 		This behavior allows easy migration of the instantiation from using the adoption mechanism to using explicit instantiation inside the page widget's code. When this case arises, the =widgetClass= property in the declaration will be ignored - even if it doesn't match the class of the existing widget, so the page widget's child widget takes precedence since it's already created. Child widgets declared using the =children= property *will*, however, be added to the existing widget.
@@ -1043,7 +1043,7 @@ Widget Adoption
 		Must Match the Page Widget idPrefix
 			The name you specify for the page widget in your child widget =idPrefix= must match the actual =idPrefix= that is set for the page widget, or your child widgets will not be adopted.
 
-			The initial value for the =idPrefix= set-get property in the =Uize.Widget.Page= class is ='page'=, so unless you change that in your own subclasses of =Uize.Widget.Page= you should be able to start all your widget adoption statements with =window.$page_=.
+			The initial value for the =idPrefix= state property in the =Uize.Widget.Page= class is ='page'=, so unless you change that in your own subclasses of =Uize.Widget.Page= you should be able to start all your widget adoption statements with =window.$page_=.
 
 			INCORRECT
 			..................................................................................
@@ -1078,7 +1078,7 @@ Widget Adoption
 		Reserved Property Names
 			As mentioned earlier, the special properties =widgetClass= and =children= are reserved for the widget adoption mechanism.
 
-			The implication of this is that you can't create widget classes that register either =widgetClass= or =children= as set-get properties and expect to use the widget adoption mechanism. Or, more correctly, you can, but any values that you specify for those properties in a widget declaration won't make their way through to the widget, because they get "consumed" by the adoption mechanism. So, best to avoid using those names for set-get properties, which is not likely to be a major constraint.
+			The implication of this is that you can't create widget classes that register either =widgetClass= or =children= as state properties and expect to use the widget adoption mechanism. Or, more correctly, you can, but any values that you specify for those properties in a widget declaration won't make their way through to the widget, because they get "consumed" by the adoption mechanism. So, best to avoid using those names for state properties, which is not likely to be a major constraint.
 
 		Takes Time
 			It *does* take a tiny bit of time for the page widget to scan through and discover widget adoption declarations.
@@ -1140,9 +1140,9 @@ Developing Custom Widgets
 
 		Constructor
 
-		Set-get Properties
+		State Properties
 			Property Robustness
-				Ask yourself the question: if I wire up my widget and then use the =set= instance method to change one of the widget's set-get properties, will the widget correctly reflect that new state? Or is the property that I set only observed during construction or wiring of the widget?
+				Ask yourself the question: if I wire up my widget and then use the =set= instance method to change one of the widget's state properties, will the widget correctly reflect that new state? Or is the property that I set only observed during construction or wiring of the widget?
 
 		Wiring Nodes
 			- wiring nodes should not be done during construction
@@ -1150,7 +1150,7 @@ Developing Custom Widgets
 			- adding child widgets should, ideally, not be done during wiring
 
 			- the only thing that is done in =wireUi= that is automatically undone by =unwireUi= is the unwiring of node event handlers. Anything else that is done during =wireUi= will not be undone. So, if you are developing a widget that may need to be unwired and then rewired, the implementation should avoid adding child widgets or wiring events other than node events in the -wireUi= method.
-			- child widgets that are dynamically added with the influence of set-get properties should be added in response to a change in the properties' values, and not in the constructor. Similarly, state that is set on child widgets with the influence of set-get properties should be set in response to a change in the properties' values.
+			- child widgets that are dynamically added with the influence of state properties should be added in response to a change in the properties' values, and not in the constructor. Similarly, state that is set on child widgets with the influence of state properties should be set in response to a change in the properties' values.
 
 Principles of Good Widget Design
 	Self-maintaining UI

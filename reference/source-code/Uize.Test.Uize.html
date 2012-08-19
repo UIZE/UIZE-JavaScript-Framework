@@ -1924,7 +1924,7 @@ Uize.module ({
             ['Test that null is considered empty',[null],true],
             ['Test that undefined is considered empty',[undefined],true],
             ['Test that NaN is considered empty',[NaN],true],
-            ['Test that class instance with empty value set-get property is considered empty',
+            ['Test that class instance with empty value state property is considered empty',
               [Uize.Class.Value ({value:0})],
               true
             ],
@@ -1944,7 +1944,7 @@ Uize.module ({
             ['Test that Boolean object initialized to true is not considered empty',[new Boolean (true)],false],
             //['Test that a regular expression is not considered empty',[/^.+$/],false],
             ['Test that a function (even an empty one) is not considered empty',function () {},false],
-            ['Test that class instance with non-empty value set-get property is not considered empty',
+            ['Test that class instance with non-empty value state property is not considered empty',
               [Uize.Class.Value ({value:1})],
               false
             ]

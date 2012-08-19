@@ -10,7 +10,7 @@ Introduction
 		- see a tree or flattened list of all the modules built for a page
 		- see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing implied node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances *have not* been created, and many more different types of lists / reports of useful information
 		- see a summary for various objects, such as widget instances, class or package modules, DOM nodes, functions and methods, etc.
-		- see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, set-get properties, etc.
+		- see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, state properties, etc.
 		- for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, implied nodes, etc.
 		- for widget classes, see a summary of all the instances of such classes on the page
 		- easily get documentation for a widget's class, or any UIZE module (whether loaded on the page or not)
@@ -157,7 +157,7 @@ The Left Pane
 			Widgets that are in the disabled state
 				A flat list of all the widgets on the page that are in the disabled state, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
 
-				Disabled widgets are widgets where the value of the =enabledInherited= set-get property is =false=. This property will be =false= if the widget's =enabled= set-get property is set to =false=, or if its =enabled= property is set to ='inherit'= and the disabled state is inherited from its parent. It might be interesting to see just how many widgets on a page are in the disabled state at any one time in the use of the page.
+				Disabled widgets are widgets where the value of the =enabledInherited= state property is =false=. This property will be =false= if the widget's =enabled= state property is set to =false=, or if its =enabled= property is set to ='inherit'= and the disabled state is inherited from its parent. It might be interesting to see just how many widgets on a page are in the disabled state at any one time in the use of the page.
 
 			Widgets that are not wired
 				A flat list of all the widgets on the page that are not yet wired, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
@@ -182,12 +182,12 @@ The Left Pane
 			Widgets that have some remapped DOM nodes
 				A flat list of all the widgets on the page that have some remapped DOM nodes, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
 
-				A widget is considered to have remapped DOM nodes when the value of its =nodeMap= set-get property is a non-empty object with one or more node name to remapped node mappings. This query might be useful when learning how node remapping works and how and where it used in widgets in real world applications (so, this query is probably of more academic than diagnostic value).
+				A widget is considered to have remapped DOM nodes when the value of its =nodeMap= state property is a non-empty object with one or more node name to remapped node mappings. This query might be useful when learning how node remapping works and how and where it used in widgets in real world applications (so, this query is probably of more academic than diagnostic value).
 
 			Widgets that implement the value interface
 				A flat list of all the widgets on the page that implement the value interface, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
 
-				A widget is considered to implement the value interface if the class of which it is an instance registers the =value= set-get property. Widgets that implement the value interface are fun to play around with, because they most often are the widgets used in a page for obtaining input from a user. When selecting a widget from the query's results set, the actual value for the widget can be viewed in the table of set-get properties displayed in the `state tab`. If you then click on the "set" action in the row for the =value= set-get property, you will get a setter expression that you can use to modify the value for the widget and see how the UI responds in the page being inspected.
+				A widget is considered to implement the value interface if the class of which it is an instance registers the =value= state property. Widgets that implement the value interface are fun to play around with, because they most often are the widgets used in a page for obtaining input from a user. When selecting a widget from the query's results set, the actual value for the widget can be viewed in the table of state properties displayed in the `state tab`. If you then click on the "set" action in the row for the =value= state property, you will get a setter expression that you can use to modify the value for the widget and see how the UI responds in the page being inspected.
 
 		Module Queries
 			A number of module queries are provided for finding JavaScript modules that have been built for the page and that match certain criteria.
@@ -238,7 +238,7 @@ The Left Pane
 			All accessed widget DOM nodes
 				A flat list of all the accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
 
-				DOM nodes are considered accessed widget DOM nodes if some widget in the entire widget tree contains a mapping for it in its node cache (ie. the widget tried to access it). The results set for this query may contain listings for DOM nodes that are present as well as DOM nodes that are missing. For DOM nodes that are present, the ID used when listing a node in the results set will be the value of the node's =id= attribute. For DOM nodes that are *not* present, the ID used when listing a node will be constructed using the value of the =idPrefix= set-get property of the widget that owns it, and the listing will have the suffix "[MISSING]".
+				DOM nodes are considered accessed widget DOM nodes if some widget in the entire widget tree contains a mapping for it in its node cache (ie. the widget tried to access it). The results set for this query may contain listings for DOM nodes that are present as well as DOM nodes that are missing. For DOM nodes that are present, the ID used when listing a node in the results set will be the value of the node's =id= attribute. For DOM nodes that are *not* present, the ID used when listing a node will be constructed using the value of the =idPrefix= state property of the widget that owns it, and the listing will have the suffix "[MISSING]".
 
 			All present accessed widget DOM nodes
 				A flat list of all the present accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
@@ -248,7 +248,7 @@ The Left Pane
 			All missing accessed widget DOM nodes
 				A flat list of all the missing accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
 
-				DOM nodes are considered missing accessed widget DOM nodes if some widget in the entire widget tree contains a null mapping for it in its node cache (ie. the widget tried to access the node and the node did not exist at the time). The ID used when listing a node will be constructed using the value of the =idPrefix= set-get property of the widget that owns it, and the listing will have the suffix "[MISSING]".
+				DOM nodes are considered missing accessed widget DOM nodes if some widget in the entire widget tree contains a null mapping for it in its node cache (ie. the widget tried to access the node and the node did not exist at the time). The ID used when listing a node will be constructed using the value of the =idPrefix= state property of the widget that owns it, and the listing will have the suffix "[MISSING]".
 
 			All unaccessed widget DOM nodes
 				A flat list of all `widget DOM nodes` that have not been accessed by widgets (see `Unaccessed Widget DOM Nodes`), where each node is listed by its ID with a prepended "#" (pound) character.
@@ -258,7 +258,7 @@ The Left Pane
 			DOM nodes with IDs not belonging to widgets
 				A flat list of all DOM nodes that have IDs but that do not appear to belong to widgets, where each node is listed by its ID with a prepended "#" (pound) character.
 
-				DOM nodes are considered to *not* belong to widgets if they have not been accessed by any widget in the entire widget tree *and* their ID is also not consistent with the value of the =idPrefix= set-get property for any widget in the entire widget tree. Web developers creating the HTML for a Web page may assign IDs to DOM nodes for the sake of CSS selectors in stylesheets, and these IDs are unlikely to conform to the ID syntax for widgets.
+				DOM nodes are considered to *not* belong to widgets if they have not been accessed by any widget in the entire widget tree *and* their ID is also not consistent with the value of the =idPrefix= state property for any widget in the entire widget tree. Web developers creating the HTML for a Web page may assign IDs to DOM nodes for the sake of CSS selectors in stylesheets, and these IDs are unlikely to conform to the ID syntax for widgets.
 
 				DOM nodes that are not recognized as belonging to widgets but that look like they are intended for widgets could be an indication of an underlying problem. This query may be useful when troubleshooting problems where widgets are not functioning as expected. A DOM node that is not considered to belong to a widget on the page, but whose ID syntax looks like the ID syntax for a widget DOM node, could be an indication of any of the following...
 
@@ -390,7 +390,7 @@ The Right Pane
 		Entering Expressions
 			Beyond `entering object paths`, `entering DOM node IDs`, and `entering recognized but not loaded UIZE modules`, absolutely any expression can be entered into the `object entry input`.
 
-			So, for example, the expression =2 + 3= can be entered, and the result of evaluating that expression - while not very interesting - can be inspected further in the various tabs of `the object inspector`. In the example of the expression =2 + 3=, the inspected object will be the result of evaluating that expression in the page being inspected, which will be the value =5=. A more compelling example of being able to enter arbitrary expressions into the `object entry input` is the case of entering a setter expression for a set-get property of a widget instance, such as the expression =page.children.colorPicker.children.sliderR.set ('value',176)=.
+			So, for example, the expression =2 + 3= can be entered, and the result of evaluating that expression - while not very interesting - can be inspected further in the various tabs of `the object inspector`. In the example of the expression =2 + 3=, the inspected object will be the result of evaluating that expression in the page being inspected, which will be the value =5=. A more compelling example of being able to enter arbitrary expressions into the `object entry input` is the case of entering a setter expression for a state property of a widget instance, such as the expression =page.children.colorPicker.children.sliderR.set ('value',176)=.
 
 		Invalid Expression
 			An Invalid Expression is an expression that is entered into the `object entry input` that throws an exception when it is evaluated in the page being inspected.
@@ -521,7 +521,7 @@ The Right Pane
 			HTML
 				The HTML section displays in the `summary tab` for all objects that are widget instances, and displays the HTML for the widget being inspected (provided that the widget's HTML can be discovered).
 
-				The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (ie. there's a valid node specified for the =container= set-get property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (ie. the implied node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (ie. the implied node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.
+				The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (ie. there's a valid node specified for the =container= state property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (ie. the implied node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (ie. the implied node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.
 
 				If the HTML for the widget cannot be discovered by DELVE, then a message to the effect that the widget has no container node, shell node, or root node will be displayed. If DELVE can't discover the HTML for the widget being inspected, it might be that the widget's HTML is not in the page, or it might just be that the HTML is actually there but it has no shell or root node (not all widgets require that their HTML have a shell or root node) and there is no container node specified for the widget. It could also be that there is a mismatch between the =idPrefix= specified for the widget and the =idPrefix= used when generating the HTML intended for the widget.
 
@@ -578,61 +578,61 @@ The Right Pane
 	State Tab
 		The State Tab displays the current state of the object being inspected, if the object is an instance of a =Uize.Class= subclass, or a =Uize.Class= subclass.
 
-		The state for an instance of a =Uize.Class= subclass is represented by the instance values of all of its set-get properties. The state for a =Uize.Class= subclass (*not* an instance) is represented by the static values of all its set-get properties. The state for the object being inspected is displayed in the `set-get properties table`.
+		The state for an instance of a =Uize.Class= subclass is represented by the instance values of all of its state properties. The state for a =Uize.Class= subclass (*not* an instance) is represented by the static values of all its state properties. The state for the object being inspected is displayed in the `state properties table`.
 
 		Objects Without a State Interface
 			If the object being inspected is neither an *instance* of a =Uize.Class= subclass, nor a =Uize.Class= subclass, then the object is not considered to have a state interface.
 
-			For objects that do not support a state interface, the `state tab` will contain only a message to the effect that the object does not support a set-get properties state interface - there will be no `set-get properties table`.
+			For objects that do not support a state interface, the `state tab` will contain only a message to the effect that the object does not support a state properties state interface - there will be no `state properties table`.
 
-		Set-get Properties Table
-			The Set-get Properties Table displays all the public set-get properties for the instance or class being inspected.
+		State Properties Table
+			The State Properties Table displays all the public state properties for the instance or class being inspected.
 
-			The set-get properties table is comprised of three columns: the `NAME` column, the `ACTIONS` column, and the `VALUE` column. The set-get properties listed in the table are sorted by name, in ascending alphabetical order.
+			The state properties table is comprised of three columns: the `NAME` column, the `ACTIONS` column, and the `VALUE` column. The state properties listed in the table are sorted by name, in ascending alphabetical order.
 
 		Name
-			The Name column of the `set-get properties table` displays the name for a set-get property.
+			The Name column of the `state properties table` displays the name for a state property.
 
-			The name for each set-get property listed in the `set-get properties table` is an `object link`, where the `object link text` is the set-get property's name, and the `object link expression` is a getter expression that can be used to query the value of the set-get property - the same expression that is used for `the get action`.
+			The name for each state property listed in the `state properties table` is an `object link`, where the `object link text` is the state property's name, and the `object link expression` is a getter expression that can be used to query the value of the state property - the same expression that is used for `the get action`.
 
 		Actions
-			The Actions column of the `set-get properties table` provides two useful actions for each set-get property: `the get action` and `the set action`.
+			The Actions column of the `state properties table` provides two useful actions for each state property: `the get action` and `the set action`.
 
 			The Get Action
-				The Get Action is an `object link` whose `object link expression` is a getter expression that can be used to query the value of the set-get property.
+				The Get Action is an `object link` whose `object link expression` is a getter expression that can be used to query the value of the state property.
 
 				Instance Getter or Static Getter
 					The getter expression linked to by `the get action` will be either a call to the =get= instance method or a call to the =MyClass.get= static method, depending on whether the object being inspected is an instance of a =Uize.Class= subclass, or an actual subclass.
 
-					For example, if the object being inspected was an instance of the =Uize.Widget.Page= class that is assigned to the global variable =page=, then the getter expression for the =idPrefix= set-get property would be =page.get ('idPrefix')=. On the other hand, if the object being inspected was the actual =Uize.Widget.Page= class, then the getter expression for the =idPrefix= set-get property would be =Uize.Widget.Page.get ('idPrefix')=.
+					For example, if the object being inspected was an instance of the =Uize.Widget.Page= class that is assigned to the global variable =page=, then the getter expression for the =idPrefix= state property would be =page.get ('idPrefix')=. On the other hand, if the object being inspected was the actual =Uize.Widget.Page= class, then the getter expression for the =idPrefix= state property would be =Uize.Widget.Page.get ('idPrefix')=.
 
 				When the Get Action is Useful
-					`The get action` can be useful when the simple =toString= serialization of a set-get property that is displayed in the `VALUE` column of the `set-get properties table` is less than satisfactory.
+					`The get action` can be useful when the simple =toString= serialization of a state property that is displayed in the `VALUE` column of the `state properties table` is less than satisfactory.
 
-					In such cases, using the get action for a set-get property will provide a more complete (and useful) view of that property's value in the `summary tab`. The getter expression that is linked to by the get action is the same getter expression that is linked to by the linked set-get property names in the `NAME` column.
+					In such cases, using the get action for a state property will provide a more complete (and useful) view of that property's value in the `summary tab`. The getter expression that is linked to by the get action is the same getter expression that is linked to by the linked state property names in the `NAME` column.
 
 			The Set Action
-				The Set Action is an `object link` whose `object link expression` is a setter expression that can be used to set the value of the set-get property.
+				The Set Action is an `object link` whose `object link expression` is a setter expression that can be used to set the value of the state property.
 
 				Instance Setter or Static Setter
 					The setter expression linked to by `the set action` will be either a call to the =set= instance method or a call to the =MyClass.set= static method, depending on whether the object being inspected is an instance of a =Uize.Class= subclass, or an actual subclass.
 
-					For example, if the object being inspected was an instance of the =Uize.Widget.Page= class that is assigned to the global variable =page=, then the getter expression for the =enabled= set-get property would be =page.set ('enabled',#)=. On the other hand, if the object being inspected was the actual =Uize.Widget.Page= class, then the getter expression for the =enabled= set-get property would be =Uize.Widget.Page.get ('enabled',#)=.
+					For example, if the object being inspected was an instance of the =Uize.Widget.Page= class that is assigned to the global variable =page=, then the getter expression for the =enabled= state property would be =page.set ('enabled',#)=. On the other hand, if the object being inspected was the actual =Uize.Widget.Page= class, then the getter expression for the =enabled= state property would be =Uize.Widget.Page.get ('enabled',#)=.
 
 				Deliberately Incapacitated
-					The setter expression linked to by `the set action` link is deliberately incapacitated by using a placeholder "#" (pound character) where the set-get property's new value should go.
+					The setter expression linked to by `the set action` link is deliberately incapacitated by using a placeholder "#" (pound character) where the state property's new value should go.
 
-					This has the effect of ensuring that merely clicking on `the set action` doesn't actually change the value of the set-get property before you get a chance to enter your own value. Because the initial state of the setter expression is invalid, it fails. Replace the "#" with a valid value and the setter expression does its thing.
+					This has the effect of ensuring that merely clicking on `the set action` doesn't actually change the value of the state property before you get a chance to enter your own value. Because the initial state of the setter expression is invalid, it fails. Replace the "#" with a valid value and the setter expression does its thing.
 
 				When the Set Action is Useful
 					`The set action` can be useful when troubleshooting, or even when just experimenting with the state interface for widgets on a page.
 
-					Once you've got a setter expression for the set-get property of a widget in the `object entry input`, then you can go to town playing with different values and seeing how the UI of the widget responds.
+					Once you've got a setter expression for the state property of a widget in the `object entry input`, then you can go to town playing with different values and seeing how the UI of the widget responds.
 
 		Value
-			The Value column of the `set-get properties table` displays the value for a set-get property, using a simple =toString= serialization.
+			The Value column of the `state properties table` displays the value for a state property, using a simple =toString= serialization.
 
-			Because the value of a set-get property is displayed using a =toString= serialization, the displayed value can be less than satisfactory in some cases. In such cases, `the get action` comes in handy, since it allows you to get a more complete (and useful) view of a set-get property's value in the `summary tab`.
+			Because the value of a state property is displayed using a =toString= serialization, the displayed value can be less than satisfactory in some cases. In such cases, `the get action` comes in handy, since it allows you to get a more complete (and useful) view of a state property's value in the `summary tab`.
 
 	Features Tab
 		The Features Tab displays the public features that can be automatically detected for a class in a sortable features table.
@@ -643,9 +643,9 @@ The Right Pane
 			So, if the object being inspected is a =Uize.Class= subclass, then the detectable features of that class will be displayed in the `features table`. However, if the inspected object is an instance of a =Uize.Class= subclass, then the features of the instance's class will be displayed in the Features Table.
 
 		Automatically Detectable Features
-			Features that can be automatically detected for a class include: static methods, static properties, instance methods, instance properties, and set-get properties.
+			Features that can be automatically detected for a class include: static methods, static properties, instance methods, instance properties, and state properties.
 
-			Features are detected by iterating through the properties of the class to discover static features (static methods and static properties), and by iterating through the properties of the class' =prototype= object to discover instance features (instance methods and instance properties). Set-get properties are detected by calling the =MyClass.get= static method with no parameter specified.
+			Features are detected by iterating through the properties of the class to discover static features (static methods and static properties), and by iterating through the properties of the class' =prototype= object to discover instance features (instance methods and instance properties). State properties are detected by calling the =MyClass.get= static method with no parameter specified.
 
 		Features Table
 			The Features Table is table, whose `columns are sortable`, that displays all the `automatically detectable features` for a class.
@@ -658,7 +658,7 @@ The Right Pane
 
 				For instance features, the name displayed in this column will be the name of the property of the =prototype= object. For example, the name displayed for the =wireUi= instance method would be simply "wireUi". For static features, the name displayed will be the full dereferencing path for the static feature. For example, the =registerProperties= static method of the =Uize.Widget.Page= class would be displayed as "Uize.Widget.Page.registerProperties".
 
-				Displayed names for all features, except set-get properties, are `navigable values`. Instance features are linked to inspect the feature on the =prototype= object of the class. For example, the `object link` for the =wireUi= instance method of the =Uize.Widget.Page= class would have the `object link expression` of =Uize.Widget.Page.prototype.wireUi=. In this case, clicking on the feature name will let you inspect the function that implements the =wireUi= instance method for this class.
+				Displayed names for all features, except state properties, are `navigable values`. Instance features are linked to inspect the feature on the =prototype= object of the class. For example, the `object link` for the =wireUi= instance method of the =Uize.Widget.Page= class would have the `object link expression` of =Uize.Widget.Page.prototype.wireUi=. In this case, clicking on the feature name will let you inspect the function that implements the =wireUi= instance method for this class.
 
 				By contrast, static features are simply linked to those features on the class object. For example, the `object link` for the =registerProperties= static method of the =Uize.Widget.Page= class would have the `object link expression` of =Uize.Widget.Page.registerProperties=. In this case, clicking on the feature name will let you inspect the function that implements the =registerProperties= static method for this class.
 
@@ -676,7 +676,7 @@ The Right Pane
 
 				- *Instance* - features that are defined on the =prototype= object of a class, and that are accessible on instances of the class, such as the =wireUi= instance method of the =Uize.Widget.Page= class
 
-				- *Set-get* - Set-get properties are considered to be neither exclusively in the *Instance* context nor exclusively in the *Static* context, since they combine aspects of both. Instead, set-get properties are given their own dedicated *Set-get* context. They are regarded as "Property" `type` features in the *Set-get* context.
+				- *State* - State properties are considered to be neither exclusively in the *Instance* context nor exclusively in the *Static* context, since they combine aspects of both. Instead, state properties are given their own dedicated *State* context. They are regarded as "Property" `type` features in the *State* context.
 
 			Type
 				The Type column displays the type of a feature.
@@ -697,7 +697,7 @@ The Right Pane
 				How Introduced In Is Determined
 					The class in which a feature was first introduced is determined according to the `context` of the feature.
 
-					For static features, the class is determined by going up the inheritance chain towards the root class, finding the first class in which the feature is present in the class object. For instance features, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the class' =prototype= object. For set-get properties, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the object returned by a call to the =get= static method with no parameter specified (ie. a "get all").
+					For static features, the class is determined by going up the inheritance chain towards the root class, finding the first class in which the feature is present in the class object. For instance features, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the class' =prototype= object. For state properties, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the object returned by a call to the =get= static method with no parameter specified (ie. a "get all").
 
 			Last Overridden In
 				The Last Overridden In column displays the last class in which the feature was overridden.
@@ -707,7 +707,7 @@ The Right Pane
 				How Last Overridden In Is Determined
 					The class in which a feature was last overridden is determined by going up the inheritance chain towards the root class, and finding the earliest class in which the feature is still present and has the same value / implementation as the class being inspected.
 
-					Upon each iteration up the inheritance chain, the feature's value / implementation is obtained according to the `context` of the feature: for static features, the feature is obtained from the class object; for instance features, the feature is obtained from the class' =prototype= object; for set-get properties, the feature is obtained by a call to the =get= static method with no parameter specified (ie. a "get all").
+					Upon each iteration up the inheritance chain, the feature's value / implementation is obtained according to the `context` of the feature: for static features, the feature is obtained from the class object; for instance features, the feature is obtained from the class' =prototype= object; for state properties, the feature is obtained by a call to the =get= static method with no parameter specified (ie. a "get all").
 
 			When Introduced In and Last Overridden In Are the Same
 				The class that a feature was `Introduced In` can be the same as the class that the feature was `Last Overridden In`.
@@ -737,7 +737,7 @@ The Right Pane
 			:| Public | Instance| Method   |
 			:| Public | Instance| Module   |
 			:| Public | Instance| Property |
-			:| Public | Set-get | Property |
+			:| Public | State | Property |
 			:| Public | Static  | Method   |
 			:| Public | Static  | Module   |
 			:| Public | Static  | Property |
@@ -792,7 +792,7 @@ The Right Pane
 			The `events tab` can automatically log all `property change events` for instances of =Uize.Class= subclasses, as well as all instance `custom events` for instances of =Uize.Class= subclasses and all static Custom Events for =Uize.Class= subclasses.
 
 			Property Change Events
-				Property Change Events are events that are fired whenever one or more of the set-get properties for an instance of a =Uize.Class= subclass are changed during a set operation.
+				Property Change Events are events that are fired whenever one or more of the state properties for an instance of a =Uize.Class= subclass are changed during a set operation.
 
 				Unlike `custom events`, `property change events` are only applicable to *instances* and not to classes. Whenever Property Change Events are logged, an object specifying all the properties that have changed value, along with their new values, is serialized to a one line JSON formatted string and appended to the log message.
 
@@ -967,15 +967,15 @@ Universal Features
 			OWNER WIDGET (all DOM nodes)
 				Shown only for objects that are DOM nodes, the text displayed will be the full dereferencing path for the widget that "owns" the node.
 
-				A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the =idPrefix= set-get property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be *"not owned by a widget"*.
+				A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the =idPrefix= state property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be *"not owned by a widget"*.
 
 			OWNER WIDGET CLASS (all DOM nodes)
 				Shown only for objects that are DOM nodes, the text displayed will be the full dereferencing path for the widget class of the widget that "owns" the node.
 
-				A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the =idPrefix= set-get property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be *"not owned by a widget"*.
+				A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the =idPrefix= state property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be *"not owned by a widget"*.
 
 			VALUE (all instances with value interface)
-				Shown only for objects that are instances of =Uize.Class= subclasses that implement the value interface, the text displayed will be a simple =toString= serialization of the value of the instance's =value= set-get property.
+				Shown only for objects that are instances of =Uize.Class= subclasses that implement the value interface, the text displayed will be a simple =toString= serialization of the value of the instance's =value= state property.
 
 		Object Highlighting
 			Object Highlighting lets you see where widgets and DOM nodes are in the page being inspected.
@@ -1039,7 +1039,7 @@ Definitions of Terms
 	Specified Localized Strings
 		Specified Localized Strings are those localized strings that are explicitly specified for a widget instance.
 
-		Localized strings can be explicitly specified for a widget by setting an object value for the widget's =localized= set-get property, so the number of localized strings specified for a widget is the number of properties in the =localized= object specified for the widget.
+		Localized strings can be explicitly specified for a widget by setting an object value for the widget's =localized= state property, so the number of localized strings specified for a widget is the number of properties in the =localized= object specified for the widget.
 
 		Bear in mind that the system of localization in the UIZE JavaScript Framework (see the [[javascript-localization.html][JavaScript Localization]] explainer) allows a widget to "inherit" localized strings from up its parent chain, so the number of localized strings specified for a widget does not always give an indication of how many localized strings the widget uses in its implementation.
 
@@ -1052,7 +1052,7 @@ Definitions of Terms
 		An accessed DOM node may be considered missing even though there is HTML for it in the page, since it is possible that the HTML for the node did not exist in the page when the widget first tried to access the node.
 
 	Unaccessed Widget DOM Nodes
-		DOM nodes are considered unaccessed `widget DOM nodes` if such a node has *not* been accessed by a widget (so there is no entry for the node in any widget's node cache), but the node's ID is consistent with the value of the =idPrefix= set-get property for some widget in the entire widget tree.
+		DOM nodes are considered unaccessed `widget DOM nodes` if such a node has *not* been accessed by a widget (so there is no entry for the node in any widget's node cache), but the node's ID is consistent with the value of the =idPrefix= state property for some widget in the entire widget tree.
 
 		A node may be considered an unaccessed widget DOM node even if it is actually never addressed in the implementation of the widget instance that is considered to be its owner. This is because the person writing the code to generate the HTML for a widget may mistakenly add IDs for some DOM nodes inside that HTML that makes those nodes appear as nodes that the widget uses - even though they are not. Another possibility might be that the HTML being used for a widget is actually HTML intended for a subclass of that widget's class. In such cases, extra nodes that are addressed in the implementation of the widget subclass are not known to the base class - they will be ignored, but they will still appear to belong to instances of that base class because of their ID structure.
 

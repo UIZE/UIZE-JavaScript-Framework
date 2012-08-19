@@ -81,7 +81,7 @@
 					<li><a href="#5_3" title="A node that acts as the title bar for the dialog and that is wired up by the drag child widget to enable drag-to-move for the dialog.">5.3. title Implied Node</a></li>
 				</ul>
 			</li>
-			<li><a href="#6">6. Set-get Properties</a>
+			<li><a href="#6">6. State Properties</a>
 				<ul>
 					<li><a href="#6_1" title="A boolean, indicating whether or not the dialog should be automatically positioned when it is shown, or whenever the browser window is resized.">6.1. autoPosition</a></li>
 					<li><a href="#6_2" title="Inherited from Uize.Widget.">6.2. built</a></li>
@@ -91,9 +91,9 @@
 					<li><a href="#6_6" title="Inherited from Uize.Widget.">6.6. children</a></li>
 					<li><a href="#6_7" title="Inherited from Uize.Widget.">6.7. container</a></li>
 					<li><a href="#6_8" title="A read-only floating point number in the range of 0 to 1, indicating the current opacity level of the dialog&apos;s shield.">6.8. currentShieldOpacity</a></li>
-					<li><a href="#6_9" title="A string, specifying the default text for the cancel button, should the cancelText set-get property be set to null, undefined, or &apos;&apos; (an empty string).">6.9. defaultCancelText</a></li>
-					<li><a href="#6_10" title="A string, specifying the default text for the ok button, should the okText set-get property be set to null, undefined, or &apos;&apos; (an empty string).">6.10. defaultOkText</a></li>
-					<li><a href="#6_11" title="A string, specifying the default text for the title Implied Node (ie. the title bar), should the title set-get property be set to null, undefined, or &apos;&apos; (an empty string).">6.11. defaultTitle</a></li>
+					<li><a href="#6_9" title="A string, specifying the default text for the cancel button, should the cancelText state property be set to null, undefined, or &apos;&apos; (an empty string).">6.9. defaultCancelText</a></li>
+					<li><a href="#6_10" title="A string, specifying the default text for the ok button, should the okText state property be set to null, undefined, or &apos;&apos; (an empty string).">6.10. defaultOkText</a></li>
+					<li><a href="#6_11" title="A string, specifying the default text for the title Implied Node (ie. the title bar), should the title state property be set to null, undefined, or &apos;&apos; (an empty string).">6.11. defaultTitle</a></li>
 					<li><a href="#6_12" title="An boolean, specifying whether or not clicking shield implied node should close the dialog.">6.12. dismissOnShieldClick</a></li>
 					<li><a href="#6_13" title="Inherited from Uize.Widget.">6.13. enabled</a></li>
 					<li><a href="#6_14" title="Inherited from Uize.Widget.">6.14. enabledInherited</a></li>
@@ -241,7 +241,7 @@
 				
 				<p><code><a href="#7_2">afterWireUi</a></code> | <code><a href="#7_4">atEndOfOmegaStructor</a></code> | <code><a href="#7_46">updateUiPositionIfShown</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#6_1">autoPosition</a></code> | <code><a href="#6_5">cancelText</a></code> | <code><a href="#6_8">currentShieldOpacity</a></code> | <code><a href="#6_9">defaultCancelText</a></code> | <code><a href="#6_10">defaultOkText</a></code> | <code><a href="#6_11">defaultTitle</a></code> | <code><a href="#6_12">dismissOnShieldClick</a></code> | <code><a href="#6_15">height</a></code> | <code><a href="#6_16">hideShieldOnDrag</a></code> | <code><a href="#6_20">inDrag</a></code> | <code><a href="#6_23">mooringNode</a></code> | <code><a href="#6_26">offsetX</a></code> | <code><a href="#6_27">offsetY</a></code> | <code><a href="#6_28">okEnabledOnShow</a></code> | <code><a href="#6_29">okText</a></code> | <code><a href="#6_30">shieldOpacity</a></code> | <code><a href="#6_31">shieldShown</a></code> | <code><a href="#6_32">shown</a></code> | <code><a href="#6_33">title</a></code> | <code><a href="#6_34">width</a></code></p>
 			</div>
@@ -277,7 +277,7 @@
 				
 				<p><code><a href="#2_2">showConfirm</a></code> | <code><a href="#2_3">showInform</a></code></p>
 				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
 				
 				<p><code><a href="#6_2">built</a></code> | <code><a href="#6_3">busy</a></code> | <code><a href="#6_4">busyInherited</a></code> | <code><a href="#6_6">children</a></code> | <code><a href="#6_7">container</a></code> | <code><a href="#6_13">enabled</a></code> | <code><a href="#6_14">enabledInherited</a></code> | <code><a href="#6_17">html</a></code> | <code><a href="#6_18">idPrefix</a></code> | <code><a href="#6_19">idPrefixConstruction</a></code> | <code><a href="#6_21">insertionMode</a></code> | <code><a href="#6_22">localized</a></code> | <code><a href="#6_24">name</a></code> | <code><a href="#6_25">nodeMap</a></code> | <code><a href="#6_35">wired</a></code></p>
 				
@@ -312,7 +312,7 @@
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class, that is used to fade the opacity of the <code><a href="#5_2">shield</a></code> implied node when hiding it.</p>
 			
-			<p>This property lets you customize the qualities of the opacity fade for the dialog's <code><a href="#5_2">shield</a></code>, by letting you set values for the set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance (such as <code>duration</code>, <code>curve</code>, etc.).</p>
+			<p>This property lets you customize the qualities of the opacity fade for the dialog's <code><a href="#5_2">shield</a></code>, by letting you set values for the state properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance (such as <code>duration</code>, <code>curve</code>, etc.).</p>
 		</div>
 		
 		<a name="2_2"></a>
@@ -351,7 +351,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when this event is fired, the value of the <code><a href="#6_32">shown</a></code> set-get property will be <code>false</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when this event is fired, the value of the <code><a href="#6_32">shown</a></code> state property will be <code>false</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_4">Before Show</a></code>, <code><a href="#3_3">Before Hide</a></code>, and <code><a href="#3_2">After Show</a></code> instance events</td></tr>
 			</table>
 		</div>
@@ -364,7 +364,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when this event is fired, the value of the <code><a href="#6_32">shown</a></code> set-get property will be <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when this event is fired, the value of the <code><a href="#6_32">shown</a></code> state property will be <code>true</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_4">Before Show</a></code>, <code><a href="#3_3">Before Hide</a></code>, and <code><a href="#3_1">After Hide</a></code> instance events</td></tr>
 			</table>
 		</div>
@@ -377,7 +377,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when this event is fired, the value of the <code><a href="#6_32">shown</a></code> set-get property will be <code>false</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when this event is fired, the value of the <code><a href="#6_32">shown</a></code> state property will be <code>false</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_4">Before Show</a></code>, <code><a href="#3_2">After Show</a></code>, and <code><a href="#3_1">After Hide</a></code> instance events</td></tr>
 			</table>
 		</div>
@@ -390,7 +390,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when this event is fired, the value of the <code><a href="#6_32">shown</a></code> set-get property will be <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when this event is fired, the value of the <code><a href="#6_32">shown</a></code> state property will be <code>true</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_3">Before Hide</a></code>, <code><a href="#3_2">After Show</a></code>, and <code><a href="#3_1">After Hide</a></code> instance events</td></tr>
 			</table>
 		</div>
@@ -490,7 +490,7 @@
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, that lets the user cancel (and close) the dialog.</p>
 			
-			<p>When this button is clicked, the <code><a href="#3_5">Cancel</a></code> event is fired on the dialog instance. The text for this button can be controlled via the <code><a href="#6_5">cancelText</a></code> and <code><a href="#6_9">defaultCancelText</a></code> set-get properties.</p>
+			<p>When this button is clicked, the <code><a href="#3_5">Cancel</a></code> event is fired on the dialog instance. The text for this button can be controlled via the <code><a href="#6_5">cancelText</a></code> and <code><a href="#6_9">defaultCancelText</a></code> state properties.</p>
 		</div>
 		
 		<a name="4_2"></a>
@@ -506,7 +506,7 @@
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Drag.html">Uize.Widget.Drag</a></code> class, that is wired up to the <code><a href="#5_3">title Implied Node</a></code> to enable drag-to-move for the dialog.</p>
 			
-			<p>Setting the <code><a href="#6_13">enabled</a></code> set-get property of this child widget to <code>false</code> will disable drag-to-move for the dialog.</p>
+			<p>Setting the <code><a href="#6_13">enabled</a></code> state property of this child widget to <code>false</code> will disable drag-to-move for the dialog.</p>
 		</div>
 		
 		<a name="4_4"></a>
@@ -514,7 +514,7 @@
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, that lets the user submit the dialog.</p>
 			
-			<p>When this button is clicked, the <code><a href="#3_10">Ok</a></code> event is fired on the dialog instance. The text for this button can be controlled via the <code><a href="#6_29">okText</a></code> and <code><a href="#6_10">defaultOkText</a></code> set-get properties.</p>
+			<p>When this button is clicked, the <code><a href="#3_10">Ok</a></code> event is fired on the dialog instance. The text for this button can be controlled via the <code><a href="#6_29">okText</a></code> and <code><a href="#6_10">defaultOkText</a></code> state properties.</p>
 		</div>
 		
 		<a name="4_5"></a>
@@ -534,7 +534,7 @@
 		<div class="contents2">
 			<p>A node that is the root for all of the dialog's HTML, excluding the <code><a href="#5_2">shield</a></code> implied node.</p>
 			
-			<p>When a dialog is shown, its <code><a href="#5_1">Root Node</a></code> and <code><a href="#5_2">shield</a></code> implied nodes are displayed. Conversely, when a dialog is hidden, both its <code><a href="#5_1">Root Node</a></code> and <code><a href="#5_2">shield</a></code> implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the <code><a href="#5_1">Root Node</a></code> is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its <code><a href="#6_34">width</a></code> and <code><a href="#6_15">height</a></code> set-get properties, the dimensions of the <code><a href="#5_1">Root Node</a></code> are modified through CSS. All chrome for the dialog should therefore be "pinned" to the <code><a href="#5_1">Root Node</a></code>, so that when the dialog is moved and resized, the chrome goes along for the ride.</p>
+			<p>When a dialog is shown, its <code><a href="#5_1">Root Node</a></code> and <code><a href="#5_2">shield</a></code> implied nodes are displayed. Conversely, when a dialog is hidden, both its <code><a href="#5_1">Root Node</a></code> and <code><a href="#5_2">shield</a></code> implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the <code><a href="#5_1">Root Node</a></code> is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its <code><a href="#6_34">width</a></code> and <code><a href="#6_15">height</a></code> state properties, the dimensions of the <code><a href="#5_1">Root Node</a></code> are modified through CSS. All chrome for the dialog should therefore be "pinned" to the <code><a href="#5_1">Root Node</a></code>, so that when the dialog is moved and resized, the chrome goes along for the ride.</p>
 		</div>
 		
 		<a name="5_2"></a>
@@ -542,12 +542,12 @@
 		<div class="contents2">
 			<p>A node that will be sized to fill the entire browser view port, in order to block events to the page behind the dialog.</p>
 			
-			<p>When the dialog is shown, the <code><a href="#5_2">shield</a></code> implied node is shown along with the <code><a href="#5_1">Root Node</a></code>. The shield can be set to hide when the user drag or resizes the dialog by setting the <code><a href="#6_16">hideShieldOnDrag</a></code> set-get property to <code>true</code>. When the dialog is shown, the shield can be hidden by setting the <code><a href="#6_31">shieldShown</a></code> set-get property to <code>false</code>. Even though the shield won't be visible, it will still block events to the page behind the dialog.</p>
+			<p>When the dialog is shown, the <code><a href="#5_2">shield</a></code> implied node is shown along with the <code><a href="#5_1">Root Node</a></code>. The shield can be set to hide when the user drag or resizes the dialog by setting the <code><a href="#6_16">hideShieldOnDrag</a></code> state property to <code>true</code>. When the dialog is shown, the shield can be hidden by setting the <code><a href="#6_31">shieldShown</a></code> state property to <code>false</code>. Even though the shield won't be visible, it will still block events to the page behind the dialog.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#6_8">currentShieldOpacity</a></code>, <code><a href="#6_16">hideShieldOnDrag</a></code>, <code><a href="#6_30">shieldOpacity</a></code>, and <code><a href="#6_31">shieldShown</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#6_8">currentShieldOpacity</a></code>, <code><a href="#6_16">hideShieldOnDrag</a></code>, <code><a href="#6_30">shieldOpacity</a></code>, and <code><a href="#6_31">shieldShown</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_1">shieldFade</a></code> instance property</td></tr>
 			</table>
 		</div>
@@ -557,28 +557,28 @@
 		<div class="contents2">
 			<p>A node that acts as the title bar for the dialog and that is wired up by the <code><a href="#4_3">drag</a></code> child widget to enable drag-to-move for the dialog.</p>
 			
-			<p>The text for the dialog's title bar can be controlled via the <code><a href="#6_33">title</a></code> and <code><a href="#6_11">defaultTitle</a></code> set-get properties.</p>
+			<p>The text for the dialog's title bar can be controlled via the <code><a href="#6_33">title</a></code> and <code><a href="#6_11">defaultTitle</a></code> state properties.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if no <code><a href="#5_3">title Implied Node</a></code> is present in the dialog's HTML, then the dialog will not be movable</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#6_11">defaultTitle</a></code> and <code><a href="#6_33">title</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#6_11">defaultTitle</a></code> and <code><a href="#6_33">title</a></code> state properties</td></tr>
 			</table>
 		</div>
 	</div>
 	
 	<a name="6"></a>
-	<h1 class="heading1" title="6. Set-get Properties"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>. </span>Set-get Properties</h1>
+	<h1 class="heading1" title="6. State Properties"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>. </span>State Properties</h1>
 	<div class="contents1">
 		<a name="6_1"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.1. autoPosition"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_1" title="6. Set-get Properties -&gt; 6.1. autoPosition">1</a>. </span>autoPosition</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.1. autoPosition"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_1" title="6. State Properties -&gt; 6.1. autoPosition">1</a>. </span>autoPosition</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not the dialog should be automatically positioned when it is shown, or whenever the browser window is resized.</p>
 			
-			<p>When <code><a href="#6_1">autoPosition</a></code> is set to <code>true</code>, the dialog will be automatically positioned each time it is shown and each time the browser window is resized. When the dialog is positioned, the way in which it is positioned is determined by the value of the <code><a href="#6_23">mooringNode</a></code>, <code><a href="#6_26">offsetX</a></code>, and <code><a href="#6_27">offsetY</a></code> set-get properties.</p>
+			<p>When <code><a href="#6_1">autoPosition</a></code> is set to <code>true</code>, the dialog will be automatically positioned each time it is shown and each time the browser window is resized. When the dialog is positioned, the way in which it is positioned is determined by the value of the <code><a href="#6_23">mooringNode</a></code>, <code><a href="#6_26">offsetX</a></code>, and <code><a href="#6_27">offsetY</a></code> state properties.</p>
 			
-			<p>If the value of the <code><a href="#6_23">mooringNode</a></code> set-get property resolves to a DOM node, then the dialog will be "moored" to the specified mooring node (for a more detailed explanation, see the reference for the <code><a href="#6_23">mooringNode</a></code> set-get property). On the other hand, if the value of the <code><a href="#6_23">mooringNode</a></code> set-get property is <code>null</code>, <code>undefined</code>, or does not resolve to a DOM node, then the dialog will be positioned so that it is centered in the browser window.</p>
+			<p>If the value of the <code><a href="#6_23">mooringNode</a></code> state property resolves to a DOM node, then the dialog will be "moored" to the specified mooring node (for a more detailed explanation, see the reference for the <code><a href="#6_23">mooringNode</a></code> state property). On the other hand, if the value of the <code><a href="#6_23">mooringNode</a></code> state property is <code>null</code>, <code>undefined</code>, or does not resolve to a DOM node, then the dialog will be positioned so that it is centered in the browser window.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -593,7 +593,7 @@
 		</div>
 		
 		<a name="6_2"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.2. built"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_2" title="6. Set-get Properties -&gt; 6.2. built">2</a>. </span>built</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.2. built"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_2" title="6. State Properties -&gt; 6.2. built">2</a>. </span>built</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -605,7 +605,7 @@
 		</div>
 		
 		<a name="6_3"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.3. busy"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_3" title="6. Set-get Properties -&gt; 6.3. busy">3</a>. </span>busy</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.3. busy"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_3" title="6. State Properties -&gt; 6.3. busy">3</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -617,7 +617,7 @@
 		</div>
 		
 		<a name="6_4"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.4. busyInherited"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_4" title="6. Set-get Properties -&gt; 6.4. busyInherited">4</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.4. busyInherited"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_4" title="6. State Properties -&gt; 6.4. busyInherited">4</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -629,16 +629,16 @@
 		</div>
 		
 		<a name="6_5"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.5. cancelText"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_5" title="6. Set-get Properties -&gt; 6.5. cancelText">5</a>. </span>cancelText</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.5. cancelText"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_5" title="6. State Properties -&gt; 6.5. cancelText">5</a>. </span>cancelText</h2>
 		<div class="contents2">
 			<p>A string, representing text that should be displayed for the dialog's <code><a href="#4_1">cancel</a></code> button.</p>
 			
-			<p>Using this property, the text of the <code><a href="#4_1">cancel</a></code> button can be changed at any time - even when the dialog is shown. Setting a non-empty string value for this property has the effect of setting the value of the <code>text</code> set-get property for the <code><a href="#4_1">cancel</a></code> child widget. Leaving <code><a href="#6_5">cancelText</a></code> set to its initial value of <code>undefined</code> will result in the <code><a href="#4_1">cancel</a></code> button's text being determined by the value of the <code><a href="#6_9">defaultCancelText</a></code> set-get property. If the values for both the <code><a href="#6_5">cancelText</a></code> and <code><a href="#6_9">defaultCancelText</a></code> set-get properties are <code>undefined</code>, then the <code><a href="#4_1">cancel</a></code> button will retain whatever text was initially in its HTML markup.</p>
+			<p>Using this property, the text of the <code><a href="#4_1">cancel</a></code> button can be changed at any time - even when the dialog is shown. Setting a non-empty string value for this property has the effect of setting the value of the <code>text</code> state property for the <code><a href="#4_1">cancel</a></code> child widget. Leaving <code><a href="#6_5">cancelText</a></code> set to its initial value of <code>undefined</code> will result in the <code><a href="#4_1">cancel</a></code> button's text being determined by the value of the <code><a href="#6_9">defaultCancelText</a></code> state property. If the values for both the <code><a href="#6_5">cancelText</a></code> and <code><a href="#6_9">defaultCancelText</a></code> state properties are <code>undefined</code>, then the <code><a href="#4_1">cancel</a></code> button will retain whatever text was initially in its HTML markup.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_9">defaultCancelText</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_9">defaultCancelText</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -649,7 +649,7 @@
 		</div>
 		
 		<a name="6_6"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.6. children"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_6" title="6. Set-get Properties -&gt; 6.6. children">6</a>. </span>children</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.6. children"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_6" title="6. State Properties -&gt; 6.6. children">6</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -661,7 +661,7 @@
 		</div>
 		
 		<a name="6_7"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.7. container"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_7" title="6. Set-get Properties -&gt; 6.7. container">7</a>. </span>container</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.7. container"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_7" title="6. State Properties -&gt; 6.7. container">7</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -673,7 +673,7 @@
 		</div>
 		
 		<a name="6_8"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.8. currentShieldOpacity"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_8" title="6. Set-get Properties -&gt; 6.8. currentShieldOpacity">8</a>. </span>currentShieldOpacity</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.8. currentShieldOpacity"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_8" title="6. State Properties -&gt; 6.8. currentShieldOpacity">8</a>. </span>currentShieldOpacity</h2>
 		<div class="contents2">
 			<p>A read-only floating point number in the range of <code>0</code> to <code>1</code>, indicating the current opacity level of the dialog's shield.</p>
 			
@@ -681,7 +681,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_16">hideShieldOnDrag</a></code>, <code><a href="#6_30">shieldOpacity</a></code>, and <code><a href="#6_31">shieldShown</a></code> set-get properties, and the <code><a href="#5_2">shield</a></code> implied node</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_16">hideShieldOnDrag</a></code>, <code><a href="#6_30">shieldOpacity</a></code>, and <code><a href="#6_31">shieldShown</a></code> state properties, and the <code><a href="#5_2">shield</a></code> implied node</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -692,17 +692,17 @@
 		</div>
 		
 		<a name="6_9"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.9. defaultCancelText"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_9" title="6. Set-get Properties -&gt; 6.9. defaultCancelText">9</a>. </span>defaultCancelText</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.9. defaultCancelText"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_9" title="6. State Properties -&gt; 6.9. defaultCancelText">9</a>. </span>defaultCancelText</h2>
 		<div class="contents2">
-			<p>A string, specifying the default text for the <code><a href="#4_1">cancel</a></code> button, should the <code><a href="#6_5">cancelText</a></code> set-get property be set to <code>null</code>, <code>undefined</code>, or <code>''</code> (an empty string).</p>
+			<p>A string, specifying the default text for the <code><a href="#4_1">cancel</a></code> button, should the <code><a href="#6_5">cancelText</a></code> state property be set to <code>null</code>, <code>undefined</code>, or <code>''</code> (an empty string).</p>
 			
-			<p>For a more detailed explanation of the cancel button text fallback mechanism, see the reference for the <code><a href="#6_5">cancelText</a></code> set-get property.</p>
+			<p>For a more detailed explanation of the cancel button text fallback mechanism, see the reference for the <code><a href="#6_5">cancelText</a></code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_5">cancelText</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_5">cancelText</a></code> set-get property is set to a non-empty string, then <code><a href="#6_9">defaultCancelText</a></code> will have no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_5">cancelText</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_5">cancelText</a></code> state property is set to a non-empty string, then <code><a href="#6_9">defaultCancelText</a></code> will have no effect</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -713,17 +713,17 @@
 		</div>
 		
 		<a name="6_10"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.10. defaultOkText"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_10" title="6. Set-get Properties -&gt; 6.10. defaultOkText">10</a>. </span>defaultOkText</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.10. defaultOkText"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_10" title="6. State Properties -&gt; 6.10. defaultOkText">10</a>. </span>defaultOkText</h2>
 		<div class="contents2">
-			<p>A string, specifying the default text for the <code><a href="#4_4">ok</a></code> button, should the <code><a href="#6_29">okText</a></code> set-get property be set to <code>null</code>, <code>undefined</code>, or <code>''</code> (an empty string).</p>
+			<p>A string, specifying the default text for the <code><a href="#4_4">ok</a></code> button, should the <code><a href="#6_29">okText</a></code> state property be set to <code>null</code>, <code>undefined</code>, or <code>''</code> (an empty string).</p>
 			
-			<p>For a more detailed explanation of the ok button text fallback mechanism, see the reference for the <code><a href="#6_29">okText</a></code> set-get property.</p>
+			<p>For a more detailed explanation of the ok button text fallback mechanism, see the reference for the <code><a href="#6_29">okText</a></code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_29">okText</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_29">okText</a></code> set-get property is set to a non-empty string, then <code><a href="#6_10">defaultOkText</a></code> will have no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_29">okText</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_29">okText</a></code> state property is set to a non-empty string, then <code><a href="#6_10">defaultOkText</a></code> will have no effect</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -734,17 +734,17 @@
 		</div>
 		
 		<a name="6_11"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.11. defaultTitle"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_11" title="6. Set-get Properties -&gt; 6.11. defaultTitle">11</a>. </span>defaultTitle</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.11. defaultTitle"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_11" title="6. State Properties -&gt; 6.11. defaultTitle">11</a>. </span>defaultTitle</h2>
 		<div class="contents2">
-			<p>A string, specifying the default text for the <code><a href="#5_3">title Implied Node</a></code> (ie. the title bar), should the <code><a href="#6_33">title</a></code> set-get property be set to <code>null</code>, <code>undefined</code>, or <code>''</code> (an empty string).</p>
+			<p>A string, specifying the default text for the <code><a href="#5_3">title Implied Node</a></code> (ie. the title bar), should the <code><a href="#6_33">title</a></code> state property be set to <code>null</code>, <code>undefined</code>, or <code>''</code> (an empty string).</p>
 			
-			<p>For a more detailed explanation of the title text fallback mechanism, see the reference for the <code><a href="#6_33">title</a></code> set-get property.</p>
+			<p>For a more detailed explanation of the title text fallback mechanism, see the reference for the <code><a href="#6_33">title</a></code> state property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_33">title</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_33">title</a></code> set-get property is set to a non-empty string, then <code><a href="#6_11">defaultTitle</a></code> will have no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_33">title</a></code> state property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_33">title</a></code> state property is set to a non-empty string, then <code><a href="#6_11">defaultTitle</a></code> will have no effect</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -755,7 +755,7 @@
 		</div>
 		
 		<a name="6_12"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.12. dismissOnShieldClick"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_12" title="6. Set-get Properties -&gt; 6.12. dismissOnShieldClick">12</a>. </span>dismissOnShieldClick</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.12. dismissOnShieldClick"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_12" title="6. State Properties -&gt; 6.12. dismissOnShieldClick">12</a>. </span>dismissOnShieldClick</h2>
 		<div class="contents2">
 			<p>An boolean, specifying whether or not clicking <code><a href="#5_2">shield</a></code> implied node should close the dialog.</p>
 			
@@ -774,7 +774,7 @@
 		</div>
 		
 		<a name="6_13"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.13. enabled"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_13" title="6. Set-get Properties -&gt; 6.13. enabled">13</a>. </span>enabled</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.13. enabled"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_13" title="6. State Properties -&gt; 6.13. enabled">13</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -786,7 +786,7 @@
 		</div>
 		
 		<a name="6_14"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.14. enabledInherited"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_14" title="6. Set-get Properties -&gt; 6.14. enabledInherited">14</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.14. enabledInherited"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_14" title="6. State Properties -&gt; 6.14. enabledInherited">14</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -798,16 +798,16 @@
 		</div>
 		
 		<a name="6_15"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.15. height"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_15" title="6. Set-get Properties -&gt; 6.15. height">15</a>. </span>height</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.15. height"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_15" title="6. State Properties -&gt; 6.15. height">15</a>. </span>height</h2>
 		<div class="contents2">
 			<p>An integer, specifying the height of the dialog (ie. the height of its <code><a href="#5_1">Root Node</a></code>).</p>
 			
-			<p>When a dialog is resizable (by using the <code><a href="../reference/Uize.Widget.Dialog.xResizable.html">Uize.Widget.Dialog.xResizable</a></code> extension), the value of the <code><a href="#6_15">height</a></code> and set-get property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving <code><a href="#6_15">height</a></code> set to its initial value of <code>undefined</code> will result in the dialog's height remaining as determined by its initial HTML markup and CSS.</p>
+			<p>When a dialog is resizable (by using the <code><a href="../reference/Uize.Widget.Dialog.xResizable.html">Uize.Widget.Dialog.xResizable</a></code> extension), the value of the <code><a href="#6_15">height</a></code> and state property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving <code><a href="#6_15">height</a></code> set to its initial value of <code>undefined</code> will result in the dialog's height remaining as determined by its initial HTML markup and CSS.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_34">width</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_34">width</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -818,11 +818,11 @@
 		</div>
 		
 		<a name="6_16"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.16. hideShieldOnDrag"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_16" title="6. Set-get Properties -&gt; 6.16. hideShieldOnDrag">16</a>. </span>hideShieldOnDrag</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.16. hideShieldOnDrag"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_16" title="6. State Properties -&gt; 6.16. hideShieldOnDrag">16</a>. </span>hideShieldOnDrag</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not the <code><a href="#5_2">shield</a></code> implied node should be hidden when the dialog is dragged (moved or resized).</p>
 			
-			<p>When the user drags a dialog, it is considered that one possible reason is to see what is being obscured by it. This can be the case if the user wishes to reference what is on the page behind the dialog in order to inform what choices they make in the dialog's UI. Therefore, the <code><a href="#6_16">hideShieldOnDrag</a></code> set-get property is initially set to <code>true</code>. Setting this property to <code>false</code> means that the <code><a href="#5_2">shield</a></code> implied node will remain obscuring the page even when the user drags the dialog.</p>
+			<p>When the user drags a dialog, it is considered that one possible reason is to see what is being obscured by it. This can be the case if the user wishes to reference what is on the page behind the dialog in order to inform what choices they make in the dialog's UI. Therefore, the <code><a href="#6_16">hideShieldOnDrag</a></code> state property is initially set to <code>true</code>. Setting this property to <code>false</code> means that the <code><a href="#5_2">shield</a></code> implied node will remain obscuring the page even when the user drags the dialog.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -837,7 +837,7 @@
 		</div>
 		
 		<a name="6_17"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.17. html"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_17" title="6. Set-get Properties -&gt; 6.17. html">17</a>. </span>html</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.17. html"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_17" title="6. State Properties -&gt; 6.17. html">17</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -849,7 +849,7 @@
 		</div>
 		
 		<a name="6_18"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.18. idPrefix"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_18" title="6. Set-get Properties -&gt; 6.18. idPrefix">18</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.18. idPrefix"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_18" title="6. State Properties -&gt; 6.18. idPrefix">18</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -861,7 +861,7 @@
 		</div>
 		
 		<a name="6_19"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.19. idPrefixConstruction"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_19" title="6. Set-get Properties -&gt; 6.19. idPrefixConstruction">19</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.19. idPrefixConstruction"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_19" title="6. State Properties -&gt; 6.19. idPrefixConstruction">19</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -873,7 +873,7 @@
 		</div>
 		
 		<a name="6_20"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.20. inDrag"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_20" title="6. Set-get Properties -&gt; 6.20. inDrag">20</a>. </span>inDrag</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.20. inDrag"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_20" title="6. State Properties -&gt; 6.20. inDrag">20</a>. </span>inDrag</h2>
 		<div class="contents2">
 			<p>A read-only boolean, indicating whether or not the dialog is being dragged (moved or resized).</p>
 			
@@ -891,7 +891,7 @@
 		</div>
 		
 		<a name="6_21"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.21. insertionMode"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_21" title="6. Set-get Properties -&gt; 6.21. insertionMode">21</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.21. insertionMode"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_21" title="6. State Properties -&gt; 6.21. insertionMode">21</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -903,7 +903,7 @@
 		</div>
 		
 		<a name="6_22"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.22. localized"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_22" title="6. Set-get Properties -&gt; 6.22. localized">22</a>. </span>localized</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.22. localized"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_22" title="6. State Properties -&gt; 6.22. localized">22</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -915,18 +915,18 @@
 		</div>
 		
 		<a name="6_23"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.23. mooringNode"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_23" title="6. Set-get Properties -&gt; 6.23. mooringNode">23</a>. </span>mooringNode</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.23. mooringNode"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_23" title="6. State Properties -&gt; 6.23. mooringNode">23</a>. </span>mooringNode</h2>
 		<div class="contents2">
 			<p>A node reference or node ID for a node to which the dialog should be "moored".</p>
 			
-			<p>When the value of the <code><a href="#6_23">mooringNode</a></code> set-get property resolves to a DOM node <b>and</b> the <code><a href="#6_1">autoPosition</a></code> set-get property is set to <code>true</code>, then the dialog is considered moored to the specified mooring node. On the other hand, if the <code><a href="#6_1">autoPosition</a></code> set-get property is set to <code>false</code>, then the value of the <code><a href="#6_23">mooringNode</a></code>, <code><a href="#6_26">offsetX</a></code>, and <code><a href="#6_27">offsetY</a></code> set-get properties will have no effect.</p>
+			<p>When the value of the <code><a href="#6_23">mooringNode</a></code> state property resolves to a DOM node <b>and</b> the <code><a href="#6_1">autoPosition</a></code> state property is set to <code>true</code>, then the dialog is considered moored to the specified mooring node. On the other hand, if the <code><a href="#6_1">autoPosition</a></code> state property is set to <code>false</code>, then the value of the <code><a href="#6_23">mooringNode</a></code>, <code><a href="#6_26">offsetX</a></code>, and <code><a href="#6_27">offsetY</a></code> state properties will have no effect.</p>
 			
-			<p>When in the moored state, the dialog will maintain its offset position relative to the mooring node, as specified by the <code><a href="#6_26">offsetX</a></code> and <code><a href="#6_27">offsetY</a></code> set-get properties - even as the browser window is resized. Each time it is shown or the browser window is resized, the dialog will be re-positioned so that the top left corner of its <code><a href="#5_1">Root Node</a></code> is offset vertically and horizontally from the top left corner of the mooring node, by the number of pixels specified by the <code><a href="#6_27">offsetY</a></code> and <code><a href="#6_26">offsetX</a></code> set-get properties, respectively.</p>
+			<p>When in the moored state, the dialog will maintain its offset position relative to the mooring node, as specified by the <code><a href="#6_26">offsetX</a></code> and <code><a href="#6_27">offsetY</a></code> state properties - even as the browser window is resized. Each time it is shown or the browser window is resized, the dialog will be re-positioned so that the top left corner of its <code><a href="#5_1">Root Node</a></code> is offset vertically and horizontally from the top left corner of the mooring node, by the number of pixels specified by the <code><a href="#6_27">offsetY</a></code> and <code><a href="#6_26">offsetX</a></code> state properties, respectively.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_1">autoPosition</a></code>, <code><a href="#6_26">offsetX</a></code>, and <code><a href="#6_27">offsetY</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_1">autoPosition</a></code>, <code><a href="#6_26">offsetX</a></code>, and <code><a href="#6_27">offsetY</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -937,7 +937,7 @@
 		</div>
 		
 		<a name="6_24"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.24. name"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_24" title="6. Set-get Properties -&gt; 6.24. name">24</a>. </span>name</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.24. name"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_24" title="6. State Properties -&gt; 6.24. name">24</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -949,7 +949,7 @@
 		</div>
 		
 		<a name="6_25"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.25. nodeMap"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_25" title="6. Set-get Properties -&gt; 6.25. nodeMap">25</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.25. nodeMap"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_25" title="6. State Properties -&gt; 6.25. nodeMap">25</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -961,17 +961,17 @@
 		</div>
 		
 		<a name="6_26"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.26. offsetX"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_26" title="6. Set-get Properties -&gt; 6.26. offsetX">26</a>. </span>offsetX</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.26. offsetX"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_26" title="6. State Properties -&gt; 6.26. offsetX">26</a>. </span>offsetX</h2>
 		<div class="contents2">
 			<p>An integer, specifying the offset in pixels from the left edge of the <code><a href="#6_23">mooringNode</a></code> to the left edge of the dialog's <code><a href="#5_1">Root Node</a></code>.</p>
 			
-			<p>When a dialog is "moored" to a mooring node, the <code><a href="#6_26">offsetX</a></code> property specifies how it is horizontally positioned in relation to the mooring node (for a more detailed explanation, see the reference for the <code><a href="#6_23">mooringNode</a></code> set-get property).</p>
+			<p>When a dialog is "moored" to a mooring node, the <code><a href="#6_26">offsetX</a></code> property specifies how it is horizontally positioned in relation to the mooring node (for a more detailed explanation, see the reference for the <code><a href="#6_23">mooringNode</a></code> state property).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_1">autoPosition</a></code> set-get property is set to <code>false</code>, then <code><a href="#6_26">offsetX</a></code> has no effect</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_1">autoPosition</a></code>, <code><a href="#6_23">mooringNode</a></code>, and <code><a href="#6_27">offsetY</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_1">autoPosition</a></code> state property is set to <code>false</code>, then <code><a href="#6_26">offsetX</a></code> has no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_1">autoPosition</a></code>, <code><a href="#6_23">mooringNode</a></code>, and <code><a href="#6_27">offsetY</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -982,17 +982,17 @@
 		</div>
 		
 		<a name="6_27"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.27. offsetY"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_27" title="6. Set-get Properties -&gt; 6.27. offsetY">27</a>. </span>offsetY</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.27. offsetY"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_27" title="6. State Properties -&gt; 6.27. offsetY">27</a>. </span>offsetY</h2>
 		<div class="contents2">
 			<p>An integer, specifying the offset in pixels from the top edge of the <code><a href="#6_23">mooringNode</a></code> to the top edge of the dialog's <code><a href="#5_1">Root Node</a></code>.</p>
 			
-			<p>When a dialog is "moored" to a mooring node, the <code><a href="#6_27">offsetY</a></code> property specifies how it is vertically positioned in relation to the mooring node (for a more detailed explanation, see the reference for the <code><a href="#6_23">mooringNode</a></code> set-get property).</p>
+			<p>When a dialog is "moored" to a mooring node, the <code><a href="#6_27">offsetY</a></code> property specifies how it is vertically positioned in relation to the mooring node (for a more detailed explanation, see the reference for the <code><a href="#6_23">mooringNode</a></code> state property).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_1">autoPosition</a></code> set-get property is set to <code>false</code>, then <code><a href="#6_27">offsetY</a></code> has no effect</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_1">autoPosition</a></code>, <code><a href="#6_23">mooringNode</a></code>, and <code><a href="#6_26">offsetX</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the <code><a href="#6_1">autoPosition</a></code> state property is set to <code>false</code>, then <code><a href="#6_27">offsetY</a></code> has no effect</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_1">autoPosition</a></code>, <code><a href="#6_23">mooringNode</a></code>, and <code><a href="#6_26">offsetX</a></code> state properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1003,7 +1003,7 @@
 		</div>
 		
 		<a name="6_28"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.28. okEnabledOnShow"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_28" title="6. Set-get Properties -&gt; 6.28. okEnabledOnShow">28</a>. </span>okEnabledOnShow</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.28. okEnabledOnShow"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_28" title="6. State Properties -&gt; 6.28. okEnabledOnShow">28</a>. </span>okEnabledOnShow</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether the dialog's <code><a href="#4_4">ok</a></code> button should be enabled or disabled each time the dialog is shown.</p>
 			
@@ -1022,16 +1022,16 @@
 		</div>
 		
 		<a name="6_29"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.29. okText"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_29" title="6. Set-get Properties -&gt; 6.29. okText">29</a>. </span>okText</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.29. okText"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_29" title="6. State Properties -&gt; 6.29. okText">29</a>. </span>okText</h2>
 		<div class="contents2">
 			<p>A string, representing text that should be displayed for the dialog's <code><a href="#4_4">ok</a></code> button.</p>
 			
-			<p>Using this property, the text of the <code><a href="#4_4">ok</a></code> button can be changed at any time - even when the dialog is shown. Setting a non-empty string value for this property has the effect of setting the value of the <code>text</code> set-get property for the <code><a href="#4_4">ok</a></code> child widget. Leaving <code><a href="#6_29">okText</a></code> set to its initial value of <code>undefined</code> will result in the <code><a href="#4_4">ok</a></code> button's text being determined by the value of the <code><a href="#6_10">defaultOkText</a></code> set-get property. If the values for both the <code><a href="#6_29">okText</a></code> and <code><a href="#6_10">defaultOkText</a></code> set-get properties are <code>undefined</code>, then the <code><a href="#4_4">ok</a></code> button will retain whatever text was initially in its HTML markup.</p>
+			<p>Using this property, the text of the <code><a href="#4_4">ok</a></code> button can be changed at any time - even when the dialog is shown. Setting a non-empty string value for this property has the effect of setting the value of the <code>text</code> state property for the <code><a href="#4_4">ok</a></code> child widget. Leaving <code><a href="#6_29">okText</a></code> set to its initial value of <code>undefined</code> will result in the <code><a href="#4_4">ok</a></code> button's text being determined by the value of the <code><a href="#6_10">defaultOkText</a></code> state property. If the values for both the <code><a href="#6_29">okText</a></code> and <code><a href="#6_10">defaultOkText</a></code> state properties are <code>undefined</code>, then the <code><a href="#4_4">ok</a></code> button will retain whatever text was initially in its HTML markup.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_10">defaultOkText</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_10">defaultOkText</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1042,14 +1042,14 @@
 		</div>
 		
 		<a name="6_30"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.30. shieldOpacity"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_30" title="6. Set-get Properties -&gt; 6.30. shieldOpacity">30</a>. </span>shieldOpacity</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.30. shieldOpacity"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_30" title="6. State Properties -&gt; 6.30. shieldOpacity">30</a>. </span>shieldOpacity</h2>
 		<div class="contents2">
 			<p>A floating point number in the range of <code>0</code> to <code>1</code>, specifying the opacity for the <code><a href="#5_2">shield</a></code> implied node when it is shown.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_8">currentShieldOpacity</a></code>, <code><a href="#6_16">hideShieldOnDrag</a></code>, and <code><a href="#6_31">shieldShown</a></code> set-get properties, and the <code><a href="#5_2">shield</a></code> implied node</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_8">currentShieldOpacity</a></code>, <code><a href="#6_16">hideShieldOnDrag</a></code>, and <code><a href="#6_31">shieldShown</a></code> state properties, and the <code><a href="#5_2">shield</a></code> implied node</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>.3</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1060,16 +1060,16 @@
 		</div>
 		
 		<a name="6_31"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.31. shieldShown"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_31" title="6. Set-get Properties -&gt; 6.31. shieldShown">31</a>. </span>shieldShown</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.31. shieldShown"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_31" title="6. State Properties -&gt; 6.31. shieldShown">31</a>. </span>shieldShown</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not the <code><a href="#5_2">shield</a></code> implied node is shown.</p>
 			
-			<p>Whenever this property is set to <code>true</code>, the <code><a href="#5_2">shield</a></code> implied node will be revealed. When it is set to <code>false</code>, the <code><a href="#5_2">shield</a></code> will be hidden. This property is set to <code>true</code> each time the dialog is shown, and it is set to <code>false</code> the first time the dialog is dragged after being shown (provided that the <code><a href="#6_16">hideShieldOnDrag</a></code> set-get property is set to <code>true</code>). You can also programmatically set <code><a href="#6_31">shieldShown</a></code> to <code>false</code> in your dialog code if some action requires that the user be able to see the page behind the dialog.</p>
+			<p>Whenever this property is set to <code>true</code>, the <code><a href="#5_2">shield</a></code> implied node will be revealed. When it is set to <code>false</code>, the <code><a href="#5_2">shield</a></code> will be hidden. This property is set to <code>true</code> each time the dialog is shown, and it is set to <code>false</code> the first time the dialog is dragged after being shown (provided that the <code><a href="#6_16">hideShieldOnDrag</a></code> state property is set to <code>true</code>). You can also programmatically set <code><a href="#6_31">shieldShown</a></code> to <code>false</code> in your dialog code if some action requires that the user be able to see the page behind the dialog.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_8">currentShieldOpacity</a></code>, <code><a href="#6_16">hideShieldOnDrag</a></code>, and <code><a href="#6_30">shieldOpacity</a></code> set-get properties, and the <code><a href="#5_2">shield</a></code> implied node</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#6_8">currentShieldOpacity</a></code>, <code><a href="#6_16">hideShieldOnDrag</a></code>, and <code><a href="#6_30">shieldOpacity</a></code> state properties, and the <code><a href="#5_2">shield</a></code> implied node</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>false</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1080,7 +1080,7 @@
 		</div>
 		
 		<a name="6_32"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.32. shown"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_32" title="6. Set-get Properties -&gt; 6.32. shown">32</a>. </span>shown</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.32. shown"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_32" title="6. State Properties -&gt; 6.32. shown">32</a>. </span>shown</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not the dialog is shown.</p>
 			
@@ -1099,16 +1099,16 @@
 		</div>
 		
 		<a name="6_33"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.33. title"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_33" title="6. Set-get Properties -&gt; 6.33. title">33</a>. </span>title</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.33. title"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_33" title="6. State Properties -&gt; 6.33. title">33</a>. </span>title</h2>
 		<div class="contents2">
 			<p>A string, specifying text that should be displayed in the dialog's <code><a href="#5_3">title Implied Node</a></code> (ie. the title bar).</p>
 			
-			<p>Using this property, the title of a dialog can be changed at any time - even when the dialog is shown. Leaving <code><a href="#6_33">title</a></code> set to its initial value of <code>undefined</code> will result in the dialog's title being determined by the value of the <code><a href="#6_11">defaultTitle</a></code> set-get property. If the values for both the <code><a href="#6_33">title</a></code> and <code><a href="#6_11">defaultTitle</a></code> set-get properties are <code>undefined</code>, then the <code><a href="#5_3">title Implied Node</a></code> will retain whatever text was initially in its HTML markup.</p>
+			<p>Using this property, the title of a dialog can be changed at any time - even when the dialog is shown. Leaving <code><a href="#6_33">title</a></code> set to its initial value of <code>undefined</code> will result in the dialog's title being determined by the value of the <code><a href="#6_11">defaultTitle</a></code> state property. If the values for both the <code><a href="#6_33">title</a></code> and <code><a href="#6_11">defaultTitle</a></code> state properties are <code>undefined</code>, then the <code><a href="#5_3">title Implied Node</a></code> will retain whatever text was initially in its HTML markup.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_11">defaultTitle</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_11">defaultTitle</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1119,16 +1119,16 @@
 		</div>
 		
 		<a name="6_34"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.34. width"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_34" title="6. Set-get Properties -&gt; 6.34. width">34</a>. </span>width</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.34. width"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_34" title="6. State Properties -&gt; 6.34. width">34</a>. </span>width</h2>
 		<div class="contents2">
 			<p>An integer, specifying the width of the dialog (ie. the width of its <code><a href="#5_1">Root Node</a></code>).</p>
 			
-			<p>When a dialog is resizable (by using the <code><a href="../reference/Uize.Widget.Dialog.xResizable.html">Uize.Widget.Dialog.xResizable</a></code> extension), the value of the <code><a href="#6_34">width</a></code> and set-get property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving <code><a href="#6_34">width</a></code> set to its initial value of <code>undefined</code> will result in the dialog's width remaining as determined by its initial HTML markup and CSS.</p>
+			<p>When a dialog is resizable (by using the <code><a href="../reference/Uize.Widget.Dialog.xResizable.html">Uize.Widget.Dialog.xResizable</a></code> extension), the value of the <code><a href="#6_34">width</a></code> and state property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving <code><a href="#6_34">width</a></code> set to its initial value of <code>undefined</code> will result in the dialog's width remaining as determined by its initial HTML markup and CSS.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_15">height</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#6_15">height</a></code> state property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1139,7 +1139,7 @@
 		</div>
 		
 		<a name="6_35"></a>
-		<h2 class="heading2" title="6. Set-get Properties -&gt; 6.35. wired"><span class="headingNumber"><a href="#6" title="6. Set-get Properties">6</a>.<a href="#6_35" title="6. Set-get Properties -&gt; 6.35. wired">35</a>. </span>wired</h2>
+		<h2 class="heading2" title="6. State Properties -&gt; 6.35. wired"><span class="headingNumber"><a href="#6" title="6. State Properties">6</a>.<a href="#6_35" title="6. State Properties -&gt; 6.35. wired">35</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
