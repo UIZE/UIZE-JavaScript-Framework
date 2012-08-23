@@ -983,7 +983,7 @@ Uize.Class
 		- to indicate that the instance has been constructed
 		- can be used by onChange handlers for state properties to conditionalize actions
 		- particularly compelling to widgets, since being completely constructed is a good indicator child widgets added during construction exist and can be accessed
-		- some classes (maybe Zazzle.* or Uize.*) are already doing this with their own private properties
+		- some classes may already be doing this with their own private properties
 
 	- idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?
 
@@ -2449,6 +2449,10 @@ Uize.Web.ImageLoader
 		- average load time
 
 Uize.Widget
+	Possible New Tree-inherited Properties
+		- theme
+		- locale
+
 	Proposed Shortenings
 		- myWidget.getNode -> myWidget.node
 
