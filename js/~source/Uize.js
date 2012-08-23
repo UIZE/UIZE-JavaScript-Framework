@@ -28,7 +28,7 @@
 				Value Testing Methods
 					The =Uize= module provides a number of static methods for performing commonly useful tests on values.
 
-					- =Uize.canExtend= - tests if value can be extended with custom properties
+					- =Uize.canExtend= - tests if value is an object that can be extended with custom properties
 					- =Uize.inRange= - tests if value is within specified value range
 					- =Uize.isArray= - tests if value is an array
 					- =Uize.isBoolean= - tests if value is a boolean
@@ -2610,7 +2610,7 @@
 			/*?
 				Static Methods
 					Uize.canExtend
-						Returns a boolean, indicating whether or not the specified value can be extended with custom properties.
+						Returns a boolean, indicating whether or not the specified value is an object that can be extended with custom properties.
 
 						SYNTAX
 						..............................................
