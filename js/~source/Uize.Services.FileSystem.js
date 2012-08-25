@@ -30,16 +30,12 @@ Uize.module ({
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_undefined,
 				_false = false,
 				_true = true
 			;
 
 		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+			var _class = _superclass.subclass ();
 
 		/*** Public Instance Methods ***/
 			_class.declareServiceMethods ({
@@ -49,16 +45,57 @@ Uize.module ({
 						Instance Methods
 							readFile
 								document...
+
+								SYNTAX
+								...................................................................................
+								fileContentsSTR = fileSystemInstance.readFile (paramsOBJ,callbackFUNC,errbackFUNC);
+								...................................................................................
+
+								Params
+									path
+										document...
 					*/
 				},
 				writeFile:{
-					async:_true
+					async:_false
 					/*?
 						Instance Methods
 							writeFile
 								document...
 					*/
+				},
+				init:{
+					async:_false
+					/*?
+						Instance Methods
+							init
+								document...
+					*/
 				}
+				/*
+					- more methods to add
+						- rename
+							- rename one or more files or folders
+							- two approaches
+								- matcher + transformer
+									- value matcher (choosing which paths to rename)
+									- value transformer (generate new path)
+								- regular expression renaming
+									- regular expression
+									- replacer expression
+								- support general matcher, which can match on all properties of items
+									- access permissions
+									- modified date
+									-
+								- different from path matcher, which only gets string value of path to match on
+						- copy
+							- copy one or more files or folders
+						- modify
+							- can modify anything about a file
+								- can change permissions
+								- can delete files
+								- can move/rename files
+				*/
 			});
 	}
 });
