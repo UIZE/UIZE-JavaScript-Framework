@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Services.FileSystem.WshAdapter | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Services.FileSystem.WshAdapter module reference documentation"/>
+	<meta name="description" content="The Uize.Services.FileSystem.WshAdapter module defines an adapter for the file system service (Uize.Services.FileSystem) for the WSH (Windows Script Host) environment."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Services.html" title="View reference for Uize.Services" class="breadcrumb">Services</a>.<a href="Uize.Services.FileSystem.html" title="View reference for Uize.Services.FileSystem" class="breadcrumb">FileSystem</a>.<a href="Uize.Services.FileSystem.WshAdapter.html" title="View reference for Uize.Services.FileSystem.WshAdapter" class="breadcrumb">WshAdapter</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Services.FileSystem.WshAdapter.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Services.FileSystem.WshAdapter module defines an adapter for the file system service (Uize.Services.FileSystem) for the WSH (Windows Script Host) environment.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Services.FileSystem.WshAdapter module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Services.FileSystem.WshAdapter module defines the Uize.Services.FileSystem.WshAdapter class, which is a subclass of Uize.Service.Adapter.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="The features listed in this section have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="The features listed in this section have been inherited from other modules.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Services.FileSystem.WshAdapter module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Instance Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Inherited from Uize.Class.">2.1. fire</a></li>
+					<li><a href="#2_2" title="Inherited from Uize.Class.">2.2. get</a></li>
+					<li><a href="#2_3" title="IMPLEMENTATION INFO">2.3. init</a></li>
+					<li><a href="#2_4" title="Inherited from Uize.Class.">2.4. is</a></li>
+					<li><a href="#2_5" title="Inherited from Uize.Class.">2.5. kill</a></li>
+					<li><a href="#2_6" title="Inherited from Uize.Class.">2.6. met</a></li>
+					<li><a href="#2_7" title="Inherited from Uize.Class.">2.7. once</a></li>
+					<li><a href="#2_8" title="IMPLEMENTATION INFO">2.8. readFile</a></li>
+					<li><a href="#2_9" title="Inherited from Uize.Class.">2.9. set</a></li>
+					<li><a href="#2_10" title="Inherited from Uize.Class.">2.10. toggle</a></li>
+					<li><a href="#2_11" title="Inherited from Uize.Class.">2.11. unmet</a></li>
+					<li><a href="#2_12" title="Inherited from Uize.Class.">2.12. unwire</a></li>
+					<li><a href="#2_13" title="Inherited from Uize.Class.">2.13. wire</a></li>
+					<li><a href="#2_14" title="IMPLEMENTATION INFO">2.14. writeFile</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Methods</a>
+				<ul>
+					<li><a href="#3_1" title="Inherited from Uize.Class.">3.1. Uize.Services.FileSystem.WshAdapter.fire</a></li>
+					<li><a href="#3_2" title="Inherited from Uize.Class.">3.2. Uize.Services.FileSystem.WshAdapter.get</a></li>
+					<li><a href="#3_3" title="Inherited from Uize.Class.">3.3. Uize.Services.FileSystem.WshAdapter.registerProperties</a></li>
+					<li><a href="#3_4" title="Inherited from Uize.Class.">3.4. Uize.Services.FileSystem.WshAdapter.set</a></li>
+					<li><a href="#3_5" title="Inherited from Uize.Class.">3.5. Uize.Services.FileSystem.WshAdapter.singleton</a></li>
+					<li><a href="#3_6" title="Inherited from Uize.Class.">3.6. Uize.Services.FileSystem.WshAdapter.subclass</a></li>
+					<li><a href="#3_7" title="Inherited from Uize.Class.">3.7. Uize.Services.FileSystem.WshAdapter.toggle</a></li>
+					<li><a href="#3_8" title="Inherited from Uize.Class.">3.8. Uize.Services.FileSystem.WshAdapter.unwire</a></li>
+					<li><a href="#3_9" title="Inherited from Uize.Class.">3.9. Uize.Services.FileSystem.WshAdapter.wire</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Static Properties</a>
+				<ul>
+					<li><a href="#4_1" title="IMPLEMENTATION INFO">4.1. Uize.Services.FileSystem.WshAdapter.moduleName</a></li>
+					<li><a href="#4_2" title="IMPLEMENTATION INFO">4.2. Uize.Services.FileSystem.WshAdapter.nonInheritableStatics</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Services.FileSystem.WshAdapter</code> module defines an adapter for the file system service (<code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code>) for the WSH (Windows Script Host) environment.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>Uize.Services.FileSystem.WshAdapter</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Services.FileSystem.WshAdapter</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Services.FileSystem.WshAdapter%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Services.FileSystem.WshAdapter</code> module defines the <code>Uize.Services.FileSystem.WshAdapter</code> class, which is a subclass of <code><a href="../reference/Uize.Service.Adapter.html">Uize.Service.Adapter</a></code>.</p>
+			
+			<p><span class="allCaps">INHERITANCE CHAIN</span></p>
+			
+			<p><code><a href="../reference/Uize.Class.html">Uize.Class</a></code> -> <code><a href="../reference/Uize.Service.Adapter.html">Uize.Service.Adapter</a></code> -> <code>Uize.Services.FileSystem.WshAdapter</code></p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">INSTANCE METHODS</span></p>
+				
+				<p><code><a href="#2_3">init</a></code> | <code><a href="#2_8">readFile</a></code> | <code><a href="#2_14">writeFile</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been overridden in this module.</p>
+				
+				<p>The module that an overridden feature was initially introduced in will be noted in the IMPLEMENTATION INFO notes for the feature.</p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#4_1">Uize.Services.FileSystem.WshAdapter.moduleName</a></code> | <code><a href="#4_2">Uize.Services.FileSystem.WshAdapter.nonInheritableStatics</a></code></p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been inherited from other modules.</p>
+				
+				<p>The module that an inherited feature was initially introduced in will be noted in the IMPLEMENTATION INFO notes for the feature.</p>
+				
+				<p><span class="allCaps">INSTANCE METHODS</span></p>
+				
+				<p><code><a href="#2_1">fire</a></code> | <code><a href="#2_2">get</a></code> | <code><a href="#2_4">is</a></code> | <code><a href="#2_5">kill</a></code> | <code><a href="#2_6">met</a></code> | <code><a href="#2_7">once</a></code> | <code><a href="#2_9">set</a></code> | <code><a href="#2_10">toggle</a></code> | <code><a href="#2_11">unmet</a></code> | <code><a href="#2_12">unwire</a></code> | <code><a href="#2_13">wire</a></code></p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#3_1">Uize.Services.FileSystem.WshAdapter.fire</a></code> | <code><a href="#3_2">Uize.Services.FileSystem.WshAdapter.get</a></code> | <code><a href="#3_3">Uize.Services.FileSystem.WshAdapter.registerProperties</a></code> | <code><a href="#3_4">Uize.Services.FileSystem.WshAdapter.set</a></code> | <code><a href="#3_5">Uize.Services.FileSystem.WshAdapter.singleton</a></code> | <code><a href="#3_6">Uize.Services.FileSystem.WshAdapter.subclass</a></code> | <code><a href="#3_7">Uize.Services.FileSystem.WshAdapter.toggle</a></code> | <code><a href="#3_8">Uize.Services.FileSystem.WshAdapter.unwire</a></code> | <code><a href="#3_9">Uize.Services.FileSystem.WshAdapter.wire</a></code></p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>Uize.Services.FileSystem.WshAdapter</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Instance Methods"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>. </span>Instance Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.1. fire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_1" title="2. Instance Methods -&gt; 2.1. fire">1</a>. </span>fire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.2. get"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_2" title="2. Instance Methods -&gt; 2.2. get">2</a>. </span>get</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.3. init"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_3" title="2. Instance Methods -&gt; 2.3. init">3</a>. </span>init</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.4. is"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_4" title="2. Instance Methods -&gt; 2.4. is">4</a>. </span>is</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.5. kill"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_5" title="2. Instance Methods -&gt; 2.5. kill">5</a>. </span>kill</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.6. met"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_6" title="2. Instance Methods -&gt; 2.6. met">6</a>. </span>met</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_7"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.7. once"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_7" title="2. Instance Methods -&gt; 2.7. once">7</a>. </span>once</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_8"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.8. readFile"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_8" title="2. Instance Methods -&gt; 2.8. readFile">8</a>. </span>readFile</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_9"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.9. set"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_9" title="2. Instance Methods -&gt; 2.9. set">9</a>. </span>set</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_10"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.10. toggle"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_10" title="2. Instance Methods -&gt; 2.10. toggle">10</a>. </span>toggle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_11"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.11. unmet"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_11" title="2. Instance Methods -&gt; 2.11. unmet">11</a>. </span>unmet</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_12"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.12. unwire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_12" title="2. Instance Methods -&gt; 2.12. unwire">12</a>. </span>unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_13"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.13. wire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_13" title="2. Instance Methods -&gt; 2.13. wire">13</a>. </span>wire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_14"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.14. writeFile"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_14" title="2. Instance Methods -&gt; 2.14. writeFile">14</a>. </span>writeFile</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Methods"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.1. Uize.Services.FileSystem.WshAdapter.fire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Services.FileSystem.WshAdapter.fire">1</a>. </span>Uize.Services.FileSystem.WshAdapter.fire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.2. Uize.Services.FileSystem.WshAdapter.get"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Services.FileSystem.WshAdapter.get">2</a>. </span>Uize.Services.FileSystem.WshAdapter.get</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.3. Uize.Services.FileSystem.WshAdapter.registerProperties"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Services.FileSystem.WshAdapter.registerProperties">3</a>. </span>Uize.Services.FileSystem.WshAdapter.registerProperties</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.4. Uize.Services.FileSystem.WshAdapter.set"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_4" title="3. Static Methods -&gt; 3.4. Uize.Services.FileSystem.WshAdapter.set">4</a>. </span>Uize.Services.FileSystem.WshAdapter.set</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.5. Uize.Services.FileSystem.WshAdapter.singleton"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_5" title="3. Static Methods -&gt; 3.5. Uize.Services.FileSystem.WshAdapter.singleton">5</a>. </span>Uize.Services.FileSystem.WshAdapter.singleton</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.6. Uize.Services.FileSystem.WshAdapter.subclass"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_6" title="3. Static Methods -&gt; 3.6. Uize.Services.FileSystem.WshAdapter.subclass">6</a>. </span>Uize.Services.FileSystem.WshAdapter.subclass</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_7"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.7. Uize.Services.FileSystem.WshAdapter.toggle"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_7" title="3. Static Methods -&gt; 3.7. Uize.Services.FileSystem.WshAdapter.toggle">7</a>. </span>Uize.Services.FileSystem.WshAdapter.toggle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_8"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.8. Uize.Services.FileSystem.WshAdapter.unwire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_8" title="3. Static Methods -&gt; 3.8. Uize.Services.FileSystem.WshAdapter.unwire">8</a>. </span>Uize.Services.FileSystem.WshAdapter.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_9"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.9. Uize.Services.FileSystem.WshAdapter.wire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_9" title="3. Static Methods -&gt; 3.9. Uize.Services.FileSystem.WshAdapter.wire">9</a>. </span>Uize.Services.FileSystem.WshAdapter.wire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Static Properties"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.1. Uize.Services.FileSystem.WshAdapter.moduleName"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_1" title="4. Static Properties -&gt; 4.1. Uize.Services.FileSystem.WshAdapter.moduleName">1</a>. </span>Uize.Services.FileSystem.WshAdapter.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.2. Uize.Services.FileSystem.WshAdapter.nonInheritableStatics"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_2" title="4. Static Properties -&gt; 4.2. Uize.Services.FileSystem.WshAdapter.nonInheritableStatics">2</a>. </span>Uize.Services.FileSystem.WshAdapter.nonInheritableStatics</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

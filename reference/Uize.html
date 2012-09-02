@@ -61,7 +61,7 @@
 			<li><a href="#2">2. Static Methods</a>
 				<ul>
 					<li><a href="#2_1" title="Recurses through the arbitrarily complex object specified, calling the specified method on all values that are not nully (null or undefined).">2.1. Uize.callOn</a></li>
-					<li><a href="#2_2" title="Returns a boolean, indicating whether or not the specified value can be extended with custom properties.">2.2. Uize.canExtend</a></li>
+					<li><a href="#2_2" title="Returns a boolean, indicating whether or not the specified value is an object that can be extended with custom properties.">2.2. Uize.canExtend</a></li>
 					<li><a href="#2_3" title="Returns a string, that is the specified source string with its first letter capitalized.">2.3. Uize.capFirstChar</a></li>
 					<li><a href="#2_4" title="Returns an identical clone of the specified source object.">2.4. Uize.clone</a></li>
 					<li><a href="#2_5" title="Returns a value, being the result of constraining the specified value within the specified lower and upper limits.">2.5. Uize.constrain</a></li>
@@ -372,7 +372,7 @@
 					<p>The <code>Uize</code> module provides a number of static methods for performing commonly useful tests on values.</p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_2">Uize.canExtend</a></code> - tests if value can be extended with custom properties</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_2">Uize.canExtend</a></code> - tests if value is an object that can be extended with custom properties</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_18">Uize.inRange</a></code> - tests if value is within specified value range</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_20">Uize.isArray</a></code> - tests if value is an array</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_21">Uize.isBoolean</a></code> - tests if value is a boolean</td></tr>
@@ -675,7 +675,7 @@ if (childWidget) childWidget.insertUi ();
 		<a name="2_2"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.canExtend"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.canExtend">2</a>. </span>Uize.canExtend</h2>
 		<div class="contents2">
-			<p>Returns a boolean, indicating whether or not the specified value can be extended with custom properties.</p>
+			<p>Returns a boolean, indicating whether or not the specified value is an object that can be extended with custom properties.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			

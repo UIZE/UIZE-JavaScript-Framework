@@ -37,7 +37,7 @@
 							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
 							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
 							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
-							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_4" title="Uize.Services.FileSystem.WshAdapter">1.2.4. Modules Directly Under This Namespace</a></li>
 							<li><a href="#1_2_5" title="The Uize.Services.FileSystem module is unit tested by the Uize.Test.Uize.Services.FileSystem test module.">1.2.5. Unit Tests</a></li>
 						</ul>
 					</li>
@@ -45,8 +45,17 @@
 			</li>
 			<li><a href="#2">2. Instance Methods</a>
 				<ul>
-					<li><a href="#2_1" title="document...">2.1. readFile</a></li>
-					<li><a href="#2_2" title="document...">2.2. writeFile</a></li>
+					<li><a href="#2_1" title="document...">2.1. init</a></li>
+					<li><a href="#2_2" title="document...">2.2. readFile</a>
+						<ul>
+							<li><a href="#2_2_1">2.2.1. Params</a>
+								<ul>
+									<li><a href="#2_2_1_1" title="document...">2.2.1.1. path</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#2_3" title="document...">2.3. writeFile</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Static Properties</a>
@@ -109,7 +118,7 @@
 			<a name="1_2_4"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
 			<div class="contents3">
-				<p>There are no modules directly under this namespace.</p>
+				<p><code><a href="../reference/Uize.Services.FileSystem.WshAdapter.html">Uize.Services.FileSystem.WshAdapter</a></code></p>
 			</div>
 			
 			<a name="1_2_5"></a>
@@ -124,13 +133,35 @@
 	<h1 class="heading1" title="2. Instance Methods"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>. </span>Instance Methods</h1>
 	<div class="contents1">
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.1. readFile"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_1" title="2. Instance Methods -&gt; 2.1. readFile">1</a>. </span>readFile</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.1. init"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_1" title="2. Instance Methods -&gt; 2.1. init">1</a>. </span>init</h2>
 		<div class="contents2">
 			<p>document...</p>
 		</div>
 		
 		<a name="2_2"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.2. writeFile"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_2" title="2. Instance Methods -&gt; 2.2. writeFile">2</a>. </span>writeFile</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.2. readFile"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_2" title="2. Instance Methods -&gt; 2.2. readFile">2</a>. </span>readFile</h2>
+		<div class="contents2">
+			<p>document...</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">fileContentsSTR = fileSystemInstance.readFile (paramsOBJ,callbackFUNC,errbackFUNC);
+</pre>
+			
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Instance Methods -&gt; 2.2. readFile -&gt; 2.2.1. Params"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_2" title="2. Instance Methods -&gt; 2.2. readFile">2</a>.<a href="#2_2_1" title="2. Instance Methods -&gt; 2.2. readFile -&gt; 2.2.1. Params">1</a>. </span>Params</h3>
+			<div class="contents3">
+				<a name="2_2_1_1"></a>
+				<h4 class="heading4" title="2. Instance Methods -&gt; 2.2. readFile -&gt; 2.2.1. Params -&gt; 2.2.1.1. path"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_2" title="2. Instance Methods -&gt; 2.2. readFile">2</a>.<a href="#2_2_1" title="2. Instance Methods -&gt; 2.2. readFile -&gt; 2.2.1. Params">1</a>.<a href="#2_2_1_1" title="2. Instance Methods -&gt; 2.2. readFile -&gt; 2.2.1. Params -&gt; 2.2.1.1. path">1</a>. </span>path</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+			</div>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.3. writeFile"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_3" title="2. Instance Methods -&gt; 2.3. writeFile">3</a>. </span>writeFile</h2>
 		<div class="contents2">
 			<p>document...</p>
 		</div>

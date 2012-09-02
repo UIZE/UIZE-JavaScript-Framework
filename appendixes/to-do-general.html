@@ -61,7 +61,7 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#6_2" title="Uize.module ({&#10;	org: &apos;zazzle&apos;,&#10;	name: &apos;Zazzle.Foo.Bar&apos;,&#10;	builder: function () {&#10;		// build and return the module&#10;	}&#10;});&#10;">6.2. Uize.module And Uize.require as Syntactical Sugar</a></li>
+					<li><a href="#6_2" title="Uize.module ({&#10;	org: &apos;MyCompany&apos;,&#10;	name: &apos;MyCompany.Foo.Bar&apos;,&#10;	builder: function () {&#10;		// build and return the module&#10;	}&#10;});&#10;">6.2. Uize.module And Uize.require as Syntactical Sugar</a></li>
 				</ul>
 			</li>
 			<li><a href="#7">7. Version Support in Module Mechanism</a>
@@ -133,7 +133,7 @@
 					<li><a href="#10_2" title="BEFORE">10.2. Example 2</a></li>
 					<li><a href="#10_3">10.3. What All Can Services Replace or Do?</a>
 						<ul>
-							<li><a href="#10_3_1" title="- should something like a login service">10.3.1. - things like ensureLoggedIn & ensure (becomes login and services)</a></li>
+							<li><a href="#10_3_1" title="- should be something like a login service">10.3.1. - things like ensureLoggedIn & ensure (becomes login and services)</a></li>
 						</ul>
 					</li>
 					<li><a href="#10_4" title="Look at the example of enableProfile.">10.4. Dynamically Load Client Code Supporting Service</a></li>
@@ -201,18 +201,11 @@
 			<li><a href="#20" title="Make sure that all setting of properties is done through the set method (ie. no more adhoc setting by assigning using the private name). Use a regular expression to search through the code.">20. Only Use set Method For Changing Property Values</a>
 				<ul>
 					<li><a href="#20_1" title="To find most cases...">20.1. How to Find Offending Cases</a></li>
-					<li><a href="#20_2">20.2. Issues found</a>
-						<ul>
-							<li><a href="#20_2_1" title="width and height being set when ratio locked - in onChange handler, so need to do some tricky dance moves.">20.2.1. Zazzle.ControlCustomShape</a></li>
-							<li><a href="#20_2_2" title="This one&apos;s tricky, assuming that a bunch of thought has already done into why it is the way it is.">20.2.2. Zazzle.ControlPoptions</a></li>
-							<li><a href="#20_2_3" title="Another tricky one...">20.2.3. Zazzle.ControlPoptionsShared</a></li>
-						</ul>
-					</li>
 				</ul>
 			</li>
 			<li><a href="#21" title="- a simple value, to which the value being tested should be compared for equality">21. - factor out code for validating a value, where the validator can be...</a>
 				<ul>
-					<li><a href="#21_1" title="- C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.FormElement.js">21.1. - could be used...</a></li>
+					<li><a href="#21_1" title="- Uize (modify Uize.recordMatches)">21.1. - could be used...</a></li>
 				</ul>
 			</li>
 			<li><a href="#22">22. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)</a>
@@ -539,9 +532,9 @@ this [_myMethod] ();        // calling instance method
 			
 			
 <pre class="sample-code">Uize.provide (
-  {type: 'module', org: 'Zazzle'},
+  {type: 'module', org: 'MyCompany'},
   function (needed, deliver) {
-    // code here to load Zazzle modules
+    // code here to load MyCompany modules
   }
 );
 </pre>
@@ -565,8 +558,8 @@ this [_myMethod] ();        // calling instance method
 		<div class="contents2">
 			
 <pre class="sample-code">Uize.module ({
-  org: 'zazzle',
-  name: 'Zazzle.Foo.Bar',
+  org: 'MyCompany',
+  name: 'MyCompany.Foo.Bar',
   builder: function () {
     // build and return the module
   }
@@ -576,8 +569,8 @@ this [_myMethod] ();        // calling instance method
 			
 <pre class="sample-code">Uize.require (
   {
-    org: 'zazzle',
-    name: 'Zazzle.Foo.Bar'
+    org: 'MyCompany',
+    name: 'MyCompany.Foo.Bar'
   },
   function (Zazzle_Foo_Bar) {
 
@@ -587,7 +580,7 @@ this [_myMethod] ();        // calling instance method
 			
 			
 <pre class="sample-code">Uize.require(
-  'zazzle:Zazzle.Foo.Bar',
+  'MyCompany:MyCompany.Foo.Bar',
   function () {
   }
 );
@@ -1058,7 +1051,7 @@ myWidget.service ('enableProfile',function () {});
 			<h3 class="heading3" title="10. Client Services -&gt; 10.3. What All Can Services Replace or Do? -&gt; 10.3.1. - things like ensureLoggedIn &amp; ensure (becomes login and services)"><span class="headingNumber"><a href="#10" title="10. Client Services">10</a>.<a href="#10_3" title="10. Client Services -&gt; 10.3. What All Can Services Replace or Do?">3</a>.<a href="#10_3_1" title="10. Client Services -&gt; 10.3. What All Can Services Replace or Do? -&gt; 10.3.1. - things like ensureLoggedIn &amp; ensure (becomes login and services)">1</a>. </span>- things like ensureLoggedIn & ensure (becomes login and services)</h3>
 			<div class="contents3">
 				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should something like a login service</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should be something like a login service</td></tr>
 				</table>
 			</div>
 			
@@ -1086,7 +1079,7 @@ myWidget.service ('enableProfile',function () {});
 <pre class="sample-code">{
   service:serviceNameSTR,
   module:moduleNameSTR,
-  methodName:
+  methodName:methodNameSTR
 }
 </pre>
 			
@@ -1617,46 +1610,6 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 			
 			<p>...or write a build script that scans through JS files, determines private names of registered properties, and then uses those names in generated regular expressions to find direct assignments.</p>
 		</div>
-		
-		<a name="20_2"></a>
-		<h2 class="heading2" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found"><span class="headingNumber"><a href="#20" title="20. Only Use set Method For Changing Property Values">20</a>.<a href="#20_2" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found">2</a>. </span>Issues found</h2>
-		<div class="contents2">
-			<a name="20_2_1"></a>
-			<h3 class="heading3" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found -&gt; 20.2.1. Zazzle.ControlCustomShape"><span class="headingNumber"><a href="#20" title="20. Only Use set Method For Changing Property Values">20</a>.<a href="#20_2" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found">2</a>.<a href="#20_2_1" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found -&gt; 20.2.1. Zazzle.ControlCustomShape">1</a>. </span>Zazzle.ControlCustomShape</h3>
-			<div class="contents3">
-				<p><code>width</code> and <code>height</code> being set when ratio locked - in onChange handler, so need to do some tricky dance moves.</p>
-				
-				<p><span class="allCaps">FILE</span></p>
-				
-				
-<pre class="sample-code">C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.ControlCustomShape.js
-</pre>
-			</div>
-			
-			<a name="20_2_2"></a>
-			<h3 class="heading3" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found -&gt; 20.2.2. Zazzle.ControlPoptions"><span class="headingNumber"><a href="#20" title="20. Only Use set Method For Changing Property Values">20</a>.<a href="#20_2" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found">2</a>.<a href="#20_2_2" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found -&gt; 20.2.2. Zazzle.ControlPoptions">2</a>. </span>Zazzle.ControlPoptions</h3>
-			<div class="contents3">
-				<p>This one's tricky, assuming that a bunch of thought has already done into why it is the way it is.</p>
-				
-				<p><span class="allCaps">FILE</span></p>
-				
-				
-<pre class="sample-code">C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.ControlPoptions.js
-</pre>
-			</div>
-			
-			<a name="20_2_3"></a>
-			<h3 class="heading3" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found -&gt; 20.2.3. Zazzle.ControlPoptionsShared"><span class="headingNumber"><a href="#20" title="20. Only Use set Method For Changing Property Values">20</a>.<a href="#20_2" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found">2</a>.<a href="#20_2_3" title="20. Only Use set Method For Changing Property Values -&gt; 20.2. Issues found -&gt; 20.2.3. Zazzle.ControlPoptionsShared">3</a>. </span>Zazzle.ControlPoptionsShared</h3>
-			<div class="contents3">
-				<p>Another tricky one...</p>
-				
-				<p><span class="allCaps">FILE</span></p>
-				
-				
-<pre class="sample-code">C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.ControlPoptionsShared.js
-</pre>
-			</div>
-		</div>
 	</div>
 	
 	<a name="21"></a>
@@ -1673,7 +1626,6 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		<h2 class="heading2" title="21. - factor out code for validating a value, where the validator can be... -&gt; 21.1. - could be used..."><span class="headingNumber"><a href="#21" title="21. - factor out code for validating a value, where the validator can be...">21</a>.<a href="#21_1" title="21. - factor out code for validating a value, where the validator can be... -&gt; 21.1. - could be used...">1</a>. </span>- could be used...</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.FormElement.js</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize (modify Uize.recordMatches)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Node.find</td></tr>
 			</table>

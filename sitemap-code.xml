@@ -427,6 +427,13 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Service.Adapter.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Service.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -435,6 +442,13 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Services.FileSystem.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Services.FileSystem.WshAdapter.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>

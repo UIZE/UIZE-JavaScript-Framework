@@ -79,9 +79,13 @@ Uize.module ({
 							Edge:0
 						}
 					},
-					Service:0,
+					Service:{
+						Adapter:0
+					},
 					Services:{
-						FileSystem:0
+						FileSystem:{
+							WshAdapter:0
+						}
 					},
 					String:{
 						Builder:0,
