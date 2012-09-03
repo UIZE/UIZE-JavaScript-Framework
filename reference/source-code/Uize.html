@@ -129,6 +129,7 @@
           - =Uize.module= - lets you declare a JavaScript module that can be required by other JavaScript modules
           - =Uize.moduleLoader= - loads a JavaScript module (specified by its module name)
           - =Uize.moduleUrlResolver= - resolves the specified JavaScript module name to a URL path
+          - =Uize.require= -
           - =Uize.toString= - provides summary info for the module on which the method is called
 */
 
@@ -147,6 +148,7 @@
       _false = false,
       _true = true,
       _null = null,
+      _trueFlag = {},
       _ObjectToString = Object.prototype.toString
     ;
 
@@ -154,14 +156,9 @@
     var
       _uizeGuids = 0,
       _sacredEmptyArray = [],
-      _modulePathToken = '[#modulePath]',
       _scriptParentNode,
       _interpreterSupportsArrayForEach = !!_Array.forEach,
-      _interpreterSupportsArrayIndexOf = !!(_Array.indexOf &amp;&amp; _Array.lastIndexOf),
-
-      /*** for module loading mechanism ***/
-        _moduleLoadHandlers = {},
-        _modulesByName = {Uize:_package}
+      _interpreterSupportsArrayIndexOf = !!(_Array.indexOf &amp;&amp; _Array.lastIndexOf)
     ;
 
   /*** Utility Functions ***/
@@ -1710,65 +1707,6 @@
             NOTES
             - see the related =Uize.isNully= static method
             - see also the other `useful value transformers`
-      */
-    };
-
-    var _getModuleByName = _package.getModuleByName = function (_moduleName) {
-      var _module;
-      return (
-        _modulesByName [_moduleName] ||
-        (_moduleName == '*' &amp;&amp; _modulesByName) ||
-        (
-          (_module = (new _Function ('try {return ' + _moduleName + '} catch (e) {}')) ()) &amp;&amp;
-          (_modulesByName [_moduleName] = _module)
-        )
-      );
-      /*?
-        Static Methods
-          Uize.getModuleByName
-            Returns an object reference, being a reference to the module of the specified name, or returns the value =undefined= if no such module is defined.
-
-            SYNTAX
-            .................................................
-            moduleOBJ = Uize.getModuleByName (moduleNameSTR);
-            .................................................
-
-            EXAMPLE
-            ........................................................................................
-            alert (Uize.Widget == Uize.getModuleByName ('Uize.Widget');  // displays the text "true"
-            ........................................................................................
-
-            In the above example, sssuming that the =Uize.Widget= module is loaded at the time that the code is executed, the =alert= statement will display the text "true".
-
-            Graceful Failure
-              The =Uize.getModuleByName= method is designed to always fail silently when a specified module is not defined.
-
-              Take the example of a module with the name =MyNamespace.MyClass.MySubclass=. Such a module may not be defined because either =MyNamespace=, =MyNamespace.MyClass=, or =MyNamespace.MyClass.MySubclass= is not defined. Now, normally when you try to dereference =MyNamespace.MyClass.MySubclass= and =MyNamespace= is not defined, you'll get a runtime error. The =Uize.getModuleByName= method handles this and makes it always safe to resolve modules names to modules. In cases where a module path is not defined at some level, the method will simply return the value =undefined=.
-
-            VARIATION
-            ..............................................
-            modulesByNameOBJ = Uize.getModuleByName ('*');
-            ..............................................
-
-            When the special value ='*'= (wildcard character) is specified for the =moduleNameSTR= parameter, then the =Uize.getModuleByName= method returns an object that serves as a lookup table for all the modules that have been built, where each property's name is the name of a module and each property's value is a reference to the module.
-
-            Module name to module reference mappings are added to the object in the order in which the modules are built. Therefore, if you write a =for...in= loop to iterate through the properties of the object, then you can build up an array of the names of the modules that have been built, in the correct dependency order. And if you execute such code in a Web page, then you can build up a list of all the modules that were built for that page. If the page only loads in a few modules using =script= tags that are in the page's initial HTML, then the list resulting from executing your code will give an indication of how many additional modules were loaded in dynamically by the module loader mechanism. The list of all the modules built on a page can be used as the basis for creating a JavaScript library file (see [[../explainers/javascript-libraries.html][JavaScript Libraries]]).
-
-            EXAMPLE
-            ..............................................
-            var
-              modulesByName = Uize.getModuleByName ('*'),
-              modulesBuilt = []
-            ;
-            for (var moduleName in modulesByName) {
-              modulesBuilt.push (moduleName)
-            }
-            ..............................................
-
-            After the above code has been executed, the =modulesBuilt= array will contain the names of all the modules that have been built, listed in the order in which they were built.
-
-            NOTES
-            - see also the other `module mechanism methods`
       */
     };
 
@@ -4008,246 +3946,400 @@
             - see also the other `dummy functions`
       */
 
-    var _resolveModuleDefinition = _package.resolveModuleDefinition = function (_definition) {
+    /*** Barrier object ***/
       var
-        _name = _definition.name = _definition.name || '',
-        _host = _definition.host = _name.substr (0,_name.lastIndexOf ('.')),
-        _superclass = _definition.superclass = _definition.superclass || _host,
-        _required = _definition.required
+        _Barrier = function () {
+          var _this = this;
+          _this._doneLookup = {};
+          _this._doneResults = {};
+          _this._doneHandlers = {};
+        },
+        _BarrierPrototype = _Barrier.prototype
       ;
-      _required = _definition.required = _isString (_required) ? _required.split (',') : _required || [];
-      _host &amp;&amp; _required.push (_host);
-      _superclass != _host &amp;&amp; _required.push (_superclass);
 
-      return _definition;
-      /*?
-        Static Methods
-          Uize.resolveModuleDefinition
-            Resolves the specified module definition object by defaulting its properties and expanding them as necessary, modifying and returning the original definition object.
+      _BarrierPrototype.done = function (_condition,_result) {
+        var
+          _this = this,
+          _doneHandlers = _this._doneHandlers [_condition]
+        ;
+        _this._doneLookup [_condition] = _trueFlag;
+        _this._doneResults [_condition] = _result;
+        if (_doneHandlers) {
+          delete _this._doneHandlers [_condition];
+          for (
+            var _doneHandlerNo = -1, _doneHandlersLength = _doneHandlers.length;
+            ++_doneHandlerNo &lt; _doneHandlersLength;
+          )
+            _doneHandlers [_doneHandlerNo] (_result)
+          ;
+        }
+      };
 
-            SYNTAX
-            .........................................................................
-            moduleDefinitionOBJ = Uize.resolveModuleDefinition (moduleDefinitionOBJ);
-            .........................................................................
+      _BarrierPrototype.once = function (_conditions,_handler) {
+        var _this = this;
+        if (_isList (_conditions) &amp;&amp; _conditions.length &lt; 2)
+          _conditions = _conditions [0]
+        ;
+        if (_conditions == _undefined) {
+          _handler ();
+        } else if (_isList (_conditions)) {
+          var
+            _results = [],
+            _conditionsLength = _conditions.length,
+            _conditionsDone = 0
+          ;
+          _forEach (
+            _conditions,
+            function (_condition,_conditionNo) {
+              _this.once (
+                _condition,
+                function (_result) {
+                  _results [_conditionNo] = _result;
+                  (++_conditionsDone == _conditionsLength) &amp;&amp; _handler.apply (0,_results);
+                }
+              );
+            }
+          );
+        } else {
+          _this._doneLookup [_conditions] == _trueFlag
+            ? _handler (_this._doneResults [_conditions])
+            : (_this._doneHandlers [_conditions] || (_this._doneHandlers [_conditions] = [])).push (_handler)
+          ;
+        }
+      };
 
-            The =Uize.resolveModuleDefinition= method is not intended for use in general application development but is intended for specialized build processes, such as dependency tracing performed during the creation of JavaScript packages.
-
-            For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
-
-            NOTES
-            - see also the other `module mechanism methods`
-      */
-    };
-
-    _package.module = function (_definition) {
-      _resolveModuleDefinition (_definition);
-
-       var
-        _name = _definition.name,
-        _modulesToLoad = []
+    /*** Module Mechanism ***/
+      var
+        _modulePathToken = '[#modulePath]',
+        _modulesByName = {},
+        _moduleDefinitionsClaimed = {},
+        _modulesAlreadyInvoked = {},
+        _modulesLoadedBarrier = new _Barrier ()
       ;
-      _moduleLoadHandlers [_name] || (_moduleLoadHandlers [_name] = []);
-        /* NOTE:
-          If a named module is declared inline, and another module requires that module further down in the same page, then that subsequent module declaration will know to wait on the successful building of the first module, because the presence of a handlers array for a particular module is regarded as an indication that code is busy waiting on building of that module. This behavior also supports library modules, where individual modules are declared inline inside the library module.
+
+      var _getModuleByName = _package.getModuleByName = function (_moduleName) {
+        var _module;
+        return (
+          _modulesByName [_moduleName] ||
+          (_moduleName == '*' &amp;&amp; _modulesByName) ||
+          (
+            (_module = (new _Function ('try {return ' + _moduleName + '} catch (e) {}')) ()) &amp;&amp;
+            (_modulesByName [_moduleName] = _module)
+          )
+        );
+        /*?
+          Static Methods
+            Uize.getModuleByName
+              Returns an object reference, being a reference to the module of the specified name, or returns the value =undefined= if no such module is defined.
+
+              SYNTAX
+              .................................................
+              moduleOBJ = Uize.getModuleByName (moduleNameSTR);
+              .................................................
+
+              EXAMPLE
+              ........................................................................................
+              alert (Uize.Widget == Uize.getModuleByName ('Uize.Widget');  // displays the text "true"
+              ........................................................................................
+
+              In the above example, sssuming that the =Uize.Widget= module is loaded at the time that the code is executed, the =alert= statement will display the text "true".
+
+              Graceful Failure
+                The =Uize.getModuleByName= method is designed to always fail silently when a specified module is not defined.
+
+                Take the example of a module with the name =MyNamespace.MyClass.MySubclass=. Such a module may not be defined because either =MyNamespace=, =MyNamespace.MyClass=, or =MyNamespace.MyClass.MySubclass= is not defined. Now, normally when you try to dereference =MyNamespace.MyClass.MySubclass= and =MyNamespace= is not defined, you'll get a runtime error. The =Uize.getModuleByName= method handles this and makes it always safe to resolve modules names to modules. In cases where a module path is not defined at some level, the method will simply return the value =undefined=.
+
+              VARIATION
+              ..............................................
+              modulesByNameOBJ = Uize.getModuleByName ('*');
+              ..............................................
+
+              When the special value ='*'= (wildcard character) is specified for the =moduleNameSTR= parameter, then the =Uize.getModuleByName= method returns an object that serves as a lookup table for all the modules that have been built, where each property's name is the name of a module and each property's value is a reference to the module.
+
+              Module name to module reference mappings are added to the object in the order in which the modules are built. Therefore, if you write a =for...in= loop to iterate through the properties of the object, then you can build up an array of the names of the modules that have been built, in the correct dependency order. And if you execute such code in a Web page, then you can build up a list of all the modules that were built for that page. If the page only loads in a few modules using =script= tags that are in the page's initial HTML, then the list resulting from executing your code will give an indication of how many additional modules were loaded in dynamically by the module loader mechanism. The list of all the modules built on a page can be used as the basis for creating a JavaScript library file (see [[../explainers/javascript-libraries.html][JavaScript Libraries]]).
+
+              EXAMPLE
+              ..............................................
+              var
+                modulesByName = Uize.getModuleByName ('*'),
+                modulesBuilt = []
+              ;
+              for (var moduleName in modulesByName) {
+                modulesBuilt.push (moduleName)
+              }
+              ..............................................
+
+              After the above code has been executed, the =modulesBuilt= array will contain the names of all the modules that have been built, listed in the order in which they were built.
+
+              NOTES
+              - see also the other `module mechanism methods`
         */
+      };
 
-      /*** determine which required modules are not already loaded ***/
+      var _resolveModuleDefinition = _package.resolveModuleDefinition = function (_definition) {
+        var
+          _name = _definition.name = _definition.name || '',
+          _host = _definition.host = _name.substr (0,_name.lastIndexOf ('.')),
+          _superclass = _definition.superclass = _definition.superclass || _host,
+          _required = _definition.required
+        ;
+        _required = _definition.required = _isString (_required) ? _required.split (',') : _required || [];
+        _host &amp;&amp; _required.push (_host);
+        _superclass != _host &amp;&amp; _required.push (_superclass);
+
+        return _definition;
+        /*?
+          Static Methods
+            Uize.resolveModuleDefinition
+              Resolves the specified module definition object by defaulting its properties and expanding them as necessary, modifying and returning the original definition object.
+
+              SYNTAX
+              .........................................................................
+              moduleDefinitionOBJ = Uize.resolveModuleDefinition (moduleDefinitionOBJ);
+              .........................................................................
+
+              The =Uize.resolveModuleDefinition= method is not intended for use in general application development but is intended for specialized build processes, such as dependency tracing performed during the creation of JavaScript packages.
+
+              For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+
+              NOTES
+              - see also the other `module mechanism methods`
+        */
+      };
+
+      _package.require = function (_modules,_callback) {
+        if (typeof _modules == _typeString)
+          _modules = [_modules]
+        ;
+        _callback &amp;&amp; _modulesLoadedBarrier.once (_modules,_callback);
         _forEach (
-          _definition.required,
-          function (_requiredModule) {
-            _requiredModule &amp;&amp; !_getModuleByName (_requiredModule) &amp;&amp; _modulesToLoad.push (_requiredModule);
+          _modules,
+          function (_module) {
+            if (_modulesAlreadyInvoked [_module] != _trueFlag) {
+              _modulesAlreadyInvoked [_module] = _trueFlag;
+              _package.moduleLoader (_module,function (_moduleCode) {_moduleCode &amp;&amp; _globalEval (_moduleCode)})
+            }
           }
         );
-
-      /*** load modules (if necessary) ***/
-        function _handleModuleLoaded (_module) {
-          _forEach (_moduleLoadHandlers [_module],function (_loadHandler) {_loadHandler ()});
-          delete _moduleLoadHandlers [_module];
-        }
-
-        function _buildModule () {
-          var
-            _builder = _definition.builder,
-            _module = _builder &amp;&amp; _builder (_getModuleByName (_definition.superclass))
-          ;
-          _name &amp;&amp;
-            (new _Function ('m',_name + '=m')) (_module = _modulesByName [_name] = _module || function () {})
-          ;
-          if (_isFunction (_module)) {
-            _module.moduleName = _name;
-            if (!_module.subclass)
-              /* NOTE:
-                if the module is not a Uize class (like a package or something else), assign the toString instrinsic method, because it won't be obtained by subclassing (since there is none)
-              */
-              _module.toString = _toString
-            ;
-          }
-          _handleModuleLoaded (_name);
-        }
-
-        var _modulesToLoadLength = _modulesToLoad.length;
-        if (_modulesToLoadLength) {
-          var _moduleLoader = _package.moduleLoader;
-          if (_moduleLoader) {
-            var _moduleToLoadNo = -1;
-            function _loadNextModule () {
-              _moduleToLoadNo++;
-              if (_moduleToLoadNo &lt; _modulesToLoadLength) {
-                var _moduleToLoad = _modulesToLoad [_moduleToLoadNo];
-                _getModuleByName (_moduleToLoad)
-                  ? _loadNextModule ()
-                  : _moduleLoadHandlers [_moduleToLoad]
-                    ? _moduleLoadHandlers [_moduleToLoad].push (_loadNextModule)
-                    : _moduleLoader (
-                      _moduleToLoad,
-                      function (_moduleToLoadCode) {
-                        if (_getModuleByName (_moduleToLoad)) {
-                          _loadNextModule ();
-                          /* NOTE:
-                            This additional check is important, because another asynchronous chain could have resulted in this module becoming loaded in between the call to _moduleLoader and the response.
-                          */
-                        } else {
-                          _moduleToLoadCode &amp;&amp; _globalEval (_moduleToLoadCode);
-                          if (_getModuleByName (_moduleToLoad)) {
-                            _handleModuleLoaded (_moduleToLoad);
-                            _loadNextModule ();
-                          } else {
-                            (
-                              _moduleLoadHandlers [_moduleToLoad] ||
-                              (_moduleLoadHandlers [_moduleToLoad] = [])
-                            ).push (_loadNextModule);
-                          }
-                        }
-                      }
-                    )
-                ;
-              } else {
-                _buildModule ();
-              }
-            }
-            _loadNextModule ();
-          } else {
-            /*
-              OK, so the alert is problematic at this point because there are some modules that are only used for their static methods, and in that usage the dependencies that they would have, if one was creating instances of them, do not apply, yet these dependencies are now being imposed on pages that use these modules.
-
-              alert (
-                'The following modules are required, but have not been loaded...\n\n' +
-                _modulesToLoad.join (', ') + '\n\n' +
-                'As a result, this application may not function correctly.'
-              );
-            */
-            _buildModule ();
-          }
-        } else {
-          _buildModule ();
-        }
-      /*?
-        Static Methods
-          Uize.module
-            Lets you declare a module in the UIZE JavaScript Framework.
-
-            SYNTAX
-            ......................................................................................
-            Uize.module ({
-              name:moduleNameSTR,           // omit for anonymous modules
-              superclass:superclassNameSTR, // omit for package modules, or if host is superclass
-              required:modulesSTRorARRAY,   // omit when only host and superclass are required
-              builder:builderFUNC           // omit for library modules and namespace modules
-            });
-            ......................................................................................
-
-            For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
-
-            NOTES
-            - see also the =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
-            - see also the other `module mechanism methods`
-      */
-    };
-
-    _package.moduleLoader = function (_moduleToLoad,_callback) {
-      _callback ();
-        /* NOTE:
-          by returning no code, the modules loader code sees that the module is not defined after eval'ing the empty string and is tricked into thinking that the module had further dependencies, when in actual fact a script tag was put into the page. The effect is that a callback is registered by the modules loader code so that when the module is successfully declared and built through its Uize.module call, then any stalled module loading is continued.
+        /*?
+          Static Methods
+            Uize.require
+              document...
         */
+      };
 
-      /*** insert the script tag ***/
+      _package.module = function (_definition) {
+        var _name = _resolveModuleDefinition (_definition).name;
+        if (!_name || _moduleDefinitionsClaimed [_name] != _trueFlag) {
+          _moduleDefinitionsClaimed [_name] = _modulesAlreadyInvoked [_name] = _trueFlag;
+          _package.require (
+            _definition.required,
+            function () {
+              var _module = (_definition.builder || _package.nop) (_getModuleByName (_definition.superclass));
+              _name &amp;&amp;
+                (new _Function ('m',_name + '=m')) (
+                  _module = _modulesByName [_name] = _module || function () {}
+                )
+              ;
+              if (_isFunction (_module)) {
+                _module.moduleName = _name;
+                if (!_module.subclass)
+                  /* NOTE:
+                    if the module is not a Uize class (like a package or something else), assign the toString instrinsic method, because it won't be obtained by subclassing (since there is none)
+                  */
+                  _module.toString = function () {
+                    var
+                      _this = this,
+                      _moduleName = _getClass (_this).moduleName,
+                      _isClass = _this.subclass
+                    ;
+                    return (
+                      '[' +
+                        (
+                          _isInstance (_this) || (!_isClass &amp;&amp; !_moduleName)
+                            ? _typeObject
+                            : _isClass ? 'class' : 'package'
+                        ) +
+                        ' ' + (_moduleName || 'Function') +
+                      ']'
+                    );
+                    /*?
+                      Static Methods
+                        Uize.toString
+                          Returns a string, providing summary info for the class on which the method is called.
+
+                          SYNTAX
+                          ......................................
+                          classSummarySTR = MyClass.toString ();
+                          ......................................
+
+                          The string returned by this method provides a summary that includes the class' name and the state of its state properties. Among other things, this method provides a convenient and lightweight way to gather information about =Uize.Class= subclasses during debugging and troubleshooting. The =Uize.toString= static intrinsic method is invoked automatically in certain contexts in order to convert a class reference to a string form, such as when alerting a class using the =alert= global function.
+
+                          EXAMPLE
+                          ...................................
+                          alert (page.children.slider.Class);
+                          ...................................
+
+                          In the above example, if the =page= widget has a =slider= child widget that is an instance of the class =Uize.Widget.Bar.Slider=, then the output of the =alert= statement could look something like...
+
+                          EXAMPLE OUTPUT
+                          ..................................
+                          [class Uize.Widget.Bar.Slider]
+
+                          built : true
+                          busy : inherit
+                          busyInherited : false
+                          confirm : undefined
+                          container : undefined
+                          decimalPlacesToDisplay : undefined
+                          enabled : inherit
+                          enabledInherited : true
+                          html : undefined
+                          idPrefix : undefined
+                          idPrefixConstruction : undefined
+                          inDrag : false
+                          increments : 1
+                          inform : undefined
+                          insertionMode: undefined
+                          localized : undefined
+                          maxValidValue : undefined
+                          maxValue : 100
+                          minValidValue : undefined
+                          minValue : 0
+                          name : undefined
+                          nodeMap : undefined
+                          orientation : vertical
+                          parent : undefined
+                          restTime : 250
+                          scaleFunc : [object Function]
+                          value : 0
+                          valueFunc : [object Function]
+                          wired : false
+                          ..................................
+
+                          In certain contexts, providing a reference to a =Uize.Class= subclass as a parameter to some method will result in the =Uize.Class.valueOf= static intrinsic method of that class being invoked in order to coerce it to a simple value. If it is your desire to have the class summary be used rather than the class' value, then you should explicitly call the =Uize.toString= static intrinsic method, as follows...
+
+                          EXAMPLE
+                          ........................................................................
+                          Uize.Node.setInnerHtml ('classSummaryForDebug',page.children.slider.Class.toString ());
+                          Uize.Node.setInnerHtml ('classCurrentValue',page.children.slider.Class);
+                          ........................................................................
+
+                          In this example, the =classSummaryForDebug= node will contain the summary info for the =Uize.Widget.Bar.Slider= class, while the =classCurrentValue= node will just show the class' current value.
+
+                          NOTES
+                          - see also the other `module mechanism methods`
+                    */
+                  }
+                ;
+              }
+              _modulesLoadedBarrier.done (_name,_module);
+            }
+          );
+        }
+        /*?
+          Static Methods
+            Uize.module
+              Lets you declare a module in the UIZE JavaScript Framework.
+
+              SYNTAX
+              ......................................................................................
+              Uize.module ({
+                name:moduleNameSTR,           // omit for anonymous modules
+                superclass:superclassNameSTR, // omit for package modules, or if host is superclass
+                required:modulesSTRorARRAY,   // omit when only host and superclass are required
+                builder:builderFUNC           // omit for library modules and namespace modules
+              });
+              ......................................................................................
+
+              For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+
+              NOTES
+              - see also the =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
+              - see also the other `module mechanism methods`
+        */
+      };
+
+      _package.module ({name:'Uize',builder:function () {return _package}});
+
+      _package.moduleLoader = function (_moduleToLoad,_callback) {
         var _scriptNode = document.createElement ('script');
+        _scriptNode.async = true;
         _scriptNode.type = 'text/javascript';
         _scriptNode.src = _package.moduleUrlResolver (_moduleToLoad);
         (_scriptParentNode || (_scriptParentNode = document.getElementsByTagName ('HEAD') [0])).appendChild (
           _scriptNode
         );
+        /*?
+          Static Methods
+            Uize.moduleLoader
+              Loads the specified JavaScript module (specified by its module name) and calls the specified callback function once the module has been loaded.
 
-      /*?
-        Static Methods
-          Uize.moduleLoader
-            Loads the specified JavaScript module (specified by its module name) and calls the specified callback function once the module has been loaded.
+              SYNTAX
+              ...............................................
+              Uize.moduleLoader (moduleNameSTR,callbackFUNC);
+              ...............................................
 
-            SYNTAX
-            ...............................................
-            Uize.moduleLoader (moduleNameSTR,callbackFUNC);
-            ...............................................
+              The callback specified by the =callbackFUNC= parameter is called with a single parameter that represents the code of the module specified by the =moduleNameSTR= parameter, unless the module loader loads modules by adding =script= tags to the page (in which case the callback is called with no parameters).
 
-            The callback specified by the =callbackFUNC= parameter is called with a single parameter that represents the code of the module specified by the =moduleNameSTR= parameter, unless the module loader loads modules by adding =script= tags to the page (in which case the callback is called with no parameters).
+              EXAMPLE
+              .................................................................................
+              Uize.moduleLoader = function (_moduleToLoad,_callback) {
+                _this._commObject.request ({
+                  url:[_this.get ('env').service + 'getjs',{filename:_moduleToLoad + '.js'}],
+                  returnType:'json',
+                  requestMethod:'GET',
+                  callback:function (_responseObject) {
+                    _callback (_responseObject.moduleCode);
+                  }
+                });
+              };
+              .................................................................................
 
-            EXAMPLE
-            .................................................................................
-            Uize.moduleLoader = function (_moduleToLoad,_callback) {
-              _this._commObject.request ({
-                url:[_this.get ('env').service + 'getjs',{filename:_moduleToLoad + '.js'}],
-                returnType:'json',
-                requestMethod:'GET',
-                callback:function (_responseObject) {
-                  _callback (_responseObject.moduleCode);
-                }
-              });
-            };
-            .................................................................................
+              For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
 
-            For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+              NOTES
+              - see the related =Uize.moduleUrlResolver= static method and the =Uize.moduleUrlTemplate= static property
+              - see also the other `module mechanism methods`
+        */
+      };
 
-            NOTES
-            - see the related =Uize.moduleUrlResolver= static method and the =Uize.moduleUrlTemplate= static property
-            - see also the other `module mechanism methods`
-      */
-    };
+      _package.moduleUrlResolver = function (_moduleName) {
+        return _package.moduleUrlTemplate.replace (_modulePathToken,_moduleName + '.js');
+        /*?
+          Static Methods
+            Uize.moduleUrlResolver
+              Returns a string, representing the URL path from where the specified JavaScript module (specified by its module name) can be loaded.
 
-    _package.moduleUrlResolver = function (_moduleName) {
-      return _package.moduleUrlTemplate.replace (_modulePathToken,_moduleName + '.js');
-      /*?
-        Static Methods
-          Uize.moduleUrlResolver
-            Returns a string, representing the URL path from where the specified JavaScript module (specified by its module name) can be loaded.
+              SYNTAX
+              ......................................................
+              moduleUrlSTR = Uize.moduleUrlResolver (moduleNameSTR);
+              ......................................................
 
-            SYNTAX
-            ......................................................
-            moduleUrlSTR = Uize.moduleUrlResolver (moduleNameSTR);
-            ......................................................
+              By overriding this static method, you have the flexibility to have different types of modules load from different locations. A classic example would be loading modules of the UIZE JavaScript Framework from a shared CDN (Content Delivery Network) location, while loading modules that are in your own Web site's namespace from the same machine that serves the pages. Consider the following example...
 
-            By overriding this static method, you have the flexibility to have different types of modules load from different locations. A classic example would be loading modules of the UIZE JavaScript Framework from a shared CDN (Content Delivery Network) location, while loading modules that are in your own Web site's namespace from the same machine that serves the pages. Consider the following example...
+              EXAMPLE
+              ...................................................................
+              Uize.moduleUrlResolver = function (_moduleName) {
+                return (
+                  moduleName.indexOf ('MyDomain.') == 0
+                    ? '/js/' + _moduleName + '.js'
+                    : 'http://www.some-cdn.com/uize-js/' + _moduleName + '.js'
+                );
+              };
+              ...................................................................
 
-            EXAMPLE
-            ...................................................................
-            Uize.moduleUrlResolver = function (_moduleName) {
-              return (
-                moduleName.indexOf ('MyDomain.') == 0
-                  ? '/js/' + _moduleName + '.js'
-                  : 'http://www.some-cdn.com/uize-js/' + _moduleName + '.js'
-              );
-            };
-            ...................................................................
+              In the above example, a custom module URL resolver is being specified. It looks at the module name, determines if the module name is in the namespace for the Web site (=MyDomain= in this example), and returns a root relative URL. Otherwise, assuming that all other modules are part of the UIZE JavaScript Framework and are stored on a CDN, it returns a URL for where the module would be located on that CDN Web site.
 
-            In the above example, a custom module URL resolver is being specified. It looks at the module name, determines if the module name is in the namespace for the Web site (=MyDomain= in this example), and returns a root relative URL. Otherwise, assuming that all other modules are part of the UIZE JavaScript Framework and are stored on a CDN, it returns a URL for where the module would be located on that CDN Web site.
+              The module URL returned by your function will be used by the built-in =Uize.moduleLoader= module loader function. If you override the built-in module loader by specifying your own value for the =Uize.moduleLoader= static method, then the =Uize.moduleUrlResolver= static method will only be applicable if your custom module loader uses this method. Similarly, the built-in =Uize.moduleUrlResolver= implementation uses the =Uize.moduleUrlTemplate= static property. So, if you supply your own custom module URL resolver by overriding the =Uize.moduleUrlResolver= static method, then it is your choice as to whether or not you use the value of the =Uize.moduleUrlTemplate= property.
 
-            The module URL returned by your function will be used by the built-in =Uize.moduleLoader= module loader function. If you override the built-in module loader by specifying your own value for the =Uize.moduleLoader= static method, then the =Uize.moduleUrlResolver= static method will only be applicable if your custom module loader uses this method. Similarly, the built-in =Uize.moduleUrlResolver= implementation uses the =Uize.moduleUrlTemplate= static property. So, if you supply your own custom module URL resolver by overriding the =Uize.moduleUrlResolver= static method, then it is your choice as to whether or not you use the value of the =Uize.moduleUrlTemplate= property.
+              For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
 
-            For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
-
-            NOTES
-            - see the related =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
-            - see also the other `module mechanism methods`
-      */
-    };
+              NOTES
+              - see the related =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
+              - see also the other `module mechanism methods`
+        */
+      };
 
     _package.pairUp = function (_firstArg) {
       var
@@ -4817,91 +4909,6 @@
 
             Using the above template, the value of the =duration= variable will indicate how long it took to perform the operations in the block between assigning the value for the =start= variable and the value for the =duration= variable.
       */
-
-    var _toString = _package.toString = function () {
-      var
-        _this = this,
-        _moduleName = _getClass (_this).moduleName,
-        _isClass = _this.subclass
-      ;
-      return (
-        '[' +
-          (
-            _isInstance (_this) || (!_isClass &amp;&amp; !_moduleName)
-              ? _typeObject
-              : _isClass ? 'class' : 'package'
-          ) +
-          ' ' + (_moduleName || 'Function') +
-        ']'
-      );
-      /*?
-        Static Methods
-          Uize.toString
-            Returns a string, providing summary info for the class on which the method is called.
-
-            SYNTAX
-            ......................................
-            classSummarySTR = MyClass.toString ();
-            ......................................
-
-            The string returned by this method provides a summary that includes the class' name and the state of its state properties. Among other things, this method provides a convenient and lightweight way to gather information about =Uize.Class= subclasses during debugging and troubleshooting. The =Uize.toString= static intrinsic method is invoked automatically in certain contexts in order to convert a class reference to a string form, such as when alerting a class using the =alert= global function.
-
-            EXAMPLE
-            ...................................
-            alert (page.children.slider.Class);
-            ...................................
-
-            In the above example, if the =page= widget has a =slider= child widget that is an instance of the class =Uize.Widget.Bar.Slider=, then the output of the =alert= statement could look something like...
-
-            EXAMPLE OUTPUT
-            ..................................
-            [class Uize.Widget.Bar.Slider]
-
-            built : true
-            busy : inherit
-            busyInherited : false
-            confirm : undefined
-            container : undefined
-            decimalPlacesToDisplay : undefined
-            enabled : inherit
-            enabledInherited : true
-            html : undefined
-            idPrefix : undefined
-            idPrefixConstruction : undefined
-            inDrag : false
-            increments : 1
-            inform : undefined
-            insertionMode: undefined
-            localized : undefined
-            maxValidValue : undefined
-            maxValue : 100
-            minValidValue : undefined
-            minValue : 0
-            name : undefined
-            nodeMap : undefined
-            orientation : vertical
-            parent : undefined
-            restTime : 250
-            scaleFunc : [object Function]
-            value : 0
-            valueFunc : [object Function]
-            wired : false
-            ..................................
-
-            In certain contexts, providing a reference to a =Uize.Class= subclass as a parameter to some method will result in the =Uize.Class.valueOf= static intrinsic method of that class being invoked in order to coerce it to a simple value. If it is your desire to have the class summary be used rather than the class' value, then you should explicitly call the =Uize.toString= static intrinsic method, as follows...
-
-            EXAMPLE
-            .......................................................................................
-            Uize.Node.setInnerHtml ('classSummaryForDebug',page.children.slider.Class.toString ());
-            Uize.Node.setInnerHtml ('classCurrentValue',page.children.slider.Class);
-            .......................................................................................
-
-            In this example, the =classSummaryForDebug= node will contain the summary info for the =Uize.Widget.Bar.Slider= class, while the =classCurrentValue= node will just show the class' current value.
-
-            NOTES
-            - see also the other `module mechanism methods`
-      */
-    };
 
   /*** Private Static Properties ***/
     _package.moduleName = 'Uize';
