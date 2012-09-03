@@ -35,14 +35,14 @@
 	scrunchedHeadComments:{
 		Uize:
 			'/*\n' +
-				'\tUIZE JAVASCRIPT FRAMEWORK {buildDate}\n' +
+				'\tUIZE JAVASCRIPT FRAMEWORK\n' +
 				'\n' +
 				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
 				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
 			'*/\n',
 		UizeDotCom:
 			'/*\n' +
-				'\tUIZE Web Site {buildDate}\n' +
+				'\tUIZE Web Site\n' +
 				'\n' +
 				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
 				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
