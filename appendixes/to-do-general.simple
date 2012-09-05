@@ -138,7 +138,7 @@ Rethinking Module Definitions
 			- the provider goes about obtaining something that matches the need
 			- the provider caches the thing that it obtained, for the benefit of others that may have matching needs
 			- the provider passes the needed item on to the needer
-	
+
 
 		Other Patterns That Can Be Modeled on Provide-Need
 			Needing an Instance
@@ -191,17 +191,17 @@ Rethinking Module Definitions
 		});
 		....................................
 
-		...............................
+		.................................
 		Uize.require (
 			{
 				org: 'MyCompany',
 				name: 'MyCompany.Foo.Bar'
 			},
-			function (Zazzle_Foo_Bar) {
+			function (MyCompany_Foo_Bar) {
 
 			}
 		);
-		...............................
+		.................................
 
 		.................................
 		Uize.require(

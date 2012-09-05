@@ -241,7 +241,16 @@
 						</ul>
 					</li>
 					<li><a href="#2_50" title="Returns a boolean, indicating whether or not the specified record&apos;s contents is a superset of the contents of the specified match object.">2.50. Uize.recordMatches</a></li>
-					<li><a href="#2_51" title="document...">2.51. Uize.require</a></li>
+					<li><a href="#2_51" title="Ensures that all of the specified modules are loaded before calling the specified callback function, loading required modules as necessary.">2.51. Uize.require</a>
+						<ul>
+							<li><a href="#2_51_1" title="In the most basic usage, a single module can be required by specifying the name of the module as a string for the moduleNameSTR parameter.">2.51.1. Require a Single Module</a></li>
+							<li><a href="#2_51_2" title="In cases where you need to require more than one module, a list of module names can be specified as a string array for the moduleNamesARRAY parameter.">2.51.2. Require Multiple Modules</a></li>
+							<li><a href="#2_51_3" title="In an uncommon usage, one or more modules can be required without specifying any callback function to be called once the modules are loaded.">2.51.3. Require Modules With No Callback</a></li>
+							<li><a href="#2_51_4" title="The callbackFUNC parameter of the Uize.require method lets you specify a callback function that should be executed once all the required modules are loaded.">2.51.4. The callbackFUNC Parameter</a></li>
+							<li><a href="#2_51_5" title="In cases where one specifies an empty array for the moduleNamesARRAY parameter, the callback function specified by the callbackFUNC parameter will be executed immediately, and the callback will receive no arguments.">2.51.5. Requiring Nothing</a></li>
+							<li><a href="#2_51_6" title="While more concise and convenient, the Uize.require method is roughly equivalent to using anonymous modules.">2.51.6. Equivalent to Anonymous Modules</a></li>
+						</ul>
+					</li>
 					<li><a href="#2_52" title="Resolves the specified matcher to a function that can be passed two arguments, value and key, and that returns a value derived from one or both of those inputs.">2.52. Uize.resolveMatcher</a>
 						<ul>
 							<li><a href="#2_52_1" title="The Uize.resolveMatcher method supports numerous different ways of specifying a matcher.">2.52.1. How Different Matcher Types are Resolved</a>
@@ -475,7 +484,7 @@
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_43">Uize.module</a></code> - lets you declare a JavaScript module that can be required by other JavaScript modules</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_44">Uize.moduleLoader</a></code> - loads a JavaScript module (specified by its module name)</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_45">Uize.moduleUrlResolver</a></code> - resolves the specified JavaScript module name to a URL path</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_51">Uize.require</a></code> -</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_51">Uize.require</a></code> - ensures that all of the specified modules are loaded before calling the specified callback function, loading required modules as necessary</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_61">Uize.toString</a></code> - provides summary info for the module on which the method is called</td></tr>
 					</table>
 				</div>
@@ -4227,8 +4236,227 @@ doSomethingWithAnObject (object);
 		<a name="2_51"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.51. Uize.require"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.require">51</a>. </span>Uize.require</h2>
 		<div class="contents2">
-			<p>document...</p>
+			<p>Ensures that all of the specified modules are loaded before calling the specified callback function, loading required modules as necessary.</p>
 			
+			<p>The <code><a href="#2_51">Uize.require</a></code> method can be used to load required modules, as necessary, before executing code that depends on those modules being loaded.</p>
+			
+			<p><span class="allCaps">DIFFERENT USAGES</span></p>
+			
+			<p><a href="#2_51_1">Require a Single Module</a></p>
+			
+			
+<pre class="sample-code">Uize.require (moduleNameSTR,callbackFUNC);
+</pre>
+			
+			<p><a href="#2_51_2">Require Multiple Modules</a></p>
+			
+			
+<pre class="sample-code">Uize.require (moduleNamesARRAY,callbackFUNC);
+</pre>
+			
+			<p><a href="#2_51_3">Require Modules With No Callback</a></p>
+			
+			
+<pre class="sample-code">Uize.require (moduleNameSTRorModuleNamesARRAY);
+</pre>
+			
+			<a name="2_51_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.1. Require a Single Module"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.require">51</a>.<a href="#2_51_1" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.1. Require a Single Module">1</a>. </span>Require a Single Module</h3>
+			<div class="contents3">
+				<p>In the most basic usage, a single module can be required by specifying the name of the module as a string for the <code>moduleNameSTR</code> parameter.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">Uize.require (moduleNameSTR,callbackFUNC);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE 1</span></p>
+				
+				
+<pre class="sample-code">Uize.require (
+  'Uize.Widget.Bar.Slider',
+  function (Slider) {
+    var mySlider = Slider ({
+      minValue:-50,
+      maxValue:50,
+      value:0
+    });
+  }
+);
+</pre>
+				
+				<p>In the above example, the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> widget class module is being required. Once the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module is loaded, the <code><a href="#2_51">Uize.require</a></code> method will call the callback specified by the <code>callbackFUNC</code> parameter, passing a reference to <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module as the callback function's first argument. In this example, we have named the argument <code>Slider</code>. You can name this argument anything you like, as long as it's a valid JavaScript identifier. If we wanted to reinforce that this argument is a reference to the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module, we could name the argument something like <code>Uize_Widget_Bar_Slider</code> or <code>UizeWidgetBarSlider</code> (depending on whether or not we like using underscores in variable names).</p>
+				
+				<p><span class="allCaps">EXAMPLE 2</span></p>
+				
+				
+<pre class="sample-code">Uize.require (
+  'Uize.Widget.Bar.Slider',
+  function () {
+    var mySlider = Uize.Widget.Bar.Slider ({
+      minValue:-50,
+      maxValue:50,
+      value:0
+    });
+  }
+);
+</pre>
+				
+				<p>In the above example, we are also requiring the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module. In this case, however, instead of using the reference to the module that would be passed to the callback function, we are simply ignoring this argument and referencing the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module by its name in the global scope. This is also supported.</p>
+			</div>
+			
+			<a name="2_51_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.2. Require Multiple Modules"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.require">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.2. Require Multiple Modules">2</a>. </span>Require Multiple Modules</h3>
+			<div class="contents3">
+				<p>In cases where you need to require more than one module, a list of module names can be specified as a string array for the <code>moduleNamesARRAY</code> parameter.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">Uize.require (moduleNamesARRAY,callbackFUNC);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.require (
+  [
+    'Uize.Widget.Bar.Slider',
+    'Uize.Data.Csv',
+    'Uize.Color'
+  ],
+  function (
+    Uize_Widget_Bar_Slider,
+    Uize_Data_Csv,
+    Uize_Color
+  ) {
+    // reference the Uize.Widget.Bar.Slider module by Uize_Widget_Bar_Slider
+    // reference the Uize.Data.Csv module by Uize_Data_Csv
+    // reference the Uize.Color module by Uize_Color
+  }
+);
+</pre>
+				
+				<p>In the above example, the three modules <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code>, <code><a href="../reference/Uize.Data.Csv.html">Uize.Data.Csv</a></code>, and <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> are being required. Once all of these modules are loaded, references to the modules are passed as arguments to the callback function, in the order in which the modules are specified in the <code>moduleNamesARRAY</code> parameter. The arguments can be named anything you like, but it helps to name them so as to clearly indicate the modules to which they are references. As with the using the <code><a href="#2_51">Uize.require</a></code> method to <a href="#2_51_1">require a single module</a>, the module references that would be passed as arguments to the callback function can simply be ignored in favor of referencing the modules using their names in the global scope.</p>
+			</div>
+			
+			<a name="2_51_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.3. Require Modules With No Callback"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.require">51</a>.<a href="#2_51_3" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.3. Require Modules With No Callback">3</a>. </span>Require Modules With No Callback</h3>
+			<div class="contents3">
+				<p>In an uncommon usage, one or more modules can be required without specifying any callback function to be called once the modules are loaded.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">Uize.require (moduleNameSTRorModuleNamesARRAY);
+</pre>
+				
+				<p>With this usage, the <code><a href="#2_51">Uize.require</a></code> method can be used simply to initiate loading of modules.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.require ([
+  'Uize.Widget.Bar.Slider',
+  'Uize.Data.Csv',
+  'Uize.Color'
+]);
+</pre>
+				
+				<p>In the above example, the three modules <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code>, <code><a href="../reference/Uize.Data.Csv.html">Uize.Data.Csv</a></code>, and <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> are being required without specifying any code that should be executed once the modules are loaded.</p>
+			</div>
+			
+			<a name="2_51_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.4. The callbackFUNC Parameter"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.require">51</a>.<a href="#2_51_4" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.4. The callbackFUNC Parameter">4</a>. </span>The callbackFUNC Parameter</h3>
+			<div class="contents3">
+				<p>The <code>callbackFUNC</code> parameter of the <code><a href="#2_51">Uize.require</a></code> method lets you specify a callback function that should be executed once all the required modules are loaded.</p>
+				
+				<p>When the <code><a href="#2_51">Uize.require</a></code> method calls the specified callback function, it passes references to the required modules as arguments, in the order in which the modules are specified in the first parameter of the <code><a href="#2_51">Uize.require</a></code> method. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.require (
+  [
+    'MyNamespace.MyModule1',
+    'MyNamespace.MyModule2'
+  ],
+  function (
+    MyNamespace_MyModule1,
+    MyNamespace_MyModule2
+  ) {
+    // reference the MyNamespace.MyModule1 module by MyNamespace_MyModule1
+    // reference the MyNamespace.MyModule2 module by MyNamespace_MyModule2
+  }
+);
+</pre>
+				
+				<p>In the above example, the modules <code>MyNamespace.MyModule1</code> and <code>MyNamespace.MyModule2</code> are being required. Once these modules are loaded, references to the modules are passed as arguments to the callback function. The arguments can be named anything you like, but it helps to name them so as to clearly indicate the modules to which they are references. Here, for example, we have chosen to name the first argument <code>MyNamespace_MyModule1</code>, since it will be a reference to the <code>MyNamespace.MyModule1</code> module.</p>
+			</div>
+			
+			<a name="2_51_5"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.5. Requiring Nothing"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.require">51</a>.<a href="#2_51_5" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.5. Requiring Nothing">5</a>. </span>Requiring Nothing</h3>
+			<div class="contents3">
+				<p>In cases where one specifies an empty array for the <code>moduleNamesARRAY</code> parameter, the callback function specified by the <code>callbackFUNC</code> parameter will be executed immediately, and the callback will receive no arguments.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.require (
+  [],
+  function () {
+    // code here is executed immediately, because no modules need to be loaded
+  }
+);
+</pre>
+				
+				<p>One would not deliberately write code as shown in the above example, but situations like this may arise where a list of modules that is to be required is being determined programmatically, and where in some situations a programmatically determined list may be empty. Rather than having to implement a check for such cases along with appropriate protection / conditional branching, the <code><a href="#2_51">Uize.require</a></code> method does the logical thing and calls the specified callback function immediately, since all requirements (none, in this case) are already satisfied. An empty list indicates that the callback code is not contingent upon anything, so it is executed straight away.</p>
+			</div>
+			
+			<a name="2_51_6"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.6. Equivalent to Anonymous Modules"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.require">51</a>.<a href="#2_51_6" title="2. Static Methods -&gt; 2.51. Uize.require -&gt; 2.51.6. Equivalent to Anonymous Modules">6</a>. </span>Equivalent to Anonymous Modules</h3>
+			<div class="contents3">
+				<p>While more concise and convenient, the <code><a href="#2_51">Uize.require</a></code> method is roughly equivalent to using anonymous modules.</p>
+				
+				<p><span class="allCaps">INSTEAD OF...</span></p>
+				
+				
+<pre class="sample-code">Uize.module ({
+  required:[
+    'MyNamespace.MyModule1',
+    'MyNamespace.MyModule2'
+  ],
+  builder:function () {
+    // code here can rely on MyNamespace.MyModule1 and MyNamespace.MyModule2 being loaded
+  }
+});
+</pre>
+				
+				<p><span class="allCaps">USE...</span></p>
+				
+				
+<pre class="sample-code">Uize.require (
+  [
+    'MyNamespace.MyModule1',
+    'MyNamespace.MyModule2'
+  ],
+  function () {
+    // code here can rely on MyNamespace.MyModule1 and MyNamespace.MyModule2 being loaded
+  }
+);
+</pre>
+				
+				<p>In addition to being a little bit cleaner and more concise, as well as a bit more semantically elegant, the <code><a href="#2_51">Uize.require</a></code> method also supports passing references to required modules in <a href="#2_51_4">the callbackFUNC parameter</a>.</p>
+			</div>
+			
+			<p>For an in-depth discussion of modules, consult the explainer <a href="../explainers/javascript-modules.html">JavaScript Modules</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the other <a href="#1_1_1_7">module mechanism methods</a></td></tr>
+			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">

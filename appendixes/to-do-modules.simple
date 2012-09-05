@@ -200,9 +200,6 @@ Uize
 			Uize.indexIn
 				- adapt to add support for source being a string
 
-			Uize.require
-				- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient & intuitive)
-
 		LATER
 			Uize.extend
 				- alias of copyInto, for those who are more comfortable with the extend semantic
