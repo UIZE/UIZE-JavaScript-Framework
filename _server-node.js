@@ -1,5 +1,5 @@
 /*** boilerplate setup code for WSH build scripts ***/
-	eval (require ('fs').readFileSync ('_build-script-setup-node.js','utf8')) ();
+	eval (require ('fs').readFileSync ('_build-script-setup.js','utf8')) ();
 
 Uize.module ({
 	required:[
