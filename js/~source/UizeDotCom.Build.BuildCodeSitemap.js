@@ -67,7 +67,7 @@ Uize.module ({
 					;
 				}
 				_siteMapChunks.push ('</urlset>');
-		
+
 				Uize.Wsh.writeFile ({path:'sitemap-code.xml',text:_siteMapChunks.join ('\n')});
 			};
 
