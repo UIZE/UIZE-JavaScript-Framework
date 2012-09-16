@@ -19,6 +19,7 @@ Uize.module ({
 						ModuleInfo:0,
 						NeatenJsFiles:0,
 						Scruncher:0,
+						ServicesSetup:0,
 						UpdateCopyrightNotices:0,
 						Util:0
 					},
@@ -167,6 +168,7 @@ Uize.module ({
 					Util:{
 						Coupler:0,
 						Cycle:0,
+						Needs:0,
 						Oop:0,
 						PropertyAdapter:0
 					},

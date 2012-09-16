@@ -55,6 +55,9 @@
 				_callback (_readFile (_modulePath + '\\' + _moduleToLoad + '.js'));
 			}
 			_moduleLoader ('Uize',function (_uizeCode) {eval (_uizeCode); Uize.moduleLoader = _moduleLoader});
+
+		Uize.require ('Uize.Wsh');
+		Uize.require ('Uize.Build.ServicesSetup');
 	};
 }) ();
 

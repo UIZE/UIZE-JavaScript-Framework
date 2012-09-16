@@ -1236,10 +1236,199 @@ Uize.module ({
 						_eventsSystemTest ('Test that the event system works for instances',true),
 						_eventsSystemTest ('Test that the event system works for classes',false),
 						{
-							title:'Test that the once instance method works correctly',
+							title:'Test support for compound conditions',
 							test:[
-								_onceMethodTest (false),
-								_onceMethodTest (true)
+								{
+									title:'Test that the once instance method works correctly',
+									test:[
+										_onceMethodTest (false),
+										_onceMethodTest (true),
+										{
+											title:'Test that specifying an array of property names for the condition is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													phase1Done:{value:false},
+													phase2Done:{value:false},
+													phase3Done:{value:false}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													['phase1Done','phase2Done','phase3Done'],
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({phase1Done:1});
+												_instance.set ({phase2Done:true});
+												_instance.set ({phase3Done:'foo'});
+												return this.expect ([[1,true,'foo']],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that, when specifying an array of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													ready:{value:false},
+													empty:{value:true}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													['ready','!empty'],
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({ready:true});
+												_instance.set ({empty:false});
+												return this.expect ([[true,false]],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that specifying a comma-separated list of property names for the condition is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													phase1Done:{value:false},
+													phase2Done:{value:false},
+													phase3Done:{value:false}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													'phase1Done, phase2Done, phase3Done',
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({phase1Done:1});
+												_instance.set ({phase2Done:true});
+												_instance.set ({phase3Done:'foo'});
+												return this.expect ([[1,true,'foo']],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that, when specifying a comma-separated list of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													ready:{value:false},
+													empty:{value:true}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													'ready, !empty',
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({ready:true});
+												_instance.set ({empty:false});
+												return this.expect ([[true,false]],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that a compound condition specified as a string, consisting of a properties list and a condition evaluator expression, is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													width:{value:0},
+													height:{value:0},
+													depth:{value:0}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													'width, height, depth: width * height * depth > 1000',
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({width:10});
+												_instance.set ({height:11});
+												_instance.set ({depth:12});
+												return this.expect ([[10,11,12]],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that a compound condition specified as a function is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													width:{value:0},
+													height:{value:0},
+													depth:{value:0}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													function (width,height,depth) {return width * height * depth > 1000},
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({width:10});
+												_instance.set ({height:11});
+												_instance.set ({depth:12});
+												return this.expect ([[10,11,12]],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that the method retuns a wirings object that contains wirings for the Changed.[propertyName] event of every property',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													phase1Done:{value:false},
+													phase2Done:{value:false},
+													phase3Done:{value:false}
+												});
+												var
+													_instance = _Class (),
+													_wirings = _instance.once (
+														['phase1Done','phase2Done','phase3Done'],
+														Uize.nop
+													)
+												;
+												return (
+													this.expect (
+														['Changed.phase1Done','Changed.phase2Done','Changed.phase3Done'],
+														Uize.keys (_wirings)
+													) &&
+													this.expectType ('function',_wirings ['Changed.phase1Done']) &&
+													this.expectType ('function',_wirings ['Changed.phase2Done']) &&
+													this.expectType ('function',_wirings ['Changed.phase3Done'])
+												);
+											}
+										},
+										{
+											title:'Test that unwiring the event wirings for a compound condition before it is met results in the handler for the condition not being executed',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													phase1Done:{value:false},
+													phase2Done:{value:false},
+													phase3Done:{value:false}
+												});
+												var
+													_instance = _Class (),
+													_handlerCalled = false
+												;
+												_instance.unwire (
+													_instance.once (
+														'phase1Done, phase2Done, phase3Done',
+														function () {_handlerCalled = true}
+													)
+												);
+												_instance.set ({phase1Done:true,phase2Done:true,phase3Done:true});
+												return this.expect (false,_handlerCalled);
+											}
+										}
+									]
+								}
 							]
 						}
 					]

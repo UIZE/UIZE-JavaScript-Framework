@@ -29,12 +29,12 @@
 		}
 
 	Uize.require (
-		'Uize.Needs',
+		'Uize.Util.Needs',
 		function () {
 			/*** register services setup ***/
 				var
 					_uizeRequire = Uize.require,
-					_servicesSetup = Uize.Needs (),
+					_servicesSetup = Uize.Util.Needs (),
 					_registeredServices = {},
 					_trueFlag = {}
 				;

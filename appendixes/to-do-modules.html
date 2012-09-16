@@ -175,8 +175,7 @@
 								</ul>
 							</li>
 							<li><a href="#3_1_2" title="EXAMPLES">3.1.2. The whenever Instance Method</a></li>
-							<li><a href="#3_1_3" title="EXAMPLES">3.1.3. The once Instance Method</a></li>
-							<li><a href="#3_1_4" title="EXAMPLES">3.1.4. The next Virtual Event</a></li>
+							<li><a href="#3_1_3" title="EXAMPLES">3.1.3. The next Virtual Event</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_2" title="SYNTAX">3.2. Properties Expressions</a></li>
@@ -2206,113 +2205,7 @@ myWidget.wire (
 			</div>
 			
 			<a name="3_1_3"></a>
-			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The once Instance Method"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The once Instance Method">3</a>. </span>The once Instance Method</h3>
-			<div class="contents3">
-				<p><span class="allCaps">EXAMPLES</span></p>
-				
-				
-<pre class="sample-code">myWidget.once (
-  function (totalSelected) {return totalSelected  &gt; 5},
-  function () {
-    // do stuff once condition is met for the first time
-  }
-);
-
-myWidget.once (
-  'totalSelected =&gt; totalSelected  &gt; 5',
-  function () {
-    // do stuff once condition is met for the first time
-  }
-);
-</pre>
-				
-				<p><span class="allCaps">IMPLEMENTATION</span></p>
-				
-				
-<pre class="sample-code">function _resolveDerivation (_derivation) {
-  function _getDeterminantsFromListStr (_determinantsStr) {
-    return _determinantsStr.replace (/\s+/g,'').split (',');
-  }
-  if (typeof _derivation == 'string') {
-    var _separatorPos = _derivation.indexOf (':');
-    if (_separatorPos &gt; -1) {
-      var _determinantsStr = _derivation.slice (0,_separatorPos);
-      _derivation = {
-        _determinants:_getDeterminantsFromListStr (_determinantsStr),
-        _determiner:eval (
-          '(function d (' + _determinantsStr + ') {' +
-            'return ' + _derivation.slice (_separatorPos + 1) +
-          '})'
-        )
-      };
-    } else {
-      _derivation = {
-        _determinants:[_derivation],
-        _determiner:new Function (_derivation,'return ' + _derivation)
-      };
-    }
-  } else if (Uize.isFunction (_derivation)) {
-    _derivation = {
-      _determinants:_getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]),
-      _determiner:_derivation
-    };
-  } else if (Uize.isArray (_derivation)) {
-    _derivation = {
-      _determinants:_derivation,
-      _determiner:eval (
-        '(function d (' + _derivation.join (',') + ') {' +
-          'return ' + _derivation.join (' &amp;&amp; ') +
-        '})'
-      )
-    };
-  }
-  return _derivation;
-}
-
-_classPrototype.once = function (_condition,_handler) {
-  var
-    _this = this,
-    _propertyValue
-  ;
-  if (
-    typeof _condition == 'string' &amp;&amp;
-    (_condition in _this._propertyProfilesByPublicNames || _condition.indexOf (':') &lt; 0) &amp;&amp;
-    (_propertyValue = _this.get (_condition))
-  ) {
-    _handler (_propertyValue);
-  } else {
-    var
-      _derivation = _resolveDerivation (_condiiton),
-      _properties = _derivation._determinants,
-      _determiner = _derivation._determiner,
-      _propertiesLength = _properties.length,
-      _propertyValues = []
-    ;
-    function _isConditionMet () {
-      for (var _propertyNo = _propertiesLength; --_propertyNo &gt;= 0;)
-        _propertyValues [_propertyNo] = _this.get (_properties [_propertyNo])
-      ;
-      var _conditionMet = _determiner.apply (0,_propertyValues);
-      _conditionMet &amp;&amp; _handler.apply (0,_propertyValues);
-      return _conditionMet;
-    }
-    if (!_isConditionMet ()) {
-      var _wirings = {};
-      function _checkIfConditionMet () {
-        _isConditionMet () &amp;&amp; _this.unwire (_wirings);
-      }
-      for (var _propertyNo = -1; ++_propertyNo &lt; _propertiesLength;)
-        _wirings ['Changed:' + _properties [_propertyNo]] = _checkIfConditionMet
-      ;
-      _this.wire (_wirings);
-    }
-  }
-};
-</pre>
-			</div>
-			
-			<a name="3_1_4"></a>
-			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.4. The next Virtual Event"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_4" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.4. The next Virtual Event">4</a>. </span>The next Virtual Event</h3>
+			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The next Virtual Event"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The next Virtual Event">3</a>. </span>The next Virtual Event</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLES</span></p>
 				

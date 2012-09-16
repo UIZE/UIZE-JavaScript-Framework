@@ -91,10 +91,40 @@
 							<li><a href="#3_5_3" title="In cases where you wish to set multiple conditions as having been met, the names of those conditions can be supplied by specifying an array for the propertyNamesARRAY parameter.">3.5.3. Set Multiple Conditions as Having Been Met</a></li>
 						</ul>
 					</li>
-					<li><a href="#3_6" title="Lets you register a handler that should be executed only once a condition is met (ie. the value of the specified condition property is truthy).">3.6. once</a>
+					<li><a href="#3_6" title="Lets you register a handler that should be executed only once a condition is met.">3.6. once</a>
 						<ul>
-							<li><a href="#3_6_1" title="As a convenience, the once method supports condition inversion through an optional &quot;!&quot; (logical not) prefix that can be placed before the condition name.">3.6.1. Condition Inversion</a></li>
-							<li><a href="#3_6_2" title="The once method returns a wirings object that can be supplied to the unwire method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property&apos;s value has become truthy.">3.6.2. Return Value</a></li>
+							<li><a href="#3_6_1" title="In its most basic usage, code can be registered to be executed once a single state property becomes truthy or falsy.">3.6.1. Execute Code Once a State Property is Truthy or Falsy</a></li>
+							<li><a href="#3_6_2" title="Code can be registered to be executed once all properties in a set of state properties become truthy or falsy, by specifying the state properties as an array of property names or as a comma-separated list string.">3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy</a>
+								<ul>
+									<li><a href="#3_6_2_1" title="The value specified for the propertiesConditionARRAYorSTR parameter may be an array of property names or a comma-separated list string.">3.6.2.1. propertiesConditionARRAYorSTR</a>
+										<ul>
+											<li><a href="#3_6_2_1_1" title="If a comma-separated list string is specified, all whitespace in the string is ignored.">3.6.2.1.1. Whitespace Ignored for Comma-separated List String</a></li>
+										</ul>
+									</li>
+									<li><a href="#3_6_2_2" title="The following examples illustrate the different ways in which multiple properties can be specified.">3.6.2.2. Examples</a>
+										<ul>
+											<li><a href="#3_6_2_2_1" title="Multiple state properties can be specified using an array of state property names.">3.6.2.2.1. EXAMPLE: Array of Property Names</a></li>
+											<li><a href="#3_6_2_2_2" title="Multiple state properties can be specified using a comma-separated list string.">3.6.2.2.2. EXAMPLE: Comma-separated List String</a></li>
+											<li><a href="#3_6_2_2_3" title="Multiple state properties can be specified using an array of state property names, where some of the property names in the array are prefixed with the optional &quot;!&quot; to indicate condition inversion.">3.6.2.2.3. EXAMPLE: Array of Property Names, with Condition Inversion</a></li>
+											<li><a href="#3_6_2_2_4" title="Multiple state properties can be specified using a comma-separated list string, where some of the property names in the list are prefixed with the optional &quot;!&quot; to indicate condition inversion.">3.6.2.2.4. EXAMPLE: Comma-separated List String, with Condition Inversion</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#3_6_3" title="Code can be registered to be executed once a compound condition is met, by specifying the compound condition in the form of a condition function or condition expression string.">3.6.3. Execute Code Once a Compound Condition is Met</a>
+								<ul>
+									<li><a href="#3_6_3_1" title="A compound condition can be specified as a function, where the names of the function&apos;s arguments indicate the state properties that affect the condition and where the function&apos;s body evaluates the condition.">3.6.3.1. Condition Function</a></li>
+									<li><a href="#3_6_3_2" title="A compound condition can be specified as an expression string, where the names of the state properties affecting the condition are specified along with an expression string for evaluating the condition.">3.6.3.2. Condition Expression String</a></li>
+								</ul>
+							</li>
+							<li><a href="#3_6_4" title="If the condition specified in the call to the once method is already met at the time that the method is called, then the handler specified by the handlerFUNC parameter will be executed immediately.">3.6.4. Immediate Execution if Condition Already Met</a></li>
+							<li><a href="#3_6_5" title="As a convenience, the once method supports condition inversion through an optional &quot;!&quot; (logical not) prefix that can be placed before the condition name.">3.6.5. Condition Inversion</a>
+								<ul>
+									<li><a href="#3_6_5_1" title="Condition inversion can be used both with single state property conditions as well as multiple property conditions.">3.6.5.1. Condition Inversion with Multiple Property Conditions</a></li>
+								</ul>
+							</li>
+							<li><a href="#3_6_6" title="The once method returns a wirings object that can be supplied to the unwire method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the condition becomes met.">3.6.6. Wirings Object</a></li>
+							<li><a href="#3_6_7" title="The handler code that is registered to be executed once a condition is met will be passed the values of all the state properties that affect the condition as arguments.">3.6.7. Handler Arguments</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_7" title="Lets you set values for one or more of an instance&apos;s state properties.">3.7. set</a>
@@ -815,21 +845,46 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 		<a name="3_6"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.6. once"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>. </span>once</h2>
 		<div class="contents2">
-			<p>Lets you register a handler that should be executed only once a condition is met (ie. the value of the specified condition property is truthy).</p>
+			<p>Lets you register a handler that should be executed only once a condition is met.</p>
 			
-			<p><span class="allCaps">SYNTAX</span></p>
+			<p>The <code><a href="#3_6">once</a></code> method is useful when using one or more state properties to form a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the <code><a href="#3_6">once</a></code> method is called.</p>
+			
+			<p><span class="allCaps">DIFFERENT USAGES</span></p>
+			
+			<p><a href="#3_6_1">Execute Code Once a State Property is Truthy or Falsy</a></p>
 			
 			
-<pre class="sample-code">wiringsOBJ = myInstance.once (propertyNameSTR,handlerFUNC);
+<pre class="sample-code">wiringsOBJ = myInstance.once (propertyConditionSTR,handlerFUNC);
 </pre>
 			
-			<p>If the value of the property specified by the <code>propertyNameSTR</code> parameter is truthy when the <code><a href="#3_6">once</a></code> method is called, then the handler specified by the <code>handlerFUNC</code> parameter will be executed immediately. Otherwise, the value of the property will be watched and the handler will be executed once the property's value becomes truthy, upon which the property watcher will be removed and the property will no longer be watched. By design, the handler is only executed for the first time that the property's value becomes truthy.</p>
-			
-			<p>The <code><a href="#3_6">once</a></code> method is useful when using a state property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the <code><a href="#3_6">once</a></code> method is called. Consider the following example...</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
+			<p><a href="#3_6_2">Execute Code Once Multiple State Properties Are Truthy or Falsy</a></p>
 			
 			
+<pre class="sample-code">wiringsOBJ = myInstance.once (propertiesConditionARRAYorSTR,handlerFUNC);
+</pre>
+			
+			<p><a href="#3_6_3">Execute Code Once a Compound Condition is Met</a></p>
+			
+			
+<pre class="sample-code">wiringsOBJ = myInstance.once (compoundConditionSTRorFUNC,handlerFUNC);
+</pre>
+			
+			<a name="3_6_1"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Execute Code Once a State Property is Truthy or Falsy"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Execute Code Once a State Property is Truthy or Falsy">1</a>. </span>Execute Code Once a State Property is Truthy or Falsy</h3>
+			<div class="contents3">
+				<p>In its most basic usage, code can be registered to be executed once a single state property becomes truthy or falsy.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">wiringsOBJ = myInstance.once (propertyConditionSTR,handlerFUNC);
+</pre>
+				
+				<p>The <code>propertyConditionSTR</code> parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating <a href="#3_6_5">condition inversion</a>. If simply the name of a state property is specified, then the handler code specified by the <code>handlerFUNC</code> parameter will be executed once the property is truthy. If the optional "!" prefix is specified, then the handler code will be executed once the property is falsy.</p>
+				
+				<p><span class="allCaps">EXAMPLE 1</span></p>
+				
+				
 <pre class="sample-code">myWidget.once (
   'wired',
   function () {
@@ -837,11 +892,197 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
   }
 );
 </pre>
+				
+				<p>In the above example, a handler is being registered to be executed once the widget <code>myWidget</code> has been wired (ie. the value of its <code>wired</code> state property becomes <code>true</code>).</p>
+				
+				<p><span class="allCaps">EXAMPLE 2</span></p>
+				
+				
+<pre class="sample-code">myCollectionWidget.once (
+  '!isEmpty',
+  function () {
+    // do something now that the collection is no longer empty
+  }
+);
+</pre>
+				
+				<p>In the above example, code is being registered to execute once the <code>isEmpty</code> state property is <code>false</code>.</p>
+			</div>
 			
-			<p>In the above example, a handler is being registered to be executed once the widget <code>myWidget</code> has been wired (ie. the value of its <code>wired</code> state property becomes <code>true</code>).</p>
+			<a name="3_6_2"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy">2</a>. </span>Execute Code Once Multiple State Properties Are Truthy or Falsy</h3>
+			<div class="contents3">
+				<p>Code can be registered to be executed once all properties in a set of state properties become truthy or falsy, by specifying the state properties as an array of property names or as a comma-separated list string.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">wiringsOBJ = myInstance.once (propertiesConditionARRAYorSTR,handlerFUNC);
+</pre>
+				
+				<a name="3_6_2_1"></a>
+				<h4 class="heading4" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.1. propertiesConditionARRAYorSTR"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy">2</a>.<a href="#3_6_2_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.1. propertiesConditionARRAYorSTR">1</a>. </span>propertiesConditionARRAYorSTR</h4>
+				<div class="contents4">
+					<p>The value specified for the <code><a href="#3_6_2_1">propertiesConditionARRAYorSTR</a></code> parameter may be an array of property names or a comma-separated list string.</p>
+					
+					<p>Whichever form is used, any property name can be prefixed with a "!" (exclamation mark) to achieve <a href="#3_6_5">condition inversion</a> for the property.</p>
+					
+					<p>Summary of different forms...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>array of property names: <code>['phase1Done','phase2Done','phase3Done']</code></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>array of property names with <a href="#3_6_5">condition inversion</a>: <code>['wired','!isEmpty']</code></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>comma-separated list string: <code>'phase1Done, phase2Done, phase3Done'</code></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>comma-separated list with <a href="#3_6_5">condition inversion</a>: <code>'wired, !isEmpty'</code></td></tr>
+					</table>
+					<a name="3_6_2_1_1"></a>
+					<h5 class="heading5" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.1. propertiesConditionARRAYorSTR -&gt; 3.6.2.1.1. Whitespace Ignored for Comma-separated List String"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy">2</a>.<a href="#3_6_2_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.1. propertiesConditionARRAYorSTR">1</a>.<a href="#3_6_2_1_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.1. propertiesConditionARRAYorSTR -&gt; 3.6.2.1.1. Whitespace Ignored for Comma-separated List String">1</a>. </span>Whitespace Ignored for Comma-separated List String</h5>
+					<div class="contents5">
+						<p>If a comma-separated list string is specified, all whitespace in the string is ignored.</p>
+						
+						<p>This means that whitespace around the property names is ignored, so the value <code>'phase1Done,phase2Done,phase3Done'</code> is equivalent to the value <code>'phase1Done, phase2Done , phase3Done'</code>. This also means that whitespace around the optional "!" (exclamation mark) prefix is ignored, so the value <code>'wired, !isEmpty'</code> is equivalent to the value <code>'wired, ! isEmpty'</code>.</p>
+					</div>
+				</div>
+				
+				<a name="3_6_2_2"></a>
+				<h4 class="heading4" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy">2</a>.<a href="#3_6_2_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples">2</a>. </span>Examples</h4>
+				<div class="contents4">
+					<p>The following examples illustrate the different ways in which multiple properties can be specified.</p>
+					
+					<a name="3_6_2_2_1"></a>
+					<h5 class="heading5" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples -&gt; 3.6.2.2.1. EXAMPLE: Array of Property Names"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy">2</a>.<a href="#3_6_2_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples">2</a>.<a href="#3_6_2_2_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples -&gt; 3.6.2.2.1. EXAMPLE: Array of Property Names">1</a>. </span>EXAMPLE: Array of Property Names</h5>
+					<div class="contents5">
+						<p>Multiple state properties can be specified using an array of state property names.</p>
+						
+						<p><span class="allCaps">EXAMPLE</span></p>
+						
+						
+<pre class="sample-code">myInstance.once (
+  ['phase1Done','phase2Done','phase3Done'],
+  function () {
+    // execute code now that all three phases are done
+  }
+);
+</pre>
+					</div>
+					
+					<a name="3_6_2_2_2"></a>
+					<h5 class="heading5" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples -&gt; 3.6.2.2.2. EXAMPLE: Comma-separated List String"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy">2</a>.<a href="#3_6_2_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples">2</a>.<a href="#3_6_2_2_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples -&gt; 3.6.2.2.2. EXAMPLE: Comma-separated List String">2</a>. </span>EXAMPLE: Comma-separated List String</h5>
+					<div class="contents5">
+						<p>Multiple state properties can be specified using a comma-separated list string.</p>
+						
+						<p><span class="allCaps">EXAMPLE</span></p>
+						
+						
+<pre class="sample-code">myInstance.once (
+  'phase1Done, phase2Done, phase3Done',
+  function () {
+    // execute code now that all three phases are done
+  }
+);
+</pre>
+					</div>
+					
+					<a name="3_6_2_2_3"></a>
+					<h5 class="heading5" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples -&gt; 3.6.2.2.3. EXAMPLE: Array of Property Names, with Condition Inversion"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy">2</a>.<a href="#3_6_2_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples">2</a>.<a href="#3_6_2_2_3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples -&gt; 3.6.2.2.3. EXAMPLE: Array of Property Names, with Condition Inversion">3</a>. </span>EXAMPLE: Array of Property Names, with Condition Inversion</h5>
+					<div class="contents5">
+						<p>Multiple state properties can be specified using an array of state property names, where some of the property names in the array are prefixed with the optional "!" to indicate <a href="#3_6_5">condition inversion</a>.</p>
+						
+						<p><span class="allCaps">EXAMPLE</span></p>
+						
+						
+<pre class="sample-code">myCollection.once (
+  ['wired','!isEmpty'],
+  function () {
+    // execute code now that the collection widget is wired and no longer empty
+  }
+);
+</pre>
+					</div>
+					
+					<a name="3_6_2_2_4"></a>
+					<h5 class="heading5" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples -&gt; 3.6.2.2.4. EXAMPLE: Comma-separated List String, with Condition Inversion"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy">2</a>.<a href="#3_6_2_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples">2</a>.<a href="#3_6_2_2_4" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Execute Code Once Multiple State Properties Are Truthy or Falsy -&gt; 3.6.2.2. Examples -&gt; 3.6.2.2.4. EXAMPLE: Comma-separated List String, with Condition Inversion">4</a>. </span>EXAMPLE: Comma-separated List String, with Condition Inversion</h5>
+					<div class="contents5">
+						<p>Multiple state properties can be specified using a comma-separated list string, where some of the property names in the list are prefixed with the optional "!" to indicate <a href="#3_6_5">condition inversion</a>.</p>
+						
+						<p><span class="allCaps">EXAMPLE</span></p>
+						
+						
+<pre class="sample-code">myCollection.once (
+  'wired, !isEmpty',
+  function () {
+    // execute code now that the collection widget is wired and no longer empty
+  }
+);
+</pre>
+					</div>
+				</div>
+			</div>
 			
-			<a name="3_6_1"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Condition Inversion"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Condition Inversion">1</a>. </span>Condition Inversion</h3>
+			<a name="3_6_3"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.3. Execute Code Once a Compound Condition is Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.3. Execute Code Once a Compound Condition is Met">3</a>. </span>Execute Code Once a Compound Condition is Met</h3>
+			<div class="contents3">
+				<p>Code can be registered to be executed once a compound condition is met, by specifying the compound condition in the form of a condition function or condition expression string.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">wiringsOBJ = myInstance.once (compoundConditionSTRorFUNC,handlerFUNC);
+</pre>
+				
+				<a name="3_6_3_1"></a>
+				<h4 class="heading4" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.3. Execute Code Once a Compound Condition is Met -&gt; 3.6.3.1. Condition Function"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.3. Execute Code Once a Compound Condition is Met">3</a>.<a href="#3_6_3_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.3. Execute Code Once a Compound Condition is Met -&gt; 3.6.3.1. Condition Function">1</a>. </span>Condition Function</h4>
+				<div class="contents4">
+					<p>A compound condition can be specified as a function, where the names of the function's arguments indicate the state properties that affect the condition and where the function's body evaluates the condition.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">myFishTankWater.once (
+  function (width,height,depth) {return width * height * depth &gt; 1000},
+  function () {
+    // execute code, now that the water volume of the fish tank exceeds 1000
+  }
+}
+</pre>
+					
+					<p>In the above example, a compound condition is specified using a function. The arguments of the function - <code>width</code>, <code>height</code>, and <code>depth</code> - indicate that the condition is affected by the <code>width</code>, <code>height</code>, and <code>depth</code> state properties of the <code>myFishTankWater</code> instance. The function's body, <code>return width &#42; height &#42; depth > 1000</code>, evaluates the condition to be <code>true</code> when the volume of the fish tank's water is greater than <code>1000</code>.</p>
+					
+					<p>When code is registered to be executed once the product of the <code>width</code>, <code>height</code>, and <code>depth</code> properties is greater than <code>1000</code>, if this condition is not yet met when the <code><a href="#3_6">once</a></code> method is called, the method will wire handlers for the <code>Changed.width</code>, <code>Changed.height</code>, and <code>Changed.depth</code> events and will re-evaluate the condition function every time any of the properties that affect the condition change value. Once the condition function returns a truthy result, the handler for the compound condition will be executed and the handlers that were wired for the <code><a href="#6_1">Changed.*</a></code> events will be unwired.</p>
+				</div>
+				
+				<a name="3_6_3_2"></a>
+				<h4 class="heading4" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.3. Execute Code Once a Compound Condition is Met -&gt; 3.6.3.2. Condition Expression String"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.3. Execute Code Once a Compound Condition is Met">3</a>.<a href="#3_6_3_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.3. Execute Code Once a Compound Condition is Met -&gt; 3.6.3.2. Condition Expression String">2</a>. </span>Condition Expression String</h4>
+				<div class="contents4">
+					<p>A compound condition can be specified as an expression string, where the names of the state properties affecting the condition are specified along with an expression string for evaluating the condition.</p>
+					
+					<p>A condition expression string is formatted with two parts separated by a ":" (colon) delimiter, where the part before the colon is a comma-separated list of the state properties affecting the condition, and the part after the colon is an expression to be used for evaluating the condition.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">myFishTankWater.once (
+  'width, height, depth : width * height * depth &gt; 1000',
+  function () {
+    // execute code, now that the water volume of the fish tank exceeds 1000
+  }
+}
+</pre>
+					
+					<p>In the above example, a compound condition is specified using a <a href="#3_6_3_2">condition expression string</a>. In this string, the part before the colon - "width, height, depth" - indicates that the condition is affected by the <code>width</code>, <code>height</code>, and <code>depth</code> state properties of the <code>myFishTankWater</code> instance. The part after the colon - "width &#42; height &#42; depth > 1000" - evaluates the condition to be <code>true</code> when the volume of the fish tank's water (ie. the product of the <code>width</code>, <code>height</code>, and <code>depth</code> properties) is greater than <code>1000</code>.</p>
+				</div>
+			</div>
+			
+			<a name="3_6_4"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.4. Immediate Execution if Condition Already Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_4" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.4. Immediate Execution if Condition Already Met">4</a>. </span>Immediate Execution if Condition Already Met</h3>
+			<div class="contents3">
+				<p>If the condition specified in the call to the <code><a href="#3_6">once</a></code> method is already met at the time that the method is called, then the handler specified by the <code>handlerFUNC</code> parameter will be executed immediately.</p>
+				
+				<p>Otherwise, handlers will be wired for the <code><a href="#6_1">Changed.*</a></code> (value change) events for all the state properties that affect the condition. The condition evaluator will be executed each time any of the watched properties change value. As soon as the condition becomes met (ie. the condition evaluator produces a truthy result), the handlers wired to watch the value change events of the properties will be unwired and the handler function registered for the condition will be executed. By design, the handler is only executed for the first time that the condition becomes met.</p>
+			</div>
+			
+			<a name="3_6_5"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.5. Condition Inversion"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_5" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.5. Condition Inversion">5</a>. </span>Condition Inversion</h3>
 			<div class="contents3">
 				<p>As a convenience, the <code><a href="#3_6">once</a></code> method supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.</p>
 				
@@ -856,15 +1097,61 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 );
 </pre>
 				
-				<p>In the above example, code is being registered to execute once the <code>isEmpty</code> condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the <code>isEmpty</code> state property becomes <code>false</code>). The <a href="#3_6_1">condition inversion</a> facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the <code><a href="#3_6">once</a></code> method).</p>
+				<p>In the above example, code is being registered to execute once the <code>isEmpty</code> state property is <code>false</code>. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the <code>isEmpty</code> state property becomes <code>false</code>). The <a href="#3_6_5">condition inversion</a> facility is convenient in situations like this where you wish to execute code only once a property's value becomes falsy, rather than once the property's value becomes truthy (which is the standard behavior for the <code><a href="#3_6">once</a></code> method).</p>
+				
+				<a name="3_6_5_1"></a>
+				<h4 class="heading4" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.5. Condition Inversion -&gt; 3.6.5.1. Condition Inversion with Multiple Property Conditions"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_5" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.5. Condition Inversion">5</a>.<a href="#3_6_5_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.5. Condition Inversion -&gt; 3.6.5.1. Condition Inversion with Multiple Property Conditions">1</a>. </span>Condition Inversion with Multiple Property Conditions</h4>
+				<div class="contents4">
+					<p>Condition inversion can be used both with single state property conditions as well as multiple property conditions.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">myCollectionWidget.once (
+  ['wired','!isEmpty'],
+  function () {
+    // do something now that the collection is wired and no longer empty
+  }
+);
+</pre>
+					
+					<p>In the above example, code is being registered to be executed once the <code>wired</code> state property is truthy and the <code>isEmpty</code> state property is falsy. Condition inversion can also be used when the state properties are specified as a comma-separated list string, so specifying the condition as <code>['wired','!isEmpty']</code> is equivalent to specifying it as <code>'wired, !isEmpty'</code>.</p>
+				</div>
 			</div>
 			
-			<a name="3_6_2"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Return Value"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Return Value">2</a>. </span>Return Value</h3>
+			<a name="3_6_6"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.6. Wirings Object"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_6" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.6. Wirings Object">6</a>. </span>Wirings Object</h3>
 			<div class="contents3">
-				<p>The <code><a href="#3_6">once</a></code> method returns a wirings object that can be supplied to the <code><a href="#3_11">unwire</a></code> method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.</p>
+				<p>The <code><a href="#3_6">once</a></code> method returns a wirings object that can be supplied to the <code><a href="#3_11">unwire</a></code> method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the condition becomes met.</p>
 				
-				<p>This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the <code><a href="#3_6">once</a></code> method. In the event that the property's value is truthy when the <code><a href="#3_6">once</a></code> method is called, then the returned wirings object will be an empty object.</p>
+				<p>This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the <code><a href="#3_6">once</a></code> method. In the event that the condition is met when the <code><a href="#3_6">once</a></code> method is called, then the returned wirings object will be an empty object.</p>
+			</div>
+			
+			<a name="3_6_7"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.7. Handler Arguments"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_7" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.7. Handler Arguments">7</a>. </span>Handler Arguments</h3>
+			<div class="contents3">
+				<p>The handler code that is registered to be executed once a condition is met will be passed the values of all the state properties that affect the condition as arguments.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">myFishTankWater.once (
+  'width, height, depth : width * height * depth &gt; 1000',
+  function (width,height,depth) {
+    alert (width + '(W) x ' + height + '(H) x ' + depth + '(D)');
+  }
+}
+
+myFishTankWater.set ({
+  width:10,
+  height:11,
+  depth:12
+});
+</pre>
+				
+				<p>In the above example, code is being registered to be executed once the product of the <code>width</code>, <code>height</code>, and <code>depth</code> properties of the <code>myFishTankWater</code> instance exceeds <code>1000</code>. Once the call to the <code><a href="#3_7">set</a></code> method has been executed, the volume of the fish tank's water will be <code>1320</code> and the handler will be executed.</p>
+				
+				<p>Now, because the properties affecting the condition have been specified as "width, height, depth", the value of these state properties will be passed as arguments to the handler in the order <code>width</code>, <code>height</code>, and <code>depth</code>. In this case, the handler function is choosing to declare these function arguments, using the same names for the sake of clarity - you could ignore the arguments if you didn't care about the specific values at the time the condition is met, or you could use the arguments but name them differently. In this example, the <code>alert</code> statement will alert the text "10(W) x 11(H) x 12(D)".</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>

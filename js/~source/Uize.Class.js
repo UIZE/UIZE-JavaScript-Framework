@@ -616,53 +616,273 @@ Uize.module ({
 					*/
 				};
 
-				_classPrototype.once = function (_property,_handler) {
-					var _wirings = {};
-					if (_handler) {
-						var _not = _property.charCodeAt (0) == 33; // supports usages like instance.once ('!empty', ...
-						if (_not) _property = _property.slice (1);
+
+				var _newFunction = new Function (
+					'a', // arguments
+					'b', // body
+					'var f; return eval ("f = function (" + a.join (",") + ") {" + b + "}")'
+				);
+
+				var _derivationCache = {};
+				function _resolveDerivation (_derivation) {
+					/* NOTE: this code will eventually be used also for derived properties */
+					var
+						_derivationCacheKey = _derivation + '',
+						_resolvedDerivation = _derivationCache [_derivationCacheKey]
+					;
+					function _getDeterminantsFromListStr (_determinantsStr) {
+						return _determinantsStr.replace (/\s+/g,'').split (',');
+					}
+					if (!_resolvedDerivation) {
 						var
-							_this = this,
-							_propertyValue = _this.get (_property)
+							_determinants,
+							_determiner
 						;
-						if (!_propertyValue == _not) {
-							_handler (_propertyValue);
+						if (Uize.isFunction (_derivation)) {
+							_determinants = _getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]);
+							_determiner = _derivation;
 						} else {
-							_wirings ['Changed.' + _property] = function  () {
-								if (!(_propertyValue = _this.get (_property)) == _not) {
-									_this.unwire (_wirings);
-									_handler (_propertyValue);
+							if (typeof _derivation == 'string') {
+								var _separatorPos = _derivation.indexOf (':');
+								if (_separatorPos > -1) {
+									_determiner = _newFunction (
+										_determinants = _getDeterminantsFromListStr (_derivation.slice (0,_separatorPos)),
+										'return ' + _derivation.slice (_separatorPos + 1)
+									);
+								} else {
+									_derivation = _getDeterminantsFromListStr (_derivation);
 								}
-							};
-							_this.wire (_wirings);
+							}
+							if (Uize.isArray (_derivation)) {
+								_determinants = Uize.map (_derivation,'value.charCodeAt (0) == 33 ? value.slice (1) : value');
+								_determiner = _newFunction (
+									_determinants,
+									'return ' + (_derivation.length ? _derivation.join (' && ') : 'true')
+								);
+							}
 						}
+						_resolvedDerivation = _derivationCache [_derivationCacheKey] = {
+							_determinants:_determinants,
+							_determinantsValuesHarvester:new Function (
+								'return [' + Uize.map (_determinants,'"this.get(\'" + value + "\')"').join (',') + ']'
+							),
+							_determiner:_determiner,
+							_changedEventNames:Uize.map (_determinants,'"Changed." + value')
+						};
+					}
+					return _resolvedDerivation;
+				}
+
+				_classPrototype.once = function (_condition,_handler) {
+					var
+						_this = this,
+						_derivation = _resolveDerivation (_condition),
+						_determinants = _derivation._determinants,
+						_determinantsValuesHarvester = _derivation._determinantsValuesHarvester,
+						_determiner = _derivation._determiner,
+						_wirings
+					;
+					function _isConditionMet () {
+						var
+							_determinantsValues = _determinantsValuesHarvester.call (_this),
+							_conditionMet = _determiner.apply (0,_determinantsValues)
+						;
+						if (_conditionMet) {
+							_wirings && _this.unwire (_wirings);
+							_handler.apply (0,_determinantsValues);
+						}
+						return _conditionMet;
+					}
+					if (_isConditionMet ()) {
+						_wirings = {};
+					} else {
+						_this.wire (_wirings = Uize.lookup (_derivation._changedEventNames,_isConditionMet));
 					}
 					return _wirings;
 					/*?
 						Instance Methods
 							once
-								Lets you register a handler that should be executed only once a condition is met (ie. the value of the specified condition property is truthy).
+								Lets you register a handler that should be executed only once a condition is met.
 
-								SYNTAX
-								...........................................................
-								wiringsOBJ = myInstance.once (propertyNameSTR,handlerFUNC);
-								...........................................................
+								The =once= method is useful when using one or more state properties to form a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the =once= method is called.
 
-								If the value of the property specified by the =propertyNameSTR= parameter is truthy when the =once= method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately. Otherwise, the value of the property will be watched and the handler will be executed once the property's value becomes truthy, upon which the property watcher will be removed and the property will no longer be watched. By design, the handler is only executed for the first time that the property's value becomes truthy.
+								DIFFERENT USAGES
 
-								The =once= method is useful when using a state property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the =once= method is called. Consider the following example...
+								`Execute Code Once a State Property is Truthy or Falsy`
+								................................................................
+								wiringsOBJ = myInstance.once (propertyConditionSTR,handlerFUNC);
+								................................................................
 
-								EXAMPLE
-								........................................................
-								myWidget.once (
-									'wired',
-									function () {
-										// do something now that the widget has been wired
-									}
-								);
-								........................................................
+								`Execute Code Once Multiple State Properties Are Truthy or Falsy`
+								.........................................................................
+								wiringsOBJ = myInstance.once (propertiesConditionARRAYorSTR,handlerFUNC);
+								.........................................................................
 
-								In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= state property becomes =true=).
+								`Execute Code Once a Compound Condition is Met`
+								......................................................................
+								wiringsOBJ = myInstance.once (compoundConditionSTRorFUNC,handlerFUNC);
+								......................................................................
+
+								Execute Code Once a State Property is Truthy or Falsy
+									In its most basic usage, code can be registered to be executed once a single state property becomes truthy or falsy.
+
+									SYNTAX
+									................................................................
+									wiringsOBJ = myInstance.once (propertyConditionSTR,handlerFUNC);
+									................................................................
+
+									The =propertyConditionSTR= parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating `condition inversion`. If simply the name of a state property is specified, then the handler code specified by the =handlerFUNC= parameter will be executed once the property is truthy. If the optional "!" prefix is specified, then the handler code will be executed once the property is falsy.
+
+									EXAMPLE 1
+									........................................................
+									myWidget.once (
+										'wired',
+										function () {
+											// do something now that the widget has been wired
+										}
+									);
+									........................................................
+
+									In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= state property becomes =true=).
+
+									EXAMPLE 2
+									................................................................
+									myCollectionWidget.once (
+										'!isEmpty',
+										function () {
+											// do something now that the collection is no longer empty
+										}
+									);
+									................................................................
+
+									In the above example, code is being registered to execute once the =isEmpty= state property is =false=.
+
+								Execute Code Once Multiple State Properties Are Truthy or Falsy
+									Code can be registered to be executed once all properties in a set of state properties become truthy or falsy, by specifying the state properties as an array of property names or as a comma-separated list string.
+
+									SYNTAX
+									.........................................................................
+									wiringsOBJ = myInstance.once (propertiesConditionARRAYorSTR,handlerFUNC);
+									.........................................................................
+
+									propertiesConditionARRAYorSTR
+										The value specified for the =propertiesConditionARRAYorSTR= parameter may be an array of property names or a comma-separated list string.
+
+										Whichever form is used, any property name can be prefixed with a "!" (exclamation mark) to achieve `condition inversion` for the property.
+
+										Summary of different forms...
+
+										- array of property names: =['phase1Done','phase2Done','phase3Done']=
+										- array of property names with `condition inversion`: =['wired','!isEmpty']=
+										- comma-separated list string: ='phase1Done, phase2Done, phase3Done'=
+										- comma-separated list with `condition inversion`: ='wired, !isEmpty'=
+
+										Whitespace Ignored for Comma-separated List String
+											If a comma-separated list string is specified, all whitespace in the string is ignored.
+
+											This means that whitespace around the property names is ignored, so the value ='phase1Done,phase2Done,phase3Done'= is equivalent to the value ='phase1Done, phase2Done , phase3Done'=. This also means that whitespace around the optional "!" (exclamation mark) prefix is ignored, so the value ='wired, !isEmpty'= is equivalent to the value ='wired, ! isEmpty'=.
+
+									Examples
+										The following examples illustrate the different ways in which multiple properties can be specified.
+
+										EXAMPLE: Array of Property Names
+											Multiple state properties can be specified using an array of state property names.
+
+											EXAMPLE
+											........................................................
+											myInstance.once (
+												['phase1Done','phase2Done','phase3Done'],
+												function () {
+													// execute code now that all three phases are done
+												}
+											);
+											........................................................
+
+										EXAMPLE: Comma-separated List String
+											Multiple state properties can be specified using a comma-separated list string.
+
+											EXAMPLE
+											........................................................
+											myInstance.once (
+												'phase1Done, phase2Done, phase3Done',
+												function () {
+													// execute code now that all three phases are done
+												}
+											);
+											........................................................
+
+										EXAMPLE: Array of Property Names, with Condition Inversion
+											Multiple state properties can be specified using an array of state property names, where some of the property names in the array are prefixed with the optional "!" to indicate `condition inversion`.
+
+											EXAMPLE
+											.................................................................................
+											myCollection.once (
+												['wired','!isEmpty'],
+												function () {
+													// execute code now that the collection widget is wired and no longer empty
+												}
+											);
+											.................................................................................
+
+										EXAMPLE: Comma-separated List String, with Condition Inversion
+											Multiple state properties can be specified using a comma-separated list string, where some of the property names in the list are prefixed with the optional "!" to indicate `condition inversion`.
+
+											EXAMPLE
+											.................................................................................
+											myCollection.once (
+												'wired, !isEmpty',
+												function () {
+													// execute code now that the collection widget is wired and no longer empty
+												}
+											);
+											.................................................................................
+
+								Execute Code Once a Compound Condition is Met
+									Code can be registered to be executed once a compound condition is met, by specifying the compound condition in the form of a condition function or condition expression string.
+
+									SYNTAX
+									......................................................................
+									wiringsOBJ = myInstance.once (compoundConditionSTRorFUNC,handlerFUNC);
+									......................................................................
+
+									Condition Function
+										A compound condition can be specified as a function, where the names of the function's arguments indicate the state properties that affect the condition and where the function's body evaluates the condition.
+
+										EXAMPLE
+										..............................................................................
+										myFishTankWater.once (
+											function (width,height,depth) {return width * height * depth > 1000},
+											function () {
+												// execute code, now that the water volume of the fish tank exceeds 1000
+											}
+										}
+										..............................................................................
+
+										In the above example, a compound condition is specified using a function. The arguments of the function - =width=, =height=, and =depth= - indicate that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The function's body, =return width &#42; height &#42; depth > 1000=, evaluates the condition to be =true= when the volume of the fish tank's water is greater than =1000=.
+
+										When code is registered to be executed once the product of the =width=, =height=, and =depth= properties is greater than =1000=, if this condition is not yet met when the =once= method is called, the method will wire handlers for the =Changed.width=, =Changed.height=, and =Changed.depth= events and will re-evaluate the condition function every time any of the properties that affect the condition change value. Once the condition function returns a truthy result, the handler for the compound condition will be executed and the handlers that were wired for the =Changed.*= events will be unwired.
+
+									Condition Expression String
+										A compound condition can be specified as an expression string, where the names of the state properties affecting the condition are specified along with an expression string for evaluating the condition.
+
+										A condition expression string is formatted with two parts separated by a ":" (colon) delimiter, where the part before the colon is a comma-separated list of the state properties affecting the condition, and the part after the colon is an expression to be used for evaluating the condition.
+
+										EXAMPLE
+										..............................................................................
+										myFishTankWater.once (
+											'width, height, depth : width * height * depth > 1000',
+											function () {
+												// execute code, now that the water volume of the fish tank exceeds 1000
+											}
+										}
+										..............................................................................
+
+										In the above example, a compound condition is specified using a `condition expression string`. In this string, the part before the colon - "width, height, depth" - indicates that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The part after the colon - "width &#42; height &#42; depth > 1000" - evaluates the condition to be =true= when the volume of the fish tank's water (ie. the product of the =width=, =height=, and =depth= properties) is greater than =1000=.
+
+								Immediate Execution if Condition Already Met
+									If the condition specified in the call to the =once= method is already met at the time that the method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately.
+
+									Otherwise, handlers will be wired for the =Changed.*= (value change) events for all the state properties that affect the condition. The condition evaluator will be executed each time any of the watched properties change value. As soon as the condition becomes met (ie. the condition evaluator produces a truthy result), the handlers wired to watch the value change events of the properties will be unwired and the handler function registered for the condition will be executed. By design, the handler is only executed for the first time that the condition becomes met.
 
 								Condition Inversion
 									As a convenience, the =once= method supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.
@@ -677,12 +897,50 @@ Uize.module ({
 									);
 									................................................................
 
-									In the above example, code is being registered to execute once the =isEmpty= condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= state property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the =once= method).
+									In the above example, code is being registered to execute once the =isEmpty= state property is =false=. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= state property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a property's value becomes falsy, rather than once the property's value becomes truthy (which is the standard behavior for the =once= method).
 
-								Return Value
-									The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.
+									Condition Inversion with Multiple Property Conditions
+										Condition inversion can be used both with single state property conditions as well as multiple property conditions.
 
-									This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the property's value is truthy when the =once= method is called, then the returned wirings object will be an empty object.
+										EXAMPLE
+										................................................................
+										myCollectionWidget.once (
+											['wired','!isEmpty'],
+											function () {
+												// do something now that the collection is wired and no longer empty
+											}
+										);
+										...........................................................................
+
+										In the above example, code is being registered to be executed once the =wired= state property is truthy and the =isEmpty= state property is falsy. Condition inversion can also be used when the state properties are specified as a comma-separated list string, so specifying the condition as =['wired','!isEmpty']= is equivalent to specifying it as ='wired, !isEmpty'=.
+
+								Wirings Object
+									The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the condition becomes met.
+
+									This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the condition is met when the =once= method is called, then the returned wirings object will be an empty object.
+
+								Handler Arguments
+									The handler code that is registered to be executed once a condition is met will be passed the values of all the state properties that affect the condition as arguments.
+
+									EXAMPLE
+									...................................................................
+									myFishTankWater.once (
+										'width, height, depth : width * height * depth > 1000',
+										function (width,height,depth) {
+											alert (width + '(W) x ' + height + '(H) x ' + depth + '(D)');
+										}
+									}
+
+									myFishTankWater.set ({
+										width:10,
+										height:11,
+										depth:12
+									});
+									...................................................................
+
+									In the above example, code is being registered to be executed once the product of the =width=, =height=, and =depth= properties of the =myFishTankWater= instance exceeds =1000=. Once the call to the =set= method has been executed, the volume of the fish tank's water will be =1320= and the handler will be executed.
+
+									Now, because the properties affecting the condition have been specified as "width, height, depth", the value of these state properties will be passed as arguments to the handler in the order =width=, =height=, and =depth=. In this case, the handler function is choosing to declare these function arguments, using the same names for the sake of clarity - you could ignore the arguments if you didn't care about the specific values at the time the condition is met, or you could use the arguments but name them differently. In this example, the =alert= statement will alert the text "10(W) x 11(H) x 12(D)".
 
 								NOTES
 								- see the other `condition system methods`
