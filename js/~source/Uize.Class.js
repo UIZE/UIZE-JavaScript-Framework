@@ -159,6 +159,8 @@ Uize.module ({
 					_clone = _Uize.clone,
 					_copyInto = _Uize.copyInto,
 					_forEach = _Uize.forEach,
+					_map = _Uize.map,
+					_lookup = _Uize.lookup,
 					_getClass = _Uize.getClass,
 					_getGuid = _Uize.getGuid,
 					_globalEval = _Uize.globalEval,
@@ -654,20 +656,37 @@ Uize.module ({
 								}
 							}
 							if (Uize.isArray (_derivation)) {
-								_determinants = Uize.map (_derivation,'value.charCodeAt (0) == 33 ? value.slice (1) : value');
-								_determiner = _newFunction (
-									_determinants,
-									'return ' + (_derivation.length ? _derivation.join (' && ') : 'true')
-								);
+								_determinants = [];
+								if (_derivation.length) {
+									var
+										_determinerArgs = []
+										_determinerOperands = []
+									;
+									_forEach (
+										_derivation,
+										function (_determinant,_determinantNo) {
+											var
+												_inverted = _determinant.charCodeAt (0) == 33,
+												_argName = 'a' + _determinantNo
+											;
+											_determinants.push (_inverted ? _determinant.slice (1) : _determinant);
+											_determinerArgs.push (_argName);
+											_determinerOperands.push ((_inverted ? '!' : '') + _argName);
+										}
+									);
+									_determiner = _newFunction (_determinerArgs,'return ' + _determinerOperands.join (' && '));
+								} else {
+									_determiner = Uize.returnTrue;
+								}
 							}
 						}
 						_resolvedDerivation = _derivationCache [_derivationCacheKey] = {
 							_determinants:_determinants,
 							_determinantsValuesHarvester:new Function (
-								'return [' + Uize.map (_determinants,'"this.get(\'" + value + "\')"').join (',') + ']'
+								'return [' + _map (_determinants,'"this.get(\'" + value + "\')"').join (',') + ']'
 							),
 							_determiner:_determiner,
-							_changedEventNames:Uize.map (_determinants,'"Changed." + value')
+							_changedEventNames:_map (_determinants,'"Changed." + value')
 						};
 					}
 					return _resolvedDerivation;
@@ -696,7 +715,7 @@ Uize.module ({
 					if (_isConditionMet ()) {
 						_wirings = {};
 					} else {
-						_this.wire (_wirings = Uize.lookup (_derivation._changedEventNames,_isConditionMet));
+						_this.wire (_wirings = _lookup (_derivation._changedEventNames,_isConditionMet));
 					}
 					return _wirings;
 					/*?
@@ -1306,7 +1325,7 @@ Uize.module ({
 						if (_propertyPublicName.indexOf ('|') > -1) {
 							var _pseudonyms = _propertyPublicName.split ('|');
 							_propertyPrimaryPublicName = _pseudonyms [0];
-							_Uize.lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicNames);
+							_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicNames);
 						} else {
 							_propertyProfilesByPublicNames [_propertyPublicName] = _propertyProfile;
 						}
@@ -1379,7 +1398,7 @@ Uize.module ({
 						*/
 						_properties = _argumentsLength > 2 || typeof _properties == _typeString
 							? _pairUp.apply (0,_arguments)
-							: _Uize.lookup (_properties,_arguments [1])
+							: _lookup (_properties,_arguments [1])
 					;
 					var
 						_this = this,
