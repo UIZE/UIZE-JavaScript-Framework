@@ -68,6 +68,8 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_class.declareServiceMethods = function (_serviceMethods) {
+				var _this = this;
+
 				if (arguments.length != 1 || typeof _serviceMethods != 'object')
 					_serviceMethods = [].slice.call (arguments)
 				;
@@ -78,7 +80,7 @@ Uize.module ({
 
 					function _errorMessage (_message) {return '<< ' + _methodName + ' >> ' + _message}
 
-					if (_classPrototype [_methodName])
+					if (_this.prototype [_methodName])
 						throw new Error (
 							_errorMessage ('You may not override a non-service public method with a service method')
 						)
@@ -265,7 +267,7 @@ Uize.module ({
 						? function (_methodName) {_declareServiceMethod (_methodName)}
 						: function (_methodProfile,_methodName) {_declareServiceMethod (_methodName,_methodProfile)}
 				);
-				Uize.copyInto (_classPrototype,_serviceMethodPublicWrappers);
+				Uize.copyInto (_this.prototype,_serviceMethodPublicWrappers);
 				/*?
 					Static Methods
 						Uize.Service.declareServiceMethods

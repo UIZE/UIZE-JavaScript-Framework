@@ -455,7 +455,7 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Services.FileSystem.WshAdapter.js</loc>
+		<loc>http://www.uize.com/js/~source/Uize.Services.FileSystemWsh.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>

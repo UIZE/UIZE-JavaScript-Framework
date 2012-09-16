@@ -97,6 +97,8 @@ Uize.module ({
 								- can move/rename files
 				*/
 			});
+
+		return _class;
 	}
 });
 

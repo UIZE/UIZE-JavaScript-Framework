@@ -659,7 +659,7 @@ Uize.module ({
 								_determinants = [];
 								if (_derivation.length) {
 									var
-										_determinerArgs = []
+										_determinerArgs = [],
 										_determinerOperands = []
 									;
 									_forEach (
@@ -676,7 +676,7 @@ Uize.module ({
 									);
 									_determiner = _newFunction (_determinerArgs,'return ' + _determinerOperands.join (' && '));
 								} else {
-									_determiner = Uize.returnTrue;
+									_determiner = _Uize.returnTrue;
 								}
 							}
 						}

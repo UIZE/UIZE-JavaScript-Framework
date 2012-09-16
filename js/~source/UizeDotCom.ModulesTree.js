@@ -84,9 +84,8 @@ Uize.module ({
 						Adapter:0
 					},
 					Services:{
-						FileSystem:{
-							WshAdapter:0
-						}
+						FileSystem:0,
+						FileSystemWsh:0
 					},
 					String:{
 						Builder:0,

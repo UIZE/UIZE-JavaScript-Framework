@@ -4,4 +4,4 @@
 	http://www.uize.com/reference/Uize.Util.Needs.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html
 */
-Uize.module({name:'Uize.Util.Needs',superclass:'Uize.Class',builder:function(b_a){var b_b=b_a.subclass(),b_c=b_b.prototype;b_c.need=function(b_d,b_e){var b_f=this;b_f.once(b_d,b_e);typeof b_d=='string'?b_f.met('Needed:'+b_d):Uize.forEach(b_d,function(b_g){b_f.met('Needed:'+b_g)});};b_c.provide=function(b_g,b_h){var b_f=this;b_f.once('Needed:'+b_g,function(){b_h(function(b_i){b_f.met(b_g,b_i)})});};return b_b;}});
+Uize.module({name:'Uize.Util.Needs',superclass:'Uize.Class',builder:function(b_a){var b_b='NEEDED_';var b_c=b_a.subclass(),b_d=b_c.prototype;b_d.need=function(b_e,b_f){var b_g=this;b_g.once(b_e,b_f);typeof b_e=='string'?b_g.met(b_b+b_e):Uize.forEach(b_e,function(b_h){b_g.met(b_b+b_h)});};b_d.provide=function(b_h,b_i){var b_g=this;b_g.once(b_b+b_h,function(){b_i(function(b_j){b_g.met(b_h,b_j)})});};return b_c;}});

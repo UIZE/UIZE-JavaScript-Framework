@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Uize.Services.FileSystem.WshAdapter | Documentation | UIZE JavaScript Framework</title>
-	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Services.FileSystem.WshAdapter module reference documentation"/>
-	<meta name="description" content="The Uize.Services.FileSystem.WshAdapter module defines an adapter for the file system service (Uize.Services.FileSystem) for the WSH (Windows Script Host) environment."/>
+	<title>Uize.Services.FileSystemWsh | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Services.FileSystemWsh module reference documentation"/>
+	<meta name="description" content="The Uize.Services.FileSystemWsh module defines an adapter for the file system service (Uize.Services.FileSystem) for the WSH (Windows Script Host) environment."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -17,9 +17,9 @@
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
 	
 	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
-	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Services.html" title="View reference for Uize.Services" class="breadcrumb">Services</a>.<a href="Uize.Services.FileSystem.html" title="View reference for Uize.Services.FileSystem" class="breadcrumb">FileSystem</a>.<a href="Uize.Services.FileSystem.WshAdapter.html" title="View reference for Uize.Services.FileSystem.WshAdapter" class="breadcrumb">WshAdapter</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Services.html" title="View reference for Uize.Services" class="breadcrumb">Services</a>.<a href="Uize.Services.FileSystemWsh.html" title="View reference for Uize.Services.FileSystemWsh" class="breadcrumb">FileSystemWsh</a>
 	<div class="pageActions">
-		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Services.FileSystem.WshAdapter.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Services.FileSystemWsh.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
 	</div>
 
 </h1>
@@ -29,16 +29,16 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The Uize.Services.FileSystem.WshAdapter module defines an adapter for the file system service (Uize.Services.FileSystem) for the WSH (Windows Script Host) environment.">1. Introduction</a>
+			<li><a href="#1" title="The Uize.Services.FileSystemWsh module defines an adapter for the file system service (Uize.Services.FileSystem) for the WSH (Windows Script Host) environment.">1. Introduction</a>
 				<ul>
-					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Services.FileSystem.WshAdapter module.">1.1. Examples</a></li>
-					<li><a href="#1_2" title="The Uize.Services.FileSystem.WshAdapter module defines the Uize.Services.FileSystem.WshAdapter class, which is a subclass of Uize.Service.Adapter.">1.2. Implementation Info</a>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Services.FileSystemWsh module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Services.FileSystemWsh module defines the Uize.Services.FileSystemWsh class, which is a subclass of Uize.Service.Adapter.">1.2. Implementation Info</a>
 						<ul>
 							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
 							<li><a href="#1_2_2" title="The features listed in this section have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
 							<li><a href="#1_2_3" title="The features listed in this section have been inherited from other modules.">1.2.3. Features Inherited From Other Modules</a></li>
 							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
-							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Services.FileSystem.WshAdapter module.">1.2.5. Unit Tests</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Services.FileSystemWsh module.">1.2.5. Unit Tests</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -63,21 +63,21 @@
 			</li>
 			<li><a href="#3">3. Static Methods</a>
 				<ul>
-					<li><a href="#3_1" title="Inherited from Uize.Class.">3.1. Uize.Services.FileSystem.WshAdapter.fire</a></li>
-					<li><a href="#3_2" title="Inherited from Uize.Class.">3.2. Uize.Services.FileSystem.WshAdapter.get</a></li>
-					<li><a href="#3_3" title="Inherited from Uize.Class.">3.3. Uize.Services.FileSystem.WshAdapter.registerProperties</a></li>
-					<li><a href="#3_4" title="Inherited from Uize.Class.">3.4. Uize.Services.FileSystem.WshAdapter.set</a></li>
-					<li><a href="#3_5" title="Inherited from Uize.Class.">3.5. Uize.Services.FileSystem.WshAdapter.singleton</a></li>
-					<li><a href="#3_6" title="Inherited from Uize.Class.">3.6. Uize.Services.FileSystem.WshAdapter.subclass</a></li>
-					<li><a href="#3_7" title="Inherited from Uize.Class.">3.7. Uize.Services.FileSystem.WshAdapter.toggle</a></li>
-					<li><a href="#3_8" title="Inherited from Uize.Class.">3.8. Uize.Services.FileSystem.WshAdapter.unwire</a></li>
-					<li><a href="#3_9" title="Inherited from Uize.Class.">3.9. Uize.Services.FileSystem.WshAdapter.wire</a></li>
+					<li><a href="#3_1" title="Inherited from Uize.Class.">3.1. Uize.Services.FileSystemWsh.fire</a></li>
+					<li><a href="#3_2" title="Inherited from Uize.Class.">3.2. Uize.Services.FileSystemWsh.get</a></li>
+					<li><a href="#3_3" title="Inherited from Uize.Class.">3.3. Uize.Services.FileSystemWsh.registerProperties</a></li>
+					<li><a href="#3_4" title="Inherited from Uize.Class.">3.4. Uize.Services.FileSystemWsh.set</a></li>
+					<li><a href="#3_5" title="Inherited from Uize.Class.">3.5. Uize.Services.FileSystemWsh.singleton</a></li>
+					<li><a href="#3_6" title="Inherited from Uize.Class.">3.6. Uize.Services.FileSystemWsh.subclass</a></li>
+					<li><a href="#3_7" title="Inherited from Uize.Class.">3.7. Uize.Services.FileSystemWsh.toggle</a></li>
+					<li><a href="#3_8" title="Inherited from Uize.Class.">3.8. Uize.Services.FileSystemWsh.unwire</a></li>
+					<li><a href="#3_9" title="Inherited from Uize.Class.">3.9. Uize.Services.FileSystemWsh.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#4">4. Static Properties</a>
 				<ul>
-					<li><a href="#4_1" title="IMPLEMENTATION INFO">4.1. Uize.Services.FileSystem.WshAdapter.moduleName</a></li>
-					<li><a href="#4_2" title="IMPLEMENTATION INFO">4.2. Uize.Services.FileSystem.WshAdapter.nonInheritableStatics</a></li>
+					<li><a href="#4_1" title="IMPLEMENTATION INFO">4.1. Uize.Services.FileSystemWsh.moduleName</a></li>
+					<li><a href="#4_2" title="IMPLEMENTATION INFO">4.2. Uize.Services.FileSystemWsh.nonInheritableStatics</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -89,30 +89,30 @@
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
 	<div class="contents1">
-		<p>The <code>Uize.Services.FileSystem.WshAdapter</code> module defines an adapter for the file system service (<code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code>) for the WSH (Windows Script Host) environment.</p>
+		<p>The <code>Uize.Services.FileSystemWsh</code> module defines an adapter for the file system service (<code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code>) for the WSH (Windows Script Host) environment.</p>
 		
 		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
 		
 		<a name="1_1"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
 		<div class="contents2">
-			<p>There are no dedicated showcase example pages for the <code>Uize.Services.FileSystem.WshAdapter</code> module.</p>
+			<p>There are no dedicated showcase example pages for the <code>Uize.Services.FileSystemWsh</code> module.</p>
 			
 			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
 			
-			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Services.FileSystem.WshAdapter</code> module...</p>
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Services.FileSystemWsh</code> module...</p>
 			
-			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Services.FileSystem.WshAdapter%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Services.FileSystemWsh%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
 		</div>
 		
 		<a name="1_2"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
 		<div class="contents2">
-			<p>The <code>Uize.Services.FileSystem.WshAdapter</code> module defines the <code>Uize.Services.FileSystem.WshAdapter</code> class, which is a subclass of <code><a href="../reference/Uize.Service.Adapter.html">Uize.Service.Adapter</a></code>.</p>
+			<p>The <code>Uize.Services.FileSystemWsh</code> module defines the <code>Uize.Services.FileSystemWsh</code> class, which is a subclass of <code><a href="../reference/Uize.Service.Adapter.html">Uize.Service.Adapter</a></code>.</p>
 			
 			<p><span class="allCaps">INHERITANCE CHAIN</span></p>
 			
-			<p><code><a href="../reference/Uize.Class.html">Uize.Class</a></code> -> <code><a href="../reference/Uize.Service.Adapter.html">Uize.Service.Adapter</a></code> -> <code>Uize.Services.FileSystem.WshAdapter</code></p>
+			<p><code><a href="../reference/Uize.Class.html">Uize.Class</a></code> -> <code><a href="../reference/Uize.Service.Adapter.html">Uize.Service.Adapter</a></code> -> <code>Uize.Services.FileSystemWsh</code></p>
 			
 			<a name="1_2_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
@@ -133,7 +133,7 @@
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
-				<p><code><a href="#4_1">Uize.Services.FileSystem.WshAdapter.moduleName</a></code> | <code><a href="#4_2">Uize.Services.FileSystem.WshAdapter.nonInheritableStatics</a></code></p>
+				<p><code><a href="#4_1">Uize.Services.FileSystemWsh.moduleName</a></code> | <code><a href="#4_2">Uize.Services.FileSystemWsh.nonInheritableStatics</a></code></p>
 			</div>
 			
 			<a name="1_2_3"></a>
@@ -149,7 +149,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#3_1">Uize.Services.FileSystem.WshAdapter.fire</a></code> | <code><a href="#3_2">Uize.Services.FileSystem.WshAdapter.get</a></code> | <code><a href="#3_3">Uize.Services.FileSystem.WshAdapter.registerProperties</a></code> | <code><a href="#3_4">Uize.Services.FileSystem.WshAdapter.set</a></code> | <code><a href="#3_5">Uize.Services.FileSystem.WshAdapter.singleton</a></code> | <code><a href="#3_6">Uize.Services.FileSystem.WshAdapter.subclass</a></code> | <code><a href="#3_7">Uize.Services.FileSystem.WshAdapter.toggle</a></code> | <code><a href="#3_8">Uize.Services.FileSystem.WshAdapter.unwire</a></code> | <code><a href="#3_9">Uize.Services.FileSystem.WshAdapter.wire</a></code></p>
+				<p><code><a href="#3_1">Uize.Services.FileSystemWsh.fire</a></code> | <code><a href="#3_2">Uize.Services.FileSystemWsh.get</a></code> | <code><a href="#3_3">Uize.Services.FileSystemWsh.registerProperties</a></code> | <code><a href="#3_4">Uize.Services.FileSystemWsh.set</a></code> | <code><a href="#3_5">Uize.Services.FileSystemWsh.singleton</a></code> | <code><a href="#3_6">Uize.Services.FileSystemWsh.subclass</a></code> | <code><a href="#3_7">Uize.Services.FileSystemWsh.toggle</a></code> | <code><a href="#3_8">Uize.Services.FileSystemWsh.unwire</a></code> | <code><a href="#3_9">Uize.Services.FileSystemWsh.wire</a></code></p>
 			</div>
 			
 			<a name="1_2_4"></a>
@@ -161,7 +161,7 @@
 			<a name="1_2_5"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
 			<div class="contents3">
-				<p>There is no dedicated unit tests module for the <code>Uize.Services.FileSystem.WshAdapter</code> module.</p>
+				<p>There is no dedicated unit tests module for the <code>Uize.Services.FileSystemWsh</code> module.</p>
 			</div>
 		</div>
 	</div>
@@ -336,7 +336,7 @@
 	<h1 class="heading1" title="3. Static Methods"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>. </span>Static Methods</h1>
 	<div class="contents1">
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.1. Uize.Services.FileSystem.WshAdapter.fire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Services.FileSystem.WshAdapter.fire">1</a>. </span>Uize.Services.FileSystem.WshAdapter.fire</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.1. Uize.Services.FileSystemWsh.fire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Services.FileSystemWsh.fire">1</a>. </span>Uize.Services.FileSystemWsh.fire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -349,7 +349,7 @@
 		</div>
 		
 		<a name="3_2"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.2. Uize.Services.FileSystem.WshAdapter.get"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Services.FileSystem.WshAdapter.get">2</a>. </span>Uize.Services.FileSystem.WshAdapter.get</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.2. Uize.Services.FileSystemWsh.get"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Services.FileSystemWsh.get">2</a>. </span>Uize.Services.FileSystemWsh.get</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -362,7 +362,7 @@
 		</div>
 		
 		<a name="3_3"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.3. Uize.Services.FileSystem.WshAdapter.registerProperties"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Services.FileSystem.WshAdapter.registerProperties">3</a>. </span>Uize.Services.FileSystem.WshAdapter.registerProperties</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.3. Uize.Services.FileSystemWsh.registerProperties"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Services.FileSystemWsh.registerProperties">3</a>. </span>Uize.Services.FileSystemWsh.registerProperties</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -375,7 +375,7 @@
 		</div>
 		
 		<a name="3_4"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.4. Uize.Services.FileSystem.WshAdapter.set"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_4" title="3. Static Methods -&gt; 3.4. Uize.Services.FileSystem.WshAdapter.set">4</a>. </span>Uize.Services.FileSystem.WshAdapter.set</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.4. Uize.Services.FileSystemWsh.set"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_4" title="3. Static Methods -&gt; 3.4. Uize.Services.FileSystemWsh.set">4</a>. </span>Uize.Services.FileSystemWsh.set</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -388,7 +388,7 @@
 		</div>
 		
 		<a name="3_5"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.5. Uize.Services.FileSystem.WshAdapter.singleton"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_5" title="3. Static Methods -&gt; 3.5. Uize.Services.FileSystem.WshAdapter.singleton">5</a>. </span>Uize.Services.FileSystem.WshAdapter.singleton</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.5. Uize.Services.FileSystemWsh.singleton"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_5" title="3. Static Methods -&gt; 3.5. Uize.Services.FileSystemWsh.singleton">5</a>. </span>Uize.Services.FileSystemWsh.singleton</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -401,7 +401,7 @@
 		</div>
 		
 		<a name="3_6"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.6. Uize.Services.FileSystem.WshAdapter.subclass"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_6" title="3. Static Methods -&gt; 3.6. Uize.Services.FileSystem.WshAdapter.subclass">6</a>. </span>Uize.Services.FileSystem.WshAdapter.subclass</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.6. Uize.Services.FileSystemWsh.subclass"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_6" title="3. Static Methods -&gt; 3.6. Uize.Services.FileSystemWsh.subclass">6</a>. </span>Uize.Services.FileSystemWsh.subclass</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -414,7 +414,7 @@
 		</div>
 		
 		<a name="3_7"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.7. Uize.Services.FileSystem.WshAdapter.toggle"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_7" title="3. Static Methods -&gt; 3.7. Uize.Services.FileSystem.WshAdapter.toggle">7</a>. </span>Uize.Services.FileSystem.WshAdapter.toggle</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.7. Uize.Services.FileSystemWsh.toggle"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_7" title="3. Static Methods -&gt; 3.7. Uize.Services.FileSystemWsh.toggle">7</a>. </span>Uize.Services.FileSystemWsh.toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -427,7 +427,7 @@
 		</div>
 		
 		<a name="3_8"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.8. Uize.Services.FileSystem.WshAdapter.unwire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_8" title="3. Static Methods -&gt; 3.8. Uize.Services.FileSystem.WshAdapter.unwire">8</a>. </span>Uize.Services.FileSystem.WshAdapter.unwire</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.8. Uize.Services.FileSystemWsh.unwire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_8" title="3. Static Methods -&gt; 3.8. Uize.Services.FileSystemWsh.unwire">8</a>. </span>Uize.Services.FileSystemWsh.unwire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -440,7 +440,7 @@
 		</div>
 		
 		<a name="3_9"></a>
-		<h2 class="heading2" title="3. Static Methods -&gt; 3.9. Uize.Services.FileSystem.WshAdapter.wire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_9" title="3. Static Methods -&gt; 3.9. Uize.Services.FileSystem.WshAdapter.wire">9</a>. </span>Uize.Services.FileSystem.WshAdapter.wire</h2>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.9. Uize.Services.FileSystemWsh.wire"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_9" title="3. Static Methods -&gt; 3.9. Uize.Services.FileSystemWsh.wire">9</a>. </span>Uize.Services.FileSystemWsh.wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -457,7 +457,7 @@
 	<h1 class="heading1" title="4. Static Properties"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>. </span>Static Properties</h1>
 	<div class="contents1">
 		<a name="4_1"></a>
-		<h2 class="heading2" title="4. Static Properties -&gt; 4.1. Uize.Services.FileSystem.WshAdapter.moduleName"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_1" title="4. Static Properties -&gt; 4.1. Uize.Services.FileSystem.WshAdapter.moduleName">1</a>. </span>Uize.Services.FileSystem.WshAdapter.moduleName</h2>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.1. Uize.Services.FileSystemWsh.moduleName"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_1" title="4. Static Properties -&gt; 4.1. Uize.Services.FileSystemWsh.moduleName">1</a>. </span>Uize.Services.FileSystemWsh.moduleName</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -468,7 +468,7 @@
 		</div>
 		
 		<a name="4_2"></a>
-		<h2 class="heading2" title="4. Static Properties -&gt; 4.2. Uize.Services.FileSystem.WshAdapter.nonInheritableStatics"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_2" title="4. Static Properties -&gt; 4.2. Uize.Services.FileSystem.WshAdapter.nonInheritableStatics">2</a>. </span>Uize.Services.FileSystem.WshAdapter.nonInheritableStatics</h2>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.2. Uize.Services.FileSystemWsh.nonInheritableStatics"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_2" title="4. Static Properties -&gt; 4.2. Uize.Services.FileSystemWsh.nonInheritableStatics">2</a>. </span>Uize.Services.FileSystemWsh.nonInheritableStatics</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

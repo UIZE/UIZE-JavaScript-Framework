@@ -61,16 +61,30 @@ Uize.module ({
 
 		function _registerServiceSetup (_serviceModuleName,_serviceAdapterModuleName,_serviceSetup) {
 			_registeredServices [_serviceModuleName] = _trueFlag;
-			_servicesSetup.provide (_serviceModuleName,function (_provide) {
-				_uizeRequire (
-					[_serviceModuleName,_serviceAdapterModuleName],
-					function (_serviceModule,_serviceAdapterModule) {
-						(_service = _serviceModule.singleton ()).set ('adapter',_serviceAdapterModule.singleton ());
-						_serviceSetup (_service,function () {_provide (_service)});
-					}
-				);
-			});
+			_servicesSetup.provide (
+				_serviceModuleName,
+				function (_provide) {
+					_uizeRequire (
+						[_serviceModuleName,_serviceAdapterModuleName],
+						function (_serviceModule,_serviceAdapterModule) {
+							(_service = _serviceModule.singleton ()).set ('adapter',_serviceAdapterModule.singleton ());
+							_serviceSetup (_service,function () {_provide (_service)});
+						}
+					);
+				}
+			);
 		}
+
+		/*** register setup for different services ***/
+			var _isWsh = typeof ActiveXObject != 'undefined';
+			_registerServiceSetup (
+				'Uize.Services.FileSystem',
+				_isWsh ? 'Uize.Services.FileSystemWsh' : 'Uize.Services.FileSystemNode',
+				function (_service,_doneWithSetup) {
+					_service.init ();
+					_doneWithSetup ();
+				}
+			);
 	}
 });
 

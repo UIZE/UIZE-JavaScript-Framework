@@ -28,6 +28,9 @@ Uize.module ({
 	name:'Uize.Util.Needs',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
+		/*** General Variables ***/
+			var _needConditionPrefix = 'NEEDED_';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
@@ -39,15 +42,15 @@ Uize.module ({
 				var _this = this;
 				_this.once (_needs,_needer);
 				typeof _needs == 'string'
-					? _this.met ('Needed:' + _needs)
-					: Uize.forEach (_needs,function (_need) {_this.met ('Needed:' + _need)})
+					? _this.met (_needConditionPrefix + _needs)
+					: Uize.forEach (_needs,function (_need) {_this.met (_needConditionPrefix + _need)})
 				;
 			};
 
 			_classPrototype.provide = function (_need,_provider) {
 				var _this = this;
 				_this.once (
-					'Needed:' + _need,
+					_needConditionPrefix + _need,
 					function () {_provider (function (_provided) {_this.met (_need,_provided)})}
 				);
 			};
