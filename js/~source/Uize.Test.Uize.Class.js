@@ -1288,6 +1288,27 @@ Uize.module ({
 											}
 										},
 										{
+											title:'Test that, when specifying an array of property names for the condition, property names may contain spaces and special characters',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.registerProperties ({
+													'property name with spaces':{value:false},
+													'~@#$%^&*(){}[]:;<>,.?/':{value:false}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													['property name with spaces','~@#$%^&*(){}[]:;<>,.?/'],
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({'property name with spaces':42});
+												_instance.set ({'~@#$%^&*(){}[]:;<>,.?/':'forty two'});
+												return this.expect ([[42,'forty two']],_valuesPassedToHandler);
+											}
+										},
+										{
 											title:'Test that specifying a comma-separated list of property names for the condition is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
