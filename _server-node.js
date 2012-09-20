@@ -120,13 +120,13 @@ Uize.module ({
 
 				- needed items can be objects, in memory
 					- as objects in memory, needed objects can have a last modified date
-				
+
 				- a JST template can have template modules as dependencies
 					- template module dependencies are dependencies for the process of using of such a JST template
 					- if one of the template module dependencies is modified since the last build using the JST template, then the last built product of the JST template would need to be rebuilt
-				
+
 				- with a request driven model for build process, for the purpose of performance, any file can have an internal / parsed representation as an object
-					- so, for example, a .json file that is built as part of a build process can also be stored in memory as a JavaScript object, so that processes that repeatedly use the .json file as an input can not have to repeatedly parse the 
+					- so, for example, a .json file that is built as part of a build process can also be stored in memory as a JavaScript object, so that processes that repeatedly use the .json file as an input can not have to repeatedly parse the
 					- all files can be modified through their string or object interfaces
 						- if modified through object interface...
 							- buffered serialization, buffered writing to file
