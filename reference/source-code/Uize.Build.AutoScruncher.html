@@ -87,10 +87,16 @@ Uize.module ({
           _endsWidthDotJsRegExp = /\.js$/,
           _buildScriptName = WScript.ScriptName,
           _scrunchedHeadComments = _params.scrunchedHeadComments || {},
-          _scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+          _scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+          _currentFolderPath,
+          _fullModuleFolderPath = Uize.Wsh.getScriptFolderPath () + '\\' + _params.moduleFolderPath
         ;
         function _targetFolderPathCreator (_folderPath) {
-          return _package.getScrunchedFolderPath (_folderPath,_params.buildFolderPath,_params.sourceFolderName);
+          return _package.getScrunchedFolderPath (
+            _currentFolderPath = _folderPath,
+            _params.buildFolderPath,
+            _params.sourceFolderName
+          );
         }
 
         /*** scrunch eligible JavaScript files ***/
@@ -113,17 +119,19 @@ Uize.module ({
                   if (!_keepHeadComment)
                     _scruncherSettings.KEEPHEADCOMMENT = 'FALSE'
                   ;
-                  Uize.module ({
-                    required:_moduleName,
-                    builder:function () {
-                      var _inheritanceDepth = Uize.Util.Oop.getInheritanceChain (eval (_moduleName)).length;
-                      _scruncherSettings.MAPPINGS =
-                        '=' +
-                        (_inheritanceDepth ? _scruncherPrefixChars.charAt (_inheritanceDepth - 1) : '') +
-                        ',' + _moduleName.replace (/\./g,'_')
-                      ;
-                    }
-                  });
+                  if (_currentFolderPath == _fullModuleFolderPath)
+                    Uize.require (
+                      _moduleName,
+                      function (_module) {
+                        var _inheritanceDepth = Uize.Util.Oop.getInheritanceChain (_module).length;
+                        _scruncherSettings.MAPPINGS =
+                          '=' +
+                          (_inheritanceDepth ? _scruncherPrefixChars.charAt (_inheritanceDepth - 1) : '') +
+                          ',' + _moduleName.replace (/\./g,'_')
+                        ;
+                      }
+                    )
+                  ;
                   var _scruncherResult = Uize.Build.Scruncher.scrunch (_sourceFileText,_scruncherSettings);
                   return {
                     outputText:
@@ -145,15 +153,10 @@ Uize.module ({
           );
 
         /*** build .library.js files ***/
-          /* TO DO:
-            substitute scrunched modules in library contents comment
-          */
           var
             _contentsCommentRegExp = /\/\*\s*Library\s*Contents/i,
             _lineStartsWithIdentifierCharRegExp = /^[a-zA-Z_$]/,
-            _scrunchedModuleFolderPath = _targetFolderPathCreator (
-              Uize.Wsh.getScriptFolderPath () + '\\' + _params.moduleFolderPath
-            ),
+            _scrunchedModuleFolderPath = _targetFolderPathCreator (_fullModuleFolderPath),
             _libraryUsesUizeModulesHeader =
               '/*______________\n' +
               '|       ______  |   B U I L T     O N     U I Z E     F R A M E W O R K\n' +
