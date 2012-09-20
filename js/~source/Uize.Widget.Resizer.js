@@ -181,6 +181,10 @@ Uize.module ({
 				}
 			};
 
+			_classPrototype.initiateDrag = function (_domEvent) {
+				this.children.move.initiate (_domEvent)
+			};
+
 			_classPrototype.getCoords = function () {
 				var _this = this;
 				return {left:_this._left,top:_this._top,width:_this._width,height:_this._height};
@@ -189,15 +193,20 @@ Uize.module ({
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {
+					var _setRotation = _true;
 					function _setAreaDims (_areaNode) {
 						function _getBorderWidth (_side) {
 							return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
 						}
 						var _area = _this.getNode (_areaNode);
 						if (_area) {
-							var _newAreaWidth = Math.max (
+							var
+								_newAreaWidth = Math.max (
 								_this._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
-							);
+								),
+								_newAreaHeight = Math.max (_this._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
+							;
+
 							if (_isIe)
 								_newAreaWidth == _this._lastAreaWidth [_areaNode]
 									? _this.displayNode ('jiggler',_this._jigglerShown = !_this._jigglerShown)
@@ -209,12 +218,39 @@ Uize.module ({
 									left:_this._left,
 									top:_this._top,
 									width:_newAreaWidth,
-									height:Math.max (_this._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
+									height:_newAreaHeight
 								}
 							);
+
+							if (Uize.isNumber (_this._rotation) && _setRotation) {
+								var
+									_rotation = _this._rotation,
+									_rotationString = _rotation ? 'rotate(' + Math.round (_this._rotation) + 'deg)' : '',
+									_origin = _rotation ? (_this._left + _newAreaWidth / 2) + 'px ' + (_this._top + _newAreaHeight / 2) + 'px' : ''
+								;
+
+								_this.setNodeStyle (
+									'',
+									{
+										MozTransformOrigin:_origin,
+										webkitTransformOrigin:_origin,
+										OTransformOrigin:_origin,
+										msTransformOrigin:_origin,
+										transformOrigin:_origin,
+										MozTransform:_rotationString,
+										webkitTransform:_rotationString,
+										msTransform:_rotationString,
+										OTransform:_rotationString,
+										transform:_rotationString
+									}
+								);
+
+								_setRotation = _false;
+							}
 						}
 					}
 					Uize.forEach (_this._areaNodes,_setAreaDims);
+
 				}
 			};
 
@@ -497,6 +533,10 @@ Uize.module ({
 					name:'width',
 					onChange:_conformDimsAndUpdateUi,
 					value:200
+				},
+				_rotation:{
+					name:'rotation',
+					onChange:_conformDimsAndUpdateUi
 				}
 			});
 

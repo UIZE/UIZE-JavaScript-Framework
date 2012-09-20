@@ -49,17 +49,22 @@ Uize.module ({
 					southwestEdge:'SouthwestEdge',
 					center:'Center'
 				},
-				_childrenInMini = {north:1,south:1,east:1,west:1},
+				_childrenInMini = {north:1,south:1,east:1,west:1,center:1},
 				_class = _superclass.subclass (
+					null,
 					function () {
-						var
-							_this = this
-						;
-
-						// add the four cardinal directions
+						if (!this._useLinks)
 						for (var _name in _buttonDictionary)
-							_this._addChildButton (_name)
-						;
+								this._addChildButton (_name).wire (
+									'Click',
+									function (_event) {
+										this.fire ({
+											name:'Move',
+											direction:_buttonDictionary [_name],
+											domEvent:_event.domEvent
+										})
+									}
+								)
 					}
 				),
 				_classPrototype = _class.prototype
@@ -76,6 +81,11 @@ Uize.module ({
 					_this = this
 				;
 				if (_this.isWired) {
+					if (_this._useLinks) {
+						for (var _name in _buttonDictionary)
+							_this.displayNode (_name, _this._mode == 'full' || _name in _childrenInMini)
+						;
+					} else {
 					var
 						_children = _this.children
 					;
@@ -85,13 +95,16 @@ Uize.module ({
 						_children [_child].displayNode ('', _this._mode == 'full' || _child in _childrenInMini )
 					;
 				}
+				}
 			};
 
 			_classPrototype._updateUiEnabled = function () {
 				var
 					_this = this,
 					_children = _this.children,
-					_enabled = _this.get ('enabled')
+					_enabled = _this.get ('enabled'),
+					_cssClassDisabledButton = _this._cssClassDisabledButton,
+					_useLinks = _this._useLinks
 				;
 
 				// if enabled is an object then parse through and set the children enabled states
@@ -102,14 +115,40 @@ Uize.module ({
 						_childName
 					;
 
-					for (_childName in _children) {
+					for (_childName in _buttonDictionary) {
 						var _childNameInEnabled = _childName in _enabled;
-						(_childNameInEnabled || _default !== undefined) && _children [_childName].set ({
-							enabled:_childNameInEnabled ? _enabled [_childName] : _default
+
+						if (_childNameInEnabled || _default !== undefined) {
+							var _enable = _childNameInEnabled ? _enabled [_childName] : _default;
+
+							if (_useLinks) {
+								var
+									_node = _this.getNode (_childName)
+								;
+
+								_enable ?
+									Uize.Node.Classes.removeClass (_node, _cssClassDisabledButton) :
+									Uize.Node.Classes.addClass (_node, _cssClassDisabledButton)
+								;
+							}
+							else
+								_children [_childName].set ({
+									enabled:_enable
 						});
 					}
+					}
+				} else {
+					if (_useLinks) {
+						for (var _buttonName in _buttonDictionary) {
+							var _node = _this.getNode (_buttonName);
+							_enabled ?
+								Uize.Node.Classes.removeClass (_node, _cssClassDisabledButton) :
+								Uize.Node.Classes.addClass (_node, _cssClassDisabledButton)
+							;
+						}
 				} else
 					Uize.callOn (_children,'set',[{enabled:_enabled}]);
+				}
 			};
 
 			_classPrototype.wireUi = function () {
@@ -122,6 +161,26 @@ Uize.module ({
 						'Changed.enabled',
 						function () { _this._updateUiEnabled () }
 					);
+
+					_this._useLinks &&
+						Uize.forEach (
+							_buttonDictionary,
+							function (_direction, _name) {
+								_this.wireNode (
+									_name,
+									'click',
+									function (_event) {
+										(_this.get ('enabled') || _this.get ('enabledInherited')) &&
+											_this.fire ({
+												name:'Move',
+												direction:_direction,
+												domEvent:_event
+											})
+									}
+								)
+							}
+						)
+					;
 
 					_superclass.prototype.wireUi.call (_this);
 				}
@@ -138,6 +197,7 @@ Uize.module ({
 
 		/*** Properties Registration ***/
 			_class.registerProperties ({
+				_cssClassDisabledButton:'cssClassDisabledButton',
 				_mode:{
 					name:'mode',
 					onChange:_classPrototype._updateUiMode,
@@ -165,7 +225,13 @@ Uize.module ({
 
 								The =enabled= property object value is a dictionary whose keys are either 'defaultValue' or the names of the =Uize.Widget.DirectionalPad= instance's child widgets. If the child widget is not mentioned in the dictionary, then its value will be set to whatever is specified by 'defaultValue'. If 'defaultValue' is undefined then the child widget's enabled state will not change.
 					*/
-				}
+				},
+				_useLinks:'useLinks'
+				/*?
+					State properties
+						useLinks
+							A boolean used by the omegastructor and wireUi methods to determine whether to use child button widgets or links for the sub-actions.
+				*/
 			});
 
 			return _class;

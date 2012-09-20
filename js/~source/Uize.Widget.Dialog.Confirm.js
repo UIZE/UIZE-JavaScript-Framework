@@ -41,11 +41,11 @@ Uize.module ({
 						var _this = this;
 
 						/*** add event handlers ***/
-							function _submitDialog (_result) {_this.fire ({name:'Submission Complete',result:_result})}
+							function _handleConfirm(_event) { _this.handleConfirm(_event) }
 							_this.wire ({
-								Ok:function () {_submitDialog (_true)},
-								Cancel:function () {_submitDialog (_false)},
-								Close:function () {_submitDialog (_false)}
+								Ok:_handleConfirm,
+								Cancel:_handleConfirm,
+								Close:_handleConfirm
 							});
 					}
 				),
@@ -71,6 +71,10 @@ Uize.module ({
 			};
 
 		/*** Public Instance Methods ***/
+			_classPrototype.handleConfirm = function(_event) {
+				this.fire ({name:'Submission Complete',result:_event.name == 'Ok'})
+			};
+		
 			_classPrototype.updateUi = function () {
 				this._updateUiState ();
 				this._updateUiMessage ();

@@ -96,7 +96,10 @@ Uize.module ({
 				}
 				_this._xmlHttpRequest.open (_requestMethod,_requestUrl,true);
 				if (_requestMethodIsPost) {
-					_this._xmlHttpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					// don't set the content-type request header if it's multipart/form-data; the built-in FormData object will take care of that
+					_request.contentType != 'multipart/form-data'
+						&& _this._xmlHttpRequest.setRequestHeader('Content-type', _request.contentType || 'application/x-www-form-urlencoded')
+					;
 					_this._xmlHttpRequest.setRequestHeader('Content-length', _requestData.length);
 				}
 				_this._xmlHttpRequest.send (_requestData);

@@ -26,7 +26,10 @@
 
 Uize.module ({
 	name:'Uize.Widget.Resizer.Marquee',
-	required:'Uize.Node',
+	required:[
+		'Uize.Node',
+		'Uize.Node.Event'
+	],
 	builder:function  (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var
@@ -135,6 +138,19 @@ Uize.module ({
 				}
 			};
 
+			_classPrototype._updateUiRotate = function () {
+				var
+					_this = this,
+					_canRotate = !!_this._canRotate
+				;
+
+				if (_this.isWired && _canRotate) {
+					var _rotateNode = _this.getNode ('rotate');
+					_this.displayNode (_rotateNode, _canRotate);
+					_this.children.rotate.set ({node:_rotateNode});
+				}
+			};
+
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
 				var _this = this;
@@ -145,6 +161,7 @@ Uize.module ({
 					_superclass.prototype.updateUi.call (_this);
 
 					_this._updateUiHandlesPositions ();
+					_this._updateUiRotate ();
 				}
 			};
 
@@ -187,11 +204,125 @@ Uize.module ({
 
 		/*** Register Properties ***/
 			_class.registerProperties ({
+				_canRotate:{ // if true, show the rotation button
+					name:'canRotate',
+					onChange:function () {
+						var _this = this;
+
+						if (_this._canRotate && !_this.children.rotate)
+							Uize.module ({
+								required:'Uize.Widget.Drag',
+								builder:function () {
+									var
+										_initialRotation,
+										_centerX, _centerY, // the center of the visible marquee (ie. the dashed line + handles)
+										_initialRotationOffset // the angle created by the line segment center-button center and the line f(x) = _center.x
+									;
+
+									_this.set ({rotation:0});
+
+									_this.addChild (
+										'rotate',
+										Uize.Widget.Drag
+									).wire ({
+										'Before Drag Start':function (_event) {
+											var
+												_buttonCoords = Uize.Node.getCoords (_this.getNode ('rotate')),
+												_centerCoords = Uize.Node.getCoords (_this.getNode (_this.get ('areaNodes') [0])) // assume that an area node always exists
+											;
+
+											_initialRotation = _this.get ('rotation');
+											_centerX = _centerCoords.x + _centerCoords.width / 2;
+											_centerY = _centerCoords.y + _centerCoords.height / 2;
+											_initialRotationOffset = Math.atan (
+												Math.abs (
+													(_centerY - (_buttonCoords.y + _buttonCoords.height / 2)) /
+													((_buttonCoords.x + _buttonCoords.width / 2) - _centerX)
+												)
+											) * 180 / Math.PI;
+
+											if (_buttonCoords.x < _centerX)
+												_initialRotationOffset = 180 - _initialRotationOffset;
+											if (_buttonCoords.y > _centerY)
+												_initialRotationOffset *= -1;
+
+											_this.set ({inDrag:_true});
+											_this.fire (_event);
+										},
+										'Drag Update':function (_event) {
+											if (!_this._updatingRotationPosition) {
+												_this._updatingRotationPosition = _true;
+
+												var
+													_mouseCoords = _event.source.get ('eventPos'),
+													_angle = Math.atan (
+														Math.abs (
+															(_centerY - _mouseCoords [1]) /
+															(_mouseCoords [0] - _centerX)
+														)
+													)
+												;
+
+												// _angle stores the value of the angle created by the two lines:
+												// 1. the line segment with endpoints at the mouse coordinates and the _center
+												// 2. f(x) = _center [0]
+												//
+												// Math.abs is used because we don't care about the relative position of the triangle
+												// created by the angle and related lines. We just need that angular value. We deal
+												// with the orientation of the angle below.
+												//
+												// Imagine a plane with the center at _center. If line segment 1 (see the top of this comment)
+												// is completely within Quadrant I, its angle will be a value between 0 and 90. Additionally,
+												// _mouseCoords [0] >= _center [0] and _mouseCoords [1] <= _center [1].
+												//
+												// Now, assume that line segment 1 is in Quadrant II. The _angle will be for the triangle
+												// whose right angle is to the left of the _center. However, for the rotation we care about
+												// the angle that is 180 - _angle: the angle that helps define the arc from the Quadrant I
+												// to line segment 1.
+												//
+												// In Quadrant III both conditions are satisfied. We'll subtract the angle from 180 because
+												// our arc is now going from Quadrant IV to Quadrant III. Additionally, since the angle is
+												// the inverse of the angle defined in the paragraph above we have to reverse the sign.
+												//
+												// In Quadrant IV the angle is just the opposite of the angle in Quadrant I, so we reverse
+												// the sign.
+												//
+												// This would be easier to explain if I knew how to create ASCII art.
+												if (_mouseCoords [0] < _centerX)
+													_angle = Math.PI - _angle;
+												if (_mouseCoords [1] > _centerY)
+													_angle *= -1;
+
+												_this.set ({
+													rotation:
+														_initialRotation +
+														_initialRotationOffset +
+														_angle * -180 / Math.PI
+												});
+
+												_this._updatingRotationPosition = _false;
+											}
+										},
+										'Drag Done':function (_event) {
+											_this.set ({inDrag:_false});
+											_this.fire (_event);
+										}
+									});
+
+									_this._updateUiRotate ();
+								}
+							});
+						else _this._updateUiRotate ();
+
+					}
+				},
 				_handlesAlign:'handlesAlign',
+				_handleCssClass:'handleCssClass',
 				_hideOtherHandlesInDrag:{
 					name:'hideOtherHandlesInDrag',
 					value:_true
 				},
+				_rotateCssClass:'rotateCssClass',
 				_shellLive:{
 					name:'shellLive',
 					value:_true
@@ -209,7 +340,9 @@ Uize.module ({
 							);
 						}
 						return (
-							'<div id="' + input.idPrefix + '-border" style="position:absolute; left:0px; top:0px; width:200px; height:200px; border:1px solid #000; background:url(' + input.blankGif + '); z-index:999;"></div>' +
+							'<div id="' + input.idPrefix + '-border" style="position:absolute; left:0px; top:0px; width:200px; height:200px; border:1px solid #000; background:url(' + input.blankGif + '); z-index:999;">' +
+							'<a href="javascript://" id="' + input.idPrefix + '-rotate"' + (input.rotateCssClass ? (' class="' + input.rotateCssClass + '"') : '') + ' style="display:none;position:absolute;' + (input.rotateCssClass ? '' : 'right:-30px;top:-30px;width:18px;height:18px;background:#000') + ';"></a>' +
+							'</div>' +
 							'<a id="' + input.idPrefix + '-move" href="javascript://" style="display:block; position:absolute; left:0px; top:0px; width:200px; height:200px; border:1px dashed #fff; z-index:1000; background:url(' + input.blankGif + ');"></a>' +
 							_getHandleHtml ('northWest') +
 							_getHandleHtml ('north') +

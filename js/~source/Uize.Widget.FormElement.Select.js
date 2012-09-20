@@ -129,7 +129,7 @@ Uize.module ({
 					_superclass.prototype.wireUi.call (_this);
 
 					var
-						_values = _this._values,
+						_values = _this._values || [],
 						_selectNode = _this.getNode('input')
 					;
 
@@ -178,8 +178,7 @@ Uize.module ({
 				},
 				_values:{
 					name:'values',
-					onChange:_classPrototype._updateUiValues,
-					value:[]
+					onChange:_classPrototype._updateUiValues
 				}
 			});
 

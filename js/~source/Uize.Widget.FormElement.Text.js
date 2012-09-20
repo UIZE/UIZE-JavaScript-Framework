@@ -48,11 +48,13 @@ Uize.module ({
 								var
 									_focused = _this.get('focused'),
 									_placeholder = _this._placeholder,
-									_value = _this.get('value')
+									_value = _this.get('value'),
+									_inputNode = _this.getNode('input')
 								;
 
-								if (_placeholder && !_supportsPlaceholder) {
-									function _setText (_newText) { _this.isWired && _this.setNodeValue ('input', _newText) }
+								if (_this.isWired) {
+									if (_placeholder && !_supportsPlaceholder && _this.get('type') != 'password') {
+										function _setText (_newText) { _this.setNodeValue (_inputNode, _newText) }
 
 									if (_focused && _value == _placeholder)
 										_setText ('');
@@ -60,9 +62,8 @@ Uize.module ({
 										_setText (_placeholder)
 								}
 
-								if (_this.isWired && _focused) {
+									if (_focused) {
 									var
-										_inputNode = _this.getNode('input'),
 										_inputNodeValue = _this.getNodeValue(_inputNode),
 										_valueLength = _inputNodeValue ? _inputNodeValue.length : 0
 									;
@@ -78,6 +79,7 @@ Uize.module ({
 										;
 									}
 								}
+							}
 							}
 						);
 
@@ -104,9 +106,22 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiPlaceholder = function() {
-				this.isWired
-					&& _supportsPlaceholder
-					&& this.setNodeProperties('input', {placeholder:this._placeholder})
+				var _this = this;
+				
+				if (_this.isWired) {
+					var
+						_placeholder = _this._placeholder,
+						_input = _this.getNode ('input')
+					;
+
+					// Set input placeholder
+					if (_placeholder) {
+						if (_supportsPlaceholder)
+							_this.setNodeProperties (_input, {placeholder:_placeholder});
+						else if (!_this.get('value') && !_this.get('focused') && _this.get('type') != 'password')
+							_this.setNodeValue (_input, _placeholder);
+					}
+				}
 			};
 
 		/*** Public Instance Methods ***/
@@ -156,29 +171,8 @@ Uize.module ({
 
 			_classPrototype.updateUi = function() {
 				if (this.isWired) {
-					this._updateUiPlaceholder();
 					_superclass.prototype.updateUi.call(this);
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var _this = this;
-
-				if (!_this.isWired) {
-					var
-						_placeholder = _this._placeholder,
-						_input = _this.getNode ('input')
-					;
-
-					// Set input placeholder
-					if (_placeholder) {
-						if (_supportsPlaceholder)
-							_this.setNodeProperties (_input, {placeholder:_placeholder});
-						else
-							_this.set ('value', _placeholder);
-					}
-
-					_superclass.prototype.wireUi.call(_this);
+					this._updateUiPlaceholder();
 				}
 			};
 

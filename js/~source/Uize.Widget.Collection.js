@@ -110,6 +110,11 @@ Uize.module ({
 					function () {
 						var _this = this;
 
+						// Initialize the items array here (as opposed to the default value when registering the
+						// set-get property), since that default is static and gets shared between all instances
+						// which casues problems
+						_this._items = [];
+
 						/*** Private Instance Properties ***/
 							_this._itemWidgetNameUniquifier = 0;
 
@@ -405,6 +410,38 @@ Uize.module ({
 			};
 
 		/*** Public Instance Methods ***/
+			_classPrototype.addChild = function(_childName, _childInstanceOrClass, _properties) {
+				// NOTE: Overriding addChild for the case that a collection item is added to the collection
+				// via widget adoption.  If this is the case, the code won't go through the normal addItemWidget
+				// and the item widget won't have the necessary events wired on it and it won't get added to the
+				// itemWidgets property
+				var
+					_this = this,
+					_parentForm = _this.parent,
+					_childWidget = _superclass.prototype.addChild.call (
+						_this,
+						_childName,
+						_childInstanceOrClass,
+						_properties
+					)
+				;
+
+				// First test to make sure the widget being added is actually a collection item widget
+				if (_this._itemWidgetClass && _childWidget.Class.moduleName == _this._itemWidgetClass.moduleName) {
+					_this.wireItemWidget (_childWidget);
+					_this._itemWidgets.push (_childWidget);
+
+					// In the event that we're adding this child via adoption, the items property won't have
+					// an entry for the properties of the item widget, so add it in explicitly
+					if (_this._items.length < _this._itemWidgets.length) {
+						(_this._items = (!_this._items.length ? [] : _this._items)).push(_childWidget.get('properties'));
+						_this._fireItemsChangedEvent ();
+					}
+				}
+
+				return _childWidget;
+			};
+			
 			_classPrototype.addItemWidget = function (_widgetName,_widgetProperties) {
 				var
 					_this = this,
@@ -415,8 +452,6 @@ Uize.module ({
 					)
 				;
 
-				_this.wireItemWidget (_itemWidget);
-				_this._itemWidgets.push (_itemWidget);
 				_this.isWired && _itemWidget.insertOrWireUi ();
 				return _itemWidget;
 				/*?

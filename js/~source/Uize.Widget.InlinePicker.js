@@ -27,7 +27,10 @@
 Uize.module ({
 	name:'Uize.Widget.InlinePicker',
 	superclass:'Uize.Widget.FormElement',
-	required:'Uize.Util.Coupler',
+	required:[
+		'Uize.Widget.Button.ValueDisplay',
+		'Uize.Util.PropertyAdapter'
+	],
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
 			var
@@ -50,10 +53,23 @@ Uize.module ({
 						;
 
 						// Sync value & value details back and forth with value widget
-						Uize.Util.Coupler({
-							instances:[_this, _valueWidget],
-							properties:['value', 'valueDetails', 'tentativeValue', 'tentativeValueDetails']
-						});
+						function _addPropertyApater(_propertyName) {
+							new Uize.Util.PropertyAdapter({
+								propertyA:{
+									instance:_this,
+									property:_propertyName
+								},
+								propertyB:{
+									instance:_valueWidget,
+									property:_propertyName
+								}
+							})
+						}
+						
+						_addPropertyApater('value');
+						_addPropertyApater('valueDetails');
+						_addPropertyApater('tentativeValue');
+						_addPropertyApater('tentativeValueDetails');
 
 						/** One-way sync value & value details to value display widget **/
 							function _setValueDisplayWidget(_propertyName, _propertyNameToGet) {

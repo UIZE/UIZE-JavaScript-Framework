@@ -78,19 +78,6 @@ Uize.module({
 						_this._preventRequests = _false;
 						_this._typedQueryTokenInfo = _null;
 						_this._tokenInfo = _null;
-						_this._suggestionHoverHandler = function (_suggestion) {
-							var
-								_displayInfo = _suggestion ?
-									_this._getDisplay(_this._tokenInfo, _suggestion) :
-									_this._getDisplay(_this._typedQueryTokenInfo)
-							;
-							_this._preventRequests = _true;
-							if (_displayInfo.text === _this + _emptyString) _this.set('value', _emptyString);
-							_this.set('value', _displayInfo.text);
-							_this._preventRequests = _false;
-							_this.setCaretPosition(_displayInfo.position);
-							_this._tokenInfo = _this._getTokenInfo(_displayInfo.text, _displayInfo.position);
-						};
 
 						/*** Wire Events on Inherited Widget ***/
 						// hide suggestions when the caret is positioned over a different subquery
@@ -214,6 +201,7 @@ Uize.module({
 			_classPrototype._addAndWireSuggestions = function () {
 				var
 					_this = this,
+					_cssClassSelected = _this._cssClassSelected,
 					_suggestions = _this.addChild(
 						'suggestions',
 						_this._optionsWidgetClass || Uize.Widget.Options.Selector,
@@ -222,9 +210,9 @@ Uize.module({
 								built: _false,
 								html: _true,
 								optionWidgetProperties: {
-									cssClassActive: 'selectedSuggestion',
-									cssClassSelected: 'selectedSuggestion',
-									cssClassTentativeSelected: 'selectedSuggestion'
+									cssClassActive:_cssClassSelected,
+									cssClassSelected:_cssClassSelected,
+									cssClassTentativeSelected:_cssClassSelected
 								},
 								values: []
 							},
@@ -429,6 +417,22 @@ Uize.module({
 				}
 			};
 
+			_classPrototype._suggestionHoverHandler = function (_suggestion) {
+				var
+					_this = this,
+					_displayInfo = _suggestion ?
+						_this._getDisplay(_this._tokenInfo, _suggestion) :
+						_this._getDisplay(_this._typedQueryTokenInfo)
+				;
+				_this._preventRequests = _true;
+				if (_displayInfo.text === _this + _emptyString)
+					_this.set('value', _emptyString);
+				_this.set('value', _displayInfo.text);
+				_this._preventRequests = _false;
+				_this.setCaretPosition(_displayInfo.position);
+				_this._tokenInfo = _this._getTokenInfo(_displayInfo.text, _displayInfo.position);
+			};
+
 			_classPrototype._updateSuggestions = function () {
 				function _highlight(_text) { return '<span class="' + _this._cssClassHighlight + '">' + _text + '</span>' }
 
@@ -441,7 +445,8 @@ Uize.module({
 				if (
 					_normalizedQuery != _this.get('defaultValue') &&
 					_normalizedQuery.length >= _this._numCharsBeforeSuggest &&
-					_this._numSuggestions
+					_this._numSuggestions &&
+					_this._serviceUrl != _undefined
 				) {
 					_this.ajax(
 						Uize.pairUp(
@@ -611,7 +616,7 @@ Uize.module({
 					}
 
 					// disable browser autocomplete
-					_this.setNodeProperties('input', { autocomplete: "off" });
+					_this.setNodeProperties('input', { autocomplete: 'off' });
 
 					_superclass.prototype.wireUi.call(_this);
 				}
@@ -641,6 +646,18 @@ Uize.module({
 
 								NOTES
 								- the initial value is ='suggestionHighlight'=
+					*/
+				},
+				_cssClassSelected:{
+					name:'cssClassSelected',
+					value:'selectedSuggestion'
+					/*?
+						State Properties
+							cssClassSelected
+								A string, indicating the CSS class used for the (tentatively) selected suggestion
+
+								NOTES
+								- the initial value is ='selectedSuggestion'=
 					*/
 				},
 				_highlightMode: {

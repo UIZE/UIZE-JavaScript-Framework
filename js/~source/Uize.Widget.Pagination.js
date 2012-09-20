@@ -31,7 +31,8 @@ Uize.module ({
 	required:[
 		'Uize.Widget.Button',
 		'Uize.Node',
-		'Uize.Node.Classes'
+		'Uize.Node.Classes',
+		'Uize.Url'
 	],
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
@@ -49,6 +50,24 @@ Uize.module ({
 				),
 				_classPrototype = _class.prototype
 			;
+
+		/*** Helper Functions ***/
+			function _formatNumber(_number) {
+				var
+					_numberString = _number + '',
+					_numberStringLength = _numberString.length,
+					_formattedStringBuilder = []
+				;
+				
+				for (var _count = 0; ++_count <= _numberStringLength;) {
+					_formattedStringBuilder.unshift(_numberString.charAt(_numberStringLength - _count));
+					!(_count % 3)
+						&& _count < _numberStringLength
+						&& _formattedStringBuilder.unshift(',');
+				}
+				
+				return _formattedStringBuilder.join('');
+			}
 
 		/*** Private Methods ***/
 			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
@@ -88,8 +107,8 @@ Uize.module ({
 					_numResults = _this._numResults
 				;
 
-				if (_this.isWired) {
-					_this.displayNode('', _numResults > 0);
+				if (_this.isWired && _this.getNode()) {
+					_this.displayNode('displayShell', _numResults > 0);
 					_this.displayNode('paginationShell', _hasMultiplePages);
 
 					_this.setNodeInnerHtml(
@@ -97,30 +116,41 @@ Uize.module ({
 						_this.localize(
 							'displayInfo',
 							{
-								number:(_value - 1) * _this._pageSize + 1,
-								toNumber:Math.min(_numResults, _value * _this._pageSize),
-								total:_this.localize('numResultsDisplay', {numResults:_this._numResults}) || _numResults
+								number:_formatNumber((_value - 1) * _this._pageSize + 1),
+								toNumber:_formatNumber(Math.min(_numResults, _value * _this._pageSize)),
+								total:_this.localize('numResultsDisplay', {numResults:_formatNumber(_numResults)}) || _formatNumber(_numResults)
 							}
 						)
 					);
 
-					if (_hasMultiplePages) {
-						function _enable(_pageButtonName, _mustEnable) {
-							_children[_pageButtonName].set({enabled:_mustEnable ? 'inherit' : _mustEnable})
+					_this.setNodeInnerHtml(
+						'pageDisplay',
+						_this.localize(
+							'pageDisplayInfo',
+							{
+								page:_formatNumber(_value),
+								totalPages:_formatNumber(_this.localize('numResultsDisplay', {numResults:_maxPages}) || _maxPages)
 						}
+						)
+					);
+
+					if (_hasMultiplePages) {
 						function _display(_pageButtonName, _mustDisplay) {
+							_children[_pageButtonName] &&
 							_children[_pageButtonName].displayNode('', _mustDisplay)
 						}
-						function _setText(_pageButtonName, _text) {
-							_children[_pageButtonName].set({text:_text})
+						function _setText(_pageButtonName, _pageNumber) {
+							_children[_pageButtonName] &&
+								_children[_pageButtonName].set({text:_formatNumber(_pageNumber)})
 						}
 
-						_enable('prev', _value > 1);
-						_enable('next', _value < _maxPages);
+						_display('prev', _value > 1);
+						_display('next', _value < _maxPages);
+						_this._setEdgeButtons && _setText('first', 1);
 
 						_display('first', _value > 1);
 						_display('last', _value < _maxPages);
-						_setText('last', _maxPages);
+						_this._setEdgeButtons && _setText('last', _maxPages);
 
 						var _pagesStart = _this._calculatePagesStart();
 
@@ -141,7 +171,6 @@ Uize.module ({
 									? _this.localize('selectedPage', {page:_pageNumber}) || _pageNumber
 									: _pageNumber
 							);
-							//_enable(_pageName, _pageNumber != _value);
 							_display(_pageName, _pageNumber == _value || _pageNumber <= (_maxPages - _this._showLastPage));
 							Uize.Node.Classes.setState(_pageLinkNode, _this._classSelected, _isCurrentPage);
 						}
@@ -160,9 +189,7 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function() {
-				var
-					_this = this
-				;
+				var _this = this;
 
 				if (!_this.isWired) {
 					/*** Determine which page links exist ***/
@@ -203,28 +230,49 @@ Uize.module ({
 				},
 				_numResults:{
 					name:'numResults',
-					onChange:[
-						_classPrototype._calculateMaxPages,
-						_classPrototype._updatePages
-					]
+					onChange:_classPrototype._updatePages
 				},
 				_pageSize:{
 					name:'pageSize',
 					conformer:function(_newPageSize) { return _newPageSize ? _newPageSize : 30 },
-					onChange:[
-						_classPrototype._calculateMaxPages,
-						_classPrototype._updatePages
-					],
+					onChange:_classPrototype._updatePages,
 					value:30
+				},
+				_setEdgeButtons:{
+					name:'setEdgeButtons',
+					value:true
+				},
+				_thousandsSeparator:{
+					name:'thousandsSeparator',
+					onChange:_classPrototype._updatePages,
+					value:','
+				},
+				_urlAnchor:'urlAnchor',
+				_urlBase:'urlBase',
+				_urlParam:{
+					name:'urlParam',
+					value:'pg'
 				},
 				_value:{
 					name:'value',
 					conformer:function(_newValue) {
 						var _maxPages = this._calculateMaxPages();
 
-						return _newValue ? (!_maxPages || _newValue < _maxPages ? _newValue : _maxPages) : 1
+						return _newValue ? (!_maxPages || _newValue < _maxPages ? Math.floor(_newValue) : _maxPages) : 1
 					},
-					onChange:_classPrototype._updatePages,
+					onChange:[
+						function() {
+							var _this = this;
+							
+							if (_this._urlBase && _this.isWired)
+								location.href = Uize.Url.resolve(
+									_this._urlBase,
+									Uize.pairUp(_this._urlParam, _this._value)
+								)
+							;
+						},
+						_classPrototype._updatePages
+					],
 					value:1
 				}
 			});

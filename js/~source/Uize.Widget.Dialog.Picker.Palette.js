@@ -26,10 +26,14 @@
 
 Uize.module ({
 	name:'Uize.Widget.Dialog.Picker.Palette',
-	required:'Uize.Util.Coupler',
+	required:[
+		'Uize.Node',
+		'Uize.Util.Coupler',
+	],
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
-			var _class = _superclass.subclass (
+			var
+				_class = _superclass.subclass (
 				null,
 				function() {
 					var _this = this;
@@ -44,25 +48,39 @@ Uize.module ({
 						'After Show',
 						function() {
 							_this.children.value.updateUi();
-							if (_this._minWidth) {
+								_this._updateUiMinWidth();
+							}
+						);
+					}
+				),
+				_classPrototype = _class.prototype
+			;
+			
+		/*** Private Methods ***/
+			_classPrototype._updateUiMinWidth = function() {
+				var _this = this;
+				
+				if (_this.isWired && _this._minWidth) {
 								_this.setNodeStyle (
 									'',
 									{minWidth:_this._minWidth}
 								);
-								Uize.Node.ieMajorVersion <= 7
+					Uize.Node.isIe
+						&& Uize.Node.ieMajorVersion <= 7
 									&& _this.setNodeStyle (
 										'valueShell',
 										{minWidth:_this._minWidth}
-									);
-							}
-						}
-					);
+						)
+					;
 				}
-			);
+			};
 
 		/*** Register Properties ***/
 			_class.registerProperties ({
-				_minWidth:'minWidth',
+				_minWidth:{
+					name:'minWidth',
+					onChange:_classPrototype._updateUiMinWidth
+				},
 				_tentativeValue:{
 					name:'tentativeValue',
 					onChange:function() {

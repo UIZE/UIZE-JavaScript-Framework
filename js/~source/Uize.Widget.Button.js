@@ -221,6 +221,9 @@ Uize.module ({
 							? _Uize_Node.setStyle (_rootNode,{cursor:'wait'})
 							: _Uize_Node.showClickable (_rootNode,_this._isClickable ())
 						;
+
+					/*** set attributes ***/
+						_this.setNodeProperties (_rootNode, {disabled:!_enabledInherited});
 				}
 			};
 

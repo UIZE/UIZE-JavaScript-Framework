@@ -79,7 +79,8 @@ Uize.module ({
 									_this.handleDialogSubmit(_valueInfo);
 									_event && _event.keepOpen || _possiblyFocus ();
 								},
-								dismissHandler:_possiblyFocus
+								dismissHandler:_possiblyFocus,
+								widgetEventHandlers:_this.getMoreDialogEventHandlers()
 							});
 						}
 
@@ -120,6 +121,8 @@ Uize.module ({
 		/*** Public Methods ***/
 			_classPrototype.getDialogWidgetProperties = function() { return _null };
 
+			_classPrototype.getMoreDialogEventHandlers = function() { return _null };
+			
 			_classPrototype.getMooringNode = function() {
 				return this.children.selector.getNode () || this.getNode ('input')
 			};

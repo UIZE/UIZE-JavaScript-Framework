@@ -77,7 +77,10 @@ Uize.module ({
 						mode:_mode,
 						state:_params.state || _defaultState,
 						okText:_params.okText || _null,
-						cancelText:_params.cancelText || _null
+						cancelText:_params.cancelText || _null,
+						mooringNode:_params.mooringNode || _null,
+						offsetX:_params.offsetX || _null,
+						offsetY:_params.offsetY || _null
 					},
 					submitHandler:function (_confirmed) {
 						var _handler = _params.callback || (_confirmed ? _params.yesHandler : _params.noHandler);
@@ -209,8 +212,10 @@ Uize.module ({
 					_this = this,
 					_rootNodeId = _injectionParams.rootNodeId,
 					_callback = _getCallbackFromDirectives (_loaderDirectives),
+					_loaderDirectivesIsValidObject = typeof _loaderDirectives == 'object' && _loaderDirectives,
 					_loadHtmlCallbackObject = {
 						callback:function (_html) {
+							function _injectHmtl() {
 							var
 								_documentBody = document.body,
 								_node = _injectionParams.node != undefined
@@ -222,7 +227,17 @@ Uize.module ({
 								_html,
 								_injectionParams.injectMode || (_node == _documentBody ? 'inner bottom' : 'inner replace')
 							);
-							_this._adoptChildWidgets (_callback);
+
+								// Need to break synchronous execution of the page between HTML injection
+								// and child widget adoption so the browser has time to insert any widget data
+								// into the window object
+								setTimeout(function() { _this._adoptChildWidgets (_callback) }, 0);
+							}
+							
+							_loaderDirectivesIsValidObject && _loaderDirectivesIsValidObject.beforeInject
+								? _loaderDirectivesIsValidObject.beforeInject(_injectHmtl, _html)
+								: _injectHmtl()
+							;
 						}
 					}
 				;
@@ -230,7 +245,7 @@ Uize.module ({
 					? _callback ()
 					: _this.loadHtml (
 						_htmlParams,
-						typeof _loaderDirectives == 'object' && _loaderDirectives
+						_loaderDirectivesIsValidObject
 							? Uize.copyInto ({},_loaderDirectives,_loadHtmlCallbackObject)
 							: _loadHtmlCallbackObject
 					)
@@ -389,6 +404,7 @@ Uize.module ({
 					;
 					_componentProfile = {
 						name:_component.name,
+						node:_component.rootNode,	// the node to inject into
 						rootNodeId:_rootNodeId,
 						params:Uize.copyInto ({idPrefix:_rootNodeId},_component.params)
 					};
@@ -410,11 +426,15 @@ Uize.module ({
 								_callHandler ('dismissHandler',_handlerParams);
 							}
 							function _handleShownOrHide(_event) {
+								var _eventName = _event.name;
+								_callHandler(_eventName, [_event]);
 								_this.fire({
-									name:'Dialog ' + _event.name,
+									name:'Dialog ' + _eventName,
 									dialogWidget:_event.source
-								})
+								});
 							}
+							
+							_dialogWidget.set ({shown:_false});
 							/*** store handlers as properties of widget, in order to be able to remove them on reuse ***/
 								/* WORKAROUND:
 									this is a horrible workaround, since there is currently no elegant way to remove event handlers based upon an owner ID, or wiring IDs
@@ -432,7 +452,8 @@ Uize.module ({
 										...store reference to previous handlers on widget instance
 								*/
 								_dialogWidget.unwire (_dialogWidget.eventHandlersForUseDialog || {});
-								_dialogWidget.eventHandlersForUseDialog = {
+								_dialogWidget.eventHandlersForUseDialog = Uize.copyInto (
+									{
 									'Submission Complete':
 										function (_event) {_callHandler ('submitHandler',[_event.result,_event])},
 									Close:_handleCloseOrCancel,
@@ -441,7 +462,9 @@ Uize.module ({
 									'After Show':_handleShownOrHide,
 									'Before Hide':_handleShownOrHide,
 									'After Hide':_handleShownOrHide
-								};
+									},
+									_params.widgetEventHandlers
+								);
 								_dialogWidget.wire (_dialogWidget.eventHandlersForUseDialog);
 
 							_dialogWidget.set (_dialogWidgetProperties);
@@ -479,7 +502,6 @@ Uize.module ({
 									)
 								;
 								_dialogWidget.componentProfile = _componentProfile;
-								_dialogWidget.wire (_params.widgetEventHandlers);
 								_dialogWidget.insertOrWireUi ();
 								_showDialog (_refetch ? 'refetched' : 'initial');
 							}
@@ -488,6 +510,7 @@ Uize.module ({
 					_componentProfile
 						? _this.loadHtmlIntoNode (
 							{
+								node:_componentProfile.node,
 								rootNodeId:_componentProfile.rootNodeId,
 								injectMode:'inner bottom',
 								alwaysReplace:_false

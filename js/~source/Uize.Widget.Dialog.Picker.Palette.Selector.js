@@ -35,10 +35,18 @@ Uize.module ({
 			var _class = _superclass.subclass (
 				null,
 				function() {
+					var
+						_this = this,
+						_valueWidget = _this.children.value
+					;
+					_this.wire(
+						'After Show',
+						function() { _valueWidget.updateUi() }
+					);
 					Uize.Util.Coupler({
-						instances:[this, this.children.value],
+						instances:[_this, _valueWidget],
 						properties:['valueNo', 'tentativeValueNo']
-					})
+					});
 				}
 			);
 

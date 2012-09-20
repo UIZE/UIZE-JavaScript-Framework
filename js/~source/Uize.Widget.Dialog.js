@@ -245,7 +245,7 @@ Uize.module ({
 				this.fire (_dismissalEvent).abort || this.set ({_shown:_false})
 			};
 
-			var _updateUiPositionIfShown = _classPrototype._updateUiPositionIfShown = _classPrototype.updateUiPositionIfShown = function () {
+			_classPrototype.updateUiPositionIfShown = function () {
 				var _this = this;
 				if (_this.isWired && _this._shown && !_this._inDrag) {
 					_Uize_Widget_Drag.resizeShield (_this.getNode ('shield'));
@@ -298,7 +298,7 @@ Uize.module ({
 			var _updateUiDimsIfShown = _classPrototype._updateUiDimsIfShown = function () {
 				var _this = this;
 				_this.isWired && _this._shown && !_this._inDrag &&
-					_this.setNodeStyle ('',{width:_this._width,height:_this._height})
+					_this.setNodeStyle (_this.getNode(_this._nodeToSetDimension),{width:_this._width,height:_this._height})
 				;
 			};
 
@@ -355,7 +355,7 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					_this.wireNode (window,'resize',function () {_this._updateUiPositionIfShown ()});
+					_this.wireNode (window,'resize',function () {_this.updateUiPositionIfShown ()});
 					_this._drag.set ({node:_this.getNode ('title')});
 
 					_this.wireNode(
@@ -386,7 +386,7 @@ Uize.module ({
 				_autoPosition:{
 					name:'autoPosition',
 					value:_true,
-					onChange:_updateUiPositionIfShown
+				onChange: _classPrototype.updateUiPositionIfShown
 					/*?
 						State Properties
 							autoPosition
@@ -495,7 +495,7 @@ Uize.module ({
 					name:'height',
 					onChange:[
 						_updateUiDimsIfShown,
-						_updateUiPositionIfShown
+						_classPrototype.updateUiPositionIfShown
 					]
 					/*?
 						State Properties
@@ -507,6 +507,7 @@ Uize.module ({
 								NOTES
 								- see the companion =width= state property
 								- the initial value is =undefined=
+				- see the =nodeToSetDimension= state property
 					*/
 				},
 				_hideShieldOnDrag:{
@@ -538,7 +539,7 @@ Uize.module ({
 				},
 				_mooringNode:{
 					name:'mooringNode',
-					onChange:_updateUiPositionIfShown
+				onChange: _classPrototype.updateUiPositionIfShown
 					/*?
 						State Properties
 							mooringNode
@@ -555,7 +556,7 @@ Uize.module ({
 				},
 				_offsetX:{
 					name:'offsetX',
-					onChange:_updateUiPositionIfShown,
+				onChange: _classPrototype.updateUiPositionIfShown,
 					value:0
 					/*?
 						State Properties
@@ -572,7 +573,7 @@ Uize.module ({
 				},
 				_offsetY:{
 					name:'offsetY',
-					onChange:_updateUiPositionIfShown,
+				onChange: _classPrototype.updateUiPositionIfShown,
 					value:0
 					/*?
 						State Properties
@@ -710,7 +711,7 @@ Uize.module ({
 									}
 									_hideWithVisibilityForDimensionGetting (_true);
 									_this._updateUiDimsIfShown ();
-									_this._updateUiPositionIfShown ();
+							_this.updateUiPositionIfShown();
 									_hideWithVisibilityForDimensionGetting (_false);
 							} else {
 								_totalShown--;
@@ -778,7 +779,7 @@ Uize.module ({
 					name:'width',
 					onChange:[
 						_updateUiDimsIfShown,
-						_updateUiPositionIfShown
+						_classPrototype.updateUiPositionIfShown
 					]
 					/*?
 						State Properties
@@ -790,6 +791,7 @@ Uize.module ({
 								NOTES
 								- see the companion =height= state property
 								- the initial value is =undefined=
+				- see the =nodeToSetDimension= state property
 					*/
 				}
 			});

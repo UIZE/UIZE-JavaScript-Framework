@@ -117,10 +117,6 @@ Uize.module ({
 				*/
 			}
 
-			function _getDocumentScrollElement () {
-				return document [_isSafari ? 'body' : 'documentElement'];
-			}
-
 			function _makeGlobalScopedFunction (_function) {
 				var _paramsStr = (_function = _function + '').slice (_function.indexOf ('(') + 1,_function.indexOf (')'));
 				return Function.apply (
@@ -143,6 +139,27 @@ Uize.module ({
 			}
 
 		/*** Public Static Methods ***/
+			var _getDocumentScrollElement = _package.getDocumentScrollElement = function() {
+				return document [_isSafari ? 'body' : 'documentElement']
+			};
+				/*?
+					Static Methods
+						Uize.Node.getDocumentScrollElement
+							A utility function that returns the DOM node on which you can scroll the document.
+
+							SYNTAX
+							................................................
+							Uize.Node.getDocumentScrollElement ();
+							................................................
+
+							This method abstracts the difference between WebKit browsers (Safari, Chrome, etc.) and other browsers as to which DOM node is the one that allows changing the scrolling position of the document.
+
+							EXAMPLE
+							.........................................................................................
+							Uize.Node.getDocumentScrollElement ().scrollTop = 0;  // scroll to the top of the page
+							.........................................................................................
+				*/
+			
 			var
 				_tableDisplayValuePrefix = 'table-',
 				_tableRowDisplayValue = _tableDisplayValuePrefix + 'row',
@@ -1368,7 +1385,7 @@ Uize.module ({
 					: (_coordMargin || {x:0,y:0})
 				;
 				var
-					_documentElement = document [_isSafari ? 'body' : 'documentElement'],
+					_documentElement = _getDocumentScrollElement(),
 					_viewDims = _getDimensions (window)
 				;
 				_doForAll (
@@ -1711,12 +1728,13 @@ Uize.module ({
 							_node.value = _value;
 						} else if (_nodeTagName == 'INPUT') {
 							var _nodeType = _node.type;
-							if (_nodeType == 'text' || _nodeType == _hidden || _nodeType == 'password') {
-								_node.value = _value;
-							} else if (_nodeType == 'checkbox') {
+							if (_nodeType == 'checkbox') {
 								_node.checked = _value == 'true';
 							} else if (_nodeType == 'radio') {
 								_node.checked = _node.value == _value;
+							}
+							else {	// text, password, hidden, HTML5 types, etc.
+								_node.value = _value
 							}
 						} else if (_nodeTagName == 'SELECT') {
 							if (!_value) {

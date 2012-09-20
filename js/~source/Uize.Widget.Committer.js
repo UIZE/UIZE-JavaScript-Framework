@@ -158,6 +158,8 @@ Uize.module ({
 					_watchedProperties = _this._watchedProperties
 				;
 				for (var _watchedPropertyAlias in _committedValues) {
+					var _instance = _watchedProperties [_watchedPropertyAlias].instance;
+					if (!_this._ignoreDisabled || _instance.get('enabledInherited') !== _false) {
 					var _uncommittedValue = _uncommittedValues [_watchedPropertyAlias];
 					if (!_anyNotCommitted)
 						_anyNotCommitted = _uncommittedValue !== _committedValues [_watchedPropertyAlias]
@@ -169,8 +171,9 @@ Uize.module ({
 						_allClear =  _uncommittedValue == ''
 					;
 					if (_allValid)
-						_allValid = _watchedProperties [_watchedPropertyAlias].instance.get ('isValid') === _true
+							_allValid = _instance.get('isValid') === _true
 					;
+				}
 				}
 				_this.set ({
 					_allClear:_allClear,
@@ -187,6 +190,8 @@ Uize.module ({
 					_watchedPropertyInstance = _watchedPropertyProfile.instance,
 					_watchedPropertyName = _watchedPropertyProfile.name
 				;
+
+				function _updateSummaryStateProperties() { _this._updateSummaryStateProperties() }
 
 				// any events that get wired here need to be unwired in _classPrototype.removeWatchedProperties.
 				_watchedPropertyInstance.wire (
@@ -208,7 +213,12 @@ Uize.module ({
 							}
 					}
 				);
-				_watchedPropertyInstance.wire('Changed.isValid', function() { _this._updateSummaryStateProperties () });
+				
+				// any events that are wired here need to be unwired in removeWatchedProperties.
+				_watchedPropertyInstance.wire({
+					'Changed.isValid':_updateSummaryStateProperties,
+					'Changed.enabledInherited':_updateSummaryStateProperties
+				});
 
 				// here is where we would add the profile to the watchedProperties property, but since this method is called by the onChange handler to watchedProperties, then it's already there. And, in the odd case that it's not, then the caller can add the profile itself.
 			};
@@ -284,9 +294,9 @@ Uize.module ({
 				Uize.copyInto (_this._watchedProperties || (_this._watchedProperties = {}), _propertiesAdded);
 
 				_this.set ({
-					_committedValues:Uize.copyInto (_this._committedValues, _committedValues),
-					_uncommittedValues:Uize.copyInto (_this._uncommittedValues, _uncommittedValues),
-					_initialValues:Uize.copyInto (_this._initialValues, _initialValues)
+					_committedValues:Uize.copyInto ({}, _this._committedValues, _committedValues),
+					_uncommittedValues:Uize.copyInto ({}, _this._uncommittedValues, _uncommittedValues),
+					_initialValues:Uize.copyInto ({}, _this._initialValues, _initialValues)
 				});
 				_this._updateSummaryStateProperties ();
 
@@ -353,6 +363,7 @@ Uize.module ({
 
 						// any events that are wired to the watched property instance in _classPrototype._watchProperty needs to be unwired here.
 						_watchedPropertyInstance.unwire ('Changed.isValid');
+						_watchedPropertyInstance.unwire ('Changed.enabledInherited');
 						_watchedPropertyInstance.unwire ('Changed.' + _watchedPropertyProfile.name);
 
 						delete _watchedProperties [_watchedPropertyAlias];
@@ -497,6 +508,22 @@ Uize.module ({
 								- this property is read-only
 								- see the related =uncommittedValues= and =watchedProperties= state properties
 								- the initial value is ={}= (an empty object)
+					*/
+				},
+				_ignoreDisabled:{
+					name:'ignoreDisabled',
+					onChange:_classPrototype._updateSummaryStateProperties,
+					value:_false
+					/*?
+						State Properties
+							ignoreDisabled
+								A boolean, specifying whether or not any disabled =watchedProperties= will be ignored.
+								
+								When the value of this property is set to =true=, then the =allClear=, =allValid=, =anyNotCommitted=, =anyNotInitial=, and =readyToCommit= read-only set-get properties will not take into account any disabled =watchedProperties= in their calculation.
+
+								NOTES
+								- see also the =allClear=, =allValid=, =anyNotCommitted=, =anyNotInitial=, and =readyToCommit= set-get properties
+								- the initial value is =false=
 					*/
 				},
 				_initialValues:{

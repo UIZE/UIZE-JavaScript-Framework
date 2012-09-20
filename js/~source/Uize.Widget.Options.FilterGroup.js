@@ -81,7 +81,11 @@ Uize.module ({
 					)
 				;
 
-				_this.displayNode('', !_allZero && _this.get('values').length > 1);
+				_this.displayNode(
+					'',
+					_this.getInherited('allowMultiple') === _false
+						|| (!_allZero && _this.get('values').length > 1)
+				);
 			};
 
 			_classPrototype._updateUiTitle = function() {
@@ -149,8 +153,7 @@ Uize.module ({
 
 		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
-				optionWidgetClass:Uize.Widget.Button.Filter,
-				ensureValueInValues:_true
+				optionWidgetClass:Uize.Widget.Button.Filter
 			});
 
 		return _class;

@@ -29,19 +29,47 @@ Uize.module ({
 	required:[
 		'Uize.Widget.Options.Selector',
 		'Uize.Widget.Button.ValueDisplay.Selector',
-		'Uize.Util.Coupler'
+		'Uize.Util.PropertyAdapter'
 	],
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass (
 				null,
 				function() {
-					Uize.Util.Coupler({
-						instances:[this, this.children.value],
-						properties:['valueNo', 'tentativeValueNo']
+					var _this = this;
+
+					function _addPropertyApater(_propertyName) {
+						new Uize.Util.PropertyAdapter({
+							propertyA:{
+								instance:_this,
+								property:_propertyName
+							},
+							propertyB:{
+								instance:_this.children.value,
+								property:_propertyName
+							}
 					})
 				}
+					
+					_addPropertyApater('valueNo');
+					_addPropertyApater('tentativeValueNo');
+				}
+			),
+				_classPrototype = _class.prototype
+			;
+
+		/*** Public Instance Methods ***/
+			_classPrototype.getValueObject = function (_name) {
+				var _undefined;
+				return Uize.findRecord (
+					this._values,
+					{
+						name:_name == _undefined
+							? this + ''
+							: _name
+					}
 			);
+			};
 
 		/*** Register Properties ***/
 			_class.registerProperties ({

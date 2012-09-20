@@ -67,15 +67,14 @@ Uize.module ({
 				if (_this.isWired) {
 					if (_valueDetails) {
 						_valueDetails.value != null
-							&& _this._setInputNodeProperties({value:_valueDetails.value})
+							&& _this._setInputNodeProperties({value:_valueDetails.name})
 						;
 						_valueDetails.displayName != null
 							&& _this.setNodeInnerHtml('displayName', _valueDetails.displayName)
 						;
 					}
-					else
-						_this.displayNode('', false)
-					;
+
+					_this.displayNode('', _valueDetails);
 				}
 			};
 
@@ -136,16 +135,7 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					var
-						_inputNode = _this.getNode('input'),
-						_displayNameNode = _this.getNode('displayName');
-					;
-
-					_this.wireNode(
-						_inputNode,
-						'change',
-						function () { _this.set({selected:_inputNode.checked}) }
-					);
+					var _displayNameNode = _this.getNode('displayName');
 
 					// NOTE: in the case where the display name is a <label> tag w/ a for
 					// attribute, this could cause double selections on the input tag,
@@ -153,7 +143,7 @@ Uize.module ({
 					// Once this widget is wired on the client-side we don't need the <label>
 					// interaction to check the input for us any longer
 					_displayNameNode
-						&& _displayNameNode.setAttribute('for', null)
+						&& _displayNameNode.removeAttribute('for')
 					;
 
 					_superclass.prototype.wireUi.call (_this);

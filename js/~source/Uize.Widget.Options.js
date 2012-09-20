@@ -68,8 +68,12 @@ Uize.module ({
 			};
 
 			_classPrototype._updateValueNo = function () {
-				var _this = this;
-				_this.set ({_valueNo:_this.getValueNoFromValue (_this._value)});
+				var
+					_this = this,
+					_valueNo = _this.getValueNoFromValue (_this._value)
+				;
+				
+				_this.set ({_valueNo:_valueNo, _tentativeValueNo:_valueNo});
 				_this._updateUiOptionSelected ();
 			};
 
@@ -237,7 +241,7 @@ Uize.module ({
 											;
 										} else if (_event.name == 'Out') {
 											_clearTentativeValueTimeouts ();
-											_restoreValueTimeout = setTimeout (_restoreValue,250);
+											_restoreValueTimeout = setTimeout (_restoreValue,50);
 										}
 										_this.fire ({
 											name:'Option Event',
@@ -451,6 +455,7 @@ Uize.module ({
 							;
 							_this.unwireUi ();
 							_this.get ('html') != _undefined && _this.set ({built:_false});
+							_this.set({_value:_getValidValue.call(_this, _this._value)});
 							_this.insertOrWireUi ();
 						}
 					},
