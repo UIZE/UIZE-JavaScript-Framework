@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =Uize.Build.BuildSimpleDocPages= package provides a method to build all the SimpleDoc documentation for the *uize.com* Web site.
+		The =Uize.Build.BuildSimpleDocPages= package provides a method to build all the SimpleDoc documentation for a Web site built with the UIZE JavaScript Framework.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -31,24 +31,21 @@ Uize.module ({
 	required:[
 		'Uize.Wsh',
 		'Uize.Build.Util',
-		'Uize.Data.Simple',
 		'Uize.Data.PathsTree',
 		'Uize.Doc.Simple',
 		'Uize.Doc.Sucker',
-		'Uize.Template',
 		'Uize.String',
-		'Uize.Url',
-		'UizeDotCom.Build.Util'
+		'Uize.Url'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {}
-			;
+			var _package = function () {};
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
 				var
+					_urlDictionary = _params.urlDictionary,
+					_examplesByKeyword = _params.examplesByKeyword,
 					_alwaysBuild = env.alwaysBuild,
 					_simpleDocTemplateFileName = '~SIMPLE-DOC-TEMPLATE.html.jst',
 					_simpleDocTemplatePath,
@@ -56,7 +53,6 @@ Uize.module ({
 					_scriptFolderPath = Uize.Wsh.getScriptFolderPath (),
 					_scriptFolderPathLengthPlusOne = _scriptFolderPath.length + 1,
 					_pathToRoot,
-					_urlDictionary = {},
 					_moduleReferenceFolderName = 'reference',
 					_dotSimpleRegExp = /\.simple$/i,
 					_dotJsRegExp = /\.js$/i
@@ -69,40 +65,6 @@ Uize.module ({
 					function _getTitleFromFilename (_filename) {
 						return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
 					}
-
-				/*** populate URL dictionary ***/
-					/*** add UIZE developers to URL dictionary ***/
-						function _addDictionaryUrlsFromCreditsSimpleDataFile (_filePath) {
-							var _listings =
-								Uize.Data.Simple.parse ({simple:Uize.Wsh.readFile (_filePath),collapseChildren:true}).listings
-							;
-							for (var _listingNo = -1, _listingsLength = _listings.length; ++_listingNo < _listingsLength;) {
-								var _listing = _listings [_listingNo];
-								if (_listing.link)
-									_urlDictionary [_listing.fullName] = _listing.link
-								;
-							}
-						}
-						_addDictionaryUrlsFromCreditsSimpleDataFile ('appendixes/credits.html.simpledata');
-						_addDictionaryUrlsFromCreditsSimpleDataFile ('endorsements.html.simpledata');
-
-					/*** add reference pages to URL dictionary ***/
-						function _addReferencePagesToUrlDictionary (_sourceFolder,_sourceFileMatcher,_referenceFolder) {
-							for (
-								var
-									_fileNo = -1,
-									_referenceUrlPrefix = '/' + (_referenceFolder || _sourceFolder)+ '/',
-									_files = Uize.Wsh.getFiles (_sourceFolder,_sourceFileMatcher,_getFilenameFromPath),
-									_filesLength = _files.length,
-									_fileName
-								;
-								++_fileNo < _filesLength;
-							)
-								_urlDictionary [_fileName = _files [_fileNo]] = _referenceUrlPrefix + _fileName + '.html'
-							;
-						}
-						_addReferencePagesToUrlDictionary ('javascript-reference',_dotSimpleRegExp);
-						_addReferencePagesToUrlDictionary (env.moduleFolderPath,_dotJsRegExp,_moduleReferenceFolderName);
 
 				function _getSimpleDocFileBuilder (_docBuilderFunction) {
 					return function (_sourceFileName,_sourceFileText) {
@@ -145,7 +107,6 @@ Uize.module ({
 				}
 
 				/*** find all .simple files and generate HTML files ***/
-					var _dotSimpleRegExp = /\.simple$/i;
 					Uize.Wsh.buildFiles ({
 						alwaysBuild:_alwaysBuild,
 						targetFolderPathCreator:function (_folderPath) {
@@ -183,13 +144,15 @@ Uize.module ({
 						_moduleName,
 						_modulesTree = Uize.Data.PathsTree.fromList (
 							Uize.Wsh.getFiles (env.moduleFolderPath,_dotJsRegExp,_getFilenameFromPath)
-						),
-						_examplesByKeyword = UizeDotCom.Build.Util.getExamplesByKeyword ()
+						)
 					;
 
 					Uize.Wsh.buildFiles ({
 						alwaysBuild:_alwaysBuild,
-						logFileName:'_build-pages-from-simple-doc-in-js-modules.log',
+						logFileName:
+							_params.logFileName
+								? _params.logFileName.replace ('.','-in-js-modules.')
+								: '_build-pages-from-simple-doc-in-js-modules.log',
 						targetFolderPathCreator:function (_folderPath) {
 							var _targetFolderPath = _folderPath.slice (-_moduleFolderPathLength) == _moduleFolderPath
 								? _scriptFolderPath + '\\' + _moduleReferenceFolderName

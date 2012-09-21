@@ -316,6 +316,7 @@ Uize.module ({
 						BuildCodeSitemap:0,
 						BuildIndexPages:0,
 						BuildPagesFromSourceCode:0,
+						BuildSimpleDocPages:0,
 						BuildSotu:0,
 						BuildWidgetPages:0,
 						Util:0
