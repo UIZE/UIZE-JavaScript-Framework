@@ -250,8 +250,8 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
 
     // these curve modules are only needed for the additional effects previews
     'Uize.Curve',
@@ -259,7 +259,7 @@ Uize.module ({
     'Uize.Curve.Mod'
   ],
   builder:function () {
-    (window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}})).wireUi ();
+    (window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}})).wireUi ();
   }
 });
 
@@ -275,10 +275,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeSite.Templates.ParamsInspector | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeSite.Templates.ParamsInspector module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeSite.Templates.ParamsInspector
+	<div class="pageActions">
+		<a href="../UizeSite.Templates.ParamsInspector.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*
+  This is an automatically generated module, compiled from the JavaScript template file:
+    UizeSite.Templates.ParamsInspector.js.jst
+*/
+
+Uize.module ({
+  name:'UizeSite.Templates.ParamsInspector',
+  required:[
+    'UizeSite.Templates.ParamsTable'
+  ],
+  builder:function () {
+    var _package = function () {};
+
+    /*** Public Static Methods ***/
+      _package.process = function (input) {
+        var output = [];
+        output.push ('\r\n&lt;div class="tabShell"&gt;\r\n  &lt;div class="tabStubShell"&gt;\r\n    &lt;a id="',input .idPrefix,'_tabs_option0" class="tabStub" href="javascript://"&gt;PRESETS&lt;/a&gt;\r\n    &lt;a id="',input .idPrefix,'_tabs_option1" class="tabStub" href="javascript://"&gt;PARAMS&lt;/a&gt;\r\n    &lt;br style="clear:left;"/&gt;\r\n  &lt;/div&gt;\r\n  &lt;div class="tabBodyShell"&gt;\r\n    &lt;div id="',input .idPrefix,'_tabs-option0TabBody" class="tabBodyInactive"&gt;\r\n      &lt;div id="',input .idPrefix,'-presets" class="selectorLinks"&gt;');
+         for (var _presetName in input.presets) {
+        output.push ('\r\n        &lt;a href="javascript://" onfocus="this.blur ()" class="buttonLink"&gt;',_presetName,'&lt;/a&gt;');
+         }
+        output.push ('\r\n      &lt;/div&gt;\r\n    &lt;/div&gt;\r\n    &lt;div id="',input .idPrefix,'_tabs-option1TabBody" class="tabBodyInactive" style="overflow:auto;"&gt;\r\n      ',UizeSite.Templates.ParamsTable.process ({idPrefix:input.idPrefix,params:input.params}),'\r\n    &lt;/div&gt;\r\n  &lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;div id="',input .idPrefix,'_preview" class="button"&gt;',input .previewButtonText,'&lt;/div&gt;\r\n\r\n');
+        return output.join ('');
+      };
+
+    /*** Public Static Properties ***/
+      _package.input = {
+        idPrefix:'string',
+        params:'object',
+        presets:'object',
+        previewButtonText:'string'
+      };
+
+    return _package;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.library',
+		'UizeSite.Page'
+	],
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
+});
+
+</script>
+
+</body></html>

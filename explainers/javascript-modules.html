@@ -666,15 +666,15 @@
   Uize.Widget.Page
   Uize.Widget.Tree
   Uize.Widget.Tree.List
-  UizeDotCom
-  UizeDotCom.Page
-  UizeDotCom.Page.Doc
+  UizeSite
+  UizeSite.Page
+  UizeSite.Page.Doc
 */
 
-Uize.module ({name:'UizeDotCom.Page.Doc.library'});
+Uize.module ({name:'UizeSite.Page.Doc.library'});
 </pre>
 			
-			<p>The above example shows the contents of the source version of the library module <code>UizeDotCom.Page.Doc.library.js</code>. Notice how all that the module declaration does is to define the namespace for the library. When a JavaScript library file includes a module declaration that declares a namespace for the library file, then that library file can be required as a module, and requiring it will result in it being dynamically loaded in by the module loader mechanism - if it is not already loaded. Using this approach, the library module can simply be added to the <code><a href="#4_1_3">required</a></code> list of the anonymous module declaration that sets up the page widget instance in the page.</p>
+			<p>The above example shows the contents of the source version of the library module <code>UizeSite.Page.Doc.library.js</code>. Notice how all that the module declaration does is to define the namespace for the library. When a JavaScript library file includes a module declaration that declares a namespace for the library file, then that library file can be required as a module, and requiring it will result in it being dynamically loaded in by the module loader mechanism - if it is not already loaded. Using this approach, the library module can simply be added to the <code><a href="#4_1_3">required</a></code> list of the anonymous module declaration that sets up the page widget instance in the page.</p>
 			
 			<p>For a detailed discussion of JavaScript library files and how they can be used to improve the performance of Web pages, consult the explainer <a href="javascript-libraries.html">JavaScript Libraries</a>.</p>
 		</div>
@@ -758,7 +758,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 				
 				<p>Now, in order to avoid contructing and returning a fresh data object each time this function is called, the function implements a simple caching mechanism, using the <code>_cachedData</code> variable that is defined in its enclosing scope. If this variable has a non-null value at the time that the <code>MyNamespace.MyDataModule</code> function is called, then this value is simply returned. Otherwise, or if the value <code>true</code> is specified for the optional <code>_getCopy</code> parameter, then the data object is constructed and cached as necessary. As mentioned, an optional <code>_getCopy</code> parameter allows fresh copies of the object to be made when calling the <code>MyNamespace.MyDataModule</code> function, in case using a shared copy is not desired.</p>
 				
-				<p>To see a real world example of this approach in use, take a look at the <code><a href="../reference/UizeDotCom.TestDataPhotos.html">UizeDotCom.TestDataPhotos</a></code> data module that is used by the <b>uize.com</b> Web site.</p>
+				<p>To see a real world example of this approach in use, take a look at the <code><a href="../reference/UizeSite.TestDataPhotos.html">UizeSite.TestDataPhotos</a></code> data module that is used by the <b>uize.com</b> Web site.</p>
 			</div>
 			
 			<a name="5_8_3"></a>
@@ -781,7 +781,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 					
 					<p>This deferral becomes even more pronounced if the data structure is large and complex, or if building the data object requires any programmatic / algorithmic construction, programmatic expanding of compressed data, or the cloning of data subsets obtained from other data modules (see <a href="#5_8_7">Composite Data Module</a>). Instead, the performance impact of this construction can be deferred until when (and if) the data is truly needed.</p>
 					
-					<p>A good demonstration of this principle can be found in the <code><a href="../reference/UizeDotCom.SiteMap.html">UizeDotCom.SiteMap</a></code> module that defines the contents tree of the <b>uize.com</b> Web site. This module performs various types of programmatic data construction in order to reduce the module's file size. This file size reduction comes at the expense of slightly increased CPU usage, but the construction of the site contents tree is deferred until the user activates the site's contents tree menu, so this cost does not hurt the initial load time for pages that use the site menu control.</p>
+					<p>A good demonstration of this principle can be found in the <code><a href="../reference/UizeSite.SiteMap.html">UizeSite.SiteMap</a></code> module that defines the contents tree of the <b>uize.com</b> Web site. This module performs various types of programmatic data construction in order to reduce the module's file size. This file size reduction comes at the expense of slightly increased CPU usage, but the construction of the site contents tree is deferred until the user activates the site's contents tree menu, so this cost does not hurt the initial load time for pages that use the site menu control.</p>
 				</div>
 			</div>
 			
@@ -846,7 +846,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			<div class="contents3">
 				<p>There's no saying that data modules need to be static files - they can be dynamically generated.</p>
 				
-				<p>Data modules can be dynamically generated from data stored in some other data format, such as CSV (Comma Separated Values), SimpleData, XML, etc. Furthermore, data modules can be generated in a number of different ways. For example, they can be generated dynamically by the server in response to an HTTP request. Alternatively, they can be generated by <a href="javascript-build-scripts.html">JavaScript Build Scripts</a> as part of a Web site build process. A good example of this is the <code><a href="../reference/UizeDotCom.ModulesTree.html">UizeDotCom.ModulesTree</a></code> module that defines the tree of all the JavaScript modules contained inside the modules folder of the <b>uize.com</b> Web site.</p>
+				<p>Data modules can be dynamically generated from data stored in some other data format, such as CSV (Comma Separated Values), SimpleData, XML, etc. Furthermore, data modules can be generated in a number of different ways. For example, they can be generated dynamically by the server in response to an HTTP request. Alternatively, they can be generated by <a href="javascript-build-scripts.html">JavaScript Build Scripts</a> as part of a Web site build process. A good example of this is the <code><a href="../reference/UizeSite.ModulesTree.html">UizeSite.ModulesTree</a></code> module that defines the tree of all the JavaScript modules contained inside the modules folder of the <b>uize.com</b> Web site.</p>
 			</div>
 			
 			<a name="5_8_7"></a>
@@ -944,7 +944,7 @@ Uize.module ({
 				
 				<p>Avoiding shared references may or may not be an important consideration, depending on how the data is intended to be used. In this particular approach, modifying a data object returned by the <code>MyNamespace.FinanceEmployees</code> accessor would not affect the data object returned by the <code>MyNamespace.AllEmployees</code> accessor, because the accessor function in the <code>MyNamespace.AllEmployees</code> module guarantees that it has discrete copies of the data defined by the <code>MyNamespace.EngineeringEmployees</code> and <code>MyNamespace.FinanceEmployees</code> modules.</p>
 				
-				<p>For further reference, a good example of a <a href="#5_8_7">Composite Data Module</a> is the <code><a href="../reference/UizeDotCom.SiteMap.html">UizeDotCom.SiteMap</a></code> module that defines the contents tree of the <b>uize.com</b> Web site. This module makes use of the <code><a href="../reference/UizeDotCom.ModulesTree.html">UizeDotCom.ModulesTree</a></code> <a href="#5_8_6">Dynamically Generated Data Module</a> that defines the tree of all the JavaScript modules contained inside the modules folder of the <b>uize.com</b> Web site.</p>
+				<p>For further reference, a good example of a <a href="#5_8_7">Composite Data Module</a> is the <code><a href="../reference/UizeSite.SiteMap.html">UizeSite.SiteMap</a></code> module that defines the contents tree of the <b>uize.com</b> Web site. This module makes use of the <code><a href="../reference/UizeSite.ModulesTree.html">UizeSite.ModulesTree</a></code> <a href="#5_8_6">Dynamically Generated Data Module</a> that defines the tree of all the JavaScript modules contained inside the modules folder of the <b>uize.com</b> Web site.</p>
 			</div>
 		</div>
 	</div>
@@ -1109,10 +1109,10 @@ Uize.moduleLoader = moduleLoader;
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

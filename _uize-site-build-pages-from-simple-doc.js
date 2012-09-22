@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'UizeDotCom.Build.BuildSimpleDocPages',
-	builder:function () {UizeDotCom.Build.BuildSimpleDocPages.perform (env)}
+	required:'UizeSite.Build.BuildSimpleDocPages',
+	builder:function () {UizeSite.Build.BuildSimpleDocPages.perform (env)}
 });
 

@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'UizeDotCom.Build.BuildPagesFromSourceCode',
-	builder:function () {UizeDotCom.Build.BuildPagesFromSourceCode.perform (env)}
+	required:'UizeSite.Build.BuildPagesFromSourceCode',
+	builder:function () {UizeSite.Build.BuildPagesFromSourceCode.perform (env)}
 });
 

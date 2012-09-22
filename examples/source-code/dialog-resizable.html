@@ -82,15 +82,15 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
     'Uize.Widget.Dialog.xResizable',
-    'UizeDotCom.Templates.Dialog',
+    'UizeSite.Templates.Dialog',
     'Uize.String'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+      var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
     /*** create the Uize.Widget.Dialog object ***/
       var dialog = page.addChild (
@@ -102,7 +102,7 @@ Uize.module ({
           offsetY:-100,
           built:false,
           title:'RESIZABLE DIALOG',
-          html:UizeDotCom.Templates.Dialog.process ({
+          html:UizeSite.Templates.Dialog.process ({
             idPrefix:'page_dialog',
             contents:
               '&lt;div style="padding:5px;"&gt;' + Uize.String.repeat ('This is a resizable dialog. ',50) + '&lt;/div&gt;'
@@ -131,10 +131,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

@@ -648,7 +648,7 @@ Uize.module ({
 								EXAMPLE
 								.......................................................
 								myWidget.callInherited ('useDialog') ({
-									widgetClassName:'UizeDotCom.DialogConfirm',
+									widgetClassName:'UizeSite.DialogConfirm',
 									widgetProperties:{
 										name:'confirmDialog',
 										title:'Are you sure?',
@@ -667,7 +667,7 @@ Uize.module ({
 								});
 								.......................................................
 
-								In the above example, the =callInherited= instance method of the widget =myWidget= is being used to get a caller for the =useDialog= instance method of the page widget. It is assumed, in this example, that =myWidget= is somewhere on a widget tree with a page widget instance at the root. The widget class =UizeDotCom.DialogConfirm= is being used for the dialog widget, and the various widget properties that are specified in the =widgetProperties= property are state properties of the =UizeDotCom.DialogConfirm= class. This example is essentially using a dynamically loaded dialog widget class for displaying a decorated confirmation dialog that is implemented using HTML.
+								In the above example, the =callInherited= instance method of the widget =myWidget= is being used to get a caller for the =useDialog= instance method of the page widget. It is assumed, in this example, that =myWidget= is somewhere on a widget tree with a page widget instance at the root. The widget class =UizeSite.DialogConfirm= is being used for the dialog widget, and the various widget properties that are specified in the =widgetProperties= property are state properties of the =UizeSite.DialogConfirm= class. This example is essentially using a dynamically loaded dialog widget class for displaying a decorated confirmation dialog that is implemented using HTML.
 				*/
 			};
 

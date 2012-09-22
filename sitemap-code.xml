@@ -1708,455 +1708,455 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildCodeSitemap.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Build.BuildCodeSitemap.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildIndexPages.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Build.BuildIndexPages.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildPagesFromSourceCode.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Build.BuildPagesFromSourceCode.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildSimpleDocPages.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Build.BuildSimpleDocPages.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildSotu.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Build.BuildSotu.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildWidgetPages.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Build.BuildWidgetPages.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Build.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.Util.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Build.Util.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Delve.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Delve.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Delve.library.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Delve.library.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.DelvePageWriter.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.DelvePageWriter.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.DialogConfirm.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.DialogConfirm.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.DialogDate.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.DialogDate.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Examples.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Examples.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.ExamplesInfoForSiteMap.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.ExamplesInfoForSiteMap.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.ModulesTree.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.ModulesTree.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Doc.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Doc.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Doc.library.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Doc.library.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Example.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Example.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Example.library.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Example.library.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Example.Test.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Example.Test.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Example.Test.library.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Example.Test.library.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Home.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Home.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Home.library.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Home.library.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.Index.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.Index.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Page.library.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Page.library.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.ParamsInspector.InlinePresets.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.ParamsInspector.InlinePresets.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.ParamsInspector.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.ParamsInspector.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.SiteMap.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.SiteMap.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.DataBar.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.DataBar.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.DelvePageHtml.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.DelvePageHtml.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.DelveUiHtml.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.DelveUiHtml.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.Dialog.Confirm.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.Dialog.Confirm.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.Dialog.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.Dialog.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.Dialog.Picker.Date.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.Dialog.Picker.Date.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.Dialog.Picker.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.Dialog.Picker.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.Footer.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.Footer.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.IndexPage.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.IndexPage.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.JavaScriptSourceSample.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.JavaScriptSourceSample.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.ListingsPage.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.ListingsPage.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.ParamsInspector.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.ParamsInspector.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.ParamsTable.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.ParamsTable.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.ShareThisPanel.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.ShareThisPanel.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.SimpleDoc.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.SimpleDoc.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.SimpleDocSample.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.SimpleDocSample.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.SlideShow.Basic.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.SlideShow.Basic.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.SlideShow.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.SlideShow.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.SlideShow.Wipes.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.SlideShow.Wipes.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.Tour.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.Tour.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.WidgetToGoGadgetXml.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.WidgetToGoGadgetXml.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.WidgetToGoHomepage.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.WidgetToGoHomepage.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.WidgetToGoPage.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.WidgetToGoPage.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.Templates.WidgetToGoTitle.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.Templates.WidgetToGoTitle.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.TestDataFruits.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.TestDataFruits.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.TestDataObject.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.TestDataObject.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.TestDataPhotos.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.TestDataPhotos.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.TestWidget.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.TestWidget.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.WidgetToGoPage.Calculator.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.WidgetToGoPage.Calculator.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.WidgetToGoPage.Calculator.library.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.WidgetToGoPage.Calculator.library.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.WidgetToGoPage.Calendar.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.WidgetToGoPage.Calendar.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.WidgetToGoPage.Calendar.library.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.WidgetToGoPage.Calendar.library.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.WidgetToGoPage.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeSite.WidgetToGoPage.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>

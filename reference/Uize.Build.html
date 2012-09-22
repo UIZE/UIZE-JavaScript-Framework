@@ -37,7 +37,7 @@
 							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
 							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
 							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
-							<li><a href="#1_2_4" title="Uize.Build.AuditStrings | Uize.Build.AutoScruncher | Uize.Build.BuildSimpleDataPages | Uize.Build.BuildSimpleDocPages | Uize.Build.CompileJstModules | Uize.Build.ModuleInfo | Uize.Build.NeatenJsFiles | Uize.Build.Scruncher | Uize.Build.UpdateCopyrightNotices | Uize.Build.Util">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_4" title="Uize.Build.AuditStrings | Uize.Build.AutoScruncher | Uize.Build.BuildSimpleDataPages | Uize.Build.BuildSimpleDocPages | Uize.Build.CompileJstModules | Uize.Build.ModuleInfo | Uize.Build.NeatenJsFiles | Uize.Build.Scruncher | Uize.Build.ServicesSetup | Uize.Build.UpdateCopyrightNotices | Uize.Build.Util">1.2.4. Modules Directly Under This Namespace</a></li>
 							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Build module.">1.2.5. Unit Tests</a></li>
 						</ul>
 					</li>
@@ -103,7 +103,7 @@
 			<a name="1_2_4"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
 			<div class="contents3">
-				<p><code><a href="../reference/Uize.Build.AuditStrings.html">Uize.Build.AuditStrings</a></code> | <code><a href="../reference/Uize.Build.AutoScruncher.html">Uize.Build.AutoScruncher</a></code> | <code><a href="../reference/Uize.Build.BuildSimpleDataPages.html">Uize.Build.BuildSimpleDataPages</a></code> | <code><a href="../reference/Uize.Build.BuildSimpleDocPages.html">Uize.Build.BuildSimpleDocPages</a></code> | <code><a href="../reference/Uize.Build.CompileJstModules.html">Uize.Build.CompileJstModules</a></code> | <code><a href="../reference/Uize.Build.ModuleInfo.html">Uize.Build.ModuleInfo</a></code> | <code><a href="../reference/Uize.Build.NeatenJsFiles.html">Uize.Build.NeatenJsFiles</a></code> | <code><a href="../reference/Uize.Build.Scruncher.html">Uize.Build.Scruncher</a></code> | <code><a href="../reference/Uize.Build.UpdateCopyrightNotices.html">Uize.Build.UpdateCopyrightNotices</a></code> | <code><a href="../reference/Uize.Build.Util.html">Uize.Build.Util</a></code></p>
+				<p><code><a href="../reference/Uize.Build.AuditStrings.html">Uize.Build.AuditStrings</a></code> | <code><a href="../reference/Uize.Build.AutoScruncher.html">Uize.Build.AutoScruncher</a></code> | <code><a href="../reference/Uize.Build.BuildSimpleDataPages.html">Uize.Build.BuildSimpleDataPages</a></code> | <code><a href="../reference/Uize.Build.BuildSimpleDocPages.html">Uize.Build.BuildSimpleDocPages</a></code> | <code><a href="../reference/Uize.Build.CompileJstModules.html">Uize.Build.CompileJstModules</a></code> | <code><a href="../reference/Uize.Build.ModuleInfo.html">Uize.Build.ModuleInfo</a></code> | <code><a href="../reference/Uize.Build.NeatenJsFiles.html">Uize.Build.NeatenJsFiles</a></code> | <code><a href="../reference/Uize.Build.Scruncher.html">Uize.Build.Scruncher</a></code> | <code><a href="../reference/Uize.Build.ServicesSetup.html">Uize.Build.ServicesSetup</a></code> | <code><a href="../reference/Uize.Build.UpdateCopyrightNotices.html">Uize.Build.UpdateCopyrightNotices</a></code> | <code><a href="../reference/Uize.Build.Util.html">Uize.Build.Util</a></code></p>
 			</div>
 			
 			<a name="1_2_5"></a>
@@ -135,10 +135,10 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

@@ -82,14 +82,14 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example',
     'Uize.Widget.Options.Tabbed',
     'Uize.Build.Scruncher',
-    'UizeDotCom.Templates.JavaScriptSourceSample'
+    'UizeSite.Templates.JavaScriptSourceSample'
   ],
   builder:function () {
     /*** create a page widget subclass ***/
-      var CustomPageWidget = UizeDotCom.Page.Example.subclass ();
+      var CustomPageWidget = UizeSite.Page.Example.subclass ();
 
       /*** add property for managing update of scrunched code and scruncher report ***/
         CustomPageWidget.registerProperties ({
@@ -134,7 +134,7 @@ Uize.module ({
       page.wireUi ();
 
     /*** initialize sample data ***/
-      page.setNodeValue ('sourceCode',UizeDotCom.Templates.JavaScriptSourceSample.process ());
+      page.setNodeValue ('sourceCode',UizeSite.Templates.JavaScriptSourceSample.process ());
   }
 });
 
@@ -149,10 +149,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

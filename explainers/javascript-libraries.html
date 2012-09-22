@@ -138,15 +138,15 @@
   Uize.Widget.Page
   Uize.Widget.Tree
   Uize.Widget.Tree.List
-  UizeDotCom
-  UizeDotCom.Page
-  UizeDotCom.Page.Doc
+  UizeSite
+  UizeSite.Page
+  UizeSite.Page.Doc
 */
 
-Uize.module ({name:'UizeDotCom.Page.Doc.library'});
+Uize.module ({name:'UizeSite.Page.Doc.library'});
 </pre>
 				
-				<p>The above example shows the contents of the source version of the library file <code>UizeDotCom.Page.Doc.library.js</code>.</p>
+				<p>The above example shows the contents of the source version of the library file <code>UizeSite.Page.Doc.library.js</code>.</p>
 				
 				<a name="3_1_1_1"></a>
 				<h4 class="heading4" title="3. What They Look Like -&gt; 3.1. The Source Version -&gt; 3.1.1. Library Contents -&gt; 3.1.1.1. Comments and Indentation Inside the Library Contents Comment"><span class="headingNumber"><a href="#3" title="3. What They Look Like">3</a>.<a href="#3_1" title="3. What They Look Like -&gt; 3.1. The Source Version">1</a>.<a href="#3_1_1" title="3. What They Look Like -&gt; 3.1. The Source Version -&gt; 3.1.1. Library Contents">1</a>.<a href="#3_1_1_1" title="3. What They Look Like -&gt; 3.1. The Source Version -&gt; 3.1.1. Library Contents -&gt; 3.1.1.1. Comments and Indentation Inside the Library Contents Comment">1</a>. </span>Comments and Indentation Inside the Library Contents Comment</h4>
@@ -172,10 +172,10 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
   Uize.Widget.Tree
   Uize.Widget.Tree.List
   : THIS LINE IS A COMMENT AND WILL BE IGNORED
-  UizeDotCom
-  UizeDotCom.Page
+  UizeSite
+  UizeSite.Page
   &gt; THIS LINE IS A COMMENT AND WILL BE IGNORED
-  UizeDotCom.Page.Doc
+  UizeSite.Page.Doc
 */
 </pre>
 					
@@ -185,15 +185,15 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 					
 					
 <pre class="sample-code">/* Library Contents
-  // Modules required (directly AND indirectly) by UizeDotCom.WidgetToGoPage
-    UizeDotCom
+  // Modules required (directly AND indirectly) by UizeSite.WidgetToGoPage
+    UizeSite
     Uize.Class
     Uize.Node
     Uize.Widget
     Uize.Widget.Page
-    UizeDotCom.Templates
-    UizeDotCom.Templates.WidgetToGoTitle
-    UizeDotCom.WidgetToGoPage
+    UizeSite.Templates
+    UizeSite.Templates.WidgetToGoTitle
+    UizeSite.WidgetToGoPage
 
   // Modules with a high likelihood of being needed by one widget or another
     Uize.Node.Event
@@ -261,7 +261,7 @@ Uize.module ({name:'MyNamespace.MyLibraryName.library'});
 				<div class="contents4">
 					<p>When creating a library specifically to bundle all the JavaScript modules needed by a page widget class, a convention that can be used is to use the module name of the page widget class as the namespace for the library module.</p>
 					
-					<p>So, for example, the library module <code><a href="../reference/UizeDotCom.Page.Doc.library.html">UizeDotCom.Page.Doc.library</a></code> bundles all the JavaScript modules required by the <code><a href="../reference/UizeDotCom.Page.Doc.html">UizeDotCom.Page.Doc</a></code> page widget class, so one can count on the <code><a href="../reference/UizeDotCom.Page.Doc.html">UizeDotCom.Page.Doc</a></code> namespace existing when the module declaration for the library module is encountered. Similarly, a library module for the page widget base class could be named <code>Uize.Widget.Page.library</code>, since it would bundle all modules required by the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> module.</p>
+					<p>So, for example, the library module <code><a href="../reference/UizeSite.Page.Doc.library.html">UizeSite.Page.Doc.library</a></code> bundles all the JavaScript modules required by the <code><a href="../reference/UizeSite.Page.Doc.html">UizeSite.Page.Doc</a></code> page widget class, so one can count on the <code><a href="../reference/UizeSite.Page.Doc.html">UizeSite.Page.Doc</a></code> namespace existing when the module declaration for the library module is encountered. Similarly, a library module for the page widget base class could be named <code>Uize.Widget.Page.library</code>, since it would bundle all modules required by the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> module.</p>
 				</div>
 				
 				<a name="3_1_2_3"></a>
@@ -333,8 +333,8 @@ Uize.module ({
 &lt;script type="text/javascript"&gt;
   Uize.moduleUrlTemplate = 'js/[#modulePath]';
   Uize.module ({
-    required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+    required:'UizeSite.Page.Doc',
+    builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -371,15 +371,15 @@ Uize.module ({name:'Uize.Widget.Page.library'});
   Uize.Tooltip
   Uize.Widget.Tree
   Uize.Widget.Tree.List
-  UizeDotCom
-  UizeDotCom.Page
-  UizeDotCom.Page.Doc
+  UizeSite
+  UizeSite.Page
+  UizeSite.Page.Doc
 */
 
-Uize.module ({name:'UizeDotCom.Page.Doc.library'});
+Uize.module ({name:'UizeSite.Page.Doc.library'});
 </pre>
 				
-				<p>In the above example, while the definition of the <code>Uize.Widget.Page.library.js</code> library file is perfectly ok, the definition here for the <code>UizeDotCom.Page.Doc.library.js</code> library file will not guarantee correct results, since the <code>Uize.Widget.Page.library.js</code> library file may not be built or up-to-date at the time that the <code>UizeDotCom.Page.Doc.library.js</code> library file gets built.</p>
+				<p>In the above example, while the definition of the <code>Uize.Widget.Page.library.js</code> library file is perfectly ok, the definition here for the <code>UizeSite.Page.Doc.library.js</code> library file will not guarantee correct results, since the <code>Uize.Widget.Page.library.js</code> library file may not be built or up-to-date at the time that the <code>UizeSite.Page.Doc.library.js</code> library file gets built.</p>
 			</div>
 		</div>
 	</div>
@@ -400,12 +400,12 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">&lt;script src="js/Uize.js"&gt;&lt;/script&gt;
-&lt;script src="js/UizeDotCom.Page.Doc.library.js"&gt;&lt;/script&gt;
+&lt;script src="js/UizeSite.Page.Doc.library.js"&gt;&lt;/script&gt;
 
 &lt;script type="text/javascript"&gt;
   Uize.module ({
-    required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+    required:'UizeSite.Page.Doc',
+    builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -422,12 +422,12 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">&lt;script src="js/Uize.js"&gt;&lt;/script&gt;
-&lt;script src="js/UizeDotCom.Page.Doc.library.js"&gt;&lt;/script&gt;
+&lt;script src="js/UizeSite.Page.Doc.library.js"&gt;&lt;/script&gt;
 
 &lt;script type="text/javascript"&gt;
   Uize.module ({
-    required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+    required:'UizeSite.Page.Doc',
+    builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -450,10 +450,10 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 &lt;script type="text/javascript"&gt;
   Uize.module ({
     required:[
-      'UizeDotCom.Page.Doc.library',
-      'UizeDotCom.Page.Doc'
+      'UizeSite.Page.Doc.library',
+      'UizeSite.Page.Doc'
     ],
-    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+    builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -487,7 +487,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 	<div class="contents1">
 		<p>For some "living and breathing", real world examples of JavaScript libraries in action, take a look at the library files used by the <b>uize.com</b> Web site.</p>
 		
-		<p>If you've already <a href="../download.html">downloaded</a> the UIZE JavaScript Framework and followed the instructions in the <a href="getting-started.html">Getting Started With UIZE</a> guide, then you can take a peek inside the <code>UIZE-JavaScript-Framework/js/~source</code> folder and look at the contents of the library files, like <code>UizeDotCom.Page.Doc.library.js</code>, <code>UizeDotCom.Page.Example.library.js</code>, etc.</p>
+		<p>If you've already <a href="../download.html">downloaded</a> the UIZE JavaScript Framework and followed the instructions in the <a href="getting-started.html">Getting Started With UIZE</a> guide, then you can take a peek inside the <code>UIZE-JavaScript-Framework/js/~source</code> folder and look at the contents of the library files, like <code>UizeSite.Page.Doc.library.js</code>, <code>UizeSite.Page.Example.library.js</code>, etc.</p>
 	</div>
 	
 	<a name="7"></a>
@@ -620,9 +620,9 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
   Uize.Widget.Page
   Uize.Widget.Tree
   Uize.Widget.Tree.List
-  UizeDotCom
-  UizeDotCom.Page
-  UizeDotCom.Page.Doc
+  UizeSite
+  UizeSite.Page
+  UizeSite.Page.Doc
 */
 </pre>
 			
@@ -637,10 +637,10 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

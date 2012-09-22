@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'UizeDotCom.Build.BuildWidgetPages',
-	builder:function () {UizeDotCom.Build.BuildWidgetPages.perform (env)}
+	required:'UizeSite.Build.BuildWidgetPages',
+	builder:function () {UizeSite.Build.BuildWidgetPages.perform (env)}
 });
 

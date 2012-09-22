@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeSite.Templates.SlideShow.Basic | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeSite.Templates.SlideShow.Basic module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeSite.Templates.SlideShow.Basic
+	<div class="pageActions">
+		<a href="../UizeSite.Templates.SlideShow.Basic.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*
+  This is an automatically generated module, compiled from the JavaScript template file:
+    UizeSite.Templates.SlideShow.Basic.js.jst
+*/
+
+Uize.module ({
+  name:'UizeSite.Templates.SlideShow.Basic',
+  required:[
+    'UizeSite.Templates.SlideShow'
+  ],
+  builder:function () {
+    var _package = function () {};
+
+    /*** Public Static Methods ***/
+      _package.process = function (input) {
+        var output = [];
+        function viewHtml () {var output = [];
+        output.push ('\r\n&lt;img id="',input .idPrefix,'-slide_image" width="',input .width,'" height="',input .height,'" src="../images/blank.gif" alt=""/&gt;');
+        return output.join ('');}
+        output.push ('\r\n',UizeSite.Templates.SlideShow.process ({idPrefix:input.idPrefix,viewHtml:viewHtml ()}),'\r\n');
+        return output.join ('');
+      };
+
+    /*** Public Static Properties ***/
+      _package.input = {
+        idPrefix:'string',
+        width:'number',
+        height:'number'
+      };
+
+    return _package;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.library',
+		'UizeSite.Page'
+	],
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
+});
+
+</script>
+
+</body></html>

@@ -57,7 +57,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example demonstrates how the <code>enabled</code> and <code>busy</code> state properties behave in a hierarchical tree of widgets. In the example, a widget tree is created from instances of a dummy <a href="../reference/UizeDotCom.TestWidget.html"><code>UizeDotCom.TestWidget</code></a> class. The root widget has two child widgets of the same class, and one of those children has a further two children of the same class. The widget exposes controls for <code>enabled</code> and <code>busy</code>, and provides two buttons to demonstrate the effect of different combinations of enabled and busy at different levels of the tree. Tweak the values to see how the inheritance for these properties operates.</p>
+		<p>This example demonstrates how the <code>enabled</code> and <code>busy</code> state properties behave in a hierarchical tree of widgets. In the example, a widget tree is created from instances of a dummy <a href="../reference/UizeSite.TestWidget.html"><code>UizeSite.TestWidget</code></a> class. The root widget has two child widgets of the same class, and one of those children has a further two children of the same class. The widget exposes controls for <code>enabled</code> and <code>busy</code>, and provides two buttons to demonstrate the effect of different combinations of enabled and busy at different levels of the tree. Tweak the values to see how the inheritance for these properties operates.</p>
 	</div>
 
 	<!-- HTML "wireframe" for widget tree -->
@@ -85,26 +85,26 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
-		'UizeDotCom.TestWidget'
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'UizeSite.TestWidget'
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
 		function beBusyForSomeTime () {
 			testWidget.set ({busy:true});
 			setTimeout (function () {testWidget.set ({busy:'inherit'})},4000);
 		}
 
-		/*** add the UizeDotCom.TestWidget child widget ***/
-			UizeDotCom.TestWidget.set ({built:false});
-			var testWidget = page.addChild ('testWidget',UizeDotCom.TestWidget);
-				testWidget.addChild ('childTestWidget0',UizeDotCom.TestWidget);
-					testWidget.children.childTestWidget0.addChild ('childTestWidget0',UizeDotCom.TestWidget);
-					testWidget.children.childTestWidget0.addChild ('childTestWidget1',UizeDotCom.TestWidget);
-				testWidget.addChild ('childTestWidget1',UizeDotCom.TestWidget);
+		/*** add the UizeSite.TestWidget child widget ***/
+			UizeSite.TestWidget.set ({built:false});
+			var testWidget = page.addChild ('testWidget',UizeSite.TestWidget);
+				testWidget.addChild ('childTestWidget0',UizeSite.TestWidget);
+					testWidget.children.childTestWidget0.addChild ('childTestWidget0',UizeSite.TestWidget);
+					testWidget.children.childTestWidget0.addChild ('childTestWidget1',UizeSite.TestWidget);
+				testWidget.addChild ('childTestWidget1',UizeSite.TestWidget);
 
 		/*** wire up the page widget ***/
 			page.wireUi ();

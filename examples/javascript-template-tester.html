@@ -98,7 +98,7 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
 		'Uize.String.Lines',
@@ -107,7 +107,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create a page widget subclass ***/
-			var CustomPageWidget = UizeDotCom.Page.Example.subclass ();
+			var CustomPageWidget = UizeSite.Page.Example.subclass ();
 
 			/*** add property for managing update of scrunched code and scruncher report ***/
 				CustomPageWidget.registerProperties ({

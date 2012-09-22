@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'UizeDotCom.Build.BuildCodeSitemap',
-	builder:function () {UizeDotCom.Build.BuildCodeSitemap.perform (env)}
+	required:'UizeSite.Build.BuildCodeSitemap',
+	builder:function () {UizeSite.Build.BuildCodeSitemap.perform (env)}
 });
 

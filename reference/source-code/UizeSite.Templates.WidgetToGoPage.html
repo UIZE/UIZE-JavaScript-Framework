@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeSite.Templates.WidgetToGoPage | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeSite.Templates.WidgetToGoPage module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeSite.Templates.WidgetToGoPage
+	<div class="pageActions">
+		<a href="../UizeSite.Templates.WidgetToGoPage.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*
+  This is an automatically generated module, compiled from the JavaScript template file:
+    UizeSite.Templates.WidgetToGoPage.js.jst
+*/
+
+Uize.module ({
+  name:'UizeSite.Templates.WidgetToGoPage',
+  required:[
+    'Uize.Xml',
+    'Uize.Json'
+  ],
+  builder:function () {
+    var _package = function () {};
+
+    /*** Public Static Methods ***/
+      _package.process = function (input) {
+        var output = [];
+
+          var
+            _widget = input.widget,
+            _widgetName = _widget.title.toLowerCase ()
+          ;
+
+        output.push ('&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;\r\n&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;\r\n&lt;head&gt;\r\n  &lt;title&gt;',Uize.Xml.toAttributeValue (_widget.title),'&lt;/title&gt;');
+         if (input.mobile) {
+        output.push ('\r\n  &lt;meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/&gt;');
+         }
+        output.push ('\r\n  &lt;link rel="stylesheet" href="../../css/page.css"/&gt;\r\n  &lt;link rel="stylesheet" href="../../css/page.widget.css"/&gt;');
+         if (input.mobile) {
+        output.push ('\r\n  &lt;link rel="stylesheet" href="../../css/page.widget.mobile.css"/&gt;');
+         }
+        output.push ('\r\n  &lt;link rel="stylesheet" href="../../css/widget.',_widgetName,'.css"/&gt;\r\n  &lt;link rel="stylesheet" href="../../css/widget.',_widgetName,'.widgetstogo.css"/&gt;');
+         if (input.mobile) {
+        output.push ('\r\n  &lt;link rel="stylesheet" href="../../css/widget.',_widgetName,'.widgetstogo.mobile.css"/&gt;');
+         }
+        output.push ('\r\n&lt;/head&gt;\r\n\r\n&lt;body&gt;\r\n\r\n&lt;script type="text/javascript" src="../../js/Uize.js"&gt;&lt;/script&gt;\r\n\r\n&lt;script type="text/javascript"&gt;\r\n\r\nUize.module ({\r\n  required:[\r\n    \'UizeSite.WidgetToGoPage.',Uize.capFirstChar (_widgetName),'.library\',\r\n    \'UizeSite.WidgetToGoPage\'\r\n  ],\r\n  builder:function () {\r\n    (\r\n      window.page = UizeSite.WidgetToGoPage ({\r\n        title:',Uize.Json.to (_widget.title),',\r\n        widgetToGoClass:',Uize.Json.to (_widget.widgetClassModule),',\r\n        widgetToGoHtml:',Uize.Json.to (_widget.widgetTemplateModule),'\r\n      })\r\n    ).wireUi ();\r\n  }\r\n});\r\n\r\n&lt;/script&gt;\r\n\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n\r\n');
+        return output.join ('');
+      };
+
+    /*** Public Static Properties ***/
+      _package.input = {
+        widget:'object',
+        mobile:'boolean'
+      };
+
+    return _package;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.library',
+		'UizeSite.Page'
+	],
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
+});
+
+</script>
+
+</body></html>

@@ -1,5 +1,5 @@
 <%@
-	required ('UizeDotCom.Templates.SimpleDoc');
+	required ('UizeSite.Templates.SimpleDoc');
 	input ({title:'string',description:'string',body:'string'});
 %><%
 	function getLinkedModuleName (moduleName) {
@@ -30,7 +30,7 @@
 		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/<% .title %>.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
 	</div>
 <%@ endBlock () %><%=
-	UizeDotCom.Templates.SimpleDoc.process ({
+	UizeSite.Templates.SimpleDoc.process ({
 		title:input.title,
 		section:'Documentation',
 		description:input.description || 'This is reference documentation for the ' + input.title + ' module of the UIZE JavaScript Framework.',

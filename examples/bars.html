@@ -89,9 +89,9 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
-		'UizeDotCom.TestDataFruits',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'UizeSite.TestDataFruits',
 		'Uize.Widget.Bar',
 		'Uize.Fade',
 		'Uize.Widget.Options',
@@ -99,7 +99,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** set the default UI HTML and other properties for all bar widgets ***/
 			Uize.Widget.Bar.set ({
@@ -124,7 +124,7 @@ Uize.module ({
 
 		/*** global variables ***/
 			var
-				fruits = UizeDotCom.TestDataFruits (),
+				fruits = UizeSite.TestDataFruits (),
 				fruitsLength = Math.min (fruits.length,10)
 			;
 
@@ -164,7 +164,7 @@ Uize.module ({
 					},
 				Done:
 					function () {
-						var propertyUnit = UizeDotCom.TestDataFruits.getPropertyUnit (propertyName);
+						var propertyUnit = UizeSite.TestDataFruits.getPropertyUnit (propertyName);
 						for (var fruitNo = -1; ++fruitNo < fruitsLength;)
 							getFruitBar (fruitNo).setNodeInnerHtml ('knob',fruits [fruitNo] [propertyName] + propertyUnit)
 						;
@@ -174,7 +174,7 @@ Uize.module ({
 			function selectProperty () {
 				propertyName = page.children.propertyOptions.get ('tentativeValue');
 				var
-					propertyValueBounds = UizeDotCom.TestDataFruits.getValueBoundsForProperty (propertyName),
+					propertyValueBounds = UizeSite.TestDataFruits.getValueBoundsForProperty (propertyName),
 					propertyMinValue = propertyValueBounds.minValue,
 					propertyValueRange = propertyValueBounds.maxValue - propertyMinValue,
 					fadeValue = fade.get ('value'),
@@ -200,14 +200,14 @@ Uize.module ({
 
 		/*** use first fruit to get properties and generate property selector options ***/
 			var
-				nutritionProperties = UizeDotCom.TestDataFruits.getNutritionProperties (),
+				nutritionProperties = UizeSite.TestDataFruits.getNutritionProperties (),
 				nutritionPropertiesLength = nutritionProperties.length,
 				optionsHtml = ''
 			;
 			for (var propertyNo = -1; ++propertyNo < nutritionPropertiesLength;)
 				optionsHtml +=
 					'<a id="page_propertyOptions_option' + propertyNo + '" href="javascript://" class="button">' +
-						UizeDotCom.TestDataFruits.getPropertyDisplayName (nutritionProperties [propertyNo]) +
+						UizeSite.TestDataFruits.getPropertyDisplayName (nutritionProperties [propertyNo]) +
 					'</a>'
 			;
 			page.addChild (

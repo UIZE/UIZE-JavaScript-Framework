@@ -605,7 +605,7 @@ Test Improvements
 		Shareable Code to Dynamically Add Tests
 			Have shareable code that can take a list of module names, and dynamically add tests for modules for which no dedicated test modules have been created.
 
-			This code would be used in the UIZE Unit Tests example page, by supplying the list of modules from the =UizeDotCom.ModulesTree= module, and in the =_run-unit-tests-scrunched.js= and =_run-unit-tests-source.js= build scripts which would obtain a list of modules using =Uize.Wsh.getFiles=.
+			This code would be used in the UIZE Unit Tests example page, by supplying the list of modules from the =UizeSite.ModulesTree= module, and in the =_run-unit-tests-scrunched.js= and =_run-unit-tests-source.js= build scripts which would obtain a list of modules using =Uize.Wsh.getFiles=.
 
 	Clean Up Tests
 		Make Performance Tests Legit

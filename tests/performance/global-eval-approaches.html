@@ -46,10 +46,10 @@ function globallyDefinedGlobalEval (_toEval) {return eval (_toEval)}
 function functionDefinedNormallyInGlobalScope () {Uize.Widget.Page}
 
 Uize.module ({
-	required:'UizeDotCom.Page.Example.Test.library',
+	required:'UizeSite.Page.Example.Test.library',
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example.Test ();
+			var page = window.page = UizeSite.Page.Example.Test ();
 
 		/*** test functions ***/
 			deeplyDefinedGlobalEval = typeof execScript == 'function'

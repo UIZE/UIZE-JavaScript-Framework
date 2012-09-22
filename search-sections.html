@@ -94,8 +94,8 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page',
+		'UizeSite.Page.library',
+		'UizeSite.Page',
 		'Uize.Node',
 		'Uize.Url',
 		'Uize.Widget.HoverFader',
@@ -103,7 +103,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var _page = window.page = UizeDotCom.Page ();
+			var _page = window.page = UizeSite.Page ();
 
 		/*** add hover fader for sections highlight effect ***/
 			_page.addChild (

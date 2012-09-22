@@ -1,7 +1,7 @@
 <%@
-	required ('UizeDotCom.Templates.IndexPage');
+	required ('UizeSite.Templates.IndexPage');
 	input ({files:'array',year:'string'});
-%><%= UizeDotCom.Templates.IndexPage.process ({
+%><%= UizeSite.Templates.IndexPage.process ({
 	title:(input.year || 'Latest') + ' News',
 	description:input.year
 		? 'This is the news archive for the UIZE JavaScript Framework for the year ' + input.year + '.'

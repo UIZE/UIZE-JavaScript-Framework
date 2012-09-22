@@ -6,7 +6,7 @@
 Uize.module ({
 	required:'Uize.Build.ModuleInfo',
 	builder:function () {
-		alert (Uize.Build.ModuleInfo.traceDependencies ('UizeDotCom.Page.Doc'));
+		alert (Uize.Build.ModuleInfo.traceDependencies ('UizeSite.Page.Doc'));
 	}
 });
 

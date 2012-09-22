@@ -1,5 +1,5 @@
 <%@
-	required ('UizeDotCom.Templates.IndexPage');
+	required ('UizeSite.Templates.IndexPage');
 	input ({files:'array',keyword:'string'});
 %><%
 	var
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 <%@ endBlock () %>
-<%= UizeDotCom.Templates.IndexPage.process ({
+<%= UizeSite.Templates.IndexPage.process ({
 	title:'JavaScript ' + (_keyword && (Uize.capFirstChar (_keyword) + ' ')) + 'Examples',
 	description:'The UIZE JavaScript Framework includes scores of excellent examples to get you started. This index lists ' + (_keyword ? '' : 'all ') + _files.length + ' JavaScript ' + (_keyword && (_keyword + ' ')) + 'examples.',
 	extraPreambleContent:extraPreambleContent (),

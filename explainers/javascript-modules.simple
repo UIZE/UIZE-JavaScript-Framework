@@ -469,15 +469,15 @@ Types of Modules
 			Uize.Widget.Page
 			Uize.Widget.Tree
 			Uize.Widget.Tree.List
-			UizeDotCom
-			UizeDotCom.Page
-			UizeDotCom.Page.Doc
+			UizeSite
+			UizeSite.Page
+			UizeSite.Page.Doc
 		*/
 
-		Uize.module ({name:'UizeDotCom.Page.Doc.library'});
+		Uize.module ({name:'UizeSite.Page.Doc.library'});
 		...................................................
 
-		The above example shows the contents of the source version of the library module =UizeDotCom.Page.Doc.library.js=. Notice how all that the module declaration does is to define the namespace for the library. When a JavaScript library file includes a module declaration that declares a namespace for the library file, then that library file can be required as a module, and requiring it will result in it being dynamically loaded in by the module loader mechanism - if it is not already loaded. Using this approach, the library module can simply be added to the =required= list of the anonymous module declaration that sets up the page widget instance in the page.
+		The above example shows the contents of the source version of the library module =UizeSite.Page.Doc.library.js=. Notice how all that the module declaration does is to define the namespace for the library. When a JavaScript library file includes a module declaration that declares a namespace for the library file, then that library file can be required as a module, and requiring it will result in it being dynamically loaded in by the module loader mechanism - if it is not already loaded. Using this approach, the library module can simply be added to the =required= list of the anonymous module declaration that sets up the page widget instance in the page.
 
 		For a detailed discussion of JavaScript library files and how they can be used to improve the performance of Web pages, consult the explainer [[javascript-libraries.html][JavaScript Libraries]].
 
@@ -545,7 +545,7 @@ Types of Modules
 
 			Now, in order to avoid contructing and returning a fresh data object each time this function is called, the function implements a simple caching mechanism, using the =_cachedData= variable that is defined in its enclosing scope. If this variable has a non-null value at the time that the =MyNamespace.MyDataModule= function is called, then this value is simply returned. Otherwise, or if the value =true= is specified for the optional =_getCopy= parameter, then the data object is constructed and cached as necessary. As mentioned, an optional =_getCopy= parameter allows fresh copies of the object to be made when calling the =MyNamespace.MyDataModule= function, in case using a shared copy is not desired.
 
-			To see a real world example of this approach in use, take a look at the =UizeDotCom.TestDataPhotos= data module that is used by the *uize.com* Web site.
+			To see a real world example of this approach in use, take a look at the =UizeSite.TestDataPhotos= data module that is used by the *uize.com* Web site.
 
 		Benefits of Deferred Construction
 			Deferring the construction of a data object, as shown in the section `One Implementation Approach`, offers benefits in `Deferred Use of Memory` as well as `Deferred Use of CPU`.
@@ -560,7 +560,7 @@ Types of Modules
 
 				This deferral becomes even more pronounced if the data structure is large and complex, or if building the data object requires any programmatic / algorithmic construction, programmatic expanding of compressed data, or the cloning of data subsets obtained from other data modules (see `Composite Data Module`). Instead, the performance impact of this construction can be deferred until when (and if) the data is truly needed.
 
-				A good demonstration of this principle can be found in the =UizeDotCom.SiteMap= module that defines the contents tree of the *uize.com* Web site. This module performs various types of programmatic data construction in order to reduce the module's file size. This file size reduction comes at the expense of slightly increased CPU usage, but the construction of the site contents tree is deferred until the user activates the site's contents tree menu, so this cost does not hurt the initial load time for pages that use the site menu control.
+				A good demonstration of this principle can be found in the =UizeSite.SiteMap= module that defines the contents tree of the *uize.com* Web site. This module performs various types of programmatic data construction in order to reduce the module's file size. This file size reduction comes at the expense of slightly increased CPU usage, but the construction of the site contents tree is deferred until the user activates the site's contents tree menu, so this cost does not hurt the initial load time for pages that use the site menu control.
 
 		Warming up the Engine
 			Even with the approach where the data object is only built in memory when first requested, you can always still warm up the engine, so to speak, by calling the accessor early on in the code of a module that requires a data module.
@@ -605,7 +605,7 @@ Types of Modules
 		Dynamically Generated Data Module
 			There's no saying that data modules need to be static files - they can be dynamically generated.
 
-			Data modules can be dynamically generated from data stored in some other data format, such as CSV (Comma Separated Values), SimpleData, XML, etc. Furthermore, data modules can be generated in a number of different ways. For example, they can be generated dynamically by the server in response to an HTTP request. Alternatively, they can be generated by [[javascript-build-scripts.html][JavaScript Build Scripts]] as part of a Web site build process. A good example of this is the =UizeDotCom.ModulesTree= module that defines the tree of all the JavaScript modules contained inside the modules folder of the *uize.com* Web site.
+			Data modules can be dynamically generated from data stored in some other data format, such as CSV (Comma Separated Values), SimpleData, XML, etc. Furthermore, data modules can be generated in a number of different ways. For example, they can be generated dynamically by the server in response to an HTTP request. Alternatively, they can be generated by [[javascript-build-scripts.html][JavaScript Build Scripts]] as part of a Web site build process. A good example of this is the =UizeSite.ModulesTree= module that defines the tree of all the JavaScript modules contained inside the modules folder of the *uize.com* Web site.
 
 		Composite Data Module
 			Because data modules can require other data modules, this opens up the possibility of creating data modules that build up more complex data structures by using shared data subsets defined in other data modules.
@@ -699,7 +699,7 @@ Types of Modules
 
 			Avoiding shared references may or may not be an important consideration, depending on how the data is intended to be used. In this particular approach, modifying a data object returned by the =MyNamespace.FinanceEmployees= accessor would not affect the data object returned by the =MyNamespace.AllEmployees= accessor, because the accessor function in the =MyNamespace.AllEmployees= module guarantees that it has discrete copies of the data defined by the =MyNamespace.EngineeringEmployees= and =MyNamespace.FinanceEmployees= modules.
 
-			For further reference, a good example of a `Composite Data Module` is the =UizeDotCom.SiteMap= module that defines the contents tree of the *uize.com* Web site. This module makes use of the =UizeDotCom.ModulesTree= `Dynamically Generated Data Module` that defines the tree of all the JavaScript modules contained inside the modules folder of the *uize.com* Web site.
+			For further reference, a good example of a `Composite Data Module` is the =UizeSite.SiteMap= module that defines the contents tree of the *uize.com* Web site. This module makes use of the =UizeSite.ModulesTree= `Dynamically Generated Data Module` that defines the tree of all the JavaScript modules contained inside the modules folder of the *uize.com* Web site.
 
 Dynamically Loading Modules
 	Uize.moduleLoader

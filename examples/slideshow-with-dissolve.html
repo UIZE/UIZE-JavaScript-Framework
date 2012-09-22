@@ -33,8 +33,8 @@
 	</div>
 
 	<!-- the photos set is defined in an external library so it can be shared by several pages -->
-	<script type="text/javascript" src="../js/UizeDotCom.js"></script>
-	<script type="text/javascript" src="../js/UizeDotCom.TestDataPhotos.js"></script>
+	<script type="text/javascript" src="../js/UizeSite.js"></script>
+	<script type="text/javascript" src="../js/UizeSite.TestDataPhotos.js"></script>
 
 	<!-- slideshow HTML layout with UI to be wired up -->
 
@@ -87,7 +87,7 @@
 
 window.$page_slideShow = {
 	widgetClass:'Uize.Widget.SlideShow',
-	slides:UizeDotCom.TestDataPhotos ()
+	slides:UizeSite.TestDataPhotos ()
 };
 
 window.$page_slideShow_slideImage = {
@@ -112,10 +112,10 @@ window.$page_slideShow_slideRating = {
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example'
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Example ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Example ()).wireUi ()}
 });
 
 </script>

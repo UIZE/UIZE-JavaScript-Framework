@@ -109,7 +109,7 @@ Anatomy of a Typical Page
 						],
 						builder:function () {
 							/*** create the example page widget ***/
-								var page = window.page = UizeDotCom.Page.Example ();
+								var page = window.page = UizeSite.Page.Example ();
 
 							/*** add the Uize.Widget.Bar.Slider child widget ***/
 								page.addChild ('slider',Uize.Widget.Bar.Slider,{minValue:0,maxValue:200});
@@ -136,7 +136,7 @@ Anatomy of a Typical Page
 				- for example, a news Web site might make a special page widget subclass for pages that are news stories, where there is some base client-side functionality that is common to all such news story pages
 				- an object-oriented rather than a chaotic / ad hoc approach to sharing client code across multiple pages
 					- note: for ad hoc injection of widgets on pages that require special JavaScript code to support their client-side interaction, the UIZE JavaScript Framework also supports a system of widget adoption (see the section `Widget Adoption` in the explainer [[javascript-widgets.html][JavaScript Widgets]]).
-			- the examples in the *uize.com* Web site all use the =UizeDotCom.Page.Example= class, which is a subclass of =UizeDotCom.Page=, which is a subclass of =Uize.Widget.Page=
+			- the examples in the *uize.com* Web site all use the =UizeSite.Page.Example= class, which is a subclass of =UizeSite.Page=, which is a subclass of =Uize.Widget.Page=
 
 	### The "Code Beside"
 		You can still have JavaScript files, such as code besides, that use UIZE and that are located in different folders of your site, but these JavaScript files cannot be loaded using the module loader mechanism (more on that later).

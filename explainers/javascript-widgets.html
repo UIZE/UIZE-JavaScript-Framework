@@ -317,7 +317,7 @@ page.children.colorPicker.children.sliderB
 			<div class="contents3">
 				<p>Any Web site is likely to have several subclasses of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class - likely even a small class hierarchy.</p>
 				
-				<p>For example, the <a href="http://www.zazzle.com" target="_blank" class="externalSiteLink">Zazzle Inc.</a> Web site implements its own <code>Zazzle.Page</code> page widget class, that is a subclass of <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>. To get an idea of how the page widget paradigm is applied to a real world project, take a look at the module reference for the <code><a href="../reference/UizeDotCom.Page.html">UizeDotCom.Page</a></code> class and all its subclasses.</p>
+				<p>For example, the <a href="http://www.zazzle.com" target="_blank" class="externalSiteLink">Zazzle Inc.</a> Web site implements its own <code>Zazzle.Page</code> page widget class, that is a subclass of <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>. To get an idea of how the page widget paradigm is applied to a real world project, take a look at the module reference for the <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code> class and all its subclasses.</p>
 				
 				<p>The <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> base class provides some base functionality. You will likely want to create a subclass of <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, in a namespace appropriate for your site, and then use that in all your pages. That's a good starting point, even if your subclass adds no additional functionality initially. In time, you will find that your page widget class is a useful place to put functionality that needs to be available to many widgets that may exist at different places in the <a href="#1_5">Widget Tree</a>.</p>
 				
@@ -1187,7 +1187,7 @@ page.addChild ('myWidget'Uize.Widget);
 <pre class="sample-code">&lt;script type="text/javascript"&gt;
   window.$page_slideShow = {
     widgetClass:'Uize.Widget.SlideShow',
-    slides:UizeDotCom.TestDataPhotos ()
+    slides:UizeSite.TestDataPhotos ()
   };
   window.$page_slideShow_slideImage = {
     widgetClass:'Uize.Widget.Swap.Image',
@@ -1216,7 +1216,7 @@ page.addChild ('myWidget'Uize.Widget);
 <pre class="sample-code">&lt;script type="text/javascript"&gt;
   window.$page_slideShow = {
     widgetClass:'Uize.Widget.SlideShow',
-    slides:UizeDotCom.TestDataPhotos (),
+    slides:UizeSite.TestDataPhotos (),
     children:{
       slideImage:{
         widgetClass:'Uize.Widget.Swap.Image',
@@ -1245,7 +1245,7 @@ page.addChild ('myWidget'Uize.Widget);
 <pre class="sample-code">&lt;script type="text/javascript"&gt;
   window.$page_slideShow = {
     widgetClass:'Uize.Widget.SlideShow',
-    slides:UizeDotCom.TestDataPhotos (),
+    slides:UizeSite.TestDataPhotos (),
     children:{
       slideImage:{
         widgetClass:'Uize.Widget.Swap.Image',
@@ -1648,10 +1648,10 @@ page.addChild ('myWidget'Uize.Widget);
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

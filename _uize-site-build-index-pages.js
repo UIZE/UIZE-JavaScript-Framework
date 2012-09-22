@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'UizeDotCom.Build.BuildIndexPages',
-	builder:function () {UizeDotCom.Build.BuildIndexPages.perform (env)}
+	required:'UizeSite.Build.BuildIndexPages',
+	builder:function () {UizeSite.Build.BuildIndexPages.perform (env)}
 });
 

@@ -106,8 +106,8 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
 		'Uize.Widget.Scrolly',
 		'Uize.Widget.ThumbZoom',
 		'Uize.Node',
@@ -115,7 +115,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** add the scrolly child widgets ***/
 			page.addChild ('horzScrolly',Uize.Widget.Scrolly);

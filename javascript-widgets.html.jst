@@ -1,5 +1,5 @@
 <%@
-	required ('UizeDotCom.Templates.IndexPage');
+	required ('UizeSite.Templates.IndexPage');
 	input ({files:'array'});
 %><%@
 	startBlock ('extraPreambleContent')
@@ -14,7 +14,7 @@
 	</ul>
 <%@
 	endBlock ()
-%><%= UizeDotCom.Templates.IndexPage.process ({
+%><%= UizeSite.Templates.IndexPage.process ({
 	title:'JavaScript Widgets',
 	description:'The UIZE JavaScript Framework offers FREE widgets that can be easily and safely embedded in your own Web sites and blogs. No fees. No advertising.',
 	extraPreambleContent:extraPreambleContent (),

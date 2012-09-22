@@ -1327,9 +1327,9 @@ Curve Modifiers - banded easeOutBounce
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
-		'UizeDotCom.ParamsInspector.InlinePresets',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'UizeSite.ParamsInspector.InlinePresets',
 		'Uize.Fade',
 		'Uize.Curve',
 		'Uize.Curve.Rubber',
@@ -1341,7 +1341,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** configurable values ***/
 			var
@@ -1384,7 +1384,7 @@ Uize.module ({
 			var lastPreviewedCurve;
 			page.addChild (
 				'paramsInspector',
-				UizeDotCom.ParamsInspector.InlinePresets,
+				UizeSite.ParamsInspector.InlinePresets,
 				{
 					params:{curve:'string-multiline',duration:'integer'},
 					previewButtonText:'PREVIEW CURVE',

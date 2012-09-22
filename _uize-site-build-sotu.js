@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'UizeDotCom.Build.BuildSotu',
-	builder:function () {UizeDotCom.Build.BuildSotu.perform (env)}
+	required:'UizeSite.Build.BuildSotu',
+	builder:function () {UizeSite.Build.BuildSotu.perform (env)}
 });
 

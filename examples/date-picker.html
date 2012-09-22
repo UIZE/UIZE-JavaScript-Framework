@@ -130,18 +130,18 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
 		'Uize.Widget.Picker.Date',
 		'Uize.Date'
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** add the date picker widgets ***/
 			// all our date pickers use the same dialog widget class for the uize.com Web site
-			Uize.Widget.Picker.Date.set ({dialogWidgetClass:'UizeDotCom.DialogDate'});
+			Uize.Widget.Picker.Date.set ({dialogWidgetClass:'UizeSite.DialogDate'});
 
 			var today = new Date;
 

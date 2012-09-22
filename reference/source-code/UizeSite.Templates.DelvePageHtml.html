@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeSite.Templates.DelvePageHtml | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeSite.Templates.DelvePageHtml module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeSite.Templates.DelvePageHtml
+	<div class="pageActions">
+		<a href="../UizeSite.Templates.DelvePageHtml.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*
+  This is an automatically generated module, compiled from the JavaScript template file:
+    UizeSite.Templates.DelvePageHtml.js.jst
+*/
+
+Uize.module ({
+  name:'UizeSite.Templates.DelvePageHtml',
+  required:[
+    'Uize.Url',
+    'Uize.Json'
+  ],
+  builder:function () {
+    var _package = function () {};
+
+    /*** Public Static Methods ***/
+      _package.process = function (input) {
+        var output = [];
+
+          var _baseUrl = Uize.Url.from (input.pathToResources).fullDomain;
+
+        output.push ('&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;\r\n&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;\r\n&lt;head&gt;\r\n  &lt;title&gt;DELVE&lt;/title&gt;\r\n  &lt;base href="',_baseUrl,'"/&gt;\r\n  &lt;link rel="stylesheet" href="css/page.css"/&gt;\r\n  &lt;link rel="stylesheet" href="css/widget.datatable.css"/&gt;\r\n  &lt;link rel="stylesheet" href="css/widget.tabs.css"/&gt;\r\n  &lt;link rel="stylesheet" href="css/page.delve.css"/&gt;\r\n  &lt;link rel="stylesheet" href="css/widget.hashtable.css"/&gt;\r\n&lt;/head&gt;\r\n\r\n&lt;body&gt;\r\n\r\n&lt;script type="text/javascript" src="',input.pathToResources,'Uize.js"&gt;&lt;/script&gt;\r\n\r\n&lt;script type="text/javascript"&gt;\r\n\r\nUize.module ({\r\n  required:[\r\n    \'UizeSite.Delve.library\',\r\n    \'UizeSite.Templates.DelveUiHtml\',\r\n    \'Uize.Node\',\r\n    \'UizeSite.Delve\'\r\n  ],\r\n  builder:function () {\r\n    /*** inject the guts of the page ***/\r\n      Uize.Node.injectHtml (document.body,UizeSite.Templates.DelveUiHtml.process ());\r\n\r\n    /*** create the example page widget ***/\r\n      var _page = window.page = UizeSite.Delve ({baseUrl:',Uize.Json.to (_baseUrl),',window:top.opener});\r\n\r\n    /*** wire up the page widget ***/\r\n      _page.wireUi ();\r\n  }\r\n});\r\n\r\n&lt;/script&gt;\r\n\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n\r\n');
+        return output.join ('');
+      };
+
+    /*** Public Static Properties ***/
+      _package.input = {
+        pathToResources:'string'
+      };
+
+    return _package;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.library',
+		'UizeSite.Page'
+	],
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
