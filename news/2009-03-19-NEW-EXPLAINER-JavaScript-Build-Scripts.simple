@@ -1,4 +1,4 @@
-The new [[../explainers/javascript-build-scripts.html][JavaScript Build Scripts]] explainer discusses all the ins and outs of the JavaScript build scripts that are used for the *uize.com* Web site project, and that you can use in your own Web site projects to automate certain build tasks.
+The new [[../explainers/javascript-build-scripts.html][JavaScript Build Scripts]] explainer discusses all the ins and outs of the JavaScript build scripts that are used for the UIZE Web site project, and that you can use in your own Web site projects to automate certain build tasks.
 
 Among other things, build scripts let you...
 

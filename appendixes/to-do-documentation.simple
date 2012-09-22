@@ -165,7 +165,7 @@ Build Process Improvements
 	- script to insert UIZE version number into all script tags that source in the Uize.js file
 	- write script to search for example files that are using ~source JS
 		- as long as they don't have a "~" at the beginning of the file name
-		- incorporate into the build sequence for the *uize.com* site
+		- incorporate into the build sequence for the UIZE Web site
 		- terminate build script if examples found, report offending examples
 	- write script to test for HTML pages with meta descriptions that are too long (more than 150 characters)
 
@@ -266,7 +266,7 @@ Upcoming Releases
 		variableA - (someCondition && variableB)     // works even if someCondition is not a boolean value
 		.........................................................
 
-- explain about layer library modules (as used by the *uize.com* Web site)
+- explain about layer library modules (as used by the UIZE Web site)
 
 Pull All Images from Zazzle...
 	- use more product images from Zazzle for slideshow widgets and such

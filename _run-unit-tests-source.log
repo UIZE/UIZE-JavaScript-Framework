@@ -1,10 +1,10 @@
 Unit Tests Suite
 	TEST MODULE: Uize.Test.Uize
 		REQUIRE TEST MODULE: Uize.Test.Uize
-			PASSED!!! (duration: 1036ms)
+			PASSED!!! (duration: 1182ms)
 		RUN TEST MODULE: Uize.Test.Uize
-			PASSED!!! (duration: 1173ms)
-		PASSED!!! (duration: 2209ms)
+			PASSED!!! (duration: 1352ms)
+		PASSED!!! (duration: 2534ms)
 	TEST MODULE: Uize.Test.Uize.Array
 		REQUIRE TEST MODULE: Uize.Test.Uize.Array
 			PASSED!!! (duration: 2ms)
@@ -13,72 +13,72 @@ Unit Tests Suite
 		PASSED!!! (duration: 3ms)
 	TEST MODULE: Uize.Test.Uize.Data
 		REQUIRE TEST MODULE: Uize.Test.Uize.Data
-			PASSED!!! (duration: 294ms)
+			PASSED!!! (duration: 337ms)
 		RUN TEST MODULE: Uize.Test.Uize.Data
-			PASSED!!! (duration: 237ms)
-		PASSED!!! (duration: 532ms)
+			PASSED!!! (duration: 293ms)
+		PASSED!!! (duration: 630ms)
 	TEST MODULE: Uize.Test.Uize.Data.Matches
 		REQUIRE TEST MODULE: Uize.Test.Uize.Data.Matches
-			PASSED!!! (duration: 397ms)
+			PASSED!!! (duration: 437ms)
 		RUN TEST MODULE: Uize.Test.Uize.Data.Matches
-			PASSED!!! (duration: 486ms)
-		PASSED!!! (duration: 883ms)
+			PASSED!!! (duration: 563ms)
+		PASSED!!! (duration: 1002ms)
 	TEST MODULE: Uize.Test.Uize.Array.Dupes
 		REQUIRE TEST MODULE: Uize.Test.Uize.Array.Dupes
-			PASSED!!! (duration: 16ms)
+			PASSED!!! (duration: 17ms)
 		RUN TEST MODULE: Uize.Test.Uize.Array.Dupes
-			PASSED!!! (duration: 81ms)
-		PASSED!!! (duration: 99ms)
+			PASSED!!! (duration: 88ms)
+		PASSED!!! (duration: 107ms)
 	TEST MODULE: Uize.Test.Uize.Array.Order
 		REQUIRE TEST MODULE: Uize.Test.Uize.Array.Order
-			PASSED!!! (duration: 54ms)
+			PASSED!!! (duration: 70ms)
 		RUN TEST MODULE: Uize.Test.Uize.Array.Order
-			PASSED!!! (duration: 118ms)
-		PASSED!!! (duration: 172ms)
+			PASSED!!! (duration: 135ms)
+		PASSED!!! (duration: 205ms)
 	TEST MODULE: Uize.Test.Uize.Array.Sort
 		REQUIRE TEST MODULE: Uize.Test.Uize.Array.Sort
-			PASSED!!! (duration: 18ms)
+			PASSED!!! (duration: 26ms)
 		RUN TEST MODULE: Uize.Test.Uize.Array.Sort
-			PASSED!!! (duration: 17ms)
-		PASSED!!! (duration: 36ms)
+			PASSED!!! (duration: 21ms)
+		PASSED!!! (duration: 47ms)
 	TEST MODULE: Uize.Test.Uize.Array.Util
 		REQUIRE TEST MODULE: Uize.Test.Uize.Array.Util
-			PASSED!!! (duration: 31ms)
+			PASSED!!! (duration: 34ms)
 		RUN TEST MODULE: Uize.Test.Uize.Array.Util
-			PASSED!!! (duration: 94ms)
-		PASSED!!! (duration: 125ms)
+			PASSED!!! (duration: 112ms)
+		PASSED!!! (duration: 147ms)
 	REQUIRED MODULES TEST: Uize.Build
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Wsh
 		PASSED!!! (duration: 0ms)
 	TEST MODULE: Uize.Test.Uize.Xml
 		REQUIRE TEST MODULE: Uize.Test.Uize.Xml
-			PASSED!!! (duration: 54ms)
+			PASSED!!! (duration: 59ms)
 		RUN TEST MODULE: Uize.Test.Uize.Xml
-			PASSED!!! (duration: 116ms)
-		PASSED!!! (duration: 170ms)
+			PASSED!!! (duration: 129ms)
+		PASSED!!! (duration: 190ms)
 	TEST MODULE: Uize.Test.Uize.String
 		REQUIRE TEST MODULE: Uize.Test.Uize.String
-			PASSED!!! (duration: 192ms)
+			PASSED!!! (duration: 209ms)
 		RUN TEST MODULE: Uize.Test.Uize.String
-			PASSED!!! (duration: 200ms)
-		PASSED!!! (duration: 393ms)
+			PASSED!!! (duration: 214ms)
+		PASSED!!! (duration: 424ms)
 	REQUIRED MODULES TEST: Uize.Build.Scruncher
-		PASSED!!! (duration: 76ms)
+		PASSED!!! (duration: 80ms)
 	REQUIRED MODULES TEST: Uize.Build.AuditStrings
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	TEST MODULE: Uize.Test.Uize.Date
 		REQUIRE TEST MODULE: Uize.Test.Uize.Date
-			PASSED!!! (duration: 227ms)
+			PASSED!!! (duration: 249ms)
 		RUN TEST MODULE: Uize.Test.Uize.Date
-			PASSED!!! (duration: 333ms)
-		PASSED!!! (duration: 560ms)
+			PASSED!!! (duration: 388ms)
+		PASSED!!! (duration: 637ms)
 	TEST MODULE: Uize.Test.Uize.String.Lines
 		REQUIRE TEST MODULE: Uize.Test.Uize.String.Lines
-			PASSED!!! (duration: 185ms)
+			PASSED!!! (duration: 210ms)
 		RUN TEST MODULE: Uize.Test.Uize.String.Lines
-			PASSED!!! (duration: 189ms)
-		PASSED!!! (duration: 375ms)
+			PASSED!!! (duration: 220ms)
+		PASSED!!! (duration: 430ms)
 	TEST MODULE: Uize.Test.Uize.Util
 		REQUIRE TEST MODULE: Uize.Test.Uize.Util
 			PASSED!!! (duration: 2ms)
@@ -86,43 +86,43 @@ Unit Tests Suite
 			PASSED!!! (duration: 1ms)
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Util.Oop
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Build.AutoScruncher
 		PASSED!!! (duration: 1ms)
 	TEST MODULE: Uize.Test.Uize.Url
 		REQUIRE TEST MODULE: Uize.Test.Uize.Url
-			PASSED!!! (duration: 256ms)
+			PASSED!!! (duration: 294ms)
 		RUN TEST MODULE: Uize.Test.Uize.Url
-			PASSED!!! (duration: 196ms)
-		PASSED!!! (duration: 453ms)
+			PASSED!!! (duration: 224ms)
+		PASSED!!! (duration: 518ms)
 	TEST MODULE: Uize.Test.Uize.Template
 		REQUIRE TEST MODULE: Uize.Test.Uize.Template
-			PASSED!!! (duration: 12ms)
+			PASSED!!! (duration: 15ms)
 		RUN TEST MODULE: Uize.Test.Uize.Template
-			PASSED!!! (duration: 11ms)
-		PASSED!!! (duration: 23ms)
+			PASSED!!! (duration: 12ms)
+		PASSED!!! (duration: 28ms)
 	REQUIRED MODULES TEST: Uize.Data.Simple
 		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: Uize.Json
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	TEST MODULE: Uize.Test.Uize.Class
 		REQUIRE TEST MODULE: Uize.Test.Uize.Class
-			PASSED!!! (duration: 314ms)
+			PASSED!!! (duration: 352ms)
 		RUN TEST MODULE: Uize.Test.Uize.Class
-			PASSED!!! (duration: 223ms)
-		PASSED!!! (duration: 538ms)
+			PASSED!!! (duration: 249ms)
+		PASSED!!! (duration: 601ms)
 	REQUIRED MODULES TEST: Uize.Test
-		PASSED!!! (duration: 107ms)
+		PASSED!!! (duration: 129ms)
 	REQUIRED MODULES TEST: Uize.Build.Util
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Build.BuildSimpleDataPages
 		PASSED!!! (duration: 1ms)
 	TEST MODULE: Uize.Test.Uize.Data.PathsTree
 		REQUIRE TEST MODULE: Uize.Test.Uize.Data.PathsTree
-			PASSED!!! (duration: 19ms)
+			PASSED!!! (duration: 20ms)
 		RUN TEST MODULE: Uize.Test.Uize.Data.PathsTree
 			PASSED!!! (duration: 19ms)
-		PASSED!!! (duration: 38ms)
+		PASSED!!! (duration: 40ms)
 	TEST MODULE: Uize.Test.Uize.Doc
 		REQUIRE TEST MODULE: Uize.Test.Uize.Doc
 			PASSED!!! (duration: 2ms)
@@ -131,44 +131,44 @@ Unit Tests Suite
 		PASSED!!! (duration: 3ms)
 	TEST MODULE: Uize.Test.Uize.Templates
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates
-			PASSED!!! (duration: 2ms)
+			PASSED!!! (duration: 1ms)
 		RUN TEST MODULE: Uize.Test.Uize.Templates
-			PASSED!!! (duration: 2ms)
-		PASSED!!! (duration: 4ms)
+			PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 3ms)
 	TEST MODULE: Uize.Test.Uize.Templates.List
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.List
 			PASSED!!! (duration: 3ms)
 		RUN TEST MODULE: Uize.Test.Uize.Templates.List
-			PASSED!!! (duration: 2ms)
-		PASSED!!! (duration: 5ms)
+			PASSED!!! (duration: 5ms)
+		PASSED!!! (duration: 8ms)
 	REQUIRED MODULES TEST: Uize.Doc.Simple
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Doc.Sucker
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Build.BuildSimpleDocPages
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Build.CompileJstModules
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: Uize.Build.ModuleInfo
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: Uize.Build.NeatenJsFiles
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Util.Needs
 		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: Uize.Build.ServicesSetup
-		PASSED!!! (duration: 1ms)
-	REQUIRED MODULES TEST: Uize.Build.UpdateCopyrightNotices
 		PASSED!!! (duration: 0ms)
+	REQUIRED MODULES TEST: Uize.Build.UpdateCopyrightNotices
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Class.Value
 		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: Uize.Color
-		PASSED!!! (duration: 5ms)
+		PASSED!!! (duration: 6ms)
 	REQUIRED MODULES TEST: Uize.Color.xCmyk
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Color.xHsv
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Color.xSvgColors
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Color.xUtil
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Comm
@@ -180,51 +180,51 @@ Unit Tests Suite
 			PASSED!!! (duration: 1ms)
 		RUN TEST MODULE: Uize.Test.Uize.Node
 			PASSED!!! (duration: 10ms)
-		PASSED!!! (duration: 12ms)
+		PASSED!!! (duration: 13ms)
 	REQUIRED MODULES TEST: Uize.Comm.Iframe
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Comm.Iframe.Upload
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Comm.Script
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Cookie
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Curve
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 4ms)
 	REQUIRED MODULES TEST: Uize.Curve.Mod
-		PASSED!!! (duration: 3ms)
-	REQUIRED MODULES TEST: Uize.Curve.Rubber
 		PASSED!!! (duration: 2ms)
+	REQUIRED MODULES TEST: Uize.Curve.Rubber
+		PASSED!!! (duration: 3ms)
 	TEST MODULE: Uize.Test.Uize.Data.Combinations
 		REQUIRE TEST MODULE: Uize.Test.Uize.Data.Combinations
-			PASSED!!! (duration: 44ms)
+			PASSED!!! (duration: 51ms)
 		RUN TEST MODULE: Uize.Test.Uize.Data.Combinations
-			PASSED!!! (duration: 53ms)
-		PASSED!!! (duration: 98ms)
+			PASSED!!! (duration: 58ms)
+		PASSED!!! (duration: 109ms)
 	TEST MODULE: Uize.Test.Uize.Data.Csv
 		REQUIRE TEST MODULE: Uize.Test.Uize.Data.Csv
-			PASSED!!! (duration: 122ms)
+			PASSED!!! (duration: 126ms)
 		RUN TEST MODULE: Uize.Test.Uize.Data.Csv
-			PASSED!!! (duration: 30ms)
-		PASSED!!! (duration: 152ms)
+			PASSED!!! (duration: 31ms)
+		PASSED!!! (duration: 158ms)
 	TEST MODULE: Uize.Test.Uize.Data.NameValueRecords
 		REQUIRE TEST MODULE: Uize.Test.Uize.Data.NameValueRecords
 			PASSED!!! (duration: 27ms)
 		RUN TEST MODULE: Uize.Test.Uize.Data.NameValueRecords
-			PASSED!!! (duration: 30ms)
-		PASSED!!! (duration: 57ms)
+			PASSED!!! (duration: 31ms)
+		PASSED!!! (duration: 58ms)
 	TEST MODULE: Uize.Test.Uize.Data.PathsTree.CompactString
 		REQUIRE TEST MODULE: Uize.Test.Uize.Data.PathsTree.CompactString
 			PASSED!!! (duration: 27ms)
 		RUN TEST MODULE: Uize.Test.Uize.Data.PathsTree.CompactString
-			PASSED!!! (duration: 27ms)
-		PASSED!!! (duration: 54ms)
+			PASSED!!! (duration: 28ms)
+		PASSED!!! (duration: 55ms)
 	TEST MODULE: Uize.Test.Uize.Date.Formatter
 		REQUIRE TEST MODULE: Uize.Test.Uize.Date.Formatter
-			PASSED!!! (duration: 291ms)
+			PASSED!!! (duration: 303ms)
 		RUN TEST MODULE: Uize.Test.Uize.Date.Formatter
-			PASSED!!! (duration: 332ms)
-		PASSED!!! (duration: 624ms)
+			PASSED!!! (duration: 369ms)
+		PASSED!!! (duration: 672ms)
 	REQUIRED MODULES TEST: Uize.Fade
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Fade.xFactory
@@ -232,32 +232,32 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Fade.xSeries
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Fx
-		PASSED!!! (duration: 123ms)
+		PASSED!!! (duration: 143ms)
 	REQUIRED MODULES TEST: Uize.Fx.xShadows
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Fx.xTextShadow
 		PASSED!!! (duration: 1ms)
 	TEST MODULE: Uize.Test.Uize.Node.Classes
 		REQUIRE TEST MODULE: Uize.Test.Uize.Node.Classes
-			PASSED!!! (duration: 89ms)
+			PASSED!!! (duration: 105ms)
 		RUN TEST MODULE: Uize.Test.Uize.Node.Classes
-			PASSED!!! (duration: 94ms)
-		PASSED!!! (duration: 184ms)
+			PASSED!!! (duration: 107ms)
+		PASSED!!! (duration: 212ms)
 	REQUIRED MODULES TEST: Uize.Node.Event
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Node.Form
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Node.Tree
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Node.Util
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Node.VirtualEvent
-		PASSED!!! (duration: 6ms)
+		PASSED!!! (duration: 8ms)
 	REQUIRED MODULES TEST: Uize.Node.VirtualEvent.Edge
 		PASSED!!! (duration: 2ms)
 	TEST MODULE: Uize.Test.Uize.Service
 		REQUIRE TEST MODULE: Uize.Test.Uize.Service
-			PASSED!!! (duration: 1ms)
+			PASSED!!! (duration: 2ms)
 		RUN TEST MODULE: Uize.Test.Uize.Service
 			PASSED!!! (duration: 2ms)
 		PASSED!!! (duration: 4ms)
@@ -265,31 +265,31 @@ Unit Tests Suite
 		PASSED!!! (duration: 1ms)
 	TEST MODULE: Uize.Test.Uize.Services
 		REQUIRE TEST MODULE: Uize.Test.Uize.Services
-			PASSED!!! (duration: 2ms)
+			PASSED!!! (duration: 1ms)
 		RUN TEST MODULE: Uize.Test.Uize.Services
 			PASSED!!! (duration: 1ms)
 		PASSED!!! (duration: 3ms)
 	TEST MODULE: Uize.Test.Uize.Services.FileSystem
 		REQUIRE TEST MODULE: Uize.Test.Uize.Services.FileSystem
-			PASSED!!! (duration: 1ms)
+			PASSED!!! (duration: 5ms)
 		RUN TEST MODULE: Uize.Test.Uize.Services.FileSystem
 			PASSED!!! (duration: 3ms)
-		PASSED!!! (duration: 6ms)
+		PASSED!!! (duration: 9ms)
 	REQUIRED MODULES TEST: Uize.Services.FileSystemWsh
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 0ms)
 	TEST MODULE: Uize.Test.Uize.String.Builder
 		REQUIRE TEST MODULE: Uize.Test.Uize.String.Builder
 			PASSED!!! (duration: 24ms)
 		RUN TEST MODULE: Uize.Test.Uize.String.Builder
 			PASSED!!! (duration: 19ms)
-		PASSED!!! (duration: 43ms)
+		PASSED!!! (duration: 44ms)
 	REQUIRED MODULES TEST: Uize.String.Discombobulator
 		PASSED!!! (duration: 2ms)
 	TEST MODULE: Uize.Test.Uize.Templates.Calculator
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.Calculator
-			PASSED!!! (duration: 3ms)
-		RUN TEST MODULE: Uize.Test.Uize.Templates.Calculator
 			PASSED!!! (duration: 2ms)
+		RUN TEST MODULE: Uize.Test.Uize.Templates.Calculator
+			PASSED!!! (duration: 3ms)
 		PASSED!!! (duration: 5ms)
 	TEST MODULE: Uize.Test.Uize.Templates.Calendar
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.Calendar
@@ -299,74 +299,74 @@ Unit Tests Suite
 		PASSED!!! (duration: 5ms)
 	TEST MODULE: Uize.Test.Uize.Templates.Collection
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.Collection
-			PASSED!!! (duration: 2ms)
+			PASSED!!! (duration: 3ms)
 		RUN TEST MODULE: Uize.Test.Uize.Templates.Collection
-			PASSED!!! (duration: 2ms)
-		PASSED!!! (duration: 4ms)
+			PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 8ms)
 	TEST MODULE: Uize.Test.Uize.Templates.CollectionItem
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.CollectionItem
-			PASSED!!! (duration: 2ms)
+			PASSED!!! (duration: 3ms)
 		RUN TEST MODULE: Uize.Test.Uize.Templates.CollectionItem
 			PASSED!!! (duration: 2ms)
-		PASSED!!! (duration: 4ms)
+		PASSED!!! (duration: 5ms)
 	TEST MODULE: Uize.Test.Uize.Templates.ColorInfo
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.ColorInfo
-			PASSED!!! (duration: 2ms)
+			PASSED!!! (duration: 3ms)
 		RUN TEST MODULE: Uize.Test.Uize.Templates.ColorInfo
 			PASSED!!! (duration: 2ms)
-		PASSED!!! (duration: 4ms)
+		PASSED!!! (duration: 5ms)
 	TEST MODULE: Uize.Test.Uize.Templates.HashTable
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.HashTable
-			PASSED!!! (duration: 2ms)
+			PASSED!!! (duration: 5ms)
 		RUN TEST MODULE: Uize.Test.Uize.Templates.HashTable
 			PASSED!!! (duration: 2ms)
-		PASSED!!! (duration: 5ms)
+		PASSED!!! (duration: 7ms)
 	TEST MODULE: Uize.Test.Uize.Templates.JstModule
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.JstModule
 			PASSED!!! (duration: 2ms)
 		RUN TEST MODULE: Uize.Test.Uize.Templates.JstModule
 			PASSED!!! (duration: 2ms)
-		PASSED!!! (duration: 5ms)
+		PASSED!!! (duration: 4ms)
 	REQUIRED MODULES TEST: Uize.Templates.Log
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 0ms)
 	TEST MODULE: Uize.Test.Uize.Templates.SevenSegmentDisplay
 		REQUIRE TEST MODULE: Uize.Test.Uize.Templates.SevenSegmentDisplay
-			PASSED!!! (duration: 3ms)
-		RUN TEST MODULE: Uize.Test.Uize.Templates.SevenSegmentDisplay
 			PASSED!!! (duration: 2ms)
-		PASSED!!! (duration: 5ms)
+		RUN TEST MODULE: Uize.Test.Uize.Templates.SevenSegmentDisplay
+			PASSED!!! (duration: 5ms)
+		PASSED!!! (duration: 8ms)
 	REQUIRED MODULES TEST: Uize.Templates.SevenSegmentDisplayDimsCss
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Templates.SimpleDoc
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Tooltip
-		PASSED!!! (duration: 1ms)
-	REQUIRED MODULES TEST: Uize.Util.Coupler
 		PASSED!!! (duration: 2ms)
+	REQUIRED MODULES TEST: Uize.Util.Coupler
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Util.Cycle
 		PASSED!!! (duration: 1ms)
 	TEST MODULE: Uize.Test.Uize.Util.PropertyAdapter
 		REQUIRE TEST MODULE: Uize.Test.Uize.Util.PropertyAdapter
-			PASSED!!! (duration: 40ms)
+			PASSED!!! (duration: 45ms)
 		RUN TEST MODULE: Uize.Test.Uize.Util.PropertyAdapter
-			PASSED!!! (duration: 52ms)
-		PASSED!!! (duration: 92ms)
+			PASSED!!! (duration: 59ms)
+		PASSED!!! (duration: 104ms)
 	REQUIRED MODULES TEST: Uize.Widget
-		PASSED!!! (duration: 8ms)
+		PASSED!!! (duration: 9ms)
 	REQUIRED MODULES TEST: Uize.Widget.Collapsy
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.FormElement
-		PASSED!!! (duration: 2ms)
-	REQUIRED MODULES TEST: Uize.Widget.FormElement.Text
-		PASSED!!! (duration: 2ms)
-	REQUIRED MODULES TEST: Uize.Widget.Button
 		PASSED!!! (duration: 3ms)
-	REQUIRED MODULES TEST: Uize.Widget.Options
+	REQUIRED MODULES TEST: Uize.Widget.FormElement.Text
+		PASSED!!! (duration: 3ms)
+	REQUIRED MODULES TEST: Uize.Widget.Button
 		PASSED!!! (duration: 4ms)
+	REQUIRED MODULES TEST: Uize.Widget.Options
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Button.ValueDisplay
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Button.ValueDisplay.Selector
-		PASSED!!! (duration: 118ms)
+		PASSED!!! (duration: 135ms)
 	REQUIRED MODULES TEST: Uize.Widget.Options.Selector
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.AutoSuggest
@@ -388,25 +388,25 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.Beam
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Bevel
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Widget.Button.Checkbox
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Button.Filter
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Button.Toggle
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.TextInput
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Calculator
-		PASSED!!! (duration: 6ms)
+		PASSED!!! (duration: 5ms)
 	REQUIRED MODULES TEST: Uize.Widget.Calendar
-		PASSED!!! (duration: 4ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Captcha
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Widget.Captcha.Recaptcha
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Collection
-		PASSED!!! (duration: 6ms)
+		PASSED!!! (duration: 10ms)
 	REQUIRED MODULES TEST: Uize.Widget.Collection.Dynamic
 		PASSED!!! (duration: 4ms)
 	REQUIRED MODULES TEST: Uize.Widget.Collection.Dynamic.Table
@@ -416,35 +416,35 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.CollectionItem.Zooming
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.ColorCube
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 5ms)
 	REQUIRED MODULES TEST: Uize.Widget.ColorCube.Draggable
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.ColorInfo
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.ColorPicker
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Committer
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 4ms)
 	REQUIRED MODULES TEST: Uize.Widget.Flip
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Count
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Dialog
 		PASSED!!! (duration: 4ms)
 	REQUIRED MODULES TEST: Uize.Widget.Dialog.Confirm
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Dialog.Form
-		PASSED!!! (duration: 2ms)
-	REQUIRED MODULES TEST: Uize.Widget.Dialog.Iframe
 		PASSED!!! (duration: 3ms)
+	REQUIRED MODULES TEST: Uize.Widget.Dialog.Iframe
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Dialog.Picker
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Dialog.Picker.Date
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 5ms)
 	REQUIRED MODULES TEST: Uize.Widget.Dialog.Picker.Palette
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Dialog.Picker.Palette.Selector
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Resizer
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Dialog.xResizable
@@ -460,11 +460,11 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.Options.FilterGroup
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.FilterGroups
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Fleeting
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.FormElements
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.FormWarnings
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Form
@@ -476,7 +476,7 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.HoverFader
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.ImagePort
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.ImagePort.Draggable
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.ImageWipe
@@ -484,13 +484,13 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.ImageWipe.xPresets
 		PASSED!!! (duration: 5ms)
 	REQUIRED MODULES TEST: Uize.Widget.InlinePicker
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.InlinePicker.Selector
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.ListEditor
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Log
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 4ms)
 	REQUIRED MODULES TEST: Uize.Widget.Log.InstanceEvents
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.MagView
@@ -500,7 +500,7 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.Options.Accordion
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.PopupPalette
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Options.Popup
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Options.Tabbed
@@ -516,23 +516,23 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.Picker
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Picker.Date
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 4ms)
 	REQUIRED MODULES TEST: Uize.Widget.Picker.Palette
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Picker.Palette.Selector
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Population
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Resizer.Marquee
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Scrolly
-		PASSED!!! (duration: 4ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.SegmentDisplay
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.SegmentDisplay.Seven
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: Uize.Widget.SlideShow
-		PASSED!!! (duration: 4ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.SlideShow.AutoAdvance
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.SlideShow.AutoAdvance.WithSlideSelectors
@@ -542,17 +542,17 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.Swap
 		PASSED!!! (duration: 4ms)
 	REQUIRED MODULES TEST: Uize.Widget.Swap.Deck
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Swap.Html
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Swap.Image
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Swap.Image.Cycle
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Swap.xPresets
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.TableSort
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.ThumbZoom
 		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: Uize.Widget.Tree
@@ -560,29 +560,29 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: Uize.Widget.Tree.List
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Tree.Menu
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: Uize.Widget.Tree.Select
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 5ms)
 	REQUIRED MODULES TEST: UizeSite
 		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: UizeSite.Build
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: UizeSite.Build.BuildCodeSitemap
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Build.Util
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Build.BuildIndexPages
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Build.BuildPagesFromSourceCode
-		PASSED!!! (duration: 116ms)
+		PASSED!!! (duration: 126ms)
 	REQUIRED MODULES TEST: UizeSite.Build.BuildSimpleDocPages
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Build.BuildSotu
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Templates
 		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.WidgetToGoGadgetXml
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.WidgetToGoPage
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.WidgetToGoHomepage
@@ -600,19 +600,19 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: UizeSite.Templates.Dialog
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.Dialog.Confirm
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.DialogConfirm
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.Dialog.Picker
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.Dialog.Picker.Date
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.DialogDate
-		PASSED!!! (duration: 2ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: UizeSite.Examples
-		PASSED!!! (duration: 4ms)
+		PASSED!!! (duration: 3ms)
 	REQUIRED MODULES TEST: UizeSite.ExamplesInfoForSiteMap
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.SiteMap
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.ShareThisPanel
@@ -622,7 +622,7 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: UizeSite.Page
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: UizeSite.Page.Doc
-		PASSED!!! (duration: 3ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: UizeSite.Page.Example
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: UizeSite.Page.Example.Test
@@ -634,11 +634,11 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: UizeSite.Templates.ParamsTable
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.ParamsInspector
-		PASSED!!! (duration: 0ms)
+		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.ParamsInspector
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: UizeSite.ParamsInspector.InlinePresets
-		PASSED!!! (duration: 1ms)
+		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.DataBar
 		PASSED!!! (duration: 1ms)
 	REQUIRED MODULES TEST: UizeSite.Templates.DelveUiHtml
@@ -672,9 +672,9 @@ Unit Tests Suite
 	REQUIRED MODULES TEST: UizeSite.TestWidget
 		PASSED!!! (duration: 2ms)
 	REQUIRED MODULES TEST: UizeSite.WidgetToGoPage
-		PASSED!!! (duration: 2ms)
-	REQUIRED MODULES TEST: UizeSite.WidgetToGoPage.Calculator
 		PASSED!!! (duration: 1ms)
+	REQUIRED MODULES TEST: UizeSite.WidgetToGoPage.Calculator
+		PASSED!!! (duration: 0ms)
 	REQUIRED MODULES TEST: UizeSite.WidgetToGoPage.Calendar
 		PASSED!!! (duration: 1ms)
-	PASSED!!! (duration: 9093ms)
+	PASSED!!! (duration: 10288ms)

@@ -54,7 +54,7 @@ Introduction
 			================================================================================================================
 
 		DELVE In UIZE Example Pages
-			The DELVE tool can be conveniently launched from any one of the example pages on the *uize.com* Web site.
+			The DELVE tool can be conveniently launched from any one of the example pages on the UIZE Web site.
 
 			Every example page has a *"DELVE"* button in the title bar, sitting on the right hand side next to the *"SOURCE CODE"* button. Clicking the *"DELVE"* button in the example pages is just like using the bookmarklet - it'll open up the DELVE tool with the example page being the page that is inspected.
 

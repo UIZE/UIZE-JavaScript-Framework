@@ -3,7 +3,7 @@
 <head>
 	<title>2012-07-08 - Build Script Modules Migrated | News | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework News "/>
-	<meta name="description" content="Various build scripts used for building the UIZE project and the uize.com Web site have been migrated."/>
+	<meta name="description" content="Various build scripts used for building the UIZE project and the UIZE Web site have been migrated."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -23,7 +23,7 @@
 
 <div class="main">
 <div class="contents0">
-	<p>Various build scripts used for building the UIZE project and the <b>uize.com</b> Web site have been migrated.</p>
+	<p>Various build scripts used for building the UIZE project and the UIZE Web site have been migrated.</p>
 	
 	<p>Various build scripts that were located under the <code><a href="../reference/Uize.Wsh.html">Uize.Wsh</a></code> namespace have been migrated into the more recently created <code><a href="../reference/Uize.Build.html">Uize.Build</a></code> namespace. This migration is in preparation for retooling these build scripts to make them environment agnostic, so that they can be run also in non-Windows environments. Currently, the migrated scripts still rely on WSH (Windows Script Host), but they will be updated in future to be able to run in other environments (such as Mac OS and Linux) with appropriate environment specific bootstrapping.</p>
 	
@@ -43,12 +43,12 @@ Uize.Wsh.UpdateCopyrightNotices  &gt;&gt; BECOMES &gt;&gt;  Uize.Build.UpdateCop
 UizeDotCom.BuildUtils            &gt;&gt; BECOMES &gt;&gt;  UizeDotCom.Build.Util
 </pre>
 	
-	<p>In addition to the migration of these build script modules, a set of new build script modules has been created to allow code that was previously inside build scripts at the root of the <b>uize.com</b> site to be migrated into the modules folder. Migrating the build script code from the script files to being legitimate modules in the modules folder confers upon them all the benefits of being true modules, such as documentation generation, basic automated sanity testing, source viewing on the Web site, etc.</p>
+	<p>In addition to the migration of these build script modules, a set of new build script modules has been created to allow code that was previously inside build scripts at the root of the UIZE Web site to be migrated into the modules folder. Migrating the build script code from the script files to being legitimate modules in the modules folder confers upon them all the benefits of being true modules, such as documentation generation, basic automated sanity testing, source viewing on the Web site, etc.</p>
 	
 	<p>The list of newly created build script modules is as follows...</p>
 	
 	<table class="list">
-	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>UizeDotCom.Build</code> (a namespace created to house all the build script modules specific to the <b>uize.com</b> site)</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>UizeDotCom.Build</code> (a namespace created to house all the build script modules specific to the UIZE Web site)</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>UizeDotCom.Build.BuildSimpleDocPages</code> (code migrated from the <b>_build-pages-from-simple-doc.js</b> build script)</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>UizeDotCom.Build.BuildCodeSitemap</code> (code migrated from the <b>_uize-site-build-code-sitemap.js</b> build script)</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>UizeDotCom.Build.BuildIndexPages</code> (code migrated from the <b>_uize-site-build-index-pages.js</b> build script)</td></tr>

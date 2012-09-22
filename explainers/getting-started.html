@@ -27,7 +27,7 @@
 	<li>Contents
 		<ul>
 			<li><a href="#1" title="This document takes you step by step through the process of setting up a Web project to use the UIZE JavaScript Framework. &quot;Hello, world&quot; awaits you.">1. Introduction</a></li>
-			<li><a href="#2" title="If you haven&apos;t already downloaded the zip archive of the uize.com Web site, DOWNLOAD IT NOW.">2. Download UIZE</a></li>
+			<li><a href="#2" title="If you haven&apos;t already downloaded the zip archive of the UIZE Web site, DOWNLOAD IT NOW.">2. Download UIZE</a></li>
 			<li><a href="#3" title="You may want to consider joining the UIZE JavaScript Framework Group, so you can ask other developers questions as you start using the UIZE JavaScript Framework.">3. Join the Online Users' Group</a></li>
 			<li><a href="#4" title="Locate the uize.zip archive file that you downloaded (probably on your desktop) and unzip it (probably by double-clicking on it).">4. Unzip the Archive</a></li>
 			<li><a href="#5" title="To use UIZE in a Web site project, you should copy the js folder from the UIZE-JavaScript-Framework folder to a desired location in your project&apos;s folder.">5. Copy the JavaScript Files</a>
@@ -80,7 +80,7 @@
 	<a name="2"></a>
 	<h1 class="heading1" title="2. Download UIZE"><span class="headingNumber"><a href="#2" title="2. Download UIZE">2</a>. </span>Download UIZE</h1>
 	<div class="contents1">
-		<p>If you haven't already downloaded the zip archive of the <b>uize.com</b> Web site, <a href="../download.html">DOWNLOAD IT NOW</a>.</p>
+		<p>If you haven't already downloaded the zip archive of the UIZE Web site, <a href="../download.html">DOWNLOAD IT NOW</a>.</p>
 		
 		<p>Once you've downloaded the zip archive, come back to this page and continue on with the rest of the instructions.</p>
 	</div>
@@ -178,7 +178,7 @@
 			<div class="contents3">
 				<p>Hacking the example pages inside the <code>UIZE-JavaScript-Framework/examples</code> folder is easy and convenient.</p>
 				
-				<p>If you just want to experiment in order to gain an understanding of how things work, or play around with the settings for some widget, then hacking the example pages inside the <code>UIZE-JavaScript-Framework/examples</code> folder will be easier, since the pages are already set up to utilize assets and CSS from the <b>uize.com</b> project.</p>
+				<p>If you just want to experiment in order to gain an understanding of how things work, or play around with the settings for some widget, then hacking the example pages inside the <code>UIZE-JavaScript-Framework/examples</code> folder will be easier, since the pages are already set up to utilize assets and CSS from the UIZE Web site project.</p>
 			</div>
 			
 			<a name="7_1_2"></a>
@@ -205,7 +205,7 @@
 				<div class="contents4">
 					<p>The example pages in the <code>UIZE-JavaScript-Framework/examples</code> folder use a JavaScript library file called <code><a href="../reference/UizeSite.Page.Example.library.html">UizeSite.Page.Example.library</a></code>.</p>
 					
-					<p>This is a library file that is specific to the <b>uize.com</b> Web site, and that bundles a bunch of the commonly required JavaScript modules into a single file to reduce HTTP requests and improve page load performance. Eventually, you can make these library files for your own Web site, but for the time being it is not necessary to use the <b>uize.com</b> Web site's version. The example pages will still function correctly without this optimization.</p>
+					<p>This is a library file that is specific to the UIZE Web site, and that bundles a bunch of the commonly required JavaScript modules into a single file to reduce HTTP requests and improve page load performance. Eventually, you can make these library files for your own Web site, but for the time being it is not necessary to use the UIZE Web site's version. The example pages will still function correctly without this optimization.</p>
 					
 					<p>To remove the reference, just do a text search for "UizeSite.Page.Example.library" and then remove the entire entry in the <code>required</code> block, including the quotes and comma, as shown in the example below...</p>
 					
@@ -242,7 +242,7 @@ required:[
 				<div class="contents4">
 					<p>The example pages in the <code>UIZE-JavaScript-Framework/examples</code> folder use the page widget class <code><a href="../reference/UizeSite.Page.Example.html">UizeSite.Page.Example</a></code>.</p>
 					
-					<p>This page widget class is a subclass of the plain vanilla page widget class <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, and is specific to the <b>uize.com</b> Web site. To change this, just do a text search for "UizeSite.Page.Example" and replace it with "Uize.Widget.Page". To illustrate how the required block will change, consider the following example...</p>
+					<p>This page widget class is a subclass of the plain vanilla page widget class <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, and is specific to the UIZE Web site. To change this, just do a text search for "UizeSite.Page.Example" and replace it with "Uize.Widget.Page". To illustrate how the required block will change, consider the following example...</p>
 					
 					<p><span class="allCaps">INSTEAD OF...</span></p>
 					
@@ -300,7 +300,7 @@ required:[
 				<div class="contents4">
 					<p>Realize that the example pages use CSS and assets contained inside the <code>UIZE-JavaScript-Framework</code> folder.</p>
 					
-					<p>You'll either have to copy those over, or otherwise massage your copies of the example pages so that they use your own CSS and assets. Also, some example pages use JavaScript code that is specific to the <b>uize.com</b> Web site, such as compiled JavaScript templates used for generating HTML for widgets, or JavaScript files that define test data to drive some of the examples.</p>
+					<p>You'll either have to copy those over, or otherwise massage your copies of the example pages so that they use your own CSS and assets. Also, some example pages use JavaScript code that is specific to the UIZE Web site, such as compiled JavaScript templates used for generating HTML for widgets, or JavaScript files that define test data to drive some of the examples.</p>
 				</div>
 			</div>
 			
@@ -350,7 +350,7 @@ required:[
 	<div class="contents1">
 		<p>There are some JavaScript files that you can remove from your "js" folder, if you wish to tidy things up a bit.</p>
 		
-		<p>In an earlier step you copied the <code>UIZE-JavaScript-Framework</code> folder's "js" folder to your Web site project. Now, because this folder is used by the <b>uize.com</b> Web site, it contains a number of JavaScript modules that are specific to <b>uize.com</b>. You don't need these modules for your own Web site project, since they are not part of the framework, per se. These modules are the ones under the <code><a href="../reference/UizeSite.html">UizeSite</a></code> namespace. You can delete all the JavaScript files prefixed with "UizeSite" (eg. <code>UizeSite.Page.js</code>) from the "js" folder that you copied over, and from the "~source" folder inside the "js" folder. You don't need the source or the scrunched versions of these files.</p>
+		<p>In an earlier step you copied the <code>UIZE-JavaScript-Framework</code> folder's "js" folder to your Web site project. Now, because this folder is used by the UIZE Web site, it contains a number of JavaScript modules that are specific to UIZE Web site. You don't need these modules for your own Web site project, since they are not part of the framework, per se. These modules are the ones under the <code><a href="../reference/UizeSite.html">UizeSite</a></code> namespace. You can delete all the JavaScript files prefixed with "UizeSite" (eg. <code>UizeSite.Page.js</code>) from the "js" folder that you copied over, and from the "~source" folder inside the "js" folder. You don't need the source or the scrunched versions of these files.</p>
 		
 		<p><span class="allCaps">A PACKAGE DEAL</span></p>
 		

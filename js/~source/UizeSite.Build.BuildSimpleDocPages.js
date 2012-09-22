@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.BuildSimpleDocPages= package provides a method to build all the SimpleDoc documentation for the *uize.com* Web site.
+		The =UizeSite.Build.BuildSimpleDocPages= package provides a method to build all the SimpleDoc documentation for the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

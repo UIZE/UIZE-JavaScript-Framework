@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.BuildIndexPages= package provides a method for building index pages for examples, tools, and JavaScript modules for the *uize.com* Web site.
+		The =UizeSite.Build.BuildIndexPages= package provides a method for building index pages for examples, tools, and JavaScript modules for the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

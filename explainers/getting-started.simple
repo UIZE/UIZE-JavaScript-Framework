@@ -2,7 +2,7 @@ Introduction
 	This document takes you step by step through the process of setting up a Web project to use the UIZE JavaScript Framework. "Hello, world" awaits you.
 
 Download UIZE
-	If you haven't already downloaded the zip archive of the *uize.com* Web site, [[../download.html][DOWNLOAD IT NOW]].
+	If you haven't already downloaded the zip archive of the UIZE Web site, [[../download.html][DOWNLOAD IT NOW]].
 
 	Once you've downloaded the zip archive, come back to this page and continue on with the rest of the instructions.
 
@@ -64,7 +64,7 @@ Start Hacking
 		Hacking In Situ
 			Hacking the example pages inside the =UIZE-JavaScript-Framework/examples= folder is easy and convenient.
 
-			If you just want to experiment in order to gain an understanding of how things work, or play around with the settings for some widget, then hacking the example pages inside the =UIZE-JavaScript-Framework/examples= folder will be easier, since the pages are already set up to utilize assets and CSS from the *uize.com* project.
+			If you just want to experiment in order to gain an understanding of how things work, or play around with the settings for some widget, then hacking the example pages inside the =UIZE-JavaScript-Framework/examples= folder will be easier, since the pages are already set up to utilize assets and CSS from the UIZE Web site project.
 
 		Hacking Copies
 			If you want to use an example page as a starting point for a page in your own Web site project, then you can copy the example over and start hacking.
@@ -82,7 +82,7 @@ Start Hacking
 			Kill the .library File Reference
 				The example pages in the =UIZE-JavaScript-Framework/examples= folder use a JavaScript library file called =UizeSite.Page.Example.library=.
 
-				This is a library file that is specific to the *uize.com* Web site, and that bundles a bunch of the commonly required JavaScript modules into a single file to reduce HTTP requests and improve page load performance. Eventually, you can make these library files for your own Web site, but for the time being it is not necessary to use the *uize.com* Web site's version. The example pages will still function correctly without this optimization.
+				This is a library file that is specific to the UIZE Web site, and that bundles a bunch of the commonly required JavaScript modules into a single file to reduce HTTP requests and improve page load performance. Eventually, you can make these library files for your own Web site, but for the time being it is not necessary to use the UIZE Web site's version. The example pages will still function correctly without this optimization.
 
 				To remove the reference, just do a text search for "UizeSite.Page.Example.library" and then remove the entire entry in the =required= block, including the quotes and comma, as shown in the example below...
 
@@ -114,7 +114,7 @@ Start Hacking
 			Use the Plain Vanilla Page Widget
 				The example pages in the =UIZE-JavaScript-Framework/examples= folder use the page widget class =UizeSite.Page.Example=.
 
-				This page widget class is a subclass of the plain vanilla page widget class =Uize.Widget.Page=, and is specific to the *uize.com* Web site. To change this, just do a text search for "UizeSite.Page.Example" and replace it with "Uize.Widget.Page". To illustrate how the required block will change, consider the following example...
+				This page widget class is a subclass of the plain vanilla page widget class =Uize.Widget.Page=, and is specific to the UIZE Web site. To change this, just do a text search for "UizeSite.Page.Example" and replace it with "Uize.Widget.Page". To illustrate how the required block will change, consider the following example...
 
 				INSTEAD OF...
 				......................................................
@@ -162,7 +162,7 @@ Start Hacking
 			CSS, Assets, JavaScript
 				Realize that the example pages use CSS and assets contained inside the =UIZE-JavaScript-Framework= folder.
 
-				You'll either have to copy those over, or otherwise massage your copies of the example pages so that they use your own CSS and assets. Also, some example pages use JavaScript code that is specific to the *uize.com* Web site, such as compiled JavaScript templates used for generating HTML for widgets, or JavaScript files that define test data to drive some of the examples.
+				You'll either have to copy those over, or otherwise massage your copies of the example pages so that they use your own CSS and assets. Also, some example pages use JavaScript code that is specific to the UIZE Web site, such as compiled JavaScript templates used for generating HTML for widgets, or JavaScript files that define test data to drive some of the examples.
 
 		Switch to Using Source JavaScript
 			Regardless of whether you hack the example pages inside the =UIZE-JavaScript-Framework/examples= folder or create your own copies of them in your Web site project, it will be useful to switch the pages over to using the source versions of the JavaScript files.
@@ -197,7 +197,7 @@ Setting Up the Build Scripts
 Removing Unnecessary JavaScript Files
 	There are some JavaScript files that you can remove from your "js" folder, if you wish to tidy things up a bit.
 
-	In an earlier step you copied the =UIZE-JavaScript-Framework= folder's "js" folder to your Web site project. Now, because this folder is used by the *uize.com* Web site, it contains a number of JavaScript modules that are specific to *uize.com*. You don't need these modules for your own Web site project, since they are not part of the framework, per se. These modules are the ones under the =UizeSite= namespace. You can delete all the JavaScript files prefixed with "UizeSite" (eg. =UizeSite.Page.js=) from the "js" folder that you copied over, and from the "~source" folder inside the "js" folder. You don't need the source or the scrunched versions of these files.
+	In an earlier step you copied the =UIZE-JavaScript-Framework= folder's "js" folder to your Web site project. Now, because this folder is used by the UIZE Web site, it contains a number of JavaScript modules that are specific to UIZE Web site. You don't need these modules for your own Web site project, since they are not part of the framework, per se. These modules are the ones under the =UizeSite= namespace. You can delete all the JavaScript files prefixed with "UizeSite" (eg. =UizeSite.Page.js=) from the "js" folder that you copied over, and from the "~source" folder inside the "js" folder. You don't need the source or the scrunched versions of these files.
 
 	A PACKAGE DEAL
 

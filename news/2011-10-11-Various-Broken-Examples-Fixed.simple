@@ -1,4 +1,4 @@
-Various JavaScript examples on the *uize.com* Web site that had become victims to bit rot have been restored to their former glory.
+Various JavaScript examples on the UIZE Web site that had become victims to bit rot have been restored to their former glory.
 
 Broken Styling in Sliders Examples Fixed
 	A number of the JavaScript examples that use slider widgets (ie. instances of the =Uize.Widget.Bar.Slider= class) that had been broken by a change in the state properties mechanism have now been fixed.

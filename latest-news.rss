@@ -7,7 +7,7 @@
 		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		<language>en-us</language>
 		<copyright>© 1996-2008 UIZE</copyright>
-		<pubDate>Sat, 22 Sep 2012 19:02:18 UT</pubDate>
+		<pubDate>Sat, 22 Sep 2012 19:25:54 UT</pubDate>
 		<ttl>10080</ttl>
 		<image>
 			<title>UIZE JavaScript Framework | Latest News</title>
@@ -86,7 +86,7 @@
 			<title>2012-07-08 - Build Script Modules Migrated</title>
 			<link>http://www.uize.com/news/2012-07-08-Build-Script-Modules-Migrated.html</link>
 			<guid>http://www.uize.com/news/2012-07-08-Build-Script-Modules-Migrated.html</guid>
-			<description>Various build scripts used for building the UIZE project and the uize.com Web site have been migrated.</description>
+			<description>Various build scripts used for building the UIZE project and the UIZE Web site have been migrated.</description>
 			<pubDate>Sun, 8 Jul 2012 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2012-07-08-Build-Script-Modules-Migrated.html</feedburner:origLink>
 		</item>
@@ -278,7 +278,7 @@
 			<title>2011-10-11 - Various Broken Examples Fixed</title>
 			<link>http://www.uize.com/news/2011-10-11-Various-Broken-Examples-Fixed.html</link>
 			<guid>http://www.uize.com/news/2011-10-11-Various-Broken-Examples-Fixed.html</guid>
-			<description>Various JavaScript examples on the uize.com Web site that had become victims to bit rot have been restored to their former glory.</description>
+			<description>Various JavaScript examples on the UIZE Web site that had become victims to bit rot have been restored to their former glory.</description>
 			<pubDate>Tue, 11 Oct 2011 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2011-10-11-Various-Broken-Examples-Fixed.html</feedburner:origLink>
 		</item>
@@ -302,7 +302,7 @@
 			<title>2011-09-20 - Broken Pages in IE9 Fixed</title>
 			<link>http://www.uize.com/news/2011-09-20-Broken-Pages-in-IE9-Fixed.html</link>
 			<guid>http://www.uize.com/news/2011-09-20-Broken-Pages-in-IE9-Fixed.html</guid>
-			<description>An issue that was breaking pages of the uize.com Web site in IE9 has been fixed.</description>
+			<description>An issue that was breaking pages of the UIZE Web site in IE9 has been fixed.</description>
 			<pubDate>Tue, 20 Sep 2011 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2011-09-20-Broken-Pages-in-IE9-Fixed.html</feedburner:origLink>
 		</item>

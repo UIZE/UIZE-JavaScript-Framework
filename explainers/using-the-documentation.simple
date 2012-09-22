@@ -2,7 +2,7 @@ Introduction
 	To learn all about UIZE, you'll have to rely heavily on the documentation. This document discusses tips for using the documentation more effectively.
 
 Navigating This Site
-	Navigating the documentation - and the entire *uize.com* Web site, in general - can be done by mousing over the UIZE logo at the top left and then using the drop down menu that pops up. Easy!
+	Navigating the documentation - and the entire UIZE Web site, in general - can be done by mousing over the UIZE logo at the top left and then using the drop down menu that pops up. Easy!
 
 Sections of This Web Site
 	Example Pages
@@ -60,7 +60,7 @@ Sections of This Web Site
 Search Tips
 	If you're looking for information on something in particular, be sure to use the convenient *"SEARCH"* link located in the lower left - at the very bottom of the contents menu pane.
 
-	You may be looking for references to a certain topic (such as "Ajax"), or you may be looking for references to method names (eg "Uize.Node.setStyle"), or module names (eg. "Uize.Widget.Calendar"), or types of widgets (eg. "calendar"). Search for anything within the *uize.com* Web site. Just click the *"SEARCH"* link, enter your search query in the search page that loads in, and then click on one of the search buttons for the various main sections of the site - your search will be conducted within that section.
+	You may be looking for references to a certain topic (such as "Ajax"), or you may be looking for references to method names (eg "Uize.Node.setStyle"), or module names (eg. "Uize.Widget.Calendar"), or types of widgets (eg. "calendar"). Search for anything within the UIZE Web site. Just click the *"SEARCH"* link, enter your search query in the search page that loads in, and then click on one of the search buttons for the various main sections of the site - your search will be conducted within that section.
 
 	Searching for References to a Module
 		When you're reading up on a particular JavaScript module and you want to understand more about it by viewing examples that use it, or by reading explainers that reference it, or by seeing how it's used by other modules, etc., then a dedicated feature of the module reference documents will make your life easier.
@@ -68,7 +68,7 @@ Search Tips
 		Simply browse to the reference document for a particular module under the "Module Reference" section. When the reference document loads in, you'll notice a *"( SEARCH )"* link in parentheses, just after the module name in the title bar. This special search features makes it easy to find references to a module (or its subclasses or extensions) inside different sections of the site. Click on this link and you will be taken to a page where you can choose the section you'd like to search in.
 
 		ENTIRE SITE
-			To find pages throughout the entire *uize.com* Web site that reference the module you're searching on, use this link. Your search results could include pages from all sections of the site, including the example pages, example source code pages, module reference documents, module source code pages, explainers, appendixes, etc.
+			To find pages throughout the entire UIZE Web site that reference the module you're searching on, use this link. Your search results could include pages from all sections of the site, including the example pages, example source code pages, module reference documents, module source code pages, explainers, appendixes, etc.
 
 		IN EXAMPLES
 			To learn how to use a module, it may be helpful to see how it is used in example pages. If you want to find examples that directly use a module, or that reference it somewhere in the source, use this link.
@@ -84,14 +84,14 @@ Search Tips
 			To find explainers that reference the module you're searching on (or its subclasses or extensions), use this link. Your search will be performed within the =explainers= section of the site.
 
 General Documentation Tips
-	A number of features of the documentation are available within all documents in the *uize.com* Web site.
+	A number of features of the documentation are available within all documents in the UIZE Web site.
 
 	Contents Lists
 		Expanding One Level Deep
-			For all contents trees in the *uize.com* Web site, a collapsed section can be expanded to only one level deep by holding down the shift key while clicking on the expander arrow, allowing you to "peel back the layers", one at a time.
+			For all contents trees in the UIZE Web site, a collapsed section can be expanded to only one level deep by holding down the shift key while clicking on the expander arrow, allowing you to "peel back the layers", one at a time.
 
 		Expading All
-			For all contents trees in the *uize.com* Web site, a collapsed section can be fully expanded (so that all deeper subsections are also fully expanded) by holding down the ctrl key while clicking on the expander arrow.
+			For all contents trees in the UIZE Web site, a collapsed section can be fully expanded (so that all deeper subsections are also fully expanded) by holding down the ctrl key while clicking on the expander arrow.
 
 		Contents List Tooltips
 			For any item in a document page's contents list, a tooltip is displayed when hovering over the item, that provides a snapshot / preview of the section by showing a portion of the first paragraph of the section (provided that the section has a first paragraph).

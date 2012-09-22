@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build= module defines a namespace for the various build scripts used to build the *uize.com* Web site.
+		The =UizeSite.Build= module defines a namespace for the various build scripts used to build the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

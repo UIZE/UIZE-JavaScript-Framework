@@ -11,7 +11,7 @@
 
 /*?
 	Introduction
-		A package that defines a tree data structure for the *uize.com* Web site's site hierarchy.
+		A package that defines a tree data structure for the UIZE Web site's site hierarchy.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
