@@ -1,5 +1,5 @@
 {
-	alwaysBuild:true,
+	alwaysBuild:false,
 	buildFolderPath:'',
 	buildSequence:[
 		/* IMPORTANT:

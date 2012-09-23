@@ -2,7 +2,10 @@ The =UizeDotCom= namespace has been renamed to simply =UizeSite= in order to mak
 
 The UIZE Web site has always been available on the top level domains *.com*, *.org*, and *.net*, so it never made complete sense that the namespace for the modules that support the Web site were put under a =UizeDotCom= namespace. This change corrects that bad naming choice.
 
-Be aware that there were =UizeDotCom= modules used by the DELVE tool. If you have a DELVE bookmarklet saved in your browser, you should update it with the new one that is listed in the [[../explainers/using-the-delve-tool.html][Using The Delve Tool]] explainer. The old bookmarklet should continue to work for now, since a redirect rule has been added for the site, but that may be removed at some point in the future.
+Update Your DELVE Bookmarklet
+	Be aware that the DELVE bookmarklet referenced a module under the defunct =UizeDotCom= namespace and will therefore no longer work with this namespace change.
+
+	If you have a DELVE bookmarklet saved in your browser, you should update it with the new one that is listed in the [[../explainers/using-the-delve-tool.html][Using The Delve Tool]] explainer.
 
 ....................................................................................
 << metadata >>
