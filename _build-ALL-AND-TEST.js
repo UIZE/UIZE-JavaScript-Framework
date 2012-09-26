@@ -1,5 +1,5 @@
 /*** boilerplate setup code for WSH build scripts ***/
-	var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('_build-script-setup.js',1);
+	var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('_build.js',1);
 	eval (_setupFile.ReadAll ()) ();
 	_setupFile.Close ();
 
@@ -8,8 +8,8 @@ Uize.module ({
 	builder:function () {
 		var _buildError = Uize.Build.Util.runScripts (
 			env.buildSequence.concat ([
-				'_run-unit-tests-source.js silent',
-				'_run-unit-tests-scrunched.js silent'
+				'_Uize.Build.RunUnitTests-source.js silent',
+				'_Uize.Build.RunUnitTests-scrunched.js silent'
 			])
 		);
 		(WScript.Arguments.Count () && WScript.Arguments.Item (0) == 'silent') ||

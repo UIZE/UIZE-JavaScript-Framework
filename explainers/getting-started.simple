@@ -192,7 +192,7 @@ Setting Up the Build Scripts
 	+. then, crack open your version of the file =_build-env.json= and edit the value of the =moduleFolderPath= build environment variable, if necessary, to point to the folder where you copied the JavaScript files
 	+. you may also want to edit the value of the =doNotEnter= build environment variable at some point, but it's not essential at first
 
-	Most likely you'll be interested in the =_build-scrunched.js= build script. Double-clicking on this file in Windows should run this build script and a log file should be created. For a more in-depth discussion of the various build scripts and tips on different configuration settings, consult the explainer [[javascript-build-scripts.html][JavaScript Build Scripts]].
+	Most likely you'll be interested in the =_Uize.Build.AutoScruncher.js= build script. Double-clicking on this file in Windows should run this build script and a log file should be created. For a more in-depth discussion of the various build scripts and tips on different configuration settings, consult the explainer [[javascript-build-scripts.html][JavaScript Build Scripts]].
 
 Removing Unnecessary JavaScript Files
 	There are some JavaScript files that you can remove from your "js" folder, if you wish to tidy things up a bit.

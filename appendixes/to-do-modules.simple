@@ -3788,7 +3788,7 @@ Uize.Wsh
 		recurse:false
 		..................
 
-		- use these new params to speed up: _build-pages-from-simple-doc.js (for documenting the JavaScript modules)
+		- use these new params to speed up: _UizeSite.Build.BuildSimpleDocPages.js (for documenting the JavaScript modules)
 
 Uize.Build.AutoScruncher
 	- should no longer support .library.js files that don't have a Library Contents comment, because it's not really a JS file if it has a bunch of modules listed in the open

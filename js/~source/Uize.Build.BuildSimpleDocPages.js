@@ -149,10 +149,9 @@ Uize.module ({
 
 					Uize.Wsh.buildFiles ({
 						alwaysBuild:_alwaysBuild,
-						logFileName:
-							_params.logFileName
-								? _params.logFileName.replace ('.','-in-js-modules.')
-								: '_build-pages-from-simple-doc-in-js-modules.log',
+						logFileName:_params.logFileName
+							? _params.logFileName.replace (/(\.\w+)$/,'-from-js-modules$1')
+							: '',
 						targetFolderPathCreator:function (_folderPath) {
 							var _targetFolderPath = _folderPath.slice (-_moduleFolderPathLength) == _moduleFolderPath
 								? _scriptFolderPath + '\\' + _moduleReferenceFolderName

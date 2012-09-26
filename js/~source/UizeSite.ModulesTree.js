@@ -18,6 +18,8 @@ Uize.module ({
 						CompileJstModules:0,
 						ModuleInfo:0,
 						NeatenJsFiles:0,
+						RunUnitTest:0,
+						RunUnitTests:0,
 						Scruncher:0,
 						ServicesSetup:0,
 						UpdateCopyrightNotices:0,

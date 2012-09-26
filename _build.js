@@ -5,13 +5,13 @@
 
 	Using NodeJS...
 
-	node _build-script-setup Uize.Build.SomeBuildScript
-	node _build-script-setup Uize.Build.SomeBuildScript p1Name=p1Value p2Name=p2Value
+	node _build Uize.Build.SomeBuildScript
+	node _build Uize.Build.SomeBuildScript p1Name=p1Value p2Name=p2Value
 
 	Using WSH (Windows Script Host)...
 
-	wscript _build-script-setup.js Uize.Build.SomeBuildScript
-	wscript _build-script-setup.js Uize.Build.SomeBuildScript p1Name=p1Value p2Name=p2Value
+	wscript _build.js Uize.Build.SomeBuildScript
+	wscript _build.js Uize.Build.SomeBuildScript p1Name=p1Value p2Name=p2Value
 
 	NOTE:
 
@@ -21,7 +21,7 @@
 (function () {
 	var _isWsh = typeof ActiveXObject != 'undefined';
 
-	function _buildScriptSetup (_params) {
+	function _build (_buildModuleName,_params) {
 		if (!_params) _params = {};
 		var
 			_pathToRoot = _params.pathToRoot || '',
@@ -77,12 +77,27 @@
 			}
 			_moduleLoader ('Uize',function (_uizeCode) {eval (_uizeCode); Uize.moduleLoader = _moduleLoader});
 
-		Uize.require ('Uize.Build.ServicesSetup');
+		/*** services setup & run build module (if specified) ***/
+			Uize.require (
+				'Uize.Build.ServicesSetup',
+				function () {
+					if (_buildModuleName)
+						Uize.require (
+							_buildModuleName,
+							function (_buildModule) {
+								_buildModule.perform (
+									Uize.copyInto ({},env,{logFileName:'_' + _buildModuleName + '.log'},_params)
+								);
+							}
+						)
+					;
+				}
+			);
 	};
 
 	/*** if this script is being run directly, then run the specified build process ***/
 		var
-			_thisScriptName = '_build-script-setup.js',
+			_thisScriptName = '_build.js',
 			_scriptFullName = _isWsh ? WScript.ScriptFullName : process.argv [1]
 		;
 		if (_scriptFullName.slice (_scriptFullName.length - _thisScriptName.length) == _thisScriptName) {
@@ -101,6 +116,7 @@
 				}
 
 			var _buildModuleName = _args [0];
+
 			if (_buildModuleName) {
 				/*** parse out named arguments ***/
 					var _params = {};
@@ -111,17 +127,10 @@
 						;
 					}
 
-				_buildScriptSetup (_params);
-
-				Uize.require (
-					_buildModuleName,
-					function (_buildModule) {
-						_buildModule.perform (Uize.copyInto ({},env,{logFileName:_buildModuleName + '.log'},_params));
-					}
-				);
+				_build (_buildModuleName,_params);
 			}
 		}
 
-	return _buildScriptSetup;
+	return _build;
 }) ();
 
