@@ -821,11 +821,11 @@ Uize.module ({
 								var _match = (_value || '').match (/alpha\s*\(\s*opacity\s*=([^\)]*)\)/i);
 								_value = _match ? _match [1] / 100 : 1;
 							}
-						} else {
+					} else {
 							for (_property in _property)
 								_value [_property] = _getStyle (_node,_property)
 							;
-						}
+					}
 					}
 					return _value;
 					/*?
@@ -1044,23 +1044,25 @@ Uize.module ({
 						} else if (_isOuterReplace && _isIe && !_isNode && !_htmlToInjectHasScript ()) {
 							_node.outerHTML = _htmlToInject;
 						} else {
+							var _nodesToInject = [];
 							if (_isInnerReplace)
 								if (_isIe && _ieInnerHtmlReadOnly [_node.tagName]) {
 									var _newNode = _node.cloneNode ();
 									_node.replaceNode (_newNode);
 									_node = _newNode;
-								} else
+								}
+								else
 									_node.innerHTML = '';
 							if (_areNodes) {
-								var _nodesToInject = [];
 								for (var _nodeNo = -1, _nodesLength = _htmlToInject.length; ++_nodeNo < _nodesLength;)
 									_nodesToInject.push (_htmlToInject [_nodeNo].cloneNode (_true));
-							} else {
-							var _dummyNode = document.createElement ('DIV');
+							}
+							else {
+								var _dummyNode = document.createElement (_node.tagName);
 								_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
 									+ _htmlToInject
 								;
-								var _nodesToInject = _dummyNode.childNodes
+								_nodesToInject = _dummyNode.childNodes
 							}
 							var
 								_nodeToInsertBefore = _isInnerTop
