@@ -3,7 +3,7 @@
 <head>
 	<title>2009-03-14 - Improved Build Scripts | News | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework News "/>
-	<meta name="description" content="The various build scripts that are bundled with the UIZE JavaScript Framework download (used for the uize.com Web site project, and that you can use in your own Web site projects to automate certain build tasks) have been improved in a number of ways."/>
+	<meta name="description" content="The various build scripts that are bundled with the UIZE JavaScript Framework download (used for the UIZE Web site project, and that you can use in your own Web site projects to automate certain build tasks) have been improved in a number of ways."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -23,10 +23,10 @@
 
 <div class="main">
 <div class="contents0">
-	<p>The various build scripts that are bundled with the UIZE JavaScript Framework download (used for the <b>uize.com</b> Web site project, and that you can use in your own Web site projects to automate certain build tasks) have been improved in a number of ways.</p>
+	<p>The various build scripts that are bundled with the UIZE JavaScript Framework download (used for the UIZE Web site project, and that you can use in your own Web site projects to automate certain build tasks) have been improved in a number of ways.</p>
 	
 	<table class="list">
-	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The build script JavaScript files that are located in the root folder of the <b>uize.com</b> Web site project are now all named with the prefix <code>_build-</code>. This results in them being grouped together in a folder listing and provides clearer organization.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The build script JavaScript files that are located in the root folder of the UIZE Web site project are now all named with the prefix <code>_build-</code>. This results in them being grouped together in a folder listing and provides clearer organization.</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The new <code>_build-env.json</code> file provides a means for configuring build environment variables that can be shared by the various build scripts, and allows the build scripts to be tailored to a particular Web site project without having to modify the build scripts, themselves.</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>It is now possible to easily do dry runs of the build scripts, simply by setting the new <code>dryRun</code> build environment variable to <code>true</code>.</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The new <code>_build-strings-audit-report.js</code> build script recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files. This build script can be useful when internationalizing the JavaScript files of a Web site project.</td></tr>
@@ -40,10 +40,10 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

@@ -266,8 +266,8 @@ document.writeln (styleTag);
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
 		'Uize.Widget.SegmentDisplay.Seven',
 		'Uize.Templates.SevenSegmentDisplay',
 		'Uize.Node',
@@ -277,7 +277,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** build the values set for the value selector (before wiring the UI, so there's no UI updating) ***/
 			var

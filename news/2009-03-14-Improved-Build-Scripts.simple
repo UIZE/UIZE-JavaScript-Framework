@@ -1,6 +1,6 @@
-The various build scripts that are bundled with the UIZE JavaScript Framework download (used for the *uize.com* Web site project, and that you can use in your own Web site projects to automate certain build tasks) have been improved in a number of ways.
+The various build scripts that are bundled with the UIZE JavaScript Framework download (used for the UIZE Web site project, and that you can use in your own Web site projects to automate certain build tasks) have been improved in a number of ways.
 
-- The build script JavaScript files that are located in the root folder of the *uize.com* Web site project are now all named with the prefix =_build-=. This results in them being grouped together in a folder listing and provides clearer organization.
+- The build script JavaScript files that are located in the root folder of the UIZE Web site project are now all named with the prefix =_build-=. This results in them being grouped together in a folder listing and provides clearer organization.
 
 - The new =_build-env.json= file provides a means for configuring build environment variables that can be shared by the various build scripts, and allows the build scripts to be tailored to a particular Web site project without having to modify the build scripts, themselves.
 

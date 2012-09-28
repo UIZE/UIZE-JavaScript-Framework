@@ -72,14 +72,14 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
 		'Uize.Widget.Bar.Slider',
 		'Uize.Node'
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** code to manage sharing of the same UI HTML among different widget instances ***/
 			var wiredSlider;

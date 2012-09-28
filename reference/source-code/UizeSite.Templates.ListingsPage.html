@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeSite.Templates.ListingsPage | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeSite.Templates.ListingsPage module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeSite.Templates.ListingsPage
+	<div class="pageActions">
+		<a href="../UizeSite.Templates.ListingsPage.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*
+  This is an automatically generated module, compiled from the JavaScript template file:
+    UizeSite.Templates.ListingsPage.js.jst
+*/
+
+Uize.module ({
+  name:'UizeSite.Templates.ListingsPage',
+  required:[
+    'Uize.String.Lines',
+    'Uize.Xml'
+  ],
+  builder:function () {
+    var _package = function () {};
+
+    /*** Public Static Methods ***/
+      _package.process = function (input) {
+        var output = [];
+        output.push ('&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;\r\n&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;\r\n&lt;head&gt;\r\n  &lt;title&gt;',input .title,' | UIZE JavaScript Framework&lt;/title&gt;\r\n  &lt;meta name="keywords" content="UIZE JavaScript Framework"/&gt;\r\n  &lt;meta name="description" content="',Uize.Xml.toAttributeValue (input .metaDescription),'"/&gt;\r\n  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;\r\n  &lt;link rel="stylesheet" href="',input .pathToRoot,'css/page.css"/&gt;\r\n  &lt;link rel="stylesheet" href="',input .pathToRoot,'css/page.simpledoc.css"/&gt;\r\n  &lt;link rel="stylesheet" href="',input .pathToRoot,'css/page.listings.css"/&gt;\r\n&lt;/head&gt;\r\n\r\n&lt;body&gt;\r\n\r\n&lt;script type="text/javascript" src="',input .pathToRoot,'js/Uize.js"&gt;&lt;/script&gt;\r\n\r\n&lt;h1 class="document-title"&gt;\r\n  &lt;a id="page-homeLink" href="',input .pathToRoot,'index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;\r\n  ',input.displayTitle || input.title,'\r\n&lt;/h1&gt;\r\n\r\n&lt;div class="main"&gt;\r\n\r\n&lt;div class="preamble"&gt;',input .preamble,'&lt;/div&gt;\r\n');
+
+          for (
+            var
+              listingNo = -1,
+              listings = input.listings,
+              listingsLength = listings.length,
+              imageFolder = input.imageFolder || input.title.toLowerCase ()
+            ;
+            ++listingNo &lt; listingsLength;
+          ) {
+            var
+              listing = listings [listingNo],
+              listingName = listing.fullName,
+              listingSubTitle = listing.subTitle || '',
+              listingNamePlusSubTitle = listingName + (listingSubTitle &amp;&amp; ' - ') + listingSubTitle,
+              moreInfoLink = listing.link
+            ;
+
+        output.push ('\r\n&lt;div class="heading1"&gt;',listingNamePlusSubTitle,'&lt;/div&gt;\r\n&lt;div class="infoRow"&gt;\r\n  ');
+         if (moreInfoLink) {
+        output.push ('&lt;a href="',moreInfoLink,'" target="_blank" class="imageLink"&gt;');
+         }
+        output.push ('&lt;img src="',input .pathToRoot,'images/',imageFolder,'/',listingName.toLowerCase ().replace (/ /g,'-'),'.png" alt="',Uize.Xml.toAttributeValue (listingNamePlusSubTitle),'"/&gt;');
+         if (moreInfoLink) {
+        output.push ('&lt;/a&gt;');
+         }
+         for (
+            var lineNo = -1, lines = Uize.String.Lines.split (listing.text), linesLength = lines.length;
+            ++lineNo &lt; linesLength;
+          ) {
+        output.push ('\r\n  &lt;p&gt;',lines [lineNo],'&lt;/p&gt;');
+         }
+
+            if (moreInfoLink) {
+        output.push ('\r\n  &lt;p class="more"&gt;more info at... &lt;a href="',moreInfoLink,'" target="_blank"&gt;',moreInfoLink,'&lt;/a&gt;&lt;/p&gt;');
+         }
+        output.push ('\r\n  &lt;br class="end"/&gt;\r\n&lt;/div&gt;');
+         }
+        output.push ('\r\n\r\n&lt;/div&gt;\r\n\r\n&lt;script type="text/javascript"&gt;\r\n\r\nUize.module ({\r\n  required:\'UizeSite.Page.library\',\r\n  builder:function () {(window.page = UizeSite.Page ()).wireUi ()}\r\n});\r\n\r\n&lt;/script&gt;\r\n\r\n&lt;/body&gt;&lt;/html&gt;\r\n');
+        return output.join ('');
+      };
+
+    /*** Public Static Properties ***/
+      _package.input = {
+        title:'string',
+        displayTitle:'string',
+        pathToRoot:'string',
+        imageFolder:'string',
+        metaDescription:'string',
+        preamble:'string',
+        listings:'array'
+      };
+
+    return _package;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.library',
+		'UizeSite.Page'
+	],
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
+});
+
+</script>
+
+</body></html>

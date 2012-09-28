@@ -269,7 +269,7 @@
 			</table>
 			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
 			
-			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Widget.Page</code> module...</p>
+			<p>Use the link below to search for example pages on the UIZE Web site that reference the <code>Uize.Widget.Page</code> module...</p>
 			
 			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Widget.Page%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
 		</div>
@@ -1421,7 +1421,7 @@ widget.callInherited ('launchPopup') ({name:'window3',url:'http://www.uize.com'}
 				
 				
 <pre class="sample-code">myWidget.callInherited ('useDialog') ({
-  widgetClassName:'UizeDotCom.DialogConfirm',
+  widgetClassName:'UizeSite.DialogConfirm',
   widgetProperties:{
     name:'confirmDialog',
     title:'Are you sure?',
@@ -1440,7 +1440,7 @@ widget.callInherited ('launchPopup') ({name:'window3',url:'http://www.uize.com'}
 });
 </pre>
 				
-				<p>In the above example, the <code><a href="#3_4">callInherited</a></code> instance method of the widget <code>myWidget</code> is being used to get a caller for the <code><a href="#3_50">useDialog</a></code> instance method of the page widget. It is assumed, in this example, that <code>myWidget</code> is somewhere on a widget tree with a page widget instance at the root. The widget class <code><a href="../reference/UizeDotCom.DialogConfirm.html">UizeDotCom.DialogConfirm</a></code> is being used for the dialog widget, and the various widget properties that are specified in the <code><a href="#3_50_2_1">widgetProperties</a></code> property are state properties of the <code><a href="../reference/UizeDotCom.DialogConfirm.html">UizeDotCom.DialogConfirm</a></code> class. This example is essentially using a dynamically loaded dialog widget class for displaying a decorated confirmation dialog that is implemented using HTML.</p>
+				<p>In the above example, the <code><a href="#3_4">callInherited</a></code> instance method of the widget <code>myWidget</code> is being used to get a caller for the <code><a href="#3_50">useDialog</a></code> instance method of the page widget. It is assumed, in this example, that <code>myWidget</code> is somewhere on a widget tree with a page widget instance at the root. The widget class <code><a href="../reference/UizeSite.DialogConfirm.html">UizeSite.DialogConfirm</a></code> is being used for the dialog widget, and the various widget properties that are specified in the <code><a href="#3_50_2_1">widgetProperties</a></code> property are state properties of the <code><a href="../reference/UizeSite.DialogConfirm.html">UizeSite.DialogConfirm</a></code> class. This example is essentially using a dynamically loaded dialog widget class for displaying a decorated confirmation dialog that is implemented using HTML.</p>
 			</div>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2111,10 +2111,10 @@ popupWindowDoc.close ();
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

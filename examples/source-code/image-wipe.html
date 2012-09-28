@@ -80,27 +80,27 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
     'Uize.Widget.ImageWipe.xPresets',
-    'UizeDotCom.TestDataPhotos',
-    'UizeDotCom.ParamsInspector'
+    'UizeSite.TestDataPhotos',
+    'UizeSite.ParamsInspector'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ();
+      var page = window.page = UizeSite.Page.Example ();
 
     /*** create the Uize.Widget.ImageWipe instance ***/
       var imageWipe = page.addChild ('imageWipe',Uize.Widget.ImageWipe,{built:false});
 
     /*** create the params inspector widget ***/
       var
-        photos = UizeDotCom.TestDataPhotos (),
+        photos = UizeSite.TestDataPhotos (),
         photoNo = 0
       ;
       page.addChild (
         'paramsInspector',
-        UizeDotCom.ParamsInspector,
+        UizeSite.ParamsInspector,
         {
           params:{
             allToFull:'json',
@@ -146,10 +146,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

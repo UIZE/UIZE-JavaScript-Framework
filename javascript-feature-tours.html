@@ -24,12 +24,12 @@
 Uize.module ({
 	required:[
 		'Uize.Url',
-		'UizeDotCom.Examples'
+		'UizeSite.Examples'
 	],
 	builder:function () {
 		var
 			_tour = Uize.Url.fromParams (location.href).tour,
-			_examples = UizeDotCom.Examples (),
+			_examples = UizeSite.Examples (),
 			_startExample
 		;
 		if (_tour) {
@@ -57,12 +57,12 @@ Uize.module ({
 		} else {
 			Uize.module ({
 				required:[
-					'UizeDotCom.Page.library',
-					'UizeDotCom.Page'
+					'UizeSite.Page.library',
+					'UizeSite.Page'
 				],
 				builder:function () {
 					/*** create the example page widget ***/
-						var _page = window.page = UizeDotCom.Page ();
+						var _page = window.page = UizeSite.Page ();
 			
 					/*** wire up the page widget ***/
 						_page.wireUi ();

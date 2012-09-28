@@ -57,8 +57,8 @@
   &lt;/div&gt;
 
   &lt;!-- the photos set is defined in an external library so it can be shared by several pages --&gt;
-  &lt;script type="text/javascript" src="../js/UizeDotCom.js"&gt;&lt;/script&gt;
-  &lt;script type="text/javascript" src="../js/UizeDotCom.TestDataPhotos.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="../js/UizeSite.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="../js/UizeSite.TestDataPhotos.js"&gt;&lt;/script&gt;
 
   &lt;!-- slideshow HTML layout with UI to be wired up --&gt;
 
@@ -111,7 +111,7 @@
 
 window.$page_slideShow = {
   widgetClass:'Uize.Widget.SlideShow',
-  slides:UizeDotCom.TestDataPhotos ()
+  slides:UizeSite.TestDataPhotos ()
 };
 
 window.$page_slideShow_slideImage = {
@@ -136,10 +136,10 @@ window.$page_slideShow_slideRating = {
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example'
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example'
   ],
-  builder:function () {(window.page = UizeDotCom.Page.Example ()).wireUi ()}
+  builder:function () {(window.page = UizeSite.Page.Example ()).wireUi ()}
 });
 
 &lt;/script&gt;
@@ -154,10 +154,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

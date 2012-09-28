@@ -1,0 +1,1462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeSite.Page.Doc | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation UizeSite.Page.Doc module reference documentation"/>
+	<meta name="description" content="A subclass of UizeSite.Page that provides additional functionality specific to pages that contain documentation."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="UizeSite.html" title="View reference for UizeSite" class="breadcrumb">UizeSite</a>.<a href="UizeSite.Page.html" title="View reference for UizeSite.Page" class="breadcrumb">Page</a>.<a href="UizeSite.Page.Doc.html" title="View reference for UizeSite.Page.Doc" class="breadcrumb">Doc</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/UizeSite.Page.Doc.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="A subclass of UizeSite.Page that provides additional functionality specific to pages that contain documentation.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the UizeSite.Page.Doc module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The UizeSite.Page.Doc module defines the UizeSite.Page.Doc class, which is a subclass of UizeSite.Page.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="No features have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="The features listed in this section have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="The features listed in this section have been inherited from other modules.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="UizeSite.Page.Doc.library">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the UizeSite.Page.Doc module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Child Widgets</a>
+				<ul>
+					<li><a href="#2_1" title="An instance of Uize.Widget.Tree.List that is used to provide an expandable/collapsible contents tree at the top of the document.">2.1. contents</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Instance Methods</a>
+				<ul>
+					<li><a href="#3_1" title="Inherited from Uize.Widget.">3.1. addChild</a></li>
+					<li><a href="#3_2" title="Inherited from Uize.Widget.">3.2. ajax</a></li>
+					<li><a href="#3_3" title="Inherited from Uize.Widget.">3.3. buildHtml</a></li>
+					<li><a href="#3_4" title="Inherited from Uize.Widget.">3.4. callInherited</a></li>
+					<li><a href="#3_5" title="Inherited from Uize.Widget.">3.5. confirm</a></li>
+					<li><a href="#3_6" title="Inherited from Uize.Widget.">3.6. displayNode</a></li>
+					<li><a href="#3_7" title="Inherited from Uize.Class.">3.7. fire</a></li>
+					<li><a href="#3_8" title="Inherited from Uize.Widget.">3.8. flushNodeCache</a></li>
+					<li><a href="#3_9" title="Inherited from Uize.Class.">3.9. get</a></li>
+					<li><a href="#3_10" title="Inherited from Uize.Widget.">3.10. getInherited</a></li>
+					<li><a href="#3_11" title="Inherited from Uize.Widget.">3.11. getNode</a></li>
+					<li><a href="#3_12" title="Inherited from Uize.Widget.">3.12. getNodeStyle</a></li>
+					<li><a href="#3_13" title="Inherited from Uize.Widget.">3.13. getNodeValue</a></li>
+					<li><a href="#3_14" title="Inherited from UizeSite.Page.">3.14. getPathToRoot</a></li>
+					<li><a href="#3_15" title="Inherited from Uize.Widget.">3.15. getProvider</a></li>
+					<li><a href="#3_16" title="Inherited from Uize.Widget.">3.16. globalizeNode</a></li>
+					<li><a href="#3_17" title="Inherited from Uize.Widget.">3.17. inform</a></li>
+					<li><a href="#3_18" title="Inherited from Uize.Widget.">3.18. injectNodeHtml</a></li>
+					<li><a href="#3_19" title="Inherited from Uize.Widget.">3.19. insertOrWireUi</a></li>
+					<li><a href="#3_20" title="Inherited from Uize.Widget.">3.20. insertUi</a></li>
+					<li><a href="#3_21" title="Inherited from Uize.Class.">3.21. is</a></li>
+					<li><a href="#3_22" title="Inherited from Uize.Widget, but introduced in Uize.Class.">3.22. kill</a></li>
+					<li><a href="#3_23" title="Inherited from Uize.Widget.Page.">3.23. launchPopup</a></li>
+					<li><a href="#3_24" title="Inherited from Uize.Widget.Page.">3.24. loadHtml</a></li>
+					<li><a href="#3_25" title="Inherited from Uize.Widget.Page.">3.25. loadHtmlIntoNode</a></li>
+					<li><a href="#3_26" title="Inherited from Uize.Widget.">3.26. localize</a></li>
+					<li><a href="#3_27" title="Inherited from Uize.Class.">3.27. met</a></li>
+					<li><a href="#3_28" title="Inherited from Uize.Class.">3.28. once</a></li>
+					<li><a href="#3_29" title="Inherited from Uize.Widget.Page.">3.29. performAjax</a></li>
+					<li><a href="#3_30" title="Inherited from UizeSite.Page.">3.30. performSearch</a></li>
+					<li><a href="#3_31" title="Inherited from Uize.Widget.">3.31. removeChild</a></li>
+					<li><a href="#3_32" title="Inherited from Uize.Widget.">3.32. removeNode</a></li>
+					<li><a href="#3_33" title="Inherited from Uize.Widget.">3.33. removeUi</a></li>
+					<li><a href="#3_34" title="Inherited from Uize.Class.">3.34. set</a></li>
+					<li><a href="#3_35" title="Inherited from Uize.Widget.">3.35. setInherited</a></li>
+					<li><a href="#3_36" title="Inherited from Uize.Widget.">3.36. setNodeClipRect</a></li>
+					<li><a href="#3_37" title="Inherited from Uize.Widget.">3.37. setNodeInnerHtml</a></li>
+					<li><a href="#3_38" title="Inherited from Uize.Widget.">3.38. setNodeOpacity</a></li>
+					<li><a href="#3_39" title="Inherited from Uize.Widget.">3.39. setNodeProperties</a></li>
+					<li><a href="#3_40" title="Inherited from Uize.Widget.">3.40. setNodeStyle</a></li>
+					<li><a href="#3_41" title="Inherited from Uize.Widget.">3.41. setNodeValue</a></li>
+					<li><a href="#3_42" title="Inherited from Uize.Widget.Page, but introduced in Uize.Widget.">3.42. showConfirm</a></li>
+					<li><a href="#3_43" title="Inherited from Uize.Widget.Page, but introduced in Uize.Widget.">3.43. showInform</a></li>
+					<li><a href="#3_44" title="Inherited from Uize.Widget.">3.44. showNode</a></li>
+					<li><a href="#3_45" title="Inherited from Uize.Class.">3.45. toggle</a></li>
+					<li><a href="#3_46" title="Inherited from Uize.Class.">3.46. unmet</a></li>
+					<li><a href="#3_47" title="Inherited from Uize.Class.">3.47. unwire</a></li>
+					<li><a href="#3_48" title="Inherited from Uize.Widget.">3.48. unwireNode</a></li>
+					<li><a href="#3_49" title="Inherited from Uize.Widget.">3.49. unwireNodeEventsByMatch</a></li>
+					<li><a href="#3_50" title="Inherited from Uize.Widget.">3.50. unwireUi</a></li>
+					<li><a href="#3_51" title="Inherited from Uize.Widget.">3.51. updateUi</a></li>
+					<li><a href="#3_52" title="Inherited from Uize.Widget.Page.">3.52. useDialog</a></li>
+					<li><a href="#3_53" title="Inherited from UizeSite.Page.">3.53. viewSource</a></li>
+					<li><a href="#3_54" title="Inherited from Uize.Class.">3.54. wire</a></li>
+					<li><a href="#3_55" title="Inherited from Uize.Widget.Page.">3.55. wireDeferredLinks</a></li>
+					<li><a href="#3_56" title="Inherited from Uize.Widget.">3.56. wireNode</a></li>
+					<li><a href="#3_57" title="IMPLEMENTATION INFO">3.57. wireUi</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. State Properties</a>
+				<ul>
+					<li><a href="#4_1" title="Inherited from Uize.Widget.">4.1. built</a></li>
+					<li><a href="#4_2" title="Inherited from Uize.Widget.">4.2. busy</a></li>
+					<li><a href="#4_3" title="Inherited from Uize.Widget.">4.3. busyInherited</a></li>
+					<li><a href="#4_4" title="Inherited from Uize.Widget.">4.4. children</a></li>
+					<li><a href="#4_5" title="IMPLEMENTATION INFO">4.5. confirmDialog</a></li>
+					<li><a href="#4_6" title="Inherited from Uize.Widget.">4.6. container</a></li>
+					<li><a href="#4_7" title="Inherited from UizeSite.Page.">4.7. contentsTreeItems</a></li>
+					<li><a href="#4_8" title="IMPLEMENTATION INFO">4.8. deferredLinks</a></li>
+					<li><a href="#4_9" title="Inherited from Uize.Widget.Page.">4.9. dialogProperties</a></li>
+					<li><a href="#4_10" title="Inherited from Uize.Widget.">4.10. enabled</a></li>
+					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. enabledInherited</a></li>
+					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. html</a></li>
+					<li><a href="#4_13" title="Inherited from Uize.Widget.Page, but introduced in Uize.Widget.">4.13. idPrefix</a></li>
+					<li><a href="#4_14" title="Inherited from Uize.Widget.">4.14. idPrefixConstruction</a></li>
+					<li><a href="#4_15" title="Inherited from Uize.Widget.">4.15. insertionMode</a></li>
+					<li><a href="#4_16" title="Inherited from Uize.Widget.Page.">4.16. linkBatchSize</a></li>
+					<li><a href="#4_17" title="Inherited from Uize.Widget.">4.17. localized</a></li>
+					<li><a href="#4_18" title="Inherited from Uize.Widget.">4.18. name</a></li>
+					<li><a href="#4_19" title="Inherited from Uize.Widget.">4.19. nodeMap</a></li>
+					<li><a href="#4_20" title="Inherited from UizeSite.Page.">4.20. showFooter</a></li>
+					<li><a href="#4_21" title="Inherited from UizeSite.Page.">4.21. showShareThisPanel</a></li>
+					<li><a href="#4_22" title="Inherited from Uize.Widget.">4.22. wired</a></li>
+				</ul>
+			</li>
+			<li><a href="#5">5. Static Methods</a>
+				<ul>
+					<li><a href="#5_1" title="Inherited from Uize.Class.">5.1. UizeSite.Page.Doc.fire</a></li>
+					<li><a href="#5_2" title="Inherited from Uize.Class.">5.2. UizeSite.Page.Doc.get</a></li>
+					<li><a href="#5_3" title="Inherited from Uize.Widget.">5.3. UizeSite.Page.Doc.getBlankImageUrl</a></li>
+					<li><a href="#5_4" title="Inherited from Uize.Widget.Page.">5.4. UizeSite.Page.Doc.launchPopup</a></li>
+					<li><a href="#5_5" title="Inherited from Uize.Class.">5.5. UizeSite.Page.Doc.registerProperties</a></li>
+					<li><a href="#5_6" title="Inherited from Uize.Class.">5.6. UizeSite.Page.Doc.set</a></li>
+					<li><a href="#5_7" title="Inherited from Uize.Class.">5.7. UizeSite.Page.Doc.singleton</a></li>
+					<li><a href="#5_8" title="Inherited from Uize.Widget.">5.8. UizeSite.Page.Doc.spawn</a></li>
+					<li><a href="#5_9" title="Inherited from Uize.Class.">5.9. UizeSite.Page.Doc.subclass</a></li>
+					<li><a href="#5_10" title="Inherited from Uize.Class.">5.10. UizeSite.Page.Doc.toggle</a></li>
+					<li><a href="#5_11" title="Inherited from Uize.Class.">5.11. UizeSite.Page.Doc.unwire</a></li>
+					<li><a href="#5_12" title="Inherited from Uize.Class.">5.12. UizeSite.Page.Doc.wire</a></li>
+				</ul>
+			</li>
+			<li><a href="#6">6. Static Properties</a>
+				<ul>
+					<li><a href="#6_1" title="IMPLEMENTATION INFO">6.1. UizeSite.Page.Doc.deferredLinks</a></li>
+					<li><a href="#6_2" title="Inherited from Uize.Widget.">6.2. UizeSite.Page.Doc.isWired</a></li>
+					<li><a href="#6_3" title="Inherited from Uize.Widget.Page.">6.3. UizeSite.Page.Doc.linkBatchSize</a></li>
+					<li><a href="#6_4" title="IMPLEMENTATION INFO">6.4. UizeSite.Page.Doc.moduleName</a></li>
+					<li><a href="#6_5" title="IMPLEMENTATION INFO">6.5. UizeSite.Page.Doc.nonInheritableStatics</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>A subclass of <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code> that provides additional functionality specific to pages that contain documentation.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>UizeSite.Page.Doc</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the UIZE Web site that reference the <code>UizeSite.Page.Doc</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22UizeSite.Page.Doc%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>UizeSite.Page.Doc</code> module defines the <code>UizeSite.Page.Doc</code> class, which is a subclass of <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>.</p>
+			
+			<p><span class="allCaps">INHERITANCE CHAIN</span></p>
+			
+			<p><code><a href="../reference/Uize.Class.html">Uize.Class</a></code> -> <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> -> <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> -> <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code> -> <code>UizeSite.Page.Doc</code></p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>No features have been introduced in this module.</p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been overridden in this module.</p>
+				
+				<p>The module that an overridden feature was initially introduced in will be noted in the IMPLEMENTATION INFO notes for the feature.</p>
+				
+				<p><span class="allCaps">INSTANCE METHODS</span></p>
+				
+				<p><code><a href="#3_57">wireUi</a></code></p>
+				
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
+				
+				<p><code><a href="#4_5">confirmDialog</a></code> | <code><a href="#4_8">deferredLinks</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#6_1">UizeSite.Page.Doc.deferredLinks</a></code> | <code><a href="#6_4">UizeSite.Page.Doc.moduleName</a></code> | <code><a href="#6_5">UizeSite.Page.Doc.nonInheritableStatics</a></code></p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been inherited from other modules.</p>
+				
+				<p>The module that an inherited feature was initially introduced in will be noted in the IMPLEMENTATION INFO notes for the feature.</p>
+				
+				<p><span class="allCaps">INSTANCE METHODS</span></p>
+				
+				<p><code><a href="#3_1">addChild</a></code> | <code><a href="#3_2">ajax</a></code> | <code><a href="#3_3">buildHtml</a></code> | <code><a href="#3_4">callInherited</a></code> | <code><a href="#3_5">confirm</a></code> | <code><a href="#3_6">displayNode</a></code> | <code><a href="#3_7">fire</a></code> | <code><a href="#3_8">flushNodeCache</a></code> | <code><a href="#3_9">get</a></code> | <code><a href="#3_10">getInherited</a></code> | <code><a href="#3_11">getNode</a></code> | <code><a href="#3_12">getNodeStyle</a></code> | <code><a href="#3_13">getNodeValue</a></code> | <code><a href="#3_14">getPathToRoot</a></code> | <code><a href="#3_15">getProvider</a></code> | <code><a href="#3_16">globalizeNode</a></code> | <code><a href="#3_17">inform</a></code> | <code><a href="#3_18">injectNodeHtml</a></code> | <code><a href="#3_19">insertOrWireUi</a></code> | <code><a href="#3_20">insertUi</a></code> | <code><a href="#3_21">is</a></code> | <code><a href="#3_22">kill</a></code> | <code><a href="#3_23">launchPopup</a></code> | <code><a href="#3_24">loadHtml</a></code> | <code><a href="#3_25">loadHtmlIntoNode</a></code> | <code><a href="#3_26">localize</a></code> | <code><a href="#3_27">met</a></code> | <code><a href="#3_28">once</a></code> | <code><a href="#3_29">performAjax</a></code> | <code><a href="#3_30">performSearch</a></code> | <code><a href="#3_31">removeChild</a></code> | <code><a href="#3_32">removeNode</a></code> | <code><a href="#3_33">removeUi</a></code> | <code><a href="#3_34">set</a></code> | <code><a href="#3_35">setInherited</a></code> | <code><a href="#3_36">setNodeClipRect</a></code> | <code><a href="#3_37">setNodeInnerHtml</a></code> | <code><a href="#3_38">setNodeOpacity</a></code> | <code><a href="#3_39">setNodeProperties</a></code> | <code><a href="#3_40">setNodeStyle</a></code> | <code><a href="#3_41">setNodeValue</a></code> | <code><a href="#3_42">showConfirm</a></code> | <code><a href="#3_43">showInform</a></code> | <code><a href="#3_44">showNode</a></code> | <code><a href="#3_45">toggle</a></code> | <code><a href="#3_46">unmet</a></code> | <code><a href="#3_47">unwire</a></code> | <code><a href="#3_48">unwireNode</a></code> | <code><a href="#3_49">unwireNodeEventsByMatch</a></code> | <code><a href="#3_50">unwireUi</a></code> | <code><a href="#3_51">updateUi</a></code> | <code><a href="#3_52">useDialog</a></code> | <code><a href="#3_53">viewSource</a></code> | <code><a href="#3_54">wire</a></code> | <code><a href="#3_55">wireDeferredLinks</a></code> | <code><a href="#3_56">wireNode</a></code></p>
+				
+				<p><span class="allCaps">STATE PROPERTIES</span></p>
+				
+				<p><code><a href="#4_1">built</a></code> | <code><a href="#4_2">busy</a></code> | <code><a href="#4_3">busyInherited</a></code> | <code><a href="#4_4">children</a></code> | <code><a href="#4_6">container</a></code> | <code><a href="#4_7">contentsTreeItems</a></code> | <code><a href="#4_9">dialogProperties</a></code> | <code><a href="#4_10">enabled</a></code> | <code><a href="#4_11">enabledInherited</a></code> | <code><a href="#4_12">html</a></code> | <code><a href="#4_13">idPrefix</a></code> | <code><a href="#4_14">idPrefixConstruction</a></code> | <code><a href="#4_15">insertionMode</a></code> | <code><a href="#4_16">linkBatchSize</a></code> | <code><a href="#4_17">localized</a></code> | <code><a href="#4_18">name</a></code> | <code><a href="#4_19">nodeMap</a></code> | <code><a href="#4_20">showFooter</a></code> | <code><a href="#4_21">showShareThisPanel</a></code> | <code><a href="#4_22">wired</a></code></p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#5_1">UizeSite.Page.Doc.fire</a></code> | <code><a href="#5_2">UizeSite.Page.Doc.get</a></code> | <code><a href="#5_3">UizeSite.Page.Doc.getBlankImageUrl</a></code> | <code><a href="#5_4">UizeSite.Page.Doc.launchPopup</a></code> | <code><a href="#5_5">UizeSite.Page.Doc.registerProperties</a></code> | <code><a href="#5_6">UizeSite.Page.Doc.set</a></code> | <code><a href="#5_7">UizeSite.Page.Doc.singleton</a></code> | <code><a href="#5_8">UizeSite.Page.Doc.spawn</a></code> | <code><a href="#5_9">UizeSite.Page.Doc.subclass</a></code> | <code><a href="#5_10">UizeSite.Page.Doc.toggle</a></code> | <code><a href="#5_11">UizeSite.Page.Doc.unwire</a></code> | <code><a href="#5_12">UizeSite.Page.Doc.wire</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#6_2">UizeSite.Page.Doc.isWired</a></code> | <code><a href="#6_3">UizeSite.Page.Doc.linkBatchSize</a></code></p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p><code><a href="../reference/UizeSite.Page.Doc.library.html">UizeSite.Page.Doc.library</a></code></p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>UizeSite.Page.Doc</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Child Widgets"><span class="headingNumber"><a href="#2" title="2. Child Widgets">2</a>. </span>Child Widgets</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Child Widgets -&gt; 2.1. contents"><span class="headingNumber"><a href="#2" title="2. Child Widgets">2</a>.<a href="#2_1" title="2. Child Widgets -&gt; 2.1. contents">1</a>. </span>contents</h2>
+		<div class="contents2">
+			<p>An instance of <code><a href="../reference/Uize.Widget.Tree.List.html">Uize.Widget.Tree.List</a></code> that is used to provide an expandable/collapsible contents tree at the top of the document.</p>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Instance Methods"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>. </span>Instance Methods</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.1. addChild"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_1" title="3. Instance Methods -&gt; 3.1. addChild">1</a>. </span>addChild</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.2. ajax"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. ajax">2</a>. </span>ajax</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.3. buildHtml"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. buildHtml">3</a>. </span>buildHtml</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.4. callInherited"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_4" title="3. Instance Methods -&gt; 3.4. callInherited">4</a>. </span>callInherited</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.5. confirm"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. confirm">5</a>. </span>confirm</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.6. displayNode"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. displayNode">6</a>. </span>displayNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_7"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.7. fire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. fire">7</a>. </span>fire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_8"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.8. flushNodeCache"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_8" title="3. Instance Methods -&gt; 3.8. flushNodeCache">8</a>. </span>flushNodeCache</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_9"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.9. get"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_9" title="3. Instance Methods -&gt; 3.9. get">9</a>. </span>get</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_10"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.10. getInherited"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. getInherited">10</a>. </span>getInherited</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_11"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.11. getNode"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_11" title="3. Instance Methods -&gt; 3.11. getNode">11</a>. </span>getNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_12"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.12. getNodeStyle"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_12" title="3. Instance Methods -&gt; 3.12. getNodeStyle">12</a>. </span>getNodeStyle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_13"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.13. getNodeValue"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_13" title="3. Instance Methods -&gt; 3.13. getNodeValue">13</a>. </span>getNodeValue</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_14"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.14. getPathToRoot"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_14" title="3. Instance Methods -&gt; 3.14. getPathToRoot">14</a>. </span>getPathToRoot</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>, first introduced in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_15"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.15. getProvider"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_15" title="3. Instance Methods -&gt; 3.15. getProvider">15</a>. </span>getProvider</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_16"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.16. globalizeNode"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_16" title="3. Instance Methods -&gt; 3.16. globalizeNode">16</a>. </span>globalizeNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_17"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.17. inform"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_17" title="3. Instance Methods -&gt; 3.17. inform">17</a>. </span>inform</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_18"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.18. injectNodeHtml"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_18" title="3. Instance Methods -&gt; 3.18. injectNodeHtml">18</a>. </span>injectNodeHtml</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_19"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.19. insertOrWireUi"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_19" title="3. Instance Methods -&gt; 3.19. insertOrWireUi">19</a>. </span>insertOrWireUi</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_20"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.20. insertUi"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_20" title="3. Instance Methods -&gt; 3.20. insertUi">20</a>. </span>insertUi</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_21"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.21. is"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_21" title="3. Instance Methods -&gt; 3.21. is">21</a>. </span>is</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_22"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.22. kill"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_22" title="3. Instance Methods -&gt; 3.22. kill">22</a>. </span>kill</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, but introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_23"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.23. launchPopup"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_23" title="3. Instance Methods -&gt; 3.23. launchPopup">23</a>. </span>launchPopup</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_24"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.24. loadHtml"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_24" title="3. Instance Methods -&gt; 3.24. loadHtml">24</a>. </span>loadHtml</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_25"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.25. loadHtmlIntoNode"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_25" title="3. Instance Methods -&gt; 3.25. loadHtmlIntoNode">25</a>. </span>loadHtmlIntoNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_26"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.26. localize"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_26" title="3. Instance Methods -&gt; 3.26. localize">26</a>. </span>localize</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_27"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.27. met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_27" title="3. Instance Methods -&gt; 3.27. met">27</a>. </span>met</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_28"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.28. once"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_28" title="3. Instance Methods -&gt; 3.28. once">28</a>. </span>once</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_29"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.29. performAjax"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_29" title="3. Instance Methods -&gt; 3.29. performAjax">29</a>. </span>performAjax</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_30"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.30. performSearch"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_30" title="3. Instance Methods -&gt; 3.30. performSearch">30</a>. </span>performSearch</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>, first introduced in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_31"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.31. removeChild"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_31" title="3. Instance Methods -&gt; 3.31. removeChild">31</a>. </span>removeChild</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_32"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.32. removeNode"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_32" title="3. Instance Methods -&gt; 3.32. removeNode">32</a>. </span>removeNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_33"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.33. removeUi"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_33" title="3. Instance Methods -&gt; 3.33. removeUi">33</a>. </span>removeUi</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_34"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.34. set"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_34" title="3. Instance Methods -&gt; 3.34. set">34</a>. </span>set</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_35"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.35. setInherited"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_35" title="3. Instance Methods -&gt; 3.35. setInherited">35</a>. </span>setInherited</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_36"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.36. setNodeClipRect"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_36" title="3. Instance Methods -&gt; 3.36. setNodeClipRect">36</a>. </span>setNodeClipRect</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_37"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.37. setNodeInnerHtml"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_37" title="3. Instance Methods -&gt; 3.37. setNodeInnerHtml">37</a>. </span>setNodeInnerHtml</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_38"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.38. setNodeOpacity"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_38" title="3. Instance Methods -&gt; 3.38. setNodeOpacity">38</a>. </span>setNodeOpacity</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_39"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.39. setNodeProperties"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_39" title="3. Instance Methods -&gt; 3.39. setNodeProperties">39</a>. </span>setNodeProperties</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_40"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.40. setNodeStyle"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_40" title="3. Instance Methods -&gt; 3.40. setNodeStyle">40</a>. </span>setNodeStyle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_41"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.41. setNodeValue"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_41" title="3. Instance Methods -&gt; 3.41. setNodeValue">41</a>. </span>setNodeValue</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_42"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.42. showConfirm"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_42" title="3. Instance Methods -&gt; 3.42. showConfirm">42</a>. </span>showConfirm</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, but introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_43"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.43. showInform"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_43" title="3. Instance Methods -&gt; 3.43. showInform">43</a>. </span>showInform</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, but introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_44"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.44. showNode"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_44" title="3. Instance Methods -&gt; 3.44. showNode">44</a>. </span>showNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_45"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.45. toggle"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_45" title="3. Instance Methods -&gt; 3.45. toggle">45</a>. </span>toggle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_46"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.46. unmet"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_46" title="3. Instance Methods -&gt; 3.46. unmet">46</a>. </span>unmet</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_47"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.47. unwire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_47" title="3. Instance Methods -&gt; 3.47. unwire">47</a>. </span>unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_48"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.48. unwireNode"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_48" title="3. Instance Methods -&gt; 3.48. unwireNode">48</a>. </span>unwireNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_49"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.49. unwireNodeEventsByMatch"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_49" title="3. Instance Methods -&gt; 3.49. unwireNodeEventsByMatch">49</a>. </span>unwireNodeEventsByMatch</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_50"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.50. unwireUi"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_50" title="3. Instance Methods -&gt; 3.50. unwireUi">50</a>. </span>unwireUi</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_51"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.51. updateUi"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_51" title="3. Instance Methods -&gt; 3.51. updateUi">51</a>. </span>updateUi</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_52"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.52. useDialog"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_52" title="3. Instance Methods -&gt; 3.52. useDialog">52</a>. </span>useDialog</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_53"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.53. viewSource"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_53" title="3. Instance Methods -&gt; 3.53. viewSource">53</a>. </span>viewSource</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>, first introduced in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_54"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.54. wire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_54" title="3. Instance Methods -&gt; 3.54. wire">54</a>. </span>wire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_55"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.55. wireDeferredLinks"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_55" title="3. Instance Methods -&gt; 3.55. wireDeferredLinks">55</a>. </span>wireDeferredLinks</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_56"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.56. wireNode"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_56" title="3. Instance Methods -&gt; 3.56. wireNode">56</a>. </span>wireNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_57"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.57. wireUi"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_57" title="3. Instance Methods -&gt; 3.57. wireUi">57</a>. </span>wireUi</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. State Properties"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>. </span>State Properties</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.1. built"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_1" title="4. State Properties -&gt; 4.1. built">1</a>. </span>built</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.2. busy"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_2" title="4. State Properties -&gt; 4.2. busy">2</a>. </span>busy</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.3. busyInherited"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_3" title="4. State Properties -&gt; 4.3. busyInherited">3</a>. </span>busyInherited</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_4"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.4. children"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_4" title="4. State Properties -&gt; 4.4. children">4</a>. </span>children</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_5"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.5. confirmDialog"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_5" title="4. State Properties -&gt; 4.5. confirmDialog">5</a>. </span>confirmDialog</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_6"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.6. container"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_6" title="4. State Properties -&gt; 4.6. container">6</a>. </span>container</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_7"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.7. contentsTreeItems"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_7" title="4. State Properties -&gt; 4.7. contentsTreeItems">7</a>. </span>contentsTreeItems</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>, first introduced in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_8"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.8. deferredLinks"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_8" title="4. State Properties -&gt; 4.8. deferredLinks">8</a>. </span>deferredLinks</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_9"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.9. dialogProperties"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_9" title="4. State Properties -&gt; 4.9. dialogProperties">9</a>. </span>dialogProperties</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_10"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.10. enabled"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_10" title="4. State Properties -&gt; 4.10. enabled">10</a>. </span>enabled</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_11"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.11. enabledInherited"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_11" title="4. State Properties -&gt; 4.11. enabledInherited">11</a>. </span>enabledInherited</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_12"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.12. html"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_12" title="4. State Properties -&gt; 4.12. html">12</a>. </span>html</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_13"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.13. idPrefix"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_13" title="4. State Properties -&gt; 4.13. idPrefix">13</a>. </span>idPrefix</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, but introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_14"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.14. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_14" title="4. State Properties -&gt; 4.14. idPrefixConstruction">14</a>. </span>idPrefixConstruction</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_15"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.15. insertionMode"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_15" title="4. State Properties -&gt; 4.15. insertionMode">15</a>. </span>insertionMode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_16"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.16. linkBatchSize"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_16" title="4. State Properties -&gt; 4.16. linkBatchSize">16</a>. </span>linkBatchSize</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_17"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.17. localized"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_17" title="4. State Properties -&gt; 4.17. localized">17</a>. </span>localized</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_18"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.18. name"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_18" title="4. State Properties -&gt; 4.18. name">18</a>. </span>name</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_19"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.19. nodeMap"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_19" title="4. State Properties -&gt; 4.19. nodeMap">19</a>. </span>nodeMap</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_20"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.20. showFooter"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_20" title="4. State Properties -&gt; 4.20. showFooter">20</a>. </span>showFooter</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>, first introduced in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_21"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.21. showShareThisPanel"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_21" title="4. State Properties -&gt; 4.21. showShareThisPanel">21</a>. </span>showShareThisPanel</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>, first introduced in <code><a href="../reference/UizeSite.Page.html">UizeSite.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_22"></a>
+		<h2 class="heading2" title="4. State Properties -&gt; 4.22. wired"><span class="headingNumber"><a href="#4" title="4. State Properties">4</a>.<a href="#4_22" title="4. State Properties -&gt; 4.22. wired">22</a>. </span>wired</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Static Methods"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.1. UizeSite.Page.Doc.fire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_1" title="5. Static Methods -&gt; 5.1. UizeSite.Page.Doc.fire">1</a>. </span>UizeSite.Page.Doc.fire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.2. UizeSite.Page.Doc.get"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_2" title="5. Static Methods -&gt; 5.2. UizeSite.Page.Doc.get">2</a>. </span>UizeSite.Page.Doc.get</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.3. UizeSite.Page.Doc.getBlankImageUrl"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_3" title="5. Static Methods -&gt; 5.3. UizeSite.Page.Doc.getBlankImageUrl">3</a>. </span>UizeSite.Page.Doc.getBlankImageUrl</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.4. UizeSite.Page.Doc.launchPopup"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_4" title="5. Static Methods -&gt; 5.4. UizeSite.Page.Doc.launchPopup">4</a>. </span>UizeSite.Page.Doc.launchPopup</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_5"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.5. UizeSite.Page.Doc.registerProperties"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_5" title="5. Static Methods -&gt; 5.5. UizeSite.Page.Doc.registerProperties">5</a>. </span>UizeSite.Page.Doc.registerProperties</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_6"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.6. UizeSite.Page.Doc.set"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_6" title="5. Static Methods -&gt; 5.6. UizeSite.Page.Doc.set">6</a>. </span>UizeSite.Page.Doc.set</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_7"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.7. UizeSite.Page.Doc.singleton"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_7" title="5. Static Methods -&gt; 5.7. UizeSite.Page.Doc.singleton">7</a>. </span>UizeSite.Page.Doc.singleton</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_8"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.8. UizeSite.Page.Doc.spawn"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_8" title="5. Static Methods -&gt; 5.8. UizeSite.Page.Doc.spawn">8</a>. </span>UizeSite.Page.Doc.spawn</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_9"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.9. UizeSite.Page.Doc.subclass"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_9" title="5. Static Methods -&gt; 5.9. UizeSite.Page.Doc.subclass">9</a>. </span>UizeSite.Page.Doc.subclass</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_10"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.10. UizeSite.Page.Doc.toggle"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. UizeSite.Page.Doc.toggle">10</a>. </span>UizeSite.Page.Doc.toggle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_11"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.11. UizeSite.Page.Doc.unwire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. UizeSite.Page.Doc.unwire">11</a>. </span>UizeSite.Page.Doc.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_12"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.12. UizeSite.Page.Doc.wire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_12" title="5. Static Methods -&gt; 5.12. UizeSite.Page.Doc.wire">12</a>. </span>UizeSite.Page.Doc.wire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Static Properties"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.1. UizeSite.Page.Doc.deferredLinks"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_1" title="6. Static Properties -&gt; 6.1. UizeSite.Page.Doc.deferredLinks">1</a>. </span>UizeSite.Page.Doc.deferredLinks</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.2. UizeSite.Page.Doc.isWired"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_2" title="6. Static Properties -&gt; 6.2. UizeSite.Page.Doc.isWired">2</a>. </span>UizeSite.Page.Doc.isWired</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="6_3"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.3. UizeSite.Page.Doc.linkBatchSize"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_3" title="6. Static Properties -&gt; 6.3. UizeSite.Page.Doc.linkBatchSize">3</a>. </span>UizeSite.Page.Doc.linkBatchSize</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="6_4"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.4. UizeSite.Page.Doc.moduleName"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_4" title="6. Static Properties -&gt; 6.4. UizeSite.Page.Doc.moduleName">4</a>. </span>UizeSite.Page.Doc.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="6_5"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.5. UizeSite.Page.Doc.nonInheritableStatics"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_5" title="6. Static Properties -&gt; 6.5. UizeSite.Page.Doc.nonInheritableStatics">5</a>. </span>UizeSite.Page.Doc.nonInheritableStatics</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
+	],
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

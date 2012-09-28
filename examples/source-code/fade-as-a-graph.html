@@ -126,22 +126,22 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
-    'UizeDotCom.Templates.DataBar',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
+    'UizeSite.Templates.DataBar',
     'Uize.Widget.Bar',
     'Uize.Fade',
     'Uize.Color'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+      var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
     /*** configurable values ***/
       var
         totalBars = 20,
         barProperties = {
-          html:UizeDotCom.Templates.DataBar,
+          html:UizeSite.Templates.DataBar,
           minValue:0,
           maxValue:100
         }
@@ -156,7 +156,7 @@ Uize.module ({
     /*** inside the table to hold the bars ***/
       var htmlChunks = ['&lt;table border="0" cellspacing="1" cellpadding="0" style="margin:auto;"&gt;&lt;tr&gt;'];
       for (var barNo = -1; ++barNo &lt; totalBars;) {
-        htmlChunks.push ('&lt;td&gt;' + UizeDotCom.Templates.DataBar.process ({idPrefix:'page_bar' + barNo}) + '&lt;/td&gt;');
+        htmlChunks.push ('&lt;td&gt;' + UizeSite.Templates.DataBar.process ({idPrefix:'page_bar' + barNo}) + '&lt;/td&gt;');
       }
       htmlChunks.push ('&lt;/tr&gt;&lt;/table&gt;');
       page.setNodeInnerHtml ('bars',htmlChunks.join (''));
@@ -199,10 +199,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

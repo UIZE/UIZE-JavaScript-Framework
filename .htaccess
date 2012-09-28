@@ -25,6 +25,7 @@
 		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Coupler\.html$ http://www.uize.com/$1/Uize.Util.Coupler.html
 		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Cycle\.html$ http://www.uize.com/$1/Uize.Util.Cycle.html
 		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Population\.html$ http://www.uize.com/$1/Uize.Widget.Population.html
+		RedirectMatch 301 ^(.*)/UizeDotCom\.(.*)$ http://www.uize.com/$1/UizeSite.$2
 
 		# renamed build modules
 			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Scruncher\.html$ http://www.uize.com/$1/Uize.Build.Scruncher.html

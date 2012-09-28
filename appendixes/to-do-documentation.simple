@@ -165,7 +165,7 @@ Build Process Improvements
 	- script to insert UIZE version number into all script tags that source in the Uize.js file
 	- write script to search for example files that are using ~source JS
 		- as long as they don't have a "~" at the beginning of the file name
-		- incorporate into the build sequence for the *uize.com* site
+		- incorporate into the build sequence for the UIZE Web site
 		- terminate build script if examples found, report offending examples
 	- write script to test for HTML pages with meta descriptions that are too long (more than 150 characters)
 
@@ -266,7 +266,7 @@ Upcoming Releases
 		variableA - (someCondition && variableB)     // works even if someCondition is not a boolean value
 		.........................................................
 
-- explain about layer library modules (as used by the *uize.com* Web site)
+- explain about layer library modules (as used by the UIZE Web site)
 
 Pull All Images from Zazzle...
 	- use more product images from Zazzle for slideshow widgets and such
@@ -400,13 +400,13 @@ Explainer: JavaScript Libraries
 	- feedback from Ben
 		I read over the JavaScript Library Documentation and here are my suggestions:
 
-		- I like the metaphor in the 1. Introduction section.  When talking about the performance benefit of the libraries maybe using an actual real example (maybe the UizeDotCom.Page.Doc.library.js file?) of what the savings look like of one request versus many requests.
+		- I like the metaphor in the 1. Introduction section.  When talking about the performance benefit of the libraries maybe using an actual real example (maybe the UizeSite.Page.Doc.library.js file?) of what the savings look like of one request versus many requests.
 
 		- In the 2. Where They Live section, I think it'd be helpful to actually list where the default JavaScript modules folder is (both the source and built versions) just so someone reading can know exactly what you're referring to.
 
 		- In the 3.1.2.3. Don't Require List Modules I understand what you're getting at in the paragraph about not requiring the modules so the onus is on the modules that actually need those modules to require them properly. I think what's confusing is that if you don't know how the framework works in "source-mode" (i.e. all the modules are loaded dynamically) then the paragraph seems pretty confusing.  I think either it needs some examples of what you're trying to explain or at least a reference to the explainer section that talks about the source-mode module loading
 
-		- In 3.2 The Built Version I think you may want to play up the performance benefits mention in 1. Introduction about saving http requests because that's when the benefits come in (in the built version).  Maybe here is where you can do an analysis using the UizeDotCom page widget library file (if not in the intro)
+		- In 3.2 The Built Version I think you may want to play up the performance benefits mention in 1. Introduction about saving http requests because that's when the benefits come in (in the built version).  Maybe here is where you can do an analysis using the UizeSite page widget library file (if not in the intro)
 
 		- In 4. How To use Them it seems to me that the example in 4.1 Sourcing the Source Version looks the same as the example in 4.2 Source in the Built Version.  This also got me thinking.  In Zazzle we have a function that listens to a config entry as to whether to use the source JS.  How does Uize.com (or any other site for that matter) determine which version to use?  Most likely people will just copy what they developed locally to their website.  Maybe a suggestion on how to implement that in the Build Scripts explainer (I did a cursory search and didn't find anything) would help
 

@@ -192,15 +192,15 @@ document.writeln (styleTag);
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
     'Uize.Widget.SegmentDisplay.Seven',
     'Uize.Templates.SevenSegmentDisplay',
     'Uize.Date.Formatter'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ();
+      var page = window.page = UizeSite.Page.Example ();
 
     /*** add the segment display widgets for the hours, minutes, and seconds ***/
       var digits = {hoursTens:0,hoursOnes:1,minutesTens:2,minutesOnes:3,secondsTens:4,secondsOnes:5};
@@ -241,10 +241,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

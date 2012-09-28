@@ -63,15 +63,15 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
     'Uize.Widget.SlideShow',
-    'UizeDotCom.TestDataPhotos',
-    'UizeDotCom.Templates.SlideShow.Basic'
+    'UizeSite.TestDataPhotos',
+    'UizeSite.Templates.SlideShow.Basic'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ();
+      var page = window.page = UizeSite.Page.Example ();
 
     /*** add the slide show child widget ***/
       page.addChild (
@@ -79,10 +79,10 @@ Uize.module ({
         Uize.Widget.SlideShow,
         {
           built:false,
-          html:UizeDotCom.Templates.SlideShow.Basic,
+          html:UizeSite.Templates.SlideShow.Basic,
           width:500,
           height:357,
-          slides:UizeDotCom.TestDataPhotos ()
+          slides:UizeSite.TestDataPhotos ()
         }
       );
 
@@ -103,10 +103,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

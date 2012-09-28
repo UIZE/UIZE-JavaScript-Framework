@@ -771,7 +771,7 @@
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>as long as they don't have a "~" at the beginning of the file name</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>incorporate into the build sequence for the <b>uize.com</b> site</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>incorporate into the build sequence for the UIZE Web site</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>terminate build script if examples found, report offending examples</td></tr>
 			</table>
 		</div>
@@ -930,7 +930,7 @@ variableA - (someCondition &amp;&amp; variableB)     // works even if someCondit
 	</div>
 	
 	<table class="list">
-	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>explain about layer library modules (as used by the <b>uize.com</b> Web site)</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>explain about layer library modules (as used by the UIZE Web site)</td></tr>
 	</table>
 	<a name="14"></a>
 	<h1 class="heading1" title="14. Pull All Images from Zazzle..."><span class="headingNumber"><a href="#14" title="14. Pull All Images from Zazzle...">14</a>. </span>Pull All Images from Zazzle...</h1>
@@ -1227,10 +1227,10 @@ Uize.Widget
 			<p>I read over the JavaScript Library Documentation and here are my suggestions:</p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>I like the metaphor in the 1. Introduction section.  When talking about the performance benefit of the libraries maybe using an actual real example (maybe the UizeDotCom.Page.Doc.library.js file?) of what the savings look like of one request versus many requests.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>I like the metaphor in the 1. Introduction section.  When talking about the performance benefit of the libraries maybe using an actual real example (maybe the UizeSite.Page.Doc.library.js file?) of what the savings look like of one request versus many requests.</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In the 2. Where They Live section, I think it'd be helpful to actually list where the default JavaScript modules folder is (both the source and built versions) just so someone reading can know exactly what you're referring to.</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In the 3.1.2.3. Don't Require List Modules I understand what you're getting at in the paragraph about not requiring the modules so the onus is on the modules that actually need those modules to require them properly. I think what's confusing is that if you don't know how the framework works in "source-mode" (i.e. all the modules are loaded dynamically) then the paragraph seems pretty confusing.  I think either it needs some examples of what you're trying to explain or at least a reference to the explainer section that talks about the source-mode module loading</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In 3.2 The Built Version I think you may want to play up the performance benefits mention in 1. Introduction about saving http requests because that's when the benefits come in (in the built version).  Maybe here is where you can do an analysis using the UizeDotCom page widget library file (if not in the intro)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In 3.2 The Built Version I think you may want to play up the performance benefits mention in 1. Introduction about saving http requests because that's when the benefits come in (in the built version).  Maybe here is where you can do an analysis using the UizeSite page widget library file (if not in the intro)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In 4. How To use Them it seems to me that the example in 4.1 Sourcing the Source Version looks the same as the example in 4.2 Source in the Built Version.  This also got me thinking.  In Zazzle we have a function that listens to a config entry as to whether to use the source JS.  How does Uize.com (or any other site for that matter) determine which version to use?  Most likely people will just copy what they developed locally to their website.  Maybe a suggestion on how to implement that in the Build Scripts explainer (I did a cursory search and didn't find anything) would help</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>It seems that the paragraph in 4.3 Requiring a JavaScript Library sort of explains what I was just talking about, although I still don't see how the module loading mechanism knows to use the built version of the modules.  Is that because the script tag sourcing of the Uize.js module would be changed to point to the built version (and thus the module loading mechanism knows where to find the rest)?</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>I think an example of what you mean in 7.1. Pages Should Always Work Without Libraries would be nice</td></tr>
@@ -2031,10 +2031,10 @@ _lastValue = _param;
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

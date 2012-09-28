@@ -162,15 +162,15 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
 		'Uize.Node.Form',
-		'UizeDotCom.TestDataObject'
+		'UizeSite.TestDataObject'
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** add the tabs child widget ***/
 			var tabs = page.addChild (
@@ -235,7 +235,7 @@ Uize.module ({
 				tabs.set ({value:'serialized'});
 			}
 			function resetTestData () {
-				page.setNodeValue ('sourceJson',Uize.Json.to (UizeDotCom.TestDataObject (),presets.pretty));
+				page.setNodeValue ('sourceJson',Uize.Json.to (UizeSite.TestDataObject (),presets.pretty));
 				serializeUsingCurrentSettings ();
 			}
 

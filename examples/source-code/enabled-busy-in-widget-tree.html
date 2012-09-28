@@ -81,7 +81,7 @@
   &lt;!-- explanation copy --&gt;
 
   &lt;div class="explanation"&gt;
-    &lt;p&gt;This example demonstrates how the &lt;code&gt;enabled&lt;/code&gt; and &lt;code&gt;busy&lt;/code&gt; state properties behave in a hierarchical tree of widgets. In the example, a widget tree is created from instances of a dummy &lt;a href="../reference/UizeDotCom.TestWidget.html"&gt;&lt;code&gt;UizeDotCom.TestWidget&lt;/code&gt;&lt;/a&gt; class. The root widget has two child widgets of the same class, and one of those children has a further two children of the same class. The widget exposes controls for &lt;code&gt;enabled&lt;/code&gt; and &lt;code&gt;busy&lt;/code&gt;, and provides two buttons to demonstrate the effect of different combinations of enabled and busy at different levels of the tree. Tweak the values to see how the inheritance for these properties operates.&lt;/p&gt;
+    &lt;p&gt;This example demonstrates how the &lt;code&gt;enabled&lt;/code&gt; and &lt;code&gt;busy&lt;/code&gt; state properties behave in a hierarchical tree of widgets. In the example, a widget tree is created from instances of a dummy &lt;a href="../reference/UizeSite.TestWidget.html"&gt;&lt;code&gt;UizeSite.TestWidget&lt;/code&gt;&lt;/a&gt; class. The root widget has two child widgets of the same class, and one of those children has a further two children of the same class. The widget exposes controls for &lt;code&gt;enabled&lt;/code&gt; and &lt;code&gt;busy&lt;/code&gt;, and provides two buttons to demonstrate the effect of different combinations of enabled and busy at different levels of the tree. Tweak the values to see how the inheritance for these properties operates.&lt;/p&gt;
   &lt;/div&gt;
 
   &lt;!-- HTML "wireframe" for widget tree --&gt;
@@ -109,26 +109,26 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
-    'UizeDotCom.TestWidget'
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
+    'UizeSite.TestWidget'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+      var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
     function beBusyForSomeTime () {
       testWidget.set ({busy:true});
       setTimeout (function () {testWidget.set ({busy:'inherit'})},4000);
     }
 
-    /*** add the UizeDotCom.TestWidget child widget ***/
-      UizeDotCom.TestWidget.set ({built:false});
-      var testWidget = page.addChild ('testWidget',UizeDotCom.TestWidget);
-        testWidget.addChild ('childTestWidget0',UizeDotCom.TestWidget);
-          testWidget.children.childTestWidget0.addChild ('childTestWidget0',UizeDotCom.TestWidget);
-          testWidget.children.childTestWidget0.addChild ('childTestWidget1',UizeDotCom.TestWidget);
-        testWidget.addChild ('childTestWidget1',UizeDotCom.TestWidget);
+    /*** add the UizeSite.TestWidget child widget ***/
+      UizeSite.TestWidget.set ({built:false});
+      var testWidget = page.addChild ('testWidget',UizeSite.TestWidget);
+        testWidget.addChild ('childTestWidget0',UizeSite.TestWidget);
+          testWidget.children.childTestWidget0.addChild ('childTestWidget0',UizeSite.TestWidget);
+          testWidget.children.childTestWidget0.addChild ('childTestWidget1',UizeSite.TestWidget);
+        testWidget.addChild ('childTestWidget1',UizeSite.TestWidget);
 
     /*** wire up the page widget ***/
       page.wireUi ();
@@ -147,10 +147,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

@@ -493,9 +493,9 @@ Ease Into Accelerating Twirls
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
-		'UizeDotCom.ParamsInspector.InlinePresets',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'UizeSite.ParamsInspector.InlinePresets',
 		'Uize.Curve',
 		'Uize.Curve.Rubber',
 		'Uize.Curve.Mod',
@@ -505,7 +505,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** code for positioning ghost ***/
 			function positionGhost (centerCoords) {
@@ -544,7 +544,7 @@ Uize.module ({
 			}
 			page.addChild (
 				'paramsInspector',
-				UizeDotCom.ParamsInspector.InlinePresets,
+				UizeSite.ParamsInspector.InlinePresets,
 				{
 					params:{curve:'string-multiline',duration:'integer'},
 					previewButtonText:'PREVIEW ANIMATION',

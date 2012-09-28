@@ -186,7 +186,7 @@ Uize.module({
 									) +
 									'\n' +
 									'\t\tSEARCH FOR EXAMPLES\n' +
-									'\t\tUse the link below to search for example pages on the *uize.com* Web site that reference the =' + _moduleName + '= module...\n' +
+									'\t\tUse the link below to search for example pages on the UIZE Web site that reference the =' + _moduleName + '= module...\n' +
 									'\t\t[[http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22' + _moduleName + '%22][SEARCH]]\n' +
 							'\n'
 						);

@@ -46,7 +46,7 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#3_2" title="JavaScript library files are built by the _build-scrunched.js build script into JavaScript files of the same name, but that are located in your project where scrunched JavaScript files are configured to be located (see the JavaScript Build Scripts explainer for more information).">3.2. The Built Version</a></li>
+					<li><a href="#3_2" title="JavaScript library files are built by the _Uize.Build.AutoScruncher.js build script into JavaScript files of the same name, but that are located in your project where scrunched JavaScript files are configured to be located (see the JavaScript Build Scripts explainer for more information).">3.2. The Built Version</a></li>
 					<li><a href="#3_3" title="To deliver the best performance for your pages, a library file can include all of the JavaScript modules needed by the page, or at least the complete set of modules required by one or more of the classes used in the page (such as the page widget class, for example).">3.3. What to Include</a>
 						<ul>
 							<li><a href="#3_3_1" title="The modules included should be listed in the correct order of dependency, otherwise some modules included in the library may actually be dynamically loaded, producing sub-optimal results (see Incorrect Ordering of Modules for more details).">3.3.1. Use the Correct Dependency Order</a></li>
@@ -67,13 +67,13 @@
 					<li><a href="#4_3" title="Another way to load in a JavaScript library file is to require it as a module.">4.3. Requiring a JavaScript Library Module</a></li>
 				</ul>
 			</li>
-			<li><a href="#5" title="The source versions of JavaScript library files are built by running the _build-scrunched.js build script (see the JavaScript Build Scripts explainer for more information).">5. Building Them</a>
+			<li><a href="#5" title="The source versions of JavaScript library files are built by running the _Uize.Build.AutoScruncher.js build script (see the JavaScript Build Scripts explainer for more information).">5. Building Them</a>
 				<ul>
-					<li><a href="#5_1" title="The _build-scrunched.js build script first builds all the scrunched versions of JavaScript modules it finds in the source folder for JavaScript modules.">5.1. Modules Scrunched, Then Libraries Built</a></li>
-					<li><a href="#5_2" title="Library files are built every time the _build-scrunched.js build script is run, since any of the JavaScript modules listed in a library file may have changed since the last time a particular library was built.">5.2. Libraries Always Built</a></li>
+					<li><a href="#5_1" title="The _Uize.Build.AutoScruncher.js build script first builds all the scrunched versions of JavaScript modules it finds in the source folder for JavaScript modules.">5.1. Modules Scrunched, Then Libraries Built</a></li>
+					<li><a href="#5_2" title="Library files are built every time the _Uize.Build.AutoScruncher.js build script is run, since any of the JavaScript modules listed in a library file may have changed since the last time a particular library was built.">5.2. Libraries Always Built</a></li>
 				</ul>
 			</li>
-			<li><a href="#6" title="For some &quot;living and breathing&quot;, real world examples of JavaScript libraries in action, take a look at the library files used by the uize.com Web site.">6. Real World Examples</a></li>
+			<li><a href="#6" title="For some &quot;living and breathing&quot;, real world examples of JavaScript libraries in action, take a look at the library files used by the UIZE Web site.">6. Real World Examples</a></li>
 			<li><a href="#7">7. Important Considerations</a>
 				<ul>
 					<li><a href="#7_1" title="It is important to stress that library files are an optimization for pages, and pages should always work without them being used.">7.1. Pages Should Always Work Without Libraries</a></li>
@@ -138,15 +138,15 @@
   Uize.Widget.Page
   Uize.Widget.Tree
   Uize.Widget.Tree.List
-  UizeDotCom
-  UizeDotCom.Page
-  UizeDotCom.Page.Doc
+  UizeSite
+  UizeSite.Page
+  UizeSite.Page.Doc
 */
 
-Uize.module ({name:'UizeDotCom.Page.Doc.library'});
+Uize.module ({name:'UizeSite.Page.Doc.library'});
 </pre>
 				
-				<p>The above example shows the contents of the source version of the library file <code>UizeDotCom.Page.Doc.library.js</code>.</p>
+				<p>The above example shows the contents of the source version of the library file <code>UizeSite.Page.Doc.library.js</code>.</p>
 				
 				<a name="3_1_1_1"></a>
 				<h4 class="heading4" title="3. What They Look Like -&gt; 3.1. The Source Version -&gt; 3.1.1. Library Contents -&gt; 3.1.1.1. Comments and Indentation Inside the Library Contents Comment"><span class="headingNumber"><a href="#3" title="3. What They Look Like">3</a>.<a href="#3_1" title="3. What They Look Like -&gt; 3.1. The Source Version">1</a>.<a href="#3_1_1" title="3. What They Look Like -&gt; 3.1. The Source Version -&gt; 3.1.1. Library Contents">1</a>.<a href="#3_1_1_1" title="3. What They Look Like -&gt; 3.1. The Source Version -&gt; 3.1.1. Library Contents -&gt; 3.1.1.1. Comments and Indentation Inside the Library Contents Comment">1</a>. </span>Comments and Indentation Inside the Library Contents Comment</h4>
@@ -172,10 +172,10 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
   Uize.Widget.Tree
   Uize.Widget.Tree.List
   : THIS LINE IS A COMMENT AND WILL BE IGNORED
-  UizeDotCom
-  UizeDotCom.Page
+  UizeSite
+  UizeSite.Page
   &gt; THIS LINE IS A COMMENT AND WILL BE IGNORED
-  UizeDotCom.Page.Doc
+  UizeSite.Page.Doc
 */
 </pre>
 					
@@ -185,15 +185,15 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 					
 					
 <pre class="sample-code">/* Library Contents
-  // Modules required (directly AND indirectly) by UizeDotCom.WidgetToGoPage
-    UizeDotCom
+  // Modules required (directly AND indirectly) by UizeSite.WidgetToGoPage
+    UizeSite
     Uize.Class
     Uize.Node
     Uize.Widget
     Uize.Widget.Page
-    UizeDotCom.Templates
-    UizeDotCom.Templates.WidgetToGoTitle
-    UizeDotCom.WidgetToGoPage
+    UizeSite.Templates
+    UizeSite.Templates.WidgetToGoTitle
+    UizeSite.WidgetToGoPage
 
   // Modules with a high likelihood of being needed by one widget or another
     Uize.Node.Event
@@ -261,7 +261,7 @@ Uize.module ({name:'MyNamespace.MyLibraryName.library'});
 				<div class="contents4">
 					<p>When creating a library specifically to bundle all the JavaScript modules needed by a page widget class, a convention that can be used is to use the module name of the page widget class as the namespace for the library module.</p>
 					
-					<p>So, for example, the library module <code><a href="../reference/UizeDotCom.Page.Doc.library.html">UizeDotCom.Page.Doc.library</a></code> bundles all the JavaScript modules required by the <code><a href="../reference/UizeDotCom.Page.Doc.html">UizeDotCom.Page.Doc</a></code> page widget class, so one can count on the <code><a href="../reference/UizeDotCom.Page.Doc.html">UizeDotCom.Page.Doc</a></code> namespace existing when the module declaration for the library module is encountered. Similarly, a library module for the page widget base class could be named <code>Uize.Widget.Page.library</code>, since it would bundle all modules required by the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> module.</p>
+					<p>So, for example, the library module <code><a href="../reference/UizeSite.Page.Doc.library.html">UizeSite.Page.Doc.library</a></code> bundles all the JavaScript modules required by the <code><a href="../reference/UizeSite.Page.Doc.html">UizeSite.Page.Doc</a></code> page widget class, so one can count on the <code><a href="../reference/UizeSite.Page.Doc.html">UizeSite.Page.Doc</a></code> namespace existing when the module declaration for the library module is encountered. Similarly, a library module for the page widget base class could be named <code>Uize.Widget.Page.library</code>, since it would bundle all modules required by the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> module.</p>
 				</div>
 				
 				<a name="3_1_2_3"></a>
@@ -297,7 +297,7 @@ Uize.module ({
 		<a name="3_2"></a>
 		<h2 class="heading2" title="3. What They Look Like -&gt; 3.2. The Built Version"><span class="headingNumber"><a href="#3" title="3. What They Look Like">3</a>.<a href="#3_2" title="3. What They Look Like -&gt; 3.2. The Built Version">2</a>. </span>The Built Version</h2>
 		<div class="contents2">
-			<p>JavaScript library files are built by the <code>_build-scrunched.js</code> build script into JavaScript files of the same name, but that are located in your project where scrunched JavaScript files are configured to be located (see the <a href="javascript-build-scripts.html">JavaScript Build Scripts</a> explainer for more information).</p>
+			<p>JavaScript library files are built by the <code>_Uize.Build.AutoScruncher.js</code> build script into JavaScript files of the same name, but that are located in your project where scrunched JavaScript files are configured to be located (see the <a href="javascript-build-scripts.html">JavaScript Build Scripts</a> explainer for more information).</p>
 			
 			<p>When a library file is built, the <a href="#3_1_1">Library Contents</a> comment that lists the contents of the library will be replaced with the actual code for the scrunched versions of all the modules listed in the comment - bundled into the built library in the order in which they are listed in the comment. <a href="#3_1_1_1">Comments and Indentation Inside the Library Contents Comment</a> are ignored. All other code inside the library file - such as a module namespace declaration for the library, for example - will remain unaltered in the built file.</p>
 		</div>
@@ -333,8 +333,8 @@ Uize.module ({
 &lt;script type="text/javascript"&gt;
   Uize.moduleUrlTemplate = 'js/[#modulePath]';
   Uize.module ({
-    required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+    required:'UizeSite.Page.Doc',
+    builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -371,15 +371,15 @@ Uize.module ({name:'Uize.Widget.Page.library'});
   Uize.Tooltip
   Uize.Widget.Tree
   Uize.Widget.Tree.List
-  UizeDotCom
-  UizeDotCom.Page
-  UizeDotCom.Page.Doc
+  UizeSite
+  UizeSite.Page
+  UizeSite.Page.Doc
 */
 
-Uize.module ({name:'UizeDotCom.Page.Doc.library'});
+Uize.module ({name:'UizeSite.Page.Doc.library'});
 </pre>
 				
-				<p>In the above example, while the definition of the <code>Uize.Widget.Page.library.js</code> library file is perfectly ok, the definition here for the <code>UizeDotCom.Page.Doc.library.js</code> library file will not guarantee correct results, since the <code>Uize.Widget.Page.library.js</code> library file may not be built or up-to-date at the time that the <code>UizeDotCom.Page.Doc.library.js</code> library file gets built.</p>
+				<p>In the above example, while the definition of the <code>Uize.Widget.Page.library.js</code> library file is perfectly ok, the definition here for the <code>UizeSite.Page.Doc.library.js</code> library file will not guarantee correct results, since the <code>Uize.Widget.Page.library.js</code> library file may not be built or up-to-date at the time that the <code>UizeSite.Page.Doc.library.js</code> library file gets built.</p>
 			</div>
 		</div>
 	</div>
@@ -400,12 +400,12 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">&lt;script src="js/Uize.js"&gt;&lt;/script&gt;
-&lt;script src="js/UizeDotCom.Page.Doc.library.js"&gt;&lt;/script&gt;
+&lt;script src="js/UizeSite.Page.Doc.library.js"&gt;&lt;/script&gt;
 
 &lt;script type="text/javascript"&gt;
   Uize.module ({
-    required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+    required:'UizeSite.Page.Doc',
+    builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -422,12 +422,12 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">&lt;script src="js/Uize.js"&gt;&lt;/script&gt;
-&lt;script src="js/UizeDotCom.Page.Doc.library.js"&gt;&lt;/script&gt;
+&lt;script src="js/UizeSite.Page.Doc.library.js"&gt;&lt;/script&gt;
 
 &lt;script type="text/javascript"&gt;
   Uize.module ({
-    required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+    required:'UizeSite.Page.Doc',
+    builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -450,10 +450,10 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 &lt;script type="text/javascript"&gt;
   Uize.module ({
     required:[
-      'UizeDotCom.Page.Doc.library',
-      'UizeDotCom.Page.Doc'
+      'UizeSite.Page.Doc.library',
+      'UizeSite.Page.Doc'
     ],
-    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+    builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -465,12 +465,12 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 	<a name="5"></a>
 	<h1 class="heading1" title="5. Building Them"><span class="headingNumber"><a href="#5" title="5. Building Them">5</a>. </span>Building Them</h1>
 	<div class="contents1">
-		<p>The source versions of JavaScript library files are built by running the <code>_build-scrunched.js</code> build script (see the <a href="javascript-build-scripts.html">JavaScript Build Scripts</a> explainer for more information).</p>
+		<p>The source versions of JavaScript library files are built by running the <code>_Uize.Build.AutoScruncher.js</code> build script (see the <a href="javascript-build-scripts.html">JavaScript Build Scripts</a> explainer for more information).</p>
 		
 		<a name="5_1"></a>
 		<h2 class="heading2" title="5. Building Them -&gt; 5.1. Modules Scrunched, Then Libraries Built"><span class="headingNumber"><a href="#5" title="5. Building Them">5</a>.<a href="#5_1" title="5. Building Them -&gt; 5.1. Modules Scrunched, Then Libraries Built">1</a>. </span>Modules Scrunched, Then Libraries Built</h2>
 		<div class="contents2">
-			<p>The <code>_build-scrunched.js</code> build script first builds all the scrunched versions of JavaScript modules it finds in the source folder for JavaScript modules.</p>
+			<p>The <code>_Uize.Build.AutoScruncher.js</code> build script first builds all the scrunched versions of JavaScript modules it finds in the source folder for JavaScript modules.</p>
 			
 			<p>After building all the scrunched modules, it then iterates through all the folders of the Web site project, finding and building all source versions of <code>.library.js</code> files. Source versions are distinguished from built versions, according to the configuration of the Build Environment Variables (once again, see the <a href="javascript-build-scripts.html">JavaScript Build Scripts</a> explainer for more information).</p>
 		</div>
@@ -478,16 +478,16 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 		<a name="5_2"></a>
 		<h2 class="heading2" title="5. Building Them -&gt; 5.2. Libraries Always Built"><span class="headingNumber"><a href="#5" title="5. Building Them">5</a>.<a href="#5_2" title="5. Building Them -&gt; 5.2. Libraries Always Built">2</a>. </span>Libraries Always Built</h2>
 		<div class="contents2">
-			<p>Library files are built every time the <code>_build-scrunched.js</code> build script is run, since any of the JavaScript modules listed in a library file may have changed since the last time a particular library was built.</p>
+			<p>Library files are built every time the <code>_Uize.Build.AutoScruncher.js</code> build script is run, since any of the JavaScript modules listed in a library file may have changed since the last time a particular library was built.</p>
 		</div>
 	</div>
 	
 	<a name="6"></a>
 	<h1 class="heading1" title="6. Real World Examples"><span class="headingNumber"><a href="#6" title="6. Real World Examples">6</a>. </span>Real World Examples</h1>
 	<div class="contents1">
-		<p>For some "living and breathing", real world examples of JavaScript libraries in action, take a look at the library files used by the <b>uize.com</b> Web site.</p>
+		<p>For some "living and breathing", real world examples of JavaScript libraries in action, take a look at the library files used by the UIZE Web site.</p>
 		
-		<p>If you've already <a href="../download.html">downloaded</a> the UIZE JavaScript Framework and followed the instructions in the <a href="getting-started.html">Getting Started With UIZE</a> guide, then you can take a peek inside the <code>UIZE-JavaScript-Framework/js/~source</code> folder and look at the contents of the library files, like <code>UizeDotCom.Page.Doc.library.js</code>, <code>UizeDotCom.Page.Example.library.js</code>, etc.</p>
+		<p>If you've already <a href="../download.html">downloaded</a> the UIZE JavaScript Framework and followed the instructions in the <a href="getting-started.html">Getting Started With UIZE</a> guide, then you can take a peek inside the <code>UIZE-JavaScript-Framework/js/~source</code> folder and look at the contents of the library files, like <code>UizeSite.Page.Doc.library.js</code>, <code>UizeSite.Page.Example.library.js</code>, etc.</p>
 	</div>
 	
 	<a name="7"></a>
@@ -620,9 +620,9 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
   Uize.Widget.Page
   Uize.Widget.Tree
   Uize.Widget.Tree.List
-  UizeDotCom
-  UizeDotCom.Page
-  UizeDotCom.Page.Doc
+  UizeSite
+  UizeSite.Page
+  UizeSite.Page.Doc
 */
 </pre>
 			
@@ -637,10 +637,10 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

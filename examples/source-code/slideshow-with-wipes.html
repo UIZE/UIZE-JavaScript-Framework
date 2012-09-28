@@ -63,17 +63,17 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
     'Uize.Widget.ImageWipe.xPresets',
     'Uize.Widget.SlideShow',
     'Uize.Array.Order',
-    'UizeDotCom.TestDataPhotos',
-    'UizeDotCom.Templates.SlideShow.Wipes'
+    'UizeSite.TestDataPhotos',
+    'UizeSite.Templates.SlideShow.Wipes'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ();
+      var page = window.page = UizeSite.Page.Example ();
 
     /*** add the slide show child widget ***/
       var slideShow = page.addChild (
@@ -81,10 +81,10 @@ Uize.module ({
         Uize.Widget.SlideShow,
         {
           built:false,
-          html:UizeDotCom.Templates.SlideShow.Wipes,
+          html:UizeSite.Templates.SlideShow.Wipes,
           width:500,
           height:357,
-          slides:UizeDotCom.TestDataPhotos ()
+          slides:UizeSite.TestDataPhotos ()
         }
       );
 
@@ -125,10 +125,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

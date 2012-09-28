@@ -487,8 +487,9 @@
 		</div>
 	</div>
 
-	<div class="pod podNews">		<a href="latest-news.html" class="podHeading">News - 2012-09-15</a>
+	<div class="pod podNews">		<a href="latest-news.html" class="podHeading">News - 2012-09-23</a>
 		<ul>
+			<li>The UizeDotCom namespace has been renamed to simply UizeSite in order to make it TLD (Top Level Domain) agnostic. [<a href="news/2012-09-23-UizeDotCom-Namespace-Renamed-to-UizeSite.html">read more</a>]</li>
 			<li>Support for conditions in UIZE has been improved with the addition of support for compound conditions in the once instance method of the Uize.Class module. [<a href="news/2012-09-15-Improved-Support-for-Conditions.html">read more</a>]</li>
 			<li>The module mechanism of the UIZE JavaScript Framework has been improved with the addition of support for parallel ascynchronous loading of required modules and the new Uize.require static method. [<a href="news/2012-09-03-Improved-Module-Mechanism.html">read more</a>]</li>
 			<li>Set-get properties, a core system of the UIZE JavaScript Framework, has been renamed to &quot;state properties&quot;. [<a href="news/2012-08-18-Set-get-Properties-Become-State-Properties.html">read more</a>]</li>
@@ -497,8 +498,7 @@
 			<li>The new is instance method, implemented in the Uize.Class base class module, provides a semantically elegant way to test if the value of an instance&apos;s state property is truthy. [<a href="news/2012-08-05-New-is-Instance-Method-for-Classes.html">read more</a>]</li>
 			<li>Setting of state properties has been improved with convenient new variations for the set instance method and the Uize.Class.set static method, implemented in the Uize.Class base class module. [<a href="news/2012-08-04-Improved-Setting-of-State-Properties.html">read more</a>]</li>
 			<li>The Uize.Class module, that implements the class mechanism for the UIZE JavaScript Framework, has been improved with the addition of a once instance method for state properties. [<a href="news/2012-07-22-New-once-Instance-Method-for-Classes.html">read more</a>]</li>
-			<li>Various build scripts used for building the UIZE project and the uize.com Web site have been migrated. [<a href="news/2012-07-08-Build-Script-Modules-Migrated.html">read more</a>]</li>
-			<li>With a recent improvement in the auto scruncher (implemented in the Uize.Build.AutoScruncher module), it is no longer necessary to specify unique mappings for scrunched identifier names in a ScruncherSettings comment in source files. [<a href="news/2012-07-07-Auto-Derived-Scruncher-Mappings.html">read more</a>]</li>
+			<li>Various build scripts used for building the UIZE project and the UIZE Web site have been migrated. [<a href="news/2012-07-08-Build-Script-Modules-Migrated.html">read more</a>]</li>
 		</ul>
 		<center>
 			<a href="latest-news.html" style="font-weight:bold; font-size:12px; padding-right:16px; background:transparent url(js/Uize_Widget_Tree_List/arrows-orange-collapsed.gif) no-repeat right center;">MORE LATEST NEWS</a>
@@ -514,10 +514,10 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Home.library',
-		'UizeDotCom.Page.Home'
+		'UizeSite.Page.Home.library',
+		'UizeSite.Page.Home'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Home ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Home ()).wireUi ()}
 });
 
 </script>

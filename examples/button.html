@@ -63,15 +63,15 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
 		'Uize.Widget.Button',
 		'Uize.Widget.Log.InstanceEvents',
 		'Uize.Templates.Log'
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
 		/*** create the Uize.Widget.Button instance ***/
 			var button = page.addChild ('button',Uize.Widget.Button);

@@ -71,17 +71,17 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
     'Uize.Widget.Collection.Dynamic',
     'Uize.Widget.CollectionItem',
     'Uize.Templates.Collection',
     'Uize.Templates.CollectionItem',
-    'UizeDotCom.TestDataPhotos'
+    'UizeSite.TestDataPhotos'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ();
+      var page = window.page = UizeSite.Page.Example ();
 
     /*** add the Uize.Widget.Bar.Slider child widget ***/
       var collection = page.addChild (
@@ -117,7 +117,7 @@ Uize.module ({
     /*** add initial items ***/
       var
         items = [],
-        photos = UizeDotCom.TestDataPhotos ()
+        photos = UizeSite.TestDataPhotos ()
       ;
       for (var photoNo = -1, photosLength = photos.length; ++photoNo &lt; photosLength;) {
         var photo = photos [photoNo];
@@ -142,10 +142,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

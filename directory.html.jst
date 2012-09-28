@@ -1,6 +1,6 @@
 <%
 	@required ([
-		'UizeDotCom.SiteMap',
+		'UizeSite.SiteMap',
 		'Uize.Templates.List'
 	])
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -27,16 +27,16 @@
 <div class="main">
 	<div class="preamble">This document provides a directory / site map for the UIZE JavaScript Framework.</div>
 	<div id="page_contents" class="contents-tree-shell">
-<%= Uize.Templates.List.process ({items:[{title:'Site Map',items:UizeDotCom.SiteMap ()}]}) %>
+<%= Uize.Templates.List.process ({items:[{title:'Site Map',items:UizeSite.SiteMap ()}]}) %>
 	</div>
 </div>
 
 <script type="text/javascript">
 
 Uize.module ({
-	required:'UizeDotCom.Page.Doc.library',
+	required:'UizeSite.Page.Doc.library',
 	builder:function () {
-		(window.page = UizeDotCom.Page.Doc ()).wireUi ();
+		(window.page = UizeSite.Page.Doc ()).wireUi ();
 
 		page.children.contents.collapseAllBut (['Site Map','Examples']);
 	}

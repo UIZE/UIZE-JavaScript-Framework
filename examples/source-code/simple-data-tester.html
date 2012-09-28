@@ -148,14 +148,14 @@ Alternate Array Representations
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example',
     'Uize.Widget.Options.Tabbed',
     'Uize.Data.Simple',
     'Uize.Json'
   ],
   builder:function () {
     /*** create a page widget subclass ***/
-      var CustomPageWidget = UizeDotCom.Page.Example.subclass ();
+      var CustomPageWidget = UizeSite.Page.Example.subclass ();
 
       /*** add property for managing update of converted HTML and preview ***/
         CustomPageWidget.registerProperties ({
@@ -214,10 +214,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

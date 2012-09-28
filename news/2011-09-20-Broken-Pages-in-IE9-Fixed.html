@@ -3,7 +3,7 @@
 <head>
 	<title>2011-09-20 - Broken Pages in IE9 Fixed | News | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework News "/>
-	<meta name="description" content="An issue that was breaking pages of the uize.com Web site in IE9 has been fixed."/>
+	<meta name="description" content="An issue that was breaking pages of the UIZE Web site in IE9 has been fixed."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -23,11 +23,11 @@
 
 <div class="main">
 <div class="contents0">
-	<p>An issue that was breaking pages of the <b>uize.com</b> Web site in IE9 has been fixed.</p>
+	<p>An issue that was breaking pages of the UIZE Web site in IE9 has been fixed.</p>
 	
-	<p>Testing in Microsoft Internet Explorer 9 revealed an issue that was breaking pages in the <b>uize.com</b> Web site, including reference pages, explainers, and example pages. This problem was first pointed out by Tim Carter (thanks for the find, Tim). The issue related to the "share this" panel that hugs the left side of pages and that uses an opacity animation effect. This effect was ultimately relying on the <code>Uize.Node.getStyle</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module, and this method was tracked down as being the culprit in the breakage. The method broke as a result of a change in behavior in IE9.</p>
+	<p>Testing in Microsoft Internet Explorer 9 revealed an issue that was breaking pages in the UIZE Web site, including reference pages, explainers, and example pages. This problem was first pointed out by Tim Carter (thanks for the find, Tim). The issue related to the "share this" panel that hugs the left side of pages and that uses an opacity animation effect. This effect was ultimately relying on the <code>Uize.Node.getStyle</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module, and this method was tracked down as being the culprit in the breakage. The method broke as a result of a change in behavior in IE9.</p>
 	
-	<p>The <code>Uize.Node.getStyle</code> method has been updated to handle the new behavior in IE9 and pages of the <b>uize.com</b> site now function with all their interactivity. The opacity animation of the "share this" panel is still wonky in IE9, and this will be fixed in an upcoming update.</p>
+	<p>The <code>Uize.Node.getStyle</code> method has been updated to handle the new behavior in IE9 and pages of the UIZE Web site now function with all their interactivity. The opacity animation of the "share this" panel is still wonky in IE9, and this will be fixed in an upcoming update.</p>
 </div>
 
 </div>
@@ -36,10 +36,10 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

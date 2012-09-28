@@ -143,7 +143,7 @@ Example Page Requirements
 		Avoid Horizontal Scrolling
 			On a 1024x768 display with the browser maximized, an example page should never require horizontal scrolling.
 
-			The styling of the *uize.com* Web site imposes a maximum width of =780= pixels on the main content area for all pages, including example pages. The `Main Layout` for an example should be designed to fit within that width.
+			The styling of the UIZE Web site imposes a maximum width of =780= pixels on the main content area for all pages, including example pages. The `Main Layout` for an example should be designed to fit within that width.
 
 		Avoid Vertical Scrolling, Where Possible
 			On a 1024x768 display with the browser maximized, an example page should ideally not require vertical scrolling.

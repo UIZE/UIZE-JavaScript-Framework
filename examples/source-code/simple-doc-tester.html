@@ -82,10 +82,10 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example',
+    'UizeSite.Page.Example',
     'Uize.Widget.Options.Tabbed',
     'Uize.Doc.Simple',
-    'UizeDotCom.Templates.SimpleDocSample',
+    'UizeSite.Templates.SimpleDocSample',
     'Uize.Templates.SimpleDoc'
   ],
   builder:function () {
@@ -94,7 +94,7 @@ Uize.module ({
       - in IE, fix problem of JS not loading correctly (lack of base tag?)
     */
     /*** create a page widget subclass ***/
-      var CustomPageWidget = UizeDotCom.Page.Example.subclass ();
+      var CustomPageWidget = UizeSite.Page.Example.subclass ();
 
       /*** add property for managing update of converted HTML and preview ***/
         CustomPageWidget.registerProperties ({
@@ -147,7 +147,7 @@ Uize.module ({
       page.wireUi ();
 
     /*** initialize sample data ***/
-      page.setNodeValue ('simpleDocSource',UizeDotCom.Templates.SimpleDocSample.process ());
+      page.setNodeValue ('simpleDocSource',UizeSite.Templates.SimpleDocSample.process ());
   }
 });
 
@@ -162,10 +162,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

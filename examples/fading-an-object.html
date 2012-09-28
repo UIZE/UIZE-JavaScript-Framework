@@ -73,15 +73,15 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
 		'Uize.Json',
 		'Uize.Fade',
 		'Uize.Color'
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		function setNodeBgColorFromRgb (impliedNode,rgb) {
 			page.setNodeStyle (impliedNode,{backgroundColor:Uize.Color.to (rgb,'RGB string')});

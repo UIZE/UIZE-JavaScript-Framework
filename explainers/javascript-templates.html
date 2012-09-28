@@ -475,7 +475,7 @@
 				
 				
 <pre class="sample-code">&lt;%@ input ({idPrefix:'string'}) %&gt;
-&lt;%@ required ('UizeDotCom.Templates.Dialog') %&gt;
+&lt;%@ required ('UizeSite.Templates.Dialog') %&gt;
 &lt;%@ startBlock ('dialogContents') %&gt;
   &lt;p&gt;
     Renewable energy is energy generated from natural resources
@@ -487,14 +487,14 @@
   &lt;/p&gt;
 &lt;%@ endBlock () %&gt;
 &lt;%=
-  UizeDotCom.Templates.Dialog.process ({
+  UizeSite.Templates.Dialog.process ({
     idPrefix:input.idPrefix,
     contents:dialogContents ()}
   )
 %&gt;
 </pre>
 				
-				<p>In the above example, the <code>dialogContents</code> block is being used to generate contents for a dialog. The output of the block is passed to the <code>process</code> method of the compiled <code><a href="../reference/UizeDotCom.Templates.Dialog.html">UizeDotCom.Templates.Dialog</a></code> template in the <code>contents</code> property of its input. The result of calling the <code>process</code> method is then assigned to the template's output. This provides a means for a template to use other templates in its implementation, where those other templates can essentially define content placeholders, and where the template that use them can then build the contents for those content placeholders using block directives.</p>
+				<p>In the above example, the <code>dialogContents</code> block is being used to generate contents for a dialog. The output of the block is passed to the <code>process</code> method of the compiled <code><a href="../reference/UizeSite.Templates.Dialog.html">UizeSite.Templates.Dialog</a></code> template in the <code>contents</code> property of its input. The result of calling the <code>process</code> method is then assigned to the template's output. This provides a means for a template to use other templates in its implementation, where those other templates can essentially define content placeholders, and where the template that use them can then build the contents for those content placeholders using block directives.</p>
 			</div>
 		</div>
 		
@@ -691,10 +691,10 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

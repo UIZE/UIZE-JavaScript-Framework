@@ -171,7 +171,7 @@ Update Header Comments
 	Module Meta Data Comment
 		The module meta data comment is required for all UIZE modules and contains meta data information that is used on the [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page.
 
-		The meta data contained in the module meta data comments of all UIZE JavaScript modules is scooped up by the =_uize-site-build-sotu.js= build script when it iterates through all the module files. This data is then presented on the State of the UIZE page in a sortable table. This information can then be used by UIZE framework developers to get a big picture view of where things stand with the framework, and can help in determining where development effort should be directed.
+		The meta data contained in the module meta data comments of all UIZE JavaScript modules is scooped up by the =_UizeSite.Build.BuildSotu.js= build script when it iterates through all the module files. This data is then presented on the State of the UIZE page in a sortable table. This information can then be used by UIZE framework developers to get a big picture view of where things stand with the framework, and can help in determining where development effort should be directed.
 
 		The module meta data comment has the following syntax...
 
@@ -241,7 +241,7 @@ Update Header Comments
 		Module Meta Data in JavaScript Template Modules
 			Getting the `Module Meta Data Comment` into [[javascript-templates.html][JavaScript template modules]] is a little bit trickier than regular JavaScript modules, but still quite doable.
 
-			JavaScript template modules don't have to be generated from JavaScript template (=.js.jst=) files, but they generally are. It is the =_build-jst-modules.js= build script that scans the modules folder for =.js.jst= files and generates =.js= JavaScript template modules from them. Now, all that the =_uize-site-build-sotu.js= build script knows and cares about is regular JavaScript modules (=.js= files in the modules folder). Therefore, the `Module Meta Data Comment` for a JavaScript template module needs to be in the generated JavaScript file. In order to get there, it needs to come from the =.js.jst= file. Since JavaScript templates *can* contain JavaScript comments that *do* make their way into the compiled JavaScript code, getting the `Module Meta Data Comment` into the =.js.jst= file can be accomplished as follows...
+			JavaScript template modules don't have to be generated from JavaScript template (=.js.jst=) files, but they generally are. It is the =_Uize.Build.CompileJstModules.js= build script that scans the modules folder for =.js.jst= files and generates =.js= JavaScript template modules from them. Now, all that the =_UizeSite.Build.BuildSotu.js= build script knows and cares about is regular JavaScript modules (=.js= files in the modules folder). Therefore, the `Module Meta Data Comment` for a JavaScript template module needs to be in the generated JavaScript file. In order to get there, it needs to come from the =.js.jst= file. Since JavaScript templates *can* contain JavaScript comments that *do* make their way into the compiled JavaScript code, getting the `Module Meta Data Comment` into the =.js.jst= file can be accomplished as follows...
 
 			EXAMPLE
 			.......................................................

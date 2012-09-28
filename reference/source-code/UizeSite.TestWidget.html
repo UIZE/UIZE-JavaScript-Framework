@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeSite.TestWidget | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeSite.TestWidget module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeSite.TestWidget
+	<div class="pageActions">
+		<a href="../UizeSite.TestWidget.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : UizeSite.TestWidget
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2008-2012 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/*?
+  Introduction
+    A test widget class used in examples to demonstrate the behavior of the =enabled= and =busy= state properties.
+
+    *DEVELOPERS:* `Chris van Rensburg`
+*/
+
+Uize.module ({
+  name:'UizeSite.TestWidget',
+  superclass:'Uize.Widget',
+  required:'Uize.Widget.Button',
+  builder:function (_superclass) {
+    /*** Class Constructor ***/
+      var
+        _class = _superclass.subclass (
+          function () {
+            var _this = this;
+
+            /*** add child button widgets ***/
+              _this._addChildButton (
+                'button1',
+                function () {
+                  alert (_this.get ('idPrefix') + ' --- click button 1');
+                }
+              );
+              _this._addChildButton (
+                'button2',
+                function () {
+                  alert (_this.get ('idPrefix') + ' --- click button 2');
+                }
+              );
+
+            /*** code to update UI whenever enabled and busy state properties change ***/
+              var _updateUi = function () {_this.updateUi ()};
+              _this.wire ({
+                'Changed.enabled':_updateUi,
+                'Changed.busy':_updateUi
+              });
+          }
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*** Private Instance Methods ***/
+      _classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
+
+    /*** Public Instance Methods ***/
+      _classPrototype.updateUi = function () {
+        var _this = this;
+        if (_this.isWired) {
+          _this.setNodeValue ('enabledSelector',_this.get ('enabled'));
+          _this.setNodeValue ('busySelector',_this.get ('busy'));
+        }
+      };
+
+      _classPrototype.wireUi = function () {
+        var _this = this;
+        if (!_this.isWired) {
+          var _valuesMap = {'false':false,'true':true,inherit:'inherit'};
+          _this.wireNode (
+            'enabledSelector',
+            'change',
+            function () {_this.set ({enabled:_valuesMap [_this.getNodeValue ('enabledSelector')]})}
+          );
+          _this.wireNode (
+            'busySelector',
+            'change',
+            function () {_this.set ({busy:_valuesMap [_this.getNodeValue ('busySelector')]})}
+          );
+
+          _superclass.prototype.wireUi.call (_this);
+        }
+      };
+
+      _classPrototype.resetEnabledAndBusy = function () {
+        this.set ({enabled:'inherit',busy:'inherit'});
+        Uize.callOn (this.children,'resetEnabledAndBusy');
+      };
+
+    /*** Override Initial Values for Inherited State Properties ***/
+      _class.set ({
+        html:
+          '&lt;div class="widgetShell"&gt;' +
+            '&lt;div class="heading"&gt;[#idPrefix]&lt;/div&gt;' +
+            '&lt;div class="body"&gt;' +
+              'ENABLED: ' +
+                '&lt;select id="[#idPrefix]-enabledSelector"&gt;' +
+                  '&lt;option value="inherit" selected&gt;inherit&lt;/option&gt;' +
+                  '&lt;option value="true"&gt;true&lt;/option&gt;' +
+                  '&lt;option value="false"&gt;false&lt;/option&gt;' +
+                '&lt;/select&gt;' +
+              '&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;' +
+              'BUSY: ' +
+                '&lt;select id="[#idPrefix]-busySelector"&gt;' +
+                  '&lt;option value="inherit" selected&gt;inherit&lt;/option&gt;' +
+                  '&lt;option value="true"&gt;true&lt;/option&gt;' +
+                  '&lt;option value="false"&gt;false&lt;/option&gt;' +
+                '&lt;/select&gt;' +
+              '&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;' +
+              '&lt;span id="[#idPrefix]_button1" class="button"&gt;BUTTON 1&lt;/span&gt;' +
+              '&lt;span id="[#idPrefix]_button2" class="button"&gt;BUTTON 2&lt;/span&gt;' +
+              '&lt;br clear="left"/&gt;' +
+              '&lt;div id="[#idPrefix]_childTestWidget0"&gt;&lt;/div&gt;' +
+              '&lt;div id="[#idPrefix]_childTestWidget1"&gt;&lt;/div&gt;' +
+            '&lt;/div&gt;' +
+          '&lt;/div&gt;'
+      });
+
+    return _class;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.library',
+		'UizeSite.Page'
+	],
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
+});
+
+</script>
+
+</body></html>

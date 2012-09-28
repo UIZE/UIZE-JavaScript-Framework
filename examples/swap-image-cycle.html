@@ -46,17 +46,17 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example',
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
 		'Uize.Widget.Swap.Image.Cycle',
 		'Uize.Widget.Swap.xPresets',
 		'Uize.Node',
 		'Uize.Data',
-		'UizeDotCom.TestDataPhotos'
+		'UizeSite.TestDataPhotos'
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+			var page = window.page = UizeSite.Page.Example ();
 
 		/*** create the Uize.Widget.ImageSwap.Cycle object ***/
 			page.addChild (
@@ -64,7 +64,7 @@ Uize.module ({
 				Uize.Widget.Swap.Image.Cycle,
 				{
 					background:'none',
-					images:Uize.Data.getColumn (UizeDotCom.TestDataPhotos (),'image'),
+					images:Uize.Data.getColumn (UizeSite.TestDataPhotos (),'image'),
 					interval:3000,
 					cycleSettings:Uize.Widget.Swap.presets,
 					crossFade:true,

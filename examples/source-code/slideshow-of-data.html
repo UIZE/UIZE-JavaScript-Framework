@@ -137,27 +137,27 @@
 
 Uize.module ({
   required:[
-    'UizeDotCom.Page.Example.library',
-    'UizeDotCom.Page.Example',
-    'UizeDotCom.TestDataFruits',
-    'UizeDotCom.Templates.DataBar',
+    'UizeSite.Page.Example.library',
+    'UizeSite.Page.Example',
+    'UizeSite.TestDataFruits',
+    'UizeSite.Templates.DataBar',
     'Uize.Widget.Bar',
     'Uize.Widget.Swap.Image',
     'Uize.Widget.SlideShow'
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ();
+      var page = window.page = UizeSite.Page.Example ();
 
     /*** add the slide show child widget ***/
-      var slideShow = page.addChild ('slideShow',Uize.Widget.SlideShow,{slides:UizeDotCom.TestDataFruits ()});
+      var slideShow = page.addChild ('slideShow',Uize.Widget.SlideShow,{slides:UizeSite.TestDataFruits ()});
 
       /*** add the image wipe widget as a child widget to the slide show widget ***/
         slideShow.addChild ('slideImage',Uize.Widget.Swap.Image,{width:695,height:327,built:false});
 
     /*** add bar child widgets to the slideshow widget for displaying the nutritional data ***/
       var
-        nutritionProperties = UizeDotCom.TestDataFruits.getNutritionProperties (),
+        nutritionProperties = UizeSite.TestDataFruits.getNutritionProperties (),
         nutritionPropertiesLength = nutritionProperties.length
       ;
       for (var propertyNo = -1; ++propertyNo &lt; nutritionPropertiesLength;) {
@@ -167,14 +167,14 @@ Uize.module ({
           Uize.Widget.Bar,
           Uize.copyInto (
             {
-              html:UizeDotCom.Templates.DataBar,
+              html:UizeSite.Templates.DataBar,
               minValue:0,
               maxValue:1,
               increments:0,
               built:false,
-              unit:UizeDotCom.TestDataFruits.getPropertyUnit (propertyName)
+              unit:UizeSite.TestDataFruits.getPropertyUnit (propertyName)
             },
-            UizeDotCom.TestDataFruits.getValueBoundsForProperty (propertyName)
+            UizeSite.TestDataFruits.getValueBoundsForProperty (propertyName)
           )
         );
       }
@@ -196,10 +196,10 @@ Uize.module ({
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.library',
-		'UizeDotCom.Page'
+		'UizeSite.Page.library',
+		'UizeSite.Page'
 	],
-	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
 });
 
 </script>

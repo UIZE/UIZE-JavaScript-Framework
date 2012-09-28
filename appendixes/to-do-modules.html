@@ -7547,7 +7547,7 @@ recurse:false
 </pre>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use these new params to speed up: _build-pages-from-simple-doc.js (for documenting the JavaScript modules)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use these new params to speed up: _UizeSite.Build.BuildSimpleDocPages.js (for documenting the JavaScript modules)</td></tr>
 			</table>
 		</div>
 	</div>
@@ -7571,10 +7571,10 @@ recurse:false
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

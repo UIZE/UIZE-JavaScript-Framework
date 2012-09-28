@@ -32,7 +32,7 @@
 					<li><a href="#1_2" title="The build scripts are located at the root of the UIZE JavaScript Framework Web site (ie. in the UIZE-JavaScript-Framework folder).">1.2. Where You Will Find Them</a></li>
 					<li><a href="#1_3" title="To use the build scripts in your own Web site project, you should copy them from the UIZE-JavaScript-Framework root folder into the root folder of your project.">1.3. Where They Should Go</a>
 						<ul>
-							<li><a href="#1_3_1" title="Be sure to copy the _build-script-setup.js file along with the desired build scripts (for more info, see the section Build Script Setup).">1.3.1. Must Have the Build Script Setup</a></li>
+							<li><a href="#1_3_1" title="Be sure to copy the _build.js file along with the desired build scripts (for more info, see the section Build Script Setup).">1.3.1. Must Have the Build Script Setup</a></li>
 							<li><a href="#1_3_2" title="Be sure to copy the _build-env.json file along with the desired build scripts (for more info, see the section Build Environment Variables).">1.3.2. Must Have the Build Environment Variables</a></li>
 							<li><a href="#1_3_3" title="Note that the build scripts make use of modules of the UIZE JavaScript Framework, so your Web site project must be set up with a folder containing these JavaScript modules before you can use the build scripts.">1.3.3. Must Have the UIZE Modules</a></li>
 						</ul>
@@ -59,13 +59,13 @@
 			</li>
 			<li><a href="#2" title="The UIZE JavaScript Framework download comes bundled with a score of convenient, ready-to-go build scripts that will immediately be useful to your project built on top of the UIZE JavaScript Framework.">2. The Build Scripts</a>
 				<ul>
-					<li><a href="#2_1" title="The Build JST Modules build script (implemented in the file _build-jst-modules.js) generates JavaScript template modules from all the JavaScript template (.js.jst) files that it finds in the modules folder.">2.1. Build JST Modules</a></li>
-					<li><a href="#2_2" title="The Build Pages from Simple Data build script (implemented in the file _build-pages-from-simple-data.js) recurses through all folders of a Web site project, building pages from all the Simple Data (.simpledata) files that it finds.">2.2. Build Pages from Simple Data</a>
+					<li><a href="#2_1" title="The Compile JST Modules build script (implemented in the file _Uize.Build.CompileJstModules.js) generates JavaScript template modules from all the JavaScript template (.js.jst) files that it finds in the modules folder.">2.1. Compile JST Modules</a></li>
+					<li><a href="#2_2" title="The Build Simple Data Pages build script (implemented in the file _Uize.Build.BuildSimpleDataPages.js) recurses through all folders of a Web site project, building pages from all the Simple Data (.simpledata) files that it finds.">2.2. Build Simple Data Pages</a>
 						<ul>
 							<li><a href="#2_2_1" title="The filename for the JST file and the target (ie. built) file are determined by a simple file naming scheme that associates the two files with the Simple Data source file.">2.2.1. File Naming Scheme</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_3" title="The Build Pages from Simple Doc build script (implemented in the file _build-pages-from-simple-doc.js) recurses through all folders of a Web site project, building pages from all the Simple Doc (.simple) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.">2.3. Build Pages from Simple Doc</a>
+					<li><a href="#2_3" title="The Build Simple Doc Pages build script (implemented in the file _Uize.Build.BuildSimpleDocPages.js) recurses through all folders of a Web site project, building pages from all the Simple Doc (.simple) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.">2.3. Build Simple Doc Pages</a>
 						<ul>
 							<li><a href="#2_3_1" title="This build script is made up of two phases...">2.3.1. Phases</a>
 								<ul>
@@ -75,25 +75,25 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_4" title="The UIZE Site Build Pages from Source Code build script (implemented in the file _uize-site-build-pages-from-source-code.js) is intended primarily for the uize.com Web site, and builds HTML pages for viewing the source code of JavaScript modules and examples pages.">2.4. UIZE Site Build Pages from Source Code</a>
+					<li><a href="#2_4" title="The UIZE Site Build Pages from Source Code build script (implemented in the file _UizeSite.Build.BuildPagesFromSourceCode.js) is intended primarily for the UIZE Web site, and builds HTML pages for viewing the source code of JavaScript modules and examples pages.">2.4. UIZE Site Build Pages from Source Code</a>
 						<ul>
 							<li><a href="#2_4_1" title="A source code page is generated for every JavaScript module in the modules folder.">2.4.1. JavaScript Module Source Code Pages</a></li>
 							<li><a href="#2_4_2" title="A source code page is generated for every example page contained inside the examples folder.">2.4.2. Example Source Code Pages</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_5" title="The Build Scrunched build script (implemented in the file _build-scrunched.js) recurses through all folders of a Web site project, automatically scrunching down all JavaScript files into smaller, obfuscated files using the UIZE JavaScript Framework&apos;s Scruncher.">2.5. Build Scrunched</a>
+					<li><a href="#2_5" title="The Auto Scruncher build script (implemented in the file _Uize.Build.AutoScruncher.js) recurses through all folders of a Web site project, automatically scrunching down all JavaScript files into smaller, obfuscated files using the UIZE JavaScript Framework&apos;s Scruncher.">2.5. Auto Scruncher</a>
 						<ul>
 							<li><a href="#2_5_1" title="This build script is made up of two phases...">2.5.1. Phases</a>
 								<ul>
-									<li><a href="#2_5_1_1" title="The build script recurses through all the folders, finding JavaScript files and building scrunched versions of them which are then saved to a target location.">2.5.1.1. PHASE 1: Build Scrunched JavaScript Files</a></li>
-									<li><a href="#2_5_1_2" title="The build script recurses through all the folders, finding JavaScript library (.library.js) files and building scrunched versions that combine the scrunched versions of all the JavaScript modules referenced in the library file.">2.5.1.2. PHASE 2: Build Scrunched Library (.library.js) Files</a></li>
+									<li><a href="#2_5_1_1" title="The build script recurses through all the folders, finding JavaScript files and building scrunched versions of them which are then saved to a target location.">2.5.1.1. PHASE 1: Auto Scruncher JavaScript Files</a></li>
+									<li><a href="#2_5_1_2" title="The build script recurses through all the folders, finding JavaScript library (.library.js) files and building scrunched versions that combine the scrunched versions of all the JavaScript modules referenced in the library file.">2.5.1.2. PHASE 2: Auto Scruncher Library (.library.js) Files</a></li>
 								</ul>
 							</li>
 							<li><a href="#2_5_2" title="JavaScript files that are scrunched are NOT overwritten by their scrunched versions.">2.5.2. Source Not Overwritten</a></li>
 							<li><a href="#2_5_3" title="document...">2.5.3. Head Comments</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_6" title="The Build Strings Audit Report build script (implemented in the file _build-strings-audit-report.js) recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files.">2.6. Build Strings Audit Report</a>
+					<li><a href="#2_6" title="The Audit Strings build script (implemented in the file _Uize.Build.AuditStrings.js) recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files.">2.6. Audit Strings</a>
 						<ul>
 							<li><a href="#2_6_1" title="This category includes strings that are recognized by certain patterns as being non-internationalizable strings, including: DOM event names (eg. click), very JavaScript specific keywords (eg. function), HTML specific attribute names (eg. href), sufficiently distinctive HTML tag names (eg. div), file extensions (eg. .gif), strings that are only whitespace, strings that have no letter characters,...">2.6.1. NON-INTERNATIONALIZABLE STRINGS</a></li>
 							<li><a href="#2_6_2" title="This category includes strings with only one letter character (eg. a), and strings that look like short url snippets (eg. myfolder/mysubfolder).">2.6.2. LIKELY NON-INTERNATIONALIZABLE STRINGS</a></li>
@@ -101,16 +101,16 @@
 							<li><a href="#2_6_4" title="This category includes strings that are not filtered out into either the NON-INTERNATIONALIZABLE STRINGS or LIKELY NON-INTERNATIONALIZABLE STRINGS categories and that contain three adjacent, space separated words, where the middle word is all lowecase.">2.6.4. LIKELY INTERNATIONALIZABLE STRINGS</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_7" title="The Run Unit Tests (Scrunched) build script (implemented in the file _run-unit-tests-scrunched.js) runs the unit test suite for the UIZE JavaScript Framework, using the scrunched versions of the JavaScript modules.">2.7. Run Unit Tests (Scrunched)</a></li>
-					<li><a href="#2_8" title="The Run Unit Tests (Source) build script (implemented in the file _run-unit-tests-source.js) runs the unit test suite for the UIZE JavaScript Framework, using the source versions of the JavaScript modules.">2.8. Run Unit Tests (Source)</a></li>
+					<li><a href="#2_7" title="The Run Unit Tests (Scrunched) build script (implemented in the file _Uize.Build.RunUnitTests-scrunched.js) runs the unit test suite for the UIZE JavaScript Framework, using the scrunched versions of the JavaScript modules.">2.7. Run Unit Tests (Scrunched)</a></li>
+					<li><a href="#2_8" title="The Run Unit Tests (Source) build script (implemented in the file _Uize.Build.RunUnitTests-source.js) runs the unit test suite for the UIZE JavaScript Framework, using the source versions of the JavaScript modules.">2.8. Run Unit Tests (Source)</a></li>
 				</ul>
 			</li>
-			<li><a href="#3" title="The Build Script Setup (implemented in the file _build-script-setup.js) implements a module loader, specific to Windows Script Host, that is used by The Build Scripts that come bundled with the UIZE JavaScript Framework, and that can also be used when Writing Your Own Build Scripts.">3. Build Script Setup</a>
+			<li><a href="#3" title="The Build Script Setup (implemented in the _build.js file) implements a module loader that is used by The Build Scripts that come bundled with the UIZE JavaScript Framework, and that can also be used when Writing Your Own Build Scripts.">3. Build Script Setup</a>
 				<ul>
 					<li><a href="#3_1" title="The Build Script Setup is used in a build script by adding a few lines of &quot;boilerplate&quot; JavaScript code.">3.1. Using the Build Script Setup</a>
 						<ul>
-							<li><a href="#3_1_1" title="The module loader defined in the _build-script-setup.js file can be configured to load the scrunched versions of JavaScript modules.">3.1.1. Loading Scrunched Versions of Modules</a></li>
-							<li><a href="#3_1_2" title="The module loader defined in the _build-script-setup.js file can be configured for scripts that are to be run in a folder other than the root folder of a Web site project.">3.1.2. Running Scripts Outside a Project's Root Folder</a></li>
+							<li><a href="#3_1_1" title="The module loader defined in the _build.js file can be configured to load the scrunched versions of JavaScript modules.">3.1.1. Loading Scrunched Versions of Modules</a></li>
+							<li><a href="#3_1_2" title="The module loader defined in the _build.js file can be configured for scripts that are to be run in a folder other than the root folder of a Web site project.">3.1.2. Running Scripts Outside a Project's Root Folder</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -124,7 +124,7 @@
 					<li><a href="#4_5" title="A string, specifying the path to the folder in your Web site project within which the unscrunched / source UIZE JavaScript modules are located.">4.5. moduleFolderPath</a></li>
 					<li><a href="#4_6" title="document...">4.6. scrunchedHeadComments</a></li>
 					<li><a href="#4_7" title="A string, specifying the folder name for folders that contain source (ie. unscrunched) JavaScript files.">4.7. sourceFolderName</a></li>
-					<li><a href="#4_8" title="For certain build scripts - such as the Build Scrunched and Build Strings Audit Report build scripts - the location for unscrunched and scrunched JavaScript files needs to be known.">4.8. buildFolderPath vs sourceFolderName</a>
+					<li><a href="#4_8" title="For certain build scripts - such as the Auto Scruncher and Audit Strings build scripts - the location for unscrunched and scrunched JavaScript files needs to be known.">4.8. buildFolderPath vs sourceFolderName</a>
 						<ul>
 							<li><a href="#4_8_1" title="You can locate your source JavaScript throughout the folder structure of your site and then have the scrunched JavaScript be output to a separate build folder that contains a mirror of your site&apos;s folder hierarchy.">4.8.1. The buildFolderPath Approach</a></li>
 							<li><a href="#4_8_2" title="You can locate your source JavaScript throughout the folder structure of your site in a specially named folder, where the scrunched version of JavaScript files in such folders are output to the parent folder.">4.8.2. The sourceFolderName Approach</a></li>
@@ -197,16 +197,16 @@
 			<p>The build script files are JavaScript files (with the <code>.js</code> extension) with names that all start with a "_" (underscore) character, as in...</p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_build-jst-modules.js (<a href="#2_1">Build JST Modules</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_build-pages-from-simple-data.js (<a href="#2_2">Build Pages from Simple Data</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_build-pages-from-simple-doc.js (<a href="#2_3">Build Pages from Simple Doc</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_build-scrunched.js (<a href="#2_5">Build Scrunched</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_build-strings-audit-report.js (<a href="#2_6">Build Strings Audit Report</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_run-unit-tests-scrunched.js (<a href="#2_7">Run Unit Tests (Scrunched)</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_run-unit-tests-source.js (<a href="#2_8">Run Unit Tests (Source)</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_uize-site-build-pages-from-source-code.js (<a href="#2_4">UIZE Site Build Pages from Source Code</a>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_Uize.Build.CompileJstModules.js (<a href="#2_1">Compile JST Modules</a>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_Uize.Build.BuildSimpleDataPages.js (<a href="#2_2">Build Simple Data Pages</a>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_Uize.Build.BuildSimpleDocPages.js (<a href="#2_3">Build Simple Doc Pages</a>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_Uize.Build.AutoScruncher.js (<a href="#2_5">Auto Scruncher</a>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_Uize.Build.AuditStrings.js (<a href="#2_6">Audit Strings</a>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_Uize.Build.RunUnitTests-scrunched.js (<a href="#2_7">Run Unit Tests (Scrunched)</a>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_Uize.Build.RunUnitTests-source.js (<a href="#2_8">Run Unit Tests (Source)</a>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>_UizeSite.Build.BuildPagesFromSourceCode.js (<a href="#2_4">UIZE Site Build Pages from Source Code</a>)</td></tr>
 			</table>
-			<p>Not all the build scripts will necessarily be useful for your own Web site project. In particular, the <a href="#2_3">Build Pages from Simple Doc</a> and <a href="#2_4">UIZE Site Build Pages from Source Code</a> build scripts are intended primarily for the uize.com Web site, although you are welcome to hack them to meet your needs or use them as a reference when <a href="#5">Writing Your Own Build Scripts</a>.</p>
+			<p>Not all the build scripts will necessarily be useful for your own Web site project. In particular, the <a href="#2_3">Build Simple Doc Pages</a> and <a href="#2_4">UIZE Site Build Pages from Source Code</a> build scripts are intended primarily for the uize.com Web site, although you are welcome to hack them to meet your needs or use them as a reference when <a href="#5">Writing Your Own Build Scripts</a>.</p>
 		</div>
 		
 		<a name="1_3"></a>
@@ -217,7 +217,7 @@
 			<a name="1_3_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Where They Should Go -&gt; 1.3.1. Must Have the Build Script Setup"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Where They Should Go">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Where They Should Go -&gt; 1.3.1. Must Have the Build Script Setup">1</a>. </span>Must Have the Build Script Setup</h3>
 			<div class="contents3">
-				<p>Be sure to copy the <code>_build-script-setup.js</code> file along with the desired build scripts (for more info, see the section <a href="#3">Build Script Setup</a>).</p>
+				<p>Be sure to copy the <code>_build.js</code> file along with the desired build scripts (for more info, see the section <a href="#3">Build Script Setup</a>).</p>
 			</div>
 			
 			<a name="1_3_2"></a>
@@ -275,7 +275,7 @@
 			<div class="contents3">
 				<p>Most (but not all) build scripts will output at least one log file once they have completed execution.</p>
 				
-				<p>Some build scripts may generate multiple log files. For example, the <a href="#2_5">Build Scrunched</a> build script generates one log file that lists the JavaScript files that were scrunched, and another log file listing the JavaScript library (<code>.library.js</code>) files that were built. There are also <b>some</b> build scripts that don't output any log files at all.</p>
+				<p>Some build scripts may generate multiple log files. For example, the <a href="#2_5">Auto Scruncher</a> build script generates one log file that lists the JavaScript files that were scrunched, and another log file listing the JavaScript library (<code>.library.js</code>) files that were built. There are also <b>some</b> build scripts that don't output any log files at all.</p>
 			</div>
 			
 			<a name="1_5_2"></a>
@@ -283,7 +283,7 @@
 			<div class="contents3">
 				<p>For many build scripts, the name of the script's associated log file is simply the name of the build script with the <code>.js</code> file extension replaced by a <code>.log</code> extension.</p>
 				
-				<p>In the case of build scripts that generate multiple log files, the log files will typically be named with the build script name (sans <code>.js</code> extension) as a prefix, and then some identifying suffix to distinguish the different log files in the group from one another. For example, the <code>_build-scrunched.js</code> (<a href="#2_5">Build Scrunched</a>) build script generates the two log files named <code>_build-scrunched-js-files.log</code> and <code>_build-scrunched-libraries.log</code>.</p>
+				<p>In the case of build scripts that generate multiple log files, the log files will typically be named with the build script name (sans <code>.js</code> extension) as a prefix, and then some identifying suffix to distinguish the different log files in the group from one another. For example, the <code>_Uize.Build.AutoScruncher.js</code> (<a href="#2_5">Auto Scruncher</a>) build script generates the two log files named <code>_Uize.Build.AutoScruncher-js-files.log</code> and <code>_Uize.Build.AutoScruncher-libraries.log</code>.</p>
 				
 				<p><span class="allCaps">OVERWRITE BEHAVIOR</span></p>
 				
@@ -300,7 +300,7 @@
 				<div class="contents4">
 					<p>Some build scripts simply list the files that were built, with basic information about the source file path, the target (generated / built) file path, a reason why the file was built (eg. <code>DIDN'T EXIST</code>, <code>WAS OUT OF DATE</code>, <code>ALWAYS BUILD</code>), and the duration for the build process.</p>
 					
-					<p>The snippet below shows some of the log file generated from running the <a href="#2_1">Build JST Modules</a> build script...</p>
+					<p>The snippet below shows some of the log file generated from running the <a href="#2_1">Compile JST Modules</a> build script...</p>
 					
 					<p><span class="allCaps">LOG FILE SNIPPET</span></p>
 					
@@ -335,7 +335,7 @@ C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.CollectionItem.js.j
 				<div class="contents4">
 					<p>Some build scripts provide additional summary info for files that were built, that appears right below the basic summary info.</p>
 					
-					<p>For example, the <a href="#2_5">Build Scrunched</a> build script provides a Scruncher report for every JavaScript file that was scrunched. The snippet below shows some of the log file generated from running this build script...</p>
+					<p>For example, the <a href="#2_5">Auto Scruncher</a> build script provides a Scruncher report for every JavaScript file that was scrunched. The snippet below shows some of the log file generated from running this build script...</p>
 					
 					<p><span class="allCaps">LOG FILE SNIPPET</span></p>
 					
@@ -385,34 +385,34 @@ C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.Iframe.js
 		<p>The UIZE JavaScript Framework download comes bundled with a score of convenient, ready-to-go build scripts that will immediately be useful to your project built on top of the UIZE JavaScript Framework.</p>
 		
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.1. Build JST Modules"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_1" title="2. The Build Scripts -&gt; 2.1. Build JST Modules">1</a>. </span>Build JST Modules</h2>
+		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.1. Compile JST Modules"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_1" title="2. The Build Scripts -&gt; 2.1. Compile JST Modules">1</a>. </span>Compile JST Modules</h2>
 		<div class="contents2">
-			<p>The Build JST Modules build script (implemented in the file <code>_build-jst-modules.js</code>) generates JavaScript template modules from all the JavaScript template (<code>.js.jst</code>) files that it finds in the modules folder.</p>
+			<p>The Compile JST Modules build script (implemented in the file <code>_Uize.Build.CompileJstModules.js</code>) generates JavaScript template modules from all the JavaScript template (<code>.js.jst</code>) files that it finds in the modules folder.</p>
 			
 			<p>The folder that contains the UIZE JavaScript modules (as well as your own JavaScript modules built on top of the UIZE JavaScript Framework), and that is pointed to by the <code><a href="#4_5">moduleFolderPath</a></code> build environment variable, may contain JavaScript templates that are to be compiled to JavaScript template modules. Once compiled to regular JavaScript modules, they can then be used and required by other JavaScript modules - just like any module.</p>
 			
-			<p>The Build JST Modules build script provides a convenient way to automate the compilation of JavaScript template modules. If you look through the <code>UIZE-JavaScript-Framework/js/~source</code> folder in the download of the UIZE JavaScript Framework, you will notice a number of <code>.js.jst</code> files under the <code><a href="../reference/UizeDotCom.Templates.html">UizeDotCom.Templates</a></code> namespace. Many of these JST modules are HTML generators for widgets. Others are used by build scripts, such as, for example, the <code>UizeDotCom.Templates.IndexPage.js.jst</code> JavaScript template, which is used by the build scripts that build the various index pages for the <b>uize.com</b> Web site.</p>
+			<p>The Compile JST Modules build script provides a convenient way to automate the compilation of JavaScript template modules. If you look through the <code>UIZE-JavaScript-Framework/js/~source</code> folder in the download of the UIZE JavaScript Framework, you will notice a number of <code>.js.jst</code> files under the <code><a href="../reference/UizeSite.Templates.html">UizeSite.Templates</a></code> namespace. Many of these JST modules are HTML generators for widgets. Others are used by build scripts, such as, for example, the <code>UizeSite.Templates.IndexPage.js.jst</code> JavaScript template, which is used by the build scripts that build the various index pages for the UIZE Web site.</p>
 			
-			<p>The files generated by this script are JavaScript modules that can then be scrunched - along with all other JavaScript modules - by the <a href="#2_5">Build Scrunched</a> build script. For this reason, after making a change to any JavaScript template (<code>.js.jst</code>) files, one should first run the Build JST Modules build script before running the <a href="#2_5">Build Scrunched</a> build script, or otherwise your scrunched JavaScript template modules will not be up-to-date.</p>
+			<p>The files generated by this script are JavaScript modules that can then be scrunched - along with all other JavaScript modules - by the <a href="#2_5">Auto Scruncher</a> build script. For this reason, after making a change to any JavaScript template (<code>.js.jst</code>) files, one should first run the Compile JST Modules build script before running the <a href="#2_5">Auto Scruncher</a> build script, or otherwise your scrunched JavaScript template modules will not be up-to-date.</p>
 			
 			<p>For more information on JavaScript template modules, consult the explainers <a href="javascript-templates.html">JavaScript Templates</a> and <a href="javascript-modules.html">JavaScript Modules</a>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build JST Modules build script can be found in the <code><a href="../reference/Uize.Build.CompileJstModules.html">Uize.Build.CompileJstModules</a></code> module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Compile JST Modules build script can be found in the <code><a href="../reference/Uize.Build.CompileJstModules.html">Uize.Build.CompileJstModules</a></code> module</td></tr>
 			</table>
 		</div>
 		
 		<a name="2_2"></a>
-		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.2. Build Pages from Simple Data"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_2" title="2. The Build Scripts -&gt; 2.2. Build Pages from Simple Data">2</a>. </span>Build Pages from Simple Data</h2>
+		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.2. Build Simple Data Pages"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_2" title="2. The Build Scripts -&gt; 2.2. Build Simple Data Pages">2</a>. </span>Build Simple Data Pages</h2>
 		<div class="contents2">
-			<p>The Build Pages from Simple Data build script (implemented in the file <code>_build-pages-from-simple-data.js</code>) recurses through all folders of a Web site project, building pages from all the Simple Data (<code>.simpledata</code>) files that it finds.</p>
+			<p>The Build Simple Data Pages build script (implemented in the file <code>_Uize.Build.BuildSimpleDataPages.js</code>) recurses through all folders of a Web site project, building pages from all the Simple Data (<code>.simpledata</code>) files that it finds.</p>
 			
 			<p>Simple Data is a data file format that is even more human readable than XML (how could this even be possible!?!?) and that uses indentation to indicate structure (so, kind of like Python, but for data). This build script finds all these files and builds pages from them, by processing the data in each file using an accompanying JavaScript Template (<code>.jst</code>) file.</p>
 			
 			<a name="2_2_1"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.2. Build Pages from Simple Data -&gt; 2.2.1. File Naming Scheme"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_2" title="2. The Build Scripts -&gt; 2.2. Build Pages from Simple Data">2</a>.<a href="#2_2_1" title="2. The Build Scripts -&gt; 2.2. Build Pages from Simple Data -&gt; 2.2.1. File Naming Scheme">1</a>. </span>File Naming Scheme</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.2. Build Simple Data Pages -&gt; 2.2.1. File Naming Scheme"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_2" title="2. The Build Scripts -&gt; 2.2. Build Simple Data Pages">2</a>.<a href="#2_2_1" title="2. The Build Scripts -&gt; 2.2. Build Simple Data Pages -&gt; 2.2.1. File Naming Scheme">1</a>. </span>File Naming Scheme</h3>
 			<div class="contents3">
 				<p>The filename for the JST file and the target (ie. built) file are determined by a simple file naming scheme that associates the two files with the Simple Data source file.</p>
 				
@@ -428,30 +428,30 @@ JST template file &gt; credits.html.jst
 				
 				<p>In the above example, the file <code>credits.html.simpledata</code> is the source Simple Data file, the file <code>credits.html.jst</code> is the JavaScript template that should be used for processing the data in the Simple Data file, and the file <code>credits.html</code> is the built file that contains the output of the template processing operation.</p>
 				
-				<p>Based on this file naming principle, the desired file extension for the built file is put before the <code>.simpledata</code> and <code>.jst</code> extensions. This means that the Build Pages from Simple Data build script can build any type of text file from Simple Data files it encounters, and, in fact, the <b>uize.com</b> Web site project uses it to build a few HTML pages as well as an RSS (<code>.rss</code>) file.</p>
+				<p>Based on this file naming principle, the desired file extension for the built file is put before the <code>.simpledata</code> and <code>.jst</code> extensions. This means that the Build Simple Data Pages build script can build any type of text file from Simple Data files it encounters, and, in fact, the UIZE Web site project uses it to build a few HTML pages as well as an RSS (<code>.rss</code>) file.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Pages from Simple Data build script can be found in the <code><a href="../reference/Uize.Build.BuildSimpleDataPages.html">Uize.Build.BuildSimpleDataPages</a></code> module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Simple Data Pages build script can be found in the <code><a href="../reference/Uize.Build.BuildSimpleDataPages.html">Uize.Build.BuildSimpleDataPages</a></code> module</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the behavior of this build script is not affected by the values of the <code><a href="#4_2">buildFolderPath</a></code> and <code><a href="#4_7">sourceFolderName</a></code> build environment variables</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the summary info for this build script is output to the log file <code>_build-pages-from-simple-data.log</code></td></tr>
 			</table>
 		</div>
 		
 		<a name="2_3"></a>
-		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_3" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc">3</a>. </span>Build Pages from Simple Doc</h2>
+		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_3" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages">3</a>. </span>Build Simple Doc Pages</h2>
 		<div class="contents2">
-			<p>The Build Pages from Simple Doc build script (implemented in the file <code>_build-pages-from-simple-doc.js</code>) recurses through all folders of a Web site project, building pages from all the Simple Doc (<code>.simple</code>) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.</p>
+			<p>The Build Simple Doc Pages build script (implemented in the file <code>_Uize.Build.BuildSimpleDocPages.js</code>) recurses through all folders of a Web site project, building pages from all the Simple Doc (<code>.simple</code>) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.</p>
 			
 			<a name="2_3_1"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc -&gt; 2.3.1. Phases"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_3" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc">3</a>.<a href="#2_3_1" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc -&gt; 2.3.1. Phases">1</a>. </span>Phases</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages -&gt; 2.3.1. Phases"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_3" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages">3</a>.<a href="#2_3_1" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages -&gt; 2.3.1. Phases">1</a>. </span>Phases</h3>
 			<div class="contents3">
 				<p>This build script is made up of two phases...</p>
 				
 				<a name="2_3_1_1"></a>
-				<h4 class="heading4" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc -&gt; 2.3.1. Phases -&gt; 2.3.1.1. PHASE 1: Build Pages From Simple Doc (.simple) Files"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_3" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc">3</a>.<a href="#2_3_1" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc -&gt; 2.3.1. Phases">1</a>.<a href="#2_3_1_1" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc -&gt; 2.3.1. Phases -&gt; 2.3.1.1. PHASE 1: Build Pages From Simple Doc (.simple) Files">1</a>. </span>PHASE 1: Build Pages From Simple Doc (.simple) Files</h4>
+				<h4 class="heading4" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages -&gt; 2.3.1. Phases -&gt; 2.3.1.1. PHASE 1: Build Pages From Simple Doc (.simple) Files"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_3" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages">3</a>.<a href="#2_3_1" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages -&gt; 2.3.1. Phases">1</a>.<a href="#2_3_1_1" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages -&gt; 2.3.1. Phases -&gt; 2.3.1.1. PHASE 1: Build Pages From Simple Doc (.simple) Files">1</a>. </span>PHASE 1: Build Pages From Simple Doc (.simple) Files</h4>
 				<div class="contents4">
 					<p>An HTML page is generated for each Simple Doc (<code>.simple</code>) file.</p>
 					
@@ -463,15 +463,15 @@ JST template file &gt; credits.html.jst
 <pre class="sample-code">javascript-build-scripts.simple --&gt; PRODUCES --&gt; javascript-build-scripts.html
 </pre>
 					
-					<p>The summary info for this phase of the build script is output to the log file <code>_build-pages-from-simple-doc.log</code>.</p>
+					<p>The summary info for this phase of the build script is output to the log file <code>_Uize.Build.BuildSimpleDocPages.log</code>.</p>
 				</div>
 				
 				<a name="2_3_1_2"></a>
-				<h4 class="heading4" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc -&gt; 2.3.1. Phases -&gt; 2.3.1.2. PHASE 2: Build Pages From Simple Doc in JavaScript Modules"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_3" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc">3</a>.<a href="#2_3_1" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc -&gt; 2.3.1. Phases">1</a>.<a href="#2_3_1_2" title="2. The Build Scripts -&gt; 2.3. Build Pages from Simple Doc -&gt; 2.3.1. Phases -&gt; 2.3.1.2. PHASE 2: Build Pages From Simple Doc in JavaScript Modules">2</a>. </span>PHASE 2: Build Pages From Simple Doc in JavaScript Modules</h4>
+				<h4 class="heading4" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages -&gt; 2.3.1. Phases -&gt; 2.3.1.2. PHASE 2: Build Pages From Simple Doc in JavaScript Modules"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_3" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages">3</a>.<a href="#2_3_1" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages -&gt; 2.3.1. Phases">1</a>.<a href="#2_3_1_2" title="2. The Build Scripts -&gt; 2.3. Build Simple Doc Pages -&gt; 2.3.1. Phases -&gt; 2.3.1.2. PHASE 2: Build Pages From Simple Doc in JavaScript Modules">2</a>. </span>PHASE 2: Build Pages From Simple Doc in JavaScript Modules</h4>
 				<div class="contents4">
 					<p>An HTML reference documentation page is generated for each JavaScript module contained inside the modules folder.</p>
 					
-					<p>The build script iterates through all the JavaScript modules contained inside the modules folder (as specified by the <code><a href="#4_5">moduleFolderPath</a></code> build environment variable). For each file, it extracts all the Simple Doc comments, stitches all those comments together into a single Simple Doc document, and then builds an HTML page from that document, using the <code>~SIMPLE-DOC-TEMPLATE.html.jst</code> template file that is contained inside the <code>reference/</code> folder of the <b>uize.com</b> Web site project. The built HTML reference documentation page is then output to the <code>reference/</code> folder, where the filename of the built file is the filename of the JavaScript module with the <code>.js</code> file extension replaced with the <code>.html</code> extension.</p>
+					<p>The build script iterates through all the JavaScript modules contained inside the modules folder (as specified by the <code><a href="#4_5">moduleFolderPath</a></code> build environment variable). For each file, it extracts all the Simple Doc comments, stitches all those comments together into a single Simple Doc document, and then builds an HTML page from that document, using the <code>~SIMPLE-DOC-TEMPLATE.html.jst</code> template file that is contained inside the <code>reference/</code> folder of the UIZE Web site project. The built HTML reference documentation page is then output to the <code>reference/</code> folder, where the filename of the built file is the filename of the JavaScript module with the <code>.js</code> file extension replaced with the <code>.html</code> extension.</p>
 					
 					<p><span class="allCaps">FILE NAMING EXAMPLE</span></p>
 					
@@ -479,7 +479,7 @@ JST template file &gt; credits.html.jst
 <pre class="sample-code">js/~source/Uize.Widget.js --&gt; PRODUCES --&gt; reference/Uize.Widget.html
 </pre>
 					
-					<p>The summary info for this phase of the build script is output to the log file <code>_build-pages-from-simple-doc-in-js-modules.log</code>.</p>
+					<p>The summary info for this phase of the build script is output to the log file <code>_Uize.Build.BuildSimpleDocPages-in-js-modules.log</code>.</p>
 				</div>
 			</div>
 			
@@ -495,7 +495,7 @@ JST template file &gt; credits.html.jst
 		<a name="2_4"></a>
 		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.4. UIZE Site Build Pages from Source Code"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_4" title="2. The Build Scripts -&gt; 2.4. UIZE Site Build Pages from Source Code">4</a>. </span>UIZE Site Build Pages from Source Code</h2>
 		<div class="contents2">
-			<p>The UIZE Site Build Pages from Source Code build script (implemented in the file <code>_uize-site-build-pages-from-source-code.js</code>) is intended primarily for the <b>uize.com</b> Web site, and builds HTML pages for viewing the source code of JavaScript modules and examples pages.</p>
+			<p>The UIZE Site Build Pages from Source Code build script (implemented in the file <code>_UizeSite.Build.BuildPagesFromSourceCode.js</code>) is intended primarily for the UIZE Web site, and builds HTML pages for viewing the source code of JavaScript modules and examples pages.</p>
 			
 			<a name="2_4_1"></a>
 			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.4. UIZE Site Build Pages from Source Code -&gt; 2.4.1. JavaScript Module Source Code Pages"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_4" title="2. The Build Scripts -&gt; 2.4. UIZE Site Build Pages from Source Code">4</a>.<a href="#2_4_1" title="2. The Build Scripts -&gt; 2.4. UIZE Site Build Pages from Source Code -&gt; 2.4.1. JavaScript Module Source Code Pages">1</a>. </span>JavaScript Module Source Code Pages</h3>
@@ -516,41 +516,41 @@ JST template file &gt; credits.html.jst
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the summary info for this build script is output to the log file <code>_uize-site-build-pages-from-source-code.log</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the summary info for this build script is output to the log file <code>_UizeSite.Build.BuildPagesFromSourceCode.log</code></td></tr>
 			</table>
 		</div>
 		
 		<a name="2_5"></a>
-		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.5. Build Scrunched"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Build Scrunched">5</a>. </span>Build Scrunched</h2>
+		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher">5</a>. </span>Auto Scruncher</h2>
 		<div class="contents2">
-			<p>The Build Scrunched build script (implemented in the file <code>_build-scrunched.js</code>) recurses through all folders of a Web site project, automatically scrunching down all JavaScript files into smaller, obfuscated files using the UIZE JavaScript Framework's <a href="all-about-scrunching.html">Scruncher</a>.</p>
+			<p>The Auto Scruncher build script (implemented in the file <code>_Uize.Build.AutoScruncher.js</code>) recurses through all folders of a Web site project, automatically scrunching down all JavaScript files into smaller, obfuscated files using the UIZE JavaScript Framework's <a href="all-about-scrunching.html">Scruncher</a>.</p>
 			
-			<p>The Build Scrunched build script provides a convenient way to obfuscate and reduce the size of <b>all</b> the JavaScript files in your Web site project, not just those written explicitly to use the UIZE JavaScript Framework. The scrunched versions of JavaScript files are output to a location that is determined by the two related <code><a href="#4_2">buildFolderPath</a></code> and <code><a href="#4_7">sourceFolderName</a></code> build environment variables.</p>
+			<p>The Auto Scruncher build script provides a convenient way to obfuscate and reduce the size of <b>all</b> the JavaScript files in your Web site project, not just those written explicitly to use the UIZE JavaScript Framework. The scrunched versions of JavaScript files are output to a location that is determined by the two related <code><a href="#4_2">buildFolderPath</a></code> and <code><a href="#4_7">sourceFolderName</a></code> build environment variables.</p>
 			
 			<a name="2_5_1"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.1. Phases"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Build Scrunched">5</a>.<a href="#2_5_1" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.1. Phases">1</a>. </span>Phases</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.1. Phases"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher">5</a>.<a href="#2_5_1" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.1. Phases">1</a>. </span>Phases</h3>
 			<div class="contents3">
 				<p>This build script is made up of two phases...</p>
 				
 				<a name="2_5_1_1"></a>
-				<h4 class="heading4" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.1. Phases -&gt; 2.5.1.1. PHASE 1: Build Scrunched JavaScript Files"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Build Scrunched">5</a>.<a href="#2_5_1" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.1. Phases">1</a>.<a href="#2_5_1_1" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.1. Phases -&gt; 2.5.1.1. PHASE 1: Build Scrunched JavaScript Files">1</a>. </span>PHASE 1: Build Scrunched JavaScript Files</h4>
+				<h4 class="heading4" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.1. Phases -&gt; 2.5.1.1. PHASE 1: Auto Scruncher JavaScript Files"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher">5</a>.<a href="#2_5_1" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.1. Phases">1</a>.<a href="#2_5_1_1" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.1. Phases -&gt; 2.5.1.1. PHASE 1: Auto Scruncher JavaScript Files">1</a>. </span>PHASE 1: Auto Scruncher JavaScript Files</h4>
 				<div class="contents4">
 					<p>The build script recurses through all the folders, finding JavaScript files and building scrunched versions of them which are then saved to a target location.</p>
 					
-					<p>The summary info for this phase of the build script is output to the log file <code>_build-scrunched-js-files.log</code>.</p>
+					<p>The summary info for this phase of the build script is output to the log file <code>_Uize.Build.AutoScruncher-js-files.log</code>.</p>
 				</div>
 				
 				<a name="2_5_1_2"></a>
-				<h4 class="heading4" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.1. Phases -&gt; 2.5.1.2. PHASE 2: Build Scrunched Library (.library.js) Files"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Build Scrunched">5</a>.<a href="#2_5_1" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.1. Phases">1</a>.<a href="#2_5_1_2" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.1. Phases -&gt; 2.5.1.2. PHASE 2: Build Scrunched Library (.library.js) Files">2</a>. </span>PHASE 2: Build Scrunched Library (.library.js) Files</h4>
+				<h4 class="heading4" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.1. Phases -&gt; 2.5.1.2. PHASE 2: Auto Scruncher Library (.library.js) Files"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher">5</a>.<a href="#2_5_1" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.1. Phases">1</a>.<a href="#2_5_1_2" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.1. Phases -&gt; 2.5.1.2. PHASE 2: Auto Scruncher Library (.library.js) Files">2</a>. </span>PHASE 2: Auto Scruncher Library (.library.js) Files</h4>
 				<div class="contents4">
 					<p>The build script recurses through all the folders, finding JavaScript library (<code>.library.js</code>) files and building scrunched versions that combine the scrunched versions of all the JavaScript modules referenced in the library file.</p>
 					
-					<p>The summary info for this phase of the build script is output to the log file <code>_build-scrunched-libraries.log</code>.</p>
+					<p>The summary info for this phase of the build script is output to the log file <code>_Uize.Build.AutoScruncher-libraries.log</code>.</p>
 				</div>
 			</div>
 			
 			<a name="2_5_2"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.2. Source Not Overwritten"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Build Scrunched">5</a>.<a href="#2_5_2" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.2. Source Not Overwritten">2</a>. </span>Source Not Overwritten</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.2. Source Not Overwritten"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher">5</a>.<a href="#2_5_2" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.2. Source Not Overwritten">2</a>. </span>Source Not Overwritten</h3>
 			<div class="contents3">
 				<p>JavaScript files that are scrunched are <b>NOT</b> overwritten by their scrunched versions.</p>
 				
@@ -558,7 +558,7 @@ JST template file &gt; credits.html.jst
 			</div>
 			
 			<a name="2_5_3"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.3. Head Comments"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Build Scrunched">5</a>.<a href="#2_5_3" title="2. The Build Scripts -&gt; 2.5. Build Scrunched -&gt; 2.5.3. Head Comments">3</a>. </span>Head Comments</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.3. Head Comments"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_5" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher">5</a>.<a href="#2_5_3" title="2. The Build Scripts -&gt; 2.5. Auto Scruncher -&gt; 2.5.3. Head Comments">3</a>. </span>Head Comments</h3>
 			<div class="contents3">
 				<p>document...</p>
 			</div>
@@ -566,42 +566,42 @@ JST template file &gt; credits.html.jst
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Scrunched build script can be found in the <code><a href="../reference/Uize.Build.AutoScruncher.html">Uize.Build.AutoScruncher</a></code> module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Auto Scruncher build script can be found in the <code><a href="../reference/Uize.Build.AutoScruncher.html">Uize.Build.AutoScruncher</a></code> module</td></tr>
 			</table>
 		</div>
 		
 		<a name="2_6"></a>
-		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report">6</a>. </span>Build Strings Audit Report</h2>
+		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.6. Audit Strings"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Audit Strings">6</a>. </span>Audit Strings</h2>
 		<div class="contents2">
-			<p>The Build Strings Audit Report build script (implemented in the file <code>_build-strings-audit-report.js</code>) recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files.</p>
+			<p>The Audit Strings build script (implemented in the file <code>_Uize.Build.AuditStrings.js</code>) recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files.</p>
 			
-			<p>The Build Strings Audit Report build script groups the literal strings it finds inside a JavaScript file into four buckets...</p>
+			<p>The Audit Strings build script groups the literal strings it finds inside a JavaScript file into four buckets...</p>
 			
 			<a name="2_6_1"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report -&gt; 2.6.1. NON-INTERNATIONALIZABLE STRINGS"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report">6</a>.<a href="#2_6_1" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report -&gt; 2.6.1. NON-INTERNATIONALIZABLE STRINGS">1</a>. </span>NON-INTERNATIONALIZABLE STRINGS</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.6. Audit Strings -&gt; 2.6.1. NON-INTERNATIONALIZABLE STRINGS"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Audit Strings">6</a>.<a href="#2_6_1" title="2. The Build Scripts -&gt; 2.6. Audit Strings -&gt; 2.6.1. NON-INTERNATIONALIZABLE STRINGS">1</a>. </span>NON-INTERNATIONALIZABLE STRINGS</h3>
 			<div class="contents3">
 				<p>This category includes strings that are recognized by certain patterns as being non-internationalizable strings, including: DOM event names (eg. <code>click</code>), very JavaScript specific keywords (eg. <code>function</code>), HTML specific attribute names (eg. <code>href</code>), sufficiently distinctive HTML tag names (eg. <code>div</code>), file extensions (eg. <code>.gif</code>), strings that are only whitespace, strings that have no letter characters, hex formatted RGB color values (eg. <code>#ff0000</code>), module names (eg. <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code>), any string starting with "Uize", underscore delimited identifiers (eg. <code>button_big_disabled</code>), Changed.[propertyName] events (eg. <code>Changed.value</code>), the Changed.&#42; event, sufficiently distinguishable URL paths (eg. <code>myfolder/mysubfolder/myfile.html</code>), camelCase identifiers (eg. <code>languageSortAscending</code>).</p>
 			</div>
 			
 			<a name="2_6_2"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report -&gt; 2.6.2. LIKELY NON-INTERNATIONALIZABLE STRINGS"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report">6</a>.<a href="#2_6_2" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report -&gt; 2.6.2. LIKELY NON-INTERNATIONALIZABLE STRINGS">2</a>. </span>LIKELY NON-INTERNATIONALIZABLE STRINGS</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.6. Audit Strings -&gt; 2.6.2. LIKELY NON-INTERNATIONALIZABLE STRINGS"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Audit Strings">6</a>.<a href="#2_6_2" title="2. The Build Scripts -&gt; 2.6. Audit Strings -&gt; 2.6.2. LIKELY NON-INTERNATIONALIZABLE STRINGS">2</a>. </span>LIKELY NON-INTERNATIONALIZABLE STRINGS</h3>
 			<div class="contents3">
 				<p>This category includes strings with only one letter character (eg. <code>a</code>), and strings that look like short url snippets (eg. <code>myfolder/mysubfolder</code>).</p>
 			</div>
 			
 			<a name="2_6_3"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report -&gt; 2.6.3. POSSIBLY INTERNATIONALIZABLE STRINGS"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report">6</a>.<a href="#2_6_3" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report -&gt; 2.6.3. POSSIBLY INTERNATIONALIZABLE STRINGS">3</a>. </span>POSSIBLY INTERNATIONALIZABLE STRINGS</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.6. Audit Strings -&gt; 2.6.3. POSSIBLY INTERNATIONALIZABLE STRINGS"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Audit Strings">6</a>.<a href="#2_6_3" title="2. The Build Scripts -&gt; 2.6. Audit Strings -&gt; 2.6.3. POSSIBLY INTERNATIONALIZABLE STRINGS">3</a>. </span>POSSIBLY INTERNATIONALIZABLE STRINGS</h3>
 			<div class="contents3">
 				<p>This category includes strings that are not filtered out into either the <a href="#2_6_1">NON-INTERNATIONALIZABLE STRINGS</a>, <a href="#2_6_2">LIKELY NON-INTERNATIONALIZABLE STRINGS</a>, or <a href="#2_6_4">LIKELY INTERNATIONALIZABLE STRINGS</a> categories.</p>
 			</div>
 			
 			<a name="2_6_4"></a>
-			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report -&gt; 2.6.4. LIKELY INTERNATIONALIZABLE STRINGS"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report">6</a>.<a href="#2_6_4" title="2. The Build Scripts -&gt; 2.6. Build Strings Audit Report -&gt; 2.6.4. LIKELY INTERNATIONALIZABLE STRINGS">4</a>. </span>LIKELY INTERNATIONALIZABLE STRINGS</h3>
+			<h3 class="heading3" title="2. The Build Scripts -&gt; 2.6. Audit Strings -&gt; 2.6.4. LIKELY INTERNATIONALIZABLE STRINGS"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_6" title="2. The Build Scripts -&gt; 2.6. Audit Strings">6</a>.<a href="#2_6_4" title="2. The Build Scripts -&gt; 2.6. Audit Strings -&gt; 2.6.4. LIKELY INTERNATIONALIZABLE STRINGS">4</a>. </span>LIKELY INTERNATIONALIZABLE STRINGS</h3>
 			<div class="contents3">
 				<p>This category includes strings that are not filtered out into either the <a href="#2_6_1">NON-INTERNATIONALIZABLE STRINGS</a> or <a href="#2_6_2">LIKELY NON-INTERNATIONALIZABLE STRINGS</a> categories and that contain three adjacent, space separated words, where the middle word is all lowecase.</p>
 			</div>
 			
-			<p>Below is a snippet from the log file after the Build Strings Audit Report build script was run inside the <code>UIZE-JavaScript-Framework</code> folder of the <b>uize.com</b> Web site project...</p>
+			<p>Below is a snippet from the log file after the Audit Strings build script was run inside the <code>UIZE-JavaScript-Framework</code> folder of the UIZE Web site project...</p>
 			
 			<p><span class="allCaps">LOG FILE SNIPPET</span></p>
 			
@@ -648,28 +648,28 @@ JST template file &gt; credits.html.jst
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Strings Audit Report build script can be found in the <code><a href="../reference/Uize.Build.AuditStrings.html">Uize.Build.AuditStrings</a></code> module</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the summary info for this build script is output to the log file <code>_build-strings-audit-report.log</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Audit Strings build script can be found in the <code><a href="../reference/Uize.Build.AuditStrings.html">Uize.Build.AuditStrings</a></code> module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the summary info for this build script is output to the log file <code>_Uize.Build.AuditStrings.log</code></td></tr>
 			</table>
 		</div>
 		
 		<a name="2_7"></a>
 		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.7. Run Unit Tests (Scrunched)"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_7" title="2. The Build Scripts -&gt; 2.7. Run Unit Tests (Scrunched)">7</a>. </span>Run Unit Tests (Scrunched)</h2>
 		<div class="contents2">
-			<p>The Run Unit Tests (Scrunched) build script (implemented in the file <code>_run-unit-tests-scrunched.js</code>) runs the unit test suite for the UIZE JavaScript Framework, using the scrunched versions of the JavaScript modules.</p>
+			<p>The Run Unit Tests (Scrunched) build script (implemented in the file <code>_Uize.Build.RunUnitTests-scrunched.js</code>) runs the unit test suite for the UIZE JavaScript Framework, using the scrunched versions of the JavaScript modules.</p>
 		</div>
 		
 		<a name="2_8"></a>
 		<h2 class="heading2" title="2. The Build Scripts -&gt; 2.8. Run Unit Tests (Source)"><span class="headingNumber"><a href="#2" title="2. The Build Scripts">2</a>.<a href="#2_8" title="2. The Build Scripts -&gt; 2.8. Run Unit Tests (Source)">8</a>. </span>Run Unit Tests (Source)</h2>
 		<div class="contents2">
-			<p>The Run Unit Tests (Source) build script (implemented in the file <code>_run-unit-tests-source.js</code>) runs the unit test suite for the UIZE JavaScript Framework, using the source versions of the JavaScript modules.</p>
+			<p>The Run Unit Tests (Source) build script (implemented in the file <code>_Uize.Build.RunUnitTests-source.js</code>) runs the unit test suite for the UIZE JavaScript Framework, using the source versions of the JavaScript modules.</p>
 		</div>
 	</div>
 	
 	<a name="3"></a>
 	<h1 class="heading1" title="3. Build Script Setup"><span class="headingNumber"><a href="#3" title="3. Build Script Setup">3</a>. </span>Build Script Setup</h1>
 	<div class="contents1">
-		<p>The Build Script Setup (implemented in the file <code>_build-script-setup.js</code>) implements a module loader, specific to Windows Script Host, that is used by <a href="#2">The Build Scripts</a> that come bundled with the UIZE JavaScript Framework, and that can also be used when <a href="#5">Writing Your Own Build Scripts</a>.</p>
+		<p>The Build Script Setup (implemented in the <code>_build.js</code> file) implements a module loader that is used by <a href="#2">The Build Scripts</a> that come bundled with the UIZE JavaScript Framework, and that can also be used when <a href="#5">Writing Your Own Build Scripts</a>.</p>
 		
 		<a name="3_1"></a>
 		<h2 class="heading2" title="3. Build Script Setup -&gt; 3.1. Using the Build Script Setup"><span class="headingNumber"><a href="#3" title="3. Build Script Setup">3</a>.<a href="#3_1" title="3. Build Script Setup -&gt; 3.1. Using the Build Script Setup">1</a>. </span>Using the Build Script Setup</h2>
@@ -683,7 +683,7 @@ JST template file &gt; credits.html.jst
 			
 <pre class="sample-code">/*** boilerplate setup code for WSH build scripts ***/
   var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile (
-    '_build-script-setup.js',1
+    '_build.js',1
   );
   eval (_setupFile.ReadAll ()) ();
   _setupFile.Close ();
@@ -694,58 +694,54 @@ JST template file &gt; credits.html.jst
   // ... ... ...
 </pre>
 			
-			<p>In the boilerplate block, the statement <code>eval (_setupFile.ReadAll ()) ();</code> reads the contents of the <code>_build-script-setup.js</code> file, evaluates its code using the JavaScript <code>eval</code> function, and then calls the function that is returned by the <code>eval</code> call (the <code>_build-script-setup.js</code> file actually defines a function that returns a reference to the actual setup function). In this case, we are not passing any parameters to the setup function. This is the typical usage for build scripts that reside in the root folder of a Web site project (ie. the same folder as the <code>_build-script-setup.js</code> file) and that are to run using the source versions of the JavaScript modules. Optional parameters for the setup function allow the module loader to be configured for <a href="#3_1_1">Loading Scrunched Versions of Modules</a> and for <a href="#3_1_2">Running Scripts Outside a Project's Root Folder</a></p>
+			<p>In the boilerplate block, the statement <code>eval (_setupFile.ReadAll ()) ();</code> reads the contents of the <code>_build.js</code> file, evaluates its code using the JavaScript <code>eval</code> function, and then calls the function that is returned by the <code>eval</code> call (the <code>_build.js</code> file actually defines a function that returns a reference to the actual setup function). In this case, we are not passing any parameters to the setup function. This is the typical usage for build scripts that reside in the root folder of a Web site project (ie. the same folder as the <code>_build.js</code> file) and that are to run using the source versions of the JavaScript modules. Optional parameters for the setup function allow the module loader to be configured for <a href="#3_1_1">Loading Scrunched Versions of Modules</a> and for <a href="#3_1_2">Running Scripts Outside a Project's Root Folder</a></p>
 			
 			<a name="3_1_1"></a>
 			<h3 class="heading3" title="3. Build Script Setup -&gt; 3.1. Using the Build Script Setup -&gt; 3.1.1. Loading Scrunched Versions of Modules"><span class="headingNumber"><a href="#3" title="3. Build Script Setup">3</a>.<a href="#3_1" title="3. Build Script Setup -&gt; 3.1. Using the Build Script Setup">1</a>.<a href="#3_1_1" title="3. Build Script Setup -&gt; 3.1. Using the Build Script Setup -&gt; 3.1.1. Loading Scrunched Versions of Modules">1</a>. </span>Loading Scrunched Versions of Modules</h3>
 			<div class="contents3">
-				<p>The module loader defined in the <code>_build-script-setup.js</code> file can be configured to load the scrunched versions of JavaScript modules.</p>
+				<p>The module loader defined in the <code>_build.js</code> file can be configured to load the scrunched versions of JavaScript modules.</p>
 				
-				<p>This is done by specifying the value <code>false</code> for the optional <code>useSource</code> property of the optional params object that is passed when calling the setup function. Consider the following example...</p>
+				<p>This is done by specifying the value <code>false</code> for the optional <code>useSource</code> property of the optional params object that is passed when calling the build function. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">/*** boilerplate setup code for WSH build scripts ***/
-  var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile (
-    '_build-script-setup.js',1
-  );
-  eval (_setupFile.ReadAll ()) ({useSource:false});
-  _setupFile.Close ();
-
-Uize.module ({
-  required:'Uize.Build.Util',
-  builder:function () {Uize.Build.Util.testAllModules ()}
-});
+<pre class="sample-code">(function () {
+  var
+    _buildFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('_build.js',1),
+    _build = eval (_buildFile.ReadAll ())
+  ;
+  _buildFile.Close ();
+  _build ('Uize.Build.RunUnitTests',{useSource:false});
+}) ();
 </pre>
 				
-				<p>In the boilerplate block, the statement <code>eval (_setupFile.ReadAll ()) ({useSource:false});</code> calls the setup function, passing a params object with the value <code>false</code> specified for the <code>useSource</code> property. When no params object is specified, or when the <code>useSource</code> property is omitted from the params object, then this property is defaulted to <code>true</code>. Explicitly specifying the value <code>false</code> causes the module loader defined inside the <code>_build-script-setup.js</code> file to load the scrunched versions of the JavaScript modules.</p>
+				<p>In the call to the build function, the optional params object is passed with the value <code>false</code> specified for the <code>useSource</code> property. When no params object is specified, or when the <code>useSource</code> property is omitted from the params object, then this property is defaulted to <code>true</code>. Explicitly specifying the value <code>false</code> causes the module loader defined inside the <code>_build.js</code> file to load the scrunched versions of the JavaScript modules.</p>
 			</div>
 			
 			<a name="3_1_2"></a>
 			<h3 class="heading3" title="3. Build Script Setup -&gt; 3.1. Using the Build Script Setup -&gt; 3.1.2. Running Scripts Outside a Project&apos;s Root Folder"><span class="headingNumber"><a href="#3" title="3. Build Script Setup">3</a>.<a href="#3_1" title="3. Build Script Setup -&gt; 3.1. Using the Build Script Setup">1</a>.<a href="#3_1_2" title="3. Build Script Setup -&gt; 3.1. Using the Build Script Setup -&gt; 3.1.2. Running Scripts Outside a Project&apos;s Root Folder">2</a>. </span>Running Scripts Outside a Project's Root Folder</h3>
 			<div class="contents3">
-				<p>The module loader defined in the <code>_build-script-setup.js</code> file can be configured for scripts that are to be run in a folder other than the root folder of a Web site project.</p>
+				<p>The module loader defined in the <code>_build.js</code> file can be configured for scripts that are to be run in a folder other than the root folder of a Web site project.</p>
 				
 				<p>This is done by specifying a string value for the optional <code>pathToRoot</code> property of the optional params object that is passed when calling the setup function. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">/*** boilerplate setup code for WSH build scripts ***/
-  var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile (
-    '_build-script-setup.js',1
-  );
-  eval (_setupFile.ReadAll ()) ({pathToRoot:'UIZE-JavaScript-Framework\\'});
-  _setupFile.Close ();
-
-Uize.module ({
-  required:'Uize.Build.Util',
-  builder:function () {Uize.Build.Util.testAllModules ()}
-});
+<pre class="sample-code">(function () {
+  var
+    _buildFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('_build.js',1),
+    _build = eval (_buildFile.ReadAll ())
+  ;
+  _buildFile.Close ();
+  _build ('Uize.Build.RunUnitTests',{pathToRoot:'UIZE-JavaScript-Framework\\'});
+}) ();
 </pre>
 				
-				<p>In the boilerplate block, the statement <code>eval (_setupFile.ReadAll ()) ({pathToRoot:'UIZE-JavaScript-Framework\\'});</code> calls the setup function, passing a params object with the value <code>'UIZE-JavaScript-Framework\\'</code> specified for the <code>pathToRoot</code> property. When no params object is specified, or when the <code>pathToRoot</code> property is omitted from the params object, then this property is defaulted to <code>''</code> (empty string). In this example, explicitly specifying the value <code>'UIZE-JavaScript-Framework\\'</code> causes the module loader defined inside the <code>_build-script-setup.js</code> file to prepend the path "UIZE-JavaScript-Framework\" to the path for every module that it loads. Assuming that the folder "UIZE-JavaScript-Framework" contains the UIZE JavaScript Framework, then the above configuration of the <a href="#3">Build Script Setup</a> would be appropriate for a script that resides in, and is to be run from, a parent folder of the "UIZE-JavaScript-Framework" folder.</p>
+				<p>In the call to the build function, the optional params object is passed with the value <code>'UIZE-JavaScript-Framework\\'</code> specified for the <code>pathToRoot</code> property. When no params object is specified, or when the <code>pathToRoot</code> property is omitted from the params object, then this property is defaulted to <code>''</code> (empty string).</p>
+				
+				<p>In this example, explicitly specifying the value <code>'UIZE-JavaScript-Framework\\'</code> causes the module loader defined inside the <code>_build.js</code> file to prepend the path "UIZE-JavaScript-Framework\" to the path for every module that it loads. Assuming that the folder "UIZE-JavaScript-Framework" contains the UIZE JavaScript Framework, then the above configuration of the <a href="#3">Build Script Setup</a> would be appropriate for a script that resides in, and is to be run from, a parent folder of the "UIZE-JavaScript-Framework" folder.</p>
 			</div>
 		</div>
 	</div>
@@ -777,7 +773,7 @@ Uize.module ({
 			
 			<p>Most of the build scripts are coded to only rebuild files if the source file was updated since the previous build (ie. the modification date of the source file is later than that of the built file). In cases where you want to force the scripts to rebuild all the files they would normally build, you can set <code><a href="#4_1">alwaysBuild</a></code> to <code>true</code>.</p>
 			
-			<p>For some scripts, such as the <a href="#2_6">Build Strings Audit Report</a> script, the <code><a href="#4_1">alwaysBuild</a></code> build environment variable has no meaning. Also, the library builder portion of the <a href="#2_5">Build Scrunched</a> script always builds all library (<code>.library.js</code>) files, regardless of the modified dates of the source file or the modified dates of the various JavaScript modules listed in the library file.</p>
+			<p>For some scripts, such as the <a href="#2_6">Audit Strings</a> script, the <code><a href="#4_1">alwaysBuild</a></code> build environment variable has no meaning. Also, the library builder portion of the <a href="#2_5">Auto Scruncher</a> script always builds all library (<code>.library.js</code>) files, regardless of the modified dates of the source file or the modified dates of the various JavaScript modules listed in the library file.</p>
 		</div>
 		
 		<a name="4_2"></a>
@@ -785,7 +781,7 @@ Uize.module ({
 		<div class="contents2">
 			<p>A string, specifying the path - relative to the folder containing the build scripts - to a folder into which built files should be placed.</p>
 			
-			<p>When a value is specified for this optional build environment variable, built files will be populated into the specified build folder in a folder hierarchy that mirrors the folder hierarchy of the Web site project. For example, if the build scripts are in a folder <code>myproject</code>, and if the value <code>bld</code> is specified for the <code><a href="#4_2">buildFolderPath</a></code> variable, and if the JavaScript file <code>myproject/javascript/MyDomainDotCom.Page.js</code> is then scrunched by the <a href="#2_5">Build Scrunched</a> build script, then the scrunched version will be located at <code>myproject/bld/javascript/MyDomainDotCom.Page.js</code>.</p>
+			<p>When a value is specified for this optional build environment variable, built files will be populated into the specified build folder in a folder hierarchy that mirrors the folder hierarchy of the Web site project. For example, if the build scripts are in a folder <code>myproject</code>, and if the value <code>bld</code> is specified for the <code><a href="#4_2">buildFolderPath</a></code> variable, and if the JavaScript file <code>myproject/javascript/MyCompanySite.Page.js</code> is then scrunched by the <a href="#2_5">Auto Scruncher</a> build script, then the scrunched version will be located at <code>myproject/bld/javascript/MyCompanySite.Page.js</code>.</p>
 			
 			<p>New folders are created inside the build folder as needed in order to house the built files. After the build scripts have run, the folder hierarchy inside the build folder will only match the folder hierarchy of the Web site project if at least one file was built from every folder of the Web site project, since folders are only created as needed for the built files. Of course, the build folder won't contain itself, since the build scripts don't consider the files inside the build folder as source material for building files (which is a good thing).</p>
 			
@@ -815,7 +811,7 @@ Uize.module ({
 			
 			<p>By default, the build scripts will save the built files to the location determined by the values of the <code><a href="#4_2">buildFolderPath</a></code> and <code><a href="#4_7">sourceFolderName</a></code> build environment variables. In cases where you just want to see what build actions are taken by a particular build script without having any files be modified, you can set <code><a href="#4_4">dryRun</a></code> to <code>true</code>.</p>
 			
-			<p>When a build script is doing a dry run, it will still build the files and do everything that it normally would, except that it won't write the built files to the target location. A summary of all that would be done is output to a build script's associated log file(s), just as would be the case if you weren't doing a dry run. So, for example, in the case of running the <a href="#2_5">Build Scrunched</a> build script, the log files would contain all the Scruncher report information and the listings of all the library files that would be built. Doing a dry run and viewing the log files might be a good way to check that the target file paths are correct before doing a genuine build that would write files to the system.</p>
+			<p>When a build script is doing a dry run, it will still build the files and do everything that it normally would, except that it won't write the built files to the target location. A summary of all that would be done is output to a build script's associated log file(s), just as would be the case if you weren't doing a dry run. So, for example, in the case of running the <a href="#2_5">Auto Scruncher</a> build script, the log files would contain all the Scruncher report information and the listings of all the library files that would be built. Doing a dry run and viewing the log files might be a good way to check that the target file paths are correct before doing a genuine build that would write files to the system.</p>
 		</div>
 		
 		<a name="4_5"></a>
@@ -851,7 +847,7 @@ Uize.module ({
 		<a name="4_8"></a>
 		<h2 class="heading2" title="4. Build Environment Variables -&gt; 4.8. buildFolderPath vs sourceFolderName"><span class="headingNumber"><a href="#4" title="4. Build Environment Variables">4</a>.<a href="#4_8" title="4. Build Environment Variables -&gt; 4.8. buildFolderPath vs sourceFolderName">8</a>. </span>buildFolderPath vs sourceFolderName</h2>
 		<div class="contents2">
-			<p>For certain build scripts - such as the <a href="#2_5">Build Scrunched</a> and <a href="#2_6">Build Strings Audit Report</a> build scripts - the location for unscrunched and scrunched JavaScript files needs to be known.</p>
+			<p>For certain build scripts - such as the <a href="#2_5">Auto Scruncher</a> and <a href="#2_6">Audit Strings</a> build scripts - the location for unscrunched and scrunched JavaScript files needs to be known.</p>
 			
 			<p>You can take one of two approaches in your Web site project...</p>
 			
@@ -913,7 +909,7 @@ js/Uize.Comm.Iframe.Upload.js
 		<div class="contents2">
 			<p>Any build script provided as part of the UIZE JavaScript Framework download that is useful to your Web sites or projects can be adapted to suit your needs.</p>
 			
-			<p>Not all of the provided build scripts will necessarily be useful to you, of course, since some of them are intended primarily for the <b>uize.com</b> Web site. But, if a build script is potentially useful but not perfectly suited to the folder structure of your own projects, just change it. And some of the build scripts are already configurable with <a href="#4">Build Environment Variables</a>.</p>
+			<p>Not all of the provided build scripts will necessarily be useful to you, of course, since some of them are intended primarily for the UIZE Web site. But, if a build script is potentially useful but not perfectly suited to the folder structure of your own projects, just change it. And some of the build scripts are already configurable with <a href="#4">Build Environment Variables</a>.</p>
 		</div>
 		
 		<a name="5_2"></a>
@@ -944,7 +940,7 @@ js/Uize.Comm.Iframe.Upload.js
 			
 <pre class="sample-code">/*** Build Script Setup Boilerplate ***/
   var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile (
-    '_build-script-setup.js',1
+    '_build.js',1
   );
   eval (_setupFile.ReadAll ()) ();
   _setupFile.Close ();
@@ -968,7 +964,7 @@ js/Uize.Comm.Iframe.Upload.js
 			<div class="contents3">
 				<p>The <a href="#3">Build Script Setup</a> boilerplate is a small block of code that is necessary in every build script in order to bootstrap the process.</p>
 				
-				<p>This little block of code evals the JavaScript contained inside the <code>_build-script-setup.js</code> file, which defines a module loader that works in the Windows Script Host context. For a more detailed discussion, consult the section <a href="#3">Build Script Setup</a>.</p>
+				<p>This little block of code evals the JavaScript contained inside the <code>_build.js</code> file, which defines a module loader that works in the Windows Script Host context. For a more detailed discussion, consult the section <a href="#3">Build Script Setup</a>.</p>
 			</div>
 			
 			<a name="5_4_2"></a>
@@ -1053,10 +1049,10 @@ js/Uize.Comm.Iframe.Upload.js
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Doc.library',
-		'UizeDotCom.Page.Doc'
+		'UizeSite.Page.Doc.library',
+		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
 });
 
 </script>

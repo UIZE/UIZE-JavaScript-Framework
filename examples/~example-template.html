@@ -63,15 +63,15 @@
 
 Uize.module ({
 	required:[
-		'UizeDotCom.Page.Example.library',
-		'UizeDotCom.Page.Example'
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example'
 		/*
 			REPLACE THIS COMMENT WITH A LIST OF MODULES REQUIRED SPECIFICALLY BY THIS EXAMPLE, OR REMOVE COMMENT
 		*/
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
 		/*
 			REPLACE THIS COMMENT WITH SETUP CODE FOR THE EXAMPLE
