@@ -57,7 +57,7 @@ Uize.module ({
 					_dotLibraryDotJsRegExp = /\.library\.js$/i,
 					_testModuleRegExp = /^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/,
 					_modules = Uize.Wsh.getFiles (
-						env.moduleFolderPath,
+						_params.moduleFolderPath,
 						function (_filePath) {
 							return _dotJsRegExp.test (_filePath) && !_dotLibraryDotJsRegExp.test (_filePath)
 						},

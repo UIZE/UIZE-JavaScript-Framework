@@ -108,7 +108,7 @@ Uize.module ({
               ;
             }
             _addReferencePagesToUrlDictionary ('javascript-reference',_dotSimpleRegExp);
-            _addReferencePagesToUrlDictionary (env.moduleFolderPath,_dotJsRegExp,_moduleReferenceFolderName);
+            _addReferencePagesToUrlDictionary (_params.moduleFolderPath,_dotJsRegExp,_moduleReferenceFolderName);
 
         /*** now build the SimpleDoc pages ***/
           Uize.Build.BuildSimpleDocPages.perform (

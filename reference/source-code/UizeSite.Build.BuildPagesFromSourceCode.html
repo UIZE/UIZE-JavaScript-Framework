@@ -73,7 +73,7 @@ Uize.module ({
         }
 
         Uize.Wsh.buildFiles ({
-          alwaysBuild:env.alwaysBuild,
+          alwaysBuild:_params.alwaysBuild,
           targetFolderPathCreator:function (_folderPath) {
             var _targetFolderPath = null;
             if (/js\\~source$/.test (_folderPath)) {

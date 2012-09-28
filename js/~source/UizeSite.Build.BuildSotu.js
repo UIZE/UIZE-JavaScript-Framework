@@ -102,7 +102,7 @@ Uize.module ({
 
 							/*** extract module meta data from module source ***/
 								var
-									_sourceFileText = Uize.Wsh.readFile (env.moduleFolderPath + '\\' + _moduleName + '.js'),
+									_sourceFileText = Uize.Wsh.readFile (_params.moduleFolderPath + '\\' + _moduleName + '.js'),
 									_metaDataCommentRegExp = /\/\*\s*Module\s*Meta\s*Data/i,
 									_metaDataCommentStartPos = _sourceFileText.search (_metaDataCommentRegExp),
 									_metaDataCommentEndPos = _sourceFileText.indexOf ('*/',_metaDataCommentStartPos),
@@ -131,9 +131,9 @@ Uize.module ({
 								_moduleInfo.scrunchedFileSize =
 									Uize.Wsh.readFile (
 										Uize.Build.AutoScruncher.getScrunchedFolderPath (
-											Uize.Wsh.getScriptFolderPath () + '\\' + env.moduleFolderPath,
-											env.buildFolderPath,
-											env.sourceFolderName
+											Uize.Wsh.getScriptFolderPath () + '\\' + _params.moduleFolderPath,
+											_params.buildFolderPath,
+											_params.sourceFolderName
 										) + '\\' + _moduleName + '.js'
 									).length
 								;

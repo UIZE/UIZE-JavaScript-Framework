@@ -70,13 +70,13 @@ Uize.module ({
 						var _modulesTree = Uize.Data.PathsTree.fromList (Uize.map (_moduleReferenceFiles,'value.title'),'.');
 
 					/*** write the modules tree module file ***/
-						Uize.Build.Util.writeDataModule (env.moduleFolderPath,'UizeSite.ModulesTree',_modulesTree);
+						Uize.Build.Util.writeDataModule (_params.moduleFolderPath,'UizeSite.ModulesTree',_modulesTree);
 
 				/*** build the examples module and index pages ***/
 					var _examples = Uize.Build.Util.getHtmlFilesInfo ('examples',_getFirstTitleSegment);
 
 					/*** build the UizeSite.Examples module ***/
-						Uize.Build.Util.writeDataModule (env.moduleFolderPath,'UizeSite.Examples',_examples);
+						Uize.Build.Util.writeDataModule (_params.moduleFolderPath,'UizeSite.Examples',_examples);
 
 					/*** build the examples by module page ***/
 						Uize.Build.Util.processJstFile ('javascript-examples-by-module.html.jst');
@@ -110,7 +110,7 @@ Uize.module ({
 
 					/*** build the UizeSite.ExamplesInfoForSiteMap module ***/
 						Uize.Build.Util.writeDataModule (
-							env.moduleFolderPath,'UizeSite.ExamplesInfoForSiteMap',
+							_params.moduleFolderPath,'UizeSite.ExamplesInfoForSiteMap',
 							{
 								keywords:Uize.keys (_examplesByKeyword).slice (1).sort (), // slice removes the '' keyword
 								tools:

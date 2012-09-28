@@ -46,7 +46,7 @@ Uize.module ({
 				var
 					_urlDictionary = _params.urlDictionary,
 					_examplesByKeyword = _params.examplesByKeyword,
-					_alwaysBuild = env.alwaysBuild,
+					_alwaysBuild = _params.alwaysBuild,
 					_simpleDocTemplateFileName = '~SIMPLE-DOC-TEMPLATE.html.jst',
 					_simpleDocTemplatePath,
 					_simpleDocTemplate,
@@ -139,11 +139,11 @@ Uize.module ({
 
 				/*** extract SIMPLE doc from JavaScript modules ***/
 					var
-						_moduleFolderPath = '\\' + env.moduleFolderPath,
+						_moduleFolderPath = '\\' + _params.moduleFolderPath,
 						_moduleFolderPathLength = _moduleFolderPath.length,
 						_moduleName,
 						_modulesTree = Uize.Data.PathsTree.fromList (
-							Uize.Wsh.getFiles (env.moduleFolderPath,_dotJsRegExp,_getFilenameFromPath)
+							Uize.Wsh.getFiles (_params.moduleFolderPath,_dotJsRegExp,_getFilenameFromPath)
 						)
 					;
 
