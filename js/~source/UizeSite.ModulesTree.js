@@ -11,6 +11,7 @@ Uize.module ({
 						Util:0
 					},
 					Build:{
+						All:0,
 						AuditStrings:0,
 						AutoScruncher:0,
 						BuildSimpleDataPages:0,

@@ -21,8 +21,44 @@
 (function () {
 	var _isWsh = typeof ActiveXObject != 'undefined';
 
-	function _build (_buildModuleName,_params) {
-		if (!_params) _params = {};
+	/*** get the command line args, excluding the first two ***/
+		var _args;
+		if (_isWsh) {
+			_args = [];
+			for (
+				var _wshArgNo = -1, _wshArgs = WScript.Arguments, _wshArgsLength = _wshArgs.length;
+				++_wshArgNo < _wshArgsLength;
+			) {
+				_args.push (_wshArgs (_wshArgNo));
+			}
+		} else {
+			_args = process.argv.slice (2);
+		}
+
+	/*** determine build module name (if this script is being used in that way) ***/
+		var
+			_buildModuleName,
+			_thisScriptName = '_build.js',
+			_scriptFullName = _isWsh ? WScript.ScriptFullName : process.argv [1]
+		;
+		if (_scriptFullName.slice (_scriptFullName.length - _thisScriptName.length) == _thisScriptName) {
+			_buildModuleName = _args [0];
+			_args = _args.slice (1);
+		}
+
+	/*** parse out named arguments ***/
+		var _params = {};
+		for (var _argNo = -1, _arg, _delimPos; ++_argNo < _args.length;) {
+			_delimPos = (_arg = _args [_argNo]).indexOf ('=');
+			if (_delimPos > -1)
+				_params [_arg.slice (0,_delimPos)] = _arg.slice (_delimPos + 1)
+			;
+		}
+
+	function _build (_buildModuleName,_paramOverrides) {
+		for (var _paramName in _paramOverrides) {
+			_params [_paramName] = _paramOverrides [_paramName];
+		}
 		var
 			_pathToRoot = _params.pathToRoot || '',
 			_useSource = _params.useSource !== false
@@ -96,40 +132,7 @@
 	};
 
 	/*** if this script is being run directly, then run the specified build process ***/
-		var
-			_thisScriptName = '_build.js',
-			_scriptFullName = _isWsh ? WScript.ScriptFullName : process.argv [1]
-		;
-		if (_scriptFullName.slice (_scriptFullName.length - _thisScriptName.length) == _thisScriptName) {
-			/*** get the command line args, excluding the first two ***/
-				var _args;
-				if (_isWsh) {
-					_args = [];
-					for (
-						var _wshArgNo = -1, _wshArgs = WScript.Arguments, _wshArgsLength = _wshArgs.length;
-						++_wshArgNo < _wshArgsLength;
-					) {
-						_args.push (_wshArgs (_wshArgNo));
-					}
-				} else {
-					_args = process.argv.slice (2);
-				}
-
-			var _buildModuleName = _args [0];
-
-			if (_buildModuleName) {
-				/*** parse out named arguments ***/
-					var _params = {};
-					for (var _argNo = 0, _arg, _delimPos; ++_argNo < _args.length;) {
-						_delimPos = (_arg = _args [_argNo]).indexOf ('=');
-						if (_delimPos > -1)
-							_params [_arg.slice (0,_delimPos)] = _arg.slice (_delimPos + 1)
-						;
-					}
-
-				_build (_buildModuleName,_params);
-			}
-		}
+		_buildModuleName && _build (_buildModuleName);
 
 	return _build;
 }) ();

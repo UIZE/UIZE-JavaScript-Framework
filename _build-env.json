@@ -29,6 +29,10 @@
 		'_UizeSite.Build.BuildSotu.js',
 		'_UizeSite.Build.BuildCodeSitemap.js'
 	],
+	testSequence:[
+		'_Uize.Build.RunUnitTests-source.js silent=true',
+		'_Uize.Build.RunUnitTests-scrunched.js silent=true'
+	],
 	doNotEnter:/\\(css|images|OLD|photos|source-code|Uize.*)$/,
 	dryRun:false,
 	moduleFolderPath:'js\\~source',

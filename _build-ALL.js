@@ -1,20 +1,9 @@
-/*** boilerplate setup code for WSH build scripts ***/
-	var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('_build.js',1);
-	eval (_setupFile.ReadAll ()) ();
-	_setupFile.Close ();
-
-Uize.module ({
-	required:'Uize.Build.Util',
-	builder:function () {
-		var _buildError = Uize.Build.Util.runScripts (env.buildSequence);
-		(WScript.Arguments.Count () && WScript.Arguments.Item (0) == 'silent') ||
-			alert (
-				_buildError
-					? ('BUILD FAILED IN THE FOLLOWING SCRIPT:\n\n' + _buildError.script)
-					: 'BUILD ALL COMPLETE!!!'
-			)
-		;
-		_buildError && WScript.Quit (1);
-	}
-});
+(function () {
+	var
+		_buildFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('_build.js',1),
+		_build = eval (_buildFile.ReadAll ())
+	;
+	_buildFile.Close ();
+	_build ('Uize.Build.All');
+}) ();
 

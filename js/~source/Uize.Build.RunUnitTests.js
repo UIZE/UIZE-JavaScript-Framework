@@ -159,7 +159,7 @@ Uize.module ({
 						})
 					;
 
-				Uize.Build.Util.runUnitTests (_unitTestSuite);
+				Uize.Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true');
 			};
 
 		return _package;

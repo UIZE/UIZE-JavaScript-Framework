@@ -128,13 +128,8 @@ Uize.module ({
 				return _error;
 			};
 
-			_package.runUnitTests = function (_unitTestsClass) {
-				if (typeof _unitTestsClass == 'string') {
-					Uize.module ({
-						required:_unitTestsClass,
-						builder:function () {_package.runUnitTests (eval (_unitTestsClass))}
-					});
-				} else {
+			_package.runUnitTests = function (_unitTestsClass,_silent) {
+				function _runUnitTests (_unitTestsClass) {
 					var
 						_unitTests = new _unitTestsClass,
 						_logChunks = []
@@ -165,9 +160,7 @@ Uize.module ({
 
 								/*** finish up if the test fails or if unit tests complete ***/
 									if (_test == _unitTests || !_test.get ('result')) {
-										(WScript.Arguments.Count () && WScript.Arguments.Item (0) == 'silent') ||
-											alert (_test.getSynopsis ())
-										;
+										_silent || alert (_test.getSynopsis ());
 										Uize.Wsh.writeFile ({
 											path:WScript.ScriptName.replace (/\.js$/,'.log'),
 											text:_logChunks.join ('\n')
@@ -178,6 +171,10 @@ Uize.module ({
 					});
 					_unitTests.run ();
 				}
+				typeof _unitTestsClass == 'string'
+					? Uize.require (_unitTestsClass,_runUnitTests)
+					: _runUnitTests (_unitTestsClass)
+				;
 			};
 
 			_package.writeDataModule = function (_moduleFolderPath,_moduleName,_moduleData) {
