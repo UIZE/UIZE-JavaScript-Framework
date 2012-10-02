@@ -1,2 +1,2 @@
-/site-source/*.log
+*.log
 /site-built
