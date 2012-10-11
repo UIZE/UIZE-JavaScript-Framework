@@ -1058,11 +1058,70 @@ Uize.module ({
 									_nodesToInject.push (_htmlToInject [_nodeNo].cloneNode (_true));
 							}
 							else {
+								// IE is "special" in that it has nodes that don't accept innerHTML, so the solution to parse
+								// the HTML string is to parse it as XML with the XMLDOM ACtiveX control. But XmlDom is different
+								// than HtmlDom nodes, so we have to traverse the XmlDom tree creating corresponding HtmlDom nodes
+								if (_isIe && _ieInnerHtmlReadOnly [_node.tagName] && ActiveXObject) {
+									var _activeXObject = new ActiveXObject('Microsoft.XMLDOM');
+									_activeXObject.async = _false;
+									_activeXObject.loadXML('<foo>' + _htmlToInject.replace(/&/g, '&amp;') + '</foo>');
+
+									var _xmlChildNodes = _activeXObject.documentElement.childNodes;
+									
+									function _convertToHtmlNode(_xmlNode) {
+										var _htmlNode;
+										switch (_xmlNode.nodeType) {
+											case 1: // element
+												_htmlNode = document.createElement(_xmlNode.tagName);
+												
+												// add attributes
+												for (var _attributeNo = -1; ++_attributeNo < _xmlNode.attributes.length;) {
+													var _attribute = _xmlNode.attributes[_attributeNo];
+													_htmlNode.setAttribute(_attribute.nodeName, _attribute.nodeValue);
+												}
+												
+												// handle scripts specially but just getting text contents
+												if (_htmlNode.tagName == 'SCRIPT')
+													_htmlNode.text = _xmlNode.text;
+												else {
+													// all others iterate through child nodes and get their html equivalents
+													for (var _childNodeNo = -1; ++_childNodeNo < _xmlNode.childNodes.length;) {
+														var _htmlChildNode = _convertToHtmlNode(_xmlNode.childNodes[_childNodeNo]);
+														
+														_htmlChildNode
+															&& _htmlNode.appendChild(_htmlChildNode)
+														;
+													}
+												}
+												
+												break;
+											case 3:	// text
+												_htmlNode = document.createTextNode(_xmlNode.nodeValue);
+												break;
+											case 8: // comment
+												_htmlNode = document.createComment(_xmlNode.nodeValue);
+												break;
+										}
+										return _htmlNode;
+									}
+									
+									// iterate through XML nodes and convert to their HTML equivalents
+									for (var _nodeNo = -1; ++_nodeNo < _xmlChildNodes.length;)
+										_nodesToInject.push(
+											_convertToHtmlNode(_xmlChildNodes[_nodeNo])
+										)
+									;
+									
+									// we have an array of nodes as opposed to a NodeList
+									_areNodes = _true;
+								}
+								else {
 								var _dummyNode = document.createElement (_node.tagName);
 								_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
 									+ _htmlToInject
 								;
-								_nodesToInject = _dummyNode.childNodes
+										_nodesToInject = _dummyNode.childNodes;
+								}
 							}
 							var
 								_nodeToInsertBefore = _isInnerTop
@@ -1070,7 +1129,7 @@ Uize.module ({
 									: _isOuterBottom ? _node.nextSibling : _node
 								,
 								_nodeParentNode = _node.parentNode,
-								_nodesToSkip = +!_areNodes // IE NoScope fix not needed when given dom nodes
+								_nodesToSkip = +!_areNodes
 							;
 							function _fixCrippledScripts (_node) {
 								if (_node.tagName == 'SCRIPT') {
