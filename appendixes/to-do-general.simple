@@ -1,5 +1,62 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[to-do-documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[to-do-modules.html][TO DO - Modules]]).
 
+Separate Source Code From Built Code
+	Update all the build scripts and the site deploy script so that the built code is separated out from the source code.
+
+	Problems With Existing Situation
+		Currently, the built code is placed alongside source code in the source code folder structure. This is problematic for a number of reasons...
+
+		Built Code is Committed
+			All the built code is committed to the source control system, which presents the following issues...
+
+			- this bloats up the repository
+			- it adds noise to the commits (for every source file that changes, multiple built files change)
+
+		Searches Are Ugly
+			Searches inside the source code folder structure often will produce results / matches in built files, and this often adds a burden during refactoring processes.
+
+		Bigger Download
+			Including the built files in the source code folder structure bloats up the zip archive download for the framework.
+
+		Deploying the Site is Slower
+			Because source files are deployed with the built site, uploading the archive of the site's code takes much longer than it needs to.
+
+		Deployed Site Contains Source
+			The deployed site contains all the source code, which includes WSH build scripts, =.simple= files, =.jst= template files, etc.
+
+			The unnecessary =.simple= source files may be indexed by search engines. At the very least, they are just clutter lying around.
+
+	The Solution
+		The solution is to separate out the built code from the source code, so that there are distinct source and built folder structures for the framework's Web site.
+
+		Update Build Scripts
+			The build scripts will need to be updated in the following ways...
+
+			Output to Built Folder
+				The build scripts should save all built files to a built folder, that is a peer of the source folder, and whose structure parallels the source folder.
+
+				One consequence of this change is that the scrunched JavaScript modules and the source JavaScript modules can be in the same place in their respective built and source folder trees (currently, the JavaScript module source files are contained inside a "~source" subfolder of the site's "js" folder.
+
+			Copy Static Files
+				Numerous static files that are not involved in the build process should simply be copied to their equivalent place within the built folder.
+
+				This will require writing a new build script to copy over static files. Example of static files are...
+
+				- CSS files
+				- image assets
+				- example and test HTML files (until they're turned into dynamic / built files)
+				- various other miscellaneous files (like *404.html*, *HELLO-WORLD.html*, etc.)
+
+		Update Deploy Script
+			The deploy script will have to be updated to perform the following steps...
+
+			- create a ZIP archive of the built Web site (only the contents of the built folder)
+			- ftp the built site ZIP archive and expand on server
+			- remove ZIP archive from server
+
+		Remove All Built Code From Source Tree
+			Once the build scripts have been updated to output built files to the built folder, all built code should be cleared from the source folder.
+
 General Drag and Drop Framework
 	Virtual dom events to mimic new HTML5 dnd events.
 
