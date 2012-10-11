@@ -468,7 +468,7 @@ Uize.module ({
 		/*** General Variables ***/
 			var
 				_classesProfiles = {},
-				_arrayWithEmptyString = ['','']
+				_arrayWithEmptyString = ['']
 			;
 
 		/*** Public Static Methods ***/
@@ -481,7 +481,7 @@ Uize.module ({
 					(_classes = _classesProfileKey.split (',')).length == 1 && _classes.unshift ('');
 					var
 						_classesRegExpStr =
-							'(?:^| )(' + _classes.join ('|').replace (/\|{2,}/g,'|').replace (/^\||\|$/g,'') + ')(?: |$)',
+							'\\b(?:' + _classes.join ('|').replace (/\|{2,}/g,'|').replace (/^\||\|$/g,'') + ')\\b',
 						_classToStateMap = {'':-1},
 						_classesLength = _classes.length
 					;
@@ -504,7 +504,7 @@ Uize.module ({
 					var _classesProfile = _getClassesProfile (_classes);
 					if (_classesProfile)
 						_result = _classesProfile._classToStateMap [
-							(_node.className.match (_classesProfile._matchClassRegExp) || _arrayWithEmptyString) [1]
+							(_node.className.match (_classesProfile._matchClassRegExp) || _arrayWithEmptyString) [0]
 						]
 					;
 				}
