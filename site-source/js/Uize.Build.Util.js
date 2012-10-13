@@ -36,14 +36,18 @@ Uize.module ({
 		'Uize.String',
 		'Uize.String.Lines',
 		'Uize.Json',
-		'Uize.Array.Sort'
+		'Uize.Array.Sort',
+		'Uize.Services.FileSystem'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
 		/*** General Variables ***/
-			var _compiledJstFilesByPath = {};
+			var
+				_fileSystem = Uize.Services.FileSystem.singleton (),
+				_compiledJstFilesByPath = {}
+			;
 
 		/*** Public Static Methods ***/
 			_package.resolveBuiltFolderPath = function (_folderPath,_buildFolderPath) {
@@ -97,12 +101,12 @@ Uize.module ({
 			_package.compileJstFile = function (_jstTemplatePath) {
 				var _template = _compiledJstFilesByPath [_jstTemplatePath];
 				if (!_template) {
-					if (!Uize.Wsh.fileExists (_jstTemplatePath)) return;
+					if (!_fileSystem.fileExists ({path:_jstTemplatePath})) return;
 					_template = _compiledJstFilesByPath [_jstTemplatePath] = Uize.Template.compile (
-						Uize.Wsh.readFile (_jstTemplatePath),
+						_fileSystem.readFile ({path:_jstTemplatePath}),
 						{result:'full'}
 					);
-					Uize.module ({required:_template.required});
+					Uize.require (_template.required);
 				}
 				return _template.templateFunction;
 			};
