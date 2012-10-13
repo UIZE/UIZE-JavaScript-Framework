@@ -1,6 +1,7 @@
 {
 	alwaysBuild:false,
-	buildFolderPath:'..\\site-built',
+	buildFolderPath:'site-built',
+	rootFolderPath:'site-source',
 	buildSequence:[
 		/* IMPORTANT:
 			The order of execution of these build scripts is important, informed by the following criteria...
@@ -35,7 +36,7 @@
 	],
 	doNotEnter:/\\(css|images|OLD|photos|Uize.*)$/,
 	dryRun:false,
-	moduleFolderPath:'js',
+	moduleFolderPath:'site-source\\js',
 	scrunchedHeadComments:{
 		Uize:
 			'/*\n' +

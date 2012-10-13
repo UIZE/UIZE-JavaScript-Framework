@@ -18,6 +18,10 @@
 	The working directory for running this script in node should be the UIZE root directory.
 */
 
+function _eval (_toEval) {
+	eval (_toEval);
+}
+
 (function () {
 	var _isWsh = typeof ActiveXObject != 'undefined';
 
@@ -109,9 +113,10 @@
 						_modulePath = _buildFolderPath + '\\' + _modulePath
 					;
 				}
-				_callback (_readFile (_modulePath + '\\' + _moduleToLoad + '.js'));
+				_eval (_readFile (_modulePath + '\\' + _moduleToLoad + '.js'));
+				_callback ();
 			}
-			_moduleLoader ('Uize',function (_uizeCode) {eval (_uizeCode); Uize.moduleLoader = _moduleLoader});
+			_moduleLoader ('Uize',function (_uizeCode) {Uize.moduleLoader = _moduleLoader});
 
 		/*** services setup & run build module (if specified) ***/
 			Uize.require (
