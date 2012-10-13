@@ -58,7 +58,6 @@ Separate Source Code From Built Code
 			Once the build scripts have been updated to output built files to the built folder, all built code should be cleared from the source folder.
 
 		Build Scripts to be Fixed
-			- _Uize.Build.AuditStrings.js
 			- _Uize.Build.AutoScruncher.js
 			- _Uize.Build.BuildSimpleDataPages.js
 			- _Uize.Build.BuildSimpleDocPages.js
