@@ -39,6 +39,40 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_class.declareServiceMethods ({
+				fileExists:{
+					async:_false
+					/*?
+						Instance Methods
+							fileExists
+								document...
+
+								SYNTAX
+								...........................................................
+								fileExistsBOOL = fileSystemInstance.fileExists (paramsOBJ);
+								...........................................................
+
+								Params
+									path
+										document...
+					*/
+				},
+				getModifiedDate:{
+					async:_false
+					/*?
+						Instance Methods
+							getModifiedDate
+								document...
+
+								SYNTAX
+								.................................................................
+								modifiedDateOBJ = fileSystemInstance.getModifiedDate (paramsOBJ);
+								.................................................................
+
+								Params
+									path
+										document...
+					*/
+				},
 				readFile:{
 					async:_false
 					/*?
@@ -47,9 +81,26 @@ Uize.module ({
 								document...
 
 								SYNTAX
-								...................................................................................
-								fileContentsSTR = fileSystemInstance.readFile (paramsOBJ,callbackFUNC,errbackFUNC);
-								...................................................................................
+								..........................................................
+								fileContentsSTR = fileSystemInstance.readFile (paramsOBJ);
+								..........................................................
+
+								Params
+									path
+										document...
+					*/
+				},
+				pathExists:{
+					async:_false
+					/*?
+						Instance Methods
+							pathExists
+								document...
+
+								SYNTAX
+								...........................................................
+								pathExistsBOOL = fileSystemInstance.pathExists (paramsOBJ);
+								...........................................................
 
 								Params
 									path
@@ -62,6 +113,18 @@ Uize.module ({
 						Instance Methods
 							writeFile
 								document...
+
+								SYNTAX
+								.........................................
+								fileSystemInstance.writeFile (paramsOBJ);
+								.........................................
+
+								Params
+									path
+										document...
+
+									contents
+										document...
 					*/
 				},
 				init:{
