@@ -41,9 +41,7 @@ Uize.module ({
 
 		/*** Class Constructor ***/
 			var
-				_class = _superclass.subclass (
-					function () {this._serviceMethods = []}
-				),
+				_class = _superclass.subclass (),
 				_classPrototype = _class.prototype
 			;
 
@@ -59,7 +57,7 @@ Uize.module ({
 			}
 
 		/*** Private Static Properties ***/
-			_class._serviceMethods = [];
+			_class._serviceMethods = {};
 
 		/*** Private Instance Methods ***/
 			_classPrototype._warn = function (_message) {
@@ -68,25 +66,23 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_class.declareServiceMethods = function (_serviceMethods) {
-				var _this = this;
-
-				if (arguments.length != 1 || typeof _serviceMethods != 'object')
-					_serviceMethods = [].slice.call (arguments)
+				var
+					_this = this,
+					_thisServiceMethods = _this._serviceMethods,
+					_serviceMethodPublicWrappers = {}
 				;
-
-				var _serviceMethodPublicWrappers = {};
 				function _declareServiceMethod (_methodName,_methodProfile) {
 					var _isInitMethod = _methodName == 'init';
 
-					function _errorMessage (_message) {return '<< ' + _methodName + ' >> ' + _message}
+					function _methodError (_message) {return '<< ' + _methodName + ' >> ' + _message}
 
 					if (_this.prototype [_methodName])
 						throw new Error (
-							_errorMessage ('You may not override a non-service public method with a service method')
+							_methodError ('You may not override a non-service public method with a service method')
 						)
 					;
 
-					_serviceMethods [_methodName] = _methodProfile || (_methodProfile = {});
+					_thisServiceMethods [_methodName] = _methodProfile || (_methodProfile = {});
 
 					// normalize method profile
 					// eg.
@@ -105,14 +101,14 @@ Uize.module ({
 						if (!_methodIsAsync) {
 							if (!_adapter)
 								throw new Error (
-									_errorMessage (
+									_methodError (
 										'To call a synchronous service method, a service adapter must be set and the service must be initialized'
 									)
 								)
 							;
 							if (!_isInitMethod && !_this.get ('initialized'))
 								throw new Error (
-									_errorMessage (
+									_methodError (
 										'In order to call a synchronous service method, the service must already be initialized'
 									)
 								)
@@ -121,7 +117,7 @@ Uize.module ({
 						if (_params == _undefined) {
 							_params = {};
 						} else if (typeof _params != 'object') {
-							throw new Error (_errorMessage ('First argument (params) must be an object, null, or undefined'));
+							throw new Error (_methodError ('First argument (params) must be an object, null, or undefined'));
 						}
 						var
 							_adapterMethodWasAsync = _false,
@@ -148,8 +144,8 @@ Uize.module ({
 											_onError (_error);
 										} else {
 											typeof _error == 'string'
-												? (_error = new Error (_errorMessage (_error)))
-												: (_error.message = _errorMessage (_error.message))
+												? (_error = new Error (_methodError (_error)))
+												: (_error.message = _methodError (_error.message))
 											;
 											throw _error;
 										}
@@ -159,13 +155,13 @@ Uize.module ({
 									}
 								}
 								if (_timeReturned !== _undefined) {
-									throw new Error (_errorMessage ('Service adapter method should only return once'));
+									throw new Error (_methodError ('Service adapter method should only return once'));
 								} else {
 									_timeReturned = Uize.now ();
 									var _adapterMethodDuration = _timeReturned - _timeCalled;
 									_adapterMethodDuration > _SERVICE_TAKING_TOO_LONG &&
 										_this._warn (
-											_errorMessage(
+											_methodError(
 												'Service adapter method took too long to return (' + _adapterMethodDuration + 'ms)'
 											)
 										)
@@ -175,7 +171,7 @@ Uize.module ({
 									} else {
 										if (_adapterMethodWasAsync) {
 											throw new Error (
-												_errorMessage (
+												_methodError (
 													'Service method is declared as synchronous, but implementation in adapter is asynchronous'
 												)
 											);
@@ -200,7 +196,7 @@ Uize.module ({
 									) !== _undefined
 								)
 									throw new Error (
-										_errorMessage (
+										_methodError (
 											'Service adapter method should always provide its result through a callback, not a return statement'
 										)
 									)
@@ -216,7 +212,7 @@ Uize.module ({
 								function () {
 									var _initialized = _this.get ('initialized');
 									_this._warn (
-										_errorMessage (
+										_methodError (
 											_adapter && _initialized
 												? 'Service adapter method taking too long to return'
 												: (
@@ -242,10 +238,10 @@ Uize.module ({
 							_this.once ('adapter',_callAdapterMethod);
 						} else {
 							if (!_adapter) {
-								_this._warn (_errorMessage ('Adapter is not yet set when service method is called'));
+								_this._warn (_methodError ('Adapter is not yet set when service method is called'));
 							} else if (!_this.get ('initialized')) {
 								_this._warn (
-									_errorMessage (
+									_methodError (
 										'Service adapter is set but not yet initialized when service method is called'
 									)
 								);
@@ -261,6 +257,9 @@ Uize.module ({
 						return _result;
 					};
 				}
+				if (arguments.length != 1 || typeof _serviceMethods != 'object')
+					_serviceMethods = [].slice.call (arguments)
+				;
 				Uize.forEach (
 					_serviceMethods,
 					Uize.isArray (_serviceMethods)
@@ -307,9 +306,7 @@ Uize.module ({
 								_adapter = new _adapterClass;
 							} else {
 								throw new Error (
-									_errorMessage (
-										'The adapter module ' + _adapter + ' must be required and loaded first if you wish to set an adapter by module name'
-									)
+									'The adapter module ' + _adapter + ' must be required and loaded first if you wish to set an adapter by module name'
 								);
 							}
 						}
@@ -318,21 +315,16 @@ Uize.module ({
 							var _missingServiceMethods = [];
 							Uize.forEach (
 								this.constructor._serviceMethods,
-								function (_serviceMethod) {
-									if (
-										!_adapter.hasOwnProperty (_serviceMethod) ||
-										typeof _adapter [_serviceMethod] != 'function'
-									) {
-										_missingServiceMethods.push (_serviceMethod);
-									}
+								function (_serviceMethodProfile,_serviceMethod) {
+									typeof _adapter [_serviceMethod] != 'function' &&
+										_missingServiceMethods.push (_serviceMethod)
+									;
 								}
 							);
 							if (_missingServiceMethods.length) {
 								_adapter = _undefined;
 								throw new Error (
-									_errorMessage (
-										'Service module adapter is missing implementations for service methods: ' + _missingServiceMethods.sort ().join (', ')
-									)
+									'Service module adapter is missing implementations for service methods: ' + _missingServiceMethods.sort ().join (', ')
 								);
 							}
 						}
