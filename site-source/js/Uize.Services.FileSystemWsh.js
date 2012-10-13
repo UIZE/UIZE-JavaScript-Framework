@@ -35,6 +35,10 @@ Uize.module ({
 			;
 
 		/*** Public Instance Methods ***/
+			_classPrototype.fileExists = function (_params,_callback) {
+				_callback (this._fileSystemObject.FileExists (_params.path));
+			};
+
 			_classPrototype.readFile = function (_params,_callback) {
 				var
 					_fileSystemObject = this._fileSystemObject,
