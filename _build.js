@@ -68,25 +68,37 @@ function _eval (_toEval) {
 			_useSource = _params.useSource !== false
 		;
 
-		/*** read file ***/
+		/*** minimal file system functions ***/
 			var
-				_fileSystemObject,
-				_readFile
+				_fileSystem,
+				_readFile,
+				_fileExists
 			;
 			if (_isWsh) {
-				_fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject');
+				_fileSystem = new ActiveXObject ('Scripting.FileSystemObject');
+				_fileExists = function (_path) {
+					return _fileSystem.FileExists (_path);
+				};
 				_readFile = function (_filePath) {
 					var
-						_file = _fileSystemObject.OpenTextFile (_pathToRoot + _filePath,1),
+						_file = _fileSystem.OpenTextFile (_pathToRoot + _filePath,1),
 						_fileText = _file.ReadAll ()
 					;
 					_file.Close ();
 					return _fileText;
 				};
 			} else {
-				_fileSystemObject = require ('fs');
+				_fileSystem = require ('fs');
+				_fileExists = function (_path) {
+					try {
+						_fileSystem.statSync (_path);
+						return true;
+					} catch (_error) {
+						return false;
+					}
+				};
 				_readFile = function (_filePath) {
-					return _fileSystemObject.readFileSync (_pathToRoot + _filePath,'utf8');
+					return _fileSystem.readFileSync (_pathToRoot + _filePath,'utf8');
 				};
 			}
 
@@ -113,7 +125,26 @@ function _eval (_toEval) {
 						_modulePath = _buildFolderPath + '\\' + _modulePath
 					;
 				}
-				_eval (_readFile (_modulePath + '\\' + _moduleToLoad + '.js'));
+				if (_fileExists (_modulePath += '\\' + _moduleToLoad + '.js')) {
+					_eval (_readFile (_modulePath));
+				} else if (_fileExists (_modulePath + '.jst')) {
+					Uize.require (
+						'Uize.Template',
+						function (_Uize_Template) {
+							var _compiledTemplate = _Uize_Template.compile (_readFile (_modulePath + '.jst'),{result:'full'});
+							Uize.module ({
+								name:_moduleToLoad,
+								required:_compiledTemplate.required,
+								builder:function () {
+									var _package = function () {};
+									_package.process = new Function ('input',_compiledTemplate.code); 
+									_package.input = _compiledTemplate.input; 
+									return _package;
+								}
+							});
+						}
+					);
+				}
 				_callback ();
 			}
 			_moduleLoader ('Uize',function (_uizeCode) {Uize.moduleLoader = _moduleLoader});
