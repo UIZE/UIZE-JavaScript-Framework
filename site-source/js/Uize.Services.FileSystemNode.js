@@ -79,6 +79,19 @@ Uize.module ({
 			};
 
 		/*** Public Instance Methods ***/
+			_classPrototype.copyFile = function (_params,_callback) {
+				var
+					_this = this,
+					_targetPath = _params.targetPath
+				;
+				_this._makeFolder (_getParentFolderPath (_targetPath));
+				_this._fileSystem.writeFileSync (
+					_targetPath,
+					_this._fileSystem.readFileSync (_params.path)
+				);
+				_callback ();
+			};
+
 			_classPrototype.fileExists = function (_params,_callback) {
 				_callback (this._pathExists (_params.path,_false));
 			};
@@ -96,7 +109,16 @@ Uize.module ({
 			};
 
 			_classPrototype.readFile = function (_params,_callback) {
-				_callback (this._fileSystem.readFileSync (_params.path,_params.encoding || 'utf8'));
+				var
+					_fileSystem = this._fileSystem,
+					_path = _params.path,
+					_encoding = _params.encoding
+				;
+				_callback (
+					_encoding == 'buffer'
+						? _fileSystem.readFileSync (_path)
+						: _fileSystem.readFileSync (_path,_encoding || 'utf8')
+				);
 			};
 
 			_classPrototype.writeFile = function (_params,_callback) {
