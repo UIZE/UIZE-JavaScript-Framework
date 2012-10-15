@@ -170,7 +170,7 @@ Uize.module ({
 							);
 						},
 						builderInputs:function (_urlParts) {
-							return {moduleSource:_sourcePath + '/js/' + _urlParts.fileName + '.js'};
+							return {sourceCode:_sourcePath + '/js/' + _urlParts.fileName + '.js'};
 						},
 						builder:function (_inputs) {
 							return 'Foo';
@@ -178,30 +178,31 @@ Uize.module ({
 					});
 
 				/*** handler for module source code pages ***/
+					var _modulesSourceCodePagesPath = '/reference/source-code/';
 					_registerUrlHandler ({
 						description:'Module source code pages',
 						urlMatcher:function (_urlParts) {
 							var _folderPath = _urlParts.folderPath;
 							return (
-								_urlParts.folderPath == _builtPath + '/reference/source-code/' &&
+								_urlParts.folderPath == _builtPath + _modulesSourceCodePagesPath &&
 								_fileSystem.pathExists ({path:_sourcePath + '/js/' + _urlParts.fileName + '.js'})
 							);
 						},
 						builderInputs:function (_urlParts) {
 							return {
-								moduleSource:_sourcePath + '/js/' + _urlParts.fileName + '.js',
-								sourceCodeTemplate:_sourcePath + '/reference/source-code/~SOURCE-CODE-TEMPLATE.html'
+								sourceCode:_sourcePath + '/js/' + _urlParts.fileName + '.js',
+								sourceCodeTemplate:_sourcePath + _modulesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html'
 							};
 						},
 						builder:function (_inputs) {
 							var
-								_moduleSource = _inputs.moduleSource,
-								_sourceFileName = Uize.Url.from (_moduleSource).file
+								_sourceCode = _inputs.sourceCode,
+								_sourceFileName = Uize.Url.from (_sourceCode).file
 							;
 							return Uize.Build.Util.compileJstFile (_inputs.sourceCodeTemplate) ({
 								sourceFilename:_sourceFileName,
 								title:_getTitleFromFilename (_sourceFileName),
-								body:_fileSystem.readFile ({path:_moduleSource})
+								body:_fileSystem.readFile ({path:_sourceCode})
 							});
 						}
 					});
@@ -212,7 +213,43 @@ Uize.module ({
 
 				/*** handler for scrunched JavaScript library modules ***/
 
-				/*** handler for example source view pages ***/
+				/*** handler for example source code pages ***/
+					var _examplesSourceCodePagesPath = '/examples/source-code/';
+					_registerUrlHandler ({
+						description:'Example source code pages',
+						urlMatcher:function (_urlParts) {
+							var _folderPath = _urlParts.folderPath;
+							return (
+								_urlParts.folderPath == _builtPath + _examplesSourceCodePagesPath &&
+								_fileSystem.pathExists ({path:_sourcePath + '/examples/' + _urlParts.file})
+							);
+						},
+						builderInputs:function (_urlParts) {
+							console.log ({
+								sourceCode:_sourcePath + _examplesSourceCodePagesPath + _urlParts.file,
+								sourceCodeTemplate:_sourcePath + _examplesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html'
+							});
+							return {
+								sourceCode:_sourcePath + '/examples/' + _urlParts.file,
+								sourceCodeTemplate:_sourcePath + _examplesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html'
+							};
+						},
+						builder:function (_inputs) {
+							console.log (_inputs);
+							var
+								_sourceCode = _inputs.sourceCode,
+								_sourceFileName = Uize.Url.from (_sourceCode).file,
+								_sourceFileText = _fileSystem.readFile ({path:_sourceCode})
+							;
+							return Uize.Build.Util.compileJstFile (_inputs.sourceCodeTemplate) ({
+								sourceFilename:_sourceFileName,
+								title:_sourceFileText.match (
+									/<title>(.+?)\s*\|\s*JavaScript\s+(?:Tools|Examples)\s*(\|.*?)?<\/title>/
+								) [1],
+								body:_sourceFileText
+							});
+						}
+					});
 
 				/*** handler for example index pages ***/
 
