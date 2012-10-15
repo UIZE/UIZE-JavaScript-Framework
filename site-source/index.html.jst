@@ -494,7 +494,7 @@
 %>		<a href="latest-news.html" class="podHeading">News - <%= _latestNews [0].title.slice (0,10) %></a>
 		<ul>
 <%
-		for (var _newsItemNo = -1, _newsItem; ++_newsItemNo < 10;) {
+		for (var _newsItemNo = -1, _newsItem; ++_newsItemNo < Math.min (_latestNews.length,10);) {
 %>			<li><%= (_newsItem = _latestNews [_newsItemNo]).description -> xmlAttributeValue %> [<a href="<%= _newsItem.path -> xmlAttributeValue %>">read more</a>]</li>
 <%
 		}

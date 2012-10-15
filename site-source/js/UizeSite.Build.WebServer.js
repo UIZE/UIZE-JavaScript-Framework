@@ -107,6 +107,22 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for the home page ***/
+					_registerUrlHandler ({
+						description:'Homepage',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _builtPath + '/index.html';
+						},
+						builderInputs:function (_urlParts) {
+							return {template:_sourcePath + '/index.html.jst'};
+						},
+						builder:function (_inputs) {
+							return Uize.Build.Util.compileJstFile (_inputs.template) ({
+								latestNews:[{title:'FOO',description:'BAR'}]
+							});
+						}
+					});
+
 				/*** handler for SimpleDoc explainers, appendixes, news, etc. ***/
 					_registerUrlHandler ({
 						description:'Explainers, generated from SimpleDoc files',
@@ -250,8 +266,6 @@ Uize.module ({
 							});
 						}
 					});
-
-				/*** handler for example index pages ***/
 
 				/*** handler for SimpleData derived JavaScript source modules ***/
 
