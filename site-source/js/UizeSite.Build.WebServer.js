@@ -129,7 +129,6 @@ Uize.module ({
 						},
 						builder:function (_inputs) {
 							var
-								_simpleDocTemplate = Uize.Build.Util.compileJstFile (_inputs.simpleDocTemplate)
 								_simpleDocPath = _inputs.simpleDoc,
 								_simpleDocUrlPath = _simpleDocPath.slice (_sourcePath.length + 1),
 								_buildResult = Uize.Doc.Simple.build ({
@@ -145,7 +144,7 @@ Uize.module ({
 								_contentsTreeItems = _buildResult.contentsTreeItems,
 								_contentsTreeItem0 = _contentsTreeItems [0]
 							;
-							return _simpleDocTemplate ({
+							return Uize.Build.Util.compileJstFile (_inputs.simpleDocTemplate) ({
 								title:
 									_buildResult.metaData.title ||
 									_getTitleFromFilename (Uize.Url.from (_simpleDocPath).file)
@@ -178,7 +177,34 @@ Uize.module ({
 						}
 					});
 
-				/*** handler for module source view pages ***/
+				/*** handler for module source code pages ***/
+					_registerUrlHandler ({
+						description:'Module source code pages',
+						urlMatcher:function (_urlParts) {
+							var _folderPath = _urlParts.folderPath;
+							return (
+								_urlParts.folderPath == _builtPath + '/reference/source-code/' &&
+								_fileSystem.pathExists ({path:_sourcePath + '/js/' + _urlParts.fileName + '.js'})
+							);
+						},
+						builderInputs:function (_urlParts) {
+							return {
+								moduleSource:_sourcePath + '/js/' + _urlParts.fileName + '.js',
+								sourceCodeTemplate:_sourcePath + '/reference/source-code/~SOURCE-CODE-TEMPLATE.html'
+							};
+						},
+						builder:function (_inputs) {
+							var
+								_moduleSource = _inputs.moduleSource,
+								_sourceFileName = Uize.Url.from (_moduleSource).file
+							;
+							return Uize.Build.Util.compileJstFile (_inputs.sourceCodeTemplate) ({
+								sourceFilename:_sourceFileName,
+								title:_getTitleFromFilename (_sourceFileName),
+								body:_fileSystem.readFile ({path:_moduleSource})
+							});
+						}
+					});
 
 				/*** handler for scrunched JavaScript modules ***/
 
