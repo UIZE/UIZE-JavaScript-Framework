@@ -39,6 +39,26 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_class.declareServiceMethods ({
+				copyFile:{
+					async:_false
+					/*?
+						Instance Methods
+							copyFile
+								document...
+
+								SYNTAX
+								........................................
+								fileSystemInstance.copyFile (paramsOBJ);
+								........................................
+
+								Params
+									path
+										document...
+
+									targetPath
+										document...
+					*/
+				},
 				fileExists:{
 					async:_false
 					/*?
