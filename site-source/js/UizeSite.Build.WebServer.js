@@ -50,7 +50,8 @@ Uize.module ({
 		'Uize.Build.Util',
 		'Uize.Services.FileSystem',
 		'Uize.Doc.Simple',
-		'Uize.Templates.JstModule'
+		'Uize.Templates.JstModule',
+		'Uize.Data.Simple'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -267,7 +268,33 @@ Uize.module ({
 						}
 					});
 
-				/*** handler for SimpleData derived JavaScript source modules ***/
+				/*** handler for SimpleData derived pages ***/
+					_registerUrlHandler ({
+						description:'SimpleData derived pages',
+						urlMatcher:function (_urlParts) {
+							var _pathname = _urlParts.pathname;
+							return (
+								_isUnderBuiltPath (_urlParts.pathname) &&
+								_fileSystem.pathExists ({path:_sourcePathFromBuiltPath (_pathname) + '.jst'}) &&
+								_fileSystem.pathExists ({path:_sourcePathFromBuiltPath (_pathname) + '.simpledata'})
+							);
+						},
+						builderInputs:function (_urlParts) {
+							var _pathUnderSource = _sourcePathFromBuiltPath (_urlParts.pathname);
+							return {
+								jstTemplate:_pathUnderSource + '.jst',
+								simpleData:_pathUnderSource + '.simpledata'
+							};
+						},
+						builder:function (_inputs) {
+							return Uize.Build.Util.compileJstFile (_inputs.jstTemplate) (
+								Uize.Data.Simple.parse ({
+									simple:_fileSystem.readFile ({path:_inputs.simpleData}),
+									collapseChildren:true
+								})
+							);
+						}
+					});
 
 				/*** handler for widgets-to-go widget pages ***/
 
@@ -278,10 +305,9 @@ Uize.module ({
 						urlMatcher:function (_urlParts) {
 							var _folderPath = _urlParts.folderPath;
 							return (
+								Uize.String.endsWith (_urlParts.file,'.js.jst') &&
 								Uize.String.startsWith (_folderPath,_builtPath) &&
-								_fileSystem.pathExists ({
-									path:_sourcePath + _urlParts.pathname.slice (_builtPath.length) + '.jst'
-								})
+								_fileSystem.pathExists ({path:_sourcePathFromBuiltPath (_urlParts.pathname) + '.jst'})
 							);
 						},
 						builderInputs:function (_urlParts) {
@@ -306,11 +332,11 @@ Uize.module ({
 							var _folderPath = _urlParts.folderPath;
 							return (
 								Uize.String.startsWith (_folderPath,_builtPath) &&
-								_fileSystem.pathExists ({path:_sourcePath + _urlParts.pathname.slice (_builtPath.length)})
+								_fileSystem.pathExists ({path:_sourcePathFromBuiltPath (_urlParts.pathname)})
 							);
 						},
 						builderInputs:function (_urlParts) {
-							return {sourcePath:_sourcePath + _urlParts.pathname.slice (_builtPath.length)};
+							return {sourcePath:_sourcePathFromBuiltPath (_urlParts.pathname)};
 						}
 					});
 
