@@ -167,7 +167,7 @@ Uize.module ({
 							return _urlParts.pathname == _builtPath + '/index.html';
 						},
 						builderInputs:function (_urlParts) {
-							return {template:_memoryPath + '/index.html.jst'};
+							return {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
 						},
 						builder:function (_inputs) {
 							return _readFile ({path:_inputs.template}) ({
@@ -175,6 +175,22 @@ Uize.module ({
 							});
 						}
 					});
+
+				/*** handler for the directory page ***/
+					_registerUrlHandler ({
+						description:'Directory page',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _builtPath + '/directory.html';
+						},
+						builderInputs:function (_urlParts) {
+							return {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
+						},
+						builder:function (_inputs) {
+							return _readFile ({path:_inputs.template}) ();
+						}
+					});
+
+				/*** handler for example index pages ***/
 
 				/*** handler for in-memory compiled JST templates ***/
 					_registerUrlHandler ({
@@ -247,6 +263,12 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for scrunched JavaScript modules ***/
+
+				/*** handler for scrunched compiled JST modules ***/
+
+				/*** handler for scrunched JavaScript library modules ***/
+
 				/*** handler for module reference docs ***/
 					_registerUrlHandler ({
 						description:'Module reference pages',
@@ -294,12 +316,6 @@ Uize.module ({
 							});
 						}
 					});
-
-				/*** handler for scrunched JavaScript modules ***/
-
-				/*** handler for scrunched compiled JST modules ***/
-
-				/*** handler for scrunched JavaScript library modules ***/
 
 				/*** handler for example source code pages ***/
 					var _examplesSourceCodePagesPath = '/examples/source-code/';
