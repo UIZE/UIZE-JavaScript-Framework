@@ -47,7 +47,6 @@ Uize.module ({
 	required:[
 		'Uize.Url',
 		'Uize.String',
-		'Uize.Build.Util',
 		'Uize.Services.FileSystem',
 		'Uize.Doc.Simple',
 		'Uize.Templates.JstModule',
@@ -58,8 +57,13 @@ Uize.module ({
 			var
 				_package = function () {},
 				_Uize = Uize,
-				_Uize_Url = _Uize.Url,
-				_fileSystem = Uize.Services.FileSystem.singleton ()
+				_Uize_Url = _Uize.Url
+			;
+
+		/*** General Variables ***/
+			var
+				_fileSystem = Uize.Services.FileSystem.singleton (),
+				_sacredEmptyObject = {}
 			;
 
 		/*** Public Static Methods ***/
@@ -82,23 +86,71 @@ Uize.module ({
 					_sourcePath = _params.sourcePath,
 					_tempPath = _params.tempPath,
 					_builtPath = _params.builtPath
+					_memoryPath = 'memory'
 				;
 
 				function _registerUrlHandler (_urlHandler) {
 					_urlHandlers.push (_urlHandler);
 				}
 
+				function _isUnderMemoryPath (_path) {
+					return Uize.String.startsWith (_path,_memoryPath + '/');
+				}
+
 				function _isUnderBuiltPath (_path) {
-					return Uize.String.startsWith (_path,_builtPath);
+					return Uize.String.startsWith (_path,_builtPath + '/');
 				}
 
 				function _sourcePathFromBuiltPath (_path) {
 					return _sourcePath + _path.slice (_builtPath.length);
 				}
 
+				function _memoryPathFromBuiltPath (_path) {
+					return _memoryPath + _path.slice (_builtPath.length);
+				}
+
 				function _getTitleFromFilename (_filename) {
 					return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
 				}
+
+				/*** abstractions of various methods of the file system service to support object storage ***/
+					var _objectCache = {};
+
+					function _writeFile (_params) {
+						var _path = _params.path;
+						_isUnderMemoryPath (_path)
+							? (
+								_objectCache [_path] = {
+									contents:_params.contents,
+									modifiedDate:new Date
+								}
+							)
+							: _fileSystem.writeFile (_params)
+						;
+					}
+
+					function _readFile (_params) {
+						var _path = _params.path;
+						return (
+							_isUnderMemoryPath (_path)
+								? (_objectCache [_path] || _sacredEmptyObject).contents
+								: _fileSystem.readFile (_params)
+						);
+					}
+
+					function _getModifiedDate (_params) {
+						var _path = _params.path;
+						return (
+							_isUnderMemoryPath (_path)
+								? (_objectCache [_path] || _sacredEmptyObject).modifiedDate
+								: _fileSystem.getModifiedDate (_params)
+						);
+					}
+
+					function _pathExists (_params) {
+						var _path = _params.path;
+						return _isUnderMemoryPath (_path) ? !!_objectCache [_path] : _fileSystem.pathExists (_params);
+					}
 
 				/*** handler for source files ***/
 					_registerUrlHandler ({
@@ -115,12 +167,31 @@ Uize.module ({
 							return _urlParts.pathname == _builtPath + '/index.html';
 						},
 						builderInputs:function (_urlParts) {
-							return {template:_sourcePath + '/index.html.jst'};
+							return {template:_memoryPath + '/index.html.jst'};
 						},
 						builder:function (_inputs) {
-							return Uize.Build.Util.compileJstFile (_inputs.template) ({
+							return _readFile ({path:_inputs.template}) ({
 								latestNews:[{title:'FOO',description:'BAR'}]
 							});
+						}
+					});
+
+				/*** handler for in-memory compiled JST templates ***/
+					_registerUrlHandler ({
+						description:'In-memory compiled JST templates',
+						urlMatcher:function (_urlParts) {
+							return _isUnderMemoryPath (_urlParts.pathname) && _urlParts.fileType == 'jst';
+						},
+						builderInputs:function (_urlParts) {
+							return {sourceJst:_sourcePath + _urlParts.pathname.slice (_memoryPath.length)};
+						},
+						builder:function (_inputs) {
+							var _template = Uize.Template.compile (
+								_fileSystem.readFile ({path:_inputs.sourceJst}),
+								{result:'full'}
+							);
+							Uize.require (_template.required);
+							return _template.templateFunction;
 						}
 					});
 
@@ -138,10 +209,10 @@ Uize.module ({
 							);
 						},
 						builderInputs:function (_urlParts) {
-							var _sourceFolderPath = _sourcePathFromBuiltPath (_urlParts.folderPath);
+							var _folderPath = _urlParts.folderPath;
 							return {
-								simpleDoc:_sourceFolderPath + _urlParts.fileName + '.simple',
-								simpleDocTemplate:_sourceFolderPath + '~SIMPLE-DOC-TEMPLATE.html.jst'
+								simpleDoc:_sourcePathFromBuiltPath (_folderPath) + _urlParts.fileName + '.simple',
+								simpleDocTemplate:_memoryPathFromBuiltPath (_folderPath) + '~SIMPLE-DOC-TEMPLATE.html.jst'
 							};
 						},
 						builder:function (_inputs) {
@@ -161,7 +232,7 @@ Uize.module ({
 								_contentsTreeItems = _buildResult.contentsTreeItems,
 								_contentsTreeItem0 = _contentsTreeItems [0]
 							;
-							return Uize.Build.Util.compileJstFile (_inputs.simpleDocTemplate) ({
+							return _readFile ({path:_inputs.simpleDocTemplate}) ({
 								title:
 									_buildResult.metaData.title ||
 									_getTitleFromFilename (Uize.Url.from (_simpleDocPath).file)
@@ -208,7 +279,7 @@ Uize.module ({
 						builderInputs:function (_urlParts) {
 							return {
 								sourceCode:_sourcePath + '/js/' + _urlParts.fileName + '.js',
-								sourceCodeTemplate:_sourcePath + _modulesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html'
+								sourceCodeTemplate:_memoryPath + _modulesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html.jst'
 							};
 						},
 						builder:function (_inputs) {
@@ -216,7 +287,7 @@ Uize.module ({
 								_sourceCode = _inputs.sourceCode,
 								_sourceFileName = Uize.Url.from (_sourceCode).file
 							;
-							return Uize.Build.Util.compileJstFile (_inputs.sourceCodeTemplate) ({
+							return _readFile ({path:_inputs.sourceCodeTemplate}) ({
 								sourceFilename:_sourceFileName,
 								title:_getTitleFromFilename (_sourceFileName),
 								body:_fileSystem.readFile ({path:_sourceCode})
@@ -242,23 +313,18 @@ Uize.module ({
 							);
 						},
 						builderInputs:function (_urlParts) {
-							console.log ({
-								sourceCode:_sourcePath + _examplesSourceCodePagesPath + _urlParts.file,
-								sourceCodeTemplate:_sourcePath + _examplesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html'
-							});
 							return {
 								sourceCode:_sourcePath + '/examples/' + _urlParts.file,
-								sourceCodeTemplate:_sourcePath + _examplesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html'
+								sourceCodeTemplate:_memoryPath + _examplesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html.jst'
 							};
 						},
 						builder:function (_inputs) {
-							console.log (_inputs);
 							var
 								_sourceCode = _inputs.sourceCode,
 								_sourceFileName = Uize.Url.from (_sourceCode).file,
 								_sourceFileText = _fileSystem.readFile ({path:_sourceCode})
 							;
-							return Uize.Build.Util.compileJstFile (_inputs.sourceCodeTemplate) ({
+							return _readFile ({path:_inputs.sourceCodeTemplate}) ({
 								sourceFilename:_sourceFileName,
 								title:_sourceFileText.match (
 									/<title>(.+?)\s*\|\s*JavaScript\s+(?:Tools|Examples)\s*(\|.*?)?<\/title>/
@@ -280,14 +346,14 @@ Uize.module ({
 							);
 						},
 						builderInputs:function (_urlParts) {
-							var _pathUnderSource = _sourcePathFromBuiltPath (_urlParts.pathname);
+							var _pathname = _urlParts.pathname;
 							return {
-								jstTemplate:_pathUnderSource + '.jst',
-								simpleData:_pathUnderSource + '.simpledata'
+								jstTemplate:_memoryPathFromBuiltPath (_pathname) + '.jst',
+								simpleData:_sourcePathFromBuiltPath (_pathname) + '.simpledata'
 							};
 						},
 						builder:function (_inputs) {
-							return Uize.Build.Util.compileJstFile (_inputs.jstTemplate) (
+							return _readFile ({path:_inputs.jstTemplate}) (
 								Uize.Data.Simple.parse ({
 									simple:_fileSystem.readFile ({path:_inputs.simpleData}),
 									collapseChildren:true
@@ -395,15 +461,15 @@ Uize.module ({
 						var
 							_builderInputs = (_matchingHandler.builderInputs || Uize.nop) (_urlParts),
 							_path = _urlParts.pathname,
-							_mustBuild = !_fileSystem.pathExists ({path:_path}),
-							_lastBuiltDate = _mustBuild ? 0 : _fileSystem.getModifiedDate ({path:_path}),
+							_mustBuild = !_pathExists ({path:_path}),
+							_lastBuiltDate = _mustBuild ? 0 : _getModifiedDate ({path:_path}),
 							_builderInput
 						;
 						for (var _builderInputName in _builderInputs) {
 							_ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
 							_mustBuild || (
 								_mustBuild = Math.max (
-									_fileSystem.getModifiedDate ({path:_builderInput}),
+									_getModifiedDate ({path:_builderInput}),
 									_minAllowedModifiedDate
 								) > _lastBuiltDate
 							);
@@ -414,7 +480,7 @@ Uize.module ({
 								_builder = _matchingHandler.builder
 							;
 							_builder
-								? _fileSystem.writeFile ({path:_url,contents:_builder (_builderInputs,_urlParts)})
+								? _writeFile ({path:_url,contents:_builder (_builderInputs,_urlParts)})
 								: _fileSystem.copyFile ({path:Uize.values (_builderInputs) [0],targetPath:_url})
 							;
 							console.log (
