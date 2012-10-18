@@ -96,22 +96,18 @@ Uize.module ({
 				}
 
 				/*** URL tests ***/
-					function _isUnderMemoryPath (_path) {
-						return Uize.String.startsWith (_path,_memoryPath + '/');
-					}
-
-					function _isUnderBuiltPath (_path) {
-						return Uize.String.startsWith (_path,_builtPath + '/');
-					}
+					function _isUnderPath (_path,_whichPath) {return Uize.String.startsWith (_path,_whichPath + '/')}
+					function _isUnderMemoryPath (_path) {return _isUnderPath (_path,_memoryPath)}
+					function _isUnderBuiltPath (_path) {return _isUnderPath (_path,_builtPath)}
+					function _isUnderTempPath (_path) {return _isUnderPath (_path,_tempPath)}
 
 				/*** URL transformers ***/
-					function _sourcePathFromBuiltPath (_path) {
-						return _sourcePath + _path.slice (_builtPath.length);
+					function _changePath (_path,_pathToRemove,_pathToPrepend) {
+						return (_pathToPrepend || '') + _path.slice (_pathToRemove.length);
 					}
-
-					function _memoryPathFromBuiltPath (_path) {
-						return _memoryPath + _path.slice (_builtPath.length);
-					}
+					function _sourcePathFromBuiltPath (_path) {return _changePath (_path,_builtPath,_sourcePath)}
+					function _tempPathFromBuiltPath (_path) {return _changePath (_path,_builtPath,_tempPath)}
+					function _memoryPathFromBuiltPath (_path) {return _changePath (_path,_builtPath,_memoryPath)}
 
 				/*** URL utilities ***/
 					function _getTitleFromFilename (_filename) {
@@ -236,6 +232,22 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for regular JavaScript modules under temp ***/
+					_registerUrlHandler ({
+						description:'Regular JavaScript modules under temp',
+						urlMatcher:function (_urlParts) {
+							var _pathname = _urlParts.pathname;
+							return (
+								_urlParts.fileType == 'js' &&
+								_isUnderTempPath (_pathname) &&
+								_fileSystem.fileExists ({path:_changePath (_pathname,_tempPath,_sourcePath)})
+							);
+						},
+						builderInputs:function (_urlParts) {
+							return {sourceJs:_changePath (_urlParts.pathname,_tempPath,_sourcePath)};
+						},
+					});
+
 				/*** handler for SimpleDoc explainers, appendixes, news, etc. ***/
 					_registerUrlHandler ({
 						description:'Explainers, generated from SimpleDoc files',
@@ -275,8 +287,6 @@ Uize.module ({
 							);
 						}
 					});
-
-				/*** handler for scrunched JavaScript modules ***/
 
 				/*** handler for JavaScript library modules ***/
 					var
@@ -370,6 +380,21 @@ Uize.module ({
 								_libraryContentsChunks.join ('\n') +
 								_libraryFileContents.slice (_contentsCommentEndPos + 2)
 							);
+						}
+					});
+
+				/*** handler for JavaScript built modules (scrunched, if preference configured) ***/
+					_registerUrlHandler ({
+						description:'JavaScript modules',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.fileType == 'js' && _isUnderBuiltPath (_urlParts.folderPath);
+						},
+						builderInputs:function (_urlParts) {
+							return {jsTemp:_changePath (_urlParts.pathname,_builtPath,_tempPath)};
+						},
+						builder:function (_inputs) {
+							/* TO DO: SCRUNCH!!! */
+							return '/* TODO: SCRUNCH!!! */\n\n' + _fileSystem.readFile ({path:_inputs.jsTemp});
 						}
 					});
 
@@ -512,20 +537,20 @@ Uize.module ({
 
 				/*** handler for widgets-to-go widget pages ***/
 
-				/*** handler for source compiled JST modules ***/
+				/*** handler for compiled JST modules ***/
 					var _jsJstRegExp = /\.js\.jst$/i;
 					_registerUrlHandler ({
-						description:'Source JST modules, generated from .js.jst files',
+						description:'Compiled JST modules, generated from .js.jst files',
 						urlMatcher:function (_urlParts) {
-							var _folderPath = _urlParts.folderPath;
+							var _pathname = _urlParts.pathname;
 							return (
-								Uize.String.endsWith (_urlParts.file,'.js.jst') &&
-								Uize.String.startsWith (_folderPath,_builtPath) &&
-								_fileSystem.pathExists ({path:_sourcePathFromBuiltPath (_urlParts.pathname) + '.jst'})
+								_urlParts.fileType == 'js' &&
+								_isUnderTempPath (_pathname) &&
+								_fileSystem.pathExists ({path:_changePath (_pathname,_tempPath,_sourcePath) + '.jst'})
 							);
 						},
 						builderInputs:function (_urlParts) {
-							return {jstSource:_sourcePathFromBuiltPath (_urlParts.pathname) + '.jst'};
+							return {jstSource:_changePath (_urlParts.pathname,_tempPath,_sourcePath) + '.jst'};
 						},
 						builder:function (_inputs) {
 							var _jstSource = _inputs.jstSource;
