@@ -50,7 +50,8 @@ Uize.module ({
 		'Uize.Services.FileSystem',
 		'Uize.Doc.Simple',
 		'Uize.Templates.JstModule',
-		'Uize.Data.Simple'
+		'Uize.Data.Simple',
+		'Uize.Doc.Sucker'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -93,25 +94,32 @@ Uize.module ({
 					_urlHandlers.push (_urlHandler);
 				}
 
-				function _isUnderMemoryPath (_path) {
-					return Uize.String.startsWith (_path,_memoryPath + '/');
-				}
+				/*** URL tests ***/
+					function _isUnderMemoryPath (_path) {
+						return Uize.String.startsWith (_path,_memoryPath + '/');
+					}
 
-				function _isUnderBuiltPath (_path) {
-					return Uize.String.startsWith (_path,_builtPath + '/');
-				}
+					function _isUnderBuiltPath (_path) {
+						return Uize.String.startsWith (_path,_builtPath + '/');
+					}
 
-				function _sourcePathFromBuiltPath (_path) {
-					return _sourcePath + _path.slice (_builtPath.length);
-				}
+				/*** URL transformers ***/
+					function _sourcePathFromBuiltPath (_path) {
+						return _sourcePath + _path.slice (_builtPath.length);
+					}
 
-				function _memoryPathFromBuiltPath (_path) {
-					return _memoryPath + _path.slice (_builtPath.length);
-				}
+					function _memoryPathFromBuiltPath (_path) {
+						return _memoryPath + _path.slice (_builtPath.length);
+					}
 
-				function _getTitleFromFilename (_filename) {
-					return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
-				}
+				/*** URL utilities ***/
+					function _getTitleFromFilename (_filename) {
+						return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
+					}
+
+					function _getPathToRoot (_path) {
+						return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
+					}
 
 				/*** abstractions of various methods of the file system service to support object storage ***/
 					var _objectCache = {};
@@ -151,6 +159,22 @@ Uize.module ({
 						var _path = _params.path;
 						return _isUnderMemoryPath (_path) ? !!_objectCache [_path] : _fileSystem.pathExists (_params);
 					}
+
+				function _processSimpleDoc (_title,_simpleDocBuildResult,_simpleDocTemplatePath) {
+					var
+						_contentsTreeItems = _simpleDocBuildResult.contentsTreeItems,
+						_contentsTreeItem0 = _contentsTreeItems [0]
+					;
+					return _readFile ({path:_simpleDocTemplatePath}) ({
+						title:_title,
+						description:
+							(
+								_contentsTreeItem0 &&
+								(_contentsTreeItem0.description || (_contentsTreeItem0.items [0] || {}).description)
+							) || '',
+						body:_simpleDocBuildResult.html
+					});
+				}
 
 				/*** handler for source files ***/
 					_registerUrlHandler ({
@@ -234,32 +258,20 @@ Uize.module ({
 						builder:function (_inputs) {
 							var
 								_simpleDocPath = _inputs.simpleDoc,
-								_simpleDocUrlPath = _simpleDocPath.slice (_sourcePath.length + 1),
-								_buildResult = Uize.Doc.Simple.build ({
+								_simpleDoc = Uize.Doc.Simple.build ({
 									data:_fileSystem.readFile ({path:_simpleDocPath}),
 									//urlDictionary:_urlDictionary,
-									pathToRoot:Uize.String.repeat (
-										'../',
-										_simpleDocUrlPath.length -
-										_simpleDocUrlPath.replace (/[\/\\]/g,'').length
-									),
+									pathToRoot:_getPathToRoot (_simpleDocPath.slice (_sourcePath.length + 1)),
 									result:'full'
-								}),
-								_contentsTreeItems = _buildResult.contentsTreeItems,
-								_contentsTreeItem0 = _contentsTreeItems [0]
+								})
 							;
-							return _readFile ({path:_inputs.simpleDocTemplate}) ({
-								title:
-									_buildResult.metaData.title ||
-									_getTitleFromFilename (Uize.Url.from (_simpleDocPath).file)
-										.replace (/(^|\s)[a-z]/g,function (_match) {return _match.toUpperCase ()}),
-								description:
-									(
-										_contentsTreeItem0 &&
-										(_contentsTreeItem0.description || (_contentsTreeItem0.items [0] || {}).description)
-									) || '',
-								body:_buildResult.html
-							});
+							return _processSimpleDoc (
+								_simpleDoc.metaData.title ||
+								_getTitleFromFilename (Uize.Url.from (_simpleDocPath).file)
+									.replace (/(^|\s)[a-z]/g,function (_match) {return _match.toUpperCase ()}),
+								_simpleDoc,
+								_inputs.simpleDocTemplate
+							);
 						}
 					});
 
@@ -270,6 +282,7 @@ Uize.module ({
 				/*** handler for scrunched JavaScript library modules ***/
 
 				/*** handler for module reference docs ***/
+					var _urlDictionary = {};
 					_registerUrlHandler ({
 						description:'Module reference pages',
 						urlMatcher:function (_urlParts) {
@@ -280,10 +293,37 @@ Uize.module ({
 							);
 						},
 						builderInputs:function (_urlParts) {
-							return {sourceCode:_sourcePath + '/js/' + _urlParts.fileName + '.js'};
+							return {
+								sourceCode:_sourcePath + '/js/' + _urlParts.fileName + '.js',
+								simpleDocTemplate:_memoryPath + '/reference/~SIMPLE-DOC-TEMPLATE.html.jst'
+							};
 						},
 						builder:function (_inputs) {
-							return 'Foo';
+							var
+								_simpleDoc,
+								_sourceCodePath = _inputs.sourceCode,
+								_moduleName = Uize.Url.from (_sourceCodePath).fileName
+							;
+							Uize.require (
+								_moduleName,
+								function (_module) {
+									var _moduleUrlFromDictionary = _urlDictionary [_moduleName];
+									_urlDictionary [_moduleName] = null;
+									_simpleDoc = Uize.Doc.Sucker.toDocument (
+										_fileSystem.readFile ({path:_sourceCodePath}),
+										{
+											urlDictionary:_urlDictionary,
+											pathToRoot:'../',
+											result:'full',
+											module:_module,
+											//modulesTree:_modulesTree,
+											examples:[] //_examplesByKeyword [_moduleName]
+										}
+									);
+									_urlDictionary [_moduleName] = _moduleUrlFromDictionary;
+								}
+							);
+							return _processSimpleDoc (_moduleName,_simpleDoc,_inputs.simpleDocTemplate);
 						}
 					});
 
@@ -517,7 +557,8 @@ Uize.module ({
 					function (_request,_response) {
 						var
 							_requestUrl = _builtPath + _request.url,
-							_fileContents
+							_fileContents,
+							_startTime = Uize.now ()
 						;
 						_ensureFileCurrent (_requestUrl);
 						try {
@@ -530,6 +571,7 @@ Uize.module ({
 							_response.writeHead (404,{'Content-Type':'text/html'});
 						}
 						_response.end (_fileContents);
+						console.log ('PAGE DELIVERY TIME: ' + _requestUrl + ' (' + (Uize.now () - _startTime) + ')\n');
 					}
 				).listen (_port,_host);
 
