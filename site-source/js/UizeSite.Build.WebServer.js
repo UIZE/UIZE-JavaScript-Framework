@@ -58,7 +58,8 @@ Uize.module ({
 			var
 				_package = function () {},
 				_Uize = Uize,
-				_Uize_Url = _Uize.Url
+				_Uize_Url = _Uize.Url,
+				_undefined
 			;
 
 		/*** General Variables ***/
@@ -277,9 +278,100 @@ Uize.module ({
 
 				/*** handler for scrunched JavaScript modules ***/
 
-				/*** handler for scrunched compiled JST modules ***/
-
-				/*** handler for scrunched JavaScript library modules ***/
+				/*** handler for JavaScript library modules ***/
+					var
+						_contentsCommentRegExp = /\/\*\s*Library\s*Contents/i,
+						_lineStartsWithIdentifierCharRegExp = /^[a-zA-Z_$]/,
+						_libraryUsesUizeModulesHeader =
+							'/*______________\n' +
+							'|       ______  |   B U I L T     O N     U I Z E     F R A M E W O R K\n' +
+							'|     /      /  |   ---------------------------------------------------\n' +
+							'|    /    O /   |   This JavaScript application is developed using the object\n' +
+							'|   /    / /    |   oriented UIZE JavaScript framework as its foundation.\n' +
+							'|  /    / /  /| |\n' +
+							'| /____/ /__/_| |    ONLINE : http://www.uize.com\n' +
+							'|          /___ |   LICENSE : Available under MIT License or GNU General Public License\n' +
+							'|_______________|             http://www.uize.com/license.html\n' +
+							'*/\n\n'
+					;
+					_registerUrlHandler ({
+						description:'JavaScript library modules',
+						urlMatcher:function (_urlParts) {
+							var _folderPath = _urlParts.folderPath;
+							return (
+								Uize.String.startsWith (_urlParts.pathname,_builtPath + '/js/') &&
+								Uize.String.endsWith (_urlParts.pathname,'.library.js')
+							);
+						},
+						builderInputs:function (_urlParts) {
+							var
+								_pathname = _urlParts.pathname,
+								_librarySourcePath = _sourcePathFromBuiltPath (_pathname),
+								_inputs = {librarySource:_librarySourcePath},
+								_libraryFileContents = _fileSystem.readFile ({path:_librarySourcePath})
+								_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
+								_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
+								_moduleNo = -1
+							;
+							Uize.forEach (
+								Uize.String.Lines.split (
+									_contentsCommentStartPos > -1
+										?
+											_libraryFileContents.slice (_contentsCommentStartPos,_contentsCommentEndPos)
+												.replace (_contentsCommentRegExp,'')
+										: _libraryFileContents
+								),
+								function (_moduleName) {
+									if (
+										(_moduleName = Uize.String.trim (_moduleName)) &&
+										_lineStartsWithIdentifierCharRegExp.test (_moduleName)
+									)
+										_inputs ['libraryModule' + ++_moduleNo] = _builtPath + '/js/' + _moduleName + '.js'
+									;
+								}
+							);
+							return _inputs;
+						},
+						builder:function (_inputs) {
+							function _stripModuleHeaderComment (_moduleText) {
+								var _moduleHeaderCommentPos = _moduleText.indexOf ('/*');
+								return (
+									_moduleHeaderCommentPos > -1
+										? (
+											_moduleText.slice (0,_moduleHeaderCommentPos) +
+											_moduleText.slice (_moduleText.indexOf ('*/',_moduleHeaderCommentPos + 2) + 2)
+										)
+										: _moduleText
+								);
+							}
+							var
+								_libraryFileContents = _fileSystem.readFile ({path:_inputs.librarySource}),
+								_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
+								_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
+								_libraryContentsChunks = [],
+								_moduleNo = -1,
+								_modulePath,
+								_libraryUsesUizeModules
+							;
+							while ((_modulePath = _inputs ['libraryModule' + ++_moduleNo]) != _undefined) {
+								if (!_libraryUsesUizeModules)
+									_libraryUsesUizeModules = Uize.String.startsWith (
+										Uize.Url.from (_modulePath).fileName,
+										'Uize'
+									)
+								;
+								_libraryContentsChunks.push (
+									_stripModuleHeaderComment (_fileSystem.readFile ({path:_modulePath}))
+								);
+							}
+							return (
+								(_libraryUsesUizeModules ? _libraryUsesUizeModulesHeader : '') +
+								_libraryFileContents.slice (0,_contentsCommentStartPos) +
+								_libraryContentsChunks.join ('\n') +
+								_libraryFileContents.slice (_contentsCommentEndPos + 2)
+							);
+						}
+					});
 
 				/*** handler for module reference docs ***/
 					var _urlDictionary = {};
