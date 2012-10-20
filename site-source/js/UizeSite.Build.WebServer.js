@@ -40,6 +40,9 @@
 
 			freshBuild
 				document...
+
+			isDev
+				document...
 */
 
 Uize.module ({
@@ -47,11 +50,13 @@ Uize.module ({
 	required:[
 		'Uize.Url',
 		'Uize.String',
+		'Uize.Date',
 		'Uize.Services.FileSystem',
 		'Uize.Doc.Simple',
 		'Uize.Templates.JstModule',
 		'Uize.Data.Simple',
-		'Uize.Doc.Sucker'
+		'Uize.Doc.Sucker',
+		'Uize.Util.Oop'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -88,7 +93,9 @@ Uize.module ({
 					_sourcePath = _params.sourcePath,
 					_tempPath = _params.tempPath,
 					_builtPath = _params.builtPath
-					_memoryPath = 'memory'
+					_memoryPath = 'memory',
+					_isDev = _params.isDev == 'true',
+					_scrunchedHeadComments = _params.scrunchedHeadComments || {}
 				;
 
 				function _registerUrlHandler (_urlHandler) {
@@ -309,6 +316,7 @@ Uize.module ({
 						urlMatcher:function (_urlParts) {
 							var _folderPath = _urlParts.folderPath;
 							return (
+								!_isDev &&
 								Uize.String.startsWith (_urlParts.pathname,_builtPath + '/js/') &&
 								Uize.String.endsWith (_urlParts.pathname,'.library.js')
 							);
@@ -384,6 +392,10 @@ Uize.module ({
 					});
 
 				/*** handler for JavaScript built modules (scrunched, if preference configured) ***/
+					var
+						_scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+						_endsWithDotJsRegExp = /\.js$/
+					;
 					_registerUrlHandler ({
 						description:'JavaScript modules',
 						urlMatcher:function (_urlParts) {
@@ -393,8 +405,58 @@ Uize.module ({
 							return {jsTemp:_changePath (_urlParts.pathname,_builtPath,_tempPath)};
 						},
 						builder:function (_inputs) {
-							/* TO DO: SCRUNCH!!! */
-							return '/* TODO: SCRUNCH!!! */\n\n' + _fileSystem.readFile ({path:_inputs.jsTemp});
+							var
+								_path = _inputs.jsTemp,
+								_result = _fileSystem.readFile ({path:_path})
+							;
+							if (!_isDev) {
+								var
+									_pathParts = Uize.Url.from (_path),
+									_moduleName = _pathParts.fileName,
+									_scruncherSettings = {},
+									_sourceFileName = _pathParts.file,
+									_headComment =
+										_scrunchedHeadComments [_sourceFileName.slice (0,_sourceFileName.indexOf ('.'))],
+									_keepHeadComment = _headComment == undefined
+								;
+								if (!_keepHeadComment)
+									_scruncherSettings.KEEPHEADCOMMENT = 'FALSE'
+								;
+								if (Uize.String.startsWith (_path,_tempPath + '/js/'))
+									console.log (_moduleName);
+									Uize.require (
+										_moduleName,
+										function (_module) {
+											var _inheritanceDepth = Uize.Util.Oop.getInheritanceChain (_module).length;
+											_scruncherSettings.MAPPINGS =
+												'=' +
+												(_inheritanceDepth ? _scruncherPrefixChars.charAt (_inheritanceDepth - 1) : '') +
+												',' + _moduleName.replace (/\./g,'_')
+											;
+										}
+									)
+								;
+								var _scruncherResult = Uize.Build.Scruncher.scrunch (_result,_scruncherSettings);
+								_result =
+									(
+										_keepHeadComment
+											? ''
+											: Uize.substituteInto (
+												_headComment,
+												{buildDate:Uize.Date.toIso8601 (),moduleName:_moduleName},
+												'{KEY}'
+											)
+									) + _scruncherResult.scrunchedCode
+								;
+								return _result;
+								/*
+								return {
+									outputText:_result,
+									logDetails:Uize.String.Lines.indent (_scruncherResult.report,2) + '\n'
+								};
+								*/
+							}
+							return _result;
 						}
 					});
 

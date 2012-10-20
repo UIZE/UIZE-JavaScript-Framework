@@ -58,7 +58,7 @@ Uize.module ({
 			_package.perform = function (_params) {
 				var
 					_buildDate = Uize.Date.toIso8601 (),
-					_endsWidthDotJsRegExp = /\.js$/,
+					_endsWithDotJsRegExp = /\.js$/,
 					_buildScriptName = WScript.ScriptName,
 					_scrunchedHeadComments = _params.scrunchedHeadComments || {},
 					_scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
@@ -77,14 +77,14 @@ Uize.module ({
 					Uize.Wsh.buildFiles (
 						Uize.copyInto (
 							{
-								logFileName:_buildScriptName.replace (_endsWidthDotJsRegExp,'-js-files.log'),
+								logFileName:_buildScriptName.replace (_endsWithDotJsRegExp,'-js-files.log'),
 								targetFolderPathCreator:_targetFolderPathCreator,
 								targetFilenameCreator:function (_sourceFileName) {
-									return _endsWidthDotJsRegExp.test (_sourceFileName) ? _sourceFileName : null;
+									return _endsWithDotJsRegExp.test (_sourceFileName) ? _sourceFileName : null;
 								},
 								fileBuilder:function (_sourceFileName,_sourceFileText) {
 									var
-										_moduleName = _sourceFileName.replace (_endsWidthDotJsRegExp,''),
+										_moduleName = _sourceFileName.replace (_endsWithDotJsRegExp,''),
 										_scruncherSettings = {},
 										_headComment =
 											_scrunchedHeadComments [_sourceFileName.slice (0,_sourceFileName.indexOf ('.'))],
@@ -192,7 +192,7 @@ Uize.module ({
 												_stripModuleHeaderComment (
 													Uize.Wsh.readFile (
 														_scrunchedModuleFolderPath + '\\' + _moduleName +
-														(_endsWidthDotJsRegExp.test (_moduleName) ? '' : '.js')
+														(_endsWithDotJsRegExp.test (_moduleName) ? '' : '.js')
 													)
 												)
 											);
@@ -210,7 +210,7 @@ Uize.module ({
 							_params,
 							{
 								alwaysBuild:true,
-								logFileName:_buildScriptName.replace (_endsWidthDotJsRegExp,'-libraries.log')
+								logFileName:_buildScriptName.replace (_endsWithDotJsRegExp,'-libraries.log')
 							}
 						)
 					);
