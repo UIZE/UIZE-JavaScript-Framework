@@ -243,7 +243,9 @@ Uize.module ({
 						});
 
 					/*** handler for widget homepages ***/
-						var _widgetHomepageRegExp = new RegExp (_builtPath + '/[^\\/\\.]+\\.html')
+						var _widgetHomepageRegExp = new RegExp (
+							_builtPath + '/' + _widgetsToGoPath + '[^\\/\\.]+\\.html'
+						);
 						_registerUrlHandler ({
 							description:'Widget homepages',
 							urlMatcher:function (_urlParts) {
@@ -285,7 +287,6 @@ Uize.module ({
 							},
 							builder:function (_inputs,_urlParts) {
 								var _widgetTitleUrlized = _urlParts.pathname.match (_widgetIframePageRegExp) [1];
-								console.log (_widgetTitleUrlized);
 								return _readFile ({path:_inputs.template}) ({
 									widget:Uize.Data.Matches.firstValue (
 										_readFile ({path:_inputs.widgets}).widgets,
@@ -532,7 +533,6 @@ Uize.module ({
 									_scruncherSettings.KEEPHEADCOMMENT = 'FALSE'
 								;
 								if (Uize.String.startsWith (_path,_tempPath + '/js/'))
-									console.log (_moduleName);
 									Uize.require (
 										_moduleName,
 										function (_module) {
@@ -821,14 +821,19 @@ Uize.module ({
 						if (_mustBuild) {
 							var
 								_startTime = Uize.now (),
-								_builder = _matchingHandler.builder
+								_builder = _matchingHandler.builder,
+								_buildError
 							;
-							_builder
-								? _writeFile ({path:_url,contents:_builder (_builderInputs,_urlParts)})
-								: _fileSystem.copyFile ({path:Uize.values (_builderInputs) [0],targetPath:_url})
-							;
+							try {
+								_builder
+									? _writeFile ({path:_url,contents:_builder (_builderInputs,_urlParts)})
+									: _fileSystem.copyFile ({path:Uize.values (_builderInputs) [0],targetPath:_url})
+								;
+							} catch (_error) {
+								_buildError = _error;
+							}
 							console.log (
-								'BUILT: ' + _url + '\n' +
+								(_buildError ? '*** BUILD FAILED' : 'BUILT') + ': ' + _url + '\n' +
 									'\tduration: ' + (Uize.now () - _startTime) + '\n' +
 									'\tbuilder: ' + _matchingHandler.description + '\n' +
 									'\tbuilder inputs:\n' +
@@ -837,6 +842,10 @@ Uize.module ({
 											function (_key) {return '\t\t' + _key + ': ' + _builderInputs [_key] + '\n'}
 										).join ('')
 							);
+							if (_buildError) {
+								console.log (_buildError);
+								throw _buildError;
+							}
 						}
 					}
 				}
@@ -848,8 +857,8 @@ Uize.module ({
 							_fileContents,
 							_startTime = Uize.now ()
 						;
-						_ensureFileCurrent (_requestUrl);
 						try {
+							_ensureFileCurrent (_requestUrl);
 							var _urlParts = _Uize_Url.from (_requestUrl);
 							_fileContents = _fileSystem.readFile ({path:_urlParts.pathname,encoding:'buffer'});
 							_response.writeHead (200,{'Content-Type':_mimeTypes [_urlParts.fileType]});
