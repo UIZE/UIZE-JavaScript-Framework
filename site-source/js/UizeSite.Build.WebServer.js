@@ -243,29 +243,56 @@ Uize.module ({
 						});
 
 					/*** handler for widget homepages ***/
+						var _widgetHomepageRegExp = new RegExp (_builtPath + '/[^\\/\\.]+\\.html')
 						_registerUrlHandler ({
 							description:'Widget homepages',
 							urlMatcher:function (_urlParts) {
-								return (
-									_urlParts.fileType == 'html' &&
-									Uize.String.startsWith (_urlParts.pathname,_builtPath + '/' + _widgetsToGoPath)
-								);
+								return _widgetHomepageRegExp.test (_urlParts.pathname);
 							},
 							builderInputs:function (_urlParts) {
 								var _widgetsToGoMemoryPath = _memoryPath + '/' + _widgetsToGoPath;
 								return {
-									template:_widgetsToGoMemoryPath + 'homepage.jst',
+									template:_widgetsToGoMemoryPath + 'homepage.html.jst',
 									widgets:_widgetsToGoMemoryPath + 'widgets.simpledata'
 								};
 							},
 							builder:function (_inputs,_urlParts) {
-								var _fileName = _urlParts.fileName;
+								var _widgetTitleUrlized = _urlParts.fileName;
 								return _readFile ({path:_inputs.template}) (
 									Uize.Data.Matches.firstValue (
 										_readFile ({path:_inputs.widgets}).widgets,
-										function (_widget) {return _fileName == _urlizeWidgetTitle (_widget)}
+										function (_widget) {return _widgetTitleUrlized == _urlizeWidgetTitle (_widget)}
 									)
 								);
+							}
+						});
+
+					/*** handler for widget iframe pages ***/
+						var _widgetIframePageRegExp = new RegExp (
+							_builtPath + '/' + _widgetsToGoPath + '([^\\/\\.]+)/(?:web|mobile)\\.html'
+						);
+						_registerUrlHandler ({
+							description:'Widget IFRAME pages',
+							urlMatcher:function (_urlParts) {
+								return _widgetIframePageRegExp.test (_urlParts.pathname);
+							},
+							builderInputs:function (_urlParts) {
+								var _widgetsToGoMemoryPath = _memoryPath + '/' + _widgetsToGoPath;
+								return {
+									template:_widgetsToGoMemoryPath + 'widget.html.jst',
+									widgets:_widgetsToGoMemoryPath + 'widgets.simpledata'
+								};
+							},
+							builder:function (_inputs,_urlParts) {
+								var _widgetTitleUrlized = _urlParts.pathname.match (_widgetIframePageRegExp) [1];
+								console.log (_widgetTitleUrlized);
+								return _readFile ({path:_inputs.template}) ({
+									widget:Uize.Data.Matches.firstValue (
+										_readFile ({path:_inputs.widgets}).widgets,
+										function (_widget) {return _widgetTitleUrlized == _urlizeWidgetTitle (_widget)}
+									),
+									mobile:_urlParts.fileName == 'mobile'
+								});
 							}
 						});
 
