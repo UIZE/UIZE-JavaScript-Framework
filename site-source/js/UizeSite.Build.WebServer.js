@@ -56,7 +56,8 @@ Uize.module ({
 		'Uize.Templates.JstModule',
 		'Uize.Data.Simple',
 		'Uize.Doc.Sucker',
-		'Uize.Util.Oop'
+		'Uize.Util.Oop',
+		'Uize.Data.Matches'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -204,36 +205,69 @@ Uize.module ({
 						}
 					});
 
-				/*** handler for Widgets To Go index page ***/
+				/*** handlers for Widgets To Go pages ***/
 					var _widgetsToGoPath = 'widgets/';
-					_registerUrlHandler ({
-						description:'Widgets To Go index page',
-						urlMatcher:function (_urlParts) {
-							return _urlParts.pathname == _builtPath + '/javascript-widgets.html';
-						},
-						builderInputs:function (_urlParts) {
-							return {
-								template:_changePath (_urlParts.pathname,_builtPath,_memoryPath) + '.jst',
-								widgets:_memoryPath + '/widgets/widgets.simpledata'
-							};
-						},
-						builder:function (_inputs) {
-							return _readFile ({path:_inputs.template}) ({
-								files:Uize.map (
-									_readFile ({path:_inputs.widgets}).widgets,
-									function (_widget) {
-										var _widgetTitleUrlized = _widget.title.toLowerCase ().replace (/\s+/g,'-');
-										return {
-											title:_widget.title,
-											path:_widgetsToGoPath + _widgetTitleUrlized + '.html',
-											imageSrc:'../images/widgets/' + _widgetTitleUrlized + '-96x96.gif',
-											description:_widget.description.short
-										};
-									}
-								)
-							});
-						}
-					});
+
+					function _urlizeWidgetTitle (_widget) {
+						return _widget.title.toLowerCase ().replace (/\s+/g,'-');
+					}
+
+					/*** handler for Widgets To Go index page ***/
+						_registerUrlHandler ({
+							description:'Widgets To Go index page',
+							urlMatcher:function (_urlParts) {
+								return _urlParts.pathname == _builtPath + '/javascript-widgets.html';
+							},
+							builderInputs:function (_urlParts) {
+								return {
+									template:_changePath (_urlParts.pathname,_builtPath,_memoryPath) + '.jst',
+									widgets:_memoryPath + '/' + _widgetsToGoPath + 'widgets.simpledata'
+								};
+							},
+							builder:function (_inputs) {
+								return _readFile ({path:_inputs.template}) ({
+									files:Uize.map (
+										_readFile ({path:_inputs.widgets}).widgets,
+										function (_widget) {
+											var _widgetTitleUrlized = _urlizeWidgetTitle (_widget);
+											return {
+												title:_widget.title,
+												path:_widgetsToGoPath + _widgetTitleUrlized + '.html',
+												imageSrc:'../images/widgets/' + _widgetTitleUrlized + '-96x96.gif',
+												description:_widget.description.short
+											};
+										}
+									)
+								});
+							}
+						});
+
+					/*** handler for widget homepages ***/
+						_registerUrlHandler ({
+							description:'Widget homepages',
+							urlMatcher:function (_urlParts) {
+								return (
+									_urlParts.fileType == 'html' &&
+									Uize.String.startsWith (_urlParts.pathname,_builtPath + '/' + _widgetsToGoPath)
+								);
+							},
+							builderInputs:function (_urlParts) {
+								var _widgetsToGoMemoryPath = _memoryPath + '/' + _widgetsToGoPath;
+								return {
+									template:_widgetsToGoMemoryPath + 'homepage.jst',
+									widgets:_widgetsToGoMemoryPath + 'widgets.simpledata'
+								};
+							},
+							builder:function (_inputs,_urlParts) {
+								var _fileName = _urlParts.fileName;
+								return _readFile ({path:_inputs.template}) (
+									Uize.Data.Matches.firstValue (
+										_readFile ({path:_inputs.widgets}).widgets,
+										function (_widget) {return _fileName == _urlizeWidgetTitle (_widget)}
+									)
+								);
+							}
+						});
 
 				/*** handler for the directory page ***/
 					_registerUrlHandler ({
