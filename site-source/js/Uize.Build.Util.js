@@ -95,7 +95,10 @@ Uize.module ({
 			};
 
 			_package.readSimpleDataFile = function (_simpleDataFilePath) {
-				return Uize.Data.Simple.parse ({simple:Uize.Wsh.readFile (_simpleDataFilePath),collapseChildren:true});
+				return Uize.Data.Simple.parse ({
+					simple:_fileSystem.readFile ({path:_simpleDataFilePath}),
+					collapseChildren:true
+				});
 			};
 
 			_package.compileJstFile = function (_jstTemplatePath) {

@@ -204,6 +204,37 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for Widgets To Go index page ***/
+					var _widgetsToGoPath = 'widgets/';
+					_registerUrlHandler ({
+						description:'Widgets To Go index page',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _builtPath + '/javascript-widgets.html';
+						},
+						builderInputs:function (_urlParts) {
+							return {
+								template:_changePath (_urlParts.pathname,_builtPath,_memoryPath) + '.jst',
+								widgets:_memoryPath + '/widgets/widgets.simpledata'
+							};
+						},
+						builder:function (_inputs) {
+							return _readFile ({path:_inputs.template}) ({
+								files:Uize.map (
+									_readFile ({path:_inputs.widgets}).widgets,
+									function (_widget) {
+										var _widgetTitleUrlized = _widget.title.toLowerCase ().replace (/\s+/g,'-');
+										return {
+											title:_widget.title,
+											path:_widgetsToGoPath + _widgetTitleUrlized + '.html',
+											imageSrc:'../images/widgets/' + _widgetTitleUrlized + '-96x96.gif',
+											description:_widget.description.short
+										};
+									}
+								)
+							});
+						}
+					});
+
 				/*** handler for the directory page ***/
 					_registerUrlHandler ({
 						description:'Directory page',
@@ -227,15 +258,32 @@ Uize.module ({
 							return _isUnderMemoryPath (_urlParts.pathname) && _urlParts.fileType == 'jst';
 						},
 						builderInputs:function (_urlParts) {
-							return {sourceJst:_sourcePath + _urlParts.pathname.slice (_memoryPath.length)};
+							return {source:_changePath (_urlParts.pathname,_memoryPath,_sourcePath)};
 						},
 						builder:function (_inputs) {
 							var _template = Uize.Template.compile (
-								_fileSystem.readFile ({path:_inputs.sourceJst}),
+								_fileSystem.readFile ({path:_inputs.source}),
 								{result:'full'}
 							);
 							Uize.require (_template.required);
 							return _template.templateFunction;
+						}
+					});
+
+				/*** handler for in-memory parsed SimpleData files ***/
+					_registerUrlHandler ({
+						description:'In-memory parsed SimpleData files',
+						urlMatcher:function (_urlParts) {
+							return _isUnderMemoryPath (_urlParts.pathname) && _urlParts.fileType == 'simpledata';
+						},
+						builderInputs:function (_urlParts) {
+							return {source:_changePath (_urlParts.pathname,_memoryPath,_sourcePath)};
+						},
+						builder:function (_inputs) {
+							return Uize.Data.Simple.parse ({
+								simple:_fileSystem.readFile ({path:_inputs.source}),
+								collapseChildren:true
+							});
 						}
 					});
 
@@ -252,7 +300,7 @@ Uize.module ({
 						},
 						builderInputs:function (_urlParts) {
 							return {sourceJs:_changePath (_urlParts.pathname,_tempPath,_sourcePath)};
-						},
+						}
 					});
 
 				/*** handler for SimpleDoc explainers, appendixes, news, etc. ***/
