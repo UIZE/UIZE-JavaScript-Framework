@@ -17,6 +17,21 @@
 	docCompleteness: 4
 */
 
+/* TODO:
+	- to implement
+		- handler for sitemap-code.xml
+		- handler for latest-news.rss
+		- handler for news.html
+		- handler for per year latest news pages
+		- handler for example index pages
+		- handler for javascript-modules-index.html
+		- handler for javascript-explainers.html
+		- handler for SOTU
+	- to fix
+		- SimpleDoc files need to be supplied with urlDictionary
+		- homepage (index.html) needs to have most recent 10 news items
+*/
+
 /*?
 	Introduction
 		The =UizeSite.Build.WebServer= package provides a method for running a Web server for the UIZE Web site on the localhost.
@@ -880,7 +895,7 @@ Uize.module ({
 				_http.createServer (
 					function (_request,_response) {
 						var
-							_requestUrl = _builtPath + _request.url,
+							_requestUrl = _builtPath + (_request.url == '/' ? '/index.html' : _request.url),
 							_fileContents,
 							_startTime = Uize.now ()
 						;
