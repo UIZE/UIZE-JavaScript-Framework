@@ -34,6 +34,7 @@
 	- to fix
 		- SimpleDoc files need to be supplied with urlDictionary
 		- homepage (index.html) needs to have most recent 10 news items
+		- references are not being generated for .js.jst modules
 */
 
 /*?
@@ -342,6 +343,34 @@ Uize.module ({
 								);
 							}
 						});
+
+				/*** handler for the JavaScript modules index page ***/
+					_registerUrlHandler ({
+						description:'JavaScript modules index page',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _builtPath + '/javascript-modules-index.html';
+						},
+						builderInputs:function (_urlParts) {
+							var
+								_moduleExtensionRegExp = /(\.js|\.js\.jst)$/,
+								_inputs = {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'},
+								_moduleFiles = _fileSystem.getFiles ({
+									path:_sourcePath + '/js',
+									pathMatcher:_moduleExtensionRegExp
+								})
+							;
+							/*
+								- populate inputs object with entries for memory cached SimpleDoc objects parsed from files
+							*/
+							return _inputs;
+						},
+						builder:function (_inputs) {
+							/*
+								- iterate through all inputs that are SimpleDoc objects and populate files array with objects containing title, path, and description
+							*/
+							return _readFile ({path:_inputs.template}) ({files:[]});
+						}
+					});
 
 				/*** handler for the directory page ***/
 					_registerUrlHandler ({
