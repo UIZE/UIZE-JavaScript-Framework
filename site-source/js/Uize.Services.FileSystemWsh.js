@@ -39,6 +39,21 @@ Uize.module ({
 				_callback (this._fileSystemObject.FileExists (_params.path));
 			};
 
+			_classPrototype.getFiles = function (_params,_callback) {
+				var
+					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
+					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
+					_result = [],
+					_files = new Enumerator (this._fileSystemObject.getFolder (_params.path).files),
+					_filePath
+				;
+				while (!_files.atEnd ()) {
+					_pathMatcher (_filePath = _files.item ().Path) && _result.push (_pathTransformer (_filePath));
+					_files.moveNext ();
+				}
+				_callback (_result);
+			};
+
 			_classPrototype.readFile = function (_params,_callback) {
 				var
 					_fileSystemObject = this._fileSystemObject,

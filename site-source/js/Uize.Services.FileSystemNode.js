@@ -96,6 +96,19 @@ Uize.module ({
 				_callback (this._pathExists (_params.path,_false));
 			};
 
+			_classPrototype.getFiles = function (_params,_callback) {
+				var
+					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
+					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
+					_result = []
+				;
+				Uize.forEach (
+					this._fileSystem.readdirSync (_params.path),
+					function (_filePath) {_pathMatcher (_filePath) && _result.push (_pathTransformer (_filePath))}
+				);
+				_callback (_result);
+			};
+
 			_classPrototype.getModifiedDate = function (_params,_callback) {
 				try {
 					_callback (new Date (this._fileSystem.statSync (_params.path).mtime));

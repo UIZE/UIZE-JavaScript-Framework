@@ -76,6 +76,29 @@ Uize.module ({
 										document...
 					*/
 				},
+				getFiles:{
+					async:_false
+					/*?
+						Instance Methods
+							getFiles
+								document...
+
+								SYNTAX
+								.........................................................
+								filePathsARRAY = fileSystemInstance.getFiles (paramsOBJ);
+								.........................................................
+
+								Params
+									path
+										document...
+
+									pathMatcher
+										document...
+
+									pathTransformer
+										document...
+					*/
+				},
 				getModifiedDate:{
 					async:_false
 					/*?
