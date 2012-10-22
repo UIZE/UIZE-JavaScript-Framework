@@ -297,6 +297,33 @@ Uize.module ({
 							}
 						});
 
+					/*** handler for widget Google Gadget XML pages ***/
+						var _widgetGoogleGadgetPageRegExp = new RegExp (
+							_builtPath + '/' + _widgetsToGoPath + '([^\\/\\.]+)/gadget\\.xml'
+						);
+						_registerUrlHandler ({
+							description:'Widget Google Gadget XML pages',
+							urlMatcher:function (_urlParts) {
+								return _widgetGoogleGadgetPageRegExp.test (_urlParts.pathname);
+							},
+							builderInputs:function (_urlParts) {
+								var _widgetsToGoMemoryPath = _memoryPath + '/' + _widgetsToGoPath;
+								return {
+									template:_widgetsToGoMemoryPath + 'gadget.xml.jst',
+									widgets:_widgetsToGoMemoryPath + 'widgets.simpledata'
+								};
+							},
+							builder:function (_inputs,_urlParts) {
+								var _widgetTitleUrlized = _urlParts.pathname.match (_widgetGoogleGadgetPageRegExp) [1];
+								return _readFile ({path:_inputs.template}) (
+									Uize.Data.Matches.firstValue (
+										_readFile ({path:_inputs.widgets}).widgets,
+										function (_widget) {return _widgetTitleUrlized == _urlizeWidgetTitle (_widget)}
+									)
+								);
+							}
+						});
+
 				/*** handler for the directory page ***/
 					_registerUrlHandler ({
 						description:'Directory page',
