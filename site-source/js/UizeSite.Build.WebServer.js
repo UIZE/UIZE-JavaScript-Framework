@@ -19,14 +19,18 @@
 
 /* TODO:
 	- to implement
-		- handler for sitemap-code.xml
-		- handler for latest-news.rss
-		- handler for news.html
-		- handler for per year latest news pages
-		- handler for example index pages
-		- handler for javascript-modules-index.html
-		- handler for javascript-explainers.html
-		- handler for SOTU
+		- handlers
+			- handler for javascript-modules-index.html
+			- handler for sitemap-code.xml
+			- handler for javascript-explainers.html
+
+			- handler for latest-news.rss
+			- handler for news.html
+			- handler for per year latest news pages
+			- handler for example index pages
+			- handler for SOTU
+		- factor out file building into separate module, so that file building can be triggered by build scripts
+		- update all build scripts to trigger file building using new approach
 	- to fix
 		- SimpleDoc files need to be supplied with urlDictionary
 		- homepage (index.html) needs to have most recent 10 news items
