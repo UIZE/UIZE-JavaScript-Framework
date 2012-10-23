@@ -56,42 +56,36 @@ Uize.module ({
 			};
 
 			_package.getHtmlFilesInfo = function (_folderToIndex,_titleExtractor) {
-				var _files = [];
 				if (!_titleExtractor) _titleExtractor = Uize.returnX;
-
-				for (
-					var
-						_fileNo = -1,
-						_filesToIndex = Uize.Wsh.getFiles (_folderToIndex),
-						_filesToIndexLength = _filesToIndex.length
-					;
-					++_fileNo < _filesToIndexLength;
-				) {
-					var
-						_filePath = _filesToIndex [_fileNo],
-						_fileName = Uize.Url.from (_filePath).file
-					;
-					if (/\.html$/i.test (_fileName) && _fileName.charAt (0) != '~') {
-						var
-							_fileText = Uize.Wsh.readFile (_filePath),
-							_keywordsMatch = _fileText.match (/<meta name="keywords" content="(.*?)"\/>/),
-							_descriptionMatch = _fileText.match (/<meta name="description" content="(.*?)"\/>/),
-							_imageSrcMatch = _fileText.match (/<link rel="image_src" href="(.*?)"\/>/)
-						;
-						_files.push ({
-							path:_folderToIndex + '/' + _fileName,
-							title:_titleExtractor (_fileText.match (/<title>(.*?)<\/title>/) [1]),
-							keywords:_keywordsMatch ? _keywordsMatch [1] : '',
-							description:_descriptionMatch ? _descriptionMatch [1] : '',
-							imageSrc:_imageSrcMatch ? Uize.Url.toAbsolute (_folderToIndex,_imageSrcMatch [1]) : ''
-						});
-					}
-				}
-
-				/*** sort files in case-insensitive ASCIIbetical order ***/
-					Uize.Array.Sort.sortBy (_files,'value.title.toLowerCase ()');
-
-				return _files;
+				return Uize.Array.Sort.sortBy (
+					Uize.map (
+						_fileSystem.getFiles ({
+							path:_folderToIndex,
+							pathMatcher:function (_path) {
+								var _urlParts = Uize.Url.from (_path);
+								return _urlParts.fileType == 'html' && !Uize.String.startsWith (_urlParts.file,'~');
+							}
+						}),
+						function (_path) {
+							var
+								_fileName = Uize.Url.from (_path).file,
+								_filePath = _folderToIndex + '/' + _fileName,
+								_fileText = _fileSystem.readFile ({path:_filePath}),
+								_keywordsMatch = _fileText.match (/<meta name="keywords" content="(.*?)"\/>/),
+								_descriptionMatch = _fileText.match (/<meta name="description" content="(.*?)"\/>/),
+								_imageSrcMatch = _fileText.match (/<link rel="image_src" href="(.*?)"\/>/)
+							;
+							return {
+								path:_filePath,
+								title:_titleExtractor (_fileText.match (/<title>(.*?)<\/title>/) [1]),
+								keywords:_keywordsMatch ? _keywordsMatch [1] : '',
+								description:_descriptionMatch ? _descriptionMatch [1] : '',
+								imageSrc:_imageSrcMatch ? Uize.Url.toAbsolute (_folderToIndex,_imageSrcMatch [1]) : ''
+							};
+						}
+					),
+					'value.title.toLowerCase ()'
+				);
 			};
 
 			_package.readSimpleDataFile = function (_simpleDataFilePath) {

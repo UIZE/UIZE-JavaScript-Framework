@@ -20,7 +20,6 @@
 /* TODO:
 	- to implement
 		- handlers
-			- handler for javascript-modules-index.html
 			- handler for sitemap-code.xml
 			- handler for javascript-explainers.html
 
@@ -77,7 +76,9 @@ Uize.module ({
 		'Uize.Data.Simple',
 		'Uize.Doc.Sucker',
 		'Uize.Util.Oop',
-		'Uize.Data.Matches'
+		'Uize.Data.Matches',
+		'Uize.Build.Util',
+		'UizeSite.Build.Util'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -116,7 +117,8 @@ Uize.module ({
 					_builtPath = _params.builtPath
 					_memoryPath = 'memory',
 					_isDev = _params.isDev == 'true',
-					_scrunchedHeadComments = _params.scrunchedHeadComments || {}
+					_scrunchedHeadComments = _params.scrunchedHeadComments || {},
+					_moduleExtensionRegExp = /(\.js|\.js\.jst)$/
 				;
 
 				function _registerUrlHandler (_urlHandler) {
@@ -351,24 +353,33 @@ Uize.module ({
 							return _urlParts.pathname == _builtPath + '/javascript-modules-index.html';
 						},
 						builderInputs:function (_urlParts) {
-							var
-								_moduleExtensionRegExp = /(\.js|\.js\.jst)$/,
-								_inputs = {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'},
-								_moduleFiles = _fileSystem.getFiles ({
+							var _inputs = {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
+							Uize.forEach (
+								_fileSystem.getFiles ({
 									path:_sourcePath + '/js',
 									pathMatcher:_moduleExtensionRegExp
-								})
-							;
-							/*
-								- populate inputs object with entries for memory cached SimpleDoc objects parsed from files
-							*/
+								}),
+								function (_modulePath,_moduleNo) {
+									_inputs ['moduleReference' + _moduleNo] =
+										_builtPath + '/reference/' +
+										Uize.Url.from (_modulePath).file.replace (_moduleExtensionRegExp,'') + '.html'
+									;
+								}
+							);
 							return _inputs;
 						},
 						builder:function (_inputs) {
-							/*
-								- iterate through all inputs that are SimpleDoc objects and populate files array with objects containing title, path, and description
-							*/
-							return _readFile ({path:_inputs.template}) ({files:[]});
+							var _referencePath = _builtPath + '/reference';
+							return _readFile ({path:_inputs.template}) ({
+								files:Uize.map (
+									Uize.Build.Util.getHtmlFilesInfo (_referencePath,UizeSite.Build.Util.getFirstTitleSegment),
+									function (_fileInfo) {
+										_fileInfo.path = _fileInfo.path.slice (_builtPath.length + 1);
+										return _fileInfo;
+									},
+									false
+								)
+							});
 						}
 					});
 
@@ -649,15 +660,24 @@ Uize.module ({
 					_registerUrlHandler ({
 						description:'Module reference pages',
 						urlMatcher:function (_urlParts) {
-							var _folderPath = _urlParts.folderPath;
+							var
+								_folderPath = _urlParts.folderPath,
+								_sourcePathSansExtension = _sourcePath + '/js/' + _urlParts.fileName
+							;
 							return (
-								_urlParts.folderPath == _builtPath + '/reference/' &&
-								_fileSystem.pathExists ({path:_sourcePath + '/js/' + _urlParts.fileName + '.js'})
+								_folderPath == _builtPath + '/reference/' &&
+								(
+									_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js'}) ||
+									_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js.jst'})
+								)
 							);
 						},
 						builderInputs:function (_urlParts) {
+							var _sourcePathSansExtension = _sourcePath + '/js/' + _urlParts.fileName;
 							return {
-								sourceCode:_sourcePath + '/js/' + _urlParts.fileName + '.js',
+								sourceCode:
+									_sourcePathSansExtension +
+									(_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js'}) ? '.js' : '.js.jst'),
 								simpleDocTemplate:_memoryPath + '/reference/~SIMPLE-DOC-TEMPLATE.html.jst'
 							};
 						},
@@ -665,7 +685,7 @@ Uize.module ({
 							var
 								_simpleDoc,
 								_sourceCodePath = _inputs.sourceCode,
-								_moduleName = Uize.Url.from (_sourceCodePath).fileName
+								_moduleName = Uize.Url.from (_sourceCodePath).file.replace (_moduleExtensionRegExp,'')
 							;
 							Uize.require (
 								_moduleName,

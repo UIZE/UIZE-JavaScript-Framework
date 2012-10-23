@@ -28,10 +28,7 @@ Uize.module ({
 	name:'UizeSite.Build.BuildWidgetPages',
 	required:[
 		'Uize.Wsh',
-		'Uize.Build.Util',
-		'UizeSite.Templates.WidgetToGoGadgetXml',
-		'UizeSite.Templates.WidgetToGoPage',
-		'UizeSite.Templates.WidgetToGoHomepage'
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
