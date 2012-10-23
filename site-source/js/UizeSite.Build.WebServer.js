@@ -21,7 +21,6 @@
 	- to implement
 		- handlers
 			- handler for sitemap-code.xml
-			- handler for javascript-explainers.html
 
 			- handler for latest-news.rss
 			- handler for news.html
@@ -346,42 +345,71 @@ Uize.module ({
 							}
 						});
 
-				/*** handler for the JavaScript modules index page ***/
-					_registerUrlHandler ({
-						description:'JavaScript modules index page',
-						urlMatcher:function (_urlParts) {
-							return _urlParts.pathname == _builtPath + '/javascript-modules-index.html';
-						},
-						builderInputs:function (_urlParts) {
-							var _inputs = {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
-							Uize.forEach (
-								_fileSystem.getFiles ({
-									path:_sourcePath + '/js',
-									pathMatcher:_moduleExtensionRegExp
-								}),
-								function (_modulePath,_moduleNo) {
-									_inputs ['moduleReference' + _moduleNo] =
-										_builtPath + '/reference/' +
-										Uize.Url.from (_modulePath).file.replace (_moduleExtensionRegExp,'') + '.html'
-									;
-								}
-							);
-							return _inputs;
-						},
-						builder:function (_inputs) {
-							var _referencePath = _builtPath + '/reference';
-							return _readFile ({path:_inputs.template}) ({
-								files:Uize.map (
-									Uize.Build.Util.getHtmlFilesInfo (_referencePath,UizeSite.Build.Util.getFirstTitleSegment),
-									function (_fileInfo) {
-										_fileInfo.path = _fileInfo.path.slice (_builtPath.length + 1);
-										return _fileInfo;
-									},
-									false
-								)
-							});
-						}
-					});
+				/*** handlers for some index pages ***/
+					function _registerIndexPageUrlHandler (
+						_description,
+						_indexPageFileName,
+						_indexableFileFolderUnderSource,
+						_indexableFileFolderUnderBuilt,
+						_indexableFileExtensionRegExp
+					) {
+						_registerUrlHandler ({
+							description:_description,
+							urlMatcher:function (_urlParts) {
+								return _urlParts.pathname == _builtPath + '/' + _indexPageFileName + '.html';
+							},
+							builderInputs:function (_urlParts) {
+								var _inputs = {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
+								Uize.forEach (
+									_fileSystem.getFiles ({
+										path:_sourcePath + '/' + _indexableFileFolderUnderSource,
+										pathMatcher:_indexableFileExtensionRegExp
+									}),
+									function (_filePath,_fileNo) {
+										_inputs ['builtFile' + _fileNo] =
+											_builtPath + '/' + _indexableFileFolderUnderBuilt + '/' +
+											Uize.Url.from (_filePath).file.replace (_indexableFileExtensionRegExp,'') + '.html'
+										;
+									}
+								);
+								return _inputs;
+							},
+							builder:function (_inputs) {
+								var _builtPathPrefix = _builtPath + '/' + _indexableFileFolderUnderBuilt;
+								return _readFile ({path:_inputs.template}) ({
+									files:Uize.map (
+										Uize.Build.Util.getHtmlFilesInfo (
+											_builtPathPrefix,
+											UizeSite.Build.Util.getFirstTitleSegment
+										),
+										function (_fileInfo) {
+											_fileInfo.path = _fileInfo.path.slice (_builtPath.length + 1);
+											return _fileInfo;
+										},
+										false
+									)
+								});
+							}
+						});
+					}
+
+					/*** handler for the JavaScript modules index page ***/
+						_registerIndexPageUrlHandler (
+							'JavaScript modules index page',
+							'javascript-modules-index',
+							'js',
+							'reference',
+							_moduleExtensionRegExp
+						);
+
+					/*** handler for the JavaScript explainers page ***/
+						_registerIndexPageUrlHandler (
+							'JavaScript explainers page',
+							'javascript-explainers',
+							'explainers',
+							'explainers',
+							/\.simple$/
+						);
 
 				/*** handler for the directory page ***/
 					_registerUrlHandler ({
