@@ -20,12 +20,12 @@
 /* TODO:
 	- to implement
 		- handlers
-			- handler for sitemap-code.xml
+			- handler for example index pages
 
 			- handler for latest-news.rss
 			- handler for news.html
 			- handler for per year latest news pages
-			- handler for example index pages
+
 			- handler for SOTU
 		- factor out file building into separate module, so that file building can be triggered by build scripts
 		- update all build scripts to trigger file building using new approach
@@ -344,6 +344,39 @@ Uize.module ({
 								);
 							}
 						});
+
+				/*** handler for Google Code sitemap ***/
+					_registerUrlHandler ({
+						description:'Google Code sitemap',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _builtPath + '/sitemap-code.xml';
+						},
+						builder:function (_inputs) {
+							return (
+								'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:codesearch="http://www.google.com/codesearch/schemas/sitemap/1.0">\n' +
+								Uize.map (
+									_fileSystem.getFiles ({
+										path:_sourcePath + '/js',
+										pathMatcher:_moduleExtensionRegExp
+									}),
+									function (_fileName) {
+										return (
+											'\t<url>\n' +
+												'\t\t<loc>' +
+													'http://www.uize.com/js/' + _fileName.replace (_moduleExtensionRegExp,'') + '.js' +
+												'</loc>\n' +
+												'\t\t<codesearch:codesearch>\n' +
+													'\t\t\t<codesearch:filetype>javascript</codesearch:filetype>\n' +
+													'\t\t\t<codesearch:license>GPL</codesearch:license>\n' +
+												'\t\t</codesearch:codesearch>\n' +
+											'\t</url>\n'
+										);
+									}
+								).join ('') +
+								'</urlset>\n'
+							);
+						}
+					});
 
 				/*** handlers for some index pages ***/
 					function _registerIndexPageUrlHandler (
@@ -927,47 +960,52 @@ Uize.module ({
 					if (_matchingHandler) {
 						var
 							_builderInputs = (_matchingHandler.builderInputs || Uize.nop) (_urlParts),
-							_path = _urlParts.pathname,
-							_mustBuild = !_pathExists ({path:_path}),
-							_lastBuiltDate = _mustBuild ? 0 : _getModifiedDate ({path:_path}),
-							_builderInput
+							_builder = _matchingHandler.builder
 						;
-						for (var _builderInputName in _builderInputs) {
-							_ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
-							_mustBuild || (
-								_mustBuild = Math.max (
-									_getModifiedDate ({path:_builderInput}),
-									_minAllowedModifiedDate
-								) > _lastBuiltDate
-							);
-						}
-						if (_mustBuild) {
+						if (_builderInputs || _builder) {
 							var
-								_startTime = Uize.now (),
-								_builder = _matchingHandler.builder,
-								_buildError
+								_path = _urlParts.pathname,
+								_mustBuild = !_pathExists ({path:_path}),
+								_lastBuiltDate = _mustBuild ? 0 : _getModifiedDate ({path:_path}),
+								_builderInput
 							;
-							try {
-								_builder
-									? _writeFile ({path:_url,contents:_builder (_builderInputs,_urlParts)})
-									: _fileSystem.copyFile ({path:Uize.values (_builderInputs) [0],targetPath:_url})
-								;
-							} catch (_error) {
-								_buildError = _error;
+							_mustBuild || (_mustBuild = _lastBuiltDate < _minAllowedModifiedDate);
+							for (var _builderInputName in _builderInputs) {
+								_ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
+								_mustBuild || (
+									_mustBuild = Math.max (
+										_getModifiedDate ({path:_builderInput}),
+										_minAllowedModifiedDate
+									) > _lastBuiltDate
+								);
 							}
-							console.log (
-								(_buildError ? '*** BUILD FAILED' : 'BUILT') + ': ' + _url + '\n' +
-									'\tduration: ' + (Uize.now () - _startTime) + '\n' +
-									'\tbuilder: ' + _matchingHandler.description + '\n' +
-									'\tbuilder inputs:\n' +
-										Uize.map (
-											Uize.keys (_builderInputs),
-											function (_key) {return '\t\t' + _key + ': ' + _builderInputs [_key] + '\n'}
-										).join ('')
-							);
-							if (_buildError) {
-								console.log (_buildError);
-								throw _buildError;
+							if (_mustBuild) {
+								var
+									_startTime = Uize.now (),
+									_buildError
+								;
+								try {
+									_builder
+										? _writeFile ({path:_url,contents:_builder (_builderInputs,_urlParts)})
+										: _fileSystem.copyFile ({path:Uize.values (_builderInputs) [0],targetPath:_url})
+									;
+								} catch (_error) {
+									_buildError = _error;
+								}
+								console.log (
+									(_buildError ? '*** BUILD FAILED' : 'BUILT') + ': ' + _url + '\n' +
+										'\tduration: ' + (Uize.now () - _startTime) + '\n' +
+										'\tbuilder: ' + _matchingHandler.description + '\n' +
+										'\tbuilder inputs:\n' +
+											Uize.map (
+												Uize.keys (_builderInputs),
+												function (_key) {return '\t\t' + _key + ': ' + _builderInputs [_key] + '\n'}
+											).join ('')
+								);
+								if (_buildError) {
+									console.log (_buildError);
+									throw _buildError;
+								}
 							}
 						}
 					}
