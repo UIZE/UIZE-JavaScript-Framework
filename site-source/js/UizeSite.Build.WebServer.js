@@ -20,8 +20,6 @@
 /* TODO:
 	- to implement
 		- handlers
-			- handler for example index pages
-
 			- handler for latest-news.rss
 			- handler for news.html
 			- handler for per year latest news pages
@@ -32,7 +30,7 @@
 	- to fix
 		- SimpleDoc files need to be supplied with urlDictionary
 		- homepage (index.html) needs to have most recent 10 news items
-		- references are not being generated for .js.jst modules
+		- improve performance of examples index (and other index pages) by switching to a model where there are in-memory .info objects for each index HTML file, so that index pages are more responsive to updates to individual files in the indexes
 */
 
 /*?
@@ -368,6 +366,21 @@ Uize.module ({
 					});
 
 				/*** handlers for some index pages ***/
+					function _getHtmlFilesInfo (_folderToIndexPath,_filePathPrefixToRemove) {
+						var _filePathPrefixToRemoveLength = _filePathPrefixToRemove.length;
+						return Uize.map (
+							Uize.Build.Util.getHtmlFilesInfo (
+								_folderToIndexPath,
+								UizeSite.Build.Util.getFirstTitleSegment
+							),
+							function (_fileInfo) {
+								_fileInfo.path = _fileInfo.path.slice (_filePathPrefixToRemoveLength + 1);
+								return _fileInfo;
+							},
+							false
+						);
+					}
+
 					function _registerIndexPageUrlHandler (
 						_description,
 						_indexPageFileName,
@@ -399,17 +412,7 @@ Uize.module ({
 							builder:function (_inputs) {
 								var _builtPathPrefix = _builtPath + '/' + _indexableFileFolderUnderBuilt;
 								return _readFile ({path:_inputs.template}) ({
-									files:Uize.map (
-										Uize.Build.Util.getHtmlFilesInfo (
-											_builtPathPrefix,
-											UizeSite.Build.Util.getFirstTitleSegment
-										),
-										function (_fileInfo) {
-											_fileInfo.path = _fileInfo.path.slice (_builtPath.length + 1);
-											return _fileInfo;
-										},
-										false
-									)
+									files:_getHtmlFilesInfo (_builtPathPrefix,_builtPath)
 								});
 							}
 						});
@@ -432,6 +435,103 @@ Uize.module ({
 							'explainers',
 							/\.simple$/
 						);
+
+				/*** handler for examples-by-keyword index pages ***/
+					var
+						_examplesInfoPath = _memoryPath + '/examples-info',
+						_examplesByKeywordPath = _memoryPath + '/examples-by-keyword',
+						_examplesKeywordRegExp = /^javascript-((.+?)-)?examples$/
+					;
+
+					_registerUrlHandler ({
+						description:'Examples info',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _examplesInfoPath;
+						},
+						builderInputs:function (_urlParts) {
+							var
+								_inputs = {},
+								_examplesSourcePath = _sourcePath + '/examples'
+							;
+							Uize.forEach (
+								_fileSystem.getFiles ({
+									path:_examplesSourcePath,
+									pathMatcher:function (_filePath) {
+										var _urlParts = Uize.Url.from (_filePath);
+										return _urlParts.fileType == 'html' && !Uize.String.startsWith (_urlParts.fileName,'~');
+									}
+								}),
+								function (_filePath,_fileNo) {
+									_inputs ['indexedFile' + _fileNo] = _examplesSourcePath + '/' + _filePath;
+								}
+							);
+							return _inputs;
+						},
+						builder:function (_inputs) {
+							return _getHtmlFilesInfo (_sourcePath + '/examples',_sourcePath);
+						}
+					});
+
+					_registerUrlHandler ({
+						description:'Examples-by-keyword lookup',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _examplesByKeywordPath;
+						},
+						builderInputs:function (_urlParts) {
+							return {examplesInfo:_examplesInfoPath};
+						},
+						builder:function (_inputs) {
+							var
+								_examples = _readFile ({path:_inputs.examplesInfo}),
+								_examplesByKeyword = {'':_examples}
+							;
+							for (
+								var _exampleNo = -1, _examplesLength = _examples.length, _example, _keywords, _keywordsStr;
+								++_exampleNo < _examplesLength;
+							) {
+								if (_keywordsStr = (_example = _examples [_exampleNo]).keywords) {
+									for (
+										var
+											_keywordNo = -1,
+											_keywords = _keywordsStr.split (' '),
+											_keywordsLength = _keywords.length,
+											_keyword
+										;
+										++_keywordNo < _keywordsLength;
+									) {
+										Uize.String.startsWith (_keyword = _keywords [_keywordNo],'Uize') ||
+											(_examplesByKeyword [_keyword] || (_examplesByKeyword [_keyword] = [])).push (_example)
+										;
+									}
+								}
+							}
+							return _examplesByKeyword;
+						}
+					});
+
+					_registerUrlHandler ({
+						description:'Examples-by-keyword index page',
+						urlMatcher:function (_urlParts) {
+							return (
+								_urlParts.fileType == 'html' &&
+								_isUnderBuiltPath (_urlParts.pathname) &&
+								_examplesKeywordRegExp.test (_urlParts.fileName)
+							);
+						},
+						builderInputs:function (_urlParts) {
+							return {
+								template:_memoryPath + '/javascript-examples.html.jst',
+								examplesByKeyword:_examplesByKeywordPath
+							};
+						},
+						builder:function (_inputs,_urlParts) {
+							var _keyword = _urlParts.fileName.match (_examplesKeywordRegExp) [2] || '';
+							return _readFile ({path:_inputs.template}) ({
+								keyword:_keyword,
+								files:_readFile ({path:_inputs.examplesByKeyword}) [_keyword] || []
+							});
+						}
+					});
 
 				/*** handler for the directory page ***/
 					_registerUrlHandler ({
