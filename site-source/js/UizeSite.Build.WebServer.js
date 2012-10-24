@@ -351,30 +351,19 @@ Uize.module ({
 						urlMatcher:function (_urlParts) {
 							return _urlParts.pathname == _builtPath + '/sitemap-code.xml';
 						},
+						builderInputs:function (_urlParts) {
+							return {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
+						},
 						builder:function (_inputs) {
-							return (
-								'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:codesearch="http://www.google.com/codesearch/schemas/sitemap/1.0">\n' +
-								Uize.map (
+							return _readFile ({path:_inputs.template}) ({
+								modules:Uize.map (
 									_fileSystem.getFiles ({
 										path:_sourcePath + '/js',
 										pathMatcher:_moduleExtensionRegExp
 									}),
-									function (_fileName) {
-										return (
-											'\t<url>\n' +
-												'\t\t<loc>' +
-													'http://www.uize.com/js/' + _fileName.replace (_moduleExtensionRegExp,'') + '.js' +
-												'</loc>\n' +
-												'\t\t<codesearch:codesearch>\n' +
-													'\t\t\t<codesearch:filetype>javascript</codesearch:filetype>\n' +
-													'\t\t\t<codesearch:license>GPL</codesearch:license>\n' +
-												'\t\t</codesearch:codesearch>\n' +
-											'\t</url>\n'
-										);
-									}
-								).join ('') +
-								'</urlset>\n'
-							);
+									function (_fileName) {return _fileName.replace (_moduleExtensionRegExp,'')}
+								)
+							});
 						}
 					});
 
