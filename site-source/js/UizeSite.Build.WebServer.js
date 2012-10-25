@@ -21,8 +21,6 @@
 	- to implement
 		- handlers
 			- handler for latest-news.rss
-			- handler for news.html
-			- handler for per year latest news pages
 
 			- handler for SOTU
 		- factor out file building into separate module, so that file building can be triggered by build scripts
@@ -74,7 +72,8 @@ Uize.module ({
 		'Uize.Util.Oop',
 		'Uize.Data.Matches',
 		'Uize.Build.Util',
-		'UizeSite.Build.Util'
+		'UizeSite.Build.Util',
+		'Uize.Array.Sort'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -405,7 +404,8 @@ Uize.module ({
 					function _registerInMemoryHtmlFilesIndexHandler (
 						_indexableFolderUnderSource,
 						_indexableFolderUnderBuilt,
-						_indexableFileExtensionRegExp
+						_indexableFileExtensionRegExp,
+						_sortOrder
 					) {
 						var
 							_inMemoryFileInfoPath = _memoryPath + '/' + _indexableFolderUnderBuilt,
@@ -444,7 +444,7 @@ Uize.module ({
 									'fileInfo',
 									function (_fileInfoPath) {_index.push (_readFile ({path:_fileInfoPath}))}
 								);
-								return _index;
+								return Uize.Array.Sort.sortBy (_index,'value.title',_sortOrder);
 							}
 						});
 					}
@@ -515,10 +515,7 @@ Uize.module ({
 				/*** handler for examples-by-keyword index pages ***/
 					_registerInMemoryHtmlFilesIndexHandler ('examples','examples',/\.html$/);
 
-					var
-						_examplesByKeywordPath = _memoryPath + '/examples-by-keyword',
-						_examplesKeywordRegExp = /^javascript-((.+?)-)?examples$/
-					;
+					var _examplesByKeywordPath = _memoryPath + '/examples-by-keyword';
 					_registerUrlHandler ({
 						description:'Examples-by-keyword lookup',
 						urlMatcher:function (_urlParts) {
@@ -556,6 +553,7 @@ Uize.module ({
 						}
 					});
 
+					var _examplesKeywordRegExp = /^javascript-((.+?)-)?examples$/;
 					_registerUrlHandler ({
 						description:'Examples-by-keyword index page',
 						urlMatcher:function (_urlParts) {
@@ -579,6 +577,63 @@ Uize.module ({
 							});
 						}
 					});
+
+				/*** handlers for news index pages ***/
+					_registerInMemoryHtmlFilesIndexHandler ('news','news',/\.simple$/,-1);
+
+					/*** handler for news-by-year index pages ***/
+						var _newsByYearPath = _memoryPath + '/news-by-year';
+						_registerUrlHandler ({
+							description:'News-by-year lookup',
+							urlMatcher:function (_urlParts) {
+								return _urlParts.pathname == _newsByYearPath;
+							},
+							builderInputs:function (_urlParts) {
+								return {filesIndex:_memoryPath + '/news.index'};
+							},
+							builder:function (_inputs) {
+								var
+									_newsItems = _readFile ({path:_inputs.filesIndex}),
+									_newsByYearLookup = {'':_newsItems}
+								;
+								for (
+									var _newsItemNo = -1, _newsItemsLength = _newsItems.length, _newsItem;
+									++_newsItemNo < _newsItemsLength;
+								) {
+									var _year = Uize.Url.from ((_newsItem = _newsItems [_newsItemNo]).path).file.slice (0,4);
+									(_newsByYearLookup [_year] || (_newsByYearLookup [_year] = [])).push (_newsItem);
+								}
+								return _newsByYearLookup;
+							}
+						});
+
+						var _newsByYearRegExp = /^(news-(\d{4})|latest-news)$/;
+						_registerUrlHandler ({
+							description:'News-by-year index page',
+							urlMatcher:function (_urlParts) {
+								return (
+									_urlParts.fileType == 'html' &&
+									_isUnderBuiltPath (_urlParts.pathname) &&
+									_newsByYearRegExp.test (_urlParts.fileName)
+								);
+							},
+							builderInputs:function (_urlParts) {
+								return {
+									template:_memoryPath + '/news.html.jst',
+									newsByYear:_newsByYearPath
+								};
+							},
+							builder:function (_inputs,_urlParts) {
+								var
+									_year = _urlParts.fileName.match (_newsByYearRegExp) [2] || '',
+									_newsItems = _readFile ({path:_inputs.newsByYear}) [_year] || []
+								;
+								return _readFile ({path:_inputs.template}) ({
+									year:_year,
+									files:_year ? _newsItems : _newsItems.slice (0,50)
+								});
+							}
+						});
 
 				/*** handler for the directory page ***/
 					_registerUrlHandler ({
