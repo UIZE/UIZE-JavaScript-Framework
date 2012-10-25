@@ -30,7 +30,6 @@
 	- to fix
 		- SimpleDoc files need to be supplied with urlDictionary
 		- homepage (index.html) needs to have most recent 10 news items
-		- improve performance of examples index (and other index pages) by switching to a model where there are in-memory .info objects for each index HTML file, so that index pages are more responsive to updates to individual files in the indexes
 */
 
 /*?
@@ -403,54 +402,76 @@ Uize.module ({
 					});
 
 				/*** handlers for some index pages ***/
-					function _getHtmlFilesInfo (_folderToIndexPath,_filePathPrefixToRemove) {
-						var _filePathPrefixToRemoveLength = _filePathPrefixToRemove.length;
-						return Uize.map (
-							Uize.Build.Util.getHtmlFilesInfo (
-								_folderToIndexPath,
-								UizeSite.Build.Util.getFirstTitleSegment
-							),
-							function (_fileInfo) {
-								_fileInfo.path = _fileInfo.path.slice (_filePathPrefixToRemoveLength + 1);
-								return _fileInfo;
-							},
-							false
-						);
-					}
-
-					function _registerIndexPageUrlHandler (
-						_description,
-						_indexPageFileName,
-						_indexableFileFolderUnderSource,
-						_indexableFileFolderUnderBuilt,
+					function _registerInMemoryHtmlFilesIndexHandler (
+						_indexableFolderUnderSource,
+						_indexableFolderUnderBuilt,
 						_indexableFileExtensionRegExp
 					) {
+						var
+							_inMemoryFileInfoPath = _memoryPath + '/' + _indexableFolderUnderBuilt,
+							_inMemoryHtmlFilesIndexPath = _inMemoryFileInfoPath + '.index'
+						;
 						_registerUrlHandler ({
-							description:_description,
+							description:'In-memory HTML files index for the ' + _indexableFolderUnderBuilt + ' folder',
 							urlMatcher:function (_urlParts) {
-								return _urlParts.pathname == _builtPath + '/' + _indexPageFileName + '.html';
+								return _urlParts.pathname == _inMemoryHtmlFilesIndexPath;
 							},
 							builderInputs:function (_urlParts) {
-								var _inputs = {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
+								var _inputs = {};
 								Uize.forEach (
 									_fileSystem.getFiles ({
-										path:_sourcePath + '/' + _indexableFileFolderUnderSource,
-										pathMatcher:_indexableFileExtensionRegExp
+										path:_sourcePath + '/' + _indexableFolderUnderSource,
+										pathMatcher:function (_filePath) {
+											return (
+												_indexableFileExtensionRegExp.test (_filePath) &&
+												!Uize.String.startsWith (Uize.Url.from (_filePath).fileName,'~')
+											);
+										}
 									}),
 									function (_filePath,_fileNo) {
-										_inputs ['builtFile' + _fileNo] =
-											_builtPath + '/' + _indexableFileFolderUnderBuilt + '/' +
-											Uize.Url.from (_filePath).file.replace (_indexableFileExtensionRegExp,'') + '.html'
+										_inputs ['fileInfo' + _fileNo] =
+											_inMemoryFileInfoPath + '/' +
+											_filePath.replace (_indexableFileExtensionRegExp,'') + '.html.info'
 										;
 									}
 								);
 								return _inputs;
 							},
 							builder:function (_inputs) {
-								var _builtPathPrefix = _builtPath + '/' + _indexableFileFolderUnderBuilt;
-								return _readFile ({path:_inputs.template}) ({
-									files:_getHtmlFilesInfo (_builtPathPrefix,_builtPath)
-								});
+								var _index = [];
+								_forEachNumberedInput (
+									_inputs,
+									'fileInfo',
+									function (_fileInfoPath) {_index.push (_readFile ({path:_fileInfoPath}))}
+								);
+								return _index;
+							}
+						});
+					}
+
+					function _registerIndexPageUrlHandler (
+						_description,
+						_indexPageFileName,
+						_indexableFolderUnderSource,
+						_indexableFolderUnderBuilt,
+						_indexableFileExtensionRegExp
+					) {
+						_registerInMemoryHtmlFilesIndexHandler (
+							_indexableFolderUnderSource,_indexableFolderUnderBuilt,_indexableFileExtensionRegExp
+						);
+						_registerUrlHandler ({
+							description:_description,
+							urlMatcher:function (_urlParts) {
+								return _urlParts.pathname == _builtPath + '/' + _indexPageFileName + '.html';
+							},
+							builderInputs:function (_urlParts) {
+								return {
+									template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst',
+									filesIndex:_memoryPath + '/' + _indexableFolderUnderBuilt + '.index'
+								};
+							},
+							builder:function (_inputs) {
+								return _readFile ({path:_inputs.template}) ({files:_readFile ({path:_inputs.filesIndex})});
 							}
 						});
 					}
@@ -492,58 +513,23 @@ Uize.module ({
 						);
 
 				/*** handler for examples-by-keyword index pages ***/
+					_registerInMemoryHtmlFilesIndexHandler ('examples','examples',/\.html$/);
+
 					var
-						_examplesInfoPath = _memoryPath + '/examples-info',
 						_examplesByKeywordPath = _memoryPath + '/examples-by-keyword',
 						_examplesKeywordRegExp = /^javascript-((.+?)-)?examples$/
 					;
-
-					_registerUrlHandler ({
-						description:'Examples info',
-						urlMatcher:function (_urlParts) {
-							return _urlParts.pathname == _examplesInfoPath;
-						},
-						builderInputs:function (_urlParts) {
-							var
-								_inputs = {},
-								_exampleInfoMemoryPath = _memoryPath + '/examples'
-							;
-							Uize.forEach (
-								_fileSystem.getFiles ({
-									path:_sourcePath + '/examples',
-									pathMatcher:function (_filePath) {
-										var _urlParts = Uize.Url.from (_filePath);
-										return _urlParts.fileType == 'html' && !Uize.String.startsWith (_urlParts.fileName,'~');
-									}
-								}),
-								function (_filePath,_fileNo) {
-									_inputs ['exampleInfo' + _fileNo] = _exampleInfoMemoryPath + '/' + _filePath + '.info';
-								}
-							);
-							return _inputs;
-						},
-						builder:function (_inputs) {
-							var _examples = [];
-							_forEachNumberedInput (
-								_inputs,
-								'exampleInfo',
-								function (_exampleInfoPath) {_examples.push (_readFile ({path:_exampleInfoPath}))}
-							);
-							return _examples;
-						}
-					});
-
 					_registerUrlHandler ({
 						description:'Examples-by-keyword lookup',
 						urlMatcher:function (_urlParts) {
 							return _urlParts.pathname == _examplesByKeywordPath;
 						},
 						builderInputs:function (_urlParts) {
-							return {examplesInfo:_examplesInfoPath};
+							return {filesIndex:_memoryPath + '/examples.index'};
 						},
 						builder:function (_inputs) {
 							var
-								_examples = _readFile ({path:_inputs.examplesInfo}),
+								_examples = _readFile ({path:_inputs.filesIndex}),
 								_examplesByKeyword = {'':_examples}
 							;
 							for (
