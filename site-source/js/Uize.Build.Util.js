@@ -55,6 +55,22 @@ Uize.module ({
 				return (_buildFolderPath && _rootPath + '\\' + _buildFolderPath) + _folderPath.substr (_rootPath.length);
 			};
 
+			_package.getHtmlFileInfo = function (_filePath,_titleExtractor) {
+				var
+					_fileText = _fileSystem.readFile ({path:_filePath}),
+					_keywordsMatch = _fileText.match (/<meta name="keywords" content="(.*?)"\/>/),
+					_descriptionMatch = _fileText.match (/<meta name="description" content="(.*?)"\/>/),
+					_imageSrcMatch = _fileText.match (/<link rel="image_src" href="(.*?)"\/>/)
+				;
+				return {
+					path:_filePath,
+					title:_titleExtractor (_fileText.match (/<title>(.*?)<\/title>/) [1]),
+					keywords:_keywordsMatch ? _keywordsMatch [1] : '',
+					description:_descriptionMatch ? _descriptionMatch [1] : '',
+					imageSrc:_imageSrcMatch ? Uize.Url.toAbsolute (_folderToIndex,_imageSrcMatch [1]) : ''
+				};
+			};
+
 			_package.getHtmlFilesInfo = function (_folderToIndex,_titleExtractor) {
 				if (!_titleExtractor) _titleExtractor = Uize.returnX;
 				return Uize.Array.Sort.sortBy (
@@ -67,21 +83,10 @@ Uize.module ({
 							}
 						}),
 						function (_path) {
-							var
-								_fileName = Uize.Url.from (_path).file,
-								_filePath = _folderToIndex + '/' + _fileName,
-								_fileText = _fileSystem.readFile ({path:_filePath}),
-								_keywordsMatch = _fileText.match (/<meta name="keywords" content="(.*?)"\/>/),
-								_descriptionMatch = _fileText.match (/<meta name="description" content="(.*?)"\/>/),
-								_imageSrcMatch = _fileText.match (/<link rel="image_src" href="(.*?)"\/>/)
-							;
-							return {
-								path:_filePath,
-								title:_titleExtractor (_fileText.match (/<title>(.*?)<\/title>/) [1]),
-								keywords:_keywordsMatch ? _keywordsMatch [1] : '',
-								description:_descriptionMatch ? _descriptionMatch [1] : '',
-								imageSrc:_imageSrcMatch ? Uize.Url.toAbsolute (_folderToIndex,_imageSrcMatch [1]) : ''
-							};
+							return _package.getHtmlFileInfo (
+								_folderToIndex + '/' + Uize.Url.from (_path).file,
+								_titleExtractor
+							);
 						}
 					),
 					'value.title.toLowerCase ()'

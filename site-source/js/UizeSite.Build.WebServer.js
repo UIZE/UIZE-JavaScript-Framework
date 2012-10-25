@@ -145,6 +145,18 @@ Uize.module ({
 						return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
 					}
 
+				/*** misc utilities ***/
+					function _forEachNumberedInput (_inputs,_inputNamePrefix,_handler) {
+						var
+							_inputNo = -1,
+							_inputName,
+							_inputValue
+						;
+						while ((_inputValue = _inputs [_inputName = _inputNamePrefix + ++_inputNo]) != _undefined)
+							_handler (_inputValue,_inputName)
+						;
+					}
+
 				/*** abstractions of various methods of the file system service to support object storage ***/
 					var _objectCache = {};
 
@@ -365,6 +377,26 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for in-memory HTML page info objects **/
+					var _htmlInfoExtensionRegExp = /\.html\.info$/;
+					_registerUrlHandler ({
+						description:'In-memory HTML page info object',
+						urlMatcher:function (_urlParts) {
+							var _pathname = _urlParts.pathname;
+							return _isUnderMemoryPath (_pathname) && _htmlInfoExtensionRegExp.test (_pathname);
+						},
+						builderInputs:function (_urlParts) {
+							return {
+								htmlFile:
+									_changePath (_urlParts.pathname,_memoryPath,_builtPath)
+										.replace (_htmlInfoExtensionRegExp,'.html')
+							};
+						},
+						builder:function (_inputs) {
+							return Uize.Build.Util.getHtmlFileInfo (_inputs.htmlFile,UizeSite.Build.Util.getFirstTitleSegment);
+						}
+					});
+
 				/*** handlers for some index pages ***/
 					function _getHtmlFilesInfo (_folderToIndexPath,_filePathPrefixToRemove) {
 						var _filePathPrefixToRemoveLength = _filePathPrefixToRemove.length;
@@ -451,24 +483,30 @@ Uize.module ({
 						builderInputs:function (_urlParts) {
 							var
 								_inputs = {},
-								_examplesSourcePath = _sourcePath + '/examples'
+								_exampleInfoMemoryPath = _memoryPath + '/examples'
 							;
 							Uize.forEach (
 								_fileSystem.getFiles ({
-									path:_examplesSourcePath,
+									path:_sourcePath + '/examples',
 									pathMatcher:function (_filePath) {
 										var _urlParts = Uize.Url.from (_filePath);
 										return _urlParts.fileType == 'html' && !Uize.String.startsWith (_urlParts.fileName,'~');
 									}
 								}),
 								function (_filePath,_fileNo) {
-									_inputs ['indexedFile' + _fileNo] = _examplesSourcePath + '/' + _filePath;
+									_inputs ['exampleInfo' + _fileNo] = _exampleInfoMemoryPath + '/' + _filePath + '.info';
 								}
 							);
 							return _inputs;
 						},
 						builder:function (_inputs) {
-							return _getHtmlFilesInfo (_sourcePath + '/examples',_sourcePath);
+							var _examples = [];
+							_forEachNumberedInput (
+								_inputs,
+								'exampleInfo',
+								function (_exampleInfoPath) {_examples.push (_readFile ({path:_exampleInfoPath}))}
+							);
+							return _examples;
 						}
 					});
 
@@ -713,21 +751,23 @@ Uize.module ({
 								_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
 								_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
 								_libraryContentsChunks = [],
-								_moduleNo = -1,
-								_modulePath,
 								_libraryUsesUizeModules
 							;
-							while ((_modulePath = _inputs ['libraryModule' + ++_moduleNo]) != _undefined) {
-								if (!_libraryUsesUizeModules)
-									_libraryUsesUizeModules = Uize.String.startsWith (
-										Uize.Url.from (_modulePath).fileName,
-										'Uize'
-									)
-								;
-								_libraryContentsChunks.push (
-									_stripModuleHeaderComment (_fileSystem.readFile ({path:_modulePath}))
-								);
-							}
+							_forEachNumberedInput (
+								_inputs,
+								'libraryModule',
+								function (_modulePath) {
+									if (!_libraryUsesUizeModules)
+										_libraryUsesUizeModules = Uize.String.startsWith (
+											Uize.Url.from (_modulePath).fileName,
+											'Uize'
+										)
+									;
+									_libraryContentsChunks.push (
+										_stripModuleHeaderComment (_fileSystem.readFile ({path:_modulePath}))
+									);
+								}
+							);
 							return (
 								(_libraryUsesUizeModules ? _libraryUsesUizeModulesHeader : '') +
 								_libraryFileContents.slice (0,_contentsCommentStartPos) +
