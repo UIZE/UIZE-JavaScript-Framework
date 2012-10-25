@@ -202,6 +202,7 @@ Uize.module ({
 					_modulesReferenceItem,
 					{
 						title:'JavaScript Reference',
+						link:'javascript-reference.html',
 						items:[
 							_javaScriptReference ('Array'),
 							_javaScriptReference ('Boolean'),
@@ -218,6 +219,7 @@ Uize.module ({
 					},
 					{
 						title:'Appendixes',
+						link:'appendixes.html',
 						items:[
 							_appendix ('Press Center'),
 							_appendix ('Showcase'),

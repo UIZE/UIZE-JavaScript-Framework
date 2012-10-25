@@ -393,7 +393,12 @@ Uize.module ({
 							};
 						},
 						builder:function (_inputs) {
-							return Uize.Build.Util.getHtmlFileInfo (_inputs.htmlFile,UizeSite.Build.Util.getFirstTitleSegment);
+							var _info = Uize.Build.Util.getHtmlFileInfo (
+								_inputs.htmlFile,
+								UizeSite.Build.Util.getFirstTitleSegment
+							);
+							_info.path = _info.path.slice (_builtPath.length + 1);
+							return _info;
 						}
 					});
 
@@ -459,12 +464,30 @@ Uize.module ({
 							_moduleExtensionRegExp
 						);
 
-					/*** handler for the JavaScript explainers page ***/
+					/*** handler for the JavaScript explainers index page ***/
 						_registerIndexPageUrlHandler (
-							'JavaScript explainers page',
+							'JavaScript explainers index page',
 							'javascript-explainers',
 							'explainers',
 							'explainers',
+							/\.simple$/
+						);
+
+					/*** handler for the appendixes index page ***/
+						_registerIndexPageUrlHandler (
+							'Appendixes index page',
+							'appendixes',
+							'appendixes',
+							'appendixes',
+							/(\.simple|\.html\.jst)$/
+						);
+
+					/*** handler for the JavaScript reference index page ***/
+						_registerIndexPageUrlHandler (
+							'JavaScript reference index',
+							'javascript-reference',
+							'javascript-reference',
+							'javascript-reference',
 							/\.simple$/
 						);
 
