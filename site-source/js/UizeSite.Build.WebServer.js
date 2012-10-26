@@ -28,7 +28,6 @@
 		- update all build scripts to trigger file building using new approach
 	- to fix
 		- SimpleDoc files need to be supplied with urlDictionary
-		- homepage (index.html) needs to have most recent 10 news items
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
@@ -229,11 +228,14 @@ Uize.module ({
 							return _urlParts.pathname == _builtPath + '/index.html';
 						},
 						builderInputs:function (_urlParts) {
-							return {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
+							return {
+								template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst',
+								newsItems:_memoryPath + '/news.index'
+							};
 						},
 						builder:function (_inputs) {
 							return _readFile ({path:_inputs.template}) ({
-								latestNews:[{title:'FOO',description:'BAR'}]
+								latestNews:_readFile ({path:_inputs.newsItems}).slice (0,10)
 							});
 						}
 					});
