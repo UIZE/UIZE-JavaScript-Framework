@@ -20,7 +20,8 @@
 /* TODO:
 	- to implement
 		- handlers
-			- handler for latest-news.rss
+			- handler for UizeSite.ModulesTree
+			- handler for UizeSite.ExamplesInfoForSiteMap
 
 			- handler for SOTU
 		- factor out file building into separate module, so that file building can be triggered by build scripts
@@ -28,6 +29,9 @@
 	- to fix
 		- SimpleDoc files need to be supplied with urlDictionary
 		- homepage (index.html) needs to have most recent 10 news items
+		- UizeSite.SiteMap should dynamically reflect the following...
+			- the news-by-year index pages
+			- the JavaScript reference pages
 */
 
 /*?
@@ -631,6 +635,35 @@ Uize.module ({
 								return _readFile ({path:_inputs.template}) ({
 									year:_year,
 									files:_year ? _newsItems : _newsItems.slice (0,50)
+								});
+							}
+						});
+
+					/*** handler for latest news RSS feed ***/
+						_registerUrlHandler ({
+							description:'Latest news RSS feed',
+							urlMatcher:function (_urlParts) {
+								return _urlParts.pathname == _builtPath + '/latest-news.rss';
+							},
+							builderInputs:function (_urlParts) {
+								return {
+									newsItems:_memoryPath + '/news.index',
+									template:_changePath (_urlParts.pathname,_builtPath,_memoryPath) + '.jst'
+								};
+							},
+							builder:function (_inputs) {
+								return _readFile ({path:_inputs.template}) ({
+									items:Uize.map (
+										_readFile ({path:_inputs.newsItems}).slice (0,50),
+										function (_value) {
+											return {
+												title:_value.title.replace (/^\d{4}-\d{2}-\d{2}\s*-\s*/,''),
+												date:_value.title.slice (0,10),
+												link:'http://www.uize.com/' + _value.path,
+												description:_value.description
+											}
+										}
+									)
 								});
 							}
 						});
