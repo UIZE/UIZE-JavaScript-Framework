@@ -35,8 +35,23 @@ Uize.module ({
 			;
 
 		/*** Public Instance Methods ***/
+			_classPrototype.copyFile = function (_params,_callback) {
+				// TODO: IMPLEMENT!!!
+				_callback ();
+			};
+
 			_classPrototype.fileExists = function (_params,_callback) {
 				_callback (this._fileSystemObject.FileExists (_params.path));
+			};
+
+			_classPrototype.getModifiedDate = function (_params,_callback) {
+				// TODO: IMPLEMENT!!!
+				_callback ();
+			};
+
+			_classPrototype.pathExists = function (_params,_callback) {
+				// TODO: IMPLEMENT!!!
+				_callback ();
 			};
 
 			_classPrototype.getFiles = function (_params,_callback) {

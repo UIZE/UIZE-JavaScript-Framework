@@ -96,6 +96,18 @@ Uize.module ({
 				_callback (this._pathExists (_params.path,_false));
 			};
 
+			_classPrototype.getModifiedDate = function (_params,_callback) {
+				try {
+					_callback (new Date (this._fileSystem.statSync (_params.path).mtime));
+				} catch (_error) {
+					_callback (NaN);
+				}
+			};
+
+			_classPrototype.pathExists = function (_params,_callback) {
+				_callback (this._pathExists (_params.path));
+			};
+
 			_classPrototype.getFiles = function (_params,_callback) {
 				var
 					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
@@ -107,18 +119,6 @@ Uize.module ({
 					function (_filePath) {_pathMatcher (_filePath) && _result.push (_pathTransformer (_filePath))}
 				);
 				_callback (_result);
-			};
-
-			_classPrototype.getModifiedDate = function (_params,_callback) {
-				try {
-					_callback (new Date (this._fileSystem.statSync (_params.path).mtime));
-				} catch (_error) {
-					_callback (NaN);
-				}
-			};
-
-			_classPrototype.pathExists = function (_params,_callback) {
-				_callback (this._pathExists (_params.path));
 			};
 
 			_classPrototype.readFile = function (_params,_callback) {
