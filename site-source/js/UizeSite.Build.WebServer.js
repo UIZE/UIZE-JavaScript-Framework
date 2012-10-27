@@ -21,12 +21,12 @@
 	- to implement
 		- handlers
 			- handler for UizeSite.ExamplesInfoForSiteMap
-
 			- handler for SOTU
 		- factor out file building into separate module, so that file building can be triggered by build scripts
 		- update all build scripts to trigger file building using new approach
 	- to fix
 		- SimpleDoc files need to be supplied with urlDictionary
+		- JavaScript reference files need to be supplied the examplesByKeyword object
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
@@ -722,17 +722,31 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for in-memory modules tree object ***/
+					_registerUrlHandler ({
+						description:'In-memory modules tree object',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _memoryPath +'/modules-tree';
+						},
+						builder:function () {
+							return Uize.Data.PathsTree.fromList (_getModules (),'.');
+						}
+					});
+
 				/*** handler for generated UizeSite.ModulesTree module under temp ***/
 					var _modulesTreeDataModuleName = 'UizeSite.ModulesTree';
 					_registerUrlHandler ({
 						description:'Generated UizeSite.ModulesTree module under temp',
 						urlMatcher:function (_urlParts) {
-							return _urlParts.pathname == _tempPath +'/' + _modulesTreeDataModuleName + '.js';
+							return _urlParts.pathname == _tempPath +'/js/' + _modulesTreeDataModuleName + '.js';
 						},
-						builder:function () {
+						builderInputs:function () {
+							return {modulesTree:_memoryPath +'/modules-tree'};
+						},
+						builder:function (_inputs) {
 							return Uize.Build.Util.dataAsModule (
 								_modulesTreeDataModuleName,
-								Uize.Data.PathsTree.fromList (_getModules (),'.')
+								_readFile ({path:_inputs.modulesTree})
 							);
 						}
 					});
@@ -982,7 +996,8 @@ Uize.module ({
 								sourceCode:
 									_sourcePathSansExtension +
 									(_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js'}) ? '.js' : '.js.jst'),
-								simpleDocTemplate:_memoryPath + '/reference/~SIMPLE-DOC-TEMPLATE.html.jst'
+								simpleDocTemplate:_memoryPath + '/reference/~SIMPLE-DOC-TEMPLATE.html.jst',
+								modulesTree:_memoryPath + '/modules-tree'
 							};
 						},
 						builder:function (_inputs) {
@@ -1003,7 +1018,7 @@ Uize.module ({
 											pathToRoot:'../',
 											result:'full',
 											module:_module,
-											//modulesTree:_modulesTree,
+											modulesTree:_readFile ({path:_inputs.modulesTree}),
 											examples:[] //_examplesByKeyword [_moduleName]
 										}
 									);

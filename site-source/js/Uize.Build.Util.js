@@ -189,7 +189,7 @@ Uize.module ({
 			};
 
 			_package.dataAsModule = function (_moduleName,_moduleData) {
-				return (
+				return [
 					'Uize.module ({',
 					'	name:\'' + _moduleName + '\',',
 					'	builder:function () {',
@@ -198,7 +198,7 @@ Uize.module ({
 					'		};',
 					'	}',
 					'});'
-				).join ('\n');
+				].join ('\n');
 			};
 
 			_package.writeDataModule = function (_moduleFolderPath,_moduleName,_moduleData) {
