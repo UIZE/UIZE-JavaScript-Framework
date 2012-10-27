@@ -188,18 +188,23 @@ Uize.module ({
 				;
 			};
 
+			_package.dataAsModule = function (_moduleName,_moduleData) {
+				return (
+					'Uize.module ({',
+					'	name:\'' + _moduleName + '\',',
+					'	builder:function () {',
+					'		return function () {',
+					'			return ' + Uize.String.Lines.indent (Uize.Json.to (_moduleData),3,'\t',false) + ';',
+					'		};',
+					'	}',
+					'});'
+				).join ('\n');
+			};
+
 			_package.writeDataModule = function (_moduleFolderPath,_moduleName,_moduleData) {
 				Uize.Wsh.writeFile ({
 					path:_moduleFolderPath + '\\' + _moduleName + '.js',
-					text:
-						'Uize.module ({\n' +
-							'\tname:\'' + _moduleName + '\',\n' +
-							'\tbuilder:function () {\n' +
-								'\t\treturn function () {\n' +
-								'\t\t\treturn ' + Uize.String.Lines.indent (Uize.Json.to (_moduleData),3,'\t',false) + ';\n' +
-								'\t\t};\n' +
-							'\t}\n' +
-						'});\n'
+					text:_package.dataAsModule (_moduleName,_moduleData)
 				});
 			};
 

@@ -20,7 +20,6 @@
 /* TODO:
 	- to implement
 		- handlers
-			- handler for UizeSite.ModulesTree
 			- handler for UizeSite.ExamplesInfoForSiteMap
 
 			- handler for SOTU
@@ -76,7 +75,8 @@ Uize.module ({
 		'Uize.Data.Matches',
 		'Uize.Build.Util',
 		'UizeSite.Build.Util',
-		'Uize.Array.Sort'
+		'Uize.Array.Sort',
+		'Uize.Data.PathsTree'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -118,6 +118,16 @@ Uize.module ({
 					_scrunchedHeadComments = _params.scrunchedHeadComments || {},
 					_moduleExtensionRegExp = /(\.js|\.js\.jst)$/
 				;
+
+				function _getModules () {
+					return Uize.map (
+						_fileSystem.getFiles ({
+							path:_sourcePath + '/js',
+							pathMatcher:_moduleExtensionRegExp
+						}),
+						function (_fileName) {return _fileName.replace (_moduleExtensionRegExp,'')}
+					);
+				}
 
 				function _registerUrlHandler (_urlHandler) {
 					_urlHandlers.push (_urlHandler);
@@ -369,15 +379,7 @@ Uize.module ({
 							return {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
 						},
 						builder:function (_inputs) {
-							return _readFile ({path:_inputs.template}) ({
-								modules:Uize.map (
-									_fileSystem.getFiles ({
-										path:_sourcePath + '/js',
-										pathMatcher:_moduleExtensionRegExp
-									}),
-									function (_fileName) {return _fileName.replace (_moduleExtensionRegExp,'')}
-								)
-							});
+							return _readFile ({path:_inputs.template}) ({modules:_getModules ()});
 						}
 					});
 
@@ -684,8 +686,6 @@ Uize.module ({
 						}
 					});
 
-				/*** handler for example index pages ***/
-
 				/*** handler for in-memory compiled JST templates ***/
 					_registerUrlHandler ({
 						description:'In-memory compiled JST templates',
@@ -719,6 +719,21 @@ Uize.module ({
 								simple:_fileSystem.readFile ({path:_inputs.source}),
 								collapseChildren:true
 							});
+						}
+					});
+
+				/*** handler for generated UizeSite.ModulesTree module under temp ***/
+					var _modulesTreeDataModuleName = 'UizeSite.ModulesTree';
+					_registerUrlHandler ({
+						description:'Generated UizeSite.ModulesTree module under temp',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _tempPath +'/' + _modulesTreeDataModuleName + '.js';
+						},
+						builder:function () {
+							return Uize.Build.Util.dataAsModule (
+								_modulesTreeDataModuleName,
+								Uize.Data.PathsTree.fromList (_getModules (),'.')
+							);
 						}
 					});
 
@@ -1089,8 +1104,6 @@ Uize.module ({
 							);
 						}
 					});
-
-				/*** handler for widgets-to-go widget pages ***/
 
 				/*** handler for compiled JST modules ***/
 					var _jsJstRegExp = /\.js\.jst$/i;
