@@ -23,10 +23,10 @@
 			- handler for UizeSite.ExamplesInfoForSiteMap
 			- handler for SOTU
 		- factor out file building into separate module, so that file building can be triggered by build scripts
+			- put in support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- update all build scripts to trigger file building using new approach
 	- to fix
 		- SimpleDoc files need to be supplied with urlDictionary
-		- JavaScript reference files need to be supplied the examplesByKeyword object
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
@@ -550,11 +550,12 @@ Uize.module ({
 											_keyword
 										;
 										++_keywordNo < _keywordsLength;
-									) {
-										Uize.String.startsWith (_keyword = _keywords [_keywordNo],'Uize') ||
-											(_examplesByKeyword [_keyword] || (_examplesByKeyword [_keyword] = [])).push (_example)
-										;
-									}
+									)
+										(
+											_examplesByKeyword [_keyword = _keywords [_keywordNo]] ||
+											(_examplesByKeyword [_keyword] = [])
+										).push (_example)
+									;
 								}
 							}
 							return _examplesByKeyword;
@@ -997,7 +998,8 @@ Uize.module ({
 									_sourcePathSansExtension +
 									(_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js'}) ? '.js' : '.js.jst'),
 								simpleDocTemplate:_memoryPath + '/reference/~SIMPLE-DOC-TEMPLATE.html.jst',
-								modulesTree:_memoryPath + '/modules-tree'
+								modulesTree:_memoryPath + '/modules-tree',
+								examplesByKeyword:_memoryPath + '/examples-by-keyword'
 							};
 						},
 						builder:function (_inputs) {
@@ -1019,7 +1021,7 @@ Uize.module ({
 											result:'full',
 											module:_module,
 											modulesTree:_readFile ({path:_inputs.modulesTree}),
-											examples:[] //_examplesByKeyword [_moduleName]
+											examples:_readFile ({path:_inputs.examplesByKeyword}) [_moduleName]
 										}
 									);
 									_urlDictionary [_moduleName] = _moduleUrlFromDictionary;
