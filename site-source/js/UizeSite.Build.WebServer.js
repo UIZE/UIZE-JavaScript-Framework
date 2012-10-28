@@ -20,7 +20,6 @@
 /* TODO:
 	- to implement
 		- handlers
-			- handler for UizeSite.ExamplesInfoForSiteMap
 			- handler for SOTU
 		- factor out file building into separate module, so that file building can be triggered by build scripts
 			- put in support in factored out code for producing log output, so that built scripts can generate log files much like before
@@ -76,7 +75,8 @@ Uize.module ({
 		'Uize.Build.Util',
 		'UizeSite.Build.Util',
 		'Uize.Array.Sort',
-		'Uize.Data.PathsTree'
+		'Uize.Data.PathsTree',
+		'Uize.Data.Matches'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -735,11 +735,14 @@ Uize.module ({
 					});
 
 				/*** handler for generated UizeSite.ModulesTree module under temp ***/
-					var _modulesTreeDataModuleName = 'UizeSite.ModulesTree';
+					var
+						_modulesTreeDataModuleName = 'UizeSite.ModulesTree',
+						_modulesTreeDataModulePath = _tempPath +'/js/' + _modulesTreeDataModuleName + '.js'
+					;
 					_registerUrlHandler ({
 						description:'Generated UizeSite.ModulesTree module under temp',
 						urlMatcher:function (_urlParts) {
-							return _urlParts.pathname == _tempPath +'/js/' + _modulesTreeDataModuleName + '.js';
+							return _urlParts.pathname == _modulesTreeDataModuleName;
 						},
 						builderInputs:function () {
 							return {modulesTree:_memoryPath +'/modules-tree'};
@@ -748,6 +751,34 @@ Uize.module ({
 							return Uize.Build.Util.dataAsModule (
 								_modulesTreeDataModuleName,
 								_readFile ({path:_inputs.modulesTree})
+							);
+						}
+					});
+
+				/*** handler for generated UizeSite.ExamplesInfoForSiteMap module under temp ***/
+					var
+						_examplesInfoForSiteMapModuleName = 'UizeSite.ExamplesInfoForSiteMap',
+						_examplesInfoForSiteMapModulePath = _tempPath +'/js/' + _examplesInfoForSiteMapModuleName + '.js'
+					;
+					_registerUrlHandler ({
+						description:'Generated UizeSite.ExamplesInfoForSiteMap module under temp',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _examplesInfoForSiteMapModulePath;
+						},
+						builderInputs:function () {
+							return {examplesByKeyword:_examplesByKeywordPath};
+						},
+						builder:function (_inputs) {
+							var _examplesByKeyword = _readFile ({path:_inputs.examplesByKeyword});
+							return Uize.Build.Util.dataAsModule (
+								_examplesInfoForSiteMapModuleName,
+								{
+									keywords:Uize.Data.Matches.values (
+										Uize.keys (_examplesByKeyword),
+										'value && value.slice (0,4) != "Uize"'
+									).sort (),
+									tools:Uize.map (_examplesByKeyword.tool,'{title:value.title,path:value.path}')
+								}
 							);
 						}
 					});
@@ -999,7 +1030,7 @@ Uize.module ({
 									(_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js'}) ? '.js' : '.js.jst'),
 								simpleDocTemplate:_memoryPath + '/reference/~SIMPLE-DOC-TEMPLATE.html.jst',
 								modulesTree:_memoryPath + '/modules-tree',
-								examplesByKeyword:_memoryPath + '/examples-by-keyword'
+								examplesByKeyword:_examplesByKeywordPath
 							};
 						},
 						builder:function (_inputs) {
