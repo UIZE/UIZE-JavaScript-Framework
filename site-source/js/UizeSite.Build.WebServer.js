@@ -76,6 +76,7 @@ Uize.module ({
 		'UizeSite.Build.Util',
 		'Uize.Array.Sort',
 		'Uize.Data.PathsTree',
+		'Uize.String.Lines',
 		'Uize.Data.Matches'
 	],
 	builder:function () {
@@ -90,7 +91,8 @@ Uize.module ({
 		/*** General Variables ***/
 			var
 				_fileSystem = Uize.Services.FileSystem.singleton (),
-				_sacredEmptyObject = {}
+				_sacredEmptyObject = {},
+				_sacredEmptyArray = []
 			;
 
 		/*** Public Static Methods ***/
@@ -1177,6 +1179,118 @@ Uize.module ({
 									{result:'full'}
 								)
 							});
+						}
+					});
+
+				/*** handler for the SOTU page ***/
+					function _isModuleForSotu (_moduleName) {
+						return (
+							(_moduleName == 'Uize' || Uize.String.startsWith (_moduleName,'Uize.')) &&
+							!Uize.String.startsWith (_moduleName,'Uize.Test.')
+						);
+					}
+
+					var _metaDataCommentRegExp = /\/\*\s*Module\s*Meta\s*Data/i;
+					_registerUrlHandler ({
+						description:'SOTU (State of the UIZE) page',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _builtPath + '/appendixes/sotu.html';
+						},
+						builderInputs:function (_urlParts) {
+							var _inputs = {
+								jstSource:_changePath (_urlParts.pathname,_builtPath,_memoryPath) + '.jst',
+								referencesIndex:_memoryPath + '/reference.index',
+								examplesByKeyword:_examplesByKeywordPath
+							};
+							Uize.forEach (
+								_getModules (),
+								function (_moduleName) {
+									if (_isModuleForSotu (_moduleName)) {
+										var _modulePathSuffix = '/js/' + _moduleName + '.js';
+										_inputs ['moduleTempPath_' + _moduleName] = _tempPath + _modulePathSuffix;
+										_inputs ['moduleBuiltPath_' + _moduleName] = _builtPath + _modulePathSuffix;
+									}
+								}
+							);
+							return _inputs;
+						},
+						builder:function (_inputs) {
+							var
+								_moduleReferenceFiles = _readFile ({path:_inputs.referencesIndex}),
+								_examplesByKeyword = _readFile ({path:_inputs.examplesByKeyword}),
+								_modules = []
+							;
+							for (
+								var _moduleReferenceFileNo = -1, _moduleReferenceFilesLength = _moduleReferenceFiles.length;
+								++_moduleReferenceFileNo < _moduleReferenceFilesLength;
+							) {
+								var
+									_moduleReferenceFile = _moduleReferenceFiles [_moduleReferenceFileNo],
+									_moduleName = _moduleReferenceFile.title
+								;
+								if (_isModuleForSotu (_moduleName)) {
+									var _moduleInfo = {
+										name:_moduleName,
+										description:_moduleReferenceFile.description,
+										examples:(_examplesByKeyword [_moduleName] || _sacredEmptyArray).length
+									};
+
+									/*** determine number of direct and nested submodules ***/
+										var
+											_directSubmodules = 0,
+											_nestedSubmodules = 0
+										;
+										for (
+											var
+												_submoduleNo = _moduleReferenceFileNo,
+												_moduleNamePlusDot = _moduleName + '.',
+												_moduleNamePlusDotLength = _moduleNamePlusDot.length
+											;
+											++_submoduleNo < _moduleReferenceFilesLength;
+										) {
+											var _submoduleName = _moduleReferenceFiles [_submoduleNo].title;
+											if (Uize.String.startsWith (_submoduleName,_moduleNamePlusDot)) {
+												_nestedSubmodules++;
+												_submoduleName.indexOf ('.',_moduleNamePlusDotLength) == -1 && _directSubmodules++;
+											}
+										}
+										_moduleInfo.directSubmodules = _directSubmodules;
+										_moduleInfo.nestedSubmodules = _nestedSubmodules;
+
+									/*** extract module meta data from module source ***/
+										var
+											_moduleTempFileText = _readFile ({path:_inputs ['moduleTempPath_' + _moduleName]}),
+											_metaDataCommentStartPos = _moduleTempFileText.search (_metaDataCommentRegExp),
+											_metaDataCommentEndPos = _moduleTempFileText.indexOf ('*/',_metaDataCommentStartPos),
+											_metaDataText = _metaDataCommentStartPos > -1
+												?
+													_moduleTempFileText.slice (_metaDataCommentStartPos,_metaDataCommentEndPos)
+														.replace (_metaDataCommentRegExp,'')
+												: '',
+											_metaData = _metaDataText
+												?
+													Uize.Data.Simple.parse ({
+														simple:Uize.String.Lines.normalizeIndent (_metaDataText),
+														collapseChildren:true
+													})
+												: _sacredEmptyObject
+										;
+										_moduleInfo.type = _metaData.type || 'Unknown';
+										_moduleInfo.importance = +_metaData.importance || 0;
+										_moduleInfo.codeCompleteness = +_metaData.codeCompleteness || 0;
+										_moduleInfo.docCompleteness = +_metaData.docCompleteness || 0;
+										_moduleInfo.testCompleteness = +_metaData.testCompleteness || 0;
+										_moduleInfo.keywords = _metaData.keywords || '';
+
+									/*** find size of built version of module ***/
+										_moduleInfo.scrunchedFileSize =
+											_readFile ({path:_inputs ['moduleBuiltPath_' + _moduleName]}).length
+										;
+
+									_modules.push (_moduleInfo);
+								}
+							}
+							return _readFile ({path:_inputs.jstSource}) ({modules:_modules});
 						}
 					});
 
