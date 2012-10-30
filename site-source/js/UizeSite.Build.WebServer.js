@@ -1182,6 +1182,47 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for in-memory module metadata objects **/
+					var
+						_moduleMetaDataExtensionRegExp = /\.js\.metadata$/,
+						_metaDataCommentRegExp = /\/\*\s*Module\s*Meta\s*Data/i
+					;
+					_registerUrlHandler ({
+						description:'In-memory module metadata object',
+						urlMatcher:function (_urlParts) {
+							var _pathname = _urlParts.pathname;
+							return _isUnderMemoryPath (_pathname) && _moduleMetaDataExtensionRegExp.test (_pathname);
+						},
+						builderInputs:function (_urlParts) {
+							return {
+								jsModule:
+									_changePath (_urlParts.pathname,_memoryPath,_tempPath)
+										.replace (_moduleMetaDataExtensionRegExp,'.js')
+							};
+						},
+						builder:function (_inputs) {
+							var
+								_moduleText = _readFile ({path:_inputs.jsModule}),
+								_metaDataCommentStartPos = _moduleText.search (_metaDataCommentRegExp),
+								_metaDataCommentEndPos = _moduleText.indexOf ('*/',_metaDataCommentStartPos),
+								_metaDataText = _metaDataCommentStartPos > -1
+									?
+										_moduleText.slice (_metaDataCommentStartPos,_metaDataCommentEndPos)
+											.replace (_metaDataCommentRegExp,'')
+									: ''
+							;
+							return (
+								_metaDataText
+									?
+										Uize.Data.Simple.parse ({
+											simple:Uize.String.Lines.normalizeIndent (_metaDataText),
+											collapseChildren:true
+										})
+									: {}
+							);
+						}
+					});
+
 				/*** handler for the SOTU page ***/
 					function _isModuleForSotu (_moduleName) {
 						return (
@@ -1190,7 +1231,6 @@ Uize.module ({
 						);
 					}
 
-					var _metaDataCommentRegExp = /\/\*\s*Module\s*Meta\s*Data/i;
 					_registerUrlHandler ({
 						description:'SOTU (State of the UIZE) page',
 						urlMatcher:function (_urlParts) {
@@ -1207,8 +1247,8 @@ Uize.module ({
 								function (_moduleName) {
 									if (_isModuleForSotu (_moduleName)) {
 										var _modulePathSuffix = '/js/' + _moduleName + '.js';
-										_inputs ['moduleTempPath_' + _moduleName] = _tempPath + _modulePathSuffix;
-										_inputs ['moduleBuiltPath_' + _moduleName] = _builtPath + _modulePathSuffix;
+										_inputs ['moduleBuilt_' + _moduleName] = _builtPath + _modulePathSuffix;
+										_inputs ['moduleMetaData_' + _moduleName] = _memoryPath + _modulePathSuffix + '.metadata';
 									}
 								}
 							);
@@ -1257,24 +1297,8 @@ Uize.module ({
 										_moduleInfo.directSubmodules = _directSubmodules;
 										_moduleInfo.nestedSubmodules = _nestedSubmodules;
 
-									/*** extract module meta data from module source ***/
-										var
-											_moduleTempFileText = _readFile ({path:_inputs ['moduleTempPath_' + _moduleName]}),
-											_metaDataCommentStartPos = _moduleTempFileText.search (_metaDataCommentRegExp),
-											_metaDataCommentEndPos = _moduleTempFileText.indexOf ('*/',_metaDataCommentStartPos),
-											_metaDataText = _metaDataCommentStartPos > -1
-												?
-													_moduleTempFileText.slice (_metaDataCommentStartPos,_metaDataCommentEndPos)
-														.replace (_metaDataCommentRegExp,'')
-												: '',
-											_metaData = _metaDataText
-												?
-													Uize.Data.Simple.parse ({
-														simple:Uize.String.Lines.normalizeIndent (_metaDataText),
-														collapseChildren:true
-													})
-												: _sacredEmptyObject
-										;
+									/*** extract module meta data from module ***/
+										var _metaData = _readFile ({path:_inputs ['moduleMetaData_' + _moduleName]});
 										_moduleInfo.type = _metaData.type || 'Unknown';
 										_moduleInfo.importance = +_metaData.importance || 0;
 										_moduleInfo.codeCompleteness = +_metaData.codeCompleteness || 0;
@@ -1284,7 +1308,7 @@ Uize.module ({
 
 									/*** find size of built version of module ***/
 										_moduleInfo.scrunchedFileSize =
-											_readFile ({path:_inputs ['moduleBuiltPath_' + _moduleName]}).length
+											_readFile ({path:_inputs ['moduleBuilt_' + _moduleName]}).length
 										;
 
 									_modules.push (_moduleInfo);
