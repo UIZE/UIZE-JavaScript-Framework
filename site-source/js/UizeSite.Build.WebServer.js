@@ -19,8 +19,6 @@
 
 /* TODO:
 	- to implement
-		- handlers
-			- handler for SOTU
 		- factor out file building into separate module, so that file building can be triggered by build scripts
 			- put in support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- update all build scripts to trigger file building using new approach
@@ -29,6 +27,8 @@
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
+		- improve performance of SOTU
+		- generally improve performance of dependency tracing (TTL on currentness determination?)
 */
 
 /*?
@@ -1223,6 +1223,26 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for in-memory built size for modules **/
+					var _moduleBuiltSizeExtensionRegExp = /\.js\.builtsize$/;
+					_registerUrlHandler ({
+						description:'In-memory built size for module',
+						urlMatcher:function (_urlParts) {
+							var _pathname = _urlParts.pathname;
+							return _isUnderMemoryPath (_pathname) && _moduleBuiltSizeExtensionRegExp.test (_pathname);
+						},
+						builderInputs:function (_urlParts) {
+							return {
+								builtModule:
+									_changePath (_urlParts.pathname,_memoryPath,_builtPath)
+										.replace (_moduleBuiltSizeExtensionRegExp,'.js')
+							};
+						},
+						builder:function (_inputs) {
+							return _readFile ({path:_inputs.builtModule}).length;
+						}
+					});
+
 				/*** handler for the SOTU page ***/
 					function _isModuleForSotu (_moduleName) {
 						return (
@@ -1247,8 +1267,12 @@ Uize.module ({
 								function (_moduleName) {
 									if (_isModuleForSotu (_moduleName)) {
 										var _modulePathSuffix = '/js/' + _moduleName + '.js';
-										_inputs ['moduleBuilt_' + _moduleName] = _builtPath + _modulePathSuffix;
-										_inputs ['moduleMetaData_' + _moduleName] = _memoryPath + _modulePathSuffix + '.metadata';
+										_inputs ['moduleBuiltSize_' + _moduleName] =
+											_memoryPath + _modulePathSuffix + '.builtsize'
+										;
+										_inputs ['moduleMetaData_' + _moduleName] =
+											_memoryPath + _modulePathSuffix + '.metadata'
+										;
 									}
 								}
 							);
@@ -1297,7 +1321,7 @@ Uize.module ({
 										_moduleInfo.directSubmodules = _directSubmodules;
 										_moduleInfo.nestedSubmodules = _nestedSubmodules;
 
-									/*** extract module meta data from module ***/
+									/*** stitch in module meta data ***/
 										var _metaData = _readFile ({path:_inputs ['moduleMetaData_' + _moduleName]});
 										_moduleInfo.type = _metaData.type || 'Unknown';
 										_moduleInfo.importance = +_metaData.importance || 0;
@@ -1306,9 +1330,9 @@ Uize.module ({
 										_moduleInfo.testCompleteness = +_metaData.testCompleteness || 0;
 										_moduleInfo.keywords = _metaData.keywords || '';
 
-									/*** find size of built version of module ***/
+									/*** stitch in size of built version of module ***/
 										_moduleInfo.scrunchedFileSize =
-											_readFile ({path:_inputs ['moduleBuilt_' + _moduleName]}).length
+											_readFile ({path:_inputs ['moduleBuiltSize_' + _moduleName]})
 										;
 
 									_modules.push (_moduleInfo);
