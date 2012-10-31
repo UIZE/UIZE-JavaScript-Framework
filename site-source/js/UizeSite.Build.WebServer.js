@@ -22,13 +22,12 @@
 		- factor out file building into separate module, so that file building can be triggered by build scripts
 			- put in support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- update all build scripts to trigger file building using new approach
-	- to fix
-		- SimpleDoc files need to be supplied with urlDictionary
+	- to improve
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
 		- improve performance of SOTU
-		- generally improve performance of dependency tracing (TTL on currentness determination?)
+		- implement ability to store memory results to file system in json form, with ability to read after restarting server
 */
 
 /*?
@@ -92,7 +91,8 @@ Uize.module ({
 			var
 				_fileSystem = Uize.Services.FileSystem.singleton (),
 				_sacredEmptyObject = {},
-				_sacredEmptyArray = []
+				_sacredEmptyArray = [],
+				_trueFlag = {}
 			;
 
 		/*** Public Static Methods ***/
@@ -801,6 +801,69 @@ Uize.module ({
 						}
 					});
 
+				/*** handler for in-memory URL dictionary for SimpleDoc pages ***/
+					var _urlDictionaryPath = _memoryPath + '/url-dictionary';
+					_registerUrlHandler ({
+						description:'In-memory URL dictionary for SimpleDoc pages',
+						urlMatcher:function (_urlParts) {
+							return _urlParts.pathname == _urlDictionaryPath;
+						},
+						builderInputs:function (_urlParts) {
+							return {
+								credits:_memoryPath + '/appendixes/credits.html.simpledata',
+								endorsements:_memoryPath + '/endorsements.html.simpledata'
+							};
+						},
+						builder:function (_inputs) {
+							var _urlDictionary = {};
+
+							/*** add the credits and endorsements links ***/
+								function _addUrlsFromListingsInput (_inputName) {
+									for (
+										var
+											_listingNo = -1,
+											_listings = _readFile ({path:_inputs [_inputName]}).listings,
+											_listingsLength = _listings.length,
+											_listing
+										;
+										++_listingNo < _listingsLength;
+									) {
+										if ((_listing = _listings [_listingNo]).link)
+											_urlDictionary [_listing.fullName] = _listing.link
+										;
+									}
+								}
+								_addUrlsFromListingsInput ('credits');
+								_addUrlsFromListingsInput ('endorsements');
+
+							/*** add links to module reference pages and JavaScript reference pages ***/
+								function _addReferencePages (_sourceFolder,_sourceFileExtensionRegExp,_referenceFolder) {
+									for (
+										var
+											_fileNo = -1,
+											_referenceUrlPrefix = '/' + (_referenceFolder || _sourceFolder)+ '/',
+											_files = _fileSystem.getFiles ({
+												path:_sourcePath + '/' + _sourceFolder,
+												pathMatcher:_sourceFileExtensionRegExp
+											}),
+											_filesLength = _files.length,
+											_fileName
+										;
+										++_fileNo < _filesLength;
+									)
+										_urlDictionary [
+											_fileName = Uize.Url.from (_files [_fileNo]).file
+												.replace (_sourceFileExtensionRegExp,'')
+										] = _referenceUrlPrefix + _fileName + '.html'
+									;
+								}
+								_addReferencePages ('javascript-reference',/\.simple$/i);
+								_addReferencePages ('js',/(\.js|\.js\.jst)$/i,'reference');
+
+							return _urlDictionary;
+						}
+					});
+
 				/*** handler for SimpleDoc explainers, appendixes, news, etc. ***/
 					_registerUrlHandler ({
 						description:'Explainers, generated from SimpleDoc files',
@@ -818,7 +881,8 @@ Uize.module ({
 							var _folderPath = _urlParts.folderPath;
 							return {
 								simpleDoc:_sourcePathFromBuiltPath (_folderPath) + _urlParts.fileName + '.simple',
-								simpleDocTemplate:_memoryPathFromBuiltPath (_folderPath) + '~SIMPLE-DOC-TEMPLATE.html.jst'
+								simpleDocTemplate:_memoryPathFromBuiltPath (_folderPath) + '~SIMPLE-DOC-TEMPLATE.html.jst',
+								urlDictionary:_urlDictionaryPath
 							};
 						},
 						builder:function (_inputs) {
@@ -826,7 +890,7 @@ Uize.module ({
 								_simpleDocPath = _inputs.simpleDoc,
 								_simpleDoc = Uize.Doc.Simple.build ({
 									data:_fileSystem.readFile ({path:_simpleDocPath}),
-									//urlDictionary:_urlDictionary,
+									urlDictionary:_readFile ({path:_inputs.urlDictionary}),
 									pathToRoot:_getPathToRoot (_simpleDocPath.slice (_sourcePath.length + 1)),
 									result:'full'
 								})
@@ -1007,10 +1071,9 @@ Uize.module ({
 						}
 					});
 
-				/*** handler for module reference docs ***/
-					var _urlDictionary = {};
+				/*** handler for module reference pages ***/
 					_registerUrlHandler ({
-						description:'Module reference pages',
+						description:'Module reference page',
 						urlMatcher:function (_urlParts) {
 							var
 								_folderPath = _urlParts.folderPath,
@@ -1032,6 +1095,7 @@ Uize.module ({
 									(_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js'}) ? '.js' : '.js.jst'),
 								simpleDocTemplate:_memoryPath + '/reference/~SIMPLE-DOC-TEMPLATE.html.jst',
 								modulesTree:_memoryPath + '/modules-tree',
+								urlDictionary:_urlDictionaryPath,
 								examplesByKeyword:_examplesByKeywordPath
 							};
 						},
@@ -1044,7 +1108,10 @@ Uize.module ({
 							Uize.require (
 								_moduleName,
 								function (_module) {
-									var _moduleUrlFromDictionary = _urlDictionary [_moduleName];
+									var
+										_urlDictionary = _readFile ({path:_inputs.urlDictionary}),
+										_moduleUrlFromDictionary = _urlDictionary [_moduleName]
+									;
 									_urlDictionary [_moduleName] = null;
 									_simpleDoc = Uize.Doc.Sucker.toDocument (
 										_fileSystem.readFile ({path:_sourceCodePath}),
@@ -1293,49 +1360,40 @@ Uize.module ({
 									_moduleName = _moduleReferenceFile.title
 								;
 								if (_isModuleForSotu (_moduleName)) {
-									var _moduleInfo = {
+									var
+										_metaData = _readFile ({path:_inputs ['moduleMetaData_' + _moduleName]}),
+										_directSubmodules = 0,
+										_nestedSubmodules = 0
+									;
+									for (
+										var
+											_submoduleNo = _moduleReferenceFileNo,
+											_moduleNamePlusDot = _moduleName + '.',
+											_moduleNamePlusDotLength = _moduleNamePlusDot.length
+										;
+										++_submoduleNo < _moduleReferenceFilesLength;
+									) {
+										var _submoduleName = _moduleReferenceFiles [_submoduleNo].title;
+										if (Uize.String.startsWith (_submoduleName,_moduleNamePlusDot)) {
+											_nestedSubmodules++;
+											_submoduleName.indexOf ('.',_moduleNamePlusDotLength) == -1 && _directSubmodules++;
+										}
+									}
+
+									_modules.push ({
 										name:_moduleName,
 										description:_moduleReferenceFile.description,
-										examples:(_examplesByKeyword [_moduleName] || _sacredEmptyArray).length
-									};
-
-									/*** determine number of direct and nested submodules ***/
-										var
-											_directSubmodules = 0,
-											_nestedSubmodules = 0
-										;
-										for (
-											var
-												_submoduleNo = _moduleReferenceFileNo,
-												_moduleNamePlusDot = _moduleName + '.',
-												_moduleNamePlusDotLength = _moduleNamePlusDot.length
-											;
-											++_submoduleNo < _moduleReferenceFilesLength;
-										) {
-											var _submoduleName = _moduleReferenceFiles [_submoduleNo].title;
-											if (Uize.String.startsWith (_submoduleName,_moduleNamePlusDot)) {
-												_nestedSubmodules++;
-												_submoduleName.indexOf ('.',_moduleNamePlusDotLength) == -1 && _directSubmodules++;
-											}
-										}
-										_moduleInfo.directSubmodules = _directSubmodules;
-										_moduleInfo.nestedSubmodules = _nestedSubmodules;
-
-									/*** stitch in module meta data ***/
-										var _metaData = _readFile ({path:_inputs ['moduleMetaData_' + _moduleName]});
-										_moduleInfo.type = _metaData.type || 'Unknown';
-										_moduleInfo.importance = +_metaData.importance || 0;
-										_moduleInfo.codeCompleteness = +_metaData.codeCompleteness || 0;
-										_moduleInfo.docCompleteness = +_metaData.docCompleteness || 0;
-										_moduleInfo.testCompleteness = +_metaData.testCompleteness || 0;
-										_moduleInfo.keywords = _metaData.keywords || '';
-
-									/*** stitch in size of built version of module ***/
-										_moduleInfo.scrunchedFileSize =
-											_readFile ({path:_inputs ['moduleBuiltSize_' + _moduleName]})
-										;
-
-									_modules.push (_moduleInfo);
+										examples:(_examplesByKeyword [_moduleName] || _sacredEmptyArray).length,
+										directSubmodules:_directSubmodules,
+										nestedSubmodules:_nestedSubmodules,
+										type:_metaData.type || 'Unknown',
+										importance:+_metaData.importance || 0,
+										codeCompleteness:+_metaData.codeCompleteness || 0,
+										docCompleteness:+_metaData.docCompleteness || 0,
+										testCompleteness:+_metaData.testCompleteness || 0,
+										keywords:_metaData.keywords || '',
+										scrunchedFileSize:_readFile ({path:_inputs ['moduleBuiltSize_' + _moduleName]})
+									});
 								}
 							}
 							return _readFile ({path:_inputs.jstSource}) ({modules:_modules});
@@ -1357,6 +1415,7 @@ Uize.module ({
 						}
 					});
 
+				var _filesConsideredCurrentLookup = {};
 				function _ensureFileCurrent (_url) {
 					/*** remove query from URL (since we don't handle this on the server side yet) ***/
 						var _queryPos = _url.indexOf ('?');
@@ -1395,67 +1454,72 @@ Uize.module ({
 									- immediate parsing when requested in object form
 							- to aid in performance, files can be cached in a memory cache system (such as memcache)
 					*/
-					var
-						_urlParts = _Uize_Url.from (_url),
-						_matchingHandler
-					;
-					for (
-						var _urlHandlerNo = -1, _urlHandlersLength = _urlHandlers.length, _urlHandler;
-						++_urlHandlerNo < _urlHandlersLength;
-					) {
-						if ((_urlHandler = _urlHandlers [_urlHandlerNo]).urlMatcher (_urlParts)) {
-							_matchingHandler = _urlHandler;
-							break;
-						}
-					}
-					if (_matchingHandler) {
+					if (_filesConsideredCurrentLookup [_url] != _trueFlag) {
 						var
-							_builderInputs = (_matchingHandler.builderInputs || Uize.nop) (_urlParts),
-							_builder = _matchingHandler.builder
+							_urlParts = _Uize_Url.from (_url),
+							_matchingHandler
 						;
-						if (_builderInputs || _builder) {
-							var
-								_path = _urlParts.pathname,
-								_mustBuild = !_pathExists ({path:_path}),
-								_lastBuiltDate = _mustBuild ? 0 : _getModifiedDate ({path:_path}),
-								_builderInput
-							;
-							_mustBuild || (_mustBuild = _lastBuiltDate < _minAllowedModifiedDate);
-							for (var _builderInputName in _builderInputs) {
-								_ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
-								_mustBuild || (
-									_mustBuild = Math.max (
-										_getModifiedDate ({path:_builderInput}),
-										_minAllowedModifiedDate
-									) > _lastBuiltDate
-								);
+						for (
+							var _urlHandlerNo = -1, _urlHandlersLength = _urlHandlers.length, _urlHandler;
+							++_urlHandlerNo < _urlHandlersLength;
+						) {
+							if ((_urlHandler = _urlHandlers [_urlHandlerNo]).urlMatcher (_urlParts)) {
+								_matchingHandler = _urlHandler;
+								break;
 							}
-							if (_mustBuild) {
+						}
+						if (_matchingHandler) {
+							var
+								_builderInputs = (_matchingHandler.builderInputs || Uize.nop) (_urlParts),
+								_builder = _matchingHandler.builder
+							;
+							if (_builderInputs || _builder) {
 								var
-									_startTime = Uize.now (),
-									_buildError
+									_path = _urlParts.pathname,
+									_mustBuild = !_pathExists ({path:_path}),
+									_lastBuiltDate = _mustBuild ? 0 : _getModifiedDate ({path:_path}),
+									_builderInput
 								;
-								try {
-									_builder
-										? _writeFile ({path:_url,contents:_builder (_builderInputs,_urlParts)})
-										: _fileSystem.copyFile ({path:Uize.values (_builderInputs) [0],targetPath:_url})
-									;
-								} catch (_error) {
-									_buildError = _error;
+								_mustBuild || (_mustBuild = _lastBuiltDate < _minAllowedModifiedDate);
+								for (var _builderInputName in _builderInputs) {
+									_ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
+									_mustBuild || (
+										_mustBuild = Math.max (
+											_getModifiedDate ({path:_builderInput}),
+											_minAllowedModifiedDate
+										) > _lastBuiltDate
+									);
 								}
-								console.log (
-									(_buildError ? '*** BUILD FAILED' : 'BUILT') + ': ' + _url + '\n' +
-										'\tduration: ' + (Uize.now () - _startTime) + '\n' +
-										'\tbuilder: ' + _matchingHandler.description + '\n' +
-										'\tbuilder inputs:\n' +
-											Uize.map (
-												Uize.keys (_builderInputs),
-												function (_key) {return '\t\t' + _key + ': ' + _builderInputs [_key] + '\n'}
-											).join ('')
-								);
-								if (_buildError) {
-									console.log (_buildError);
-									throw _buildError;
+								if (_mustBuild) {
+									var
+										_startTime = Uize.now (),
+										_buildError
+									;
+									try {
+										_builder
+											? _writeFile ({path:_url,contents:_builder (_builderInputs,_urlParts)})
+											: _fileSystem.copyFile ({path:Uize.values (_builderInputs) [0],targetPath:_url})
+										;
+										_filesConsideredCurrentLookup [_url] = _trueFlag;
+									} catch (_error) {
+										_buildError = _error;
+									}
+									console.log (
+										(_buildError ? '*** BUILD FAILED' : 'BUILT') + ': ' + _url + '\n' +
+											'\tduration: ' + (Uize.now () - _startTime) + '\n' +
+											'\tbuilder: ' + _matchingHandler.description + '\n' +
+											'\tbuilder inputs:\n' +
+												Uize.map (
+													Uize.keys (_builderInputs),
+													function (_key) {return '\t\t' + _key + ': ' + _builderInputs [_key] + '\n'}
+												).join ('')
+									);
+									if (_buildError) {
+										console.log (_buildError);
+										throw _buildError;
+									}
+								} else {
+									_filesConsideredCurrentLookup [_url] = _trueFlag;
 								}
 							}
 						}
@@ -1470,6 +1534,7 @@ Uize.module ({
 							_startTime = Uize.now ()
 						;
 						try {
+							_filesConsideredCurrentLookup = {};
 							_ensureFileCurrent (_requestUrl);
 							var _urlParts = _Uize_Url.from (_requestUrl);
 							_fileContents = _fileSystem.readFile ({path:_urlParts.pathname,encoding:'buffer'});
