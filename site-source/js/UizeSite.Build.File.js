@@ -20,7 +20,16 @@
 /* TODO:
 	- to implement
 		- add support in factored out code for producing log output, so that built scripts can generate log files much like before
-		- update all build scripts to trigger file building using this module
+		- build scripts that still need to be updated to trigger file building using this module...
+			- UizeSite.Build.BuildSotu.js
+			- UizeSite.Build.BuildIndexPages.js
+			- Uize.Build.CompileJstModules.js
+			- UizeSite.Build.BuildWidgetPages.js
+			- UizeSite.Build.BuildSimpleDocPages.js
+			- Uize.Build.BuildSimpleDataPages.js
+			- UizeSite.Build.BuildPagesFromSourceCode.js
+			- Uize.Build.AutoScruncher.js
+
 	- to improve
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
@@ -85,6 +94,13 @@ Uize.module ({
 				_package = function () {},
 				_undefined
 			;
+
+		/*** Utility Functions ***/
+			function _log () {
+				typeof console != 'undefined' && typeof console.log == 'function' &&
+					console.log.apply (console,arguments)
+				;
+			}
 
 		/*** General Variables ***/
 			var
@@ -1280,6 +1296,14 @@ Uize.module ({
 				});
 
 			/*** handler for the SOTU page ***/
+				/* TODO:
+					- nice-to-haves, per module
+						- number of modules that require the module (ie. how shared is the module throughout framework, or is it more isolated)
+						- total number of modules (directly and indirectly) required by the module
+						- total scrunched size of all modules (directly and indirectly) required by the module
+						- creation date of the module
+						- developers for the module
+				*/
 				function _isModuleForSotu (_moduleName) {
 					return (
 						(_moduleName == 'Uize' || Uize.String.startsWith (_moduleName,'Uize.')) &&
@@ -1469,7 +1493,7 @@ Uize.module ({
 									} catch (_error) {
 										_buildError = _error;
 									}
-									console.log (
+									_log (
 										(_buildError ? '*** BUILD FAILED' : 'BUILT') + ': ' + _url + '\n' +
 											'\tduration: ' + (Uize.now () - _startTime) + '\n' +
 											'\tbuilder: ' + _matchingHandler.description + '\n' +
@@ -1480,7 +1504,7 @@ Uize.module ({
 												).join ('')
 									);
 									if (_buildError) {
-										console.log (_buildError);
+										_log (_buildError);
 										throw _buildError;
 									}
 								} else {
