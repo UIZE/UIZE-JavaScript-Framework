@@ -28,47 +28,14 @@
 
 Uize.module ({
 	name:'UizeSite.Build.BuildCodeSitemap',
-	required:'Uize.Wsh',
+	required:'UizeSite.Build.File',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
-				var
-					_dotJsRegExp = /\.js$/i,
-					_scriptFolderPathLengthPlusOne = Uize.Wsh.getScriptFolderPath ().length + 1,
-					_siteMapChunks = [
-						'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:codesearch="http://www.google.com/codesearch/schemas/sitemap/1.0">'
-					]
-				;
-				for (
-					var
-						_moduleFileNo = 0,
-						_moduleFiles = Uize.Wsh.getFiles (_params.moduleFolderPath),
-						_moduleFilesLength = _moduleFiles.length,
-						_moduleName
-					;
-					_moduleFileNo < _moduleFilesLength;
-					_moduleFileNo++
-				) {
-					if (_dotJsRegExp.test (_moduleName = _moduleFiles [_moduleFileNo]))
-						_siteMapChunks.push (
-							'\t<url>',
-								'\t\t<loc>' +
-									'http://www.uize.com/' + _moduleName.slice (_scriptFolderPathLengthPlusOne).replace (/\\/g,'/') +
-								'</loc>',
-								'\t\t<codesearch:codesearch>',
-									'\t\t\t<codesearch:filetype>javascript</codesearch:filetype>',
-									'\t\t\t<codesearch:license>GPL</codesearch:license>',
-								'\t\t</codesearch:codesearch>',
-							'\t</url>'
-						)
-					;
-				}
-				_siteMapChunks.push ('</urlset>');
-
-				Uize.Wsh.writeFile ({path:'sitemap-code.xml',text:_siteMapChunks.join ('\n')});
+				UizeSite.Build.File.perform (Uize.copyInto ({url:'sitemap-code.xml'},_params));
 			};
 
 		return _package;
