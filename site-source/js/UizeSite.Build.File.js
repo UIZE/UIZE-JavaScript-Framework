@@ -21,7 +21,6 @@
 	- to implement
 		- add support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- build scripts that still need to be updated to trigger file building using this module...
-			- UizeSite.Build.BuildSotu.js
 			- UizeSite.Build.BuildIndexPages.js
 			- Uize.Build.CompileJstModules.js
 			- UizeSite.Build.BuildWidgetPages.js
@@ -177,9 +176,9 @@ Uize.module ({
 					);
 				}
 
-				function _pathExists (_params) {
+				function _fileExists (_params) {
 					var _path = _params.path;
-					return _isUnderMemoryPath (_path) ? !!_objectCache [_path] : _fileSystem.pathExists (_params);
+					return _isUnderMemoryPath (_path) ? !!_objectCache [_path] : _fileSystem.fileExists (_params);
 				}
 
 			/*** misc utilities ***/
@@ -863,7 +862,7 @@ Uize.module ({
 						return (
 							_urlParts.fileType == 'html' &&
 							_isUnderBuiltPath (_urlParts.folderPath) &&
-							_fileSystem.pathExists ({
+							_fileSystem.fileExists ({
 								path:_sourcePathFromBuiltPath (_urlParts.folderPath) + _urlParts.fileName + '.simple'
 							})
 						);
@@ -1069,8 +1068,8 @@ Uize.module ({
 						return (
 							_urlParts.folderPath == _builtPath + '/reference/' &&
 							(
-								_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js'}) ||
-								_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js.jst'})
+								_fileSystem.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
+								_fileSystem.fileExists ({path:_sourcePathSansExtension + '.js.jst'})
 							)
 						);
 					},
@@ -1079,7 +1078,7 @@ Uize.module ({
 						return {
 							sourceCode:
 								_sourcePathSansExtension +
-								(_fileSystem.pathExists ({path:_sourcePathSansExtension + '.js'}) ? '.js' : '.js.jst'),
+								(_fileSystem.fileExists ({path:_sourcePathSansExtension + '.js'}) ? '.js' : '.js.jst'),
 							simpleDocTemplate:_memoryPath + '/reference/~SIMPLE-DOC-TEMPLATE.html.jst',
 							modulesTree:_memoryPath + '/modules-tree',
 							urlDictionary:_memoryPath + '/url-dictionary',
@@ -1154,7 +1153,7 @@ Uize.module ({
 					urlMatcher:function (_urlParts) {
 						return (
 							_urlParts.folderPath == _builtPath + _examplesSourceCodePagesPath &&
-							_fileSystem.pathExists ({path:_sourcePath + '/examples/' + _urlParts.file})
+							_fileSystem.fileExists ({path:_sourcePath + '/examples/' + _urlParts.file})
 						);
 					},
 					builderInputs:function (_urlParts) {
@@ -1186,8 +1185,8 @@ Uize.module ({
 						var _pathname = _urlParts.pathname;
 						return (
 							_isUnderBuiltPath (_urlParts.pathname) &&
-							_fileSystem.pathExists ({path:_sourcePathFromBuiltPath (_pathname) + '.jst'}) &&
-							_fileSystem.pathExists ({path:_sourcePathFromBuiltPath (_pathname) + '.simpledata'})
+							_fileSystem.fileExists ({path:_sourcePathFromBuiltPath (_pathname) + '.jst'}) &&
+							_fileSystem.fileExists ({path:_sourcePathFromBuiltPath (_pathname) + '.simpledata'})
 						);
 					},
 					builderInputs:function (_urlParts) {
@@ -1216,7 +1215,7 @@ Uize.module ({
 						return (
 							_urlParts.fileType == 'js' &&
 							_isUnderTempPath (_pathname) &&
-							_fileSystem.pathExists ({path:_changePath (_pathname,_tempPath,_sourcePath) + '.jst'})
+							_fileSystem.fileExists ({path:_changePath (_pathname,_tempPath,_sourcePath) + '.jst'})
 						);
 					},
 					builderInputs:function (_urlParts) {
@@ -1399,7 +1398,7 @@ Uize.module ({
 					urlMatcher:function (_urlParts) {
 						return (
 							Uize.String.startsWith (_urlParts.folderPath,_builtPath) &&
-							_fileSystem.pathExists ({path:_sourcePathFromBuiltPath (_urlParts.pathname)})
+							_fileSystem.fileExists ({path:_sourcePathFromBuiltPath (_urlParts.pathname)})
 						);
 					},
 					builderInputs:function (_urlParts) {
@@ -1465,7 +1464,7 @@ Uize.module ({
 							if (_builderInputs || _builder) {
 								var
 									_path = _urlParts.pathname,
-									_mustBuild = !_pathExists ({path:_path}),
+									_mustBuild = !_fileExists ({path:_path}),
 									_lastBuiltDate = _mustBuild ? 0 : _getModifiedDate ({path:_path}),
 									_builderInput
 								;

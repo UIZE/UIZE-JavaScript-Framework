@@ -20,6 +20,7 @@
 					'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
 				'*/\n'
 		},
+		freshBuild:'false',
 
 	/*** for the older build process ***/
 		alwaysBuild:false,

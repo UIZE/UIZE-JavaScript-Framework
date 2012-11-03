@@ -34,9 +34,37 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
+		/*** Utility Functions ***/
+			function _getParentFolderPath (_path) {
+				return _path.slice (0,((_path.lastIndexOf ('/') + 1) || 1) - 1);
+			}
+
+		/*** Private Instance Methods ***/
+			_classPrototype._makeFolder = function (_path) {
+				var _fileSystemObject = this._fileSystemObject;
+				if (!_fileSystemObject.FolderExists (_path)) {
+					var
+						_pathToCreate = _path,
+						_pathsToCreate = []
+					;
+					while (_pathToCreate && !_fileSystemObject.FolderExists (_pathToCreate)) {
+						_pathsToCreate.push (_pathToCreate);
+						_pathToCreate = _getParentFolderPath (_pathToCreate);
+					}
+					for (var _pathToCreateNo = _pathsToCreate.length; --_pathToCreateNo >= 0;)
+						 _fileSystemObject.CreateFolder (_pathsToCreate [_pathToCreateNo])
+					;
+				}
+			};
+
 		/*** Public Instance Methods ***/
 			_classPrototype.copyFile = function (_params,_callback) {
-				// TODO: IMPLEMENT!!!
+				var
+					_this = this,
+					_targetPath = _params.targetPath
+				;
+				_this._makeFolder (_getParentFolderPath (_targetPath));
+				_this._fileSystemObject.CopyFile (_params.path,_targetPath,true);
 				_callback ();
 			};
 
@@ -63,7 +91,13 @@ Uize.module ({
 					_filePath
 				;
 				while (!_files.atEnd ()) {
-					_pathMatcher (_filePath = _files.item ().Path) && _result.push (_pathTransformer (_filePath));
+					_pathMatcher (_filePath = _files.item ().Path) &&
+						_result.push (
+							_pathTransformer (
+								_filePath.slice (Math.max (_filePath.lastIndexOf ('/'),_filePath.lastIndexOf ('\\')) + 1)
+							)
+						)
+					;
 					_files.moveNext ();
 				}
 				_callback (_result);
@@ -72,7 +106,7 @@ Uize.module ({
 			_classPrototype.readFile = function (_params,_callback) {
 				var
 					_fileSystemObject = this._fileSystemObject,
-					_path = _params.path,
+					_path = _params.path, 
 					_text = ''
 				;
 				if (_fileSystemObject.GetFile (_path).Size) {
@@ -85,28 +119,13 @@ Uize.module ({
 
 			_classPrototype.writeFile = function (_params,_callback) {
 				var
-					_path = _params.path,
-					_fileSystemObject = this._fileSystemObject
+					_this = this,
+					_path = _params.path
 				;
-
-				/*** make sure path exists (if not, create it) ***/
-					var _folderPath = _path.substr (0,_path.lastIndexOf ('\\'));
-					if (!_fileSystemObject.FolderExists (_folderPath)) {
-						var
-							_pathSegments = _folderPath.split ('\\'),
-							_currentPath = _pathSegments [0] // this should be a drive letter ... this code might break if it isn't
-						;
-						for (
-							var _pathSegmentNo = 0, _pathSegmentsLength = _pathSegments.length;
-							++_pathSegmentNo < _pathSegmentsLength;
-						) {
-							_currentPath += '\\' + _pathSegments [_pathSegmentNo];
-							_fileSystemObject.FolderExists (_currentPath) || _fileSystemObject.CreateFolder (_currentPath);
-						}
-					}
+				_this._makeFolder (_getParentFolderPath (_path));
 
 				/*** write text to file and close ***/
-					var _file = _fileSystemObject.CreateTextFile (_path);
+					var _file = _this._fileSystemObject.CreateTextFile (_path);
 					_file.Write (_params.contents);
 					_file.Close ();
 
