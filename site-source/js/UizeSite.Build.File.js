@@ -573,6 +573,24 @@ Uize.module ({
 					}
 				});
 
+			/*** handler for javascript-examples-by-module index page ***/
+				var _examplesByModuleFile = 'javascript-examples-by-module.html';
+				_registerUrlHandler ({
+					description:'JavaScript examples by module index page',
+					urlMatcher:function (_urlParts) {
+						return _urlParts.pathname == _builtPath + '/' + _examplesByModuleFile;
+					},
+					builderInputs:function () {
+						return {
+							template:_memoryPath + '/' + _examplesByModuleFile + '.jst',
+							examplesIndex:_memoryPath + '/examples.index'
+						};
+					},
+					builder:function (_inputs) {
+						return _readFile ({path:_inputs.template}) ({examples:_readFile ({path:_inputs.examplesIndex})});
+					}
+				});
+
 			/*** handlers for news index pages ***/
 				_registerInMemoryHtmlFilesIndexHandler ('news','news',/\.simple$/,-1);
 
