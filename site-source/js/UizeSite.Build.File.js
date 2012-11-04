@@ -21,8 +21,8 @@
 	- to implement
 		- add support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- build scripts that still need to be updated to trigger file building using this module...
-			- UizeSite.Build.BuildSimpleDocPages.js
 			- UizeSite.Build.BuildIndexPages.js
+			- UizeSite.Build.BuildSimpleDocPages.js
 			- Uize.Build.BuildSimpleDataPages.js
 			- UizeSite.Build.BuildStaticFiles.js -- MUST CREATE THIS ONE
 
@@ -733,6 +733,24 @@ Uize.module ({
 						return Uize.Build.Util.dataAsModule (
 							_modulesTreeDataModuleName,
 							_readFile ({path:_inputs.modulesTree})
+						);
+					}
+				});
+
+			/*** handler for generated UizeSite.Examples module under temp ***/
+				var _examplesDataModuleName = 'UizeSite.Examples';
+				_registerUrlHandler ({
+					description:'Generated UizeSite.Examples module under temp',
+					urlMatcher:function (_urlParts) {
+						return _urlParts.pathname == _tempPath + '/js/' + _examplesDataModuleName + '.js';
+					},
+					builderInputs:function () {
+						return {filesIndex:_memoryPath + '/examples.index'};
+					},
+					builder:function (_inputs) {
+						return Uize.Build.Util.dataAsModule (
+							_examplesDataModuleName,
+							_readFile ({path:_inputs.filesIndex})
 						);
 					}
 				});
