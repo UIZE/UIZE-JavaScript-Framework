@@ -187,13 +187,7 @@ Uize.module ({
 				}
 
 				function _getModules () {
-					return Uize.map (
-						_fileSystem.getFiles ({
-							path:_sourcePath + '/js',
-							pathMatcher:_moduleExtensionRegExp
-						}),
-						function (_fileName) {return _fileName.replace (_moduleExtensionRegExp,'')}
-					);
+					return _package.getJsModules (_sourcePath);
 				}
 
 				function _forEachNumberedInput (_inputs,_inputNamePrefix,_handler) {
@@ -429,15 +423,9 @@ Uize.module ({
 						builderInputs:function (_urlParts) {
 							var _inputs = {};
 							Uize.forEach (
-								_fileSystem.getFiles ({
-									path:_sourcePath + '/' + _indexableFolderUnderSource,
-									pathMatcher:function (_filePath) {
-										return (
-											_indexableFileExtensionRegExp.test (_filePath) &&
-											!Uize.String.startsWith (Uize.Url.from (_filePath).fileName,'~')
-										);
-									}
-								}),
+								_package.getIndexableFiles (
+									_sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp
+								),
 								function (_filePath,_fileNo) {
 									_inputs ['fileInfo' + _fileNo] =
 										_memoryPath + '/' + _indexableFolderUnderBuilt + '/' +
@@ -1407,6 +1395,28 @@ Uize.module ({
 				});
 
 		/*** Public Static Methods ***/
+			_package.getJsModules = function (_sourcePath) {
+				return Uize.map (
+					_fileSystem.getFiles ({
+						path:_sourcePath + '/js',
+						pathMatcher:_moduleExtensionRegExp
+					}),
+					function (_fileName) {return _fileName.replace (_moduleExtensionRegExp,'')}
+				);
+			};
+
+			_package.getIndexableFiles = function (_sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp) {
+				return _fileSystem.getFiles ({
+					path:_sourcePath + '/' + _indexableFolderUnderSource,
+					pathMatcher:function (_filePath) {
+						return (
+							_indexableFileExtensionRegExp.test (_filePath) &&
+							!Uize.String.startsWith (Uize.Url.from (_filePath).fileName,'~')
+						);
+					}
+				});
+			};
+
 			_package.perform = function (_params) {
 				var _filesConsideredCurrentLookup = {};
 
@@ -1522,7 +1532,12 @@ Uize.module ({
 				_isDev = _params.isDev == 'true';
 				_scrunchedHeadComments = _params.scrunchedHeadComments || {};
 
-				_ensureFileCurrent (_builtPath + '/' + _params.url);
+				var _url = _params.url;
+				if (Uize.isArray (_url)) {
+					Uize.forEach (_url,function (_url) {_ensureFileCurrent (_builtPath + '/' + _url)});
+				} else {
+					_ensureFileCurrent (_builtPath + '/' + _url);
+				}
 				/*?
 					Static Methods
 						UizeSite.Build.File.perform

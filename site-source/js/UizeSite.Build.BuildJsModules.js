@@ -26,11 +26,7 @@
 
 Uize.module ({
 	name:'UizeSite.Build.BuildJsModules',
-	required:[
-		'Uize.Services.FileSystem',
-		'UizeSite.Build.File',
-		'Uize.Wsh'
-	],
+	required:'UizeSite.Build.File',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
@@ -39,27 +35,17 @@ Uize.module ({
 			_package.perform = function (_params) {
 				var
 					_modulesFolder = 'js',
-					_fileSystem = Uize.Services.FileSystem.singleton (),
-					_moduleExtensionRegExp = /(\.js|\.js\.jst)$/,
-					_modules = Uize.map (
-						_fileSystem.getFiles ({
-							path:_params.sourcePath + '/' + _modulesFolder,
-							pathMatcher:_moduleExtensionRegExp
-						}),
-						function (_fileName) {return _fileName.replace (_moduleExtensionRegExp,'')}
-					)
+					_modules = UizeSite.Build.File.getJsModules (_params.sourcePath)
 				;
 				_modules.push (
 					'UizeSite.ModulesTree',
 					'UizeSite.ExamplesInfoForSiteMap'
 				);
-				Uize.forEach (
-					_modules.sort (),
-					function (_moduleName) {
-						UizeSite.Build.File.perform (
-							Uize.copyInto ({url:_modulesFolder + '/' + _moduleName + '.js'},_params)
-						);
-					}
+				UizeSite.Build.File.perform (
+					Uize.copyInto (
+						{url:Uize.map (_modules.sort (),'"' + _modulesFolder + '/" + value + ".js"')},
+						_params
+					)
 				);
 			};
 
