@@ -4,6 +4,6 @@
 		_build = eval (_buildFile.ReadAll ())
 	;
 	_buildFile.Close ();
-	_build ('Uize.Build.CompileJstModules');
+	_build ('UizeSite.Build.BuildJsModules');
 }) ();
 

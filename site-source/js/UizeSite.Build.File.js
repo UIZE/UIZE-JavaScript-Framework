@@ -21,12 +21,12 @@
 	- to implement
 		- add support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- build scripts that still need to be updated to trigger file building using this module...
+			- UizeSite.Build.BuildPagesFromSourceCode.js
+
 			- UizeSite.Build.BuildIndexPages.js
-			- Uize.Build.CompileJstModules.js
 			- UizeSite.Build.BuildWidgetPages.js
 			- UizeSite.Build.BuildSimpleDocPages.js
 			- Uize.Build.BuildSimpleDataPages.js
-			- UizeSite.Build.BuildPagesFromSourceCode.js
 			- Uize.Build.AutoScruncher.js
 
 	- to improve

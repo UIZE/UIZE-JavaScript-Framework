@@ -61,7 +61,6 @@ Separate Source Code From Built Code
 			- _Uize.Build.AutoScruncher.js
 			- _Uize.Build.BuildSimpleDataPages.js
 			- _Uize.Build.BuildSimpleDocPages.js
-			- _Uize.Build.CompileJstModules.js
 			- _Uize.Build.RunUnitTests-source.js
 				- issue with some modules having dependencies on JavaScript JST modules
 			- _Uize.Build.RunUnitTests-scrunched.js

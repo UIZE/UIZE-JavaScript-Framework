@@ -1,5 +1,11 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+Major Build Process Improvements
+
+	- _Uize.Build.CompileJstModules.js replaced with _UizeSite.Build.BuildJsModules
+	- built code no longer in the source tree
+	- build process can now be run with either WSH or NodeJS
+
 ### Bugs to fix
 	- examples with fruits images broken because of Zazzle changes
 		- Slideshow of Data
