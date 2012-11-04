@@ -27,7 +27,7 @@
 Uize.module ({
 	name:'UizeSite.Build.BuildWidgetPages',
 	required:[
-		'Uize.Wsh',
+		'UizeSite.Build.File',
 		'Uize.Build.Util'
 	],
 	builder:function () {
@@ -36,39 +36,29 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
-				var _widgets = Uize.Build.Util.readSimpleDataFile ('widgets/widgets.simpledata').widgets;
-				for (var _widgetNo = -1, _widgetsLength = _widgets.length; ++_widgetNo < _widgetsLength;) {
-					var
-						_widget = _widgets [_widgetNo],
-						_widgetNameForUrls = _widget.title.toLowerCase (),
-						_widgetFilesPathPrefix = 'widgets\\' + _widgetNameForUrls
-					;
+				var
+					_urlsToBuild = [],
+					_widgetsFolder = 'widgets'
+				;
 
-					/*** build widget's homepage ***/
-						Uize.Wsh.writeFile ({
-							path:_widgetFilesPathPrefix + '.html',
-							text:UizeSite.Templates.WidgetToGoHomepage.process (_widget)
-						});
+				/*** generate URLs to build for all widgets ***/
+					Uize.forEach (
+						Uize.Build.Util.readSimpleDataFile (
+							_params.sourcePath + '/' + _widgetsFolder + '/widgets.simpledata'
+						).widgets,
+						function (_widget) {
+							var _widgetFilesPathPrefix = _widgetsFolder + '/' + _widget.title.toLowerCase ();
+							_urlsToBuild.push (
+								_widgetFilesPathPrefix + '.html',        // homepage
+								_widgetFilesPathPrefix + '/gadget.xml',  // Google Gadget XML
+								_widgetFilesPathPrefix + '/web.html',    // Web version
+								_widgetFilesPathPrefix + '/mobile.html'  // mobile version
+							);
+						}
+					);
 
-					/*** build files in widget's folder ***/
-						/*** build widget's Google Gadget XML file ***/
-							Uize.Wsh.writeFile ({
-								path:_widgetFilesPathPrefix + '\\gadget.xml',
-								text:UizeSite.Templates.WidgetToGoGadgetXml.process (_widget)
-							});
-
-						/*** build widget's web.html page ***/
-							Uize.Wsh.writeFile ({
-								path:_widgetFilesPathPrefix + '\\web.html',
-								text:UizeSite.Templates.WidgetToGoPage.process ({widget:_widget})
-							});
-
-						/*** build widget's mobile.html page ***/
-							Uize.Wsh.writeFile ({
-								path:_widgetFilesPathPrefix + '\\mobile.html',
-								text:UizeSite.Templates.WidgetToGoPage.process ({widget:_widget,mobile:true})
-							});
-				}
+				/*** now build all the pages ***/
+					UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params));
 			};
 
 		return _package;
