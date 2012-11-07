@@ -192,6 +192,7 @@ Uize.module ({
 				return [
 					'Uize.module ({',
 					'	name:\'' + _moduleName + '\',',
+					'	superclass:\'\',',
 					'	builder:function () {',
 					'		return function () {',
 					'			return ' + Uize.String.Lines.indent (Uize.Json.to (_moduleData),3,'\t',false) + ';',

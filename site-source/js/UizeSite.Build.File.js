@@ -113,7 +113,8 @@ Uize.module ({
 				_memoryPath,
 				_isDev,
 				_scrunchedHeadComments,
-				_threeFoldersDeepRegExp = /^([^\\\/]+)[\\\/]([^\\\/]+)[\\\/]([^\\\/]+)[\\\/][^\\\/]+$/
+				_threeFoldersDeepRegExp = /^([^\\\/]+)[\\\/]([^\\\/]+)[\\\/]([^\\\/]+)[\\\/][^\\\/]+$/,
+				_lastParams
 			;
 
 			/*** URL tests ***/
@@ -1013,13 +1014,54 @@ Uize.module ({
 					}
 				});
 
-			/*** handler for JavaScript built modules (scrunched, if preference configured) ***/
+			/*** handler for built JavaScript modules (scrunched, if preference configured) ***/
 				var
 					_scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-					_endsWithDotJsRegExp = /\.js$/
+					_endsWithDotJsRegExp = /\.js$/,
+					_moduleInheritanceDepthLookup = {
+						Uize:0 // pre-cache this in order to prevent loading and re-evaluating the Uize base module
+					}
 				;
+				function _getModuleInheritanceDepth (_moduleName,_moduleCode) {
+					function _getModuleDefinitionFromCode (_moduleCode) {
+						var
+							_result,
+							Uize = {module:function (_definition) {_result = _definition}}
+						;
+						eval (_moduleCode);
+						return _result;
+					}
+					if (_moduleName in _moduleInheritanceDepthLookup) {
+						return _moduleInheritanceDepthLookup [_moduleName];
+					} else {
+						var
+							_inheritanceDepth = 0,
+							_superclassKnown
+						;
+						if (!_moduleCode) {
+							var _moduleUrl = 'js/' + _moduleName + '.js';
+							_package.perform (Uize.copyInto ({},_lastParams,{url:_moduleUrl}));
+							_moduleCode = _fileSystem.readFile ({path:_builtPath + '/' + _moduleUrl});
+						}
+						var _moduleDefinition = _getModuleDefinitionFromCode (_moduleCode);
+						if (_moduleDefinition && (_superclassKnown = 'superclass' in _moduleDefinition)) {
+							var _superclass = _moduleDefinition.superclass;
+							if (_superclass)
+								_inheritanceDepth = _getModuleInheritanceDepth (_superclass) + 1
+							;
+						}
+						_superclassKnown ||
+							Uize.require (
+								_moduleName,
+								function (_module) {_inheritanceDepth = Uize.Util.Oop.getInheritanceChain (_module).length}
+							)
+						;
+						_moduleInheritanceDepthLookup [_moduleName] = _inheritanceDepth;
+						return _moduleInheritanceDepthLookup [_moduleName] = _inheritanceDepth;
+					}
+				}
 				_registerUrlHandler ({
-					description:'JavaScript modules',
+					description:'Built JavaScript module',
 					urlMatcher:function (_urlParts) {
 						return _urlParts.fileType == 'js' && _isUnderBuiltPath (_urlParts.folderPath);
 					},
@@ -1044,19 +1086,14 @@ Uize.module ({
 							if (!_keepHeadComment)
 								_scruncherSettings.KEEPHEADCOMMENT = 'FALSE'
 							;
-							if (Uize.String.startsWith (_path,_tempPath + '/js/'))
-								Uize.require (
-									_moduleName,
-									function (_module) {
-										var _inheritanceDepth = Uize.Util.Oop.getInheritanceChain (_module).length;
-										_scruncherSettings.MAPPINGS =
-											'=' +
-											(_inheritanceDepth ? _scruncherPrefixChars.charAt (_inheritanceDepth - 1) : '') +
-											',' + _moduleName.replace (/\./g,'_')
-										;
-									}
-								)
-							;
+							if (Uize.String.startsWith (_path,_tempPath + '/js/')) {
+								var _inheritanceDepth = _getModuleInheritanceDepth (_moduleName,_result);
+								_scruncherSettings.MAPPINGS =
+									'=' +
+									(_inheritanceDepth ? _scruncherPrefixChars.charAt (_inheritanceDepth - 1) : '') +
+									',' + _moduleName.replace (/\./g,'_')
+								;
+							}
 							var _scruncherResult = Uize.Build.Scruncher.scrunch (_result,_scruncherSettings);
 							_result =
 								(
@@ -1069,7 +1106,6 @@ Uize.module ({
 										)
 								) + _scruncherResult.scrunchedCode
 							;
-							return _result;
 							/*
 							return {
 								outputText:_result,
@@ -1451,6 +1487,7 @@ Uize.module ({
 			};
 
 			_package.perform = function (_params) {
+				_lastParams = Uize.copyInto ({},_params);
 				var _filesConsideredCurrentLookup = {};
 
 				function _ensureFileCurrent (_url) {
