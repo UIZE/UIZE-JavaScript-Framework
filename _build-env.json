@@ -22,6 +22,9 @@
 		},
 		freshBuild:'false',
 
+	/*** UIZE Web site specific modules to stub ***/
+		modulesToStub:/^UizeSite\.(ModulesTree|Examples|ExamplesInfoForSiteMap)$/,
+
 	/*** for the older build process ***/
 		alwaysBuild:false,
 		buildFolderPath:'site-built',
@@ -33,9 +36,8 @@
 			'_UizeSite.Build.BuildSimpleDocPages.js',
 			'_UizeSite.Build.BuildIndexPages.js',
 			'_Uize.Build.BuildSimpleDataPages.js',
-			'_UizeSite.Build.BuildPagesFromSourceCode.js',
-			'_Uize.Build.AutoScruncher.js',
 			*/
+			'_UizeSite.Build.BuildPagesFromSourceCode.js',
 			'_UizeSite.Build.BuildSotu.js',
 			'_UizeSite.Build.BuildCodeSitemap.js'
 		],
