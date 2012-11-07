@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.BuildIndexPages= package provides a method for building index pages for examples, tools, and JavaScript modules for the UIZE Web site.
+		The =UizeSite.Build.BuildIndexPages= package provides a method for building the index pages for the examples, tools, and JavaScript modules for the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -27,8 +27,11 @@
 Uize.module ({
 	name:'UizeSite.Build.BuildIndexPages',
 	required:[
-		'Uize.Wsh',
+		'UizeSite.Build.File',
 		'Uize.Build.Util',
+
+
+		'Uize.Wsh',
 		'Uize.Template',
 		'Uize.String',
 		'Uize.String.Lines',
@@ -40,47 +43,40 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
-				_getFirstTitleSegment = UizeSite.Build.Util.getFirstTitleSegment
-			;
-
-		/*** Utility Functions ***/
-			function _buildIndexPage (_indexPageTemplatePath,_filesToIndex) {
-				Uize.Build.Util.processJstFile (_indexPageTemplatePath,{files:_filesToIndex});
-			}
+			var _package = function () {};
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
+				var _urlsToBuild = [];
+
+				/*** add URLs for index pages for modules, examples by module, explainers, and widgets ***/
+					_urlsToBuild.push (
+						'javascript-explainers.html',
+						'javascript-examples-by-module.html',
+						'javascript-modules-index.html',
+						'javascript-widgets.html'
+					);
+
+				/*** add URLs for the various news pages ***/
+					_urlsToBuild.push (
+						'latest-news.html',
+						'latest-news.rss'
+					);
+
+				/*** add URLs for other miscellaneous pages ***/
+					_urlsToBuild.push (
+						'index.html'//, // homepage
+						//'directory.html'
+					);
+
+				/*** now build all the pages ***/
+					UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params));
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>> */ return;
+
 				var _moduleReferenceFiles = Uize.Build.Util.getHtmlFilesInfo ('reference',_getFirstTitleSegment);
 
-				/*** build index files for modules, explainers, and widgets ***/
-					_buildIndexPage (
-						'javascript-explainers.html.jst',
-						Uize.Build.Util.getHtmlFilesInfo ('explainers',_getFirstTitleSegment)
-					);
-					_buildIndexPage ('javascript-modules-index.html.jst',_moduleReferenceFiles);
-					_buildIndexPage (
-						'javascript-widgets.html.jst',
-						Uize.Build.Util.getHtmlFilesInfo ('widgets',_getFirstTitleSegment)
-					);
-
-				/*** build the UizeSite.ModulesTree module ***/
-					/*** build modules tree structure from list of module names ***/
-						var _modulesTree = Uize.Data.PathsTree.fromList (Uize.map (_moduleReferenceFiles,'value.title'),'.');
-
-					/*** write the modules tree module file ***/
-						Uize.Build.Util.writeDataModule (_params.moduleFolderPath,'UizeSite.ModulesTree',_modulesTree);
-
 				/*** build the examples module and index pages ***/
-					var _examples = Uize.Build.Util.getHtmlFilesInfo ('examples',_getFirstTitleSegment);
-
-					/*** build the UizeSite.Examples module ***/
-						Uize.Build.Util.writeDataModule (_params.moduleFolderPath,'UizeSite.Examples',_examples);
-
-					/*** build the examples by module page ***/
-						Uize.Build.Util.processJstFile ('javascript-examples-by-module.html.jst');
-
 					/*** build map of examples by keyword ***/
 						var _examplesByKeyword = {'':_examples};
 						for (
@@ -108,69 +104,7 @@ Uize.module ({
 							})
 						;
 
-					/*** build the UizeSite.ExamplesInfoForSiteMap module ***/
-						Uize.Build.Util.writeDataModule (
-							_params.moduleFolderPath,'UizeSite.ExamplesInfoForSiteMap',
-							{
-								keywords:Uize.keys (_examplesByKeyword).slice (1).sort (), // slice removes the '' keyword
-								tools:
-									Uize.map (
-										_examplesByKeyword.tool,
-										function (_value) {return Uize.Data.filter (_value,['title','path'])}
-									)
-							}
-						);
-
 				/*** build the news index pages ***/
-					var
-						_newsItems = Uize.Array.Sort.sortBy (
-							Uize.Build.Util.getHtmlFilesInfo ('news',_getFirstTitleSegment),
-							'value.title',
-							-1
-						),
-						_newsIndexPageTemplate = Uize.Build.Util.compileJstFile ('news.html.jst')
-					;
-
-					/*** build the latest news files ***/
-						var _latestNews = _newsItems.slice (0,50);
-
-						/*** build the latest news HTML page ***/
-							Uize.Wsh.writeFile ({
-								path:'latest-news.html',
-								text:_newsIndexPageTemplate ({files:_latestNews})
-							});
-
-						/*** build the latest news RSS file ***/
-							Uize.Build.Util.processJstFile (
-								'latest-news.rss.jst',
-								{
-									items:Uize.map (
-										_latestNews,
-										function (_value) {
-											return {
-												title:_value.title.replace (/^\d\d\d\d-\d\d-\d\d\s*-\s*/,''),
-												date:_value.title.slice (0,10),
-												link:'http://www.uize.com/' + _value.path,
-												description:_value.description
-											}
-										}
-									)
-								}
-							);
-
-					/*** build the home page, to update the news pod ***/
-						Uize.Build.Util.processJstFile ('index.html.jst',{latestNews:_latestNews});
-
-					/*** build map of news items by year ***/
-						var _newsItemsByYear = {};
-						for (
-							var _newsItemNo = -1, _newsItemsLength = _newsItems.length, _newsItem, _year;
-							++_newsItemNo < _newsItemsLength;
-						) {
-							var _year = (_newsItem = _newsItems [_newsItemNo]).title.slice (0,4);
-							(_newsItemsByYear [_year] || (_newsItemsByYear [_year] = [])).push (_newsItem);
-						}
-
 					/*** build news index pages for each year ***/
 						for (var _year in _newsItemsByYear)
 							Uize.Wsh.writeFile ({
@@ -178,9 +112,6 @@ Uize.module ({
 								text:_newsIndexPageTemplate ({files:_newsItemsByYear [_year],year:_year})
 							})
 						;
-
-				/*** build the directory page ***/
-					Uize.Build.Util.processJstFile ('directory.html.jst');
 			};
 
 		return _package;
