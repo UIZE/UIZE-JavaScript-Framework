@@ -91,12 +91,12 @@ Uize.module ({
 					_filePath
 				;
 				while (!_files.atEnd ()) {
-					_pathMatcher (_filePath = _files.item ().Path) &&
-						_result.push (
-							_pathTransformer (
-								_filePath.slice (Math.max (_filePath.lastIndexOf ('/'),_filePath.lastIndexOf ('\\')) + 1)
-							)
+					_pathMatcher (
+						_filePath = (_filePath = _files.item ().Path).slice (
+							Math.max (_filePath.lastIndexOf ('/'),_filePath.lastIndexOf ('\\')) + 1
 						)
+					) &&
+						_result.push (_pathTransformer (_filePath))
 					;
 					_files.moveNext ();
 				}
@@ -106,7 +106,7 @@ Uize.module ({
 			_classPrototype.readFile = function (_params,_callback) {
 				var
 					_fileSystemObject = this._fileSystemObject,
-					_path = _params.path, 
+					_path = _params.path,
 					_text = ''
 				;
 				if (_fileSystemObject.GetFile (_path).Size) {

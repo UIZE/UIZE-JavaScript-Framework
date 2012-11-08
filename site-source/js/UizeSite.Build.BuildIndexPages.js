@@ -29,6 +29,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Build.File',
 		'Uize.Build.Util',
+		'Uize.Services.FileSystem',
 
 
 		'Uize.Wsh',
@@ -44,6 +45,9 @@ Uize.module ({
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
+
+		/*** General Variables ***/
+			var _fileSystem = Uize.Services.FileSystem.singleton ();
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
@@ -62,6 +66,23 @@ Uize.module ({
 						'latest-news.html',
 						'latest-news.rss'
 					);
+
+					/*** add URLs for news by year index pages ***/
+						var _newsYearsLookup = {};
+						_fileSystem.getFiles ({
+							path:_params.sourcePath + '/news',
+							pathMatcher:function (_path) {
+								var
+									_yearMatch = _path.match (/^(\d{4})-\d{2}-\d{2}-.+\.simple$/),
+									_year = _yearMatch && _yearMatch [1]
+								;
+								if (_year && !_newsYearsLookup [_year]) {
+									_newsYearsLookup [_year] = true;
+									_urlsToBuild.push ('news-' + _year + '.html');
+								}
+							}
+						});
+
 
 				/*** add URLs for other miscellaneous pages ***/
 					_urlsToBuild.push (
@@ -101,15 +122,6 @@ Uize.module ({
 							Uize.Wsh.writeFile ({
 								path:'javascript-' + _keyword + (_keyword && '-') + 'examples.html',
 								text:_indexPageTemplate ({files:_examplesByKeyword [_keyword],keyword:_keyword})
-							})
-						;
-
-				/*** build the news index pages ***/
-					/*** build news index pages for each year ***/
-						for (var _year in _newsItemsByYear)
-							Uize.Wsh.writeFile ({
-								path:'news-' + _year + '.html',
-								text:_newsIndexPageTemplate ({files:_newsItemsByYear [_year],year:_year})
 							})
 						;
 			};
