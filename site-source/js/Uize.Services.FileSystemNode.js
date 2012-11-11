@@ -121,6 +121,11 @@ Uize.module ({
 				_callback (_result);
 			};
 
+			_classPrototype.getFolders = function (_params,_callback) {
+				// TODO: IMPLEMENT!!!
+				_callback ();
+			};
+
 			_classPrototype.readFile = function (_params,_callback) {
 				var
 					_fileSystem = this._fileSystem,

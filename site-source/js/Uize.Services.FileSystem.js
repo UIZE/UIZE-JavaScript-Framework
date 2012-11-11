@@ -97,6 +97,32 @@ Uize.module ({
 
 									pathTransformer
 										document...
+
+									recursive
+										document...
+					*/
+				},
+				getFolders:{
+					async:_false
+					/*?
+						Instance Methods
+							getFolders
+								document...
+
+								SYNTAX
+								...........................................................
+								filePathsARRAY = fileSystemInstance.getFolders (paramsOBJ);
+								...........................................................
+
+								Params
+									path
+										document...
+
+									pathMatcher
+										document...
+
+									pathTransformer
+										document...
 					*/
 				},
 				getModifiedDate:{

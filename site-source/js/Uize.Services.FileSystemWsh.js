@@ -57,6 +57,29 @@ Uize.module ({
 				}
 			};
 
+			_classPrototype._getItemsInFolder = function (_params,_itemIsFolder) {
+				var
+					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
+					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
+					_result = [],
+					_items = new Enumerator (
+						this._fileSystemObject.getFolder (_params.path) [_itemIsFolder ? 'SubFolders' : 'Files']
+					),
+					_itemPath
+				;
+				while (!_items.atEnd ()) {
+					_pathMatcher (
+						_itemPath = (_itemPath = _items.item ().Path).slice (
+							Math.max (_itemPath.lastIndexOf ('/'),_itemPath.lastIndexOf ('\\')) + 1
+						)
+					) &&
+						_result.push (_pathTransformer (_itemPath))
+					;
+					_items.moveNext ();
+				}
+				return _result;
+			};
+
 		/*** Public Instance Methods ***/
 			_classPrototype.copyFile = function (_params,_callback) {
 				var
@@ -84,23 +107,38 @@ Uize.module ({
 
 			_classPrototype.getFiles = function (_params,_callback) {
 				var
-					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
-					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
+					_this = this,
 					_result = [],
-					_files = new Enumerator (this._fileSystemObject.getFolder (_params.path).files),
-					_filePath
+					_path = _params.path,
+					_pathMatcher = _params.pathMatcher,
+					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
+					_recursive = _params.recursive
 				;
-				while (!_files.atEnd ()) {
-					_pathMatcher (
-						_filePath = (_filePath = _files.item ().Path).slice (
-							Math.max (_filePath.lastIndexOf ('/'),_filePath.lastIndexOf ('\\')) + 1
-						)
-					) &&
-						_result.push (_pathTransformer (_filePath))
-					;
-					_files.moveNext ();
+				function _addItemsFromFolder (_subPath) {
+					var _pathPlusSubPath = _path + (_path && _subPath && '/') + _subPath;
+					_result.push.apply (
+						_result,
+						_this._getItemsInFolder ({
+							path:_pathPlusSubPath,
+							pathMatcher:_pathMatcher,
+							pathTransformer:function (_itemPath) {
+								return _subPath + (_subPath && '/') + _pathTransformer (_itemPath);
+							}
+						})
+					);
+					if (_recursive) {
+						Uize.forEach (
+							_this._getItemsInFolder ({path:_pathPlusSubPath},true),
+							function (_folderName) {_addItemsFromFolder (_subPath + (_subPath && '/') + _folderName)}
+						);
+					}
 				}
+				_addItemsFromFolder ('');
 				_callback (_result);
+			};
+
+			_classPrototype.getFolders = function (_params,_callback) {
+				_callback (this._getItemsInFolder (_params,true));
 			};
 
 			_classPrototype.readFile = function (_params,_callback) {
