@@ -29,73 +29,46 @@
 Uize.module ({
 	name:'UizeSite.Build.BuildSimpleDocPages',
 	required:[
-		'Uize.Build.BuildSimpleDocPages',
-		'Uize.Wsh',
-		'Uize.Data.Simple',
-		'Uize.Url',
-		'UizeSite.Build.Util'
+		'UizeSite.Build.File',
+		'Uize.Services.FileSystem'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
+		/*** General Variables ***/
+			var _fileSystem = Uize.Services.FileSystem.singleton ();
+
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
 				var
-					_urlDictionary = {},
-					_moduleReferenceFolderName = 'reference',
-					_dotSimpleRegExp = /\.simple$/i,
-					_dotJsRegExp = /\.js$/i
+					_urlsToBuild = [],
+					_sourcePath = _params.sourcePath
 				;
-				/*** utility functions ***/
-					function _getFilenameFromPath (_filePath) {
-						return Uize.Url.from (_filePath).fileName;
-					}
 
-				/*** populate URL dictionary ***/
-					/*** add UIZE developers to URL dictionary ***/
-						function _addDictionaryUrlsFromCreditsSimpleDataFile (_filePath) {
-							var _listings =
-								Uize.Data.Simple.parse ({simple:Uize.Wsh.readFile (_filePath),collapseChildren:true}).listings
-							;
-							for (var _listingNo = -1, _listingsLength = _listings.length; ++_listingNo < _listingsLength;) {
-								var _listing = _listings [_listingNo];
-								if (_listing.link)
-									_urlDictionary [_listing.fullName] = _listing.link
-								;
-							}
-						}
-						_addDictionaryUrlsFromCreditsSimpleDataFile ('appendixes/credits.html.simpledata');
-						_addDictionaryUrlsFromCreditsSimpleDataFile ('endorsements.html.simpledata');
+				/*** add URLs for all .simple files (explainers, appendixes, JavaScript reference pages, etc.) ***/
+					var _dotSimpleExtensionRegExp = /\.simple$/;
+					_urlsToBuild.push.apply (
+						_urlsToBuild,
+						_fileSystem.getFiles ({
+							path:_sourcePath,
+							recursive:true,
+							pathMatcher:_dotSimpleExtensionRegExp,
+							pathTransformer:function (_path) {return _path.replace (_dotSimpleExtensionRegExp,".html")}
+						})
+					);
 
-					/*** add reference pages to URL dictionary ***/
-						function _addReferencePagesToUrlDictionary (_sourceFolder,_sourceFileMatcher,_referenceFolder) {
-							for (
-								var
-									_fileNo = -1,
-									_referenceUrlPrefix = '/' + (_referenceFolder || _sourceFolder)+ '/',
-									_files = Uize.Wsh.getFiles (_sourceFolder,_sourceFileMatcher,_getFilenameFromPath),
-									_filesLength = _files.length,
-									_fileName
-								;
-								++_fileNo < _filesLength;
-							)
-								_urlDictionary [_fileName = _files [_fileNo]] = _referenceUrlPrefix + _fileName + '.html'
-							;
-						}
-						_addReferencePagesToUrlDictionary ('javascript-reference',_dotSimpleRegExp);
-						_addReferencePagesToUrlDictionary (_params.moduleFolderPath,_dotJsRegExp,_moduleReferenceFolderName);
-
-				/*** now build the SimpleDoc pages ***/
-					Uize.Build.BuildSimpleDocPages.perform (
-						Uize.copyInto (
-							{
-								urlDictionary:_urlDictionary,
-								examplesByKeyword:UizeSite.Build.Util.getExamplesByKeyword ()
-							},
-							_params
+				/*** add URLs for all JavaScript module reference files ***/
+					_urlsToBuild.push.apply (
+						_urlsToBuild,
+						Uize.map (
+							UizeSite.Build.File.getJsModules (_sourcePath).sort (),
+							'"reference/" + value + ".html"'
 						)
 					);
+
+				/*** now build all the pages ***/
+					UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params));
 			};
 
 		return _package;
