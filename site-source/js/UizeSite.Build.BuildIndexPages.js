@@ -28,7 +28,6 @@ Uize.module ({
 	name:'UizeSite.Build.BuildIndexPages',
 	required:[
 		'UizeSite.Build.File',
-		'Uize.Build.Util',
 		'Uize.Services.FileSystem',
 
 
@@ -94,8 +93,6 @@ Uize.module ({
 					UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params));
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>> */ return;
-
-				var _moduleReferenceFiles = Uize.Build.Util.getHtmlFilesInfo ('reference',_getFirstTitleSegment);
 
 				/*** build the examples module and index pages ***/
 					/*** build map of examples by keyword ***/
