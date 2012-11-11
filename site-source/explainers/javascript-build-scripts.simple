@@ -23,7 +23,7 @@ Introduction
 		The build script files are JavaScript files (with the =.js= extension) with names that all start with a "_" (underscore) character, as in...
 
 		- _Uize.Build.BuildSimpleDataPages.js (`Build Simple Data Pages`)
-		- _Uize.Build.BuildSimpleDocPages.js (`Build Simple Doc Pages`)
+		- _UizeSite.Build.BuildSimpleDocPages.js (`UIZE Site Build Simple Doc Pages`)
 		- _Uize.Build.AutoScruncher.js (`Auto Scruncher`)
 		- _Uize.Build.AuditStrings.js (`Audit Strings`)
 		- _Uize.Build.RunUnitTests-scrunched.js (`Run Unit Tests (Scrunched)`)
@@ -31,7 +31,7 @@ Introduction
 		- _UizeSite.Build.BuildJsModules.js (`Build JS Modules`)
 		- _UizeSite.Build.BuildPagesFromSourceCode.js (`UIZE Site Build Pages from Source Code`)
 
-		Not all the build scripts will necessarily be useful for your own Web site project. In particular, the `Build Simple Doc Pages` and `UIZE Site Build Pages from Source Code` build scripts are intended primarily for the uize.com Web site, although you are welcome to hack them to meet your needs or use them as a reference when `Writing Your Own Build Scripts`.
+		Not all the build scripts will necessarily be useful for your own Web site project. In particular, the `UIZE Site Build Simple Doc Pages` and `UIZE Site Build Pages from Source Code` build scripts are intended primarily for the uize.com Web site, although you are welcome to hack them to meet your needs or use them as a reference when `Writing Your Own Build Scripts`.
 
 	Where They Should Go
 		To use the build scripts in your own Web site project, you should copy them from the =UIZE-JavaScript-Framework= root folder into the root folder of your project.
@@ -199,8 +199,8 @@ The Build Scripts
 		- the behavior of this build script is not affected by the values of the =buildFolderPath= and =sourceFolderName= build environment variables
 		- the summary info for this build script is output to the log file =_build-pages-from-simple-data.log=
 
-	Build Simple Doc Pages
-		The Build Simple Doc Pages build script (implemented in the file =_Uize.Build.BuildSimpleDocPages.js=) recurses through all folders of a Web site project, building pages from all the Simple Doc (=.simple=) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.
+	UIZE Site Build Simple Doc Pages
+		The UIZE Site Build Simple Doc Pages build script (implemented in the file =_UizeSite.Build.BuildSimpleDocPages.js=) recurses through all folders of the UIZE Web site project, building pages from all the Simple Doc (=.simple=) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.
 
 		Phases
 			This build script is made up of two phases...
@@ -215,7 +215,7 @@ The Build Scripts
 				javascript-build-scripts.simple --> PRODUCES --> javascript-build-scripts.html
 				..............................................................................
 
-				The summary info for this phase of the build script is output to the log file =_Uize.Build.BuildSimpleDocPages.log=.
+				The summary info for this phase of the build script is output to the log file =_UizeSite.Build.BuildSimpleDocPages.log=.
 
 			PHASE 2: Build Pages From Simple Doc in JavaScript Modules
 				An HTML reference documentation page is generated for each JavaScript module contained inside the modules folder.
@@ -227,7 +227,7 @@ The Build Scripts
 				js/~source/Uize.Widget.js --> PRODUCES --> reference/Uize.Widget.html
 				.....................................................................
 
-				The summary info for this phase of the build script is output to the log file =_Uize.Build.BuildSimpleDocPages-in-js-modules.log=.
+				The summary info for this phase of the build script is output to the log file =_UizeSite.Build.BuildSimpleDocPages-in-js-modules.log=.
 
 		For more information on Simple Doc - such as its rules on document structure, inline formatting, etc. - refer to the explainer [[javascript-documentation-system.html][JavaScript Documentation System]].
 
