@@ -26,7 +26,10 @@
 
 Uize.module ({
 	name:'UizeSite.Build.BuildJsModules',
-	required:'UizeSite.Build.File',
+	required:[
+		'UizeSite.Build.File',
+		'Uize.Services.FileSystem'
+	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
@@ -34,19 +37,29 @@ Uize.module ({
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
 				var
-					_modulesFolder = 'js',
-					_modules = UizeSite.Build.File.getJsModules (_params.sourcePath)
+					_urlsToBuild = [],
+					_modulesFolder = 'js'
 				;
-				_modules.push (
-					'UizeSite.ModulesTree',
-					'UizeSite.ExamplesInfoForSiteMap'
-				);
-				UizeSite.Build.File.perform (
-					Uize.copyInto (
-						{url:Uize.map (_modules.sort (),'"' + _modulesFolder + '/" + value + ".js"')},
-						_params
-					)
-				);
+
+				/*** add URLs for generated JavaScript modules ***/
+					_urlsToBuild.push (
+						_modulesFolder + '/UizeSite.ModulesTree.js',
+						_modulesFolder + '/UizeSite.Examples.js',
+						_modulesFolder + '/UizeSite.ExamplesInfoForSiteMap.js'
+					);
+
+				/*** add URLs for all JavaScript files (modules and otherwise) ***/
+					_urlsToBuild.push.apply (
+						_urlsToBuild,
+						Uize.Services.FileSystem.singleton ().getFiles ({
+							path:_params.sourcePath,
+							recursive:true,
+							pathMatcher:/\.js$/
+						})
+					);
+
+				/*** now build all the pages ***/
+					UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params));
 			};
 
 		return _package;
