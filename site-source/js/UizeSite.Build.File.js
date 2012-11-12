@@ -42,7 +42,7 @@
 
 		EXAMPLE USAGE
 		......................................................................................................
-		node _build.js UizeSite.Build.File url=reference/Uize.html sourcePath=site-source tempPath=site-temp builtPath=site-built freshBuild=true
+		node _build.js UizeSite.Build.File url=reference/Uize.html sourcePath=site-source tempPath=site-temp memoryPath=site-memory builtPath=site-built freshBuild=true
 		......................................................................................................
 
 		Parameters
@@ -1484,7 +1484,7 @@ Uize.module ({
 				});
 			};
 
-			_package.perform = function (_params) {
+			_package.perform = function (_params,_pathPrefix) {
 				_lastParams = Uize.copyInto ({},_params);
 				var _filesConsideredCurrentLookup = {};
 
@@ -1596,15 +1596,18 @@ Uize.module ({
 				_sourcePath = _params.sourcePath;
 				_tempPath = _params.tempPath;
 				_builtPath = _params.builtPath;
-				_memoryPath = 'memory';
+				_memoryPath = _params.memoryPath;
 				_isDev = _params.isDev == 'true';
 				_scrunchedHeadComments = _params.scrunchedHeadComments || {};
 
 				var _url = _params.url;
+				if (_pathPrefix == _undefined)
+					_pathPrefix = _builtPath + '/'
+				;
 				if (Uize.isArray (_url)) {
-					Uize.forEach (_url,function (_url) {_ensureFileCurrent (_builtPath + '/' + _url)});
+					Uize.forEach (_url,function (_url) {_ensureFileCurrent (_pathPrefix + _url)});
 				} else {
-					_ensureFileCurrent (_builtPath + '/' + _url);
+					_ensureFileCurrent (_pathPrefix + _url);
 				}
 				/*?
 					Static Methods
@@ -1634,6 +1637,8 @@ Uize.module ({
 									document...
 				*/
 			};
+
+			_package.readFile = _readFile;
 
 		return _package;
 	}

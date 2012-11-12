@@ -2,6 +2,7 @@
 	/*** for the newer build process ***/
 		builtPath:'site-built',
 		tempPath:'site-temp',
+		memoryPath:'site-memory',
 		sourcePath:'site-source',
 		isDev:'false',
 		scrunchedHeadComments:{
