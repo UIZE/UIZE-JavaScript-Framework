@@ -22,8 +22,6 @@
 		- add support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- build scripts that still need to be updated to trigger file building using this module...
 			- UizeSite.Build.BuildIndexPages.js
-			- UizeSite.Build.BuildSimpleDocPages.js
-			- Uize.Build.BuildSimpleDataPages.js
 			- UizeSite.Build.BuildStaticFiles.js -- MUST CREATE THIS ONE
 
 	- to improve

@@ -110,19 +110,24 @@ Uize.module ({
 					_this = this,
 					_result = [],
 					_path = _params.path,
-					_pathMatcher = _params.pathMatcher,
+					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
 					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
 					_recursive = _params.recursive
 				;
 				function _addItemsFromFolder (_subPath) {
-					var _pathPlusSubPath = _path + (_path && _subPath && '/') + _subPath;
+					var
+						_pathPlusSubPath = _path + (_path && _subPath && '/') + _subPath,
+						_currentItemPath
+					;
 					_result.push.apply (
 						_result,
 						_this._getItemsInFolder ({
 							path:_pathPlusSubPath,
-							pathMatcher:_pathMatcher,
+							pathMatcher:function (_itemPath) {
+								return _pathMatcher (_currentItemPath = _subPath + (_subPath && '/') + _itemPath);
+							},
 							pathTransformer:function (_itemPath) {
-								return _subPath + (_subPath && '/') + _pathTransformer (_itemPath);
+								return _pathTransformer (_currentItemPath);
 							}
 						})
 					);

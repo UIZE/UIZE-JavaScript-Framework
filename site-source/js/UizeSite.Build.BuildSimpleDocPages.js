@@ -54,7 +54,7 @@ Uize.module ({
 							path:_sourcePath,
 							recursive:true,
 							pathMatcher:_dotSimpleExtensionRegExp,
-							pathTransformer:function (_path) {return _path.replace (_dotSimpleExtensionRegExp,".html")}
+							pathTransformer:function (_path) {return _path.replace (_dotSimpleExtensionRegExp,'.html')}
 						})
 					);
 

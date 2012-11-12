@@ -29,57 +29,43 @@
 Uize.module ({
 	name:'Uize.Build.BuildSimpleDataPages',
 	required:[
-		'Uize.Wsh',
-		'Uize.Build.Util',
-		'Uize.Template',
-		'Uize.Data.Simple',
-		'Uize.Url'
+		'UizeSite.Build.File',
+		'Uize.Services.FileSystem'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
+			var _package = function () {};
+
+		/*** General Variables ***/
 			var
-				_package = function () {},
-				_Uize_Data_Simple_parse = Uize.Data.Simple.parse
+				_fileSystem = Uize.Services.FileSystem.singleton (),
+				_dotSimpledataExtensionRegExp = /\.simpledata$/
 			;
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
-				var
-					_currentFolderPath,
-					_buildFolderPath = _params.buildFolderPath,
-					_currentTargetFileName,
-					_simpleDataExtensionRegExp = /\.simpledata$/i
-				;
-				Uize.Wsh.buildFiles (
+				var _sourcePath = _params.sourcePath;
+
+				UizeSite.Build.File.perform (
 					Uize.copyInto (
 						{
-							targetFolderPathCreator:function (_folderPath) {
-								return Uize.Build.Util.resolveBuiltFolderPath (
-									_currentFolderPath = _folderPath,
-									_buildFolderPath
-								);
-							},
-							targetFilenameCreator:function (_sourceFileName) {
-								_currentTargetFileName = null;
-								if (_simpleDataExtensionRegExp.test (_sourceFileName)) {
-									_currentTargetFileName = _sourceFileName.replace (_simpleDataExtensionRegExp,'');
-									if (_currentTargetFileName.indexOf ('.') == -1)
-										_currentTargetFileName = null
-									;
-								}
-								return _currentTargetFileName;
-							},
-							fileBuilder:function (_sourceFileName,_sourceFileText) {
-								var _pageData = _Uize_Data_Simple_parse ({simple:_sourceFileText,collapseChildren:true});
-								return {
-									outputText:
-										Uize.Build.Util.compileJstFile (
-											_pageData.templatePath
-												? Uize.Url.toAbsolute (_currentFolderPath + '\\',_pageData.templatePath)
-												: _currentFolderPath + '\\' + _currentTargetFileName + '.jst'
-										) (_pageData)
-								};
-							}
+							url:_fileSystem.getFiles ({
+								path:_params.sourcePath,
+								recursive:true,
+								pathMatcher:function (_path) {
+									return (
+										_dotSimpledataExtensionRegExp.test (_path) &&
+											// path must end with .simpledata extension
+										/\.[^\.\\\/]+$/.test (_path.replace (_dotSimpledataExtensionRegExp,'')) &&
+											// path minus .simpledata extension must have a remaining real extension
+										_fileSystem.fileExists ({
+											path:_sourcePath + '/' + _path.replace (_dotSimpledataExtensionRegExp,'.jst')
+										})
+											// there must be a corresponding .jst template file
+									);
+								},
+								pathTransformer:function (_path) {return _path.replace (_dotSimpledataExtensionRegExp,'')}
+							})
 						},
 						_params
 					)
