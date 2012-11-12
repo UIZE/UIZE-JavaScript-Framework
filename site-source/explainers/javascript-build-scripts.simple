@@ -22,7 +22,7 @@ Introduction
 
 		The build script files are JavaScript files (with the =.js= extension) with names that all start with a "_" (underscore) character, as in...
 
-		- _Uize.Build.BuildSimpleDataPages.js (`Build Simple Data Pages`)
+		- _UizeSite.Build.BuildSimpleDataPages.js (`UIZE Site Build Simple Data Pages`)
 		- _UizeSite.Build.BuildSimpleDocPages.js (`UIZE Site Build Simple Doc Pages`)
 		- _Uize.Build.AutoScruncher.js (`Auto Scruncher`)
 		- _Uize.Build.AuditStrings.js (`Audit Strings`)
@@ -173,8 +173,8 @@ The Build Scripts
 		- the core of the intelligence of the Build JS Modules build script can be found in the =UizeSite.Build.BuildJsModules= module
 		- for more information on JavaScript template modules, consult the explainers [[javascript-templates.html][JavaScript Templates]] and [[javascript-modules.html][JavaScript Modules]]
 
-	Build Simple Data Pages
-		The Build Simple Data Pages build script (implemented in the file =_Uize.Build.BuildSimpleDataPages.js=) recurses through all folders of a Web site project, building pages from all the Simple Data (=.simpledata=) files that it finds.
+	UIZE Site Build Simple Data Pages
+		The UIZE Site Build Simple Data Pages build script (implemented in the file =_UizeSite.Build.BuildSimpleDataPages.js=) recurses through all folders of the UIZE Web site project, building pages from all the Simple Data (=.simpledata=) files that it finds.
 
 		Simple Data is a data file format that is even more human readable than XML (how could this even be possible!?!?) and that uses indentation to indicate structure (so, kind of like Python, but for data). This build script finds all these files and builds pages from them, by processing the data in each file using an accompanying JavaScript Template (=.jst=) file.
 
@@ -192,10 +192,10 @@ The Build Scripts
 
 			In the above example, the file =credits.html.simpledata= is the source Simple Data file, the file =credits.html.jst= is the JavaScript template that should be used for processing the data in the Simple Data file, and the file =credits.html= is the built file that contains the output of the template processing operation.
 
-			Based on this file naming principle, the desired file extension for the built file is put before the =.simpledata= and =.jst= extensions. This means that the Build Simple Data Pages build script can build any type of text file from Simple Data files it encounters, and, in fact, the UIZE Web site project uses it to build a few HTML pages as well as an RSS (=.rss=) file.
+			Based on this file naming principle, the desired file extension for the built file is put before the =.simpledata= and =.jst= extensions. This means that the UIZE Site Build Simple Data Pages build script can build any type of text file from Simple Data files it encounters, and, in fact, the UIZE Web site project uses it to build a few of its HTML pages.
 
 		NOTES
-		- the core of the intelligence of the Build Simple Data Pages build script can be found in the =Uize.Build.BuildSimpleDataPages= module
+		- the core of the intelligence of the UIZE Site Build Simple Data Pages build script can be found in the =UizeSite.Build.BuildSimpleDataPages= module
 		- the behavior of this build script is not affected by the values of the =buildFolderPath= and =sourceFolderName= build environment variables
 		- the summary info for this build script is output to the log file =_build-pages-from-simple-data.log=
 

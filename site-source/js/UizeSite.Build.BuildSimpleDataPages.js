@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Build.BuildSimpleDataPages Package
+|    /    O /   |    MODULE : UizeSite.Build.BuildSimpleDataPages Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2008-2012 UIZE
@@ -19,15 +19,15 @@
 
 /*?
 	Introduction
-		The =Uize.Build.BuildSimpleDataPages= package provides a method to recurse a folder structure and build pages from =.simpledata= files using =.jst= templates.
+		The =UizeSite.Build.BuildSimpleDataPages= package provides a method to recurse a folder structure and build pages from =.simpledata= files using =.jst= templates.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		The =Uize.Build.BuildSimpleDataPages= module is designed specifically to run in the context of Windows Script Host.
+		The =UizeSite.Build.BuildSimpleDataPages= module is designed specifically to run in the context of Windows Script Host.
 */
 
 Uize.module ({
-	name:'Uize.Build.BuildSimpleDataPages',
+	name:'UizeSite.Build.BuildSimpleDataPages',
 	required:[
 		'UizeSite.Build.File',
 		'Uize.Services.FileSystem'
