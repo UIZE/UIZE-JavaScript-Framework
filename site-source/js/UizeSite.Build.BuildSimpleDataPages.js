@@ -50,7 +50,7 @@ Uize.module ({
 					Uize.copyInto (
 						{
 							url:_fileSystem.getFiles ({
-								path:_params.sourcePath,
+								path:_sourcePath,
 								recursive:true,
 								pathMatcher:function (_path) {
 									return (
