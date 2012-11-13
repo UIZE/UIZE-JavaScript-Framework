@@ -153,6 +153,7 @@ function _eval (_toEval) {
 			Uize.require (
 				'Uize.Build.ServicesSetup',
 				function () {
+					Uize.Build.ServicesSetup.setup ();
 					if (_buildModuleName)
 						Uize.require (
 							_buildModuleName,
