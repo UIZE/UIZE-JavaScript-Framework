@@ -52,7 +52,7 @@ Uize.module ({
 		/*** Public Static Methods ***/
 			_package.resolveBuiltFolderPath = function (_folderPath,_buildFolderPath) {
 				var _rootPath = Uize.Wsh.getScriptFolderPath ();
-				return (_buildFolderPath && _rootPath + '\\' + _buildFolderPath) + _folderPath.substr (_rootPath.length);
+				return (_buildFolderPath && _rootPath + '/' + _buildFolderPath) + _folderPath.substr (_rootPath.length);
 			};
 
 			_package.getHtmlFileInfo = function (_filePath,_titleExtractor) {
@@ -115,7 +115,9 @@ Uize.module ({
 
 			_package.processJstFile = function (_jstTemplatePath,_input) {
 				var _template = _package.compileJstFile (_jstTemplatePath);
-				_template && Uize.Wsh.writeFile ({path:_jstTemplatePath.replace (/\.jst$/,''),text:_template (_input)});
+				_template &&
+					_fileSystem.writeFile ({path:_jstTemplatePath.replace (/\.jst$/,''),contents:_template (_input)})
+				;
 			};
 
 			_package.runScripts = function (_scripts) {
@@ -172,9 +174,9 @@ Uize.module ({
 								/*** finish up if the test fails or if unit tests complete ***/
 									if (_test == _unitTests || !_test.get ('result')) {
 										_silent || alert (_test.getSynopsis ());
-										Uize.Wsh.writeFile ({
+										_fileSystem.writeFile ({
 											path:WScript.ScriptName.replace (/\.js$/,'.log'),
-											text:_logChunks.join ('\n')
+											contents:_logChunks.join ('\n')
 										});
 										_test.get ('result') || WScript.Quit (1);
 									}
@@ -203,9 +205,9 @@ Uize.module ({
 			};
 
 			_package.writeDataModule = function (_moduleFolderPath,_moduleName,_moduleData) {
-				Uize.Wsh.writeFile ({
-					path:_moduleFolderPath + '\\' + _moduleName + '.js',
-					text:_package.dataAsModule (_moduleName,_moduleData)
+				_fileSystem.writeFile ({
+					path:_moduleFolderPath + '/' + _moduleName + '.js',
+					contents:_package.dataAsModule (_moduleName,_moduleData)
 				});
 			};
 
