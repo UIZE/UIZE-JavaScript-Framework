@@ -49,12 +49,14 @@ Uize.module ({
 					);
 
 				/*** add URLs for all JavaScript files (modules and otherwise) ***/
+					var _jsModuleExtensionRegExp = /\.js(\.jst)?$/;
 					_urlsToBuild.push.apply (
 						_urlsToBuild,
 						Uize.Services.FileSystem.singleton ().getFiles ({
 							path:_params.sourcePath,
 							recursive:true,
-							pathMatcher:/\.js$/
+							pathMatcher:_jsModuleExtensionRegExp,
+							pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
 						})
 					);
 
