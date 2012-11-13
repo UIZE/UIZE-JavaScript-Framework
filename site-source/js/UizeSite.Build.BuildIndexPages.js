@@ -75,8 +75,8 @@ Uize.module ({
 
 				/*** add URLs for other miscellaneous pages ***/
 					_urlsToBuild.push (
-						'index.html'//, // homepage
-						//'directory.html'
+						'index.html',
+						'directory.html'
 					);
 
 				/*** build examples index pages for each keyword ***/

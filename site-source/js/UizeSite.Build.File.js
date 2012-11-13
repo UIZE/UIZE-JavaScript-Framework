@@ -19,10 +19,25 @@
 
 /* TODO:
 	- to implement
-		- add support in factored out code for producing log output, so that built scripts can generate log files much like before
-		- build scripts that still need to be updated to trigger file building using this module...
-			- UizeSite.Build.BuildIndexPages.js
-			- UizeSite.Build.BuildStaticFiles.js -- MUST CREATE THIS ONE
+		- UizeSite.Build.BuildIndexPages.js
+			- finish up directory page
+		- get unit tests working in browser
+			- Uize.Services.FileSystemNode is causing tests to choke
+		- get build all with tests to work with tests run in source and scrunched modes
+		- get all unit test build scripts working again
+		- update site to link to download of UIZE from github
+		- update deploy script to deploy zip of built version of site
+		- merge source_vs_built_restructuring branch back into main
+		- deploy new site
+
+		- add announcement for changes to build process
+		- update Uize.Services.FileSystemNode to support running the unit tests with Node
+			- implement getFolders method
+			- implement recursive for getFiles
+		- get log output working again
+			- add support in factored out code for producing log output, so that built scripts can generate log files much like before
+		- document the Web server functionality (under dev section initially)
+		- document services model
 
 	- to improve
 		- UizeSite.SiteMap should dynamically reflect the following...

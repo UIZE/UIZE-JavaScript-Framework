@@ -71,7 +71,10 @@ Uize.module ({
 					function _perfTest (_title,_link) {return _item (_title,'tests/performance/',_link)}
 
 				/*** utilize the info from the UizeSite.ExamplesInfoForSiteMap module ***/
-					var _infoForSiteMap = UizeSite.ExamplesInfoForSiteMap ();
+					var _infoForSiteMap = UizeSite.ExamplesInfoForSiteMap () || {examples:[],tools:[]};
+						/* HACK:
+							to deal with the fact that in the build script context, the UizeSite.ExamplesInfoForSiteMap generated module is stubbed and doesn't return the actual examples data
+						*/
 
 					/*** build the examples submenu's items ***/
 						function _examplesByTheme (_tour) {
