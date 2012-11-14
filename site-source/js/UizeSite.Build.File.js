@@ -960,7 +960,7 @@ Uize.module ({
 							_pathname = _urlParts.pathname,
 							_librarySourcePath = _sourcePathFromBuiltPath (_pathname),
 							_inputs = {librarySource:_librarySourcePath},
-							_libraryFileContents = _fileSystem.readFile ({path:_librarySourcePath})
+							_libraryFileContents = _fileSystem.readFile ({path:_librarySourcePath}),
 							_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
 							_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
 							_moduleNo = -1
