@@ -21,8 +21,6 @@
 	- to implement
 		- UizeSite.Build.BuildIndexPages.js
 			- finish up directory page
-		- get unit tests working in browser
-			- Uize.Services.FileSystemNode is causing tests to choke
 		- get build all with tests to work with tests run in source and scrunched modes
 		- get all unit test build scripts working again
 		- update site to link to download of UIZE from github
