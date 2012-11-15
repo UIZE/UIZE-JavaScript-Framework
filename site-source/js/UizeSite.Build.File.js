@@ -83,7 +83,7 @@ Uize.module ({
 		'Uize.Date',
 		'Uize.Services.FileSystem',
 		'Uize.Doc.Simple',
-		'Uize.Templates.JstModule',
+		'Uize.Template.Module',
 		'Uize.Data.Simple',
 		'Uize.Doc.Sucker',
 		'Uize.Util.Oop',
@@ -1291,13 +1291,10 @@ Uize.module ({
 					},
 					builder:function (_inputs) {
 						var _jstSource = _inputs.jstSource;
-						return Uize.Templates.JstModule.process ({
-							moduleName:Uize.Url.from (_jstSource).file.replace (_jsJstRegExp,''),
-							compiledTemplate:Uize.Template.compile (
-								_fileSystem.readFile ({path:_jstSource}),
-								{result:'full'}
-							)
-						});
+						return Uize.Template.Module.buildTemplateModuleText (
+							Uize.Url.from (_jstSource).file.replace (_jsJstRegExp,''),
+							_fileSystem.readFile ({path:_jstSource})
+						);
 					}
 				});
 

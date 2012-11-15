@@ -3791,7 +3791,7 @@
 			*/
 		};
 
-		var _globalEval = _package.globalEval = new _Function ('toEval','return eval (toEval)');
+		_package.globalEval = new _Function ('toEval','return eval (toEval)');
 			/*?
 				Static Methods
 					Uize.globalEval
@@ -4093,7 +4093,10 @@
 					function (_module) {
 						if (_modulesAlreadyInvoked [_module] != _trueFlag) {
 							_modulesAlreadyInvoked [_module] = _trueFlag;
-							_package.moduleLoader (_module,function (_moduleCode) {_moduleCode && _globalEval (_moduleCode)})
+							_package.moduleLoader (
+								_module,
+								function (_moduleCode) {_moduleCode && Uize.globalEval (_moduleCode)}
+							)
 						}
 					}
 				);

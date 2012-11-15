@@ -107,47 +107,48 @@ function _eval (_toEval) {
 
 		/*** load Uize base class and set up with module loader ***/
 			function _moduleLoader (_moduleToLoad,_callback) {
+				var _moduleText = '';
 				if (env.modulesToStub && env.modulesToStub.test (_moduleToLoad)) {
-					_callback ('Uize.module ({name:\'' + _moduleToLoad + '\'})');
-					return;
+					_moduleText = 'Uize.module ({name:\'' + _moduleToLoad + '\'})';
+				} else {
+					var _modulePath = env.moduleFolderPath;
+					if (!_useSource) {
+						var
+							_sourceFolderName = env.sourceFolderName || '',
+							_sourceFolderNameLength = _sourceFolderName.length,
+							_buildFolderPath = env.buildFolderPath
+						;
+						if (_sourceFolderNameLength && _modulePath.slice (-_sourceFolderNameLength) == _sourceFolderName)
+							_modulePath = _modulePath.slice (0,-_sourceFolderNameLength - 1)
+						;
+						if (_buildFolderPath)
+							_modulePath = _buildFolderPath + '/' + _modulePath
+						;
+					}
+					if (_fileExists (_modulePath += '/' + _moduleToLoad + '.js')) {
+						_moduleText = _readFile (_modulePath);
+					} else if (_fileExists (_modulePath + '.jst')) {
+						Uize.require (
+							'Uize.Template.Module',
+							function (_Uize_Template_Module) {
+								_moduleText = _Uize_Template_Module.buildTemplateModuleText (
+									_moduleToLoad,
+									_readFile (_modulePath + '.jst')
+								);
+							}
+						);
+					}
 				}
-				var _modulePath = env.moduleFolderPath;
-				if (!_useSource) {
-					var
-						_sourceFolderName = env.sourceFolderName || '',
-						_sourceFolderNameLength = _sourceFolderName.length,
-						_buildFolderPath = env.buildFolderPath
-					;
-					if (_sourceFolderNameLength && _modulePath.slice (-_sourceFolderNameLength) == _sourceFolderName)
-						_modulePath = _modulePath.slice (0,-_sourceFolderNameLength - 1)
-					;
-					if (_buildFolderPath)
-						_modulePath = _buildFolderPath + '\\' + _modulePath
-					;
-				}
-				if (_fileExists (_modulePath += '\\' + _moduleToLoad + '.js')) {
-					_eval (_readFile (_modulePath));
-				} else if (_fileExists (_modulePath + '.jst')) {
-					Uize.require (
-						'Uize.Template',
-						function (_Uize_Template) {
-							var _compiledTemplate = _Uize_Template.compile (_readFile (_modulePath + '.jst'),{result:'full'});
-							Uize.module ({
-								name:_moduleToLoad,
-								required:_compiledTemplate.required,
-								builder:function () {
-									var _package = function () {};
-									_package.process = new Function ('input',_compiledTemplate.code); 
-									_package.input = _compiledTemplate.input; 
-									return _package;
-								}
-							});
-						}
-					);
-				}
-				_callback ();
+				_callback (_moduleText);
 			}
-			_moduleLoader ('Uize',function (_uizeCode) {Uize.moduleLoader = _moduleLoader});
+			_moduleLoader (
+				'Uize',
+				function (_uizeCode) {
+					_eval (_uizeCode);
+					Uize.globalEval = _eval; // this actually *needs* to be overridden for the NodeJS context
+					Uize.moduleLoader = _moduleLoader;
+				}
+			);
 
 		/*** services setup & run build module (if specified) ***/
 			Uize.require (

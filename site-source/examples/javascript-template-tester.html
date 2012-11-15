@@ -103,7 +103,7 @@ Uize.module ({
 		'Uize.Json',
 		'Uize.String.Lines',
 		'Uize.Template',
-		'Uize.Templates.JstModule'
+		'Uize.Template.Module'
 	],
 	builder:function () {
 		/*** create a page widget subclass ***/
@@ -122,10 +122,10 @@ Uize.module ({
 							);
 							page.setNodeValue (
 								'jstModule',
-								Uize.Templates.JstModule.process ({
-									moduleName:'YourNamespace.Templates.YourTemplateName',
-									compiledTemplate:compiledTemplate
-								})
+								Uize.Template.Module.buildTemplateModuleText (
+									'YourNamespace.Templates.YourTemplateName',
+									this.sourceCode
+								)
 							);
 						}
 					}
