@@ -22,14 +22,11 @@
 		The =Uize.Build.Util= package provides various utility methods to facilitate building of pages for a Web site project.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		The =Uize.Build.Util= module is designed specifically to run in the context of Windows Script Host.
 */
 
 Uize.module ({
 	name:'Uize.Build.Util',
 	required:[
-		'Uize.Wsh',
 		'Uize.Url',
 		'Uize.Template',
 		'Uize.Data.Simple',
@@ -50,11 +47,6 @@ Uize.module ({
 			;
 
 		/*** Public Static Methods ***/
-			_package.resolveBuiltFolderPath = function (_folderPath,_buildFolderPath) {
-				var _rootPath = Uize.Wsh.getScriptFolderPath ();
-				return (_buildFolderPath && _rootPath + '/' + _buildFolderPath) + _folderPath.substr (_rootPath.length);
-			};
-
 			_package.getHtmlFileInfo = function (_filePath,_titleExtractor) {
 				var
 					_fileText = _fileSystem.readFile ({path:_filePath}),

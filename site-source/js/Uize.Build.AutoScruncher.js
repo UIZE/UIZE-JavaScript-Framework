@@ -42,6 +42,11 @@ Uize.module ({
 			var _package = function () {};
 
 		/*** Public Static Methods ***/
+			_package.resolveBuiltFolderPath = function (_folderPath,_buildFolderPath) {
+				var _rootPath = Uize.Wsh.getScriptFolderPath ();
+				return (_buildFolderPath && _rootPath + '/' + _buildFolderPath) + _folderPath.substr (_rootPath.length);
+			};
+
 			_package.getScrunchedFolderPath = function (_folderPath,_buildFolderPath,_sourceFolderName) {
 				var _sourceFolderNameLength = _sourceFolderName ? _sourceFolderName.length : 0;
 				return (
