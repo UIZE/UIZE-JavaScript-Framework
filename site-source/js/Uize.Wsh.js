@@ -45,40 +45,6 @@ Uize.module ({
 			}
 
 		/*** Public Static Methods ***/
-			_package.getFiles = function (_folderPath,_filePathMatcher,_filePathTransformer) {
-				var _resolvedFilePathMatcher = _filePathMatcher == _undefined
-					? Uize.returnTrue
-					: _filePathMatcher instanceof RegExp
-						? function (_filePath) {return _filePathMatcher.test (_filePath)}
-						: _filePathMatcher
-				;
-				if (_filePathTransformer == _undefined)
-					_filePathTransformer = function (_filePath) {return _filePath}
-				;
-				var
-					_result = [],
-					_files = new Enumerator (_getFileSystemObject ().getFolder (_folderPath).files),
-					_filePath
-				;
-				while (!_files.atEnd ()) {
-					_resolvedFilePathMatcher (_filePath = _files.item ().Path) &&
-						_result.push (_filePathTransformer (_filePath))
-					;
-					_files.moveNext ();
-				}
-				return _result;
-				/*?
-					Static Methods
-						Uize.Wsh.getFiles
-							Returns an array, being a listing of the files contained inside the specified folder, where each element of the array is a string representing the path for a file.
-
-							SYNTAX
-							...................................................
-							filePathsARRAY = Uize.Wsh.getFiles (folderPathSTR);
-							...................................................
-				*/
-			};
-
 			var _getScriptFolderPath = _package.getScriptFolderPath = function () {
 				return WScript.ScriptFullName.slice (0,-WScript.ScriptName.length - 1);
 				/*?
