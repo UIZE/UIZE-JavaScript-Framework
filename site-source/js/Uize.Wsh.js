@@ -45,20 +45,6 @@ Uize.module ({
 			}
 
 		/*** Public Static Methods ***/
-			_package.fileExists = function (_filePath) {
-				return _getFileSystemObject ().FileExists (_filePath);
-				/*?
-					Static Methods
-						Uize.Wsh.fileExists
-							Return a boolean, indicating whether or not the file at the specified path exists.
-
-							SYNTAX
-							...................................................
-							fileExistsBOOL = Uize.Wsh.fileExists (filePathSTR);
-							...................................................
-				*/
-			};
-
 			_package.getFiles = function (_folderPath,_filePathMatcher,_filePathTransformer) {
 				var _resolvedFilePathMatcher = _filePathMatcher == _undefined
 					? Uize.returnTrue
