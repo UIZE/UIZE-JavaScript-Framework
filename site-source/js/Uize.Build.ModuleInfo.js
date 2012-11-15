@@ -26,7 +26,7 @@
 
 Uize.module ({
 	name:'Uize.Build.ModuleInfo',
-	required:'Uize.Wsh',
+	required:'Uize.Services.FileSystem',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var
@@ -38,11 +38,8 @@ Uize.module ({
 				_forEach = Uize.forEach
 			;
 
-		/*** Utility Functions ***/
-			function _readModuleFile (_moduleName) {
-				/* TODO: this should be migrated into a new Uize.Build.Utils module as Uize.Build.Utils.readModuleFile */
-				return Uize.Wsh.readFile (env.moduleFolderPath + '\\' + _moduleName + '.js');
-			}
+		/*** General Variables ***/
+			var _fileSystem = Uize.Services.FileSystem.singleton ();
 
 		/*** Public Static Methods ***/
 			_package.getDefinitionFromCode = function (_moduleCode) {
@@ -55,7 +52,18 @@ Uize.module ({
 			};
 
 			_package.getDefinition = function (_moduleName) {
-				return _package.getDefinitionFromCode (_readModuleFile (_moduleName));
+				var _definition = {name:_moduleName};
+				if (_moduleName != 'Uize') {
+					try {
+						Uize.moduleLoader (
+							_moduleName,
+							function (_moduleText) {_definition = _package.getDefinitionFromCode (_moduleText)}
+						);
+					} catch (_error) {
+						// if a module cannot be loaded because it is missing, ignore it
+					}
+				}
+				return _definition;
 			};
 
 			var _getDirectDependencies = _package.getDirectDependencies = function (_moduleName) {
