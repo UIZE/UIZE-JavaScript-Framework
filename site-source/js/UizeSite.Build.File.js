@@ -22,7 +22,7 @@
 		- UizeSite.Build.BuildIndexPages.js
 			- finish up directory page
 		- get build all with tests to work with tests run in source and scrunched modes
-		- get all unit test build scripts working again
+		- get unit tests working in scrunched mode (ie. get build scripts runnable with scrunched code)
 		- update site to link to download of UIZE from github
 		- update deploy script to deploy zip of built version of site
 		- merge source_vs_built_restructuring branch back into main

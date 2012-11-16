@@ -133,7 +133,7 @@ Uize.module ({
 				return _error;
 			};
 
-			_package.runUnitTests = function (_unitTestsClass,_silent) {
+			_package.runUnitTests = function (_unitTestsClass,_silent,_logFilePath) {
 				function _runUnitTests (_unitTestsClass) {
 					var
 						_unitTests = new _unitTestsClass,
@@ -166,10 +166,9 @@ Uize.module ({
 								/*** finish up if the test fails or if unit tests complete ***/
 									if (_test == _unitTests || !_test.get ('result')) {
 										_silent || alert (_test.getSynopsis ());
-										_fileSystem.writeFile ({
-											path:WScript.ScriptName.replace (/\.js$/,'.log'),
-											contents:_logChunks.join ('\n')
-										});
+										_logFilePath &&
+											_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
+										;
 										_test.get ('result') || WScript.Quit (1);
 									}
 							}

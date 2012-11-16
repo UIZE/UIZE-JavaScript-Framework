@@ -102,6 +102,42 @@ function _eval (_toEval) {
 				};
 			}
 
+		/*** miscellaneous global JavaScript functions (to mirror what's available in the browser context) ***/
+			if (_isWsh) {
+				function _popup (_message,_title,_buttonsAndIconMask) {
+					return (
+						(_popup._wscriptShell || (_popup._wscriptShell = new ActiveXObject ('wscript.shell'))).Popup (
+							_message + '',
+							0, // seconds to wait before auto-dismissing (0 = stay open forever)
+							_title,
+							_buttonsAndIconMask
+						)
+					);
+				}
+				alert = function (_message) {
+					_popup (_message,'Windows Script Host Alert',0 | 48 /* 0 = ok button only, 48 = warning icon */);
+				};
+				confirm = function (_message) {
+					return _popup (
+						_message,
+						'Please Confirm...',
+						1 | 32 /* 1 = ok and cancel, 32 = question mark icon */
+					) == 1;
+				};
+				/* TO DO:
+					for prompt, try to figure out how to use VBSCRIPT's InputBox built-in function
+						http://wsh2.uw.hu/ch08c.html
+
+					Function WSHInputBox(Message, Title, Value)
+						WSHInputBox = InputBox(Message, Title, Value)
+					End Function
+				*/
+			} else {
+				alert = function (_message) {
+					console.log (_message);
+				};
+			}
+
 		/*** load build environment properties ***/
 			(function () {return this}) ().env = eval ('(' + _readFile ('_build-env.json') + ')');
 
