@@ -31,6 +31,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined = undefined,
+				_true = true,
 				_false = false
 			;
 
@@ -78,6 +79,27 @@ Uize.module ({
 				}
 			};
 
+			_classPrototype._getFolderItems = function (_params,_mustBeFolder) {
+				var
+					_this = this,
+					_path = _params.path,
+					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
+					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
+					_result = [],
+					_subPathPrefix = _path.replace (/[\\\/]+$/g,'')
+				;
+				_subPathPrefix += _subPathPrefix && '/';
+				Uize.forEach (
+					this._fileSystem.readdirSync (_path),
+					function (_itemSubPath) {
+						if (_this._pathExists (_subPathPrefix + _itemSubPath,_mustBeFolder) && _pathMatcher (_itemSubPath))
+							_result.push (_pathTransformer (_itemSubPath))
+						;
+					}
+				);
+				return _result;
+			};
+
 		/*** Public Instance Methods ***/
 			_classPrototype.copyFile = function (_params,_callback) {
 				var
@@ -109,21 +131,11 @@ Uize.module ({
 			};
 
 			_classPrototype.getFiles = function (_params,_callback) {
-				var
-					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
-					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
-					_result = []
-				;
-				Uize.forEach (
-					this._fileSystem.readdirSync (_params.path),
-					function (_filePath) {_pathMatcher (_filePath) && _result.push (_pathTransformer (_filePath))}
-				);
-				_callback (_result);
+				_callback (this._getFolderItems (_params,_false));
 			};
 
 			_classPrototype.getFolders = function (_params,_callback) {
-				// TODO: IMPLEMENT!!!
-				_callback ();
+				_callback (this._getFolderItems (_params,_true));
 			};
 
 			_classPrototype.readFile = function (_params,_callback) {
