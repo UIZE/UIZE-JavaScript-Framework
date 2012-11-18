@@ -48,6 +48,7 @@
 		doNotEnter:/\\(css|images|OLD|photos|Uize.*)$/,
 		dryRun:false,
 		moduleFolderPath:'site-source/js',
+		moduleFolderBuiltPath:'site-built/js',
 		sourceFolderName:''
 }
 

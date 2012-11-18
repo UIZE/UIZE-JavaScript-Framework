@@ -147,21 +147,10 @@ function _eval (_toEval) {
 				if (env.modulesToStub && env.modulesToStub.test (_moduleToLoad)) {
 					_moduleText = 'Uize.module ({name:\'' + _moduleToLoad + '\'})';
 				} else {
-					var _modulePath = env.moduleFolderPath;
-					if (!_useSource) {
-						var
-							_sourceFolderName = env.sourceFolderName || '',
-							_sourceFolderNameLength = _sourceFolderName.length,
-							_buildFolderPath = env.buildFolderPath
-						;
-						if (_sourceFolderNameLength && _modulePath.slice (-_sourceFolderNameLength) == _sourceFolderName)
-							_modulePath = _modulePath.slice (0,-_sourceFolderNameLength - 1)
-						;
-						if (_buildFolderPath)
-							_modulePath = _buildFolderPath + '/' + _modulePath
-						;
-					}
-					if (_fileExists (_modulePath += '/' + _moduleToLoad + '.js')) {
+					var _modulePath =
+						(_useSource ? env.moduleFolderPath : env.moduleFolderBuiltPath) + '/' + _moduleToLoad + '.js'
+					;
+					if (_fileExists (_modulePath)) {
 						_moduleText = _readFile (_modulePath);
 					} else if (_fileExists (_modulePath + '.jst')) {
 						Uize.require (
