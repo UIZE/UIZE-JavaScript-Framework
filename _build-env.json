@@ -31,15 +31,15 @@
 		buildFolderPath:'site-built',
 		rootFolderPath:'site-source',
 		buildSequence:[
-			'_UizeSite.Build.BuildStaticPages.js',
-			'_UizeSite.Build.BuildJsModules.js',
-			'_UizeSite.Build.BuildWidgetPages.js',
-			'_UizeSite.Build.BuildSimpleDocPages.js',
-			'_UizeSite.Build.BuildIndexPages.js',
-			'_UizeSite.Build.BuildSimpleDataPages.js',
-			'_UizeSite.Build.BuildPagesFromSourceCode.js',
-			'_UizeSite.Build.BuildSotu.js',
-			'_UizeSite.Build.BuildCodeSitemap.js'
+			'UizeSite.Build.BuildStaticPages',
+			'UizeSite.Build.BuildJsModules',
+			'UizeSite.Build.BuildWidgetPages',
+			'UizeSite.Build.BuildSimpleDocPages',
+			'UizeSite.Build.BuildIndexPages',
+			'UizeSite.Build.BuildSimpleDataPages',
+			'UizeSite.Build.BuildPagesFromSourceCode',
+			'UizeSite.Build.BuildSotu',
+			'UizeSite.Build.BuildCodeSitemap'
 		],
 		testSequence:[
 			'_Uize.Build.RunUnitTests-source.js silent=true',

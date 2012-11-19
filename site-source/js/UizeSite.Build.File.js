@@ -34,6 +34,7 @@
 		- document services model
 
 	- to improve
+		- improve performance of the build-all script by providing a way for the _filesConsideredCurrentLookup lookup to persist across calls to the UizeSite.Build.File.perform method
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
