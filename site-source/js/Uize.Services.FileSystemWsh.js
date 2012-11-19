@@ -95,13 +95,19 @@ Uize.module ({
 			};
 
 			_classPrototype.getModifiedDate = function (_params,_callback) {
-				// TODO: IMPLEMENT!!!
-				_callback ();
+				var
+					_path = _params.path,
+					_fileSystemObject = this._fileSystemObject
+				;
+				_callback (_fileSystemObject.FileExists (_path) ? _fileSystemObject.GetFile (_path).DataLastModified : NaN);
 			};
 
 			_classPrototype.pathExists = function (_params,_callback) {
-				// TODO: IMPLEMENT!!!
-				_callback ();
+				var
+					_path = _params.path,
+					_fileSystemObject = this._fileSystemObject
+				;
+				_callback (_fileSystemObject.FileExists (_path) || _fileSystemObject.FolderExists (_path));
 			};
 
 			_classPrototype.getFolders = function (_params,_callback) {
