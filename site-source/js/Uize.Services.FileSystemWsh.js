@@ -26,7 +26,7 @@
 
 Uize.module ({
 	name:'Uize.Services.FileSystemWsh',
-	superclass:'Uize.Service.Adapter',
+	superclass:'Uize.Services.FileSystemAdapter',
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
 			var
@@ -35,9 +35,7 @@ Uize.module ({
 			;
 
 		/*** Utility Functions ***/
-			function _getParentFolderPath (_path) {
-				return _path.slice (0,((_path.lastIndexOf ('/') + 1) || 1) - 1);
-			}
+			var _getParentFolderPath = _class.getParentFolderPath;
 
 		/*** Private Instance Methods ***/
 			_classPrototype._makeFolder = function (_path) {
@@ -57,7 +55,8 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._getItemsInFolder = function (_params,_itemIsFolder) {
+		/*** Overridden Extensibility Methods ***/
+			_classPrototype.getItemsInFolder = function (_params,_itemIsFolder) {
 				var
 					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
 					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
@@ -105,45 +104,8 @@ Uize.module ({
 				_callback ();
 			};
 
-			_classPrototype.getFiles = function (_params,_callback) {
-				var
-					_this = this,
-					_result = [],
-					_path = _params.path,
-					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
-					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
-					_recursive = _params.recursive
-				;
-				function _addItemsFromFolder (_subPath) {
-					var
-						_pathPlusSubPath = _path + (_path && _subPath && '/') + _subPath,
-						_currentItemPath
-					;
-					_result.push.apply (
-						_result,
-						_this._getItemsInFolder ({
-							path:_pathPlusSubPath,
-							pathMatcher:function (_itemPath) {
-								return _pathMatcher (_currentItemPath = _subPath + (_subPath && '/') + _itemPath);
-							},
-							pathTransformer:function (_itemPath) {
-								return _pathTransformer (_currentItemPath);
-							}
-						})
-					);
-					if (_recursive) {
-						Uize.forEach (
-							_this._getItemsInFolder ({path:_pathPlusSubPath},true),
-							function (_folderName) {_addItemsFromFolder (_subPath + (_subPath && '/') + _folderName)}
-						);
-					}
-				}
-				_addItemsFromFolder ('');
-				_callback (_result);
-			};
-
 			_classPrototype.getFolders = function (_params,_callback) {
-				_callback (this._getItemsInFolder (_params,true));
+				_callback (this.getItemsInFolder (_params,true));
 			};
 
 			_classPrototype.readFile = function (_params,_callback) {

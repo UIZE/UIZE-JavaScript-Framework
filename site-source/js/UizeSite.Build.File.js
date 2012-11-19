@@ -21,8 +21,8 @@
 	- to implement
 		- UizeSite.Build.BuildIndexPages.js
 			- finish up directory page
-		- get build all with tests to work with tests run in source and scrunched modes
-		- update site to link to download of UIZE from github
+		- update the getting started documentation
+			- provide build instructions for WSH and NodeJS
 		- update deploy script to deploy zip of built version of site
 		- merge source_vs_built_restructuring branch back into main
 		- deploy new site
@@ -30,9 +30,6 @@
 		- add announcement for changes to build process
 		- get log output working again
 			- add support in factored out code for producing log output, so that built scripts can generate log files much like before
-		- update Uize.Services.FileSystemNode to support running all the build scripts with Node
-			- implement getFolders method
-			- implement recursive for getFiles
 		- document the Web server functionality (under dev section initially)
 		- document services model
 

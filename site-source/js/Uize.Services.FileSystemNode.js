@@ -26,7 +26,7 @@
 
 Uize.module ({
 	name:'Uize.Services.FileSystemNode',
-	superclass:'Uize.Service.Adapter',
+	superclass:'Uize.Services.FileSystemAdapter',
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var
@@ -42,9 +42,7 @@ Uize.module ({
 			;
 
 		/*** Utility Functions ***/
-			function _getParentFolderPath (_path) {
-				return _path.slice (0,((_path.lastIndexOf ('/') + 1) || 1) - 1);
-			}
+			var _getParentFolderPath = _class.getParentFolderPath;
 
 		/*** Private Instance Methods ***/
 			_classPrototype._pathExists = function (_path,_mustBeFolder) {
@@ -79,7 +77,8 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._getFolderItems = function (_params,_mustBeFolder) {
+		/*** Overridden Extensibility Methods ***/
+			_classPrototype.getItemsInFolder = function (_params,_mustBeFolder) {
 				var
 					_this = this,
 					_path = _params.path,
@@ -130,12 +129,8 @@ Uize.module ({
 				_callback (this._pathExists (_params.path));
 			};
 
-			_classPrototype.getFiles = function (_params,_callback) {
-				_callback (this._getFolderItems (_params,_false));
-			};
-
 			_classPrototype.getFolders = function (_params,_callback) {
-				_callback (this._getFolderItems (_params,_true));
+				_callback (this.getItemsInFolder (_params,_true));
 			};
 
 			_classPrototype.readFile = function (_params,_callback) {
