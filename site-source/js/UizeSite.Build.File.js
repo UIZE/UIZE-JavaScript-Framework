@@ -290,7 +290,7 @@ Uize.module ({
 										return {
 											title:_widget.title,
 											path:_widgetsToGoPath + _widgetTitleUrlized + '.html',
-											imageSrc:'../images/widgets/' + _widgetTitleUrlized + '-96x96.gif',
+											imageSrc:'images/widgets/' + _widgetTitleUrlized + '-96x96.gif',
 											description:_widget.description.short
 										};
 									}
