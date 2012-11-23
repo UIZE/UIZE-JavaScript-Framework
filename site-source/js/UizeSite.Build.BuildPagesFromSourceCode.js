@@ -14,7 +14,7 @@
 	importance: 1
 	codeCompleteness: 100
 	testCompleteness: 100
-	docCompleteness: 100
+	docCompleteness: 30
 */
 
 /*?
