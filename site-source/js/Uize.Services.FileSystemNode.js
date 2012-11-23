@@ -113,6 +113,11 @@ Uize.module ({
 				_callback ();
 			};
 
+			_classPrototype.deleteFile = function (_params,_callback) {
+				/* TODO: implement this method */
+				_callback ();
+			};
+
 			_classPrototype.fileExists = function (_params,_callback) {
 				_callback (this._pathExists (_params.path,_false));
 			};

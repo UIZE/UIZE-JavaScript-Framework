@@ -59,6 +59,23 @@ Uize.module ({
 										document...
 					*/
 				},
+				deleteFile:{
+					async:_false
+					/*?
+						Instance Methods
+							deleteFile
+								document...
+
+								SYNTAX
+								........................................
+								fileSystemInstance.copyFile (paramsOBJ);
+								........................................
+
+								Params
+									path
+										document...
+					*/
+				},
 				fileExists:{
 					async:_false
 					/*?

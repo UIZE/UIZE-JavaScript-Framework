@@ -90,6 +90,15 @@ Uize.module ({
 				_callback ();
 			};
 
+			_classPrototype.deleteFile = function (_params,_callback) {
+				try {
+					this._fileSystemObject.DeleteFile (_params.path);
+				} catch (_error) {
+					// do nothing for now
+				}
+				_callback ();
+			};
+
 			_classPrototype.fileExists = function (_params,_callback) {
 				_callback (this._fileSystemObject.FileExists (_params.path));
 			};
