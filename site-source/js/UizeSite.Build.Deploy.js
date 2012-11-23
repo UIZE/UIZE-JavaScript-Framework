@@ -100,7 +100,7 @@ Uize.module ({
 
 					/*** create uize-site-built.zip, and create dated copy in archives ***/
 						Uize.Wsh.execute (
-							'"' + _deployConfig.appPaths ['7-Zip'] + '" a uize-site-built.zip UIZE-JavaScript-Framework/site-built'
+							'"' + _deployConfig.appPaths ['7-Zip'] + '" a uize-site-built.zip site-built -r'
 						);
 
 					/*** FTP zip archive to Web site ***/
@@ -120,9 +120,9 @@ Uize.module ({
 								'rm uize-site-built.zip',
 								'rm *.* .htaccess',
 								'rm -r appendixes css examples explainers images javascript-reference js news reference tests widgets widgetstogo',
-								'mv UIZE-JavaScript-Framework/site-built/* ~',
-								'mv UIZE-JavaScript-Framework/site-built/.htaccess ~/.htaccess',
-								'rm -r UIZE-JavaScript-Framework'
+								'mv site-built/* ~',
+								'mv site-built/.htaccess ~/.htaccess',
+								'rm -rf site-built'
 							]
 						);
 
