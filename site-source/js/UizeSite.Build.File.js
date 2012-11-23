@@ -19,12 +19,8 @@
 
 /* TODO:
 	- to implement
-		- UizeSite.Build.BuildIndexPages.js
-			- finish up directory page
 		- update the getting started documentation
 			- provide build instructions for WSH and NodeJS
-		- update deploy script to deploy zip of built version of site
-			- ideally, get deploy script to be able to work in NodeJS as well, but this will be hard as there is currently a reliance on system specific services like FTP and SSH
 		- merge source_vs_built_restructuring branch back into main
 		- deploy new site
 		- get the build all script working with running the unit tests in NodeJS
@@ -46,6 +42,7 @@
 			- possibly provide a way for the _filesConsideredCurrentLookup lookup to persist across calls to the UizeSite.Build.File.perform method
 
 	- to improve
+		- eventually, get deploy script to be able to work in NodeJS as well, but this will be hard as there is currently a reliance on system specific services like FTP and SSH
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
@@ -102,7 +99,8 @@ Uize.module ({
 		'Uize.Array.Sort',
 		'Uize.Data.PathsTree',
 		'Uize.String.Lines',
-		'Uize.Data.Matches'
+		'Uize.Data.Matches',
+		'UizeSite.SiteMap'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -704,10 +702,19 @@ Uize.module ({
 						return _urlParts.pathname == _builtPath + '/directory.html';
 					},
 					builderInputs:function (_urlParts) {
-						return {template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'};
+						return {
+							modulesTree:_memoryPath +'/modules-tree',
+							examplesInfoForSiteMap:_memoryPath +'/examples-info-for-sitemap',
+							template:_memoryPathFromBuiltPath (_urlParts.pathname) + '.jst'
+						};
 					},
 					builder:function (_inputs) {
-						return _readFile ({path:_inputs.template}) ();
+						return _readFile ({path:_inputs.template}) ({
+							siteMap:UizeSite.SiteMap ({
+								modulesTree:_readFile ({path:_inputs.modulesTree}),
+								examplesInfo:_readFile ({path:_inputs.examplesInfoForSiteMap})
+							})
+						});
 					}
 				});
 
@@ -794,6 +801,27 @@ Uize.module ({
 					}
 				});
 
+			/*** handler for in-memory examples-info-for-sitemap object ***/
+				_registerUrlHandler ({
+					description:'In-memory examples-info-for-sitemap object',
+					urlMatcher:function (_urlParts) {
+						return _urlParts.pathname == _memoryPath +'/examples-info-for-sitemap';
+					},
+					builderInputs:function () {
+						return {examplesByKeyword:_memoryPath + '/examples-by-keyword'};
+					},
+					builder:function (_inputs) {
+						var _examplesByKeyword = _readFile ({path:_inputs.examplesByKeyword});
+						return {
+							keywords:Uize.Data.Matches.values (
+								Uize.keys (_examplesByKeyword),
+								'value && value.slice (0,4) != "Uize"'
+							).sort (),
+							tools:Uize.map (_examplesByKeyword.tool,'{title:value.title,path:value.path}')
+						};
+					}
+				});
+
 			/*** handler for generated UizeSite.ExamplesInfoForSiteMap module under temp ***/
 				var _examplesInfoForSiteMapModuleName = 'UizeSite.ExamplesInfoForSiteMap';
 				_registerUrlHandler ({
@@ -802,19 +830,12 @@ Uize.module ({
 						return _urlParts.pathname == _tempPath +'/js/' + _examplesInfoForSiteMapModuleName + '.js';
 					},
 					builderInputs:function () {
-						return {examplesByKeyword:_memoryPath + '/examples-by-keyword'};
+						return {examplesInfoForSiteMap:_memoryPath +'/examples-info-for-sitemap'};
 					},
 					builder:function (_inputs) {
-						var _examplesByKeyword = _readFile ({path:_inputs.examplesByKeyword});
 						return Uize.Build.Util.dataAsModule (
 							_examplesInfoForSiteMapModuleName,
-							{
-								keywords:Uize.Data.Matches.values (
-									Uize.keys (_examplesByKeyword),
-									'value && value.slice (0,4) != "Uize"'
-								).sort (),
-								tools:Uize.map (_examplesByKeyword.tool,'{title:value.title,path:value.path}')
-							}
+							_readFile ({path:_inputs.examplesInfoForSiteMap})
 						);
 					}
 				});

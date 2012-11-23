@@ -25,7 +25,7 @@
 
 		EXAMPLE USAGE
 		......................................................................................................
-		node _build.js UizeSite.Build.WebServer sourcePath=site-source tempPath=site-temp builtPath=site-built freshBuild=true
+		node _build.js UizeSite.Build.WebServer sourcePath=site-source tempPath=site-temp builtPath=site-built freshBuild=true isDev=true
 		......................................................................................................
 
 		Parameters

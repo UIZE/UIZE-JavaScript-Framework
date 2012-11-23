@@ -24,8 +24,8 @@ Uize.module ({
 	],
 	builder:function () {
 		var _data;
-		return function () {
-			if (!_data) {
+		return function (_overrides) {
+			if (!_data || _overrides) {
 				var _divider = {title:'-'};
 
 				/*** build the modules reference items from the modules tree data ***/
@@ -53,7 +53,7 @@ Uize.module ({
 						;
 						return _item;
 					}
-					var _modulesReferenceItem = _buildModuleItem ('','',UizeSite.ModulesTree ());
+					var _modulesReferenceItem = _buildModuleItem ('','',_overrides.modulesTree || UizeSite.ModulesTree ());
 					_modulesReferenceItem.title = 'Module Reference';
 					_modulesReferenceItem.link = 'javascript-modules-index.html';
 
@@ -71,10 +71,7 @@ Uize.module ({
 					function _perfTest (_title,_link) {return _item (_title,'tests/performance/',_link)}
 
 				/*** utilize the info from the UizeSite.ExamplesInfoForSiteMap module ***/
-					var _infoForSiteMap = UizeSite.ExamplesInfoForSiteMap () || {examples:[],tools:[]};
-						/* HACK:
-							to deal with the fact that in the build script context, the UizeSite.ExamplesInfoForSiteMap generated module is stubbed and doesn't return the actual examples data
-						*/
+					var _infoForSiteMap = _overrides.examplesInfo || UizeSite.ExamplesInfoForSiteMap ();
 
 					/*** build the examples submenu's items ***/
 						function _examplesByTheme (_tour) {
