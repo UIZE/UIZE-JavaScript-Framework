@@ -24,8 +24,17 @@
 		- update the getting started documentation
 			- provide build instructions for WSH and NodeJS
 		- update deploy script to deploy zip of built version of site
+			- ideally, get deploy script to be able to work in NodeJS as well, but this will be hard as there is currently a reliance on system specific services like FTP and SSH
 		- merge source_vs_built_restructuring branch back into main
 		- deploy new site
+		- get the build all script working with running the unit tests in NodeJS
+			- must have way to run scripts (so, a new service module that abstracts process capabilities?)
+
+		- update the following final scripts to be able to work in NodeJS
+			- Uize.Build.AuditStrings
+			- Uize.Build.NeatenJsFiles
+			- Uize.Build.UpdateCopyrightNotices
+			- implement new Uize.Build.Util.BuildFiles module by porting across buildFiles method from Uize.Wsh
 
 		- add announcement for changes to build process
 		- get log output working again
@@ -33,12 +42,15 @@
 		- document the Web server functionality (under dev section initially)
 		- document services model
 
+		- improve performance of the build-all script
+			- possibly provide a way for the _filesConsideredCurrentLookup lookup to persist across calls to the UizeSite.Build.File.perform method
+
 	- to improve
-		- improve performance of the build-all script by providing a way for the _filesConsideredCurrentLookup lookup to persist across calls to the UizeSite.Build.File.perform method
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
 		- improve performance of SOTU
+			- Possibly don't require building of reference documentation for modules in order to get description. Instead, just do parsing of simple doc structure, but without the HTML generation. Then refactor code to have a .info handler specifically for modules, and that has a dependency on the parsed simple doc data, and refactor the module reference handler to use a different process than Uize.Doc.Sucker.toDocument or refactor the Uize.Doc.Sucker.toDocument method to be able to take in a simple data object as well.
 		- refactor code to cache in memory the SimpleDoc parsed out of the modules
 			- this will allow descriptions to be obtained for the modules without actually building the HTML reference pages, and these descriptions will be used by the SOTU
 		- implement ability to store memory results to file system in json form, with ability to read after restarting server
