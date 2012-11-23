@@ -32,16 +32,22 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
-				_undefined
+				_undefined,
+				_wshShell,
+				_fileSystemObject
 			;
 
 		/*** Utility Functions ***/
 			function _getFileSystemObject (_params) {
 				return (
-					(typeof _params == 'object' && _params && _params.fileSystemObject) ||
-					_package._fileSystemObject ||
-					(_package._fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject'))
+					(_params && _params.fileSystemObject) ||
+					_fileSystemObject ||
+					(_fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject'))
 				);
+			}
+
+			function _getWshShell () {
+				return _wshShell || (_wshShell = new ActiveXObject ('WScript.Shell'));
 			}
 
 		/*** Public Static Methods ***/
@@ -312,6 +318,10 @@ Uize.module ({
 								NOTES
 								- If no =logFileName= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the filename for the log file will be derived from the filename of the build script, with the ".js" file extension replaced with the extension ".log".
 				*/
+			};
+
+			_package.execute = function (_command) {
+				_getWshShell ().Run (_command,0,true);
 			};
 
 		return _package;

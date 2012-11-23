@@ -12,12 +12,21 @@ Join the Online Users' Group
 	The official [[http://groups.google.com/group/uize][UIZE JavaScript Framework Group]] is the place where developers can discuss ways that they're using UIZE in their own projects. Join up so you can get support, give support, learn tips and tricks, show off your cool projects built on UIZE, and generally get involved in the discussion on all things UIZE. [[http://groups.google.com/group/uize][JOIN NOW]]
 
 Unzip the Archive
-	Locate the =uize.zip= archive file that you downloaded (probably on your desktop) and unzip it (probably by double-clicking on it).
+	Locate the archive file that you downloaded (probably on your desktop) and unzip it (probably by double-clicking on it).
 
-	Extract the contents of the =uize.zip= archive to your desktop, or any other desired location. You'll end up with a =UIZE-JavaScript-Framework= folder that contains a local copy of the =uize.com= Web site.
+	Extract the contents of the archive to a folder on your desktop, or any other desired location. You'll end up with a =UIZE-JavaScript-Framework-master= folder that contains a local copy of the UIZE JavaScript source code along with the source code for the =uize.com= Web site.
+
+Build the Web Site
+	The UIZE [[../download.html][download]] contains only the source code for the framework, so the site needs to be built you can work with the scrunched files and hack the example pages.
+
+	The Web site can be built very easily, either using Windows Script Host in Windows, or using NodeJS on any operating system.
+
+	Windows
+
+	Mac OS & Linux
 
 Copy the JavaScript Files
-	To use UIZE in a Web site project, you should copy the =js= folder from the =UIZE-JavaScript-Framework= folder to a desired location in your project's folder.
+	To use UIZE in a Web site project, you should copy the =js= folder from the =site-built= folder (created under the =UIZE-JavaScript-Framework-master= folder by the [[Build the Web Site][build process]]) to a desired location in your project's folder.
 
 	What If I Already Have a "js" Folder?
 		If you already have a folder named "js" and don't wish to interfere with its contents, you can choose to copy the =UIZE-JavaScript-Framework= folder's "js" folder to your Web site project under a different name, like "uize_js" or whatever makes the most sense for you.
