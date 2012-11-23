@@ -43,10 +43,12 @@ Uize.module ({
 
 				/*** add URLs for index pages for modules, examples, examples by module, explainers, and widgets ***/
 					_urlsToBuild.push (
+						'appendixes.html',
 						'javascript-explainers.html',
 						'javascript-examples.html',
 						'javascript-examples-by-module.html',
 						'javascript-modules-index.html',
+						'javascript-reference.html',
 						'javascript-widgets.html'
 					);
 
