@@ -28,7 +28,7 @@
 
 Uize.module ({
 	name:'Uize.Build.UpdateCopyrightNotices',
-	required:'Uize.Wsh',
+	required:'Uize.Build.Util',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
@@ -42,7 +42,7 @@ Uize.module ({
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
 				var _thisYear = (new Date).getFullYear ();
-				Uize.Wsh.buildFiles (
+				Uize.Build.Util.buildFiles (
 					Uize.copyInto (
 						{
 							targetFolderPathCreator:function (_folderPath) {
@@ -54,15 +54,19 @@ Uize.module ({
 							fileBuilder:function (_sourceFileName,_sourceFileText) {
 								var _copyrightNoticeMatch = _sourceFileText.match (_copyrightNoticeRegExp);
 								if (_copyrightNoticeMatch) {
-									var
-										_oldCopyrightNotice = _copyrightNoticeMatch [0],
-										_endYearMatch = _oldCopyrightNotice.match (_copyrightNoticeEndYearRegExp),
-										_newCopyrightNotice = _endYearMatch
-											? _oldCopyrightNotice.replace (_copyrightNoticeEndYearRegExp,'$1' + _thisYear)
-											: _oldCopyrightNotice + '-' + _thisYear,
-										_updatedaSourceFileText =
-											_sourceFileText.replace (_oldCopyrightNotice,_newCopyrightNotice)
-									;
+									var _oldCopyrightNotice = _copyrightNoticeMatch [0];
+									if (_oldCopyrightNotice == '(c)' + _thisYear) {
+										_copyrightNoticeMatch = null;
+									} else {
+										var
+											_endYearMatch = _oldCopyrightNotice.match (_copyrightNoticeEndYearRegExp),
+											_newCopyrightNotice = _endYearMatch
+												? _oldCopyrightNotice.replace (_copyrightNoticeEndYearRegExp,'$1' + _thisYear)
+												: _oldCopyrightNotice + '-' + _thisYear,
+											_updatedaSourceFileText =
+												_sourceFileText.replace (_oldCopyrightNotice,_newCopyrightNotice)
+										;
+									}
 								}
 								return (
 									_copyrightNoticeMatch &&
