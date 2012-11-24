@@ -58,7 +58,6 @@ Uize.module ({
 									: 'BUILD ALL COMPLETE!!! (duration: ' + Math.round ((Uize.now () - _startTime) / 1000) + 's)'
 							)
 						;
-						_buildError && WScript.Quit (1);
 					}
 				);
 			};
