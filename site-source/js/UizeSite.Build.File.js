@@ -22,15 +22,7 @@
 		- update the getting started documentation
 			- provide build instructions for WSH and NodeJS
 
-		- merge source_vs_built_restructuring branch back into main
-
 		- add announcement for changes to build process
-
-		- update the following final scripts to be able to work in NodeJS
-			- Uize.Build.AuditStrings
-			- Uize.Build.NeatenJsFiles
-			- Uize.Build.UpdateCopyrightNotices
-			- implement new Uize.Build.Util.BuildFiles module by porting across buildFiles method from Uize.Wsh
 
 		- get the build all script working with running the unit tests in NodeJS
 			- must have way to run scripts (so, a new service module that abstracts process capabilities?)
