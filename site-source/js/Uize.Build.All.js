@@ -44,7 +44,7 @@ Uize.module ({
 							_buildSequence,
 							function (_buildModuleName) {
 								eval (_buildModuleName).perform (
-									Uize.copyInto ({},_params,{logFileName:'_' + _buildModuleName + '.log'})
+									Uize.copyInto ({},_params,{logFilePath:'logs/' + _buildModuleName + '.log'})
 								);
 							}
 						);

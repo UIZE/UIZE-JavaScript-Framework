@@ -185,7 +185,7 @@ function _eval (_toEval) {
 							_buildModuleName,
 							function (_buildModule) {
 								_buildModule.perform (
-									Uize.copyInto ({},env,{logFileName:'_' + _buildModuleName + '.log'},_params)
+									Uize.copyInto ({},env,{logFilePath:'logs/' + _buildModuleName + '.log'},_params)
 								);
 							}
 						)

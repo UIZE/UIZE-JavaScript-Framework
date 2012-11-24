@@ -80,7 +80,7 @@ Uize.module ({
 						)
 					})
 				;
-				Uize.Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true',_params.logFileName);
+				Uize.Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true',_params.logFilePath);
 			};
 
 		return _package;

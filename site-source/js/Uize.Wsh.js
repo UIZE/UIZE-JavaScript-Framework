@@ -245,7 +245,7 @@ Uize.module ({
 				}
 				_processFolder (_params.rootFolderPath || _getScriptFolderPath ());
 				_writeFile ({
-					path:_params.logFileName || _buildScriptName.replace (/\.js$/,'.log'),
+					path:_params.logFilePath || _buildScriptName.replace (/\.js$/,'.log'),
 					text:_logChunks.join ('')
 				});
 				/*?
@@ -264,7 +264,7 @@ Uize.module ({
 								alwaysBuild:alwaysBuildBOOL,                          // optional
 								doNotEnter:doNotEnterARRAYorREGEXP,                   // optional
 								fileSystemObject:fileSystemObjectOBJ,                 // optional
-								logFileName:logFileNameSTR                            // optional
+								logFilePath:logFilePathSTR                            // optional
 							});
 							....................................................................
 
@@ -310,13 +310,13 @@ Uize.module ({
 							fileSystemObject
 								An optional object reference, specifying an instance of the =Scripting.FileSystemObject= control that should be used in file I/O operations. An instance can be created with the statement =new ActiveXObject ('Scripting.FileSystemObject')=. When no =fileSystemObject= parameter is specified, then a file system object will be created as needed to serve the needs of the build process.
 
-							logFileName
+							logFilePath
 								An optional string, specifying the filename of a file within the same folder as the build script that should be used for writing out the log of the build process.
 
 								Basic information is automatically placed into the log file by the =Uize.Wsh.buildFiles= method, but additional information for each built file can be added by returning text for the optional =logDetails= property of your =fileBuilder= function's return object.
 
 								NOTES
-								- If no =logFileName= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the filename for the log file will be derived from the filename of the build script, with the ".js" file extension replaced with the extension ".log".
+								- If no =logFilePath= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the filename for the log file will be derived from the filename of the build script, with the ".js" file extension replaced with the extension ".log".
 				*/
 			};
 

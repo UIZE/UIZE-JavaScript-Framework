@@ -72,7 +72,7 @@ Uize.module ({
 					Uize.Wsh.buildFiles (
 						Uize.copyInto (
 							{
-								logFileName:_buildScriptName.replace (_endsWithDotJsRegExp,'-js-files.log'),
+								logFilePath:_buildScriptName.replace (_endsWithDotJsRegExp,'-js-files.log'),
 								targetFolderPathCreator:_targetFolderPathCreator,
 								targetFilenameCreator:function (_sourceFileName) {
 									return _endsWithDotJsRegExp.test (_sourceFileName) ? _sourceFileName : null;
@@ -205,7 +205,7 @@ Uize.module ({
 							_params,
 							{
 								alwaysBuild:true,
-								logFileName:_buildScriptName.replace (_endsWithDotJsRegExp,'-libraries.log')
+								logFilePath:_buildScriptName.replace (_endsWithDotJsRegExp,'-libraries.log')
 							}
 						)
 					);
