@@ -42,24 +42,6 @@ Uize.module ({
 			var _package = function () {};
 
 		/*** Public Static Methods ***/
-			_package.resolveBuiltFolderPath = function (_folderPath,_buildFolderPath) {
-				var _rootPath = Uize.Wsh.getScriptFolderPath ();
-				return (_buildFolderPath && _rootPath + '/' + _buildFolderPath) + _folderPath.substr (_rootPath.length);
-			};
-
-			_package.getScrunchedFolderPath = function (_folderPath,_buildFolderPath,_sourceFolderName) {
-				var _sourceFolderNameLength = _sourceFolderName ? _sourceFolderName.length : 0;
-				return (
-					_sourceFolderNameLength
-						? (
-							_folderPath.slice (-_sourceFolderNameLength) == _sourceFolderName
-								? _folderPath.slice (0,-_sourceFolderNameLength - 1)
-								: null
-						)
-						: _package.resolveBuiltFolderPath (_folderPath,_buildFolderPath)
-				);
-			};
-
 			_package.perform = function (_params) {
 				var
 					_buildDate = Uize.Date.toIso8601 (),
@@ -68,13 +50,21 @@ Uize.module ({
 					_scrunchedHeadComments = _params.scrunchedHeadComments || {},
 					_scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 					_currentFolderPath,
-					_fullModuleFolderPath = Uize.Wsh.getScriptFolderPath () + '\\' + _params.moduleFolderPath
+					_buildFolderPath = _params.buildFolderPath,
+					_sourceFolderName = _params.sourceFolderName,
+					_rootPath = Uize.Wsh.getScriptFolderPath (),
+					_fullModuleFolderPath = _rootPath + '\\' + _params.moduleFolderPath
 				;
 				function _targetFolderPathCreator (_folderPath) {
-					return _package.getScrunchedFolderPath (
-						_currentFolderPath = _folderPath,
-						_params.buildFolderPath,
-						_params.sourceFolderName
+					var _sourceFolderNameLength = _sourceFolderName ? _sourceFolderName.length : 0;
+					return (
+						_sourceFolderNameLength
+							? (
+								_folderPath.slice (-_sourceFolderNameLength) == _sourceFolderName
+									? _folderPath.slice (0,-_sourceFolderNameLength - 1)
+									: null
+							)
+							: _buildFolderPath && _rootPath + '/' + _buildFolderPath + _folderPath.substr (_rootPath.length)
 					);
 				}
 
