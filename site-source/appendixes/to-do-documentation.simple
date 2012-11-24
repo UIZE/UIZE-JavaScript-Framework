@@ -1,5 +1,11 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
+JavaScript Services
+	Create an explainer to explain the approach UIZE takes to services.
+
+Update the Getting Started Documentation
+	Update the Getting Started explainer to have build instructions for WSH and NodeJS, now that only the source code is downloaded in the ZIP archive.
+
 Issues With Auto-generated Documentation
 	Function Type Static Properties Regarded as Static Methods
 		Static properties whose values are functions are regarded as static methods.
@@ -182,17 +188,6 @@ Migrate Modules Into Deeper Namespaces
 	Uize.Xml         ->  ???
 	.........................................................
 
-Possible New Namespaces
-	* Uize.Math
-	- Uize.Web (or Uize.Browser? or Uize.Html? or Uize.WebBrowser? or Uize.Wb? or Uize.Www?)
-
-Code to Factor Out
-	Code to factor out of widget classes into non-Web specific modules...
-
-	- =Uize.Widget.ImagePort= - pure rectangle scaling math should be factored out into a new =Uize.Math.RectScaler= module
-	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.String.Population= module (or =Uize.Template.Population=?)
-	- =Uize.Widget.Tree= - model stuff for the data structure that represents a tree (=Uize.Data.Tree=?)
-
 Upcoming Releases
 	- loop optimization approaches
 		- finish loop optimization approaches performance test...
@@ -296,17 +291,6 @@ Improved Location of Source Code
 		- users can search only source code, or only documents
 		- UIZE developers can search within examples folder without also searching in source-code child folder by default
 
-Uize.Minimal.library.js
-	.........................................................
-	Uize.Fade
-	Uize.Node
-	Uize.Url
-	Uize.Tooltip
-	Uize.Comm
-	Uize.Comm.Ajax
-	Uize.Widget
-	.........................................................
-
 For Framework Developers
 	Documentation Style Guide
 		- first paragraph at root of document, or first paragraph of first section of document should be no more than 150 characters (excluding SimpleDoc formatting characters). This is because this paragraph is used as the value for the meta description tag. In this paragraph, make careful use of words, with the mind to maximizing the value of the description. This is the first opporunity that the reader will have to glean what the document is discussing. Sum it all up, ideally, in a single sentence, touching on key themes that will capture the reader's attention and interest. This paragraph has to make a case for reading the document.
@@ -391,7 +375,6 @@ New Explainers
 
 Search on Selected Text
 	- for any content document, pop open search pop-up when selecting text (as long as text is not more than a certain max length, and does not contain linebreaks -- must make sure that this feature wouldn't be annoying, so perhaps only for documentation pages? Don't want to confuse this search feature with normal interaction with form fields).
-
 
 Explainer: JavaScript Localization
 	default localized strings (could be English)
@@ -505,10 +488,10 @@ Explainer: JavaScript Modules
 
 	Document Inner Classes
 		Document the pattern of creating inner classes.
-	
+
 		Private Inner Classes
 			Push dependencies of inner class(es) into =required= list of host class or module.
-	
+
 			EXAMPLE
 			..................................................................
 			Uize.module ({
@@ -521,19 +504,19 @@ Explainer: JavaScript Modules
 					/*** create the inner class ***/
 						var _MyInnerClass = MySite.Widget.subclass ();
 						// code here to further create the inner class
-	
+
 					/*** build the class ***/
 						// code here to build the main class for the module
 				}
 			});
 			..................................................................
-	
+
 		Public Inner Classes
 			Don't do them, because they're too problematic.
-	
+
 		Can't Have Inner Subclasses
 			Because the inner subclass would require the host module as its base class, and it would not be built before trying to declare the module for the inner subclass.
-	
+
 Miscellaneous
 	Novel map Method
 		...............................................................

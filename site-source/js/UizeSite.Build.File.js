@@ -19,18 +19,9 @@
 
 /* TODO:
 	- to implement
-		- update the getting started documentation
-			- provide build instructions for WSH and NodeJS
-
-		- add announcement for changes to build process
-
-		- get the build all script working with running the unit tests in NodeJS
-			- must have way to run scripts (so, a new service module that abstracts process capabilities?)
-
 		- get log output working again
 			- add support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- document the Web server functionality (under dev section initially)
-		- document services model
 
 		- get character encoding declared at the top of every HTML document
 
@@ -38,11 +29,11 @@
 			- possibly provide a way for the _filesConsideredCurrentLookup lookup to persist across calls to the UizeSite.Build.File.perform method
 
 	- to improve
-		- eventually, get deploy script to be able to work in NodeJS as well, but this will be hard as there is currently a reliance on system specific services like FTP and SSH
+		- for manageability of the code, figure out an elegant way to be able to have separate file handlers (or sets of handlers) as separate modules
 		- UizeSite.SiteMap should dynamically reflect the following...
 			- the news-by-year index pages
 			- the JavaScript reference pages
-		- improve performance of SOTU
+		- improve performance of SOTU handler
 			- Possibly don't require building of reference documentation for modules in order to get description. Instead, just do parsing of simple doc structure, but without the HTML generation. Then refactor code to have a .info handler specifically for modules, and that has a dependency on the parsed simple doc data, and refactor the module reference handler to use a different process than Uize.Doc.Sucker.toDocument or refactor the Uize.Doc.Sucker.toDocument method to be able to take in a simple data object as well.
 		- refactor code to cache in memory the SimpleDoc parsed out of the modules
 			- this will allow descriptions to be obtained for the modules without actually building the HTML reference pages, and these descriptions will be used by the SOTU

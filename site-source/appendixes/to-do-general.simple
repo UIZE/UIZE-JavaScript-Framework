@@ -1,5 +1,16 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[to-do-documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[to-do-modules.html][TO DO - Modules]]).
 
+Possible New Namespaces
+	* Uize.Math
+	- Uize.Web (or Uize.Browser? or Uize.Html? or Uize.WebBrowser? or Uize.Wb? or Uize.Www?)
+
+Code to Factor Out
+	Code to factor out of widget classes into non-Web specific modules...
+
+	- =Uize.Widget.ImagePort= - pure rectangle scaling math should be factored out into a new =Uize.Math.RectScaler= module
+	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.String.Population= module (or =Uize.Template.Population=?)
+	- =Uize.Widget.Tree= - model stuff for the data structure that represents a tree (=Uize.Data.Tree=?)
+
 Separate Source Code From Built Code
 	Update all the build scripts and the site deploy script so that the built code is separated out from the source code.
 
