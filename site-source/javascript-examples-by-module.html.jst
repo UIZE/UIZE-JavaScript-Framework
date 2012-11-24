@@ -1,0 +1,120 @@
+<%@
+	required (['Uize.Templates.List','Uize.String']);
+	input ({examples:'array'});
+%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>JavaScript Examples, By Module | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework"/>
+	<meta name="description" content="A directory of the JavaScript example pages on the UIZE JavaScript Framework, organized by the primary JavaScript module that they showcase."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="css/page.css"/>
+	<link rel="stylesheet" href="css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
+	JavaScript Examples, By Module
+</h1>
+
+<%
+	function _spliceInItem (_items,_itemToSpliceIn) {
+		var
+			_itemToSpliceInHasItems = !!_itemToSpliceIn.items,
+			_itemToSpliceInTitleLowerCase = _itemToSpliceIn.title.toLowerCase ()
+		;
+		for (var _itemNo = -1, _itemsLength = _items.length, _item; ++_itemNo < _itemsLength;) {
+			var _itemHasItems = !!(_item = _items [_itemNo]).items;
+			if (
+				(_itemToSpliceInHasItems && !_itemHasItems) ||
+				(
+					_itemToSpliceInHasItems == _itemHasItems &&
+					_itemToSpliceInTitleLowerCase < _item.title.toLowerCase ()
+				)
+			)
+				break
+			;
+		}
+		_items.splice (_itemNo,0,_itemToSpliceIn);
+	}
+	var
+		_examples = input.examples,
+		_treeItems = []
+	;
+	for (
+		var _exampleNo = -1, _examplesLength = _examples.length, _example, _keywordsStr;
+		++_exampleNo < _examplesLength;
+	) {
+		if (_keywordsStr = (_example = _examples [_exampleNo]).keywords) {
+			var _keywords = _keywordsStr.split (' ');
+			for (var _keywordNo = -1, _keywordsLength = _keywords.length, _moduleName; ++_keywordNo < _keywordsLength;) {
+				if (Uize.String.startsWith (_moduleName = _keywords [_keywordNo],'Uize')) {
+					var _modulesTreeNodeItems = _treeItems;
+					for (
+						var
+							_moduleNameDelimPos = -1,
+							_moduleNameLength = _moduleName.length,
+							_moduleNamePart,
+							_moduleNamePartItem
+						;
+						_moduleNameDelimPos < _moduleNameLength;
+					) {
+						(
+							_moduleNamePartItem = Uize.findRecord (
+								_modulesTreeNodeItems,
+								{
+									title:
+										_moduleNamePart = _moduleName.slice (
+											0,
+											_moduleNameDelimPos = (
+												_moduleName.indexOf ('.',_moduleNameDelimPos + 1) + 1 ||
+												_moduleNameLength + 1
+											) - 1
+										)
+								}
+							)
+						) ||
+							_spliceInItem (_modulesTreeNodeItems,_moduleNamePartItem = {title:_moduleNamePart,items:[]})
+						;
+						_modulesTreeNodeItems = _moduleNamePartItem.items;
+					}
+					_spliceInItem (
+						_modulesTreeNodeItems,
+						{
+							title:_example.title,
+							link:_example.path,
+							description:_example.description
+						}
+					);
+				}
+			}
+		}
+	}
+%><div class="main">
+	<div class="preamble">This document provides a directory of the JavaScript example pages on the UIZE JavaScript Framework, organized by the primary JavaScript module that they showcase.</div>
+	<div id="page_contents" class="contents-tree-shell">
+<%= Uize.Templates.List.process ({items:[{title:'Examples (organized by module)',items:_treeItems}]}) %>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:'UizeSite.Page.Doc.library',
+	builder:function () {
+		(window.page = UizeSite.Page.Doc ()).wireUi ();
+
+		page.children.contents.collapseAllBut (['Examples (organized by module)','Uize']);
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,353 @@
+Introduction
+	This document provides guidelines and advice for the development of new UIZE modules, to be followed by developers of the UIZE JavaScript Framework.
+
+What Type of Module Are You Creating?
+	The first step in creating a new UIZE module is to decide what type of module you are creating.
+
+	Depending on your needs, you may wish to create a class module, a package module, an extension module, a namespace module, a library module, etc. If you need a refresher on modules, what's inside them, how they're loaded, the different types, etc., refer back to the [[javascript-modules.html][JavaScript Modules]] explainer.
+
+	Creating Widget Modules
+		If you're creating a new widget, then you'll be creating a class module, where the class is either a direct subclass of the =Uize.Widget= base class, or is a subclass of some other existing widget class.
+
+Name Your Module
+	Your new UIZE module needs a name, of course, and naming your module requires you to `Find the Appropriate Namespace` and `Choose a Name`.
+
+	Find the Appropriate Namespace
+		All modules of the UIZE JavaScript Framework must exist somewhere under the =Uize= namespace.
+
+		When choosing the namespace for your new UIZE module, keep in mind the following considerations and conventions...
+
+		Avoid Using the Uize Root Namespace
+			When adding a new module to the UIZE JavaScript Framework, avoid adding it directly under the =Uize= root namespace if this can at all be avoided.
+
+			Before placing a module into the =Uize= root namespace, exhaust all other options discussed in the sections below. There is usually a better place to put a module than directly under =Uize=. Generally, modules directly under the =Uize= root namespace should either be incredibly important and essential, or they should defined namespaces that are likely to grow into substantial subtrees in the module hierarchy (consider the examples of the =Uize.Templates=, =Uize.Test=, and =Uize.Widget= namespaces).
+
+		Namespace for Extension Modules
+			Extension modules always exist in the namespace of the module they extend.
+
+			For example, the =Uize.Fade.xFactory= extension module extends the =Uize.Fade= class, therefore it is placed directly under the =Uize.Fade= namespace. Similarly, the =Uize.Color.xHsv= extension module extends the =Uize.Color= object, so it is placed directly under that namespace.
+
+		Namespace for Class Modules
+			Class modules often, but do not have to, exist under the namespace of the classes that they subclass.
+
+			For example, the =Uize.Widget.Bar= module defines a class that is a subclass of the =Uize.Widget= class, so it is placed under that namespace. Similarly, the =Uize.Widget.Bar.Slider= module defines a class that is a subclass of the =Uize.Widget.Bar= class, so it is placed under that namespace, and so on.
+
+			There are times when this general rule is deviated from, such as when class modules are placed under `Namespaces for Areas of Functionality`, rather than directly under the namespace of the class that they subclass. An example of this is the =Uize.Util.Coupler= module. This module defines the =Uize.Util.Coupler= class, which is a subclass of the =Uize.Class= base class - *not* a subclass of =Uize.Util=. The =Uize.Util= module merely defines a namespace that serves as a place to group / organize various utility type modules. The modules under this namespace may be any =type= of module.
+
+		Namespaces for Areas of Functionality
+			Certain dedicated namespaces exist for grouping / organization modules according to their area of functionality, such as, for example, the =Uize.Color=, =Uize.Data=, and =Uize.Util= modules.
+
+			Namespace Modules Can Define Classes or Objects
+				In some cases, a module that defines a namespace for an area of functionality also defines a class or object.
+
+				For example, the =Uize.Color= module defines the =Uize.Color= object, but also provides a namespace for additional modules that provide color related functionality.
+
+			Namespace Modules Can Define Packages
+				In some cases, a module that defines a namespace for an area of functionality also defines a package that offers a base level of functionality in the form of static methods, and expects other modules under that namespace to offer additional related functionality.
+
+				An example of this is the =Uize.Data= module, which contains a number of basic methods that are useful when dealing with data structures. Other modules under the =Uize.Data= namespace, such as the =Uize.Data.Csv= and =Uize.Data.NameValueRecords= modules, provide more advanced or more specific functionality, but which is still centered around dealing with data structures.
+
+			Namespace Modules Can Be Purely Namespaces
+				In some cases, a module that defines a namespace for an area of functionality does nothing more than define a namespace, with the expectation that modules under that namespace will provide the functionality.
+
+				Examples of this are the =Uize.Templates= and =Uize.Util= modules, which only define namespaces and provide no actual functionality themselves.
+
+		Namespaces for Package Modules
+			When adding a new package module to the UIZE JavaScript Framework, first consider the general rule `Avoid Using the Uize Root Namespace`, and then try to use one of the already established `Namespaces for Areas of Functionality` as a place to house your new module.
+
+			Package modules that provide additional more advanced or more esoteric functionality can exist under the namespace of a module that offers related but more basic functionality. For example, the =Uize.Data.Csv= package module was added under the =Uize.Data= namespace, because it also offers data-related functionality. Another example is the =Uize.Node.VirtualEvent= package module, which offers additional node-related functionality. Extending this approach even further, the =Uize.Node.VirtualEvent.Edge= package module was added under the =Uize.Node.VirtualEvent= namespace, because the =Uize.Node.VirtualEvent.Edge= module provides additional virtual event related functionality. And, this module actually directly requires the =Uize.Node.VirtualEvent= module for features that it provides. So, in the absence of class inheritance, a namespace hierarchy can be established around the dependency relationships and a sensible layering of functionality.
+
+		Namespace for Test Modules
+			All test modules that test regular / non-test modules of the UIZE JavaScript Framework are placed within the =Uize.Test= namespace.
+
+			The namespace hierarchy for test modules mirrors the namespace hierarchy of regular / non-test modules (see the section `Unit Test Module` for more info). The inheritance pattern is not the same, however. For example, the =Uize.Widget.Bar= module would define a subclass of =Uize.Widget=, but the =Uize.Test.Uize.Widget.Bar= module *would not* define a subclass of =Uize.Test.Uize.Widget=, since all test modules define subclasses of the =Uize.Test= base class.
+
+		Namespace for JavaScript Template Modules
+			All JavaScript template modules added to the UIZE JavaScript Framework should be placed somewhere within the =Uize.Templates= namespace.
+
+			While JavaScript template modules merely define packages and not classes, template modules *can* potentially extend on other template modules. For example, a certain flavor of dialog HTML template may build upon the HTML generated by a basic dialog HTML template. In such cases, the specific dialog template module could be placed under the namespace of the more general dialog template module, and it would then be coded to require the general dialog template module and would use that module in generating its output.
+
+	Choose a Name
+		Once you `Find the Appropriate Namespace` for your new UIZE module, you will need to decide the name of the property of that namespace object that will reference your module.
+
+		For example, with the module =Uize.Data.Csv=, the =Uize.Data= module is the namespace, and the property =Csv= of that namespace object is a reference to the module named =Uize.Data.Csv=. If you're placing your new module under a namespace that already has a number of other modules under it, you'll need to come up with a name for a property that doesn't conflict with other properties already on the namespace object. By convention, property names for modules always begin with a capital letter, with the exception of extension modules, that begin with a lowercase "x".
+
+### Find a Module to Use as a Template
+	- find an appropriate existing module as a starting point / skeleton
+
+Update Header Comments
+	When you use an existing module as the basis for creating a new module, make sure to update the header comments appropriately.
+
+	Don't just leave your new module with information that lingers from the module you used as your template, where this lingering information is incorrect for the new module you are creating. Pay attention to the considerations noted below...
+
+	Module Info Comment
+		Make sure that all information in the module info comment (the one that sits right at the very top of the file) is correct, paying attention to the `Module Name Comment Line` and the `Copyright Notice Comment Line`.
+
+		EXAMPLE
+		.......................................................................................
+		/*______________
+		|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+		|     /      /  |   ---------------------------------------------------
+		|    /    O /   |    MODULE : Uize.Widget.ListEditor Class
+		|   /    / /    |
+		|  /    / /  /| |    ONLINE : http://www.uize.com
+		| /____/ /__/_| | COPYRIGHT : (c)2006-2012 UIZE
+		|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+		|_______________|             http://www.uize.com/license.html
+		*/
+		.......................................................................................
+
+		Module Name Comment Line
+			The Module Name Comment Line is the line in the `Module Info Comment` that lists the name of the module defined by the JavaScript file.
+
+			..........................................................
+			|    /    O /   |    MODULE : Uize.Widget.ListEditor Class
+			..........................................................
+
+			In the example `Module Info Comment` shown above, the module name comment line is the one with the text "MODULE : Uize.Widget.ListEditor Class". If you use an existing module as a starting point for creating a new module, be sure not to leave this comment line unchanged (and, therefore, incorrect).
+
+		Copyright Notice Comment Line
+			The Copyright Notice Comment Line is the line in the `Module Info Comment` that provides a notice of copyright for the code contained inside the module, stating the `Copyright Date Range` and the `Copyright Holder` for the module's code.
+
+			...............................................
+			| /____/ /__/_| | COPYRIGHT : (c)2006-2012 UIZE
+			...............................................
+
+			In the example `Module Info Comment` shown above, the Copyright Notice Comment Line is the one with the text "COPYRIGHT : (c)2006-2012 UIZE". If you use an existing module as a starting point for creating a new module, be sure to update the date range in the copyright notice the correctly reflect the year in which the new module is being created.
+
+			Copyright Date Range
+				The copyright date range must reflect when the code in the module was initially created - which is not necessarily the date when the actually JavaScript file that defines the module was created.
+
+				For example, a new module could be created by factoring out code that used to exist in some other module. In such cases, the copyright date range used in the `Copyright Notice Comment Line` for the new module should be the copyright date range for the existing module from which the new module's code was taken.
+
+			Copyright Holder
+				The copyright holder portion of the `Copyright Notice Comment Line` identifies the holder of the rights to copy the contents of the file.
+
+				The copyright holder should always be "UIZE" for modules of the UIZE JavaScript Framework.
+
+	Scruncher Settings Comment
+		The scruncher settings comment contains settings that are used by the scruncher when it builds a scrunched version of a JavaScript module's source code.
+
+		.........................................................
+		/*ScruncherSettings Mappings="=c" LineCompacting="TRUE"*/
+		.........................................................
+
+		Among the scruncher settings that can be specified in this comment, the most common and typical is the mappings setting, which specifies a comma separated list of one or more mappings (but usually just one), where each mapping maps an identifier prefix to a scrunch prefix. In the above example, there is only one mapping, between the empty prefix and the scrunch prefix "c". It should be noted that it is implicit that the prefix is delimited from the suffix by a "&#95;" (underscore) character, so that's why the value on the left of the "&#61;" (equals sign) is an empty string. This particular mapping maps all identifiers of the form =&#95;[unscrunchedIdentifierName]= to scrunched identifiers of the form =c&#95;[scrunchedIdentifierName]=. For a refresher on scrunching JavaScript files, consult the explainer [[all-about-scrunching.html][All About Scrunching]].
+
+		Scruncher Mappings for Class Modules
+			For class modules, it is the convention to use a single letter for the scrunch namespace, where that letter is one letter higher than the letter used for the class' superclass.
+
+			So, for example, the =Uize.Widget.ListEditor= module defines a class that is a subclass of the =Uize.Widget= base class. Further, the =Uize.Widget= class is a subclass of the =Uize.Class= base class. The =Uize.Class= module uses the letter "a" for its scrunch namespace, so the =Uize.Widget= subclass uses the letter "b", and the =Uize.Widget.ListEditor= class uses the letter "c". This ensures that the scrunched identifier names for private properties and methods that are defined at the various different levels of this class hierarchy don't accidentally collide (scrunching is applied discretely to each file, after all).
+
+			EXAMPLE
+			.........................................................
+			/*ScruncherSettings Mappings="=c" LineCompacting="TRUE"*/
+			.........................................................
+
+		Scruncher Mappings for Package Modules
+			For package modules, the convention is to use the blank scrunch namespace.
+
+			Because package modules only define utility static methods and properties, and because they do not place private static methods or properties into an object along with the private static methods or properties of other modules, there is no need for them to use a unique scrunch namespace. By using the blank-to-blank scrunch namespace mapping, all identifiers prefixed with just an underscore will be scrunched down to scrunched identifiers prefixed with just an underscore. This same convention applies to namespace modules, library modules, alias modules, and data modules.
+
+			EXAMPLE
+			........................................................
+			/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
+			........................................................
+
+		Scruncher Mappings for Class Extension Modules
+			For class extension modules (not package extension modules), the convention is to use the letter used by the class that is being extended, with an underscore separated suffix appended that is unique to the extension module.
+
+			For example, both the =Uize.Fade.xFactory= and =Uize.Fade.xSeries= modules are class extension modules because they extend the =Uize.Fade= class. Now, the scrunch namespace used by the =Uize.Fade= class is "b". Therefore, by the convention used for class extension modules, the scrunch namespace for the =Uize.Fade.xFactory= module is "b_a", and the scrunch namespace for the =Uize.Fade.xSeries= module is "b_b".
+
+			Because these two class extension modules only extend the =Uize.Fade= class and don't create subclasses, we don't want to use the letter "c", since this should be reserved for any module that were to define a =Uize.Fade= subclass. Also, we don't want the two extension modules to use the same scrunch namespace, since they could both be used at the same time to extend the =Uize.Fade= class, and the scrunched names of any private properties or methods on instances of the =Uize.Fade= class that are added by these extensions should not accidentally collide with one another.
+
+			Therefore, what we do is we branch off of the scrunch namespace of the class being extended, using an added suffix that is unique to each extension module. This approach does have the drawback that there has to be cooperation across the various extension modules.
+
+			EXAMPLE
+			...........................................................
+			/*ScruncherSettings Mappings="=b_a" LineCompacting="TRUE"*/
+			...........................................................
+
+	Module Meta Data Comment
+		The module meta data comment is required for all UIZE modules and contains meta data information that is used on the [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page.
+
+		The meta data contained in the module meta data comments of all UIZE JavaScript modules is scooped up by the =_UizeSite.Build.BuildSotu.js= build script when it iterates through all the module files. This data is then presented on the State of the UIZE page in a sortable table. This information can then be used by UIZE framework developers to get a big picture view of where things stand with the framework, and can help in determining where development effort should be directed.
+
+		The module meta data comment has the following syntax...
+
+		............................
+		/* Module Meta Data
+			type: [module type]
+			importance: [0-10]
+			codeCompleteness: [0-100]
+			testCompleteness: [0-100]
+			docCompleteness: [0-100]
+		*/
+		............................
+
+		Module Meta Data Comment Entries
+			type
+				The type of the JavaScript module.
+
+				The value for this meta data entry should be one of the following, depending on the module...
+
+				- *Class* - for modules that implemented classes
+				- *Package* - for modules that provide utility static methods and/or properties
+				- *Extension* - for modules that extend classes or packages
+				- *Data* - for modules that define data objects
+				- *Object* - for modules that define objects (as opposed to classes), such as the =Uize.Color= object module
+				- *Template* - for JavaScript template modules that are generated from =.js.jst= files
+				- *Test* - for unit test or functional test modules (subclasses of the =Uize.Test= class)
+				- *Namespace* - for modules that define namespaces
+				- *Alias* - for modules that are merely aliases to other modules (provided for backwards compatibility)
+				- *Library* - for modules that define libraries of modules that are to be bundled together by the auto scruncher build script
+
+			importance
+				A number, in the range of =0= to =10=, indicating the overal importance of the module in the larger scheme of things.
+
+				To get a sense of how modules should be ranked in importance, take a look at the [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page and note the importance that is assigned to modules with which you are familiar. A module like the =Uize= module, for example, is assigned the importance of =10=. Without the =Uize= module and the namespace it defines, pretty much nothing else in the framework can exist, so this is the most important module and has the highest importance possible.
+
+				On the opposite end of the spectrum, a module like the =Uize.String.Discombobulator= package is assigned an importance of =0=. This module provides some very esoteric and hardly used functionality, and so it has the lowest importance possible. It's important to emphasize that having an importance of =0= doesn't mean that a module is useless and has no value - it just means that it is among the least important modules in the framework, in the larger scheme of things.
+
+				In the middle of the importance spectrum, one finds modules like =Uize.String.Lines=, =Uize.Fx=, =Uize.Date=, =Uize.Tooltip=, and many others. Towards the high end of the importance spectrum, but not right at the top, are modules like =Uize.Node=, =Uize.Widget=, =Uize.Test=, =Uize.Template=, and others. Assigning an importance ranking to a module is not an exact science, and the rankings are likely to shift over time as the framework evolves and expands. Just make the best assessment you can.
+
+			codeCompleteness
+				A number, in the range of =0= to =100=, indicating the code completeness of the module as a percentage.
+
+				The =codeCompleteness= value is a best guess estimate of how complete a module's code is. One could argue that a module is never complete, because it can always be improved and features can always be added to it. The =codeCompleteness= measure, however, is a measure of how complete the code is for an established feature set at any given point in time. Generally, a module should be 100% code complete before it is officially made public as part of the framework. This principle can be seen when viewing the [[../appendixes/sotu.html][SOTU]] page, where you will notice that the overwhelming majority of modules are marked as being 100% code complete.
+
+				Note that if the module is a unit test module, then the value of the =codeCompleteness= meta data entry for the module should correspond to the value of the =testCompleteness= meta data entry in the module that the unit test module is intended to test. It is far more acceptable for test modules to not be 100% code complete than it is for other types of modules.
+
+			testCompleteness
+				A number, in the range of =0= to =100=, indicating the completeness of unit tests for the module as a percentage.
+
+				If the module is a unit test module, then the value of the =testCompleteness= meta data entry for the module should be =100=, since unit test modules are not themselves unit tested. Assigning them test complete just means that they won't sort along with other modules that truly are in need of unit testing when sorting the [[../appendixes/sotu.html][SOTU]] table by its "TEST" column. Instead, they appear "checked off" as done, with regards to unit testing.
+
+				For regular / non-unit test modules, the =testCompleteness= value is a best guess estimate of how complete the unit test for the module is. To determine a value, you can consider what percentage of a module's static methods, static properties, instance methods, instance properties, etc. are tested. Bear in mind that if, say, 50% of the features of a module are tested, you may still wish to assign a =testCompleteness= value for the module that is less than or greater than 50%, based upon how much coding work you feel there is to writing the remaining tests. Any value that you assign to the =testCompleteness= meta data entry for a module should correspond to the value of the =codeCompleteness= meta data entry for that module's companion unit test module.
+
+			docCompleteness
+				A number, in the range of =0= to =100=, indicating the completeness of documentation for the module as a percentage.
+
+				The =docCompleteness= value is a best guess estimate of how complete the documentation for the module is. To determine a value, you can consider what percentage of a module's static methods, static properties, instance methods, instance properties, etc. are documented. Bear in mind that if, say, 50% of the features of a module are documented, you may still wish to assign a =docCompleteness= value for the module that is less than or greater than 50%, based upon how much work you feel there is to writing the remaining documentation.
+
+			### keywords
+				- eg. widget, color, animation, form, math, data, format, etc.
+
+		So Long, One Hundred Percent
+			Attaining the sought after value of =100= for either of the =codeCompleteness=, =codeCompleteness=, or =docCompleteness= meta data entries is unfortunately not the end of the story.
+
+			The value of any one of these entries may have to be bumped back down again as the framework evolves. A module that used to be code complete, for example, may cease to be code complete if its functionality is expanded but not completely implemented. Similarly, test completeness may be bumped back down from 100% if the module's functionality is expanded and the unit tests are not completely updated to keep up with the added features. The same effect can apply to documentation completeness, if new functionality is added without fully documenting it.
+
+		Module Meta Data in JavaScript Template Modules
+			Getting the `Module Meta Data Comment` into [[javascript-templates.html][JavaScript template modules]] is a little bit trickier than regular JavaScript modules, but still quite doable.
+
+			The `Module Meta Data Comment` for a JavaScript template module can be placed in the JST source code as follows...
+
+			EXAMPLE
+			.......................................................
+			<%@ input ({idPrefix:'string'}) %><%/* Module Meta Data
+				type: Template
+				importance: 2
+				codeCompleteness: 100
+				testCompleteness: 0
+				docCompleteness: 100
+			*/%><%@
+				/* guts of template follows... */
+			%>
+			.......................................................
+
+			It's admittedly a little bit ugly / awkward, but it works! In the example shown above, the `Module Meta Data Comment` is close to the top of the JavaScript template file, but after the =input= directive. It doesn't have to be after the directive, but it feels right to have the directives first. Notice how there is no whitespace between the tokens that enclose the directive, the module meta data comment, and what follows the comment. This prevents unwanted extra whitespace from creeping into the generated JavaScript template module.
+
+Implement the Module
+	When implementing your new UIZE module, there are a number of considerations to keep in mind...
+
+	- *Follow the Coding Style Guide* - Be sure to be aware of the recommended coding conventions for JavaScript code. For a refresher, consult the [[../appendixes/javascript-code-conventions.html][JavaScript Code Conventions]] appendix.
+
+	- *Write Optimized Code* - Make sure to optimize your code for both performance and code size. To learn some useful optimization tips and tricks, consult the [[../appendixes/javascript-optimization.html][JavaScript Optimization]] appendix.
+
+	- *Write Scruncher-ready Code* - Make sure your UIZE module's code is Scruncher-ready. For a refresher on scrunching, consult the explainer [[all-about-scrunching.html][All About Scrunching]].
+
+	### - for widget class modules, ideally create a JavaScript template module to generate the HTML for the widget, along with some accompanying CSS to style the HTML
+
+	### cleanup checklist
+		- cleanup empty code
+			- cite a bad example
+				- where wireUi has been hollowed out and doesn't actually do anything
+				- where subclasser alphastructor and/or omegastructor don't do anything
+				- where registerProperties doesn't actually register any
+				- where class.set doesn't override any initial values
+				- where section comments are left in
+
+Document the Module
+	New modules added to the UIZE JavaScript Framework should, ideally, be comprehensively document.
+
+	When documenting your new UIZE module, keep the following considerations in mind...
+
+	At Least Have a Skeleton
+		If time does not allow every feature of a new module to be documented in a lot of detail, at least make sure that every feature is mentioned, along with some minimal information about the feature.
+
+		Build up the skeleton of your documentation in the following order...
+
+		- For methods, at least have a basic summary line about the method, along with a *SYNTAX* sample code block.
+
+	Add Flesh to the Skeleton
+		Once you have the basic skeleton of the documentation, convering in a very sparse way all the features of the module, you can then proceed to flesh out the documentation in the following order...
+
+	Update the docCompleteness Meta Data Entry
+		Once you've written as much documentation as you're going to write, make sure to update the value for the =docCompleteness= meta data entry to reflect how complete the documentation is, using the following rough guide to completeness milestones...
+
+		- =docCompleteness: 2= - You only wrote the most basic "Introduction" paragraph, with no in-depth discussion of the module.
+		- =docCompleteness: 20= - You wrote the basic "Introduction" paragraph, along with a skeleton that lists all the features of the module, such as static and instance methods, static and instance properties, state properties, static and instance events, implied nodes (for widget classes), etc.
+		- =docCompleteness: 80= - You wrote the basic "Introduction" paragraph, along with thorough reference documentation for all the features of the modules. There is not yet a thorough introduction and explanation of the module.
+		- =docCompleteness: 100= - You wrote thorough reference documentation for all the features of the modules, and you wrote a thorough introduction and explanation of the module. Therefore, the documentation is complete! (yay)
+
+		### special notes for different types of modules
+			- test modules only need the most basic "Introduction" paragraph in order to be considered documentation complete
+			- what about JavaScript template modules?
+			- what about data modules?
+
+	### List Developers
+		- list all developers, in order of level of contribution
+
+	### - refer to the Documentation Style Guide
+
+Create Examples for the Module
+	New modules added to the UIZE JavaScript Framework should have at least one example page to serve as a real life test and demonstration of the module's key capabilities.
+
+	An example page for a module should be only as complicated as is necessary to provide a compelling / convincing demonstration for the module, and as simple as possible so that a developer considering using the module doesn't have to wade through unnecessary complexity in order to get to the crux of how a module is used.
+
+	Modules That Don't Warrant Examples
+		Example pages are neither necessary nor particularly useful for certain kinds of modules, including data modules, template modules, test modules, namespace modules, alias modules, and library modules.
+
+		For template modules that generate HTML for specific widget classes, these template modules can be demonstrated along with the widget class modules for which they are intended. For template modules that are not widget HTML generators, example pages can be created.
+
+	### - refer to Creating Example Pages
+
+Write Unit Tests
+	New modules added to the UIZE JavaScript Framework should be thoroughly unit tested.
+
+	This involves the creation of a companion `Unit Test Module` for your new module, and the incorporation of that unit test module into the `UIZE Unit Tests`.
+
+	Unit Test Module
+		Each UIZE module should have a companion test module (except test modules themselves, of course).
+
+		A unit test module for a UIZE module should be placed under the =Uize.Test= namespace, and should be named by appending the module name to "Uize.Test.". So, for example, the unit test module for the module =Uize.Data= would be named =Uize.Test.Uize.Data=. To get a sense for how unit test modules should be implemented, take a look through the source code of existing test modules. When implementing your unit test module, be sure to follow these same guidelines for creating regular UIZE modules, since many of the same principles apply, but keep the following points in mind...
+
+		- Test modules only need to have the most basic "Introduction" paragraph in order to be considered documentation complete (see the =Uize.Test.Uize.Data= module for an example of documentation for a test module).
+		- The =testCompleteness= meta data entry in the `Module Meta Data Comment` can be automatically marked as =100= for test modules, since it is not desirable to test test modules with yet other test module test modules.
+		- The value for the =importance= meta data entry in the `Module Meta Data Comment` for a test module should never be greater than the =importance= value for the module it tests, and should generally be somewhat less.
+		- The =codeCompleteness= value for a test module should be identical to the =testCompleteness= value for the module that it tests.
+		- Test modules do not need example pages.
+
+	UIZE Unit Tests
+		The unit test suite for the UIZE JavaScript Framework is implemented in the =Uize.Test.UnitTests= module.
+
+		The =Uize.Test.UnitTests= module is a test module that defines an uber test comprised of all the test modules that test individual modules of the framework, and is used by build scripts that automate testing of the framework. When creating a new UIZE module and, therefore, creating its companion `Unit Test Module`, the unit test module needs to be entered into the =Uize.Test.UnitTests= module. This involves adding a line to the file in order to add the test to the sequence of tests performed by the =Uize.Test.UnitTests= module. When you open up the source code for the =Uize.Test.UnitTests= module, it should be pretty clear what to do.
+
+### Announce the Module
+
+Revisit This Explainer, As Needed
+	Creating a new module for the UIZE JavaScript Framework is no trivial matter - you're *growing* a framework that many developers will be building applications and features on.
+
+	Don't be afraid to revisit this document as a refresher when adding a new module, and as a last step / checklist before finally committing your new module to the framework. If it takes a few minutes to skim through this document and see if you've forgotten or missed anything, it might be a few minutes well spent.
+

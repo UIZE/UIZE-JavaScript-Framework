@@ -1,0 +1,14 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:codesearch="http://www.google.com/codesearch/schemas/sitemap/1.0">
+<%
+	for (var _moduleNo = -1, _modules = input.modules, _modulesLength = _modules.length; ++_moduleNo < _modulesLength;) {
+%>	<url>
+		<loc>http://www.uize.com/js/<%= _modules [_moduleNo] %>.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+<%
+	}
+%></urlset>
+

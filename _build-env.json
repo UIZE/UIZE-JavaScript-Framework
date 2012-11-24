@@ -1,57 +1,55 @@
 {
-	alwaysBuild:false,
-	buildFolderPath:'',
-	buildSequence:[
-		/* IMPORTANT:
-			The order of execution of these build scripts is important, informed by the following criteria...
+	/*** for the newer build process ***/
+		builtPath:'site-built',
+		tempPath:'site-temp',
+		memoryPath:'site-memory',
+		sourcePath:'site-source',
+		isDev:'false',
+		scrunchedHeadComments:{
+			Uize:
+				'/*\n' +
+					'\tUIZE JAVASCRIPT FRAMEWORK\n' +
+					'\n' +
+					'\thttp://www.uize.com/reference/{moduleName}.html\n' +
+					'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
+				'*/\n',
+			UizeDotCom:
+				'/*\n' +
+					'\tUIZE Web Site\n' +
+					'\n' +
+					'\thttp://www.uize.com/reference/{moduleName}.html\n' +
+					'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
+				'*/\n'
+		},
+		freshBuild:'false',
+		deployConfigPath:'../deploy.config.json',
 
-			- _Uize.Build.CompileJstModules.js must execute before _UizeSite.Build.BuildWidgetPages.js, _UizeSite.Build.BuildSimpleDocPages.js, _UizeSite.Build.BuildPagesFromSourceCode.js, and _Uize.Build.AutoScruncher.js, because the latter three build scripts process JavaScript modules, and _Uize.Build.CompileJstModules.js builds JavaScript modules from .js.jst files
+	/*** UIZE Web site specific modules to stub ***/
+		modulesToStub:/^UizeSite\.(ModulesTree|Examples|ExamplesInfoForSiteMap)$/,
 
-			- _UizeSite.Build.BuildSimpleDocPages.js must execute before _UizeSite.Build.BuildIndexPages.js, because _UizeSite.Build.BuildIndexPages.js builds the UizeDotCom.ModulesTree module based upon the module reference pages it finds in the reference folder, and these reference pages are built by _UizeSite.Build.BuildSimpleDocPages.js
-
-			- _UizeSite.Build.BuildIndexPages.js must execute before _UizeSite.Build.BuildPagesFromSourceCode.js and _Uize.Build.AutoScruncher.js, because the latter scripts process JavaScript modules, and _UizeSite.Build.BuildIndexPages.js builds a JavaScript module containing a list of all the example pages in a JSON data structure
-
-			- _UizeSite.Build.BuildIndexPages.js must execute before _Uize.Build.BuildSimpleDataPages.js, because _UizeSite.Build.BuildIndexPages.js builds the UizeDotCom.ModulesTree module, which is required by the UizeDotCom.SiteMap module, which is in turn required by _Uize.Build.BuildSimpleDataPages.js when it builds the directory.html page from directory.html.simpledata
-
-			- _UizeSite.Build.BuildIndexPages.js must execute after _UizeSite.Build.BuildSimpleDocPages.js, because _UizeSite.Build.BuildIndexPages.js builds index pages for explainers and module references, which are built by _UizeSite.Build.BuildSimpleDocPages.js
-
-			- _UizeSite.Build.BuildSotu.js must execute after _Uize.Build.CompileJstModules.js, because _UizeSite.Build.BuildSotu.js needs to know the file sizes for the JavaScript module source code, and because some JavaScript modules are built by _Uize.Build.CompileJstModules.js. _UizeSite.Build.BuildSotu.js must execute after _Uize.Build.AutoScruncher.js, because _uize-site-build-sotu.js needs to know the scrunched file sizes for the JavaScript modules, since this information is listed on the module details page
-
-			If, at some point in the future, things get jammed up in a catch 22 situation, then one or more of these build scripts may have to get broken up further into more atomic build scripts, so that the order of some build tasks can be changed.
-		*/
-		'_Uize.Build.CompileJstModules.js',
-		'_UizeSite.Build.BuildWidgetPages.js',
-		'_UizeSite.Build.BuildSimpleDocPages.js',
-		'_UizeSite.Build.BuildIndexPages.js',
-		'_Uize.Build.BuildSimpleDataPages.js',
-		'_UizeSite.Build.BuildPagesFromSourceCode.js',
-		'_Uize.Build.AutoScruncher.js',
-		'_UizeSite.Build.BuildSotu.js',
-		'_UizeSite.Build.BuildCodeSitemap.js'
-	],
-	testSequence:[
-		'_Uize.Build.RunUnitTests-source.js silent=true',
-		'_Uize.Build.RunUnitTests-scrunched.js silent=true'
-	],
-	doNotEnter:/\\(css|images|OLD|photos|source-code|Uize.*)$/,
-	dryRun:false,
-	moduleFolderPath:'js\\~source',
-	scrunchedHeadComments:{
-		Uize:
-			'/*\n' +
-				'\tUIZE JAVASCRIPT FRAMEWORK\n' +
-				'\n' +
-				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
-				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
-			'*/\n',
-		UizeDotCom:
-			'/*\n' +
-				'\tUIZE Web Site\n' +
-				'\n' +
-				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
-				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
-			'*/\n'
-	},
-	sourceFolderName:'~source'
+	/*** for the older build process ***/
+		alwaysBuild:false,
+		buildFolderPath:'site-built',
+		rootFolderPath:'site-source',
+		buildSequence:[
+			'UizeSite.Build.BuildStaticPages',
+			'UizeSite.Build.BuildJsModules',
+			'UizeSite.Build.BuildWidgetPages',
+			'UizeSite.Build.BuildSimpleDocPages',
+			'UizeSite.Build.BuildIndexPages',
+			'UizeSite.Build.BuildSimpleDataPages',
+			'UizeSite.Build.BuildPagesFromSourceCode',
+			'UizeSite.Build.BuildSotu',
+			'UizeSite.Build.BuildCodeSitemap'
+		],
+		testSequence:[
+			'_Uize.Build.RunUnitTests-source.js silent=true',
+			'_Uize.Build.RunUnitTests-scrunched.js silent=true'
+		],
+		doNotEnter:/\\(css|images|OLD|photos|Uize.*)$/,
+		dryRun:false,
+		moduleFolderPath:'site-source/js',
+		moduleFolderBuiltPath:'site-built/js',
+		sourceFolderName:''
 }
 

@@ -1,0 +1,1307 @@
+This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[to-do-documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[to-do-modules.html][TO DO - Modules]]).
+
+Separate Source Code From Built Code
+	Update all the build scripts and the site deploy script so that the built code is separated out from the source code.
+
+	Problems With Existing Situation
+		Currently, the built code is placed alongside source code in the source code folder structure. This is problematic for a number of reasons...
+
+		Built Code is Committed
+			All the built code is committed to the source control system, which presents the following issues...
+
+			- this bloats up the repository
+			- it adds noise to the commits (for every source file that changes, multiple built files change)
+
+		Searches Are Ugly
+			Searches inside the source code folder structure often will produce results / matches in built files, and this often adds a burden during refactoring processes.
+
+		Bigger Download
+			Including the built files in the source code folder structure bloats up the zip archive download for the framework.
+
+		Deploying the Site is Slower
+			Because source files are deployed with the built site, uploading the archive of the site's code takes much longer than it needs to.
+
+		Deployed Site Contains Source
+			The deployed site contains all the source code, which includes WSH build scripts, =.simple= files, =.jst= template files, etc.
+
+			The unnecessary =.simple= source files may be indexed by search engines. At the very least, they are just clutter lying around.
+
+	The Solution
+		The solution is to separate out the built code from the source code, so that there are distinct source and built folder structures for the framework's Web site.
+
+		Update Build Scripts
+			The build scripts will need to be updated in the following ways...
+
+			Output to Built Folder
+				The build scripts should save all built files to a built folder, that is a peer of the source folder, and whose structure parallels the source folder.
+
+				One consequence of this change is that the scrunched JavaScript modules and the source JavaScript modules can be in the same place in their respective built and source folder trees (currently, the JavaScript module source files are contained inside a "~source" subfolder of the site's "js" folder.
+
+			Copy Static Files
+				Numerous static files that are not involved in the build process should simply be copied to their equivalent place within the built folder.
+
+				This will require writing a new build script to copy over static files. Example of static files are...
+
+				- CSS files
+				- image assets
+				- example and test HTML files (until they're turned into dynamic / built files)
+				- various other miscellaneous files (like *404.html*, *HELLO-WORLD.html*, etc.)
+
+		Update Deploy Script
+			The deploy script will have to be updated to perform the following steps...
+
+			- create a ZIP archive of the built Web site (only the contents of the built folder)
+			- ftp the built site ZIP archive and expand on server
+			- remove ZIP archive from server
+
+		Remove All Built Code From Source Tree
+			Once the build scripts have been updated to output built files to the built folder, all built code should be cleared from the source folder.
+
+		Build Scripts to be Fixed
+			- _Uize.Build.AutoScruncher.js
+			- _Uize.Build.BuildSimpleDataPages.js => BECOMES => _UizeSite.Build.BuildSimpleDataPages.js
+			- _Uize.Build.BuildSimpleDocPages.js => BECOMES => _UizeSite.Build.BuildSimpleDocPages.js
+			- _Uize.Build.RunUnitTests-source.js
+				- issue with some modules having dependencies on JavaScript JST modules
+			- _Uize.Build.RunUnitTests-scrunched.js
+				- issue of loading scrunched modules
+			- _UizeSite.Build.BuildCodeSitemap.js
+				- needs to be run against site-built
+			- _UizeSite.Build.BuildIndexPages.js
+			- _UizeSite.Build.BuildPagesFromSourceCode.js
+			- _UizeSite.Build.BuildSimpleDocPages.js
+			- _UizeSite.Build.BuildSotu.js
+			- _UizeSite.Build.BuildWidgetPages.js
+
+General Drag and Drop Framework
+	Virtual dom events to mimic new HTML5 dnd events.
+
+Types for Properties
+	Can be used by interpolation code (such as fades).
+
+Iterator Interface
+	Instance Methods
+		- =first= - rewinds the iterator to the beginning and returns the value for the first iteration
+		- =next= - advances to the next iteration and returns the value for the iteration
+		- =advance= - advances to the next iteration, if possible, and returns a boolean indicating success
+		- =rewind= - rewinds the iterator, so that calling =next= will return the value for the first iteration
+		- =reset= - synonymous with =rewind=
+		- =forEach= - executes the entire iteration, calling the specified iteration handler function for each iteration
+		- =end= - ends the iteration, after which calling =hasNext= will return =false=
+
+	Instance Properties
+		- =value= - the value for the current iteration
+		- =current= - synonymous with =value=
+		- =key= - the key / index for the current iteration
+		- =ended= - a boolean, indicating whether or not the iteration has ended
+
+	Usages
+		EXAMPLE
+		...................................................................................
+		for (var currentSum = series.first(); !series.ended; currentSum = series.next();) {
+			// do stuff
+		}
+		...................................................................................
+
+		EXAMPLE
+		.............................
+		var currentSum;
+		while (series.advance()) {
+			currentSum = series.value;
+			// do stuff
+		}
+		.............................
+
+	Uize.Iterator
+		The =Uize.Iterator= object implements the `iterator interface`.
+
+		As a Wrapper
+			A =Uize.Iterator= object can be instantiated as a wrapper around a number of different source values.
+
+			Wrapping a Number
+				document...
+
+			Wrapping an Array
+				document...
+
+			Wrapping an Object
+				document...
+
+			Wrapping a JavaScript Iterator
+				document...
+
+		Modules Supporting Iterators
+			Several UIZE modules provide built-in support for the =Uize.Iterator= class.
+
+			For example, the =Uize.Fade= module supports wrapping a =Uize.Fade= value series as an iterator.
+
+			- =Uize.Data.Combinations=
+			- =Uize.String.Lines=
+			- =Uize.Color.xUtil=
+			- =Uize.Curve=
+
+		Iterator Modifier Function
+			A function, in the spirit of a curve function modifier, that returns an iterator function that is a modification of the source iterator function (or the source resolved to an iterator function).
+
+			An iterator modifier function can accept a source that is not an iterator object, which will first be resolved to an iterator object.
+
+			Examples of iterator modifier functions...
+
+			- =Uize.Iterator.map= - the new iterator produces every value from the source iterator, transformed through a specified `value transformer`
+			- =Uize.Iterator.filter= - produces an iterator with only those iterations whose values pass the specified `value matcher`
+			- =Uize.Iterator.stretch= - stretches out the number of iterations by either repeating or interpolating between the values in the original iterator function
+			- =Uize.Iterator.slice= - produces an iterator that includes only the specified slice of iterations from the source iterator
+			- =Uize.Iterator.sliceByMatch= - produces a slice of the source iterator, where the first and last iterations are determined by specified value matchers
+			- =Uize.Iterator.concat= - produces a new iterator by concatenating multiple iterators
+			- =Uize.Iterator.combine= - takes multiple source iterators and produces a new iterator where the value for each iteration is generated by the specified function that takes the values from all the source iterators as its input
+			- =Uize.Iterator.nest= - produces an iterator where for each iteration of an outer source iterator, an inner "nested" iterator is iterated over, where the inner iterator is provided the value of an iteration of the outer iterator as a seed value, and where the resulting iterator returns the values from the nested iterator
+			- =Uize.Iterator.cycle= - produces an iterator where the specified source iterator is cycled through the specified number of times
+			- =Uize.Iterator.interleave= - produces an iterator by interleaving multiple source iterators together (ie. where each iteration alternates through the specified source iterators)
+
+Safe Privates
+	A new system to support safe private properties and methods - for both instance as well as static private properties and methods.
+
+	EXAMPLE
+	..........................................................................................
+	/*** create variables for mapping between pretty name of privates and generated names ***/
+		var
+			_myProperty = _class.priv ('myProperty'),
+			_myMethod = _class.priv ('myMethod')
+		});
+
+	_classPrototype [_myProperty] = 'blah';        // declaring instance property
+	_classPrototype [_myMethod] = function () {};  // declaring instance method
+
+	alert (this [_myProperty]); // accessing instance property
+	this [_myMethod] ();        // calling instance method
+	..........................................................................................
+
+	ISSUES
+	- all accesses and assignments of privates involve an additional variable lookup step, and dereferencing with the result of an expression (so, some precompilation benefits are lost)
+	- "lookup" of private names involves accessing variables in a higher scope than point of access, so performance cost
+	- names must be generated for all privates, which adds setup code
+	- makes it a little bit harder to do impromptu assignments of privates
+	- accessing state properties via their private names becomes rather inconvenient, and their private names must be registered in an extra step
+
+	QUESTIONS
+	- how does one provide private names for state properties? Provide an example.
+	- should multiple calls to the =priv= method on the same class for the same named private always return the same result? If so, this would suggest that external code could probe around and easily discover the internal name for a private.
+	- how is the mapping / registry of privates for a class inherited by a subclass? Does it have to be?
+
+Mixins
+	Add support for mix-ins.
+
+	Mixing in would...
+	- copy all properties of the prototype
+	- copy all static properties
+	- copy in all information of registered state properties
+
+	ISSUES
+	- namespace conflict for all instance properties
+
+Rethinking Module Definitions
+
+	Using a Provide-Need Pattern as Foundation
+		In Essence
+			- the needer specifies the criteria for what is needed
+			- from the registered providers, a provider is selected that can best satisfy the need
+			- the chosen provider sees if anything is already cached that matches the need
+			- if something is cached, the provider passes it on to the needer
+			- if nothing is cached, then...
+			- the provider goes about obtaining something that matches the need
+			- the provider caches the thing that it obtained, for the benefit of others that may have matching needs
+			- the provider passes the needed item on to the needer
+
+
+		Other Patterns That Can Be Modeled on Provide-Need
+			Needing an Instance
+				An instance provider would be given criteria for the instance needed, such as class module, initial / constructor properties, etc.
+
+				The provider registered for providing instances would in turn need the class module for a specific instance that is needed.
+
+			Needing a Session
+				Code that needs the user to be logged in and to have a session could use a provide-need pattern, where a registered provider for session would go about prompting the user to log in.
+
+		.......................................
+		Uize.provide (
+			{type: 'module', org: 'Uize'},
+			function (needed, deliver) {
+				// code here to load Uize modules
+			}
+		);
+		.......................................
+
+		............................................
+		Uize.provide (
+			{type: 'module', org: 'MyCompany'},
+			function (needed, deliver) {
+				// code here to load MyCompany modules
+			}
+		);
+		............................................
+
+		....................................
+		Uize.providers
+		....................................
+
+		......................................................
+		Uize.need (
+			{type: 'module', org: 'Uize', name: 'Uize.Widget'},
+			function (Uize_Widget) {
+				// now we can use the Uize.Widget class
+			}
+		);
+		......................................................
+
+	Uize.module And Uize.require as Syntactical Sugar
+		....................................
+		Uize.module ({
+			org: 'MyCompany',
+			name: 'MyCompany.Foo.Bar',
+			builder: function () {
+				// build and return the module
+			}
+		});
+		....................................
+
+		.................................
+		Uize.require (
+			{
+				org: 'MyCompany',
+				name: 'MyCompany.Foo.Bar'
+			},
+			function (MyCompany_Foo_Bar) {
+
+			}
+		);
+		.................................
+
+		.................................
+		Uize.require(
+			'MyCompany:MyCompany.Foo.Bar',
+			function () {
+			}
+		);
+		.................................
+
+Version Support in Module Mechanism
+	Requirements
+		Support the following...
+			- ability to have multiple versions of UIZE on the same page
+			- ability to have different versions of the same module on the same page
+			- ability for modules to have dependencies on specific versions of other modules
+			- it must still be possible for a module to declare itself and then be available as a required module for other modules that are subsequently declared in the same scope
+
+	- possible approach...
+
+		VARIATION 1
+		...............................................................
+		Uize.module ({
+			required:[
+				'Uize.Curve',     // end up getting version 2, let's say
+				'Uize.Curve.Mod'  // end up getting version 3, let's say
+			],
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				m ('Uize.Curve')...
+				m ('Uize.Curve.Mod')...
+			}
+		});
+		...............................................................
+
+		VARIATION 2
+		...............................................................
+		Uize.module ({
+			required:{
+				_Uize_Curve:'Uize.Curve',         // end up getting version 2, let's say
+				_Uize_Curve_Mod:'Uize.Curve.Mod'  // end up getting version 3, let's say
+			},
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				m._Uize_Curve ()...
+				m._Uize_Curve_Mod ()...
+			}
+		});
+		...............................................................
+
+	- declaring information about a module variation
+
+
+		EXAMPLE
+		...............................................................
+		Uize.module ({
+			name:'Uize.Widget.FooBar',
+			version:'2',
+			builder:function (_super,m) {
+				// build the module
+			}
+		});
+		...............................................................
+
+	- requiring specific versions of modules...
+
+		VARIATION 1
+		...............................................................
+		Uize.module ({
+			required:[
+				'Uize.Curve[2]',      // require version 2 of this module
+				'Uize.Curve.Mod[3-]'  // require version 3 or higher of this module
+			],
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				m ('Uize.Curve[2]')...
+				m ('Uize.Curve.Mod')...
+			}
+		});
+		...............................................................
+
+		VARIATION 2
+		...............................................................
+		Uize.module ({
+			required:{
+				_Uize_Curve:'Uize.Curve[2]',          // require version 2 of this module
+				_Uize_Curve_Mod:'Uize.Curve.Mod[3-]'  // require version 3 or higher of this module
+			},
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				m._Uize_Curve ()...
+				m._Uize_Curve_Mod ()...
+			}
+		});
+		...............................................................
+
+	- requiring a variation of a module using a custom match...
+
+		EXAMPLE
+		...............................................................
+		Uize.module ({
+			required:{
+				_Uize_Curve:{
+					name:'Uize.Curve',
+					version:/^2.[1|2](\..*)?$/  // require versions 2.1 and subversions, or 2,2 and subversions
+				}
+			},
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				_Uize_Curve ()...
+			}
+		});
+		...............................................................
+
+	In a Nutshell
+		- modules declare themselves and provide meta data (such as version number) that can be used to uniquely identify / disambiguate the module when requiring the module in other modules
+		- when a module requires another module, it can provide additional information over and above the required module's name that can be used to identify the module, should multiple variations of the required module be loaded concurrently
+		- when a module is declared, all information identifying the module is stored in a global registry. Different variations of the same named module can be loaded concurrently, and the identifying information
+
+		NOTES
+		- it should be possible to use multiple versions of the framework at the same time
+		- two variations of the same named module cannot be loaded in the same scope and have all the same other identifying information (such as version)
+		- specifying a version number in the module name string is a shorthand way of specifying both a name and version properties
+
+	Ideas
+		- it should be possible to load a module and have the module be defined without actually building it
+		- it should be possible to determine all the modules that have been loaded
+		- building a module should not have side effects outside of the definition of the module, such that building a module but not accessing it can affect the way other code behaves in such a way that other code relies upon those side effects and it becomes impossible to defer the building of the module until the first access to it without breaking code
+
+	Module Registry
+
+		Querying the Module Registry
+			Discovering the Loaded Modules
+
+			Getting a Module Profile
+				After a module has been loaded, the module registry can be queried to obtain a profile for the loaded module - even before the module has been built.
+
+				Obtaining a module profile for a module is done by calling the getProfile method on the module registry, as follows...
+
+				EXAMPLE
+				.............................................
+				Uize.modules.getProfile ('Uize.Widget.Page');
+				.............................................
+
+				Module Profile is Persisted
+					After a module has been built, it is still possible to query the `module registry` to get the profile for the module in order to find out more about it.
+
+					The name, superclass, required list, version, etc. are all persisted in the module registry. In the case of a class module, the profile for a module is assigned to the =moduleProfile= property of the module, so it is not necessary to use the `module registry` interface. However, in the case of a module where it is not appropriate to stitch in properties (such as data modules), `Getting a Module Profile` must be done through the `module registry` interface.
+
+	Module Meta Data
+		EXAMPLE
+		...............................................................
+		Uize.module ({
+			name:'Uize.Widget.FooBar',
+			version:'2',
+			experiment:'performance-optimized',
+			builder:function (_super,m) {
+				// build the module
+			}
+		});
+		...............................................................
+
+	Loading of Modules
+		General principles
+			- it is not the responsibility of the code requiring a module to specify how the module should be obtained
+			- when a module is obtained, "where" is merely a qualifier to how, and how the location is specified will depend on the method of retrieval
+
+		Loader Configuration
+			Configuration of the module loading mechanism is independent of how modules are declared or required and is environment specific.
+
+	EXAMPLE 1
+	..............................................................................
+	Uize.module ({
+		name:'Uize.Widget.Droplist',
+		superclass:'Uize.Widget',
+		required:{
+			_Uize_Widget_PopupPalette:'Uize.Widget.PopupPalette[2.*]',
+			_Uize_Widget_FormElement:'Uize.Widget.FormElement'
+		},
+		builder:function (_superclass,m) {
+			/*** Class Constructor ***/
+				var
+					_class = _superclass.subclass (
+						_null,
+						function () {
+							this.addChild ('popupPalette',m._Uize_Widget_PopupPalette ());
+							this.addChild ('input',m._Uize_Widget_FormElement ());
+						}
+				;
+
+				return _class;
+		}
+	});
+	..............................................................................
+
+	EXAMPLE 2
+	..............................................................................
+	Uize.module ({
+		name:'Uize.Widget.Droplist',
+		superclass:'Uize.Widget',
+		required:[
+			'Uize.Widget.PopupPalette',
+			'Uize.Widget.FormElement'
+		},
+		builder:function (_superclass,m) {
+			/*** Class Constructor ***/
+				var
+					_class = _superclass.subclass (
+						_null,
+						function () {
+							this.addChild ('popupPalette',m ('Uize.Widget.PopupPalette'));
+							this.addChild ('input',m ('Uize.Widget.FormElement'));
+						}
+				;
+
+				return _class;
+		}
+	});
+	..............................................................................
+
+	Module Variations
+		Variations vs Versions
+			The system should generally support the notion of a variation of a module, rather than specifically versions.
+
+			Versions are a narrower application of the more general variation system.
+
+		Variation File Naming
+			In order for multiple variations of the same module to coexist alongside one another in the file system, the different variations must have different filenames.
+
+			While a required module qualifier can provide matching criteria that can be used to test if an existing loaded variation of the module matches the criteria, an explicit fallback must be specified in the event that no matching variation can be found in the currently loaded modules.
+
+	Module Specifier
+		A module specifier identifies a specific module, by name alone, or by a combination of name and an additional `variation qualifier`.
+
+	Variation Qualifier
+		A variation qualifier is a specialized kind of value matcher that is applied to all loaded modules to find a module that matches certain criteria.
+
+		Variation Qualifier for Specifying Version
+			In the simplest form, a `variation qualifier` can be used to indicate an acceptable version or versions for a module.
+
+			EXAMPLE
+			....................................................................................................
+			Uize.module ({
+				required:{
+					_Uize_Curve:{
+						name:'Uize.Curve',
+						version:/^2.[1|2](\..*)?$/  // require versions 2.1 and subversions, or 2,2 and subversions
+					}
+				},
+				builder:function (_superclass,m) {
+					// referencing required modules inside this scope...
+					_Uize_Curve ()...
+				}
+			});
+			....................................................................................................
+
+	Issues to Address
+		- if one has a reference to a module, such as in a tool like the Delve tool, how does one determine what the filename of a module is for the purpose of linking to reference documentation?
+		- if a `variation qualifier` is used to indicate a very specific variation of a module, and if that variation is not yet loaded, how does the module loader mechanism know where to obtain a variation that matches the criteria of the `variation qualifier`?
+
+JavaScript Language Unit Tests
+	Implement unit tests for all features of the JavaScript language.
+
+	For In Loops And Undefined Array Elements
+		In several versions of Microsoft's JScript interpreter, if an array is initialized using the literal syntax (ie. =['value 1','value 2','value 3']=), then any element whose value is initialized to =undefined= will not be encountered in a =for...in= loop.
+
+		EXAMPLE
+		....................................
+		var
+			keysHash = {},
+			myArray = ['foo',undefined,'bar']
+		;
+		for (key in myArray) {
+			keysHash [key] = true;
+		}
+		alert (keysHash [1]);
+		....................................
+
+		In the above example, the =alert= statement would alert the value =undefined= in interpreters that exhibit the problematic behavior. This behavior could cause problems when using a =for...in= loop to compare arrays to see if their elements and custom properties are identical.
+
+		A test can be written for this issue as follows...
+
+		TEST
+		..............................................................
+		var _hasIssueWithForInLoopsAndUndefinedArrayElements = true;
+		for (var _key in [undefined]) {
+			if (_key == 0)
+				_hasIssueWithForInLoopsAndUndefinedArrayElements = false
+			;
+		}
+		..............................................................
+
+Function Argument Validation
+	Provide a facility that can optionally be used for function argument validation.
+
+	An easy way to define validator logic that can be used to validate the arguments of a function call. It sounds kind of like a test, so maybe some convenience features to allow easily creating an arguments test.
+
+	Method Signature Validation as Optional Layer
+		Possibly a way generally to have method signature validation as a separate optional layer of code.
+
+		As a Separate Module
+			Maybe a separate module that can accompany the main module?
+
+		Validation Code Inside the Main Module
+			Maybe the validation code is inside the main module, but can be optimized / compiled out for scrunched production code?
+
+			There are some benefits to the validation code being inside the main module's implementation. A traditional approach here would be to have a compiler flag / directive that could affect whether or not the validation is included / enabled.
+
+Client Services
+	- unit conversion (possible to implement this on the client side, but might be appropriate to migrate such a service to server side at some stage, and in such a case it would be desirable to allow for such a migration in a way that doesn't heavily impact the code using such a service)
+
+	- myWidget.ajax | myWidget.service
+	- Uize.Widget.Page.MySite subclass implements performAjax
+
+	- myWidget.ajax ({action:'convert',fromUnit:'inches',toUnit:''})
+
+	Example 1
+
+		BEFORE
+		...........................................................
+		myWidget.callInherited ('ensureLoggedIn') (function () {});
+		...........................................................
+
+		AFTER
+		.................................................
+		myWidget.ajax ({service:'login'},function () {});
+
+		// or...
+
+		myWidget.service ('login',function () {});
+		.................................................
+
+	Example 2
+
+		BEFORE
+		..........................................................
+		myWidget.callInherited ('enableProfile') (function () {});
+		..........................................................
+
+		AFTER
+		.........................................................
+		myWidget.ajax ({service:'enableProfile'},function () {});
+
+		or...
+
+		myWidget.service ('enableProfile',function () {});
+		.........................................................
+
+	What All Can Services Replace or Do?
+		- things like ensureLoggedIn & ensure (becomes login and services)
+			- should be something like a login service
+		- basic unit conversion, localization services, validation services
+		- useDialog for probably a good number of existing dialogs that gather input / choices from the user
+		- anything asynchronous that requires a callback
+
+	Dynamically Load Client Code Supporting Service
+		Look at the example of enableProfile.
+
+		Benefit of being able to dynamically load code supporting client side execution of portions of the service.
+
+	Zazzle Specific Registration of Services
+
+		SYNTAX
+		...
+		{
+			service:serviceNameSTR,
+			module:moduleNameSTR,
+			methodName:methodNameSTR
+		}
+		...
+
+		EXAMPLE - EXISTING CODE
+		...
+		{
+			service:'isValidHandle',
+			module:'Zazzle.Validator',
+			methodName:'handle'
+		}
+		...
+
+		EXAMPLE - NEW CODE
+		...
+		{
+			service:'enableProfile',
+			performService:function (_params,_directives) {
+				var _this = this;
+				Uize.module ({
+					required:'Zazzle.Services.MemberProfile',
+					builder:function () {
+						Zazzle.Services.MemberProfile.enable (_params,_this);
+					}
+				});
+			}
+		}
+		...
+
+	Caching?
+		If implemented in Uize.Comm, can get the benefit of its client caching mechanism. How could one get that benefit using a different approach? (such as implementing in performAjax in page widget subclass)
+
+Test Improvements
+	Make Unit Test Build Scripts Generic
+		Shareable Code to Dynamically Add Tests
+			Have shareable code that can take a list of module names, and dynamically add tests for modules for which no dedicated test modules have been created.
+
+			This code would be used in the UIZE Unit Tests example page, by supplying the list of modules from the =UizeSite.ModulesTree= module, and in the =Uize.Build.RunUnitTests= build script module which would obtain a list of modules using the =getFiles= method of the FileSystem service.
+
+	Clean Up Tests
+		Make Performance Tests Legit
+			Performance tests that aren't browser dependent should be turned into true test modules.
+
+			- they would exist under the namespace =Uize.Test.Performance=
+			- they would be combined into a test suite module as =Uize.Test.PerformanceTests=
+			- they would be runnable in the regular UIZE Unit Tests example
+			- as real modules, they would automatically have reference documentation, which could contain the full description / explanation for what the tests aim to establish
+
+		- some tests could become examples
+		- some tests could be eliminated
+
+	Put Tests Into Separate Uize.Tests Namespace
+		It would be better for tests to exist under a different namespace than =Uize.Test=, so that the =Uize.Test= namespace can be reserved for test subclasses for special types of tests.
+
+	For Unit Test Build Scripts
+		Consider testing the loading of modules in isolation of other modules, in order to determine that modules correctly declare their dependencies, without having missing declared dependencies masked by other modules that were loaded and built before them that shared some of their dependencies.
+
+		This approach would still not be foolproof, however, since merely loading and building a module can't determine that all modules that are needed are declared in the =required= list, since some required modules may only be accessed during runtime execution of some code within a module.
+
+	Test All JavaScript Files
+		It would be nice if the build script could also test code besides and other JavaScript files throughout the folder hierarchy of a site, rather than just testing the modules.
+
+		There might be numerous issues with testing arbitrary JavaScript files found spotted throughout a Web site's folders. For one thing, such JavaScript files may not be written as =Uize= JavaScript modules, and such files may not be able to be loaded without causing errors if they depend on other JavaScript code that they don't declare dependencies on.
+
+Node as a Widget
+	- a lot of widgets have to synchronize state to implied nodes
+
+	- to make it easier for widgets to optimize their performance and minimize the number of times that they touch the DOM in performing UI updates, it might be helpful to provide a representation of the state of a DOM node in the form of a widget. In this approach, implied nodes are instead represented as node type child widgets. Instances of node type widgets can carry state for a node while the widget is not yet wired and while the node does not exist, to be synchronized with the node when the widget is wired up later.
+
+	In what different ways do widgets touch implied nodes?
+
+	- modifying the className to reflect state
+	- modifying position
+	- modifying dimensions
+	- modifying color
+	- wiring event handlers
+
+Test Modules to Implement Next...
+	- =Uize.Test.Uize.Template=
+	- =Uize.Test.Uize=
+	- =Uize.Test.Uize.Json=
+	- =Uize.Test.Uize.Color=
+	- =Uize.Test.Uize.Color.xUtil=
+	- =Uize.Test.Uize.Curve=
+	- =Uize.Test.Uize.Build.Scruncher=
+	- =Uize.Test.Uize.Curve.Rubber=
+	- =Uize.Test.Uize.Curve.Mod=
+
+Value Transformer Function
+	- a function that is flagged as a value transformer
+	- it is up to each function or method to determine if they will support value transformers or not
+	- good candidates for methods to support value transformers...
+		- myInstance.set
+		- MyClass.set
+		- Uize.Fade.fadeProperty
+		- Uize.Fade.fadeProperties
+		- Uize.Fx.fadeStyle
+		- Uize.Node.setStyle, myWidget.setNodeStyle
+		- Uize.Node.setProperty, myWidget.setNodeProperty
+
+	- makes sense where the value for which a value transformer is being specified is intended to specify a value for something for which a current value is known
+
+	Semantics
+		.........................................................
+		// plus value transformer
+		slider.set ({value:Uize.add.x (10)});
+		slider.set ({value:Uize.x ('x + 10')});
+		slider.set ({value:Uize.x (function (x) {return x + 10}}));
+
+		// boolean toggle value transformer
+		slider.set ({value:Uize.not})
+		slider.set ({value:Uize.x ('!x')})
+		slider.set ({value:Uize.x (function (x) {return !x})})
+
+		// multiply value transformer
+		slider.set ({value:Uize.multiply.x (10)});
+		slider.set ({value:Uize.x ('x * 10')});
+		slider.set ({value:Uize.x (function (x) {return x * 10})});
+
+		Uize.multiply.x (10)
+		Uize.x ('x * 10')
+		function (x) {return x * 10}
+
+		Uize.add.x (10)
+		Uize.x ('x + 10')
+		function (x) {return x + 10}
+
+		Uize.subtract.x (10)
+		Uize.x ('x - 10')
+		function (x) {return x - 10}
+
+		Uize.divide.x (10)
+		Uize.x ('x / 10')
+		function (x) {return x / 10}
+
+		Uize.mod.x (10)
+		Uize.x ('x % 10')
+		function (x) {return x % 10}
+
+		Uize.not
+		Uize.x ('!x')
+		function (x) {return !x}
+
+		Uize.round
+		Uize.x (Math.round)
+		Uize.x ('Math.round (x)');
+		function (x) {return Math.round (x)}
+		.........................................................
+
+	Behavior
+		- for any state property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property
+		- for any state property that is defined in its property profile as allowing function type values, but that is not defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property
+		- for any state property that is defined in its property profile as allowing function type values and that is also defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will simply be set as the new value for that property
+
+	Possible Implementation
+		................................................................................
+		function _makeValueTransformer (_functon,_extraArguments) {
+			var _valueTransformer = _extraArguments && _extraArguments.length
+				? function (x) {return _functon.apply (this,[x].concat (_extraArguments))}
+				: function (x) {return _functon.call (this,x)}
+			;
+			_valueTransformer.isValueTransformer = true;
+			return _valueTransformer;
+		}
+		................................................................................
+
+		....................................................................................................
+		var _cachedValueTransformers = {};
+		Uize.x = function (_unresolvedValueTransformer) {
+			var _valueTransformer = _unresolvedValueTransformer;
+			if (typeof _valueTransformer == 'function') {
+				if (!_valueTransformer.isValueTransformer)
+					_valueTransformer = _makeValueTransformer (
+						_functon,
+						arguments.length > 1 && Array.prototype.slice.call (arguments,1)
+					)
+				;
+			} else {
+				_valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer += ''];
+				if (!_valueTransformer) {
+					_valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer] = new Function (
+						'x',
+						'return ' + _unresolvedValueTransformer
+					);
+					_valueTransformer.isValueTransformer = true;
+				}
+			}
+			return _valueTransformer;
+		};
+		....................................................................................................
+
+		...............................................................................
+		function _x () {return _makeValueTransformer (this,arguments)}
+		Uize.exify = function (_function,_wrapOriginal) {
+			var _arity = _function.arity || _function.length;
+			if (_wrapOriginal) {
+				var _originalFunction = _function;
+				_function = function () {return _originalFunction.apply (this,arguments};
+			}
+			if (_arity < 2) _function.isValueTransformer = true;
+			_function.x = _x;
+			return _function;
+		};
+		...............................................................................
+
+		...
+		// define
+		Uize.divide = Uize.exify (function (x,denominator) {return x / denominator});
+
+		// use
+		Uize.divide (10,2);
+		Uize.divide.x (2);
+
+		// define
+		Uize.round = Uize.exify (Math.round,true); // wrap original, so as not to modify native function's properties
+
+		// define
+		Uize.isType = Uize.exify (function (x,type) {return typeof x == type});
+
+		// use
+		Uize.isNumber = Uize.isType.x ('number');
+		Uize.isString = Uize.isType.x ('string');
+		...
+
+		...
+		Uize.willCall (Uize.isType,[0,'number'],0)
+		Uize.isTypeOf.x ('number')
+		...
+
+		...
+		_makeExify ('divide',function (x,value) {return x / value});
+		...
+
+Profiling Support
+	- a means for getting reports of the time that certain operations take on a page
+		- module building time
+			- time for building each module
+			- total time for building all modules
+		- for widget instances (stored on each instance)...
+			- construction time
+			- wiring time
+				- total wiring time
+				- wiring time for children
+				- self wiring time
+			- inspect by widget tree
+			- inspect by module
+				- total number of instances
+				- total construction time
+				- total wiring time
+				- average construction time
+				- average wiring time
+
+Performance Questions...
+	- is there any difference between array.push (element) and array [array.length] = element ?
+		- there appears to be, with assign-to-end being faster, but it is not significant. In building an array of 1,000,000 elements, it can make a difference of up to 2 seconds. Difference is most pronounced in IE. At scales of 1000 elements, it makes a difference of just 1 or 2 ms. The assign-to-end approach adds to code size a tiny bit, requires maintaining a separate array length counter variable, and doesn't offer the convenience of pushing multiple elements in a single statement. Assign-to-end with accessing the length property is definitely not advisable, since that would eat into the performance benefit and more significantly add to code size.
+
+	- when getting a reference to a node, does it hurt to fall back to document.getElementsByName?
+		- doesn't appear to make that much difference in cases of many lookups. Optimizing it out for most lookups might help a little bit, but it's not that compelling.
+
+	- does setting a style property on a node always incur a cost, even if the value you're setting is the current value? If so, does accessing and testing before setting improve performance?
+
+	- what's the performance difference between Math.round (myNumber) and (myNumber + .5) >> 0 ?
+
+	- what's the performance difference between...
+
+		.........................................................
+		function doSomething (value) {
+			...
+		}
+		doSomething ('value1');
+		doSomething ('value2');
+		doSomething ('value3');
+		doSomething ('value4');
+		.........................................................
+
+		...and...
+
+		.........................................................
+		for (var value in {value1:1,value2:1,value3:1,value4:1}) {
+			...
+		}
+		.........................................................
+
+	- what's the performance difference between...
+
+		.........................................................
+		if (condition) doSomething ();
+		.........................................................
+
+		...and...
+
+		.........................................................
+		condition && doSomething ();
+		.........................................................
+
+Idea for Handling Functions That May Be Asynchronous
+	- approach 1
+		.........................................................
+		function blah (param1,param2,param3,_returnResult) {
+			var _returnResult = arguments.callee.returnResult || _returnResult;
+			delete arguments.callee.returnResult;
+
+			doAsyncStuff (
+				function () {
+					_returnResult (result);
+				}
+			);
+
+			arguments.callee.isAsync = true;
+		}
+
+		function callAsAsync (_functionToCall,_args,_returnResult) {
+			_functionToCall.returnResult = _returnResult;
+			var
+				result = _functionToCall.apply (_args),
+				thisCallWasAsync = _functionToCall.isAsync
+			;
+			delete _functionToCall.returnResult;
+			delete _functionToCall.isAsync;
+			thisCallWasAsync || setTimeout (0,function () {_returnResult (result)});
+		}
+		.........................................................
+
+		using it...
+
+		.........................................................
+		callAsAsync (blah,[1,2,3],handleReturn);
+		function handleReturn (result) {
+		}
+		.........................................................
+
+	- approach 2
+		.........................................................
+		function isValidUser (_user) {
+			var _result = new Async;
+
+			doAsyncUserValidation ({
+				user:_user,
+				callback:function (_isValidUser) {
+					_result.returnResult
+						? _result.returnResult (_isValidUser)
+						: (_result = _isValidUser)
+					;
+				}
+			});
+
+			return _result;
+		}
+
+		function callAsAsync (_functionToCall,_args,_returnResult) {
+			var _result = _functionToCall.apply (0,_args);
+			_result instanceof Async
+				? (_result.returnResult = _returnResult)
+				: _returnResult (_result)
+			;
+		}
+		.........................................................
+
+		using it...
+		.........................................................
+		callAsAsync (
+			isValidUser,
+			['timipoo'],
+			function (_isValid) {
+				// do next stuff
+			}
+		);
+		.........................................................
+
+- the most challenging and difficult problems to solve
+	- generic I18N resource string dependency system
+	- CSS dependency resolution system
+	- generic tracking/logging solution
+	- unit testing
+
+Generic Solution for Tracking
+	- in most cases, should not require code changes
+	- ability, from the outside of code, to track any event of any type of widget
+	- whether or not to track an event is determined by a configurable rule
+	- with tracked events, ability to log any aspects of state state that might be interesting
+	- tracking is basically just logging by a different name
+	- tracking and logging as good candidates for Aspect Oriented Programming
+
+Only Use set Method For Changing Property Values
+	Make sure that all setting of properties is done through the set method (ie. no more adhoc setting by assigning using the private name). Use a regular expression to search through the code.
+
+	How to Find Offending Cases
+		To find most cases...
+
+		SEARCH REGEXP
+		.........................................................
+		/this\._\w+\s*=[^=]/
+		.........................................................
+
+		...or write a build script that scans through JS files, determines private names of registered properties, and then uses those names in generated regular expressions to find direct assignments.
+
+- factor out code for validating a value, where the validator can be...
+	- a simple value, to which the value being tested should be compared for equality
+	- a function, whose return result should indicate whether or not the value being tested is valid
+	- a regular expression, which should be tested on the value to determine if it is valid
+	- null or undefined, indicating that no test should be performed
+	- an optional parameter, indicating whether or not equality, strict equality, or dynamic (or some better name) mode should be used
+
+	- could be used...
+		- Uize (modify Uize.recordMatches)
+		- Uize.Node.find
+
+- should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)
+	- while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?
+		Uize.Browser.Window.write
+			Uize.Browser.Window.write (window,content)
+			Uize.Browser.Window.write (window,content,contentType)
+		Uize.Browser.Window.launch
+		Uize.Browser.Window.center
+			Uize.Browser.Window.center (window)
+			Uize.Browser.Window.center ()
+		Uize.Browser.Window.resize
+			Uize.Browser.Window.resize (windowOBJ,width,height,positionX,positionY)
+
+			Uize.Browser.Window.resize (window,600,400)
+			Uize.Browser.Window.resize (window,'max','max')
+			Uize.Browser.Window.resize (window,null,'max')
+
+Key Aspects of a Framework
+	Solving fundamental problems in useful, convenient, friendly, understandable ways
+
+	- performance (load time, interaction speed, memory usage (non-leaky))
+	- i18n / L10n
+	- interaction logging & tracking
+	- multivariate testing
+	- application robustness & state management
+	- skinning / theming
+	- troubleshooting
+	- sensible code reuse
+	- ease of development
+	- easy wow (effects and animation)
+	- user help
+	- interoperability
+
+- Uize.Delayed
+	Portion of Implementation
+
+		.........................................................
+		_classPrototype.cancel = function () {
+			if (_this._timeout) {
+				clearTimeout (_this._timeout);
+				_this._timeout = _null;
+			}
+		}
+		_classPrototype.perform (_actionFunction) { // support optional delay param
+			var
+				_this = this,
+				_delay = _this._delay
+			;
+			_this.cancel ();
+			_delay ? (_this._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();
+		};
+		.........................................................
+
+	Another Possible Implementation
+
+		.........................................................
+		Uize.caller = function (_context,_method,_params,_delay) {
+			function _callMethod () {
+				var _function = typeof _method == 'string' ? _context [_method] : _method;
+				_function.callerThis = this;
+				_function.callerArguments = arguments;
+				var _result = _params ? _function.apply (_context,_params) : _function.call (_context);
+				delete _function.callerThis;
+				delete _function.callerArguments;
+				return _result;
+			}
+			_callMethod.cancel = function () {};
+			if (_delay) {
+				var
+					_timeout,
+					_caller = function () {
+						var
+							_this = this,
+							_arguments = arguments
+						;
+						return (_timeout = setTimeout (function () {_callMethod.apply (_this,_arguments)},_delay));
+					}
+				;
+				(_caller.cancel = function () {if (_timeout) _timeout = clearTimeout (_timeout)}) ();
+				return _caller;
+			} else {
+				return _callMethod;
+			}
+		};
+		.........................................................
+
+	Sample Usage
+		Approach 1
+			.........................................................
+			_this._delayedAction = Uize.Delayed ({delay:1000});
+			_this.wireNode (
+				node,
+				{
+					mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},
+					mouseout:function () {_this._delayed.cancel ()}
+				}
+			);
+			.........................................................
+
+		Approach 2
+			.........................................................
+			var _delayedCaller = Uize.caller (_this,'doSomething',null,1000);
+			_this.wireNode (
+				node,
+				{
+					mouseover:_delayedCaller,
+					mouseout:function () {_delayedCaller.cancel ()}
+				}
+			);
+			.........................................................
+
+	Thoughts
+		.........................................................
+		function () {_this.setNodeStyle ('blah',{color:'#000'})}
+		Uize.caller (_this,'setNodeStyle,['blah',{color:'#000'}])
+
+		Uize.defer
+		.........................................................
+
+		What's good about closures for node event handlers is that they can access...
+
+		- the node as this
+		- the event as the first parameter
+
+		What's bad about closures...
+
+		- don't offer the delayed execution and cancelability supported with Uize.caller
+		- code hangs on to state of closure's scope
+
+More Unobtrusive JavaScript Features
+	Implement more unobtrusive features, where no JS is needed inside markup, such as...
+
+	- links that are flagged to pop open windows (perhaps with target="[some window name]")
+	- expand/collapse
+		- a lightweight way to get expand/collapse behavior into documents, without having to instantiate widgets
+
+Code Development (in order of priority)
+	**** property changed events refactoring
+		- some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?
+
+		- the code registered in handlers for the Changed.[propertyName] event is now being executed as a batch for the changed properties after the whole batch of onChange handlers is executed. Could this cause order of execution problems, with some code already expecting the previous behavior?
+
+		- the Uize.Widget.Options class is using the '*' event to bubble up events from the button instances. The Uize.Widget.Button class was previously firing an event for change of the 'selected' property value. Because of the way that the Changed.[propertyName] event is currently implemented, this event will no longer be bubbled up. Could this issue with the '*' event become a general problem?
+
+		- perhaps onChange handlers should get the previous value for the property as a parameter
+
+	- high-minded ideas
+		- drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface
+		- an easy way to bind two widgets to each other, so that values are syncronized
+		- an orthogonal effect system that does not require widget code to implement effects
+		- a codified system for registering optimized handlers for batch property changes (eg. when value and value set are changed in one action)
+
+	- memory usage optimizations
+		- use prototype for state properties?
+
+	- performance optimizations
+		- a way to avoid calling onChange handlers at construction time
+
+	- new subclassing syntax
+		.........................................................
+		MyClass.subclass ({
+			alphastructor:{
+			},
+			omegastructor:{
+			},
+			instanceMethods:{
+			},
+			staticMethods:{
+			},
+			instaticMethods:{
+			},
+			setGetProperties:{
+			}
+		});
+		.........................................................
+
+	widget ID scheme refactoring
+		other...
+			- possibly come up with a different term for the root node of a widget (since we still have shell references in identifiers in various places, possibly just "root" instead of "shell")
+
+	image border fade overlay
+		a convenient way to automatically overlay a border fade on images in a document
+
+	Uize.TextOutline: a little class to make it easy to create an outline effect around text, so that it can be legible when against a background of a similar tone (ie. insufficient contrast)
+
+	Graphing DHTML
+		overlay for stock price chart images to highlight date and price at date
+
+	Image Letters Widget (Uize.Widget.Spritext)
+		an easy way to display words using character set table images
+
+	Auto-wired hide-reveal mechanism
+		for documents with sections of extra in-depth information that most users may not be interested. Allows the information to be available and read in the context of the larger document with an extra click, but without creating an overly heavy read for most users
+
+	Stars Rating Widget
+		a convenient way to have a rating value translated into a graphic of stars (whole and fractional). Could this be accomplished with a generalized bar / slider widget that has stars as its fullness bg?
+
+	Suggest / Auto-complete Widget
+
+	Utility routine to easily make a bunch of links open in a new window
+		- mode to automatically detect links to larger images and wire to open correctly sized. Frill where linked thumbnail "throbs" outwardly to suggest enlarging.
+		- mode to overlay alt/title on image with transparency effect
+
+	Auto-viewer for Images
+		Simply put in image tags in your page, let the auto-viewer present the images to the user in a professional layout
+		- covenient skins for easy setup
+
+	IDEAS
+		- facilitate multiple controls controlling the same data (eg. two buttons for the same action) -- might be two different object instances linked in some way
+		- combined with conformer mechanism, perhaps also the concept of discrete set value and resolved (ie. calculated value) value -- so if there was a valid range and there was an attempt to set outside the valid range, the common value used by most code would be the resolved value, but the set value would also still be stored and accessible through some interface
+
+	Puzzle Game
+		- takes an image and splits it up into puzzle fragments and then lets the user drag and drop them in place
+		- race against time
+		- mode where puzzle split if they haven't been used in a while
+		- mode where unused pieces fade out over time
+		- difficulty level can affect number of pieces
+		- difficulty level can increase piece dimension variation
+
+	- expand/collapse module for documents (to attach logic in similar way to Uize.Widget.Tree.List)
+	- letters remaining widget implemented using slider indicator widget
+	- XY selector widget
+	- nifty javascript bookmarklets that allow you to view the online version of a local file, or the local version of an online file
+	- table color fader
+	- text color fader
+	- ordering widget (for customizing table column order, etc.)
+
+BUGS
+	General
+		- examples/button-types.html - nodes type button
+			- when disabled or selected, busy cursor doesn't display
+			- in IE, when in normal state, busy cursor only display when mousing over certain regions
+
+	Firefox
+		- in the button-types example, the frames style button does not fire the "Click" event (seems to have something to do with the mousedown event handler's execution)
+
+	Safari
+		- for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)
+		- the slideshow stuff is not working
+		- the ThumbZoom class zoom out effect is not centering in the window when the window is scrolled
+		- after an image has zoomed out, there is a brief moment where the shield displays all solid before the opacity kicks in
+
+		...ImagePort.Draggable
+			no way to initiate Ctrl modifier key behaviors
+
+		Color Pickers With Gradient example
+			extremely slow
+
+		ThumbZoom
+			- zoom out effect is very choppy
+			- fade-to-black effect is very choppy
+			- weird flash sometimes at start of fade-to-black
+			- positioning is not adjusted for page being scrolled
+			- zoomed image is spontaneously dismissed if page had scrollbars (some weird event thing?)
+
+	IE (in order of priority)
+		- "Uize.WiseLoad Example": mouseover opacity effect on thumbnails not working (and trying to enable it using filter:alpha(opacity=...) was completely hosing my machine)
+
