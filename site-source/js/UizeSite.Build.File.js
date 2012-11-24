@@ -404,7 +404,7 @@ Uize.module ({
 					builder:function (_inputs) {
 						var _info = Uize.Build.Util.getHtmlFileInfo (
 							_inputs.htmlFile,
-							UizeSite.Build.Util.getFirstTitleSegment
+							function (_title) {return _title.match (/^\s*(.*?)\s*\|/) [1]}
 						);
 						_info.path = _info.path.slice (_builtPath.length + 1);
 						return _info;
