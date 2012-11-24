@@ -56,7 +56,7 @@ Uize.module ({
 								? _folderPath.slice (0,-_sourceFolderNameLength - 1)
 								: null
 						)
-						: Uize.Build.Util.resolveBuiltFolderPath (_folderPath,_buildFolderPath)
+						: _package.resolveBuiltFolderPath (_folderPath,_buildFolderPath)
 				);
 			};
 
