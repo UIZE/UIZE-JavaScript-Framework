@@ -108,7 +108,11 @@ Uize.module ({
 					_path = _params.path,
 					_fileSystemObject = this._fileSystemObject
 				;
-				_callback (_fileSystemObject.FileExists (_path) ? _fileSystemObject.GetFile (_path).DataLastModified : NaN);
+				_callback (
+					_fileSystemObject.FileExists (_path)
+						? new Date (_fileSystemObject.GetFile (_path).DataLastModified)
+						: NaN
+				);
 			};
 
 			_classPrototype.pathExists = function (_params,_callback) {
