@@ -29,7 +29,7 @@
 Uize.module ({
 	name:'Uize.Build.NeatenJsFiles',
 	required:[
-		'Uize.Wsh',
+		'Uize.Build.Util',
 		'Uize.String.Lines',
 		'Uize.Build.AutoScruncher'
 	],
@@ -39,18 +39,11 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
-				Uize.Wsh.buildFiles (
+				Uize.Build.Util.buildFiles (
 					Uize.copyInto (
 						{
 							targetFolderPathCreator:function (_folderPath) {
-								return (
-									Uize.Build.AutoScruncher.getScrunchedFolderPath (
-										_folderPath,
-										_params.buildFolderPath,
-										_params.sourceFolderName
-									) &&
-									_folderPath
-								);
+								return _folderPath;
 							},
 							targetFilenameCreator:function (_sourceFileName) {
 								return /\.js$/.test (_sourceFileName) ? _sourceFileName : null;
