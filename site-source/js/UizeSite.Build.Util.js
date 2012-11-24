@@ -24,38 +24,6 @@ Uize.module ({
 		/*** Public Static Methods ***/
 			_package.getFirstTitleSegment = function (_title) {return _title.match (/^\s*(.*?)\s*\|/) [1]};
 
-			_package.getExamplesByKeyword = function () {
-				var _examplesByKeyword = {};
-				for (
-					var
-						_exampleNo = -1,
-						_examples = Uize.Build.Util.getHtmlFilesInfo ('examples',_package.getFirstTitleSegment),
-						_examplesLength = _examples.length,
-						_example,
-						_keywordsStr
-					;
-					++_exampleNo < _examplesLength;
-				) {
-					if (_keywordsStr = (_example = _examples [_exampleNo]).keywords) {
-						var _keywords = _keywordsStr.split (' ');
-						for (
-							var _keywordNo = -1, _keywordsLength = _keywords.length, _keyword;
-							++_keywordNo < _keywordsLength;
-						)
-							(
-								_examplesByKeyword [_keyword = _keywords [_keywordNo]] ||
-								(_examplesByKeyword [_keyword] = [])
-							).push ({
-								title:_example.title,
-								url:'../' + _example.path,
-								description:_example.description
-							})
-						;
-					}
-				}
-				return _examplesByKeyword;
-			};
-
 		return _package;
 	}
 });
