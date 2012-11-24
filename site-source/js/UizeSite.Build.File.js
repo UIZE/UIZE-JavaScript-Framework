@@ -23,7 +23,6 @@
 			- provide build instructions for WSH and NodeJS
 
 		- merge source_vs_built_restructuring branch back into main
-		- deploy new site
 
 		- add announcement for changes to build process
 
@@ -32,6 +31,7 @@
 			- Uize.Build.NeatenJsFiles
 			- Uize.Build.UpdateCopyrightNotices
 			- implement new Uize.Build.Util.BuildFiles module by porting across buildFiles method from Uize.Wsh
+
 		- get the build all script working with running the unit tests in NodeJS
 			- must have way to run scripts (so, a new service module that abstracts process capabilities?)
 
@@ -39,6 +39,8 @@
 			- add support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- document the Web server functionality (under dev section initially)
 		- document services model
+
+		- get character encoding declared at the top of every HTML document
 
 		- improve performance of the build-all script
 			- possibly provide a way for the _filesConsideredCurrentLookup lookup to persist across calls to the UizeSite.Build.File.perform method
