@@ -82,7 +82,6 @@ Uize.module ({
 		'Uize.Util.Oop',
 		'Uize.Data.Matches',
 		'Uize.Build.Util',
-		'UizeSite.Build.Util',
 		'Uize.Array.Sort',
 		'Uize.Data.PathsTree',
 		'Uize.String.Lines',
