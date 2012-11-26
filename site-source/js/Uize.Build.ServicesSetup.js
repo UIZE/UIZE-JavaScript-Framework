@@ -26,62 +26,16 @@
 
 Uize.module ({
 	name:'Uize.Build.ServicesSetup',
-	required:[
-		'Uize.Util.Needs',
-		'Uize.Data.Matches'
-	],
+	required:'Uize.Services.Setup',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
 		/*** Public Static Methods ***/
 			_package.setup = function () {
-				var
-					_uizeRequire = Uize.require,
-					_servicesSetup = Uize.Util.Needs (),
-					_registeredServices = {},
-					_trueFlag = {}
-				;
-
-				/*** override Uize.require in order to inject service setup ***/
-					Uize.require = function (_modules,_callback) {
-						if (typeof _modules == 'string')
-							_modules = [_modules]
-						;
-						_uizeRequire (
-							_modules,
-							function () {
-								var _uizeRequireCallbackArgs = arguments;
-								_servicesSetup.need (
-									Uize.Data.Matches.values (
-										_modules,
-										function (_module) {return _registeredServices [_module] == _trueFlag}
-									),
-									function () {_callback && _callback.apply (0,_uizeRequireCallbackArgs)}
-								);
-							}
-						);
-					};
-
-				function _registerServiceSetup (_serviceModuleName,_serviceAdapterModuleName,_serviceSetup) {
-					_registeredServices [_serviceModuleName] = _trueFlag;
-					_servicesSetup.provide (
-						_serviceModuleName,
-						function (_provide) {
-							_uizeRequire (
-								[_serviceModuleName,_serviceAdapterModuleName],
-								function (_serviceModule,_serviceAdapterModule) {
-									(_service = _serviceModule.singleton ()).set ('adapter',_serviceAdapterModule.singleton ());
-									_serviceSetup (_service,function () {_provide (_service)});
-								}
-							);
-						}
-					);
-				}
-
-				/*** register setup for different services ***/
+				/*** provide setup for FileSystem service ***/
 					var _isWsh = typeof ActiveXObject != 'undefined';
-					_registerServiceSetup (
+					Uize.Services.Setup.provideServiceSetup (
 						'Uize.Services.FileSystem',
 						_isWsh ? 'Uize.Services.FileSystemWsh' : 'Uize.Services.FileSystemNode',
 						function (_service,_doneWithSetup) {
