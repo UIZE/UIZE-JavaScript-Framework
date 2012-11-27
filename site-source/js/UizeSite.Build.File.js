@@ -19,8 +19,6 @@
 
 /* TODO:
 	- to implement
-		- get log output working again
-			- add support in factored out code for producing log output, so that built scripts can generate log files much like before
 		- document the Web server functionality (under dev section initially)
 
 		- get character encoding declared at the top of every HTML document
@@ -85,7 +83,6 @@ Uize.module ({
 		'Uize.Array.Sort',
 		'Uize.Data.PathsTree',
 		'Uize.String.Lines',
-		'Uize.Data.Matches',
 		'UizeSite.SiteMap'
 	],
 	builder:function () {
