@@ -26,6 +26,9 @@ Uize.module ({
 		var _data;
 		return function (_overrides) {
 			if (!_data || _overrides) {
+				if (!_overrides)
+					_overrides = {}
+				;
 				var _divider = {title:'-'};
 
 				/*** build the modules reference items from the modules tree data ***/
