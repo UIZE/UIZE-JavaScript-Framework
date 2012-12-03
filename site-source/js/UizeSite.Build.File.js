@@ -19,8 +19,6 @@
 
 /* TODO:
 	- to implement
-		- get character encoding declared at the top of every HTML document
-
 		- improve performance of the build-all script
 			- possibly provide a way for the _filesConsideredCurrentLookup lookup to persist across calls to the UizeSite.Build.File.perform method
 
