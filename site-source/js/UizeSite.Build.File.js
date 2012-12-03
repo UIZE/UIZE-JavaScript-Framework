@@ -18,10 +18,6 @@
 */
 
 /* TODO:
-	- to implement
-		- improve performance of the build-all script
-			- possibly provide a way for the _filesConsideredCurrentLookup lookup to persist across calls to the UizeSite.Build.File.perform method
-
 	- to improve
 		- for manageability of the code, figure out an elegant way to be able to have separate file handlers (or sets of handlers) as separate modules
 		- UizeSite.SiteMap should dynamically reflect the following...

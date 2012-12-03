@@ -77,7 +77,6 @@ Uize.module ({
 						gif:'image/gif',
 						jpg:'image/jpeg'
 					},
-					_minAllowedModifiedDate = _params.freshBuild == 'true' ? Uize.now () : -Infinity,
 					_builtPath = _params.builtPath
 				;
 
@@ -98,15 +97,7 @@ Uize.module ({
 							_startTime = Uize.now ()
 						;
 						try {
-							UizeSite.Build.File.perform (
-								Uize.copyInto (
-									{
-										url:_requestUrl.slice (1),
-										minAllowedModifiedDate:_minAllowedModifiedDate
-									},
-									_params
-								)
-							);
+							UizeSite.Build.File.perform (Uize.copyInto ({url:_requestUrl.slice (1)},_params));
 							_fileContents = _fileSystem.readFile ({path:_builtUrl,encoding:'buffer'});
 							_response.writeHead (200,{'Content-Type':_mimeTypes [Uize.Url.from (_requestUrl).fileType]});
 						} catch (_error) {

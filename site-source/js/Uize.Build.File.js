@@ -90,6 +90,9 @@ Uize.module ({
 				return _pathPrefix + (_path && _path.charCodeAt (0) != 47 ? '/' : '') + _path;
 			};
 
+		/*** Private Static Properties ***/
+			_class._filesConsideredCurrentLookup = {};
+
 		/*** Public Static Properties ***/
 			_class.fileSystem = Uize.Services.FileSystem.singleton ();
 			_class.urlHandlers = [];
@@ -196,15 +199,17 @@ Uize.module ({
 				};
 
 			_class.perform = function (_params,_pathPrefix) {
-				var
-					_filesConsideredCurrentLookup = {},
-					_this = this,
-					_minAllowedModifiedDate = _params.minAllowedModifiedDate =
-						Uize.toNumber (_params.minAllowedModifiedDate,-Infinity)
-				;
+				var _this = this;
 				_this.params = _params;
 				_params.isDev = _params.isDev == 'true';
-
+				if (_params.freshBuild = _params.freshBuild == 'true') {
+					_this._filesConsideredCurrentLookup = {};
+				}
+				var
+					_filesConsideredCurrentLookup = _this._filesConsideredCurrentLookup,
+					_minAllowedModifiedDate = _params.minAllowedModifiedDate =
+						Math.max (Uize.toNumber (_params.minAllowedModifiedDate,-Infinity),_params.freshBuild * Uize.now ())
+				;
 				function _ensureFileCurrent (_url) {
 					/*
 						- how handlers are used...
