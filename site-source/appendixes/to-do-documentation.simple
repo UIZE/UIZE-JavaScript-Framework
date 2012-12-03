@@ -3,6 +3,9 @@ This document lists to do tasks relating to the documentation and Web site for t
 JavaScript Services
 	Create an explainer to explain the approach UIZE takes to services.
 
+JIT File Builder Web Server
+	Document the Web server functionality (under dev section initially) that is used by the UIZE Web site and that employs the same code as the build process.
+
 Update the Getting Started Documentation
 	Update the Getting Started explainer to have build instructions for WSH and NodeJS, now that only the source code is downloaded in the ZIP archive.
 

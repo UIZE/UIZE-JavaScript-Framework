@@ -19,8 +19,6 @@
 
 /* TODO:
 	- to implement
-		- document the Web server functionality (under dev section initially)
-
 		- get character encoding declared at the top of every HTML document
 
 		- improve performance of the build-all script
