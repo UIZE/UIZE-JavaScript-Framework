@@ -21,7 +21,7 @@
 					'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
 				'*/\n'
 		},
-		freshBuild:'false',
+		freshBuild:'true',
 		deployConfigPath:'../deploy.config.json',
 
 	/*** UIZE Web site specific modules to stub ***/

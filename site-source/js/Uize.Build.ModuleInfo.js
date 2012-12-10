@@ -69,6 +69,22 @@ Uize.module ({
 			var _getDirectDependencies = _package.getDirectDependencies = function (_moduleName) {
 				var _definition = _package.getDefinition (_moduleName);
 				return _definition ? Uize.resolveModuleDefinition (_definition).required : [];
+				/*?
+					Static Methods
+						Uize.Build.ModuleInfo.getDirectDependencies
+							Returns an array, containing the names of all the modules that are declared as direct dependencies of the specified module.
+
+							SYNTAX
+							...............................................................................
+							moduleNamesARRAY = Uize.Build.ModuleInfo.getDirectDependencies (moduleNameSTR);
+							...............................................................................
+
+							Unlike the related =Uize.Build.ModuleInfo.traceDependencies= static method, which performs deep dependency tracing, the =Uize.Build.ModuleInfo.getDirectDependencies= method only returns the direct dependencies for a module.
+
+							NOTES
+							- compare to the related =Uize.Build.ModuleInfo.traceDependencies= static method
+
+				*/
 			};
 
 			_package.traceDependencies = function (_modules,_excludeModules) {
