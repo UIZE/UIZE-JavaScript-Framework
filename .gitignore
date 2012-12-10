@@ -1,4 +1,5 @@
 *.log
+/temp
 /site-built
 /site-temp
 /uize-site-built.zip
