@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =Uize.Build.ModuleInfo= module provides various methods for obtaining information about modules JavaScript modules.
+		The =Uize.Build.ModuleInfo= module provides various methods for obtaining information about JavaScript modules.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
