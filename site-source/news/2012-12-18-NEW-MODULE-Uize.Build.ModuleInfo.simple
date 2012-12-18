@@ -1,0 +1,38 @@
+The new =Uize.Build.ModuleInfo= module provides various methods for obtaining information about JavaScript modules.
+
+The =Uize.Build.ModuleInfo= module is intended primarily for build processes that build JavaScript libraries / packages that contain all necessary dependency modules. Among other things, this module provides a means for performing package dependency tracing for modules.
+
+Summary of Methods
+	The =Uize.Build.ModuleInfo= module provides the following methods...
+
+	Uize.Build.ModuleInfo.getDefinitionFromCode
+		Returns an object, representing the module definition for the module supplied in the specified module code string.
+
+		SYNTAX
+		..................................................................................
+		moduleDefinitionOBJ = Uize.Build.ModuleInfo.getDefinitionFromCode (moduleCodeSTR);
+		..................................................................................
+
+	Uize.Build.ModuleInfo.getDefinition
+		Returns an object, representing the module definition for the specified module.
+
+		SYNTAX
+		..........................................................................
+		moduleDefinitionOBJ = Uize.Build.ModuleInfo.getDefinition (moduleNameSTR);
+		..........................................................................
+
+	Uize.Build.ModuleInfo.getDirectDependencies
+		Returns an array, containing the names of all the modules that are declared as `direct dependencies` of the specified module.
+
+		SYNTAX
+		...............................................................................
+		moduleNamesARRAY = Uize.Build.ModuleInfo.getDirectDependencies (moduleNameSTR);
+		...............................................................................
+
+The =Uize.Build.ModuleInfo= module is comprehensively documented. Consult the reference for more detailed information on its various methods and how they behave.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-12-18 - NEW MODULE: Uize.Build.ModuleInfo
+....................................................................................
