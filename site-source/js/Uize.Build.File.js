@@ -211,13 +211,13 @@ Uize.module ({
 				var _this = this;
 				_this.params = _params;
 				_params.isDev = _params.isDev == 'true';
-				if (_params.freshBuild = _params.freshBuild == 'true') {
-					_this._filesConsideredCurrentLookup = {};
-				}
+				_params.freshBuild = _params.freshBuild == 'true';
 				var
-					_filesConsideredCurrentLookup = _this._filesConsideredCurrentLookup,
-					_minAllowedModifiedDate = _params.minAllowedModifiedDate =
-						Math.max (Uize.toNumber (_params.minAllowedModifiedDate,-Infinity),_params.freshBuild * Uize.now ())
+					_filesConsideredCurrentLookup = _this._filesConsideredCurrentLookup = {},
+					_minAllowedModifiedDate = _params.minAllowedModifiedDate = Math.max (
+						Uize.toNumber (_params.minAllowedModifiedDate,-Infinity),
+						_params.freshBuild ? Uize.now () : -Infinity
+					)
 				;
 				function _ensureFileCurrent (_url) {
 					/*
