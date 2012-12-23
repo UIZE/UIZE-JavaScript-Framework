@@ -1503,41 +1503,6 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that state properties can be registered in an ad hoc fashion, by specifying values for unregistered properties when calling the constructor',
-									test:function () {
-										var
-											_Subclass = Uize.Class.subclass (),
-											_instance1 = new _Subclass ({foo:'bar'}),
-											_instance2 = new _Subclass
-										;
-										return this.expect ({foo:undefined},_instance2.get ());
-									}
-								},
-								{
-									title:
-										'Test that state properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set instance method',
-									test:function () {
-										var
-											_Subclass = Uize.Class.subclass (),
-											_instance1 = new _Subclass
-										;
-										_instance1.set ({foo:'bar'});
-										var _instance2 = new _Subclass;
-										return this.expect ({foo:undefined},_instance2.get ());
-									}
-								},
-								{
-									title:
-										'Test that state properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set static method',
-									test:function () {
-										var _Subclass = Uize.Class.subclass ();
-										_Subclass.set ({foo:'bar'});
-										var _instance = new _Subclass;
-										return this.expect ({foo:'bar'},_instance.get ());
-									}
-								},
-								{
-									title:
 										'Test that multiple state properties can be registered cumulatively by calling registerProperties repeatedly',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
@@ -2958,6 +2923,92 @@ Uize.module ({
 									this.expect ('myProperty3 initial value',_instance._myProperty3)
 								);
 							}
+						},
+						{
+							title:'Test ad hoc registration of properties',
+							test:[
+								{
+									title:
+										'Test that state properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set static method',
+									test:function () {
+										var _Subclass = Uize.Class.subclass ();
+										_Subclass.set ({foo:'bar'});
+										var _instance = new _Subclass;
+										return this.expect ({foo:'bar'},_instance.get ());
+									}
+								},
+								{
+									title:
+										'Test that, when properties are registered for an instance in an ad hoc fashion, by setting values for the unregistered properties using the set instance method, those instance ad hoc properties are not registered on the class',
+									test:function () {
+										var
+											_Subclass = Uize.Class.subclass (),
+											_instance1 = new _Subclass
+										;
+										_instance1.set ({foo:'bar'});
+										var _instance2 = new _Subclass;
+										return (
+											this.expect ({},_Subclass.get ()) &&
+											this.expect ({},_instance2.get ())
+										);
+									}
+								},
+								{
+									title:
+										'Test that, when properties are registered for an instance in an ad hoc fashion, by specifying values for unregistered properties when calling the constructor, those instance ad hoc properties are not registered on the class',
+									test:function () {
+										var
+											_Subclass = Uize.Class.subclass (),
+											_instance1 = new _Subclass ({foo:'bar'}),
+											_instance2 = new _Subclass
+										;
+										return (
+											this.expect ({},_Subclass.get ()) &&
+											this.expect ({},_instance2.get ())
+										);
+									}
+								},
+								{
+									title:
+										'Test that, for properties that are registered for an instance in an ad hoc fashion, the values are contained in the object that is returned by the form of the get instance method that takes no parameters',
+									test:function () {
+										var
+											_Subclass = Uize.Class.subclass (),
+											_instance = new _Subclass
+										;
+										_instance.set ({foo:'bar'});
+										return this.expect ({foo:'bar'},_instance.get ());
+									}
+								},
+								{
+									title:
+										'Test that the special Changed.* event is fired for instance properties that are registered in an ad hoc fashion, by setting values for unregistered properties using the set instance method',
+									test:function () {
+										var
+											_Subclass = Uize.Class.subclass (),
+											_instance = new _Subclass,
+											_changedEventWasFired,
+											_eventObjectPropertiesProperty,
+											_adHocProperties = {
+												foo:'bar',
+												hello:'world'
+											}
+										;
+										_instance.wire (
+											'Changed.*',
+											function (_event) {
+												_changedEventWasFired = true;
+												_eventObjectPropertiesProperty = _event.properties;
+											}
+										);
+										_instance.set (_adHocProperties);
+										return (
+											this.expect (true,_changedEventWasFired) &&
+											this.expect (_adHocProperties,_eventObjectPropertiesProperty)
+										);
+									}
+								}
+							]
 						},
 						{
 							title:'Test the condition related instance methods',

@@ -1159,6 +1159,12 @@ Uize.module ({
 								_result [_propertyProfilesByPrivateNames [_propertyPrivateName]._publicName] =
 									_this [_propertyPrivateName]
 							;
+							if (_isInstance (_this)) {
+								var _adHocProperties = _this._adHocProperties;
+								if (_adHocProperties)
+									for (_property in _adHocProperties) _result [_property] = _this [_property]
+								;
+							}
 						} else if (_isArray (_property)) {
 							for (
 								var _subPropertyNo = -1, _totalSubProperties = _property.length;
@@ -1430,10 +1436,16 @@ Uize.module ({
 							_propertyPrivateName = _propertyProfile._privateName;
 							_propertyPublicName = _propertyProfile._publicName;
 						} else {
-							(_propertiesToRegister || (_propertiesToRegister = {})) [
-								_propertyPrivateName = _propertyPublicName = _propertyPublicOrPrivateName
-							] =
-								_propertyProfile = _thisIsInstance ? {} : {value:_propertyValue}
+							_propertyPrivateName = _propertyPublicName = _propertyPublicOrPrivateName;
+							_propertyProfile = _thisIsInstance ? {} : {value:_propertyValue};
+							_thisIsInstance
+								? (
+									(_this._adHocProperties || (_this._adHocProperties = {})) [_propertyPublicOrPrivateName] =
+										true
+								) : (
+									(_propertiesToRegister || (_propertiesToRegister = {})) [_propertyPublicOrPrivateName] =
+										_propertyProfile
+								)
 							;
 						}
 						if (_thisIsInstance)
@@ -1447,7 +1459,6 @@ Uize.module ({
 									)
 									: _propertyValue
 						;
-
 						if (_propertyValue !== _this [_propertyPrivateName]) {
 							if (_thisIsInstance) {
 								/*** build up list of events to fire for 'Changed.' event handlers ***/
