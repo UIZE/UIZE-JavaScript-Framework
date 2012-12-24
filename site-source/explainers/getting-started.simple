@@ -22,8 +22,20 @@ Build the Web Site
 	The Web site can be built very easily, either using Windows Script Host in Windows, or using NodeJS on any operating system.
 
 	Windows
+		On Windows, the Web site can be built by running the build script in either WSH (Windows Script Host) or NodeJS.
+
+		- *WSH* - To run the build script using WSH (Windows Script Host), which is built into Windows, simple double click on the =_Uize.Build.All.js= file that is at the root of the =UIZE-JavaScript-Framework= folder.
+		- *NodeJS* - To run the build script using NodeJS, first make sure that you have NodeJS installed on your system. Once you do, go into either a Windows command line window or a Bash window, change your current / working directory to the =UIZE-JavaScript-Framework= folder, and then execute the command =node _build.js Uize.Build.All=
 
 	Mac OS & Linux
+		On Mac OS or Linux, the Web site can be built by running the build script in NodeJS.
+
+		First make sure that you have NodeJS installed on your system. Once you do, go into a Bash window, change your current / working directory to the =UIZE-JavaScript-Framework= folder, and then execute the command =node _build.js Uize.Build.All=
+
+	The Built Web Site
+		Once you have built the Web site, there will be a =site-built= folder under the =UIZE-JavaScript-Framework= folder.
+
+		The =site-built= folder will contain the entire built Web site for the UIZE JavaScript Framework - the very same Web site that is available online at *uize.com*. To view the Web site locally without a Web server, you can simply drag the =index.html= file into your Web browser of choice.
 
 Copy the JavaScript Files
 	To use UIZE in a Web site project, you should copy the =js= folder from the =site-built= folder (created under the =UIZE-JavaScript-Framework-master= folder by the [[Build the Web Site][build process]]) to a desired location in your project's folder.
