@@ -96,11 +96,11 @@ Uize.module ({
 
 				/*** do the deploy ***/
 					/*** delete old .zip archive ***/
-						_fileSystem.deleteFile ({path:'uize-site-built.zip'});
+						_fileSystem.deleteFile ({path:'temp/uize-site-built.zip'});
 
 					/*** create uize-site-built.zip, and create dated copy in archives ***/
 						Uize.Wsh.execute (
-							'"' + _deployConfig.appPaths ['7-Zip'] + '" a uize-site-built.zip site-built -r'
+							'"' + _deployConfig.appPaths ['7-Zip'] + '" a temp/uize-site-built.zip site-built -r'
 						);
 
 					/*** FTP zip archive to Web site ***/
@@ -108,7 +108,7 @@ Uize.module ({
 							_uizeSite,
 							[
 								'binary',
-								'put uize-site-built.zip'
+								'put temp/uize-site-built.zip uize-site-built.zip'
 							]
 						);
 
