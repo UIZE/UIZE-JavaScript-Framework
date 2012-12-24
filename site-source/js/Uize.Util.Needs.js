@@ -70,7 +70,8 @@ Uize.module ({
 				/*?
 					Instance Methods
 						need
-							
+							Lets you register code that should only be executed once one or more needs have been satisfied, and invokes the providers of those needs if the providers have already been registered.
+
 							DIFFERENT USAGES
 
 							`Register Code That Has a Single Need`
@@ -106,6 +107,8 @@ Uize.module ({
 								In the above example,
 
 							Register Code That Has Multiple Needs
+								By specifying a =needNamesARRAY= parameter for the first argument when calling the =need= method, handler code can be registered that has multiple needs.
+
 								SYNTAX
 								..............................................................
 								wiringsOBJ = myNeedsInstance.need (needNamesARRAY,neederFUNC);
