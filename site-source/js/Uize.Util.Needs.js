@@ -14,7 +14,7 @@
 	importance: 3
 	codeCompleteness: 100
 	testCompleteness: 0
-	docCompleteness: 90
+	docCompleteness: 100
 */
 
 /*?
@@ -26,16 +26,61 @@
 		In a Nutshell
 			The =Uize.Util.Needs= class facilitates needs management and can ensure correct order of execution of code in situations where dependency relationships exist between disparate and distributed code.
 
-			A common problem with complex application code, where initialization of different components of code may involve potentially asynchronous processes, or processes that may sometimes be synchronous and in other conditions be asynchronous, is that some code that has a need for some object to have been created, or for the completion of some setup phase, is not able to explicitly control the timing of when its need will be met - it may be at the mercy of some other complex chain of events that involves yet other code over which it has no control.
+			A common problem with complex application code, where initialization of different components of code may involve potentially asynchronous processes, or processes that may sometimes be synchronous and under other conditions be asynchronous, is that some code that has a need for some object to have been created, or for the completion of some setup phase, is not able to explicitly control the timing of when its need will be met - it may be at the mercy of some other complex chain of events that involves yet other code over which it has no control.
 
-			In tricky situations like this, the =Uize.Util.Needs= class allows needs to be explicitly exposed by registering `providers` for those needs. Then, those needs can in turn be needed explicitly by registering `needers`. This allows needer code to be declared as being dependent on a need (or needs), and provider code to be declared as being the provider of a need. When a provider is registered for a need, that provider code is invoked the first time that the need is needed. Once the provider has finished producing the need result, that result is provided to the needer handler function.
+			In tricky situations like this, the =Uize.Util.Needs= class allows needs to be explicitly exposed by registering `providers` for those needs. Then, those needs can in turn be needed explicitly by registering `needers`. This allows needer code to be declared as being dependent on a need (or needs), and provider code to be declared as being the provider of a need. When a provider is registered for a need, that provider code is invoked the first time that the need is needed. Once the provider has finished producing the need result, that result is provided to the needer handler function, and is essentially "cached" for future needers of the same need.
 
 			This is all best illustrated with a simple example...
 
 			EXAMPLE
-			...
-			blah
-			...
+			..................................................................
+			// create the needs manager instance
+			var needsManager = Uize.Util.Needs ();
+
+			// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+
+			// register the "myThing" provider
+			needsManager.provide (
+				'myThing',
+				function (_provide) {
+					Uize.require (
+						'MyNamespace.MyThing',
+						function (_MyNamespace_MyThing) {
+							var _myThing = new _MyNamespace_MyThing ();
+							// do _myThing instance setup
+							_provide (_myThing);
+						}
+					);
+				}
+			);
+
+			// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+
+			// register the "myThing" needer
+			needsManager.need (
+				'myThing',
+				function (_myThing) {
+					// do something with _myThing
+				}
+			);
+			..................................................................
+
+			In the above example, a =Uize.Util.Needs= instance is being created by calling the class constructor. Then, in some other code, a provider is being registered for the "myThing" need by calling the =provide= instance method on the instance, specifying the name of the need along with the provider function that should be called the first time that the need is needed. When the provider function is called, it is provided callback function that it should call in order to deliver the need result.
+
+			The callback pattern is important, because it allows the provider code to be potentially asynchronous. This is a good thing, because in this case the provider function is requiring the =MyNamespace.MyThing= module, creating an instance of it, and then passing that back using the callback. Requiring the module will likely be asynchronous if it is not already loaded.
+
+			Now, on the opposite side of the world, a needer is being registered for the "myThing" need by calling the =need= instance method on the shared =needsManager= instance, specifying the name of the need along with the handler function that should be called once the need has been provided. The handler function receives the need result as its single argument, and it can then do with the needed item what it pleases.
+
+			It's as simple as that.
+
+			Decoupling and Insulating Needers from Providers
+				The needs system makes it possible to decouple and insulate needers from providers.
+
+				In our example above, let's pretend that the code that registers the provider and the code that registers the needer are in totally separate parts of the code, possibly even in different modules, and that the needer code knows nothing about how the need is provided - when the provider is registered, and whether the need is provided in a synchronous or asynchronous manner.
+
+				All the needer knows is that the need is named "myThing" and is managed through a =Uize.Util.Needs= instance that is accessible via the variable =needsManager=. Similarly, the provider knows nothing about how the need is needed - whether or not it will even be needed at runtime, how many needers will depend on the need, and when those needers might be registered (could be before or after the provider is registered). All the provider knows is that the need is named "myThing" and is managed through a =Uize.Util.Needs= instance assigned to the shared variable =needsManager=.
+
+				This is a pretty effective decoupling of the needer and provider, insulating the two pieces of code from execution order irregularities or inconsistencies that may be introduced over time as the code evolves, or that may always exist due to differences between the various environments in which the code may execute.
 
 			Needers and Providers
 				The =Uize.Util.Needs= class provides a way to set up `casual relationships` between `needers` and `providers`.
@@ -102,10 +147,78 @@
 				Registering Providers
 					Providers can be registered by calling the =provide= instance method, specifying the need and the `provider` handler that should be executed the first time that the need is needed.
 
+					EXAMPLE
+					.......................................................................
+					// register the "auditSubsystem" provider
+					needsManager.provide (
+						'auditSubsystem',
+						function (_provide) {
+							Uize.require (
+								'MyNamespace.AuditSubsystem',
+								function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
+							);
+						}
+					);
+					.......................................................................
+
+					In the above example, we are registering a provider for the "auditSubsystem" need. Registering the provider involves specifying the name of the need that is being provided, along with a handler function that will be responsible for providing the need and that will be called the first time that the need is needed.
+
+					The provider function can execute asynchronous code in order to provide the need, so it is passed a callback function that should be called to deliver the result. You can name the argument for this callback function anything you like - in this example, we have named it =&#95;provide=. In the example, our provider is requiring a module =MyNamespace.AuditSubsystem=. When that module has been loaded, an instance is created and then passed as the result when calling the =&#95;provide= callback function.
+
 					Only One Provider Per Need
 						Unlike `registering needers`, where it is perfectly valid to register `multiple needers for the same need`, one should only ever register one provider per need.
 
 						Registering multiple providers for the same need could produce unpredictable results and should, therefore, be avoided.
+
+					Provider is Executed Only the First Time
+						If a need that has already been provided is needed again by a different needer, then the cached need result is delivered to that needer.
+
+						This ensures that the provider code is only executed the very first time that a need is needed and *not* redundantly thereafter.
+
+			Provide Before Need, Need Before Provide
+				By design, the needs system allows providers to be registered before corresponding needers, or needers to be registered before corresponding providers.
+
+				So, for example, the two examples below would both work quite nicely and would produce the same great outcome - the needer code would get executed at just the right time once the need has been provided and not before.
+
+				EXAMPLE - PROVIDE BEFORE NEED
+				...............................................................................
+				// register the "auditSubsystem" provider
+				needsManager.provide (
+					'auditSubsystem',
+					function (_provide) {
+						Uize.require (
+							'MyNamespace.AuditSubsystem',
+							function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
+						);
+					}
+				);
+
+				// register the "auditSubsystem" needer
+				needsManager.need (
+					'auditSubsystem',
+					function () {alert (needsManager.is ('auditSubsystem'))}  // displays "true"
+				);
+				...............................................................................
+
+				EXAMPLE - NEED BEFORE PROVIDE
+				...............................................................................
+				// register the "auditSubsystem" needer
+				needsManager.need (
+					'auditSubsystem',
+					function () {alert (needsManager.is ('auditSubsystem'))}  // displays "true"
+				);
+
+				// register the "auditSubsystem" provider
+				needsManager.provide (
+					'auditSubsystem',
+					function (_provide) {
+						Uize.require (
+							'MyNamespace.AuditSubsystem',
+							function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
+						);
+					}
+				);
+				...............................................................................
 
 			Needs System is Built on the Conditions System
 				The needs system implemented in the =Uize.Util.Needs= module is built on top of the conditions system that is implemented in the =Uize.Class= base class module.
@@ -119,6 +232,16 @@
 					In a similar way to how the needs system implements `needs as properties`, the neededness for needs is implemented using state properties whose names are derived from the need names.
 
 					When a need handler is registered for a need (by calling the =need= instance method), a state property is set to =true= whose name is the name of the need with the prefix "NEEDED&#95;" prepended. So, for example, if a `needer` is registered for the "auditSubsystem" need, then the state property named =NEEDED_auditSubsystem= will be set to =true=. Now, when a `provider` is registered for the "auditSubsystem" need (by calling the =provide= instance method), the provider code will only be executed once the =NEEDED_auditSubsystem= property becomes truthy.
+
+			Unlimited Needs
+				There is no limit imposed on the number of needs that can be managed through an instance of the =Uize.Util.Needs= class.
+
+				You can register providers and needers for needs in an ad hoc fashion, and for as many different needs as is appropriate for your application. You can even programatically generate providers for needs using dynamically generated need names, if that's something that's useful for your application.
+
+			As Many Needs Managers as Desired
+				Because the needs system is implemented in a class, and because each instance of the class can support `unlimited needs`, it is possible to create as many needs managers as desired.
+
+				One can use a =Uize.Util.Needs= instance exclusively within the implementation of a class in order to leverage the needers and providers pattern for instances of that class, or one could create a global shared =Uize.Util.Needs= instance in order to manage needs at an application environment level. So, you can have needs management at an instance scope, at a class scope, at a global scope, etc. Each instance of the =Uize.Util.Needs= class will manage its own set of needs.
 
 			Unwiring Needers and Providers
 				While it is a highly unlikely use case, it is theoretically possible to unwire needers and providers before they've had a chance to be executed.
@@ -164,7 +287,7 @@
 					Because needs are represented using state properties, it is easy to check if a need has been provided simply by using the =is= instance method to test if a need's property is truthy.
 
 					EXAMPLE
-					.......................................................................
+					...............................................................................
 					alert (needsManager.is ('auditSubsystem'));  // displays "false"
 
 					// register the "auditSubsystem" provider
@@ -183,11 +306,9 @@
 					// register the "auditSubsystem" needer
 					needsManager.need (
 						'auditSubsystem',
-						function () {
-							alert (needsManager.is ('auditSubsystem'));  // displays "true"
-						}
+						function () {alert (needsManager.is ('auditSubsystem'))}  // displays "true"
 					);
-					.......................................................................
+					...............................................................................
 
 					In the above example, we are registering a provider for the "auditSubsystem" need. However, before the provider has been registered, we are testing if the need has been provided using the expression =needsManager.is ('auditSubsystem')=. Naturally, this test produces the result =false=, since the need has not yet been provided. After all, the provider for the need has not even been registered. Then, immediately after the provider is registered, we are once again testing if the need has been provided. This test still produces the result =false=, since no needer has yet been registered. Finally, we are registering a needer for the need, and in the handler code we are once more executing the same test. This time the test produces the result =true=, since by the time that the need handler is executed, the =auditSubsystem= state property will have been set to a truthy value.
 
@@ -483,13 +604,11 @@ Uize.module ({
 							EXAMPLE
 							.......................................................................
 							// create the Uize.Util.Needs instance
-
 							var needsManager = Uize.Util.Needs ();
 
 							// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
 
 							// register the "auditSubsystem" provider
-
 							needsManager.provide (
 								'auditSubsystem',
 								function (_provide) {
@@ -502,7 +621,6 @@ Uize.module ({
 							// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
 
 							// register the "auditSubsystem" needer
-
 							needsManager.need (
 								'auditSubsystem',
 								function (_auditSubsystem) {
