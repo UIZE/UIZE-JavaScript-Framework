@@ -1,4 +1,10 @@
 # renamed or relocated pages
+	# migrated TODO documents
+		Redirect 301 /appendixes/to-do-documentation.html http://www.uize.com/todo/documentation.html
+		Redirect 301 /appendixes/to-do-general.html http://www.uize.com/todo/general.html
+		Redirect 301 /appendixes/to-do-news-announcements.html http://www.uize.com/todo/news-announcements.html
+		Redirect 301 /appendixes/to-do-modules.html http://www.uize.com/todo/modules.html
+
 	# renamed examples
 		Redirect 301 /examples/window-draggable.html http://www.uize.com/examples/dialog.html
 		Redirect 301 /examples/window-resizable.html http://www.uize.com/examples/dialog-resizable.html

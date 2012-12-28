@@ -71,6 +71,7 @@ Uize.module ({
 					function _news (_year) {return _item (_year + ' News','','news-' + _year)}
 					function _javaScriptReference (_title,_link) {return _item (_title,'javascript-reference/',_link)}
 					function _appendix (_title,_link) {return _item (_title,'appendixes/',_link)}
+					function _todo (_title,_link) {return _item (_title,'todo/',_link)}
 					function _perfTest (_title,_link) {return _item (_title,'tests/performance/',_link)}
 
 				/*** utilize the info from the UizeSite.ExamplesInfoForSiteMap module ***/
@@ -270,10 +271,10 @@ Uize.module ({
 							{
 								title:'TO DO',
 								items:[
-									_appendix ('TO DO - Modules'),
-									_appendix ('TO DO - Documentation'),
-									_appendix ('TO DO - General'),
-									_appendix ('TO DO - News Announcements')
+									_todo ('Modules'),
+									_todo ('Documentation'),
+									_todo ('General'),
+									_todo ('News Announcements')
 								]
 							}
 							/*
