@@ -1,0 +1,51 @@
+This TO DO document is intended to capture all the requirements that need to be satisfied in order to make UIZE a widely acceptable framework that can be integrated into external sites as easily and cleanly as possible.
+
+In order for using UIZE to be a viable option for external sites, the following needs will have to be addressed in UIZE...
+
+Ability to Load Modules from Multiple Sources
+	External sites would want to keep their codebase separate from the UIZE codebase, so it would be necessary to provide a way for all modules - JS, CSS, images, HTML templates, etc. - to be able to be organized into separate external site and UIZE areas.
+
+	The dynamic loader system would need to support multiple sources, as well as the build processes.
+
+Packaging
+	- JS Packaging
+	- CSS Packaging
+	- Image Spritifying
+	- HTML Template Compiling
+
+Third Party JavaScript
+	document...
+
+MVC System
+	Base classes would need to be provided for the model, view, and controller aspects of an MVC code architecture.
+
+jQuery Interoperability
+	A way would have to be provided to allow jQuery code to be used in conjunction with UIZE, which includes jQuery plugins.
+
+	jQuery Files as UIZE Modules
+		To satisfy the dependency management system, a way should be provided to allow jQuery files to be wrapped / expressed as UIZE modules.
+
+		This could potentially be achieved by a build handler for 3rd party files that does the wrapping as part of a build process.
+
+Folder Organization of Code
+	Currently, UIZE is built around the assumption that all code exists in a flat js folder structure.
+
+	Ideally, in order to facilitate better management of code, UIZE would be adapted to support different code being able to exist in different folders.
+
+Visual Unit Tests for Widgets
+	UIZE should provide a way that JavaScript visual widget unit tests can be developed, with a system for easily navigating and running those unit tests.
+
+	This system should also make it possible to provide fake data services setup, as needed, in order to view widgets divorced from live application dependencies.
+
+CSS Class Namespacing
+	document...
+
+	CSS Class Namespacing in CSS Files
+		document...
+
+	CSS Class Name Expansion in HTML Templates
+		document...
+
+Localization
+	document...
+
