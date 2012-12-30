@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Widget.HtmlEntity= module.
+
 - a widget that lets you select an HTML entity
 - selector for number of entities to display per row
 	- should it be a slider that controls entity cell size?

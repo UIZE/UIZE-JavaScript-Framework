@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Build.Scruncher= module.
+
 - allow the first block of comments in a document to consist of comment lines that are started with a "//"
 - provide more info in reports
 	- time elapsed

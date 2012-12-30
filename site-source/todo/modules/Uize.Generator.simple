@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Generator= module.
+
 - from the widget's perspective as a user of generators
 	- you have a set of display properties (state properties that are reflected in the UI)
 	- a widget class should be able to register which of its state properties affect display

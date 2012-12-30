@@ -1,3 +1,7 @@
+This is a proposal document for a =Uize.Util.Conformer= module.
+
+*NOTE:* How does this module relate to the proposed =Uize.Conformer= module? Does this module subsume that module?
+
 Examples of Usage
 	................................................................................
 	conformer:Uize.Util.Conformer.oneOf (['auto','always'],'auto')

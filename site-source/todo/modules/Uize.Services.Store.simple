@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Services.Store= module.
+
 A service that provides simple data storage.
 
 Adapters for the =Uize.Services.Store= can provide varying degrees of persistence of the data.

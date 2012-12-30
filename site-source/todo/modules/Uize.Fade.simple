@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Fade= module.
+
 - instead of start / stop methods, just use property interface (ie. inProgress property)
 - for compound curves and quantization, a way to specify a default for all properties of an object, when an object is specified in order to specify curves or quantization for some properties
 	eg.

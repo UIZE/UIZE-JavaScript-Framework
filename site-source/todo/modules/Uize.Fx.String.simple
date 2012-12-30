@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Fx.String= module.
+
 - it should be possible to animate the value of a string over time, and have anything display the value of that string (could be shown in browser's title bar, could be shown in a div or span, could be set on an instance property, etc.)
 
 ................................................................................

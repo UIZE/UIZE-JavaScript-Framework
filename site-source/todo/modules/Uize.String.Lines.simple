@@ -1,7 +1,11 @@
-Uize.String.Lines.addLineNumbering
+This is a TO DO document for the =Uize.String.Lines= module.
 
-low priority
+Possible New Methods
 	Uize.String.Lines.removeLineNumbering ??
+		Would remove line numbering from all the lines of a multi-line string.
+
+		Since this seems kind of esoteric, perhaps it could be put into a =Uize.String.Lines.Numbering= module, which would have methods like =Uize.String.Lines.Numbering.addNumbering= and =Uize.String.Lines.Numbering.removeNumbering=.
+
 	Uize.String.Lines.consolidateBlanks
 		................................................................................
 		Uize.String.Lines.consolidateBlanks = function (_sourceStr) {

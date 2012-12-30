@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.Dialog= module.
+
 - support for multiple non-modal windows at the same z level, with switching when mousing down on any part of window
 - the update UI method for position updates should not always resize the drag shield
 

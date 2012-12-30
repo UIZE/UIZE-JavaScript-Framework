@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Class= module.
+
 Convenience Methods for Class Creation
 	instanceMethods
 		Lets you declare one or more instance methods, by specifying the methods in an object.

@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Is= module.
+
 The =Uize.Is= module would provide methods for testing if values meet various test criteria.
 
 Examples of Methods

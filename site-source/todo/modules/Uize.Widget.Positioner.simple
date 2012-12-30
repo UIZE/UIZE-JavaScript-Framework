@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Widget.Positioner= module.
+
 - used to position a node, and maintain the node's position as properties that should influence its position are modified
 - different positioning behaviors can be specified for each axis
 - types of positioning behaviors to accommodate...

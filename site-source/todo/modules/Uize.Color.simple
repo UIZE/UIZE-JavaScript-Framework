@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Color= module.
+
 - support for % unit in "RGB string" decoder (eg. rgb(100%,50%,25%))
 	- support % generically in setTupleFromString, now that there are profiles for the color components
 - for color profile conversions, can component profile min/max info now be used for normalizing values to 0-1 range, and denormalizing as well?

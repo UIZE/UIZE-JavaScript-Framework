@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.ColorInfo= module.
+
 A simple widget that provides a swatch for previewing a color and shows the current color as a background with white and black text, and as a text color over white and black background.
 
 NOTES

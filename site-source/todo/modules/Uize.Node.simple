@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Node= module.
+
 Proposed Simplified Interface
 	The following proposed interface aims to address the desire amongst Web developers for easier and more concise ways to access and manipulate DOM elements.
 

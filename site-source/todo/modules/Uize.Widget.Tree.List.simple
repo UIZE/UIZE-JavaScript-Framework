@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.Tree.List= module.
+
 - research implementing markup using true nested UL/LI
 - refactor to make all styling done through CSS (ie. no img URLs known to JS). Do away with old school approach.
 - support for divider items

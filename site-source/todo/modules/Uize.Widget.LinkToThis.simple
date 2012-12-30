@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Widget.LinkToThis= module.
+
 A widget that wires up anchored section headings in a document, so that...
 
 - mousing over the heading displays a tooltip that invites the user to click to get a URL/link for that section of the document

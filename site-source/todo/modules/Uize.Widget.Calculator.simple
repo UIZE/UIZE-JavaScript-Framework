@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.Calculator= module.
+
 - BUG WITH PASTE:
 	- when pasting in a new value that contains a decimal point, the point button is not disabled as it should be
 	- pasting in a value when the current value is an empty string, or was entirely selected, does not behave as value entry (so it does not clear the clearOnNextDigit flag)

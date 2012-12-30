@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Fx= module.
+
 - for all style properties that can be animated by this module, it would be useful if parsing and serializing of the style properties was available outside of the context of just fading for FX purposes
 	- perhaps a Uize.Css module (see Uize.Css)?
 

@@ -1,2 +1,4 @@
-An instance of the Uize.Widget.Browser class used in a resizable dialog.
+This is a proposal document for a =Uize.Widget.Dialog.Browser= module.
+
+An instance of the =Uize.Widget.Browser= class used in a resizable dialog.
 

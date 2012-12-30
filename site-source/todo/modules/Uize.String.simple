@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.String= module.
+
 Uize.String.lengthize (sourceSTR,lengthINT,alignFLOAT,padBOOL,truncateBOOL,tildeBOOLorSTR)
 	- how does this relate to Uize.String.limitLength? (is limitLength a special case of lengthize?)
 	- should the defaults for the extended parameters result in it effectively being a pad? If so, should there be a pad method that is just an alias to lengthize?

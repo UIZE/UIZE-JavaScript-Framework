@@ -1,4 +1,7 @@
-Get the build all script working with running the unit tests in NodeJS.
+This is a TO DO document for the =Uize.Build.All= module.
 
-In order to accomplish this, we must have a way to run scripts (so, a new service module that abstracts process capabilities?).
+Get it Working in NodeJS
+	Get the build all script working with running the unit tests in NodeJS.
+
+	In order to accomplish this, we must have a way to run scripts (so, a new service module that abstracts process capabilities?).
 

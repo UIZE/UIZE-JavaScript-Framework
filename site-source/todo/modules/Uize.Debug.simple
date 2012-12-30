@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Debug= module.
+
 Implement a package to facilitate logging and debugging of all Uize subclasses.
 
 The module should provide the following...

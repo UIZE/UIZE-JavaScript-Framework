@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Array.Order= module.
+
 New 'binary' Mode for Uize.Array.Order.reorder
 	Reorders the array in a binary search pattern.
 

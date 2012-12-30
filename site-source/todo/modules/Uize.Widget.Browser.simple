@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Widget.Browser= module.
+
 - a simple Web browser widget that lets the user browse the Web in an IFRAME
 - back and forward buttons
 - a location field for entering a URL

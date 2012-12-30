@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.ImageWipe= module.
+
 - factor out code that looks like it could be common between Uize.Widget.Swap.Image and this class (some of this code was intentionally derived from Uize.Widget.Swap and Uize.Widget.Swap.Image to make it easier to contemplate merging / refactoring later)
 
 - come up with a better mechanism than the allToFull property

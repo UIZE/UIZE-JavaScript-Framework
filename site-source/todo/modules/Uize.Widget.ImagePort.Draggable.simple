@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.ImagePort.Draggable= module.
+
 ISSUES
 - with ctrl-click for zooming, respect click position as indicator of point of interest and stay aligned to that region/point while zooming in or out.
 - find a more elegant way to expose portVsScaledDelta info from Uize.Widget.ImagePort

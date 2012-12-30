@@ -1,4 +1,6 @@
-drag-to-reorder
+This is a TO DO document for the =Uize.Widget.Collection.Dynamic= module.
+
+Drag-to-reorder
 	- NEXT
 		- should not permit drag-and-drop when all items would be dragged (either all are selected, or there is only one item)
 		- escape key should cancel drag (right now it just forces drop)

@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.Picker.Date= module.
+
 Need Support for Validation
 	Validates format (ie. can parse date) & within valid date range.
 

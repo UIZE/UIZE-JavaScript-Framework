@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.SlideShow= module.
+
 Clean Up Inconsistency with Phantom Slide Properties
 	For implied node binding, naming is as per normal slide properties, but for child widget binding, naming is not.
 

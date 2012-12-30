@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Css= module.
+
 Methods
 	Uize.Css.fromProperty
 	Uize.Css.toProperty

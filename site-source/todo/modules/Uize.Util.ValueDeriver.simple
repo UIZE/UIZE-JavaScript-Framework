@@ -1,3 +1,7 @@
+This is a proposal document for a =Uize.Util.ValueDeriver= module.
+
+*NOTE:* How does this module relate to the derivations functionality that was added to =Uize.Class= as part of the conditions system?
+
 EXAMPLE
 ...........................
 Uize.Util.ValueDeriver ({

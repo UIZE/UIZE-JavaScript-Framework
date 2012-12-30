@@ -1,4 +1,6 @@
-Something akin to Zazzle.TemplateFields. Basically, a generic container for numerous input widgets, and something that manages the full data set.
+This is a TO DO document for the =Uize.Widget.Form= module.
+
+Basically, a generic container for numerous input widgets, and something that manages the full data set.
 
 FEATURES / BENEFITS
 

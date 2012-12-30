@@ -1,9 +1,11 @@
+This is a TO DO document for the =Uize.Curve.Mod= module.
+
 Uize.Curve.Mod.tame
 	- a curve function modifier that...
 		- constrains a curve function so that its values are in the range of =0= to =1=
 		- guarantees that the value =0= is returned for the input value of =0=, and that the value =1= is returned for the input value of =1=
 
-Uize.Curve.Mod.Sample
+Uize.Curve.Mod.sample
 	- generates a curve function that is a sample, with a specifiable degree of precision, of the specified curve function. This could be useful for curve functions that are performance intensive and where a finite precision might be acceptable. Can be lazy in generation, so values are only generated when needed - perhaps this is a parameter. Also possibly a parameter for interpolation between sample points when using curve function.
 
 Uize.Curve.Mod.noise

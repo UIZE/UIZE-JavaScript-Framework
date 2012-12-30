@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Date= module.
+
 - possibly turn package into an Object
 	- stitch in instance methods from Date object, as is done with the Uize.String.Builder object
 	- make majority of static methods available as instance methods

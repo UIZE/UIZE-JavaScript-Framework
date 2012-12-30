@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.Picker= module.
+
 valueParser or valueDecoder
 	Consider adding a valueParser or valueDecoder property.
 	

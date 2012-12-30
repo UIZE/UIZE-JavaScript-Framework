@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Web.ImageLoader= module.
+
 - a class that manages loading state for one or more images
 - state interface
 	- images

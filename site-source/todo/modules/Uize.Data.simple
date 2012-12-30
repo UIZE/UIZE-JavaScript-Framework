@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Data= module.
+
 Uize.Data.safeLookup
 	- performs a lookup in a lookup object that may not be a safe lookup, so it handles the problems keys
 	- perhaps there should also be a similar Uize.Data.keyIn (or Uize.Data.keyExists) method

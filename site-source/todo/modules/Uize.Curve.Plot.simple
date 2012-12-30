@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Curve.Plot= module.
+
 - a class that allows the creation of arbitrarily complex multi-point curve functions
 
 Uize.Curve.Plot.plot

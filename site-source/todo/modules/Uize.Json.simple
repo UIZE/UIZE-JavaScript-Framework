@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Json= module.
+
 - document Uize.Json.encodingOptionsPresets static property
 - perhaps optimize the mini option for higher performance, possibly avoiding recursion?
 - rely on new JSON object that's supported in FF3.5 and IE8 for mini mode

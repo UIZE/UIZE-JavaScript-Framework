@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Comm= module.
+
 - must support synchronous communication
 	- one thing that Ben would like to do is implement a Uize.Comm.Wsh
 - provide a way to allow JavaScript functions to be registered as handlers for specific requests, intercepting requests before they reach the performRequest method of a subclass. This would be useful for emulation of AJAX communication in tests and demos.

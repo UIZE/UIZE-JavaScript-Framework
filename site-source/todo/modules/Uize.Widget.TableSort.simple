@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.TableSort= module.
+
 - should support headings with linebreaks (when headings have linebreaks, the tooltips for column values don't display well)
 - update data sorting algorithm to be efficient (not bubble sort). Perhaps there's a way to use the built in sort, if the array being sorted is an array of objects combining the value and original column index, with a custom sort function that performs the comparison on the value. This could avoid using the current sortMap approach, which involves more swapping.
 

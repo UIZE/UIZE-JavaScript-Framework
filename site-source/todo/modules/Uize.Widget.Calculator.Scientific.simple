@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Widget.Calculator.Scientific= module.
+
 - a subclass of Uize.Widget.Calculator that adds functions of a scientific calculator
 - unary operators
 	- inverse (1/x)

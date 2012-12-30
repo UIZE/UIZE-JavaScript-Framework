@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Doc.Simple= module.
+
 Fix issue with section title aliases and canonicalization
 	An issue right now with the section title aliases feature is that multiple sections with the same display title but different aliases are not canonicalized into the same section.
 

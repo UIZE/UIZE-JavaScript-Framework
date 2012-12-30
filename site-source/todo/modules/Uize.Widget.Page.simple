@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Widget.Page= module.
+
 - right now, the implementation of useDialog has support for component loading that is a functionality specific to zazzle.com and that is dependent on the loadComponentIntoNode method implemented in Zazzle.Page. Either find a way to make this generic and configurable, or provide some hooks so that this code can migrate back into Zazzle.Page.
 - there is an ugly reference to productType that is Zazzle-specific. Find a way to migrate this out.
 

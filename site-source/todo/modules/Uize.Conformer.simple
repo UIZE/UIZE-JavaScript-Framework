@@ -1,3 +1,5 @@
+This is a proposal document for a =Uize.Conformer= module.
+
 A module that would contain a number of useful conformer methods, and also provide a namespace for other collections of conformers.
 
 EXAMPLE
