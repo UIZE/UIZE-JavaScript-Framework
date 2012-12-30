@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Services.FileSystemWsh Class
+|    /    O /   |    MODULE : Uize.Services.FileSystemAdapter.Wsh Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012 UIZE
@@ -19,13 +19,13 @@
 
 /*?
 	Introduction
-		The =Uize.Services.FileSystemWsh= module defines an adapter for the file system service (=Uize.Services.FileSystem=) for the WSH (Windows Script Host) environment.
+		The =Uize.Services.FileSystemAdapter.Wsh= module defines an adapter for the file system service (=Uize.Services.FileSystem=) for the WSH (Windows Script Host) environment.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Services.FileSystemWsh',
+	name:'Uize.Services.FileSystemAdapter.Wsh',
 	superclass:'Uize.Services.FileSystemAdapter',
 	builder:function (_superclass) {
 		/*** Class Constructor ***/

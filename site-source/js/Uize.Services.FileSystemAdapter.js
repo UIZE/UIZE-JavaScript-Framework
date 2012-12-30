@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =Uize.Services.FileSystemAdapter= module defines an abstract base class for adapters for the file system service (=Uize.Services.FileSystem=), such as the =Uize.Services.FileSystemNode= and =Uize.Services.FileSystemWsh= adapters.
+		The =Uize.Services.FileSystemAdapter= module defines an abstract base class for adapters for the file system service (=Uize.Services.FileSystem=).
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

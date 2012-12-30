@@ -37,7 +37,7 @@ Uize.module ({
 					var _isWsh = typeof ActiveXObject != 'undefined';
 					Uize.Services.Setup.provideServiceSetup (
 						'Uize.Services.FileSystem',
-						_isWsh ? 'Uize.Services.FileSystemWsh' : 'Uize.Services.FileSystemNode',
+						_isWsh ? 'Uize.Services.FileSystemAdapter.Wsh' : 'Uize.Services.FileSystemAdapter.Node',
 						function (_service,_doneWithSetup) {
 							_service.init ();
 							_doneWithSetup ();

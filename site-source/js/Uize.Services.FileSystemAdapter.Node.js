@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Services.FileSystemNode Class
+|    /    O /   |    MODULE : Uize.Services.FileSystemAdapter.Node Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012 UIZE
@@ -19,13 +19,13 @@
 
 /*?
 	Introduction
-		The =Uize.Services.FileSystemNode= module defines an adapter for the file system service (=Uize.Services.FileSystem=) for the NodeJS environment.
+		The =Uize.Services.FileSystemAdapter.Node= module defines an adapter for the file system service (=Uize.Services.FileSystem=) for the NodeJS environment.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Services.FileSystemNode',
+	name:'Uize.Services.FileSystemAdapter.Node',
 	superclass:'Uize.Services.FileSystemAdapter',
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
