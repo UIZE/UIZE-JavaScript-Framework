@@ -724,7 +724,7 @@ Uize.Class
 		Each property of the object should match the name of a static method that exists on the base class, and that will be called with the value of the property as its single parameter. So, for example, to conveniently declare static methods that should be added to the subclass, the =staticMethods= property can be specified, which will result in the =MyClass.staticMethods= static method being called in order to declare the specified set of static methods.
 
 		EXAMPLE
-		...
+		................................
 		MySubclass = MyClass.subclass ({
 			staticMethods:{
 			},
@@ -735,7 +735,7 @@ Uize.Class
 			stateProperties:{
 			}
 		});
-		...
+		................................
 
 	Conditions
 		The whenever Instance Method
@@ -3969,4 +3969,27 @@ UizeSite.Build.Deploy
 	Get the deploy script able to work in NodeJS as well
 
 	This will be hard, as there is currently a reliance on system specific services like FTP and SSH.
+
+UizeSite.Build.File
+	File Handler Modules
+		For manageability of the code, figure out an elegant way to be able to have separate file handlers (or sets of handlers) as separate modules.
+
+	Make Site Map More Dynamic
+		The module =UizeSite.SiteMap= should dynamically reflect the following...
+
+		- the news-by-year index pages
+		- the JavaScript reference pages
+
+	Improve Performance of SOTU Handler
+		Possibly don't require building of reference documentation for modules in order to get description.
+
+		Instead, just do parsing of simple doc structure, but without the HTML generation. Then refactor code to have a .info handler specifically for modules, and that has a dependency on the parsed simple doc data, and refactor the module reference handler to use a different process than Uize.Doc.Sucker.toDocument or refactor the Uize.Doc.Sucker.toDocument method to be able to take in a simple data object as well.
+
+	Cache Parsed SimpleDoc
+		Refactor code to cache in memory the SimpleDoc parsed out of the modules
+
+		This will allow descriptions to be obtained for the modules without actually building the HTML reference pages, and these descriptions will be used by the SOTU.
+
+	Persisted Memory Results
+		Implement the ability to store memory results to file system in json form, with ability to read after restarting server.
 

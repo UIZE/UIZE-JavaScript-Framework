@@ -17,19 +17,6 @@
 	docCompleteness: 2
 */
 
-/* TODO:
-	- to improve
-		- for manageability of the code, figure out an elegant way to be able to have separate file handlers (or sets of handlers) as separate modules
-		- UizeSite.SiteMap should dynamically reflect the following...
-			- the news-by-year index pages
-			- the JavaScript reference pages
-		- improve performance of SOTU handler
-			- Possibly don't require building of reference documentation for modules in order to get description. Instead, just do parsing of simple doc structure, but without the HTML generation. Then refactor code to have a .info handler specifically for modules, and that has a dependency on the parsed simple doc data, and refactor the module reference handler to use a different process than Uize.Doc.Sucker.toDocument or refactor the Uize.Doc.Sucker.toDocument method to be able to take in a simple data object as well.
-		- refactor code to cache in memory the SimpleDoc parsed out of the modules
-			- this will allow descriptions to be obtained for the modules without actually building the HTML reference pages, and these descriptions will be used by the SOTU
-		- implement ability to store memory results to file system in json form, with ability to read after restarting server
-*/
-
 /*?
 	Introduction
 		The =UizeSite.Build.File= package provides a method for building any file requested for the UIZE Web site.
