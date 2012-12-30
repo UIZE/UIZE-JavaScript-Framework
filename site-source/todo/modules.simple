@@ -662,52 +662,82 @@ Uize.Build.Scruncher
 			- error is in scrunched module that is discretely loaded
 
 Uize.Class
+	Convenience Methods for Class Creation
+		instanceMethods
+			Lets you declare one or more instance methods, by specifying the methods in an object.
+
+			SYNTAX
+			.............................................
+			MyClass.instanceMethods (instanceMethodsOBJ);
+			.............................................
+
+			EXAMPLE
+			...................................................
+			_class.instanceMethods ({
+				wireUi:function () {
+					// implementation of wireUi instance method
+				},
+				updateUi:function () {
+					// implementation of updateUi instance method
+				}
+			});
+			...................................................
+
+		staticMethods
+			Lets you declare one or more instance methods, by specifying the methods in an object.
+
+			SYNTAX
+			.........................................
+			MyClass.staticMethods (staticMethodsOBJ);
+			.........................................
+
+		dualContextMethods
+			Lets you declare methods that can operate in both the class and instance contexts, by specifying the methods in an object.
+
+			SYNTAX
+			...................................................
+			MyClass.dualContextMethods (dualContextMethodsOBJ);
+			...................................................
+
+		instanceProperties
+			Lets you declare one or more instance properties, by specifying the properties in an object.
+
+			SYNTAX
+			...................................................
+			MyClass.instanceProperties (instancePropertiesOBJ);
+			...................................................
+
+		staticProperties
+			Lets you declare one or more static properties, by specifying the properties in an object.
+
+			SYNTAX
+			...............................................
+			MyClass.staticProperties (staticPropertiesOBJ);
+			...............................................
+
+		stateProperties
+			Lets you declare one or more state properties for the class, by specifying the state properties in an object.
+
+	Improved Subclass Method
+		As a convenience, the subclass method should be improved to take an optional object, which will let you specify in a declarative way various features that should be added to the class.
+
+		Each property of the object should match the name of a static method that exists on the base class, and that will be called with the value of the property as its single parameter. So, for example, to conveniently declare static methods that should be added to the subclass, the =staticMethods= property can be specified, which will result in the =MyClass.staticMethods= static method being called in order to declare the specified set of static methods.
+
+		EXAMPLE
+		...
+		MySubclass = MyClass.subclass ({
+			staticMethods:{
+			},
+			instanceMethods:{
+			},
+			instanceProperties:{
+			},
+			stateProperties:{
+			}
+		});
+		...
+
 	Conditions
-		Possible Methods
-			need & provide
-
-				IMPLEMENTATION
-				..............................
-				_classPrototype.need = function (_property,_needer) {
-					this.done ('Needed:' + _property);
-					this.once (_property,_needer);
-					/*?
-						Instance Methods
-							need
-
-								SYNTAX
-								.............................................
-								myInstance.need (propertyNameSTR,neederFUNC);
-								.............................................
-
-								NOTES
-								- see the companion `provide` instance method
-								- compare to the related `condition system methods`
-					*/
-				};
-
-				_classPrototype.provide = function (_property,_provider) {
-					var _this = this;
-					_this.once (
-						'Needed:' + _property,
-						function () {_provider (function (_provided) {_this.set (_property,_provided)})}
-					);
-					/*?
-						Instance Methods
-							provide
-
-								SYNTAX
-								..................................................
-								myInstance.provide (propertyNameSTR,providerFUNC);
-								..................................................
-
-								NOTES
-								- see the companion `need` instance method
-								- compare to the related `condition system methods`
-					*/
-				};
-				..............................
-
 		The whenever Instance Method
 			EXAMPLES
 			.....................................................................
@@ -2132,10 +2162,81 @@ Uize.Widget.Population
 				eg. function (_keyName) {return '[' + _keyName.toUpperCase () + ']'}
 			- default value for this param is "{KEY}"
 
-UizeSite.Build.Deploy
-	Get the deploy script able to work in NodeJS as well
+Uize.Services.FileSystem
+	More Methods to Add
+		rename
+			Lets you rename one or more files or folders.
 
-	This will be hard, as there is currently a reliance on system specific services like FTP and SSH.
+			Two Possible Implementation Approaches
+				Matcher and Transformer
+					- value matcher (choosing which paths to rename)
+					- value transformer (generate new path)
+
+					Regular Expression Renaming
+						- matcher regular expression
+						- replacer regular expression plus replacement string or function
+
+				General Matcher
+					Support general matcher, which can match on all properties of items...
+
+					- path / uri
+					- access permissions
+					- creation date
+					- modified date
+
+					- different from path matcher, which only gets string value of path to match on
+
+		copy
+			Copy one or more files or folders.
+
+		modify
+			Can modify anything about a file, including...
+
+			- can change permissions
+			- can delete files
+			- can move/rename files
+
+		touch
+			"Touches" a file so that it's modified date is updated to the current time.
+
+Uize.Services.Store
+	A service that provides simple data storage.
+
+	Adapters for the =Uize.Services.Store= can provide varying degrees of persistence of the data.
+
+	Interface
+		key
+			Returns the key of the item at the specified index.
+
+		getItem
+			Returns the value for the specified item.
+
+		setItem
+			Sets the specified item to the specified value.
+
+		removeItem
+			Removes the specified item.
+
+		clear
+			Clears the entire store.
+
+	Adapter Base Class
+		In order to endow all adapters of the =Uize.Services.Store= service with certain useful features, an adapter base class should be provided that can be subclassed by any adapter implementation.
+
+		Responsible of the adapter
+
+		- access caching to improve performance
+		- set caching to improve performance
+
+	Adapters
+		The following adapters could be implemented for the =Uize.Services.Store= service.
+
+		- =Uize.Services.StoreFileSytem= - would use the =Uize.Services.FileSystem= service to store data in a file using the file system.
+		- =Uize.Services.StoreBrowserLocalStorage= - would use the browser's local storage facility.
+		- =Uize.Services.StoreFlash= - would store using a Flash swf.
+		- =Uize.Services.StoreIeActiveX= - would store using an ActiveX control in MSIE.
+		- =Uize.Services.StoreCookies= - would use the browser cookies.
+		- =Uize.Services.StoreMemory= - would store in JavaScript memory.
 
 Uize.String
 	Uize.String.lengthize (sourceSTR,lengthINT,alignFLOAT,padBOOL,truncateBOOL,tildeBOOLorSTR)
@@ -3864,14 +3965,8 @@ Uize.Widget.Year
 Uize.WiseLoad
 	- a module to load images when they come into view
 
-Uize.Wsh
-	- improve performance of some build scripts by providing a param for a starting folder, and a recurse param
+UizeSite.Build.Deploy
+	Get the deploy script able to work in NodeJS as well
 
-		EXAMPLE
-		..................
-		startFolder:...
-		recurse:false
-		..................
-
-		- use these new params to speed up: _UizeSite.Build.BuildSimpleDocPages.js (for documenting the JavaScript modules)
+	This will be hard, as there is currently a reliance on system specific services like FTP and SSH.
 
