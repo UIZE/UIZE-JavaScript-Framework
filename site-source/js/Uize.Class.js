@@ -45,10 +45,11 @@
 				Condition System Methods
 					The `condition system` of the =Uize.Class= module is exposed through the following methods...
 
-					- =is= - returns whether or not a condition has been met
+					- =is= - returns whether or not a state property is truthy (useful when a state property represents a condition)
 					- =once= - registers code that is to be executed once a condition has been met
 					- =met= - sets a condition as having been met
 					- =unmet= - sets a condition as having not been met / no longer being met
+					- =isMet= - returns whether or not a condition has been met
 
 			The "no new" Mechanism
 				The JavaScript =new= operator is optional when creating instances of =Uize.Class= subclasses, and you can make the =new= operator optional for your own object constructors using the newly added =Uize.noNew= static method.
@@ -721,7 +722,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							once
-								Lets you register a handler that should be executed only once a condition is met.
+								Lets you register a handler that should be executed only once the specified condition is met.
 
 								The =once= method is useful when using one or more state properties to form a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the =once= method is called.
 
@@ -971,7 +972,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							is
-								Returns a boolean, indicating whether or not the specified condition is met (ie. the specified condition state property's value is truthy).
+								Returns a boolean, indicating whether or not the specified state property's value is truthy.
 
 								SYNTAX
 								................................
@@ -1131,6 +1132,60 @@ Uize.module ({
 
 								NOTES
 								- see the companion =met= instance method
+								- see the other `condition system methods`
+					*/
+				};
+
+				_classPrototype.isMet = function (_condition) {
+					var _derivation = _resolveDerivation (_condition);
+					return _derivation._determiner.apply (0,_derivation._determinantsValuesHarvester.call (this));
+					/*?
+						Instance Methods
+							isMet
+								Returns a boolean, indicating whether or not the specified condition is met.
+
+								DIFFERENT USAGES
+
+								`Test if a State Property is Truthy or Falsy`
+								...................................................
+								isMetBOOL = myInstance.isMet (propertyConditionSTR);
+								...................................................
+
+								`Test if Multiple State Properties Are Truthy or Falsy`
+								.............................................................
+								isMetBOOL = myInstance.isMet (propertiesConditionARRAYorSTR);
+								.............................................................
+
+								`Test if a Compound Condition is Met`
+								..........................................................
+								isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
+								..........................................................
+
+								Test if a State Property is Truthy or Falsy
+									In its most basic usage, the =isMet= method can be used to test if a single state property becomes truthy or falsy.
+
+									SYNTAX
+									...................................................
+									isMetBOOL = myInstance.isMet (propertyConditionSTR);
+									...................................................
+
+								Test if Multiple State Properties Are Truthy or Falsy
+									One can test if all properties in a set of state properties are truthy or falsy, by specifying the state properties as an array of property names or as a comma-separated list string.
+
+									SYNTAX
+									.............................................................
+									isMetBOOL = myInstance.isMet (propertiesConditionARRAYorSTR);
+									.............................................................
+
+								Test if a Compound Condition is Met
+									One can test if a compound condition has been met, by specifying the compound condition in the form of a condition function or condition expression string.
+
+									SYNTAX
+									..........................................................
+									isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
+									..........................................................
+
+								NOTES
 								- see the other `condition system methods`
 					*/
 				};
