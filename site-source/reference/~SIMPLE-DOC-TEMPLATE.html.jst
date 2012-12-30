@@ -1,6 +1,11 @@
 <%@
 	required ('UizeSite.Templates.SimpleDoc');
-	input ({title:'string',description:'string',body:'string'});
+	input ({
+		title:'string',
+		description:'string',
+		body:'string',
+		hasToDo:'boolean'
+	});
 %><%
 	function getLinkedModuleName (moduleName) {
 		var
@@ -27,7 +32,7 @@
 	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
 	<%= getLinkedModuleName (input.title) %>
 	<div class="pageActions">
-		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/<% .title %>.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/<% .title %>.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><% if (input.hasToDo) { %><a href="../todo/modules/<% .title %>.html" class="buttonLink" title="View the TO DO list for this module...">TO DO</a><% } %><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
 	</div>
 <%@ endBlock () %><%=
 	UizeSite.Templates.SimpleDoc.process ({

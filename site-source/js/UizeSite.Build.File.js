@@ -108,20 +108,27 @@ Uize.module ({
 			}
 
 		/*** Private Static Methods ***/
-			_class._processSimpleDoc = function (_title,_simpleDocBuildResult,_simpleDocTemplatePath) {
+			_class._processSimpleDoc = function (
+				_title,_simpleDocBuildResult,_simpleDocTemplatePath,_extraTemplateInputs
+			) {
 				var
 					_contentsTreeItems = _simpleDocBuildResult.contentsTreeItems,
 					_contentsTreeItem0 = _contentsTreeItems [0]
 				;
-				return this.readFile ({path:_simpleDocTemplatePath}) ({
-					title:_title,
-					description:
-						(
-							_contentsTreeItem0 &&
-							(_contentsTreeItem0.description || (_contentsTreeItem0.items [0] || {}).description)
-						) || '',
-					body:_simpleDocBuildResult.html
-				});
+				return this.readFile ({path:_simpleDocTemplatePath}) (
+					Uize.copyInto (
+						{
+							title:_title,
+							description:
+								(
+									_contentsTreeItem0 &&
+									(_contentsTreeItem0.description || (_contentsTreeItem0.items [0] || {}).description)
+								) || '',
+							body:_simpleDocBuildResult.html
+						},
+						_extraTemplateInputs
+					)
+				);
 			};
 
 		/*** handler for source files ***/
@@ -1124,7 +1131,12 @@ Uize.module ({
 							_urlDictionary [_moduleName] = _moduleUrlFromDictionary;
 						}
 					);
-					return _this._processSimpleDoc (_moduleName,_simpleDoc,_inputs.simpleDocTemplate);
+					return _this._processSimpleDoc (
+						_moduleName,
+						_simpleDoc,
+						_inputs.simpleDocTemplate,
+						{hasToDo:_this.fileExists ({path:this.sourceUrl ('todo/modules/' + _moduleName + '.simple')})}
+					);
 				}
 			});
 
