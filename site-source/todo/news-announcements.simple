@@ -1,5 +1,8 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+New isMet Instance Method in Uize.Class
+	Returns a boolean, indicating whether or not the specified condition is met.
+
 Major Build Process Improvements
 
 	- _Uize.Build.CompileJstModules.js replaced with _UizeSite.Build.BuildJsModules

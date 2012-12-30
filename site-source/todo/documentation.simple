@@ -3,6 +3,12 @@ This document lists to do tasks relating to the documentation and Web site for t
 JavaScript Services
 	Create an explainer to explain the approach UIZE takes to services.
 
+Conditions
+	Document the conditions system that is implemented in the =Uize.Class= base class.
+
+Needs and Providers
+	Document the needs management system that is implemented in the =Uize.Util.Needs= class.
+
 JIT File Builder Web Server
 	Document the Web server functionality (under dev section initially) that is used by the UIZE Web site and that employs the same code as the build process.
 
