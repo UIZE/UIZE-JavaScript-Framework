@@ -1,0 +1,24 @@
+- should support headings with linebreaks (when headings have linebreaks, the tooltips for column values don't display well)
+- update data sorting algorithm to be efficient (not bubble sort). Perhaps there's a way to use the built in sort, if the array being sorted is an array of objects combining the value and original column index, with a custom sort function that performs the comparison on the value. This could avoid using the current sortMap approach, which involves more swapping.
+
+MUST HAVE
+
+- CSS styles that can be specified for the sort order (rather than simply the headingLitClass property)
+- support different combinations of over/lit classes
+
+DESIRABLE
+
+- a way to implement highlight states without the user having to specify classes
+- for numbers with units suffixes, support metric unit canonicalization (so, one could have "2cm" and "1m" in a column, and sorting would do the right thing)
+- extensible system for registering sort handlers for different types of column data
+- support multiple table sections, with sorting discrete to each group
+- support for mixed data types in columns
+- support for form fields (sorting, and retaining values to deal with stupid IE bug)
+
+PERHAPS
+
+- ability to have class values for rows persist regardless of changed row order (useful for tables that alternate classes for readability)
+- support for non-sortable columns (eg. a column in a table containing only pictures)
+- failure modes for complex tables that aren't suited to sorting (eg. columns with rowspans)
+- a way for the user to restore the table to its original state (unsort?)
+

@@ -1,0 +1,11 @@
+Uize.Array.Util.chunk
+	- returns a chunk of the specified source array of the specified size
+
+Uize.Array.Util.head
+	- returns the specified number of elements at the head of the specified source array
+	- when no length parameter is specified, returns the first element of the array
+
+Uize.Array.Util.tail
+	- returns the specified number of elements at the tail of the specified source array
+	- when no length parameter is specified, returns the last element of the array
+

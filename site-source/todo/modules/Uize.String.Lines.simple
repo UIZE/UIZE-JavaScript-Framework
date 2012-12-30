@@ -1,0 +1,43 @@
+Uize.String.Lines.addLineNumbering
+
+low priority
+	Uize.String.Lines.removeLineNumbering ??
+	Uize.String.Lines.consolidateBlanks
+		................................................................................
+		Uize.String.Lines.consolidateBlanks = function (_sourceStr) {
+			var _previousIsBlank;
+			return _package.modify (
+				_sourceStr,
+				function (_line) {
+					var
+						_isBlank = !Uize.String.trim (_line),
+						_keepLine = !_isBlank || !_previousIsBlank
+					;
+					_previousIsBlank = _isBlank;
+					return _keepLine;
+				}
+			);
+		};
+		................................................................................
+
+	Uize.String.Lines.pad
+		document...
+
+	Rearranging Lines
+		Uize.String.Lines.sort
+			................................................................................
+			function sortMultilineStr (sourceStr) {
+				return (
+					Uize.String.Lines.split (sourceStr).sort (
+						function (a,b) {return a < b ? -1 : 1}
+					).join (
+						Uize.String.Lines.getLinebreakType (sourceStr)
+					)
+				);
+			}
+			................................................................................
+
+		Uize.String.Lines.reverse
+			document...
+
+

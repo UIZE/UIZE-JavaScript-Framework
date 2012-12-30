@@ -1,0 +1,85 @@
+- support for % unit in "RGB string" decoder (eg. rgb(100%,50%,25%))
+	- support % generically in setTupleFromString, now that there are profiles for the color components
+- for color profile conversions, can component profile min/max info now be used for normalizing values to 0-1 range, and denormalizing as well?
+- for =to= and =Uize.Color.to= encoding methods, possibly a way to specify a target array or object for encodings that use arrays or objects (in some cases this would avoid wasteful creation of a temporary array)
+- in a color space profile, should it be possible to also register short names for tuple components?
+	eg. for sRGB...
+		................................................................................
+		tuple:[
+			{name:'red',shortName:'r',min:0,max:255},
+			{name:'green',shortName:'g',min:0,max:255},
+			{name:'green',shortName:'b',min:0,max:255}
+		]
+		................................................................................
+
+	- could the short name then be used to automatically recognize object formats like {r:255,g:50,b:50} ?
+
+	- with component profile, instance methods could be supported, like...
+
+		................................................................................
+		myColor.getComponent ('red')
+		................................................................................
+
+		equivalent to =myColor.getComponent (0)=, but where naming a component might imply conversion across color spaces
+
+- need a way for encodings to register tests for auto-decoders (eg. when adding HSV, how does one detect HSV object?)
+- support for alpha
+
+- a reference: http://www.easyrgb.com/index.php?X=MATH&H=01#text1
+
+- refactor tomkidding.com to no longer use Tk.Color
+
+- should named colors be defined with display names, rather than crunched names?
+	- the crunched names could be generated from the display names
+	- should the Uize.Color object have a name property, so that a particular instance can be given a name?
+
+- disambiguating color space / format
+	Certain formats for representing data may produce ambiguity.
+
+	For instance, a color can be represented in both the RGB and HSL color spaces using an array with three elements. For certain colors, it cannot be automatically determined by the values of the elements which color space the color is being specified in. In such cases, a color value may be wrapped in an object with only one key, where the key's name specifies the color's encoding (color space and format), and where the value represents the encoded color.
+
+	- with values...
+		the UIZE way...
+			................................................................................
+			Uize.Color.blend ({hslArray:[200,100,40]},{hslArray:[240,10,0]},.25);
+			................................................................................
+
+		the dojo way...
+			................................................................................
+			dojox.color.blend (dojox.color.fromHsl(200,100,40),dojox.color.fromHsl(240,10,0),.25);
+			................................................................................
+
+	- with array variables
+		the UIZE way...
+			................................................................................
+			Uize.Color.blend ({hslArray:myHslColor1Array},{hslArray:myHslColor2Array},.25)
+			................................................................................
+
+		the dojo way...
+			................................................................................
+			dojox.color.blend (
+				dojox.color.fromHsl(myHslColor1Array[0], myHslColor1Array[1], myHslColor1Array[2]),
+				dojox.color.fromHsl(myHslColor2Array[0], myHslColor2Array[1], myHslColor2Array[2]),
+				.25
+			);
+			................................................................................
+
+			...or...
+
+			................................................................................
+			dojox.color.blend (
+				dojox.color.fromHsl.apply(0,myHslColor1Array),
+				dojox.color.fromHsl.apply(0,myHslColor2Array),
+				.25
+			);
+			................................................................................
+
+- support for alpha, rgba
+
+- consider normalizing RGB components to floats in range of 0 to 1
+
+- lingering questions
+	- should from/to instance methods be renamed to set/get ? Or encode/decode?
+	- should Uize.Color.to be renamed to Uize.Color.convert ?
+
+

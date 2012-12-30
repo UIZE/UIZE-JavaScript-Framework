@@ -1,0 +1,11 @@
+- must support synchronous communication
+	- one thing that Ben would like to do is implement a Uize.Comm.Wsh
+- provide a way to allow JavaScript functions to be registered as handlers for specific requests, intercepting requests before they reach the performRequest method of a subclass. This would be useful for emulation of AJAX communication in tests and demos.
+- caching
+	- edge case optimization: consolidate consecutive requests when identical and memory caching is in use
+- flushCache property of request object
+- timeout failure mechanism
+- cancelability for requests
+- configurable comm_mode & output format query params (ie. not always assumed)
+
+

@@ -1,0 +1,7 @@
+Implement a package to facilitate logging and debugging of all Uize subclasses.
+
+The module should provide the following...
+
+- a generic log service
+- the ability to trace method calls, events, property value changes, etc. (provide multiple levels of filters)
+

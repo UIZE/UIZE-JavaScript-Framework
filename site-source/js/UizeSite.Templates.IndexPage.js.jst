@@ -1,5 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ required ('UizeSite.Templates.Footer') %>
+<%@
+	required ('UizeSite.Templates.Footer');
+	input ({
+		files:'array',
+		title:'string',
+		description:'string',
+		extraPreambleContent:'string',
+		pathToRoot:'string'
+	});
+%><%
+	var _pathToRoot = input.pathToRoot || '';
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title><% .title %> | UIZE JavaScript Framework</title>
@@ -7,17 +18,17 @@
 	<meta name="keywords" content="UIZE JavaScript Framework"/>
 	<meta name="description" content="<% .description %>"/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
-	<link rel="stylesheet" href="css/page.css"/>
-	<link rel="stylesheet" href="css/page.simpledoc.css"/>
-	<link rel="stylesheet" href="css/page.index.css"/>
+	<link rel="stylesheet" href="<%= _pathToRoot %>css/page.css"/>
+	<link rel="stylesheet" href="<%= _pathToRoot %>css/page.simpledoc.css"/>
+	<link rel="stylesheet" href="<%= _pathToRoot %>css/page.index.css"/>
 </head>
 
 <body>
 
-<script type="text/javascript" src="js/Uize.js"></script>
+<script type="text/javascript" src="<%= _pathToRoot %>js/Uize.js"></script>
 
 <h1 class="document-title">
-	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
+	<a id="page-homeLink" href="<%= _pathToRoot %>index.html" title="UIZE JavaScript Framework home"></a>
 	<% .title %>
 </h1>
 
@@ -34,10 +45,10 @@
 		var _file = _files [_fileNo];
 %>
 	<li>
-		<div class="itemTitle"><a href="<%= _file.path %>"><%= _file.title %></a><span class="arrow">&nbsp;</span></div>
+		<div class="itemTitle"><a href="<%= _pathToRoot %><%= _file.path %>"><%= _file.title %></a><span class="arrow">&nbsp;</span></div>
 		<div class="itemBody"><%
 			if (_file.imageSrc) {
-		%><a href="<%= _file.path %>"><img src="<%= _file.imageSrc %>" class="fileThumbnail"/></a><%
+		%><a href="<%= _pathToRoot %><%= _file.path %>"><img src="<%= _pathToRoot %><%= _file.imageSrc %>" class="fileThumbnail"/></a><%
 			}
 		%><%= _file.description %></div><%
 			if (_file.imageSrc) {

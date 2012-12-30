@@ -1,0 +1,49 @@
+- can a virtual DOM event involve multiple nodes, or more complex relationships?
+
+- ideas for new virtual DOM events
+	- match(matchObject)
+		- match()
+			- wildcard virtual DOM event
+			- wires handlers for all events supported by node type
+	- firstClick()
+	- repeatClick(times,maxInterval)
+	- key abstractions
+		- delete()
+		- cut()
+		- copy()
+		- paste()
+		- print()
+		- undo()
+		- redo()
+	- ctrl('v')
+	- keyDown(keyName)
+		- examples...
+			- keyDown('delete')
+			- keyDown('tab')
+			- keyDown('enter')
+	- keyPressed(keyName)
+		- examples...
+			- keyDown('delete')
+			- keyPressed('v')
+			- keyPressed('v',{shift:true,ctrl:true})
+	- inState({state:'mouseover',shiftKey:true})
+		- would fire when mousing over node with shift modifier key pressed
+		- would fire when already moused over node and then pressing down shift key
+	- notInState({state:'mouseover',shiftKey:true})
+		- would fire when having been moused over node and having shift modifier key pressed, and then either mousing out of node or releasing shift modifier key
+	- becomeSeen
+	- becomeUnseen
+	- valueChange
+	- not quite sure what to do with these ones...
+		- mouseenter (currently mouseover)
+		- mouseleave (currently mouseout)
+	- sector detection events
+		- virtual DOM events for when mouse activity occurs within a specific sector of a node's region
+		- question: doesn't this approach limit the ability to use the remain-in-state events for sectors, as well? Perhaps there's a better construct to permit wiring sectors of nodes? Perhaps DOM nodes need a companion virtual DOM node construct, where a sector of a node can be treated as a discrete node for convenience of coding application logic.
+		- possible event names
+			- mouseoverSector(x,y,width,height)
+			- mousedownSector(x,y,width,height)
+			- mouseupSector(x,y,width,height)
+			- clickSector(x,y,width,height)
+
+

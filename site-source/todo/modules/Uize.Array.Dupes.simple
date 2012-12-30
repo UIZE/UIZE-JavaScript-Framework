@@ -1,0 +1,7 @@
+Uize.Array.Dupes.getDupes
+	- returns an array of dupe info objects
+Uize.Array.Dupes.getValueCount
+	- returns the number of occurrences of the specified value
+Uize.Array.Dupes.getValueCounts
+	- returns a lookup array of counts per value
+

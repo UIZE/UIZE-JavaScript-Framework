@@ -1,0 +1,6 @@
+BUGS
+- noticed a problem in Firefox with an image that doesn't fill the entire view and is not being centered correctly.
+
+IMPROVEMENTS
+- feature to prefetch "next" image while current image is fading in
+

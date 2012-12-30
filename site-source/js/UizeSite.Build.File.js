@@ -418,6 +418,15 @@ Uize.module ({
 					/\.simple$/
 				);
 
+			/*** handler for the modules TO DO index page ***/
+				_registerIndexPageUrlHandler (
+					'JavaScript modules TO DO index page',
+					'todo/modules',
+					'todo/modules',
+					'todo/modules',
+					/\.simple$/
+				);
+
 		/*** handler for examples-by-keyword index pages ***/
 			_registerInMemoryHtmlFilesIndexHandler ('examples','examples',/\.html$/);
 

@@ -1,0 +1,2 @@
+- come up with a better scheme for updating the className of the tab contents nodes, so that the whole class name string doesn't have to be specified, and rather just the segment that needs updating (refer to the way this is done with class-based buttons)
+

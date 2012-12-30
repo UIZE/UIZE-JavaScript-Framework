@@ -1,0 +1,4 @@
+Get the deploy script able to work in NodeJS as well.
+
+This will be hard, as there is currently a reliance on system specific services like FTP and SSH.
+

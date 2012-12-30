@@ -1,0 +1,7 @@
+A simple widget that provides a swatch for previewing a color and shows the current color as a background with white and black text, and as a text color over white and black background.
+
+NOTES
+- can be used in Color Sort by RGB Proximity example (both for tooltip as well as large preview of desired color)
+- can be used for tooltip in color palette widget
+- should combine default HTML template, since it's such a simple widget to begin with
+

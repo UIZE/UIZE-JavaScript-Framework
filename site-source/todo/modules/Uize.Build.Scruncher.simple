@@ -1,0 +1,45 @@
+- allow the first block of comments in a document to consist of comment lines that are started with a "//"
+- provide more info in reports
+	- time elapsed
+	- speed (size/second)
+- further code size optimization
+	- allow for flagging concise header comments for concise output mode
+	- last semicolon before close brace not needed
+- misc improvements
+	- allow "ScruncherSettings" directive to have space between itself and comment start chars
+- error reports
+	- an option for evaluating libraries before and after they are scrunched, and reporting the position in the source code for syntax errors
+		- pre-scrunch
+			- IE-specific
+				- trailing comma in JSON object or multi-line var statement that is not OK in IE
+		- post-scrunch
+			- missing comma in multi-line var statement
+				- ok in unscrunched code, because the JavaScript interpreter accepts a linebreak as a terminator
+
+				EXAMPLE
+				................................................................................
+				var
+					blah = 1234
+					blahBlah = 123
+				;
+				................................................................................
+
+			- missing semi-colon after any statement (but often method assignments)
+				- ok in unscrunched code, because the JavaScript interpreter accepts a linebreak as a terminator
+
+				EXAMPLE
+				................................................................................
+				_classPrototype.myMethod1 = function () {
+				}
+				_classPrototype.myMethod2 = function () {
+				};
+				................................................................................
+
+			- implementation idea: map each line+char in scrunched code to line+char in source
+
+- idea: ability to find error in source file
+	- deal with the following two cases...
+		- error is in scrunched module that is part of library file
+		- error is in scrunched module that is discretely loaded
+
+

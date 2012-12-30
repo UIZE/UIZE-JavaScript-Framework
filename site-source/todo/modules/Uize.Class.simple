@@ -1,0 +1,328 @@
+Convenience Methods for Class Creation
+	instanceMethods
+		Lets you declare one or more instance methods, by specifying the methods in an object.
+
+		SYNTAX
+		.............................................
+		MyClass.instanceMethods (instanceMethodsOBJ);
+		.............................................
+
+		EXAMPLE
+		...................................................
+		_class.instanceMethods ({
+			wireUi:function () {
+				// implementation of wireUi instance method
+			},
+			updateUi:function () {
+				// implementation of updateUi instance method
+			}
+		});
+		...................................................
+
+	staticMethods
+		Lets you declare one or more instance methods, by specifying the methods in an object.
+
+		SYNTAX
+		.........................................
+		MyClass.staticMethods (staticMethodsOBJ);
+		.........................................
+
+	dualContextMethods
+		Lets you declare methods that can operate in both the class and instance contexts, by specifying the methods in an object.
+
+		SYNTAX
+		...................................................
+		MyClass.dualContextMethods (dualContextMethodsOBJ);
+		...................................................
+
+	instanceProperties
+		Lets you declare one or more instance properties, by specifying the properties in an object.
+
+		SYNTAX
+		...................................................
+		MyClass.instanceProperties (instancePropertiesOBJ);
+		...................................................
+
+	staticProperties
+		Lets you declare one or more static properties, by specifying the properties in an object.
+
+		SYNTAX
+		...............................................
+		MyClass.staticProperties (staticPropertiesOBJ);
+		...............................................
+
+	stateProperties
+		Lets you declare one or more state properties for the class, by specifying the state properties in an object.
+
+Improved Subclass Method
+	As a convenience, the subclass method should be improved to take an optional object, which will let you specify in a declarative way various features that should be added to the class.
+
+	Each property of the object should match the name of a static method that exists on the base class, and that will be called with the value of the property as its single parameter. So, for example, to conveniently declare static methods that should be added to the subclass, the =staticMethods= property can be specified, which will result in the =MyClass.staticMethods= static method being called in order to declare the specified set of static methods.
+
+	EXAMPLE
+	................................
+	MySubclass = MyClass.subclass ({
+		staticMethods:{
+		},
+		instanceMethods:{
+		},
+		instanceProperties:{
+		},
+		stateProperties:{
+		}
+	});
+	................................
+
+Conditions
+	The whenever Instance Method
+		EXAMPLES
+		.....................................................................
+		myWidget.whenever (
+			function (theme) {return theme == 'bottle'},
+			function () {
+				// do stuff whenever condition is met
+			}
+		);
+
+		myWidget.whenever (
+			'theme => theme == "bottle"',
+			function () {
+				// do stuff whenever condition is met
+			}
+		);
+
+		myWidget.wire (
+			Uize.Class.virtualEvent ('whenever','theme => theme == "bottle"'),
+			function () {
+				// do stuff whenever condition is met
+			}
+		);
+
+		myWidget.wire (
+			Uize.Class.virtualEvent ('whenever',function (theme) {return theme == 'bottle'}),
+			function () {
+				// do stuff whenever condition is met
+			}
+		);
+
+		myWidget.wire (
+			'whenever("theme => theme == \'bottle\'")',
+			function () {
+				// do stuff whenever condition is met
+			}
+		);
+		.....................................................................
+
+	The next Virtual Event
+		EXAMPLES
+		..................................................
+		myWidget.wire (
+			'next("Click")',
+			function () {
+				// do something for only the very next click
+			}
+		);
+
+		myWidget.onNext(
+			'Click',
+			function () {
+				// do something for only the very next click
+			}
+		);
+		..................................................
+
+Properties Expressions
+	SYNTAX
+	......................................................................
+	propertiesExpressionFUNC = Uize.propertiesExpression (expressionFUNC);
+	......................................................................
+
+	INSTEAD OF...
+	.......................................................
+	function (object) {
+		return object.get ('width') * object.get ('height');
+	}
+	.......................................................
+
+	USE...
+	...................................................
+	Uize.propertiesExpression (
+		function (width,height) {return width * height};
+	}
+	...................................................
+
+Derived Properties
+	A derived property is a special type of state property whose value is derived from the values of other state properties of the same instance.
+
+	EXAMPLE
+	...........................................................................................................
+	_class.registerProperties ({
+		_allSelected:{
+			name:'allSelected',
+			derived:function (totalSelected,totalItems) {return totalSelected > 0 && totalSelected == totalItems}
+		},
+		_oneSelected:{
+			name:'oneSelected',
+			derived:function (totalSelected) {return totalSelected == 1}
+		},
+		_someSelected:{
+			name:'someSelected',
+			derived:function (totalSelected) {return totalSelected > 0}
+		},
+		_totalSelected:{
+			name:'totalSelected',
+			value:0
+		},
+		_totalItems:{
+			name:'totalItems',
+			value:0
+		}
+	});
+	...........................................................................................................
+
+	In the above example, the =allSelected=, =oneSelected=, and =someSelected= state properties are all derived properties. A state property is indicated as being a derived property by the presence of the =derived= property in the property profile. The =derived= property serves both to indicate that a state property is derived, as well to provide the deriver function that indicates from which other state properties the derived property is derived and how to calculate the derived value.
+
+	Implementation Questions
+		How Are Derived Properties Inherited
+			Currently, profiles for state properties are inherited through cloning of the definition objects.
+
+			If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.
+
+	Implementation Approaches
+		Exploding Out the Properties Being Set
+			With this approach, setting values for derived state properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.
+
+			After setting values for the state properties that are being set explicitly, and before executing onChange handlers for any state properties whose values have changed, the registered state properties are scanned for derived state properties that may be affected by the properties being set explicitly. If any derived state properties *are* affected by any of the state properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
+
+			Advantages
+				document...
+
+			Disadvantages
+				document...
+
+		Single Level Derived Property Batching
+			With this approach, values for all directly affected derived state properties are set in a batch set that occurs before =onChange= handlers are executed for the state properties being explicitly set.
+
+		Using onChange Handler Mechanism
+			With this approach, when a derived state property is registed, an onChange handler is registered with any property from which the derived property is derived.
+
+			Advantages
+				- uses the existing optimization built into the =onChange= handlers mechanism
+				- matches the way values for derived state properties are currently being updated
+
+			Disadvantages
+				- involves a separate set for each derived state property whose value changes
+				- requires management of =onChange= handlers and dealing with situations where state properties are re-registered
+
+			Issues to Deal With
+				Re-registering a Non-derived State Property
+					How does one deal with re-registering a state property that affects a derived state property?
+
+					Currently, everything gets blown away when re-registering a state property. This means that the =onChange= handler that was added to the state property at the time of registering the state property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.
+
+				Re-registering a Derived State Property
+					How does one deal with re-registering a derived state property, where the new profile for the derived property defines a different relationship properties from which it is derived?
+
+Property Bindings
+	Provide a way in the =Uize.Class= base class to bind two state properties together, in order to keep their values synchronized.
+
+	This would provide a more concise and lightweight way of binding properties than using an instance of the =Uize.Util.PropertyAdapter= class.
+
+	INSTEAD OF...
+	................................................................................
+	Uize.Util.PropertyAdapter ({propertyA:[this,'prop'],propertyB:[slider,'prop']});
+	................................................................................
+
+	USE...
+	............................................
+	_this.bindProperty ('prop',[slider,'prop']);
+	............................................
+
+	BENEFITS
+	- The =bindProperty= instance method would be a core capability of the =Uize.Class= base class, and all classes would get to benefit from this.
+	- The =bindProperty= instance method should require a little less code to implement than the =Uize.Util.PropertyAdapter= class.
+
+	NOTES
+	- The =bindProperty= instance method would support an optional value adapter, just like the =Uize.Util.PropertyAdapter= class.
+	- The =bindProperty= instance method would return an array of all the wirings created, so that they could be unwired later.
+	- The =bindProperty= instance method should ideally be implemented by factoring some code out of the =Uize.Util.PropertyAdapter= class, and then the =Uize.Util.PropertyAdapter= class could be reduced in size and made to leverage the =bindProperty= implementation in the =Uize.Class= base class.
+
+Copy Ability for State Properties
+	Copy ability, for initial values of state properties that are arrays or objects.
+
+	Have a property that can be specified in a state property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.
+
+Handle Simple Type in Place of Constructor Properties
+	Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.
+
+	For example, if =Uize.Color= were to become a subclass of =Uize.Class=...
+
+	EXAMPLE
+	............................................
+	Uize.Color ({value:'#ffffff'});  // old form
+	Uize.Color ('#ffffff');          // new form
+	............................................
+
+	Or, in the case of an existing widget class that supports the value interface...
+
+	EXAMPLE
+	.................................................
+	Uize.Widget.Bar.Slider ({value:50});  // old form
+	Uize.Widget.Bar.Slider (50);          // old form
+	.................................................
+
+Improvements to Property Mechanism
+	New Profile Features
+		type
+			Basic types...
+
+			- string (coerce with value + '', implicit initial value is '')
+			- boolean (coerce with !!value, implicit initial value is false)
+			- number (coerce with +value, implicit initial value is 0)
+			- date (coerce with new Date (value), implicit initial value is now)
+
+			Extended types (ideas for other useful types)...
+
+			- switch (valid string values for true value, implicit initial value is false)
+			- integer (coerce with Math.round (value))
+
+		validator
+			Different types of validators...
+
+			- function that can return true or false
+			- regular expression
+			- array of valid values
+
+	- support for read-only properties (how would that work, exactly? Only settable through private name?)
+
+	- problem: there's currently no way to use the set method to set the value for a state property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for state properties that have no initial value (what percentage of the overall is that?).
+
+constructed Property
+	- to indicate that the instance has been constructed
+	- can be used by onChange handlers for state properties to conditionalize actions
+	- particularly compelling to widgets, since being completely constructed is a good indicator child widgets added during construction exist and can be accessed
+	- some classes may already be doing this with their own private properties
+
+- idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?
+
+Improve Calling of Superclass Methods
+	Come up with a new and more concise semantics for calling methods on superclass.
+
+	POSSIBILITIES
+	................................................................................
+	_this.doIn (_superclass,'wireUi');
+
+	_class.doSuper (_this,'wireUi');
+	_class.useSuper (_this,'wireUi');
+	_class.callSuper (_this,'wireUi');
+
+	_superclass.on (_this,'wireUi');
+	_superclass.my (_this,'wireUi');
+	_superclass.doOn (_this,'wireUi');
+	_superclass.doMy (_this,'wireUi');
+	_superclass.useMy (_this,'wireUi');
+	_superclass.proto (_this,'wireUi');
+	_superclass.useMine (_this,'wireUi');
+	................................................................................
+
+

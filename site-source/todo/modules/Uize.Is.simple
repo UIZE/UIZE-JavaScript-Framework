@@ -1,0 +1,69 @@
+The =Uize.Is= module would provide methods for testing if values meet various test criteria.
+
+Examples of Methods
+	................................................................................
+	Uize.Is.nonNull
+	Uize.Is.anInstanceOf (classOBJ)
+	Uize.Is.ofType (typeSTR)
+	Uize.Is.anArray
+	Uize.Is.aBoolean
+	Uize.Is.aString
+	Uize.Is.aNumber
+	Uize.Is.aFunction
+	Uize.Is.anObject
+	Uize.Is.aRegExp
+	Uize.Is.arrayLike
+	Uize.Is.inRange (min,max)
+	Uize.Is.negative
+	Uize.Is.positive
+	Uize.Is.inLengthRange (min,max)
+	Uize.Is.nonEmpty
+	Uize.Is.anInteger
+	Uize.Is.evenNumber
+	Uize.Is.oddNumber
+	Uize.Is.arrayWithNoRepeats
+	................................................................................
+
+Other Possibles
+	................................................................................
+	Uize.Is.greaterThan
+	Uize.Is.lessThan
+	Uize.Is.emailAddress
+	Uize.Is.Url
+	Uize.Is.Color
+	................................................................................
+
+Semantics for Test vs Make Tester
+	Test
+		................................................................................
+		Uize.Is.inRange (0,100,value)
+		................................................................................
+
+	Make Tester
+		................................................................................
+		function (value) {return Uize.Is.inRange (0,100,value)}
+
+		Uize.Is.inRange.fn (0,100)
+		Uize.Is.inRange.tester (0,100)
+		Uize.Is.inRange.test (0,100)
+		Uize.Is.inRange.match (0,100)
+		Uize.Is.inRange.matcher (0,100)
+		Uize.Is.inRange.value (0,100)
+
+		Uize.Is.inRange.make (0,100)
+		Uize.Is.inRange.capture (0,100)
+		Uize.Is.inRange.freeze (0,100)
+
+		Uize.Is.inRange._(0,100)
+		Uize.Is.inRange ['...'] (0,100)
+		Uize.Is.inRange ['?'] (0,100)
+		................................................................................
+
+	More Thoughts on Make Tester
+		................................................................................
+		Uize.Is.instanceOf (Uize.Widget.FormElement,myInstance)
+		Uize.Is.instanceOf (Uize.Widget.FormElement) (myInstance)
+		Uize.Is.instanceOf.tester (Uize.Widget.FormElement)
+		................................................................................
+
+

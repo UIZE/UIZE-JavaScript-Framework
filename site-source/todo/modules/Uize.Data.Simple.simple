@@ -1,0 +1,4 @@
+- fix bug where multi-line values are unindented using a crude slice (switch over to using the Uize.String.Lines.indent method)
+- parsing for quoted strings (names and values)
+- support for structure without indenting
+

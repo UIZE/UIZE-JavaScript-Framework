@@ -1,0 +1,3 @@
+getCookies
+	Add a =getCookies= method that returns the values of all the cookies as a hash.
+

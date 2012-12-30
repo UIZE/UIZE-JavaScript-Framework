@@ -1,0 +1,4 @@
+IDEAS
+- perhaps the _getColorAtRelativePoint function could be replaced with a blendFour method implement in Uize.Color.xUtil?
+
+

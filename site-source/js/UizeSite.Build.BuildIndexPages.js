@@ -49,7 +49,8 @@ Uize.module ({
 						'javascript-examples-by-module.html',
 						'javascript-modules-index.html',
 						'javascript-reference.html',
-						'javascript-widgets.html'
+						'javascript-widgets.html',
+						'todo/modules.html'
 					);
 
 				/*** add URLs for the various news pages ***/

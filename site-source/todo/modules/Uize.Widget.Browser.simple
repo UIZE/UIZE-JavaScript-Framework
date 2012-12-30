@@ -1,0 +1,7 @@
+- a simple Web browser widget that lets the user browse the Web in an IFRAME
+- back and forward buttons
+- a location field for entering a URL
+	- location field value is used to set src of iframe on the user hitting enter
+	- location field value is blanked out upon use, since it is not possible to keep it current (can't watch iframe's location.href for cross-domain URLs)
+- go button next to location field provides another way to commit entered URL
+

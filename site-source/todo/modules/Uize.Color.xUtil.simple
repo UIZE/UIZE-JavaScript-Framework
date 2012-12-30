@@ -1,0 +1,41 @@
+- proximity sort
+	- ability to use average of colors as starting point for proximity (ie. center of clump) -- just add as note in example for sort method
+
+- possibly have a gray encoding
+	eg. {gray:50}
+
+	- a gray level in range of 0-100, being black to white
+	- encoding name is gray, so can use {'encoding name':value} scheme for specifying value
+	- its an encoding for sRGB
+	- when encoding, average components to produce gray value ((tuple [0] + tuple [1] + tuple [2]) / 3 / 255 * 100
+
+Uize.Color.sort
+	- support 4-tuple color spaces
+	- should it be possible to do a primary,secondary,tertiary component-based subsort after a proximity sort?
+		- ability to specify component order (or can some weighting scheme apply here as well?)
+
+Uize.Color.closest
+	- returns the closest match to a reference color, out of a specified array of colors
+		eg. closestColorANYTYPE = Uize.Color.closest (referenceColorANYTYPE,colorsARRAY);
+
+		- how does this relate to proximity sort? Can it share code with sort?
+
+Uize.Color.makeCombinations
+	- support 4-tuple color spaces
+
+Uize.Color.makeSeries
+	.....................................
+	colorsARRAY = Uize.Color.makeSeries (
+		color1ANYTYPE,
+		color2ANYTYPE,
+		componentChaosFLOATorARRAY,
+		outputEncodingSTR
+	);
+	.....................................
+
+	eg. =Uize.Color.makeSeries ('0','f',100)=
+	eg. =Uize.Color.makeSeries ('0','f',100,0,'#hex')=
+
+	component chaos of 1 lets you create any number of random colors within a range
+
+

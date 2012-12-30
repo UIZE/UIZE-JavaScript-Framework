@@ -1,0 +1,39 @@
+A service that provides simple data storage.
+
+Adapters for the =Uize.Services.Store= can provide varying degrees of persistence of the data.
+
+Interface
+	key
+		Returns the key of the item at the specified index.
+
+	getItem
+		Returns the value for the specified item.
+
+	setItem
+		Sets the specified item to the specified value.
+
+	removeItem
+		Removes the specified item.
+
+	clear
+		Clears the entire store.
+
+Adapter Base Class
+	In order to endow all adapters of the =Uize.Services.Store= service with certain useful features, an adapter base class should be provided that can be subclassed by any adapter implementation.
+
+	Responsible of the adapter
+
+	- access caching to improve performance
+	- set caching to improve performance
+
+Adapters
+	The following adapters could be implemented for the =Uize.Services.Store= service.
+
+	- =Uize.Services.StoreFileSytem= - would use the =Uize.Services.FileSystem= service to store data in a file using the file system.
+	- =Uize.Services.StoreBrowserLocalStorage= - would use the browser's local storage facility.
+	- =Uize.Services.StoreFlash= - would store using a Flash swf.
+	- =Uize.Services.StoreIeActiveX= - would store using an ActiveX control in MSIE.
+	- =Uize.Services.StoreCookies= - would use the browser cookies.
+	- =Uize.Services.StoreMemory= - would store in JavaScript memory.
+
+

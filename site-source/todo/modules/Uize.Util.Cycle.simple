@@ -1,0 +1,3 @@
+TODO
+- instead of start / stop methods, just use property interface (ie. inProgress property)
+

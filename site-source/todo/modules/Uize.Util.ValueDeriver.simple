@@ -1,0 +1,15 @@
+EXAMPLE
+...........................
+Uize.Util.ValueDeriver ({
+	inputs:{
+		a:foo,
+		b:bar
+	},
+	deriver:function (a,b) {
+		return a + b;
+	},
+	output:{
+	}
+});
+...........................
+

@@ -1,0 +1,49 @@
+- possibly turn package into an Object
+	- stitch in instance methods from Date object, as is done with the Uize.String.Builder object
+	- make majority of static methods available as instance methods
+
+Uize.Date.resolve
+	- consider expanding dateSTRorOBJ value type to dateSTRorINTorOBJ, in order to support dates specified as POSIX milliseconds
+
+- refactor tomkidding.com to no longer use Tk.Date
+- localization
+
+- possible new methods...
+	- Uize.Date.is - determines if specified value is a valid date (could be used by Uize.Widget.TableSort in checking for valid date columns)
+
+Uize.Date.getRange
+	- support more range types
+		- range, neatly bound
+			- start to end
+				eg. this week, this month, this year, etc.
+			- start to date
+				eg. from start of this month till date
+			- date to end
+				eg. from date till end of month
+			- end and beyond
+				eg. starting next month
+			- up until start
+				eg. before this month
+			- past
+				- before date
+			- future
+				- after date
+		- range, with date alignment
+			- 0: starting at
+			- .5: range with date in middle
+			- 1: ending at
+
+Uize.Date.isRecent
+	- ability to specify time unit for recency window (default to days)
+	- right now, always checks if specified date is recent, relative to now - could also allow reference point date to be specified
+	- right now, you can check if date is within a time window before or after now -- what about date being "around" now (ie. in a window some time leading up to and some time past now)
+
+Uize.Date.constrain
+	- constrain a date to a specified Date range
+
+Uize.Date.inRange
+	- could be refactored to make use of new =Uize.Date.constrain= method
+		return +(_date = _resolve (_date)) == +_package.constrain (_date,_range)
+	- benefit would be smaller implementation, and Uize.Date.constrain would support ranges where minValue is after maxValue, because it would use Uize.constrain in its implementation
+
+

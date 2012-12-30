@@ -1,0 +1,26 @@
+- automatically stitched in documentation, based on auto-detection of features and such...
+	- module level info
+		- a list of all modules directly under the module's namespace
+		- the unit test module (if one exists) that tests this module
+		- a list of the examples that feature the module
+
+		- a way to see a table (or other representation) of the module meta data, as well as other information like file size, scrunched file size, etc.
+
+	- feature level info
+		- for static features, a note regarding whether or not the static feature is inheritable
+		- for properties (instance properties, static properties, state properties), note the initial value
+
+		- for method features, the ability to see the implementation (not the scrunched, of course, so how???)
+
+	- more module utilities
+		- a way to launch a table to view all the features detected for the class
+		- a way to see the full list of dependencies
+		- a way to see the total scrunched file size of the module and all its dependencies
+		- a list of all the other modules that depend on this module
+			- directly
+			- indirectly
+		- a way to load and play with the module
+
+- create a test page/utility for displaying doc, given any JS file's contents as input
+
+

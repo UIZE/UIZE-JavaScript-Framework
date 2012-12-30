@@ -1,0 +1,25 @@
+- for all style properties that can be animated by this module, it would be useful if parsing and serializing of the style properties was available outside of the context of just fading for FX purposes
+	- perhaps a Uize.Css module (see Uize.Css)?
+
+Uize.Fx.fadeStyle
+	- ability to take over fading of certain style properties from active fades
+	- look into support for HSL color fades
+		- with true support, not just initial conversion to RGB
+		- maybe support for all color spaces, with translation at time of setting style properties, so you could always interpolate in the color space's original components
+		- don't think IE6 supports hsl(...,...,...), so may have to do translation to RGB when setting properties
+	- ability to chain fades
+	- support for compound TRBL values, like "1px 0px 10px 5px" (split up into multiple properties?)
+	- what's the best way to support compound, mixed type values like "1px solid #fff"? (split up into multiple properties?)
+	- ability to set style properties immediately for properties and terminate active fade (ie. like a fade with 0 duration)
+	- support for non-px units of dimension (em, pt)
+	- idea: ability to specify a node for start or end style, and have the style values for that node picked up
+	- ability to fade style for multiple nodes at the same time
+	- think about what it means to have generators for components of a fade effect, or being able to compose a fade from multiple different parts, where the generators of those parts may provide start values, end values, and curve and quantization values. Perhaps such a use case could be satisfied by just being able to merge two fades together.
+	- have a way to specify values that are to be relative to current value
+
+- migrate effects from Uize.Widget.Swap into Uize.Fx
+- Uize.Fx.fadeOpacity
+- possibly higher level effects (could be in subnamespace), ala what's available in some other frameworks
+- for defineStylePropertiesProfile, support ability to build quantization object based upon decoded fade value, rather than assuming that one size fits all for quantization, especially since some properties like textShadow will have many different components, each with different quantization needs (eg. color and px vs. em or ex).
+
+
