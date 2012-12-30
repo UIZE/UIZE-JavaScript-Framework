@@ -364,6 +364,24 @@ Uize.module({
 				/* PARAMETERS:
 					module
 						A reference to a module, for which the JavaScript source is providing documentation.
+
+					modulesTree
+						An object, defining the hierarchical modules tree.
+
+					examples
+						An array, listing examples that showcase the module.
+
+						Each element of the =examples= array is an object of the form...
+
+						..............................
+						{
+							path:filePathSTR,
+							title:titleSTR,
+							keywords:keywordsSTR,
+							description:descriptionSTR,
+							imageSrc:imageSrcSTR
+						}
+						..............................
 				*/
 				function _extractParam (_paramName) {
 					var _paramValue;
