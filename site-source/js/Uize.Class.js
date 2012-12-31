@@ -2348,6 +2348,50 @@ Uize.module ({
 				*/
 			};
 
+			_class.instanceMethods = _class.instanceProperties = function (_instanceFeatures) {
+				_copyInto (this.prototype,_instanceFeatures);
+				/*?
+					Static Methods
+						Uize.Class.instanceMethods
+							Lets you conveniently declare one or more instance methods, by specifying the methods in an object.
+
+							SYNTAX
+							.............................................
+							MyClass.instanceMethods (instanceMethodsOBJ);
+							.............................................
+
+						Uize.Class.instanceProperties
+							Lets you conveniently declare one or more instance properties, by specifying the properties and their initial values in an object.
+
+							SYNTAX
+							................................................
+							MyClass.instanceMethods (instancePropertiesOBJ);
+							................................................
+				*/
+			};
+
+			_class.staticMethods = _class.staticProperties = function (_staticFeatures) {
+				_copyInto (this,_staticFeatures);
+				/*?
+					Static Methods
+						Uize.Class.staticMethods
+							Lets you conveniently declare one or more static methods, by specifying the methods in an object.
+
+							SYNTAX
+							.........................................
+							MyClass.staticMethods (staticMethodsOBJ);
+							.........................................
+
+						Uize.Class.staticProperties
+							Lets you conveniently declare one or more static properties, by specifying the properties and their initial values in an object.
+
+							SYNTAX
+							............................................
+							MyClass.staticMethods (staticPropertiesOBJ);
+							............................................
+				*/
+			};
+
 		return _class;
 	}
 });
