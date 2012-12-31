@@ -1,9 +1,5 @@
 This is a TO DO document for the =Uize.Services.Store= module.
 
-A service that provides simple data storage.
-
-Adapters for the =Uize.Services.Store= can provide varying degrees of persistence of the data.
-
 Interface
 	key
 		Returns the key of the item at the specified index.
@@ -32,10 +28,12 @@ Adapters
 	The following adapters could be implemented for the =Uize.Services.Store= service.
 
 	- =Uize.Services.StoreFileSytem= - would use the =Uize.Services.FileSystem= service to store data in a file using the file system.
-	- =Uize.Services.StoreBrowserLocalStorage= - would use the browser's local storage facility.
-	- =Uize.Services.StoreFlash= - would store using a Flash swf.
-	- =Uize.Services.StoreIeActiveX= - would store using an ActiveX control in MSIE.
-	- =Uize.Services.StoreCookies= - would use the browser cookies.
-	- =Uize.Services.StoreMemory= - would store in JavaScript memory.
+	- =Uize.Services.StoreAdapter.BrowserLocalStorage= - would use the browser's local storage facility.
+	- =Uize.Services.StoreAdapter.Flash= - would store using a Flash swf.
+	- =Uize.Services.StoreAdapter.IeActiveX= - would store using an ActiveX control in MSIE.
+	- =Uize.Services.StoreAdapter.Cookies= - would use the browser cookies.
+	- =Uize.Services.StoreAdapter.Memory= - would store in JavaScript memory.
 
+Data Persistence
+	Adapters for the =Uize.Services.Store= can provide varying degrees of persistence of the data.
 
