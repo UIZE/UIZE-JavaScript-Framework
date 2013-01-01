@@ -1,79 +1,112 @@
 This is a TO DO document for the =Uize.Class= module.
 
-Convenience Methods for Class Creation
-	instanceMethods
-		Lets you declare one or more instance methods, by specifying the methods in an object.
+Improve Feature Declaration and Subclassing
+	Rename registerProperties to stateProperties
+		Rename the =Uize.Class.registerProperties= static method to =Uize.Class.stateProperties= and deprecate =Uize.Class.registerProperties=.
+
+		- update all code to use the new =Uize.Class.stateProperties= method (make sure to cover examples and test modules)
+		- update all explainer documentation to use the new =Uize.Class.stateProperties= method
+		- update the =Uize.Test.Uize.Class= test module to rename the existing tests for the =Uize.Class.registerProperties= method, and to create a new test that verifies that the =Uize.Class.registerProperties= method still exists and is a straight reference to the =Uize.Class.stateProperties= method
+		- announce the deprecation of the =Uize.Class.registerProperties= method
+		- document that the =Uize.Class.registerProperties= method is deprecated in the =Uize.Class= reference
+
+	New Variation for the Uize.Class.subclass Method
+		As a convenience, the =Uize.Class.subclass= method should be improved with addition of a variation that takes a single object parameter, which will let you specify in a declarative way various features that should be added to the newly created class.
+
+		The name of each property of the object should match the name of a static method that exists on the base class, and that will be called with the value of the property as its single parameter. So, for example, to conveniently declare static methods that should be added to the subclass, the =staticMethods= property can be specified, which will result in the =MyClass.staticMethods= static method being called in order to declare the specified set of static methods.
 
 		SYNTAX
-		.............................................
-		MyClass.instanceMethods (instanceMethodsOBJ);
-		.............................................
+		..........................................................
+		MySubclassOBJ = MyClass.subclass (featuresDeclarationOBJ);
+		..........................................................
 
 		EXAMPLE
-		...................................................
-		_class.instanceMethods ({
-			wireUi:function () {
-				// implementation of wireUi instance method
+		................................
+		MySubclass = MyClass.subclass ({
+			staticMethods:{
 			},
-			updateUi:function () {
-				// implementation of updateUi instance method
+			instanceMethods:{
+			},
+			instanceProperties:{
+			},
+			stateProperties:{
 			}
 		});
-		...................................................
+		................................
 
-	staticMethods
-		Lets you declare one or more instance methods, by specifying the methods in an object.
+		Benefit to Service Classes
+			Improving the =Uize.Class.subclass= method in the proposed way would benefit other base classes that provide static methods for declaring features of subclasses.
 
-		SYNTAX
-		.........................................
-		MyClass.staticMethods (staticMethodsOBJ);
-		.........................................
+			For example, the =Uize.Service= base class provides a =Uize.Service.declareServiceMethods= static methods that service subclasses can use to declare their service methods. By changing the name of the =Uize.Service.declareServiceMethods= method to simply =Uize.Service.serviceMethods=, and given the proposed behavior for the new variation of the =Uize.Class.subclass= method, a service subclass will be able to be created along with declaration of service methods in a single call to the =Uize.Class.subclass= method, as follows...
 
-	dualContextMethods
-		Lets you declare methods that can operate in both the class and instance contexts, by specifying the methods in an object.
+			EXAMPLE
+			.........................................
+			MyServiceClass = Uize.Service.subclass ({
+				serviceMethods:{
+					serviceMethod1:{
+					},
+					serviceMethod2:{
+					}
+				}
+			});
+			.........................................
 
-		SYNTAX
-		...................................................
-		MyClass.dualContextMethods (dualContextMethodsOBJ);
-		...................................................
+		Need New Methods for Declaring Structors
+			In order to be able to provide the `new variation for the Uize.Class.subclass method` that supports only a single features declaration object, new methods would need to be provided for declaring the =alphastructor= and =omegastructor= for the class.
 
-	instanceProperties
-		Lets you declare one or more instance properties, by specifying the properties in an object.
+			This is because the new variation would displace the previous form that allows the =alphastructor= and =omegastructor= to be specified as the two parameters. This would be a generally good thing, in terms of being consistent with allowing all the features of the class to be declared at any time using `feature declaration methods`.
 
-		SYNTAX
-		...................................................
-		MyClass.instanceProperties (instancePropertiesOBJ);
-		...................................................
+			- =Uize.Class.alphastructor= - lets you declare the =alphastructor= for the class
+			- =Uize.Class.omegastructor= - lets you declare the =omegastructor= for the class
 
-	staticProperties
-		Lets you declare one or more static properties, by specifying the properties in an object.
+			Adding new =Uize.Class.alphastructor= and =Uize.Class.omegastructor= static methods would allow the =alphastructor= and =omegastructor= to be declared inside the `new variation for the Uize.Class.subclass method`, as well as in the proposed new =Uize.Class.declare= static method.
 
-		SYNTAX
-		...............................................
-		MyClass.staticProperties (staticPropertiesOBJ);
-		...............................................
+			EXAMPLE
+			................................
+			MySubclass = MyClass.subclass ({
+				alphastructor:function () {
+					// alphastructor
+				},
+				omegastructor:function () {
+					// omegastructor
+				},
+				staticMethods:{
+				},
+				instanceMethods:{
+				},
+				instanceProperties:{
+				},
+				stateProperties:{
+				}
+			});
+			................................
 
-	stateProperties
-		Lets you declare one or more state properties for the class, by specifying the state properties in an object.
+	New Uize.Class.declare Static Method
+		For convenience, a new =Uize.Class.declare= static method should be created that would let you declare various types of features in the same way as they can be declared when using the `new variation for the Uize.Class.subclass method`.
 
-Improved Subclass Method
-	As a convenience, the subclass method should be improved to take an optional object, which will let you specify in a declarative way various features that should be added to the class.
+		This would allow features for a class to be declared when first creating the class, but also at any time after creating the class, using the same semantics. In fact, the =Uize.Class.subclass= method would use the new =Uize.Class.declare= method in its implementation for the variation that supports a single
 
-	Each property of the object should match the name of a static method that exists on the base class, and that will be called with the value of the property as its single parameter. So, for example, to conveniently declare static methods that should be added to the subclass, the =staticMethods= property can be specified, which will result in the =MyClass.staticMethods= static method being called in order to declare the specified set of static methods.
+		EXAMPLE
+		.................................
+		MySubclass = MyClass.subclass ();
 
-	EXAMPLE
-	................................
-	MySubclass = MyClass.subclass ({
-		staticMethods:{
-		},
-		instanceMethods:{
-		},
-		instanceProperties:{
-		},
-		stateProperties:{
-		}
-	});
-	................................
+		MySubclass.declare ({
+			alphastructor:function () {
+				// alphastructor
+			},
+			omegastructor:function () {
+				// omegastructor
+			},
+			staticMethods:{
+			},
+			instanceMethods:{
+			},
+			instanceProperties:{
+			},
+			stateProperties:{
+			}
+		});
+		.................................
 
 Conditions
 	The whenever Instance Method
