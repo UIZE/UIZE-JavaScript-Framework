@@ -29,137 +29,137 @@ Uize.module ({
 	superclass:'Uize.Services.FileSystemAdapter',
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+			var _class = _superclass.subclass ();
 
 		/*** Utility Functions ***/
 			var _getParentFolderPath = _class.getParentFolderPath;
 
-		/*** Private Instance Methods ***/
-			_classPrototype._makeFolder = function (_path) {
-				var _fileSystemObject = this._fileSystemObject;
-				if (!_fileSystemObject.FolderExists (_path)) {
-					var
-						_pathToCreate = _path,
-						_pathsToCreate = []
-					;
-					while (_pathToCreate && !_fileSystemObject.FolderExists (_pathToCreate)) {
-						_pathsToCreate.push (_pathToCreate);
-						_pathToCreate = _getParentFolderPath (_pathToCreate);
+		/*** Instance Methods ***/
+			_class.instanceMethods ({
+				/*** Overridden Extensibility Methods ***/
+					getItemsInFolder:function (_params,_itemIsFolder) {
+						var
+							_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
+							_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
+							_result = [],
+							_items = new Enumerator (
+								this._fileSystemObject.getFolder (_params.path) [_itemIsFolder ? 'SubFolders' : 'Files']
+							),
+							_itemPath
+						;
+						while (!_items.atEnd ()) {
+							_pathMatcher (
+								_itemPath = (_itemPath = _items.item ().Path).slice (
+									Math.max (_itemPath.lastIndexOf ('/'),_itemPath.lastIndexOf ('\\')) + 1
+								)
+							) &&
+								_result.push (_pathTransformer (_itemPath))
+							;
+							_items.moveNext ();
+						}
+						return _result;
+					},
+
+				/*** Private Instance Methods ***/
+					_makeFolder:function (_path) {
+						var _fileSystemObject = this._fileSystemObject;
+						if (!_fileSystemObject.FolderExists (_path)) {
+							var
+								_pathToCreate = _path,
+								_pathsToCreate = []
+							;
+							while (_pathToCreate && !_fileSystemObject.FolderExists (_pathToCreate)) {
+								_pathsToCreate.push (_pathToCreate);
+								_pathToCreate = _getParentFolderPath (_pathToCreate);
+							}
+							for (var _pathToCreateNo = _pathsToCreate.length; --_pathToCreateNo >= 0;)
+								 _fileSystemObject.CreateFolder (_pathsToCreate [_pathToCreateNo])
+							;
+						}
+					},
+
+				/*** Public Instance Methods ***/
+					copyFile:function (_params,_callback) {
+						var
+							_this = this,
+							_targetPath = _params.targetPath
+						;
+						_this._makeFolder (_getParentFolderPath (_targetPath));
+						_this._fileSystemObject.CopyFile (_params.path,_targetPath,true);
+						_callback ();
+					},
+
+					deleteFile:function (_params,_callback) {
+						try {
+							this._fileSystemObject.DeleteFile (_params.path);
+						} catch (_error) {
+							// do nothing for now
+						}
+						_callback ();
+					},
+
+					fileExists:function (_params,_callback) {
+						_callback (this._fileSystemObject.FileExists (_params.path));
+					},
+
+					getModifiedDate:function (_params,_callback) {
+						var
+							_path = _params.path,
+							_fileSystemObject = this._fileSystemObject
+						;
+						_callback (
+							_fileSystemObject.FileExists (_path)
+								? new Date (_fileSystemObject.GetFile (_path).DataLastModified)
+								: NaN
+						);
+					},
+
+					pathExists:function (_params,_callback) {
+						var
+							_path = _params.path,
+							_fileSystemObject = this._fileSystemObject
+						;
+						_callback (_fileSystemObject.FileExists (_path) || _fileSystemObject.FolderExists (_path));
+					},
+
+					getFolders:function (_params,_callback) {
+						_callback (this.getItemsInFolder (_params,true));
+					},
+
+					readFile:function (_params,_callback) {
+						var
+							_fileSystemObject = this._fileSystemObject,
+							_path = _params.path,
+							_text = ''
+						;
+						if (_fileSystemObject.GetFile (_path).Size) {
+							var _file = _fileSystemObject.OpenTextFile (_path,1);
+							_text = _file.ReadAll ();
+							_file.Close ();
+						}
+						_callback (_text);
+					},
+
+					writeFile:function (_params,_callback) {
+						var
+							_this = this,
+							_path = _params.path
+						;
+						_this._makeFolder (_getParentFolderPath (_path));
+
+						/*** write text to file and close ***/
+							var _file = _this._fileSystemObject.CreateTextFile (_path);
+							_file.Write (_params.contents);
+							_file.Close ();
+
+						_callback ();
+					},
+
+					init:function (_params,_callback) {
+						this._fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject');
+						_callback ();
 					}
-					for (var _pathToCreateNo = _pathsToCreate.length; --_pathToCreateNo >= 0;)
-						 _fileSystemObject.CreateFolder (_pathsToCreate [_pathToCreateNo])
-					;
-				}
-			};
-
-		/*** Overridden Extensibility Methods ***/
-			_classPrototype.getItemsInFolder = function (_params,_itemIsFolder) {
-				var
-					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
-					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
-					_result = [],
-					_items = new Enumerator (
-						this._fileSystemObject.getFolder (_params.path) [_itemIsFolder ? 'SubFolders' : 'Files']
-					),
-					_itemPath
-				;
-				while (!_items.atEnd ()) {
-					_pathMatcher (
-						_itemPath = (_itemPath = _items.item ().Path).slice (
-							Math.max (_itemPath.lastIndexOf ('/'),_itemPath.lastIndexOf ('\\')) + 1
-						)
-					) &&
-						_result.push (_pathTransformer (_itemPath))
-					;
-					_items.moveNext ();
-				}
-				return _result;
-			};
-
-		/*** Public Instance Methods ***/
-			_classPrototype.copyFile = function (_params,_callback) {
-				var
-					_this = this,
-					_targetPath = _params.targetPath
-				;
-				_this._makeFolder (_getParentFolderPath (_targetPath));
-				_this._fileSystemObject.CopyFile (_params.path,_targetPath,true);
-				_callback ();
-			};
-
-			_classPrototype.deleteFile = function (_params,_callback) {
-				try {
-					this._fileSystemObject.DeleteFile (_params.path);
-				} catch (_error) {
-					// do nothing for now
-				}
-				_callback ();
-			};
-
-			_classPrototype.fileExists = function (_params,_callback) {
-				_callback (this._fileSystemObject.FileExists (_params.path));
-			};
-
-			_classPrototype.getModifiedDate = function (_params,_callback) {
-				var
-					_path = _params.path,
-					_fileSystemObject = this._fileSystemObject
-				;
-				_callback (
-					_fileSystemObject.FileExists (_path)
-						? new Date (_fileSystemObject.GetFile (_path).DataLastModified)
-						: NaN
-				);
-			};
-
-			_classPrototype.pathExists = function (_params,_callback) {
-				var
-					_path = _params.path,
-					_fileSystemObject = this._fileSystemObject
-				;
-				_callback (_fileSystemObject.FileExists (_path) || _fileSystemObject.FolderExists (_path));
-			};
-
-			_classPrototype.getFolders = function (_params,_callback) {
-				_callback (this.getItemsInFolder (_params,true));
-			};
-
-			_classPrototype.readFile = function (_params,_callback) {
-				var
-					_fileSystemObject = this._fileSystemObject,
-					_path = _params.path,
-					_text = ''
-				;
-				if (_fileSystemObject.GetFile (_path).Size) {
-					var _file = _fileSystemObject.OpenTextFile (_path,1);
-					_text = _file.ReadAll ();
-					_file.Close ();
-				}
-				_callback (_text);
-			};
-
-			_classPrototype.writeFile = function (_params,_callback) {
-				var
-					_this = this,
-					_path = _params.path
-				;
-				_this._makeFolder (_getParentFolderPath (_path));
-
-				/*** write text to file and close ***/
-					var _file = _this._fileSystemObject.CreateTextFile (_path);
-					_file.Write (_params.contents);
-					_file.Close ();
-
-				_callback ();
-			};
-
-			_classPrototype.init = function (_params,_callback) {
-				this._fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject');
-				_callback ();
-			};
+			});
 
 		return _class;
 	}

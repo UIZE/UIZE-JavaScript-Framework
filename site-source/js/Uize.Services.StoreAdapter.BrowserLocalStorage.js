@@ -29,10 +29,7 @@ Uize.module ({
 	superclass:'Uize.Services.StoreAdapter',
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+			var _class = _superclass.subclass ();
 
 		/*** Public Instance Methods ***/
 			_class.instanceMethods ({
