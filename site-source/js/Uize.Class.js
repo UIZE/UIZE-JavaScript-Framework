@@ -13,7 +13,7 @@
 	type: Class
 	importance: 10
 	codeCompleteness: 100
-	testCompleteness: 40
+	testCompleteness: 36
 	docCompleteness: 100
 */
 
@@ -49,7 +49,7 @@
 					Declare Private or Public Features
 						The `feature declaration methods` can be used either to declare public features or private features.
 
-						In UIZE, there is no fundamental difference between private methods or properties and public methods or properties - it's all in the naming. By convention, private features are named with an "_" (underscore) prefix. This has its pros and cons, but one side effect of this is that the either private or public features (or a mixture of both) can be declared using the `feature declaration methods`.
+						In UIZE, there is no fundamental difference between private methods or properties and public methods or properties - it's all in the naming. By convention, private features are named with an "_" (underscore) prefix. This has its pros and cons, but one side effect of this is that either private or public features (or a mixture of both) can be declared using the `feature declaration methods`.
 
 						EXAMPLE
 						........................................
@@ -59,7 +59,7 @@
 							},
 							_privateInstanceMethod2:function () {
 								// implementation here
-							}
+							},
 							publicInstanceMethod1:function () {
 								// implementation here
 							},
