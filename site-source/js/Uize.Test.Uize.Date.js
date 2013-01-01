@@ -51,6 +51,7 @@ Uize.module ({
 		var
 			_defaultDate = new Date,
 			_oneDayInMilliseconds = 24 * 60 * 60 * 1000,
+			_nowTestFudgeFactor = 10,
 
 			/*** various test dates, for use in tests for different methods ***/
 				_testDate = _newDate (2001,9,11,8,46,40),
@@ -85,7 +86,7 @@ Uize.module ({
 						_now = new Date,
 						_result = Uize.Date.resolve.apply (Uize.Date,_arguments)
 					;
-					return this.expectInstanceOf (Date,_result) && _now - _result < 10;
+					return this.expectInstanceOf (Date,_result) && _now - _result < _nowTestFudgeFactor;
 				}
 			};
 		}
@@ -489,7 +490,7 @@ Uize.module ({
 						],
 						{
 							title:'Test that now is the default when date to encode is not specfied',
-							test:function () {return Uize.Date.toIso8601 () == Uize.Date.toIso8601 (new Date ())}
+							test:function () {return Uize.Date.toIso8601 () == Uize.Date.toIso8601 (new Date)}
 						},
 						['Test that an invalid date is formatted in ISO8601 as ????-??-??',
 							NaN,
@@ -640,15 +641,30 @@ Uize.module ({
 						/*** test defaulting of the date to test for being in range ***/
 							{
 								title:'Test that date to test is defaulted to now when its value is undefined',
-								test:function () {return Uize.Date.inRange (undefined,{minValue:new Date,maxValue:new Date})}
+								test:function () {
+									return Uize.Date.inRange (
+										undefined,
+										{minValue:new Date,maxValue:new Date + _nowTestFudgeFactor}
+									);
+								}
 							},
 							{
 								title:'Test that date to test is defaulted to now when its value is null',
-								test:function () {return Uize.Date.inRange (null,{minValue:new Date,maxValue:new Date})}
+								test:function () {
+									return Uize.Date.inRange (
+										null,
+										{minValue:new Date,maxValue:new Date + _nowTestFudgeFactor}
+									);
+								}
 							},
 							{
 								title:'Test that date to test is defaulted to now when its value is an empty string',
-								test:function () {return Uize.Date.inRange ('',{minValue:new Date,maxValue:new Date})}
+								test:function () {
+									return Uize.Date.inRange (
+										'',
+										{minValue:new Date,maxValue:new Date + _nowTestFudgeFactor}
+									);
+								}
 							}
 					]],
 					['Uize.Date.isRecent',[
