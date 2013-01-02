@@ -11,7 +11,7 @@
 
 /* Module Meta Data
 	type: Class
-	importance: 6
+	importance: 1
 	codeCompleteness: 0
 	testCompleteness: 0
 	docCompleteness: 5
@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =Uize.Services.StoreAdapter.BrowserLocalStorage= module defines an adapter for the file system service (=Uize.Services.Store=) for the BrowserLocalStorageJS environment.
+		The =Uize.Services.StoreAdapter.BrowserLocalStorage= module defines an adapter for the store service (=Uize.Services.Store=) that uses the browser's localStorage object for persisting data.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
