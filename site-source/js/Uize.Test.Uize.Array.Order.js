@@ -26,10 +26,10 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Array.Order',
-	required:'Uize.Test.Uize.Data',
+	required:'Uize.Test.Uize',
 	builder:function () {
 		function _arrayMethodTargetTest (_methodName,_sourceArrayContents,_expectedTargetArrayContents) {
-			return Uize.Test.Uize.Data.arrayMethodTargetTest (
+			return Uize.Test.Uize.arrayMethodTargetTest (
 				'Uize.Array.Order',
 				_methodName,
 				_sourceArrayContents,

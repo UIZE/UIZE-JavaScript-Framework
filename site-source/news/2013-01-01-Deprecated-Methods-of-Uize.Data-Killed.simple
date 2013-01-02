@@ -1,0 +1,50 @@
+Various static methods of the =Uize.Data= module that were migrated out of this module back in November of 2011, and that were therefore deprecated, have now finally been killed.
+
+In keeping with the policy of keeping deprecated features alive for a year or more, the deprecated =Uize.Data= methods remained and continued to function in the same way. In order to keep the codebase as clean as possible going forward, however, these methods have now been eliminated from the =Uize.Data= module.
+
+The methods that have been killed are as follows...
+
+KILLED METHODS
+.............................................................
+Uize.Data.emptyOut          >> NOW USE >>  Uize.emptyOut
+Uize.Data.getKeys           >> NOW USE >>  Uize.keys
+Uize.Data.getLookup         >> NOW USE >>  Uize.lookup
+Uize.Data.getReverseLookup  >> NOW USE >>  Uize.reverseLookup
+Uize.Data.getTotalKeys      >> NOW USE >>  Uize.totalKeys
+Uize.Data.getValues         >> NOW USE >>  Uize.values
+Uize.Data.isEmpty           >> NOW USE >>  Uize.isEmpty
+Uize.Data.map               >> NOW USE >>  Uize.map
+Uize.Data.min               >> NOW USE >>  Uize.min
+Uize.Data.max               >> NOW USE >>  Uize.max
+.............................................................
+
+After updating with the latest version of UIZE, you should be sure to change any references to the killed =Uize.Data= methods - if any still exist - to now use the equivalent methods as they exist in the =Uize= module.
+
+Special Consideration for Uize.Data.map
+	Of all the methods of the =Uize.Data= module that were migrated to the =Uize= module back in 2011, all methods remained compatible in their signature except for the =Uize.Data.map= method.
+
+	The =Uize.Data.map= method was promoted to the =Uize= base module as =Uize.map=, but the arguments signature was changed. While the deprecated =Uize.Data.map= method accepted a mapper expression or function as its first argument and an array, object, or number as its second argument, these two arguments were swapped around in the =Uize.map= method. This is the more conventional signature for =map= type methods.
+
+	INSTEAD OF...
+	.........................................................................
+	mappedARRAYorOBJ = Uize.Data.map (mapperSTRorFUNC,sourceARRAYorOBJorINT);
+	.........................................................................
+
+	USE...
+	....................................................................
+	mappedARRAYorOBJ = Uize.map (sourceARRAYorOBJorINT,mapperSTRorFUNC);
+	....................................................................
+
+	Other than the change in its arguments signature, the =Uize.map= behaves in exactly the same way as the defunct =Uize.Data.map= method did. This should be kept in mind if you still have lingering usages of the =Uize.Data.map= method lying around in your code that will need to be changed to use the =Uize.map= method.
+
+Background
+	For background on the original changes in November 2011, consult the following two news announcements...
+
+	- [[2011-11-13-New-Utility-Belt-Features.html][2011-11-13 - New Utility Belt Features]]
+	- [[2011-11-27-Uize-Base-Gets-Uize.forEach-and-Uize.map.html][2011-11-27 - Uize Base Gets Uize.forEach and Uize.map]]
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-01 - Deprecated Methods of Uize.Data Killed
+....................................................................................

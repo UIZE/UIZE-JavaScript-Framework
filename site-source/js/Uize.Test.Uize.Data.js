@@ -43,119 +43,7 @@ Uize.module ({
 			}
 		;
 
-		function _arrayMethodTargetTest (
-			_hostName,
-			_methodName,
-			_sourceArrayContents,
-			_expectedTargetArrayContents,
-			_argumentsTemplate,
-			_sourceArgumentNo,
-			_targetArgumentNo
-		) {
-			if (!_argumentsTemplate) _argumentsTemplate = [];
-			if (_sourceArgumentNo == null) _sourceArgumentNo = 0;
-			if (_targetArgumentNo == null) _targetArgumentNo = 1;
-			var _sourceArray, _target;
-
-			function _callMethodWithTargetArgumentValue (_targetArgumentValue) {
-				var
-					_host = eval (_hostName),
-					_arguments = _argumentsTemplate.concat ()
-				;
-				_arguments [_sourceArgumentNo] = _sourceArray = _sourceArrayContents.concat ();
-				_arguments [_targetArgumentNo] = _targetArgumentValue !== undefined ? _targetArgumentValue : _sourceArray;
-				_target = _host [_methodName].apply (_host,_arguments);
-			}
-			return Uize.Test.declare ({
-				title:'Test that the targetARRAYorBOOL parameter is handled correctly for various types of values',
-				test:[
-					{
-						title:'Test that specifying the value false for the optional targetARRAYorBOOL parameter is handled correctly',
-						test:function () {
-							_callMethodWithTargetArgumentValue (false);
-							return (
-								this.expect (true,_sourceArray == _target) &&
-								this.expect (_expectedTargetArrayContents,_target)
-							);
-						}
-					},
-					{
-						title:'Test that specifying the value true for the optional targetARRAYorBOOL parameter is handled correctly',
-						test:function () {
-							_callMethodWithTargetArgumentValue (true);
-							return (
-								this.expect (false,_sourceArray == _target) &&
-								this.expect (_expectedTargetArrayContents,_target)
-							);
-						}
-					},
-					{
-						title:'Test that specifying an empty array for the optional targetARRAYorBOOL parameter is handled correctly',
-						test:function () {
-							_callMethodWithTargetArgumentValue ([]);
-							return (
-								this.expect (false,_sourceArray == _target) &&
-								this.expect (_expectedTargetArrayContents,_target)
-							);
-						}
-					},
-					{
-						title:'Test that specifying an array that is already populated with more elements for the optional targetARRAYorBOOL parameter is handled correctly',
-						test:function () {
-							var _someExtraCrud = ['some','extra','crud'];
-							_callMethodWithTargetArgumentValue (_sourceArrayContents.concat (_someExtraCrud));
-							return (
-								this.expect (false,_sourceArray == _target) &&
-								this.expect (_expectedTargetArrayContents.concat (_someExtraCrud),_target)
-							);
-						}
-					},
-					{
-						title:'Test that specifying an array that is already populated, but with the same number of elements, for the optional targetARRAYorBOOL parameter is handled correctly',
-						test:function () {
-							_callMethodWithTargetArgumentValue (_sourceArrayContents.concat ());
-							return (
-								this.expect (false,_sourceArray == _target) &&
-								this.expect (_expectedTargetArrayContents,_target)
-							);
-						}
-					},
-					{
-						title:'Test that specifying the source array for the optional targetARRAYorBOOL parameter is handled correctly',
-						test:function () {
-							_callMethodWithTargetArgumentValue ();
-							return (
-								this.expect (true,_sourceArray == _target) &&
-								this.expect (_expectedTargetArrayContents,_target)
-							);
-						}
-					},
-					{
-						title:'Test that specifying an empty object for the optional targetARRAYorBOOL parameter is handled correctly',
-						test:function () {
-							_callMethodWithTargetArgumentValue ({});
-							return (
-								this.expect (false,_sourceArray == _target) &&
-								this.expect (Uize.copyInto ({},_expectedTargetArrayContents),_target)
-							);
-						}
-					},
-					{
-						title:'Test that specifying an object that already has some properties for the optional targetARRAYorBOOL parameter is handled correctly',
-						test:function () {
-							var _someExtraCrud = {some:1,extra:1,crud:1};
-							_callMethodWithTargetArgumentValue (Uize.copyInto ({},_someExtraCrud));
-							return (
-								this.expect (false,_sourceArray == _target) &&
-								this.expect (Uize.copyInto ({},_someExtraCrud,_expectedTargetArrayContents),_target)
-							);
-						}
-					}
-				]
-			});
-		}
-
-		var _class = Uize.Test.declare ({
+		return Uize.Test.declare ({
 			title:'Test for Uize.Data Module',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Data'),
@@ -747,60 +635,6 @@ Uize.module ({
 							['engineering','finance']
 						]
 					]],
-					['Uize.Data.isEmpty',[
-						{
-							title:'Test that this method is simply a reference to the Uize.keys method',
-							test:function () {return this.expectSameAs (Uize.isEmpty,Uize.Data.isEmpty)}
-						}
-					]],
-					['Uize.Data.emptyOut',[
-						{
-							title:'Test that this method is simply a reference to the Uize.emptyOut method',
-							test:function () {return this.expectSameAs (Uize.emptyOut,Uize.Data.emptyOut)}
-						}
-					]],
-					['Uize.Data.getKeys',[
-						{
-							title:'Test that this method is simply a reference to the Uize.keys method',
-							test:function () {return this.expectSameAs (Uize.keys,Uize.Data.getKeys)}
-						}
-					]],
-					['Uize.Data.getTotalKeys',[
-						{
-							title:'Test that this method is simply a reference to the Uize.totalKeys method',
-							test:function () {return this.expectSameAs (Uize.totalKeys,Uize.Data.getTotalKeys)}
-						}
-					]],
-					['Uize.Data.getValues',[
-						{
-							title:'Test that this method is simply a reference to the Uize.values method',
-							test:function () {return this.expectSameAs (Uize.values,Uize.Data.getValues)}
-						}
-					]],
-					['Uize.Data.getLookup',[
-						{
-							title:'Test that this method is simply a reference to the Uize.lookup method',
-							test:function () {return this.expectSameAs (Uize.lookup,Uize.Data.getLookup)}
-						}
-					]],
-					['Uize.Data.getReverseLookup',[
-						{
-							title:'Test that this method is simply a reference to the Uize.reverseLookup method',
-							test:function () {return this.expectSameAs (Uize.reverseLookup,Uize.Data.getReverseLookup)}
-						}
-					]],
-					['Uize.Data.max',[
-						{
-							title:'Test that this method is simply a reference to the Uize.max method',
-							test:function () {return this.expectSameAs (Uize.max,Uize.Data.max)}
-						}
-					]],
-					['Uize.Data.min',[
-						{
-							title:'Test that this method is simply a reference to the Uize.min method',
-							test:function () {return this.expectSameAs (Uize.min,Uize.Data.min)}
-						}
-					]],
 					['Uize.Data.intersection',[
 						['Test that calling with no parameters produces an empty object',
 							[],
@@ -839,67 +673,6 @@ Uize.module ({
 							{1:'bar',3:null}
 						]
 					]],
-					['Uize.Data.map',[
-						['Test that function mapper gets element value as a parameter correctly',
-							[function (_value) {return _value.toUpperCase ()},['a','b','c']],
-							['A','B','C']
-						],
-						['Test that function mapper gets element key as a parameter correctly',
-							[function (_value,_key) {return _key},['a','b','c']],
-							[0,1,2]
-						],
-						['Test that function mapper is called as instance method on array correctly',
-							[function () {return this.length},['a','b','c']],
-							[3,3,3]
-						],
-						['Test that number can be specified in place of a source array',
-							[function (_value,_key) {return (_key + 1) + ' of ' + this.length + ' = ' + _value},['a','b','c']],
-							['1 of 3 = a','2 of 3 = b','3 of 3 = c']
-						],
-						['Test that a string can be used to specify a mapper',
-							['(key + 1) + \' of \' + this.length + \' = \' + value',['a','b','c']],
-							['1 of 3 = a','2 of 3 = b','3 of 3 = c']
-						],
-						['Test that a source object is automatically mapped to a object',
-							['key + value',{a:0,b:1,c:2}],
-							{a:'a0',b:'b1',c:'c2'}
-						],
-						['Test that an empty array maps to an empty array',
-							['value',[]],
-							[]
-						],
-						['Test that an empty object maps to an empty object',
-							['value',{}],
-							{}
-						],
-
-						/*** test target parameter ***/
-							['Test that map can be used to convert an array to an object by specifying an empty object target',
-								['value',['a','b','c'],{}],
-								{0:'a',1:'b',2:'c'}
-							],
-							['Test that map can be used to convert an object to an array by specifying an empty array target',
-								['value',{0:'a',1:'b',2:'c'},[]],
-								['a','b','c']
-							],
-							['Test that an empty array maps to an empty object, when an empty object target is specified',
-								['value',[],{}],
-								{}
-							],
-							['Test that an empty object maps to an empty array, when an empty array target is specified',
-								['value',{},[]],
-								[]
-							],
-							_arrayMethodTargetTest (
-								'Uize.Data',
-								'map',
-								[1,2,3,4,5],
-								[2,4,6,8,10],
-								['value * 2',null,null],
-								1,
-								2
-							)
-					]],
 					['Uize.Data.conjoined',[
 						['Test that object is considered conjoined to itself',
 							[_identicalTestObjectA,_identicalTestObjectA],
@@ -931,11 +704,6 @@ Uize.module ({
 				])
 			]
 		});
-
-		/*** Public Static Methods ***/
-			_class.arrayMethodTargetTest = _arrayMethodTargetTest;
-
-		return _class;
 	}
 });
 
