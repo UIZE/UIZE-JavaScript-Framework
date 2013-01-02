@@ -19,7 +19,7 @@ Interface
 Adapter Base Class
 	In order to endow all adapters of the =Uize.Services.Store= service with certain useful features, an adapter base class should be provided that can be subclassed by any adapter implementation.
 
-	Responsible of the adapter
+	Responsibilities of the adapter...
 
 	- access caching to improve performance
 	- set caching to improve performance
@@ -33,6 +33,23 @@ Adapters
 	- =Uize.Services.StoreAdapter.IeActiveX= - would store using an ActiveX control in MSIE.
 	- =Uize.Services.StoreAdapter.Cookies= - would use the browser cookies.
 	- =Uize.Services.StoreAdapter.Memory= - would store in JavaScript memory.
+
+Caching Behavior
+	The adapter base class for the store service could provide a generic caching layer, to minimize usage of the external storage system which can be costly for some storage mechanisms.
+
+	Cache Warming
+		The adapter base class can provide a mechanism for warming the cache by getting items from the external storage system and seeding them into the in-memory cache object.
+
+		- ability to specify maxItems to load into cache
+		- ability to specify maxTime spent warming cache
+		- ability to specify specific items to cache
+		- lazy warming of cache, if cache enabled and item not cached
+		- ability to warm cache as part of initialization
+
+	Cache Requirements
+		- enable or disable caching at any time
+		- ability to clear items from cache
+		- ability to clear entire cache
 
 Data Persistence
 	Adapters for the =Uize.Services.Store= can provide varying degrees of persistence of the data.
