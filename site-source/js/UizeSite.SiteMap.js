@@ -124,6 +124,7 @@ Uize.module ({
 						title:'Latest News',
 						link:'latest-news.html',
 						items:[
+							_news (2013),
 							_news (2012),
 							_news (2011),
 							_news (2010),
