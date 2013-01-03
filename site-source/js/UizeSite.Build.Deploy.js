@@ -119,7 +119,7 @@ Uize.module ({
 								'unzip --L uize-site-built.zip',
 								'rm uize-site-built.zip',
 								'rm *.* .htaccess',
-								'rm -r appendixes css examples explainers images javascript-reference js news reference tests widgets widgetstogo',
+								'rm -r appendixes css examples explainers images javascript-reference js news reference tests todo widgets widgetstogo',
 								'mv site-built/* ~',
 								'mv site-built/.htaccess ~/.htaccess',
 								'rm -rf site-built'
