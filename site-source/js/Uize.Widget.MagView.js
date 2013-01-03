@@ -453,8 +453,8 @@ Uize.module ({
 						- this node is required
 			*/
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_cursorAlignX:{
 					name:'cursorAlignX',
 					value:.5

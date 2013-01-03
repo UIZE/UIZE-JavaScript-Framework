@@ -85,8 +85,8 @@ Uize.module({
 				document.body.appendChild(_scriptNode);
 			};
 
-		/*** Register properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_callbackMode:{
 					name:'callbackMode',
 					value:'server'

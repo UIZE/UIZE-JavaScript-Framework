@@ -97,8 +97,8 @@ Uize.module ({
 				_this._resumeTimeout = setTimeout (function () {_this.set ({_playing:true})},_this._idleResumeTime);
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_idleResumeTime:{
 					name:'idleResumeTime',
 					value:1000

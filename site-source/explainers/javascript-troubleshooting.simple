@@ -237,7 +237,7 @@ Scrunch-related Problems
 		Accessing a Superclass' State Properties
 			One less-than-obvious access of privates that can occur is with subclasses.
 
-			If a state property is registered in a superclass, with a mapping of public name to private name, then the superclass can reference that state property by its private name. However, a subclass of that superclass may not. Instead, it must use the public name. And, to query the value for a state property registered in the superclass, the subclass must use the =get= method.
+			If a state property is declared in a superclass, with a mapping of public name to private name, then the superclass can reference that state property by its private name. However, a subclass of that superclass may not. Instead, it must use the public name. And, to query the value for a state property declared in the superclass, the subclass must use the =get= method.
 
 			If you reference state properties, properties, or methods of a superclass by private name in the implementation of your subclass, your code will work when using source code but most likely produce errors or erratic behavior when using scrunched code.
 

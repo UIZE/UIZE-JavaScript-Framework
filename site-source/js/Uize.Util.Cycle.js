@@ -111,8 +111,8 @@ Uize.module ({
 				this._running = _false;
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_bindings:'bindings',
 				_interval:{
 					name:'interval',

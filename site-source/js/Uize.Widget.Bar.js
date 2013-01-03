@@ -185,14 +185,14 @@ Uize.module ({
 							[DOCUMENT]
 				*/
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _conformValueAndUpdateUi () {
 				var _this = this;
 				_this.set ({_value:_this._conformValue (_this._value)});
 				_this._updateUi ();
 			}
 
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_decimalPlacesToDisplay:'decimalPlacesToDisplay',
 					/*?
 						State Properties

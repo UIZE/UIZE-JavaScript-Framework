@@ -100,8 +100,8 @@ Uize.module ({
 				return {isModified:!Uize.Data.identical(_this._formData, _formData), formData:_formData};
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_formData:{
 					name:'formData',
 					value:null,

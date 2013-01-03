@@ -51,14 +51,14 @@ Uize.module ({
 				title:_title,
 				test:[
 					{
-						title:'Test that firing an event for which no handler is registered has no ill effect',
+						title:'Test that firing an event for which no handler is wired has no ill effect',
 						test:function () {
 							_getEventSource ().fire ('testEvent');
 							return true;
 						}
 					},
 					{
-						title:'Test that firing an event for which a handler is registered works correctly',
+						title:'Test that firing an event for which a handler is wired works correctly',
 						test:function () {
 							var
 								_success = false,
@@ -106,7 +106,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that firing an event for which two handlers are registered results in the handlers being exucuted in the order registered',
+							'Test that firing an event for which two handlers are wired results in the handlers being exucuted in the order wired',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -120,7 +120,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that firing an event for which more than two handlers are registered results in the handlers being exucuted in the order registered',
+							'Test that firing an event for which more than two handlers are wired results in the handlers being exucuted in the order wired',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -601,7 +601,7 @@ Uize.module ({
 						title:'Test that the handler is executed immediately if the property is already ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
+							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
 							var
 								_instance = _Class (),
 								_handlerCalled = false
@@ -614,7 +614,7 @@ Uize.module ({
 						title:'Test that the handler is not executed immediately if the property is not yet ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
+							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
 							var
 								_instance = _Class (),
 								_handlerCalled = false
@@ -627,7 +627,7 @@ Uize.module ({
 						title:'Test that the handler is executed later once the property becomes ' + _mustExecuteStateName + ', if it wasn\'t already ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
+							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
 							var
 								_instance = _Class (),
 								_handlerCalled = false
@@ -641,7 +641,7 @@ Uize.module ({
 						title:'Test that the handler is executed only the first time that the property becomes ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
+							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
 							var
 								_instance = _Class (),
 								_handlerCalledCount = 0
@@ -657,7 +657,7 @@ Uize.module ({
 						title:'Test that the method returns a wirings object that can be used to unwire the handler before the property becomes ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
+							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
 							var
 								_instance = _Class (),
 								_handlerCalled = false,
@@ -672,7 +672,7 @@ Uize.module ({
 						title:'Test that the method returns an empty wirings object if the handler is executed immediately because the property is already ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
+							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
 							var
 								_instance = _Class (),
 								_wirings = _instance.once (_prefix + 'myProperty',function () {})
@@ -697,7 +697,7 @@ Uize.module ({
 						title:'Test that the handler is passed the value of the property as its single argument, both when executed immediately and when executed later',
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({
+							_Class.stateProperties ({
 								_myProperty1:{name:'myProperty1',value:_mustExecuteValue},
 								_myProperty2:{name:'myProperty2',value:_mustNotExecuteValue}
 							});
@@ -721,7 +721,7 @@ Uize.module ({
 						title:'Test that the same once handler can be registered repeatedly for the same property',
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
+							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
 							var
 								_instance = _Class (),
 								_valuesPassedToHandler = []
@@ -746,7 +746,7 @@ Uize.module ({
 						title:'Test that multiple once handlers can be registered for the same property',
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
+							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
 							var
 								_instance = _Class (),
 								_handler1Called = false,
@@ -775,7 +775,7 @@ Uize.module ({
 								_falsyAndTruthyValues,
 								function (_value,_valueNo) {
 									var _propertyName = 'myProperty' + _valueNo;
-									_Class.registerProperties (Uize.pairUp (_propertyName,{value:_value}));
+									_Class.stateProperties (Uize.pairUp (_propertyName,{value:_value}));
 									!!_value == !!_mustExecuteValue && _expectedHandlersCalled.push (_propertyName);
 								}
 							);
@@ -810,7 +810,7 @@ Uize.module ({
 							'Test that the ' + _method + ' method always sets the value of the specified state property to ' + _isMetTest + ', regardless of the property\'s current value',
 						test:function () {
 							var _Class = Uize.Class.subclass ();
-							_Class.registerProperties ({_myProperty:'myProperty'});
+							_Class.stateProperties ({_myProperty:'myProperty'});
 							var
 								_instance = _Class (),
 								_expectedValues = [],
@@ -829,7 +829,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that the ' + _method + ' method works correctly with a state property that has not yet been registered',
+						title:'Test that the ' + _method + ' method works correctly with a state property that has not yet been declared',
 						test:function () {
 							var
 								_Class = Uize.Class.subclass (),
@@ -852,7 +852,7 @@ Uize.module ({
 							'Test that values can be set for multiple properties by calling the set method with a single argument, which is an object containing an arbitrary number of property name to property value mappings',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({
+							_Subclass.stateProperties ({
 								property1:{},
 								property2:{},
 								property3:{}
@@ -875,7 +875,7 @@ Uize.module ({
 							'Test that a value can be set for a single property by calling the set method with two arguments, where the first argument is the property\'s name and the second is the property\'s value',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({property1:{}});
+							_Subclass.stateProperties ({property1:{}});
 							var _testContext = _isInstance ? new _Subclass : _Subclass;
 							_testContext.set ('property1','property1Value');
 							return this.expect ('property1Value',_testContext.get ('property1'));
@@ -886,7 +886,7 @@ Uize.module ({
 							'Test that values can be set for multiple properties by calling the set method with more than two arguments, where the arguments are property name-value pairs',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({
+							_Subclass.stateProperties ({
 								property1:{},
 								property2:{},
 								property3:{}
@@ -909,7 +909,7 @@ Uize.module ({
 							'Test that the same value can be set for multiple properties by specifying the names of the properties in an array for the first argument and the value that all the properties should be set to as the second argument',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({
+							_Subclass.stateProperties ({
 								property1:{},
 								property2:{},
 								property3:{}
@@ -928,7 +928,7 @@ Uize.module ({
 							'Test that, when a private name for a state property is different from its publice name, the set method sets a value for a property using the private name of the state property and not its public name',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({_property1:'property1'});
+							_Subclass.stateProperties ({_property1:'property1'});
 							var _testContext = _isInstance ? new _Subclass : _Subclass;
 							_testContext.set ('property1','property1Value');
 							return (
@@ -942,7 +942,7 @@ Uize.module ({
 							'Test that, when a private name for a state property is different from its publice name, a value can be set for the property by specifying its private name when calling the set method',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({_property1:'property1'});
+							_Subclass.stateProperties ({_property1:'property1'});
 							var _testContext = _isInstance ? new _Subclass : _Subclass;
 							_testContext.set ({_property1:'property1Value'});
 							return this.expect ('property1Value',_testContext._property1);
@@ -961,7 +961,7 @@ Uize.module ({
 							'Test that the value of a single state property can be obtained by calling the get method with a single string argument, specifying the name of the property',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({
+							_Subclass.stateProperties ({
 								property1:{value:'property1Value'},
 								property2:{value:'property2Value'}
 							});
@@ -974,7 +974,7 @@ Uize.module ({
 							'Test that values can be obtained for multiple properties by calling the get method with a single argument, which is a list of property names',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({
+							_Subclass.stateProperties ({
 								property1:{value:'property1Value'},
 								property2:{value:'property2Value'},
 								property3:{value:'property3Value'}
@@ -995,7 +995,7 @@ Uize.module ({
 							'Test that values can be obtained for multiple properties by calling the get method with a single argument, which is an object whose properties are the properties of the instance whose values should be obtained',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({
+							_Subclass.stateProperties ({
 								property1:{value:'property1Value'},
 								property2:{value:'property2Value'},
 								property3:{value:'property3Value'}
@@ -1016,7 +1016,7 @@ Uize.module ({
 							'Test that values can be obtained for all properties by calling the get method with no arguments',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({
+							_Subclass.stateProperties ({
 								property1:{value:'property1Value'},
 								property2:{value:'property2Value'},
 								property3:{value:'property3Value'}
@@ -1041,7 +1041,7 @@ Uize.module ({
 								_properties = {_property1:'property1'}
 							;
 							for (var _propertyPrivateName in _properties);
-							_Subclass.registerProperties (_properties);
+							_Subclass.stateProperties (_properties);
 							var _testContext = _isInstance ? new _Subclass : _Subclass;
 							_testContext.set ('property1','property1Value');
 							return this.expect ('property1Value',_testContext.get (_propertyPrivateName));
@@ -1052,7 +1052,7 @@ Uize.module ({
 							'Test that, when a private name for a state property is different from its publice name and its value is set using its private name, the value can be obtained for the property by specifying its public name when calling the get method',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
-							_Subclass.registerProperties ({_property1:'property1'});
+							_Subclass.stateProperties ({_property1:'property1'});
 							var _testContext = _isInstance ? new _Subclass : _Subclass;
 							_testContext.set ({_property1:'property1Value'});
 							return this.expect ('property1Value',_testContext.get ('property1'));
@@ -1075,7 +1075,7 @@ Uize.module ({
 					['Uize.Class.unwire',[
 						// NOTE: this method is thoroughly tested by the event system tests (so, no tests here)
 					]],
-					['Uize.Class.registerProperties',[
+					['Uize.Class.stateProperties',[
 						// NOTE: this method is thoroughly tested by the properties system tests (so, no tests here)
 					]],
 					['Uize.Class.get',[
@@ -1093,7 +1093,7 @@ Uize.module ({
 								'Test that the valueOf method of a class returns the value of the special value state property for the class (ie. the initial value for the value state property)',
 							test:function () {
 								var _Subclass = Uize.Class.subclass ();
-								_Subclass.registerProperties ({
+								_Subclass.stateProperties ({
 									_value:{
 										name:'value',
 										value:'foo'
@@ -1107,7 +1107,7 @@ Uize.module ({
 								'Test that the valueOf method of an instance returns the value of the special value state property for the instance',
 							test:function () {
 								var _Subclass = Uize.Class.subclass ();
-								_Subclass.registerProperties ({
+								_Subclass.stateProperties ({
 									_value:{
 										name:'value',
 										value:'foo'
@@ -1247,7 +1247,7 @@ Uize.module ({
 											title:'Test that specifying an array of property names for the condition is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													phase1Done:{value:false},
 													phase2Done:{value:false},
 													phase3Done:{value:false}
@@ -1270,7 +1270,7 @@ Uize.module ({
 											title:'Test that, when specifying an array of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													ready:{value:false},
 													empty:{value:true}
 												});
@@ -1291,7 +1291,7 @@ Uize.module ({
 											title:'Test that, when specifying an array of property names for the condition, property names may contain spaces and special characters',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													'property name with spaces':{value:false},
 													'~@#$%^&*(){}[]:;<>,.?/':{value:false}
 												});
@@ -1312,7 +1312,7 @@ Uize.module ({
 											title:'Test that specifying a comma-separated list of property names for the condition is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													phase1Done:{value:false},
 													phase2Done:{value:false},
 													phase3Done:{value:false}
@@ -1335,7 +1335,7 @@ Uize.module ({
 											title:'Test that, when specifying a comma-separated list of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													ready:{value:false},
 													empty:{value:true}
 												});
@@ -1356,7 +1356,7 @@ Uize.module ({
 											title:'Test that a compound condition specified as a string, consisting of a properties list and a condition evaluator expression, is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													width:{value:0},
 													height:{value:0},
 													depth:{value:0}
@@ -1379,7 +1379,7 @@ Uize.module ({
 											title:'Test that a compound condition specified as a function is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													width:{value:0},
 													height:{value:0},
 													depth:{value:0}
@@ -1402,7 +1402,7 @@ Uize.module ({
 											title:'Test that the method retuns a wirings object that contains wirings for the Changed.[propertyName] event of every property',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													phase1Done:{value:false},
 													phase2Done:{value:false},
 													phase3Done:{value:false}
@@ -1429,7 +1429,7 @@ Uize.module ({
 											title:'Test that unwiring the event wirings for a compound condition before it is met results in the handler for the condition not being executed',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({
+												_Class.stateProperties ({
 													phase1Done:{value:false},
 													phase2Done:{value:false},
 													phase3Done:{value:false}
@@ -1458,32 +1458,32 @@ Uize.module ({
 					title:'Test the state properties system',
 					test:[
 						{
-							title:'Test registering state properties',
+							title:'Test declaration of state properties',
 							test:[
 								{
-									title:'Test that a state property can be registered using the minimal profile syntax',
+									title:'Test that a state property can be declared using the minimal profile syntax',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({_myProperty:'myProperty'});
+										_Subclass.stateProperties ({_myProperty:'myProperty'});
 										var _instance = new _Subclass;
 										return this.expect ({myProperty:undefined},_instance.get ());
 									}
 								},
 								{
-									title:'Test that a state property can be registered using the complete profile syntax',
+									title:'Test that a state property can be declared using the complete profile syntax',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({_myProperty:{name:'myProperty'}});
+										_Subclass.stateProperties ({_myProperty:{name:'myProperty'}});
 										var _instance = new _Subclass;
 										return this.expect ({myProperty:undefined},_instance.get ());
 									}
 								},
 								{
 									title:
-										'Test that multiple properties can be registered in a single call to the registerProperty method, and that minimal and complete profiles can be combined',
+										'Test that multiple properties can be declared in a single call to the stateProperties method, and that minimal and complete profiles can be combined',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty1:'myProperty1',
 											_myProperty2:{name:'myProperty2'}
 										});
@@ -1496,18 +1496,18 @@ Uize.module ({
 										'Test that the public name of a state property is defaulted when no value is specified for the name property in the property profile',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({myProperty:{}});
+										_Subclass.stateProperties ({myProperty:{}});
 										var _instance = new _Subclass;
 										return this.expect ({myProperty:undefined},_instance.get ());
 									}
 								},
 								{
 									title:
-										'Test that multiple state properties can be registered cumulatively by calling registerProperties repeatedly',
+										'Test that multiple state properties can be declared cumulatively by repeatedly calling the stateProperties method',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({_myProperty1:'myProperty1'});
-										_Subclass.registerProperties ({_myProperty2:{name:'myProperty2'}});
+										_Subclass.stateProperties ({_myProperty1:'myProperty1'});
+										_Subclass.stateProperties ({_myProperty2:{name:'myProperty2'}});
 										var _instance = new _Subclass;
 										return this.expect ({myProperty1:undefined,myProperty2:undefined},_instance.get ());
 									}
@@ -1536,7 +1536,7 @@ Uize.module ({
 										'Test that when no initial value is specified for a state property, the property\'s initial value is undefined',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{}
 										});
 										var _instance = new _Subclass;
@@ -1545,10 +1545,10 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that specifying a value property in a state property\'s profile when registering it has the effect of setting the initial value for that property for new instances that are created',
+										'Test that specifying a value property in a state property\'s profile when declaring it has the effect of setting the initial value for that property for new instances that are created',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{value:'initial value'}
 										});
 										var _instance = new _Subclass;
@@ -1560,7 +1560,7 @@ Uize.module ({
 										'Test that null is supported as an initial value for a state property and that it is not treated the same as undefined',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{value:null}
 										});
 										var _instance = new _Subclass;
@@ -1569,10 +1569,10 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the initial value registered for a property is returned as the result when querying the value of that state property on the class',
+										'Test that the initial value defined for a property is returned as the result when querying the value of that state property on the class',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{value:'initial value'}
 										});
 										return this.expect ('initial value',_Subclass.get ('myProperty'));
@@ -1583,7 +1583,7 @@ Uize.module ({
 										'Test that setting the value for a state property on the class has the effect of setting the initial value for the property',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{}
 										});
 										_Subclass.set ({myProperty:'initial value'});
@@ -1596,7 +1596,7 @@ Uize.module ({
 										'Test that setting the value for a state property on the class does not affect the value of the property for instances that have already been created',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{value:'initial value'}
 										});
 										var _instance = new _Subclass;
@@ -1617,7 +1617,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_onChangeHandlerCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:function () {_onChangeHandlerCount++}
@@ -1635,7 +1635,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_onChangeHandlerCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:function () {_onChangeHandlerCount++}
@@ -1653,7 +1653,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_onChangeCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:function () {_onChangeCount++}
@@ -1674,7 +1674,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_contextForCallingOnChange
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:function () {_contextForCallingOnChange = this}
@@ -1692,7 +1692,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_valueOfPropertyWhenOnChangeCalled
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:function () {
@@ -1714,7 +1714,7 @@ Uize.module ({
 											_onChangeCount = 0
 										;
 										_Subclass.prototype.someMethod = function () {_onChangeCount++};
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:'someMethod'
@@ -1733,7 +1733,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_coverageAndOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:[
@@ -1764,7 +1764,7 @@ Uize.module ({
 										_Subclass.prototype.someMethod2 = function () {
 											_coverageAndOrder.push ('onChangeHandlerSpecifiedByString2');
 										};
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:[
@@ -1810,7 +1810,7 @@ Uize.module ({
 												myProperty:'new value'
 											}
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											foo:{
 												value:'the value of foo'
 											},
@@ -1855,7 +1855,7 @@ Uize.module ({
 											_onChangeHandlerCountForMyProperty,
 											_coverageAndOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											foo:{
 												value:'the value of foo'
 											},
@@ -1895,7 +1895,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_onChangeCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
 												onChange:function () {_onChangeCount++}
@@ -1923,7 +1923,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_coverageAndOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											name:{},
 											myProperty:{
 												value:'initial value',
@@ -1948,7 +1948,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_valuesWhenOnChangeCalled = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											name:{},
 											myProperty:{
 												value:0,
@@ -1982,7 +1982,7 @@ Uize.module ({
 										;
 										_Subclass.prototype.someMethod = function () {_onChangeHandlerSpecifiedByStringCount++};
 										function _onChangeHandlerFunction () {_onChangeHandlerSpecifiedByFunctionCount++};
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{
 												value:'initial value',
 												onChange:[
@@ -2029,7 +2029,7 @@ Uize.module ({
 											_myProperty3NewValue = 0
 										;
 										function _onChangeHandlerFunction () {_onChangeHandlerCount++};
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{onChange:_onChangeHandlerFunction},
 											myProperty2:{onChange:_onChangeHandlerFunction},
 											myProperty3:{onChange:_onChangeHandlerFunction}
@@ -2059,7 +2059,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_contextForConformerCall
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												conformer:function () {_contextForConformerCall = this},
 												value:5
@@ -2079,7 +2079,7 @@ Uize.module ({
 											_expectedConformerArguments = [42,5],
 											_actualConformerArguments
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												conformer:function (_newValue,_currentValue) {
 													_actualConformerArguments = _copyArguments (arguments);
@@ -2098,7 +2098,7 @@ Uize.module ({
 										'Test that the value returned by a conformer function is treated as the new value to be set for the property',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												conformer:function () {return 'foo'},
 												value:5
@@ -2118,7 +2118,7 @@ Uize.module ({
 											_myPropertyValuesWhenConformerCalled = [],
 											_expectedPropertyValuesWhenConformerCalled = [undefined,5]
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												conformer:function (_newValue) {
 													_myPropertyValuesWhenConformerCalled.push (this.get ('myProperty'));
@@ -2143,7 +2143,7 @@ Uize.module ({
 											_expectedExecutionOrder = ['conformer','onChange'],
 											_actualExecutionOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												conformer:function (_newValue) {
 													_actualExecutionOrder.push ('conformer');
@@ -2166,7 +2166,7 @@ Uize.module ({
 											_expectedExecutionOrder = ['conformer'],
 											_actualExecutionOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{
 												conformer:function (_newValue,_oldValue) {
 													_actualExecutionOrder.push ('conformer');
@@ -2193,7 +2193,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_changedEventCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{value:'initial value'}
 										});
 										var _instance = new _Subclass;
@@ -2210,7 +2210,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_changedEventCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty:{value:'initial value'}
 										});
 										var _instance = new _Subclass;
@@ -2227,7 +2227,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_coverageAndOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{
 												value:'myProperty1 initial value',
 												onChange:[
@@ -2272,13 +2272,13 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the Changed.[propertyName] events for state properties that have changed value are fired in the order in which the properties are set - not the order in which they were registered',
+										'Test that the Changed.[propertyName] events for state properties that have changed value are fired in the order in which the properties are set - not the order in which they were declared',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
 											_coverageAndOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{value:'myProperty1 initial value'},
 											myProperty2:{value:'myProperty2 initial value'}
 										});
@@ -2313,7 +2313,7 @@ Uize.module ({
 											_coverageAndOrder = [],
 											_newValue = 0
 										;
-										_Subclass.registerProperties ({myProperty:{}});
+										_Subclass.stateProperties ({myProperty:{}});
 										var _instance = new _Subclass;
 
 										function _makeHandler (_handlerNo) {
@@ -2354,7 +2354,7 @@ Uize.module ({
 									test:[
 										{
 											title:
-												'Test that wiring a handler for a Changed.[propertyName] event for a property that has not been registered does not produce a JavaScript error',
+												'Test that wiring a handler for a Changed.[propertyName] event for a property that has not been declared does not produce a JavaScript error',
 											test:function () {
 												var
 													_Subclass = Uize.Class.subclass (),
@@ -2366,7 +2366,7 @@ Uize.module ({
 										},
 										{
 											title:
-												'Test that a handler can be wired for a Changed.[propertyName] event for a property that is not yet registered, and that it will get executed when the property is later registered and its value changes',
+												'Test that a handler can be wired for a Changed.[propertyName] event for a property that is not yet declared, and that it will get executed when the property is later declared and its value changes',
 											test:function () {
 												var
 													_Subclass = Uize.Class.subclass (),
@@ -2377,14 +2377,14 @@ Uize.module ({
 													'Changed.myProperty',
 													function () {_changedHandlerCount++}
 												);
-												_Subclass.registerProperties ({myProperty:{}});
+												_Subclass.stateProperties ({myProperty:{}});
 												_instance.set ({myProperty:'foo'});
 												return this.expect (1,_changedHandlerCount);
 											}
 										},
 										{
 											title:
-												'Test that a handler can be wired for a Changed.[propertyName] event for a property that is not yet registered, and that it will get executed if the property is registered in an ad hoc fashion by setting its value',
+												'Test that a handler can be wired for a Changed.[propertyName] event for a property that is not yet declared, and that it will get executed if the property is created in an ad hoc fashion by setting its value',
 											test:function () {
 												var
 													_Subclass = Uize.Class.subclass (),
@@ -2414,7 +2414,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_changedDotStarHandlerCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{value:'initial value'},
 											myProperty2:{value:'initial value'},
 											myProperty3:{value:'initial value'}
@@ -2437,7 +2437,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_changedDotStarHandlerCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{value:'initial value'},
 											myProperty2:{value:'initial value'},
 											myProperty3:{value:'initial value'}
@@ -2458,7 +2458,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_changedDotStarHandlerCount = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{value:'initial value'},
 											myProperty2:{value:'initial value'},
 											myProperty3:{value:'initial value'}
@@ -2481,7 +2481,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_eventObjectPropertiesProperty
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{value:'initial value'},
 											myProperty2:{value:'initial value'},
 											myProperty3:{value:'initial value'}
@@ -2506,7 +2506,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_coverageAndOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											myProperty1:{
 												value:'myProperty1 initial value',
 												onChange:[
@@ -2559,7 +2559,7 @@ Uize.module ({
 											_coverageAndOrder = [],
 											_newValue = 0
 										;
-										_Subclass.registerProperties ({myProperty:{}});
+										_Subclass.stateProperties ({myProperty:{}});
 										var _instance = new _Subclass;
 
 										function _makeHandler (_handlerNo) {
@@ -2610,7 +2610,7 @@ Uize.module ({
 											_valueAfterSetUsingAlias1,
 											_valueAfterSetUsingAlias2
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty:{name:'myProperty|myPropertyAlias1|myPropertyAlias2'}
 										});
 										var _instance = new _Subclass;
@@ -2632,7 +2632,7 @@ Uize.module ({
 										'Test that getting the values for all state properties results in the values of state properties with aliases being reported only through their canonical (non-alias) names',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty1:'myProperty1',
 											_myProperty2:'myProperty2|myProperty2Alias1',
 											_myProperty3:'myProperty3|myProperty3Alias1|myProperty3Alias2'
@@ -2653,7 +2653,7 @@ Uize.module ({
 										'Test that aliases can be specified using the minimal profile syntax as well as the complete profile syntax',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty1:'myProperty1|myProperty1Alias',
 											_myProperty2:{name:'myProperty2|myProperty2Alias'}
 										});
@@ -2673,7 +2673,7 @@ Uize.module ({
 										'Test that a value can be set for a state property using any of its aliases in the constructor when creating an instance',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty1:'myProperty1|myProperty1Alias1|myProperty1Alias2',
 											_myProperty2:'myProperty2|myProperty2Alias1|myProperty2Alias2',
 											_myProperty3:'myProperty3|myProperty3Alias1|myProperty3Alias2'
@@ -2695,10 +2695,10 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that a state property\'s value can be accessed using any of its registered aliases',
+										'Test that a state property\'s value can be accessed using any of its declared aliases',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty:{
 												name:'myProperty|myPropertyAlias1|myPropertyAlias2',
 												value:'myProperty value'
@@ -2720,7 +2720,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_coverageAndOrder = []
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty:'myProperty|myPropertyAlias1|myPropertyAlias2'
 										});
 										var _instance = new _Subclass;
@@ -2756,7 +2756,7 @@ Uize.module ({
 											_coverageAndOrder = [],
 											_newValue = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty:'myProperty|myPropertyAlias1|myPropertyAlias2'
 										});
 										var _instance = new _Subclass;
@@ -2799,7 +2799,7 @@ Uize.module ({
 											_coverageAndOrder = [],
 											_newValue = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty:'myProperty|myPropertyAlias1|myPropertyAlias2'
 										});
 										var _instance = new _Subclass;
@@ -2835,7 +2835,7 @@ Uize.module ({
 											_propertiesBeingSetLog = [],
 											_newValue = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty:{
 												name:'myProperty|myPropertyAlias1|myPropertyAlias2',
 												onChange:function (_propertiesBeingSet) {
@@ -2868,7 +2868,7 @@ Uize.module ({
 											_changedDotStarEventObjectPropertiesLog = [],
 											_newValue = 0
 										;
-										_Subclass.registerProperties ({
+										_Subclass.stateProperties ({
 											_myProperty:'myProperty|myPropertyAlias1|myPropertyAlias2'
 										});
 										var _instance = new _Subclass;
@@ -2899,7 +2899,7 @@ Uize.module ({
 								'Test that values specified for state properties when calling a class\' constructor are respected',
 							test:function () {
 								var _Subclass = Uize.Class.subclass ();
-								_Subclass.registerProperties ({
+								_Subclass.stateProperties ({
 									_myProperty1:{
 										name:'myProperty1',
 										value:'myProperty1 initial value'
@@ -2925,11 +2925,11 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test ad hoc registration of properties',
+							title:'Test ad hoc creation of state properties',
 							test:[
 								{
 									title:
-										'Test that state properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set static method',
+										'Test that state properties can be created in an ad hoc fashion, by setting values for undeclared properties using the set static method',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.set ({foo:'bar'});
@@ -2939,7 +2939,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, when properties are registered for an instance in an ad hoc fashion, by setting values for the unregistered properties using the set instance method, those instance ad hoc properties are not registered on the class',
+										'Test that, when properties are created for an instance in an ad hoc fashion, by setting values for the undeclared properties using the set instance method, those instance ad hoc properties are not declared on the class',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2955,7 +2955,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, when properties are registered for an instance in an ad hoc fashion, by specifying values for unregistered properties when calling the constructor, those instance ad hoc properties are not registered on the class',
+										'Test that, when properties are created for an instance in an ad hoc fashion, by specifying values for undeclared properties when calling the constructor, those instance ad hoc properties are not declared on the class',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2970,7 +2970,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, for properties that are registered for an instance in an ad hoc fashion, the values are contained in the object that is returned by the form of the get instance method that takes no parameters',
+										'Test that, for properties that are created for an instance in an ad hoc fashion, the values are contained in the object that is returned by the form of the get instance method that takes no parameters',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2982,7 +2982,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the special Changed.* event is fired for instance properties that are registered in an ad hoc fashion, by setting values for unregistered properties using the set instance method',
+										'Test that the special Changed.* event is fired for instance properties that are created in an ad hoc fashion, by setting values for undeclared properties using the set instance method',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3017,7 +3017,7 @@ Uize.module ({
 									title:'Test that the is instance method works correctly',
 									test:[
 										{
-											title:'Test that the value false is returned when the specified condition property is not registered',
+											title:'Test that the value false is returned when the specified condition property is not declared',
 											test:function () {
 												var
 													_Subclass = Uize.Class.subclass (),
@@ -3030,7 +3030,7 @@ Uize.module ({
 											title:'Test that the value true is returned for all truthy values of the specified condition property, and that the value false is returned for all falsy values of the property',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.registerProperties ({myProperty:{}});
+												_Class.stateProperties ({myProperty:{}});
 												var _instance = _Class ();
 												return this.expect (
 													Uize.map (_falsyAndTruthyValues,'!!value'),

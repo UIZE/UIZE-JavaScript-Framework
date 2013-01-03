@@ -29,10 +29,10 @@ Fleshing Out a Subclass
 
 	In this example, =MyClass= is a plain vanilla subclass of the =Uize.Class= base class. The property =foo= is assigned on its =prototype= and is shared by all instances. Now, a subclass of =MyClass= is created, by the name of =MySubclass=. An instance of =MySubclass= is created, and the value of its =foo= property is alerted. Unsurprisingly, what shows up in the alert dialog is the text "bar". Naturally, meaningful classes are a little more complex than this, but this demonstrates the basics.
 
-	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as `non-inheritable statics`), and state properties registered on the superclass using the =registerProperties= static method. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.
+	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as `non-inheritable statics`), and state properties declared on the superclass using the =Uize.Class.stateProperties= static method. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.
 
 Fleshing Out a Subclass
-	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and registering state properties or overriding the initial values of inherited state properties.
+	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and declaring state properties or overriding the initial values of inherited state properties.
 
 	Adding Instance Methods and Properties
 		Adding instance methods and properties to a subclass involves assigning properties on the subclass' prototype object.
@@ -65,12 +65,12 @@ Fleshing Out a Subclass
 		In the UIZE JavaScript Framework, static methods and properties assigned on a class are copied to a subclass when creating that subclass (unless they are registered as `non-inheritable statics`). After a subclass is created, modifying the static methods and properties of the superclass has no effect on that subclass.
 
 	Adding State Properties
-		You can register one or more state properties for a subclass, using the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class.
+		You can declare one or more state properties for a subclass, using the =MyClass.stateProperties= static method that is inherited from the =Uize.Class= base class.
 
 		EXAMPLE
-		.................................................................................
+		..............................................................................
 		var MyClass = Uize.Class.subclass ();  // create a class
-		MyClass.registerProperties ({          // register one or more state properties
+		MyClass.stateProperties ({             // declare one or more state properties
 			_mySetGetProperty:{
 				name:'mySetGetProperty',
 				onChange:function () {
@@ -79,15 +79,15 @@ Fleshing Out a Subclass
 				value:'initialValue'
 			}
 		});
-		.................................................................................
+		..............................................................................
 
 		Inheriting State Properties
-			State properties registered for a class are inherited when creating a subclass.
+			State properties declared for a class are inherited when creating a subclass.
 
 			EXAMPLE
-			.............................................................................
+			..........................................................................
 			var MyClass = Uize.Class.subclass ();  // create a class
-			MyClass.registerProperties ({          // register the "foo" state property
+			MyClass.stateProperties ({             // declare the "foo" state property
 				_foo:{
 					name:'foo',
 					onChange:function () {
@@ -97,8 +97,8 @@ Fleshing Out a Subclass
 				}
 			});
 
-			var MySubclass = MyClass.subclass (); // create a subclass
-			MySubclass.registerProperties ({      // register the "bar" state property
+			var MySubclass = MyClass.subclass ();  // create a subclass
+			MySubclass.stateProperties ({          // declare the "bar" state property
 				_bar:{
 					name:'bar',
 					onChange:function () {
@@ -107,7 +107,7 @@ Fleshing Out a Subclass
 					value:'initial value for bar'
 				}
 			});
-			.............................................................................
+			..........................................................................
 
 			After the above code has executed, the class =MySubclass= will have the two state properties =foo= and =bar=.
 
@@ -233,12 +233,12 @@ Overriding a Superclass
 	Overriding State Property Values
 		The initial value for a state property inherited from a superclass can be overrided by calling the =MyClass.set= static method that is inherited from the =Uize.Class= base class.
 
-		The initial value for a state property is registered by specifying the =value= property in the profile for the state property, as follows...
+		The initial value for a state property is declared by specifying the =value= property in the profile for the state property, as follows...
 
 		EXAMPLE
 		...........................................................................
 		var MyClass = Uize.Class.subclass ();  // create a class
-		MyClass.registerProperties ({          // register the foo state property
+		MyClass.stateProperties ({             // declare the foo state property
 			_foo:{
 				name:'foo',
 				onChange:function () {
@@ -250,16 +250,16 @@ Overriding a Superclass
 
 		var _myClassInstance = new MyClass;    // create instance of MyClass
 		alert (_myClassInstance.get ('foo'));  // alert value of foo state property
-		.............................................................................
+		...........................................................................
 
 		In the above example, the text "bar" will be displayed in the alert dialog.
 
 		Now, the initial value for the =foo= state property inherited from =MyClass= can be overrided in a subclass, as follows...
 
 		EXAMPLE
-		.................................................................................
+		...............................................................................
 		var MyClass = Uize.Class.subclass ();      // create a class
-		MyClass.registerProperties ({              // register the foo state property
+		MyClass.stateProperties ({                 // declare the foo state property
 			_foo:{
 				name:'foo',
 				onChange:function () {
@@ -274,9 +274,9 @@ Overriding a Superclass
 
 		var _mySubclassInstance = new MySubclass;  // create instance of MySubclass
 		alert (_mySubclassInstance.get ('foo'));   // alert value of foo state property
-		.................................................................................
+		...............................................................................
 
-		In this example, we have now created a subclass of =MyClass= named =MySubclass=. The new subclass inherits the =foo= state property, along with its initial value of ='bar'= that is registered in =MyClass=. The =MySubclass.set= static method is then used to change the initial value of this state property to ='NOT BAR'=. Now, the fresh instance of =MySubclass= that is created, named =_mySubclassInstance=, will have the initial value ='NOT BAR'= for its =foo= state property, and the alert dialog will display this text.
+		In this example, we have now created a subclass of =MyClass= named =MySubclass=. The new subclass inherits the =foo= state property, along with its initial value of ='bar'= that is declared in =MyClass=. The =MySubclass.set= static method is then used to change the initial value of this state property to ='NOT BAR'=. Now, the fresh instance of =MySubclass= that is created, named =_mySubclassInstance=, will have the initial value ='NOT BAR'= for its =foo= state property, and the alert dialog will display this text.
 
 Private vs. Public
 	By convention, private methods and properties - both instance and static - are distinguished from public methods and properties by prefixing their names with an underscore.
@@ -383,7 +383,7 @@ Non-inheritable Statics
 	When Statics Should Be Inheritable
 		Whenever a static method or property is intended to be unique to its class context, and it is also desirable for that method or property to be inherited by subclasses, then it should *not* be registered as non-inheritable.
 
-		Examples of some static methods in the =Uize.Class= base class that are inheritable are the =Uize.Class.set=, =Uize.Class.get=, =Uize.Class.toggle=, =Uize.Class.fire=, =Uize.Class.wire=, =Uize.Class.subclass=, and =Uize.Class.registerProperties= methods. All of these methods act on the class context. So, for example, calling =Uize.Class.subclass= is different to calling =Uize.Widget.subclass=. The =Uize.Class.subclass= method, which is inherited by all =Uize.Class= subclasses, uses the context of the class on which it is called. Calling the =Uize.Class.subclass= method returns a subclass of =Uize.Class=, while calling the =Uize.Widget.subclass= method returns a subclass of =Uize.Widget= - even though both of these methods reference the same function for their implementation (in other words, the statement =alert (Uize.Class.subclass &#61;&#61; Uize.Widget.subclass)= would alert the text "true").
+		Examples of some static methods in the =Uize.Class= base class that are inheritable are the =Uize.Class.set=, =Uize.Class.get=, =Uize.Class.toggle=, =Uize.Class.fire=, =Uize.Class.wire=, =Uize.Class.subclass=, and =Uize.Class.stateProperties= methods. All of these methods act on the class context. So, for example, calling =Uize.Class.subclass= is different to calling =Uize.Widget.subclass=. The =Uize.Class.subclass= method, which is inherited by all =Uize.Class= subclasses, uses the context of the class on which it is called. Calling the =Uize.Class.subclass= method returns a subclass of =Uize.Class=, while calling the =Uize.Widget.subclass= method returns a subclass of =Uize.Widget= - even though both of these methods reference the same function for their implementation (in other words, the statement =alert (Uize.Class.subclass &#61;&#61; Uize.Widget.subclass)= would alert the text "true").
 
 	Inheritability of Static Features is Noted in Module References
 		All static features of modules of the UIZE JavaScript Framework are noted as being either inheritable or non-inheritable in the reference documentation for those features.
@@ -396,7 +396,7 @@ Phases of Construction
 	alphastructor
 		The alphastructor is a function that is executed before the state properties for an instance are initialized, and before the =omegastructor= function is executed.
 
-		An alphastructor is registered by specifying a value for the first parameter when calling the =subclass= static method on the superclass.
+		An alphastructor is declared by specifying a value for the first parameter when calling the =subclass= static method on the superclass.
 
 		EXAMPLE
 		...................................
@@ -433,7 +433,7 @@ Dissecting a Subclass Module
 		Let's take a look at a skeleton of a subclass module, and then explore various aspects of it.
 
 		SUBCLASS MODULE EXAMPLE
-		..............................................................................................
+		....................................................................................
 		Uize.module ({
 			name:'Uize.Subclass',
 			builder:function (_superclass) {
@@ -480,9 +480,9 @@ Dissecting a Subclass Module
 						// implementation for this method
 					};
 
-				/*** Register Properties ***/
-					_class.registerProperties ({
-						_property1:'property1', // minimalistic approach to registering a property
+				/*** State Properties ***/
+					_class.stateProperties ({
+						_property1:'property1', // minimalistic approach to declaring a property
 						_property2:{
 							name:'property2',
 							onChange:function () {
@@ -495,7 +495,7 @@ Dissecting a Subclass Module
 				return _class;
 			}
 		});
-		..............................................................................................
+		....................................................................................
 
 		NOTE: If you're not familiar with module declarations in the UIZE JavaScript Framework, consult the explainer [[javascript-modules.html][JavaScript Modules]].
 
@@ -536,10 +536,10 @@ Dissecting a Subclass Module
 		};
 		.....................................
 
-		...or when registering state properties, as in...
+		...or when declaring state properties, as in...
 
 		.........................................
-		_class.registerProperties ({
+		_class.stateProperties ({
 			// profiles for the state properties
 		});
 		.........................................
@@ -598,15 +598,15 @@ Dissecting a Subclass Module
 
 		For a more in-depth discussion, see the section `Non-inheritable Statics`.
 
-	Registering State Properties
-		State properties are registered for a class by calling the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class.
+	Declaring State Properties
+		State properties are declared for a class by calling the =MyClass.stateProperties= static method that is inherited from the =Uize.Class= base class.
 
-		The =MyClass.registerProperties= static method lets you register one or more state properties in a single call to the method. The single parameter that the =MyClass.registerProperties= static method takes is an object containing profiles for all the state properties being registered, where each key is the private name for a state property, and where each value is either the public name - or an object providing a complete profile - for the state property.
+		The =MyClass.stateProperties= static method lets you declare one or more state properties in a single call to the method. The single parameter that the =MyClass.stateProperties= static method takes is an object containing profiles for all the state properties being declared, where each key is the private name for a state property, and where each value is either the public name - or an object providing a complete profile - for the state property.
 
 		EXAMPLE
-		.............................................................................
-		_class.registerProperties ({
-			_property1:'property1', // minimalistic approach to registering a property
+		...........................................................................
+		_class.stateProperties ({
+			_property1:'property1', // minimalistic approach to declaring a property
 			_property2:{
 				name:'property2',
 				onChange:function () {
@@ -615,9 +615,9 @@ Dissecting a Subclass Module
 				value:0
 			}
 		});
-		.............................................................................
+		...........................................................................
 
-		In the above example, the state property with the public name =property1= is being mapped to the private identifier =_property1=. It is not technically necessary that the private name be the public name prefixed with an underscore - this is simply a convention that is followed. Because no object is used to specify the profile for this state property, there is no =onChange= handler registered, and the initial value is =undefined=. By contrast, the =property2= state property is registered with a profile object that specifies an =onChange= handler function and an initial value of =0=.
+		In the above example, the state property with the public name =property1= is being mapped to the private identifier =_property1=. It is not technically necessary that the private name be the public name prefixed with an underscore - this is simply a convention that is followed. Because no object is used to specify the profile for this state property, there is no =onChange= handler declared, and the initial value is =undefined=. By contrast, the =property2= state property is declared with a profile object that specifies an =onChange= handler function and an initial value of =0=.
 
 Singletons
 	The UIZE JavaScript Framework provides support for [[http://en.wikipedia.org/wiki/Singleton_pattern][singletons]] in the form of the =Uize.Class.singleton= static method that is implemented in the =Uize.Class= base class and is inherited by all =Uize.Class= subclasses.
@@ -733,7 +733,7 @@ Singletons
 		instance event is fired in superclass' implementation
 
 	Adding Handlers for State Property Changed Events on Self
-		state property is registered by superclass
+		state property is declared by superclass
 
 	Accessing State Properties From Subclass
 

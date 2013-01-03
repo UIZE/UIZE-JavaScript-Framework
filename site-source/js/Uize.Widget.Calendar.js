@@ -466,11 +466,11 @@ Uize.module ({
 				this._updateUiGrid ();
 			};
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _conformNullableDateValue (_value) {
 				return _Uize_Date.Formatter.parse (_value,this._displayFormat) || null;
 			}
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_displayFormat:'displayFormat',
 				_maxValue:{
 					name:'maxValue',

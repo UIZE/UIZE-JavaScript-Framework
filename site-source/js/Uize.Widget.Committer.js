@@ -398,8 +398,8 @@ Uize.module ({
 				this._setAllValues ('committed')
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_allClear:{
 					name:'allClear',
 					onChange:function () {

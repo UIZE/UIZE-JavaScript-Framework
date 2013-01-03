@@ -2,13 +2,13 @@ This is a TO DO document for the =Uize.Class= module.
 
 Improve Feature Declaration and Subclassing
 	Rename registerProperties to stateProperties
-		Rename the =Uize.Class.registerProperties= static method to =Uize.Class.stateProperties= and deprecate =Uize.Class.registerProperties=.
+		Rename the =Uize.Class.stateProperties= static method to =Uize.Class.stateProperties= and deprecate =Uize.Class.stateProperties=.
 
 		- update all code to use the new =Uize.Class.stateProperties= method (make sure to cover examples and test modules)
 		- update all explainer documentation to use the new =Uize.Class.stateProperties= method
-		- update the =Uize.Test.Uize.Class= test module to rename the existing tests for the =Uize.Class.registerProperties= method, and to create a new test that verifies that the =Uize.Class.registerProperties= method still exists and is a straight reference to the =Uize.Class.stateProperties= method
-		- announce the deprecation of the =Uize.Class.registerProperties= method
-		- document that the =Uize.Class.registerProperties= method is deprecated in the =Uize.Class= reference
+		- update the =Uize.Test.Uize.Class= test module to rename the existing tests for the =Uize.Class.stateProperties= method, and to create a new test that verifies that the =Uize.Class.stateProperties= method still exists and is a straight reference to the =Uize.Class.stateProperties= method
+		- announce the deprecation of the =Uize.Class.stateProperties= method
+		- document that the =Uize.Class.stateProperties= method is deprecated in the =Uize.Class= reference
 
 	New Variation for the Uize.Class.subclass Method
 		As a convenience, the =Uize.Class.subclass= method should be improved with addition of a variation that takes a single object parameter, which will let you specify in a declarative way various features that should be added to the newly created class.
@@ -191,7 +191,7 @@ Derived Properties
 
 	EXAMPLE
 	...........................................................................................................
-	_class.registerProperties ({
+	_class.stateProperties ({
 		_allSelected:{
 			name:'allSelected',
 			derived:function (totalSelected,totalItems) {return totalSelected > 0 && totalSelected == totalItems}
@@ -221,13 +221,13 @@ Derived Properties
 		How Are Derived Properties Inherited
 			Currently, profiles for state properties are inherited through cloning of the definition objects.
 
-			If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.
+			If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent declaration of more derived properties.
 
 	Implementation Approaches
 		Exploding Out the Properties Being Set
 			With this approach, setting values for derived state properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.
 
-			After setting values for the state properties that are being set explicitly, and before executing onChange handlers for any state properties whose values have changed, the registered state properties are scanned for derived state properties that may be affected by the properties being set explicitly. If any derived state properties *are* affected by any of the state properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
+			After setting values for the state properties that are being set explicitly, and before executing onChange handlers for any state properties whose values have changed, the declared state properties are scanned for derived state properties that may be affected by the properties being set explicitly. If any derived state properties *are* affected by any of the state properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
 
 			Advantages
 				document...
@@ -239,7 +239,7 @@ Derived Properties
 			With this approach, values for all directly affected derived state properties are set in a batch set that occurs before =onChange= handlers are executed for the state properties being explicitly set.
 
 		Using onChange Handler Mechanism
-			With this approach, when a derived state property is registed, an onChange handler is registered with any property from which the derived property is derived.
+			With this approach, when a derived state property is declared, an onChange handler is registered with any property from which the derived property is derived.
 
 			Advantages
 				- uses the existing optimization built into the =onChange= handlers mechanism
@@ -247,16 +247,16 @@ Derived Properties
 
 			Disadvantages
 				- involves a separate set for each derived state property whose value changes
-				- requires management of =onChange= handlers and dealing with situations where state properties are re-registered
+				- requires management of =onChange= handlers and dealing with situations where state properties are re-declared
 
 			Issues to Deal With
-				Re-registering a Non-derived State Property
-					How does one deal with re-registering a state property that affects a derived state property?
+				Re-declaring a Non-derived State Property
+					How does one deal with re-declaring a state property that affects a derived state property?
 
-					Currently, everything gets blown away when re-registering a state property. This means that the =onChange= handler that was added to the state property at the time of registering the state property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.
+					Currently, everything gets blown away when re-declaring a state property. This means that the =onChange= handler that was added to the state property at the time of declaring the state property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.
 
-				Re-registering a Derived State Property
-					How does one deal with re-registering a derived state property, where the new profile for the derived property defines a different relationship properties from which it is derived?
+				Re-declaring a Derived State Property
+					How does one deal with re-declaring a derived state property, where the new profile for the derived property defines a different relationship properties from which it is derived?
 
 Property Bindings
 	Provide a way in the =Uize.Class= base class to bind two state properties together, in order to keep their values synchronized.

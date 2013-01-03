@@ -123,8 +123,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_expanded:{
 					name:'expanded',
 					onChange:_classPrototype._updateUiExpanded,

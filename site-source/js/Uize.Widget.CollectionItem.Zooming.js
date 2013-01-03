@@ -330,8 +330,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_alignX:{
 					name:'alignX',
 					onChange:_updateUiPreviewZoomNodePosition,

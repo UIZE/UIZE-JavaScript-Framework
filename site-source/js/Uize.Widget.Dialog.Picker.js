@@ -27,7 +27,7 @@
 			- intended to be subclassed to create value picker dialogs for specific types of values, such as dates, colors, etc.
 
 			Piped Properties
-				- don't need to be registered as state properties, although they will be ad hoc registered when they are set of the picker dialog instance
+				- don't need to be declared as state properties, although they will be created in an ad hoc fashion when they are set on the picker dialog instance
 
 				A One Way Conduit
 					- these properties only act as a conduit for values
@@ -165,8 +165,8 @@ Uize.module ({
 				;
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_keepOpen:{
 					name:'keepOpen',
 					onChange:_classPrototype._updateUiKeepOpenState,

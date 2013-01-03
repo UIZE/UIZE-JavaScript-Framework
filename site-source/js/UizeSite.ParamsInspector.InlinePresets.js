@@ -47,8 +47,8 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_settingsPropertyName:'settingsPropertyName'
 			});
 

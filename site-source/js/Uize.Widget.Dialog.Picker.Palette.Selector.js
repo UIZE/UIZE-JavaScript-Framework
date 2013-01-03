@@ -42,11 +42,11 @@ Uize.module ({
 				}
 			);
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _fireSubmissionComplete(_propertiesChanged) {
 				this.fireSubmissionComplete(true, _propertiesChanged)
 			}
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_tentativeValueNo:{
 					name:'tentativeValueNo',	// read-only
 					onChange:_fireSubmissionComplete,

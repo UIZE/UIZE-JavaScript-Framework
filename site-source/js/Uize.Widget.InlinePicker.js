@@ -83,8 +83,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_pipedProperties:{
 					name:'pipedProperties',
 					onChange:function() {

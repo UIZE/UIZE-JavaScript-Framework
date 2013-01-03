@@ -148,7 +148,7 @@ Uize.module ({
 				);
 			};
 
-			function _registerTreeInheritedProperty (_propertyPrivateToPublicNameMapping,_defaultValue) {
+			function _declareTreeInheritedProperty (_propertyPrivateToPublicNameMapping,_defaultValue) {
 				var
 					_propertyPrivateNames = _Uize.keys (_propertyPrivateToPublicNameMapping),
 					_propertyPublicNames = _Uize.values (_propertyPrivateToPublicNameMapping),
@@ -164,7 +164,7 @@ Uize.module ({
 						this.set (_propertyInheritedPrivateName,_value)
 					;
 				}
-				_class.registerProperties (
+				_class.stateProperties (
 					_Uize.pairUp (
 						_propertyPrivateName,
 						{
@@ -549,7 +549,7 @@ Uize.module ({
 							Providence
 								An important feature of the =localize= method is its ability to go up the parent chain of a widget to find the nearest parent widget that provides a value for the specified resource in its =localized= state property.
 
-								This allows localized resources to be registered with the top-most parent widget in a page - the page widget - if that is what proves most convenient for the application. Additionally, a parent widget might define a value for a localized resource which is overrided by a child widget's =localized= resources map.
+								This allows localized resources to be declared with the top-most parent widget in a page - the page widget - if that is what proves most convenient for the application. Additionally, a parent widget might define a value for a localized resource which is overrided by a child widget's =localized= resources map.
 
 								EXAMPLE
 								.....................................................................................
@@ -558,7 +558,7 @@ Uize.module ({
 								var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','USA']);
 								.....................................................................................
 
-								The above example would still produce the result ='Welcome, Chris of California, USA'=, even though the localized resource string is not registered with the =myWidget= instance, but its parent instead.
+								The above example would still produce the result ='Welcome, Chris of California, USA'=, even though the localized resource string is not declared with the =myWidget= instance, but its parent instead.
 
 							Function Type Resources
 								A simple yet powerful feature of the =localize= method is its support for function type resources.
@@ -1815,8 +1815,8 @@ Uize.module ({
 				*/
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_built:{
 					name:'built',
 					value:_true
@@ -2113,7 +2113,7 @@ Uize.module ({
 				}
 			});
 
-			_registerTreeInheritedProperty ({_busy:'busy',_busyInherited:'busyInherited'},_false);
+			_declareTreeInheritedProperty ({_busy:'busy',_busyInherited:'busyInherited'},_false);
 				/*?
 					State Properties
 						busy
@@ -2136,7 +2136,7 @@ Uize.module ({
 							- see also the =getInherited= instance method
 				*/
 
-			_registerTreeInheritedProperty ({_enabled:'enabled',_enabledInherited:'enabledInherited'},_true);
+			_declareTreeInheritedProperty ({_enabled:'enabled',_enabledInherited:'enabledInherited'},_true);
 				/*?
 					State Properties
 						enabled

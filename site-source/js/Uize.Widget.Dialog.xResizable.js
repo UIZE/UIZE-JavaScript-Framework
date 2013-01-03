@@ -206,8 +206,8 @@ Uize.module ({
 			_classPrototype.atEndOfOmegaStructor = function () {this [_pCreateResizerIfNecessary] ()};
 			_classPrototype.afterWireUi = function () {this [_pInitializeResizerNodesIfNecessary] ()};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				resizable:{
 					name:'resizable',
 					onChange:function () {

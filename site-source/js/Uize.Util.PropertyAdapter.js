@@ -320,7 +320,7 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _updateConnection () {
 				var
 					_this = this,
@@ -393,7 +393,7 @@ Uize.module ({
 				}
 				return _value;
 			}
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_connected:{
 					name:'connected',
 					onChange:_updateConnection,

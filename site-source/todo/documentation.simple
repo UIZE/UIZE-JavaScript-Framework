@@ -19,7 +19,7 @@ Issues With Auto-generated Documentation
 	Function Type Static Properties Regarded as Static Methods
 		Static properties whose values are functions are regarded as static methods.
 
-		Perhaps in such cases such features should just get documented and referred to as static methods. In the future, however, it should be possible to register a feature as a static property, but where the type of the property can be function, through a formal feature registration mechanism.
+		Perhaps in such cases such features should just get documented and referred to as static methods. In the future, however, it should be possible to register a feature as a static property, but where the type of the property can be function, through a formal feature declaration mechanism.
 
 	Extension Modules Mess Things Up
 		Documenting extension modules can mess things up.

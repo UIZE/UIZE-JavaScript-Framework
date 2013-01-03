@@ -90,8 +90,8 @@ Uize.module ({
 				this._running = _false;
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_images:{
 					name:'images',
 					value:[]

@@ -172,8 +172,8 @@ Uize.module ({
 		/*** Public Static Properties ***/
 			_class.presets = {};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_inDrag:{
 					name:'inDrag',
 					value:_false

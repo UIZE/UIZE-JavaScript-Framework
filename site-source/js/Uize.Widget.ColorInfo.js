@@ -72,8 +72,8 @@ Uize.module ({
 				this._updateUiValue ();
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_value:{
 					name:'value',
 					onChange:_classPrototype._updateUiValue,

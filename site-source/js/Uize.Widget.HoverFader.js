@@ -205,7 +205,7 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _updateResolvedFadeInFadeOutProperties () {
 				var _fadeInOut = this._fadeInOut;
 				this._resolvedFadeIn = _fadeInOut ? Uize.copyInto ({},_fadeInOut,this._fadeIn) : this._fadeIn;
@@ -214,7 +214,7 @@ Uize.module ({
 					: this._fadeOut
 				;
 			}
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_defaultStyle:{
 					name:'defaultStyle',
 					value:{color:'fff',backgroundColor:'000'}

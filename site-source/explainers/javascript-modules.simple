@@ -756,7 +756,7 @@ Dynamically Loading Modules
 			In the above example, the callback is called immediately with no code, since a script tag will be inserted into the document and the browser will, itself, load and execute the code. Upon the callback being called, the module loader mechanism recognizes that the module is not defined after the =moduleLoader= is executed and assumes that it must wait for the module - and all its dependencies - to load asynchronously.
 
 		Ajax Module Loader
-			An Ajax based module loader can be registered to allow modules to be loaded through a Web service of your choosing.
+			An Ajax based module loader can be defined to allow modules to be loaded through a Web service of your choosing.
 
 			EXAMPLE
 			.................................................................................
@@ -771,9 +771,9 @@ Dynamically Loading Modules
 			.................................................................................
 
 		Windows Script Host Module Loader
-			Build scripts written for the WSH (Windows Script Host) context can register a module loader that uses the =Scripting.FileSystemObject= ActiveX control to load modules.
+			Build scripts written for the WSH (Windows Script Host) context can define a module loader that uses the =Scripting.FileSystemObject= ActiveX control to load modules.
 
-			The many build scripts used by the uize.com Web site make use of a module loader that works in the WSH context and that allows the build scripts to register and have their dependencies resolved in just the same way as you would expect when writing code for the Web browser context.
+			The many build scripts used by the uize.com Web site make use of a module loader that works in the WSH context and that allows the build scripts to declare and have their dependencies resolved in just the same way as you would expect when writing code for the Web browser context.
 
 			EXAMPLE
 			..................................................................................
@@ -791,10 +791,10 @@ Dynamically Loading Modules
 			Uize.moduleLoader = moduleLoader;
 			..................................................................................
 
-			The module loader is implemented inside the build script. When the build script is executed, =Uize= is not yet defined. So, you find yourself in somewhat of a [[http://en.wikipedia.org/wiki/Catch-22][Catch-22]] situation. You can't rely on a module loader defined in the =Uize= module to load in the =Uize= module, since it's not yet loaded. So, to break this impasse we define a =moduleLoader= function inside the build script, use this function to load the =Uize= module, eval the loaded =Uize= module's code, and then finally register the function as the module loader by overriding the =Uize.moduleLoader= static method. From here on, modules can be declared using the =Uize.module= static method, and the module loader mechanism is now set up to resolve all dependencies and load modules as needed using the =Scripting.FileSystemObject= ActiveX control.
+			The module loader is implemented inside the build script. When the build script is executed, =Uize= is not yet defined. So, you find yourself in somewhat of a [[http://en.wikipedia.org/wiki/Catch-22][Catch-22]] situation. You can't rely on a module loader defined in the =Uize= module to load in the =Uize= module, since it's not yet loaded. So, to break this impasse we define a =moduleLoader= function inside the build script, use this function to load the =Uize= module, eval the loaded =Uize= module's code, and then finally declare the function as the module loader by overriding the =Uize.moduleLoader= static method. From here on, modules can be declared using the =Uize.module= static method, and the module loader mechanism is now set up to resolve all dependencies and load modules as needed using the =Scripting.FileSystemObject= ActiveX control.
 
 		Adobe Photoshop Module Loader
-			It is even possible to register a module loader in Adobe Photoshop's JavaScript based scripting environment (.jsx files), which has its own facility for reading in files.
+			It is even possible to declare a module loader in Adobe Photoshop's JavaScript based scripting environment (.jsx files), which has its own facility for reading in files.
 
 			EXAMPLE
 			....................................................................................

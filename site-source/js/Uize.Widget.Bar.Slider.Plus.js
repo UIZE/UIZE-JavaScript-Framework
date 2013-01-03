@@ -84,8 +84,8 @@ Uize.module ({
 				_children.stepToMax.set ({enabled:_toMaxEnabled});
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_stepsCoarse:{
 					name:'stepsCoarse',
 					value:2

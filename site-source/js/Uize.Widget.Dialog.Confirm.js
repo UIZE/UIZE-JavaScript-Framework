@@ -78,8 +78,8 @@ Uize.module ({
 				_superclass.prototype.updateUi.call (this);
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_message:{
 					name:'message',
 					onChange:_classPrototype._updateUiMessage,

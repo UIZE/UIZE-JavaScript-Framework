@@ -68,8 +68,8 @@ Uize.module ({
 				return _contentNode ? _contentNode.contentWindow : _null;
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_resetUrl:{
 					name:'resetUrl',
 					value:_true

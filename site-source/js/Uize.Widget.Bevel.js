@@ -75,8 +75,8 @@ Uize.module ({
 				this._updateUi ();
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_opacity:{
 					name:'opacity',
 					onChange:_classPrototype._updateUi,

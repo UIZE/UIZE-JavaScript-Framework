@@ -3426,7 +3426,7 @@
 									.......................................
 									var Rectangle = Uize.Class.subclass ();
 
-									Rectangle.registerProperties ({
+									Rectangle.stateProperties ({
 										width:{
 											conformer:Uize.toNumber,
 											value:0

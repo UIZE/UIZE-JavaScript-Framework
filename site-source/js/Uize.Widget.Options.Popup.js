@@ -87,8 +87,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_emptyLabel:{
 					name:'emptyLabel',
 					value:''

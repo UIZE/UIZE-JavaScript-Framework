@@ -39,9 +39,9 @@ Introduction
 	Static Events and Instance Events
 		The =Uize.Class= base class provides a convenient infrastructure for supporting both static (ie. class) and instance events.
 
-		Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the =Uize.Class= base class to allow code to manage the registering and unregistering of event handlers at both the instance and class levels.
+		Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the =Uize.Class= base class to allow code to manage the wiring and unwiring of event handlers at both the instance and class levels.
 
-		The syntax for registering handlers on static events is identical to registering handlers on instance events, except that the method is called on the class rather than an instance.
+		The syntax for wiring handlers on static events is identical to wiring handlers on instance events, except that the method is called on the class rather than an instance.
 
 		EXAMPLE
 		.....................
@@ -59,7 +59,7 @@ Introduction
 		They can be fired from anywhere in your code, even from deep within nested closures, so you can provide further hooks as needed without having to radically restructure your code around hook points.
 
 The Event Object
-	When an event is fired, all handlers registered for that event are called sequentially - in the order in which they were registered.
+	When an event is fired, all handlers wired for that event are called sequentially - in the order in which they were wired.
 
 	Each handler function can expect to receive a single parameter, being an object that represents the event being fired. The event object contains properties that describe the event, including some standard properties that are set by the event mechanism itself, and any arbitrary custom properties set by the code firing the event.
 
@@ -76,7 +76,7 @@ The Event Object
 		myInstance.fire ('My Custom Event Name');
 		.........................................
 
-		For a handler that is registered for the above event, the event object will have the value ='My Custom Event Name'= for its =name= property, and a reference to the instance =myInstance= for its =source= property. The event object is passed as the single parameter to registered handlers when they are called, so the following handler function would alert the value =true=, for example...
+		For a handler that is wired for the above event, the event object will have the value ='My Custom Event Name'= for its =name= property, and a reference to the instance =myInstance= for its =source= property. The event object is passed as the single parameter to wired handlers when they are called, so the following handler function would alert the value =true=, for example...
 
 		...................................................................................
 		myInstance.wire (
@@ -115,7 +115,7 @@ Relaying Events
 		);
 		....................................................
 
-		In the above example, whenever ='Some Crazy Event'= is fired on the =myWidget= instance, the registered handler will relay it to its parent by calling the =fire= method on its parent and passing the event object.
+		In the above example, whenever ='Some Crazy Event'= is fired on the =myWidget= instance, the wired handler will relay it to its parent by calling the =fire= method on its parent and passing the event object.
 
 	Dedicated Event Relay Facility
 		In addition to being able to manually relay events using the =fire= instance method and the =Uize.Class.fire= static method, the UIZE JavaScript Framework provides a dedicated facility for relaying events.

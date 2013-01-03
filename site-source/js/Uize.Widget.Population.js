@@ -374,8 +374,8 @@ Uize.module ({
 				return _class.replaceByTemplateItem (_sourceStr,_item,_class.makeTemplateItem (_item,_tokenNaming || '{KEY}'));
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_outputPrefix:{
 					name:'outputPrefix',
 					value:''

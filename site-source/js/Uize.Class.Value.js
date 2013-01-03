@@ -19,7 +19,7 @@
 
 /*?
 	Introduction
-		The =Uize.Class.Value= class is a simple class that merely implements the `value interface` (ie. it registers a =value= state property).
+		The =Uize.Class.Value= class is a simple class that merely implements the `value interface` (ie. it declares a =value= state property).
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -33,8 +33,8 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass ();
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_value:'value'
 			});
 

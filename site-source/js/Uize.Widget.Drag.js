@@ -417,8 +417,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_animation:{
 					name:'animation',
 					onChange:function () {this.set ({_cancelFade:this._animation ? {duration:500} : _undefined})}

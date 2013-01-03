@@ -963,10 +963,10 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _conformToNumber (_value) {return isNaN (_value) ? _undefined : +_value}
 
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_activeOperand:{
 					name:'activeOperand',
 					value:'operandA'

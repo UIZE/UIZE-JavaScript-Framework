@@ -382,8 +382,8 @@ Uize.module ({
 				_superclass.prototype.wireUi.call (this);
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_alignX:{
 					name:'alignX',
 					value:{start:1,end:0,keyedTo:'column'}

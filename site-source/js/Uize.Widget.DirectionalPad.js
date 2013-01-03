@@ -136,8 +136,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Properties Registration ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_mode:{
 					name:'mode',
 					onChange:_classPrototype._updateUiMode,

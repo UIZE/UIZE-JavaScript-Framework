@@ -367,7 +367,7 @@ Uize.module ({
 			};
 			_nonInheritableStatics.celeration = 1;
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _setCurveFromAccelerationDeceleration () {
 				this.set ({
 					_curve:
@@ -380,7 +380,7 @@ Uize.module ({
 				this._value = null;
 				this._updateValue ();
 			}
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_acceleration:{
 					name:'acceleration', // DEPRECATED (see documentation)
 					onChange:_setCurveFromAccelerationDeceleration

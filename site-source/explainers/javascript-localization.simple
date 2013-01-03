@@ -21,12 +21,12 @@ The localize Instance Method
 	);
 	................................................................
 
-	The above example shows a snippet of code taken from the implementation of a widget class. The class assumes that instances will be configured with a localized string named "welcomeMessage". The localized string is expected to have three tokens - for a first name, state, and country. The localized string's value could look something like ='Welcome, {0} of {1}, {2}'=, depending on the language for which it is localized (English, in this case). The localized string would be registered when the widget instance is created, as follows...
+	The above example shows a snippet of code taken from the implementation of a widget class. The class assumes that instances will be configured with a localized string named "welcomeMessage". The localized string is expected to have three tokens - for a first name, state, and country. The localized string's value could look something like ='Welcome, {0} of {1}, {2}'=, depending on the language for which it is localized (English, in this case). The localized string would be declared when the widget instance is created, as follows...
 
 	........................................................
-	var myWidget = new MyNamespace.MyWidgetClass (
+	var myWidget = MyNamespace.MyWidgetClass ({
 		localized:{welcomeMessage:'Welcome, {0} of {1}, {2}'}
-	);
+	});
 	........................................................
 
 	Named Tokens
@@ -97,7 +97,7 @@ The localize Instance Method
 		The above example would also produce the result ='Welcome, Chris of California, USA'=.
 
 The localized State Property
-	The =localized= state property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.
+	The =localized= state property lets you declare one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.
 
 	EXAMPLE (APPLICATION PERSPECTIVE)
 	............................................................................
@@ -129,7 +129,7 @@ The localized State Property
 	);
 	............................................................................
 
-	The above code illustrates registering localized resources by specifying a value for the =localized= state property when adding a child widget to a page widget instance. Notice how there are four localized strings being registered: =draggingToReorderSingular=, =draggingToReorderPlural=, =removeItemConfirmation=, =removeItemsConfirmation=.
+	The above code illustrates declaring localized resources by specifying a value for the =localized= state property when adding a child widget to a page widget instance. Notice how there are four localized strings being declared: =draggingToReorderSingular=, =draggingToReorderPlural=, =removeItemConfirmation=, =removeItemsConfirmation=.
 
 	The code snippet below illustrates how the =draggingToReorderSingular= and =draggingToReorderPlural= localized strings may be used in a widget's implementation. In this case, one of the two strings is being chosen to use, depending on how many items are being dragged. A string expression is constructing the name of the localized string, adding a suffix of either "Plural" or "Singular".
 
@@ -149,7 +149,7 @@ The localized State Property
 Inheritance Tree
 	The =localize= instance method's implementation supports "inheriting" localized resources from the widget tree in which a widget resides.
 
-	This facility makes it possible to share localized resources across a number of widgets. In one approach, localized resources may be registered with the page widget when instantiating it. These localized resources are then available to all child widgets in its tree. This is a way for multiple widgets to share common localized resources. Consider the following example...
+	This facility makes it possible to share localized resources across a number of widgets. In one approach, localized resources may be declared with the page widget when instantiating it. These localized resources are then available to all child widgets in its tree. This is a way for multiple widgets to share common localized resources. Consider the following example...
 
 	EXAMPLE
 	.......................................................................................
@@ -169,9 +169,9 @@ Inheritance Tree
 	);
 	.......................................................................................
 
-	In the above example, a child widget is being added to a page widget instance (which we assume to have already been created). Both the page widget instance and the child widget have values set for the =localized= state property, registering localized strings with each. Now, with this setup the first =alert= statement will display the text *"Are you sure you want to delete?"*, while the second =alert= statement will display the text *"Welcome, Chris of California, USA"*.
+	In the above example, a child widget is being added to a page widget instance (which we assume to have already been created). Both the page widget instance and the child widget have values set for the =localized= state property, declaring localized strings with each. Now, with this setup the first =alert= statement will display the text *"Are you sure you want to delete?"*, while the second =alert= statement will display the text *"Welcome, Chris of California, USA"*.
 
-	Even though the =deleteConfirmation= localized string is not registered for the =myChildWidget= instance, the call to the =localize= method on this instance results in the localized string being found in the parent page widget's =localized= state property. Thus, any widget anywhere in this page widget's widget tree can utilize the =deleteConfirmation= localized string that is registered with the page widget. Child widgets can still override this localized string value by registering their own localized version with different wording. If we extend on the previous example...
+	Even though the =deleteConfirmation= localized string is not declared for the =myChildWidget= instance, the call to the =localize= method on this instance results in the localized string being found in the parent page widget's =localized= state property. Thus, any widget anywhere in this page widget's widget tree can utilize the =deleteConfirmation= localized string that is declared with the page widget. Child widgets can still override this localized string value by declaring their own localized version with different wording. If we extend on the previous example...
 
 	EXAMPLE
 	.......................................................................................
@@ -201,7 +201,7 @@ Inheritance Tree
 	Parent-child Relationships
 		Cases may arise where widgets are developed with an expected parent-child relationship.
 
-		In such cases, localized resources needed by the child widgets can be registered with the parent widget, and then all the child widgets can share those resources. An example of such a case is the =Uize.Widget.Collection= and =Uize.Widget.CollectionItem= classes, where the =Uize.Widget.Collection= class is implemented to be a parent to many instances of the =Uize.Widget.CollectionItem= class. Another example of such a relationship is the =Uize.Widget.Options= class, which is designed to be a parent to many instances of the =Uize.Widget.Button= class. In such cases, localized resources expected by the child widgets can be registered on the instance of the parent widget.
+		In such cases, localized resources needed by the child widgets can be declared with the parent widget, and then all the child widgets can share those resources. An example of such a case is the =Uize.Widget.Collection= and =Uize.Widget.CollectionItem= classes, where the =Uize.Widget.Collection= class is implemented to be a parent to many instances of the =Uize.Widget.CollectionItem= class. Another example of such a relationship is the =Uize.Widget.Options= class, which is designed to be a parent to many instances of the =Uize.Widget.Button= class. In such cases, localized resources expected by the child widgets can be declared on the instance of the parent widget.
 
 Function Type Localized Resources
 	A simple yet powerful feature of the =localize= method is its support for function type resources.
@@ -229,7 +229,7 @@ Function Type Localized Resources
 		);
 		.....................................................................
 
-		In the above example, an instance of the fictitious =SomeNamespace.ProductWidgetClass= widget class is being added as a child widget of the page widget. The localized resource =buyConfirmation= is being registered for this instance. The implementation of a =buyWithConfirm= instance method of the =SomeNamespace.ProductWidgetClass= class calls the =localize= method to localize this resource, passing a single substitution value for the title of the product, and then displays the localized confirmation message in a confirm dialog, as shown in the code below...
+		In the above example, an instance of the fictitious =SomeNamespace.ProductWidgetClass= widget class is being added as a child widget of the page widget. The localized resource =buyConfirmation= is being declared for this instance. The implementation of a =buyWithConfirm= instance method of the =SomeNamespace.ProductWidgetClass= class calls the =localize= method to localize this resource, passing a single substitution value for the title of the product, and then displays the localized confirmation message in a confirm dialog, as shown in the code below...
 
 		.....................................................................
 		_classPrototype.buyWithConfirm = function () {

@@ -205,7 +205,7 @@ Mixins
 	Mixing in would...
 	- copy all properties of the prototype
 	- copy all static properties
-	- copy in all information of registered state properties
+	- copy in all information of declared state properties
 
 	ISSUES
 	- namespace conflict for all instance properties
@@ -1046,7 +1046,7 @@ Only Use set Method For Changing Property Values
 		/this\._\w+\s*=[^=]/
 		.........................................................
 
-		...or write a build script that scans through JS files, determines private names of registered properties, and then uses those names in generated regular expressions to find direct assignments.
+		...or write a build script that scans through JS files, determines private names of declared state properties, and then uses those names in generated regular expressions to find direct assignments.
 
 - factor out code for validating a value, where the validator can be...
 	- a simple value, to which the value being tested should be compared for equality

@@ -187,7 +187,7 @@ The Left Pane
 			Widgets that implement the value interface
 				A flat list of all the widgets on the page that implement the value interface, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
 
-				A widget is considered to implement the value interface if the class of which it is an instance registers the =value= state property. Widgets that implement the value interface are fun to play around with, because they most often are the widgets used in a page for obtaining input from a user. When selecting a widget from the query's results set, the actual value for the widget can be viewed in the table of state properties displayed in the `state tab`. If you then click on the "set" action in the row for the =value= state property, you will get a setter expression that you can use to modify the value for the widget and see how the UI responds in the page being inspected.
+				A widget is considered to implement the value interface if the class of which it is an instance declares the =value= state property. Widgets that implement the value interface are fun to play around with, because they most often are the widgets used in a page for obtaining input from a user. When selecting a widget from the query's results set, the actual value for the widget can be viewed in the table of state properties displayed in the `state tab`. If you then click on the "set" action in the row for the =value= state property, you will get a setter expression that you can use to modify the value for the widget and see how the UI responds in the page being inspected.
 
 		Module Queries
 			A number of module queries are provided for finding JavaScript modules that have been built for the page and that match certain criteria.
@@ -656,11 +656,11 @@ The Right Pane
 			Name
 				The Name column displays the name for a feature.
 
-				For instance features, the name displayed in this column will be the name of the property of the =prototype= object. For example, the name displayed for the =wireUi= instance method would be simply "wireUi". For static features, the name displayed will be the full dereferencing path for the static feature. For example, the =registerProperties= static method of the =Uize.Widget.Page= class would be displayed as "Uize.Widget.Page.registerProperties".
+				For instance features, the name displayed in this column will be the name of the property of the =prototype= object. For example, the name displayed for the =wireUi= instance method would be simply "wireUi". For static features, the name displayed will be the full dereferencing path for the static feature. For example, the =Uize.Widget.Page.stateProperties= static method of the =Uize.Widget.Page= class would be displayed as "Uize.Widget.Page.stateProperties".
 
 				Displayed names for all features, except state properties, are `navigable values`. Instance features are linked to inspect the feature on the =prototype= object of the class. For example, the `object link` for the =wireUi= instance method of the =Uize.Widget.Page= class would have the `object link expression` of =Uize.Widget.Page.prototype.wireUi=. In this case, clicking on the feature name will let you inspect the function that implements the =wireUi= instance method for this class.
 
-				By contrast, static features are simply linked to those features on the class object. For example, the `object link` for the =registerProperties= static method of the =Uize.Widget.Page= class would have the `object link expression` of =Uize.Widget.Page.registerProperties=. In this case, clicking on the feature name will let you inspect the function that implements the =registerProperties= static method for this class.
+				By contrast, static features are simply linked to those features on the class object. For example, the `object link` for the =Uize.Widget.Page.stateProperties= static method of the =Uize.Widget.Page= class would have the `object link expression` of =Uize.Widget.Page.stateProperties=. In this case, clicking on the feature name will let you inspect the function that implements the =Uize.Widget.Page.stateProperties= static method.
 
 			Access
 				The Access column displays the access control for a feature.
@@ -672,7 +672,7 @@ The Right Pane
 
 				A feature is considered to exist in one of the following three contexts...
 
-				- *Static* - features that are defined and accessible on the class object, such as the =Uize.Widget.Page.registerProperties= static method of the =Uize.Widget.Page= class
+				- *Static* - features that are defined and accessible on the class object, such as the =Uize.Widget.Page.stateProperties= static method of the =Uize.Widget.Page= class
 
 				- *Instance* - features that are defined on the =prototype= object of a class, and that are accessible on instances of the class, such as the =wireUi= instance method of the =Uize.Widget.Page= class
 

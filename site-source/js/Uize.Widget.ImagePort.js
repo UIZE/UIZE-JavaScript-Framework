@@ -170,13 +170,13 @@ Uize.module ({
 				};
 			};
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _updateAfterPositionChanged () {
 				this._updateUiPosition ();
 				this.fire ('Position Changed');
 			}
 
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_alignApplicableX:'alignApplicableX', // read only
 				_alignApplicableY:'alignApplicableY', // read only
 				_alignX:{

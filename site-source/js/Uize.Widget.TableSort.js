@@ -357,9 +357,9 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			var _updateUi = 'updateUi';
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_cellTooltips:{
 					name:'cellTooltips',
 					value:_true

@@ -279,7 +279,7 @@ Uize.module ({
 				this._updateMaxPageProperty ('Y');
 			};
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _handlePageChange () {
 				var _this = this;
 				if (_this.isWired) {
@@ -308,7 +308,7 @@ Uize.module ({
 			function _displayAxisButtonsX () {this._displayAxisButtons ('X','left','right')}
 			function _displayAxisButtonsY () {this._displayAxisButtons ('Y','up','down')}
 
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_isScrollableX:{
 					name:'isScrollableX',
 					onChange:_displayAxisButtonsX,

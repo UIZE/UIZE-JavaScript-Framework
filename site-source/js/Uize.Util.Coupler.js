@@ -79,7 +79,7 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _updateCoupling () {
 				var
 					_this = this,
@@ -157,7 +157,7 @@ Uize.module ({
 					}
 				}
 			}
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_coupled:{
 					name:'coupled',
 					onChange:_updateCoupling,

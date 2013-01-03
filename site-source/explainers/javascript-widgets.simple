@@ -463,8 +463,8 @@ More on Widgets
 				- when the DOM for the widget is built by explicitly calling the =buildUi= or =insertUi= instance methods, or by calling the =insertOrWireUi= instance method when the =built= state property is set to =false=
 
 		### The Node Map
-			- node map registered at the class level
-			- node map registered at the instane level
+			- node map declared at the class level
+			- node map declared at the instance level
 			- changing the mapping of a node that is already cached will require flushing of the cache for that node
 
 		### MORE TO DISCUSS
@@ -1078,7 +1078,7 @@ Widget Adoption
 		Reserved Property Names
 			As mentioned earlier, the special properties =widgetClass= and =children= are reserved for the widget adoption mechanism.
 
-			The implication of this is that you can't create widget classes that register either =widgetClass= or =children= as state properties and expect to use the widget adoption mechanism. Or, more correctly, you can, but any values that you specify for those properties in a widget declaration won't make their way through to the widget, because they get "consumed" by the adoption mechanism. So, best to avoid using those names for state properties, which is not likely to be a major constraint.
+			The implication of this is that you can't create widget classes that declare either =widgetClass= or =children= as state properties and expect to use the widget adoption mechanism. Or, more correctly, you can, but any values that you specify for those properties in a widget declaration won't make their way through to the widget, because they get "consumed" by the adoption mechanism. So, best to avoid using those names for state properties, which is not likely to be a major constraint.
 
 		Takes Time
 			It *does* take a tiny bit of time for the page widget to scan through and discover widget adoption declarations.

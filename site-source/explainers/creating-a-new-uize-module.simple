@@ -274,7 +274,7 @@ Implement the Module
 			- cite a bad example
 				- where wireUi has been hollowed out and doesn't actually do anything
 				- where subclasser alphastructor and/or omegastructor don't do anything
-				- where registerProperties doesn't actually register any
+				- where stateProperties doesn't actually declare any
 				- where class.set doesn't override any initial values
 				- where section comments are left in
 

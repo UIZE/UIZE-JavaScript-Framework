@@ -77,8 +77,8 @@ Uize.module ({
 				_this.fire('Changed.watchedElements');
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties({
+		/*** State Properties ***/
+			_class.stateProperties({
 				_shown:{
 					name:'shown',
 					onChange:function() {

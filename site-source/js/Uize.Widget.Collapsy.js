@@ -93,8 +93,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties({
+		/*** State Properties ***/
+			_class.stateProperties({
 				_collapsed:{
 					name:'collapsed',
 					onChange:_classPrototype._updateUi,

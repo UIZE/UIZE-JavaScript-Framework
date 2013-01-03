@@ -170,9 +170,9 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			var _updateUi = 'updateUi';
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_height:{
 					name:'height',
 					onChange:_updateUi,

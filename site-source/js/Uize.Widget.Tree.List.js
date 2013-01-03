@@ -154,8 +154,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_alwaysLinkHeadings:{
 					name:'alwaysLinkHeadings',
 					value:_false

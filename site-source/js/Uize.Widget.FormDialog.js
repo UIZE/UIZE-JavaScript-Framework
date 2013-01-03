@@ -84,8 +84,8 @@ Uize.module ({
 		/*** Public Methods ***/
 			_class.prototype.handleFormValue = function(_callback) { _callback() };
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_formWidgetClass:{
 					name:'formWidgetClass',
 					value:Uize.Widget.Form

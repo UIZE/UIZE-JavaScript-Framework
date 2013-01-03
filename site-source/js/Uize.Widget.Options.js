@@ -294,7 +294,7 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			function _getValidValue(_value) {
 				var
 					_this = this,
@@ -307,7 +307,7 @@ Uize.module ({
 						: (typeof _values[0] == 'object' ? _values[0].name : _values[0])
 				);
 			}
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_ensureValueInValues:{
 					name:'ensureValueInValues',
 					onChange:function() {

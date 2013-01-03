@@ -25,13 +25,13 @@ More Versatile wireNode Method
 	- implementation could use Uize.pairUp to create object from array
 
 - UI Updater Mechanism
-	- register updaters
-		- register which properties updaters cover
+	- declare updaters
+		- declare which properties updaters cover
 		- can have multiple updaters
 
 	- viewed properties
 		- viewed properties are properties whose values are reflected somehow in the view
-		- viewed properties can be registered
+		- viewed properties can be declared
 	- when the values of viewed properties change, one of two things can happen...
 		- if the widget is able to update its view, then the appropriate updaters are executed in order to synchronize the view to the new values of the viewed properties
 		- if the widget is NOT able to update its view, then the viewed properties whose values have changed are flagged as needing to be reflected in the view when next the view is updated
@@ -57,7 +57,7 @@ More Versatile wireNode Method
 		this._updateUiValue ();
 	};
 
-	_class.registerProperties ({
+	_class.stateProperties ({
 		_value:{
 			name:'value',
 			onChange:_classPrototype._updateUiValue
@@ -67,7 +67,7 @@ More Versatile wireNode Method
 
 	AFTER
 	....................................
-	_class.registerProperties ({
+	_class.stateProperties ({
 		_value:'value'
 	});
 
@@ -171,7 +171,7 @@ New Mode for Building HTML
 	- a way to set state all the way through a widget tree
 
 **** a way of cloning the DOM nodes used by one instance, to be used in another instance
-- a formalized means of registering certain parameters as display parameters (ie. parameters that impact display)
+- a formalized means of declaring certain state properties as display properties (ie. properties that impact display)
 
 - a way for one widget to have more than one set of DOM nodes for the same UI (to have the UI appear in more than one place)
 - provide an automatic way to bubble up inDrag state and the drag events for all widgets (an onChange handler for inDrag at the Uize.Widget level?)

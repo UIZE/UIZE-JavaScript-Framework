@@ -44,7 +44,7 @@
 					- =Uize.Class.staticProperties= - lets you declare one or more static properties for the class
 					- =Uize.Class.dualContextMethods= - lets you declare one or more `dual context` methods for the class
 					- =Uize.Class.dualContextProperties= - lets you declare one or more `dual context` properties for the class
-					- =Uize.Class.registerProperties= - lets you declare one or more state properties for instances of the class
+					- =Uize.Class.stateProperties= - lets you declare one or more state properties for instances of the class
 
 					Declare Private or Public Features
 						The `feature declaration methods` can be used either to declare public features or private features.
@@ -1453,7 +1453,7 @@ Uize.module ({
 								allPropertyValuesOBJ = Uize.Class.get ();
 								.........................................
 
-								When no parameter is specified, the =Uize.Class.get= static method will return an object containing values for all the registered state properties of the class.
+								When no parameter is specified, the =Uize.Class.get= static method will return an object containing values for all the declared state properties of the class.
 
 								NOTES
 								- see also the =Uize.Class.set= static method
@@ -1461,69 +1461,83 @@ Uize.module ({
 					*/
 				};
 
-				_class.registerProperties = function (_propertyProfiles) {
-					var
-						_this = this,
-						_propertyProfilesByPrivateNames = _this._propertyProfilesByPrivateNames,
-						_propertyProfilesByPublicNames = _this._propertyProfilesByPublicNames
-					;
-					for (var _propertyPrivateName in _propertyProfiles) {
+
+				_class.stateProperties =
+				_class.registerProperties = /* DEPRECATED 2013-01-02 */
+					function (_propertyProfiles) {
 						var
-							_propertyData = _propertyProfiles [_propertyPrivateName],
-							_propertyDataIsObject = _isObject (_propertyData),
-							_propertyPublicName =
-								(_propertyDataIsObject ? _propertyData.name : _propertyData) || _propertyPrivateName,
-							_propertyPrimaryPublicName = _propertyPublicName,
-							_propertyProfile = _propertyProfilesByPrivateNames [_propertyPrivateName] = {_privateName:_propertyPrivateName}
+							_this = this,
+							_propertyProfilesByPrivateNames = _this._propertyProfilesByPrivateNames,
+							_propertyProfilesByPublicNames = _this._propertyProfilesByPublicNames
 						;
-						if (_propertyPublicName.indexOf ('|') > -1) {
-							var _pseudonyms = _propertyPublicName.split ('|');
-							_propertyPrimaryPublicName = _pseudonyms [0];
-							_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicNames);
-						} else {
-							_propertyProfilesByPublicNames [_propertyPublicName] = _propertyProfile;
+						for (var _propertyPrivateName in _propertyProfiles) {
+							var
+								_propertyData = _propertyProfiles [_propertyPrivateName],
+								_propertyDataIsObject = _isObject (_propertyData),
+								_propertyPublicName =
+									(_propertyDataIsObject ? _propertyData.name : _propertyData) || _propertyPrivateName,
+								_propertyPrimaryPublicName = _propertyPublicName,
+								_propertyProfile = _propertyProfilesByPrivateNames [_propertyPrivateName] = {_privateName:_propertyPrivateName}
+							;
+							if (_propertyPublicName.indexOf ('|') > -1) {
+								var _pseudonyms = _propertyPublicName.split ('|');
+								_propertyPrimaryPublicName = _pseudonyms [0];
+								_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicNames);
+							} else {
+								_propertyProfilesByPublicNames [_propertyPublicName] = _propertyProfile;
+							}
+							_propertyProfile._publicName = _propertyPrimaryPublicName;
+							if (_propertyDataIsObject) {
+								if (_propertyData.onChange) _propertyProfile._onChange = _propertyData.onChange;
+								if (_propertyData.conformer) _propertyProfile._conformer = _propertyData.conformer;
+								_this [_propertyPrivateName] = _propertyData.value;
+							}
 						}
-						_propertyProfile._publicName = _propertyPrimaryPublicName;
-						if (_propertyDataIsObject) {
-							if (_propertyData.onChange) _propertyProfile._onChange = _propertyData.onChange;
-							if (_propertyData.conformer) _propertyProfile._conformer = _propertyData.conformer;
-							_this [_propertyPrivateName] = _propertyData.value;
-						}
-					}
-					_this._instancePropertyDefaults = this.get ();
-					/*?
-						Static Methods
-							Uize.Class.registerProperties
-								Lets you register properties for the class.
+						_this._instancePropertyDefaults = this.get ();
+						/*?
+							Static Methods
+								Uize.Class.stateProperties
+									Lets you declare one or more state properties for instances of the class.
 
-								SYNTAX
-								.....................................................
-								MyClass.registerProperties (propertiesDefinitionOBJ);
-								.....................................................
+									SYNTAX
+									..................................................
+									MyClass.stateProperties (propertiesDefinitionOBJ);
+									..................................................
 
-								The object specified in =propertiesDefinitionOBJ= parameter must conform to a specific structure. Each property of this object represents a property to be registered for the class, where the property name specifies the internal name to be used for the class property and the property's string value specifies the class property's public name. As an alternative to a string value, the property's value can be an object whose =name= property specifies the class property's public name and where an optional =onChange= property specifies a handler function that should be executed every time the value of the class property changes. This is all best illustrated with an example...
+									The object specified in =propertiesDefinitionOBJ= parameter must conform to a specific structure. Each property of this object represents a property to be declared for the class, where the property name specifies the internal name to be used for the class property and the property's string value specifies the class property's public name. As an alternative to a string value, the property's value can be an object whose =name= property specifies the class property's public name and where an optional =onChange= property specifies a handler function that should be executed every time the value of the class property changes. This is all best illustrated with an example...
 
-								EXAMPLE
-								...........................................................................
-								MyClass.registerProperties (
-									{
-										_propertylName:'property1Name',
-										_property2Name:'property2Name',
-										_property3Name:{
-											name:'property3Name',
-											onChange:function () {
-												// code to be performed when the value of this property changes
+									EXAMPLE
+									...........................................................................
+									MyClass.stateProperties (
+										{
+											_propertylName:'property1Name',
+											_property2Name:'property2Name',
+											_property3Name:{
+												name:'property3Name',
+												onChange:function () {
+													// code to be performed when the value of this property changes
+												}
 											}
 										}
-									}
-								);
-								...........................................................................
+									);
+									...........................................................................
 
-								NOTES
-								- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
-								- see the other `feature declaration methods`
-					*/
-				};
+									NOTES
+									- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
+									- see the other `feature declaration methods`
+
+							Deprecated Features
+								Uize.Class.registerProperties -- DEPRECATED 2013-01-02
+									The =Uize.Class.registerProperties= static method has been deprecated in favor of the newly added =Uize.Class.stateProperties= static method.
+
+									......................................................................
+									Uize.Class.registerProperties >> BECOMES >> Uize.Class.stateProperties
+									......................................................................
+
+									The =Uize.Class.stateProperties= method is essentially just a renaming of the deprecated =Uize.Class.registerProperties= method and behaves in exactly the same way. The new name was chosen to be consistent with documentation that refers to these properties universally as state properties. The new name is also more concise.
+						*/
+					}
+				;
 
 				_class.set = _classPrototype.set = function (_properties) {
 					/* NOTE:
@@ -1571,7 +1585,7 @@ Uize.module ({
 						_changedEventsToFire,
 						_propertyPrivateName,
 						_propertyPublicName,
-						_propertiesToRegister,
+						_propertiesToDeclare,
 						_propertyValue,
 						_propertiesBeingSet
 					;
@@ -1592,7 +1606,7 @@ Uize.module ({
 									(_this._adHocProperties || (_this._adHocProperties = {})) [_propertyPublicOrPrivateName] =
 										true
 								) : (
-									(_propertiesToRegister || (_propertiesToRegister = {})) [_propertyPublicOrPrivateName] =
+									(_propertiesToDeclare || (_propertiesToDeclare = {})) [_propertyPublicOrPrivateName] =
 										_propertyProfile
 								)
 							;
@@ -1640,7 +1654,7 @@ Uize.module ({
 							_this [_propertyPrivateName] = _propertyValue;
 						}
 					}
-					_propertiesToRegister && _class.registerProperties (_propertiesToRegister);
+					_propertiesToDeclare && _class.stateProperties (_propertiesToDeclare);
 					if (_thisIsInstance) {
 						if (_onChangeHandlers) {
 							for (
@@ -1673,13 +1687,13 @@ Uize.module ({
 									Changed.[propertyName]
 										The =Uize.Class= base class implements a generalized mechanism for firing events when the values of state properties are changed.
 
-										This means that for any state property that is registered through the =Uize.Class.registerProperties= static method, a handler can be registered for a change in the value of that property without having to write any additional code to fire an event.
+										This means that for any state property that is declared through the =Uize.Class.stateProperties= static method, a handler can be registered for a change in the value of that property without having to write any additional code to fire an event.
 
 										Event Naming
-											The name of a changed event that fires is of the form =Changed.[propertyName]=, where =propertyName= is the primary public name of the state property. For example, if you registered a state property named =value=, then a =Changed.value= event would fire each time this property is changed.
+											The name of a changed event that fires is of the form =Changed.[propertyName]=, where =propertyName= is the primary public name of the state property. For example, if you declared a state property named =value=, then a =Changed.value= event would fire each time this property is changed.
 
 										Property Aliases
-											If a state property has aliases, handlers can be registered for the property's changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a state property was registered with the public names =color= and =hexRgb=, both =Changed.color= and =Changed.hexRgb= would be treated as equivalent.
+											If a state property has aliases, handlers can be registered for the property's changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a state property was declared with the public names =color= and =hexRgb=, both =Changed.color= and =Changed.hexRgb= would be treated as equivalent.
 
 											EXAMPLE
 											..........................................................
@@ -2182,7 +2196,7 @@ Uize.module ({
 								NOTES
 								- compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
 								- see also the =Uize.Class.valueOf= static intrinsic method
-								- if the instance's class does not register a =value= state property, then this method will return the value of the instance's =value= property, and if the instance has no =value= property, then this method will simply return =undefined=
+								- if the instance's class does not declare a =value= state property, then this method will return the value of the instance's =value= property, and if the instance has no =value= property, then this method will simply return =undefined=
 
 						Static Methods
 							Uize.Class.valueOf
@@ -2198,7 +2212,7 @@ Uize.module ({
 								NOTES
 								- compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
 								- see also the =valueOf Intrinsic Method=
-								- if the class does not register a =value= state property, then this method will return the value of the class' =value= property, and if the class has no =value= property, then this method will simply return =undefined=
+								- if the class does not declare a =value= state property, then this method will return the value of the class' =value= property, and if the class has no =value= property, then this method will simply return =undefined=
 					*/
 				}
 
@@ -2494,7 +2508,7 @@ Uize.module ({
 							In the above example, the =Uize.Class.instanceProperties= method is being used to declare the =timeoutMs= and =retryAttempts= instance properties.
 
 							NOTES
-							- compare to the =Uize.Class.registerProperties= static method
+							- compare to the =Uize.Class.stateProperties= static method
 							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
 							- see the other `feature declaration methods`
 				*/
@@ -2525,7 +2539,7 @@ Uize.module ({
 							............................................
 
 							NOTES
-							- compare to the =Uize.Class.registerProperties= static method
+							- compare to the =Uize.Class.stateProperties= static method
 							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
 							- see the other `feature declaration methods`
 				*/
@@ -2557,7 +2571,7 @@ Uize.module ({
 							......................................................
 
 							NOTES
-							- compare to the =Uize.Class.registerProperties= static method
+							- compare to the =Uize.Class.stateProperties= static method
 							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
 							- see the other `feature declaration methods`
 				*/

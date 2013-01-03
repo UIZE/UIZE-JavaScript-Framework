@@ -214,8 +214,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_exclusive:{
 					name:'exclusive',
 					value:_true

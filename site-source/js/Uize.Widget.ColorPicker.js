@@ -98,8 +98,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_value:{
 					name:'value',
 					conformer:function (_value) {return Uize.Color.to (_value,'hex')},

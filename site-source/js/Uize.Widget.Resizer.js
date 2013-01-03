@@ -417,13 +417,13 @@ Uize.module ({
 		/*** Public Static Properties ***/
 			_class.pointIdsMap = _pointIdsMap;
 
-		/*** Register Properties ***/
+		/*** State Properties ***/
 			var
 				_updateUi = 'updateUi',
 				_fixedOnChange = [_updateUi,_classPrototype._updateHandlesEnabled],
 				_conformDimsAndUpdateUi = [_conformDims,_updateUi]
 			;
-			_class.registerProperties ({
+			_class.stateProperties ({
 				_activeHandleEffectivePointIdX:'activeHandleEffectivePointIdX',
 				_activeHandleEffectivePointIdY:'activeHandleEffectivePointIdY',
 				_areaNodes:{

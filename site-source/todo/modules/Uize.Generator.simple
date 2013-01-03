@@ -2,7 +2,7 @@ This is a proposal document for a =Uize.Generator= module.
 
 - from the widget's perspective as a user of generators
 	- you have a set of display properties (state properties that are reflected in the UI)
-	- a widget class should be able to register which of its state properties affect display
+	- a widget class should be able to declare which of its state properties affect display
 		- of the state properties that affect display...
 			- which are updated by the client code
 			- which are handled as inputs by the generator specified by the html state property
@@ -32,7 +32,7 @@ This is a proposal document for a =Uize.Generator= module.
 
 - generator principles
 	- a generator should be able to leverage or depend on other code modules, so it should be declared with a module declaration
-	- a generator should be able to register its inputs
+	- a generator should be able to declare its inputs
 	- a generator should not assume the context of its usage, so it should be able to operate on the server side or in a non HTML document context
 
 Uize.Generator implements simply...
@@ -55,7 +55,7 @@ Uize.Generator implements simply...
 		- widgets should be able to use generators to generate their markup
 		- the same class of widget should be able to use any number of generators, and theoretically, different widget classes should be able to use the same generator
 		- a generator should be able to leverage other generators in the process of generating their output
-		- generators should be able to register their input interface
+		- generators should be able to declare their input interface
 
 	Uize.Generator (base class)
 		- params

@@ -60,8 +60,8 @@ Uize.module ({
 				}
 			);
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_minWidth:'minWidth',
 				_tentativeValue:{
 					name:'tentativeValue',

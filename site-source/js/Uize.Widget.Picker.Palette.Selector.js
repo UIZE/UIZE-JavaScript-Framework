@@ -87,8 +87,8 @@ Uize.module ({
 				_superclass.prototype.handleDialogSubmit.call(_this, _valueInfo);
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_tentativeValueNo:{
 					name:'tentativeValueNo',	// read-only
 					value:-1

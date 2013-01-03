@@ -74,8 +74,8 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass ();
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_displayFormat:{
 					name:'displayFormat',
 					value:'{YYYY}-{MM}-{DD}'

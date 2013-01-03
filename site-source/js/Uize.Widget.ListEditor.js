@@ -75,7 +75,7 @@
 			The list can also be pre-seeded or updated programmatically by setting the value of this property.
 
 			Value Interface
-				The =value= state property is registered as an alias to the =list= state property.
+				The =value= state property is declared as an alias to the =list= state property.
 
 				This means that the =Uize.Widget.ListEditor= class effectively implements the =Value Interface=, so the following statements would all be equivalent...
 
@@ -398,8 +398,8 @@ Uize.module ({
 				}
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_itemConformer:'itemConformer',
 					/*?
 						State Properties

@@ -96,8 +96,8 @@ Uize.module ({
 			return this.getNode (this._shellNode) || this.getNode ();
 		};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_shellNode:'shellNode'
 			});
 

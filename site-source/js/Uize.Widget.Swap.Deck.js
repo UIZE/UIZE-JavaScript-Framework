@@ -168,8 +168,8 @@ Uize.module ({
 				this._updateUiItemNo ();
 			};
 
-		/*** Register Properties ***/
-			_class.registerProperties ({
+		/*** State Properties ***/
+			_class.stateProperties ({
 				_itemNo:{
 					name:'itemNo|value',
 					onChange:_classPrototype._updateUiItemNo,
