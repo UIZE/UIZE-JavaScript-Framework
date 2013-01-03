@@ -76,7 +76,7 @@ Terms
 	JavaScript Module
 		In the UIZE JavaScript Framework, classes, packages, and extensions are implemented in JavaScript modules.
 
-		JavaScript modules are typically implemented in external JavaScript files - usually with one module defined per file. The UIZE JavaScript Framework reserves the term "library" to refer to collections of modules. To improve page load performance, many JavaScript modules can be bundled together in a single `JavaScript Library` file.
+		JavaScript modules are typically implemented in external JavaScript files - usually with one module defined per file. The UIZE JavaScript Framework reserves the term "library" to refer to collections of modules. To improve page load performance, many JavaScript modules can be bundled together in a single `JavaScript library` file.
 
 		For more information on JavaScript libraries, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
 

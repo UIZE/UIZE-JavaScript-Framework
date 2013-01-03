@@ -110,7 +110,7 @@ The Basics
 
 		This example uses the extended form for declaring a state property that lets you define the property's "profile" (but we'll get into that in more detail a bit later). In the example, a =conformer= function is registered for the =percentLoaded= state property, that conforms the property's value so that it doesn't fall outside of the range of =0= to =100=. So, even though the code is trying to set the property's value to =200= during construction of an instance, the conformer conforms the value to not fall out of bounds.
 
-		Custom conformer functions are discussed in more detail in the section `Conformer Function`.
+		Custom conformer functions are discussed in more detail in the section `conformer function`.
 
 More on Setting Values
 	Always Use Set
@@ -305,7 +305,7 @@ More on Declaring State Properties
 	Property Profiles
 		The parameter passed to this method should be an object, whose properties' names are the private/internal names for the state properties being declared, and where the value for each property is a profile for each state property.
 
-		The profile for a state property can take two forms: `The Minimal Profile`, and `The Complete Profile`.
+		The profile for a state property can take two forms: `the minimal profile`, and `the complete profile`.
 
 	The Minimal Profile
 		The minimal profile is a shorthand for declaring a state property, where the only thing being declared is a mapping between a private name and a public name.
@@ -319,10 +319,10 @@ More on Declaring State Properties
 
 		IMPORTANT
 
-		When declaring state properties using the minimal profile, those properties cannot utilize the more advanced features of state properties, such as =onChange= handlers, =conformer= functions, =value= defaults, etc. that are available when using `The Complete Profile`. Without specifying an initial value for state properties using the =value= property of `The Complete Profile`, state properties will be initialized to the value =undefined= when creating new instances of a class.
+		When declaring state properties using the minimal profile, those properties cannot utilize the more advanced features of state properties, such as =onChange= handlers, =conformer= functions, =value= defaults, etc. that are available when using `the complete profile`. Without specifying an initial value for state properties using the =value= property of `the complete profile`, state properties will be initialized to the value =undefined= when creating new instances of a class.
 
 	The Complete Profile
-		Unlike `The Minimal Profile`, the complete profile lets you utilize the more advanced features of state properties, such as =onChange= handlers, =conformer= functions, =value= defaults, etc.
+		Unlike `the minimal profile`, the complete profile lets you utilize the more advanced features of state properties, such as =onChange= handlers, =conformer= functions, =value= defaults, etc.
 
 		EXAMPLE
 		....................................................................................
@@ -343,7 +343,7 @@ More on Declaring State Properties
 		The =name= property in the profile specifies the property's public name. A =conformer= function is registered that is executed each time there is an attempt to set a new value for =percentLoaded=, and this function's implementation ensures that the property's value does not fall outside of the valid range of =0= to =100=. An =onChange= handler function is registered that is executed each time the value of =percentLoaded= changes, and this function's implementation displays the current value in a node in the document (we're assuming this code is transplanted from a widget class' implementation). Finally, the =value= property in the profile specifies the initial value for =percentLoaded=, for all freshly minted instances of =MyClass=.
 
 	Mixing Profile Types
-		For any state property, you can use either `The Minimal Profile` or `The Complete Profile`.
+		For any state property, you can use either `the minimal profile` or `the complete profile`.
 
 		So, when declaring multiple state properties in one call to the =MyClass.stateProperties= static method, you can use a combination of both profile types, as suits your needs.
 
@@ -362,7 +362,7 @@ More on Declaring State Properties
 		});
 		....................................................................................
 
-		In the above example, two state properties are being declared. =propertyName= is being declared using `The Minimal Profile`, while =percentLoaded= is being declared using `The Complete Profile`.
+		In the above example, two state properties are being declared. =propertyName= is being declared using `the minimal profile`, while =percentLoaded= is being declared using `the complete profile`.
 
 	### Ad hoc Creation Through Set
 		- using the set method with an unrecognized property name results in it being auto-created
@@ -370,7 +370,7 @@ More on Declaring State Properties
 	Public Name Defaulting
 		If a public name is not specified for a state property, the public name is defaulted to be same as the private name. This offers two intriguing flavors of state properties (discussed below).
 
-		When declaring a state property, one specifies a mapping between its private name and its public name. With the `The Minimal Profile`, this is done by specifying a string value for the key that represents the property's private name. With `The Complete Profile`, this is done by specifying a value for the =name= property in the profile object. Now, if the public name is =undefined=, =null=, or an empty string, then the public name will be defaulted to the private name.
+		When declaring a state property, one specifies a mapping between its private name and its public name. With the `the minimal profile`, this is done by specifying a string value for the key that represents the property's private name. With `the complete profile`, this is done by specifying a value for the =name= property in the profile object. Now, if the public name is =undefined=, =null=, or an empty string, then the public name will be defaulted to the private name.
 
 		Naked State Properties
 			By using an unscrunchable (effectively public) name for a state property's private name, and not specifying the public name so that it defaults to its unscrunchable private name, you end up with a "naked" state property whose value can be accessed outside of the implementation for a class (such as in application code) with a simple dereferencing.
@@ -438,7 +438,7 @@ More on Declaring State Properties
 
 		In the above example, a state property is being declared for the class =MyClass=, with the two public names =title= and =displayTitle=. When creating an instance of =MyClass=, a call to set the value for =displayTitle= is equivalent to setting the value for =title=, since both public names map to the same underlying state property. So, in the above code, the =alert= statement will display the text =HELLO= in the alert dialog.
 
-		Of course, aliases can be specified also when using `The Complete Profile`, as in...
+		Of course, aliases can be specified also when using `the complete profile`, as in...
 
 		.............................................................................
 		MyClass.stateProperties ({
@@ -458,7 +458,7 @@ More on Declaring State Properties
 		One of the benefits of public aliases for state properties is that it eases the evolution of interfaces over time. One can officially change the name of a state property, while deprecating the old name and continuing to support it for some time for backwards compatibility.
 
 	Initial Value
-		When using the `The Complete Profile` form to declare a state property, an initial value for a property can be specified using the =value= property of the profile.
+		When using the `the complete profile` form to declare a state property, an initial value for a property can be specified using the =value= property of the profile.
 
 		EXAMPLE
 		.........................................................................
@@ -483,10 +483,10 @@ More on Declaring State Properties
 		alert (myClass.get ('percentLoaded'));  // will alert the value 0
 		.........................................................................
 
-		If a state property is declared using `The Minimal Profile`, or if it is declared using the `The Complete Profile` but no =value= property is specified in the profile, then the state property will be set to =undefined= for all freshly minted instances.
+		If a state property is declared using `the minimal profile`, or if it is declared using the `the complete profile` but no =value= property is specified in the profile, then the state property will be set to =undefined= for all freshly minted instances.
 
 	onChange
-		When using the `The Complete Profile` form to declare a state property, an =onChange= handler function can be declared to respond to changes in the property's value.
+		When using the `the complete profile` form to declare a state property, an =onChange= handler function can be declared to respond to changes in the property's value.
 
 		EXAMPLE
 		...................................................................................
@@ -703,7 +703,7 @@ More on Declaring State Properties
 				......................................................................
 
 	Conformer Function
-		When using the `The Complete Profile` form to declare a state property, a =conformer= function can be registered to ensure that the value for the property is always conformed to be a valid value.
+		When using the `the complete profile` form to declare a state property, a =conformer= function can be registered to ensure that the value for the property is always conformed to be a valid value.
 
 		Normally, whatever value is specified for a state property when calling the =set= method is the new value that gets set for that property. However, specifying the optional conformer allows you to register a function that should be executed before the state property's value actually changes, providing an opportunity to constrain or correct the value, or to abort the set so that the property's value remains unchanged.
 
@@ -1120,7 +1120,7 @@ The Special value State Property
 		To take advantage of this facility, all you need to do is declare a state property with the public name =value=.
 
 	Value as an Alias
-		By using the `Public Aliases` mechanism, it is possible to name a state property something other than =value= while still leveraging the =valueOf Intrinsic Method= provision. Simply declare two public names for the property: your desired name, and the special name =value= as an alias.
+		By using the `public aliases` mechanism, it is possible to name a state property something other than =value= while still leveraging the =valueOf Intrinsic Method= provision. Simply declare two public names for the property: your desired name, and the special name =value= as an alias.
 
 		EXAMPLE
 		.........................................................................

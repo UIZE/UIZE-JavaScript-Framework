@@ -36,7 +36,7 @@ Location and Filename
 		Example pages are all located at the *root level* of the "examples" folder - examples are *not* organized into subfolders.
 
 	Filename
-		The filename for an example page should be derived from the `Title` of the page, according to the following scheme...
+		The filename for an example page should be derived from the `title` of the page, according to the following scheme...
 
 		- use the first portion up to the first " | " separator
 		- lowercase all the characters
@@ -53,9 +53,9 @@ Location and Filename
 		hover-fader-text-shadow-animation.html
 		......................................
 
-		As you can see from the above example, we have taken the "Hover Fader Text Shadow Animation" text from the example page's `Title`, then we have lowercased all the letters, replaced non-word characters (only spaces in this case) with hyphens, and then appended the =.html= file extension. The result is the filename =hover-fader-text-shadow-animation.html=.
+		As you can see from the above example, we have taken the "Hover Fader Text Shadow Animation" text from the example page's `title`, then we have lowercased all the letters, replaced non-word characters (only spaces in this case) with hyphens, and then appended the =.html= file extension. The result is the filename =hover-fader-text-shadow-animation.html=.
 
-		There are some exceptions to this rule, but most of these exceptions are legacy - going forward, all filenames for example pages should be derived from their `Title`.
+		There are some exceptions to this rule, but most of these exceptions are legacy - going forward, all filenames for example pages should be derived from their `title`.
 
 		Unreleased Example Pages
 			Example pages that are still under development and that are not yet ready for primetime release can be distinguished from released example pages by adding a "~" (tilde) character as a prefix.
@@ -91,7 +91,7 @@ Example Page Requirements
 		Additional Use of Example Name
 			Put some careful thought into the creation of the value for the =[example name]= token, since it gets used in other places...
 
-			- By convention, the =[example name]= value is used in deriving a `Filename` for the example page.
+			- By convention, the =[example name]= value is used in deriving a `filename` for the example page.
 			- The =[example name]= value is extracted by build scripts that then use it as the title / link text for examples in index pages that list examples by keyword, module, etc.
 
 	Meta Description
@@ -143,17 +143,17 @@ Example Page Requirements
 		Avoid Horizontal Scrolling
 			On a 1024x768 display with the browser maximized, an example page should never require horizontal scrolling.
 
-			The styling of the UIZE Web site imposes a maximum width of =780= pixels on the main content area for all pages, including example pages. The `Main Layout` for an example should be designed to fit within that width.
+			The styling of the UIZE Web site imposes a maximum width of =780= pixels on the main content area for all pages, including example pages. The `main layout` for an example should be designed to fit within that width.
 
 		Avoid Vertical Scrolling, Where Possible
 			On a 1024x768 display with the browser maximized, an example page should ideally not require vertical scrolling.
 
-			This requirement is not as important as the requirement to `Avoid Horizontal Scrolling`, but it preferable that example pages not require vertical scrolling. Where possible, modify the various elements of the `Main Layout` (such as the `Explanation` text, the `Main Content`, and the `Programmatic Interface Demos`) as needed to ensure that the combined height does not introduce vertical scrolling.
+			This requirement is not as important as the requirement to `avoid horizontal scrolling`, but it preferable that example pages not require vertical scrolling. Where possible, modify the various elements of the `Main Layout` (such as the `explanation` text, the `main content`, and the `programmatic interface demos`) as needed to ensure that the combined height does not introduce vertical scrolling.
 
 			Maximum Height Marker
 				The styling of example pages includes a dotted marker line that indicates the maximum height for the combined contents of an example page.
 
-				The `Maximum Height Marker` is subtle so as to not be too intrusive for those viewing the examples, but it's easy enough to spot when you're designing an example page. The position of the marker takes into account a worst case scenario of a browser with a lot of vertical chrome - window title bar, window menu bar, location bar, personal bookmarks bar, developer toolbar, and tabs. So, if your example page fits above that fold line, chances are there'll be enough breathing room to avoid scrolling on most notebook and netbook displays, and ample room to view the entire example in Safari on an iPad.
+				The `maximum height marker` is subtle so as to not be too intrusive for those viewing the examples, but it's easy enough to spot when you're designing an example page. The position of the marker takes into account a worst case scenario of a browser with a lot of vertical chrome - window title bar, window menu bar, location bar, personal bookmarks bar, developer toolbar, and tabs. So, if your example page fits above that fold line, chances are there'll be enough breathing room to avoid scrolling on most notebook and netbook displays, and ample room to view the entire example in Safari on an iPad.
 
 			Benefits of No Vertical Scrolling
 				Avoiding vertical scrolling in example pages offers the following important benefits...
@@ -165,7 +165,7 @@ Example Page Requirements
 			When Vertical Scrolling is Necessary
 				There will always be a few cases where it is just not possible to avoid vertical scrolling and still produce a viable example page.
 
-				Some example pages that have more content than can fit above the `Maximum Height Marker` include...
+				Some example pages that have more content than can fit above the `maximum height marker` include...
 
 				- [[../examples/collection-dynamic.html][Dynamic Collection]]
 				- [[../examples/hover-fader-for-thumbnails.html][ Hover Fader for Thumbnails]]
@@ -176,9 +176,9 @@ Example Page Requirements
 
 				Whenever working on an example page where vertical scrolling may be necessary, consider the following guidelines...
 
-				- The `Main Content` of an example page should never be pushed below or deep into the `Maximum Height Marker` because the `Explanation` is too long.
+				- The `main content` of an example page should never be pushed below or deep into the `maximum height marker` because the `explanation` is too long.
 
-				- If the `Main Content` of an example page *must* extend beneath the `Maximum Height Marker`, make sure at least to fit a compelling portion of the `Main Content` above the `Maximum Height Marker`, so that the user viewing the example can at least get a good sense of what it offers at first glance - there must be something sufficiently juicy within plain view.
+				- If the `main content` of an example page *must* extend beneath the `maximum height marker`, make sure at least to fit a compelling portion of the `main content` above the `maximum height marker`, so that the user viewing the example can at least get a good sense of what it offers at first glance - there must be something sufficiently juicy within plain view.
 
 	Comments
 		document...
@@ -191,24 +191,24 @@ What's Done for You Automatically
 	When you create a new example page, various build scripts perform some functions for you automatically.
 
 	Source Code Pages Built Automatically
-		For every example page (excluding `Unreleased Example Pages`), a corresponding source code page is automatically generated.
+		For every example page (excluding `unreleased example pages`), a corresponding source code page is automatically generated.
 
 		Generated source code pages are all placed within the =examples/source-code= folder, and the filename for each source code page is identical to the filename of its corresponding example.
 
 	Listing in Various Index Pages
-		Every example page you create (excluding `Unreleased Example Pages`) is automatically listed in appropriate example index pages, using the `Title`, `Meta Description`, and `Meta Keywords` you provided for the example.
+		Every example page you create (excluding `unreleased example pages`) is automatically listed in appropriate example index pages, using the `title`, `meta description`, and `meta keywords` you provided for the example.
 
 		Examples By Keyword Listings
-			Using the `Category Keywords` contained in the `Meta Keywords` you provide for an example page, the page will be listed in the index page for each of the specified `Category Keywords`.
+			Using the `category keywords` contained in the `meta keywords` you provide for an example page, the page will be listed in the index page for each of the specified `category keywords`.
 
 		Examples By Module Name Listing
-			Using the `Module Name Keywords`, if any, contained in the `Meta Keywords` you provide for an example page, the page will be listed in the appropriate place(s) in the tree menu on the [[../javascript-examples-by-module.html][JavaScript Examples, By Module]] page.
+			Using the `module name keywords`, if any, contained in the `meta keywords` you provide for an example page, the page will be listed in the appropriate place(s) in the tree menu on the [[../javascript-examples-by-module.html][JavaScript Examples, By Module]] page.
 
 		All Examples Listing
-			Every example page you create (excluding `Unreleased Example Pages`) is automatically listed in the [[../javascript-examples.html][JavaScript Examples]] page, which lists all examples.
+			Every example page you create (excluding `unreleased example pages`) is automatically listed in the [[../javascript-examples.html][JavaScript Examples]] page, which lists all examples.
 
 	Example Tours
-		The example pages listed in any of the `Examples By Keyword Listings`, as well as the `All Examples Listing`, can be viewed in a step-by-step tour ([[../javascript-feature-tours.html?tour=all][see example]]), so any example page you create will be available in at least one tour, and possibly more (depending on how many `Category Keywords` you supply).
+		The example pages listed in any of the `examples by keyword listings`, as well as the `all examples listing`, can be viewed in a step-by-step tour ([[../javascript-feature-tours.html?tour=all][see example]]), so any example page you create will be available in at least one tour, and possibly more (depending on how many `category keywords` you supply).
 
 Announce a New Example Page or Tool
 	document...
