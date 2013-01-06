@@ -28,68 +28,55 @@ Uize.module ({
 	name:'Uize.Services.FileSystemAdapter',
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_undefined = undefined,
-				_true = true,
-				_false = false
-			;
+		return _superclass.subclass ({
+			instanceMethods:{
+				getItemsInFolder:function (_params,_mustBeFolder) {
+					// override the implementation of this method in a host specific adapter to the FileSystem service
+				},
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Extensibility Methods ***/
-			_classPrototype.getItemsInFolder = function (_params,_mustBeFolder) {
-				// override the implementation of this method in a host specific adapter to the FileSystem service
-			};
-
-		/*** Public Instance Methods ***/
-			_classPrototype.getFiles = function (_params,_callback) {
-				var
-					_this = this,
-					_result = [],
-					_path = _params.path,
-					_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
-					_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
-					_recursive = _params.recursive
-				;
-				function _addItemsFromFolder (_subPath) {
+				getFiles:function (_params,_callback) {
 					var
-						_pathPlusSubPath = _path + (_path && _subPath && '/') + _subPath,
-						_currentItemPath
+						_this = this,
+						_result = [],
+						_path = _params.path,
+						_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
+						_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
+						_recursive = _params.recursive
 					;
-					_result.push.apply (
-						_result,
-						_this.getItemsInFolder ({
-							path:_pathPlusSubPath,
-							pathMatcher:function (_itemPath) {
-								return _pathMatcher (_currentItemPath = _subPath + (_subPath && '/') + _itemPath);
-							},
-							pathTransformer:function (_itemPath) {
-								return _pathTransformer (_currentItemPath);
-							}
-						})
-					);
-					if (_recursive) {
-						Uize.forEach (
-							_this.getItemsInFolder ({path:_pathPlusSubPath},true),
-							function (_folderName) {_addItemsFromFolder (_subPath + (_subPath && '/') + _folderName)}
+					function _addItemsFromFolder (_subPath) {
+						var
+							_pathPlusSubPath = _path + (_path && _subPath && '/') + _subPath,
+							_currentItemPath
+						;
+						_result.push.apply (
+							_result,
+							_this.getItemsInFolder ({
+								path:_pathPlusSubPath,
+								pathMatcher:function (_itemPath) {
+									return _pathMatcher (_currentItemPath = _subPath + (_subPath && '/') + _itemPath);
+								},
+								pathTransformer:function (_itemPath) {
+									return _pathTransformer (_currentItemPath);
+								}
+							})
 						);
+						if (_recursive) {
+							Uize.forEach (
+								_this.getItemsInFolder ({path:_pathPlusSubPath},true),
+								function (_folderName) {_addItemsFromFolder (_subPath + (_subPath && '/') + _folderName)}
+							);
+						}
 					}
+					_addItemsFromFolder ('');
+					_callback (_result);
 				}
-				_addItemsFromFolder ('');
-				_callback (_result);
-			};
-
-		/*** Public Static Methods ***/
-			_class.getParentFolderPath = function (_path) {
-				return _path.slice (0,((Math.max (_path.lastIndexOf ('/'),_path.lastIndexOf ('\\')) + 1) || 1) - 1);
-			};
-
-		return _class;
+			},
+			staticMethods:{
+				getParentFolderPath:function (_path) {
+					return _path.slice (0,((Math.max (_path.lastIndexOf ('/'),_path.lastIndexOf ('\\')) + 1) || 1) - 1);
+				}
+			}
+		});;
 	}
 });
 

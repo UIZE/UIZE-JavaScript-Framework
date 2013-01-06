@@ -28,20 +28,7 @@ Uize.module ({
 	name:'Uize.Services.StoreAdapter',
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_undefined = undefined,
-				_true = true,
-				_false = false
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		return _class;
+		return _superclass.subclass ();
 	}
 });
 

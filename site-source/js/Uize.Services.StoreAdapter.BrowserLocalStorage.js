@@ -28,11 +28,8 @@ Uize.module ({
 	name:'Uize.Services.StoreAdapter.BrowserLocalStorage',
 	superclass:'Uize.Services.StoreAdapter',
 	builder:function (_superclass) {
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
-
-		/*** Public Instance Methods ***/
-			_class.instanceMethods ({
+		return _superclass.subclass ({
+			instanceMethods:{
 				key:function (_params,_callback) {
 				},
 
@@ -51,9 +48,8 @@ Uize.module ({
 				init:function (_params,_callback) {
 					_callback ();
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

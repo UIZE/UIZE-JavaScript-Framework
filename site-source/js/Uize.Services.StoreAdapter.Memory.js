@@ -30,15 +30,11 @@ Uize.module ({
 	name:'Uize.Services.StoreAdapter.Memory',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass (
-				function () {
-					this._store = {};
-				}
-			);
-
-		/*** Public Instance Methods ***/
-			_class.instanceMethods ({
+		return _superclass.subclass ({
+			alphastructor:function () {
+				this._store = {};
+			},
+			instanceMethods:{
 				key:function (_params,_callback) {
 					var
 						_index = _params.index,
@@ -74,9 +70,8 @@ Uize.module ({
 				init:function (_params,_callback) {
 					_callback ();
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

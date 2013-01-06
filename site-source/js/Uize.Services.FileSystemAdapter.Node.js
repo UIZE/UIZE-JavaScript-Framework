@@ -35,14 +35,11 @@ Uize.module ({
 				_false = false
 			;
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
-
 		/*** Utility Functions ***/
-			var _getParentFolderPath = _class.getParentFolderPath;
+			var _getParentFolderPath = _superclass.getParentFolderPath;
 
-		/*** Instance Methods ***/
-			_class.instanceMethods ({
+		return _superclass.subclass ({
+			instanceMethods:{
 				/*** Private Instance Methods ***/
 					_pathExists:function (_path,_mustBeFolder) {
 						try {
@@ -164,9 +161,8 @@ Uize.module ({
 						this._fileSystem = require ('fs');
 						_callback ();
 					}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

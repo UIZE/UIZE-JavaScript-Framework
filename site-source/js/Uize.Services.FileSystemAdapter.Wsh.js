@@ -28,14 +28,11 @@ Uize.module ({
 	name:'Uize.Services.FileSystemAdapter.Wsh',
 	superclass:'Uize.Services.FileSystemAdapter',
 	builder:function (_superclass) {
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
-
 		/*** Utility Functions ***/
-			var _getParentFolderPath = _class.getParentFolderPath;
+			var _getParentFolderPath = _superclass.getParentFolderPath;
 
-		/*** Instance Methods ***/
-			_class.instanceMethods ({
+		return _superclass.subclass ({
+			instanceMethods:{
 				/*** Overridden Extensibility Methods ***/
 					getItemsInFolder:function (_params,_itemIsFolder) {
 						var
@@ -159,9 +156,8 @@ Uize.module ({
 						this._fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject');
 						_callback ();
 					}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 
