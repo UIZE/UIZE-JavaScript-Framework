@@ -734,7 +734,7 @@ Uize.module ({
 							_determinants,
 							_determiner
 						;
-						if (Uize.isFunction (_derivation)) {
+						if (_isFunction (_derivation)) {
 							_determinants = _getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]);
 							_determiner = _derivation;
 						} else {
@@ -749,7 +749,7 @@ Uize.module ({
 									_derivation = _getDeterminantsFromListStr (_derivation);
 								}
 							}
-							if (Uize.isArray (_derivation)) {
+							if (_isArray (_derivation)) {
 								_determinants = [];
 								if (_derivation.length) {
 									var
@@ -2343,8 +2343,8 @@ Uize.module ({
 						_alphastructors = _subclass._alphastructors = (_class._alphastructors || _sacredEmptyArray).concat (),
 						_omegastructors = _subclass._omegastructors = (_class._omegastructors || _sacredEmptyArray).concat ()
 					;
-					_alphastructor && _alphastructors.push (_alphastructor);
-					_omegastructor && _omegastructors.push (_omegastructor);
+					(_subclass._alphastructor = _alphastructor) && _alphastructors.push (_alphastructor);
+					(_subclass._omegastructor = _omegastructor) && _omegastructors.push (_omegastructor);
 
 				_subclass._propertyProfilesByPrivateNames || (_subclass._propertyProfilesByPrivateNames = {});
 				_subclass._propertyProfilesByPublicNames || (_subclass._propertyProfilesByPublicNames = {});
@@ -2352,8 +2352,14 @@ Uize.module ({
 				return _subclass;
 			};
 
-			_class.subclass = function (_alphastructor,_omegastructor) {
-				return _createSubclass (this,_alphastructor,_omegastructor);
+			_class.subclass = function (_arg0,_arg1) {
+				var _subclass;
+				if (arguments.length == 1 && !_isFunction (_arg0)) {
+					(_subclass = _createSubclass (this)).declare (_arg0);
+				} else {
+					_subclass = _createSubclass (this,_arg0,_arg1);
+				}
+				return _subclass;
 				/*?
 					Static Methods
 						Uize.Class.subclass
@@ -2575,6 +2581,23 @@ Uize.module ({
 							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
 							- see the other `feature declaration methods`
 				*/
+			};
+
+			_class.alphastructor = function (_alphastructor) {
+				this._alphastructor && this._alphastructors.length--;
+				(this._alphastructor = _alphastructor) && this._alphastructors.push (_alphastructor);
+			};
+
+			_class.omegastructor = function (_omegastructor) {
+				this._omegastructor && this._omegastructors.length--;
+				(this._omegastructor = _omegastructor) && this._omegastructors.push (_omegastructor);
+			};
+
+			_class.declare = function (_featuresByType) {
+				if (_featuresByType)
+					for (var _featureType in _featuresByType)
+						_isFunction (this [_featureType]) && this [_featureType] (_featuresByType [_featureType])
+				;
 			};
 
 		return _class;
