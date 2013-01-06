@@ -562,7 +562,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Date.Formatter.parse
-							Return a date object, that is parsed from the specified date that is formatted in the specified `Date Format`, or the value =undefined= if the specified date cannot be parsed.
+							Returns a date object, that is parsed from the specified date that is formatted in the specified `Date Format`, or the value =undefined= if the specified date cannot be parsed.
 
 							SYNTAX
 							................................................................
