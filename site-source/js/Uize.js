@@ -2893,9 +2893,7 @@
 		};
 
 		var _isPrimitive = _package.isPrimitive = function (_value) {
-			if (_value == _undefined) return _false;
-			var _typeofValue = typeof _value;
-			return _typeofValue == _typeString || _typeofValue == _typeNumber || _typeofValue == _typeBoolean;
+			return _value != _undefined && !(_value instanceof _value.constructor);
 			/*?
 				Static Methods
 					Uize.isPrimitive

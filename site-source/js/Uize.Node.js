@@ -132,13 +132,12 @@ Uize.module ({
 			}
 
 			function _resolveStringEventName (_eventName) {
-				if (_eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110)
-					_eventName = _eventName.slice (2)
-				;
 				return (
-					_eventName.charCodeAt (_eventName.length - 1) == 41 && _package.VirtualEvent
+					_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
 						? _package.VirtualEvent.resolve (_eventName)
-						: _eventName
+						: _eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110
+							? _eventName.slice (2)
+							: _eventName
 				);
 			}
 
@@ -1134,7 +1133,7 @@ Uize.module ({
 			var _isNode = _package.isNode = function (_node) {
 				return !!(
 					_node && typeof _node == _typeObject &&
-					(_node.getAttribute || _node.documentElement || (_node.self && _node.self == _node))
+					(_node.getAttribute || _node.documentElement || _node.self == _node)
 				);
 				/*?
 					Static Methods
