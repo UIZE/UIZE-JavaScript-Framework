@@ -38,6 +38,9 @@
 				Feature Declaration Methods
 					The =Uize.Class= module provides a number of methods that let you declare instance and/or static features of a class.
 
+					- =Uize.Class.declare= - lets you declare one or more features of one or more different feature types for the class
+					- =Uize.Class.alphastructor= - lets you declare the `alphastructor` for the class
+					- =Uize.Class.omegastructor= - lets you declare the `omegastructor` for the class
 					- =Uize.Class.instanceMethods= - lets you declare one or more instance methods for the class
 					- =Uize.Class.instanceProperties= - lets you declare one or more instance properties for the class
 					- =Uize.Class.staticMethods= - lets you declare one or more static methods for the class
@@ -2586,11 +2589,37 @@ Uize.module ({
 			_class.alphastructor = function (_alphastructor) {
 				this._alphastructor && this._alphastructors.length--;
 				(this._alphastructor = _alphastructor) && this._alphastructors.push (_alphastructor);
+				/*?
+					Static Methods
+						Uize.Class.alphastructor
+							Lets you declare the `alphastructor` for the class.
+
+							SYNTAX
+							..........................................
+							MyClass.alphastructor (alphastructorFUNC);
+							..........................................
+
+							NOTES
+							- see the other `feature declaration methods`
+				*/
 			};
 
 			_class.omegastructor = function (_omegastructor) {
 				this._omegastructor && this._omegastructors.length--;
 				(this._omegastructor = _omegastructor) && this._omegastructors.push (_omegastructor);
+				/*?
+					Static Methods
+						Uize.Class.omegastructor
+							Lets you declare the `omegastructor` for the class.
+
+							SYNTAX
+							..........................................
+							MyClass.omegastructor (omegastructorFUNC);
+							..........................................
+
+							NOTES
+							- see the other `feature declaration methods`
+				*/
 			};
 
 			_class.declare = function (_featuresByType) {
@@ -2598,6 +2627,49 @@ Uize.module ({
 					for (var _featureType in _featuresByType)
 						_isFunction (this [_featureType]) && this [_featureType] (_featuresByType [_featureType])
 				;
+				/*?
+					Static Methods
+						Uize.Class.declare
+							Lets you declare one or more features of one or more different feature types for the class.
+
+							SYNTAX
+							....................................
+							MyClass.declare (featuresByTypeOBJ);
+							....................................
+
+							For convenience, the =Uize.Class.declare= method lets you declare features of various types, in the same way as they can be declared when using the variation of the =Uize.Class.subclass= method that supports specifying features in a =featuresByTypeOBJ= object. The =Uize.Class.declare= method lets you declare additional features at any time after first creating a class, using the same semantics as supported by the =Uize.Class.subclass= method.
+
+							EXAMPLE
+							...................................
+							MySubclass = MyClass.subclass ({
+								alphastructor:function () {
+									// implementation here
+								},
+								omegastructor:function () {
+									// implementation here
+								},
+								staticMethods:{
+									staticMethod1:function () {
+										// implementation here
+									},
+									staticMethod2:function () {
+										// implementation here
+									}
+								},
+								instanceMethods:{
+									instanceMethod1:function () {
+										// implementation here
+									},
+									instanceMethod2:function () {
+										// implementation here
+									}
+								}
+							});
+							...................................
+
+							NOTES
+							- see the other `feature declaration methods`
+				*/
 			};
 
 		return _class;
