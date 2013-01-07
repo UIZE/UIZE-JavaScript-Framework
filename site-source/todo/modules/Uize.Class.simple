@@ -1,15 +1,6 @@
 This is a TO DO document for the =Uize.Class= module.
 
 Improve Feature Declaration and Subclassing
-	Rename registerProperties to stateProperties
-		Rename the =Uize.Class.stateProperties= static method to =Uize.Class.stateProperties= and deprecate =Uize.Class.stateProperties=.
-
-		- update all code to use the new =Uize.Class.stateProperties= method (make sure to cover examples and test modules)
-		- update all explainer documentation to use the new =Uize.Class.stateProperties= method
-		- update the =Uize.Test.Uize.Class= test module to rename the existing tests for the =Uize.Class.stateProperties= method, and to create a new test that verifies that the =Uize.Class.stateProperties= method still exists and is a straight reference to the =Uize.Class.stateProperties= method
-		- announce the deprecation of the =Uize.Class.stateProperties= method
-		- document that the =Uize.Class.stateProperties= method is deprecated in the =Uize.Class= reference
-
 	New Variation for the Uize.Class.subclass Method
 		As a convenience, the =Uize.Class.subclass= method should be improved with addition of a variation that takes a single object parameter, which will let you specify in a declarative way various features that should be added to the newly created class.
 
@@ -50,63 +41,6 @@ Improve Feature Declaration and Subclassing
 				}
 			});
 			.........................................
-
-		Need New Methods for Declaring Structors
-			In order to be able to provide the `new variation for the Uize.Class.subclass method` that supports only a single features declaration object, new methods would need to be provided for declaring the =alphastructor= and =omegastructor= for the class.
-
-			This is because the new variation would displace the previous form that allows the =alphastructor= and =omegastructor= to be specified as the two parameters. This would be a generally good thing, in terms of being consistent with allowing all the features of the class to be declared at any time using `feature declaration methods`.
-
-			- =Uize.Class.alphastructor= - lets you declare the =alphastructor= for the class
-			- =Uize.Class.omegastructor= - lets you declare the =omegastructor= for the class
-
-			Adding new =Uize.Class.alphastructor= and =Uize.Class.omegastructor= static methods would allow the =alphastructor= and =omegastructor= to be declared inside the `new variation for the Uize.Class.subclass method`, as well as in the proposed new =Uize.Class.declare= static method.
-
-			EXAMPLE
-			................................
-			MySubclass = MyClass.subclass ({
-				alphastructor:function () {
-					// alphastructor
-				},
-				omegastructor:function () {
-					// omegastructor
-				},
-				staticMethods:{
-				},
-				instanceMethods:{
-				},
-				instanceProperties:{
-				},
-				stateProperties:{
-				}
-			});
-			................................
-
-	New Uize.Class.declare Static Method
-		For convenience, a new =Uize.Class.declare= static method should be created that would let you declare various types of features in the same way as they can be declared when using the `new variation for the Uize.Class.subclass method`.
-
-		This would allow features for a class to be declared when first creating the class, but also at any time after creating the class, using the same semantics. In fact, the =Uize.Class.subclass= method would use the new =Uize.Class.declare= method in its implementation for the variation that supports a single
-
-		EXAMPLE
-		.................................
-		MySubclass = MyClass.subclass ();
-
-		MySubclass.declare ({
-			alphastructor:function () {
-				// alphastructor
-			},
-			omegastructor:function () {
-				// omegastructor
-			},
-			staticMethods:{
-			},
-			instanceMethods:{
-			},
-			instanceProperties:{
-			},
-			stateProperties:{
-			}
-		});
-		.................................
 
 Conditions
 	The whenever Instance Method
