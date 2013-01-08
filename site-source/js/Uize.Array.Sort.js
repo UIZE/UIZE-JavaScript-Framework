@@ -27,7 +27,7 @@
 			The =Uize.Array.Sort= module offers a number of important features, as outlined below...
 
 			Sort Value Generator
-				The =Uize.Array.Sort.sortBy= static method allows an array to be sorted by sort values that are generated for elements of the array by a sort value generator, which can be specified as either a `Sort Value Generator Expression` or a `Value Generator Function`.
+				The =Uize.Array.Sort.sortBy= static method allows an array to be sorted by sort values that are generated for elements of the array by a sort value generator, which can be specified as either a `sort value generator expression` or a `value generator function`.
 
 				Why a Sort Value Generator?
 					When one sorts an array using the =sort= instance method of JavaScript's =Array= object, the =sort= method compares the raw values of the array's elements - unless one specifies a custom comparison function.
@@ -48,10 +48,10 @@
 					Uize.Array.Sort.sortBy (firstNames,'value.toLowerCase ()');
 					...........................................................
 
-					Now that we're using the =Uize.Array.Sort.sortBy= method, we no longer specify a comparison function. Instead, we're specifying the string ='value.toLowerCase ()'= as a `Sort Value Generator Expression`. This expression will be used for every element of the array being sorted. The array will then be sorted using the sort values generated for each of the array's elements. Instead of using the array's element values in the comparison function, the =Uize.Array.Sort.sortBy= method will use the generated sort values. This means that the =toLowerCase= method is guaranteed to only be called once for every element of the array.
+					Now that we're using the =Uize.Array.Sort.sortBy= method, we no longer specify a comparison function. Instead, we're specifying the string ='value.toLowerCase ()'= as a `sort value generator expression`. This expression will be used for every element of the array being sorted. The array will then be sorted using the sort values generated for each of the array's elements. Instead of using the array's element values in the comparison function, the =Uize.Array.Sort.sortBy= method will use the generated sort values. This means that the =toLowerCase= method is guaranteed to only be called once for every element of the array.
 
 				Sort Value Generator Function
-					A Sort Value Generator Function is a `Sort Value Generator` specified in the form of a function.
+					A sort value generator function is a `sort value generator` specified in the form of a function.
 
 					When a function is specified for the Sort Value Generator, it should expect to receive two parameters: the value for an element of the array being sorted, and the index / key for that element. The function should return the generated sort value. Generated sort values should be of a type that can be used with the boolean less than and greater than comparison operators - numbers and strings are the typical types that are appropriate for generated sort values. This is all illustrated well in the following example...
 
@@ -70,7 +70,7 @@
 					For an example of how an element's key might be used in generating sort values, see the section `Using an Element's Key To Generate a Sort Value`.
 
 				Sort Value Generator Expression
-					A Sort Value Generator Expression is a `Sort Value Generator` specified in the form of an expression string.
+					A sort value generator expression is a `sort value generator` specified in the form of an expression string.
 
 					When an expression string is specified for the Sort Value Generator, it should expect two variables to be defined in the scope of the expression's code: the =value= variable contains the value for an element of the array being sorted, and the =key= variable contains that element's index / key. The expression should produce the generated sort value. Generated sort values should be of a type that can be used with the boolean less than and greater than comparison operators - numbers and strings are the typical types that are appropriate for generated sort values. This is all illustrated well in the following example...
 
@@ -79,9 +79,9 @@
 					Uize.Array.Sort.sortBy (names,'value.toLowerCase ()');
 					......................................................
 
-					In the above example, the =names= array is an array of string values. It is being sorted in ASCIIbetical order, using a Sort Value Generator Expression that renders the sort case-insensitive. The expression is using the =value= variable to generate a sort value that is an element's value converted to all lower case. As you'll notice, using a `Sort Value Generator Expression` can be more concise than using a `Sort Value Generator Function`. And since you're just specifying a JavaScript expression and not defining a function, there is no =return= statement in the expression.
+					In the above example, the =names= array is an array of string values. It is being sorted in ASCIIbetical order, using a Sort Value Generator Expression that renders the sort case-insensitive. The expression is using the =value= variable to generate a sort value that is an element's value converted to all lower case. As you'll notice, using a `sort value generator expression` can be more concise than using a `sort value generator function`. And since you're just specifying a JavaScript expression and not defining a function, there is no =return= statement in the expression.
 
-					You'll also notice that the expression is not using the =key= variable in generating the sort value. For an example of how an element's key might be used in generating sort values, see the section `Using an Element's Key To Generate a Sort Value`.
+					You'll also notice that the expression is not using the =key= variable in generating the sort value. For an example of how an element's key might be used in generating sort values, see the section `using an element's key to generate a sort value`.
 
 				Using an Element's Key To Generate a Sort Value
 					The key for an element is very seldom used when performing a sort using the =Uize.Array.Sort.sortBy= method, but the following hypothetical example demonstrates how it might be used...
@@ -105,7 +105,7 @@
 				Uize.Array.Sort.sortBy (names,'value.toLowerCase ()',-1);
 				.........................................................
 
-				In the above example, the =names= array is an array of string values. It is being sorted in descending ASCIIbetical order, using a `Sort Value Generator Expression` that renders the sort case-insensitive. Using the =directionINT= parameter when you want to perform a sort in descending order is more efficient than first performing the sort and then reversing the sorted array using the array's =reverse= instance method. This is because the =Uize.Array.Sort.sortBy= method takes the sort direction into account during the sort operation's reordering of the array's elements.
+				In the above example, the =names= array is an array of string values. It is being sorted in descending ASCIIbetical order, using a `sort value generator expression` that renders the sort case-insensitive. Using the =directionINT= parameter when you want to perform a sort in descending order is more efficient than first performing the sort and then reversing the sorted array using the array's =reverse= instance method. This is because the =Uize.Array.Sort.sortBy= method takes the sort direction into account during the sort operation's reordering of the array's elements.
 
 			Easy Data Table Sorting
 				The =Uize.Array.Sort= module's =Uize.Array.Sort.sortBy= method makes it very easy to sort a data table by the values of a specific column, simply by the number of the column to sort the table by for the method's =sortColumnINT= parameter.
@@ -129,7 +129,7 @@
 				In the above example, the =fruits= array is a data table array where each row contains data describing a fruit. Each row array contains information for fruit name, calorie count, total carbohydrates, and dietary fiber. We're using the =Uize.Array.Sort.sortBy= method to sort the fruits in order of their caloric content, from lowest calorie count to highest calorie count. Specifying the value =1= for the =sortColumnINT= parameter indicates that the values of the second column (column numbers are zero-based) should be used as the sort values, so the sort values used to drive the sort of the =fruits= array is an array of calorie count numbers.
 
 			Easy Record Array Sorting
-				With the use of a simple `Sort Value Generator Expression`, the =Uize.Array.Sort= module's =Uize.Array.Sort.sortBy= method makes it a very concise thing to sort an array of records by a specific record field.
+				With the use of a simple `sort value generator expression`, the =Uize.Array.Sort= module's =Uize.Array.Sort.sortBy= method makes it a very concise thing to sort an array of records by a specific record field.
 
 				A records array is an array of objects, where each object represents a record and contains properties that represent the fields of the record. Consider the following example...
 
@@ -147,7 +147,7 @@
 				Uize.Array.Sort.sortBy (fruits,'value.calories');
 				.......................................................................
 
-				In the above example, the =fruits= array is a records array where each record describes a fruit and contains the fields =name=, =calories=, =totalCarbs=, and =dietaryFiber=. We're using the =Uize.Array.Sort.sortBy= method to sort the fruits in order of their caloric content, from lowest calorie count to highest calorie count. The `Sort Value Generator Expression` used here simply dereferences the =calories= property for a record, so the generated sort values used to drive the sort of the =fruits= array is an array of calorie count numbers.
+				In the above example, the =fruits= array is a records array where each record describes a fruit and contains the fields =name=, =calories=, =totalCarbs=, and =dietaryFiber=. We're using the =Uize.Array.Sort.sortBy= method to sort the fruits in order of their caloric content, from lowest calorie count to highest calorie count. The `sort value generator expression` used here simply dereferences the =calories= property for a record, so the generated sort values used to drive the sort of the =fruits= array is an array of calorie count numbers.
 
 			Optimized For Performance
 				The =Uize.Array.Sort= method of the =Uize.Array.Sort= module is optimized for performance.
@@ -167,7 +167,7 @@
 				......................................................
 
 			Sorts Are More Concise
-				Besides being `Optimized For Performance`, the =Uize.Array.Sort.sortBy= method of the ==Uize.Array.Sort= module also produces more concise code than using the traditional approach.
+				Besides being `optimized for performance`, the =Uize.Array.Sort.sortBy= method of the ==Uize.Array.Sort= module also produces more concise code than using the traditional approach.
 
 				To illustrate this point, consider the following before-and-after examples...
 
@@ -269,7 +269,7 @@ Uize.module ({
 
 							The =Uize.Array.Sort.sortBy= method is engineered for high performance when sorting arrays where the sort order is determined by values that are derived from the source array's element values (see `Optimized For Performance` for more details).
 
-							When the =Uize.Array.Sort.sortBy= method sorts an array, it first generates sort values for all the elements of the array, using a `Sort Value Generator` that can be specified either in the form of a `Sort Value Generator Function` or a `Sort Value Generator Expression`. The method then sorts the array of generated sort values, and then applies that sort order back to the elements of the source array. This lets you drive the sorting of the source array by something other than the exact values of the source array's elements.
+							When the =Uize.Array.Sort.sortBy= method sorts an array, it first generates sort values for all the elements of the array, using a `sort value generator` that can be specified either in the form of a `sort value generator function` or a `sort value generator expression`. The method then sorts the array of generated sort values, and then applies that sort order back to the elements of the source array. This lets you drive the sorting of the source array by something other than the exact values of the source array's elements.
 
 							To illustrate this, let's take the simple example of performing a case-insensitive ASCIIbetical sort...
 
@@ -293,7 +293,7 @@ Uize.module ({
 								sourceARRAY = Uize.Array.Sort.sortBy (sourceARRAY,sortValueGeneratorSTR);
 								.........................................................................
 
-								When a =sortValueGeneratorSTR= parameter is specified in place of the =sortValueGeneratorFUNC= parameter, then a more concise JavaScript expression string can be specified for the sort value generator. For a more in-depth discussion of this feature and to see an example, consult the section `Sort Value Generator Expression`.
+								When a =sortValueGeneratorSTR= parameter is specified in place of the =sortValueGeneratorFUNC= parameter, then a more concise JavaScript expression string can be specified for the sort value generator. For a more in-depth discussion of this feature and to see an example, consult the section `sort value generator expression`.
 
 								VARIATION 2
 								.................................................................
@@ -330,7 +330,7 @@ Uize.module ({
 
 							Examples
 								Sort an Array of Strings by Length, Shortest to Longest
-									An array of strings can be sorted by length with a simple `Sort Value Generator Expression` that returns the value of the =length= property of a value.
+									An array of strings can be sorted by length with a simple `sort value generator expression` that returns the value of the =length= property of a value.
 
 									EXAMPLE
 									................................................
@@ -338,7 +338,7 @@ Uize.module ({
 									................................................
 
 								Sort an Array of People Records by lastName Property
-									A records array, where each element is an object containing data for a person, can be sorted by last name with a simple `Sort Value Generator Expression` that returns the value of the =lastName= property of a value.
+									A records array, where each element is an object containing data for a person, can be sorted by last name with a simple `sort value generator expression` that returns the value of the =lastName= property of a value.
 
 									EXAMPLE
 									........................................................
@@ -346,7 +346,7 @@ Uize.module ({
 									........................................................
 
 								Sort an Array of People Records in lastName,firstName Order
-									A records array, where each element is an object containing data for a person, can be sorted by last name and subsorted by first name, with a `Sort Value Generator Expression` that concatenates the values of the =lastName= and =firstName= properties of a value.
+									A records array, where each element is an object containing data for a person, can be sorted by last name and subsorted by first name, with a `sort value generator expression` that concatenates the values of the =lastName= and =firstName= properties of a value.
 
 									EXAMPLE
 									................................................................................
@@ -366,7 +366,7 @@ Uize.module ({
 									Column indexes are zero based, so specifying the value =1= in the above example will sort the =rows= data table array by the values in the second column.
 
 								Sort an Array of Strings That Are Decimal Numbers
-									An array of strings that are decimal formatted numbers can be sorted numerically (rather than ASCIIbetically), by specifying a simple `Sort Value Generator Expression` that returns an element's value coerced to a number.
+									An array of strings that are decimal formatted numbers can be sorted numerically (rather than ASCIIbetically), by specifying a simple `sort value generator expression` that returns an element's value coerced to a number.
 
 									EXAMPLE
 									................................................
@@ -376,17 +376,17 @@ Uize.module ({
 									Coercing the string type element values to numbers is accomplished quite easily by simply prefixing the "+" (plus) operator in the expression.
 
 								Sort an Array of Strings That are Hex Formatted Numbers
-									An array of strings that are hexadecimal formatted numbers can be sorted numerically (rather than ASCIIbetically), by specifying a simple `Sort Value Generator Expression` that returns an element's value coerced to a decimal number.
+									An array of strings that are hexadecimal formatted numbers can be sorted numerically (rather than ASCIIbetically), by specifying a simple `sort value generator expression` that returns an element's value coerced to a decimal number.
 
 									EXAMPLE
 									............................................................
 									Uize.Array.Sort.sortBy (hexNumberStrings,'+("0x" + value)');
 									............................................................
 
-									It is assumed in this example that the hex formatted numbers are *not* prefixed with any kind of hex formatting indicator (such as "0x" for programming languages, or "#" for RGB color values in CSS). The hex numbers are coerced to decimal by prepending the "0x" and then coercing the resulting string to a number by prefixing the "+" (plus) operator in the `Sort Value Generator Expression`.
+									It is assumed in this example that the hex formatted numbers are *not* prefixed with any kind of hex formatting indicator (such as "0x" for programming languages, or "#" for RGB color values in CSS). The hex numbers are coerced to decimal by prepending the "0x" and then coercing the resulting string to a number by prefixing the "+" (plus) operator in the `sort value generator expression`.
 
 								Sort an Array of Date Strings
-									An array of correctly formatted date strings can be sorted into chronological order, by specifying a `Sort Value Generator Expression` that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time).
+									An array of correctly formatted date strings can be sorted into chronological order, by specifying a `sort value generator expression` that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time).
 
 									EXAMPLE
 									...........................................................
@@ -396,7 +396,7 @@ Uize.module ({
 									A date string value is transformed into a POSIX time number by first using JavaScript's built-in =Date= object to parse the date string and create a =Date= object instance. The =Date= object instance is then coerced to a number by using the "+" (plus) operator, which invokes the =Date= object's =valueOf Intrinsic Method=.
 
 								Sort an Array of Date Objects
-									An array of =Date= object instances can be sorted into chronological order, by specifying a `Sort Value Generator Expression` that transforms a =Date= object instance into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time).
+									An array of =Date= object instances can be sorted into chronological order, by specifying a `sort value generator expression` that transforms a =Date= object instance into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time).
 
 									EXAMPLE
 									..............................................
@@ -406,17 +406,17 @@ Uize.module ({
 									A =Date= object instance is transformed into a POSIX time number by simply using the "+" (plus) operator, which invokes the =Date= object's =valueOf Intrinsic Method=.
 
 								Sort Cubes by Volume, Smallest to Largest
-									An array of objects representing geometric cubes can be sorted according to their volumes, from smallest volume to largest volume, by specifying a `Sort Value Generator Expression` that calculates the volume for a cube from its =width=, =height=, and =depth= properties.
+									An array of objects representing geometric cubes can be sorted according to their volumes, from smallest volume to largest volume, by specifying a `sort value generator expression` that calculates the volume for a cube from its =width=, =height=, and =depth= properties.
 
 									EXAMPLE
 									..........................................................................
 									Uize.Array.Sort.sortBy (cubes,'value.width * value.height * value.depth');
 									..........................................................................
 
-									Each value of the =cubes= array is an object containing =width=, =height=, and =depth= properties that describe a cube's dimensions. A `Sort Value Generator Expression` can calculate the volume for an element of the =cubes= array by dereferencing the =width=, =height=, and =depth= properties on the =value= variable and multiplying them together.
+									Each value of the =cubes= array is an object containing =width=, =height=, and =depth= properties that describe a cube's dimensions. A `sort value generator expression` can calculate the volume for an element of the =cubes= array by dereferencing the =width=, =height=, and =depth= properties on the =value= variable and multiplying them together.
 
 								Sort Rectangles by Squarest, Most Square to Least Square
-									An array of objects representing rectangles can be sorted according to their squareness, from most square to least square, by specifying a `Sort Value Generator Expression` that calculates an aspect ratio for a rectangle from its =width= and =height= properties.
+									An array of objects representing rectangles can be sorted according to their squareness, from most square to least square, by specifying a `sort value generator expression` that calculates an aspect ratio for a rectangle from its =width= and =height= properties.
 
 									EXAMPLE
 									..............................................................................
@@ -426,22 +426,22 @@ Uize.module ({
 									);
 									..............................................................................
 
-									Each value of the =rectangles= array is an object containing =width= and =height= properties that describe a rectangle's dimensions. A `Sort Value Generator Expression` can calculate the aspect ratio for an element of the =rectangles= array by dereferencing the =width= and =height= properties of the =value= variable and dividing the maximum axis dimension by the minimum axis dimension.
+									Each value of the =rectangles= array is an object containing =width= and =height= properties that describe a rectangle's dimensions. A `sort value generator expression` can calculate the aspect ratio for an element of the =rectangles= array by dereferencing the =width= and =height= properties of the =value= variable and dividing the maximum axis dimension by the minimum axis dimension.
 
 									According to this calculation, a perfectly square rectangle will have an aspect ratio of =1=. The more unsquare a rectangle is, the higher the calculated aspect ratio value. By always dividing the maximum axis dimension by the minimum axis dimension, the aspect ratio is guaranteed to always be =1= or greater, rather than being less than =1= for rectangles whose =width= is smaller than their =height= (ie. where orientation is landscape rather than portrait). Now, sorting the generated sort values into ascending order, the elements of the =rectangles= array are sorted according to how close to square they are.
 
 								Sort Array of Numbers By Closeness to a Reference Number
-									An array of numbers can be sorted according to how close they are to a reference number, from closest to furthest away, by specifying a `Sort Value Generator Expression` that calculates for a number its absolute distance from the reference number.
+									An array of numbers can be sorted according to how close they are to a reference number, from closest to furthest away, by specifying a `sort value generator expression` that calculates for a number its absolute distance from the reference number.
 
 									EXAMPLE
 									..............................................................................
 									Uize.Array.Sort.sortBy (numbers,'Math.abs (' + referenceNumber + ' - value)');
 									..............................................................................
 
-									Because we are using a `Sort Value Generator Expression` rather than a `Sort Value Generator Function` in our example, we can fix the value of the =referenceNumber= variable into the expression using string concatenation. We use the =Math.abs= method of JavaScript's built-in =Math= object to ensure that the calculated distance is always positive - this ensures that numbers are sorted based on their closeness to the reference number, regardless of on which side of the reference number they fall. Now, sorting the generated sort values into ascending order, the elements of the =numbers= array are sorted according to how close they are to the reference number.
+									Because we are using a `sort value generator expression` rather than a `sort value generator function` in our example, we can fix the value of the =referenceNumber= variable into the expression using string concatenation. We use the =Math.abs= method of JavaScript's built-in =Math= object to ensure that the calculated distance is always positive - this ensures that numbers are sorted based on their closeness to the reference number, regardless of on which side of the reference number they fall. Now, sorting the generated sort values into ascending order, the elements of the =numbers= array are sorted according to how close they are to the reference number.
 
 								Sort Array of Names in Case-insensitive ASCIIbetical Order
-									An array of strings can be sorted into case-insensitive ASCIIbetical order, by specifying a `Sort Value Generator Expression` that generates a lower case version of a string value.
+									An array of strings can be sorted into case-insensitive ASCIIbetical order, by specifying a `sort value generator expression` that generates a lower case version of a string value.
 
 									EXAMPLE
 									......................................................
@@ -451,7 +451,7 @@ Uize.module ({
 									In this example, when the elements of the =names= array are sorted according to the lower case, generated sort values, the elements are effectively sorted in a case-insensitive manner, since all the letters of all the sort value strings are guaranteed to be lower case.
 
 								Sort Array of RGB Color Objects By Blackness, Blackest to Whitest
-									An array of objects representing RGB colors can be sorted according to their blackness, from blackest to whitest, by specifying a `Sort Value Generator Function` that calculates the distance of a color from black in three dimensional RGB color space.
+									An array of objects representing RGB colors can be sorted according to their blackness, from blackest to whitest, by specifying a `sort value generator function` that calculates the distance of a color from black in three dimensional RGB color space.
 
 									EXAMPLE
 									.................................................................................
@@ -466,31 +466,31 @@ Uize.module ({
 									);
 									.................................................................................
 
-									Each value of the =rgbColorObjects= array is an object containing =red=, =green=, and =blue= properties that indicate the values of the three RGB color channels for a color. A `Sort Value Generator Function` can calculate a color's distance from black in three dimensional RGB color space by simply treating the color channels as dimensions like width, height, and depth.
+									Each value of the =rgbColorObjects= array is an object containing =red=, =green=, and =blue= properties that indicate the values of the three RGB color channels for a color. A `sort value generator function` can calculate a color's distance from black in three dimensional RGB color space by simply treating the color channels as dimensions like width, height, and depth.
 
-									Calculating distance in three dimensional space involves two successive hypotenuse-of-a-triangle calculations (square root of the sum of the squares) - the first calculates a distance in two of the three dimensions, and the second uses the first distance as one of the sides of a right angled triangle to calculate the final distance in three dimensional space. Our calculation in the `Sort Value Generator Function` is made simpler by the fact that our reference color is black, which is represented by zeros for each of the color channels, so there is no delta calculation needed for each of the color channels.
+									Calculating distance in three dimensional space involves two successive hypotenuse-of-a-triangle calculations (square root of the sum of the squares) - the first calculates a distance in two of the three dimensions, and the second uses the first distance as one of the sides of a right angled triangle to calculate the final distance in three dimensional space. Our calculation in the `sort value generator function` is made simpler by the fact that our reference color is black, which is represented by zeros for each of the color channels, so there is no delta calculation needed for each of the color channels.
 
 								Randomly Shuffle the Elements in an Array
-									The order of the elements in an array can be randomly shuffled, by specifying a `Sort Value Generator Function` that generates a random number.
+									The order of the elements in an array can be randomly shuffled, by specifying a `sort value generator function` that generates a random number.
 
 									EXAMPLE
 									..............................................
 									Uize.Array.Sort.sortBy (elements,Math.random);
 									..............................................
 
-									Randomly shuffling the order of elements in an array is not influenced by the values of the elements, nor is this process influenced by the original order of the elements, so we use neither the =value= nor the =key= variable in our expression. Instead, we simply supply a `Sort Value Generator Function` that doesn't expect any input parameters and that always returns a random number. The =Math.random= method of JavaScript's built-in =Math= object fits the bill. Sorting the array using a set of randomly generated sort values has the effect of randomly shuffling the order of the elements in the array.
+									Randomly shuffling the order of elements in an array is not influenced by the values of the elements, nor is this process influenced by the original order of the elements, so we use neither the =value= nor the =key= variable in our expression. Instead, we simply supply a `sort value generator function` that doesn't expect any input parameters and that always returns a random number. The =Math.random= method of JavaScript's built-in =Math= object fits the bill. Sorting the array using a set of randomly generated sort values has the effect of randomly shuffling the order of the elements in the array.
 
 									While the above technique works, it's worth noting that a better performing way of shuffling the elements of an array is to use the =Uize.Array.Order.jumble= static method of the =Uize.Array.Order= module.
 
 								Reverse the Elements in an Array
-									The order of the elements in an array can be reversed, by specifying a `Sort Value Generator Expression` that subtracts the index for an element from the length of the array.
+									The order of the elements in an array can be reversed, by specifying a `sort value generator expression` that subtracts the index for an element from the length of the array.
 
 									EXAMPLE
 									.............................................................
 									Uize.Array.Sort.sortBy (elements,elements.length + ' - key');
 									.............................................................
 
-									Because we are using a `Sort Value Generator Expression` rather than a `Sort Value Generator Function` in our example, we can fix the array's length into the expression using string concatenation. Reversing the order of elements in an array is not influenced by the values of the elements, so we don't use the =value= variable in our expression. Instead, we use the =key= variable and subtract that from the array's length. This results in sort values that descend in value, starting from the length of the array for the first element, and ending with the value =1= for the last element. Sorting the array using these sort values has the effect of reversing the order of the elements.
+									Because we are using a `sort value generator expression` rather than a `sort value generator function` in our example, we can fix the array's length into the expression using string concatenation. Reversing the order of elements in an array is not influenced by the values of the elements, so we don't use the =value= variable in our expression. Instead, we use the =key= variable and subtract that from the array's length. This results in sort values that descend in value, starting from the length of the array for the first element, and ending with the value =1= for the last element. Sorting the array using these sort values has the effect of reversing the order of the elements.
 
 									While the above technique works, it's worth noting that a better performing way of reversing the order of the elements of an array is to use the =Uize.Array.Order.reverse= static method of the =Uize.Array.Order= module, or the =reverse= instance method of JavaScript's built-in =Array= object.
 
@@ -500,7 +500,7 @@ Uize.module ({
 									Uize.Array.Sort.sortBy (elements,'key',-1);
 									...........................................
 
-									When we use the =directionINT= parameter to reverse the sort direction, we no longer need to use the array's length in the `Sort Value Generator Expression`. Instead, we can have a simpler expression that simply returns the key / index.
+									When we use the =directionINT= parameter to reverse the sort direction, we no longer need to use the array's length in the `sort value generator expression`. Instead, we can have a simpler expression that simply returns the key / index.
 				*/
 			};
 

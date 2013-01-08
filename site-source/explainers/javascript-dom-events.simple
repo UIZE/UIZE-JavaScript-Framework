@@ -173,7 +173,7 @@ Event Wiring Basics
 		In the above example, we're wiring the =mouseover=, =mouseout=, and =click= events on a =div= tag with the =id= of "myDiv". Some browsers do not support the =hover= CSS pseudoclass for =div= tags, so we're wiring the =mouseover= and =mouseout= events here to achieve hover highlighting for the =div= by changing the value of its =className= property. We're still using the =Uize.Node.wire= method, but the method's parameter signature is quite different than it is for wiring a single event handler (as shown in the section `Wiring an Event`). In this case the first parameter is the DOM node, and the second parameter is an object that contains mappings between event names and handler functions. You can specify as many event-name-to-handler mappings as you like in this object.
 
 	Unwiring Multiple Events
-		Handlers for multiple events can be unwired using the =Uize.Node.unwire= method, just as easily as `Wiring Multiple Events` using the =Uize.Node.wire= method.
+		Handlers for multiple events can be unwired using the =Uize.Node.unwire= method, just as easily as `wiring multiple events` using the =Uize.Node.wire= method.
 
 		EXAMPLE
 		..............................................................
@@ -200,7 +200,7 @@ Event Wiring Basics
 		);
 		..............................................................
 
-		In the above example, we're using the form of the =Wiring Multiple Events= method that takes multiple event-name-to-handler mappings to unwire all of the event handlers wired in the previous call to the =Uize.Node.wire= method. Notice how we are specifying the event handler functions by reference, and how the functions are defined outside of the wiring and unwiring statements, just as in the simple case of `Unwiring an Event`. After the above code has executed, our =div= will have no hover highlighting behavior and no alert dialog will pop up when it is clicked.
+		In the above example, we're using the form of the =Wiring Multiple Events= method that takes multiple event-name-to-handler mappings to unwire all of the event handlers wired in the previous call to the =Uize.Node.wire= method. Notice how we are specifying the event handler functions by reference, and how the functions are defined outside of the wiring and unwiring statements, just as in the simple case of `unwiring an event`. After the above code has executed, our =div= will have no hover highlighting behavior and no alert dialog will pop up when it is clicked.
 
 		Storing Handlers, For Later Unwiring
 			In cases where you know that you might like to unwire a specific set of event handlers at a later stage, you can create a variable to store the event-name-to-handler mappings.
@@ -371,9 +371,9 @@ Event Wiring Basics
 		In the above example, we're wiring handlers for the =mouseover=, =mouseout=, and =click= events of the =div= with the =id= of "myDiv". Then, we're using the =Uize.Node.unwire= method to unwire all handlers for all events of this node. After the above code has been executed, our =div= will have no hover highlighting behavior, and clicking on it will *not* pop up a JavaScript alert dialog.
 
 	Wiring Events for Multiple DOM Nodes
-		Just as the =Uize.Node.wire= method makes `Wiring Multiple Events` a snap, you can just as easily wire handlers for one or more events of multiple DOM nodes - in a single method call.
+		Just as the =Uize.Node.wire= method makes `wiring multiple events` a snap, you can just as easily wire handlers for one or more events of multiple DOM nodes - in a single method call.
 
-		The =Uize.Node.wire= method - along with many other methods in the =Uize.Node= module - supports a concept called the `Node Blob`. Where a method might otherwise be used to apply an action to just a single node, a `Node Blob` can be used instead to apply that action to more than one node. A "blob" of nodes can be specified using an array of node IDs or node references, as shown in the example below...
+		The =Uize.Node.wire= method - along with many other methods in the =Uize.Node= module - supports a concept called the `node blob`. Where a method might otherwise be used to apply an action to just a single node, a `node blob` can be used instead to apply that action to more than one node. A "blob" of nodes can be specified using an array of node IDs or node references, as shown in the example below...
 
 		EXAMPLE
 		...........................................................
@@ -387,10 +387,10 @@ Event Wiring Basics
 		);
 		...........................................................
 
-		In the above example, we have taken the example shown in the section `Wiring Multiple Events` and extended it so that the =Uize.Node.wire= method is wiring multiple events of multiple DOM nodes. Here we're wiring the =mouseover=, =mouseout=, and =click= events for the =div= nodes with the IDs of "myDiv1", "myDiv2", and "myDiv3". We're using an array of node IDs in this case for our `Node Blob`. You'll notice that in the handler for the =click= event we're using the =this= keyword to get the value of the =id= property for the DOM node that fired the event, and we're using this value to form the message that shows in the alert dialog. So, for example, clicking the =div= with the =id= of "myDiv1" will pop up an alert dialog with the message "You Clicked myDiv1".
+		In the above example, we have taken the example shown in the section `Wiring Multiple Events` and extended it so that the =Uize.Node.wire= method is wiring multiple events of multiple DOM nodes. Here we're wiring the =mouseover=, =mouseout=, and =click= events for the =div= nodes with the IDs of "myDiv1", "myDiv2", and "myDiv3". We're using an array of node IDs in this case for our `node blob`. You'll notice that in the handler for the =click= event we're using the =this= keyword to get the value of the =id= property for the DOM node that fired the event, and we're using this value to form the message that shows in the alert dialog. So, for example, clicking the =div= with the =id= of "myDiv1" will pop up an alert dialog with the message "You Clicked myDiv1".
 
 		Wiring a Node Blob, Using Single Form
-			Of course, you can also use the `Node Blob` technique with the variation of the =Uize.Node.wire= method that only wires a handler for a single event, as shown in the example below...
+			Of course, you can also use the `node blob` technique with the variation of the =Uize.Node.wire= method that only wires a handler for a single event, as shown in the example below...
 
 			.................................................
 			Uize.Node.wire (
@@ -403,7 +403,7 @@ Event Wiring Basics
 			Here's we're only wiring the =click= event for our three DOM nodes.
 
 	Unwiring Events for Multiple DOM Nodes
-		Just as it's possible to wire handlers for multiple DOM nodes in a single method call by specifying a `Node Blob` in place of a single node (see `Wiring Events for Multiple DOM Nodes`), handlers wired to many DOM nodes can be unwired in a single method call with the =Uize.Node.unwire= method.
+		Just as it's possible to wire handlers for multiple DOM nodes in a single method call by specifying a `node blob` in place of a single node (see `Wiring Events for Multiple DOM Nodes`), handlers wired to many DOM nodes can be unwired in a single method call with the =Uize.Node.unwire= method.
 
 		EXAMPLE
 		...........................................................
@@ -420,7 +420,7 @@ Event Wiring Basics
 		Uize.Node.unwire (divIds,divHandlers);
 		...........................................................
 
-		After the above code has been executed, none of the event handler functions contained in the =divHandlers= event-name-to-handler mappings object will be wired to any of the =div= nodes contained in the =divIds= `Node Blob`.
+		After the above code has been executed, none of the event handler functions contained in the =divHandlers= event-name-to-handler mappings object will be wired to any of the =div= nodes contained in the =divIds= `node blob`.
 
 	Unwiring Events That Use the Same Handler
 		The =Uize.Node.wire= method provides a way to unwire all events that are wired to a particular handler function in a single method call, by simply specifying the value =undefined= for the event name parameter.

@@ -9,7 +9,7 @@ Introduction
 
 	Many visible properties of a document can be animated, such as color style properties (eg. =color=, =background=, =backgroundColor=, =borderColor=, etc.), position style properties (eg. =top=, =right=, =bottom=, =left=, =backgroundPosition=), padding and margin style properties (eg. =padding=, =paddingTop=, =paddingRight=, =paddingBottom=, =paddingLeft=, =margin=, =marginTop=, etc.), dimension style properties (eg. =width=, =height=, =maxWidth=, =maxHeigh=, =borderWidth=, =borderTopWidth=, etc.), and font style properties (eg. =fontSize=, =letterSpacing=, =wordSpacing=, =lineHeight=, =textIndent=).
 
-	In addition, the UIZE JavaScript Framework lets you animate the values of state properties for instances of =Uize.Class= subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other `Non-time Based Fades`.
+	In addition, the UIZE JavaScript Framework lets you animate the values of state properties for instances of =Uize.Class= subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other `non-time based fades`.
 
 	HOW'S THE PERFORMANCE?
 
@@ -158,7 +158,7 @@ The Engine
 
 		In the above example, the DOM node with the =id= of ='myNode'= is being moved and resized, starting from a position of 0,0 and a size of 10 x 10, and ending up at the position of 100,100 and a size of 200 x 200. Because the values of the =startValue= and =endValue= state properties are both objects containing the properties =left=, =top=, =width=, and =height=, so the value of the =value= state property is also an object containing these properties. The =Uize.Node.setStyle= static method conveniently accepts an object with an arbitrary number of properties for different CSS style properties, and =left=, =top=, =width=, and =height= happen to be valid names of CSS style properties. Furthermore, this method resolves numerical values for coordinate properties by appending the unit string ='px'=. So we're golden - we can just pass the value of the fade's =value= state property to the =Uize.Node.setStyle= method and it will position and resize the DOM node as desired.
 
-		Now this, of course, is *not* the most concise way to animate coordinates using the UIZE JavaScript Framework - the framework provides convenient modules for easily `Animating CSS Style Properties` - but this example illustrates the benefit of interpolating compound values. And those other, more convenient features for easily animating CSS properties rely on this mechanism, anyway.
+		Now this, of course, is *not* the most concise way to animate coordinates using the UIZE JavaScript Framework - the framework provides convenient modules for easily `animating CSS style properties` - but this example illustrates the benefit of interpolating compound values. And those other, more convenient features for easily animating CSS properties rely on this mechanism, anyway.
 
 		Now let's consider a slightly more complex example - one where we want to animate both the coordinates *and* background color of a DOM node using the same =Uize.Fade= instance...
 
@@ -195,10 +195,10 @@ The Engine
 
 		Now the values for the =startValue= and =endValue= state properties have even more in them - this time separate =coords= and =bg= properties, where both =coords= and =bg= are objects. No problem, the =Uize.Fade= class can handle it all. The value of the =value= state property, that is interpolated between =startValue= and =endValue=, will have the same structure as =startValue= and =endValue=. In the handler for the =Change.value= event, the code is indexing into this interpolated compound value to get the interpolated values for =coords= and =bg=, which it is then using separately to set the coordinates and background color for the node. With the interpolated background color tuple object it is forming a string of the form "rgb([red],[green],[blue])" for setting the =backgroundColor= CSS style property.
 
-		Now, once again, there *are* more convient ways to do this in a single statement using the =Uize.Fx= module, but this example illustrates the versatility of `Compound Value Interpolation`.
+		Now, once again, there *are* more convient ways to do this in a single statement using the =Uize.Fx= module, but this example illustrates the versatility of `compound value interpolation`.
 
 		Compound Values and Compound Quantization
-			Along with `Compound Value Interpolation`, the =Uize.Fade= class also supports compound quantization.
+			Along with `compound value interpolation`, the =Uize.Fade= class also supports compound quantization.
 
 			In the previous example that showed how quantization is used, the quantization value of =1= was being used for the interpolation of all components of the compound value. But, what if different parts of a compound value need different quantization? Say, for example, we wanted to use a single =Uize.Fade= instance to animate both the opacity and color of a DOM node. If we used the value =1= for quantizing the opacity value (a floating point number in the range of =0= to =1=), then it could only ever be the integers =0= or =1=. In such cases, it is possible to specify a compound value for the =quantization= state property. Consider the following example...
 
@@ -254,7 +254,7 @@ The Fade Factory
 	);
 	......................................................................................
 
-	The above example is a reformulation of the first example shown in the `Compound Value Interpolation` section, to now use the =Uize.Fade.fade= static method that is defined in the =Uize.Fade.xFactory= extension module. If you compare the two examples, you will notice that this one is shorter. It's still not as short as it could be, because we're not using the convenient =Uize.Fx.fadeStyle= static method that's defined in the =Uize.Fx= module and that's designed specifically for the purpose of making `Animating CSS Style Properties` dead simple. It is, however, shorter than the example that directly uses the =Uize.Fade= class, because it leaves it to the =Uize.Fade.fade= method to create the =Uize.Fade= instance, wire event handlers, and start the fade.
+	The above example is a reformulation of the first example shown in the `compound Value Interpolation` section, to now use the =Uize.Fade.fade= static method that is defined in the =Uize.Fade.xFactory= extension module. If you compare the two examples, you will notice that this one is shorter. It's still not as short as it could be, because we're not using the convenient =Uize.Fx.fadeStyle= static method that's defined in the =Uize.Fx= module and that's designed specifically for the purpose of making `animating CSS style properties` dead simple. It is, however, shorter than the example that directly uses the =Uize.Fade= class, because it leaves it to the =Uize.Fade.fade= method to create the =Uize.Fade= instance, wire event handlers, and start the fade.
 
 	Looking at the example, you should notice a few important things:
 
@@ -319,7 +319,7 @@ The Fade Factory
 			Uize.Fade.fadeMethod (Uize.Node,'setOpacity',['myNode',1],['myNode',0],2000);
 			.............................................................................
 
-			In the above example, both statements would have the effect of fading the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The first statement is animating calls to the function =Uize.Node.setOpacity=, while the second statement is animating calling the method =setOpacity= on the context =Uize.Node=. Now, the implementation of the =Uize.Node.setOpacity= static method does not use the =this= keyword, so the context that it is called on does not affect its execution. So, one may as well just animate the opacity using the `Fading a Function Call` approach. As you can see, in such cases the =Uize.Fade.fadeMethod= method does not even produce the most concise code.
+			In the above example, both statements would have the effect of fading the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The first statement is animating calls to the function =Uize.Node.setOpacity=, while the second statement is animating calling the method =setOpacity= on the context =Uize.Node=. Now, the implementation of the =Uize.Node.setOpacity= static method does not use the =this= keyword, so the context that it is called on does not affect its execution. So, one may as well just animate the opacity using the `fading a function call` approach. As you can see, in such cases the =Uize.Fade.fadeMethod= method does not even produce the most concise code.
 
 			IMPORTANT
 
@@ -417,7 +417,7 @@ The Fade Factory
 		Uize.Fade.fade (slider,0,100,2000);
 		...................................
 
-		In the above example, =slider= is an instance of the =Uize.Widget.Bar.Slider= class, and this class has a =value= state property. So, the statement will have the effect of fading the value of the slider widget from =0= to =100= over a period of =2000= milliseconds (2 seconds) - short 'n sweet. Of course, you could accomplish the same effect by `Fading a Method Call` or by `Fading a State Property`, as in...
+		In the above example, =slider= is an instance of the =Uize.Widget.Bar.Slider= class, and this class has a =value= state property. So, the statement will have the effect of fading the value of the slider widget from =0= to =100= over a period of =2000= milliseconds (2 seconds) - short 'n sweet. Of course, you could accomplish the same effect by `fading a method call` or by `fading a state property`, as in...
 
 		...............................................................
 		// fading the slider value by fading a method call
@@ -430,7 +430,7 @@ The Fade Factory
 		But, why would you want to write more code, if you could avoid it?
 
 	Fading a State Property
-		While the =Uize.Fade.fade= static method can be used for `Fading the value State Property`, fading a state property other than the =value= property can be accomplished using the =Uize.Fade.fadeProperty= static method.
+		While the =Uize.Fade.fade= static method can be used for `fading the value state property`, fading a state property other than the =value= property can be accomplished using the =Uize.Fade.fadeProperty= static method.
 
 		EXAMPLE
 		.....................................................
@@ -440,7 +440,7 @@ The Fade Factory
 		In the above example, =marquee= is an instance of the =Uize.Widget.Resizer.Marquee= class. The statement will fade the value of its =width= state property from =10= to =200= over a period of =2000= milliseconds (2 seconds).
 
 	Fading Many State Properties
-		While the =Uize.Fade.fadeProperty= static method can be used for `Fading a State Property`, fading values for multiple state properties of an instance in a single fade can be accomplished using the =Uize.Fade.fadeProperties= static method.
+		While the =Uize.Fade.fadeProperty= static method can be used for `fading a state property`, fading values for multiple state properties of an instance in a single fade can be accomplished using the =Uize.Fade.fadeProperties= static method.
 
 		EXAMPLE
 		....................................................................................
@@ -490,7 +490,7 @@ The Fade Factory
 
 		### Passing the Baton
 			- ability of one property or properties fade to assume responsibility for fading values of any state properties in new fade that are currently being faded by any active fades of the same property on the same instance
-			- applies to any state properties being faded, regardless of how the fade was initiated: `Fading the value State Property`, `Fading a State Property`, or `Fading Many State Properties`
+			- applies to any state properties being faded, regardless of how the fade was initiated: `fading the value state property`, `fading a state property`, or `fading many state properties`
 
 	### The Most Generic Fade
 		- ability to specify context and handler in target object
@@ -559,7 +559,7 @@ Animating CSS Style Properties
 	Advanced Techniques
 		The way that the =Uize.Fx.fadeStyle= method packs the values of all the style properties to be faded into compound start and end values, and the fact that it's possible to specify a compound value for the =curve= fade property, make some interesting techniques possible.
 
-		If you're fading multiple style properties in a single fade, the ability to specify a compound value for the =curve= fade property lets you specify different `Curve Functions` for different of the style properties being faded. Consider the following example....
+		If you're fading multiple style properties in a single fade, the ability to specify a compound value for the =curve= fade property lets you specify different `curve functions` for different of the style properties being faded. Consider the following example....
 
 		EXAMPLE
 		.......................................................................................
@@ -580,7 +580,7 @@ Animating CSS Style Properties
 		In the above example, we are fading the border color of the top, left, right, and bottom borders from black to white, over a period of =3000= milliseconds (3 seconds). When the fade has completed, the entire border will be white all around. However, because we're accomplishing this by fading the four discrete CSS border color properties, we get the ability to specify different curves for each using a compoung value for the =curve= fade property, whose value is an object with the same structure as the start and end values of the fade. There is an entry in the =curve= object for each of the style properties being faded. In this case, we're using the =Uize.Curve.Mod.band= curve function generator defined in the =Uize.Curve.Mod= module so that each of the borders' white "comes in" at different points in the fade. Because of the values we've used in this example, the border would fade to white in a clockwise fashion, starting from the left border.
 
 		Color Component Curves
-			The way that the =Uize.Fx.fadeStyle= method resolves color values to tuples that make their way into the compound start and end values of a style fade makes it possible to specify different `Curve Functions` for the different components of a color.
+			The way that the =Uize.Fx.fadeStyle= method resolves color values to tuples that make their way into the compound start and end values of a style fade makes it possible to specify different `curve functions` for the different components of a color.
 
 			This provides a way to achieve subtle color transitions, where your start and end colors are always simple, but the colors that are faded through in the course of a fade produce elegant effects. Consider the following example...
 
@@ -647,8 +647,8 @@ Curves
 		The UIZE JavaScript Framework introduces the following key concepts...
 
 		- `Curve Functions` - functions that generate values for curves.
-		- `Curve Function Generators` - functions or methods that generate `Curve Functions`, possibly accepting parameters that affect the generated curve functions.
-		- `Curve Function Modifiers` - function or methods that accept `Curve Functions` as parameters and that generate modified versions of the source curve functions.
+		- `Curve Function Generators` - functions or methods that generate `curve functions`, possibly accepting parameters that affect the generated curve functions.
+		- `Curve Function Modifiers` - function or methods that accept `curve functions` as parameters and that generate modified versions of the source curve functions.
 
 	Curve Functions
 		In the UIZE JavaScript Framework, a curve is represented simply as a function that accepts a floating point number in the scale =0= to =1= and returns a value, also in the scale of =0= to =1=, that reflects how that input value is distorted by the curve.
@@ -710,7 +710,7 @@ Curves
 			Start At 0, End At 1
 				A curve function should start at =0= (ie. the input value =0= should produce the output value =0=) and end at =1= (ie. the input value =1= should produce the output value =1=).
 
-				Curve functions that produce curves that start at the value =0= and end at the value =1= can be rotated 180 degrees to produce new curves that still start at =0= and end at =1=. The rotated version of an `Ease-in Curve Function` would produce an `Ease-out Curve Function`. Similarly, the rotated version of an `Ease-out Curve Function` would produce an `Ease-in Curve Function`.
+				Curve functions that produce curves that start at the value =0= and end at the value =1= can be rotated 180 degrees to produce new curves that still start at =0= and end at =1=. The rotated version of an `ease-in curve function` would produce an `ease-out curve function`. Similarly, the rotated version of an `ease-out curve function` would produce an `ease-in curve function`.
 
 			Deterministic
 				Ideally, a curve function should be deterministic (ie. it should always return the same output value for the same input value), although this is not a hard requirement.
@@ -784,7 +784,7 @@ Curves
 			positionFade.start ();
 			.........................................................................
 
-			Although there are more concise ways of `Animating CSS Style Properties` in order to fade the position of a node, the above example illustrates how a curve function can be specified as a value for the =curve= state property of an instance of the =Uize.Fade= class.
+			Although there are more concise ways of `animating CSS style properties` in order to fade the position of a node, the above example illustrates how a curve function can be specified as a value for the =curve= state property of an instance of the =Uize.Fade= class.
 
 		Controlling Effects
 			Because curve functions are supported by the =Uize.Fade= class, any modules that use instances of this class to drive fade effects can also use curve functions and permit curve functions to be used.
@@ -900,7 +900,7 @@ Curves
 
 				An ease-out curve function is actually just a 180 degree rotated version of an ease-in curve function. In order to rotate the ease-in curve 180 degrees, the curve is flipped both horizontally and vertically. It is flipped horizontally first by complementing the input value (subtracting it from =1=). Then, the value is remapped using the ease-in curve function. Finally, the remapped value is complemented in order to vertically flip the already horizontally flipped curve.
 
-				An ease-out curve function can be generated from a source `Ease-in Curve Function` using the =Uize.Curve.makeEaseOut= static method of the =Uize.Curve= module, as follows...
+				An ease-out curve function can be generated from a source `ease-in curve function` using the =Uize.Curve.makeEaseOut= static method of the =Uize.Curve= module, as follows...
 
 				............................................................................
 				var myEaseOutCurveFunction = Uize.Curve.makeEaseOut (myEaseInCurveFunction);
@@ -909,9 +909,9 @@ Curves
 			Ease-in-out Curve Function
 				Easing into and out of a transition means that the rate of change will be slow at the beginning and end of the transition, and will then be higher inbetween in order to make up. This will produce an effect that starts *and* ends gradually.
 
-				An ease-in-out curve function is the combination of a source `Ease-in Curve Function` occupying the bottom left quadrant, flowing into the 180 degree rotated version of that source `Ease-in Curve Function` occupying the top right quadrant, producing a seamless curve that flows from the bottom left to the top right.
+				An ease-in-out curve function is the combination of a source `ease-in curve function` occupying the bottom left quadrant, flowing into the 180 degree rotated version of that source `ease-in curve function` occupying the top right quadrant, producing a seamless curve that flows from the bottom left to the top right.
 
-				An ease-in-out curve function can be generated from a source `Ease-in Curve Function` using the =Uize.Curve.makeEaseInOut= static method of the =Uize.Curve= module, as follows...
+				An ease-in-out curve function can be generated from a source `ease-in curve function` using the =Uize.Curve.makeEaseInOut= static method of the =Uize.Curve= module, as follows...
 
 				................................................................................
 				var myEaseInOutCurveFunction = Uize.Curve.makeEaseInOut (myEaseInCurveFunction);
@@ -920,9 +920,9 @@ Curves
 			Ease-in-the-middle Curve Function
 				Easing in the middle means that the rate of change will be fast at the beginning and end of the transition, but will be slower in the middle. This will produce an effect that starts abruptly and ends abruptly, and appears to pause / ease during the middle.
 
-				An ease-in-the-middle curve function is the combination of the 180 degree rotated version of a source `Ease-in Curve Function` occupying the bottom left quadrant, flowing into that source `Ease-in Curve Function` occupying the top right quadrant, producing a seamless curve that flows from the bottom left to the top right.
+				An ease-in-the-middle curve function is the combination of the 180 degree rotated version of a source `ease-in curve function` occupying the bottom left quadrant, flowing into that source `ease-in curve function` occupying the top right quadrant, producing a seamless curve that flows from the bottom left to the top right.
 
-				An ease-in-the-middle curve function can be generated from a source `Ease-in Curve Function` using the =Uize.Curve.makeEaseMiddle= static method of the =Uize.Curve= module, as follows...
+				An ease-in-the-middle curve function can be generated from a source `ease-in curve function` using the =Uize.Curve.makeEaseMiddle= static method of the =Uize.Curve= module, as follows...
 
 				..................................................................................
 				var myEaseMiddleCurveFunction = Uize.Curve.makeEaseMiddle (myEaseInCurveFunction);
@@ -938,7 +938,7 @@ Curves
 				The naming convention for the easing curve function generators is that the ease-in curve function generators start with the prefix "easeIn", the ease-out curve function generators start with the prefix "easeOut", the ease-in-out curve function generators start with the prefix "easeInOut", and the ease-in-the-middle curve function generators start with the prefix "easeMiddle".
 
 			Making Easing Curve Function Generators
-				Static methods for generating easing curve functions can be manufactured by calling the =Uize.Curve.makeEasingCurveGenerators= static method of the =Uize.Curve= module and providing a curve generator function for the `Ease-in Curve Function` version.
+				Static methods for generating easing curve functions can be manufactured by calling the =Uize.Curve.makeEasingCurveGenerators= static method of the =Uize.Curve= module and providing a curve generator function for the `ease-in curve function` version.
 
 				EXAMPLE
 				..............................................................
@@ -954,7 +954,7 @@ Curves
 				The above example would create the four curve generator static methods =Uize.Curve.easeInPower=, =Uize.Curve.easeOutPower=, =Uize.Curve.easeInOutPower=, and =Uize.Curve.easeMiddlePower=. For a more detailed discussion, consult the reference for the =Uize.Curve.makeEasingCurveGenerators= method.
 
 	Curve Function Modifiers
-		Curve function modifiers are `Curve Function Generators` that accept `Curve Functions` as their primary inputs.
+		Curve function modifiers are `curve function generators` that accept `curve functions` as their primary inputs.
 
 		The =Uize.Curve.makeEaseOut=, =Uize.Curve.makeEaseInOut=, and =Uize.Curve.makeEaseMiddle= static methods of the =Uize.Curve= module can be considered curve function modifiers, because they take a curve function as an input and return a modified curve function as an output. Additionally, a good selection of more exotic curve function modifiers are provided in the =Uize.Curve.Mod= module.
 

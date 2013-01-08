@@ -24,22 +24,22 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 
 	In a Nutshell
-		The =Uize.Node.Tree= module provides convenient ways to derive a `Tree Data Object` from HTML on a page.
+		The =Uize.Node.Tree= module provides convenient ways to derive a `tree data object` from HTML on a page.
 
 		Tree Data Object
-			A tree data object is an array, where each element of the array is a `Tree Item`.
+			A tree data object is an array, where each element of the array is a `tree item`.
 
-			Because a Tree Item may itself contain a child Tree Data Object, specified by its =items= property, a Tree Data Object can be used to represent an arbitrarily complex, hierarchical structure for information.
+			Because a tree item may itself contain a child tree data object, specified by its =items= property, a tree data object can be used to represent an arbitrarily complex, hierarchical structure for information.
 
 		Using a Tree Data Object
-			A `Tree Data Object` can be used in any number of ways, but is commonly used for building tree-based user interface elements such as contents lists, structured dropdown menus, etc.
+			A `tree data object` can be used in any number of ways, but is commonly used for building tree-based user interface elements such as contents lists, structured dropdown menus, etc.
 
-			A number of widget class support data in the `Tree Data Object` format, such as the =Uize.Widget.Tree.List=, =Uize.Widget.Tree.Menu=, and =Uize.Widget.Tree.Select= classes. Outside of widgets, tree data objects can be used to drive the generation of HTML, in build scripts or Web applications, using [[../explainers/javascript-templates.html][JavaScript Templates]]. To see tree data objects in action, see the [[../examples/tree-list.html][Tree List From JSON]] and [[../examples/tree-menu.html][Tree Menu From JSON]] examples.
+			A number of widget class support data in the `tree data object` format, such as the =Uize.Widget.Tree.List=, =Uize.Widget.Tree.Menu=, and =Uize.Widget.Tree.Select= classes. Outside of widgets, tree data objects can be used to drive the generation of HTML, in build scripts or Web applications, using [[../explainers/javascript-templates.html][JavaScript Templates]]. To see tree data objects in action, see the [[../examples/tree-list.html][Tree List From JSON]] and [[../examples/tree-menu.html][Tree Menu From JSON]] examples.
 
 		Tree Item
-			A tree item is a single item in an array of items that make up a `Tree Data Object`.
+			A tree item is a single item in an array of items that make up a `tree data object`.
 
-			Any tree item may contain a subtree, which is itself a `Tree Data Object`, specified by the =items= property. A tree item has the following structure...
+			Any tree item may contain a subtree, which is itself a `tree data object`, specified by the =items= property. A tree item has the following structure...
 
 			ITEM STRUCTURE
 			................................................................
@@ -64,7 +64,7 @@
 				An optional string, specifying description text for the item.
 
 			items
-				An optional array, specifying the `Tree Data Object` for a subtree, where each element in the array is an item.
+				An optional array, specifying the `tree data object` for a subtree, where each element in the array is an item.
 
 				An empty array value for this property is equivalent to the values =null= or =undefined=, and indicates that the item does not have a subtree.
 
@@ -74,13 +74,13 @@
 				When this property is omitted, its value is defaulted to =true=. Therefore, for a subtree to be collapsed, the =expanded= property must be explicitly set to =false=.
 
 		Getting a Tree From a List Element
-			To generate a `Tree Data Object` from a hierarchical list defined by an HTML =ul= (unordered list) or =ol= (ordered list) tag, the =Uize.Node.Tree= module provides the =Uize.Node.Tree.getTreeFromList= static method.
+			To generate a `tree data object` from a hierarchical list defined by an HTML =ul= (unordered list) or =ol= (ordered list) tag, the =Uize.Node.Tree= module provides the =Uize.Node.Tree.getTreeFromList= static method.
 
 			This method is able to scan through the structure and contents of a list element and build a data structure that reflects the structure of the list. All the method needs in order to work its magic is a reference to
 			(or id for) either a list node or the immediate parent node of a list node. The method can handle unordered lists as well as ordered lists. From the list HTML that it analyzes, the method is able to build a tree data object where each item will have a =title= property, and may also have =link=, =description=, =items=, and =expanded= properties.
 
 			An Example
-				The following sample code blocks show the source HTML, JavaScript code, and output `Tree Data Object` for the [[../examples/get-tree-from-list.html][Get Tree from List]] example.
+				The following sample code blocks show the source HTML, JavaScript code, and output `tree data object` for the [[../examples/get-tree-from-list.html][Get Tree from List]] example.
 
 				HTML
 				..............................................................................................
@@ -259,7 +259,7 @@
 					</li>
 					..............................................
 
-					If the above HTML were the HTML for a `Tree Item`, then the value derived for the =title= property of the item would be "This is the item title". For one thing, the =span= and =b= tags would be stripped out, and only the unformatted / unmarked up text would be retained. And, secondly, the text contents of the nested =ul= tag would be ignored and would not contribute to the tree item's derived =title=.
+					If the above HTML were the HTML for a `tree item`, then the value derived for the =title= property of the item would be "This is the item title". For one thing, the =span= and =b= tags would be stripped out, and only the unformatted / unmarked up text would be retained. And, secondly, the text contents of the nested =ul= tag would be ignored and would not contribute to the tree item's derived =title=.
 
 				Deriving the link Property's Value
 					The value of the =link= property is derived from the =href= property of an item's node, if this node is a link tag.
@@ -274,7 +274,7 @@
 					</li>
 					........................................................................
 
-					If the above HTML were the HTML for a `Tree Item`, then the value derived for the =link= property of the item would be "http://www.uize.com". It doesn't matter that there are multiple link tags in the HTML, since the two other link tags belong to a nested =ul= tag - only the first link tag will be used when deriving the value for the item's =link= property. Note that not all items need to be linked - for item nodes that are not link tags, the value of the =link= property will not be set and the =link= property will not be present in the `Tree Item`.
+					If the above HTML were the HTML for a `tree item`, then the value derived for the =link= property of the item would be "http://www.uize.com". It doesn't matter that there are multiple link tags in the HTML, since the two other link tags belong to a nested =ul= tag - only the first link tag will be used when deriving the value for the item's =link= property. Note that not all items need to be linked - for item nodes that are not link tags, the value of the =link= property will not be set and the =link= property will not be present in the `tree item`.
 
 				Deriving the description Property's Value
 					The value of the =description= property is derived from the "title" attribute of an item's node, if this node is a link tag.
@@ -289,9 +289,9 @@
 					</li>
 					......................................................................................
 
-					If the above HTML were the HTML for a `Tree Item`, then the value derived for the =description= property of the item would be "UIZE JavaScript Framework". It doesn't matter that there are multiple link tags in the HTML, since the two other link tags belong to a nested =ul= tag - only the first link tag will be used when deriving the value for the item's =description= property.
+					If the above HTML were the HTML for a `tree item`, then the value derived for the =description= property of the item would be "UIZE JavaScript Framework". It doesn't matter that there are multiple link tags in the HTML, since the two other link tags belong to a nested =ul= tag - only the first link tag will be used when deriving the value for the item's =description= property.
 
-					Note that not all items need to be linked - for item nodes that are not link tags, the value of the =description= property will not be set and the =description= property will not be present in the `Tree Item`. Similarly, for item nodes that *are* link tags, but that do not have a "title" attribute specified, or that have an empty string specified for the "title" attribute, the =description= property will not be present in the `Tree Item`.
+					Note that not all items need to be linked - for item nodes that are not link tags, the value of the =description= property will not be set and the =description= property will not be present in the `tree item`. Similarly, for item nodes that *are* link tags, but that do not have a "title" attribute specified, or that have an empty string specified for the "title" attribute, the =description= property will not be present in the `tree item`.
 
 				Deriving the items Property's Value
 					The value of the =items= property is derived from the first =ul= (unordered list) or =ol= (ordered list) tag encountered in an item's node.
@@ -306,7 +306,7 @@
 					</li>
 					......................................................................................
 
-					If the above HTML were the HTML for a `Tree Item`, then the value derived for the =items= property of the item would be an array with the following structure...
+					If the above HTML were the HTML for a `tree item`, then the value derived for the =items= property of the item would be an array with the following structure...
 
 					...............................................
 					[
@@ -321,7 +321,7 @@
 					]
 					...............................................
 
-					It doesn't matter that there is HTML content ahead of the nested =ul= tag - that content will be ignored when deriving the value for the =items= property, but it will be used when deriving values for the =title=, =link=, and =description= properties of the `Tree Item` object. Note that not every item needs to have a subtree - in most cases, the majority will not. For item nodes that do not contain nested list tags, the value of the =items= property will not be set and the =items= property will not be present in the `Tree Item`.
+					It doesn't matter that there is HTML content ahead of the nested =ul= tag - that content will be ignored when deriving the value for the =items= property, but it will be used when deriving values for the =title=, =link=, and =description= properties of the `tree item` object. Note that not every item needs to have a subtree - in most cases, the majority will not. For item nodes that do not contain nested list tags, the value of the =items= property will not be set and the =items= property will not be present in the `tree item`.
 
 				Deriving the expanded Property's Value
 					The value of the =expanded= property is derived from the value of the =display= CSS property of the first =ul= (unordered list) or =ol= (ordered list) tag encountered in an item's node.
@@ -336,15 +336,15 @@
 					</li>
 					......................................................................................
 
-					If the above HTML were the HTML for a `Tree Item`, then the value derived for the =expanded= property of the item would be =false=. The rule is simple: if the list tag that represents the items in the subtree for an item is set to =display:none=, either through inline CSS in a =style= attribute, or in a style rule in an external style sheet, then the value of the =expanded= property will be =false=. Note that not every item needs to have a subtree - in most cases, the majority will not. For item nodes that do not contain nested list tags, the =expanded= property will not be present in the `Tree Item`. Also, for any item that *does* have a subtree and where the subtree is expanded, the value of the =expanded= property will be =true= and the property will not be present in the `Tree Item`, since =true= is the default value for this property.
+					If the above HTML were the HTML for a `tree item`, then the value derived for the =expanded= property of the item would be =false=. The rule is simple: if the list tag that represents the items in the subtree for an item is set to =display:none=, either through inline CSS in a =style= attribute, or in a style rule in an external style sheet, then the value of the =expanded= property will be =false=. Note that not every item needs to have a subtree - in most cases, the majority will not. For item nodes that do not contain nested list tags, the =expanded= property will not be present in the `tree item`. Also, for any item that *does* have a subtree and where the subtree is expanded, the value of the =expanded= property will be =true= and the property will not be present in the `tree item`, since =true= is the default value for this property.
 
 		Getting a Tree From a Page's Section Headings
-			To generate a `Tree Data Object` from the section headings contained inside a document, the =Uize.Node.Tree= module provides the =Uize.Node.Tree.getTreeFromPage= static method.
+			To generate a `tree data object` from the section headings contained inside a document, the =Uize.Node.Tree= module provides the =Uize.Node.Tree.getTreeFromPage= static method.
 
 			This method is able to scan through all the nodes inside a document, building a data structure that reflects the structure of the document by analyzing the occurrence of different CSS classes for section headings at different depths of a document. All this method needs in order to work its magic is an array specifying the names of CSS classes that identify section headings at different depths (section heading nodes may be of any type, including =div=, =span=, =p=, etc.). From the document HTML that it analyzes, the method is able to build a tree data object where each item will have =title= and =link= properties, and may also have =description= and =items= properties.
 
 			An Example
-				The following sample code blocks show the source HTML, JavaScript code, and output `Tree Data Object` for the [[../examples/get-tree-from-page.html][Get Tree from Page]] example.
+				The following sample code blocks show the source HTML, JavaScript code, and output `tree data object` for the [[../examples/get-tree-from-page.html][Get Tree from Page]] example.
 
 				HTML
 				..........................................................................................
@@ -484,7 +484,7 @@
 					</h2>
 					.......................................................
 
-					If the above HTML were the HTML for a `Tree Item` heading node, then the value derived for the =title= property of the item would be "2.1. Tree Data Object" - the =span= and =a= tags would be stripped out, and only the unformatted / unmarked up text would be retained. Note also that the leading and trailing whitespace resulting from the indentation of the HTML tags would be stripped as well.
+					If the above HTML were the HTML for a `tree item` heading node, then the value derived for the =title= property of the item would be "2.1. Tree Data Object" - the =span= and =a= tags would be stripped out, and only the unformatted / unmarked up text would be retained. Note also that the leading and trailing whitespace resulting from the indentation of the HTML tags would be stripped as well.
 
 				Deriving the link Property's Value
 					The value of the =link= property is derived from the =id= attribute of an item's heading node, by concatenating the value of the =id= attribute at the end of the value of the =location= object's =href= property, with the two parts separated by a "#" (pound / hash) character.
@@ -498,7 +498,7 @@
 					</h2>
 					..........................................................
 
-					If the above HTML were the HTML for a `Tree Item` heading node, and if the value of the =location= object's =href= property was "http://www.uize.com", then the value derived for the =link= property of the item would be "http://www.uize.com#sect2".
+					If the above HTML were the HTML for a `tree item` heading node, and if the value of the =location= object's =href= property was "http://www.uize.com", then the value derived for the =link= property of the item would be "http://www.uize.com#sect2".
 
 					For heading nodes that do not have an =id= specified, an ID will be dynamically generated and assigned to the node. The generated ID will be constructed by combining the prefix "Uize_Node_Tree_" with a suffix that indicates the "path" of the section or subsection in the overal hierarchical structure of the document. The format for the suffix is =[sectionNo]&#95;[subsectionNo]&#95;[subSubsectionNo]...=, where the numbering for sections at any level in the tree structure is one-based (*not* zero-based). In order words, the generated suffix for the third subsection of the second section of a document would "2_3", where "2" represents the second section, and "3" represents the third subsection.
 
@@ -525,10 +525,10 @@
 					</h2>
 					..........................................................
 
-					If the above HTML were the HTML for a `Tree Item` heading node, then the value derived for the =description= property of the item would be "2. Static Methods". For item heading nodes that do not have a "title" attribute specified, or that have an empty string specified for the "title" attribute, the value of the =description= property will not be set and the =description= property will not be present in the `Tree Item`.
+					If the above HTML were the HTML for a `tree item` heading node, then the value derived for the =description= property of the item would be "2. Static Methods". For item heading nodes that do not have a "title" attribute specified, or that have an empty string specified for the "title" attribute, the value of the =description= property will not be set and the =description= property will not be present in the `tree item`.
 
 				Deriving the items Property's Value
-					The value of the =items= property is derived from all `Tree Item` heading nodes following the current item's heading node, that are at the immediately deeper level in the document structure, and up until the very next heading node that is at the same level as or at a shallower level than the current item.
+					The value of the =items= property is derived from all `tree item` heading nodes following the current item's heading node, that are at the immediately deeper level in the document structure, and up until the very next heading node that is at the same level as or at a shallower level than the current item.
 
 					So, for example, if an item is a section, then the items in that section will be derived by finding all heading nodes following the section heading node that are subsection heading nodes, up until the next section heading node. Consider the following example...
 
@@ -565,7 +565,7 @@
 					</div>
 					.........................................................................................
 
-					If the above HTML were the HTML for a `Tree Item`, then the value derived for the =items= property of the item would be an array with the following structure...
+					If the above HTML were the HTML for a `tree item`, then the value derived for the =items= property of the item would be an array with the following structure...
 
 					...............................................................
 					[
@@ -582,17 +582,17 @@
 					]
 					...............................................................
 
-					Note that not every item needs to have a subtree - in most cases, the majority will not. For items that do not, the value of the =items= property will not be set and the =items= property will not be present in the `Tree Item`. In our above example, this is the case for the items for sections 2.1 and 2.2.
+					Note that not every item needs to have a subtree - in most cases, the majority will not. For items that do not, the value of the =items= property will not be set and the =items= property will not be present in the `tree item`. In our above example, this is the case for the items for sections 2.1 and 2.2.
 
 				Deriving the expanded Property's Value
 					When using the =Uize.Node.Tree.getTreeFromPage= method, the value of the =expanded= property is derived from the value of the method's =initialExpandedDepthINT= parameter and the level of the current item.
 
-					The =initialExpandedDepthINT= parameter specifies the depth to which the generated `Tree Data Object` should be expanded, so the value of the =expanded= property for any `Tree Item` will be =true= if the depth level of that item is less than or equal to the value of the =initialExpandedDepthINT= parameter. Put another way, a value of =1= for the =initialExpandedDepthINT= parameter will result in the generated `Tree Data Object` being expanded to only one level deep, while the value =2= will result in the `Tree Data Object` being expanded to two levels deep.
+					The =initialExpandedDepthINT= parameter specifies the depth to which the generated `tree data object` should be expanded, so the value of the =expanded= property for any `tree item` will be =true= if the depth level of that item is less than or equal to the value of the =initialExpandedDepthINT= parameter. Put another way, a value of =1= for the =initialExpandedDepthINT= parameter will result in the generated `tree data object` being expanded to only one level deep, while the value =2= will result in the `tree data object` being expanded to two levels deep.
 
-					So, for example, if sections of a document are considered to be at level 1, and subsections of a document are considered to be at level 2, then the value =2= for the =initialExpandedDepthINT= parameter will result in all section and subsection items in the generated `Tree Data Object` being expanded, the value =1= will result in only section items being expanded, and the value =0= will result in all items being collapsed. If you wish all levels of the tree to be expanded, then you can specify the value =Infinity= for the =initialExpandedDepthINT= parameter. If you wish all levels to be collapsed, then you can specify any value less than =1=.
+					So, for example, if sections of a document are considered to be at level 1, and subsections of a document are considered to be at level 2, then the value =2= for the =initialExpandedDepthINT= parameter will result in all section and subsection items in the generated `tree data object` being expanded, the value =1= will result in only section items being expanded, and the value =0= will result in all items being collapsed. If you wish all levels of the tree to be expanded, then you can specify the value =Infinity= for the =initialExpandedDepthINT= parameter. If you wish all levels to be collapsed, then you can specify any value less than =1=.
 
 					NOTE
-					Note that for any item that is expanded, the value of the =expanded= property will be =true= and the property will not be present in the `Tree Item`, since =true= is the default value for this property.
+					Note that for any item that is expanded, the value of the =expanded= property will be =true= and the property will not be present in the `tree item`, since =true= is the default value for this property.
 */
 
 Uize.module ({
@@ -661,14 +661,14 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.Tree.getTreeFromList
-							Returns a `Tree Data Object`, generated by analyzing the structure and contents of a hierarchical list defined by an HTML =ul= (unordered list) or =ol= (ordered list) tag.
+							Returns a `tree data object`, generated by analyzing the structure and contents of a hierarchical list defined by an HTML =ul= (unordered list) or =ol= (ordered list) tag.
 
 							SYNTAX
 							........................................................
 							treeOBJ = Uize.Node.Tree.getTreeFromList (nodeSTRorOBJ);
 							........................................................
 
-							The =nodeSTRorOBJ= parameter should specify either a list node (ie. a =ul= or =ol= tag) or the immediate parent node of a list node. List type (unordered or ordered) does not affect the data in the `Tree Data Object` returned by this method, and a hierarchical list can mix different types of lists.
+							The =nodeSTRorOBJ= parameter should specify either a list node (ie. a =ul= or =ol= tag) or the immediate parent node of a list node. List type (unordered or ordered) does not affect the data in the `tree data object` returned by this method, and a hierarchical list can mix different types of lists.
 
 							EXAMPLE
 
@@ -738,7 +738,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.Tree.getTreeFromPage
-							Returns a `Tree Data Object`, generated by analyzing the occurrence of different CSS classes for section headings at different depths of a document.
+							Returns a `tree data object`, generated by analyzing the occurrence of different CSS classes for section headings at different depths of a document.
 
 							SYNTAX
 							.....................................................................................
@@ -767,7 +767,7 @@ Uize.module ({
 									The first element in this array specifies the CSS class name for top level section headings, the second element specifies the CSS class name for subsection headings, the third element specifies the CSS class name for sub-subsection headings, and so on. The =Uize.Node.Tree.getTreeFromPage= method supports documents with an arbitrary number of section levels.
 
 								initialExpandedDepthINT
-									An integer, specifying the depth to which the generated `Tree Data Object` should be expanded.
+									An integer, specifying the depth to which the generated `tree data object` should be expanded.
 
 									If you wish all levels of the tree to be expanded, then you can specify the value =Infinity= for the =initialExpandedDepthINT= parameter. If you wish all levels to be collapsed, then you can specify any value less than =1=.
 

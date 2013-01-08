@@ -282,7 +282,7 @@ Documentation System
 				encodedColor = colorOBJ.to (encodingSTR);
 				.........................................
 
-				The =encodingSTR= parameter supports a wide variety of different `Color Encodings`.
+				The =encodingSTR= parameter supports a wide variety of different `color encodings`.
 
 				EXAMPLES
 				.............................................................................

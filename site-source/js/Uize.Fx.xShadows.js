@@ -123,7 +123,7 @@
 
 			In the above example, four shadows are being used to produce a strong, white stroke effect around some text. This is done by offsetting the first shadow one pixel left, offsetting the second shadow one pixel right, offsetting the third shadow one pixel up, and offsetting the fourth shadow one pixel down. All the shadows are white, and their blur radius is one pixel to produce a subtle anti-aliased edge.
 
-			The =Uize.Fx.xShadows= module supports fading values for all shadow properties of an arbitrary number of shadows. You can produce some pretty sophisticated animation effects when you involve multiple shadows for the same node, but be aware of `Performance Considerations` when doing this.
+			The =Uize.Fx.xShadows= module supports fading values for all shadow properties of an arbitrary number of shadows. You can produce some pretty sophisticated animation effects when you involve multiple shadows for the same node, but be aware of `performance considerations` when doing this.
 
 			Only One Box Shadow Per Node
 				While the shadow parsing code can technically support an arbitrary number of box shadows per =boxShadow= value, as with text shadows, the browsers that support box shadow only support a single shadow per DOM node.
@@ -238,7 +238,7 @@
 					- unlike the spatial shadow properties, color can be specified in any format supported by the =Uize.Color= module, and color will always be resolved to the =sRGB= color space.
 
 			Always Specify Units When Not Using px
-				When no unit is specified for a spatial property, its unit defaults to "px", so the `Use All the Same Units For Start and End Values` rule applies in this case as well.
+				When no unit is specified for a spatial property, its unit defaults to "px", so the rule to `use all the same units for start and end values` applies in this case as well.
 
 				So, for instance, you should not omit the unit for a spatial property of a shadow in the start value if the unit specified for the corresponding property of the corresponding shadow in the end value is not "px". Consider the following example...
 
@@ -326,7 +326,7 @@
 				Now we have four shadows for the start value as well as the end value.
 
 			Shadows Must Have Same Properties Specified
-				While the =Uize.Fx.xShadows= module supports `Flexible Arrangement of Shadow Properties`, with some properties being optional and having defaulting behavior, whatever properties are specified for a shadow in the start value, those same properties should all be specified for the corresponding shadow in the end value.
+				While the =Uize.Fx.xShadows= module supports `flexible arrangement of shadow properties`, with some properties being optional and having defaulting behavior, whatever properties are specified for a shadow in the start value, those same properties should all be specified for the corresponding shadow in the end value.
 
 				This is best illustrated with an example...
 
@@ -348,7 +348,7 @@
 				);
 				................................................................
 
-				In the above example, the problem is with the way the properties of the first shadow are specified in the start and end values. While the optional blur radius property does default to =0= when not specified, if you specify it in a shadow in the start value, then you must specify it in the corresponding shadow in the end value. Looking at the second shadow, you'll notice that the order of the properties is different between the start and end values. This is fine, because the =Uize.Fx.xShadows= module supports `Flexible Arrangement of Shadow Properties`, as long as all the same properties are present for any given shadow in both the start and end values. Looking at the third shadow, you'll notice that the blur radius is not specified in either the start value or the end value. This is fine as well, since it will default to =0=.
+				In the above example, the problem is with the way the properties of the first shadow are specified in the start and end values. While the optional blur radius property does default to =0= when not specified, if you specify it in a shadow in the start value, then you must specify it in the corresponding shadow in the end value. Looking at the second shadow, you'll notice that the order of the properties is different between the start and end values. This is fine, because the =Uize.Fx.xShadows= module supports `flexible arrangement of shadow properties`, as long as all the same properties are present for any given shadow in both the start and end values. Looking at the third shadow, you'll notice that the blur radius is not specified in either the start value or the end value. This is fine as well, since it will default to =0=.
 
 				CORRECT
 				................................................................

@@ -27,7 +27,7 @@
 			The =Uize.Widget.Collection= class implements a widget for managing a collection of items, with support for managing selected state of items (including non-contiguous selection, range selection, and controls for selecting all, selecting none, and removing selected items), and methods by which application code can manipulate the collection.
 
 			Collection Item Widget Naming
-				Collection item widgets that are added to an instance of the =Uize.Widget.Collection= class as child widgets are named using one of two available schemes: `Explicit Naming of Collection Item Widgets`, and `Automatic Naming of Collection Item Widgets`.
+				Collection item widgets that are added to an instance of the =Uize.Widget.Collection= class as child widgets are named using one of two available schemes: `explicit naming of collection item widgets`, and `automatic naming of collection item widgets`.
 
 				Explicit Naming of Collection Item Widgets
 					When a collection item widget is added as a child widget of the collection, the element out of the =items= array that corresponds to the collection item being added is supplied as the value of the collection item widget's =properties= state property.
@@ -86,7 +86,7 @@
 					);
 					.................................................
 
-					In the above example, the newly created collection widget will have two collection item child widgets: one named ='photoItem0'=, and the other named ='photoItem1'=. This is because the =itemPropertyForItemWidgetName= state property is set to =null=, thereby defeating the `Explicit Naming of Collection Item Widgets`, and because the =itemWidgetNamePrefix= state property is set to ='photoItem'=. The uniqifier value starts at =0=, and is incremented for each item added to the collection. This results in the collection item widget names ='photoItem0'= and ='photoItem1'=.
+					In the above example, the newly created collection widget will have two collection item child widgets: one named ='photoItem0'=, and the other named ='photoItem1'=. This is because the =itemPropertyForItemWidgetName= state property is set to =null=, thereby defeating the `explicit naming of collection item widgets`, and because the =itemWidgetNamePrefix= state property is set to ='photoItem'=. The uniqifier value starts at =0=, and is incremented for each item added to the collection. This results in the collection item widget names ='photoItem0'= and ='photoItem1'=.
 */
 
 Uize.module ({

@@ -306,7 +306,7 @@ Paragraphs
 	This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2. This is paragraph 2.
 
 Lists
-	The SimpleDoc format provides various means for formatting standard `Bullet Lists`, `Custom Unordered Lists`, and `Ordered Lists` labeled using either numerals or letters.
+	The SimpleDoc format provides various means for formatting standard `bullet lists`, `custom unordered lists`, and `ordered lists` labeled using either numerals or letters.
 
 	Bullet Lists
 		A bullet list is a series of peer lines that are all started with the same bullet list character, followed by a space.
@@ -608,7 +608,7 @@ Lists
 				[a] ordered list item 3
 
 Dividers
-	SimpleDoc provides support for two types of horizontal divider lines: a `Thin Horizontal Divider`, and a `Thick Horizontal Divider`.
+	SimpleDoc provides support for two types of horizontal divider lines: a `thin horizontal divider`, and a `thick horizontal divider`.
 
 	Thin Horizontal Divider
 		A thin horizontal divider is denoted by a line containing at least three hyphen characters (dashes), and only hyphen characters.
@@ -733,7 +733,7 @@ Inline Formatting
 		+] NOT A NOTE HEADING
 
 	Non-formatted Areas
-		While paragraphs in a SimpleDoc document can contain `Inline Formatting`, there are a number of places where formatting is imposed and inline formatting is not possible.
+		While paragraphs in a SimpleDoc document can contain `inline formatting`, there are a number of places where formatting is imposed and inline formatting is not possible.
 
 		Section Headings
 			Segments of a section heading cannot be bolded, italicized, formatted as inline code, or contain any other inline formatting.
@@ -898,7 +898,7 @@ Links
 			Untitled Section Links
 				A link to a section where the linked text is identical to the section's heading can be achieved by using the square brackets syntax and simply not specifying the second pair of nested square brackets.
 
-				This syntax produces the same result as and is merely an alternative to `Section Links Using Backticks`.
+				This syntax produces the same result as and is merely an alternative to `section links using backticks`.
 
 				SOURCE
 				.......................................................
@@ -1297,7 +1297,7 @@ Object Blocks
 			..............................................................
 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-			In the above example, the line "<< HTML >>" is the `object block type declaration`, which in this case declares the block to be an `HTML Object Block`.
+			In the above example, the line "<< HTML >>" is the `object block type declaration`, which in this case declares the block to be an `HTML object block`.
 
 			Rules for the Object Block Type Declaration
 				The following rules apply to the `object block type declaration` (which are discussed in further detail in the sections below)...
@@ -1472,7 +1472,7 @@ Object Blocks
 				- Any properties specified in the object block data that are *not* supported by the type of object block being used (including properties that are specified using the incorrect case) will simply be ignored.
 
 	Built-in Object Blocks
-		The SimpleDoc HTML document generator supports a number of built-in object blocks, including the `HTML Object Block`, the `samplecode Object Block`, and the `table Object Block`.
+		The SimpleDoc HTML document generator supports a number of built-in object blocks, including the `HTML object block`, the `samplecode object block`, and the `table object block`.
 
 		HTML Object Block
 			The HTML Object Block is one of the `built-in object blocks` and allows the insertion of arbitrary chunks of HTML into the HTML document generated from a SimpleDoc document.
@@ -2019,7 +2019,7 @@ Sample Code Blocks
 		In this case, the multi-line value of the =code= property is indented, and the `rules for object block enclosing lines` require that the opener and closer enclosing lines for a block be at the same indent level. This means that none of the lines in the multi-line value of the =code= property can confuse the parser, and so this is the fail-safe and truly robust way to include sample code without having to worry about enclosing line character conflicts. Of course, such conflicts are not generally a practical concern, and the formal `samplecode object block` is a little less elegant / simple, so it is not used as often.
 
 Comments
-	Portions of SimpleDoc documents can be commented out in two key ways: `Section Commenting`, and `Region Commenting`.
+	Portions of SimpleDoc documents can be commented out in two key ways: `section commenting`, and `region commenting`.
 
 	Section Commenting
 		An entire section - along with all its contents and child sections - can be commented out simply by prefixing the section heading with =###= (three hash / pound characters).
@@ -2179,7 +2179,7 @@ Comments
 			In the above example, Not all of the content of the section "Rich Internet Applications" would be commented out, because the first "#<" opener will be matched to the first "#>" closer, leaving some crud until the second "#>" closer.
 
 	Nested Comments
-		Comments using both the `Section Commenting` and the `Region Commenting` syntax can be nested together in various ways.
+		Comments using both the `section commenting` and the `region commenting` syntax can be nested together in various ways.
 
 		Nesting Section Comments
 			For any section that is commented out, any subsections can also be commented out, and the contents of the section may also contain region comments.
@@ -2197,7 +2197,7 @@ Comments
 			.............................................
 
 		Nesting Region Comments
-			For any region that is commented out, any portion of that region can also be commented out using `Region Commenting` (provided that the subregion uses different opener and closer markers), and any sections contained inside the region can be commented out using `Section Commenting`.
+			For any region that is commented out, any portion of that region can also be commented out using `region commenting` (provided that the subregion uses different opener and closer markers), and any sections contained inside the region can be commented out using `section commenting`.
 
 			EXAMPLE
 			.............................................

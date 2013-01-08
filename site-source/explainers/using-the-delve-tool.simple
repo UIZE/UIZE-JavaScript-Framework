@@ -275,7 +275,7 @@ The Left Pane
 	Tree List Actions
 		A number of tree list actions are provided, in the form of links that are located just underneath the `tree list query selector`.
 
-		The Tree List Actions are divided into two main types: `Expand / Collapse Actions` and `Report Actions`.
+		The tree list actions are divided into two main types: `expand / collapse actions` and `report actions`.
 
 		Expand / Collapse Actions
 			Various expand / collapse `tree list actions` are offered as a convenience to make it easier to control the expanded depth of the entire hierarchical contents of the `tree list query results`.

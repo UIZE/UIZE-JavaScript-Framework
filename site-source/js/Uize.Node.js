@@ -181,7 +181,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.display
-							Displays or hides the specified `Node Blob`, using the "display" CSS property.
+							Displays or hides the specified `node blob`, using the "display" CSS property.
 
 							SYNTAX
 							................................................
@@ -199,7 +199,7 @@ Uize.module ({
 
 							NOTES
 							- compare to the =Uize.Node.show= static method
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
 			};
 
@@ -232,7 +232,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.doForAll
-							Iterates through the specified `Node Blob`, calling the specified function for each node and passing the node reference as a parameter.
+							Iterates through the specified `node blob`, calling the specified function for each node and passing the node reference as a parameter.
 
 							SYNTAX
 							.........................................
@@ -1098,7 +1098,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.injectHtml
-							Injects the specified HTML into the specified `Node Blob`.
+							Injects the specified HTML into the specified `node blob`.
 
 							The action of this method is different to simply setting the =innerHTML= property in that it does not replace the existing contents, but instead adds to it.
 
@@ -1125,7 +1125,7 @@ Uize.module ({
 								- ='outer replace'= - HTML will replace the node itself (equivalent to IE's outerHTML replacement)
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 							- compare to the =Uize.Node.setInnerHtml= static method
 				*/
 			};
@@ -1181,7 +1181,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.remove
-							Removes the specified `Node Blob` from the DOM.
+							Removes the specified `node blob` from the DOM.
 
 							SYNTAX
 							............................
@@ -1190,7 +1190,7 @@ Uize.module ({
 
 							NOTES
 							- if other references to nodes being removed are still being maintained, those nodes will not be freed from memory until all those other references are nulled
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
 			};
 
@@ -1200,7 +1200,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setClipRect
-							Serializes the specified clip parameters into a string and sets the value of the "clip" CSS property for the specified `Node Blob`.
+							Serializes the specified clip parameters into a string and sets the value of the "clip" CSS property for the specified `node blob`.
 
 							SYNTAX
 							...................................................................
@@ -1208,7 +1208,7 @@ Uize.module ({
 							...................................................................
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
 			};
 
@@ -1218,7 +1218,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setCoords
-							Sets the left, top, width, and height coordinates for the specified `Node Blob`.
+							Sets the left, top, width, and height coordinates for the specified `node blob`.
 
 							SYNTAX
 							................................................
@@ -1282,7 +1282,7 @@ Uize.module ({
 							In the above example, =sliderL=, =sliderT=, =sliderW=, and =sliderH= are instances of the =Uize.Widget.Bar.Slider= class.
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 							- see also the =Uize.Node.getCoords= static method
 				*/
 			};
@@ -1305,7 +1305,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.centerInWindow
-							Positions the specified absolutely positioned node (or `Node Blob`) to be centered in the window.
+							Positions the specified absolutely positioned node (or `node blob`) to be centered in the window.
 
 							SYNTAX
 							....................................
@@ -1315,7 +1315,7 @@ Uize.module ({
 							This method can be useful for positioning dialogs, loading indicator overlays, splashscreens, etc.
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 							- nodes centered using this method should be absolutely positioned and should not be set to =display:none= at the time of being centered
 				*/
 			};
@@ -1404,14 +1404,14 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setAbsPos
-							Positions the specified absolutely positioned node (or `Node Blob`) to be adjacent to the specified absolute position coordinates.
+							Positions the specified absolutely positioned node (or `node blob`) to be adjacent to the specified absolute position coordinates.
 
 							SYNTAX
 							.............................................................
 							Uize.Node.setAbsPos (nodeBLOB,absPosOBJ,coordMarginINTorOBJ);
 							.............................................................
 
-							This method is useful for displaying an absolutely positioned node adjacent to absolute position coordinates, in such a way that the node being positioned is kept within view in the browser window. This comes in handy, for example, when positioning tooltips that track the mouse cursor position. If the default positioning of the node causes some part of it to fall out of view in a given axis, then its position will be flipped to the other side of the absolute position coordinate for that axis, according to the `Flipping Behavior` described below.
+							This method is useful for displaying an absolutely positioned node adjacent to absolute position coordinates, in such a way that the node being positioned is kept within view in the browser window. This comes in handy, for example, when positioning tooltips that track the mouse cursor position. If the default positioning of the node causes some part of it to fall out of view in a given axis, then its position will be flipped to the other side of the absolute position coordinate for that axis, according to the `flipping behavior` described below.
 
 							The absPosOBJ Parameter
 								The =absPosOBJ= parameter specifies the center of the region, adjacent to which the node should be positioned.
@@ -1484,7 +1484,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setAbsPosAdjacentTo
-							Positions the specified absolutely positioned node (or `Node Blob`) to be adjacent to the specified reference node.
+							Positions the specified absolutely positioned node (or `node blob`) to be adjacent to the specified reference node.
 
 							SYNTAX
 							.......................................................................
@@ -1525,7 +1525,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setInnerHtml
-							Sets the value of the =innerHTML= property of the specified `Node Blob`.
+							Sets the value of the =innerHTML= property of the specified `node blob`.
 
 							SYNTAX
 							...............................................
@@ -1535,7 +1535,7 @@ Uize.module ({
 							The =htmlSTRorOBJ= parameter can be a string containing the HTML you wish to inject, or it can be any object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property).
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 							- compare to the =Uize.Node.injectHtml= static method
 				*/
 			};
@@ -1547,7 +1547,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setOpacity
-							Sets the opacity (and, therefore, the transparency) of the specified `Node Blob`.
+							Sets the opacity (and, therefore, the transparency) of the specified `node blob`.
 
 							SYNTAX
 							..................................................
@@ -1557,7 +1557,7 @@ Uize.module ({
 							Varying degrees of opacity are achieved in different browsers using slightly different techniques. This method acts as an abstraction so you can set opacity for a node in a standard way. =opacityFLOAT= should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity.
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 							- the =opacityFLOATorOBJ= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
 				*/
 			};
@@ -1567,7 +1567,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setProperties
-							Sets values for an arbitrary set of properties for the specified `Node Blob`.
+							Sets values for an arbitrary set of properties for the specified `node blob`.
 
 							SYNTAX
 							.................................................
@@ -1589,7 +1589,7 @@ Uize.module ({
 							...........................................................
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
 			};
 
@@ -1626,7 +1626,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setStyle
-							Sets values for an arbitrary set of style properties for the specified `Node Blob`.
+							Sets values for an arbitrary set of style properties for the specified `node blob`.
 
 							SYNTAX
 							.................................................
@@ -1688,10 +1688,10 @@ Uize.module ({
 								Uize.Node.setStyle ('myNodeId',{width:myWidthSlider});
 								......................................................
 
-								This feature of the =Uize.Node.setStyle= method is provided as a convenience, so that instances of =Uize.Class= subclasses that are value selectors and that implement the =value= state property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for `Specifying Number Values`.
+								This feature of the =Uize.Node.setStyle= method is provided as a convenience, so that instances of =Uize.Class= subclasses that are value selectors and that implement the =value= state property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for `specifying number values`.
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 							- see also the companion =Uize.Node.getStyle= static method
 				*/
 			};
@@ -1745,7 +1745,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.setValue
-							Sets the value of the specified `Node Blob`.
+							Sets the value of the specified `node blob`.
 
 							SYNTAX
 							.......................................................
@@ -1767,7 +1767,7 @@ Uize.module ({
 							);
 							....................................................................
 
-							In the above example, an array `Node Blob` is being supplied to the =Uize.Node.setValue= method. Each element of the array is itself an array, being the result of a call to the =Uize.Node.find= method. Essentially, this example is finding all the =textarea= and text =input= tags within the form of the id =myFormId= and using the =Uize.Node.setValue= method to set their values to an empty string, thereby clearing all the form's text fields.
+							In the above example, an array `node blob` is being supplied to the =Uize.Node.setValue= method. Each element of the array is itself an array, being the result of a call to the =Uize.Node.find= method. Essentially, this example is finding all the =textarea= and text =input= tags within the form of the id =myFormId= and using the =Uize.Node.setValue= method to set their values to an empty string, thereby clearing all the form's text fields.
 
 							Text Fields
 								For =textarea= tags and =input= tags of type =text= and =hidden=, the node's =value= property is set to the value of the =valueSTRorNUMorBOOLorOBJ= parameter.
@@ -1807,7 +1807,7 @@ Uize.module ({
 									There is no option ='Oil'= in our list of renewable energy technologies, so this value would simply be ignored, and only the ='Solar'= and ='Wind'= options would become selected.
 
 								Duplicate Values Are Allowed
-									Duplicate entries in the selected options list are permitted, a behavior which comes in handy when performing `Additive Selection`.
+									Duplicate entries in the selected options list are permitted, a behavior which comes in handy when performing `additive selection`.
 
 									In the following example, both statements would have the same outcome...
 
@@ -1873,7 +1873,7 @@ Uize.module ({
 
 									In the above example, a node with the =id= of ='renewableEnergyList'= is a multiple select =select= tag that lets the user choose any number of renewable energy technologies.
 
-									Executing the statement in the example would add the ='Solar'= and ='Wind'= options to the selected options. To avoid blowing away any currently selected options, the =Uize.Node.getValue= method is used to get the currently selected options. The value returned from this method is an array, so we can use the =concat= method of the =Array= object to "merge in" the ='Solar'= and ='Wind'= options. The resulting array is then supplied to the =Uize.Node.setValue= method to set the selected options. It doesn't matter if either - or both - of the ='Solar'= and ='Wind'= options were already selected, since `Duplicate Values Are Allowed` by the =Uize.Node.setValue= method.
+									Executing the statement in the example would add the ='Solar'= and ='Wind'= options to the selected options. To avoid blowing away any currently selected options, the =Uize.Node.getValue= method is used to get the currently selected options. The value returned from this method is an array, so we can use the =concat= method of the =Array= object to "merge in" the ='Solar'= and ='Wind'= options. The resulting array is then supplied to the =Uize.Node.setValue= method to set the selected options. It doesn't matter if either - or both - of the ='Solar'= and ='Wind'= options were already selected, since `duplicate values are allowed` by the =Uize.Node.setValue= method.
 
 							Checkboxes
 								For checkboxes (=input= tags of type =checkbox=), the =checked= property of the node is set to =true= or =false= dependending on whether or not the value of the =valueSTRorNUMorBOOLorOBJ= parameter is equivalent to =true= (ie. if it has the boolean value =true= or the string value ='true'=).
@@ -1901,7 +1901,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.show
-							Lets you show or hide the specified `Node Blob`.
+							Lets you show or hide the specified `node blob`.
 
 							SYNTAX
 							.......................................
@@ -1911,7 +1911,7 @@ Uize.module ({
 							This method operates on the =visibility= style property of nodes. When =true= is specified for the =mustShowBOOL= parameter, then the =visibility= property is set to ="inherit"=. When =false= is specified, the =visibility= property is set to ="hidden"=.
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
 			};
 
@@ -1928,7 +1928,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.showClickable
-							Sets the value of the "cursor" style property of the specified `Node Blob` so that the node(s) appear either clickable or not, depending on the specified boolean value.
+							Sets the value of the "cursor" style property of the specified `node blob` so that the node(s) appear either clickable or not, depending on the specified boolean value.
 
 							This method is useful for DOM nodes that need to be wired up with click actions by JavaScript code, but that don't have CSS selectors from the document applying the appropriate cursor style to them.
 
@@ -1947,7 +1947,7 @@ Uize.module ({
 							When no =clickableANYTYPE= parameter is specified (or when its value is =undefined=), the node(s) will be set to appear clickable.
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
 			};
 
@@ -1974,7 +1974,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.unwire
-							Lets you unwire one or more event handlers for the specified node or `Node Blob`.
+							Lets you unwire one or more event handlers for the specified node or `node blob`.
 
 							SYNTAX
 							..........................................................
@@ -1999,7 +1999,7 @@ Uize.module ({
 							Uize.Node.unwire (nodeBLOB,eventNameSTR);
 							.........................................
 
-							When no =eventHandlerFUNC= parameter is specified, then all handlers wired for the specified event of the specified node or `Node Blob` will be unwired. This applies only to handlers wired using the =Uize.Node= module, and belonging to the `Global Wirings Owner`.
+							When no =eventHandlerFUNC= parameter is specified, then all handlers wired for the specified event of the specified node or `node blob` will be unwired. This applies only to handlers wired using the =Uize.Node= module, and belonging to the `global wirings owner`.
 
 							EXAMPLE
 							....................................
@@ -2056,7 +2056,7 @@ Uize.module ({
 							Uize.Node.unwire (nodeBLOB);
 							............................
 
-							When no =eventNameSTR= or =eventHandlerFUNC= parameters are specified, then all handlers wired for all events of the specified node or `Node Blob` will be unwired. This applies only to handlers wired using the =Uize.Node= module, and belonging to the `Global Wirings Owner`.
+							When no =eventNameSTR= or =eventHandlerFUNC= parameters are specified, then all handlers wired for all events of the specified node or `node blob` will be unwired. This applies only to handlers wired using the =Uize.Node= module, and belonging to the `global wirings owner`.
 
 							EXAMPLE
 							............................
@@ -2358,7 +2358,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.wire
-							Wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified node or `Node Blob`.
+							Wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified node or `node blob`.
 
 							SYNTAX
 							........................................................
@@ -2442,7 +2442,7 @@ Uize.module ({
 								..............................................................
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 							- see also the companion =Uize.Node.unwire= static method
 				*/
 			};

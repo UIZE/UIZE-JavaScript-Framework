@@ -141,7 +141,7 @@ Uize.module ({
 							Instead of using the =display= property, this method sets values for both the =position= and =visibility= properties. When a value of =true= is specified for the =mustShowBOOL= parameter, then the =position= property is set to =relative= and the =visibility= property is set to =inherit=. And when =false= is specified for =mustShowBOOL=, then =position= is set to =absolute= and =visibility= is set to =hidden=.
 
 							NOTES
-							- this method can operate on multiple nodes at a time. For more details, see the section on `Node Blob`
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
 			};
 

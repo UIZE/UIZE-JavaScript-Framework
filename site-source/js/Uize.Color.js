@@ -37,7 +37,7 @@
 			A Framework for Defining Color Encodings
 				Colors can be represented using different formats and color models. In UIZE, the combination of a color space and format is called a color encoding.
 
-				The =Uize.Color= object supports a wide variety of built-in `Color Encodings`. Multiple encodings often exist for the same color space. For example, the =#hex= (eg. =#ff00ff=), =RGB string= (eg. =rgb(255,0,255)=), and =name= (eg. =fuchsia=) encodings are all encodings for the =sRGB= color space.
+				The =Uize.Color= object supports a wide variety of built-in `color encodings`. Multiple encodings often exist for the same color space. For example, the =#hex= (eg. =#ff00ff=), =RGB string= (eg. =rgb(255,0,255)=), and =name= (eg. =fuchsia=) encodings are all encodings for the =sRGB= color space.
 
 				............................................................
 				<< table >>
@@ -66,7 +66,7 @@
 				Further utilities for dealing with colors are available in extension module, such as the =Uize.Color.xUtil= module, which provides methods for blending between colors, mixing multiple colors together, testing for color equivalence, etc.
 
 			A Framework for Defining Named Colors
-				`Named Colors` can be defined, and these colors can then be used wherever colors can be specified using the methods of the =Uize.Color= object.
+				`Named colors` can be defined, and these colors can then be used wherever colors can be specified using the methods of the =Uize.Color= object.
 
 				And because the =Uize.Color= module is used by other modules, such as the =Uize.Fx= module, it is possible to use color names when specifying the values of color CSS style properties for fade effects. The SVG 1.0 and CSS 3 specifications define over a hundred additional named colors, and these become available when using the =Uize.Color.xSvgColors= extension module. You can also define your own custom named colors (see the section `Defining New Named Colors`).
 
@@ -179,7 +179,7 @@ Uize.module ({
 							colorOBJ = Uize.Color (colorANYTYPE);
 							.....................................
 
-							Initial color value can be specified in the =colorANYTYPE= parameter using any of the many `Color Encodings` supported by the =Uize.Color= module. The following examples illustrate this variety and flexibility...
+							Initial color value can be specified in the =colorANYTYPE= parameter using any of the many `color encodings` supported by the =Uize.Color= module. The following examples illustrate this variety and flexibility...
 
 							EXAMPLES
 							..................................................................
@@ -219,7 +219,7 @@ Uize.module ({
 							........................................
 
 							NOTES
-							- in addition to using the constructor, there are two other methods for `Creating Instances` of the =Uize.Color= object
+							- in addition to using the constructor, there are two other methods for `creating instances` of the =Uize.Color= object
 
 						Instance Properties
 							encoding
@@ -234,7 +234,7 @@ Uize.module ({
 							tuple
 								An array, containing typically three, but up to four floating point number elements, representing the values for the color components of the instance.
 
-								This property can be accessed by code that wishes to perform color computations, or by code that wishes to encode a color value in a custom manner - not using any of the `Color Encodings` supported by the =Uize.Color= object. This property can also be useful when implementing extension modules.
+								This property can be accessed by code that wishes to perform color computations, or by code that wishes to encode a color value in a custom manner - not using any of the `color encodings` supported by the =Uize.Color= object. This property can also be useful when implementing extension modules.
 
 								NOTES
 								- for three component color spaces, the =tuple= array may still contain four elements, where the value of the fourth element is =NaN= or =undefined=
@@ -301,7 +301,7 @@ Uize.module ({
 							colorOBJ = colorOBJ.from (colorANYTYPE);
 							........................................
 
-							The color specified by the =colorANYTYPE= parameter can be specified using any of the many `Color Encodings` supported by the =Uize.Color= module. The following examples illustrate this variety and flexibility...
+							The color specified by the =colorANYTYPE= parameter can be specified using any of the many `color encodings` supported by the =Uize.Color= module. The following examples illustrate this variety and flexibility...
 
 							EXAMPLES
 							....................................................................
@@ -431,7 +431,7 @@ Uize.module ({
 							encodedColor = colorOBJ.to (encodingSTR);
 							.........................................
 
-							The =encodingSTR= parameter supports a wide variety of different `Color Encodings`.
+							The =encodingSTR= parameter supports a wide variety of different `color encodings`.
 
 							EXAMPLES
 							.............................................................................
@@ -478,7 +478,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Color.defineColors
-							Lets you define an arbitrary number of custom `Named Colors`, which will then be accessible to code that uses the =Uize.Color= module.
+							Lets you define an arbitrary number of custom `named colors`, which will then be accessible to code that uses the =Uize.Color= module.
 
 							SYNTAX
 							.......................................
@@ -507,7 +507,7 @@ Uize.module ({
 							colorOBJ = Uize.Color.from (colorANYTYPE);
 							..........................................
 
-							The =Uize.Color.from= method is a factory method, is essentially equivalent to using the =Uize.Color= object's `Constructor`, and is mainly provided to have parity with the =Uize.Color.to= static method.
+							The =Uize.Color.from= method is a factory method, is essentially equivalent to using the =Uize.Color= object's `constructor`, and is mainly provided to have parity with the =Uize.Color.to= static method.
 
 							EXAMPLE
 							...........................
@@ -517,7 +517,7 @@ Uize.module ({
 
 							The above two statements would both return new instances of the =Uize.Color= object initialized to the color "fuchsia" (=#ff00ff=).
 
-							The color specified by the =colorANYTYPE= parameter can be specified using any of the many `Color Encodings` supported by the =Uize.Color= module. The following examples illustrate this variety and flexibility...
+							The color specified by the =colorANYTYPE= parameter can be specified using any of the many `color encodings` supported by the =Uize.Color= module. The following examples illustrate this variety and flexibility...
 
 							EXAMPLES
 							.......................................................................
@@ -577,7 +577,7 @@ Uize.module ({
 							clonedTupleARRAY = Uize.Color.cloneTuple (tupleARRAY);
 							......................................................
 
-							This method is intended primary for use in the implementation of `Color Encodings`.
+							This method is intended primary for use in the implementation of `color encodings`.
 
 							NOTES
 							- see the related =Uize.Color.setTuple=, =Uize.Color.setTupleFromArray=, and =Uize.Color.setTupleFromString= static methods
@@ -602,7 +602,7 @@ Uize.module ({
 							);
 							..................................................................
 
-							This method is intended primary for use in the implementation of `Color Encodings`.
+							This method is intended primary for use in the implementation of `color encodings`.
 
 							NOTES
 							- see the related =Uize.Color.cloneTuple=, =Uize.Color.setTupleFromArray=, and =Uize.Color.setTupleFromString= static methods
@@ -621,7 +621,7 @@ Uize.module ({
 							Uize.Color.setTupleFromArray (sourceARRAY,tupleARRAY);
 							......................................................
 
-							This method is intended primary for use in the implementation of `Color Encodings`.
+							This method is intended primary for use in the implementation of `color encodings`.
 
 							NOTES
 							- see the related =Uize.Color.cloneTuple=, =Uize.Color.setTuple=, and =Uize.Color.setTupleFromString= static methods
@@ -647,7 +647,7 @@ Uize.module ({
 							Uize.Color.setTupleFromString (sourceSTR,tupleARRAY);
 							.....................................................
 
-							This method is intended primary for use in the implementation of `Color Encodings`.
+							This method is intended primary for use in the implementation of `color encodings`.
 
 							NOTES
 							- see the related =Uize.Color.cloneTuple=, =Uize.Color.setTuple=, and =Uize.Color.setTupleFromArray= static methods
@@ -666,7 +666,7 @@ Uize.module ({
 							encodedColorANYTYPE = Uize.Color.to (colorToEncodeANYTYPE,encodingSTR);
 							.......................................................................
 
-							This method's return value can be of any type, and is determined by the encoding specified in the =encodingSTR= parameter, which supports a wide variety of different `Color Encodings`. Moreover, the color to be encoded, as specified by the =colorToEncodeANYTYPE= parameter, can be specified in any of the supported encodings.
+							This method's return value can be of any type, and is determined by the encoding specified in the =encodingSTR= parameter, which supports a wide variety of different `color encodings`. Moreover, the color to be encoded, as specified by the =colorToEncodeANYTYPE= parameter, can be specified in any of the supported encodings.
 
 							VARIATION
 							..........................................................
@@ -687,7 +687,7 @@ Uize.module ({
 							Uize.Color.to ([255,0,255]);              // produces 'ff00ff'
 							..................................................................................
 
-							These are just a few examples to illustrate the versatility of this method. Given the wide variety of different `Color Encodings` supported by the =Uize.Color= module, there are a great many permutations to this method - too numerous to list.
+							These are just a few examples to illustrate the versatility of this method. Given the wide variety of different `color encodings` supported by the =Uize.Color= module, there are a great many permutations to this method - too numerous to list.
 
 							NOTES
 							- see the related =to= instance method
@@ -700,7 +700,7 @@ Uize.module ({
 					/*?
 						Static Properties
 							Uize.Color.colorSpaces
-								An object, containing definitions for `Color Spaces` supported by the =Uize.Color= object.
+								An object, containing definitions for `color spaces` supported by the =Uize.Color= object.
 
 								In general, color spaces are not explicitly specified when working with =Uize.Color= instances. Instead, a color space is implied by a given color encoding. Encodings specify their associated color spaces, and the profile that defines a color space is utilized automatically when encoding across color spaces, such as when encoding a color object that was initialized in the =sRGB= color space as =HSL string=, as shown in the following example...
 
@@ -823,7 +823,7 @@ Uize.module ({
 								Implementing color spaces in extension modules avoids burdening the core code with having to support less common / more esoteric color spaces that are not as frequently used. This also allows applications built on the UIZE JavaScript Framework to be better optimized for code size.
 
 							Defining New Color Spaces
-								You can extend the =Uize.Color.colorSpaces= object in order to define new `Color Spaces`.
+								You can extend the =Uize.Color.colorSpaces= object in order to define new `color spaces`.
 
 								This can be done quite easily by setting a new property on the =Uize.Color.colorSpaces= object, as follows...
 
@@ -849,7 +849,7 @@ Uize.module ({
 								}
 								....................................................................
 
-								Typically one will define a new color space and also define new `Color Encodings` to accompany the new color space. The new encodings should specify the name of their associated color space in their =colorSpace= property.
+								Typically one will define a new color space and also define new `color encodings` to accompany the new color space. The new encodings should specify the name of their associated color space in their =colorSpace= property.
 
 								The object that describes a color space is called a color space profile, and should have the following properties...
 
@@ -859,7 +859,7 @@ Uize.module ({
 
 								- =tuple (profile)= - This is an object that provides a profile for the tuple of color components of the color space - the "dimensions" of the color space, if you will. The tuple profile is an array of objects, one for each component of the color space, where each object is a profile for a component and should contain "name", "min", and "max" properties. The "name" property for a component profile is self-explanatory, and the "min" and "max" properties define the value range for the component.
 
-								The =fromHsl= and =toHsl= conversion functions that you provide as part of a color space profile are used for converting a tuple back and forth between your color space and the =HSL= color space. The =HSL= color space is essentially used as a canonical color space - a kind of "conduit" through which colors are converted in order to convert across `Color Spaces`. This avoids having to have an ever increasing number of cross conversion functions for every defined color space to every other. For example, if a =CMYK= color space were defined, then conversion from =sRGB= to =CMYK= would first involve conversion from =sRGB= to =HSL=, and then =HSL= to =CMYK=.
+								The =fromHsl= and =toHsl= conversion functions that you provide as part of a color space profile are used for converting a tuple back and forth between your color space and the =HSL= color space. The =HSL= color space is essentially used as a canonical color space - a kind of "conduit" through which colors are converted in order to convert across `color spaces`. This avoids having to have an ever increasing number of cross conversion functions for every defined color space to every other. For example, if a =CMYK= color space were defined, then conversion from =sRGB= to =CMYK= would first involve conversion from =sRGB= to =HSL=, and then =HSL= to =CMYK=.
 					*/
 				};
 
@@ -1368,7 +1368,7 @@ Uize.module ({
 
 								The object that describes a color encoding is called a color encoding profile, and should have the following properties...
 
-								- =colorSpace= - This is the name of the color space that is associated with the encoding, and should be one of the `Color Spaces` defined in the =Uize.Color.colorSpaces= static property.
+								- =colorSpace= - This is the name of the color space that is associated with the encoding, and should be one of the `color spaces` defined in the =Uize.Color.colorSpaces= static property.
 
 								- =from (decoder function)= - This is a function that should set the values of the elements of the provided tuple array, based upon the provided color value. The function should expect two parameters: 1) the color value, and 2) the tuple. The function should decode (ie. process or parse) the color value as needed in order to set the appropriate values for the components of the color in the provided tuple array. The function does not need to return anything, and anything it returns will be ignored.
 

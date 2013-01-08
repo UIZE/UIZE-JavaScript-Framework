@@ -278,9 +278,9 @@ Uize.module ({
 					/*?
 						State Properties
 							cssClassActive
-								A string, specifying the CSS class name that should be added to the =className= property of the `Root Node` when the instance is selected (ie. the =selected= state property is set to =true=).
+								A string, specifying the CSS class name that should be added to the =className= property of the `root node` when the instance is selected (ie. the =selected= state property is set to =true=).
 
-								For a more in-depth discussion of the interaction between this property and the companion =cssClassOver= property, consult the reference for the `Root Node`.
+								For a more in-depth discussion of the interaction between this property and the companion =cssClassOver= property, consult the reference for the `root node`.
 
 								NOTES
 								- see the companion =cssClassOver= state property
@@ -291,9 +291,9 @@ Uize.module ({
 					/*?
 						State Properties
 							cssClassBase -- DEPRECATED 2011-02-03
-								A string, specifying the base CSS class string that should be set as the =className= property of the `Root Node` when wiring the instance.
+								A string, specifying the base CSS class string that should be set as the =className= property of the `root node` when wiring the instance.
 
-								This state property, now deprecated, was originally used to aid in constructing the =className= property for the `Root Node` to reflect the =selected= and =over= states of the instance.
+								This state property, now deprecated, was originally used to aid in constructing the =className= property for the `root node` to reflect the =selected= and =over= states of the instance.
 
 								NOTES
 								- This state property is deprecated
@@ -331,7 +331,7 @@ Uize.module ({
 							cssClassOver
 								A string, specifying the CSS class name that should be added to the =className= property of the root node when the user is mousing over the instance and it is not already selected (ie. the =over= state property is set to =true= and the =selected= state property is set to =false=).
 
-								For a more in-depth discussion of the interaction between this property and the companion =cssClassActive= property, consult the reference for the `Root Node`.
+								For a more in-depth discussion of the interaction between this property and the companion =cssClassActive= property, consult the reference for the `root node`.
 
 								NOTES
 								- see the companion =cssClassActive= state properties

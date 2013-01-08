@@ -41,12 +41,12 @@
 
 					The scrolly instance creates an instance of the =Uize.Fade= class in order to drive the scroll position fade. This fade instance is accessible through the =fade= instance property, so the properties of the scroll fade can be configured by setting values for the various state properties of this =fade= instance, such as its =curve=, =duration=, and other state properties.
 
-					If the value of the =pageX= or =pageY= state properties are modified in the middle of a scroll fade - either by `Scrolling With Buttons` or by `Scrolling Programmatically` - then the current animation will be stopped and a new animation will be started to fade the scroll position from its current position to the new scroll position.
+					If the value of the =pageX= or =pageY= state properties are modified in the middle of a scroll fade - either by `scrolling with buttons` or by `scrolling programmatically` - then the current animation will be stopped and a new animation will be started to fade the scroll position from its current position to the new scroll position.
 
 			Scrolling With Buttons
 				Instances of the =Uize.Widget.Scrolly= class are equipped with four scroll buttons: =left= and =right= buttons for scrolling horizontally, and =up= and =down= buttons for scrolling vertically.
 
-				Providing markup for the buttons is optional, and one can provide button HTML for only horizontal scrolling, only vertical scrolling, or both horiztonal and vertical scrolling. If one doesn't provide markup for any of the scroll buttons, there is still the option of `Scrolling Programmatically`.
+				Providing markup for the buttons is optional, and one can provide button HTML for only horizontal scrolling, only vertical scrolling, or both horiztonal and vertical scrolling. If one doesn't provide markup for any of the scroll buttons, there is still the option of `scrolling programmatically`.
 
 				Shift-click
 					Clicking the buttons scrolls one page at a time (see `Scrolling in Pages`), but holding down the shift modifier key when clicking on the buttons will scroll all the way to the extremes.
@@ -54,7 +54,7 @@
 					Holding down shift while clicking on the =left= button will scroll to the far left (first page, horizontally), effectively setting =pageX= to =0=. Holding down shift while clicking on the =right= button will scroll to the far right (last page, horizontally), effectively setting =pageX= to the value of =maxPageX=. Holding down shift while clicking on the =up= button will scroll to the top (first page, vertically), effectively setting =pageY= to =0=. Holding down shift while clicking on the =down= button will scroll to the bottom (last page, vertically), effectively setting =pageX= to the value of =maxPageX=.
 
 			Scrolling Programmatically
-				In addition to `Scrolling With Buttons`, it is also possible to programmatically scroll an instance by setting the values of its =pageX= and =pageY= state properties.
+				In addition to `scrolling with buttons`, it is also possible to programmatically scroll an instance by setting the values of its =pageX= and =pageY= state properties.
 
 				EXAMPLES
 				........................................................................................

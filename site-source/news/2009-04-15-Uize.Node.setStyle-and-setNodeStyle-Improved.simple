@@ -50,7 +50,7 @@ Specifying Instance Values
 	Uize.Node.setStyle ('myNodeId',{width:myWidthSlider});
 	......................................................
 
-	This feature of the =Uize.Node.setStyle= method is provided as a convenience, so that instances of =Uize= subclasses that are value selectors and that implement the =value= state property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for `Specifying Number Values`.
+	This feature of the =Uize.Node.setStyle= method is provided as a convenience, so that instances of =Uize= subclasses that are value selectors and that implement the =value= state property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for `specifying number values`.
 
 
 

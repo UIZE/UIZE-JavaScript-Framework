@@ -75,7 +75,7 @@
 				Pasting in Invalid Characters
 					It *is* possible to get invalid characters into the =entry= value using the paste function (typically =Ctrl-v=).
 
-					When the =value= of the =entry= widget is not a well formed number, then the calculator will enter the `Error State`.
+					When the =value= of the =entry= widget is not a well formed number, then the calculator will enter the `error state`.
 
 				Filtering of Keys for Calculator Functions
 					Keys that are mapped to trigger functions of the calculator are filtered from the input, so that pressing one of these keys will trigger the appropriate function without adding the key's character to the input.
@@ -88,7 +88,7 @@
 					An example of this is the =equals= button, which will be disabled if there is no binary operation to complete or compound. In this state, pressing the "&#61;" key will have no effect and the "&#61;" character will, as always, not find its way into the =entry= value. In a different example, the "." (period / decimal point) key will be filtered out and will not allow a decimal point character into the =entry= value when the =point= button is disabled because the =entry= value already contains a decimal point.
 
 			Value Editing
-				Besides the special handling for value entry keys and keys that trigger calculator functions (see `Hot Keys`), and keys that are filtered out as a result of `Invalid Key Filtering`, the =entry= widget's input field permits all other standard operations for a text input.
+				Besides the special handling for value entry keys and keys that trigger calculator functions (see `Hot Keys`), and keys that are filtered out as a result of `invalid key filtering`, the =entry= widget's input field permits all other standard operations for a text input.
 
 				This means that you can select the value (=Ctrl-a= on many systems), copy the value to the clipboard (=Ctrl-c= on many systems), paste a value into the input field (=Ctrl-v= on many systems), select portions of the value (=Shift-Left=, =Shift-Right=, =Shift-Home=, =Shift-End=), delete characters using the delete and backspace keys, and so on.
 
@@ -98,7 +98,7 @@
 			The Negate Operator
 				The =negate= operator is the fail-safe way to enter negative numbers in the calculator widget.
 
-				To use it for enterting a negative number, you can first enter a positive number and then click the =negate= button to turn it negative. The =negate= operator is one of the `Unary Operators`, meaning that it acts on the current =entry= value without triggering `Operation Completion` for pending binary operations. This allows you to perform calculations like three times negative four, as =3 x 4 +/- &#61;=. In this example, the =negate= operator operates on the second operand without triggering completion of the pending multiplication. Similarly, you could perform the calculation, negative three times negative four, as =3 +/- x 4 +/- &#61;=.
+				To use it for enterting a negative number, you can first enter a positive number and then click the =negate= button to turn it negative. The =negate= operator is one of the `unary operators`, meaning that it acts on the current =entry= value without triggering `operation completion` for pending binary operations. This allows you to perform calculations like three times negative four, as =3 x 4 +/- &#61;=. In this example, the =negate= operator operates on the second operand without triggering completion of the pending multiplication. Similarly, you could perform the calculation, negative three times negative four, as =3 +/- x 4 +/- &#61;=.
 
 				Negating Zero
 					The =negate= button can be clicked even when the current =entry= value is =0=.
@@ -108,13 +108,13 @@
 				Negating Doesn't Complete Value Entry
 					Important to note is that using the =negate= operator does not signal completion of value entry.
 
-					So, for example, you could enter the value =-56= with the steps =5 6 +/-= as well as =5 +/- 6=. In the latter case, the negate is performed after the digit =5= is entered, producing the interim value =-5=. Value entry is not completed by the =negate= operator, however, so entering the next digit =6= produces the interim value of =-56=. In this way, the =negate= operator differs from other `Unary Operators`, such as the =squareRoot= function.
+					So, for example, you could enter the value =-56= with the steps =5 6 +/-= as well as =5 +/- 6=. In the latter case, the negate is performed after the digit =5= is entered, producing the interim value =-5=. Value entry is not completed by the =negate= operator, however, so entering the next digit =6= produces the interim value of =-56=. In this way, the =negate= operator differs from other `unary operators`, such as the =squareRoot= function.
 
 			Subtraction as Negation
 				As a convenience, the =subtract= operator - that can also be triggered by pressing the "-" key when the =entry= child widget's input field is focused - can be used in an intuitive way to initiate entry of negative numbers.
 
 				Subtraction After Other Binary Operators
-					Using the =subtract= operator during `Partial Binary Operations` - immediately after setting up a binary operation but before entering the second operand - will turn the next value you enter negative.
+					Using the =subtract= operator during `partial binary operations` - immediately after setting up a binary operation but before entering the second operand - will turn the next value you enter negative.
 
 					For example, performing the calculation =3 x - 4 &#61;= will produce the result =-12=. In this example, because the multiplication operation is already setup when the subtraction operator is invoked, and because the second value for the multiplication operation has not yet been entered, the subtraction operator has the special behavior of initiating entry of a negative number for the second operand. The number will initially display as =-0=, but entering the next non-zero digit will replace the leading "0" character.
 
@@ -124,22 +124,22 @@
 					For example, after clicking the =clear= button, performing the calculation =- 3 x 4 &#61;= will produce the result =-12=. That's because the =entry= value will be =0= after clearing the calculator, so =- 3 x 4 &#61;= is really equivalent to =0 - 3 x 4 &#61;=, where the subtraction is completed first before the multiplication is performed (remember, this is a calculator, so no [[http://en.wikipedia.org/wiki/Order_of_operations][BODMAS]]), and the subtraction of your positive number from zero turns it negative.
 
 			Pasting in Negative Numbers
-				Because the =Uize.Widget.Calculator= class supports `Value Editing` when the =entry= child widget's input field is focused, negative numbers can also be pasted in by first clearing the =entry= value and then using the paste function (=Ctrl-v= on many systems).
+				Because the =Uize.Widget.Calculator= class supports `value editing` when the =entry= child widget's input field is focused, negative numbers can also be pasted in by first clearing the =entry= value and then using the paste function (=Ctrl-v= on many systems).
 
 		Binary Operators
 			Binary operators are operators that require two operands, an example of which is multiplication.
 
-			The =Uize.Widget.Calculator= class supports the binary operators =add=, =subtract=, =multiply=, and =divide=. Additionally, this class implements a `Versatile Percent Function` that behaves as a binary operator in different ways under different conditions. Binary operations are performed by entering a number (=operandA=), then clicking the a binary =operator= button, entering a second number (=operandB=), then clicking the =equals= button to calculate the result.
+			The =Uize.Widget.Calculator= class supports the binary operators =add=, =subtract=, =multiply=, and =divide=. Additionally, this class implements a `versatile percent function` that behaves as a binary operator in different ways under different conditions. Binary operations are performed by entering a number (=operandA=), then clicking the a binary =operator= button, entering a second number (=operandB=), then clicking the =equals= button to calculate the result.
 
 			Partial Binary Operations
 				The =Uize.Widget.Calculator= class supports partial binary operations, just like most regular physical calculators.
 
-				A partial binary operation is where a value has not yet been entered for the second operand before `Operation Completion` occurs. In such cases, the value of the first operand is used as a default for the second operand. So, for example, the calculation =3 x &#61;= is equivalent to the calculation =3 x 3 &#61;=. This behavior becomes compelling when `Compounding Binary Operations` (see also `Compounding Partial Binary Operations`).
+				A partial binary operation is where a value has not yet been entered for the second operand before `operation completion` occurs. In such cases, the value of the first operand is used as a default for the second operand. So, for example, the calculation =3 x &#61;= is equivalent to the calculation =3 x 3 &#61;=. This behavior becomes compelling when `compounding binary operations` (see also `Compounding Partial Binary Operations`).
 
 		Unary Operators
-			Unlike `Binary Operators`, unary operators operate on only a single operand.
+			Unlike `binary operators`, unary operators operate on only a single operand.
 
-			The way that the =Uize.Widget.Calculator= implements unary operators, they operate on the current value of the active operand, without triggering `Operation Completion` for pending binary operations. This is useful, and also the way that most regular physical calculators behave. This allows you to perform calculations like three times the square root of sixteen, as =3 x 16 &radic; &#61;=. In this example, the =squareRoot= operator operates on the second operand without triggering completion of the pending multiplication. This allows you to compound the unary operation. For example, you could calculate three times the fourth root of sixteen, as =3 x 16 &radic; &radic; &#61;=. For more info, see the section `Compounding Unary Operations`.
+			The way that the =Uize.Widget.Calculator= implements unary operators, they operate on the current value of the active operand, without triggering `operation completion` for pending binary operations. This is useful, and also the way that most regular physical calculators behave. This allows you to perform calculations like three times the square root of sixteen, as =3 x 16 &radic; &#61;=. In this example, the =squareRoot= operator operates on the second operand without triggering completion of the pending multiplication. This allows you to compound the unary operation. For example, you could calculate three times the fourth root of sixteen, as =3 x 16 &radic; &radic; &#61;=. For more info, see the section `compounding unary operations`.
 
 			Apart from the =squareRoot= function, another example of a unary operator is the =negate= function, which inverts the sign of the current =entry= value. The =memoryRecall= function could also be considered a kind of unary operator, although it completely replaces the current =entry= value with the current value of the calculator's =memory=.
 
@@ -266,22 +266,22 @@
 					In this calculaton, triggering the =percent= function causes the value of the second operand, =12=, to be divided by =100= to produce the value =.12=. It is then subtracted from the value =1= to produce the value =.88=. After this, the pending operation is switched from subtraction to multiplication, and then the pending multiplication operation is automatically completed. This produces an intuitive way of decreasing a value by a desired percentage. It also sets up the completed operation for convenient compounding (see `Percent Operation Compounding`).
 
 			Percent Operation Compounding
-				When using `Percent With Pending Binary Operations`, the =percent= function automatically completes the operation, and this completed operation is then set up for convenient compounding.
+				When using `percent with pending binary operations`, the =percent= function automatically completes the operation, and this completed operation is then set up for convenient compounding.
 
 				For example, if you wanted to increase the value =100= by =5= percent repeatedly, you could first perform the percent operation =100 + 5 %=. Now, to keep compounding that =5= percent increase, just keep triggering the =equals= function. Every time you do, the current value will be increased again by five percent. For example, the calculation =100 + 5 % &#61; &#61;= will calculate the value =100= increased by five percent, the result increased by five percent, and then that result once again increased by five percent.
 
-				You can do this same thing in the `Percent With Pending Subtraction` case, as well as the `Percent With Pending Multiplication` case.
+				You can do this same thing when there is a `percent with pending subtraction`, as well as when there's a `percent with pending multiplication`.
 
 		Button State Management
 			The =Uize.Widget.Calculator= class implements management of the enabled state for its various button child widgets, so that buttons are appropriately disabled when their functions can't be used because of the state of the calculator widget.
 
-			To see this principle in action, enter the value =2.5= and you will notice how the =point= button becomes disabled. You can't have two decimal points in the same number, so the =point= button is disabled as soon as the =entry= value contains its first decimal point. In a more extreme example, try getting the square root of =-1=. This puts the calculator widget into the `Error State`, in which all buttons - except those that can be used to enter a new value, or that are not affected by the `Error State` (such as the =memoryClear= button) - will be disabled.
+			To see this principle in action, enter the value =2.5= and you will notice how the =point= button becomes disabled. You can't have two decimal points in the same number, so the =point= button is disabled as soon as the =entry= value contains its first decimal point. In a more extreme example, try getting the square root of =-1=. This puts the calculator widget into the `error state`, in which all buttons - except those that can be used to enter a new value, or that are not affected by the `error state` (such as the =memoryClear= button) - will be disabled.
 
 			The following button enabling/disabling rules apply...
 
 			- the =equals= button is disabled when there is no pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
 
-			- all buttons - except those that can be used to enter a new value, or that are not affected by the `Error State` (such as the =memoryClear= button) - will be disabled when the calculator widget is in the `Error State`
+			- all buttons - except those that can be used to enter a new value, or that are not affected by the `error state` (such as the =memoryClear= button) - will be disabled when the calculator widget is in the `error state`
 
 			- the =memoryRecall= and =memoryClear= buttons are disabled when the memory is clear (ie. the value of the =memory= state property is =undefined=), and will be enabled whenever the calculator's memory is storing a value (=memory= is not =undefined=) - regardless of other state of the calculator widget
 
@@ -290,12 +290,12 @@
 			Error State
 				The calculator widget can be put into an error state by performing certain operations, such as trying to obtain the square root of a negative number.
 
-				When in the Error State as a result of performing an operation, the =entry= child widget will be set to the value ='ERROR'=. In the Error State, all buttons that perform operations using the current =entry= value will be disabled. `Number Entry Buttons`, and other buttons that would have the effect of replacing the current =entry= value (such as the =clearEntry=, =clear=, and =memoryRecall= buttons), will not be disabled because of the error state. Similarly, any buttons for which the current =entry= value is not relevant (such as the =memoryClear= button) will also not be disabled because of the error state.
+				When in the Error State as a result of performing an operation, the =entry= child widget will be set to the value ='ERROR'=. In the Error State, all buttons that perform operations using the current =entry= value will be disabled. `Number entry buttons`, and other buttons that would have the effect of replacing the current =entry= value (such as the =clearEntry=, =clear=, and =memoryRecall= buttons), will not be disabled because of the error state. Similarly, any buttons for which the current =entry= value is not relevant (such as the =memoryClear= button) will also not be disabled because of the error state.
 
 				The error state is cleared automatically when next a digit is entered, or when a calculator function is used that would replace the current =entry= value (such as the =clearEntry=, =clear=, and =memoryRecall= functions).
 
 				Invalid Entry Value
-					An invalid =entry= value is equivalent to the `Error State`, and the calculator widget behaves in the same way in this condition.
+					An invalid =entry= value is equivalent to the `error state`, and the calculator widget behaves in the same way in this condition.
 
 					For example, you could replace the contents of the =entry= widget's text input field with the text "HELLO". This constitutes an invalid entry value, and the calculator will behave as if you had tried to obtain the square root of =-1=. The only difference is that it will display "HELLO" instead of "ERROR".
 
@@ -360,9 +360,9 @@ Uize.module ({
 							/*?
 								Child Widgets
 									entry
-										An instance of the =Uize.Widget.TextInput= class, that is used both to display the calculator's current value and also to allow the user to enter numbers and trigger operations by `Using the Regular Keyboard`.
+										An instance of the =Uize.Widget.TextInput= class, that is used both to display the calculator's current value and also to allow the user to enter numbers and trigger operations by `using the regular keyboard`.
 
-										When the calculator is in the `Error State`, the =entry= child widget will be set to the value ='ERROR'=. For more information on using the =entry= text input field to drive the calculator, see the section `Using the Regular Keyboard`.
+										When the calculator is in the `error state`, the =entry= child widget will be set to the value ='ERROR'=. For more information on using the =entry= text input field to drive the calculator, see the section `Using the Regular Keyboard`.
 							*/
 							function _releaseLastButtonClicked () {
 								if (_this._lastButtonClicked) {
@@ -596,7 +596,7 @@ Uize.module ({
 													This button's function can also be triggered by a number of other interactions with the calculator widget (for more info, see the section `Operation Completion`).
 
 													NOTES
-													- this button will be disabled if the calculator is in the `Error State`, or if there is not a pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
+													- this button will be disabled if the calculator is in the `error state`, or if there is not a pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
 										*/
 									);
 
@@ -623,7 +623,7 @@ Uize.module ({
 													NOTES
 													- see the companion =memoryMinus= child widget
 													- see the related =memoryRecall= and =memoryClear= child widgets
-													- this button will be disabled if the calculator is in the `Error State`
+													- this button will be disabled if the calculator is in the `error state`
 										*/
 									);
 									_addChildButton (
@@ -643,7 +643,7 @@ Uize.module ({
 													NOTES
 													- see the companion =memoryPlus= child widget
 													- see the related =memoryRecall= and =memoryClear= child widgets
-													- this button will be disabled if the calculator is in the `Error State`
+													- this button will be disabled if the calculator is in the `error state`
 										*/
 									);
 									_addChildButton (
@@ -724,9 +724,9 @@ Uize.module ({
 													This button's function can also be triggered using the "+" (addition / plus character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
 
 													NOTES
-													- the =add= function is one of the `Binary Operators`
+													- the =add= function is one of the `binary operators`
 													- see the related =divide=, =multiply=, and =subtract= child widgets
-													- this button will be disabled if the calculator is in the `Error State`
+													- this button will be disabled if the calculator is in the `error state`
 
 												divide
 													An instance of the =Uize.Widget.Button= class, that lets the user set up the division binary operation.
@@ -739,9 +739,9 @@ Uize.module ({
 													This button's function can also be triggered using the "/" (division / forward slash character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
 
 													NOTES
-													- the =divide= function is one of the `Binary Operators`
+													- the =divide= function is one of the `binary operators`
 													- see the related =add=, =multiply=, and =subtract= child widgets
-													- this button will be disabled if the calculator is in the `Error State`
+													- this button will be disabled if the calculator is in the `error state`
 
 												multiply
 													An instance of the =Uize.Widget.Button= class, that lets the user set up the multiplication binary operation.
@@ -754,9 +754,9 @@ Uize.module ({
 													This button's function can also be triggered using the "&#42;" (multiply / star / asterisk character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
 
 													NOTES
-													- the =multiply= function is one of the `Binary Operators`
+													- the =multiply= function is one of the `binary operators`
 													- see the related =add=, =divide=, and =subtract= child widgets
-													- this button will be disabled if the calculator is in the `Error State`
+													- this button will be disabled if the calculator is in the `error state`
 
 												subtract
 													An instance of the =Uize.Widget.Button= class, that lets the user set up the subtraction binary operation.
@@ -771,9 +771,9 @@ Uize.module ({
 													This button's function can also be triggered using the "-" (minus / dash / hyphen character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
 
 													NOTES
-													- the =subtract= function is one of the `Binary Operators`
+													- the =subtract= function is one of the `binary operators`
 													- see the related =add=, =divide=, and =multiply= child widgets
-													- this button will be disabled if the calculator is in the `Error State`
+													- this button will be disabled if the calculator is in the `error state`
 										*/
 									;
 
@@ -796,8 +796,8 @@ Uize.module ({
 													The negation operation can be used even when the current =entry= value is =0=, producing the value =-0= (for more info, see the section `Entering Negative Numbers`). Using the =negate= operator repeatedly will toggle the sign of the current =entry= value back and forth between positive and negative.
 
 													NOTES
-													- the =negate= function is one of the `Unary Operators`
-													- this button will be disabled if the calculator is in the `Error State`
+													- the =negate= function is one of the `unary operators`
+													- this button will be disabled if the calculator is in the `error state`
 										*/
 									);
 									_addChildButton (
@@ -826,7 +826,7 @@ Uize.module ({
 													The percent function will behave as either a unary or binary operator, depending on the current state of the calculator (for a detailed explanation of this, see the section `Versatile Percent Function`). This button's function can also be triggered using the "%" (percent character) key on the keyboard. For more info, see the section `Using the Regular Keyboard`.
 
 													NOTES
-													- this button will be disabled if the calculator is in the `Error State`
+													- this button will be disabled if the calculator is in the `error state`
 										*/
 									);
 									_addChildButton (
@@ -840,11 +840,11 @@ Uize.module ({
 												squareRoot
 													An instance of the =Uize.Widget.Button= class, that lets the user perform the square root operation on the current value of the =entry= child widget.
 
-													If the value of the =entry= child widget is negative, then clicking the =squareRoot= button will put the calculator widget into the `Error State`.
+													If the value of the =entry= child widget is negative, then clicking the =squareRoot= button will put the calculator widget into the `error state`.
 
 													NOTES
-													- the =squareRoot= function is one of the `Unary Operators`
-													- this button will be disabled if the calculator is in the `Error State`
+													- the =squareRoot= function is one of the `unary operators`
+													- this button will be disabled if the calculator is in the `error state`
 										*/
 									);
 

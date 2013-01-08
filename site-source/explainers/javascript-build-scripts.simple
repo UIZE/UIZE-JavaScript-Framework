@@ -31,7 +31,7 @@ Introduction
 		- _UizeSite.Build.BuildJsModules.js (`Build JS Modules`)
 		- _UizeSite.Build.BuildPagesFromSourceCode.js (`UIZE Site Build Pages from Source Code`)
 
-		Not all the build scripts will necessarily be useful for your own Web site project. In particular, the `UIZE Site Build Simple Doc Pages` and `UIZE Site Build Pages from Source Code` build scripts are intended primarily for the uize.com Web site, although you are welcome to hack them to meet your needs or use them as a reference when `Writing Your Own Build Scripts`.
+		Not all the build scripts will necessarily be useful for your own Web site project. In particular, the `UIZE site build simple doc pages` and `UIZE site build pages from source code` build scripts are intended primarily for the uize.com Web site, although you are welcome to hack them to meet your needs or use them as a reference when `writing your own build scripts`.
 
 	Where They Should Go
 		To use the build scripts in your own Web site project, you should copy them from the =UIZE-JavaScript-Framework= root folder into the root folder of your project.
@@ -45,10 +45,10 @@ Introduction
 		Must Have the UIZE Modules
 			Note that the build scripts make use of modules of the UIZE JavaScript Framework, so your Web site project must be set up with a folder containing these JavaScript modules before you can use the build scripts.
 
-			Also note that the =moduleFolderPath= build environment variable that is defined in the =_build-env.json= file (see the section `Build Environment Variables`) should be correctly set so that the UIZE JavaScript modules can be located by the module loader that is defined inside the `Build Script Setup` file.
+			Also note that the =moduleFolderPath= build environment variable that is defined in the =_build-env.json= file (see the section `Build Environment Variables`) should be correctly set so that the UIZE JavaScript modules can be located by the module loader that is defined inside the `build script setup` file.
 
 	How You Can Run Them
-		Once you have copied the build scripts to the root folder of your Web site project, and once you have configured the `Build Environment Variables` appropriately, then the build scripts can be run by simply double-clicking on the script files, or by selecting them in Windows Explorer and pressing the *Enter* key.
+		Once you have copied the build scripts to the root folder of your Web site project, and once you have configured the `build environment variables` appropriately, then the build scripts can be run by simply double-clicking on the script files, or by selecting them in Windows Explorer and pressing the *Enter* key.
 
 		Windows Script Host
 			The build scripts are JavaScript files intended to be run using Microsoft's [[http://en.wikipedia.org/wiki/Windows_Script_Host][Windows Script Host]] technology that is built into Windows systems.
@@ -74,12 +74,12 @@ Introduction
 		Most Build Scripts Have At Least One Log File
 			Most (but not all) build scripts will output at least one log file once they have completed execution.
 
-			Some build scripts may generate multiple log files. For example, the `Auto Scruncher` build script generates one log file that lists the JavaScript files that were scrunched, and another log file listing the JavaScript library (=.library.js=) files that were built. There are also *some* build scripts that don't output any log files at all.
+			Some build scripts may generate multiple log files. For example, the `auto scruncher` build script generates one log file that lists the JavaScript files that were scrunched, and another log file listing the JavaScript library (=.library.js=) files that were built. There are also *some* build scripts that don't output any log files at all.
 
 		Log File Naming
 			For many build scripts, the name of the script's associated log file is simply the name of the build script with the =.js= file extension replaced by a =.log= extension.
 
-			In the case of build scripts that generate multiple log files, the log files will typically be named with the build script name (sans =.js= extension) as a prefix, and then some identifying suffix to distinguish the different log files in the group from one another. For example, the =_Uize.Build.AutoScruncher.js= (`Auto Scruncher`) build script generates the two log files named =_Uize.Build.AutoScruncher-js-files.log= and =_Uize.Build.AutoScruncher-libraries.log=.
+			In the case of build scripts that generate multiple log files, the log files will typically be named with the build script name (sans =.js= extension) as a prefix, and then some identifying suffix to distinguish the different log files in the group from one another. For example, the =_Uize.Build.AutoScruncher.js= (`auto scruncher`) build script generates the two log files named =_Uize.Build.AutoScruncher-js-files.log= and =_Uize.Build.AutoScruncher-libraries.log=.
 
 			OVERWRITE BEHAVIOR
 
@@ -91,7 +91,7 @@ Introduction
 			Basic Log Summaries
 				Some build scripts simply list the files that were built, with basic information about the source file path, the target (generated / built) file path, a reason why the file was built (eg. =DIDN'T EXIST=, =WAS OUT OF DATE=, =ALWAYS BUILD=), and the duration for the build process.
 
-				The snippet below shows some of the log file generated from running the `Build JS Modules` build script...
+				The snippet below shows some of the log file generated from running the `build JS modules` build script...
 
 				LOG FILE SNIPPET
 				.............................................................................................
@@ -119,7 +119,7 @@ Introduction
 			Detailed Log Summaries
 				Some build scripts provide additional summary info for files that were built, that appears right below the basic summary info.
 
-				For example, the `Auto Scruncher` build script provides a Scruncher report for every JavaScript file that was scrunched. The snippet below shows some of the log file generated from running this build script...
+				For example, the `auto scruncher` build script provides a Scruncher report for every JavaScript file that was scrunched. The snippet below shows some of the log file generated from running this build script...
 
 				LOG FILE SNIPPET
 				.........................................................................
@@ -349,7 +349,7 @@ The Build Scripts
 		The Run Unit Tests (Source) build script (implemented in the file =_Uize.Build.RunUnitTests-source.js=) runs the unit test suite for the UIZE JavaScript Framework, using the source versions of the JavaScript modules.
 
 Build Script Setup
-	The Build Script Setup (implemented in the =_build.js= file) implements a module loader that is used by `The Build Scripts` that come bundled with the UIZE JavaScript Framework, and that can also be used when `Writing Your Own Build Scripts`.
+	The Build Script Setup (implemented in the =_build.js= file) implements a module loader that is used by `the build scripts` that come bundled with the UIZE JavaScript Framework, and that can also be used when `writing your own build scripts`.
 
 	Using the Build Script Setup
 		The Build Script Setup is used in a build script by adding a few lines of "boilerplate" JavaScript code.
@@ -371,7 +371,7 @@ Build Script Setup
 			// ... ... ...
 		...................................................................................
 
-		In the boilerplate block, the statement =eval (_setupFile.ReadAll ()) ();= reads the contents of the =_build.js= file, evaluates its code using the JavaScript =eval= function, and then calls the function that is returned by the =eval= call (the =_build.js= file actually defines a function that returns a reference to the actual setup function). In this case, we are not passing any parameters to the setup function. This is the typical usage for build scripts that reside in the root folder of a Web site project (ie. the same folder as the =_build.js= file) and that are to run using the source versions of the JavaScript modules. Optional parameters for the setup function allow the module loader to be configured for `Loading Scrunched Versions of Modules` and for `Running Scripts Outside a Project's Root Folder`
+		In the boilerplate block, the statement =eval (_setupFile.ReadAll ()) ();= reads the contents of the =_build.js= file, evaluates its code using the JavaScript =eval= function, and then calls the function that is returned by the =eval= call (the =_build.js= file actually defines a function that returns a reference to the actual setup function). In this case, we are not passing any parameters to the setup function. This is the typical usage for build scripts that reside in the root folder of a Web site project (ie. the same folder as the =_build.js= file) and that are to run using the source versions of the JavaScript modules. Optional parameters for the setup function allow the module loader to be configured for `loading scrunched versions of modules` and for `running scripts outside a project's root folder`
 
 		Loading Scrunched Versions of Modules
 			The module loader defined in the =_build.js= file can be configured to load the scrunched versions of JavaScript modules.
@@ -411,7 +411,7 @@ Build Script Setup
 
 			In the call to the build function, the optional params object is passed with the value ='UIZE-JavaScript-Framework\\'= specified for the =pathToRoot= property. When no params object is specified, or when the =pathToRoot= property is omitted from the params object, then this property is defaulted to =''= (empty string).
 
-			In this example, explicitly specifying the value ='UIZE-JavaScript-Framework\\'= causes the module loader defined inside the =_build.js= file to prepend the path "UIZE-JavaScript-Framework\" to the path for every module that it loads. Assuming that the folder "UIZE-JavaScript-Framework" contains the UIZE JavaScript Framework, then the above configuration of the `Build Script Setup` would be appropriate for a script that resides in, and is to be run from, a parent folder of the "UIZE-JavaScript-Framework" folder.
+			In this example, explicitly specifying the value ='UIZE-JavaScript-Framework\\'= causes the module loader defined inside the =_build.js= file to prepend the path "UIZE-JavaScript-Framework\" to the path for every module that it loads. Assuming that the folder "UIZE-JavaScript-Framework" contains the UIZE JavaScript Framework, then the above configuration of the `build script setup` would be appropriate for a script that resides in, and is to be run from, a parent folder of the "UIZE-JavaScript-Framework" folder.
 
 Build Environment Variables
 	You may have to configure the build scripts to work in your Web site project's environment by modifying the build environment variables.
@@ -435,12 +435,12 @@ Build Environment Variables
 
 		Most of the build scripts are coded to only rebuild files if the source file was updated since the previous build (ie. the modification date of the source file is later than that of the built file). In cases where you want to force the scripts to rebuild all the files they would normally build, you can set =alwaysBuild= to =true=.
 
-		For some scripts, such as the `Audit Strings` script, the =alwaysBuild= build environment variable has no meaning. Also, the library builder portion of the `Auto Scruncher` script always builds all library (=.library.js=) files, regardless of the modified dates of the source file or the modified dates of the various JavaScript modules listed in the library file.
+		For some scripts, such as the `audit strings` script, the =alwaysBuild= build environment variable has no meaning. Also, the library builder portion of the `auto scruncher` script always builds all library (=.library.js=) files, regardless of the modified dates of the source file or the modified dates of the various JavaScript modules listed in the library file.
 
 	buildFolderPath
 		A string, specifying the path - relative to the folder containing the build scripts - to a folder into which built files should be placed.
 
-		When a value is specified for this optional build environment variable, built files will be populated into the specified build folder in a folder hierarchy that mirrors the folder hierarchy of the Web site project. For example, if the build scripts are in a folder =myproject=, and if the value =bld= is specified for the =buildFolderPath= variable, and if the JavaScript file =myproject/javascript/MyCompanySite.Page.js= is then scrunched by the `Auto Scruncher` build script, then the scrunched version will be located at =myproject/bld/javascript/MyCompanySite.Page.js=.
+		When a value is specified for this optional build environment variable, built files will be populated into the specified build folder in a folder hierarchy that mirrors the folder hierarchy of the Web site project. For example, if the build scripts are in a folder =myproject=, and if the value =bld= is specified for the =buildFolderPath= variable, and if the JavaScript file =myproject/javascript/MyCompanySite.Page.js= is then scrunched by the `auto scruncher` build script, then the scrunched version will be located at =myproject/bld/javascript/MyCompanySite.Page.js=.
 
 		New folders are created inside the build folder as needed in order to house the built files. After the build scripts have run, the folder hierarchy inside the build folder will only match the folder hierarchy of the Web site project if at least one file was built from every folder of the Web site project, since folders are only created as needed for the built files. Of course, the build folder won't contain itself, since the build scripts don't consider the files inside the build folder as source material for building files (which is a good thing).
 
@@ -461,7 +461,7 @@ Build Environment Variables
 
 		By default, the build scripts will save the built files to the location determined by the values of the =buildFolderPath= and =sourceFolderName= build environment variables. In cases where you just want to see what build actions are taken by a particular build script without having any files be modified, you can set =dryRun= to =true=.
 
-		When a build script is doing a dry run, it will still build the files and do everything that it normally would, except that it won't write the built files to the target location. A summary of all that would be done is output to a build script's associated log file(s), just as would be the case if you weren't doing a dry run. So, for example, in the case of running the `Auto Scruncher` build script, the log files would contain all the Scruncher report information and the listings of all the library files that would be built. Doing a dry run and viewing the log files might be a good way to check that the target file paths are correct before doing a genuine build that would write files to the system.
+		When a build script is doing a dry run, it will still build the files and do everything that it normally would, except that it won't write the built files to the target location. A summary of all that would be done is output to a build script's associated log file(s), just as would be the case if you weren't doing a dry run. So, for example, in the case of running the `auto scruncher` build script, the log files would contain all the Scruncher report information and the listings of all the library files that would be built. Doing a dry run and viewing the log files might be a good way to check that the target file paths are correct before doing a genuine build that would write files to the system.
 
 	moduleFolderPath
 		A string, specifying the path to the folder in your Web site project within which the unscrunched / source UIZE JavaScript modules are located.
@@ -482,7 +482,7 @@ Build Environment Variables
 		- if a value is specified for this variable, then the =buildFolderPath= build environment variable has no effect
 
 	buildFolderPath vs sourceFolderName
-		For certain build scripts - such as the `Auto Scruncher` and `Audit Strings` build scripts - the location for unscrunched and scrunched JavaScript files needs to be known.
+		For certain build scripts - such as the `auto scruncher` and `audit strings` build scripts - the location for unscrunched and scrunched JavaScript files needs to be known.
 
 		You can take one of two approaches in your Web site project...
 
@@ -532,7 +532,7 @@ Writing Your Own Build Scripts
 	Adapting the Existing Build Scripts
 		Any build script provided as part of the UIZE JavaScript Framework download that is useful to your Web sites or projects can be adapted to suit your needs.
 
-		Not all of the provided build scripts will necessarily be useful to you, of course, since some of them are intended primarily for the UIZE Web site. But, if a build script is potentially useful but not perfectly suited to the folder structure of your own projects, just change it. And some of the build scripts are already configurable with `Build Environment Variables`.
+		Not all of the provided build scripts will necessarily be useful to you, of course, since some of them are intended primarily for the UIZE Web site. But, if a build script is potentially useful but not perfectly suited to the folder structure of your own projects, just change it. And some of the build scripts are already configurable with `build environment variables`.
 
 	Roll Your Own
 		If you can't adapt an existing build script to meet your needs, or hack it to meet slightly different needs, then you may just want to create your own specialized build script from scratch.
@@ -545,7 +545,7 @@ Writing Your Own Build Scripts
 		The =Uize.Wsh= module provides facilities for accessing files, building files by recursing a folder hierarchy, automatically generating log files, and more. Additionally, a number of the build scripts use other modules under the =Uize.Wsh= namespace.
 
 	Structure of a Build Script
-		Build scripts are made up of two key sections: the `Build Script Setup Boilerplate`, and the `Build Script Anonymous Module Declaration`.
+		Build scripts are made up of two key sections: the `build script setup boilerplate`, and the `build script anonymous module declaration`.
 
 		These two sections are highlighted using comments in the sample build script shown below...
 
@@ -573,7 +573,7 @@ Writing Your Own Build Scripts
 		........................................................................................
 
 		Build Script Setup Boilerplate
-			The `Build Script Setup` boilerplate is a small block of code that is necessary in every build script in order to bootstrap the process.
+			The `build script setup` boilerplate is a small block of code that is necessary in every build script in order to bootstrap the process.
 
 			This little block of code evals the JavaScript contained inside the =_build.js= file, which defines a module loader that works in the Windows Script Host context. For a more detailed discussion, consult the section `Build Script Setup`.
 
@@ -581,16 +581,16 @@ Writing Your Own Build Scripts
 			The build script anonymous module declaration is a declaration of the module of code that performs the build script's action.
 
 			Required Modules
-				Your build script's anonymous module can require any of the `WSH-compatible UIZE Modules`, which includes many modules of the UIZE JavaScript Framework, and even your own modules (provided they are WSH-compatible and reside in the modules folder).
+				Your build script's anonymous module can require any of the `build-compatible UIZE modules`, which includes many modules of the UIZE JavaScript Framework, and even your own modules (provided they are WSH-compatible and reside in the modules folder).
 
 				Typically, your build script's code will at least require the =Uize.Wsh= module, but many build scripts may also require additional modules under the =Uize.Wsh= namespace (such as the =Uize.Build.Util= module), or basic utility modules such as the =Uize.Data=, =Uize.String=, =Uize.Template=, and other modules.
 
 			Builder Function
-				The builder function in your `Build Script Anonymous Module Declaration` is what contains the code that performs the build script's action.
+				The builder function in your `build script anonymous module declaration` is what contains the code that performs the build script's action.
 
-				The code inside this function will be executed when all the modules required by your anonymous module are loaded in by the module loader defined in the `Build Script Setup` file.
+				The code inside this function will be executed when all the modules required by your anonymous module are loaded in by the module loader defined in the `build script setup` file.
 
-	WSH-compatible UIZE Modules
+	Build-compatible UIZE Modules
 		In addition to using the build script specific modules under the =Uize.Wsh= namespace, build scripts can also use any of the other UIZE modules that are compatible with Windows Script Host.
 
 		Compatible Modules

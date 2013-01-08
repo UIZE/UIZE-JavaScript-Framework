@@ -5,14 +5,14 @@ Introduction
 	document...
 
 Value Transformer
-	A Value Transformer is code (specified as a `Value Transformer Function`) that transforms one value to another value.
+	A value transformer is code (specified as a `value transformer function`) that transforms one value to another value.
 
-	### A Value Transformer is code (specified as either a `Value Transformer Function` or a `Value Transformer Expression`) that transforms one value to another value.
+	### A value transformer is code (specified as either a `value transformer function` or a `value transformer expression`) that transforms one value to another value.
 
 	Value Transformer Function
-		A Value Transformer Function is a `Value Transformer` specified in the form of a function.
+		A value transformer function is a `value transformer` specified in the form of a function.
 
-		A Value Transformer Function should expect to receive a single parameter, being the value that is to be transformed to a new value. The function should return the transformed value. Consider the following example...
+		A value transformer function should expect to receive a single parameter, being the value that is to be transformed to a new value. The function should return the transformed value. Consider the following example...
 
 		EXAMPLE
 		................................
@@ -24,7 +24,7 @@ Value Transformer
 		In the above example, the function =cubed= transforms its input value to the input value to the power of three (ie. cubed).
 
 		Using a Value Transformer Function
-			A `Value Transformer Function` can be supplied as a parameter to any method that supports a Value Transformer Function, such as the =Uize.map= static method. Consider the following example...
+			A `value transformer function` can be supplied as a parameter to any method that supports a value transformer function, such as the =Uize.map= static method. Consider the following example...
 
 			EXAMPLE
 			..............................................
@@ -35,12 +35,12 @@ Value Transformer
 			var myValuesCubed = Uize.map (myValues,cubed);
 			..............................................
 
-			The =Uize.map= method accepts a `Value and Key Transformer` for its first parameter and a source array as its second. It iterates through all the elements of the source array, calling the Value and Key Transformer for each element. With the transformed element values returned by the Value and Key Transformer, the method populates a new array.
+			The =Uize.map= method accepts a `value and key transformer` for its first parameter and a source array as its second. It iterates through all the elements of the source array, calling the Value and Key Transformer for each element. With the transformed element values returned by the value and key transformer, the method populates a new array.
 
-			In this example we are supplying a `Value Transformer` in place of a `Value and Key Transformer` (see `Using a Value Transformer in Place of a Value and Key Transformer`), which just means that the additional key / index information for the elements will be ignored. The variable =myValuesCubed=, in this case, will contain the cubes of all the values in the =myValues= source array.
+			In this example we are supplying a `value transformer` in place of a `value and key transformer` (see `Using a Value Transformer in Place of a Value and Key Transformer`), which just means that the additional key / index information for the elements will be ignored. The variable =myValuesCubed=, in this case, will contain the cubes of all the values in the =myValues= source array.
 
 		Value Parameter Can Be Named Anything
-			The value input parameter for a `Value Transformer Function` can be named anything - it does *not* need to be named =value=. Consider the following example...
+			The value input parameter for a `value transformer function` can be named anything - it does *not* need to be named =value=. Consider the following example...
 
 			EXAMPLE
 			...................................
@@ -52,7 +52,7 @@ Value Transformer
 			In the above example, our value parameter is named =toCube=.
 
 	### Value Transformer Expression
-		A Value Transformer Expression is a `Value Transformer` specified in the form of an expression string.
+		A value transformer expression is a `value transformer` specified in the form of an expression string.
 
 		As an expression string, the value transformer code can access the value being transformed using the reserved variable name =value=. Consider the following example...
 
@@ -64,37 +64,37 @@ Value Transformer
 		In the above example, the expression transforms the value of the =value= variable to =value= to the power of three (ie. cubed).
 
 		Using a Value Transformer Expression
-			A `Value Transformer Expression` can be supplied as a parameter to any method that supports a Value Transformer Expression, such as the =Uize.map= static method. Consider the following example...
+			A `value transformer expression` can be supplied as a parameter to any method that supports a value transformer expression, such as the =Uize.map= static method. Consider the following example...
 
 			EXAMPLE
 			................................................................
 			var myValuesCubed = Uize.map (myValues,'value * value * value');
 			................................................................
 
-			This example is essentially the same as the example shown in the section `Using a Value Transformer Function`, excepting that the `Value Transformer` is being specified in the form of a `Value Transformer Expression`, rather than a `Value Transformer Function`. The variable =myValuesCubed=, in this case, will contain the cubes calculated from all the values in the =myValues= source array.
+			This example is essentially the same as the example shown in the section `Using a Value Transformer Function`, excepting that the `value transformer` is being specified in the form of a `value transformer expression`, rather than a `value transformer function`. The variable =myValuesCubed=, in this case, will contain the cubes calculated from all the values in the =myValues= source array.
 
 		Value Variable Always Named value
-			Unlike the case with a `Value Transformer Function`, the value being transformed is always referenced inside a `Value Transformer Expression` using the reserved variable name =value=.
+			Unlike the case with a `value transformer function`, the value being transformed is always referenced inside a `value transformer expression` using the reserved variable name =value=.
 
 			This is because a Value Transformer Expression is essentially resolved to a Value Transformer Function using JavaScript's built-in =Function= object. So, for example, the Value Transformer Expression ='value &#42; value &#42; value'= is resolved automatically to a Value Transformer Function using the expression =new Function ('value','value &#42; value &#42; value')=, where the name of the function's single value parameter is always =value= by convention.
 
 	Different Types of Value Transformers
-		The `Value Transformer` construct is deliberately very generic, making it applicable in a number of different contexts and to a wide range of different types of value transformers.
+		The `value transformer` construct is deliberately very generic, making it applicable in a number of different contexts and to a wide range of different types of value transformers.
 
 		Now, while there are a number of different kinds of value transformers (as outlined below) that are different in spirit and intended use, they all share the basic feature of accepting an input value and then returning that value transformed somehow into a new value. Different types of value transformers can impose different limits on the kinds of input values they accept, and the nature of their transformations can differ radically.
 
 		Curve Functions Are Specialized Value Transformers
-			A Curve Function is a specialized kind of `Value Transformer` whose input value is expected to be a floating point number in the range of =0= to =1=, and where the returned transformed value should also be a floating point number in the range of =0= to =1=.
+			A Curve Function is a specialized kind of `value transformer` whose input value is expected to be a floating point number in the range of =0= to =1=, and where the returned transformed value should also be a floating point number in the range of =0= to =1=.
 
 			EXAMPLE
 			................................................................................
 			Uize.Fade.fade (scrollTo,[0,0],[0,200],800,{curve:Uize.Curve.easeInOutPow (4)});
 			................................................................................
 
-			In the above example, the vertical scroll position of a browser window is being animated using the =Uize.Fade.fade= static method of the =Uize.Fade= class. A curve function (which is a `Value Transformer`) is being created using the statement =Uize.Curve.easeInOutPow (4)=, and this curve is being supplied to the =Uize.Fade.fade= method so that the animation isn't completely linear and lifeless - some non-linearity adds physical realism to the animation. The curve function is being used to bend / distort a =0= to =1= floating point number into a different =0= to =1= floating point number.
+			In the above example, the vertical scroll position of a browser window is being animated using the =Uize.Fade.fade= static method of the =Uize.Fade= class. A curve function (which is a `value transformer`) is being created using the statement =Uize.Curve.easeInOutPow (4)=, and this curve is being supplied to the =Uize.Fade.fade= method so that the animation isn't completely linear and lifeless - some non-linearity adds physical realism to the animation. The curve function is being used to bend / distort a =0= to =1= floating point number into a different =0= to =1= floating point number.
 
 		Value Matchers Are Specialized Value Transformers
-			A `Value Matcher` is a specialized kind of `Value Transformer` that transforms a value to a boolean value.
+			A `value matcher` is a specialized kind of `value transformer` that transforms a value to a boolean value.
 
 			EXAMPLE
 			...................................
@@ -103,10 +103,10 @@ Value Transformer
 			}
 			...................................
 
-			In the above example, the function =isOnlyWhitespace= returns a boolean value, indicating whether or not the input value is a string containing only whitespace characters (such as spaces and tabs). The fact that it always returns a value =true= or =false= makes it a `Value Matcher` (by the very definition of a Value Matcher).
+			In the above example, the function =isOnlyWhitespace= returns a boolean value, indicating whether or not the input value is a string containing only whitespace characters (such as spaces and tabs). The fact that it always returns a value =true= or =false= makes it a `value matcher` (by the very definition of a value matcher).
 
 		Value Conformers Are Specialized Value Transformers
-			A `Value Conformer` is a specialized kind of `Value Transformer` that transforms a value so that it conforms to certain criteria.
+			A `value conformer` is a specialized kind of `value transformer` that transforms a value so that it conforms to certain criteria.
 
 			EXAMPLE
 			.......................................................................
@@ -115,20 +115,20 @@ Value Transformer
 			}
 			.......................................................................
 
-			In the above example, the =limitStringLengthTo100Chars= function is a `Value Conformer` that conforms a string value so that it can never be more than a hundred characters in length. It does this by using the =String= object's =slice= instance method, chopping off any characters beyond the first hundred.
+			In the above example, the =limitStringLengthTo100Chars= function is a `value conformer` that conforms a string value so that it can never be more than a hundred characters in length. It does this by using the =String= object's =slice= instance method, chopping off any characters beyond the first hundred.
 
 	Using Value Transformers
-		A `Value Transformer` can be used with any of the many methods that support a Value Transformer.
+		A `value transformer` can be used with any of the many methods that support a value transformer.
 
 		The Uize.Fade Class
-			The =Uize.Fade= class supports a `Value Transformer` with its =curve= state property.
+			The =Uize.Fade= class supports a `value transformer` with its =curve= state property.
 
 			Additionally, any of the factory methods that create instances of the =Uize.Fade= class will also support value transformers for the =curve= fade property. Examples of such factory methods are the =Uize.Fade.fade=, =Uize.Fade.fadeMethod=, =Uize.Fade.fadeProperty=, and =Uize.Fade.fadeProperties= methods implemented in the =Uize.Fade.xFactory= extension module, as well as the =Uize.Fx.fadeStyle= and =Uize.Fx.fadeStyleAcrossNodes= methods of the =Uize.Fx= module.
 
 			For a more in-depth discussion of curve functions, see the section `Curve Functions Are Specialized Value Transformers`.
 
 		The Uize.String.Lines.modify Method
-			The =Uize.String.Lines.modify= static method of the =Uize.String.Lines= module supports a `Value Transformer` for the line modifier that processes each line of a multi-line string.
+			The =Uize.String.Lines.modify= static method of the =Uize.String.Lines= module supports a `value transformer` for the line modifier that processes each line of a multi-line string.
 
 			EXAMPLE
 			.......................................................................
@@ -142,27 +142,27 @@ Value Transformer
 			In the above example, the =Uize.String.Lines.modify= method is using the =limitStringLengthTo100Chars= value transformer to limit the length of all lines in a multi-line string to a maximum of a hundred characters - lines that are longer than a hundred characters in length will be truncated so that the extra characters are discarded.
 
 		Using a Value Transformer in Place of a Value and Key Transformer
-			A `Value Transformer` can always be used in place of a `Value and Key Transformer`.
+			A `value transformer` can always be used in place of a `value and key transformer`.
 
 			In such cases, the key that is supplied as the second parameter to the Value Transformer that is only expecting a single parameter will simply be ignored - the transformed value that it returns will only be influenced by the value and not the key.
 
 			The Uize.map Method
-				While the =Uize.map= method expects a `Value and Key Transformer`, a `Value Transformer` can be supplied instead.
+				While the =Uize.map= method expects a `value and key transformer`, a `value transformer` can be supplied instead.
 
 				To see an example that illustrates this, consult the section `Using a Value Transformer Function`.
 
 			The Uize.Array.Sort.sortBy Method
-				The =Uize.Array.Sort.sortBy= method of the =Uize.Array.Sort= module expects a `Value and Key Transformer`, but a `Value Transformer` can be supplied instead. Consider the following example...
+				The =Uize.Array.Sort.sortBy= method of the =Uize.Array.Sort= module expects a `value and key transformer`, but a `value transformer` can be supplied instead. Consider the following example...
 
 				EXAMPLE
 				...................................................................................
 				Uize.Array.Sort.sortBy (dateStrings,function (value) {return +(new Date (value))});
 				...................................................................................
 
-				In the above example, the =dateStrings= variable is a reference to an array containing correctly formatted date strings. The array of date strings is being sorted into chronological order by the =Uize.Array.Sort.sortBy= method, with a `Value Transformer Function` specified for the sort value generator that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time). While the sort value generator will be passed the index / key as the second parameter when it is called for each element of the =dateStrings= array, the function does not declare or use that second parameter.
+				In the above example, the =dateStrings= variable is a reference to an array containing correctly formatted date strings. The array of date strings is being sorted into chronological order by the =Uize.Array.Sort.sortBy= method, with a `value transformer function` specified for the sort value generator that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time). While the sort value generator will be passed the index / key as the second parameter when it is called for each element of the =dateStrings= array, the function does not declare or use that second parameter.
 
 		Any Type of Value Can Be Transformed
-			There is no limit to the kinds of values that can be transformed by a `Value Transformer`.
+			There is no limit to the kinds of values that can be transformed by a `value transformer`.
 
 			While an input value for a Value Transformer is likely to be a simple type value, such as a number or a string, there is no saying that an input value can't also be an array or an object. Consider the following example...
 
@@ -182,17 +182,17 @@ Value Transformer
 			;
 			...........................................
 
-			In the above example, the =computeArea= function defines a `Value Transformer` that transforms an input value that is expected to be an object with =width= and =height= properties, into an area value that is computed as the product of the =width= and =height= properties. This value transformer is then supplied to the =Uize.map= method, which is used to produce an array containing the areas computed from the rectangle objects inside the =rects= array. After the above code has been executed, the statement =alert (rectAreas)= would display the text "50,7,12" in the alert dialog.
+			In the above example, the =computeArea= function defines a `value transformer` that transforms an input value that is expected to be an object with =width= and =height= properties, into an area value that is computed as the product of the =width= and =height= properties. This value transformer is then supplied to the =Uize.map= method, which is used to produce an array containing the areas computed from the rectangle objects inside the =rects= array. After the above code has been executed, the statement =alert (rectAreas)= would display the text "50,7,12" in the alert dialog.
 
 	### Supporting Value Transformers
 		document...
 
 Value Matcher
-	A Value Matcher is code (specified as a `Value Matcher Function`) that transforms a value to a boolean value.
+	A value matcher is code (specified as a `value matcher function`) that transforms a value to a boolean value.
 
-	### A Value Matcher is code (specified as either a `Value Matcher Function`, a `Value Matcher Expression`, or a 'Value Matcher Regular Expression`) that transforms a value to a boolean value.
+	### A value matcher is code (specified as either a `value matcher function`, a `value matcher expression`, or a 'value matcher regular expression`) that transforms a value to a boolean value.
 
-	A Value Matcher can be considered to be a specialized kind of `Value Transformer`, where the input value is always transformed to a result of =true= or =false=.
+	A value matcher can be considered to be a specialized kind of `value transformer`, where the input value is always transformed to a result of =true= or =false=.
 
 	Applications of Value Matchers
 		Value matchers can have a variety of different uses - they can be used as validators, they can be supplied to map functions (such as =Uize.String.Lines.removeMatching=), they can be used to test values generated in unit tests against expectations, etc.
@@ -213,9 +213,9 @@ Value Matcher
 		- etc.
 
 	Value Matcher Function
-		A Value Matcher Function is a `Value Matcher` specified in the form of a function.
+		A value matcher function is a `value matcher` specified in the form of a function.
 
-		A Value Matcher Function should expect to receive a single parameter, being the value that is to be transformed to a boolean value. The function should return the transformed boolean value. Consider the following example...
+		A value matcher function should expect to receive a single parameter, being the value that is to be transformed to a boolean value. The function should return the transformed boolean value. Consider the following example...
 
 		EXAMPLE
 		...................................
@@ -227,7 +227,7 @@ Value Matcher
 		In the above example, the function =isOnlyWhitespace= returns a boolean value, indicating whether or not the input value is a string containing only whitespace characters (such as spaces and tabs).
 
 		Using a Value Matcher Function
-			A `Value Matcher Function` can be supplied as a parameter to any method that supports a Value Matcher Function, such as the =Uize.String.Lines.removeMatching= static method of the =Uize.String.Lines= module. Consider the following example...
+			A `value matcher function` can be supplied as a parameter to any method that supports a value matcher function, such as the =Uize.String.Lines.removeMatching= static method of the =Uize.String.Lines= module. Consider the following example...
 
 			EXAMPLE
 			........................................................................
@@ -275,18 +275,18 @@ Value Matcher
 			...............................................................
 
 	Different Types of Value Matchers
-		As with the `Value Transformer` construct, the `Value Matcher` construct is deliberately very generic, making it applicable in a number of different contexts.
+		As with the `value transformer` construct, the `value matcher` construct is deliberately very generic, making it applicable in a number of different contexts.
 
 		Value Validators Are Specialized Value Matchers
-			A `Value Validator` is a specialized kind of `Value Matcher` that transforms a value to a boolean value, indicating whether or not the input value is valid according to certain criteria.
+			A `value validator` is a specialized kind of `value matcher` that transforms a value to a boolean value, indicating whether or not the input value is valid according to certain criteria.
 
-			A Value Validator is no more than a `Value Matcher`, where the implication of a value not being matched by the matcher is that the value is not valid.
+			A value validator is no more than a `value matcher`, where the implication of a value not being matched by the matcher is that the value is not valid.
 
 	Using Value Matchers
-		A `Value Matcher` can be used with any of the many methods that support a Value Matcher.
+		A `value matcher` can be used with any of the many methods that support a value matcher.
 
 		Methods of the Uize.String.Lines Module
-			Some of the static methods of the =Uize.String.Lines= module support a `Value Matcher`.
+			Some of the static methods of the =Uize.String.Lines= module support a `value matcher`.
 
 			Uize.String.Lines.removeMatching
 				The =Uize.String.Lines.removeMatching= static method supports a value matcher to identify which lines of a multi-line string should be removed.
@@ -318,11 +318,11 @@ Value Matcher
 		document...
 
 Value Conformer
-	A Value Conformer is code (specified as a `Value Conformer Function`) that transforms a value so that it conforms to certain criteria.
+	A value conformer is code (specified as a `value conformer function`) that transforms a value so that it conforms to certain criteria.
 
-	### A Value Conformer is code (specified as either a `Value Matcher Function` or a `Value Matcher Expression`) that transforms a value so that it conforms to certain criteria.
+	### A value conformer is code (specified as either a `value matcher function` or a `value matcher expression`) that transforms a value so that it conforms to certain criteria.
 
-	A Value Conformer can be considered to be a specialized kind of `Value Transformer`, where the input value may be returned as is if it already conforms to the criteria, or it may be transformed in some way to force it into conformance with the criteria.
+	a value conformer can be considered to be a specialized kind of `value transformer`, where the input value may be returned as is if it already conforms to the criteria, or it may be transformed in some way to force it into conformance with the criteria.
 
 	Applications of Value Conformers
 		Value conformers can have a variety of different uses - they can be used as conformers for state properties, or they can be supplied to map functions (such as =Uize.map=).
@@ -338,9 +338,9 @@ Value Conformer
 		- etc.
 
 	Value Conformer Function
-		A Value Conformer Function is a `Value Conformer` specified in the form of a function.
+		A value conformer function is a `value conformer` specified in the form of a function.
 
-		A Value Conformer Function should expect to receive a single parameter, being the value that is to be conformed. The function should return the conformed value. Consider the following example...
+		A value conformer function should expect to receive a single parameter, being the value that is to be conformed. The function should return the conformed value. Consider the following example...
 
 		EXAMPLE
 		.......................................
@@ -349,10 +349,10 @@ Value Conformer
 		}
 		.......................................
 
-		In the above example, the =conformToRange0to100= function defines a `Value Conformer` that conforms a number value so that it is constrained to the value range of =0= to =100=.
+		In the above example, the =conformToRange0to100= function defines a `value conformer` that conforms a number value so that it is constrained to the value range of =0= to =100=.
 
 		Using a Value Conformer Function
-			A `Value Conformer Function` can be supplied as a parameter to any method that supports a `Value Transformer Function`, such as the =Uize.map= static method. Consider the following example...
+			A `value conformer function` can be supplied as a parameter to any method that supports a `value transformer function`, such as the =Uize.map= static method. Consider the following example...
 
 			EXAMPLE
 			...........................................
@@ -362,7 +362,7 @@ Value Conformer
 			In the above example, the =Math.round= static method of JavaScript's built-in =Math= object is being used as a value conformer with the =Uize.map= method in order to conform all the number values in an array to integer values. The third parameter of the =Uize.map= method specifies the target for the mapped values, where the value =false= indicates that the values should *not* be populated into a new array but should replace the values in the source array.
 
 			Conformers for State Properties
-				A `Value Conformer Function` can be specified for the =conformer= property in the profile of a state property. Consider the following example...
+				A `value conformer function` can be specified for the =conformer= property in the profile of a state property. Consider the following example...
 
 				EXAMPLE
 				.......................................
@@ -380,14 +380,14 @@ Value Conformer
 				});
 				.......................................
 
-				In the above example, a =percentLoaded= state property is being declared for the class =MyClass=. In order to ensure that the value set for this property doesn't stray outside of the range of =0= to =100=, the `Value Conformer Function` =conformToRange0to100= is being specified for the =conformer= property inside the profile for the =percentLoaded= state property.
+				In the above example, a =percentLoaded= state property is being declared for the class =MyClass=. In order to ensure that the value set for this property doesn't stray outside of the range of =0= to =100=, the `value conformer function` =conformToRange0to100= is being specified for the =conformer= property inside the profile for the =percentLoaded= state property.
 
 Value Validator
-	A Value Validator is code (specified as a `Value Validator Function`) that transforms an input value to a boolean value, indicating whether or not the input value is valid according to certain criteria.
+	A value validator is code (specified as a `value validator function`) that transforms an input value to a boolean value, indicating whether or not the input value is valid according to certain criteria.
 
-	### A Value Validator is code (specified as either a `Value Matcher Function` or a `Value Matcher Expression`) that transforms an input value to a boolean value, indicating whether or not the input value is valid according to certain criteria.
+	### a value validator is code (specified as either a `value matcher function` or a `value matcher expression`) that transforms an input value to a boolean value, indicating whether or not the input value is valid according to certain criteria.
 
-	A Value Validator is no more than a `Value Matcher`, where the implication of a value not being matched by the matcher is that the value is not valid.
+	A value validator is no more than a `value matcher`, where the implication of a value not being matched by the matcher is that the value is not valid.
 
 	Applications of Value Validators
 		Value validators can have a variety of different uses, but most typically they are used for validating user input for form element widgets.
@@ -402,9 +402,9 @@ Value Validator
 		- etc.
 
 	Value Validator Function
-		A Value Validator Function is a `Value Validator` specified in the form of a function.
+		A value validator function is a `value validator` specified in the form of a function.
 
-		A Value Validator Function should expect to receive a single parameter, being the value that is to be validated. The function should return a boolean value, indicating whether or not the input value is valid according to the validation criteria. Consider the following example...
+		A value validator function should expect to receive a single parameter, being the value that is to be validated. The function should return a boolean value, indicating whether or not the input value is valid according to the validation criteria. Consider the following example...
 
 		EXAMPLE
 		........................................
@@ -413,7 +413,7 @@ Value Validator
 		}
 		........................................
 
-		In the above example, the =validateInRange0to100= function defines a `Value Validator` that validates that a value is in the range of =0= to =100=.
+		In the above example, the =validateInRange0to100= function defines a `value validator` that validates that a value is in the range of =0= to =100=.
 
 		### Using a Value Validator Function
 			document...
@@ -421,7 +421,7 @@ Value Validator
 Conformers vs. Validators
 	Conformers and validators are similar in nature, and can be considered to be two sides of the same coin.
 
-	Whereas a `Value Validator` is a type of `Value Matcher` that returns a boolean to indicate whether or not the input value is valid according to certain criteria, a `Value Conformer` is a `Value Transformer` that will modify the input value as needed in order to ensure that it is valid according to specific constrains (returning it as is when it is already valid). To illustrate this point, let's look at a comparison of a =0= to =100= range conformer versus a =0= to =100= range validator...
+	Whereas a `value validator` is a type of `value matcher` that returns a boolean to indicate whether or not the input value is valid according to certain criteria, a `value conformer` is a `value transformer` that will modify the input value as needed in order to ensure that it is valid according to specific constrains (returning it as is when it is already valid). To illustrate this point, let's look at a comparison of a =0= to =100= range conformer versus a =0= to =100= range validator...
 
 	0 TO 100 RANGE CONFORMER
 	........................................................................
@@ -438,12 +438,12 @@ Conformers vs. Validators
 	.........................................................................
 
 	Not all Validators Have Corresponding Conformers
-		While there is a simple way of `Deriving a Validator From a Conformer`, it is not always possible to create a meaningful conformer to pair with a validator.
+		While there is a simple way of `deriving a validator from a conformer`, it is not always possible to create a meaningful conformer to pair with a validator.
 
 		Take for example a validator that tests whether or not a string is a correctly formatted e-mail address. Such a validator can be implemented without too much difficulty using a regular expression - albeit a rather sophisticated one. On the flip side, how does one meaningfully conform a string value to a correctly formatted e-mail address? An even more extreme illustration of this is with a non-empty validator, where a string value is considered valid as long as it is not empty. How does one then conform a string that *is* empty to being a string that is not empty? There are too many choices of possible non-empty values.
 
 	Deriving a Validator From a Conformer
-		While `Not all Validators Have Corresponding Conformers`, it is always possible to generate / derive a `Value Validator` from a `Value Conformer`, according to the following simple principle...
+		While `not all validators have corresponding conformers`, it is always possible to generate / derive a `value validator` from a `value conformer`, according to the following simple principle...
 
 		...................................................
 		function deriveValidatorFromConformer (conformer) {
@@ -453,7 +453,7 @@ Conformers vs. Validators
 		}
 		...................................................
 
-		Essentially, if you use a specified `Value Conformer` to conform a value, and the resulting conformed value is not the same as the original value, then the original value must have been non-conforming (another way of saying not valid). So, for example, the =Math.round= method of JavaScript's built-in =Math= object can be considered a conformer that conforms any floating point number value to an integer number value. Therefore, a validator can be produced by using the =Math.round= method, as follows...
+		Essentially, if you use a specified `value conformer` to conform a value, and the resulting conformed value is not the same as the original value, then the original value must have been non-conforming (another way of saying not valid). So, for example, the =Math.round= method of JavaScript's built-in =Math= object can be considered a conformer that conforms any floating point number value to an integer number value. Therefore, a validator can be produced by using the =Math.round= method, as follows...
 
 		..........................................................
 		var isInteger = deriveValidatorFromConformer (Math.round);
@@ -502,9 +502,9 @@ Conformers vs. Validators
 	document...
 
 ### Value and Key Transformer
-	A `Value and Key Transformer` is a function that transforms a value and key to a new value.
+	A `value and key transformer` is a function that transforms a value and key to a new value.
 
-	Whereas a `Value Transformer` only has a value as its input, a Value and Key Transformer has both a value and a key as its input. The value that is returned by a Value and Key Transformer can be derived from either or both of the value and key inputs.
+	Whereas a `value transformer` only has a value as its input, a value and key transformer has both a value and a key as its input. The value that is returned by a value and key transformer can be derived from either or both of the value and key inputs.
 
 	EXAMPLE
 	...

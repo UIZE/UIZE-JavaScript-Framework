@@ -143,7 +143,7 @@ Tips for Troubleshooting in Firebug
 		....................................................
 
 	Logging Summary Info for Instances or Classes to Firebug's Console
-		Just as with `Alerting Summary Info for Instances or Classes`, summary info for instances of =Uize.Class= subclasses as well as =Uize.Class= subclasses can be conveniently logged to the `Firebug` console using Firebug's =console.log= method.
+		Just as with `alerting summary info for instances or classes`, summary info for instances of =Uize.Class= subclasses as well as =Uize.Class= subclasses can be conveniently logged to the `Firebug` console using Firebug's =console.log= method.
 
 		Unlike JavaScript's built-in =alert= function, however, Firebug's =console.log= method does not call the =toString Intrinsic Method= on its first argument, so you have to call this method explicitly, as in...
 
@@ -157,10 +157,10 @@ Tips for Troubleshooting in Firebug
 		console.log (Uize.Widget.Bar.Slider.toString ());
 		.................................................
 
-		In both cases, the output that is logged to the `Firebug` console will look pretty much the same as what you would see in an alert dialog (see `Alerting Summary Info for Instances or Classes`).
+		In both cases, the output that is logged to the `Firebug` console will look pretty much the same as what you would see in an alert dialog (see `alerting summary info for instances or classes`).
 
 	Logging Values of Instances or Classes to Firebug's Console
-		Just as with `Alerting Values of Instances or Classes`, values for instances of =Uize.Class= subclasses as well as =Uize.Class= subclasses can be conveniently logged to the `Firebug` console using Firebug's =console.log= method.
+		Just as with `alerting values of instances or classes`, values for instances of =Uize.Class= subclasses as well as =Uize.Class= subclasses can be conveniently logged to the `Firebug` console using Firebug's =console.log= method.
 
 		EXAMPLE 1
 		....................................
@@ -244,7 +244,7 @@ Scrunch-related Problems
 	Accidental Globals and Scrunching
 		Accidentally assigning globals can have interesting interactions with the scrunching process.
 
-		Scrunch-related side-effects of accidentally assigned globals are discussed in more detail in the section `Accidental Globals`.
+		Scrunch-related side-effects of accidentally assigned globals are discussed in more detail in the section `accidental globals`.
 
 	Private Collisions
 		It can sometimes - yet rarely - happen that source code of a subclass may conflict with source code of a superclass, if the same private identifier name is used in each, but for different purposes.
@@ -338,7 +338,7 @@ Accidental Globals
 			Fails in Source, Works in Scrunched
 				In another scenario, two accidental globals may "collide" when using source / unscrunched code, but may not collide when the scrunched version of the code is used.
 
-				This is a more likely scenario than the `Works in Source, Fails in Scrunched` scenario, because the probability of using the same name for a variable in two different pieces of code is higher than the probability of the same name being mapped to the same scrunched name in two different pieces of code. Fortunately, a problem that occurs in source code is more likely to be detected earlier, because development will be done using source / unscrunched code.
+				This is a more likely scenario than the `works in source, fails in scrunched` scenario, because the probability of using the same name for a variable in two different pieces of code is higher than the probability of the same name being mapped to the same scrunched name in two different pieces of code. Fortunately, a problem that occurs in source code is more likely to be detected earlier, because development will be done using source / unscrunched code.
 
 		Collisions With Page Code
 			Code inside a module can accidentally assign a value on a global variable that is also used by the page code, when the module actually needs to be using a local scope variable.

@@ -32,7 +32,7 @@
 			myLog.log ('This is my log message');
 			.....................................
 
-			Messages that are logged by calling the =log= instance method will be displayed in the =messages= implied node of the instance. If the =showTimestamp= state property is set to the value =true=, then `Log Message Timestamping` will be enabled for logged messages. If a message is logged before the instance is wired, then the message will be added to the `Queued Log Messages`.
+			Messages that are logged by calling the =log= instance method will be displayed in the =messages= implied node of the instance. If the =showTimestamp= state property is set to the value =true=, then `log message timestamping` will be enabled for logged messages. If a message is logged before the instance is wired, then the message will be added to the `queued log messages`.
 
 			Log Messages Displayed Literally
 				The text of a log message is displayed literally / exactly.
@@ -59,7 +59,7 @@
 				To illustrate the timestamping feature, consider the following examples...
 
 				EXAMPLE 1: No Timestamping
-					In the following example, `Log Message Timestamping` has been disabled by explicitly setting the =showTimestamp= state property to =false=.
+					In the following example, `log message timestamping` has been disabled by explicitly setting the =showTimestamp= state property to =false=.
 
 					EXAMPLE
 					................................................
@@ -74,7 +74,7 @@
 					......................
 
 				EXAMPLE 2: Timestamping With Default Format
-					In the following example, `Log Message Timestamping` is enabled by simply not overriding the initial value of =true= for the =showTimestamp= state property.
+					In the following example, `log message timestamping` is enabled by simply not overriding the initial value of =true= for the =showTimestamp= state property.
 
 					EXAMPLE
 					.....................................
@@ -89,7 +89,7 @@
 					.....................................
 
 				EXAMPLE 3: Timestamping With Custom Format
-					In the following example, `Log Message Timestamping` is enabled and a custom timestamp format is being specified using the =timestampFormat= state property.
+					In the following example, `log message timestamping` is enabled and a custom timestamp format is being specified using the =timestampFormat= state property.
 
 					EXAMPLE
 					....................................................................................
@@ -188,7 +188,7 @@ Uize.module ({
 							myInstance.clear ();
 							....................
 
-							If the instance is not wired at the time that this method is called, then the `Queued Log Messages` will be cleared. The =clear= instance method is called when the user clicks the =clear Child Widget=.
+							If the instance is not wired at the time that this method is called, then the `queued log messages` will be cleared. The =clear= instance method is called when the user clicks the =clear Child Widget=.
 
 							NOTES
 							- see the related =clear Child Widget=
@@ -227,7 +227,7 @@ Uize.module ({
 							myInstance.log (messageTextSTR);
 							................................
 
-							If the instance is not wired at the time that this method is called, then the specified log message will be added to the `Queued Log Messages`. For a more detailed discussion on logging, see the section `Logging a Message`.
+							If the instance is not wired at the time that this method is called, then the specified log message will be added to the `queued log messages`. For a more detailed discussion on logging, see the section `Logging a Message`.
 				*/
 			};
 
@@ -266,7 +266,7 @@ Uize.module ({
 					/*?
 						State Properties
 							showTimestamp
-								A boolean, specifying whether or not `Log Message Timestamping` should be enabled for logged messages.
+								A boolean, specifying whether or not `log message timestamping` should be enabled for logged messages.
 
 								When the value of this property is =true=, then the value of the related =timestampFormat= state property can be used to control how the prepended timestamps are formatted.
 

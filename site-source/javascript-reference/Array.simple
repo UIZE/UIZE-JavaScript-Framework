@@ -814,7 +814,7 @@ Instance Methods
 			repeatedSTR = new Array (numRepetitionsINT + 1).join (toRepeatANYTYPE);
 			.......................................................................
 
-			Because =null= or =undefined= element values are converted to empty strings, joining an array that contains some number of =null= or =undefined= elements using a custom delimiter results in a string with number-of-elements-minus-one repititions of that delimiter. The `Contructor` of the =Array= object makes it easy to `create a new array of a desired length`, where the elements are initialized to =undefined=.
+			Because =null= or =undefined= element values are converted to empty strings, joining an array that contains some number of =null= or =undefined= elements using a custom delimiter results in a string with number-of-elements-minus-one repititions of that delimiter. The `contructor` of the =Array= object makes it easy to `create a new array of a desired length`, where the elements are initialized to =undefined=.
 
 			EXAMPLE
 			........................................................................................
@@ -1404,7 +1404,7 @@ Instance Methods
 			lotsOfCommasSTR = new Array (totalCommasINT + 1) + '';
 			......................................................
 
-			Because the =,= (comma) character is the delimiter that separates elements when the =toString= method concatenates them, and because =null= or =undefined= element values are converted to empty strings, serializing an array that contains some number of =null= or =undefined= elements to a string results in a string with number-of-elements-minus-one commas. The `Contructor` of the =Array= object makes it easy to `create a new array of a desired length`, where the elements are initialized to =undefined=.
+			Because the =,= (comma) character is the delimiter that separates elements when the =toString= method concatenates them, and because =null= or =undefined= element values are converted to empty strings, serializing an array that contains some number of =null= or =undefined= elements to a string results in a string with number-of-elements-minus-one commas. The `contructor` of the =Array= object makes it easy to `create a new array of a desired length`, where the elements are initialized to =undefined=.
 
 			EXAMPLE
 			..........................................................................

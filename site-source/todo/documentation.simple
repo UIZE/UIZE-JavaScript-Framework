@@ -5,11 +5,6 @@ Improve Social Network Sharing
 
 	While the slide out sharing widget on the left is neat in its own way, its not direct and to the point enough and doesn't acknowledge the reality that Facebook and Twitter are currently the primary means for virality. Add an always visible widget somewhere near the top right in the gutter that shows likes, lets users easily like, and possibly shows FB friends for FB authenticated users. Look into the widgets that are provided by FB, Twitter, and Google.
 
-Uncapitalize Auto-linked Text
-	Uncapitalize the many section links in the reference and explainer documentation.
-
-	There are numerous places in the documentation where section links in paragraphs are still using the case sensitive / exact match text for the section titles. Since the auto-linking is now case insensitive (and has been for quite some time), lowercase all these section links - they're clunky and make the documentation less friendly.
-
 JavaScript Services
 	Create an explainer to explain the approach UIZE takes to services.
 

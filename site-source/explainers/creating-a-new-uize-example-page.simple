@@ -148,7 +148,7 @@ Example Page Requirements
 		Avoid Vertical Scrolling, Where Possible
 			On a 1024x768 display with the browser maximized, an example page should ideally not require vertical scrolling.
 
-			This requirement is not as important as the requirement to `avoid horizontal scrolling`, but it preferable that example pages not require vertical scrolling. Where possible, modify the various elements of the `Main Layout` (such as the `explanation` text, the `main content`, and the `programmatic interface demos`) as needed to ensure that the combined height does not introduce vertical scrolling.
+			This requirement is not as important as the requirement to `avoid horizontal scrolling`, but it preferable that example pages not require vertical scrolling. Where possible, modify the various elements of the `main layout` (such as the `explanation` text, the `main content`, and the `programmatic interface demos`) as needed to ensure that the combined height does not introduce vertical scrolling.
 
 			Maximum Height Marker
 				The styling of example pages includes a dotted marker line that indicates the maximum height for the combined contents of an example page.

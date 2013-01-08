@@ -1,4 +1,4 @@
-The event system of the UIZE JavaScript Framework has been improved with `More Concisely Named Methods` and the addition of a `Dedicated Event Relay Facility`.
+The event system of the UIZE JavaScript Framework has been improved with `more concisely named methods` and the addition of a `dedicated event relay facility`.
 
 More Concisely Named Methods
 	Various event management methods have been deprecated in favor of more versatile and more concisely named versions.

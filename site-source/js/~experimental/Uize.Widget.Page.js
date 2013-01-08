@@ -298,7 +298,7 @@ Uize.module ({
 									The =injectionParamsOBJ= object supports the following properties...
 
 									node
-										A `Node Blob`, specifying the node (or nodes) into which the loaded HTML should be injected.
+										A `node blob`, specifying the node (or nodes) into which the loaded HTML should be injected.
 
 										NOTES
 										- required
@@ -782,7 +782,7 @@ Uize.module ({
 								url
 									A string, specifying the URL of the document that should be loaded into the popup window.
 
-									If no URL is specified, then a `Blank Popup Window` will be launched.
+									If no URL is specified, then a `blank popup window` will be launched.
 
 								width
 									An integer, specifying the width of the document area of the popup window (ie. *not* the outside width, so excluding browser chrome).

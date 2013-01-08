@@ -41,34 +41,34 @@
 			Now, let's get into a more detailed description of the mechanics. For the purpose of this discussion, a number of terms and concepts are defined, as follows...
 
 			Swap Port
-				The "port" in which the swap effect is viewed is termed the `Swap Port`.
+				The "port" in which the swap effect is viewed is termed the `swap port`.
 
-				The `Swap Port` contains two Views - one `View` for displaying the current item, and another `View` for revealing the next item. Both Views are positioned absolutely, with one on top of the other.
+				The `swap port` contains two views - one `view` for displaying the current item, and another `view` for revealing the next item. Both views are positioned absolutely, with one on top of the other.
 
 			View
-				One item node in the `Swap Port` is termed a `View`.
+				One item node in the `swap port` is termed a `view`.
 
-				There are two Views in the Swap Port: one View provides a view into the current item, and the other View provides a view into the next item that is being revealed. When a swap is performed, initial View coordinates (termed the `View Seed`) and final View coordinates (termed the `View Final`) are calculated. During the course of the swap effect, the View coordinates for the next item's View are interpolated between the View Seed coordinates and the View Final coordinates. Additionally, its opacity will be faded from completely transparent to completely opaque over the course of the animation if the =dissolve= state property is set to =true=.
+				There are two views in the swap port: one view provides a view into the current item, and the other view provides a view into the next item that is being revealed. When a swap is performed, initial view coordinates (termed the `view seed`) and final View coordinates (termed the `view final`) are calculated. During the course of the swap effect, the View coordinates for the next item's view are interpolated between the view seed coordinates and the view final coordinates. Additionally, its opacity will be faded from completely transparent to completely opaque over the course of the animation if the =dissolve= state property is set to =true=.
 
-				If the =crossFade= state property is set to =true=, then the `Crossfade` behavior is enabled and the View coordinates for the current item's View will be interpolated between the View Final coordinates and the View Seed coordinates, and its opacity will be faded from completely opaque to completely transparent over the course of the animation if the =dissolve= state property is set to =true=. The additional =crossFadeSize= and =crossFadeAlign= state properties govern the nature of the `Crossfade` behavior.
+				If the =crossFade= state property is set to =true=, then the `crossfade` behavior is enabled and the view coordinates for the current item's view will be interpolated between the view final coordinates and the view seed coordinates, and its opacity will be faded from completely opaque to completely transparent over the course of the animation if the =dissolve= state property is set to =true=. The additional =crossFadeSize= and =crossFadeAlign= state properties govern the nature of the `crossfade` behavior.
 
 			View Seed
-				The View Seed is the initial coordinates for a `View`.
+				The view seed is the initial coordinates for a `view`.
 
-				The View Seed is derived by calculating `View Seed Size` and `View Seed Alignment`, in this process combining the coordinates of the `View Final` and the values of the =viewSeedSizeX=, =viewSeedSizeY=, =viewSeedAlignX=, and =viewSeedAlignY= state properties (discussed below).
+				The view seed is derived by calculating `view seed size` and `view seed alignment`, in this process combining the coordinates of the `view final` and the values of the =viewSeedSizeX=, =viewSeedSizeY=, =viewSeedAlignX=, and =viewSeedAlignY= state properties (discussed below).
 
 				View Seed Size
-					View Seed Size is calculated using the =viewSeedSizeX= and =viewSeedSizeY= state properties.
+					View seed size is calculated using the =viewSeedSizeX= and =viewSeedSizeY= state properties.
 
-					Specifically, the width of the View Seed is calculated as a fraction of the width of the `View Final` (as specified by the =viewSeedSizeX= state property), and the height of the View Seed is calculated as a fraction of the height of the `View Final` (as specified by the =viewSeedSizeY= state property).
+					Specifically, the width of the view seed is calculated as a fraction of the width of the `view final` (as specified by the =viewSeedSizeX= state property), and the height of the view seed is calculated as a fraction of the height of the `view final` (as specified by the =viewSeedSizeY= state property).
 
 				View Seed Alignment
-					View Seed Alignment refers to the positioning of the View Seed within the `Swap Port` and is calculated using the =viewSeedAlignX= and =viewSeedAlignY= state properties.
+					View seed alignment refers to the positioning of the view seed within the `swap port` and is calculated using the =viewSeedAlignX= and =viewSeedAlignY= state properties.
 
 					The =viewSeedAlignX= and =viewSeedAlignY= state properties are floating point numbers in the range of =0= to =1=, where the value =0= represents left and top alignment, the value =1= represents right and bottom alignment, and the value =.5= represents center alignment.
 
 			View Final
-				The `View Final` is the final coordinates for a `View`, being the coordinates of the `Swap Port`.
+				The `view final` is the final coordinates for a `view`, being the coordinates of the `swap port`.
 
 			Crossfade
 				Crossfade refers to the process by which the current item is progressively hidden while the next item is progressively revealed.
@@ -77,7 +77,7 @@
 
 				The way that the current item is hidden is essentially the reverse of the effect for revealing the next item. So, for example, if the exact settings for the swap effect mean that the next item will slide out from the right edge while also fading in from completely transparent to completely opaque, then the current item will hide by sliding out towards the right edge while also fading out from completely opaque to completely transparent.
 
-				The additional =crossFadeSize= and =crossFadeAlign= state properties govern the nature of the Crossfade behavior.
+				The additional =crossFadeSize= and =crossFadeAlign= state properties govern the nature of the crossfade behavior.
 
 				Crossfade Size
 					The =crossFadeSize= state property lets you control the size of the overlap of the current item hide and next item reveal animations.
@@ -98,13 +98,13 @@
 					A value of =0= (start-aligned) for =crossFadeAlign= means that the overlap will be aligned so that the start of the overlap is against the start of the effect, a value of =1= (end-aligned) means that the overlap will be aligned so that the end of the overlap is against the end of the effect, and a value of =.5= (center-aligned) means that the overlap will be aligned so that the time gap between the effect start and the overlap start is the same as the time gap between the overlap end and the effect end.
 
 			View Content Alignment
-				View Content Alignment refers to the positioning of an item within its corresponding `View`.
+				View content alignment refers to the positioning of an item within its corresponding `view`.
 
-				As the swap effect progresses, the coordinates of a View are animated between the `View Seed` coordinates and the `View Final` coordinates. At any one point during this transition, the way that the item is positioned within the View coordinates is determined by the =viewContentAlignX= and =viewContentAlignY= state properties (alignment can be controlled discretely for the X and Y axes). The values specified for these properties should be floating point numbers in the range of =0= to =1=, where the value =0= represents left and top alignment, the value =1= represents right and bottom alignment, and the value =.5= represents center alignment.
+				As the swap effect progresses, the coordinates of a view are animated between the `view seed` coordinates and the `view final` coordinates. At any one point during this transition, the way that the item is positioned within the View coordinates is determined by the =viewContentAlignX= and =viewContentAlignY= state properties (alignment can be controlled discretely for the X and Y axes). The values specified for these properties should be floating point numbers in the range of =0= to =1=, where the value =0= represents left and top alignment, the value =1= represents right and bottom alignment, and the value =.5= represents center alignment.
 
-				Additionally, the special value ='none'= indicates that there should be no View Content Alignment for the axis for which the value ='none'= is specified, meaning that the item's position for that axis will be fixed with respect to the `Swap Port` for the entire duration of the effect.
+				Additionally, the special value ='none'= indicates that there should be no view content alignment for the axis for which the value ='none'= is specified, meaning that the item's position for that axis will be fixed with respect to the `swap port` for the entire duration of the effect.
 
-				To better understand the principle of View Content Alignment, it may help to consider as an example the value of the =Uize.Widget.Swap.presets.fadeSlideInFromRight= preset...
+				To better understand the principle of view content alignment, it may help to consider as an example the value of the =Uize.Widget.Swap.presets.fadeSlideInFromRight= preset...
 
 				............................
 				{
@@ -123,16 +123,16 @@
 
 				With the =fadeSlideInFromRight= preset, the new item slides in from the right edge and also fades in as it slides into place to eventually fully cover the current item.
 
-				The `View Seed` is a vertical sliver, as defined by the values for the =viewSeedSizeX= and =viewSeedSizeY= state properties. The value of =0= for =viewSeedSizeX= means that the View Seed has a width of =0=, and the value of =1= for =viewSeedSizeY= means that the View Seed starts out at the full height of the `Swap Port`. Moreover, the value of =1= for =viewSeedAlignX= means that the vertical sliver is aligned so that it is positioned at the right edge of the Swap Port. Because =viewSeedSizeY= is set to =1=, the value of the =viewSeedAlignY= state property (=0= in this case) has no effect on the vertical position of the View Seed.
+				The `view seed` is a vertical sliver, as defined by the values for the =viewSeedSizeX= and =viewSeedSizeY= state properties. The value of =0= for =viewSeedSizeX= means that the View Seed has a width of =0=, and the value of =1= for =viewSeedSizeY= means that the view seed starts out at the full height of the `swap port`. Moreover, the value of =1= for =viewSeedAlignX= means that the vertical sliver is aligned so that it is positioned at the right edge of the Swap Port. Because =viewSeedSizeY= is set to =1=, the value of the =viewSeedAlignY= state property (=0= in this case) has no effect on the vertical position of the view seed.
 
-				Now, as the effect progresses, the new item is revealed within an ever growing rectangle that starts out as a vertical sliver on the right, to eventually become the entire Swap Port. As this rectangle grows, how is the positioning of the view content within this rectangle determined? How does one qualify the difference between a wipe reveal and a slide in reveal?
+				Now, as the effect progresses, the new item is revealed within an ever growing rectangle that starts out as a vertical sliver on the right, to eventually become the entire swap port. As this rectangle grows, how is the positioning of the view content within this rectangle determined? How does one qualify the difference between a wipe reveal and a slide in reveal?
 
-				The answer is to be found in the values of the =viewContentAlignX= and =viewContentAlignY= state properties. In this example, =viewContentAlignX= is set to =0=. What this means is that the new item is positioned within the ever growing `View` rectangle so that it is aligned against its left edge. This has the effect of creating a slide in effect. Were the value of =viewContentAlignX= to be =1= (ie. right aligned) or ='none'=, then you would end up with a wipe reveal.
+				The answer is to be found in the values of the =viewContentAlignX= and =viewContentAlignY= state properties. In this example, =viewContentAlignX= is set to =0=. What this means is that the new item is positioned within the ever growing `view` rectangle so that it is aligned against its left edge. This has the effect of creating a slide in effect. Were the value of =viewContentAlignX= to be =1= (ie. right aligned) or ='none'=, then you would end up with a wipe reveal.
 
-				The value ='none'= has the same effect as right alignment in this case because the View Seed starts at the right edge of the Swap Port and the right edge of the View rectangle stays against the right edge of the Swap Port as the rectangle grows during the effect. By contrast, the value ='none'= would *not* have the same effect as =1= if the =viewSeedAlignX= state property were set to =.5=.
+				The value ='none'= has the same effect as right alignment in this case because the view seed starts at the right edge of the swap port and the right edge of the view rectangle stays against the right edge of the swap port as the rectangle grows during the effect. By contrast, the value ='none'= would *not* have the same effect as =1= if the =viewSeedAlignX= state property were set to =.5=.
 
 			Cycling Property Sets
-				Cycling Property Sets, as specified in the =cyclingPropertySets= state property, provide a convenient way to cycle through different swap effect settings on each transition from the current item to the next item.
+				Cycling property sets, as specified in the =cyclingPropertySets= state property, provide a convenient way to cycle through different swap effect settings on each transition from the current item to the next item.
 
 				The value of the =cyclingPropertySets= property should be an array, where each element of the array is an object containing values for the state properties of the =Uize.Widget.Swap= class. Each time, upon transitioning from the current item to the next item, the current element of the =cyclingPropertySets= is used to set new effect values and the array counter is advanced. Upon using the last element of the array, the counter is then reset back to =0=, thereby starting again at the first element. Consider the following example...
 
@@ -192,7 +192,7 @@ Uize.module ({
 								/*?
 									Instance Properties
 										viewFinalCoords
-											An array, representing the `View Final` coordinates for the swap effect, where the elements of the array represent values for left, top, width, and height, respectively.
+											An array, representing the `view final` coordinates for the swap effect, where the elements of the array represent values for left, top, width, and height, respectively.
 
 											NOTES
 											- this property is intended to be used by subclasses
@@ -380,7 +380,7 @@ Uize.module ({
 					/*?
 						State Properties
 							crossFade
-								A boolean, specifying whether or not the `Crossfade` behavior should be enabled.
+								A boolean, specifying whether or not the `crossfade` behavior should be enabled.
 
 								When =crossFade= is set to =true=, then the related =crossFadeSize= and =crossFadeAlign= state properties become applicable.
 
@@ -395,9 +395,9 @@ Uize.module ({
 					/*?
 						State Properties
 							crossFadeAlign
-								A floating point number in the range of =0= to =1=, specifying the `Crossfade Alignment` for the `Crossfade` behavior.
+								A floating point number in the range of =0= to =1=, specifying the `crossfade alignment` for the `crossfade` behavior.
 
-								For a detailed discussion of =crossFadeAlign= in the broader context of the crossfade behavior, see the section `Crossfade`.
+								For a detailed discussion of =crossFadeAlign= in the broader context of the crossfade behavior, see the section `crossfade`.
 
 								NOTES
 								- see the companion =crossFadeSize= state property
@@ -411,9 +411,9 @@ Uize.module ({
 					/*?
 						State Properties
 							crossFadeSize
-								A floating point number in the range of =0= to =1=, specifying `Crossfade Size` for the `Crossfade` behavior as a fraction of the overal swap effect duration.
+								A floating point number in the range of =0= to =1=, specifying `Crossfade Size` for the `crossfade` behavior as a fraction of the overal swap effect duration.
 
-								For a detailed discussion of =crossFadeSize= in the broader context of the crossfade behavior, see the section `Crossfade`.
+								For a detailed discussion of =crossFadeSize= in the broader context of the crossfade behavior, see the section `crossfade`.
 
 								NOTES
 								- see the companion =crossFadeAlign= state property
@@ -425,7 +425,7 @@ Uize.module ({
 					/*?
 						State Properties
 							cyclingPropertySets
-								An optional array, specifying `Cycling Property Sets` that should be cycled through on each transition from the current item to the next item.
+								An optional array, specifying `cycling property sets` that should be cycled through on each transition from the current item to the next item.
 
 								NOTES
 								- the initial value is =undefined=
@@ -438,7 +438,7 @@ Uize.module ({
 							dissolve
 								A boolean, specifying whether or not opacity should be animated during the swap effect.
 
-								When the =viewSeedSizeX= and =viewSeedSizeY= state properties are both set to =1=, then you will only notice the swap effect if =dissolve= is set to =true=, since the coordinates of each `View` will be the `View Final` coordinates throughout the duration of the effect - the only means for transitioning from the current item to the next item will be through animating the opacity.
+								When the =viewSeedSizeX= and =viewSeedSizeY= state properties are both set to =1=, then you will only notice the swap effect if =dissolve= is set to =true=, since the coordinates of each `view` will be the `view final` coordinates throughout the duration of the effect - the only means for transitioning from the current item to the next item will be through animating the opacity.
 
 								NOTES
 								- the initial value is =true=
@@ -450,10 +450,10 @@ Uize.module ({
 					/*?
 						State Properties
 							viewContentAlignX
-								A floating point number in the range of =0= to =1=, specifying the horitontal `View Content Alignment` of an item in its `View`.
+								A floating point number in the range of =0= to =1=, specifying the horitontal `view content alignment` of an item in its `view`.
 
 								NOTES
-								- the special value of ='none'= specifies that there should be no `View Content Alignment` for the X-axis
+								- the special value of ='none'= specifies that there should be no `view content alignment` for the X-axis
 								- the initial value is ='none'=
 					*/
 				},
@@ -463,10 +463,10 @@ Uize.module ({
 					/*?
 						State Properties
 							viewContentAlignY
-								A floating point number in the range of =0= to =1=, specifying the vertical `View Content Alignment` of an item in its `View`.
+								A floating point number in the range of =0= to =1=, specifying the vertical `view content alignment` of an item in its `view`.
 
 								NOTES
-								- the special value of ='none'= specifies that there should be no `View Content Alignment` for the Y-axis
+								- the special value of ='none'= specifies that there should be no `view content alignment` for the Y-axis
 								- the initial value is ='none'=
 					*/
 				},
@@ -476,7 +476,7 @@ Uize.module ({
 					/*?
 						State Properties
 							viewSeedSizeX
-								A floating point number in the range of =0= to =1=, specifying the horizontal `View Seed Size` as a fraction of the width of the `View Final`.
+								A floating point number in the range of =0= to =1=, specifying the horizontal `view seed size` as a fraction of the width of the `view final`.
 
 								NOTES
 								- the initial value is =1=
@@ -488,7 +488,7 @@ Uize.module ({
 					/*?
 						State Properties
 							viewSeedSizeY
-								A floating point number in the range of =0= to =1=, specifying the vertical `View Seed Size` as a fraction of the height of the `View Final`.
+								A floating point number in the range of =0= to =1=, specifying the vertical `view seed size` as a fraction of the height of the `view final`.
 
 								NOTES
 								- the initial value is =1=
@@ -500,7 +500,7 @@ Uize.module ({
 					/*?
 						State Properties
 							viewSeedAlignX
-								A floating point number in the range of =0= to =1=, specifying the horizontal `View Seed Alignment` of the `View Seed` within the `Swap Port`.
+								A floating point number in the range of =0= to =1=, specifying the horizontal `view seed alignment` of the `view seed` within the `swap port`.
 
 								NOTES
 								- the initial value is =.5=
@@ -512,7 +512,7 @@ Uize.module ({
 					/*?
 						State Properties
 							viewSeedAlignY
-								A floating point number in the range of =0= to =1=, specifying the vertical `View Seed Alignment` of the `View Seed` within the `Swap Port`.
+								A floating point number in the range of =0= to =1=, specifying the vertical `view seed alignment` of the `view seed` within the `swap port`.
 
 								NOTES
 								- the initial value is =.5=

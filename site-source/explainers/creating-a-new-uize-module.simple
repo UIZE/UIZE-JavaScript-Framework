@@ -118,7 +118,7 @@ Update Header Comments
 			Copyright Date Range
 				The copyright date range must reflect when the code in the module was initially created - which is not necessarily the date when the actually JavaScript file that defines the module was created.
 
-				For example, a new module could be created by factoring out code that used to exist in some other module. In such cases, the copyright date range used in the `Copyright Notice Comment Line` for the new module should be the copyright date range for the existing module from which the new module's code was taken.
+				For example, a new module could be created by factoring out code that used to exist in some other module. In such cases, the copyright date range used in the `copyright notice comment line` for the new module should be the copyright date range for the existing module from which the new module's code was taken.
 
 			Copyright Holder
 				The copyright holder portion of the `copyright notice comment line` identifies the holder of the rights to copy the contents of the file.

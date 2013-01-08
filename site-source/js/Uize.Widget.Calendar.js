@@ -28,16 +28,16 @@
 
 			- `Valid Date Range` - You can configure a valid date range to limit the date range within which the user can select dates.
 			- `Navigation Buttons` - Month and year navigation buttons let the user navigate the calendar to a different month or year in order to select a date.
-			- `Navigation Button State Management` - The enabled states of the month and year navigation buttons are managed so that they are disabled when their action would take the view outside of a configured `Valid Date Range`.
+			- `Navigation Button State Management` - The enabled states of the month and year navigation buttons are managed so that they are disabled when their action would take the view outside of a configured `valid date range`.
 			- `Date Grid` - A date grid, with links for every day of the month, lets the user select a date.
-			- `Snap View Behavior` - A snap view behavior ensures that the date is in view and that the view is not outside of the `Valid Date Range` after the values of the =value=, =minValue=, or =maxValue= state properties are changed programmatically.
-			- Flexibility in `Specifying Date Values` - Flexibility in how dates can be specified when setting values for the =value=, =minValue=, and =maxValue= state properties lets you specify dates in any of the ways supported by the =Uize.Date.resolve= method.
+			- `Snap View Behavior` - A snap view behavior ensures that the date is in view and that the view is not outside of the `valid date range` after the values of the =value=, =minValue=, or =maxValue= state properties are changed programmatically.
+			- Flexibility in `specifying date values` - Flexibility in how dates can be specified when setting values for the =value=, =minValue=, and =maxValue= state properties lets you specify dates in any of the ways supported by the =Uize.Date.resolve= method.
 
 		Implemented Interfaces
 			The =Uize.Widget.Calendar= implements the following JavaScript interfaces...
 
-			- *Value Interface* - This class implements a =value= state property and, therefore, it implements the `Value Interface`.
-			- *Value Range Interface* - This class implements =minValue= and =maxValue= state properties and, therefore, it implements the `Value Range Interface`.
+			- *Value Interface* - This class implements a =value= state property and, therefore, it implements the `value interface`.
+			- *Value Range Interface* - This class implements =minValue= and =maxValue= state properties and, therefore, it implements the `value range interface`.
 
 		Valid Date Range
 			The =Uize.Widget.Calendar= module supports the ability to limit the date range within which the user can select dates.
@@ -76,7 +76,7 @@
 				This means that either - or both - of the =minValue= and =maxValue= properties can be set to =null= or =''= (empty string), to indicate that there is no lower and/or upper bound, respectively, for the valid date range.
 
 				Lower Bound Only
-					When only the =minValue= property is set to a date and the =maxValue= property is set to =null= or =''= (empty string), then there will be no upper bound to the `Valid Date Range`.
+					When only the =minValue= property is set to a date and the =maxValue= property is set to =null= or =''= (empty string), then there will be no upper bound to the `valid date range`.
 
 					This configuration lets the user select a date from a specified start date onwards. Consider the following examples...
 
@@ -95,7 +95,7 @@
 					In the above example, the user will be able to select a date from today's date (ie. the date on which this calendar widget is instantiated) onwards.
 
 				Upper Bound Only
-					When only the =maxValue= property is set to a date and the =minValue= property is set to =null= or =''= (empty string), then there will be no lower bound to the `Valid Date Range`.
+					When only the =maxValue= property is set to a date and the =minValue= property is set to =null= or =''= (empty string), then there will be no lower bound to the `valid date range`.
 
 					This configuration lets the user select a date up until a specified date. Consider the following examples...
 
@@ -119,7 +119,7 @@
 					In this case, there will effectively be no valid date range constraint. Put another way, the valid date range will include all dates for all time - completely boundless.
 
 			Invalidation of value
-				The value of the =value= state property (ie. the selected date) may be set to =null=, effectively being invalidated, if the values of the =minValue= and/or =maxValue= state properties are modified and the selected date no longer falls within the newly set `Valid Date Range`.
+				The value of the =value= state property (ie. the selected date) may be set to =null=, effectively being invalidated, if the values of the =minValue= and/or =maxValue= state properties are modified and the selected date no longer falls within the newly set `valid date range`.
 
 		Specifying Date Values
 			The =Uize.Widget.Calendar= module uses the =Uize.Date.resolve= static method of the =Uize.Date= module to conform date values to instances of JavaScript's =Date= object.
@@ -134,25 +134,25 @@
 			The markup for the navigation button child widgets is optional, and a given implementation of a calendar widget's HTML does not need to offer the navigation buttons in its UI. If the navigation button markup is omitted, the application may elect to provide month and year navigation through some alternate UI. In other cases, a calendar widget's HTML may exclude just the markup for the year navigation buttons, especially in cases where the user is not likely to need to navigate to earlier or later years, or if date selection will be constrained to dates from a particular year.
 
 			Navigation Button State Management
-				The =Uize.Widget.Calendar= module manages the =enabled= state of the `Navigation Buttons` so that they are disabled when their action would take the view outside of a `Valid Date Range` specified by the =minValue= and =maxValue= state properties.
+				The =Uize.Widget.Calendar= module manages the =enabled= state of the `navigation buttons` so that they are disabled when their action would take the view outside of a `valid date range` specified by the =minValue= and =maxValue= state properties.
 
-				- When a non-null value is specified for the =maxValue= state property and incrementing the value of the =month= state property would take the view outside of the `Valid Date Range`, then the =nextMonth= button will be disabled.
+				- When a non-null value is specified for the =maxValue= state property and incrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =nextMonth= button will be disabled.
 
-				- When a non-null value is specified for the =minValue= state property and decrementing the value of the =month= state property would take the view outside of the `Valid Date Range`, then the =previousMonth= button will be disabled.
+				- When a non-null value is specified for the =minValue= state property and decrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =previousMonth= button will be disabled.
 
-				- When a non-null value is specified for the =maxValue= state property and incrementing the value of the =year= state property would take the view outside of the `Valid Date Range`, then the =nextYear= button will be disabled.
+				- When a non-null value is specified for the =maxValue= state property and incrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =nextYear= button will be disabled.
 
-				- When a non-null value is specified for the =minValue= state property and decrementing the value of the =year= state property would take the view outside of the `Valid Date Range`, then the =previousYear= button will be disabled.
+				- When a non-null value is specified for the =minValue= state property and decrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =previousYear= button will be disabled.
 
 		Snap View Behavior
-			The =Uize.Widget.Calendar= module implements a snap-into-view behavior, so that programmatically changing the value of the =value=, =minValue=, or =maxValue= state properties will update the =month= and =year= state properties - as needed - in order to ensure that the date is in view and that the view is not outside of the `Valid Date Range`.
+			The =Uize.Widget.Calendar= module implements a snap-into-view behavior, so that programmatically changing the value of the =value=, =minValue=, or =maxValue= state properties will update the =month= and =year= state properties - as needed - in order to ensure that the date is in view and that the view is not outside of the `valid date range`.
 
-			The Snap View behavior, as it pertains to the =value= state property, is switchable with the boolean =snapViewOnValueChange= state property. If the =snapViewOnValueChange= state property is set to =true= at the time that the =value= property is modified, then the values of the =year= and =month= state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the `Valid Date Range` and that the selected date is in view. If no date is selected, then the =year= and =month= will be updated so that today's date is in view, unless today's date is outside of the `Valid Date Range`, in which case the =year= and =month= will be updated so that the start or end date of the `Valid Date Range` is in view, with priority given to the start date, but with the end date being used if there is no lower bound to the `Valid Date Range`.
+			The snap view behavior, as it pertains to the =value= state property, is switchable with the boolean =snapViewOnValueChange= state property. If the =snapViewOnValueChange= state property is set to =true= at the time that the =value= property is modified, then the values of the =year= and =month= state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the `valid date range` and that the selected date is in view. If no date is selected, then the =year= and =month= will be updated so that today's date is in view, unless today's date is outside of the `valid date range`, in which case the =year= and =month= will be updated so that the start or end date of the `valid date range` is in view, with priority given to the start date, but with the end date being used if there is no lower bound to the `valid date range`.
 
 		Date Grid
 			The =Uize.Widget.Calendar= module implements a date grid, with links for every day of the month, which lets the user select a date.
 
-			The HTML for the date grid is dynamically generated to have links for the month of the year currently in view by the instance. The currently selected date is indicated in the grid with a highlight. Days of the month currently in view that are outside of the `Valid Date Range` are grayed out.
+			The HTML for the date grid is dynamically generated to have links for the month of the year currently in view by the instance. The currently selected date is indicated in the grid with a highlight. Days of the month currently in view that are outside of the `valid date range` are grayed out.
 */
 
 Uize.module ({
@@ -187,9 +187,9 @@ Uize.module ({
 								/*?
 									Child Widgets
 										nextMonth
-											An instance of =Uize.Widget.Button=, that is wired up as part of the `Navigation Buttons`, and that increments the value of the =month= state property.
+											An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation buttons`, and that increments the value of the =month= state property.
 
-											When a non-null value is specified for the =maxValue= state property and incrementing the value of the =month= state property would take the view outside of the `Valid Date Range`, then the =nextMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
+											When a non-null value is specified for the =maxValue= state property and incrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =nextMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
 
 											When the =month= state property is set to the value =11= (the last month of the year), then incrementing its value will increment the value of the =year= state property and set the =month= property to =0=. Thus, the =nextMonth= button can be used to navigate across years (see `Month Wrapping Behavior`).
 
@@ -206,9 +206,9 @@ Uize.module ({
 								/*?
 									Child Widgets
 										previousMonth
-											An instance of =Uize.Widget.Button=, that is wired up as part of the `Navigation Buttons`, and that decrements the value of the =month= state property.
+											An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation buttons`, and that decrements the value of the =month= state property.
 
-											When a non-null value is specified for the =minValue= state property and decrementing the value of the =month= state property would take the view outside of the `Valid Date Range`, then the =previousMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
+											When a non-null value is specified for the =minValue= state property and decrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =previousMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
 
 											When the =month= state property is set to the value =0= (the first month of the year), then decrementing its value will decrement the value of the =year= state property and set the =month= property to =11=. Thus, the =previousMonth= button can be used to navigate across years (see `Month Wrapping Behavior`).
 
@@ -225,9 +225,9 @@ Uize.module ({
 								/*?
 									Child Widgets
 										nextYear
-											An instance of =Uize.Widget.Button=, that is wired up as part of the `Navigation Buttons`, and that increments the value of the =year= state property.
+											An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation buttons`, and that increments the value of the =year= state property.
 
-											When a non-null value is specified for the =maxValue= state property and incrementing the value of the =year= state property would take the view outside of the `Valid Date Range`, then the =nextYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
+											When a non-null value is specified for the =maxValue= state property and incrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =nextYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
 
 											NOTES
 											- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =nextYear= button
@@ -242,9 +242,9 @@ Uize.module ({
 								/*?
 									Child Widgets
 										previousYear
-											An instance of =Uize.Widget.Button=, that is wired up as part of the `Navigation Buttons`, and that decrements the value of the =year= state property.
+											An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation buttons`, and that decrements the value of the =year= state property.
 
-											When a non-null value is specified for the =minValue= state property and decrementing the value of the =year= state property would take the view outside of the `Valid Date Range`, then the =previousYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
+											When a non-null value is specified for the =minValue= state property and decrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =previousYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
 
 											NOTES
 											- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =previousYear= button
@@ -426,7 +426,7 @@ Uize.module ({
 										grid
 											A node, whose contents will be replaced with the dynamically generated grid HTML for the month of the year currently in view by the instance.
 
-											This implied node can be of any type that can accept HTML contents containing a table. The contents of this node will be replaced when the grid needs to be updated - as a result of the values of the =month= or =year= properties changing, as a result of the `Valid Date Range` changing, or as a result of any other state change in the instance that would affect what is displayed in the grid. For more info, see the section `Date Grid`.
+											This implied node can be of any type that can accept HTML contents containing a table. The contents of this node will be replaced when the grid needs to be updated - as a result of the values of the =month= or =year= properties changing, as a result of the `valid date range` changing, or as a result of any other state change in the instance that would affect what is displayed in the grid. For more info, see the section `Date Grid`.
 
 											NOTES
 											- see the related =day[dayNo]= implied node
@@ -442,9 +442,9 @@ Uize.module ({
 								/*?
 									Implied Nodes
 										day[dayNo]
-											One of a number of nodes in the `Date Grid` that are used to indicate the days of the month of the year currently in view by the instance and that may be wired up to let the user select the corresponding date.
+											One of a number of nodes in the `date grid` that are used to indicate the days of the month of the year currently in view by the instance and that may be wired up to let the user select the corresponding date.
 
-											The HTML for these implied nodes are generated dynamically when the contents of the =grid= implied node is replaced with the updated date grid HTML. The specific =day[dayNo]= implied node that corresponds to the currently selected date will be highlighted. All =day[dayNo]= implied nodes that represent dates that are outside of the `Valid Date Range` will be grayed out.
+											The HTML for these implied nodes are generated dynamically when the contents of the =grid= implied node is replaced with the updated date grid HTML. The specific =day[dayNo]= implied node that corresponds to the currently selected date will be highlighted. All =day[dayNo]= implied nodes that represent dates that are outside of the `valid date range` will be grayed out.
 
 											NOTES
 											- see the related =grid= implied node
@@ -487,16 +487,16 @@ Uize.module ({
 									When setting the =maxValue= property, the date can be specified in a variety of different manners (for more info, see the section `Specifying Date Values`).
 
 								Nullable
-									The =maxValue= property can be set to =null= or =''= (empty string), to indicate that there is no upper bound to the `Valid Date Range` (for more info, see the section `Boundless Date Ranges`).
+									The =maxValue= property can be set to =null= or =''= (empty string), to indicate that there is no upper bound to the `valid date range` (for more info, see the section `Boundless Date Ranges`).
 
 								Snapping into View
-									When the =maxValue= property is modified, the values of the =year= and =month= state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set `Valid Date Range` (for more info, see the section `Snap View Behavior`).
+									When the =maxValue= property is modified, the values of the =year= and =month= state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set `valid date range` (for more info, see the section `Snap View Behavior`).
 
 								Value Invalidation
-									When the =maxValue= property is modified, the =value= state property may be set to =null= if the selected date lies outside of the newly set `Valid Date Range` (for more info, see the section `Invalidation of value`).
+									When the =maxValue= property is modified, the =value= state property may be set to =null= if the selected date lies outside of the newly set `valid date range` (for more info, see the section `Invalidation of value`).
 
 								Updating Navigation Button State
-									When the value of the =maxValue= property is modified, the state of the year and month navigation buttons will be updated, so that buttons will only be enabled if their action would not take the view outside of the newly set `Valid Date Range` (for more info, see the section `Navigation Button State Management`).
+									When the value of the =maxValue= property is modified, the state of the year and month navigation buttons will be updated, so that buttons will only be enabled if their action would not take the view outside of the newly set `valid date range` (for more info, see the section `Navigation Button State Management`).
 
 								NOTES
 								- see the companion =minValue= state property
@@ -518,16 +518,16 @@ Uize.module ({
 									When setting the =minValue= property, the date can be specified in a variety of different manners (for more info, see the section `Specifying Date Values`).
 
 								Nullable
-									The =minValue= property can be set to =null= or =''= (empty string), to indicate that there is no lower bound to the `Valid Date Range` (for more info, see the section `Boundless Date Ranges`).
+									The =minValue= property can be set to =null= or =''= (empty string), to indicate that there is no lower bound to the `valid date range` (for more info, see the section `Boundless Date Ranges`).
 
 								Snapping into View
-									When the =minValue= property is modified, the values of the =year= and =month= state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set `Valid Date Range` (for more info, see the section `Snap View Behavior`).
+									When the =minValue= property is modified, the values of the =year= and =month= state properties will be updated, if necessary, in order to ensure that the viewed year and month is not outside of the newly set `valid date range` (for more info, see the section `Snap View Behavior`).
 
 								Value Invalidation
-									When the =minValue= property is modified, the =value= state property may be set to =null= if the selected date lies outside of the newly set `Valid Date Range` (for more info, see the section `Invalidation of value`).
+									When the =minValue= property is modified, the =value= state property may be set to =null= if the selected date lies outside of the newly set `valid date range` (for more info, see the section `Invalidation of value`).
 
 								Updating Navigation Button State
-									When the value of the =minValue= property is modified, the state of the year and month navigation buttons will be updated, so that buttons will only be enabled if their action would not take the view outside of the newly set `Valid Date Range` (for more info, see the section `Navigation Button State Management`).
+									When the value of the =minValue= property is modified, the state of the year and month navigation buttons will be updated, so that buttons will only be enabled if their action would not take the view outside of the newly set `valid date range` (for more info, see the section `Navigation Button State Management`).
 
 								NOTES
 								- see the companion =maxValue= state property

@@ -38,7 +38,7 @@
 					Uize.Array.Order.reverse ([1,2,3,4,5,6,7,8]); // returns the array [8,7,6,5,4,3,2,1]
 					....................................................................................
 
-					While JavaScript's built-in =Array= object *does* provide a =reverse= instance method, the =Uize.Array.Order.reverse= method offers a `Versatile Target` facility that is lacking with the built-in =reverse= method, which always modifies the source array.
+					While JavaScript's built-in =Array= object *does* provide a =reverse= instance method, the =Uize.Array.Order.reverse= method offers a `versatile target` facility that is lacking with the built-in =reverse= method, which always modifies the source array.
 
 					For a more in-depth explanation, consult the reference for the =Uize.Array.Order.reverse= method.
 

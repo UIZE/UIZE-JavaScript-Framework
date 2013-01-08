@@ -116,7 +116,7 @@ More on Setting Values
 	Always Use Set
 		Values for state properties should always be set using the =set= method.
 
-		This is the only way to ensure that =conformer= functions and =onChange= handlers registered for state properties are invoked, and that handlers registered for the `Changed.[propertyName] Virtual Event` and the `Changed.&#42; Wildcard Event` are executed.
+		This is the only way to ensure that =conformer= functions and =onChange= handlers registered for state properties are invoked, and that handlers registered for the `Changed.[propertyName] virtual event` and the `Changed.&#42; wildcard event` are executed.
 
 		INSTEAD OF...
 		.....................................

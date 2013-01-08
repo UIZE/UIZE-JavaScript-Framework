@@ -159,7 +159,7 @@ Relaying Events
 		.....................................................................
 
 	Event Bubbling
-		Another built-in facility for `Relaying Events` is event bubbling.
+		Another built-in facility for `relaying events` is event bubbling.
 
 		Event bubbling allows events originating from widgets (instances of a =Uize.Widget= subclass) to bubble up the parent chain, until the root of the widget tree is reached, or the event is handled and bubbling is canceled. Bubbling is both activated and canceled by using the =bubble= property of the event object. Consider the following example...
 

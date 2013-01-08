@@ -487,7 +487,7 @@ Uize.module ({
 								String Type Handlers
 									When a string value is specified for the =eventHandlerSTRorFNorOBJ= parameter, a function object will be constructed from that string for the purpose of handling the event.
 
-									One limitation of this handler type is that, unlike `Function Type Handlers`, a code string specified by the =eventHandlerSTRorFNorOBJ= parameter cannot reference the event object.
+									One limitation of this handler type is that, unlike `function type handlers`, a code string specified by the =eventHandlerSTRorFNorOBJ= parameter cannot reference the event object.
 
 								Object Type Handlers
 									When a reference to a =Uize.Class= subclass or an instance of a =Uize.Class= subclass is specified for the =eventHandlerSTRorFNorOBJ= parameter, then the event for which the handler is registered will be fired on that instance or class.

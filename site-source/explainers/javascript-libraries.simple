@@ -6,7 +6,7 @@ Introduction
 Where They Live
 	JavaScript library files - both the source versions and built versions - are named with a =.library.js= file extension and can live anywhere in the folder structure of your Web site project.
 
-	While these JavaScript library files can live anywhere, they can only reference JavaScript modules that live inside the JavaScript modules folder. Also, while they can live anywhere, the source versions of JavaScript library files very often live inside the source folder for JavaScript modules. The built versions of JavaScript library files are saved to a location according to the configuration of the `Build Environment Variables` (see the [[javascript-build-scripts.html][JavaScript Build Scripts]] explainer for more information).
+	While these JavaScript library files can live anywhere, they can only reference JavaScript modules that live inside the JavaScript modules folder. Also, while they can live anywhere, the source versions of JavaScript library files very often live inside the source folder for JavaScript modules. The built versions of JavaScript library files are saved to a location according to the configuration of the `build environment variables` (see the [[javascript-build-scripts.html][JavaScript Build Scripts]] explainer for more information).
 
 What They Look Like
 	As with scrunched and unscrunched JavaScript modules, the source and built versions of JavaScript library files look very different to one another.
@@ -42,7 +42,7 @@ What They Look Like
 			The above example shows the contents of the source version of the library file =UizeSite.Page.Doc.library.js=.
 
 			Comments and Indentation Inside the Library Contents Comment
-				Both comments and arbitrary indentation are supported inside the `Library Contents` comment, and both will be stripped out when creating `The Built Version` of the JavaScript library.
+				Both comments and arbitrary indentation are supported inside the `library contents` comment, and both will be stripped out when creating `the built version` of the JavaScript library.
 
 				Any individual line inside the Library Contents comment can be commented out by making the first non-whitespace character of the line not a valid identifier starting character. In JavaScript, valid identifier names can be started with any of the lowercase letters "a" through "z", the uppercase letters "A" through "Z", and the characters "$" (dollar) and "_" (underscore). Any line of the Library Contents comment that doesn't start with one of these characters is simply ignored. The following example shows a bunch of lines that are commented out using different prefix characters...
 
@@ -95,7 +95,7 @@ What They Look Like
 				*/
 				.............................................................................
 
-				In the above `Library Contents` comment, two lines commented using a "//" prefix are serving as headings for sections of the list, and two modules in the second section are commented out using a "//" prefix. All these commented lines will be ignored when creating `The Built Version` of the JavaScript library.
+				In the above `library contents` comment, two lines commented using a "//" prefix are serving as headings for sections of the list, and two modules in the second section are commented out using a "//" prefix. All these commented lines will be ignored when creating `the built version` of the JavaScript library.
 
 		Optional Module Declaration
 			The example shown above includes a module declaration that declares the library as a module.
@@ -119,7 +119,7 @@ What They Look Like
 				Uize.module ({name:'MyNamespace.MyLibraryName.library'});
 				.........................................................
 
-				The above example assumes that =MyNamespace= is already defined, or included in the `Library Contents` list. If this is not guaranteed to be the case, and if you wish to avoid dynamically loading an external file that simply defines this namespace, then you can also define that namespace in your library module, as in...
+				The above example assumes that =MyNamespace= is already defined, or included in the `library contents` list. If this is not guaranteed to be the case, and if you wish to avoid dynamically loading an external file that simply defines this namespace, then you can also define that namespace in your library module, as in...
 
 				EXAMPLE
 				.........................................................
@@ -142,7 +142,7 @@ What They Look Like
 				So, for example, the library module =UizeSite.Page.Doc.library= bundles all the JavaScript modules required by the =UizeSite.Page.Doc= page widget class, so one can count on the =UizeSite.Page.Doc= namespace existing when the module declaration for the library module is encountered. Similarly, a library module for the page widget base class could be named =Uize.Widget.Page.library=, since it would bundle all modules required by the =Uize.Widget.Page= module.
 
 			Don't Require Listed Modules
-				When declaring a library as a module, the module declaration should *not* include the modules that are listed in the `Library Contents` comment inside the =required= list of the module declaration.
+				When declaring a library as a module, the module declaration should *not* include the modules that are listed in the `library contents` comment inside the =required= list of the module declaration.
 
 				INCORRECT
 				....................................................................
@@ -168,7 +168,7 @@ What They Look Like
 	The Built Version
 		JavaScript library files are built by the =_Uize.Build.AutoScruncher.js= build script into JavaScript files of the same name, but that are located in your project where scrunched JavaScript files are configured to be located (see the [[javascript-build-scripts.html][JavaScript Build Scripts]] explainer for more information).
 
-		When a library file is built, the `Library Contents` comment that lists the contents of the library will be replaced with the actual code for the scrunched versions of all the modules listed in the comment - bundled into the built library in the order in which they are listed in the comment. `Comments and Indentation Inside the Library Contents Comment` are ignored. All other code inside the library file - such as a module namespace declaration for the library, for example - will remain unaltered in the built file.
+		When a library file is built, the `library contents` comment that lists the contents of the library will be replaced with the actual code for the scrunched versions of all the modules listed in the comment - bundled into the built library in the order in which they are listed in the comment. `Comments and indentation inside the library contents comment` are ignored. All other code inside the library file - such as a module namespace declaration for the library, for example - will remain unaltered in the built file.
 
 	What to Include
 		To deliver the best performance for your pages, a library file can include all of the JavaScript modules needed by the page, or at least the complete set of modules required by one or more of the classes used in the page (such as the page widget class, for example).
@@ -200,7 +200,7 @@ What They Look Like
 		Libraries Can't Include Libraries
 			JavaScript library files can't include other JavaScript library files - even if those other library files include a module declaration and are located inside the JavaScript modules folder.
 
-			This is a limitation of the build process for library files, since it is not currently recursive and cannot guarantee that the library modules will be built and current when they might be encountered in the `Library Contents` lists of other library files. Consider the following example...
+			This is a limitation of the build process for library files, since it is not currently recursive and cannot guarantee that the library modules will be built and current when they might be encountered in the `library contents` lists of other library files. Consider the following example...
 
 			PERFECTLY OK
 			................................................
@@ -254,7 +254,7 @@ How To Use Them
 		</script>
 		............................................................................
 
-		By design, the source version of a JavaScript library file does not contain the JavaScript code for the modules it lists, nor should a library module require the modules it lists in the `Library Contents` comment. Loading in a source version of a JavaScript library file should have no effect with regards to loading of modules (see the section `Don't Require Listed Modules` for a more in-depth discussion of this principle).
+		By design, the source version of a JavaScript library file does not contain the JavaScript code for the modules it lists, nor should a library module require the modules it lists in the `library contents` comment. Loading in a source version of a JavaScript library file should have no effect with regards to loading of modules (see the section `Don't Require Listed Modules` for a more in-depth discussion of this principle).
 
 	Sourcing in the Built Version
 		When pushing code to a live site, you will want to use the built versions of the library files.
@@ -277,7 +277,7 @@ How To Use Them
 	Requiring a JavaScript Library Module
 		Another way to load in a JavaScript library file is to require it as a module.
 
-		When a JavaScript library file includes an `Optional Module Declaration` that declares a namespace for the library file, then that library file can be required as a module, and requiring it will result in it being dynamically loaded in by the module loader mechanism - if it is not already loaded. Using this approach, it is not necessary to have a dedicated =script= tag for sourcing in the library file - the library module can simply be added to the =required= list of the anonymous module declaration that sets up the page widget instance in the page.
+		When a JavaScript library file includes an `optional module declaration` that declares a namespace for the library file, then that library file can be required as a module, and requiring it will result in it being dynamically loaded in by the module loader mechanism - if it is not already loaded. Using this approach, it is not necessary to have a dedicated =script= tag for sourcing in the library file - the library module can simply be added to the =required= list of the anonymous module declaration that sets up the page widget instance in the page.
 
 		EXAMPLE
 		............................................................................
@@ -302,7 +302,7 @@ Building Them
 	Modules Scrunched, Then Libraries Built
 		The =_Uize.Build.AutoScruncher.js= build script first builds all the scrunched versions of JavaScript modules it finds in the source folder for JavaScript modules.
 
-		After building all the scrunched modules, it then iterates through all the folders of the Web site project, finding and building all source versions of =.library.js= files. Source versions are distinguished from built versions, according to the configuration of the `Build Environment Variables` (once again, see the [[javascript-build-scripts.html][JavaScript Build Scripts]] explainer for more information).
+		After building all the scrunched modules, it then iterates through all the folders of the Web site project, finding and building all source versions of =.library.js= files. Source versions are distinguished from built versions, according to the configuration of the `build environment variables` (once again, see the [[javascript-build-scripts.html][JavaScript Build Scripts]] explainer for more information).
 
 	Libraries Always Built
 		Library files are built every time the =_Uize.Build.AutoScruncher.js= build script is run, since any of the JavaScript modules listed in a library file may have changed since the last time a particular library was built.
@@ -371,7 +371,7 @@ Important Considerations
 
 		This means that, in the built version of the library file, when the module declaration for the =Uize.Widget.Page= module is encountered, the =Uize.Widget= module won't be defined yet. This will trigger the module loader mechanism to dynamically load the =Uize.Widget= module. Once this module is loaded, only then will the =Uize.Widget.Page= module be built. After =Uize.Widget.Page= is built, the =Uize.Widget= module declaration will be encountered in the library file. Now, because this module will already have been loaded dynamically, the redundant module declaration will be ignored. The page should still work correctly, but it will be slower to load.
 
-		This case is even worse than the `Incomplete Library Files` case highlighted earlier, since not only are you incurring the dynamic loading of a discrete module, but your built library file will be bulked up by an inclusion of that same module that will simply be ignored - wasteful! The following example shows the correct ordering of the JavaScript modules for this library file...
+		This case is even worse than the `incomplete library files` case highlighted earlier, since not only are you incurring the dynamic loading of a discrete module, but your built library file will be bulked up by an inclusion of that same module that will simply be ignored - wasteful! The following example shows the correct ordering of the JavaScript modules for this library file...
 
 		CORRECT
 		...................

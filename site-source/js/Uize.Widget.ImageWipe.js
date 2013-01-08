@@ -39,57 +39,57 @@
 			Now, let's get into a more detailed description of the mechanics. For the purpose of this discussion, a number of terms and concepts are defined, as follows...
 
 			Wipe Port
-				The "port" in which the wipe effect is viewed is termed the `Wipe Port`.
+				The "port" in which the wipe effect is viewed is termed the `wipe port`.
 
-				The `Wipe Port` contains two Pane Stacks - one `Pane Stack` for displaying the current image, and another `Pane Stack` for revealing the next image. Both Pane Stacks are positioned absolutely and right on top of one another.
+				The `wipe port` contains two pane stacks - one `pane stack` for displaying the current image, and another `pane stack` for revealing the next image. Both pane stacks are positioned absolutely and right on top of one another.
 
 			Pane Stack
-				A Pane Stack is a stack of image nodes that are all positioned absolutely and right on top of one another, where each image node corresponds to what is termed a `Pane`.
+				A pane stack is a stack of image nodes that are all positioned absolutely and right on top of one another, where each image node corresponds to what is termed a `pane`.
 
-				One Pane Stack is used to display one image, even though it is comprised of many image nodes. The number of image nodes in the Pane Stack used for showing the current image is the same as the number of image nodes in the Pane Stack used for showing the next image, and is calculated as the product of the =divisionsX= and =divisionsY= state properties. So, for example, if =divisionsX= were set to the value =8= and =divisionsY= were set to the value =2=, then the two Pane Stacks in the `Wipe Port` would each have 16 image nodes. Moreover, a 1x16, 2x8, 4x4, 8x2, and 16x1 wipe would all produce a wipe effect using 16 image nodes per `Pane Stack`.
+				One pane stack is used to display one image, even though it is comprised of many image nodes. The number of image nodes in the pane stack used for showing the current image is the same as the number of image nodes in the pane stack used for showing the next image, and is calculated as the product of the =divisionsX= and =divisionsY= state properties. So, for example, if =divisionsX= were set to the value =8= and =divisionsY= were set to the value =2=, then the two pane stacks in the `wipe port` would each have 16 image nodes. Moreover, a 1x16, 2x8, 4x4, 8x2, and 16x1 wipe would all produce a wipe effect using 16 image nodes per `pane stack`.
 
 			Pane
-				One image node in a `Pane Stack` is termed a Pane.
+				One image node in a `pane stack` is termed a pane.
 
-				When a wipe is performed, initial crop rect coordinates (termed the `Pane Seed`) and final crop rect coordinates (termed the `Pane Final`) are calculated for every pane in the Pane Stack that is being used to reveal the next image. When a specific pane is being animated, its crop rect coordinates are interpolated between the Pane Seed coordinates and the Pane Final coordinates. Additionally, its opacity will be faded from completely transparent to completely opaque over the course of the animation if the =dissolve= state property is set to =true=.
+				When a wipe is performed, initial crop rect coordinates (termed the `pane seed`) and final crop rect coordinates (termed the `pane final`) are calculated for every pane in the pane stack that is being used to reveal the next image. When a specific pane is being animated, its crop rect coordinates are interpolated between the pane seed coordinates and the pane final coordinates. Additionally, its opacity will be faded from completely transparent to completely opaque over the course of the animation if the =dissolve= state property is set to =true=.
 
 			Wipe Port Matrix
-				The Wipe Port Matrix is a matrix of `Wipe Port Matrix Cell` coordinates, produced by dividing the `Wipe Port` into a number of rows and columns, as determined by the =divisionsY= and =divisionsX= state properties, respectively.
+				The wipe port matrix is a matrix of `wipe port matrix cell` coordinates, produced by dividing the `wipe port` into a number of rows and columns, as determined by the =divisionsY= and =divisionsX= state properties, respectively.
 
-				The coordinates of the Wipe Port Matrix are used in determining the coordinates of the `Pane Seed` and `Pane Final` for each `Pane` of the `Pane Stack`.
+				The coordinates of the wipe port matrix are used in determining the coordinates of the `pane seed` and `pane final` for each `pane` of the `pane stack`.
 
 			Wipe Port Matrix Cell
-				Each cell in the Wipe Port Matrix is termed a Wipe Port Matrix Cell.
+				Each cell in the wipe port matrix is termed a wipe port matrix cell.
 
-				The height of a Wipe Port Matrix Cell is influenced by the number of vertical divisions (as specified by the =divisionsY= state property), as well as the value of the =firstPaneSizeY= property. Similarly, the width of a Wipe Port Matrix Cell is influenced by the number of horizontal divisions (as specified by the =divisionsX= state property), as well as the value of the =firstPaneSizeX= property.
+				The height of a wipe port matrix cell is influenced by the number of vertical divisions (as specified by the =divisionsY= state property), as well as the value of the =firstPaneSizeY= property. Similarly, the width of a wipe port matrix cell is influenced by the number of horizontal divisions (as specified by the =divisionsX= state property), as well as the value of the =firstPaneSizeX= property.
 
-				The coordinates of each Wipe Port Matrix Cell influences the coordinates of the `Pane Seed` and the `Pane Final` for each `Pane` of the `Pane Stack`, factoring in the effects of the =paneSeedContext= and =allToFull= state properties.
+				The coordinates of each wipe port matrix cell influences the coordinates of the `pane seed` and the `pane final` for each `pane` of the `pane stack`, factoring in the effects of the =paneSeedContext= and =allToFull= state properties.
 
 			Pane Seed
-				The `Pane Seed` is the initial coordinates for a `Pane`.
+				The `pane seed` is the initial coordinates for a `pane`.
 
-				The Pane Seed coordinates are calculated by combining the coordinates of the `Pane Seed Context` and the values of the =alignX=, =alignY=, =paneSeedSizeX=, and =paneSeedSizeY= state properties. Specifically, the width of the Pane Seed is calculated as a percentage of the width of the `Pane Seed Context` (as specified by the =paneSeedSizeX= state property), and the height of the Pane Seed is calculated as a percentage of the height of the `Pane Seed Context` (as specified by the =paneSeedSizeY= state property).
+				The pane seed coordinates are calculated by combining the coordinates of the `pane seed context` and the values of the =alignX=, =alignY=, =paneSeedSizeX=, and =paneSeedSizeY= state properties. Specifically, the width of the pane seed is calculated as a percentage of the width of the `pane seed context` (as specified by the =paneSeedSizeX= state property), and the height of the pane seed is calculated as a percentage of the height of the `pane seed context` (as specified by the =paneSeedSizeY= state property).
 
-				Moreover, the Pane Seed is positioned within the Pane Seed Context using the =alignX= and =alignY= state properties, where these properties are floating point numbers in the range of =0= to =1= and where the value =0= represents left and top alignment, the value =1= represents right and bottom alignment, and the value =.5= represents center alignment.
+				Moreover, the pane seed is positioned within the pane seed context using the =alignX= and =alignY= state properties, where these properties are floating point numbers in the range of =0= to =1= and where the value =0= represents left and top alignment, the value =1= represents right and bottom alignment, and the value =.5= represents center alignment.
 
 			Pane Seed Context
-				The Pane Seed Context is the coordinates that provide the context for calculating the `Pane Seed` coordinates.
+				The pane seed context is the coordinates that provide the context for calculating the `pane seed` coordinates.
 
-				Each `Pane` is associated with a corresponding `Wipe Port Matrix Cell`. The =paneSeedContext= state property lets one specify the `Pane Seed Context` for a Pane as a blend between the coordinates of a Pane's corresponding Wipe Port Matrix Cell and the coordinates of the `Wipe Port`. When =paneSeedContext= is set to =0=, then the Pane Seed Context will be exactly the coordinates of Pane's corresponding Wipe Port Matrix Cell. When =paneSeedContext= is set to =100=, then the Pane Seed Context will be exactly the coordinates of the Wipe Port. And when =paneSeedContext= is set to =50=, then the Pane Seed Context will be calculated as a 50% blend between the coordinates of the Pane's corresponding Wipe Port Matrix Cell and the coordinates of the Wipe Port.
+				Each `pane` is associated with a corresponding `wipe port matrix cell`. The =paneSeedContext= state property lets one specify the `pane seed context` for a pane as a blend between the coordinates of a pane's corresponding wipe port matrix cell and the coordinates of the `wipe port`. When =paneSeedContext= is set to =0=, then the pane seed context will be exactly the coordinates of pane's corresponding wipe port matrix cell. When =paneSeedContext= is set to =100=, then the pane seed context will be exactly the coordinates of the wipe port. And when =paneSeedContext= is set to =50=, then the pane seed context will be calculated as a 50% blend between the coordinates of the pane's corresponding wipe port matrix cell and the coordinates of the wipe port.
 
 			Pane Final
-				The `Pane Final` is the final coordinates for a `Pane`.
+				The `pane final` is the final coordinates for a `pane`.
 
-				The Pane Final coordinates are calculated by combining the coordinates of a Pane's corresponding Wipe Port Matrix Cell with the coordinates of the `Wipe Port` and the value of the =allToFull= state property. Specifically, the width of the Pane Final is calculated as the blend of the width of a Pane's corresponding Wipe Port Matrix Cell and the width of the `Wipe Port`, as specified by the =allToFull= state property. Similarly, the height of the Pane Final is calculated as the blend of the height of a Pane's corresponding Wipe Port Matrix Cell and the height of the `Wipe Port`, as specified by the =allToFull= state property.
+				The pane final coordinates are calculated by combining the coordinates of a pane's corresponding wipe port matrix cell with the coordinates of the `wipe port` and the value of the =allToFull= state property. Specifically, the width of the pane final is calculated as the blend of the width of a pane's corresponding wipe port matrix cell and the width of the `wipe port`, as specified by the =allToFull= state property. Similarly, the height of the pane final is calculated as the blend of the height of a pane's corresponding wipe port matrix cell and the height of the `wipe port`, as specified by the =allToFull= state property.
 
-				When =allToFull= is set to =0=, then the Pane Final coordinates will be exactly the coordinates of Pane's corresponding Wipe Port Matrix Cell. When =allToFull= is set to =100=, then the Pane Final coordinates will be exactly the coordinates of the Wipe Port. And when =allToFull= is set to =50=, then the Pane Final coordinates will be calculated as a 50% blend between the coordinates of the Pane's corresponding Wipe Port Matrix Cell and the coordinates of the Wipe Port.
+				When =allToFull= is set to =0=, then the pane final coordinates will be exactly the coordinates of pane's corresponding wipe port matrix cell. When =allToFull= is set to =100=, then the pane final coordinates will be exactly the coordinates of the wipe port. And when =allToFull= is set to =50=, then the pane final coordinates will be calculated as a 50% blend between the coordinates of the pane's corresponding wipe port matrix cell and the coordinates of the wipe port.
 
 			Value Range Declaration
-				The values for certain state properties can be specified with a Value Range Declaration that allows a range of values to be specified, so that each `Pane` in a `Pane Stack` can have a different value along a continous range.
+				The values for certain state properties can be specified with a value range declaration that allows a range of values to be specified, so that each `pane` in a `pane stack` can have a different value along a continous range.
 
-				This facility allows for more sophisticated effects, since it allows for controlled variation in the animations of all the Panes that comprise the wipe effect. Some of the more compelling wipe effect presets available in the =Uize.Widget.ImageWipe.xPresets= extension take advantage of this mechanism for some of their settings.
+				This facility allows for more sophisticated effects, since it allows for controlled variation in the animations of all the panes that comprise the wipe effect. Some of the more compelling wipe effect presets available in the =Uize.Widget.ImageWipe.xPresets= extension take advantage of this mechanism for some of their settings.
 
-				The syntax for a Value Range Declaration is as follows...
+				The syntax for a value range declaration is as follows...
 
 				.......................................................................
 				{
@@ -110,13 +110,13 @@
 				keyedTo
 					A string, specifying what the interpolation between the =start= value and =end= value should be keyed to.
 
-					- the value ='row'= means that the interpolation will be keyed to the row number of the current `Pane` for which the value is being calculated, where the interpolated value for panes in the first row will be the specified =start= value, and the interpolated value for panes in the last row will be the specified =end= value. This is useful when specifying a value range for state properties that apply to the Y-axis, such as =alignY= and =paneSeedSizeY=, although there's nothing to say that you couldn't key the interpolation of an X-axis state property to row number.
+					- the value ='row'= means that the interpolation will be keyed to the row number of the current `pane` for which the value is being calculated, where the interpolated value for panes in the first row will be the specified =start= value, and the interpolated value for panes in the last row will be the specified =end= value. This is useful when specifying a value range for state properties that apply to the Y-axis, such as =alignY= and =paneSeedSizeY=, although there's nothing to say that you couldn't key the interpolation of an X-axis state property to row number.
 
-					- the value ='column'= means that the interpolation will be keyed to the column number of the current `Pane` for which the value is being calculated, where the interpolated value for panes in the first column will be the specified =start= value, and the interpolated value for panes in the last column will be the specified =end= value. This is useful when specifying a value range for state properties that apply to the X-axis, such as =alignX= and =paneSeedSizeX=, although there's nothing to say that you couldn't key the interpolation of a Y-axis state property to column number.
+					- the value ='column'= means that the interpolation will be keyed to the column number of the current `pane` for which the value is being calculated, where the interpolated value for panes in the first column will be the specified =start= value, and the interpolated value for panes in the last column will be the specified =end= value. This is useful when specifying a value range for state properties that apply to the X-axis, such as =alignX= and =paneSeedSizeX=, although there's nothing to say that you couldn't key the interpolation of a Y-axis state property to column number.
 
-					- the value ='pane'= means that the interpolation will be keyed to the pane number of the current `Pane` for which the value is being calculated, where the interpolated value for the first pane will be the specified =start= value, and the interpolated value for the last pane will be the specified =end= value. When the value =1= is specified for the =divisionsY= state property (ie. only one row), then the values ='column'= and ='pane'= for =keyedTo= will have the same effect. Similarly, when the value =1= is specified for the =divisionsX= state property (ie. only one column), then the values ='row'= and ='pane'= for =keyedTo= will have the same effect.
+					- the value ='pane'= means that the interpolation will be keyed to the pane number of the current `pane` for which the value is being calculated, where the interpolated value for the first pane will be the specified =start= value, and the interpolated value for the last pane will be the specified =end= value. When the value =1= is specified for the =divisionsY= state property (ie. only one row), then the values ='column'= and ='pane'= for =keyedTo= will have the same effect. Similarly, when the value =1= is specified for the =divisionsX= state property (ie. only one column), then the values ='row'= and ='pane'= for =keyedTo= will have the same effect.
 
-					- the value ='random'= means that the interpolation will be keyed to a random number, so that the value being calculated for each `Pane` will be some random blend between the =start= value and the =end= value. *NOTE:* When using this value, the =wraps= and =wrapMode= properties become pretty much meaningless.
+					- the value ='random'= means that the interpolation will be keyed to a random number, so that the value being calculated for each `pane` will be some random blend between the =start= value and the =end= value. *NOTE:* When using this value, the =wraps= and =wrapMode= properties become pretty much meaningless.
 
 				wraps
 					A positive integer, specifying the number of times that the value range should repeat across the series of the panes.
@@ -137,7 +137,7 @@
 					- The effect of this property's value is defeated by specifying the value ='random'= for the =keyedTo= property.
 					- The value of this property is not meaningful if the =wraps= property is not specified, or if its value is =1=.
 
-				State properties of this class that support a Value Range Declaration include: =allToFull=, =alignX=, =alignY=, =paneSeedSizeX=, =paneSeedSizeY=, and =paneSeedContext=.
+				State properties of this class that support a value range declaration include: =allToFull=, =alignX=, =alignY=, =paneSeedSizeX=, =paneSeedSizeY=, and =paneSeedContext=.
 */
 
 Uize.module ({
@@ -390,12 +390,12 @@ Uize.module ({
 					/*?
 						State Properties
 							alignX
-								A number in the range of =0= to =1=, specifying the horizontal alignment of each `Pane Seed`.
+								A number in the range of =0= to =1=, specifying the horizontal alignment of each `pane seed`.
 
-								A value of =0= specifies that a Pane Seed should be aligned to the left of its `Pane Seed Context`, a value of =1= specifies that a Pane Seed should be right aligned, and a value of =.5= specifies that a Pane Seed should be center aligned.
+								A value of =0= specifies that a pane seed should be aligned to the left of its `pane seed context`, a value of =1= specifies that a pane seed should be right aligned, and a value of =.5= specifies that a pane seed should be center aligned.
 
 								NOTES
-								- the value for this property may also be a `Value Range Declaration`
+								- the value for this property may also be a `value range declaration`
 								- if the value of the =paneSeedSizeX= state property is =100=, then the =alignX= property will have no effect
 								- see the companion =alignY= state property
 								- the initial value is ={start:1,end:0,keyedTo:'column'}=
@@ -407,12 +407,12 @@ Uize.module ({
 					/*?
 						State Properties
 							alignY
-								A number in the range of =0= to =1=, specifying the vertical alignment of each `Pane Seed`.
+								A number in the range of =0= to =1=, specifying the vertical alignment of each `pane seed`.
 
-								A value of =0= specifies that a Pane Seed should be aligned to the top of its `Pane Seed Context`, a value of =1= specifies that a Pane Seed should be bottom aligned, and a value of =.5= specifies that a Pane Seed should be center aligned.
+								A value of =0= specifies that a pane seed should be aligned to the top of its `pane seed context`, a value of =1= specifies that a pane seed should be bottom aligned, and a value of =.5= specifies that a pane seed should be center aligned.
 
 								NOTES
-								- the value for this property may also be a `Value Range Declaration`
+								- the value for this property may also be a `value range declaration`
 								- if the value of the =paneSeedSizeY= state property is =100=, then the =alignY= property will have no effect
 								- see the companion =alignX= state property
 								- the initial value is =.5=
@@ -424,12 +424,12 @@ Uize.module ({
 					/*?
 						State Properties
 							allToFull
-								A number in the range of =0= to =100=, representing the balance between the `Pane Seed Context` coordinates and the `Wipe Port` coordinates that should be used when calculating the `Pane Final` coordinates for each `Pane`.
+								A number in the range of =0= to =100=, representing the balance between the `pane seed context` coordinates and the `wipe port` coordinates that should be used when calculating the `pane final` coordinates for each `pane`.
 
-								A value of =0= means that the Pane Final coordinates for a pane will be the Pane Seed Context coordinates, a value of =100= means that the Pane Final coordinates will be the Wipe Port coordinates, and a value of =50= will create Pane Final coordinates that are a blend of 50% the Pane Seed Context coordinates and 50% the Wipe Port coordinates.
+								A value of =0= means that the pane final coordinates for a pane will be the pane seed context coordinates, a value of =100= means that the pane final coordinates will be the wipe port coordinates, and a value of =50= will create pane final coordinates that are a blend of 50% the pane seed context coordinates and 50% the wipe port coordinates.
 
 								NOTES
-								- the value for this property may also be a `Value Range Declaration`
+								- the value for this property may also be a `value range declaration`
 								- the initial value is =0=
 					*/
 				},
@@ -437,7 +437,7 @@ Uize.module ({
 				/*?
 					State Properties
 						background
-							A string, specifying an optional background style that should be used for each `Pane`.
+							A string, specifying an optional background style that should be used for each `pane`.
 
 							NOTES
 							- the initial value is =undefined=
@@ -448,9 +448,9 @@ Uize.module ({
 					/*?
 						State Properties
 							dissolve
-								A boolean, specifying whether or not each `Pane` should fade in opacity - from being completely transparent to being completely opaque - during the course of its animation.
+								A boolean, specifying whether or not each `pane` should fade in opacity - from being completely transparent to being completely opaque - during the course of its animation.
 
-								When the value =false= is specified for this property, only the crop rect coordinates of a `Pane` will be updated during its animation, but when the value =true= is specified it will be faded in as well. The latter setting allows for more sophisticated effects, although there is likely to be a cost in performance and the wipe may not appear as smooth - depending on the browser and the speed of the system it is running on.
+								When the value =false= is specified for this property, only the crop rect coordinates of a `pane` will be updated during its animation, but when the value =true= is specified it will be faded in as well. The latter setting allows for more sophisticated effects, although there is likely to be a cost in performance and the wipe may not appear as smooth - depending on the browser and the speed of the system it is running on.
 
 								NOTES
 								- the initial value is =false=
@@ -462,7 +462,7 @@ Uize.module ({
 					/*?
 						State Properties
 							divisionsX
-								A positive integer, specifying the number of horizontal divisions in the `Wipe Port Matrix`.
+								A positive integer, specifying the number of horizontal divisions in the `wipe port matrix`.
 
 								NOTES
 								- see the companion =divisionsY= state property
@@ -475,7 +475,7 @@ Uize.module ({
 					/*?
 						State Properties
 							divisionsY
-								A positive integer, specifying the number of vertical divisions in the `Wipe Port Matrix`.
+								A positive integer, specifying the number of vertical divisions in the `wipe port matrix`.
 
 								NOTES
 								- see the companion =divisionsX= state property
@@ -501,34 +501,34 @@ Uize.module ({
 					/*?
 						State Properties
 							firstPaneSizeX
-								A number in the range of =0= to =100=, specifying the width of the first `Wipe Port Matrix` column as a percentage of the normal column width.
+								A number in the range of =0= to =100=, specifying the width of the first `wipe port matrix` column as a percentage of the normal column width.
 
-								Normal column width is defined as the width of the `Wipe Port` divided by the number of columns (as specified by the =divisionsX= state property). If the first Wipe Port Matrix column width is smaller or greater than the normal column width, then the difference will be distributed amongst the remaining columns to compenstate - according to a sigma series distribution. This makes it possible to bias the widths towards the first column or towards the last column.
+								Normal column width is defined as the width of the `wipe port` divided by the number of columns (as specified by the =divisionsX= state property). If the first wipe port matrix column width is smaller or greater than the normal column width, then the difference will be distributed amongst the remaining columns to compenstate - according to a sigma series distribution. This makes it possible to bias the widths towards the first column or towards the last column.
 
-								For example, specifying a value of =10= for the =firstPaneSizeX= state property means that the missing 90% of the normal column width for the first Wipe Port Matrix column must be distributed across the remaining columns. In order for this distribution to look natural, the width would grow gradually from left to right. Consider the following representations...
+								For example, specifying a value of =10= for the =firstPaneSizeX= state property means that the missing 90% of the normal column width for the first wipe port matrix column must be distributed across the remaining columns. In order for this distribution to look natural, the width would grow gradually from left to right. Consider the following representations...
 
 								EVEN COLUMN WIDTH
 								..............................................................................
 								|  6   |  6   |  6   |  6   |  6   |  6   |  6   |  6   |  6   |  6   |  6   |
 								..............................................................................
 
-								This representation depicts a `Wipe Port` with a width of 66 and with 11 horizontal divisions (ie. =divisionsX= is set to =6=), so the normal width for each Wipe Port Matrix column would be 6 (ie. 66 / 11).
+								This representation depicts a `wipe port` with a width of 66 and with 11 horizontal divisions (ie. =divisionsX= is set to =6=), so the normal width for each wipe port matrix column would be 6 (ie. 66 / 11).
 
-								To achieve the above distribution, =firstPaneSizeX= would be set to =100= (ie. 6 / 6), since the width of the first Wipe Port Matrix column is 100% of the normal column width.
+								To achieve the above distribution, =firstPaneSizeX= would be set to =100= (ie. 6 / 6), since the width of the first wipe port matrix column is 100% of the normal column width.
 
 								SIGMA DISTRIBUTION
 								..............................................................................
 								|1|2 | 3 | 4  |  5  |  6   |   7   |   8    |    9    |    10    |     11    |
 								..............................................................................
 
-								To achieve the above distribution, =firstPaneSizeX= would be set to =16.666= (ie. 1 / 6), since the width of the first Wipe Port Matrix column is 16.666% of the normal column width.
+								To achieve the above distribution, =firstPaneSizeX= would be set to =16.666= (ie. 1 / 6), since the width of the first wipe port matrix column is 16.666% of the normal column width.
 
 								ANOTHER SIGMA DISTRIBUTION
 								..............................................................................
 								|     11    |    10    |    9    |   8    |   7   |  6   |  5  | 4  | 3 |2 |1|
 								..............................................................................
 
-								To achieve the above distribution, =firstPaneSizeX= would be set to =183.333= (ie. 11 / 6), since the width of the first Wipe Port Matrix column is 183.333% of the normal column width.
+								To achieve the above distribution, =firstPaneSizeX= would be set to =183.333= (ie. 11 / 6), since the width of the first wipe port matrix column is 183.333% of the normal column width.
 
 								NOTES
 								- see the companion =firstPaneSizeY= state property
@@ -541,9 +541,9 @@ Uize.module ({
 					/*?
 						State Properties
 							firstPaneSizeY
-								A number in the range of =0= to =100=, specifying the height of the first `Wipe Port Matrix` row as a percentage of the normal row height.
+								A number in the range of =0= to =100=, specifying the height of the first `wipe port matrix` row as a percentage of the normal row height.
 
-								Normal row height is defined as the height of the `Wipe Port` divided by the number of rows (as specified by the =divisionsY= state property). If the first Wipe Port Matrix row height is smaller or greater than the normal row height, then the difference will be distributed amongst the remaining rows to compenstate - according to a sigma series distribution. This makes it possible to bias the heights towards the first row or towards the last row.
+								Normal row height is defined as the height of the `wipe port` divided by the number of rows (as specified by the =divisionsY= state property). If the first wipe port matrix row height is smaller or greater than the normal row height, then the difference will be distributed amongst the remaining rows to compenstate - according to a sigma series distribution. This makes it possible to bias the heights towards the first row or towards the last row.
 
 								For a more in-depth explanation, and for some illustrations, consult the reference for the =firstPaneSizeX= state property, since the =firstPaneSizeY= property behaves in exactly the same way as the =firstPaneSizeX= property, excepting that it applies to the Y-axis rather than the X-axis.
 
@@ -593,12 +593,12 @@ Uize.module ({
 					/*?
 						State Properties
 							paneSeedContext
-								A number in the range of =0= to =100=, representing the balance between the `Wipe Port Matrix Cell` coordinates and the `Wipe Port` coordinates that should be used when calculating the `Pane Seed Context` coordinates for each `Pane`.
+								A number in the range of =0= to =100=, representing the balance between the `wipe port matrix cell` coordinates and the `wipe port` coordinates that should be used when calculating the `pane seed context` coordinates for each `pane`.
 
-								A value of =0= means that the `Pane Seed Context` for calculating a pane's coordinates will be the `Wipe Port Matrix Cell`, a value of =100= means that the context will be the `Wipe Port`, and a value of =50= will produce a context whose coordinates are a blend of 50% the `Wipe Port Matrix Cell` coordinates and 50% the `Wipe Port` coordinates.
+								A value of =0= means that the `pane seed context` for calculating a pane's coordinates will be the `wipe port matrix cell`, a value of =100= means that the context will be the `wipe port`, and a value of =50= will produce a context whose coordinates are a blend of 50% the `wipe port matrix cell` coordinates and 50% the `wipe port` coordinates.
 
 								NOTES
-								- the value for this property may also be a `Value Range Declaration`
+								- the value for this property may also be a `value range declaration`
 								- the initial value is =0=
 					*/
 				},
@@ -608,12 +608,12 @@ Uize.module ({
 					/*?
 						State Properties
 							paneSeedSizeX
-								A number in the range of =0= to =100=, specifying the width for the `Pane Seed` as a percentage of the width of the `Pane Seed Context`.
+								A number in the range of =0= to =100=, specifying the width for the `pane seed` as a percentage of the width of the `pane seed context`.
 
-								A value of =0= means that the Pane Seed's width will be =0=, a value of =100= means that its width will be the full width of the `Pane Seed Context`, and a value of =50= means that its width will be 50% of the width of the `Pane Seed Context`.
+								A value of =0= means that the pane seed's width will be =0=, a value of =100= means that its width will be the full width of the `pane seed context`, and a value of =50= means that its width will be 50% of the width of the `pane seed context`.
 
 								NOTES
-								- the value for this property may also be a `Value Range Declaration`
+								- the value for this property may also be a `value range declaration`
 								- see the companion =paneSeedSizeY= state property
 								- the initial value is =0=
 					*/
@@ -624,12 +624,12 @@ Uize.module ({
 					/*?
 						State Properties
 							paneSeedSizeY
-								A number in the range of =0= to =100=, specifying the height for the `Pane Seed` as a percentage of the height of the `Pane Seed Context`.
+								A number in the range of =0= to =100=, specifying the height for the `pane seed` as a percentage of the height of the `pane seed context`.
 
-								A value of =0= means that the Pane Seed's height will be =0=, a value of =100= means that its height will be the full height of the `Pane Seed Context`, and a value of =50= means that its height will be 50% of the height of the `Pane Seed Context`.
+								A value of =0= means that the pane seed's height will be =0=, a value of =100= means that its height will be the full height of the `pane seed context`, and a value of =50= means that its height will be 50% of the height of the `pane seed context`.
 
 								NOTES
-								- the value for this property may also be a `Value Range Declaration`
+								- the value for this property may also be a `value range declaration`
 								- see the companion =paneSeedSizeX= state property
 								- the initial value is =100=
 					*/
@@ -717,14 +717,14 @@ Uize.module ({
 							src
 								A string, representing the URL of the current image.
 
-								After setting this property to a new value, the new image will first be loaded in each `Pane` of the `Pane Stack` used for revealing the next image. Once it has been loaded, the wipe effect will be initiated to reveal the new image.
+								After setting this property to a new value, the new image will first be loaded in each `pane` of the `pane stack` used for revealing the next image. Once it has been loaded, the wipe effect will be initiated to reveal the new image.
 
 								NOTES
 								- this property can also be accessed through the alias =value=
 								- the initial value is =undefined=
 
 							value
-								An alias to the =src= state property, establishing the =src= property as the public Value Interface for this class.
+								An alias to the =src= state property, establishing the =src= property as the public value interface for this class.
 					*/
 				}
 			});

@@ -101,7 +101,7 @@ Uize.module ({
 								- a string, containing just the linebreak characters, if present (the last line of a multi-line string may not have any linebreak characters)
 								- a zero-based integer, representing the line number for the line being processed
 
-								In your function it is not necessary to declare all three parameters. In many cases, you may not care about the linebreak characters or the line number, and in those cases your function can simply declare the first parameter. Returning the value =false= in your line handler function can be used for `Terminating Iteration`.
+								In your function it is not necessary to declare all three parameters. In many cases, you may not care about the linebreak characters or the line number, and in those cases your function can simply declare the first parameter. Returning the value =false= in your line handler function can be used for `terminating iteration`.
 
 							An Example
 								In this example, we're using the =Uize.String.Lines.forEach= method to iterate over all of the lines in a multi-line string in order to calculate the lengths (excluding linebreak characters) of the longest and shortest lines.
@@ -279,7 +279,7 @@ Uize.module ({
 									);
 									...............................................................
 
-									As with the `Normalizing an Indented Multi-line String` use case, we are using the =Uize.String.Lines.getIndentRange= method to determine how many levels of indentation to remove across all lines of the multi-line string. By using the value of the =maxValue= property from the returned indent range object, we can make sure that all indentation is stripped from even the most deeply indented line. After the above code has been executed, the value of the =multiLineString= variable would be...
+									As with `normalizing an indented multi-line string`, we are using the =Uize.String.Lines.getIndentRange= method to determine how many levels of indentation to remove across all lines of the multi-line string. By using the value of the =maxValue= property from the returned indent range object, we can make sure that all indentation is stripped from even the most deeply indented line. After the above code has been executed, the value of the =multiLineString= variable would be...
 
 									............
 									'LINE 1\n' +

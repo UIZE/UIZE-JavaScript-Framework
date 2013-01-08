@@ -154,7 +154,7 @@ Uize.module ({
 					/*?
 						Localizable Strings
 							customInstanceEvent
-								A localizable string, that will be prepended to log messages for all `Custom Instance Events`.
+								A localizable string, that will be prepended to log messages for all `custom instance events`.
 
 							nothingToWatch
 								A localizable string, that will be logged as a log message whenever there is no valid object to watch events on (see `Nothing to Watch`).
@@ -162,7 +162,7 @@ Uize.module ({
 								In order for the instance to have a valid object to watch events on, the value of the =instance= state property must be either a reference to an instance of a =Uize.Class= subclass, or a referece to a =Uize.Class= subclass.
 
 							propertiesChangedEvent
-								A localizable string, that will be prepended to log messages for all `Property Change Events`.
+								A localizable string, that will be prepended to log messages for all `property change events`.
 
 							startedWatching
 								A localizable string, that will be logged as a log message whenever the instance starts watching events on a new object.

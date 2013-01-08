@@ -581,7 +581,7 @@ Uize.module ({
 
 							Using Date Ranges
 								Using Date Ranges With Classes Supporting the Value Range Interface
-									Because the value returned by the =Uize.Date.getRangeAround= method is an object containing =minValue= and =maxValue= properties, this object can be used to set the state properties for an instance of any class that implements the `Value Range Interface`.
+									Because the value returned by the =Uize.Date.getRangeAround= method is an object containing =minValue= and =maxValue= properties, this object can be used to set the state properties for an instance of any class that implements the `value range interface`.
 
 									An example of this is the =Uize.Widget.Picker.Date= class, which lets the user select a date inside a popup date dialog.
 
@@ -684,7 +684,7 @@ Uize.module ({
 
 							NOTES
 							- see the related =Uize.Date.getRangeAround= static method
-							- this method supports `Boundless Date Ranges`
+							- this method supports `boundless date ranges`
 							- when the value =''= (empty string), =null=, or =undefined= is specified for the =dateSTRorNUMorOBJ= parameter, then this parameter will be defaulted to the date at the time that the method is called (today's date, essentially)
 				*/
 			};

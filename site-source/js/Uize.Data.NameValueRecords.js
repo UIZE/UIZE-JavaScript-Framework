@@ -43,7 +43,7 @@
 			);
 			............................................................
 
-			In the above example, we're assuming that the text contents has already been loaded into the string variable =myLocalizationHash=. We use the =Uize.Data.Csv.from= method to parse the CSV formatted data string, producing a `Name/value Records Array` containing `Array Type Name/value Records`. The =Uize.Data.NameValueRecords.toHash= method is then used to convert this `Name/value Records Array` to a hash object. After the above code has executed, the value of the =myLocalizationHash= variable would be as follows...
+			In the above example, we're assuming that the text contents has already been loaded into the string variable =myLocalizationHash=. We use the =Uize.Data.Csv.from= method to parse the CSV formatted data string, producing a `name/value records array` containing `array type name/value records`. The =Uize.Data.NameValueRecords.toHash= method is then used to convert this `name/value records array` to a hash object. After the above code has executed, the value of the =myLocalizationHash= variable would be as follows...
 
 			OUTPUT
 			.................................................................................
@@ -57,7 +57,7 @@
 		Name/value Records Array
 			A name/value records array is an array where each record in the array represents a name/value pair.
 
-			Name/value pairs in a name/value records array can be either `Object Type Name/value Records` or `Array Type Name/value Records`.
+			Name/value pairs in a name/value records array can be either `object type name/value records` or `array type name/value records`.
 
 			Object Type Name/value Records
 				With object type name/value records, each record is an object containing properties for the name and value of a name/value pair.
@@ -83,7 +83,7 @@
 				Non-standard Name/value Properties
 					By default, and typically, the property used for specifying the name out of a name/value pair is called =name=, and the property used for specifying the value out of a name/value pair is called =value=, but this does not have to be the case.
 
-					The methods of the =Uize.Data.NameValueRecords= module support `Object Type Name/value Records` where the name/value records use different property names for defining name/value pairs. Consider the following example...
+					The methods of the =Uize.Data.NameValueRecords= module support `object type name/value records` where the name/value records use different property names for defining name/value pairs. Consider the following example...
 
 					EXAMPLE
 					...................................................................................
@@ -103,7 +103,7 @@
 					]
 					...................................................................................
 
-					In the above example, =stringId= is used for the name property, and =translation= is used for the value property. This is an extreme example. Maybe more reasonable would be to use =key= and =value=, but this illustrates the point. The =Uize.Data.NameValueRecords.fromHash= and =Uize.Data.NameValueRecords.toHash= methods let you work with an `Object Type Name/value Records` array that has non-standard name/value properties, with their optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters.
+					In the above example, =stringId= is used for the name property, and =translation= is used for the value property. This is an extreme example. Maybe more reasonable would be to use =key= and =value=, but this illustrates the point. The =Uize.Data.NameValueRecords.fromHash= and =Uize.Data.NameValueRecords.toHash= methods let you work with an `object type name/value records` array that has non-standard name/value properties, with their optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters.
 
 					See the following examples for more info...
 
@@ -132,9 +132,9 @@
 				.......................................................................
 
 				Non-standard Name/value Elements
-					By default, and typically, the first element of `Array Type Name/value Records` is used for specifying the name out of a name/value pair, and the second element is used for specifying the value out of a name/value pair, but this does not have to be the case.
+					By default, and typically, the first element of `array type name/value records` is used for specifying the name out of a name/value pair, and the second element is used for specifying the value out of a name/value pair, but this does not have to be the case.
 
-					The methods of the =Uize.Data.NameValueRecords= module support `Array Type Name/value Records` where different elements of the name/value records are used for defining name/value pairs. Consider the following example...
+					The methods of the =Uize.Data.NameValueRecords= module support `array type name/value records` where different elements of the name/value records are used for defining name/value pairs. Consider the following example...
 
 					EXAMPLE
 					.......................................................................
@@ -154,7 +154,7 @@
 					]
 					.......................................................................
 
-					In the above example, we want the second element out of each record to be used for the name property, and the first element to be used for the value property. The =Uize.Data.NameValueRecords.fromHash= and =Uize.Data.NameValueRecords.toHash= methods let you work with an `Array Type Name/value Records` array that has non-standard ordering of name/value elements, with their optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters.
+					In the above example, we want the second element out of each record to be used for the name property, and the first element to be used for the value property. The =Uize.Data.NameValueRecords.fromHash= and =Uize.Data.NameValueRecords.toHash= methods let you work with an `array type name/value records` array that has non-standard ordering of name/value elements, with their optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters.
 
 					See the following examples for more info...
 
@@ -162,9 +162,9 @@
 					- `EXAMPLE: From Array Type Records, Name and Value Reversed`
 
 			Extraneous Properties or Elements
-				The methods of the =Uize.Data.NameValueRecords= module support the presence of extraneous properties or elements in `Object Type Name/value Records` and `Array Type Name/value Records`.
+				The methods of the =Uize.Data.NameValueRecords= module support the presence of extraneous properties or elements in `object type name/value records` and `array type name/value records`.
 
-				For `Object Type Name/value Records`, properties that aren't the name or value properties for name/value pairs are simply ignored. For `Array Type Name/value Records`, elements that aren't the name or value elements for name/value pairs will also be ignored, provided the first element remains the name element and the second element remains the value element. If the presence of extraneous elements in `Array Type Name/value Records` interferes with the order of the name and value elements, then you will have to use the optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters to indicate the indices of the name and value elements.
+				For `object type name/value records`, properties that aren't the name or value properties for name/value pairs are simply ignored. For `array type name/value records`, elements that aren't the name or value elements for name/value pairs will also be ignored, provided the first element remains the name element and the second element remains the value element. If the presence of extraneous elements in `array type name/value records` interferes with the order of the name and value elements, then you will have to use the optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters to indicate the indices of the name and value elements.
 
 				See the following examples for more info...
 
@@ -172,7 +172,7 @@
 				- `EXAMPLE: From Array Type Records, With Extraneous Elements`
 
 		Converting From Name/value Records Array To Hash
-			Converting from a `Name/value Records Array` to a hash object is done using the =Uize.Data.NameValueRecords.toHash= static method.
+			Converting from a `name/value records array` to a hash object is done using the =Uize.Data.NameValueRecords.toHash= static method.
 
 			EXAMPLE
 			................................................................................
@@ -194,7 +194,7 @@
 			);
 			................................................................................
 
-			In the above example, an array of name/value records defines a dictionary of localized string id to translation mappings. This `Name/value Records Array` is converted to a dictionary hash, for easy lookup, using the =Uize.Data.NameValueRecords.toHash=. The above method call would produce the following result...
+			In the above example, an array of name/value records defines a dictionary of localized string id to translation mappings. This `name/value records array` is converted to a dictionary hash, for easy lookup, using the =Uize.Data.NameValueRecords.toHash=. The above method call would produce the following result...
 
 			OUTPUT
 			.................................................................................
@@ -208,7 +208,7 @@
 			For a more detailed explanation, and for more examples, see the reference for the =Uize.Data.NameValueRecords.toHash= method.
 
 		Converting From Hash to Name/value Records Array
-			Converting from a hash object to a `Name/value Records Array` is done using the =Uize.Data.NameValueRecords.fromHash= static method.
+			Converting from a hash object to a `name/value records array` is done using the =Uize.Data.NameValueRecords.fromHash= static method.
 
 			EXAMPLE
 			....................................................................................
@@ -244,7 +244,7 @@
 			For a more detailed explanation, and for more examples, see the reference for the =Uize.Data.NameValueRecords.fromHash= method.
 
 		Bi-directional Conversion
-			Conversion back and forth between a hash object and a `Name/value Records Array` should continue to preserve all the original data, provided that the original data did not contain `Extraneous Properties or Elements` or mappings of multiple values to the same name, as these would get lost in the conversion from a `Name/value Records Array` to a hash object.
+			Conversion back and forth between a hash object and a `name/value records array` should continue to preserve all the original data, provided that the original data did not contain `extraneous properties or elements` or mappings of multiple values to the same name, as these would get lost in the conversion from a `name/value records array` to a hash object.
 
 			EXAMPLE
 			....................................................................................
@@ -269,7 +269,7 @@
 			.................................................................................
 
 		Transmuting a Name/value Records Array
-			You can use the methods of the =Uize.Data.NameValueRecords= module to transmute a `Name/value Records Array`, by going through a hash object as an intermediate state, as shown in the examples below...
+			You can use the methods of the =Uize.Data.NameValueRecords= module to transmute a `name/value records array`, by going through a hash object as an intermediate state, as shown in the examples below...
 
 			EXAMPLE 1
 			......................................................................................
@@ -297,7 +297,7 @@
 			;
 			......................................................................................
 
-			In the above example, we're transmuting a `Name/value Records Array` with `Object Type Name/value Records` into one with `Array Type Name/value Records`. After the above code has executed, the value of the =transmutedNameValueRecords= variable will be as follows...
+			In the above example, we're transmuting a `name/value records array` with `object type name/value records` into one with `array type name/value records`. After the above code has executed, the value of the =transmutedNameValueRecords= variable will be as follows...
 
 			OUTPUT
 			.......................................................................
@@ -343,7 +343,7 @@
 			;
 			......................................................................................
 
-			In the above example, we're transmuting a `Name/value Records Array` with `Object Type Name/value Records` into a new one - also with object type records - but where the names of the name/value properties have been remapped from =name= and =value= to =stringId= and =translation=. After the above code has executed, the value of the =transmutedNameValueRecords= variable will be as follows...
+			In the above example, we're transmuting a `name/value records array` with `object type name/value records` into a new one - also with object type records - but where the names of the name/value properties have been remapped from =name= and =value= to =stringId= and =translation=. After the above code has executed, the value of the =transmutedNameValueRecords= variable will be as follows...
 
 			OUTPUT
 			...................................................................................
@@ -401,7 +401,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Data.NameValueRecords.fromHash
-							Returns a `Name/value Records Array`, where each record contains the name and value for a property of the specified object hash.
+							Returns a `name/value records array`, where each record contains the name and value for a property of the specified object hash.
 
 							SYNTAX
 							......................................................................
@@ -588,7 +588,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Data.NameValueRecords.toHash
-							Returns an object hash, where each property of the hash represents an element of the specified `Name/value Records Array`.
+							Returns an object hash, where each property of the hash represents an element of the specified `name/value records array`.
 
 							SYNTAX
 							....................................................................
@@ -627,7 +627,7 @@ Uize.module ({
 								);
 								................................................................................
 
-								In the above example, an array of name/value records defines a dictionary of localized string id to translation mappings. This `Name/value Records Array` is converted to a dictionary hash, for easy lookup, using the =Uize.Data.NameValueRecords.toHash=. Because the name/value records are objects containing =name= and =value= properties, the optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters do not need to be used. The above method call would produce the following result...
+								In the above example, an array of name/value records defines a dictionary of localized string id to translation mappings. This `name/value records array` is converted to a dictionary hash, for easy lookup, using the =Uize.Data.NameValueRecords.toHash=. Because the name/value records are objects containing =name= and =value= properties, the optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters do not need to be used. The above method call would produce the following result...
 
 								OUTPUT
 								.................................................................................
@@ -734,7 +734,7 @@ Uize.module ({
 								);
 								..........................................................................
 
-								In the above example, the =Uize.Data.NameValueRecords.toHash= method detects that the first record in the `Name/value Records Array` is an array. Because the optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters are not used, and because the name/value records are arrays, the =Uize.Data.NameValueRecords.toHash= method defaults the =namePropertySTRorINT= and =valuePropertySTRorINT= parameters to =0= and =1=, which results in extracting the first and second elements out of each name/value record when forming the properties of the returned hash object. The above method call would produce the following result...
+								In the above example, the =Uize.Data.NameValueRecords.toHash= method detects that the first record in the `name/value records array` is an array. Because the optional =namePropertySTRorINT= and =valuePropertySTRorINT= parameters are not used, and because the name/value records are arrays, the =Uize.Data.NameValueRecords.toHash= method defaults the =namePropertySTRorINT= and =valuePropertySTRorINT= parameters to =0= and =1=, which results in extracting the first and second elements out of each name/value record when forming the properties of the returned hash object. The above method call would produce the following result...
 
 								OUTPUT
 								.................................................................................

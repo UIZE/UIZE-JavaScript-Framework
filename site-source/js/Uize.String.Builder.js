@@ -28,7 +28,7 @@
 		In a Nutshell
 			Building strings using a traditional incremental concatenation approach using the =+&#61;= (incrementing assignment) operator can be slow in certain JavaScript interpreters when *very large* strings are being built.
 
-			One way around this performance issue is to use an array to accumulate all the segments of a large string, and then concatenate all the elements of that array at the end of the string building process using the =Array= object's =join= instance method. The =Uize.String.Builder= object wraps this pattern up neatly into an object that also provides the benefit of `String Object Parity` that wouldn't otherwise be available in a manual array building process. In doing so, the =Uize.String.Builder= object can provide a substantial `Performance Benefit` in certain applications.
+			One way around this performance issue is to use an array to accumulate all the segments of a large string, and then concatenate all the elements of that array at the end of the string building process using the =Array= object's =join= instance method. The =Uize.String.Builder= object wraps this pattern up neatly into an object that also provides the benefit of `string object parity` that wouldn't otherwise be available in a manual array building process. In doing so, the =Uize.String.Builder= object can provide a substantial `performance benefit` in certain applications.
 
 			Performance Benefit
 				The =Uize.String.Builder= object can provide significant performance benefits in some JavaScript interpreters when building *very large* strings.
@@ -78,7 +78,7 @@
 				Initializing the Value in the Constructor
 					The very first opportunity that you have to initialize the value of a =Uize.String.Builder= instance is during construction.
 
-					The `Constructor` for the =Uize.String.Builder= object supports a single parameter, being the initial value for the instance being created.
+					The `constructor` for the =Uize.String.Builder= object supports a single parameter, being the initial value for the instance being created.
 
 					EXAMPLE
 					......................................................
@@ -86,7 +86,7 @@
 					alert (myStringBuilder);  // displays the text "hello"
 					......................................................
 
-					If you don't set the value for an instance during construction, the value for the instance will be initialized to =''= (empty string). There are still ways of `Initializing the Value After Construction`.
+					If you don't set the value for an instance during construction, the value for the instance will be initialized to =''= (empty string). There are still ways of `initializing the value after construction`.
 
 				Initializing the Value After Construction
 					After a =Uize.String.Builder= instance has already been constructed, its value can be subsequently re-initialized using the =setValue= instance method.
@@ -100,7 +100,7 @@
 					alert (myStringBuilder);  // displays the text "goodbye"
 					........................................................
 
-					By specifying the value =''= (empty string) when calling the =setValue= method, this method can be used for `Clearing the Value After Construction`.
+					By specifying the value =''= (empty string) when calling the =setValue= method, this method can be used for `clearing the value after construction`.
 
 				Clearing the Value After Construction
 					As a convenience, a =clear= instance method is provided to allow you to set the value of an instance to an empty string at any point.
@@ -140,7 +140,7 @@
 				Using the getValue Instance Method
 					The most explicit way to obtain the value for a =Uize.String.Builder= instance is to call the =getValue= instance method.
 
-					Like other ways of `Getting the Value` for an instance, calling the =getValue= instance method invokes `Value Resolution` for the instance, concatenating together any appended or prepended segments that were added since the last time that `Value Resolution` was performed for the instance. Consider the following example...
+					Like other ways of `getting the value` for an instance, calling the =getValue= instance method invokes `value resolution` for the instance, concatenating together any appended or prepended segments that were added since the last time that `value resolution` was performed for the instance. Consider the following example...
 
 					EXAMPLE
 					........................................................................
@@ -169,9 +169,9 @@
 					.....................................................................................
 
 				Value Resolution
-					Whether you are `Using the getValue Instance Method` or `Invoking the Intrinsic Methods`, causing the string value for a =Uize.String.Builder= instance to be returned will cause the value to be resolved.
+					Whether you are `using the getvalue instance method` or `invoking the intrinsic methods`, causing the string value for a =Uize.String.Builder= instance to be returned will cause the value to be resolved.
 
-					Each time that the value of an instance is resolved there is the cost of concatenating any segments that have been appended or prepended and that are pending concatenation. The main `Performance Benefit` that comes from using the =Uize.String.Builder= object derives from *not* needing to access the resolved / concatenated string value until at the end of the building process. However, not being able to easily access the value before building is complete could make it that much harder to retrofit existing code to use the =Uize.String.Builder= object. Therefore, the methods for `Getting the Value` of an instance automatically resolve the value as needed.
+					Each time that the value of an instance is resolved there is the cost of concatenating any segments that have been appended or prepended and that are pending concatenation. The main `performance benefit` that comes from using the =Uize.String.Builder= object derives from *not* needing to access the resolved / concatenated string value until at the end of the building process. However, not being able to easily access the value before building is complete could make it that much harder to retrofit existing code to use the =Uize.String.Builder= object. Therefore, the methods for `getting the value` of an instance automatically resolve the value as needed.
 
 				Variable Type Conversion
 					When using a variable to store a reference to a =Uize.String.Builder= instance, one can easily convert that variable to the string equivalent of the =Uize.String.Builder= instance using the =+&#61;= (incrementing assignment) operator, as shown in the example below...
@@ -190,9 +190,9 @@
 					After the above code has been executed, the value of the =fruitsTable= variable will be a string, being the value that was built up using the =Uize.String.Builder= object. This approach is certainly more concise than the statement =fruitsTable &#61; fruitsTable.getValue ()=. The re-assignment of the =fruitsTable= variable will cause the =Uize.String.Builder= instance to be thrown into the garbage collection pile.
 
 			Value to String Coercion
-				As a convenience, many of the instance methods that are provided for `Initializing the Value` or `Building the Value` of a =Uize.String.Builder= instance allow a value to be specified in any type.
+				As a convenience, many of the instance methods that are provided for `initializing the value` or `building the value` of a =Uize.String.Builder= instance allow a value to be specified in any type.
 
-				Methods such as the =append=, =equals=, =prepend=, and =setValue= instance methods, along with the `Constructor`, all support a =valueANYTYPE= parameter. The value for this parameter can be of any type, and will be coerced to a string. If the value is an instance of an object or a =Uize.Class= subclass, then it will be coerced to a string by invoking the object's =valueOf Intrinsic Method=. So, string type values, boolean type values, number type values, etc. can be used with these methods. As an example, following is a list of mappings between value and string equivalent...
+				Methods such as the =append=, =equals=, =prepend=, and =setValue= instance methods, along with the `constructor`, all support a =valueANYTYPE= parameter. The value for this parameter can be of any type, and will be coerced to a string. If the value is an instance of an object or a =Uize.Class= subclass, then it will be coerced to a string by invoking the object's =valueOf Intrinsic Method=. So, string type values, boolean type values, number type values, etc. can be used with these methods. As an example, following is a list of mappings between value and string equivalent...
 
 				........................................................................................
 				<< table >>
@@ -240,14 +240,14 @@
 					alert (myStringBuilder.toUpperCase ());  // displays the text "SOLAR POWER"
 					...........................................................................
 
-					In the above example, when the =toUpperCase= instance method is called on the =myStringBuilder= instance, `Value Resolution` is triggered in the =Uize.String.Builder= object. This is a pleasant side effect of the way that the methods of the =String= object are implemented.
+					In the above example, when the =toUpperCase= instance method is called on the =myStringBuilder= instance, `value resolution` is triggered in the =Uize.String.Builder= object. This is a pleasant side effect of the way that the methods of the =String= object are implemented.
 
 					For the full list of mixed in methods, see the section `String Object Instance Methods`.
 
 				length Property
-					A =length= property is maintained for =Uize.String.Builder= object instances, to reflect the current length of the value - even before `Value Resolution` has been performed.
+					A =length= property is maintained for =Uize.String.Builder= object instances, to reflect the current length of the value - even before `value resolution` has been performed.
 
-					The =length= property lets code query the length of the string value represented by a =Uize.String.Builder= instance, even before all the segments that may make up the value have been concatenated during `Value Resolution`. Consider the following example...
+					The =length= property lets code query the length of the string value represented by a =Uize.String.Builder= instance, even before all the segments that may make up the value have been concatenated during `value resolution`. Consider the following example...
 
 					EXAMPLE
 					.........................................................
@@ -264,7 +264,7 @@
 					alert (myStringBuilder.length);  // displays the text "3"
 					.........................................................
 
-					The value of the =length= property is maintained while `Building the Value` for the instance using the =append= and =prepend= instance methods, and when `Initializing the Value` during construction or when calling the =clear= and =setValue= instance methods. Unlike `Getting the Value` for a =Uize.String.Builder= instance, simply querying its =length= property *does not* trigger `Value Resolution`, so querying =length= will not defeat the `Performance Benefit` of using this object.
+					The value of the =length= property is maintained while `building the value` for the instance using the =append= and =prepend= instance methods, and when `initializing the value` during construction or when calling the =clear= and =setValue= instance methods. Unlike `getting the value` for a =Uize.String.Builder= instance, simply querying its =length= property *does not* trigger `value resolution`, so querying =length= will not defeat the `performance benefit` of using this object.
 
 					You can use the =length= property to test if a =Uize.String.Builder= instance has an empty value as follows...
 
@@ -275,7 +275,7 @@
 				toString and valueOf Intrinsic Methods
 					To match how instances of the =String= object behave when involved in operations or passed as parameters in function and method calls, the =Uize.String.Builder= object implements the =toString Intrinsic Method= and the =valueOf Intrinsic Method=.
 
-					Involving an instance of the =Uize.String.Builder= object in an operation can result in JavaScript `Invoking the Intrinsic Methods` in order to obtain a value that can be used in the operation. Consider the following example...
+					Involving an instance of the =Uize.String.Builder= object in an operation can result in JavaScript `invoking the intrinsic methods` in order to obtain a value that can be used in the operation. Consider the following example...
 
 					EXAMPLE
 					.......................................................................
@@ -321,7 +321,7 @@ Uize.module ({
 							For an in-depth discussion on setting the value for an instance, see the section `Initializing the Value`.
 
 							NOTES
-							- the constructor supports `Value to String Coercion` for the =valueANYTYPE= parameter
+							- the constructor supports `value to string coercion` for the =valueANYTYPE= parameter
 
 						Instance Properties
 							length
@@ -373,7 +373,7 @@ Uize.module ({
 								When no =valueANYTYPE= parameter is specified, then the =equals= method tests whether or not the instance's value is an empty string. You can also use the =length= instance property to test if a =Uize.String.Builder= instance has an empty value (see the section `length Property` for details).
 
 								NOTES
-								- this method supports `Value to String Coercion` for the =valueANYTYPE= parameter
+								- this method supports `value to string coercion` for the =valueANYTYPE= parameter
 					*/
 				};
 
@@ -394,7 +394,7 @@ Uize.module ({
 
 								NOTES
 								- see the equivalent =toString Intrinsic Method= and =valueOf Intrinsic Method=
-								- calling this method will trigger `Value Resolution`
+								- calling this method will trigger `value resolution`
 
 							toString Intrinsic Method
 								Returns a string, being the current value of the instance.
@@ -404,11 +404,11 @@ Uize.module ({
 								valueSTR = myStringBuilder.toString ();
 								.......................................
 
-								For a more in-depth discussion on accessing the value for an instance, see the section `Getting the Value`.
+								For a more in-depth discussion on accessing the value for an instance, see the section `getting the value`.
 
 								NOTES
 								- see the equivalent =getValue= instance method and =valueOf Intrinsic Method=
-								- calling this method will trigger `Value Resolution`
+								- calling this method will trigger `value resolution`
 
 							valueOf Intrinsic Method
 								Returns a string, being the current value of the instance.
@@ -418,11 +418,11 @@ Uize.module ({
 								valueSTR = myStringBuilder.valueOf ();
 								......................................
 
-								For a more in-depth discussion on accessing the value for an instance, see the section `Getting the Value`.
+								For a more in-depth discussion on accessing the value for an instance, see the section `getting the value`.
 
 								NOTES
 								- see the equivalent =getValue= instance method and =toString Intrinsic Method=
-								- calling this method will trigger `Value Resolution`
+								- calling this method will trigger `value resolution`
 					*/
 				};
 
@@ -449,7 +449,7 @@ Uize.module ({
 
 								NOTES
 								- see the companion =prepend= instance method
-								- this method supports `Value to String Coercion` for the =valueANYTYPE= parameter
+								- this method supports `value to string coercion` for the =valueANYTYPE= parameter
 					*/
 				};
 
@@ -475,7 +475,7 @@ Uize.module ({
 
 								NOTES
 								- see the companion =append= instance method
-								- this method supports `Value to String Coercion` for the =valueANYTYPE= parameter
+								- this method supports `value to string coercion` for the =valueANYTYPE= parameter
 					*/
 				};
 
@@ -517,7 +517,7 @@ Uize.module ({
 								NOTES
 								- see the related =clear= instance method
 								- see the companion =getValue= instance method
-								- this method supports `Value to String Coercion` for the =valueANYTYPE= parameter
+								- this method supports `value to string coercion` for the =valueANYTYPE= parameter
 					*/
 				};
 
@@ -530,11 +530,11 @@ Uize.module ({
 					/*?
 						Instance Methods
 							String Object Instance Methods
-								In addition to the `Instance Methods` implemented specifically to facilitate building strings, the =Uize.String.Builder= object also supports the instance methods from JavaScript's =String= object.
+								In addition to the `instance methods` implemented specifically to facilitate building strings, the =Uize.String.Builder= object also supports the instance methods from JavaScript's =String= object.
 
 								These instance methods include: =charAt=, =charCodeAt=, =concat=, =indexOf=, =lastIndexOf=, =match=, =replace=, =search=, =slice=, =split=, =substr=, =substring=, =toLowerCase=, =toUpperCase=, =anchor=, =big=, =blink=, =bold=, =fixed=, =fontcolor=, =fontsize=, =italics=, =link=, =small=, =strike=, =sub=, and =sup=.
 
-								All of the =String= object instance methods implemented for the =Uize.String.Builder= object have exactly the same signatures and behave in exactly the same way as they do for the =String= object. Because of this, they have not been documented in detail here. For a detailed explanation for any of them, consult a good JavaScript reference. For some examples, you can read through the section `String Object Parity`.
+								All of the =String= object instance methods implemented for the =Uize.String.Builder= object have exactly the same signatures and behave in exactly the same way as they do for the =String= object. Because of this, they have not been documented in detail here. For a detailed explanation for any of them, consult a good JavaScript reference. For some examples, you can read through the section `string object parity`.
 					*/
 				);
 

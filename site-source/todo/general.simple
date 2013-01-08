@@ -432,7 +432,7 @@ Version Support in Module Mechanism
 				Module Profile is Persisted
 					After a module has been built, it is still possible to query the `module registry` to get the profile for the module in order to find out more about it.
 
-					The name, superclass, required list, version, etc. are all persisted in the module registry. In the case of a class module, the profile for a module is assigned to the =moduleProfile= property of the module, so it is not necessary to use the `module registry` interface. However, in the case of a module where it is not appropriate to stitch in properties (such as data modules), `Getting a Module Profile` must be done through the `module registry` interface.
+					The name, superclass, required list, version, etc. are all persisted in the module registry. In the case of a class module, the profile for a module is assigned to the =moduleProfile= property of the module, so it is not necessary to use the `module registry` interface. However, in the case of a module where it is not appropriate to stitch in properties (such as data modules), `getting a module profile` must be done through the `module registry` interface.
 
 	Module Meta Data
 		EXAMPLE

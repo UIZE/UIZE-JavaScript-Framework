@@ -59,17 +59,17 @@ Introduction
 		What is the Page Widget?
 			In the UIZE JavaScript Framework, the page is a widget too.
 
-			Yes, the whole Web page is considered a widget. A revolutionary concept, perhaps. Because the widget framework of UIZE supports a hierarchical structure for widgets (the `Widget Tree`), the most logical thing to put at the root of that tree on a Web page is a widget that represents the page. In this way, the widget tree is analogous to - but not identical to - the DOM structure, and the page widget is to the widget tree as =documentElement= is to the DOM hierarchy of a document.
+			Yes, the whole Web page is considered a widget. A revolutionary concept, perhaps. Because the widget framework of UIZE supports a hierarchical structure for widgets (the `widget tree`), the most logical thing to put at the root of that tree on a Web page is a widget that represents the page. In this way, the widget tree is analogous to - but not identical to - the DOM structure, and the page widget is to the widget tree as =documentElement= is to the DOM hierarchy of a document.
 
 		What Does the Page Widget Do?
 			The page widget provides an environment and services that can be relied upon by child widgets in its tree.
 
-			As the root parent of the `Widget Tree`, the page widget gets to provide to all widgets on the tree:
+			As the root parent of the `widget tree`, the page widget gets to provide to all widgets on the tree:
 
 			- useful context (such as environment variables)
 			- useful facilities (such as decorated alert/confirmation dialogs, methods for generating URLs for the site, localization resources, etc.)
 
-			Facilities provided by the page widget are available to child widgets via their =getInherited= and =callInherited= instance methods. The page widget base class also implements a `Widget Adoption` mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (ie. requiring no JavaScript to be previously loaded).
+			Facilities provided by the page widget are available to child widgets via their =getInherited= and =callInherited= instance methods. The page widget base class also implements a `widget adoption` mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (ie. requiring no JavaScript to be previously loaded).
 
 		What Doesn't the Page Widget Do?
 			The page widget doesn't do a lot of things.
@@ -88,7 +88,7 @@ Introduction
 
 			For example, the `Zazzle Inc.` Web site implements its own =Zazzle.Page= page widget class, that is a subclass of =Uize.Widget.Page=. To get an idea of how the page widget paradigm is applied to a real world project, take a look at the module reference for the =UizeSite.Page= class and all its subclasses.
 
-			The =Uize.Widget.Page= base class provides some base functionality. You will likely want to create a subclass of =Uize.Widget.Page=, in a namespace appropriate for your site, and then use that in all your pages. That's a good starting point, even if your subclass adds no additional functionality initially. In time, you will find that your page widget class is a useful place to put functionality that needs to be available to many widgets that may exist at different places in the `Widget Tree`.
+			The =Uize.Widget.Page= base class provides some base functionality. You will likely want to create a subclass of =Uize.Widget.Page=, in a namespace appropriate for your site, and then use that in all your pages. That's a good starting point, even if your subclass adds no additional functionality initially. In time, you will find that your page widget class is a useful place to put functionality that needs to be available to many widgets that may exist at different places in the `widget tree`.
 
 			You may also find yourself creating subclasses of your page widget base class, for the pages of different sections of your Web site. If a lot of pages in a section share common functionality, then you can implement that functionality in a page widget subclass. This may involve adding and connecting up child widgets to support certain features for those pages. This provides an object oriented approach for designing the shared functionality of pages in different sections, rather than employing the typical ad hoc, source-in-shared-snippets approach.
 
@@ -241,7 +241,7 @@ More on Widgets
 				var alsoTheRootNode = myWidget.getNode ('');
 				............................................
 
-				Similarly, when using the `Node Related Instance Methods`, one can specify the value =''= (empty string), as in...
+				Similarly, when using the `node related instance methods`, one can specify the value =''= (empty string), as in...
 
 				....................................................................................
 				myWidget.displayNode ('',false); // hide myWidget, if it has a root node in its HTML
@@ -285,7 +285,7 @@ More on Widgets
 			nodeOBJ = myWidget.getNode (impliedNodeSTRorBLOB);
 			..................................................
 
-			Additionally, the `Node Related Instance Methods` of the =Uize.Widget= class allow implied nodes to be specified by their name, so it is *not* necessary in most cases to even use the =getNode= method when using these node related instance methods. However, the =getNode= method *is* quite useful for other methods - possibly outside of the =Uize.Widget= class - that deal in node references. This is true of some of the static methods in the =Uize.Node= module, since not all of the static methods of this module have analogs in the =Uize.Widget= class - only the most generally useful ones do.
+			Additionally, the `node related instance methods` of the =Uize.Widget= class allow implied nodes to be specified by their name, so it is *not* necessary in most cases to even use the =getNode= method when using these node related instance methods. However, the =getNode= method *is* quite useful for other methods - possibly outside of the =Uize.Widget= class - that deal in node references. This is true of some of the static methods in the =Uize.Node= module, since not all of the static methods of this module have analogs in the =Uize.Widget= class - only the most generally useful ones do.
 
 			EXAMPLE
 			.........................................................................
@@ -362,7 +362,7 @@ More on Widgets
 
 				A few of the instance methods, however, add additional logic not implemeted in the =Uize.Node= module. Example of such methods include the =removeNode= and =wireNode= instance methods.
 
-				When removing a node from the DOM using the =removeNode= instance method, the cached reference to the removed implied node is cleared from `The Node Cache`. When wiring events on implied nodes using the =wireNode= instance method, an ID for the widget instance that owns the event wirings is provided to the =Uize.Node.wire= static method, so that events can be unwired later by the widget by providing the same owner ID to the =Uize.Node.unwire= static method.
+				When removing a node from the DOM using the =removeNode= instance method, the cached reference to the removed implied node is cleared from `the node cache`. When wiring events on implied nodes using the =wireNode= instance method, an ID for the widget instance that owns the event wirings is provided to the =Uize.Node.wire= static method, so that events can be unwired later by the widget by providing the same owner ID to the =Uize.Node.unwire= static method.
 
 				INCORRECT
 				................................................
@@ -397,7 +397,7 @@ More on Widgets
 			myWidget.setNodeInnerHtml (_titleNode,'THIS WORKS');
 			....................................................................
 
-			Using a node reference for an implied node may be more convenient if one already has a reference to the node. Capturing a reference to an implied node in a private instance property or a local variable can offer a slight performance advantage, but not much since references to implied nodes are cached by the `The Node Cache`.
+			Using a node reference for an implied node may be more convenient if one already has a reference to the node. Capturing a reference to an implied node in a private instance property or a local variable can offer a slight performance advantage, but not much since references to implied nodes are cached by the `the node cache`.
 
 		The Node Cache
 			The =Uize.Widget= base class implements a system for caching references to implied nodes when they are first accessed.
@@ -814,7 +814,7 @@ Widget Adoption
 		- The JSON format allows one to specify rich data - such as an array of slide records for a slideshow - without having to worry about ugly encoding and escaping characters so data can be put into XHTML attributes. The JSON data is similar to how it would be specified if you were adding the child widget in page widget code, so the data is easily portable. Furthermore, many convenient utilities exist across different server platforms for serializing data structures to JSON objects.
 
 	Deep Adoption
-		The =idPrefix= for a widget you would like to be adopted lets you control where in the `Widget Tree` that the widget should be attached as a child.
+		The =idPrefix= for a widget you would like to be adopted lets you control where in the `widget tree` that the widget should be attached as a child.
 
 		The page widget's adoption mechanism allows child widgets to be attached anywhere on a widget tree - not just as children of the page widget, itself. So, if you happen to know that the page widget creates its own child widgets (perhaps in your subclass of =Uize.Widget.Page=), then the declarative syntax allows child widgets to be adopted deeper into the tree. Moreover, you can declare widgets that should be adopted by other widgets that are, themselves, being adopted.
 
@@ -944,7 +944,7 @@ Widget Adoption
 			Besides the =idPrefix= value here that identifies the DOM nodes for which the =Uize.Widget.CollectionItem.Zooming= instances should be created, the values specified for the =previewZoomUrl= and =zoomPower= state properties of this widget class are common for all instances that are spawned. The =$[idPrefix]= declaration of =$page_$$= indicates that the spawned widgets are to be added as children of the page widget instance.
 
 		Spawning Using the children Property
-			In addition to being able to use `The $[parentName]_$$[childWidgetName] Syntax` for declaring widgets to be spawned, the name of child widgets can be prefixed with "$$" (two dollar signs) when declaring them using `The children Property`.
+			In addition to being able to use `the $[parentName]_$$[childWidgetName] syntax` for declaring widgets to be spawned, the name of child widgets can be prefixed with "$$" (two dollar signs) when declaring them using `the children property`.
 
 			EXAMPLE
 			.............................................................................
@@ -976,7 +976,7 @@ Widget Adoption
 		This behavior allows easy migration of the instantiation from using the adoption mechanism to using explicit instantiation inside the page widget's code. When this case arises, the =widgetClass= property in the declaration will be ignored - even if it doesn't match the class of the existing widget, so the page widget's child widget takes precedence since it's already created. Child widgets declared using the =children= property *will*, however, be added to the existing widget.
 
 	Vanilla Parent Widgets
-		A mechanism exists for filling in "holes" in the `Widget Tree` path in widget adoption declarations.
+		A mechanism exists for filling in "holes" in the `widget tree` path in widget adoption declarations.
 
 		Specifically, if an =idPrefix= specified in a widget adoption declaration implies a parent widget - at any level of the widget tree - that doesn't exist and for which there is no explicit adoption declaration, then a plain vanilla widget (an instance of the =Uize.Widget= base class) will be created as that parent. This behavior allows for casual grouping of adopted widgets under a plain vanilla =Uize.Widget= parent, or the use of a plain vanilla parent as a placeholder for some other widget class that might be plugged in later.
 
