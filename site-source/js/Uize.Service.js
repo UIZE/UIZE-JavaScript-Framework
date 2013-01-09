@@ -65,7 +65,9 @@ Uize.module ({
 			};
 
 		/*** Public Static Methods ***/
-			_class.declareServiceMethods = function (_serviceMethods) {
+			_class.serviceMethods =
+			_class.declareServiceMethods = /* DEPRECATED 2013-01-09 */
+			function (_serviceMethods) {
 				var
 					_this = this,
 					_thisServiceMethods = _this._serviceMethods,
@@ -84,12 +86,15 @@ Uize.module ({
 
 					_thisServiceMethods [_methodName] = _methodProfile || (_methodProfile = {});
 
-					// normalize method profile
-					// eg.
-					// {
-					//    async: true (default) | false,
-					//    params: {...}
-					// }
+					/* NOTES:
+						normalize method profile
+
+						eg.
+						{
+							async: true (default) | false,
+							params: {...}
+						}
+					*/
 					_methodProfile.async = _methodProfile.async !== _false;
 
 					_serviceMethodPublicWrappers [_methodName] = function (_params,_callback) {
@@ -269,13 +274,13 @@ Uize.module ({
 				Uize.copyInto (_this.prototype,_serviceMethodPublicWrappers);
 				/*?
 					Static Methods
-						Uize.Service.declareServiceMethods
+						Uize.Service.serviceMethods
 							document...
 
 							EXAMPLE
 							..........................................
 							var FileSystem = Uize.Service.subclass ();
-							FileSystem.declareServiceMethods ({
+							FileSystem.serviceMethods ({
 								readFile:{
 									async:false
 								},
@@ -292,6 +297,41 @@ Uize.module ({
 								// etc.
 							});
 							..........................................
+
+					Deprecated Features
+						Uize.Service.declareServiceMethods -- DEPRECATED 2013-01-09
+							The =Uize.Service.declareServiceMethods= static method has been deprecated in favor of the newly added =Uize.Service.serviceMethods= static method.
+
+							............................................................................
+							Uize.Service.declareServiceMethods >> BECOMES >> Uize.Service.serviceMethods
+							............................................................................
+
+							The =Uize.Service.serviceMethods= method is essentially just a renaming of the deprecated =Uize.Service.declareServiceMethods= method and behaves in exactly the same way. The new name was chosen to fit, in a more semantically elegant way, with the new capability of the =Uize.Class.subclass= method (inherited by the =Uize.Service= class) that lets you declare class features when creating a subclass.
+
+							According to how this behavior works, it is possible to declare service methods when creating a service class by specifying a =serviceMethods= property in the =featuresByTypeOBJ= parameter, as follows...
+
+							EXAMPLE
+							.........................................
+							var FileSystem = Uize.Service.subclass ({
+								serviceMethods:{
+									readFile:{
+										async:false
+									},
+									writeFile:{
+										async:false
+									},
+									getFiles:{
+										async:false
+									},
+									getFolder:{
+										async:false
+									},
+									// etc.
+									// etc.
+								}
+							});
+							.........................................
+
 				*/
 			};
 

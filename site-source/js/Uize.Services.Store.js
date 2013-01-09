@@ -34,11 +34,8 @@ Uize.module ({
 				_true = true
 			;
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
-
-		/*** Public Instance Methods ***/
-			_class.declareServiceMethods ({
+		return _superclass.subclass ({
+			serviceMethods:{
 				key:{
 					async:_false
 					/*?
@@ -127,8 +124,7 @@ Uize.module ({
 					*/
 				}
 			});
-
-		return _class;
+		}
 	}
 });
 

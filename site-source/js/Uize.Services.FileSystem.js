@@ -34,11 +34,8 @@ Uize.module ({
 				_true = true
 			;
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
-
-		/*** Public Instance Methods ***/
-			_class.declareServiceMethods ({
+		return _superclass.subclass ({
+			serviceMethods:{
 				copyFile:{
 					async:_false
 					/*?
@@ -221,9 +218,8 @@ Uize.module ({
 								document...
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 
