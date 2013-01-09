@@ -1,0 +1,50 @@
+The new =Uize.Class.declare= static method, implemented in the =Uize.Class= base class and inherited by all subclasses, lets you conveniently declare one or more features of one or more different `feature types` for the class.
+
+SYNTAX
+....................................
+MyClass.declare (featuresByTypeOBJ);
+....................................
+
+For convenience, the =Uize.Class.declare= method lets you declare features of various types, in the same way as they can be declared when using the variation of the =Uize.Class.subclass= method that supports specifying features in a =featuresByTypeOBJ= object. The =Uize.Class.declare= method lets you declare additional features at any time after first creating a class, using the same semantics as supported by the =Uize.Class.subclass= method.
+
+EXAMPLE
+...................................
+MyClass.declare ({
+	alphastructor:function () {
+		// implementation here
+	},
+	omegastructor:function () {
+		// implementation here
+	},
+	staticMethods:{
+		staticMethod1:function () {
+			// implementation here
+		},
+		staticMethod2:function () {
+			// implementation here
+		}
+	},
+	instanceMethods:{
+		instanceMethod1:function () {
+			// implementation here
+		},
+		instanceMethod2:function () {
+			// implementation here
+		}
+	},
+	stateProperties:{
+		stateProperty1:{
+			// property profile
+		},
+		stateProperty2:{
+			// property profile
+		}
+	}
+});
+...................................
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-09 - New Uize.Class.declare Static Method
+....................................................................................
