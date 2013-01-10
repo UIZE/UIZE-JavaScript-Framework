@@ -41,7 +41,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							key
-								Returns the key of the item at the specified index.
+								Returns a string, being the key of the item at the specified index.
 
 								SYNTAX
 								.......................................
@@ -49,8 +49,15 @@ Uize.module ({
 								.......................................
 
 								Params
+									The =key= service method supports the following parameters...
+
 									index
-										document...
+										A number, specifying the item for which the key should be determined.
+
+										If no item exists at the specified index, then this method will return the value =null= and will not produce any errors.
+
+								NOTES
+								- this service method is synchronous
 					*/
 				},
 
@@ -59,7 +66,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							getItem
-								Returns the value for the specified item.
+								Returns a string, being the value for the item with the specified key.
 
 								SYNTAX
 								.................................................
@@ -67,8 +74,15 @@ Uize.module ({
 								.................................................
 
 								Params
+									The =getItem= service method supports the following parameters...
+
 									key
-										document...
+										A string, specifying the key of the item whose value should be returned.
+
+										If no item with the specified key exists, then this method will return the value =undefined= and will not produce any errors.
+
+								NOTES
+								- this service method is synchronous
 					*/
 				},
 
@@ -77,7 +91,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							setItem
-								document...
+								Lets you set the item with the specified key to the specified value.
 
 								SYNTAX
 								..................................
@@ -85,11 +99,18 @@ Uize.module ({
 								..................................
 
 								Params
+									The =setItem= service method supports the following parameters...
+
 									key
-										document...
+										A string, specifying the key of the item whose value should be set.
+
+										If an item with the specified key already exists, its value will be set to the new value specified in the =value= parameter. If not item with the specified key exists, it will be created.
 
 									value
-										document...
+										A string, specifying the value that the item should be set to.
+
+								NOTES
+								- this service method is synchronous
 					*/
 				},
 
@@ -98,7 +119,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							removeItem
-								document...
+								Lets you remove the item with the specified key.
 
 								SYNTAX
 								.....................................
@@ -106,8 +127,15 @@ Uize.module ({
 								.....................................
 
 								Params
+									The =removeItem= service method supports the following parameters...
+
 									key
-										document...
+										A string, specifying the key of the item that should be removed.
+
+										If no item with the specified key exists, then this method will do nothing - it will not produce any errors.
+
+								NOTES
+								- this service method is synchronous
 					*/
 				},
 
@@ -116,15 +144,18 @@ Uize.module ({
 					/*?
 						Instance Methods
 							clear
-								document...
+								Lets you clear the entire store, removing all items.
 
 								SYNTAX
-								................................
-								storeInstance.clear (paramsOBJ);
-								................................
+								.......................
+								storeInstance.clear ();
+								.......................
 
 								Params
-									The =clear= method has no parameters.
+									The =clear= service method has no parameters.
+
+								NOTES
+								- this service method is synchronous
 					*/
 				}
 			}
