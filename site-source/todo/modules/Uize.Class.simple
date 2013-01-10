@@ -1,47 +1,5 @@
 This is a TO DO document for the =Uize.Class= module.
 
-Improve Feature Declaration and Subclassing
-	New Variation for the Uize.Class.subclass Method
-		As a convenience, the =Uize.Class.subclass= method should be improved with addition of a variation that takes a single object parameter, which will let you specify in a declarative way various features that should be added to the newly created class.
-
-		The name of each property of the object should match the name of a static method that exists on the base class, and that will be called with the value of the property as its single parameter. So, for example, to conveniently declare static methods that should be added to the subclass, the =staticMethods= property can be specified, which will result in the =MyClass.staticMethods= static method being called in order to declare the specified set of static methods.
-
-		SYNTAX
-		..........................................................
-		MySubclassOBJ = MyClass.subclass (featuresDeclarationOBJ);
-		..........................................................
-
-		EXAMPLE
-		................................
-		MySubclass = MyClass.subclass ({
-			staticMethods:{
-			},
-			instanceMethods:{
-			},
-			instanceProperties:{
-			},
-			stateProperties:{
-			}
-		});
-		................................
-
-		Benefit to Service Classes
-			Improving the =Uize.Class.subclass= method in the proposed way would benefit other base classes that provide static methods for declaring features of subclasses.
-
-			For example, the =Uize.Service= base class provides a =Uize.Service.declareServiceMethods= static methods that service subclasses can use to declare their service methods. By changing the name of the =Uize.Service.declareServiceMethods= method to simply =Uize.Service.serviceMethods=, and given the proposed behavior for the new variation of the =Uize.Class.subclass= method, a service subclass will be able to be created along with declaration of service methods in a single call to the =Uize.Class.subclass= method, as follows...
-
-			EXAMPLE
-			.........................................
-			MyServiceClass = Uize.Service.subclass ({
-				serviceMethods:{
-					serviceMethod1:{
-					},
-					serviceMethod2:{
-					}
-				}
-			});
-			.........................................
-
 Conditions
 	The whenever Instance Method
 		EXAMPLES
