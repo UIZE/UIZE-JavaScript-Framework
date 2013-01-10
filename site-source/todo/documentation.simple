@@ -180,10 +180,6 @@ Doc Improvements
 
 Build Process Improvements
 	- script to insert UIZE version number into all script tags that source in the Uize.js file
-	- write script to search for example files that are using ~source JS
-		- as long as they don't have a "~" at the beginning of the file name
-		- incorporate into the build sequence for the UIZE Web site
-		- terminate build script if examples found, report offending examples
 	- write script to test for HTML pages with meta descriptions that are too long (more than 150 characters)
 
 gzipping Text Files
@@ -199,78 +195,142 @@ Migrate Modules Into Deeper Namespaces
 	Uize.Xml         ->  ???
 	.........................................................
 
-Upcoming Releases
-	- loop optimization approaches
-		- finish loop optimization approaches performance test...
-			- write up explanation
-			- list in directory
-
-		- add entry in javascript optimization appendix
-
-	Conditional Expression Optimization
-		.........................................................
-		if (blah) doSomething ();   ==>  blah && doSomething ();
-		if (!blah) doSomething ();  ==>  blah || doSomething ();
-		.........................................................
+Add Interview Questions
+	- the matrix
+	- find smallest number
+		- find the smallest number in an array of numbers, without using methods of the Math object (like Math.max or Math.min)
+		- now, find the smallest number using a method of the Math object
+		- does the candidate still use iteration? do they know about the Infinity value?
+		- now, find the smallest number in a single statement
+		- does the candidate know that Math.min can take an arbitrary number of parameters?
+		- does the candidate understand how to use the call and apply methods of Function objects?
 
 	Brain Teaser / Interview Question
-		.........................................................
+		...................................................
 		alert (blah);            // displays "Hello"
 		alert (blah + 'Brian');  // displays "Hello, Brian"
-		.........................................................
+		...................................................
 
 		define blah
 
-		.........................................................
+		..............................................
 		var blah = {};
 		blah.toString = function () {return 'Hello'};
 		blah.valueOf = function () {return 'Hello, '};
-		.........................................................
+		..............................................
 
 		or...
 
-		.........................................................
+		..............................................
 		var blah = new String ('Hello');
 		blah.valueOf = function () {return 'Hello, '};
-		.........................................................
+		..............................................
 
 		or...
 
-		.........................................................
+		............................................................
 		var blah = new String ('Hello');
 		blah.valueOf = function () {return this.toString () + ', '};
-		.........................................................
-
-	Testing if instance is of a certain class or object type
-
-		.........................................................
-		if (someInstance.constructor == SomeClass) {
-			// ...
-		}
-		.........................................................
-
-	Testing if two instances are of the same class or object type
-
-		.........................................................
-		if (someInstance1.constructor == someInstance2.constructor) {
-			// ...
-		}
-		.........................................................
-
-	Creating a fresh instance with same state
-		.........................................................
-		someInstance2 = new someInstance1.Class (someInstance1.get ())
-		.........................................................
+		............................................................
 
 	Interview question / brainteaser
 		optimize the following statement...
 
-		.........................................................
+		.........................................................................................................
 		someCondition ? variableA - variableB : variableA
 		variableA - (someCondition ? variableB : 0)
 		variableA - someCondition * variableB        // works if someCondition is guaranteed to produce a boolean
-		variableA - (someCondition && variableB)     // works even if someCondition is not a boolean value
+		variableA - !!someCondition * variableB      // works even if someCondition is not a boolean value
+		.........................................................................................................
+
+Optimization Tricks
+	Page Performance Optimization
+		- put JavaScript only as early in page as is needed (at end of page, if possible)
+
+	Loop Optimization Approaches
+		Finish loop optimization approaches performance test.
+
+		- write up explanation
+		- list in directory
+
+		- add entry in javascript optimization appendix
+
+	Conditional Expression Optimization
+		........................................................
+		if (blah) doSomething ();   ==>  blah && doSomething ();
+		if (!blah) doSomething ();  ==>  blah || doSomething ();
+		........................................................
+
+	Sacred Empty Object
+		document...
+
+	Sacred Empty Array
+		document...
+
+Code Size Optimization
+	- UIZE-specific: Leave State Property Initial Values undefined, where possible. don't define an initial value for a state property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)
+	- use slice instead of substring (or substr when just one parameter) method, wherever possible
+	- omit parentheses after constructor when constructor doesn't take any parameters
+
+	- lazy assignment combined with conditional execution
 		.........................................................
+		if (!_param) _param = _lastValue;
+		if (_param) {
+			// do stuff
+		}
+		_lastValue = _param;
+		.........................................................
+
+		.........................................................
+		if (_param || (_param = _lastValue)) {
+			// do stuff
+		}
+		_lastValue = _param;
+		.........................................................
+
+General Tips
+	How to test if a multi-line string contains any lines exceeding a specific length
+		.........................................................
+		function hasLineExceedingMaxLength (sourceStr,maxLength) {
+			return new RegExp ('^.{' + (maxLength + 1) + ',}$','m').test (sourceStr);
+		}
+		.........................................................
+
+	How to create a copy of an array...
+		.........................................................
+		myArray.concat ();
+		.........................................................
+
+	How to split out the characters from a string into an array of characters...
+		.........................................................
+		myString.split ('');
+		.........................................................
+
+	How to double space the characters in a string...
+		.........................................................
+		myString.split ('').join (' ');
+		.........................................................
+
+	Testing if instance is of a certain class or object type
+
+		............................................
+		if (someInstance.constructor == SomeClass) {
+			// ...
+		}
+		............................................
+
+	Testing if two instances are of the same class or object type
+
+		.............................................................
+		if (someInstance1.constructor == someInstance2.constructor) {
+			// ...
+		}
+		.............................................................
+
+	Creating a fresh instance with same state
+		...........................................................
+		someInstance2 = someInstance1.Class (someInstance1.get ());
+		...........................................................
 
 - explain about layer library modules (as used by the UIZE Web site)
 
@@ -285,7 +345,7 @@ URLs to link to somewhere in docs
 	- http://dean.edwards.name/weblog/2007/03/rules/
 
 Improved Location of Source Code
-	For examples, modules, put source code into a peer folder, rather than child folder
+	For examples, modules, put source code into a peer folder, rather than child folder.
 
 	So...
 
@@ -298,9 +358,7 @@ Improved Location of Source Code
 	- must update .jst files that generate reference pages and source code pages, to link to correct places
 	- must update examples to link to source code files correctly
 	- must update search page to allow separate searching in source code folders
-	- benefits
-		- users can search only source code, or only documents
-		- UIZE developers can search within examples folder without also searching in source-code child folder by default
+	- benefit: users can search only within source code, or only documents
 
 For Framework Developers
 	Documentation Style Guide
@@ -536,17 +594,20 @@ Miscellaneous
 
 		Can't do this with JavaScript 1.6's map method (or the map methods in any other framework), because the map function can't reference the newly created target array.
 
-Interview Questions to Add
-	- the matrix
-	- find smallest number
-		- find the smallest number in an array of numbers, without using methods of the Math object (like Math.max or Math.min)
-		- now, find the smallest number using a method of the Math object
-		- does the candidate still use iteration? do they know about the Infinity value?
-		- now, find the smallest number in a single statement
-		- does the candidate know that Math.min can take an arbitrary number of parameters?
-		- does the candidate understand how to use the call and apply methods of Function objects?
+Basic Wireframe Documentation for *ALL* Modules
+	Add at least a single line summary for every feature of every module.
 
-!!! basic wireframe documentation for *ALL* modules
+	This applies to...
+
+	- instance methods
+	- instance properties
+	- static methods
+	- static properties
+	- state properties
+	- implied nodes (widgets)
+	- instance events
+	- static events
+	- etc.
 
 XHTML Validation Problems
 	- "JavaScript Templates" explainer has issue with "<%" and ">" chars not being entities. This is a problem for SimpleDoc in general.
@@ -563,7 +624,6 @@ Design Philosophy (some ramblings)
 	Node-related methods implemented in Uize.Widget are a reflection of static methods from the Uize.Node package that are the most useful and frequently used in the context of widget implementations. If you need to use more esoteric methods, you can access those from the Uize.Node package and use the getNode instance method to get references to implied nodes to supply to the methods of the Uize.Node package.
 
 	UIZE takes the approach of exposing abstractions for things for which it is useful to provide abstractions. Beyond these useful abstractions, UIZE does not attempt to provide a comprehensive abstraction of all DOM APIs. There's nothing wrong with using safe and consistently implemented methods of the standard DOM APIs.
-
 
 Site & Documentation (in order of priority)
 	- go through all documentation pages and see what tooltips show up for the contents tree links. Make sure all sections have a concise introductory first paragraph.
@@ -592,79 +652,27 @@ UIZE guidelines
 	Development Practices
 		- only source in JavaScript files that are actually used on a page (same applies to CSS files)
 
-	Code Size Optimization
-		- UIZE-specific: Leave State Property Initial Values undefined, where possible. don't define an initial value for a state property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)
-		- use slice instead of substring (or substr when just one parameter) method, wherever possible
-		- omit parentheses after constructor when constructor doesn't take any parameters
-
-		- lazy assignment combined with conditional execution
-			.........................................................
-			if (!_param) _param = _lastValue;
-			if (_param) {
-				// do stuff
-			}
-			_lastValue = _param;
-			.........................................................
-
-			.........................................................
-			if (_param || (_param = _lastValue)) {
-				// do stuff
-			}
-			_lastValue = _param;
-			.........................................................
-
-	Code Performance Optimization
-		- sacred empty object and sacred empty array techniques
-
-	Code Tricks & Tips
-		- how to test if a multi-line string contains any lines exceeding a specific length
-			.........................................................
-			function hasLineExceedingMaxLength (sourceStr,maxLength) {
-				return new RegExp ('^.{' + (maxLength + 1) + ',}$','m').test (sourceStr);
-			}
-			.........................................................
-
-		- how to create a copy of an array...
-			.........................................................
-			myArray.concat ();
-			.........................................................
-
-		- how to split out the characters from a string into an array of characters...
-			.........................................................
-			myString.split ('');
-			.........................................................
-
-		- how to double space the characters in a string...
-			.........................................................
-			myString.split ('').join (' ');
-			.........................................................
-
-
-	- page performance optimization
-		- put JavaScript only as early in page as is needed (at end of page, if possible)
-
 Overview
 	- mention Uize/uize/UIZE namespace considerations for developers
 
 For All Examples
-	- add explanation copy
-		C:/~uize/UIZE-JavaScript-Framework/examples/hierarchical-selector.html
-		C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
-		C:/~uize/UIZE-JavaScript-Framework/examples/button-types.html
-
-		C:/~uize/UIZE-JavaScript-Framework/examples/button-toggle.html
-		C:/~uize/UIZE-JavaScript-Framework/examples/swap-image-png.html -- mention "JavaScript animation"
+	Add Explanation Copy
+		- C:/~uize/UIZE-JavaScript-Framework/examples/hierarchical-selector.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/button-types.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/button-toggle.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/swap-image-png.html -- mention "JavaScript animation"
 
 	- for examples that should wait until all images are loaded (eg. sequenced show), for now use Uize.Widget's "Document Loaded" event as a proxy for detecting that state
 
-For All Tests
+For All Performance Test Pages
 	- add description copy
 	- turn as many of the faceless tests as possible into true tests using the Uize.Test class
 	- improve test framework, so that...
 		- each individual test can specify its title, so that...
 			- generating the report is easier
 			- the user can know what test is currently being performed
-		- give better status updates, so that the user knows...
+		- give better status updates, so that...
 			- the user knows when a wait is happening
 			- the user knows what test is currently being performed
 			- the user can see the results as they come in
