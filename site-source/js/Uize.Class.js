@@ -31,14 +31,14 @@
 					The =Uize.Class.subclass= static method lets you create a subclass of the class on which the method is called.
 
 					EXAMPLE
-					.................................
-					MySubclass = MyClass.subclass ();
-					.................................
+					.....................................
+					var MySubclass = MyClass.subclass ();
+					.....................................
 
 				Feature Declaration Methods
 					The =Uize.Class= module provides a number of methods that let you declare instance and/or static features of a class.
 
-					- =Uize.Class.declare= - lets you declare one or more features of one or more different feature types for the class
+					- =Uize.Class.declare= - lets you declare one or more features of one or more different `feature types` for the class
 					- =Uize.Class.alphastructor= - lets you declare the `alphastructor` for the class
 					- =Uize.Class.omegastructor= - lets you declare the `omegastructor` for the class
 					- =Uize.Class.instanceMethods= - lets you declare one or more instance methods for the class
@@ -80,7 +80,7 @@
 						This is useful, because it lets you break out declarations into different sections in your code if that makes your code more readable and/or manageable.
 
 						EXAMPLE
-						......................................
+						........................................
 						// Private Instance Methods
 						_class.instanceMethods ({
 							_privateInstanceMethod1:function () {
@@ -102,7 +102,7 @@
 								// implementation here
 							}
 						});
-						......................................
+						........................................
 
 						In the above example, the =Uize.Class.instanceMethods= method is being called twice - in one section to declare private instance methods, and in the other section to declare public instance methods.
 
@@ -119,6 +119,202 @@
 						Although a less likely scenario, it is also possible to declare dual context properties using the =Uize.Class.dualContextProperties= static method. This method is present mainly for symmetry and consistency.
 
 						For dual context features, it is assumed that the feature is named the same on both the instance and the class. In situations where this is not the case, one should just use the separate methods for defining instance features and class features.
+
+					Declaring Multiple Features, Categorized by Type
+						Multiple features, categorized by type, can be declared for a class by either `declaring features by type when creating a class` or by `declaring features by type for an already created class`.
+
+						Declaring Features by Type When Creating a Class
+							The =Uize.Class.subclass= method supports a variation that lets you `create a subclass, declaring multiple features by type` at the time of creating a class, by supplying just a single =featuresByTypeOBJ= parameter.
+
+							EXAMPLE
+							....................................
+							var MySubclass = MyClass.subclass ({
+								alphastructor:function () {
+									// implementation here
+								},
+								omegastructor:function () {
+									// implementation here
+								},
+								staticMethods:{
+									staticMethod1:function () {
+										// implementation here
+									},
+									staticMethod2:function () {
+										// implementation here
+									}
+								},
+								instanceMethods:{
+									instanceMethod1:function () {
+										// implementation here
+									},
+									instanceMethod2:function () {
+										// implementation here
+									}
+								},
+								stateProperties:{
+									stateProperty1:{
+										// property profile
+									},
+									stateProperty2:{
+										// property profile
+									}
+								}
+							});
+							....................................
+
+						Declaring Features by Type for an Already Created Class
+							One or more features of one or more different `feature types` can be declared for a class after the class has already been created, by calling the =Uize.Class.declare= method on the class and supplying a =featuresByTypeOBJ= parameter.
+
+							EXAMPLE
+							.....................................
+							var MyClass = Uize.Class.subclass ();
+
+							MyClass.declare ({
+								alphastructor:function () {
+									// implementation here
+								},
+								omegastructor:function () {
+									// implementation here
+								},
+								staticMethods:{
+									staticMethod1:function () {
+										// implementation here
+									},
+									staticMethod2:function () {
+										// implementation here
+									}
+								},
+								instanceMethods:{
+									instanceMethod1:function () {
+										// implementation here
+									},
+									instanceMethod2:function () {
+										// implementation here
+									}
+								},
+								stateProperties:{
+									stateProperty1:{
+										// property profile
+									},
+									stateProperty2:{
+										// property profile
+									}
+								}
+							});
+							.....................................
+
+						Feature Types
+							When a =featuresByTypeOBJ= parameter is passed to either the =Uize.Class.declare= or the =Uize.Class.declare= methods, the object may contain any of the following properties...
+
+							- =alphastructor= - lets you declare the `alphastructor` for the class
+							- =omegastructor= - lets you declare the `omegastructor` for the class
+							- =instanceMethods= - lets you declare one or more instance methods for the class
+							- =instanceProperties= - lets you declare one or more instance properties for the class
+							- =staticMethods= - lets you declare one or more static methods for the class
+							- =staticProperties= - lets you declare one or more static properties for the class
+							- =dualContextMethods= - lets you declare one or more `dual context` methods for the class
+							- =dualContextProperties= - lets you declare one or more `dual context` properties for the class
+							- =stateProperties= - lets you declare one or more state properties for instances of the class
+
+						How It's Implemented
+							The properties of the =featuresByTypeOBJ= object should correspond to the names of the various `feature declaration methods` supported by the class being subclassed.
+
+							When features are specified, categorized by type, in the =featuresByTypeOBJ= parameter, the =Uize.Class.declare= and =Uize.Class.subclass= methods will iterate over the properties of the object, attempting to call a static method of the name of each property encountered, on the class being subclassed, and passing the value of the property as the first parameter of the feature declaration method.
+
+							So, for example, if the =Uize.Service.subclass= method is called to create a service class, and if a =featuresByTypeOBJ= parameter is specified, and if a =serviceMethods= property exists within the =featuresByTypeOBJ= object, then the =Uize.Service.serviceMethods= static method will be called and the value of the =serviceMethods= property from the =featuresByTypeOBJ= object will be passed as the single parameter to the =Uize.Service.serviceMethods= method.
+
+							To illustrate this by example...
+
+							THIS...
+							.........................................
+							var FileSystem = Uize.Service.subclass ({
+								serviceMethods:{
+									readFile:{
+										async:false
+									},
+									writeFile:{
+										async:false
+									},
+									getFiles:{
+										async:false
+									},
+									getFolder:{
+										async:false
+									},
+									// etc.
+									// etc.
+								}
+							});
+							.........................................
+
+							...IS EQUIVALENT TO...
+							..........................................
+							var FileSystem = Uize.Service.subclass ();
+
+							FileSystem.declare ({
+								serviceMethods:{
+									readFile:{
+										async:false
+									},
+									writeFile:{
+										async:false
+									},
+									getFiles:{
+										async:false
+									},
+									getFolder:{
+										async:false
+									},
+									// etc.
+									// etc.
+								}
+							});
+							..........................................
+
+							More Feature Types for Specific Base Classes
+								Because of `how it's implemented`, `declaring multiple features, categorized by type`, inherently supports new feature types introduced in subclasses.
+
+								For instance, the =Uize.Service= base class introduces the feature type of a service method and provides the =Uize.Service.serviceMethods= static method for declaring service methods. So, inherently, service methods can be declared in the =featuresByTypeOBJ= parameter along with other feature types that were introduced in the =Uize.Class= base class (instance methods, instance properties, static methods, static properties, state properties, etc.), simply by specifying a =serviceMethods= property in the =featuresByTypeOBJ= object.
+
+								Therefore, if you implement a new base class of which multiple different subclasses will be created, and you define a static method that allows developers to declare features of a new feature type that is introduced in your base class, then features of that type can be declared in the =Uize.Class.subclass= and =Uize.Class.declare= methods.
+
+							Less Conventional Usages
+								Because of `how it's implemented`, one can also do less conventional things along with declaring features in the =Uize.Class.subclass= and =Uize.Class.declare= methods.
+
+								For example, one can effectively call the =Uize.Class.set= static method to override the initial values of state properties that are inherited from the base class, as shown in the following example...
+
+								THIS...
+								...............................................................
+								var MySliderWidgetSubclass = Uize.Widget.Bar.Slider.subclass ({
+									instanceMethods:{
+										// instance methods declared here
+									},
+									stateProperties:{
+										// state properties declared here
+									}
+								});
+
+								MySliderWidgetSubclass.set ({
+									minValue:-50,
+									maxValue:50
+								});
+								...............................................................
+
+								...COULD BE SHORTENED TO...
+								...............................................................
+								var MySliderWidgetSubclass = Uize.Widget.Bar.Slider.subclass ({
+									instanceMethods:{
+										// instance methods declared here
+									},
+									stateProperties:{
+										// state properties declared here
+									},
+									set:{
+										minValue:-50,
+										maxValue:50
+									}
+								});
+								...............................................................
 
 			Event System
 				The =Uize.Class= module implements a powerful and versatile event system, which can be used for application events outside the context of browser DOM events.
@@ -2301,7 +2497,7 @@ Uize.module ({
 
 										EXAMPLE
 										...........................................................................
-										MyClass = Uize.Class.subclass ();
+										var MyClass = Uize.Class.subclass ();
 										MyClass.someUtilityFunction = function () {
 											// do something of great utility
 										};
@@ -2368,29 +2564,118 @@ Uize.module ({
 						Uize.Class.subclass
 							Lets you subclass the =Uize.Class= base class or any subclass of =Uize.Class=.
 
-							SYNTAX
-							......................................................
-							MyClass = Uize.Class.subclass (subclassConstructorFN);
-							......................................................
+							DIFFERENT USAGES
 
-							Consider the following example...
+							`Create a Subclass, Declaring Multiple Features by Type`
+							..................................................
+							MyClass = Uize.Class.subclass (featuresByTypeOBJ);
+							..................................................
 
-							EXAMPLE
-							.......................................
-							MyClass = Uize.Class.subclass (
-								function () {
-									this.foo = 'How unoriginal!';
-								}
-							);
+							`Create a Subclass, Specifying Only an Alphastructor`
+							..................................................
+							MyClass = Uize.Class.subclass (alphastructorFUNC);
+							..................................................
 
-							MySubclass = MyClass.subclass (
-								function () {
-									this.bar = this.foo + ' Indeed!';
-								}
-							);
-							.......................................
+							`Create a Subclass, Specifying Both Alphastructor and Omegastructor`
+							....................................................................
+							MyClass = Uize.Class.subclass (alphastructorFUNC,omegastructorFUNC);
+							....................................................................
 
-							In the above example, =MySubclass= is a subclass of =MyClass=, which is in turn a subclass of the =Uize.Class= base class. Now, when an instance of =MySubSubclass= gets created, the constructor of =MyClass= and then the constructor of =MySubSubclass= will be executed in the initialization of the instance, and the instance will have both =foo= and =bar= properties, where the =bar= property will have a value of "How unoriginal! Indeed!".
+							`Create a Subclass, Specifying Only an Omegastructor`
+							............................................................
+							MyClass = Uize.Class.subclass (null,omegastructorFUNC);
+							MyClass = Uize.Class.subclass (undefined,omegastructorFUNC);
+							............................................................
+
+							Create a Subclass, Declaring Multiple Features by Type
+								As a convenience, the =Uize.Class.subclass= method supports a variation that takes a single object parameter, as a means of `declaring features by type when creating a class`.
+
+								SYNTAX
+								..................................................
+								MyClass = Uize.Class.subclass (featuresByTypeOBJ);
+								..................................................
+
+								Using this variation, one or more features of various different `feature types` can be conveniently declared during the subclass creation. When using this variation, setting the alphastructor and/or omegastructor for the class being created must be done by specifying values for the =alphastructor= and/or =omegastructor= properties of the =featuresByTypeOBJ= object.
+
+								EXAMPLE
+								....................................
+								var MySubclass = MyClass.subclass ({
+									alphastructor:function () {
+										// implementation here
+									},
+									omegastructor:function () {
+										// implementation here
+									},
+									staticMethods:{
+										staticMethod1:function () {
+											// implementation here
+										},
+										staticMethod2:function () {
+											// implementation here
+										}
+									},
+									instanceMethods:{
+										instanceMethod1:function () {
+											// implementation here
+										},
+										instanceMethod2:function () {
+											// implementation here
+										}
+									},
+									stateProperties:{
+										stateProperty1:{
+											// property profile
+										},
+										stateProperty2:{
+											// property profile
+										}
+									}
+								});
+								....................................
+
+							Create a Subclass, Specifying Only an Alphastructor
+								A subclass can be created with just an `alphastructor` set, by specifying just a single =alphastructorFUNC= function type parameter.
+
+								SYNTAX
+								..................................................
+								MyClass = Uize.Class.subclass (alphastructorFUNC);
+								..................................................
+
+								Consider the following example...
+
+								EXAMPLE
+								.......................................
+								var MyClass = Uize.Class.subclass (
+									function () {
+										this.foo = 'How unoriginal!';
+									}
+								);
+
+								var MySubclass = MyClass.subclass (
+									function () {
+										this.bar = this.foo + ' Indeed!';
+									}
+								);
+								.......................................
+
+								In the above example, =MySubclass= is a subclass of =MyClass=, which is in turn a subclass of the =Uize.Class= base class. Now, when an instance of =MySubSubclass= gets created, the constructor of =MyClass= and then the constructor of =MySubSubclass= will be executed in the initialization of the instance, and the instance will have both =foo= and =bar= properties, where the =bar= property will have a value of "How unoriginal! Indeed!".
+
+							Create a Subclass, Specifying Both Alphastructor and Omegastructor
+								A subclass can be created with both an `alphastructor` and an `omegastructor` set, by specifying the =alphastructorFUNC= and =omegastructorFUNC= function type parameters.
+
+								SYNTAX
+								....................................................................
+								MyClass = Uize.Class.subclass (alphastructorFUNC,omegastructorFUNC);
+								....................................................................
+
+							Create a Subclass, Specifying Only an Omegastructor
+								A subclass can be created with just an `omegastructor` set, by specifying the =alphastructorFUNC= and =omegastructorFUNC= parameters and specifying the value =null= or =undefined= for the =alphastructorFUNC= parameter.
+
+								SYNTAX
+								............................................................
+								MyClass = Uize.Class.subclass (null,omegastructorFUNC);
+								MyClass = Uize.Class.subclass (undefined,omegastructorFUNC);
+								............................................................
 				*/
 			};
 
@@ -2630,7 +2915,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Class.declare
-							Lets you declare one or more features of one or more different feature types for the class.
+							Lets you declare one or more features of one or more different `feature types` for the class.
 
 							SYNTAX
 							....................................
@@ -2641,7 +2926,7 @@ Uize.module ({
 
 							EXAMPLE
 							...................................
-							MySubclass = MyClass.subclass ({
+							MyClass.declare ({
 								alphastructor:function () {
 									// implementation here
 								},
@@ -2662,6 +2947,14 @@ Uize.module ({
 									},
 									instanceMethod2:function () {
 										// implementation here
+									}
+								},
+								stateProperties:{
+									stateProperty1:{
+										// property profile
+									},
+									stateProperty2:{
+										// property profile
 									}
 								}
 							});
