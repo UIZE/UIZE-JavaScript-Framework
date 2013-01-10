@@ -56,6 +56,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				deleteFile:{
 					async:_false
 					/*?
@@ -73,6 +74,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				fileExists:{
 					async:_false
 					/*?
@@ -90,6 +92,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				getFiles:{
 					async:_false
 					/*?
@@ -116,6 +119,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				getFolders:{
 					async:_false
 					/*?
@@ -139,6 +143,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				getModifiedDate:{
 					async:_false
 					/*?
@@ -156,6 +161,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				readFile:{
 					async:_false
 					/*?
@@ -173,6 +179,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				pathExists:{
 					async:_false
 					/*?
@@ -190,6 +197,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				writeFile:{
 					async:_false
 					/*?
@@ -210,6 +218,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				init:{
 					async:_false
 					/*?
