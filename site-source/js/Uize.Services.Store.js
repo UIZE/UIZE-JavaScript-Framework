@@ -53,6 +53,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				getItem:{
 					async:_false
 					/*?
@@ -70,6 +71,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				setItem:{
 					async:_false
 					/*?
@@ -90,6 +92,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				removeItem:{
 					async:_false
 					/*?
@@ -107,6 +110,7 @@ Uize.module ({
 										document...
 					*/
 				},
+
 				clear:{
 					async:_false
 					/*?
@@ -123,8 +127,8 @@ Uize.module ({
 									The =clear= method has no parameters.
 					*/
 				}
-			});
-		}
+			}
+		});
 	}
 });
 
