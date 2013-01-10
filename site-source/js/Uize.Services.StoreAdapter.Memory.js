@@ -46,7 +46,7 @@ Uize.module ({
 							return _key
 						;
 					}
-					return undefined;
+					return null;
 				},
 
 				getItem:function (_params,_callback) {
