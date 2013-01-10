@@ -752,7 +752,7 @@ Value Transformer Function
 		- Uize.Node.setStyle, myWidget.setNodeStyle
 		- Uize.Node.setProperty, myWidget.setNodeProperty
 
-	- makes sense where the value for which a value transformer is being specified is intended to specify a value for something for which a current value is known
+	- makes sense where the value for which a value transformer is being specified is intended to set a new value for something for which a current value is known, where the new value is derived by applying the specified value transformer to the current value
 
 	Semantics
 		.........................................................
@@ -1215,24 +1215,6 @@ Code Development (in order of priority)
 
 	- performance optimizations
 		- a way to avoid calling onChange handlers at construction time
-
-	- new subclassing syntax
-		.........................................................
-		MyClass.subclass ({
-			alphastructor:{
-			},
-			omegastructor:{
-			},
-			instanceMethods:{
-			},
-			staticMethods:{
-			},
-			instaticMethods:{
-			},
-			setGetProperties:{
-			}
-		});
-		.........................................................
 
 	widget ID scheme refactoring
 		other...
