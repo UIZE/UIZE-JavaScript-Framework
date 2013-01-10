@@ -31,18 +31,26 @@ Uize.module ({
 		return _superclass.subclass ({
 			instanceMethods:{
 				key:function (_params,_callback) {
+					_callback (window.localStorage.key (_params.index));
 				},
 
 				getItem:function (_params,_callback) {
+					_callback (window.localStorage.getItem (_params.key));
 				},
 
 				setItem:function (_params,_callback) {
+					window.localStorage.setItem (_params.key,_params.value);
+					_callback ();
 				},
 
 				removeItem:function (_params,_callback) {
+					window.localStorage.removeItem (_params.key);
+					_callback ();
 				},
 
 				clear:function (_params,_callback) {
+					window.localStorage.clear ();
+					_callback ();
 				},
 
 				init:function (_params,_callback) {
