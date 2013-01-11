@@ -83,7 +83,7 @@ Uize.module ({
 				title:_testTitle,
 				test:function () {
 					var
-						_now = new Date,
+						_now = Uize.now (),
 						_result = Uize.Date.resolve.apply (Uize.Date,_arguments)
 					;
 					return this.expectInstanceOf (Date,_result) && _now - _result < _nowTestFudgeFactor;
@@ -111,7 +111,7 @@ Uize.module ({
 			return {
 				title:_testTitle,
 				test:function () {
-					var _now = new Date;
+					var _now = Uize.now ();
 					return this.expect (
 						_expectedValue,
 						Uize.Date.isRecent (
@@ -184,9 +184,9 @@ Uize.module ({
 						_rangeAroundNow = Uize.Date.getRangeAround (new Date,'month'),
 						_rangeAroundValue = Uize.Date.getRangeAround (_value,'month')
 					;
-					return !(
-						_rangeAroundNow.minValue - _rangeAroundValue.minValue ||
-						_rangeAroundNow.maxValue - _rangeAroundValue.maxValue
+					return (
+						_rangeAroundValue.minValue - _rangeAroundNow.minValue < _nowTestFudgeFactor &&
+						_rangeAroundValue.maxValue - _rangeAroundNow.maxValue < _nowTestFudgeFactor
 					);
 				}
 			};
@@ -644,7 +644,7 @@ Uize.module ({
 								test:function () {
 									return Uize.Date.inRange (
 										undefined,
-										{minValue:new Date,maxValue:new Date + _nowTestFudgeFactor}
+										{minValue:Uize.now (),maxValue:Uize.now () + _nowTestFudgeFactor}
 									);
 								}
 							},
@@ -653,7 +653,7 @@ Uize.module ({
 								test:function () {
 									return Uize.Date.inRange (
 										null,
-										{minValue:new Date,maxValue:new Date + _nowTestFudgeFactor}
+										{minValue:Uize.now (),maxValue:Uize.now () + _nowTestFudgeFactor}
 									);
 								}
 							},
@@ -662,7 +662,7 @@ Uize.module ({
 								test:function () {
 									return Uize.Date.inRange (
 										'',
-										{minValue:new Date,maxValue:new Date + _nowTestFudgeFactor}
+										{minValue:Uize.now (),maxValue:Uize.now () + _nowTestFudgeFactor}
 									);
 								}
 							}
