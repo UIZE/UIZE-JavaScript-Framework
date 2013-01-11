@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Build.ServicesSetup',
 	required:'Uize.Services.Setup',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 

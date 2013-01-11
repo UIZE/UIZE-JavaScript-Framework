@@ -83,6 +83,8 @@
 Uize.module ({
 	name:'Uize.Array.Order',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 

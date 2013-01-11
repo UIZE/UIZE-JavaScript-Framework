@@ -225,6 +225,8 @@ Uize.module ({
 	name:'Uize.Build.ModuleInfo',
 	required:'Uize.Services.FileSystem',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},

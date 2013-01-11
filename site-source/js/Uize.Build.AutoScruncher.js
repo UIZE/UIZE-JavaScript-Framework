@@ -38,6 +38,8 @@ Uize.module ({
 		'Uize.Util.Oop'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 

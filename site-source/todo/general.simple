@@ -8,19 +8,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	..............................................................................
 	examples/js/animals.js
 	examples/js/plants.js
-	js/Uize.Build.All.js
-	js/Uize.Build.AuditStrings.js
-	js/Uize.Build.AutoScruncher.js
-	js/Uize.Build.BuildStateCombinationLibraries.js
-	js/Uize.Build.File.js
-	js/Uize.Build.ModuleInfo.js
-	js/Uize.Build.NeatenJsFiles.js
-	js/Uize.Build.RunUnitTest.js
-	js/Uize.Build.RunUnitTests.js
-	js/Uize.Build.Scruncher.js
-	js/Uize.Build.ServicesSetup.js
-	js/Uize.Build.UpdateCopyrightNotices.js
-	js/Uize.Build.Util.js
 	js/Uize.Class.js
 	js/Uize.Class.Value.js
 	js/Uize.Color.js

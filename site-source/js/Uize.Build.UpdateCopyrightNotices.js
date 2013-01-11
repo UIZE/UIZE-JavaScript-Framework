@@ -30,6 +30,8 @@ Uize.module ({
 	name:'Uize.Build.UpdateCopyrightNotices',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 

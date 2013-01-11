@@ -34,6 +34,8 @@ Uize.module ({
 		'Uize.Build.AutoScruncher'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 

@@ -69,6 +69,8 @@ Uize.module ({
 		'Uize.Services.FileSystem'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_class = _superclass.subclass (),

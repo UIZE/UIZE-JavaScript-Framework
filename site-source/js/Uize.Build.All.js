@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Build.All',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		var _package = function () {};
 
 		/*** Public Static Methods ***/

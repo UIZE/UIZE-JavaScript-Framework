@@ -34,6 +34,8 @@ Uize.module ({
 		'Uize.Data.Matches'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
