@@ -127,7 +127,8 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_package.from = function (_toDecode) {
-				return _toDecode ? Uize.globalEval ('(' + _toDecode + ')') : null;
+				var d; // dummy variable, needed for anonymous function value in IE
+				return _toDecode ? eval ('d = ' + _toDecode) : null;
 				/*?
 					Static Methods
 						Uize.Json.from
