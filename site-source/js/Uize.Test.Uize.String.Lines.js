@@ -26,6 +26,7 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.String.Lines',
+	required:'Uize.Json',
 	builder:function () {
 		return Uize.Test.declare ({
 			title:'Test for Uize.String.Lines Module',
@@ -897,7 +898,7 @@ Uize.module ({
 								'true\n' +
 								'\'hello\'\n'
 								,
-								function (_line) {return Uize.globalEval ('(' + _line + ')')}
+								Uize.Json.from
 							],
 							'undefined\n' +
 							'null\n' +
@@ -1015,7 +1016,7 @@ Uize.module ({
 								'true\n' +
 								'\'hello\'\n'
 								,
-								function (_line) {return Uize.globalEval ('(' + _line + ')')}
+								Uize.Json.from
 							],
 							'{}\n' +
 							'[]\n' +
