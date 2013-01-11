@@ -38,7 +38,8 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
+				_classPrototype = _class.prototype,
+				_window = typeof window != 'undefined' ? window : {}
 			;
 
 		/*** General Variables ***/
@@ -60,7 +61,7 @@ Uize.module ({
 					_returnType = _request.returnType,
 					_returnTypeIsObject = _returnType == 'object'
 				;
-				window.handleResponse = function (_responseResult) {
+				_window.handleResponse = function (_responseResult) {
 					if (_returnTypeIsObject || _returnType == 'json')
 						_request.responseJson = Uize.clone (_responseResult)
 					;
@@ -96,7 +97,7 @@ Uize.module ({
 				);
 			}
 
-			window.handleResponse = function () {
+			_window.handleResponse = function () {
 				/*
 					a dummy version of this function in case the user navigates back to a page using this code and a cached iframe server response tries to call this function (ie. no requests have been made yet)
 				*/
