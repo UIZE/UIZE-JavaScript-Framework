@@ -13,7 +13,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	js/Uize.Build.AutoScruncher.js
 	js/Uize.Build.BuildStateCombinationLibraries.js
 	js/Uize.Build.File.js
-	js/Uize.Build.js
 	js/Uize.Build.ModuleInfo.js
 	js/Uize.Build.NeatenJsFiles.js
 	js/Uize.Build.RunUnitTest.js
@@ -48,7 +47,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	js/Uize.Data.Simple.js
 	js/Uize.Date.Formatter.js
 	js/Uize.Date.js
-	js/Uize.Doc.js
 	js/Uize.Doc.Simple.js
 	js/Uize.Doc.Sucker.js
 	js/Uize.Fade.js
@@ -68,7 +66,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	js/Uize.Node.VirtualEvent.Edge.js
 	js/Uize.Node.VirtualEvent.js
 	js/Uize.Service.Adapter.js
-	js/Uize.Service.js
 	js/Uize.Services.FileSystem.js
 	js/Uize.Services.FileSystemAdapter.js
 	js/Uize.Services.FileSystemAdapter.Node.js
@@ -92,7 +89,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	js/Uize.Templates.CollectionItem.js
 	js/Uize.Templates.ColorInfo.js
 	js/Uize.Templates.HashTable.js
-	js/Uize.Templates.js
 	js/Uize.Templates.List.js
 	js/Uize.Templates.Log.js
 	js/Uize.Templates.SevenSegmentDisplay.js
@@ -268,8 +264,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	js/UizeSite.Build.BuildWidgetPages.js
 	js/UizeSite.Build.Deploy.js
 	js/UizeSite.Build.File.js
-	js/UizeSite.Build.FileBuilders.js
-	js/UizeSite.Build.js
 	js/UizeSite.Build.ListJsModules.js
 	js/UizeSite.Build.WebServer.js
 	js/UizeSite.Delve.js
