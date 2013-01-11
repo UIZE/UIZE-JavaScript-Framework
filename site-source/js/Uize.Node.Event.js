@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Node.Event',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function (_event) {return _event || event};
 

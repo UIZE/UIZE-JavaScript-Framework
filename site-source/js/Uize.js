@@ -109,10 +109,12 @@
 					- =Uize.toString= - provides summary info for the module on which the method is called
 */
 
-(function () {
+Uize = (function () {
+	'use strict';
+
 	/*** Variables for Scruncher Optimization ***/
 		var
-			_package = Uize = function () {},
+			_package = function () {},
 			_undefined,
 			_typeString = 'string',
 			_typeObject = 'object',
@@ -518,7 +520,7 @@
 			*/
 		};
 
-		Uize.mergeInto = function () {
+		_package.mergeInto = function () {
 			function _mergeInto (_targetObject,_sourceObject) {
 				var
 					_targetObjectPropertyValue,
@@ -1912,7 +1914,7 @@
 			*/
 		};
 
-		var _values = _package.values = values = function (_object) {
+		var _values = _package.values = function (_object) {
 			if (_isArray (_object)) return _object;
 			var _result = [];
 			if (!_isString (_object))
@@ -4093,7 +4095,7 @@
 							_modulesAlreadyInvoked [_module] = _trueFlag;
 							_package.moduleLoader (
 								_module,
-								function (_moduleCode) {_moduleCode && Uize.globalEval (_moduleCode)}
+								function (_moduleCode) {_moduleCode && _package.globalEval (_moduleCode)}
 							)
 						}
 					}

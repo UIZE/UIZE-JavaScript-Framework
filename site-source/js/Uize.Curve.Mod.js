@@ -55,6 +55,8 @@
 Uize.module ({
 	name:'Uize.Curve.Mod',
 	builder:function (_host) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},

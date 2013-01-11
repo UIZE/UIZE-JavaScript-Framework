@@ -92,6 +92,8 @@
 Uize.module ({
 	name:'Uize.Json',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
@@ -243,13 +245,13 @@ Uize.module ({
 										_sortKeys && _keys.sort ();
 
 									/*** create serialized versions of keys ***/
-										function _mustQuoteKey (_key) {
+										var _mustQuoteKey = function (_key) {
 											return (
 												isNaN (+_key)
 													? (/[^\w\$]|^\d/.test (_key) || _reservedWordsMap [_key])
 													: _key != +_key + '' || _key < 0
 											);
-										}
+										};
 
 										/*** determine if all keys should be quoted ***/
 											var _quoteAllKeys = _whenToQuoteKeys == 'always';

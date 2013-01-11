@@ -57,6 +57,8 @@
 Uize.module ({
 	name:'Uize.Fade.xSeries',
 	builder:function (_class) {
+		'use strict';
+
 		/*** Public Instance Methods ***/
 			_class.prototype.getSeries = function (_valuesLength) {
 				var

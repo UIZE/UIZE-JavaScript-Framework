@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Cookie',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,

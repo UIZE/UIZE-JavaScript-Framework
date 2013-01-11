@@ -31,6 +31,8 @@ Uize.module ({
 	superclass:'Uize.Class',
 	required:'Uize.Url',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -290,40 +292,43 @@ Uize.module ({
 				if (!_this._usingQueue && _requestQueueLength) {
 					_this._usingQueue = _true;
 
-					function _cleanFromQueue () {
-						var _request;
-						while ((_request = _requestQueue [0]) && (_this._getCachedResponse (_request) || _request.completed))
-							_this._callResponseCallback (_requestQueue.shift ())
-						;
-						_this._usingQueue = _false;
-						_this._fireRequestQueueUpdatedEvent ();
+					var
+						_cleanFromQueue = function () {
+							var _request;
+							while (
+								(_request = _requestQueue [0]) && (_this._getCachedResponse (_request) || _request.completed)
+							)
+								_this._callResponseCallback (_requestQueue.shift ())
+							;
+							_this._usingQueue = _false;
+							_this._fireRequestQueueUpdatedEvent ();
 
-						_requestQueue.length && setTimeout (function () {_this.useQueue ()},1);
-							/* TO DO:
-								- determine whether or not it's necessary and/or OK to set a timeout in the AJAX case
-								- determine if it's OK in the IFRAME case to do the location back before this timeout is set
-							*/
-					}
-
-					function _handleSingleRequest (_request) {
-						if (_this._getCachedResponse (_request)) {
-							_cleanFromQueue ();
-						} else {
-							_this.fire ({name:'Perform Request',request:_request});
-							/*?
-								Instance Events
-									Perform Request
-										The =Perform Request= instance event fires each time before a request is performed - for both single requests as well as batch requests. The event object contains a "request" property, which is a reference to the request object for the request about to be performed.
-							*/
-							_this.performRequest (
-								_request,
-								function () {
-									_request.completed = _true;
-									_cleanFromQueue ();
-								}
-							);
+							_requestQueue.length && setTimeout (function () {_this.useQueue ()},1);
+								/* TO DO:
+									- determine whether or not it's necessary and/or OK to set a timeout in the AJAX case
+									- determine if it's OK in the IFRAME case to do the location back before this timeout is set
+								*/
+						},
+						_handleSingleRequest = function (_request) {
+							if (_this._getCachedResponse (_request)) {
+								_cleanFromQueue ();
+							} else {
+								_this.fire ({name:'Perform Request',request:_request});
+								/*?
+									Instance Events
+										Perform Request
+											The =Perform Request= instance event fires each time before a request is performed - for both single requests as well as batch requests. The event object contains a "request" property, which is a reference to the request object for the request about to be performed.
+								*/
+								_this.performRequest (
+									_request,
+									function () {
+										_request.completed = _true;
+										_cleanFromQueue ();
+									}
+								);
+							}
 						}
-					}
+					;
 
 					if (_requestQueueLength == 1) {
 						_handleSingleRequest (_requestQueue [0]);

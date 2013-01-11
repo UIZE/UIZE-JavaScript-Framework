@@ -56,6 +56,8 @@
 Uize.module ({
 	name:'Uize.Date',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function (_year,_month,_dayNo,_hours,_minutes,_seconds,_milliseconds) {

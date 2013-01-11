@@ -33,6 +33,8 @@
 Uize.module ({
 	name:'Uize.Fade.xFactory',
 	builder:function (_class) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -78,7 +80,7 @@ Uize.module ({
 
 				/*** for properties fades, default startValue and endValue, if null ***/
 					if (_fadeIsPropertiesFade) {
-						function _defaultFadePropertiesValue (_propertiesValue,_defaultIfNull) {
+						var _defaultFadePropertiesValue = function (_propertiesValue,_defaultIfNull) {
 							if (_propertiesValue) {
 								for (var _propertyName in _propertiesValue) {
 									if (_propertiesValue [_propertyName] == _undefined)
@@ -89,7 +91,7 @@ Uize.module ({
 								_propertiesValue = _targetContext.get (_startValue || _endValue);
 							}
 							return _propertiesValue;
-						}
+						};
 						_startValue = _defaultFadePropertiesValue (_startValue);
 						_endValue = _defaultFadePropertiesValue (_endValue);
 					}
@@ -136,7 +138,7 @@ Uize.module ({
 									}
 								}
 							} else {
-								function _doSignaturesMatch (_startValue,_endValue,_newFadeStartValue,_newFadeEndValue) {
+								var _doSignaturesMatch = function (_startValue,_endValue,_newFadeStartValue,_newFadeEndValue) {
 									/* NOTE: this code is loosely based on Uize.Data.identical */
 									var _signaturesMatch;
 									if (_startValue == _endValue) {
@@ -167,7 +169,7 @@ Uize.module ({
 										}
 									}
 									return _signaturesMatch;
-								}
+								};
 								_isMatch =
 									_doSignaturesMatch (_matchingFadeStartValue,_matchingFadeEndValue,_startValue,_endValue)
 								;

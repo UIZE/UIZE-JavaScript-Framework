@@ -27,6 +27,7 @@
 Uize.module ({
 	name:'Uize.Data.PathsTree',
 	builder:function () {
+		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
 			var

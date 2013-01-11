@@ -378,6 +378,8 @@ Uize.module ({
 		'Uize.Node'
 	],
 	builder:function (_package) {
+		'use strict';
+
 		/*** General Variables ***/
 			var
 				_extension = function () {},

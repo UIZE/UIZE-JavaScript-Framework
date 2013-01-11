@@ -598,6 +598,8 @@
 Uize.module ({
 	name:'Uize.Node.Tree',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},

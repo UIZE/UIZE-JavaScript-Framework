@@ -465,6 +465,8 @@
 Uize.module ({
 	name:'Uize.Data.Combinations',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},

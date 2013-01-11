@@ -38,6 +38,8 @@
 Uize.module ({
 	name:'Uize.Curve',
 	builder:function () {
+		'use strict';
+
 		var _package = function () {};
 
 		/*** Variables for Scruncher Optimization ***/

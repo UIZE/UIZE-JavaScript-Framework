@@ -66,11 +66,14 @@
 Uize.module ({
 	name:'Uize.Curve.Rubber',
 	builder:function (_host) {
-		var
-			_package = function () {},
-			_makeEasingCurveGenerators = _host.makeEasingCurveGenerators,
-			_resolve = _host.resolve
-		;
+		'use strict';
+
+		/*** Variables for Scruncher Optimization ***/
+			var
+				_package = function () {},
+				_makeEasingCurveGenerators = _host.makeEasingCurveGenerators,
+				_resolve = _host.resolve
+			;
 
 		/*** Curve Function Generators ***/
 			/*** elastic easing ***/

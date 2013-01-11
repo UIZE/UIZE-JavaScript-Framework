@@ -62,6 +62,8 @@ Uize.module ({
 	name:'Uize.Node',
 	required:'Uize.Class',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
@@ -590,9 +592,6 @@ Uize.module ({
 							}
 						}
 
-					function _nodeHidden (_node) {
-						return _getStyle (_node,'display') == 'none' || _getStyle (_node,'visibility') == _hidden;
-					}
 					if (_node.tagName == 'A' && _node.childNodes.length == 1 && _node.childNodes [0].tagName == 'IMG')
 						/* NOTE:
 							this is a workaround for Mozilla, which doesn't seem to be able to give reliable values for determining coordinates of links that fully enclose IMG tags. In such cases, using the child IMG tag for determining coordinates is reliable. This workaround has no negative effect in IE, so it is not conditionalized
@@ -600,6 +599,9 @@ Uize.module ({
 						_node = _node.childNodes [0]
 					;
 					var
+						 _nodeHidden = function (_node) {
+							return _getStyle (_node,'display') == 'none' || _getStyle (_node,'visibility') == _hidden;
+						},
 						_nodeVisible = _seen = !_nodeHidden (_node),
 						_offsetParent = _node,
 						_currentNode = _node,
@@ -867,7 +869,7 @@ Uize.module ({
 			var _getText = _package.getText = function (_node) {
 				var _text = '';
 				if (_node = _getById (_node)) {
-					function _gatherText (_node) {
+					var  _gatherText = function (_node) {
 						if (typeof _node.innerText == _typeString) {
 							_text += _node.innerText.replace (/\r|\n|\r\n/g,'');
 						} else if (typeof _node.textContent == _typeString) {
@@ -876,7 +878,7 @@ Uize.module ({
 							if (_node.nodeType == 3) _text += _node.data;
 							_node.childNodes && _Uize.forEach (_node.childNodes,_gatherText);
 						}
-					}
+					};
 					_gatherText (_node);
 				}
 				return _text;
@@ -1050,26 +1052,26 @@ Uize.module ({
 									: _isOuterBottom ? _node.nextSibling : _node
 								,
 								_nodeParentNode = _node.parentNode,
-								_nodesToSkip = +!_areNodes // IE NoScope fix not needed when given dom nodes
-							;
-							function _fixCrippledScripts (_node) {
-								if (_node.tagName == 'SCRIPT') {
-									/* WORKAROUND:
-										This is a workaround for an issue where script tags, that are part of HTML that is injected through innerHTML replacement, become crippled in the document. This is particularly an issue for component markup that is loaded and inserted dynamically and that may wish to define properties in companion script tags using the $[idPrefix] syntax.
-									*/
-									var _activatedScriptNode = document.createElement ('script');
+								_nodesToSkip = +!_areNodes, // IE NoScope fix not needed when given dom nodes
+								_fixCrippledScripts = function (_node) {
+									if (_node.tagName == 'SCRIPT') {
+										/* WORKAROUND:
+											This is a workaround for an issue where script tags, that are part of HTML that is injected through innerHTML replacement, become crippled in the document. This is particularly an issue for component markup that is loaded and inserted dynamically and that may wish to define properties in companion script tags using the $[idPrefix] syntax.
+										*/
+										var _activatedScriptNode = document.createElement ('script');
 
-									/*** transfer properties of crippled script node to fresh script node ***/
-										if (_node.id) _activatedScriptNode.id = _node.id;
-										if (_node.type) _activatedScriptNode.type = _node.type;
-										_activatedScriptNode.text = _node.text;
-										if (_node.src) _activatedScriptNode.src = _node.src;
+										/*** transfer properties of crippled script node to fresh script node ***/
+											if (_node.id) _activatedScriptNode.id = _node.id;
+											if (_node.type) _activatedScriptNode.type = _node.type;
+											_activatedScriptNode.text = _node.text;
+											if (_node.src) _activatedScriptNode.src = _node.src;
 
-									_node.parentNode.replaceChild (_activatedScriptNode,_node);
-								} else if (_htmlHasScript (_node.innerHTML)) {
-									_Uize.forEach (_node.childNodes,_fixCrippledScripts);
+										_node.parentNode.replaceChild (_activatedScriptNode,_node);
+									} else if (_htmlHasScript (_node.innerHTML)) {
+										_Uize.forEach (_node.childNodes,_fixCrippledScripts);
+									}
 								}
-							}
+							;
 							while (_nodesToInject.length > _nodesToSkip) {
 								var _childNodeToInject = _areNodes ?
 									_nodesToInject.shift () :
@@ -2090,7 +2092,7 @@ Uize.module ({
 			_package.unwireEventsByOwnerId = function (_wiringOwnerId,_eventMatch) {
 				var _wiringIds = _wiringIdsByOwnerId [_wiringOwnerId = _wiringOwnerId || ''];
 				if (_wiringIds) {
-					function _unwireWiringForNode (_eventMatchNode) {
+					var _unwireWiringForNode = function (_eventMatchNode) {
 						if (_eventMatchNode !== _null) {
 							var
 								_eventMatchEventName = _eventMatch && _eventMatch.eventName,
@@ -2138,7 +2140,7 @@ Uize.module ({
 							}
 							(_effectivelyHasEventMatch && _wiringIds.length) || delete _wiringIdsByOwnerId [_wiringOwnerId];
 						}
-					}
+					};
 					_eventMatch && _eventMatch.node !== _undefined
 						? _doForAll (_eventMatch.node,_unwireWiringForNode)
 						: _unwireWiringForNode ()

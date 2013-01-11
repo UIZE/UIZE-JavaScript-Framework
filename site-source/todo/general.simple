@@ -8,39 +8,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	..............................................................................
 	examples/js/animals.js
 	examples/js/plants.js
-	js/Uize.Comm.Iframe.js
-	js/Uize.Comm.Iframe.Upload.js
-	js/Uize.Comm.js
-	js/Uize.Comm.Script.js
-	js/Uize.Cookie.js
-	js/Uize.Curve.js
-	js/Uize.Curve.Mod.js
-	js/Uize.Curve.Rubber.js
-	js/Uize.Data.Combinations.js
-	js/Uize.Data.Csv.js
-	js/Uize.Data.js
-	js/Uize.Data.Matches.js
-	js/Uize.Data.NameValueRecords.js
-	js/Uize.Data.PathsTree.CompactString.js
-	js/Uize.Data.PathsTree.js
-	js/Uize.Data.Simple.js
-	js/Uize.Date.Formatter.js
-	js/Uize.Date.js
-	js/Uize.Doc.Simple.js
-	js/Uize.Doc.Sucker.js
-	js/Uize.Fade.js
-	js/Uize.Fade.xFactory.js
-	js/Uize.Fade.xSeries.js
-	js/Uize.Fx.js
-	js/Uize.Fx.xShadows.js
-	js/Uize.Fx.xTextShadow.js
-	js/Uize.js
-	js/Uize.Json.js
-	js/Uize.Node.Classes.js
-	js/Uize.Node.Event.js
-	js/Uize.Node.Form.js
-	js/Uize.Node.js
-	js/Uize.Node.Tree.js
 	js/Uize.Node.Util.js
 	js/Uize.Node.VirtualEvent.Edge.js
 	js/Uize.Node.VirtualEvent.js

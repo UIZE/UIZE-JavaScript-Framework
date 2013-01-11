@@ -369,6 +369,8 @@
 Uize.module ({
 	name:'Uize.Data.NameValueRecords',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,

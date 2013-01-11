@@ -34,6 +34,8 @@ Uize.module({
 		'Uize.Xml'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
@@ -250,17 +252,19 @@ Uize.module({
 				/*** support for sorting of peer sections ***/
 					var _sectionsToSort = _params.sectionsToSort;
 					if (_sectionsToSort) {
-						var _sectionsToSortLookup = Uize.lookup (_sectionsToSort);
-						function _sortPeerSections (_data) {
-							var _children = _data.children;
-							if (_children.length) {
-								/*** sort all the peer sections (if this section should be sorted) ***/
-									_sectionsToSortLookup [_data.value] && Uize.Array.Sort.sortBy (_children,'value.value');
-
-								/*** handle sorting within each of the peer sections ***/
-									Uize.forEach (_children,_sortPeerSections,true);
+						var
+							_sectionsToSortLookup = Uize.lookup (_sectionsToSort),
+							_sortPeerSections = function (_data) {
+								var _children = _data.children;
+								if (_children.length) {
+									/*** sort all the peer sections (if this section should be sorted) ***/
+										_sectionsToSortLookup [_data.value] && Uize.Array.Sort.sortBy (_children,'value.value');
+	
+									/*** handle sorting within each of the peer sections ***/
+										Uize.forEach (_children,_sortPeerSections,true);
+								}
 							}
-						}
+						;
 						_sortPeerSections (_data);
 					}
 

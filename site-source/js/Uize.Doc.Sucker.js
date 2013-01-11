@@ -35,6 +35,8 @@ Uize.module({
 		'Uize.Util.Oop'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
@@ -238,7 +240,7 @@ Uize.module({
 						);
 
 						/*** list out features according to where they are introduced and overridden ***/
-							function _addFilteredFeatures (
+							var _addFilteredFeatures = function (
 								_relationshipToModule,_sectionTitle,_introduction,_introductionIfNoFeatures
 							) {
 								var
@@ -282,7 +284,8 @@ Uize.module({
 									'\n',
 									_filteredFeaturesChunks.join ('')
 								);
-							}
+							};
+
 							/*** list out features introduced in this module ***/
 								_addFilteredFeatures (
 									'introduced',

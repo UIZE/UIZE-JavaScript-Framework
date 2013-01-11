@@ -34,6 +34,8 @@ Uize.module ({
 	name:'Uize.Fade',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,

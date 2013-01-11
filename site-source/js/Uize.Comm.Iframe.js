@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Node'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
@@ -58,7 +60,7 @@ Uize.module ({
 					_returnType = _request.returnType,
 					_returnTypeIsObject = _returnType == 'object'
 				;
-				handleResponse = function (_responseResult) {
+				window.handleResponse = function (_responseResult) {
 					if (_returnTypeIsObject || _returnType == 'json')
 						_request.responseJson = Uize.clone (_responseResult)
 					;
@@ -94,7 +96,7 @@ Uize.module ({
 				);
 			}
 
-			handleResponse = function () {
+			window.handleResponse = function () {
 				/*
 					a dummy version of this function in case the user navigates back to a page using this code and a cached iframe server response tries to call this function (ie. no requests have been made yet)
 				*/
