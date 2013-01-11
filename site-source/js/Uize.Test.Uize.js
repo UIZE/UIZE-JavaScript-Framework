@@ -275,7 +275,7 @@ Uize.module ({
 
 			function _callMethodWithTargetArgumentValue (_targetArgumentValue) {
 				var
-					_host = eval (_hostName),
+					_host = Uize.getModuleByName (_hostName),
 					_arguments = _argumentsTemplate.concat ()
 				;
 				_arguments [_sourceArgumentNo] = _sourceArray = _sourceArrayContents.concat ();

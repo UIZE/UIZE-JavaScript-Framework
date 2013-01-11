@@ -185,7 +185,7 @@ Uize.module ({
 				_classPrototype.expectInstanceOf = function (_class,_value) {
 					return this._expectSuccess (
 						_value != _undefined &&
-						_value.constructor == (typeof _class == 'string' ? eval (_class) : _class),
+						_value.constructor == Uize.getModuleByName (_class),
 						function () {return 'instance of ' + Uize.Util.Oop.getClassName (_class)},
 						function () {return 'instance of ' + Uize.Util.Oop.getClassName (_value.constructor)}
 					);
@@ -1629,14 +1629,14 @@ Uize.module ({
 						test:[
 							{
 								title:'Test that host ' + _propertyHost + ' is defined',
-								test:function () {return this.expectNonNull (eval (_propertyHost))}
+								test:function () {return this.expectNonNull (Uize.getModuleByName (_propertyHost))}
 							},
 							{
 								title:'Test that ' + _propertyFullName + ' is a ' + _expectedType,
 								test:function () {
 									return this.expectType (
 										_expectedType,
-										eval (_propertyHost) [_hostAndProperty.property]
+										Uize.getModuleByName (_propertyHost) [_hostAndProperty.property]
 									);
 								}
 							}
@@ -1699,7 +1699,7 @@ Uize.module ({
 								title:_case [0],
 								test:function () {
 									var
-										_methodHost = eval (_methodHostName),
+										_methodHost = Uize.getModuleByName (_methodHostName),
 										_arguments = this.get ('cloneArguments') ? Uize.clone (_case [1]) : _case [1]
 									;
 									return this.expect (
@@ -1966,7 +1966,7 @@ Uize.module ({
 								test:function (_continue) {
 									var
 										_this = this,
-										_testModuleInstance = new (eval (_testModule))
+										_testModuleInstance = Uize.getModuleByName (_testModule) ()
 									;
 									_testModuleInstance.wire (
 										'Done',

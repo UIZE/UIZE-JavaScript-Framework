@@ -63,7 +63,8 @@ Uize.module ({
 		'UizeSite.Build.File',
 		'Uize.Services.FileSystem',
 		'Uize.Build.ModuleInfo',
-		'Uize.Data'
+		'Uize.Data',
+		'Uize.Json'
 	],
 	builder:function () {
 		'use strict';
@@ -80,7 +81,7 @@ Uize.module ({
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_dependenciesByStateCombination = {},
 					_excludeModules = _params.excludeModules ? _params.excludeModules.split (',') : [],
-					_states = eval ('(' + _fileSystem.readFile ({path:_params.stateDefinitionsPath}) + ')'),
+					_states = Uize.Json.from (_fileSystem.readFile ({path:_params.stateDefinitionsPath})),
 					_stateNames = Uize.Data.getColumn (_states,'name'),
 					_statesLookup = {},
 					_builtModuleFileCache = {}

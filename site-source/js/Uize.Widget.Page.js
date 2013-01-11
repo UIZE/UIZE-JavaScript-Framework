@@ -181,7 +181,9 @@ Uize.module ({
 										function (_parent,_childName,_childProperties) {
 											var _child = _parent.children [_childName];
 											if (!_child) {
-												var _widgetClass = eval (_childProperties.widgetClass || 'Uize.Widget');
+												var _widgetClass =
+													Uize.getModuleByName (_childProperties.widgetClass) || Uize.Widget
+												;
 												_child = _childName.charCodeAt (0) == 36 && _childName.charCodeAt (1) == 36
 													? _widgetClass.spawn (_childProperties,_parent)
 													: _parent.addChild (_childName,_widgetClass)
@@ -474,7 +476,7 @@ Uize.module ({
 									? _dialogWidget.set (_dialogWidgetProperties)
 									: (
 										_dialogWidget = _dialogWidgetParent.addChild (
-											_dialogWidgetName,eval (_dialogWidgetClassName),_dialogWidgetProperties
+											_dialogWidgetName,Uize.getModuleByName (_dialogWidgetClassName),_dialogWidgetProperties
 										)
 									)
 								;

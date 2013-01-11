@@ -341,7 +341,7 @@ Uize.module ({
 					name:'adapter',
 					conformer:function (_adapter) {
 						if (typeof _adapter == 'string') {
-							var _adapterClass = eval (_adapter);
+							var _adapterClass = Uize.getModuleByName (_adapter);
 							if (_adapterClass) {
 								_adapter = new _adapterClass;
 							} else {

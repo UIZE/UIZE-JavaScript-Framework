@@ -127,7 +127,7 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_package.from = function (_toDecode) {
-				return _toDecode ? eval ('(' + _toDecode + ')') : null;
+				return _toDecode ? Uize.globalEval ('(' + _toDecode + ')') : null;
 				/*?
 					Static Methods
 						Uize.Json.from

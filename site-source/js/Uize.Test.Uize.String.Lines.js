@@ -897,10 +897,7 @@ Uize.module ({
 								'true\n' +
 								'\'hello\'\n'
 								,
-								function (_line) {
-									var blah;
-									return eval ('blah = ' + _line);
-								}
+								function (_line) {return Uize.globalEval ('(' + _line + ')')}
 							],
 							'undefined\n' +
 							'null\n' +
@@ -1018,10 +1015,7 @@ Uize.module ({
 								'true\n' +
 								'\'hello\'\n'
 								,
-								function (_line) {
-									var blah;
-									return eval ('blah = ' + _line);
-								}
+								function (_line) {return Uize.globalEval ('(' + _line + ')')}
 							],
 							'{}\n' +
 							'[]\n' +

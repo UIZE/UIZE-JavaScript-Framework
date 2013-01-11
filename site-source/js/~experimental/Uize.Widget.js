@@ -132,11 +132,7 @@ Uize.module ({
 							_child.set (_unappliedChildrenDataForChild);
 						} else if (_widgetClass = _unappliedChildrenDataForChild.widgetClass) {
 							delete _unappliedChildrenDataForChild.widgetClass;
-							_this.addChild (
-								_childName,
-								typeof _widgetClass == _typeString ? eval (_widgetClass) : _widgetClass,
-								_unappliedChildrenDataForChild
-							);
+							_this.addChild (_childName,Uize.getModuleByName (_widgetClass),_unappliedChildrenDataForChild);
 						}
 					}
 				}

@@ -68,6 +68,7 @@ Uize.module ({
 		'Uize.Util.Oop',
 		'Uize.Data.Matches',
 		'Uize.Build.Util',
+		'Uize.Build.ModuleInfo',
 		'Uize.Array.Sort',
 		'Uize.Data.PathsTree',
 		'Uize.String.Lines',
@@ -993,14 +994,6 @@ Uize.module ({
 						_result = _this.readFile ({path:_path})
 					;
 					function _getModuleInheritanceDepth (_moduleName,_moduleCode) {
-						function _getModuleDefinitionFromCode (_moduleCode) {
-							var
-								_result,
-								Uize = {module:function (_definition) {_result = _definition}}
-							;
-							eval (_moduleCode);
-							return _result;
-						}
 						if (_moduleName in _moduleInheritanceDepthLookup) {
 							return _moduleInheritanceDepthLookup [_moduleName];
 						} else {
@@ -1013,7 +1006,7 @@ Uize.module ({
 								_this.perform (Uize.copyInto ({},_this.params,{url:_moduleUrl}));
 								_moduleCode = _this.readFile ({path:_this.builtUrl (_moduleUrl)});
 							}
-							var _moduleDefinition = _getModuleDefinitionFromCode (_moduleCode);
+							var _moduleDefinition = Uize.Build.ModuleInfo.getDefinitionFromCode (_moduleCode);
 							if (_moduleDefinition && (_superclassKnown = 'superclass' in _moduleDefinition)) {
 								var _superclass = _moduleDefinition.superclass;
 								if (_superclass)

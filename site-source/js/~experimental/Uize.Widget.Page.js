@@ -201,14 +201,15 @@ Uize.module ({
 										;
 										delete _childProperties.widgetClass;
 										delete _childProperties.children;
-										_child
-											? _child.set (_childProperties)
-											: (
-												_child = _childName.charCodeAt (0) == 36 && _childName.charCodeAt (1) == 36
-													? eval (_widgetClass).spawn (_childProperties,_parent)
-													: _parent.addChild (_childName,eval (_widgetClass),_childProperties)
-											)
-										;
+										if (_child) {
+											_child.set (_childProperties);
+										} else {
+											_widgetClass = Uize.getModuleByName (_widgetClass);
+											_child = _childName.charCodeAt (0) == 36 && _childName.charCodeAt (1) == 36
+												? _widgetClass.spawn (_childProperties,_parent)
+												: _parent.addChild (_childName,_widgetClass,_childProperties)
+											;
+										}
 										return _child;
 									},
 									_this.isWired ? function (_child) {Uize.callOn (_child,'insertOrWireUi')} : 0
@@ -501,14 +502,14 @@ Uize.module ({
 					}
 					function _createDialogWidget () {
 						var _dialogWidgetClassName = _params.widgetClassName;
-						Uize.module ({
-							required:_dialogWidgetClassName,
-							builder:function () {
+						Uize.require (
+							_dialogWidgetClassName,
+							function (_dialogWidgetClass) {
 								(_dialogWidget = _dialogWidgetParent.children [_dialogWidgetName])
 									? _dialogWidget.set (_dialogWidgetProperties)
 									: (
 										_dialogWidget = _dialogWidgetParent.addChild (
-											_dialogWidgetName,eval (_dialogWidgetClassName),_dialogWidgetProperties
+											_dialogWidgetName,_dialogWidgetClass,_dialogWidgetProperties
 										)
 									)
 								;
@@ -517,7 +518,7 @@ Uize.module ({
 								_dialogWidget.insertOrWireUi ();
 								_showDialog (_refetch ? 'refetched' : 'initial');
 							}
-						});
+						);
 					}
 					_componentProfile
 						? _this.loadHtmlIntoNode (

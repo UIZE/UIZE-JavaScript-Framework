@@ -3996,12 +3996,16 @@ Uize = (function () {
 			var _getModuleByName = _package.getModuleByName = function (_moduleName) {
 				var _module;
 				return (
-					_modulesByName [_moduleName] ||
-					(_moduleName == '*' && _modulesByName) ||
-					(
-						(_module = (new _Function ('try {return ' + _moduleName + '} catch (e) {}')) ()) &&
-						(_modulesByName [_moduleName] = _module)
-					)
+					typeof _moduleName == _typeString
+						? (
+							_modulesByName [_moduleName] ||
+							(_moduleName == '*' && _modulesByName) ||
+							(
+								(_module = (new _Function ('try {return ' + _moduleName + '} catch (e) {}')) ()) &&
+								(_modulesByName [_moduleName] = _module)
+							)
+						)
+						: _moduleName
 				);
 				/*?
 					Static Methods

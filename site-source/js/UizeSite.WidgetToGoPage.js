@@ -57,19 +57,19 @@ Uize.module ({
 						);
 
 					/*** add the main child widget ***/
-						Uize.module ({
-							required:[_this._widgetToGoClass,_this._widgetToGoHtml],
-							builder:function () {
+						Uize.require (
+							[_this._widgetToGoClass,_this._widgetToGoHtml],
+							function (_widgetToGoClass,_widgetToGoHtml) {
 								_this.addChild (
 									'widget',
-									eval (_this._widgetToGoClass),
+									_widgetToGoClass,
 									{
 										built:false,
-										html:eval (_this._widgetToGoHtml)
+										html:_widgetToGoHtml
 									}
 								).insertOrWireUi ();
 							}
-						});
+						);
 
 					/*** wire up the menu links ***/
 						var

@@ -56,7 +56,7 @@ Uize.module ({
 							test:function () {
 								var
 									_mockNode = _mockNodeWithClassName (_case [1]),
-									_methodHost = eval (_methodHostName),
+									_methodHost = Uize.getModuleByName (_methodHostName),
 									_arguments = _case [2]
 								;
 								_methodHost [_methodName].apply (

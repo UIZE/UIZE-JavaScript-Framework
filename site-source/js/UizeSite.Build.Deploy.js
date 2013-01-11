@@ -29,7 +29,8 @@ Uize.module ({
 	required:[
 		'Uize.Wsh',
 		'Uize.String',
-		'Uize.Services.FileSystem'
+		'Uize.Services.FileSystem',
+		'Uize.Json'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -41,7 +42,7 @@ Uize.module ({
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
 				var
-					_deployConfig = eval ('(' + _fileSystem.readFile ({path:_params.deployConfigPath}) + ')'),
+					_deployConfig = Uize.Json.from (_fileSystem.readFile ({path:_params.deployConfigPath})),
 					_uizeSite = _deployConfig.site
 				;
 
