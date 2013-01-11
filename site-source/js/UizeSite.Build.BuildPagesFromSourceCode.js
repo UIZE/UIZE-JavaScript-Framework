@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Namespace
+	type: Package
 	importance: 1
 	codeCompleteness: 100
 	testCompleteness: 100
