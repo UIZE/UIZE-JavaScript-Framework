@@ -1,5 +1,10 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
+Move Away From VARIATION N
+	For methods that support multiple variations, move away from the "VARIATION N" approach to listing those variations.
+
+	Instead, move to the newer "DIFFERENT USAGES" section, with descriptive use case oriented titles for the different usages and links to more detailed descriptions with examples.
+
 Improve Social Network Sharing
 	Improve the social network sharing in pages of the UIZE Web site by adding a new widget for Facebook liking and other stuff.
 
