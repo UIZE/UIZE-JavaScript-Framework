@@ -32,6 +32,8 @@
 Uize.module ({
 	name:'Uize.Color.xCmyk',
 	builder:function (_Uize_Color) {
+		'use strict';
+
 		var _sRgbColorSpace = _Uize_Color.colorSpaces.sRGB;
 
 		/*** Color Profile ***/

@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Color.xUtil',
 	required:'Uize.Array.Sort',
 	builder:function (_object) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
@@ -614,11 +616,11 @@ Uize.module ({
 						_dummyColor1Tuple = _dummyColor1.tuple,
 						_dummyColor1Component0Normalized = _getNormalizedComponent (_dummyColor1Tuple,0),
 						_dummyColor1Component1Normalized = _getNormalizedComponent (_dummyColor1Tuple,1),
-						_dummyColor1Component2Normalized = _getNormalizedComponent (_dummyColor1Tuple,2)
+						_dummyColor1Component2Normalized = _getNormalizedComponent (_dummyColor1Tuple,2),
+						_getDistanceBetweenCoords = function (_aX,_aY,_bX,_bY) {
+							return Math.sqrt ((_bX - _aX) * (_bX - _aX) + (_bY - _aY) * (_bY - _aY));
+						}
 					;
-					function _getDistanceBetweenCoords (_aX,_aY,_bX,_bY) {
-						return Math.sqrt ((_bX - _aX) * (_bX - _aX) + (_bY - _aY) * (_bY - _aY));
-					}
 					Uize.Array.Sort.sortBy (
 						_colors,
 						function (_color) {

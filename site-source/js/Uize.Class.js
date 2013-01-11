@@ -441,6 +441,8 @@
 Uize.module ({
 	name:'Uize.Class',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
@@ -1832,7 +1834,7 @@ Uize.module ({
 										(_changedEventsToFire || (_changedEventsToFire = [])).push (_propertyPublicName)
 									;
 								/*** build up list of onChange handlers to execute ***/
-									function _processOnChangeHandler (_onChangeHandler) {
+									var _processOnChangeHandler = function (_onChangeHandler) {
 										if (_isFunction (_onChangeHandler)) {
 											if (!_onChangeHandlers) {
 												_onChangeHandlers = [];
@@ -1847,7 +1849,7 @@ Uize.module ({
 										} else if (_isArray (_onChangeHandler)) {
 											_forEach (_onChangeHandler,_processOnChangeHandler);
 										}
-									}
+									};
 									_propertyProfile._onChange && _processOnChangeHandler (_propertyProfile._onChange);
 							}
 							_this [_propertyPrivateName] = _propertyValue;

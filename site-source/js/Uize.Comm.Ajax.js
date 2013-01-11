@@ -30,6 +30,8 @@ Uize.module ({
 	name:'Uize.Comm.Ajax',
 	required:'Uize.Url',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),

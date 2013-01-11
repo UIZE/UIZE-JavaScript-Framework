@@ -30,15 +30,9 @@ Uize.module ({
 	name:'Uize.Class.Value',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
+		'use strict';
 
-		/*** State Properties ***/
-			_class.stateProperties ({
-				_value:'value'
-			});
-
-		return _class;
+		return _superclass.subclass ({stateProperties:{_value:'value'}});
 	}
 });
 

@@ -8,14 +8,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	..............................................................................
 	examples/js/animals.js
 	examples/js/plants.js
-	js/Uize.Class.js
-	js/Uize.Class.Value.js
-	js/Uize.Color.js
-	js/Uize.Color.xCmyk.js
-	js/Uize.Color.xHsv.js
-	js/Uize.Color.xSvgColors.js
-	js/Uize.Color.xUtil.js
-	js/Uize.Comm.Ajax.js
 	js/Uize.Comm.Iframe.js
 	js/Uize.Comm.Iframe.Upload.js
 	js/Uize.Comm.js

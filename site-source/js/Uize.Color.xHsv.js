@@ -32,6 +32,8 @@
 Uize.module ({
 	name:'Uize.Color.xHsv',
 	builder:function (_Uize_Color) {
+		'use strict';
+
 		/*** Color Profile ***/
 			_Uize_Color.colorSpaces.HSV = {
 				fromHsl:function (_tuple) {

@@ -140,6 +140,8 @@
 Uize.module ({
 	name:'Uize.Color',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _undefined;
 
@@ -736,18 +738,20 @@ Uize.module ({
 										: _lightness + _saturation - _lightness * _saturation,
 									_temp2 = 2 * _lightness - _temp1
 								;
-								var _hue = _tuple [0] / 360;
-								function _computeChannel (_level) {
-									return (
-										(_level = (_level + 1) % 1) < 1 / 6
-											? _temp2 + (_temp1 - _temp2) * 6 * _level
-											: _level < .5
-												? _temp1
-												: _level < 2 / 3
-													? _temp2 + (_temp1 - _temp2) * 6 * (2 / 3 - _level)
-													: _temp2
-									) * 255;
-								}
+								var
+									_hue = _tuple [0] / 360,
+									_computeChannel = function (_level) {
+										return (
+											(_level = (_level + 1) % 1) < 1 / 6
+												? _temp2 + (_temp1 - _temp2) * 6 * _level
+												: _level < .5
+													? _temp1
+													: _level < 2 / 3
+														? _temp2 + (_temp1 - _temp2) * 6 * (2 / 3 - _level)
+														: _temp2
+										) * 255;
+									}
+								;
 								return [_computeChannel (_hue + 1 / 3),_computeChannel (_hue),_computeChannel (_hue - 1 / 3)];
 							} else {
 								var _channelLevel = _lightness * 255;
