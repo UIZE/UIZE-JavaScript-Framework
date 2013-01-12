@@ -95,6 +95,8 @@
 Uize.module ({
 	name:'Uize.Node.VirtualEvent.Edge',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},

@@ -295,6 +295,8 @@
 Uize.module ({
 	name:'Uize.String.Builder',
 	builder:function () {
+		'use strict';
+
 		/*** Constructor ***/
 			var
 				_object = Uize.noNew (

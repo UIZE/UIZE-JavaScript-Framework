@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Util.Oop',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
@@ -48,7 +50,7 @@ Uize.module ({
 					_features = []
 				;
 				if (_class) {
-					function _getFeaturesForContext (_contextName) {
+					var _getFeaturesForContext = function (_contextName) {
 						var
 							_contextIsSetGet = _contextName == 'state',
 							_context = _contextIsSetGet
@@ -78,15 +80,15 @@ Uize.module ({
 									)
 								)
 						;
-					}
+					};
 					_getFeaturesForContext ('instance');
 					_getFeaturesForContext ('static');
 					_package.isUizeClass (_class) && _getFeaturesForContext ('state');
 
 					/*** sort the features by the keys: access, context, type, name ***/
-						function _compareTwo (_valueA,_valueB) {
+						var _compareTwo = function (_valueA,_valueB) {
 							return _valueA < _valueB ? -1 : _valueA > _valueB ? 1 : 0;
-						}
+						};
 						_features.sort (
 							function (_featureA,_featureB) {
 								return (

@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Util.Cycle',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,

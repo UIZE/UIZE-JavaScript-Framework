@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Services.StoreAdapter.BrowserLocalStorage',
 	superclass:'Uize.Services.StoreAdapter',
 	builder:function (_superclass) {
+		'use strict';
+
 		return _superclass.subclass ({
 			instanceMethods:{
 				key:function (_params,_callback) {

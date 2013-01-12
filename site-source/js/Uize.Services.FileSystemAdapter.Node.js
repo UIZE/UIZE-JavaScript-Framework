@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Services.FileSystemAdapter.Node',
 	superclass:'Uize.Services.FileSystemAdapter',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined = undefined,

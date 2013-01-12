@@ -314,6 +314,8 @@ Uize.module ({
 	name:'Uize.Util.PropertyAdapter',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
@@ -343,25 +345,25 @@ Uize.module ({
 						_propertyA = _this._propertyA,
 						_propertyB = _this._propertyB,
 						_valueAdapter = _this._valueAdapter,
-						_driver
-					;
-					function _synchronize (_aToB) {
-						var
-							_source = _aToB ? _propertyA : _propertyB,
-							_target = _aToB ? _propertyB : _propertyA
-						;
-						if (_driver != _target) {
-							var _sourcePropertyValue = _source.instance.get (_source.property);
-							_driver = _source;
-							_target.instance.set (
-								_target.property,
-								_valueAdapter
-									? _valueAdapter [_aToB ? 'aToB' : 'bToA'] (_sourcePropertyValue)
-									: _sourcePropertyValue
-							);
-							_driver = null;
+						_driver,
+						_synchronize = function (_aToB) {
+							var
+								_source = _aToB ? _propertyA : _propertyB,
+								_target = _aToB ? _propertyB : _propertyA
+							;
+							if (_driver != _target) {
+								var _sourcePropertyValue = _source.instance.get (_source.property);
+								_driver = _source;
+								_target.instance.set (
+									_target.property,
+									_valueAdapter
+										? _valueAdapter [_aToB ? 'aToB' : 'bToA'] (_sourcePropertyValue)
+										: _sourcePropertyValue
+								);
+								_driver = null;
+							}
 						}
-					}
+					;
 					if (_propertyA && _propertyB) {
 						/*** synchronize A to B ***/
 							_synchronize (true);

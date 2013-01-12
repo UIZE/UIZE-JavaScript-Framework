@@ -8,25 +8,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	..............................................................................
 	examples/js/animals.js
 	examples/js/plants.js
-	js/Uize.Node.Util.js
-	js/Uize.Node.VirtualEvent.Edge.js
-	js/Uize.Node.VirtualEvent.js
-	js/Uize.Service.Adapter.js
-	js/Uize.Services.FileSystem.js
-	js/Uize.Services.FileSystemAdapter.js
-	js/Uize.Services.FileSystemAdapter.Node.js
-	js/Uize.Services.FileSystemAdapter.Wsh.js
-	js/Uize.Services.js
-	js/Uize.Services.Setup.js
-	js/Uize.Services.Store.js
-	js/Uize.Services.StoreAdapter.BrowserLocalStorage.js
-	js/Uize.Services.StoreAdapter.js
-	js/Uize.Services.StoreAdapter.Memory.js
-	js/Uize.String.Builder.js
-	js/Uize.String.Discombobulator.js
-	js/Uize.String.js
-	js/Uize.String.Lines.js
-	js/Uize.String.Replace.js
 	js/Uize.Template.js
 	js/Uize.Template.Module.js
 	js/Uize.Templates.Calculator.js
@@ -40,7 +21,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	js/Uize.Templates.SevenSegmentDisplay.js
 	js/Uize.Templates.SevenSegmentDisplayDimsCss.js
 	js/Uize.Templates.SimpleDoc.js
-	js/Uize.Test.js
 	js/Uize.Test.Performance.ArrayBuildingStyles.js
 	js/Uize.Test.Performance.js
 	js/Uize.Test.Uize.Array.Dupes.js
@@ -83,14 +63,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	js/Uize.Test.Uize.Util.js
 	js/Uize.Test.Uize.Util.PropertyAdapter.js
 	js/Uize.Test.Uize.Xml.js
-	js/Uize.Tooltip.js
-	js/Uize.Url.js
-	js/Uize.Util.Coupler.js
-	js/Uize.Util.Cycle.js
-	js/Uize.Util.js
-	js/Uize.Util.Needs.js
-	js/Uize.Util.Oop.js
-	js/Uize.Util.PropertyAdapter.js
 	js/Uize.Widget.AutoSuggest.js
 	js/Uize.Widget.AutoTooltip.js
 	js/Uize.Widget.Bar.js

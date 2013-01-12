@@ -30,6 +30,8 @@ Uize.module ({
 	name:'Uize.Services.StoreAdapter.Memory',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
+		'use strict';
+
 		return _superclass.subclass ({
 			alphastructor:function () {
 				this._store = {};

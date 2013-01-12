@@ -366,6 +366,8 @@ Uize.module ({
 	name:'Uize.Util.Needs',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** General Variables ***/
 			var _needConditionPrefix = 'NEEDED_';
 

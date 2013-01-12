@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Service.Adapter',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
+		'use strict';
+
 		return _superclass.subclass ();
 	}
 });

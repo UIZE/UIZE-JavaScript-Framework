@@ -37,6 +37,8 @@ Uize.module ({
 		'Uize.Util.Oop'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -1304,19 +1306,19 @@ Uize.module ({
 				if (Uize.isArray (_test)) {
 					var
 						_testLength = _test.length,
-						_testNo = -1
-					;
-					function _continue () {
-						_this.set ({_progress:(_testNo + 1) / _testLength});
-						function _setResultAndContinue (_result) {
-							_testResult = _result;
-							_continue ();
+						_testNo = -1,
+						_continue = function () {
+							_this.set ({_progress:(_testNo + 1) / _testLength});
+							function _setResultAndContinue (_result) {
+								_testResult = _result;
+								_continue ();
+							}
+							while (_this._inProgress && _testResult === _true && ++_testNo < _testLength)
+								_testResult = _test [_testNo].run (_setResultAndContinue)
+							;
+							_updateResultProperty ();
 						}
-						while (_this._inProgress && _testResult === _true && ++_testNo < _testLength)
-							_testResult = _test [_testNo].run (_setResultAndContinue)
-						;
-						_updateResultProperty ();
-					}
+					;
 					_continue ();
 				} else {
 					try {

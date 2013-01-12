@@ -613,6 +613,8 @@
 Uize.module ({
 	name:'Uize.Node.VirtualEvent',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},

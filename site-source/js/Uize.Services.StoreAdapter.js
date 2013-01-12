@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Services.StoreAdapter',
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
+		'use strict';
+
 		return _superclass.subclass ();
 	}
 });

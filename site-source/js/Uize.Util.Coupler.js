@@ -70,6 +70,8 @@ Uize.module ({
 	name:'Uize.Util.Coupler',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** General Variables ***/
 			var _syncFunctions = {};
 
@@ -139,12 +141,14 @@ Uize.module ({
 
 						/*** wire events for coupling instances together ***/
 							_wirings = _this._wirings = [];
-							var _eventName = 'Changed.' + (_propertiesLength > 1 ? '*' : _properties [0]);
-							function _wireCouplingHandler (_controllingInstance,_controlledInstance) {
-								var _handler = function (_event) {_syncFunction (_event,_controlledInstance)};
-								_wirings.push ({_instance:_controllingInstance,_eventName:_eventName,_handler:_handler});
-								_controllingInstance.wire (_eventName,_handler);
-							}
+							var
+								_eventName = 'Changed.' + (_propertiesLength > 1 ? '*' : _properties [0]),
+								_wireCouplingHandler = function (_controllingInstance,_controlledInstance) {
+									var _handler = function (_event) {_syncFunction (_event,_controlledInstance)};
+									_wirings.push ({_instance:_controllingInstance,_eventName:_eventName,_handler:_handler});
+									_controllingInstance.wire (_eventName,_handler);
+								}
+							;
 							for (
 								var _instanceNo = -1, _instancesLength = _instances.length;
 								++_instanceNo < _instances.length;

@@ -10,7 +10,12 @@
 
 <script type="text/javascript">
 
-Uize.require ('Uize.Node.Tree');
+Uize.require (
+	'Uize.Test',
+	function (_module) {
+		console.log ('SUCCESS --- ' + _module.toString ());
+	}
+);
 
 </script>
 

@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Services.FileSystemAdapter.Wsh',
 	superclass:'Uize.Services.FileSystemAdapter',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Utility Functions ***/
 			var _getParentFolderPath = _superclass.getParentFolderPath;
 

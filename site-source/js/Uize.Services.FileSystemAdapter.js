@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Services.FileSystemAdapter',
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
+		'use strict';
+
 		return _superclass.subclass ({
 			instanceMethods:{
 				getItemsInFolder:function (_params,_mustBeFolder) {
