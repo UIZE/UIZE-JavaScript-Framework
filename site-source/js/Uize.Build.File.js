@@ -320,6 +320,9 @@ Uize.module ({
 									);
 									if (_buildError) {
 										_log (_buildError);
+										typeof console != 'undefined' && typeof console.trace == 'function' &&
+											console.trace ()
+										;
 										throw _buildError;
 									}
 								} else {

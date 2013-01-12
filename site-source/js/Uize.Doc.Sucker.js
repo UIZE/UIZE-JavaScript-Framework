@@ -79,6 +79,7 @@ Uize.module({
 								'Static Methods':[],
 								'Static Properties':[]
 							},
+							_featuresSectionTitle,
 							_nonInheritableStatics = _module.nonInheritableStatics
 						;
 						for (
