@@ -39,8 +39,7 @@
 			'UizeSite.Build.BuildIndexPages',
 			'UizeSite.Build.BuildSimpleDataPages',
 			'UizeSite.Build.BuildPagesFromSourceCode',
-			'UizeSite.Build.BuildSotu',
-			'UizeSite.Build.BuildCodeSitemap'
+			'UizeSite.Build.BuildSotu'
 		],
 		testSequence:[
 			'_Uize.Build.RunUnitTests-source.js silent=true',

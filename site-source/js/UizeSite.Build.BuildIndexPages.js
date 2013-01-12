@@ -79,7 +79,8 @@ Uize.module ({
 				/*** add URLs for other miscellaneous pages ***/
 					_urlsToBuild.push (
 						'index.html',
-						'directory.html'
+						'directory.html',
+						'sitemap-code.xml'
 					);
 
 				/*** build examples index pages for each keyword ***/
