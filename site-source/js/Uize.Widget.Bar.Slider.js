@@ -36,6 +36,8 @@ Uize.module ({
 		'Uize.Widget.Drag'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -93,25 +95,25 @@ Uize.module ({
 						_knob = _this.getNode ('knob'),
 						_orientationNo, _trackDimsObj, _trackDims, _knobDimsObj, _knobDims,
 						_scaleFunc = _this.get ('scaleFunc'),
-						_valueFunc = _this.get ('valueFunc')
+						_valueFunc = _this.get ('valueFunc'),
+						_calculateCommonCoords = function () {
+							_orientationNo = _this.get ('orientation') == 'vertical' ? 1 : 0;
+							_trackDimsObj = _Uize_Node.getDimensions (_track);
+							_trackDims = [_trackDimsObj.width,_trackDimsObj.height];
+							_knobDimsObj = _Uize_Node.getDimensions (_knob);
+							_knobDims = [_knobDimsObj.width,_knobDimsObj.height];
+						},
+						_pixelsToScale = function (_pixels) {
+							var
+								_scaleMax = _scaleFunc (_this.get ('maxValue')),
+								_scaleMin = _scaleFunc (_this.get ('minValue'))
+							;
+							return (
+								_pixels * (1 - _orientationNo * 2) * (_scaleMax - _scaleMin)
+								/ (_trackDims [_orientationNo] - _knobDims [_orientationNo])
+							);
+						}
 					;
-					function _calculateCommonCoords () {
-						_orientationNo = _this.get ('orientation') == 'vertical' ? 1 : 0;
-						_trackDimsObj = _Uize_Node.getDimensions (_track);
-						_trackDims = [_trackDimsObj.width,_trackDimsObj.height];
-						_knobDimsObj = _Uize_Node.getDimensions (_knob);
-						_knobDims = [_knobDimsObj.width,_knobDimsObj.height];
-					}
-					function _pixelsToScale (_pixels) {
-						var
-							_scaleMax = _scaleFunc (_this.get ('maxValue')),
-							_scaleMin = _scaleFunc (_this.get ('minValue'))
-						;
-						return (
-							_pixels * (1 - _orientationNo * 2) * (_scaleMax - _scaleMin)
-							/ (_trackDims [_orientationNo] - _knobDims [_orientationNo])
-						);
-					}
 					/*** wire up the knob's drag object ***/
 						var
 							_drag = _this.addChild ('drag',_Uize_Widget_Drag,{node:_knob}),
@@ -143,7 +145,7 @@ Uize.module ({
 						});
 
 					/*** wire up the slider's track ***/
-						function _initiateDrag (_event) {
+						var _initiateDrag = function (_event) {
 							if (_this.get ('enabledInherited')) {
 								_calculateCommonCoords ();
 								var
@@ -162,7 +164,7 @@ Uize.module ({
 								);
 								return _drag.initiate (_event);
 							}
-						}
+						};
 						_this.wireNode ([_track,'full','empty'],{mousedown:_initiateDrag,touchstart:_initiateDrag});
 
 					_superclass.prototype.wireUi.call (_this);

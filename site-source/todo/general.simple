@@ -63,22 +63,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 	js/Uize.Test.Uize.Util.js
 	js/Uize.Test.Uize.Util.PropertyAdapter.js
 	js/Uize.Test.Uize.Xml.js
-	js/Uize.Widget.AutoSuggest.js
-	js/Uize.Widget.AutoTooltip.js
-	js/Uize.Widget.Bar.js
-	js/Uize.Widget.Bar.Progress.js
-	js/Uize.Widget.Bar.Slider.js
-	js/Uize.Widget.Bar.Slider.Plus.js
-	js/Uize.Widget.Bar.Slider.xSkin.js
-	js/Uize.Widget.Beam.js
-	js/Uize.Widget.Bevel.js
-	js/Uize.Widget.Button.Checkbox.js
-	js/Uize.Widget.Button.Filter.js
-	js/Uize.Widget.Button.js
-	js/Uize.Widget.Button.Toggle.js
-	js/Uize.Widget.Button.ValueDisplay.js
-	js/Uize.Widget.Button.ValueDisplay.Selector.js
-	js/Uize.Widget.Calculator.js
 	js/Uize.Widget.Calendar.js
 	js/Uize.Widget.Captcha.js
 	js/Uize.Widget.Captcha.Recaptcha.js

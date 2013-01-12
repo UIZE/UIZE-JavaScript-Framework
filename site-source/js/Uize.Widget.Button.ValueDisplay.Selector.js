@@ -28,10 +28,13 @@ Uize.module ({
 	name:'Uize.Widget.Button.ValueDisplay.Selector',
 	required:'Uize.Node.Classes',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_Uize_Node_Classes = Uize.Node.Classes
 			;
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Widget.Button.Checkbox',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

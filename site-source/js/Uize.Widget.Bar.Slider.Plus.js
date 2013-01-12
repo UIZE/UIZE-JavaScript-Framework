@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Bar.Slider.Plus',
 	required:'Uize.Widget.Button',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,

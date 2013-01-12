@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Widget.Button.Toggle',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _null = null;
 

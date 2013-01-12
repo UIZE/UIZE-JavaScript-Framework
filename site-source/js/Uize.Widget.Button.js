@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Button',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
@@ -236,7 +238,7 @@ Uize.module ({
 					/*** deferred wiring of other events (for performance) ***/
 						if (!_this._allEventsWired) {
 							_this._allEventsWired = _true;
-							function _setStateAndFireEvent (_domEvent) {_this._setStateAndFireEvent (_domEvent)}
+							var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
 							_this.wireNode (
 								_this._rootNode,
 								{
@@ -343,7 +345,7 @@ Uize.module ({
 							if (_this._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
 								_rootNode.onclick = Uize.returnTrue
 							;
-							function _setStateAndFireEvent (_domEvent) {_this._setStateAndFireEvent (_domEvent)}
+							var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
 							_this.wireNode (
 								_rootNode,
 								{

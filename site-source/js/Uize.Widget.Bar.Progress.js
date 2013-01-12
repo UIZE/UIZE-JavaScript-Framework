@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Bar.Progress',
 	required:'Uize.Fade',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -83,13 +85,13 @@ Uize.module ({
 							_this._totalProcessesTime += _nowMs - _this._startTime;
 						}
 						if (_this.isWired) {
-							function _updateShown () {
+							var _updateShown = function () {
 								if (_this._vanishTimeout) {
 									clearTimeout (_this._vanishTimeout);
 									_this._vanishTimeout = _null;
 								}
 								_this._updateUiShown ();
-							}
+							};
 							if (_this._inProgress) {
 								_this._fade.start ({duration:(_this._totalProcesses > 0 ? _this._totalProcessesTime / _this._totalProcesses : 3000) * _this._paddingFactor});
 								_updateShown ();

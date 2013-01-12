@@ -27,20 +27,18 @@
 Uize.module ({
 	name:'Uize.Widget.Button.ValueDisplay',
 	builder:function (_superclass) {
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
+		'use strict';
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			stateProperties:{
 				_defaultValueDetails:'defaultValueDetails',
 				_value:'value',
 				_valueDetails:{
 					name:'valueDetails',
 					conformer:function(_valueDetails) { return _valueDetails || this._defaultValueDetails }
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

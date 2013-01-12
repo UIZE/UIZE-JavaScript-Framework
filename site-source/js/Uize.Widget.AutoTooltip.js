@@ -35,6 +35,8 @@ Uize.module ({
 		'Uize.String'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,

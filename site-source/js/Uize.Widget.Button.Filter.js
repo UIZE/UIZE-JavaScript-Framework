@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Button.Filter',
 	required:'Uize.Node.Classes',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
