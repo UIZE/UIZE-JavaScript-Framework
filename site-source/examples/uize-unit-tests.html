@@ -293,11 +293,10 @@ Uize.module ({
 					}
 					instantiateTestSuite (RunAllTests);
 				} else if (testsSubTreeLookup [testName]) {
-					var testModuleName = 'Uize.Test.' + testName;
-					Uize.module ({
-						required:testModuleName,
-						builder:function () {instantiateTestSuite (eval (testModuleName))}
-					});
+					Uize.require (
+						'Uize.Test.' + testName,
+						function (testModuleName) {instantiateTestSuite (testModuleName)}
+					);
 				} else {
 					instantiateTestSuite (Uize.Test.requiredModulesTest (testName));
 				}

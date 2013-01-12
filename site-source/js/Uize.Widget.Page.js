@@ -171,9 +171,9 @@ Uize.module ({
 								}
 							);
 
-						Uize.module ({
-							required:_requiredModules,
-							builder:function () {
+						Uize.require (
+							_requiredModules,
+							function () {
 								_this.set ({children:_childrenToAdoptTree});
 
 								/*** recurse tree, adopting all widgets ***/
@@ -199,7 +199,7 @@ Uize.module ({
 
 								_callback ();
 							}
-						});
+						);
 					} else {
 						_callback ();
 					}
@@ -469,14 +469,14 @@ Uize.module ({
 					}
 					function _createDialogWidget () {
 						var _dialogWidgetClassName = _params.widgetClassName;
-						Uize.module ({
-							required:_dialogWidgetClassName,
-							builder:function () {
+						Uize.require (
+							_dialogWidgetClassName,
+							function (_dialogWidgetClass) {
 								(_dialogWidget = _dialogWidgetParent.children [_dialogWidgetName])
 									? _dialogWidget.set (_dialogWidgetProperties)
 									: (
 										_dialogWidget = _dialogWidgetParent.addChild (
-											_dialogWidgetName,Uize.getModuleByName (_dialogWidgetClassName),_dialogWidgetProperties
+											_dialogWidgetName,_dialogWidgetClass,_dialogWidgetProperties
 										)
 									)
 								;
@@ -485,7 +485,7 @@ Uize.module ({
 								_dialogWidget.insertOrWireUi ();
 								_showDialog (_refetch ? 'refetched' : 'initial');
 							}
-						});
+						);
 					}
 					_componentProfile
 						? _this.loadHtmlIntoNode (

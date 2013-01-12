@@ -62,10 +62,10 @@ Uize.module ({
 					width:1000,
 					height:740
 				});
-				Uize.module ({
-					required:'Uize.Comm.Ajax',
-					builder:function () {
-						Uize.Comm.Ajax ().request ({
+				Uize.require (
+					'Uize.Comm.Ajax',
+					function (_Uize_Comm_Ajax) {
+						_Uize_Comm_Ajax ().request ({
 							url:_url,
 							requestMethod:'GET',
 							returnType:'text',
@@ -77,7 +77,7 @@ Uize.module ({
 							}
 						});
 					}
-				});
+				);
 				/*?
 					Instance Methods
 						viewSource

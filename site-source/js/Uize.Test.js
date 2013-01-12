@@ -1574,12 +1574,7 @@ Uize.module ({
 				_class.requiredModulesTest = function (_modules) {
 					return this.declare ({
 						title:'REQUIRED MODULES TEST: ' + _modules,
-						test:function (_continue) {
-							Uize.module ({
-								required:_modules,
-								builder:function () {_continue (true)}
-							});
-						}
+						test:function (_continue) {Uize.require (_modules,function () {_continue (true)})}
 					});
 					/*?
 						Static Methods

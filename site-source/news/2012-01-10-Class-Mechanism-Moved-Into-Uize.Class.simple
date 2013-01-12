@@ -65,6 +65,7 @@ Updating Your Own Code
 		THE OLD WAY...
 		...........................................
 		Uize.module ({
+			name:'MyNamespace.MyClass',
 			superclass:'Uize',
 			builder:function (_superclass) {
 				var _class = _superclass.subclass ();
@@ -77,6 +78,7 @@ Updating Your Own Code
 		THE NEW WAY...
 		...........................................
 		Uize.module ({
+			name:'MyNamespace.MyClass',
 			superclass:'Uize.Class',
 			builder:function (_superclass) {
 				var _class = _superclass.subclass ();

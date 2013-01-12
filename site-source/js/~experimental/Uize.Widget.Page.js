@@ -188,9 +188,9 @@ Uize.module ({
 								}
 							);
 
-						Uize.module ({
-							required:_requiredModules,
-							builder:function () {
+						Uize.require (
+							_requiredModules,
+							function () {
 
 								if (false) {
 								_traverseChildrenToAdoptTree (
@@ -229,7 +229,7 @@ Uize.module ({
 
 								_callback ();
 							}
-						});
+						);
 					} else {
 						_callback ();
 					}
