@@ -78,7 +78,8 @@ Uize.module ({
 						_uizeRequire (
 							[_serviceModuleName,_serviceAdapterModuleName],
 							function (_serviceModule,_serviceAdapterModule) {
-								(_service = _serviceModule.singleton ()).set ('adapter',_serviceAdapterModule.singleton ());
+								var _service = _serviceModule.singleton ();
+								_service.set ('adapter',_serviceAdapterModule.singleton ());
 								_serviceSetup (_service,function () {_provide (_service)});
 							}
 						);
