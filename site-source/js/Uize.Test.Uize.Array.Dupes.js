@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Array.Dupes',
 	builder:function () {
+		'use strict';
+
 		var
 			_objectA = {},
 			_objectB = {},

@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Data.Matches',
 	builder:function () {
+		'use strict';
+
 		function _getArrayWithUnassignedElements () {
 			var _result = [];
 			_result [0] = undefined;

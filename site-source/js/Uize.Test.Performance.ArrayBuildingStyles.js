@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Performance.ArrayBuildingStyles',
 	builder:function () {
+		'use strict';
+
 		var _totalIterations = 2000000;
 
 		return Uize.Test.declare ({

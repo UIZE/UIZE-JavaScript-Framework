@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Test.Uize.String.Builder',
 	required:'Uize.Data',
 	builder:function () {
+		'use strict';
+
 		function _getHelloStringBuilderAppended () {
 			var _stringBuilder = Uize.String.Builder ();
 			_stringBuilder.append ('H');

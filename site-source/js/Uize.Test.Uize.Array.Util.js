@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Array.Util',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Uize.Array.Util Module Test',
 			test:[

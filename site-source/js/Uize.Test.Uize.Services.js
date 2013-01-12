@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Services',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Services Module',
 			test:[

@@ -31,6 +31,8 @@ Uize.module ({
 		'Uize.Class.Value'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Url Module',
 			test:[

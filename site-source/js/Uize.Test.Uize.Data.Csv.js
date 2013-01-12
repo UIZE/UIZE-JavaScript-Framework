@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Data.Csv',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Uize.Data.Csv Module Test',
 			test:[

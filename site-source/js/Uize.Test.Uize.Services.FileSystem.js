@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Services.FileSystem',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Services.FileSystem Module',
 			test:[

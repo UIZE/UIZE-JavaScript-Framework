@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Template',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Template Module',
 			test:[

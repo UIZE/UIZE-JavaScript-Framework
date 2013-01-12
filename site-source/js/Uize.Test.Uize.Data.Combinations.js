@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Data.Combinations',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Uize.Data.Combinations Module Test',
 			test:[

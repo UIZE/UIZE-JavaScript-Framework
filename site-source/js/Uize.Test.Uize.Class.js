@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Class.Value'
 	],
 	builder:function () {
+		'use strict';
+
 		var _falsyAndTruthyValues = [
 			null,undefined,0,false,'',NaN, // falsy values
 			{},[],1,-1,true,'foo'          // truthy values

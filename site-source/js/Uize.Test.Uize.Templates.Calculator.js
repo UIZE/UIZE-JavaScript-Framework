@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Templates.Calculator',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Templates.Calculator JavaScript Template',
 			test:[

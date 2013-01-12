@@ -31,6 +31,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Node.Classes',
 	builder:function () {
+		'use strict';
+
 		function _mockNodeWithClassName (_className) {
 			/* NOTE:
 				returns an object designed to fool the Uize.Node.isNode method into thinking it's a node, so we can test the classes methods without having to have a browser or a document, allowing this test module to run in Windows Script Host or other non-browser host

@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Test.Uize.Util.PropertyAdapter',
 	required:'Uize.Class',
 	builder:function () {
+		'use strict';
+
 		var _DummyClass = Uize.Class.subclass ();
 
 		function _getRig (_extraAdapterProperties) {

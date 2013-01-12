@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Templates.ColorInfo',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Templates.ColorInfo JavaScript Template',
 			test:[

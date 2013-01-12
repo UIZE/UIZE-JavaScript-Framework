@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Class.Value'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_oneLevelDeepTestObjectForCloning = {
 				undefinedValue:undefined,

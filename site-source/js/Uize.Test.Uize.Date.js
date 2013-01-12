@@ -31,6 +31,8 @@ Uize.module ({
 		'Uize.Class.Value'
 	],
 	builder:function () {
+		'use strict';
+
 		function _dateToNumber (_date) {return +_date}
 		function _dateToString (_date) {return _date + ''}
 		function _dateToIso8601String (_date) {return Uize.Date.toIso8601 (_date)}

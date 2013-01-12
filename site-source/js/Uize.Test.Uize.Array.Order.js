@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Test.Uize.Array.Order',
 	required:'Uize.Test.Uize',
 	builder:function () {
+		'use strict';
+
 		function _arrayMethodTargetTest (_methodName,_sourceArrayContents,_expectedTargetArrayContents) {
 			return Uize.Test.Uize.arrayMethodTargetTest (
 				'Uize.Array.Order',

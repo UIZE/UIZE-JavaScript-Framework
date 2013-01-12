@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Test.Uize.String.Lines',
 	required:'Uize.Json',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.String.Lines Module',
 			test:[

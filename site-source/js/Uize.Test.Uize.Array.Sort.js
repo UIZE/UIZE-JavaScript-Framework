@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Array.Sort',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Uize.Array.Sort Module Test',
 			test:[

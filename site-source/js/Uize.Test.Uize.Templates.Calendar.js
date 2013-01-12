@@ -29,6 +29,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Templates.Calendar',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Templates.Calendar JavaScript Template',
 			test:[

@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Templates.Collection',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Templates.Collection JavaScript Template',
 			test:[

@@ -10,11 +10,13 @@
 
 <script type="text/javascript">
 
+var moduleName =
+	'Uize.Test.Uize.Xml'
+;
+
 Uize.require (
-	'Uize.Widget.Calculator',
-	function (_module) {
-		console.log ('SUCCESS --- ' + _module.toString ());
-	}
+	moduleName,
+	function (_module) {console.log ('SUCCESS --- ' + moduleName)}
 );
 
 </script>

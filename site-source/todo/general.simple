@@ -25,48 +25,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 		js/Uize.Templates.SevenSegmentDisplay.js
 		js/Uize.Templates.SevenSegmentDisplayDimsCss.js
 		js/Uize.Templates.SimpleDoc.js
-		js/Uize.Test.Performance.ArrayBuildingStyles.js
-		js/Uize.Test.Performance.js
-		js/Uize.Test.Uize.Array.Dupes.js
-		js/Uize.Test.Uize.Array.js
-		js/Uize.Test.Uize.Array.Order.js
-		js/Uize.Test.Uize.Array.Sort.js
-		js/Uize.Test.Uize.Array.Util.js
-		js/Uize.Test.Uize.Class.js
-		js/Uize.Test.Uize.Data.Combinations.js
-		js/Uize.Test.Uize.Data.Csv.js
-		js/Uize.Test.Uize.Data.js
-		js/Uize.Test.Uize.Data.Matches.js
-		js/Uize.Test.Uize.Data.NameValueRecords.js
-		js/Uize.Test.Uize.Data.PathsTree.CompactString.js
-		js/Uize.Test.Uize.Data.PathsTree.js
-		js/Uize.Test.Uize.Date.Formatter.js
-		js/Uize.Test.Uize.Date.js
-		js/Uize.Test.Uize.Doc.js
-		js/Uize.Test.Uize.js
-		js/Uize.Test.Uize.Node.Classes.js
-		js/Uize.Test.Uize.Node.js
-		js/Uize.Test.Uize.Service.js
-		js/Uize.Test.Uize.Services.FileSystem.js
-		js/Uize.Test.Uize.Services.js
-		js/Uize.Test.Uize.String.Builder.js
-		js/Uize.Test.Uize.String.js
-		js/Uize.Test.Uize.String.Lines.js
-		js/Uize.Test.Uize.String.Replace.js
-		js/Uize.Test.Uize.Template.js
-		js/Uize.Test.Uize.Templates.Calculator.js
-		js/Uize.Test.Uize.Templates.Calendar.js
-		js/Uize.Test.Uize.Templates.Collection.js
-		js/Uize.Test.Uize.Templates.CollectionItem.js
-		js/Uize.Test.Uize.Templates.ColorInfo.js
-		js/Uize.Test.Uize.Templates.HashTable.js
-		js/Uize.Test.Uize.Templates.js
-		js/Uize.Test.Uize.Templates.List.js
-		js/Uize.Test.Uize.Templates.SevenSegmentDisplay.js
-		js/Uize.Test.Uize.Url.js
-		js/Uize.Test.Uize.Util.js
-		js/Uize.Test.Uize.Util.PropertyAdapter.js
-		js/Uize.Test.Uize.Xml.js
 		js/Uize.Widget.Calendar.js
 		js/Uize.Widget.Captcha.js
 		js/Uize.Widget.Captcha.Recaptcha.js

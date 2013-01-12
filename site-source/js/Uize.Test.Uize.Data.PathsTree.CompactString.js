@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Data.PathsTree.CompactString',
 	builder:function () {
+		'use strict';
+
 		return Uize.Test.declare ({
 			title:'Uize.Data.PathsTree.CompactString Module Test',
 			test:[

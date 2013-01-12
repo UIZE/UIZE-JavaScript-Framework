@@ -31,6 +31,8 @@ Uize.module ({
 		'Uize.Class.Value'
 	],
 	builder:function () {
+		'use strict';
+
 		function _newDate (_year,_month,_dayNo,_hours,_minutes,_seconds,_milliseconds) {
 			var _date = new Date (
 				+_year + (_year < 100 && 400),
