@@ -1,0 +1,9 @@
+The =Uize.Fx.xTextShadow= extension module, that was deprecated back in April of 2010, has finally been killed.
+
+The now defunct =Uize.Fx.xTextShadow= module was superceded by the more versatile =Uize.Fx.xShadows= module. For background on the original deprecating of this module, see the news announcement [[2010-04-18-DEPRECATED-MODULE-Uize.Fx.xTextShadow.html][2010-04-18 - DEPRECATED MODULE: Uize.Fx.xTextShadow]].
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-12 - Deprecated Uize.Fx.xTextShadow Module Killed
+....................................................................................
