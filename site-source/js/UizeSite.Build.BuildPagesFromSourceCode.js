@@ -28,6 +28,8 @@ Uize.module ({
 	name:'UizeSite.Build.BuildPagesFromSourceCode',
 	required:'UizeSite.Build.File',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 

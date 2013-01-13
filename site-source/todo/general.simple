@@ -117,18 +117,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 		js/Uize.Widget.Tree.Select.js
 		js/Uize.Wsh.js
 		js/Uize.Xml.js
-		js/UizeSite.Build.BuildIndexPages.js
-		js/UizeSite.Build.BuildJsModules.js
-		js/UizeSite.Build.BuildPagesFromSourceCode.js
-		js/UizeSite.Build.BuildSimpleDataPages.js
-		js/UizeSite.Build.BuildSimpleDocPages.js
-		js/UizeSite.Build.BuildSotu.js
-		js/UizeSite.Build.BuildStaticPages.js
-		js/UizeSite.Build.BuildWidgetPages.js
-		js/UizeSite.Build.Deploy.js
-		js/UizeSite.Build.File.js
-		js/UizeSite.Build.ListJsModules.js
-		js/UizeSite.Build.WebServer.js
 		js/UizeSite.Delve.js
 		js/UizeSite.Delve.library.js
 		js/UizeSite.DelvePageWriter.js
@@ -285,7 +273,6 @@ Separate Source Code From Built Code
 			- _UizeSite.Build.BuildIndexPages.js
 			- _UizeSite.Build.BuildPagesFromSourceCode.js
 			- _UizeSite.Build.BuildSimpleDocPages.js
-			- _UizeSite.Build.BuildSotu.js
 			- _UizeSite.Build.BuildWidgetPages.js
 
 General Drag and Drop Framework

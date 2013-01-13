@@ -30,6 +30,8 @@ Uize.module ({
 	name:'UizeSite.Build.ListJsModules',
 	required:'Uize.Services.FileSystem',
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 

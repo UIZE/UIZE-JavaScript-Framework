@@ -31,6 +31,8 @@ Uize.module ({
 		'Uize.Services.FileSystem'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
@@ -40,6 +42,14 @@ Uize.module ({
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
 				var _urlsToBuild = [];
+
+				/*** add URLs for other miscellaneous pages ***/
+					_urlsToBuild.push (
+						'index.html',
+						'directory.html',
+						'sitemap-code.xml',
+						'appendixes/sotu.html'
+					);
 
 				/*** add URLs for index pages for modules, examples, examples by module, explainers, and widgets ***/
 					_urlsToBuild.push (
@@ -75,13 +85,6 @@ Uize.module ({
 							}
 						});
 
-
-				/*** add URLs for other miscellaneous pages ***/
-					_urlsToBuild.push (
-						'index.html',
-						'directory.html',
-						'sitemap-code.xml'
-					);
 
 				/*** build examples index pages for each keyword ***/
 					var _examplesByKeywordPath = _params.memoryPath + '/examples-by-keyword';
