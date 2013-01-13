@@ -20,6 +20,8 @@ Uize.module ({
 	name:'UizeSite.Page.Example.Test',
 	required:'Uize.Widget.Button',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

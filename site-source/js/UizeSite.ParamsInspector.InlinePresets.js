@@ -20,6 +20,8 @@ Uize.module ({
 	name:'UizeSite.ParamsInspector.InlinePresets',
 	required:'Uize.Data.Simple',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

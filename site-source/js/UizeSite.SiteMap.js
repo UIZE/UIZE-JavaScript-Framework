@@ -23,6 +23,8 @@ Uize.module ({
 		'UizeSite.ExamplesInfoForSiteMap'
 	],
 	builder:function () {
+		'use strict';
+
 		var _data;
 		return function (_overrides) {
 			if (!_data || _overrides) {
@@ -32,74 +34,77 @@ Uize.module ({
 				var _divider = {title:'-'};
 
 				/*** build the modules reference items from the modules tree data ***/
-					function _getModuleReferenceUrl (_moduleName) {
-						return 'reference/' + _moduleName + '.html';
-					}
-					function _buildModuleItem (_moduleHost,_moduleSubModuleName,_moduleProfile) {
-						var
-							_moduleName = _moduleHost + (_moduleHost && '.') + _moduleSubModuleName,
-							_moduleLink = _getModuleReferenceUrl (_moduleName),
-							_item = {title:_moduleSubModuleName,link:_moduleLink},
-							_itemItems = _item.items = []
-						;
-						if (_moduleProfile)
-							for (var _subModule in _moduleProfile)
-								_itemItems.push (
-									_buildModuleItem (_moduleName,_subModule,_moduleProfile [_subModule])
+					var
+						_buildModuleItem = function (_moduleHost,_moduleSubModuleName,_moduleProfile) {
+							var
+								_moduleName = _moduleHost + (_moduleHost && '.') + _moduleSubModuleName,
+								_moduleLink = 'reference/' + _moduleName + '.html',
+								_item = {title:_moduleSubModuleName,link:_moduleLink},
+								_itemItems = _item.items = []
+							;
+							if (_moduleProfile)
+								for (var _subModule in _moduleProfile)
+									_itemItems.push (
+										_buildModuleItem (_moduleName,_subModule,_moduleProfile [_subModule])
+									)
+							;
+							_itemItems.length && _moduleName &&
+								_itemItems.unshift (
+									{title:'[[ BASE ]]',link:_moduleLink},
+									_divider
 								)
-						;
-						_itemItems.length && _moduleName &&
-							_itemItems.unshift (
-								{title:'[[ BASE ]]',link:_moduleLink},
-								_divider
-							)
-						;
-						return _item;
-					}
-					var _modulesReferenceItem = _buildModuleItem ('','',_overrides.modulesTree || UizeSite.ModulesTree ());
+							;
+							return _item;
+						},
+						_modulesReferenceItem = _buildModuleItem ('','',_overrides.modulesTree || UizeSite.ModulesTree ())
+					;
 					_modulesReferenceItem.title = 'Module Reference';
 					_modulesReferenceItem.link = 'javascript-modules-index.html';
 
 				/*** file size optimization tricks ***/
-					function _item (_title,_section,_link) {
-						return {
-							title:_title,
-							link:(_section || '') + (_link || _title.toLowerCase ().replace (/\W+/g,'-')) + '.html'
-						}
-					}
-					function _explainer (_title,_link) {return _item (_title,'explainers/',_link)}
-					function _news (_year) {return _item (_year + ' News','','news-' + _year)}
-					function _javaScriptReference (_title,_link) {return _item (_title,'javascript-reference/',_link)}
-					function _appendix (_title,_link) {return _item (_title,'appendixes/',_link)}
-					function _todo (_title,_link) {return _item (_title,'todo/',_link)}
-					function _perfTest (_title,_link) {return _item (_title,'tests/performance/',_link)}
+					var
+						_item = function (_title,_section,_link) {
+							return {
+								title:_title,
+								link:(_section || '') + (_link || _title.toLowerCase ().replace (/\W+/g,'-')) + '.html'
+							}
+						},
+						_explainer = function (_title,_link) {return _item (_title,'explainers/',_link)},
+						_news = function (_year) {return _item (_year + ' News','','news-' + _year)},
+						_javaScriptReference = function (_title,_link) {return _item (_title,'javascript-reference/',_link)},
+						_appendix = function (_title,_link) {return _item (_title,'appendixes/',_link)},
+						_todo = function (_title,_link) {return _item (_title,'todo/',_link)},
+						_perfTest = function (_title,_link) {return _item (_title,'tests/performance/',_link)}
+					;
 
 				/*** utilize the info from the UizeSite.ExamplesInfoForSiteMap module ***/
 					var _infoForSiteMap = _overrides.examplesInfo || UizeSite.ExamplesInfoForSiteMap ();
 
 					/*** build the examples submenu's items ***/
-						function _examplesByTheme (_tour) {
-							var _tourIndexLink = 'javascript-' + (_tour != 'all' ? (_tour + '-') : '') + 'examples.html';
-							return {
-								title:Uize.capFirstChar (_tour) + ' examples',
-								link:_tourIndexLink,
-								items:[
-									{
-										title:'TOUR ' + _tour.toUpperCase () + ' EXAMPLES',
-										link:'javascript-feature-tours.html?tour=' + _tour
-									},
-									_divider,
-									{
-										title:'Index of ' + _tour + ' examples',
-										link:_tourIndexLink
-									}
-								]
-							}
-						}
-						var _examplesSubmenuItems = [
-							_examplesByTheme ('featured'),
-							_divider
-						];
+						var
+							_examplesByTheme = function (_tour) {
+								var _tourIndexLink = 'javascript-' + (_tour != 'all' ? (_tour + '-') : '') + 'examples.html';
+								return {
+									title:Uize.capFirstChar (_tour) + ' examples',
+									link:_tourIndexLink,
+									items:[
+										{
+											title:'TOUR ' + _tour.toUpperCase () + ' EXAMPLES',
+											link:'javascript-feature-tours.html?tour=' + _tour
+										},
+										_divider,
+										{
+											title:'Index of ' + _tour + ' examples',
+											link:_tourIndexLink
+										}
+									]
+								}
+							},
+							_examplesSubmenuItems = [
+								_examplesByTheme ('featured'),
+								_divider
+							]
+						;
 						Uize.forEach (
 							_infoForSiteMap.keywords,
 							function (_keyword) {

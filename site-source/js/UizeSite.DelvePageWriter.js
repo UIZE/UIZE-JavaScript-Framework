@@ -23,6 +23,8 @@ Uize.module ({
 		'UizeSite.Templates.DelvePageHtml'
 	],
 	builder:function () {
+		'use strict';
+
 		var _package = function () {};
 
 		/*** Public Static Methods ***/

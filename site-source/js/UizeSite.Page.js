@@ -31,6 +31,8 @@ Uize.module ({
 		'UizeSite.Templates.Footer'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
@@ -94,7 +96,7 @@ Uize.module ({
 				var _this = this;
 				if (!_this.isWired) {
 					/*** wire up mouseover on UIZE icon in title bar to load and show site menu ***/
-						function _wireUpSiteMenu () {
+						var _wireUpSiteMenu = function () {
 							_this.unwireNode ('homeLink','mouseover',_wireUpSiteMenu);
 							var
 								_siteMenuItems = [{title:'',link:'index.html',items:UizeSite.SiteMap ()}],
@@ -166,13 +168,13 @@ Uize.module ({
 							/*** wire menu ***/
 								_siteMenu.insertOrWireUi ();
 								_siteMenu.setExpandedDepth (1); // the mouseover event for the root level item (which sits above the UIZE logo) is not picked up by Safari on the iPad, so force the issue
-						}
+						};
 						_this.wireNode ('homeLink','mouseover',_wireUpSiteMenu);
 
 					/*** inject share this panel (if desired) ***/
 						if (_this._showShareThisPanel) {
 							/*** inject the HTML ***/
-								function _getMetaTagContent (_metaTagName) {
+								var _getMetaTagContent = function (_metaTagName) {
 									/* ISSUE:
 										can't use name property in find object, because it doesn't seem to find the tags in FF. Perhaps getElementsByName is being used in Uize.Node.find, or something, and that doesn't work with meta tags? Weird!
 									*/
@@ -181,7 +183,7 @@ Uize.module ({
 										self:function () {return this.name == _metaTagName}
 									}) [0];
 									return _metaTag ? _metaTag.content : '';
-								}
+								};
 								Uize.Node.injectHtml (
 									document.body,
 									UizeSite.Templates.ShareThisPanel.process ({

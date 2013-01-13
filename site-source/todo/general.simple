@@ -115,28 +115,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 		js/Uize.Widget.Tree.List.js
 		js/Uize.Widget.Tree.Menu.js
 		js/Uize.Widget.Tree.Select.js
-		js/Uize.Wsh.js
-		js/Uize.Xml.js
-		js/UizeSite.Delve.js
-		js/UizeSite.Delve.library.js
-		js/UizeSite.DelvePageWriter.js
-		js/UizeSite.DialogConfirm.js
-		js/UizeSite.DialogDate.js
-		js/UizeSite.js
-		js/UizeSite.Page.Doc.js
-		js/UizeSite.Page.Doc.library.js
-		js/UizeSite.Page.Example.js
-		js/UizeSite.Page.Example.library.js
-		js/UizeSite.Page.Example.Test.js
-		js/UizeSite.Page.Example.Test.library.js
-		js/UizeSite.Page.Home.js
-		js/UizeSite.Page.Home.library.js
-		js/UizeSite.Page.Index.js
-		js/UizeSite.Page.js
-		js/UizeSite.Page.library.js
-		js/UizeSite.ParamsInspector.InlinePresets.js
-		js/UizeSite.ParamsInspector.js
-		js/UizeSite.SiteMap.js
 		js/UizeSite.Templates.DataBar.js
 		js/UizeSite.Templates.DelvePageHtml.js
 		js/UizeSite.Templates.DelveUiHtml.js
@@ -159,15 +137,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 		js/UizeSite.Templates.SlideShow.Wipes.js
 		js/UizeSite.Templates.Tour.js
 		js/UizeSite.Templates.WidgetToGoTitle.js
-		js/UizeSite.TestDataFruits.js
-		js/UizeSite.TestDataObject.js
-		js/UizeSite.TestDataPhotos.js
-		js/UizeSite.TestWidget.js
-		js/UizeSite.WidgetToGoPage.Calculator.js
-		js/UizeSite.WidgetToGoPage.Calculator.library.js
-		js/UizeSite.WidgetToGoPage.Calendar.js
-		js/UizeSite.WidgetToGoPage.Calendar.library.js
-		js/UizeSite.WidgetToGoPage.js
 		js/~experimental/Uize.Color.xSvgColorNames.js
 		js/~experimental/Uize.Widget.Button-touch1.js
 		js/~experimental/Uize.Widget.Button-touch2.js

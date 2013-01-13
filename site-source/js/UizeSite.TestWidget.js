@@ -21,6 +21,8 @@ Uize.module ({
 	superclass:'Uize.Widget',
 	required:'Uize.Widget.Button',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

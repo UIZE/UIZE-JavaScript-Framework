@@ -2,6 +2,8 @@ Uize.module ({
 	name:'UizeSite.TestDataFruits',
 	required:'Uize.Data',
 	builder:function () {
+		'use strict';
+
 		var
 			_cachedData,
 			_package = function (_getCopy) {

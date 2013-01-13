@@ -25,6 +25,8 @@ Uize.module ({
 		'Uize.Widget.PopupPalette'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
@@ -74,26 +76,26 @@ Uize.module ({
 					/*** wire up the menu links ***/
 						var
 							_menu = _this.children.menu,
-							_widgetHomepageUrl = '../' + _this._title.toLowerCase ().replace (/\s+/g,'-') + '.html'
+							_widgetHomepageUrl = '../' + _this._title.toLowerCase ().replace (/\s+/g,'-') + '.html',
+							_launchPopup = function (_name,_url,_width,_height,_haveStuff) {
+								page.launchPopup ({
+									name:_name,
+									url:_url,
+									width:_width,
+									height:_height,
+									toolbar:_haveStuff,
+									location:_haveStuff,
+									directories:_haveStuff,
+									status:_haveStuff,
+									menubar:_haveStuff,
+									scrollbars:_haveStuff,
+									resizable:_haveStuff
+								});
+							},
+							_wireUpPopupLink = function (_nodeName,_url) {
+								_menu.wireNode (_nodeName,'click',function () {_launchPopup (null,_url,1010,690,1)});
+							}
 						;
-						function _launchPopup (_name,_url,_width,_height,_haveStuff) {
-							page.launchPopup ({
-								name:_name,
-								url:_url,
-								width:_width,
-								height:_height,
-								toolbar:_haveStuff,
-								location:_haveStuff,
-								directories:_haveStuff,
-								status:_haveStuff,
-								menubar:_haveStuff,
-								scrollbars:_haveStuff,
-								resizable:_haveStuff
-							});
-						}
-						function _wireUpPopupLink (_nodeName,_url) {
-							_menu.wireNode (_nodeName,'click',function () {_launchPopup (null,_url,1010,690,1)});
-						}
 						_wireUpPopupLink ('getThisWidget',_widgetHomepageUrl);
 						_wireUpPopupLink ('aboutThisWidget',_widgetHomepageUrl);
 						_wireUpPopupLink ('moreWidgets','../../javascript-widgets.html');

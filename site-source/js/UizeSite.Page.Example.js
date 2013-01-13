@@ -23,6 +23,8 @@ Uize.module ({
 		'Uize.Url'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),

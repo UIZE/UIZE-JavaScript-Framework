@@ -37,6 +37,8 @@ Uize.module ({
 	],
 	superclass:'Uize.Widget.Page',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _undefined;
 
@@ -74,7 +76,7 @@ Uize.module ({
 									_pageWidget = _this._getPageWidget ()
 								;
 								if (_pageWidget) {
-									function _widgetToItem (_widget,_level) {
+									var _widgetToItem = function (_widget,_level) {
 										var
 											_item = {
 												title:_this._getWidgetName (_widget),
@@ -100,7 +102,7 @@ Uize.module ({
 											_item.items = _itemItems
 										;
 										return _item;
-									}
+									};
 									_items [0] = _widgetToItem (_pageWidget,0);
 								}
 								return _items;
@@ -729,22 +731,22 @@ Uize.module ({
 			_classPrototype._getWidgetFromNodeId = function (_nodeId) {
 				var _this = this;
 				if (_nodeId) {
-					function _findWidgetWithIdPrefix (_parent) {
-						if (_parent.get ('idPrefix') == _idPrefix) {
-							return _parent;
-						} else {
-							var
-								_children = _parent.children,
-								_widget
-							;
-							for (var _childName in _children) {
-								if (_widget = _findWidgetWithIdPrefix (_children [_childName]))
-									return _widget
-								;
-							}
-						}
-					}
 					var
+						_findWidgetWithIdPrefix = function (_parent) {
+							if (_parent.get ('idPrefix') == _idPrefix) {
+								return _parent;
+							} else {
+								var
+									_children = _parent.children,
+									_widget
+								;
+								for (var _childName in _children) {
+									if (_widget = _findWidgetWithIdPrefix (_children [_childName]))
+										return _widget
+									;
+								}
+							}
+						},
 						_nodeNamePos = _nodeId.indexOf ('-'),
 						_idPrefix = _nodeNamePos > -1 ? _nodeId.slice (0,_nodeNamePos) : _nodeId
 					;
@@ -1025,7 +1027,7 @@ Uize.module ({
 							true
 						);
 
-						function _addWidgetsSummarySection (_title,_widgets,_contentsDefault) {
+						var _addWidgetsSummarySection = function (_title,_widgets,_contentsDefault) {
 							_addTabContentsSection (
 								_htmlChunks,
 								_title,
@@ -1057,7 +1059,7 @@ Uize.module ({
 									)
 									: ('<pre>' + _contentsDefault + '</pre>')
 							);
-						}
+						};
 
 						if (_objectIsWidget) {
 							/*** determine parentage ***/
@@ -1155,26 +1157,26 @@ Uize.module ({
 								var
 									_localized = _object.get ('localized'),
 									_stringNames = Uize.keys (_localized).sort (),
-									_localizeMethodCallPrefix = _objectInspectedPath + '.localize ('
-								;
-								function _getLocalizeMethodCall (_stringName) {
-									var
-										_stringValue = _localized [_stringName],
-										_totalTokens = 0,
-										_tokensHash = {},
-										_tokenMatcher = /\{([^\}]+)\}/g,
-										_tokenMatch
-									;
-									while (_tokenMatch = _tokenMatcher.exec (_stringValue)) {
-										_tokensHash [_tokenMatch [1]] = '';
-										_totalTokens++;
+									_localizeMethodCallPrefix = _objectInspectedPath + '.localize (',
+									_getLocalizeMethodCall = function (_stringName) {
+										var
+											_stringValue = _localized [_stringName],
+											_totalTokens = 0,
+											_tokensHash = {},
+											_tokenMatcher = /\{([^\}]+)\}/g,
+											_tokenMatch
+										;
+										while (_tokenMatch = _tokenMatcher.exec (_stringValue)) {
+											_tokensHash [_tokenMatch [1]] = '';
+											_totalTokens++;
+										}
+										return (
+											_localizeMethodCallPrefix + Uize.Json.to (_stringName) +
+											(_totalTokens ? ',' + Uize.Json.to (_tokensHash,'mini') : '') +
+											')'
+										);
 									}
-									return (
-										_localizeMethodCallPrefix + Uize.Json.to (_stringName) +
-										(_totalTokens ? ',' + Uize.Json.to (_tokensHash,'mini') : '') +
-										')'
-									);
-								}
+								;
 								_addTabContentsSection (
 									_htmlChunks,
 									'LOCALIZED STRINGS',
@@ -1395,14 +1397,16 @@ Uize.module ({
 							_featuresLength = _features.length
 						;
 						if (_featuresLength) {
-							var _objectPath = Uize.Util.Oop.getClassName (_object = Uize.Util.Oop.resolveToClass (_object));
-							function _getLinkedModuleCell (_object) {
-								return (
-									'<td class="moduleName">' +
-										_getObjectLink (Uize.Util.Oop.getClassName (_object),'',true) +
-									'</td>'
-								);
-							}
+							var
+								_objectPath = Uize.Util.Oop.getClassName (_object = Uize.Util.Oop.resolveToClass (_object)),
+								_getLinkedModuleCell = function (_object) {
+									return (
+										'<td class="moduleName">' +
+											_getObjectLink (Uize.Util.Oop.getClassName (_object),'',true) +
+										'</td>'
+									);
+								}
+							;
 							_htmlChunks.push (
 								'<table id="' + _this.children.objectInspectorFeatures.children.table.get ('idPrefix') + '" class="data">',
 									'<tr class="title">',
@@ -1604,32 +1608,32 @@ Uize.module ({
 							_left = Infinity,
 							_right = -Infinity,
 							_top = Infinity,
-							_bottom = -Infinity
-						;
-						function _expandCoords (_nodeCoords) {
-							if (_nodeCoords.area && _nodeCoords.seen) {
-								if (_nodeCoords.left < _left) _left = _nodeCoords.left;
-								if (_nodeCoords.top < _top) _top = _nodeCoords.top;
-								if (_nodeCoords.right > _right) _right = _nodeCoords.right;
-								if (_nodeCoords.bottom > _bottom) _bottom = _nodeCoords.bottom;
-							}
-						}
-						function _processWidget (_widget) {
-							/*** iterate through accessed DOM nodes ***/
-								var
-									_nodeCache = _this._getWidgetNodeCache (_widget),
-									_node
-								;
-								for (var _nodeName in _nodeCache)
-									if (_node = _nodeCache [_nodeName]) _expandCoords (_getCoords (_node))
-								;
+							_bottom = -Infinity,
+							_expandCoords = function (_nodeCoords) {
+								if (_nodeCoords.area && _nodeCoords.seen) {
+									if (_nodeCoords.left < _left) _left = _nodeCoords.left;
+									if (_nodeCoords.top < _top) _top = _nodeCoords.top;
+									if (_nodeCoords.right > _right) _right = _nodeCoords.right;
+									if (_nodeCoords.bottom > _bottom) _bottom = _nodeCoords.bottom;
+								}
+							},
+							_processWidget = function (_widget) {
+								/*** iterate through accessed DOM nodes ***/
+									var
+										_nodeCache = _this._getWidgetNodeCache (_widget),
+										_node
+									;
+									for (var _nodeName in _nodeCache)
+										if (_node = _nodeCache [_nodeName]) _expandCoords (_getCoords (_node))
+									;
 
-							/*** iterate through child widgets ***/
-								var _children = _widget.children;
-								for (var _childName in _children)
-									_processWidget (_children [_childName])
-								;
-						}
+								/*** iterate through child widgets ***/
+									var _children = _widget.children;
+									for (var _childName in _children)
+										_processWidget (_children [_childName])
+									;
+							}
+						;
 						_processWidget (_object);
 
 						if (_left != Infinity) {
@@ -1845,16 +1849,16 @@ Uize.module ({
 								for (var _treeListQueryName in _treeListQueries) {
 									var
 										_treeListQuery = _treeListQueries [_treeListQueryName],
-										_itemsGenerator = _treeListQuery._itemsGenerator
+										_itemsGenerator = _treeListQuery._itemsGenerator,
+										_countItems = function (_items) {
+											if (!_items) return 0;
+											var _totalItems = _items.length;
+											for (var _itemNo = _totalItems; --_itemNo > -1;)
+												_totalItems += _countItems (_items [_itemNo].items)
+											;
+											return _totalItems;
+										}
 									;
-									function _countItems (_items) {
-										if (!_items) return 0;
-										var _totalItems = _items.length;
-										for (var _itemNo = _totalItems; --_itemNo > -1;)
-											_totalItems += _countItems (_items [_itemNo].items)
-										;
-										return _totalItems;
-									}
 									_querySummaries.push (
 										_treeListQuery._title +
 										(

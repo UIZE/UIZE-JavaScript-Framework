@@ -25,6 +25,8 @@ Uize.module ({
 		'Uize.Url'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
@@ -173,64 +175,66 @@ Uize.module ({
 									tagName:'A',
 									href:/.+/
 								}),
-								_linkNo = 0
-							;
-							function _wireNextLink () {
-								var _lastLinkNo = _links.length - 1;
-								if (_linkNo <= _lastLinkNo) {
-									for (
-										var _lastLinkToWireNo = Math.min (_lastLinkNo,_linkNo + 19);
-										_linkNo <= _lastLinkToWireNo;
-										_linkNo++
-									)
-										Uize.Node.wire (
-											_links [_linkNo],
-											{
-												onmouseover:function () {
-													var
-														_anchor = _getAnchorFromLinkTag (this),
-														_title,
-														_description
-													;
-													if (_anchor) {
-														var _itemSpecifier = [0];
-														_anchor.replace (
-															/\d+/g,
-															function (_sectionSpecifier) {_itemSpecifier.push (_sectionSpecifier - 1)}
-														);
-														var _itemInfo = _contents.getItemInfoFromSpecifier (_itemSpecifier);
-														if (_itemInfo && _itemInfo.item) {
-															_title = _itemInfo.titleParts.slice (1).join (' ... ');
-															_description = _itemInfo.item.description || '';
-														}
-													} else {
-														var
-															_href = this.getAttribute ('href'),
-															_urlParts = Uize.Url.from (_href)
-														;
-														if (
-															_urlParts.protocol == 'http:' &&
-															_urlParts.host.indexOf ('uize.com') == -1
-														) {
-															_title = 'LINK TO EXTERNAL SITE';
-															_description = _href;
-														}
-													}
-													if (_title && _description) {
-														Uize.Node.setValue ('bodyLinkTooltipTitle',_title);
-														Uize.Node.setValue ('bodyLinkTooltipDescription',_description);
-														Uize.Tooltip.showTooltip ('bodyLinkTooltip');
-													}
-												},
-												onmouseout:function () {
-													Uize.Tooltip.showTooltip ('bodyLinkTooltip',false);
-												}
-											}
+								_linkNo = 0,
+								_wireNextLink = function () {
+									var _lastLinkNo = _links.length - 1;
+									if (_linkNo <= _lastLinkNo) {
+										for (
+											var _lastLinkToWireNo = Math.min (_lastLinkNo,_linkNo + 19);
+											_linkNo <= _lastLinkToWireNo;
+											_linkNo++
 										)
-									;
-									setTimeout (_wireNextLink,0);
+											Uize.Node.wire (
+												_links [_linkNo],
+												{
+													onmouseover:function () {
+														var
+															_anchor = _getAnchorFromLinkTag (this),
+															_title,
+															_description
+														;
+														if (_anchor) {
+															var _itemSpecifier = [0];
+															_anchor.replace (
+																/\d+/g,
+																function (_sectionSpecifier) {
+																	_itemSpecifier.push (_sectionSpecifier - 1);
+																}
+															);
+															var _itemInfo = _contents.getItemInfoFromSpecifier (_itemSpecifier);
+															if (_itemInfo && _itemInfo.item) {
+																_title = _itemInfo.titleParts.slice (1).join (' ... ');
+																_description = _itemInfo.item.description || '';
+															}
+														} else {
+															var
+																_href = this.getAttribute ('href'),
+																_urlParts = Uize.Url.from (_href)
+															;
+															if (
+																_urlParts.protocol == 'http:' &&
+																_urlParts.host.indexOf ('uize.com') == -1
+															) {
+																_title = 'LINK TO EXTERNAL SITE';
+																_description = _href;
+															}
+														}
+														if (_title && _description) {
+															Uize.Node.setValue ('bodyLinkTooltipTitle',_title);
+															Uize.Node.setValue ('bodyLinkTooltipDescription',_description);
+															Uize.Tooltip.showTooltip ('bodyLinkTooltip');
+														}
+													},
+													onmouseout:function () {
+														Uize.Tooltip.showTooltip ('bodyLinkTooltip',false);
+													}
+												}
+											)
+										;
+										setTimeout (_wireNextLink,0);
+									}
 								}
-							}
+							;
 							_wireNextLink ();
 
 						_superclass.prototype.wireUi.call (_this);

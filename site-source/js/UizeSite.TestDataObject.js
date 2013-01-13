@@ -1,6 +1,8 @@
 Uize.module ({
 	name:'UizeSite.TestDataObject',
 	builder:function () {
+		'use strict';
+
 		var _cachedData;
 
 		return function (_getCopy) {
