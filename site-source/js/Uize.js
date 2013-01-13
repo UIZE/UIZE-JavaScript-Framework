@@ -3791,6 +3791,18 @@ Uize = (function () {
 			*/
 		};
 
+		_package.global = new Function ('return (function () {return this}) ()');
+			/*?
+				Static Methods
+					Uize.global
+						Returns a reference to the global context.
+
+						SYNTAX
+						...........................
+						globalOBJ = Uize.global ();
+						...........................
+			*/
+
 		_package.globalEval = new _Function ('toEval','return eval (toEval)');
 			/*?
 				Static Methods
