@@ -163,7 +163,7 @@ Uize.module ({
 
 		function _matcherTest (_methodName) {
 			var
-				_globalContext = (function () {return this}) (),
+				_globalContext = Uize.global (),
 				_dummyGlobalTestMethodName = 'Uize_Test_Uize_Data_Matches_dummyTestMethod'
 			;
 			function _matcherCallSignatureTest (
