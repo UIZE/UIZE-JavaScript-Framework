@@ -171,7 +171,7 @@ Update Header Comments
 	Module Meta Data Comment
 		The module meta data comment is required for all UIZE modules and contains meta data information that is used on the [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page.
 
-		The meta data contained in the module meta data comments of all UIZE JavaScript modules is scooped up by the =_UizeSite.Build.BuildSotu.js= build script when it iterates through all the module files. This data is then presented on the State of the UIZE page in a sortable table. This information can then be used by UIZE framework developers to get a big picture view of where things stand with the framework, and can help in determining where development effort should be directed.
+		The meta data contained in the module meta data comments of all UIZE JavaScript modules is scooped up and presented in a sortable table in the [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page. This information can then be used by UIZE framework developers to get a big picture view of where things stand with the framework, and can help in determining where development effort should be directed.
 
 		The module meta data comment has the following syntax...
 

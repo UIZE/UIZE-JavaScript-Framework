@@ -36,10 +36,9 @@
 			'UizeSite.Build.BuildJsModules',
 			'UizeSite.Build.BuildWidgetPages',
 			'UizeSite.Build.BuildSimpleDocPages',
-			'UizeSite.Build.BuildIndexPages',
 			'UizeSite.Build.BuildSimpleDataPages',
 			'UizeSite.Build.BuildPagesFromSourceCode',
-			'UizeSite.Build.BuildSotu'
+			'UizeSite.Build.BuildIndexPages'
 		],
 		testSequence:[
 			'_Uize.Build.RunUnitTests-source.js silent=true',
