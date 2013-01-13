@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.DirectionalPad',
 	required:'Uize.Widget.Button',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Constructor ***/
 			var
 				_buttonDictionary = {

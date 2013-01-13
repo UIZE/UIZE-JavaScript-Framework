@@ -29,6 +29,8 @@
 Uize.module ({
 	name:'Uize.Widget.Collection.Dynamic.Table',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),

@@ -41,6 +41,8 @@ Uize.module ({
 		'Uize.Node.Classes'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -206,38 +208,39 @@ Uize.module ({
 					;
 
 					/*** wire up the preview shell node ***/
-						var _previewShellNode = _this.getNode ('previewShell') || 'imageLink';
-							/*?
-								Implied Nodes
-									previewShell
-										A node that serves as a shell around the =preview= implied node.
+						var
+							_previewShellNode = _this.getNode ('previewShell') || 'imageLink',
+								/*?
+									Implied Nodes
+										previewShell
+											A node that serves as a shell around the =preview= implied node.
 
-										Mouseover, mouseout, and click events are wired for this node in order to manage =over= and =selected= state for the instance, and in order to fire instance events, such as the ='Click Preview'=, ='Click Selected'=, and ='Item Mouse Down'= events.
+											Mouseover, mouseout, and click events are wired for this node in order to manage =over= and =selected= state for the instance, and in order to fire instance events, such as the ='Click Preview'=, ='Click Selected'=, and ='Item Mouse Down'= events.
 
-										NOTES
-										- this implied node is required, even if the optional =preview= implied node is omitted
+											NOTES
+											- this implied node is required, even if the optional =preview= implied node is omitted
 
-									imageLink -- DEPRECATED 2009-07-28
-										The deprecated =imageLink= implied node is an alternate / legacy name for the =previewShell= implied node.
+										imageLink -- DEPRECATED 2009-07-28
+											The deprecated =imageLink= implied node is an alternate / legacy name for the =previewShell= implied node.
 
-										If the =imageLink= implied node is used, it will behave in exactly the same way as the =previewShell= node. If you're writing new code, you should *not* use this implied node in your HTML markup.
+											If the =imageLink= implied node is used, it will behave in exactly the same way as the =previewShell= node. If you're writing new code, you should *not* use this implied node in your HTML markup.
 
-										NOTES
-										- this implied node is deprecated
-							*/
+											NOTES
+											- this implied node is deprecated
+								*/
+							_fireItemMouseDownEvent = function (_event) {
+								_this.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true})
+								/*?
+									Instance Events
+										Item Mouse Down
+											A bubbling instance event that is fired when the user mouses down on the =previewShell= implied node.
 
-						function _fireItemMouseDownEvent (_event) {
-							_this.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true})
-							/*?
-								Instance Events
-									Item Mouse Down
-										A bubbling instance event that is fired when the user mouses down on the =previewShell= implied node.
+											As a bubbling event, a handler for this event can be wired by an instance of the =Uize.Widget.Collection= class (or subclass) - that owns the collection items as child widgets - on itself. This is the case with the =Uize.Widget.Collection.Dynamic= class, which manages drag-and-drop for reordering of items in a collection.
 
-										As a bubbling event, a handler for this event can be wired by an instance of the =Uize.Widget.Collection= class (or subclass) - that owns the collection items as child widgets - on itself. This is the case with the =Uize.Widget.Collection.Dynamic= class, which manages drag-and-drop for reordering of items in a collection.
-
-										When this event is fired, the event object contains a =domEvent= property that is a reference to the mousedown DOM event, and a =bubble= property that is set to =true=.
-							*/
-						}
+											When this event is fired, the event object contains a =domEvent= property that is a reference to the mousedown DOM event, and a =bubble= property that is set to =true=.
+								*/
+							}
+						;
 						_this.wireNode (
 							_previewShellNode,
 							{

@@ -34,6 +34,8 @@ Uize.module ({
 	superclass:'Uize.Class',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Optimization ***/
 			var
 				/*** Scruncher Optimization ***/

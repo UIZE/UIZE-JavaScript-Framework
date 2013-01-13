@@ -48,6 +48,8 @@
 Uize.module ({
 	name:'Uize.Widget.SegmentDisplay.Seven',
 	builder:function (_superclass) {
+		'use strict';
+
 		var _class = _superclass.subclass ();
 
 		/*** Set Values for Public Static Properties ***/

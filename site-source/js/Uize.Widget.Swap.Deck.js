@@ -115,6 +115,8 @@
 Uize.module ({
 	name:'Uize.Widget.Swap.Deck',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

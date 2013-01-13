@@ -96,6 +96,8 @@ Uize.module ({
 		'Uize.Node.Event'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -230,11 +232,13 @@ Uize.module ({
 					};
 				}
 				if (_enabledWhen) {
-					var _affectedBy = _enabledWhen.affectedBy;
+					var
+						_updateButtonEnabled = function () {
+							_buttonWidget.set ({enabled:_enabledWhen.stateEvaluator.call (_this) ? 'inherit' : _false});
+						},
+						_affectedBy = _enabledWhen.affectedBy
+					;
 					if (typeof _affectedBy == 'string') _affectedBy = [_affectedBy];
-					function _updateButtonEnabled () {
-						_buttonWidget.set ({enabled:_enabledWhen.stateEvaluator.call (_this) ? 'inherit' : _false});
-					}
 					Uize.forEach (
 						_affectedBy,
 						function (_affectedByProperty) {_this.wire ('Changed.' + _affectedByProperty,_updateButtonEnabled)}
@@ -344,7 +348,7 @@ Uize.module ({
 					_itemWidgetsToRemoveLength = _itemWidgetsToRemove.length
 				;
 				if (_itemWidgetsToRemoveLength) {
-					function _remove () {_this.remove (_itemWidgetsToRemove,_byUser)}
+					var _remove = function () {_this.remove (_itemWidgetsToRemove,_byUser)};
 					if (_byUser) {
 						_this.confirm ({
 							message:

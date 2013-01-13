@@ -28,7 +28,7 @@ Uize.module ({
 	name:'Uize.Widget.FormElements',
 	required:'Uize.Widget.FormElement',
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
+		'use strict';
 
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass ();

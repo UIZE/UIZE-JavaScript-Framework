@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -365,12 +367,12 @@ Uize.module ({
 					);
 
 					/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/
-						function _initializeDefaultProperty (_defaultPropertyName,_widget,_impliedNodeName) {
+						var _initializeDefaultProperty = function (_defaultPropertyName,_widget,_impliedNodeName) {
 							if (!_this.get (_defaultPropertyName)) {
 								var _innerHtml = (_widget.getNode (_impliedNodeName) || _sacredEmptyObject).innerHTML;
 								_innerHtml && _this.set (_defaultPropertyName,_innerHtml);
 							}
-						}
+						};
 						_initializeDefaultProperty ('defaultTitle',_this,'title');
 						_initializeDefaultProperty ('defaultOkText',_this.children.ok,'text');
 						_initializeDefaultProperty ('defaultCancelText',_this.children.cancel,'text');
@@ -704,10 +706,10 @@ Uize.module ({
 									_this.setNodeStyle (['','shield'],{zIndex:4000 + _highestZIndexSlotNo * 10});
 
 								/*** position and display ***/
-									function _hideWithVisibilityForDimensionGetting (_hideWithVisibility) {
+									var _hideWithVisibilityForDimensionGetting = function (_hideWithVisibility) {
 										_this.showNode ('',!_hideWithVisibility);
 										_this.displayNode ('',_hideWithVisibility);
-									}
+									};
 									_hideWithVisibilityForDimensionGetting (_true);
 									_this._updateUiDimsIfShown ();
 									_this._updateUiPositionIfShown ();

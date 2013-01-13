@@ -13,6 +13,8 @@ Uize.module ({
 	name:'Uize.Widget.Page.xDeferredLinks',
 	required:'Uize.Node',
 	builder:function (_class) {
+		'use strict';
+
 		_class.prototype.wireDeferredLinks = function() {
 			var
 				_this = this,

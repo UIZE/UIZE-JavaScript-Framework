@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Widget.FormElement.Text',
 	required:'Uize.Node',
 	builder:function(_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_supportsPlaceholder = typeof document != 'undefined'
@@ -45,37 +47,42 @@ Uize.module ({
 						_this.wire(
 							'Changed.focused',
 							function() {
-								var
-									_focused = _this.get('focused'),
-									_placeholder = _this._placeholder,
-									_value = _this.get('value')
-								;
-
-								if (_placeholder && !_supportsPlaceholder) {
-									function _setText (_newText) { _this.isWired && _this.setNodeValue ('input', _newText) }
-
-									if (_focused && _value == _placeholder)
-										_setText ('');
-									else if (!_focused && !_value)
-										_setText (_placeholder)
-								}
-
-								if (_this.isWired && _focused) {
+								if (_this.isWired) {
 									var
-										_inputNode = _this.getNode('input'),
-										_inputNodeValue = _this.getNodeValue(_inputNode),
-										_valueLength = _inputNodeValue ? _inputNodeValue.length : 0
+										_focused = _this.get('focused'),
+										_placeholder = _this._placeholder
 									;
 
-									if (_valueLength > 0) {
-										if (_inputNode.createTextRange) {
-											var _range = _inputNode.createTextRange();
-											_range.move('character', _valueLength);
-											_range.select();
-										}
-										else if (_inputNode.setSelectionRange)
-											_inputNode.setSelectionRange(_valueLength, _valueLength)
+									if (_placeholder && !_supportsPlaceholder) {
+										var
+											_newText,
+											_value = _this.get('value')
 										;
+										if (_focused && _value == _placeholder)
+											_newText = '';
+										else if (!_focused && !_value)
+											_newText = _placeholder
+										;
+										_newText != undefined && _this.setNodeValue ('input', _newText);
+									}
+
+									if (_focused) {
+										var
+											_inputNode = _this.getNode('input'),
+											_inputNodeValue = _this.getNodeValue(_inputNode),
+											_valueLength = _inputNodeValue ? _inputNodeValue.length : 0
+										;
+
+										if (_valueLength > 0) {
+											if (_inputNode.createTextRange) {
+												var _range = _inputNode.createTextRange();
+												_range.move('character', _valueLength);
+												_range.select();
+											}
+											else if (_inputNode.setSelectionRange)
+												_inputNode.setSelectionRange(_valueLength, _valueLength)
+											;
+										}
 									}
 								}
 							}

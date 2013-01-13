@@ -29,6 +29,8 @@
 Uize.module ({
 	name:'Uize.Widget.Swap.Image.Cycle',
 	builder:function  (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,

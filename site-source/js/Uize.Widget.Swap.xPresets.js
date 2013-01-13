@@ -57,6 +57,8 @@
 Uize.module ({
 	name:'Uize.Widget.Swap.xPresets',
 	builder:function (_class) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,

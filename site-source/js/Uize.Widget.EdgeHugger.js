@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Node'
 	],
 	builder:function (_superclass) {
+		'use string';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,

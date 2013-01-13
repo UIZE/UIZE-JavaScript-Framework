@@ -31,6 +31,8 @@ Uize.module ({
 		'Uize.Node.Util'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _Uize_Node = Uize.Node;
 
@@ -64,7 +66,7 @@ Uize.module ({
 							_nextItem.style.padding = '0px';
 							_this.prepareForNextItem (_currentItem,_nextItem);
 
-							function _loadNextImage () {
+							var _loadNextImage = function () {
 								var _image = _this._imagesLoaded [_this._src];
 								_Uize_Node.setStyle (
 									_nextItem,
@@ -105,7 +107,7 @@ Uize.module ({
 									_nextItemImg.width = _image._width;
 									_nextItemImg.height = _image._height;
 								}
-							}
+							};
 							if (_this._imagesLoaded [_this._src]) {
 								_loadNextImage ();
 							} else {

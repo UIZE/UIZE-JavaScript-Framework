@@ -47,6 +47,8 @@ Uize.module ({
 	name:'Uize.Widget.Committer',
 	required:'Uize.Widget.Button',
 	builder:function  (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_null = null,

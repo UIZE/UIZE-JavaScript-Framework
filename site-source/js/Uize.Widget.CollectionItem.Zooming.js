@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -233,17 +235,22 @@ Uize.module ({
 							(_this._previewZoomDisplayed && _this._previewZoomVisible)
 						)
 					) {
-						var _coords = {};
-						function _updateCoordsForAxis (_axisIsY) {
-							var _axisDimName = _axisIsY ? 'height' : 'width';
-							_coords [_axisIsY ? 'top' : 'left'] =
-								_this.get (_axisIsY ? 'alignY' : 'alignX') *
-								(
-									_this._previewShellNodeCoords [_axisDimName] -
-									(_coords [_axisDimName] = _this._previewNodeDims [_axisDimName] * _this._displayedZoomPower)
-								)
-							;
-						}
+						var
+							_coords = {},
+							_updateCoordsForAxis = function (_axisIsY) {
+								var _axisDimName = _axisIsY ? 'height' : 'width';
+								_coords [_axisIsY ? 'top' : 'left'] =
+									_this.get (_axisIsY ? 'alignY' : 'alignX') *
+									(
+										_this._previewShellNodeCoords [_axisDimName] -
+										(
+											_coords [_axisDimName] =
+												_this._previewNodeDims [_axisDimName] * _this._displayedZoomPower
+										)
+									)
+								;
+							}
+						;
 						_updateCoordsForAxis (0);
 						_updateCoordsForAxis (1);
 						_this.setNodeStyle (_this._previewZoomVisible ? 'previewZoom' : 'previewZoomLowRes',_coords);
@@ -304,7 +311,7 @@ Uize.module ({
 								_this.set ({inUse:_true});
 
 								/*** wire up document mousemove event ***/
-									function _handleMouseMove () {
+									var _handleMouseMove = function () {
 										var
 											_eventAbsPos = _Uize_Node.getEventAbsPos (),
 											_deadMargin = _this._deadMargin
@@ -319,7 +326,7 @@ Uize.module ({
 											)
 										}
 										_this._previewShellNodeCoords && _this.set ({_alignX:_getAlignForAxis (0),_alignY:_getAlignForAxis (1)});
-									}
+									};
 									_handleMouseMove ();
 									_this.wireNode (document.documentElement,'mousemove',_handleMouseMove);
 							}

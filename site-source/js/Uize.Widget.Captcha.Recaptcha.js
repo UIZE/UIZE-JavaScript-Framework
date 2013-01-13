@@ -34,6 +34,8 @@ Uize.module ({
 	name:'Uize.Widget.Captcha.Recaptcha',
 	required:'Uize.Comm.Script',
 	builder:function (_superclass) {
+		'use strict';
+
 		var
 			_class = _superclass.subclass (
 				null,

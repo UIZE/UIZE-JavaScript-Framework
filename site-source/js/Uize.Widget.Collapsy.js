@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Collapsy',
 	required:'Uize.Node.Classes',
 	builder:function(_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -79,7 +81,7 @@ Uize.module ({
 				var _this = this;
 
 				if (!_this.isWired) {
-					function _collapse(_collapsed) { _this.set({_collapsed:_collapsed}) }
+					var _collapse = function (_collapsed) { _this.set({_collapsed:_collapsed}) };
 
 					_this.wireNode (
 						'',

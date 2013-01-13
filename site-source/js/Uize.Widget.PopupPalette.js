@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Widget.Button'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -252,13 +254,12 @@ Uize.module ({
 										_nodeToPositionAdjacentTo =
 											Uize.isFunction (_positioning)
 												? _positioning(_paletteNode)
-												: _this._selector.getNode ()
+												: _this._selector.getNode (),
+										_displayHiddenForPositioning = function (_before) {
+											_this.showNode ('palette',!_before);
+											_this.displayNode ('palette',_before);
+										}
 									;
-									function _displayHiddenForPositioning (_before) {
-										_this.showNode ('palette',!_before);
-										_this.displayNode ('palette',_before);
-									}
-
 									if (_Uize_Node.isNode(_nodeToPositionAdjacentTo)) {
 										_displayHiddenForPositioning (_true);
 										_Uize_Node.setAbsPosAdjacentTo (_paletteNode, _nodeToPositionAdjacentTo);

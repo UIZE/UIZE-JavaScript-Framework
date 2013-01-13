@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Resizer.Marquee',
 	required:'Uize.Node',
 	builder:function  (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -153,29 +155,31 @@ Uize.module ({
 				if (!_this.isWired) {
 					/*** wire up the marquee shell ***/
 						if (_this._shellLive) {
-							var _shell = _this.getNode ('shell');
-							_Uize_Node.setStyle (_shell,{cursor:'crosshair'});
-							function _initiateDrag (_event) {
-								if (_this.get ('enabledInherited')) {
-									_event || (_event = event);
-									var
-										_handleName = _this.get ('aspectRatio') == null ? 'northWest' : 'southEast',
-											/* NOTE:
-												because we have the don't-swap-sides hack for when an aspect ratio is set, we can only create marquee by dragging from top left to bottom right, and so we start drag with the bottom right handle
-											*/
-										_shellCoords = _Uize_Node.getCoords (_shell),
-										_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
-									;
-									_this.set ({creatingNew:_true});
-									_this.setPositionDuringDrag (
-										_eventAbsPos.left - _shellCoords.left,
-										_eventAbsPos.top - _shellCoords.top,
-										_this.get ('minWidth'),
-										_this.get ('minHeight')
-									);
-									return _this.children [_handleName].initiate (_event);
+							var
+								_shell = _this.getNode ('shell'),
+								_initiateDrag = function (_event) {
+									if (_this.get ('enabledInherited')) {
+										_event || (_event = event);
+										var
+											_handleName = _this.get ('aspectRatio') == null ? 'northWest' : 'southEast',
+												/* NOTE:
+													because we have the don't-swap-sides hack for when an aspect ratio is set, we can only create marquee by dragging from top left to bottom right, and so we start drag with the bottom right handle
+												*/
+											_shellCoords = _Uize_Node.getCoords (_shell),
+											_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
+										;
+										_this.set ({creatingNew:_true});
+										_this.setPositionDuringDrag (
+											_eventAbsPos.left - _shellCoords.left,
+											_eventAbsPos.top - _shellCoords.top,
+											_this.get ('minWidth'),
+											_this.get ('minHeight')
+										);
+										return _this.children [_handleName].initiate (_event);
+									}
 								}
-							}
+							;
+							_Uize_Node.setStyle (_shell,{cursor:'crosshair'});
 							_this.wireNode (_shell,{mousedown:_initiateDrag,touchstart:_initiateDrag});
 						}
 

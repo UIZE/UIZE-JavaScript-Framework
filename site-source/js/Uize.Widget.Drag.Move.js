@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Drag.Move',
 	required:'Uize.Node',
 	builder:function  (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_Uize_Node = Uize.Node

@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Widget.Dialog.Confirm',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_false = false,

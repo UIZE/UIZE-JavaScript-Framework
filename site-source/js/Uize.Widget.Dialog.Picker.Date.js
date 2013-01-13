@@ -33,6 +33,8 @@ Uize.module ({
 	name:'Uize.Widget.Dialog.Picker.Date',
 	required:'Uize.Widget.Calendar',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass ();
 

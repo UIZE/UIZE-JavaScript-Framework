@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Tree.Select',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_null = null,
@@ -90,12 +92,12 @@ Uize.module ({
 					var
 						_thisLevel = _this._levels [_thisLevelNo],
 						_thisSelect = _this.getNode ('level' + _thisLevelNo),
-						_nextLevelNo = _thisLevelNo + 1
+						_nextLevelNo = _thisLevelNo + 1,
+						_enableSelect = function (_select,_mustEnable) {
+							_select.disabled = !_mustEnable;
+							_this.displayNode (_select,_mustEnable || _this._displayDisabledSelects);
+						}
 					;
-					function _enableSelect (_select,_mustEnable) {
-						_select.disabled = !_mustEnable;
-						_this.displayNode (_select,_mustEnable || _this._displayDisabledSelects);
-					}
 					for (var _levelNo = _nextLevelNo - 1; ++_levelNo <= _this._totalLevels;) {
 						var _select = _this.getNode ('level' + _levelNo);
 						_select.options.length = 0;
@@ -110,12 +112,14 @@ Uize.module ({
 					_this.setNodeProperties ('submitButton',{disabled:!_selectionComplete});
 					if (_itemSelectedHasChildren) {
 						/* populate values for the next level's select box */
-						function _addOption (_optionText) {
-							_nextSelect.options [_nextSelect.options.length] = new Option (_optionText);
-						}
 						_this._levels.length = _nextLevelNo + 1;
 						_this._levels [_nextLevelNo] = _itemSelected.items;
-						var _nextSelect = _this.getNode ('level' + _nextLevelNo);
+						var
+							_nextSelect = _this.getNode ('level' + _nextLevelNo),
+							_addOption = function (_optionText) {
+								_nextSelect.options [_nextSelect.options.length] = new Option (_optionText);
+							}
+						;
 						_addOption (_this._chooseText);
 						Uize.forEach (_itemSelected.items,function (_item) {_addOption (_item.title)});
 						_enableSelect (_nextSelect,_true);
@@ -133,8 +137,15 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					function _getOnItemSelectedHandler (_levelNo) {return function () {_this._onItemSelected (_levelNo)}}
-					for (var _levelNo = 0; ++_levelNo <= _this._maxLevels;)
+					for (
+						var
+							_levelNo = 0,
+							_getOnItemSelectedHandler = function (_levelNo) {
+								return function () {_this._onItemSelected (_levelNo)};
+							}
+						;
+						++_levelNo <= _this._maxLevels;
+					)
 						_this.wireNode ('level' + _levelNo,'change',_getOnItemSelectedHandler (_levelNo))
 					;
 

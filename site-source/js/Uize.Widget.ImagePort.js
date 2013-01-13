@@ -30,6 +30,8 @@ Uize.module ({
 	name:'Uize.Widget.ImagePort',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,

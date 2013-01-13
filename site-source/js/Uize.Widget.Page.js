@@ -41,6 +41,8 @@ Uize.module ({
 	name:'Uize.Widget.Page',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -139,7 +141,7 @@ Uize.module ({
 
 				/*** if any widgets to adopt, require widget class modules and recurse tree to add widgets ***/
 					if (_hasChildrenToAdopt) {
-						function _traverseChildrenToAdoptTree (_childCreator,_childInitializer) {
+						var _traverseChildrenToAdoptTree = function (_childCreator,_childInitializer) {
 							function _traverseChild (_parent,_childName,_childProperties) {
 								var
 									_childChildren = _childProperties.children,
@@ -154,7 +156,7 @@ Uize.module ({
 								;
 							}
 							_traverseChildren (_this,_childrenToAdoptTree);
-						}
+						};
 
 						/*** recurse tree, determining required widget class modules ***/
 							var
@@ -467,7 +469,7 @@ Uize.module ({
 						_dialogWidget.removeUi ();
 						_dialogWidgetParent.removeChild (_dialogWidgetName);
 					}
-					function _createDialogWidget () {
+					var _createDialogWidget = function () {
 						var _dialogWidgetClassName = _params.widgetClassName;
 						Uize.require (
 							_dialogWidgetClassName,
@@ -486,7 +488,7 @@ Uize.module ({
 								_showDialog (_refetch ? 'refetched' : 'initial');
 							}
 						);
-					}
+					};
 					_componentProfile
 						? _this.loadHtmlIntoNode (
 							{

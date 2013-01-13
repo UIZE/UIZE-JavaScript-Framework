@@ -31,6 +31,8 @@ Uize.module ({
 		'Uize.Node.Event'
 	],
 	builder:function  (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
@@ -287,11 +289,11 @@ Uize.module ({
 							}
 						);
 					} else {
-						function _cleanupAfterMouseDrag (_event) {
+						var _cleanupAfterMouseDrag = function (_event) {
 							Uize.copyInto (document,_oldDocumentEvents);
 							_Uize_Node.display (_dragShield,_false);
 							_this._dragCancelled || _endDragWithPossibleReleaseTravel (_event);
-						}
+						};
 						document.onmousemove = function (_event) {
 							_event || (_event = window.event);
 							_hasStickyDragIssue && _event.button == 0
@@ -326,7 +328,7 @@ Uize.module ({
 					var _rootNode = _this.getNode ();
 					if (_rootNode) {
 						_rootNode.onmousedown = Uize.returnFalse;
-						function _initiate (_event) {return _this.initiate (_event,_true)}
+						var _initiate = function (_event) {return _this.initiate (_event,_true)};
 						_this.wireNode (_rootNode,{mousedown:_initiate,touchstart:_initiate});
 					}
 					if (!_dragShield) {

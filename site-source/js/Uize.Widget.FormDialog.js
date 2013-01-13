@@ -29,7 +29,7 @@ Uize.module ({
 	superclass:'Uize.Widget.Dialog',
 	required:'Uize.Widget.Form',
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
+		'use strict';
 
 		/*** Class Constructor ***/
 			var

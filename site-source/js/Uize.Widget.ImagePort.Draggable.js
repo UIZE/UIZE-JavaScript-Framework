@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.ImagePort.Draggable',
 	required:'Uize.Widget.Drag',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -67,7 +69,7 @@ Uize.module ({
 												)
 											});
 										} else {
-											function _calculateNewAlignValue (_axis) {
+											var _calculateNewAlignValue = function (_axis) {
 												return (
 													Uize.constrain (
 														_dragStartAlign [_axis] + _drag.eventDeltaPos [_axis] *
@@ -80,7 +82,7 @@ Uize.module ({
 														1
 													)
 												);
-											}
+											};
 											_this.set ({
 												alignX:_calculateNewAlignValue (0),
 												alignY:_calculateNewAlignValue (1)

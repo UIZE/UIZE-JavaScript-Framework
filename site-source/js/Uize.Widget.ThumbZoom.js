@@ -38,6 +38,8 @@ Uize.module ({
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -130,123 +132,128 @@ Uize.module ({
 						_thumbNode, _zoomedImageNode,
 						_showFade = _this.showFade,
 						_hideFade = _this.hideFade,
-						_shieldFade = _this.shieldFade
-					;
-					function _prepareZoomedImageNode () {
-						if (!_zoomedImageNode) {
-							_zoomedImageNode = document.createElement ('img');
-							_Uize_Node.setStyle (
-								_zoomedImageNode,
-								{
-									display:'none',
-									position:'absolute',
-									zIndex:50001
-								}
-							);
-							_this.wireNode (
-								_zoomedImageNode,
-								'load',
-								function (_event) {
-									_this._showLoadingProgress && _this._loadingProgress.set ({inProgress:_false});
-									_Uize_Node.display (_zoomedImageNode);
-									_Uize_Node.setOpacity (_zoomedImageNode,1);
-									var
-										_coords = _Uize_Node.getCoords (_thumbNode),
-										_windowDims = _Uize_Node.getDimensions (window),
-										_scaledImageCoords = _Uize_Widget.ImagePort.getScaledRect ({
-											portWidth:_windowDims.width,
-											portHeight:_windowDims.height,
-											rectWidth:_zoomedImageNode.width,
-											rectHeight:_zoomedImageNode.height,
-											alignX:.5,
-											alignY:.5,
-											sizingLowerBound:0,
-											sizingUpperBound:'fit',
-											sizingValue:.95,
-											maxScaling:1
-										}),
-										_documentElement = document.documentElement
-									;
-									_scaledImageCoords.left += _documentElement.scrollLeft;
-									_scaledImageCoords.top += _documentElement.scrollTop;
-
-									/*** register document handlers for dismissing zoomed image ***/
+						_shieldFade = _this.shieldFade,
+						_prepareZoomedImageNode = function () {
+							if (!_zoomedImageNode) {
+								_zoomedImageNode = document.createElement ('img');
+								_Uize_Node.setStyle (
+									_zoomedImageNode,
+									{
+										display:'none',
+										position:'absolute',
+										zIndex:50001
+									}
+								);
+								_this.wireNode (
+									_zoomedImageNode,
+									'load',
+									function (_event) {
+										_this._showLoadingProgress && _this._loadingProgress.set ({inProgress:_false});
+										_Uize_Node.display (_zoomedImageNode);
+										_Uize_Node.setOpacity (_zoomedImageNode,1);
 										var
-											_oldOnkeydown = document.onkeydown,
-											_oldOnmousemove = document.onmousemove,
-											_oldOnmousedown = document.onmousedown,
-											_initiatingClientX = _event.clientX,
-											_initiatingClientY = _event.clientY
+											_coords = _Uize_Node.getCoords (_thumbNode),
+											_windowDims = _Uize_Node.getDimensions (window),
+											_scaledImageCoords = _Uize_Widget.ImagePort.getScaledRect ({
+												portWidth:_windowDims.width,
+												portHeight:_windowDims.height,
+												rectWidth:_zoomedImageNode.width,
+												rectHeight:_zoomedImageNode.height,
+												alignX:.5,
+												alignY:.5,
+												sizingLowerBound:0,
+												sizingUpperBound:'fit',
+												sizingValue:.95,
+												maxScaling:1
+											}),
+											_documentElement = document.documentElement
 										;
-										function _dismissImage () {
-											_showFade.stop ();
-											document.onmousemove = _oldOnmousemove;
-											document.onmousedown = _oldOnmousedown;
-											document.onkeydown = _oldOnkeydown;
-											_shieldFade.stop ();
-											_Uize_Node.display (_shield,_false);
-											_hideFade.start ();
-											return _false;
-										}
-										document.onkeydown = document.onmousedown = _dismissImage;
-										document.onmousemove = function (_event) {
-											_event = _event || event;
-											return (
-												_event.clientX != _initiatingClientX || _event.clientY != _initiatingClientY
-													? _dismissImage ()
-													: _false
-											);
-										};
+										_scaledImageCoords.left += _documentElement.scrollLeft;
+										_scaledImageCoords.top += _documentElement.scrollTop;
 
-									/*** setup fade properties and initiate zoom out ***/
-										function _getCoordsStyleProperties (_coords) {
-											return {left:_coords.left,top:_coords.top,width:_coords.width,height:_coords.height};
+										/*** register document handlers for dismissing zoomed image ***/
+											var
+												_oldOnkeydown = document.onkeydown,
+												_oldOnmousemove = document.onmousemove,
+												_oldOnmousedown = document.onmousedown,
+												_initiatingClientX = _event.clientX,
+												_initiatingClientY = _event.clientY
+											;
+											function _dismissImage () {
+												_showFade.stop ();
+												document.onmousemove = _oldOnmousemove;
+												document.onmousedown = _oldOnmousedown;
+												document.onkeydown = _oldOnkeydown;
+												_shieldFade.stop ();
+												_Uize_Node.display (_shield,_false);
+												_hideFade.start ();
+												return _false;
+											}
+											document.onkeydown = document.onmousedown = _dismissImage;
+											document.onmousemove = function (_event) {
+												_event = _event || event;
+												return (
+													_event.clientX != _initiatingClientX || _event.clientY != _initiatingClientY
+														? _dismissImage ()
+														: _false
+												);
+											};
+
+										/*** setup fade properties and initiate zoom out ***/
+											function _getCoordsStyleProperties (_coords) {
+												return {
+													left:_coords.left,
+													top:_coords.top,
+													width:_coords.width,
+													height:_coords.height
+												};
+											}
+											_showFade.start ({
+												startValue:_getCoordsStyleProperties (_coords),
+												endValue:_getCoordsStyleProperties (_scaledImageCoords)
+											});
+									}
+								);
+								document.body.appendChild (_zoomedImageNode);
+								if (!_shield)
+									_shield = _Uize_Widget.Drag.insertShield ({
+										zIndex:50000,
+										backgroundColor:'#000'
+									})
+								;
+								_showFade.wire ({
+									'Changed.value':
+										function () {
+											_Uize_Node.setStyle (_zoomedImageNode,_showFade.valueOf ());
+										},
+									Done:
+										function () {
+											_Uize_Node.setOpacity (_shield,0);
+											_Uize_Node.display (_shield);
+											_shieldFade.start ();
 										}
-										_showFade.start ({
-											startValue:_getCoordsStyleProperties (_coords),
-											endValue:_getCoordsStyleProperties (_scaledImageCoords)
-										});
-								}
-							);
-							document.body.appendChild (_zoomedImageNode);
-							if (!_shield)
-								_shield = _Uize_Widget.Drag.insertShield ({
-									zIndex:50000,
-									backgroundColor:'#000'
-								})
-							;
-							_showFade.wire ({
-								'Changed.value':
-									function () {
-										_Uize_Node.setStyle (_zoomedImageNode,_showFade.valueOf ());
-									},
-								Done:
-									function () {
-										_Uize_Node.setOpacity (_shield,0);
-										_Uize_Node.display (_shield);
-										_shieldFade.start ();
-									}
-							});
-							_hideFade.wire ({
-								'Changed.value':
-									function () {
-										_Uize_Node.setOpacity (_zoomedImageNode,_hideFade);
-									},
-								Done:
-									function () {
-										_Uize_Node.display (_zoomedImageNode,_false);
-									}
-							});
-							_shieldFade.wire ({
-								'Changed.value':
-									function () {
-										_Uize_Node.setOpacity (_shield,_shieldFade);
-									}
-							});
+								});
+								_hideFade.wire ({
+									'Changed.value':
+										function () {
+											_Uize_Node.setOpacity (_zoomedImageNode,_hideFade);
+										},
+									Done:
+										function () {
+											_Uize_Node.display (_zoomedImageNode,_false);
+										}
+								});
+								_shieldFade.wire ({
+									'Changed.value':
+										function () {
+											_Uize_Node.setOpacity (_shield,_shieldFade);
+										}
+								});
+							}
 						}
-					}
+					;
 					/*** wire up the thumb nodes ***/
-						function _handleThumbNodeClick () {
+						var _handleThumbNodeClick = function () {
 							_thumbNode = this;
 							var
 								_clickHandled = _false,
@@ -286,7 +293,7 @@ Uize.module ({
 								}
 							}
 							return !_clickHandled;
-						}
+						};
 						_Uize_Node.doForAll (
 							_Uize_Node.find (_this._thumbNodes),
 							function (_node) {

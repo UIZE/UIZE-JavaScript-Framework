@@ -37,6 +37,8 @@ Uize.module ({
 		'Uize.Widget.ImagePort'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -126,12 +128,13 @@ Uize.module ({
 					var _magImageHighResUrl = _this._getMagImageHighResUrl (_this._magPower);
 					if (_magImageHighResUrl !== _this._displayedMagImageHighResUrl) {
 						/* NOTE: check if image in magImagePort needs to be updated */
-						function _displayHighRes (_mustDisplay) {
-							_Uize_Node.show (_this.getNode ('magImageHighRes'),_mustDisplay);
-							_this.displayNode ('magImageLowRes',!_mustDisplay);
-						}
-
-						var _magImageHighResUrlCached = _imagesCached [_magImageHighResUrl];
+						var
+							_displayHighRes = function (_mustDisplay) {
+								_Uize_Node.show (_this.getNode ('magImageHighRes'),_mustDisplay);
+								_this.displayNode ('magImageLowRes',!_mustDisplay);
+							},
+							_magImageHighResUrlCached = _imagesCached [_magImageHighResUrl]
+						;
 						if (!_magImageHighResUrlCached) {
 							/*** choose placeholder image URL to use while high res is loading ***/
 								var
@@ -164,12 +167,12 @@ Uize.module ({
 						_displayHighRes (_false);
 
 						/*** loading indicator for loading the high res image ***/
-							function _highResLoaded () {
+							var _highResLoaded = function () {
 								_this.unwireNode ('magImageHighRes');
 								_imagesCached [_magImageHighResUrl] = 1;
 								_this.displayNode ('highResLoading',_false);
 								_displayHighRes (_true);
-							}
+							};
 							_this.wireNode (
 								'magImageHighRes',
 								{
@@ -233,10 +236,10 @@ Uize.module ({
 						*/
 				}
 				if (_this._magInUse ()) {
-					function _reflectChangedMagPower () {
+					var _reflectChangedMagPower = function () {
 						_this._updateUiCalibrateDuringUse ();
 						_this._updateUiDuringUse ();
-					}
+					};
 					if (_this._fade) {
 						var _fade = _this._fade;
 						_fade.set ({
@@ -311,13 +314,13 @@ Uize.module ({
 						;
 
 					/*** wire up the mouseover and mouseout events ***/
-						function _displayMagUi (_mustDisplay) {
+						var _displayMagUi = function (_mustDisplay) {
 							_this.displayNode (
 								['magImagePortShell','highlight',_this._showBeam ? _this._beam.getNode () : _null],
 								_mustDisplay
 							);
 							_this._magShown = _mustDisplay;
-						}
+						};
 						_this.wireNode (
 							'',
 							'mouseover',
@@ -327,17 +330,19 @@ Uize.module ({
 								/*** move highlight, beam, and image port nodes to document root (if not already done) ***/
 									if (!_this._nodesMovedToRoot) {
 										_this._nodesMovedToRoot = _true;
-										var _docBody = document.body;
-										function _moveNodeToRoot (_node) {
-											_docBody.insertBefore (_node,_docBody.childNodes [0]);
-											_Uize_Node.setStyle (
-												_node,
-												{
-													zIndex:100000,
-													position:'absolute'
-												}
-											);
-										}
+										var
+											_docBody = document.body,
+											_moveNodeToRoot = function (_node) {
+												_docBody.insertBefore (_node,_docBody.childNodes [0]);
+												_Uize_Node.setStyle (
+													_node,
+													{
+														zIndex:100000,
+														position:'absolute'
+													}
+												);
+											}
+										;
 										_moveNodeToRoot (_this.getNode ('magImagePortShell'));
 										_moveNodeToRoot (_this.getNode ('highlight'));
 										_this._showBeam && _moveNodeToRoot (_this._beam.getNode ());

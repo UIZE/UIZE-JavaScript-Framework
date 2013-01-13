@@ -28,7 +28,7 @@ Uize.module ({
 	name:'Uize.Widget.SlideShow.AutoAdvance.WithSlideSelectors',
 	required:'Uize.Widget.Options',
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
+		'use strict';
 
 		/*** Class Constructor ***/
 			var

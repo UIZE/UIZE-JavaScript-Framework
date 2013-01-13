@@ -33,6 +33,8 @@
 Uize.module ({
 	name:'Uize.Widget.Captcha',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Constructor ***/
 			var
 				_class = _superclass.subclass (),

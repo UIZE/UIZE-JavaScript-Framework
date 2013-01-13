@@ -149,6 +149,8 @@ Uize.module ({
 		'Uize.Array.Order'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_null = null,
@@ -650,47 +652,48 @@ Uize.module ({
 								_nextItem = _this.getNode ('item' + _nextItemNo)
 							;
 							_this.prepareForNextItem (_currentItem,_nextItem);
-							var _paneNodes = _this._paneNodes;
+							var
+								_paneNodes = _this._paneNodes,
+								_loadNextImage = function () {
+									var
+										_image = _this._imagesLoaded [_this._src],
+										_paneNodesLength = _paneNodes.length,
+										_src = _this._src,
+										_totalLoaded = 0
+									;
+									function _nextImageLoaded () {
+										/*** update the img node ("this" is a reference to the img node firing the event) ***/
+											this.Uize_Widget_ImageWipe_src = _src;
+											_this.unwireNode (this);
 
-							function _loadNextImage () {
-								var
-									_image = _this._imagesLoaded [_this._src],
-									_paneNodesLength = _paneNodes.length,
-									_src = _this._src,
-									_totalLoaded = 0
-								;
-								function _nextImageLoaded () {
-									/*** update the img node ("this" is a reference to the img node firing the event) ***/
-										this.Uize_Widget_ImageWipe_src = _src;
-										_this.unwireNode (this);
-
-									if (++_totalLoaded == _paneNodesLength) {
-										_currentItem.style.zIndex = '0';
-										_nextItem.style.zIndex = '1';
-										_this._currentItemNo = _nextItemNo;
-										_this.setCurrentItem (_nextItem);
+										if (++_totalLoaded == _paneNodesLength) {
+											_currentItem.style.zIndex = '0';
+											_nextItem.style.zIndex = '1';
+											_this._currentItemNo = _nextItemNo;
+											_this.setCurrentItem (_nextItem);
+										}
+									}
+									for (var _paneNodeNo = -1; ++_paneNodeNo < _paneNodesLength;) {
+										var _paneNode = _paneNodes [_paneNodeNo];
+										if (_paneNode.Uize_Widget_ImageWipe_src === _src) {
+											/* NOTE:
+												In IE 5.2 and Safari 1.3- on Mac OS X, the load event for an IMG node is not fired when that node's src is set again to its current value. So, when switching back and forth between two image URLs, the load event cannot be relied upon for triggering the reveal, since we're toggling between two IMG nodes and sometimes an IMG node used to display an image will already have loaded that image from a previous toggle.
+											*/
+											_nextImageLoaded ();
+										} else {
+											_this.wireNode (
+												_paneNode,
+												{
+													load:_nextImageLoaded,
+													error:_nextImageLoaded,
+													abort:_nextImageLoaded
+												}
+											);
+											_paneNode.src = _src;
+										}
 									}
 								}
-								for (var _paneNodeNo = -1; ++_paneNodeNo < _paneNodesLength;) {
-									var _paneNode = _paneNodes [_paneNodeNo];
-									if (_paneNode.Uize_Widget_ImageWipe_src === _src) {
-										/* NOTE:
-											In IE 5.2 and Safari 1.3- on Mac OS X, the load event for an IMG node is not fired when that node's src is set again to its current value. So, when switching back and forth between two image URLs, the load event cannot be relied upon for triggering the reveal, since we're toggling between two IMG nodes and sometimes an IMG node used to display an image will already have loaded that image from a previous toggle.
-										*/
-										_nextImageLoaded ();
-									} else {
-										_this.wireNode (
-											_paneNode,
-											{
-												load:_nextImageLoaded,
-												error:_nextImageLoaded,
-												abort:_nextImageLoaded
-											}
-										);
-										_paneNode.src = _src;
-									}
-								}
-							}
+							;
 							if (_this._imagesLoaded [_this._src]) {
 								_loadNextImage ();
 							} else {

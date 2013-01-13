@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Dialog.Picker.Palette',
 	required:'Uize.Util.Coupler',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass (
 				null,

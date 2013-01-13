@@ -158,6 +158,8 @@ Uize.module ({
 	name:'Uize.Widget.SlideShow',
 	required:'Uize.Widget.Button',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var _undefined;
 
@@ -254,10 +256,10 @@ Uize.module ({
 					_children = _this.children
 				;
 				if (_children.previous) {
-					function _updateButtonState (_buttonName,_canNavigate) {
-						_children [_buttonName].set ({enabled:_totalSlides && _canNavigate ? 'inherit' : false});
-					}
 					var
+						_updateButtonState = function (_buttonName,_canNavigate) {
+							_children [_buttonName].set ({enabled:_totalSlides && _canNavigate ? 'inherit' : false});
+						},
 						_totalSlides = _this._totalSlides,
 						_slideNo = _this._slideNo,
 						_notAtFirst = !!_slideNo,

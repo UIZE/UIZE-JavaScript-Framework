@@ -36,6 +36,8 @@ Uize.module ({
 		'Uize.Node.Event'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -353,9 +355,9 @@ Uize.module ({
 
 					/*** Initialize get-set properties to be form attributes if not specified ***/
 						if (_formNode) {
-							function _hasNoValue(_propertyValue) {
+							var _hasNoValue = function (_propertyValue) {
 								return _propertyValue == _null;
-							}
+							};
 
 							if (_hasNoValue(_this._action)) _this._action = _formNode.action;
 							if (_hasNoValue(_this._enctype)) _this._enctype = _formNode.enctype;

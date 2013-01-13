@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Picker.Palette.Selector',
 	required:'Uize.Widget.Button.ValueDisplay.Selector',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

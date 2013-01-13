@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Tooltip'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -253,7 +255,7 @@ Uize.module ({
 											_setInDrag (_false);
 											_this.displayNode ('insertionMarker',_false);
 
-											function _finishDrag () {
+											var _finishDrag = function () {
 												if (_insertPointItem && !_drag.get ('dragCancelled')) {
 													var _itemWidgets = _this.itemWidgets;
 
@@ -284,7 +286,7 @@ Uize.module ({
 														_this.fire ('Items Reordered');
 														_this._fireItemsChangedEvent ();
 												}
-											}
+											};
 											_this._confirmToDrag
 												? _this.confirm ({
 													state:'warning',

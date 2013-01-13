@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Count',
 	required:'Uize.Widget.Flip',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),

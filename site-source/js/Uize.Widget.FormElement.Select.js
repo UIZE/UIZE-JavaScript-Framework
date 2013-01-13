@@ -27,6 +27,8 @@
 Uize.module ({
 	name:'Uize.Widget.FormElement.Select',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

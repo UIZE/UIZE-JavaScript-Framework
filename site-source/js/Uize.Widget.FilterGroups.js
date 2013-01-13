@@ -31,6 +31,8 @@ Uize.module ({
 		'Uize.Data'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,

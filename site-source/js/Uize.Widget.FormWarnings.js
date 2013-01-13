@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.FormWarnings',
 	required:'Uize.Template',	// for the JST
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),

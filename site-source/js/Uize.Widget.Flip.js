@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Flip',
 	required:'Uize.Fade',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

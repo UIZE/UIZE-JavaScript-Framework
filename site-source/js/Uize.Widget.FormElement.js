@@ -32,7 +32,9 @@ Uize.module ({
 		'Uize.Widget.Collapsy',
 		'Uize.Node.Classes'
 	],
-	builder:function(_superclass){
+	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -219,44 +221,41 @@ Uize.module ({
 						_validators = _validators ? _validators.concat(_moreValidators) : _moreValidators
 					;
 
-					function _setIsValid(_isValid) { _this.set({_isValid:_isValid}) }
+					var _setIsValid = function (_isValid) { _this.set({_isValid:_isValid}) };
 
 					if (_validators != _null) {
 						var
 							_value = _this._validateWhen == _tentativeValueChanged
 								? _this._tentativeValue : _this._value,
 							_validatorsLength = _validators.length,
-							_validatorNo = -1
-						;
+							_validatorNo = -1,
+							_processNextValidator = function () {
+								if (++_validatorNo < _validatorsLength) {
+									var
+										_handleIsValid = function (_isValid, _newWarningMessage) {
+											if (_isValid == _false) {
+												_this.set({_warningMessage:_newWarningMessage || _this._initialWarningMessage});
+												_setIsValid(_false);
+											}
+											else _processNextValidator();
+										},
+										_validatorToEvaluate = _validators[_validatorNo],
+										_isValid = _validatorToEvaluate instanceof RegExp
+											? _validatorToEvaluate.test (_value)
+											: (
+												_validatorToEvaluate.func || Uize.isFunction (_validatorToEvaluate)
+													? (
+														_validatorToEvaluate.func || _validatorToEvaluate
+													).call(_this, _value, _handleIsValid)
+													: _value == _validatorToEvaluate
+											)
+									;
 
-						function _processNextValidator() {
-							if (++_validatorNo < _validatorsLength) {
-								function _handleIsValid(_isValid, _newWarningMessage) {
-									if (_isValid == _false) {
-										_this.set({_warningMessage:_newWarningMessage || _this._initialWarningMessage});
-										_setIsValid(_false);
-									}
-									else _processNextValidator();
+									_handleIsValid(_isValid, _validatorToEvaluate.msg);
 								}
-
-								var
-									_validatorToEvaluate = _validators[_validatorNo],
-									_isValid = _validatorToEvaluate instanceof RegExp
-										? _validatorToEvaluate.test (_value)
-										: (
-											_validatorToEvaluate.func || Uize.isFunction (_validatorToEvaluate)
-												? (
-													_validatorToEvaluate.func || _validatorToEvaluate
-												).call(_this, _value, _handleIsValid)
-												: _value == _validatorToEvaluate
-										)
-								;
-
-								_handleIsValid(_isValid, _validatorToEvaluate.msg);
+								else _setIsValid(_true);
 							}
-							else _setIsValid(_true);
-						}
-
+						;
 						_processNextValidator();
 					}
 					else _setIsValid(_true)
@@ -274,17 +273,17 @@ Uize.module ({
 							_this._type = _inputNode.type;
 							_this._elementName = _inputNode.name;
 
-						/*** Helper functions ***/
-							function _fire (_eventName, _domEvent) { _this.fire ({name:_eventName,domEvent:_domEvent}) }
-							function _fireClick (_event) { _fire ('Click', _event) }
-							function _fireKeyUp (_event) { _fire ('Key Up', _event) }
-							function _setValue (_isInitial) {
-								_this.set ({_value:_this.getNodeValue(_inputNode)});
-								!_isInitial && _this._isDirty != _true &&
-									_this.set({_isDirty:_true});
-							}
-
 						var
+							/*** Helper functions ***/
+								_fire = function (_eventName, _domEvent) { _this.fire ({name:_eventName,domEvent:_domEvent}) },
+								_fireClick = function (_event) { _fire ('Click', _event) },
+								_fireKeyUp = function (_event) { _fire ('Key Up', _event) },
+								_setValue = function (_isInitial) {
+									_this.set ({_value:_this.getNodeValue(_inputNode)});
+									!_isInitial && _this._isDirty != _true &&
+										_this.set({_isDirty:_true});
+								},
+
 							_eventsToWire = {
 								blur:function () {
 									_setValue();

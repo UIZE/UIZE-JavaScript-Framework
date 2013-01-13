@@ -163,6 +163,8 @@ Uize.module ({
 		'Uize.Date.Formatter'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -287,11 +289,11 @@ Uize.module ({
 						_viewMonthRange = _Uize_Date.getRangeAround (_firstOfViewMonth,'month'),
 						_viewYearRange = _Uize_Date.getRangeAround (_firstOfViewMonth,'year'),
 						_minValue = _this._minValue,
-						_maxValue = _this._maxValue
+						_maxValue = _this._maxValue,
+						_enableWidget = function (_widget,_mustEnable) {
+							_widget.set ({enabled:_mustEnable ? 'inherit' : _false});
+						}
 					;
-					function _enableWidget (_widget,_mustEnable) {
-						_widget.set ({enabled:_mustEnable ? 'inherit' : _false});
-					}
 					_enableWidget (_this._previousMonthButton,!_minValue || _minValue < _viewMonthRange.minValue);
 					_enableWidget (_this._nextMonthButton,!_maxValue || _maxValue > _viewMonthRange.maxValue);
 					_enableWidget (_this._previousYearButton,!_minValue || _minValue < _viewYearRange.minValue);
@@ -332,14 +334,14 @@ Uize.module ({
 			var _updateUiGrid = _classPrototype._updateUiGrid = function () {
 				var _this = this;
 				if (_this.isWired) {
-					function _dateAsInt (_date,_defaultValue) {
-						return (
-							_date
-								? _date.getFullYear () * 10000 + (_date.getMonth () + 1) * 100 + _date.getDate ()
-								: _defaultValue
-						);
-					}
 					var
+						_dateAsInt = function (_date,_defaultValue) {
+							return (
+								_date
+									? _date.getFullYear () * 10000 + (_date.getMonth () + 1) * 100 + _date.getDate ()
+									: _defaultValue
+							);
+						},
 						_value = _this._value,
 						_minValue = _this._minValue,
 						_maxValue = _this._maxValue,
@@ -433,24 +435,29 @@ Uize.module ({
 								*/
 
 						/*** wire the day selectors ***/
-							function _wireDaySelector (_dayNo) {
-								_this.wireNode (
-									'day' + _dayNo,
-									'click',
-									function () {_this.set ({_value:new Date (_year,_month,_dayNo)})}
-								);
-								/*?
-									Implied Nodes
-										day[dayNo]
-											One of a number of nodes in the `date grid` that are used to indicate the days of the month of the year currently in view by the instance and that may be wired up to let the user select the corresponding date.
+							for (
+								var
+									_dayNo = _daysInMonth + 1,
+									_wireDaySelector = function (_dayNo) {
+										_this.wireNode (
+											'day' + _dayNo,
+											'click',
+											function () {_this.set ({_value:new Date (_year,_month,_dayNo)})}
+										);
+										/*?
+											Implied Nodes
+												day[dayNo]
+													One of a number of nodes in the `date grid` that are used to indicate the days of the month of the year currently in view by the instance and that may be wired up to let the user select the corresponding date.
 
-											The HTML for these implied nodes are generated dynamically when the contents of the =grid= implied node is replaced with the updated date grid HTML. The specific =day[dayNo]= implied node that corresponds to the currently selected date will be highlighted. All =day[dayNo]= implied nodes that represent dates that are outside of the `valid date range` will be grayed out.
+													The HTML for these implied nodes are generated dynamically when the contents of the =grid= implied node is replaced with the updated date grid HTML. The specific =day[dayNo]= implied node that corresponds to the currently selected date will be highlighted. All =day[dayNo]= implied nodes that represent dates that are outside of the `valid date range` will be grayed out.
 
-											NOTES
-											- see the related =grid= implied node
-								*/
-							}
-							for (var _dayNo = _daysInMonth + 1; --_dayNo > 0;)
+													NOTES
+													- see the related =grid= implied node
+										*/
+									}
+								;
+								--_dayNo > 0;
+							)
 								_wireDaySelector (_dayNo)
 							;
 					}

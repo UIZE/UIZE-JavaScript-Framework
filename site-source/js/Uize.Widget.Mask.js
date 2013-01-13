@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Mask',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -133,23 +135,23 @@ Uize.module ({
 					var
 						_shell = _this.getNode (),
 						_img = _this._img,
-						_imgNode = _this.getNode('img')
+						_imgNode = _this.getNode('img'),
+						_getClonedMaskNode = function () {
+							var _node = _shell.cloneNode (_false);
+							_node.removeAttribute ('id');
+							_Uize_Node.setStyle (
+								_node,
+								{
+									position:'absolute',
+									display:_img ? 'none' : 'block',
+									visibility:'inherit'
+								}
+							);
+							_shell.appendChild (_node);
+							return _node;
+						}
 					;
 					_this._shellBoundsObj = _Uize_Node.getDimensions (_shell);
-					function _getClonedMaskNode () {
-						var _node = _shell.cloneNode (_false);
-						_node.removeAttribute ('id');
-						_Uize_Node.setStyle (
-							_node,
-							{
-								position:'absolute',
-								display:_img ? 'none' : 'block',
-								visibility:'inherit'
-							}
-						);
-						_shell.appendChild (_node);
-						return _node;
-					}
 					_this._maskNodeTop = _getClonedMaskNode ();
 					_this._maskNodeLeft = _getClonedMaskNode ();
 					_this._maskNodeRight = _getClonedMaskNode ();

@@ -86,6 +86,8 @@ Uize.module ({
 		'Uize.Node'
 	],
 	builder:function (_class) {
+		'use strict';
+
 		/*** Names for Namespaced Privates ***/
 			var
 				_privatesNamespace = 'Uize.Widget.Dialog.xResizable.',
@@ -156,7 +158,7 @@ Uize.module ({
 					});
 
 					/*** code to resync resizer position ***/
-						function _syncResizerToDialogPosition () {
+						var _syncResizerToDialogPosition = function () {
 							if (_this.isWired && _this.get ('shown')) {
 								var _rootNode = _this.getNode ();
 								if (Uize.Node.getStyle (_rootNode,'display') != 'none') {

@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Util.Coupler'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass (
 				null,

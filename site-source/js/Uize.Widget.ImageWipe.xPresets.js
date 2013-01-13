@@ -59,6 +59,8 @@
 Uize.module ({
 	name:'Uize.Widget.ImageWipe.xPresets',
 	builder:function (_class) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,

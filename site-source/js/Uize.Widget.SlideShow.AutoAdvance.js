@@ -28,7 +28,7 @@ Uize.module ({
 	name:'Uize.Widget.SlideShow.AutoAdvance',
 	required:'Uize.Widget.Button',
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
+		'use strict';
 
 		/*** Class Constructor ***/
 			var

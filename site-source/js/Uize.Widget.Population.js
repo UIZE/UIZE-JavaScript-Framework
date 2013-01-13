@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Population',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -83,45 +85,45 @@ Uize.module ({
 						var
 							_nearestPropertyPath = '',
 							_nearestPropertyValue = '',
-							_nearestPropertyIndex = _templateStrLength
-						;
-						function _findNearestPropertyName (_object,_objectPath) {
-							var _propertyIndex;
-							for (var _propertyName in _object) {
-								var
-									_propertyValue = _object [_propertyName],
-									_propertyValueIsObject = typeof _propertyValue == 'object',
-									_propertyPath = '(' + _objectPath + ' || {}) [' + _getQuotedStr (_propertyName,'\'') + ']'
-								;
-								if (_propertyValueIsObject && typeof _propertyValue.length != 'number') {
-									_findNearestPropertyName (_propertyValue,_propertyPath);
-								} else {
-									if (_propertyValueIsObject) {
-										var _subTemplateItem = _propertyValue [0];
-										_propertyIndex = _templateStr.indexOf (_subTemplateItem.OPENER_TOKEN,_index);
-										if (_propertyIndex > -1) {
-											var _closerTokenPos = _templateStr.indexOf (
-												_subTemplateItem.CLOSER_TOKEN,_propertyIndex + _subTemplateItem.OPENER_TOKEN.length
-											);
-											if (_closerTokenPos > -1) {
-												_propertyValue = _templateStr.slice (
-													_propertyIndex,_closerTokenPos + _subTemplateItem.CLOSER_TOKEN.length
-												);
-											} else {
-												_propertyIndex = -1;
-											}
-										}
+							_nearestPropertyIndex = _templateStrLength,
+							_findNearestPropertyName = function (_object,_objectPath) {
+								var _propertyIndex;
+								for (var _propertyName in _object) {
+									var
+										_propertyValue = _object [_propertyName],
+										_propertyValueIsObject = typeof _propertyValue == 'object',
+										_propertyPath = '(' + _objectPath + ' || {}) [' + _getQuotedStr (_propertyName,'\'') + ']'
+									;
+									if (_propertyValueIsObject && typeof _propertyValue.length != 'number') {
+										_findNearestPropertyName (_propertyValue,_propertyPath);
 									} else {
-										_propertyIndex = _templateStr.indexOf (_propertyValue,_index);
-									}
-									if (_propertyIndex > -1 && _propertyIndex < _nearestPropertyIndex) {
-										_nearestPropertyPath = _propertyPath;
-										_nearestPropertyValue = _propertyValue;
-										_nearestPropertyIndex = _propertyIndex;
+										if (_propertyValueIsObject) {
+											var _subTemplateItem = _propertyValue [0];
+											_propertyIndex = _templateStr.indexOf (_subTemplateItem.OPENER_TOKEN,_index);
+											if (_propertyIndex > -1) {
+												var _closerTokenPos = _templateStr.indexOf (
+													_subTemplateItem.CLOSER_TOKEN,_propertyIndex + _subTemplateItem.OPENER_TOKEN.length
+												);
+												if (_closerTokenPos > -1) {
+													_propertyValue = _templateStr.slice (
+														_propertyIndex,_closerTokenPos + _subTemplateItem.CLOSER_TOKEN.length
+													);
+												} else {
+													_propertyIndex = -1;
+												}
+											}
+										} else {
+											_propertyIndex = _templateStr.indexOf (_propertyValue,_index);
+										}
+										if (_propertyIndex > -1 && _propertyIndex < _nearestPropertyIndex) {
+											_nearestPropertyPath = _propertyPath;
+											_nearestPropertyValue = _propertyValue;
+											_nearestPropertyIndex = _propertyIndex;
+										}
 									}
 								}
 							}
-						}
+						;
 						_findNearestPropertyName (_templateItem,'obj');
 						_insertionObjects.push ({
 							_precedingText:_templateStr.slice (_index,_nearestPropertyIndex),

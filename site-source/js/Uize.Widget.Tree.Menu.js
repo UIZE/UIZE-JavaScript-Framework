@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.Tree.Menu',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		var
 			_undefined,
 			_true = true,
@@ -79,19 +81,21 @@ Uize.module ({
 						/* NOTE:
 							sure, you could have more anonymous functions in this code, but sharing a single reference across all occurrences should provide better performance
 						*/
-						function _clearDismissTimeout () {
-							if (_this._dismissTimeout)
-								_this._dismissTimeout = clearTimeout (_this._dismissTimeout)
-							;
-						}
-						function _dismiss () {
-							_clearDismissTimeout ();
-							_this.setExpandedDepth (0);
-						}
-						function _setDismissTimeout () {
-							_clearDismissTimeout ();
-							_this._dismissTimeout = setTimeout (_dismiss,_this._dismissDelay);
-						}
+						var
+							_clearDismissTimeout = function () {
+								if (_this._dismissTimeout)
+									_this._dismissTimeout = clearTimeout (_this._dismissTimeout)
+								;
+							},
+							_dismiss = function () {
+								_clearDismissTimeout ();
+								_this.setExpandedDepth (0);
+							},
+							_setDismissTimeout = function () {
+								_clearDismissTimeout ();
+								_this._dismissTimeout = setTimeout (_dismiss,_this._dismissDelay);
+							}
+						;
 						_this.wireNode (
 							_itemSpecifier + (_itemSpecifier && 'Children'),
 							{

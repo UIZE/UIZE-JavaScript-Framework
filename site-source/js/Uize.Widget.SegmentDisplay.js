@@ -28,6 +28,8 @@ Uize.module ({
 	name:'Uize.Widget.SegmentDisplay',
 	required:'Uize.Node.Classes',
 	builder:function (_superclass) {
+		'use strict';
+
 		var
 			_class = _superclass.subclass (),
 			_classPrototype = _class.prototype
