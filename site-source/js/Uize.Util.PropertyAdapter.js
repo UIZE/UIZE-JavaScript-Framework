@@ -330,7 +330,7 @@ Uize.module ({
 				;
 
 				function _wireOrUnwireWirings (_wiringMethodName) {
-					for (var _wiringNo = -1, _wiringsLength = _wirings.length; ++_wiringNo < _wiringsLength;)
+					for (var _wiringNo = -1, _wiringsLength = _wirings.length, _wiring; ++_wiringNo < _wiringsLength;)
 						(_wiring = _wirings [_wiringNo])._instance [_wiringMethodName] (_wiring._eventName,_wiring._handler)
 					;
 				}
