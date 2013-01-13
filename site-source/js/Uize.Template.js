@@ -131,7 +131,10 @@
 
 Uize.module ({
 	name:'Uize.Template',
-	required:'Uize.String',
+	required:[
+		'Uize.String',
+		'Uize.String.Replace'
+	],
 	builder:function () {
 		'use strict';
 
@@ -142,8 +145,14 @@ Uize.module ({
 				_false = false,
 				_string = 'string',
 				_Uize_String = Uize.String,
-				_Uise_String_splitInTwo = _Uize_String.splitInTwo,
-				_Uise_String_trim = _Uize_String.trim
+				_Uize_String_splitInTwo = _Uize_String.splitInTwo,
+				_Uize_String_trim = _Uize_String.trim,
+				_jsonStringLiteralEscaper = _Uize_String.Replace.replacerByLookup ({
+					'\\':'\\\\',
+					'\n':'\\n',
+					'\r':'\\r',
+					'\'':'\\\''
+				})
 			;
 
 		/*** General Variables ***/
@@ -175,9 +184,9 @@ Uize.module ({
 						++_encodingNo < _encodingsLength;
 					) {
 						if (
-							_encodingName = _Uise_String_trim (
+							_encodingName = _Uize_String_trim (
 								(
-									_encodingNameAndParams = _Uise_String_splitInTwo (
+									_encodingNameAndParams = _Uize_String_splitInTwo (
 										_encodings [_reverse ? _encodingsLength - _encodingNo - 1 : _encodingNo],
 										'{'
 									)
@@ -190,7 +199,7 @@ Uize.module ({
 							if (_encoding = _package.encodings [_encodingName]) {
 								if (_reverse) _encodingReverse = !_encodingReverse;
 								var
-									_encodingParams = _Uise_String_trim (_encodingNameAndParams [1]),
+									_encodingParams = _Uize_String_trim (_encodingNameAndParams [1]),
 									_encoderOrDecoderProfileProperty = _encodingReverse ? 'from' : 'to',
 									_encoderOrDecoderProfile = _encoding [_encoderOrDecoderProfileProperty]
 								;
@@ -463,15 +472,7 @@ Uize.module ({
 							_staticSegment = _staticSegment.replace (_trailingLinebreakAndPossibleWhitespaceRegExp,'')
 						;
 						_staticSegment &&
-							_pushToOutputBuffer.push (
-								'\'' +
-								_staticSegment
-									.replace (/\\/g,'\\\\')
-									.replace (/\n/g,'\\n')
-									.replace (/\r/g,'\\r')
-									.replace (/\'/g,'\\\'') +
-								'\''
-							);
+							_pushToOutputBuffer.push ('\'' + _jsonStringLiteralEscaper (_staticSegment) + '\'')
 						;
 					}
 					if (_notAtEnd) {
@@ -487,7 +488,7 @@ Uize.module ({
 									<%= expression %>
 									<%= expression -> encoding1 -> encoding2 %>
 							*/
-							var _expressionAndEncodings = _Uise_String_splitInTwo (
+							var _expressionAndEncodings = _Uize_String_splitInTwo (
 								_codeChunkIsAssignment
 									? _codeChunk.replace (_codeChunkStartsWithEqualsRegExp,'')
 									: 'input' + _codeChunk,
@@ -495,7 +496,7 @@ Uize.module ({
 							);
 							_pushToOutputBuffer.push (
 								_expandEncodingsChain (
-									_Uise_String_trim (_expressionAndEncodings [0]),
+									_Uize_String_trim (_expressionAndEncodings [0]),
 									_expressionAndEncodings [1],
 									_false,
 									function (_encoderOrDecoderKey,_encoderOrDecoderRequired) {
