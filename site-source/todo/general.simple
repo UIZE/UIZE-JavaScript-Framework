@@ -10,41 +10,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 
 		REMAINING TO UPGRADE
 		..............................................................................
-		examples/js/animals.js
-		examples/js/plants.js
-		js/Uize.Templates.Calculator.js
-		js/Uize.Templates.Calendar.js
-		js/Uize.Templates.Collection.js
-		js/Uize.Templates.CollectionItem.js
-		js/Uize.Templates.ColorInfo.js
-		js/Uize.Templates.HashTable.js
-		js/Uize.Templates.List.js
-		js/Uize.Templates.Log.js
-		js/Uize.Templates.SevenSegmentDisplay.js
-		js/Uize.Templates.SevenSegmentDisplayDimsCss.js
-		js/Uize.Templates.SimpleDoc.js
-		js/UizeSite.Templates.DataBar.js
-		js/UizeSite.Templates.DelvePageHtml.js
-		js/UizeSite.Templates.DelveUiHtml.js
-		js/UizeSite.Templates.Dialog.Confirm.js
-		js/UizeSite.Templates.Dialog.js
-		js/UizeSite.Templates.Dialog.Picker.Date.js
-		js/UizeSite.Templates.Dialog.Picker.js
-		js/UizeSite.Templates.Footer.js
-		js/UizeSite.Templates.IndexPage.js
-		js/UizeSite.Templates.JavaScriptSourceSample.js
-		js/UizeSite.Templates.js
-		js/UizeSite.Templates.ListingsPage.js
-		js/UizeSite.Templates.ParamsInspector.js
-		js/UizeSite.Templates.ParamsTable.js
-		js/UizeSite.Templates.ShareThisPanel.js
-		js/UizeSite.Templates.SimpleDoc.js
-		js/UizeSite.Templates.SimpleDocSample.js
-		js/UizeSite.Templates.SlideShow.Basic.js
-		js/UizeSite.Templates.SlideShow.js
-		js/UizeSite.Templates.SlideShow.Wipes.js
-		js/UizeSite.Templates.Tour.js
-		js/UizeSite.Templates.WidgetToGoTitle.js
 		js/~experimental/Uize.Color.xSvgColorNames.js
 		js/~experimental/Uize.Widget.Button-touch1.js
 		js/~experimental/Uize.Widget.Button-touch2.js

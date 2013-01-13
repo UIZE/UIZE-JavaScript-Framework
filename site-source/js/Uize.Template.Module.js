@@ -62,6 +62,8 @@ Uize.module ({
 					'	name:' + Uize.Json.to (_moduleName) + ',',
 					'	required:' + Uize.String.Lines.indent (Uize.Json.to (_required),1,'\t',false) + ',',
 					'	builder:function () {',
+					'		\'use strict\';',
+					'',
 					'		var _package = function () {};',
 					'',
 					'		/*** Public Static Methods ***/',
