@@ -163,7 +163,7 @@ Uize.module ({
 
 		function _matcherTest (_methodName) {
 			var
-				_globalContext = Uize.global (),
+				_global = Uize.global (),
 				_dummyGlobalTestMethodName = 'Uize_Test_Uize_Data_Matches_dummyTestMethod'
 			;
 			function _matcherCallSignatureTest (
@@ -181,14 +181,14 @@ Uize.module ({
 							_keysSeenByMatcher.push (_key);
 						}
 						if (_useStringMatcher)
-							_globalContext [_dummyGlobalTestMethodName] = _matcher
+							_global [_dummyGlobalTestMethodName] = _matcher
 						;
 						Uize.Data.Matches [_methodName] (
 							_source,
 							_useStringMatcher ? _dummyGlobalTestMethodName + ' (value,key)' : _matcher
 						);
 						if (_useStringMatcher)
-							delete _globalContext [_dummyGlobalTestMethodName]
+							delete _global [_dummyGlobalTestMethodName]
 						;
 						return (
 							this.expect (_expectedMatchValues,_valuesSeenByMatcher) &&

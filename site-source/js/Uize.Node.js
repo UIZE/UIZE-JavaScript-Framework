@@ -124,7 +124,7 @@ Uize.module ({
 			}
 
 			function _makeGlobalScopedFunction (_function) {
-				var _paramsStr = (_function = _function + '').slice (_function.indexOf ('(') + 1,_function.indexOf (')'));
+				var _paramsStr = (_function += '').slice (_function.indexOf ('(') + 1,_function.indexOf (')'));
 				return Function.apply (
 					{},
 					(_paramsStr ? _paramsStr.split (',') : []).concat (
