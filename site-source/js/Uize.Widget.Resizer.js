@@ -354,7 +354,7 @@ Uize.module ({
 																			: _bounds [_axis + 2] - _newCenter [_axis]
 																	) * 2
 																);
-															}
+															},
 															_updateDimByCornerPoint = function (_axis) {
 																_setDimWithConstraint (
 																	_axis,
