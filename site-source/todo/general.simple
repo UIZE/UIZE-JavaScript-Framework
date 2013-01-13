@@ -12,8 +12,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 		..............................................................................
 		examples/js/animals.js
 		examples/js/plants.js
-		js/Uize.Template.js
-		js/Uize.Template.Module.js
 		js/Uize.Templates.Calculator.js
 		js/Uize.Templates.Calendar.js
 		js/Uize.Templates.Collection.js
