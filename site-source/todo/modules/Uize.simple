@@ -15,6 +15,29 @@ Uize.log
 	};
 	...................................
 
+Uize.own
+	Would return the value of the own property of an object, but not a property value that is inherited from the object's prototype.
+
+	SYNTAX
+	.....................................................
+	valueANYTYPE = Uize.own (sourceOBJ,propertySTRorINT);
+	.....................................................
+
+	IMPLEMENTATION
+	.................................................................
+	_package.own = function (_source,_property) {
+		var _result;
+		return (
+			_source &&
+			(_result = _source [_property]) !== _undefined &&
+			_source.constructor.prototype [_property] !== _undefined &&
+			!_source.hasOwnProperty (_property)
+				? _undefined
+				: _result
+		);
+	};
+	.................................................................
+
 Uize.try
 	Tries to execute the given function, executing the optional catch expression and warning, ignoring, or throwing any error that occurs.
 
