@@ -157,10 +157,16 @@ Uize.module ({
 			}
 
 			function _updateColorNamesLookup (_colors) {
-				var _colorInt;
 				for (var _colorName in _colors)
-					(_colorInt = _colors [_colorName]) in _colorNamesLookup || (_colorNamesLookup [_colorInt] = _colorName)
+					_colorNamesLookup [_colors [_colorName]] = _colorNamesLookup [_colorName.toLowerCase ()] = _colorName
 				;
+			}
+
+			function _createColorNamesLookupIfNecessary () {
+				if (!_colorNamesLookup) {
+					_colorNamesLookup = _object.colorNamesLookup = {};
+					_updateColorNamesLookup (_colors);
+				}
 			}
 
 		/*** Constructor ***/
@@ -261,7 +267,8 @@ Uize.module ({
 						if (_color == _undefined || typeof _color == 'number') {
 							_encoding = 'RGB int';
 						} else if (typeof _color == 'string') {
-							if (_colors [_color] != _undefined || _colors [_color.toLowerCase ()] != _undefined) {
+							_createColorNamesLookupIfNecessary ();
+							if (_colorNamesLookup [_color] || _colorNamesLookup [_color.toLowerCase ()]) {
 								_encoding = 'name';
 							} else {
 								var _tupleMatch = _color.match (_tupleRegExp);
@@ -965,7 +972,7 @@ Uize.module ({
 					'#hex':{
 						colorSpace:'sRGB',
 						from:_setTupleFromRgbHex,
-						to:function (_tuple) {return '#' + _encodings ['hex'].to (_tuple)}
+						to:function (_tuple) {return '#' + _encodings.hex.to (_tuple)}
 						/*?
 							Color Encodings
 								#hex
@@ -1004,17 +1011,21 @@ Uize.module ({
 					name:{
 						colorSpace:'sRGB',
 						from:function (_colorName,_tuple) {
-							_encodings ['RGB int'].from (
-								_colorName in _colors ? _colors [_colorName] : _colors [_colorName.toLowerCase ()],
-								_tuple
-							);
+							_createColorNamesLookupIfNecessary ();
+							var _resolvedColorName;
+							if (
+								(_resolvedColorName = _colorNamesLookup [_colorName]) ||
+								(
+									(_resolvedColorName = _colorNamesLookup [_colorName.toLowerCase ()]) &&
+									(_colorNamesLookup [_colorName] = _resolvedColorName)
+								)
+							)
+								_encodings ['RGB int'].from (_colors [_resolvedColorName],_tuple)
+							;
 						},
 						to:function (_tuple) {
-							if (!_colorNamesLookup) {
-								_colorNamesLookup = {};
-								_updateColorNamesLookup (_colors);
-							}
-							return _colorNamesLookup [_encodings ['RGB int'].to (_tuple)] || _encodings ['hex'].to (_tuple);
+							_createColorNamesLookupIfNecessary ();
+							return _colorNamesLookup [_encodings ['RGB int'].to (_tuple)] || _encodings.hex.to (_tuple);
 						}
 						/*?
 							Color Encodings
@@ -1022,7 +1033,7 @@ Uize.module ({
 									A string, representing the name for a color (eg. the color chartreuse is encoded as ='chartreuse'=).
 
 									Encoding
-										When a color is encoded as =name=, the name string is all lowercase. If no named color is defined that matches the color being encoded, then the encoding source will be encoded as =hex= as a fallback.
+										When a color is encoded as =name=, the name string is camelCase. If no named color is defined that matches the color being encoded, then the encoding source will be encoded as =hex= as a fallback.
 
 										............................
 										<< table >>
@@ -1486,19 +1497,28 @@ Uize.module ({
 								Uize.Fx.fadeStyle ('myNodeId',{color:'darkmagenta'},{color:'lavenderblush'});
 								.............................................................................
 
-								When extending the =Uize.Color.colors= object, the names of added colors should be in all lowecase, and the values should be specified in the =RGB int= encoding (you can use JavaScript's hexadecimal notation for convenience, so that the =RGB int= encoding resembles the =hex= or =#hex= encodings).
+								Case Doesn't Matter
+									When extending the =Uize.Color.colors= object, the names of added colors can be in mixed case.
 
-								INCORRECT
-								.................................................................................
-								Uize.Color.defineColors ({DarkMagenta:0x8b008b});     // DON'T USE MIXED CASE
-								Uize.Color.defineColors ({lavenderblush:'#fff0f5'});  // DON'T USE OTHER ENCODING
-								.................................................................................
+									Regardless of the case of the color names you define, it will be possible to specify those newly defined colors by using names that are equivalent but have different case. So, for example, if you define a color by the name ='BabyPukeYellow'=, it will then be possible to specify that color by the names ='babypukeyellow'=, ='babyPukeYellow'=, ='BABYPUKEYELLOW'=, etc.
 
-								CORRECT
-								......................................................................................
-								Uize.Color.defineColors ({darkmagenta:0x8b008b});    // OK TO USE HEX FORMATTED NUMBER
-								Uize.Color.defineColors ({lavenderblush:16773365});  // OK TO USE DECIMAL NUMBER
-								......................................................................................
+								Specify Color Values as RGB int
+									When extending the =Uize.Color.colors= object by defining new colors, the values of added colors should be specified in the =RGB int= encoding.
+
+									You can use JavaScript's hexadecimal notation for convenience, so that the =RGB int= encoding resembles the =hex= or =#hex= encodings. The following examples illustrate incorrect versus correct ways of specifying color values when defining colors...
+
+									INCORRECT
+									.................................................................................
+									Uize.Color.defineColors ({lavenderblush:'#fff0f5'});  // DON'T USE OTHER ENCODING
+									.................................................................................
+
+									CORRECT
+									................................................................
+									Uize.Color.defineColors ({
+										darkmagenta   : 0x8b008b,   // OK TO USE HEX FORMATTED NUMBER
+										lavenderblush : 16773365    // OK TO USE DECIMAL NUMBER
+									});
+									................................................................
 
 								NOTES
 								- see the related =Uize.Color.colors= static property
