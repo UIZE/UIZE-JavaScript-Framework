@@ -5,31 +5,8 @@ Convert to Using Uize.require Where Possible
 
 Upgrade Codebase to Use JavaScript Strict Mode
 
-	Upgrade Modules to Use Strict Mode
-		The following modules remain to be upgraded...
-
-		REMAINING TO UPGRADE
-		..............................................................................
-		js/~experimental/Uize.Color.xSvgColorNames.js
-		js/~experimental/Uize.Widget.Button-touch1.js
-		js/~experimental/Uize.Widget.Button-touch2.js
-		js/~experimental/Uize.Widget.Button-touch3.js
-		js/~experimental/Uize.Widget.ImagePort.AutoPan.js
-		js/~experimental/Uize.Widget.js
-		js/~experimental/Uize.Widget.Page.js
-		js/~experimental/Uize.Widget.Pagination.js
-		..............................................................................
-
 	Upgrade Test Pages to Use Strict Mode
 		Upgrade all test pages (such as performance tests and such) to use strict mode.
-
-	Upgrade All Other Pages
-		Basically, any remaining pages that have inline script blocks where UIZE modules are being required should be upgraded so that the callback or builder function uses strict mode.
-
-		- index.html
-		- HELLO-WORLD.html
-		- search-sections.html
-		- all SimpleDoc template (=.html.jst=) files used to generate HTML pages from =.simple= pages and other sources
 
 Possible New Namespaces
 	* Uize.Math

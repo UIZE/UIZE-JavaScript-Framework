@@ -74,17 +74,17 @@
 		<span class="label">ENTIRE SITE :</span>Search the entire site for all references to <span class="searchQuery"></span>...
 		<a id="page-searchEntireSite" href="javascript://" class="buttonLink searchLink">SEARCH ENTIRE SITE &gt;&gt;</a>
 	</div>
-	
+
 	<div class="preamble searchPod">
 		<span class="label">IN EXAMPLES :</span>Search for just examples that refer to <span class="searchQuery"></span>...
 		<a id="page-searchInExamples" href="javascript://" class="buttonLink searchLink">SEARCH IN EXAMPLES &gt;&gt;</a>
 	</div>
-	
+
 	<div class="preamble searchPod">
 		<span class="label">IN MODULES :</span>Search for just modules that refer to <span class="searchQuery"></span>...
 		<a id="page-searchInModules" href="javascript://" class="buttonLink searchLink">SEARCH IN MODULES &gt;&gt;</a>
 	</div>
-	
+
 	<div class="preamble searchPod">
 		<span class="label">IN EXPLAINERS :</span>Search for just explainers that refer to <span class="searchQuery"></span>...
 		<a id="page-searchInExplainers" href="javascript://" class="buttonLink searchLink">SEARCH IN EXPLAINERS &gt;&gt;</a>
@@ -103,6 +103,8 @@ Uize.module ({
 		'Uize.Curve'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** create the example page widget ***/
 			var _page = window.page = UizeSite.Page ();
 

@@ -28,6 +28,8 @@ Uize.module ({
 		'UizeSite.Examples'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_tour = Uize.Url.fromParams (location.href).tour,
 			_examples = UizeSite.Examples (),
