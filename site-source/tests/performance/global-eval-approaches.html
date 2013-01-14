@@ -49,16 +49,18 @@ function functionDefinedNormallyInGlobalScope () {Uize.Widget.Page}
 Uize.module ({
 	required:'UizeSite.Page.Example.Test.library',
 	builder:function () {
+		'use strict';
+
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example.Test ();
 
 		/*** test functions ***/
-			deeplyDefinedGlobalEval = typeof execScript == 'function'
+			window.deeplyDefinedGlobalEval = typeof execScript == 'function'
 				? function (_toEval) {return execScript (_toEval)}
 				: function (_toEval) {return eval.call (null,_toEval)}
 			;
 
-			functionObjectBasedGlobalEval = function (_toEval) {
+			window.functionObjectBasedGlobalEval = function (_toEval) {
 				return (new Function (_toEval)) ();
 			};
 

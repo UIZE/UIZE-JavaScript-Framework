@@ -50,6 +50,8 @@ Uize.module ({
 		'Uize.String'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example.Test ();
 
@@ -68,7 +70,7 @@ Uize.module ({
 
 			function _makeRandomNumbersArray (_arrayLength) {
 				var _result = [];
-				for (_elementNo = _arrayLength; --_elementNo >= 0;) {
+				for (var _elementNo = _arrayLength; --_elementNo >= 0;) {
 					_result.push (Math.random () * 1000000);
 				}
 				return _result;

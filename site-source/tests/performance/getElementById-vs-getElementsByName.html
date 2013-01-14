@@ -51,6 +51,8 @@
 Uize.module ({
 	required:'UizeSite.Page.Example.Test.library',
 	builder:function () {
+		'use strict';
+
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example.Test ();
 
@@ -75,7 +77,7 @@ Uize.module ({
 						function () {
 							/*** test lookup by document.getElementById ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
-									for (_nodeNo = -1; ++_nodeNo < _totalNodes;)
+									for (var _nodeNo = -1; ++_nodeNo < _totalNodes;)
 										document.getElementById ('node' + _nodeNo)
 									;
 								}
@@ -83,7 +85,7 @@ Uize.module ({
 						function () {
 							/*** test lookup by document.getElementsByName ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
-									for (_nodeNo = -1; ++_nodeNo < _totalNodes;)
+									for (var _nodeNo = -1; ++_nodeNo < _totalNodes;)
 										document.getElementsByName ('node' + _nodeNo)
 									;
 								}

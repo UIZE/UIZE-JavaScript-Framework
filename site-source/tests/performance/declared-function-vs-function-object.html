@@ -48,6 +48,8 @@ var globalFunctionCreatedUsingFunctionObject = new Function ('a','b','return a *
 Uize.module ({
 	required:'UizeSite.Page.Example.Test.library',
 	builder:function () {
+		'use strict';
+
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example.Test ();
 
