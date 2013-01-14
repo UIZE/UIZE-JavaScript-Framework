@@ -20,11 +20,6 @@ Upgrade Codebase to Use JavaScript Strict Mode
 		js/~experimental/Uize.Widget.Pagination.js
 		..............................................................................
 
-	Upgrade Examples to Use Strict Mode
-		Upgrade all sample code examples and tools to use strict mode.
-
-		This involves adding the ='use strict';= pragma at the top of the builder function for all the anonymous module declarations towards the bottom of the pages.
-
 	Upgrade Test Pages to Use Strict Mode
 		Upgrade all test pages (such as performance tests and such) to use strict mode.
 

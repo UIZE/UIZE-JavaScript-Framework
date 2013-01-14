@@ -79,6 +79,8 @@
 Uize.module ({
 	required:'Uize.Node',
 	builder:function () {
+		'use strict';
+
 		/*** find all images that need "wise load" applied to them ***/
 			var
 				_imageNodes = Uize.Node.find ({tagName:'IMG'}),

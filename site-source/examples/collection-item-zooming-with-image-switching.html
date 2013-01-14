@@ -111,6 +111,8 @@ Uize.module ({
 		'Uize.Url'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
