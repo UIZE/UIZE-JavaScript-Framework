@@ -43,6 +43,8 @@ Uize.module ({
 	name:'Uize.Widget.Page',
 	required:'Uize.Node',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,

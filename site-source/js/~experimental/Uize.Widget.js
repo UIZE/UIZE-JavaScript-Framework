@@ -35,6 +35,8 @@ Uize.module ({
 	name:'Uize.Widget',
 	required:'Uize.Node,Uize.Data',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Variables for Optimization ***/
 			var
 				/*** Scruncher Optimization ***/

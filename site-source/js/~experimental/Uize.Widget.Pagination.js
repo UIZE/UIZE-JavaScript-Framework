@@ -20,6 +20,8 @@ Uize.module ({
 	name:'Uize.Widget.Pagination',
 	required:'Uize.Widget.Population',
 	builder:function (_superclass) {
+		'use strict';
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (

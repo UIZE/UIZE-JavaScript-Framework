@@ -25,6 +25,8 @@ Uize.module ({
 		'Uize.Node'
 	],
 	builder:function (_superclass) {
+		'use strict';
+
 		var
 			_null = null,
 			_Uize_Node = Uize.Node
