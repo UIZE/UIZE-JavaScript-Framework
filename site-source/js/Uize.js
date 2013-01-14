@@ -70,6 +70,7 @@
 					- =Uize.values= - returns an array containing the values of the properties in an object
 
 				Iterator Methods
+					The =Uize= module provides a number of static methods for iterating over properties of an object or elements of an array.
 
 					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
 					- =Uize.forEach= - iterates over an array, object, or length, calling the specified iteration handler for each element or property
@@ -95,6 +96,7 @@
 					- =Uize.getClass= - gets the class of which a specified value is an instance, or returns the value if it is a class or function
 					- =Uize.noNew= - wraps an object constructor function to make JavaScript's =new= operator optional
 					- =Uize.now= - returns the current time in milliseconds since 1970 (POSIX time)
+					- =Uize.own= -
 					- =Uize.resolveTransformer= - resolves the specified transformer (of any type) to a transformer function
 					- =Uize.substituteInto= - substitutes one or more substitution values into a string
 
@@ -3791,7 +3793,8 @@ Uize = (function () {
 			*/
 		};
 
-		_package.global = new Function ('return (function () {return this}) ()');
+		_package.global = new _Function (
+			'return (function () {return this}) ()'
 			/*?
 				Static Methods
 					Uize.global
@@ -3802,8 +3805,11 @@ Uize = (function () {
 						globalOBJ = Uize.global ();
 						...........................
 			*/
+		);
 
-		_package.globalEval = new _Function ('toEval','return eval (toEval)');
+		_package.globalEval = new _Function (
+			'toEval',
+			'return eval (toEval)'
 			/*?
 				Static Methods
 					Uize.globalEval
@@ -3820,6 +3826,7 @@ Uize = (function () {
 
 						The =Uize.globalEval= method lets you guarantee that code you wish to be eval'ed in the global scope *is* eval'ed in the global scope.
 			*/
+		);
 
 		var _isInstance = _package.isInstance = function (_value) {
 			return !!(typeof _value == _typeObject && _value && _value.constructor.subclass);
@@ -3868,7 +3875,8 @@ Uize = (function () {
 						- see also the other `dummy functions`
 			*/
 
-		_package.returnFalse = new _Function ('return false');
+		_package.returnFalse = new _Function (
+			'return false'
 			/*?
 				Static Methods
 					Uize.returnFalse
@@ -3893,8 +3901,10 @@ Uize = (function () {
 						- see the related =Uize.nop= static method
 						- see also the other `dummy functions`
 			*/
+		);
 
-		_package.returnTrue = new _Function ('return true');
+		_package.returnTrue = new _Function (
+			'return true'
 			/*?
 				Static Methods
 					Uize.returnTrue
@@ -3918,8 +3928,11 @@ Uize = (function () {
 						- see also the companion =Uize.returnFalse= static method
 						- see also the other `dummy functions`
 			*/
+		);
 
-		_package.returnX = new _Function ('x','return x');
+		_package.returnX = new _Function (
+			'x',
+			'return x'
 			/*?
 				Static Methods
 					Uize.returnX
@@ -3933,6 +3946,7 @@ Uize = (function () {
 						NOTES
 						- see also the other `dummy functions`
 			*/
+		);
 
 		/*** Barrier object ***/
 			var
@@ -5075,7 +5089,8 @@ Uize = (function () {
 			*/
 		};
 
-		_package.now = new _Function ('return ' + (Date.now ? 'Date.now()' : '+new Date'));
+		_package.now = new _Function (
+			'return ' + (Date.now ? 'Date.now()' : '+new Date')
 			/*?
 				Static Methods
 					Uize.now
@@ -5103,9 +5118,7 @@ Uize = (function () {
 
 						Using the above template, the value of the =duration= variable will indicate how long it took to perform the operations in the block between assigning the value for the =start= variable and the value for the =duration= variable.
 			*/
-
-	/*** Private Static Properties ***/
-		_package.moduleName = 'Uize';
+		);
 
 	/*** Public Static Properties ***/
 		_package.moduleUrlTemplate = _getPathToLibrary ('Uize.js',_modulePathToken);
