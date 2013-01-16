@@ -1515,7 +1515,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that the deprecated Uize.registerProperties method is still supported and is simply a reference to the Uize.stateProperties method',
+									title:'Test that the deprecated Uize.Class.registerProperties method is still supported and is simply a reference to the Uize.Class.stateProperties method',
 									test:function () {
 										return this.expectSameAs (Uize.Class.registerProperties,Uize.Class.stateProperties);
 									}
