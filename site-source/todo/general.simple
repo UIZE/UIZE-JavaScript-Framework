@@ -3,11 +3,6 @@ This document lists to do tasks that relate to the UIZE JavaScript Framework in 
 Convert to Using Uize.require Where Possible
 	Convert all usages of the =Uize.module= method for declaring anonymous modules over to using the =Uize.require= method.
 
-Upgrade Codebase to Use JavaScript Strict Mode
-
-	Upgrade Test Pages to Use Strict Mode
-		Upgrade all test pages (such as performance tests and such) to use strict mode.
-
 Possible New Namespaces
 	* Uize.Math
 	- Uize.Web (or Uize.Browser? or Uize.Html? or Uize.WebBrowser? or Uize.Wb? or Uize.Www?)
