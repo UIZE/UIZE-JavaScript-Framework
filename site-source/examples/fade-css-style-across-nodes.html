@@ -855,7 +855,7 @@ Uize.module ({
 					var values = page.children.paramsInspector.getValues ();
 					if (values.settings != lastSettings) {
 						Uize.Node.setStyle (menuNodes,initialStyle); // reset all nodes to initial style, so there's no style lingering from previous CSS fade
-						eval (lastSettings = values.settings);
+						Uize.eval (lastSettings = values.settings);
 					}
 				}
 			);

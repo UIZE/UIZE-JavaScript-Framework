@@ -1399,7 +1399,7 @@ Uize.module ({
 					var
 						values = page.children.paramsInspector.getValues (),
 						curve = values.curve,
-						curveFunction = eval (curve),
+						curveFunction = Uize.eval (curve),
 						curveIsCurrent = curve == lastPreviewedCurve
 					;
 					if (!curveIsCurrent) {
