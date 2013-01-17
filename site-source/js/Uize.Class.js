@@ -448,7 +448,7 @@ Uize.module ({
 				_undefined,
 				_typeString = 'string',
 				_typeObject = 'object',
-				_Function = Function
+				_Function = Function,
 
 				/*** references to utility methods of Uize ***/
 					_Uize = Uize,
