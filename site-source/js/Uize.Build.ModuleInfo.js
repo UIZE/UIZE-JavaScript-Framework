@@ -241,13 +241,15 @@ Uize.module ({
 			var _fileSystem = Uize.Services.FileSystem.singleton ();
 
 		/*** Public Static Methods ***/
-			_package.getDefinitionFromCode = function (_moduleCode) {
-				var
-					_result,
-					Uize = {module: function (_definition) {_result = _definition}}
-				;
-				eval (_moduleCode);
-				return _result;
+			_package.getDefinitionFromCode = Uize.quarantine (
+				function (_moduleCode) {
+					var
+						_result,
+						Uize = {module: function (_definition) {_result = _definition}}
+					;
+					eval (_moduleCode);
+					return _result;
+				}
 				/*?
 					Static Methods
 						Uize.Build.ModuleInfo.getDefinitionFromCode
@@ -263,7 +265,7 @@ Uize.module ({
 							NOTES
 							- compare to the related =Uize.Build.ModuleInfo.getDefinition= static method
 					*/
-			};
+			);
 
 			_package.getDefinition = function (_moduleName) {
 				var _definition = {name:_moduleName};

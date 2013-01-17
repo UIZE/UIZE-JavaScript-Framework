@@ -123,16 +123,6 @@ Uize.module ({
 				return document [_isSafari ? 'body' : 'documentElement'];
 			}
 
-			function _makeGlobalScopedFunction (_function) {
-				var _paramsStr = (_function += '').slice (_function.indexOf ('(') + 1,_function.indexOf (')'));
-				return Function.apply (
-					{},
-					(_paramsStr ? _paramsStr.split (',') : []).concat (
-						_function.slice (_function.indexOf ('{') + 1,_function.lastIndexOf ('}'))
-					)
-				);
-			}
-
 			function _resolveStringEventName (_eventName) {
 				return (
 					_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
@@ -2185,7 +2175,8 @@ Uize.module ({
 			};
 
 			var
-				_makeWindowEventHandlerCaller = _makeGlobalScopedFunction (
+				_quarantine = Uize.quarantine,
+				_makeWindowEventHandlerCaller = _quarantine (
 					function (_wiringId) {
 						return (
 							function (_event) {
@@ -2199,7 +2190,7 @@ Uize.module ({
 						);
 					}
 				),
-				_makeGenericHandlerCaller = _makeGlobalScopedFunction (
+				_makeGenericHandlerCaller = _quarantine (
 					function (_wiringId) {
 						return (
 							function (_event) {
@@ -2215,7 +2206,7 @@ Uize.module ({
 				),
 				_handlerCallerMakersByEvent = {
 					click:_makeGenericHandlerCaller,
-					mouseover:_makeGlobalScopedFunction (
+					mouseover:_quarantine (
 						function (_wiringId) {
 							return (
 								function (_event) {
@@ -2249,7 +2240,7 @@ Uize.module ({
 							);
 						}
 					),
-					mouseout:_makeGlobalScopedFunction (
+					mouseout:_quarantine (
 						function (_wiringId) {
 							return (
 								function (_event) {

@@ -458,7 +458,7 @@ Uize.module ({
 					_lookup = _Uize.lookup,
 					_getClass = _Uize.getClass,
 					_getGuid = _Uize.getGuid,
-					_globalEval = _Uize.globalEval,
+					_eval = _Uize.eval,
 					_isArray = _Uize.isArray,
 					_isFunction = _Uize.isFunction,
 					_isInstance = _Uize.isInstance,
@@ -2246,7 +2246,7 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.kill = function () {
 				var _instanceId = this.instanceId;
-				_globalEval ('if(typeof ' + _instanceId + '!=\'undefined\')' + _instanceId + '=null');
+				_eval ('if(typeof ' + _instanceId + '!=\'undefined\')' + _instanceId + '=null');
 				/*?
 					Instance Methods
 						kill

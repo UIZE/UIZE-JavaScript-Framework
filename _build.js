@@ -170,7 +170,9 @@ function _eval (_toEval) {
 				'Uize',
 				function (_uizeCode) {
 					_eval (_uizeCode);
-					Uize.globalEval = _eval; // this actually *needs* to be overridden for the NodeJS context
+					if (!_isWsh)
+						Uize.laxEval = _eval // this actually *needs* to be overridden for the NodeJS context
+					;
 					Uize.moduleLoader = _moduleLoader;
 				}
 			);

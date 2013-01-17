@@ -119,7 +119,18 @@ Key Concepts
 
 	verbosity within application code is welcome, as a framework varies less than the wide array of logic that can be written in applications
 
+Design Principles
+	The design of the UIZE JavaScript Framework is informed by the following design principles...
 
-	Function Names Should Imply Action
-		To help semantic clarity,
+	### Designed to be Highly Performant
+
+	### Designed to be Highly Modular
+
+	### Designed to be Compact
+
+	Designed to be Strict
+		UIZE and JavaScript Strict Mode
+		document...
+
+		- background information
 

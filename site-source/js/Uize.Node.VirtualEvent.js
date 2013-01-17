@@ -666,7 +666,7 @@ Uize.module ({
 				*/
 				var
 					_paramsStartDelimPos = _eventName.indexOf ('('),
-					_params = Uize.globalEval ('([' + _eventName.slice (_paramsStartDelimPos + 1,-1) + '])')
+					_params = Uize.eval ('([' + _eventName.slice (_paramsStartDelimPos + 1,-1) + '])')
 				;
 				return (
 					_virtualDomEventsByName [_eventName = _eventName.slice (0,_paramsStartDelimPos)] ||

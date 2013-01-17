@@ -2232,7 +2232,16 @@ Uize.module ({
 							}
 						}
 					]],
-					['Uize.globalEval',[
+					{
+						title:'Test that the deprecated Uize.globalEval method is still supported and is simply a reference to the Uize.laxEval method',
+						test:function () {
+							return this.expectSameAs (Uize.globalEval,Uize.laxEval);
+						}
+					},
+					['Uize.eval',[
+						/* TODO: implement tests */
+					]],
+					['Uize.laxEval',[
 						/* TODO: implement tests */
 					]],
 					['Uize.getClass',[

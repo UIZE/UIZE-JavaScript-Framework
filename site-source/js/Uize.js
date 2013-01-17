@@ -25,8 +25,21 @@
 
 		Key Features
 			Utility Belt Methods
+				The =Uize= module provides a slew of utility belt methods that can be divided into the following categories...
+
+				Module Mechanism Methods
+					The =Uize= module provides static methods for declaring your own JavaScript modules, requiring modules, and configuring the `module loader mechanism` to suit your application environment.
+
+					- =Uize.getModuleByName= - returns a reference to the module of the specified name, or =undefined= if the module's not loaded
+					- =Uize.getPathToLibrary= - returns the relative path from the current document to the folder containing the specified JavaScript file
+					- =Uize.module= - lets you declare a JavaScript module that can be required by other JavaScript modules
+					- =Uize.moduleLoader= - loads a JavaScript module (specified by its module name)
+					- =Uize.moduleUrlResolver= - resolves the specified JavaScript module name to a URL path
+					- =Uize.require= - ensures that all of the specified modules are loaded before calling the specified callback function, loading required modules as necessary
+					- =Uize.toString= - provides summary info for the module on which the method is called
+
 				Value Testing Methods
-					The =Uize= module provides a number of static methods for performing commonly useful tests on values.
+					The =Uize= module provides a number of static methods for performing useful tests on values.
 
 					- =Uize.canExtend= - tests if value is an object that can be extended with custom properties
 					- =Uize.inRange= - tests if value is within specified value range
@@ -47,7 +60,7 @@
 					- =Uize.isString= - tests if a value is a string
 
 				Basic Data Utilities
-					The =Uize= module provides a number of static methods for performing basic data manipulation operations.
+					The =Uize= module provides a number of static methods for performing basic data manipulation operations that are commonly encountered.
 
 					- =Uize.clone= - clones a value, and creates deep clones of object or array type values
 					- =Uize.copyInto= - copies the values of properties from one or more source objects into a target object
@@ -70,12 +83,13 @@
 					- =Uize.values= - returns an array containing the values of the properties in an object
 
 				Iterator Methods
-					The =Uize= module provides a number of static methods for iterating over properties of an object or elements of an array.
+					The =Uize= module provides a number of static methods for iterating over properties of objects or elements of arrays.
 
 					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
 					- =Uize.forEach= - iterates over an array, object, or length, calling the specified iteration handler for each element or property
 
 				Useful Value Transformers
+					The =Uize= module provides some value transformer methods for transforming or resolving values in ways that are either generally useful or useful to other UIZE modules.
 
 					- =Uize.capFirstChar= - capitalizes the first character of a string
 					- =Uize.constrain= - constrains a value to a specified range
@@ -85,6 +99,7 @@
 					- =Uize.toNumber= - coerces a value to a number, with defaulting if it cannot be coerced successfully
 
 				Dummy Functions
+					The =Uize= module provides a number of dummy functions that can be supplied as placeholders in situations where function type parameters are expected.
 
 					- =Uize.nop= - performs no operation and returns no value (equivalent to returning =undefined=)
 					- =Uize.returnFalse= - always returns the value =false=
@@ -92,23 +107,21 @@
 					- =Uize.returnX= - always returns the value of the first argument, unaltered
 
 				General Utilities
+					The =Uize= module provides the following general utility methods...
 
+					- =Uize.eval= - lets you perform `quarantined code evaluation` of a JavaScript code string
 					- =Uize.getClass= - gets the class of which a specified value is an instance, or returns the value if it is a class or function
+					- =Uize.laxEval= - lets you perform `quarantined code evaluation` of a JavaScript code string, but not in JavaScript strict mode
 					- =Uize.noNew= - wraps an object constructor function to make JavaScript's =new= operator optional
 					- =Uize.now= - returns the current time in milliseconds since 1970 (POSIX time)
-					- =Uize.own= -
 					- =Uize.resolveTransformer= - resolves the specified transformer (of any type) to a transformer function
 					- =Uize.substituteInto= - substitutes one or more substitution values into a string
 
-				Module Mechanism Methods
+			Quarantined Code Evaluation
+				The =Uize= module provides two static methods to facilitate quarantined evaluation of JavaScript code strings.
 
-					- =Uize.getModuleByName= - returns a reference to the module of the specified name, or =undefined= if the module's not loaded
-					- =Uize.getPathToLibrary= - returns the relative path from the current document to the folder containing the specified JavaScript file
-					- =Uize.module= - lets you declare a JavaScript module that can be required by other JavaScript modules
-					- =Uize.moduleLoader= - loads a JavaScript module (specified by its module name)
-					- =Uize.moduleUrlResolver= - resolves the specified JavaScript module name to a URL path
-					- =Uize.require= - ensures that all of the specified modules are loaded before calling the specified callback function, loading required modules as necessary
-					- =Uize.toString= - provides summary info for the module on which the method is called
+				The general wisdom is to avoid using JavaScript's built-in =eval= function at all costs, and this is, for the most part, good advice. However, JavaScript is a dynamic language, and when you're doing more sophisticated (and risky) things with JavaScript such as dynamic code construction, it becomes useful to evaluate strings that contain JavaScript code.
+
 */
 
 Uize = (function () {
@@ -799,7 +812,7 @@ Uize = (function () {
 				var _sourceIsArray = _isArray (_source);
 				if (!_sourceIsArray || _source.length) {
 					if (typeof _iterationHandler == _typeString)
-						_iterationHandler = new _Function ('value','key','source',_iterationHandler)
+						_iterationHandler = _Function ('value','key','source',_iterationHandler)
 					;
 					if (_sourceIsArray) {
 						if (_interpreterSupportsArrayForEach && !_allArrayElements) {
@@ -1093,7 +1106,7 @@ Uize = (function () {
 					: _typeofTransformer == _typeFunction
 						? _transformer
 						: _typeofTransformer == 'string'
-							? new _Function ('value','key','return ' + _transformer)
+							? _Function ('value','key','return ' + _transformer)
 							: _typeofTransformer == 'object'
 								? (
 									_isRegExp (_transformer)
@@ -3793,7 +3806,7 @@ Uize = (function () {
 			*/
 		};
 
-		_package.global = new _Function (
+		_package.global = _Function (
 			'return (function () {return this}) ()'
 			/*?
 				Static Methods
@@ -3807,26 +3820,76 @@ Uize = (function () {
 			*/
 		);
 
-		_package.globalEval = new _Function (
-			'toEval',
-			'return eval (toEval)'
+		_package.eval = _Function (
+			'\'use strict\'; return eval (arguments [0])'
 			/*?
 				Static Methods
-					Uize.globalEval
-						A method that lets you eval code in the global scope.
+					Uize.eval
+						Lets you perform `quarantined code evaluation` of the specified JavaScript code string.
 
 						SYNTAX
-						....................................................
-						evalResultANYTYPE = Uize.globalEval (codeToEvalSTR);
-						....................................................
+						..............................................
+						evalResultANYTYPE = Uize.eval (codeToEvalSTR);
+						..............................................
 
 						A risk with careless use of JavaScript's =eval= function from deep within the nested functions of your code is that you may not be intending to have the code evaluated within the scope of your deep function.
 
 						It could be a benefit to the code you're eval'ing that it has access to the scope of the function in which you're eval'ing it. It may also be a curse in two respects: 1) the code being eval'ed may unexpectedly conflict with identifiers in your function's scope, and 2) function closures within the code being eval'ed will hang on to your function's scope state (with "interesting" memory usage implications).
 
-						The =Uize.globalEval= method lets you guarantee that code you wish to be eval'ed in the global scope *is* eval'ed in the global scope.
+						The =Uize.eval= method lets you guarantee that code you wish to be eval'ed in the global scope *is* eval'ed in the global scope.
+
+						NOTES
+						- compare to the companion =Uize.laxEval= static method
 			*/
 		);
+
+		_package.laxEval =
+		_package.globalEval = /* DEPRECATED 2013-01-14 */
+		_Function (
+			'return eval (arguments [0])'
+			/*?
+				Static Methods
+					Uize.laxEval
+						Lets you perform `quarantined code evaluation` of the specified JavaScript code string, but not in JavaScript strict mode.
+
+						SYNTAX
+						.................................................
+						evalResultANYTYPE = Uize.laxEval (codeToEvalSTR);
+						.................................................
+
+						NOTES
+						- compare to the companion =Uize.eval= static method
+
+				Deprecated Features
+					Uize.globalEval -- DEPRECATED 2013-01-14
+						The =Uize.globalEval= static method has been deprecated in favor of the newly added =Uize.laxEval= static method.
+
+						..........................................
+						Uize.globalEval >> BECOMES >> Uize.laxEval
+						..........................................
+
+						The =Uize.laxEval= method is essentially just a renaming of the deprecated =Uize.globalEval= method and behaves in exactly the same way. The old name was deemed to be misleading.
+
+						While the =Uize.globalEval= method could be used to evaluate JavaScript code outside of the scope of the current function, that scope was actually a root level *function* defined in the global scope - the evaluated code itself could not truly be evaluated at the very root of the global scope. The spirit of the method was never so much about evaluating code in the global scope as it was about evaluating the code in a way that was quarantined from the current scope (see `Quarantined Code Evaluation`), so as not to risk side effects of local variable access and closure memory reference implications that would arise from evaluating the code within the current function's scope.
+			*/
+		);
+
+		_package.quarantine = function (_function) {
+			var
+				_functionArguments = (_function += '').slice (_function.indexOf ('(') + 1,_function.indexOf (')')),
+				_functionBody = _function.slice (_function.indexOf ('{') + 1,_function.lastIndexOf ('}'))
+			;
+			return _functionArguments ? _Function (_functionArguments,_functionBody) : _Function (_functionBody);
+			/*?
+				Static Methods
+					Uize.quarantine
+
+						SYNTAX
+						...................................................................
+						quarantinedFunctionFUNC = Uize.quarantine (localScopeFunctionFUNC);
+						...................................................................
+			*/
+		};
 
 		var _isInstance = _package.isInstance = function (_value) {
 			return !!(typeof _value == _typeObject && _value && _value.constructor.subclass);
@@ -3847,7 +3910,7 @@ Uize = (function () {
 			*/
 		};
 
-		_package.nop = new _Function;
+		_package.nop = _Function ();
 			/*?
 				Static Methods
 					Uize.nop
@@ -3875,7 +3938,7 @@ Uize = (function () {
 						- see also the other `dummy functions`
 			*/
 
-		_package.returnFalse = new _Function (
+		_package.returnFalse = _Function (
 			'return false'
 			/*?
 				Static Methods
@@ -3903,7 +3966,7 @@ Uize = (function () {
 			*/
 		);
 
-		_package.returnTrue = new _Function (
+		_package.returnTrue = _Function (
 			'return true'
 			/*?
 				Static Methods
@@ -3930,7 +3993,7 @@ Uize = (function () {
 			*/
 		);
 
-		_package.returnX = new _Function (
+		_package.returnX = _Function (
 			'x',
 			'return x'
 			/*?
@@ -4027,7 +4090,7 @@ Uize = (function () {
 							_modulesByName [_moduleName] ||
 							(_moduleName == '*' && _modulesByName) ||
 							(
-								(_module = (new _Function ('try {return ' + _moduleName + '} catch (e) {}')) ()) &&
+								(_module = _Function ('try {return ' + _moduleName + '} catch (e) {}') ()) &&
 								(_modulesByName [_moduleName] = _module)
 							)
 						)
@@ -4125,7 +4188,7 @@ Uize = (function () {
 							_modulesAlreadyInvoked [_module] = _trueFlag;
 							_package.moduleLoader (
 								_module,
-								function (_moduleCode) {_moduleCode && _package.globalEval (_moduleCode)}
+								function (_moduleCode) {_moduleCode && _package.laxEval (_moduleCode)}
 							)
 						}
 					}
@@ -4331,7 +4394,7 @@ Uize = (function () {
 						function () {
 							var _module = (_definition.builder || _package.nop) (_getModuleByName (_definition.superclass));
 							_name &&
-								(new _Function ('m',_name + '=m')) (
+								(_Function (_name + '=arguments[0]')) (
 									_module = _modulesByName [_name] = _module || function () {}
 								)
 							;
@@ -5089,7 +5152,7 @@ Uize = (function () {
 			*/
 		};
 
-		_package.now = new _Function (
+		_package.now = _Function (
 			'return ' + (Date.now ? 'Date.now()' : '+new Date')
 			/*?
 				Static Methods
