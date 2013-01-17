@@ -448,6 +448,7 @@ Uize.module ({
 				_undefined,
 				_typeString = 'string',
 				_typeObject = 'object',
+				_Function = Function
 
 				/*** references to utility methods of Uize ***/
 					_Uize = Uize,
@@ -590,7 +591,7 @@ Uize.module ({
 											_isFunction (_handler)
 												? _handler
 												: typeof _handler == _typeString
-													? new Function (_handler)
+													? _Function (_handler)
 													: function (_event) {_handler.fire (_event)},
 										_originalHandler:_handler
 									}
@@ -914,12 +915,6 @@ Uize.module ({
 				};
 
 
-				var _newFunction = new Function (
-					'a', // arguments
-					'b', // body
-					'var f; return eval ("f = function (" + a.join (",") + ") {" + b + "}")'
-				);
-
 				var _derivationCache = {};
 				function _resolveDerivation (_derivation) {
 					/* NOTE: this code will eventually be used also for derived properties */
@@ -942,7 +937,7 @@ Uize.module ({
 							if (typeof _derivation == 'string') {
 								var _separatorPos = _derivation.indexOf (':');
 								if (_separatorPos > -1) {
-									_determiner = _newFunction (
+									_determiner = _Function (
 										_determinants = _getDeterminantsFromListStr (_derivation.slice (0,_separatorPos)),
 										'return ' + _derivation.slice (_separatorPos + 1)
 									);
@@ -969,7 +964,7 @@ Uize.module ({
 											_determinerOperands.push ((_inverted ? '!' : '') + _argName);
 										}
 									);
-									_determiner = _newFunction (_determinerArgs,'return ' + _determinerOperands.join (' && '));
+									_determiner = _Function (_determinerArgs,'return ' + _determinerOperands.join (' && '));
 								} else {
 									_determiner = _Uize.returnTrue;
 								}
@@ -977,7 +972,7 @@ Uize.module ({
 						}
 						_resolvedDerivation = _derivationCache [_derivationCacheKey] = {
 							_determinants:_determinants,
-							_determinantsValuesHarvester:new Function (
+							_determinantsValuesHarvester:_Function (
 								'return [' + _map (_determinants,'"this.get(\'" + value + "\')"').join (',') + ']'
 							),
 							_determiner:_determiner,
