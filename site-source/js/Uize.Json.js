@@ -101,7 +101,8 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_string = 'string',
-				_sacredEmptyArray = []
+				_sacredEmptyArray = [],
+				_trueFlag = {}
 			;
 
 		/*** General Variables ***/
@@ -109,20 +110,23 @@ Uize.module ({
 				_someSpaces = '       ',
 				_keyPadding = _someSpaces.replace (/ /g,_someSpaces).replace (/ /g,_someSpaces),
 				_serializableBuiltInObjects = {RegExp:1,Date:1,String:1,Number:1,Boolean:1},
-				_reservedWordsMap = {
-					'break':1, 'boolean':1, 'case':1, 'catch':1, 'continue':1, 'const':1, 'debugger':1, 'default':1, 'delete':1, 'do':1, 'else':1, 'export':1, 'false':1, 'finally':1, 'for':1, 'function':1, 'if':1, 'import':1, 'in':1, 'instanceof':1, 'new':1, 'null':1, 'return':1, 'switch':1, 'this':1, 'throw':1, 'true':1, 'try':1, 'typeof':1, 'var':1, 'void':1, 'while':1, 'with':1
-					/* NOTES:
-						- future reserved words:
-							- JavaScript 2.0
-								as, class, extends, interface, is, namespace, package, private, public, super, use
-							- future use unknown
-								abstract, enum, final, goto, implements, native, protected, static, synchronized, throws, transient, volatile
-						- no longer reserved
-							boolean, byte, char, double, float, int, long, short
-						- words that are still an issue for Adobe's scripting environment in Photoshop and Illustrator
-							boolean
-					*/
-				}
+				_reservedWordsLookup = Uize.lookup (
+					[
+						'break', 'boolean', 'case', 'catch', 'continue', 'const', 'debugger', 'default', 'delete', 'do', 'else', 'export', 'false', 'finally', 'for', 'function', 'if', 'import', 'in', 'instanceof', 'new', 'null', 'return', 'switch', 'this', 'throw', 'true', 'try', 'typeof', 'var', 'void', 'while', 'with', 'implements', 'interface', 'let', 'package', 'private', 'protected', 'public', 'static', 'yield'
+						/* NOTES:
+							- future reserved words:
+								- JavaScript 2.0
+									as, class, extends, is, namespace, super, use
+								- future use unknown
+									abstract, enum, final, goto, native, synchronized, throws, transient, volatile
+							- no longer reserved
+								boolean, byte, char, double, float, int, long, short
+							- words that are still an issue for Adobe's scripting environment in Photoshop and Illustrator
+								boolean
+						*/
+					],
+					_trueFlag
+				)
 			;
 
 		/*** Public Static Methods ***/
@@ -248,7 +252,7 @@ Uize.module ({
 										var _mustQuoteKey = function (_key) {
 											return (
 												isNaN (+_key)
-													? (/[^\w\$]|^\d/.test (_key) || _reservedWordsMap [_key])
+													? (/[^\w\$]|^\d/.test (_key) || _reservedWordsLookup [_key] == _trueFlag)
 													: _key != +_key + '' || _key < 0
 											);
 										};
