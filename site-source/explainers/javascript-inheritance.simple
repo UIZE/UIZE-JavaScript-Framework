@@ -437,6 +437,8 @@ Dissecting a Subclass Module
 		Uize.module ({
 			name:'Uize.Subclass',
 			builder:function (_superclass) {
+				'use strict';
+
 				/*** Class Constructor ***/
 					var
 						_class = _superclass.subclass (

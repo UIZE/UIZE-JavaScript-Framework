@@ -16,6 +16,8 @@ A Simple Example
 			'Uize.Widget.ImagePort'
 		],
 		builder:function (_superclass) {
+			'use strict';
+
 			/*** Object Constructor ***/
 				var
 					_class = _superclass.subclass (
@@ -222,6 +224,8 @@ Types of Modules
 		Uize.module ({
 			name:'Uize.Widget.MyWidgetClass',
 			builder:function (_superclass) {
+				'use strict';
+
 				/*** Object Constructor ***/
 					var
 						_class = _superclass.subclass (
@@ -253,6 +257,8 @@ Types of Modules
 			name:'MyNamespace.MyWidgetClass',
 			superclass:'Uize.Widget',
 			builder:function (_superclass) {
+				'use strict';
+
 				/*** Object Constructor ***/
 					var
 						_class = _superclass.subclass (
@@ -288,6 +294,8 @@ Types of Modules
 				'Uize.Fade'
 			],
 			builder:function (_superclass) {
+				'use strict';
+
 				/*** Object Constructor ***/
 					var
 						_class = _superclass.subclass (
@@ -323,6 +331,8 @@ Types of Modules
 		Uize.module ({
 			name:'Uize.Node',
 			builder:function () {
+				'use strict';
+
 				var _package = function () {};
 
 				/*
@@ -411,6 +421,8 @@ Types of Modules
 			name:'MyNamespace.MyWidgetClass',
 			superclass:'Uize.Widget',
 			builder:function (_superclass) {
+				'use strict';
+
 				/*** Object Constructor ***/
 					var
 						_class = _superclass.subclass (
@@ -525,6 +537,8 @@ Types of Modules
 			Uize.module ({
 				name:'MyNamespace.MyDataModule',
 				builder:function () {
+					'use strict';
+
 					var _cachedData; // cached copy of data object, so it doesn't get created over and over
 
 					return function (_getCopy) {
@@ -570,6 +584,8 @@ Types of Modules
 			Uize.module ({
 				required:'MyNamespace.MyDataModule',
 				builder:function () {
+					'use strict';
+
 					MyNamespace.MyDataModule ();  // causes data object to be constructed and cached
 
 					// DO THE REST OF THE STUFF
@@ -622,6 +638,8 @@ Types of Modules
 			Uize.module ({
 				name:'MyNamespace.EngineeringEmployees',
 				builder:function () {
+					'use strict';
+
 					var _cachedData;
 
 					return function (_getCopy) {
@@ -643,6 +661,8 @@ Types of Modules
 			Uize.module ({
 				name:'MyNamespace.FinanceEmployees',
 				builder:function () {
+					'use strict';
+
 					var _cachedData;
 
 					return function (_getCopy) {
@@ -667,6 +687,8 @@ Types of Modules
 					'MyNamespace.FinanceEmployees'
 				],
 				builder:function () {
+					'use strict';
+
 					var _cachedData;
 
 					return function (_getCopy) {

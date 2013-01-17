@@ -596,6 +596,8 @@ Test Module
 		Uize.module ({
 			name:'MyCompanySite.Test.MyCompanySite.CommonUtils',
 			builder:function () {
+				'use strict';
+
 				return Uize.Test.declare ({
 					title:'MyCompanySite.CommonUtils Test',
 					test:[
