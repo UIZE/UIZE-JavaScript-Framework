@@ -80,7 +80,7 @@ Uize.module ({
 							;
 							if (_returnTypeIsObject || _returnType == 'json')
 								_request.responseJson = _responseText
-									? (new Function ('var a=[' + _responseText + '];return a.pop()')) ()
+									? Function ('var a=[' + _responseText + '];return a.pop()') ()
 									: null
 							;
 							_this._xmlHttpRequest.abort ();

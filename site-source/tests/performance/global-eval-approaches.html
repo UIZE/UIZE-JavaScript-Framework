@@ -61,7 +61,7 @@ Uize.module ({
 			;
 
 			window.functionObjectBasedGlobalEval = function (_toEval) {
-				return (new Function (_toEval)) ();
+				return Function (_toEval) ();
 			};
 
 		/*** define the test code by overriding the performTest method of the page widget ***/

@@ -45,7 +45,7 @@ Uize.module ({
 					required:_compiledTemplate.required,
 					builder:function () {
 						var _package = function () {};
-						_package.process = new Function ('input',_compiledTemplate.code);
+						_package.process = Function ('input',_compiledTemplate.code);
 						_package.input = _compiledTemplate.input;
 						return _package;
 					}

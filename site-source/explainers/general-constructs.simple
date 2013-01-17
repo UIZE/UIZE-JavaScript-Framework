@@ -76,7 +76,7 @@ Value Transformer
 		Value Variable Always Named value
 			Unlike the case with a `value transformer function`, the value being transformed is always referenced inside a `value transformer expression` using the reserved variable name =value=.
 
-			This is because a Value Transformer Expression is essentially resolved to a Value Transformer Function using JavaScript's built-in =Function= object. So, for example, the Value Transformer Expression ='value &#42; value &#42; value'= is resolved automatically to a Value Transformer Function using the expression =new Function ('value','value &#42; value &#42; value')=, where the name of the function's single value parameter is always =value= by convention.
+			This is because a Value Transformer Expression is essentially resolved to a Value Transformer Function using JavaScript's built-in =Function= object. So, for example, the Value Transformer Expression ='value &#42; value &#42; value'= is resolved automatically to a Value Transformer Function using the expression =Function ('value','value &#42; value &#42; value')=, where the name of the function's single value parameter is always =value= by convention.
 
 	Different Types of Value Transformers
 		The `value transformer` construct is deliberately very generic, making it applicable in a number of different contexts and to a wide range of different types of value transformers.

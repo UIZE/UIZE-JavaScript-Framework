@@ -244,7 +244,7 @@ Uize.module ({
 							);
 						}
 						_updaterFunction = _updaterFunctions [_updaterFunctionId] =
-							new Function ('style',_functionChunks.join (''))
+							Function ('style',_functionChunks.join (''))
 						;
 					}
 

@@ -517,7 +517,7 @@ Uize.module ({
 				_pushToTemplateFunctionChunks (_blockLastChunk);
 				var
 					_templateFunctionCode = _templateFunctionChunks.join ('\n'),
-					_templateFunction = new Function ('input',_templateFunctionCode)
+					_templateFunction = Function ('input',_templateFunctionCode)
 				;
 				return (
 					_templateOptions.result == 'full'
@@ -583,7 +583,7 @@ Uize.module ({
 						(
 							_encodingsChainCache [_encodingsChainCacheKey] ||
 							(
-								_encodingsChainCache [_encodingsChainCacheKey] = new Function (
+								_encodingsChainCache [_encodingsChainCacheKey] = Function (
 									'e',
 									'return ' + _expandEncodingsChain ('e',_encodings,_reverse)
 								)

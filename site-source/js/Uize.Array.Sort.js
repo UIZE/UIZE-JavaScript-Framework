@@ -211,15 +211,18 @@ Uize.module ({
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
+			var
+				_package = function () {},
+				_Function = Function
+			;
 
 		/*** General Variables ***/
 			var
 				_sortValues = [],
-				_ascendingSort = new Function ('a','b','return a.v<b.v?-1:a.v>b.v?1:0'),
-				_descendingSort = new Function ('a','b','return a.v<b.v?1:a.v>b.v?-1:0'),
-				_ascendingSimpleSort = new Function ('a','b','return a<b?-1:a>b?1:0'),
-				_descendingSimpleSort = new Function ('a','b','return a<b?1:a>b?-1:0')
+				_ascendingSort = _Function ('a,b','return a.v<b.v?-1:a.v>b.v?1:0'),
+				_descendingSort = _Function ('a,b','return a.v<b.v?1:a.v>b.v?-1:0'),
+				_ascendingSimpleSort = _Function ('a,b','return a<b?-1:a>b?1:0'),
+				_descendingSimpleSort = _Function ('a,b','return a<b?1:a>b?-1:0')
 			;
 
 		/*** Public Static Methods ***/

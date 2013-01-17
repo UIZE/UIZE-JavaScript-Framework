@@ -135,7 +135,7 @@ Uize.module ({
 									'delete source.UIZE_UTIL_COUPLER_driver;'
 								);
 								_syncFunction = _syncFunctions [_propertiesSignature] =
-									new Function ('eventObj','target',_functionChunks.join (''))
+									Function ('eventObj,target',_functionChunks.join (''))
 								;
 							}
 

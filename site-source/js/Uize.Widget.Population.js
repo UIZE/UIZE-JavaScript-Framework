@@ -128,7 +128,7 @@ Uize.module ({
 						_insertionObjects.push ({
 							_precedingText:_templateStr.slice (_index,_nearestPropertyIndex),
 							_propertyPath:_nearestPropertyPath,
-							_propertyGetter:_nearestPropertyPath ? new Function ('obj','return ' + _nearestPropertyPath) : 0,
+							_propertyGetter:_nearestPropertyPath ? Function ('obj','return ' + _nearestPropertyPath) : 0,
 							_propertyValue:_nearestPropertyValue
 						});
 						_index = _nearestPropertyIndex;

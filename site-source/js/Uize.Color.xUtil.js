@@ -582,7 +582,7 @@ Uize.module ({
 				*/
 			};
 
-			var _returnTupleComponentAsIs = new Function ('tuple','componentNo','return tuple [componentNo]');
+			var _returnTupleComponentAsIs = Function ('tuple,componentNo','return tuple [componentNo]');
 			_object.sort = function (_colors,_referenceColor,_componentWeighting) {
 				if (_colors.length > 1) {
 					_componentWeighting = _ensureSettingIsTuple (_componentWeighting,1);

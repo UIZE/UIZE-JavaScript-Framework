@@ -341,16 +341,16 @@ Uize.module ({
 								- class modules, such as =Uize.Class=, =Uize.Fade=, =Uize.Widget=, etc.
 
 								EXAMPLE
-								................................................................................
-								myTest.expectFunction (Uize.copyInto);                           // returns true
-								myTest.expectFunction (myTest.expectFunction);                   // returns true
-								myTest.expectFunction (function (value) {alert (value)});        // returns true
-								myTest.expectFunction (new Function ('value','alert (value')));  // returns true
-								myTest.expectFunction (Date);                                    // returns true
-								myTest.expectFunction (Uize.Util);                               // returns true
-								myTest.expectFunction (Uize.Node);                               // returns true
-								myTest.expectFunction (Uize.Widget);                             // returns true
-								................................................................................
+								............................................................................
+								myTest.expectFunction (Uize.copyInto);                       // returns true
+								myTest.expectFunction (myTest.expectFunction);               // returns true
+								myTest.expectFunction (function (value) {alert (value)});    // returns true
+								myTest.expectFunction (Function ('value','alert (value')));  // returns true
+								myTest.expectFunction (Date);                                // returns true
+								myTest.expectFunction (Uize.Util);                           // returns true
+								myTest.expectFunction (Uize.Node);                           // returns true
+								myTest.expectFunction (Uize.Widget);                         // returns true
+								............................................................................
 
 								NOTES
 								- see the related =expectType= and =expectInstanceOf= instance methods
@@ -408,21 +408,21 @@ Uize.module ({
 									Using the =typeof= operator, instances of many of JavaScript's built-in objects (such as the =Date=, =RegExp=, =Number=, =Boolean=, and =String= objects) are considered of type ='object'= - not just instances of the built-in =Object= object. In addition, the value =null= is considered to be of type ='object'=. If you want to test specifically whether or not a value is an instance of the =Object= object, then you should use a statement like =myTest.expectInstanceOf (Object,value)=.
 
 								EXAMPLES
-								..............................................................................
-								myTest.expectObject ({});                                     // returns true
-								myTest.expectObject ({foo:'bar'});                            // returns true
-								myTest.expectObject (new Object);                             // returns true
-								myTest.expectObject ([]);                                     // returns true
-								myTest.expectObject (['foo','bar']);                          // returns true
-								myTest.expectObject (/^\s+$/);                                // returns true
-								myTest.expectObject (new Boolean (false));                    // returns true
-								myTest.expectObject (Uize.Widget.Bar.Slider ());              // returns true
-								myTest.expectObject (null);                                   // returns true
+								..........................................................................
+								myTest.expectObject ({});                                 // returns true
+								myTest.expectObject ({foo:'bar'});                        // returns true
+								myTest.expectObject (new Object);                         // returns true
+								myTest.expectObject ([]);                                 // returns true
+								myTest.expectObject (['foo','bar']);                      // returns true
+								myTest.expectObject (/^\s+$/);                            // returns true
+								myTest.expectObject (new Boolean (false));                // returns true
+								myTest.expectObject (Uize.Widget.Bar.Slider ());          // returns true
+								myTest.expectObject (null);                               // returns true
 
-								myTest.expectObject (undefined);                              // returns false
-								myTest.expectObject (function (value) {alert (value)});       // returns false
-								myTest.expectObject (new Function ('value','alert (value)');  // returns false
-								..............................................................................
+								myTest.expectObject (undefined);                          // returns false
+								myTest.expectObject (function (value) {alert (value)});   // returns false
+								myTest.expectObject (Function ('value','alert (value)');  // returns false
+								..........................................................................
 
 								NOTES
 								- see the related =expectType= and =expectInstanceOf= instance methods

@@ -818,7 +818,7 @@ Value Transformer Function
 		}
 		................................................................................
 
-		....................................................................................................
+		................................................................................................
 		var _cachedValueTransformers = {};
 		Uize.x = function (_unresolvedValueTransformer) {
 			var _valueTransformer = _unresolvedValueTransformer;
@@ -832,7 +832,7 @@ Value Transformer Function
 			} else {
 				_valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer += ''];
 				if (!_valueTransformer) {
-					_valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer] = new Function (
+					_valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer] = Function (
 						'x',
 						'return ' + _unresolvedValueTransformer
 					);
@@ -841,7 +841,7 @@ Value Transformer Function
 			}
 			return _valueTransformer;
 		};
-		....................................................................................................
+		................................................................................................
 
 		...............................................................................
 		function _x () {return _makeValueTransformer (this,arguments)}

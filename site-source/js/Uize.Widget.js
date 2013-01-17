@@ -678,14 +678,12 @@ Uize.module ({
 
 			/*** UI Node Methods ***/
 				function _makeNodeMethod (_methodPrefix,_methodSuffix) {
-					_classPrototype [_methodPrefix + 'Node' + _methodSuffix] =
-						new Function (
-							'arguments.length' +
-								'?(arguments[0]=this.getNode(arguments[0]))' +
-								':(arguments[arguments.length++]=this.getNode());' +
-							'return Uize.Node.' + _methodPrefix + _methodSuffix + '.apply(0,arguments)'
-						)
-					;
+					_classPrototype [_methodPrefix + 'Node' + _methodSuffix] = Function (
+						'arguments.length' +
+							'?(arguments[0]=this.getNode(arguments[0]))' +
+							':(arguments[arguments.length++]=this.getNode());' +
+						'return Uize.Node.' + _methodPrefix + _methodSuffix + '.apply(0,arguments)'
+					);
 				}
 
 				_classPrototype.getNode = function (_nodeBlob) {

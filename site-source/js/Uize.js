@@ -812,7 +812,7 @@ Uize = (function () {
 				var _sourceIsArray = _isArray (_source);
 				if (!_sourceIsArray || _source.length) {
 					if (typeof _iterationHandler == _typeString)
-						_iterationHandler = _Function ('value','key','source',_iterationHandler)
+						_iterationHandler = _Function ('value,key,source',_iterationHandler)
 					;
 					if (_sourceIsArray) {
 						if (_interpreterSupportsArrayForEach && !_allArrayElements) {
@@ -1106,7 +1106,7 @@ Uize = (function () {
 					: _typeofTransformer == _typeFunction
 						? _transformer
 						: _typeofTransformer == 'string'
-							? _Function ('value','key','return ' + _transformer)
+							? _Function ('value,key','return ' + _transformer)
 							: _typeofTransformer == 'object'
 								? (
 									_isRegExp (_transformer)
