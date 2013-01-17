@@ -1932,7 +1932,7 @@ Uize.module ({
 											_coverageAndOrder = []
 										;
 										_Subclass.stateProperties ({
-											name:{},
+											_name:'name',
 											myProperty:{
 												value:'initial value',
 												onChange:function () {_coverageAndOrder.push (this.get ('name'))}
@@ -1957,7 +1957,7 @@ Uize.module ({
 											_valuesWhenOnChangeCalled = []
 										;
 										_Subclass.stateProperties ({
-											name:{},
+											_name:'name',
 											myProperty:{
 												value:0,
 												conformer:function (_value) {
