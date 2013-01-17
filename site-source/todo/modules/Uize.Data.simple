@@ -20,55 +20,8 @@ Uize.Data.safeLookup
 		................................................................................
 
 ................................................................................
-Uize.Data.resolveTransformer = function (_transformer) {
-	return (
-		typeof _transformer == _typeFunction
-			? _transformer
-			: typeof _transformer == _typeString
-				? new Function ('value','key','return ' + _transformer)
-				: function (_value) {return _transformer.test (_value)}
-	);
-	/*?
-		Static Methods
-			Uize.Data.resolveTransformer
-				SYNTAX
-				..............................................................................
-				transformerFUNC = Uize.Data.resolveTransformer (transformerFUNCorSTRorREGEXP);
-				..............................................................................
-
-				NOTES
-				- see the related =Uize.Data.resolveMatcher= static method
-	*/
-};
-................................................................................
-
-................................................................................
-Uize.Data.resolveMatcher = function (_matcher,_inverse) {
-	_matcher = _class.resolveTransformer (_matcher);
-	_inverse = !!_inverse;
-	return function (_value,_key) {return !_matcher (_value,_key) == _inverse};
-	/*?
-		Static Methods
-			Uize.Data.resolveMatcher
-				SYNTAX
-				..................................................................
-				matcherFUNC = Uize.Data.resolveMatcher (matcherFUNCorSTRorREGEXP);
-				..................................................................
-
-				VARIATION
-				..............................................................................
-				matcherFUNC = Uize.Data.resolveMatcher (matcherFUNCorSTRorREGEXP,inverseBOOL);
-				..............................................................................
-
-				NOTES
-				- see the related =Uize.Data.resolveTransformer= static method
-	*/
-};
-................................................................................
-
-................................................................................
 Uize.Data.makeValueTransformerGenerator = function (_valueTransformer) {
-	_valueTransformer = Uize.Data.resolveTransformer (_valueTransformer);
+	_valueTransformer = Uize.resolveTransformer (_valueTransformer);
 	var _generator = function () {
 		if (arguments.length) {
 			var _arguments = [0];
