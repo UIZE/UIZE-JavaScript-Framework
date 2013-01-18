@@ -3888,6 +3888,18 @@ Uize = (function () {
 						...................................................................
 						quarantinedFunctionFUNC = Uize.quarantine (localScopeFunctionFUNC);
 						...................................................................
+
+						### Quarantining and Strict Mode
+							- mention impact of quarantining a function where the scope in which the function is defined is using strict mode
+							- quarantined function will be compliant with strict mode according at the time of being interpreted, but the quarantined version won't execute using strict mode unless you explicitly add the directive prologue in the function as well
+
+						### Benefits of Quarantining Using Uize.quarantine
+							- Scrunching Benefits
+								unlike using the Function constructor to create quarantined functions, identifiers inside functions that are quarantined using the =Uize.quarantine= method can be scrunched / minified
+							- Syntax errors and some strict mode compliance issues discovered early during parsing
+							- No need to deal with issues of writing JavaScript code using string literals
+								- multi-line string concatenation
+								- cumbersome escaping of quotes, backslashes, etc.
 			*/
 		};
 
