@@ -131,7 +131,7 @@ Uize.module ({
 					/*?
 						State Properties
 							pipedProperties
-								document...
+								.
 
 								NOTES
 								- the initial value is =undefined=
@@ -151,9 +151,10 @@ Uize.module ({
 					/*?
 						State Properties
 							valueFormatter
-								document...
-									NOTES
-									- the initial value is =undefined=
+								.
+
+								NOTES
+								- the initial value is =undefined=
 					*/
 				_valueWidgetClass:'valueWidgetClass'
 			});

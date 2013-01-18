@@ -1065,24 +1065,24 @@ Definitions of Terms
 
 ### Important Considerations
 	Delving Into Non-UIZE Pages
-		document...
+		.
 
 	When to Launch DELVE
-		document...
+		.
 
 		- not too soon, naturally
 
 	Heavily Dynamic Documents
-		document...
+		.
 
 	How DELVE Finds the Page Widget
-		document...
+		.
 
 	Reloading the Page Being Inspected
-		document...
+		.
 
 	Navigating Away From the Page Being Inspected
-		document...
+		.
 
 Issues That DELVE Helps To Troubleshoot
 	Issues With Missing DOM Nodes
@@ -1095,5 +1095,5 @@ Issues That DELVE Helps To Troubleshoot
 		To help you in locating widgets that are missing DOM nodes, the DELVE tool provides two `widget instance queries`: the `Wired widgets that are missing some DOM nodes` and `Wired widgets that appear to missing all DOM nodes` queries.
 
 	### Modules Loaded Unnecessarily
-		document...
+		.
 

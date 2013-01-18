@@ -132,13 +132,13 @@ Uize.module ({
 					###
 						Public Static Properties
 							segmentCodes
-								document...
+								.
 
 							segmentsStateToValueLookup
-								document...
+								.
 
 							valueToSegmentsStateLookup
-								document...
+								.
 				*/
 			};
 

@@ -4,7 +4,7 @@ Introduction
 	This document provides additional tips, along with some useful bookmarklets that should come in handy when doing development using the UIZE JavaScript Framework.
 
 ### Bookmarklets That Open Widgets in Popup Windows
-	document...
+	.
 
 	Examples
 	- calculator widget
@@ -471,7 +471,7 @@ Useful Troubleshooting Bookmarklets
 			............................................................................
 
 		More Examples
-			document...
+			.
 
 	### Remote Bookmarklet
 		- allows bulky bookmarklet implementation to be kept in external script file

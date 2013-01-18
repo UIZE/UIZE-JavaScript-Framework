@@ -2514,14 +2514,14 @@ Uize.module ({
 				/*?
 					Deprecated Features
 						Uize.returnFalse
-							document...
+							.
 				*/
 
 			_package.returnTrue = _Uize.returnTrue;
 				/*?
 					Deprecated Features
 						Uize.returnTrue
-							document...
+							.
 				*/
 
 		return _package;

@@ -267,10 +267,10 @@ Optimization Tricks
 		........................................................
 
 	Sacred Empty Object
-		document...
+		.
 
 	Sacred Empty Array
-		document...
+		.
 
 Code Size Optimization
 	- UIZE-specific: Leave State Property Initial Values undefined, where possible. don't define an initial value for a state property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)

@@ -92,10 +92,10 @@ Uize.module ({
 				/*?
 					Implied Nodes
 						maximized Implied Node
-							document...
+							.
 
 						minimized
-							document...
+							.
 				*/
 			};
 
@@ -135,7 +135,7 @@ Uize.module ({
 							/*?
 								Implied Nodes
 									maximize
-										document...
+										.
 							*/
 						);
 						_this.wireNode (
@@ -145,7 +145,7 @@ Uize.module ({
 							/*?
 								Implied Nodes
 									minimize
-										document...
+										.
 							*/
 						);
 
@@ -188,14 +188,14 @@ Uize.module ({
 					/*?
 						State Properties
 							contentId
-								document...
+								.
 					*/
 				},
 				_cookieName:'cookieName',
 					/*?
 						State Properties
 							cookieName
-								document...
+								.
 					*/
 				_cookiePath:{
 					name:'cookiePath',
@@ -203,7 +203,7 @@ Uize.module ({
 					/*?
 						State Properties
 							cookiePath
-								document...
+								.
 					*/
 				},
 				_edge:{
@@ -212,7 +212,7 @@ Uize.module ({
 					/*?
 						State Properties
 							edge
-								document...
+								.
 					*/
 				},
 				_fadeProperties:{
@@ -221,7 +221,7 @@ Uize.module ({
 					/*?
 						State Properties
 							fadeProperties
-								document...
+								.
 					*/
 				},
 				_maximized:{
@@ -237,20 +237,20 @@ Uize.module ({
 					/*?
 						State Properties
 							maximized
-								document...
+								.
 					*/
 				},
 				_maximizedHeight:'maximizedHeight',
 					/*?
 						State Properties
 							maximizedHeight
-								document...
+								.
 					*/
 				_minimizedHeight:'minimizedHeight',
 					/*?
 						State Properties
 							minimizedHeight
-								document...
+								.
 					*/
 				_whenToFadeOnInit:{
 					name:'whenToFadeOnInit',
@@ -258,7 +258,7 @@ Uize.module ({
 					/*?
 						State Properties
 							whenToFadeOnInit
-								document...
+								.
 					*/
 				}
 			});

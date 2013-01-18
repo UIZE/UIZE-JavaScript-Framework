@@ -112,7 +112,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										selector
-											document...
+											.
 								*/
 					}
 				),
@@ -156,7 +156,7 @@ Uize.module ({
 					/*?
 						State Properties
 							allowManualEntry
-								document...
+								.
 
 								NOTES
 								- the initial value is =true=
@@ -168,7 +168,7 @@ Uize.module ({
 					/*?
 						State Properties
 							dialogWidgetClass
-								document...
+								.
 
 								NOTES
 								- the initial value is =undefined=
@@ -177,7 +177,7 @@ Uize.module ({
 					/*?
 						State Properties
 							pipedProperties
-								document...
+								.
 
 								NOTES
 								- the initial value is =undefined=
@@ -197,9 +197,10 @@ Uize.module ({
 					/*?
 						State Properties
 							valueFormatter
-								document...
-									NOTES
-									- the initial value is =undefined=
+								.
+
+								NOTES
+								- the initial value is =undefined=
 					*/
 			});
 

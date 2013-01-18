@@ -802,7 +802,7 @@ Uize.module ({
 				/*?
 					Static Properties
 						Uize.Date.dayNoSuffixes
-							document...
+							.
 				*/
 
 			_package.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

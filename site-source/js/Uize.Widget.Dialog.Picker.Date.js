@@ -46,7 +46,7 @@ Uize.module ({
 						/*?
 							State Properties
 								displayFormat
-									document...
+									.
 
 									NOTES
 									- this value of this property is piped through to the =displayFormat= state property of the =Uize.Widget.Calendar= value widget
@@ -56,7 +56,7 @@ Uize.module ({
 						/*?
 							State Properties
 								minValue
-									document...
+									.
 
 									NOTES
 									- see the companion =maxValue= state property
@@ -67,7 +67,7 @@ Uize.module ({
 						/*?
 							State Properties
 								maxValue
-									document...
+									.
 
 									NOTES
 									- see the companion =minValue= state property

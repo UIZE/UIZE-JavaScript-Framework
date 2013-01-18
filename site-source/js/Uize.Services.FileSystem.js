@@ -43,7 +43,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							copyFile
-								document...
+								.
 
 								SYNTAX
 								........................................
@@ -52,10 +52,10 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 
 									targetPath
-										document...
+										.
 					*/
 				},
 
@@ -64,7 +64,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							deleteFile
-								document...
+								.
 
 								SYNTAX
 								........................................
@@ -73,7 +73,7 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 					*/
 				},
 
@@ -82,7 +82,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							fileExists
-								document...
+								.
 
 								SYNTAX
 								...........................................................
@@ -91,7 +91,7 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 					*/
 				},
 
@@ -100,7 +100,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							getFiles
-								document...
+								.
 
 								SYNTAX
 								.........................................................
@@ -109,16 +109,16 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 
 									pathMatcher
-										document...
+										.
 
 									pathTransformer
-										document...
+										.
 
 									recursive
-										document...
+										.
 					*/
 				},
 
@@ -127,7 +127,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							getFolders
-								document...
+								.
 
 								SYNTAX
 								...........................................................
@@ -136,13 +136,13 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 
 									pathMatcher
-										document...
+										.
 
 									pathTransformer
-										document...
+										.
 					*/
 				},
 
@@ -151,7 +151,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							getModifiedDate
-								document...
+								.
 
 								SYNTAX
 								.................................................................
@@ -160,7 +160,7 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 					*/
 				},
 
@@ -169,7 +169,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							readFile
-								document...
+								.
 
 								SYNTAX
 								..........................................................
@@ -178,7 +178,7 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 					*/
 				},
 
@@ -187,7 +187,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							pathExists
-								document...
+								.
 
 								SYNTAX
 								...........................................................
@@ -196,7 +196,7 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 					*/
 				},
 
@@ -205,7 +205,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							writeFile
-								document...
+								.
 
 								SYNTAX
 								.........................................
@@ -214,10 +214,10 @@ Uize.module ({
 
 								Params
 									path
-										document...
+										.
 
 									contents
-										document...
+										.
 					*/
 				},
 
@@ -226,7 +226,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							init
-								document...
+								.
 					*/
 				}
 			}

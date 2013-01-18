@@ -60,7 +60,7 @@ Proposed Simplified Interface
 			...................................................................................
 
 	Shortened Method Names
-		document...
+		.
 
 		- =Uize.Node.style= - set the values for one or more style properties for all the nodes of a node blob, or get the value for a single style property
 		- =Uize.Node.prop= - set the value for one or more properties, or get the value for a single property
@@ -85,7 +85,7 @@ Proposed Simplified Interface
 		- =Uize.Node.onerror=
 
 	Combo Setter and Getter Methods
-		document...
+		.
 
 	Method Chaining
 		To appease developers who are fond of method chaining, all modify type methods that don't need to return a result will return a reference to the `node blob`.

@@ -130,16 +130,16 @@ Iterator Interface
 			A =Uize.Iterator= object can be instantiated as a wrapper around a number of different source values.
 
 			Wrapping a Number
-				document...
+				.
 
 			Wrapping an Array
-				document...
+				.
 
 			Wrapping an Object
-				document...
+				.
 
 			Wrapping a JavaScript Iterator
-				document...
+				.
 
 		Modules Supporting Iterators
 			Several UIZE modules provide built-in support for the =Uize.Iterator= class.

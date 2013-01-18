@@ -14,7 +14,7 @@ Packaging
 	- HTML Template Compiling
 
 Third Party JavaScript
-	document...
+	.
 
 MVC System
 	Base classes would need to be provided for the model, view, and controller aspects of an MVC code architecture.
@@ -38,14 +38,14 @@ Visual Unit Tests for Widgets
 	This system should also make it possible to provide fake data services setup, as needed, in order to view widgets divorced from live application dependencies.
 
 CSS Class Namespacing
-	document...
+	.
 
 	CSS Class Namespacing in CSS Files
-		document...
+		.
 
 	CSS Class Name Expansion in HTML Templates
-		document...
+		.
 
 Localization
-	document...
+	.
 

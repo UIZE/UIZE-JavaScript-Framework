@@ -94,7 +94,7 @@ Uize.module ({
 								/*?
 									Child Widget
 										value
-											document...
+											.
 								*/
 							);
 
@@ -105,7 +105,7 @@ Uize.module ({
 								/*?
 									Child Widget
 										keepOpen Child Widget
-											document...
+											.
 								*/
 							);
 
@@ -161,7 +161,7 @@ Uize.module ({
 						/*?
 							Instance Events
 								Submission Complete
-									document...
+									.
 						*/
 					})
 				;
@@ -176,7 +176,7 @@ Uize.module ({
 					/*?
 						State Properties
 							keepOpen
-								document...
+								.
 
 								NOTES
 								- the initial value is =false=
@@ -188,7 +188,7 @@ Uize.module ({
 					/*?
 						State Properties
 							pipedProperties
-								document...
+								.
 
 								NOTES
 								- the initial value is =undefined=
@@ -197,7 +197,7 @@ Uize.module ({
 					/*?
 						State Properties
 							value
-								document...
+								.
 
 								NOTES
 								- the initial value is =undefined=

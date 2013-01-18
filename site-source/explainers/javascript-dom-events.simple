@@ -446,28 +446,29 @@ Event Wiring Basics
 
 ### Supported Events
 	### Events Common to All Nodes
-		document...
-			- link to external documentation for each event
+		.
+
+		- link to external documentation for each event
 
 	### Node-specific Events
-		document...
+		.
 
 	### Window Events
-		document...
+		.
 
 	### Virtual DOM Events
 		[ factor documentation out of reference doc for Uize.Node.VirtualEvent module ]
 
 ### The Event Object
-	document...
+	.
 
 	### Event Object Abstraction
-		document...
+		.
 
 	### Cross-browser Event Object Issues
 
 	### The Uize.Node.Event Module
-		document...
+		.
 
 		### show preventDefault use case
 		### why not just always fix all events?
@@ -476,45 +477,45 @@ Event Wiring Basics
 
 ### Widgets and DOM Events
 	Wiring Widget Implied Nodes
-		document...
+		.
 
 		Wiring Implied Nodes
-			document...
+			.
 
 			Wiring Implied Nodes Inside wireUi
-				document...
+				.
 
 		Unwiring Implied Nodes
-			document...
+			.
 
 			Automatic Unwiring Inside unwireUi
-				document...
+				.
 
 			Manually Unwiring Implied Nodes
-				document...
+				.
 
 	Wiring Page Widget Implied Nodes
-		document...
+		.
 
 	###
 		- events wired using wireNode method after wireUi has been called with also be unwired by the unwireUi method
 
 ### Advanced Topics
 	Ownership of Event Wirings
-		document...
+		.
 
 		Discrete Widget Ownership
-			document...
+			.
 
 		Global Wirings Owner
-			document...
+			.
 
 	Circular Reference Isolation System (CRIS)
-		document...
+		.
 
 	Preventing Default Browser Behavior
-		document...
+		.
 
 ### External Resources
-	document...
+	.
 

@@ -3,19 +3,19 @@ Introduction
 
 What Type of Example Page Are You Creating?
 	Module Showcases
-		document...
+		.
 
 	Widget Showcases
-		document...
+		.
 
 	Behavior or Feature Showcases
-		document...
+		.
 
 	Demo Applications
-		document...
+		.
 
 	Tools
-		document...
+		.
 
 Implement the Example Page
 	When implementing your new UIZE example page, there are a number of considerations to keep in mind.
@@ -120,7 +120,7 @@ Example Page Requirements
 				- zoom
 
 		Module Name Keywords
-			document...
+			.
 
 	Main Layout
 		Explanation
@@ -181,8 +181,10 @@ Example Page Requirements
 				- If the `main content` of an example page *must* extend beneath the `maximum height marker`, make sure at least to fit a compelling portion of the `main content` above the `maximum height marker`, so that the user viewing the example can at least get a good sense of what it offers at first glance - there must be something sufficiently juicy within plain view.
 
 	Comments
-		document...
+		.
+
 		Comment the Example Page Source
+			.
 
 	Conform to the HTML Style Guide
 		- refer to the HTML Style Guide
@@ -211,7 +213,7 @@ What's Done for You Automatically
 		The example pages listed in any of the `examples by keyword listings`, as well as the `all examples listing`, can be viewed in a step-by-step tour ([[../javascript-feature-tours.html?tour=all][see example]]), so any example page you create will be available in at least one tour, and possibly more (depending on how many `category keywords` you supply).
 
 Announce a New Example Page or Tool
-	document...
+	.
 
 Revisit This Explainer, As Needed
 	Developers using the UIZE JavaScript Framework will use the example pages you create to learn how to use the framework or the UIZE modules that you develop that are showcased by your example pages.

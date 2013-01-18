@@ -110,7 +110,7 @@
 
 		### Specifying Color Values
 			Automatic Encoding Detection
-				document...
+				.
 
 			Disambiguating Encoding
 				SYNTAX

@@ -14,14 +14,12 @@ Introduction
 	This document discusses the methods and properties of the =Array= object, providing copious examples and plenty of clever tips and tricks along the way.
 
 	### Create an Array
-		document...
+		.
 
 		### Arrays As Results of Methods
-			document...
+			.
 
 	### Add Elements to An Array
-		### document...
-
 		Insert a Single Element to the End of an Array
 			- using push
 			- assigning at the end
@@ -33,14 +31,14 @@ Introduction
 			- using splice
 
 		Insert Multiple Elements at the Beginning of an Array
-			document...
+			.
 
 			###
 				- using unshift
 				- using splice
 
 		Insert Multiple Elements at the End of an Array
-			document...
+			.
 
 			###
 				- using push
@@ -51,23 +49,23 @@ Introduction
 			must use splice
 
 	### Index Array Elements
-		document...
+		.
 
 	### Different Types of Array Methods
 		### Methods That Modify Arrays
-			document...
+			.
 
 		### Methods That Create New Arrays
-			document...
+			.
 
 		### Methods That Return Arrays
-			document...
+			.
 
 		### Methods That Don't Return Arrays
-			document...
+			.
 
 		### Methods That Reorder Elements
-			document...
+			.
 
 	Remove Elements From An Array
 		Remove the First Element From an Array
@@ -135,7 +133,7 @@ Introduction
 				It's technically correct, but it's kind of ugly.
 
 		Remove Multiple Elements at the End of an Array
-			document...
+			.
 
 		Empty Out An Array
 			An array can be emptied of all of its elements by simply setting the value of its =length= property to =0=.
@@ -153,8 +151,6 @@ Introduction
 			..........................................................................................
 
 		Remove All Elements Having a Specific Value From An Array
-			### document...
-
 			EXAMPLE
 			............................................................................................
 			function removeFromArray (_array,_value) {
@@ -172,7 +168,7 @@ Introduction
 			............................................................................................
 
 		### Remove Duplicates From An Array
-			document...
+			.
 
 	Copy Elements of an Array
 		One Level Deep Copy
@@ -244,24 +240,18 @@ Introduction
 
 	Move Elements Between Arrays
 		Move the Contents of One Array to the End of Another Array
-			### document...
-
 			SYNTAX
 			.....................................................................
 			targetARRAY.push.apply (targetARRAY,sourceARRAY.splice (0,Infinity));
 			.....................................................................
 
 		Move the Contents of One Array to the Beginning of Another Array
-			### document...
-
 			SYNTAX
 			........................................................................
 			targetARRAY.unshift.apply (targetARRAY,sourceARRAY.splice (0,Infinity));
 			........................................................................
 
 		Swap the Contents of Two Arrays
-			### document...
-
 			SYNTAX
 			.......................................................................
 			array1ARRAY.push.apply (
@@ -283,8 +273,6 @@ Introduction
 			..............................................................................
 
 		Swap Beginning Segments of a Specified Length Between Two Arrays
-			### document...
-
 			SYNTAX
 			..............................................................................
 			array1ARRAY.unshift.apply (
@@ -297,8 +285,6 @@ Introduction
 			..............................................................................
 
 		Swap End Segments of a Specified Length Between Two Arrays
-			### document...
-
 			SYNTAX
 			...........................................................................................
 			segmentLengthINT && array1ARRAY.push.apply (
@@ -312,16 +298,14 @@ Introduction
 
 	Reorder the Elements of an Array
 		Reverse the Order of Elements of an Array
-			document...
+			.
 
 		Sort the Elements of an Array
-			document...
+			.
 
 	### Assigning Arbitrary Properties
-		### document...
-
 		Arbitrary Properties Don't Impact Length
-			document...
+			.
 
 		Property Names That Are Numbers
 			Property names that are numbers are treated as element indexes.
@@ -330,7 +314,7 @@ Introduction
 			Indexes that aren't positive integers are treated as property names.
 
 	Chain Array Method Calls
-		document...
+		.
 
 Constructor
 
@@ -362,8 +346,6 @@ Constructor
 	...........................................................................................
 
 	Create a New Empty Array
-		### document...
-
 		SYNTAX
 		......................................................................................
 		newARRAY = [];             // the most concise
@@ -373,8 +355,6 @@ Constructor
 		......................................................................................
 
 	Create a New Array of a Desired Length
-		### document...
-
 		SYNTAX
 		........................................
 		newARRAY = new Array (initialLengthINT);
@@ -386,8 +366,6 @@ Constructor
 			Specifying a negative number, a non-integer number, or any of the special number values =-Infinity=, =Infinity=, or =NaN= will result in a JavaScript error being generated.
 
 	Create a New Array Seeded With a Single Value
-		### document...
-
 		SYNTAX
 		...............................................................................
 		newARRAY = [valueANYTYPE];            // the most concise
@@ -395,8 +373,6 @@ Constructor
 		...............................................................................
 
 	Create a New Array Seeded With Multiple Values
-		### document...
-
 		SYNTAX
 		...........................................................................................
 		newARRAY = [element0ANYTYPE,element1ANYTYPE,...,elementNANYTYPE];           // most concise
@@ -825,7 +801,7 @@ Instance Methods
 			This technique is similar to the technique that can be used with the =toString= method to `create a string containing an arbitrary number of commas` (remember, `toString is a special case of join`). Because the =join= method's `custom delimiter can be of any type`, you can use this technique to repeat any type of value to form a new string.
 
 		Do a Hug Join, Where Each Element is Wrapped in a Prefix and Suffix
-			document...
+			.
 
 			SYNTAX
 			............................................................
@@ -887,8 +863,6 @@ Instance Methods
 		- this method modifies the array on which it is called
 
 	push
-		### document...
-
 		DIFFERENT USAGES
 
 		`Push a Single Value Onto the End of an Array`...
@@ -913,7 +887,7 @@ Instance Methods
 		...........................................
 
 		### Push a Single Value Onto the End of an Array
-			document...
+			.
 
 			SYNTAX
 			.......................................................
@@ -921,7 +895,7 @@ Instance Methods
 			.......................................................
 
 		### Push Any Number of Values Onto the End of an Array
-			document...
+			.
 
 			SYNTAX
 			........................................................................................
@@ -929,7 +903,7 @@ Instance Methods
 			........................................................................................
 
 		### Push the Elements of a Source Array Onto the End of a Target Array
-			document...
+			.
 
 			SYNTAX
 			........................................................................
@@ -1020,8 +994,6 @@ Instance Methods
 		- this method modifies the array on which it is called
 
 	slice
-		### document...
-
 		DIFFERENT USAGES
 
 		`Get a Slice From a Start Element up to But Not Including an End Element`...
@@ -1055,7 +1027,7 @@ Instance Methods
 		................................
 
 		### Get a Slice From a Start Element up to But Not Including an End Element
-			document...
+			.
 
 			SYNTAX
 			...........................................................................
@@ -1063,7 +1035,7 @@ Instance Methods
 			...........................................................................
 
 		### Get a Slice From a Start Element to an End Element
-			document...
+			.
 
 			SYNTAX
 			...............................................................................
@@ -1071,7 +1043,7 @@ Instance Methods
 			...............................................................................
 
 		### Get a Slice From a Start Element to the End of the Array
-			document...
+			.
 
 			SYNTAX
 			...........................................................
@@ -1079,7 +1051,7 @@ Instance Methods
 			...........................................................
 
 		### Get a Slice of a Specified Length at the End of an Array
-			document...
+			.
 
 			SYNTAX
 			...........................................................
@@ -1087,7 +1059,7 @@ Instance Methods
 			...........................................................
 
 		### Get a Slice of a Specified Length at the Beginning of an Array
-			document...
+			.
 
 			SYNTAX
 			............................................................
@@ -1109,8 +1081,6 @@ Instance Methods
 		- this method is chainable (see `Chain Array Method Calls`)
 
 	sort
-		### document...
-
 		DIFFERENT USAGES
 
 		`Sort an Array Using the Default Comparison Function`...
@@ -1124,7 +1094,7 @@ Instance Methods
 		................................................
 
 		### Sort an Array Using the Default Comparison Function
-			document...
+			.
 
 			SYNTAX
 			..................................
@@ -1132,7 +1102,7 @@ Instance Methods
 			..................................
 
 		### Sort an Array Using a Custom Comparison Function
-			document...
+			.
 
 			SYNTAX
 			................................................
@@ -1144,8 +1114,6 @@ Instance Methods
 		- this method is chainable (see `Chain Array Method Calls`)
 
 	splice
-		### document...
-
 		DIFFERENT USAGES
 
 		`Replace a Segment of a Specified Length, From a Specified Start Element, With New Elements`...
@@ -1419,8 +1387,6 @@ Instance Methods
 		- this method *does not* modify the array on which it is called
 
 	unshift
-		### document...
-
 		DIFFERENT USAGES
 
 		`Insert a Single Element at the Beginning of an Array`...
@@ -1445,7 +1411,7 @@ Instance Methods
 		..............................................
 
 		### Insert a Single Element at the Beginning of an Array
-			document...
+			.
 
 			SYNTAX
 			..........................................................
@@ -1453,7 +1419,7 @@ Instance Methods
 			..........................................................
 
 		### Insert Any Number of Values at the Beginning of an Array
-			document...
+			.
 
 			SYNTAX
 			...........................................................................................
@@ -1461,7 +1427,7 @@ Instance Methods
 			...........................................................................................
 
 		### Insert the Elements of a Source Array at the Beginning of a Target Array
-			document...
+			.
 
 			SYNTAX
 			...........................................................................
@@ -1513,8 +1479,6 @@ Instance Properties
 		.....
 
 	length
-		### document...
-
 		DIFFERENT USAGES
 
 		`Empty Out an Array`...
@@ -1566,5 +1530,5 @@ Static Properties
 
 ### Methods of Other Objects That Return Arrays
 	### split Instance Method of String Object
-		document...
+		.
 

@@ -87,14 +87,14 @@
 					The =Uize.Data.Matches.remove= method is versatile and supports a number of different usages. For more in-depth info, consult the method's [[Uize.Data.Matches.remove][reference documentation]].
 
 				Retaining Matches
-					document...
+					.
 
 					EXAMPLE
 					...
 					...
 
 			Counting Matches
-				document...
+				.
 
 				EXAMPLE
 				...
@@ -108,56 +108,56 @@
 				...
 
 			Getting the Key or Value of the First Match
-				document...
+				.
 
 				EXAMPLE
 				...
 				...
 
 			Specifying a Source
-				document...
+				.
 
 				Specifying an Array Source
-					document...
+					.
 
 				Specifying an Object Source
-					document...
+					.
 
 				Specifying a Range Source
-					document...
+					.
 
 			Specifying a Matcher
-				document...
+				.
 
 				Matching Items Using a Matcher Function
-					document...
+					.
 
 				Matching Items Using a Matcher Expression String
-					document...
+					.
 
 				Matching Items Using a Value Matcher Regular Expression
-					document...
+					.
 
 				Matching All Items
-					document...
+					.
 
 				Matching No Items
-					document...
+					.
 
 				Matching by Value
-					document...
+					.
 
 				Matching by Key / Index
-					document...
+					.
 
 				Matching by Key and Value
-					document...
+					.
 
 			Limiting the Number of Matches
-				document...
+				.
 
 			Specifying a Target
-				document...
+				.
 */
 
 Uize.module ({

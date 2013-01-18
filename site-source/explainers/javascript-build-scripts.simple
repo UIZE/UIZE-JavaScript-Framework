@@ -274,7 +274,7 @@ The Build Scripts
 			Among other things, this means that JavaScript files that are not well suited to scrunching (perhaps they're missing semi-colons at the end of statements) are still available in their unscrunched form and can be accessed just as they always were. At any stage, there may be some JavaScript files that are not accessed in their scrunched form when a site is live - this is entirely up to you. Leaving the source unmolested also means that you can switch back and forth between using the scrunched and unscrunched code in order to troubleshoot problems.
 
 		Head Comments
-			document...
+			.
 
 		NOTES
 		- the core of the intelligence of the Auto Scruncher build script can be found in the =Uize.Build.AutoScruncher= module
@@ -469,7 +469,7 @@ Build Environment Variables
 		The build scripts make use of modules of the UIZE JavaScript Framework. Also, some build scripts actually build files from the JavaScript module (=.js=) files and JavaScript template (=.js.jst=) files inside the modules folder. In order for the build scripts to know where to load these files from, the =moduleFolderPath= build environment variable should be modified, if necessary, to correctly point to the location of the JavaScript modules folder.
 
 	scrunchedHeadComments
-		document...
+		.
 
 	sourceFolderName
 		A string, specifying the folder name for folders that contain source (ie. unscrunched) JavaScript files.

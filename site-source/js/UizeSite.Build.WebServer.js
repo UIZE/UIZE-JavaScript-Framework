@@ -30,22 +30,22 @@
 
 		Parameters
 			sourcePath
-				document...
+				.
 
 			tempPath
-				document...
+				.
 
 			builtPath
-				document...
+				.
 
 			freshBuild
-				document...
+				.
 
 			isDev
-				document...
+				.
 
 			scrunchedHeadComments
-				document...
+				.
 */
 
 Uize.module ({
@@ -132,13 +132,13 @@ Uize.module ({
 									A string, specifying the folder path for the built files of the site.
 
 								freshBuild
-									document...
+									.
 
 								isDev
-									document...
+									.
 
 								scrunchedHeadComments
-									document...
+									.
 				*/
 			};
 

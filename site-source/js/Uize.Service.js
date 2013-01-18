@@ -275,7 +275,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Service.serviceMethods
-							document...
+							.
 
 							EXAMPLE
 							..........................................
@@ -374,7 +374,7 @@ Uize.module ({
 					/*?
 						State Properties
 							adapter
-								document...
+								.
 					*/
 				},
 				_initialized:{
@@ -383,7 +383,7 @@ Uize.module ({
 					/*?
 						State Properties
 							initialized
-								document...
+								.
 					*/
 				}
 			});

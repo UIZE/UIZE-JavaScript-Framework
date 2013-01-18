@@ -122,10 +122,10 @@ Derived Properties
 			After setting values for the state properties that are being set explicitly, and before executing onChange handlers for any state properties whose values have changed, the declared state properties are scanned for derived state properties that may be affected by the properties being set explicitly. If any derived state properties *are* affected by any of the state properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
 
 			Advantages
-				document...
+				.
 
 			Disadvantages
-				document...
+				.
 
 		Single Level Derived Property Batching
 			With this approach, values for all directly affected derived state properties are set in a batch set that occurs before =onChange= handlers are executed for the state properties being explicitly set.

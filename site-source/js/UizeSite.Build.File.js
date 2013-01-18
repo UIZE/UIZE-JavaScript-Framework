@@ -30,28 +30,28 @@
 
 		Parameters
 			builtPath
-				document...
+				.
 
 			freshBuild
-				document...
+				.
 
 			isDev
-				document...
+				.
 
 			memoryPath
-				document...
+				.
 
 			minAllowedModifiedDate
-				document...
+				.
 
 			url
-				document...
+				.
 
 			sourcePath
-				document...
+				.
 
 			tempPath
-				document...
+				.
 */
 
 Uize.module ({

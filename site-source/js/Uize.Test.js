@@ -24,7 +24,7 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 
 	### In a Nutshell
-		document...
+		.
 
 */
 

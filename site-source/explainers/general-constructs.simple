@@ -2,7 +2,7 @@ Introduction
 	This document describes a number of general constructs that apply across the entire UIZE JavaScript Framework, and can apply in application programming more generally.
 
 ### Array-like Values
-	document...
+	.
 
 Value Transformer
 	A value transformer is code (specified as a `value transformer function`) that transforms one value to another value.
@@ -185,7 +185,7 @@ Value Transformer
 			In the above example, the =computeArea= function defines a `value transformer` that transforms an input value that is expected to be an object with =width= and =height= properties, into an area value that is computed as the product of the =width= and =height= properties. This value transformer is then supplied to the =Uize.map= method, which is used to produce an array containing the areas computed from the rectangle objects inside the =rects= array. After the above code has been executed, the statement =alert (rectAreas)= would display the text "50,7,12" in the alert dialog.
 
 	### Supporting Value Transformers
-		document...
+		.
 
 Value Matcher
 	A value matcher is code (specified as a `value matcher function`) that transforms a value to a boolean value.
@@ -243,7 +243,7 @@ Value Matcher
 			The variable =myString=, in this case, will contain only the lines of the source multi-line string that have at least one non-whitespace character - lines containing only whitespace are matched by the =isOnlyWhitespace= matcher function and are removed by the =Uize.String.Lines.removeMatching= method.
 
 	### Value Matcher Expression
-		document...
+		.
 
 		EXAMPLE
 		.......................
@@ -251,7 +251,7 @@ Value Matcher
 		.......................
 
 		Using a Value Matcher Expression
-			document...
+			.
 
 			EXAMPLE
 			...............................................................................
@@ -259,7 +259,7 @@ Value Matcher
 			...............................................................................
 
 	### Value Matcher Regular Expression
-		document...
+		.
 
 		EXAMPLE
 		.......
@@ -267,7 +267,7 @@ Value Matcher
 		.......
 
 		Using a Value Matcher Regular Expression
-			document...
+			.
 
 			EXAMPLE
 			...............................................................
@@ -315,7 +315,7 @@ Value Matcher
 				In the above example, all lines that contain at least one non-whitespace character will be retained in the string specified by the =myString= variable (so, empty lines or lines with only whitespace will be removed), and the resulting string will be assigned back to the =myString= variable.
 
 	### Supporting Value Matchers
-		document...
+		.
 
 Value Conformer
 	A value conformer is code (specified as a `value conformer function`) that transforms a value so that it conforms to certain criteria.
@@ -416,7 +416,7 @@ Value Validator
 		In the above example, the =validateInRange0to100= function defines a `value validator` that validates that a value is in the range of =0= to =100=.
 
 		### Using a Value Validator Function
-			document...
+			.
 
 Conformers vs. Validators
 	Conformers and validators are similar in nature, and can be considered to be two sides of the same coin.
@@ -462,7 +462,7 @@ Conformers vs. Validators
 		Similarly, the =conformToRange0to100= function defined in the example in the `Conformers vs. Validators` section could be used to derive the =validateInRange0to100= validator function using the statement =deriveValidatorFromConformer (conformToRange0to100)=.
 
 ### Value Adapter
-	document...
+	.
 
 	STRUCTURE
 	...................................
@@ -499,7 +499,7 @@ Conformers vs. Validators
 		........................................................
 
 ### Property Specifier
-	document...
+	.
 
 ### Value and Key Transformer
 	A `value and key transformer` is a function that transforms a value and key to a new value.
@@ -512,5 +512,5 @@ Conformers vs. Validators
 	...
 
 ### Value and Key Matcher
-	document...
+	.
 

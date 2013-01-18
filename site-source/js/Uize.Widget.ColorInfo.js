@@ -55,16 +55,16 @@ Uize.module ({
 					/*?
 						Implied Nodes
 							value Implied Node
-								document...
+								.
 
 							swatch
-								document...
+								.
 
 							asBackground
-								document...
+								.
 
 							asForeground
-								document...
+								.
 					*/
 				}
 			};

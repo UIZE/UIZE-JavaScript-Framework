@@ -339,7 +339,7 @@ Uize.module ({
 									The =htmlParamsOBJ= may contain any number of arbitrary properties that are used by the HTML generator in generating its HTML output, so the properties supported will depend entirely upon the particular HTML generator.
 
 								loaderDirectivesOBJorCallbackFUNC
-									document...
+									.
 
 									...
 									{
@@ -353,7 +353,7 @@ Uize.module ({
 									When the value of the =loaderDirectivesOBJorCallbackFUNC= parameter is an object, the object supports the following properties...
 
 									callback
-										document...
+										.
 
 
 							Loading is Implemented Elsewhere

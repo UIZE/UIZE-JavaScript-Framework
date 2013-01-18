@@ -11,7 +11,7 @@
 
 /*?
 	Introduction
-		document...
+		.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

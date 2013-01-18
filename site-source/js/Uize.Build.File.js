@@ -36,28 +36,28 @@
 
 		Parameters
 			builtPath
-				document...
+				.
 
 			freshBuild
-				document...
+				.
 
 			isDev
-				document...
+				.
 
 			memoryPath
-				document...
+				.
 
 			minAllowedModifiedDate
-				document...
+				.
 
 			url
-				document...
+				.
 
 			sourcePath
-				document...
+				.
 
 			tempPath
-				document...
+				.
 */
 
 Uize.module ({
@@ -364,10 +364,10 @@ Uize.module ({
 									A string, specifying the folder path for the built files of the site.
 
 								minAllowedModifiedDate
-									document...
+									.
 
 								isDev
-									document...
+									.
 				*/
 			};
 
