@@ -1,0 +1,88 @@
+The UIZE JavaScript Framework is designed to use [[https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode][JavaScript strict mode]].
+
+Some Background on JavaScript Strict Mode
+	JavaScript strict mode was introduced as a way of helping to pave the way to future versions of the ECMAScript language (aka JavaScript / JScript).
+
+	Preparing for the Future
+		Opting in to JavaScript strict mode is a way of restricting what can be done in one's code in order to ensure that one's code will be compliant with newer versions of the language when they become available.
+
+		When using strict mode, certain code practices that were be permitted with earlier versions of JavaScript, but that are proscribed by the upcoming versions, will cause JavaScript errors to be thrown. In a nutshell, you basically want to ensure now that your codebase is happy when using JavaScript strict mode in order to minimize the future pain of having to make potentially more serious and costly retrofits down the line in order to benefit from the features of newer versions of the language. In this spirit, the entire codebase of the UIZE JavaScript Framework is written to use strict mode.
+
+	Online Resources
+		There are numerous impacts that arise from using JavaScript strict mode.
+
+		Rather than go into detail on these impacts here, please spend some time reviewing some of the articles available online on the subject...
+
+		- [[https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode][Strict mode (Mozilla Developer Network)]]
+		- [[http://msdn.microsoft.com/en-us/library/ie/br230269%28v=vs.94%29.aspx][Strict mode (Microsoft Developer Network)]]
+		- [[http://www.nczonline.net/blog/2012/03/13/its-time-to-start-using-javascript-strict-mode/][It’s time to start using JavaScript strict mode]], by Nicholas Zakas
+
+UIZE Strict Mode and Your Own Code
+	Strict Mode in UIZE is Friendly to File Concatenation
+		The way that the UIZE modules implement JavaScript strict mode, you don't have to worry about concatenating UIZE modules along with your own JavaScript code that may not use strict mode.
+
+		The well-conceived syntax for declaring modules in UIZE makes it easy to update a module to use strict mode without having to worry about possible interactions with other modules or code libraries that would be concatenated alongside it when packaging JavaScript code to be ready for a production environment. This is because JavaScript strict mode is implemented as an opt-in at a function level (lexically scoped), and because the implementation code for a UIZE module is always contained inside a builder function.
+
+		EXAMPLE
+		...............................
+		Uize.module ({
+			name:'MyNamespace.MyModule',
+			builder:function () {
+				'use strict';
+
+				// IMPLEMENTATION
+			}
+		});
+		...............................
+
+		In the above example, the ='use strict'= directive prologue is being used to indicate that the code inside the =builder= function of the =MyNamespace.MyModule= module must be interpreted and run using JavaScript strict mode. Now, the code from this module can be concatenated into the same JavaScript file alongside other code that does not use strict mode without any worries - the ='use strict'= directive inside the =builder= function applies only to that function and not to the other code concatenated alongside. That other code can, itself, independently opt in to using strict mode.
+
+	Strict Mode For Your Code Recommended, But Not Required
+		While it is recommended that you update your own code to use strict mode as a way of `preparing for the future` of the JavaScript, using strict mode is still entirely optional
+
+		Your own modules don't have to be implemented using strict mode in order to work with UIZE. You can use UIZE modules that use strict mode alongside your own modules that don't use strict mode. You can even create a subclass of a UIZE module where the UIZE superclass module uses strict mode but where the code in your subclass does not (this is thanks to the lexically scoped nature of strict mode).
+
+Strict Mode and Code Evaluation
+	- mention =Uize.eval= and =Uize.laxEval=, as they pertain to strict mode
+	- if you're in strice mode code, how do you execute some code that's not in strict mode
+	- if you're in non-strict code, how do you evaluate code in strict mode
+
+	Strict Mode and Quarantined Code Evaluation
+		.
+
+	Strict Mode and Uize.quarantine
+		.
+
+Caveats
+	Can currently not have a class that has a state property whose private name is "name".
+
+	FAILS
+	...
+	var MyClass = Uize.Class.subclass ({
+		stateProperties:{
+			name:{
+				value:'this is my name'
+			}
+		}
+	});
+	...
+
+	WORKS
+	...
+	var MyClass = Uize.Class.subclass ({
+		stateProperties:{
+			_name:{
+				name:'name',
+				value:'this is my name'
+			}
+		}
+	});
+	...
+
+	The reason for this is that the initial value for every state property is stored as a property on the class. Unfortunately (from a certain perspective), more recent versions of JavaScript have introduced the =name= property on =Function= instances, and classes are essentially constructor functions. Moreover, this =name= property is read-only and this is enforced in JavaScript strict mode by throwing an error when trying to set its value, which is what the =Uize.Class.stateProperties= feature declaration method tries to do. You can still have a class that has a =name= state property that is accessible publicly as =name= when using the =set= and =get= instance methods and the =Uize.Class.set= and =Uize.Class.get= static methods, but you have to declare it with a private name other than "name" in order to avoid the conflict with the =name= read-only property of functions.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-18 - UIZE Gets Strict
+....................................................................................
