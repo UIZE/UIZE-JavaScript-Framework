@@ -197,6 +197,7 @@ Uize.module ({
 									_explainer ('JavaScript Testing Framework'),
 									_explainer ('JavaScript Documentation System'),
 									_explainer ('All About Scrunching'),
+									_explainer ('JavaScript Strict Mode'),
 									_explainer ('JavaScript Troubleshooting'),
 									_explainer ('Using the DELVE Tool'),
 									_divider,
