@@ -4401,10 +4401,26 @@ Uize = (function () {
 				var _name = _resolveModuleDefinition (_definition).name;
 				if (!_name || _moduleDefinitionsClaimed [_name] != _trueFlag) {
 					_moduleDefinitionsClaimed [_name] = _modulesAlreadyInvoked [_name] = _trueFlag;
+					var _required = _definition.required;
 					_package.require (
-						_definition.required,
+						_required,
 						function () {
-							var _module = (_definition.builder || _package.nop) (_getModuleByName (_definition.superclass));
+							var
+								_module,
+								_builder = _definition.builder
+							;
+							if (_builder) {
+								var _requiredLookup = {};
+								for (var _requiredNo = _required.length; --_requiredNo >= 0;) {
+									var _requireModule = _required [_requiredNo];
+									_requiredLookup [_requireModule] = _modulesByName [_requireModule];
+								}
+								var _superclass = _definition.superclass;
+								_module = _superclass
+									? _builder (_modulesByName [_superclass],_requiredLookup)
+									: _builder (_requiredLookup)
+								;
+							}
 							_name &&
 								(_Function (_name + '=arguments[0]')) (
 									_module = _modulesByName [_name] = _module || function () {}
