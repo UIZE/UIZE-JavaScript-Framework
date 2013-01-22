@@ -1,0 +1,10 @@
+<%@
+	required ('UizeSite.Templates.IndexPage');
+	input ({files:'array'});
+%><%= UizeSite.Templates.IndexPage.process ({
+	title:'Modules TO DO Index',
+	description:'This index lists all the TO DO lists for modules of the UIZE JavaScript Framework, as well as ideas or design documents for modules that have yet to be created.',
+	files:input.files,
+	pathToRoot:'../'
+}) %>
+

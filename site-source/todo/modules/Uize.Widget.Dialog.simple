@@ -1,0 +1,62 @@
+This is a TO DO document for the =Uize.Widget.Dialog= module.
+
+- support for multiple non-modal windows at the same z level, with switching when mousing down on any part of window
+- the update UI method for position updates should not always resize the drag shield
+
+- optional reveal/hide effect
+	- fade
+	- zoom in/out
+
+- for shield, optional fade to reveal/hide
+
+- constraining within view (specified as percent of size, or as constrain event coords)
+- auto-constrain in view on resize
+- maintain relative position in view (on resize and scroll)
+
+ISSUES
+	- when dragging, if you mouse up outside the window in Firefox, you get stuck in drag mode, even once the mouse is up
+
+- the update UI method for position updates should not always resize the drag shield
+
+- constraining within view (specified as percent of size, or as constrain event coords)
+- auto-constrain in view on resize
+- maintain relative position in view (on resize and scroll)
+- modifier keys to constrain movement
+	- snap to edges
+	- snap to 45 degree angles
+
+- for changes in resizer position and sizing...
+	- make sure various events are fired
+- Uize.Widget.Resizer refactoring
+	- when drag starts, must pick up coordinates from area node, so that window can be moved in other ways
+
+- positioning on click event
+	when clicking a button indirectly results in a dialog being launched... or if the dialog is deferred loaded and shown is set to true long after the click happens, how does the dialog know that it was launched from a button click, or wasn't launched programmatically? Or from a mouseover event?
+
+	If you remember the last click, do you remember the event position? Or the node reference of the event source? The document could be scrolled between clicking and showing the dialog. Is it a configuration of the dialog to position on
+
+- support for okText and cancelText state properties
+	and perhaps defaultOkText and defaultCancelText? Either way, localization of default strings should be able to occur inside the widget module, rather than being defaulted in Uize.Widget.Page where the code to show the confirm dialog is
+
+- the update UI method for position updates should not always resize the drag shield
+
+- optional reveal/hide effect
+	- fade
+	- zoom in/out
+
+- for shield, optional fade to reveal/hide
+
+- constraining within view (specified as percent of size, or as constrain event coords)
+- auto-constrain in view on resize
+- maintain relative position in view (on resize and scroll)
+- modifier keys to constrain movement
+	- snap to edges
+	- snap to 45 degree angles
+- consider adding resizable feature
+
+refactor Uize.Widget.Dialog in the following ways...
+	- implement support for fading to reveal and fading to hide
+ISSUES
+	- when dragging, if you mouse up outside the window in Firefox, you get stuck in drag mode, even once the mouse is up
+
+

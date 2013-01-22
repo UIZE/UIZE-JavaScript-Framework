@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>CSV / JSON Converter | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="Uize.Data.Csv"/>
+	<meta name="description" content=""/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		textarea {
+			width:700px;
+			height:200px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/~source/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	CSV / JSON Converter
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/web-browser.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+
+<div>JSON</div>
+<textarea id="page-dataAsJson">
+[
+	{firstName:'jo|hn',lastName:'wol#les'},
+	{lastName:'boyd',firstName:'billy'}
+]
+</textarea>
+<!--
+[
+	[' john "cat" katzenberg ','dog'],
+	[' apple ','pear']
+]
+-->
+<br/>
+
+<div>CSV</div>
+<textarea id="page-dataAsCsv">
+#jo|hn#|#wol##les#
+billy|boyd
+</textarea>
+
+</div>
+
+<!-- JavaScript code to make the HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Json',
+		'Uize.Data.Csv'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialization ***/
+			page.setNodeValue (
+				'dataAsJson',
+				Uize.Json.to (Uize.Data.Csv.from (page.getNodeValue ('dataAsCsv'),{quoteChar:'#',valueDelimiter:'|'}))
+			);
+
+			/*
+			page.setNodeValue (
+				'dataAsCsv',
+				Uize.Data.Csv.to (Uize.Json.from (page.getNodeValue ('dataAsJson')),{quoteChar:'#',valueDelimiter:'|'})
+			);
+			*/
+	}
+});
+
+</script>
+
+</body>
+</html>
+

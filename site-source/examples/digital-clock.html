@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Digital Clock | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="widget Uize.Widget.SegmentDisplay.Seven"/>
+	<meta name="description" content="See how to easily create a JavaScript digital clock widget in UIZE, that shows hours, minutes, and seconds, using UIZE's seven segment display widget."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.segmentdisplay.seven.css"/>
+	<style type="text/css">
+		.digitalClock {
+			padding:15px;
+			background:#000 url(../images/title-bg.gif) repeat-x left top;
+			margin:auto;
+			width:740px;
+			border-width:7px;
+			border-style:solid;
+			border-radius:40px;
+			-moz-border-radius:40px;
+			-webkit-border-radius:40px;
+		}
+		.digitalClock .segmentShell {
+			float:left;
+			padding:10px;
+			width:83px;
+		}
+		.digitalClock .hmsSeparator {
+			position:relative;
+			float:left;
+			width:20px;
+			height:160px;
+			padding:10px 20px;
+		}
+		.digitalClock .hmsSeparator .hmsSeparatorColon {
+			position:absolute;
+			width:20px;
+			height:20px;
+			background:#3f6;
+		}
+		.digitalClock .hmsSeparator .hmsSeparatorColonTop {
+			top:30%;
+		}
+		.digitalClock .hmsSeparator .hmsSeparatorColonBottom {
+			bottom:30%;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<script type="text/javascript">
+
+var
+	segmentThickness = 16,
+	displayWidth = 83,
+	displayHeight = 160,
+	segmentGap = 1,
+	segmentThicknessDiv2 = segmentThickness / 2,
+	segmentThicknessPlusSegmentGap = segmentThickness + segmentGap,
+	styleTag =
+		'<style type="text/css">\n' +
+		'	.sevenSeg {\n' +
+		'		width:' + displayWidth + 'px;\n' +
+		'		height:' + displayHeight + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegSegmentEnd {\n' +
+		'		border-width:' + segmentThicknessDiv2 + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegHorzSegment {\n' +
+		'		height:' + segmentThickness + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegHorzSegmentMiddle {\n' +
+		'		top:' + (displayHeight / 2 - segmentThicknessDiv2) + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegSegmentLeftEnd {\n' +
+		'		left:' + segmentGap + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegHorzSegment .sevenSegSegmentBar {\n' +
+		'		left:' + segmentThicknessPlusSegmentGap + 'px;\n' +
+		'		right:' + segmentThicknessPlusSegmentGap + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegSegmentRightEnd {\n' +
+		'		right:' + segmentGap + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegVertSegment {\n' +
+		'		width:' + segmentThickness + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegSegmentTopEnd {\n' +
+		'		top:' + segmentGap + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegVertSegment .sevenSegSegmentBar {\n' +
+		'		top:' + segmentThicknessPlusSegmentGap + 'px;\n' +
+		'		bottom:' + segmentThicknessPlusSegmentGap + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegSegmentBottomEnd {\n' +
+		'		bottom:' + segmentGap + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegVertSegmentTop .sevenSegSegmentBottomEnd {\n' +
+		'		bottom:' + (segmentGap - segmentThicknessDiv2) + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegVertSegmentTop  .sevenSegSegmentBar {\n' +
+		'		bottom:' + (segmentGap + segmentThicknessDiv2) + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegVertSegmentBottom .sevenSegSegmentTopEnd {\n' +
+		'		top:' + (segmentGap - segmentThicknessDiv2) + 'px;\n' +
+		'	}\n' +
+		'	.sevenSegVertSegmentBottom  .sevenSegSegmentBar {\n' +
+		'		top:' + (segmentGap + segmentThicknessDiv2) + 'px;\n' +
+		'	}\n' +
+		'</style>\n'
+;
+
+document.writeln (styleTag);
+
+</script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Digital Clock
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/digital-clock.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, multiple instances of the <a href="../reference/Uize.Widget.SegmentDisplay.Seven.html"><code>Uize.Widget.SegmentDisplay.Seven</code></a> widget class are being wired up to create a classic LED style digital clock.</p>
+
+		<p>There are six seven segment display widgets being used - two for the hours display, two for the minutes display, and two for the seconds display. After the page loads and is initialized, a timer/interval is started that updates the clock's display every second. For every update, the current time is queried using JavaScript's <code>Date</code> object and formatted to an <code>HHMMSS</code> string using the <code>Uize.Date.Formatter.format</code> method of the <a href="../reference/Uize.Date.Formatter.html"><code>Uize.Date.Formatter</code></a> module, specifying the string value <code>'{hh}{mm}{ss}'</code> for the date format. From the formatted string, the first character is used to set the value of the hours display's tens widget, and the second character is used to set the value of the hours display's ones widget. In a similar manner, the third and fourth characters of the formatted date string are used for the minutes display's two seven segment display widgets, and the last two characters of the formatted date string are used for the seconds display's two widgets.</p>
+
+		<p>Now, because the clock is always updated to the current time when the updater function is triggered by the timer, the clock remains accurate and doesn't drift. The timer may be unreliable as a result of load on the computer, but the worst that will happen is that the clock may not update for a while before once again updating to the correct time.</p> 
+	</div>
+
+	<!-- UI for seven segment displays that make up the digital clock -->
+		<div class="digitalClock insetBorderColor">
+			<div id="page_hoursTens-shell" class="segmentShell"></div>
+			<div id="page_hoursOnes-shell" class="segmentShell"></div>
+
+			<div class="hmsSeparator">
+				<div class="hmsSeparatorColon hmsSeparatorColonTop"></div>
+				<div class="hmsSeparatorColon hmsSeparatorColonBottom"></div>
+			</div>
+
+			<div id="page_minutesTens-shell" class="segmentShell"></div>
+			<div id="page_minutesOnes-shell" class="segmentShell"></div>
+
+			<div class="hmsSeparator">
+				<div class="hmsSeparatorColon hmsSeparatorColonTop"></div>
+				<div class="hmsSeparatorColon hmsSeparatorColonBottom"></div>
+			</div>
+
+			<div id="page_secondsTens-shell" class="segmentShell"></div>
+			<div id="page_secondsOnes-shell" class="segmentShell"></div>
+
+			<br style="clear:left;"/>
+		</div>
+</div>
+
+<!-- JavaScript code to make the static slider HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.SegmentDisplay.Seven',
+		'Uize.Templates.SevenSegmentDisplay',
+		'Uize.Date.Formatter'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** add the segment display widgets for the hours, minutes, and seconds ***/
+			var digits = {hoursTens:0,hoursOnes:1,minutesTens:2,minutesOnes:3,secondsTens:4,secondsOnes:5};
+			for (var widgetName in digits)
+				page.addChild (
+					widgetName,
+					Uize.Widget.SegmentDisplay.Seven,
+					{html:Uize.Templates.SevenSegmentDisplay,built:false}
+				)
+			;
+
+		/*** update clock display ***/
+			function updateClockDisplay () {
+				var hhMmSs = Uize.Date.Formatter.format (null,'{hh}{mm}{ss}');
+				for (var widgetName in digits)
+					page.children [widgetName].set ({value:hhMmSs.charAt (digits [widgetName])})
+				;
+			}
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** start the clock ***/
+			updateClockDisplay ();
+			setInterval (updateClockDisplay,1000);
+	}
+});
+
+</script>
+
+</body>
+</html>
+

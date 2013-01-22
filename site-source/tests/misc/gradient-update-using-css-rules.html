@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: Gradient Update Using CSS Rules | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.color1 {
+			width:10px;
+			height:10px;
+			background:#fff;
+		}
+		.color2 {
+			width:10px;
+			height:10px;
+			background:#fff;
+		}
+	</style>
+</head>
+
+<body>
+
+<!-- load in the necessary JavaScript libraries -->
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+<script type="text/javascript" src="../../js/Uize.Node.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.Bar.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.Drag.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.Bar.Slider.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.Bar.Slider.xSkin.js"></script>
+<script type="text/javascript" src="../../js/Uize.Color.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.ColorPicker.js"></script>
+
+<!-- "wireframe" for the UI -->
+
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td id="colorPicker1" valign="top"></td>
+		<td id="colorGradient" valign="top" width="500"></td>
+		<td id="colorPicker2" valign="top"></td>
+	</tr>
+</table>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+	/*** create the Uize.Widget.ColorPicker instances ***/
+		var
+			colorPicker1 = Uize.Widget.ColorPicker ({idPrefix:'colorPicker1',value:'ffff00'}),
+			colorPicker2 = Uize.Widget.ColorPicker ({idPrefix:'colorPicker2',value:'ff0000'})
+		;
+
+	/*** code to update the gradient effect ***/
+		function updateGradientEffect () {
+			var
+				_stylesheet = document.styleSheets [2],
+				_standardsCompliant = _stylesheet.cssRules ? true : false,
+				_rules = _standardsCompliant ? _stylesheet.cssRules : _stylesheet.rules
+			;
+			_rules [0].style.backgroundColor = '#' + colorPicker1;
+			_rules [1].style.backgroundColor = '#' + colorPicker2;
+		}
+		colorPicker1.wire ('Changed.value',updateGradientEffect);
+		colorPicker2.wire ('Changed.value',updateGradientEffect);
+
+	/*** generate the gradient HTML ***/
+		var
+			_totalSegments = 100,
+			_segmentWidth = 5,
+			_segmentHeight = 316,
+			_html = '<div class="color1" style="position:absolute; width:' + (_totalSegments * _segmentWidth) + 'px; height:' + _segmentHeight + 'px;">'
+		;
+		for (var _segmentNo = -1; ++_segmentNo < _totalSegments;) {
+			_html += '<div class="color2" style="position:absolute; left:' + (_segmentNo * _segmentWidth) + 'px; top:0px; width:' + _segmentWidth + 'px; height:' + _segmentHeight + 'px; ' + Uize.Node.getOpacityStr (_segmentNo / _totalSegments) + '"></div>';
+		}
+		_html += '</div>';
+
+		Uize.Node.injectHtml ('colorGradient',_html);
+
+	/*** insert the UI for the color pickers ***/
+		colorPicker1.insertUi ();
+		colorPicker2.insertUi ();
+
+	/*** initialize the gradient ***/
+		updateGradientEffect ();
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,47 @@
+This is a TO DO document for the =Uize.String.Lines= module.
+
+Possible New Methods
+	Uize.String.Lines.removeLineNumbering ??
+		Would remove line numbering from all the lines of a multi-line string.
+
+		Since this seems kind of esoteric, perhaps it could be put into a =Uize.String.Lines.Numbering= module, which would have methods like =Uize.String.Lines.Numbering.addNumbering= and =Uize.String.Lines.Numbering.removeNumbering=.
+
+	Uize.String.Lines.consolidateBlanks
+		................................................................................
+		Uize.String.Lines.consolidateBlanks = function (_sourceStr) {
+			var _previousIsBlank;
+			return _package.modify (
+				_sourceStr,
+				function (_line) {
+					var
+						_isBlank = !Uize.String.trim (_line),
+						_keepLine = !_isBlank || !_previousIsBlank
+					;
+					_previousIsBlank = _isBlank;
+					return _keepLine;
+				}
+			);
+		};
+		................................................................................
+
+	Uize.String.Lines.pad
+		.
+
+	Rearranging Lines
+		Uize.String.Lines.sort
+			................................................................................
+			function sortMultilineStr (sourceStr) {
+				return (
+					Uize.String.Lines.split (sourceStr).sort (
+						function (a,b) {return a < b ? -1 : 1}
+					).join (
+						Uize.String.Lines.getLinebreakType (sourceStr)
+					)
+				);
+			}
+			................................................................................
+
+		Uize.String.Lines.reverse
+			.
+
+

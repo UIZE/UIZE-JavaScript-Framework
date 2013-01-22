@@ -1,0 +1,11 @@
+This is a proposal document for a =Uize.Widget.MantleSlideShow= module.
+
+- a slideshow experience specifically designed for mantle and that utilizes...
+	- an instance of Uize.Widget.Swap.Deck (for the view)
+	- an instance of Uize.Widget.Options
+	- an instance of Uize.Widget.SlideShow.AutoAdvance
+- ties all these widgets together into an experience where...
+	- slideshow plays automatically on wiring
+	- optional play, pause, stop buttons allow control
+	- mousing over the options buttons sets the relevant item while pausing the slideshow and setting an autoresume timeout
+

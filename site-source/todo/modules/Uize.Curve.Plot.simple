@@ -1,0 +1,22 @@
+This is a proposal document for a =Uize.Curve.Plot= module.
+
+- a class that allows the creation of arbitrarily complex multi-point curve functions
+
+Uize.Curve.Plot.plot
+	- x distribution curve function, array of y values, y-to-y interpolation curve function
+	- array of x and y values, y-to-y interpolation curve function
+	- array of x and y values and interpolation curve function
+
+	................................................................................
+	Uize.Curve.Plot.plot (pointsARRAY)
+	Uize.Curve.Plot.plot (pointsARRAY,interpolationCurveFUNC)
+	Uize.Curve.Plot.plot (pointsARRAY,interpolationCurveFUNC,distributionCurveFUNC)
+	................................................................................
+
+	pointsARRAY can be...
+		- array of numbers, being y values
+		- array of objects, containing x, y, and curve properties
+			- if x property is not present, use distributionCurveFUNC
+			- if curve property is not present, use interpolationCurveFUNC
+
+

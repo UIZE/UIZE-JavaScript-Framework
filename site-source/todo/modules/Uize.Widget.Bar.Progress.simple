@@ -1,0 +1,6 @@
+This is a TO DO document for the =Uize.Widget.Bar.Progress= module.
+
+Move implementation of hysteresis from Zazzle.ProductView into Uize.Widget.Bar.Progress.
+
+Basically, after inProgress changes to false, the progress bar should be allowed to stay displayed and running for a configurable amount of time, in case new tasks are initiated soon afterwards. Similarly, the progress bar shouldn't be displayed and started running until after a configurable amount of time has elapsed from inProgress changing to true. The combination of these two configurable durations should prevent the progress bar from ever displaying for very short tasks, and should prevent the progress bar from flashing on and off rapidly for a succession of tasks separated by small intervals, overal creating a smoother and less seizure inducing experience.
+

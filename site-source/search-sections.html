@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Search Sections | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="css/page.css"/>
+	<link rel="stylesheet" href="css/page.simpledoc.css"/>
+	<style type="text/css">
+		.searchPod {
+			position:relative;
+			background:#adbebf url(images/brushed-metal.jpg) repeat left top;
+			border:2px solid #122;
+			font-size:15px;
+			margin-bottom:20px;
+			padding-bottom:60px;
+		}
+		.searchPod .searchLink {
+			position:absolute;
+			right:15px;
+			bottom:15px;
+			width:200px;
+			border-radius:3px;
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
+		}
+		.searchPod .label {
+			letter-spacing:1px;
+			color:#000;
+			font-weight:bold;
+			margin-right:10px;
+			padding-left:10px;
+			border-left:30px solid #eee;
+			border-radius-topleft:10px;
+			-moz-border-radius-topleft:10px;
+			-webkit-border-radius-topleft:10px;
+			border-radius-bottomleft:10px;
+			-moz-border-radius-bottomleft:10px;
+			-webkit-border-radius-bottomleft:10px;
+		}
+		#page-searchQuery {
+			width:780px;
+			font-family:verdana;
+			font-size:14px;
+			font-weight:bold;
+			letter-spacing:2px;
+			text-indent:5px;
+			margin:0 0 0 5px;
+			border-radius:7px;
+			-moz-border-radius:7px;
+			-webkit-border-radius:7px;
+		}
+		.document-title {
+			padding-top:12px;
+			padding-bottom:13px;
+		}
+		.searchQuery {
+			font-weight:bold;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
+	Search query <input id="page-searchQuery" type="text"/>
+</h1>
+
+<div class="main">
+	<div class="preamble searchPod">
+		<span class="label">ENTIRE SITE :</span>Search the entire site for all references to <span class="searchQuery"></span>...
+		<a id="page-searchEntireSite" href="javascript://" class="buttonLink searchLink">SEARCH ENTIRE SITE &gt;&gt;</a>
+	</div>
+
+	<div class="preamble searchPod">
+		<span class="label">IN EXAMPLES :</span>Search for just examples that refer to <span class="searchQuery"></span>...
+		<a id="page-searchInExamples" href="javascript://" class="buttonLink searchLink">SEARCH IN EXAMPLES &gt;&gt;</a>
+	</div>
+
+	<div class="preamble searchPod">
+		<span class="label">IN MODULES :</span>Search for just modules that refer to <span class="searchQuery"></span>...
+		<a id="page-searchInModules" href="javascript://" class="buttonLink searchLink">SEARCH IN MODULES &gt;&gt;</a>
+	</div>
+
+	<div class="preamble searchPod">
+		<span class="label">IN EXPLAINERS :</span>Search for just explainers that refer to <span class="searchQuery"></span>...
+		<a id="page-searchInExplainers" href="javascript://" class="buttonLink searchLink">SEARCH IN EXPLAINERS &gt;&gt;</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.library',
+		'UizeSite.Page',
+		'Uize.Node',
+		'Uize.Url',
+		'Uize.Widget.HoverFader',
+		'Uize.Curve'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var _page = window.page = UizeSite.Page ();
+
+		/*** add hover fader for sections highlight effect ***/
+			_page.addChild (
+				'sectionHoverFader',
+				Uize.Widget.HoverFader,
+				{
+					nodes:{className:/\bsearchPod\b/},
+					defaultStyle:{borderColor:'122'},
+					hoverStyle:{borderColor:'f'},
+					fadeIn:{
+						duration:800,
+						curve:{borderColor:[Uize.Curve.easeOutPow (9),Uize.Curve.easeInPow (2),Uize.Curve.easeInPow (6)]}
+					},
+					fadeOut:{
+						duration:800,
+						curve:{borderColor:[Uize.Curve.easeOutPow (4),null,Uize.Curve.easeInPow (3)]}
+					}
+				}
+			);
+
+		/*** wire up the page widget ***/
+			_page.wireUi ();
+
+		/*** initialization ***/
+			/*** code for managing search term ***/
+				var
+					_searchQueryPreviewNodes = Uize.Node.find ({className:'searchQuery'}),
+					_searchQueryNode = _page.getNode ('searchQuery'),
+					_searchQuery = _page.getNodeValue (_searchQueryNode)
+				;
+				if (!_searchQuery) {
+					_searchQuery = location.search.slice (1);
+					if (_searchQuery) _searchQuery = '"' + Uize.Url.fromPiece (_searchQuery) + '"';
+				}
+				function _updateSearchTermPreviewNodes () {
+					Uize.Node.setInnerHtml (_searchQueryPreviewNodes,_searchQuery);
+				}
+				if (_searchQuery) {
+					_page.setNodeValue (_searchQueryNode,_searchQuery);
+					_updateSearchTermPreviewNodes ();
+				}
+				_page.wireNode (
+					_searchQueryNode,
+					'keyup',
+					function () {
+						var _newSearchTerm = _page.getNodeValue (_searchQueryNode);
+						if (_newSearchTerm != _searchQuery) {
+							_searchQuery = _newSearchTerm;
+							_updateSearchTermPreviewNodes ();
+						}
+					}
+				);
+
+			/*** wire up search links ***/
+				function _wireSectionSearchLink (_linkName,_sectionUrl) {
+					_page.wireNode (_linkName,'click',function () {page.performSearch (_searchQuery,_sectionUrl)});
+				}
+				_wireSectionSearchLink ('searchEntireSite','');
+				_wireSectionSearchLink ('searchInExamples','/examples/source-code');
+				_wireSectionSearchLink ('searchInModules','/reference/source-code');
+				_wireSectionSearchLink ('searchInExplainers','/explainers');
+
+			/*** focus and select search query input ***/
+				_searchQueryNode.focus ();
+				_searchQueryNode.select ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

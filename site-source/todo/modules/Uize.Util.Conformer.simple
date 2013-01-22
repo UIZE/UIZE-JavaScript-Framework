@@ -1,0 +1,73 @@
+This is a proposal document for a =Uize.Util.Conformer= module.
+
+*NOTE:* How does this module relate to the proposed =Uize.Conformer= module? Does this module subsume that module?
+
+Examples of Usage
+	................................................................................
+	conformer:Uize.Util.Conformer.oneOf (['auto','always'],'auto')
+
+	conformer:Uize.Util.Conformer.oneOf (['auto','always']),
+	noSetIfConformed:true
+	................................................................................
+
+	................................................................................
+	Uize.Util.Conformer.oneOf (['auto','always'],'auto')
+	Uize.Util.Conformer.oneOf (['auto','always'],'auto') (blah)
+
+	Uize.Util.Conformer.string ()
+	Uize.Util.Conformer.bool ()
+	................................................................................
+
+- chaining conformers
+	................................................................................
+	Uize.Util.Conformer.chain (
+		Uize.Util.Conformer.string (),
+		Uize.Util.Conformer.oneOf (['auto','always'],'always')
+	)
+
+	Uize.Util.Conformer.chain (
+		'string',
+		['oneOf',['auto','always'],'always']
+	)
+	................................................................................
+
+Example Implementations
+	................................................................................
+	function _bool (_value) {return !!(typeof _value == 'object' && _value ? _value.valueOf : _value)}
+	_package.bool = function () {return _bool};
+
+	var _trueValuesMap = {1:1,TRUE:1,ON:1,YES:1};
+	function _switchBool (_value) {
+		if (typeof _value == 'object' && _value)
+			_value = _value.valueOf ()
+		;
+		return (
+			typeof _value == 'boolean'
+				? _value
+				: (_value = (_value + '').toUpperCase ()) == '1' || _value == 'TRUE' || _value == 'ON' || _value == 'YES'
+		);
+	}
+	_package.switchBool = function () {return _switchBool};
+
+	function _string () {return _value + ''}
+	_package.string = function () {return _string};
+
+	function _number (_value) {return +_value}
+	_package.number = function () {return _number};
+
+	_package.range = function (_minValue,_maxValue) {
+		return function (_value) {Uize.constrain (_value,_minValue,_maxValue)};
+	};
+
+	_package.oneOf = function (_values,_default) {
+		if (_default == _undefined) _default = _values [0];
+		var _valuesLookup = {};
+		for (var _valueNo = -1, _valuesLength = _values.length; ++_valueNo < _valuesLength;)
+			_valuesLookup [_values [_valueNo]] = 1
+		;
+		_valuesLookup.toString = _valuesLookup.valueOf = 0;
+		return function (_value) {_valuesLookup [_value] ? _value : _default};
+	};
+	................................................................................
+
+

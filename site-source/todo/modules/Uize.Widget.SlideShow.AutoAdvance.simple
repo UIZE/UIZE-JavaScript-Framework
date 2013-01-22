@@ -1,0 +1,8 @@
+This is a TO DO document for the =Uize.Widget.SlideShow.AutoAdvance= module.
+
+IMPROVEMENTS
+- add play button
+
+ISSUES
+- don't like the wipeDone method approach and this kind of bi-directional interfacing. Think of a better way to allow for an indeterminate period of time between moving to the next slide and being ready to hold before advancing to the next.
+

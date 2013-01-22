@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Color Gradient Tool | JavaScript Tools | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="color tool Uize.Color"/>
+	<meta name="description" content="Explore a wide variety of color gradients - from basic gradients to intricate patterns. Tweak presets or build your own. Use gradients to pick colors."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.tabs.css"/>
+	<link rel="stylesheet" href="../css/widget.colorinfo.css"/>
+	<link rel="stylesheet" href="../examples/css/selector-links.css"/>
+	<link rel="stylesheet" href="../examples/css/params-table.css"/>
+	<link rel="stylesheet" href="../examples/css/params-inspector.css"/>
+	<style type="text/css">
+		#page_paramsInspector-shell .tabShell {
+			width:480px;
+		}
+		#page_paramsInspector_curveRed, #page_paramsInspector_curveGreen, #page_paramsInspector_curveBlue {
+			width:381px;
+			height:68px;
+			font-size:12px;
+		}
+		#page_paramsInspector_preview {
+			width:466px;
+		}
+		#page-colorGradient {
+			cursor:pointer;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-tool-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT TOOLS</a>
+	Color Gradient Tool
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/color-gradient-tool.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>The <b>Color Gradient Tool</b> provides a UI for visualizing and experimenting with color gradients. By applying different <a href="../reference/Uize.Curve.html">curve functions</a> to different color components, color gradients can range from basic color transitions to sophisticated spectral patterns. Select a color gradient in the <b>"PRESETS"</b> tab. The preview on the left will update. To tweak the parameters for a color gradient preset, use the <b>"PARAMS"</b> tab. Use the <b>"PREVIEW COLOR GRADIENT"</b> button to preview the changes you make. Move the mouse over the gradient preview on the left and a tooltip will display information about the color you're over, and if you click you will get the hex value of that color in a prompt dialog so you can copy it to the clipboard.</p>
+	</div>
+
+	<!-- page layout's "wireframe" with slots for gradient preview and params inspector -->
+
+	<table border="0" cellspacing="0" cellpadding="4" style="margin:auto;">
+		<tr valign="top">
+			<td>
+				<div id="page-colorGradient" style="position:relative; width:200px; height:350px;"></div>
+			</td>
+			<td id="page_paramsInspector-shell"></td>
+		</tr>
+	</table>
+</div>
+
+<textarea id="page_paramsInspector-inlinePresets" style="display:none;">
+
+White to Black, Pastel Stripes
+	colorA: #fff
+	colorB: #000
+	curveRed: Uize.Curve.easeInOutPow (3)
+	curveGreen: Uize.Curve.easeMiddlePow (2)
+	curveBlue: Uize.Curve.Rubber.easeOutBounce (9,4,1)
+
+White to Black, Through Teal Grays
+	colorA: #fff
+	colorB: #000
+	curveRed: Uize.Curve.resolve (3)
+	curveGreen: Uize.Curve.resolve (2)
+	curveBlue: Uize.Curve.resolve (2)
+
+White to Black, Through Pinks and Reds
+	colorA: #fff
+	colorB: #000
+	curveRed: Uize.Curve.resolve (-8)
+	curveGreen: Uize.Curve.resolve (5)
+	curveBlue: Uize.Curve.resolve (-2)
+
+White to Black, Through Yellows, Oranges, and Reds
+	colorA: #fff
+	colorB: #000
+	curveRed: Uize.Curve.resolve (-10)
+	curveGreen: Uize.Curve.resolve (-2)
+	curveBlue: Uize.Curve.resolve (3)
+
+White to Black, Through Pinks, Turquoise, and Greens
+	colorA: #fff
+	colorB: #000
+	curveRed: Uize.Curve.easeInOutPow (2)
+	curveGreen: Uize.Curve.easeMiddlePow (16)
+	curveBlue: Uize.Curve.easeMiddlePow (2)
+
+Pink Sunset, Blue Sky Through Pink Glow to Yellow Horizon
+	colorA: #33f
+	colorB: #ff6
+	curveRed: Uize.Curve.resolve (1.5)
+	curveGreen: Uize.Curve.resolve (-9)
+	curveBlue: Uize.Curve.resolve (-2)
+
+Hazy Sunset With Pollution
+	colorA: #fef
+	colorB: #322
+	curveRed: Uize.Curve.easeMiddlePow (12)
+	curveGreen: Uize.Curve.easeMiddlePow (2)
+	curveBlue: Uize.Curve.easeInOutPow (2)
+
+Peach To Green To Blue To Black
+	colorA: #f95
+	colorB: #000
+	curveRed: Uize.Curve.Mod.bend (Uize.Curve.easeInOutPow (2),-1.5)
+	curveGreen: Uize.Curve.Mod.bend (Uize.Curve.easeInOutPow (2),1.5)
+	curveBlue: Uize.Curve.Mod.bend (Uize.Curve.easeInOutPow (2),6)
+
+Peach To Fuchsia To Blue To Black
+	colorA: #fc5
+	colorB: #000
+	curveRed: Uize.Curve.Mod.bend (Uize.Curve.easeInOutPow (2),1.5)
+	curveGreen: Uize.Curve.Mod.bend (Uize.Curve.easeInOutPow (2),-2)
+	curveBlue: Uize.Curve.Mod.bend (Uize.Curve.easeInOutPow (2),10)
+
+Pink to Violet, Banded
+	colorA: #f09
+	colorB: #50f
+	curveRed: Uize.Curve.linear
+	curveGreen: Uize.Curve.linear
+	curveBlue::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.easeMiddleCircular (3.5),
+			Uize.Curve.easeInOutCircular (3.5),
+			Uize.Curve.Mod.repeat (
+				Uize.Curve.easeInOutCircular (7),
+				31,   // repeats (0-Infinity), odd to end at 1
+				0,    // stairs degree (0-1)
+				true  // alternating flip horizontal
+			)
+		)
+
+White to Black, Neon Glow
+	colorA: #fff
+	colorB: #000
+	curveRed::
+		Uize.Curve.Mod.repeat (
+			1,    // curve function (1 == linear)
+			5,    // repeats (0-Infinity), odd to end at 1
+			0,    // stairs degree (0-1)
+			true  // alternating flip horizontal
+		)
+	curveGreen::
+		Uize.Curve.Mod.repeat (
+			1,    // curve function (1 == linear)
+			7,    // repeats (0-Infinity), odd to end at 1
+			0,    // stairs degree (0-1)
+			true  // alternating flip horizontal
+		)
+	curveBlue::
+		Uize.Curve.Mod.repeat (
+			1,    // curve function (1 == linear)
+			21,    // repeats (0-Infinity), odd to end at 1
+			0,    // stairs degree (0-1)
+			true  // alternating flip horizontal
+		)
+
+Cyan to Dark Blue, Expanding Ripples
+	colorA: #0ff
+	colorB: #003
+	curveRed: null
+	curveGreen: Uize.Curve.Rubber.easeOutBounce (10,2,.5,-2)
+	curveBlue: Uize.Curve.Rubber.easeOutBounce (15,2,.8,-2)
+
+Cyan to Dark Blue, Irregular Ripples
+	colorA: #0ff
+	colorB: #003
+	curveRed: null
+	curveGreen: Uize.Curve.Rubber.easeOutBounce (10,5,1.4,-3)
+	curveBlue: Uize.Curve.Rubber.easeOutBounce (15,2,.8,2)
+
+Violet Blue Ripples
+	colorA: #6af
+	colorB: #f09
+	curveRed: Uize.Curve.Rubber.easeOutBounce (7,2,1,4)
+	curveGreen: Uize.Curve.Rubber.easeOutBounce (15,2,1,-2)
+	curveBlue: Uize.Curve.Rubber.easeOutBounce (9,2,1,4)
+
+Candy Cane
+	colorA: #fff
+	colorB: #600
+	curveRed: Uize.Curve.resolve (-10)
+	curveGreen::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.Rubber.easeOutBounce (
+				12,
+				2,
+				1,
+				Uize.Curve.easeInOutPow (10)
+			),
+			Uize.Curve.Rubber.easeOutBounce (
+				100,
+				2,
+				.99,
+				Uize.Curve.easeInOutPow (20)
+			),
+			.2
+		)
+	curveBlue::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.Rubber.easeOutBounce (
+				12,
+				2,
+				1,
+				Uize.Curve.easeInOutPow (10)
+			),
+			Uize.Curve.Rubber.easeOutBounce (
+				100,
+				2,
+				.99,
+				Uize.Curve.easeInOutPow (20)
+			),
+			.2
+		)
+
+Light to Dark Teal, Ribbed in Middle
+	colorA: #9ff
+	colorB: #045
+	curveRed::
+		Uize.Curve.makeEaseInOut (
+			Uize.Curve.Mod.repeat (
+				[
+					Uize.Curve.easeInOutPow (3),
+					Uize.Curve.Rubber.easeInElastic (
+						.2,  // period (0-Infinity)
+						4    // amplitude (1-Infinity)
+					)
+				],
+				2,  // repeats (0-Infinity)
+				1   // stairs degree (0-1)
+			)
+		)
+	curveGreen::
+		Uize.Curve.makeEaseInOut (
+			Uize.Curve.Mod.repeat (
+				[
+					Uize.Curve.easeInOutPow (3),
+					Uize.Curve.Rubber.easeInElastic (
+						.2,  // period (0-Infinity)
+						2    // amplitude (1-Infinity)
+					)
+				],
+				2,  // repeats (0-Infinity)
+				1   // stairs degree (0-1)
+			)
+		)
+	curveBlue::
+		Uize.Curve.makeEaseInOut (
+			Uize.Curve.Mod.repeat (
+				[
+					Uize.Curve.easeInOutPow (9),
+					Uize.Curve.Rubber.easeInElastic (
+						.2,  // period (0-Infinity)
+						1    // amplitude (1-Infinity)
+					)
+				],
+				2,  // repeats (0-Infinity)
+				1   // stairs degree (0-1)
+			)
+		)
+
+Peach to Red With Black Lines
+	colorA: #f95
+	colorB: #000
+	curveRed: Uize.Curve.Rubber.easeInElastic (.01,4)
+	curveGreen: Uize.Curve.linear
+	curveBlue: Uize.Curve.linear
+
+</textarea>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'UizeSite.ParamsInspector.InlinePresets',
+		'Uize.Curve',
+		'Uize.Curve.Rubber',
+		'Uize.Curve.Mod',
+		'Uize.Fx',
+		'Uize.Color',
+		'Uize.Color.xUtil',
+		'Uize.Widget.ColorInfo',
+		'Uize.Node',
+		'Uize.Node.Event',
+		'Uize.Tooltip'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** configurable values ***/
+			var totalSegments = 350;
+
+		/*** generate preview UI HTML ***/
+			function buildSegmentsHtml (rootNodeName,segmentHtmlTemplate) {
+				var
+					htmlChunks = [],
+					rootNode = page.getNode (rootNodeName),
+					rootNodeHeight = Uize.Node.getDimensions (rootNode).height,
+					segmentHeight = rootNodeHeight / totalSegments,
+					currentPos = 0,
+					newPos
+				;
+				for (var segmentNo = -1; ++segmentNo < totalSegments;) {
+					newPos = Math.round (segmentHeight * (segmentNo + 1));
+					htmlChunks.push (segmentHtmlTemplate.replace ('TOP',currentPos).replace ('HEIGHT',newPos - currentPos));
+					currentPos = newPos;
+				}
+				page.setNodeInnerHtml (rootNode,htmlChunks.join (''));
+				return Uize.Node.find ({root:rootNode,tagName:'div'})
+			}
+
+			var gradientNodes = buildSegmentsHtml (
+				'colorGradient',
+				'<div style="position:absolute; top:TOPpx; width:100%; height:HEIGHTpx;"></div>'
+			);
+
+		/*** create the params inspector widget ***/
+			page.addChild (
+				'paramsInspector',
+				UizeSite.ParamsInspector.InlinePresets,
+				{
+					params:{
+						colorA:'string',
+						colorB:'string',
+						curveRed:'string-multiline',
+						curveGreen:'string-multiline',
+						curveBlue:'string-multiline'
+					},
+					previewButtonText:'PREVIEW COLOR GRADIENT',
+					settingsPropertyName:'curveRed'
+				}
+			).wire (
+				'Preset Selected',
+				function () {
+					var
+						values = page.children.paramsInspector.getValues (),
+						curveRed = values.curveRed,
+						curveGreen = values.curveGreen,
+						curveBlue = values.curveBlue
+					;
+					Uize.Fx.fadeStyleAcrossNodes (
+						gradientNodes,
+						{backgroundColor:values.colorA},
+						{backgroundColor:values.colorB},
+						{curve:{backgroundColor:[Uize.eval (curveRed),Uize.eval (curveGreen),Uize.eval (curveBlue)]}}
+					);
+				}
+			);
+
+		/*** add the color info widget ***/
+			var colorInfo = page.addChild ('colorInfo',Uize.Widget.ColorInfo);
+
+		/*** wire up the swatch mouseover and click behaviors ***/
+			function updateColorInfo () {colorInfo.set ({value:this.style.backgroundColor})}
+			page.wireNode (
+				'colorGradient',
+				{
+					mouseover:function () {Uize.Tooltip.showTooltip (colorInfo.getNode ())},
+					mouseout:function () {Uize.Tooltip.showTooltip (colorInfo.getNode (),false)},
+					click:function (event) {
+						Uize.Tooltip.showTooltip (colorInfo.getNode (),false);
+						prompt (
+							'Here is the color you selected...',
+							Uize.Color.to (Uize.Node.getStyle (Uize.Node.Event.target (event),'backgroundColor'),'#hex')
+						);
+					}
+				}
+			);
+			page.wireNode (gradientNodes,'mouseover',updateColorInfo);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

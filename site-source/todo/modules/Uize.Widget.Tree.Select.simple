@@ -1,0 +1,12 @@
+This is a TO DO document for the =Uize.Widget.Tree.Select= module.
+
+- a way to get the current value series (as an array)
+- a way to get a reference to the final item object
+
+IDEAS
+	- facility for adding an ellipsis to options that have further suboptions
+	- a switch for keeping as many selected values as possible when selecting a different value closer to the root
+	- possibly a way to remember selections on different branches for when switching back (ie. maybe selections are remembered per node)
+	- a way to easily populate the final value and peripheral data into form nodes
+	- a way to inherit values for peripheral data down the tree chain, with values on deeper branches overriding values closer to the root
+

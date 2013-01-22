@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Fade Quantization Chart | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="color Uize.Fade"/>
+	<meta name="description" content="See how different values for the quantization property affect a fade with this visualization using color gradients for different quantization values."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="css/params-table.css"/>
+	<style type="text/css">
+		.chartSegment {
+			width:7px;
+			height:16px;
+			margin-bottom:1px;
+		}
+		table.paramsTable td {
+			padding:0;
+			border:none;
+		}
+		table.paramsTable td.fieldLabel {
+			font-size:11px;
+			padding:0 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Fade Quantization Chart
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/fade-quantization-chart.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example illustrates, by way of a color chart representation, how the <code>quantization</code> state property of the <a href="../reference/Uize.Fade.html"><code>Uize.Fade</code></a> class affects a fade's interpolated value over the course of its progress. In the example, a color is being faded from red to black over a series of swatches, from left to right. The color chart lets you visualize how different quantization settings for a fade could be used to generate color gradients with varying characteristics. This example also illustrates how the <code>Uize.Fade</code> class can be used for non-time based fades. Quantization, however, can be just as useful in time based fades.</p>
+	</div>
+
+	<div id="page-quantizationChart"></div>
+</div>
+
+<!-- JavaScript code to build and insert the color chart -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Node',
+		'Uize.Fade',
+		'Uize.Color',
+		'Uize.Json'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** configurable values ***/
+			var
+				columns = 80,
+				tableSections = [
+					{
+						title:'The Same Quantization for All Color Channels',
+						colors:['ff0000','000000'],
+						settings:[
+							{quantization:0},
+							{quantization:4},
+							{quantization:8},
+							{quantization:12},
+							{quantization:16},
+							{quantization:20},
+							{quantization:24},
+							{quantization:26},
+							{quantization:32},
+							{quantization:36},
+							{quantization:40},
+							{quantization:44},
+							{quantization:48},
+							{quantization:52},
+							{quantization:56},
+							{quantization:60},
+							{quantization:64},
+							{quantization:68},
+							{quantization:72},
+							{quantization:76},
+							{quantization:80}
+						]
+					}
+				]
+			;
+
+		/*** create fade instance ***/
+			var fade = Uize.Fade ();
+
+		/*** inside the table to hold the bars ***/
+			var htmlChunks = ['<table border="0" cellspacing="0" cellpadding="0" class="paramsTable" style="margin:auto;">'];
+			for (var tableSectionNo = -1; ++tableSectionNo < tableSections.length;) {
+				var
+					tableSection = tableSections [tableSectionNo],
+					fadeSettings = tableSection.settings
+				;
+				fade.set ({
+					startValue:Uize.Color.to (tableSection.colors [0],'RGB array'),
+					endValue:Uize.Color.to (tableSection.colors [1],'RGB array')
+				});
+				htmlChunks.push ('<tr><td colspan="' + (columns + 1) + '" class="tableHeading">' + tableSection.title + '</td></tr>');
+				for (var fadeSettingNo = -1; ++fadeSettingNo < fadeSettings.length;) {
+					var fadeSetting = fadeSettings [fadeSettingNo];
+					fade.set (fadeSetting);
+					htmlChunks.push ('<tr><td class="fieldLabel">' + Uize.Json.to (fadeSetting,'mini') + '</td>');
+					for (var columnNo = -1; ++columnNo < columns;) {
+						fade.set ({progress:columnNo / (columns - 1)});
+						htmlChunks.push ('<td><div class="chartSegment" style="background:' + Uize.Color.to (fade.valueOf (),'RGB string') + ';"></div></td>');
+					}
+					htmlChunks.push ('</tr>');
+				}
+			}
+			htmlChunks.push ('</table>');
+			page.setNodeInnerHtml ('quantizationChart',htmlChunks.join (''));
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Domain List Editor | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="widget form Uize.Widget.ListEditor"/>
+	<meta name="description" content="See an example of a domain list editor that lets the user add domains to a list, or select items from the list to remove or modify and then re-add."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.listEditor {
+			width:355px;
+			margin:auto;
+			padding:10px;
+			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
+			border:1px solid #899;
+		}
+		.listEditor input {
+			width:300px;
+		}
+		.listEditor select {
+			margin-bottom:6px;
+			width:353px;
+		}
+		.listEditor h4 {
+			margin:4px 0;
+			font-weight:normal;
+			font-size:11px;
+			letter-spacing:2px;
+			text-transform:uppercase;
+		}
+		.listEditor .domains {
+			margin-top:14px;
+			border-top:1px dotted #555;
+			padding-top:5px;
+		}
+		.note {
+			font-size:12px;
+			color:#999;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Domain List Editor
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/domain-list-editor.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ListEditor.html"><code>Uize.Widget.ListEditor</code></a> class is being used to create an interface that lets the user build up a list of domain names. This could be for something like a domain whitelist, or a domain based, blacklist style content filter. Domains can be entered in the text input and then added by either pressing the enter key or clicking the <b>"ADD"</b> button. Domains can be removed by selecting them in the multi-select box and then pressing the delete key or clicking the <b>"REMOVE SELECT"</b> button. Below the widget is a demonstration of some of the widget's programmatic interface, with an up-to-date display of the value of the widget's <code>list</code> state property, and some links for setting the value of this property.</p>
+	</div>
+
+	<!-- HTML for the Domain List Editor widget -->
+
+	<form>
+		<div class="listEditor">
+			<h4>Add a Domain:</h4>
+			<div>
+				<input type="text" id="page_listEditor_input-input" size="50"/>
+				<a id="page_listEditor_add" href="javascript://" class="button">ADD</a>
+				<div class="note">example: www.mydomain.com</div>
+			</div>
+			<div class="domains">
+				<h4>Your Domains:</h4>
+				<div>
+					<select id="page_listEditor-list" size="6" multiple="multiple"></select>
+					<br/>
+					<a id="page_listEditor_remove" href="javascript://" class="button">REMOVE SELECTED</a>
+				</div>
+			</div>
+		</div>
+	</form>
+	<br/>
+
+	<!-- programmatic interface examples -->
+
+	<div class="programmaticInterface">
+		<ul>
+			<li>Current State
+				<ul>
+					<li><b>listEditor.get ('list') == </b> <span id="page-listEditorValue"></span></li>
+				</ul>
+			</li>
+			<li>Set Value
+				<ul>
+					<li><a href="javascript://" class="linkedJs">listEditor.set ({list:['uize.com']})</a></li>
+					<li><a href="javascript://" class="linkedJs">listEditor.set ({list:['uize.com','uize.blogspot.com','zazzle.com/uize_merch']})</a></li>
+					<li><a href="javascript://" class="linkedJs">listEditor.set ({list:['cnn.com','reuters.com','nytimes.com','news.bbc.co.uk','bloomberg.com','msnbc.com']})</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- JavaScript code to wire up the page UI -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.ListEditor',
+		'Uize.Json'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** add the Domain List Editor child widget ***/
+			var listEditor = page.addChild (
+				'listEditor',
+				Uize.Widget.ListEditor,
+				{itemConformer:function (value) {return value.replace (/(^\s*(https?\:\/\/)?|(\/)+\s*$)/gi,'')}}
+			);
+
+		/*** functions for updating state display ***/
+			function updateStateDisplay () {
+				page.setNodeValue ('listEditorValue',Uize.Json.to (listEditor.get ('list'),'mini'));
+			}
+			listEditor.wire ('Changed.list',updateStateDisplay);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialization ***/
+			updateStateDisplay ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

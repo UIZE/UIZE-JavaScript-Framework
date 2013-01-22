@@ -1,0 +1,14 @@
+This is a proposal document for a =Uize.Conformer= module.
+
+A module that would contain a number of useful conformer methods, and also provide a namespace for other collections of conformers.
+
+EXAMPLE
+................................................................................
+Uize.Conformer.toRange = Uize.Data.makeValueTransformerGenerator (Uize.constrain);
+
+Uize.Conformer.toRange (1,100);         // creates a conformer
+Uize.Conformer.toRange.exec (5,1,100);  // executes a conformer immediately against a subject
+Uize.Conformer.toRange (1,100) (5);     // creates a conformer, uses it immediately, and throws it away
+................................................................................
+
+

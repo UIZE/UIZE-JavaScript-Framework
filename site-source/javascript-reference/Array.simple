@@ -1,0 +1,1534 @@
+### STILL TO DOCUMENT
+	- join
+
+	- push
+	- unshift
+	- sort
+
+	- slice
+	- splice
+
+Introduction
+	The JavaScript language's =Array= object provides methods for building and manipulating ordered lists of values, with support for concatenting arrays, joining their elements to form strings, adding and removing elements, and sorting their values.
+
+	This document discusses the methods and properties of the =Array= object, providing copious examples and plenty of clever tips and tricks along the way.
+
+	### Create an Array
+		.
+
+		### Arrays As Results of Methods
+			.
+
+	### Add Elements to An Array
+		Insert a Single Element to the End of an Array
+			- using push
+			- assigning at the end
+			- add an undefined value at the end by incrementing length
+			- using splice
+
+		Insert a Single Element to the Beginning of an Array
+			- using unshift
+			- using splice
+
+		Insert Multiple Elements at the Beginning of an Array
+			.
+
+			###
+				- using unshift
+				- using splice
+
+		Insert Multiple Elements at the End of an Array
+			.
+
+			###
+				- using push
+				- using splice
+				- insert a number of undefined values at the end of array, by increasing length
+
+		Insert Elements at a Specific Place in an Array
+			must use splice
+
+	### Index Array Elements
+		.
+
+	### Different Types of Array Methods
+		### Methods That Modify Arrays
+			.
+
+		### Methods That Create New Arrays
+			.
+
+		### Methods That Return Arrays
+			.
+
+		### Methods That Don't Return Arrays
+			.
+
+		### Methods That Reorder Elements
+			.
+
+	Remove Elements From An Array
+		Remove the First Element From an Array
+			Because of the versatility of the various methods of the =Array= object, there are numerous ways to remove the first element from an array.
+
+			Remove the First Element Using the shift Method
+				The first element of an array can be removed quite easily using the =shift= method, which is designed exclusively for this purpose.
+
+				SYNTAX
+				...........................................
+				firstElementANYTYPE = sourceARRAY.shift ();
+				...........................................
+
+				The =shift= method returns the value of the element that it removed (ie. the first element) as its result.
+
+			Remove the First Element Using the splice Method
+				While it wouldn't be your first choice for removing the first element from an array (the =shift= method would), the =splice= method can be used for this task.
+
+				SYNTAX
+				.............................................
+				firstElementARRAY = sourceARRAY.splice (0,1);
+				.............................................
+
+				By specifying the value =0= for the first parameter of the =splice= method, we start the splice at the first element of the array. Then, we specify the value =1= for the second parameter, indicating that one element should be removed in the splice. We don't specify any replacement elements, so the =sourceARRAY= array is the poorer for the splice operation, losing its precious first element and gaining nothing in return. One thing that *is* interesting about the =splice= method is that it returns an array of all the elements that were removed as its result, so using this method to remove the first element of an array would result in the element removed being returned in a single element array.
+
+		Remove the Last Element From an Array
+			Because of the versatility of the various methods of the =Array= object, there are numerous ways to remove the last element from an array.
+
+			Remove the Last Element Using the pop Method
+				Removing the last element from an array is where the =pop= method really shines (it doesn't really shine anywhere else, given that its sole purpose in life is to remove the last element from an array).
+
+				SYNTAX
+				........................................
+				lastElementANYTYPE = sourceARRAY.pop ();
+				........................................
+
+				The =pop= method returns the value of the element that it removed (ie. the last element) as its result.
+
+			Remove the Last Element Using the splice Method
+				While it wouldn't be your first choice for removing the last element from an array (the =pop= method would), the =splice= method can be used to do just this.
+
+				SYNTAX
+				.............................................
+				lastElementARRAY = sourceARRAY.splice (-1,1);
+				.............................................
+
+				By specifying the value =-1= for the first parameter of the =splice= method, we start the splice at the last element of the array (a negative starting index is just a feature of the =splice= method). Then, we specify the value =1= for the second parameter, indicating that one element should be removed in the splice. We don't specify any replacement elements, so the =sourceARRAY= array is the poorer for the splice operation, losing its precious last element and gaining nothing in return. One thing that *is* interesting about the =splice= method is that it returns an array of all the elements that were removed as its result, so using this method to remove the last element of an array would result in the element removed being returned in a single element array.
+
+			Remove the Last Element by Decrementing the length Property
+				A rather simple way to remove the last element of an array is to just decrement the array's =length= property - an approach that is all the more appealing if you don't care to capture the value of the removed element.
+
+				SYNTAX
+				.....................
+				sourceARRAY.length--;
+				.....................
+
+				Of course, even if you *do* care to capture the value of the element being removed, you could still do this using the =length= decrementing approach, although it then starts looking more appealing to `remove the last element using the pop method`.
+
+				SYNTAX
+				..........................................................
+				lastElementANYTYPE = sourceARRAY [sourceARRAY.length - 1];
+				sourceARRAY.length--;
+				..........................................................
+
+				It's technically correct, but it's kind of ugly.
+
+		Remove Multiple Elements at the End of an Array
+			.
+
+		Empty Out An Array
+			An array can be emptied of all of its elements by simply setting the value of its =length= property to =0=.
+
+			SYNTAX
+			...................
+			myArray.length = 0;
+			...................
+
+			EXAMPLE
+			..........................................................................................
+			var fruits = ['apricot','strawberry','apple','mango','peach','pear','orange','tangerine'];
+			fruits.length = 0;  // this empties out the fruits array
+			alert (fruits);     // displays an empty alert, because the fruits array has no elements
+			..........................................................................................
+
+		Remove All Elements Having a Specific Value From An Array
+			EXAMPLE
+			............................................................................................
+			function removeFromArray (_array,_value) {
+				var _timesFound = 0;
+				if (typeof _array != 'undefined' && _array != null && typeof _array.length == 'number') {
+					for (var _elementNo = -1; ++_elementNo < _array.length - _timesFounds;) {
+						if (_array [_elementNo + _timesFound] === _value) _timesFound++;
+						if (_timesFound && _elementNo + _timesFound < _array.length)
+							_array [_elementNo] = _array [_elementNo + _timesFound]
+					}
+					_array.length -= _timesFound;
+				}
+				return _timesFound;
+			}
+			............................................................................................
+
+		### Remove Duplicates From An Array
+			.
+
+	Copy Elements of an Array
+		One Level Deep Copy
+			A one level deep copy of an array (as opposed to a deep clone) is an array whose element values are all identical to the corresponding element values in the source array.
+
+			This means that for a source array that has element values that are object references, those object references will be copied into the copy of that array. The result of this is that the source array and its one level deep copy could share objects. Consider the following example...
+
+			EXAMPLE
+			................................................................
+			var
+				citrusFruits = ['lemon','lime','orange'],
+				stoneFruits = ['apricot','peach','plum'],
+				berryFruits = ['grape','raspberry','strawberry'],
+				fruits = [citrusFruits,stoneFruits,berryFruits],
+				fruitsCopy = fruits.concat () // CREATE A ONE LEVEL DEEP COPY
+			;
+			citrusFruits [0] = 'grapefruit';
+			alert (fruitsCopy [0] [0]); // alerts the text "grapefruit"
+			................................................................
+
+			In the above example, the =fruits= array is a two dimensional array, where the elements of the array are references to the =citrusFruits=, =stoneFruits=, and =berryFruits= arrays. The =fruitsCopy= array is a one level deep copy of the =fruits= array, created by calling the =concat= method on the =fruits= array and not specifying any additional values to concatenate. Now, if the first element of the =citrusFruits= array is changed from ='lemon'= to ='grapefruit'=, dereferencing the first element in the first nested array in the =fruitsCopy= array produces the value ='grapefruit'=. So, clearly the =fruitsCopy= array didn't get its own copy of the =citrusFruits= array - it has a shared reference to it.
+
+			Creating a one level deep copy of an array - rather than a deep clone - is often perfectly adequate, and sometimes actually preferable. In the event that you do actually need a deep clone, you can use the =Uize.clone= static method of the =Uize= base module.
+
+			Several Ways to Create a One Level Deep Copy
+				Because of the versatility of the various built-in methods of JavaScript's =Array= object, there are actually numerous ways to create a `one level deep copy` of an array - some concise and elegant, and some less so.
+
+				Create a One Level Deep Copy Using the concat Method
+					A `one level deep copy` of an array can easily be created using the =concat= method, simply by calling the method on the array you wish to copy, and supplying no parameters to the method.
+
+					SYNTAX
+					.................................
+					newARRAY = sourceARRAY.concat ();
+					.................................
+
+					With nothing specified to concatenate to the =sourceARRAY= array, the new array that is returned by the =concat= method will contain only the values of the elements of the =sourceARRAY= array.
+
+				Create a One Level Deep Copy Using the slice Method
+					A `one level deep copy` of an array can easily be created using the =slice= method, simply by calling the method on the array you wish to copy, and supplying no parameters to the method.
+
+					SYNTAX
+					................................
+					newARRAY = sourceARRAY.slice ();
+					................................
+
+					The =slice= method returns a new array that is a one level deep copy of the specified portion of the array on which the method is called. The array "slice" that is to be copied is specified using two parameters: the first parameter specifies the starting index, and the second parameter specifies the ending index. When the ending index (ie. the second parameter) is not specified, it is defaulted to the array's length (ie. one element after the last element of the array). When the starting index (ie. the first parameter) is not specified, it is defaulted to =0= (ie. the first element of the array). So, if the =slice= method is called with no parameters specified, it effectively returns a one level deep copy of the entire array - from first element to last.
+
+				Create a One Level Deep Copy Using the push Method
+					While neither convenient nor concise, it *is* technically possible to create a one level deep copy of an array using the =push= instance method, as shown below...
+
+					SYNTAX
+					...........................................
+					var newARRAY = [];
+					newARRAY.push.apply (newARRAY,sourceARRAY);
+					...........................................
+
+					We're leveraging the fact that the =push= method can accept an arbitrary number of parameters, and we can supply the elements of the =sourceARRAY= array as the arguments for the =push= method by calling the =apply= method on the =push= method (this is a facility of JavaScript's built-in =Function= object). In a similar way, you can also `create a one level deep copy using the unshift method`.
+
+				Create a One Level Deep Copy Using the unshift Method
+					While neither convenient nor concise, it *is* technically possible to create a one level deep copy of an array using the =unshift= instance method, as shown below...
+
+					SYNTAX
+					..............................................
+					var newARRAY = [];
+					newARRAY.unshift.apply (newARRAY,sourceARRAY);
+					..............................................
+
+					We're leveraging the fact that the =unshift= method can accept an arbitrary number of parameters, and we can supply the elements of the =sourceARRAY= array as the arguments for the =unshift= method by calling the =apply= method on the =unshift= method (this is a facility of JavaScript's built-in =Function= object). In a similar way, you can also `create a one level deep copy using the push method`.
+
+	Move Elements Between Arrays
+		Move the Contents of One Array to the End of Another Array
+			SYNTAX
+			.....................................................................
+			targetARRAY.push.apply (targetARRAY,sourceARRAY.splice (0,Infinity));
+			.....................................................................
+
+		Move the Contents of One Array to the Beginning of Another Array
+			SYNTAX
+			........................................................................
+			targetARRAY.unshift.apply (targetARRAY,sourceARRAY.splice (0,Infinity));
+			........................................................................
+
+		Swap the Contents of Two Arrays
+			SYNTAX
+			.......................................................................
+			array1ARRAY.push.apply (
+				array1ARRAY,
+				array2ARRAY.splice.apply (
+					array2ARRAY,[0,Infinity].concat (array1ARRAY.splice (0,Infinity))
+				)
+			);
+			.......................................................................
+
+			OR...
+			..............................................................................
+			array1ARRAY.splice.apply (
+				array1ARRAY,
+				[0,Infinity].concat (
+					array2ARRAY.splice.apply (array2ARRAY,[0,Infinity].concat (array1ARRAY))
+				)
+			);
+			..............................................................................
+
+		Swap Beginning Segments of a Specified Length Between Two Arrays
+			SYNTAX
+			..............................................................................
+			array1ARRAY.unshift.apply (
+				array1ARRAY,
+				array2ARRAY.splice.apply (
+					array2ARRAY,
+					[0,segmentLengthINT].concat (array1ARRAY.splice (0,segmentLengthINT))
+				)
+			);
+			..............................................................................
+
+		Swap End Segments of a Specified Length Between Two Arrays
+			SYNTAX
+			...........................................................................................
+			segmentLengthINT && array1ARRAY.push.apply (
+				array1ARRAY,
+				array2ARRAY.splice.apply (
+					array2ARRAY,
+					[-segmentLengthINT,Infinity].concat (array1ARRAY.splice (-segmentLengthINT,Infinity))
+				)
+			);
+			...........................................................................................
+
+	Reorder the Elements of an Array
+		Reverse the Order of Elements of an Array
+			.
+
+		Sort the Elements of an Array
+			.
+
+	### Assigning Arbitrary Properties
+		Arbitrary Properties Don't Impact Length
+			.
+
+		Property Names That Are Numbers
+			Property names that are numbers are treated as element indexes.
+
+		Invalid Number Indexes
+			Indexes that aren't positive integers are treated as property names.
+
+	Chain Array Method Calls
+		.
+
+Constructor
+
+	DIFFERENT USAGES
+
+	`Create a New Empty Array`...
+	......................................................................................
+	newARRAY = [];             // the most concise
+	newARRAY = new Array;      // yes, you don't need the parentheses
+	newARRAY = new Array ();   // the classic (and somewhat verbose) form
+	newARRAY = new Array (0);  // technically correct, but why type more than you have to?
+	......................................................................................
+
+	`Create a New Array of a Desired Length`...
+	........................................
+	newARRAY = new Array (initialLengthINT);
+	........................................
+
+	`Create a New Array Seeded With a Single Value`...
+	...............................................................................
+	newARRAY = [valueANYTYPE];            // the most concise
+	newARRAY = new Array (valueANYTYPE);  // ONLY WORKS IF VALUE IS NOT A NUMBER!!!
+	...............................................................................
+
+	`Create a New Array Seeded With Multiple Values`...
+	...........................................................................................
+	newARRAY = [element0ANYTYPE,element1ANYTYPE,...,elementNANYTYPE];           // most concise
+	newARRAY = new Array (element0ANYTYPE,element1ANYTYPE,...,elementNANYTYPE); // less concise
+	...........................................................................................
+
+	Create a New Empty Array
+		SYNTAX
+		......................................................................................
+		newARRAY = [];             // the most concise
+		newARRAY = new Array;      // yes, you don't need the parentheses
+		newARRAY = new Array ();   // the classic (and somewhat verbose) form
+		newARRAY = new Array (0);  // technically correct, but why type more than you have to?
+		......................................................................................
+
+	Create a New Array of a Desired Length
+		SYNTAX
+		........................................
+		newARRAY = new Array (initialLengthINT);
+		........................................
+
+		Length Must Be Specified As a Non-Negative Integer
+			When specifying an initial length for an array in the =Array= constructor, the length *must* be specified as a non-negative integer value.
+
+			Specifying a negative number, a non-integer number, or any of the special number values =-Infinity=, =Infinity=, or =NaN= will result in a JavaScript error being generated.
+
+	Create a New Array Seeded With a Single Value
+		SYNTAX
+		...............................................................................
+		newARRAY = [valueANYTYPE];            // the most concise
+		newARRAY = new Array (valueANYTYPE);  // ONLY WORKS IF VALUE IS NOT A NUMBER!!!
+		...............................................................................
+
+	Create a New Array Seeded With Multiple Values
+		SYNTAX
+		...........................................................................................
+		newARRAY = [element0ANYTYPE,element1ANYTYPE,...,elementNANYTYPE];           // most concise
+		newARRAY = new Array (element0ANYTYPE,element1ANYTYPE,...,elementNANYTYPE); // less concise
+		...........................................................................................
+
+	### to mention
+		- new arrays can also be created using any one of the many methods that return new arrays
+
+Instance Methods
+	concat
+		Returns a new array, being the concatenation of the elements of the array on which the method is called, and the additional array elements specified in parameters to the method.
+
+		The =concat= method is quite versatile, supporting numerous ways to concatenate arrays.
+
+		DIFFERENT USAGES
+
+		`Concatenate Two Arrays`...
+		............................................
+		newARRAY = array1ARRAY.concat (array2ARRAY);
+		............................................
+
+		`Concatenate Any Number of Arrays`...
+		........................................................................
+		newARRAY = array1ARRAY.concat (array2ARRAY,array3ARRAY,...,arrayNARRAY);
+		........................................................................
+
+		`Concatenate an Array With Any Number of Values of Any Type`...
+		..............................................................................
+		newARRAY = sourceARRAY.concat (value1ANYTYPE,value2ANYTYPE,...,valueNANYTYPE);
+		..............................................................................
+
+		`Concatenate Values of Any Type, Flattening Array Types Values`...
+		.....................................................................
+		newARRAY = [].concat (value1ANYTYPE,value2ANYTYPE,...,valueNANYTYPE);
+		.....................................................................
+
+		`Create a One Level Deep Copy of an Array`...
+		.................................
+		newARRAY = sourceARRAY.concat ();
+		.................................
+
+		`Flatten a Two-dimensional Array`...
+		.................................................................
+		newARRAY = Array.prototype.concat.apply ([],twoDimensionalARRAY);
+		.................................................................
+
+		`Concatenate Two Arrays, Either of Which Could be Null or Undefined`...
+		..........................................................
+		newARRAY = (array1ARRAY || []).concat (array2ARRAY || []);
+		..........................................................
+
+		Concatenate Two Arrays
+			In its most basic usage, the =concat= method can be used to concatenate two arrays in order to produce a new array.
+
+			SYNTAX
+			............................................
+			newARRAY = array1ARRAY.concat (array2ARRAY);
+			............................................
+
+			In this usage, the elements of the array =array2ARRAY= are concatenated at the end of the array =array1ARRAY= to produce a new array that is returned as the result. If you wanted the elements of =array2ARRAY= to appear at the beginning of the concatenated array, then you would swap the variables around and call the =concat= method on =array2ARRAY=, supplying =array1ARRAY= as the parameter.
+
+			EXAMPLE
+			.........................................................
+			var
+				citrusFruits = ['lemon','lime','orange'],
+				stoneFruits = ['apricot','peach','plum'],
+				fruitsCitrusFirst = citrusFruits.concat (stoneFruits),
+				fruitsStoneFirst = stoneFruits.concat (citrusFruits)
+			;
+			.........................................................
+
+			After the above code has executed, the =fruitsCitrusFirst= array will have the value =['lemon','lime','orange','apricot','peach','plum']=, while the =fruitsStoneFirst= array will have the value =['apricot','peach','plum','lemon','lime','orange']=.
+
+		Concatenate Any Number of Arrays
+			The =concat= method is versatile enough to allow you to easily concatenate an arbitrary number of arrays, simply by specifying all the arrays that you want concatenated at the end of the "head" array as parameters to the =concat= method.
+
+			SYNTAX
+			........................................................................
+			newARRAY = array1ARRAY.concat (array2ARRAY,array3ARRAY,...,arrayNARRAY);
+			........................................................................
+
+			To concatenate an arbitrary number of arrays, call the =concat= method on the array whose elements you would like to appear at the "head" of the concatenated array, and then supply all the other arrays as parameters to the =concat= method.
+
+			EXAMPLE
+			.........................................................
+			var
+				citrusFruits = ['lemon','lime','orange'],
+				stoneFruits = ['apricot','peach','plum'],
+				berryFruits = ['grape','raspberry','strawberry'],
+				fruits = citrusFruits.concat (stoneFruits,berryFruits)
+			;
+			.........................................................
+
+			After the above code has been executed, the =fruits= array will have the value =['lemon','lime','orange','apricot','peach','plum','grape','raspberry','strawberry']=.
+
+			Chaining concat Also Works, But is Less Efficient
+				Because the =concat= method returns an array, it is also possible to concatenate multiple arrays by chaining together multiple calls to the =concat= method, as shown in the example below...
+
+				EXAMPLE
+				..................................................................
+				var
+					citrusFruits = ['lemon','lime','orange'],
+					stoneFruits = ['apricot','peach','plum'],
+					berryFruits = ['grape','raspberry','strawberry'],
+					fruits = citrusFruits.concat (stoneFruits).concat (berryFruits)
+				;
+				..................................................................
+
+				After the above code has been executed, the =fruits= array will have the value =['lemon','lime','orange','apricot','peach','plum','grape','raspberry','strawberry']=. While this is technically one way to concatenate multiple arrays, it's not as efficient as calling the =concat= method just once and supplying all the arrays to concatenate beyond the first one as parameters in the call. For one thing, calling the =concat= method multiple times will result in all the interim concatenated arrays (ie. before the last one) being thrown away for garbage collection.
+
+		Concatenate an Array With Any Number of Values of Any Type
+			While the =concat= method is typically used to concatenate the contents of two or more arrays, it can also be used to concatenate the elements of one array with any number of individual values of any type.
+
+			SYNTAX
+			..............................................................................
+			newARRAY = sourceARRAY.concat (value1ANYTYPE,value2ANYTYPE,...,valueNANYTYPE);
+			..............................................................................
+
+			EXAMPLE
+			........................................................................
+			var
+				citrusFruits = ['lemon','lime','orange'],
+				citrusAndStoneFruits = citrusFruits.concat ('apricot','peach','plum')
+			;
+			........................................................................
+
+			After the above code has been executed, the value of the =citrusAndStoneFruits= array will be =['lemon','lime','orange','apricot','peach','plum']=.
+
+			Special Handling for Array Values
+				When the =concat= method iterates through all the parameters it is supplied, it applies special handling for parameter values that are arrays, effectively "unrolling" them so that their elements are added to the concatenated array that is being built.
+
+				It is, in fact, because of this special handling of array value parameters that the `Concatenating Two Arrays` and `Concatenating Any Number of Arrays` usages are supported by the method.
+
+				EXAMPLE
+				..............................................................................
+				var
+					citrusFruits = ['lemon','lime','orange'],
+					stoneFruits = ['apricot','peach','plum'],
+					fruits = citrusFruits.concat (stoneFruits,'grape','raspberry','strawberry')
+				;
+				..............................................................................
+
+				After the above code has been executed, the =fruits= array will have the value =['lemon','lime','orange','apricot','peach','plum','grape','raspberry','strawberry']=. The elements of the =stoneFruits= array are *not* in a nested array inside the =fruits= array, because the =concat= method unrolls parameter values that are arrays.
+
+		Concatenate Values of Any Type, Flattening Array Types Values
+			In situations where you need to concatenate some number of values of any type, and you like the behavior of the =concat= method of "unrolling" array values, but you're not guaranteed that the first value is going to always be an array, then you can call the =concat= method on a new empty array.
+
+			SYNTAX
+			.....................................................................
+			newARRAY = [].concat (value1ANYTYPE,value2ANYTYPE,...,valueNANYTYPE);
+			.....................................................................
+
+			Using this little trick, you don't have to worry about calling the =concat= method on the first of the values you wish to concatenate, not knowing whether or not that value will be an array - your dummy empty array guarantees you've always got something to call the =concat= method on. Consider the following example...
+
+			EXAMPLE
+			............................................................................................
+			var
+				stoneFruits = ['apricot','peach','plum'],
+				fruits = [].concat ('lemon','lime','orange',stoneFruits,'grape','raspberry','strawberry')
+			;
+			............................................................................................
+
+			After the above code has been executed, the =fruits= array will have the value =['lemon','lime','orange','apricot','peach','plum','grape','raspberry','strawberry']=. The first value we wish to concatenate is the string value ='lemon'=, and we can't call the =Array= object's =concat= method on that string value. But we *can* call =concat= on the array value =[]= (empty array).
+
+		Create a One Level Deep Copy of an Array
+			A `one level deep copy` of an array can easily be created using the =concat= method, simply by calling the method on the array you wish to copy, and supplying no parameters to the method.
+
+			SYNTAX
+			.................................
+			newARRAY = sourceARRAY.concat ();
+			.................................
+
+			EXAMPLE
+			......................................................
+			var
+				citrusFruits = ['lime','orange','lemon'],
+				citrusFruitsSorted = citrusFruits.concat ().sort ()
+			;
+			......................................................
+
+			After the above code has been executed, the value of the =citrusFruitsSorted= array will be =['lemon','lime','orange']=, while the value of the =citrusFruits= array will still be its initial value of =['lime','orange','lemon']=. This is because the =citrusFruitsSorted= array is created by first creating a `one level deep copy` of the =citrusFruits= array, after which its elements are then sorted. This leaves the elements of the =citrusFruits= array untouched.
+
+		Flatten a Two-dimensional Array
+			As a result of its unique behavior of "unrolling" parameter values that are arrays, the =concat= method can be used in a novel way to flatten a two dimensional array (ie. an array of arrays).
+
+			SYNTAX
+			.................................................................
+			newARRAY = Array.prototype.concat.apply ([],twoDimensionalARRAY);
+			.................................................................
+
+			The =apply= method can be called on the =concat= method (which is dereferenced off of the =Array.prototype= object), allowing an array to be used as the arguments for a =concat= method call. To give the =apply= method a context on which to apply the =concat= method, the value =[]= (a dummy empty array) is provided. Now, each of the arguments that the =concat= method sees would be one of the arrays that were nested inside the two dimensional array, and the elements in these arrays would get "unrolled" and concatenated together with the elements from all the other nested arrays, to form the new flattened array.
+
+			EXAMPLE
+			............................................................
+			var
+				fruitsInGroups = [
+					['lemon','lime','orange'],
+					['apricot','peach','plum'],
+					['grape','raspberry','strawberry']
+				],
+				fruits = Array.prototype.concat.apply ([],fruitsInGroups)
+			;
+			............................................................
+
+			After the above code has been executed, the =fruits= array will have the value =['lemon','lime','orange','apricot','peach','plum','grape','raspberry','strawberry']=. The statement =Array.prototype.concat.apply ([],fruitsInGroups)= effectively translates to the statement =[].concat (['lemon','lime','orange'],['apricot','peach','plum'],['grape','raspberry','strawberry'])=.
+
+		Concatenate Two Arrays, Either of Which Could be Null or Undefined
+			In situations where you need to concatenate two array variables and where either or both of them may be =null= or =undefined=, and where you wish to treat =null= or =undefined= values as empty arrays, you can simply or the values with empty arrays, as shown below...
+
+			SYNTAX
+			..........................................................
+			newARRAY = (array1ARRAY || []).concat (array2ARRAY || []);
+			..........................................................
+
+			In the case of the =array1ARRAY= value, you kind of have to ensure that the value is an array, because you can't call the =concat= method on =null= or =undefined=. Then, with regards to the =array2ARRAY= value, specifying a single parameter to the =concat= method that is =null= or =undefined= is not the same as specifying no parameters (or a single parameter that is an empty array). Specifying a =null= or =undefined= parameter value will result in that value being concatenated onto the result array. So, if you want to treat a =null= or =undefined= value for the =array2ARRAY= variable as meaning no elements, you need to do the or operation as shown above.
+
+		NOTES
+		- don't use the =concat= method to add elements to an array, since it creates a new array
+		- calling the =concat= method with the value =null= or =undefined= is not the same as calling the =concat= method with no parameters
+		- this method *does not* modify the array on which it is called
+		- this method is chainable (see `Chain Array Method Calls`)
+
+	join
+		Returns a string, that is the array on which the method is called, serialized to a string by serializing all its elements to strings, and concatenating them together using a specifiable separator to separate the element values.
+
+		DIFFERENT USAGES
+
+		`Join an Array Using the Default Delimiter`...
+		.....................................
+		joinedArraySTR = sourceARRAY.join ();
+		.....................................
+
+		`Join an Array Using a Custom Delimiter`...
+		.....................................................
+		joinedArraySTR = sourceARRAY.join (delimiterANYTYPE);
+		.....................................................
+
+		`Join an Array With Nothing Between Element Values`...
+		.......................................
+		joinedArraySTR = sourceARRAY.join ('');
+		.......................................
+
+		`Turn an Array Into a Multi-line String`...
+		.......................................
+		multiLineSTR = sourceARRAY.join ('\n');
+		.......................................
+
+		`Repeat a Value Any Number of Times`...
+		.......................................................................
+		repeatedSTR = new Array (numRepetitionsINT + 1).join (toRepeatANYTYPE);
+		.......................................................................
+
+		`Do a Hug Join, Where Each Element is Wrapped in a Prefix and Suffix`...
+		............................................................
+		joinedArraySTR =
+			prefixSTR +
+			sourceARRAY.join (suffixSTR + delimiterSTR + prefixSTR) +
+			suffixSTR
+		;
+		............................................................
+
+		Serialization of Element Values
+			When an array is serialized to a string using the =join= method, the values of individual elements of the array are serialized / coerced to strings before being concatenated together.
+
+			EXAMPLE
+			.......................................................................................
+			var array = [
+				false,                       // serialized to "false"
+				42,                          // serialized to "42"
+				Infinity,                    // serialized to "Infinity"
+				'foo',                       // serialized to "foo"
+				new RegExp ('\\d+'),         // serialized to "/\d+/"
+				Uize.Class ({value:'bar'}),  // serialized to "bar"
+				['lemon','lime','orange']    // serialized to "lemon,lime,orange"
+			];
+
+			alert (array.join (' ')); // alerts "false 42 Infinity foo /\d+/ bar lemon,lime,orange"
+			.......................................................................................
+
+			In the above example, the =alert= statement would alert the text *"false 42 Infinity foo /\d+/ bar lemon,lime,orange"*. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the =RegExp= object, the =Uize.Class= base class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the =toString= method of the =Array= object.
+
+			Special Handling of null and undefined Values
+				When the =join= method serializes array elements to strings before concatenating them, it implements special handling for elements with values of =null= or =undefined=.
+
+				Whereas a coercion to string of the values =null= or =undefined= using a =value + ''= style of coercion would produce the results ='null'= and ='undefined'=, respectively, the =join= method converts these two values to empty strings, instead. Consider the following example...
+
+				EXAMPLE
+				......................................................
+				var array = ['foo',null,undefined,'bar'];
+				alert (array.join ());  // alerts the text "foo,,,bar"
+				......................................................
+
+				In the above example, the the middle elements of the array are =null= and =undefined=. When using =join= on the array, these two values get turned into empty strings. So, *instead* of the array being serialized to ='foo,null,undefined,bar'=, it gets serialized to ='foo,,,bar'=.
+
+				This behavior of the =join= method can be used in a novel way to `repeat a value any number of times`. An equivalent behavior in the =toString= method (`toString is a special case of join`, after all) can be used to `create a string containing an arbitrary number of commas`.
+
+		Join an Array Using the Default Delimiter
+			Although it is possible to `join an array using a custom delimiter`, one can also omit the optional delimiter parameter and simply join an array's elements together using the default "," (comma) delimiter.
+
+			SYNTAX
+			.....................................
+			joinedArraySTR = sourceARRAY.join ();
+			.....................................
+
+			EXAMPLE
+			................................................................
+			var
+				citrusFruits = ['lemon','lime','orange'],
+				citrusFruitsStr = citrusFruits.join ()
+			;
+			alert (citrusFruitsStr);  // alerts the text "lemon,lime,orange"
+			................................................................
+
+			In this form, using the =join= method is equivalent to using the =toString= method, which also joins the elements of an array together using a comma as the separator. Because the default delimiter is a comma and not an empty string, if you want to join all the elements of an array with nothing between the element values, then you will have to `join an array using a custom delimiter`, specifying the value =''= (empty string) for the delimiter - the statement =array.join ()= is *not* equivalent to the statement =array.join ('')=.
+
+		Join an Array Using a Custom Delimiter
+			The elements of an array can be joined using a custom delimiter, by specifying the delimiter as the single parameter to the =join= method.
+
+			SYNTAX
+			.....................................................
+			joinedArraySTR = sourceARRAY.join (delimiterANYTYPE);
+			.....................................................
+
+			EXAMPLE
+			..........................................................
+			var array = ['FOO','AND','BAR'];
+			alert (array.join (' ')); // alerts the text "FOO AND BAR"
+			..........................................................
+
+			Custom Delimiter Can Be of Any Type
+				When specifying a custom delimiter with the =join= method, the delimiter you specify can be of any type - it will be coerced to a string by the =join= method before it is used in joining together the elements of the array.
+
+				EXAMPLE
+				.......................................................................
+				var array = ['FOO','AND','BAR'];
+				alert (array.join (false));    // alerts the text "FOOfalseANDfalseBAR"
+				alert (array.join (777));      // alerts the text "FOO777AND777BAR"
+				alert (array.join (NaN));      // alerts the text "FOONaNANDNaNBAR"
+				alert (array.join (null));     // alerts the text "FOOnullANDnullBAR"
+				alert (array.join ([1,2,3]));  // alerts the text "FOO1,2,3AND1,2,3BAR"
+				.......................................................................
+
+				undefined Delimiter Treated as No Custom Delimiter
+					When the value =undefined= is specified for the =delimiterANYTYPE= parameter, the =join= method treats this as though no custom delimiter is specified and the default delimiter (a comma) is used.
+
+					EXAMPLE
+					.................................................................
+					var array = ['FOO','AND','BAR'];
+					alert (array.join (undefined));  // alerts the text "FOO,AND,BAR"
+					.................................................................
+
+				Bug With Handling of undefined Delimiter in Microsoft's JScript
+					Worth noting is that specifying the value =undefined= for the =delimiterANYTYPE= parameter is handled incorrectly in Microsoft's JScript interpreter (which is used in Internet Explorer and Windows Script Host).
+
+					In the JScript interpreter, the delimiter value =undefined= is serialized to the string ='undefined'=. This means that the statement =[1,2,3].join (undefined)= would produce the result ='1undefined2undefined3'= in IE. The ECMA-262 specification clearly states in its definition for the =Array= object's =join= method that if the separator is =undefined=, then a comma should be used. One can argue the merits of one behavior over the other, but there's no denying that the Microsoft implementation is simply non-compliant.
+
+		Join an Array With Nothing Between Element Values
+			Because the behavior of the =join= method when the optional delimiter is not specified is to use a comma as the default, if you want to join an array's elements together with nothing inbetween them then you have to explicitly specify the value =''= (an empty string) as the custom delimiter.
+
+			SYNTAX
+			.......................................
+			joinedArraySTR = sourceARRAY.join ('');
+			.......................................
+
+			EXAMPLE
+			........................................
+			var htmlChunks = [
+				'<div style="font-size:20px;">',
+					'Hello, world!',
+				'</div>'
+			];
+			document.writeln (htmlChunks.join (''));
+			........................................
+
+			In the above example, if you didn't specify the empty string delimiter, then the HTML that the =document.writeln= statement spits out would contain undesired commas that would actually display in the rendered HTML.
+
+		Turn an Array Into a Multi-line String
+			An array can easily be turned into a multi-line string using the =join= method, simply by specifying the value ='\n'= (a linebreak character) for the method's optional delimiter parameter.
+
+			SYNTAX
+			.......................................
+			multiLineSTR = sourceARRAY.join ('\n');
+			.......................................
+
+			EXAMPLE
+			..........................................................................................
+			var fruits = ['apricot','strawberry','apple','mango','peach','pear','orange','tangerine'];
+			document.writeln (
+				'<pre>\n' +
+				fruits.join ('\n') + '\n' +
+				'</pre>'
+			);
+			..........................................................................................
+
+			HTML OUTPUT
+			..........
+			<pre>
+			apricot
+			strawberry
+			apple
+			mango
+			peach
+			pear
+			orange
+			tangerine
+			</pre>
+			..........
+
+		Repeat a Value Any Number of Times
+			Because of its `special handling of null and undefined values`, the =join= method can be used in a novel way to repeat any value a desired number of times.
+
+			SYNTAX
+			.......................................................................
+			repeatedSTR = new Array (numRepetitionsINT + 1).join (toRepeatANYTYPE);
+			.......................................................................
+
+			Because =null= or =undefined= element values are converted to empty strings, joining an array that contains some number of =null= or =undefined= elements using a custom delimiter results in a string with number-of-elements-minus-one repititions of that delimiter. The `contructor` of the =Array= object makes it easy to `create a new array of a desired length`, where the elements are initialized to =undefined=.
+
+			EXAMPLE
+			........................................................................................
+			var divider = new Array (11).join ('-=+=-');
+			alert (divider); // alerts the text "-=+=--=+=--=+=--=+=--=+=--=+=--=+=--=+=--=+=--=+=-"
+			........................................................................................
+
+			This technique is similar to the technique that can be used with the =toString= method to `create a string containing an arbitrary number of commas` (remember, `toString is a special case of join`). Because the =join= method's `custom delimiter can be of any type`, you can use this technique to repeat any type of value to form a new string.
+
+		Do a Hug Join, Where Each Element is Wrapped in a Prefix and Suffix
+			.
+
+			SYNTAX
+			............................................................
+			joinedArraySTR =
+				prefixSTR +
+				sourceARRAY.join (suffixSTR + delimiterSTR + prefixSTR) +
+				suffixSTR
+			;
+			............................................................
+
+			### mention Uize.String.hugJoin
+
+		NOTES
+		- compare to the =toString= instance method
+		- this method *does not* modify the array on which it is called
+
+	pop
+		Removes the last element of the array on which the method is called, and returns the value of the element that was removed.
+
+		SYNTAX
+		........................................
+		lastElementANYTYPE = sourceARRAY.pop ();
+		........................................
+
+		EXAMPLE
+		.............................................................
+		var citrusFruits = ['lemon','lime','orange'];
+
+		alert (citrusFruits.pop ());  // alerts the text "orange"
+		alert (citrusFruits);         // alerts the text "lemon,lime"
+		.............................................................
+
+		Zero Length Arrays
+			If the array on which the =pop= method is called has no elements, then the array will not be affected and the method will return the value =undefined=.
+
+		Stacks of Fun
+			Along with the companion =push= method, the =pop= method has its history in stack management, so JavaScript's version of this method may come in handy in programs where you're effectively treating a JavaScript array as a stack.
+
+		Using pop in a Loop's Test
+			In cases where you're processing and eliminating the items on a stack inside a loop, and where you know that none of the elements' values are =null= or =undefined=, you can use the =pop= method inside the loop's test, as follows...
+
+			EXAMPLE
+			...............................................
+			var stackElement;
+			while ((stackElement = stack.pop ()) != null) {
+				// code here to process stackElement
+			}
+			// by the time we get here, the stack is empty
+			...............................................
+
+			In the above example, we're doing an assigment and also a test on the result of the assignment, both inside the loop's test. Once the stack is empty, the =pop= method will return the value =undefined=, the test will fail, and the loop will stop iterating, at which point the stack array will also be empty.
+
+		More Ways Than One
+			Besides the =pop= method, there are numerous other ways to `remove the last element from an array`.
+
+		NOTES
+		- compare to the similar =shift= instance method
+		- compare to the opposite =push= instance method
+		- this method modifies the array on which it is called
+
+	push
+		DIFFERENT USAGES
+
+		`Push a Single Value Onto the End of an Array`...
+		.......................................................
+		targetArrayLengthINT = targetARRAY.push (valueANYTYPE);
+		.......................................................
+
+		`Push Any Number of Values Onto the End of an Array`...
+		........................................................................................
+		targetArrayLengthINT = targetARRAY.push (value1ANYTYPE,value2ANYTYPE,...,valueNANYTYPE);
+		........................................................................................
+
+		`Push the Elements of a Source Array Onto the End of a Target Array`...
+		........................................................................
+		targetArrayLengthINT = targetARRAY.push.apply (targetARRAY,sourceARRAY);
+		........................................................................
+
+		`Create a One Level Deep Copy of an Array`...
+		...........................................
+		var newARRAY = [];
+		newARRAY.push.apply (newARRAY,sourceARRAY);
+		...........................................
+
+		### Push a Single Value Onto the End of an Array
+			.
+
+			SYNTAX
+			.......................................................
+			targetArrayLengthINT = targetARRAY.push (valueANYTYPE);
+			.......................................................
+
+		### Push Any Number of Values Onto the End of an Array
+			.
+
+			SYNTAX
+			........................................................................................
+			targetArrayLengthINT = targetARRAY.push (value1ANYTYPE,value2ANYTYPE,...,valueNANYTYPE);
+			........................................................................................
+
+		### Push the Elements of a Source Array Onto the End of a Target Array
+			.
+
+			SYNTAX
+			........................................................................
+			targetArrayLengthINT = targetARRAY.push.apply (targetARRAY,sourceARRAY);
+			........................................................................
+
+		Create a One Level Deep Copy of an Array
+			While there are more concise ways to create a `one level deep copy` of an array using other methods of the =Array= object, it *is* also technically possible to create a one level deep copy using the =push= instance method, as shown below...
+
+			SYNTAX
+			...........................................
+			var newARRAY = [];
+			newARRAY.push.apply (newARRAY,sourceARRAY);
+			...........................................
+
+			We're leveraging the fact that the =push= method can accept an arbitrary number of parameters, and we can supply the elements of the =sourceARRAY= array as the arguments for the =push= method by calling the =apply= method on the =push= method (this is a facility of JavaScript's built-in =Function= object). In a similar way, you can also create a `one level deep copy` using the =unshift= instance method.
+
+		NOTES
+		- compare to the similar =unshift= instance method
+		- compare to the opposite =pop= instance method
+		- this method modifies the array on which it is called
+
+	reverse
+		Reverses the order of the values in the array on which the method is called, and returns the array as its result.
+
+		SYNTAX
+		.....................................
+		sourceARRAY = sourceARRAY.reverse ();
+		.....................................
+
+		EXAMPLE
+		....................................................................................
+		var fruits = [
+			'strawberry','apricot','lemon','peach','grape','lime','plum','raspberry','orange'
+		];
+
+		fruits.sort ().reverse ();
+		alert (fruits);
+		....................................................................................
+
+		In the above example, the =fruits= array contains the names of a bunch of fruits - not arranged in any particular order. The code then calls the =sort= method on the array in order to sort its contents into ascending ASCIIbetical order, after which the =reverse= method is called on it in order to reverse the elements so that the fruits are sorted in descending ASCIIbetical order. After the above code has been executed, the =fruits= array will have the value =['strawberry','raspberry','plum','peach','orange','lime','lemon','grape','apricot']=.
+
+		Now, there *are* better performing ways to do a descending order sort, but this example demonstrates the use of the =reverse= method. Notice that the =reverse= method is being called on the result of the =sort= method call. We can do that because the =sort= method, like the =reverse= method, returns the array on which it is called as its result, so it is chainable (see `Chain Array Method Calls`).
+
+		NOTES
+		- this method modifies the array on which it is called
+		- this method is chainable (see `Chain Array Method Calls`)
+
+	shift
+		Removes the first element of the array on which the method is called, and returns the value of the element that was removed.
+
+		SYNTAX
+		...........................................
+		firstElementANYTYPE = sourceARRAY.shift ();
+		...........................................
+
+		EXAMPLE
+		...............................................................
+		var citrusFruits = ['lemon','lime','orange'];
+
+		alert (citrusFruits.shift ()); // alerts the text "lemon"
+		alert (citrusFruits);          // alerts the text "lime,orange"
+		...............................................................
+
+		Zero Length Arrays
+			If the array on which the =shift= method is called has no elements, then the array will not be affected and the method will return the value =undefined=.
+
+		Using shift in a Loop's Test
+			In cases where you're processing and eliminating the items from a queue inside a loop, and where you know that none of the queue's element values are =null= or =undefined=, you can use the =shift= method inside the loop's test, as follows...
+
+			EXAMPLE
+			..................................................
+			var firstInQeueue;
+			while ((firstInQeueue = queue.shift ()) != null) {
+				// code here to process firstInQeueue
+			}
+			// by the time we get here, the queue is empty
+			..................................................
+
+			In the above example, we're doing an assigment and also a test on the result of the assignment, both inside the loop's test. Once the queue is empty, the =shift= method will return the value =undefined=, the test will fail, and the loop will stop iterating, at which point the queue array will also be empty.
+
+		More Ways Than One
+			Besides the =shift= method, there are numerous other ways to `remove the first element from an array`.
+
+		NOTES
+		- compare to the similar =pop= instance method
+		- compare to the opposite =unshift= instance method
+		- this method modifies the array on which it is called
+
+	slice
+		DIFFERENT USAGES
+
+		`Get a Slice From a Start Element up to But Not Including an End Element`...
+		...........................................................................
+		sliceOfSourceARRAY = sourceARRAY.slice (startElementNoINT,endElementNoINT);
+		...........................................................................
+
+		`Get a Slice From a Start Element to an End Element`...
+		...............................................................................
+		sliceOfSourceARRAY = sourceARRAY.slice (startElementNoINT,endElementNoINT + 1);
+		...............................................................................
+
+		`Get a Slice From a Start Element to the End of the Array`...
+		...........................................................
+		sliceOfSourceARRAY = sourceARRAY.slice (startElementNoINT);
+		...........................................................
+
+		`Get a Slice of a Specified Length at the End of an Array`...
+		...........................................................
+		sliceOfSourceARRAY = sourceARRAY.slice (-lengthOfSliceINT);
+		...........................................................
+
+		`Get a Slice of a Specified Length at the Beginning of an Array`...
+		............................................................
+		sliceOfSourceARRAY = sourceARRAY.slice (0,lengthOfSliceINT);
+		............................................................
+
+		`Create a One Level Deep Copy of an Array`...
+		................................
+		newARRAY = sourceARRAY.slice ();
+		................................
+
+		### Get a Slice From a Start Element up to But Not Including an End Element
+			.
+
+			SYNTAX
+			...........................................................................
+			sliceOfSourceARRAY = sourceARRAY.slice (startElementNoINT,endElementNoINT);
+			...........................................................................
+
+		### Get a Slice From a Start Element to an End Element
+			.
+
+			SYNTAX
+			...............................................................................
+			sliceOfSourceARRAY = sourceARRAY.slice (startElementNoINT,endElementNoINT + 1);
+			...............................................................................
+
+		### Get a Slice From a Start Element to the End of the Array
+			.
+
+			SYNTAX
+			...........................................................
+			sliceOfSourceARRAY = sourceARRAY.slice (startElementNoINT);
+			...........................................................
+
+		### Get a Slice of a Specified Length at the End of an Array
+			.
+
+			SYNTAX
+			...........................................................
+			sliceOfSourceARRAY = sourceARRAY.slice (-lengthOfSliceINT);
+			...........................................................
+
+		### Get a Slice of a Specified Length at the Beginning of an Array
+			.
+
+			SYNTAX
+			............................................................
+			sliceOfSourceARRAY = sourceARRAY.slice (0,lengthOfSliceINT);
+			............................................................
+
+		Create a One Level Deep Copy of an Array
+			A `one level deep copy` of an array can easily be created using the =slice= method, simply by calling the method on the array you wish to copy, and supplying no parameters to the method.
+
+			SYNTAX
+			................................
+			newARRAY = sourceARRAY.slice ();
+			................................
+
+			The =slice= method returns a new array that is a one level deep copy of the specified portion of the array on which the method is called. The array "slice" that is to be copied is specified using two parameters: the first parameter specifies the starting index, and the second parameter specifies the ending index. When the ending index (ie. the second parameter) is not specified, it is defaulted to the array's length (ie. one element after the last element of the array). When the starting index (ie. the first parameter) is not specified, it is defaulted to =0= (ie. the first element of the array). So, if the =slice= method is called with no parameters specified, it effectively returns a one level deep copy of the entire array - from first element to last.
+
+		NOTES
+		- this method *does not* modify the array on which it is called
+		- this method is chainable (see `Chain Array Method Calls`)
+
+	sort
+		DIFFERENT USAGES
+
+		`Sort an Array Using the Default Comparison Function`...
+		..................................
+		sourceARRAY = sourceARRAY.sort ();
+		..................................
+
+		`Sort an Array Using a Custom Comparison Function`...
+		................................................
+		sourceARRAY = sourceARRAY.sort (comparisonFUNC);
+		................................................
+
+		### Sort an Array Using the Default Comparison Function
+			.
+
+			SYNTAX
+			..................................
+			sourceARRAY = sourceARRAY.sort ();
+			..................................
+
+		### Sort an Array Using a Custom Comparison Function
+			.
+
+			SYNTAX
+			................................................
+			sourceARRAY = sourceARRAY.sort (comparisonFUNC);
+			................................................
+
+		NOTES
+		- this method modifies the array on which it is called
+		- this method is chainable (see `Chain Array Method Calls`)
+
+	splice
+		DIFFERENT USAGES
+
+		`Replace a Segment of a Specified Length, From a Specified Start Element, With New Elements`...
+		...............................................................
+		replacedElementsARRAY = sourceARRAY.splice (
+			startElementNoINT,
+			segmentLengthINT,
+			newElement1ANYTYPE,newElement2ANYTYPE,...,newElementNANYTYPE
+		);
+		...............................................................
+
+		`Replace a Segment of a Target Array With the Elements of a Source Array`...
+		............................................................
+		replacedElementsARRAY = targetARRAY.splice.apply (
+			targetARRAY,
+			[startElementNoINT,segmentLengthINT].concat (sourceARRAY)
+		);
+		............................................................
+
+		`Insert New Elements Into an Array, Before a Specified Element Number`...
+		...............................................................
+		emptyARRAY = sourceARRAY.splice (
+			elementNoINT,
+			0,
+			newElement1ANYTYPE,newElement2ANYTYPE,...,newElementNANYTYPE
+		);
+		...............................................................
+
+		`Insert the Elements of a Source Array Into a Target Array, Before a Specified Element Number`...
+		..........................................................................................
+		emptyARRAY = targetARRAY.splice.apply (targetARRAY,[elementNoINT,0].concat (sourceARRAY));
+		..........................................................................................
+
+		`Insert New Elements at the Beginning of an Array`...
+		...............................................................
+		emptyARRAY = sourceARRAY.splice (
+			0,
+			0,
+			newElement1ANYTYPE,newElement2ANYTYPE,...,newElementNANYTYPE
+		);
+		...............................................................
+
+		`Insert the Elements of a Source Array at the Beginning of a Target Array`...
+		...............................................................................
+		emptyARRAY = targetARRAY.splice.apply (targetARRAY,[0,0].concat (sourceARRAY));
+		...............................................................................
+
+		`Insert New Elements at the End of an Array`...
+		...............................................................
+		emptyARRAY = sourceARRAY.splice (
+			Infinity,
+			0,
+			newElement1ANYTYPE,newElement2ANYTYPE,...,newElementNANYTYPE
+		);
+		...............................................................
+
+		`Insert the Elements of a Source Array at the End of a Target Array`...
+		......................................................................................
+		emptyARRAY = targetARRAY.splice.apply (targetARRAY,[Infinity,0].concat (sourceARRAY));
+		......................................................................................
+
+		`Remove a Segment of a Specified Length, From a Specified Start Element`...
+		...............................................................................
+		removedElementsARRAY = sourceARRAY.splice (startElementNoINT,segmentLengthINT);
+		...............................................................................
+
+		`Remove a Segment of a Specified Length at the Beginning of an Array`...
+		...............................................................
+		removedElementsARRAY = sourceARRAY.splice (0,segmentLengthINT);
+		...............................................................
+
+		`Remove a Segment of a Specified Length at the End of an Array`...
+		...............................................................................
+		removedElementsARRAY = sourceARRAY.splice (-segmentLengthINT,segmentLengthINT);
+		...............................................................................
+
+		`Remove Elements From a Start Element up to But Not Including an End Element`...
+		...........................................
+		removedElementsARRAY = sourceARRAY.splice (
+			startElementNoINT,
+			endElementNoINT - startElementNoINT
+		);
+		...........................................
+
+		`Remove Elements From a Start Element to an End Element`...
+		...........................................
+		removedElementsARRAY = sourceARRAY.splice (
+			startElementNoINT,
+			endElementNoINT - startElementNoINT + 1
+		);
+		...........................................
+
+		`Remove Elements From a Start Element to the End of the Array`...
+		.......................................................................
+		removedElementsARRAY = sourceARRAY.splice (startElementNoINT,Infinity);
+		.......................................................................
+
+		`Remove the Entire Contents of an Array`...
+		.......................................................
+		removedElementsARRAY = sourceARRAY.splice (0,Infinity);
+		.......................................................
+
+		NOTES
+		- this method modifies the array on which it is called
+		- this method is chainable (see `Chain Array Method Calls`)
+
+	toString
+		Returns a string, that is a comma-separated list of the values of all the elements of the array on which the method is called.
+
+		DIFFERENT USAGES
+
+		`Serialize an Array to a String, by Calling the toString Method Explicitly`...
+		...........................................
+		arrayAsStringSTR = sourceARRAY.toString ();
+		...........................................
+
+		`Serialize an Array to a String, by Implicitly Invoking the toString Method`...
+		....................................
+		arrayAsStringSTR = sourceARRAY + '';
+		....................................
+
+		`Create a String Containing an Arbitrary Number of Commas`...
+		......................................................
+		lotsOfCommasSTR = new Array (totalCommasINT + 1) + '';
+		......................................................
+
+		Automatic Invoking of toString
+			The =toString= method may be called explicitly, but it is also invoked implicitly in various situations.
+
+			Automatic Invoking of toString by Operators
+				When an array value is used with certain operators - such as =+= (plus), =-= (minus), =&#42;= (multiply), =/= (divide), etc. - the =toString= method is called to coerce the array to a string value for use in the operation.
+
+				EXAMPLE
+				......................................................................
+				var
+					citrusFruits = ['lemon','lime','orange'],
+					message = 'CITRUS FRUITS: ' + citrusFruits
+				;
+				alert (message); // alerts the text "CITRUS FRUITS: lemon,lime,orange"
+				......................................................................
+
+				Using this behavior, you can more concisely `serialize an array to a string, by implicitly invoking the toString method`.
+
+			Automatic Invoking of toString by Functions and Methods
+				When an array value is passed as a parameter to certain functions or methods - such as the =alert= global function, or the =test= instance method of the =RegExp= object - the =toString= method is called to coerce the array to a string value.
+
+				EXAMPLE
+				..........................................................................................
+				var fruits = ['apricot','strawberry','apple','mango','peach','pear','orange','tangerine'];
+
+				alert (/grapefruit|mango|pomegranate/.test (fruits)); // alerts the text "true"
+				..........................................................................................
+
+				In the above example, the =fruits= array is being supplied as a parameter to the =test= instance method of the regular expression, and this method coerces this array to a string by invoking its =toString= method. The regular expression is testing if a string contains any of the text "grapefruit", "mango", or "pomegranate". The array, serialized as a string, *does* happen to contain one of these fruit names (mango, to be exact), so the method returns =true= and the =alert= statement displays this result.
+
+				Refer to Other Documentation
+					It's not a feature of the =Array= object which actual functions or methods invoke the =toString= method of array instances to serialize them to strings - this is entirely up to the wide (and expanding) range of functions that are built into the JavaScript language, or that are provided as part of higher level JavaScript frameworks built on top of the language.
+
+					Therefore, no attempt is made here to provide a comprehensive and authoritative list of all the functions and methods that may invoke =toString=, and for which of their parameters they may do this. You should refer, instead, to the documentation for those functions and methods for those kinds of details.
+
+		toString is a Special Case of join
+			Using the =toString= method is equivalent to using the =join= method and either specifying the value =','= (a comma) for that method's delimiter parameter, or not specifying a delimiter parameter (the delimiter defaults to a comma).
+
+			EXAMPLE
+			..........................................................................................
+			var fruits = ['apricot','strawberry','apple','mango','peach','pear','orange','tangerine'];
+			alert (fruits.toString () == fruits.join (',')); // alerts the text "true"
+			alert (fruits.toString () == fruits.join ());    // alerts the text "true"
+			..........................................................................................
+
+			In the above example, the two =alert= statements would display the text "true", because for each of them the two sides of the equality expression are equivalent and produce the exact same result.
+
+		No Custom Delimiter With toString
+			Unlike the =join= method, there is no way to specify the delimiter to be used when concatenating values using the =toString= method - it's always a comma.
+
+			So, for example, the statement =array.toString ('-')= is *INCORRECT* and would *still* produce a string where the element values are concatenated using a comma. If you need to control the delimiter used, use the =join= method.
+
+		Serialization of Element Values
+			When an array is serialized to a string using the =toString= method, the values of individual elements of the array are serialized / coerced to strings before being concatenated together.
+
+			EXAMPLE
+			......................................................................................
+			var array = [
+				false,                       // serialized to "false"
+				42,                          // serialized to "42"
+				Infinity,                    // serialized to "Infinity"
+				'foo',                       // serialized to "foo"
+				new RegExp ('\\d+'),         // serialized to "/\d+/"
+				Uize.Class ({value:'bar'}),  // serialized to "bar"
+				['lemon','lime','orange']    // serialized to "lemon,lime,orange"
+			];
+
+			alert (array);  // alerts the text "false,42,Infinity,foo,/\d+/,bar,lemon,lime,orange"
+			......................................................................................
+
+			In the above example, the =alert= statement would alert the text *"false,42,Infinity,foo,/\d+/,bar,lemon,lime,orange"*. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the =RegExp= object, the =Uize.Class= base class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the =toString= method of the =Array= object.
+
+			Special Handling of null and undefined Values
+				When the =toString= method serializes array elements to strings before concatenating them, it implements special handling for elements with values of =null= or =undefined=.
+
+				Whereas a coercion to string of the values =null= or =undefined= using a =value + ''= style of coercion would produce the results ='null'= and ='undefined'=, respectively, the =toString= method converts these two values to empty strings, instead. Consider the following example...
+
+				EXAMPLE
+				..........................................................
+				var array = ['foo',null,undefined,'bar'];
+				alert (array.toString ());  // alerts the text "foo,,,bar"
+				..........................................................
+
+				In the above example, the the middle elements of the array are =null= and =undefined=. When using =toString= on the array, these two values get turned into empty strings. So, *instead* of the array being serialized to ='foo,null,undefined,bar'=, it gets serialized to ='foo,,,bar'=.
+
+				This behavior of the =toString= method can be used in a novel way to `create a string containing an arbitrary number of commas`. An equivalent behavior in the =join= method (remember, `toString is a special case of join`) can be used to `repeat a value any number of times`.
+
+		Serialize an Array to a String, by Calling the toString Method Explicitly
+			An array can be serialized to a string by calling the =toString= method on the array.
+
+			SYNTAX
+			...........................................
+			arrayAsStringSTR = sourceARRAY.toString ();
+			...........................................
+
+			EXAMPLE
+			................................................................
+			var
+				citrusFruits = ['lemon','lime','orange'],
+				citrusFruitsStr = citrusFruits.toString ()
+			;
+			alert (citrusFruitsStr);  // alerts the text "lemon,lime,orange"
+			................................................................
+
+			This approach is not often used in practice, because you can more conveniently `serialize an array to a string, by implicitly invoking the toString method`.
+
+		Serialize an Array to a String, by Implicitly Invoking the toString Method
+			A more concise way of serializing an array to a string than calling the =toString= method is implicitly invoking the =toString= method by adding the array to an empty string (see `Automatic Invoking of toString by Operators`).
+
+			SYNTAX
+			....................................
+			arrayAsStringSTR = sourceARRAY + '';
+			....................................
+
+			An additional benefit of this approach, besides just being less to type, is that the array variable or parameter can be =null= or =undefined=. Trying to call the =toString= method on a variable whose value is =null= or =undefined= would throw an error, but concatenating =null= or =undefined= with an empty string will *not* throw an error.
+
+			EXAMPLE
+			................................................................
+			var
+				citrusFruits = ['lemon','lime','orange'],
+				citrusFruitsStr = citrusFruits + ''
+			;
+			alert (citrusFruitsStr);  // alerts the text "lemon,lime,orange"
+			................................................................
+
+		Create a String Containing an Arbitrary Number of Commas
+			Because of the =toString= method's `special handling of null and undefined values`, this method can be used in a novel way to create a string containing a specified number of commas, simply by creating an array initialized with a number of =undefined= values and then serializing it to a string.
+
+			SYNTAX
+			......................................................
+			lotsOfCommasSTR = new Array (totalCommasINT + 1) + '';
+			......................................................
+
+			Because the =,= (comma) character is the delimiter that separates elements when the =toString= method concatenates them, and because =null= or =undefined= element values are converted to empty strings, serializing an array that contains some number of =null= or =undefined= elements to a string results in a string with number-of-elements-minus-one commas. The `contructor` of the =Array= object makes it easy to `create a new array of a desired length`, where the elements are initialized to =undefined=.
+
+			EXAMPLE
+			..........................................................................
+			var totalCommas = 10;
+			alert (new Array (totalCommas + 1) + '');  // alerts the text ",,,,,,,,,,"
+			..........................................................................
+
+			This technique is similar to the technique that can be used with the =join= method to `repeat a value any number of times` (remember, `toString is a special case of join`).
+
+		NOTES
+		- compare to the =join= instance method
+		- this method *does not* modify the array on which it is called
+
+	unshift
+		DIFFERENT USAGES
+
+		`Insert a Single Element at the Beginning of an Array`...
+		..........................................................
+		targetArrayLengthINT = sourceARRAY.unshift (valueANYTYPE);
+		..........................................................
+
+		`Insert Any Number of Values at the Beginning of an Array`...
+		...........................................................................................
+		targetArrayLengthINT = sourceARRAY.unshift (value1ANYTYPE,value2ANYTYPE,...,valueNANYTYPE);
+		...........................................................................................
+
+		`Insert the Elements of a Source Array at the Beginning of a Target Array`...
+		...........................................................................
+		targetArrayLengthINT = targetARRAY.unshift.apply (targetARRAY,sourceARRAY);
+		...........................................................................
+
+		`Create a One Level Deep Copy of an Array`...
+		..............................................
+		var newARRAY = [];
+		newARRAY.unshift.apply (newARRAY,sourceARRAY);
+		..............................................
+
+		### Insert a Single Element at the Beginning of an Array
+			.
+
+			SYNTAX
+			..........................................................
+			targetArrayLengthINT = sourceARRAY.unshift (valueANYTYPE);
+			..........................................................
+
+		### Insert Any Number of Values at the Beginning of an Array
+			.
+
+			SYNTAX
+			...........................................................................................
+			targetArrayLengthINT = sourceARRAY.unshift (value1ANYTYPE,value2ANYTYPE,...,valueNANYTYPE);
+			...........................................................................................
+
+		### Insert the Elements of a Source Array at the Beginning of a Target Array
+			.
+
+			SYNTAX
+			...........................................................................
+			targetArrayLengthINT = targetARRAY.unshift.apply (targetARRAY,sourceARRAY);
+			...........................................................................
+
+		Create a One Level Deep Copy of an Array
+			While there are more concise ways to create a `one level deep copy` of an array using other methods of the =Array= object, it *is* also technically possible to create a one level deep copy using the =unshift= instance method, as shown below...
+
+			SYNTAX
+			..............................................
+			var newARRAY = [];
+			newARRAY.unshift.apply (newARRAY,sourceARRAY);
+			..............................................
+
+			We're leveraging the fact that the =unshift= method can accept an arbitrary number of parameters, and we can supply the elements of the =sourceARRAY= array as the arguments for the =unshift= method by calling the =apply= method on the =unshift= method (this is a facility of JavaScript's built-in =Function= object). In a similar way, you can also create a `one level deep copy` using the =push= instance method.
+
+		NOTES
+		- compare to the similar =push= instance method
+		- compare to the opposite =shift= instance method
+		- this method modifies the array on which it is called
+
+	valueOf
+		Returns a reference to the array on which the method is called.
+
+		SYNTAX
+		.....................................
+		sourceARRAY = sourceARRAY.valueOf ();
+		.....................................
+
+		The =valueOf= method is inherited from JavaScript's built-in =Object= object, and its behavior for the =Array= object makes it arguably not a method you'll ever care to think about or call explicitly.
+
+		EXAMPLE
+		...........................................................................
+		var citrusFruits = ['lemon','lime','orange'];
+		alert (citrusFruits == citrusFruits.valueOf ());  // alerts the text "true"
+		...........................................................................
+
+		In the above example, the =alert= statement displays the text "true", because the statement =citrusFruits.valueOf ()= simply returns a reference to =citrusFruits= as its result.
+
+		NOTES
+		- this method *does not* modify the array on which it is called
+		- compare to the somewhat more interesting =toString= instance method
+
+Instance Properties
+	constructor
+		.....
+		<< >>
+		.....
+
+	length
+		DIFFERENT USAGES
+
+		`Empty Out an Array`...
+		.......................
+		sourceARRAY.length = 0;
+		.......................
+
+		`Remove a Segment of a Specified Length at the End of an Array`...
+		.......................................
+		sourceARRAY.length -= segmentLengthINT;
+		.......................................
+
+Static Methods
+	Array.apply
+		.....
+		<< >>
+		.....
+
+	Array.call
+		.....
+		<< >>
+		.....
+
+	Array.toString
+		.....
+		<< >>
+		.....
+
+	Array.valueOf
+		.....
+		<< >>
+		.....
+
+Static Properties
+	Array.constructor
+		.....
+		<< >>
+		.....
+
+	Array.length
+		.....
+		<< >>
+		.....
+
+	Array.prototype
+		.....
+		<< >>
+		.....
+
+### Methods of Other Objects That Return Arrays
+	### split Instance Method of String Object
+		.
+

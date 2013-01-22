@@ -1,0 +1,45 @@
+This is a TO DO document for the =Uize.Services.Store= module.
+
+Adapter Base Class
+	In order to endow all adapters of the =Uize.Services.Store= service with certain useful features, an adapter base class should be provided that can be subclassed by any adapter implementation.
+
+	Responsibilities of the adapter...
+
+	- access caching to improve performance
+	- provide a caching layer, to avoid constant setItem and getItem calls
+	- serialize / deserialize to and from string, for adapters that only support string storage
+
+Adapters
+	The following adapters could be implemented for the =Uize.Services.Store= service.
+
+	- =Uize.Services.StoreAdapter.FileSytem= - would use the =Uize.Services.FileSystem= service to store data in a file using the file system
+	- =Uize.Services.StoreAdapter.BrowserLocalStorage= - would use the browser's local storage facility
+	- =Uize.Services.StoreAdapter.Flash= - would store using a Flash swf
+	- =Uize.Services.StoreAdapter.IeActiveX= - would store using an ActiveX control in MSIE
+	- =Uize.Services.StoreAdapter.Cookies= - would use the browser cookies
+	- =Uize.Services.StoreAdapter.Memory= - would store in JavaScript memory
+
+Caching Behavior
+	The adapter base class for the store service could provide a generic caching layer, to minimize usage of the external storage system which can be costly for some storage mechanisms.
+
+	Cache Warming
+		The adapter base class can provide a mechanism for warming the cache by getting items from the external storage system and seeding them into the in-memory cache object.
+
+		- ability to specify maxItems to load into cache
+		- ability to specify maxTime spent warming cache
+		- ability to specify specific items to cache
+		- lazy warming of cache, if cache enabled and item not cached
+		- ability to warm cache as part of initialization
+
+	Cache Requirements
+		- enable or disable caching at any time
+		- ability to clear items from cache
+		- ability to clear entire cache
+
+Serialization / Deserilization
+	- per adapter subclass, ability to declare if adapter only supports storage in string form
+	- per instance of service, ability to configure serializer / deserializer for adapters that only support storage in string form
+
+Data Persistence
+	Adapters for the =Uize.Services.Store= can provide varying degrees of persistence of the data.
+

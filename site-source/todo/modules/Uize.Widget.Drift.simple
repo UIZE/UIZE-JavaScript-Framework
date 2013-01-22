@@ -1,0 +1,6 @@
+This is a proposal document for a =Uize.Widget.Drift= module.
+
+Wires up a node that is being cropped by a containing node so that it automatically drifts inside its containing node in order to reveal over time all of its contents.
+
+Motion may involve some arbitrary angle and bouncing at edges, with slight randomization of reflection angle on bouncing to avoid too repetitive of an animation path.
+

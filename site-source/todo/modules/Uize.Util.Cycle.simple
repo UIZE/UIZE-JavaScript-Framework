@@ -1,0 +1,5 @@
+This is a TO DO document for the =Uize.Util.Cycle= module.
+
+TODO
+- instead of start / stop methods, just use property interface (ie. inProgress property)
+

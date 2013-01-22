@@ -1,0 +1,423 @@
+/*** SimpleDoc Elements ***/
+	/*** Section Contents ***/
+		.contents1, .contents2, .contents3, .contents4, .contents5, .contents6, .contents7, .contents8, .contents9 {
+			margin-left:10px;
+			margin-bottom:10px;
+		}
+
+	/*** Section Headings ***/
+		/*** all ***/
+			.heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .heading7, .heading8, .heading9 {
+				font-family:Arial, Helvetica, Verdana;
+				font-weight:normal;
+			}
+
+		/*** heading numbering ***/
+			.heading2 .headingNumber,
+			.heading3 .headingNumber,
+			.heading4 .headingNumber,
+			.heading5 .headingNumber,
+			.heading6 .headingNumber,
+			.heading7 .headingNumber,
+			.heading8 .headingNumber,
+			.heading9 .headingNumber
+			{
+				margin-right:3px;
+			}
+
+		/*** heading 1 ***/
+			.heading1 {
+				font-size:14px;
+				letter-spacing:3px;
+				padding:6px 0 6px 16px;
+				margin-top:20px;
+				margin-bottom:0;
+				border:1px solid #aab;
+				border-radius:5px;
+				-moz-border-radius:5px;
+				-webkit-border-radius:5px;
+				color:#000;
+				background:#fff url(../images/heading-bg-light.gif) repeat left top;
+			}
+			.heading1 a, .heading1 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+				margin:0;
+			}
+			.heading1 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 2 ***/
+			.heading2 {
+				font-size:15px;
+				padding:3px 2px 3px 15px;
+				margin-bottom:0;
+				margin-top:20px;
+				border:1px solid #b3bcbd;
+				border-radius:3px;
+				-moz-border-radius:3px;
+				-webkit-border-radius:3px;
+				color:#000;
+				background:#eaedef;
+			}
+			.heading2 a, .heading2 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+				margin:0;
+			}
+			.heading2 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 3 ***/
+			.heading3 {
+				font-size:14px;
+				letter-spacing:1px;
+				padding:1px 0 4px 0;
+				margin-bottom:0;
+				margin-top:25px;
+				border-bottom:1px solid #899;
+				color:#000;
+			}
+			.heading3 a, .heading3 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+				margin:0;
+			}
+			.heading3 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 4 ***/
+			.heading4 {
+				font-size:12px;
+				letter-spacing:2px;
+				background:#d8dbdf;
+				margin-bottom:0;
+				margin-top:15px;
+				border:1px solid #fff;
+				border-radius:2px;
+				-moz-border-radius:2px;
+				-webkit-border-radius:2px;
+				padding:5px 0 5px 10px;
+				color:#000;
+			}
+			.heading4 a, .heading4 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+			}
+			.heading4 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 5 ***/
+			.heading5 {
+				font-size:12px;
+				letter-spacing:2px;
+				background:#e6eaef;
+				margin-bottom:0;
+				margin-top:15px;
+				border:1px solid #d0d0d0;
+				border-radius:2px;
+				-moz-border-radius:2px;
+				-webkit-border-radius:2px;
+				padding:4px 0 4px 10px;
+				color:#000;
+			}
+			.heading5 a, .heading5 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+			}
+			.heading5 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 6-9 ***/
+			.heading6, .heading7, .heading8, .heading9 {
+				font-size:12px;
+				letter-spacing:1px;
+				margin-bottom:0;
+				margin-top:15px;
+				border-bottom:1px solid #d0d0d0;
+				padding:4px 0 4px 10px;
+				color:#000;
+			}
+			.heading6 a, .heading6 a:visited,
+			.heading7 a, .heading6 a:visited,
+			.heading8 a, .heading6 a:visited,
+			.heading9 a, .heading6 a:visited
+			{
+				color:#000;
+				background:none;
+				border:none;
+			}
+			.heading6 a:hover, .heading7 a:hover, .heading8 a:hover, .heading9 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+	/*** Other Elements ***/
+		pre.sample-code {
+			color:#000;
+			background:#fff;
+			font-family:Courier;
+			font-size:12px;
+			font-weight:normal;
+			padding:10px;
+			border:4px solid #afb6b8;
+			border-radius:10px;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			overflow:auto;
+		}
+		.allCaps {
+			font-family:Verdana, Arial, Helvetica;
+			font-size:11px;
+			font-weight:bold;
+			color:#354;
+			letter-spacing:3px;
+			text-shadow:
+				-1px -1px 0 #f3f3f3, -1px 0 0 #f3f3f3, -1px 1px 0 #f3f3f3,
+				1px -1px 0 #f3f3f3, 1px 0 0 #f3f3f3, 1px 1px 0 #f3f3f3
+			;
+			padding-bottom:2px;
+			border-bottom:1px solid #ccc;
+		}
+
+		/*** lists ***/
+			table.list {
+				margin-top:5px;
+			}
+			table.list td {
+				padding:2px 0;
+			}
+			table.list .bullet {
+				display: inline-block;
+				width: 15px;
+				height: 15px;
+				background:url(../js/Uize_Widget_Tree_List/arrows-orange-bullet.gif) no-repeat 3px center;
+			}
+
+		/*** Horizontal Rules ***/
+			hr.thin, hr.thick {
+				margin:20px 0;
+			}
+			hr.thin {
+				height:0;
+				border:1px dotted #899;
+				border-bottom:none;
+			}
+			hr.thick {
+				background:#c6cccc;
+				border:none;
+				height:10px;
+			}
+
+/*** Contents Trees ***/
+	#page_contents {
+		position:relative;
+		background:#c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
+		padding:15px;
+		margin:3px 2px 20px 2px;
+		border:1px solid #bbb;
+		border-radius:10px;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+	}
+	.contents-tree-shell {
+		max-height:100px;
+		overflow:auto;
+	}
+	.contents-tooltip {
+		display:none;
+		font-size:11px;
+		color:#000;
+		padding:3px 7px 10px 7px;
+		background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+		border:3px solid #fff;
+		border-radius:8px;
+		-moz-border-radius:8px;
+		-webkit-border-radius:8px;
+		box-shadow:5px 5px 10px rgba(0,0,0,.6);
+		-moz-box-shadow:5px 5px 10px rgba(0,0,0,.6);
+		-webkit-box-shadow:5px 5px 10px rgba(0,0,0,.6);
+		max-width:260px;
+		_width:260px; /* hack for IE6 (which doesn't support max-width) */
+	}
+	.contents-tree-shell *,
+	.contents-tree-shell *:link,
+	.contents-tree-shell *:visited,
+	.contents-tree-shell *:hover,
+	.contents-tree-shell *:active
+	{
+		font-family:Arial;
+		font-style:normal;
+		border-bottom:none;
+		color:#444;
+		background:none;
+	}
+
+	/*** common to all levels ***/
+		a.contents-tree-level1:hover,
+		a.contents-tree-level2:hover,
+		a.contents-tree-level3:hover,
+		a.contents-tree-level4:hover
+		{
+			border-bottom:1px solid #ffa200;
+		}
+
+		/*** divider ***/
+			.contents-tree-shell .divider {
+				border-top:1px dotted #567;
+				width:150px;
+				height:0;
+				margin-top:-10px;
+			}
+
+	/*** level 1 ***/
+		.contents-tree-level1,
+		.contents-tree-level1:link,
+		.contents-tree-level1:visited,
+		.contents-tree-level1:hover,
+		.contents-tree-level1:active
+		{
+			font-size:14px;
+		}
+
+	/*** level 2 ***/
+		.contents-tree-level2,
+		.contents-tree-level2:link,
+		.contents-tree-level2:visited,
+		.contents-tree-level2:hover,
+		.contents-tree-level2:active
+		{
+			font-size:13px;
+		}
+
+	/*** level 3 ***/
+		.contents-tree-level3,
+		.contents-tree-level3:link,
+		.contents-tree-level3:visited,
+		.contents-tree-level3:hover,
+		.contents-tree-level3:active
+		{
+			font-size:12px;
+		}
+
+	/*** level 4 ***/
+		.contents-tree-level4,
+		.contents-tree-level4:link,
+		.contents-tree-level4:visited,
+		.contents-tree-level4:hover,
+		.contents-tree-level4:active
+		{
+			font-size:11px;
+		}
+
+/*** body link tooltip ***/
+	.body-link-tooltip {
+		display:none;
+		background:#c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
+		border:1px solid #999;
+		border-radius:8px;
+		-moz-border-radius:8px;
+		-webkit-border-radius:8px;
+		max-width:500px;
+		_width:500px; /* hack for IE6 (which doesn't support max-width) */
+	}
+	.body-link-tooltip .body-link-tooltip-title {
+		font-size:10px;
+		color:#000;
+		text-shadow:1px 1px 1px #fff;
+		padding:5px;
+		background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+		border-top-left-radius:7px;
+		-moz-border-radius-topleft:7px;
+		-webkit-border-top-left-radius:7px;
+		border-top-right-radius:7px;
+		-moz-border-radius-topright:7px;
+		-webkit-border-top-right-radius:7px;
+		border-bottom:1px solid #777;
+	}
+	.body-link-tooltip .body-link-tooltip-description {
+		border-top:1px solid #fff;
+		padding:3px 5px;
+		font-size:12px;
+		color:#000;
+	}
+	.body-link-tooltip .body-link-tooltip-more {
+		font-size:9px;
+		font-weight:bold;
+		letter-spacing:2px;
+		color:#000;
+		text-align:right;
+		padding:4px;
+	}
+
+/*** data tables ***/
+	table.data {
+		border-collapse:collapse;
+		background:#fff;
+		margin:5px 0;
+	}
+	table.data tr td {
+		border:1px solid #aaa;
+		text-align:left;
+		padding:3px 7px;
+		font-family:courier;
+	}
+	table.data tr.title td, table.data tr.heading td {
+		color:#000;
+		font-family:Arial;
+		text-shadow:1px 0 1px #fff;
+		background:#fff url(../images/title-bg-shiny.gif) left top repeat-x;
+		border-bottom:1px solid #888;
+		text-align:center;
+	}
+	table.data tr.title td {
+		font-size:11px;
+		font-weight:bold;
+		letter-spacing:4px;
+		padding:5px 15px 6px 15px;
+	}
+	table.data tr.heading td {
+		font-size:11px;
+		padding:4px 8px;
+	}
+
+/*** image objects ***/
+	.image {
+		margin:15px 0;
+	}
+	.image a {
+		border:none;
+	}
+	.image img {
+		border:none;
+	}
+	.image .imageTitle {
+		font-size:12px;
+		font-weight:bold;
+		padding-right:5px;
+	}
+	.image .imageSubtitle {
+		font-size:10px;
+	}
+

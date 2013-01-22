@@ -1,0 +1,14 @@
+This is a TO DO document for the =Uize.Widget.Dialog.Iframe= module.
+
+Formalize system for interface between iframe dialog widget and iframe document
+
+	- dialog widget should be able to be proxy for certain state that the iframe document's page widget cares to expose
+	- exposed state could be reflected as state properties of the dialog widget, with corresponding state properties of the iframe document's page widget
+	- property values are synchronized in both directions: if any are changed in the dialog widget, the changes are relayed to the iframe document's page widget, and if any are changed in the iframe document's page widget, the changes are relayed to the dialog widget
+	- property values from dialog widget are used - somehow - during construction of iframe document's page widget, so it has its state as early as possible
+	- dialog widget can become persister of state for iframe document's page widget, even with navigation across pages within the iframe
+	- means should be available for iframe document's page widget to get access to its corresponding dialog widget, and thereby provide dialog widget with reference to page widget
+	- the ok button may require initiating a completion action in the iframe document, so the ok button should disabled initially and enabled using the iframe document's page widget as the authority
+	- a cancel button may require initiating some undo/recover functionality in the iframe document, however cancel should always be enabled, even before the iframe document has completed loading. So, what the cancel button does should depend on whether or not the iframe document is loaded: if it is not loaded, the dialog should just be dismissed, and if it *is* loaded, then the iframe document's page widget should be given the opportunity to do something special before the dialog is dismissed.
+
+

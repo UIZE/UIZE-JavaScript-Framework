@@ -1,0 +1,19 @@
+This is a TO DO document for the =Uize.Widget.MagView= module.
+
+- zoom in/out tooltip, which disappears while moving, but fades in on hover pause
+
+ISSUES
+	- if the mouse is over the main view before the widget is wired up, the mag view doesn't activate. This is understandable, given the implementation, but I fear that users will have little patience with such excuses and the UX will feel flaky.
+	- there's some weird mouseover capturing flakiness - in both FF and IE (seems to suggest something) - when moving the mouse in and out of the main view from the side that has the mag image port
+
+NICE TO HAVE
+	- support a choice of positioning for the mag image port node (left, right, top, bottom)
+	- support a mode for auto popping the mag image port node to the best available side, if it won't all be visible within the window's view port using the specified preferred positioning
+	- support for enabling/disabling auto-active
+		- showWhenOver (ala Uize.Widget.PopupPalette)
+		- support for an activation delay (user would have to rest on the image for a specified amount of time before entering into magnify mode)
+	- property interface for activating the mag view (so that it can be activated with a toggle button UI)
+
+	- fade in the large view once the image has loaded
+
+

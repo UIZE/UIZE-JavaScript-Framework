@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Fade As a Color Chart | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="color Uize.Color Uize.Fade"/>
+	<meta name="description" content="See how acceleration and deceleration affect fades in this visual representation using color gradients, where fades are blending between two colors."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="css/params-table.css"/>
+	<style type="text/css">
+		.chartSegment {
+			width:7px;
+			height:15px;
+			margin-bottom:1px;
+		}
+		table.paramsTable td {
+			padding:0;
+			border:none;
+		}
+		table.paramsTable td.fieldLabel {
+			font-size:11px;
+			padding:0 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Fade As a Color Chart
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/fade-as-a-color-chart.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example illustrates, by way of a color chart representation, how different acceleration/deceleration curves (generated using the <code>Uize.Fade.celeration</code> static method of the <a href="../reference/Uize.Fade.html"><code>Uize.Fade</code></a> class) shape a fade's curve over the course of its progress. In the example, a color is being faded from one to another over a series of swatches, from left to right. The color chart lets you visualize how different values for acceleration and deceleration in a fade's curve could be used to generate color gradients with varying characteristics. This example also illustrates how the <code>Uize.Fade</code> class can be used for non-time based fades.</p>
+	</div>
+
+	<div id="page-colorChart"></div>
+</div>
+
+<!-- JavaScript code to build and insert the color chart -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Node',
+		'Uize.Fade',
+		'Uize.Color'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** configurable values ***/
+			var
+				columns = 80,
+				tableSections = [
+					{
+						title:'Equal Acceleration and Deceleration',
+						colors:['0064ff','640046'],
+						celerations:[[0,0],[.25,.25],[.33,.33],[.5,.5]]
+					},
+					{
+						title:'Acceleration is Inverse of Deceleration',
+						colors:['64ff00','003232'],
+						celerations:[[0,1],[.33,.66],[.66,.33],[1,0]]
+					},
+					{
+						title:'Acceleration is Always Zero, Deceleration Varies',
+						colors:['ffff00','640000'],
+						celerations:[[0,0],[0,.25],[0,.5],[0,.75],[0,1]]
+					},
+					{
+						title:'Deceleration is Always Zero, Acceleration Varies',
+						colors:['ff6400','000000'],
+						celerations:[[0,0],[.25,0],[.5,0],[.75,0],[1,0]]
+					}
+				]
+			;
+
+		/*** create fade instance ***/
+			var fade = Uize.Fade ();
+
+		/*** inside the table to hold the bars ***/
+			var htmlChunks = ['<table border="0" cellspacing="0" cellpadding="0" class="paramsTable" style="margin:auto;">'];
+			for (var tableSectionNo = -1; ++tableSectionNo < tableSections.length;) {
+				var
+					tableSection = tableSections [tableSectionNo],
+					fadeCelerations = tableSection.celerations
+				;
+				fade.set ({
+					startValue:Uize.Color.to (tableSection.colors [0],'RGB array'),
+					endValue:Uize.Color.to (tableSection.colors [1],'RGB array')
+				});
+				htmlChunks.push ('<tr><td colspan="' + (columns + 1) + '" class="tableHeading">' + tableSection.title + '</td></tr>');
+				for (var fadeCelerationNo = -1; ++fadeCelerationNo < fadeCelerations.length;) {
+					var fadeCeleration = fadeCelerations [fadeCelerationNo];
+					fade.set ({curve:Uize.Fade.celeration (fadeCeleration [0],fadeCeleration [1])});
+					htmlChunks.push ('<tr><td class="fieldLabel">Uize.Fade.celeration (' + fadeCeleration [0] + ',' + fadeCeleration [1] + ')</td>');
+					for (var columnNo = -1; ++columnNo < columns;) {
+						fade.set ({progress:columnNo / (columns - 1)});
+						htmlChunks.push ('<td><div class="chartSegment" style="background:' + Uize.Color.to (fade.valueOf (),'RGB string') + ';"></div></td>');
+					}
+					htmlChunks.push ('</tr>');
+				}
+			}
+			htmlChunks.push ('</table>');
+			page.setNodeInnerHtml ('colorChart',htmlChunks.join (''));
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

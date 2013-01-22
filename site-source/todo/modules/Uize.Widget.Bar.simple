@@ -1,0 +1,9 @@
+This is a TO DO document for the =Uize.Widget.Bar= module.
+
+- eliminate need for setting orientation property (possibly keep, but have 'auto' value as default)
+- OPTIMIZE UPDATE PERFORMANCE
+	- consider moving some of the wireUi optimization that's currently in Uize.Widget.Bar.Slider into the wireUi method of this class
+
+- truncation for display of value, so doesn't overflow outside of display node
+- valid values list
+

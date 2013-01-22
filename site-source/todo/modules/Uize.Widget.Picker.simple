@@ -1,0 +1,13 @@
+This is a TO DO document for the =Uize.Widget.Picker= module.
+
+valueParser or valueDecoder
+	Consider adding a valueParser or valueDecoder property.
+	
+	Uize.Widget.Picker.Date could provide an inputFormat property, which would allow fallbacks to be specified.
+
+	EXAMPLES
+	................................................................................
+	inputFormat:'YYYY-MM-DD'
+	inputFormat:['YYYY-MM-DD','YYYY/MM/DD']
+	................................................................................
+

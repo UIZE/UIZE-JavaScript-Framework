@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Sliders in a Color Blender | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="featured drag-and-drop touch ipad color Uize.Color Uize.Widget.Bar.Slider"/>
+	<meta name="description" content="Three sliders for one RGB color selector. Three sliders for another. One slider to blend between the colors. Three sliders to show the blended color."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		input {
+			font-family:Courier;
+			font-size:11px;
+			border:1px solid #aaa;
+			padding:0px 4px 0px 4px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Sliders in a Color Blender
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/sliders-in-color-blender.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, two sets of RGB sliders (instances of the <a href="../reference/Uize.Widget.Bar.Slider.html"><code>Uize.Widget.Bar.Slider</code></a> class) to the left and right let you choose two RGB colors. Then, a small slider above the swatch in the middle lets you blend between the two colors. As you change the left and right colors and the blending between them, the center swatch is updated in realtime and the RGB values of the blend color are indicated in the center by bars (also updated in realtime).</p>
+	</div>
+
+	<!-- page layout's "wireframe" with slots for sliders' HTML -->
+
+	<form>
+		<table style="margin:auto;">
+			<tr>
+				<td align="center" class="heading">COLOR 1</td>
+				<td id="page_colorBlendSlider"><img src="../images/blank.gif" width="115" height="15" alt=""/></td>
+				<td align="center" class="heading">COLOR 2</td>
+			</tr>
+			<tr>
+				<td>
+					<table cellspacing="0" cellpadding="0">
+						<tr>
+							<td id="page-color1Swatch" align="center" valign="center" colspan="5" height="75">
+								<input id="page-color1Input" type="text" size="7" readonly/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5" height="6"></td>
+						</tr>
+						<tr>
+							<td id="page_color1SliderR"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+							<td width="6"></td>
+							<td id="page_color1SliderG"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+							<td width="6"></td>
+							<td id="page_color1SliderB"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+						</tr>
+						<tr>
+							<td colspan="5" height="6"></td>
+						</tr>
+						<tr>
+							<td height="15" style="background:#f00">&nbsp;</td>
+							<td width="6"></td>
+							<td height="15" style="background:#0f0">&nbsp;</td>
+							<td width="6"></td>
+							<td height="15" style="background:#00f">&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table cellspacing="0" cellpadding="0">
+						<tr>
+							<td id="page-colorBlendSwatch" align="center" valign="center" colspan="5" height="75">
+								<input id="page-colorBlendInput" type="text" size="7" readonly/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5" height="6"></td>
+						</tr>
+						<tr style="background:#000;">
+							<td id="page_colorBlendSliderR"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+							<td width="6"></td>
+							<td id="page_colorBlendSliderG"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+							<td width="6"></td>
+							<td id="page_colorBlendSliderB"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+						</tr>
+						<tr>
+							<td colspan="5" height="6"></td>
+						</tr>
+						<tr>
+							<td colspan="5" height="15"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table cellspacing="0" cellpadding="0">
+						<tr>
+							<td id="page-color2Swatch" align="center" valign="center" colspan="5" height="75">
+								<input id="page-color2Input" type="text" size="7" readonly/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5" height="6"></td>
+						</tr>
+						<tr>
+							<td id="page_color2SliderR"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+							<td width="6"></td>
+							<td id="page_color2SliderG"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+							<td width="6"></td>
+							<td id="page_color2SliderB"><img src="../images/blank.gif" width="35" height="275" alt=""/></td>
+						</tr>
+						<tr>
+							<td colspan="5" height="6"></td>
+						</tr>
+						<tr>
+							<td height="15" style="background:#f00">&nbsp;</td>
+							<td width="6"></td>
+							<td height="15" style="background:#0f0">&nbsp;</td>
+							<td width="6"></td>
+							<td height="15" style="background:#00f">&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Color',
+		'Uize.Color.xUtil',
+		'Uize.Widget.Bar.Slider.xSkin'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** set defaults for properties whose values are the same for most sliders ***/
+			Uize.Widget.Bar.Slider.set ({
+				minValue:0,
+				maxValue:255,
+				borderThickness:3,
+				fullTintLevel:100,
+				emptyTintColor:'#000',
+				emptyTintLevel:50,
+				knobSize:28,
+				orientation:'vertical',
+				built:false
+			});
+
+		/*** create the Uize.Widget.Bar.Slider objects for red, green, and blue of color 1 ***/
+			var
+				color1SliderR = page.addChild (
+					'color1SliderR',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#f00',
+						value:255
+					}
+				),
+				color1SliderG = page.addChild (
+					'color1SliderG',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#0f0',
+						value:245
+					}
+				),
+				color1SliderB = page.addChild (
+					'color1SliderB',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#00f',
+						value:75
+					}
+				),
+				color1Sliders = [color1SliderR,color1SliderG,color1SliderB]
+			;
+
+		/*** create the Uize.Widget.Bar.Slider objects for red, green, and blue of color 2 ***/
+			var
+				color2SliderR = page.addChild (
+					'color2SliderR',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#f00',
+						value:255
+					}
+				),
+				color2SliderG = page.addChild (
+					'color2SliderG',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#0f0',
+						value:75
+					}
+				),
+				color2SliderB = page.addChild (
+					'color2SliderB',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#00f',
+						value:0
+					}
+				),
+				color2Sliders = [color2SliderR,color2SliderG,color2SliderB]
+			;
+
+		/*** create the Uize.Widget.Bar.Slider objects for red, green, and blue of the color blend ***/
+			Uize.Widget.Bar.Slider.set ({
+				borderThickness:10,
+				borderTintColor:'#000',
+				borderTintLevel:100,
+				emptyTintColor:'#000',
+				emptyTintLevel:100,
+				knobSize:1,
+				knobTintColor:'#FFF',
+				knobTintLevel:100
+			});
+
+			var
+				colorBlendSliderR = page.addChild (
+					'colorBlendSliderR',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#f00',
+						value:0
+					}
+				),
+				colorBlendSliderG = page.addChild (
+					'colorBlendSliderG',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#0f0',
+						value:0
+					}
+				),
+				colorBlendSliderB = page.addChild (
+					'colorBlendSliderB',
+					Uize.Widget.Bar.Slider,
+					{
+						fullTintColor:'#00f',
+						value:0
+					}
+				)
+			;
+
+		/*** create the Uize.Widget.Bar.Slider object for the color blend slider ***/
+			var colorBlendSlider = page.addChild (
+				'colorBlendSlider',
+				Uize.Widget.Bar.Slider,
+				{
+					minValue:0,
+					maxValue:100,
+					value:50,
+					orientation:'horizontal',
+					borderThickness:3,
+					borderTintLevel:0,
+					knobSize:10,
+					knobTintLevel:0,
+					emptyTintColor:'#000',
+					emptyTintLevel:100,
+					fullTintColor:'#000',
+					fullTintLevel:100
+				}
+			);
+
+		/*** code to update the color blend ***/
+			function updateColorBlendSwatch () {
+				var
+					colorBlend = Uize.Color.blend (color1Sliders,color2Sliders,colorBlendSlider / 100),
+					hexColor = Uize.Color.to (colorBlend,'#hex')
+				;
+				page.setNodeStyle ('colorBlendSwatch',{background:hexColor});
+				page.setNodeValue ('colorBlendInput',hexColor);
+				colorBlendSliderR.set ({value:colorBlend [0]});
+				colorBlendSliderG.set ({value:colorBlend [1]});
+				colorBlendSliderB.set ({value:colorBlend [2]});
+			}
+
+		/*** make color blend slider value changes update the color blend swatch ***/
+			colorBlendSlider.wire ('Changed.value',updateColorBlendSwatch);
+
+		/*** make slider value changes for color 1 update the color swatch ***/
+			function updateColor1Swatch () {
+				var hexColor = Uize.Color.to (color1Sliders,'#hex');
+				page.setNodeStyle (['color1Swatch',colorBlendSlider.getNode ('empty')],{background:hexColor});
+				page.setNodeValue ('color1Input',hexColor);
+				updateColorBlendSwatch ();
+			}
+
+			color1SliderR.wire ('Changed.value',updateColor1Swatch);
+			color1SliderG.wire ('Changed.value',updateColor1Swatch);
+			color1SliderB.wire ('Changed.value',updateColor1Swatch);
+
+		/*** make slider value changes for color 2 update the color swatch ***/
+			function updateColor2Swatch () {
+				var hexColor = Uize.Color.to (color2Sliders,'#hex');
+				page.setNodeStyle (['color2Swatch',colorBlendSlider.getNode ('full')],{background:hexColor});
+				page.setNodeValue ('color2Input',hexColor);
+				updateColorBlendSwatch ();
+			}
+
+			color2SliderR.wire ('Changed.value',updateColor2Swatch);
+			color2SliderG.wire ('Changed.value',updateColor2Swatch);
+			color2SliderB.wire ('Changed.value',updateColor2Swatch);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialize the color swatches ***/
+			updateColor1Swatch ();
+			updateColor2Swatch ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

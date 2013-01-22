@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Image Swap With PNG | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="Uize.Widget.Swap.Image"/>
+	<meta name="description" content="This example demonstrates that the image swap widget can perform transitions with images in the PNG format that have an alpha / transparency channel."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Image Swap With PNG
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/swap-image-png.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- image swap HTML layout with UI to be wired up -->
+
+	<center>
+		<a id="page-image1" class="buttonLink" href="javascript://">Image 1</a>
+		<a id="page-image2" class="buttonLink" href="javascript://">Image 2</a>
+		<br/>
+		<br/>
+	</center>
+	<div id="page_imageSwap" style="position:relative; width:48px; height:48px; background:#000; margin:auto;"></div>
+</div>
+
+<!-- JavaScript code to make the static slideshow HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.Swap.Image'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** create the Uize.Widget.ImageSwap object ***/
+			page.addChild (
+				'imageSwap',
+				Uize.Widget.Swap.Image,
+				{
+					background:'none',
+					viewSeedSizeX:0,
+					viewSeedSizeY:1,
+					viewSeedAlignX:.5,
+					viewSeedAlignY:.5,
+					dissolve:false,
+					viewContentAlignX:'none',
+					viewContentAlignY:'none',
+					crossFade:true,
+					built:false
+				}
+			).fade.set ({duration:1000});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** wire up the image selectors ***/
+			function wireImageLink (imageNo,src) {
+				page.wireNode ('image' + imageNo,'click',function () {page.children.imageSwap.set ({src:src})});
+			}
+			wireImageLink (1,'../images/icons/crystal/Crystal_Clear_action_apply.png');
+			wireImageLink (2,'../images/icons/crystal/Crystal_Clear_action_stop.png');
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+This is a proposal document for a =Uize.Widget.Calculator.Scientific= module.
+
+- a subclass of Uize.Widget.Calculator that adds functions of a scientific calculator
+- unary operators
+	- inverse (1/x)
+	- pi
+	- power
+		- x^2
+		- 2^x
+		- 10^x
+		- e^x
+	- ln
+	- log
+	- log2
+	- logx(y)
+	- trigonometric operators: sin, cos, tan, asin, acos, atan
+	- series: n!, sigma n
+	- x mod y
+	- int
+		- floor
+		- ceil
+		- round
+- binary operators
+	- x^y
+- base support: decimal, binary, octal, hexadecimal, arbitrary?
+
+

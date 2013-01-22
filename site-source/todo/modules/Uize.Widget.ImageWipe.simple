@@ -1,0 +1,14 @@
+This is a TO DO document for the =Uize.Widget.ImageWipe= module.
+
+- factor out code that looks like it could be common between Uize.Widget.Swap.Image and this class (some of this code was intentionally derived from Uize.Widget.Swap and Uize.Widget.Swap.Image to make it easier to contemplate merging / refactoring later)
+
+- come up with a better mechanism than the allToFull property
+- problem with the current finalCoords approach is that it doesn't account for wipes where the pane size doesn't change over time
+	- final pane coord should be able to be...
+		- initial seed coords
+		- calculated matrix sector coords
+		- full image coords
+	- should be able to be continuous between two limits
+	- one application for refactored mechanism would be a fading zoom from center
+
+

@@ -1,0 +1,8 @@
+This is a TO DO document for the =Uize.Widget.ListEditor= module.
+
+- must allow validation ability (for things like domains and such)
+- possibly have a conformer for the list state property that applies the item conformer to all the items
+	- in such cases, one may wish for performance sake to maintain a hash of values and cached conformed state, that gets flushed whenever the itemConformer is changed
+- for 'a-z' and 'z-a' values for sort state property, sort should be case insensitive
+- configurable max number of items?
+

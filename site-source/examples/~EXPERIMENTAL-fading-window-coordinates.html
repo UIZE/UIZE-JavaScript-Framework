@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Fading Window Coordinates | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="Uize.Fade.xFactory"/>
+	<meta name="description" content=""/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.coordsButtons .buttonLink {
+			width:120px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Fading Window Coordinates
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/fading-window-coordinates.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, ...</p>
+	</div>
+
+	<!-- links for demonstrating with and without auto tooltips -->
+
+	<center class="coordsButtons">
+		<a id="page-topLeft" href="javascript://" class="buttonLink">TOP LEFT</a>
+		<a id="page-topCenter" href="javascript://" class="buttonLink">TOP CENTER</a>
+		<a id="page-topRight" href="javascript://" class="buttonLink">TOP RIGHT</a>
+		<br/>
+		<a id="page-centerLeft" href="javascript://" class="buttonLink">CENTER LEFT</a>
+		<a id="page-centerCenter" href="javascript://" class="buttonLink">CENTER CENTER</a>
+		<a id="page-centerRight" href="javascript://" class="buttonLink">CENTER RIGHT</a>
+		<br/>
+		<a id="page-bottomLeft" href="javascript://" class="buttonLink">BOTTOM LEFT</a>
+		<a id="page-bottomCenter" href="javascript://" class="buttonLink">BOTTOM CENTER</a>
+		<a id="page-bottomRight" href="javascript://" class="buttonLink">BOTTOM RIGHT</a>
+		<br/>
+		<br/>
+		<a id="page-640x480" href="javascript://" class="buttonLink">640 x 480</a>
+		<a id="page-800x600" href="javascript://" class="buttonLink">800 x 600</a>
+		<a id="page-1024x768" href="javascript://" class="buttonLink">1024 x 768</a>
+	</center>
+</div>
+
+<!-- JavaScript code to wire up the "auto tooltip" behavior for the links -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Fade.xFactory',
+		'Uize.Curve'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** utility functions ***/
+			function myResizeTo (width,height) {
+				resizeTo (width,height);
+				if (width != window.outerWidth) window.outerWidth = width;
+				if (height != window.outerHeight) window.outerHeight = height;
+			}
+
+			function myMoveTo (x,y) {
+				moveTo (x,y);
+				if (x != window.screenX) window.screenX = x;
+				if (y != window.screenY) window.screenY = y;
+			}
+
+		/*** wire up links for fading window position ***/
+			function fadeWindowPosition (alignX,alignY) {
+				Uize.Fade.fade (
+					myMoveTo,
+					[window.screenX,window.screenY],
+					[
+						Math.round ((screen.width - window.outerWidth) * alignX),
+						Math.round ((screen.height - window.outerHeight) * alignY)
+					],
+					1000,
+					{quantization:1,curve:Uize.Curve.easeInOutPow (4)}
+				);
+			}
+
+			function wirePositionButton (buttonName,alignX,alignY) {
+				page.wireNode (buttonName,'click',function () {fadeWindowPosition (alignX,alignY)});
+			}
+			wirePositionButton ('topLeft',0,0);
+			wirePositionButton ('topCenter',.5,0);
+			wirePositionButton ('topRight',1,0);
+			wirePositionButton ('centerLeft',0,.5);
+			wirePositionButton ('centerCenter',.5,.5);
+			wirePositionButton ('centerRight',1,.5);
+			wirePositionButton ('bottomLeft',0,1);
+			wirePositionButton ('bottomCenter',.5,1);
+			wirePositionButton ('bottomRight',1,1);
+
+		/*** wire up links for fading window size ***/
+			function fadeWindowSize (width,height) {
+				Uize.Fade.fade (
+					myResizeTo,
+					[window.outerWidth,window.outerHeight],
+					[width,height],
+					1000,
+					{quantization:1,curve:Uize.Curve.easeInOutPow (4)}
+				);
+			}
+
+			function wireSizeButton (width,height) {
+				page.wireNode (width + 'x' + height,'click',function () {fadeWindowSize (width,height)});
+			}
+			wireSizeButton (640,480);
+			wireSizeButton (800,600);
+			wireSizeButton (1024,768);
+
+		/*** initialize window size and position ***/
+			myResizeTo (640,480);
+			myMoveTo (
+				Math.round ((screen.width - window.outerWidth) * .5),
+				Math.round ((screen.height - window.outerHeight) * .5)
+			);
+	}
+});
+
+</script>
+
+</body>
+</html>
+

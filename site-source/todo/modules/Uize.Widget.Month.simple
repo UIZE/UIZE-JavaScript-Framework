@@ -1,0 +1,4 @@
+This is a proposal document for a =Uize.Widget.Month= module.
+
+A widget that can be used as a child widget in a calendar widget, or as one of many child widgets in a year widget.
+

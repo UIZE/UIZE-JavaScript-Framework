@@ -1,0 +1,101 @@
+This is a TO DO document for the =Uize.Template= module.
+
+Active Widget Templates
+
+	@nodeClass Directive
+
+		EXAMPLE
+		.................................................
+		<div class="<%@ nodeClass('thumbnail') %>"></div>
+		.................................................
+
+	nodeClass Function
+
+		EXAMPLE
+		.................................................
+		<div class="<%. nodeClass('thumbnail') %>"></div>
+		.................................................
+
+	nodeId Function
+
+		EXAMPLE
+		...........................................
+		<div id="<%. nodeId('thumbnail') %>"></div>
+		...........................................
+
+	Determinant Based Replacements
+
+		EXAMPLE
+		...
+		<div>
+			<%| firstName, lastName | firstName + ' ' lastName %>
+			<%. firstName %>
+		</div>
+		...
+
+	Generating Active Updaters
+		from string replacement, how does one determine dynamic updaters?
+
+		process template, where all assignment expressions are enumerated, replaced with simple assignments, and where each enumerated assignment is provided with a unique value that is safe for substitution in attribute values or text nodes, unique enough as to be discoverable with a simple text search
+
+		- the dummy template is processed with the dummy inputs
+		- the generated DOM is scanned and attribute values and text nodes are scanned for the unique dummy inputs
+		- based upon where the dummy inputs are discovered, dynamic updaters are generated, with a maximum of one updater per attribute value or text node
+		- if multiple dummy inputs are found in the same attribute value or text node, then the entire value for the attribute value or text node will be recalculated
+
+	State to Class Bindings
+		Directive Approach
+
+			EXAMPLE
+			...................................................
+			class="<% @stateClass('selected', 'isSelected') %>"
+			...................................................
+
+		Generic Determinant Based Replacement Approach
+
+			EXAMPLE
+			.......................................................................
+			class="<%| selected | selected ? input.nodeClass('isSelected') : '' %>"
+			.......................................................................
+
+Look Into Supporting Subclassing
+	Subclassing of templates would allow template subclasses to more easily use the rendering features of their base classes.
+
+	Also, any features defined in a template base class and that are used for rendering can then be accessed of public instance methods from the subclass. Perhaps a separate question is how *.jst* files that can be compiled into template modules can expose generator functions as methods, to be used by external code. Would the =input= directive then define the properties for the class?
+
+- other encodings to support
+	- colors
+		- rgbHex
+		- rgb
+		- hsl
+		- hsv
+	- dates
+		- date('{YY}-{MM}-{DD}')
+
+			EXAMPLE
+			................................................................................
+			<%= '12/31/2007' -> date('{YY}-{MM}-{DD}') %>
+			................................................................................
+
+	- currency
+	- urls
+		- absoluteUrl
+
+			EXAMPLE
+			................................................................................
+			<%= myRelativeUrl -> absoluteUrl('http://www.uize.com') %>
+
+			................................................................................
+	- string encodings
+		repeat (Uize.String.repeat)
+		camel (Uize.String.toCamel)
+		trim (Uize.String.trim or Uize.String.Lines.trim?)
+		trimLeft (Uize.String.trimLeft or Uize.String.Lines.trimLeft?)
+		trimRight (Uize.String.trimRight or Uize.String.Lines.trimRight?)
+		indent (Uize.String.Lines.indent)
+
+- for templates...
+	- multi return value templates (blocks that can assign output to specific output property)
+	- support whitespace gobbling
+
+

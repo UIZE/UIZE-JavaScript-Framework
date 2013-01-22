@@ -1,0 +1,19 @@
+This is a TO DO document for the =Uize.Widget.Calculator= module.
+
+- BUG WITH PASTE:
+	- when pasting in a new value that contains a decimal point, the point button is not disabled as it should be
+	- pasting in a value when the current value is an empty string, or was entirely selected, does not behave as value entry (so it does not clear the clearOnNextDigit flag)
+
+- when validation moves into Uize.Widget.FormElement, then make Uize.Widget.Calculator configure the entry child widget with a number validator, and make it rely on the entry widget's isValid state for maintaining the enabled state of the operator buttons (it can wire the Changed.isValid event on the entry widget)
+
+- indicator for memory
+- indicator for current binary operator
+- enforce maximum number of digits?
+
+- extended calculator operators
+- hook methods for adding buttons for unary and binary operations
+	- such methods can be used by subclasses for adding button child widgets that trigger operations
+	- methods will handle maintaining enabled state of different types of buttons
+	- possibly look at the method in Uize.Widget.Collection and implement something like that
+
+

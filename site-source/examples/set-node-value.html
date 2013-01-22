@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>The setNodeValue Method | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="form Uize.Widget"/>
+	<meta name="description" content="See a demo of the setNodeValue method, which can set a value on select boxes, checkboxes, radio buttons, text inputs, textareas, divs, spans..."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="css/params-table.css"/>
+	<style type="text/css">
+		.testSpan {
+			font-size:13px;
+			font-weight:bold;
+			letter-spacing:10px;
+			border:1px solid #899;
+			padding-left:30px;
+			padding-right:20px;
+			background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+			text-transform:uppercase;
+			text-shadow:-1px -1px 1px #fff, -1px 1px 1px #fff, 1px -1px 1px #fff, 1px 1px 1px #fff;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	The setNodeValue Method
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/set-node-value.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example demonstrates how the <code>setNodeValue</code> instance method of the <a href="../reference/Uize.Widget.html"><code>Uize.Widget</code></a> base class can be used to set the value of different types of element nodes, including form inputs. In this example, the "value" is being set in a single call to the <code>setNodeValue</code> instance method - for a select node, a multiple select select node, a checkbox input, a radio button set, a text input, a read-only text input, a textarea, and a span node. Setting the value for all the nodes in a single call is accomplished by supplying the <code>setNodeValue</code> method with a node "blob". A <code>value</code> property does not exist, per se, for all of the element types mentioned. So, the concept of a value is provided as an abstraction to ease interfacing with these different element types, making it easier to swap one type for another without having to change the way one's application logic addresses the elements. Use the buttons below to set the value for all of the elements to either <code>true</code> or <code>false</code>. You <b>can</b> use any values with <code>setNodeValue</code>, but a boolean was chosen here in order to demonstrate this method with a checkbox input as well. Notice how setting the "value" of the span node essentially sets its <code>innerHTML</code>.</p>
+	</div>
+
+	<!-- various form elements and a span -->
+
+	<center>
+		<a id="page-setAllToFalse" href="javascript://" class="buttonLink">Set all to false</a>
+		<a id="page-setAllToTrue" href="javascript://" class="buttonLink">Set all to true</a>
+
+		<form style="margin-top:10px;">
+			<table class="paramsTable">
+				<tr>
+					<td class="fieldLabel">a select tag</td>
+					<td>
+						<select id="page-select">
+							<option value="false">false</option>
+							<option value="true">true</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldLabel">a multi-select tag</td>
+					<td>
+						<select id="page-multiSelect" multiple="multiple" size="2">
+							<option value="false">false</option>
+							<option value="true">true</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldLabel">a checkbox</td>
+					<td><input id="page-checkbox" type="checkbox"/></td>
+				</tr>
+				<tr>
+					<td class="fieldLabel">radio buttons</td>
+					<td>
+						<input name="page-radios" id="page-radiosFalse" type="radio" value="false"/><label for="page-radiosFalse">false</label>
+						&nbsp;
+						<input name="page-radios" id="page-radiosTrue" type="radio" value="true"/><label for="page-radiosTrue">true</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="fieldLabel">a text input</td>
+					<td><input id="page-text" type="text"/></td>
+				</tr>
+				<tr>
+					<td class="fieldLabel">a read-only text input</td>
+					<td><input id="page-readOnlyText" type="text" readonly="readonly"/></td>
+				</tr>
+				<tr>
+					<td class="fieldLabel">a text area</td>
+					<td><textarea id="page-textarea"></textarea></td>
+				</tr>
+				<tr>
+					<td class="fieldLabel">a span</td>
+					<td><span id="page-span" class="testSpan"></span></td>
+				</tr>
+			</table>
+		</form>
+	</center>
+</div>
+
+<!-- JavaScript code to wire up the page -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** code to set the value for all the nodes ***/
+			function setValueForAllNodes (newValue) {
+				page.setNodeValue (
+					['select','multiSelect','checkbox','radios','text','readOnlyText','textarea','span'],
+					newValue
+				);
+			}
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** wire up the links for setting the values ***/
+			page.wireNode ('setAllToTrue','click',function () {setValueForAllNodes (true)});
+			page.wireNode ('setAllToFalse','click',function () {setValueForAllNodes (false)});
+
+		/*** initialize the value for the nodes ***/
+			setValueForAllNodes (false);
+	}
+});
+
+</script>
+
+</body>
+</html>
+

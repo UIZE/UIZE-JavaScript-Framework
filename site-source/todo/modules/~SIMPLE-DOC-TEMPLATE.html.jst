@@ -1,0 +1,13 @@
+<%@
+	required ('UizeSite.Templates.SimpleDoc');
+	input ({title:'string',description:'string',body:'string'});
+%><%=
+	UizeSite.Templates.SimpleDoc.process ({
+		title:'TO DO - ' + input.title,
+		section:'TO DO - Modules',
+		description:input.description || 'This is a TO DO list for a module of the UIZE JavaScript Framework.',
+		pathToRoot:'../../',
+		body:input.body
+	})
+%>
+

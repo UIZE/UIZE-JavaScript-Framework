@@ -1,0 +1,5 @@
+This is a TO DO document for the =Uize.Url= module.
+
+TODO
+- refactor tomkidding.com to no longer use Tk.Url
+

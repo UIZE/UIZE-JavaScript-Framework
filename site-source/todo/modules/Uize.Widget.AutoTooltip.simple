@@ -1,0 +1,5 @@
+This is a TO DO document for the =Uize.Widget.AutoTooltip= module.
+
+TODO
+- handle case of nodes being changed in "mid flight"
+

@@ -1,0 +1,9 @@
+This is a TO DO document for the =Uize.Build.AutoScruncher= module.
+
+TO DO
+- should no longer support .library.js files that don't have a Library Contents comment, because it's not really a JS file if it has a bunch of modules listed in the open
+- provide a switch to use the source files (ie. scrunched files are replaced with source files)
+- provide a switch to enable echo of progress / status
+- look into drag-and-drop support, so that the auto-scruncher can exist anywhere, and operate on files or folders
+- store a mapping of modified date for all scrunchable JS modules, and then library builder code can use that mapping to determine if a previously built library file should be updated
+

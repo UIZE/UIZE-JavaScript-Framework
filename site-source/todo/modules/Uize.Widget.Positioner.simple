@@ -1,0 +1,23 @@
+This is a proposal document for a =Uize.Widget.Positioner= module.
+
+- used to position a node, and maintain the node's position as properties that should influence its position are modified
+- different positioning behaviors can be specified for each axis
+- types of positioning behaviors to accommodate...
+	- alignment
+		- centered
+		- left/top
+		- right/bottom
+		- continuous
+	- pixel offset
+- positioning reference box
+	- left
+	- top
+	- right
+	- bottom
+	- all can be specified independently
+- positioning properties
+- ability to maintain position through polling, with configurable polling interval
+- ability to explicitly invoke position update
+- positioning updated by scrolling and resize
+
+

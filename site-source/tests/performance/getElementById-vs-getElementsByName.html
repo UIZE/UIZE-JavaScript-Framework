@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERFORMANCE TEST: getElementById vs getElementsByName | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.example.css"/>
+	<link rel="stylesheet" href="../../css/page.example.test.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	PERFORMANCE TEST: getElementById vs getElementsByName
+	<div class="pageActions">
+		<a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This test page demonstrates that - under the specific conditions of this test, at least - using the <code>document.getElementsByName</code> method is slower than using the <code>document.getElementById</code> method in Firefox, but is roughly as slow in Internet Explorer.</p>
+
+		<p>In the test, HTML for 1000 INPUT tags is generated and inserted into the page. Each INPUT tag has both <code>id</code> and <code>name</code> attributes, both having the same value that is unique to the node. Then, an entire loop through all of the nodes IDs/names is performed 40 times. In the first test, the <code>document.getElementById</code> method is used for every node ID/name. In the second test, the <code>document.getElementsByName</code> method is used instead.</p>
+
+		<p>A conclusion that can be drawn from the test is that, while it may seem like a neat feature of an abstraction layer to try lookup of nodes through both the <code>document.getElementsByName</code> and <code>document.getElementById</code> methods to catch nodes that have either <code>name</code> or <code>id</code> attributes, there may be a performance cost, depending on the complexity of a document's DOM and the ambient CPU load of the page.</p>
+	</div>
+
+	<!-- test results -->
+
+	<div class="testResults">
+		<div class="testResultsFooter">
+			<a id="page_performTest" class="button" href="javascript://">PERFORM TEST</a>
+		</div>
+		<div id="page-testResults"></div>
+	</div>
+
+	<div id="page-testNodes"></div>
+</div>
+
+<!-- JavaScript code to wire up the page widget and define the test code -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:'UizeSite.Page.Example.Test.library',
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example.Test ();
+
+		/*** define the test code by overriding the performTest method of the page widget ***/
+			page.performTest = function (_reportResults) {
+				var
+					_this = this,
+					_totalNodes = 1000,
+					_totalIterations = 40,
+					_iterationNo
+				;
+				_this.executeFunctionsWithPause (
+					[
+						function () {
+							/*** inject the test nodes into the page ***/
+								var _nodesHtmlChunks = [];
+								for (var _nodeNo = -1; ++_nodeNo < _totalNodes;)
+									_nodesHtmlChunks.push ('<input id="node' + _nodeNo + '" name="node' + _nodeNo + '" type="text" style="position:absolute; left:-1000px; top:-1000px;"/>')
+								;
+								_this.setNodeInnerHtml ('testNodes',_nodesHtmlChunks.join (''));
+						},
+						function () {
+							/*** test lookup by document.getElementById ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									for (var _nodeNo = -1; ++_nodeNo < _totalNodes;)
+										document.getElementById ('node' + _nodeNo)
+									;
+								}
+						},
+						function () {
+							/*** test lookup by document.getElementsByName ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									for (var _nodeNo = -1; ++_nodeNo < _totalNodes;)
+										document.getElementsByName ('node' + _nodeNo)
+									;
+								}
+						}
+					],
+					1000,
+					function (_executionTimes) {
+						/*** report the results ***/
+							_reportResults (
+								'<h1>Durations</h1>\n' +
+								'<p><b>getElementById:</b> ' + _executionTimes [1] + 'ms</p>\n' +
+								'<p><b>getElementsByName:</b> ' + _executionTimes [2] + 'ms</p>\n'
+							);
+					}
+				);
+			};
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Mantle Slideshow | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="animation slideshow Uize.Widget.SlideShow.AutoAdvance Uize.Widget.SlideShow"/>
+	<meta name="description" content="."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.slideshow.css"/>
+	<link rel="stylesheet" href="css/option-buttons-set.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Mantle Slideshow
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/slideshow-mantle.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<!--
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.SlideShow.html"><code>Uize.Widget.SlideShow</code></a> is used to present a slideshow interface that allows you to step through a series of images. The images are displayed with a dissolve transition effect between them using JavaScript animation. This is achieved by using an instance of the <a href="../reference/Uize.Widget.Swap.Image.html"><code>Uize.Widget.Swap.Image</code></a> widget class, which is declared as a child widget of the slideshow widget, with a child widget name that maps it to the <code>image</code> property of the slide records. Each photo also has a rating, represented by the <code>rating</code> field contained in the record for each slide. An instance of <a href="../reference/Uize.Widget.Bar.html"><code>Uize.Widget.Bar</code></a> with a star decoration is used to represent the rating value, and this instance is added as a child widget to the slideshow widget - with a name that maps it to the <code>rating</code> record field.</p>
+
+		<p>What's notable in this example is the use of the declarative syntax for widget adoption by the page widget. View the source code to appreciate this nuance. Notice the script tag that begins with <code>window.$page_slideShow = ...</code>. That's where all the magic is.</p>
+		-->
+	</div>
+
+	<!-- slideshow HTML layout with UI to be wired up -->
+
+	<div style="position:relative; width:350px; height:250px; margin:auto;">
+		<!-- markup for the image swap widget -->
+			<div id="page_slideShow_slideImage" style="position:absolute; left:0px; top:0px; width:350px; height:250px; background:#000; z-index:1; text-align:left;">
+			</div>
+	</div>
+
+	<table class="optionsShell" cellspacing="0" cellpadding="0">
+		<tr>
+			<td><div id="page_slideShow_options_option0" class="button">SLIDE 0</div></td>
+			<td><div id="page_slideShow_options_option1" class="button">SLIDE 1</div></td>
+			<td><div id="page_slideShow_options_option2" class="button">SLIDE 2</div></td>
+			<td><div id="page_slideShow_options_option3" class="button">SLIDE 3</div></td>
+			<td><div id="page_slideShow_options_option4" class="button">SLIDE 4</div></td>
+		</tr>
+	</table>
+</div>
+
+<!-- declarative syntax that defines a widget tree for the slideshow -->
+
+<script type="text/javascript">
+
+window.$page_slideShow = {
+	widgetClass:'Uize.Widget.SlideShow.AutoAdvance.WithSlideSelectors',
+	playing:true,
+	interSlideTime:4000,
+	idleResumeTime:3000,
+	wrap:true,
+	startSlideNo:3,
+	slides:[
+		{image:'http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228277244419896914&max_dim=500'},
+		{image:'http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228109666540948246&max_dim=500'},
+		{image:'http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228745103279879745&max_dim=500'},
+		{image:'http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228866001826566384&max_dim=500'},
+		{image:'http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228321774790917687&max_dim=500'}
+	]
+};
+
+window.$page_slideShow_slideImage = {
+	widgetClass:'Uize.Widget.Swap.Image',
+	width:350,
+	height:250,
+	built:false
+};
+
+</script>
+
+<!-- JavaScript code to make the static slideshow HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example'
+	],
+	builder:function () {(window.page = UizeSite.Page.Example ()).wireUi ()}
+});
+
+</script>
+
+</body>
+</html>
+

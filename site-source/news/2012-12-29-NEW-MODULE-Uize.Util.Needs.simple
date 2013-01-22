@@ -1,0 +1,56 @@
+The new =Uize.Util.Needs= module, implements a mechanism for expressing needs/provides relationships in a semantically elegant way.
+
+The =Uize.Util.Needs= class facilitates needs management and can ensure correct order of execution of code in situations where dependency relationships exist between disparate and distributed code.
+
+A common problem with complex application code, where initialization of different components of code may involve potentially asynchronous processes, or processes that may sometimes be synchronous and under other conditions be asynchronous, is that some code that has a need for some object to have been created, or for the completion of some setup phase, is not able to explicitly control the timing of when its need will be met - it may be at the mercy of some other complex chain of events that involves yet other code over which it has no control.
+
+In tricky situations like this, the =Uize.Util.Needs= class allows needs to be explicitly exposed by registering `providers` for those needs. Then, those needs can in turn be needed explicitly by registering `needers`. This allows needer code to be declared as being dependent on a need (or needs), and provider code to be declared as being the provider of a need. When a provider is registered for a need, that provider code is invoked the first time that the need is needed. Once the provider has finished producing the need result, that result is provided to the needer handler function, and is essentially "cached" for future needers of the same need.
+
+This is all best illustrated with a simple example...
+
+EXAMPLE
+..................................................................
+// create the needs manager instance
+var needsManager = Uize.Util.Needs ();
+
+// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+
+// register the "myThing" provider
+needsManager.provide (
+	'myThing',
+	function (_provide) {
+		Uize.require (
+			'MyNamespace.MyThing',
+			function (_MyNamespace_MyThing) {
+				var _myThing = new _MyNamespace_MyThing ();
+				// do _myThing instance setup
+				_provide (_myThing);
+			}
+		);
+	}
+);
+
+// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+
+// register the "myThing" needer
+needsManager.need (
+	'myThing',
+	function (_myThing) {
+		// do something with _myThing
+	}
+);
+..................................................................
+
+In the above example, a =Uize.Util.Needs= instance is being created by calling the class constructor. Then, in some other code, a provider is being registered for the "myThing" need by calling the =provide= instance method on the instance, specifying the name of the need along with the provider function that should be called the first time that the need is needed. When the provider function is called, it is provided callback function that it should call in order to deliver the need result.
+
+The callback pattern is important, because it allows the provider code to be potentially asynchronous. This is a good thing, because in this case the provider function is requiring the =MyNamespace.MyThing= module, creating an instance of it, and then passing that back using the callback. Requiring the module will likely be asynchronous if it is not already loaded.
+
+Now, on the opposite side of the world, a needer is being registered for the "myThing" need by calling the =need= instance method on the shared =needsManager= instance, specifying the name of the need along with the handler function that should be called once the need has been provided. The handler function receives the need result as its single argument, and it can then do with the needed item what it pleases.
+
+It's as simple as that. For comprehensive documentation, consult the reference for the =Uize.Util.Needs= module.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-12-29 - NEW MODULE: Uize.Util.Needs
+....................................................................................

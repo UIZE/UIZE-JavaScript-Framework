@@ -1,0 +1,51 @@
+This document lists official news announcements that need to be created for developments that have already taken place.
+
+New isMet Instance Method in Uize.Class
+	Returns a boolean, indicating whether or not the specified condition is met.
+
+Major Build Process Improvements
+
+	- _Uize.Build.CompileJstModules.js replaced with _UizeSite.Build.BuildJsModules
+	- built code no longer in the source tree
+	- build process can now be run with either WSH or NodeJS
+
+### Bugs to fix
+	- examples with fruits images broken because of Zazzle changes
+		- Slideshow of Data
+		- Scrolly Carousel
+
+Improved Uize.recordMatches, Uize.findRecord, and Uize.findRecordNo Methods
+	- match parameter can now be a value matcher function
+
+	Behavior Change in the =Uize.findRecordNo= Method
+		Now, if a matching record cannot be found in the specified records array, then the optionally specified default value will be coerced to a number and constrained to the range of =-1= to the length of the records array minus one (ie. the index of the last record in the array).
+
+		Therefore, it will not be possible to have the =Uize.findRecordNo= return a value that is not the valid index for a record in the records array, unless the value is =-1= as a valid way to indicate no match.
+
+NEW MODULE: Uize.Util.Oop
+	Announce.
+
+Support for Dynamic Loading of HTML
+	The =Uize.Widget.Page= module has been improved with the addition of two new methods for facilitating the dynamic loading of HTML: the =loadHtmlIntoNode= instance method and the =loadHtml= hook method.
+
+NEW MODULE: Uize.Widget.SegmentDisplay.Seven
+	Announce this new widget.
+
+NEW MODULE: Uize.Widget.SegmentDisplay
+	Announce this new widget.
+
+NEW MODULE: Uize.Widget.ColorInfo
+	Announce this new widget.
+
+NEW MODULE: Uize.Widget.EdgeHugger
+	Announce this new widget.
+
+IMPROVED MODULE: Uize.Build.AutoScruncher
+	Announce configurable handling of head comments.
+
+NEW PERFORMANCE TEST: Loop Optimization Approaches
+	Announce (but refactor as performance test module first).
+
+BROWSER BUG: Text Area Borked After Hiding and Getting Offset Dim
+	Announce bug that Tim discovered.
+

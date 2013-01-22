@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Resizable Dialog | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="featured drag-and-drop widget Uize.Widget.Dialog.xResizable"/>
+	<meta name="description" content="See an example of a draggable and resizable modal JavaScript dialog that uses inline HTML (rather than a blockable popup window) and is configurable."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.dialog.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Resizable Dialog
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/dialog-resizable.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.Dialog.html"><code>Uize.Widget.Dialog</code></a> class is being used to implement a resizable modal dialog. The dialog can be resized by dragging on any of the corners or sides. Dragging on a side changes the dialog's dimensions in one axis only, while dragging on a corner changes the dimensions in both axes. In any given HTML implementation of a resizable dialog, all drag handles are optional. If you like, you can provide just a lower right corner drag handle. Since resizable dialogs share code with the marquee widget (<a href="../reference/Uize.Widget.Resizer.Marquee.html"><code>Uize.Widget.Resizer.Marquee</code></a>), it is possible to configure a resizable dialog to have a constrained aspect ratio, or to be resizable only in one axis, by setting state for its <code>resizer</code> child widget. The resizable dialog widget has child widgets for the <b>"OK"</b>, <b>"CANCEL"</b>, and <b>"CLOSE"</b> buttons.</p>
+
+		<p>To open the dialog, click the <b>"OPEN DIALOG"</b> button below.</p>
+	</div>
+
+	<center>
+		<p><a id="page-openDialogLink" href="javascript://" class="buttonLink">OPEN DIALOG</a></p>
+	</center>
+
+	<!-- programmatic interface examples -->
+
+	<div class="programmaticInterface">
+		<ul>
+			<li>Resizing Configurations
+				<ul>
+					<li>FIXED WIDTH ONLY: <a href="javascript://" class="linkedJs">dialog.children.resizer.set ({fixedX:true,fixedY:false}); dialog.set ({shown:true})</a></li>
+					<li>FIXED HEIGHT ONLY: <a href="javascript://" class="linkedJs">dialog.children.resizer.set ({fixedX:false,fixedY:true}); dialog.set ({shown:true})</a></li>
+					<li>NOT RESIZABLE: <a href="javascript://" class="linkedJs">dialog.children.resizer.set ({fixedX:true,fixedY:true}); dialog.set ({shown:true})</a></li>
+					<li>FULLY RESIZABLE: <a href="javascript://" class="linkedJs">dialog.children.resizer.set ({fixedX:false,fixedY:false}); dialog.set ({shown:true})</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- JavaScript code to wire up the page -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.Dialog.xResizable',
+		'UizeSite.Templates.Dialog',
+		'Uize.String'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** create the Uize.Widget.Dialog object ***/
+			var dialog = page.addChild (
+				'dialog',
+				Uize.Widget.Dialog,
+				{
+					mooringNode:'page-openDialogLink',
+					offsetX:-100,
+					offsetY:-100,
+					built:false,
+					title:'RESIZABLE DIALOG',
+					html:UizeSite.Templates.Dialog.process ({
+						idPrefix:'page_dialog',
+						contents:
+							'<div style="padding:5px;">' + Uize.String.repeat ('This is a resizable dialog. ',50) + '</div>'
+					}),
+					resizable:true
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** wire up link for opening dialog ***/
+			page.wireNode ('openDialogLink','click',function () {dialog.set ({shown:true})});
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Multiple Sliders From a Template | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="touch ipad Uize.Widget.Bar.Slider"/>
+	<meta name="description" content="See how to supply your own HTML template for widgets. Seven sliders in a row - all using the same HTML, but each with its own unique configuration."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Multiple Sliders From a Template
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/sliders-from-template.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, multiple instances of <a href="../reference/Uize.Widget.Bar.Slider.html"><code>Uize.Widget.Bar.Slider</code></a> are being wired up. Each slider instance has wildly different settings for <code>minValue</code>, <code>maxValue</code>, and <code>increments</code>. Interact with them and you'll see that they all select values very differently. However, all the sliders share the same look. The markup for all the sliders is not in the page, but is inserted dynamically when the slider widgets are wired up, and is based on a template string that is set on the static <code>html</code> state property of the <code>Uize.Widget.Bar.Slider</code> class.</p>
+	</div>
+
+	<!-- HTML "wireframe" for sliders -->
+
+	<table cellspacing="0" cellpadding="0" style="margin:auto;">
+		<tr>
+			<td id="page_slider0"></td>
+			<td width="6"></td>
+			<td id="page_slider1"></td>
+			<td width="6"></td>
+			<td id="page_slider2"></td>
+			<td width="6"></td>
+			<td id="page_slider3"></td>
+			<td width="6"></td>
+			<td id="page_slider4"></td>
+			<td width="6"></td>
+			<td id="page_slider5"></td>
+			<td width="6"></td>
+			<td id="page_slider6"></td>
+		</tr>
+	</table>
+</div>
+
+<!-- JavaScript code to make the static slider HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.Bar.Slider'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** set the default UI HTML and other properties for all slider widgets ***/
+			Uize.Widget.Bar.Slider.set ({
+				html:
+					'<div style="position:relative; left:0px; top:0px; width:54px; height:341px; background:#455; margin:auto;">' +
+						'<div id="[#idPrefix]-track" style="position:absolute; left:2px; top:2px; width:50px; height:315px; cursor:pointer;">' +
+							'<img src="../js/Uize_Widget_Bar_Slider/track-bg-vertical.gif" style="position:absolute; left:0; top:0; width:100%; height:100%;" alt=""/>' +
+							'<img id="[#idPrefix]-knob" src="../js/Uize_Widget_Bar_Slider/knob-vertical.gif" style="position:absolute; left:0; top:0; width:50px; height:35px; cursor:pointer;" border="0" hspace="0" vspace="0" alt=""/>' +
+						'</div>' +
+						'<div id="[#idPrefix]-value" style="position:absolute; left:2px; top:319px; width:50px; height:20px; font-family:Arial; font-size:17px; font-weight:bold; color:#555; background:#adbebf url(../images/brushed-metal.jpg) repeat left top; text-align:center;"></div>' +
+					'</div>',
+				built:false
+			});
+
+		/*** add the slider child widgets ***/
+			var sliderNo = 0;
+			function addSlider (properties) {
+				page.addChild ('slider' + sliderNo++,Uize.Widget.Bar.Slider,properties);
+			}
+			addSlider ({minValue:0,maxValue:100});
+			addSlider ({minValue:0,maxValue:1,increments:0,decimalPlacesToDisplay:2});
+			addSlider ({minValue:-25,maxValue:25});
+			addSlider ({minValue:200,maxValue:0});
+			addSlider ({minValue:0,maxValue:256,increments:16});
+			addSlider ({minValue:0,maxValue:100,increments:10});
+			addSlider ({minValue:0,maxValue:100,increments:20});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

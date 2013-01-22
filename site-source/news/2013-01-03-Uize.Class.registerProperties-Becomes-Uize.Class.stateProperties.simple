@@ -1,0 +1,36 @@
+The =Uize.Class.registerProperties= static method has been deprecated in favor of the newly added =Uize.Class.stateProperties= static method.
+
+......................................................................
+Uize.Class.registerProperties >> BECOMES >> Uize.Class.stateProperties
+......................................................................
+
+The =Uize.Class.stateProperties= method is essentially just a renaming of the deprecated =Uize.Class.registerProperties= method and behaves in exactly the same way. The new name was chosen to be consistent with documentation that refers to these properties universally as state properties. The new name is also more concise.
+
+EXAMPLE
+......................................................................
+MyClass.stateProperties ({
+	_minWidth:{
+		name:'minWidth',
+		value:0
+	},
+	_maxWidth:{
+		name:'maxWidth',
+		value:100
+	},
+	_width:{
+		name:'width',
+		conformer:function (_value) {
+			return Uize.constrain (_value,this._minWidth,this._maxWidth);
+		},
+		value:0
+	}
+});
+......................................................................
+
+While the =Uize.Class.registerProperties= method has been deprecated, it will still be supported for a year or more and will continue to function in exactly the same way as it always has. However, it is advisable that you update your code as soon as you can to use the new name. Fortunately, updating your code for this change is a rather straightforward search-and-replace operation.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-03 - Uize.Class.registerProperties Becomes Uize.Class.stateProperties
+....................................................................................

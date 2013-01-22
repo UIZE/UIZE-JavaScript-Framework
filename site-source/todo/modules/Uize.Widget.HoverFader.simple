@@ -1,0 +1,5 @@
+This is a TO DO document for the =Uize.Widget.HoverFader= module.
+
+- mode where the start style property values for a fade is the current state, rather than the opposite extreme. Currently, the behavior of starting a fade out from the hoverStyle values when mousing out of a node can cause some spastic / jerky effects when moving the mouse quickly over a series of nodes wired up by the widget.
+- ability to configure the widget so that the fade in and/or fade out phases are only triggered when the mouse remains over or remains out for long enough. This could be accomplished using the virtual DOM events, and by the ability to configure the trigger events for the widget. This would also allow some other interesting use cases, like an effect for when the user focuses and blurs form fields, or for while the user is mousing down on a button.
+

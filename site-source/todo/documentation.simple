@@ -1,0 +1,833 @@
+This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
+
+Move Away From VARIATION N
+	For methods that support multiple variations, move away from the "VARIATION N" approach to listing those variations.
+
+	Instead, move to the newer "DIFFERENT USAGES" section, with descriptive use case oriented titles for the different usages and links to more detailed descriptions with examples.
+
+Improve Social Network Sharing
+	Improve the social network sharing in pages of the UIZE Web site by adding a new widget for Facebook liking and other stuff.
+
+	While the slide out sharing widget on the left is neat in its own way, its not direct and to the point enough and doesn't acknowledge the reality that Facebook and Twitter are currently the primary means for virality. Add an always visible widget somewhere near the top right in the gutter that shows likes, lets users easily like, and possibly shows FB friends for FB authenticated users. Look into the widgets that are provided by FB, Twitter, and Google.
+
+JavaScript Services
+	Create an explainer to explain the approach UIZE takes to services.
+
+Conditions
+	Document the conditions system that is implemented in the =Uize.Class= base class.
+
+Needs and Providers
+	Document the needs management system that is implemented in the =Uize.Util.Needs= class.
+
+JIT File Builder Web Server
+	Document the Web server functionality (under dev section initially) that is used by the UIZE Web site and that employs the same code as the build process.
+
+Issues With Auto-generated Documentation
+	Function Type Static Properties Regarded as Static Methods
+		Static properties whose values are functions are regarded as static methods.
+
+		Perhaps in such cases such features should just get documented and referred to as static methods. In the future, however, it should be possible to register a feature as a static property, but where the type of the property can be function, through a formal feature declaration mechanism.
+
+	Extension Modules Mess Things Up
+		Documenting extension modules can mess things up.
+
+		Loading extension modules in the documentation build script in order to document them can have the side effect of modifying a class, and other modules that are subclasses of the modified class that are then documented later appear to have features that they really do not have, because they've inherited the features that were extended on their base class by loading and documenting the extension module.
+
+	State Properties With Object Initial Values Treated as Overridden
+		State properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature.
+
+		This is simply because the initial value in the subclass is a clone of the initial value in the base class and not a shared reference. The initial value is a clone because the whole property definition is a clone. Not sure what the solution is.
+
+DELVE tool improvements
+	- polling to watch the window and detect when the window has been reloaded, and then auto-refresh view
+	- polling (or some other mechanism) to keep DELVE in sync with changing contents in the page being inspected
+		- when rebuilding the tree list, ideally retain the expanded state of nodes in the tree
+
+	Bugs / Issues
+		- improve page widget detection method
+			- currently breaks on some pages because of presence of global variable named page that is not page widget
+			- eg. http://www.webreference.com/js/column5/methods.html
+		- DELVE fails during launch on iPad
+
+	State Tab
+		- to be an inspector UI, with form elements for viewing and modifying values of state properties
+		- to be wired to observe object's Changed.* event in order to keep values synchronized
+		- yellow fade effect (or equivalent) for highlighting state properties that have recently changed value
+		- link to documentation for every state property (link to class that introduces property)
+		- count of the number of times the value has changed since being watched (good for judging volume of activity)
+		- property name linked to get summary (as with current behavior with state properties table in summary tab)
+
+	- wire up a menu for the UIZE logo, as a spillover for more features
+
+	- for tree list, show total number of items somewhere in UI
+	- write reference documentation
+
+	Uber Report Improvements
+		- possibly provide percentage results (eg. % of widgets that are missing all DOM nodes)
+		- possible conclusions section
+
+	Events Log Improvements
+		- serialize the other properties of the event object
+		- for the source property, make it a linked object (this may mean having to make the log message generator configurable in Uize.Widget.Log.InstanceEvents, and providing some custom handling in DELVE)
+
+	Features Tab
+		- maintain sort state across rewirings (ie. sort should be a property)
+		- ability to filter the data in the table (say I only care about instance methods, for example)
+		- link to documentation for every feature
+
+	Summary Tab
+		- have sections be collapsible, with collapsible state remembered across updates
+			- this possibly argues in favor of not rebuilding the entire contents, but only rebuilding the contents for sections, and then showing / hiding sections relevant to the object inspected)
+			- this might be an acceptable vehicle for an animated expand/collapse widget
+		- for widgets...
+			- unaccessed DOM nodes table
+				- DOM nodes whose IDs suggest the nodes belong to the widget, but the node is not in the node cache
+
+	- issue with serializing children property of widget, because of circular references
+		- add handling for instances of Uize classes to Uize.Json
+		- add handling of DOM objects to Uize.Json
+
+	- for object entry, implement history feature
+		- back
+		- forward
+		- up arrow / down arrow
+		- history droplist
+		- note: in FF, undo and redo provide a kind of history
+
+	- select widget by clicking on node in page being inspected
+		- mouseover nodes of widgets to show info tooltip about node and owner widget
+			- would require wiring mouseover, mouseout, and click events for all nodes of all widgets
+
+	- ability to spawn multiple DELVE tools inspecting the same document
+		- good for watching events on multiple different objects at the same time, or seeing different tree list contents
+	- automatic expanding of tree list to reveal current widget or module, when tree list is showing all widgets or all modules as a tree
+	- idea (from Jason) - ability to e-mail the state of DELVE to someone else, as a way of showing another person what you were seeing. This could involve creating a bookmarklet URL that captures the state of DELVE, such as the object inspected, the active tab, the URL of the page being inspected, etc.
+
+	- different contents for tree list...
+		- widget instance queries
+			- widgets that don't appear to have any HTML (for them, directly, or their children)
+			- only widgets that are wired
+			- widgets that were adopted
+
+			- widgets for which DOM events have fired?
+			- widgets of a specific class?
+			- widgets whose class inherits from a specific class?
+
+		- module queries
+			- widgets classes that have no subclasses and of which no instances have been created
+
+		- DOM node queries
+			- DOM nodes that have ids, but that don't appear to belong to widget instances
+				- DOM nodes that have not been accessed by any widget, and whose id structure does not appear to fit with any widget on the page
+			- DOM nodes that appear to belong to widgets, but that haven't been accessed by those widgets
+			- DOM nodes that are missing according to a widget's node cache, but are actually present
+
+		- localized string queries
+			- all localized strings
+
+		- stuff that's already interspersed in the summary tab info
+			- children of a specific widget
+			- parent chain for a specific widget
+			- siblings of a specific widget
+
+			- all subclasses of a specific class
+
+Kill acceleration and deceleration
+	Kill acceleration and deceleration state properties of Uize.Fade class.
+
+	Pages still to update...
+
+	- C:/~uize/UIZE-JavaScript-Framework/examples/hover-fader-for-thumbnails.html
+	- C:/~uize/UIZE-JavaScript-Framework/examples/fading-links.html
+
+Explainers to Update
+	JavaScript Build Scripts
+		Add Head Comments Info
+			Update JavaScript Build Scripts explainer with info about head comments...
+
+			- Head Comments
+			- scrunchedHeadComments
+
+Finish "Creating a New UIZE Example Page" Explainer
+
+iPad issues
+	- outstanding
+		- all pages
+			- share it panel is useless on iPad, because neither mouseover nor fixed positioning are supported
+			- performance
+				- on doc pages, building of contents tree's DOM in JavaScript slows down page load, and also leaves page in unattractive state for too long. Suggest moving to building contents tree HTML as part of build script, and modify tree widget to be able to wire up prebuilt HTML (perhaps it already can do this)
+				- rendering share it panel slows down page rendering, and it adds no value on iPad. Perhaps an alternate UI that defers the cost until the user wants to share a page would be a better approach.
+
+		- example pages
+			- have to tap tour navigation buttons twice in order to navigate (first tap shows tooltip), which is annoying
+			- navigating back leaves some pages in a state where dynamically rendered HTML is not re-rendered. You can see this in the pages that have lists of presets - they are rendered on arriving on the pages, but using the back button to go back to them leaves them in a broken state.
+		- misc
+			- for example and module source code pages, width of pages causes titlebar to be tiny, since default is to scale page so there is no horizontal scrolling
+
+Bugs
+	file:///C:/~uize/UIZE-JavaScript-Framework/examples/date-picker.html
+		- initial values in text input all display as null
+	file:///C:/~uize/UIZE-JavaScript-Framework/examples/dialog-resizable.html
+		- when resizing by dragging either the left or top edges, dialog repositions incorrectly after drag
+	file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-of-data.html
+		- data bars don't have any space around them (has to do with IE8's handling of cellspacing attribute of table)
+	- weird bug with slideshow with wipes, where if you navigate forward and then back (or vice versa), it starts coming up with bogus wipe effect settings. Is this a side effect of the code that picks a new random wipe each slide? Or is this a side effect of recent loop optimizations? Seems like it may have to do with the images for the various panes being cached. Maybe something about the load handler behavior. Doesn't seem reproducable at all when going straight through - regardless of direction. Flipping back and forth between two images, however, causes corruption of the effects.
+	- Chrome: issue with thumbzoom in some examples (zoomed image disappears as soon as its zoomed out)
+	- FF: issue with ThumbZoom and horizontal scrolly in scrolly example - zooms out from pancaked sliver (could this be a result of changes in getCoordinates?)
+	- IE7: Hover Fader Stretching Menu - weird flickering with some presets, screwy sticky shifting of entire menu with other presets
+
+Doc Improvements
+	- integrate module meta data into reference doc
+	- link references to static methods and properties (eg. =Uize.clone=) to appropriate sections of reference documents
+		- will need to settle on naming scheme for anchors for doc sections
+		- will need ability to register custom linker function, so that the doc build script can provide this meta level intelligence about the documentation
+	- tooltip behavior for linking to other documents in documentation
+
+Build Process Improvements
+	- script to insert UIZE version number into all script tags that source in the Uize.js file
+	- write script to test for HTML pages with meta descriptions that are too long (more than 150 characters)
+
+gzipping Text Files
+	- add to .htaccess file
+		AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript
+	- http://httpd.apache.org/docs/2.0/mod/mod_deflate.html
+
+Migrate Modules Into Deeper Namespaces
+	Migrate some modules at the root =Uize= namespace into deeper namespaces in order to tuck them away.
+
+	.........................................................
+	Uize.Tooltip     ->  ???
+	Uize.Xml         ->  ???
+	.........................................................
+
+Add Interview Questions
+	- the matrix
+	- find smallest number
+		- find the smallest number in an array of numbers, without using methods of the Math object (like Math.max or Math.min)
+		- now, find the smallest number using a method of the Math object
+		- does the candidate still use iteration? do they know about the Infinity value?
+		- now, find the smallest number in a single statement
+		- does the candidate know that Math.min can take an arbitrary number of parameters?
+		- does the candidate understand how to use the call and apply methods of Function objects?
+
+	Brain Teaser / Interview Question
+		...................................................
+		alert (blah);            // displays "Hello"
+		alert (blah + 'Brian');  // displays "Hello, Brian"
+		...................................................
+
+		define blah
+
+		..............................................
+		var blah = {};
+		blah.toString = function () {return 'Hello'};
+		blah.valueOf = function () {return 'Hello, '};
+		..............................................
+
+		or...
+
+		..............................................
+		var blah = new String ('Hello');
+		blah.valueOf = function () {return 'Hello, '};
+		..............................................
+
+		or...
+
+		............................................................
+		var blah = new String ('Hello');
+		blah.valueOf = function () {return this.toString () + ', '};
+		............................................................
+
+	Interview question / brainteaser
+		optimize the following statement...
+
+		.........................................................................................................
+		someCondition ? variableA - variableB : variableA
+		variableA - (someCondition ? variableB : 0)
+		variableA - someCondition * variableB        // works if someCondition is guaranteed to produce a boolean
+		variableA - !!someCondition * variableB      // works even if someCondition is not a boolean value
+		.........................................................................................................
+
+Optimization Tricks
+	Page Performance Optimization
+		- put JavaScript only as early in page as is needed (at end of page, if possible)
+
+	Loop Optimization Approaches
+		Finish loop optimization approaches performance test.
+
+		- write up explanation
+		- list in directory
+
+		- add entry in javascript optimization appendix
+
+	Conditional Expression Optimization
+		........................................................
+		if (blah) doSomething ();   ==>  blah && doSomething ();
+		if (!blah) doSomething ();  ==>  blah || doSomething ();
+		........................................................
+
+	Sacred Empty Object
+		.
+
+	Sacred Empty Array
+		.
+
+Code Size Optimization
+	- UIZE-specific: Leave State Property Initial Values undefined, where possible. don't define an initial value for a state property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)
+	- use slice instead of substring (or substr when just one parameter) method, wherever possible
+	- omit parentheses after constructor when constructor doesn't take any parameters
+
+	- lazy assignment combined with conditional execution
+		.........................................................
+		if (!_param) _param = _lastValue;
+		if (_param) {
+			// do stuff
+		}
+		_lastValue = _param;
+		.........................................................
+
+		.........................................................
+		if (_param || (_param = _lastValue)) {
+			// do stuff
+		}
+		_lastValue = _param;
+		.........................................................
+
+General Tips
+	How to test if a multi-line string contains any lines exceeding a specific length
+		.........................................................
+		function hasLineExceedingMaxLength (sourceStr,maxLength) {
+			return new RegExp ('^.{' + (maxLength + 1) + ',}$','m').test (sourceStr);
+		}
+		.........................................................
+
+	How to create a copy of an array...
+		.........................................................
+		myArray.concat ();
+		.........................................................
+
+	How to split out the characters from a string into an array of characters...
+		.........................................................
+		myString.split ('');
+		.........................................................
+
+	How to double space the characters in a string...
+		.........................................................
+		myString.split ('').join (' ');
+		.........................................................
+
+	Testing if instance is of a certain class or object type
+
+		............................................
+		if (someInstance.constructor == SomeClass) {
+			// ...
+		}
+		............................................
+
+	Testing if two instances are of the same class or object type
+
+		.............................................................
+		if (someInstance1.constructor == someInstance2.constructor) {
+			// ...
+		}
+		.............................................................
+
+	Creating a fresh instance with same state
+		...........................................................
+		someInstance2 = someInstance1.Class (someInstance1.get ());
+		...........................................................
+
+- explain about layer library modules (as used by the UIZE Web site)
+
+Pull All Images from Zazzle...
+	- use more product images from Zazzle for slideshow widgets and such
+		- have slideshows and such, containing UIZE merch product images
+
+URLs that could use a UIZE slideshow experience
+	- http://www.100abandonedhouses.com/
+
+URLs to link to somewhere in docs
+	- http://dean.edwards.name/weblog/2007/03/rules/
+
+Improved Location of Source Code
+	For examples, modules, put source code into a peer folder, rather than child folder.
+
+	So...
+
+	- examples/
+	- examples-source-code/
+	- reference
+	- reference-source-code/
+
+	- must add 301 redirect rules in .htaccess
+	- must update .jst files that generate reference pages and source code pages, to link to correct places
+	- must update examples to link to source code files correctly
+	- must update search page to allow separate searching in source code folders
+	- benefit: users can search only within source code, or only documents
+
+For Framework Developers
+	Documentation Style Guide
+		- first paragraph at root of document, or first paragraph of first section of document should be no more than 150 characters (excluding SimpleDoc formatting characters). This is because this paragraph is used as the value for the meta description tag. In this paragraph, make careful use of words, with the mind to maximizing the value of the description. This is the first opporunity that the reader will have to glean what the document is discussing. Sum it all up, ideally, in a single sentence, touching on key themes that will capture the reader's attention and interest. This paragraph has to make a case for reading the document.
+
+		General
+			First Paragraph Should Summarize
+				Each section should start with a clear and concise, salient, in-a-nutshell declaration of what the section is about. This first paragraph should be able to stand alone, without requiring the subsequent paragraphs for it to make sense. The first paragraph
+
+		Module References
+			Defining Syntax
+				SYNTAX
+				.....................................
+				resultTYPE = object.methodName (...);
+				.....................................
+
+				SYNTAX
+				........................
+				object.methodName (...);
+				........................
+
+				- talk about type indicating assignment variable only being to indicate type, optional because one can always discard the result of a method call, function call, or expression
+
+	- Deprecating Features
+	- Renaming UIZE Modules
+	- Creating a New Explainer
+		Add an Entry to the Site Map
+		Announce the New Explainer
+			- refer to Announcing a New Development
+	- Announcing a New Development
+	- Registering New Developers
+	- Registering New Contributing Organizations
+	- Releasing a Build
+
+New Explainers
+	Ajax
+		- specifying params
+		- GET vs. POST
+		- caching results
+		- batching requests
+
+	JavaScript Mobile Development
+		- UIZE works in smart phones and other mobile devices with Web browsers that support JavaScript and other Web standards
+			- typically, these are devices that support HTML5 and CSS3
+		- emphasize that UIZE file size is compact, and that features better suited to devices with more real estate, processing power, or memory need not be loaded in
+			- provide examples: Uize.Fx, Uize.Fade.*, etc.
+		- point to example widgets that run on Palm Pre and Apple iPhone
+
+	JavaScript Colors
+		- animating colors
+		- working with colors
+		- color selector
+
+	Unobtrusive JavaScript
+		- GLUE paradigm
+		- progressive enhancement
+			- Uize.Widget.HoverFader
+			- Uize.Widget.TableSort
+		- code beside concept
+
+	JavaScript Drag-and-drop
+		- Uize.Widget.Drag (for drag handles)
+
+	JavaScript Interfaces
+		- The Value Interface
+		- The ValueAndValues Interface
+		- The ValueAndRange Interface
+		- The ValueSelectorDialog Interface
+
+	Extending UIZE
+		- subclassing existing widget classes, or other classes
+			- creating your own widgets
+		- extension modules to extend classes or packages
+		- extending color support
+			- defining new named colors
+			- defining new color spaces (including encodings)
+		- extending Fx
+			- adding new effects
+			- supporting style properties
+		- adding support for communication protocols
+			- creating Uize.Comm subclasses
+		- implementing virtual DOM events
+
+Search on Selected Text
+	- for any content document, pop open search pop-up when selecting text (as long as text is not more than a certain max length, and does not contain linebreaks -- must make sure that this feature wouldn't be annoying, so perhaps only for documentation pages? Don't want to confuse this search feature with normal interaction with form fields).
+
+Explainer: JavaScript Localization
+	default localized strings (could be English)
+
+Explainer: JavaScript Libraries
+	- feedback from Ben
+		I read over the JavaScript Library Documentation and here are my suggestions:
+
+		- I like the metaphor in the 1. Introduction section.  When talking about the performance benefit of the libraries maybe using an actual real example (maybe the UizeSite.Page.Doc.library.js file?) of what the savings look like of one request versus many requests.
+
+		- In the 2. Where They Live section, I think it'd be helpful to actually list where the default JavaScript modules folder is (both the source and built versions) just so someone reading can know exactly what you're referring to.
+
+		- In the 3.1.2.3. Don't Require List Modules I understand what you're getting at in the paragraph about not requiring the modules so the onus is on the modules that actually need those modules to require them properly. I think what's confusing is that if you don't know how the framework works in "source-mode" (i.e. all the modules are loaded dynamically) then the paragraph seems pretty confusing.  I think either it needs some examples of what you're trying to explain or at least a reference to the explainer section that talks about the source-mode module loading
+
+		- In 3.2 The Built Version I think you may want to play up the performance benefits mention in 1. Introduction about saving http requests because that's when the benefits come in (in the built version).  Maybe here is where you can do an analysis using the UizeSite page widget library file (if not in the intro)
+
+		- In 4. How To use Them it seems to me that the example in 4.1 Sourcing the Source Version looks the same as the example in 4.2 Source in the Built Version.  This also got me thinking.  In Zazzle we have a function that listens to a config entry as to whether to use the source JS.  How does Uize.com (or any other site for that matter) determine which version to use?  Most likely people will just copy what they developed locally to their website.  Maybe a suggestion on how to implement that in the Build Scripts explainer (I did a cursory search and didn't find anything) would help
+
+		- It seems that the paragraph in 4.3 Requiring a JavaScript Library sort of explains what I was just talking about, although I still don't see how the module loading mechanism knows to use the built version of the modules.  Is that because the script tag sourcing of the Uize.js module would be changed to point to the built version (and thus the module loading mechanism knows where to find the rest)?
+
+		- I think an example of what you mean in 7.1. Pages Should Always Work Without Libraries would be nice
+
+		Looking at all my suggestions, I think I understand now where my confusions lie.  In some regards I'm a visual learner so I like to see things rather than just read or hear them.  So for the more tricky explanation, an example of what you're talking about would clear things up for me.  Towards the end of the explainer it seems that you talked about some of the things I was mentioning earlier on the explainer, so maybe some well-placed links to further in the document might help as well.
+
+		But overall after reading the explainer, I think you really need to beat the developer over the head as to why library files are useful.  There's all this explanation of how they were and some dancing you have to do, but only a little bit on why you would actually use them.
+
+	- feedback from Tim
+		General:
+			The word “page” is used primarily to describe the environment in which Uize operates, but using the word “application” would suggest that Uize is able to work in more diverse environments than just a web browser. Of course, using “application” would confuse people who aren’t used to thinking about javascript as anything more than a web-scripting tool.
+
+			More emphasis on how libraries are an optimization, and that the application should be able to chug along if the libraries were stripped from it. I’d personally use some analogy about how the modules are like Captain Kirk and Spock, while the libraries are Red-shirt Ensign #3. If the Ensign is killed, the mission should still succeed.
+
+		Introduction:
+			- Strike the “like” from “Think of a JavaScript module as like a book”
+			- There shouldn’t be a comma in the sentence “JavaScript libraries offer a performance benefit for pages…”
+
+		Where They Live:
+			- Doesn’t using the extension .library.js remove an entire range of possible names for js files? Could .jsl be appropriate?
+			- In the first sentence of the second paragraph, “the” and “inside” are reverse
+
+		3.1
+			Point out that, in source, absolutely nothing happens if the Library Contents comment is all that is in the library file. People might wonder if there’s a special mechanism within Uize to parse the comment and load the js classes using the module loader.
+
+		3.1.2.3
+			The paragraph about not requiring modules that are listed in a library module is unclear. This would be my re-write:
+
+			“The source version of the library module, if consisting solely of the Library Contents comment, will not load any modules, thus forcing the other modules in the application to load their required lists (which may include modules listed in the library). This mechanism allows any errors in the modules’ required lists to be revealed while running in source. By requiring the modules in the library file that are listed in the Library Contents comment, this mechanism will be hidden.”
+
+			It might not make sense to everyone, but it makes sense to me. If you stick with the original, then note that “omissions” is spelled wrong.
+
+		Real World Examples
+			Add Zazzle?
+
+		7.1
+			A gentle reminder of how multiple module declarations of the same module won’t lead to multiple requests might be helpful
+
+Explainer: JavaScript Modules
+	Uize.module -> Parameters -> required
+		Order Unimportant
+			It's worth mentioning and explaining why order is not important in the required list
+
+		Requiring Extension Modules
+			Because they extend namespaces, how do you know from the code if you need them? Yes, it's a little trickier.
+
+	Multiple Consecutive Module Declarations
+		You can have multiple consecutive module declarations that share common required modules and things will work correctly, rather than some of the required modules being loaded multiple times (which would cause all sorts of problems with modules stomping over themselves when re-declaring themselves and thereby crippling code).
+
+		EXAMPLE
+		..................................................
+		Uize.module ({
+			required:'Uize.Widget',
+			builder:function () {
+				alert ('build the first anonymous module');
+			}
+		});
+
+		Uize.module ({
+			required:'Uize.Widget',
+			builder:function () {
+				alert ('build the second anonymous module');
+			}
+		});
+		..................................................
+
+		The first anonymous module being declared requires the =Uize.Widget= module. If this module is not already loaded, then the module loader mechanism will load it asynchronously. The second anonymous module declaration occurs immediately after the first (because this code is synchronous), and it also requires the =Uize.Widget= module. A second request to load this required module externally is *not* made, because the module loader mechanism knows that loading of the module is already in progress.
+
+	Named Inline Module Required By Subsequent Anonymous Inline Module
+		You can have an inline module declaration that requires other external modules, and subsequent inline module declarations that require that first module will correctly wait until it is built - rather than trying to load it externally
+
+		EXAMPLE
+		.............................................................................
+		Uize.module ({
+			name:'Uize.MyInlineModule',
+			required:'Uize.Widget',
+			builder:function () {
+				alert ('build Uize.MyInlineModule');
+			}
+		});
+
+		Uize.module {{
+			required:'Uize.MyInlineModule',
+			builder:function () {
+				alert ('build the anonymous module that requires Uize.MyInlineModule');
+			}
+		});
+		.............................................................................
+
+		The =Uize.MyInlineModule= module may not be built yet when the second, anonymous module is declared because =Uize.MyInlineModule= requires the module =Uize.Widget= that may not yet be defined and may have to be loaded asynchronously. Now, when the anonymous module is declared, the module loader mechanism doesn't try to load =Uize.MyInlineModule= externally even though it is not yet defined, because it knows that this required module is in the process of being defined.
+
+	- discuss Uize.moduleUrlResolver
+
+	Document Inner Classes
+		Document the pattern of creating inner classes.
+
+		Private Inner Classes
+			Push dependencies of inner class(es) into =required= list of host class or module.
+
+			EXAMPLE
+			..................................................................
+			Uize.module ({
+				name:'MySite.MyClass',
+				required:[
+					'MySite.Widget',  // required as base class of inner class
+					'Uize.Data'       // required for inner class
+				],
+				builder:function () {
+					/*** create the inner class ***/
+						var _MyInnerClass = MySite.Widget.subclass ();
+						// code here to further create the inner class
+
+					/*** build the class ***/
+						// code here to build the main class for the module
+				}
+			});
+			..................................................................
+
+		Public Inner Classes
+			Don't do them, because they're too problematic.
+
+		Can't Have Inner Subclasses
+			Because the inner subclass would require the host module as its base class, and it would not be built before trying to declare the module for the inner subclass.
+
+Miscellaneous
+	Novel map Method
+		...............................................................
+		Uize.map (30,'key > 1 ? this [key - 2] + this [key - 1] : key')
+		...............................................................
+
+		Can't do this with JavaScript 1.6's map method (or the map methods in any other framework), because the map function can't reference the newly created target array.
+
+Basic Wireframe Documentation for *ALL* Modules
+	Add at least a single line summary for every feature of every module.
+
+	This applies to...
+
+	- instance methods
+	- instance properties
+	- static methods
+	- static properties
+	- state properties
+	- implied nodes (widgets)
+	- instance events
+	- static events
+	- etc.
+
+XHTML Validation Problems
+	- "JavaScript Templates" explainer has issue with "<%" and ">" chars not being entities. This is a problem for SimpleDoc in general.
+	- for all pages when run locally, need default style language
+	- for pages delivered by server, no char encoding specified in response headers (refer to zazzle.com response headers)
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	- script tags with inline code should really have...
+		.........................................................
+		<!--
+		// -->
+		.........................................................
+
+Design Philosophy (some ramblings)
+	Node-related methods implemented in Uize.Widget are a reflection of static methods from the Uize.Node package that are the most useful and frequently used in the context of widget implementations. If you need to use more esoteric methods, you can access those from the Uize.Node package and use the getNode instance method to get references to implied nodes to supply to the methods of the Uize.Node package.
+
+	UIZE takes the approach of exposing abstractions for things for which it is useful to provide abstractions. Beyond these useful abstractions, UIZE does not attempt to provide a comprehensive abstraction of all DOM APIs. There's nothing wrong with using safe and consistently implemented methods of the standard DOM APIs.
+
+Site & Documentation (in order of priority)
+	- go through all documentation pages and see what tooltips show up for the contents tree links. Make sure all sections have a concise introductory first paragraph.
+		- possibly write a build script to find documents with first paragraphs for sections that are long or contain multiple sentences (non-period, following by period, followed by space)
+
+	- add like button to all pages (in title bar)
+	- look into gzip'ing entire site (or enabling Apache's mod_gzip)
+
+	How UIZE is used on Zazzle
+		Describe the many ways in which UIZE is utilized on the zazzle.com Web site.
+
+	UIZE Comparison With Other Frameworks
+		In discussion of UIZE, WRT how UIZE compares to other frameworks.
+
+		Discuss convenience iterators...
+			- Uize.callOn
+			- Uize.doForAll
+			- Uize.Comm.processArrayAsync
+
+	Thoughts on Good Design
+		A feature can be a side effect of an implementation by design.
+
+		In other words, an elegant design can have the intention of producing positive side effects. From a certain perspective, it might seem purely lucky or fortuitous that certain good things fall out of a particular implementation choice. But a good designer has their mind tuned to deliver positive knock-on effects from their design choices.
+
+UIZE guidelines
+	Development Practices
+		- only source in JavaScript files that are actually used on a page (same applies to CSS files)
+
+Overview
+	- mention Uize/uize/UIZE namespace considerations for developers
+
+For All Examples
+	Add Explanation Copy
+		- C:/~uize/UIZE-JavaScript-Framework/examples/hierarchical-selector.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/button-types.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/button-toggle.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/swap-image-png.html -- mention "JavaScript animation"
+
+	- for examples that should wait until all images are loaded (eg. sequenced show), for now use Uize.Widget's "Document Loaded" event as a proxy for detecting that state
+
+For All Performance Test Pages
+	- add description copy
+	- turn as many of the faceless tests as possible into true tests using the Uize.Test class
+	- improve test framework, so that...
+		- each individual test can specify its title, so that...
+			- generating the report is easier
+			- the user can know what test is currently being performed
+		- give better status updates, so that...
+			- the user knows when a wait is happening
+			- the user knows what test is currently being performed
+			- the user can see the results as they come in
+		- have a non-animating progress bar that indicates how far along the user is through the tests
+
+New Examples to Create
+	Uize
+		- Changed.* event
+			- an example that demonstrates the Changed.* event
+			- a widget that updates a lot of state properties during user interaction
+			- a log pane that fills with notifications of state properties changed during user interaction
+			- possibly a listing (to the right of the widget) of all the widget's state properties, with the most recently changed properties highlighted in red and bolded
+
+	- Color Gradients
+		- demonstrates use of Uize.Fx.fadeStyleAcrossNodes
+		- demonstrates use of different curve functions for different color components
+		- should have ability to select color for both ends of gradient
+
+	Uize.Color.xUtil
+		- Color Theme Transformation
+			- an example that takes a set of colors and provides various controls for transforming the colors in the color theme
+			- a live preview of the theme is updated in realtime as the theme is transformed
+			- a variety of preset color themes as starting points
+			- ability to...
+				- change hue
+					- reduce range
+					- shift (with shift mode = "wrap", "constrain", "align")
+				- change saturation
+					- reduce range
+					- shift (with shift mode = "wrap", "constrain", "align")
+				- change lightness
+					- reduce range
+					- shift (with shift mode = "wrap", "constrain", "align")
+
+	Uize.Data.Csv
+		- CSV-to-JSON / JSON-to-CSV converter
+
+	Uize.Fade.xFactory
+		- an example that illustrates animating the opening of a popup browser window for displaying help topics
+		- an example that illustrates animating the positioning of the browser window
+			- top left, top center, top right
+			- center left, center center, center right
+			- bottom left, bottom center, bottom right
+
+	Uize.Fx.fadeStyle
+		- an example that demonstrates fading of many different CSS style properties
+			- layout...
+				- left side has playground area
+				- right side has vertically scrolling list of fade operations, below which is...
+					- a text field where selected operation is editable
+					- a button for performing the current edited operation
+			- stuff to demo
+				- moving an object
+				- fading an object's size
+				- fading position and size
+				- fading position and size and properties
+				- I'm feeling lucky (where many properties are randomized)
+				- a reset
+				- fading an object's font-size
+
+	Uize.Widget.Collection
+		- movie queue sorter (ala Netflix)
+
+	Uize.Widget.Dialog.Iframe
+		- a demo that loads an example into a resizable iframe dialog
+
+	Uize.Widget.EggTimer
+
+	Uize.Widget.FormElement
+		- a vanilla widget that has a bunch of Uize.Widget.FormElement instances as child widgets
+		- a checkbox for changing the enabled state of the form widget
+		- a checkbox for changing the busy state of the form widget
+		- spans / divs alongside form elements for displaying current value
+		- hook into Changed.value event for each element to update display of current value
+		- form elements
+			- text input
+			- checkbox
+			- radio buttons
+			- select (single)
+			- select (multiple)
+		- all form element nodes to have labels (for radio buttons, a label per radio)
+
+	Uize.Widget.Options
+		- dynamic options, with more elaborate HTML
+			- image selector UI, where each selector has thumbnail, title, rating
+			- values uses object form
+			- displayName property (rather than name) is used in JST template for displaying title
+
+	Uize.Widget.Stretchy
+
+	Uize.Widget.Scrolly
+		- new demo to show how scrolly could be used simply to scroll a regular block of HTML (a div with scrollbar)
+		- a scrolly combined with an options widget for pagination
+
+	Uize.Widget.Options.Accordion
+
+	Uize.Node.injectHtml
+		- migrate existing test from functionality test and add explanation
+		- create interactive example that lets you add things in different places
+
+	Uize.Widget
+		- Declarative Syntax for Properties
+		- mouserest Virtual Event
+
+	Uize.Widget.Committer
+
+	Uize.Widget.Options
+		- example with animating arrow pointing to selected option, with elastic motion
+		- possible trail of ghosted arrows, delayed behind main arrow
+
+	Uize.Widget.Page
+		Widget Adoption by Page Widget
+			- declarative syntax for page's child widgets
+
+	Uize.Widget.TableSort
+		- example showing how multiple table are made sortable with a single spawning declaration
+
+	Uize.Tooltip
+
+	Uize.Widget.Options.Popup
+	Uize.Widget.Committer
+
+	Form Validation
+		Uize.Validator
+		Uize.Widget.FormElement
+
+	Uize.Comm.Ajax
+
+	Uize.Widget.Tree.List
+		- example with different icon themes
+		- example of tree generated from document
+
+	Transferring Form Field Values
+		- an example with two columns of identical form fields, a bunch of different types of form fields in each column, with a different form field per row
+		- for each row, arrows exist between the two columns to transfer the values from one side to the other
+		- the example demonstrates how easy it is to tranfer a value from form field to another using the getNodeValue and setNodeValue methods, and also tests that there is parity between these two methods
+
+SIMPLE-based Presentation Tool
+	- lightweight, quick to create presentations
+
+Things to Add to Documentation
+	- trademark & copyright notices
+	- more endorsements
+		- Tortoise SVN
+		- Firefox
+			- Tamper Data
+			- DustMe Selectors
+			- YSlow
+		- for IE
+			- Fiddler
+			- DevToolBar for IE
+		- Windows Script Host
+

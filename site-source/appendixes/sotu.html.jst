@@ -1,0 +1,251 @@
+<%@ required ('Uize.Data') %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>SOTU (State of the UIZE) | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="UIZE JavaScript Framework"/>
+	<meta name="description" content="This document provides a sortable table of data and statistical information for the JavaScript modules that make up the UIZE JavaScript Framework."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.datatable.css"/>
+	<style type="text/css">
+		/*** column-specific table cell decorations ***/
+			table.data tr.heading td {
+				padding-left:5px;
+				padding-right:5px;
+			}
+			table.data td.moduleName {
+				text-align:left;
+				font-size:11px;
+			}
+			table.data td.moduleName a {
+				border:none;
+			}
+			table.data td.moduleType {
+				font-size:11px;
+			}
+			table.data td.numericalValue {
+				text-align:right;
+				font-size:10px;
+				letter-spacing:1px;
+			}
+
+		/*** bar ***/
+			.bar {
+				position:relative;
+				width:100%;
+				height:6px;
+				background:#0a0;
+			}
+			.bar .barFull {
+				position:absolute;
+				left:0;
+				top:0;
+				background:#c52;
+				height:100%;
+			}
+
+			/*** high numbers good bars ***/
+				.highNumbersGood {
+					background:#c52;
+				}
+				.highNumbersGood .barFull {
+					background:#0a0;
+				}
+
+			/*** high numbers neutral bars ***/
+				.highNumbersNeutral {
+					background:#fff;
+				}
+				.highNumbersNeutral .barFull {
+					background:#90f;
+				}
+
+			/*** high numbers importance bars ***/
+				.highNumbersImportance {
+					background:#fff;
+				}
+				.highNumbersImportance .barFull {
+					background:#fc0;
+				}
+
+		.moduleDescriptionTooltip {
+			display:none;
+			font-size:11px;
+			max-width:250px;
+			padding:6px;
+			border:3px solid #fff;
+			border-radius:10px;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+			box-shadow:5px 5px 10px rgba(0,0,0,.6);
+			-moz-box-shadow:5px 5px 10px rgba(0,0,0,.6);
+			-webkit-box-shadow:5px 5px 10px rgba(0,0,0,.6);
+		}
+	</style>
+</head>
+
+<body>
+
+<!--
+	- add tooltips for headings, with explanations of what the headings mean (would have to integrate sort messaging)
+-->
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	SOTU (State of the UIZE)
+</h1>
+
+<div class="main">
+
+<div class="explanation">
+	<p>This document provides an overview of the state of all the modules that make up the UIZE JavaScript Framework. For developers of UIZE modules, use this document as a guide on where work is needed. The table below provides information on various aspects of UIZE modules: things such as estimated code completeness, estimated documentation completeness, unit test completeness, scrunched file size, etc.</p>
+
+	<p>The table's columns are sortable, so if you want to sort the modules by documentation completeness, you can do so clicking on the "<b>DOC</b>" heading. Or, if you want to see all modules of a certain type, sort by the "<b>MODULE TYPE</b>" column and then scroll to the module type you're interested in - they'll all be clumped together. The "<b>IMPORT.</b>" column is a high level assessment of the importance of modules in the grand scheme of things, so this can also inform where effort is invested in writing documentation and tests.</p>
+</div>
+
+<table id="page_moduleDetailsTable" class="data" cellspacing="0" cellpadding="2" style="margin:auto;">
+	<tr class="title">
+		<td colspan="11">Data and Statistics for UIZE Modules</td>
+	</tr>
+	<tr class="heading">
+		<td>Module Name</td>
+		<td>Module<br/>Type</td>
+		<td>Import.</td>
+		<td>Code<br/>%</td>
+		<td>Doc<br/>%</td>
+		<td>Test<br/>%</td>
+		<td>Example<br/>Pages</td>
+		<td>Scrunch<br/>Size</td>
+		<td>Direct<br/>Sub-<br/>mod.</td>
+		<td>Nested<br/>Sub-<br/>mod.</td>
+	</tr>
+<%@
+	startBlock ('bar','width,className')
+%><div class="bar <%= className %>"><div class="barFull" style="width:<%= Math.round (width) %>%;"></div></div><%@
+	endBlock ()
+%><%
+	var modules = input.modules;
+
+	function getColumnMinMax (columnName) {
+		var columnValues = Uize.Data.getColumn (modules,columnName);
+		return {
+			min:Uize.min (columnValues),
+			max:Uize.max (columnValues)
+		};
+	}
+	function getPercentThroughRange (value,rangeMinMax) {
+		return (value - rangeMinMax.min) / ((rangeMinMax.max - rangeMinMax.min) || 1) * 100;
+	}
+
+	var
+		examplesMinMax = getColumnMinMax ('examples'),
+		scrunchedFileSizeMinMax = getColumnMinMax ('scrunchedFileSize'),
+		directSubmodulesMinMax = getColumnMinMax ('directSubmodules'),
+		nestedSubmodulesMinMax = getColumnMinMax ('nestedSubmodules')
+	;
+
+	for (
+		var moduleNo = -1, modulesLength = modules.length;
+		++moduleNo < modulesLength;
+	) {
+		var
+			module = modules [moduleNo],
+			moduleName = module.name
+		;
+%>
+	<tr class="dataRow">
+		<td class="moduleName">
+			<a href="../reference/<%= module.name %>.html" title="<%= module.description -> tagAttributeValue %>"><%= module.name %></a>
+		</td>
+		<td class="moduleType">
+			<%= module.type %>
+		</td>
+		<td class="numericalValue">
+			<%= bar (module.importance * 10,'highNumbersImportance') %>
+			<%= module.importance %>
+		</td>
+		<td class="numericalValue">
+			<%= bar (module.codeCompleteness,'highNumbersGood') %><%= module.codeCompleteness.toFixed (1) %>%
+		</td>
+		<td class="numericalValue">
+			<%= bar (module.docCompleteness,'highNumbersGood') %><%= module.docCompleteness.toFixed (1) %>%
+		</td>
+		<td class="numericalValue">
+			<%= bar (module.testCompleteness,'highNumbersGood') %><%= module.testCompleteness.toFixed (1) %>%
+		</td>
+		<td class="numericalValue">
+			<%= bar (getPercentThroughRange (module.examples,examplesMinMax),'highNumbersGood') %><%= module.examples %>
+		</td>
+		<td class="numericalValue">
+			<%= bar (getPercentThroughRange (module.scrunchedFileSize,scrunchedFileSizeMinMax)) %>
+			<%= module.scrunchedFileSize %>
+		</td>
+		<td class="numericalValue">
+			<%= bar (getPercentThroughRange (module.directSubmodules,directSubmodulesMinMax),'highNumbersImportance') %>
+			<%= module.directSubmodules %>
+		</td>
+		<td class="numericalValue">
+			<%= bar (getPercentThroughRange (module.nestedSubmodules,nestedSubmodulesMinMax),'highNumbersImportance') %>
+			<%= module.nestedSubmodules %>
+		</td>
+	</tr>
+<% } %>
+</table>
+<script type="text/javascript">
+	window.$page_moduleDetailsTable = {
+		widgetClass:'Uize.Widget.TableSort',
+		headingOverClass:'headingOver',
+		headingLitClass:'headingLit',
+		rowOverClass:'rowOver',
+		cellTooltips:false,
+		dominantSortOrder:'descending',
+		dominantSortOrderByColumn:{0:'ascending',1:'ascending'}
+	};
+</script>
+
+</div>
+
+<div id="page-moduleDescriptionTooltip" class="moduleDescriptionTooltip"></div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.library',
+		'Uize.Node',
+		'Uize.Tooltip'
+	],
+	builder:function () {
+		'use strict';
+
+		var page = window.page = UizeSite.Page ();
+
+		page.wireUi ();
+
+		page.wireNode (
+			Uize.Node.find ({tagName:'A',href:/reference\/Uize/,title:/./}),
+			{
+				mouseover:function () {
+					if (this.oldTitle == null) {
+						this.oldTitle = this.title;
+						this.title = '';
+					}
+					Uize.Node.setInnerHtml ('page-moduleDescriptionTooltip',this.oldTitle);
+					Uize.Tooltip.showTooltip ('page-moduleDescriptionTooltip');
+				},
+				mouseout:function () {
+					Uize.Tooltip.showTooltip ('page-moduleDescriptionTooltip',false);
+				}
+			}
+		);
+	}
+});
+
+</script>
+
+</body></html>

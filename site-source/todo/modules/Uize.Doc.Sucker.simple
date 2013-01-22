@@ -1,0 +1,29 @@
+This is a TO DO document for the =Uize.Doc.Sucker= module.
+
+Module Metrics
+	Automatically stitched in, derived module metrics data.
+
+	- a way to see a table (or other representation) of the module meta data, as well as other information like file size, scrunched file size, etc.
+
+Feature Level info
+	Add more automatically determined feature level info.
+
+	- for static features, a note regarding whether or not the static feature is inheritable
+	- for properties (instance properties, static properties, state properties), note the initial value
+	- for method features, the ability to see the implementation (not the scrunched, of course, so how???)
+
+More Module Utilities
+	Add more module utilities that can be launched from the reference docs.
+
+	- a way to launch a table to view all the features detected for the class
+	- a way to see the full list of dependencies
+	- a way to see the total scrunched file size of the module and all its dependencies
+	- a list of all the other modules that depend on this module
+		- directly
+		- indirectly
+	- a way to load and play with the module
+
+MISC TO DO
+
+- create a test page/utility for displaying doc, given any JS file's contents as input
+

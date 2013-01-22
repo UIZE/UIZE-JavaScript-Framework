@@ -1,0 +1,447 @@
+This is a proposal document for a =Uize.Widget.HtmlEntity= module.
+
+- a widget that lets you select an HTML entity
+- selector for number of entities to display per row
+	- should it be a slider that controls entity cell size?
+- clicking of entity adds entity code to text field, from where it can be copied
+- possible copy-to-clipboard feature?
+- ability to filter entities
+
+- master list of entities
+	................................................................................
+	[
+		34,'quot','quotation mark',
+		38,'amp','ampersand',
+		39,'apos','apostrophe',
+		60,'lt','less-than',
+		62,'gt','greater-than',
+		160,'nbsp','non-breaking space',
+		161,'iexcl','inverted exclamation mark',
+		162,'cent','cent',
+		163,'pound','pound',
+		164,'curren','currency',
+		165,'yen','yen',
+		166,'brvbar','broken vertical bar',
+		167,'sect','section',
+		168,'uml','spacing diaeresis',
+		169,'copy','copyright',
+		170,'ordf','feminine ordinal indicator',
+		171,'laquo','angle quotation mark (left)',
+		172,'not','negation',
+		173,'shy','soft hyphen',
+		174,'reg','registered trademark',
+		175,'macr','spacing macron',
+		176,'deg','degree',
+		177,'plusmn','plus-or-minus',
+		178,'sup2','superscript 2',
+		179,'sup3','superscript 3',
+		180,'acute','spacing acute',
+		181,'micro','micro',
+		182,'para','paragraph',
+		183,'middot','middle dot',
+		184,'cedil','spacing cedilla',
+		185,'sup1','superscript 1',
+		186,'ordm','masculine ordinal indicator',
+		187,'raquo','angle quotation mark (right)',
+		188,'frac14','fraction 1/4',
+		189,'frac12','fraction 1/2',
+		190,'frac34','fraction 3/4',
+		191,'iquest','inverted question mark',
+		192,'Agrave','capital a, grave accent',
+		193,'Aacute','capital a, acute accent',
+		194,'Acirc','capital a, circumflex accent',
+		195,'Atilde','capital a, tilde',
+		196,'Auml','capital a, umlaut mark',
+		197,'Aring','capital a, ring',
+		198,'AElig','capital ae',
+		199,'Ccedil','capital c, cedilla',
+		200,'Egrave','capital e, grave accent',
+		201,'Eacute','capital e, acute accent',
+		202,'Ecirc','capital e, circumflex accent',
+		203,'Euml','capital e, umlaut mark',
+		204,'Igrave','capital i, grave accent',
+		205,'Iacute','capital i, acute accent',
+		206,'Icirc','capital i, circumflex accent',
+		207,'Iuml','capital i, umlaut mark',
+		208,'ETH','capital eth, Icelandic',
+		209,'Ntilde','capital n, tilde',
+		210,'Ograve','capital o, grave accent',
+		211,'Oacute','capital o, acute accent',
+		212,'Ocirc','capital o, circumflex accent',
+		213,'Otilde','capital o, tilde',
+		214,'Ouml','capital o, umlaut mark',
+		215,'times','multiplication',
+		216,'Oslash','capital o, slash',
+		217,'Ugrave','capital u, grave accent',
+		218,'Uacute','capital u, acute accent',
+		219,'Ucirc','capital u, circumflex accent',
+		220,'Uuml','capital u, umlaut mark',
+		221,'Yacute','capital y, acute accent',
+		222,'THORN','capital THORN, Icelandic',
+		223,'szlig','small sharp s, German',
+		224,'agrave','small a, grave accent',
+		225,'aacute','small a, acute accent',
+		226,'acirc','small a, circumflex accent',
+		227,'atilde','small a, tilde',
+		228,'auml','small a, umlaut mark',
+		229,'aring','small a, ring',
+		230,'aelig','small ae',
+		231,'ccedil','small c, cedilla',
+		232,'egrave','small e, grave accent',
+		233,'eacute','small e, acute accent',
+		234,'ecirc','small e, circumflex accent',
+		235,'euml','small e, umlaut mark',
+		236,'igrave','small i, grave accent',
+		237,'iacute','small i, acute accent',
+		238,'icirc','small i, circumflex accent',
+		239,'iuml','small i, umlaut mark',
+		240,'eth','small eth, Icelandic',
+		241,'ntilde','small n, tilde',
+		242,'ograve','small o, grave accent',
+		243,'oacute','small o, acute accent',
+		244,'ocirc','small o, circumflex accent',
+		245,'otilde','small o, tilde',
+		246,'ouml','small o, umlaut mark',
+		247,'divide','division',
+		248,'oslash','small o, slash',
+		249,'ugrave','small u, grave accent',
+		250,'uacute','small u, acute accent',
+		251,'ucirc','small u, circumflex accent',
+		252,'uuml','small u, umlaut mark',
+		253,'yacute','small y, acute accent',
+		254,'thorn','small thorn, Icelandic',
+		255,'yuml','small y, umlaut mark',
+		338,'OElig','capital ligature OE',
+		339,'oelig','small ligature oe',
+		352,'Scaron','capital S with caron',
+		353,'scaron','small S with caron',
+		376,'Yuml','capital Y with diaeres',
+		402,'fnof','f with hook',
+		710,'circ','modifier letter circumflex accent',
+		732,'tilde','small tilde',
+		913,'Alpha','Alpha',
+		914,'Beta','Beta',
+		915,'Gamma','Gamma',
+		916,'Delta','Delta',
+		917,'Epsilon','Epsilon',
+		918,'Zeta','Zeta',
+		919,'Eta','Eta',
+		920,'Theta','Theta',
+		921,'Iota','Iota',
+		922,'Kappa','Kappa',
+		923,'Lambda','Lambda',
+		924,'Mu','Mu',
+		925,'Nu','Nu',
+		926,'Xi','Xi',
+		927,'Omicron','Omicron',
+		928,'Pi','Pi',
+		929,'Rho','Rho',
+		931,'Sigma','Sigma',
+		932,'Tau','Tau',
+		933,'Upsilon','Upsilon',
+		934,'Phi','Phi',
+		935,'Chi','Chi',
+		936,'Psi','Psi',
+		937,'Omega','Omega',
+		945,'alpha','alpha',
+		946,'beta','beta',
+		947,'gamma','gamma',
+		948,'delta','delta',
+		949,'epsilon','epsilon',
+		950,'zeta','zeta',
+		951,'eta','eta',
+		952,'theta','theta',
+		953,'iota','iota',
+		954,'kappa','kappa',
+		955,'lambda','lambda',
+		956,'mu','mu',
+		957,'nu','nu',
+		958,'xi','xi',
+		959,'omicron','omicron',
+		960,'pi','pi',
+		961,'rho','rho',
+		962,'sigmaf','sigmaf',
+		963,'sigma','sigma',
+		964,'tau','tau',
+		965,'upsilon','upsilon',
+		966,'phi','phi',
+		967,'chi','chi',
+		968,'psi','psi',
+		969,'omega','omega',
+		977,'thetasym','theta symbol',
+		978,'upsih','upsilon symbol',
+		982,'piv','pi symbol',
+		8194,'ensp','en space',
+		8195,'emsp','em space',
+		8201,'thinsp','thin space',
+		8204,'zwnj','zero width non-joiner',
+		8205,'zwj','zero width joiner',
+		8206,'lrm','left-to-right mark',
+		8207,'rlm','right-to-left mark',
+		8211,'ndash','en dash',
+		8212,'mdash','em dash',
+		8216,'lsquo','left single quotation mark',
+		8217,'rsquo','right single quotation mark',
+		8218,'sbquo','single low-9 quotation mark',
+		8220,'ldquo','left double quotation mark',
+		8221,'rdquo','right double quotation mark',
+		8222,'bdquo','double low-9 quotation mark',
+		8224,'dagger','dagger',
+		8225,'Dagger','double dagger',
+		8226,'bull','bullet',
+		8230,'hellip','horizontal ellipsis',
+		8240,'permil','per mille',
+		8242,'prime','minutes',
+		8243,'Prime','seconds',
+		8249,'lsaquo','single left angle quotation',
+		8250,'rsaquo','single right angle quotation',
+		8254,'oline','overline',
+		8364,'euro','euro',
+		8482,'trade','trademark',
+		8592,'larr','left arrow',
+		8593,'uarr','up arrow',
+		8594,'rarr','right arrow',
+		8595,'darr','down arrow',
+		8596,'harr','left right arrow',
+		8629,'crarr','carriage return arrow',
+		8704,'forall','for all',
+		8706,'part','part',
+		8707,'exists','exists',
+		8709,'empty','empty',
+		8711,'nabla','nabla',
+		8712,'isin','isin',
+		8713,'notin','notin',
+		8715,'ni','ni',
+		8719,'prod','prod',
+		8721,'sum','sum',
+		8722,'minus','minus',
+		8727,'lowast','lowast',
+		8730,'radic','square root',
+		8733,'prop','proportional to',
+		8734,'infin','infinity',
+		8736,'ang','angle',
+		8743,'and','and',
+		8744,'or','or',
+		8745,'cap','cap',
+		8746,'cup','cup',
+		8747,'int','integral',
+		8756,'there4','therefore',
+		8764,'sim','simular to',
+		8773,'cong','approximately equal',
+		8776,'asymp','almost equal',
+		8800,'ne','not equal',
+		8801,'equiv','equivalent',
+		8804,'le','less or equal',
+		8805,'ge','greater or equal',
+		8834,'sub','subset of',
+		8835,'sup','superset of',
+		8836,'nsub','not subset of',
+		8838,'sube','subset or equal',
+		8839,'supe','superset or equal',
+		8853,'oplus','circled plus',
+		8855,'otimes','cirled times',
+		8869,'perp','perpendicular',
+		8901,'sdot','dot operator',
+		8968,'lceil','left ceiling',
+		8969,'rceil','right ceiling',
+		8970,'lfloor','left floor',
+		8971,'rfloor','right floor',
+		9674,'loz','lozenge',
+		9824,'spades','spade',
+		9827,'clubs','club',
+		9829,'hearts','heart',
+		9830,'diams','diamond'
+	]
+	................................................................................
+
+- entity categorization
+	................................................................................
+	{
+		'reserved XML special characters':[34,38,39,60,62],
+		'quotation marks':{
+			conventional:[34,39,8216,8217,8218,8220,8221,8222],
+			'angle quotations':[171,187,8249,8250],
+			'quote-like (false quotes)':[8242,8243]
+		},
+		'currency symbols':[162,163,164,165,8364],
+		'copyright and trade marks':[169,174,8482],
+		'punctuation marks':{
+			'':[175,183,8211,8212,8230],
+			inverted:[161,191]
+		},
+		'lines and arrows':{
+			lines:[161,167,172,175,915,921,926,928,932,8211,8212,8224,8225,8260,8719,8722,8869,8968,8969,8970,8971],
+			arrows:[8592,8593,8594,8595,8629,8656,8657,8658,8659,8660],
+			'arrow-like':[60,62,171,187,238,916,923,947,957,978,8249,8250,8704,8711,8736,8744,9001,9002]
+		},
+		'card suits':[9824,9827,9829,9830],
+		'spacers and joiners':[173,8194,8195,8201,8204,8205,8206,8207],
+		greek:{
+			'small letter':[945,946,947,948,949,950,951,952,953,954,955,956,957,958,959,960,961,962,963,964,965,966,967,968,969],
+			'capital letters':[913,914,915,916,917,918,919,920,921,922,923,924,925,926,927,928,929,930,931,932,933,934,935,936,937],
+			symbols:[977,978,982,8721]
+		},
+		letters:{
+			'accented and lookalikes':{
+				a:{
+					'like small "a"':[170,224,225,226,227,228,229,230,945,8706],
+					'like capital "A"':[192,193,194,195,196,197,198,913,916,923,955,8704]
+				},
+				b:{
+					'like small "b"':[222,254],
+					'like capital "B"':[223,914,946,952]
+				},
+				c:{
+					'like small "c"':[60,162,169,231,962,8834,8835,8836],
+					'like capital "C"':[199,9001,9002]
+				},
+				d:{
+					'like small "d"':[948,8706,8834,8836],
+					'like capital "D"':[208,222,254,2283,9002]
+				},
+				e:{
+					'like small "e"':[230,232,233,234,235,339,8706],
+					'like capital "E"':[163,200,201,202,203,338,917,920,926,931,949,952,958,8364,8707,8712,8713,8715,8721]
+				},
+				f:{
+					'like small "f"':[402,8747],
+					'like capital "F"':[163]
+				},
+				h:{
+					'like capital "H"':[919]
+				},
+				i:{
+					'like small "i"':[161,236,237,238,239,953],
+					'like capital "I"':[166,204,205,206,207,921,8465]
+				},
+				j:{
+					'like capital "J"':[8747]
+				},
+				k:{
+					'like small "k"':[954],
+					'like capital "K"':[922]
+				},
+				l:{
+					'like small "l"':[921,953,8747],
+					'like capital "L"':[8970]
+				},
+				m:{
+					'like capital "M"':[924,8721]
+				},
+				n:{
+					'like small "n"':[241,928,937,951,960,8719,8745],
+					'like capital "N"':[209,925]
+				},
+				o:{
+					'like small "o"':[164,176,186,242,243,244,245,246,248,339,948,952,959,963,966,8743,8853,8855],
+					'like capital "O"':[210,211,212,213,214,216,338,920,927,934,8709]
+				},
+				p:{
+					'like small "p"':[254,961,966],
+					'like capital "P"':[222,929,8472]
+				},
+				r:{
+					'like small "r"':[915],
+					'like capital "R"':[8476]
+				},
+				s:{
+					'like capital "S"':[167,352]
+				},
+				t:{
+					'like small "t"':[8224,8593,8968],
+					'like capital "T"':[932,964]
+				},
+				u:{
+					'like small "u"':[181,249,250,251,252,956,965,977],
+					'like capital "U"':[217,218,219,220]
+				},
+				v:{
+					'like small "v"':[957,8730,8744],
+					'like capital "V"':[947]
+				},
+				w:{
+					'like small "w"':[936,968,969,982]
+				},
+				x:{
+					'like small "x"':[215,8501],
+					'like capital "X"':[935,967]
+				}
+			}
+		},
+		numerical:{
+			fractions:[188,189,190],
+			superscripts:[176,178,179,185,186],
+			'number lookalikes':{
+				0:[164,176,186,210,211,212,213,214,216,240,242,243,244,245,246,248,920,927,934,937,948,952,952,961,963,966,8709,8743,8853,8855],
+				1:[161,166,185,204,205,206,207,236,237,238,239,921,953,8224,8593,8747,8969],
+				2:[178],
+				3:[179,949,958,969,8707,8715],
+				6:[222,254],
+				7:[172,8969],
+				8:[38,208,223,914,920,946,949,952]
+			}
+		},
+		brackets:[9001,9002],
+		'bullet-like':[164,183,248,958,8226,8743,8853,8855,8901,9674,9830],
+		accents:{
+			'accent marks':[168,180,710,732,8764],
+			'accented letters':{
+				acute:{
+					'capital letters':[193,201,205,211,218,221],
+					'small letters':[233,237,243,250,253,]
+				},
+				grave:{
+					'capital letters':[192,200,204,210,217],
+					'small letters':[224,232,236,242,249]
+				},
+				circumflex:{
+					'capital letters':[194,202,206,212,219],
+					'small letters':[226,234,238,244,251]
+				},
+				'umlaut / diaeres':{
+					'capital letters':[196,203,207,214,220,376],
+					'small letters':[228,235,239,246,252,255]
+				},
+				tilde:{
+					'capital letters':[195,209,213],
+					'small letters':[227,241,245]
+				},
+				ring:{
+					'capital letters':[197],
+					'small letters':[229]
+				},
+				caron:{
+					'capital letters':[352],
+					'small letters':[353]
+				},
+				slash:{
+					'capital letters':[217,8709],
+					'small letters':[248]
+				}
+			}
+		},
+		geometric shapes:{
+			'circles and ellipses':[164,176,186,927,959],
+			triangles:[916,8711],
+			diamonds:[9674,9830],
+			angles:[60,62,172,915,923,947,955,957,978,8249,8250,8730,8736,8744,8968,8969,8970,8971,9001,9002]
+		}
+	}
+	................................................................................
+
+	http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
+		- Math
+			- arithmetic operators
+			- set theory
+			- equivalence
+			- geometry
+		- footnote
+			- dagger
+			- double dagger
+		- crosses (plus, x, multiply, circled plus, circled x, etc.)
+
+- sort by
+	- entity number
+	- entity code
+	- entity name
+

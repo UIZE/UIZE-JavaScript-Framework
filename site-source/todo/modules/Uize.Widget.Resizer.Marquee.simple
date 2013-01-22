@@ -1,0 +1,15 @@
+This is a TO DO document for the =Uize.Widget.Resizer.Marquee= module.
+
+- 'Position Changed' event should be fired whenever the position is changed, even if it's through the state property interface (make sure this won't mess up any code -- especially Zazzle DT)
+- a mode where the middle handles are sized to the length of the axis (similar to hot area for resizing a window in one axis only)
+- consider marquee HTML implementation with no drag handles, just hot regions (for less clutter)
+- prim up built in HTML markup to allow parameters
+
+Ideas
+	- consider optional tooltip feature to indicate dimensions when mousing over move node
+	- consider tooltips when mousing over handles
+	- consider way of displaying positioning information only during drag
+	- consider making handles be buttons, so marquees can easily be disabled
+	- consider implementing border differently to allow for marching ants
+
+

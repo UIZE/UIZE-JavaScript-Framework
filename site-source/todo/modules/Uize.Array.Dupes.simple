@@ -1,0 +1,12 @@
+This is a TO DO document for the =Uize.Array.Dupes= module.
+
+Proposed New Methods
+	Uize.Array.Dupes.getDupes
+		Returns an array of dupe info objects.
+
+	Uize.Array.Dupes.getValueCount
+		Returns the number of occurrences of the specified value.
+
+	Uize.Array.Dupes.getValueCounts
+		Returns a lookup array of counts per value.
+

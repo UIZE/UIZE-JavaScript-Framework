@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Image Port with Auto-pan | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="Uize.Widget.ImagePort.AutoPan"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		table.portholes div {
+			position:relative;
+			width:150px;
+			height:150px;
+			overflow:hidden;
+		}
+		img.porthole {
+			position:absolute;
+			border:none;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Image Port with Auto-pan
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/~EXPERIMENTAL-image-port-auto-pan.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- the matrix of nine images that are cropped by parent nodes -->
+
+	<table id="portholes" class="portholes" border="0" cellspacing="1" cellpadding="0" style="margin:auto;">
+		<tr align="left" valign="top">
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228109666540948246&max_dim=500" class="porthole" title="Braving the Onslaught" alt=""/></div></td>
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228745103279879745&max_dim=500" class="porthole" title="Companion to a Sunset" alt=""/></div></td>
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228507796122097730&max_dim=500" class="porthole" title="Driving Through the Rain" alt=""/></div></td>
+		</tr>
+		<tr align="left" valign="top">
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228267745724726415&max_dim=500" class="porthole" title="Flock of Clouds" alt=""/></div></td>
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228937676589416694&max_dim=500" class="porthole" title="Hail to the Opening" alt=""/></div></td>
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228623703668130129&max_dim=500" class="porthole" title="Just a Visitor" alt=""/></div></td>
+		</tr>
+		<tr align="left" valign="top">
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228897217554746467&max_dim=500" class="porthole" title="Out the Bus Window" alt=""/></div></td>
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228554379238024970&max_dim=500" class="porthole" title="Pacifica Pier From Milagra" alt=""/></div></td>
+			<td><div><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228550194293355740&max_dim=500" class="porthole" title="Pier Before the Storm" alt=""/></div></td>
+		</tr>
+	</table>
+</div>
+
+<!-- JavaScript code to wire up the sequenced show and "thumb zoom" behavior for the image portholes -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Node',
+		'Uize.Widget.ImagePort.AutoPan'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** set defaults for all Uize.Widget.ImagePort.AutoPan instances ***/
+			Uize.Widget.ImagePort.AutoPan.set ({
+				speed:10
+			});
+
+		/*** spawn a batch of Uize.AutoPan instances ***/
+			Uize.Widget.ImagePort.AutoPan.spawn ({idPrefix:{tagName:'IMG',className:'porthole'}},page);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>

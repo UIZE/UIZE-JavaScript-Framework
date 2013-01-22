@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Marquee and Image Port | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="featured drag-and-drop touch ipad widget zoom Uize.Widget.Resizer.Marquee Uize.Widget.ImagePort.Draggable"/>
+	<meta name="description" content="See this demo for a drag-and-drop image crop interface, with an enlarged display of the cropped region. Drag to move it, or drag its edges to resize."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Marquee and Image Port
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/marquee-and-image-port.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>Resizing and moving the marquee (an instance of the <a href="../reference/Uize.Widget.Resizer.Marquee.html">Uize.Widget.Resizer.Marquee</a> widget class) updates the masking in order to highlight the marquee region, but also sets values for the image port widget (an instance of the <a href="../reference/Uize.Widget.ImagePort.Draggable.html">Uize.Widget.ImagePort.Draggable</a> widget class) to the right, so that the image port effectively shows the enlarged view of the marquee region. Click-and-dragging on the image port feeds back into the marquee widget to the left, so that the marquee is always positioned to correctly reflect the area shown in the image port. If you use the Ctrl key when click-and-dragging on the image port, it will zoom in or zoom out the image port's view when you move the mouse up or down, respectively. When you do this, the marquee is updated to stay in sync.</p>
+	</div>
+
+	<!-- marquee UI wireframe -->
+
+	<table border="0" cellspacing="0" cellpadding="0" align="center">
+		<tr>
+			<td class="heading">Uize.Widget.Resizer.Marquee Instance</td>
+			<td width="10"></td>
+			<td class="heading">Uize.Widget.ImagePort.Draggable Instance</td>
+		</tr>
+		<tr>
+			<td>
+				<div style="position:relative; left:0px; top:0px; width:451px; height:300px; border:1px solid #666;">
+					<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Crowd_in_HK.JPG/800px-Crowd_in_HK.JPG" style="position:absolute; width:451px; height:300px;" alt=""/>
+					<div style="position:absolute; width:451px; height:300px; background:#222; opacity:.5; filter:alpha(opacity=50);"></div>
+					<img id="page-marqueeHighlight" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Crowd_in_HK.JPG/800px-Crowd_in_HK.JPG" style="position:absolute; left:0px; top:0px; width:451px; height:300px;" alt=""/>
+					<div id="page_marquee" style="position:absolute; width:451px; height:300px;"></div>
+				</div>
+			</td>
+			<td></td>
+			<td>
+				<div id="page_imagePort" style="position:relative; width:300px; height:300px; border:1px solid #666; overflow:hidden;">
+					<img id="page_imagePort-image" src="http://upload.wikimedia.org/wikipedia/commons/e/e0/Crowd_in_HK.JPG" style="width:3008px; height:2000px; position:absolute;" alt=""/>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<!-- JavaScript code to make the static marquee HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Node',
+		'Uize.Widget.Resizer.Marquee',
+		'Uize.Widget.ImagePort.Draggable'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** global variables ***/
+			var
+				_imageWidth = 3008,
+				_imageHeight = 2000,
+				_displayScaleFactor = .15
+			;
+
+		/*** create the marquee widget ***/
+			var marquee = page.addChild (
+				'marquee',
+				Uize.Widget.Resizer.Marquee,
+				{
+					aspectRatio:1,
+					constrain:true,
+					minWidth:50,
+					minHeight:50,
+					left:100,
+					top:100,
+					width:150,
+					height:150,
+					built:false
+				}
+			);
+
+		/*** create the ImagePort instance ***/
+			var imagePort = page.addChild (
+				'imagePort',
+				Uize.Widget.ImagePort.Draggable,
+				{
+					maxSizingValue:10,
+					minSizingValue:1,
+					sizingLowerBound:'0',
+					sizingUpperBound:'fill'
+				}
+			);
+
+		/*** code for updating the zoomed view of the marqueed image area ***/
+			function updateZoomedView (onlyMarqueeHighlight) {
+				var
+					_left = marquee.get ('left'),
+					_top = marquee.get ('top'),
+					_width = marquee.get ('width'),
+					_height = marquee.get ('height')
+				;
+				if (!onlyMarqueeHighlight)
+					imagePort.set ({
+						alignX:_left / Math.max (_imageWidth * _displayScaleFactor - _width,1),
+						alignY:_top / Math.max (_imageHeight * _displayScaleFactor - _height,1),
+						sizingValue:_imageHeight * _displayScaleFactor / _height
+					})
+				;
+				page.setNodeClipRect ('marqueeHighlight',_top,_left + _width - 1,_top + _height - 1,_left);
+			}
+			marquee.wire ('Position Changed',function () {updateZoomedView ()});
+
+		/*** update settings UI whenever position changes ***/
+			imagePort.wire (
+				'Position Changed',
+				function () {
+					if (!marquee.get ('inDrag')) {
+						var
+							_marqueeScaleFactor = 1 / imagePort.get ('sizingValue') * _displayScaleFactor,
+							_marqueeWidth = _imageHeight * _marqueeScaleFactor,
+							_marqueeHeight = _imageHeight * _marqueeScaleFactor
+						;
+						marquee.set ({
+							left:(_imageWidth * _displayScaleFactor - _marqueeWidth) * imagePort.get ('alignX'),
+							top:(_imageHeight * _displayScaleFactor - _marqueeHeight) * imagePort.get ('alignY'),
+							width:_marqueeWidth,
+							height:_marqueeHeight
+						});
+					}
+					updateZoomedView (true);
+				}
+			);
+
+		/*** initialize the zoomed view, based on marquee's initial settings ***/
+			updateZoomedView ();
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

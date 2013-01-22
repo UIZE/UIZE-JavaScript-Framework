@@ -1,0 +1,10 @@
+This is a TO DO document for the =Uize.Widget.Drag= module.
+
+- it should be possible to cancel drag programmatically during drag, just by setting the dragCancelled state property to true
+- upon releasing, an event should be fired to allow an application to programmatically cancel drag
+- scroll near borders behavior
+- clicking right mouse button during drag should also cancel drag (just like hitting escape key)
+- find a consistent and reliable way to implement the shield resizing (perhaps using a table at the root with width=100% and height=100% ? Then, is there something additional that has to be done to make it work in the various DOCTYPE modes so that its height is 100% even if the document is short?
+- deal with unnecessary window scrollbars issue during drag in IE
+- support switching in and out of SHIFT modifier mode during drag
+

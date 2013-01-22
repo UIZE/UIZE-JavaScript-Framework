@@ -1,0 +1,24 @@
+This is a TO DO document for the =Uize.Widget.Resizer= module.
+
+- BUG: issue with minWidth and minHeight, where min for an axis is not observed when resizing from opposite axis
+- SUBCLASSING
+	- deal with where jiggler should go
+	- make sure all Uize.Widget.Resizer.Marquee references to Uize.Widget.Resizer superclass are through public interface
+
+- create mechanism by which node map can be overrided for the various nodes that a resizable palette or other subclass might need to override
+- automatically pick up coordinates each time drag is initiated, so that if the area is moved / resized through other means, it takes effect
+
+- support for floating point coordinates
+- support for resize pinned to center using ctrl modifier key
+- support for constraining to not fall entirely outside of a specified region (ie. hanging-on-by-a-thread mode)
+- support snapping behaviors, with modifier key for override
+- support for maximum dimensions (maxWidth, maxHeight)
+- support for allowing override of constrained aspect ratio (using modifier key?) -- is this the same as "concept of preferred aspect ratio" that I made a note about at one point?
+- perhaps storing of start drag positions to be used by end-of-drag handlers or in-drag-rest handlers
+
+- deal with issue of swapping over sides in preserve aspect ratio mode
+
+- fire events all through drag (whenever positioning changes)
+- highlight current handle being dragged
+
+

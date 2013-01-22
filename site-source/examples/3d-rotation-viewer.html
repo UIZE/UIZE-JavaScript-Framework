@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>3D Rotation Viewer | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="animation drag-and-drop ipad touch Uize.Widget.Drag Uize.Widget.Fade.xFactory"/>
+	<meta name="description" content="Easily create a 3D rotation viewer in UIZE that lets users rotate the view of an object a full 360 degrees using a mouse, or finger on the Apple iPad."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.rotationViewer {
+			position:relative;
+			width:640px;
+			height:378px;
+			border-style:solid;
+			border-width:1px;
+			margin:auto;
+			margin-bottom:10px;
+			cursor:pointer;
+		}
+		.rotationViewer img {
+			position:absolute;
+			visibility:hidden;
+			left:0;
+			top:0;
+			width:100%;
+			height:100%;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	3D Rotation Viewer
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/3d-rotation-viewer.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example is inspired by a <a href="http://www.apple.com/html5/showcase/threesixty/" target="_blank">showcase example</a> by Apple of HTML5 technologies. The UIZE implementation works in pretty much all browsers, with no need for HTML5 or CSS3 features. This was an exercise in seeing how easy it would be to create an equivalent experience in UIZE. It was easy, taking less than a day. The code is all original, with absolutely no referencing of Apple's code (but thanks to Apple for their delicious iPod Touch products, and for their fabulous photos of said products). In the example, an instance of the <a href="../reference/Uize.Widget.Drag.html"><code>Uize.Widget.Drag</code></a> class is being used to create a simple 3D rotation viewer. Using a mouse, you can click and drag to rotate the 3D image. On an Apple iPad, you can use your finger. The viewer implements a deceleration behavior - the speed at the time of release determines how long it will take to spin down to a stop. When the page loads initially, the image is animated 360 degrees clockwise. Buttons beneath the viewer let you trigger other kinds of spins.</p>
+	</div>
+
+	<!-- HTML "wireframe" for 3D rotation viewer -->
+
+	<div id="page_rotationViewer" class="rotationViewer insetBorderColor"></div>
+
+	<div style="text-align:center;">
+		<a href="javascript://" class="linkedJs buttonLink" title="spin (360,2700,Uize.Curve.easeInOutPow (4))">360 clockwise</a><a href="javascript://" class="linkedJs buttonLink" title="spin (-360,2700,Uize.Curve.easeInOutPow (4))">360 counter-clockwise</a><a href="javascript://" class="linkedJs buttonLink" title="spin (1080,4000,Uize.Curve.easeInOutPow (4))">3 spins</a><a href="javascript://" class="linkedJs buttonLink" title="spin (360,2700,Uize.Curve.Rubber.easeOutBounce (5,-2,1.5))">spin with bounce</a><a href="javascript://" class="linkedJs buttonLink" title="spin (360,4000,Uize.Curve.Mod.bend (Uize.Curve.Rubber.easeOutElastic (.1),3))">spin with elasticity</a>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static bar HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.Drag',
+		'Uize.Fade.xFactory',
+		'Uize.Curve.Rubber',
+		'Uize.Curve.Mod'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** configuration variables ***/
+			var
+				totalFrames = 72,
+				frameUrlTemplate =
+					'http://www.apple.com/html5/showcase/threesixty/images/optimized/Seq_v04_640x378_[#frame].jpg'
+			;
+
+		/*** state variables ***/
+			var
+				rotation = 0,
+				lastFrameNo = -1,
+				dragStartRotation
+			;
+
+		/*** create the Uize.Widget.Drag instance ***/
+			var rotationViewer = page.addChild (
+				'rotationViewer',
+				Uize.Widget.Drag,
+				{
+					cancelFade:{duration:5000,curve:Uize.Curve.Rubber.easeOutBounce ()},
+					releaseTravel:function (speed) {
+						var
+							deceleration = 5000, // measured in pixels/s/s
+							duration = speed / deceleration
+						;
+						return {
+							duration:duration,
+							distance:Math.round (speed * duration / 2),
+							curve:function (_value) {return 1 - (_value = 1 - _value) * _value}
+						};
+					},
+					html:function (input) {
+						var
+							htmlChunks = [],
+							frameNodeIdPrefix = input.idPrefix + '-frame'
+						;
+						for (var frameNo = 0; ++frameNo <= totalFrames;) {
+							htmlChunks.push (
+								'<img' +
+									' id="' + frameNodeIdPrefix + frameNo + '"' +
+									' src="' + Uize.substituteInto (frameUrlTemplate,{frame:(frameNo < 10 ? '0' : '') + frameNo}) +'"' +
+								'/>'
+							);
+						}
+						return htmlChunks.join ('');
+					},
+					built:false
+				}
+			);
+
+		/*** wire up the drag widget with events for updating rotation degree ***/
+			function updateRotation (newRotation) {
+				rotation = ((newRotation % 360) + 360) % 360;
+				var frameNo = 1 + Math.round (rotation / 360 * (totalFrames - 1));
+				if (frameNo != lastFrameNo) {
+					rotationViewer.showNode ('frame'+ lastFrameNo,false);
+					rotationViewer.showNode ('frame'+ (lastFrameNo = frameNo));
+				}
+			}
+			rotationViewer.wire ({
+				'Drag Start':function () {dragStartRotation = rotation},
+				'Drag Update':function (e) {updateRotation (dragStartRotation - e.source.eventDeltaPos [0] / 2.5)}
+			});
+
+		/*** function for animating spin ***/
+			function spin (degrees,duration,curve) {
+				Uize.Fade.fade (updateRotation,rotation,rotation + degrees,duration,{quantization:1,curve:curve});
+			}
+
+		/*** initialization ***/
+			Uize.Node.wire (window,'load',function () {spin (360,2700,Uize.Curve.easeInOutPow (4))});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

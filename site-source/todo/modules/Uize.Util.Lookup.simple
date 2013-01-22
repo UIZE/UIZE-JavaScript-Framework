@@ -1,0 +1,89 @@
+This is a proposal document for a =Uize.Util.Lookup= module.
+
+Introduction
+	Implement a package to facilitate creating very lightweight and highly performant lookup objects that are safe.
+
+	Features
+		- handles the own property issue in a performant way
+
+Instance Methods
+	keys
+		Returns an array, containing the keys for all the items in the lookup, in the order in which the items were defined.
+
+		SYNTAX
+		.............................
+		keysARRAY = myLookup.keys ();
+		.............................
+
+	values
+		Returns an array, containing the values for all the items in the lookup, in the order in which the items were defined.
+
+		SYNTAX
+		...............................
+		valuesARRAY = myLookup.keys ();
+		...............................
+
+	forEach
+		Iterates over all the items in the lookup, in the order in which the items were defined, calling the specified iteration handler function and passing the value, key, and item number.
+
+		SYNTAX
+		........................................
+		myLookup.forEach (iterationHandlerFUNC);
+		........................................
+
+	item
+		DIFFERENT USAGES
+
+		`Get the Value for an Item`
+		......................................
+		valueANYTYPE = myLookup.item (keySTR);
+		......................................
+
+		`Set the Value for an Item`
+		....................................
+		myLookup.item (keySTR,valueANYTYPE);
+		....................................
+
+	remove
+		Removes the specified item or items from the lookup.
+
+		DIFFERENT USAGES
+
+		`Remove a Single Item`
+		.........................
+		myLookup.remove (keySTR);
+		.........................
+
+		`Remove Multiple Items`
+		............................
+		myLookup.remove (keysARRAY);
+		............................
+
+	has
+		Returns a boolean, indicating whether or not there is an item with the specified key in the lookup.
+
+		SYNTAX
+		................................
+		hasBOOL = myLookup.has (keySTR);
+		................................
+
+	clear
+		Clears the lookup object, removing all items.
+
+		SYNTAX
+		..................
+		myLookup.clear ();
+		..................
+
+	init
+		Lets you initialize the lookup with the specified set of values.
+
+		SYNTAX
+		..............................
+		myLookup.init (keysValuesOBJ);
+		..............................
+
+Instance Properties
+	length
+		An integer, indicating the number of items in the lookup.
+

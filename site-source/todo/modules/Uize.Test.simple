@@ -1,0 +1,16 @@
+This is a TO DO document for the =Uize.Test= module.
+
+expectInstanceState
+	SYNTAX
+	..................................................................
+	successBOOL = this.expectInstanceState (statePropertiesValuesOBJ);
+	..................................................................
+
+New State Properties
+	- =breathe= - an amount of time that the test runner should pause after completion of a test
+	- =cleanup= - code to execute upon completion of a test (different between success or failure?)
+	- =context= - a context selector/filter that can be used by the test runner to determine if the test should be run in the current context (eg. browser tests vs non-browser tests, tests specific to certain browsers, etc.)
+	- =setup= - code to execute before running of a test
+
+- should be possible for tests to declare that they can run outside of browser context
+

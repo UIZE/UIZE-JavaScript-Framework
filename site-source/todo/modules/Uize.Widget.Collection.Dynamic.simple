@@ -1,0 +1,26 @@
+This is a TO DO document for the =Uize.Widget.Collection.Dynamic= module.
+
+Drag-to-reorder
+	- NEXT
+		- should not permit drag-and-drop when all items would be dragged (either all are selected, or there is only one item)
+		- escape key should cancel drag (right now it just forces drop)
+
+	- cleanup
+		- share CSS for insertion marker, so it's not in inline style attributes
+
+	- low priority
+		- hover cursor should be move cursor?
+		- come up with better tooltip / proxy for items being moved
+		- come up with better insertion marker
+		- optimize reordering of itemWidgets array
+
+	- hooks
+		- drag start: should provide hook for validation logic before drag, so that code can evaluate if drag should be allowed, based upon contents
+		- drag done: should provide hook to validate drop
+	- dragging
+		- should be able to autoscroll when detecting mouse at boundaries of scrollable view port
+	- drop
+
+	- facility for duplicating an item (something like this was wanted at one point for an add-another-one-of-these feature in the photoprints page, and we were discussing making that page use Uize.Widget.Collection.Dynamic)
+
+

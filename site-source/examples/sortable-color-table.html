@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Sortable Color Table | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="featured color Uize.Color.xSvgColors Uize.Widget.TableSort"/>
+	<meta name="description" content="See all the standardized colors of the CSS 3 specification in a sortable table, where you can sort by name, hue, saturation, lightness, and more."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.datatable.css"/>
+	<style tyle="text/css">
+		table.data tr td.colorSwatch {
+			font-size:11px;
+			text-align:center;
+			padding-left:7px;
+			padding-right:7px;
+		}
+		.levelIndicator {
+			width:10px;
+			height:10px;
+			margin-left:5px;
+			border:1px solid #555;
+		}
+		table.data tr td {
+			text-align:right;
+			padding:2px 6px;
+		}
+		table.data tr td.colorName {
+			font-size:12px;
+			text-align:left;
+		}
+		table.data tr td.rgbHex, table.data tr td.hslString {
+			color:#666;
+		}
+		table.data tr td.rgbHex {
+			font-family:courier;
+		}
+		table.data tr td.hslString {
+			font-size:10px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Sortable Color Table
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/sortable-color-table.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>The table shown below represents the named colors that form part of <a href="http://www.w3.org/TR/2008/WD-css3-color-20080721/" target="_blank">CSS Color Module Level 3</a>, derived from the <a href="http://www.w3.org/TR/SVG/types.html#ColorKeywords" target="_blank">SVG 1.0 specification</a>. Each color is depicted in a row, with a 1) color swatch, 2) its standardized name, 3) its hue, saturation, and lightness (according to the <a href="http://en.wikipedia.org/wiki/HSL_color_space" target="_blank">HSL color space</a>), 4) its representation as an HSL-formatted CSS style property value, 5) its red, green, and blue channel levels (according to the <a href="http://en.wikipedia.org/wiki/SRGB" target="_blank">sRGB color space</a>), and 6) its hex formatted RGB value.</p>
+
+		<p>What makes the table most compelling is that it is sortable by any one of the colors' properties, so you can get a sense of how properties such as hue, saturation, lightness, red level, etc. relate to different colors by sorting on those properties - in either ascending or descending order. Indicators alongside the column values also provide cues for visual reference. Click on one of the column headings to see. The indicator for hue values is a color of that hue, with saturation at max value, and lightness at center value. The indicators for saturation and lightness are a grayscale, where black represents min value and white represents max value. Indicators for red, green, and blue are various shades of pure red, green, and blue, respectively. The table is generated with the help of the <a href="../reference/Uize.Color.html"><code>Uize.Color</code></a> module and the named colors defined in the <a href="../reference/Uize.Color.xSvgColors.html"><code>Uize.Color.xSvgColors</code></a> extension. The table is made sortable with the help of the <a href="../reference/Uize.Widget.TableSort.html"><code>Uize.Widget.TableSort</code></a> module.
+		</p>
+	</div>
+
+	<!-- wireframe for sortable color table -->
+
+	<center id="page_colorTable-shell">
+	</center>
+</div>
+
+<!-- JavaScript code to generate the color table and wire it up with the sortable behavior -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Color',
+		'Uize.Color.xSvgColors',
+		'Uize.Widget.TableSort'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** build the color table ***/
+			var
+				color = Uize.Color (),
+				colors = Uize.Color.colors,
+				tableHtmlChunks = [
+					'<table id="page_colorTable" class="data">',
+						'<tr class="title">' +
+							'<td colspan="10">Sortable Table of SVG 1.0 / CSS 3 Named Colors</td>' +
+						'</tr>' +
+						'<tr class="heading">' +
+							'<td>swatch</td>' +
+							'<td>Color Name</td>' +
+							'<td>Hue</td>' +
+							'<td>Sat.</td>' +
+							'<td>Light.</td>' +
+							'<td>HSL value</td>' +
+							'<td>Red</td>' +
+							'<td>Green</td>' +
+							'<td>Blue</td>' +
+							'<td>RGB hex</td>' +
+						'</tr>'
+				]
+			;
+			for (var colorName in colors) {
+				color.from (colors [colorName]);
+				var
+					tuple = color.tuple,
+					red = tuple [0],
+					green = tuple [1],
+					blue = tuple [2],
+					hslTuple = color.getTuple ('HSL'),
+					hue = hslTuple [0],
+					saturation = hslTuple [1],
+					lightness = hslTuple [2]
+				;
+				tableHtmlChunks.push (
+					'<tr>' +
+						'<td class="colorSwatch" style="background:' + color.to ('RGB string') + ';"><span style="color:#000;">black text</span>&nbsp;<span style="color:#fff;">white text</span></td>' +
+						'<td class="colorName">' + colorName + '</td>' +
+						'<td>' +
+							Math.round (hue) +
+							'<img src="../images/blank.gif" class="levelIndicator" style="background:' + Uize.Color.to ({hue:hue,saturation:100,lightness:50},'#hex') + ';"/>' +
+						'</td>' +
+						'<td>' +
+							Math.round (saturation) +
+							'<img src="../images/blank.gif" class="levelIndicator" style="background:' + Uize.Color.to ({hue:0,saturation:0,lightness:saturation},'#hex') + ';"/>' +
+						'</td>' +
+						'<td>' +
+							Math.round (lightness) +
+							'<img src="../images/blank.gif" class="levelIndicator" style="background:' + Uize.Color.to ({hue:0,saturation:0,lightness:lightness},'#hex') + ';"/>' +
+						'</td>' +
+						'<td class="hslString">' + color.to ('HSL string') + '</td>' +
+						'<td>' +
+							red +
+							'<img src="../images/blank.gif" class="levelIndicator" style="background:' + Uize.Color.to ({red:red,green:0,blue:0},'#hex') + ';"/>' +
+						'</td>' +
+						'<td>' +
+							green +
+							'<img src="../images/blank.gif" class="levelIndicator" style="background:' + Uize.Color.to ({red:0,green:green,blue:0},'#hex') + ';"/>' +
+						'</td>' +
+						'<td>' +
+							blue +
+							'<img src="../images/blank.gif" class="levelIndicator" style="background:' + Uize.Color.to ({red:0,green:0,blue:blue},'#hex') + ';"/>' +
+						'</td>' +
+						'<td class="rgbHex">' + color.to ('#hex') + '</td>' +
+					'</tr>'
+				);
+			}
+			tableHtmlChunks.push ('</table>');
+
+		/*** add a Uize.Widget.TableSort child widget ***/
+			page.addChild (
+				'colorTable',
+				Uize.Widget.TableSort,
+				{
+					headingOverClass:'headingOver',
+					headingLitClass:'headingLit',
+					rowOverClass:'rowOver',
+					html:tableHtmlChunks.join (''),
+					built:false
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

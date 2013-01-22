@@ -1,0 +1,18 @@
+This is a TO DO document for the =Uize.Widget.CollectionItem.Zooming= module.
+
+Design Choices
+	- in order to achieve zooming as soon as possible, low res image is used
+	- in order to achieve a smooth crossover from zooming low res to zooming high res, two different image nodes are needed, since switching src can have flickery artifacts in some browsers
+
+	- one low res image node
+		- low res image node is inserted as needed, either on over becoming true, or inUse becoming true
+	- one high res image node
+		- high res image node is inserted as needed, on inUse becoming true
+	- when user mouses over, src for low src image node is set to current preview src
+	- when user rests mouse, animation begins, and src for high res image node is set
+		- once high res image node has loaded image, it is revealed and low res image node is hidden
+	- zooming applies to either low res image node or high res image node, depending on loaded state of high res image
+
+- previewZoomUrl state property should have onChange handler to handle change in URL possibly during use
+
+

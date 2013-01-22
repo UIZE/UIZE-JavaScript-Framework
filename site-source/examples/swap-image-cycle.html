@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Image Cycle | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="animation Uize.Widget.Swap.Image.Cycle Uize.Widget.Swap.xPresets"/>
+	<meta name="description" content="Create a simple JavaScript slideshow experience with the cycling image swap widget. Each image is revealed with a different swap / transition effect."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Image Cycle
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/swap-image-cycle.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.Swap.Image.Cycle.html"><code>Uize.Widget.Swap.Image.Cycle</code></a> is wired up to provide a simple cycling slideshow of images, with no navigation. The <code>cycleSettings</code> state property is set to the <code>Uize.Widget.Swap.presets</code> property (defined in the <a href="../reference/Uize.Widget.Swap.xPresets.html"><code>Uize.Widget.Swap.xPresets</code></a> module), so each new image shows with a different JavaScript animation transition effect. The buttons below are wired up to call the <code>start</code> and <code>stop</code> instance methods. Click "Start".</p>
+	</div>
+
+	<!-- image cycle HTML layout with UI to be wired up -->
+
+	<center>
+		<a id="page-start" class="buttonLink" href="javascript://">Start</a>
+		<a id="page-stop" class="buttonLink" href="javascript://">Stop</a>
+		<br/>
+		<br/>
+	</center>
+	<div id="page_swapImageCycle" style="position:relative; width:500px; height:357px; background:#000; margin:auto; border-width:8px; border-style:solid;" class="insetBorderColor"></div>
+</div>
+
+<!-- JavaScript code to make the static slideshow HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.Swap.Image.Cycle',
+		'Uize.Widget.Swap.xPresets',
+		'Uize.Node',
+		'Uize.Data',
+		'UizeSite.TestDataPhotos'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** create the Uize.Widget.ImageSwap.Cycle object ***/
+			page.addChild (
+				'swapImageCycle',
+				Uize.Widget.Swap.Image.Cycle,
+				{
+					background:'none',
+					images:Uize.Data.getColumn (UizeSite.TestDataPhotos (),'image'),
+					interval:3000,
+					cycleSettings:Uize.Widget.Swap.presets,
+					crossFade:true,
+					viewContentAlignX:'none',
+					viewContentAlignY:'none',
+					built:false
+				}
+			).fade.set ({duration:1500});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** wire up start/stop links ***/
+			page.wireNode ('start','click',function () {page.children.swapImageCycle.start ()});
+			page.wireNode ('stop','click',function () {page.children.swapImageCycle.stop ()});
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERFORMANCE TEST: Repeat String Approaches | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.example.css"/>
+	<link rel="stylesheet" href="../../css/page.example.test.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	PERFORMANCE TEST: Repeat String Approaches
+	<div class="pageActions">
+		<a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This test page demonstrates that the <code>Uize.String.repeat</code> static method performs about the same as a typical implementation for the majority case, and performs significantly better in specific cases for which this method's implementation has been optimized.</p>
+
+		<p>In the test, the <code>Uize.String.repeat</code> static method is being compared to a typical implementation - <code>6000</code> iterations for each test - given various different parameter values. As you can see from the results, the UIZE implementation's optimizations have a dramatic effect for the special cases.</p>
+	</div>
+
+	<!-- test results -->
+
+	<div class="testResults">
+		<div class="testResultsFooter">
+			<a id="page_performTest" class="button" href="javascript://">PERFORM TEST</a>
+		</div>
+		<div id="page-testResults"></div>
+	</div>
+</div>
+
+<!-- JavaScript code to wire up the page widget and define the test code -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.Test.library',
+		'Uize.String'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example.Test ();
+
+		/*** define the test code by overriding the performTest method of the page widget ***/
+			page.performTest = function (_reportResults) {
+				var
+					_this = this,
+					_totalIterations = 6000,
+					_iterationNo,
+					_optimizedRepeat = Uize.String.repeat
+				;
+				function _typicalRepeat (_stringToRepeat,_repeatTimes) {
+					return new Array (_repeatTimes + 1).join (_stringToRepeat);
+				}
+				_this.executeFunctionsWithPause (
+					[
+						function () {
+							/*** small string, many repeats - typical repeat approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_typicalRepeat ('*',1000)
+								;
+						},
+						function () {
+							/*** small string, many repeats - Uize.String.repeat ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_optimizedRepeat ('*',1000)
+								;
+						},
+						function () {
+							/*** empty string, many repeats - typical repeat approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_typicalRepeat ('',1000)
+								;
+						},
+						function () {
+							/*** empty string, many repeats - Uize.String.repeat ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_optimizedRepeat ('',1000)
+								;
+						},
+						function () {
+							/*** small string, zero repeats - typical repeat approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_typicalRepeat ('*',0)
+								;
+						},
+						function () {
+							/*** small string, zero repeats - Uize.String.repeat ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_optimizedRepeat ('*',0)
+								;
+						},
+						function () {
+							/*** large string, one repeat - typical repeat approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_typicalRepeat ('****************************************',1)
+								;
+						},
+						function () {
+							/*** large string, one repeat - Uize.String.repeat ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_optimizedRepeat ('****************************************',1)
+								;
+						},
+						function () {
+							/*** space, many repeats - typical repeat approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_typicalRepeat (' ',1000)
+								;
+						},
+						function () {
+							/*** space, many repeats - Uize.String.repeat ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+									_optimizedRepeat (' ',1000)
+								;
+						}
+					],
+					1000,
+					function (_executionTimes) {
+						/*** report the results ***/
+							_reportResults (
+								'<h1>Durations</h1>\n' +
+								'<p><b>small string, many repeats - typical repeat approach:</b> ' + _executionTimes [0] + 'ms</p>\n' +
+								'<p><b>small string, many repeats - Uize.String.repeat:</b> ' + _executionTimes [1] + 'ms</p>\n' +
+								'<p><b>empty string, many repeats - typical repeat approach:</b> ' + _executionTimes [2] + 'ms</p>\n' +
+								'<p><b>empty string, many repeats - Uize.String.repeat:</b> ' + _executionTimes [3] + 'ms</p>\n' +
+								'<p><b>small string, zero repeats - typical repeat approach:</b> ' + _executionTimes [4] + 'ms</p>\n' +
+								'<p><b>small string, zero repeats - Uize.String.repeat:</b> ' + _executionTimes [5] + 'ms</p>\n' +
+								'<p><b>large string, one repeat - typical repeat approach:</b> ' + _executionTimes [6] + 'ms</p>\n' +
+								'<p><b>large string, one repeat - Uize.String.repeat:</b> ' + _executionTimes [7] + 'ms</p>\n' +
+								'<p><b>space, many repeats - typical repeat approach:</b> ' + _executionTimes [8] + 'ms</p>\n' +
+								'<p><b>space, many repeats - Uize.String.repeat:</b> ' + _executionTimes [9] + 'ms</p>\n'
+							);
+					}
+				);
+			};
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

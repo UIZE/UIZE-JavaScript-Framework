@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Virtual DOM Events | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="Uize.Node.VirtualEvent"/>
+	<meta name="description" content="A demonstration of various virtual DOM events, such as mouseRest, mouseRemainOver, mouseRemainDown, remainFocused, ctrlClick, shiftClick, and more."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.testPod {
+			float:left;
+			width:146px;
+			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
+			padding:2px;
+			border:1px solid #566;
+			margin:2px;
+		}
+		.testPod .testPodHeading {
+			font-size:11px;
+			text-align:center;
+			letter-spacing:1px;
+			padding:2px 0;
+			color:#000;
+			background:#b7babf url(../images/brushed-metal.jpg) repeat left top;
+			border:1px solid #abb;
+		}
+		.testPod .testPodHeading a:link, .testPod .testPodHeading a:visited {
+			border-bottom:none;
+		}
+		.testPod .testPodTestNode {
+			width:138px;
+			height:58px;
+			font-family:Arial;
+			font-size:11px;
+			font-weight:bold;
+			text-align:center;
+			color:#000;
+			background:#ccc;
+			border:2px solid #788;
+			padding:2px;
+			margin:0;
+			margin-bottom:4px;
+		}
+		.testPod textarea.testPodTestNode {
+			overflow:hidden;
+		}
+		.testPod textarea.testPodTestNode:focus {
+			border:2px solid #ffa200;
+		}
+		.testPod .testPodLog {
+			font-size:10px;
+			color:#000;
+			padding:4px;
+			border:1px solid #899;
+			background:#fff;
+			height:53px;
+			overflow:auto;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Virtual DOM Events
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/virtual-dom-events.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example demonstrates virtual DOM events - such as <code>mouseRest</code>, <code>mouseRemainDown</code>, <code>remainFocused</code>, <code>ctrlClick</code>, etc. - that are available in the <a href="../reference/Uize.Node.VirtualEvent.html"><code>Uize.Node.VirtualEvent</code></a> package.</p>
+
+		<p>Each of the pods below is a test for a type of virtual DOM event. Each pod has a colorful test node, with handlers registered for various virtual DOM events, and with instructions on how to interact with the test node in order to trigger the virtual events. Below each test node is a mini log console, which will fill up with log entries as the virtual DOM events are fired (a clear link lets you clear a log).</p>
+	</div>
+
+	<!-- HTML for virtual DOM event test pods -->
+
+	<div class="testPod">
+		<div class="testPodHeading">mouseRest</div>
+		<div id="page-mouseRestTestNode" class="testPodTestNode" style="background:#77f;">mouse over me and then rest the mouse for more than half a second</div>
+		<div class="testPodHeading">LOG (<a id="page_mouseRestLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_mouseRestLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">mouseRemainOver</div>
+		<div id="page-mouseRemainOverTestNode" class="testPodTestNode" style="background:#0c9;">mouse over me for more than half a second (mouse can keep moving)</div>
+		<div class="testPodHeading">LOG (<a id="page_mouseRemainOverLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_mouseRemainOverLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">mouseRemainDown</div>
+		<div id="page-mouseRemainDownTestNode" class="testPodTestNode" style="background:#eb3;">hold mouse down on me for more than half a second (mouse may move)</div>
+		<div class="testPodHeading">LOG (<a id="page_mouseRemainDownLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_mouseRemainDownLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">mouseRemainUp</div>
+		<div id="page-mouseRemainUpTestNode" class="testPodTestNode" style="background:#f96;">mouse down on me, then release mouse and keep mouse up for more than half a second</div>
+		<div class="testPodHeading">LOG (<a id="page_mouseRemainUpLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_mouseRemainUpLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">mouseRemainOut</div>
+		<div id="page-mouseRemainOutTestNode" class="testPodTestNode" style="background:#9c7;">first mouse over me, then mouse out and keep mouse out for more than half a second</div>
+		<div class="testPodHeading">LOG (<a id="page_mouseRemainOutLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_mouseRemainOutLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">keyRemainDown</div>
+		<textarea id="page-keyRemainDownTestNode" class="testPodTestNode" style="background:#c6f;">first click on me, then press and hold a key down for more than half a second</textarea>
+		<div class="testPodHeading">LOG (<a id="page_keyRemainDownLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_keyRemainDownLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">keyRemainUp</div>
+		<textarea id="page-keyRemainUpTestNode" class="testPodTestNode" style="background:#86f;">click on me, press and release a key, and don't press another for more than half a second</textarea>
+		<div class="testPodHeading">LOG (<a id="page_keyRemainUpLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_keyRemainUpLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">remainFocused</div>
+		<textarea id="page-remainFocusedTestNode" class="testPodTestNode" style="background:#f88;">click on me, and keep this textarea element focused for more than half a second</textarea>
+		<div class="testPodHeading">LOG (<a id="page_remainFocusedLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_remainFocusedLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">remainBlurred</div>
+		<textarea id="page-remainBlurredTestNode" class="testPodTestNode" style="background:#79f;">first click on me, then click outside and keep me blurred for more than half a second</textarea>
+		<div class="testPodHeading">LOG (<a id="page_remainBlurredLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_remainBlurredLog-messages" class="testPodLog"></div>
+	</div>
+
+	<div class="testPod">
+		<div class="testPodHeading">modifier key clicks</div>
+		<div id="page-modClickTestNode" class="testPodTestNode" style="background:#f4c;">click on me, with various different combinations of shift, ctrl, and alt modifier keys pressed</div>
+		<div class="testPodHeading">LOG (<a id="page_modClickLog_clear" href="javascript://">clear</a>)</div>
+		<div id="page_modClickLog-messages" class="testPodLog"></div>
+	</div>
+
+	<br style="clear:left;"/>
+</div>
+
+<!-- JavaScript code to make the HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Node.VirtualEvent',
+		'Uize.Widget.Log'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** wire up virtual DOM events on test nodes ***/
+			function wireUpEventLogger (eventLoggerName,events) {
+				var log = page.addChild (eventLoggerName + 'Log',Uize.Widget.Log,{showTimestamp:false});
+				function wireEvent (eventName) {
+					page.wireNode (eventLoggerName + 'TestNode',eventName,function () {log.log (eventName)});
+				}
+				for (var eventNo = -1, eventsLength = events.length; ++eventNo < eventsLength;)
+					wireEvent (events [eventNo])
+				;
+				log.wireUi ();
+			}
+
+			/*** wire up test for mouseRest ***/
+				wireUpEventLogger (
+					'mouseRest',
+					['mouseRest(500)','mouseRest(1000)','mouseRest(1500)','mouseRest(2000)']
+				);
+
+			/*** wire up test for mouseRemainOver ***/
+				wireUpEventLogger (
+					'mouseRemainOver',
+					['mouseRemainOver(500)','mouseRemainOver(1000)','mouseRemainOver(1500)','mouseRemainOver(2000)']
+				);
+
+			/*** wire up test for mouseRemainDown ***/
+				wireUpEventLogger (
+					'mouseRemainDown',
+					['mouseRemainDown(500)','mouseRemainDown(1000)','mouseRemainDown(1500)','mouseRemainDown(2000)']
+				);
+
+			/*** wire up test for mouseRemainUp ***/
+				wireUpEventLogger (
+					'mouseRemainUp',
+					['mouseRemainUp(500)','mouseRemainUp(1000)','mouseRemainUp(1500)','mouseRemainUp(2000)']
+				);
+
+			/*** wire up test for mouseRemainOut ***/
+				wireUpEventLogger (
+					'mouseRemainOut',
+					['mouseRemainOut(500)','mouseRemainOut(1000)','mouseRemainOut(1500)','mouseRemainOut(2000)']
+				);
+
+			/*** wire up test for keyRemainDown ***/
+				wireUpEventLogger (
+					'keyRemainDown',
+					['keyRemainDown(500)','keyRemainDown(1000)','keyRemainDown(1500)','keyRemainDown(2000)']
+				);
+
+			/*** wire up test for keyRemainUp ***/
+				wireUpEventLogger (
+					'keyRemainUp',
+					['keyRemainUp(500)','keyRemainUp(1000)','keyRemainUp(1500)','keyRemainUp(2000)']
+				);
+
+			/*** wire up test for remainFocused ***/
+				wireUpEventLogger (
+					'remainFocused',
+					['remainFocused(500)','remainFocused(1000)','remainFocused(1500)','remainFocused(2000)']
+				);
+
+			/*** wire up test for remainBlurred ***/
+				wireUpEventLogger (
+					'remainBlurred',
+					['remainBlurred(500)','remainBlurred(1000)','remainBlurred(1500)','remainBlurred(2000)']
+				);
+
+			/*** wire up test for click-with-modifier events ***/
+				wireUpEventLogger (
+					'modClick',
+					[
+						'click()',
+						'shiftClick()',
+						'ctrlClick()',
+						'altClick()',
+						'ctrlAltClick()',
+						'ctrlAltClick()',
+						'shiftAltClick()',
+						'shiftCtrlClick()',
+						'shiftCtrlAltClick()'
+					]
+				);
+	}
+});
+
+</script>
+
+</body>
+</html>
+

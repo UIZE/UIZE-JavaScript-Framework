@@ -1,0 +1,9 @@
+<%@
+	required ('UizeSite.Templates.IndexPage');
+	input ({files:'array'});
+%><%= UizeSite.Templates.IndexPage.process ({
+	title:'Appendixes',
+	description:'The documentation of the UIZE JavaScript Framework includes various appendixes containing supporting information for the framework.',
+	files:input.files
+}) %>
+

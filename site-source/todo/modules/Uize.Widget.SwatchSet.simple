@@ -1,0 +1,6 @@
+This is a proposal document for a =Uize.Widget.SwatchSet= module.
+
+A generalized widget that can wire up a range of nodes as color selector swatches, using either their foreground color, background color, or both for currently selected value.
+
+This class could be used as a helper class in implementation of the ColorCube class.
+

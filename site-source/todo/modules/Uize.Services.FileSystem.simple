@@ -1,0 +1,38 @@
+This is a TO DO document for the =Uize.Services.FileSystem= module.
+
+More Methods to Add
+	rename
+		Lets you rename one or more files or folders.
+
+		Two Possible Implementation Approaches
+			Matcher and Transformer
+				- value matcher (choosing which paths to rename)
+				- value transformer (generate new path)
+
+				Regular Expression Renaming
+					- matcher regular expression
+					- replacer regular expression plus replacement string or function
+
+			General Matcher
+				Support general matcher, which can match on all properties of items...
+
+				- path / uri
+				- access permissions
+				- creation date
+				- modified date
+
+				- different from path matcher, which only gets string value of path to match on
+
+	copy
+		Copy one or more files or folders.
+
+	modify
+		Can modify anything about a file, including...
+
+		- can change permissions
+		- can delete files
+		- can move/rename files
+
+	touch
+		"Touches" a file so that it's modified date is updated to the current time.
+

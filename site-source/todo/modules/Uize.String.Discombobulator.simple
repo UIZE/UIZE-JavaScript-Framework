@@ -1,0 +1,26 @@
+This is a TO DO document for the =Uize.String.Discombobulator= module.
+
+More Ideas
+	Backwording
+
+		BEFORE
+		...................
+		siht si gnidrowkcab
+		...................
+
+		AFTER
+		...................
+		gnidrowkcab si siht
+		...................
+
+	Modes for Intra-word Hyphening
+		Instead of having the number of intra-word hyphens be fixed for all letters, it could increase or decrease from left to right or have a center peack
+
+		.............................................
+		h-y--p---h----e-----n------i-------n--------g
+		h--------y-------p------h-----e----n---i--n-g
+		h----y---p--h-e-n---i----n-----g
+		.............................................
+
+		randomization could be per word or per letter
+

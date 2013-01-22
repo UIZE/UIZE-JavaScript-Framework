@@ -1,0 +1,33 @@
+This is a proposal document for a =Uize.Widget.LinkToThis= module.
+
+A widget that wires up anchored section headings in a document, so that...
+
+- mousing over the heading displays a tooltip that invites the user to click to get a URL/link for that section of the document
+- clicking on the section heading opens up a dialog that contains a URL for that section that can be copied-and-pasted
+- dialog would contain
+	................................................................................
+	document | section of document
+
+		Link to This
+
+		Document Title: [documentTitle]
+		Document URL: [documentUrl] -- in auto-selecting input field
+
+		Section Title: [sectionTitle]
+		Section URL: [sectionUrl] -- in auto-selecting input field
+
+		---------------------------------------------------
+
+		Link to: document | section
+
+		Copy-and-paste HTML: <a href="[documentUrl | sectionUrl]" title="[documentTitle]" target="_blank">[documentTitle | sectionTitle]</a>
+	................................................................................
+
+- or, clicking on the section heading could initiate a third party service, like "Add this"
+
+Uize.Widget.DialogLinkToThis
+	documentUrl
+	documentTitle
+	sectionUrl
+	sectionTitle
+

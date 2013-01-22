@@ -1,0 +1,46 @@
+This is a TO DO document for the =Uize.Doc.Simple= module.
+
+Fix issue with section title aliases and canonicalization
+	An issue right now with the section title aliases feature is that multiple sections with the same display title but different aliases are not canonicalized into the same section.
+
+	This is because the canonicalization is done using the unaltered section title - complete with its section aliases. So, two sections that are ostensibly the same but that have different aliases are not viewed as the same because their titles including aliases are not identical. The solution would be to detect aliases in the title and canonicalize using just the displayed portion of the title.
+
+- improved automatic linking behavior
+	- multiple branch disambiguation syntax (eg. Section : Section : Section)
+	- warnings
+		- for any ambiguity in links to sections of same name
+			- could be a log of how such ambiguities were resolved
+				- link text
+				- link context (section identifier)
+				- resolved link (section identifier)
+		- for links to non-existent sections (ie. dead links)
+		- invalid / unrecognized types of object blocks
+	- should never link the same item more than once in the same paragraph
+	- should ideally never link to the same URL / anchor more than once in the same section (unless, perhaps there was at least one deeper section between the new occurrence and the last occurrence)
+	- should never link to the section within that same section, unless...
+		- the link is in a much later paragraph in that section
+		- the link is in a subsection of that section
+
+- table improvements
+	- add ability to formally describe individual columns
+		- support for horizontal alignment for columns
+		- logical (and limited) styling options for columns (that key into specific CSS classes)
+		- columns can be declared as having SimpleDoc formatted text
+		- ability to specify type for a column's data (eg. completion level, rating, time, etc.)
+	- allow tables to be sortable (column description can qualify sorting behavior)
+	- ability to specify row data as object, rather than array, with named keys identifying columns
+
+- need a more robust solution for defining bullet lists, particularly to allow nested lists, and nested contents within lists
+
+- conversion of special characters to HTML entities
+- formatting issues
+	- nested inline formatting
+	- some formatting is currently supported in inline code segments, which is a problem for use of "*", "+", "_", and other formatting characters in inline code.
+	- there is no formal way to escape the "=" character inside inline code segments
+	- there should be a way to escape all formatting characters
+	- a way to have bolded text that is not auto-linked
+
+Problems
+	- no way to disambiguate for intra-document linking purposes when an instance method and a state property have the same name (happens with =wired= in doc for Uize.Widget, for example)
+
+

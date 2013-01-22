@@ -1,0 +1,13 @@
+This is a TO DO document for the =Uize.Widget.FormElement= module.
+
+- enabled / busy state
+	- for busy state, possibly use hourglass cursor, as with button
+	- for disabled state, possibly add CSS class name to input node
+- should all events fired that are triggered by DOM events put the DOM event into a domEvent property of the event object?
+- move validation mechanism into this class
+- possibly rename to something more concise (fewer syllables would be nice)
+	- Uize.Widget.FormField
+	- Uize.Widget.FormInput
+- should implement a values state property for select type (single and multi-select)
+- support readOnly state? Pick up initial enabled value from readOnly property of input node?
+

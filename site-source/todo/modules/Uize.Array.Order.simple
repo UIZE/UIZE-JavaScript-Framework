@@ -1,0 +1,62 @@
+This is a TO DO document for the =Uize.Array.Order= module.
+
+New 'binary' Mode for Uize.Array.Order.reorder
+	Reorders the array in a binary search pattern.
+
+	BEFORE
+	.............
+	1,2,3,4,5,6,7
+	.............
+
+	AFTER
+	.............
+	4,2,6,1,3,5,7
+	.............
+
+	NOTES
+	- modes for order of iterating through at any depth level?
+
+New 'evens odds' Mode for Uize.Array.Order.reorder
+	BEFORE
+	.............
+	1,2,3,4,5,6,7
+	.............
+
+	AFTER
+	.............
+	2,4,6,1,3,5,7
+	.............
+
+	NOTES
+	- what about 'evens reverse odds'?
+	- is this a special case of a more general algorithm? What about every third?
+		1,2,3,4,5,6,7
+		1,4,7,2,5,3,6
+		- for every successive scan, can the direction be different?
+
+New 'odds evens' Mode for Uize.Array.Order.reorder
+
+	BEFORE
+	.............
+	1,2,3,4,5,6,7
+	.............
+
+	AFTER
+	.............
+	1,3,5,7,2,4,6
+	.............
+
+	NOTES
+	- what about 'odds reverse evens'?
+
+Dedicated Methods?
+
+	- Uize.Array.Order.binary
+	- Uize.Array.Order.evensOdds
+	- Uize.Array.Order.oddsEvens
+
+Primary, Secondary, or Even Tertiary Ordering?
+	In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.
+
+	Then, why not support arbitrary levels of subordering?
+

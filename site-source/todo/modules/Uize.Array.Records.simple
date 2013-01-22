@@ -1,0 +1,9 @@
+This is a proposal document for a =Uize.Array.Records= module.
+
+Uize.Array.Records.getColumn -- migrated from Uize.Data.getColumn
+Uize.Array.Records.findRows -- migrated from Uize.Data.findRows
+Uize.Array.Records.removeMatching
+	delete all records that match (with configurable match function)
+Uize.Array.Records.retainMatching
+	delete all records that match (with configurable match function)
+

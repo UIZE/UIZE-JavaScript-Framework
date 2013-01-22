@@ -1,0 +1,5 @@
+This is a TO DO document for the =Uize.Widget.Scrolly= module.
+
+TODO
+- figure out a better way to handle the issue where dimensions get reported as 0,0 if the scrolly is display:none at the time that its dimensions must be evaluated
+

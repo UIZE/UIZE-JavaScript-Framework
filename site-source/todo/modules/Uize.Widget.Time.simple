@@ -1,0 +1,7 @@
+This is a proposal document for a =Uize.Widget.Time= module.
+
+A widget for displaying the current time.
+
+NOTES
+- support for configurable digit widget class, so that a time widget could employ effects
+

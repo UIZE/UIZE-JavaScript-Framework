@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Tabbed Interface With Fade | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="featured animation widget Uize.Widget.Options.Tabbed.Fading"/>
+	<meta name="description" content="Everyone's seen a basic tabbed interface. Why not add some pizazz to your tabs with a JavaScript animation cross-fade effect! This demo shows you how."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.tabs.css"/>
+	<link rel="stylesheet" href="css/tabbed-interface.css"/>
+	<style type="text/css">
+		.tabShell {
+			width:500px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Tabbed Interface With Fade
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/tabbed-interface-with-fade.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, the markup for a tabbed interface is being wired up by an instance of <a href="../reference/Uize.Widget.Options.Tabbed.html"><code>Uize.Widget.Options.Tabbed</code></a>. Below the tabs are some links that execute snippets of code to demonstrate the programmatic interface of the widget. Because the tabs widget is a subclass of <a href="../reference/Uize.Widget.Options.html"><code>Uize.Widget.Options</code></a>, it provides a <code>value</code> state property in its interface. The <code>Changed.value</code> instance event for this property can be used to watch for changes in the selected tab. The property can be set to programmatically change the selected tab. Interact with both the tabs UI and the test links to see how they affect one another. Switching from one tab to another is accompanied by a JavaScript animation transition effect.</p>
+	</div>
+
+	<!-- tabs UI -->
+
+	<div class="tabShell">
+		<div class="tabStubShell">
+			<a id="page_tabs_option0" class="tabStub" href="javascript://">APPLES</a>
+			<a id="page_tabs_option1" class="tabStub" href="javascript://">DATES</a>
+			<a id="page_tabs_option2" class="tabStub" href="javascript://">MANGOS</a>
+			<a id="page_tabs_option4" class="tabStub" href="javascript://">PEARS</a>
+			<a id="page_tabs_option3" class="tabStub" href="javascript://">PLUMS</a>
+			<br style="clear:left;"/>
+		</div>
+		<div class="tabBodyShell">
+			<div id="page_tabs-option0TabBody" class="tabBodyInactive" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228935673692621070&max_dim=500);">
+				APPLES
+			</div>
+			<div id="page_tabs-option1TabBody" class="tabBodyInactive" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228897711281453018&max_dim=500);">
+				DATES
+			</div>
+			<div id="page_tabs-option2TabBody" class="tabBodyInactive" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228428092943531202&max_dim=500);">
+				MANGOS
+			</div>
+			<div id="page_tabs-option4TabBody" class="tabBodyInactive" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228197023342145752&max_dim=500);">
+				PEARS
+			</div>
+			<div id="page_tabs-option3TabBody" class="tabBodyInactive" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228984929702082003&max_dim=500);">
+				PLUMS
+			</div>
+		</div>
+	</div>
+
+	<!-- programmatic interface examples -->
+
+	<div class="programmaticInterface">
+		<p><b>tabs.get ('value') == </b>'<span id="page-tabsValue"></span>'</p>
+		<p><b>tabs.get ('tentativeValue') == </b>'<span id="page-tabsTentativeValue"></span>'</p>
+		<p>
+			<b>Set the value for the tabs widget: </b>
+			<a href="javascript://" class="linkedJs">tabs.set ({value:'apples'})</a>
+			&nbsp;,&nbsp;
+			<a href="javascript://" class="linkedJs">tabs.set ({value:'grapefruits'})</a>
+			&nbsp;,&nbsp;
+			<a href="javascript://" class="linkedJs">tabs.set ({value:'mangos'})</a>
+			&nbsp;,&nbsp;
+			<a href="javascript://" class="linkedJs">tabs.set ({value:'plums'})</a>
+			&nbsp;,&nbsp;
+			<a href="javascript://" class="linkedJs">tabs.set ({value:'strawberries'})</a>
+		</p>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.Options.Tabbed.Fading'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** add the tabs child widget ***/
+			var tabs = page.addChild (
+				'tabs',
+				Uize.Widget.Options.Tabbed.Fading,
+				{
+					bodyClassActive:'tabBodyActive',
+					bodyClassInactive:'tabBodyInactive'
+				}
+			);
+
+		/*** some code for demonstrating the widget's programmatic interface ***/
+			tabs.wire ({
+				'Changed.value':
+					function () {page.setNodeInnerHtml ('tabsValue',tabs)},
+				'Changed.tentativeValue':
+					function () {page.setNodeInnerHtml ('tabsTentativeValue',tabs.get ('tentativeValue'))}
+			});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialize the tabs widget's values ***/
+			tabs.set ({
+				values:['apples','grapefruits','mangos','plums','strawberries'],
+				value:'apples'
+			});
+	}
+});
+
+</script>
+
+</body>
+</html>
+

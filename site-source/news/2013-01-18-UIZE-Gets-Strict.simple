@@ -1,0 +1,89 @@
+The UIZE JavaScript Framework has been updated to use and be compliant with [[https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode][JavaScript strict mode]].
+
+About JavaScript Strict Mode
+	JavaScript strict mode was introduced as a way of helping to pave the way to future versions of the ECMAScript language (aka JavaScript / JScript).
+
+	Preparing for the Future
+		Opting in to JavaScript strict mode is a way of restricting what can be done in one's code in order to ensure that one's code will be compliant with newer versions of the language when they become available.
+
+		When using strict mode, certain code practices that were be permitted with earlier versions of JavaScript, but that are proscribed by the upcoming versions, will cause JavaScript errors to be thrown. In a nutshell, you basically want to ensure now that your codebase is happy when using JavaScript strict mode in order to minimize the future pain of having to make potentially more serious and costly retrofits down the line. In this spirit, the entire codebase of the UIZE JavaScript Framework is written to use strict mode.
+
+	Online Resources
+		There are numerous impacts that arise from using JavaScript strict mode.
+
+		Rather than go into detail on these impacts here, please spend some time reviewing some of the articles available online on the subject...
+
+		- [[https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode][Strict mode (Mozilla Developer Network)]]
+		- [[http://msdn.microsoft.com/en-us/library/ie/br230269%28v=vs.94%29.aspx][Strict mode (Microsoft Developer Network)]]
+		- [[http://www.nczonline.net/blog/2012/03/13/its-time-to-start-using-javascript-strict-mode/][It’s time to start using JavaScript strict mode]], by Nicholas Zakas
+
+What's Been Updated
+	Pretty much the entire codebase of the UIZE JavaScript Framework has been updated.
+
+	This includes...
+
+	- all the core modules of the framework, including unit test modules
+	- all the modules used by the UIZE Web site
+	- all template modules compiled from =.jst= files
+	- pretty much all of the pages of the UIZE Web site that contain inline JavaScript code
+	- all the example pages (excluding some that didn't have substantial inline JavaScript code)
+	- all of the performance test pages
+
+Issues Discovered and Fixed
+	In the course of updating the UIZE codebase to use JavaScript strict mode, numerous issues were discovered and fixed.
+
+	Compared to the size of the codebase, relatively few issues were found, however. Those found can be divided into the following categories...
+
+	Function Statements Nested Inside Blocks
+		Of the issues addressed, by far the most common was function statements nested inside conditional blocks or loop blocks - something that is not permitted in strict mode.
+
+		Instances of this issue are easy enough to address by instead using anonymous function expressions and assigning the function reference results to local variables.
+
+		NON-COMPLIANT
+		...........................
+		if (someCondition) {
+			function myFunction () {
+				// do stuff
+			}
+			// ... ... ...
+			myFunction ();
+		}
+		...........................
+
+		COMPLIANT
+		.................................
+		if (someCondition) {
+			var myFunction = function () {
+				// do stuff
+			};
+			// ... ... ...
+			myFunction ();
+		}
+		.................................
+
+	Accidental Globals
+		Beyond the handful of modules that had `function statements nested inside blocks`, a few cases of accidental globals were uncovered by running the strict mode code.
+
+		These few cases were fixed.
+
+	Broken Unit Test Module
+		An issue was discovered with the =Uize.Test.Uize.Class= unit test module, involving a couple of test cases that were declaring a state property with the private name of "name".
+
+		This issue is a little complicated to explain here. Suffice it to say, the unit test module was being lazy and not following the general convention of using private names for state properties that are flagged for scrunching and different from the public names.
+
+		The issue was easy to fix by simply modifying the unit test, but it did reveal a somewhat esoteric edge case restriction based upon a combination of strict mode behavior and how state properties are implemented in UIZE. In a nutshell, you can't declare a state property whose private name is "name", having to do with =name= being a read-only property of functions in newer versions of JavaScript, and strict mode changing behavior to throwing errors on attempts to set the value for this property.
+
+In Conclusion
+	In conclusion, the UIZE codebase is now better prepared for future versions of JavaScript while still being compatible with current implementations.
+
+	Unit Tests All Pass
+		Upon upgrading the codebase to use strict mode, care was taken to ensure that all the unit tests pass, and a testing sweep was made through the example pages to verify that all functionality demonstrated in them is still healthy.
+
+	More Details
+		For more complete details on UIZE and JavaScript strict mode, and to dig deeper into the specifics of caveats and restrictions, consult the explainer [[../explainers/javascript-strict-mode.html][JavaScript Strict Mode]].
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-18 - UIZE Gets Strict
+....................................................................................

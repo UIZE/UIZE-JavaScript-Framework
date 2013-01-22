@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Basic Slider | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="animation Uize.Widget.Bar.Slider Uize.Fade.xFactory"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Basic Slider
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/slider.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div id="blah" class="explanation">
+		<p>In this very basic slider example, an instance of <a href="../reference/Uize.Widget.Bar.Slider.html"><code>Uize.Widget.Bar.Slider</code></a> is being wired up to slider markup in the page. The slider simply allows for selection of a value in the range of 0 to 200. The markup in the page helps to illustrate the DOM structure and implied nodes expected by the <code>Uize.Widget.Bar.Slider</code> class.</p>
+	</div>
+
+	<!-- slider UI -->
+
+	<div style="position:relative; left:0px; top:0px; width:29px; height:235px; background:#888; margin:auto;">
+		<div id="page_slider-track" style="position:absolute; left:2px; top:2px; width:25px; height:215px; background:url(../js/Uize_Widget_Bar_Slider/track-bg-vertical.gif);">
+			<img id="page_slider-knob" src="../js/Uize_Widget_Bar_Slider/knob-vertical.gif" style="position:absolute; left:0px; top:0px; width:25px; height:15px; cursor:n-resize;" border="0" hspace="0" vspace="0" alt=""/>
+		</div>
+		<div id="page_slider-value" style="position:absolute; left:2px; top:219px; width:25px; height:14px; font-family:Arial; font-size:12px; color:#000; background:#ccc; text-align:center;"></div>
+	</div>
+	<br/>
+
+	<!-- programmatic interface examples -->
+
+	<div class="programmaticInterface">
+		<ul>
+			<li>Canonicalized to Equivalent Signature
+				<ul>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade (slider,0,200,2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:slider,handler:'set'},{value:0},{value:200},2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperty (slider,'value',0,200,2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperties (slider,{value:0},{value:200},2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (slider,'set',{value:0},{value:200},2000)</a></li>
+				</ul>
+			</li>
+			<li>Equivalent, But Not Matching Above
+				<ul>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade (function (value) {slider.set ({value:value})},0,200,2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade (function (properties) {slider.set (properties)},{value:0},{value:200},2000)</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static slider HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.Bar.Slider',
+		'Uize.Fade.xFactory'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** add the Uize.Widget.Bar.Slider child widget ***/
+			var slider = page.addChild ('slider',Uize.Widget.Bar.Slider,{minValue:0,maxValue:200});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

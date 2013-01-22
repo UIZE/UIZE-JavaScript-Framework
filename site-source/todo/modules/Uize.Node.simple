@@ -1,0 +1,211 @@
+This is a TO DO document for the =Uize.Node= module.
+
+Proposed Simplified Interface
+	The following proposed interface aims to address the desire amongst Web developers for easier and more concise ways to access and manipulate DOM elements.
+
+	The Uize.Node Object
+		A convenient proxy wrapper for DOM objects that allows methods to be called without always dereferencing the static methods on the =Uize.Node= package and having to specify the =node blob= in each call.
+
+		EXAMPLE
+		.....................................
+		var myNode = Uize.Node ('#myNodeId');
+		myNode.style ({
+			border: '1px',
+			background: '#ccc'
+		});
+		myNode.display (false);
+		myNode.on (
+			'click',
+			function () {
+				// do something
+			}
+		);
+		.....................................
+
+	Node Blob Management
+		The =Uize.Node= object provides methods for managing the set of nodes that make up the node blob that the object represents.
+
+		- =nodeBlobOBJ.addToBlob= - lets you add more nodes to a node blob
+		- =nodeBlobOBJ.clearBlob= - clears the node blob of all its contents
+		- =nodeBlobOBJ.removeFromBlob= - removes the specified nodes from the node blob
+		- =nodeBlobOBJ.setBlob= - lets you set the nodes that make up the node blob
+
+	Versatile Setter and Getter Signatures
+
+		Getting Values
+			`Get the Value for a Single Style Property`
+			.............................................................................
+			var stylePropertyValueSTR = Uize.Node.style (nodeBLOB, stylePropertyNameSTR);
+			.............................................................................
+
+			`Get the Values for Multiple Style Properties as an Array`
+			.......................................................................................
+			var stylePropertiesValuesARRAY = Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY);
+			.......................................................................................
+
+		Setting Values
+			`Set the Values for Multiple Style Properties as an Object`
+			...............................................
+			Uize.Node.style (nodeBLOB, stylePropertiesOBJ);
+			...............................................
+
+			`Set the Values for Multiple Style Properties, Specifying Names And Values Separately`
+			..................................................................................
+			Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY, stylePropertiesValuesARRAY);
+			..................................................................................
+
+			`Set the Same Value For Multiple Style Properties`
+			...................................................................................
+			Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY, stylePropertyValuePRIMITIVE);
+			...................................................................................
+
+	Shortened Method Names
+		.
+
+		- =Uize.Node.style= - set the values for one or more style properties for all the nodes of a node blob, or get the value for a single style property
+		- =Uize.Node.prop= - set the value for one or more properties, or get the value for a single property
+		- =Uize.Node.attr= - set the value for one or more attributes, or get the value for a single attribute
+		- =Uize.Node.on= - wire event handlers for one or more DOM events
+		- =Uize.Node.text= - set the text of a DOM node, or get the text of a DOM node
+		- =Uize.Node.value= - set the value for a DOM node, or get the value for a DOM node
+		- =Uize.Node.html= - set the inner HTML for a node blob
+		- =Uize.Node.clip= - set the clip rect for all the nodes of a node blob
+
+	Convenience Event Wiring Methods
+		As a convenience for developers, short form wiring methods are provided for all the major DOM event types.
+
+		- =Uize.Node.onclick=
+		- =Uize.Node.onmouseover=
+		- =Uize.Node.onmouseout=
+		- =Uize.Node.onmousedown=
+		- =Uize.Node.onmouseup=
+		- =Uize.Node.ondblclick=
+		- =Uize.Node.onchange=
+		- =Uize.Node.onload=
+		- =Uize.Node.onerror=
+
+	Combo Setter and Getter Methods
+		.
+
+	Method Chaining
+		To appease developers who are fond of method chaining, all modify type methods that don't need to return a result will return a reference to the `node blob`.
+
+		EXAMPLE
+		...................................................
+		Uize.Node ('#myNodeId')
+			.style ({display: 'none', position: 'absolute'})
+			.on (
+				'click',
+				function () {
+					// handle click event
+				}
+			)
+		;
+		...................................................
+
+	Uize.Node.style
+		Set or get style for a `node blob`.
+
+		SYNTAX
+		........................................................................
+		Uize.Node.style ('#myNodeId', 'display', 'none');
+		Uize.Node.style ('#myNodeId', {display: 'none', position: 'absolute'});
+		var nodeDisplay = Uize.Node.style ('#myNodeId', 'display');
+
+		Uize.Node ('#myNodeId').style ('display', 'none');
+		Uize.Node ('#myNodeId').style ({display: 'none', position: 'absolute'});
+		var nodeDisplay = Uize.Node ('#myNodeId').style ('display');
+		........................................................................
+
+	Uize.Node.on
+		A short form for the =wire= method.
+
+		SYNTAX
+		............................
+		Uize.Node.on (
+			'#myNodeId',
+			'click',
+			function () {
+				// handle click event
+			}
+		);
+
+		Uize.Node ('#myNodeId').on (
+			'click',
+			function () {
+				// handle click event
+			}
+		);
+		............................
+
+Proposed Shortenings
+	- Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node
+
+Uize.Node.setValue & Uize.Node.getValue
+	- respect disabled property?
+		- what about disabled select options, radios?
+		- browsers are not supposed to send values for disabled form elements to the form processor, so should getValue have special handling to mimic this behavior?
+
+- NEW WIRE EVENTS MECHANISM
+	- consider providing a way of unwiring wirings by specifying the wiring IDs, and returning wiring IDs from Uize.Node.wire and myWidget.wire
+
+	**** make sure that Uize.Node.wire handles rewiring the same event for the same node
+		1) when is this likely to happen? what code might do this?
+		2) how would I accomplish this without Uize.Node.wire becoming too slow?
+
+	- make changes so that wired nodes are only remembered by ID (make IDs on the fly for nodes without)
+	- for all widget classes...
+		- make sure no events are being wired in a way that they wouldn't get unwired
+		- look at moving more child widget creation into constructor rather than wireUi
+
+Uize.Node.display
+	- IDEA: respecting initial non-none display value
+		................................................................................
+		var currentDisplay = Uize.Node.getStyle (node,'display');
+		if (mustDisplay != (currentDisplay != 'none')) {
+			if (mustDisplay) {
+				node.style.display = node.OLDDISPLAY || 'block';
+			} else {
+				node.OLDDISPLAY = currentDisplay;
+				node.style.display = 'none';
+			}
+		}
+		................................................................................
+
+Uize.Node.getProperty
+	- should support string for property name, or object for properties
+
+Uize.Node.find
+	- provide a way to search through a specified set of nodes (so that one can chain searches)
+	- think about supporting node blob for root, or test object for root (ie. invoke find)
+	- think about testing...
+		- style properties
+		- calculated / computed style properties
+		- element attributes (as opposed to reflected properties)
+	- how would one do OR finds? (basically, merging multiple finds)
+	- idea: optimization for when tagName is non-simple type (could test tagName against a known list of tag names and perform successive getElementsByTagName on result set of tag names)
+
+- facility for specifying a set of nodes using a match object (eg {class:/^heading\d+$/})
+
+- methods that should coerce use of valueOf interface
+	- Uize.Node.setProperties
+
+Uize.Node.setStyle
+	- when setting opacity, if opacity is 1, set opacity properties to '' (empty string). Some browsers seem to still be processing opacity when set to 1, which is slowing down render time.
+
+Uize.Node.getStyle
+	- it would be useful to have a way to parse out a number from style attribute values that are denominated in px (eg. 128px -> 128, empty string -> 0)
+
+Uize.Node.injectHtml
+	- support a node reference, or document fragment for html parameter
+
+- for Uize.Node.getCoords, consider deprecating some of the properties of the return object (eg. right, bottom) to simplify the interface (first investigate extent of usage)
+- for Uize.Node.isNode, is it possible to use instanceof in some way? What about the cross frames issue in FF?
+- consider "fixing" Uize.Node.doRectanglesOverlap method to be able to work as well for floating point and relative coordinates (ie. not just pixels). Could it then be used in Ben's DT code?
+- for Uize.Node.getByMatch, consider supporting regular expressions in the properties match object
+- rename: getDimensions -> getSize
+- new methods
+	- setSize
+- Uize.Node.wire to support array for _eventName parameters (ie. change to just _event)
+
+

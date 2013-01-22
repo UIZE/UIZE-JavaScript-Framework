@@ -1,0 +1,28 @@
+Support for ad hoc state properties for classes, as implemented in the =Uize.Class= base class module, has been improved so that an ad hoc property created on an instance of a class no longer affects the underlying class.
+
+Prior to this change, when creating an ad hoc state property on an instance by setting a value for the property using the =set= instance method, the new property would be declared on the class. This had the side effect of making all subsequent instances of that class have the ad hoc property. This behavior has some negative implications and is deemed undesirable. With the new behavior, ad hoc properties created on different instances are now discreet - there is no interaction across instances resulting from creating ad hoc properties.
+
+The changed behavior is best illustrated with an example...
+
+EXAMPLE
+......................................................................................................
+var
+	MyClass = Uize.Class.subclass (),
+	myClassInstance1 = MyClass ()
+;
+myClassInstance1.set ({foo:'bar'}); // create an ad hoc property on myClassInstance1
+var myClassInstance2 = MyClass ();
+alert ('foo' in myClassInstance2.get ()); // would alert true with old behavior, now would alert false
+......................................................................................................
+
+In the above example, a class =MyClass= is being created. With the instance =myClassInstance1= we have created, we have created the ad hoc property =foo= by setting a value for this undeclared property using the =set= instance method. Then, we have created another instance, =myClassInstance2=. When we call the =get= method on this instance and specify no parameters, we get an object that contains values for all the state properties of the instance. With the old behavior, the object would have contained the property =foo= set to the value =undefined=. This is because the ad hoc property created on =myClassInstance1= would have been automatically declared on the class. With the new behavior, the object will not even contain the property =foo=, because the ad hoc property created on =myClassInstance1= is no longer automatically declared on the class.
+
+The new behavior is particularly useful when using state properties to represent conditions, and where one might set conditions as having been met in an ad hoc way for an instance, without declaring the condition state properties on the class. It is also useful in cases where one is using a class that relies on state properties as an underlying mechanism, such as is the case with the =Uize.Util.Needs= class. When creating instances of the =Uize.Util.Needs= class, it might be quite common for one instance to have an entirely different set of needs and providers as another instance. Because the needs and neededness states are implemented using state properties, it follows that one instance may have an entirely different set of state properties than another instance. In such cases, it is desirable that creating ad hoc properties on one instance in support of the needs mechanism doesn't result in those properties being present in an unrelated instance.
+
+Unit tests have been created to establish that this behavior works as intended and to ensure that this behavior continues to work as intended.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-12-22 - New Behavior for Ad Hoc Properties
+....................................................................................

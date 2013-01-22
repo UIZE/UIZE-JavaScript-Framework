@@ -1,0 +1,5 @@
+This is a TO DO document for the =Uize.Data.Csv= module.
+
+TODO
+- test performance of parser using regular expressions
+

@@ -1,0 +1,6 @@
+This is a TO DO document for the =Uize.Widget.Stretchy= module.
+
+TODO
+- make it work with Ajax'ed components
+- make it work with a single div that's hidden
+

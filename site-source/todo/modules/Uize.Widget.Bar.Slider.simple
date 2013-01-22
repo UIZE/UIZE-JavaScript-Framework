@@ -1,0 +1,22 @@
+This is a TO DO document for the =Uize.Widget.Bar.Slider= module.
+
+- refactor code to use Drag Rest event of Uize.Widget.Drag class
+
+- click on track to move continuously
+	- must be able to disable this (for when the coordinate system fails hopelessly)
+	- problem: requires a bunch of positioning code in order to work
+
+- implement support for disabled state
+- support for auto orientation (based upon aspect ratio of track)
+
+- support for display boxes for min and max range values
+
+- consider making knob a button, so that it can support mouseover, mousedown, and disabled display states
+- value display in knob (while dragging, mousing over knob, etc.)
+- switch to allow coerceing fine adjustment inbetween valid values
+- sticky value notches (like for a center position)?
+- calibration marks
+- should observe enabled state
+- capture calculated value (rather than recalculating each time it is needed)
+
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Hierarchical Selector | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="form Uize.Widget.Tree.Select"/>
+	<meta name="description" content="See a demo of the tree select widget being used to let the user choose a value from a hierarchical value list using the browser's built-in select tag."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+
+	<style type="text/css">
+		select {
+			display:block;
+			width:200px;
+			margin:3px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Hierarchical Selector
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/hierarchical-selector.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<!-- load in the JavaScript libraries that define the animals and plants hierarchical lists -->
+
+<script type="text/javascript" src="js/animals.js"></script>
+<script type="text/javascript" src="js/plants.js"></script>
+
+<div class="main">
+	<!-- select nodes that make up the UI of the Uize.Widget.SelectTree object -->
+
+	<center>
+	<a id="page-animalsLink" href="javascript://" class="buttonLink" title="click to populate selector with a hierarchy of animals (the initial default)">ANIMALS</a>&nbsp;
+	<a id="page-plantsLink" href="javascript://" class="buttonLink" title="click to populate selector with a hierarchy of plants">PLANTS</a><br/>
+	<br/>
+	<form>
+		<select id="page_selectTree-level1"></select>
+		<select id="page_selectTree-level2"></select>
+		<select id="page_selectTree-level3"></select>
+		<select id="page_selectTree-level4"></select>
+		<select id="page_selectTree-level5"></select>
+		<input id="page_selectTree-submitButton" type="submit" value="SUBMIT" onclick="return false">
+	</form>
+	</center>
+</div>
+
+<!-- JavaScript code to make the static tree select UI "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Node',
+		'Uize.Widget.Tree.Select'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** create the Uize.Widget.SelectTree object ***/
+			var selectTree = page.addChild ('selectTree',Uize.Widget.Tree.Select,{items:animals});
+
+		/*** wire up items selector links ***/
+			page.wireNode ('animalsLink','click',function () {selectTree.set ({items:animals})});
+			page.wireNode ('plantsLink','click',function () {selectTree.set ({items:plants})});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

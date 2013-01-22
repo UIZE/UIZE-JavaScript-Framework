@@ -1,0 +1,8 @@
+This is a TO DO document for the =Uize.Util.Coupler= module.
+
+- the loop approach to coupling more than two instances is not robust, because...
+	- some instance in the chain may already have the correct value for one of the changing properties, and so the change from the master isn't guaranteed to propagate through the chain
+	- some instance in the chain may have a conformer that modifies the value of a changing property, and so there could be drift as change propagates through the chain
+	- it would be better to set all others directly from the master, rather than the telephone game approach
+- handle property names that contain quotes or backslashes
+

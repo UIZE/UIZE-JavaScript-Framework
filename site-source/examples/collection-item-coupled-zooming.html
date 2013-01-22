@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Coupled Zooming Collection Items | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="animation zoom Uize.Widget.CollectionItem.Zooming Uize.Util.Coupler"/>
+	<meta name="description" content="See how two instances of the zooming collection item widget can be coupled together to give you a side-by-side zoomed in comparison of two images."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.thumbnails {
+			width:306px;
+			margin:auto;
+		}
+		.thumbnails .thumbnail {
+			display:block;
+			position:relative;
+			float:left;
+			margin:0 4px 4px 4px;
+			border-width:10px;
+			border-style:solid;
+			overflow:hidden;
+		}
+		.thumbnails .thumbnailHeading {
+			display:block;
+			float:left;
+			margin:4px 4px 0 4px;
+			width:143px;
+			text-align:center;
+			letter-spacing:0;
+			font-size:10px;
+			padding:3px 0;
+		}
+		.thumbnails .thumbnail a, .thumbnails .thumbnail a img {
+			display:block;
+			position:relative;
+			border:none;
+		}
+		.thumbnails .thumbnail, .thumbnails .thumbnail a, .thumbnails .thumbnail a img {
+			width:125px;
+			height:89px;
+		}
+		.clearFloatLeft {
+			clear:left;
+			height:0;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Coupled Zooming Collection Items
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/collection-item-coupled-zooming.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, the <a href="../reference/Uize.Widget.CollectionItem.Zooming.html"><code>Uize.Widget.CollectionItem.Zooming</code></a> widget class is being used to add a JavaScript animation zoom in effect to a pair of thumbnails. The two instances are coupled together using an instance of the <a href="../reference/Uize.Util.Coupler.html"><code>Uize.Util.Coupler</code></a> class, so that the values of the <code>alignX</code>, <code>alignY</code>, and <code>inUse</code> state properties are synchronized between the two. This means that if you rest the mouse over one of the thumbnails and the zoom in behavior is activated for that instance, it will also be activated for the other instance. Similarly, when you move the mouse around on one of the instances, the other instance follows the lead of the one you're mousing over. This coupling facility is made possible as a result of the state oriented design of the UIZE JavaScript Framework. Using the <code>Uize.Util.Coupler</code> class is easy: all you have to do is create an instance of it, specifying which properties of which instances you would like to be coupled together. This example demonstrates coupling two instances, but the <code>Uize.Util.Coupler</code> class supports coupling an arbitrary number of instances.</p>
+
+		<p>Now, the widget on the left uses a low resolution image and stretches it larger for the zoomed in effect. The widget on the right uses a <b>high</b> resolution image. By coupling the two widgets together so that the one drives the other, you can inspect the zoomed in image on both sides at once, and you can compare them region by region to see the affect of the browser's image stretching process. Load this example in different browsers to see how the image stretching of different browsers stack up. Finally, a checkbox is provided to easily activate or de-activate the coupling of the two instances. Try interacting with the widgets in both modes: coupled, and decoupled.</p>
+	</div>
+
+	<center style="margin:7px 0;">
+		<input id="page-coupled" type="checkbox" checked="checked"/><label for="page-coupled">coupled</label>
+	</center>
+
+	<div id="thumbnails" class="thumbnails">
+		<div class="exampleSectionHeading thumbnailHeading">
+			Low Res, Scaled
+		</div>
+		<div class="exampleSectionHeading thumbnailHeading">
+			High Resolution
+		</div>
+		<div style="clear:left;"></div>
+		<div id="page_item0" class="thumbnail insetBorderColor">
+			<a id="page_item0-previewShell" href="http://www.tomkidding.com/artworks/photos/shadow-of-the-past.html">
+				<img id="page_item0-preview" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228026937512483785&max_dim=125" alt=""/>
+			</a>
+		</div>
+		<div id="page_item1" class="thumbnail insetBorderColor">
+			<a id="page_item1-previewShell" href="http://www.tomkidding.com/artworks/photos/shadow-of-the-past.html">
+				<img id="page_item1-preview" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228026937512483785&max_dim=125" alt=""/>
+			</a>
+		</div>
+		<div style="clear:left;"></div>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.CollectionItem.Zooming',
+		'Uize.Util.Coupler'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** create the two collection item widgets ***/
+			var
+				item0 = page.addChild (
+					'item0',
+					Uize.Widget.CollectionItem.Zooming,
+					{
+						previewZoomUrl:function () {return this.get ('previewUrl')},
+						zoomPower:4
+					}
+				),
+				item1 = page.addChild (
+					'item1',
+					Uize.Widget.CollectionItem.Zooming,
+					{
+						previewZoomUrl:
+							function () {return this.get ('previewUrl').replace ('max_dim=125','max_dim=500')},
+						zoomPower:4
+					}
+				)
+			;
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** couple the alignX, alignY, inUse properties between the two collection items ***/
+			var coupler = Uize.Util.Coupler ({
+				instances:[item0,item1],
+				properties:['alignX','alignY','inUse']
+			});
+
+		/*** wire up the coupled checkbox ***/
+			function updateCoupledFromCheckbox () {coupler.set ({coupled:page.getNodeValue ('coupled')})};
+			page.wireNode ('coupled','click',updateCoupledFromCheckbox);
+			updateCoupledFromCheckbox ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

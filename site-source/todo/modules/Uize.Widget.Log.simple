@@ -1,0 +1,20 @@
+This is a TO DO document for the =Uize.Widget.Log= module.
+
+Features
+	- ability to have a display template for each log item
+		- can be string or function
+			- string, to be used with substitution
+			- function (which can be a compiled template)
+		- timestamp format ability
+		- ability to have different display templates for different types of items
+	- ability to display new items at top or bottom
+	- ability to filter display of log items (by type or other properties)
+	- ability to disable logging
+	- automatic timestamping of log items
+	- display of line numbers in log
+	- color coding?
+
+NOTES
+- big question: should a log really just be a dynamic collection, where each log message is a collection item?
+	- lots of benefits would accrue by building advanced logging around the collection architecture
+

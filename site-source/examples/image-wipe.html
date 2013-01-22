@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Widget.ImageWipe | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="featured animation Uize.Widget.ImageWipe.xPresets"/>
+	<meta name="description" content="See stunning image wipe animation effects you didn't believe possible with JavaScript. Choose from dozens of presets. Tweak values to make your own."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.tabs.css"/>
+	<link rel="stylesheet" href="css/selector-links.css"/>
+	<link rel="stylesheet" href="../examples/css/params-table.css"/>
+	<link rel="stylesheet" href="../examples/css/params-inspector.css"/>
+	<style type="text/css">
+		#page_paramsInspector_preview {
+			width:240px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Uize.Widget.ImageWipe
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/image-wipe.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ImageWipe.html"><code>Uize.Widget.ImageWipe</code></a> class has been wired up to a <code>div</code> in the document. This class provides an elaborate and highly configurable JavaScript animation wipe effect to transition from one image to another. A list of links in the <b>"PRESETS"</b> tab lets you preview the effect presets defined in the <a href="../reference/Uize.Widget.ImageWipe.xPresets.html"><code>Uize.Widget.ImageWipe.xPresets</code></a> extension. Click away to experience some of the many effects this widget can achieve. To fool around with the settings for a preset, switch over to the <b>"PARAMS"</b> tab to tweak values and click the <b>"PERFORM WIPE EFFECT"</b> button to preview changes. To understand how the effect settings work, consult the reference for the <a href="../reference/Uize.Widget.ImageWipe.html"><code>Uize.Widget.ImageWipe</code></a> class.</p>
+	</div>
+
+	<!-- page layout's "wireframe" with slots for Uize.Widget.ImageWipe instance and params inspector -->
+
+	<table border="0" cellspacing="0" cellpadding="4" style="margin:auto;">
+		<tr valign="top">
+			<td>
+				<div id="page_imageWipe" style="position:relative; width:500px; height:357px; border:1px solid #555;"></div>
+			</td>
+			<td id="page_paramsInspector-shell"></td>
+		</tr>
+	</table>
+</div>
+
+<!-- JavaScript code to make the static wipe HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.ImageWipe.xPresets',
+		'UizeSite.TestDataPhotos',
+		'UizeSite.ParamsInspector'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** create the Uize.Widget.ImageWipe instance ***/
+			var imageWipe = page.addChild ('imageWipe',Uize.Widget.ImageWipe,{built:false});
+
+		/*** create the params inspector widget ***/
+			var
+				photos = UizeSite.TestDataPhotos (),
+				photoNo = 0
+			;
+			page.addChild (
+				'paramsInspector',
+				UizeSite.ParamsInspector,
+				{
+					params:{
+						allToFull:'json',
+						alignX:'json',
+						alignY:'json',
+						dissolve:'boolean',
+						divisionsX:'integer',
+						divisionsY:'integer',
+						duration:'integer',
+						firstPaneSizeX:{type:'number',minValue:0,maxValue:100},
+						firstPaneSizeY:{type:'number',minValue:0,maxValue:100},
+						paneSeedSizeX:'json',
+						paneSeedSizeY:'json',
+						paneSeedContext:'json',
+						paneProgressDelay:{type:'number',minValue:0,maxValue:100},
+						paneOrderScheme:['normal','outside in','inside out','reverse','jumbled']
+					},
+					presets:Uize.Widget.ImageWipe.presets,
+					previewButtonText:'PERFORM WIPE EFFECT'
+				}
+			).wire (
+				'Preset Selected',
+				function (_presetName) {
+					imageWipe.set (page.children.paramsInspector.getValues ());
+					imageWipe.set ({src:photos [photoNo].image});
+					photoNo = (photoNo + 1) % photos.length;
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>

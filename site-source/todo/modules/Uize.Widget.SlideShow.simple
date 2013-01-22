@@ -1,0 +1,11 @@
+This is a TO DO document for the =Uize.Widget.SlideShow= module.
+
+Clean Up Inconsistency with Phantom Slide Properties
+	For implied node binding, naming is as per normal slide properties, but for child widget binding, naming is not.
+
+	- progress
+	- slideNumber
+	- totalSlides
+
+- provide some way that a node can specify that its value setting behavior is to display or not, or perhaps different modes for setting values. For example, a way to route the value into a deeper property of the node, such as a style property, or a way to provide a node modifier handler to accept the value and apply it to itself, or a way to specify a certain kind of widget type.
+

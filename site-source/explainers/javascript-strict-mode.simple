@@ -1,0 +1,219 @@
+The UIZE JavaScript Framework is designed to use [[https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode][JavaScript strict mode]].
+
+Some Background on JavaScript Strict Mode
+	JavaScript strict mode was introduced as a way of helping to pave the way to future versions of the ECMAScript language (aka JavaScript / JScript).
+
+	Preparing for the Future
+		Opting in to JavaScript strict mode is a way of restricting what can be done in one's code in order to ensure that one's code will be compliant with newer versions of the language when they become available.
+
+		When using strict mode, certain code practices that were be permitted with earlier versions of JavaScript, but that are proscribed by the upcoming versions, will cause JavaScript errors to be thrown. In a nutshell, you basically want to ensure now that your codebase is happy when using JavaScript strict mode in order to minimize the future pain of having to make potentially more serious and costly retrofits down the line. In this spirit, the entire codebase of the UIZE JavaScript Framework is written to use strict mode.
+
+	Online Resources
+		There are numerous impacts that arise from using JavaScript strict mode.
+
+		Rather than go into detail on these impacts here, please spend some time reviewing some of the articles available online on the subject...
+
+		- [[https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode][Strict mode (Mozilla Developer Network)]]
+		- [[http://msdn.microsoft.com/en-us/library/ie/br230269%28v=vs.94%29.aspx][Strict mode (Microsoft Developer Network)]]
+		- [[http://www.nczonline.net/blog/2012/03/13/its-time-to-start-using-javascript-strict-mode/][It’s time to start using JavaScript strict mode]], by Nicholas Zakas
+
+UIZE Strict Mode and Your Own Code
+	Strict Mode in UIZE is Friendly to File Concatenation
+		Given the way that UIZE modules implement JavaScript strict mode, you don't have to worry about concatenating UIZE modules along with your own JavaScript code that may not use strict mode.
+
+		The well-conceived syntax for declaring modules in UIZE makes it easy to update a module to use strict mode without having to worry about possible interactions with other modules or code libraries that would be concatenated alongside it when packaging JavaScript code to be ready for a production environment. This is because JavaScript strict mode is implemented as an opt-in at a function level (lexically scoped), and because the implementation code for a UIZE module is always contained inside a builder function.
+
+		EXAMPLE
+		...............................
+		Uize.module ({
+			name:'MyNamespace.MyModule',
+			builder:function () {
+				'use strict';
+
+				// IMPLEMENTATION
+			}
+		});
+		...............................
+
+		In the above example, the ='use strict'= directive prologue is being used to indicate that the code inside the =builder= function of the =MyNamespace.MyModule= module must be interpreted and run using JavaScript strict mode. Now, the code from this module can be concatenated into the same JavaScript file alongside other code that does not use strict mode without any worries - the ='use strict'= directive inside the =builder= function applies only to that function and not to the other code concatenated alongside. That other code can, itself, independently opt in to using strict mode.
+
+	Strict Mode For Your Code Recommended, But Not Required
+		While it is recommended that you update your own code to use strict mode as a way of `preparing for the future` of JavaScript, using strict mode is still entirely optional
+
+		Your own modules don't have to be implemented using strict mode in order to work with UIZE. You can use UIZE modules that use strict mode alongside your own modules that don't use strict mode. You can even create a subclass of a UIZE class where that class uses strict mode but where the code in your subclass does not (this is thanks to the lexically scoped nature of strict mode).
+
+Strict Mode and Code Evaluation
+	There are some important things to consider when wanting to evaluate code using strict or non-strict mode, from strict or non-strict code outside code.
+
+	The general wisdom is to avoid using JavaScript's built-in =eval= function at all costs, and this is, for the most part, good advice. However, JavaScript is a dynamic language, and when you're doing more sophisticated (and risky) things with JavaScript such as dynamic code construction, it becomes useful to evaluate strings that contain JavaScript code. And, if you are in the situation where evaluation of code is truly a necessary part of your application, then there are some things to consider.
+
+	Eval'ing Within Strict Code Does Strict Eval
+		When you call the =eval= function from within strict mode code, the code that you evaluate is interpreted and executed using strict mode as well.
+
+		EXAMPLE
+		....................................................................................................
+		function foo () {
+			'use strict';
+			eval ('with (document) {}'); // produces a JavaScript error - you can't use "with" in strict mode
+		}
+		foo ();
+		....................................................................................................
+
+		In the above example, calling the =foo= function will result in a JavaScript error being thrown. That's because the function's implementation uses the ='strict mode'= directive prologue and then tries to =eval= code that is not compliant with strict mode. In addition to imposing strict mode on code evaluated using the =eval= function, strict mode always enforces sandboxing of variables declared within the code being evaluated. For more details on this, consult one of the excellent `online resources`.
+
+		In cases where you wish to evaluate code that is not compliant with strict mode from within code that is using strict mode, you may be able to get by with using the =Uize.laxEval= method. So, the above example could be rewritten as follows...
+
+		THIS WORKS
+		...............................................................
+		function foo () {
+			'use strict';
+			Uize.laxEval ('with (document) {}'); // this works just fine
+		}
+		foo ();
+		...............................................................
+
+		One thing to consider when using the =Uize.laxEval= method is that, while it allows code to be evaluated in non-strict mode even from strict mode code, the code is evaluated in a quarantined fashion - it is not evaluated in the current local scope, but rather with only the global scope at the top of its scope chain. This means that the code being evaluated can't rely on variables or functions from the local scope, or any scope up the scope chain - it can only access identifiers from the global scope. This is generally ok and usually desirable, because it allows code to be evaluated from any scope without the evaluated code conflicting with identifiers defined in the local scope or elsewhere up the scope chain.
+
+	Eval'ing Within Non-strict Mode Does Non-strict Eval
+		When you call the =eval= function from within non-strict mode code, the code that you evaluate is interpreted and executed using non-strict mode as well.
+
+		EXAMPLE
+		...............................................................................................
+		function foo () {
+			eval ('with (document) {}'); // this is allowed, because eval is from within non-strict mode
+		}
+		foo ();
+		...............................................................................................
+
+		In the above example, calling the =foo= function will not produce any JavaScript errors. That's because the function's implementation does not use the ='strict mode'= directive prologue, so the code being eval'd is evaluated also using non-strict mode. One way to impose strict mode on code being evaluated from within non-strict mode code is to explicitly place the ='use strict'= directive prologue at the start of the code being evaluated, as follows...
+
+		STRICT EVAL
+		...................................................................................................
+		function foo () {
+			eval ('"use strict"; with (document) {}'); // strict mode explicitly invoked, so we get an error
+		}
+		foo ();
+		...................................................................................................
+
+		Another way to enforce strict mode for code evaluated from within non-strict mode code is to use the =Uize.eval= method, as follows...
+
+		STRICT (AND QUARANTINED) EVAL
+		.........................................................................................
+		function foo () {
+			Uize.eval ('with (document) {}'); // Uize.eval imposes strict mode, so we get an error
+		}
+		foo ();
+		.........................................................................................
+
+		Unlike the companion =Uize.laxEval= method, the =Uize.eval= method imposes strict mode. Like the =Uize.laxEval= method, however, the =Uize.eval= method also performs quarantined evaluation of code, so the code being evaluated can't access identifiers from the local scope or any scope up the scope chain - it can only access identifiers from the global scope.
+
+	Strict Mode and Uize.quarantine -- HIGHLY ESOTERIC
+		Strict mode also has implications for the =Uize.quarantine= method that are a little subtle (and highly esoteric).
+
+		First off, most developers are unlikely to ever need to use the =Uize.quarantine= method. The =Uize.quarantine= method provides a way to define a function in some deeply nested scope but have the function be quarantined from that scope so that it only has access to the global scope when executed.
+
+		An Expected Consequence
+			In this example, we see a consequence of defining a quarantined function within strict mode code that we would expect...
+
+			FAILS
+			..........................................
+			(function () {
+				'use strict';
+
+				var quarantinedFunc = Uize.quarantine (
+					function (person) {
+						with (person) {
+							alert (name);
+						}
+					}
+				);
+			}) ();
+			..........................................
+
+			The above example produces a JavaScript error because the function being quarantined is being defined from within strict mode code, and the =with= statement is not permitted in strict mode. This error is detected at the time of parsing the code - before the quarantined function is ever executed.
+
+		An Unexpected Consequence
+			In this example, we see a consequence of defining a quarantined function within strict mode code that is unexpected and inconsistent across JavaScript interpreters...
+
+			DOESN'T FAIL IN ALL INTERPRETERS - WHY?
+			..........................................
+			(function () {
+				'use strict';
+
+				var quarantinedFunc = Uize.quarantine (
+					function () {
+						accidentalGlobal = 'foo';
+					}
+				);
+
+				quarantinedFunc ();
+			}) ();
+			..........................................
+
+			Surprisingly (unless you understand what's going on under the hood), the above example does not always produce a JavaScript error. Only in some JavaScript interpreters will it fail. For one thing, unlike the use of the =with= statement, the accidental global assignment is only caught at runtime.
+
+			Furthermore, the =Uize.quarantine= method actually produces a new, quarantined version of the function provided to it by serializing the function to a string and using its arguments list and body to produce a new function using the =Function= constructor. A side effect of this is that the strict or non-strict mode in which the original function was defined may not be carried to the newly created function. In Firefox, the string serialization of a function defined within strict mode code contains its own ='use strict'= directive prologue, even if it's not explicitly specified in the function's implementation, while in other interpreters the serialized form does not.
+
+			So, the only way to guarantee that a quarantined function that is defined within strict mode code is executed also using strict mode code is to explicitly place the ='use strict'= directive redundantly in the function, as follows...
+
+			NOW FAILS IN ALL INTERPRETERS SUPPORTING STRICT MODE
+			..........................................
+			(function () {
+				'use strict';
+
+				var quarantinedFunc = Uize.quarantine (
+					function () {
+						'use strict';
+
+						accidentalGlobal = 'foo';
+					}
+				);
+
+				quarantinedFunc ();
+			}) ();
+			..........................................
+
+			Unfortunately, the =Uize.quarantine= method can't add the ='use strict'= directive in the quarantined version of the function, since it has no way of reliably knowing if the original was defined within strict mode or non-strict mode code.
+
+		Highly Esoteric, So Don't Worry
+			As mentioned earlier, this is a highly esoteric concern and should not affect the majority of people.
+
+			Basically, besides being of academic interest, and possibly applicable to a few hardcore developers, you don't need to worry about this issue.
+
+Can't Have a State Property With Private Name of "name"
+	One quirky and somewhat esoteric consequence of switching the UIZE codebase over to using strict mode is that one cannot have a class that has a state property whose private name is "name".
+
+	To be more technically correct, attempting to set the initial value for a state property whose private name is "name" will now produce a JavaScript error.
+
+	FAILS
+	....................................
+	var MyClass = Uize.Class.subclass ({
+		stateProperties:{
+			name:{
+				name:'name',
+				value:'this is my name'
+			}
+		}
+	});
+	....................................
+
+	The reason for this is that the initial value for every state property is stored as a property on the class, using the private name for the property. Unfortunately (from a certain perspective), more recent versions of JavaScript have introduced the =name= property on =Function= instances, and classes are essentially constructor functions. Moreover, the =name= property on functions is read-only and this is now enforced in JavaScript strict mode by throwing an error when trying to set its value, which is what the =Uize.Class.stateProperties= feature declaration method tries to do (as does the =Uize.Class.set= method).
+
+	So, consequently, if you try to declare a state property for a class where the private name of the property is "name", and you also try to declare or later set the initial value for that property, then the =Uize.Class= module will attempt to set a value for the =name= property on the class function, and this throws the error in strict mode.
+
+	Now, you can still have a class that has a =name= state property that is accessible publicly as =name= when using the =set= and =get= instance methods and the =Uize.Class.set= and =Uize.Class.get= static methods, but you'd have to declare it with a private name other than "name" in order to avoid the conflict with the =name= read-only property of functions. The following code would work just fine...
+
+	WORKS
+	....................................
+	var MyClass = Uize.Class.subclass ({
+		stateProperties:{
+			_name:{
+				name:'name',
+				value:'this is my name'
+			}
+		}
+	});
+	....................................
+
+	This is a rather esoteric issue and is not likely to affect the overwhelming majority of developers.
+

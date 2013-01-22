@@ -1,0 +1,43 @@
+This is a TO DO document for the =Uize.Curve.Mod= module.
+
+Uize.Curve.Mod.tame
+	- a curve function modifier that...
+		- constrains a curve function so that its values are in the range of =0= to =1=
+		- guarantees that the value =0= is returned for the input value of =0=, and that the value =1= is returned for the input value of =1=
+
+Uize.Curve.Mod.sample
+	- generates a curve function that is a sample, with a specifiable degree of precision, of the specified curve function. This could be useful for curve functions that are performance intensive and where a finite precision might be acceptable. Can be lazy in generation, so values are only generated when needed - perhaps this is a parameter. Also possibly a parameter for interpolation between sample points when using curve function.
+
+Uize.Curve.Mod.noise
+	- possible implementation...
+		................................................................................
+		_package.noise = function (_curveFunction,_noiseLevel) {
+			/*** parameter defaulting ***/
+				_curveFunction = _resolve (_curveFunction);
+				if (_noiseLevel == _undefined) _noiseLevel = .25;
+
+			function _noiseCurveFunction (_value) {
+				function _getNoiseValue (_value) {
+					var
+						_cycles = 20,
+						_cycle = ((_value / .001) % 20) / (_cycles - 1)
+					;
+					if (!(Math.floor (_cycle) % 2)) _value = (_value + .05) % 1;
+					return (Math.pow (_cycle,Math.abs (_value - 1 / (_cycle || .001) / ((1 - _value) || .0001),1)) / ((1 - _value) || .0001)) % 1;
+				}
+				return (_getNoiseValue (_value) + _getNoiseValue (((1 - _value) * Math.PI) % 1)) % 1;
+			}
+
+			return (
+				!_noiseLevel
+					? _curveFunction
+					: _noiseLevel == 1
+						? _noiseCurveFunction
+						: function (_value) {
+							return _blendFloats (_curveFunction (_value),_noiseCurveFunction (_value),_noiseLevel);
+						}
+			);
+		};
+		................................................................................
+
+

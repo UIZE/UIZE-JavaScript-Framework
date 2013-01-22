@@ -1,0 +1,5 @@
+This is a TO DO document for the =Uize.Widget.Options= module.
+
+- migrate filter support from poptions class (basically, code changes should make it possible to avoid wiring all the options that are filtered out on first wiring, and also the filter should be remembered so that it can be automatically reapplied in all the right deep little spots)
+- support an array of values, where the elements are objects, ala poptions (and then try to migrate more logic specific to the value object array support out of poptions, so options becomes more powerful)
+

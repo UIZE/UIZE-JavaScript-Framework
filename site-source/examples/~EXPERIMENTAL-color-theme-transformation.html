@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Color Theme Transformation | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="color Uize.Widget.Bar.Slider Uize.Color.xUtil"/>
+	<meta name="description" content=""/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="css/labeled-horizontal-sliders.css"/>
+	<style type="text/css">
+		/*** labeled horizontal slider overrides ***/
+			.sliderPlaceholder {
+				width:500px;
+			}
+
+		/*** styling for color theme preview ***/
+			.gutter {
+				width:700px;
+				height:250px;
+			}
+			/*** content ***/
+				.content {
+					position:relative;
+					width:70%;
+					height:220px;
+					margin:auto;
+					padding:15px;
+					border-left:1px solid #666;
+					border-right:1px solid #666;
+				}
+				.content .contentMain {
+					position:absolute;
+					width:335px;
+					left:170px;
+				}
+				.content .contentMain .paragraph {
+					padding:0 10px;
+					margin:5px 0;
+				}
+				.content .contentDivider {
+					height:2px;
+					margin:6px 0;
+				}
+				.content .contentHeading {
+					font-size:12px;
+					font-weight:bold;
+					letter-spacing:2px;
+					padding:2px 0 2px 10px;
+					border:1px solid #000;
+				}
+				.contentLink, .contentLink:link, .contentLink:visited, .contentLink:hover, .contentLink:active {
+					font-size:11px;
+					letter-spacing:1px;
+					text-decoration:none;
+					border:none;
+					text-decoration:underline;
+				}
+			/*** pod ***/
+				.pod {
+					float:left;
+					font-size:11px;
+					width:130px;
+					height:210px;
+					margin-right:15px;
+					border:1px solid #fff;
+					padding:5px;
+				}
+				.pod .podHeading {
+					font-size:11px;
+					text-align:center;
+					letter-spacing:1px;
+					padding:0 5px;
+					border:1px solid #fff;
+					margin-bottom:5px;
+				}
+				.podLink, .podLink:link, .podLink:visited, .podLink:hover, .podLink:active {
+					display:block;
+					text-decoration:none;
+					border:none;
+					padding-left:10px;
+					text-decoration:underline;
+				}
+				.pod .podDivider {
+					height:3px;
+					margin:5px 0;
+				}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Color Theme Transformation
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/color-theme-transformation.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<form>
+		<table border="0" cellspacing="2" cellpadding="0" style="margin:auto;">
+			<tr>
+				<td colspan="4">
+					<div id="page-previewGutter" class="gutter">
+						<div id="page-previewContent" class="content">
+							<div id="page-previewPod" class="pod">
+								<div id="page-previewPodHeading1" class="podHeading">POD HEADING 1</div>
+								<a id="page-previewPodLink1" href="javascript://" class="podLink">pod link 1</a>
+								<a id="page-previewPodLink2" href="javascript://" class="podLink">pod link 2</a>
+								<a id="page-previewPodLink3" href="javascript://" class="podLink">pod link 3</a>
+								<br/>
+								<div id="page-previewPodHeading2" class="podHeading">POD HEADING 2</div>
+								This is some text in the pod. This is some text in the pod.
+								<div id="page-previewPodDivider" class="podDivider"></div>
+								This is some more text in the pod. This is some more text in the pod.
+							</div>
+							<div class="contentMain">
+								<div id="page-previewContentHeading1" class="contentHeading">THIS IS CONTENT HEADING ONE</div>
+								<div class="paragraph" style="padding-bottom:5px;">
+									This is some text in the main content area. This is some text in the main content area. This is some text in the main content area.
+									<div id="page-previewContentDivider" class="contentDivider"></div>
+									This is some text after the divider. This is some text after the divider. This is some text after the divider.
+								</div>
+								<div id="page-previewContentHeading2" class="contentHeading">THIS IS CONTENT HEADING TWO</div>
+								<div class="paragraph">
+									This is some more text in the main content area. And then there are some links that follow...
+									<br/>
+									<br/>
+									<a id="page-previewContentLink1" href="javascript://" class="contentLink">content link 1</a>
+									&nbsp;|&nbsp;
+									<a id="page-previewContentLink2" href="javascript://" class="contentLink">content link 2</a>
+									&nbsp;|&nbsp;
+									<a id="page-previewContentLink3" href="javascript://" class="contentLink">content link 3</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="height:4px;"></td>
+			</tr>
+			<tr>
+				<td class="sliderLabel">HUE RANGE</td>
+				<td class="sliderValueLabel slideMinValue">0</td>
+				<td id="page_hueRangeSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td class="sliderValueLabel sliderMaxValue">100</td>
+			</tr>
+			<tr>
+				<td class="sliderLabel">HUE SHIFT</td>
+				<td class="sliderValueLabel slideMinValue">-180</td>
+				<td id="page_hueShiftSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td class="sliderValueLabel sliderMaxValue">+180</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="height:4px;"></td>
+			</tr>
+			<tr>
+				<td class="sliderLabel">SATURATION RANGE</td>
+				<td class="sliderValueLabel slideMinValue">0</td>
+				<td id="page_saturationRangeSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td class="sliderValueLabel sliderMaxValue">100</td>
+			</tr>
+			<tr>
+				<td class="sliderLabel">SATURATION SHIFT</td>
+				<td class="sliderValueLabel slideMinValue">-100</td>
+				<td id="page_saturationShiftSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td class="sliderValueLabel sliderMaxValue">+100</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="height:4px;"></td>
+			</tr>
+			<tr>
+				<td class="sliderLabel">LIGHTNESS RANGE</td>
+				<td class="sliderValueLabel slideMinValue">0</td>
+				<td id="page_lightnessRangeSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td class="sliderValueLabel sliderMaxValue">100</td>
+			</tr>
+			<tr>
+				<td class="sliderLabel">LIGHTNESS SHIFT</td>
+				<td class="sliderValueLabel slideMinValue">-100</td>
+				<td id="page_lightnessShiftSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td class="sliderValueLabel sliderMaxValue">+100</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<!-- JavaScript code to activate the image port functionality -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.Bar.Slider',
+		'Uize.Widget.Bar.Slider.xSkin',
+		'Uize.Color',
+		'Uize.Color.xUtil'
+	],
+	builder:function () {
+		'use strict';
+
+		/* TO DO:
+			- factor out code for getting min color and getting max color (add some method to Uize.Color.xUtil)
+			- factor out code for transforming a set of colors (add some method to Uize.Color.xUtil)
+			- a means in the UI for resetting all the sliders to their neutral points
+			- a means for picking new color themes, and a suite of useful preset color themes (start with a select box)
+			- add explanation
+			- ability to select which colors are to be modified
+				- shortcuts for selecting different groups of colors, like...
+					- based on structure
+						- all colors
+							- all pod colors
+								- pod heading colors
+								- all pod text colors
+								- all pod background colors
+								- all pod stroke colors
+							- all content colors
+								- content heading colors
+								- all content text colors
+								- all content background colors
+								- all content stroke colors
+					- based on functional element
+						- all heading colors
+						- all text colors
+						- all divider colors
+						- all link colors
+					- based on CSS type
+						- all background colors
+						- all text colors
+						- all stroke colors
+		*/
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** initial color theme ***/
+			var
+				colorTheme = {
+					gutterBackground:'76827B',
+					contentStroke:'E7F0EC',
+					contentBackground:'E7F0EC',
+					contentText:'586D6C',
+					contentHeadingBackground:'798',
+					contentHeadingStroke:'000',
+					contentHeadingText:'fff',
+					contentDivider:'ccb',
+					contentLink:'3E8EB7',
+					podBackground:'D3E0DC',
+					podStroke:'8af',
+					podText:'2C3635',
+					podLink:'2C3635',
+					podHeadingBackground:'b3c0d8',
+					podHeadingStroke:'aaa',
+					podHeadingText:'2C3635',
+					podDivider:'aca'
+					/*
+					gutterBackground:'000',
+					contentStroke:'666',
+					contentBackground:'333',
+					contentText:'aaa',
+					contentHeadingBackground:'aaa',
+					contentHeadingStroke:'000',
+					contentHeadingText:'000',
+					contentDivider:'444',
+					contentLink:'ccc',
+					podBackground:'888',
+					podStroke:'fff',
+					podText:'333',
+					podLink:'000',
+					podHeadingBackground:'000',
+					podHeadingStroke:'fff',
+					podHeadingText:'fff',
+					podDivider:'666'
+					*/
+				},
+				colorThemeObjects = {},
+				transformedColorTheme = {}
+			;
+			for (var colorKey in colorTheme)
+				colorThemeObjects [colorKey] = Uize.Color.from (colorTheme [colorKey]).setEncoding ('HSL array')
+			;
+
+		/*** code to transform the color theme and update the preview ***/
+			var color = Uize.Color ('hsl(0,0,0)');
+
+			/*** calculate min/max range for components of colors ***/
+				var
+					component0Min = Infinity,
+					component0Max = -Infinity,
+					component1Min = Infinity,
+					component1Max = -Infinity,
+					component2Min = Infinity,
+					component2Max = -Infinity
+				;
+				for (var colorKey in colorTheme) {
+					var
+						colorTuple = colorThemeObjects [colorKey].tuple,
+						component0 = colorTuple [0],
+						component1 = colorTuple [1],
+						component2 = colorTuple [2]
+					;
+					component0Min = Math.min (component0Min,component0);
+					component0Max = Math.max (component0Max,component0);
+					component1Min = Math.min (component1Min,component1);
+					component1Max = Math.max (component1Max,component1);
+					component2Min = Math.min (component2Min,component2);
+					component2Max = Math.max (component2Max,component2);
+				}
+
+			function transformColorThemeAndUpdatePreview () {
+				/*** using min/max range and slider values, compute transformed colors ***/
+					function _blendValues (_valueA,_valueB,_blendAmount) {
+						return _valueA + (_valueB - _valueA) * _blendAmount
+					}
+					function transformComponent (value,minValue,maxValue,componentMin,componentMax,range,shift,shiftMode) {
+						if (range != 50)
+							value = range > 50
+								? _blendValues (
+									value,
+									_blendValues (componentMin,componentMax,(value - minValue) / (maxValue - minValue || 1)),
+									(range - 50) / 50
+								)
+								: _blendValues ((minValue + maxValue) / 2,value,range / 50)
+						;
+						if (shift)
+							value = shiftMode == 'wrap'
+								? (((value + shift) % componentMax) + componentMax) % componentMax
+								: Uize.constrain (value + shift,componentMin,componentMax)
+						;
+						return value;
+					}
+					for (var colorKey in colorTheme) {
+						var colorTuple = colorThemeObjects [colorKey].tuple;
+						Uize.Color.setTuple (
+							color.tuple,
+							transformComponent (
+								colorTuple [0],
+								component0Min,component0Max,0,360,+hueRangeSlider,+hueShiftSlider,'wrap'
+							),
+							transformComponent (
+								colorTuple [1],
+								component1Min,component1Max,0,100,+saturationRangeSlider,+saturationShiftSlider
+							),
+							transformComponent (
+								colorTuple [2],
+								component2Min,component2Max,0,100,+lightnessRangeSlider,+lightnessShiftSlider
+							)
+						);
+						transformedColorTheme [colorKey] = color.to ('#hex');
+					}
+
+				/*** update the preview ***/
+					page.setNodeStyle ('previewGutter',{background:transformedColorTheme.gutterBackground});
+
+					/*** content ***/
+						page.setNodeStyle (
+							'previewContent',
+							{
+								color:transformedColorTheme.contentText,
+								background:transformedColorTheme.contentBackground,
+								borderColor:transformedColorTheme.contentStroke
+							}
+						);
+						page.setNodeStyle (
+							['previewContentHeading1','previewContentHeading2'],
+							{
+								color:transformedColorTheme.contentHeadingText,
+								background:transformedColorTheme.contentHeadingBackground,
+								borderColor:transformedColorTheme.contentHeadingStroke
+							}
+						);
+						page.setNodeStyle (
+							['previewContentLink1','previewContentLink2','previewContentLink3'],
+							{color:transformedColorTheme.contentLink}
+						);
+						page.setNodeStyle ('previewContentDivider',{background:transformedColorTheme.contentDivider});
+
+					/*** pod ***/
+						page.setNodeStyle (
+							'previewPod',
+							{
+								color:transformedColorTheme.podText,
+								background:transformedColorTheme.podBackground,
+								borderColor:transformedColorTheme.podStroke
+							}
+						);
+						page.setNodeStyle (
+							['previewPodHeading1','previewPodHeading2'],
+							{
+								color:transformedColorTheme.podHeadingText,
+								background:transformedColorTheme.podHeadingBackground,
+								borderColor:transformedColorTheme.podHeadingStroke
+							}
+						);
+						page.setNodeStyle (
+							['previewPodLink1','previewPodLink2','previewPodLink3'],
+							{color:transformedColorTheme.podLink}
+						);
+						page.setNodeStyle ('previewPodDivider',{background:transformedColorTheme.podDivider});
+			}
+
+		/*** add the various slider child widgets ***/
+			function addSliderWidget (sliderName,minValue,maxValue,value) {
+				var slider = page.addChild (
+					sliderName,
+					Uize.Widget.Bar.Slider,
+					{
+						increments:0,
+						borderThickness:1,
+						borderTintColor:'#666',
+						borderTintLevel:100,
+						orientation:'horizontal',
+						built:false,
+						minValue:minValue,
+						maxValue:maxValue,
+						value:value
+					}
+				);
+				slider.wire ('Changed.value',transformColorThemeAndUpdatePreview);
+				return slider;
+			}
+			var
+				hueRangeSlider = addSliderWidget ('hueRangeSlider',0,100,50),
+				hueShiftSlider = addSliderWidget ('hueShiftSlider',-180,180,0),
+				saturationRangeSlider = addSliderWidget ('saturationRangeSlider',0,100,50),
+				saturationShiftSlider = addSliderWidget ('saturationShiftSlider',-100,100,0),
+				lightnessRangeSlider = addSliderWidget ('lightnessRangeSlider',0,100,50),
+				lightnessShiftSlider = addSliderWidget ('lightnessShiftSlider',-100,100,0)
+			;
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialize ***/
+			transformColorThemeAndUpdatePreview ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

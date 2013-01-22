@@ -1,0 +1,9 @@
+This is a TO DO document for the =Uize.Widget.Button= module.
+
+- fix the bug that Ben had seen with the class names not being updated correctly in his example with radio button widgets
+- performance optimization idea: only wire up additional events (click, mousedown, mouseup, mouseout) on mouseover
+- double-click actions for buttons
+- state->node map to allow different naming schemes? (grayed vs. dimmed, etc.)
+- state->className map to allow different naming schemes
+- state cumulative mode (exclusive or cumulative)
+

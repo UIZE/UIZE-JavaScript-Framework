@@ -1,0 +1,10 @@
+This is a TO DO document for the =Uize.Widget.Calendar= module.
+
+- fix bug with being able to year navigate past end of valid range (is this what the conformer for month and year should do?)
+- localize this widget!!!!
+	- month names
+	- day names
+	- day letters?
+- calling updateUi when the value property changes is problematic the way that updateUi is currently implemented because all the day nodes will get wired over. Also, it's not efficient that simply changing the selected date should cause an entire re-rendering of the grid.
+- tooltip for when hovering over dates, to show at least pretty representation of date, but could also for custom date specific notes or events to be displayed
+

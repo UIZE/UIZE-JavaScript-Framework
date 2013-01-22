@@ -1,0 +1,58 @@
+This is a TO DO document for the =Uize.Array.Sort= module.
+
+Uize.Array.Sort.alphaNum
+	- a sophisticated, human / intuituve alphanumeric sort
+	- http://www.davekoelle.com/alphanum.html
+
+Uize.Array.Sort.sortBy
+	- add support for subsorts (secondary, tertiary sorts, etc.)
+		- sort value generator can be an array of sort value generators?
+
+	- support for optional sort value comparison function
+		This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot be compared by a simple a < b logical comparison.
+
+Uize.Array.Sort.indexBy
+	Returns the index of a value in an array that is sorted by the specified sort value generator.
+
+	SYNTAX
+	..................................................................................................
+	indexINT = Uize.Array.Sort.indexBy (valueANYTYPE,targetARRAY,sortValueGeneratorFUNC,directionINT);
+	indexINT = Uize.Array.Sort.indexBy (valueANYTYPE,targetARRAY,sortValueGeneratorSTR,directionINT);
+	indexINT = Uize.Array.Sort.indexBy (valueANYTYPE,targetARRAY,sortColumnINT,directionINT);
+	..................................................................................................
+
+
+Uize.Array.Sort.insertBy
+	Inserts the specified value, using the specified sort value generator to determine at which spot to insert it.
+
+	SYNTAX
+	........................................................................................
+	Uize.Array.Sort.insertBy (valueANYTYPE,targetARRAY,sortValueGeneratorFUNC,directionINT);
+	Uize.Array.Sort.insertBy (valueANYTYPE,targetARRAY,sortValueGeneratorSTR,directionINT);
+	Uize.Array.Sort.insertBy (valueANYTYPE,targetARRAY,sortColumnINT,directionINT);
+	........................................................................................
+
+Uize.Array.Sort.firstBy
+	Returns the first element from a sort by the specified sort value generator.
+
+	SYNTAX
+	.........................................................................................
+	firstANYTYPE = Uize.Array.Sort.firstBy (sourceARRAY,sortValueGeneratorFUNC,directionINT);
+	firstANYTYPE = Uize.Array.Sort.firstBy (sourceARRAY,sortValueGeneratorSTR,directionINT);
+	firstANYTYPE = Uize.Array.Sort.firstBy (sourceARRAY,sortColumnINT,directionINT);
+	.........................................................................................
+
+Uize.Array.Sort.lastBy
+	Returns the last element from a sort by the specified sort value generator.
+
+	SYNTAX
+	........................................................................................
+	firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortValueGeneratorFUNC,directionINT);
+	firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortValueGeneratorSTR,directionINT);
+	firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortColumnINT,directionINT);
+	........................................................................................
+
+Sorted Array Object
+	Consider adding support for a sorted array object, that can retain a configured sort and where the sort affects how methods like =pop=, =shift=, =push=, and =unshift= behave.
+
+

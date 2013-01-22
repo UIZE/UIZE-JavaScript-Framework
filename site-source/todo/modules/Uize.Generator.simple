@@ -1,0 +1,149 @@
+This is a proposal document for a =Uize.Generator= module.
+
+- from the widget's perspective as a user of generators
+	- you have a set of display properties (state properties that are reflected in the UI)
+	- a widget class should be able to declare which of its state properties affect display
+		- of the state properties that affect display...
+			- which are updated by the client code
+			- which are handled as inputs by the generator specified by the html state property
+			- some display state properties may be handled by both the generator and client code
+
+	................................................................................
+	if (property values are modified) {
+		displayPropertiesModified = /* code to determine this */
+		if (displayPropertiesModified.length) {
+			displayPropertiesOnlyReflectedByRenderWereModified = /* code to determine this */
+			if (displayPropertiesOnlyReflectedByRenderWereModified && can re-render DOME) {
+				unwireUi ();
+				remove DOM
+				re-render DOM and insert
+				wireUi ();
+				remove properties handled by re-render from displayPropertiesModified
+			}
+			if (displayPropertiesModified.length) {
+		}
+	}
+	................................................................................
+
+	- html state property
+		- string, being a template into which a limited set of params are substituted
+		- a function, which can generate the HTML, and which receives no parameters but which is called as a method on the instance (so can access property values)
+		- an instance of a generator class
+
+- generator principles
+	- a generator should be able to leverage or depend on other code modules, so it should be declared with a module declaration
+	- a generator should be able to declare its inputs
+	- a generator should not assume the context of its usage, so it should be able to operate on the server side or in a non HTML document context
+
+Uize.Generator implements simply...
+	- state properties
+		- asynchronous
+		- params
+	- getOutput (params,callback)
+		- result can be a string, or an object of which text is a property
+
+- good tests of the paradigm would be...
+	- implementing the slider skin extension, in such a way, that setting properties track, knob, and other colors would trigger a re-render
+	- providing the functionality of Zazzle.ControlPoptions in Uize.Widget.Options
+
+- classes of generator
+	- thoughts
+		- generators should be able to require any module in order to accomplish generating their output
+		- generators should be able to use JavaScript templates, or other means
+		- generators should be able to be used in a context outside of the Web, Web pages, and browsers
+
+		- widgets should be able to use generators to generate their markup
+		- the same class of widget should be able to use any number of generators, and theoretically, different widget classes should be able to use the same generator
+		- a generator should be able to leverage other generators in the process of generating their output
+		- generators should be able to declare their input interface
+
+	Uize.Generator (base class)
+		- params
+
+	Uize.Generator.Basic (utilizing basic substitution)
+		- params
+		- templateStr
+
+		EXAMPLE
+		................................................................................
+		Uize.Generator.Basic ({
+			params:['property1','property2'],
+			templateStr:'This template supports [#property1] and [#property2]'
+		});
+		................................................................................
+
+	Uize.Generator.Tokenized
+		- params
+		- templateStr
+		- tokenNaming
+
+		EXAMPLE
+		................................................................................
+		Uize.Generator.Tokenized ({
+			params:['property1','property2'],
+			templateStr:'This template supports {property1} and {property2}',
+			tokenNaming:'{KEY}'
+		})
+		................................................................................
+
+	Uize.Generator.Population
+		- params
+		- templateStr
+		- templateItem
+
+		EXAMPLE
+		................................................................................
+		Uize.Generator.Population ({
+			params:['property1','property2'],
+			templateStr:'This template supports property1Value and property2Value',
+			templateItem:{
+				property1:'property1Value',
+				property2:'property2Value'
+			}
+		})
+		................................................................................
+
+	Uize.Generator.Function
+		- generator
+
+		EXAMPLE
+		................................................................................
+		Uize.Generator.Function ({
+			params:['property1','property2'],
+			generator:
+				function (_params) {
+					return 'This template supports ' + _params.property1 + ' and ' + _params.property2;
+				}
+		});
+		................................................................................
+
+	Uize.Generator.Ajax
+		- serviceUrl
+
+		EXAMPLE
+		................................................................................
+		Uize.Generator.Ajax ({
+			params:['property1','property2'],
+			url:'service/getcomponent?'
+		});
+		................................................................................
+
+		NOTES
+		- provides a system for expressing dynamically loaded HTML through service
+		- should it require its own instance of Uize.Comm.Ajax
+		- no, because it should be able to use whatever the protocol is that's in use?
+		- should defer to page's environment for URLs and comm
+
+	Uize.Generator.Async
+		requires a...
+			- comm object
+			- environment for URLs
+
+			- or...
+				maybe it just requires a loader...
+
+		- to provide the maximum flexibility, the only thing that an async generator needs is a loader
+
+	Uize.Generator.Http
+
+

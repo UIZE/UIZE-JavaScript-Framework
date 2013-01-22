@@ -18,6 +18,10 @@
 	The working directory for running this script in node should be the UIZE root directory.
 */
 
+function _eval (_toEval) {
+	eval (_toEval);
+}
+
 (function () {
 	var _isWsh = typeof ActiveXObject != 'undefined';
 
@@ -64,25 +68,73 @@
 			_useSource = _params.useSource !== false
 		;
 
-		/*** read file ***/
+		/*** minimal file system functions ***/
 			var
-				_fileSystemObject,
-				_readFile
+				_fileSystem,
+				_readFile,
+				_fileExists
 			;
 			if (_isWsh) {
-				_fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject');
+				_fileSystem = new ActiveXObject ('Scripting.FileSystemObject');
+				_fileExists = function (_path) {
+					return _fileSystem.FileExists (_path);
+				};
 				_readFile = function (_filePath) {
 					var
-						_file = _fileSystemObject.OpenTextFile (_pathToRoot + _filePath,1),
+						_file = _fileSystem.OpenTextFile (_pathToRoot + _filePath,1),
 						_fileText = _file.ReadAll ()
 					;
 					_file.Close ();
 					return _fileText;
 				};
 			} else {
-				_fileSystemObject = require ('fs');
+				_fileSystem = require ('fs');
+				_fileExists = function (_path) {
+					try {
+						_fileSystem.statSync (_path);
+						return true;
+					} catch (_error) {
+						return false;
+					}
+				};
 				_readFile = function (_filePath) {
-					return _fileSystemObject.readFileSync (_pathToRoot + _filePath,'utf8');
+					return _fileSystem.readFileSync (_pathToRoot + _filePath,'utf8');
+				};
+			}
+
+		/*** miscellaneous global JavaScript functions (to mirror what's available in the browser context) ***/
+			if (_isWsh) {
+				function _popup (_message,_title,_buttonsAndIconMask) {
+					return (
+						(_popup._wscriptShell || (_popup._wscriptShell = new ActiveXObject ('wscript.shell'))).Popup (
+							_message + '',
+							0, // seconds to wait before auto-dismissing (0 = stay open forever)
+							_title,
+							_buttonsAndIconMask
+						)
+					);
+				}
+				alert = function (_message) {
+					_popup (_message,'Windows Script Host Alert',0 | 48 /* 0 = ok button only, 48 = warning icon */);
+				};
+				confirm = function (_message) {
+					return _popup (
+						_message,
+						'Please Confirm...',
+						1 | 32 /* 1 = ok and cancel, 32 = question mark icon */
+					) == 1;
+				};
+				/* TO DO:
+					for prompt, try to figure out how to use VBSCRIPT's InputBox built-in function
+						http://wsh2.uw.hu/ch08c.html
+
+					Function WSHInputBox(Message, Title, Value)
+						WSHInputBox = InputBox(Message, Title, Value)
+					End Function
+				*/
+			} else {
+				alert = function (_message) {
+					console.log (_message);
 				};
 			}
 
@@ -91,38 +143,51 @@
 
 		/*** load Uize base class and set up with module loader ***/
 			function _moduleLoader (_moduleToLoad,_callback) {
+				var _moduleText = '';
 				if (env.modulesToStub && env.modulesToStub.test (_moduleToLoad)) {
-					_callback ('Uize.module ({name:\'' + _moduleToLoad + '\'})');
-					return;
+					_moduleText = 'Uize.module ({name:\'' + _moduleToLoad + '\'})';
+				} else {
+					var _modulePath =
+						(_useSource ? env.moduleFolderPath : env.moduleFolderBuiltPath) + '/' + _moduleToLoad + '.js'
+					;
+					if (_fileExists (_modulePath)) {
+						_moduleText = _readFile (_modulePath);
+					} else if (_fileExists (_modulePath + '.jst')) {
+						Uize.require (
+							'Uize.Template.Module',
+							function (_Uize_Template_Module) {
+								_moduleText = _Uize_Template_Module.buildTemplateModuleText (
+									_moduleToLoad,
+									_readFile (_modulePath + '.jst')
+								);
+							}
+						);
+					}
 				}
-				var _modulePath = env.moduleFolderPath;
-				if (!_useSource) {
-					var
-						_sourceFolderName = env.sourceFolderName || '',
-						_sourceFolderNameLength = _sourceFolderName.length,
-						_buildFolderPath = env.buildFolderPath
-					;
-					if (_sourceFolderNameLength && _modulePath.slice (-_sourceFolderNameLength) == _sourceFolderName)
-						_modulePath = _modulePath.slice (0,-_sourceFolderNameLength - 1)
-					;
-					if (_buildFolderPath)
-						_modulePath = _buildFolderPath + '\\' + _modulePath
-					;
-				}
-				_callback (_readFile (_modulePath + '\\' + _moduleToLoad + '.js'));
+				_callback (_moduleText);
 			}
-			_moduleLoader ('Uize',function (_uizeCode) {eval (_uizeCode); Uize.moduleLoader = _moduleLoader});
+			_moduleLoader (
+				'Uize',
+				function (_uizeCode) {
+					_eval (_uizeCode);
+					if (!_isWsh)
+						Uize.laxEval = _eval // this actually *needs* to be overridden for the NodeJS context
+					;
+					Uize.moduleLoader = _moduleLoader;
+				}
+			);
 
 		/*** services setup & run build module (if specified) ***/
 			Uize.require (
 				'Uize.Build.ServicesSetup',
 				function () {
+					Uize.Build.ServicesSetup.setup ();
 					if (_buildModuleName)
 						Uize.require (
 							_buildModuleName,
 							function (_buildModule) {
 								_buildModule.perform (
-									Uize.copyInto ({},env,{logFileName:'_' + _buildModuleName + '.log'},_params)
+									Uize.copyInto ({},env,{logFilePath:'logs/' + _buildModuleName + '.log'},_params)
 								);
 							}
 						)

@@ -1,0 +1,22 @@
+This is a proposal document for a =Uize.Css= module.
+
+Methods
+	Uize.Css.fromProperty
+	Uize.Css.toProperty
+	Uize.Css.fromPropertyName
+	Uize.Css.toPropertyName
+	Uize.Css.fromPropertyValue
+	Uize.Css.toPropertyValue
+	Uize.Css.fromProperties
+	Uize.Css.toProperties
+	Uize.Css.fromRule
+	Uize.Css.toRule
+
+Modules Under Namespace
+	Uize.Css.Shadow
+	Uize.Css.BorderRadius
+	Uize.Css.Gradient
+	Uize.Css.Background
+	Uize.Css.Border
+
+

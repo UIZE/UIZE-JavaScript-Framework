@@ -1,0 +1,15 @@
+This is a proposal document for a =Uize.Minimal.library= module.
+
+Library module would possibly contain the following modules...
+
+.........................................................
+Uize.Fade
+Uize.Node
+Uize.Url
+Uize.Tooltip
+Uize.Comm
+Uize.Comm.Ajax
+Uize.Widget
+.........................................................
+
+

@@ -1,0 +1,482 @@
+This is a TO DO document for the =Uize= module.
+
+Uize.log
+	Logs a message, using the configured logging options.
+
+	SYNTAX
+	......................
+	Uize.log (messageSTR);
+	......................
+
+	IMPLEMENTATION
+	...................................
+	_package.log = function (message) {
+		// fill this in
+	};
+	...................................
+
+Uize.own
+	Would return the value of the own property of an object, but not a property value that is inherited from the object's prototype.
+
+	SYNTAX
+	.....................................................
+	valueANYTYPE = Uize.own (sourceOBJ,propertySTRorINT);
+	.....................................................
+
+	IMPLEMENTATION
+	.................................................................
+	_package.own = function (_source,_property) {
+		var _result;
+		return (
+			_source &&
+			(_result = _source [_property]) !== _undefined &&
+			_source.constructor.prototype [_property] !== _undefined &&
+			!_source.hasOwnProperty (_property)
+				? _undefined
+				: _result
+		);
+	};
+	.................................................................
+
+Uize.try
+	Tries to execute the given function, executing the optional catch expression and warning, ignoring, or throwing any error that occurs.
+
+	SYNTAX
+	.............................
+	Uize.try (tryFUNC,catchFUNC);
+	.............................
+
+	IMPLEMENTATION
+	.......................................................
+	_package.warnForTryErrors = true;
+	_package.ignoreUncaughtTryErrors = false;
+	_package.try = function (_tryFunction,_catchFunction) {
+		try {
+			_tryFunction ();
+		} catch (_error) {
+			_package.warnForTryErrors && _package.warn (_error);
+			if (_catchFunction) {
+				_catchFunction (_error);
+			} else if (!_package.ignoreUncaughtTryErrors) {
+				throw _error;
+			}
+		}
+	};
+	.......................................................
+
+Uize.warn
+	Outputs to the log, depending on the configuration for warnings.
+
+	SYNTAX
+	.......................
+	Uize.warn (messageSTR);
+	.......................
+
+	IMPLEMENTATION
+	...................................................
+	_package.logWarnings = true;
+	_package.warn = function (_message) {
+		_package.logWarnings && _package.log (_message);
+	};
+	...................................................
+
+Uize.warnIfSlow
+	Warns if the specified function takes too long to complete (the function can be synchronous or asynchronous).
+
+	IMPLEMENTATION
+	............................................
+	_package.warnIfSlow = function (_function) {
+		function _done () {
+
+		}
+		_function (_done);
+	};
+	............................................
+
+Uize.quantize
+	Quantizes the specified number to the specified quantum size.
+
+	IMPLEMENTATION
+	........................................................................
+	_package.quantize = function (_value,_quantum) {
+		return _quantum ? Math.round (_value / _quantum) * _quantum : _value;
+	};
+	........................................................................
+
+Uize.random
+	Generates a random value from the specified range or list of possible values.
+
+	DIFFERENT USAGES
+
+	`Generate a Random Number in the Range of Zero to One`
+	...........................
+	randomNUM = Uize.random ();
+	...........................
+
+	`Generate a Random Number in the Range of Zero to a Maximum Value`
+	......................................
+	randomNUM = Uize.random (maxValueNUM);
+	......................................
+
+	`Select a Random Value From a List of Possible Values`
+	..............................................
+	randomValueANYTYPE = Uize.random (valuesLIST);
+	..............................................
+
+	`Select a Random Characters From a Characters String`
+	.................................................
+	randomCharacterSTR = Uize.random (charactersSTR);
+	.................................................
+
+	`Generate a Random Integer in a Specified Range`
+	................................................................
+	randomINT = Uize.random (rangeLowerLimitINT,rangeUpperLimitINT);
+	................................................................
+
+	`Generate a Random Floating Point Number in a Specified Range`
+	..................................................................
+	randomNUM = Uize.random (rangeLowerLimitNUM,rangeUpperLimitNUM,0);
+	..................................................................
+
+	`Generate a Random, Custom Quantized Number in a Specified Range`
+	...........................................................................
+	randomNUM = Uize.random (rangeLowerLimitNUM,rangeUpperLimitNUM,quantumNUM);
+	...........................................................................
+
+	IMPLEMENTATION
+	..............................................................................................
+	_package.random = function (_arg0,_arg1,_arg2) {
+		var _random0to1 = Math.random ();
+		function _randomIndex () {
+			return Math.round ((_arg0.length - 1) * _random0to1);
+		}
+		return (
+			arguments.length > 1
+				? _package.constrain (
+					_arg0 + _quantize ((_arg1 - _arg0) * _random0to1,_arg2 == _undefined ? 1 : _arg2),
+					_arg0,
+					_arg1
+				)
+				: _arg0 == _undefined
+					? _random0to1
+					: _package.isNumber (_arg0)
+						? Math.round (_random0to1 * _arg0)
+						: _package.isList (_arg0)
+							? _arg0 [_randomIndex ()]
+							: _package.isString (_arg0)
+								? _arg0.charAt (_randomIndex ())
+								: _random0to1
+		);
+	};
+	..............................................................................................
+
+Uize.safe
+	Wraps a function in order to protect it from possible JavaScript errors during its execution.
+
+	IMPLEMENTATION
+	......................................................................
+	Uize.safe = function (_function,_returnValueIfError) {
+		var _hasReturnValueIfError = arguments.length > 1;
+		return function () {
+			try {
+				return _function.apply (this,arguments);
+			} catch (_error) {
+				return _hasReturnValueIfError ? _returnValueIfError : _error;
+			}
+		};
+	};
+	......................................................................
+
+	This method catches errors that occur in the function that is being wrapped, returning the error if no value is explicitly specified that should be returned when an errors occur.
+
+Uize.cycleCalls
+	IMPLEMENTATION
+	........................................................
+	Uize.cycleCalls = function () {
+		var
+			_functionNo = 0,
+			_arguments = arguments,
+			_totalFunctions = arguments.length
+		;
+		return function () {
+			_arguments [_functionNo].apply (this,arguments);
+			_functionNo = (_functionNo + 1) % _totalFunctions;
+		};
+	}
+	........................................................
+
+Uize.map
+	Add support for _source being a string?
+
+Uize.TreeWalker
+	An object built into the =Uize= base module that allows you to control walking through an object tree in a safe and performant way.
+
+	- avoids reference loops / circular references
+	- iterates without using recursion, to minimize function calls used for walking the tree
+
+Quick Win Additions (in order of priority / usefulness)
+	STILL TO DO
+		Uize.indexOf, Uize.lastIndexOf
+			- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)
+
+		Uize.indexIn
+			- adapt to add support for source being a string
+
+	LATER
+		Uize.extend
+			- alias of copyInto, for those who are more comfortable with the extend semantic
+
+		Uize.ensureArray
+			- ensures that the value is an array
+			- if the value is already an array, then it is simply returned
+			- if the value is an arguments object, then an array is created from it
+			- if the value is any other type, then a new array is returned with the value as its single element
+			- this is useful for methods that want to be versatile and support simple value types in addition to arrays, but want to normalize to array of one element for purpose of implementation code
+
+		Uize.ensureIn
+			- checks to see if an element is present, and adds it if not
+			- supports adding at beginning or adding at end, with optional where parameter
+
+		Uize.isStringy
+			- returns true if the value is either a string primitive or an instance of a String object or "subclass"
+
+		Uize.isTruthy
+			- returns true if the value is truthy
+			- useful for methods that accept value matchers
+
+		Uize.isFalsy
+			- returns true is the value is falsy
+			- useful for methods that accept value matchers
+
+Uize.willCall
+	Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.
+
+	- names considered
+		- callback
+		- callerOf
+		- willCall
+		- performer
+		- willDo
+		- asCall
+		- toCall
+		- will
+		- perform
+		- callProxy
+		- callAgent
+		- funcCaller
+		- funcAgent
+		- funcProxy
+		- handler
+		- asHandler
+		- asContext
+		- makeCaller
+		- doer
+
+	IMPLEMENTATION
+	................................................................................
+	Uize.willCall = function (_context,_function,_arguments,_extraArgsMapping) {
+		var _hasExtraArgsMapping = _extraArgsMapping != _undefined;
+		if (_hasExtraArgsMapping)
+			_arguments = _arguments ? _arguments.concat () : []
+		;
+		if (typeof _function == 'string')
+			_function = _context [_function]
+		;
+		return (
+			_hasExtraArgsMapping
+				? (
+					typeof _extraArgsMapping == 'number'
+						? function () {
+							_arguments [_extraArgsMapping] = arguments [0];
+							return _function.apply (_context,_arguments);
+						}
+
+						// loop should be driven by _extraArgsMapping - not incoming arguments?
+						// what about incoming arguments for which there are no mappings (ie. beyond end of mapping array)
+						: function () {
+							for (var _argumentNo = arguments.length; --_argumentNo >= 0;)
+								_arguments [_extraArgsMapping [_argumentNo]] = arguments [_argumentNo]
+							;
+							return _function.apply (_context,_arguments);
+						}
+
+
+				)
+				: _arguments && _arguments.length
+					? function () {return _function.apply (_context,_arguments)}
+					: function () {return _function.call (_context)}
+		);
+	};
+
+	Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
+		return Uize.willCall (0,_function,_arguments,_extraArgsMapping);
+	};
+	................................................................................
+
+	EXAMPLE
+	...............................................
+	var
+		xSquared = Uize.willCall (Math.pow,[0,2],0),
+		3ToPowerX = Uize.willCall (Math.pow,[3,0],1)
+	;
+	...............................................
+
+	INSTEAD OF...
+	.....................................................
+	var 3ToPowerX = function (x) {return Math.pow (3,x)};
+	.....................................................
+
+	USE...
+	.................................................
+	var 3ToPowerX = Uize.willCall (Math.pow,[3,0],1);
+	.................................................
+
+Uize.watchMethod
+	...................................................................
+	Uize.watchFunction = function (_function,_before,_after) {
+		return function () {
+			_before && _before (this,arguments);
+			var _result = _watched.apply (this,arguments);
+			_after && _after (this,arguments,_result);
+			return _result;
+		};
+	};
+
+	Uize.watchMethod = function (_context,_methodName,_before,_after) {
+		if (!Uize.isInstance (_context))
+			_context = _context.prototype
+		;
+		var
+			_watched = _context [_methodName],
+			_watcher = _context [_methodName] = Uize.watchFunction (_watched)
+		;
+		return {
+			watch: function () {_context [_methodName] = _watcher},
+			unwatch: function () {_context [_methodName] = _watched}
+		};
+	};
+	...................................................................
+
+Uize.memoize
+	............................................................................
+	Uize.memoize = function (_function) {
+		var _resultsCache = {};
+		return function () {
+			var _cacheKey = Uize.Json.to (arguments);
+			return (
+				_cacheKey in _resultsCache
+					? _resultsCache [_cacheKey]
+					: (_resultsCache [_cacheKey] = _function.apply (this,arguments))
+			);
+		};
+	};
+
+	Uize.memoizeMethod = function (_context,_methodName) {
+		// ...
+	};
+	............................................................................
+
+	- add ability to memoize a method (memoizeMethod)
+	- consider supporting ability to dynamically unmemoize / turn memoization on or off
+	- expose more granular memoization cache methods to allow functions to cache more discriminately
+	- for basic memoization, support an optional function that can test the arguments values to determine whether or not memoization should be used for the specific call
+	- consider supporting functions that may be asynchronous (ie. use callbacks)
+	- support ability to clear entire cache
+	- support ability to invalidate cache for a specific set of argument values
+	- idea: ability to count time saved as a result of memoization (ie. keep track of number of times particular argument sets are encountered, and how long it took for first calculation)
+
+Uize.constrain
+	Support a wrap flag
+		Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.
+
+		EXAMPLE USAGE
+		......................................
+		hue = Uize.constrain (hue,0,360,true);
+		......................................
+
+		IMPLEMENTATION THOUGHTS
+		.......................................................................
+		var maxMinDelta = max - min;
+		return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
+		// what about max < min?
+		.......................................................................
+
+	Unbounded
+		Support either or both of the min and max boundaries being =null= or =undefined=.
+
+Uize.reverseLookup
+	Support values for source being arrays.
+
+		EXAMPLE
+		.................................
+		Uize.reverseLookup ({
+			vegetable:['potato','tomato'],
+			fruit:['apple','orange']
+		});
+		.................................
+
+		OUTPUT
+		......................
+		{
+			potato:'vegetable',
+			tomato:'vegetable',
+			apple:'fruit',
+			orange:'fruit'
+		}
+		......................
+
+	Support multiple values for source being the same
+
+		EXAMPLE
+		......................
+		Uize.reverseLookup ({
+			potato:'vegetable',
+			tomato:'vegetable',
+			apple:'fruit',
+			orange:'fruit'
+		});
+		......................
+
+		OUTPUT
+		.................................
+		{
+			vegetable:['potato','tomato'],
+			fruit:['apple','orange']
+		}
+		.................................
+
+	Support Merging in to Target
+		- when entries are added to an existing reverse lookup object, use the following rules...
+			- if the desired key to add already exists, then...
+				- if the key's value is not an array, make it an array with the current value as the first element and the desired value to add as the second
+				- if the key's value is an array, then append the desired value to add if it is not already present
+
+Uize.indexIn
+	Support Simple Type Source
+		For simple type source, could do string index.
+
+		In this mode, =fromEndBOOL= parameter could control choice of =indexOf= vs =lastIndexOf=, and =strictEqualityBOOL= parameter could control case sensitivity.
+
+Uize.module
+	Support Code Besides in Module Loader
+		How can code require a module that is not in the modules directory (like a code beside)?
+
+		What about by specifying a path (relative to the current file) in parentheses in the module name?
+
+Multiple Inheritance
+	Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function's implementation).
+
+Library Modules
+	Library of Dispersed Modules
+		Can library modules that are outside the modules directory require modules that are outside the modules directory?
+
+Uize.clone
+	Uize.clone and Circular References
+		Handle circular references in =Uize.clone= (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)
+
+Uize.substituteInto
+	- optimize for successive substitution on the same source using the same form of map (but different values, of course)
+
+- idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.
+
+

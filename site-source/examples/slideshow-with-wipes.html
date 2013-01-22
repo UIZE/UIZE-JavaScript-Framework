@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Slideshow With Wipes | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="featured animation widget slideshow Uize.Widget.ImageWipe Uize.Widget.SlideShow"/>
+	<meta name="description" content="See an example of a JavaScript slideshow widget with stunning image wipe animation effects that you didn't believe were possible with just JavaScript."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.slideshow.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Slideshow With Wipes
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/slideshow-with-wipes.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.SlideShow.html"><code>Uize.Widget.SlideShow</code></a> is used to present a slideshow interface that allows you to step through a series of images. The images are displayed with a sophisticated wipe transition effect between them using JavaScript animation. This is achieved by using an instance of the <a href="../reference/Uize.Widget.ImageWipe.html"><code>Uize.Widget.ImageWipe</code></a> widget class, which is added as a child widget of the slideshow widget, with a child widget name that maps it to the <code>image</code> property of the slide records.</p>
+	</div>
+
+	<div id="page_slideShow-shell"></div>
+</div>
+
+<!-- JavaScript code to wire up the page and insert the slideshow -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.ImageWipe.xPresets',
+		'Uize.Widget.SlideShow',
+		'Uize.Array.Order',
+		'UizeSite.TestDataPhotos',
+		'UizeSite.Templates.SlideShow.Wipes'
+	],
+	builder:function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** add the slide show child widget ***/
+			var slideShow = page.addChild (
+				'slideShow',
+				Uize.Widget.SlideShow,
+				{
+					built:false,
+					html:UizeSite.Templates.SlideShow.Wipes,
+					width:500,
+					height:357,
+					slides:UizeSite.TestDataPhotos ()
+				}
+			);
+
+			/*** add the image wipe widget as a child widget to the slide show widget ***/
+				slideShow.addChild ('slideImage',Uize.Widget.ImageWipe,{built:false});
+
+		/*** code for cycling the wipe effects ***/
+			/* TO DO: this should be factored out for greater ease */
+			var
+				imageWipePresetNames = Uize.Array.Order.jumble (Uize.keys (Uize.Widget.ImageWipe.presets)),
+				imageWipePresetNo = -1
+			;
+			slideShow.wire (
+				'Changed.slideNo',
+				function () {
+					slideShow.children.slideImage.set (
+						Uize.Widget.ImageWipe.presets [
+							imageWipePresetNames [imageWipePresetNo = (imageWipePresetNo + 1) % imageWipePresetNames.length]
+						]
+					);
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

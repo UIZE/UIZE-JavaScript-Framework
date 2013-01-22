@@ -1,0 +1,26 @@
+This is a TO DO document for the =Uize.Date.Formatter= module.
+
+Uize.Date.Formatter.getDateComponents
+	- returns an object containing the values for all the date components
+
+Uize.Date.Formatter.format
+	- add support for time zone
+	- add support for milliseconds
+	- allow format to be a function that accepts an object containing the values for all the date components
+		- this would allow a format to be a compiled template, which would allow certain of the component values to go through encodings as well
+
+Uize.Date.Formatter.parse
+	- add support for time zone
+	- add support for milliseconds
+	- consider supporting {date} token (might need complex regular expression)
+	- possible encoding options / switches
+		- case sensitive
+		- allow padding around token values
+		- allow padding around token separators
+			eg. a date formatted with 'YYYY/MM/DD' could currently no be parsed with 'YYYY / MM / DD' because all whitespace segments are turned into \s+ matches. Perhaps this is just a switch on the whitespace segment matcher... \s* vs \s+
+	- possible loose rules around certain separator characters
+		eg. a date formatted with 'YYYY-MM-DD' could not currently be parsed with 'YYYY/MM/DD'
+	- consider making dates not validate when values for equivalent / overlapping date components don't agree
+		- eg. if the day name is not correct for the date, or if the month name is not correct for the month, or if the am/pm is not correct for the hour of the day (if it is specified using 24hr / military time)
+
+

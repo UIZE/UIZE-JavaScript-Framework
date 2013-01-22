@@ -1,0 +1,1180 @@
+Introduction
+	The UIZE JavaScript Framework provides a system to facilitate the development of behavioral logic for widgets that can be embedded in HTML pages.
+
+	The Uize.Widget Base Class
+		Widgets in the UIZE JavaScript Framework derive from the =Uize.Widget= base class.
+
+		From the =Uize.Widget= base class, widgets of the UIZE JavaScript Framework inherit certain key facilities and capabilities that are commonly needed in their implementation. The fundamentals of widgetdom are wrapped up in this base class.
+
+	Widget Class Naming
+		UIZE Widgets
+			Because UIZE widgets inherit from =Uize.Widget=, the class files are typically named =Uize.Widget.*=, such as for example the =Uize.Widget.Bar.Slider= widget class, which is a subclass of the =Uize.Widget.Bar= widget class, which is a subclass of the =Uize.Widget= base class.
+
+			SOME EXAMPLES OF WIDGET CLASS NAMES
+			..........................
+			Uize.Widget
+			Uize.Widget.Bar.Slider
+			Uize.Widget.Button
+			Uize.Widget.Calendar
+			Uize.Widget.ImageWipe
+			Uize.Widget.Options
+			Uize.Widget.Options.Tabbed
+			Uize.Widget.Tree
+			Uize.Widget.Tree.List
+			Uize.Widget.Tree.Menu
+			..........................
+
+		Custom Namespaces
+			It is not required to place widget classes under the =Uize.Widget= namespace. The `Zazzle Inc.` Web site, for example, implements a large number of custom widgets that are placed under their own =Zazzle= namespace, such as =Zazzle.ControlMove=, =Zazzle.ControlNumber=, =Zazzle.GridCell=, etc.
+
+	Meet the Widgets
+		The UIZE JavaScript Framework comes packed with scores of built in widgets.
+
+		These built in widgets include the calendar widget, the scrolly widget, the thumb zoom widget, the slider widget, the bar widget, the image port widget, the marquee widget, the window widget, the accordion widget, the tree menu widget, the tree list widget, the slide show widget, the egg timer widget, the collection widget... the list goes on and on. And new widgets are being developed all the time. Feel free to use these widgets in your own Web applications, or reference their source code for a guide on how to implement your own UIZE widgets. To get a sense of all the available widgets and how they may be used, take a swing through the many examples provided.
+
+	Every Widget Can Have Children
+		Every widget can own child widgets to support its implementation.
+
+		The widget architecture of the UIZE JavaScript Framework makes it possible to conveniently build new widgets that use other existing widgets in their implementation, in the form of child widgets. Every widget can be a parent to an unlimited number of children. The =Uize.Widget= base class implements mechanisms that provide value to the parent-child relationship.
+
+	Widget Tree
+		Because every widget can have child widgets, this makes it possible to have a hierarchical tree of widgets.
+
+		Not to be confused with "widgetry" (which we do a lot of in the UIZE JavaScript Framework), the inherent parent-child relationship of widgets in the UIZE JavaScript Framework means that one can construct an arbitrarily complex "tree" of widgets.
+
+		EXAMPLE
+		..........................................
+		page
+		page.children.colorPicker
+		page.children.colorPicker.children.sliderR
+		page.children.colorPicker.children.sliderG
+		page.children.colorPicker.children.sliderB
+		..........................................
+
+		The above representation depicts a widget tree with a =page= widget instance at the root of the tree. The =page= widget instance has one child widget, named =colorPicker=, which is an instance of the =Uize.Widget.ColorPicker= class. The =colorPicker= widget has three child widgets - =sliderR=, =sliderG=, and =sliderB= - which are added in the implementation of the =Uize.Widget.ColorPicker= class.
+
+		The hierarchical nature of the widget tree brings the same kinds of benefits to the use of widgets in an application as the Document Object Model brings to document structure, or nested encapsulation brings to good functional programming, or folder structure brings to file management. Hierarchy is a pervasive phenomenon in complex systems of all kinds, and the widgets want some of that sweet hierarchy juice as well.
+
+	Page Widget
+		What is the Page Widget?
+			In the UIZE JavaScript Framework, the page is a widget too.
+
+			Yes, the whole Web page is considered a widget. A revolutionary concept, perhaps. Because the widget framework of UIZE supports a hierarchical structure for widgets (the `widget tree`), the most logical thing to put at the root of that tree on a Web page is a widget that represents the page. In this way, the widget tree is analogous to - but not identical to - the DOM structure, and the page widget is to the widget tree as =documentElement= is to the DOM hierarchy of a document.
+
+		What Does the Page Widget Do?
+			The page widget provides an environment and services that can be relied upon by child widgets in its tree.
+
+			As the root parent of the `widget tree`, the page widget gets to provide to all widgets on the tree:
+
+			- useful context (such as environment variables)
+			- useful facilities (such as decorated alert/confirmation dialogs, methods for generating URLs for the site, localization resources, etc.)
+
+			Facilities provided by the page widget are available to child widgets via their =getInherited= and =callInherited= instance methods. The page widget base class also implements a `widget adoption` mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (ie. requiring no JavaScript to be previously loaded).
+
+		What Doesn't the Page Widget Do?
+			The page widget doesn't do a lot of things.
+
+			The page widget paradigm is a progressive / opt-in design pattern for a page's client code. The UIZE JavaScript Framework doesn't presume that all aspects of a page's functionality need to be under the purview of - or even known about by - the page widget.
+
+			Ideally, functionality can be migrated into the page widget as it proves convenient to do so, and as the benefits of doing so prove compelling. However, a pragmatic approach is to expect that aspects of what appear in a page will remain the domain of middle tier code, or even that some aspects of client interaction may be controlled by other non-UIZE JavaScript code, such as code using aspects of other JavaScript frameworks, widgets or utilities from other providers, proprietary JavaScript code not written according to the UIZE model, or just legacy JavaScript code.
+
+			Essentially, as the page widget model proves useful in your Web applications, your own page widget subclasses will gather more functionality over time.
+
+		Where is the Page Widget?
+			The page widget base class is implemented in the =Uize.Widget.Page= module.
+
+		Your Own Page Widgets
+			Any Web site is likely to have several subclasses of the =Uize.Widget.Page= class - likely even a small class hierarchy.
+
+			For example, the `Zazzle Inc.` Web site implements its own =Zazzle.Page= page widget class, that is a subclass of =Uize.Widget.Page=. To get an idea of how the page widget paradigm is applied to a real world project, take a look at the module reference for the =UizeSite.Page= class and all its subclasses.
+
+			The =Uize.Widget.Page= base class provides some base functionality. You will likely want to create a subclass of =Uize.Widget.Page=, in a namespace appropriate for your site, and then use that in all your pages. That's a good starting point, even if your subclass adds no additional functionality initially. In time, you will find that your page widget class is a useful place to put functionality that needs to be available to many widgets that may exist at different places in the `widget tree`.
+
+			You may also find yourself creating subclasses of your page widget base class, for the pages of different sections of your Web site. If a lot of pages in a section share common functionality, then you can implement that functionality in a page widget subclass. This may involve adding and connecting up child widgets to support certain features for those pages. This provides an object oriented approach for designing the shared functionality of pages in different sections, rather than employing the typical ad hoc, source-in-shared-snippets approach.
+
+More on Widgets
+	Implied Nodes
+		At some point, a widget is going to want to touch the DOM - especially if it wants to be at all useful.
+
+		The UIZE JavaScript Framework provides a facility for associating DOM nodes in a document to corresponding widget instances. Using this facility in the design of widget classes allows multiple instances of such classes to coexist in the same page together, without stomping on each other's nodes (yes, it sounds painful, I know). This facility is referred to as the system of "implied nodes".
+
+		What are These Implied Node Thingies?
+			Implied nodes are DOM nodes that are expected by a widget class to exist in the document in order to support the functioning of instances of such a class.
+
+			They are "implied" because the implementation of a widget class implies their presence in the DOM. The vast majority of widget classes are implemented to expect the existence of certain nodes in the DOM. For example, the slider class (=Uize.Widget.Bar.Slider=) anticipates the presence of the =track=, =knob=, =empty=, =full=, and =value=, and root (blank) implied nodes.
+
+		Need-to-Know Basis
+			The HTML markup for a widget instance may contain more DOM nodes than the widget's implementation knows - or cares - about.
+
+			To a widget class, all HTML outside of the implied nodes that its implementation cares about is like dark matter in the Universe. A widget class doesn't need to know about all the bells and whistles that may be added to the decoration of a widget through the addition of further extraneous layout HTML. This allows flexibility in the choice of layout implementation for widgets, since widgets don't presume an exact DOM structure for their HTML - they only expect certain implied nodes, to which they will attach behavior logic.
+
+		In the Spirit of Unobtrusive JavaScript
+			When it comes to widgets, the UIZE JavaScript Framework is predicated on the notion of unobtrusive JavaScript.
+
+			The GLUE (Glue Logic Upon Elements) paradigm means that the HTML for widgets contains no inline event handlers. Instead, all the behavior logic for widgets is neatly consolidated into JavaScript modules. As external files, code for widget classes can be scrunched and is cacheable. This approach also frees up designers and Web developers to work on the HTML layout and CSS separately from an interaction programmer, and without having to worry about potentially breaking behavior logic. This design strategy is sometimes referred to as the [[http://en.wikipedia.org/wiki/Separation_of_concerns][separation of concerns]].
+
+			Now, when an instance of a widget class is created and its user interface is wired up, the implied nodes of the widget may be wired up with event handlers, and properties of these nodes might be modified in order to correctly reflect current state for the widget.
+
+		How Are Implied Nodes Found?
+			By now you're probably wondering how an instance of a widget class finds its implied nodes so it can then have its way with them.
+
+			The UIZE JavaScript Framework relies upon node ids for identifying implied nodes of widgets. The =id= system is largely orthogonal to document structure and document styling. Although ids *are* used at times for narrowly selecting very specific nodes for styling, the rather compelling benefits of reusability means that CSS style sheets tend to rely more heavily on class names, tag names, and structure relationships for selecting nodes in their style rules. By using the =id= system, widgets can minimize competition with the interests of designers and Web devs. Since id-based wiring is a core tenet of the framework, CSS selectors are not necessary for finding nodes that belong to widget instances.
+
+		Widget Namespaces and the idPrefix
+			The namespace for the implied nodes of a widget instance is controlled by the value of its =idPrefix= state property.
+
+			The =idPrefix= is just what it sounds like it is: it's the prefix for the ids of all implied nodes that the widget may have. The ids for implied nodes of a widget are named according to the following rule...
+
+			IMPLIED NODE ID SYNTAX
+			............................
+			[idPrefix]-[impliedNodeName]
+			............................
+
+			The =idPrefix= and implied node name are joined with a "-" (hyphen) character. For example, this means that an instance of the slider class (=Uize.Widget.Bar.Slider=) with its =idPrefix= set to the value ='mySlider'= would have the following ids for its implied nodes...
+
+			............................
+			mySlider        // root node
+			mySlider-track
+			mySlider-knob
+			mySlider-empty
+			mySlider-full
+			mySlider-value
+			............................
+
+			The =idPrefix= acts as a namespace, allowing the same implied nodes to appear multiple times in the DOM for different instances of the same widget class. Setting different =idPrefix= values for the different instances of the widget prevents the ids for the implied nodes of those instances from having conflicts. For example, if you had two instances of the slider class, one with an =idPrefix= of ='mySlider1'=, and the other with an =idPrefix= of ='mySlider2'=, then the two instances would have the following ids for their implied nodes...
+
+			..........................................
+			mySlider1        // root node of mySlider1
+			mySlider1-track
+			mySlider1-knob
+			mySlider1-empty
+			mySlider1-full
+			mySlider1-value
+			mySlider2        // root node of mySlider2
+			mySlider2-track
+			mySlider2-knob
+			mySlider2-empty
+			mySlider2-full
+			mySlider2-value
+			..........................................
+
+			IMPORTANT
+
+			In order for widgets to work correctly, two different widget instances should never have the same value for their =idPrefix= property.
+
+		Widget Namespaces and the Widget Tree
+			Different instances of the same widget class, but at different places on the widget tree, will have different =idPrefix= values that reflect where they reside on the tree.
+
+			When adding a child widget to a parent widget, the =idPrefix= value for the child widget is derived by combining the =idPrefix= of the parent widget with the name of the child widget, according to the following rule...
+
+			CHILD WIDGET ID PREFIX NAMING
+			..................................
+			[parentIdPrefix]_[childWidgetName]
+			..................................
+
+			The =idPrefix= of the parent widget and the name of the child widget are joined with a "_" (underscore) character to form an =idPrefix= for the child widget. For example, this means that an instance of the slider class that was added as a child widget to an instance of the page widget class (=Uize.Widget.Page=), where the =idPrefix= of the page widget instance is ='page'= and where the name of the slider child widget is ='mySlider'=, would have the following ids for its implied nodes...
+
+			...........................................................
+			page_mySlider        // root node of page.children.mySlider
+			page_mySlider-track
+			page_mySlider-knob
+			page_mySlider-empty
+			page_mySlider-full
+			page_mySlider-value
+			...........................................................
+
+			Looking at the ids in the HTML, you can tell what part of the id "path" is the implied node, and what part is the parent chain. Underscores separate the names of widgets along the parent chain, and the hyphen terminates the parent chain to indicate an implied node of the last child widget in that chain.
+
+			EXAMPLE
+			............................................................
+			// create an instance of the page widget class
+			var pageWidget = Uize.Widget.Page ({idPrefix:'page'});
+
+			// add a slider child widget to the page widget
+			pageWidget.addChild ('slider',Uize.Widget.Bar.Slider);
+
+			// add a plain vanilla child widget
+			var plainWidget = pageWidget.addChild ('plain',Uize.Widget)
+
+			// now add a slider child widget to the plain vanilla widget
+			plainWidget.addChild ('slider',Uize.Widget.Bar.Slider);
+			............................................................
+
+			The above example would produce the following set of implied node ids for the four widgets involved...
+
+			.............................................................................
+			page                      // root node of page widget instance
+			page_slider               // root node of page.children.slider
+			page_slider-track
+			page_slider-knob
+			page_slider-empty
+			page_slider-full
+			page_slider-value
+			page_plain                // root node of page.children.plain
+			page_plain_slider         // root node of page.children.plain.children.slider
+			page_plain_slider-track
+			page_plain_slider-knob
+			page_plain_slider-empty
+			page_plain_slider-full
+			page_plain_slider-value
+			.............................................................................
+
+			As you can see from the above example, different child widgets *can* have the same name, as long as they reside at different places on the widget tree. In this case, there are two slider instances with the name ='slider'=, but one is a child of the page widget, and the other is a child of the deeper plain vanilla widget.
+
+		Required vs. Optional Implied Nodes
+			Not all of a widget class' implied nodes are always required in order for an instance of the widget to function correctly.
+
+			Some implied nodes may be deliberately implemented to be optional in the markup. For example, in the case of the slider widget class (=Uize.Widget.Bar.Slider=), the =track= and =knob= implied nodes are required, while the =empty=, =full=, and =value= implied nodes are optional. Widgets with optional implied nodes are implemented so that they fail gracefully when those nodes are not present in the markup. To find out which implied nodes are required and which ones are optional for a particular widget class, consult the reference documentation for the class.
+
+		Special Implied Nodes
+			Besides the implied nodes that are supported by subclasses of the =Uize.Widget= base class, the base class itself supports special implied nodes.
+
+			The Root Node
+				The optional root node of a widget is the implied node with the name =''= (empty string).
+
+				The =id= for the root node of a widget instance is the value of that instance's =idPrefix= state property - there is no "-" (hyphen) separating the =idPrefix= and the empty implied node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=. If you're looking at an implied node in the HTML and there's no hyphen character in its id, then you know you're dealing with the root node for a widget instance.
+
+				A reference to the root node can be obtained by either specifying the value =''= (empty string) or no =impliedNodeSTRorBLOB= parameter when calling the =getNode= instance method, as in...
+
+				............................................
+				var theRootNode = myWidget.getNode ();
+				var alsoTheRootNode = myWidget.getNode ('');
+				............................................
+
+				Similarly, when using the `node related instance methods`, one can specify the value =''= (empty string), as in...
+
+				....................................................................................
+				myWidget.displayNode ('',false); // hide myWidget, if it has a root node in its HTML
+				....................................................................................
+
+			The Shell Node
+				The optional =shell= implied node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
+
+				The following example illustrates use of the =shell= implied node by showing some HTML before and after a widget instance is set up. The widget instance that is created is a plain vanilla widget (ie. an instance of the =Uize.Widget= base class), with its =idPrefix= set to the value ='myWidget'=.
+
+				HTML BEFORE
+				.........................
+				<div id="myWidget-shell">
+				</div>
+				.........................
+
+				WIDGET SETUP
+				..........................................................
+				// create a plain vanilla widget instance
+				var myWidget = Uize.Widget ({
+					idPrefix:'myWidget',
+					html:'<div id="myWidget">I CRAWLED INTO MY SHELL</div>'
+				});
+
+				// insert the UI for the widget
+				myWidget.insertUi ();
+				..........................................................
+
+				HTML AFTER
+				...................................................
+				<div id="myWidget-shell">
+					<div id="myWidget">I CRAWLED INTO MY SHELL</div>
+				</div>
+				...................................................
+
+		Accessing Implied Nodes
+			References to the implied nodes of a widget instance can be obtained by calling the =getNode= instance method.
+
+			SYNTAX
+			..................................................
+			nodeOBJ = myWidget.getNode (impliedNodeSTRorBLOB);
+			..................................................
+
+			Additionally, the `node related instance methods` of the =Uize.Widget= class allow implied nodes to be specified by their name, so it is *not* necessary in most cases to even use the =getNode= method when using these node related instance methods. However, the =getNode= method *is* quite useful for other methods - possibly outside of the =Uize.Widget= class - that deal in node references. This is true of some of the static methods in the =Uize.Node= module, since not all of the static methods of this module have analogs in the =Uize.Widget= class - only the most generally useful ones do.
+
+			EXAMPLE
+			.........................................................................
+			// create a plain vanilla widget instance
+			var myWidget = Uize.Widget ({idPrefix:'myWidget'});
+
+			// inject some HTML into the document for the widget instance
+			Uize.Node.injectHtml (
+				document.body,
+				'<span id="myWidget-title">this is the title implied node</span>'
+			);
+
+			// change the title's text color and background color to white over black
+			myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
+
+			// or, get a reference to the "title" implied node, to be used later
+			var myWidgetTitleNode = myWidget.getNode ('title');
+			.........................................................................
+
+			The above example illustrates both specifying an implied node by name when using the =setNodeStyle= node related instance method, as well as getting a reference to a node using the =getNode= method.
+
+		Node Related Instance Methods
+			Various static methods of the =Uize.Node= module are exposed as instance methods of the =Uize.Widget= class.
+
+			The node related instance methods of the =Uize.Widget= class differ from their counterparts in the =Uize.Node= module in the following key ways:
+
+			1) they are named differently
+			2) string values for nodes are implied node names, rather than node ids
+			3) some =Uize.Widget= class counterparts provide additional logic
+
+			Naming Scheme for Node Related Instance Methods
+				Node related instance methods of the =Uize.Widget= class are named like their counterparts in the =Uize.Node= module, but with the word "Node" spliced in at an appropriate spot.
+
+				EXAMPLES
+				........................................................
+				Uize.Node                     Uize.Widget
+				---------                     -----------
+				Uize.Node.display             myWidget.displayNode
+				Uize.Node.getStyle            myWidget.getNodeStyle
+				Uize.Node.getValue            myWidget.getNodeValue
+				Uize.Node.remove              myWidget.removeNode
+				Uize.Node.setClipRect         myWidget.setNodeClipRect
+				Uize.Node.setInnerHtml        myWidget.setNodeInnerHtml
+				Uize.Node.setOpacity          myWidget.setNodeOpacity
+				Uize.Node.setProperties       myWidget.setNodeProperties
+				Uize.Node.setValue            myWidget.setNodeValue
+				Uize.Node.show                myWidget.showNode
+				Uize.Node.wire                myWidget.wireNode
+				Uize.Node.unwire              myWidget.unwireNode
+				........................................................
+
+			Node Related Instance Methods Are More Concise
+				The node related instance methods are provided as a convenience, as they are more concise and more semantically elegant.
+
+				INSTEAD OF...
+				.....................................................................................
+				Uize.Node.setStyle (myWidget.getNode ('title'),{color:'#fff',backgroudColor:'#000'});
+				.....................................................................................
+
+				USE...
+				.....................................................................
+				myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
+				.....................................................................
+
+			Straight Mappings, For the Most Part
+				Most of the node related instance methods are straight mappings to their =Uize.Node= module counterparts, with the differences mentioned above in method name and how nodes are specified.
+
+				So, for example, the following two statements are equivalent...
+
+				.....................................................................................
+				Uize.Node.setStyle (myWidget.getNode ('title'),{color:'#fff',backgroudColor:'#000'});
+				myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
+				.....................................................................................
+
+				A few of the instance methods, however, add additional logic not implemeted in the =Uize.Node= module. Example of such methods include the =removeNode= and =wireNode= instance methods.
+
+				When removing a node from the DOM using the =removeNode= instance method, the cached reference to the removed implied node is cleared from `the node cache`. When wiring events on implied nodes using the =wireNode= instance method, an ID for the widget instance that owns the event wirings is provided to the =Uize.Node.wire= static method, so that events can be unwired later by the widget by providing the same owner ID to the =Uize.Node.unwire= static method.
+
+				INCORRECT
+				................................................
+				Uize.Node.wire (
+					myWidget.getNode ('title'),
+					'click',
+					function () {alert ('You clicked the title')}
+				);
+				................................................
+
+				CORRECT
+				................................................
+				myWidget.wireNode (
+					'title',
+					'click',
+					function () {alert ('You clicked the title')}
+				);
+				................................................
+
+				While the first snippet of code *will* wire up the =click= event of the =title= implied node of the widget instance =myWidget=, the wiring will not be associated to this widget instance. So, when at a later stage you might call the =unwireUi= instance method on the instance, that =click= event handler will not be unwired. With the second snippet of code, the =click= event *will* be unwired correctly when calling =myWidget.unwireUi ()=.
+
+		Implied Node Names vs. Node Ids
+			While implied nodes are typically specified by name when using the node related instance methods, one can also use references to them.
+
+			The following statements are equivalent ways to replace the =innerHTML= for the =title= implied node of the widget instance =myWidget=...
+
+			....................................................................
+			myWidget.setNodeInnerHtml ('title','THIS WORKS');
+			myWidget.setNodeInnerHtml (myWidget.getNode ('title'),'THIS WORKS');
+
+			var _titleNode = myWidget.getNode ('title');
+			myWidget.setNodeInnerHtml (_titleNode,'THIS WORKS');
+			....................................................................
+
+			Using a node reference for an implied node may be more convenient if one already has a reference to the node. Capturing a reference to an implied node in a private instance property or a local variable can offer a slight performance advantage, but not much since references to implied nodes are cached by the `the node cache`.
+
+		The Node Cache
+			The =Uize.Widget= base class implements a system for caching references to implied nodes when they are first accessed.
+
+			This caching mechanism improves performance on subsequent occasions when implied nodes that have already been cached are again accessed, and makes it possible to specify implied nodes by named without worrying about significant cost of repeated lookups in the DOM - something that can be quite slow with large or complex documents in certain browsers. While improving performance, this caching mechanism (like any caching mechanism) has some implications that should be considered when implementing more sophisticated widget classes.
+
+			Don't Forget To Flush
+				Unlike with toilets, there are only a few rare instances where it is necessary to flush the node cache, and these typically involve more sophisticated widget implementations.
+
+			How to Flush
+				Flushing the node cache for a widget instance is performed quite easily by calling the instance's =flushNodeCache= method.
+
+				SYNTAX
+				....................................................................................
+				myWidget.flushNodeCache (impliedNodeName);  // flush the cache for one implied node
+				myWidget.flushNodeCache ();                 // flush the cache for ALL implied nodes
+				....................................................................................
+
+				It is safe to flush the cache for implied nodes that have not already been cached. It is also safe to flush the entire cache at any time. This will not affect the functioning of a widget that has already been wired up, but may incur a very small performance cost the next time that operations on implied nodes are performed.
+
+			DOM Added Later
+				In some cases, an implied node - or several implied nodes - may be added at some point after a widget has been wired up.
+
+				If an attempt is made to operate on or to get a reference to an implied node of a widget and that implied node does not exist in the DOM, then a =null= result *will be cached* for that node. This is an optimization for implied nodes that may be optional in a widget's implementation. So, if the widget anticipates that an implied node may be added at some later stage, after the widget has already been wired up and an attempt has already been made to access that node, then the cached reference can be flushed using the =flushNodeCache= method.
+
+				EXAMPLE
+				..............................................................................
+				// we create a widget instance with the idPrefix of "foo" and wire it up
+				var myWidget = Uize.Widget ({idPrefix:'foo'});
+				myWidget.wireUi ();
+
+				// no DOM for "bar" implied node yet, so null value is cached for it
+				myWidget.setNodeInnerHtml ('bar','I fail silently [shhhhhh]');
+
+				// now we inject the HTML for the "bar" implied node into the body
+				Uize.Node.injectHtml (document.body,'<div id="foo-bar"></div>');
+
+				// now "bar" implied node exists, but null value is cached, so nothing happens
+				myWidget.setNodeInnerHtml ('bar','D\'OH!');
+
+				// now we flush the node cache for the "bar" implied node
+				myWidget.flushNodeCache  ('bar');
+
+				// now a reference to the injected node is obtained, and "Woo Hoo!" shows up
+				myWidget.setNodeInnerHtml ('bar','Woo Hoo!');
+				..............................................................................
+
+				REMEMBER
+				Null references are cached!!!
+
+			DOM Rebuilt
+				In some cases, one may wish to rebuild or otherwise modify the DOM for a widget, replacing one or more implied nodes for which references have already been cached.
+
+				In such cases, unless one flushes the node cache, attempts to access the replaced nodes will result in accessing the old nodes that have become orphaned from the DOM, since the node cache holds on to references to them. When significantly modifying the DOM for a widget that has been wired, it may be safest to flush the widget's entire node cache by specifying no parameter when calling the =flushNodeCache= method.
+
+			Automatic Flushing
+				In addition to being able to flush the node cache using the =flushNodeCache= method, the node cache is also automatically completely flushed in certain situations.
+
+				Such situations include...
+
+				- when the widget is unwired by calling the =unwireUi= instance method
+				- when the value of the =idPrefix= state property is modified
+				- when the DOM for the widget is built by explicitly calling the =buildUi= or =insertUi= instance methods, or by calling the =insertOrWireUi= instance method when the =built= state property is set to =false=
+
+		### The Node Map
+			- node map declared at the class level
+			- node map declared at the instance level
+			- changing the mapping of a node that is already cached will require flushing of the cache for that node
+
+		### MORE TO DISCUSS
+			- idPrefixConstruction
+			- in typical cases, no need to specify idPrefix when adding child widgets
+				- in exceptional cases, if idPrefix is specified, isPrefixConstruction is automatically set to 'explicit' if not specified when adding child widget
+
+	Declarative Syntax For Widget Properties
+		The declarative syntax for widget properties provides a way for data that is to be fed to a widget's client-side JavaScript code to be included as part of the HTML that is generated by server code.
+
+		As such, the declarative data can be generated by the same server logic that generates the HTML, and the state that is reflected in the particular HTML that is generated can be serialized to JSON for consumption by the widget's JavaScript code that runs on the client side. In this way, the widget's JavaScript doesn't have to try to divine the logical state that the widget is in by poking around in the HTML and DOM nodes generated initially by the server, but the declarative data explicitly tells the widget what its initial state should be to match the initial state of the HTML. The major benefit here is that it lets the server code encapsulate the generation of the HTML along with a declaration of widget state that is picked up when the widget is either adopted or otherwise created on the client side.
+
+		An Example
+			In the following example, HTML that is to be wired up by an instance of the =Uize.Widget.HoverFader= widget class is generated by the server, along with a declaration of widget properties that should be used for the widget instance.
+
+			EXAMPLE
+			...........................................................................
+			<!-- HTML for a menu widget that is generated by a server component -->
+				<!-- this is just the HTML for the menu -->
+					<div id="page_menu1HoverFader" class="menu">
+						<a href="javascript://" class="menuLink">About Us</a>
+						<a href="javascript://" class="menuLink">Products</a>
+						<a href="javascript://" class="menuLink">Store Locator</a>
+						<a href="javascript://" class="menuLink">Investors</a>
+						<a href="javascript://" class="menuLink">Contact Us</a>
+						<a href="javascript://" class="menuLink">Support</a>
+						<a href="javascript://" class="menuLink">My Account</a>
+					</div>
+
+				<!-- this is the declaration of the widget's properties -->
+					<script type="text/javascript">
+						window.$page_menu1HoverFader = {
+							nodes:{root:'page_menu1HoverFader',className:/\bmenuLink\b/}
+						};
+					</script>
+
+			<!-- some page setup code -->
+				<script type="text/javascript">
+					/*** create the page widget ***/
+						var page = Uize.Widget.Page ();
+
+					/*** add the JavaScript widget to manage the hover fader effects ***/
+						page.addChild ('menu1HoverFader',Uize.Widget.HoverFader);
+
+					/*** wire up the page ***/
+						page.wireUi ();
+				</script>
+			...........................................................................
+
+			Even though the widget instance is created and wired up by separate client side code, the server side code that generates the HTML is still able to provide widget properties for the instance. This is useful here because the server side code knows the CSS class name that is used for the link tags and that needs to be used to provide the =Uize.Widget.HoverFader= instance with nodes to wire up with the fancy hover effects. By encapsulating this in the server's code, if the CSS class name is modified in the HTML generation code, then the widget properties can be updated as well so that the client side wiring still works correctly. Most importantly, the client side wiring code is none the wiser about the change in the CSS class name - this is all handled by the server side HTML generation code.
+
+		Widget Properties Are Picked Up Early
+			Widget properties are picked up as early as possible, so that the property values can be available even to code written for the alphastructor of a widget class.
+
+			Provided that a widget is instantiated with an =idPrefix= specified (which happens automatically when adding a widget as a child widget of another widget), code in the =Uize.Widget= base class will look for the presence of the global variable for the declarative widget properties. If the variable is present, the properties will be harvested and stitched in to the properties object that is used to set the initial state of the widget instance and that is also available as a parameter to the alphastructor and omegastructor functions of a widget class.
+
+			EXAMPLE
+			...............................................................................................
+			/*** create a page widget ***/
+				var page = Uize.Widget.Page ();      // the default idPrefix is "page"
+
+			/*** declarative syntax widget properties for widget not yet created ***/
+				window.$page_myWidget = {foo:'bar'}; // for the "myWidget" child widget
+
+			/*** create a test widget class ***/
+				var MyWidgetClass = Uize.Widget.subclass (
+					/*** the alphastructor ***/
+						function (_properties) {
+							alert (_properties.foo);    // alerts the text "bar"
+							alert (this.get ('foo'));   // alerts the text "undefined" (set hasn't happened)
+						},
+					/*** the omegastructor ***/
+						function (_properties) {
+							alert (_properties.foo);    // alerts the text "bar" (it's still here, no surprise)
+							alert (this.get ('foo'));   // alerts the text "bar" (the set has happened by now)
+						}
+				);
+
+			page.addChild ('myWidget'Uize.Widget);
+			...............................................................................................
+
+			The above example illustrates how the widget properties that are defined for a widget (using the declarative syntax) before the widget is actually created are available as early as the alphastructor of the widget. Because the alphastructor of the =Uize.Widget= base class executes before the alphastructor of the =MyWidgetClass= subclass, the declarative widget properties can be harvested and stitched into the properties parameter that is passed to both the alphastructor and omegastructor, so that the harvested properties are available during the construction code of subclasses.
+
+			What's important to note in this example is that the stitched in properties, just like any properties specified explicitly when instantiating a widget, are not yet set on the instance - that happens between the alphastructor and omegastructor. So, using the =get= instance method to query the value of the =foo= property in the alphastructor yields the value =undefined=, while doing the same query inside the omegastructor yields the value ='bar'=.
+
+		Widget Properties Can Address Widget Trees
+			Widget properties specified for a widget using the declarative syntax can also contain widget properties for any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree - using `the children state property`.
+
+		The children State Property
+			In addition to supporting a =children= instance property, the =Uize.Widget= base class also supports a companion state property of the same name but with special handling.
+
+			The children State Property vs the children Instance Property
+				The =Uize.Widget= class supports a =children= instance property as well as a =children= state property, and each has its own purpose.
+
+				The children Instance Property
+					The =children= instance property is a read-only property that provides access to a widget's child widgets.
+
+					For example, a widget named =rgbSlider= that is a child widget of a page widget could be accessed by a statement like =page.children.rgbSlider=, where the =children= property of the page widget instance provides access to all of its child widgets.
+
+				The children State Property
+					The =children= state property is a somewhat unique type of state property that provides a versatile way to distribute widget properties to a widget's child widgets.
+
+					When the value of the =children= state property is set, a conformer processes the value and attempts to "consume" it. The value specified should be an object, where each property of the object is treated as providing widget properties for a child widget. The conformer attempts to distribute those widget properties objects to the corresponding child widgets. For example, the statement =page.set ({children:{rgbSlider:{value:'#ff0000'}}})= is attempting to distribute the widget properties ={value:'#ff0000'}= to the child widget named =rgbSlider= of the page widget.
+
+					For any properties objects for which there are no corresponding child widgets, they are retained in order to potentially be used later when a child widget that does correspond is added, at which time the properties will be supplied as overrides to any properties that are specified by the code adding the child widget.
+
+			The children State Property Allows Deep Setting
+				The =children= state property allows properties to be distributed to any or all of a widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in a widget's widget tree.
+
+				Consider the following example...
+
+				EXAMPLE
+				....................................................................
+				/*** build up a widget tree under the page widget ***/
+					var
+						page = Uize.Widget.Page (),
+						rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
+					;
+
+					rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+
+				/*** now, set values for the deepest widgets in the widget tree ***/
+					page.set ({
+						children:{
+							rgbSlider:{
+								children:{
+									sliderR:{value:127},
+									sliderG:{value:255},
+									sliderB:{value:0}
+								}
+							}
+						}
+					});
+				....................................................................
+
+				If the =sliderR=, =sliderG=, and =sliderB= slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse. This is admittedly not a terribly compelling example of how to use the special behavior of the =children= state property, but it demonstrates the basic principle.
+
+			The children State Children Property Allows Deferred Pickup
+				The special behavior of the =children= state property allows widget properties to be specified for a child widget even before that child widget has been created.
+
+				EXAMPLE
+				.......................................................................................
+				/*** create a page widget, specifying properties for child widgets not yet created ***/
+					var page = Uize.Widget.Page ({
+						children:{
+							rgbSlider:{
+								children:{
+									sliderR:{value:127},
+									sliderG:{value:255},
+									sliderB:{value:0}
+								}
+							}
+						}
+					});
+
+				/*** now, create the child widgets for which properties were specified earlier ***/
+					var rgbSliders = page.addChild ('rgbSliders',Uize.Widget);
+
+					rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+				.......................................................................................
+
+				In the above example, a page widget is being created and a value is being specified for its =children= state property that is defining widget properties for child widgets in the page widget's widget tree that have not yet been created. Then, after the fact, a widget tree is fleshed out for the page widget, with child widgets that correspond to the structure of the object specified for the =children= state property when the page widget instance was created. Because of the special way that the =children= state property works, the widget properties defined earlier are "picked up" by the child widgets when they are created.
+
+			The children State Property is Respected in the Declarative Syntax
+				Along with using the =children= state property in the constructor of a widget instance, when calling the instance's =set= method or in a widget adoption declaration, the =children= state property can also be used in the `declarative syntax for widget properties`.
+
+				EXAMPLE
+				......................................................................
+				/*** declare widget properties for a page widget ***/
+					window.$page = {
+						children:{
+							rgbSlider:{
+								children:{
+									sliderR:{value:127},
+									sliderG:{value:255},
+									sliderB:{value:0}
+								}
+							}
+						}
+					};
+
+				/*** now, create the page widget and build a widget tree under it ***/
+					var
+						page = Uize.Widget.Page (),
+						rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
+					;
+					rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+				......................................................................
+
+				In the above example, a =$page= property is being defined on the =window= object. Because the default =idPrefix= of the page widget is ='page'=, the =$page= property is effectively declaring widget properties for the page widget.
+
+				In our example, the page widget is created later. What you'll notice is that the value of the =$page= property is an object that contains a =children= property, which is itself an object containing a single =rgbSlider= property. This is declaring widget properties for the =rgbSlider= child widget of the page widget. Furthermore, the =rgbSlider= property is an object containing its own =children= property, which is declaring widget properties for the =sliderR=, =sliderG=, and =sliderB= child widgets of the =rgbSlider= child widget.
+
+				So, the widget properties declared for a widget using the declarative syntax may contain widget properties for any or all of the child widgets of the widget - all the way down to the deepest child widgets in the widget's widget tree.
+
+			Setting Doesn't Create or Destroy Children
+				Setting the value of the =children= state property is handled in a special way and has no effect on the actual child widgets for a widget, nor does it affect the value or contents of the =children= instance property.
+
+				When you set a value for the =children= state property, the widget instance tries to distribute any specified child widget properties to the widget's current child widgets. If widget properties are specified for a child that does not yet exist, that child widget is not created. Instead, the unapplied child widget properties are remembered. If a child widget is added later and its name corresponds to the name of a child widget for which unapplied widget properties have been remembered, then those widget properties are applied at the time of creating the child widget (for more details, see the section `The children State Children Property Allows Deferred Pickup`).
+
+	### Get Your Hands Off My Nodes
+		### - discuss using the node related instance methods on nodes that don't belong to a widget
+		### - avoid using global / shared nodes when implementing a widget class
+
+	### Wiring Phase
+		- don't wire node events during instance construction. Wire them inside the wireUi method's implementation.
+		- always check that widget isn't already wired
+		- don't add event handlers to self or child widgets or other =Uize.Class= subclass instances during wiring - these handlers won't get automatically removed when unwiring a widget through =unwireUi=, so if the widget gets unwired and rewired later, event handlers registered in this way will accumulate, leading to poor performance and potentially unpredictable behavior. Besides, it's a better design to separate the state architecture for your widgets (and how they relate to other instance) from the act of wiring up the DOM events and such. A widget should be able to operate in an application and carry state correctly without being wired up.
+
+	### Inheritance From Tree
+		enabledInherited
+		busyInherited
+		getInherited
+
+		The Busy Mechanism
+
+		The Enabled Mechanism
+
+		Providence (abundant context)
+			callInherited
+			getProvider
+			getProvided
+			callProvided
+
+More on Child Widgets
+	Adding Child Widgets
+		Child widgets are added to a widget using the =addChild= instance method, as in...
+
+		EXAMPLE
+		...................................
+		myWidget.addChild (
+			'childWidgetName',
+			MyNamespace.MyChildWidgetClass,
+			{
+				property1Name:property1Value,
+				property2Name:property2Value,
+				...
+				propertyNName:propertyNValue
+			}
+		);
+		...................................
+
+		Notice how the child widget is not created first using its class constructor. Instead, a reference to the child widget's class is provided in the second parameter, and the values for the child widget's state properties are supplied in the optional third parameter. By leaving it up to the parent widget to instantiate the child widget before adding it, the parent can ensure that the child widget knows its =parent= and its =idPrefix= when its constructor is executed. This can be useful information for the code inside the constructor.
+
+	Referencing Child Widgets
+		After the above code has executed, the newly added child widget can be referenced using your widget's =children= instance property, as in =myWidget.children.childWidgetName=.
+
+	Removing Child Widgets
+		The child widget can be removed at a later stage using your widget's =removeChild= instance method, as in...
+
+		.........................................
+		myWidget.removeChild ('childWidgetName');
+		.........................................
+
+		If no child widget by the specified name exists, then the =removeChild= method will have no effect. In addition to being able to specify a child widget to remove by its name, a reference to a child widget can also be supplied, as in...
+
+		.....................................
+		myWidget.removeChild (myChildWidget);
+		.....................................
+
+		If you have only a reference to the child widget, then you can remove that widget from its parent widget by using the =parent= instance property, as in...
+
+		.................................................
+		myChildWidget.parent.removeChild (myChildWidget);
+		.................................................
+
+Widget Adoption
+	A facility exists within the =Uize.Widget.Page= class for automatic adoption of child widgets that are declared inside a page using a special declarative syntax.
+
+	This mechanism makes it possible to place the markup and the data that a JavaScript widget needs in the page in a declarative manner, without having to explicitly require the JavaScript modules that the widget might need, and without having to explicitly add the child widget in the page widget's implementation. Widgets can be declared in this way without having to source in all JavaScript modules that the widget might require ahead of the declaration block.
+
+	EXAMPLE
+	.............................................................
+	<div id="menu1" class="menu">
+		<a href="javascript://" class="menuLink">About Us</a>
+		<a href="javascript://" class="menuLink">Products</a>
+		<a href="javascript://" class="menuLink">Services</a>
+		<a href="javascript://" class="menuLink">Technology</a>
+		<a href="javascript://" class="menuLink">Solutions</a>
+		<a href="javascript://" class="menuLink">My Account</a>
+		<a href="javascript://" class="menuLink">Store Locator</a>
+		<a href="javascript://" class="menuLink">Investors</a>
+		<a href="javascript://" class="menuLink">Support</a>
+		<a href="javascript://" class="menuLink">Contact Us</a>
+	</div>
+	<script type="text/javascript">
+		window.$page_menu1HoverFader = {
+			widgetClass:'Uize.Widget.HoverFader',
+			nodes:{root:'menu1',className:/\bmenuLink\b/}
+		};
+	</script>
+	.............................................................
+
+	In the above example, an instance of the =Uize.Widget.HoverFader= class is being adopted by the page widget. The adoption mechanism will automatically resolve the module dependencies for this class and dynamically load all the necessary modules if they're not already loaded. Once all modules are loaded, the widget instance will be created and wired up.
+
+	Declarative Syntax For Widget Adoption
+		The syntax for declaring a widget to adopt is as follows...
+
+		SYNTAX
+		.................................................
+		<script type="text/javascript">
+			window.$page_widgetName = {
+				widgetClass:'WidgetClassName',
+				setGetProperty1Name:'setGetProperty1Value',
+				setGetProperty2Name:'setGetProperty2Value',
+				setGetProperty3Name:'setGetProperty3Value'
+			};
+		</script>
+		.................................................
+
+		IN A NUTSHELL
+
+		Basically, you're assigning a property to the =window= object, where the property name is the =idPrefix= of the widget you want to have instantiated, prefixed with a "$" (dollar) sign. The dollar sign serves to minimize namespace collisions with other properties on the window object, and also to flag the property to the page widget as a candidate for adoption. The value of the property is a bundle of state property values for the widget that's to be instantiated and adopted. The special =widgetClass= property is a string value specifying the class name of your widget. Note that you can't just have an "open" class reference here, because the widget class is not guaranteed to be loaded and may need to be dynamically loaded.
+
+		INCORRECT
+		...................................................
+		<script type="text/javascript">
+			window.$page_menu1HoverFader = {
+				widgetClass:Uize.Widget.HoverFader,
+				nodes:{root:'menu1',className:/\bmenuLink\b/}
+			};
+		</script>
+		...................................................
+
+		The above example will trigger an error if the =Uize.Widget.HoverFader= class isn't already loaded when the declaration is encountered, defeating the purpose of this declarative syntax. Wrap the class name in quotes.
+
+	The $[idPrefix] Syntax
+		When you add a child widget of the name ='slideShow'= to a page widget with the =idPrefix= of ='page'=, then the child widget's =idPrefix= is constructed to be ='page_slideShow'=.
+
+		Now, when you declare a widget to adopt with an =idPrefix= of ='page_slideShow'=, then the adoption mechanism determines that you want a child widget of the name ='slideShow'= to be adopted by the page widget with the =idPrefix= of ='page'=.
+
+		Furthermore, when you add a child widget of the name ='slideImage'= to a parent widget of the name ='slideShow'=, which is itself a child widget of the page with the =idPrefix= of ='page'=, then the child widget's =idPrefix= is constructed to be ='page_slideShow_slideImage'=. Conversely, when you declare a widget to adopt with an =idPrefix= of ='page_slideShow_slideImage'=, then the adoption mechanism determines that you want a child widget of the name ='slideImage'= to be adopted by the parent widget of the name ='slideShow'=, which is itself a child widget of the page with the =idPrefix= of ='page'=.
+
+	Benefits of Using JSON
+		A declarative syntax using JavaScript and JSON has some benefits over other approaches.
+
+		- Scanning to find the declared widgets in the =window= object avoids scanning through the DOM and inspecting =class= attributes or otherwise identifying if a DOM node is associated to a widget.
+		- No proprietary attributes need to be used for declaring data for widgets - attributes that would cause an XHTML document to fail validation.
+		- Avoiding accessing attributes of a DOM node improves performance, as DOM reflection comes at a cost.
+		- No parsing of data taken from DOM nodes is necessary in order to obtain the data for the widget. The parsing has already been done by the JavaScript interpreter.
+		- The JSON format allows one to specify rich data - such as an array of slide records for a slideshow - without having to worry about ugly encoding and escaping characters so data can be put into XHTML attributes. The JSON data is similar to how it would be specified if you were adding the child widget in page widget code, so the data is easily portable. Furthermore, many convenient utilities exist across different server platforms for serializing data structures to JSON objects.
+
+	Deep Adoption
+		The =idPrefix= for a widget you would like to be adopted lets you control where in the `widget tree` that the widget should be attached as a child.
+
+		The page widget's adoption mechanism allows child widgets to be attached anywhere on a widget tree - not just as children of the page widget, itself. So, if you happen to know that the page widget creates its own child widgets (perhaps in your subclass of =Uize.Widget.Page=), then the declarative syntax allows child widgets to be adopted deeper into the tree. Moreover, you can declare widgets that should be adopted by other widgets that are, themselves, being adopted.
+
+		EXAMPLE
+		...........................................
+		<script type="text/javascript">
+			window.$page_slideShow = {
+				widgetClass:'Uize.Widget.SlideShow',
+				slides:UizeSite.TestDataPhotos ()
+			};
+			window.$page_slideShow_slideImage = {
+				widgetClass:'Uize.Widget.Swap.Image',
+				width:350,
+				height:250,
+				built:false
+			};
+			window.$page_slideShow_slideRating = {
+				widgetClass:'Uize.Widget.Bar',
+				orientation:'horizontal',
+				minValue:0,
+				maxValue:10
+			};
+		</script>
+		...........................................
+
+		In the above example, an instance of the =Uize.Widget.SlideShow= class is being adopted by the page widget as a child named ='slideShow'=. Then, an instance of =Uize.Widget.Swap.Image= and an instance of =Uize.Widget.Bar= are both being adopted by the =slideShow= widget. As you will note from the example, one script block can contain any number of widget declarations (three in this case).
+
+	The children Property
+		There is also a more concise way of tackling the above use case by using the special =children= property of the widget properties object, as follows...
+
+		.................................................
+		<script type="text/javascript">
+			window.$page_slideShow = {
+				widgetClass:'Uize.Widget.SlideShow',
+				slides:UizeSite.TestDataPhotos (),
+				children:{
+					slideImage:{
+						widgetClass:'Uize.Widget.Swap.Image',
+						width:350,
+						height:250,
+						built:false
+					},
+					slideRating:{
+						widgetClass:'Uize.Widget.Bar',
+						orientation:'horizontal',
+						minValue:0,
+						maxValue:10
+					}
+				}
+			};
+		</script>
+		.................................................
+
+	Mix-and-Match
+		Of course, you can mix and match both techniques for specifying where to attach adopted widgets, so the following code would have the same effect...
+
+		.................................................
+		<script type="text/javascript">
+			window.$page_slideShow = {
+				widgetClass:'Uize.Widget.SlideShow',
+				slides:UizeSite.TestDataPhotos (),
+				children:{
+					slideImage:{
+						widgetClass:'Uize.Widget.Swap.Image',
+						width:350,
+						height:250,
+						built:false
+					}
+				}
+			};
+			window.$page_slideShow_slideRating = {
+				widgetClass:'Uize.Widget.Bar',
+				orientation:'horizontal',
+				minValue:0,
+				maxValue:10
+			};
+		</script>
+		.................................................
+
+	Declarative Spawning
+		Using the declarative syntax for widget adoption, it is possible to declare multiple widgets that should be spawned as children of a parent widget.
+
+		The $[parentName]_$$[childWidgetName] Syntax
+			To indicate that multiple child widgets should be spawned, prefix the child widget name with "$$" (two dollar signs).
+
+			The =[childWidgetName]= text that follows the "$$" prefix is optional and actually not significant - it will not affect the names of the spawned child widgets. Specifying anything at all after the "$$" prefix might be useful if you wish to have multiple spawn declarations for the same parent widget, in which case you can use the optional =[childWidgetName]= suffix to distinguish the window property names for the different spawn declarations from one another so they don't overwrite each other, as in...
+
+			EXAMPLE
+			.....................................
+			<script type="text/javascript">
+				window.$page_$$spawnedWidgets1 = {
+					... ... ...
+					... ... ...
+				};
+
+				window.$page_$$spawnedWidgets2 = {
+					... ... ...
+					... ... ...
+				};
+			</script>
+			.....................................
+
+		Special Meaning of idPrefix
+			The number of widgets spawned is determined by the value of the "idPrefix" property in the object that specifies the instance properties.
+
+			A value for "idPrefix" must be specified, otherwise the declarative spawning will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the =id= of a DOM node, an array of DOM node references, or a find expression object that will be used with the =Uize.Node.find= static method to find the DOM nodes.
+
+			Once the value of the "idPrefix" property has been resolved to one or more DOM nodes, an instance of the specified widget class will be created for each of the DOM nodes. For each widget instance that is created, the actual =idPrefix= value for the instance will be derived from the =id= attribute of the DOM node for which the instance is being created. For this reason, the DOM nodes represented by the "idPrefix" property should be the root nodes for the widget instances that will be spawned.
+
+		An Example
+			To better understand the syntax for spawn declarations and how to use it, consider the following example...
+
+			EXAMPLE
+			.......................................................................
+			<script type="text/javascript">
+				window.$page_$$ = {
+					idPrefix:{root:'thumbnails',tagName:'DIV',className:'thumbnail'},
+					widgetClass:'Uize.Widget.CollectionItem.Zooming',
+					previewZoomUrl:function () {return this.get ('previewUrl')},
+					zoomPower:2.5
+				};
+			</script>
+			.......................................................................
+
+			In the above example, instances of the =Uize.Widget.CollectionItem.Zooming= widget class are being spawned - one for each of the nodes obtained by evaluating the find expression object ={root:'thumbnails',tagName:'A',className:'thumbnail'}=.
+
+			Besides the =idPrefix= value here that identifies the DOM nodes for which the =Uize.Widget.CollectionItem.Zooming= instances should be created, the values specified for the =previewZoomUrl= and =zoomPower= state properties of this widget class are common for all instances that are spawned. The =$[idPrefix]= declaration of =$page_$$= indicates that the spawned widgets are to be added as children of the page widget instance.
+
+		Spawning Using the children Property
+			In addition to being able to use `the $[parentName]_$$[childWidgetName] syntax` for declaring widgets to be spawned, the name of child widgets can be prefixed with "$$" (two dollar signs) when declaring them using `the children property`.
+
+			EXAMPLE
+			.............................................................................
+			<script type="text/javascript">
+				window.$page_wrapper = {
+					widgetClass:'Uize.Widget',
+					children:{
+						$$:{
+							idPrefix:{root:'thumbnails',tagName:'DIV',className:'thumbnail'},
+							widgetClass:'Uize.Widget.CollectionItem.Zooming',
+							previewZoomUrl:function () {return this.get ('previewUrl')},
+							zoomPower:2.5
+						}
+					}
+				};
+			</script>
+			.............................................................................
+
+			In the above example, instances of the =Uize.Widget.CollectionItem.Zooming= widget class are being spawned as children of the widget named ='wrapper'= that is an instance of the =Uize.Widget= base class and that is added as a child widget of the page widget instance. The widget =page.children.wrapper= that is created will not actually have a child widget named ='$$'= - instead it will have the dynamically spawned widgets.
+
+		Uses the Uize.Widget.spawn Method
+			The mechanism for spawning child widgets utilizes the =Uize.Widget.spawn= static method that is implemented in the =Uize.Widget= base class.
+
+			For some more insights into how this mechanism works, consult the reference documentation for this method.
+
+	State Properties Merge-in
+		In the event that a widget declared for adoption is already created by the page widget code, the existing instance will be retained and the properties declared for the widget in the adoption declaration will be set on the existing instance.
+
+		This behavior allows easy migration of the instantiation from using the adoption mechanism to using explicit instantiation inside the page widget's code. When this case arises, the =widgetClass= property in the declaration will be ignored - even if it doesn't match the class of the existing widget, so the page widget's child widget takes precedence since it's already created. Child widgets declared using the =children= property *will*, however, be added to the existing widget.
+
+	Vanilla Parent Widgets
+		A mechanism exists for filling in "holes" in the `widget tree` path in widget adoption declarations.
+
+		Specifically, if an =idPrefix= specified in a widget adoption declaration implies a parent widget - at any level of the widget tree - that doesn't exist and for which there is no explicit adoption declaration, then a plain vanilla widget (an instance of the =Uize.Widget= base class) will be created as that parent. This behavior allows for casual grouping of adopted widgets under a plain vanilla =Uize.Widget= parent, or the use of a plain vanilla parent as a placeholder for some other widget class that might be plugged in later.
+
+		EXAMPLE
+		..............................................................................
+		<script type="text/javascript">
+			window.$page_slideshows_slideShow1 = {widgetClass:'Uize.Widget.SlideShow'};
+			window.$page_slideshows_slideShow2 = {widgetClass:'Uize.Widget.SlideShow'};
+			window.$page_slideshows_slideShow3 = {widgetClass:'Uize.Widget.SlideShow'};
+		</script>
+		..............................................................................
+
+		In the above example, the three slideshow widgets (nevermind the fact that there are no useful properties specified here) are being adopted into the parent widget named ='slideshows'=, which is itself adopted into the page widget, and for which there is no explicit adoption declaration.
+
+		Incidentally, the above declaration would be equivalent to...
+
+		..............................................................................
+		<script type="text/javascript">
+			window.$page_slideshows = {
+				widgetClass:'Uize.Widget',
+				children:{
+					slideShow1:{widgetClass:'Uize.Widget.SlideShow'},
+					slideShow2:{widgetClass:'Uize.Widget.SlideShow'},
+					slideShow3:{widgetClass:'Uize.Widget.SlideShow'}
+				}
+			};
+		</script>
+		..............................................................................
+
+	Important Considerations
+		There are some important considerations that should be kept in mind when using the widget adoption mechanism.
+
+		You Need a Page Widget
+			The widget adoption mechanism is implemented in the =Uize.Widget.Page= class.
+
+			Consequently, you can't adopt widgets using the declarative syntax unless your page uses a page widget instance. This should be contrasted against the generic `declarative syntax for widget properties` mechanism that is implemented in the =Uize.Widget= base class and that *doesn't* require a page widget instance in order to take advantage of it.
+
+		Must Assign to window Object
+			Because of an issue in Internet Explorer, it is necessary to assign the $ declaration as a property on the =window= object.
+
+			In some browsers, global variables are enumerable on the =window= object, so iterating through the properties of the =window= object will find them. This is not the case in IE - even though global variables can be accessed by dereferencing off of the =window= object. The solution is to assign the declaration as a property on the =window= object. This works in all browsers.
+
+			THIS WORKS...
+			.............................................................
+			<script type="text/javascript">
+				window.$page_widgetName = {widgetClass:'WidgetClassName'};
+			</script>
+			.............................................................
+
+			INCORRECT
+			..........................................................
+			<script type="text/javascript">
+				var $page_widgetName = {widgetClass:'WidgetClassName'};
+			</script>
+			..........................................................
+
+			The latter syntax only works for the `declarative syntax for widget properties` (but that's a whole other subject).
+
+		Declarations Must Occur Before Wiring Page Widget
+			The JavaScript code that declares the widgets to adopt should appear earlier in the page than the JavaScript code that wires up the page widget.
+
+			In order for your widgets to be adopted, the window properties declaring those widgets must exist at the time that the page widget is wired up, otherwise the page widget won't know of your widgets and they won't be adopted (a terrible fate, indeed).
+
+		Must Match the Page Widget idPrefix
+			The name you specify for the page widget in your child widget =idPrefix= must match the actual =idPrefix= that is set for the page widget, or your child widgets will not be adopted.
+
+			The initial value for the =idPrefix= state property in the =Uize.Widget.Page= class is ='page'=, so unless you change that in your own subclasses of =Uize.Widget.Page= you should be able to start all your widget adoption statements with =window.$page_=.
+
+			INCORRECT
+			..................................................................................
+			<script type="text/javascript">
+				window.$page_widgetName = {widgetClass:'WidgetClassName'};
+			</script>
+			... ... ...
+			... ... ...
+			... ... ...
+			<script type="text/javascript">
+				Uize.module ({
+					required:'Uize.Widget.Page',
+					builder:function () {
+						(window.page = Uize.Widget.Page ({idPrefix:'mySitePage'})).wireUi ();
+					}
+				});
+			</script>
+			..................................................................................
+
+			In the above example, the declaration for the adopted widget should start with =window.$mySitePage_widgetName=, because ='mySitePage'= is the =idPrefix= specified for the page widget in its instantiation.
+
+		Potentially Asynchronous
+			Because a widget to adopt may require JavaScript modules that aren't already loaded, instantiation of adopted widgets may be asynchronous.
+
+			The page widget instance scans the page for widgets to adopt during its wiring phase. Because the adoption of widgets may spawn asynchronous loading of additional JavaScript modules, there is no guarantee that - after returning from the =wireUi= call on the page widget - all widgets to be adopted will be instantiated and wired up. This is usually not a problem, however, since the types of widgets that are adopted are not usually widgets that are intimately tied in to a page widget's functioning or the rest of the widgets that it may govern.
+
+		It's Declarative, So Avoid Relying on Modules
+			The spirit of the declarative syntax for widget adoption is to be declarative, so that no JavaScript modules need to be loaded in order to make the declaration - and it is a declaration of data and not code logic.
+
+			The case may occasionally arise where the data that should be supplied in a declaration either needs to come from some other JavaScript module, or needs to be formulated with some JavaScript logic. This is not ideal, but in such cases one will have to ensure that modules - or any external JavaScript code - required in order to make the declaration are loaded at the time that the declaration is made.
+
+		Reserved Property Names
+			As mentioned earlier, the special properties =widgetClass= and =children= are reserved for the widget adoption mechanism.
+
+			The implication of this is that you can't create widget classes that declare either =widgetClass= or =children= as state properties and expect to use the widget adoption mechanism. Or, more correctly, you can, but any values that you specify for those properties in a widget declaration won't make their way through to the widget, because they get "consumed" by the adoption mechanism. So, best to avoid using those names for state properties, which is not likely to be a major constraint.
+
+		Takes Time
+			It *does* take a tiny bit of time for the page widget to scan through and discover widget adoption declarations.
+
+			This should not be a significant cost, but it is worth considering when choosing between adoption and explicit instantiation in the code beside.
+
+	Relationship To Code Beside / Page Widget
+		Adopted widgets maintain a loose / informal relationship with the page widget (or a page's code beside), from a code design perspective.
+
+		The benefit of the widget adoption mechanism is that widgets can be plopped into the markup for a page in an ad hoc manner, without being too concerned about how they tie into the overal page control logic and how they might relate to other widgets on the page. This implies that they are not tightly integrated into a page's control logic, or otherwise it might be more suitable to place the setup logic along with the other code for the page. It is still possible, however, for the page widget code for a specific page to sniff for the presence of certain expected adopted widgets and respond in different ways to the presence of different adopted widgets.
+
+		Mostly, however, widget adoption is convenient for ad hoc placement of discrete widgets that don't care about their surroundings or the page that they're in.
+
+		Benefits of Declarative Approach
+			The declarative approach offers several benefits...
+
+			- doesn't require modules to be loaded at the time that a widget is declared
+			- doesn't require the page widget / code beside logic to be aware of the widgets being adopted
+			- allows a widget's markup and data for client side interaction to be declared entirely in a server side / middle tier component or control, in a self-contained way, and without intimate cooperation from a page's other client code
+
+		Benefits of Explicit Approach
+			The explicit approach for adding widgets to a page widget offers several benefits...
+
+			- guarantees that child widgets added explicitly are wired and ready upon return from the =wireUi= call on the page widget
+			- allows an intimate relationship with the page's client logic and other child widgets on a page, enabling more sophisticated client functionality, where multiple widgets are involved together in producing a client side application
+			- allows all child widget instantiation to be consolidated within a single module of code, improving maintainability, and allowing for scrunching of that code as an external JavaScript module
+			- it does take the page widget a tiny bit of time to scan through and discover and act on widget adoption declarations, so explicit instantiation is technically - if not practically - faster.
+
+		As you can see, both the adoption approach and the explicit instantiation approach have their benefits, and the right one to choose will depend on what best suits your particular use case. In the case that the explicit instantiation approach is desired, you can still achieve some of the server component encapsulation benefits of the widget adoption mechanism by employing the `declarative syntax for widget properties` mechanism. This mechanism allows data for a widget to be "piped" through to the widget instance via the server generated markup, using a declarative syntax similar to the widget adoption syntax.
+
+Developing Custom Widgets
+	Build on the Foundation
+		Before you go ahead and re-invent the wheel, try to leverage the foundation of existing widgets that have been implemented for the UIZE JavaScript Framework.
+
+		There are three main ways in which you can leverage existing code:
+
+		1) use an existing widget class as the superclass for your new widget class, and add the new functionality in the your subclass
+		2) use one or more existing widget classes for child widgets in your new widget class
+		3) improve an existing widget class and add new functionality to it (proceed with caution)
+
+		Subclassing An Existing Widget Class
+			Or perhaps an existing widget could be the foundation of your new widget by using it as a superclass.
+
+			### Choose Your Base Class
+				- if you don't find an existing widget class that is suitable as your superclass, then you will be using =Uize.Widget= as your superclass
+
+		### Choose Your Child Widget Classes
+
+		Modifying An Existing Widget Class
+			If a widget already exists that almost meets your needs, perhaps it could be improved to have the new features or behaviors you require.
+
+			You can make the modifications to meet your own needs and *not* submit those changes back to the Open Source project. If you choose this option, you will have to deal carefully with framework updates to ensure that you don't get drawn into conflicts, and that you don't accidentally obliterate your modified version with an update. You may also find yourself needing to re-implement your modifications if it becomes fundamentally incompatible with an update of the framework and the only option is to revert back to the framework's version to get things working again.
+
+			For numerous reasons, modifying existing UIZE classes is best left to those who are serious about and committed to contributing to the UIZE JavaScript Framework's codebase.
+
+	### MENTION
+		- look at other widget classes to see how they're implemented
+		- look specifically at other subclasses of the widget class that you will use as your superclass
+
+		Constructor
+
+		State Properties
+			Property Robustness
+				Ask yourself the question: if I wire up my widget and then use the =set= instance method to change one of the widget's state properties, will the widget correctly reflect that new state? Or is the property that I set only observed during construction or wiring of the widget?
+
+		Wiring Nodes
+			- wiring nodes should not be done during construction
+			- adding event handlers on self or child widgets should not be done during wiring
+			- adding child widgets should, ideally, not be done during wiring
+
+			- the only thing that is done in =wireUi= that is automatically undone by =unwireUi= is the unwiring of node event handlers. Anything else that is done during =wireUi= will not be undone. So, if you are developing a widget that may need to be unwired and then rewired, the implementation should avoid adding child widgets or wiring events other than node events in the -wireUi= method.
+			- child widgets that are dynamically added with the influence of state properties should be added in response to a change in the properties' values, and not in the constructor. Similarly, state that is set on child widgets with the influence of state properties should be set in response to a change in the properties' values.
+
+Principles of Good Widget Design
+	Self-maintaining UI
+		The =updateUi= method - as a general rule - should never be called by code that is using a particular widget. The code using a widget should not be responsible for knowing that the user interface of a widget needs to be updated. The code using a widget should only change state of a widget using the properties interface (or, in rare cases, special state setting combo methods). If a widget's state is changed in a way that should be reflected in its user interface, then it is the responsibility of the widget code to detect this and update its UI accordingly.
+
+	Recoverable UI
+		All the state properties that influence a widget's UI should be maintained in the widget instance. In other words, parameters should not be used to qualify how a widget's UI is represented and then forgotten to the widget. So, at any given moment if a widget is coerced to regenerate its UI, the result should exactly match the last generated UI.
+
+	Unwiring & Rewiring
+		It should be possible to fully unwire and then rewire any widget.
+
+	Immediate Child Widget Accessibility
+		Ideally, child widgets used by a widget are created when the widget is created and not only when the widget is wired, so that the child widgets can be accessed and their configuration modified immediately after a widget is created.
+
+	Update Optimization
+		No Unnecessary DOM Updates
+			Calling uodateUi on a widget should not result in any DOM updates is the state that would be reflected in the UI has not changed since the last time the UI was updated (ie. update optimization code should be implemented, and perhaps a mechanism provided to facilitate this).
+
+		Granular DOM Updates
+			Updating the UI should be optimized so that unnecessary redundant DOM updates are not performed for state that has not changed (ie. even if some state has changed, updating should be broken down into more granular units). A widget's UI generation code should be optimized such that subcomponents of the UI are only regenerated or refreshed if the state properties that relate to them have changed since the last time the UI was updated.
+
+		Deduplication of Updates
+			Setting a widget repeatedly to the same state should not result in repeated redundant refreshes.
+
+		Batched Update
+			Changing the state of multiple properties that will affect a widget's UI in a batch =set= method call should only result in a single refresh.
+

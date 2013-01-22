@@ -1,0 +1,50 @@
+The =Uize.Class.subclass= static method, implemented in the =Uize.Class= base class, has been improved with the addition of a new variation that lets you conveniently declare one or more features of various different `feature types`.
+
+SYNTAX
+..................................................
+MyClass = Uize.Class.subclass (featuresByTypeOBJ);
+..................................................
+
+Using this variation, one or more features of various different `feature types` can be conveniently declared during the subclass creation. When using this variation, setting the alphastructor and/or omegastructor for the class being created must be done by specifying values for the =alphastructor= and/or =omegastructor= properties of the =featuresByTypeOBJ= object.
+
+EXAMPLE
+...................................
+MySubclass = MyClass.subclass ({
+	alphastructor:function () {
+		// implementation here
+	},
+	omegastructor:function () {
+		// implementation here
+	},
+	staticMethods:{
+		staticMethod1:function () {
+			// implementation here
+		},
+		staticMethod2:function () {
+			// implementation here
+		}
+	},
+	instanceMethods:{
+		instanceMethod1:function () {
+			// implementation here
+		},
+		instanceMethod2:function () {
+			// implementation here
+		}
+	},
+	stateProperties:{
+		stateProperty1:{
+			// property profile
+		},
+		stateProperty2:{
+			// property profile
+		}
+	}
+});
+...................................
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-09 - New Variation of the Uize.Class.subclass Method
+....................................................................................

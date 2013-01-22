@@ -1,0 +1,103 @@
+This is a TO DO document for the =Uize.Data= module.
+
+Uize.Data.safeLookup
+	- performs a lookup in a lookup object that may not be a safe lookup, so it handles the problems keys
+	- perhaps there should also be a similar Uize.Data.keyIn (or Uize.Data.keyExists) method
+	- possible implementation
+		................................................................................
+		var _problemKeys = {constructor:1,toString:1,valueOf:1};
+		Uize.Data.safeLookup = function (_lookup,_key) {
+			if (_problemKeys [_key]) {
+				var
+					_value = _lookup [_key],
+					_lookupConstructor = _lookup.constructor
+				;
+				return _lookupConstructor && _value == _lookupConstructor.prototype [_key] ? _undefined : _value;
+			} else {
+				return _lookup [_key];
+			}
+		};
+		................................................................................
+
+................................................................................
+Uize.Data.makeValueTransformerGenerator = function (_valueTransformer) {
+	_valueTransformer = Uize.resolveTransformer (_valueTransformer);
+	var _generator = function () {
+		if (arguments.length) {
+			var _arguments = [0];
+			_arguments.push.apply (_arguments,arguments);
+			return function (_value) {
+				_arguments [0] = _value;
+				return _valueTransformer.apply (0,_arguments);
+			};
+		} else {
+			return _valueTransformer;
+		}
+	};
+	_generator.exec = _valueTransformer;
+	return _generator;
+};
+................................................................................
+
+Uize.Data.resolveSourceAndTarget
+	................................................................................
+	_package.resolveSourceAndTarget = function (_source,_target,_targetDefault,_keysMayChange,_emptyOutTarget) {
+		if (_target === _undefined) _target = _targetDefault;
+		if (typeof _source == 'number') {
+			_source = new Array (_source);
+			if (typeof _target != 'object') _target = _source;
+		} else if (typeof _target != 'object') {
+			_target = !_target ? _source : Uize.isArray (_source) ? [] : {};
+		}
+		if (_keysMayChange && _target == _source)
+			_source = Uize.isArray (_source) ? _source.concat () : Uize.copyInto ({},_source)
+		;
+		_target != _source && _emptyOutTarget && Uize.emptyOut (_target);
+		return {source:_source,target:_target};
+	};
+	................................................................................
+
+	usage...
+
+	................................................................................
+	var _sourceAndTarget = Uize.Data.resolveSourceAndTarget (_source,_target,true);
+	_source = _sourceAndTarget._source;
+	_target = _sourceAndTarget._target;
+	................................................................................
+
+Uize.Data.filter
+	- support for new filter types
+		- regular expression type filter
+			- when regular expression is specified for filter, properties are filtered that match the regular expression
+		- function type filter
+			- when function is specified for filter, function receives property name and must return boolean indicating match
+		- object type filter
+			- filter source object to have only properties contained in filter object
+		- string type filter
+			- only permit the exactly matching property name? How else would this be handled?
+		- array -- CHANGE IMPLEMENTATION?
+			- already supported, but need to change implementation? Change implementation for performance, or code size?
+	- support for target property
+
+Uize.Data.identical
+	- finish up support for tree equality mode
+		- support a Date and a RegExp instance being considered tree identical (because they shouldn't be recursed)
+	- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?
+	- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?
+		- can two instances of classes that support the value interface simply be compared by their respective values?
+		- can two instances of any Uize subclass simply be compared by the values of all their state properties?
+
+Uize.Data.conjoined
+	- improve implementation to use object tagging technique employed in Uize.Array.Dupes
+
+Uize.Data.hasCircularity
+	- tests to see if the object contains circular references / reference loops
+	- for implementation, use object tagging
+
+Uize.Data.mapKeys
+	- lets you rename keys in an object
+
+Uize.Data.mapKeyValues
+	- lets you rename keys and transform values in an object
+
+

@@ -1,0 +1,14 @@
+This is a proposal document for a =Uize.Matcher= module.
+
+How is this proposed module related to the proposed =Uize.Is= module?
+
+................................................................................
+Uize.Matcher.inRange = Uize.Data.makeValueTransformerGenerator (
+	function (_value,_minValue,_maxValue) {return _value >= _minValue && _value <= _maxValue}
+);
+
+Uize.Matcher.inRange (1,100);         // creates a matcher
+Uize.Matcher.inRange.exec (5,1,100);  // executes a matcher immediately against a subject
+Uize.Matcher.inRange (1,100) (5);     // creates a matcher, uses it immediately, and throws it away
+................................................................................
+

@@ -1,0 +1,12 @@
+This is a TO DO document for the =Uize.Widget.Form= module.
+
+Basically, a generic container for numerous input widgets, and something that manages the full data set.
+
+FEATURES / BENEFITS
+
+- makes it easy to build input UI for an arbitrary data set (will be invaluable for examples pages)
+- allows specifying default widget types for certain input types (but is set to generic defaults)
+- uses a Uize.Widget.Committer instance
+- integrates validation
+- can bind widgets to hidden form fields
+

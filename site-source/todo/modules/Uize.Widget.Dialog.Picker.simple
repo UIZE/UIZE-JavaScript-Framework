@@ -1,0 +1,13 @@
+This is a TO DO document for the =Uize.Widget.Dialog.Picker= module.
+
+Support Different Behaviors
+	- dialog submits when the value is changed
+	- dialog doesn't submit when the value is changed
+		- value is submitted on every change
+			- if value has been submitted since dialog has been in use, cancel button submits initial state
+			- delay behavior allows changed value to only be submitted after a configurable idle period
+		- value is not submitted on every change
+			- apply button submits value, if changed value not already submitted
+	- stay open option is exposed to user through pin button in dialog's title bar
+	- submit value while changing behavior is exposed to user through preview checkbox (where?)
+

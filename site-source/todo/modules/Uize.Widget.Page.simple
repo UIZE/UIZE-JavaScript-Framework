@@ -1,0 +1,155 @@
+This is a TO DO document for the =Uize.Widget.Page= module.
+
+- right now, the implementation of useDialog has support for component loading that is a functionality specific to zazzle.com and that is dependent on the loadComponentIntoNode method implemented in Zazzle.Page. Either find a way to make this generic and configurable, or provide some hooks so that this code can migrate back into Zazzle.Page.
+- there is an ugly reference to productType that is Zazzle-specific. Find a way to migrate this out.
+
+New Mechanism For Widget Adoption
+	With the declarative syntax for widget adoption, devise a way to have code that executes as part of the adoption process (possibly allow value of $ variable to be a function?).
+
+	CONSIDERATIONS
+	- must cater to cases where HTML is to be a template module
+	- must cater to case where data needed by widget instance is defined in separate module, or needs to be somehow computed
+
+	Existing Syntax
+		EXAMPLE
+		......................................................
+		<script type="text/javascript">
+			window.$page_menu4HoverFader = {
+				widgetClass:'Uize.Widget.HoverFader',
+				nodes:{root:'menu4',className:/\bmenuLink\b/},
+				defaultStyle:{color:'bbb',borderColor:'555'},
+				hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+				fadeIn:{duration:500,deceleration:1},
+				fadeOut:{duration:750,acceleration:1}
+			};
+		</script>
+		......................................................
+
+		A major problem with this approach is that it does not allow such declarations to declare dependencies on other modules.
+
+	Dedicated pageWiring Script Type
+		EXAMPLE
+		.......................................................................
+		<script type="text/pageWiring">
+			Uize.module ({
+				required:'Uize.Fade',
+				builder:function () {
+					continueWiring (
+						'page_menu4HoverFader',
+						{
+							widgetClass:'Uize.Widget.HoverFader',
+							nodes:{root:'menu4',className:/\bmenuLink\b/},
+							defaultStyle:{color:'bbb',borderColor:'555'},
+							hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+							fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+							fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+						}
+					);
+				}
+			});
+		</script>
+		.......................................................................
+
+	Widget To Adopt is a Function
+		EXAMPLE
+		.....................................................................
+		<script type="text/javascript">
+			window.$page_menu4HoverFader = function (_returnWidgetData) {
+				Uize.module ({
+					required:'Uize.Fade',
+					builder:function () {
+						_returnWidgetData ({
+							widgetClass:'Uize.Widget.HoverFader',
+							nodes:{root:'menu4',className:/\bmenuLink\b/},
+							defaultStyle:{color:'bbb',borderColor:'555'},
+							hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+							fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+							fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+						});
+					}
+				})
+			};
+		</script>
+		.....................................................................
+
+	Dedicated widgetToAdopt Script Type
+
+		JSON Object's Properties As Per Current Syntax
+			EXAMPLE
+			.............................................................
+			<script type="text/widgetToAdopt" required="Uize.Fade">
+				{
+					idPrefix:'page_menu4HoverFader',
+					widgetClass:'Uize.Widget.HoverFader',
+					nodes:{root:'menu4',className:/\bmenuLink\b/},
+					defaultStyle:{color:'bbb',borderColor:'555'},
+					hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+					fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+					fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+				}
+			</script>
+			.............................................................
+
+		JSON Object's Properties Has New Structure
+			EXAMPLE
+			................................................................
+			<script type="text/widgetToAdopt" required="Uize.Fade">
+				{
+					idPrefix:'',
+					widgetClass:'Uize.Widget.HoverFader',
+					widgetProperties:{
+						nodes:{root:'menu4',className:/\bmenuLink\b/},
+						defaultStyle:{color:'bbb',borderColor:'555'},
+						hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+						fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+						fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+					}
+				}
+			</script>
+			................................................................
+
+	- simple / elegant
+	- understandable / readable
+
+	..............................................
+	<script type="text/widgetToAdopt" required="">
+		adoptWidget (
+			'page_someWidget',
+			'Uize.Widget.SomeWidgetClass',
+			{
+				// widget properties
+			}
+		);
+	</script>
+	..............................................
+
+	.........................................................................
+	<script type="text/widgetToAdopt" widgetClass="" idPrefix="" required="">
+		(function () {
+			return {
+			}
+		}) ()
+	</script>
+	.........................................................................
+
+	.........................................................................
+	<script type="text/javascript">
+		window.$page_menu4HoverFader = function (_returnWidgetData) {
+			Uize.module ({
+				required:'Uize.Fade',
+				builder:function () {
+					_returnWidgetData ({
+						widgetClass:'Uize.Widget.HoverFader',
+						nodes:{root:'menu4',className:/\bmenuLink\b/},
+						defaultStyle:{color:'bbb',borderColor:'555'},
+						hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+						fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+						fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+					});
+				}
+			})
+		};
+	</script>
+	.........................................................................
+
+
