@@ -388,6 +388,16 @@ Uize.module ({
 				*/
 			};
 
+			_classPrototype.flushAjaxCache = function (_requestOrUrl) {
+				/*?
+					Instance Methods
+						flushAjaxCache
+							A stub implementation of the =flushAjaxCache= instance method that should be overridden by page widget subclasses to flush the cache of Ajax requests.
+
+							This method should expect to receive the =requestOrUrl= parameter expected by =Uize.Comm.flushCache()=.
+				*/
+			};
+
 			_classPrototype.useDialog = function (_params) {
 				var
 					_this = this,
@@ -476,9 +486,9 @@ Uize.module ({
 				if (
 					_dialogWidget &&
 					(
-						_dialogWidget.componentProfile == _componentProfile ||
+						_dialogWidget._componentProfile == _componentProfile ||
 							// HACK: avoid requiring Uize.Data for most cases (it's a component specific thing)
-						Uize.Data.identical (_dialogWidget.componentProfile,_componentProfile)
+						Uize.Data.identical (_dialogWidget._componentProfile,_componentProfile)
 					)
 				) {
 					_showDialog ('subsequent');
@@ -501,7 +511,7 @@ Uize.module ({
 										)
 									)
 								;
-								_dialogWidget.componentProfile = _componentProfile;
+								_dialogWidget._componentProfile = _componentProfile;
 								_dialogWidget.insertOrWireUi ();
 								_showDialog (_refetch ? 'refetched' : 'initial');
 							}

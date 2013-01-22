@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Test.Uize.Data.Csv Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -37,7 +37,7 @@ Uize.module ({
 							[
 								'"John ""Willy""",Wilkey,(650) 123-4567\n' +
 								'Marie, Stevenson ,"(415) 456-7890, Ext. 214"\n' +
-								'Craig,Pollack,"(310) 987-6543\n(650) 303-1000"',
+								'Craig,Pollack,"(310) 987-6543\n(650) 303-1000"'
 							],
 							[
 								['John "Willy"','Wilkey','(650) 123-4567'],

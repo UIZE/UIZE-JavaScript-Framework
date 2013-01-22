@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Build.All Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -32,17 +32,34 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
-				var _buildError = Uize.Build.Util.runScripts (
-					_params.buildSequence.concat (_params.test == 'true' ? _params.testSequence : [])
-				);
-				_params.silent == 'true' ||
-					alert (
-						_buildError
-							? ('BUILD FAILED IN THE FOLLOWING SCRIPT:\n\n' + _buildError.script)
-							: 'BUILD ALL COMPLETE!!!'
-					)
+				var
+					_startTime = Uize.now (),
+					_buildSequence = _params.buildSequence,
+					_buildError
 				;
-				_buildError && WScript.Quit (1);
+				Uize.require (
+					_buildSequence,
+					function () {
+						Uize.forEach (
+							_buildSequence,
+							function (_buildModuleName) {
+								eval (_buildModuleName).perform (
+									Uize.copyInto ({},_params,{logFilePath:'logs/' + _buildModuleName + '.log'})
+								);
+							}
+						);
+						if (_params.test == 'true')
+							_buildError = Uize.Build.Util.runScripts (_params.testSequence)
+						;
+						_params.silent == 'true' ||
+							alert (
+								_buildError
+									? ('BUILD FAILED IN THE FOLLOWING SCRIPT:\n\n' + _buildError.script)
+									: 'BUILD ALL COMPLETE!!! (duration: ' + Math.round ((Uize.now () - _startTime) / 1000) + 's)'
+							)
+						;
+					}
+				);
 			};
 
 		return _package;

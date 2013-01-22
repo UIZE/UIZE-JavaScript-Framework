@@ -136,8 +136,8 @@ Uize.module ({
 									});
 
 									if (_childElement.isForm) {
-									// if form widget is added as child of another form, then it can't be using normal
-									// submit since it's part of a bigger form
+										// if form widget is added as child of another form, then it can't be using normal
+										// submit since it's part of a bigger form
 										_childElement.set({_useNormalSubmit:_false});
 										
 										_childElement.wire(
@@ -227,7 +227,7 @@ Uize.module ({
 					_isDirty:'inherit'
 				});
 
-				_this._foreachElement(  function(_element) { _element.restore()} );
+				_this._foreachElement( function(_element) { _element.restore() } );
 				_this._committer[_committerMethod]();
 			};
 
@@ -285,7 +285,7 @@ Uize.module ({
 						if (_warningShown && _this.isWired) {
 						// hide any server warnings if we're showing the client-side warnings
 							_this.displayNode('serverWarnings', _false);
-
+							
 							if (_this._scrollToWarnings) {
 								var _formWarningsRootNode = _formWarnings.getNode();
 								
@@ -317,10 +317,12 @@ Uize.module ({
 					_isEmpty = _true
 				;
 
-				for (var _elementName in _elements) {
-					if (!_elements[_elementName].get('isEmpty')) {
-						_isEmpty = _false;
-						break;
+				if (_elements) {
+					for (var _elementName in _elements) {
+						if (!_elements[_elementName].get('isEmpty')) {
+							_isEmpty = _false;
+							break;
+						}
 					}
 				}
 
@@ -358,12 +360,30 @@ Uize.module ({
 			_classPrototype.clear = function() { this._restore('clearAll') };
 
 			_classPrototype.getFormElement = function(_elementName) {
-				var _elementsLookup = this._elements.children;
+				var _formElement;
 				
-				return _elementName == _undefined
-					? _Uize.values(_elementsLookup)
-					: _elementsLookup[_elementName]
+				if (this._elements) {
+					var _elementsLookup = this._elements.children;
+					
+					_formElement = _elementName == _undefined
+						? _Uize.values(_elementsLookup)
+						: _elementsLookup[_elementName]
+					;
+				}
+				
+				return _formElement;
+			};
+			
+			_classPrototype.removeFormElement = function(_elementName) {
+				var
+					_this = this,
+					_formElement = _this.getFormElement(_elementName)
 				;
+				
+				if (_formElement) {
+					_formElement.removeUi();
+					_this._elements.removeChild(_formElement);
+				}
 			};
 
 			_classPrototype.reset = _classPrototype.restore = function() { this._restore('restoreInitial') };
@@ -466,18 +486,18 @@ Uize.module ({
 					name:'isFinished',
 					onChange:[
 						function() {
-						var _this = this;
+							var _this = this;
 
-						if (_this._isFinished) {
-							_this._validateWhen == _finished
-								&& _this._validate();
-							!_this._finishedAtLeastOnce && _this._isInitialized
-								&& _this.set({_finishedAtLeastOnce:_true});
-						}
+							if (_this._isFinished) {
+								_this._validateWhen == _finished
+									&& _this._validate();
+								!_this._finishedAtLeastOnce && _this._isInitialized
+									&& _this.set({_finishedAtLeastOnce:_true});
+							}
 							else
 								_this.set({_finishedAtLeastOnce:_false})
 							;
-					},
+						},
 						_classPrototype._checkWarningShown
 					],
 					value:_true
@@ -486,13 +506,13 @@ Uize.module ({
 					name:'isSubmitting',
 					onChange:[
 						function() {
-						var _this = this;
+							var _this = this;
 
-						_this._isSubmitting
-							&& _this._committer
-							&& _this._committer.commit()
-						;
-					},
+							_this._isSubmitting
+								&& _this._committer
+								&& _this._committer.commit()
+							;
+						},
 						_classPrototype._checkWarningShown,
 						_classPrototype._updateSummaryStateProperties
 					],
@@ -502,12 +522,12 @@ Uize.module ({
 					name:'isValid',
 					onChange:[
 						function() {
-						var _this = this;
+							var _this = this;
 
-						// if the form is invalid then we are no longer submitting
-						_this._isValid == _false
-							&& _this.set({_isSubmitting:_false});
-					},
+							// if the form is invalid then we are no longer submitting
+							_this._isValid == _false
+								&& _this.set({_isSubmitting:_false});
+						},
 						_classPrototype._checkWarningShown,
 						_classPrototype._updateSummaryStateProperties
 					],
@@ -564,27 +584,27 @@ Uize.module ({
 						_this.set({_tentativeValue:_Uize.clone(_this._value)});
 						
 						if (_this._elements) {
-						var
-							_elements = _this._elements.children,
-							_value = _this._value || {}
-						;
-
-						for (var _fieldName in _value) {
-							var _element = _elements[_fieldName];
-
-							_element	// can we assume field name and widget name are the same?
-								&& _element.set({value:_value[_fieldName]});
-						}
-
-						_this.set({
+							var
+								_elements = _this._elements.children,
+								_value = _this._value || {}
+							;
+	
+							for (var _fieldName in _value) {
+								var _element = _elements[_fieldName];
+	
+								_element	// can we assume field name and widget name are the same?
+									&& _element.set({value:_value[_fieldName]});
+							}
+	
+							_this.set({
 								_isSubmitting:_false,
-							_isFinished:_false,
-							_isEmpty:_this.checkIsEmpty()
-						});
-
-						_this._validateWhen == _valueChanged
-							&& _this._validate();
-					}
+								_isFinished:_false,
+								_isEmpty:_this.checkIsEmpty()
+							});
+	
+							_this._validateWhen == _valueChanged
+								&& _this._validate();
+						}
 					}
 				},
 				_warningAllowed:{
@@ -611,10 +631,10 @@ Uize.module ({
 					name:'warningShown',
 					onChange:[
 						function() {
-						var _this = this;
-
-						_this._foreachElement( function(_element) { _element.checkWarningShown() } );
-					},
+							var _this = this;
+	
+							_this._foreachElement( function(_element) { _element.checkWarningShown() } );
+						},
 						_classPrototype._updateUiWarning
 					],
 					value:_false

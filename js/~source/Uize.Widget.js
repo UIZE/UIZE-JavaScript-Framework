@@ -162,8 +162,8 @@ Uize.module ({
 					;
 					if (_value != this [_propertyInheritedPrivateName])
 						this.set (_propertyInheritedPrivateName,_value)
-					;
-				}
+				;
+			}
 				_class.registerProperties (
 					_Uize.pairUp (
 						_propertyPrivateName,

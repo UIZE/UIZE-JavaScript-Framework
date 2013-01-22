@@ -41,12 +41,12 @@ Uize.module ({
 							- the special keys =idPrefix=, =pathToResources=, and =blankGif= will not be serialized into the HTML table
 				*/
 				output.push ('<table class="hashTable" cellspacing="1">');
-				 var propertiesToIgnore = {idPrefix:1,pathToResources:1,blankGif:1};
-				 for (var inputParamName in input) {
-				 if (!propertiesToIgnore [inputParamName]) {
-				output.push ('\r\n	<tr valign="top"><td class="hashTableKey">',inputParamName,'</td><td class="hashTableValue">',input [inputParamName],'</td></tr>');
-				 }
-				 }
+				var propertiesToIgnore = {idPrefix:1,pathToResources:1,blankGif:1};
+				for (var inputParamName in input) {
+					if (!propertiesToIgnore [inputParamName]) {
+						output.push ('\r\n	<tr valign="top"><td class="hashTableKey">',inputParamName,'</td><td class="hashTableValue">',input [inputParamName],'</td></tr>');
+					}
+				}
 				output.push ('\r\n</table>\r\n\r\n');
 				return output.join ('');
 			};

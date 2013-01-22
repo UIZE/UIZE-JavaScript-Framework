@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.Calendar Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2007-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2007-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -168,9 +168,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_null = null,
-				_Uize_Date = Uize.Date,
-				_dayNames = _Uize_Date.dayNames,
-				_monthNames = _Uize_Date.monthNames
+				_Uize_Date = Uize.Date
 			;
 
 		/*** Class Constructor ***/
@@ -300,7 +298,8 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiMonthDisplay = function () {
-				this.isWired && this.setNodeValue ('month',_monthNames [this._month]);
+				var _this = this;
+				_this.isWired && _this.setNodeValue ('month',_this._monthNames [_this._month]);
 				/*?
 					Implied Nodes
 						month Implied Node
@@ -386,7 +385,7 @@ Uize.module ({
 							/*** build the days header ***/
 								for (var _dayNo = -1; ++_dayNo < 7;)
 									_gridStringChunks.push (
-										'<th title="' + _dayNames [_dayNo] + '">' + _dayNames [_dayNo].charAt (0) + '</th>'
+										'<th title="' + _this._dayNames[_dayNo] + '">' + _this._dayNames[_dayNo].charAt(0) + '</th>'
 									)
 								;
 								_gridStringChunks.push ('</tr><tr>');
@@ -638,6 +637,14 @@ Uize.module ({
 								- see the companion =month= state property
 								- see the related =snapViewOnValueChange= and =value= state properties
 					*/
+				},
+				_dayNames: {
+					name: 'dayNames',
+					value: _Uize_Date.dayNames
+				},
+				_monthNames: {
+					name: 'monthNames',
+					value:  _Uize_Date.monthNames
 				}
 			});
 

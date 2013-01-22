@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Build.AuditStrings Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2009-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2009-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -85,7 +85,7 @@
 Uize.module ({
 	name:'Uize.Build.AuditStrings',
 	required:[
-		'Uize.Wsh',
+		'Uize.Build.Util',
 		'Uize.Build.Scruncher',
 		'Uize.String'
 	],
@@ -129,7 +129,7 @@ Uize.module ({
 				if (!_nonI18nStringsDictionaryLookup)
 					_nonI18nStringsDictionaryLookup = Uize.lookup (_nonI18nStringsDictionary)
 				;
-				Uize.Wsh.buildFiles (
+				Uize.Build.Util.buildFiles (
 					Uize.copyInto (
 						{
 							targetFolderPathCreator:function (_folderPath) {

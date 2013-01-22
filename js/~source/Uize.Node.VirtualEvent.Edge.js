@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Node.VirtualEvent Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2009-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2009-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -98,7 +98,6 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
-				_true = true,
 				_false = false
 			;
 

@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Data.PathsTree Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2009-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2009-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -31,8 +31,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
-				_package = function () {},
-				_sacredEmptyObject = {}
+				_package = function () {}
 			;
 
 		/*** Public Static Methods ***/

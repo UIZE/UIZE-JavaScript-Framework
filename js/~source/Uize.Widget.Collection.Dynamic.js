@@ -336,7 +336,7 @@ Uize.module ({
 					_itemWidgetName = _this.makeItemWidgetName (_propertiesProperty)
 				;
 
-				_this.get ('items').push (_propertiesProperty);
+				(!_this.get ('items').length ? [] : _this.get ('items')).push (_propertiesProperty);
 
 				return _this.addItemWidget (_itemWidgetName,_widgetProperties);
 			};

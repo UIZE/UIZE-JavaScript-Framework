@@ -81,14 +81,14 @@ Uize.module ({
 					_this = this,
 					_collapsed = _this._collapsed
 				;
-
-					if (_this.isWired) {
+				
+				if (_this.isWired) {
 					_this.setNodeInnerHtml(
 						'toggleCollapsed',
 						_this.localize(_collapsed ? 'showLinkText' : 'hideLinkText')
 					);
 					_this.displayNode('warnings', !_collapsed);
-					}
+				}
 			};
 			
 			_classPrototype._updateUiWarnings = function() {
@@ -115,8 +115,8 @@ Uize.module ({
 							break;
 						
 						_messageNo++;
-				}
-
+					}
+					
 					(function _addFormWarnings(_elements) {
 						for (var _elementNo = -1; ++_elementNo < _elements.length;) {
 							var
@@ -126,7 +126,7 @@ Uize.module ({
 	
 							if (_element.get('isValid') == _false) {
 								if (_element.isForm)
-									_addFormWarnings(_element.getFormElement())
+									_addFormWarnings(_element.getFormElement());
 								else if (_elementWarningMessage)
 									_warningElements.push(_element);
 							}
@@ -146,8 +146,8 @@ Uize.module ({
 							_this.wireNode(
 								'message' + _elementNo,
 								{
-									'mouseover':function() { _focus(true) },
-									'mouseout':function() { _focus(_false) }
+									mouseover:function() { _focus(true) },
+									mouseout:function() { _focus(_false) }
 								}
 							)
 						}
@@ -195,7 +195,7 @@ Uize.module ({
 				_this._watchedElements = _watchedElements;
 				_this.fire('Changed.watchedElements');
 			};
-
+		
 			_classPrototype.updateUi = function () {
 				var _this = this;
 

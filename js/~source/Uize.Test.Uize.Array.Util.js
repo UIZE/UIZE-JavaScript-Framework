@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Test.Uize.Array.Util Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2011-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -50,9 +50,9 @@ Uize.module ({
 								test:function () {
 									var
 										_arrayA = [],
-										_arrayB = [1,2,3],
-										_result = Uize.Array.Util.replaceContents (_arrayA,_arrayB)
+										_arrayB = [1,2,3]
 									;
+									Uize.Array.Util.replaceContents(_arrayA, _arrayB);
 									return this.expect ([1,2,3],_arrayB);
 								}
 							},

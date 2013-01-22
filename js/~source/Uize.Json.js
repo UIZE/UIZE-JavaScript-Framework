@@ -96,7 +96,6 @@ Uize.module ({
 			var
 				_package = function () {},
 				_undefined,
-				_true = true,
 				_false = false,
 				_string = 'string',
 				_sacredEmptyArray = []

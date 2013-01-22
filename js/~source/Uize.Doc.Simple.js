@@ -61,7 +61,6 @@ Uize.module({
 					image:function (_input) {
 						var
 							_indent = _input.indent,
-							_indentChars = _input.indentChars,
 							_titleAsAttributeValue = Uize.Xml.toAttributeValue (_input.title || ''),
 							_subtitleAsAttributeValue = Uize.Xml.toAttributeValue (_input.subtitle || ''),
 							_titleAndSubtitle = _titleAsAttributeValue && _subtitleAsAttributeValue,
@@ -122,7 +121,7 @@ Uize.module({
 						for (var _rowNo = -1, _cols; ++_rowNo < _rowsLength;) {
 							_htmlChunks.push (_indent + _indentChars + '<tr' + (_rowNo ? '' : ' class="heading"') + '>');
 							_cols = _rows [_rowNo];
-							for (var _colNo = -1, _colsLength = _cols.length, _col; ++_colNo < _colsLength;)
+							for (var _colNo = -1, _colsLength = _cols.length; ++_colNo < _colsLength;)
 								_htmlChunks.push (
 									_indent + _indentChars + _indentChars +
 									'<td>' + _toSampleCode (_cols [_colNo]) + '</td>'

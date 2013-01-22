@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Data.Combinations Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -568,7 +568,6 @@ Uize.module ({
 					/*** preparation to optimize performance of iterating through combinations ***/
 						var
 							_keys = [],
-							_key,
 							_keyNo = -1,
 							_values,
 							_valuesPerKeyNo = [],

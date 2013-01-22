@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Comm.Iframe Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2004-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2004-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -45,7 +45,6 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.performRequest = function (_request,_callback) {
 				var
-					_this = this,
 					_iframe = Uize.Node.getById (_iframeId),
 					_requestUrl = Uize.Url.resolve (
 						_request.url,

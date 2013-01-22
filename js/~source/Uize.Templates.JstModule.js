@@ -57,10 +57,10 @@ Uize.module ({
 							An object, describing the allowed properties of the =inputOBJ= parameter of the =Uize.Templates.JstModule.process= static method.
 				*/
 				output.push ('/*\r\n	This is an automatically generated module, compiled from the JavaScript template file:\r\n		',input .moduleName,'.js.jst\r\n*/\r\n\r\nUize.module ({\r\n	name:',Uize.Json.to (input .moduleName),',');
-				 var required = input.compiledTemplate.required;
-				 if (required.length) {
-				output.push ('\r\n	required:',Uize.String.Lines.indent (Uize.Json.to (required),1,'\t',false),',');
-				 }
+				var required = input.compiledTemplate.required;
+				if (required.length) {
+					output.push ('\r\n	required:',Uize.String.Lines.indent (Uize.Json.to (required),1,'\t',false),',');
+				}
 				output.push ('\r\n	builder:function () {\r\n		var _package = function () {};\r\n\r\n		/*** Public Static Methods ***/\r\n			_package.process = function (input) {\r\n				',Uize.String.Lines.indent (Uize.String.Lines.trimRight (input.compiledTemplate.code),4,'\t',false),'\r\n			};\r\n\r\n		/*** Public Static Properties ***/\r\n			_package.input = ',Uize.String.Lines.indent (Uize.Json.to (input.compiledTemplate.input),3,'\t',false),';\r\n\r\n		return _package;\r\n	}\r\n});\r\n\r\n');
 				return output.join ('');
 			};

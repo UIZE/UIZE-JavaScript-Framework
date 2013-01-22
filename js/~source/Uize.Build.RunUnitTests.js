@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Build.RunUnitTests Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -27,139 +27,60 @@
 Uize.module ({
 	name:'Uize.Build.RunUnitTests',
 	required:[
-		'Uize.Wsh',
+		'Uize.Services.FileSystem',
 		'Uize.Test',
-		'Uize.Build.Util'
+		'Uize.Build.Util',
+		'Uize.Build.ModuleInfo',
+		'Uize.Data.Matches'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
-		/*** Utility Functions ***/
-			function _getFilenameFromPath (_filePath) {
-				return Uize.Url.from (_filePath).fileName;
-			}
-
-			function _match (_sourceStr,_regExp,_startPos) {
-				(
-					_regExp = new RegExp (
-						_regExp.source,
-						'g' + (_regExp.multiline ? 'm' : '') + (_regExp.ignoreCase ? 'i' : '')
-					)
-				).lastIndex = _startPos || 0;
-				return _regExp.exec (_sourceStr);
-			}
+		/*** General Variables ***/
+			var _fileSystem = Uize.Services.FileSystem.singleton ();
 
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
 				var
 					_dotJsRegExp = /\.js$/i,
 					_dotLibraryDotJsRegExp = /\.library\.js$/i,
-					_testModuleRegExp = /^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/,
-					_modules = Uize.Wsh.getFiles (
-						_params.moduleFolderPath,
-						function (_filePath) {
+					_modules = _fileSystem.getFiles ({
+						path:_params.moduleFolderPath,
+						pathMatcher:function (_filePath) {
 							return _dotJsRegExp.test (_filePath) && !_dotLibraryDotJsRegExp.test (_filePath)
 						},
-						_getFilenameFromPath
-					).sort (),
-					_modulesLookup = Uize.lookup (_modules)
-				;
-
-				/*** build list of modules in dependency order ***/
-					var
-						_modulesProcessed = {},
-						_modulesInDependencyOrder = []
-					;
-					function _addModuleAndDependencies (_moduleName) {
-						if (!_modulesProcessed [_moduleName]) {
-							_modulesProcessed [_moduleName] = 1;
-							if (_moduleName) {
-								var _moduleText;
-								try {
-									Uize.moduleLoader (
-										_moduleName,
-										function (_loadedModuleText) {_moduleText = _loadedModuleText}
-									);
-								} catch (_error) {
-									// if a module cannot be loaded because it is missing, ignore it
-								}
-								if (_moduleText) {
-									/* Example Module Declaration
-										.........................
-										Uize.module ({
-											name:'',
-											required:[],
-											superclass:'',
-											builder:function () {
-												// builder code here
-											}
-										});
-										.........................
-									*/
-									var
-										_host = _moduleName.substr (0,_moduleName.lastIndexOf ('.')),
-										_moduleDeclarationRegExp = new RegExp (
-											'Uize\\s*\\.\\s*module\\s*\\(\\s*\\{\\s*name\\s*:\\s*([\'"])' +
-											Uize.escapeRegExpLiteral (_moduleName) +
-											'\\1'
-										),
-										_moduleDeclarationMatch = _match (_moduleText,_moduleDeclarationRegExp)
-									;
-									_host && _addModuleAndDependencies (_host);
-									if (_moduleDeclarationMatch) {
-										var
-											_currentPos = _moduleDeclarationMatch.index + _moduleDeclarationMatch [0].length,
-											_superclassRegExp = /superclass\s*:\s*(['"])([^'"]*)\1/,
-											_superclassMatch = _match (_moduleText,_superclassRegExp,_currentPos),
-											_requiredRegExp = /required\s*:\s*((['"])([^'"]*)\2|(\[[^\]]*\]))/,
-											_requiredMatch = _match (_moduleText,_requiredRegExp,_currentPos)
-										;
-										_superclassMatch && _addModuleAndDependencies (_superclassMatch [2]);
-										if (_requiredMatch) {
-											if (_requiredMatch [4]) {
-												var _required = [];
-												try {_required = eval ('(' + _requiredMatch [4] + ')')} catch (_error) {}
-												Uize.forEach (_required,_addModuleAndDependencies);
-											} else {
-												_addModuleAndDependencies (_requiredMatch [3]);
-											}
-										}
-									}
-									_modulesInDependencyOrder.push (_moduleName);
-								}
+						pathTransformer:function (_filePath) {
+							return Uize.Url.from (_filePath).fileName;
+						}
+					}).sort (),
+					_modulesLookup = Uize.lookup (_modules),
+					_correspondingTestModuleName,
+					_testModuleRegExp = /^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/,
+					_modulesInDependencyOrder = Uize.Build.ModuleInfo.traceDependencies (
+						Uize.Data.Matches.values (
+							_modules,
+							function (_moduleName) {return !_testModuleRegExp.test (_moduleName)} // ignore test modules
+						)
+					),
+					_unitTestSuite = Uize.Test.declare ({
+						title:'Unit Tests Suite',
+						test:Uize.map (
+							_modulesInDependencyOrder,
+							function (_moduleName) {
+								return (
+									_modulesLookup [
+										_correspondingTestModuleName =
+											_moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName
+									]
+										? Uize.Test.testModuleTest (_correspondingTestModuleName)
+										: Uize.Test.requiredModulesTest (_moduleName)
+								);
 							}
-						}
-					}
-					Uize.forEach (
-						_modules,
-						function (_moduleName) { // ignore test modules
-							_testModuleRegExp.test (_moduleName) || _addModuleAndDependencies (_moduleName);
-						}
-					);
-
-				/*** build unit test suite ***/
-					var
-						_correspondingTestModuleName,
-						_unitTestSuite = Uize.Test.declare ({
-							title:'Unit Tests Suite',
-							test:Uize.map (
-								_modulesInDependencyOrder,
-								function (_moduleName) {
-									return (
-										_modulesLookup [
-											_correspondingTestModuleName =
-												_moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName
-										]
-											? Uize.Test.testModuleTest (_correspondingTestModuleName)
-											: Uize.Test.requiredModulesTest (_moduleName)
-									);
-								}
-							)
-						})
-					;
-
-				Uize.Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true');
+						)
+					})
+				;
+				Uize.Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true',_params.logFilePath);
 			};
 
 		return _package;

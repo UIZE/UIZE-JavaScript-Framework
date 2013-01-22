@@ -48,8 +48,8 @@ Uize.module ({
 								instance:_this.children.value,
 								property:_propertyName
 							}
-					})
-				}
+						})
+					}
 					
 					_addPropertyApater('valueNo');
 					_addPropertyApater('tentativeValueNo');

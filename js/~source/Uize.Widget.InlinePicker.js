@@ -39,7 +39,7 @@ Uize.module ({
 					function () {
 						var
 							_this = this,
-
+							
 							_valueWidget = _this.addChild(
 								'value',
 								_this._valueWidgetClass,
@@ -70,12 +70,12 @@ Uize.module ({
 						_addPropertyApater('valueDetails');
 						_addPropertyApater('tentativeValue');
 						_addPropertyApater('tentativeValueDetails');
-
+						
 						/** One-way sync value & value details to value display widget **/
 							function _setValueDisplayWidget(_propertyName, _propertyNameToGet) {
 								_valueDisplayWidget.set(_propertyName, _this.get(_propertyNameToGet || _propertyName))
 							}
-
+							
 							_this.wire({
 								'Changed.value':function() { _setValueDisplayWidget('value') },
 								'Changed.valueDetails':function() { _setValueDisplayWidget('valueDetails') },
@@ -88,11 +88,11 @@ Uize.module ({
 					}
 				)
 			;
-
+			
 		/*** Public Methods ***/
 			_class.prototype.updateUi = function() {
 				var _this = this;
-
+				
 				if (_this.isWired) {
 					_this.children.value.updateUi();
 					_superclass.prototype.updateUi.call(_this);
@@ -110,7 +110,7 @@ Uize.module ({
 							_pipedProperties = _this._pipedProperties,
 							_children = _this.children
 						;
-
+						
 						function _buildChangedEventName(_propertyName) { return 'Changed.' + _propertyName }
 						function _pipeChangedEvent(_event) {
 							var
@@ -122,7 +122,7 @@ Uize.module ({
 								&& _valueWidget.set(_propertyName, _this.get(_propertyName))
 							;
 						}
-
+						
 						/*** unwire previous piped properties ***/
 							Uize.forEach (
 								_previousPipedProperties,
@@ -130,15 +130,15 @@ Uize.module ({
 									_this.unwire (_buildChangedEventName (_pipedProperty),_pipeChangedEvent);
 								}
 							);
-
+								
 						/*** wire new piped properties ***/
 							Uize.forEach (
 								_pipedProperties,
 								function (_pipedProperty) {
 									_this.wire (_buildChangedEventName(_pipedProperty),_pipeChangedEvent);
-								}
+							}
 							);
-
+						
 						_this._previousPipedProperties = _this._pipedProperties;
 					}
 				},

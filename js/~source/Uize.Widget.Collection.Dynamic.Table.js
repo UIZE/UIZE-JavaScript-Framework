@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.Collection.Dynamic.Table Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2011-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -45,7 +45,7 @@ Uize.module ({
 						_superclass.prototype.processItemTemplate.call (_this, _templateNode) (_input) +
 						'</tbody></table>'
 					;
-					return Uize.map (_dummyNode.firstChild.firstChild.childNodes,'value');
+					return Array.prototype.slice.call(_dummyNode.firstChild.firstChild.childNodes);
 				};
 			};
 

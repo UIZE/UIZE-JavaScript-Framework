@@ -41,7 +41,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var _null = null;
-
+			
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
@@ -117,16 +117,16 @@ Uize.module ({
 				),
 				_classPrototype = _class.prototype
 			;
-
+			
 		/*** Public Methods ***/
 			_classPrototype.getDialogWidgetProperties = function() { return _null };
-
+			
 			_classPrototype.getMoreDialogEventHandlers = function() { return _null };
 			
 			_classPrototype.getMooringNode = function() {
 				return this.children.selector.getNode () || this.getNode ('input')
 			};
-
+			
 			_classPrototype.handleDialogSubmit = function(_valueInfo) {
 				var
 					_this = this,

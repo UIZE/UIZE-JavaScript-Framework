@@ -30,7 +30,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var _Uize_Node = Uize.Node;
-
+			
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
@@ -54,7 +54,7 @@ Uize.module ({
 				),
 				_classPrototype = _class.prototype
 			;
-
+			
 		/*** Private Methods ***/
 			_classPrototype._getMooringNodeWidth = function() {
 				var
@@ -67,7 +67,7 @@ Uize.module ({
 		
 			_classPrototype._updateUiSelector = function() {
 				var _this = this;
-
+				
 				// basically we want to the selector button from jumping in size when the value details are updated
 				// in the value display, but since we don't know what data can go in it ahead of time, we can only
 				// ensure that the button never shrinks in size.
@@ -96,7 +96,7 @@ Uize.module ({
 					}
 				}
 			};
-
+			
 		/*** Public Methods ***/
 			_classPrototype.getDialogWidgetProperties = function() {
 				var
@@ -104,24 +104,24 @@ Uize.module ({
 					_mooringNode = _this.getMooringNode(),
 					_undefined
 				;
-
+				
 				return Uize.copyInto(
 					_superclass.prototype.getDialogWidgetProperties.call(_this) || {},
 					{
-					offsetX:'adjacent',	// we want the dialog to show up next to the selector button to look like a droplist palette
-					offsetY:'adjacent',
+						offsetX:'adjacent',	// we want the dialog to show up next to the selector button to look like a droplist palette
+						offsetY:'adjacent',
 						minWidth:_this._getMooringNodeWidth()
 					}
 				);
 			};
-
+			
 			_classPrototype.getMoreDialogEventHandlers = function() {
 				var
 					_this = this,
 					_selector = _this.children.selector,
 					_undefined
 				;
-
+				
 				function _addSyncHandler(_propertyName) {
 					return Uize.pairUp(
 						'Changed.' + _propertyName,
@@ -133,7 +133,7 @@ Uize.module ({
 								&& _this.set(_propertyName, _dialogPropertyValue)
 							;
 						}
-				);
+					);
 				}
 
 				return Uize.copyInto(
@@ -154,7 +154,7 @@ Uize.module ({
 					}
 				);
 			};
-
+			
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {
@@ -175,7 +175,7 @@ Uize.module ({
 						/** One-way sync tentative value details to selector button **/
 						function() {
 							var _this = this;
-
+							
 							_this._syncTentativeValue
 								&& _this.children.selector.set({valueDetails:_this._tentativeValueDetails})
 							;

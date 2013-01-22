@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Wsh Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2005-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2005-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -32,67 +32,25 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
-				_undefined
+				_undefined,
+				_wshShell,
+				_fileSystemObject
 			;
 
 		/*** Utility Functions ***/
 			function _getFileSystemObject (_params) {
 				return (
-					(typeof _params == 'object' && _params && _params.fileSystemObject) ||
-					_package._fileSystemObject ||
-					(_package._fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject'))
+					(_params && _params.fileSystemObject) ||
+					_fileSystemObject ||
+					(_fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject'))
 				);
 			}
 
+			function _getWshShell () {
+				return _wshShell || (_wshShell = new ActiveXObject ('WScript.Shell'));
+			}
+
 		/*** Public Static Methods ***/
-			_package.fileExists = function (_filePath) {
-				return _getFileSystemObject ().FileExists (_filePath);
-				/*?
-					Static Methods
-						Uize.Wsh.fileExists
-							Return a boolean, indicating whether or not the file at the specified path exists.
-
-							SYNTAX
-							...................................................
-							fileExistsBOOL = Uize.Wsh.fileExists (filePathSTR);
-							...................................................
-				*/
-			};
-
-			_package.getFiles = function (_folderPath,_filePathMatcher,_filePathTransformer) {
-				var _resolvedFilePathMatcher = _filePathMatcher == _undefined
-					? Uize.returnTrue
-					: _filePathMatcher instanceof RegExp
-						? function (_filePath) {return _filePathMatcher.test (_filePath)}
-						: _filePathMatcher
-				;
-				if (_filePathTransformer == _undefined)
-					_filePathTransformer = function (_filePath) {return _filePath}
-				;
-				var
-					_result = [],
-					_files = new Enumerator (_getFileSystemObject ().getFolder (_folderPath).files),
-					_filePath
-				;
-				while (!_files.atEnd ()) {
-					_resolvedFilePathMatcher (_filePath = _files.item ().Path) &&
-						_result.push (_filePathTransformer (_filePath))
-					;
-					_files.moveNext ();
-				}
-				return _result;
-				/*?
-					Static Methods
-						Uize.Wsh.getFiles
-							Returns an array, being a listing of the files contained inside the specified folder, where each element of the array is a string representing the path for a file.
-
-							SYNTAX
-							...................................................
-							filePathsARRAY = Uize.Wsh.getFiles (folderPathSTR);
-							...................................................
-				*/
-			};
-
 			var _getScriptFolderPath = _package.getScriptFolderPath = function () {
 				return WScript.ScriptFullName.slice (0,-WScript.ScriptName.length - 1);
 				/*?
@@ -287,7 +245,7 @@ Uize.module ({
 				}
 				_processFolder (_params.rootFolderPath || _getScriptFolderPath ());
 				_writeFile ({
-					path:_params.logFileName || _buildScriptName.replace (/\.js$/,'.log'),
+					path:_params.logFilePath || _buildScriptName.replace (/\.js$/,'.log'),
 					text:_logChunks.join ('')
 				});
 				/*?
@@ -306,7 +264,7 @@ Uize.module ({
 								alwaysBuild:alwaysBuildBOOL,                          // optional
 								doNotEnter:doNotEnterARRAYorREGEXP,                   // optional
 								fileSystemObject:fileSystemObjectOBJ,                 // optional
-								logFileName:logFileNameSTR                            // optional
+								logFilePath:logFilePathSTR                            // optional
 							});
 							....................................................................
 
@@ -352,80 +310,19 @@ Uize.module ({
 							fileSystemObject
 								An optional object reference, specifying an instance of the =Scripting.FileSystemObject= control that should be used in file I/O operations. An instance can be created with the statement =new ActiveXObject ('Scripting.FileSystemObject')=. When no =fileSystemObject= parameter is specified, then a file system object will be created as needed to serve the needs of the build process.
 
-							logFileName
+							logFilePath
 								An optional string, specifying the filename of a file within the same folder as the build script that should be used for writing out the log of the build process.
 
 								Basic information is automatically placed into the log file by the =Uize.Wsh.buildFiles= method, but additional information for each built file can be added by returning text for the optional =logDetails= property of your =fileBuilder= function's return object.
 
 								NOTES
-								- If no =logFileName= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the filename for the log file will be derived from the filename of the build script, with the ".js" file extension replaced with the extension ".log".
+								- If no =logFilePath= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the filename for the log file will be derived from the filename of the build script, with the ".js" file extension replaced with the extension ".log".
 				*/
 			};
 
-		/*** global dialog functions to mirror what's available in the browser context ***/
-			function _popup (_message,_title,_buttonsAndIconMask) {
-				return (
-					(_popup._wscriptShell || (_popup._wscriptShell = new ActiveXObject ('wscript.shell'))).Popup (
-						_message + '',
-						0, // seconds to wait before auto-dismissing (0 = stay open forever)
-						_title,
-						_buttonsAndIconMask
-					)
-				);
-			}
-			if (typeof alert == 'undefined')
-				alert = function (_message) {
-					_popup (_message,'Windows Script Host Alert',0 | 48 /* 0 = ok button only, 48 = warning icon */);
-					/*?
-						Global Functions
-							alert
-								Lets you display an alert message to the user in a modal dialog, similar to the =alert= function available to JavaScript code running in a Web browser context.
-
-								SYNTAX
-								...................
-								alert (messageSTR);
-								...................
-
-								Windows Script Host does not provide a built-in =alert= function. The =alert= function provided in the =Uize.Wsh= package lets you perform crude troubleshooting / debugging and provide simple user feedback, through dialogs, in the same way you would do this in a Web browser.
-
-								NOTES
-								- see also the companion =confirm= global function
-					*/
-				}
-			;
-
-			if (typeof confirm == 'undefined')
-				confirm = function (_message) {
-					return _popup (
-						_message,
-						'Please Confirm...',
-						1 | 32 /* 1 = ok and cancel, 32 = question mark icon */
-					) == 1;
-					/*?
-						Global Functions
-							confirm
-								Lets you obtain confirmation from the user in a modal dialog, similar to the =confirm= function available to JavaScript code running in a Web browser context.
-
-								SYNTAX
-								.....................................
-								confirmedBOOL = confirm (messageSTR);
-								.....................................
-
-								Windows Script Host does not provide a built-in =confirm= function. The =confirm= function provided in the =Uize.Wsh= package lets you perform crude troubleshooting / debugging and obtain simple yes/no user input, through dialogs, in the same way you would do this in a Web browser.
-
-								NOTES
-								- see also the companion =alert= global function
-					*/
-				}
-			;
-			/* TO DO:
-				for prompt, try to figure out how to use VBSCRIPT's InputBox built-in function
-					http://wsh2.uw.hu/ch08c.html
-
-				Function WSHInputBox(Message, Title, Value)
-					WSHInputBox = InputBox(Message, Title, Value)
-				End Function
-			*/
+			_package.execute = function (_command) {
+				_getWshShell ().Run (_command,0,true);
+			};
 
 		return _package;
 	}

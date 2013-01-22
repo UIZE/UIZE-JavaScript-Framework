@@ -1940,7 +1940,7 @@ Uize.module ({
 											_instance1 = new _Subclass,
 											_instance2 = new _Subclass,
 											_instance3 = new _Subclass,
-											_onChangeCountAfterCreatingInstances = _onChangeCount;
+											_onChangeCountAfterCreatingInstances = _onChangeCount
 										;
 										_onChangeCount = 0;
 										_Subclass.set ({myProperty:'new initial value'});
@@ -2016,7 +2016,7 @@ Uize.module ({
 											_onChangeHandlerSpecifiedByFunctionCount = 0
 										;
 										_Subclass.prototype.someMethod = function () {_onChangeHandlerSpecifiedByStringCount++};
-										function _onChangeHandlerFunction () {_onChangeHandlerSpecifiedByFunctionCount++};
+										function _onChangeHandlerFunction () {_onChangeHandlerSpecifiedByFunctionCount++}
 										_Subclass.registerProperties ({
 											myProperty1:{
 												value:'initial value',

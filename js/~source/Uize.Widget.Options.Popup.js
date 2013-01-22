@@ -61,7 +61,7 @@ Uize.module ({
 								}
 							}
 						);
-
+						
 						_this.wire('Changed.value', function() { _this.updateUi() });
 					}
 				),

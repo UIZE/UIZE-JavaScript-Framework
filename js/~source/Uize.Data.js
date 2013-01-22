@@ -30,7 +30,6 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
-				_string = 'string',
 				_true = true,
 				_false = false,
 				_null = null,

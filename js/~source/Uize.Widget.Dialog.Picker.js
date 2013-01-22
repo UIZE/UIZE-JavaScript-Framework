@@ -62,7 +62,7 @@ Uize.module ({
 								;
 
 								_this._submittedValue = _true;
-
+								
 								_this.fireSubmissionComplete(
 									_keepOpen,
 									Uize.copyInto(
@@ -82,8 +82,8 @@ Uize.module ({
 										// Changed.value will be fired prior to Changed.valueDetails, so break flow so that the valueDetails can be synced before the 'Submission Complete' event is fired
 										&& setTimeout(
 											function() {
-										_fireSubmissionComplete (_this._keepOpen);
-										_this._keepOpen || _this.set ({shown:_false});
+												_fireSubmissionComplete (_this._keepOpen);
+												_this._keepOpen || _this.set ({shown:_false});
 											},
 											0
 										)
@@ -146,7 +146,7 @@ Uize.module ({
 			_classPrototype._updateUiKeepOpenState = function () {
 				this._widgetsAdded && this.children.keepOpen.set ({selected:this._keepOpen})
 			};
-
+			
 		/*** Public Instance Methods ***/
 			_classPrototype.fireSubmissionComplete = function(_keepOpen, _result) {
 				var _this = this;

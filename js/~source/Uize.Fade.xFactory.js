@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Fade.xFactory Class Extension
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2008-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2008-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -72,8 +72,7 @@ Uize.module ({
 				var
 					_targetContext = _target.context,
 					_targetHandler = _target.handler,
-					_fadeIsPropertiesFade = _isPropertiesFade (_targetContext,_targetHandler),
-					_fade
+					_fadeIsPropertiesFade = _isPropertiesFade (_targetContext,_targetHandler)
 				;
 
 				/*** for properties fades, default startValue and endValue, if null ***/

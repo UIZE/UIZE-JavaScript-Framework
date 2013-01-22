@@ -30,7 +30,8 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
-				_Uize_Node = Uize.Node
+				_Uize_Node = Uize.Node,
+				_false = false
 			;
 
 		/*** Public Static Methods ***/

@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.String.Discombobulator Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)1997-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)1997-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -169,7 +169,8 @@ Uize.module({
 									_intraWordHyphens = _repeatChar (_intraWordHyphen,_numberChars);
 								}
 								var
-									_lastChar = _char = '',
+									_char = '',
+									_lastChar = '',
 									_wordCharRegExp = /[a-zA-Z0-9]/
 								;
 								for (var _charNo = -1; ++_charNo < _wordChars.length;) {

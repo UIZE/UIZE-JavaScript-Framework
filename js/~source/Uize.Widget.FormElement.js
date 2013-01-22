@@ -39,7 +39,7 @@ Uize.module ({
 				_false = false,
 				_null = null,
 				_undefined,
-
+				
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
 				_Uize_Node_Event = _Uize_Node.Event,
@@ -110,7 +110,7 @@ Uize.module ({
 				var _this = this;
 				if (_this.isWired) {
 					var
-						_inputNode = _this._getInputNode(),
+						_inputNode = _this._getInputNode (),
 						_value = _this._value
 					;
 					_value + '' != _this.getNodeValue (_inputNode)
@@ -150,7 +150,7 @@ Uize.module ({
 			_classPrototype.fireOkOnEnter = _Uize.returnTrue;
 
 			_classPrototype.checkIsEmpty = function() { return this._value == _null || this._value == '' };
-
+			
 			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function() {
 				var
 					_this = this,
@@ -181,7 +181,7 @@ Uize.module ({
 
 			// To be overridden as necessary by subclasses (should return an array)
 			_classPrototype.getMoreValidators = _undefined;
-
+			
 			_classPrototype.getRootNode = function() {
 				return this.getNode() || this.getNode('input')
 			};
@@ -205,7 +205,7 @@ Uize.module ({
 					_superclass.prototype.updateUi.call (_this);
 				}
 			};
-
+			
 			_classPrototype.valueConformer = function(_value) {
 				return _Uize.isFunction (this._valueConformer) ? this._valueConformer(_value) : _value
 			};
@@ -246,7 +246,7 @@ Uize.module ({
 										_this.set({_warningMessage:_newWarningMessage || _this._initialWarningMessage});
 										_setIsValid(_false);
 									}
-									else _processNextValidator();
+									else _processNextValidator ();
 								}
 
 								var
@@ -262,7 +262,7 @@ Uize.module ({
 								;
 
 								if (_isValid != _null)	// sign that the validation is asynchronous
-								_handleIsValid(_isValid, _validatorToEvaluate.msg);
+									_handleIsValid(_isValid, _validatorToEvaluate.msg);
 							}
 							else _setIsValid(_true);
 						}
@@ -427,11 +427,11 @@ Uize.module ({
 							var _inputNode = _this._getInputNode();
 
 							try {
-							_inputNode &&
+								_inputNode &&
 									(_Uize_Node.isNode(_inputNode) ? _inputNode : _inputNode[0])[
-									_this._focused ? 'focus' : 'blur'
-								]()
-							;
+										_this._focused ? 'focus' : 'blur'
+									]()
+								;
 
 								// synch up the value with the UI, in case conformer had changed a UI value to something that already matched the programmatic value
 								_this.setNodeValue('input', _this._value);

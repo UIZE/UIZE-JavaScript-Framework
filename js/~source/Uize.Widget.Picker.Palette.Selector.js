@@ -34,7 +34,7 @@ Uize.module ({
 					null,
 					function() {
 						var _this = this;
-
+						
 						function _syncValueDetails() {
 							var _valueObject = _this.getValueObject();
 
@@ -48,7 +48,7 @@ Uize.module ({
 							'Changed.value': _syncValueDetails,
 							'Changed.values': _syncValueDetails
 						});
-
+						
 						_syncValueDetails();
 					}
 				),
@@ -67,24 +67,24 @@ Uize.module ({
 					}
 				);
 			};
-
+			
 			_classPrototype.getMoreDialogEventHandlers = function() {
 				var
 					_this = this,
 					_undefined
 				;
-
+				
 				function _addHandler(_propertyName) {
 					return Uize.pairUp(
 						'Changed.' + _propertyName,
 						function(_event) {
 							var _dialogPropertyValue = _event.source.get(_propertyName);
-
+							
 							_dialogPropertyValue !== _undefined
 								&& _this.set(_propertyName, _dialogPropertyValue)
 							;
 				}
-				);
+					);
 				}
 
 				return Uize.copyInto(

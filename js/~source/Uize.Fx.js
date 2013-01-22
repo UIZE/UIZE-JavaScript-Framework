@@ -200,7 +200,8 @@ Uize.module ({
 						_startValue = {},
 						_endValue = {},
 						_quantization = {},
-						_decoder
+						_decoder,
+						_styleProperty
 					;
 					function _decodeStyleProperty (_styleObject) {
 						var _stylePropertyValue = _styleObject && _styleObject [_styleProperty];
@@ -504,7 +505,7 @@ Uize.module ({
 							- see the related =Uize.Fx.fadeStyle= static method
 				*/
 			};
-
+		
 			_package.scrollToNode = function(_targetNode, _scrollParams) {
 				var
 					_Uize_Node = Uize.Node,

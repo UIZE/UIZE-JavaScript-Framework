@@ -821,11 +821,11 @@ Uize.module ({
 								var _match = (_value || '').match (/alpha\s*\(\s*opacity\s*=([^\)]*)\)/i);
 								_value = _match ? _match [1] / 100 : 1;
 							}
-					} else {
+						} else {
 							for (_property in _property)
 								_value [_property] = _getStyle (_node,_property)
 							;
-					}
+						}
 					}
 					return _value;
 					/*?
@@ -1116,10 +1116,10 @@ Uize.module ({
 									_areNodes = _true;
 								}
 								else {
-								var _dummyNode = document.createElement (_node.tagName);
-								_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
-									+ _htmlToInject
-								;
+									var _dummyNode = document.createElement (_node.tagName);
+									_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
+										+ _htmlToInject
+									;
 										_nodesToInject = _dummyNode.childNodes;
 								}
 							}

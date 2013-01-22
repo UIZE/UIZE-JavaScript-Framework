@@ -28,26 +28,26 @@ Uize.module ({
 	name:'Uize.Widget.Dialog.Picker.Palette',
 	required:[
 		'Uize.Node',
-		'Uize.Util.Coupler',
+		'Uize.Util.Coupler'
 	],
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
-				null,
-				function() {
-					var _this = this;
-
-					// Sync tentativeValue & tentativeValueDetails back and forth with value widget
-					Uize.Util.Coupler({
-						instances:[_this, _this.children.value],
-						properties:['tentativeValue', 'tentativeValueDetails']
-					});
-
-					_this.wire(
-						'After Show',
-						function() {
-							_this.children.value.updateUi();
+					null,
+					function() {
+						var _this = this;
+						
+						// Sync tentativeValue & tentativeValueDetails back and forth with value widget
+						Uize.Util.Coupler({
+							instances:[_this, _this.children.value],
+							properties:['tentativeValue', 'tentativeValueDetails']
+						});
+						
+						_this.wire(
+							'After Show',
+							function() {
+								_this.children.value.updateUi();
 								_this._updateUiMinWidth();
 							}
 						);
@@ -61,15 +61,15 @@ Uize.module ({
 				var _this = this;
 				
 				if (_this.isWired && _this._minWidth) {
-								_this.setNodeStyle (
-									'',
-									{minWidth:_this._minWidth}
-								);
+					_this.setNodeStyle (
+						'',
+						{minWidth:_this._minWidth}
+					);
 					Uize.Node.isIe
 						&& Uize.Node.ieMajorVersion <= 7
-									&& _this.setNodeStyle (
-										'valueShell',
-										{minWidth:_this._minWidth}
+						&& _this.setNodeStyle (
+							'valueShell',
+							{minWidth:_this._minWidth}
 						)
 					;
 				}
@@ -85,7 +85,7 @@ Uize.module ({
 					name:'tentativeValue',
 					onChange:function() {
 						var _this = this;
-
+						
 						// Changed.tentativeValue could be fired prior to Changed.tentativeValueDetails, so break flow so that the tentativeValueDetails can be synced before the 'Submission Complete' event is fired
 						setTimeout(
 							function() {

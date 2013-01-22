@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Services.FileSystem Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -39,6 +39,126 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_class.declareServiceMethods ({
+				copyFile:{
+					async:_false
+					/*?
+						Instance Methods
+							copyFile
+								document...
+
+								SYNTAX
+								........................................
+								fileSystemInstance.copyFile (paramsOBJ);
+								........................................
+
+								Params
+									path
+										document...
+
+									targetPath
+										document...
+					*/
+				},
+				deleteFile:{
+					async:_false
+					/*?
+						Instance Methods
+							deleteFile
+								document...
+
+								SYNTAX
+								........................................
+								fileSystemInstance.copyFile (paramsOBJ);
+								........................................
+
+								Params
+									path
+										document...
+					*/
+				},
+				fileExists:{
+					async:_false
+					/*?
+						Instance Methods
+							fileExists
+								document...
+
+								SYNTAX
+								...........................................................
+								fileExistsBOOL = fileSystemInstance.fileExists (paramsOBJ);
+								...........................................................
+
+								Params
+									path
+										document...
+					*/
+				},
+				getFiles:{
+					async:_false
+					/*?
+						Instance Methods
+							getFiles
+								document...
+
+								SYNTAX
+								.........................................................
+								filePathsARRAY = fileSystemInstance.getFiles (paramsOBJ);
+								.........................................................
+
+								Params
+									path
+										document...
+
+									pathMatcher
+										document...
+
+									pathTransformer
+										document...
+
+									recursive
+										document...
+					*/
+				},
+				getFolders:{
+					async:_false
+					/*?
+						Instance Methods
+							getFolders
+								document...
+
+								SYNTAX
+								...........................................................
+								filePathsARRAY = fileSystemInstance.getFolders (paramsOBJ);
+								...........................................................
+
+								Params
+									path
+										document...
+
+									pathMatcher
+										document...
+
+									pathTransformer
+										document...
+					*/
+				},
+				getModifiedDate:{
+					async:_false
+					/*?
+						Instance Methods
+							getModifiedDate
+								document...
+
+								SYNTAX
+								.................................................................
+								modifiedDateOBJ = fileSystemInstance.getModifiedDate (paramsOBJ);
+								.................................................................
+
+								Params
+									path
+										document...
+					*/
+				},
 				readFile:{
 					async:_false
 					/*?
@@ -47,9 +167,26 @@ Uize.module ({
 								document...
 
 								SYNTAX
-								...................................................................................
-								fileContentsSTR = fileSystemInstance.readFile (paramsOBJ,callbackFUNC,errbackFUNC);
-								...................................................................................
+								..........................................................
+								fileContentsSTR = fileSystemInstance.readFile (paramsOBJ);
+								..........................................................
+
+								Params
+									path
+										document...
+					*/
+				},
+				pathExists:{
+					async:_false
+					/*?
+						Instance Methods
+							pathExists
+								document...
+
+								SYNTAX
+								...........................................................
+								pathExistsBOOL = fileSystemInstance.pathExists (paramsOBJ);
+								...........................................................
 
 								Params
 									path
@@ -62,6 +199,18 @@ Uize.module ({
 						Instance Methods
 							writeFile
 								document...
+
+								SYNTAX
+								.........................................
+								fileSystemInstance.writeFile (paramsOBJ);
+								.........................................
+
+								Params
+									path
+										document...
+
+									contents
+										document...
 					*/
 				},
 				init:{
@@ -72,30 +221,6 @@ Uize.module ({
 								document...
 					*/
 				}
-				/*
-					- more methods to add
-						- rename
-							- rename one or more files or folders
-							- two approaches
-								- matcher + transformer
-									- value matcher (choosing which paths to rename)
-									- value transformer (generate new path)
-								- regular expression renaming
-									- regular expression
-									- replacer expression
-								- support general matcher, which can match on all properties of items
-									- access permissions
-									- modified date
-									-
-								- different from path matcher, which only gets string value of path to match on
-						- copy
-							- copy one or more files or folders
-						- modify
-							- can modify anything about a file
-								- can change permissions
-								- can delete files
-								- can move/rename files
-				*/
 			});
 
 		return _class;

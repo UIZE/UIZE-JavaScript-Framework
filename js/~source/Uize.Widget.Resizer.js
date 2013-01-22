@@ -202,7 +202,7 @@ Uize.module ({
 						if (_area) {
 							var
 								_newAreaWidth = Math.max (
-								_this._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
+									_this._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
 								),
 								_newAreaHeight = Math.max (_this._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
 							;

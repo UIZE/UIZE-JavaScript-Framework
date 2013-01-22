@@ -50,7 +50,7 @@ Uize.module ({
 				),
 				_classPrototype = _class.prototype
 			;
-
+			
 		/*** Helper Functions ***/
 			function _formatNumber(_number) {
 				var
@@ -122,7 +122,7 @@ Uize.module ({
 							}
 						)
 					);
-
+					
 					_this.setNodeInnerHtml(
 						'pageDisplay',
 						_this.localize(
@@ -130,41 +130,41 @@ Uize.module ({
 							{
 								page:_formatNumber(_value),
 								totalPages:_formatNumber(_this.localize('numResultsDisplay', {numResults:_maxPages}) || _maxPages)
-						}
+							}
 						)
 					);
 
 					if (_hasMultiplePages) {
 						function _display(_pageButtonName, _mustDisplay) {
 							_children[_pageButtonName] &&
-							_children[_pageButtonName].displayNode('', _mustDisplay)
+								_children[_pageButtonName].displayNode('', _mustDisplay)
 						}
 						function _setText(_pageButtonName, _pageNumber) {
 							_children[_pageButtonName] &&
 								_children[_pageButtonName].set({text:_formatNumber(_pageNumber)})
 						}
-
+	
 						_display('prev', _value > 1);
 						_display('next', _value < _maxPages);
 						_this._setEdgeButtons && _setText('first', 1);
-
+	
 						_display('first', _value > 1);
 						_display('last', _value < _maxPages);
 						_this._setEdgeButtons && _setText('last', _maxPages);
-
+	
 						var _pagesStart = _this._calculatePagesStart();
-
+	
 						_this.displayNode('less', _pagesStart > (1 + _this._showFirstPage));
 						_this.displayNode('more', (_pagesStart + _this._numPagesToShow) < (_maxPages - _this._showLastPage));
-
+	
 						for (var _pageNo = -1; ++_pageNo < _this._numPagesToShow;) {
 							var
 								_pageName = 'page' + _pageNo,
-								_pageLinkNode = _children[_pageName].getNode(),
+									_pageLinkNode = _children[_pageName].getNode(),
 								_pageNumber = _pagesStart + _pageNo,
 								_isCurrentPage = _pageNumber == _value
 							;
-
+	
 							_setText(
 								_pageName,
 								_isCurrentPage
@@ -172,7 +172,7 @@ Uize.module ({
 									: _pageNumber
 							);
 							_display(_pageName, _pageNumber == _value || _pageNumber <= (_maxPages - _this._showLastPage));
-							Uize.Node.Classes.setState(_pageLinkNode, _this._classSelected, _isCurrentPage);
+								Uize.Node.Classes.setState(_pageLinkNode, _this._classSelected, _isCurrentPage);
 						}
 					}
 				}

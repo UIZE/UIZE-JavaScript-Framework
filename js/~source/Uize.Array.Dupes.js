@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Array.Dupes Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2011-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -119,9 +119,6 @@ Uize.module ({
 
 					return _class;
 				}) ();
-
-			function _untagObjects (_taggedObjects) {
-			}
 
 		/*** Public Static Methods ***/
 			_package.dedupe = function (_source,_canonicalizer,_target) {

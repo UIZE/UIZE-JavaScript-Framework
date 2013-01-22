@@ -416,7 +416,7 @@ Uize.module({
 					}
 				}
 			};
-
+			
 			_classPrototype._suggestionHoverHandler = function (_suggestion) {
 				var
 					_this = this,

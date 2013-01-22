@@ -161,7 +161,6 @@
 						_canExtend (_sourceObject = _targetAndSources [_sourceObjectNo]) &&
 							_operation (_targetObject,_sourceObject)
 						;
-					;
 				}
 			}
 			return _targetObject;
@@ -237,7 +236,7 @@
 						_value.source,
 						(_value.global ? 'g' : '') + (_value.ignoreCase ? 'i' : '') + (_value.multiline ? 'm' : '')
 					);
-				};
+				}
 
 			/*** for arrays and simple objects, iterate through and clone elements / properties ***/
 				var

@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Build.AutoScruncher Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2005-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2005-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -30,6 +30,7 @@ Uize.module ({
 	name:'Uize.Build.AutoScruncher',
 	required:[
 		'Uize.Wsh',
+		'Uize.Build.Util',
 		'Uize.Build.Scruncher',
 		'Uize.Date',
 		'Uize.String',
@@ -41,37 +42,29 @@ Uize.module ({
 			var _package = function () {};
 
 		/*** Public Static Methods ***/
-			_package.getScrunchedFolderPath = function (_folderPath,_buildFolderPath,_sourceFolderName) {
-				var
-					_rootPath = Uize.Wsh.getScriptFolderPath (),
-					_sourceFolderNameLength = _sourceFolderName ? _sourceFolderName.length : 0
-				;
-				return (
-					_sourceFolderNameLength
-						? (
-							_folderPath.slice (-_sourceFolderNameLength) == _sourceFolderName
-								? _folderPath.slice (0,-_sourceFolderNameLength - 1)
-								: null
-						)
-						: (_buildFolderPath && _rootPath + '\\' + _buildFolderPath) + _folderPath.substr (_rootPath.length)
-				);
-			};
-
 			_package.perform = function (_params) {
 				var
 					_buildDate = Uize.Date.toIso8601 (),
-					_endsWidthDotJsRegExp = /\.js$/,
+					_endsWithDotJsRegExp = /\.js$/,
 					_buildScriptName = WScript.ScriptName,
 					_scrunchedHeadComments = _params.scrunchedHeadComments || {},
 					_scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 					_currentFolderPath,
-					_fullModuleFolderPath = Uize.Wsh.getScriptFolderPath () + '\\' + _params.moduleFolderPath
+					_buildFolderPath = _params.buildFolderPath,
+					_sourceFolderName = _params.sourceFolderName,
+					_rootPath = Uize.Wsh.getScriptFolderPath (),
+					_fullModuleFolderPath = _rootPath + '\\' + _params.moduleFolderPath
 				;
 				function _targetFolderPathCreator (_folderPath) {
-					return _package.getScrunchedFolderPath (
-						_currentFolderPath = _folderPath,
-						_params.buildFolderPath,
-						_params.sourceFolderName
+					var _sourceFolderNameLength = _sourceFolderName ? _sourceFolderName.length : 0;
+					return (
+						_sourceFolderNameLength
+							? (
+								_folderPath.slice (-_sourceFolderNameLength) == _sourceFolderName
+									? _folderPath.slice (0,-_sourceFolderNameLength - 1)
+									: null
+							)
+							: _buildFolderPath && _rootPath + '/' + _buildFolderPath + _folderPath.substr (_rootPath.length)
 					);
 				}
 
@@ -79,14 +72,14 @@ Uize.module ({
 					Uize.Wsh.buildFiles (
 						Uize.copyInto (
 							{
-								logFileName:_buildScriptName.replace (_endsWidthDotJsRegExp,'-js-files.log'),
+								logFilePath:_buildScriptName.replace (_endsWithDotJsRegExp,'-js-files.log'),
 								targetFolderPathCreator:_targetFolderPathCreator,
 								targetFilenameCreator:function (_sourceFileName) {
-									return _endsWidthDotJsRegExp.test (_sourceFileName) ? _sourceFileName : null;
+									return _endsWithDotJsRegExp.test (_sourceFileName) ? _sourceFileName : null;
 								},
 								fileBuilder:function (_sourceFileName,_sourceFileText) {
 									var
-										_moduleName = _sourceFileName.replace (_endsWidthDotJsRegExp,''),
+										_moduleName = _sourceFileName.replace (_endsWithDotJsRegExp,''),
 										_scruncherSettings = {},
 										_headComment =
 											_scrunchedHeadComments [_sourceFileName.slice (0,_sourceFileName.indexOf ('.'))],
@@ -194,7 +187,7 @@ Uize.module ({
 												_stripModuleHeaderComment (
 													Uize.Wsh.readFile (
 														_scrunchedModuleFolderPath + '\\' + _moduleName +
-														(_endsWidthDotJsRegExp.test (_moduleName) ? '' : '.js')
+														(_endsWithDotJsRegExp.test (_moduleName) ? '' : '.js')
 													)
 												)
 											);
@@ -212,7 +205,7 @@ Uize.module ({
 							_params,
 							{
 								alwaysBuild:true,
-								logFileName:_buildScriptName.replace (_endsWidthDotJsRegExp,'-libraries.log')
+								logFilePath:_buildScriptName.replace (_endsWithDotJsRegExp,'-libraries.log')
 							}
 						)
 					);

@@ -160,20 +160,20 @@ Uize.module ({
 				for (var _watchedPropertyAlias in _committedValues) {
 					var _instance = _watchedProperties [_watchedPropertyAlias].instance;
 					if (!_this._ignoreDisabled || _instance.get('enabledInherited') !== _false) {
-					var _uncommittedValue = _uncommittedValues [_watchedPropertyAlias];
-					if (!_anyNotCommitted)
-						_anyNotCommitted = _uncommittedValue !== _committedValues [_watchedPropertyAlias]
-					;
-					if (!_anyNotInitial)
-						_anyNotInitial = _uncommittedValue !== _initialValues [_watchedPropertyAlias]
-					;
-					if (_allClear)
-						_allClear =  _uncommittedValue == ''
-					;
-					if (_allValid)
+						var _uncommittedValue = _uncommittedValues [_watchedPropertyAlias];
+						if (!_anyNotCommitted)
+							_anyNotCommitted = _uncommittedValue !== _committedValues [_watchedPropertyAlias]
+						;
+						if (!_anyNotInitial)
+							_anyNotInitial = _uncommittedValue !== _initialValues [_watchedPropertyAlias]
+						;
+						if (_allClear)
+							_allClear =  _uncommittedValue == ''
+						;
+						if (_allValid)
 							_allValid = _instance.get('isValid') === _true
-					;
-				}
+						;
+					}
 				}
 				_this.set ({
 					_allClear:_allClear,
@@ -190,7 +190,7 @@ Uize.module ({
 					_watchedPropertyInstance = _watchedPropertyProfile.instance,
 					_watchedPropertyName = _watchedPropertyProfile.name
 				;
-
+				
 				function _updateSummaryStateProperties() { _this._updateSummaryStateProperties() }
 
 				// any events that get wired here need to be unwired in _classPrototype.removeWatchedProperties.

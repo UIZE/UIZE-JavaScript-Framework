@@ -407,7 +407,7 @@ Uize.module ({
 						var
 							_properties = this._properties
 						;
-						'title' in _properties && this.set ({_title:_properties.title})
+						_properties && 'title' in _properties && this.set ({_title:_properties.title})
 					}
 					/*?
 						State Properties

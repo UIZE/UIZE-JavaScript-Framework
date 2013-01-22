@@ -34,7 +34,7 @@ Uize.module ({
 				_supportsPlaceholder = typeof document != 'undefined'
 					&& 'placeholder' in document.createElement('input')
 			;
-
+		
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass(
@@ -55,31 +55,31 @@ Uize.module ({
 								if (_this.isWired) {
 									if (_placeholder && !_supportsPlaceholder && _this.get('type') != 'password') {
 										function _setText (_newText) { _this.setNodeValue (_inputNode, _newText) }
-
-									if (_focused && _value == _placeholder)
-										_setText ('');
-									else if (!_focused && !_value)
-										_setText (_placeholder)
-								}
-
+	
+										if (_focused && _value == _placeholder)
+											_setText ('');
+										else if (!_focused && !_value)
+											_setText (_placeholder)
+									}
+	
 									if (_focused) {
-									var
-										_inputNodeValue = _this.getNodeValue(_inputNode),
-										_valueLength = _inputNodeValue ? _inputNodeValue.length : 0
-									;
-
-									if (_valueLength > 0) {
-										if (_inputNode.createTextRange) {
-											var _range = _inputNode.createTextRange();
-											_range.move('character', _valueLength);
-											_range.select();
-										}
-										else if (_inputNode.setSelectionRange)
-											_inputNode.setSelectionRange(_valueLength, _valueLength)
+										var
+											_inputNodeValue = _this.getNodeValue(_inputNode),
+											_valueLength = _inputNodeValue ? _inputNodeValue.length : 0
 										;
+	
+										if (_valueLength > 0) {
+											if (_inputNode.createTextRange) {
+												var _range = _inputNode.createTextRange();
+												_range.move('character', _valueLength);
+												_range.select();
+											}
+											else if (_inputNode.setSelectionRange)
+												_inputNode.setSelectionRange(_valueLength, _valueLength)
+											;
+										}
 									}
 								}
-							}
 							}
 						);
 
@@ -104,7 +104,7 @@ Uize.module ({
 					}
 				];
 			};
-
+			
 			_classPrototype._updateUiPlaceholder = function() {
 				var _this = this;
 				

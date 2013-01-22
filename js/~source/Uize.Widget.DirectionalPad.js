@@ -54,7 +54,7 @@ Uize.module ({
 					null,
 					function () {
 						if (!this._useLinks)
-						for (var _name in _buttonDictionary)
+							for (var _name in _buttonDictionary)
 								this._addChildButton (_name).wire (
 									'Click',
 									function (_event) {
@@ -86,15 +86,15 @@ Uize.module ({
 							_this.displayNode (_name, _this._mode == 'full' || _name in _childrenInMini)
 						;
 					} else {
-					var
-						_children = _this.children
-					;
+						var
+							_children = _this.children
+						;
 
-					// this only works if we have just two modes.
-					for (var _child in _children)
-						_children [_child].displayNode ('', _this._mode == 'full' || _child in _childrenInMini )
-					;
-				}
+						// this only works if we have just two modes.
+						for (var _child in _children)
+							_children [_child].displayNode ('', _this._mode == 'full' || _child in _childrenInMini )
+						;
+					}
 				}
 			};
 
@@ -134,8 +134,8 @@ Uize.module ({
 							else
 								_children [_childName].set ({
 									enabled:_enable
-						});
-					}
+								});
+						}
 					}
 				} else {
 					if (_useLinks) {
@@ -146,8 +146,8 @@ Uize.module ({
 								Uize.Node.Classes.addClass (_node, _cssClassDisabledButton)
 							;
 						}
-				} else
-					Uize.callOn (_children,'set',[{enabled:_enabled}]);
+					} else
+						Uize.callOn (_children,'set',[{enabled:_enabled}]);
 				}
 			};
 

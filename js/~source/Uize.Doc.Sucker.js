@@ -243,7 +243,8 @@ Uize.module({
 							) {
 								var
 									_hasFilteredFeatures,
-									_filteredFeaturesChunks = []
+									_filteredFeaturesChunks = [],
+									_featuresSectionTitle
 								;
 								for (_featuresSectionTitle in _featuresPerSection) {
 									for (

@@ -56,48 +56,54 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
+			_classPrototype.setState = function (_isExpanded) {
+				var _this = this;
+				_this._isExpanded = _isExpanded;
+				_this.changeState();
+			};
+
 			_classPrototype.changeState = function () {
 				var _this = this;
 				if (_this.isWired) {
-						var
-							_shell = _this.getNode(),
-							_short = _this.getNode('short'),
-							_long = _this.getNode('long'),
-							_shortHeight = _Uize_Node.getCoords(_short).height,
+					var 
+						_shell = _this.getNode(),
+						_short = _this.getNode('short'),
+						_long = _this.getNode('long'),
+						_shortHeight = _Uize_Node.getCoords(_short).height,
 						_currentHeight = _Uize_Node.getCoords(_shell).height,
 						_longHeight = 0
-						;
-						_Uize_Node.setStyle(_shell,{
-							height:_Uize_Node.getCoords(_shell).height,
-							overflow:'hidden'
-						});
-						_Uize_Node.setStyle([_short,_long],{
+					;
+					_Uize_Node.setStyle(_shell,{
+						height:_Uize_Node.getCoords(_shell).height,
+						overflow:'hidden'
+					});
+					_Uize_Node.setStyle([_short,_long],{
 						position:_this._positioning,
-							top:0,
-							left:0
-						});
+						top:0,
+						left:0
+					});
 
-						function _showLong(){
-							_this.displayNode(_short,_false);
-							_this.displayNode(_long);
-							_longHeight = _longHeight || _Uize_Node.getCoords(_long).height;
-							_this.fade.start ({
+					function _showLong(){
+						_this.displayNode(_short,_false);
+						_this.displayNode(_long);
+						_longHeight = _longHeight || _Uize_Node.getCoords(_long).height;
+						_this.fade.start ({
 							startValue: _currentHeight,
-								endValue: _longHeight
-							});
+							endValue: _longHeight
+						});
+					}
+					function _showShort(){
+						_longHeight = _longHeight || _Uize_Node.getCoords(_long).height;
+						if( !_shortHeight ) {
+							_this.displayNode(_short);
+							_shortHeight = _Uize_Node.getCoords(_short).height;
+							_this.displayNode(_short, _false);
 						}
-						function _showShort(){
-							_longHeight = _longHeight || _Uize_Node.getCoords(_long).height;
-							if( !_shortHeight ) {
-								_this.displayNode(_short);
-								_shortHeight = _Uize_Node.getCoords(_short).height;
-								_this.displayNode(_short, _false);
-							}
-							_this.fade.start ({
+						_this.fade.start ({
 							startValue:_currentHeight,
-								endValue:_shortHeight
-							});
-						}
+							endValue:_shortHeight
+						});
+					}
 
 					if (_this._isExpanded)
 						_this.fire ({name:'Before Expand', handler:_showLong}).handled || _showLong();

@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Util.PropertyAdapter Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2011-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -328,7 +328,7 @@ Uize.module ({
 				;
 
 				function _wireOrUnwireWirings (_wiringMethodName) {
-					for (var _wiringNo = -1, _wiringsLength = _wirings.length; ++_wiringNo < _wiringsLength;)
+					for (var _wiringNo = -1, _wiringsLength = _wirings.length, _wiring; ++_wiringNo < _wiringsLength;)
 						(_wiring = _wirings [_wiringNo])._instance [_wiringMethodName] (_wiring._eventName,_wiring._handler)
 					;
 				}

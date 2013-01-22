@@ -53,7 +53,7 @@ Uize.module ({
 				_hasStickyDragIssue = _isIe && _ieMajorVersion < 9;
 				_useFixedPositioningForShield =
 					(!_isIe || _ieMajorVersion > 6) && navigator.userAgent.indexOf ('Firefox/2') < 0
-				;
+			;
 			}
 
 		/*** Class Constructor ***/

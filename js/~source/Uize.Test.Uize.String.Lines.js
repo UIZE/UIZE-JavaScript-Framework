@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Test.Uize.String.Lines Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -457,7 +457,7 @@ Uize.module ({
 							'line 1\n' +
 							'line 2\r' +
 							'line 3\r\n' +
-							'line 4',
+							'line 4'
 						],
 						['Test that removing blank lines from a multi-line string with blank lines works correctly',
 							'\n' +

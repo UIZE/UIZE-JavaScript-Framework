@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Array.Util Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2011-2012 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011-2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -30,7 +30,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
-				_undefined = undefined,
+				_undefined,
 				_ArrayPrototype = Array.prototype,
 				_ArrayPush = _ArrayPrototype.push,
 				_ArrayConcat = _ArrayPrototype.concat,
