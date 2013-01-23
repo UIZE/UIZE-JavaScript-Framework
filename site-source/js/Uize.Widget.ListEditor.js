@@ -157,7 +157,7 @@ Uize.module ({
 											- this child widget is added in the constructor
 								*/
 
-							function _clearInputNode () {_input.set ({value:''})};
+							function _clearInputNode () {_input.set ({value:''})}
 
 							_input.wire({
 								Ok:function (_event) {

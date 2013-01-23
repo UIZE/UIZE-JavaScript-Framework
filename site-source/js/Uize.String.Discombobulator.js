@@ -171,7 +171,8 @@ Uize.module({
 									_intraWordHyphens = _repeatChar (_intraWordHyphen,_numberChars);
 								}
 								var
-									_lastChar = _char = '',
+									_char = '',
+									_lastChar = '',
 									_wordCharRegExp = /[a-zA-Z0-9]/
 								;
 								for (var _charNo = -1; ++_charNo < _wordChars.length;) {

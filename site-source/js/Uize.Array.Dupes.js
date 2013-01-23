@@ -122,9 +122,6 @@ Uize.module ({
 					return _class;
 				}) ();
 
-			function _untagObjects (_taggedObjects) {
-			}
-
 		/*** Public Static Methods ***/
 			_package.dedupe = function (_source,_canonicalizer,_target) {
 				_target = _source;

@@ -58,6 +58,15 @@ Uize.module ({
 			;
 
 		/*** Private Methods ***/
+			_classPrototype._getMooringNodeWidth = function() {
+				var
+					_mooringNode = this.getMooringNode(),
+					_undefined
+				;
+				
+				return _mooringNode ? _Uize_Node.getDimensions(_mooringNode).width : _undefined;
+			};
+		
 			_classPrototype._updateUiSelector = function() {
 				var _this = this;
 
@@ -72,7 +81,7 @@ Uize.module ({
 						_previousValueDisplayShellWidth = _this._previousValueDisplayShellWidth
 					;
 
-					if (_previousValueDisplayShellWidth && _valueDisplayShellNodeWidth < _previousValueDisplayShellWidth)
+					if (_previousValueDisplayShellWidth && _valueDisplayShellNodeWidth < _previousValueDisplayShellWidth) {
 						_this.setNodeStyle(
 							_valueDisplayShellNode,
 							{
@@ -81,47 +90,71 @@ Uize.module ({
 									: _previousValueDisplayShellWidth
 							}
 						);
-					else if (_valueDisplayShellNodeWidth)
+					}
+					else if (_valueDisplayShellNodeWidth) {
 						_this._previousValueDisplayShellWidth = _valueDisplayShellNodeWidth;
+						_this.palette
+							&& _this.palette.set({minWidth:_this._getMooringNodeWidth()});
+					}
 				}
 			};
 
 		/*** Public Methods ***/
 			_classPrototype.getDialogWidgetProperties = function() {
 				var
-					_mooringNode = this.children.selector.getNode () || this.getNode ('input'),
+					_this = this,
+					_mooringNode = _this.getMooringNode(),
 					_undefined
 				;
-
-				return {
-					offsetX:'adjacent',	// we want the dialog to show up next to the selector button to look like a droplist palette
-					offsetY:'adjacent',
-					minWidth:_mooringNode
-						? Uize.Node.getDimensions(_mooringNode).width
-						: _undefined
-				};
+				
+				return Uize.copyInto(
+					_superclass.prototype.getDialogWidgetProperties.call(_this) || {},
+					{
+						offsetX:'adjacent',	// we want the dialog to show up next to the selector button to look like a droplist palette
+						offsetY:'adjacent',
+						minWidth:_this._getMooringNodeWidth()
+					}
+				);
 			};
-
-			_classPrototype.handleDialogSubmit = function(_valueInfo) {
+			
+			_classPrototype.getMoreDialogEventHandlers = function() {
 				var
 					_this = this,
+					_selector = _this.children.selector,
 					_undefined
 				;
+				
+				function _addSyncHandler(_propertyName) {
+					return Uize.pairUp(
+						'Changed.' + _propertyName,
+						function(_event) {
+							_this.palette = _event.source;
 
-				function _createSetObject(_propertyName) {
-					var _propertyValue = _valueInfo[_propertyName];
-					return _propertyValue !== _undefined ? Uize.pairUp(_propertyName, _propertyValue) : _undefined
+							var _dialogPropertyValue = _this.palette.get(_propertyName);
+							_dialogPropertyValue !== _undefined
+								&& _this.set(_propertyName, _dialogPropertyValue)
+							;
+						}
+					);
 				}
 
-				_this.set(
-					Uize.copyInto(
-						{},
-						_createSetObject('tentativeValueDetails'),
-						_createSetObject('tentativeValue')
-					)
+				return Uize.copyInto(
+					_superclass.prototype.getMoreDialogEventHandlers.call(_this) || {},
+					_addSyncHandler('tentativeValue'),
+					_addSyncHandler('tentativeValueDetails'),
+					{
+						'Before Show':function(_event) {
+							_this.palette = _event.source;
+							_selector.set({selected:true});
+							_this.set({focused:true});
+						},
+						'After Hide':function() {
+							_this.set({focused:false});
+							_selector.set({selected:false});
+							_this.palette = _undefined;
+						}
+					}
 				);
-
-				_superclass.prototype.handleDialogSubmit.call(_this, _valueInfo);
 			};
 
 			_classPrototype.updateUi = function () {

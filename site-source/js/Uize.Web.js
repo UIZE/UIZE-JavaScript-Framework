@@ -751,8 +751,7 @@ Uize.module ({
 										_nodesLength = _this.length,
 										_activeFadeObjects = _this._activeFadeObjects
 									;
-										
-									;
+
 									if (!_timingIsFunction)
 										_timing = _curveClass[_timingInfo.curve].apply(_undefined, _timingInfo.params);
 

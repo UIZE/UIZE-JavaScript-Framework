@@ -57,19 +57,23 @@ Uize.module ({
 			_classPrototype._updateUiOptionSelected = function() {
 				var _this = this;
 				if (_this.isWired && _this._valueNo != _this._lastValueNo) {
-					function _setOptionSelected (_optionNo,_selected) {
+					var _setOptionSelected = function (_optionNo, _selected) {
 						_optionNo >= 0 &&
-							Uize.callOn (_this.children ['option' + _optionNo],'set',[{selected:_selected}])
+							Uize.callOn(_this.children['option' + _optionNo], 'set', [{ selected: _selected }])
 						;
-					}
+					};
 					_setOptionSelected (_this._lastValueNo,_false);
 					_setOptionSelected (_this._lastValueNo = _this._valueNo,true);
 				}
 			};
 
 			_classPrototype._updateValueNo = function () {
-				var _this = this;
-				_this.set ({_valueNo:_this.getValueNoFromValue (_this._value)});
+				var
+					_this = this,
+					_valueNo = _this.getValueNoFromValue (_this._value)
+				;
+				
+				_this.set ({_valueNo:_valueNo, _tentativeValueNo:_valueNo});
 				_this._updateUiOptionSelected ();
 			};
 
@@ -80,7 +84,6 @@ Uize.module ({
 					++_valueNo < _valuesLength;
 				)
 					if (_function (_children ['option' + _valueNo],_valueNo) === _false) break;
-				;
 				/*?
 					Instance Methods
 						forAll
@@ -179,32 +182,33 @@ Uize.module ({
 						_optionWidgetProperties = _this._optionWidgetProperties,
 						_values = _this._values,
 						_valuesLength = _this._totalOptionChildButtons = _values.length,
-						_restoreValueTimeout, _tentativeValueTimeout
+						_restoreValueTimeout, _tentativeValueTimeout,
+						_restoreValue = function() {
+							_restoreValueTimeout = _null;
+							_this.set ({
+								_tentativeValue:_this._value,
+								_tentativeValueNo:_this._valueNo
+							});
+						},
+						_clearTentativeValueTimeouts = function() {
+							_restoreValueTimeout && clearTimeout (_restoreValueTimeout);
+							_tentativeValueTimeout && clearTimeout (_tentativeValueTimeout);
+						}
 					;
-					function _restoreValue () {
-						_restoreValueTimeout = _null;
-						_this.set ({
-							_tentativeValue:_this._value,
-							_tentativeValueNo:_this._valueNo
-						});
-					}
-					function _clearTentativeValueTimeouts () {
-						_restoreValueTimeout && clearTimeout (_restoreValueTimeout);
-						_tentativeValueTimeout && clearTimeout (_tentativeValueTimeout);
-					}
 					Uize.forEach (
 						_values,
 						function _setupOption (_valueObject,_valueNo) {
-							var _value =
-								((typeof _valueObject == 'object' && _valueObject) || (_valueObject = {name:_valueObject})).name
+							var
+								_value =
+									((typeof _valueObject == 'object' && _valueObject) || (_valueObject = {name:_valueObject})).name,
+								_setValue = function() {
+									_this.set (
+										_this._setValueOnMouseover
+											? {_value:_value}
+											: {_tentativeValue:_value,_tentativeValueNo:_valueNo}
+									);
+								}
 							;
-							function _setValue () {
-								_this.set (
-									_this._setValueOnMouseover
-										? {_value:_value}
-										: {_tentativeValue:_value,_tentativeValueNo:_valueNo}
-								);
-							}
 							_this.addChild (
 								'option' + _valueNo,
 								_optionWidgetClass,
@@ -237,7 +241,7 @@ Uize.module ({
 											;
 										} else if (_event.name == 'Out') {
 											_clearTentativeValueTimeouts ();
-											_restoreValueTimeout = setTimeout (_restoreValue,250);
+											_restoreValueTimeout = setTimeout (_restoreValue,50);
 										}
 										_this.fire ({
 											name:'Option Event',
@@ -451,6 +455,7 @@ Uize.module ({
 							;
 							_this.unwireUi ();
 							_this.get ('html') != _undefined && _this.set ({built:_false});
+							_this.set({_value:_getValidValue.call(_this, _this._value)});
 							_this.insertOrWireUi ();
 						}
 					},

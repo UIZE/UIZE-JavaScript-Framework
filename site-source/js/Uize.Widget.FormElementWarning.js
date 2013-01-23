@@ -84,7 +84,7 @@ Uize.module ({
 				var _this = this;
 
 				if (!_this.isWired) {
-					function _focus(_focused) { _this.set({_focused:_focused}) }
+					var _focus = function (_focused) { _this.set({ _focused: _focused }) };
 
 					_this.wireNode (
 						'',

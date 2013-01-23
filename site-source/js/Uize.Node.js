@@ -104,36 +104,62 @@ Uize.module ({
 			;
 
 		/*** Utility Functions ***/
-			var _captureMousePos = _package._captureMousePos = function (_event) {
-				_mousePos.clientX = _event.clientX;
-				_mousePos.clientY = _event.clientY;
-				_mousePos.pageX = _event.pageX;
-				_mousePos.pageY = _event.pageY;
-			};
-
-			function _getElementById (_nodeId) {
-				var _result = document.getElementById (_nodeId);
-				return (!_isIe || (_result && _result.id == _nodeId)) ? _result : _null;
-				/* WORKAROUND:
-					stupid issue in IE, where document.getElementById will return a reference to a node that has a name attribute with the specified ID value, if no node has an id with that value
-				*/
-			}
-
-			function _getDocumentScrollElement () {
-				return document [_isSafari ? 'body' : 'documentElement'];
-			}
-
-			function _resolveStringEventName (_eventName) {
-				return (
-					_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
-						? _package.VirtualEvent.resolve (_eventName)
-						: _eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110
-							? _eventName.slice (2)
-							: _eventName
-				);
-			}
+			var
+				_captureMousePos = _package._captureMousePos = function (_event) {
+					_mousePos.clientX = _event.clientX;
+					_mousePos.clientY = _event.clientY;
+					_mousePos.pageX = _event.pageX;
+					_mousePos.pageY = _event.pageY;
+				},
+				_getElementById = function(_nodeId) {
+					var _result = document.getElementById (_nodeId);
+					return (!_isIe || (_result && _result.id == _nodeId)) ? _result : _null;
+					/* WORKAROUND:
+						stupid issue in IE, where document.getElementById will return a reference to a node that has a name attribute with the specified ID value, if no node has an id with that value
+					*/
+				},
+				_makeGlobalScopedFunction = function(_function) {
+					var _paramsStr = (_function = _function + '').slice (_function.indexOf ('(') + 1,_function.indexOf (')'));
+					return Function.apply (
+						{},
+						(_paramsStr ? _paramsStr.split (',') : []).concat (
+							_function.slice (_function.indexOf ('{') + 1,_function.lastIndexOf ('}'))
+						)
+					);
+				},
+				_resolveStringEventName = function(_eventName) {
+					return (
+						_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
+							? _package.VirtualEvent.resolve (_eventName)
+							: _eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110
+								? _eventName.slice (2)
+								: _eventName
+					);
+				}
+			;
 
 		/*** Public Static Methods ***/
+			var _getDocumentScrollElement = _package.getDocumentScrollElement = function() {
+				return document [_isSafari ? 'body' : 'documentElement']
+			};
+				/*?
+					Static Methods
+						Uize.Node.getDocumentScrollElement
+							A utility function that returns the DOM node on which you can scroll the document.
+
+							SYNTAX
+							................................................
+							Uize.Node.getDocumentScrollElement ();
+							................................................
+
+							This method abstracts the difference between WebKit browsers (Safari, Chrome, etc.) and other browsers as to which DOM node is the one that allows changing the scrolling position of the document.
+
+							EXAMPLE
+							.........................................................................................
+							Uize.Node.getDocumentScrollElement ().scrollTop = 0;  // scroll to the top of the page
+							.........................................................................................
+				*/
+			
 			var
 				_tableDisplayValuePrefix = 'table-',
 				_tableRowDisplayValue = _tableDisplayValuePrefix + 'row',
@@ -550,12 +576,12 @@ Uize.module ({
 					_seen = _true,
 					_percentSeen = 100,
 					_documentElement = _getDocumentScrollElement (),
-					_windowDims = _getDimensions (window)
+					_windowDims = _getDimensions (window),
+					_factorInDocScroll = function() {
+						_x += _documentElement.scrollLeft;
+						_y += _documentElement.scrollTop;
+					}
 				;
-				function _factorInDocScroll () {
-					_x += _documentElement.scrollLeft;
-					_y += _documentElement.scrollTop;
-				}
 				if (_node == window) {
 					_factorInDocScroll ();
 					_width = _windowDims.width;
@@ -1002,13 +1028,15 @@ Uize.module ({
 				_doForAll (
 					_nodeBlob,
 					function (_node) {
-						var _nodeChildNodes = _node.childNodes;
-						function _htmlHasScript (_html) {
-							return _html && /<script/i.test (_html)
-						}
-						function _htmlToInjectHasScript () {
-							return _htmlHasScript (_htmlToInject)
-						}
+						var
+							_nodeChildNodes = _node.childNodes,
+							_htmlHasScript = function(_html) {
+								return _html && /<script/i.test (_html)
+							},
+							_htmlToInjectHasScript = function() {
+								return _htmlHasScript (_htmlToInject)
+							}
+						;
 						if (
 							(_isInnerReplace || (!_nodeChildNodes.length && (_isInnerTop || _isInnerBottom))) &&
 							!_isNode &&
@@ -1018,6 +1046,7 @@ Uize.module ({
 						} else if (_isOuterReplace && _isIe && !_isNode && !_htmlToInjectHasScript ()) {
 							_node.outerHTML = _htmlToInject;
 						} else {
+							var _nodesToInject = [];
 							if (_isInnerReplace)
 								if (_isIe && _ieInnerHtmlReadOnly [_node.tagName]) {
 									var _newNode = _node.cloneNode ();
@@ -1026,15 +1055,75 @@ Uize.module ({
 								} else
 									_node.innerHTML = '';
 							if (_areNodes) {
-								var _nodesToInject = [];
 								for (var _nodeNo = -1, _nodesLength = _htmlToInject.length; ++_nodeNo < _nodesLength;)
 									_nodesToInject.push (_htmlToInject [_nodeNo].cloneNode (_true));
-							} else {
-							var _dummyNode = document.createElement ('DIV');
-								_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
-									+ _htmlToInject
-								;
-								var _nodesToInject = _dummyNode.childNodes
+							}
+							else {
+								// IE is "special" in that it has nodes that don't accept innerHTML, so the solution to parse
+								// the HTML string is to parse it as XML with the XMLDOM ACtiveX control. But XmlDom is different
+								// than HtmlDom nodes, so we have to traverse the XmlDom tree creating corresponding HtmlDom nodes
+								if (_isIe && _ieInnerHtmlReadOnly [_node.tagName] && ActiveXObject) {
+									var _activeXObject = new ActiveXObject('Microsoft.XMLDOM');
+									_activeXObject.async = _false;
+									_activeXObject.loadXML('<foo>' + _htmlToInject.replace(/&/g, '&amp;') + '</foo>');
+
+									var
+										_xmlChildNodes = _activeXObject.documentElement.childNodes,
+										_convertToHtmlNode = function(_xmlNode) {
+											var _htmlNode;
+											switch (_xmlNode.nodeType) {
+												case 1: // element
+													_htmlNode = document.createElement(_xmlNode.tagName);
+													
+													// add attributes
+													for (var _attributeNo = -1; ++_attributeNo < _xmlNode.attributes.length;) {
+														var _attribute = _xmlNode.attributes[_attributeNo];
+														_htmlNode.setAttribute(_attribute.nodeName, _attribute.nodeValue);
+													}
+													
+													// handle scripts specially but just getting text contents
+													if (_htmlNode.tagName == 'SCRIPT')
+														_htmlNode.text = _xmlNode.text;
+													else {
+														// all others iterate through child nodes and get their html equivalents
+														for (var _childNodeNo = -1; ++_childNodeNo < _xmlNode.childNodes.length;) {
+															var _htmlChildNode = _convertToHtmlNode(_xmlNode.childNodes[_childNodeNo]);
+															
+															_htmlChildNode
+																&& _htmlNode.appendChild(_htmlChildNode)
+															;
+														}
+													}
+													
+													break;
+												case 3:	// text
+													_htmlNode = document.createTextNode(_xmlNode.nodeValue);
+													break;
+												case 8: // comment
+													_htmlNode = document.createComment(_xmlNode.nodeValue);
+													break;
+											}
+											return _htmlNode;
+										}
+									;
+									
+									// iterate through XML nodes and convert to their HTML equivalents
+									for (var _nodeNo = -1; ++_nodeNo < _xmlChildNodes.length;)
+										_nodesToInject.push(
+											_convertToHtmlNode(_xmlChildNodes[_nodeNo])
+										)
+									;
+									
+									// we have an array of nodes as opposed to a NodeList
+									_areNodes = _true;
+								}
+								else {
+									var _dummyNode = document.createElement (_node.tagName);
+									_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
+										+ _htmlToInject
+									;
+										_nodesToInject = _dummyNode.childNodes;
+								}
 							}
 							var
 								_nodeToInsertBefore = _isInnerTop
@@ -1359,29 +1448,31 @@ Uize.module ({
 					: (_coordMargin || {x:0,y:0})
 				;
 				var
-					_documentElement = document [_isSafari ? 'body' : 'documentElement'],
+					_documentElement = _getDocumentScrollElement(),
 					_viewDims = _getDimensions (window)
 				;
 				_doForAll (
 					_nodeBlob,
 					function (_node) {
-						function _getAxisConstrainedPos (_posName,_scrollPosName,_dimName,_axisName) {
-							var
-								_absPosForAxis = _absPos [_posName],
-								_coordMarginForAxis = _coordMargin [_axisName],
-								_preferredViewPos = _absPosForAxis - _documentElement [_scrollPosName],
-								_coordsMarginPlusNodeDim = _coordMarginForAxis + _nodeDims [_dimName]
-							;
-							return (
-								_absPosForAxis +
-								(
-									_preferredViewPos + _coordsMarginPlusNodeDim > _viewDims [_dimName]
-										? Math.max (-_coordsMarginPlusNodeDim,-_preferredViewPos)
-										: _coordMarginForAxis
-								)
-							);
-						}
-						var _nodeDims = _getDimensions (_node);
+						var
+							_nodeDims = _getDimensions (_node),
+							_getAxisConstrainedPos = function(_posName,_scrollPosName,_dimName,_axisName) {
+								var
+									_absPosForAxis = _absPos [_posName],
+									_coordMarginForAxis = _coordMargin [_axisName],
+									_preferredViewPos = _absPosForAxis - _documentElement [_scrollPosName],
+									_coordsMarginPlusNodeDim = _coordMarginForAxis + _nodeDims [_dimName]
+								;
+								return (
+									_absPosForAxis +
+									(
+										_preferredViewPos + _coordsMarginPlusNodeDim > _viewDims [_dimName]
+											? Math.max (-_coordsMarginPlusNodeDim,-_preferredViewPos)
+											: _coordMarginForAxis
+									)
+								);
+							}
+						;
 						_setStyle (
 							_node,
 							{
@@ -1702,12 +1793,13 @@ Uize.module ({
 							_node.value = _value;
 						} else if (_nodeTagName == 'INPUT') {
 							var _nodeType = _node.type;
-							if (_nodeType == 'text' || _nodeType == _hidden || _nodeType == 'password') {
-								_node.value = _value;
-							} else if (_nodeType == 'checkbox') {
+							if (_nodeType == 'checkbox') {
 								_node.checked = _value == 'true';
 							} else if (_nodeType == 'radio') {
 								_node.checked = _node.value == _value;
+							}
+							else {	// text, password, hidden, HTML5 types, etc.
+								_node.value = _value
 							}
 						} else if (_nodeTagName == 'SELECT') {
 							if (!_value) {

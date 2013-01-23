@@ -70,15 +70,14 @@ Uize.module ({
 				if (_this.isWired) {
 					if (_valueDetails) {
 						_valueDetails.value != null
-							&& _this._setInputNodeProperties({value:_valueDetails.value})
+							&& _this._setInputNodeProperties({value:_valueDetails.name})
 						;
 						_valueDetails.displayName != null
 							&& _this.setNodeInnerHtml('displayName', _valueDetails.displayName)
 						;
 					}
-					else
-						_this.displayNode('', false)
-					;
+
+					_this.displayNode('', _valueDetails);
 				}
 			};
 
@@ -141,7 +140,7 @@ Uize.module ({
 				if (!_this.isWired) {
 					var
 						_inputNode = _this.getNode('input'),
-						_displayNameNode = _this.getNode('displayName');
+						_displayNameNode = _this.getNode('displayName')
 					;
 
 					_this.wireNode(
@@ -156,7 +155,7 @@ Uize.module ({
 					// Once this widget is wired on the client-side we don't need the <label>
 					// interaction to check the input for us any longer
 					_displayNameNode
-						&& _displayNameNode.setAttribute('for', null)
+						&& _displayNameNode.removeAttribute('for')
 					;
 
 					_superclass.prototype.wireUi.call (_this);

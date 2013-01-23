@@ -27,7 +27,10 @@
 Uize.module ({
 	name:'Uize.Widget.InlinePicker',
 	superclass:'Uize.Widget.FormElement',
-	required:'Uize.Util.Coupler',
+	required:[
+		'Uize.Widget.Button.ValueDisplay',
+		'Uize.Util.PropertyAdapter'
+	],
 	builder:function (_superclass) {
 		'use strict';
 

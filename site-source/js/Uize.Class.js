@@ -535,8 +535,7 @@ Uize.module ({
 								this.set (_propertiesForSet);
 						}
 				),
-				_classPrototype = _class.prototype,
-				_classNonInheritableStatics = _class.nonInheritableStatics
+				_classPrototype = _class.prototype
 			;
 
 		/*** Property System Support Code ***/
@@ -2445,7 +2444,8 @@ Uize.module ({
 							!(
 								_isFunction (_propertyValue) &&
 								_propertyValue.moduleName &&
-								/[A-Z]/.test (_property.charAt (0))
+								_property === 'Class' // is this what they meant?
+								///[A-Z]/.test (_property.charAt (0))
 							)
 						)
 							_subclass [_property] = _clone (_propertyValue)
@@ -2546,7 +2546,7 @@ Uize.module ({
 				_subclass._propertyProfilesByPublicNames || (_subclass._propertyProfilesByPublicNames = {});
 
 				return _subclass;
-			};
+			}
 
 			_class.subclass = function (_arg0,_arg1) {
 				var _subclass;

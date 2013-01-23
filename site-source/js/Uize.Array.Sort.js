@@ -230,15 +230,15 @@ Uize.module ({
 				var _elementsLength = _elements.length;
 				if (_elementsLength > 1) {
 					if (_sortValueGenerator != null) {
-						var _sortValue;
+						var _sortValue, _elementNo;
 						if (!Uize.isFunction (_sortValueGenerator)) {
 							if (typeof _sortValueGenerator == 'number')
 								_sortValueGenerator = 'value [' + _sortValueGenerator + ']'
 							;
 							_sortValueGenerator = Uize.resolveTransformer (_sortValueGenerator);
-						};
+						}
 						/*** build sortValues array ***/
-							for (var _elementNo = _sortValues.length = _elementsLength; --_elementNo >= 0;) {
+							for (_elementNo = _sortValues.length = _elementsLength; --_elementNo >= 0;) {
 								(_sortValue = _sortValues [_elementNo] || (_sortValues [_elementNo] = {})).v =
 									_sortValueGenerator (
 										_sortValue._element = _elements [_sortValue._elementNo = _elementNo],
@@ -251,7 +251,7 @@ Uize.module ({
 							_sortValues.sort (_direction == -1 ? _descendingSort : _ascendingSort);
 
 						/*** re-populate array to be sorted, using sortValues array ***/
-							for (var _elementNo = _elementsLength; --_elementNo >= 0;) {
+							for (_elementNo = _elementsLength; --_elementNo >= 0;) {
 								if (_elementNo != (_sortValue = _sortValues [_elementNo])._elementNo)
 									_elements [_elementNo] = _sortValue._element
 								;

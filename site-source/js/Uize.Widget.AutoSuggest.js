@@ -197,7 +197,7 @@ Uize.module({
 						});
 					}
 				),
-				_classPrototype = _class.prototype;
+				_classPrototype = _class.prototype
 		;
 		/*** General Variables ***/
 			var _highlightModes = { none: 1, query: 1, remaining: 1 };
@@ -216,6 +216,7 @@ Uize.module({
 			_classPrototype._addAndWireSuggestions = function () {
 				var
 					_this = this,
+					_cssClassSelected = _this._cssClassSelected,
 					_suggestions = _this.addChild(
 						'suggestions',
 						_this._optionsWidgetClass || Uize.Widget.Options.Selector,
@@ -224,9 +225,9 @@ Uize.module({
 								built: _false,
 								html: _true,
 								optionWidgetProperties: {
-									cssClassActive: 'selectedSuggestion',
-									cssClassSelected: 'selectedSuggestion',
-									cssClassTentativeSelected: 'selectedSuggestion'
+									cssClassActive:_cssClassSelected,
+									cssClassSelected:_cssClassSelected,
+									cssClassTentativeSelected:_cssClassSelected
 								},
 								values: []
 							},
@@ -437,13 +438,14 @@ Uize.module({
 				var
 					_this = this,
 					_children = _this.children,
-					_normalizedQuery = _this._getNormalizedQuery(_this._typedQueryTokenInfo);
+					_normalizedQuery = _this._getNormalizedQuery(_this._typedQueryTokenInfo)
 				;
 
 				if (
 					_normalizedQuery != _this.get('defaultValue') &&
 					_normalizedQuery.length >= _this._numCharsBeforeSuggest &&
-					_this._numSuggestions
+					_this._numSuggestions &&
+					_this._serviceUrl != _undefined
 				) {
 					_this.ajax(
 						Uize.pairUp(
@@ -613,7 +615,7 @@ Uize.module({
 					}
 
 					// disable browser autocomplete
-					_this.setNodeProperties('input', { autocomplete: "off" });
+					_this.setNodeProperties('input', { autocomplete: 'off' });
 
 					_superclass.prototype.wireUi.call(_this);
 				}
@@ -643,6 +645,18 @@ Uize.module({
 
 								NOTES
 								- the initial value is ='suggestionHighlight'=
+					*/
+				},
+				_cssClassSelected:{
+					name:'cssClassSelected',
+					value:'selectedSuggestion'
+					/*?
+						State Properties
+							cssClassSelected
+								A string, indicating the CSS class used for the (tentatively) selected suggestion
+
+								NOTES
+								- the initial value is ='selectedSuggestion'=
 					*/
 				},
 				_highlightMode: {

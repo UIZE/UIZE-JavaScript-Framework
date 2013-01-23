@@ -149,7 +149,6 @@ Uize.module({
 						);
 
 						_childWidgetQueue.push(_childWidget);
-					;
 					}
 
 					_this._childWidgets = _childWidgetQueue;

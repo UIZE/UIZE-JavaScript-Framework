@@ -36,7 +36,9 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
-				_null = null
+				_null = null,
+				
+				_Uize = Uize
 			;
 
 		/*** Class Constructor ***/
@@ -61,10 +63,9 @@ Uize.module ({
 					++_valueNo < _valuesLength;
 				)
 					if (_function (_children ['filterGroup' + _valueNo],_valueNo) === false) break;
-				;
 			};
 
-			_classPrototype._updateSelectedFilters = function() {
+			_classPrototype._updateSelectedFilters = function(_changedValue) {
 				var _this = this;
 
 				if (_this.isWired) {
@@ -72,11 +73,20 @@ Uize.module ({
 
 					_this._forAll(
 						function(_filterGroupWidget) {
-							_selectedFilters.push(_filterGroupWidget.valueOf())
+							var _value = _filterGroupWidget.valueOf();
+							_value
+								&& _selectedFilters.push(_value);
 						}
 					);
 
-					if (!Uize.Data.clones(_selectedFilters, _this._previousSelectedFilters)) {
+					if (!_Uize.Data.clones(_selectedFilters, _this._previousSelectedFilters)) {
+						_selectedFilters = _this._allowMultiple || !_changedValue
+							? _selectedFilters
+							: (_Uize.indexIn(_selectedFilters, _changedValue) > -1
+								? [_changedValue]
+								: _selectedFilters
+							)
+						;
 						_this._previousSelectedFilters = _selectedFilters;
 						_this.set({_value:_selectedFilters});
 					}
@@ -147,11 +157,14 @@ Uize.module ({
 					for (var _filterGroupNo = -1; ++_filterGroupNo < _filterGroupsData.length;)
 						_this.addChild (
 							'filterGroup' + _filterGroupNo,
-							Uize.Widget.Options.FilterGroup,
-							Uize.clone(_filterGroupsData[_filterGroupNo])
+							_Uize.Widget.Options.FilterGroup,
+							_Uize.copyInto(
+								{ensureValueInValues:_this._allowMultiple},
+								_Uize.clone(_filterGroupsData[_filterGroupNo])
+							)
 						).wire(
 							'Changed.value',
-							function() { _this._updateSelectedFilters() }
+							function(_event) { _this._updateSelectedFilters(_event.source.valueOf()) }
 						)
 					;
 
@@ -167,11 +180,14 @@ Uize.module ({
 				_allowMultiple:{
 					name:'allowMultiple',
 					onChange:function() {
-						var _this = this;
+						var
+							_this = this,
+							_valueLength = _this._value.length
+						;
 
 						!_this._allowMultiple
-							&& _this._value.length > 1
-							&& _this.set({_value:_this._value.splice(0,1)})
+							&& _valueLength > 1
+							&& _this.set({_value:_this._value.splice(_valueLength-1,1)})
 						;
 					},
 					value:_true
@@ -179,8 +195,9 @@ Uize.module ({
 				_value:{
 					name:'value',
 					conformer:function(_value) {
-						_value = Uize.isArray(_value) ? _value : [];
-						return this._allowMultiple || _value.length == 1 ? _value : _value.splice(0,1);
+						_value = _Uize.isArray(_value) ? _value : [];
+						var _valueLength = _value.length;
+						return this._allowMultiple || _valueLength == 1 ? _value : _value.splice(_valueLength-1,1);
 					},
 					onChange:_classPrototype._setFilterGroupsSelectedFilter,
 					value:[]

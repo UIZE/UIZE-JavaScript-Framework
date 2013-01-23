@@ -436,7 +436,7 @@ Uize.module ({
 				'INFO',
 				'WARN',
 				'ERROR',
-				'FATAL',
+				'FATAL'
 			];
 
 		/*** Private Static Methods ***/

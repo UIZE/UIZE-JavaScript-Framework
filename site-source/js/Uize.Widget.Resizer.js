@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.Resizer Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2006-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2006-2012 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -183,6 +183,10 @@ Uize.module ({
 				}
 			};
 
+			_classPrototype.initiateDrag = function (_domEvent) {
+				this.children.move.initiate (_domEvent)
+			};
+
 			_classPrototype.getCoords = function () {
 				var _this = this;
 				return {left:_this._left,top:_this._top,width:_this._width,height:_this._height};
@@ -191,17 +195,21 @@ Uize.module ({
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {
-					Uize.forEach (
-						_this._areaNodes,
-						function _setAreaDims (_areaNode) {
-							function _getBorderWidth (_side) {
-								return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
-							}
+					var
+						_setRotation = _true,
+						_setAreaDims = function(_areaNode) {
 							var _area = _this.getNode (_areaNode);
 							if (_area) {
-								var _newAreaWidth = Math.max (
-									_this._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
-								);
+								var
+									_getBorderWidth = function(_side) {
+										return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
+									},
+									_newAreaWidth = Math.max (
+										_this._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
+									),
+									_newAreaHeight = Math.max (_this._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
+								;
+
 								if (_isIe)
 									_newAreaWidth == _this._lastAreaWidth [_areaNode]
 										? _this.displayNode ('jiggler',_this._jigglerShown = !_this._jigglerShown)
@@ -213,12 +221,40 @@ Uize.module ({
 										left:_this._left,
 										top:_this._top,
 										width:_newAreaWidth,
-										height:Math.max (_this._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
+										height:_newAreaHeight
 									}
 								);
+
+								if (Uize.isNumber (_this._rotation) && _setRotation) {
+									var
+										_rotation = _this._rotation,
+										_rotationString = _rotation ? 'rotate(' + Math.round (_this._rotation) + 'deg)' : '',
+										_origin = _rotation ? (_this._left + _newAreaWidth / 2) + 'px ' + (_this._top + _newAreaHeight / 2) + 'px' : ''
+									;
+
+									_this.setNodeStyle (
+										'',
+										{
+											MozTransformOrigin:_origin,
+											webkitTransformOrigin:_origin,
+											OTransformOrigin:_origin,
+											msTransformOrigin:_origin,
+											transformOrigin:_origin,
+											MozTransform:_rotationString,
+											webkitTransform:_rotationString,
+											msTransform:_rotationString,
+											OTransform:_rotationString,
+											transform:_rotationString
+										}
+									);
+
+									_setRotation = _false;
+								}
 							}
 						}
-					);
+					;
+					Uize.forEach (_this._areaNodes,_setAreaDims);
+
 				}
 			};
 
@@ -232,7 +268,7 @@ Uize.module ({
 							_pointIds,
 							_dragStartCoords,
 							_Uize_Widget_Drag = Uize.Widget.Drag,
-							_wireHandle = function (_handleName) {
+							_wireHandle = function(_handleName) {
 								_pointIds = _pointIdsMap [_handleName];
 								var _dragHandle = _this.addChild (
 									_handleName,
@@ -274,46 +310,46 @@ Uize.module ({
 												_resizerInfo = _this._activeHandle.resizerInfo,
 												_pointIds = _resizerInfo._pointIds,
 												_effectivePointIds = _pointIds.concat (),
-												_newCoords = _dragStartCoords.concat ()
-											;
-											function _updateAxisCoords (_axis) {
-												if (_this._canResizeAxis (_axis,_pointIds)) {
-													var
-														_pointIdForAxis = _pointIds [_axis],
-														_offset = _dragHandle.eventDeltaPos [_axis]
-													;
-													if (_pointIdForAxis == 'both') {
-														if (_this._constrain)
-															_offset = Uize.constrain (
-																_offset,
-																_bounds [_axis] - _newCoords [_axis],
-																_bounds [_axis + 2] - _newCoords [_axis + 2]
-															)
+												_newCoords = _dragStartCoords.concat (),
+												_updateAxisCoords = function(_axis) {
+													if (_this._canResizeAxis (_axis,_pointIds)) {
+														var
+															_pointIdForAxis = _pointIds [_axis],
+															_offset = _dragHandle.eventDeltaPos [_axis]
 														;
-														_newCoords [_axis] += _offset;
-														_newCoords [_axis + 2] += _offset;
-													} else {
-														var _coordNo = _axis + _pointIdForAxis * 2;
-														_newCoords [_coordNo] += _offset;
-														if (_this._constrain)
-															_newCoords [_coordNo] = Uize.constrain (
-																_newCoords [_coordNo],
-																_bounds [_axis],
-																_bounds [_axis + 2]
-															)
-														;
-														if (_aspectRatio == null && _newCoords [_axis] > _newCoords [_axis + 2]) {
-															/* NOTE:
-																for now we don't swap the coordinates around when they cross over if an aspect ratio is set, since we haven't dealt with the weird calculation issues that arise and lead to strange behaviors where the resizer moves around
-															*/
-															var _temp = _newCoords [_axis];
-															_newCoords [_axis] = _newCoords [_axis + 2];
-															_newCoords [_axis + 2] = _temp;
-															_effectivePointIds [_axis] = 1 - _effectivePointIds [_axis];
+														if (_pointIdForAxis == 'both') {
+															if (_this._constrain)
+																_offset = Uize.constrain (
+																	_offset,
+																	_bounds [_axis] - _newCoords [_axis],
+																	_bounds [_axis + 2] - _newCoords [_axis + 2]
+																)
+															;
+															_newCoords [_axis] += _offset;
+															_newCoords [_axis + 2] += _offset;
+														} else {
+															var _coordNo = _axis + _pointIdForAxis * 2;
+															_newCoords [_coordNo] += _offset;
+															if (_this._constrain)
+																_newCoords [_coordNo] = Uize.constrain (
+																	_newCoords [_coordNo],
+																	_bounds [_axis],
+																	_bounds [_axis + 2]
+																)
+															;
+															if (_aspectRatio == null && _newCoords [_axis] > _newCoords [_axis + 2]) {
+																/* NOTE:
+																	for now we don't swap the coordinates around when they cross over if an aspect ratio is set, since we haven't dealt with the weird calculation issues that arise and lead to strange behaviors where the resizer moves around
+																*/
+																var _temp = _newCoords [_axis];
+																_newCoords [_axis] = _newCoords [_axis + 2];
+																_newCoords [_axis + 2] = _temp;
+																_effectivePointIds [_axis] = 1 - _effectivePointIds [_axis];
+															}
 														}
 													}
 												}
-											}
+											;
 											_updateAxisCoords (0);
 											_updateAxisCoords (1);
 											var
@@ -335,27 +371,20 @@ Uize.module ({
 																_newDims [1] * _aspectRatio,
 																_newDims [0] / _aspectRatio
 															],
-															_setDimWithConstraint = function (_axis,_maxDim) {
+															_setDimWithConstraint = function(_axis,_maxDim) {
 																_newDims [_axis] = _dimsFromAspectRatio [_axis];
 																if (_this._constrain) {
 																	_newDims [_axis] = Math.min (_newDims [_axis],_maxDim);
-																	_newDims [1 - _axis] =
-																		_newDims [_axis] * Math.pow (_aspectRatio,_axis * 2 - 1)
-																	;
+																	_newDims [1 - _axis] = _newDims [_axis] * Math.pow (_aspectRatio,_axis * 2 - 1);
 																}
 															},
-															_updateDimByCenterPoint = function (_axis) {
+															_updateDimByCenterPoint = function(_axis) {
 																_setDimWithConstraint (
 																	_axis,
-																	(
-																		_newCenter [_axis] <
-																		_shellCenter [_axis]
-																			? (_newCenter [_axis] + .5)
-																			: _bounds [_axis + 2] - _newCenter [_axis]
-																	) * 2
+																	(_newCenter [_axis] < _shellCenter [_axis] ? (_newCenter [_axis] + .5) : _bounds [_axis + 2] - _newCenter [_axis]) * 2
 																);
 															},
-															_updateDimByCornerPoint = function (_axis) {
+															_updateDimByCornerPoint = function(_axis) {
 																_setDimWithConstraint (
 																	_axis,
 																	(
@@ -376,7 +405,7 @@ Uize.module ({
 															_updateDimByCornerPoint (1);
 														}
 													}
-													var _updateNewCoord = function (_axis) {
+													var _updateNewCoord = function(_axis) {
 														if (!_pointIds [_axis]) {
 															_newCoords [_axis] = _newCoords [_axis + 2] - _newDims [_axis] + 1;
 														} else if (_pointIds [_axis] == .5) {
@@ -510,6 +539,10 @@ Uize.module ({
 					name:'width',
 					onChange:_conformDimsAndUpdateUi,
 					value:200
+				},
+				_rotation:{
+					name:'rotation',
+					onChange:_conformDimsAndUpdateUi
 				}
 			});
 
