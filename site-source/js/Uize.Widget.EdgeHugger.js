@@ -153,7 +153,7 @@ Uize.module ({
 
 					/*** workaround for IE6's lack of support for fixed positioning ***/
 						if (navigator.appVersion.indexOf ('MSIE 6') > -1) {
-							function _updateRootNodePositionForIe6 () {
+							var _updateRootNodePositionForIe6 = function() {
 								var _windowCoords = Uize.Node.getCoords (window);
 								_this.setNodeStyle (
 									'',

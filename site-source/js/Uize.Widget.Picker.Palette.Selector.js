@@ -46,8 +46,11 @@ Uize.module ({
 									: null
 							});
 						}
-						_this.wire('Changed.value', _syncValueDetails);
-
+						_this.wire({
+							'Changed.value': _syncValueDetails,
+							'Changed.values': _syncValueDetails
+						});
+						
 						_syncValueDetails();
 					}
 				),
@@ -66,27 +69,31 @@ Uize.module ({
 					}
 				);
 			};
-
-			_classPrototype.handleDialogSubmit = function(_valueInfo) {
+			
+			_classPrototype.getMoreDialogEventHandlers = function() {
 				var
 					_this = this,
 					_undefined
 				;
-
-				function _createSetObject(_propertyName) {
-					var _propertyValue = _valueInfo[_propertyName];
-					return _propertyValue !== _undefined ? Uize.pairUp(_propertyName, _propertyValue) : _undefined
+				
+				function _addHandler(_propertyName) {
+					return Uize.pairUp(
+						'Changed.' + _propertyName,
+						function(_event) {
+							var _dialogPropertyValue = _event.source.get(_propertyName);
+							
+							_dialogPropertyValue !== _undefined
+								&& _this.set(_propertyName, _dialogPropertyValue)
+							;
+				}
+					);
 				}
 
-				_this.set(
-					Uize.copyInto(
-						{},
-						_createSetObject('valueNo'),
-						_createSetObject('tentativeValueNo')
-					)
+				return Uize.copyInto(
+					_superclass.prototype.getMoreDialogEventHandlers.call(_this) || {},
+					_addHandler('valueNo'),
+					_addHandler('tentativeValueNo')
 				);
-
-				_superclass.prototype.handleDialogSubmit.call(_this, _valueInfo);
 			};
 
 		/*** State Properties ***/

@@ -48,7 +48,6 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.performRequest = function (_request,_callback) {
 				var
-					_this = this,
 					_iframe = Uize.Node.getById (_iframeId),
 					_requestUrl = Uize.Url.resolve (
 						_request.url,

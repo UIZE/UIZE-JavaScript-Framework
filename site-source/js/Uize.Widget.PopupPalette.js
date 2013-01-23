@@ -121,7 +121,7 @@ Uize.module ({
 			_classPrototype._updateSelectorSelectedState = function () {this._selector.set ({selected:this._shown})};
 
 			_classPrototype._shouldTouchTimeouts = function () {
-				return this._shown && (this._showWhenOver !== _false || this._hideWhenOut);
+				return this._shown && (this._showWhenOver !== _false || this._hideWhenOut !== _false);
 			};
 			_classPrototype._over = function () {
 				this._shouldTouchTimeouts () && this._clearDismissTimeout ();
@@ -150,9 +150,26 @@ Uize.module ({
 			};
 
 			_classPrototype._setDismissTimeout = function () {
-				var _this = this;
+				var
+					_this = this,
+					_hideTimeout = !Uize.isNumber(_this._hideWhenOut)
+						? 250
+						: _this._hideWhenOut
+				;
+				
 				_this._clearDismissTimeout ();
-				_this._dismissTimeout = setTimeout (function () {_this.set ({_shown:_false})},250);
+				
+				function _hide() { _this.set ({_shown:_false}) }
+				
+				_hideTimeout
+					? (
+						_this._dismissTimeout = setTimeout (
+							_hide,
+							!Uize.isNumber(_this._hideWhenOut) ? 250 : _this._hideWhenOut
+						)
+					)
+					: _hide()
+				;
 			};
 
 		/*** Public Instance Methods ***/
@@ -224,7 +241,7 @@ Uize.module ({
 				},
 				_hideWhenOut:{
 					name:'hideWhenOut',
-					value:_false
+					value:_false	// false - no hover, true - hover, Number - mouseout delay
 				},
 				_hideOnClick:{
 					name:'hideOnClick',

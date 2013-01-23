@@ -191,7 +191,7 @@ Uize.module ({
 					{
 						title:'Test that calling with a function value returns that same function value',
 						test:function () {
-							function _function () {};
+							function _function () {}
 							return this.expectSameAs (_function,_functionGenerator () (_function));
 						}
 					},

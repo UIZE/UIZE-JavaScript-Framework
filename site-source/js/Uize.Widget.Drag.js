@@ -47,7 +47,8 @@ Uize.module ({
 			var
 				_dragShield,
 				_hasStickyDragIssue = _false,
-				_useFixedPositioningForShield = _false
+				_useFixedPositioningForShield = _false,
+				_dropTargets
 			;
 			if (typeof navigator != 'undefined') {
 				var _ieMajorVersion = _Uize_Node.ieMajorVersion;
@@ -69,6 +70,10 @@ Uize.module ({
 							_this._eventPreviousPos = [0,0];
 							_this._eventTime = _this._eventPreviousTime = 0;
 							_this.eventDeltaPos = _this._eventDeltaPos = [0,0];
+							_this._dropTargetsEntered = {};
+
+						/*** Public Static Properties ***/
+							_dropTargets = _class.dropTargets = []; // widgets onto which draggable widgets can be dropped
 					}
 				),
 				_classPrototype = _class.prototype
@@ -97,6 +102,39 @@ Uize.module ({
 						: _this.set ({_cursor:_Uize_Node.getStyle (_node,'cursor')})
 					;
 				}
+			};
+
+
+		/*** Public Static Methods ***/
+			_class.addDropTarget = function (_widget, _node) {
+				_dropTargets.push ({_widget:_widget, _node:_node})
+
+				/**
+					Registers the passed-in widget as a potential drop target for any Uize.Widget.Drag instance. When a drag instance is dragged, the position of the drag instance is checked against the positions of the drop targets and certain events are fired:
+
+					'Drag Enter': fired when the drag instance and drop target's physical positions first intersect.
+					'Drag Over': fired when the drag instance is over the drop target.
+					'Drag Leave': fired when the drag instance and the drop target's physical positions no longer intersect.
+					'Drop': fired when a Drag action terminates while the drag instance and drop target's physical positions intersect.
+					'Drag Cancel': fired when a Drag is cancelled.
+
+					Each of these events contains a =dragObject= parameter which points to the drag instance. It is up to each individual drop target to determine whether or not it should respond to the event or dragObject.
+
+					If the _node parameter is specified, that will be the node used to calculate to drop target's current coordinates.
+				*/
+			};
+
+			_class.removeDropTarget = function (_widget) {
+				for (var _dropTargetIndex = _dropTargets.length; --_dropTargetIndex >= 0;) {
+					if (_dropTargets [_dropTargetIndex]._widget == _widget) {
+						_dropTargets.splice (_dropTargetIndex, 1);
+						return;
+					}
+				}
+
+				/**
+					Removes the passed-in widget from the list of potential drop targets for any Uize.Widget.Drag instance.
+				*/
 			};
 
 		/*** Public Instance Methods ***/
@@ -338,6 +376,143 @@ Uize.module ({
 						;
 					}
 					_this.wire ({'Changed.enabledInherited':function () {_this._updateUiCursor ()}});
+
+					/*** Variables and handler for drop ***/
+					var
+						_dropTargetIndex = 0,
+						_dropTargetsEntered = _this._dropTargetsEntered,
+						_barrier = 0,
+						_restFunction,
+						_updateFunction,
+						_processDropTargets = function () {
+							/**
+							 * foreach drop target:
+							 *	if the drop target and drag instance intersect:
+							 *		if they've intersected before: fire 'Drag Over'
+							 *		else: fire 'Drag Enter'
+							 *	elseif they've intersected before:
+							 *		fire: 'Drag Leave'
+							 *	else: do nothing
+							 */
+							var
+								_dropTargetsLength = _dropTargets.length,
+								_coords = _Uize_Node.getCoords (_rootNode)
+							;
+							for (_dropTargetIndex = _dropTargetsLength; --_dropTargetIndex >= 0;) {
+								var
+									_currDropTarget = _dropTargets [_dropTargetIndex],
+									_currDropTargetWidget = _currDropTarget._widget,
+									_instanceId = _currDropTargetWidget.instanceId,
+									_currDropTargetNodeCoords = _Uize_Node.getCoords((_currDropTarget._node || (_currDropTarget._node = _currDropTargetWidget.getNode ()))), // these always have to be re-calculated (and not pre-calculated) because the drop target could also be moving
+									_hadEntered = _dropTargetsEntered [_instanceId]
+								;
+
+								if (_Uize_Node.doRectanglesOverlap (_coords.left, _coords.top, _coords.width, _coords.height, _currDropTargetNodeCoords.left, _currDropTargetNodeCoords.top, _currDropTargetNodeCoords.width, _currDropTargetNodeCoords.height)) {
+									_currDropTargetWidget.fire ({
+										name:_hadEntered ? 'Drag Over' : 'Drag Enter',
+										dragObject:_this
+									});
+
+									!_hadEntered && (_dropTargetsEntered [_instanceId] = _true);
+
+								} else if (_hadEntered) {
+									_currDropTargetWidget.fire ({
+										name:'Drag Leave',
+										dragObject:_this
+									});
+
+									_dropTargetsEntered [_instanceId] = _false;
+								}
+							}
+						}
+					;
+
+					_this.wire ({
+						'Changed.enabledInherited':function () {_this._updateUiCursor ()},
+						'Drag Cancel':function (_event) {
+							for (_dropTargetIndex = _dropTargets.length; --_dropTargetIndex >= 0;)
+								_dropTargets[_dropTargetIndex].fire ({
+									name:'Drag Cancel',
+									dragObject:_this,
+									domEvent:_event.domEvent
+								})
+							;
+						},
+						'Drag Rest':function () {
+							// even if the drag instance is at rest, the drop targets might be moving.
+							// so it's necessary to process them even on Drag Rest.
+							// NOTE: if the item is no longer being dragged, but the drop targets are still moving,
+							//	no interaction will occur. This could be rationalized as intended, or considered
+							//	a bug that requires significant refactoring of the Uize drag-drop model.
+							function _checkOnRest () {
+								_processDropTargets ();
+								_restFunction = setTimeout (
+									_checkOnRest,
+									200
+								);
+							}
+
+							_restFunction = setTimeout (
+								_checkOnRest,
+								200
+							);
+						},
+						'Drag Update':function () {
+							_restFunction && clearTimeout (_restFunction);
+							_updateFunction && clearTimeout (_updateFunction);
+							_updateFunction = setTimeout (
+								_processDropTargets,
+								0
+							);
+						},
+						'Drag Done':function (_event) {
+							_restFunction && clearTimeout (_restFunction);
+							_updateFunction && clearTimeout (_updateFunction);
+							var
+								_dropTargetsLength = _dropTargets.length,
+								_coords = _Uize_Node.getCoords (_rootNode),
+								_droppedOn = []
+							;
+
+							for (_dropTargetIndex = _dropTargetsLength; --_dropTargetIndex >= 0;) {
+								var 
+									_currDropTarget = _dropTargets [_dropTargetIndex],
+									_currDropTargetWidget = _currDropTarget._widget,
+									_instanceId = _currDropTargetWidget.instanceId,
+									_currDropTargetNodeCoords = _Uize_Node.getCoords((_currDropTarget._node || (_currDropTarget._node = _currDropTargetWidget.getNode ())))
+								;
+
+								if (_Uize_Node.doRectanglesOverlap (_coords.left, _coords.top, _coords.width, _coords.height, _currDropTargetNodeCoords.left, _currDropTargetNodeCoords.top, _currDropTargetNodeCoords.width, _currDropTargetNodeCoords.height)) {
+									_currDropTargetWidget.fire ({
+										name:'Drop',
+										dragObject:_this,
+										domEvent:_event.domEvent
+									});
+
+									_droppedOn.push (_currDropTargetWidget);
+								}
+								else if (_dropTargetsEntered [_instanceId])
+									_currDropTargetWidget.fire ({
+										name:'Drag Leave',
+										dragObject:_this,
+										domEvent:_event.domEvent
+									})
+								;
+							}
+
+							// it might be preferable to fire the 'Dropped' event for each dropTarget,
+							// but that's probably not necessary right now.
+							_droppedOn.length &&
+								_this.fire ({
+									name:'Dropped',
+									dropTargets:_droppedOn,
+									domEvent:_event.domEvent
+								})
+							;
+
+							_this._dropTargetsEntered = {};
+						}
+					});
 
 					_superclass.prototype.wireUi.call (_this);
 				}

@@ -645,6 +645,14 @@ Uize.module ({
 								- see the companion =month= state property
 								- see the related =snapViewOnValueChange= and =value= state properties
 					*/
+				},
+				_dayNames: {
+					name: 'dayNames',
+					value: _Uize_Date.dayNames
+				},
+				_monthNames: {
+					name: 'monthNames',
+					value:  _Uize_Date.monthNames
 				}
 			});
 

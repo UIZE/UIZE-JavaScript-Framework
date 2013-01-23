@@ -300,7 +300,7 @@ Uize.module ({
 			var _updateUiDimsIfShown = _classPrototype._updateUiDimsIfShown = function () {
 				var _this = this;
 				_this.isWired && _this._shown && !_this._inDrag &&
-					_this.setNodeStyle ('',{width:_this._width,height:_this._height})
+					_this.setNodeStyle (_this.getNode(_this._nodeToSetDimension),{width:_this._width,height:_this._height})
 				;
 			};
 
@@ -553,6 +553,25 @@ Uize.module ({
 								NOTES
 								- see the related =autoPosition=, =offsetX=, and =offsetY= state properties
 								- the initial value is =undefined=
+					*/
+				},
+				_nodeToSetDimension: {
+					name: 'nodeToSetDimension',
+					onChange: [
+							_updateUiDimsIfShown,
+							_updateUiPositionIfShown
+						],
+					value: ''
+					/*?
+					Set-get Properties
+					nodeToSetDimension
+					A node reference or node ID for a node to which the =height= and =width= should be set.
+
+					The default value is the root node. Setting this property is useful when the main content of the dialog is in a child node.
+
+					NOTES
+					- see the companion =height= set-get property
+					- see the companion =width= set-get property
 					*/
 				},
 				_offsetX:{
