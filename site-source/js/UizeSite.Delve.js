@@ -845,7 +845,7 @@ Uize.module ({
 				var _this = this;
 				return Uize.map (
 					_this._getMatchingWidgetsFromTree (_widgetMatcher).sort (),
-					function (_widget) {
+					function (_objectPath) {
 						return {
 							title:_objectPath,
 							link:_treeItemLink,
@@ -1654,7 +1654,7 @@ Uize.module ({
 						}
 					}
 					if (_coords && _coords.area && _coords.seen) {
-						_document = _window.document;
+						var _document = _window.document;
 						_document.body.appendChild (_this._highlightNode = _document.createElement ('DIV'));
 						Uize.Node.setStyle (
 							_this._highlightNode,
