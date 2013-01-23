@@ -667,7 +667,7 @@ Uize.module ({
 					_totalUnaccessedNodes = 0,
 					_node
 				;
-				for (_nodeName in _nodeCache) {
+				for (var _nodeName in _nodeCache) {
 					if (_node = _nodeCache [_nodeName]) {
 						_nodeCacheIdLookup [_node.id] = 1;
 						_totalPresentAccessedNodes++;
