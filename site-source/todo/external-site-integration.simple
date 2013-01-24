@@ -2,7 +2,7 @@ This TO DO document is intended to capture all the requirements that need to be 
 
 In order for using UIZE to be a viable option for external sites, the following needs will have to be addressed in UIZE...
 
-Ability to Load Modules from Multiple Sources
+Multiple Code Sources
 	External sites would want to keep their codebase separate from the UIZE codebase, so it would be necessary to provide a way for all modules - JS, CSS, images, HTML templates, etc. - to be able to be organized into separate external site and UIZE areas.
 
 	The dynamic loader system would need to support multiple sources, as well as the build processes.
@@ -15,6 +15,40 @@ Packaging
 
 Third Party JavaScript
 	.
+
+Localization
+	To achieve the greatest flexibility, with regards to UIZE integration in external sites, the entire localization system should be configurable.
+
+	This argues in favor of implementing `localization as a service`.
+
+	Localization as a Service
+		To allow the entire localization system to be swapped out in favor of a localization system that may already be in place for an external site, localization should be implemented as a service.
+
+		Limitations of Current Localization Implementation
+			In the current implementation, the localization is implemented in a specific and somewhat restrictive way.
+
+			The current implementation has the following limitations / shortcomings...
+
+			- a specific substitution token syntax is imposed
+			- the localization system doesn't explicitly address quantities and gender of substitutions
+			- localization is limited to widget instances
+			- there's no way to swap out the entire localization system
+			- no system is provided for storing locale strings and piping locale strings through a localization workflow
+
+	Design Requirements
+		For maximum flexibility, the localization system should meet the following requirements...
+
+		Dynamic Updating
+			.
+
+		Mixed Locales
+			.
+
+		Different Localization Workflows
+			.
+
+		A Viable Reference Implementation
+			.
 
 MVC System
 	Base classes would need to be provided for the model, view, and controller aspects of an MVC code architecture.
@@ -45,7 +79,4 @@ CSS Class Namespacing
 
 	CSS Class Name Expansion in HTML Templates
 		.
-
-Localization
-	.
 
