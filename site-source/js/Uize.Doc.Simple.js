@@ -259,7 +259,7 @@ Uize.module({
 								if (_children.length) {
 									/*** sort all the peer sections (if this section should be sorted) ***/
 										_sectionsToSortLookup [_data.value] && Uize.Array.Sort.sortBy (_children,'value.value');
-	
+
 									/*** handle sorting within each of the peer sections ***/
 										Uize.forEach (_children,_sortPeerSections,true);
 								}
@@ -640,16 +640,16 @@ Uize.module({
 										_orderingStr = _orderingStr.toUpperCase ()
 									;
 								}
-								_listItemPrefix = _listItemPrefix.replace (_orderingStyleRegExp,_orderingStr)
+								_listItemPrefix = _listItemPrefix.replace (_orderingStyleRegExp,_orderingStr) + '&nbsp;';
 							} else {
 								_listItemPrefix = _onlyBulletCharRegExp.test (_listItemPrefix)
 									? _listItemPrefix.replace (_bulletCharRegExp,'<span class="bullet"></span>')
-									: _toSampleCode (_listItemPrefix)
+									: _toSampleCode (_listItemPrefix) + '&nbsp;'
 								;
 							}
 							_addDocLine (
 								'<tr valign="top">' +
-									'<td><span style="white-space:nowrap;">' + _listItemPrefix + '</span></td>' +
+									'<td style="white-space:nowrap;">' + _listItemPrefix + '</td>' +
 									'<td>' +
 										_translateInlineFormatting (_value.replace (_listItemPrefixRegExp,''),_sectionPath) +
 									'</td>' +
