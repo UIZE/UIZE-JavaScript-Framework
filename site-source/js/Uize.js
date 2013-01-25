@@ -111,17 +111,185 @@
 
 					- =Uize.eval= - lets you perform `quarantined code evaluation` of a JavaScript code string
 					- =Uize.getClass= - gets the class of which a specified value is an instance, or returns the value if it is a class or function
-					- =Uize.laxEval= - lets you perform `quarantined code evaluation` of a JavaScript code string, but not in JavaScript strict mode
+					- =Uize.laxEval= - lets you perform `quarantined code evaluation` of a JavaScript code string, but not in `JavaScript strict mode`
 					- =Uize.noNew= - wraps an object constructor function to make JavaScript's =new= operator optional
 					- =Uize.now= - returns the current time in milliseconds since 1970 (POSIX time)
+					- =Uize.quarantine= - generates a quarantined version of the supplied function
 					- =Uize.resolveTransformer= - resolves the specified transformer (of any type) to a transformer function
 					- =Uize.substituteInto= - substitutes one or more substitution values into a string
 
-			Quarantined Code Evaluation
-				The =Uize= module provides two static methods to facilitate quarantined evaluation of JavaScript code strings.
+			Quarantined Code Execution
+				The =Uize= module provides static methods to facilitate the quarantined execution of JavaScript code, which can be divided into two types: `quarantined code evaluation` and `quarantined nested functions`.
 
-				The general wisdom is to avoid using JavaScript's built-in =eval= function at all costs, and this is, for the most part, good advice. However, JavaScript is a dynamic language, and when you're doing more sophisticated (and risky) things with JavaScript such as dynamic code construction, it becomes useful to evaluate strings that contain JavaScript code.
+				What is Quarantined Code Execution?
+					Quarantined code execution is the execution of some JavaScript from within a deep local scope, but where the code being executed is executed outside of that deep scope - in a "quarantined" scope.
 
+					In the quarantined scope, the only scope that the quarantined code has access to in its scope chain is the global scope. The executed code is, thereby, quarantined from the local scope so that it cannot accidentally contaminate (or be contaminated by) the local scope, by accessing or assigning to identifiers within the local scope (or anywhere else up the local scope's scope chain).
+
+					This is best illustrated by an example...
+
+					NON-QUARANTINED
+					....................................................................................
+					function foo () {
+						var bar = 5;
+						eval ('var baz = 10; alert (bar);');  // doesn't throw error, but we'd want it to
+					}
+
+					foo ();
+					....................................................................................
+
+					In the above example, some code is being evaluated inside a function scope using JavaScript's built-in =eval= function. Now, for argument's sake, let's say that this code has a typo in it where it was supposed to access the =baz= variable that it defined, but it's actually trying to access a =bar= variable. If the surrounding scope in which the =eval= call is being made contains a =bar= variable, then the code will not produce an error as it should and will appear to work, but it will have a bug.
+
+					This kind of cross-contamination between evaluated code and a deep local scope can be alleviated by using either of the =Uize.eval= or =Uize.laxEval= methods, as follows...
+
+					QUARANTINED
+					..................................................................................
+					function foo () {
+						var bar = 5;
+						Uize.eval ('var baz = 10; alert (bar);');  // throws an error, as we would like
+					}
+
+					foo ();
+					..................................................................................
+
+					In the above example, we have replaced the use of JavaScript's built-in =eval= function with a call to the =Uize.eval= method. The code being evaluated is now evaluated in a quarantined fashion so that it no longer has access to scope inside the =foo= function, and the only scope it has access to is the global scope. In this example, the global scope does not define a =bar= variable, so the code being evaluated produces a JavaScript error as we would like and exposes the typo in the code.
+
+					Now, the global scope could always still have identifiers that could cross-contaminate with code being evaluated using the =Uize.eval= or =Uize.laxEval= methods, but the potential for such cross-contamination is much reduced, especially as you consider that the deeper and deeper you go into nested scopes, the more identifiers get "tacked" on as a result of an increasingly long scope chain. The most important thing is that the =Uize.eval= and =Uize.laxEval= methods allow you to quarantine code evaluation from the current / local scope within which the methods are called.
+
+				Quarantined Code Evaluation
+					The =Uize= module provides two static methods to facilitate quarantined evaluation of JavaScript code strings.
+
+					The general wisdom is to avoid using JavaScript's built-in =eval= function at all costs, and this is, for the most part, good advice. However, JavaScript is a dynamic language, and when you're doing more sophisticated (and risky) things with JavaScript such as dynamic code construction, it becomes useful to evaluate strings that contain JavaScript code.
+
+					Now, a risk with careless use of JavaScript's =eval= function from deep within the nested functions of your code is that you may not be intending to have the code evaluated within the scope of your deep function.
+
+					It could be a benefit to the code you're eval'ing that it has access to the scope of the function in which you're eval'ing it, but it may also be a curse in two respects...
+
+					+) the code being eval'ed may unexpectedly conflict with identifiers in your function's scope (or any scope up the scope chain)
+					+) function closures within the code being eval'ed will hang on to your function's scope state (with "interesting" memory usage implications)
+
+					To address these risks and to allow you to perform `quarantined code evaluation`, the =Uize= module provides methods for `strict mode quarantined evaluation` and `non-strict mode quarantined evaluation`.
+
+					Strict Mode Quarantined Evaluation
+						To perform `quarantined code evaluation` in `JavaScript strict mode`, the =Uize.eval= method can be used.
+
+						SYNTAX
+						..............................................
+						evalResultANYTYPE = Uize.eval (codeToEvalSTR);
+						..............................................
+
+						EXAMPLE
+						..............................................................................................
+						function foo () {
+							var bar = 5;
+							Uize.eval ('bar = 10');  // throws an error, because bar is not declared inside eval'd code
+							alert (bar);
+						}
+
+						foo ();
+						..............................................................................................
+
+						In the above example, the code being evaluated in the call to the =Uize.eval= method results in a JavaScript error being thrown. This is for two reasons:
+
+						+) the =Uize.eval= method evaluates the code in a quarantined fashion, so it doesn't have access to the =bar= variable defined in the local scope
+						+) the =Uize.eval= method evaluates code using `JavaScript strict mode`, so the code that now appears to assigning a value to a variable not declared in the global scope (the only scope that the `quarantined code evaluation` has access to) throws an error because this is not permitted in strict mode
+
+					Non-strict Mode Quarantined Evaluation
+						To perform `quarantined code evaluation` in non-strict mode, the =Uize.laxEval= method can be used.
+
+						SYNTAX
+						.................................................
+						evalResultANYTYPE = Uize.laxEval (codeToEvalSTR);
+						.................................................
+
+						EXAMPLE
+						..................................................................................................
+						function foo () {
+							var bar = 5;
+							Uize.laxEval ('bar = 10');  // doesn't throw an error, but doesn't set value of local scope bar
+							alert (bar);  // alerts "5", because the quarantined eval'd code didn't set local bar variable
+						}
+
+						foo ();
+						..................................................................................................
+
+						In the above example, the code being evaluated in the call to the =Uize.laxEval= method does not throw a JavaScript as the =Uize.eval= method would, but it still doesn't set the value of the =bar= variable in the local scope. There are two things in play here...
+
+						+) the =Uize.laxEval= method evaluates the code in a quarantined fashion, so it doesn't have access to the =bar= variable defined in the local scope
+						+) the =Uize.laxEval= method evaluates code using non-strict mode, so it allows the quarantined code to assign a value to a variable that is not declared in the quarantined code's scope chain, which has the effect of declaring =bar= as a global variable rather than throwing an error (as would be the case in strict mode)
+
+				Quarantined Nested Functions
+					To declare a function from within some deep local scope, but have that function be quarantined from the local scope, one can use the =Uize.quarantine= method.
+
+					The =Uize.quarantine= method allows you to essentially generate a quarantined version of the supplied function. When the quarantined function is then called, it won't have access to the same scope chain that the original function had access to - it will only have access to the global scope.
+
+					SYNTAX
+					...............................................................
+					quarantinedFunctionFUNC = Uize.quarantine (sourceFunctionFUNC);
+					...............................................................
+
+					The behavior of the =Uize.quarantine= method is best illustrated by an example...
+
+					EXAMPLE
+					...............................................................................................
+					var bar = 10;
+
+					function Foo () {
+						var bar = 5;
+						this.baz = function () {
+							alert (bar);
+						};
+						this.qux = Uize.quarantine (this.baz);
+					}
+
+					var myFoo = new Foo ();
+
+					myFoo.baz ();  // alerts 5, because the baz method has access to the Foo scope
+					myFoo.qux ();  // alerts 10, because it is quarantined from the Foo scope, and global bar is 10
+					...............................................................................................
+
+					In the above example, the instance method =baz= of the =Foo= object is defined inside the constructor. As a result, it has access to the =Foo= scope and the =bar= variable defined in it, and it alerts the value of local =bar= variable when it is called. Now, the =qux= instance method, on the other hand, is defined as being a quarantined version of the =baz= instance method, so it will only have access to the global scope when called.
+
+					As a result, when the =baz= method is called on the instance =myFoo=, it alerts "5", which is the value of the =bar= variable in the =Foo= scope. In contrast, when the =qux= method is called on =myFoo=, it alerts "10", which is the value of the =bar= variable in the global scope - because it is quarantined from the =Foo= scope, it only has access to the global scope and the global =bar= variable.
+
+					Benefits of Uize.quarantine Over Uize.eval or Uize.laxEval
+						The quarantining effect of the =Uize.quarantine= method can also be achieved by using either of the =Uize.eval= or =Uize.laxEval= methods, but the =Uize.quarantine= method has a few benefits over the `quarantined code evaluation` methods...
+
+						Quarantine Existing Functions
+							The =Uize.quarantine= method lets you create a quarantined version of a function that already exists.
+
+							This is something that you can't easily do with the =Uize.eval= or =Uize.laxEval= methods - you'd basically have to manually re-implement the =Uize.quarantine= method.
+
+						Easier to Write Code in Function Form
+							The =Uize.quarantine= method lets you write quarantined code using a regular function, which is just plain easier to do.
+
+							By writing quarantined code in function form, you can avoid getting caught up in the character escaping and multi-line string concatenation issues associated with constructing a JavaScript code string for evaluation. This becomes increasinly an issue as the amount of code that you want to quarantine increases and constructing the code as a string becomes increasingly cumbersome.
+
+						Code in Function Form is Scrunchable
+							Quarantined code written in function form has the benefit of being scrunchable by the scruncher (or otherwise minified by other JavaScript minifiers or code obfuscators).
+
+							Naturally, the benefits of this will be greater the larger the quarantined code is.
+
+						Some Early Error Detection
+							Quarantined code written in function form will be parsed by the JavaScript interpreter early.
+
+							Unlike the =Uize.eval= and =Uize.laxEval= methods, where the quarantined code will be evaluated at runtime and where errors in the code will only surface when the code is evaluated, the function supplied to the =Uize.quarantine= method will be parsed just like any other function, and syntax errors (and some errors relating to non-compliance with `JavaScript strict mode`) will be caught early - before the quarantined code is even executed.
+
+					Immediately Invoked Quarantined Functions
+						In cases where one wishes to execute code immediately from within some deep local scope, but where one wishes to have that code be executed in a quarantined fashion, one can call the function returned by the =Uize.quarantine= method immediately.
+
+						EXAMPLE
+						........................................
+						// code executed before quarantined code
+
+						Uize.quarantine (function () {
+							// quarantined code execution
+						}) ();
+
+						// code executed after quarantined code
+						........................................
+
+						This is just like immediate invokation of an anonymous function, except with the additional wrapper of the =Uize.quarantine= call.
 */
 
 Uize = (function () {
@@ -3825,21 +3993,20 @@ Uize = (function () {
 			/*?
 				Static Methods
 					Uize.eval
-						Lets you perform `quarantined code evaluation` of the specified JavaScript code string.
+						Lets you perform `quarantined code evaluation` of the specified JavaScript code string, using `JavaScript strict mode`.
 
 						SYNTAX
 						..............................................
 						evalResultANYTYPE = Uize.eval (codeToEvalSTR);
 						..............................................
 
-						A risk with careless use of JavaScript's =eval= function from deep within the nested functions of your code is that you may not be intending to have the code evaluated within the scope of your deep function.
+						The =Uize.eval= method imposes `JavaScript strict mode` on the code being evaluated. If you need to evaluate code in non-strict mode, use the companion =Uize.laxEval= method. The =Uize.eval= method returns any result that was produced by the code being evaluated.
 
-						It could be a benefit to the code you're eval'ing that it has access to the scope of the function in which you're eval'ing it. It may also be a curse in two respects: 1) the code being eval'ed may unexpectedly conflict with identifiers in your function's scope, and 2) function closures within the code being eval'ed will hang on to your function's scope state (with "interesting" memory usage implications).
-
-						The =Uize.eval= method lets you guarantee that code you wish to be eval'ed in the global scope *is* eval'ed in the global scope.
+						For a detailed discussion of quarantining and to see examples, consult the section `Quarantined Code Execution`.
 
 						NOTES
 						- compare to the companion =Uize.laxEval= static method
+						- compare to the related =Uize.quarantine= static method
 			*/
 		);
 
@@ -3850,15 +4017,20 @@ Uize = (function () {
 			/*?
 				Static Methods
 					Uize.laxEval
-						Lets you perform `quarantined code evaluation` of the specified JavaScript code string, but not in JavaScript strict mode.
+						Lets you perform `quarantined code evaluation` of the specified JavaScript code string, but not in `JavaScript strict mode`.
 
 						SYNTAX
 						.................................................
 						evalResultANYTYPE = Uize.laxEval (codeToEvalSTR);
 						.................................................
 
+						The =Uize.laxEval= method evaluates the specified code string in non-strict mode. If you would prefer to evaluate code in JavaScript strict mode, use the companion =Uize.eval= method. The =Uize.laxEval= method returns any result that was produced by the code being evaluated.
+
+						For a detailed discussion of quarantining and to see examples, consult the section `Quarantined Code Execution`.
+
 						NOTES
 						- compare to the companion =Uize.eval= static method
+						- compare to the related =Uize.quarantine= static method
 
 				Deprecated Features
 					Uize.globalEval -- DEPRECATED 2013-01-14
@@ -3883,23 +4055,17 @@ Uize = (function () {
 			/*?
 				Static Methods
 					Uize.quarantine
+						Returns a function, being a quarantined version of the supplied function.
 
 						SYNTAX
-						...................................................................
-						quarantinedFunctionFUNC = Uize.quarantine (localScopeFunctionFUNC);
-						...................................................................
+						...............................................................
+						quarantinedFunctionFUNC = Uize.quarantine (sourceFunctionFUNC);
+						...............................................................
 
-						### Quarantining and Strict Mode
-							- mention impact of quarantining a function where the scope in which the function is defined is using strict mode
-							- quarantined function will be compliant with strict mode according at the time of being interpreted, but the quarantined version won't execute using strict mode unless you explicitly add the directive prologue in the function as well
+						For a detail discussion on this method and to see examples, consult the section `Quarantined Nested Functions`. For a more general discussion on quarantining, consult the section `Quarantined Code Execution`.
 
-						### Benefits of Quarantining Using Uize.quarantine
-							- Scrunching Benefits
-								unlike using the Function constructor to create quarantined functions, identifiers inside functions that are quarantined using the =Uize.quarantine= method can be scrunched / minified
-							- Syntax errors and some strict mode compliance issues discovered early during parsing
-							- No need to deal with issues of writing JavaScript code using string literals
-								- multi-line string concatenation
-								- cumbersome escaping of quotes, backslashes, etc.
+						NOTES
+						- compare to the related =Uize.eval= and =Uize.laxEval= static methods
 			*/
 		};
 
