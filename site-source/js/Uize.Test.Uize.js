@@ -35,6 +35,15 @@ Uize.module ({
 		'use strict';
 
 		var
+			_strictModeSupported =
+				(function () {
+					try {
+						eval ('\'use strict\'; with ({}) {}');
+					} catch (_error) {
+						return true;
+					}
+					return false;
+				}) (),
 			_oneLevelDeepTestObjectForCloning = {
 				undefinedValue:undefined,
 				nullValue:null,
@@ -2239,10 +2248,117 @@ Uize.module ({
 						}
 					},
 					['Uize.eval',[
-						/* TODO: implement tests */
+						['Test that the specified code is evaluated and that the result of the evaluated code is returned',
+							'2 + 3',
+							5
+						],
+						{
+							title:'Test that the specified code is evaluated in a quarantined fashion, having access only to the global scope',
+							test:function () {
+								var
+									_Uize_eval = Uize.eval,
+									_evalResult
+								;
+								(function () {
+									/* NOTE:
+										Because of variable hoisting, we need to do our trick with a local Uize variable inside a nested immediately invoked anonymous function.
+									*/
+									var Uize = {};
+									_evalResult = _Uize_eval ('Uize.eval');
+								}) ();
+								return this.expectSameAs (_Uize_eval,_evalResult);
+							}
+						},
+						{
+							title:'Test that the specified code is evaluated using JavaScript strict mode',
+							test:function () {
+								var _errorThrown = false;
+								try {
+									Uize.eval ('with ({}) {}');
+								} catch (_error) {
+									_errorThrown = true;
+								}
+								return this.expect (_strictModeSupported,_errorThrown);
+							}
+						}
 					]],
 					['Uize.laxEval',[
-						/* TODO: implement tests */
+						['Test that the specified code is evaluated and that the result of the evaluated code is returned',
+							'2 + 3',
+							5
+						],
+						{
+							title:'Test that the specified code is evaluated in a quarantined fashion, having access only to the global scope',
+							test:function () {
+								var
+									_Uize_laxEval = Uize.laxEval,
+									_laxEvalResult
+								;
+								(function () {
+									/* NOTE:
+										Because of variable hoisting, we need to do our trick with a local Uize variable inside a nested immediately invoked anonymous function.
+									*/
+									var Uize = {};
+									_laxEvalResult = _Uize_laxEval ('Uize.laxEval');
+								}) ();
+								return this.expectSameAs (_Uize_laxEval,_laxEvalResult);
+							}
+						},
+						{
+							title:'Test that the specified code is evaluated using non-strict mode',
+							test:function () {
+								var _errorThrown = false;
+								try {
+									Uize.eval ('with ({}) {}');
+								} catch (_error) {
+									_errorThrown = true;
+								}
+								return this.expect (false,_errorThrown);
+							}
+						}
+					]],
+					['Uize.quarantine',[
+						{
+							title:'Test that the method returns a function that is not just a reference to the source function',
+							test:function () {
+								var
+									_functionToQuarantine = function () {},
+									_quarantinedFunction = Uize.quarantine (_functionToQuarantine)
+								;
+								return (
+									this.expectFunction (_quarantinedFunction) &&
+									this.expect (false,_quarantinedFunction === _functionToQuarantine)
+								);
+							}
+						},
+						{
+							title:'Test that the quarantined function is equivalent to the source function in its behavior',
+							test:function () {
+								var
+									_functionToQuarantine = function (a,b) {return Math.pow (a,b)},
+									_quarantinedFunction = Uize.quarantine (_functionToQuarantine)
+								;
+								return this.expect (8,_quarantinedFunction (2,3));
+							}
+						},
+						{
+							title:'Test that the quarantined function is truly quarantined from the scope of the source function',
+							test:function () {
+								var
+									_quarantinedFunction = Uize.quarantine (function () {return Uize.quarantine}),
+									_Uize_quarantine = Uize.quarantine,
+									_quarantinedFunctionResult
+								;
+								(function () {
+									/* NOTE:
+										Because of variable hoisting, we need to do our trick with a local Uize variable inside a nested immediately invoked anonymous function.
+									*/
+									var Uize = {};
+									_quarantinedFunctionResult = _quarantinedFunction ();
+								}) ();
+								return this.expectSameAs (_Uize_quarantine,_quarantinedFunctionResult);
+							}
+						}
 					]],
 					['Uize.getClass',[
 						/*** test when value can't be resolved to a class ***/
