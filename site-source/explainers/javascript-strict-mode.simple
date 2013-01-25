@@ -217,3 +217,20 @@ Can't Have a State Property With Private Name of "name"
 
 	This is a rather esoteric issue and is not likely to affect the overwhelming majority of developers.
 
+Testing for Strict Mode
+	If you ever need to test if the JavaScript interpreter in use supports strict mode, you can use a feature detection approach such as the one shown in the example below...
+
+	EXAMPLE
+	............................................................................................................
+	function isStrictModeSupported () {
+		try {
+			eval ('\'use strict\'; with ({}) {}');  // if strict mode is supported, the with statement should fail
+		} catch (_error) {
+			return true;
+		}
+		return false;
+	}
+	............................................................................................................
+
+	In the above example, the =isStrictModeSupported= function returns a boolean, indicating whether or not JavaScript strict mode is supported by the JavaScript interpreter that is running this code. In its implementation, the function tries to evaluate some code in strict mode that should throw an error in strict mode. If the error is caught by the =try-catch=, then the interpreter supports strict mode and =true= is returned. If no error is caught, then the interpreter does not support strict mode and =false= is returned.
+
