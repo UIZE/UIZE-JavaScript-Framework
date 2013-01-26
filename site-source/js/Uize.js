@@ -111,6 +111,7 @@
 
 					- =Uize.eval= - lets you perform `quarantined code evaluation` of a JavaScript code string
 					- =Uize.getClass= - gets the class of which a specified value is an instance, or returns the value if it is a class or function
+					- =Uize.global= - returns a reference to the global object
 					- =Uize.laxEval= - lets you perform `quarantined code evaluation` of a JavaScript code string, but not in `JavaScript strict mode`
 					- =Uize.noNew= - wraps an object constructor function to make JavaScript's =new= operator optional
 					- =Uize.now= - returns the current time in milliseconds since 1970 (POSIX time)
@@ -3979,12 +3980,74 @@ Uize = (function () {
 			/*?
 				Static Methods
 					Uize.global
-						Returns a reference to the global context.
+						Returns a reference to the global object.
 
 						SYNTAX
 						...........................
 						globalOBJ = Uize.global ();
 						...........................
+
+						The =Uize.global= method should be used in situations where you need to access or assign properties on the global object, or to call methods on the global object, and where you need that code to be able to run inside a browser as well as other environments like WSH (Windows Script Host) or NodeJS.
+
+						In cases where you need to work with properties of the global object inside a browser, you would typically just reference the =window= object. However, in non-browser environments where you might run your JavaScript code, the =window= object is not applicable and usually not defined. To be entirely safe, use the =Uize.global= method - it will return the =window= object when you're running the code in a browser, and in other environments it will return their equivalent of the global object.
+
+						EXAMPLES
+						........................................
+						// assign a value to a global property
+						Uize.global ().myGlobalProperty = 'foo';
+
+						// access a global property
+						alert (Uize.global ().myGlobalProperty);
+
+						// delete a global property
+						delete Uize.global ().myGlobalProperty;
+						........................................
+
+						If you are going to be calling the =Uize.global= method multiple times inside some code to access or assign values to global properties, you can create a local variable that is a reference to the global object. So, the above example could be re-written as...
+
+						......................................
+						var _global = Uize.global ();
+
+						// assign a value to a global property
+						_global.myGlobalProperty = 'foo';
+
+						// access a global property
+						alert (_global.myGlobalProperty);
+
+						// delete a global property
+						delete _global.myGlobalProperty;
+						......................................
+
+						Defeating Scope Chain Overrides
+							The =Uize.global= method can be useful in situations where you need to defeat an override of some identifier from the scope chain of the local scope in order to force access of the global version.
+
+							If one defines a global identifier but then is executing code from within a deep local scope, and if the identifier is overridden somewhere in the scope chain of the local scope, then a way to force access to that identifier in the global scope is to use the =Uize.global= method. Consider the following example...
+
+							EXAMPLE
+							..................................................................
+							var foo = 'global scope';
+
+							function MyObject () {
+								var foo = 'local scope';
+
+								this.alertLocalScopeFoo = function () {
+									alert (foo);
+								};
+
+								this.alertGlobalScopeFoo = function () {
+									alert (Uize.global ().foo);
+								};
+							}
+
+							var myObjectInstance = new MyObject ();
+
+							myObjectInstance.alertLocalScopeFoo ();   // alerts "local scope"
+							myObjectInstance.alertGlobalScopeFoo ();  // alerts "global scope"
+							..................................................................
+
+							In the above example, we have a global variable named =foo=. Inside the constructor of =MyObject=, we also have a local variable named =foo=. Now, for any function that is defined within the constructor's scope, the local =foo= variable will override the =foo= variable from the global scope.
+
+							So, for the =alertLocalScopeFoo= method that is being defined, when it tries to access the =foo= variable simply by its name, it gets the version from the local scope. So, in order for the =alertGlobalScopeFoo= method to actually access the =foo= from the global scope, it can use the =Uize.global= method to get a reference to the global object and then dereference =foo= as a property on that object.
 			*/
 		);
 
