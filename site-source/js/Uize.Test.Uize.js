@@ -2247,6 +2247,17 @@ Uize.module ({
 							return this.expectSameAs (Uize.globalEval,Uize.laxEval);
 						}
 					},
+					['Uize.global',[
+						{
+							title:'Test that the method returns a reference to the global object',
+							test:function () {
+								return this.expectSameAs (
+									Function ('return (function () {return this}) ()') (),
+									Uize.global ()
+								);
+							}
+						}
+					]],
 					['Uize.eval',[
 						['Test that the specified code is evaluated and that the result of the evaluated code is returned',
 							'2 + 3',
@@ -2309,7 +2320,7 @@ Uize.module ({
 							test:function () {
 								var _errorThrown = false;
 								try {
-									Uize.eval ('with ({}) {}');
+									Uize.laxEval ('with ({}) {}');
 								} catch (_error) {
 									_errorThrown = true;
 								}
