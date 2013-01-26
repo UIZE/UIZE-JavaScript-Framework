@@ -7,14 +7,21 @@ Multiple Code Sources
 
 	The dynamic loader system would need to support multiple sources, as well as the build processes.
 
-Packaging
-	- JS Packaging
-	- CSS Packaging
-	- Image Spritifying
-	- HTML Template Compiling
-
-Third Party JavaScript
+Module Wrapping of Third Party JavaScript
 	.
+
+Packaging
+	JS Packaging
+		.
+
+	CSS Packaging
+		.
+
+	Image Spritifying
+		.
+
+	HTML Template Compiling
+		.
 
 Localization
 	To achieve the greatest flexibility, with regards to UIZE integration in external sites, the entire localization system should be configurable.
