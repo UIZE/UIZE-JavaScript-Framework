@@ -1,0 +1,53 @@
+The new =isMet= instance method, implemented in the =Uize.Class= base class module, returns a boolean, indicating whether or not the specified condition is met.
+
+DIFFERENT USAGES
+
+`Test if a State Property is Truthy or Falsy`
+....................................................
+isMetBOOL = myInstance.isMet (propertyConditionSTR);
+....................................................
+
+`Test if Multiple State Properties Are Truthy or Falsy`
+.............................................................
+isMetBOOL = myInstance.isMet (propertiesConditionARRAYorSTR);
+.............................................................
+
+`Test if a Compound Condition is Met`
+..........................................................
+isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
+..........................................................
+
+Test if a State Property is Truthy or Falsy
+	In its most basic usage, the =isMet= method can be used to test if a single state property becomes truthy or falsy.
+
+	SYNTAX
+	....................................................
+	isMetBOOL = myInstance.isMet (propertyConditionSTR);
+	....................................................
+
+Test if Multiple State Properties Are Truthy or Falsy
+	One can test if all properties in a set of state properties are truthy or falsy, by specifying the state properties as an array of property names or as a comma-separated list string.
+
+	SYNTAX
+	.............................................................
+	isMetBOOL = myInstance.isMet (propertiesConditionARRAYorSTR);
+	.............................................................
+
+Test if a Compound Condition is Met
+	One can test if a compound condition has been met, by specifying the compound condition in the form of a condition function or condition expression string.
+
+	SYNTAX
+	..........................................................
+	isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
+	..........................................................
+
+Specifying Conditions
+	When using the =isMet= method, conditions are specified in exactly the same as with the =once= method.
+
+	Rather than redundantly providing comprehensive examples for the different usages of the =isMet= method and the different ways in which conditions can be specified, instead please consult the reference for the =once= method. While the =once= method lets you register a handler function that should be executed once a condition is met, the =isMet= method simply tests if a condition is met and returns a boolean result.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-26 - New isMet Instance Method in Uize.Class
+....................................................................................
