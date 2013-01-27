@@ -1,14 +1,5 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
-Eliminate testCompleteness from Module Meta Data
-	Instead of specifying =testCompleteness= in the `module meta data` for a module, this should be derived from the =codeCompleteness= specified for the module's corresponding test module.
-
-	In this way, the test completeness listed in the SOTU page is merely a derived property.
-
-	- update the code in =UizeSite.Build.File= module to derive the =testCompleteness= values for modules
-	- update the documentation to no longer advocate specifying the =testCompleteness=, and make sure there are no longer any module examples in the docs that show the =testCompleteness=
-	- update all modules to no longer have the =testCompleteness= property in the `module meta data`
-
 Move Away From VARIATION N
 	For methods that support multiple variations, move away from the "VARIATION N" approach to listing those variations.
 
