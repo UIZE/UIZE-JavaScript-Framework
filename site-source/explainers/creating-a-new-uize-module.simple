@@ -180,7 +180,6 @@ Update Header Comments
 			type: [module type]
 			importance: [0-10]
 			codeCompleteness: [0-100]
-			testCompleteness: [0-100]
 			docCompleteness: [0-100]
 		*/
 		............................
@@ -216,14 +215,10 @@ Update Header Comments
 
 				The =codeCompleteness= value is a best guess estimate of how complete a module's code is. One could argue that a module is never complete, because it can always be improved and features can always be added to it. The =codeCompleteness= measure, however, is a measure of how complete the code is for an established feature set at any given point in time. Generally, a module should be 100% code complete before it is officially made public as part of the framework. This principle can be seen when viewing the [[../appendixes/sotu.html][SOTU]] page, where you will notice that the overwhelming majority of modules are marked as being 100% code complete.
 
-				Note that if the module is a unit test module, then the value of the =codeCompleteness= meta data entry for the module should correspond to the value of the =testCompleteness= meta data entry in the module that the unit test module is intended to test. It is far more acceptable for test modules to not be 100% code complete than it is for other types of modules.
+				Code Completeness for Test Modules
+					For test modules, the =codeCompleteness= value is a best guess estimate of how complete the unit test module is with respect to the feature set of the module it is intended to test.
 
-			testCompleteness
-				A number, in the range of =0= to =100=, indicating the completeness of unit tests for the module as a percentage.
-
-				If the module is a unit test module, then the value of the =testCompleteness= meta data entry for the module should be =100=, since unit test modules are not themselves unit tested. Assigning them test complete just means that they won't sort along with other modules that truly are in need of unit testing when sorting the [[../appendixes/sotu.html][SOTU]] table by its "TEST" column. Instead, they appear "checked off" as done, with regards to unit testing.
-
-				For regular / non-unit test modules, the =testCompleteness= value is a best guess estimate of how complete the unit test for the module is. To determine a value, you can consider what percentage of a module's static methods, static properties, instance methods, instance properties, etc. are tested. Bear in mind that if, say, 50% of the features of a module are tested, you may still wish to assign a =testCompleteness= value for the module that is less than or greater than 50%, based upon how much coding work you feel there is to writing the remaining tests. Any value that you assign to the =testCompleteness= meta data entry for a module should correspond to the value of the =codeCompleteness= meta data entry for that module's companion unit test module.
+					To determine a value, you can consider what percentage of the static methods, static properties, instance methods, instance properties, etc. of the module being tested are tested by the test module. Bear in mind that if, say, 50% of the features of a module are tested, you may still wish to assign a =codeCompleteness= value for the test module that is less than or greater than 50%, based upon how much coding work you feel there is to writing the remaining tests. Also keep in mind that it is far more acceptable for test modules to not be 100% code complete than it is for other types of modules.
 
 			docCompleteness
 				A number, in the range of =0= to =100=, indicating the completeness of documentation for the module as a percentage.
@@ -249,7 +244,6 @@ Update Header Comments
 				type: Template
 				importance: 2
 				codeCompleteness: 100
-				testCompleteness: 0
 				docCompleteness: 100
 			*/%><%@
 				/* guts of template follows... */
@@ -334,9 +328,7 @@ Write Unit Tests
 		A unit test module for a UIZE module should be placed under the =Uize.Test= namespace, and should be named by appending the module name to "Uize.Test.". So, for example, the unit test module for the module =Uize.Data= would be named =Uize.Test.Uize.Data=. To get a sense for how unit test modules should be implemented, take a look through the source code of existing test modules. When implementing your unit test module, be sure to follow these same guidelines for creating regular UIZE modules, since many of the same principles apply, but keep the following points in mind...
 
 		- Test modules only need to have the most basic "Introduction" paragraph in order to be considered documentation complete (see the =Uize.Test.Uize.Data= module for an example of documentation for a test module).
-		- The =testCompleteness= meta data entry in the `module meta data comment` can be automatically marked as =100= for test modules, since it is not desirable to test test modules with yet other test module test modules.
 		- The value for the =importance= meta data entry in the `module meta data comment` for a test module should never be greater than the =importance= value for the module it tests, and should generally be somewhat less.
-		- The =codeCompleteness= value for a test module should be identical to the =testCompleteness= value for the module that it tests.
 		- Test modules do not need example pages.
 
 	UIZE Unit Tests
