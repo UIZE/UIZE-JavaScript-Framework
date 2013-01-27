@@ -13,7 +13,6 @@
 	type: Package
 	importance: 3
 	codeCompleteness: 100
-	testCompleteness: 0
 	docCompleteness: 2
 */
 
@@ -57,7 +56,7 @@ Uize.module ({
 						}
 					}).sort (),
 					_modulesLookup = Uize.lookup (_modules),
-					_correspondingTestModuleName,
+					_testModuleName,
 					_testModuleRegExp = /^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/,
 					_modulesInDependencyOrder = Uize.Build.ModuleInfo.traceDependencies (
 						Uize.Data.Matches.values (
@@ -71,11 +70,8 @@ Uize.module ({
 							_modulesInDependencyOrder,
 							function (_moduleName) {
 								return (
-									_modulesLookup [
-										_correspondingTestModuleName =
-											_moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName
-									]
-										? Uize.Test.testModuleTest (_correspondingTestModuleName)
+									_modulesLookup [_testModuleName = Uize.Build.Util.getTestModuleName (_moduleName)]
+										? Uize.Test.testModuleTest (_testModuleName)
 										: Uize.Test.requiredModulesTest (_moduleName)
 								);
 							}

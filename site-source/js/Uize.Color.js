@@ -13,7 +13,6 @@
 	type: Object
 	importance: 7
 	codeCompleteness: 95
-	testCompleteness: 0
 	docCompleteness: 92
 */
 

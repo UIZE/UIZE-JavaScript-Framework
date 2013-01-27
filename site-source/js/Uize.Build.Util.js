@@ -13,7 +13,6 @@
 	type: Package
 	importance: 3
 	codeCompleteness: 100
-	testCompleteness: 0
 	docCompleteness: 2
 */
 
@@ -88,6 +87,10 @@ Uize.module ({
 					),
 					'value.title.toLowerCase ()'
 				);
+			};
+
+			_package.getTestModuleName = function (_moduleName) {
+				return _moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName;
 			};
 
 			_package.readSimpleDataFile = function (_simpleDataFilePath) {

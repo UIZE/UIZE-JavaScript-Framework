@@ -13,7 +13,6 @@
 	type: Extension
 	importance: 1
 	codeCompleteness: 10
-	testCompleteness: 0
 	docCompleteness: 100
 */
 

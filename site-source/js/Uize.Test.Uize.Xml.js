@@ -13,7 +13,6 @@
 	type: Test
 	importance: 2
 	codeCompleteness: 100
-	testCompleteness: 100
 	docCompleteness: 100
 */
 

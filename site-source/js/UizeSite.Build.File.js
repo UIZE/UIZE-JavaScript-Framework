@@ -13,7 +13,6 @@
 	type: Class
 	importance: 5
 	codeCompleteness: 0
-	testCompleteness: 0
 	docCompleteness: 2
 */
 
@@ -1260,10 +1259,20 @@ Uize.module ({
 					return this.isMemoryUrl (_pathname) && _moduleMetaDataExtensionRegExp.test (_pathname);
 				},
 				builderInputs:function (_urlParts) {
-					return {
-						jsModule:
-							this.tempUrlFromMemoryUrl (_urlParts.pathname).replace (_moduleMetaDataExtensionRegExp,'.js')
-					};
+					var
+						_inputs = {
+							jsModule:
+								this.tempUrlFromMemoryUrl (_urlParts.pathname.replace (_moduleMetaDataExtensionRegExp,'.js'))
+						},
+						_testModulePath =
+							'js/' +
+							Uize.Build.Util.getTestModuleName (_urlParts.file.replace (_moduleMetaDataExtensionRegExp,'')) +
+							'.js'
+					;
+					if (this.fileExists ({path:this.sourceUrl (_testModulePath)}))
+						_inputs.testModuleMetaData = this.memoryUrl (_testModulePath + '.metadata')
+					;
+					return _inputs;
 				},
 				builder:function (_inputs) {
 					var
@@ -1274,17 +1283,20 @@ Uize.module ({
 							?
 								_moduleText.slice (_metaDataCommentStartPos,_metaDataCommentEndPos)
 									.replace (_metaDataCommentRegExp,'')
-							: ''
-					;
-					return (
-						_metaDataText
+							: '',
+						_metaData = _metaDataText
 							?
 								Uize.Data.Simple.parse ({
 									simple:Uize.String.Lines.normalizeIndent (_metaDataText),
 									collapseChildren:true
 								})
-							: {}
-					);
+							: {},
+						_testModuleMetaData = _inputs.testModuleMetaData
+					;
+					if (_testModuleMetaData)
+						_metaData.testCompleteness = +this.readFile ({path:_testModuleMetaData}).codeCompleteness || 0
+					;
+					return _metaData;
 				}
 			});
 

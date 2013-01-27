@@ -13,7 +13,6 @@
 	type: Package
 	importance: 3
 	codeCompleteness: 100
-	testCompleteness: 100
 	docCompleteness: 100
 */
 

@@ -15,7 +15,6 @@ Uize.module ({name:'Uize.Templates'});
 	type: Namespace
 	importance: 1
 	codeCompleteness: 100
-	testCompleteness: 100
 	docCompleteness: 100
 */
 

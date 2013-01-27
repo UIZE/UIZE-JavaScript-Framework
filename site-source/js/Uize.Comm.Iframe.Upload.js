@@ -13,7 +13,6 @@
 	type: Class
 	importance: 4
 	codeCompleteness: 100
-	testCompleteness: 0
 	docCompleteness: 40
 */
 
