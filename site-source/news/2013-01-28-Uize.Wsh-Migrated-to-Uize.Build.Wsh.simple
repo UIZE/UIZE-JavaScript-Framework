@@ -1,0 +1,11 @@
+The =Uize.Wsh= module, that is used for the few build scripts that can only be run in Windows Scripting Host, has been migrated to under the =Uize.Build= namespace as =Uize.Build.Wsh=.
+
+Because the overwhelming majority of build scripts have already been updated to work in both NodeJS *and* Windows Script Host, and to use services and the appropriate environment specific service adapters, this change should have no impact on most developers. The =Uize.Wsh= module was hardly in use, and the change was made to clean up the top level namespace and help improve the overall organization of the codebase.
+
+Because this change was deemed to have little impact, it was not made in such a way as to be backwards compatible. So, it's technically a breaking change, but should affect practically nobody. In the unlikely event that you *did* happen to have your own build scripts that were using this module, then you will have to update those build scripts to require the module by its new name and to dereference its static methods off of the new name. The couple of modules in the UIZE codebase that were still using the =Uize.Wsh= module have been updated accordingly.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-01-28 - Uize.Wsh Migrated to Uize.Build.Wsh
+....................................................................................

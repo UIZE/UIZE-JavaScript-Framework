@@ -539,11 +539,6 @@ Writing Your Own Build Scripts
 
 		More creative applications of build scripts include things such as using a data set to drive the generation of hundreds (or thousands, even) of static files, such as HTML pages or XML files. The [[http://www.tomkidding.com][tomkidding.com]] Web site uses a build script, for example, to generate hundreds of HTML pages for paintings, drawings, sketches, graphic art, photography, photomontages, etc. from an artworks database. A benefit of building static HTML files is that there is no dependency on a server side database technology, and there are performance benefits that improve scalability under traffic load, since Web servers are well optimized to deliver static HTML pages to the client, and caching systems throughout the Internet are more likely to persist the static pages.
 
-	The Uize.Wsh Namespace
-		The various build scripts bundled with the UIZE JavaScript Framework all make use of the =Uize.Wsh= module.
-
-		The =Uize.Wsh= module provides facilities for accessing files, building files by recursing a folder hierarchy, automatically generating log files, and more. Additionally, a number of the build scripts use other modules under the =Uize.Wsh= namespace.
-
 	Structure of a Build Script
 		Build scripts are made up of two key sections: the `build script setup boilerplate`, and the `build script anonymous module declaration`.
 
@@ -561,8 +556,7 @@ Writing Your Own Build Scripts
 		/*** Build Script Anonymous Module Declaration ***/
 			Uize.module ({
 				required:[
-					'Uize.Wsh'
-					// add other modules that your build script requires, in a comma-separated list
+					// add modules that your build script requires, in a comma-separated list
 				],
 				builder:function () {
 					// build script code goes here
@@ -581,9 +575,9 @@ Writing Your Own Build Scripts
 			The build script anonymous module declaration is a declaration of the module of code that performs the build script's action.
 
 			Required Modules
-				Your build script's anonymous module can require any of the `build-compatible UIZE modules`, which includes many modules of the UIZE JavaScript Framework, and even your own modules (provided they are WSH-compatible and reside in the modules folder).
+				Your build script's anonymous module can require any of the `build-compatible UIZE modules`, which includes many modules of the UIZE JavaScript Framework, and even your own modules (provided they are build-compatible and reside in the modules folder).
 
-				Typically, your build script's code will at least require the =Uize.Wsh= module, but many build scripts may also require additional modules under the =Uize.Wsh= namespace (such as the =Uize.Build.Util= module), or basic utility modules such as the =Uize.Data=, =Uize.String=, =Uize.Template=, and other modules.
+				Your build script's code may require the =Uize.Build.Util= module, but many build scripts may also require additional modules under the =Uize.Build= namespace, or basic utility modules such as the =Uize.Data=, =Uize.String=, =Uize.Template=, and other modules.
 
 			Builder Function
 				The builder function in your `build script anonymous module declaration` is what contains the code that performs the build script's action.
@@ -591,32 +585,37 @@ Writing Your Own Build Scripts
 				The code inside this function will be executed when all the modules required by your anonymous module are loaded in by the module loader defined in the `build script setup` file.
 
 	Build-compatible UIZE Modules
-		In addition to using the build script specific modules under the =Uize.Wsh= namespace, build scripts can also use any of the other UIZE modules that are compatible with Windows Script Host.
+		In addition to using the build script specific modules under the =Uize.Build= namespace, build scripts can also use any of the other UIZE modules that are build-compatible.
 
 		Compatible Modules
-			UIZE modules that *ARE* compatible with Windows Script Host include...
+			UIZE modules that *ARE* build-compatible include...
 
+			- =Uize.Array= (and all submodules)
+			- =Uize.Build= (and all submodules)
+			- =Uize.Class= (and all submodules)
 			- =Uize.Color= (and all submodules)
 			- =Uize.Curve= (and all submodules)
 			- =Uize.Data= (and all submodules)
-			- =Uize.Date=
+			- =Uize.Date= (and all submodules)
 			- =Uize.Doc= (and all submodules)
 			- =Uize.Fade= (and all submodules, but *only for non-time based fades*)
 			- =Uize.Json=
-			- =Uize.Build.Scruncher=
+			- =Uize.Service= (and all submodules)
+			- =Uize.Services= (and all submodules, but only build-compatible service adapters)
 			- =Uize.String= (and all submodules)
-			- =Uize.Template=
+			- =Uize.Template= (and all submodules)
 			- =Uize.Templates= (and all submodules)
 			- =Uize.Test= (and all submodules)
 			- =Uize.Url=
-			- =Uize.Util.Coupler=
-			- =Uize.Wsh= (and all submodules)
+			- =Uize.Util= (and all submodules, except =Uize.Util.Cycle=)
 			- =Uize.Xml=
 
 		Incompatible Modules
 			UIZE modules that are *NOT* compatible with Windows Script Host are those modules that assume a browser context, and include such modules as...
 
+			- =Uize.Comm= (and all submodules)
 			- =Uize.Cookie=
+			- =Uize.Fx= (and all submodules)
 			- =Uize.Node= (and all submodules)
 			- =Uize.Tooltip=
 			- =Uize.Util.Cycle=

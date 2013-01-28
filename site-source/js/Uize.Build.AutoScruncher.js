@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'Uize.Build.AutoScruncher',
 	required:[
-		'Uize.Wsh',
+		'Uize.Build.Wsh',
 		'Uize.Build.Util',
 		'Uize.Build.Scruncher',
 		'Uize.Date',
@@ -53,7 +53,7 @@ Uize.module ({
 					_currentFolderPath,
 					_buildFolderPath = _params.buildFolderPath,
 					_sourceFolderName = _params.sourceFolderName,
-					_rootPath = Uize.Wsh.getScriptFolderPath (),
+					_rootPath = Uize.Build.Wsh.getScriptFolderPath (),
 					_fullModuleFolderPath = _rootPath + '\\' + _params.moduleFolderPath
 				;
 				function _targetFolderPathCreator (_folderPath) {
@@ -70,7 +70,7 @@ Uize.module ({
 				}
 
 				/*** scrunch eligible JavaScript files ***/
-					Uize.Wsh.buildFiles (
+					Uize.Build.Wsh.buildFiles (
 						Uize.copyInto (
 							{
 								logFilePath:_buildScriptName.replace (_endsWithDotJsRegExp,'-js-files.log'),
@@ -139,7 +139,7 @@ Uize.module ({
 							'|_______________|             http://www.uize.com/license.html\n' +
 							'*/\n\n'
 					;
-					Uize.Wsh.buildFiles (
+					Uize.Build.Wsh.buildFiles (
 						Uize.copyInto (
 							{
 								targetFolderPathCreator:_targetFolderPathCreator,
@@ -186,7 +186,7 @@ Uize.module ({
 											_libraryContentsChunks.push (
 												'\n' +
 												_stripModuleHeaderComment (
-													Uize.Wsh.readFile (
+													Uize.Build.Wsh.readFile (
 														_scrunchedModuleFolderPath + '\\' + _moduleName +
 														(_endsWithDotJsRegExp.test (_moduleName) ? '' : '.js')
 													)

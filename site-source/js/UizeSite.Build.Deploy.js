@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'UizeSite.Build.Deploy',
 	required:[
-		'Uize.Wsh',
+		'Uize.Build.Wsh',
 		'Uize.String',
 		'Uize.Services.FileSystem',
 		'Uize.Json'
@@ -54,7 +54,7 @@ Uize.module ({
 							path:_ftpCommandsFilename,
 							contents:Uize.isArray (_ftpCommands) ? _ftpCommands.join ('\r\n') : _ftpCommands
 						});
-						Uize.Wsh.execute ('ftp -s:' + _ftpCommandsFilename);
+						Uize.Build.Wsh.execute ('ftp -s:' + _ftpCommandsFilename);
 						_fileSystem.deleteFile ({path:_ftpCommandsFilename});
 					}
 
@@ -74,7 +74,7 @@ Uize.module ({
 							path:_sshCommandsFilename,
 							contents:Uize.isArray (_sshCommands) ? _sshCommands.join ('\r\n') : _sshCommands
 						});
-						Uize.Wsh.execute ('"' + _deployConfig.appPaths.SecureCRT + '" /SCRIPT "' + _sshCommandsFilename + '"');
+						Uize.Build.Wsh.execute ('"' + _deployConfig.appPaths.SecureCRT + '" /SCRIPT "' + _sshCommandsFilename + '"');
 						_fileSystem.deleteFile ({path:_sshCommandsFilename});
 					}
 
@@ -101,7 +101,7 @@ Uize.module ({
 						_fileSystem.deleteFile ({path:'temp/uize-site-built.zip'});
 
 					/*** create uize-site-built.zip, and create dated copy in archives ***/
-						Uize.Wsh.execute (
+						Uize.Build.Wsh.execute (
 							'"' + _deployConfig.appPaths ['7-Zip'] + '" a temp/uize-site-built.zip site-built -r'
 						);
 

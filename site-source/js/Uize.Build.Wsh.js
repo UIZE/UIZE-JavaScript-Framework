@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Wsh Package
+|    /    O /   |    MODULE : Uize.Build.Wsh Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2005-2013 UIZE
@@ -18,15 +18,15 @@
 
 /*?
 	Introduction
-		The =Uize.Wsh= package is designed to run in the context of Windows Script Host and provides methods for recursing folder structures and building files.
+		The =Uize.Build.Wsh= package is designed to run in the context of Windows Script Host and provides methods for recursing folder structures and building files.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		The =Uize.Wsh= module is used by various build scripts, including the auto scruncher and the module reference documentation builder. It will only be of interest to you if you're writing or modifying WSH build scripts.
+		The =Uize.Build.Wsh= module is used by various build scripts, such as the auto scruncher. It will only be of interest to you if you're writing or modifying build scripts that only run in the Windows Script Host environment.
 */
 
 Uize.module ({
-	name:'Uize.Wsh',
+	name:'Uize.Build.Wsh',
 	builder:function () {
 		'use strict';
 
@@ -56,13 +56,13 @@ Uize.module ({
 				return WScript.ScriptFullName.slice (0,-WScript.ScriptName.length - 1);
 				/*?
 					Static Methods
-						Uize.Wsh.getScriptFolderPath
+						Uize.Build.Wsh.getScriptFolderPath
 							Returns a string, representing the folder path for the folder from which the current script is being executed.
 
 							SYNTAX
-							......................................................
-							scriptFolderPathSTR = Uize.Wsh.getScriptFolderPath ();
-							......................................................
+							............................................................
+							scriptFolderPathSTR = Uize.Build.Wsh.getScriptFolderPath ();
+							............................................................
 				*/
 			};
 
@@ -82,28 +82,28 @@ Uize.module ({
 				return '';
 				/*?
 					Static Methods
-						Uize.Wsh.readFile
+						Uize.Build.Wsh.readFile
 							Reads the file at the specified file path and returns its entire contents as a string.
 
 							SYNTAX
 							....................................................
-							fileTextSTR = Uize.Wsh.readFile ({
+							fileTextSTR = Uize.Build.Wsh.readFile ({
 								path:filePathSTR,
 								fileSystemObject:fileSystemObjectOBJ  // optional
 							});
 							....................................................
 
 							VARIATION
-							..............................................
-							fileTextSTR = Uize.Wsh.readFile (filePathSTR);
-							..............................................
+							....................................................
+							fileTextSTR = Uize.Build.Wsh.readFile (filePathSTR);
+							....................................................
 
 							When a =filePathSTR= parameter is specified in place of an object parameter, then the file will be read at the path specified by this string parameter, and a file system object will be created as needed.
 
 							NOTES
 							- the file path, specified in the =path= parameter, can be relative to the folder in which the build script is executing
 							- the optional =fileSystemObject= parameter should specify an instance of =Scripting.FileSystemObject=
-							- see also the =Uize.Wsh.writeFile= static method
+							- see also the =Uize.Build.Wsh.writeFile= static method
 				*/
 			};
 
@@ -136,12 +136,12 @@ Uize.module ({
 
 				/*?
 					Static Methods
-						Uize.Wsh.writeFile
+						Uize.Build.Wsh.writeFile
 							Writes the specified text string to the specified file path.
 
 							SYNTAX
 							....................................................
-							Uize.Wsh.writeFile ({
+							Uize.Build.Wsh.writeFile ({
 								path:filePathSTR,
 								text:fileTextSTR,
 								fileSystemObject:fileSystemObjectOBJ  // optional
@@ -153,7 +153,7 @@ Uize.module ({
 							NOTES
 							- the file path, specified in the =path= parameter, can be relative to the folder in which the build script is executing
 							- the optional =fileSystemObject= parameter should specify an instance of =Scripting.FileSystemObject=
-							- see also the =Uize.Wsh.readFile= static method
+							- see also the =Uize.Build.Wsh.readFile= static method
 				*/
 			};
 
@@ -251,12 +251,12 @@ Uize.module ({
 				});
 				/*?
 					Static Methods
-						Uize.Wsh.buildFiles
+						Uize.Build.Wsh.buildFiles
 							Facilitates iterating through a folder hierarchy, processing specific files, and writing the results of processing to a specified log file.
 
 							SYNTAX
 							....................................................................
-							Uize.Wsh.buildFiles ({
+							Uize.Build.Wsh.buildFiles ({
 								targetFolderPathCreator:targetFolderPathCreatorFUNC,  // REQUIRED
 								targetFilenameCreator:targetFilenameCreatorFUNC,      // REQUIRED
 								fileBuilder:fileBuilderFUNC,                          // REQUIRED
@@ -299,14 +299,14 @@ Uize.module ({
 							alwaysBuild
 								An optional boolean, indicating whether or not eligible files should always be built, or whether the need to build should be determined automatically.
 
-								For any file within the folder hierarchy that would be processed by the =Uize.Wsh.buildFiles= method (given the configuration of this method by all its parameter values), a decision to build the file will normally be made automatically by this method, based upon the target file either not existing or having an older modified date than the source file. This is the behavior for the optional =alwaysBuild= parameter's default value of =false=. When the value =true= is specified, then the file will always be built, even if it is considered to have been previously built and up-to-date.
+								For any file within the folder hierarchy that would be processed by the =Uize.Build.Wsh.buildFiles= method (given the configuration of this method by all its parameter values), a decision to build the file will normally be made automatically by this method, based upon the target file either not existing or having an older modified date than the source file. This is the behavior for the optional =alwaysBuild= parameter's default value of =false=. When the value =true= is specified, then the file will always be built, even if it is considered to have been previously built and up-to-date.
 
 							doNotEnter
 								An optional array or regular expression, specifying a folder (or folders) that should not be entered when recursing through the folder hierarchy.
 
-								Any folders specified by this parameter will terminate recursion at that point in the folder tree, and any folders contained inside these dead end folders will not be processed. If a regular expression is specified for this parameter, then this regular expression will be tested against the folder name currently being processed by the =Uize.Wsh.buildFiles= method. If the regular expression matches, then the method will not enter the folder.
+								Any folders specified by this parameter will terminate recursion at that point in the folder tree, and any folders contained inside these dead end folders will not be processed. If a regular expression is specified for this parameter, then this regular expression will be tested against the folder name currently being processed by the =Uize.Build.Wsh.buildFiles= method. If the regular expression matches, then the method will not enter the folder.
 
-								This parameter is useful for build scripts that should ignore files generated by the build script (or other build scripts) and that are stored in a special build directory. Your site project may also contain a folder of build scripts, and you may not wish any build script using the =Uize.Wsh.buildFiles= method to process any of the files contained therein.
+								This parameter is useful for build scripts that should ignore files generated by the build script (or other build scripts) and that are stored in a special build directory. Your site project may also contain a folder of build scripts, and you may not wish any build script using the =Uize.Build.Wsh.buildFiles= method to process any of the files contained therein.
 
 							fileSystemObject
 								An optional object reference, specifying an instance of the =Scripting.FileSystemObject= control that should be used in file I/O operations. An instance can be created with the statement =new ActiveXObject ('Scripting.FileSystemObject')=. When no =fileSystemObject= parameter is specified, then a file system object will be created as needed to serve the needs of the build process.
@@ -314,7 +314,7 @@ Uize.module ({
 							logFilePath
 								An optional string, specifying the filename of a file within the same folder as the build script that should be used for writing out the log of the build process.
 
-								Basic information is automatically placed into the log file by the =Uize.Wsh.buildFiles= method, but additional information for each built file can be added by returning text for the optional =logDetails= property of your =fileBuilder= function's return object.
+								Basic information is automatically placed into the log file by the =Uize.Build.Wsh.buildFiles= method, but additional information for each built file can be added by returning text for the optional =logDetails= property of your =fileBuilder= function's return object.
 
 								NOTES
 								- If no =logFilePath= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the filename for the log file will be derived from the filename of the build script, with the ".js" file extension replaced with the extension ".log".
