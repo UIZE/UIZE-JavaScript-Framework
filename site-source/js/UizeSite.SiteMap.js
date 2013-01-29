@@ -262,7 +262,6 @@ Uize.module ({
 							{
 								title:'Performance Tests',
 								items:[
-									_perfTest ('Array Iteration Styles'),
 									_perfTest ('Caching Node References'),
 									_perfTest ('Checking if Undefined'),
 									_perfTest ('Extended String Class'),

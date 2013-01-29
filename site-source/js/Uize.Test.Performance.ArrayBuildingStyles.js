@@ -34,7 +34,7 @@ Uize.module ({
 			title:'Test the performance of different approaches to building arrays',
 			test:[
 				{
-					title:'Test the performance of building an array by adding elements with the push method',
+					title:'Build an array by adding elements with the push method',
 					test:function () {
 						for (var _iterationNo = -1, _elements = []; ++_iterationNo < _totalIterations;)
 							_elements.push (_iterationNo)
@@ -43,7 +43,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test the performance of building an array by assigning to an element beyond the last element of the array',
+					title:'Build an array by assigning to an element beyond the last element of the array',
 					test:function () {
 						for (var _iterationNo = -1, _elements = []; ++_iterationNo < _totalIterations;)
 							_elements [_iterationNo] = _iterationNo

@@ -188,9 +188,15 @@ Build Process Improvements
 	- write script to test for HTML pages with meta descriptions that are too long (more than 150 characters)
 
 gzipping Text Files
-	- add to .htaccess file
-		AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript
-	- http://httpd.apache.org/docs/2.0/mod/mod_deflate.html
+	Look into gzip'ing entire site (or enabling Apache's mod_gzip).
+
+	Add the following to the ".htaccess" file...
+	...........................................................................................
+	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript
+	...........................................................................................
+
+	BACKGROUND
+	- [[http://httpd.apache.org/docs/2.0/mod/mod_deflate.html]]
 
 Migrate Modules Into Deeper Namespaces
 	Migrate some modules at the root =Uize= namespace into deeper namespaces in order to tuck them away.
@@ -477,33 +483,26 @@ Explainer: JavaScript Libraries
 
 	- feedback from Tim
 		General:
-			The word “page” is used primarily to describe the environment in which Uize operates, but using the word “application” would suggest that Uize is able to work in more diverse environments than just a web browser. Of course, using “application” would confuse people who aren’t used to thinking about javascript as anything more than a web-scripting tool.
+			The word “page” is used primarily to describe the environment in which Uize operates, but using the word “application” would suggest that Uize is able to work in more diverse environments than just a web browser. Of course, using “application” would confuse people who aren't used to thinking about javascript as anything more than a web-scripting tool.
 
-			More emphasis on how libraries are an optimization, and that the application should be able to chug along if the libraries were stripped from it. I’d personally use some analogy about how the modules are like Captain Kirk and Spock, while the libraries are Red-shirt Ensign #3. If the Ensign is killed, the mission should still succeed.
-
-		Introduction:
-			- Strike the “like” from “Think of a JavaScript module as like a book”
-			- There shouldn’t be a comma in the sentence “JavaScript libraries offer a performance benefit for pages…”
+			More emphasis on how libraries are an optimization, and that the application should be able to chug along if the libraries were stripped from it. I'd personally use some analogy about how the modules are like Captain Kirk and Spock, while the libraries are Red-shirt Ensign #3. If the Ensign is killed, the mission should still succeed.
 
 		Where They Live:
-			- Doesn’t using the extension .library.js remove an entire range of possible names for js files? Could .jsl be appropriate?
-			- In the first sentence of the second paragraph, “the” and “inside” are reverse
+			- Doesn't using the extension .library.js remove an entire range of possible names for js files? Could .jsl be appropriate?
 
 		3.1
-			Point out that, in source, absolutely nothing happens if the Library Contents comment is all that is in the library file. People might wonder if there’s a special mechanism within Uize to parse the comment and load the js classes using the module loader.
+			Point out that, in source, absolutely nothing happens if the Library Contents comment is all that is in the library file. People might wonder if there's a special mechanism within Uize to parse the comment and load the js classes using the module loader.
 
 		3.1.2.3
 			The paragraph about not requiring modules that are listed in a library module is unclear. This would be my re-write:
 
-			“The source version of the library module, if consisting solely of the Library Contents comment, will not load any modules, thus forcing the other modules in the application to load their required lists (which may include modules listed in the library). This mechanism allows any errors in the modules’ required lists to be revealed while running in source. By requiring the modules in the library file that are listed in the Library Contents comment, this mechanism will be hidden.”
-
-			It might not make sense to everyone, but it makes sense to me. If you stick with the original, then note that “omissions” is spelled wrong.
+			“The source version of the library module, if consisting solely of the Library Contents comment, will not load any modules, thus forcing the other modules in the application to load their required lists (which may include modules listed in the library). This mechanism allows any errors in the modules' required lists to be revealed while running in source. By requiring the modules in the library file that are listed in the Library Contents comment, this mechanism will be hidden.”
 
 		Real World Examples
 			Add Zazzle?
 
 		7.1
-			A gentle reminder of how multiple module declarations of the same module won’t lead to multiple requests might be helpful
+			A gentle reminder of how multiple module declarations of the same module won't lead to multiple requests might be helpful
 
 Explainer: JavaScript Modules
 	Uize.module -> Parameters -> required
@@ -615,6 +614,8 @@ Basic Wireframe Documentation for *ALL* Modules
 	- etc.
 
 XHTML Validation Problems
+	When running the UIZE documentation pages through an XHTML validator to test for well-formedness, the following problems are revealed...
+
 	- "JavaScript Templates" explainer has issue with "<%" and ">" chars not being entities. This is a problem for SimpleDoc in general.
 	- for all pages when run locally, need default style language
 	- for pages delivered by server, no char encoding specified in response headers (refer to zazzle.com response headers)
@@ -633,9 +634,6 @@ Design Philosophy (some ramblings)
 Site & Documentation (in order of priority)
 	- go through all documentation pages and see what tooltips show up for the contents tree links. Make sure all sections have a concise introductory first paragraph.
 		- possibly write a build script to find documents with first paragraphs for sections that are long or contain multiple sentences (non-period, following by period, followed by space)
-
-	- add like button to all pages (in title bar)
-	- look into gzip'ing entire site (or enabling Apache's mod_gzip)
 
 	How UIZE is used on Zazzle
 		Describe the many ways in which UIZE is utilized on the zazzle.com Web site.
@@ -670,18 +668,46 @@ For All Examples
 
 	- for examples that should wait until all images are loaded (eg. sequenced show), for now use Uize.Widget's "Document Loaded" event as a proxy for detecting that state
 
-For All Performance Test Pages
-	- add description copy
-	- turn as many of the faceless tests as possible into true tests using the Uize.Test class
-	- improve test framework, so that...
-		- each individual test can specify its title, so that...
-			- generating the report is easier
-			- the user can know what test is currently being performed
-		- give better status updates, so that...
-			- the user knows when a wait is happening
-			- the user knows what test is currently being performed
-			- the user can see the results as they come in
-		- have a non-animating progress bar that indicates how far along the user is through the tests
+Performance Test Pages
+	Migrate Non-browser Performance Tests
+		For all environment agnostic (ie. non-browser) performance tests, migrate the tests from being dedicated HTML pages to being true tests using the =Uize.Test= class, under the =Uize.Test.Performance= namespace...
+
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/checking-if-undefined.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/constrain-approaches.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/declared-function-vs-function-object.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/extended-string-class.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/global-eval-approaches.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/is-string-one-of-possible-values.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/loop-optimization-approaches.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/regexp-compile.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/regexp-test-vs-search.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/repeat-string-approaches.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/reused-object-vs-garbage-collected.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/storing-length-for-iterator.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/storing-reference-to-subobject.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/string-concatenation-approaches.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/string-match-conditional-styles.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/string-starts-with-substring-styles.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/string-to-literal.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/string-trim-functions.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/testing-if-string-approaches.html
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/testing-object-for-type-marker.html
+
+		As true tests, they will show up in the [[../examples/uize-unit-tests.html][unit tests page]].
+
+	Improvements to HTML Page Performance Tests
+		For performance tests that can't be migrated to using the unit test system, make the following improvements...
+
+		- add description copy
+		- improve test framework, so that...
+			- each individual test can specify its title, so that...
+				- generating the report is easier
+				- the user can know what test is currently being performed
+			- give better status updates, so that...
+				- the user knows when a wait is happening
+				- the user knows what test is currently being performed
+				- the user can see the results as they come in
+			- have a non-animating progress bar that indicates how far along the user is through the tests
 
 New Examples to Create
 	Uize
@@ -821,7 +847,7 @@ SIMPLE-based Presentation Tool
 Things to Add to Documentation
 	- trademark & copyright notices
 	- more endorsements
-		- Tortoise SVN
+		- GIT/github
 		- Firefox
 			- Tamper Data
 			- DustMe Selectors
