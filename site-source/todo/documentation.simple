@@ -672,7 +672,6 @@ Performance Test Pages
 	Migrate Non-browser Performance Tests
 		For all environment agnostic (ie. non-browser) performance tests, migrate the tests from being dedicated HTML pages to being true tests using the =Uize.Test= class, under the =Uize.Test.Performance= namespace...
 
-		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/constrain-approaches.html
 		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/declared-function-vs-function-object.html
 		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/extended-string-class.html
 		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/global-eval-approaches.html
