@@ -263,7 +263,6 @@ Uize.module ({
 								title:'Performance Tests',
 								items:[
 									_perfTest ('Caching Node References'),
-									_perfTest ('Checking if Undefined'),
 									_perfTest ('Extended String Class'),
 									_perfTest ('getElementById vs getElementsByName','getElementById-vs-getElementsByName'),
 									_perfTest ('Repeat String Approaches'),
