@@ -120,25 +120,29 @@ Uize.module ({
 				;
 			};
 
-			_package.runScripts = function (_scripts) {
+			_package.exec = function (_commands) {
 				var _error;
-				if (!Uize.isArray (_scripts)) _scripts = [_scripts];
+				if (!Uize.isArray (_commands)) _commands = [_commands];
 				for (
 					var
-						_scriptNo = -1,
-						_scriptsLength = _scripts.length,
+						_commandNo = -1,
+						_commandsLength = _commands.length,
 						_wshShell = new ActiveXObject ('WScript.Shell'),
 						_errorCode
 					;
-					++_scriptNo < _scriptsLength && !_error;
+					++_commandNo < _commandsLength && !_error;
 				)
-					if (_errorCode = _wshShell.Run ('WScript ' + _scripts [_scriptNo],0,true))
+					if (_errorCode = _wshShell.Run (_commands [_commandNo],0,true))
 						_error = {
-							script:_scripts [_scriptNo],
+							script:_commands [_commandNo],
 							errorCode:_errorCode
 						}
 				;
 				return _error;
+			};
+
+			_package.runScripts = function (_scripts) {
+				return _package.exec (Uize.map (Uize.isArray (_scripts) ? _scripts : [_scripts],'\'WScript \' + value'));
 			};
 
 			_package.runUnitTests = function (_unitTestsClass,_silent,_logFilePath) {

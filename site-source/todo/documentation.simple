@@ -1,5 +1,22 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
+Restructure UIZE Web Site to be UIZE Application
+	Restructure the UIZE Web site project to be an application using the UIZE JavaScript Framework core.
+
+	POSSIBLE STRUCTURE
+	............................
+	UIZE-JavaScript-Framework
+		uize/
+			build scripts triggers
+			js/
+		uize-site/
+			build scripts triggers
+			built/
+			logs/
+			source/
+			temp/
+	............................
+
 Move Away From VARIATION N
 	For methods that support multiple variations, move away from the "VARIATION N" approach to listing those variations.
 

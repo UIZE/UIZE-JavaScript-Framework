@@ -65,7 +65,7 @@ function _eval (_toEval) {
 		}
 		var
 			_pathToRoot = _params.pathToRoot || '',
-			_useSource = _params.useSource !== false
+			_useSource = _params.useSource + '' != 'false'
 		;
 
 		/*** minimal file system functions ***/
