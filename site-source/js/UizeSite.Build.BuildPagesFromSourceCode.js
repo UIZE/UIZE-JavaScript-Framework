@@ -25,16 +25,17 @@
 
 Uize.module ({
 	name:'UizeSite.Build.BuildPagesFromSourceCode',
-	required:'UizeSite.Build.File',
+	required:[
+		'UizeSite.Build.File',
+		'Uize.Services.FileSystem'
+	],
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return {
+			perform:function (_params) {
 				var
+					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_urlsToBuild = [],
 					_sourcePath = _params.sourcePath
 				;
@@ -58,10 +59,12 @@ Uize.module ({
 					);
 
 				/*** now build all the pages ***/
-					UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params));
-			};
-
-		return _package;
+					_fileSystem.writeFile ({
+						path:_params.logFilePath,
+						contents:UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params))
+					});
+			}
+		};
 	}
 });
 

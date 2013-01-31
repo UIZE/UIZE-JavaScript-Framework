@@ -34,46 +34,43 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
+		return {
+			perform:function (_params) {
+				var
+					_fileSystem = Uize.Services.FileSystem.singleton (),
+					_dotSimpledataExtensionRegExp = /\.simpledata$/,
+					_sourcePath = _params.sourcePath
+				;
 
-		/*** General Variables ***/
-			var
-				_fileSystem = Uize.Services.FileSystem.singleton (),
-				_dotSimpledataExtensionRegExp = /\.simpledata$/
-			;
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
-				var _sourcePath = _params.sourcePath;
-
-				UizeSite.Build.File.perform (
-					Uize.copyInto (
-						{
-							url:_fileSystem.getFiles ({
-								path:_sourcePath,
-								recursive:true,
-								pathMatcher:function (_path) {
-									return (
-										_dotSimpledataExtensionRegExp.test (_path) &&
-											// path must end with .simpledata extension
-										/\.[^\.\\\/]+$/.test (_path.replace (_dotSimpledataExtensionRegExp,'')) &&
-											// path minus .simpledata extension must have a remaining real extension
-										_fileSystem.fileExists ({
-											path:_sourcePath + '/' + _path.replace (_dotSimpledataExtensionRegExp,'.jst')
-										})
-											// there must be a corresponding .jst template file
-									);
-								},
-								pathTransformer:function (_path) {return _path.replace (_dotSimpledataExtensionRegExp,'')}
-							})
-						},
-						_params
+				_fileSystem.writeFile ({
+					path:_params.logFilePath,
+					contents:UizeSite.Build.File.perform (
+						Uize.copyInto (
+							{
+								url:_fileSystem.getFiles ({
+									path:_sourcePath,
+									recursive:true,
+									pathMatcher:function (_path) {
+										return (
+											_dotSimpledataExtensionRegExp.test (_path) &&
+												// path must end with .simpledata extension
+											/\.[^\.\\\/]+$/.test (_path.replace (_dotSimpledataExtensionRegExp,'')) &&
+												// path minus .simpledata extension must have a remaining real extension
+											_fileSystem.fileExists ({
+												path:_sourcePath + '/' + _path.replace (_dotSimpledataExtensionRegExp,'.jst')
+											})
+												// there must be a corresponding .jst template file
+										);
+									},
+									pathTransformer:function (_path) {return _path.replace (_dotSimpledataExtensionRegExp,'')}
+								})
+							},
+							_params
+						)
 					)
-				);
-			};
-
-		return _package;
+				});
+			}
+		};
 	}
 });
 

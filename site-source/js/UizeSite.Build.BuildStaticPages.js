@@ -34,26 +34,27 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
+		return {
+			perform:function (_params) {
+				var _fileSystem = Uize.Services.FileSystem.singleton ();
 
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
-				UizeSite.Build.File.perform (
-					Uize.copyInto (
-						{
-							url:Uize.Services.FileSystem.singleton ().getFiles ({
-								path:_params.sourcePath,
-								recursive:true,
-								pathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess)$/
-							})
-						},
-						_params
+				_fileSystem.writeFile ({
+					path:_params.logFilePath,
+					contents:UizeSite.Build.File.perform (
+						Uize.copyInto (
+							{
+								url:_fileSystem.getFiles ({
+									path:_params.sourcePath,
+									recursive:true,
+									pathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess)$/
+								})
+							},
+							_params
+						)
 					)
-				);
-			};
-
-		return _package;
+				});
+			}
+		};
 	}
 });
 

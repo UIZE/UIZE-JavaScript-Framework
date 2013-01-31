@@ -31,28 +31,23 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return {
+			perform:function (_params) {
 				var
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_jsModuleExtensionRegExp = /\.js(\.jst)?$/
 				;
 				_fileSystem.writeFile ({
 					path:'logs/all-js-modules.log',
-					contents:
-						_fileSystem.getFiles ({
-							path:_params.sourcePath,
-							recursive:true,
-							pathMatcher:_jsModuleExtensionRegExp,
-							pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
-						}).join ('\n')
+					contents:_fileSystem.getFiles ({
+						path:_params.sourcePath,
+						recursive:true,
+						pathMatcher:_jsModuleExtensionRegExp,
+						pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
+					}).join ('\n')
 				});
-			};
-
-		return _package;
+			}
+		};
 	}
 });
 

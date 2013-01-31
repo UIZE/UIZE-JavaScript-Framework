@@ -16,12 +16,6 @@
 	docCompleteness: 2
 */
 
-/* TODO:
-	- to implement
-		- get log output working again
-			- add support in factored out code for producing log output, so that built scripts can generate log files much like before
-*/
-
 /*?
 	Introduction
 		The =Uize.Build.File= package provides a method for building any file requested for the UIZE Web site.
@@ -84,12 +78,6 @@ Uize.module ({
 			;
 
 		/*** Utility Functions ***/
-			function _log () {
-				typeof console != 'undefined' && typeof console.log == 'function' &&
-					console.log.apply (console,arguments)
-				;
-			}
-
 			function _isUnderPath (_url,_whichPath) {return Uize.String.startsWith (_url,_whichPath + '/')}
 
 			function _transformUrl (_url,_pathToRemove,_pathToPrepend) {
@@ -209,18 +197,25 @@ Uize.module ({
 				};
 
 			_class.perform = function (_params,_pathPrefix) {
-				var _this = this;
-				_this.params = _params;
-				_params.isDev = _params.isDev == 'true';
-				_params.freshBuild = _params.freshBuild == 'true';
 				var
+					_this = this,
+					_freshBuild = _params.freshBuild = _params.freshBuild + '' == 'true',
 					_filesConsideredCurrentLookup = _this._filesConsideredCurrentLookup = {},
 					_minAllowedModifiedDate = _params.minAllowedModifiedDate = Math.max (
 						Uize.toNumber (_params.minAllowedModifiedDate,-Infinity),
 						_params.freshBuild ? Uize.now () : -Infinity
-					)
+					),
+					_chainDepth = -1
 				;
+				_params.isDev = _params.isDev == 'true';
+				_this.params = _params;
+
 				function _ensureFileCurrent (_url) {
+					var
+						_startTime = Uize.now (),
+						_logIndent = Uize.String.repeat ('\t',++_chainDepth),
+						_log = ''
+					;
 					/*
 						- how handlers are used...
 							- handler is picked by going through all the handlers in sequence, until a handler matches the URL path
@@ -252,7 +247,12 @@ Uize.module ({
 									- immediate parsing when requested in object form
 							- to aid in performance, files can be cached in a memory cache system (such as memcache)
 					*/
-					if (_filesConsideredCurrentLookup [_url] != _trueFlag) {
+					if (_filesConsideredCurrentLookup [_url] == _trueFlag) {
+						_log =
+							_logIndent + 'file is considered current: ' + _url + '\n' +
+							_logIndent + '\tduration: ' + (Uize.now () - _startTime) + '\n'
+						;
+					} else {
 						var
 							_urlParts = Uize.Url.from (_url),
 							_matchingHandler
@@ -281,11 +281,14 @@ Uize.module ({
 									_path = _urlParts.pathname,
 									_mustBuild = !_this.fileExists ({path:_path}),
 									_lastBuiltDate = _mustBuild ? 0 : _this.getModifiedDate ({path:_path}),
-									_builderInput
+									_builderInput,
+									_subLogChunks = [],
+									_subLogChunk
 								;
 								_mustBuild || (_mustBuild = _lastBuiltDate < _minAllowedModifiedDate);
 								for (var _builderInputName in _builderInputs) {
-									_ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
+									_subLogChunk = _ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
+									_subLogChunk && _subLogChunks.push (_subLogChunk);
 									_mustBuild || (
 										_mustBuild = Math.max (
 											_this.getModifiedDate ({path:_builderInput}),
@@ -294,10 +297,7 @@ Uize.module ({
 									);
 								}
 								if (_mustBuild) {
-									var
-										_startTime = Uize.now (),
-										_buildError
-									;
+									var _buildError;
 									try {
 										_builder
 											? _this.writeFile ({path:_url,contents:_builder.call (_this,_builderInputs,_urlParts)})
@@ -307,40 +307,58 @@ Uize.module ({
 									} catch (_error) {
 										_buildError = _error;
 									}
-									_log (
-										(_buildError ? '*** BUILD FAILED' : 'BUILT') + ': ' + _url + '\n' +
-											'\tduration: ' + (Uize.now () - _startTime) + '\n' +
-											'\tbuilder: ' + _matchingHandler.description + '\n' +
-											'\tbuilder inputs:\n' +
-												Uize.map (
-													Uize.keys (_builderInputs),
-													function (_key) {return '\t\t' + _key + ': ' + _builderInputs [_key] + '\n'}
-												).join ('')
-									);
+									_log =
+										_logIndent + (_buildError ? '### BUILD FAILED ###' : '***** BUILT') + ': ' + _url + '\n' +
+										_logIndent + '\thandler: ' + _matchingHandler.description + '\n' +
+										_logIndent + '\tduration: ' + (Uize.now () - _startTime) + '\n' +
+										_logIndent + '\tbuilder inputs:\n' +
+										Uize.map (
+											Uize.keys (_builderInputs),
+											function (_key) {
+												return _logIndent + '\t\t' + _key + ': ' + _builderInputs [_key] + '\n';
+											}
+										).join ('') +
+										(_subLogChunks.length ? '\n' + _subLogChunks.join ('\n') : '') +
+										(_buildError ? _logIndent + '\nERROR: ' + _buildError : '')
+									;
 									if (_buildError) {
-										_log (_buildError);
 										typeof console != 'undefined' && typeof console.trace == 'function' &&
 											console.trace ()
 										;
 										throw _buildError;
 									}
 								} else {
+									_log =
+										_logIndent + 'file is current: ' + _url + '\n' +
+										_logIndent + '\thandler: ' + _matchingHandler.description + '\n' +
+										_logIndent + '\tduration: ' + (Uize.now () - _startTime) + '\n'
+									;
 									_filesConsideredCurrentLookup [_url] = _trueFlag;
 								}
 							}
 						}
 					}
+					_chainDepth--;
+					return _log;
 				}
 
-				var _url = _params.url;
 				if (_pathPrefix == _undefined)
 					_pathPrefix = _this.params.builtPath + '/'
 				;
-				if (Uize.isArray (_url)) {
-					Uize.forEach (_url,function (_url) {_ensureFileCurrent (_pathPrefix + _url)});
-				} else {
-					_ensureFileCurrent (_pathPrefix + _url);
-				}
+				var
+					_url = _params.url,
+					_logChunks = []
+				;
+				Uize.isArray (_url)
+					? Uize.forEach (_url,function (_url) {_logChunks.push (_ensureFileCurrent (_pathPrefix + _url))})
+					: _logChunks.push (_ensureFileCurrent (_pathPrefix + _url))
+				;
+				var _log = _logChunks.join ('\n');
+				typeof console != 'undefined' && typeof console.log == 'function' &&
+					console.log (_log)
+				;
+
+				return _log;
 				/*?
 					Static Methods
 						Uize.Build.File.perform

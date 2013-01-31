@@ -57,15 +57,10 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** General Variables ***/
-			var _fileSystem = Uize.Services.FileSystem.singleton ();
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return {
+			perform:function (_params) {
 				var
+					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_port = 1337,
 					_host = '127.0.0.1',
 					_http = require ('http'),
@@ -139,9 +134,8 @@ Uize.module ({
 								scrunchedHeadComments
 									.
 				*/
-			};
-
-		return _package;
+			}
+		};
 	}
 });
 

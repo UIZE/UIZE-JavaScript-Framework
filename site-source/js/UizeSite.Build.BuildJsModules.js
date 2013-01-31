@@ -32,12 +32,10 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return {
+			perform:function (_params) {
 				var
+					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_urlsToBuild = [],
 					_modulesFolder = 'js'
 				;
@@ -53,7 +51,7 @@ Uize.module ({
 					var _jsModuleExtensionRegExp = /\.js(\.jst)?$/;
 					_urlsToBuild.push.apply (
 						_urlsToBuild,
-						Uize.Services.FileSystem.singleton ().getFiles ({
+						_fileSystem.getFiles ({
 							path:_params.sourcePath,
 							recursive:true,
 							pathMatcher:_jsModuleExtensionRegExp,
@@ -62,10 +60,12 @@ Uize.module ({
 					);
 
 				/*** now build all the pages ***/
-					UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params));
-			};
-
-		return _package;
+					_fileSystem.writeFile ({
+						path:_params.logFilePath,
+						contents:UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params))
+					});
+			}
+		};
 	}
 });
 

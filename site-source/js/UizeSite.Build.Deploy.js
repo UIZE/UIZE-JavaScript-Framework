@@ -34,15 +34,10 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** General Variables ***/
-			var _fileSystem = Uize.Services.FileSystem.singleton ();
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return {
+			perform:function (_params) {
 				var
+					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_deployConfig = Uize.Json.from (_fileSystem.readFile ({path:_params.deployConfigPath})),
 					_uizeSite = _deployConfig.site
 				;
@@ -129,9 +124,8 @@ Uize.module ({
 						);
 
 				alert ('DEPLOY COMPLETE!!!');
-			};
-
-		return _package;
+			}
+		};
 	}
 });
 

@@ -27,17 +27,16 @@ Uize.module ({
 	name:'UizeSite.Build.BuildWidgetPages',
 	required:[
 		'UizeSite.Build.File',
-		'Uize.Build.Util'
+		'Uize.Build.Util',
+		'Uize.Services.FileSystem'
 	],
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return {
+			perform:function (_params) {
 				var
+					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_urlsToBuild = [],
 					_widgetsFolder = 'widgets'
 				;
@@ -59,10 +58,12 @@ Uize.module ({
 					);
 
 				/*** now build all the pages ***/
-					UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params));
-			};
-
-		return _package;
+					_fileSystem.writeFile ({
+						path:_params.logFilePath,
+						contents:UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params))
+					});
+			}
+		};
 	}
 });
 
