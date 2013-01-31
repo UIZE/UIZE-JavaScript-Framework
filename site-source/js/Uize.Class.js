@@ -2326,7 +2326,7 @@ Uize.module ({
 								name : slider
 								nodeMap : undefined
 								orientation : vertical
-								parent : [class UizeSite.Page.Example]
+								parent : [class MyCompanySite.Page]
 								restTime : 250
 								scaleFunc : [object Function]
 								value : 0
