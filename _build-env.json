@@ -24,9 +24,6 @@
 		freshBuild:'false',
 		deployConfigPath:'../deploy.config.json',
 
-	/*** UIZE Web site specific modules to stub ***/
-		modulesToStub:/^UizeSite\.(ModulesTree|Examples|ExamplesInfoForSiteMap)$/,
-
 	/*** for the older build process ***/
 		alwaysBuild:false,
 		buildFolderPath:'site-built',

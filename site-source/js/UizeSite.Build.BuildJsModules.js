@@ -36,16 +36,9 @@ Uize.module ({
 			perform:function (_params) {
 				var
 					_fileSystem = Uize.Services.FileSystem.singleton (),
-					_urlsToBuild = [],
-					_modulesFolder = 'js'
+					_modulesFolder = 'js',
+					_urlsToBuild = []
 				;
-
-				/*** add URLs for generated JavaScript modules ***/
-					_urlsToBuild.push (
-						_modulesFolder + '/UizeSite.ModulesTree.js',
-						_modulesFolder + '/UizeSite.Examples.js',
-						_modulesFolder + '/UizeSite.ExamplesInfoForSiteMap.js'
-					);
 
 				/*** add URLs for all JavaScript files (modules and otherwise) ***/
 					var _jsModuleExtensionRegExp = /\.js(\.jst)?$/;
