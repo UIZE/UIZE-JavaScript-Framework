@@ -22,14 +22,14 @@ Introduction
 
 		The build script files are JavaScript files (with the =.js= extension) with names that all start with a "_" (underscore) character, as in...
 
-		- _UizeSite.Build.BuildSimpleDataPages.js (`UIZE Site Build Simple Data Pages`)
-		- _UizeSite.Build.BuildSimpleDocPages.js (`UIZE Site Build Simple Doc Pages`)
-		- _Uize.Build.AutoScruncher.js (`Auto Scruncher`)
-		- _Uize.Build.AuditStrings.js (`Audit Strings`)
-		- _Uize.Build.RunUnitTests-scrunched.js (`Run Unit Tests (Scrunched)`)
-		- _Uize.Build.RunUnitTests-source.js (`Run Unit Tests (Source)`)
-		- _UizeSite.Build.BuildJsModules.js (`Build JS Modules`)
-		- _UizeSite.Build.BuildPagesFromSourceCode.js (`UIZE Site Build Pages from Source Code`)
+		- WSH-UizeSite.Build.Files.JsModules.bat (`Build JS Modules`)
+		- WSH-UizeSite.Build.Files.SimpleDataPages.bat (`UIZE Site Build Simple Data Pages`)
+		- WSH-UizeSite.Build.Files.SimpleDocPages.bat (`UIZE Site Build Simple Doc Pages`)
+		- WSH-UizeSite.Build.Files.SourceCodePages.bat (`UIZE Site Build Pages from Source Code`)
+		- WSH-Uize.Build.AutoScruncher.bat (`Auto Scruncher`)
+		- WSH-Uize.Build.AuditStrings.bat (`Audit Strings`)
+		- WSH-Uize.Build.RunUnitTests-scrunched.bat (`Run Unit Tests (Scrunched)`)
+		- WSH-Uize.Build.RunUnitTests-source.bat (`Run Unit Tests (Source)`)
 
 		Not all the build scripts will necessarily be useful for your own Web site project. In particular, the `UIZE site build simple doc pages` and `UIZE site build pages from source code` build scripts are intended primarily for the uize.com Web site, although you are welcome to hack them to meet your needs or use them as a reference when `writing your own build scripts`.
 
@@ -77,13 +77,11 @@ Introduction
 			Some build scripts may generate multiple log files. For example, the `auto scruncher` build script generates one log file that lists the JavaScript files that were scrunched, and another log file listing the JavaScript library (=.library.js=) files that were built. There are also *some* build scripts that don't output any log files at all.
 
 		Log File Naming
-			For many build scripts, the name of the script's associated log file is simply the name of the build script with the =.js= file extension replaced by a =.log= extension.
-
-			In the case of build scripts that generate multiple log files, the log files will typically be named with the build script name (sans =.js= extension) as a prefix, and then some identifying suffix to distinguish the different log files in the group from one another. For example, the =_Uize.Build.AutoScruncher.js= (`auto scruncher`) build script generates the two log files named =_Uize.Build.AutoScruncher-js-files.log= and =_Uize.Build.AutoScruncher-libraries.log=.
+			For many build scripts, the name of the script's associated log file is simply the name of the build script module with the =.js= file extension replaced by a =.log= extension.
 
 			OVERWRITE BEHAVIOR
 
-			Every time a build script is run, the previous copies of its associated log files are overwritten. If you care about them (why would you?), you should make copies before running the script.
+			Every time a build script is run, the previous copies of its associated log files are overwritten. If you care about them (unlikely), you should make copies before running the script.
 
 		Summary Info
 			Some build scripts simply list the files that were built, while others may also list summary information for the build operation for each file along with the file listing.
@@ -165,16 +163,16 @@ The Build Scripts
 		Additionally, this script builds a contents tree for the modules - where the structure of this tree reflects the namespace hierarchy of the modules - and inserts this contents tree as a nested unordered list into the =directory.html= file that resides in the root folder alongside the build script.
 
 	Build JS Modules
-		The Build JS Modules build script (implemented in the file =_UizeSite.Build.BuildJsModules.js=) generates built JavaScript template modules from all the source JavaScript modules and JavaScript template (=.js.jst=) files that it finds in the modules folder.
+		The Build JS Modules build script (implemented in the file =WSH-UizeSite.Build.Files.JsModules.bat=) generates built JavaScript template modules from all the source JavaScript modules and JavaScript template (=.js.jst=) files that it finds in the modules folder.
 
 		JavaScript modules found in the modules folder are scrunched, while JavaScript template (=.js.jst=) files are compiled to template modules and then scrunched. If you look through the modules folder in the download of the UIZE JavaScript Framework, you will notice a number of =.js.jst= files under the =UizeSite.Templates= namespace, many of which are HTML generators for widgets.
 
 		NOTES
-		- the core of the intelligence of the Build JS Modules build script can be found in the =UizeSite.Build.BuildJsModules= module
+		- the core of the intelligence of the Build JS Modules build script can be found in the =UizeSite.Build.Files.JsModules= module
 		- for more information on JavaScript template modules, consult the explainers [[javascript-templates.html][JavaScript Templates]] and [[javascript-modules.html][JavaScript Modules]]
 
 	UIZE Site Build Simple Data Pages
-		The UIZE Site Build Simple Data Pages build script (implemented in the file =_UizeSite.Build.BuildSimpleDataPages.js=) recurses through all folders of the UIZE Web site project, building pages from all the Simple Data (=.simpledata=) files that it finds.
+		The UIZE Site Build Simple Data Pages build script (implemented in the file =WSH-UizeSite.Build.Files.SimpleDataPages.bat=) recurses through all folders of the UIZE Web site project, building pages from all the Simple Data (=.simpledata=) files that it finds.
 
 		Simple Data is a data file format that is even more human readable than XML (how could this even be possible!?!?) and that uses indentation to indicate structure (so, kind of like Python, but for data). This build script finds all these files and builds pages from them, by processing the data in each file using an accompanying JavaScript Template (=.jst=) file.
 
@@ -195,12 +193,12 @@ The Build Scripts
 			Based on this file naming principle, the desired file extension for the built file is put before the =.simpledata= and =.jst= extensions. This means that the UIZE Site Build Simple Data Pages build script can build any type of text file from Simple Data files it encounters, and, in fact, the UIZE Web site project uses it to build a few of its HTML pages.
 
 		NOTES
-		- the core of the intelligence of the UIZE Site Build Simple Data Pages build script can be found in the =UizeSite.Build.BuildSimpleDataPages= module
+		- the core of the intelligence of the UIZE Site Build Simple Data Pages build script can be found in the =UizeSite.Build.Files.SimpleDataPages= module
 		- the behavior of this build script is not affected by the values of the =buildFolderPath= and =sourceFolderName= build environment variables
-		- the summary info for this build script is output to the log file =_build-pages-from-simple-data.log=
+		- the summary info for this build script is output to the log file =UizeSite.Build.Files.SimpleDataPages.log=
 
 	UIZE Site Build Simple Doc Pages
-		The UIZE Site Build Simple Doc Pages build script (implemented in the file =_UizeSite.Build.BuildSimpleDocPages.js=) recurses through all folders of the UIZE Web site project, building pages from all the Simple Doc (=.simple=) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.
+		The UIZE Site Build Simple Doc Pages build script (implemented in the file =WSH-UizeSite.Build.Files.SimpleDocPages.bat=) recurses through all folders of the UIZE Web site project, building pages from all the Simple Doc (=.simple=) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.
 
 		Phases
 			This build script is made up of two phases...
@@ -215,27 +213,24 @@ The Build Scripts
 				javascript-build-scripts.simple --> PRODUCES --> javascript-build-scripts.html
 				..............................................................................
 
-				The summary info for this phase of the build script is output to the log file =_UizeSite.Build.BuildSimpleDocPages.log=.
-
 			PHASE 2: Build Pages From Simple Doc in JavaScript Modules
 				An HTML reference documentation page is generated for each JavaScript module contained inside the modules folder.
 
 				The build script iterates through all the JavaScript modules contained inside the modules folder (as specified by the =moduleFolderPath= build environment variable). For each file, it extracts all the Simple Doc comments, stitches all those comments together into a single Simple Doc document, and then builds an HTML page from that document, using the =~SIMPLE-DOC-TEMPLATE.html.jst= template file that is contained inside the =reference/= folder of the UIZE Web site project. The built HTML reference documentation page is then output to the =reference/= folder, where the filename of the built file is the filename of the JavaScript module with the =.js= file extension replaced with the =.html= extension.
 
 				FILE NAMING EXAMPLE
-				.....................................................................
-				js/~source/Uize.Widget.js --> PRODUCES --> reference/Uize.Widget.html
-				.....................................................................
-
-				The summary info for this phase of the build script is output to the log file =_UizeSite.Build.BuildSimpleDocPages-in-js-modules.log=.
+				.............................................................
+				js/Uize.Widget.js --> PRODUCES --> reference/Uize.Widget.html
+				.............................................................
 
 		For more information on Simple Doc - such as its rules on document structure, inline formatting, etc. - refer to the explainer [[javascript-documentation-system.html][JavaScript Documentation System]].
 
 		NOTES
 		- the behavior of this build script is not affected by the values of the =buildFolderPath= and =sourceFolderName= build environment variables
+		- the summary info for this build script is output to the log file =UizeSite.Build.Files.SimpleDocPages.log=
 
 	UIZE Site Build Pages from Source Code
-		The UIZE Site Build Pages from Source Code build script (implemented in the file =_UizeSite.Build.BuildPagesFromSourceCode.js=) is intended primarily for the UIZE Web site, and builds HTML pages for viewing the source code of JavaScript modules and examples pages.
+		The UIZE Site Build Pages from Source Code build script (implemented in the file =WSH-UizeSite.Build.Files.SourceCodePages.bat=) is intended primarily for the UIZE Web site, and builds HTML pages for viewing the source code of JavaScript modules and examples pages.
 
 		JavaScript Module Source Code Pages
 			A source code page is generated for every JavaScript module in the modules folder.
@@ -248,10 +243,10 @@ The Build Scripts
 			The build script iterates through all the example pages contained inside the =examples= folder, ignoring experimental examples prefixed with a "~" (tilde) character, builds a source code page for each example using the JavaScript template =~SOURCE-CODE-TEMPLATE.html= contained inside the =examples/source-code= folder and places the built source code page inside that folder, where the source code page's filename is the same as the example page's filename.
 
 		NOTES
-		- the summary info for this build script is output to the log file =_UizeSite.Build.BuildPagesFromSourceCode.log=
+		- the summary info for this build script is output to the log file =UizeSite.Build.Files.SourceCodePages.log=
 
 	Auto Scruncher
-		The Auto Scruncher build script (implemented in the file =_Uize.Build.AutoScruncher.js=) recurses through all folders of a Web site project, automatically scrunching down all JavaScript files into smaller, obfuscated files using the UIZE JavaScript Framework's [[all-about-scrunching.html][Scruncher]].
+		The Auto Scruncher build script (implemented in the file =WSH-Uize.Build.AutoScruncher.bat=) recurses through all folders of a Web site project, automatically scrunching down all JavaScript files into smaller, obfuscated files using the UIZE JavaScript Framework's [[all-about-scrunching.html][Scruncher]].
 
 		The Auto Scruncher build script provides a convenient way to obfuscate and reduce the size of *all* the JavaScript files in your Web site project, not just those written explicitly to use the UIZE JavaScript Framework. The scrunched versions of JavaScript files are output to a location that is determined by the two related =buildFolderPath= and =sourceFolderName= build environment variables.
 
@@ -261,12 +256,12 @@ The Build Scripts
 			PHASE 1: Auto Scruncher JavaScript Files
 				The build script recurses through all the folders, finding JavaScript files and building scrunched versions of them which are then saved to a target location.
 
-				The summary info for this phase of the build script is output to the log file =_Uize.Build.AutoScruncher-js-files.log=.
+				The summary info for this phase of the build script is output to the log file =Uize.Build.AutoScruncher-js-files.log=.
 
 			PHASE 2: Auto Scruncher Library (.library.js) Files
 				The build script recurses through all the folders, finding JavaScript library (=.library.js=) files and building scrunched versions that combine the scrunched versions of all the JavaScript modules referenced in the library file.
 
-				The summary info for this phase of the build script is output to the log file =_Uize.Build.AutoScruncher-libraries.log=.
+				The summary info for this phase of the build script is output to the log file =Uize.Build.AutoScruncher-libraries.log=.
 
 		Source Not Overwritten
 			JavaScript files that are scrunched are *NOT* overwritten by their scrunched versions.
@@ -280,7 +275,7 @@ The Build Scripts
 		- the core of the intelligence of the Auto Scruncher build script can be found in the =Uize.Build.AutoScruncher= module
 
 	Audit Strings
-		The Audit Strings build script (implemented in the file =_Uize.Build.AuditStrings.js=) recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files.
+		The Audit Strings build script (implemented in the file =WSH-Uize.Build.AuditStrings.bat=) recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files.
 
 		The Audit Strings build script groups the literal strings it finds inside a JavaScript file into four buckets...
 
@@ -340,13 +335,13 @@ The Build Scripts
 
 		NOTES
 		- the core of the intelligence of the Audit Strings build script can be found in the =Uize.Build.AuditStrings= module
-		- the summary info for this build script is output to the log file =_Uize.Build.AuditStrings.log=
+		- the summary info for this build script is output to the log file =Uize.Build.AuditStrings.log=
 
 	Run Unit Tests (Scrunched)
-		The Run Unit Tests (Scrunched) build script (implemented in the file =_Uize.Build.RunUnitTests-scrunched.js=) runs the unit test suite for the UIZE JavaScript Framework, using the scrunched versions of the JavaScript modules.
+		The Run Unit Tests (Scrunched) build script (implemented in the file =WSH-Uize.Build.RunUnitTests-scrunched.bat=) runs the unit test suite for the UIZE JavaScript Framework, using the scrunched versions of the JavaScript modules.
 
 	Run Unit Tests (Source)
-		The Run Unit Tests (Source) build script (implemented in the file =_Uize.Build.RunUnitTests-source.js=) runs the unit test suite for the UIZE JavaScript Framework, using the source versions of the JavaScript modules.
+		The Run Unit Tests (Source) build script (implemented in the file =WSH-Uize.Build.RunUnitTests-source.bat=) runs the unit test suite for the UIZE JavaScript Framework, using the source versions of the JavaScript modules.
 
 Build Script Setup
 	The Build Script Setup (implemented in the =_build.js= file) implements a module loader that is used by `the build scripts` that come bundled with the UIZE JavaScript Framework, and that can also be used when `writing your own build scripts`.

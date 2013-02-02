@@ -78,19 +78,6 @@ Separate Source Code From Built Code
 		Remove All Built Code From Source Tree
 			Once the build scripts have been updated to output built files to the built folder, all built code should be cleared from the source folder.
 
-		Build Scripts to be Fixed
-			- _Uize.Build.AutoScruncher.js
-			- _Uize.Build.BuildSimpleDataPages.js => BECOMES => _UizeSite.Build.BuildSimpleDataPages.js
-			- _Uize.Build.BuildSimpleDocPages.js => BECOMES => _UizeSite.Build.BuildSimpleDocPages.js
-			- _Uize.Build.RunUnitTests-source.js
-				- issue with some modules having dependencies on JavaScript JST modules
-			- _Uize.Build.RunUnitTests-scrunched.js
-				- issue of loading scrunched modules
-			- _UizeSite.Build.BuildIndexPages.js
-			- _UizeSite.Build.BuildPagesFromSourceCode.js
-			- _UizeSite.Build.BuildSimpleDocPages.js
-			- _UizeSite.Build.BuildWidgetPages.js
-
 General Drag and Drop Framework
 	Virtual dom events to mimic new HTML5 dnd events.
 

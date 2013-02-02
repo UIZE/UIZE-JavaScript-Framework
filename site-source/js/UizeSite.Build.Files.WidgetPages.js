@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.BuildWidgetPages Namespace
+|    /    O /   |    MODULE : UizeSite.Build.Files.WidgetPages Namespace
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2009-2013 UIZE
@@ -18,37 +18,31 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.BuildWidgetPages= package provides a method for building the supporting pages for the various widgets that are offered as part of the UIZE Web site's *Widgets to Go* feature.
+		The =UizeSite.Build.Files.WidgetPages= package provides a method for building the supporting pages for the various widgets that are offered as part of the UIZE Web site's *Widgets to Go* feature.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'UizeSite.Build.BuildWidgetPages',
-	required:[
-		'UizeSite.Build.File',
-		'Uize.Build.Util',
-		'Uize.Services.FileSystem'
-	],
-	builder:function () {
+	name:'UizeSite.Build.Files.WidgetPages',
+	required:'Uize.Build.Util',
+	builder:function (_superclass) {
 		'use strict';
 
-		return {
-			perform:function (_params) {
-				var
-					_fileSystem = Uize.Services.FileSystem.singleton (),
-					_urlsToBuild = [],
-					_widgetsFolder = 'widgets'
-				;
-
-				/*** generate URLs to build for all widgets ***/
+		return _superclass.subclass ({
+			staticMethods:{
+				determineFilesToBuild:function (_params) {
+					var
+						_this = this,
+						_widgetsFolder = 'widgets'
+					;
 					Uize.forEach (
 						Uize.Build.Util.readSimpleDataFile (
 							_params.sourcePath + '/' + _widgetsFolder + '/widgets.simpledata'
 						).widgets,
 						function (_widget) {
 							var _widgetFilesPathPrefix = _widgetsFolder + '/' + _widget.title.toLowerCase ();
-							_urlsToBuild.push (
+							_this.addFiles (
 								_widgetFilesPathPrefix + '.html',        // homepage
 								_widgetFilesPathPrefix + '/gadget.xml',  // Google Gadget XML
 								_widgetFilesPathPrefix + '/web.html',    // Web version
@@ -56,14 +50,9 @@ Uize.module ({
 							);
 						}
 					);
-
-				/*** now build all the pages ***/
-					_fileSystem.writeFile ({
-						path:_params.logFilePath,
-						contents:UizeSite.Build.File.perform (Uize.copyInto ({url:_urlsToBuild},_params))
-					});
+				}
 			}
-		};
+		});
 	}
 });
 

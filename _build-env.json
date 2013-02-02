@@ -29,13 +29,13 @@
 		buildFolderPath:'site-built',
 		rootFolderPath:'site-source',
 		buildSequence:[
-			'UizeSite.Build.BuildStaticPages',
-			'UizeSite.Build.BuildJsModules',
-			'UizeSite.Build.BuildWidgetPages',
-			'UizeSite.Build.BuildSimpleDocPages',
-			'UizeSite.Build.BuildSimpleDataPages',
-			'UizeSite.Build.BuildPagesFromSourceCode',
-			'UizeSite.Build.BuildIndexPages'
+			'UizeSite.Build.Files.StaticFiles',
+			'UizeSite.Build.Files.JsModules',
+			'UizeSite.Build.Files.WidgetPages',
+			'UizeSite.Build.Files.SimpleDocPages',
+			'UizeSite.Build.Files.SimpleDataPages',
+			'UizeSite.Build.Files.SourceCodePages',
+			'UizeSite.Build.Files.IndexPages'
 		],
 		testSequence:[
 			'_build.js Uize.Build.RunUnitTests silent=true',

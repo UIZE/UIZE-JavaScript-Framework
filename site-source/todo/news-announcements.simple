@@ -2,7 +2,7 @@ This document lists official news announcements that need to be created for deve
 
 Major Build Process Improvements
 
-	- _Uize.Build.CompileJstModules.js replaced with _UizeSite.Build.BuildJsModules
+	- _Uize.Build.CompileJstModules.js replaced with WSH-UizeSite.Build.Files.JsModules
 	- built code no longer in the source tree
 	- build process can now be run with either WSH or NodeJS
 
