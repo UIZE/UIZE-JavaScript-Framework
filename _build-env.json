@@ -1,5 +1,6 @@
 {
 	/*** for the newer build process ***/
+		servicesSetup:'UizeSite.Build.ServicesSetup',
 		builtPath:'site-built',
 		tempPath:'site-temp',
 		memoryPath:'site-memory',

@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.WebServer Package
+|    /    O /   |    MODULE : Uize.Build.WebServer Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.WebServer= package provides a method for running a Web server for the UIZE Web site on the localhost.
+		The =Uize.Build.WebServer= package provides a method for running a Web server for a project on the localhost.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		EXAMPLE USAGE
 		......................................................................................................
-		node _build.js UizeSite.Build.WebServer sourcePath=site-source tempPath=site-temp builtPath=site-built freshBuild=true isDev=true
+		node _build.js Uize.Build.WebServer sourcePath=site-source tempPath=site-temp builtPath=site-built freshBuild=true isDev=true
 		......................................................................................................
 
 		Parameters
@@ -48,10 +48,10 @@
 */
 
 Uize.module ({
-	name:'UizeSite.Build.WebServer',
+	name:'Uize.Build.WebServer',
 	required:[
-		'UizeSite.Build.File',
 		'Uize.Url',
+		'Uize.Services.FileBuilder',
 		'Uize.Services.FileSystem'
 	],
 	builder:function () {
@@ -60,6 +60,7 @@ Uize.module ({
 		return {
 			perform:function (_params) {
 				var
+					_fileBuilder = Uize.Services.FileBuilder.singleton (),
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_port = 1337,
 					_host = '127.0.0.1',
@@ -93,7 +94,7 @@ Uize.module ({
 							_startTime = Uize.now ()
 						;
 						try {
-							UizeSite.Build.File.perform (Uize.copyInto ({url:_requestUrl.slice (1)},_params));
+							_fileBuilder.perform (Uize.copyInto ({url:_requestUrl.slice (1)},_params));
 							_fileContents = _fileSystem.readFile ({path:_builtUrl,encoding:'buffer'});
 							_response.writeHead (200,{'Content-Type':_mimeTypes [Uize.Url.from (_requestUrl).fileType]});
 						} catch (_error) {
@@ -109,10 +110,10 @@ Uize.module ({
 				console.log ('Server running at http://' + _host + ':' + _port + '/');
 				/*?
 					Static Methods
-						UizeSite.Build.WebServer.perform
+						Uize.Build.WebServer.perform
 							SYNTAX
 							.............................................
-							UizeSite.Build.WebServer.perform (paramsOBJ);
+							Uize.Build.WebServer.perform (paramsOBJ);
 							.............................................
 
 							Parameters

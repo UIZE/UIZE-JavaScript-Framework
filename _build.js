@@ -1,5 +1,5 @@
 /*
-	This script is designed to be run using either NodeJS or WSH (Windows Script Host), and is used to run build script modules. This script takes care of some common bootstrapping for these build script modules, such as setting up the service adapters (using Uize.Build.ServicesSetup), parsing out the named parameters for the build script module, and doing the bootstrapping so that modules required by build script modules are loaded correctly. This leaves the build script modules to only have to deal with implementing their build processes.
+	This script is designed to be run using either NodeJS or WSH (Windows Script Host), and is used to run build script modules. This script takes care of some common bootstrapping for these build script modules, such as setting up the service adapters, parsing out the named parameters for the build script module, and doing the bootstrapping so that modules required by build script modules are loaded correctly. This leaves the build script modules to only have to deal with implementing their build processes.
 
 	USAGES:
 
@@ -179,9 +179,9 @@ function _eval (_toEval) {
 
 		/*** services setup & run build module (if specified) ***/
 			Uize.require (
-				'Uize.Build.ServicesSetup',
-				function () {
-					Uize.Build.ServicesSetup.setup ();
+				env.servicesSetup || 'Uize.Build.ServicesSetup',
+				function (_servicesSetup) {
+					_servicesSetup.setup ();
 					if (_buildModuleName)
 						Uize.require (
 							_buildModuleName,

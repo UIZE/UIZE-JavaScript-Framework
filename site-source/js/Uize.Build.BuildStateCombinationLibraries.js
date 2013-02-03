@@ -59,7 +59,7 @@
 Uize.module ({
 	name:'Uize.Build.BuildStateCombinationLibraries',
 	required:[
-		'UizeSite.Build.File',
+		'Uize.Services.FileBuilder',
 		'Uize.Services.FileSystem',
 		'Uize.Build.ModuleInfo',
 		'Uize.Data',
@@ -76,7 +76,7 @@ Uize.module ({
 					_builtPath = _params.builtPath,
 					_packageTargetPathTemplate = _params.packageTargetPathTemplate,
 					_trueFlag = {},
-					_UizeSite_Build_File = UizeSite.Build.File,
+					_fileBuilder = Uize.Services.FileBuilder.singleton (),
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_dependenciesByStateCombination = {},
 					_excludeModules = _params.excludeModules ? _params.excludeModules.split (',') : [],
@@ -92,7 +92,7 @@ Uize.module ({
 					var _builtModuleFile = _builtModuleFileCache [_moduleName];
 					if (!_builtModuleFile) {
 						var _modulePath = 'js/' + _moduleName + '.js';
-						_UizeSite_Build_File.perform (
+						_fileBuilder.perform (
 							Uize.copyInto (
 								Uize.Data.filter (
 									_params,
@@ -104,7 +104,7 @@ Uize.module ({
 							)
 						);
 						_builtModuleFile = _builtModuleFileCache [_moduleName] =
-							_UizeSite_Build_File.readFile ({path:_builtPath + '/' + _modulePath})
+							_fileBuilder.readFile ({path:_builtPath + '/' + _modulePath})
 						;
 					}
 					return _builtModuleFile;

@@ -26,7 +26,10 @@
 Uize.module ({
 	name:'Uize.Build.Files',
 	superclass:'Uize.Class',
-	required:'Uize.Services.FileSystem',
+	required:[
+		'Uize.Services.FileSystem',
+		'Uize.Services.FileBuilder'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -54,6 +57,7 @@ Uize.module ({
 						_fileSystem = _this.fileSystem = Uize.Services.FileSystem.singleton (),
 						_filesToBuild = _this.filesToBuild = []
 					;
+					_this.fileBuilder = Uize.Services.FileBuilder.singleton ();
 					_this.determineFilesToBuild (_params);
 					_fileSystem.writeFile ({
 						path:_params.logFilePath,

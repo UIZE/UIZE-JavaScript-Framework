@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.Files Class
+|    /    O /   |    MODULE : UizeSite.Build.ServicesSetup Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -12,24 +12,32 @@
 /* Module Meta Data
 	type: Package
 	importance: 5
-	codeCompleteness: 100
-	docCompleteness: 4
+	codeCompleteness: 0
+	docCompleteness: 5
 */
 
 /*?
 	Introduction
-		The =UizeSite.Build.Files= module implements a base class specifically for build script modules of the UIZE Web site.
+		The =UizeSite.Build.ServicesSetup= package....
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'UizeSite.Build.Files',
-	superclass:'Uize.Build.Files',
-	builder:function (_superclass) {
+	name:'UizeSite.Build.ServicesSetup',
+	required:[
+		'Uize.Build.ServicesSetup',
+		'Uize.Services.Setup'
+	],
+	builder:function () {
 		'use strict';
 
-		return _superclass.subclass ();
+		return {
+			setup:function () {
+				Uize.Build.ServicesSetup.setup (); // get base level of services setup
+				Uize.Services.Setup.provideServiceSetup ('Uize.Services.FileBuilder','UizeSite.Build.File');
+			}
+		};
 	}
 });
 

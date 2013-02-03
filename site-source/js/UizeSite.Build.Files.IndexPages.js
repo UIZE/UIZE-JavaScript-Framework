@@ -74,10 +74,13 @@ Uize.module ({
 
 					/*** build examples index pages for each keyword ***/
 						var _examplesByKeywordPath = _params.memoryPath + '/examples-by-keyword';
-						_this.fileBuilder.perform (Uize.copyInto ({url:_examplesByKeywordPath},_params),'');
+						_this.fileBuilder.perform (Uize.copyInto ({url:_examplesByKeywordPath,pathPrefix:''},_params));
 						_this.addFiles (
 							Uize.map (
-								Uize.keys (_this.fileBuilder.readFile ({path:_examplesByKeywordPath})),
+								Uize.keys (_this.fileBuilder.get ('adapter').readFile ({path:_examplesByKeywordPath})),
+								/* TODO:
+									Accessing the service adapter to use specific instance methods that are not part of the actual service interface is a poor design, because it makes an assumption about the service adapter that is chosen for the service by the environment. A better way should be figured out to express this kind of relationship - this way is too weak and fragile.
+								*/
 								'"javascript-" + value + "-examples.html"'
 							)
 						);

@@ -79,7 +79,11 @@ Uize.module ({
 							function (_serviceModule,_serviceAdapterModule) {
 								var _service = _serviceModule.singleton ();
 								_service.set ('adapter',_serviceAdapterModule.singleton ());
-								_serviceSetup (_service,function () {_provide (_service)});
+								function _provideService () {_provide (_service)}
+								_serviceSetup
+									? _serviceSetup (_service,_provideService)
+									: _service.init ({},_provideService)
+								;
 							}
 						);
 					}
