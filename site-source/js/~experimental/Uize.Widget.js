@@ -32,7 +32,11 @@
 
 Uize.module ({
 	name:'Uize.Widget',
-	required:'Uize.Node,Uize.Data',
+	superclass:'Uize.Class',
+	required:[
+		'Uize.Node',
+		'Uize.Data'
+	],
 	builder:function (_superclass) {
 		'use strict';
 

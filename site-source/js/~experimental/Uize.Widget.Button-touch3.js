@@ -232,7 +232,7 @@ Uize.module ({
 					/*** deferred wiring of other events (for performance) ***/
 						if (!_this._allEventsWired) {
 							_this._allEventsWired = _true;
-							function _setStateAndFireEvent (_domEvent) {_this._setStateAndFireEvent (_domEvent)}
+							var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
 							_this.wireNode (
 								_this._rootNode,
 								_this._isTouch
@@ -332,7 +332,7 @@ Uize.module ({
 							if (_this._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
 								_rootNode.onclick = Uize.returnTrue
 							;
-							function _setStateAndFireEvent (_domEvent) {_this._setStateAndFireEvent (_domEvent)}
+							var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
 							/*
 							_this.wireNode (
 								_rootNode,
@@ -350,10 +350,10 @@ Uize.module ({
 							*/
 
 						/* ISSUE!!! why is this here? shouldn't be wiring instance events in wireUi */
-						function _updateUiState () {
+						var _updateUiState = function () {
 							_this._isClickable () || _this.set ({_state:''});
 							_this._updateUiState ();
-						}
+						};
 						_this.wire ({
 							'Changed.busyInherited':_updateUiState,
 							'Changed.enabledInherited':_updateUiState

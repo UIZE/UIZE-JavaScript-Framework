@@ -228,7 +228,7 @@ Uize.module ({
 					/*** deferred wiring of other mouse events (for performance) ***/
 						if (!_this._allMouseEventsWired) {
 							_this._allMouseEventsWired = _true;
-							function _setStateAndFireEvent (_domEvent) {_this._setStateAndFireEvent (_domEvent)}
+							var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
 							_this.wireNode (
 								_this._rootNode,
 								{
@@ -338,7 +338,7 @@ Uize.module ({
 							if (_this._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
 								_rootNode.onclick = Uize.returnTrue
 							;
-							function _setStateAndFireEvent (_domEvent) {_this._setStateAndFireEvent (_domEvent)}
+							var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
 							_this.wireNode (
 								_rootNode,
 								{
@@ -354,7 +354,7 @@ Uize.module ({
 							*/
 
 						/* ISSUE!!! why is this here? shouldn't be wiring instance events in wireUi */
-						function _updateUiState () {_this._updateUiState ()}
+						var _updateUiState = function () {_this._updateUiState ()};
 						_this.wire ({
 							'Changed.busyInherited':_updateUiState,
 							'Changed.enabledInherited':_updateUiState

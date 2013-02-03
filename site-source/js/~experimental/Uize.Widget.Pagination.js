@@ -66,7 +66,7 @@ Uize.module ({
 					} else {
 						_endIndex = _startIndex + _numPagesToShow - 1;
 					}
-					function _createPageLink( _pageNo ) {
+					var _createPageLink = function ( _pageNo ) {
 						return (
 							_pageNo == _currentPage
 								? ("<span class='" + _this._currentClass + "'>" + _pageNo + "</span>")
@@ -74,7 +74,7 @@ Uize.module ({
 									"<a href='' onclick='" + _this.instanceId + ".goToPage(" + _pageNo + ");return false;' class='" + _this._linkClass + "'>" + _pageNo + "</a>"
 								)
 						);
-					}
+					};
 					// always show page 1
 					if( _startIndex > 1 ) {
 						_pageLinks += _createPageLink( 1 );
