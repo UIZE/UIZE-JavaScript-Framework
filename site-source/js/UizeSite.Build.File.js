@@ -133,7 +133,7 @@ Uize.module ({
 			},
 
 			getJsModules:function () {
-				return UizeSite.Util.Build.getJsModules (this.params.sourcePath);
+				return UizeSite.Build.Util.getJsModules (this.params.sourcePath);
 			},
 
 			init:function (_params,_callback) {
