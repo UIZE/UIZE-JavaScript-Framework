@@ -67,6 +67,7 @@ Uize.module ({
 		'Uize.Util.Oop',
 		'Uize.Data.Matches',
 		'Uize.Build.Util',
+		'UizeSite.Build.Util',
 		'Uize.Build.ModuleInfo',
 		'Uize.Array.Sort',
 		'Uize.Data.PathsTree',
@@ -131,26 +132,8 @@ Uize.module ({
 				);
 			},
 
-			getJsModules:function (_sourcePath) {
-				return Uize.map (
-					this.fileSystem.getFiles ({
-						path:(_sourcePath != _undefined ? _sourcePath : this.params.sourcePath) + '/js',
-						pathMatcher:_moduleExtensionRegExp
-					}),
-					function (_fileName) {return _fileName.replace (_moduleExtensionRegExp,'')}
-				);
-			},
-
-			getIndexableFiles:function (_sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp) {
-				return this.fileSystem.getFiles ({
-					path:_sourcePath + '/' + _indexableFolderUnderSource,
-					pathMatcher:function (_filePath) {
-						return (
-							_indexableFileExtensionRegExp.test (_filePath) &&
-							!Uize.String.startsWith (Uize.Url.from (_filePath).fileName,'~')
-						);
-					}
-				});
+			getJsModules:function () {
+				return UizeSite.Util.Build.getJsModules (this.params.sourcePath);
 			},
 
 			init:function (_params,_callback) {
@@ -360,7 +343,7 @@ Uize.module ({
 									_inputs = {}
 								;
 								Uize.forEach (
-									_this.getIndexableFiles (
+									UizeSite.Build.Util.getIndexableFiles (
 										_this.params.sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp
 									),
 									function (_filePath,_fileNo) {

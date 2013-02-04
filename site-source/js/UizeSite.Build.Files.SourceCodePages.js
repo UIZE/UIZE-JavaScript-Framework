@@ -25,6 +25,7 @@
 
 Uize.module ({
 	name:'UizeSite.Build.Files.SourceCodePages',
+	required:'UizeSite.Build.Util',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -39,10 +40,7 @@ Uize.module ({
 					/*** add URLs for source code pages for the JavaScript modules ***/
 						_this.addFiles (
 							Uize.map (
-								_this.fileBuilder.get ('adapter').getJsModules (_sourcePath).sort (),
-								/* TODO:
-									Accessing the service adapter to use specific instance methods that are not part of the actual service interface is a poor design, because it makes an assumption about the service adapter that is chosen for the service by the environment. A better way should be figured out to express this kind of relationship - this way is too weak and fragile.
-								*/
+								UizeSite.Build.Util.getJsModules (_sourcePath).sort (),
 								'"reference/source-code/" + value + ".html"'
 							)
 						);
@@ -50,10 +48,7 @@ Uize.module ({
 					/*** add URLs for source code pages for the examples ***/
 						_this.addFiles (
 							Uize.map (
-								_this.fileBuilder.get ('adapter').getIndexableFiles (_sourcePath,'examples',/\.html$/),
-								/* TODO:
-									Accessing the service adapter to use specific instance methods that are not part of the actual service interface is a poor design, because it makes an assumption about the service adapter that is chosen for the service by the environment. A better way should be figured out to express this kind of relationship - this way is too weak and fragile.
-								*/
+								UizeSite.Build.Util.getIndexableFiles (_sourcePath,'examples',/\.html$/),
 								'"examples/source-code/" + value'
 							)
 						);
