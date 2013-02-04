@@ -96,9 +96,7 @@ Uize.module ({
 							Uize.copyInto (
 								Uize.Data.filter (
 									_params,
-									[
-										'builtPath', 'sourcePath', 'memoryPath', 'tempPath', 'freshBuild', 'minAllowedModifiedDate', 'isDev'
-									]
+									['builtPath', 'sourcePath', 'memoryPath', 'tempPath', 'staleBefore', 'isDev']
 								),
 								{url:_modulePath}
 							)

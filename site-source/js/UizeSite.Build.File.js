@@ -24,14 +24,14 @@
 
 		EXAMPLE USAGE
 		......................................................................................................
-		node build.js UizeSite.Build.File url=reference/Uize.html sourcePath=site-source tempPath=site-temp memoryPath=site-memory builtPath=site-built freshBuild=true
+		node build.js UizeSite.Build.File url=reference/Uize.html sourcePath=site-source tempPath=site-temp memoryPath=site-memory builtPath=site-built staleBefore=now
 		......................................................................................................
 
 		Parameters
 			builtPath
 				.
 
-			freshBuild
+			staleBefore
 				.
 
 			isDev
@@ -40,7 +40,7 @@
 			memoryPath
 				.
 
-			minAllowedModifiedDate
+			staleBefore
 				.
 
 			url

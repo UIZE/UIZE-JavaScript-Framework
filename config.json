@@ -22,13 +22,8 @@
 					'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
 				'*/\n'
 		},
-		freshBuild:'false',
+		staleBefore:'now',
 		deployConfigPath:'../deploy.config.json',
-
-	/*** for the older build process ***/
-		alwaysBuild:false,
-		buildFolderPath:'site-built',
-		rootFolderPath:'site-source',
 		buildSequence:[
 			'UizeSite.Build.Files.StaticFiles',
 			'UizeSite.Build.Files.JsModules',
@@ -42,6 +37,11 @@
 			'build.js Uize.Build.RunUnitTests silent=true',
 			'build.js Uize.Build.RunUnitTests useSource=false silent=true'
 		],
+
+	/*** for the older build process ***/
+		alwaysBuild:false,
+		buildFolderPath:'site-built',
+		rootFolderPath:'site-source',
 		doNotEnter:/\\(css|images|OLD|photos|Uize.*)$/,
 		dryRun:false,
 		moduleFolderPath:'site-source/js',

@@ -199,14 +199,13 @@ Uize.module ({
 					},
 
 				buildFile:function (_params,_callback) {
+					var _this = this;
+					if (_params.filesModified)
+						_this._filesConsideredCurrentLookup = {}
+					;
 					var
-						_this = this,
-						_freshBuild = _params.freshBuild = _params.freshBuild + '' == 'true',
-						_filesConsideredCurrentLookup = _this._filesConsideredCurrentLookup = {},
-						_minAllowedModifiedDate = _params.minAllowedModifiedDate = Math.max (
-							Uize.toNumber (_params.minAllowedModifiedDate,-Infinity),
-							_params.freshBuild ? Uize.now () : -Infinity
-						),
+						_filesConsideredCurrentLookup = _this._filesConsideredCurrentLookup,
+						_staleBefore = _params.staleBefore = Uize.toNumber (_params.staleBefore,-Infinity),
 						_chainDepth = -1
 					;
 					_params.isDev = _params.isDev == 'true';
@@ -256,15 +255,13 @@ Uize.module ({
 										_subLogChunks = [],
 										_subLogChunk
 									;
-									_mustBuild || (_mustBuild = _lastBuiltDate < _minAllowedModifiedDate);
+									_mustBuild || (_mustBuild = _lastBuiltDate < _staleBefore);
 									for (var _builderInputName in _builderInputs) {
 										_subLogChunk = _ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
 										_subLogChunk && _subLogChunks.push (_subLogChunk);
 										_mustBuild || (
-											_mustBuild = Math.max (
-												_this.getModifiedDate ({path:_builderInput}),
-												_minAllowedModifiedDate
-											) > _lastBuiltDate
+											_mustBuild = Math.max (_this.getModifiedDate ({path:_builderInput}),_staleBefore) >
+											_lastBuiltDate
 										);
 									}
 									if (_mustBuild) {

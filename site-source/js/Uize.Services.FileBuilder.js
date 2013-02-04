@@ -57,7 +57,7 @@ Uize.module ({
 									builtPath
 										A string, specifying the folder path for the built files of the site.
 
-									minAllowedModifiedDate
+									staleBefore
 										.
 
 									isDev

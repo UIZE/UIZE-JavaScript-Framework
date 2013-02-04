@@ -139,16 +139,19 @@ function _eval (_toEval) {
 			}
 
 		/*** load build environment properties ***/
-			(function () {return this}) ().env = eval ('(' + _readFile ('config.json') + ')');
+			var _env = (function () {return this}) ().env = eval ('(' + _readFile ('config.json') + ')');
+			if (_env.staleBefore == 'now')
+				_env.staleBefore = +new Date
+			;
 
 		/*** load Uize base class and set up with module loader ***/
 			function _moduleLoader (_moduleToLoad,_callback) {
 				var _moduleText = '';
-				if (env.modulesToStub && env.modulesToStub.test (_moduleToLoad)) {
+				if (_env.modulesToStub && _env.modulesToStub.test (_moduleToLoad)) {
 					_moduleText = 'Uize.module ({name:\'' + _moduleToLoad + '\'})';
 				} else {
 					var _modulePath =
-						(_useSource ? env.moduleFolderPath : env.moduleFolderBuiltPath) + '/' + _moduleToLoad + '.js'
+						(_useSource ? _env.moduleFolderPath : _env.moduleFolderBuiltPath) + '/' + _moduleToLoad + '.js'
 					;
 					if (_fileExists (_modulePath)) {
 						_moduleText = _readFile (_modulePath);
@@ -179,7 +182,7 @@ function _eval (_toEval) {
 
 		/*** services setup & run build module (if specified) ***/
 			Uize.require (
-				env.servicesSetup || 'Uize.Build.ServicesSetup',
+				_env.servicesSetup || 'Uize.Build.ServicesSetup',
 				function (_servicesSetup) {
 					_servicesSetup.setup ();
 					if (_buildModuleName)
@@ -187,7 +190,7 @@ function _eval (_toEval) {
 							_buildModuleName,
 							function (_buildModule) {
 								_buildModule.perform (
-									Uize.copyInto ({},env,{logFilePath:'logs/' + _buildModuleName + '.log'},_params)
+									Uize.copyInto ({},_env,{logFilePath:'logs/' + _buildModuleName + '.log'},_params)
 								);
 							}
 						)

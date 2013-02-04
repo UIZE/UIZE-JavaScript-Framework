@@ -24,7 +24,7 @@
 
 		EXAMPLE USAGE
 		......................................................................................................
-		node build.js Uize.Build.WebServer sourcePath=site-source tempPath=site-temp builtPath=site-built freshBuild=true isDev=true
+		node build.js Uize.Build.WebServer sourcePath=site-source tempPath=site-temp builtPath=site-built staleBefore=now isDev=true
 		......................................................................................................
 
 		Parameters
@@ -37,7 +37,7 @@
 			builtPath
 				.
 
-			freshBuild
+			staleBefore
 				.
 
 			isDev
@@ -94,7 +94,7 @@ Uize.module ({
 							_startTime = Uize.now ()
 						;
 						try {
-							_fileBuilder.buildFile (Uize.copyInto ({url:_requestUrl.slice (1)},_params));
+							_fileBuilder.buildFile (Uize.copyInto ({url:_requestUrl.slice (1),filesModified:true},_params));
 							_fileContents = _fileSystem.readFile ({path:_builtUrl,encoding:'buffer'});
 							_response.writeHead (200,{'Content-Type':_mimeTypes [Uize.Url.from (_requestUrl).fileType]});
 						} catch (_error) {
@@ -126,7 +126,7 @@ Uize.module ({
 								builtPath
 									A string, specifying the folder path for the built files of the site.
 
-								freshBuild
+								staleBefore
 									.
 
 								isDev
