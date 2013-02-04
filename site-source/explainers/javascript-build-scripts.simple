@@ -37,15 +37,15 @@ Introduction
 		To use the build scripts in your own Web site project, you should copy them from the =UIZE-JavaScript-Framework= root folder into the root folder of your project.
 
 		Must Have the Build Script Setup
-			Be sure to copy the =_build.js= file along with the desired build scripts (for more info, see the section `Build Script Setup`).
+			Be sure to copy the =build.js= file along with the desired build scripts (for more info, see the section `Build Script Setup`).
 
 		Must Have the Build Environment Variables
-			Be sure to copy the =_build-env.json= file along with the desired build scripts (for more info, see the section `Build Environment Variables`).
+			Be sure to copy the =config.json= file along with the desired build scripts (for more info, see the section `Build Environment Variables`).
 
 		Must Have the UIZE Modules
 			Note that the build scripts make use of modules of the UIZE JavaScript Framework, so your Web site project must be set up with a folder containing these JavaScript modules before you can use the build scripts.
 
-			Also note that the =moduleFolderPath= build environment variable that is defined in the =_build-env.json= file (see the section `Build Environment Variables`) should be correctly set so that the UIZE JavaScript modules can be located by the module loader that is defined inside the `build script setup` file.
+			Also note that the =moduleFolderPath= build environment variable that is defined in the =config.json= file (see the section `Build Environment Variables`) should be correctly set so that the UIZE JavaScript modules can be located by the module loader that is defined inside the `build script setup` file.
 
 	How You Can Run Them
 		Once you have copied the build scripts to the root folder of your Web site project, and once you have configured the `build environment variables` appropriately, then the build scripts can be run by simply double-clicking on the script files, or by selecting them in Windows Explorer and pressing the *Enter* key.
@@ -344,7 +344,7 @@ The Build Scripts
 		The Run Unit Tests (Source) build script (implemented in the file =WSH-Uize.Build.RunUnitTests-source.bat=) runs the unit test suite for the UIZE JavaScript Framework, using the source versions of the JavaScript modules.
 
 Build Script Setup
-	The Build Script Setup (implemented in the =_build.js= file) implements a module loader that is used by `the build scripts` that come bundled with the UIZE JavaScript Framework, and that can also be used when `writing your own build scripts`.
+	The Build Script Setup (implemented in the =build.js= file) implements a module loader that is used by `the build scripts` that come bundled with the UIZE JavaScript Framework, and that can also be used when `writing your own build scripts`.
 
 	Using the Build Script Setup
 		The Build Script Setup is used in a build script by adding a few lines of "boilerplate" JavaScript code.
@@ -355,7 +355,7 @@ Build Script Setup
 		...................................................................................
 		/*** boilerplate setup code for WSH build scripts ***/
 			var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile (
-				'_build.js',1
+				'build.js',1
 			);
 			eval (_setupFile.ReadAll ()) ();
 			_setupFile.Close ();
@@ -366,10 +366,10 @@ Build Script Setup
 			// ... ... ...
 		...................................................................................
 
-		In the boilerplate block, the statement =eval (_setupFile.ReadAll ()) ();= reads the contents of the =_build.js= file, evaluates its code using the JavaScript =eval= function, and then calls the function that is returned by the =eval= call (the =_build.js= file actually defines a function that returns a reference to the actual setup function). In this case, we are not passing any parameters to the setup function. This is the typical usage for build scripts that reside in the root folder of a Web site project (ie. the same folder as the =_build.js= file) and that are to run using the source versions of the JavaScript modules. Optional parameters for the setup function allow the module loader to be configured for `loading scrunched versions of modules` and for `running scripts outside a project's root folder`
+		In the boilerplate block, the statement =eval (_setupFile.ReadAll ()) ();= reads the contents of the =build.js= file, evaluates its code using the JavaScript =eval= function, and then calls the function that is returned by the =eval= call (the =build.js= file actually defines a function that returns a reference to the actual setup function). In this case, we are not passing any parameters to the setup function. This is the typical usage for build scripts that reside in the root folder of a Web site project (ie. the same folder as the =build.js= file) and that are to run using the source versions of the JavaScript modules. Optional parameters for the setup function allow the module loader to be configured for `loading scrunched versions of modules` and for `running scripts outside a project's root folder`
 
 		Loading Scrunched Versions of Modules
-			The module loader defined in the =_build.js= file can be configured to load the scrunched versions of JavaScript modules.
+			The module loader defined in the =build.js= file can be configured to load the scrunched versions of JavaScript modules.
 
 			This is done by specifying the value =false= for the optional =useSource= property of the optional params object that is passed when calling the build function. Consider the following example...
 
@@ -377,7 +377,7 @@ Build Script Setup
 			.................................................................................................
 			(function () {
 				var
-					_buildFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('_build.js',1),
+					_buildFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('build.js',1),
 					_build = eval (_buildFile.ReadAll ())
 				;
 				_buildFile.Close ();
@@ -385,10 +385,10 @@ Build Script Setup
 			}) ();
 			.................................................................................................
 
-			In the call to the build function, the optional params object is passed with the value =false= specified for the =useSource= property. When no params object is specified, or when the =useSource= property is omitted from the params object, then this property is defaulted to =true=. Explicitly specifying the value =false= causes the module loader defined inside the =_build.js= file to load the scrunched versions of the JavaScript modules.
+			In the call to the build function, the optional params object is passed with the value =false= specified for the =useSource= property. When no params object is specified, or when the =useSource= property is omitted from the params object, then this property is defaulted to =true=. Explicitly specifying the value =false= causes the module loader defined inside the =build.js= file to load the scrunched versions of the JavaScript modules.
 
 		Running Scripts Outside a Project's Root Folder
-			The module loader defined in the =_build.js= file can be configured for scripts that are to be run in a folder other than the root folder of a Web site project.
+			The module loader defined in the =build.js= file can be configured for scripts that are to be run in a folder other than the root folder of a Web site project.
 
 			This is done by specifying a string value for the optional =pathToRoot= property of the optional params object that is passed when calling the setup function. Consider the following example...
 
@@ -396,7 +396,7 @@ Build Script Setup
 			.................................................................................................
 			(function () {
 				var
-					_buildFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('_build.js',1),
+					_buildFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile ('build.js',1),
 					_build = eval (_buildFile.ReadAll ())
 				;
 				_buildFile.Close ();
@@ -406,12 +406,12 @@ Build Script Setup
 
 			In the call to the build function, the optional params object is passed with the value ='UIZE-JavaScript-Framework\\'= specified for the =pathToRoot= property. When no params object is specified, or when the =pathToRoot= property is omitted from the params object, then this property is defaulted to =''= (empty string).
 
-			In this example, explicitly specifying the value ='UIZE-JavaScript-Framework\\'= causes the module loader defined inside the =_build.js= file to prepend the path "UIZE-JavaScript-Framework\" to the path for every module that it loads. Assuming that the folder "UIZE-JavaScript-Framework" contains the UIZE JavaScript Framework, then the above configuration of the `build script setup` would be appropriate for a script that resides in, and is to be run from, a parent folder of the "UIZE-JavaScript-Framework" folder.
+			In this example, explicitly specifying the value ='UIZE-JavaScript-Framework\\'= causes the module loader defined inside the =build.js= file to prepend the path "UIZE-JavaScript-Framework\" to the path for every module that it loads. Assuming that the folder "UIZE-JavaScript-Framework" contains the UIZE JavaScript Framework, then the above configuration of the `build script setup` would be appropriate for a script that resides in, and is to be run from, a parent folder of the "UIZE-JavaScript-Framework" folder.
 
 Build Environment Variables
 	You may have to configure the build scripts to work in your Web site project's environment by modifying the build environment variables.
 
-	The build environment variables are set inside the =_build-env.json= file that sits alongside the build scripts at the root of your Web site project. This file contains an anonymous object formatted using JSON syntax, with properties for the various supported build environment variables, as shown in the example below...
+	The build environment variables are set inside the =config.json= file that sits alongside the build scripts at the root of your Web site project. This file contains an anonymous object formatted using JSON syntax, with properties for the various supported build environment variables, as shown in the example below...
 
 	EXAMPLE
 	.............................................................
@@ -543,7 +543,7 @@ Writing Your Own Build Scripts
 		........................................................................................
 		/*** Build Script Setup Boilerplate ***/
 			var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile (
-				'_build.js',1
+				'build.js',1
 			);
 			eval (_setupFile.ReadAll ()) ();
 			_setupFile.Close ();
@@ -564,7 +564,7 @@ Writing Your Own Build Scripts
 		Build Script Setup Boilerplate
 			The `build script setup` boilerplate is a small block of code that is necessary in every build script in order to bootstrap the process.
 
-			This little block of code evals the JavaScript contained inside the =_build.js= file, which defines a module loader that works in the Windows Script Host context. For a more detailed discussion, consult the section `Build Script Setup`.
+			This little block of code evals the JavaScript contained inside the =build.js= file, which defines a module loader that works in the Windows Script Host context. For a more detailed discussion, consult the section `Build Script Setup`.
 
 		Build Script Anonymous Module Declaration
 			The build script anonymous module declaration is a declaration of the module of code that performs the build script's action.

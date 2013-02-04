@@ -1,2 +1,2 @@
-wscript _build.js UizeSite.Build.ListJsModules
+wscript build.js UizeSite.Build.ListJsModules
 

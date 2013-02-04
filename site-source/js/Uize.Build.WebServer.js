@@ -24,7 +24,7 @@
 
 		EXAMPLE USAGE
 		......................................................................................................
-		node _build.js Uize.Build.WebServer sourcePath=site-source tempPath=site-temp builtPath=site-built freshBuild=true isDev=true
+		node build.js Uize.Build.WebServer sourcePath=site-source tempPath=site-temp builtPath=site-built freshBuild=true isDev=true
 		......................................................................................................
 
 		Parameters
@@ -112,9 +112,9 @@ Uize.module ({
 					Static Methods
 						Uize.Build.WebServer.perform
 							SYNTAX
-							.............................................
+							.........................................
 							Uize.Build.WebServer.perform (paramsOBJ);
-							.............................................
+							.........................................
 
 							Parameters
 								sourcePath

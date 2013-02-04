@@ -1,2 +1,2 @@
-wscript _build.js Uize.Build.AuditStrings
+wscript build.js Uize.Build.AuditStrings
 

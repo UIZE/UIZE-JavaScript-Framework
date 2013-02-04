@@ -39,8 +39,8 @@
 			'UizeSite.Build.Files.IndexPages'
 		],
 		testSequence:[
-			'_build.js Uize.Build.RunUnitTests silent=true',
-			'_build.js Uize.Build.RunUnitTests useSource=false silent=true'
+			'build.js Uize.Build.RunUnitTests silent=true',
+			'build.js Uize.Build.RunUnitTests useSource=false silent=true'
 		],
 		doNotEnter:/\\(css|images|OLD|photos|Uize.*)$/,
 		dryRun:false,

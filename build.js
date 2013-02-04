@@ -5,13 +5,13 @@
 
 	Using NodeJS...
 
-	node _build Uize.Build.SomeBuildScript
-	node _build Uize.Build.SomeBuildScript p1Name=p1Value p2Name=p2Value
+	node build.js Uize.Build.SomeBuildScript
+	node build.js Uize.Build.SomeBuildScript p1Name=p1Value p2Name=p2Value
 
 	Using WSH (Windows Script Host)...
 
-	wscript _build.js Uize.Build.SomeBuildScript
-	wscript _build.js Uize.Build.SomeBuildScript p1Name=p1Value p2Name=p2Value
+	wscript build.js Uize.Build.SomeBuildScript
+	wscript build.js Uize.Build.SomeBuildScript p1Name=p1Value p2Name=p2Value
 
 	NOTE:
 
@@ -42,7 +42,7 @@ function _eval (_toEval) {
 	/*** determine build module name (if this script is being used in that way) ***/
 		var
 			_buildModuleName,
-			_thisScriptName = '_build.js',
+			_thisScriptName = 'build.js',
 			_scriptFullName = _isWsh ? WScript.ScriptFullName : process.argv [1]
 		;
 		if (_scriptFullName.slice (_scriptFullName.length - _thisScriptName.length) == _thisScriptName) {
@@ -139,7 +139,7 @@ function _eval (_toEval) {
 			}
 
 		/*** load build environment properties ***/
-			(function () {return this}) ().env = eval ('(' + _readFile ('_build-env.json') + ')');
+			(function () {return this}) ().env = eval ('(' + _readFile ('config.json') + ')');
 
 		/*** load Uize base class and set up with module loader ***/
 			function _moduleLoader (_moduleToLoad,_callback) {
