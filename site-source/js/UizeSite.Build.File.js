@@ -86,7 +86,7 @@ Uize.module ({
 		/*** General Variables ***/
 			var
 				_sacredEmptyArray = [],
-				_moduleExtensionRegExp = /(\.js|\.js\.jst)$/,
+				_jsModuleExtensionRegExp = UizeSite.Build.Util.jsModuleExtensionRegExp,
 				_threeFoldersDeepRegExp = /^([^\\\/]+)[\\\/]([^\\\/]+)[\\\/]([^\\\/]+)[\\\/][^\\\/]+$/
 			;
 
@@ -403,7 +403,7 @@ Uize.module ({
 							'javascript-modules-index',
 							'js',
 							'reference',
-							_moduleExtensionRegExp
+							_jsModuleExtensionRegExp
 						);
 
 					/*** handler for the JavaScript explainers index page ***/
@@ -833,7 +833,7 @@ Uize.module ({
 									;
 								}
 								_addReferencePages ('javascript-reference',/\.simple$/i);
-								_addReferencePages ('js',/(\.js|\.js\.jst)$/i,'reference');
+								_addReferencePages ('js',_jsModuleExtensionRegExp,'reference');
 
 							return _urlDictionary;
 						}
@@ -1107,7 +1107,7 @@ Uize.module ({
 								_this = this,
 								_simpleDoc,
 								_sourceCodePath = _inputs.sourceCode,
-								_moduleName = Uize.Url.from (_sourceCodePath).file.replace (_moduleExtensionRegExp,'')
+								_moduleName = Uize.Url.from (_sourceCodePath).file.replace (_jsModuleExtensionRegExp,'')
 							;
 							Uize.require (
 								_moduleName,
