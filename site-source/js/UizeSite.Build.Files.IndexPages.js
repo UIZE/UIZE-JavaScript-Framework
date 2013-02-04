@@ -74,7 +74,7 @@ Uize.module ({
 
 					/*** build examples index pages for each keyword ***/
 						var _examplesByKeywordPath = _params.memoryPath + '/examples-by-keyword';
-						_this.fileBuilder.perform (Uize.copyInto ({url:_examplesByKeywordPath,pathPrefix:''},_params));
+						_this.fileBuilder.buildFile (Uize.copyInto ({url:_examplesByKeywordPath,pathPrefix:''},_params));
 						_this.addFiles (
 							Uize.map (
 								Uize.keys (_this.fileBuilder.get ('adapter').readFile ({path:_examplesByKeywordPath})),

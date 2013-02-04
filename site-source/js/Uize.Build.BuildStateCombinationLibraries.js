@@ -92,7 +92,7 @@ Uize.module ({
 					var _builtModuleFile = _builtModuleFileCache [_moduleName];
 					if (!_builtModuleFile) {
 						var _modulePath = 'js/' + _moduleName + '.js';
-						_fileBuilder.perform (
+						_fileBuilder.buildFile (
 							Uize.copyInto (
 								Uize.Data.filter (
 									_params,

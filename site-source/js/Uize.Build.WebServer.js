@@ -94,7 +94,7 @@ Uize.module ({
 							_startTime = Uize.now ()
 						;
 						try {
-							_fileBuilder.perform (Uize.copyInto ({url:_requestUrl.slice (1)},_params));
+							_fileBuilder.buildFile (Uize.copyInto ({url:_requestUrl.slice (1)},_params));
 							_fileContents = _fileSystem.readFile ({path:_builtUrl,encoding:'buffer'});
 							_response.writeHead (200,{'Content-Type':_mimeTypes [Uize.Url.from (_requestUrl).fileType]});
 						} catch (_error) {

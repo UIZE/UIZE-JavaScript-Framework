@@ -61,7 +61,7 @@ Uize.module ({
 					_this.determineFilesToBuild (_params);
 					_fileSystem.writeFile ({
 						path:_params.logFilePath,
-						contents:_this.fileBuilder.perform (Uize.copyInto ({url:_filesToBuild},_params))
+						contents:_this.fileBuilder.buildFile (Uize.copyInto ({url:_filesToBuild},_params))
 					});
 				}
 			},

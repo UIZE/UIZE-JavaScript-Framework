@@ -198,7 +198,7 @@ Uize.module ({
 						return _this.isMemoryUrl (_path) ? !!_this._objectCache [_path] : _this.fileSystem.fileExists (_params);
 					},
 
-				perform:function (_params,_callback) {
+				buildFile:function (_params,_callback) {
 					var
 						_this = this,
 						_freshBuild = _params.freshBuild = _params.freshBuild + '' == 'true',

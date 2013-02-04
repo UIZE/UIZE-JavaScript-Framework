@@ -34,15 +34,15 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			serviceMethods:{
-				perform:{
+				buildFile:{
 					async:_false
 					/*?
 						Instance Methods
-							perform
+							buildFile
 								SYNTAX
-								........................................
-								fileBuilderInstance.perform (paramsOBJ);
-								........................................
+								..........................................
+								fileBuilderInstance.buildFile (paramsOBJ);
+								..........................................
 
 								Parameters
 									url
