@@ -86,7 +86,7 @@ Uize.module ({
 		/*** General Variables ***/
 			var
 				_sacredEmptyArray = [],
-				_jsModuleExtensionRegExp = UizeSite.Build.Util.jsModuleExtensionRegExp,
+				_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp,
 				_threeFoldersDeepRegExp = /^([^\\\/]+)[\\\/]([^\\\/]+)[\\\/]([^\\\/]+)[\\\/][^\\\/]+$/
 			;
 

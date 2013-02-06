@@ -26,6 +26,7 @@
 Uize.module ({
 	name:'UizeSite.Build.Util',
 	required:[
+		'Uize.Build.Util',
 		'Uize.Url',
 		'Uize.String',
 		'Uize.Services.FileSystem'
@@ -37,21 +38,17 @@ Uize.module ({
 			var _undefined;
 
 		/*** General Variables ***/
-			var
-				_fileSystem = Uize.Services.FileSystem.singleton (),
-				_moduleExtensionRegExp = /(\.js|\.js\.jst)$/
-			;
+			var _fileSystem = Uize.Services.FileSystem.singleton ();
 
 		return {
-			jsModuleExtensionRegExp:_moduleExtensionRegExp,
-
 			getJsModules:function (_sourcePath) {
+				var _jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp;
 				return Uize.map (
 					_fileSystem.getFiles ({
 						path:_sourcePath + '/js',
-						pathMatcher:_moduleExtensionRegExp
+						pathMatcher:_jsModuleExtensionRegExp
 					}),
-					function (_fileName) {return _fileName.replace (_moduleExtensionRegExp,'')}
+					function (_fileName) {return _fileName.replace (_jsModuleExtensionRegExp,'')}
 				);
 			},
 

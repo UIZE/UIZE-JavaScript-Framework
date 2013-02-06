@@ -25,13 +25,14 @@
 
 Uize.module ({
 	name:'UizeSite.Build.Files.JsModules',
+	required:'Uize.Build.Util',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
-					var _jsModuleExtensionRegExp = /\.js(\.jst)?$/;
+					var _jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp;
 					this.addFiles (
 						this.fileSystem.getFiles ({
 							path:_params.sourcePath,

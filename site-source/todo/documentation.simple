@@ -7,7 +7,9 @@ Restructure UIZE Web Site to be UIZE Application
 	............................
 	UIZE-JavaScript-Framework
 		uize/
-			build scripts triggers
+			.gitignore
+			build.js
+			README
 			js/
 		uize-site/
 			build scripts triggers

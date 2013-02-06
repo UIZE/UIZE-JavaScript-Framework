@@ -27,7 +27,10 @@
 
 Uize.module ({
 	name:'UizeSite.Build.ListJsModules',
-	required:'Uize.Services.FileSystem',
+	required:[
+		'Uize.Services.FileSystem',
+		'Uize.Build.Util'
+	],
 	builder:function () {
 		'use strict';
 
@@ -35,7 +38,7 @@ Uize.module ({
 			perform:function (_params) {
 				var
 					_fileSystem = Uize.Services.FileSystem.singleton (),
-					_jsModuleExtensionRegExp = /\.js(\.jst)?$/
+					_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 				;
 				_fileSystem.writeFile ({
 					path:'logs/all-js-modules.log',
