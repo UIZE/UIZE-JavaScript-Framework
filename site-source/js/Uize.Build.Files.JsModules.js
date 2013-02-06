@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.Files.JsModules Package
+|    /    O /   |    MODULE : Uize.Build.Files.JsModules Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.Files.JsModules= package builds all the JavaScript modules needed by the UIZE Web site.
+		The =Uize.Build.Files.JsModules= package builds all the JavaScript modules needed by a Web site that uses the UIZE JavaScript Framework.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'UizeSite.Build.Files.JsModules',
+	name:'Uize.Build.Files.JsModules',
 	required:'Uize.Build.Util',
 	builder:function (_superclass) {
 		'use strict';

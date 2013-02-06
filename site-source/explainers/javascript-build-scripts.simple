@@ -22,7 +22,7 @@ Introduction
 
 		The build script files are JavaScript files (with the =.js= extension) with names that all start with a "_" (underscore) character, as in...
 
-		- WSH-UizeSite.Build.Files.JsModules.bat (`Build JS Modules`)
+		- WSH-Uize.Build.Files.JsModules.bat (`Build JS Modules`)
 		- WSH-UizeSite.Build.Files.SimpleDataPages.bat (`UIZE Site Build Simple Data Pages`)
 		- WSH-UizeSite.Build.Files.SimpleDocPages.bat (`UIZE Site Build Simple Doc Pages`)
 		- WSH-UizeSite.Build.Files.SourceCodePages.bat (`UIZE Site Build Pages from Source Code`)
@@ -163,12 +163,12 @@ The Build Scripts
 		Additionally, this script builds a contents tree for the modules - where the structure of this tree reflects the namespace hierarchy of the modules - and inserts this contents tree as a nested unordered list into the =directory.html= file that resides in the root folder alongside the build script.
 
 	Build JS Modules
-		The Build JS Modules build script (implemented in the file =WSH-UizeSite.Build.Files.JsModules.bat=) generates built JavaScript template modules from all the source JavaScript modules and JavaScript template (=.js.jst=) files that it finds in the modules folder.
+		The Build JS Modules build script (implemented in the file =WSH-Uize.Build.Files.JsModules.bat=) generates built JavaScript template modules from all the source JavaScript modules and JavaScript template (=.js.jst=) files that it finds in the modules folder.
 
 		JavaScript modules found in the modules folder are scrunched, while JavaScript template (=.js.jst=) files are compiled to template modules and then scrunched. If you look through the modules folder in the download of the UIZE JavaScript Framework, you will notice a number of =.js.jst= files under the =UizeSite.Templates= namespace, many of which are HTML generators for widgets.
 
 		NOTES
-		- the core of the intelligence of the Build JS Modules build script can be found in the =UizeSite.Build.Files.JsModules= module
+		- the core of the intelligence of the Build JS Modules build script can be found in the =Uize.Build.Files.JsModules= module
 		- for more information on JavaScript template modules, consult the explainers [[javascript-templates.html][JavaScript Templates]] and [[javascript-modules.html][JavaScript Modules]]
 
 	UIZE Site Build Simple Data Pages
