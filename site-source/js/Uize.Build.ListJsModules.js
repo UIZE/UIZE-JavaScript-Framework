@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.ListJsModules Package
+|    /    O /   |    MODULE : Uize.Build.ListJsModules Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.ListJsModules= package writes out a log file containing a list of all the JavaScript modules for the UIZE JavaScript Framework and the UIZE Web site.
+		The =Uize.Build.ListJsModules= package writes out a log file containing a list of all the JavaScript modules for a Web site.
 
 		This information might be useful when doing audits. This build script was first used when starting the initiative of updating all the modules in the codebase to use strict mode, so it was a useful way to seed a task list. The list of JavaScript modules is written out to the log file "all-js-modules.log" in the "logs" folder that is at the root of the UIZE project.
 
@@ -26,7 +26,7 @@
 */
 
 Uize.module ({
-	name:'UizeSite.Build.ListJsModules',
+	name:'Uize.Build.ListJsModules',
 	required:[
 		'Uize.Services.FileSystem',
 		'Uize.Build.Util'
