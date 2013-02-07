@@ -52,6 +52,21 @@ Uize.module ({
 				jsModuleExtensionRegExp:/(\.js|\.js\.jst)$/,
 
 			/*** Public Static Methods ***/
+				forEachNumberedProperty:function (_object,_propertyNamePrefix,_handler) {
+					var
+						_propertyNo = -1,
+						_propertyName,
+						_propertyValue
+					;
+					while ((_propertyValue = _object [_propertyName = _propertyNamePrefix + ++_propertyNo]) != undefined)
+						_handler (_propertyValue,_propertyName)
+					;
+				},
+
+				getPathToRoot:function (_path) {
+					return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
+				},
+
 				getHtmlFileInfo:function (_filePath,_titleExtractor) {
 					var
 						_fileText = _fileSystem.readFile ({path:_filePath}),

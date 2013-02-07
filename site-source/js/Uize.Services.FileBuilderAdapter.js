@@ -61,6 +61,7 @@ Uize.module ({
 	required:[
 		'Uize.Url',
 		'Uize.String',
+		'Uize.Array.Util',
 		'Uize.Services.FileSystem'
 	],
 	builder:function (_superclass) {
@@ -71,7 +72,8 @@ Uize.module ({
 				_undefined,
 				_startsWith = Uize.String.startsWith,
 				_sacredEmptyObject = {},
-				_trueFlag = {}
+				_trueFlag = {},
+				_Array_prototype_push = [].push
 			;
 
 		/*** Utility Functions ***/
@@ -99,7 +101,9 @@ Uize.module ({
 			},
 
 			instanceMethods:{
-				registerUrlHandler:function (_urlHandler) {this.urlHandlers.push (_urlHandler)},
+				registerFileBuilders:function (_urlHandler) {
+					_Array_prototype_push.apply (this.urlHandlers,Uize.Array.Util.flatten (arguments,Infinity,true));
+				},
 
 				/*** URL tester methods ***/
 					isMemoryUrl:function (_url) {return _isUnderPath (_url,this.params.memoryPath)},

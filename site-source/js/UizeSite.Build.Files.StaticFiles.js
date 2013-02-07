@@ -37,7 +37,7 @@ Uize.module ({
 						this.fileSystem.getFiles ({
 							path:_params.sourcePath,
 							recursive:true,
-							pathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess)$/
+							pathMatcher:_params.staticFilePathMatcher
 						})
 					);
 				}

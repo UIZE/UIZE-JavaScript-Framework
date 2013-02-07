@@ -34,13 +34,14 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
-
 		/*** General Variables ***/
 			var _fileSystem = Uize.Services.FileSystem.singleton ();
 
 		return {
+			getTitleFromFilename:function (_filename) {
+				return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
+			},
+
 			getJsModules:function (_sourcePath) {
 				var _jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp;
 				return Uize.map (
