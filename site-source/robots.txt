@@ -1,7 +1,4 @@
 User-agent: *
 Disallow: /404.html
-Disallow: /logo.html
 Disallow: /search.html
-Disallow: /*.simple$
-Disallow: /*.simpledata$
 

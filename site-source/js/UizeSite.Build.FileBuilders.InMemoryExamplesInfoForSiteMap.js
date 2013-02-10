@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.GoogleCodeSitemap Package
+|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.InMemoryExamplesInfoForSiteMap Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.GoogleCodeSitemap= module defines a file builder for the sitemap XML file that is used by the Google Code feature.
+		The =UizeSite.Build.FileBuilders.InMemoryExamplesInfoForSiteMap= module defines a file builder for the in-memory examples-info-for-sitemap object.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -26,21 +26,26 @@
 */
 
 Uize.module ({
-	name:'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
-	required:'UizeSite.Build.Util',
+	name:'UizeSite.Build.FileBuilders.InMemoryExamplesInfoForSiteMap',
+	required:'Uize.Data.Matches',
 	builder:function () {
 		return {
-			description:'Google Code sitemap',
+			description:'In-memory examples-info-for-sitemap object',
 			urlMatcher:function (_urlParts) {
-				return _urlParts.pathname == this.builtUrl ('sitemap-code.xml');
+				return _urlParts.pathname == this.memoryUrl ('examples-info-for-sitemap');
 			},
-			builderInputs:function (_urlParts) {
-				return {template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst'};
+			builderInputs:function () {
+				return {examplesByKeyword:this.memoryUrl ('examples-by-keyword')};
 			},
 			builder:function (_inputs) {
-				return this.readFile ({path:_inputs.template}) ({
-					modules:UizeSite.Build.Util.getJsModules (this.params.sourcePath)
-				});
+				var _examplesByKeyword = this.readFile ({path:_inputs.examplesByKeyword});
+				return {
+					keywords:Uize.Data.Matches.values (
+						Uize.keys (_examplesByKeyword),
+						'value && value.slice (0,4) != "Uize"'
+					).sort (),
+					tools:Uize.map (_examplesByKeyword.tool,'{title:value.title,path:value.path}')
+				};
 			}
 		};
 	}

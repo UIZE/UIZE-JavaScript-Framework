@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.GoogleCodeSitemap Package
+|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.LatestNewsRssFeed Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.GoogleCodeSitemap= module defines a file builder for the sitemap XML file that is used by the Google Code feature.
+		The =UizeSite.Build.FileBuilders.LatestNewsRssFeed= module defines a file builder for the latest news RSS feed page of the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -26,20 +26,32 @@
 */
 
 Uize.module ({
-	name:'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
-	required:'UizeSite.Build.Util',
+	name:'UizeSite.Build.FileBuilders.LatestNewsRssFeed',
 	builder:function () {
 		return {
-			description:'Google Code sitemap',
+			description:'Latest news RSS feed',
 			urlMatcher:function (_urlParts) {
-				return _urlParts.pathname == this.builtUrl ('sitemap-code.xml');
+				return _urlParts.pathname == this.builtUrl ('latest-news.rss');
 			},
 			builderInputs:function (_urlParts) {
-				return {template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst'};
+				return {
+					newsItems:this.memoryUrl ('news.index'),
+					template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst'
+				};
 			},
 			builder:function (_inputs) {
 				return this.readFile ({path:_inputs.template}) ({
-					modules:UizeSite.Build.Util.getJsModules (this.params.sourcePath)
+					items:Uize.map (
+						this.readFile ({path:_inputs.newsItems}).slice (0,50),
+						function (_value) {
+							return {
+								title:_value.title.replace (/^\d{4}-\d{2}-\d{2}\s*-\s*/,''),
+								date:_value.title.slice (0,10),
+								link:'http://www.uize.com/' + _value.path,
+								description:_value.description
+							}
+						}
+					)
 				});
 			}
 		};

@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.GoogleCodeSitemap Package
+|    /    O /   |    MODULE : Uize.Build.FileBuilders.TempJsModules Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.GoogleCodeSitemap= module defines a file builder for the sitemap XML file that is used by the Google Code feature.
+		The =Uize.Build.FileBuilders.TempJsModules= module defines a file builder for regular JavaScript modules in the site temp folder.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -26,21 +26,21 @@
 */
 
 Uize.module ({
-	name:'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
-	required:'UizeSite.Build.Util',
+	name:'Uize.Build.FileBuilders.TempJsModules',
+	required:'Uize.Build.Util',
 	builder:function () {
 		return {
-			description:'Google Code sitemap',
+			description:'Regular JavaScript modules under temp',
 			urlMatcher:function (_urlParts) {
-				return _urlParts.pathname == this.builtUrl ('sitemap-code.xml');
+				var _pathname = _urlParts.pathname;
+				return (
+					_urlParts.fileType == 'js' &&
+					this.isTempUrl (_pathname) &&
+					this.fileExists ({path:this.sourceUrlFromTempUrl (_pathname)})
+				);
 			},
 			builderInputs:function (_urlParts) {
-				return {template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst'};
-			},
-			builder:function (_inputs) {
-				return this.readFile ({path:_inputs.template}) ({
-					modules:UizeSite.Build.Util.getJsModules (this.params.sourcePath)
-				});
+				return {sourceJs:this.sourceUrlFromTempUrl (_urlParts.pathname)};
 			}
 		};
 	}

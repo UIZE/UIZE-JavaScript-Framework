@@ -44,10 +44,11 @@ Uize.module ({
 		/*** General Variables ***/
 			var
 				_fileSystem = Uize.Services.FileSystem.singleton (),
-				_compiledJstFilesByPath = {}
+				_compiledJstFilesByPath = {},
+				_package
 			;
 
-		return {
+		return _package = {
 			/*** Public Static Properties ***/
 				jsModuleExtensionRegExp:/(\.js|\.js\.jst)$/,
 

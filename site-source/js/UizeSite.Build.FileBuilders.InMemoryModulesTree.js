@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.GoogleCodeSitemap Package
+|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.InMemoryModulesTree Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.GoogleCodeSitemap= module defines a file builder for the sitemap XML file that is used by the Google Code feature.
+		The =UizeSite.Build.FileBuilders.InMemoryModulesTree= module defines a file builder for the in-memory modules tree object for the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -26,21 +26,22 @@
 */
 
 Uize.module ({
-	name:'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
-	required:'UizeSite.Build.Util',
+	name:'UizeSite.Build.FileBuilders.InMemoryModulesTree',
+	required:[
+		'Uize.Data.PathsTree',
+		'UizeSite.Build.Util'
+	],
 	builder:function () {
 		return {
-			description:'Google Code sitemap',
+			description:'In-memory modules tree object',
 			urlMatcher:function (_urlParts) {
-				return _urlParts.pathname == this.builtUrl ('sitemap-code.xml');
+				return _urlParts.pathname == this.memoryUrl ('modules-tree');
 			},
-			builderInputs:function (_urlParts) {
-				return {template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst'};
-			},
-			builder:function (_inputs) {
-				return this.readFile ({path:_inputs.template}) ({
-					modules:UizeSite.Build.Util.getJsModules (this.params.sourcePath)
-				});
+			builder:function () {
+				return Uize.Data.PathsTree.fromList (
+					UizeSite.Build.Util.getJsModules (this.params.sourcePath),
+					'.'
+				);
 			}
 		};
 	}

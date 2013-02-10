@@ -202,6 +202,28 @@ Uize.module ({
 						return _this.isMemoryUrl (_path) ? !!_this._objectCache [_path] : _this.fileSystem.fileExists (_params);
 					},
 
+				/*** General Utility Methods ***/
+					processSimpleDoc:function (_title,_simpleDocBuildResult,_simpleDocTemplatePath,_extraTemplateInputs) {
+						var
+							_contentsTreeItems = _simpleDocBuildResult.contentsTreeItems,
+							_contentsTreeItem0 = _contentsTreeItems [0]
+						;
+						return this.readFile ({path:_simpleDocTemplatePath}) (
+							Uize.copyInto (
+								{
+									title:_title,
+									description:
+										(
+											_contentsTreeItem0 &&
+											(_contentsTreeItem0.description || (_contentsTreeItem0.items [0] || {}).description)
+										) || '',
+									body:_simpleDocBuildResult.html
+								},
+								_extraTemplateInputs
+							)
+						);
+					},
+
 				buildFile:function (_params,_callback) {
 					var _this = this;
 					if (_params.filesModified)
