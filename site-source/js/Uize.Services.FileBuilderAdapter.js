@@ -79,8 +79,13 @@ Uize.module ({
 		/*** Utility Functions ***/
 			function _isUnderPath (_url,_whichPath) {return _startsWith (_url,_whichPath + '/')}
 
-			function _transformUrl (_url,_pathToRemove,_pathToPrepend) {
-				return (_pathToPrepend || '') + _url.slice (_pathToRemove.length);
+			function _makeUrlTransformerMethod (_pathTypeToRemove,_pathTypeToPrepend) {
+				_pathTypeToRemove += 'Path';
+				_pathTypeToPrepend += 'Path';
+				return function (_url) {
+					var _params = this.params;
+					return _params [_pathTypeToPrepend] + _url.slice (_params [_pathTypeToRemove].length);
+				};
 			}
 
 			function _generateUrl (_pathPrefix,_path) {
@@ -112,40 +117,18 @@ Uize.module ({
 					isSourceUrl:function (_url) {return _isUnderPath (_url,this.params.sourcePath)},
 
 				/*** URL transformer methods ***/
-					sourceUrlFromBuiltUrl:function (_url) {
-						var _params = this.params;
-						return _transformUrl (_url,_params.builtPath,_params.sourcePath);
-					},
-
-					tempUrlFromBuiltUrl:function (_url) {
-						var _params = this.params;
-						return _transformUrl (_url,_params.builtPath,_params.tempPath);
-					},
-
-					tempUrlFromMemoryUrl:function (_url) {
-						var _params = this.params;
-						return _transformUrl (_url,_params.memoryPath,_params.tempPath);
-					},
-
-					memoryUrlFromBuiltUrl:function (_url) {
-						var _params = this.params;
-						return _transformUrl (_url,_params.builtPath,_params.memoryPath);
-					},
-
-					builtUrlFromMemoryUrl:function (_url) {
-						var _params = this.params;
-						return _transformUrl (_url,_params.memoryPath,_params.builtPath);
-					},
-
-					sourceUrlFromMemoryUrl:function (_url) {
-						var _params = this.params;
-						return _transformUrl (_url,_params.memoryPath,_params.sourcePath);
-					},
-
-					sourceUrlFromTempUrl:function (_url) {
-						var _params = this.params;
-						return _transformUrl (_url,_params.tempPath,_params.sourcePath);
-					},
+					sourceUrlFromBuiltUrl:_makeUrlTransformerMethod ('built','source'),
+					sourceUrlFromTempUrl:_makeUrlTransformerMethod ('temp','source'),
+					sourceUrlFromMemoryUrl:_makeUrlTransformerMethod ('memory','source'),
+					tempUrlFromBuiltUrl:_makeUrlTransformerMethod ('built','temp'),
+					tempUrlFromMemoryUrl:_makeUrlTransformerMethod ('memory','temp'),
+					tempUrlFromSourceUrl:_makeUrlTransformerMethod ('source','temp'),
+					memoryUrlFromBuiltUrl:_makeUrlTransformerMethod ('built','memory'),
+					memoryUrlFromTempUrl:_makeUrlTransformerMethod ('temp','memory'),
+					memoryUrlFromSourceUrl:_makeUrlTransformerMethod ('source','memory'),
+					builtUrlFromTempUrl:_makeUrlTransformerMethod ('temp','built'),
+					builtUrlFromMemoryUrl:_makeUrlTransformerMethod ('memory','built'),
+					builtUrlFromSourceUrl:_makeUrlTransformerMethod ('source','built'),
 
 				/*** URL generator methods ***/
 					builtUrl:function (_path) {return _generateUrl (this.params.builtPath,_path)},
