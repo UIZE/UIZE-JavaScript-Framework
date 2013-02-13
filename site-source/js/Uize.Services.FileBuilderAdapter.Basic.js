@@ -46,8 +46,8 @@ Uize.module ({
 						Uize.Build.FileBuilders.UnprocessedFiles,
 						Uize.Build.FileBuilders.InMemoryCompiledJstTemplates,
 						Uize.Build.FileBuilders.InMemoryParsedSimpleDataFiles,
-						Uize.Build.FileBuilders.BuiltModules,
 						Uize.Build.FileBuilders.BuiltLibraryModules,
+						Uize.Build.FileBuilders.BuiltModules,
 						Uize.Build.FileBuilders.TempJsModules,
 						Uize.Build.FileBuilders.CompiledJstModules
 					);
