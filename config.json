@@ -14,7 +14,7 @@
 					'\thttp://www.uize.com/reference/{moduleName}.html\n' +
 					'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
 				'*/\n',
-			UizeDotCom:
+			UizeSite:
 				'/*\n' +
 					'\tUIZE Web Site\n' +
 					'\n' +
@@ -38,6 +38,9 @@
 			'build.js Uize.Build.RunUnitTests silent=true',
 			'build.js Uize.Build.RunUnitTests useSource=false silent=true'
 		],
+		uizePath:'site-source',
+		moduleFolderPath:'site-source/js',
+		moduleFolderBuiltPath:'site-built/js',
 
 	/*** for the older build process ***/
 		alwaysBuild:false,
@@ -45,8 +48,6 @@
 		rootFolderPath:'site-source',
 		doNotEnter:/\\(css|images|OLD|photos|Uize.*)$/,
 		dryRun:false,
-		moduleFolderPath:'site-source/js',
-		moduleFolderBuiltPath:'site-built/js',
 		sourceFolderName:''
 }
 

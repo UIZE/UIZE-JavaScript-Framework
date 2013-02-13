@@ -7,12 +7,13 @@ Restructure UIZE Web Site to be UIZE Application
 	............................
 	UIZE-JavaScript-Framework
 		uize/
-			.gitignore
 			build.js
 			README
 			js/
 		uize-site/
-			build scripts triggers
+			.gitignore
+			uize-config.json
+			WSH-*.bat (build scripts triggers for Windows Script Host)
 			built/
 			logs/
 			source/

@@ -104,9 +104,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			instanceMethods:{
 				init:function (_params,_callback) {
-					var _this = this;
-
-					_this.registerFileBuilders (
+					this.registerFileBuilders (
 						Uize.Build.FileBuilders.SourceFiles,
 						Uize.Build.FileBuilders.UnprocessedFiles,
 						UizeSite.Build.FileBuilders.Homepage,

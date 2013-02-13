@@ -151,7 +151,12 @@ function _eval (_toEval) {
 					_moduleText = 'Uize.module ({name:\'' + _moduleToLoad + '\'})';
 				} else {
 					var _modulePath =
-						(_useSource ? _env.moduleFolderPath : _env.moduleFolderBuiltPath) + '/' + _moduleToLoad + '.js'
+						(
+							_useSource
+								? (/^Uize(\.|$)/.test (_moduleToLoad) ? env.uizePath + '/js' : _env.moduleFolderPath)
+								: _env.moduleFolderBuiltPath
+						) +
+						'/' + _moduleToLoad + '.js'
 					;
 					if (_fileExists (_modulePath)) {
 						_moduleText = _readFile (_modulePath);
