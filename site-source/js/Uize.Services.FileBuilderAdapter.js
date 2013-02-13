@@ -77,19 +77,44 @@ Uize.module ({
 			;
 
 		/*** Utility Functions ***/
-			function _isUnderPath (_url,_whichPath) {return _startsWith (_url,_whichPath + '/')}
-
-			function _makeUrlTransformerMethod (_pathTypeToRemove,_pathTypeToPrepend) {
-				_pathTypeToRemove += 'Path';
-				_pathTypeToPrepend += 'Path';
-				return function (_url) {
-					var _params = this.params;
-					return _params [_pathTypeToPrepend] + _url.slice (_params [_pathTypeToRemove].length);
-				};
+			function _makeUrlTesterMethod (_whichPath,_pathType) {
+				_pathType += 'Path';
+				return function (_url) {return _startsWith (_url,this.params [_pathType] + '/')};
 			}
 
-			function _generateUrl (_pathPrefix,_path) {
-				return _pathPrefix + (_path && _path.charCodeAt (0) != 47 ? '/' : '') + _path;
+			function _makeUrlTransformerMethod (_pathTypeToRemove,_pathTypeToPrepend) {
+				var _pathTypeToPrependIsSource = _pathTypeToPrepend == 'source';
+				_pathTypeToRemove += 'Path';
+				_pathTypeToPrepend += 'Path';
+
+				return (
+					_pathTypeToPrependIsSource
+						? function (_url) {
+							var
+								_params = this.params,
+								_urlMinusOldPath = _url.slice (_params [_pathTypeToRemove].length)
+							;
+							return (
+								(
+									_urlMinusOldPath.slice (0,8) == '/js/Uize'
+										? _params.uizePath
+										: _params [_pathTypeToPrepend]
+								) +
+								_urlMinusOldPath
+							);
+						}
+						: function (_url) {
+							var _params = this.params;
+							return _params [_pathTypeToPrepend] + _url.slice (_params [_pathTypeToRemove].length);
+						}
+				);
+			}
+
+			function _makeUrlGeneratorMethod (_pathType,_path) {
+				_pathType += 'Path';
+				return function (_path) {
+					return this.params [_pathType] + (_path && _path.charCodeAt (0) != 47 ? '/' : '') + _path;
+				};
 			};
 
 		return _superclass.subclass ({
@@ -111,10 +136,10 @@ Uize.module ({
 				},
 
 				/*** URL tester methods ***/
-					isMemoryUrl:function (_url) {return _isUnderPath (_url,this.params.memoryPath)},
-					isBuiltUrl:function (_url) {return _isUnderPath (_url,this.params.builtPath)},
-					isTempUrl:function (_url) {return _isUnderPath (_url,this.params.tempPath)},
-					isSourceUrl:function (_url) {return _isUnderPath (_url,this.params.sourcePath)},
+					isBuiltUrl:_makeUrlTesterMethod ('built'),
+					isTempUrl:_makeUrlTesterMethod ('temp'),
+					isMemoryUrl:_makeUrlTesterMethod ('memory'),
+					isSourceUrl:_makeUrlTesterMethod ('source'),
 
 				/*** URL transformer methods ***/
 					sourceUrlFromBuiltUrl:_makeUrlTransformerMethod ('built','source'),
@@ -131,10 +156,10 @@ Uize.module ({
 					builtUrlFromSourceUrl:_makeUrlTransformerMethod ('source','built'),
 
 				/*** URL generator methods ***/
-					builtUrl:function (_path) {return _generateUrl (this.params.builtPath,_path)},
-					tempUrl:function (_path) {return _generateUrl (this.params.tempPath,_path)},
-					memoryUrl:function (_path) {return _generateUrl (this.params.memoryPath,_path)},
-					sourceUrl:function (_path) {return _generateUrl (this.params.sourcePath,_path)},
+					builtUrl:_makeUrlGeneratorMethod ('built'),
+					tempUrl:_makeUrlGeneratorMethod ('temp'),
+					memoryUrl:_makeUrlGeneratorMethod ('memory'),
+					sourceUrl:_makeUrlGeneratorMethod ('source'),
 
 				/*** abstractions of various methods of the file system service to support object storage ***/
 					writeFile:function (_params) {

@@ -40,14 +40,15 @@ Uize.module ({
 		return {
 			description:'Regular JavaScript modules under temp',
 			urlMatcher:function (_urlParts) {
+				var _pathname = _urlParts.pathname;
 				return (
 					_urlParts.fileType == 'js' &&
-					this.isTempUrl (_urlParts.pathname) &&
-					this.fileExists ({path:_sourceUrlFromTempUrl (this,_urlParts)})
+					this.isTempUrl (_pathname) &&
+					this.fileExists ({path:this.sourceUrlFromTempUrl (_pathname)})
 				);
 			},
 			builderInputs:function (_urlParts) {
-				return {sourceJs:_sourceUrlFromTempUrl (this,_urlParts)};
+				return {sourceJs:this.sourceUrlFromTempUrl (_urlParts.pathname)};
 			}
 		};
 	}
