@@ -77,7 +77,7 @@ Uize.module ({
 			;
 
 		/*** Utility Functions ***/
-			function _makeUrlTesterMethod (_whichPath,_pathType) {
+			function _makeUrlTesterMethod (_pathType) {
 				_pathType += 'Path';
 				return function (_url) {return _startsWith (_url,this.params [_pathType] + '/')};
 			}
@@ -110,7 +110,7 @@ Uize.module ({
 				);
 			}
 
-			function _makeUrlGeneratorMethod (_pathType,_path) {
+			function _makeUrlGeneratorMethod (_pathType) {
 				_pathType += 'Path';
 				return function (_path) {
 					return this.params [_pathType] + (_path && _path.charCodeAt (0) != 47 ? '/' : '') + _path;
