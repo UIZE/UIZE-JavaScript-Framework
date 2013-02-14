@@ -22,7 +22,7 @@
 	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,
 	deployConfigPath:'deploy.config.json',
 	buildSequence:[
-		'UizeSite.Build.Files.StaticFiles',
+		'Uize.Build.Files.UnprocessedFiles',
 		'UizeSite.Build.Files.JsModules'
 	],
 	testSequence:[

@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.Files.StaticFiles Package
+|    /    O /   |    MODULE : Uize.Build.Files.UnprocessedFiles Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -18,15 +18,15 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.Files.StaticFiles= package provides a method to recurse a folder structure and build static pages from source files that are not handled by other build processes (such as static *.html* pages, *.css* files, *.gif*, *jpg*, and *.png* image files, etc.).
+		The =Uize.Build.Files.UnprocessedFiles= package provides a method to recurse the source folder for a site and copy unprocessed files (static *.html* pages, static *.css* files, *.gif*, *jpg*, and *.png* image files, etc.) into the built folder.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		The =UizeSite.Build.Files.StaticFiles= module is designed specifically to run in the context of Windows Script Host.
+		The =Uize.Build.Files.UnprocessedFiles= module is designed specifically to run in the context of Windows Script Host.
 */
 
 Uize.module ({
-	name:'UizeSite.Build.Files.StaticFiles',
+	name:'Uize.Build.Files.UnprocessedFiles',
 	builder:function (_superclass) {
 		'use strict';
 
