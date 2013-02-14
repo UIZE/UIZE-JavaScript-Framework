@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.RunUnitTests
+wscript ../build.js Uize.Build.RunUnitTests
 
