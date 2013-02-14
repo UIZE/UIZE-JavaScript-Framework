@@ -25,22 +25,44 @@
 
 Uize.module ({
 	name:'Uize.Build.Files.JsModules',
-	required:'Uize.Build.Util',
+	required:[
+		'Uize.Build.Util',
+		'Uize.String',
+		'Uize.Url'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
-					var _jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp;
+					var
+						_sourcePath = _params.sourcePath,
+						_uizePath = _params.uizePath,
+						_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
+					;
 					this.addFiles (
 						this.fileSystem.getFiles ({
-							path:_params.sourcePath,
+							path:_sourcePath,
 							recursive:true,
 							pathMatcher:_jsModuleExtensionRegExp,
 							pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
 						})
 					);
+					if (_sourcePath != _uizePath)
+						this.addFiles (
+							this.fileSystem.getFiles ({
+								path:_uizePath + '/js',
+								recursive:true,
+								pathMatcher:function (_path) {
+									return _jsModuleExtensionRegExp.test (_path) && Uize.String.startsWith (_path,'Uize.');
+								},
+								pathTransformer:function (_path) {
+									return 'js/' + _path.replace (_jsModuleExtensionRegExp,'.js');
+								}
+							})
+						)
+					;
 				}
 			}
 		});
