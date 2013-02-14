@@ -158,7 +158,6 @@ function _eval (_toEval) {
 						) +
 						'/' + _moduleToLoad + '.js'
 					;
-					console.log ('HERE: ' + _modulePath);
 					if (_fileExists (_modulePath)) {
 						_moduleText = _readFile (_modulePath);
 					} else if (_fileExists (_modulePath + '.jst')) {
