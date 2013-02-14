@@ -139,7 +139,7 @@ function _eval (_toEval) {
 			}
 
 		/*** load build environment properties ***/
-			var _env = (function () {return this}) ().env = eval ('(' + _readFile ('config.json') + ')');
+			var _env = (function () {return this}) ().env = eval ('(' + _readFile ('uize-config.json') + ')');
 			if (_env.staleBefore == 'now')
 				_env.staleBefore = +new Date
 			;
@@ -158,6 +158,7 @@ function _eval (_toEval) {
 						) +
 						'/' + _moduleToLoad + '.js'
 					;
+					console.log ('HERE: ' + _modulePath);
 					if (_fileExists (_modulePath)) {
 						_moduleText = _readFile (_modulePath);
 					} else if (_fileExists (_modulePath + '.jst')) {

@@ -1,0 +1,36 @@
+{
+	servicesSetup:'SampleSite.Build.ServicesSetup',
+	builtPath:'built',
+	tempPath:'temp',
+	memoryPath:'memory',
+	sourcePath:'source',
+	isDev:'false',
+	scrunchedHeadComments:{
+		Uize:
+			'/*\n' +
+				'\tUIZE JAVASCRIPT FRAMEWORK\n' +
+				'\n' +
+				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
+				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
+			'*/\n',
+			SampleSite:
+				'/*\n' +
+					'\tSample Web Site\n' +
+				'*/\n'
+	},
+	staleBefore:'now',
+	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,
+	deployConfigPath:'deploy.config.json',
+	buildSequence:[
+		'UizeSite.Build.Files.StaticFiles',
+		'UizeSite.Build.Files.JsModules'
+	],
+	testSequence:[
+		'build.js Uize.Build.RunUnitTests silent=true',
+		'build.js Uize.Build.RunUnitTests useSource=false silent=true'
+	],
+	uizePath:'../site-source',
+	moduleFolderPath:'source/js',
+	moduleFolderBuiltPath:'built/js'
+}
+
