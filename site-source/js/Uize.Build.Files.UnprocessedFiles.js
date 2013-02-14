@@ -33,13 +33,28 @@ Uize.module ({
 		return _superclass.subclass ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
+					var
+						_sourcePath = _params.sourcePath,
+						_uizePath = _params.uizePath,
+						_staticFilePathMatcher = _params.staticFilePathMatcher
+					;
 					this.addFiles (
 						this.fileSystem.getFiles ({
 							path:_params.sourcePath,
 							recursive:true,
-							pathMatcher:_params.staticFilePathMatcher
+							pathMatcher:_staticFilePathMatcher
 						})
 					);
+					if (_sourcePath != _uizePath)
+						this.addFiles (
+							this.fileSystem.getFiles ({
+								path:_uizePath + '/js',
+								recursive:true,
+								pathMatcher:_staticFilePathMatcher,
+								pathTransformer:'"js/" + value'
+							})
+						)
+					;
 				}
 			}
 		});
