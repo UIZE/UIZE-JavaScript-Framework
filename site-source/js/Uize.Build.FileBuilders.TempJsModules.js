@@ -29,14 +29,6 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.TempJsModules',
 	required:'Uize.Build.Util',
 	builder:function () {
-		function _sourceUrlFromTempUrl (_this,_urlParts) {
-			return (
-				_urlParts.file.slice (0,5) == 'Uize.'
-					? _this.params.uizePath + '/js/' + _urlParts.file
-					: _this.sourceUrlFromTempUrl (_urlParts.pathname)
-			);
-		}
-
 		return {
 			description:'Regular JavaScript modules under temp',
 			urlMatcher:function (_urlParts) {
