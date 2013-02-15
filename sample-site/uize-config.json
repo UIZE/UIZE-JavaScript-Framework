@@ -20,10 +20,9 @@
 	},
 	staleBefore:'now',
 	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,
-	deployConfigPath:'deploy.config.json',
 	buildSequence:[
 		'Uize.Build.Files.UnprocessedFiles',
-		'UizeSite.Build.Files.JsModules'
+		'Uize.Build.Files.JsModules'
 	],
 	testSequence:[
 		'build.js Uize.Build.RunUnitTests silent=true',
