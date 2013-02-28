@@ -34,7 +34,7 @@ Uize.module ({
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
 				return (
-					this.isBuiltUrl (_urlParts.pathname) &&
+					this.isBuiltUrl (_pathname) &&
 					this.fileExists ({path:this.sourceUrlFromBuiltUrl (_pathname) + '.jst'}) &&
 					this.fileExists ({path:this.sourceUrlFromBuiltUrl (_pathname) + '.simpledata'})
 				);
