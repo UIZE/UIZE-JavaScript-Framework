@@ -117,6 +117,11 @@ Uize.module ({
 				};
 			};
 
+			function _makeSubPathExtractorMethod (_pathType) {
+				_pathType += 'Path';
+				return function (_url) {return _url.slice (this.params [_pathType].length + 1)};
+			}
+
 		return _superclass.subclass ({
 			alphastructor:function () {
 				var _this = this;
@@ -160,6 +165,12 @@ Uize.module ({
 					tempUrl:_makeUrlGeneratorMethod ('temp'),
 					memoryUrl:_makeUrlGeneratorMethod ('memory'),
 					sourceUrl:_makeUrlGeneratorMethod ('source'),
+
+				/*** sub-path extractor methods ***/
+					pathUnderBuiltUrl:_makeSubPathExtractorMethod ('built'),
+					pathUnderTempUrl:_makeSubPathExtractorMethod ('temp'),
+					pathUnderMemoryUrl:_makeSubPathExtractorMethod ('memory'),
+					pathUnderSourceUrl:_makeSubPathExtractorMethod ('source'),
 
 				/*** abstractions of various methods of the file system service to support object storage ***/
 					writeFile:function (_params) {
