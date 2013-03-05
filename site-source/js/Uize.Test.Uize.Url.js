@@ -1255,6 +1255,124 @@ Uize.module ({
 							}
 						]
 					]],
+					['Uize.Url.toRelative',[
+						['Test that relativizing an empty URL against an empty base URL produces an empty string',
+							['',''],
+							''
+						],
+						['Test that a URL to relativize that is already a relative URL is returned as is',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'../foo/bar.html'
+							],
+							'../foo/bar.html'
+						],
+						['Test that a URL to relativize that is a root relative URL is returned as is',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'/foo/bar.html'
+							],
+							'/foo/bar.html'
+						],
+						['Test that, if the URL to relativize has a domain that is different to the domain of the base URL, then the URL to relativize is returned as is, since no relative URL can be created against the base',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html',
+							],
+							'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html'
+						],
+						['Test that, if the URL to relativize has a domain and the base URL does not, then the URL to relativize is returned as is, since no relative URL can be created against the base',
+							[
+								'folder1/folder2/folder3/',
+								'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html',
+							],
+							'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a file several directories back, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'http://www.domain.com/folder1/foo/bar.html'
+							],
+							'../../foo/bar.html'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a folder several directories back, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'http://www.domain.com/folder1/foo/'
+							],
+							'../../foo/'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a file directly off the root, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'http://www.domain.com/bar.html'
+							],
+							'../../../bar.html'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a folder directly off the root, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'http://www.domain.com/bar/'
+							],
+							'../../../bar/'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a file several directories deeper, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'http://www.domain.com/folder1/folder2/folder3/folder4/folder5/bar.html',
+							],
+							'folder4/folder5/bar.html'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a deeper directory, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'http://www.domain.com/folder1/folder2/folder3/folder4/folder5/',
+							],
+							'folder4/folder5/'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a folder several directories deeper on the same path as the base URL, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/',
+								'http://www.domain.com/folder1/',
+							],
+							'../../'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a folder several directories deeper and the base URL is to a file, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/foo.html',
+								'http://www.domain.com/folder1/folder2/folder3/folder4/folder5/',
+							],
+							'folder4/folder5/'
+						],
+						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a file several directories back and the base URL is to a file, then the correct relative URL is created',
+							[
+								'http://www.domain.com/folder1/folder2/folder3/foo.html',
+								'http://www.domain.com/folder1/bar.html',
+							],
+							'../../bar.html'
+						],
+						['',
+							[
+								'foo/bar/baz/qux/',
+								'foo/bar/'
+							],
+							'../../'
+						],
+						['',
+							[
+								'foo/bar/',
+								'foo/bar/baz/qux/'
+							],
+							'baz/qux/'
+						],
+						['',
+							[
+								'foo/bar/',
+								'baz/qux/'
+							],
+							'../../baz/qux/'
+						]
+					]],
 					['Uize.Url.toAbsolute',[
 						['Test that absolutizing an empty URL against an empty base URL produces an empty string',
 							['',''],

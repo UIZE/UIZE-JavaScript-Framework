@@ -62,7 +62,7 @@ Uize.module ({
 			}
 
 		/*** Public Static Methods ***/
-			_package.from = function (_urlStr) {
+			var _from = _package.from = function (_urlStr) {
 				var _urlSegmentsMatch =
 					_urlStr &&
 					_urlStr.match (
@@ -496,6 +496,57 @@ Uize.module ({
 				*/
 			};
 
+			_package.toRelative = function (_baseUrl,_urlToRelativize) {
+				if (_urlToRelativize.charAt (0) == '/' || _urlToRelativize.slice (0,3) == '../') {
+					/* NOTE:
+						If the URL to relativize is already a relative URL, then just return it.
+					*/
+					return _urlToRelativize;
+				} else {
+					/* NOTE:
+						If the URL to relativize has a domain and it is different to the base URL's domain (or the base URL doesn't have a domain), then a URL relative to the base URL cannot be created, so just return the URL to relativize.
+					*/
+					var _urlToRelativizeParts = _from (_urlToRelativize);
+					if (
+						_urlToRelativizeParts.fullDomain &&
+						_urlToRelativizeParts.fullDomain != _from (_baseUrl).fullDomain
+					) {
+						return _urlToRelativize;
+					} else {
+						var
+							_result = '',
+							_commonStr = _baseUrl.slice (0,_baseUrl.lastIndexOf ('/') + 1),
+							_matchFound = false,
+							_slashPos
+						;
+						while (!_matchFound) {
+							if (!(_matchFound = _urlToRelativize.slice (0,_commonStr.length) == _commonStr)) {
+								_matchFound = (_slashPos = _commonStr.lastIndexOf ('/',_commonStr.length - 2)) < 0;
+								_result += '../';
+								_commonStr = _commonStr.slice (0,_slashPos + 1);
+							}
+						}
+						return _result + _urlToRelativize.slice (_commonStr.length);
+					}
+				}
+				/*?
+					Static Methods
+						Uize.Url.toRelative
+							Returns a string, representing a relative URL from the specified base URL to the specified absolute URL.
+
+							SYNTAX
+							.....................................................................
+							relativeUrlSTR = Uize.Url.toRelative (baseUrlSTR,urlToRelativizeSTR);
+							.....................................................................
+
+							Examples
+								.
+
+							NOTES
+							- see the related =Uize.Url.toAbsolute= static method
+				*/
+			};
+
 			_package.toAbsolute = function (_baseUrl,_urlToAbsolutize) {
 				var _baseUrlPieces = _urlToAbsolutize ? _package.from (_urlToAbsolutize) : _sacredEmptyObject;
 				_baseUrlPieces.fullDomain ? (_urlToAbsolutize = '') : (_baseUrlPieces = _package.from (_baseUrl));
@@ -514,9 +565,9 @@ Uize.module ({
 							Returns a string, representing the specified relative URL resolved against the specified base URL.
 
 							SYNTAX
-							.................................................................
-							absoluteUrlSTR = Uize.Url.toAbsolute (baseUrlSTR,relativeUrlSTR);
-							.................................................................
+							.....................................................................
+							absoluteUrlSTR = Uize.Url.toAbsolute (baseUrlSTR,urlToAbsolutizeSTR);
+							.....................................................................
 
 							EXAMPLE 1
 							.........................................................
@@ -541,6 +592,9 @@ Uize.module ({
 							..........................................................
 
 							The above statement would produce the value ='http://www.uize.com'=.
+
+							NOTES
+							- see the related =Uize.Url.toAbsolute= static method
 				*/
 			};
 
