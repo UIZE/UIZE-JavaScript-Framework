@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Build.FileBuilders.SimpleDataPages= module defines a file builder for HTML pages derived from SimpleData (=.simple=) files.
+		The =Uize.Build.FileBuilders.SimpleDataPages= module defines a file builder for HTML pages derived from SimpleData (=.simpledata=) files.
 		
 		*DEVELOPERS:* `Chris van Rensburg`
 
