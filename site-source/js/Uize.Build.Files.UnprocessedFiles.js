@@ -21,8 +21,6 @@
 		The =Uize.Build.Files.UnprocessedFiles= package provides a method to recurse the source folder for a site and copy unprocessed files (static *.html* pages, static *.css* files, *.gif*, *jpg*, and *.png* image files, etc.) into the built folder.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		The =Uize.Build.Files.UnprocessedFiles= module is designed specifically to run in the context of Windows Script Host.
 */
 
 Uize.module ({
