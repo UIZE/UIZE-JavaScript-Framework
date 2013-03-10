@@ -235,21 +235,34 @@ constructed Property
 Improve Calling of Superclass Methods
 	Come up with a new and more concise semantics for calling methods on superclass.
 
+	LONG
+	..........................................
+	_superclass.prototype.wireUi.call (_this);
+	..........................................
+
 	POSSIBILITIES
 	................................................................................
 	_this.doIn (_superclass,'wireUi');
-
-	_class.doSuper (_this,'wireUi');
-	_class.useSuper (_this,'wireUi');
-	_class.callSuper (_this,'wireUi');
+	_this.onSuper (_superclass,'wireUi');
+	_this.doSuper (_superclass,'wireUi');
+	_this.useSuper (_superclass,'wireUi');
+	_this.callSuper (_superclass,'wireUi');
 
 	_superclass.on (_this,'wireUi');
 	_superclass.my (_this,'wireUi');
-	_superclass.doOn (_this,'wireUi');
+	_superclass.doOn (_this,'wireUi');  // not too bad
 	_superclass.doMy (_this,'wireUi');
 	_superclass.useMy (_this,'wireUi');
 	_superclass.proto (_this,'wireUi');
+	_superclass.callOn (_this,'wireUi');
 	_superclass.useMine (_this,'wireUi');
+	_superclass.onThis (_this,'wireUi');
+	_superclass.onInstance (_this,'wireUi');
+	_superclass.callInstance (_this,'wireUi');
+
+	_class.doSuper (_this,'wireUi');  // not too bad, but you don't always have a variable reference to the class
+	_class.useSuper (_this,'wireUi');
+	_class.callSuper (_this,'wireUi');
 	................................................................................
 
 
