@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.Deploy Namespace
+|    /    O /   |    MODULE : Uize.Build.Deploy Namespace
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2008-2013 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.Deploy= package provides a method for deploying the built UIZE Web site to the s production environment.
+		The =Uize.Build.Deploy= package provides a method for deploying the built UIZE Web site to the s production environment.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'UizeSite.Build.Deploy',
+	name:'Uize.Build.Deploy',
 	required:[
 		'Uize.Build.Wsh',
 		'Uize.String',
@@ -39,7 +39,11 @@ Uize.module ({
 				var
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_deployConfig = Uize.Json.from (_fileSystem.readFile ({path:_params.deployConfigPath})),
-					_uizeSite = _deployConfig.site
+					_site = _deployConfig.site,
+					_builtPath = _params.builtPath,
+					_tempPath = _params.tempPath,
+					_builtZipFilename = 'built.zip',
+					_sshCommandsFilename = 'ssh-commands.js'
 				;
 
 				/*** Utility Functions ***/
@@ -63,14 +67,14 @@ Uize.module ({
 						]);
 					}
 
-					var _sshCommandsFilename = 'ssh-commands.js';
+					var _sshCommandsPath = _tempPath + '/' + _sshCommandsFilename;
 					function _ssh (_sshCommands) {
 						_fileSystem.writeFile ({
-							path:_sshCommandsFilename,
+							path:_sshCommandsPath,
 							contents:Uize.isArray (_sshCommands) ? _sshCommands.join ('\r\n') : _sshCommands
 						});
-						Uize.Build.Wsh.execute ('"' + _deployConfig.appPaths.SecureCRT + '" /SCRIPT "' + _sshCommandsFilename + '"');
-						_fileSystem.deleteFile ({path:_sshCommandsFilename});
+						Uize.Build.Wsh.execute ('"' + _deployConfig.appPaths.SecureCRT + '" /SCRIPT "' + _sshCommandsPath + '"');
+						_fileSystem.deleteFile ({path:_sshCommandsPath});
 					}
 
 					function _sshActions (_siteInfo,_actions) {
@@ -93,33 +97,33 @@ Uize.module ({
 
 				/*** do the deploy ***/
 					/*** delete old .zip archive ***/
-						_fileSystem.deleteFile ({path:'temp/uize-site-built.zip'});
+						_fileSystem.deleteFile ({path:_tempPath + '/' + _builtZipFilename});
 
-					/*** create uize-site-built.zip, and create dated copy in archives ***/
+					/*** create built zip archive ***/
 						Uize.Build.Wsh.execute (
-							'"' + _deployConfig.appPaths ['7-Zip'] + '" a temp/uize-site-built.zip site-built -r'
+							'"' + _deployConfig.appPaths ['7-Zip'] + '" a ' + _tempPath + '/' + _builtZipFilename + ' ' + _builtPath + ' -r'
 						);
 
 					/*** FTP zip archive to Web site ***/
 						_ftpActions (
-							_uizeSite,
+							_site,
 							[
 								'binary',
-								'put temp/uize-site-built.zip uize-site-built.zip'
+								'put ' + _tempPath + '/' + _builtZipFilename + ' ' + _builtZipFilename
 							]
 						);
 
-					/*** using SSH, extract uize-site-built.zip archive and then remove it ***/
+					/*** using SSH, extract built zip archive and then remove it ***/
 						_sshActions (
-							_uizeSite,
+							_site,
 							[
-								'unzip --L uize-site-built.zip',
-								'rm uize-site-built.zip',
+								'unzip --L ' + _builtZipFilename,
+								'rm ' + _builtZipFilename,
 								'rm *.* .htaccess',
-								'rm -r appendixes css examples explainers images javascript-reference js news reference tests todo widgets widgetstogo',
-								'mv site-built/* ~',
-								'mv site-built/.htaccess ~/.htaccess',
-								'rm -rf site-built'
+								'rm -r ' + _fileSystem.getFolders ({path:_builtPath}).join (' '),
+								'mv ' + _builtPath + '/* ~',
+								'mv ' + _builtPath + '/.htaccess ~/.htaccess',
+								'rm -rf ' + _builtPath
 							]
 						);
 
