@@ -23,6 +23,11 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
+/* TODO:
+	- add support for removing CSS for a module (this will be tricky, given the packing that gets done for IE)
+	- add support for CSS being in the document already (such as when server renders HTML for a page)
+*/
+
 Uize.module ({
 	name:'Uize.Node.CssModule',
 	superclass:'Uize.Class',
@@ -30,22 +35,15 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		Uize.forEach (
-			29,
-			function () {
-				var _styleNode = document.createElement ('style');
-				_styleNode.type = 'text/css';
-				_styleNode.textContent = '.blah {font-size:12px;}';
-				_styleNode.id = 'UIZE_' + Uize.getGuid ();
-				document.head.appendChild (_styleNode);
-			}
-		);
-
 		/*** General Variables ***/
 			var
 				_rulesPerStylesheet =
 					Uize.Node.isIe
-						? navigator.appVersion.match (/MSIE (\d+(\.\d*)?)/) [1] < 10 ? 4095 : 65534 // http://blogs.msdn.com/b/ieinternals/archive/2011/05/14/internet-explorer-stylesheet-rule-selector-import-sheet-limit-maximum.aspx
+						? navigator.appVersion.match (/MSIE (\d+(\.\d*)?)/) [1] < 10 ? 4095 : 65534
+							/*
+								http://blogs.msdn.com/b/ieinternals/archive/2011/05/14/internet-explorer-stylesheet-rule-selector-import-sheet-limit-maximum.aspx
+								http://stackoverflow.com/questions/9906794/internet-explorers-css-rules-limits
+							*/
 						: Infinity
 			;
 
@@ -82,7 +80,7 @@ Uize.module ({
 								var
 									_uizeStyleSheetNo,
 									_useFirstEmptyUizeStyleSheetAtTail = function () {
-										/*** find last UIZE stylesheet with some rules ***/
+										/*** find last non-empty UIZE stylesheet ***/
 											for (
 												_uizeStyleSheetNo = _uizeStyleSheetsLength;
 												--_uizeStyleSheetNo >= 0 && !_uizeStyleSheets [_uizeStyleSheetNo].cssRules.length;
@@ -97,7 +95,7 @@ Uize.module ({
 								;
 
 								if (!_useFirstEmptyUizeStyleSheetAtTail ()) {
-									/*** find first UIZE stylesheet not at full rules capacity ***/
+									/*** find first non-full UIZE stylesheet ***/
 										for (
 											var _nonFullUizeStyleSheetNo = -1;
 											++_nonFullUizeStyleSheetNo < _uizeStyleSheetsLength &&
@@ -110,7 +108,7 @@ Uize.module ({
 											_styleRulesToPackLength = 0
 										;
 
-										/*** gather all rules from remaining UIZE stylesheets ***/
+										/*** gather rules from all non-full UIZE stylesheets ***/
 											for (
 												_uizeStyleSheetNo = _nonFullUizeStyleSheetNo - 1;
 												++_uizeStyleSheetNo < _uizeStyleSheetsLength;
@@ -127,7 +125,7 @@ Uize.module ({
 												;
 											}
 
-										/*** efficiently pack rules across non-full UIZE stylesheets ***/
+										/*** efficiently pack rules from all non-full UIZE stylesheets ***/
 											for (
 												_uizeStyleSheetNo = _nonFullUizeStyleSheetNo - 1;
 												++_uizeStyleSheetNo < _uizeStyleSheetsLength;
