@@ -207,11 +207,7 @@ Uize.module ({
 							_this.addChild (
 								'option' + _valueNo,
 								_optionWidgetClass,
-								Uize.copyInto (
-									{},
-									_optionWidgetProperties,
-									_this.getOptionProperties(_valueNo, _valueObject)
-								)
+								Uize.copy (_optionWidgetProperties,_this.getOptionProperties(_valueNo, _valueObject))
 							)
 								.wire (
 									'*',

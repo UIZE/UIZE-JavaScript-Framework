@@ -104,8 +104,7 @@ Uize.module({
 					),
 					_digitsLookup = _makeCharLookup ('0123456789',_NUMBER),
 					_numberCharsLookup = Uize.copyInto (_digitsLookup,{x:_NUMBER}),
-					_tokenStarterCharsLookup = Uize.copyInto (
-						{},
+					_tokenStarterCharsLookup = Uize.copy (
 						_linebreakCharsLookup,
 						_operatorCharsLookup,
 						_delimiterCharsLookup,
@@ -113,7 +112,7 @@ Uize.module({
 						_numberCharsLookup,
 						_wordStarterCharsLookup
 					),
-					_wordCharsLookup = Uize.copyInto ({},_wordStarterCharsLookup,_numberCharsLookup),
+					_wordCharsLookup = Uize.copy (_wordStarterCharsLookup,_numberCharsLookup),
 					_closeParenOrSquareBracketMap = _makeCharLookup (')]'),
 
 				_identifierChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split (''),

@@ -234,7 +234,7 @@ Uize.module ({
 					: _this.loadHtml (
 						_htmlParams,
 						typeof _loaderDirectives == 'object' && _loaderDirectives
-							? Uize.copyInto ({},_loaderDirectives,_loadHtmlCallbackObject)
+							? Uize.copy (_loaderDirectives,_loadHtmlCallbackObject)
 							: _loadHtmlCallbackObject
 					)
 				;
@@ -379,7 +379,7 @@ Uize.module ({
 			_classPrototype.useDialog = function (_params) {
 				var
 					_this = this,
-					_dialogWidgetProperties = Uize.copyInto ({},_this._dialogProperties,_params.widgetProperties),
+					_dialogWidgetProperties = Uize.copy (_this._dialogProperties,_params.widgetProperties),
 					_dialogWidgetParent = _dialogWidgetProperties.parent || _this,
 					_dialogWidgetName = _dialogWidgetProperties.name,
 					_dialogWidget = _dialogWidgetParent.children [_dialogWidgetName],

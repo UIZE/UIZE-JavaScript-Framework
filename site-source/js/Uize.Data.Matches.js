@@ -314,7 +314,7 @@ Uize.module ({
 				;
 				if (!_targetIsArray) {
 					if (_target == _source)
-						_source = _Uize.copyInto ({},_target)
+						_source = _Uize.copy (_target)
 					;
 					_Uize.emptyOut (_target);
 				}

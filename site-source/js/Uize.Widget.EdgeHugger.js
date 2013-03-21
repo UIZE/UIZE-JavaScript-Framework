@@ -53,7 +53,7 @@ Uize.module ({
 					_this = this,
 					_edge = _this._edge,
 					_dimName = _edge == 'left' || _edge == 'right' ? 'width' : 'height',
-					_fadeProperties = Uize.copyInto ({},_this._fadeProperties,_suppressFade ? {duration:0} : null),
+					_fadeProperties = Uize.copy (_this._fadeProperties,_suppressFade ? {duration:0} : null),
 					_maximized = _this._maximized,
 					_lastMaximized = _this._lastMaximized
 				;

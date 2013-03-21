@@ -572,8 +572,7 @@ Uize.module ({
 							(
 								Uize.isFunction (curveObject)
 									? curveObject
-									: Uize.copyInto (
-										{},
+									: Uize.copy (
 										curveObject,
 										curveObject.width ? {left:curveObject.width} : null,
 										curveObject.height ? {top:curveObject.height} : null

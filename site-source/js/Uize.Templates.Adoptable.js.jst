@@ -22,7 +22,7 @@
 <%
 	}
 	var
-		_state = Uize.copyInto ({},_input),
+		_state = Uize.copy (_input),
 		_html = _state.html,
 		_idPrefix = 'page_' + _input.name
 	;
@@ -34,7 +34,7 @@
 		delete _state.html;
 		_state.built = true;
 %>
-<%= _html (Uize.copyInto ({},_state,{idPrefix:_idPrefix})) %>
+<%= _html (Uize.copy (_state,{idPrefix:_idPrefix})) %>
 <%
 	}
 %>

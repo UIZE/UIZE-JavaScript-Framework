@@ -562,10 +562,10 @@ Uize.module ({
 					linebreakChars:''
 				},
 				_encodingOptionsPresets = _package.encodingOptionsPresets = {
-					mini:Uize.copyInto ({},_nice,_mininess),
-					miniStrict:Uize.copyInto ({},_nice,_mininess,_strictness),
+					mini:Uize.copy (_nice,_mininess),
+					miniStrict:Uize.copy (_nice,_mininess,_strictness),
 					nice:_nice,
-					strict:Uize.copyInto ({},_nice,_strictness)
+					strict:Uize.copy (_nice,_strictness)
 					/*?
 						Static Properties
 							Uize.Json.encodingOptionsPresets

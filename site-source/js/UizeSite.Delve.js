@@ -657,7 +657,7 @@ Uize.module ({
 				var
 					_this = this,
 					_nodeCache = _this._getWidgetNodeCache (_widget),
-					_allNodesMap = Uize.copyInto ({},_nodeCache),
+					_allNodesMap = Uize.copy (_nodeCache),
 					_idPrefix = _widget.get ('idPrefix'),
 					_nodeIdPrefix = _idPrefix + '-',
 					_nodeIdPrefixLength = _nodeIdPrefix.length,

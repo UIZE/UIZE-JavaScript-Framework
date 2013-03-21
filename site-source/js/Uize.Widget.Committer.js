@@ -223,7 +223,7 @@ Uize.module ({
 				var _this = this;
 				_this._clearAutoCommitTimeout ();
 				if (_this._readyToCommit) {
-					_this.set ({_committedValues:Uize.copyInto ({},_this._uncommittedValues)});
+					_this.set ({_committedValues:Uize.copy (_this._uncommittedValues)});
 					_this.fire ('Commit');
 					/*?
 						Instance Events

@@ -62,6 +62,7 @@
 					The =Uize= module provides a number of static methods for performing basic data manipulation operations that are commonly encountered.
 
 					- =Uize.clone= - clones a value, and creates deep clones of object or array type values
+					- =Uize.copy= - copies the values of properties from one or more source objects into a fresh object
 					- =Uize.copyInto= - copies the values of properties from one or more source objects into a target object
 					- =Uize.emptyOut= - empties out the contents of an object or array
 					- =Uize.findRecord= - finds the first record in a records array that matches specified criteria
@@ -333,23 +334,26 @@ Uize = (function () {
 			);
 		}
 
-		function _performOperationWithMultipleSources (_targetAndSources,_operation) {
-			var _targetObject = _targetAndSources [0];
-			if (_canExtend (_targetObject)) {
+		function _performOperationWithMultipleSources (_sources,_operation,_target) {
+			var _targetIsWithSources = !_target;
+			if (_targetIsWithSources)
+				_target = _sources [0]
+			;
+			if (!_targetIsWithSources || _canExtend (_target)) {
 				var
-					_sourceObject = _targetAndSources [1],
-					_targetAndSourcesLength = _targetAndSources.length
+					_source = _sources [+_targetIsWithSources],
+					_sourcesLength = _sources.length
 				;
-				_canExtend (_sourceObject) && _operation (_targetObject,_sourceObject);
-				if (_targetAndSourcesLength > 2) {
-					for (var _sourceObjectNo = 1; ++_sourceObjectNo < _targetAndSourcesLength;)
-						_canExtend (_sourceObject = _targetAndSources [_sourceObjectNo]) &&
-							_operation (_targetObject,_sourceObject)
+				_canExtend (_source) && _operation (_target,_source);
+				if (_sourcesLength > _targetIsWithSources + 1) {
+					for (var _sourceNo = +_targetIsWithSources; ++_sourceNo < _sourcesLength;)
+						_canExtend (_source = _sources [_sourceNo]) &&
+							_operation (_target,_source)
 						;
 					;
 				}
 			}
-			return _targetObject;
+			return _target;
 		}
 
 	/*** Public Static Methods ***/
@@ -628,29 +632,28 @@ Uize = (function () {
 			*/
 		};
 
-		var _copyInto = _package.copyInto = function () {
-			return _performOperationWithMultipleSources (
-				arguments,
-				function (_targetObject,_sourceObject) {
-					for (var _propertyName in _sourceObject)
-						_targetObject [_propertyName] = _sourceObject [_propertyName]
-					;
-				}
-			);
+		function _copySourceIntoTarget (_target,_source) {
+			for (var _property in _source)
+				_target [_property] = _source [_property]
+			;
+		}
+
+		_package.copyInto = function () {
+			return _performOperationWithMultipleSources (arguments,_copySourceIntoTarget);
 			/*?
 				Static Methods
 					Uize.copyInto
 						Lets you copy properties into a target object from a source object.
 
 						SYNTAX
-						..............................................................
-						referenceToTargetOBJ = MyClass.copyInto (targetOBJ,sourceOBJ);
-						..............................................................
+						...........................................................
+						referenceToTargetOBJ = Uize.copyInto (targetOBJ,sourceOBJ);
+						...........................................................
 
 						After the property values from =sourceOBJ= have been copied into =targetOBJ=, a reference to =targetOBJ= is returned as the result of the method. This behavior is provided as a convenience, so that this method can be used in larger expressions where the copy is done in place and then the modified target object can be used further (similar in spirit to the in-place increment operator).
 
 						EXAMPLE
-						.............................................
+						..........................................
 						var
 							targetObject = {
 								foo:'How unoriginal!'
@@ -660,25 +663,25 @@ Uize = (function () {
 							}
 						;
 
-						MyClass.copyInto (targetObject,sourceObject);
-						.............................................
+						Uize.copyInto (targetObject,sourceObject);
+						..........................................
 
 						In the above example, after the code has been executed, =targetObject= will have both =foo= and =bar= properties while =sourceObject= will remain unchanged.
 
 						Of course, the JavaScript language allows in-place creation of anonymous objects using what's termed the "literal syntax", so you could also add properties to an object as shown in the example below...
 
-						................................................
+						.............................................
 						var targetObject = {
 							foo:'How unoriginal!'
 						};
 
-						MyClass.copyInto (targetObject,{bar:'Indeed!'});
-						................................................
+						Uize.copyInto (targetObject,{bar:'Indeed!'});
+						.............................................
 
 						VARIATION
-						..............................................................................
-						referenceToTargetOBJ = MyClass.copyInto (targetOBJ,source1OBJ,source2OBJ,...);
-						..............................................................................
+						...........................................................................
+						referenceToTargetOBJ = Uize.copyInto (targetOBJ,source1OBJ,source2OBJ,...);
+						...........................................................................
 
 						The =Uize.copyInto= static method accepts an arbitrary number of parameters, so you can conveniently copy more than one source object into the target object.
 
@@ -697,28 +700,116 @@ Uize = (function () {
 						In the above example, the =targetObject= variable will be an object with the contents ={foo:'BAR',hi:1,bye:1}=.
 
 						NOTES
-						- compare to the companion =Uize.mergeInto= static method
-						- Source object parameters whose values are not objects will simply not be copied into the target object. This is a useful behavior, as it allows one to mix conditional copies into a single call to =Uize.copyInto= by using the ternary operator to select between a source object and the value =null=.
+						- see the companion =Uize.copy= static method
+						- compare to the related =Uize.mergeInto= static method
 						- see also the other `basic data utilities`
 			*/
 		};
 
+		_package.copy = function () {
+			return _performOperationWithMultipleSources (arguments,_copySourceIntoTarget,{});
+			/*?
+				Static Methods
+					Uize.copy
+						Lets you copy the properties from one or more source objects into a freshly created object.
+
+						DIFFERENT USAGES
+
+						`Create a Shallow Copy of a Source Object`
+						.................................
+						freshOBJ = Uize.copy (sourceOBJ);
+						.................................
+
+						`Copy Properties From Multiple Source Objects Into a Fresh Object`
+						............................................................
+						freshOBJ = Uize.copy (source1OBJ,source2OBJ,source3OBJ,...);
+						............................................................
+
+						Create a Shallow Copy of a Source Object
+							The properties of a single source object can be shallow-copied into a fresh object by supplying a single =sourceOBJ= parameter.
+
+							SYNTAX
+							.................................
+							freshOBJ = Uize.copy (sourceOBJ);
+							.................................
+
+						Copy Properties From Multiple Source Objects Into a Fresh Object
+							The properties of multiple source objects can be shallow-copied into a fresh object by supplying an arbitrary number of source object arguments.
+
+							SYNTAX
+							............................................................
+							freshOBJ = Uize.copy (source1OBJ,source2OBJ,source3OBJ,...);
+							............................................................
+
+							EXAMPLE
+							.............................
+							var obj = Uize.copy (
+								{foo:'bar',baz:'qux'},
+								{baz:'QUX',hello:'world'},
+								{foo:'BAR'}
+							);
+							.............................
+
+							In the above example, the contents of three source objects are being copied to a fresh object. After the copy has been created, the =obj= variable will have the following contents...
+
+							RESULT
+							................
+							{
+								foo:'BAR',
+								baz:'QUX',
+								hello:'world'
+							}
+							................
+
+							As you will notice, the value of the =baz= property from the second source object has overwritten the value of the =baz= property from the first source object, while the value of the =foo= property from the third source object has overwritten the value of the =foo= property from the first source object. Values of properties from later source objects overwrite values of same-named properties from earlier source objects.
+
+						Null or Undefined Sources Are Ignored
+							Source parameters whose values are not objects will simply be ignored and will not be copied into the fresh object returned by this method.
+
+							This is a useful behavior, as it allows one to include conditionalized copy operations in a single call to this method by using the ternary operator to select between a source object and the value =null= or =undefined= for any of the sources.
+
+							EXAMPLE
+							.............................................................................
+							var ajaxRequestParams = Uize.copy (
+								ajaxRequestConfig,
+								{
+									svc:'feed',
+									category:'popular',
+									page:1,
+									qty:50
+								},
+								hasAuth
+									? {authType:'password',user:userInfo.username,passwd:userInfo.password}
+									: null
+							);
+							.............................................................................
+
+							In the above example, a params object is being constructed for a hypothetical Ajax request. The =authType=, =user=, and =passwd= properties are being conditionally copied in, based upon the value of the =hasAuth= variable. If =hasAuth= is =false=, then the ternary operator will produce the value =null= and the auth properties will not be copied into the fresh object returned by the =Uize.copy= method.
+
+						NOTES
+						- see the companion =Uize.copyInto= static method
+						- compare to the related =Uize.mergeInto= static method
+						- see also the other `basic data utilities`
+			*/
+		};
+
+		function _mergeSourceIntoTarget (_target,_source) {
+			var
+				_targetPropertyValue,
+				_sourcePropertyValue
+			;
+			for (var _property in _source)
+				(
+					_isPlainObject (_sourcePropertyValue = _source [_property]) &&
+					_isPlainObject (_targetPropertyValue = _target [_property])
+				)
+					? _mergeSourceIntoTarget (_targetPropertyValue,_sourcePropertyValue)
+					: (_target [_property] = _sourcePropertyValue)
+			;
+		}
+
 		_package.mergeInto = function () {
-			function _mergeInto (_targetObject,_sourceObject) {
-				var
-					_targetObjectPropertyValue,
-					_sourceObjectPropertyValue
-				;
-				for (var _propertyName in _sourceObject)
-					(
-						_isPlainObject (_sourceObjectPropertyValue = _sourceObject [_propertyName]) &&
-						_isPlainObject (_targetObjectPropertyValue = _targetObject [_propertyName])
-					)
-						? _mergeInto (_targetObjectPropertyValue,_sourceObjectPropertyValue)
-						: (_targetObject [_propertyName] = _sourceObjectPropertyValue)
-				;
-			}
-			return _performOperationWithMultipleSources (arguments,_mergeInto);
+			return _performOperationWithMultipleSources (arguments,_mergeSourceIntoTarget);
 			/*?
 				Static Methods
 					Uize.mergeInto
@@ -970,10 +1061,15 @@ Uize = (function () {
 								...............................................
 
 						NOTES
-						- compare to the companion =Uize.copyInto= static method
+						- see the companion =Uize.merge= static method
+						- compare to the related =Uize.copy= and =Uize.copyInto= static methods
 						- see also the other `basic data utilities`
 			*/
 		};
+
+		_package.merge = function () {
+			return _performOperationWithMultipleSources (arguments,_mergeSourceIntoTarget,{});
+		}
 
 		var _forEach = _package.forEach = function (_source,_iterationHandler,_context,_allArrayElements) {
 			if (_source) {
@@ -3417,8 +3513,8 @@ Uize = (function () {
 		var _recordMatches = _package.recordMatches = function (_record,_match) {
 			if (!_record) return !_match;
 			if (_isFunction (_match)) return _match (_record);
-			for (var _propertyName in _match) {
-				if (_record [_propertyName] !== _match [_propertyName]) return _false;
+			for (var _property in _match) {
+				if (_record [_property] !== _match [_property]) return _false;
 			}
 			return _true;
 			/*?
@@ -4200,7 +4296,7 @@ Uize = (function () {
 						If you are cancelling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
 
 						NOTES
-						- see also the companion =Uize.returnTrue= static method
+						- see the companion =Uize.returnTrue= static method
 						- see the related =Uize.nop= static method
 						- see also the other `dummy functions`
 			*/
@@ -4228,7 +4324,7 @@ Uize = (function () {
 						If you are enabling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
 
 						NOTES
-						- see also the companion =Uize.returnFalse= static method
+						- see the companion =Uize.returnFalse= static method
 						- see also the other `dummy functions`
 			*/
 		);

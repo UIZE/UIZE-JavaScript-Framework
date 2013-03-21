@@ -362,7 +362,7 @@ Uize.module ({
 							_callMethodWithTargetArgumentValue ({});
 							return (
 								this.expect (false,_sourceArray == _target) &&
-								this.expect (Uize.copyInto ({},_expectedTargetArrayContents),_target)
+								this.expect (Uize.copy (_expectedTargetArrayContents),_target)
 							);
 						}
 					},
@@ -370,10 +370,10 @@ Uize.module ({
 						title:'Test that specifying an object that already has some properties for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							var _someExtraCrud = {some:1,extra:1,crud:1};
-							_callMethodWithTargetArgumentValue (Uize.copyInto ({},_someExtraCrud));
+							_callMethodWithTargetArgumentValue (Uize.copy (_someExtraCrud));
 							return (
 								this.expect (false,_sourceArray == _target) &&
-								this.expect (Uize.copyInto ({},_someExtraCrud,_expectedTargetArrayContents),_target)
+								this.expect (Uize.copy (_someExtraCrud,_expectedTargetArrayContents),_target)
 							);
 						}
 					}
@@ -1354,7 +1354,7 @@ Uize.module ({
 
 							/*** test support for function target and sources ***/
 								{
-									title:'Test that the source can be a function, and that the properties from the sources will be copied in as custom properties of the function',
+									title:'Test that the target can be a function, and that the properties from the sources will be copied in as custom properties of the function',
 									test:function () {
 										var
 											_target = function () {},
@@ -1388,6 +1388,86 @@ Uize.module ({
 												theAnswer:42
 											},
 											_target
+										);
+									}
+								}
+						],
+						null,
+						{cloneArguments:true}
+					],
+					['Uize.copy',
+						[
+							['Test that calling with no arguments results in an empty object being returned',
+								[],
+								{}
+							],
+							['Test that specifying the value null for the source object results in an empty object being returned',
+								null,
+								{}
+							],
+							['Test that specifying the value undefined for the source object results in an empty object being returned',
+								undefined,
+								{}
+							],
+							['Test that copying a source object works correctly',
+								{foo:'bar',hello:'world',otherInSource:'yawn'},
+								{foo:'bar',hello:'world',otherInSource:'yawn'}
+							],
+							{
+								title:'Test that a fresh object is returned and not the source object',
+								test:function () {
+									var
+										_source = {foo:'bar'},
+										_copy = Uize.copy (_source)
+									;
+									return this.expect (_source,_copy) && _copy != _source;
+								}
+							},
+							['Test that an arbitrary number of source objects is supported',
+								[
+									{propFromSource1:'bar'},
+									{propFromSource2:'hello'},
+									{propFromSource3:'world'}
+								],
+								{
+									propFromSource1:'bar',
+									propFromSource2:'hello',
+									propFromSource3:'world'
+								}
+							],
+							['Test that the contents of source objects are copied into the fresh object in the order in which the source objects are specified',
+								[
+									{foo:'bar',fancy:'pants'},
+									{fancy:'schmancy',la:'dee dah'},
+									{la:'dolce vita',fin:'ished'}
+								],
+								{foo:'bar',fancy:'schmancy',la:'dolce vita',fin:'ished'}
+							],
+							['Test that specifying the value null or undefined for all of the source objects results in an empty object being returned',
+								[null,undefined,undefined,null],
+								{}
+							],
+
+							/*** test support for function sources ***/
+								{
+									title:'Test that any source can be a function that has custom properties, and that the properties from all such sources will be copied into the fresh object returned',
+									test:function () {
+										var
+											_source1 = function () {},
+											_source2 = function () {},
+											_source3 = function () {}
+										;
+										_source1.foo = 'bar';
+										_source2.hello = 'world';
+										_source3.theAnswer = 42;
+										var _result = Uize.copy (_source1,_source2,_source3);
+										return this.expect (
+											{
+												foo:'bar',
+												hello:'world',
+												theAnswer:42
+											},
+											_result
 										);
 									}
 								}
@@ -1465,22 +1545,16 @@ Uize.module ({
 										_valuesLength = _values.length,
 										_result = true
 									;
-									for (
-										var _targetPropertyValueNo = -1, _targetPropertyValue;
-										_result && ++_targetPropertyValueNo < _valuesLength;
-									) {
-										_targetPropertyValue = _values [_targetPropertyValueNo];
+									for (var _valueNo = -1, _value; _result && ++_valueNo < _valuesLength;) {
+										_value = _values [_valueNo];
 										for (
 											var _sourcePropertyValueNo = -1, _sourcePropertyValue;
 											_result && ++_sourcePropertyValueNo < _valuesLength;
 										) {
 											_sourcePropertyValue = _values [_sourcePropertyValueNo];
-											if (
-												!Uize.isPlainObject (_targetPropertyValue) ||
-												!Uize.isPlainObject (_sourcePropertyValue)
-											) {
+											if (!Uize.isPlainObject (_value) || !Uize.isPlainObject (_sourcePropertyValue)) {
 												var
-													_targetObject = {property:_targetPropertyValue},
+													_targetObject = {property:_value},
 													_sourceObject = {property:_sourcePropertyValue}
 												;
 												Uize.mergeInto (_targetObject,_sourceObject);
@@ -1579,7 +1653,7 @@ Uize.module ({
 								}
 							],
 							{
-								title:'Test that merging object properties from a source object into a target object results in the object properties being copied by reference',
+								title:'Test that merging object type properties from a source object into a target object results in the object type properties being copied by reference',
 								test:function () {
 									var
 										_objectProperty = {
@@ -1596,7 +1670,7 @@ Uize.module ({
 
 							/*** test support for function target and sources ***/
 								{
-									title:'Test that the source can be a function, and that the properties from the sources will be merged in as custom properties of the function',
+									title:'Test that the target can be a function, and that the properties from the sources will be merged in as custom properties of the function',
 									test:function () {
 										var
 											_target = function () {},
@@ -1633,6 +1707,227 @@ Uize.module ({
 										);
 									}
 								}
+						],
+						null,
+						{cloneArguments:true}
+					],
+					['Uize.merge',
+						[
+							['Test that calling with no source object results in an empty object being returned',
+								[],
+								{}
+							],
+							['Test that specifying the value null for the source object results in an empty object being returned',
+								null,
+								{}
+							],
+							['Test that specifying the value undefined for the source object results in an empty object being returned',
+								undefined,
+								{}
+							],
+							['Test that an arbitrary number of source objects is supported',
+								[
+									{propFromSource1:'bar'},
+									{propFromSource2:'hello'},
+									{propFromSource3:'world'}
+								],
+								{
+									propFromSource1:'bar',
+									propFromSource2:'hello',
+									propFromSource3:'world'
+								}
+							],
+							['Test that the contents of source objects are merged in the order in which the source objects are specified',
+								[
+									{foo:'bar',fancy:'pants'},
+									{fancy:'schmancy',la:'dee dah'},
+									{la:'dolce vita',fin:'ished'}
+								],
+								{foo:'bar',fancy:'schmancy',la:'dolce vita',fin:'ished'}
+							],
+							['Test that specifying the value null or undefined for all of the source objects results in an empty object being returned',
+								[null,undefined,undefined,null],
+								{}
+							],
+							{
+								title:'Test that, if the values of a property in two source objects are not both plain objects, then the value of the property from the first is simply overwritten by the value from the second source object (no recursive merging takes place)',
+								test:function () {
+									var
+										_values = [
+											'', 'foo', 42, NaN, Infinity, false, /\d+/g, new String ('foo'), new Boolean (false), new Number (42), new Date, Uize.Class (), {foo:'bar'}, ['foo','bar'], null, undefined
+										],
+										_valuesLength = _values.length,
+										_result = true
+									;
+									for (
+										var _source1PropertyValueNo = -1, _source1PropertyValue;
+										_result && ++_source1PropertyValueNo < _valuesLength;
+									) {
+										_source1PropertyValue = _values [_source1PropertyValueNo];
+										for (
+											var _source2PropertyValueNo = -1, _source2PropertyValue;
+											_result && ++_source2PropertyValueNo < _valuesLength;
+										) {
+											_source2PropertyValue = _values [_source2PropertyValueNo];
+											if (
+												!Uize.isPlainObject (_source1PropertyValue) ||
+												!Uize.isPlainObject (_source2PropertyValue)
+											) {
+												var
+													_sourceObject1 = {property:_source1PropertyValue},
+													_sourceObject2 = {property:_source2PropertyValue},
+													_mergedObject = Uize.merge (_sourceObject1,_sourceObject2)
+												;
+												_result = Uize.isSameAs (_mergedObject.property,_source2PropertyValue);
+											}
+										}
+									}
+									return _result;
+								}
+							},
+							['Test that, when the value of a property is a plain object in two source objects, then the contents of the property from the second source object are merged with the contents of the property from the first source object',
+								[{foo:{bar:1}},{foo:{hello:'world'}}],
+								{foo:{bar:1,hello:'world'}}
+							],
+							['Test that merging complex objects, requiring merging at multiple depths, is handled correctly',
+								[
+									{
+										foo:'bar',
+										junk:{
+											hey:'there',
+											moreJunk:{
+												simple:'simon'
+											}
+										}
+									},
+									{
+										foo:'BAR',
+										junk:{
+											boo:'yah',
+											moreJunk:{
+												peter:'pan'
+											}
+										}
+									}
+								],
+								{
+									foo:'BAR',
+									junk:{
+										hey:'there',
+										boo:'yah',
+										moreJunk:{
+											simple:'simon',
+											peter:'pan'
+										}
+									}
+								}
+							],
+							['Test that deep merging is handled correctly for multiple sources',
+								[
+									{
+										foo:'bar',
+										junk:{
+											hey:'there',
+											moreJunk:{
+												simple:'simon'
+											}
+										}
+									},
+									{
+										foo:'BAR',
+										junk:{
+											boo:'yah',
+											moreJunk:{
+												peter:'pan'
+											}
+										}
+									},
+									{
+										foo:'BAR!!!',
+										i:'can haz more property',
+										junk:{
+											hell:'yeah',
+											moreJunk:{
+												captain:'hook'
+											}
+										}
+									}
+								],
+								{
+									foo:'BAR!!!',
+									i:'can haz more property',
+									junk:{
+										hey:'there',
+										boo:'yah',
+										hell:'yeah',
+										moreJunk:{
+											simple:'simon',
+											peter:'pan',
+											captain:'hook'
+										}
+									}
+								}
+							],
+							{
+								title:'Test that merging object type properties from a source object results in the object type properties being copied by reference',
+								test:function () {
+									var
+										_objectProperty = {
+											foo:'bar',
+											junk:{hello:'world'},
+											moreJunk:['this','is','some','more','junk']
+										},
+										_result = Uize.merge ({objectProperty:_objectProperty})
+									;
+									return this.expectSameAs (_objectProperty,_result.objectProperty);
+								}
+							},
+							{
+								title:'Test that a fresh object is returned, and not a reference to any of the source objects being merged',
+								test:function () {
+									var
+										_source1 = {propertyFromSource1:'propertyFromSource1Value'},
+										_source2 = {propertyFromSource2:'propertyFromSource2Value'},
+										_source3 = {propertyFromSource3:'propertyFromSource3Value'},
+										_result = Uize.merge (_source1,_source2,_source3)
+									;
+									return (
+										this.expect (
+											{
+												propertyFromSource1:'propertyFromSource1Value',
+												propertyFromSource2:'propertyFromSource2Value',
+												propertyFromSource3:'propertyFromSource3Value'
+											},
+											_result
+										) &&
+										_result != _source1 &&
+										_result != _source2 &&
+										_result != _source3 
+									);
+								}
+							},
+							{
+								title:'Test that any source can be a function that has custom properties, and that the properties from all such sources will be merged into the target',
+								test:function () {
+									var
+										_source1 = function () {},
+										_source2 = function () {},
+										_source3 = function () {}
+									;
+									_source1.foo = 'bar';
+									_source2.hello = 'world';
+									_source3.theAnswer = 42;
+									var _result = Uize.merge (_source1,_source2,_source3);
+									return this.expect (
+										{
+											foo:'bar',
+											hello:'world',
+											theAnswer:42
+										},
+										_result
+									);
+								}
+							}
 						],
 						null,
 						{cloneArguments:true}

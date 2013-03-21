@@ -509,7 +509,7 @@
 								_node,
 								{
 									focus:function (_event) {
-										var _eventCopy = Uize.copyInto ({},_event);
+										var _eventCopy = Uize.copy (_event);
 										_timeout = setTimeout (
 											function () {_handler.call (_node,_eventCopy)},
 											_duration

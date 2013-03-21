@@ -56,7 +56,7 @@ Uize.module ({
 					delete _properties.name;
 					delete _properties.widgetClass;
 
-					var _suppliedState = Uize.copyInto ({},_properties);
+					var _suppliedState = Uize.copy (_properties);
 
 					/*** if child name not specified, generate one using widget class module name ***/
 						if (!_childName) {

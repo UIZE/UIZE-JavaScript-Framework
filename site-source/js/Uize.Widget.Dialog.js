@@ -284,8 +284,7 @@ Uize.module ({
 								var _mooringCoords = _Uize_Node.getCoords (_mooringNode);
 								_Uize_Node.setStyle (
 									_rootNode,
-									Uize.copyInto (
-										{},
+									Uize.copy (
 										_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,
 										_offsetY != _undefined ? {top:_mooringCoords.top + _offsetY} : _undefined
 									)

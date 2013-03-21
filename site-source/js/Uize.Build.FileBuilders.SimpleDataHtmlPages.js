@@ -43,7 +43,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				var _inMemorySimpleDataUrl = this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.simpledata';
 				this.buildFile (
-					Uize.copyInto ({},this.params,{url:_inMemorySimpleDataUrl,pathPrefix:''}),
+					Uize.copy (this.params,{url:_inMemorySimpleDataUrl,pathPrefix:''}),
 					Uize.nop
 				);
 				var _simpleData = this.readFile ({path:_inMemorySimpleDataUrl});

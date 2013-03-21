@@ -50,7 +50,7 @@ Uize.Data.resolveSourceAndTarget
 			_target = !_target ? _source : Uize.isArray (_source) ? [] : {};
 		}
 		if (_keysMayChange && _target == _source)
-			_source = Uize.isArray (_source) ? _source.concat () : Uize.copyInto ({},_source)
+			_source = Uize.isArray (_source) ? _source.concat () : Uize.copy (_source)
 		;
 		_target != _source && _emptyOutTarget && Uize.emptyOut (_target);
 		return {source:_source,target:_target};

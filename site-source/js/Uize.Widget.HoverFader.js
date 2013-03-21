@@ -209,9 +209,9 @@ Uize.module ({
 		/*** State Properties ***/
 			function _updateResolvedFadeInFadeOutProperties () {
 				var _fadeInOut = this._fadeInOut;
-				this._resolvedFadeIn = _fadeInOut ? Uize.copyInto ({},_fadeInOut,this._fadeIn) : this._fadeIn;
+				this._resolvedFadeIn = _fadeInOut ? Uize.copy (_fadeInOut,this._fadeIn) : this._fadeIn;
 				this._resolvedFadeOut = _fadeInOut
-					? Uize.copyInto ({},_fadeInOut,{reverse:!_fadeInOut.reverse},this._fadeOut)
+					? Uize.copy (_fadeInOut,{reverse:!_fadeInOut.reverse},this._fadeOut)
 					: this._fadeOut
 				;
 			}
