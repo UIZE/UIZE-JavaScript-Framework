@@ -1069,7 +1069,7 @@ Uize = (function () {
 
 		_package.merge = function () {
 			return _performOperationWithMultipleSources (arguments,_mergeSourceIntoTarget,{});
-		}
+		};
 
 		var _forEach = _package.forEach = function (_source,_iterationHandler,_context,_allArrayElements) {
 			if (_source) {
