@@ -69,7 +69,7 @@ Uize.module ({
 							_childName =
 								_widgetClassName.replace (/\./g,'_') + '_' + _generatedChildNamesPerModule [_widgetClassName]++
 							;
-						;
+						}
 
 					var
 						_html = '',
