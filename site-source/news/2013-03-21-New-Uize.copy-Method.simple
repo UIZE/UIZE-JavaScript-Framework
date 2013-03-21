@@ -1,0 +1,83 @@
+The new =Uize.copy= method, implemented in the =Uize= base module, lets you copy the properties from one or more source objects into a freshly created object.
+
+DIFFERENT USAGES
+
+`Create a Shallow Copy of a Source Object`
+.................................
+freshOBJ = Uize.copy (sourceOBJ);
+.................................
+
+`Copy Properties From Multiple Source Objects Into a Fresh Object`
+............................................................
+freshOBJ = Uize.copy (source1OBJ,source2OBJ,source3OBJ,...);
+............................................................
+
+Create a Shallow Copy of a Source Object
+	The properties of a single source object can be shallow-copied into a fresh object by supplying a single =sourceOBJ= parameter.
+
+	SYNTAX
+	.................................
+	freshOBJ = Uize.copy (sourceOBJ);
+	.................................
+
+Copy Properties From Multiple Source Objects Into a Fresh Object
+	The properties of multiple source objects can be shallow-copied into a fresh object by supplying an arbitrary number of source object arguments.
+
+	SYNTAX
+	............................................................
+	freshOBJ = Uize.copy (source1OBJ,source2OBJ,source3OBJ,...);
+	............................................................
+
+	EXAMPLE
+	.............................
+	var obj = Uize.copy (
+		{foo:'bar',baz:'qux'},
+		{baz:'QUX',hello:'world'},
+		{foo:'BAR'}
+	);
+	.............................
+
+	In the above example, the contents of three source objects are being copied to a fresh object. After the copy has been created, the =obj= variable will have the following contents...
+
+	RESULT
+	................
+	{
+		foo:'BAR',
+		baz:'QUX',
+		hello:'world'
+	}
+	................
+
+	As you will notice, the value of the =baz= property from the second source object has overwritten the value of the =baz= property from the first source object, while the value of the =foo= property from the third source object has overwritten the value of the =foo= property from the first source object. Values of properties from later source objects overwrite values of same-named properties from earlier source objects.
+
+Null or Undefined Sources Are Ignored
+	Source parameters whose values are not objects will simply be ignored and will not be copied into the fresh object returned by this method.
+
+	This is a useful behavior, as it allows one to include conditionalized copy operations in a single call to this method by using the ternary operator to select between a source object and the value =null= or =undefined= for any of the sources.
+
+	EXAMPLE
+	.............................................................................
+	var ajaxRequestParams = Uize.copy (
+		ajaxRequestConfig,
+		{
+			svc:'feed',
+			category:'popular',
+			page:1,
+			qty:50
+		},
+		hasAuth
+			? {authType:'password',user:userInfo.username,passwd:userInfo.password}
+			: null
+	);
+	.............................................................................
+
+	In the above example, a params object is being constructed for a hypothetical Ajax request. The =authType=, =user=, and =passwd= properties are being conditionally copied in, based upon the value of the =hasAuth= variable. If =hasAuth= is =false=, then the ternary operator will produce the value =null= and the auth properties will not be copied into the fresh object returned by the =Uize.copy= method.
+
+Unit Tested and Documented
+	The new =Uize.copy= method is comprehensively unit tested and documented.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-03-21 - New Uize.copy Method
+....................................................................................
