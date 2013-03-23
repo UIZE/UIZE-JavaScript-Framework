@@ -74,6 +74,7 @@
 					- =Uize.map= - iterates over an array or object and applies the specified value transformer to produce new values
 					- =Uize.max= - returns the largest value in a values array
 					- =Uize.meldKeysValues= - creates an object by melding keys from a keys array with values from a values array
+					- =Uize.merge= - merges the contents of multiple source objects together into a fresh object
 					- =Uize.mergeInto= - merges the contents of one or more source objects into a target object
 					- =Uize.min= - returns the smallest value in a values array
 					- =Uize.pairUp= - uses a list of key/value pairs to form an object
@@ -701,7 +702,7 @@ Uize = (function () {
 
 						NOTES
 						- see the companion =Uize.copy= static method
-						- compare to the related =Uize.mergeInto= static method
+						- compare to the related =Uize.merge= and =Uize.mergeInto= static methods
 						- see also the other `basic data utilities`
 			*/
 		};
@@ -788,7 +789,7 @@ Uize = (function () {
 
 						NOTES
 						- see the companion =Uize.copyInto= static method
-						- compare to the related =Uize.mergeInto= static method
+						- compare to the related =Uize.merge= and =Uize.mergeInto= static methods
 						- see also the other `basic data utilities`
 			*/
 		};
@@ -1041,7 +1042,7 @@ Uize = (function () {
 
 								In the above example, the =sourceObject= object contains the property =someProperty=, which is also present in the =targetObject= object. However, the value of this property in the target object is a string, so this value is overwritten with a reference to the object value of the property obtained from the source object. Therefore, the expression =target.someProperty= is identical in a strict equality to =sourceObject.someProperty=.
 
-							Null or Undefined Source Objects Ignored
+							Null or Undefined Sources Are Ignored
 								As with the related =Uize.copyInto= method, specifying the values =null= or =undefined= for source object parameters results in those parameters simply being ignored - they contain nothing to merge into the target object.
 
 								EXAMPLE
@@ -1069,6 +1070,50 @@ Uize = (function () {
 
 		_package.merge = function () {
 			return _performOperationWithMultipleSources (arguments,_mergeSourceIntoTarget,{});
+			/*?
+				Static Methods
+					Uize.merge
+						Merges the contents of multiple source objects together into a fresh object.
+
+						SYNTAX
+						.............................................................
+						freshOBJ = Uize.merge (source1OBJ,source2OBJ,source3OBJ,...);
+						.............................................................
+
+						EXAMPLE
+						...............................
+						var result = Uize.mergeInto (
+							{foo:{bar:{hello:'world'}}},
+							{foo:{bar:{boo:'yah'}}},
+							null,
+							{foo:{baz:'qux'},voo:'doo'}
+						);
+						...............................
+
+						RESULT
+						.......................
+						{
+							foo:{
+								bar:{
+									hello:'world',
+									boo:'yah'
+								},
+								baz:'qux'
+							},
+							voo:'doo'
+						}
+						.......................
+
+						Same Merging Behavior as the Uize.mergeInto Method
+							The =Uize.merge= method behaves in exactly the same manner as the =Uize.mergeInto= method, except that the first argument is not the target object for the merge but just another source.
+
+							Because the =Uize.merge= method always creates a fresh object, the target object is not specified and all the arguments for the method are source objects to merge together to form the fresh object returned by the method. The =Uize.mergeInto= method is documented thoroughly, and because both the =Uize.merge= and =Uize.mergeInto= methods perform the merge operation according to the same rules, you should refer to the reference for the =Uize.mergeInto= method for full details on how different situations are handled.
+
+						NOTES
+						- see the companion =Uize.mergeInto= static method
+						- compare to the related =Uize.copy= and =Uize.copyInto= static methods
+						- see also the other `basic data utilities`
+			*/
 		};
 
 		var _forEach = _package.forEach = function (_source,_iterationHandler,_context,_allArrayElements) {
