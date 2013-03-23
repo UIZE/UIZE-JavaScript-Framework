@@ -1,0 +1,44 @@
+The new =Uize.merge= method, implemented in the =Uize= base module, lets you merge the contents of multiple source objects together into a fresh object.
+
+SYNTAX
+.............................................................
+freshOBJ = Uize.merge (source1OBJ,source2OBJ,source3OBJ,...);
+.............................................................
+
+EXAMPLE
+...............................
+var result = Uize.mergeInto (
+	{foo:{bar:{hello:'world'}}},
+	{foo:{bar:{boo:'yah'}}},
+	null,
+	{foo:{baz:'qux'},voo:'doo'}
+);
+...............................
+
+RESULT
+.......................
+{
+	foo:{
+		bar:{
+			hello:'world',
+			boo:'yah'
+		},
+		baz:'qux'
+	},
+	voo:'doo'
+}
+.......................
+
+Same Merging Behavior as the Uize.mergeInto Method
+	The =Uize.merge= method behaves in exactly the same manner as the =Uize.mergeInto= method, except that the first argument is not the target object for the merge but just another source.
+
+	Because the =Uize.merge= method always creates a fresh object, the target object is not specified and all the arguments for the method are source objects to merge together to form the fresh object returned by the method. The =Uize.mergeInto= method is documented thoroughly, and because both the =Uize.merge= and =Uize.mergeInto= methods perform the merge operation according to the same rules, you should refer to the reference for the =Uize.mergeInto= method for full details on how different situations are handled.
+
+Unit Tested and Documented
+	The new =Uize.merge= method is comprehensively unit tested and documented.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-03-22 - New Uize.merge Method
+....................................................................................
