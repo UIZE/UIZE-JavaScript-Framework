@@ -1281,6 +1281,20 @@ Uize.module ({
 							],
 							'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html'
 						],
+						['Test that, if the base URL is forward-relative and the URL to relativize is absolute and contains a domain, then the URL to relativize is returned as is, since no relative URL can be created against the base',
+							[
+								'folder1/folder2/folder3/',
+								'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html',
+							],
+							'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html'
+						],
+						['Test that, if the base URL is absolute and contains a domain and the URL to relativize is forward-relative, then the URL to relativize is returned as is, since no relative URL can be created against the base',
+							[
+								'http://www.foo.com/folder1/folder2/folder3/',
+								'folder1/folder2/folder3/folder4/folder5/bar.html',
+							],
+							'folder1/folder2/folder3/folder4/folder5/bar.html'
+						],
 						['Test that, if the URL to relativize has a domain and the base URL does not, then the URL to relativize is returned as is, since no relative URL can be created against the base',
 							[
 								'folder1/folder2/folder3/',

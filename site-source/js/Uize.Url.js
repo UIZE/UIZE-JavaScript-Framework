@@ -506,11 +506,7 @@ Uize.module ({
 					/* NOTE:
 						If the URL to relativize has a domain and it is different to the base URL's domain (or the base URL doesn't have a domain), then a URL relative to the base URL cannot be created, so just return the URL to relativize.
 					*/
-					var _urlToRelativizeParts = _from (_urlToRelativize);
-					if (
-						_urlToRelativizeParts.fullDomain &&
-						_urlToRelativizeParts.fullDomain != _from (_baseUrl).fullDomain
-					) {
+					if (_from (_urlToRelativize).fullDomain != _from (_baseUrl).fullDomain) {
 						return _urlToRelativize;
 					} else {
 						var
@@ -532,15 +528,59 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Url.toRelative
-							Returns a string, representing a relative URL from the specified base URL to the specified absolute URL.
+							Returns a string, representing a relative URL from the specified base URL to the specified destination URL.
 
 							SYNTAX
 							.....................................................................
 							relativeUrlSTR = Uize.Url.toRelative (baseUrlSTR,urlToRelativizeSTR);
 							.....................................................................
 
-							Examples
+							EXAMPLE
+							....................................................
+							var relativeUrl = Uize.Url.toRelative (
+								'http://www.somedomain.com/foo/bar/',
+								'http://www.somedomain.com/foo/baz/qux/file.html'
+							);
+							....................................................
+
+							RESULT
+							......................
+							'../baz/qux/file.html'
+							......................
+
+							When the Base URL Contains a File Part
+								When the base URL contains a file part, that file part will be ignored and discarded when creating the relative URL.
+
+								This is a convenient behavior if you are using this method in a Web page to create relative URLs from absolute URLs, where the created URLs should be relative to the current document's URL. In such cases, the value of the =window.location.href= property can simply be passed to the =Uize.Url.toRelative= method as the base URL.
+
+								EXAMPLE
+								...................................................
+								var relativeUrl = Uize.Url.toRelative (
+									'http://www.somedomain.com/foo/bar/file.html',
+									'http://www.somedomain.com/foo/hello/world.html'
+								);
+								...................................................
+
+								RESULT
+								.....................
+								'../hello/world.html'
+								.....................
+
+								Because of this behavior, for any base URL that ends in a folder, the last folder in the path must end with a "/" (slash) character, otherwise the folder will be assumed to be a file part and will be discarded when creating the relative URL. The =Uize.Url.toRelative= method cannot tell the difference between a folder name and a filename that has no file extension (filename's are not required to have an extension indicating file type, after all, even though they often may).
+
+							When the URL to Relativize is Back-relative
 								.
+
+							When Both URLs Are Missing Hosts
+								.
+
+							When the URLs Have Differing Domains
+								.
+
+								### cases
+									- both base URL and URL to relativize are absolute and contain domains, but domains differ
+									- base URL is absolute and contains domain, while URL to relativize is forward-relative
+									- base URL is forward-relative, while URL to relativize is absolute and contains domain
 
 							NOTES
 							- see the related =Uize.Url.toAbsolute= static method
