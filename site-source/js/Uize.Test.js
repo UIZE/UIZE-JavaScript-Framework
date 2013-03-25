@@ -1690,24 +1690,29 @@ Uize.module ({
 						_test = [_this.staticPropertyTest (_methodFullName,'function')]
 					;
 					function _getCaseTest (_case) {
-						var _caseTest = Uize.isArray (_case)
-							? {
-								title:_case [0],
-								test:function () {
-									var
-										_methodHost = Uize.getModuleByName (_methodHostName),
-										_arguments = this.get ('cloneArguments') ? Uize.clone (_case [1]) : _case [1]
-									;
-									return this.expect (
-										_case [2],
-										_methodHost [_methodName].apply (
-											_methodHost,
-											Uize.isArray (_arguments) ? _arguments : [_arguments]
-										)
-									);
+						var
+							_caseIsArray = Uize.isArray (_case),
+							_caseTest = _caseIsArray
+								? {
+									title:_case [0],
+									test:function () {
+										var
+											_methodHost = Uize.getModuleByName (_methodHostName),
+											_arguments = this.get ('cloneArguments') ? Uize.clone (_case [1]) : _case [1]
+										;
+										return this.expect (
+											_case [2],
+											_methodHost [_methodName].apply (
+												_methodHost,
+												Uize.isArray (_arguments) ? _arguments : [_arguments]
+											)
+										);
+									}
 								}
-							}
-							: _case
+								: _case
+						;
+						if (!_caseIsArray && Uize.isArray (_case.test))
+							_case.test = Uize.map (_case.test,_getCaseTest)
 						;
 						if (_caseTestProperties)
 							Uize.Util.Oop.inheritsFrom (_caseTest,Uize.Test)
