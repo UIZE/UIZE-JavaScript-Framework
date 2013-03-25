@@ -1256,136 +1256,179 @@ Uize.module ({
 						]
 					]],
 					['Uize.Url.toRelative',[
-						['Test that relativizing an empty URL against an empty base URL produces an empty string',
-							['',''],
-							''
-						],
-						['Test that a URL to relativize that is already a relative URL is returned as is',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'../foo/bar.html'
-							],
-							'../foo/bar.html'
-						],
-						['Test that a URL to relativize that is a root relative URL is returned as is',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'/foo/bar.html'
-							],
-							'/foo/bar.html'
-						],
-						['Test that, if the URL to relativize has a domain that is different to the domain of the base URL, then the URL to relativize is returned as is, since no relative URL can be created against the base',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html',
-							],
-							'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html'
-						],
-						['Test that, if the base URL is forward-relative and the URL to relativize is absolute and contains a domain, then the URL to relativize is returned as is, since no relative URL can be created against the base',
-							[
-								'folder1/folder2/folder3/',
-								'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html',
-							],
-							'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html'
-						],
-						['Test that, if the base URL is absolute and contains a domain and the URL to relativize is forward-relative, then the URL to relativize is returned as is, since no relative URL can be created against the base',
-							[
-								'http://www.foo.com/folder1/folder2/folder3/',
-								'folder1/folder2/folder3/folder4/folder5/bar.html',
-							],
-							'folder1/folder2/folder3/folder4/folder5/bar.html'
-						],
-						['Test that, if the URL to relativize has a domain and the base URL does not, then the URL to relativize is returned as is, since no relative URL can be created against the base',
-							[
-								'folder1/folder2/folder3/',
-								'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html',
-							],
-							'http://www.foo.com/folder1/folder2/folder3/folder4/folder5/bar.html'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a file several directories back, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'http://www.domain.com/folder1/foo/bar.html'
-							],
-							'../../foo/bar.html'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a folder several directories back, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'http://www.domain.com/folder1/foo/'
-							],
-							'../../foo/'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a file directly off the root, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'http://www.domain.com/bar.html'
-							],
-							'../../../bar.html'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a folder directly off the root, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'http://www.domain.com/bar/'
-							],
-							'../../../bar/'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a file several directories deeper, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'http://www.domain.com/folder1/folder2/folder3/folder4/folder5/bar.html',
-							],
-							'folder4/folder5/bar.html'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a deeper directory, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'http://www.domain.com/folder1/folder2/folder3/folder4/folder5/',
-							],
-							'folder4/folder5/'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a folder several directories deeper on the same path as the base URL, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/',
-								'http://www.domain.com/folder1/',
-							],
-							'../../'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a folder several directories deeper and the base URL is to a file, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/foo.html',
-								'http://www.domain.com/folder1/folder2/folder3/folder4/folder5/',
-							],
-							'folder4/folder5/'
-						],
-						['Test that, when both the base URL and the URL to relativize have the same domain, and when the URL to relativize is to a file several directories back and the base URL is to a file, then the correct relative URL is created',
-							[
-								'http://www.domain.com/folder1/folder2/folder3/foo.html',
-								'http://www.domain.com/folder1/bar.html',
-							],
-							'../../bar.html'
-						],
-						['',
-							[
-								'foo/bar/baz/qux/',
-								'foo/bar/'
-							],
-							'../../'
-						],
-						['',
-							[
-								'foo/bar/',
-								'foo/bar/baz/qux/'
-							],
-							'baz/qux/'
-						],
-						['',
-							[
-								'foo/bar/',
-								'baz/qux/'
-							],
-							'../../baz/qux/'
-						]
+						{
+							title:'Test that an empty base URL is supported correctly',
+							test:[
+								['Test that, when the base URL is an empty string and the URL to relativize is an empty string, then an empty string is returned',
+									['',''],
+									''
+								],
+								['Test that, when the base URL is an empty string and the URL to relativize is a root-relative URL, then the URL to relativize is returned as is',
+									['','/foo/bar.html'],
+									'/foo/bar.html'
+								],
+								['Test that, when the base URL is an empty string and the URL to relativize is a forward-relative URL, then the URL to relativize is returned as is',
+									['','foo/bar.html'],
+									'foo/bar.html'
+								],
+								['Test that, when the base URL is an empty string and the URL to relativize is a back-relative URL, then the URL to relativize is returned as is',
+									['','../../foo/bar.html'],
+									'../../foo/bar.html'
+								],
+								['Test that, when the base URL is an empty string and the URL to relativize is a absolute with a domain, then the URL to relativize is returned as is',
+									['','http://www.somedomain.com/foo/bar.html'],
+									'http://www.somedomain.com/foo/bar.html'
+								]
+							]
+						},
+						{
+							title:'Test the cases where a relative URL can be created',
+							test:(function () {
+								function _samePrefixTestBatch (_title,_prefix) {
+									return {
+										title:_title,
+										test:[
+											['Test when the URL to relativize is to a file under the base URL',
+												[
+													_prefix + 'foo/bar/',
+													_prefix + 'foo/bar/baz/qux/file.html'
+												],
+												'baz/qux/file.html'
+											],
+											['Test when the URL to relativize is to a file under the base URL, and the base URL contains a file part',
+												[
+													_prefix + 'foo/bar/file.html',
+													_prefix + 'foo/bar/baz/qux/file.html'
+												],
+												'baz/qux/file.html'
+											],
+											['Test when the URL to relativize is to a folder under the base URL',
+												[
+													_prefix + 'foo/bar/',
+													_prefix + 'foo/bar/baz/qux/'
+												],
+												'baz/qux/'
+											],
+											['Test when the URL to relativize is to a folder under the base URL, and the base URL contains a file part',
+												[
+													_prefix + 'foo/bar/file.html',
+													_prefix + 'foo/bar/baz/qux/'
+												],
+												'baz/qux/'
+											],
+											['Test when the URL to relativize is to a file in a folder that is one folder back in relation to the base URL',
+												[
+													_prefix + 'foo/bar/',
+													_prefix + 'foo/baz/qux/file.html'
+												],
+												'../baz/qux/file.html'
+											],
+											['Test when the URL to relativize is to a file in a folder that is one folder back in relation to the base URL, and the base URL contains a file part',
+												[
+													_prefix + 'foo/bar/file.html',
+													_prefix + 'foo/baz/qux/file.html'
+												],
+												'../baz/qux/file.html'
+											],
+											['Test when the URL to relativize is one folder back in relation to the base URL',
+												[
+													_prefix + 'foo/bar/',
+													_prefix + 'foo/'
+												],
+												'../'
+											],
+											['Test when the URL to relativize is one folder back in relation to the base URL, and the base URL contains a file part',
+												[
+													_prefix + 'foo/bar/file.html',
+													_prefix + 'foo/'
+												],
+												'../'
+											],
+											['Test when the URL to relativize shares no common folder path with the base URL',
+												[
+													_prefix + 'foo/bar/',
+													_prefix + 'baz/qux/file.html'
+												],
+												'../../baz/qux/file.html'
+											],
+											['Test when the URL to relativize shares no common folder path with the base UR, and the base URL contains a file part',
+												[
+													_prefix + 'foo/bar/file.html',
+													_prefix + 'baz/qux/file.html'
+												],
+												'../../baz/qux/file.html'
+											],
+											['Test when the URL to relativize is the entire folder path of the base URL',
+												[
+													_prefix + 'foo/bar/',
+													_prefix + 'foo/bar/'
+												],
+												''
+											],
+											['Test when the URL to relativize is the entire folder path of the base URL, and the base URL contains a file part',
+												[
+													_prefix + 'foo/bar/file.html',
+													_prefix + 'foo/bar/'
+												],
+												''
+											]
+										]
+									}
+								}
+
+								return [
+									_samePrefixTestBatch (
+										'Test that, when both URLs are forward-relative, a relative URL can always be produced',
+										''
+									),
+									_samePrefixTestBatch (
+										'Test that, when both URLs are back-relative, a relative URL can always be produced',
+										'../../../'
+									),
+									_samePrefixTestBatch (
+										'Test that, when both URLs are root-relative, a relative URL can always be produced',
+										'/'
+									),
+									_samePrefixTestBatch (
+										'Test that, when both URLs have the same domain, a relative URL can always be produced',
+										'http://www.somedomain.com/'
+									)
+								];
+							}) ()
+						},
+						{
+							title:'Test cases where a relative URL cannot be created and null should be returned, unless the URL to relativize is absolute and contains a domain, in which case it should be returned as is',
+							test:(function () {
+								var
+									_prefixes = ['','/','../','../../','http://www.domain.com/','http://www.otherdomain.com/'],
+									_testCases = []
+								;
+								Uize.forEach (
+									_prefixes,
+									function (_baseUrlPrefix) {
+										Uize.forEach (
+											_prefixes,
+											function (_urlToRelativizePrefix) {
+												var
+													_urlToRelativizeIsAbsolute = _urlToRelativizePrefix.slice (0,5) == 'http:',
+													_baseUrl = _baseUrlPrefix + 'foo/bar/file.html',
+													_urlToRelativize = _urlToRelativizePrefix + 'foo/bar/baz/qux/file.html'
+												;
+												_baseUrlPrefix != _urlToRelativizePrefix &&
+													_testCases.push (
+														['Test that, when the base URL is \'' + _baseUrl + '\' and the URL to relativize is \'' + _urlToRelativize + '\'. then a relative URL cannot be created and ' + (_urlToRelativizeIsAbsolute ? '\'' + _urlToRelativize + '\'' : 'null') + ' is returned',
+															[_baseUrl,_urlToRelativize],
+															_urlToRelativizeIsAbsolute ? _urlToRelativize : null
+														]
+													)
+												;
+											}
+										)
+									}
+								);
+								return _testCases;
+							}) ()
+						}
 					]],
 					['Uize.Url.toAbsolute',[
 						['Test that absolutizing an empty URL against an empty base URL produces an empty string',

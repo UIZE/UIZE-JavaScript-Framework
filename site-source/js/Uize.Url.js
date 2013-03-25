@@ -40,7 +40,8 @@ Uize.module ({
 				_sacredEmptyArray = [],
 				_sacredEmptyObject = {},
 				_cacheDefeatStrCallCount = 0,
-				_paramsDecodingOptionsDontFavorQuery = {favorQuery:false}
+				_paramsDecodingOptionsDontFavorQuery = {favorQuery:false},
+				_leadingBackFoldersRegExp = /^(\.\.\/)*/
 			;
 
 		/*** Utility Functions ***/
@@ -497,18 +498,19 @@ Uize.module ({
 			};
 
 			_package.toRelative = function (_baseUrl,_urlToRelativize) {
-				if (_urlToRelativize.charAt (0) == '/' || _urlToRelativize.slice (0,3) == '../') {
-					/* NOTE:
-						If the URL to relativize is already a relative URL, then just return it.
-					*/
+				if (!_baseUrl) {
 					return _urlToRelativize;
 				} else {
-					/* NOTE:
-						If the URL to relativize has a domain and it is different to the base URL's domain (or the base URL doesn't have a domain), then a URL relative to the base URL cannot be created, so just return the URL to relativize.
-					*/
-					if (_from (_urlToRelativize).fullDomain != _from (_baseUrl).fullDomain) {
-						return _urlToRelativize;
-					} else {
+					var _urlToRelativizeIsRootRelative = _urlToRelativize.charAt (0) == '/';
+					if (
+						_urlToRelativizeIsRootRelative == (_baseUrl.charAt (0) == '/') &&
+							// both URLs are root-relative, or both URLs are not root-relative
+						_urlToRelativize.match (_leadingBackFoldersRegExp) [0].length ==
+						_baseUrl.match (_leadingBackFoldersRegExp) [0].length &&
+							// both URLs have the same amount of back-relative jumps (or none)
+						_from (_urlToRelativize).fullDomain == _from (_baseUrl).fullDomain
+							// both URLs have the same full domain (or none)
+					) {
 						var
 							_result = '',
 							_commonStr = _baseUrl.slice (0,_baseUrl.lastIndexOf ('/') + 1),
@@ -523,6 +525,8 @@ Uize.module ({
 							}
 						}
 						return _result + _urlToRelativize.slice (_commonStr.length);
+					} else {
+						return _from (_urlToRelativize).fullDomain ? _urlToRelativize : null;
 					}
 				}
 				/*?
@@ -548,10 +552,135 @@ Uize.module ({
 							'../baz/qux/file.html'
 							......................
 
+							When a Relative URL Can Be Created
+								The =Uize.Url.toRelative= method can create a relative URL in any case where the URL it would create, when applied against the specified base URL, would produce the original URL to relativize.
+
+								Situations in which a relative URL can be created include...
+
+								- `when both URLs have the same back-relative prefix`
+								- `when both URLs are root-relative`
+								- `when both URLs are forward-relative`
+								- `when both URLs have the same domain`
+
+								When Both URLs Have the Same Back-relative Prefix
+									When both the base URL and the URL to relativize start with exactly the same back-relative prefix (ie. "/", "../", "../../", etc.), then a relative URL can be created.
+
+									Even though both URLs may be relative URLs, a relative URL can still be created between the base URL and the URL to relativize. This is because the URLs having the identical back-relative prefix means that they essentially share a common base, even though we don't know what it is.
+
+									EXAMPLE
+									.......................................
+									var relativeUrl = Uize.Url.toRelative (
+										'../../foo/bar/',
+										'../../foo/baz/qux/file.html'
+									);
+									.......................................
+
+									In the above example, both the base URL and the URL to relativize have a back-relative prefix that jumps back two folder levels.
+
+									RESULT
+									......................
+									'../baz/qux/file.html'
+									......................
+
+								When Both URLs are Root-relative
+									When both the base URL and the URL to relativize are root-relative (ie. start with a "/"), then a relative URL can be created.
+
+									EXAMPLE
+									.......................................
+									var relativeUrl = Uize.Url.toRelative (
+										'/foo/bar/',
+										'/foo/baz/qux/file.html'
+									);
+									.......................................
+
+									RESULT
+									......................
+									'../baz/qux/file.html'
+									......................
+
+								When Both URLs are Forward-relative
+									When both the base URL and the URL to relativize are forward-relative, then a relative URL can be created.
+
+									EXAMPLE
+									.......................................
+									var relativeUrl = Uize.Url.toRelative (
+										'foo/bar/',
+										'foo/baz/qux/file.html'
+									);
+									.......................................
+
+									RESULT
+									......................
+									'../baz/qux/file.html'
+									......................
+
+								When Both URLs Have the Same Domain
+									When both the base URL and the URL to relativize have the same domain, then a relative URL can be created.
+
+									EXAMPLE
+									....................................................
+									var relativeUrl = Uize.Url.toRelative (
+										'http://www.somedomain.com/foo/bar/',
+										'http://www.somedomain.com/foo/baz/qux/file.html'
+									);
+									....................................................
+
+									RESULT
+									......................
+									'../baz/qux/file.html'
+									......................
+
+							When a Relative URL Cannot Be Created
+								In cases where it is impossible to create a relative URL (see `When a Relative URL Can Be Created`), the value =null= will be returned, unless the URL to relativize is an absolute URL, in which case the URL to relativize will be returned.
+
+								Whenever the base URL and the URL to relativize do not have the same shared base, then a relative URL cannot be created. This can occur when...
+
+								- the base URL is absolute (ie. has a domain) and the URL to relativize is either root-relative, forward-relative, back-relative, or has a domain that doesn't match that of the base URL
+								- the base URL is root-relative and the URL to relativize is either forward-relative, back-relative, or is absolute (ie. has a domain)
+								- the base URL is forward-relative and the URL to relativize is either root-relative, back-relative, or is absolute (ie. has a domain)
+								- the base URL is back-relative and the URL to relativize is either root-relative, forward-relative, or is absolute (ie. has a domain), or is also back-relative but has a differing amount of back folder jumps than the base URL
+
+								EXAMPLES
+								............................................................................................
+								// base URL is absolute (ie. has a domain)
+
+								Uize.Url.toRelative ('http://www.foo.com/','/foo/bar/');            // null
+								Uize.Url.toRelative ('http://www.foo.com/','foo/bar/');             // null
+								Uize.Url.toRelative ('http://www.foo.com/','../foo/bar/');          // null
+								Uize.Url.toRelative ('http://www.foo.com/','http://www.bar.com/');  // 'http://www.bar.com/'
+
+
+								// base URL is root-relative
+
+								Uize.Url.toRelative ('/foo/bar/','foo/bar/');                       // null
+								Uize.Url.toRelative ('/foo/bar/','../foo/bar/');                    // null
+								Uize.Url.toRelative ('/foo/bar/','http://www.bar.com/');            // 'http://www.bar.com/'
+
+
+								// base URL is forward-relative
+
+								Uize.Url.toRelative ('foo/bar/','/foo/bar/');                       // null
+								Uize.Url.toRelative ('foo/bar/','../foo/bar/');                     // null
+								Uize.Url.toRelative ('foo/bar/','http://www.bar.com/');             // 'http://www.bar.com/'
+
+
+								// base URL is back-relative
+
+								Uize.Url.toRelative ('../foo/bar/','/foo/bar/');                    // null
+								Uize.Url.toRelative ('../foo/bar/','foo/bar/');                     // null
+								Uize.Url.toRelative ('../foo/bar/','../../foo/bar/');               // null
+								Uize.Url.toRelative ('../foo/bar/','http://www.bar.com/');          // 'http://www.bar.com/'
+								............................................................................................
+
+								When the URL to Relativize is Absolute
+									`When a relative URL cannot be created` and the URL to relativize is absolute (ie. has a domain), then the URL to relativize will be returned rather than the value =null=.
+
+									The rationale behind this behavior is that an absolute URL, when resolved against another URL, will always produce that absolute URL. So, returning an absolute URL that can work against the base URL is better than returning =null=.
+
 							When the Base URL Contains a File Part
 								When the base URL contains a file part, that file part will be ignored and discarded when creating the relative URL.
 
-								This is a convenient behavior if you are using this method in a Web page to create relative URLs from absolute URLs, where the created URLs should be relative to the current document's URL. In such cases, the value of the =window.location.href= property can simply be passed to the =Uize.Url.toRelative= method as the base URL.
+								This is a convenient behavior if you are using this method in a Web page to create relative URLs from absolute URLs, and where the created URLs should be relative to the current document's URL. In such cases, the value of the =window.location.href= property can simply be passed to the =Uize.Url.toRelative= method as the value of the =baseUrlSTR= parameter.
 
 								EXAMPLE
 								...................................................
@@ -566,21 +695,7 @@ Uize.module ({
 								'../hello/world.html'
 								.....................
 
-								Because of this behavior, for any base URL that ends in a folder, the last folder in the path must end with a "/" (slash) character, otherwise the folder will be assumed to be a file part and will be discarded when creating the relative URL. The =Uize.Url.toRelative= method cannot tell the difference between a folder name and a filename that has no file extension (filename's are not required to have an extension indicating file type, after all, even though they often may).
-
-							When the URL to Relativize is Back-relative
-								.
-
-							When Both URLs Are Missing Hosts
-								.
-
-							When the URLs Have Differing Domains
-								.
-
-								### cases
-									- both base URL and URL to relativize are absolute and contain domains, but domains differ
-									- base URL is absolute and contains domain, while URL to relativize is forward-relative
-									- base URL is forward-relative, while URL to relativize is absolute and contains domain
+								Because of this behavior, for any base URL that ends in a folder, the URL must also end with a "/" (slash) character, otherwise the last folder will be assumed to be a file part and will be discarded when creating the relative URL. The =Uize.Url.toRelative= method cannot tell the difference between a folder name and a filename that has no file extension (filename's are not required to have an extension indicating file type, after all, even though they often may).
 
 							NOTES
 							- see the related =Uize.Url.toAbsolute= static method
