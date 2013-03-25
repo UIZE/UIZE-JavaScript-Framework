@@ -28,7 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Data',
 		'Uize.Class',
-		'Uize.Class.Value'
+		'Uize.Class.Value',
+		'Uize.Json'
 	],
 	builder:function () {
 		'use strict';
@@ -116,7 +117,12 @@ Uize.module ({
 		function _toNumberTestBatch (_wrapValueWithObject,_wrapValueWithFunction) {
 			function _toNumberTest (_value,_expectedValue) {
 				return {
-					title:'Blah',
+					title:
+						'Test that ' + Uize.Json.to (_value) + ' is coerced to ' + Uize.Json.to (_expectedValue) +
+						' (' +
+							'wrapped with object = ' + _wrapValueWithObject + ', ' +
+							'wrapped with function = ' + _wrapValueWithFunction +
+						')',
 					test:function () {
 						return this.expect (
 							_expectedValue,
@@ -1902,7 +1908,7 @@ Uize.module ({
 										) &&
 										_result != _source1 &&
 										_result != _source2 &&
-										_result != _source3 
+										_result != _source3
 									);
 								}
 							},
