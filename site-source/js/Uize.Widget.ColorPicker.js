@@ -25,9 +25,11 @@
 
 Uize.module ({
 	name:'Uize.Widget.ColorPicker',
+	superclass:'Uize.WidgetV2',
 	required:[
 		'Uize.Widget.Bar.Slider.xSkin',
-		'Uize.Color'
+		'Uize.Color',
+		'Uize.Templates.ColorPicker'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -35,72 +37,67 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
-				_null = null,
 				_true = true,
 				_false = false
 			;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function (_properties) {
-						var _this = this;
-
-						_this._color = Uize.Color ();
-
-						/*** Initialization ***/
-							function _addSlider (_sliderName,_sliderColor) {
-								var _slider = _this.addChild (
-									_sliderName,
-									Uize.Widget.Bar.Slider ({
-										minValue:0,
-										maxValue:255,
-										borderThickness:3,
-										borderTintColor:'#fff',
-										borderTintLevel:40,
-										knobSize:28,
-										emptyTintColor:'#fff',
-										emptyTintLevel:10,
-										fullTintColor:_sliderColor,
-										fullTintLevel:100,
-										built:_false
-									})
-								);
-								_slider.wire (
-									'Changed.value',
-									function () {
-										if (!_this._settingSliders) {
-											var _children = _this.children;
-											_this.set ({_value:_this._color.from (_this._rgbSliders).to ('hex')});
-										}
-									}
-								);
-								return _slider;
-							}
-							_this._rgbSliders = [
-								_addSlider ('sliderR','#f00'),_addSlider ('sliderG','#0f0'),_addSlider ('sliderB','#00f')
-							];
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Private Instance Methods ***/
-			_classPrototype._updateUiSwatch = function () {
-				this.isWired && this.setNodeStyle ('swatch',{background:'#' + this._value});
-			};
-
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var _this = this;
-				if (_this.isWired) {
-					Uize.callOn (_this.children,'updateUi');
-					_this._updateUiSwatch ();
-				}
-			};
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				_this._color = Uize.Color ();
+
+				/*** Initialization ***/
+					function _addSlider (_sliderName,_sliderColor) {
+						var _slider = _this.addChild (
+							_sliderName,
+							Uize.Widget.Bar.Slider,
+							{
+								minValue:0,
+								maxValue:255,
+								borderThickness:3,
+								borderTintColor:'#fff',
+								borderTintLevel:40,
+								knobSize:28,
+								emptyTintColor:'#fff',
+								emptyTintLevel:10,
+								fullTintColor:_sliderColor,
+								fullTintLevel:100
+							}
+						);
+						_slider.wire (
+							'Changed.value',
+							function () {
+								if (!_this._settingSliders) {
+									var _children = _this.children;
+									_this.set ({_value:_this._color.from (_this._rgbSliders).to ('hex')});
+								}
+							}
+						);
+						return _slider;
+					}
+					_this._rgbSliders = [
+						_addSlider ('sliderR','#f00'),_addSlider ('sliderG','#0f0'),_addSlider ('sliderB','#00f')
+					];
+			},
+
+			instanceMethods:{
+				/*** Private Instance Methods ***/
+					_updateUiSwatch:function () {
+						this.isWired && this.setNodeStyle ('swatch',{background:'#' + this._value});
+					},
+
+				/*** Public Instance Methods ***/
+					updateUi:function () {
+						var _this = this;
+						if (_this.isWired) {
+							Uize.callOn (_this.children,'updateUi');
+							_this._updateUiSwatch ();
+						}
+					}
+			},
+
+			stateProperties:{
 				_value:{
 					name:'value',
 					conformer:function (_value) {return Uize.Color.to (_value,'hex')},
@@ -119,52 +116,12 @@ Uize.module ({
 					},
 					value:'000000'
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
-				html:{
-					process:function (input) {
-						function _getSliderTdTag (_colorLetter) {
-							var _dimStyle = ' style="width:' + _sliderWidth + 'px; height:' + _sliderHeight + 'px;"';
-							return '<td id="' + input.idPrefix + '_slider' + _colorLetter + '"' + _dimStyle + '><img src="' + input.blankGif + '"' + _dimStyle + '/></td>';
-						}
-						var
-							_sliderWidth = input.sliderWidth != _undefined ? input.sliderWidth : 40,
-							_sliderHeight = input.sliderHeight != _undefined ? input.sliderHeight : 286
-						;
-						return (
-							'<table cellspacing="0" cellpadding="0">' +
-								'<tr>' +
-									'<td id="' + input.idPrefix + '-swatch" colspan="5" style="height:30px; border:1px solid #666;">&nbsp;</td>' +
-								'</tr>' +
-								'<tr>' +
-									'<td colspan="5" height="3"></td>' +
-								'</tr>' +
-								'<tr>' +
-									_getSliderTdTag ('R') +
-									'<td width="3"></td>' +
-									_getSliderTdTag ('G') +
-									'<td width="3"></td>' +
-									_getSliderTdTag ('B') +
-								'</tr>' +
-								'<tr>' +
-									'<td colspan="5" height="3"></td>' +
-								'</tr>' +
-								'<tr>' +
-									'<td style="background:#f00; height:15px; border:1px solid #666;">&nbsp;</td>' +
-									'<td width="3"></td>' +
-									'<td style="background:#0f0; height:15px; border:1px solid #666;">&nbsp;</td>' +
-									'<td width="3"></td>' +
-									'<td style="background:#00f; height:15px; border:1px solid #666;">&nbsp;</td>' +
-								'</tr>' +
-							'</table>'
-						);
-					}
-				}
-			});
-
-		return _class;
+			set:{
+				html:Uize.Templates.ColorPicker
+			}
+		});
 	}
 });
 

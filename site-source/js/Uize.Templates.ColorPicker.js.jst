@@ -1,0 +1,44 @@
+<%
+	var
+		_this = this,
+		_sliderWidth = input.sliderWidth != undefined ? input.sliderWidth : 40,
+		_sliderHeight = input.sliderHeight != undefined ? input.sliderHeight : 286
+	;
+	function _getSliderTdTag (_colorLetter) {
+		return (
+			'<td style="width:' + _sliderWidth + 'px; height:' + _sliderHeight + 'px;">' +
+				_this.childHtml ({
+					name:'slider' + _colorLetter,
+					thickness:_sliderWidth,
+					length:_sliderHeight
+				}) +
+			'</td>'
+		);
+	}
+%>
+<table cellspacing="0" cellpadding="0">
+	<tr>
+		<td id="<%= _this.nodeId ('swatch') %>" colspan="5" style="height:30px; border:1px solid #666;">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="5" height="3"></td>
+	</tr>
+	<tr>
+		<%= _getSliderTdTag ('R') %>
+		<td style="width:3px"></td>
+		<%= _getSliderTdTag ('G') %>
+		<td style="width:3px"></td>
+		<%= _getSliderTdTag ('B') %>
+	</tr>
+	<tr>
+		<td colspan="5" height="3"></td>
+	</tr>
+	<tr>
+		<td style="background:#f00; height:15px; border:1px solid #666;">&nbsp;</td>
+		<td width="3"></td>
+		<td style="background:#0f0; height:15px; border:1px solid #666;">&nbsp;</td>
+		<td width="3"></td>
+		<td style="background:#00f; height:15px; border:1px solid #666;">&nbsp;</td>
+	</tr>
+</table>
+

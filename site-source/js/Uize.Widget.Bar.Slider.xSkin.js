@@ -66,7 +66,7 @@ Uize.module ({
 									_shellDims [_dimAttributes [1 - _orientationNo]],
 									_shellDims [_dimAttributes [_orientationNo]]
 								]
-								: [35,280],
+								: [_input.thickness || 35,_input.length || 280],
 							_trackDims = [_outerDims [0] - _borderThickness * 2,_outerDims [1] - _borderThickness * 2],
 							_knobDims = [_trackDims [0],_knobSize],
 							_borderHtml = '',

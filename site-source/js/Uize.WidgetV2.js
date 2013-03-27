@@ -20,21 +20,22 @@
 	Introduction
 		The =Uize.WidgetV2= class implements the next generation widget base class and is currently under development.
 
-		*DEVELOPERS:* `Chris van Rensburg`, `Ben Ilegbodu`, `Vinson Chuong`
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 /* TO DO
 	- inserting UI should ensure that CSS is added to page
-	- implement a getHtml method that would...
-		- provide methods, as part of template input, to support...
-			- recursive inclusion of HTML from child widgets
-			- adding namespace to CSS class names
-			- adding id prefix to DOM node id's
+	- implement nodeId method
+	- implement cssClass method
 	- refactor buildHtml method to use new getHtml method
 */
 
 Uize.module ({
 	name:'Uize.WidgetV2',
+	required:[
+		'Uize.Json',
+		'Uize.Node'
+	],
 	superclass:'Uize.Widget',
 	builder:function (_superclass) {
 		'use strict';
@@ -42,14 +43,37 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var _undefined = undefined;
 
+		/*** Utility Functions ***/
+			function _cssClassPrefixFromModuleName (_moduleName) {
+				return _moduleName.replace (/\./g,'_');
+			}
+
+			function _cssClassPrefixFromModule (_module) {
+				return _module._classPrefix || (_module._classPrefix = _cssClassPrefixFromModuleName (_module.moduleName));
+			}
+
+			function _cssClassNameGeneratorFromModules (_modules) {
+				var _classNameGeneratorStr = '';
+				for (var _moduleNo = -1, _modulesLength = _modules.length; ++_moduleNo < _modulesLength;)
+					_classNameGeneratorStr +=
+						(_classNameGeneratorStr && ' + \' \' + ') +
+						'\'' + _cssClassPrefixFromModule (_modules [_moduleNo]) + '\' + classSuffix'
+				;
+				return new Function (
+					'nodeName',
+					'var classSuffix = (nodeName || \'\') && \'-\' + nodeName;' +
+					'return ' + _classNameGeneratorStr + ';'
+				);
+			}
+
 		var _class = _superclass.subclass ({
 			instanceMethods:{
 				childHtml:function (_properties) {
 					var
 						_this = this,
 						_childName = _properties.name,
-						_widgetClass = _properties.widgetClass || _class,
-						_widgetClassName = Uize.getModuleByName (_widgetClass).moduleName,
+						_widgetClass = Uize.getModuleByName (_properties.widgetClass) || _class,
+						_widgetClassName = _widgetClass.moduleName,
 						_children = _this.children
 					;
 
@@ -60,15 +84,8 @@ Uize.module ({
 
 					/*** if child name not specified, generate one using widget class module name ***/
 						if (!_childName) {
-							var _generatedChildNamesPerModule =
-								_this._generatedChildNamesPerModule || (_this._generatedChildNamesPerModule = {})
-							;
-							if (_generatedChildNamesPerModule [_widgetClassName] == _undefined)
-								_generatedChildNamesPerModule [_widgetClassName] = 0
-							;
-							_childName =
-								_widgetClassName.replace (/\./g,'_') + '_' + _generatedChildNamesPerModule [_widgetClassName]++
-							;
+							_this._generatedChildNames || (_this._generatedChildNames = 0);
+							_childName = 'generatedChildName' + _this._generatedChildNames++;
 						}
 
 					var
@@ -80,33 +97,44 @@ Uize.module ({
 						? _child.set (_properties)
 						: (_child = _this.addChild (_childName,_widgetClass,_properties))
 					;
-					if (_child.get ('built')) {
-						_html = '<div id="' + _child.nodeId ('shell') + '"></div>';
-					} else {
-						_html = _child.getHtml ();
-					}
-					if (_childExisted) {
-						if (!Uize.isEmpty (_suppliedState))
-							_html +=
-								'<script type="text/javascript">\n' +
-									'// declarative syntax for widget properties code\n' +
-								'</script>'
-						;
-					} else {
+					_html = _child.get ('built')
+						? _child.getHtml ()
+						: '<div id="' + _child.nodeId ('shell') + '"></div>'
+					;
+					_childExisted ||
+						Uize.copyInto (_suppliedState,{widgetClass:_widgetClassName})
+					;
+					if (!Uize.isEmpty (_suppliedState))
 						_html +=
 							'<script type="text/javascript">\n' +
-								'// widget adoption declaration\n' +
+								'$' + _child.get ('idPrefix') + ' = ' +
+									Uize.Json.to (_suppliedState) +
+								';\n' +
 							'</script>'
-						;
-					}
+					;
 
 					return _html;
 				},
 
-				nodeId:function (_nodeName) {
+				nodeId:function (_nodeId) {
+					return Uize.Node.joinIdPrefixAndNodeId (this.get ('idPrefix'),_nodeId || '');
 				},
 
 				cssClass:function (_className) {
+					var _thisClass = this.Class;
+					if (!_thisClass._cssClassNameGenerator) {
+						var
+							_inheritanceChain = [],
+							_module = _thisClass
+						;
+						while (_module) {
+							_inheritanceChain.unshift (_module);
+							if (_module == _class) break;
+							_module = _module.superclass;
+						}
+						_thisClass._cssClassNameGenerator = _cssClassNameGeneratorFromModules (_inheritanceChain);
+					}
+					return _thisClass._cssClassNameGenerator (_className);
 				}
 			}
 		});

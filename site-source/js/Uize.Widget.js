@@ -153,6 +153,33 @@ Uize.module ({
 					);
 				},
 
+				_getNodeToInjectInto:function () {
+					return this._container || this.getNode ('shell') || this.getNode ();
+					/*?
+						Implied Nodes
+							Root Node
+								The optional `root node` of a widget is the implied node with the name =''= (empty string).
+
+								The =id= for the root node of a widget instance is the value of that instance's =idPrefix= state property - there is no "-" (hyphen) separating the =idPrefix= and the empty implied node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=.
+
+								A reference to the root node can be obtained by either specifying the value =''= (empty string) or no =impliedNodeSTRorBLOB= parameter when calling the =getNode= instance method, as in...
+
+								............................................
+								var theRootNode = myWidget.getNode ();
+								var alsoTheRootNode = myWidget.getNode ('');
+								............................................
+
+								Similarly, when using the `node related instance methods`, one can specify the value =''= (empty string), as in...
+
+								....................................................................................
+								myWidget.displayNode ('',false); // hide myWidget, if it has a root node in its HTML
+								....................................................................................
+
+							shell
+								The optional =shell= implied node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
+					*/
+				},
+
 				_tryUseConfirmInheritedFromTree:function (_mode,_params,_builtInConfirmFallback) {
 					var _promptMethodName = 'show' + _Uize.capFirstChar (_mode);
 					this.getProvider (_promptMethodName)
@@ -549,36 +576,13 @@ Uize.module ({
 					*/
 				},
 
-				buildHtml:function (_alternateTemplateInput) {
+				getHtml:function (_alternateTemplateInput) {
 					var
 						_this = this,
 						_html = _this._html
 					;
 					if (_html != _undefined) {
-						var _nodeToInjectInto = _this._container || _this.getNode ('shell') || _this.getNode ();
-						/*?
-							Implied Nodes
-								Root Node
-									The optional `root node` of a widget is the implied node with the name =''= (empty string).
-
-									The =id= for the root node of a widget instance is the value of that instance's =idPrefix= state property - there is no "-" (hyphen) separating the =idPrefix= and the empty implied node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=.
-
-									A reference to the root node can be obtained by either specifying the value =''= (empty string) or no =impliedNodeSTRorBLOB= parameter when calling the =getNode= instance method, as in...
-
-									............................................
-									var theRootNode = myWidget.getNode ();
-									var alsoTheRootNode = myWidget.getNode ('');
-									............................................
-
-									Similarly, when using the `node related instance methods`, one can specify the value =''= (empty string), as in...
-
-									....................................................................................
-									myWidget.displayNode ('',false); // hide myWidget, if it has a root node in its HTML
-									....................................................................................
-
-								shell
-									The optional =shell= implied node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
-						*/
+						var _nodeToInjectInto = _this._getNodeToInjectInto ();
 						if (_html === _true) {
 							_html = _this._html = _Uize.Template && _nodeToInjectInto
 								? {
@@ -597,24 +601,36 @@ Uize.module ({
 						_this._idPrefix || _this.set ({_idPrefix:_this.instanceId});
 						var
 							_templateInput = _Uize.copyInto (
-							{
-								pathToResources:_Uize.pathToResources,
-								blankGif:_class.getBlankImageUrl ()
-							},
-							_alternateTemplateInput || _this.get ()
+								{
+									pathToResources:_Uize.pathToResources,
+									blankGif:_class.getBlankImageUrl ()
+								},
+								_alternateTemplateInput || _this.get ()
 							),
 							_htmlFuncOutput
 						;
+						_html = typeof _html != _typeString && _isFunction (_html.process)
+							? _html.process.call (_this,_templateInput)
+							: _isFunction (_html)
+								? typeof (_htmlFuncOutput = _html (_templateInput)) === 'string'
+									? _Uize.substituteInto (_htmlFuncOutput, _templateInput)
+									: _htmlFuncOutput
+								: _Uize.substituteInto (_html, _templateInput)
+						;
+					}
+					return _html;
+				},
+
+				buildHtml:function (_alternateTemplateInput) {
+					var
+						_this = this,
+						_html = _this.getHtml (_alternateTemplateInput)
+					;
+					if (_html != _undefined) {
+						var _nodeToInjectInto = _this._getNodeToInjectInto ();
 						_Uize_Node.injectHtml (
 							_nodeToInjectInto || document.body,
-							typeof _html != _typeString && _isFunction (_html.process)
-								? _html.process.call (_this,_templateInput)
-								: _isFunction (_html)
-									? typeof (_htmlFuncOutput = _html (_templateInput)) === 'string'
-										? _Uize.substituteInto (_htmlFuncOutput, _templateInput)
-										: _htmlFuncOutput
-									: _Uize.substituteInto (_html, _templateInput)
-							,
+							_html,
 							_this._insertionMode || (_nodeToInjectInto ? 'inner replace' : 'inner bottom')
 						);
 						_this._nodeCache = _null;
