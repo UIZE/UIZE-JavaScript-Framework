@@ -33,7 +33,9 @@ Uize.module ({
 		'Uize.Build.FileBuilders.BuiltLibraryModules',
 		'Uize.Build.FileBuilders.BuiltModules',
 		'Uize.Build.FileBuilders.TempJsModules',
-		'Uize.Build.FileBuilders.CompiledJstModules'
+		'Uize.Build.FileBuilders.CompiledJstModules',
+		'Uize.Build.FileBuilders.CompiledCss',
+		'Uize.Build.FileBuilders.CompiledCssModules'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -49,7 +51,9 @@ Uize.module ({
 						Uize.Build.FileBuilders.BuiltLibraryModules,
 						Uize.Build.FileBuilders.BuiltModules,
 						Uize.Build.FileBuilders.TempJsModules,
-						Uize.Build.FileBuilders.CompiledJstModules
+						Uize.Build.FileBuilders.CompiledJstModules,
+						Uize.Build.FileBuilders.CompiledCss,
+						Uize.Build.FileBuilders.CompiledCssModules
 					);
 
 					_callback ();

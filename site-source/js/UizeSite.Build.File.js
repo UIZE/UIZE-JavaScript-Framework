@@ -94,6 +94,8 @@ Uize.module ({
 		'UizeSite.Build.FileBuilders.ExampleSourceCodePages',
 		'Uize.Build.FileBuilders.SimpleDataPages',
 		'Uize.Build.FileBuilders.CompiledJstModules',
+		'Uize.Build.FileBuilders.CompiledCss',
+		'Uize.Build.FileBuilders.CompiledCssModules',
 		'Uize.Build.FileBuilders.InMemoryModuleMetadata',
 		'Uize.Build.FileBuilders.InMemoryModuleBuiltSize',
 		'UizeSite.Build.FileBuilders.SotuPage'
@@ -142,6 +144,8 @@ Uize.module ({
 						UizeSite.Build.FileBuilders.ExampleSourceCodePages,
 						Uize.Build.FileBuilders.SimpleDataPages,
 						Uize.Build.FileBuilders.CompiledJstModules,
+						Uize.Build.FileBuilders.CompiledCss,
+						Uize.Build.FileBuilders.CompiledCssModules,
 						Uize.Build.FileBuilders.InMemoryModuleMetadata,
 						Uize.Build.FileBuilders.InMemoryModuleBuiltSize,
 						UizeSite.Build.FileBuilders.SotuPage
