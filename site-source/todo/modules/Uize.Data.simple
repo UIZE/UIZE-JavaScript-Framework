@@ -24,8 +24,7 @@ Uize.Data.makeValueTransformerGenerator = function (_valueTransformer) {
 	_valueTransformer = Uize.resolveTransformer (_valueTransformer);
 	var _generator = function () {
 		if (arguments.length) {
-			var _arguments = [0];
-			_arguments.push.apply (_arguments,arguments);
+			var _arguments = Uize.push ([0],arguments);
 			return function (_value) {
 				_arguments [0] = _value;
 				return _valueTransformer.apply (0,_arguments);
