@@ -1082,7 +1082,7 @@ Uize = (function () {
 
 						EXAMPLE
 						...............................
-						var result = Uize.mergeInto (
+						var result = Uize.merge (
 							{foo:{bar:{hello:'world'}}},
 							{foo:{bar:{boo:'yah'}}},
 							null,
