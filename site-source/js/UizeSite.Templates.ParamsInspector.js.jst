@@ -1,5 +1,7 @@
-<% @input ({idPrefix:'string',params:'object',presets:'object',previewButtonText:'string'}) %>
-<% @required ('UizeSite.Templates.ParamsTable') %>
+<%@
+	input ({idPrefix:'string',params:'object',presets:'object',previewButtonText:'string'});
+	required ('UizeSite.Templates.ParamsTable');
+%>
 <div class="tabShell">
 	<div class="tabStubShell">
 		<a id="<% .idPrefix %>_tabs_option0" class="tabStub" href="javascript://">PRESETS</a>
