@@ -251,8 +251,14 @@ Uize.module ({
 				/*** compiler directives ***/
 					/*** interface type directives ***/
 						function required (_requiredModules) {
+							var _arguments = arguments;
 							Uize.forEach (
-								typeof _requiredModules == _string ? _requiredModules.split (',') : _requiredModules,
+								_arguments.length != 1
+									? _arguments
+									: typeof _requiredModules == _string
+										? _requiredModules.split (',')
+										: _requiredModules
+								,
 								function (_requiredModuleName) {
 									if (!_alreadyRequired [_requiredModuleName]) {
 										_required.push (_requiredModuleName);
@@ -263,35 +269,91 @@ Uize.module ({
 							/*?
 								Directives
 									@required
-										Lets you specify modules that are required by the code inside a JavaScript template.
+										Lets you specify one or more modules that are required by the code inside a JavaScript template.
 
-										SYNTAX
-										.......................................
-										<%@ required (moduleNamesSTRorARRAY) %>
-										.......................................
+										The entire list of modules required for your template to process is returned in the =required= property of the =Uize.Template.compile= method's result, when the value ='full'= is specified for its optional =templateOptionsOBJ= parameter.
 
-										The =moduleNamesSTRorARRAY= parameter can be used to specify one or more module names, either in the form of a comma-separated module names string, or as an array of module name strings. The entire list of modules required for your template to process is returned in the =required= property of the =Uize.Template.compile= method's result, when the value ='full'= is specified for its optional =templateOptionsOBJ= parameter.
+										DIFFERENT USAGES
 
-										EXAMPLE 1
-										............................
-										<%@ required ('Uize.Xml') %>
-										............................
+										`Declare a Single Required Module, Specifying it as a String`
+										...............................
+										<%@ required (moduleNameSTR) %>
+										...............................
 
-										In the above example, the =@required= directive declares that the template needs the =Uize.Xml= module for its processing.
+										`Declare Multiple Required Modules, Specifying Them as a Comma-separated String`
+										................................
+										<%@ required (moduleNamesSTR) %>
+										................................
 
-										EXAMPLE 2
-										.......................................
-										<%@ required ('Uize.Xml,Uize.Color') %>
-										.......................................
+										`Declare Multiple Required Modules, Specifying Them as an Array`
+										..................................
+										<%@ required (moduleNamesARRAY) %>
+										..................................
 
-										Here, the =@required= directive declares that both the =Uize.Xml= and =Uize.Color= modules are needed for the module's processing.
+										`Declare Multiple Required Modules, Specifying Them by Multiple String Arguments`
+										..................................................................
+										<%@ required (module1NameSTR,module2NameSTR,module3NameSTR,...) %>
+										..................................................................
 
-										EXAMPLE 3
-										...........................................
-										<%@ required (['Uize.Xml','Uize.Color']) %>
-										...........................................
+										Declare a Single Required Module, Specifying it as a String
+											A single module can be declareed as a dependency for the template by specifying the module's name for the =moduleNameSTR= parameter.
 
-										As an alternative to a comma-separated module names string, the =Uize.Xml= and =Uize.Color= modules can be specified as individual string elements of a module names array.
+											SYNTAX
+											...............................
+											<%@ required (moduleNameSTR) %>
+											...............................
+
+											EXAMPLE
+											............................
+											<%@ required ('Uize.Xml') %>
+											............................
+
+											In the above example, the =@required= directive declares that the template needs the =Uize.Xml= module for its processing.
+
+										Declare Multiple Required Modules, Specifying Them as a Comma-separated String
+											Multiple modules can be declareed as dependencies for the template by specifying the names of the modules in the comma-separated string for the =moduleNamesSTR= parameter.
+
+											SYNTAX
+											................................
+											<%@ required (moduleNamesSTR) %>
+											................................
+
+											EXAMPLE
+											.................................................
+											<%@ required ('Uize.Xml,Uize.Color,Uize.Data') %>
+											.................................................
+
+											In the above example, the =@required= directive declares that the =Uize.Xml=, =Uize.Color=, and =Uize.Data= modules are needed for the module's processing.
+
+										Declare Multiple Required Modules, Specifying Them as an Array
+											Multiple modules can be declareed as dependencies for the template by specifying an array of module names for the =moduleNamesARRAY= parameter.
+
+											SYNTAX
+											..................................
+											<%@ required (moduleNamesARRAY) %>
+											..................................
+
+											EXAMPLE
+											.......................................................
+											<%@ required (['Uize.Xml','Uize.Color','Uize.Data']) %>
+											.......................................................
+
+											In the above example, the =@required= directive declares that the =Uize.Xml=, =Uize.Color=, and =Uize.Data= modules are needed for the module's processing.
+
+										Declare Multiple Required Modules, Specifying Them by Multiple String Arguments
+											Multiple modules can be declareed as dependencies for the template by specifying the module names as an arbitrarily long list of string arguments.
+
+											SYNTAX
+											..................................................................
+											<%@ required (module1NameSTR,module2NameSTR,module3NameSTR,...) %>
+											..................................................................
+
+											EXAMPLE
+											.....................................................
+											<%@ required ('Uize.Xml','Uize.Color','Uize.Data') %>
+											.....................................................
+
+											In the above example, the =@required= directive declares that the =Uize.Xml=, =Uize.Color=, and =Uize.Data= modules are needed for the module's processing.
 
 										Multiple Calls
 											You can call the =@required= directive multiple times inside the same template, which will have a cumulative effect in building up the required modules list.
