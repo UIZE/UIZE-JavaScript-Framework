@@ -23,13 +23,6 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-/* TO DO
-	- inserting UI should ensure that CSS is added to page
-	- implement nodeId method
-	- implement cssClass method
-	- refactor buildHtml method to use new getHtml method
-*/
-
 Uize.module ({
 	name:'Uize.WidgetV2',
 	required:[
@@ -43,6 +36,12 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var _undefined = undefined;
 
+		/*** General Variables ***/
+			var
+				_cssClassNameGenerators = {},
+				_cssAddedLookup = {}
+			;
+
 		/*** Utility Functions ***/
 			function _cssClassPrefixFromModuleName (_moduleName) {
 				return _moduleName.replace (/\./g,'_');
@@ -54,11 +53,14 @@ Uize.module ({
 
 			function _cssClassNameGeneratorFromModules (_modules) {
 				var _classNameGeneratorStr = '';
-				for (var _moduleNo = -1, _modulesLength = _modules.length; ++_moduleNo < _modulesLength;)
-					_classNameGeneratorStr +=
-						(_classNameGeneratorStr && ' + \' \' + ') +
-						'\'' + _cssClassPrefixFromModule (_modules [_moduleNo]) + '\' + classSuffix'
-				;
+				for (var _moduleNo = -1, _modulesLength = _modules.length, _cssModule; ++_moduleNo < _modulesLength;) {
+					_cssModule = _modules [_moduleNo].cssModule;
+					if (_cssModule)
+						_classNameGeneratorStr +=
+							(_classNameGeneratorStr && ' + \' \' + ') +
+							'\'' + _cssClassPrefixFromModule (_cssModule) + '\' + classSuffix'
+					;
+				}
 				return new Function (
 					'nodeName',
 					'var classSuffix = (nodeName || \'\') && \'-\' + nodeName;' +
@@ -67,6 +69,10 @@ Uize.module ({
 			}
 
 		var _class = _superclass.subclass ({
+			alphastructor:function () {
+				this.Class._needCss ();
+			},
+
 			instanceMethods:{
 				childHtml:function (_properties) {
 					var
@@ -121,8 +127,11 @@ Uize.module ({
 				},
 
 				cssClass:function (_className) {
-					var _thisClass = this.Class;
-					if (!_thisClass._cssClassNameGenerator) {
+					var
+						_thisClass = this.Class,
+						_thisClassName = _thisClass.moduleName
+					;
+					if (!_cssClassNameGenerators [_thisClassName]) {
 						var
 							_inheritanceChain = [],
 							_module = _thisClass
@@ -132,12 +141,28 @@ Uize.module ({
 							if (_module == _class) break;
 							_module = _module.superclass;
 						}
-						_thisClass._cssClassNameGenerator = _cssClassNameGeneratorFromModules (_inheritanceChain);
+						_cssClassNameGenerators [_thisClassName] = _cssClassNameGeneratorFromModules (_inheritanceChain);
 					}
-					return _thisClass._cssClassNameGenerator (_className);
+					return _cssClassNameGenerators [_thisClassName] (_className);
+				}
+			},
+
+			staticMethods:{
+				_needCss:function () {
+					var
+						_this = this,
+						_moduleName = _this.moduleName
+					;
+					if (!_cssAddedLookup [_moduleName]) {
+						_this.cssModule && _this.cssModule.add ();
+						_this.superclass._needCss && _this.superclass._needCss ();
+						_cssAddedLookup [_moduleName] = 1;
+					}
 				}
 			}
 		});
+
+		_class.nonInheritableStatics.cssModule = 1;
 
 		return _class;
 	}

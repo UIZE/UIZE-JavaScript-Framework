@@ -1,0 +1,10 @@
+.$$ {
+	border:1px solid #f0f;
+	padding:10px;
+	background:#ccc;
+}
+
+.$slider$ {
+	padding:5px;
+	background:#fff;
+}

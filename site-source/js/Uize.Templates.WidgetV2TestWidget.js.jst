@@ -2,12 +2,13 @@
 	'Uize.WidgetV2.AnotherTestWidget',
 	'Uize.Widget.Bar.Slider.xSkin'
 ]) %>
-<div id="<%= this.nodeId () %>" class="<%= this.cssClass ('selected') %>" style="border:1px solid #f00; padding:10px;">
+<div id="<%= this.nodeId () %>" class="<%= this.cssClass () %>">
 	TEST WIDGET
 	<%= this.childHtml ({
 		widgetClass:Uize.WidgetV2.AnotherTestWidget,
 		label:'FOO'
 	}) %>
+	<div class="<%= this.cssClass ('slider') %>">
 	<%= this.childHtml ({
 		widgetClass:Uize.Widget.Bar.Slider,
 		minValue:0,
@@ -16,5 +17,6 @@
 		orientation:'horizontal',
 		borderThickness:2
 	}) %>
+	</div>
 </div>
 

@@ -27,17 +27,18 @@ Uize.module ({
 	name:'Uize.WidgetV2.TestWidget',
 	required:[
 		'Uize.Templates.WidgetV2TestWidget',
-		'Uize.WidgetV2.AnotherTestWidget'
+		'Uize.WidgetV2.TestWidgetCss'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined = undefined;
-
 		var _class = _superclass.subclass ({
 			set:{
 				html:Uize.Templates.WidgetV2TestWidget
+			},
+
+			staticProperties:{
+				cssModule:Uize.WidgetV2.TestWidgetCss
 			}
 		});
 

@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.WidgetV2.AnotherTestWidget',
-	required:'Uize.Templates.WidgetV2AnotherTestWidget',
+	required:[
+		'Uize.Templates.WidgetV2AnotherTestWidget',
+		'Uize.WidgetV2.AnotherTestWidgetCss'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -35,6 +38,10 @@ Uize.module ({
 		var _class = _superclass.subclass ({
 			set:{
 				html:Uize.Templates.WidgetV2AnotherTestWidget
+			},
+
+			staticProperties:{
+				cssModule:Uize.WidgetV2.AnotherTestWidgetCss
 			}
 		});
 
