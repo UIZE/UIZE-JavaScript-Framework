@@ -1,5 +1,6 @@
 <%@ required ([
 	'Uize.WidgetV2.AnotherTestWidget',
+	'Uize.WidgetV2.AnotherTestWidget.Subclass',
 	'Uize.Widget.Bar.Slider.xSkin'
 ]) %>
 <div id="<%= this.nodeId () %>" class="<%= this.cssClass () %>">
@@ -7,6 +8,10 @@
 	<%= this.childHtml ({
 		widgetClass:Uize.WidgetV2.AnotherTestWidget,
 		label:'FOO'
+	}) %>
+	<%= this.childHtml ({
+		widgetClass:Uize.WidgetV2.AnotherTestWidget.Subclass,
+		label:'BAR'
 	}) %>
 	<div class="<%= this.cssClass ('slider') %>">
 	<%= this.childHtml ({
