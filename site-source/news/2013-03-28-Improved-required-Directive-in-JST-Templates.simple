@@ -1,0 +1,35 @@
+The =@required= directive, that is part of the JST template system implemented in the =Uize.Template= module, has been improved to allow the required modules to be specified in an arbitrarily long list of string arguments.
+
+This is a convenience that makes declaring multiple module dependencies for a template a little less verbose and more intuitive.
+
+INSTEAD OF...
+......................
+<%@
+	required (
+		[
+			'Uize.Xml',
+			'Uize.Color',
+			'Uize.Data'
+		]
+	)
+%>
+......................
+
+USE...
+...................
+<%@
+	required (
+		'Uize.Xml',
+		'Uize.Color',
+		'Uize.Data'
+	)
+%>
+...................
+
+It's a subtle difference, but you will notice that the variadic form doesn't require the list of required modules to be specified as a string array, so no extra square brackets needed. The change is less about having less to type than it is about a more intuitive interface. Since the variadic form is arguably intuitive to many people, those people might be unpleasantly surprised from time to time when what they instinctively try doesn't work as they would have expected. This change makes the =@required= directive more concise, flexible, and intuitive at the same time.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-03-28 - Improved required Directive in JST Templates
+....................................................................................
