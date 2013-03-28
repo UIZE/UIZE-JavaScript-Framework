@@ -49,7 +49,7 @@ Uize.module ({
 							_pathPlusSubPath = _path + (_path && _subPath && '/') + _subPath,
 							_currentItemPath
 						;
-						_result.push.apply (
+						Uize.push (
 							_result,
 							_this.getItemsInFolder ({
 								path:_pathPlusSubPath,

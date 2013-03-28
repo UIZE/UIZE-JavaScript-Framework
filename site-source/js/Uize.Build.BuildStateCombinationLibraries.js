@@ -117,7 +117,7 @@ Uize.module ({
 						var _modules = [];
 						Uize.forEach (
 							_stateCombination,
-							function (_stateName) {_modules.push.apply (_modules,_statesLookup [_stateName].modules)}
+							function (_stateName) {Uize.push (_modules,_statesLookup [_stateName].modules)}
 						);
 						_stateCombinationDependencies = _dependenciesByStateCombination [_stateCombinationId] =
 							Uize.Build.ModuleInfo.traceDependencies (_modules,_excludeModules)

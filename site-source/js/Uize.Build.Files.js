@@ -33,10 +33,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var
-			_Array_prototype_push = [].push,
-			_undefined
-		;
+		var _undefined;
 
 		return _superclass.subclass ({
 			staticMethods:{
@@ -45,7 +42,7 @@ Uize.module ({
 				},
 
 				addFiles:function (_files) {
-					_Array_prototype_push.apply (
+					Uize.push (
 						this.filesToBuild,
 						arguments.length == 1 && Uize.isArray (_files) ? _files : arguments
 					);

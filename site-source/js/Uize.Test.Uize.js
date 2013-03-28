@@ -85,12 +85,6 @@ Uize.module ({
 		_sparselyPopulatedArray [2] = 1;
 		_sparselyPopulatedArray [7] = 2;
 
-		function _copyArguments (_arguments) {
-			var _result = [];
-			_result.push.apply (_result,_arguments);
-			return _result;
-		}
-
 		function _arrayToListObject (_array) {
 			var _listObject = Uize.map (_array,'value',{});
 			_listObject.length = _array.length;
@@ -3316,7 +3310,7 @@ Uize.module ({
 								;
 								Uize.callOn (
 									_target,
-									function () {_actualArguments = _copyArguments (arguments)},
+									function () {_actualArguments = Uize.copyList (arguments)},
 									_expectedArguments
 								);
 								return this.expect (_expectedArguments,_actualArguments);
@@ -3345,7 +3339,7 @@ Uize.module ({
 									_expectedArguments = ['foo',42,true],
 									_actualArguments
 								;
-								_target.someSillyMethodName = function () {_actualArguments = _copyArguments (arguments)};
+								_target.someSillyMethodName = function () {_actualArguments = Uize.copyList (arguments)};
 								Uize.callOn (_target,'someSillyMethodName',_expectedArguments);
 								return this.expect (_expectedArguments,_actualArguments);
 							}
@@ -3368,7 +3362,7 @@ Uize.module ({
 									function () {
 										_callLog.push ({
 											_name:this.get ('name'),
-											_arguments:_copyArguments (arguments)
+											_arguments:Uize.copyList (arguments)
 										});
 									},
 									_testArguments
@@ -3401,7 +3395,7 @@ Uize.module ({
 									function () {
 										_callLog.push ({
 											_name:this.get ('name'),
-											_arguments:[].concat.apply ([],arguments)
+											_arguments:Uize.copyList (arguments)
 										});
 									},
 									_testArguments
@@ -3458,7 +3452,7 @@ Uize.module ({
 									function () {
 										_actualCallLog.push ({
 											_name:this.get ('name'),
-											_arguments:[].concat.apply ([],arguments)
+											_arguments:Uize.copyList (arguments)
 										});
 									},
 									_testArguments

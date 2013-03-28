@@ -342,8 +342,8 @@ Uize.module ({
 											_compareObjectsForIdentical ();
 
 											/*** restore removed elements to arrays ***/
-												_object1.push.apply (_object1,_object1Elements);
-												_object2.push.apply (_object2,_object2Elements);
+												Uize.push (_object1,_object1Elements);
+												Uize.push (_object2,_object2Elements);
 										}
 									}
 								} else {

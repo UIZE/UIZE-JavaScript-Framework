@@ -72,8 +72,7 @@ Uize.module ({
 				_undefined,
 				_startsWith = Uize.String.startsWith,
 				_sacredEmptyObject = {},
-				_trueFlag = {},
-				_Array_prototype_push = [].push
+				_trueFlag = {}
 			;
 
 		/*** Utility Functions ***/
@@ -137,7 +136,7 @@ Uize.module ({
 
 			instanceMethods:{
 				registerFileBuilders:function (_urlHandler) {
-					_Array_prototype_push.apply (this.urlHandlers,Uize.Array.Util.flatten (arguments,Infinity,true));
+					Uize.push (this.urlHandlers,Uize.Array.Util.flatten (arguments,Infinity,true));
 				},
 
 				/*** URL tester methods ***/

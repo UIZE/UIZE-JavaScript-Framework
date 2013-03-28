@@ -2967,7 +2967,7 @@ Uize = (function () {
 		};
 
 		var _isArray = _package.isArray = function (_value) {
-			return _value instanceof Array || (!!_value && _isFunction (_value.splice));
+			return _value instanceof _Array || (!!_value && _isFunction (_value.splice));
 			/*?
 				Static Methods
 					Uize.isArray
@@ -3874,6 +3874,43 @@ Uize = (function () {
 
 						NOTES
 						- see also the other `useful value transformers`
+			*/
+		};
+
+		_package.copyList = function (_list) {
+			return _sacredEmptyArray.slice.call (_list);
+			/*?
+				Static Methods
+					Uize.copyList
+						SYNTAX
+						...
+						...
+
+						EXAMPLE
+						...
+						...
+
+						NOTES
+						- see also the other `basic data utilities`
+			*/
+		};
+
+		_package.push = function (_targetList,_toAppend) {
+			_targetList.push.apply (_targetList,_toAppend);
+			return _targetList;
+			/*?
+				Static Methods
+					Uize.push
+						SYNTAX
+						...
+						...
+
+						EXAMPLE
+						...
+						...
+
+						NOTES
+						- see also the other `basic data utilities`
 			*/
 		};
 

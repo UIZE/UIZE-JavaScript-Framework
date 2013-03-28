@@ -38,12 +38,6 @@ Uize.module ({
 			{},[],1,-1,true,'foo'          // truthy values
 		];
 
-		function _copyArguments (_arguments) {
-			var _result = [];
-			_result.push.apply (_result,_arguments);
-			return _result;
-		}
-
 		function _eventsSystemTest (_title,_isInstance) {
 			function _getEventSource () {
 				return _isInstance ? Uize.Class () : Uize.Class.subclass ();
@@ -1824,7 +1818,7 @@ Uize.module ({
 											bar:{
 												value:'the value of bar',
 												onChange:function () {
-													_argumentsForBarOnChangeHandler = _copyArguments (arguments);
+													_argumentsForBarOnChangeHandler = Uize.copyList (arguments);
 												}
 											},
 											helloWorld:{
@@ -1834,10 +1828,10 @@ Uize.module ({
 												value:'initial value',
 												onChange:[
 													function () {
-														_argumentsForMyPropertyOnChangeHandler1 = _copyArguments (arguments);
+														_argumentsForMyPropertyOnChangeHandler1 = Uize.copyList (arguments);
 													},
 													function () {
-														_argumentsForMyPropertyOnChangeHandler2 = _copyArguments (arguments);
+														_argumentsForMyPropertyOnChangeHandler2 = Uize.copyList (arguments);
 													}
 												]
 											}
@@ -2089,7 +2083,7 @@ Uize.module ({
 										_Subclass.stateProperties ({
 											myProperty:{
 												conformer:function (_newValue,_currentValue) {
-													_actualConformerArguments = _copyArguments (arguments);
+													_actualConformerArguments = Uize.copyList (arguments);
 													return _newValue;
 												},
 												value:5

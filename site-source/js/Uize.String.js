@@ -429,7 +429,7 @@ Uize.module ({
 							_result.push (_sourceStr.slice (_lastIndex,_match ? _match.index : _sourceStrLength));
 							if (_match) {
 								_match.length > 1 && _match.index < _sourceStrLength &&
-									_result.push.apply (_result,_match.slice (1))
+									Uize.push (_result,_match.slice (1))
 								;
 								_lastIndex = _splitter.lastIndex = _match.index + _matchStr.length;
 								_matchStr && _lastIndex == _sourceStrLength &&
