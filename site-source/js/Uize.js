@@ -64,6 +64,7 @@
 					- =Uize.clone= - clones a value, and creates deep clones of object or array type values
 					- =Uize.copy= - copies the values of properties from one or more source objects into a fresh object
 					- =Uize.copyInto= - copies the values of properties from one or more source objects into a target object
+					- =Uize.copyList= - copies the elements of a source list object into a fresh array
 					- =Uize.emptyOut= - empties out the contents of an object or array
 					- =Uize.findRecord= - finds the first record in a records array that matches specified criteria
 					- =Uize.findRecordNo= - returns the index of the first record in a records array that matches specified criteria
@@ -78,6 +79,7 @@
 					- =Uize.mergeInto= - merges the contents of one or more source objects into a target object
 					- =Uize.min= - returns the smallest value in a values array
 					- =Uize.pairUp= - uses a list of key/value pairs to form an object
+					- =Uize.push= - pushes / appends the elements from a source list onto the end of a target list
 					- =Uize.recordMatches= - determines if a record object matches the specified criteria
 					- =Uize.reverseLookup= - creates a reverse lookup from a specified lookup object or values array
 					- =Uize.totalKeys= - counts the number of keys in an object (essentially the number of properties)
@@ -3916,19 +3918,51 @@ Uize = (function () {
 			*/
 		};
 
-		_package.push = function (_targetList,_toAppend) {
-			_targetList.push.apply (_targetList,_toAppend);
+		_package.push = function (_targetList,_sourceList) {
+			_sacredEmptyArray.push.apply (_targetList,_sourceList);
 			return _targetList;
 			/*?
 				Static Methods
 					Uize.push
-						SYNTAX
-						...
-						...
+						Pushes / appends the elements from the specified source list onto the end of the specified target list, and returns the target list as the result.
 
-						EXAMPLE
-						...
-						...
+						SYNTAX
+						.............................................................................
+						targetListARRAYorOBJ = Uize.push (targetListARRAYorOBJ,sourceListARRAYorOBJ);
+						.............................................................................
+
+						While the elements from a source list object can be appended at the end of a target array with an expression like =targetArray.push.apply (targetArray,sourceList)=, appending the elements from a source list object at the end of a target list object is even a little more cumbersome with ugly expressions like =Array.prototype.push.apply (targetList,sourceList)= or =[].push.apply (targetList,sourceList)= (if you're OK with creating an empty array for immediate garbage collection).
+
+						Expressions like this are hard to remember when you need to conjure them up, and they're equally unpleasant to make sense of when you see them in your code. The =Uize.push= method provides a more semantically elegant way to push the elements of a source list onto the end of a target list, allowing both the source and target to be list objects like array instances, =arguments= objects, or any object with a =length= property whose value is a number - basically, any value that would produce the result =true= when passed to the =Uize.isList= static method.
+
+						EXAMPLE 1
+						................................................................
+						Uize.push (allOfTheNodes,document.getElementsByTagName ('div'));
+						................................................................
+
+						In the above example, the elements from the =HTMLCollection= object returned by the =document.getElementById= method are being pushed onto the end of the =allOfTheNodes= array.
+
+						EXAMPLE 2
+						................................................................................
+						var
+							registeredFruits = [],
+							fruitRegistered = {}
+						;
+
+						function registerFruits () {
+							Uize.push (registeredFruits,arguments);
+							Uize.lookup (arguments,1,fruitRegistered);
+						}
+
+						registerFruits ('apple','pear','peach');
+						registerFruits ('banana','orange','mango');
+
+						alert (registeredFruits);       // alerts "apple,pear,peach,banana,orange,mango"
+						alert (fruitRegistered.apple);  // alerts "1"
+						alert (fruitRegistered.mango);  // alerts "1"
+						................................................................................
+
+						In the above example, the =registerFruits= variadic function allows any number of fruits to be registered by specifying the names of the fruits using an arbitrarily long arguments list. The function uses the =Uize.push= method to push the contents of the =arguments= list object onto the end of the =registeredFruits= array. It also uses the =Uize.lookup= method to add entries for the fruits being added to the =fruitRegistered= lookup object, by specifying the =fruitRegistered= object as the target for the lookup creation operation.
 
 						NOTES
 						- see also the other `basic data utilities`
