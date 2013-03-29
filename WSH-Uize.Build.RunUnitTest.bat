@@ -1,1 +1,1 @@
-wscript build.js Uize.Build.RunUnitTest testModule=Uize.Test.Uize.Url
+wscript build.js Uize.Build.RunUnitTest testModule=Uize.Test.Uize

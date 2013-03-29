@@ -1475,6 +1475,173 @@ Uize.module ({
 						null,
 						{cloneArguments:true}
 					],
+					['Uize.copyList',[
+						['Test that an empty list object is copied correctly',
+							{length:0},
+							[]
+						],
+						['Test that a populated list object is copied correctly',
+							{0:'foo',1:'bar',2:'baz',3:'qux',length:4},
+							['foo','bar','baz','qux']
+						],
+						['Test that a sparsely populated list object is copied correctly',
+							{0:'foo',3:'qux',length:4},
+							['foo',undefined,undefined,'qux']
+						],
+						{
+							title:'Test that a function\'s arguments object is copied correctly',
+							test:function () {
+								var _result;
+								function _variadicFunction () {
+									_result = Uize.copyList (arguments);
+								}
+								_variadicFunction ('foo','bar','baz','qux');
+								return this.expect (['foo','bar','baz','qux'],_result);
+							}
+						},
+						{
+							title:'Test that creating a copy of an array does not modify the source array',
+							test:function () {
+								var _source = ['foo','bar','baz','qux'];
+								Uize.copyList (_source);
+								return this.expect (['foo','bar','baz','qux'],_source);
+							}
+						},
+						{
+							title:'Test that creating a copy of an array returns a fresh array and not the source array',
+							test:function () {
+								var _source = [];
+								return this.expect (true,Uize.copy (_source) != _source);
+							}
+						},
+						['Test that copying an empty array creates an empty array',
+							[[]],
+							[]
+						],
+						['Test that a copy of a populated source array contains the elements of the source array',
+							[['foo','bar','baz','qux']],
+							['foo','bar','baz','qux']
+						]
+					]],
+					['Uize.push',
+						[
+							{
+								title:'General tests',
+								test:[
+									{
+										title:'Test that a reference to the target is returned, when the target is an array',
+										test:function () {
+											var
+												_target = [],
+												_result = Uize.push (_target,[])
+											;
+											return this.expectSameAs (_target,_result);
+										}
+									},
+									{
+										title:'Test that a reference to the target is returned, when the target is a list object',
+										test:function () {
+											var
+												_target = {length:0},
+												_result = Uize.push (_target,[])
+											;
+											return this.expectSameAs (_target,_result);
+										}
+									},
+									{
+										title:'Test that the source is not modified',
+										test:function () {
+											var _source = ['foo','bar','baz','qux'];
+											Uize.push ([],_source);
+											return this.expect (['foo','bar','baz','qux'],_source);
+										}
+									}
+								]
+							},
+							{
+								title:'Test pushing onto a target array',
+								test:[
+									['Test that pushing the elements of an empty list object onto a target array works correctly',
+										[['foo','bar'],{length:0}],
+										['foo','bar']
+									],
+									['Test that pushing the elements of a populated list object onto a target array works correctly',
+										[['foo','bar'],{0:'baz',1:'qux',length:2}],
+										['foo','bar','baz','qux']
+									],
+									['Test that pushing the elements of a sparsely populated list object onto a target array works correctly',
+										[['foo','bar'],{0:'baz',3:'qux',length:4}],
+										['foo','bar','baz',undefined,undefined,'qux']
+									],
+									['Test that pushing the elements of an empty array onto a target array works correctly',
+										[['foo','bar'],[]],
+										['foo','bar']
+									],
+									['Test that pushing the elements of a populated array onto a target array works correctly',
+										[['foo','bar'],['baz','qux']],
+										['foo','bar','baz','qux']
+									],
+									['Test that pushing the elements of a sparsely populated array onto a target array works correctly',
+										[['foo','bar'],Uize.copyInto ([],{1:'baz',3:'qux'})],
+										['foo','bar',undefined,'baz',undefined,'qux']
+									],
+									{
+										title:'Test that pushing the elements of a function\'s arguments list object onto a target array works correctly',
+										test:function () {
+											var _target = ['foo','bar'];
+											function _variadicFunction () {
+												Uize.push (_target,arguments);
+											}
+											_variadicFunction ('baz','qux');
+											return this.expect (['foo','bar','baz','qux'],_target);
+										}
+									}
+								]
+							},
+							{
+								title:'Test pushing onto a target list object',
+								test:[
+									['Test that pushing the elements of an empty list object onto a target list object works correctly',
+										[{0:'foo',1:'bar',length:2},{length:0}],
+										{0:'foo',1:'bar',length:2}
+									],
+									['Test that pushing the elements of a populated list object onto a target list object works correctly',
+										[{0:'foo',1:'bar',length:2},{0:'baz',1:'qux',length:2}],
+										{0:'foo',1:'bar',2:'baz',3:'qux',length:4}
+									],
+									['Test that pushing the elements of a sparsely populated list object onto a target list object works correctly',
+										[{0:'foo',1:'bar',length:2},{1:'qux',length:2}],
+										{0:'foo',1:'bar',2:undefined,3:'qux',length:4}
+									],
+									['Test that pushing the elements of an empty array onto a target list object works correctly',
+										[{0:'foo',1:'bar',length:2},[]],
+										{0:'foo',1:'bar',length:2}
+									],
+									['Test that pushing the elements of a populated array onto a target list object works correctly',
+										[{0:'foo',1:'bar',length:2},['baz','qux']],
+										{0:'foo',1:'bar',2:'baz',3:'qux',length:4}
+									],
+									['Test that pushing the elements of a sparsely populated array onto a target list object works correctly',
+										[{0:'foo',1:'bar',length:2},Uize.copyInto ([],{1:'baz',3:'qux'})],
+										{0:'foo',1:'bar',2:undefined,3:'baz',4:undefined,5:'qux',length:6}
+									],
+									{
+										title:'Test that pushing the elements of a function\'s arguments list object onto a target list object works correctly',
+										test:function () {
+											var _target = {0:'foo',1:'bar',length:2};
+											function _variadicFunction () {
+												Uize.push (_target,arguments);
+											}
+											_variadicFunction ('baz','qux');
+											return this.expect ({0:'foo',1:'bar',2:'baz',3:'qux',length:4},_target);
+										}
+									}
+								]
+							}
+						],
+						null,
+						{cloneArguments:true}
+					],
 					['Uize.mergeInto',
 						[
 							['Test that calling with only a target object and no source object results in the target object being returned unchanged',
