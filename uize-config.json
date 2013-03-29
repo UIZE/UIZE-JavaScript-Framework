@@ -41,6 +41,7 @@
 		uizePath:'site-source',
 		moduleFolderPath:'site-source/js',
 		moduleFolderBuiltPath:'site-built/js',
+		modulesToStub:/^Uize\.WidgetV2\..+Css$/,
 
 	/*** for the older build process ***/
 		alwaysBuild:false,
