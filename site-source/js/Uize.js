@@ -3879,7 +3879,7 @@ Uize = (function () {
 			*/
 		};
 
-		_package.copyList = function (_list) {
+		var _copyList = _package.copyList = function (_list) {
 			return _sacredEmptyArray.slice.call (_list);
 			/*?
 				Static Methods
@@ -3919,7 +3919,7 @@ Uize = (function () {
 		};
 
 		_package.push = function (_targetList,_sourceList) {
-			_sacredEmptyArray.push.apply (_targetList,_sourceList);
+			_sacredEmptyArray.push.apply (_targetList,_isArray (_sourceList) ? _sourceList : _copyList (_sourceList));
 			return _targetList;
 			/*?
 				Static Methods
