@@ -23,6 +23,12 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
+/* TODO:
+	- organization of modules into folders
+	- ability to specify required modules by path (or somehow have a module name resolve to a folder path, still have mixed feelings on this)
+	- switching to using the widget module name for CSS class namespacing
+*/
+
 Uize.module ({
 	name:'Uize.WidgetV2',
 	required:[
