@@ -1,0 +1,34 @@
+The new =Uize.copyList= method, implemented in the =Uize= base module, lets you conveniently copy the elements of a list object into a fresh array.
+
+SYNTAX
+............................................
+freshARRAY = Uize.copyList (listARRAYorOBJ);
+............................................
+
+While an array can be copied by using an expression like =myArray.concat ()=, creating a copy of a list object such as a function's =arguments= object can be a little more cumbersome with an ugly expression like =Array.prototype.slice.call (arguments)= or =[].slice.call (arguments)= (if you're OK with creating an empty array for immediate garbage collection).
+
+Expressions like this are hard to remember when you need to conjure them up, and they're equally unpleasant to make sense of when you see them in your code. The =Uize.copyList= method provides a more semantically elegant way to copy list objects, such as array instances, =arguments= objects, or any object with a =length= property whose value is a number - basically, any value that would produce the result =true= when passed to the =Uize.isList= static method.
+
+EXAMPLE 1
+.................................................................................................
+Uize.copyList ({0:'foo',1:'bar',2:'baz',3:'qux',length:4});  // returns ['foo','bar','baz','qux']
+.................................................................................................
+
+In the above example, a list object is being copied to produce a fresh array containing the elements in the list object. This is a less common usage, but other objects that one may encounter during Web application development that are list objects and that you may want to create array copies of include things like DOM node lists / =HTMLCollection= instances.
+
+EXAMPLE 2
+..............................................................................................
+function alertReversedSortedArgs () {
+	alert (Uize.copyList (arguments).sort ().reverse ());  // alerts the text "qux,foo,baz,bar"
+}
+
+alertReversedSortedArgs ('foo','bar','baz','qux');
+..............................................................................................
+
+In the above example, the =alertReversedSortedArgs= function is alerting the reverse-sorted list of arguments that are passed to it. Because the =arguments= object is not a true array, the =Array= object's =sort= and =reverse= instance methods can't be called on it, but if the =arguments= list object is copied using the =Uize.copyList= method, then the =sort= and =reverse= methods can be called on the new array that is returned by this method.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-03-31 - New Uize.copyList Method
+....................................................................................
