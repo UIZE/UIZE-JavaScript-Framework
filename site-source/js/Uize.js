@@ -359,6 +359,27 @@ Uize = (function () {
 			return _target;
 		}
 
+		function _copySourceIntoTarget (_target,_source) {
+			for (var _property in _source)
+				_target [_property] = _source [_property]
+			;
+		}
+
+		function _mergeSourceIntoTarget (_target,_source) {
+			var
+				_targetPropertyValue,
+				_sourcePropertyValue
+			;
+			for (var _property in _source)
+				(
+					_isPlainObject (_sourcePropertyValue = _source [_property]) &&
+					_isPlainObject (_targetPropertyValue = _target [_property])
+				)
+					? _mergeSourceIntoTarget (_targetPropertyValue,_sourcePropertyValue)
+					: (_target [_property] = _sourcePropertyValue)
+			;
+		}
+
 	/*** Public Static Methods ***/
 		_package.capFirstChar = function (_sourceStr) {
 			return _sourceStr.charAt (0).toUpperCase () + _sourceStr.slice (1);
@@ -635,12 +656,6 @@ Uize = (function () {
 			*/
 		};
 
-		function _copySourceIntoTarget (_target,_source) {
-			for (var _property in _source)
-				_target [_property] = _source [_property]
-			;
-		}
-
 		_package.copyInto = function () {
 			return _performOperationWithMultipleSources (arguments,_copySourceIntoTarget);
 			/*?
@@ -795,21 +810,6 @@ Uize = (function () {
 						- see also the other `basic data utilities`
 			*/
 		};
-
-		function _mergeSourceIntoTarget (_target,_source) {
-			var
-				_targetPropertyValue,
-				_sourcePropertyValue
-			;
-			for (var _property in _source)
-				(
-					_isPlainObject (_sourcePropertyValue = _source [_property]) &&
-					_isPlainObject (_targetPropertyValue = _target [_property])
-				)
-					? _mergeSourceIntoTarget (_targetPropertyValue,_sourcePropertyValue)
-					: (_target [_property] = _sourcePropertyValue)
-			;
-		}
 
 		_package.mergeInto = function () {
 			return _performOperationWithMultipleSources (arguments,_mergeSourceIntoTarget);
