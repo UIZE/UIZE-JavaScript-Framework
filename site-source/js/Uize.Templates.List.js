@@ -22,7 +22,7 @@
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-	Public Static Methods
+	Static Methods
 		Uize.Templates.List.process
 			Returns a string, being the generated HTML for the unordered list.
 
@@ -82,7 +82,7 @@
 
 					When this property is not present, it's value will be defaulted to =true=. By default, all lists at all levels in the tree are expanded. If the value =false= is specified for the =expanded= property, then the CSS style setting =display:none= will be added to the HTML generated for an item's nested list. If no array is specified for an item's =items= property, then the item's =expanded= property is not applicable.
 
-	Public Static Properties
+	Static Properties
 		Uize.Templates.List.input
 			An object, describing the allowed properties of the =inputOBJ= parameter of the =Uize.Templates.List.process= static method.
 */

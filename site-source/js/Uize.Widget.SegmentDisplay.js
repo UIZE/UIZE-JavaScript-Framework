@@ -129,7 +129,7 @@ Uize.module ({
 				this._toHexExtraByteBit = 1 << (Math.ceil (segmentCodesLength / 8) * 8);
 				/*?
 					###
-						Public Static Properties
+						Static Properties
 							segmentCodes
 								.
 
