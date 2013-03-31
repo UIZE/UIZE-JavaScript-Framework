@@ -65,7 +65,7 @@ Uize.module ({
 					'		return _superclass.subclass ({',
 					'			staticProperties:{',
 					'				css:',
-					'					' + Uize.Json.to (this.readFile ({path:_cssBuilt})) + ',',
+					'					' + Uize.Json.to (this.readFile ({path:_cssBuilt})),
 					'			}',
 					'		});',
 					'	}',
