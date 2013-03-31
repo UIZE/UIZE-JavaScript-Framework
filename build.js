@@ -104,34 +104,45 @@ function _eval (_toEval) {
 
 		/*** miscellaneous global JavaScript functions (to mirror what's available in the browser context) ***/
 			if (_isWsh) {
-				function _popup (_message,_title,_buttonsAndIconMask) {
-					return (
-						(_popup._wscriptShell || (_popup._wscriptShell = new ActiveXObject ('wscript.shell'))).Popup (
-							_message + '',
-							0, // seconds to wait before auto-dismissing (0 = stay open forever)
-							_title,
-							_buttonsAndIconMask
-						)
-					);
-				}
-				alert = function (_message) {
-					_popup (_message,'Windows Script Host Alert',0 | 48 /* 0 = ok button only, 48 = warning icon */);
-				};
-				confirm = function (_message) {
-					return _popup (
-						_message,
-						'Please Confirm...',
-						1 | 32 /* 1 = ok and cancel, 32 = question mark icon */
-					) == 1;
-				};
-				/* TO DO:
-					for prompt, try to figure out how to use VBSCRIPT's InputBox built-in function
-						http://wsh2.uw.hu/ch08c.html
+				/*** implementation for console.log (absent in the WSH environment) ***/
+					if (typeof console == 'undefined')
+						console = {}
+					;
+					if (typeof console.log != 'function')
+						console.log = function () {
+							WScript.Echo ([].slice.call (arguments).join (', '))
+						}
+					;
 
-					Function WSHInputBox(Message, Title, Value)
-						WSHInputBox = InputBox(Message, Title, Value)
-					End Function
-				*/
+				/*** implementations for alert and confirm (absent in the WSH environment) ***/
+					function _popup (_message,_title,_buttonsAndIconMask) {
+						return (
+							(_popup._wscriptShell || (_popup._wscriptShell = new ActiveXObject ('wscript.shell'))).Popup (
+								_message + '',
+								0, // seconds to wait before auto-dismissing (0 = stay open forever)
+								_title,
+								_buttonsAndIconMask
+							)
+						);
+					}
+					alert = function (_message) {
+						_popup (_message,'Windows Script Host Alert',0 | 48 /* 0 = ok button only, 48 = warning icon */);
+					};
+					confirm = function (_message) {
+						return _popup (
+							_message,
+							'Please Confirm...',
+							1 | 32 /* 1 = ok and cancel, 32 = question mark icon */
+						) == 1;
+					};
+					/* TO DO:
+						for prompt, try to figure out how to use VBSCRIPT's InputBox built-in function
+							http://wsh2.uw.hu/ch08c.html
+
+						Function WSHInputBox(Message, Title, Value)
+							WSHInputBox = InputBox(Message, Title, Value)
+						End Function
+					*/
 			} else {
 				alert = function (_message) {
 					console.log (_message);
