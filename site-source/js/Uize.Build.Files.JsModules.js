@@ -45,7 +45,9 @@ Uize.module ({
 						this.fileSystem.getFiles ({
 							path:_sourcePath,
 							recursive:true,
-							pathMatcher:_jsModuleExtensionRegExp,
+							pathMatcher:function (_path) {
+								return _jsModuleExtensionRegExp.test (_path) && !/\/~experimental\//.test (_path)
+							},
 							pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
 						})
 					);
