@@ -42,16 +42,15 @@ Uize.module ({
 					_urlParts.folderPath == this.builtUrl ('reference/') &&
 					(
 						this.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
-						this.fileExists ({path:_sourcePathSansExtension + '.js.jst'})
+						this.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
+						this.fileExists ({path:_sourcePathSansExtension + '.css.source'})
 					)
 				);
 			},
 			builderInputs:function (_urlParts) {
-				var _sourcePathSansExtension = this.sourceUrl ('js/' + _urlParts.fileName);
+				var _tempPathSansExtension = this.tempUrl ('js/' + _urlParts.fileName);
 				return {
-					sourceCode:
-						_sourcePathSansExtension +
-						(this.fileExists ({path:_sourcePathSansExtension + '.js'}) ? '.js' : '.js.jst'),
+					tempCode:_tempPathSansExtension + '.js',
 					simpleDocTemplate:this.memoryUrl ('reference/~SIMPLE-DOC-TEMPLATE.html.jst'),
 					modulesTree:this.memoryUrl ('modules-tree'),
 					urlDictionary:this.memoryUrl ('url-dictionary'),
@@ -62,8 +61,8 @@ Uize.module ({
 				var
 					_this = this,
 					_simpleDoc,
-					_sourceCodePath = _inputs.sourceCode,
-					_moduleName = Uize.Url.from (_sourceCodePath).file.replace (_jsModuleExtensionRegExp,'')
+					_tempCodePath = _inputs.tempCode,
+					_moduleName = Uize.Url.from (_tempCodePath).file.replace (_jsModuleExtensionRegExp,'')
 				;
 				Uize.require (
 					_moduleName,
@@ -74,7 +73,7 @@ Uize.module ({
 						;
 						_urlDictionary [_moduleName] = null;
 						_simpleDoc = Uize.Doc.Sucker.toDocument (
-							_this.readFile ({path:_sourceCodePath}),
+							_this.readFile ({path:_tempCodePath}),
 							{
 								urlDictionary:_urlDictionary,
 								pathToRoot:'../',

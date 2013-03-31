@@ -50,7 +50,7 @@ Uize.module ({
 
 		return _package = {
 			/*** Public Static Properties ***/
-				jsModuleExtensionRegExp:/(\.js|\.js\.jst)$/,
+				jsModuleExtensionRegExp:/(\.js|\.js\.jst|\.css\.source)$/,
 
 			/*** Public Static Methods ***/
 				forEachNumberedProperty:function (_object,_propertyNamePrefix,_handler) {
