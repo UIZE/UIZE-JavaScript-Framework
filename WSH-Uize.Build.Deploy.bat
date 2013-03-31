@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.Deploy
+cscript build.js Uize.Build.Deploy
 

@@ -1,2 +1,2 @@
-wscript build.js UizeSite.Build.Files.WidgetPages
+cscript build.js UizeSite.Build.Files.WidgetPages
 

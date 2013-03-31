@@ -1,2 +1,2 @@
-wscript ../build.js Uize.Build.All test=true
+cscript ../build.js Uize.Build.All test=true
 

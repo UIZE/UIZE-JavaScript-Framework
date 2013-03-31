@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.RunUnitTests useSource=false
+cscript build.js Uize.Build.RunUnitTests useSource=false
 

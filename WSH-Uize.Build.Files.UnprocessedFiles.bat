@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.Files.UnprocessedFiles
+cscript build.js Uize.Build.Files.UnprocessedFiles
 

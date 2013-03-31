@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.Files.JsModules
+cscript build.js Uize.Build.Files.JsModules
 

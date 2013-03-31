@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.UpdateCopyrightNotices
+cscript build.js Uize.Build.UpdateCopyrightNotices
 

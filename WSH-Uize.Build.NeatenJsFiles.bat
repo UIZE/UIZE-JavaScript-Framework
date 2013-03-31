@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.NeatenJsFiles
+cscript build.js Uize.Build.NeatenJsFiles
 

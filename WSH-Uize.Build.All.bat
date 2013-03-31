@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.All
+cscript build.js Uize.Build.All
 

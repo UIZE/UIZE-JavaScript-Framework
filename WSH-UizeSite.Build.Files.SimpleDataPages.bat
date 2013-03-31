@@ -1,2 +1,2 @@
-wscript build.js UizeSite.Build.Files.SimpleDataPages
+cscript build.js UizeSite.Build.Files.SimpleDataPages
 

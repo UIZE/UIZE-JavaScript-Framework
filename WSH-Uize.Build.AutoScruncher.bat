@@ -1,2 +1,2 @@
-wscript build.js Uize.Build.AutoScruncher
+cscript build.js Uize.Build.AutoScruncher
 
