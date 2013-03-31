@@ -160,16 +160,20 @@ function _eval (_toEval) {
 					;
 					if (_fileExists (_modulePath)) {
 						_moduleText = _readFile (_modulePath);
-					} else if (_fileExists (_modulePath + '.jst')) {
-						Uize.require (
-							'Uize.Template.Module',
-							function (_Uize_Template_Module) {
-								_moduleText = _Uize_Template_Module.buildTemplateModuleText (
-									_moduleToLoad,
-									_readFile (_modulePath + '.jst')
-								);
-							}
-						);
+					} else {
+						if (_fileExists (_modulePath + '.jst')) {
+							Uize.require (
+								'Uize.Template.Module',
+								function (_Uize_Template_Module) {
+									_moduleText = _Uize_Template_Module.buildTemplateModuleText (
+										_moduleToLoad,
+										_readFile (_modulePath + '.jst')
+									);
+								}
+							);
+						} else {
+							throw Error ('Module loader can\'t find module ' + _moduleToLoad + ' at path ' + _modulePath);
+						}
 					}
 				}
 				_callback (_moduleText);
