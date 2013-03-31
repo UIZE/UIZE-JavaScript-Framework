@@ -182,7 +182,7 @@ Uize.module({
 													Uize.map (
 														_examples,
 														'"\\t\\t- [[" + value.url + "][" + value.title + "]] - " + value.description + "\\n"'
-													).join ('')
+													).join ('') 
 												)
 											: '\t\tThere are no dedicated showcase example pages for the =' + _moduleName + '= module.\n'
 									) +
@@ -405,20 +405,26 @@ Uize.module({
 									_extractParam ('examples')
 								),
 								sectionsToSort:[
+									'Introduction',
+
 									/*** methods ***/
 										'Instance Methods',
 										'Static Methods',
 										//'Parameters', -- problematic, because some methods have Parameters sections, where it's not appropriate to sort the parameters, since they should be listed in the order in which they appear in the arguments list
+
 									/*** properties ***/
 										'Instance Properties',
 										'Static Properties',
 										'State Properties',
+
 									/*** events ***/
 										'Instance Events',
 										'Static Events',
+
 									/*** widgets & nodes ***/
 										'Child Widgets',
 										'Implied Nodes',
+
 									/*** misc ***/
 										'Deprecated Features'
 								]
