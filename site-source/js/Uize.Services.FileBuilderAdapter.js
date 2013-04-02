@@ -293,32 +293,44 @@ Uize.module ({
 								if (_builderInputs || _builder) {
 									var
 										_path = _urlParts.pathname,
-										_mustBuild = !_this.fileExists ({path:_path}),
-										_lastBuiltDate = _mustBuild ? 0 : _this.getModifiedDate ({path:_path}),
-										_builderInput,
 										_subLogChunks = [],
-										_subLogChunk
+										_subLogChunk,
+										_builderInput,
+										_builderInputModifiedDate,
+										_maxBuilderInputModifiedDate = _staleBefore
 									;
-									_mustBuild || (_mustBuild = _lastBuiltDate < _staleBefore);
 									for (var _builderInputName in _builderInputs) {
-										_subLogChunk = _ensureFileCurrent (_builderInput = _builderInputs [_builderInputName]);
-										_subLogChunk && _subLogChunks.push (_subLogChunk);
-										_mustBuild || (
-											_mustBuild = Math.max (_this.getModifiedDate ({path:_builderInput}),_staleBefore) >
-											_lastBuiltDate
-										);
+										if (
+											_subLogChunk = _ensureFileCurrent (_builderInput = _builderInputs [_builderInputName])
+										)
+											_subLogChunks.push (_subLogChunk)
+										;
+										if (
+											(_builderInputModifiedDate = _this.getModifiedDate ({path:_builderInput})) >
+											_maxBuilderInputModifiedDate
+										)
+											_maxBuilderInputModifiedDate = _builderInputModifiedDate
+										;
 									}
-									if (_mustBuild) {
+									if (
+										!_this.fileExists ({path:_path}) ||
+										_this.getModifiedDate ({path:_path}) < _maxBuilderInputModifiedDate
+									) {
 										var _buildError;
 										try {
-											_builder
-												? _this.writeFile ({
-													path:_url,contents:_builder.call (_this,_builderInputs,_urlParts)
-												})
-												: _this.fileSystem.copyFile ({
+											if (_builder) {
+												_this.writeFile ({
+													path:_url,
+													contents:_builder.call (_this,_builderInputs,_urlParts)
+												});
+												if (_this.isMemoryUrl (_url))
+													_this._objectCache [_url].modifiedDate = _maxBuilderInputModifiedDate
+												;
+											} else {
+												_this.fileSystem.copyFile ({
 													path:Uize.values (_builderInputs) [0],targetPath:_url
-												})
-											;
+												});
+											}
 											_filesConsideredCurrentLookup [_url] = _trueFlag;
 										} catch (_error) {
 											_buildError = _error;
@@ -371,10 +383,7 @@ Uize.module ({
 						: _logChunks.push (_ensureFileCurrent (_pathPrefix + _url))
 					;
 					var _log = _logChunks.join ('\n');
-					typeof console != 'undefined' && typeof console.log == 'function' &&
-						console.log (_log)
-					;
-
+					console.log (_log);
 					_callback && _callback (_log);
 				}
 			}
