@@ -60,9 +60,13 @@ function _eval (_toEval) {
 		}
 
 	function _build (_buildModuleName,_paramOverrides) {
-		for (var _paramName in _paramOverrides) {
-			_params [_paramName] = _paramOverrides [_paramName];
+		function _copyInto (_target,_source) {
+			for (var _key in _source)
+				_target [_key] = _source [_key]
+			;
+			return _target;
 		}
+		_copyInto (_params,_paramOverrides);
 		var
 			_pathToRoot = _params.pathToRoot || '',
 			_useSource = _params.useSource + '' != 'false'
@@ -151,21 +155,28 @@ function _eval (_toEval) {
 
 		/*** load build environment properties ***/
 			var _env = (function () {return this}) ().env = eval ('(' + _readFile ('uize-config.json') + ')');
-			if (_env.staleBefore == 'now')
-				_env.staleBefore = +new Date
+			_params = _copyInto (
+				_copyInto (
+					_copyInto ({},_env),
+					{logFilePath:'logs/' + _buildModuleName + '.log'}
+				),
+				_params
+			);
+			if (_params.staleBefore == 'now')
+				_params.staleBefore = +new Date
 			;
 
 		/*** load Uize base class and set up with module loader ***/
 			function _moduleLoader (_moduleToLoad,_callback) {
 				var _moduleText = '';
-				if (_env.modulesToStub && _env.modulesToStub.test (_moduleToLoad)) {
+				if (_params.modulesToStub && _params.modulesToStub.test (_moduleToLoad)) {
 					_moduleText = 'Uize.module ({name:\'' + _moduleToLoad + '\'})';
 				} else {
 					var _modulePath =
 						(
 							_useSource
-								? (/^Uize(\.|$)/.test (_moduleToLoad) ? env.uizePath + '/js' : _env.moduleFolderPath)
-								: _env.moduleFolderBuiltPath
+								? (/^Uize(\.|$)/.test (_moduleToLoad) ? env.uizePath + '/js' : _params.moduleFolderPath)
+								: _params.moduleFolderBuiltPath
 						) +
 						'/' + _moduleToLoad + '.js'
 					;
@@ -202,18 +213,11 @@ function _eval (_toEval) {
 
 		/*** services setup & run build module (if specified) ***/
 			Uize.require (
-				_env.servicesSetup || 'Uize.Build.ServicesSetup',
+				_params.servicesSetup || 'Uize.Build.ServicesSetup',
 				function (_servicesSetup) {
 					_servicesSetup.setup ();
-					if (_buildModuleName)
-						Uize.require (
-							_buildModuleName,
-							function (_buildModule) {
-								_buildModule.perform (
-									Uize.copyInto ({},_env,{logFilePath:'logs/' + _buildModuleName + '.log'},_params)
-								);
-							}
-						)
+					_buildModuleName &&
+						Uize.require (_buildModuleName,function (_buildModule) {_buildModule.perform (_params)})
 					;
 				}
 			);
