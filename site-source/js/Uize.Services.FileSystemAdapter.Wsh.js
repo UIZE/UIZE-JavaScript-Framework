@@ -107,7 +107,7 @@ Uize.module ({
 						;
 						_callback (
 							_fileSystemObject.FileExists (_path)
-								? new Date (_fileSystemObject.GetFile (_path).DataLastModified)
+								? new Date (_fileSystemObject.GetFile (_path).DateLastModified)
 								: NaN
 						);
 					},
