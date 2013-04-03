@@ -61,8 +61,10 @@ Uize.module ({
 	required:[
 		'Uize.Url',
 		'Uize.String',
+		'Uize.String.Lines',
 		'Uize.Array.Util',
-		'Uize.Services.FileSystem'
+		'Uize.Services.FileSystem',
+		'Uize.Json'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -295,23 +297,26 @@ Uize.module ({
 										_path = _urlParts.pathname,
 										_subLogChunks = [],
 										_subLogChunk,
-										_builderInput,
 										_builderInputModifiedDate,
-										_maxBuilderInputModifiedDate = _staleBefore
+										_maxBuilderInputModifiedDate = _staleBefore,
+										_processBuilderInput = function (_builderInput) {
+											if (typeof _builderInput == 'string') {
+												if (_subLogChunk = _ensureFileCurrent (_builderInput))
+													_subLogChunks.push (_subLogChunk)
+												;
+												if (
+													(_builderInputModifiedDate = _this.getModifiedDate ({path:_builderInput})) >
+													_maxBuilderInputModifiedDate
+												)
+													_maxBuilderInputModifiedDate = _builderInputModifiedDate
+												;
+											} else {
+												Uize.forEach (_builderInput,_processBuilderInput);
+											}
+										}
 									;
-									for (var _builderInputName in _builderInputs) {
-										if (
-											_subLogChunk = _ensureFileCurrent (_builderInput = _builderInputs [_builderInputName])
-										)
-											_subLogChunks.push (_subLogChunk)
-										;
-										if (
-											(_builderInputModifiedDate = _this.getModifiedDate ({path:_builderInput})) >
-											_maxBuilderInputModifiedDate
-										)
-											_maxBuilderInputModifiedDate = _builderInputModifiedDate
-										;
-									}
+									_processBuilderInput (_builderInputs);
+
 									if (
 										!_this.fileExists ({path:_path}) ||
 										_this.getModifiedDate ({path:_path}) < _maxBuilderInputModifiedDate
@@ -339,13 +344,10 @@ Uize.module ({
 											_logIndent + (_buildError ? '### BUILD FAILED ###' : '***** BUILT') + ': ' + _url + '\n' +
 											_logIndent + '\thandler: ' + _matchingHandler.description + '\n' +
 											_logIndent + '\tduration: ' + (Uize.now () - _startTime) + '\n' +
-											_logIndent + '\tbuilder inputs:\n' +
-											Uize.map (
-												Uize.keys (_builderInputs),
-												function (_key) {
-													return _logIndent + '\t\t' + _key + ': ' + _builderInputs [_key] + '\n';
-												}
-											).join ('') +
+											Uize.String.Lines.indent (
+												'builder inputs: ' + Uize.Json.to (_builderInputs,{keyDelimiter:': '}),
+												_chainDepth + 1
+											) + '\n' +
 											(_subLogChunks.length ? '\n' + _subLogChunks.join ('\n') : '') +
 											(_buildError ? _logIndent + '\nERROR: ' + _buildError : '')
 										;

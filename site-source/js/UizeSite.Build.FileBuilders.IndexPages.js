@@ -18,9 +18,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.IndexPages= module defines a namespace for file builder modules for various index pages of the UIZE Web site, as well as providing utility methods for them to use in their implementation.
-
-		file builder for the in-memory examples-info-for-sitemap object.
+		The =UizeSite.Build.FileBuilders.IndexPages= module defines a file builder for various index pages of the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -44,34 +42,26 @@ Uize.module ({
 					return _urlParts.pathname == this.memoryUrl (_indexableFolderUnderBuilt + '.index');
 				},
 				builderInputs:function (_urlParts) {
-					var
-						_this = this,
-						_inputs = {}
-					;
-					Uize.forEach (
+					var _this = this;
+					return Uize.map (
 						UizeSite.Build.Util.getIndexableFiles (
 							_this.params.sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp
 						),
-						function (_filePath,_fileNo) {
-							_inputs ['fileInfo' + _fileNo] = _this.memoryUrl (
+						function (_filePath) {
+							return _this.memoryUrl (
 								_indexableFolderUnderBuilt + '/' +
 								_filePath.replace (_indexableFileExtensionRegExp,'') + '.html.info'
 							);
 						}
 					);
-					return _inputs;
 				},
 				builder:function (_inputs) {
-					var
-						_this = this,
-						_index = []
-					;
-					Uize.Build.Util.forEachNumberedProperty (
-						_inputs,
-						'fileInfo',
-						function (_fileInfoPath) {_index.push (_this.readFile ({path:_fileInfoPath}))}
+					var _this = this;
+					return Uize.Array.Sort.sortBy (
+						Uize.map (_inputs,function (_fileInfoPath) {return _this.readFile ({path:_fileInfoPath})}),
+						'value.title',
+						_sortOrder
 					);
-					return Uize.Array.Sort.sortBy (_index,'value.title',_sortOrder);
 				}
 			};
 		};

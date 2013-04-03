@@ -64,30 +64,32 @@ Uize.module ({
 					_this = this,
 					_pathname = _urlParts.pathname,
 					_librarySourcePath = _this.sourceUrlFromBuiltUrl (_pathname),
-					_inputs = {librarySource:_librarySourcePath},
 					_libraryFileContents = _this.readFile ({path:_librarySourcePath}),
 					_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
 					_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
-					_moduleNo = -1
+					_modules = [],
+					_modulesLength = 0
 				;
-				Uize.forEach (
-					Uize.String.Lines.split (
-						_contentsCommentStartPos > -1
-							?
-								_libraryFileContents.slice (_contentsCommentStartPos,_contentsCommentEndPos)
-									.replace (_contentsCommentRegExp,'')
-							: _libraryFileContents
-					),
+				Uize.String.Lines.forEach (
+					_contentsCommentStartPos > -1
+						?
+							_libraryFileContents.slice (_contentsCommentStartPos,_contentsCommentEndPos)
+								.replace (_contentsCommentRegExp,'')
+						: _libraryFileContents
+					,
 					function (_moduleName) {
 						if (
 							(_moduleName = Uize.String.trim (_moduleName)) &&
 							_lineStartsWithIdentifierCharRegExp.test (_moduleName)
 						)
-							_inputs ['libraryModule' + ++_moduleNo] = _this.builtUrl ('js/' + _moduleName + '.js')
+							_modules [_modulesLength++] = _this.builtUrl ('js/' + _moduleName + '.js')
 						;
 					}
 				);
-				return _inputs;
+				return {
+					librarySource:_librarySourcePath,
+					modules:_modules
+				};
 			},
 			builder:function (_inputs) {
 				function _stripModuleHeaderComment (_moduleText) {
@@ -106,19 +108,17 @@ Uize.module ({
 					_libraryFileContents = _this.readFile ({path:_inputs.librarySource}),
 					_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
 					_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
-					_libraryContentsChunks = [],
-					_libraryUsesUizeModules
+					_libraryUsesUizeModules,
+					_libraryContentsChunks = Uize.map (
+						_inputs.modules,
+						function (_modulePath) {
+							if (!_libraryUsesUizeModules)
+								_libraryUsesUizeModules = Uize.String.startsWith (Uize.Url.from (_modulePath).fileName,'Uize')
+							;
+							return _stripModuleHeaderComment (_this.readFile ({path:_modulePath}));
+						}
+					)
 				;
-				Uize.Build.Util.forEachNumberedProperty (
-					_inputs,
-					'libraryModule',
-					function (_modulePath) {
-						if (!_libraryUsesUizeModules)
-							_libraryUsesUizeModules = Uize.String.startsWith (Uize.Url.from (_modulePath).fileName,'Uize')
-						;
-						_libraryContentsChunks.push (_stripModuleHeaderComment (_this.readFile ({path:_modulePath})));
-					}
-				);
 				return (
 					(_libraryUsesUizeModules ? _libraryUsesUizeModulesHeader : '') +
 					_libraryFileContents.slice (0,_contentsCommentStartPos) +
