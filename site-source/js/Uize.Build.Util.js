@@ -201,18 +201,36 @@ Uize.module ({
 					;
 				},
 
+				moduleAsText:function (_moduleDefinition) {
+					var
+						_builder = _moduleDefinition.builder,
+						_builderSpecifiedAsString = typeof _builder == 'string',
+						_builderPlaceholder = '[BUILDER_PLACEHOLDER_' + Uize.now () + ']'
+					;
+					if (_builderSpecifiedAsString)
+						_moduleDefinition.builder = _builderPlaceholder
+					;
+					var _moduleText = 'Uize.module (' + Uize.Json.to (_moduleDefinition) + ');';
+					if (_builderSpecifiedAsString)
+						_moduleText = _moduleText.replace (
+							new RegExp ('.' + Uize.escapeRegExpLiteral (_builderPlaceholder) + '.'),
+							Uize.String.Lines.indent (_builder,1,'\t',false)
+						)
+					;
+					return _moduleText;
+				},
+
 				dataAsModule:function (_moduleName,_moduleData) {
-					return [
-						'Uize.module ({',
-						'	name:\'' + _moduleName + '\',',
-						'	superclass:\'\',',
-						'	builder:function () {',
-						'		return function () {',
-						'			return ' + Uize.String.Lines.indent (Uize.Json.to (_moduleData),3,'\t',false) + ';',
-						'		};',
-						'	}',
-						'});'
-					].join ('\n');
+					return _package.moduleAsText ({
+						name:_moduleName,
+						builder:[
+							'function () {',
+							'	return function () {',
+							'		return ' + Uize.String.Lines.indent (Uize.Json.to (_moduleData),2,'\t',false) + ';',
+							'	};',
+							'}'
+						].join ('\n')
+					});
 				},
 
 				writeDataModule:function (_moduleFolderPath,_moduleName,_moduleData) {

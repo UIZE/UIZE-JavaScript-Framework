@@ -29,7 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledCssModules',
 	required:[
 		'Uize.Url',
-		'Uize.Json'
+		'Uize.Json',
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		return {
@@ -55,22 +56,22 @@ Uize.module ({
 					return 'Uize.module ({name:\'' + _moduleName + '\'})';
 				}
 
-				return [
-					'Uize.module ({',
-					'	name:' + Uize.Json.to (_moduleName) + ',',
-					'	superclass:\'Uize.Node.CssModule\',',
-					'	builder:function (_superclass) {',
-					'		\'use strict\';',
-					'',
-					'		return _superclass.subclass ({',
-					'			staticProperties:{',
-					'				css:',
-					'					' + Uize.Json.to (this.readFile ({path:_cssBuilt})),
-					'			}',
-					'		});',
-					'	}',
-					'});'
-				].join ('\n');
+				return Uize.Build.Util.moduleAsText ({
+					name:_moduleName,
+					superclass:'Uize.Node.CssModule',
+					builder:[
+						'function (_superclass) {',
+						'	\'use strict\';',
+						'',
+						'	return _superclass.subclass ({',
+						'		staticProperties:{',
+						'			css:',
+						'				' + Uize.Json.to (this.readFile ({path:_cssBuilt})),
+						'		}',
+						'	});',
+						'}'
+					].join ('\n')
+				});
 			}
 		};
 	}

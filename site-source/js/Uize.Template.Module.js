@@ -28,7 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Template',
 		'Uize.String.Lines',
-		'Uize.Json'
+		'Uize.Json',
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		'use strict';
@@ -52,31 +53,30 @@ Uize.module ({
 			};
 
 			_package.buildTemplateModuleText = function (_moduleName,_templateText) {
-				var
-					_compiledTemplate = Uize.Template.compile (_templateText,{result:'full'}),
-					_required = _compiledTemplate.required
-				;
-				return [
-					'Uize.module ({',
-					'	name:' + Uize.Json.to (_moduleName) + ',',
-					'	required:' + Uize.String.Lines.indent (Uize.Json.to (_required),1,'\t',false) + ',',
-					'	builder:function () {',
-					'		\'use strict\';',
-					'',
-					'		var _package = function () {};',
-					'',
-					'		/*** Public Static Methods ***/',
-					'			_package.process = function (input) {',
-					'				' + Uize.String.Lines.indent (Uize.String.Lines.trimRight (_compiledTemplate.code),4,'\t',false),
-					'			};',
-					'',
-					'		/*** Public Static Properties ***/',
-					'			_package.input = ' + Uize.String.Lines.indent (Uize.Json.to (_compiledTemplate.input),3,'\t',false) + ';',
-					'',
-					'		return _package;',
-					'	}',
-					'});'
-				].join ('\n');
+				var _compiledTemplate = Uize.Template.compile (_templateText,{result:'full'});
+				return Uize.Build.Util.moduleAsText ({
+					name:_moduleName,
+					required:_compiledTemplate.required,
+					builder:[
+						'function () {',
+						'	\'use strict\';',
+						'',
+						'	var _package = function () {};',
+						'',
+						'	/*** Public Static Methods ***/',
+						'		_package.process = function (input) {',
+						'			' +
+							Uize.String.Lines.indent (Uize.String.Lines.trimRight (_compiledTemplate.code),4,'\t',false),
+						'		};',
+						'',
+						'	/*** Public Static Properties ***/',
+						'		_package.input = ' +
+							Uize.String.Lines.indent (Uize.Json.to (_compiledTemplate.input),3,'\t',false) + ';',
+						'',
+						'	return _package;',
+						'}'
+					].join ('\n')
+				});
 			};
 
 		return _package;
