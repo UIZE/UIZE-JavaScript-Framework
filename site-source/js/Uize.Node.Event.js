@@ -361,13 +361,14 @@ Uize.module ({
 			};
 
 			function _preventDefault () {
-				this.preventDefault ? this.preventDefault () : (this.returnValue = false);
+				this.returnValue = false;
 				/* NOTES:
-					- "preventDefault" is the DOM standard, "returnValue" is IE's proprietary feature
-					- this method does not work for the keydown event in Safari (use the keypress event, instead)
+					- "preventDefault" is the DOM standard, "returnValue" is older IE's proprietary feature
+					- this approach does not work for the keydown event in Safari (use the keypress event, instead)
 				*/
 			}
-			_package.preventDefault = function (_event) {_preventDefault.call (_event || event)};
+			_package.preventDefault = function (_event) {
+				(_event || (_event = event)).preventDefault ? _event.preventDefault () : _preventDefault.call (_event);
 				/*?
 					Static Methods
 						Uize.Node.Event.preventDefault
@@ -384,6 +385,8 @@ Uize.module ({
 							- see the related =Uize.Node.Event.abort= and =Uize.Node.Event.stopPropagation= static methods
 							- this method may modify the DOM event object
 				*/
+
+			};
 
 			_package.relatedTarget = function (_event) {
 				return (
@@ -426,12 +429,13 @@ Uize.module ({
 			};
 
 			function _stopPropagation () {
-				this.stopPropagation ? this.stopPropagation () : (this.cancelBubble = true);
+				this.cancelBubble = true;
 				/* NOTES:
-					- "stopPropagation" is the DOM standard, "cancelBubble" is IE's proprietary feature
+					- "stopPropagation" is the DOM standard, "cancelBubble" is older IE's proprietary feature
 				*/
 			}
-			_package.stopPropagation = function (_event) {_stopPropagation.call (_event || event)};
+			_package.stopPropagation = function (_event) {
+				(_event || (_event = event)).stopPropagation ? _event.stopPropagation () : _stopPropagation.call (_event);
 				/*?
 					Static Methods
 						Uize.Node.Event.stopPropagation
@@ -473,6 +477,7 @@ Uize.module ({
 							- this method may modify the DOM event object
 							- see the related =Uize.Node.Event.abort= and =Uize.Node.Event.preventDefault= static methods
 				*/
+			};
 
 			_package.target = function (_event) {
 				return (_event || (_event = event)).target || _event.srcElement;
