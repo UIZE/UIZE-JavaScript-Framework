@@ -28,7 +28,6 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledCssModules',
 	required:[
-		'Uize.Url',
 		'Uize.Json',
 		'Uize.Build.Util'
 	],
