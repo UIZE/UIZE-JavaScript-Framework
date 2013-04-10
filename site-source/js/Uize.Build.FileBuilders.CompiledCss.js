@@ -49,8 +49,10 @@ Uize.module ({
 			builder:function (_inputs) {
 				var
 					_cssSource = _inputs.cssSource,
-					_moduleName = Uize.Url.from (_cssSource).file.replace (_cssSourceRegExp,''),
-					_cssClassPrefix = _moduleName.replace (/\./g,'_')
+					_cssClassPrefix =
+						this.moduleNameFromSubPath (
+							_cssSource.slice (this.params.moduleFolderPath.length + 1).replace (_cssSourceRegExp,'')
+						).replace (/\./g,'_')
 				;
 				return this.readFile ({path:_cssSource}).replace (
 					/\$([^\$]*)\$/g,

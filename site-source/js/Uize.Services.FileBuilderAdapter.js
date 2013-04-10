@@ -223,6 +223,10 @@ Uize.module ({
 					},
 
 				/*** General Utility Methods ***/
+					moduleNameFromSubPath:function (_subPath) {
+						return _subPath.replace (/[\/_]/g,'.');
+					},
+
 					processSimpleDoc:function (_title,_simpleDocBuildResult,_simpleDocTemplatePath,_extraTemplateInputs) {
 						var
 							_contentsTreeItems = _simpleDocBuildResult.contentsTreeItems,

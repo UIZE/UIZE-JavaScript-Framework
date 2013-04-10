@@ -50,7 +50,9 @@ Uize.module ({
 			builder:function (_inputs) {
 				var _jstSource = _inputs.jstSource;
 				return Uize.Template.Module.buildTemplateModuleText (
-					Uize.Url.from (_jstSource).file.replace (_jsJstRegExp,''),
+					this.moduleNameFromSubPath (
+						_jstSource.slice (this.params.moduleFolderPath.length + 1).replace (_jsJstRegExp,'')
+					),
 					this.readFile ({path:_jstSource})
 				);
 			}

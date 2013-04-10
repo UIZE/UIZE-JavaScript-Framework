@@ -4889,6 +4889,24 @@ Uize = (function () {
 							;
 							if (_isFunction (_module)) {
 								_module.moduleName = _name;
+								_module.pathToResources = _module == _package
+									? _getPathToLibrary ('Uize.js')
+									: _package.moduleUrlResolver (_name)
+										.replace (/\.js$/,'/')
+										.replace (/\./g,'_')
+									/*?
+										Static Properties
+											Uize.pathToResources
+												A string, representing the relative path from the current document to the folder containing the =Uize= module's JavaScript library.
+
+												This property is useful in the implementation of =Uize.Class= subclasses that are to reside in the same folder alongside the =Uize= module's JavaScript file and that may wish to, in their implementation, make use of image and other support resources located inside that folder.
+
+												By using this property, a subclass' implementation does not need to know whether or not the document using it is being loaded through HTTP or from the local file system and does not need to impose extra requirements on developers regarding where its JavaScript library is located in relation to documents using it.
+
+												NOTES
+												- this static property is not inherited by subclasses
+									*/
+								;
 								if (!_module.subclass)
 									/* NOTE:
 										if the module is not a Uize class (like a package or something else), assign the toString instrinsic method, because it won't be obtained by subclassing (since there is none)
@@ -5050,8 +5068,20 @@ Uize = (function () {
 				*/
 			};
 
+			var
+				_folderOrgNamespace = 'Uize.Widgets',
+				_folderOrgNamespaceLength = _folderOrgNamespace.length,
+				_folderOrgNamespacePrefix = _folderOrgNamespace + '.',
+				_folderOrgNamespacePrefixLength = _folderOrgNamespaceLength + 1
+			;
 			_package.moduleUrlResolver = function (_moduleName) {
-				return _package.moduleUrlTemplate.replace (_modulePathToken,_moduleName + '.js');
+				var _modulePath = _moduleName.slice (0,_folderOrgNamespacePrefixLength) == _folderOrgNamespacePrefix
+					?
+						_folderOrgNamespace.replace (/\./g,'_') +
+						_moduleName.slice (_folderOrgNamespaceLength).replace (/\./g,'/')
+					: _moduleName
+				;
+				return _package.moduleUrlTemplate.replace (_modulePathToken,_modulePath + '.js');
 				/*?
 					Static Methods
 						Uize.moduleUrlResolver
@@ -5688,20 +5718,6 @@ Uize = (function () {
 
 						NOTES
 						- see also the =Uize.module= and =Uize.moduleLoader= static methods
-						- this static property is not inherited by subclasses
-			*/
-
-		_package.pathToResources = _getPathToLibrary ('Uize.js');
-			/*?
-				Static Properties
-					Uize.pathToResources
-						A string, representing the relative path from the current document to the folder containing the =Uize= module's JavaScript library.
-
-						This property is useful in the implementation of =Uize.Class= subclasses that are to reside in the same folder alongside the =Uize= module's JavaScript file and that may wish to, in their implementation, make use of image and other support resources located inside that folder.
-
-						By using this property, a subclass' implementation does not need to know whether or not the document using it is being loaded through HTTP or from the local file system and does not need to impose extra requirements on developers regarding where its JavaScript library is located in relation to documents using it.
-
-						NOTES
 						- this static property is not inherited by subclasses
 			*/
 

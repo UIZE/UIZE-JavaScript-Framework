@@ -47,17 +47,12 @@ Uize.module ({
 				return {cssBuilt:this.builtUrlFromTempUrl (_urlParts.pathname).replace (/\.js$/,'.css')};
 			},
 			builder:function (_inputs) {
-				var
-					_cssBuilt = _inputs.cssBuilt,
-					_moduleName = Uize.Url.from (_cssBuilt).file.replace (/\.css$/i,'')
-				;
-
-				function _buildCssModuleText (_moduleName,_cssText) {
-					return 'Uize.module ({name:\'' + _moduleName + '\'})';
-				}
+				var _cssBuilt = _inputs.cssBuilt;
 
 				return Uize.Build.Util.moduleAsText ({
-					name:_moduleName,
+					name:this.moduleNameFromSubPath (
+						_cssBuilt.slice (this.params.moduleFolderBuiltPath.length + 1).replace (/\.css$/i,'')
+					),
 					superclass:'Uize.Node.CssModule',
 					builder:[
 						'function (_superclass) {',
