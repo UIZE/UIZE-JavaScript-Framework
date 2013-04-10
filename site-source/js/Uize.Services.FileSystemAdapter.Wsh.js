@@ -100,6 +100,10 @@ Uize.module ({
 						_callback (this._fileSystemObject.FileExists (_params.path));
 					},
 
+					folderExists:function (_params,_callback) {
+						_callback (this._fileSystemObject.FolderExists (_params.path));
+					},
+
 					getModifiedDate:function (_params,_callback) {
 						var
 							_path = _params.path,

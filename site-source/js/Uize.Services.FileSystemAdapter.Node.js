@@ -122,6 +122,10 @@ Uize.module ({
 						_callback (this._pathExists (_params.path,_false));
 					},
 
+					folderExists:function (_params,_callback) {
+						_callback (this._pathExists (_params.path,_true));
+					},
+
 					getModifiedDate:function (_params,_callback) {
 						try {
 							_callback (new Date (this._fileSystem.statSync (_params.path).mtime));

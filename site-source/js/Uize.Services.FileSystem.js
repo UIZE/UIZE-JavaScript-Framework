@@ -94,6 +94,24 @@ Uize.module ({
 					*/
 				},
 
+				folderExists:{
+					async:_false
+					/*?
+						Instance Methods
+							folderExists
+								.
+
+								SYNTAX
+								...............................................................
+								folderExistsBOOL = fileSystemInstance.folderExists (paramsOBJ);
+								...............................................................
+
+								Params
+									path
+										.
+					*/
+				},
+
 				getFiles:{
 					async:_false
 					/*?
