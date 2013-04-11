@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.TestWidget Class
+|    /    O /   |    MODULE : Uize.Widgets.TestWidget.Logic Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,28 +18,28 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.TestWidget= class implements a test widget being used during development of the new =Uize.WidgetV2= widget base class to test this class' functionality.
+		The =Uize.Widgets.TestWidget.Logic= class implements a test widget being used during development of the new =Uize.WidgetV2= widget base class to test this class' functionality.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.TestWidget',
+	name:'Uize.Widgets.TestWidget.Logic',
 	superclass:'Uize.WidgetV2',
 	required:[
-		'Uize.Widgets.TestWidgetHtml',
-		'Uize.Widgets.TestWidgetCss'
+		'Uize.Widgets.TestWidget.Template',
+		'Uize.Widgets.TestWidget.Style'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var _class = _superclass.subclass ({
 			set:{
-				html:Uize.Widgets.TestWidgetHtml
+				html:Uize.Widgets.TestWidget.Template
 			},
 
 			staticProperties:{
-				cssModule:Uize.Widgets.TestWidgetCss
+				cssModule:Uize.Widgets.TestWidget.Style
 			}
 		});
 

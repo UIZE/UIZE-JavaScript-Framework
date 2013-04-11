@@ -24,14 +24,14 @@
 
 Uize.module ({
 	required:[
-		'Uize.Widgets.TestWidget',
+		'Uize.Widgets.TestWidget.Logic',
 		'Uize.Widget.Page'
 	],
 	builder:function () {
 		'use strict';
 
 		var _page = window.page = Uize.Widget.Page ();
-		_page.addChild ('testWidget',Uize.Widgets.TestWidget,{built:false});
+		_page.addChild ('testWidget',Uize.Widgets.TestWidget.Logic,{built:false});
 
 		_page.wireUi ();
 	}
