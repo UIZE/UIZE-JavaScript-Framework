@@ -5074,14 +5074,21 @@ Uize = (function () {
 				_folderOrgNamespacePrefix = _folderOrgNamespace + '.',
 				_folderOrgNamespacePrefixLength = _folderOrgNamespaceLength + 1
 			;
+			_package.modulePathResolver = function (_moduleName) {
+				return (
+					_moduleName.slice (0,_folderOrgNamespacePrefixLength) == _folderOrgNamespacePrefix
+						?
+							_folderOrgNamespace.replace (/\./g,'_') +
+							_moduleName.slice (_folderOrgNamespaceLength).replace (/\./g,'/')
+						: _moduleName
+				);
+			};
+
 			_package.moduleUrlResolver = function (_moduleName) {
-				var _modulePath = _moduleName.slice (0,_folderOrgNamespacePrefixLength) == _folderOrgNamespacePrefix
-					?
-						_folderOrgNamespace.replace (/\./g,'_') +
-						_moduleName.slice (_folderOrgNamespaceLength).replace (/\./g,'/')
-					: _moduleName
-				;
-				return _package.moduleUrlTemplate.replace (_modulePathToken,_modulePath + '.js');
+				return _package.moduleUrlTemplate.replace (
+					_modulePathToken,
+					_package.modulePathResolver (_moduleName) + '.js'
+				);
 				/*?
 					Static Methods
 						Uize.moduleUrlResolver
