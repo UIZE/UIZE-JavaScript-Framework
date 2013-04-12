@@ -76,12 +76,16 @@ function _eval (_toEval) {
 			var
 				_fileSystem,
 				_readFile,
-				_fileExists
+				_fileExists,
+				_folderExists
 			;
 			if (_isWsh) {
 				_fileSystem = new ActiveXObject ('Scripting.FileSystemObject');
 				_fileExists = function (_path) {
 					return _fileSystem.FileExists (_path);
+				};
+				_folderExists = function (_path) {
+					return _fileSystem.FolderExists (_path);
 				};
 				_readFile = function (_filePath) {
 					var
@@ -93,13 +97,19 @@ function _eval (_toEval) {
 				};
 			} else {
 				_fileSystem = require ('fs');
-				_fileExists = function (_path) {
+				var _pathExists = function (_path,_mustBeFolder) {
 					try {
-						_fileSystem.statSync (_path);
-						return true;
+						var _stat = _fileSystem.statSync (_path);
+						return _mustBeFolder == undefined || !!(_stat.mode & (1 << 14)) == _mustBeFolder;
 					} catch (_error) {
 						return false;
 					}
+				};
+				_fileExists = function (_path) {
+					return _pathExists (_path);
+				};
+				_folderExists = function (_path) {
+					return _pathExists (_path,true);
 				};
 				_readFile = function (_filePath) {
 					return _fileSystem.readFileSync (_pathToRoot + _filePath,'utf8');
@@ -167,35 +177,45 @@ function _eval (_toEval) {
 			;
 
 		/*** load Uize base class and set up with module loader ***/
-			function _moduleLoader (_moduleToLoad,_callback) {
+			function _modulePathResolver (_moduleName) {
+				return _moduleName;
+			}
+			function _moduleLoader (_moduleName,_callback) {
 				var _moduleText = '';
-				if (_params.modulesToStub && _params.modulesToStub.test (_moduleToLoad)) {
-					_moduleText = 'Uize.module ({name:\'' + _moduleToLoad + '\'})';
+				if (_params.modulesToStub && _params.modulesToStub.test (_moduleName)) {
+					_moduleText = 'Uize.module ({name:\'' + _moduleName + '\'})';
 				} else {
 					var _modulePath =
 						(
 							_useSource
-								? (/^Uize(\.|$)/.test (_moduleToLoad) ? env.uizePath + '/js' : _params.moduleFolderPath)
+								? (/^Uize(\.|$)/.test (_moduleName) ? env.uizePath + '/js' : _params.moduleFolderPath)
 								: _params.moduleFolderBuiltPath
 						) +
-						'/' + _moduleToLoad + '.js'
+						'/' + _modulePathResolver (_moduleName) + '.js'
 					;
 					if (_fileExists (_modulePath)) {
 						_moduleText = _readFile (_modulePath);
+					} else if (_fileExists (_modulePath + '.jst')) {
+						Uize.require (
+							'Uize.Template.Module',
+							function (_Uize_Template_Module) {
+								_moduleText = _Uize_Template_Module.buildTemplateModuleText (
+									_moduleName,
+									_readFile (_modulePath + '.jst')
+								);
+							}
+						);
+					} else if (_fileExists (_modulePath.replace (/\.js$/,'.css.source'))) {
+						_moduleText =
+							'Uize.module ({\n' +
+							'	name:\'' + _moduleName + '\',\n' +
+							'	superclass:\'Uize.Node.CssModule\',\n' +
+							'	builder:function (_superclass) {return _superclass.subclass ()}\n' +
+							'});';
+					} else if (_folderExists (_modulePath.replace (/\.js$/,''))) {
+						_moduleText = 'Uize.module ({name:\'' + _moduleName + '\'});';
 					} else {
-						if (_fileExists (_modulePath + '.jst')) {
-							Uize.require (
-								'Uize.Template.Module',
-								function (_Uize_Template_Module) {
-									_moduleText = _Uize_Template_Module.buildTemplateModuleText (
-										_moduleToLoad,
-										_readFile (_modulePath + '.jst')
-									);
-								}
-							);
-						} else {
-							throw Error ('Module loader can\'t find module ' + _moduleToLoad + ' at path ' + _modulePath);
-						}
+						throw Error ('Module loader can\'t find module ' + _moduleName + ' at path ' + _modulePath);
 					}
 				}
 				_callback (_moduleText);
@@ -207,6 +227,7 @@ function _eval (_toEval) {
 					if (!_isWsh)
 						Uize.globalEval = Uize.laxEval = _eval // this actually *needs* to be overridden for NodeJS context
 					;
+					_modulePathResolver = Uize.modulePathResolver;
 					Uize.moduleLoader = _moduleLoader;
 				}
 			);
