@@ -51,7 +51,7 @@ Uize.module ({
 					_cssClassPrefix = Uize.Build.Util.moduleNameFromModulePath (
 						_cssSource.slice (this.params.moduleFolderPath.length + 1),
 						true
-					)
+					).replace (/\./g,'_')
 				;
 				return this.readFile ({path:_cssSource}).replace (
 					/\$([^\$]*)\$/g,
