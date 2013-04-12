@@ -356,6 +356,7 @@ Uize.module ({
 											(_buildError ? _logIndent + '\nERROR: ' + _buildError : '')
 										;
 										if (_buildError) {
+											console.log (_buildError);
 											typeof console != 'undefined' && typeof console.trace == 'function' &&
 												console.trace ()
 											;
