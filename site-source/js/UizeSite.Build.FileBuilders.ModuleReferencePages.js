@@ -33,24 +33,29 @@ Uize.module ({
 		'Uize.Doc.Sucker'
 	],
 	builder:function () {
-		var _jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp;
+		function _moduleSubPathFromUrlParts (_urlParts) {
+			return 'js/' + Uize.modulePathResolver (_urlParts.fileName);
+		}
 		return {
 			description:'Module reference page',
 			urlMatcher:function (_urlParts) {
-				var _sourcePathSansExtension = this.sourceUrl ('js/' + _urlParts.fileName);
-				return (
-					_urlParts.folderPath == this.builtUrl ('reference/') &&
-					(
+				if (
+					_urlParts.fileType == 'html' &&
+					_urlParts.folderPath == this.builtUrl ('reference/')
+				) {
+					var _sourcePathSansExtension = this.sourceUrl (_moduleSubPathFromUrlParts (_urlParts));
+					return (
 						this.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
 						this.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
 						this.fileExists ({path:_sourcePathSansExtension + '.css.source'})
-					)
-				);
+					);
+				} else {
+					return false;
+				}
 			},
 			builderInputs:function (_urlParts) {
-				var _tempPathSansExtension = this.tempUrl ('js/' + _urlParts.fileName);
 				return {
-					tempCode:_tempPathSansExtension + '.js',
+					tempCode:this.tempUrl (_moduleSubPathFromUrlParts (_urlParts)) + '.js',
 					simpleDocTemplate:this.memoryUrl ('reference/~SIMPLE-DOC-TEMPLATE.html.jst'),
 					modulesTree:this.memoryUrl ('modules-tree'),
 					urlDictionary:this.memoryUrl ('url-dictionary'),
@@ -62,7 +67,10 @@ Uize.module ({
 					_this = this,
 					_simpleDoc,
 					_tempCodePath = _inputs.tempCode,
-					_moduleName = Uize.Url.from (_tempCodePath).file.replace (_jsModuleExtensionRegExp,'')
+					_moduleName = Uize.Build.Util.moduleNameFromModulePath (
+						_tempCodePath.slice ((_this.params.tempPath + '/js/').length),
+						true
+					)
 				;
 				Uize.require (
 					_moduleName,
