@@ -45,14 +45,22 @@ Uize.module ({
 			var
 				_fileSystem = Uize.Services.FileSystem.singleton (),
 				_compiledJstFilesByPath = {},
-				_package
+				_package,
+				_jsModuleExtensionRegExp = /(\.js|\.js\.jst|\.css\.source)$/
 			;
 
 		return _package = {
 			/*** Public Static Properties ***/
-				jsModuleExtensionRegExp:/(\.js|\.js\.jst|\.css\.source)$/,
+				jsModuleExtensionRegExp:_jsModuleExtensionRegExp,
 
 			/*** Public Static Methods ***/
+				moduleNameFromModulePath:function (_modulePath,_removeExtension) {
+					return (_removeExtension ? _modulePath.replace (_jsModuleExtensionRegExp,'') : _modulePath).replace (
+						/[\/_]/g,
+						'.'
+					);
+				},
+
 				getPathToRoot:function (_path) {
 					return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
 				},

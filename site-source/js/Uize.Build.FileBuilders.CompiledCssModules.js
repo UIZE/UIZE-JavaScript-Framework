@@ -49,7 +49,7 @@ Uize.module ({
 				var _cssBuilt = _inputs.cssBuilt;
 
 				return Uize.Build.Util.moduleAsText ({
-					name:this.moduleNameFromSubPath (
+					name:Uize.Build.Util.moduleNameFromModulePath (
 						_cssBuilt.slice (this.params.moduleFolderBuiltPath.length + 1).replace (/\.css$/i,'')
 					),
 					superclass:'Uize.Node.CssModule',

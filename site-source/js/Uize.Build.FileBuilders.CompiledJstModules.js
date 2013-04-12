@@ -29,11 +29,9 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledJstModules',
 	required:[
 		'Uize.Template.Module',
-		'Uize.Url'
+		'Uize.Build.Util'
 	],
 	builder:function () {
-		var _jsJstRegExp = /\.js\.jst$/i;
-
 		return {
 			description:'Compiled JST modules, generated from .js.jst files',
 			urlMatcher:function (_urlParts) {
@@ -50,8 +48,9 @@ Uize.module ({
 			builder:function (_inputs) {
 				var _jstSource = _inputs.jstSource;
 				return Uize.Template.Module.buildTemplateModuleText (
-					this.moduleNameFromSubPath (
-						_jstSource.slice (this.params.moduleFolderPath.length + 1).replace (_jsJstRegExp,'')
+					Uize.Build.Util.moduleNameFromModulePath (
+						_jstSource.slice (this.params.moduleFolderPath.length + 1),
+						true
 					),
 					this.readFile ({path:_jstSource})
 				);

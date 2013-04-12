@@ -28,11 +28,10 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledCss',
 	required:[
-		'Uize.Url'
+		'Uize.Url',
+		'Uize.Build.Util'
 	],
 	builder:function () {
-		var _cssSourceRegExp = /\.css\.source$/i;
-
 		return {
 			description:'Compiled CSS files, generated from .css.source files',
 			urlMatcher:function (_urlParts) {
@@ -49,10 +48,10 @@ Uize.module ({
 			builder:function (_inputs) {
 				var
 					_cssSource = _inputs.cssSource,
-					_cssClassPrefix =
-						this.moduleNameFromSubPath (
-							_cssSource.slice (this.params.moduleFolderPath.length + 1).replace (_cssSourceRegExp,'')
-						).replace (/\./g,'_')
+					_cssClassPrefix = Uize.Build.Util.moduleNameFromModulePath (
+						_cssSource.slice (this.params.moduleFolderPath.length + 1),
+						true
+					)
 				;
 				return this.readFile ({path:_cssSource}).replace (
 					/\$([^\$]*)\$/g,

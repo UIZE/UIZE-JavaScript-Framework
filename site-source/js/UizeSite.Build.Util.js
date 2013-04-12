@@ -43,13 +43,13 @@ Uize.module ({
 			},
 
 			getJsModules:function (_sourcePath) {
-				var _jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp;
 				return Uize.map (
 					_fileSystem.getFiles ({
 						path:_sourcePath + '/js',
-						pathMatcher:_jsModuleExtensionRegExp
+						recursive:true,
+						pathMatcher:Uize.Build.Util.jsModuleExtensionRegExp
 					}),
-					function (_fileName) {return _fileName.replace (_jsModuleExtensionRegExp,'')}
+					function (_filePath) {return Uize.Build.Util.moduleNameFromModulePath (_filePath,true)}
 				);
 			},
 
