@@ -19,7 +19,7 @@
 /*?
 	Introduction
 		The =Uize.Build.FileBuilders.TempGeneratedNamespaceModules= module defines a file builder for JavaScript namespace modules generated from folders and for which there are not explicit JavaScript modules.
-		
+
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		Functions defined in the file builder are called as instance methods on an instance of a subclass of the =Uize.Services.FileBuilderAdapter= class, so the functions can access instance methods implemented in this class.
@@ -47,7 +47,7 @@ Uize.module ({
 			},
 			builder:function (_inputs) {
 				return Uize.Build.Util.moduleAsText ({
-					name:this.moduleNameFromSubPath (
+					name:Uize.Build.Util.moduleNameFromModulePath (
 						_inputs.sourceFolderPath.slice (this.params.moduleFolderPath.length + 1)
 					)
 				});
