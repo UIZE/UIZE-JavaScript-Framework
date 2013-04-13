@@ -185,13 +185,13 @@ function _eval (_toEval) {
 				if (_params.modulesToStub && _params.modulesToStub.test (_moduleName)) {
 					_moduleText = 'Uize.module ({name:\'' + _moduleName + '\'})';
 				} else {
-					var _modulePath =
-						(
-							_useSource
-								? (/^Uize(\.|$)/.test (_moduleName) ? env.uizePath + '/js' : _params.moduleFolderPath)
-								: _params.moduleFolderBuiltPath
-						) +
-						'/' + _modulePathResolver (_moduleName) + '.js'
+					var
+						_moduleFilePath = '/' + _modulePathResolver (_moduleName) + '.js',
+						_moduleSourcePath =
+							(/^Uize(\.|$)/.test (_moduleName) ? env.uizePath + '/js' : _params.moduleFolderPath) +
+							_moduleFilePath,
+						_moduleBuiltPath = _params.moduleFolderBuiltPath + _moduleFilePath,
+						_modulePath = _useSource ? _moduleSourcePath : _moduleBuiltPath
 					;
 					if (_fileExists (_modulePath)) {
 						_moduleText = _readFile (_modulePath);
@@ -212,7 +212,7 @@ function _eval (_toEval) {
 							'	superclass:\'Uize.Node.CssModule\',\n' +
 							'	builder:function (_superclass) {return _superclass.subclass ()}\n' +
 							'});';
-					} else if (_folderExists (_modulePath.replace (/\.js$/,''))) {
+					} else if (_folderExists (_moduleSourcePath.replace (/\.js$/,''))) {
 						_moduleText = 'Uize.module ({name:\'' + _moduleName + '\'});';
 					} else {
 						throw Error ('Module loader can\'t find module ' + _moduleName + ' at path ' + _modulePath);
