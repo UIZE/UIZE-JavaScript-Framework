@@ -220,7 +220,23 @@ Uize.module ({
 							_this = this,
 							_path = _params.path
 						;
-						return _this.isMemoryUrl (_path) ? !!_this._objectCache [_path] : _this.fileSystem.fileExists (_params);
+						return (
+							_this.isMemoryUrl (_path)
+								? !!_this._objectCache [_path]
+								: _this.fileSystem.fileExists (_params)
+						);
+					},
+
+					folderExists:function (_params) {
+						var
+							_this = this,
+							_path = _params.path
+						;
+						return (
+							_this.isMemoryUrl (_path)
+								? !!_this._objectCache [_path]
+								: _this.fileSystem.folderExists (_params)
+							);
 					},
 
 				/*** General Utility Methods ***/
