@@ -30,8 +30,6 @@ Uize.module ({
 	required:[
 		'Uize.Build.ModuleInfo',
 		'Uize.Util.Oop',
-		'Uize.Url',
-		'Uize.String',
 		'Uize.Build.Scruncher',
 		'Uize.Date'
 	],
@@ -55,8 +53,8 @@ Uize.module ({
 			builder:function (_inputs) {
 				var
 					_this = this,
-					_path = _inputs.jsTemp,
-					_result = _this.readFile ({path:_path})
+					_jsTemp = _inputs.jsTemp,
+					_result = _this.readFile ({path:_jsTemp})
 				;
 				function _getModuleInheritanceDepth (_moduleName,_moduleCode) {
 					if (_moduleName in _moduleInheritanceDepthLookup) {
@@ -67,7 +65,7 @@ Uize.module ({
 							_superclassKnown
 						;
 						if (!_moduleCode) {
-							var _moduleUrl = 'js/' + _moduleName + '.js';
+							var _moduleUrl = 'js/' + Uize.modulePathResolver (_moduleName) + '.js';
 							_this.buildFile (Uize.copy (_this.params,{url:_moduleUrl}));
 							_moduleCode = _this.readFile ({path:_this.builtUrl (_moduleUrl)});
 						}
@@ -92,19 +90,17 @@ Uize.module ({
 				}
 				if (!_this.params.isDev) {
 					var
-						_pathParts = Uize.Url.from (_path),
-						_moduleName = _pathParts.fileName,
+						_moduleName = _this.moduleNameFromTempPath (_jsTemp),
 						_scruncherSettings = {},
-						_sourceFileName = _pathParts.file,
 						_headComment = _this.params.scrunchedHeadComments [
-							_sourceFileName.slice (0,_sourceFileName.indexOf ('.'))
+							_moduleName.slice (0,((_moduleName.indexOf ('.') + 1) || _moduleName.length + 1) - 1)
 						],
 						_keepHeadComment = _headComment == undefined
 					;
 					if (!_keepHeadComment)
 						_scruncherSettings.KEEPHEADCOMMENT = 'FALSE'
 					;
-					if (Uize.String.startsWith (_path,_this.tempUrl ('js/'))) {
+					if (_moduleName) {
 						var _inheritanceDepth = _getModuleInheritanceDepth (_moduleName,_result);
 						_scruncherSettings.MAPPINGS =
 							'=' +

@@ -78,11 +78,14 @@ Uize.module ({
 						: _libraryFileContents
 					,
 					function (_moduleName) {
+						console.log (_moduleName);
 						if (
 							(_moduleName = Uize.String.trim (_moduleName)) &&
 							_lineStartsWithIdentifierCharRegExp.test (_moduleName)
 						)
-							_modules [_modulesLength++] = _this.builtUrl ('js/' + _moduleName + '.js')
+							_modules [_modulesLength++] = _this.builtUrl (
+								'js/' + Uize.modulePathResolver (_moduleName) + '.js'
+							)
 						;
 					}
 				);

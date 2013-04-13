@@ -64,7 +64,8 @@ Uize.module ({
 		'Uize.String.Lines',
 		'Uize.Array.Util',
 		'Uize.Services.FileSystem',
-		'Uize.Json'
+		'Uize.Json',
+		'Uize.Build.Util'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -241,6 +242,15 @@ Uize.module ({
 								},
 								_extraTemplateInputs
 							)
+						);
+					},
+
+					moduleNameFromTempPath:function (_tempPath) {
+						var _modulesTempPath = this.tempUrl ('js/');
+						return (
+							Uize.String.startsWith (_tempPath,_modulesTempPath)
+								? Uize.Build.Util.moduleNameFromModulePath (_tempPath.slice (_modulesTempPath.length),true)
+								: ''
 						);
 					},
 

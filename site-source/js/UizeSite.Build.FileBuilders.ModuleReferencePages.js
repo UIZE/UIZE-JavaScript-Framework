@@ -28,7 +28,6 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.ModuleReferencePages',
 	required:[
-		'Uize.Build.Util',
 		'Uize.Url',
 		'Uize.Doc.Sucker'
 	],
@@ -67,10 +66,7 @@ Uize.module ({
 					_this = this,
 					_simpleDoc,
 					_tempCodePath = _inputs.tempCode,
-					_moduleName = Uize.Build.Util.moduleNameFromModulePath (
-						_tempCodePath.slice ((_this.params.tempPath + '/js/').length),
-						true
-					)
+					_moduleName = _this.moduleNameFromTempPath (_tempCodePath)
 				;
 				Uize.require (
 					_moduleName,
