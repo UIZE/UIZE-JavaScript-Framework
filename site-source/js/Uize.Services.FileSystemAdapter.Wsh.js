@@ -124,10 +124,6 @@ Uize.module ({
 						_callback (_fileSystemObject.FileExists (_path) || _fileSystemObject.FolderExists (_path));
 					},
 
-					getFolders:function (_params,_callback) {
-						_callback (this.getItemsInFolder (_params,true));
-					},
-
 					readFile:function (_params,_callback) {
 						var
 							_fileSystemObject = this._fileSystemObject,

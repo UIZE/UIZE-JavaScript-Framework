@@ -138,10 +138,6 @@ Uize.module ({
 						_callback (this._pathExists (_params.path));
 					},
 
-					getFolders:function (_params,_callback) {
-						_callback (this.getItemsInFolder (_params,_true));
-					},
-
 					readFile:function (_params,_callback) {
 						var
 							_fileSystem = this._fileSystem,

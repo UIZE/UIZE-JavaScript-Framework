@@ -31,11 +31,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
-				getItemsInFolder:function (_params,_mustBeFolder) {
-					// override the implementation of this method in a host specific adapter to the FileSystem service
-				},
-
-				getFiles:function (_params,_callback) {
+				_getItemsInFolderRecursive:function (_params,_mustBeFolder) {
 					var
 						_this = this,
 						_result = [],
@@ -51,15 +47,18 @@ Uize.module ({
 						;
 						Uize.push (
 							_result,
-							_this.getItemsInFolder ({
-								path:_pathPlusSubPath,
-								pathMatcher:function (_itemPath) {
-									return _pathMatcher (_currentItemPath = _subPath + (_subPath && '/') + _itemPath);
+							_this.getItemsInFolder (
+								{
+									path:_pathPlusSubPath,
+									pathMatcher:function (_itemPath) {
+										return _pathMatcher (_currentItemPath = _subPath + (_subPath && '/') + _itemPath);
+									},
+									pathTransformer:function (_itemPath) {
+										return _pathTransformer (_currentItemPath);
+									}
 								},
-								pathTransformer:function (_itemPath) {
-									return _pathTransformer (_currentItemPath);
-								}
-							})
+								_mustBeFolder
+							)
 						);
 						if (_recursive) {
 							Uize.forEach (
@@ -69,7 +68,19 @@ Uize.module ({
 						}
 					}
 					_addItemsFromFolder ('');
-					_callback (_result);
+					return _result;
+				},
+
+				getItemsInFolder:function (_params,_mustBeFolder) {
+					// override the implementation of this method in a host specific adapter to the FileSystem service
+				},
+
+				getFiles:function (_params,_callback) {
+					_callback (this._getItemsInFolderRecursive (_params));
+				},
+
+				getFolders:function (_params,_callback) {
+					_callback (this._getItemsInFolderRecursive (_params,true));
 				}
 			},
 			staticMethods:{
