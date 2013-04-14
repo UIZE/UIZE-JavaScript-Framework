@@ -5104,10 +5104,11 @@ Uize = (function () {
 							EXAMPLE
 							...................................................................
 							Uize.moduleUrlResolver = function (_moduleName) {
+								var _modulePath = Uize.modulePathResolver (_moduleName);
 								return (
 									moduleName.indexOf ('MyDomain.') == 0
-										? '/js/' + _moduleName + '.js'
-										: 'http://www.some-cdn.com/uize-js/' + _moduleName + '.js'
+										? '/js/' + _modulePath + '.js'
+										: 'http://www.some-cdn.com/uize-js/' + _modulePath + '.js'
 								);
 							};
 							...................................................................
