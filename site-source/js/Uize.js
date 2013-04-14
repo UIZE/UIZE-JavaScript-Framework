@@ -5076,6 +5076,7 @@ Uize = (function () {
 			;
 			_package.modulePathResolver = function (_moduleName) {
 				return (
+					_moduleName == _folderOrgNamespace ||
 					_moduleName.slice (0,_folderOrgNamespacePrefixLength) == _folderOrgNamespacePrefix
 						?
 							_folderOrgNamespace.replace (/\./g,'_') +
