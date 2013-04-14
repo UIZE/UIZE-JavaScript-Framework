@@ -66,7 +66,7 @@ Uize.module ({
 					UizeSite.Build.Util.getJsModules (_this.params.sourcePath),
 					function (_moduleName) {
 						if (_isModuleForSotu (_moduleName)) {
-							var _modulePathSuffix = '/js/' + _moduleName + '.js';
+							var _modulePathSuffix = '/js/' + Uize.modulePathResolver (_moduleName) + '.js';
 							_inputs ['moduleBuiltSize_' + _moduleName] = _this.memoryUrl (_modulePathSuffix + '.builtsize');
 							_inputs ['moduleMetaData_' + _moduleName] = _this.memoryUrl (_modulePathSuffix + '.metadata');
 						}

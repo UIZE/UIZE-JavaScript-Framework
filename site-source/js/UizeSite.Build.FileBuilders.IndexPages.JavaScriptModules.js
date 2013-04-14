@@ -27,15 +27,14 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.IndexPages.JavaScriptModules',
 	required:[
 		'UizeSite.Build.FileBuilders.IndexPages',
-		'Uize.Build.Util'
+		'UizeSite.Build.Util'
 	],
 	builder:function () {
 		return UizeSite.Build.FileBuilders.IndexPages.getIndexPageUrlHandler (
 			'JavaScript modules index page',
 			'javascript-modules-index',
-			'js',
-			'reference',
-			Uize.Build.Util.jsModuleExtensionRegExp
+			function () {return UizeSite.Build.Util.getJsModules (this.params.sourcePath)},
+			'reference'
 		);
 	}
 });

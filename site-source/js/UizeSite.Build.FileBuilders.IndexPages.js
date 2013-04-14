@@ -44,13 +44,21 @@ Uize.module ({
 				builderInputs:function (_urlParts) {
 					var _this = this;
 					return Uize.map (
-						UizeSite.Build.Util.getIndexableFiles (
-							_this.params.sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp
-						),
+						Uize.isFunction (_indexableFolderUnderSource)
+							? _indexableFolderUnderSource.call (_this)
+							: UizeSite.Build.Util.getIndexableFiles (
+								_this.params.sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp
+							)
+						,
 						function (_filePath) {
 							return _this.memoryUrl (
 								_indexableFolderUnderBuilt + '/' +
-								_filePath.replace (_indexableFileExtensionRegExp,'') + '.html.info'
+								(
+									_indexableFileExtensionRegExp
+										? _filePath.replace (_indexableFileExtensionRegExp,'')
+										: _filePath
+								) +
+								'.html.info'
 							);
 						}
 					);
