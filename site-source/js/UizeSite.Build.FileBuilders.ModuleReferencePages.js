@@ -35,31 +35,34 @@ Uize.module ({
 		function _moduleSubPathFromUrlParts (_urlParts) {
 			return 'js/' + Uize.modulePathResolver (_urlParts.fileName);
 		}
+
 		return {
 			description:'Module reference page',
 			urlMatcher:function (_urlParts) {
+				var _this = this;
 				if (
 					_urlParts.fileType == 'html' &&
-					_urlParts.folderPath == this.builtUrl ('reference/')
+					_urlParts.folderPath == _this.builtUrl ('reference/')
 				) {
-					var _sourcePathSansExtension = this.sourceUrl (_moduleSubPathFromUrlParts (_urlParts));
+					var _sourcePathSansExtension = _this.sourceUrl (_moduleSubPathFromUrlParts (_urlParts));
 					return (
-						this.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
-						this.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
-						this.fileExists ({path:_sourcePathSansExtension + '.css.source'}) ||
-						this.folderExists ({path:_sourcePathSansExtension})
+						_this.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
+						_this.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
+						_this.fileExists ({path:_sourcePathSansExtension + '.css.source'}) ||
+						_this.folderExists ({path:_sourcePathSansExtension})
 					);
 				} else {
 					return false;
 				}
 			},
 			builderInputs:function (_urlParts) {
+				var _this = this;
 				return {
-					tempCode:this.tempUrl (_moduleSubPathFromUrlParts (_urlParts)) + '.js',
-					simpleDocTemplate:this.memoryUrl ('reference/~SIMPLE-DOC-TEMPLATE.html.jst'),
-					modulesTree:this.memoryUrl ('modules-tree'),
-					urlDictionary:this.memoryUrl ('url-dictionary'),
-					examplesByKeyword:this.memoryUrl ('examples-by-keyword')
+					tempCode:_this.tempUrl (_moduleSubPathFromUrlParts (_urlParts)) + '.js',
+					simpleDocTemplate:_this.memoryUrl ('reference/~SIMPLE-DOC-TEMPLATE.html.jst'),
+					modulesTree:_this.memoryUrl ('modules-tree'),
+					urlDictionary:_this.memoryUrl ('url-dictionary'),
+					examplesByKeyword:_this.memoryUrl ('examples-by-keyword')
 				};
 			},
 			builder:function (_inputs) {

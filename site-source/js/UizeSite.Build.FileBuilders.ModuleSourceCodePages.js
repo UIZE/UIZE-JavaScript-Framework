@@ -32,7 +32,16 @@ Uize.module ({
 		'UizeSite.Build.Util'
 	],
 	builder:function () {
-		var _modulesSourceCodePagesPath = '/reference/source-code/';
+		var
+			_modulesSourceCodePagesPath = '/reference/source-code/',
+			_jsExtension = '.js',
+			_jsJstExtension = '.js.jst',
+			_cssSourceExtension = '.css.source'
+		;
+
+		function _moduleSubPathFromUrlParts (_urlParts) {
+			return 'js/' + Uize.modulePathResolver (_urlParts.fileName);
+		}
 
 		return {
 			description:'Module source code pages',
@@ -43,8 +52,22 @@ Uize.module ({
 				);
 			},
 			builderInputs:function (_urlParts) {
+				var
+					_this = this,
+					_sourcePathSansExtension = _this.sourceUrl (_moduleSubPathFromUrlParts (_urlParts))
+				;
 				return {
-					sourceCode:this.tempUrl ('js/' + _urlParts.fileName + '.js'),
+					sourceCode:
+						_sourcePathSansExtension +
+						(
+							_this.fileExists ({path:_sourcePathSansExtension + _jsExtension})
+								? _jsExtension
+								: _this.fileExists ({path:_sourcePathSansExtension + _jsJstExtension})
+									? _jsJstExtension
+									: _this.fileExists ({path:_sourcePathSansExtension + _cssSourceExtension})
+										? _cssSourceExtension
+										: _jsExtension
+						),
 					sourceCodeTemplate:this.memoryUrl (_modulesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html.jst')
 				};
 			},
