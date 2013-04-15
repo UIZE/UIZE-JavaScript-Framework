@@ -71,14 +71,11 @@ Uize.module ({
 					sourceCodeTemplate:this.memoryUrl (_modulesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html.jst')
 				};
 			},
-			builder:function (_inputs) {
-				var
-					_sourceCode = _inputs.sourceCode,
-					_sourceFileName = Uize.Url.from (_sourceCode).file
-				;
+			builder:function (_inputs,_urlParts) {
+				var _sourceCode = _inputs.sourceCode;
 				return this.readFile ({path:_inputs.sourceCodeTemplate}) ({
-					sourceFilename:_sourceFileName,
-					title:UizeSite.Build.Util.getTitleFromFilename (_sourceFileName),
+					moduleName:_urlParts.fileName,
+					sourcePath:_sourceCode.slice ((this.params.sourcePath + '/js/').length),
 					body:this.readFile ({path:_sourceCode})
 				});
 			}
