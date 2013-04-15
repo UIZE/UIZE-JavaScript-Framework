@@ -29,7 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryUrlDictionary',
 	required:[
 		'Uize.Url',
-		'Uize.Build.Util'
+		'Uize.Build.Util',
+		'UizeSite.Build.Util'
 	],
 	builder:function () {
 		return {
@@ -68,28 +69,27 @@ Uize.module ({
 					_addUrlsFromListingsInput ('credits');
 					_addUrlsFromListingsInput ('endorsements');
 
-				/*** add links to module reference pages and JavaScript reference pages ***/
-					function _addReferencePages (_sourceFolder,_sourceFileExtensionRegExp,_referenceFolder) {
-						for (
-							var
-								_fileNo = -1,
-								_referenceUrlPrefix = '/' + (_referenceFolder || _sourceFolder)+ '/',
-								_files = _this.fileSystem.getFiles ({
-									path:_this.sourceUrl (_sourceFolder),
-									pathMatcher:_sourceFileExtensionRegExp
-								}),
-								_filesLength = _files.length,
-								_fileName
-							;
-							++_fileNo < _filesLength;
-						)
-							_urlDictionary [
-								_fileName = Uize.Url.from (_files [_fileNo]).file.replace (_sourceFileExtensionRegExp,'')
-							] = _referenceUrlPrefix + _fileName + '.html'
-						;
-					}
-					_addReferencePages ('javascript-reference',/\.simple$/i);
-					_addReferencePages ('js',Uize.Build.Util.jsModuleExtensionRegExp,'reference');
+				/*** add links to module reference pages ***/
+					Uize.forEach (
+						UizeSite.Build.Util.getJsModules (_this.params.sourcePath),
+						function (_moduleName) {
+							_urlDictionary [_moduleName] = '/reference/' + _moduleName + '.html';
+						}
+					);
+
+				/*** add links to JavaScript reference pages ***/
+					var
+						_simpleModuleExtensionRegExp = /\.simple$/,
+						_javaScriptReferenceFolder = 'javascript-reference'
+					;
+					_this.fileSystem.getFiles ({
+						path:_this.sourceUrl (_javaScriptReferenceFolder),
+						pathMatcher:_simpleModuleExtensionRegExp,
+						pathTransformer:function (_filePath) {
+							var _fileName = Uize.Url.from (_filePath).file.replace (_simpleModuleExtensionRegExp,'');
+							_urlDictionary [_fileName] = '/' + _javaScriptReferenceFolder + '/' + _fileName + '.html';
+						}
+					});
 
 				return _urlDictionary;
 			}
