@@ -28,8 +28,8 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledCssModules',
 	required:[
-		'Uize.Json',
-		'Uize.Build.Util'
+		'Uize.Build.Util',
+		'Uize.Json'
 	],
 	builder:function () {
 		return {
@@ -46,12 +46,15 @@ Uize.module ({
 				return {cssBuilt:this.builtUrlFromTempUrl (_urlParts.pathname).replace (/\.js$/,'.css')};
 			},
 			builder:function (_inputs) {
-				var _cssBuilt = _inputs.cssBuilt;
+				var
+					_cssBuilt = _inputs.cssBuilt,
+					_moduleName = Uize.Build.Util.moduleNameFromModulePath (
+						_cssBuilt.slice (this.params.moduleFolderBuiltPath.length + 1).replace (/\.css$/i,'')
+					)
+				;
 
 				return Uize.Build.Util.moduleAsText ({
-					name:Uize.Build.Util.moduleNameFromModulePath (
-						_cssBuilt.slice (this.params.moduleFolderBuiltPath.length + 1).replace (/\.css$/i,'')
-					),
+					name:_moduleName,
 					superclass:'Uize.Node.CssModule',
 					builder:[
 						'function (_superclass) {',
@@ -59,8 +62,30 @@ Uize.module ({
 						'',
 						'	return _superclass.subclass ({',
 						'		staticProperties:{',
-						'			css:',
-						'				' + Uize.Json.to (this.readFile ({path:_cssBuilt})),
+						'			css:function (_input) {',
+						'				' +
+							'return ' +
+								Uize.Json.to (this.readFile ({path:_cssBuilt}))
+									.replace (
+										/(url\s*\(\s*)([\'"]?)([^\'"\)]+)\2(\s*\))/g,
+										function (_match,_open,_quote,_path,_close) {
+											return (
+												_open + _quote +
+													(
+														/^\w+:/.test (_path)
+															? ''
+															: (
+																'\' + _input.pathToModules + \'' +
+																Uize.modulePathResolver (_moduleName) + '/'
+															)
+													) +
+													_path +
+												_quote + _close
+											);
+										}
+									) +
+							';',
+						'			}',
 						'		}',
 						'	});',
 						'}'

@@ -1,7 +1,7 @@
 .$$ {
 	border:1px solid #f0f;
 	padding:10px;
-	background:#ccc;
+	background:#ccc url(bg.gif) left top repeat-x;
 }
 
 .$slider$ {

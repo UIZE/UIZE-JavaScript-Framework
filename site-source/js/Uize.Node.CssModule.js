@@ -58,6 +58,10 @@ Uize.module ({
 						_previousStyleSheetsLength = _styleSheets.length,
 						_styleNode = _document.createElement ('style')
 					;
+					if (Uize.isFunction (_css))
+						_css = _css.call (this,{pathToModules:Uize.pathToResources})
+					;
+					console.log (_css);
 					_styleNode.type = 'text/css';
 					_styleNode.textContent = _css;
 					_styleNode.id = 'UIZE_' + Uize.getGuid ();
