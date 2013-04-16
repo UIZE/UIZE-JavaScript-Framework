@@ -1,16 +1,16 @@
 <%@ required (
-	'Uize.Widgets.AnotherTestWidget.Logic',
-	'Uize.Widgets.AnotherTestWidget.Subclass.Logic',
+	'Uize.Widgets.AnotherTestWidget.Widget',
+	'Uize.Widgets.AnotherTestWidget.Subclass.Widget',
 	'Uize.Widget.Bar.Slider.xSkin'
 ) %>
 <div id="<%= this.nodeId () %>" class="<%= this.cssClass () %>">
 	TEST WIDGET
 	<%= this.childHtml ({
-		widgetClass:Uize.Widgets.AnotherTestWidget.Logic,
+		widgetClass:Uize.Widgets.AnotherTestWidget.Widget,
 		label:'FOO'
 	}) %>
 	<%= this.childHtml ({
-		widgetClass:Uize.Widgets.AnotherTestWidget.Subclass.Logic,
+		widgetClass:Uize.Widgets.AnotherTestWidget.Subclass.Widget,
 		label:'BAR'
 	}) %>
 	<div class="<%= this.cssClass ('slider') %>">
