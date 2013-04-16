@@ -27,19 +27,19 @@ Uize.module ({
 	name:'Uize.Widgets.TestWidget.Widget',
 	superclass:'Uize.WidgetV2',
 	required:[
-		'Uize.Widgets.TestWidget.Template',
-		'Uize.Widgets.TestWidget.Style'
+		'Uize.Widgets.TestWidget.Html',
+		'Uize.Widgets.TestWidget.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var _class = _superclass.subclass ({
 			set:{
-				html:Uize.Widgets.TestWidget.Template
+				html:Uize.Widgets.TestWidget.Html
 			},
 
 			staticProperties:{
-				cssModule:Uize.Widgets.TestWidget.Style
+				cssModule:Uize.Widgets.TestWidget.Css
 			}
 		});
 

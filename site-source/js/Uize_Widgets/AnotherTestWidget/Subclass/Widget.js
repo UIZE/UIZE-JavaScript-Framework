@@ -27,14 +27,14 @@ Uize.module ({
 	name:'Uize.Widgets.AnotherTestWidget.Subclass.Widget',
 	superclass:'Uize.Widgets.AnotherTestWidget.Widget',
 	required:[
-		'Uize.Widgets.AnotherTestWidget.Subclass.Style'
+		'Uize.Widgets.AnotherTestWidget.Subclass.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var _class = _superclass.subclass ({
 			staticProperties:{
-				cssModule:Uize.Widgets.AnotherTestWidget.Subclass.Style
+				cssModule:Uize.Widgets.AnotherTestWidget.Subclass.Css
 			}
 		});
 
