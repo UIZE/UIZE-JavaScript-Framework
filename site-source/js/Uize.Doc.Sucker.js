@@ -405,8 +405,6 @@ Uize.module({
 									_extractParam ('examples')
 								),
 								sectionsToSort:[
-									'Introduction',
-
 									/*** methods ***/
 										'Instance Methods',
 										'Static Methods',
