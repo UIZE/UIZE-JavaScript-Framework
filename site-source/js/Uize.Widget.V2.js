@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.WidgetV2 Class
+|    /    O /   |    MODULE : Uize.Widget.V2 Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.WidgetV2= class implements the next generation widget base class and is currently under development.
+		The =Uize.Widget.V2= class implements the next generation widget base class and is currently under development.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -30,12 +30,11 @@
 */
 
 Uize.module ({
-	name:'Uize.WidgetV2',
+	name:'Uize.Widget.V2',
 	required:[
 		'Uize.Json',
 		'Uize.Node'
 	],
-	superclass:'Uize.Widget',
 	builder:function (_superclass) {
 		'use strict';
 

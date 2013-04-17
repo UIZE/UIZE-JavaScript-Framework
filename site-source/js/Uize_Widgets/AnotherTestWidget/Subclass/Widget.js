@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.AnotherTestWidget.Subclass.Widget= class implements a test widget being used during development of the new =Uize.WidgetV2= widget base class to test this class' functionality.
+		The =Uize.Widgets.AnotherTestWidget.Subclass.Widget= class implements a test widget being used during development of the new =Uize.Widget.V2= widget base class to test this class' functionality.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

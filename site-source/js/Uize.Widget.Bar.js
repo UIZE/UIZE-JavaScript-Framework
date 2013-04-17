@@ -27,7 +27,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Bar',
-	superclass:'Uize.WidgetV2',
+	superclass:'Uize.Widget.V2',
 	required:'Uize.Node',
 	builder:function (_superclass) {
 		'use strict';
