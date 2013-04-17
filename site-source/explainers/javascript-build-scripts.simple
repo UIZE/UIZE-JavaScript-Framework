@@ -45,7 +45,7 @@ Introduction
 		Must Have the UIZE Modules
 			Note that the build scripts make use of modules of the UIZE JavaScript Framework, so your Web site project must be set up with a folder containing these JavaScript modules before you can use the build scripts.
 
-			Also note that the =moduleFolderPath= build environment variable that is defined in the =config.json= file (see the section `Build Environment Variables`) should be correctly set so that the UIZE JavaScript modules can be located by the module loader that is defined inside the `build script setup` file.
+			Also note that the =modulesFolder= build environment variable that is defined in the =config.json= file (see the section `Build Environment Variables`) should be correctly set so that the UIZE JavaScript modules can be located by the module loader that is defined inside the `build script setup` file.
 
 	How You Can Run Them
 		Once you have copied the build scripts to the root folder of your Web site project, and once you have configured the `build environment variables` appropriately, then the build scripts can be run by simply double-clicking on the script files, or by selecting them in Windows Explorer and pressing the *Enter* key.
@@ -216,7 +216,7 @@ The Build Scripts
 			PHASE 2: Build Pages From Simple Doc in JavaScript Modules
 				An HTML reference documentation page is generated for each JavaScript module contained inside the modules folder.
 
-				The build script iterates through all the JavaScript modules contained inside the modules folder (as specified by the =moduleFolderPath= build environment variable). For each file, it extracts all the Simple Doc comments, stitches all those comments together into a single Simple Doc document, and then builds an HTML page from that document, using the =~SIMPLE-DOC-TEMPLATE.html.jst= template file that is contained inside the =reference/= folder of the UIZE Web site project. The built HTML reference documentation page is then output to the =reference/= folder, where the filename of the built file is the filename of the JavaScript module with the =.js= file extension replaced with the =.html= extension.
+				The build script iterates through all the JavaScript modules contained inside the modules folder (as specified by the =modulesFolder= build environment variable). For each file, it extracts all the Simple Doc comments, stitches all those comments together into a single Simple Doc document, and then builds an HTML page from that document, using the =~SIMPLE-DOC-TEMPLATE.html.jst= template file that is contained inside the =reference/= folder of the UIZE Web site project. The built HTML reference documentation page is then output to the =reference/= folder, where the filename of the built file is the filename of the JavaScript module with the =.js= file extension replaced with the =.html= extension.
 
 				FILE NAMING EXAMPLE
 				.............................................................
@@ -235,7 +235,7 @@ The Build Scripts
 		JavaScript Module Source Code Pages
 			A source code page is generated for every JavaScript module in the modules folder.
 
-			The build script iterates through all the JavaScript modules contained inside the modules folder (as specified by the =moduleFolderPath= build environment variable), builds a source code page for each module using the JavaScript template =~SOURCE-CODE-TEMPLATE.html= contained inside the =reference/source-code= folder and places the built source code page inside that folder, where the source code page's filename is the name of the module with the file extension =.html= appended (eg. =Uize.Widget.html= for the =Uize.Widget= module).
+			The build script iterates through all the JavaScript modules contained inside the modules folder (as specified by the =modulesFolder= build environment variable), builds a source code page for each module using the JavaScript template =~SOURCE-CODE-TEMPLATE.html= contained inside the =reference/source-code= folder and places the built source code page inside that folder, where the source code page's filename is the name of the module with the file extension =.html= appended (eg. =Uize.Widget.html= for the =Uize.Widget= module).
 
 		Example Source Code Pages
 			A source code page is generated for every example page contained inside the =examples= folder.
@@ -417,7 +417,7 @@ Build Environment Variables
 	.............................................................
 	{
 		alwaysBuild:false,
-		moduleFolderPath:'js\\~source',
+		modulesFolder:'js',
 		sourceFolderName:'~source',
 		doNotEnter:/\\(css|images|OLD|photos|source-code|Uize.*)$/
 	}
@@ -458,10 +458,10 @@ Build Environment Variables
 
 		When a build script is doing a dry run, it will still build the files and do everything that it normally would, except that it won't write the built files to the target location. A summary of all that would be done is output to a build script's associated log file(s), just as would be the case if you weren't doing a dry run. So, for example, in the case of running the `auto scruncher` build script, the log files would contain all the Scruncher report information and the listings of all the library files that would be built. Doing a dry run and viewing the log files might be a good way to check that the target file paths are correct before doing a genuine build that would write files to the system.
 
-	moduleFolderPath
-		A string, specifying the path to the folder in your Web site project within which the unscrunched / source UIZE JavaScript modules are located.
+	modulesFolder
+		A string, specifying the name of the folder in your Web site project within which the source UIZE JavaScript modules are located.
 
-		The build scripts make use of modules of the UIZE JavaScript Framework. Also, some build scripts actually build files from the JavaScript module (=.js=) files and JavaScript template (=.js.jst=) files inside the modules folder. In order for the build scripts to know where to load these files from, the =moduleFolderPath= build environment variable should be modified, if necessary, to correctly point to the location of the JavaScript modules folder.
+		The build scripts make use of modules of the UIZE JavaScript Framework. Also, some build scripts actually build files from the JavaScript module (=.js=) files and JavaScript template (=.js.jst=) files inside the modules folder. In order for the build scripts to know where to load these files from, the =modulesFolder= build environment variable may need to be modified in order to correctly identify the JavaScript modules folder.
 
 	scrunchedHeadComments
 		.

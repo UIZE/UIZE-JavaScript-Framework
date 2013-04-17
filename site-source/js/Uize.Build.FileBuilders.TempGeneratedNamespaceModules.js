@@ -46,9 +46,10 @@ Uize.module ({
 				return {sourceFolderPath:this.sourceUrlFromTempUrl (_urlParts.pathname).replace (_jsExtensionRegExp,'')};
 			},
 			builder:function (_inputs) {
+				var _params = this.params;
 				return Uize.Build.Util.moduleAsText ({
 					name:Uize.Build.Util.moduleNameFromModulePath (
-						_inputs.sourceFolderPath.slice (this.params.moduleFolderPath.length + 1)
+						_inputs.sourceFolderPath.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length)
 					)
 				});
 			}

@@ -47,7 +47,7 @@ Uize.module ({
 					_dotJsRegExp = /\.js$/i,
 					_dotLibraryDotJsRegExp = /\.library\.js$/i,
 					_modules = _fileSystem.getFiles ({
-						path:_params.moduleFolderPath,
+						path:_params.sourcePath + '/' + _params.modulesFolder,
 						pathMatcher:function (_filePath) {
 							return _dotJsRegExp.test (_filePath) && !_dotLibraryDotJsRegExp.test (_filePath)
 						},

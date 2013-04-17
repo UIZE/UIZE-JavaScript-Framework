@@ -48,8 +48,11 @@ Uize.module ({
 			builder:function (_inputs) {
 				var
 					_cssBuilt = _inputs.cssBuilt,
+					_params = this.params,
 					_moduleName = Uize.Build.Util.moduleNameFromModulePath (
-						_cssBuilt.slice (this.params.moduleFolderBuiltPath.length + 1).replace (/\.css$/i,'')
+						_cssBuilt
+							.slice ((_params.builtPath + '/' + _params.modulesFolder + '/').length)
+							.replace (/\.css$/i,'')
 					)
 				;
 

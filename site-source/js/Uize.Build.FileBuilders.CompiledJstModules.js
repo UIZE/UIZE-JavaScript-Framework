@@ -46,10 +46,13 @@ Uize.module ({
 				return {jstSource:this.sourceUrlFromTempUrl (_urlParts.pathname) + '.jst'};
 			},
 			builder:function (_inputs) {
-				var _jstSource = _inputs.jstSource;
+				var
+					_jstSource = _inputs.jstSource,
+					_params = this.params
+				;
 				return Uize.Template.Module.buildTemplateModuleText (
 					Uize.Build.Util.moduleNameFromModulePath (
-						_jstSource.slice (this.params.moduleFolderPath.length + 1),
+						_jstSource.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length),
 						true
 					),
 					this.readFile ({path:_jstSource})

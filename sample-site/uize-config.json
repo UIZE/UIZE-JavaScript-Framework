@@ -4,6 +4,8 @@
 	tempPath:'temp',
 	memoryPath:'memory',
 	sourcePath:'source',
+	uizePath:'../site-source',
+	modulesFolder:'js',
 	isDev:'false',
 	scrunchedHeadComments:{
 		Uize:
@@ -27,9 +29,6 @@
 	testSequence:[
 		'build.js Uize.Build.RunUnitTests silent=true',
 		'build.js Uize.Build.RunUnitTests useSource=false silent=true'
-	],
-	uizePath:'../site-source',
-	moduleFolderPath:'source/js',
-	moduleFolderBuiltPath:'built/js'
+	]
 }
 
