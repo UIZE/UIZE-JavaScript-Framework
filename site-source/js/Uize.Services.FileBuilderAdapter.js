@@ -98,7 +98,7 @@ Uize.module ({
 							;
 							return (
 								(
-									_urlMinusOldPath.slice (0,8) == '/js/Uize'
+									_startsWith (_urlMinusOldPath,'/' + _params.modulesFolder + '/Uize')
 										? _params.uizePath
 										: _params [_pathTypeToPrepend]
 								) +
@@ -262,11 +262,18 @@ Uize.module ({
 					},
 
 					moduleNameFromTempPath:function (_tempPath) {
-						var _modulesTempPath = this.tempUrl ('js/');
+						var _modulesTempPath = this.tempUrl (this.params.modulesFolder + '/');
 						return (
-							Uize.String.startsWith (_tempPath,_modulesTempPath)
+							_startsWith (_tempPath,_modulesTempPath)
 								? Uize.Build.Util.moduleNameFromModulePath (_tempPath.slice (_modulesTempPath.length),true)
 								: ''
+						);
+					},
+
+					getModuleUrl:function (_moduleName,_includeExtension) {
+						return (
+							this.params.modulesFolder + '/' + Uize.modulePathResolver (_moduleName) +
+							(_includeExtension !== false ? '.js' : '')
 						);
 					},
 

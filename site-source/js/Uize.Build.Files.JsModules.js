@@ -52,6 +52,7 @@ Uize.module ({
 						})
 					);
 					if (_sourcePath != _uizePath)
+						var _modulesFolder = _params.modulesFolder;
 						this.addFiles (
 							this.fileSystem.getFiles ({
 								path:_uizePath + '/js',
@@ -60,7 +61,7 @@ Uize.module ({
 									return _jsModuleExtensionRegExp.test (_path) && Uize.String.startsWith (_path,'Uize.');
 								},
 								pathTransformer:function (_path) {
-									return 'js/' + _path.replace (_jsModuleExtensionRegExp,'.js');
+									return _modulesFolder + '/' + _path.replace (_jsModuleExtensionRegExp,'.js');
 								}
 							})
 						)

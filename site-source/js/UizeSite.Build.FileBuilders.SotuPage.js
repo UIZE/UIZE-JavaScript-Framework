@@ -56,6 +56,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				var
 					_this = this,
+					_params = _this.params,
 					_inputs = {
 						jstSource:_this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst',
 						referencesIndex:_this.memoryUrl ('reference.index'),
@@ -63,12 +64,12 @@ Uize.module ({
 					}
 				;
 				Uize.forEach (
-					UizeSite.Build.Util.getJsModules (_this.params.sourcePath),
+					UizeSite.Build.Util.getJsModules (_params),
 					function (_moduleName) {
 						if (_isModuleForSotu (_moduleName)) {
-							var _modulePathSuffix = '/js/' + Uize.modulePathResolver (_moduleName) + '.js';
-							_inputs ['moduleBuiltSize_' + _moduleName] = _this.memoryUrl (_modulePathSuffix + '.builtsize');
-							_inputs ['moduleMetaData_' + _moduleName] = _this.memoryUrl (_modulePathSuffix + '.metadata');
+							var _moduleUrl = _this.getModuleUrl (_moduleName);
+							_inputs ['moduleBuiltSize_' + _moduleName] = _this.memoryUrl (_moduleUrl + '.builtsize');
+							_inputs ['moduleMetaData_' + _moduleName] = _this.memoryUrl (_moduleUrl + '.metadata');
 						}
 					}
 				);

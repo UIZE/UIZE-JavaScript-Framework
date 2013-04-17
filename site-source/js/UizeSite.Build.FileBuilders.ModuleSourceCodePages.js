@@ -39,10 +39,6 @@ Uize.module ({
 			_cssSourceExtension = '.css.source'
 		;
 
-		function _moduleSubPathFromUrlParts (_urlParts) {
-			return 'js/' + Uize.modulePathResolver (_urlParts.fileName);
-		}
-
 		return {
 			description:'Module source code pages',
 			urlMatcher:function (_urlParts) {
@@ -54,7 +50,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				var
 					_this = this,
-					_sourcePathSansExtension = _this.sourceUrl (_moduleSubPathFromUrlParts (_urlParts))
+					_sourcePathSansExtension = _this.sourceUrl (_this.getModuleUrl (_urlParts.fileName,false))
 				;
 				return {
 					sourceCode:
@@ -72,10 +68,13 @@ Uize.module ({
 				};
 			},
 			builder:function (_inputs,_urlParts) {
-				var _sourceCode = _inputs.sourceCode;
+				var
+					_sourceCode = _inputs.sourceCode,
+					_params = this.params
+				;
 				return this.readFile ({path:_inputs.sourceCodeTemplate}) ({
 					moduleName:_urlParts.fileName,
-					sourcePath:_sourceCode.slice ((this.params.sourcePath + '/js/').length),
+					sourcePath:_sourceCode.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length),
 					body:this.readFile ({path:_sourceCode})
 				});
 			}

@@ -40,7 +40,7 @@ Uize.module ({
 					/*** add URLs for source code pages for the JavaScript modules ***/
 						_this.addFiles (
 							Uize.map (
-								UizeSite.Build.Util.getJsModules (_sourcePath).sort (),
+								UizeSite.Build.Util.getJsModules (_params).sort (),
 								'"reference/source-code/" + value + ".html"'
 							)
 						);

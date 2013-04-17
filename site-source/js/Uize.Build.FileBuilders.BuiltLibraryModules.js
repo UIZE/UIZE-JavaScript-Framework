@@ -53,10 +53,11 @@ Uize.module ({
 		return {
 			description:'JavaScript library modules',
 			urlMatcher:function (_urlParts) {
+				var _pathname = _urlParts.pathname;
 				return (
 					!this.params.isDev &&
-					Uize.String.startsWith (_urlParts.pathname,this.builtUrl ('js/')) &&
-					Uize.String.endsWith (_urlParts.pathname,'.library.js')
+					Uize.String.startsWith (_pathname,this.builtUrl (this.params.modulesFolder + '/')) &&
+					Uize.String.endsWith (_pathname,'.library.js')
 				);
 			},
 			builderInputs:function (_urlParts) {
@@ -83,9 +84,7 @@ Uize.module ({
 							(_moduleName = Uize.String.trim (_moduleName)) &&
 							_lineStartsWithIdentifierCharRegExp.test (_moduleName)
 						)
-							_modules [_modulesLength++] = _this.builtUrl (
-								'js/' + Uize.modulePathResolver (_moduleName) + '.js'
-							)
+							_modules [_modulesLength++] = _this.builtUrl (_this.getModuleUrl (_moduleName))
 						;
 					}
 				);

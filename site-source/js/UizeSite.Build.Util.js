@@ -45,9 +45,9 @@ Uize.module ({
 				return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
 			},
 
-			getJsModules:function (_sourcePath) {
+			getJsModules:function (_params) {
 				var
-					_modulesPath = _sourcePath + '/js',
+					_modulesPath = _params.sourcePath + '/' + _params.modulesFolder,
 					_trueFlag = {},
 					_modulesLookup = {},
 					_moduleName,

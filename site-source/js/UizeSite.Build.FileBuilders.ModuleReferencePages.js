@@ -32,10 +32,6 @@ Uize.module ({
 		'Uize.Doc.Sucker'
 	],
 	builder:function () {
-		function _moduleSubPathFromUrlParts (_urlParts) {
-			return 'js/' + Uize.modulePathResolver (_urlParts.fileName);
-		}
-
 		return {
 			description:'Module reference page',
 			urlMatcher:function (_urlParts) {
@@ -44,7 +40,7 @@ Uize.module ({
 					_urlParts.fileType == 'html' &&
 					_urlParts.folderPath == _this.builtUrl ('reference/')
 				) {
-					var _sourcePathSansExtension = _this.sourceUrl (_moduleSubPathFromUrlParts (_urlParts));
+					var _sourcePathSansExtension = _this.sourceUrl (_this.getModuleUrl (_urlParts.fileName,false));
 					return (
 						_this.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
 						_this.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
@@ -58,7 +54,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				var _this = this;
 				return {
-					tempCode:_this.tempUrl (_moduleSubPathFromUrlParts (_urlParts)) + '.js',
+					tempCode:_this.tempUrl (_this.getModuleUrl (_urlParts.fileName)),
 					simpleDocTemplate:_this.memoryUrl ('reference/~SIMPLE-DOC-TEMPLATE.html.jst'),
 					modulesTree:_this.memoryUrl ('modules-tree'),
 					urlDictionary:_this.memoryUrl ('url-dictionary'),

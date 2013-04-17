@@ -38,10 +38,7 @@ Uize.module ({
 				return _urlParts.pathname == this.memoryUrl ('modules-tree');
 			},
 			builder:function () {
-				return Uize.Data.PathsTree.fromList (
-					UizeSite.Build.Util.getJsModules (this.params.sourcePath),
-					'.'
-				);
+				return Uize.Data.PathsTree.fromList (UizeSite.Build.Util.getJsModules (this.params),'.');
 			}
 		};
 	}

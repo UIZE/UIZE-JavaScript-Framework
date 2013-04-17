@@ -65,7 +65,7 @@ Uize.module ({
 							_superclassKnown
 						;
 						if (!_moduleCode) {
-							var _moduleUrl = 'js/' + Uize.modulePathResolver (_moduleName) + '.js';
+							var _moduleUrl = _this.getModuleUrl (_moduleName);
 							_this.buildFile (Uize.copy (_this.params,{url:_moduleUrl}));
 							_moduleCode = _this.readFile ({path:_this.builtUrl (_moduleUrl)});
 						}

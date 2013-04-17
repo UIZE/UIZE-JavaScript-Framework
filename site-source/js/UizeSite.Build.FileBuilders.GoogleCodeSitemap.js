@@ -38,9 +38,7 @@ Uize.module ({
 				return {template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst'};
 			},
 			builder:function (_inputs) {
-				return this.readFile ({path:_inputs.template}) ({
-					modules:UizeSite.Build.Util.getJsModules (this.params.sourcePath)
-				});
+				return this.readFile ({path:_inputs.template}) ({modules:UizeSite.Build.Util.getJsModules (this.params)});
 			}
 		};
 	}

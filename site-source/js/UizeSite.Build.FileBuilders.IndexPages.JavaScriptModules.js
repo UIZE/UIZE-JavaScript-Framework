@@ -33,7 +33,7 @@ Uize.module ({
 		return UizeSite.Build.FileBuilders.IndexPages.getIndexPageUrlHandler (
 			'JavaScript modules index page',
 			'javascript-modules-index',
-			function () {return UizeSite.Build.Util.getJsModules (this.params.sourcePath)},
+			function () {return UizeSite.Build.Util.getJsModules (this.params)},
 			'reference'
 		);
 	}

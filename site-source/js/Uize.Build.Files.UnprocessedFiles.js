@@ -49,7 +49,7 @@ Uize.module ({
 								path:_uizePath + '/js',
 								recursive:true,
 								pathMatcher:_staticFilePathMatcher,
-								pathTransformer:'"js/" + value'
+								pathTransformer:'"' + _params.modulesFolder + '/" + value'
 							})
 						)
 					;

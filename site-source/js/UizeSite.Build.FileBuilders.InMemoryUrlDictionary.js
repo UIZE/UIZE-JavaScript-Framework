@@ -71,7 +71,7 @@ Uize.module ({
 
 				/*** add links to module reference pages ***/
 					Uize.forEach (
-						UizeSite.Build.Util.getJsModules (_this.params.sourcePath),
+						UizeSite.Build.Util.getJsModules (_this.params),
 						function (_moduleName) {
 							_urlDictionary [_moduleName] = '/reference/' + _moduleName + '.html';
 						}

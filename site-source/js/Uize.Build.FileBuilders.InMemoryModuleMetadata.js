@@ -52,7 +52,7 @@ Uize.module ({
 							_this.tempUrlFromMemoryUrl (_urlParts.pathname.replace (_moduleMetaDataExtensionRegExp,'.js'))
 					},
 					_testModulePath =
-						'js/' +
+						_this.params.modulesFolder + '/' +
 						Uize.Build.Util.getTestModuleName (_urlParts.file.replace (_moduleMetaDataExtensionRegExp,'')) +
 						'.js'
 				;

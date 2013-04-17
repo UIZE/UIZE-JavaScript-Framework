@@ -74,6 +74,7 @@ Uize.module ({
 			_package.perform = function (_params) {
 				var
 					_builtPath = _params.builtPath,
+					_modulesFolder = _params.modulesFolder,
 					_packageTargetPathTemplate = _params.packageTargetPathTemplate,
 					_trueFlag = {},
 					_fileBuilder = Uize.Services.FileBuilder.singleton (),
@@ -91,7 +92,7 @@ Uize.module ({
 				function _readBuiltModuleFile (_moduleName) {
 					var _builtModuleFile = _builtModuleFileCache [_moduleName];
 					if (!_builtModuleFile) {
-						var _modulePath = 'js/' + Uize.modulePathResolver (_moduleName) + '.js';
+						var _modulePath = _modulesFolder + '/' + Uize.modulePathResolver (_moduleName) + '.js';
 						_fileBuilder.buildFile (
 							Uize.copyInto (
 								Uize.Data.filter (
