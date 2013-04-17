@@ -323,10 +323,26 @@ Uize = (function () {
 			_sacredEmptyArray = [],
 			_scriptParentNode,
 			_interpreterSupportsArrayForEach = !!_Array.forEach,
-			_interpreterSupportsArrayIndexOf = !!(_Array.indexOf && _Array.lastIndexOf)
+			_interpreterSupportsArrayIndexOf = !!(_Array.indexOf && _Array.lastIndexOf),
+			_whitespaceCharLettersLookup = {
+				'\n':'n',
+				'\r':'r',
+				'\t':'t'
+			}
 		;
 
 	/*** Utility Functions ***/
+		function _escapeRegExpLiteral (_literal) {
+			return (
+				_literal
+					.replace (/([\^\$\|\{\}\[\]\(\)\?\.\*\+\\])/g,'\\$1')
+					.replace (
+						/[\n\r\t]/g,
+						function (_whitespaceChar) {return '\\' + _whitespaceCharLettersLookup [_whitespaceChar]}
+					)
+			);
+		}
+
 		function _resolveTargetLookup (_safeOrTarget) {
 			return (
 				_isObject (_safeOrTarget)
@@ -5069,18 +5085,16 @@ Uize = (function () {
 			};
 
 			var
-				_folderOrgNamespace = 'Uize.Widgets',
-				_folderOrgNamespaceLength = _folderOrgNamespace.length,
-				_folderOrgNamespacePrefix = _folderOrgNamespace + '.',
-				_folderOrgNamespacePrefixLength = _folderOrgNamespaceLength + 1
+				_folderOrgNamespaces = ['Uize.Widgets'],
+				_folderOrgNamespaceRegExp = new RegExp (
+					'^(' + Uize.map (_folderOrgNamespaces,_escapeRegExpLiteral).join ('|') + ')(\\..+|$)'
+				)
 			;
 			_package.modulePathResolver = function (_moduleName) {
+				var _folderOrgNamespaceMatch = _moduleName.match (_folderOrgNamespaceRegExp);
 				return (
-					_moduleName == _folderOrgNamespace ||
-					_moduleName.slice (0,_folderOrgNamespacePrefixLength) == _folderOrgNamespacePrefix
-						?
-							_folderOrgNamespace.replace (/\./g,'_') +
-							_moduleName.slice (_folderOrgNamespaceLength).replace (/\./g,'/')
+					_folderOrgNamespaceMatch
+						? _folderOrgNamespaceMatch [1].replace (/\./g,'_') + _folderOrgNamespaceMatch [2].replace (/\./g,'/')
 						: _moduleName
 				);
 			};
@@ -5227,54 +5241,38 @@ Uize = (function () {
 			*/
 		};
 
-		var
-			_whitespaceCharLettersLookup = {
-				'\n':'n',
-				'\r':'r',
-				'\t':'t'
-			},
-			_escapeRegExpLiteral = _package.escapeRegExpLiteral = function (_literal) {
-				return (
-					_literal
-						.replace (/([\^\$\|\{\}\[\]\(\)\?\.\*\+\\])/g,'\\$1')
-						.replace (
-							/[\n\r\t]/g,
-							function (_whitespaceChar) {return '\\' + _whitespaceCharLettersLookup [_whitespaceChar]}
-						)
-				);
-				/*?
-					Static Methods
-						Uize.escapeRegExpLiteral
-							Returns a string, being the specified source string escaped so that it can be used as a literal match when constructing a regular expression string.
+		_package.escapeRegExpLiteral = _escapeRegExpLiteral;
+			/*?
+				Static Methods
+					Uize.escapeRegExpLiteral
+						Returns a string, being the specified source string escaped so that it can be used as a literal match when constructing a regular expression string.
 
-							SYNTAX
-							......................................................................
-							escapedRegExpLiteralSTR = Uize.escapeRegExpLiteral (regExpLiteralSTR);
-							......................................................................
+						SYNTAX
+						......................................................................
+						escapedRegExpLiteralSTR = Uize.escapeRegExpLiteral (regExpLiteralSTR);
+						......................................................................
 
-							Using this method, any string can be escaped so that it can be used in creating a regular expression where that string can be matched as a literal match. Strings may sometimes contain special regular expression characters, such as the =(= (open parenthesis), =)= (close parenthesis), =.= (period), =?= (question mark), and other characters that have special meaning in the context of regular expression strings. If you wanted to use a regular expression to match a string that contained any of these special characters, then the special characters would have to be escaped. The =Uize.escapeRegExpLiteral= method takes care of this for you. Consider the following example...
+						Using this method, any string can be escaped so that it can be used in creating a regular expression where that string can be matched as a literal match. Strings may sometimes contain special regular expression characters, such as the =(= (open parenthesis), =)= (close parenthesis), =.= (period), =?= (question mark), and other characters that have special meaning in the context of regular expression strings. If you wanted to use a regular expression to match a string that contained any of these special characters, then the special characters would have to be escaped. The =Uize.escapeRegExpLiteral= method takes care of this for you. Consider the following example...
 
-							EXAMPLE
-							............................................................................
-							function replaceAllCaseInsensitive (sourceStr,toReplaceStr,replacementStr) {
-								return sourceStr.replace (
-									new RegExp (Uize.escapeRegExpLiteral (toReplaceStr),'gi'),
-									replacementStr
-								);
-							}
-							............................................................................
+						EXAMPLE
+						............................................................................
+						function replaceAllCaseInsensitive (sourceStr,toReplaceStr,replacementStr) {
+							return sourceStr.replace (
+								new RegExp (Uize.escapeRegExpLiteral (toReplaceStr),'gi'),
+								replacementStr
+							);
+						}
+						............................................................................
 
-							In the above example, we are defining a function that will replace all occurrences of a specified string within a source string with the specified replacement string, and where matching is case insensitive.
+						In the above example, we are defining a function that will replace all occurrences of a specified string within a source string with the specified replacement string, and where matching is case insensitive.
 
-							Now, the =replace= instance method of JavaScript's =String= object can accept a string as a match parameter, but when a string is specified the replacement is not case insensitive and is only for the first occurrence. So, we have to use a regular expression to specify what to replace, so that we can make use of the "g" (global) and "i" (case insensitive) regular expression switches. The problem, however, with using a regular expression is that the string to replace may contain regular expression special characters, so we can't just use it as is when creating the =RegExp= instance - we have to escape the special characters. So, we use the =Uize.escapeRegExpLiteral= method to escape the string to replace before supplying it to the =RegExp= object's constructor.
+						Now, the =replace= instance method of JavaScript's =String= object can accept a string as a match parameter, but when a string is specified the replacement is not case insensitive and is only for the first occurrence. So, we have to use a regular expression to specify what to replace, so that we can make use of the "g" (global) and "i" (case insensitive) regular expression switches. The problem, however, with using a regular expression is that the string to replace may contain regular expression special characters, so we can't just use it as is when creating the =RegExp= instance - we have to escape the special characters. So, we use the =Uize.escapeRegExpLiteral= method to escape the string to replace before supplying it to the =RegExp= object's constructor.
 
-							The =Uize.escapeRegExpLiteral= method can be used to escape any string that is to be treated as a literal match - even literals that are to be combined with other regular expression logic to form more complex regular expressions.
+						The =Uize.escapeRegExpLiteral= method can be used to escape any string that is to be treated as a literal match - even literals that are to be combined with other regular expression logic to form more complex regular expressions.
 
-							NOTES
-							- see also the other `useful value transformers`
-				*/
-			}
-		;
+						NOTES
+						- see also the other `useful value transformers`
+			*/
 
 		_package.substituteInto = function (_source,_substitutions,_tokenNaming) {
 			if (!(_source = _source == _undefined ? '' : _source + '') || _substitutions == _undefined)
