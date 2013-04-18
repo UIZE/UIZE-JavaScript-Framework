@@ -341,6 +341,7 @@
 		-webkit-border-radius:8px;
 		max-width:500px;
 		_width:500px; /* hack for IE6 (which doesn't support max-width) */
+		overflow:hidden;
 	}
 	.body-link-tooltip .body-link-tooltip-title {
 		font-size:10px;
