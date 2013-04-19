@@ -34,9 +34,7 @@ Uize.module ({
 		return {
 			description:'Generated UizeSite.ModulesTree module under temp',
 			urlMatcher:function (_urlParts) {
-				return (
-					_urlParts.pathname == this.tempUrl (this.params.modulesFolder + '/' + _modulesTreeDataModuleName + '.js')
-				);
+				return _urlParts.pathname == this.tempUrl (this.getModuleUrl (_modulesTreeDataModuleName));
 			},
 			builderInputs:function () {
 				return {modulesTree:this.memoryUrl ('modules-tree')};

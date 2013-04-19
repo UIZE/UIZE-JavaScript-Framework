@@ -34,10 +34,7 @@ Uize.module ({
 		return {
 			description:'Generated UizeSite.ExamplesInfoForSiteMap module under temp',
 			urlMatcher:function (_urlParts) {
-				return (
-					_urlParts.pathname ==
-					this.tempUrl (this.params.modulesFolder + '/' + _examplesInfoForSiteMapModuleName + '.js')
-				);
+				return _urlParts.pathname == this.tempUrl (this.getModuleUrl (_examplesInfoForSiteMapModuleName));
 			},
 			builderInputs:function () {
 				return {examplesInfoForSiteMap:this.memoryUrl ('examples-info-for-sitemap')};

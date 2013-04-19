@@ -5085,7 +5085,7 @@ Uize = (function () {
 			};
 
 			var
-				_folderOrgNamespaces = ['Uize.Widgets'],
+				_folderOrgNamespaces = ['Uize.Widgets','UizeSite'],
 				_folderOrgNamespaceRegExp = new RegExp (
 					'^(' + Uize.map (_folderOrgNamespaces,_escapeRegExpLiteral).join ('|') + ')(\\..+|$)'
 				)

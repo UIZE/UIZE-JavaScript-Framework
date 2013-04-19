@@ -34,9 +34,7 @@ Uize.module ({
 		return {
 			description:'Generated UizeSite.Examples module under temp',
 			urlMatcher:function (_urlParts) {
-				return (
-					_urlParts.pathname == this.tempUrl (this.params.modulesFolder + '/' + _examplesDataModuleName + '.js')
-				);
+				return _urlParts.pathname == this.tempUrl (this.getModuleUrl (_examplesDataModuleName));
 			},
 			builderInputs:function () {
 				return {filesIndex:this.memoryUrl ('examples.index')};
