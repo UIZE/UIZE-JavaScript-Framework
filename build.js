@@ -187,10 +187,14 @@ function _eval (_toEval) {
 				} else {
 					var
 						_moduleFilePath = '/' + _modulePathResolver (_moduleName) + '.js',
+						_modulesFolder = _params.modulesFolder,
 						_moduleSourcePath =
-							(/^Uize(\.|$)/.test (_moduleName) ? env.uizePath + '/js' : _params.moduleFolderPath) +
-							_moduleFilePath,
-						_moduleBuiltPath = _params.moduleFolderBuiltPath + _moduleFilePath,
+							(
+								/^Uize(\.|$)/.test (_moduleName)
+									? env.uizePath + '/js'
+									: _params.sourcePath + '/' + _modulesFolder
+							) + _moduleFilePath,
+						_moduleBuiltPath = _params.builtPath + '/' + _modulesFolder + _moduleFilePath,
 						_modulePath = _useSource ? _moduleSourcePath : _moduleBuiltPath
 					;
 					if (_fileExists (_modulePath)) {
