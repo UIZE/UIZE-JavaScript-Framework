@@ -65,6 +65,10 @@ Uize.module ({
 					return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
 				},
 
+				getTitleFromFilename:function (_filename) {
+					return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
+				},
+
 				getHtmlFileInfo:function (_filePath,_titleExtractor) {
 					var
 						_fileText = _fileSystem.readFile ({path:_filePath}),

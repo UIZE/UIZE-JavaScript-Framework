@@ -64,7 +64,7 @@ Uize.module ({
 				;
 				return this.processSimpleDoc (
 					_simpleDoc.metaData.title ||
-					UizeSite.Build.Util.getTitleFromFilename (Uize.Url.from (_simpleDocPath).file)
+					Uize.Build.Util.getTitleFromFilename (Uize.Url.from (_simpleDocPath).file)
 						.replace (/(^|\s)[a-z]/g,function (_match) {return _match.toUpperCase ()}),
 					_simpleDoc,
 					_inputs.simpleDocTemplate

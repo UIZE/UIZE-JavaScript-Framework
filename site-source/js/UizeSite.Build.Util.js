@@ -41,10 +41,6 @@ Uize.module ({
 			;
 
 		return {
-			getTitleFromFilename:function (_filename) {
-				return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
-			},
-
 			getJsModules:function (_params) {
 				var
 					_modulesPath = _params.sourcePath + '/' + _params.modulesFolder,
