@@ -223,12 +223,14 @@ Uize.module ({
 						_moduleDefinition.builder = _builderPlaceholder
 					;
 					var _moduleText = 'Uize.module (' + Uize.Json.to (_moduleDefinition) + ');';
-					if (_builderSpecifiedAsString)
-						_moduleText = _moduleText.replace (
-							new RegExp ('.' + Uize.escapeRegExpLiteral (_builderPlaceholder) + '.'),
-							Uize.String.Lines.indent (_builder,1,'\t',false)
-						)
-					;
+					if (_builderSpecifiedAsString) {
+						var _builderPlaceholderPos = _moduleText.indexOf (_builderPlaceholder);
+						_moduleText =
+							_moduleText.slice (0,_builderPlaceholderPos - 1) +
+							Uize.String.Lines.indent (_builder,1,'\t',false) +
+							_moduleText.slice (_builderPlaceholderPos + _builderPlaceholder.length + 1)
+						;
+					}
 					return _moduleText;
 				},
 
