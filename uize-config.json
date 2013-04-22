@@ -1,48 +1,47 @@
 {
-	/*** for the newer build process ***/
-		servicesSetup:'UizeSite.Build.ServicesSetup',
-		builtPath:'site-built',
-		tempPath:'site-temp',
-		memoryPath:'site-memory',
-		sourcePath:'site-source',
-		uizePath:'site-source',
-		modulesFolder:'js',
-		isDev:'false',
-		scrunchedHeadComments:{
-			Uize:
-				'/*\n' +
-					'\tUIZE JAVASCRIPT FRAMEWORK\n' +
-					'\n' +
-					'\thttp://www.uize.com/reference/{moduleName}.html\n' +
-					'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
-				'*/\n',
-			UizeSite:
-				'/*\n' +
-					'\tUIZE Web Site\n' +
-					'\n' +
-					'\thttp://www.uize.com/reference/{moduleName}.html\n' +
-					'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
-				'*/\n'
-		},
-		staleBefore:'now',
-		staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,
-		deployConfigPath:'../deploy.config.json',
-		buildSequence:[
-			'Uize.Build.Files.UnprocessedFiles',
-			'Uize.Build.Files.JsModules',
-			'UizeSite.Build.Files.WidgetPages',
-			'UizeSite.Build.Files.SimpleDocPages',
-			'UizeSite.Build.Files.SimpleDataPages',
-			'UizeSite.Build.Files.SourceCodePages',
-			'UizeSite.Build.Files.IndexPages'
-		],
-		testSequence:[
-			'build.js Uize.Build.RunUnitTests silent=true',
-			'build.js Uize.Build.RunUnitTests useSource=false silent=true'
-		],
-		folderOrgNamespaces:[
-			'Uize.Widgets'
-		],
+	servicesSetup:'UizeSite.Build.ServicesSetup',
+	builtPath:'site-built',
+	tempPath:'site-temp',
+	memoryPath:'site-memory',
+	sourcePath:'site-source',
+	uizePath:'site-source',
+	modulesFolder:'js',
+	folderOrgNamespaces:[
+		'UizeSite'
+	],
+	isDev:'false',
+	scrunchedHeadComments:{
+		Uize:
+			'/*\n' +
+				'\tUIZE JAVASCRIPT FRAMEWORK\n' +
+				'\n' +
+				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
+				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
+			'*/\n',
+		UizeSite:
+			'/*\n' +
+				'\tUIZE Web Site\n' +
+				'\n' +
+				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
+				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
+			'*/\n'
+	},
+	staleBefore:'now',
+	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,
+	deployConfigPath:'../deploy.config.json',
+	buildSequence:[
+		'Uize.Build.Files.UnprocessedFiles',
+		'Uize.Build.Files.JsModules',
+		'UizeSite.Build.Files.WidgetPages',
+		'UizeSite.Build.Files.SimpleDocPages',
+		'UizeSite.Build.Files.SimpleDataPages',
+		'UizeSite.Build.Files.SourceCodePages',
+		'UizeSite.Build.Files.IndexPages'
+	],
+	testSequence:[
+		'build.js Uize.Build.RunUnitTests silent=true',
+		'build.js Uize.Build.RunUnitTests useSource=false silent=true'
+	],
 
 	/*** for the older build process ***/
 		alwaysBuild:false,

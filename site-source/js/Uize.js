@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Package
 	importance: 10
-	codeCompleteness: 100
+	codeCompleteness: 95
 	docCompleteness: 90
 */
 
@@ -341,6 +341,10 @@ Uize = (function () {
 						function (_whitespaceChar) {return '\\' + _whitespaceCharLettersLookup [_whitespaceChar]}
 					)
 			);
+		}
+
+		function _resolveListyArgs (_arguments) {
+			return _arguments.length == 1 && _isArray (_arguments [0]) ? _arguments [0] : _arguments;
 		}
 
 		function _resolveTargetLookup (_safeOrTarget) {
@@ -5085,10 +5089,8 @@ Uize = (function () {
 			};
 
 			var
-				_folderOrgNamespaces = ['Uize.Widgets','UizeSite'],
-				_folderOrgNamespaceRegExp = new RegExp (
-					'^(' + Uize.map (_folderOrgNamespaces,_escapeRegExpLiteral).join ('|') + ')(\\..+|$)'
-				)
+				_folderOrgNamespaces = [],
+				_folderOrgNamespaceRegExp
 			;
 			_package.modulePathResolver = function (_moduleName) {
 				var _folderOrgNamespaceMatch = _moduleName.match (_folderOrgNamespaceRegExp);
@@ -5098,6 +5100,39 @@ Uize = (function () {
 						: _moduleName
 				);
 			};
+
+			(
+				_package.addFolderOrgNamespaces = function () {
+					_folderOrgNamespaceRegExp = new RegExp (
+						'^(' +
+							Uize.map (
+								Uize.push (_folderOrgNamespaces,_resolveListyArgs (arguments)),
+								_escapeRegExpLiteral
+							).join ('|') +
+						')(\\..+|$)'
+					);
+					/*?
+						Static Methods
+							Uise.addFolderOrgNamespaces
+								DIFFERENT USAGES
+
+								`Add a Single Folder Organized Namespace`
+								...........................................
+								Uize.addFolderOrgNamespaces (namespaceSTR);
+								...........................................
+
+								`Add Multiple Folder Organized Namespaces, Specifing Them as a String Array`
+								..............................................
+								Uize.addFolderOrgNamespaces (namespacesARRAY);
+								..............................................
+
+								`Add Multiple Folder Organized Namespaces, Specifing Them as Multiple Arguments`
+								............................................................................
+								Uize.addFolderOrgNamespaces (namespace1STR,namespace2STR,...,namespaceNSTR);
+								............................................................................
+					*/
+				}
+			) ('Uize.Widgets');
 
 			_package.moduleUrlResolver = function (_moduleName) {
 				return _package.moduleUrlTemplate.replace (
@@ -5143,7 +5178,7 @@ Uize = (function () {
 		_package.pairUp = function (_firstArg) {
 			var
 				_result = {},
-				_arguments = arguments.length == 1 && _isArray (_firstArg) ? _firstArg : arguments,
+				_arguments = _resolveListyArgs (arguments),
 				_argumentsLength = _arguments.length
 			;
 			if (_argumentsLength < 3) {

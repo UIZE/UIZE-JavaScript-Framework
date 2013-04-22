@@ -233,6 +233,7 @@ function _eval (_toEval) {
 					;
 					_modulePathResolver = Uize.modulePathResolver;
 					Uize.moduleLoader = _moduleLoader;
+					Uize.addFolderOrgNamespaces (_params.folderOrgNamespaces || []);
 				}
 			);
 
