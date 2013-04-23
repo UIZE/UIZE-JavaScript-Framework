@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.AnotherTestWidget.Subclass.Widget Class
+|    /    O /   |    MODULE : UizeSite.Widgets.AnotherTestWidget.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,23 +18,28 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.AnotherTestWidget.Subclass.Widget= class implements a test widget being used during development of the new =Uize.Widget.V2= widget base class to test this class' functionality.
+		The =UizeSite.Widgets.AnotherTestWidget.Widget= class implements a test widget being used during development of the new =Uize.Widget.V2= widget base class to test this class' functionality.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.AnotherTestWidget.Subclass.Widget',
-	superclass:'Uize.Widgets.AnotherTestWidget.Widget',
+	name:'UizeSite.Widgets.AnotherTestWidget.Widget',
+	superclass:'Uize.Widget.V2',
 	required:[
-		'Uize.Widgets.AnotherTestWidget.Subclass.Css'
+		'UizeSite.Widgets.AnotherTestWidget.Html',
+		'UizeSite.Widgets.AnotherTestWidget.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var _class = _superclass.subclass ({
+			set:{
+				html:UizeSite.Widgets.AnotherTestWidget.Html
+			},
+
 			staticProperties:{
-				cssModule:Uize.Widgets.AnotherTestWidget.Subclass.Css
+				cssModule:UizeSite.Widgets.AnotherTestWidget.Css
 			}
 		});
 
