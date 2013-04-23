@@ -55,11 +55,12 @@
 
 Uize.module ({
 	name:'UizeSite.Build.File',
-	superclass:'Uize.Services.FileBuilderAdapter',
+	superclass:'Uize.Services.FileBuilderAdapter.Basic',
 	required:[
-		'Uize.Build.FileBuilders.SourceFiles',
-		'Uize.Build.FileBuilders.UnprocessedFiles',
 		'UizeSite.Build.FileBuilders.Homepage',
+		'UizeSite.Build.FileBuilders.TempModulesTreeModule',
+		'UizeSite.Build.FileBuilders.TempExamplesModule',
+		'UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule',
 		'UizeSite.Build.FileBuilders.WidgetsToGoPages',
 		'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
 		'Uize.Build.FileBuilders.InMemoryHtmlInfo',
@@ -77,23 +78,10 @@ Uize.module ({
 		'UizeSite.Build.FileBuilders.NewsByYearIndexPages',
 		'UizeSite.Build.FileBuilders.LatestNewsRssFeed',
 		'UizeSite.Build.FileBuilders.DirectoryPage',
-		'Uize.Build.FileBuilders.InMemoryCompiledJstTemplates',
-		'Uize.Build.FileBuilders.InMemoryParsedSimpleDataFiles',
 		'UizeSite.Build.FileBuilders.InMemoryModulesTree',
-		'UizeSite.Build.FileBuilders.TempModulesTreeModule',
-		'UizeSite.Build.FileBuilders.TempExamplesModule',
 		'UizeSite.Build.FileBuilders.InMemoryExamplesInfoForSiteMap',
-		'UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule',
-		'Uize.Build.FileBuilders.TempUizeModule',
-		'Uize.Build.FileBuilders.TempJsModules',
-		'Uize.Build.FileBuilders.CompiledCss',
-		'Uize.Build.FileBuilders.CompiledCssModules',
-		'Uize.Build.FileBuilders.CompiledJstModules',
-		'Uize.Build.FileBuilders.TempGeneratedNamespaceModules',
 		'UizeSite.Build.FileBuilders.InMemoryUrlDictionary',
 		'Uize.Build.FileBuilders.SimpleDocPages',
-		'Uize.Build.FileBuilders.BuiltLibraryModules',
-		'Uize.Build.FileBuilders.BuiltModules',
 		'UizeSite.Build.FileBuilders.ModuleReferencePages',
 		'UizeSite.Build.FileBuilders.ModuleSourceCodePages',
 		'UizeSite.Build.FileBuilders.ExampleSourceCodePages',
@@ -109,9 +97,13 @@ Uize.module ({
 			instanceMethods:{
 				init:function (_params,_callback) {
 					this.registerFileBuilders (
-						Uize.Build.FileBuilders.SourceFiles,
-						Uize.Build.FileBuilders.UnprocessedFiles,
 						UizeSite.Build.FileBuilders.Homepage,
+						UizeSite.Build.FileBuilders.TempModulesTreeModule,
+						UizeSite.Build.FileBuilders.TempExamplesModule,
+						UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule
+					);
+					_superclass.prototype.init.call (this,{},Uize.nop);
+					this.registerFileBuilders (
 						UizeSite.Build.FileBuilders.WidgetsToGoPages,
 						UizeSite.Build.FileBuilders.GoogleCodeSitemap,
 						Uize.Build.FileBuilders.InMemoryHtmlInfo,
@@ -129,23 +121,10 @@ Uize.module ({
 						UizeSite.Build.FileBuilders.NewsByYearIndexPages,
 						UizeSite.Build.FileBuilders.LatestNewsRssFeed,
 						UizeSite.Build.FileBuilders.DirectoryPage,
-						Uize.Build.FileBuilders.InMemoryCompiledJstTemplates,
-						Uize.Build.FileBuilders.InMemoryParsedSimpleDataFiles,
 						UizeSite.Build.FileBuilders.InMemoryModulesTree,
-						UizeSite.Build.FileBuilders.TempModulesTreeModule,
-						UizeSite.Build.FileBuilders.TempExamplesModule,
 						UizeSite.Build.FileBuilders.InMemoryExamplesInfoForSiteMap,
-						UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule,
-						Uize.Build.FileBuilders.TempUizeModule,
-						Uize.Build.FileBuilders.TempJsModules,
-						Uize.Build.FileBuilders.CompiledCss,
-						Uize.Build.FileBuilders.CompiledCssModules,
-						Uize.Build.FileBuilders.CompiledJstModules,
-						Uize.Build.FileBuilders.TempGeneratedNamespaceModules,
 						UizeSite.Build.FileBuilders.InMemoryUrlDictionary,
 						Uize.Build.FileBuilders.SimpleDocPages,
-						Uize.Build.FileBuilders.BuiltLibraryModules,
-						Uize.Build.FileBuilders.BuiltModules,
 						UizeSite.Build.FileBuilders.ModuleReferencePages,
 						UizeSite.Build.FileBuilders.ModuleSourceCodePages,
 						UizeSite.Build.FileBuilders.ExampleSourceCodePages,
@@ -154,7 +133,6 @@ Uize.module ({
 						Uize.Build.FileBuilders.InMemoryModuleBuiltSize,
 						UizeSite.Build.FileBuilders.SotuPage
 					);
-
 					_callback ();
 				}
 			}
