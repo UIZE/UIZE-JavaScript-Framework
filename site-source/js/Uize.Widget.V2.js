@@ -23,12 +23,6 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-/* TODO:
-	- organization of modules into folders
-	- ability to specify required modules by path (or somehow have a module name resolve to a folder path, still have mixed feelings on this)
-	- switching to using the widget module name for CSS class namespacing
-*/
-
 Uize.module ({
 	name:'Uize.Widget.V2',
 	required:[
@@ -42,10 +36,7 @@ Uize.module ({
 			var _undefined = undefined;
 
 		/*** General Variables ***/
-			var
-				_cssClassNameGenerators = {},
-				_cssAddedLookup = {}
-			;
+			var _cssAddedLookup = {};
 
 		/*** Utility Functions ***/
 			function _cssClassPrefixFromModuleName (_moduleName) {
@@ -131,10 +122,27 @@ Uize.module ({
 					return Uize.Node.joinIdPrefixAndNodeId (this.get ('idPrefix'),_nodeId || '');
 				},
 
+				rootNodeCssClasses:function () {
+					var
+						_this = this,
+						_stateToCssBindings = _this.Class._stateToCssBindings,
+						_cssClasses = [_this.cssClass ()],
+						_cssClassSuffix
+					;
+					for (var _property in _stateToCssBindings)
+						if (_cssClassSuffix = _stateToCssBindings [_property] (_this.get (_property)))
+							_cssClasses.push (_this.cssClass (_cssClassSuffix))
+					;
+					console.log (_cssClasses.join (' '));
+					return _cssClasses.join (' ');
+				},
+
 				cssClass:function (_className) {
 					var
 						_thisClass = this.Class,
-						_thisClassName = _thisClass.moduleName
+						_thisClassName = _thisClass.moduleName,
+						_cssClassNameGenerators =
+							_thisClass._cssClassNameGenerators || (_thisClass._cssClassNameGenerators = {})
 					;
 					if (!_cssClassNameGenerators [_thisClassName]) {
 						var
@@ -149,6 +157,39 @@ Uize.module ({
 						_cssClassNameGenerators [_thisClassName] = _cssClassNameGeneratorFromModules (_inheritanceChain);
 					}
 					return _cssClassNameGenerators [_thisClassName] (_className);
+				},
+
+				_updateUiRootNodeClasses:function () {
+					var _this = this;
+					if (_this.isWired) {
+						var _rootNode = _this.getNode ();
+						if (_rootNode) {
+							var _newClassName = _this.rootNodeCssClasses ();
+							if (_newClassName != _rootNode.className)
+								_rootNode.className = _newClassName
+							;
+						}
+					}
+				},
+
+				wireUi:function () {
+					var _this = this;
+					if (!_this.isWired) {
+						_superclass.prototype.wireUi.call (_this);
+
+						_this._updateUiRootNodeClasses ();
+
+						/*** wire up handlers for state properties that influence root node CSS classes ***/
+							var
+								_updateUiRootNodeClasses = function () {_this._updateUiRootNodeClasses ()},
+								_wirings = {},
+								_stateToCssBindings = _this.Class._stateToCssBindings
+							;
+							for (var _property in _stateToCssBindings)
+								_wirings ['Changed.' + _property] = _updateUiRootNodeClasses
+							;
+							_this.wire (_wirings);
+					}
 				}
 			},
 
@@ -163,11 +204,25 @@ Uize.module ({
 						_this.superclass._needCss && _this.superclass._needCss ();
 						_cssAddedLookup [_moduleName] = 1;
 					}
+				},
+
+				stateToCssBindings:function (_bindings) {
+					Uize.copyInto (this._stateToCssBindings,Uize.map (_bindings,Uize.resolveTransformer));
 				}
+			},
+
+			staticProperties:{
+				_stateToCssBindings:{}
 			}
 		});
 
-		_class.nonInheritableStatics.cssModule = 1;
+		Uize.copyInto (
+			_class.nonInheritableStatics,
+			{
+				_cssClassNameGenerators:1,
+				cssModule:1
+			}
+		);
 
 		return _class;
 	}
