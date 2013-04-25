@@ -25,6 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Button',
+	superclass:'Uize.Widget.V2',
 	required:'Uize.Node',
 	builder:function (_superclass) {
 		'use strict';
