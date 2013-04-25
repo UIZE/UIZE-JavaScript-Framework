@@ -582,8 +582,8 @@ Uize.module ({
 						_html = _this._html
 					;
 					if (_html != _undefined) {
-						var _nodeToInjectInto = _this._getNodeToInjectInto ();
 						if (_html === _true) {
+							var _nodeToInjectInto = _this._getNodeToInjectInto ();
 							_html = _this._html = _Uize.Template && _nodeToInjectInto
 								? {
 									process:_Uize.Template.compile (
