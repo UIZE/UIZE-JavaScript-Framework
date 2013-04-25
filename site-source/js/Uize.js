@@ -1442,9 +1442,11 @@ Uize = (function () {
 								? (
 									_isRegExp (_transformer)
 										? function (_value) {return _transformer.test (_value + '')}
-										: function (_value) {
-											return _transformer.hasOwnProperty (_value) ? _transformer [_value] : _value
-										}
+										: _isArray (_transformer)
+											? function (_value) {return _transformer [+_value]}
+											: function (_value) {
+												return _transformer.hasOwnProperty (_value) ? _transformer [_value] : _value
+											}
 								)
 								: function () {return _transformer}
 			);
@@ -1511,6 +1513,9 @@ Uize = (function () {
 								alert (isValidIdentifier ('3rdVar'));   // alerts "false"
 								alert (isValidIdentifier ('_4thVar'));  // alerts "true"
 								.................................................................................
+
+							When an Array Type Transformer is Specified
+								.
 
 							When an Object Type Transformer is Specified
 								When an object is specified for the =transformerANYTYPE= parameter, a function is produced using the object as a lookup for remapping the input value, but leaving the input value unchanged if it is not found in the lookup.
