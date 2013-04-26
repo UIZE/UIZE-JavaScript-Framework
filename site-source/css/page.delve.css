@@ -30,9 +30,9 @@ hr {
 		max-height:600px;
 		_height:600px; /* hack for IE6 (which doesn't support max-height) */
 		overflow:hidden;
-		border-radius:5px;
-		-moz-border-radius:5px;
-		-webkit-border-radius:5px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 	}
 	.info-tooltip-heading {
 		font-size:11px;
@@ -66,9 +66,9 @@ hr {
 		bottom:10px;
 		background:#c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
 		border:1px solid #899;
-		border-radius:10px;
-		-moz-border-radius:10px;
-		-webkit-border-radius:10px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 		box-shadow:3px -3px 7px rgba(0,0,0,.4);
 		-moz-box-shadow:3px -3px 7px rgba(0,0,0,.4);
 		-webkit-box-shadow:3px -3px 7px rgba(0,0,0,.4);
@@ -89,9 +89,9 @@ hr {
 			height:42px;
 			background:#eee;
 			border:1px solid #ddd;
-			border-radius:6px;
-			-moz-border-radius:6px;
-			-webkit-border-radius:6px;
+			border-radius:3px;
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
 		}
 		.paneInputShell {
 			position:absolute;

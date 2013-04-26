@@ -113,9 +113,9 @@
 			padding:1px 6px;
 			background:#000;
 			border:3px solid #333c44;
-			border-radius:8px;
-			-moz-border-radius:8px;
-			-webkit-border-radius:8px;
+			border-radius:3px;
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
 			max-width:260px;
 			_width:260px; /* hack for IE6 (which doesn't support max-width) */
 		}
@@ -219,9 +219,9 @@
 			padding:15px;
 			margin:0 15px 25px 15px;
 			border:1px solid #899;
-			border-radius:10px;
-			-moz-border-radius:10px;
-			-webkit-border-radius:10px;
+			border-radius:3px;
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
 		}
 
 	/*** footer ***/

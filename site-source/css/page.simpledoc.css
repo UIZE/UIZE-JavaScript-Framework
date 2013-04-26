@@ -33,9 +33,9 @@
 				margin-top:20px;
 				margin-bottom:0;
 				border:1px solid #aab;
-				border-radius:5px;
-				-moz-border-radius:5px;
-				-webkit-border-radius:5px;
+				border-radius:3px;
+				-moz-border-radius:3px;
+				-webkit-border-radius:3px;
 				color:#000;
 				background:#fff url(../images/heading-bg-light.gif) repeat left top;
 			}
@@ -182,9 +182,9 @@
 			font-weight:normal;
 			padding:10px;
 			border:4px solid #afb6b8;
-			border-radius:10px;
-			-moz-border-radius:10px;
-			-webkit-border-radius:10px;
+			border-radius:3px;
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
 			overflow:auto;
 		}
 		.allCaps {
@@ -237,9 +237,9 @@
 		padding:15px;
 		margin:3px 2px 20px 2px;
 		border:1px solid #bbb;
-		border-radius:10px;
-		-moz-border-radius:10px;
-		-webkit-border-radius:10px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 	}
 	.contents-tree-shell {
 		max-height:100px;
@@ -252,9 +252,9 @@
 		padding:3px 7px 10px 7px;
 		background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
 		border:3px solid #fff;
-		border-radius:8px;
-		-moz-border-radius:8px;
-		-webkit-border-radius:8px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 		box-shadow:5px 5px 10px rgba(0,0,0,.6);
 		-moz-box-shadow:5px 5px 10px rgba(0,0,0,.6);
 		-webkit-box-shadow:5px 5px 10px rgba(0,0,0,.6);
@@ -336,9 +336,9 @@
 		display:none;
 		background:#c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
 		border:1px solid #999;
-		border-radius:8px;
-		-moz-border-radius:8px;
-		-webkit-border-radius:8px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 		max-width:500px;
 		_width:500px; /* hack for IE6 (which doesn't support max-width) */
 		overflow:hidden;
@@ -349,12 +349,12 @@
 		text-shadow:1px 1px 1px #fff;
 		padding:5px;
 		background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
-		border-top-left-radius:7px;
-		-moz-border-radius-topleft:7px;
-		-webkit-border-top-left-radius:7px;
-		border-top-right-radius:7px;
-		-moz-border-radius-topright:7px;
-		-webkit-border-top-right-radius:7px;
+		border-top-left-radius:2px;
+		-moz-border-radius-topleft:2px;
+		-webkit-border-top-left-radius:2px;
+		border-top-right-radius:2px;
+		-moz-border-radius-topright:2px;
+		-webkit-border-top-right-radius:2px;
 		border-bottom:1px solid #777;
 	}
 	.body-link-tooltip .body-link-tooltip-description {

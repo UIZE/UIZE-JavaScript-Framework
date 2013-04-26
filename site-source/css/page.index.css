@@ -11,9 +11,9 @@
 		list-style-type:none;
 		list-style-position:inside;
 		border:2px solid #fff;
-		border-radius:10px;
-		-moz-border-radius:10px;
-		-webkit-border-radius:10px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 		padding:0;
 		margin-bottom:10px;
 		background:#cfd3d9;
@@ -21,12 +21,12 @@
 	#page-index li .itemTitle {
 		background:#e6eaee;
 		padding:3px 0 5px 10px;
-		border-top-left-radius:8px;
-		-moz-border-radius-topleft:8px;
-		-webkit-border-top-left-radius:8px;
-		border-top-right-radius:8px;
-		-moz-border-radius-topright:8px;
-		-webkit-border-top-right-radius:8px;
+		border-top-left-radius:3px;
+		-moz-border-radius-topleft:3px;
+		-webkit-border-top-left-radius:3px;
+		border-top-right-radius:3px;
+		-moz-border-radius-topright:3px;
+		-webkit-border-top-right-radius:3px;
 	}
 	#page-index li .itemBody {
 		padding:10px;
@@ -61,9 +61,9 @@
 		background:#e6ecec;
 		margin-top:10px;
 		padding:10px;
-		border-radius:10px;
-		-moz-border-radius:10px;
-		-webkit-border-radius:10px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 		border:1px solid #abb;
 	}
 	.tourPromo .tourPromoHeading {
@@ -73,9 +73,9 @@
 		text-align:center;
 		padding:4px;
 		border:1px solid #abb;
-		border-radius:4px;
-		-moz-border-radius:4px;
-		-webkit-border-radius:4px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 		background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
 	}
 	.tourPromo .tourPromoText {

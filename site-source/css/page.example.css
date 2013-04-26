@@ -34,12 +34,12 @@ body {
 		text-shadow:1px 1px 1px #fff, 1px 0 1px #fff;
 		border:1px solid #666;
 		border-bottom:none;
-		border-top-left-radius:10px;
-		-moz-border-radius-topleft:10px;
-		-webkit-border-top-left-radius:10px;
-		border-top-right-radius:10px;
-		-moz-border-radius-topright:10px;
-		-webkit-border-top-right-radius:10px;
+		border-top-left-radius:3px;
+		-moz-border-radius-topleft:3px;
+		-webkit-border-top-left-radius:3px;
+		border-top-right-radius:3px;
+		-moz-border-radius-topright:3px;
+		-webkit-border-top-right-radius:3px;
 	}
 
 /*** miscellaneous ***/
@@ -63,9 +63,9 @@ body {
 		padding:3px 3px 3px 10px;
 		margin:0 10px 25px 10px;
 		border:1px solid #ccc;
-		border-radius:10px;
-		-moz-border-radius:10px;
-		-webkit-border-radius:10px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 	}
 	.explanation p {
 		margin:5px 4px;
@@ -79,9 +79,9 @@ body {
 		margin:0 10px 0 10px;
 		background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
 		border:3px solid #fff;
-		border-radius:10px;
-		-moz-border-radius:10px;
-		-webkit-border-radius:10px;
+		border-radius:3px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
 	}
 	.programmaticInterface p {
 		margin:5px;
@@ -185,9 +185,9 @@ body {
 			padding:0;
 			width:186px;
 			border:3px solid #fff;
-			border-radius:10px;
-			-moz-border-radius:10px;
-			-webkit-border-radius:10px;
+			border-radius:3px;
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
 			background:#adbebf url(../images/brushed-metal.jpg) repeat left top;
 		}
 		/*** annotations ***/
@@ -215,10 +215,10 @@ body {
 				color:#245;
 				border:1px solid #fff;
 				background:#1e252e url(../images/tree-menu-bg.gif) repeat-x left top;
-				border-radius:0 0 5px 5px;
-				-moz-border-radius:0 0 5px 5px;
-				-webkit-border-bottom-left-radius:5px;
-				-webkit-border-bottom-right-radius:5px;
+				border-radius:0 0 3px 3px;
+				-moz-border-radius:0 0 3px 3px;
+				-webkit-border-bottom-left-radius:3px;
+				-webkit-border-bottom-right-radius:3px;
 				padding:1px 5px;
 			}
 
