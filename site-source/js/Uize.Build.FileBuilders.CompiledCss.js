@@ -55,7 +55,7 @@ Uize.module ({
 					).replace (/\./g,'_')
 				;
 				return this.readFile ({path:_cssSource}).replace (
-					/\$([^\$]*)\$/g,
+					/`([^`]*)`/g,
 					function (_match,_cssClass) {
 						return _cssClassPrefix + (_cssClass && '-') + _cssClass;
 					}
