@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.ColorPicker',
-	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Widget.Bar.Slider.xSkin',
 		'Uize.Color',
