@@ -65,20 +65,78 @@ Uize.module ({
 					}
 			;
 
+		/*** Private Instance Methods ***/
+			function _updateUiText () {
+				this._text != _undefined && this.isWired && this.setNodeInnerHtml ('text',this._text);
+				/*?
+					Implied Nodes
+						text Implied Node
+							An optional node whose contents will be replaced with the value of the =text= state property, if this property's value is not =null= or =undefined=.
+
+							The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+
+							NOTES
+							- this implied node is optional
+				*/
+			}
+
+			function _updateDisplayState () {
+				var _this = this;
+				if (_this._created) {
+					var
+						_enabledInherited = _this.get ('enabledInherited'),
+						_busyInherited = _this.get ('busyInherited'),
+						_stateCombinationNo =
+							/* disabled state  */ (!_enabledInherited ? 16 : 0) |
+							/* default state */ (!_this._state || _busyInherited ? 8 : 0) |
+							/* over state    */ (_this == _overButton ? 4 : 0) |
+							/* active state  */ (_this._state == 'down' || _this._selected ? 2 : 0) |
+							/* playing state */ (_this._playing ? 1 : 0)
+						,
+						_displayState = _this._statePrecedenceMap [_stateCombinationNo]
+					;
+					if (_displayState == _undefined) {
+						for (
+							var
+								_stateNo = -1,
+								_statePrecedence = _this._statePrecedence,
+								_statePrecedenceLength = _statePrecedence.length
+							;
+							++_stateNo < _statePrecedenceLength;
+						) {
+							var _stateName = _statePrecedence [_stateNo];
+							if (_stateCombinationNo & _stateNamesToBitMasks [_stateName]) {
+								_displayState = _stateName;
+								break;
+							}
+						}
+						_this._statePrecedenceMap [_stateCombinationNo] = _displayState;
+					}
+					_this.set ({_displayState:_displayState});
+
+					if (_this.isWired && _this._tooltip && Uize.Tooltip) {
+						var _newTooltipShown = _this._state == 'over' && _enabledInherited && !_this._selected;
+						_newTooltipShown != _this._tooltipShown &&
+							Uize.Tooltip.showTooltip (_this._tooltip,_this._tooltipShown = _newTooltipShown)
+						;
+					}
+				}
+			}
+
 		var _class = _superclass.subclass ({
 			omegastructor:function () {
 				var _this = this;
 				_this._created = _true;
 
-				function _updateDisplayState () {
+				function _setStateAndUpdateDisplayState () {
 					_this._isClickable () || _this.set ({_state:''});
-					_this._updateDisplayState ();
+					_updateDisplayState.call (_this);
 				}
 				_this.wire ({
-					'Changed.busyInherited':_updateDisplayState,
-					'Changed.enabledInherited':_updateDisplayState
+					'Changed.busyInherited':_setStateAndUpdateDisplayState,
+					'Changed.enabledInherited':_setStateAndUpdateDisplayState
 				});
-				_this._updateDisplayState ();
+				_updateDisplayState.call (_this);
 			},
 
 			instanceProperties:{
@@ -92,63 +150,6 @@ Uize.module ({
 						_this.get ('enabledInherited') && !_this.get ('busyInherited') &&
 						(_ignoreSelected || !_this._selected || _this._clickToDeselect || _this._allowClickWhenSelected)
 					);
-				},
-
-				_updateUiText:function () {
-					this._text != _undefined && this.isWired && this.setNodeInnerHtml ('text',this._text);
-					/*?
-						Implied Nodes
-							text Implied Node
-								An optional node whose contents will be replaced with the value of the =text= state property, if this property's value is not =null= or =undefined=.
-
-								The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
-
-								NOTES
-								- this implied node is optional
-					*/
-				},
-
-				_updateDisplayState:function () {
-					var _this = this;
-					if (_this._created) {
-						var
-							_enabledInherited = _this.get ('enabledInherited'),
-							_busyInherited = _this.get ('busyInherited'),
-							_stateCombinationNo =
-								/* disabled state  */ (!_enabledInherited ? 16 : 0) |
-								/* default state */ (!_this._state || _busyInherited ? 8 : 0) |
-								/* over state    */ (_this == _overButton ? 4 : 0) |
-								/* active state  */ (_this._state == 'down' || _this._selected ? 2 : 0) |
-								/* playing state */ (_this._playing ? 1 : 0)
-							,
-							_displayState = _this._statePrecedenceMap [_stateCombinationNo]
-						;
-						if (_displayState == _undefined) {
-							for (
-								var
-									_stateNo = -1,
-									_statePrecedence = _this._statePrecedence,
-									_statePrecedenceLength = _statePrecedence.length
-								;
-								++_stateNo < _statePrecedenceLength;
-							) {
-								var _stateName = _statePrecedence [_stateNo];
-								if (_stateCombinationNo & _stateNamesToBitMasks [_stateName]) {
-									_displayState = _stateName;
-									break;
-								}
-							}
-							_this._statePrecedenceMap [_stateCombinationNo] = _displayState;
-						}
-						_this.set ({_displayState:_displayState});
-
-						if (_this.isWired && _this._tooltip && Uize.Tooltip) {
-							var _newTooltipShown = _this._state == 'over' && _enabledInherited && !_this._selected;
-							_newTooltipShown != _this._tooltipShown &&
-								Uize.Tooltip.showTooltip (_this._tooltip,_this._tooltipShown = _newTooltipShown)
-							;
-						}
-					}
 				},
 
 				_setStateAndFireEvent:function (_domEvent) {
@@ -238,7 +239,7 @@ Uize.module ({
 				},
 
 				updateUi:function () {
-					this.isWired && this._updateUiText ();
+					this.isWired && _updateUiText.call (this);
 				},
 
 				wireUi:function () {
@@ -377,7 +378,7 @@ Uize.module ({
 			stateProperties:{
 				_allowClickWhenSelected:{
 					name:'allowClickWhenSelected',
-					onChange:'updateDisplayState'
+					onChange:_updateDisplayState
 					/*?
 						State Properties
 							allowClickWhenSelected
@@ -396,7 +397,7 @@ Uize.module ({
 					*/
 				_clickToDeselect:{
 					name:'clickToDeselect',
-					onChange:'updateDisplayState'
+					onChange:_updateDisplayState
 					/*?
 						State Properties
 							clickToDeselect
@@ -428,7 +429,7 @@ Uize.module ({
 				},
 				_playing:{
 					name:'playing',
-					onChange:'updateDisplayState',
+					onChange:_updateDisplayState,
 					value:_false
 					/*?
 						State Properties
@@ -440,7 +441,7 @@ Uize.module ({
 				},
 				_selected:{
 					name:'selected',
-					onChange:'updateDisplayState',
+					onChange:_updateDisplayState,
 					value:_false
 					/*?
 						State Properties
@@ -450,21 +451,26 @@ Uize.module ({
 								- the initial value is ='false'=
 					*/
 				},
-				_size:'size',
+				_size:{
+					name:'size',
+					value:'medium'
+				},
 				_state:{
 					name:'state',
-					onChange:function () {
-						var _this = this;
-						if (!_this._state) {
-							if (_overButton == _this)
-								_overButton = _undefined
-							;
-						} else if (_this._state == 'over') {
-							_overButton && _overButton != _this && _overButton.set ({_state:''});
-							_overButton = _this;
-						}
-						_this._updateDisplayState ();
-					},
+					onChange:[
+						function () {
+							var _this = this;
+							if (!_this._state) {
+								if (_overButton == _this)
+									_overButton = _undefined
+								;
+							} else if (_this._state == 'over') {
+								_overButton && _overButton != _this && _overButton.set ({_state:''});
+								_overButton = _this;
+							}
+						},
+						_updateDisplayState
+					],
 					value:''
 					/*?
 						State Properties
@@ -485,19 +491,21 @@ Uize.module ({
 				},
 				_statePrecedence:{
 					name:'statePrecedence',
-					onChange:function () {
-						var
-							_this = this,
-							_statePrecedenceAsJoinedStr =
-								_this._statePrecedence._asJoinedStr ||
-								(_this._statePrecedence._asJoinedStr = _this._statePrecedence.join (','))
-						;
-						_this._statePrecedenceMap =
-							_statePrecedenceMaps [_statePrecedenceAsJoinedStr] ||
-							(_statePrecedenceMaps [_statePrecedenceAsJoinedStr] = {})
-						;
-						_this._updateDisplayState ();
-					},
+					onChange:[
+						function () {
+							var
+								_this = this,
+								_statePrecedenceAsJoinedStr =
+									_this._statePrecedence._asJoinedStr ||
+									(_this._statePrecedence._asJoinedStr = _this._statePrecedence.join (','))
+							;
+							_this._statePrecedenceMap =
+								_statePrecedenceMaps [_statePrecedenceAsJoinedStr] ||
+								(_statePrecedenceMaps [_statePrecedenceAsJoinedStr] = {})
+							;
+						},
+						_updateDisplayState
+					],
 					value:['playing','active','disabled','over','']
 					/*?
 						State Properties
@@ -509,7 +517,7 @@ Uize.module ({
 				},
 				_text:{
 					name:'text',
-					onChange:function () {this._updateUiText ()}
+					onChange:_updateUiText
 					/*?
 						State Properties
 							text
