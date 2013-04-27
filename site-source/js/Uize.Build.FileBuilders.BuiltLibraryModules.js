@@ -79,7 +79,6 @@ Uize.module ({
 						: _libraryFileContents
 					,
 					function (_moduleName) {
-						console.log (_moduleName);
 						if (
 							(_moduleName = Uize.String.trim (_moduleName)) &&
 							_lineStartsWithIdentifierCharRegExp.test (_moduleName)
