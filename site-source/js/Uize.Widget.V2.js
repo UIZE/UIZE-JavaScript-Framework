@@ -125,6 +125,7 @@ Uize.module ({
 				rootNodeCssClasses:function () {
 					var
 						_this = this,
+						_extraClasses = _this._extraClasses,
 						_stateToCssBindings = _this.Class._stateToCssBindings,
 						_cssClasses = [_this.cssClass ()],
 						_cssClassSuffix
@@ -133,8 +134,7 @@ Uize.module ({
 						if (_cssClassSuffix = _stateToCssBindings [_property] (_this.get (_property)))
 							_cssClasses.push (_this.cssClass (_cssClassSuffix))
 					;
-					console.log (_cssClasses.join (' '));
-					return _cssClasses.join (' ');
+					return _cssClasses.join (' ') + (_extraClasses && ' ' + _extraClasses);
 				},
 
 				cssClass:function (_className) {
@@ -213,6 +213,13 @@ Uize.module ({
 
 			staticProperties:{
 				_stateToCssBindings:{}
+			},
+
+			stateProperties:{
+				_extraClasses:{
+					name:'extraClasses',
+					value:''
+				}
 			}
 		});
 
