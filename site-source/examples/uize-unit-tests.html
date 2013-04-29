@@ -42,47 +42,8 @@
 				background:#fff;
 			}
 			.progressBar {
-				position:relative;
 				width:100%;
 				height:100%;
-			}
-			.progressBar .progressBarTrack,
-			.progressBar .progressBarTrack .progressBarTrackBg,
-			.progressBar .progressBarTrack .progressBarTrackFull,
-			.progressBar .progressBarTrack .progressBarTrackEmpty,
-			.progressBar .progressBarTrack .progressBarStatusText
-			{
-				position:absolute;
-				left:0;
-				top:0;
-				width:100%;
-				height:100%;
-			}
-			.progressBar .progressBarTrack .progressBarTrackBg {
-				background:#000 url(../images/title-bg.gif) repeat-x left top;
-			}
-			.progressBar .progressBarTrack .progressBarTrackFull {
-				background:#0f0;
-				opacity:.55;
-				filter:alpha(opacity=55);
-			}
-			.progressBar .progressBarTrack .progressBarTrackEmpty {
-				background:#ddd;
-				opacity:.2;
-				filter:alpha(opacity=20);
-			}
-			.progressBar .progressBarTrack .progressBarStatusText {
-				font-size:16px;
-				letter-spacing:2px;
-				color:#fff;
-				text-shadow:
-					-1px -1px 0 rgba(0,0,0,.4),
-					-1px 1px 0 rgba(0,0,0,.4),
-					1px -1px 0 rgba(0,0,0,.4),
-					1px 1px 0 rgba(0,0,0,.4)
-				;
-				text-align:center;
-				line-height:30px;
 			}
 	</style>
 </head>
@@ -115,17 +76,7 @@
 		<div id="page_startTests" class="testControlButton button"><span id="page_startTests-text">START</span></div>
 		<div id="page_stopTests" class="testControlButton button"><span id="page_stopTests-text">STOP</span></div>
 		<br style="clear:left;"/>
-
-		<div id="page_progressBar-shell" class="progressBarShell">
-			<div id="page_progressBar" class="progressBar">
-				<div id="page_progressBar-track" class="progressBarTrack">
-					<div class="progressBarTrackBg"></div>
-					<div id="page_progressBar-full" class="progressBarTrackFull"></div>
-					<div id="page_progressBar-empty" class="progressBarTrackEmpty"></div>
-					<div id="page_progressBar-statusText" class="progressBarStatusText"></div>
-				</div>
-			</div>
-		</div>
+		<div id="page_progressBar-shell" class="progressBarShell"></div>
 	</div>
 
 	<div style="height:4px;"></div>
@@ -142,7 +93,7 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Button',
-		'Uize.Widget.Bar',
+		'Uize.Widgets.ProgressBar.Widget',
 		'Uize.Widget.Log',
 		'Uize.Templates.Log',
 		'Uize.String',
@@ -160,7 +111,7 @@ Uize.module ({
 			testSuiteClass,
 			testSuite,
 			totalTests,
-			currentTestNo
+			currentTestNo = 0
 		;
 
 		/*** prepare list of all modules to test ***/
@@ -199,8 +150,15 @@ Uize.module ({
 		/*** add the progress bar widget ***/
 			var progressBar = page.addChild (
 				'progressBar',
-				Uize.Widget.Bar,
-				{minValue:0,maxValue:1,increments:0,orientation:'horizontal'}
+				Uize.Widgets.ProgressBar.Widget,
+				{
+					built:false,
+					extraClasses:'progressBar',
+					statusText:function (_input) {
+						var _totalSteps = _input.totalSteps;
+						return _totalSteps ? _input.stepsCompleted + ' of ' + _totalSteps + ' tests completed' : '';
+					}
+				}
 			);
 
 		/*** add the start and stop buttons ***/
@@ -224,18 +182,8 @@ Uize.module ({
 
 		/*** prepare to run tests ***/
 			function prepareToRunTests () {
-				currentTestNo = 0;
-				updateProgressBar ();
+				progressBar.set ({value:currentTestNo = 0});
 				log.clear ();
-			}
-
-		/*** update progress bar status text ***/
-			function updateProgressBar () {
-				progressBar.set ({value:currentTestNo / (totalTests || 1)})
-				page.children.progressBar.setNodeValue (
-					'statusText',
-					currentTestNo + ' of ' + (totalTests || 0) + ' tests completed'
-				);
 			}
 
 		/*** handle selection of test ***/
@@ -247,7 +195,7 @@ Uize.module ({
 			function selectTest (callback) {
 				function instantiateTestSuite (testSuiteClass) {
 					setWidgetsEnabled (true);
-					totalTests = (testSuite = new testSuiteClass).getTotalTests ();
+					progressBar.set ({maxValue:(testSuite = new testSuiteClass).getTotalTests ()});
 					prepareToRunTests ();
 					testSuite.wire ({
 						Start:
@@ -260,8 +208,7 @@ Uize.module ({
 									test = e.source,
 									reasonForFailure = test.get ('reasonForFailure')
 								;
-								currentTestNo++;
-								updateProgressBar ();
+								progressBar.set ({value:++currentTestNo});
 								log.log (
 									Uize.String.repeat ('...',test.getDepth () + 1) +
 									(
