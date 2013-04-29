@@ -470,7 +470,9 @@ Uize.module ({
 		/*** General Variables ***/
 			var
 				_sacredEmptyArray = [],
-				_sacredEmptyObject = {}
+				_sacredEmptyObject = {},
+				_constOnChangeModeOnce = 1,
+				_constOnChangeModeWhenever = 2
 			;
 
 		/*** Class Constructor ***/
@@ -913,7 +915,6 @@ Uize.module ({
 					*/
 				};
 
-
 				var _derivationCache = {};
 				function _resolveDerivation (_derivation) {
 					/* NOTE: this code will eventually be used also for derived properties */
@@ -981,32 +982,47 @@ Uize.module ({
 					return _resolvedDerivation;
 				}
 
-				_classPrototype.once = function (_condition,_handler) {
+				_classPrototype._onChange = function (_derivation,_handler,_mode) {
 					var
 						_this = this,
-						_derivation = _resolveDerivation (_condition),
-						_determinants = _derivation._determinants,
+						_isOnceMode = _mode == _constOnChangeModeOnce,
+						_isWheneverMode = _mode == _constOnChangeModeWhenever,
+						_derivation = _resolveDerivation (_derivation),
 						_determinantsValuesHarvester = _derivation._determinantsValuesHarvester,
 						_determiner = _derivation._determiner,
+						_firstCallFlag = {},
+						_lastDerivedValue = _firstCallFlag,
 						_wirings
 					;
-					function _isConditionMet () {
+					function _checkDerivedValue () {
 						var
 							_determinantsValues = _determinantsValuesHarvester.call (_this),
-							_conditionMet = _determiner.apply (0,_determinantsValues)
+							_derivedValue = _determiner.apply (0,_determinantsValues)
 						;
-						if (_conditionMet) {
-							_wirings && _this.unwire (_wirings);
-							_handler.apply (0,_determinantsValues);
+						if (_lastDerivedValue == _firstCallFlag || _derivedValue != _lastDerivedValue) {
+							_isOnceMode && _derivedValue && _wirings && _this.unwire (_wirings);
+							(_isOnceMode || _isWheneverMode)
+								? _derivedValue && (_isOnceMode || !_derivedValue != !_lastDerivedValue) &&
+									_handler.apply (0,_determinantsValues)
+								: _handler.call (0,_derivedValue,_determinantsValues)
+							;
+							_lastDerivedValue = _derivedValue;
 						}
-						return _conditionMet;
 					}
-					if (_isConditionMet ()) {
-						_wirings = {};
-					} else {
-						_this.wire (_wirings = _lookup (_derivation._changedEventNames,_isConditionMet));
-					}
+					_checkDerivedValue ();
+					_isOnceMode && _lastDerivedValue
+						? (_wirings = {})
+						: _this.wire (_wirings = _lookup (_derivation._changedEventNames,_checkDerivedValue))
+					;
 					return _wirings;
+				};
+
+				_classPrototype.onChange = function (_condition,_handler) {
+					return this._onChange (_condition,_handler);
+				};
+
+				_classPrototype.once = function (_condition,_handler) {
+					return this._onChange (_condition,_handler,_constOnChangeModeOnce);
 					/*?
 						Instance Methods
 							once
@@ -1253,6 +1269,10 @@ Uize.module ({
 								NOTES
 								- see the other `condition system methods`
 					*/
+				};
+
+				_classPrototype.whenever = function (_condition,_handler) {
+					return this._onChange (_condition,_handler,_constOnChangeModeWhenever);
 				};
 
 				_classPrototype.is = function (_property) {
