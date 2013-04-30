@@ -52,6 +52,11 @@
 	}
 
 /*** styling for different sizes ***/
+	.`tiny` {
+		font-size: 12px;
+		padding: 3px 8px;
+	}
+
 	.`small` {
 		font-size: 12px;
 		padding: 5px 9px;
