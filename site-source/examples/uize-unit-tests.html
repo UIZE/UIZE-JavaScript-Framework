@@ -3,12 +3,11 @@
 <head>
 	<title>UIZE Unit Tests | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Test Uize.Widget.Log"/>
+	<meta name="keywords" content="Uize.Test Uize.Widgets.Log.Widget"/>
 	<meta name="description" content="See how to run the various unit tests of the UIZE JavaScript Framework. Run a unit test and watch as the test runner chunks through its tests."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="../css/widget.log.css"/>
 	<style type="text/css">
 		.testControl {
 			width:740px;
@@ -26,9 +25,6 @@
 		.log {
 			width:756px;
 			margin:0;
-		}
-		.log .logMessages {
-			height:200px;
 		}
 
 		/*** progress bar ***/
@@ -94,8 +90,7 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'Uize.Widget.Button',
 		'Uize.Widgets.ProgressBar.Widget',
-		'Uize.Widget.Log',
-		'Uize.Templates.Log',
+		'Uize.Widgets.Log.Widget',
 		'Uize.String',
 		'UizeSite.ModulesTree',
 		'Uize.Data.PathsTree',
@@ -175,7 +170,7 @@ Uize.module ({
 			);
 
 		/*** add the log widget ***/
-			var log = page.addChild ('log',Uize.Widget.Log,{built:false,html:Uize.Templates.Log,title:'TEST LOG'});
+			var log = page.addChild ('log',Uize.Widgets.Log.Widget,{built:false,title:'TEST LOG'});
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
