@@ -51,7 +51,7 @@ Uize.module ({
 							pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
 						})
 					);
-					if (_sourcePath != _uizePath)
+					if (_sourcePath != _uizePath) {
 						var _modulesFolder = _params.modulesFolder;
 						this.addFiles (
 							this.fileSystem.getFiles ({
@@ -64,8 +64,8 @@ Uize.module ({
 									return _modulesFolder + '/' + _path.replace (_jsModuleExtensionRegExp,'.js');
 								}
 							})
-						)
-					;
+						);
+					}
 				}
 			}
 		});
