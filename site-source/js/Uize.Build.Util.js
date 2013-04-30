@@ -247,9 +247,9 @@ Uize.module ({
 					});
 				},
 
-				writeDataModule:function (_moduleFolderPath,_moduleName,_moduleData) {
+				writeDataModule:function (_modulesFolderPath,_moduleName,_moduleData) {
 					_fileSystem.writeFile ({
-						path:_moduleFolderPath + '/' + _moduleName + '.js',
+						path:_modulesFolderPath + '/' + _moduleName + '.js',
 						contents:_package.dataAsModule (_moduleName,_moduleData)
 					});
 				},
