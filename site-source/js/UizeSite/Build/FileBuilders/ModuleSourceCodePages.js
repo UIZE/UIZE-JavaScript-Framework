@@ -50,20 +50,17 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				var
 					_this = this,
-					_sourcePathSansExtension = _this.sourceUrl (_this.getModuleUrl (_urlParts.fileName,false))
+					_moduleUrl = _this.getModuleUrl (_urlParts.fileName,false),
+					_sourcePathSansExtension = _this.sourceUrl (_moduleUrl)
 				;
 				return {
 					sourceCode:
-						_sourcePathSansExtension +
-						(
-							_this.fileExists ({path:_sourcePathSansExtension + _jsExtension})
-								? _jsExtension
-								: _this.fileExists ({path:_sourcePathSansExtension + _jsJstExtension})
-									? _jsJstExtension
-									: _this.fileExists ({path:_sourcePathSansExtension + _cssSourceExtension})
-										? _cssSourceExtension
-										: _jsExtension
-						),
+						_this.fileExists ({path:_sourcePathSansExtension + _jsJstExtension})
+							? _sourcePathSansExtension + _jsJstExtension
+							: _this.fileExists ({path:_sourcePathSansExtension + _cssSourceExtension})
+								? _sourcePathSansExtension + _cssSourceExtension
+								: _this.tempUrl (_moduleUrl) + _jsExtension
+					,
 					sourceCodeTemplate:this.memoryUrl (_modulesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html.jst')
 				};
 			},
