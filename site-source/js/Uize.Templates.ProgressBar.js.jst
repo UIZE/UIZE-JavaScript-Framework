@@ -1,0 +1,15 @@
+<%@
+	input ({
+		idPrefix:'string',
+		pathToResources:'string',
+		blankGif:'string'
+	});
+%>
+<div id="<% .idPrefix %>" style="position:relative; visibility:hidden; left:0px; top:0px; width:<%= input.width || 87 %>px; height:<%= input.height || 12 %>px; background:#888; border:2px solid #888;">
+	<div id="<% .idPrefix %>-track" style="position:absolute; left:0px; top:0px; width:100%; height:100%;">
+		<img src="<% .pathToResources %>Uize_Widget_Bar_Progress/track-bg.gif" style="position:absolute; left:0px; top:0px; width:100%; height:100%;"/>
+		<img id="<% .idPrefix %>-full" src="<% .pathToResources %>Uize_Widget_Bar_Progress/full-bg.gif" style="position:absolute; left:0px; top:0px; width:100%; height:100%;"/>
+		<img id="<% .idPrefix %>-knob" src="<% .blankGif %>" style="position:absolute; left:0px; top:0px; width:1px; height:100%; background:#f00;"/>
+	</div>
+</div>
+

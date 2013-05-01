@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Widget.Bar.Progress',
-	required:'Uize.Fade',
+	required:[
+		'Uize.Fade',
+		'Uize.Templates.ProgressBar'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -130,22 +133,7 @@ Uize.module ({
 
 		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
-				html:{
-					process:function (input) {
-						/* compiled from...
-							<div id="<% .idPrefix %>" style="position:relative; visibility:hidden; left:0px; top:0px; width:<%= input.width || 87 %>px; height:<%= input.height || 12 %>px; background:#888; border:2px solid #888;">
-								<div id="<% .idPrefix %>-track" style="position:absolute; left:0px; top:0px; width:100%; height:100%;">
-									<img src="<% .pathToResources %>Uize_Widget_Bar_Progress/track-bg.gif" style="position:absolute; left:0px; top:0px; width:100%; height:100%;"/>
-									<img id="<% .idPrefix %>-full" src="<% .pathToResources %>Uize_Widget_Bar_Progress/full-bg.gif" style="position:absolute; left:0px; top:0px; width:100%; height:100%;"/>
-									<img id="<% .idPrefix %>-knob" src="<% .blankGif %>" style="position:absolute; left:0px; top:0px; width:1px; height:100%; background:#f00;"/>
-								</div>
-							</div>
-						*/
-						var output = [];
-						output.push("<div id=\"", input.idPrefix, "\" style=\"position:relative; visibility:hidden; left:0px; top:0px; width:", input.width || 87, "px; height:", input.height || 12, "px; background:#888; border:2px solid #888;\">\n	<div id=\"", input.idPrefix, "-track\" style=\"position:absolute; left:0px; top:0px; width:100%; height:100%;\">\n		<img src=\"", input.pathToResources, "Uize_Widget_Bar_Progress/track-bg.gif\" style=\"position:absolute; left:0px; top:0px; width:100%; height:100%;\"/>\n		<img id=\"", input.idPrefix, "-full\" src=\"", input.pathToResources, "Uize_Widget_Bar_Progress/full-bg.gif\" style=\"position:absolute; left:0px; top:0px; width:100%; height:100%;\"/>\n		<img id=\"", input.idPrefix, "-knob\" src=\"", input.blankGif, "\" style=\"position:absolute; left:0px; top:0px; width:1px; height:100%; background:#f00;\"/>\n	</div>\n</div>\n");
-						return output.join("");
-					}
-				},
+				html:Uize.Templates.ProgressBar,
 				orientation:'horizontal'
 			});
 
