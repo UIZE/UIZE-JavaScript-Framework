@@ -3393,6 +3393,41 @@ Uize.module ({
 								}
 							},
 
+						/*** test support for source being an arguments object ***/
+							{
+								title:'Test that, when the source is an arguments object, it is iterated over like an array',
+								test:function () {
+									var
+										_context = {},
+										_seenValues = [],
+										_seenKeys = [],
+										_correctSourcesSeen = [],
+										_correctContextsSeen = [],
+										_arguments = ['foo','bar','baz','qux']
+									;
+									function _someFunction () {
+										var _arguments = arguments;
+										Uize.forEach (
+											_arguments,
+											function (_value,_key,_source) {
+												_seenValues.push (_value);
+												_seenKeys.push (_key);
+												_correctSourcesSeen.push (_source == _arguments);
+												_correctContextsSeen.push (this == _context);
+											},
+											_context
+										);
+									}
+									_someFunction.apply (0,_arguments);
+									return (
+										this.expect (_arguments,_seenValues) &&
+										this.expect ([0,1,2,3],_seenKeys) &&
+										this.expect ([true,true,true,true],_correctSourcesSeen) &&
+										this.expect ([true,true,true,true],_correctContextsSeen)
+									);
+								}
+							},
+
 						/*** test handling of a non-object source ***/
 							{
 								title:'Test that, when the source is neither an array, object, nor length, the iterator is never called',

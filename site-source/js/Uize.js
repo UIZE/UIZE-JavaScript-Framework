@@ -1140,13 +1140,16 @@ Uize = (function () {
 
 		var _forEach = _package.forEach = function (_source,_iterationHandler,_context,_allArrayElements) {
 			if (_source) {
-				var _sourceIsArray = _isArray (_source);
+				var
+					_sourceIsObject = _isObject (_source),
+					_sourceIsArray = _sourceIsObject && _isArray (_source)
+				;
 				if (!_sourceIsArray || _source.length) {
 					if (typeof _iterationHandler == _typeString)
 						_iterationHandler = _Function ('value,key,source',_iterationHandler)
 					;
-					if (_sourceIsArray) {
-						if (_interpreterSupportsArrayForEach && !_allArrayElements) {
+					if (_sourceIsArray || (_sourceIsObject && _isArguments (_source))) {
+						if (_sourceIsArray && _interpreterSupportsArrayForEach && !_allArrayElements) {
 							_source.forEach (_iterationHandler,_context);
 						} else {
 							for (var _index = -1, _sourceLength = _source.length; ++_index < _sourceLength;)
@@ -1154,7 +1157,7 @@ Uize = (function () {
 									_iterationHandler.call (_context,_source [_index],_index,_source)
 							;
 						}
-					} else if (_isObject (_source)) {
+					} else if (_sourceIsObject) {
 						for (var _index in _source)
 							_iterationHandler.call (_context,_source [_index],_index,_source)
 						;
@@ -3064,9 +3067,18 @@ Uize = (function () {
 			*/
 		};
 
+		var _isArguments = _package.isArguments = function (_value) {
+			return (
+				_isList (_value) &&
+				(
+					_ObjectToString.call (_value) == '[object Arguments]' ||
+					typeof _value.callee == _typeFunction
+				)
+			);
+		};
 
 		var _isFunction = _package.isFunction = function (_value) {
-			var _constructor = _value != _undefined && _value.constructor;
+			var _constructor = _value && _value.constructor;
 			return !!(_constructor && _constructor == _constructor.constructor);
 			/* NOTES:
 				- for some inexplicable reason, typeof RegExp is 'function' in FF and Safari, so we avoid using typeof in our test
