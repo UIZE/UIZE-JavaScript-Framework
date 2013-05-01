@@ -40,6 +40,15 @@ Uize.module ({
 					['Uize.Template.defineStandardEncoding',[
 					]],
 					['Uize.Template.compile',[
+						{
+							title:'Test that, when the variadic form of the @required directive is used, the required list is populated correctly',
+							test:function () {
+								return this.expect (
+									['foo','bar'],
+									Uize.Template.compile ('<%@ required ("foo","bar") %>',{result:'full'}).required
+								);
+							}
+						}
 					]]
 				])
 			]
