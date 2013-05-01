@@ -55,9 +55,10 @@ Uize.module ({
 
 			/*** Public Static Methods ***/
 				moduleNameFromModulePath:function (_modulePath,_removeExtension) {
-					return (_removeExtension ? _modulePath.replace (_jsModuleExtensionRegExp,'') : _modulePath).replace (
-						/[\/_]/g,
-						'.'
+					return (
+						_removeExtension ? _modulePath.replace (_jsModuleExtensionRegExp,'') : _modulePath
+					).replace (
+						/[\/_]/g,'.'
 					);
 				},
 

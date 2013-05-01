@@ -37,35 +37,88 @@ Uize.module ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
 					var
+						_fileSystem = this.fileSystem,
+						_modulesFolder = _params.modulesFolder,
 						_sourcePath = _params.sourcePath,
 						_uizePath = _params.uizePath,
+						_sourceModulesPath = _sourcePath + '/' + _modulesFolder,
+						_uizeModulesPath = _uizePath + '/js',
+						_isUizeWebSite = _uizeModulesPath == _sourceModulesPath,
 						_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 					;
-					this.addFiles (
-						this.fileSystem.getFiles ({
-							path:_sourcePath,
-							recursive:true,
-							pathMatcher:function (_path) {
-								return _jsModuleExtensionRegExp.test (_path) && !/\/~experimental\//.test (_path)
-							},
-							pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
-						})
-					);
-					if (_sourcePath != _uizePath) {
-						var _modulesFolder = _params.modulesFolder;
+					/*** add JavaScript modules located throughout site (not just modules folder) ***/
 						this.addFiles (
-							this.fileSystem.getFiles ({
-								path:_uizePath + '/js',
+							_fileSystem.getFiles ({
+								path:_sourcePath,
 								recursive:true,
-								pathMatcher:function (_path) {
-									return _jsModuleExtensionRegExp.test (_path) && Uize.String.startsWith (_path,'Uize.');
-								},
-								pathTransformer:function (_path) {
-									return _modulesFolder + '/' + _path.replace (_jsModuleExtensionRegExp,'.js');
-								}
+								pathMatcher:_jsModuleExtensionRegExp,
+								pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
 							})
 						);
-					}
+
+					/*** add JavaScript modules located in the UIZE modules folder (if not the UIZE Web site) ***/
+						_isUizeWebSite ||
+							this.addFiles (
+								_fileSystem.getFiles ({
+									path:_uizeModulesPath,
+									recursive:true,
+									pathMatcher:function (_path) {
+										return _jsModuleExtensionRegExp.test (_path) && Uize.String.startsWith (_path,'Uize.');
+									},
+									pathTransformer:function (_path) {
+										return _modulesFolder + '/' + _path.replace (_jsModuleExtensionRegExp,'.js');
+									}
+								})
+							)
+						;
+
+					/*** add URLs for generated namespace modules ***/
+						function _getFolderToModuleUrlTransformer (_modulesFolder,_modulePath) {
+							var _moduleNameFromModulePath = Uize.Build.Util.moduleNameFromModulePath;
+							return function (_modulePath) {
+								return (
+									_modulesFolder + '/' +
+									Uize.modulePathResolver (_moduleNameFromModulePath (_modulePath)) +
+									'.js'
+								);
+							}
+						}
+
+						/*** add generated namespace modules for folders under site's modules folder ***/
+							this.addFiles (
+								_fileSystem.getFolders ({
+									path:_sourceModulesPath,
+									recursive:true,
+									pathMatcher:function (_path) {
+										/* TODO:
+											for better efficiency, this should exclude...
+											- folders not under folder organized namespaces
+											- folders for which there are explicit corresponding JavaScript modules
+										*/
+										return true;
+									},
+									pathTransformer:_getFolderToModuleUrlTransformer (_modulesFolder)
+								})
+							);
+
+						/*** add generated namespace modules for folders under site's modules folder ***/
+							_isUizeWebSite ||
+								this.addFiles (
+									_fileSystem.getFolders ({
+										path:_uizeModulesPath,
+										recursive:true,
+										pathMatcher:function (_path) {
+											/* TODO:
+												for better efficiency, this should exclude...
+												- folders not under folder organized namespaces
+												- folders for which there are explicit corresponding JavaScript modules
+											*/
+											return true;
+										},
+										pathTransformer:_getFolderToModuleUrlTransformer ('js')
+									})
+								)
+							;
 				}
 			}
 		});
