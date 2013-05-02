@@ -26,7 +26,6 @@
 Uize.module ({
 	name:'Uize.Build.RunUnitTests',
 	required:[
-		'Uize.Services.FileSystem',
 		'Uize.Test',
 		'Uize.Build.Util',
 		'Uize.Build.ModuleInfo',
@@ -38,30 +37,25 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
-		/*** General Variables ***/
-			var _fileSystem = Uize.Services.FileSystem.singleton ();
-
 		/*** Public Static Methods ***/
 			_package.perform = function (_params) {
 				var
-					_dotJsRegExp = /\.js$/i,
-					_dotLibraryDotJsRegExp = /\.library\.js$/i,
-					_modules = _fileSystem.getFiles ({
-						path:_params.sourcePath + '/' + _params.modulesFolder,
-						pathMatcher:function (_filePath) {
-							return _dotJsRegExp.test (_filePath) && !_dotLibraryDotJsRegExp.test (_filePath)
-						},
-						pathTransformer:function (_filePath) {
-							return Uize.Url.from (_filePath).fileName;
+					_libraryModuleSuffixRegExp = /\.library$/i,
+					_modulesExcludingLibraryModules = Uize.Data.Matches.values (
+						Uize.Build.Util.getJsModules (_params),
+						function (_moduleName) {
+							return !_libraryModuleSuffixRegExp.test (_moduleName); // ignore .library modules
 						}
-					}).sort (),
-					_modulesLookup = Uize.lookup (_modules),
+					),
+					_modulesLookup = Uize.lookup (_modulesExcludingLibraryModules),
 					_testModuleName,
 					_testModuleRegExp = /^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/,
 					_modulesInDependencyOrder = Uize.Build.ModuleInfo.traceDependencies (
 						Uize.Data.Matches.values (
-							_modules,
-							function (_moduleName) {return !_testModuleRegExp.test (_moduleName)} // ignore test modules
+							_modulesExcludingLibraryModules,
+							function (_moduleName) {
+								return !_testModuleRegExp.test (_moduleName); // ignore test modules
+							}
 						)
 					),
 					_unitTestSuite = Uize.Test.declare ({

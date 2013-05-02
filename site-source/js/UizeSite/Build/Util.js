@@ -26,7 +26,6 @@
 Uize.module ({
 	name:'UizeSite.Build.Util',
 	required:[
-		'Uize.Build.Util',
 		'Uize.Url',
 		'Uize.String',
 		'Uize.Services.FileSystem'
@@ -35,40 +34,9 @@ Uize.module ({
 		'use strict';
 
 		/*** General Variables ***/
-			var
-				_fileSystem = Uize.Services.FileSystem.singleton (),
-				_moduleNameFromModulePath = Uize.Build.Util.moduleNameFromModulePath
-			;
+			var _fileSystem = Uize.Services.FileSystem.singleton ();
 
 		return {
-			getJsModules:function (_params) {
-				var
-					_modulesPath = _params.sourcePath + '/' + _params.modulesFolder,
-					_trueFlag = {},
-					_modulesLookup = {},
-					_moduleName,
-					_modules = _fileSystem.getFiles ({
-						path:_modulesPath,
-						recursive:true,
-						pathMatcher:Uize.Build.Util.jsModuleExtensionRegExp,
-						pathTransformer:function (_filePath) {
-							_modulesLookup [_moduleName = _moduleNameFromModulePath (_filePath,true)] = _trueFlag;
-							return _moduleName;
-						}
-					})
-				;
-				_fileSystem.getFolders ({
-					path:_modulesPath,
-					recursive:true,
-					pathTransformer:function (_filePath) {
-						if (_modulesLookup [_moduleName = _moduleNameFromModulePath (_filePath)] != _trueFlag)
-							_modules.push (_moduleName)
-						;
-					}
-				});
-				return _modules.sort ();
-			},
-
 			getIndexableFiles:function (_sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp) {
 				return _fileSystem.getFiles ({
 					path:_sourcePath + '/' + _indexableFolderUnderSource,

@@ -27,7 +27,7 @@
 
 Uize.module ({
 	name:'UizeSite.Build.Files.SimpleDocPages',
-	required:'UizeSite.Build.Util',
+	required:'Uize.Build.Util',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -53,7 +53,7 @@ Uize.module ({
 					/*** add URLs for all JavaScript module reference files ***/
 						_this.addFiles (
 							Uize.map (
-								UizeSite.Build.Util.getJsModules (_params).sort (),
+								Uize.Build.Util.getJsModules (_params).sort (),
 								'"reference/" + value + ".html"'
 							)
 						);

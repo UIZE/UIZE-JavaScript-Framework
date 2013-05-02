@@ -29,8 +29,7 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryUrlDictionary',
 	required:[
 		'Uize.Url',
-		'Uize.Build.Util',
-		'UizeSite.Build.Util'
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		return {
@@ -71,7 +70,7 @@ Uize.module ({
 
 				/*** add links to module reference pages ***/
 					Uize.forEach (
-						UizeSite.Build.Util.getJsModules (_this.params),
+						Uize.Build.Util.getJsModules (_this.params),
 						function (_moduleName) {
 							_urlDictionary [_moduleName] = '/reference/' + _moduleName + '.html';
 						}

@@ -27,7 +27,7 @@
 
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
-	required:'UizeSite.Build.Util',
+	required:'Uize.Build.Util',
 	builder:function () {
 		return {
 			description:'Google Code sitemap',
@@ -38,7 +38,7 @@ Uize.module ({
 				return {template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst'};
 			},
 			builder:function (_inputs) {
-				return this.readFile ({path:_inputs.template}) ({modules:UizeSite.Build.Util.getJsModules (this.params)});
+				return this.readFile ({path:_inputs.template}) ({modules:Uize.Build.Util.getJsModules (this.params)});
 			}
 		};
 	}

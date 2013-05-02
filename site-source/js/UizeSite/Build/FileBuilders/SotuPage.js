@@ -38,7 +38,7 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.SotuPage',
 	required:[
 		'Uize.String',
-		'UizeSite.Build.Util'
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		function _isModuleForSotu (_moduleName) {
@@ -64,7 +64,7 @@ Uize.module ({
 					}
 				;
 				Uize.forEach (
-					UizeSite.Build.Util.getJsModules (_params),
+					Uize.Build.Util.getJsModules (_params),
 					function (_moduleName) {
 						if (_isModuleForSotu (_moduleName)) {
 							var _moduleUrl = _this.getModuleUrl (_moduleName);

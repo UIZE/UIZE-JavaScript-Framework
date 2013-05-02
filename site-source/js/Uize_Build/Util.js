@@ -49,18 +49,21 @@ Uize.module ({
 				_jsModuleExtensionRegExp = /(\.js|\.js\.jst|\.css\.source)$/
 			;
 
+		/*** Utility Functions ***/
+			function _moduleNameFromModulePath (_modulePath,_removeExtension) {
+				return (
+					_removeExtension ? _modulePath.replace (_jsModuleExtensionRegExp,'') : _modulePath
+				).replace (
+					/[\/_]/g,'.'
+				);
+			}
+
 		return _package = {
 			/*** Public Static Properties ***/
 				jsModuleExtensionRegExp:_jsModuleExtensionRegExp,
 
 			/*** Public Static Methods ***/
-				moduleNameFromModulePath:function (_modulePath,_removeExtension) {
-					return (
-						_removeExtension ? _modulePath.replace (_jsModuleExtensionRegExp,'') : _modulePath
-					).replace (
-						/[\/_]/g,'.'
-					);
-				},
+				moduleNameFromModulePath:_moduleNameFromModulePath,
 
 				getPathToRoot:function (_path) {
 					return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
@@ -112,6 +115,34 @@ Uize.module ({
 					return _moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName;
 				},
 
+				getJsModules:function (_params) {
+					var
+						_modulesPath = _params.sourcePath + '/' + _params.modulesFolder,
+						_trueFlag = {},
+						_modulesLookup = {},
+						_moduleName,
+						_modules = _fileSystem.getFiles ({
+							path:_modulesPath,
+							recursive:true,
+							pathMatcher:_jsModuleExtensionRegExp,
+							pathTransformer:function (_filePath) {
+								_modulesLookup [_moduleName = _moduleNameFromModulePath (_filePath,true)] = _trueFlag;
+								return _moduleName;
+							}
+						})
+					;
+					_fileSystem.getFolders ({
+						path:_modulesPath,
+						recursive:true,
+						pathTransformer:function (_filePath) {
+							if (_modulesLookup [_moduleName = _moduleNameFromModulePath (_filePath)] != _trueFlag)
+								_modules.push (_moduleName)
+							;
+						}
+					});
+					return _modules.sort ();
+				},
+	
 				readSimpleDataFile:function (_simpleDataFilePath) {
 					return Uize.Data.Simple.parse ({
 						simple:_fileSystem.readFile ({path:_simpleDataFilePath}),

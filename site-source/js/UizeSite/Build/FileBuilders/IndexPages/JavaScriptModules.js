@@ -27,13 +27,13 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.IndexPages.JavaScriptModules',
 	required:[
 		'UizeSite.Build.FileBuilders.IndexPages',
-		'UizeSite.Build.Util'
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		return UizeSite.Build.FileBuilders.IndexPages.getIndexPageUrlHandler (
 			'JavaScript modules index page',
 			'javascript-modules-index',
-			function () {return UizeSite.Build.Util.getJsModules (this.params)},
+			function () {return Uize.Build.Util.getJsModules (this.params)},
 			'reference'
 		);
 	}

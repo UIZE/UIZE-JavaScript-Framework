@@ -29,7 +29,7 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryModulesTree',
 	required:[
 		'Uize.Data.PathsTree',
-		'UizeSite.Build.Util'
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		return {
@@ -38,7 +38,7 @@ Uize.module ({
 				return _urlParts.pathname == this.memoryUrl ('modules-tree');
 			},
 			builder:function () {
-				return Uize.Data.PathsTree.fromList (UizeSite.Build.Util.getJsModules (this.params),'.');
+				return Uize.Data.PathsTree.fromList (Uize.Build.Util.getJsModules (this.params),'.');
 			}
 		};
 	}

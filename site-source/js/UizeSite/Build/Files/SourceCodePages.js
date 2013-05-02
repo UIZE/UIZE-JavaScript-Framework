@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'UizeSite.Build.Files.SourceCodePages',
-	required:'UizeSite.Build.Util',
+	required:[
+		'Uize.Build.Util',
+		'UizeSite.Build.Util'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -40,7 +43,7 @@ Uize.module ({
 					/*** add URLs for source code pages for the JavaScript modules ***/
 						_this.addFiles (
 							Uize.map (
-								UizeSite.Build.Util.getJsModules (_params).sort (),
+								Uize.Build.Util.getJsModules (_params).sort (),
 								'"reference/source-code/" + value + ".html"'
 							)
 						);
