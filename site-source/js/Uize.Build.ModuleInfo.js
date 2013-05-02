@@ -229,9 +229,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package = function () {},
-				_true = true,
 				_false = false,
-				_undefined,
 				_trueFlagValue = {},
 				_forEach = Uize.forEach
 			;
