@@ -5149,7 +5149,7 @@ Uize = (function () {
 								............................................................................
 					*/
 				}
-			) ('Uize.Widgets');
+			) ('Uize.Test','Uize.Widgets');
 
 			_package.moduleUrlResolver = function (_moduleName) {
 				return _package.moduleUrlTemplate.replace (
