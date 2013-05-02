@@ -470,7 +470,7 @@ Uize = (function () {
 						_value.source,
 						(_value.global ? 'g' : '') + (_value.ignoreCase ? 'i' : '') + (_value.multiline ? 'm' : '')
 					);
-				};
+				}
 
 			/*** for arrays and simple objects, iterate through and clone elements / properties ***/
 				var
