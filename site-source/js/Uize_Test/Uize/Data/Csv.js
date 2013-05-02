@@ -38,7 +38,7 @@ Uize.module ({
 							[
 								'"John ""Willy""",Wilkey,(650) 123-4567\n' +
 								'Marie, Stevenson ,"(415) 456-7890, Ext. 214"\n' +
-								'Craig,Pollack,"(310) 987-6543\n(650) 303-1000"',
+								'Craig,Pollack,"(310) 987-6543\n(650) 303-1000"'
 							],
 							[
 								['John "Willy"','Wilkey','(650) 123-4567'],

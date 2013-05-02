@@ -459,7 +459,7 @@ Uize.module ({
 							'line 1\n' +
 							'line 2\r' +
 							'line 3\r\n' +
-							'line 4',
+							'line 4'
 						],
 						['Test that removing blank lines from a multi-line string with blank lines works correctly',
 							'\n' +
