@@ -16,11 +16,10 @@
 			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
 			border:1px solid #899;
 		}
-		.testControl .testControlButton {
+		.testControlButton {
 			display:block;
-			width:70px;
-			margin:auto;
 			float:left;
+			margin:0 2px;
 		}
 		.log {
 			width:756px;
@@ -69,8 +68,8 @@
 	<div class="testControl">
 		<div style="float:left; line-height:22px; margin-right:5px;">SELECT A TEST:</div>
 		<select id="page-testSelector" style="float:left; margin-right:15px;"></select>
-		<div id="page_startTests" class="testControlButton button"><span id="page_startTests-text">START</span></div>
-		<div id="page_stopTests" class="testControlButton button"><span id="page_stopTests-text">STOP</span></div>
+		<div id="page_startTests-shell"></div>
+		<div id="page_stopTests-shell"></div>
 		<br style="clear:left;"/>
 		<div id="page_progressBar-shell" class="progressBarShell"></div>
 	</div>
@@ -88,7 +87,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Button',
+		'Uize.Widgets.Button.Widget',
 		'Uize.Widgets.ProgressBar.Widget',
 		'Uize.Widgets.Log.Widget',
 		'Uize.String',
@@ -157,14 +156,34 @@ Uize.module ({
 			);
 
 		/*** add the start and stop buttons ***/
-			page.addChild ('startTests',Uize.Widget.Button,{enabled:false}).wire (
+			page.addChild (
+				'startTests',
+				Uize.Widgets.Button.Widget,
+				{
+					enabled:false,
+					built:false,
+					text:'START',
+					size:'small',
+					extraClasses:'testControlButton'
+				}
+			).wire (
 				'Click',
 				function () {
 					prepareToRunTests ();
 					testSuite.run ();
 				}
 			);
-			page.addChild ('stopTests',Uize.Widget.Button,{enabled:false}).wire (
+			page.addChild (
+				'stopTests',
+				Uize.Widgets.Button.Widget,
+				{
+					enabled:false,
+					built:false,
+					text:'STOP',
+					size:'small',
+					extraClasses:'testControlButton'
+				}
+			).wire (
 				'Click',
 				function () {testSuite.stop ()}
 			);

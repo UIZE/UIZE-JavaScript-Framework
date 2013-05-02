@@ -1,10 +1,11 @@
 /*** base styling ***/
 	.``, .``:link, .``:visited, .``:hover, .``:active {
+		font-weight: bold;
 		display: inline-block;
 		border-width: 1px;
 		border-style: solid;
 		border-radius: 3px;
-		text-shadow: 1px 0 1px #fff;
+		text-shadow: 1px -1px 0 #fff, 1px 0px 0 #fff, 1px 1px 0 #fff;
 		text-decoration: none;
 		cursor: pointer;
 	}
@@ -12,8 +13,8 @@
 /*** styling for different display states ***/
 	.``, .``:link, .``:visited, .``:hover, .``:active {
 		background: #eee;
-		border-color: #bbb;
-		color: #666;
+		border-color: #ccc #999 #999 #ccc;
+		color: #444;
 
 		/*** gradient ***/
 			background: #ffffff; /* Old browsers */
@@ -26,15 +27,15 @@
 	}
 
 	.`over`, .`over`:link, .`over`:visited, .`over`:hover, .`over`:active {
-		border-color: #aaa;
-		color: #333;
+		border-color: #aaa #777 #777 #aaa;
+		color: #222;
 		background: #efefef;
 	}
 
 	.`active`, .`active`:link, .`active`:visited, .`active`:hover, .`active`:active {
-		border-color: #aaa;
+		border-color: #666;
 		color: #000;
-		box-shadow: inset 0 2px 5px rgba(0,0,0,.1);
+		box-shadow: inset 0 2px 4px rgba(0,0,0,.1);
 		background: #fff;
 	}
 
