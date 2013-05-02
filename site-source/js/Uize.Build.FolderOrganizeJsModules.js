@@ -72,9 +72,10 @@ Uize.module ({
 						_fileSystem.copyFile ({
 							path:_modulesFolderPath + '/' + _path,
 							targetPath:
-								_modulesFolderPath + '/' + 
-								_path.replace (_jsModuleExtensionRegExp,'').replace (/\./g,'/') +
+								_modulesFolderPath + '/' +
+								Uize.modulePathResolver (_path.replace (_jsModuleExtensionRegExp,'')) +
 								_path.match (_jsModuleExtensionRegExp) [1]
+								
 						});
 						_fileSystem.deleteFile ({path:_modulesFolderPath + '/' + _path});
 					}
