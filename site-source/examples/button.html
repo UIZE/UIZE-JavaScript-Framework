@@ -3,7 +3,7 @@
 <head>
 	<title>Button | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="widget Uize.Widget.Button"/>
+	<meta name="keywords" content="widget Uize.Widgets.Button.Widget"/>
 	<meta name="description" content="See a demonstration of the button widget, with a logger that displays its events and state changes, and with links for modifying its state properties."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -29,7 +29,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of the <a href="../reference/Uize.Widget.Button.html"><code>Uize.Widget.Button</code></a> widget class is being instantiated and wired up - it's the HTML element below this explanation that looks like a button and has the text <b>"BUTTON"</b> on it.</p>
+		<p>In this example, an instance of the <a href="../reference/Uize.Widgets.Button.Widget.html"><code>Uize.Widgets.Button.Widget</code></a> widget class is being instantiated and wired up - it's the HTML element below this explanation that looks like a button and has the text <b>"BUTTON"</b> on it.</p>
 
 		<p>Directly below the button widget is a log that logs the instance events that occur for the button widget. Interact with the widget to see which events are fired. The log displays both the custom instance events that are fired using the button widget's <code>fire</code> method, as well as all <code>Changed.*</code> property change events that result from values of the button's various state properties being changed (so, you can use the log to watch for changes in the state of the button widget).</p>
 
@@ -39,7 +39,7 @@
 
 	<!-- button -->
 
-	<div id="page_button" class="button" style="display:block; width:130px; margin:auto;"><span id="page_button-text">BUTTON</span></div>
+	<div id="page_button-shell" style="text-align:center;"></div>
 
 	<div id="page_log-shell" style="margin:20px 10px;"></div>
 
@@ -66,7 +66,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Button',
+		'Uize.Widgets.Button.Widget',
 		'Uize.Widget.Log.InstanceEvents',
 		'Uize.Templates.Log'
 	],
@@ -76,8 +76,8 @@ Uize.module ({
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
-		/*** create the Uize.Widget.Button instance ***/
-			var button = page.addChild ('button',Uize.Widget.Button);
+		/*** create the Uize.Widgets.Button.Widget instance ***/
+			var button = page.addChild ('button',Uize.Widgets.Button.Widget,{built:false,text:'BUTTON'});
 
 		/*** create the instance event log widget ***/
 			page.addChild (
