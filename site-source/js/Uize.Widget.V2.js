@@ -220,6 +220,23 @@ Uize.module ({
 					name:'extraClasses',
 					value:''
 				}
+			},
+
+			set:{
+				html:{
+					process:function () {
+						var
+							_this = this,
+							_children = _this.children,
+							_htmlChunks = [],
+							_htmlChunksLength = 0
+						;
+						for (var _childName in _children)
+							_htmlChunks [_htmlChunksLength++] = _children [_childName].getHtml ()
+						;
+						return _htmlChunks.join ('');
+					}
+				}
 			}
 		});
 
