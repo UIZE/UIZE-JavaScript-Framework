@@ -8,19 +8,6 @@
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<style type="text/css">
-		.testWidgetShell {
-			padding:5px 0;
-			border-bottom:1px solid #ccc;
-			margin-bottom:5px;
-		}
-
-		.testWidgetHeading {
-			padding:5px;
-			background:#fff;
-			margin-bottom:10px;
-		}
-	</style>
 </head>
 
 <body>
@@ -30,28 +17,38 @@
 <script type="text/javascript" src="../js/Uize.js"></script>
 
 <div class="main">
-	<div id="page-testWidgets"></div>
+	<div id="page_widgetTestCases-shell"></div>
 </div>
 
 <script type="text/javascript">
 
 Uize.module ({
 	required:[
+		'Uize.Widget.V2',
 		'Uize.Widgets.Button.Widget',
 		'Uize.Widget.Page',
 		'Uize.Data.Combinations',
-		'Uize.Json'
+		'UizeSite.Widgets.WidgetTestCase.Widget'
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			_page = window.page = Uize.Widget.Page (),
-			_totalTestWidgets = 0
+			_totalTestCases = 0,
+			_widgetTestCases = _page.addChild ('widgetTestCases',Uize.Widget.V2,{built:false})
 		;
+
+		function _addTestWidget (_widgetClass,_state) {
+			_widgetTestCases
+				.addChild ('testCase' + _totalTestCases++,UizeSite.Widgets.WidgetTestCase.Widget,{state:Uize.copy (_state)})
+				.addChild ('testWidget',_widgetClass,_state)
+			;
+		}
 
 		Uize.Data.Combinations.forEach (
 			{
+				text:'Cancel',
 				enabled:[true,false],
 				busy:[false,true],
 				selected:[false,true],
@@ -60,19 +57,7 @@ Uize.module ({
 				state:['','over','down'],
 				size:['small','medium','large']
 			},
-			function (_state) {
-				_page.injectNodeHtml (
-					'testWidgets',
-					'<div class="testWidgetShell">' +
-						'<div class="testWidgetHeading">' + Uize.Json.to (_state,'mini') + '</div>' +
-						_page.addChild (
-							'testWidget' + _totalTestWidgets++,
-							Uize.Widgets.Button.Widget,
-							Uize.copyInto ({text:'Cancel'},_state)
-						).getHtml () +
-					'</div>'
-				);
-			}
+			function (_state) {_addTestWidget (Uize.Widgets.Button.Widget,_state)}
 		);
 
 		_page.wireUi ();

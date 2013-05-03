@@ -1,0 +1,18 @@
+.`` {
+	border: 1px solid #f4f4f4;
+	margin-bottom: 10px;
+	border-radius: 3px;
+	overflow: hidden;
+	box-shadow: 0 0 7px rgba(0,0,0,.2);
+}
+
+.`heading` {
+	padding: 3px 5px 8px 5px;
+	background: #f4f4f4;
+}
+
+.`testWidgetShell` {
+	background: #fff;
+	padding: 8px;
+}
+

@@ -1,0 +1,9 @@
+<%@
+	required ('Uize.Json');
+%><div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
+	<div class="<%= this.cssClass ('heading') %>"><%= Uize.Json.to (input.state,'mini') %></div>
+	<div class="<%= this.cssClass ('testWidgetShell') %>">
+		<%= this.childHtml ({name:'testWidget'}) %>
+	</div>
+</div>
+
