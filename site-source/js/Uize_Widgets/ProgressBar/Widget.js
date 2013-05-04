@@ -28,7 +28,8 @@ Uize.module ({
 	superclass:'Uize.Widget.Bar',
 	required:[
 		'Uize.Widgets.ProgressBar.Html',
-		'Uize.Widgets.ProgressBar.Css'
+		'Uize.Widgets.ProgressBar.Css',
+		'Uize.Template'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -39,7 +40,18 @@ Uize.module ({
 
 				_this.onChange (
 					function (statusText,value,maxValue) {
-						return statusText ? statusText.call (this,{stepsCompleted:value,totalSteps:maxValue}) : '';
+						return (
+							statusText
+								? statusText.call (
+									this,
+									{
+											stepsCompleted:value,
+											totalSteps:maxValue,
+											percentComplete:Math.round (value / maxValue * 100)
+									}
+								)
+								: ''
+						);
 					},
 					function (_displayedStatusText) {_this.set ({_displayedStatusText:_displayedStatusText})}
 				);
@@ -54,9 +66,17 @@ Uize.module ({
 					}
 				},
 
+				_size:{
+					name:'size',
+					value:'medium'
+				},
+
 				_statusText:{
 					name:'statusText',
-					value:''
+					value:'',
+					conformer:function (_value) {
+						return _value && typeof _value == 'string' ? Uize.Template.compile (_value) : _value;
+					}
 				}
 			},
 
@@ -65,6 +85,10 @@ Uize.module ({
 				orientation:'horizontal',
 				minValue:0,
 				value:0
+			},
+
+			stateToCssBindings:{
+				size:'value'
 			},
 
 			staticProperties:{

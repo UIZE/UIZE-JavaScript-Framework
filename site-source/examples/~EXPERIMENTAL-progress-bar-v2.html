@@ -8,6 +8,12 @@
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.progressBar {
+			width: 100%;
+			height: 35px;
+		}
+	</style>
 </head>
 
 <body>
@@ -25,7 +31,7 @@
 Uize.module ({
 	required:[
 		'Uize.Widget.V2',
-		'Uize.Widgets.Button.Widget',
+		'Uize.Widgets.ProgressBar.Widget',
 		'Uize.Widget.Page',
 		'Uize.Data.Combinations',
 		'UizeSite.Widgets.WidgetTestCase.Widget'
@@ -48,16 +54,18 @@ Uize.module ({
 
 		Uize.Data.Combinations.forEach (
 			{
-				text:'Cancel',
-				enabled:[true,false],
-				busy:[false,true],
-				selected:[false,true],
-				clickToSelect:[false,true],
-				clickToDeselect:[false,true],
-				state:['','over','down'],
-				size:['tiny','small','medium','large']
+				statusText:[
+					'',
+					'<%. percentComplete %>%',
+					'<%. stepsCompleted %> of <%. totalSteps %> tests completed',
+					'<%. stepsCompleted %> of <%. totalSteps %> tests completed (<%. percentComplete %>%)'
+				],
+				value:[0,15,30],
+				size:['tiny','small','medium','large'],
+				maxValue:30,
+				extraClasses:'progressBar'
 			},
-			function (_state) {_addWidgetTestCase (Uize.Widgets.Button.Widget,_state)}
+			function (_state) {_addWidgetTestCase (Uize.Widgets.ProgressBar.Widget,_state)}
 		);
 
 		_page.wireUi ();
