@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Widgets.WidgetTestCase.Widget Class
+|    /    O /   |    MODULE : Uize.Widgets.VisualTests.TestCase.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,28 +18,28 @@
 
 /*?
 	Introduction
-		The =UizeSite.Widgets.WidgetTestCase.Widget= class implements a widget for a widget test case, to be used when building visual tests for widgets.
+		The =Uize.Widgets.VisualTests.TestCase.Widget= class implements a widget for a widget test case, to be used when building visual tests for widgets.
 		
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'UizeSite.Widgets.WidgetTestCase.Widget',
+	name:'Uize.Widgets.VisualTests.TestCase.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
-		'UizeSite.Widgets.WidgetTestCase.Html',
-		'UizeSite.Widgets.WidgetTestCase.Css'
+		'Uize.Widgets.VisualTests.TestCase.Html',
+		'Uize.Widgets.VisualTests.TestCase.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var _class = _superclass.subclass ({
 			set:{
-				html:UizeSite.Widgets.WidgetTestCase.Html
+				html:Uize.Widgets.VisualTests.TestCase.Html
 			},
 
 			staticProperties:{
-				cssModule:UizeSite.Widgets.WidgetTestCase.Css
+				cssModule:Uize.Widgets.VisualTests.TestCase.Css
 			}
 		});
 

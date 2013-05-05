@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UIZE Widget Visual Tests | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content=""/>
+	<meta name="description" content="See the visual tests for any widget that implements visual tests. Use this page to test a widget while you're developing it."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.testControl {
+			width:740px;
+			margin:auto;
+			padding:10px;
+			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
+			border:1px solid #899;
+			border-radius: 3px;
+		}
+
+		.visualTestsShell {
+			margin: 20px auto;
+		}
+
+	</style>
+</head>
+
+<body>
+
+<!-- load in the necessary JavaScript libraries -->
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	UIZE Widget Visual Tests
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/uize-widget-visual-tests.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example lets you select and run any of the visual tests for UIZE widgets that implement visual tests. Simply select a widget from the dropdown menu (only widgets that implement visual tests will be listed in this menu).</p>
+	</div>
+
+	<div class="testControl">
+		<div style="float:left; line-height:22px; margin-right:5px;">SELECT A WIDGET:</div>
+		<select id="page-testSelector" style="float:left; margin-right:15px;"></select>
+		<br style="clear:left;"/>
+	</div>
+
+	<div style="height:4px;"></div>
+
+	<div id="page_visualTests-shell" class="visualTestsShell"></div>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example',
+		'UizeSite.ModulesTree',
+		'Uize.Url',
+		'Uize.Data.PathsTree',
+		'Uize.Data.Matches'
+	],
+	builder:function () {
+		'use strict';
+
+		var
+			_testSelectorPlaceholderText = '-- NO WIDGET SELECTED --',
+			_widgetClassSuffixRegExp = /\.Widget$/
+		;
+		function _visualTestsModuleNameFromWidgetClass (_widgetClass) {
+			return (
+				_widgetClassSuffixRegExp.test (_widgetClass) &&
+				_widgetClass.replace (_widgetClassSuffixRegExp,'.VisualTests')
+			);
+		}
+
+		/*** prepare list of all widget modules with visual tests ***/
+			var
+				_modulesList = Uize.Data.PathsTree.toList (UizeSite.ModulesTree ()),
+				_modulesLookup = Uize.lookup (_modulesList),
+				_testNames = Uize.Data.Matches.values (
+					_modulesList,
+					function (_moduleName) {return _modulesLookup [_visualTestsModuleNameFromWidgetClass (_moduleName)]}
+				)
+			;
+
+		/*** create the example page widget ***/
+			var _page = window.page = UizeSite.Page.Example ();
+
+		/*** wire up the page widget ***/
+			_page.wireUi ();
+
+		/*** handle selection of test ***/
+			function _selectTest () {
+				var
+					_widgetClass = _page.getNodeValue ('testSelector'),
+					_visualTests = _page.children.visualTests
+				;
+				if (_visualTests) {
+					_page.removeChild ('visualTests');
+					_visualTests.setNodeInnerHtml ('shell','');
+				}
+				_widgetClass == _testSelectorPlaceholderText ||
+					Uize.require (
+						_visualTestsModuleNameFromWidgetClass (_widgetClass),
+						function (_visualTestsModule) {
+							_page.addChild ('visualTests',_visualTestsModule).insertUi ();
+						}
+					)
+				;
+			}
+			_page.wireNode ('testSelector','change',_selectTest);
+
+		/*** initialize ***/
+			/*** populate test selector ***/
+				Uize.map (
+					[_testSelectorPlaceholderText].concat (_testNames),
+					function (_testName) {return new Option (_testName,_testName)},
+					_page.getNode ('testSelector').options
+				);
+
+			/*** initialize test selector, using widgetClass query param ***/
+				_page.setNodeValue ('testSelector',Uize.Url.fromParams (location.href).widgetClass);
+				_selectTest ();
+	}
+});
+
+</script>
+
+</body>
+</html>

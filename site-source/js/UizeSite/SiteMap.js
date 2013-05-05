@@ -259,6 +259,7 @@ Uize.module ({
 							_explainer ('Creating a New UIZE Example Page'),
 							_appendix ('SOTU (State of the UIZE)','sotu'),
 							_item ('UIZE Unit Tests','examples/'),
+							_item ('UIZE Widget Visual Tests','examples/'),
 							{
 								title:'Performance Tests',
 								items:[

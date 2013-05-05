@@ -3,7 +3,6 @@
 	background: #becacd;
 	padding: 2px;
 	border: 1px solid #566;
-	margin: 20px auto;
 }
 
 .`heading` {
