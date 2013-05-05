@@ -15,15 +15,12 @@
 			padding:10px;
 			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
 			border:1px solid #899;
+			border-radius: 3px;
 		}
 		.testControlButton {
 			display:block;
 			float:left;
 			margin:0 2px;
-		}
-		.log {
-			width:756px;
-			margin:0;
 		}
 
 		/*** progress bar ***/
@@ -39,6 +36,12 @@
 				width:100%;
 				height:100%;
 			}
+
+		.logShell {
+			margin: 20px auto;
+			width:762px;
+		}
+
 	</style>
 </head>
 
@@ -75,7 +78,7 @@
 
 	<div style="height:4px;"></div>
 
-	<div id="page_log-shell" style="width:762px; margin:0 auto;"></div>
+	<div id="page_log-shell" class="logShell"></div>
 </div>
 
 <!-- JavaScript code to make the HTML "come alive" -->
@@ -99,49 +102,49 @@ Uize.module ({
 		'use strict';
 
 		var
-			runAllModuleTests = 'RUN ALL MODULE TESTS',
-			RunAllTests,
-			testSuiteClass,
-			testSuite,
-			totalTests,
-			currentTestNo = 0
+			_runAllModuleTests = 'RUN ALL MODULE TESTS',
+			_RunAllTests,
+			_testSuiteClass,
+			_testSuite,
+			_totalTests,
+			_currentTestNo = 0
 		;
 
 		/*** prepare list of all modules to test ***/
 			var
-				nonTestModulesTree = UizeSite.ModulesTree (),
-				testsSubTree = nonTestModulesTree.Uize.Test,
-				testNames = [],
-				testNamesExcludingLibraries = []
+				_nonTestModulesTree = UizeSite.ModulesTree (),
+				_testsSubTree = _nonTestModulesTree.Uize.Test,
+				_testNames = [],
+				_testNamesExcludingLibraries = []
 			;
-			delete nonTestModulesTree.Uize.Test;
-			var testsSubTreeLookup = Uize.lookup (Uize.Data.PathsTree.toList (testsSubTree));
+			delete _nonTestModulesTree.Uize.Test;
+			var _testsSubTreeLookup = Uize.lookup (Uize.Data.PathsTree.toList (_testsSubTree));
 			for (
 				var
-					testNo = -1,
-					testNames =
+					_testNo = -1,
+					_testNames =
 						Uize.keys (
 							Uize.copyInto (
-								Uize.lookup (Uize.Data.PathsTree.toList (nonTestModulesTree)),
-								testsSubTreeLookup
+								Uize.lookup (Uize.Data.PathsTree.toList (_nonTestModulesTree)),
+								_testsSubTreeLookup
 							)
 						).sort (),
-					testNamesLength = testNames.length,
-					testName
+					_testNamesLength = _testNames.length,
+					_testName
 				;
-				++testNo < testNamesLength;
+				++_testNo < _testNamesLength;
 			)
-				(testName = testNames [testNo]) != 'Performance' && // ignore the Uize.Test.Performance namespace module
-				testName.lastIndexOf ('library') != testName.length - 7 && // ignore .library modules
-					testNamesExcludingLibraries.push (testName)
+				(_testName = _testNames [_testNo]) != 'Performance' && // ignore the Uize.Test.Performance namespace module
+				_testName.lastIndexOf ('library') != _testName.length - 7 && // ignore .library modules
+					_testNamesExcludingLibraries.push (_testName)
 			;
-			testNames = testNamesExcludingLibraries;
+			_testNames = _testNamesExcludingLibraries;
 
 		/*** create the example page widget ***/
-			var page = window.page = UizeSite.Page.Example ();
+			var _page = window.page = UizeSite.Page.Example ();
 
 		/*** add the progress bar widget ***/
-			var progressBar = page.addChild (
+			var _progressBar = _page.addChild (
 				'progressBar',
 				Uize.Widgets.ProgressBar.Widget,
 				{
@@ -155,7 +158,7 @@ Uize.module ({
 			);
 
 		/*** add the start and stop buttons ***/
-			page.addChild (
+			_page.addChild (
 				'startTests',
 				Uize.Widgets.Button.Widget,
 				{
@@ -168,11 +171,11 @@ Uize.module ({
 			).wire (
 				'Click',
 				function () {
-					prepareToRunTests ();
-					testSuite.run ();
+					_prepareToRunTests ();
+					_testSuite.run ();
 				}
 			);
-			page.addChild (
+			_page.addChild (
 				'stopTests',
 				Uize.Widgets.Button.Widget,
 				{
@@ -184,105 +187,102 @@ Uize.module ({
 				}
 			).wire (
 				'Click',
-				function () {testSuite.stop ()}
+				function () {_testSuite.stop ()}
 			);
 
 		/*** add the log widget ***/
-			var log = page.addChild ('log',Uize.Widgets.Log.Widget,{built:false,title:'TEST LOG'});
+			var _log = _page.addChild ('log',Uize.Widgets.Log.Widget,{built:false,title:'TEST LOG'});
 
 		/*** wire up the page widget ***/
-			page.wireUi ();
+			_page.wireUi ();
 
 		/*** prepare to run tests ***/
-			function prepareToRunTests () {
-				progressBar.set ({value:currentTestNo = 0});
-				log.clear ();
+			function _prepareToRunTests () {
+				_progressBar.set ({value:_currentTestNo = 0});
+				_log.clear ();
 			}
 
 		/*** handle selection of test ***/
-			function setWidgetsEnabled (mustEnable) {
-				var enabled = mustEnable ? 'inherit' : false;
-				page.children.startTests.set ({enabled:enabled});
-				page.children.stopTests.set ({enabled:enabled});
+			function _setWidgetsEnabled (_mustEnable) {
+				var _enabled = _mustEnable ? 'inherit' : false;
+				_page.children.startTests.set ({enabled:_enabled});
+				_page.children.stopTests.set ({enabled:_enabled});
 			}
-			function selectTest (callback) {
-				function instantiateTestSuite (testSuiteClass) {
-					setWidgetsEnabled (true);
-					progressBar.set ({maxValue:(testSuite = new testSuiteClass).getTotalTests ()});
-					prepareToRunTests ();
-					testSuite.wire ({
+			function _selectTest (_callback) {
+				function _instantiateTestSuite (_testSuiteClass) {
+					_setWidgetsEnabled (true);
+					_progressBar.set ({maxValue:(_testSuite = new _testSuiteClass).getTotalTests ()});
+					_prepareToRunTests ();
+					_testSuite.wire ({
 						Start:
 							function (e) {
-								log.log (Uize.String.repeat ('...',e.source.getDepth ()) + e.source.get ('title'));
+								_log.log (Uize.String.repeat ('...',e.source.getDepth ()) + e.source.get ('title'));
 							},
 						Done:
 							function (e) {
 								var
-									test = e.source,
-									reasonForFailure = test.get ('reasonForFailure')
+									_test = e.source,
+									_reasonForFailure = _test.get ('reasonForFailure')
 								;
-								progressBar.set ({value:++currentTestNo});
-								log.log (
-									Uize.String.repeat ('...',test.getDepth () + 1) +
+								_progressBar.set ({value:++_currentTestNo});
+								_log.log (
+									Uize.String.repeat ('...',_test.getDepth () + 1) +
 									(
-										test.get ('result')
-											? ('PASSED!!! (duration: ' + test.get ('duration') + 'ms)')
-											: ('*** FAILED *** ' + (reasonForFailure || ''))
+										_test.get ('result')
+											? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
+											: ('*** FAILED *** ' + (_reasonForFailure || ''))
 									)
 								);
-								reasonForFailure && alert (test.getSynopsis ());
+								_reasonForFailure && alert (_test.getSynopsis ());
 							}
 					});
-					callback && callback ();
+					_callback && _callback ();
 				}
 
-				testSuite && testSuite.stop ();
-				setWidgetsEnabled (false);
-				prepareToRunTests ();
-				var testName = page.getNodeValue ('testSelector');
-				if (testName == runAllModuleTests) {
-					if (!RunAllTests) {
-						var test = [];
-						for (var testNo = -1, testNamesLength = testNames.length, testName; ++testNo < testNamesLength;)
-							/^Performance(\..*)?$/.test (testName = testNames [testNo]) ||
-								test.push (
-									testsSubTreeLookup [testName]
-										? Uize.Test.testModuleTest ('Uize.Test.' + testName)
-										: Uize.Test.requiredModulesTest (testName)
+				_testSuite && _testSuite.stop ();
+				_setWidgetsEnabled (false);
+				_prepareToRunTests ();
+				var _testName = _page.getNodeValue ('testSelector');
+				if (_testName == _runAllModuleTests) {
+					if (!_RunAllTests) {
+						var _test = [];
+						for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
+							/^Performance(\..*)?$/.test (_testName = _testNames [_testNo]) ||
+								_test.push (
+									_testsSubTreeLookup [_testName]
+										? Uize.Test.testModuleTest ('Uize.Test.' + _testName)
+										: Uize.Test.requiredModulesTest (_testName)
 								)
 						;
-						RunAllTests = Uize.Test.declare ({title:'UIZE Unit Tests',test:test});
+						_RunAllTests = Uize.Test.declare ({title:'UIZE Unit Tests',test:_test});
 					}
-					instantiateTestSuite (RunAllTests);
-				} else if (testsSubTreeLookup [testName]) {
-					Uize.require (
-						'Uize.Test.' + testName,
-						function (testModuleName) {instantiateTestSuite (testModuleName)}
-					);
+					_instantiateTestSuite (_RunAllTests);
+				} else if (_testsSubTreeLookup [_testName]) {
+					Uize.require ('Uize.Test.' + _testName,_instantiateTestSuite);
 				} else {
-					instantiateTestSuite (Uize.Test.requiredModulesTest (testName));
+					_instantiateTestSuite (Uize.Test.requiredModulesTest (_testName));
 				}
 			}
-			page.wireNode ('testSelector','change',function () {selectTest ()});
+			_page.wireNode ('testSelector','change',function () {_selectTest ()});
 
 		/*** initialize ***/
 			/*** populate test selector ***/
 				var
-					testSelector = page.getNode ('testSelector'),
-					testSelectorOptions = testSelector.options
+					_testSelector = _page.getNode ('testSelector'),
+					_testSelectorOptions = _testSelector.options
 				;
-				testSelectorOptions [testSelectorOptions.length] = new Option (runAllModuleTests,runAllModuleTests);
-				for (var testNo = -1, testNamesLength = testNames.length, testName; ++testNo < testNamesLength;)
-					testSelectorOptions [testSelectorOptions.length] = new Option (
-						((testName = testNames [testNo])) + (testsSubTreeLookup [testName] ? '' : ' *'),
-						testName
+				_testSelectorOptions [_testSelectorOptions.length] = new Option (_runAllModuleTests,_runAllModuleTests);
+				for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
+					_testSelectorOptions [_testSelectorOptions.length] = new Option (
+						((_testName = _testNames [_testNo])) + (_testsSubTreeLookup [_testName] ? '' : ' *'),
+						_testName
 					)
 				;
 
 			/*** initialize test selector, using runtest query param ***/
-				var runTest = Uize.Url.fromParams (location.href).runtest;
-				page.setNodeValue ('testSelector',runTest || runAllModuleTests);
-				selectTest (function () {runTest && testSuite.run ()});
+				var _runTest = Uize.Url.fromParams (location.href).runtest;
+				_page.setNodeValue ('testSelector',_runTest || _runAllModuleTests);
+				_selectTest (function () {_runTest && _testSuite.run ()});
 	}
 });
 
