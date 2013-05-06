@@ -50,7 +50,7 @@
 	}
 
 	.`small` {
-		height: 27px;
+		height: 28px;
 	}
 	.`small` .`statusText` {
 		font-size: 14px;
