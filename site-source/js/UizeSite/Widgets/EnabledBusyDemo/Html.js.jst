@@ -1,0 +1,25 @@
+<div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
+	<div class="<%= this.cssClass ('heading') %>"><% .idPrefix %></div>
+	<div class="<%= this.cssClass ('body') %>">
+		ENABLED:&nbsp;
+			<select id="<%= this.nodeId ('enabledSelector') %>">
+				<option value="inherit" selected>inherit</option>
+				<option value="true">true</option>
+				<option value="false">false</option>
+			</select>
+		&nbsp;&nbsp;|&nbsp;&nbsp;
+		BUSY:&nbsp;
+			<select id="<%= this.nodeId ('busySelector') %>">
+				<option value="inherit" selected>inherit</option>
+				<option value="true">true</option>
+				<option value="false">false</option>
+			</select>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= this.childHtml ({name:'button1',text:'BUTTON 1',size:'small'}) %>
+		<%= this.childHtml ({name:'button2',text:'BUTTON 2',size:'small'}) %>
+		<br clear="left"/>
+		<%= this.childHtml ({name:'childTestWidget0'}) %>
+		<%= this.childHtml ({name:'childTestWidget1'}) %>
+	</div>
+</div>
+

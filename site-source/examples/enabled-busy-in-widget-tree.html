@@ -8,37 +8,6 @@
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<style type="text/css">
-		.widgetShell {
-			border:1px solid #ccc;
-			margin:8px;
-			padding:0;
-		}
-		.widgetShell .heading {
-			text-align:center;
-			font-size:10px;
-			letter-spacing:3px;
-			padding:2px;
-			background:#000;
-			color:#fff;
-		}
-		.widgetShell .body {
-			color:#000;
-			padding:8px;
-			padding-left:20px;
-			padding-right:20px;
-		}
-		#page_testWidget .body {
-			background:#888;
-		}
-		#page_testWidget_childTestWidget0 .body, #page_testWidget_childTestWidget1 .body {
-			background:#aaa;
-		}
-		#page_testWidget_childTestWidget0_childTestWidget0 .body,
-		#page_testWidget_childTestWidget0_childTestWidget1 .body {
-			background:#ddd;
-		}
-	</style>
 </head>
 
 <body>
@@ -58,12 +27,12 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example demonstrates how the <code>enabled</code> and <code>busy</code> state properties behave in a hierarchical tree of widgets. In the example, a widget tree is created from instances of a dummy <a href="../reference/UizeSite.TestWidget.html"><code>UizeSite.TestWidget</code></a> class. The root widget has two child widgets of the same class, and one of those children has a further two children of the same class. The widget exposes controls for <code>enabled</code> and <code>busy</code>, and provides two buttons to demonstrate the effect of different combinations of enabled and busy at different levels of the tree. Tweak the values to see how the inheritance for these properties operates.</p>
+		<p>This example demonstrates how the <code>enabled</code> and <code>busy</code> state properties behave in a hierarchical tree of widgets. In the example, a widget tree is created from instances of a dummy <a href="../reference/UizeSite.Widgets.EnabledBusyDemo.Widget.html"><code>UizeSite.Widgets.EnabledBusyDemo.Widget</code></a> class. The root widget has two child widgets of the same class, and one of those children has a further two children of the same class. The widget exposes controls for <code>enabled</code> and <code>busy</code>, and provides two buttons to demonstrate the effect of different combinations of enabled and busy at different levels of the tree. Tweak the values to see how the inheritance for these properties operates.</p>
 	</div>
 
 	<!-- HTML "wireframe" for widget tree -->
 
-	<div id="page_testWidget"></div>
+	<div id="page_testWidget-shell"></div>
 
 	<!-- programmatic interface examples -->
 
@@ -88,7 +57,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'UizeSite.TestWidget'
+		'UizeSite.Widgets.EnabledBusyDemo.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -101,13 +70,19 @@ Uize.module ({
 			setTimeout (function () {testWidget.set ({busy:'inherit'})},4000);
 		}
 
-		/*** add the UizeSite.TestWidget child widget ***/
-			UizeSite.TestWidget.set ({built:false});
-			var testWidget = page.addChild ('testWidget',UizeSite.TestWidget);
-				testWidget.addChild ('childTestWidget0',UizeSite.TestWidget);
-					testWidget.children.childTestWidget0.addChild ('childTestWidget0',UizeSite.TestWidget);
-					testWidget.children.childTestWidget0.addChild ('childTestWidget1',UizeSite.TestWidget);
-				testWidget.addChild ('childTestWidget1',UizeSite.TestWidget);
+		/*** add the UizeSite.Widgets.EnabledBusyDemo.Widget child widget ***/
+			UizeSite.Widgets.EnabledBusyDemo.Widget.set ({built:false});
+			var
+				testWidget = page.addChild ('testWidget',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:0}),
+				childTestWidget0 = testWidget.addChild (
+					'childTestWidget0',
+					UizeSite.Widgets.EnabledBusyDemo.Widget,
+					{built:false,depth:1}
+				)
+			;
+			childTestWidget0.addChild ('childTestWidget0',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:2});
+			childTestWidget0.addChild ('childTestWidget1',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:2});
+			testWidget.addChild ('childTestWidget1',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:1});
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
