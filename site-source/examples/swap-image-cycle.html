@@ -53,7 +53,7 @@ Uize.module ({
 		'Uize.Widget.Swap.xPresets',
 		'Uize.Node',
 		'Uize.Data',
-		'UizeSite.TestDataPhotos'
+		'UizeSite.TestData.Photos'
 	],
 	builder:function () {
 		'use strict';
@@ -67,7 +67,7 @@ Uize.module ({
 				Uize.Widget.Swap.Image.Cycle,
 				{
 					background:'none',
-					images:Uize.Data.getColumn (UizeSite.TestDataPhotos (),'image'),
+					images:Uize.Data.getColumn (UizeSite.TestData.Photos (),'image'),
 					interval:3000,
 					cycleSettings:Uize.Widget.Swap.presets,
 					crossFade:true,

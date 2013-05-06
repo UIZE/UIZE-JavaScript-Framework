@@ -1,5 +1,5 @@
 Uize.module ({
-	name:'UizeSite.TestDataFruits',
+	name:'UizeSite.TestData.Fruits',
 	required:'Uize.Data',
 	builder:function () {
 		'use strict';

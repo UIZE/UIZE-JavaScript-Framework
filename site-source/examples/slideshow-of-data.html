@@ -116,7 +116,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'UizeSite.TestDataFruits',
+		'UizeSite.TestData.Fruits',
 		'UizeSite.Templates.DataBar',
 		'Uize.Widget.Bar',
 		'Uize.Widget.Swap.Image',
@@ -129,14 +129,14 @@ Uize.module ({
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** add the slide show child widget ***/
-			var slideShow = page.addChild ('slideShow',Uize.Widget.SlideShow,{slides:UizeSite.TestDataFruits ()});
+			var slideShow = page.addChild ('slideShow',Uize.Widget.SlideShow,{slides:UizeSite.TestData.Fruits ()});
 
 			/*** add the image wipe widget as a child widget to the slide show widget ***/
 				slideShow.addChild ('slideImage',Uize.Widget.Swap.Image,{width:695,height:327,built:false});
 
 		/*** add bar child widgets to the slideshow widget for displaying the nutritional data ***/
 			var
-				nutritionProperties = UizeSite.TestDataFruits.getNutritionProperties (),
+				nutritionProperties = UizeSite.TestData.Fruits.getNutritionProperties (),
 				nutritionPropertiesLength = nutritionProperties.length
 			;
 			for (var propertyNo = -1; ++propertyNo < nutritionPropertiesLength;) {
@@ -151,9 +151,9 @@ Uize.module ({
 							maxValue:1,
 							increments:0,
 							built:false,
-							unit:UizeSite.TestDataFruits.getPropertyUnit (propertyName)
+							unit:UizeSite.TestData.Fruits.getPropertyUnit (propertyName)
 						},
-						UizeSite.TestDataFruits.getValueBoundsForProperty (propertyName)
+						UizeSite.TestData.Fruits.getValueBoundsForProperty (propertyName)
 					)
 				);
 			}

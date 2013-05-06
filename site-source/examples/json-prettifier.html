@@ -167,7 +167,7 @@ Uize.module ({
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
 		'Uize.Node.Form',
-		'UizeSite.TestDataObject'
+		'UizeSite.TestData.Object'
 	],
 	builder:function () {
 		'use strict';
@@ -238,7 +238,7 @@ Uize.module ({
 				tabs.set ({value:'serialized'});
 			}
 			function resetTestData () {
-				page.setNodeValue ('sourceJson',Uize.Json.to (UizeSite.TestDataObject (),presets.pretty));
+				page.setNodeValue ('sourceJson',Uize.Json.to (UizeSite.TestData.Object (),presets.pretty));
 				serializeUsingCurrentSettings ();
 			}
 

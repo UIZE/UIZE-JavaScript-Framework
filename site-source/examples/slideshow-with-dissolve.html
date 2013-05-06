@@ -35,7 +35,8 @@
 
 	<!-- the photos set is defined in an external library so it can be shared by several pages -->
 	<script type="text/javascript" src="../js/UizeSite.js"></script>
-	<script type="text/javascript" src="../js/UizeSite/TestDataPhotos.js"></script>
+	<script type="text/javascript" src="../js/UizeSite/TestData.js"></script>
+	<script type="text/javascript" src="../js/UizeSite/TestData/Photos.js"></script>
 
 	<!-- slideshow HTML layout with UI to be wired up -->
 
@@ -88,7 +89,7 @@
 
 window.$page_slideShow = {
 	widgetClass:'Uize.Widget.SlideShow',
-	slides:UizeSite.TestDataPhotos ()
+	slides:UizeSite.TestData.Photos ()
 };
 
 window.$page_slideShow_slideImage = {

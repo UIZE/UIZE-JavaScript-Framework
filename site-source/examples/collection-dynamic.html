@@ -54,7 +54,7 @@ Uize.module ({
 		'Uize.Widget.CollectionItem',
 		'Uize.Templates.Collection',
 		'Uize.Templates.CollectionItem',
-		'UizeSite.TestDataPhotos'
+		'UizeSite.TestData.Photos'
 	],
 	builder:function () {
 		'use strict';
@@ -96,7 +96,7 @@ Uize.module ({
 		/*** add initial items ***/
 			var
 				items = [],
-				photos = UizeSite.TestDataPhotos ()
+				photos = UizeSite.TestData.Photos ()
 			;
 			for (var photoNo = -1, photosLength = photos.length; ++photoNo < photosLength;) {
 				var photo = photos [photoNo];

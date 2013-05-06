@@ -559,7 +559,7 @@ Types of Modules
 
 			Now, in order to avoid contructing and returning a fresh data object each time this function is called, the function implements a simple caching mechanism, using the =_cachedData= variable that is defined in its enclosing scope. If this variable has a non-null value at the time that the =MyNamespace.MyDataModule= function is called, then this value is simply returned. Otherwise, or if the value =true= is specified for the optional =_getCopy= parameter, then the data object is constructed and cached as necessary. As mentioned, an optional =_getCopy= parameter allows fresh copies of the object to be made when calling the =MyNamespace.MyDataModule= function, in case using a shared copy is not desired.
 
-			To see a real world example of this approach in use, take a look at the =UizeSite.TestDataPhotos= data module that is used by the UIZE Web site.
+			To see a real world example of this approach in use, take a look at the =UizeSite.TestData.Photos= data module that is used by the UIZE Web site.
 
 		Benefits of Deferred Construction
 			Deferring the construction of a data object, as shown in the section `One Implementation Approach`, offers benefits in `deferred use of memory` as well as `deferred use of CPU`.

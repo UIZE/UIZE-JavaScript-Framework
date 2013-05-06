@@ -109,7 +109,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'UizeSite.TestDataPhotos',
+		'UizeSite.TestData.Photos',
 		'Uize.Data',
 		'Uize.Widget.Population'
 	],
@@ -121,7 +121,7 @@ Uize.module ({
 
 		/*** set up the category selector ***/
 			var
-				photos = UizeSite.TestDataPhotos (),
+				photos = UizeSite.TestData.Photos (),
 				categories = Uize.Data.getColumn (photos,'category',true),
 				categorySelectorOptions = page.getNode ('categorySelector').options
 			;

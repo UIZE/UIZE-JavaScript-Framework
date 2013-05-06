@@ -1,5 +1,5 @@
 Uize.module ({
-	name:'UizeSite.TestDataPhotos',
+	name:'UizeSite.TestData.Photos',
 	builder:function () {
 		'use strict';
 

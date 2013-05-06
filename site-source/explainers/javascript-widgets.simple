@@ -823,7 +823,7 @@ Widget Adoption
 		<script type="text/javascript">
 			window.$page_slideShow = {
 				widgetClass:'Uize.Widget.SlideShow',
-				slides:UizeSite.TestDataPhotos ()
+				slides:UizeSite.TestData.Photos ()
 			};
 			window.$page_slideShow_slideImage = {
 				widgetClass:'Uize.Widget.Swap.Image',
@@ -849,7 +849,7 @@ Widget Adoption
 		<script type="text/javascript">
 			window.$page_slideShow = {
 				widgetClass:'Uize.Widget.SlideShow',
-				slides:UizeSite.TestDataPhotos (),
+				slides:UizeSite.TestData.Photos (),
 				children:{
 					slideImage:{
 						widgetClass:'Uize.Widget.Swap.Image',
@@ -875,7 +875,7 @@ Widget Adoption
 		<script type="text/javascript">
 			window.$page_slideShow = {
 				widgetClass:'Uize.Widget.SlideShow',
-				slides:UizeSite.TestDataPhotos (),
+				slides:UizeSite.TestData.Photos (),
 				children:{
 					slideImage:{
 						widgetClass:'Uize.Widget.Swap.Image',

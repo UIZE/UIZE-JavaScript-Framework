@@ -1,5 +1,5 @@
 Uize.module ({
-	name:'UizeSite.TestDataObject',
+	name:'UizeSite.TestData.Object',
 	builder:function () {
 		'use strict';
 
