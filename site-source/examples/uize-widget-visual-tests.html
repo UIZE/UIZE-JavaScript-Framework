@@ -63,6 +63,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example',
 		'UizeSite.ModulesTree',
+		'UizeSite.Build.Util',
 		'Uize.Url',
 		'Uize.Data.PathsTree',
 		'Uize.Data.Matches'
@@ -72,14 +73,8 @@ Uize.module ({
 
 		var
 			_testSelectorPlaceholderText = '-- NO WIDGET SELECTED --',
-			_widgetClassSuffixRegExp = /\.Widget$/
+			_visualTestsModuleNameFromWidgetClass = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass
 		;
-		function _visualTestsModuleNameFromWidgetClass (_widgetClass) {
-			return (
-				_widgetClassSuffixRegExp.test (_widgetClass) &&
-				_widgetClass.replace (_widgetClassSuffixRegExp,'.VisualTests')
-			);
-		}
 
 		/*** prepare list of all widget modules with visual tests ***/
 			var

@@ -34,7 +34,10 @@ Uize.module ({
 		'use strict';
 
 		/*** General Variables ***/
-			var _fileSystem = Uize.Services.FileSystem.singleton ();
+			var
+				_fileSystem = Uize.Services.FileSystem.singleton (),
+				_widgetClassSuffixRegExp = /\.Widget$/
+			;
 
 		return {
 			getIndexableFiles:function (_sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp) {
@@ -47,6 +50,14 @@ Uize.module ({
 						);
 					}
 				});
+			},
+
+			visualTestsModuleNameFromWidgetClass:function (_widgetClass) {
+				return (
+					_widgetClassSuffixRegExp.test (_widgetClass)
+						? _widgetClass.replace (_widgetClassSuffixRegExp,'.VisualTests')
+						: ''
+				);
 			}
 		};
 	}

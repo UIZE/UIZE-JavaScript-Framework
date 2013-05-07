@@ -4,35 +4,36 @@
 		title:'string',
 		description:'string',
 		body:'string',
-		hasToDo:'boolean'
+		hasToDo:'boolean',
+		hasVisualTests:'boolean'
 	});
 %><%
-	function getLinkedModuleName (moduleName) {
+	function _getLinkedModuleName (_moduleName) {
 		var
-			htmlChunks = [],
-			periodPrefix = '',
-			hostModuleName = '',
-			moduleNameSegment
+			_htmlChunks = [],
+			_periodPrefix = '',
+			_hostModuleName = '',
+			_moduleNameSegment
 		;
 		for (
 			var
-				moduleNameSegmentNo = -1,
-				moduleNameSegments = moduleName.split ('.'),
-				moduleNameSegmentsLength = moduleNameSegments.length
+				_moduleNameSegmentNo = -1,
+				_moduleNameSegments = _moduleName.split ('.'),
+				_moduleNameSegmentsLength = _moduleNameSegments.length
 			;
-			++moduleNameSegmentNo < moduleNameSegmentsLength;
+			++_moduleNameSegmentNo < _moduleNameSegmentsLength;
 		) {
-			hostModuleName += periodPrefix + (moduleNameSegment = moduleNameSegments [moduleNameSegmentNo]);
-			htmlChunks.push (periodPrefix + '<a href="' + hostModuleName + '.html" title="View reference for ' + hostModuleName + '" class="breadcrumb">' + moduleNameSegment + '</a>');
-			periodPrefix = '.';
+			_hostModuleName += _periodPrefix + (_moduleNameSegment = _moduleNameSegments [_moduleNameSegmentNo]);
+			_htmlChunks.push (_periodPrefix + '<a href="' + _hostModuleName + '.html" title="View reference for ' + _hostModuleName + '" class="breadcrumb">' + _moduleNameSegment + '</a>');
+			_periodPrefix = '.';
 		}
-		return htmlChunks.join ('');
+		return _htmlChunks.join ('');
 	}
 %><%@ startBlock ('displayTitleHtml') %>
 	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
-	<%= getLinkedModuleName (input.title) %>
+	<%= _getLinkedModuleName (input.title) %>
 	<div class="pageActions">
-		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/<% .title %>.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><% if (input.hasToDo) { %><a href="../todo/modules/<% .title %>.html" class="buttonLink" title="View the TO DO list for this module...">TO DO</a><% } %><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/<% .title %>.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><% if (input.hasToDo) { %><a href="../todo/modules/<% .title %>.html" class="buttonLink" title="View the TO DO list for this module...">TO DO</a><% } %><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a><% if (input.hasVisualTests) { %><a href="../examples/uize-widget-visual-tests.html?widgetClass=<%. title %>" class="buttonLink" title="View the visual tests for this widget class...">VISUAL TESTS</a><% } %>
 	</div>
 <%@ endBlock () %><%=
 	UizeSite.Templates.SimpleDoc.process ({

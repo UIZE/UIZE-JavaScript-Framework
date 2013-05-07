@@ -29,9 +29,20 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.ModuleReferencePages',
 	required:[
 		'Uize.Url',
-		'Uize.Doc.Sucker'
+		'Uize.Doc.Sucker',
+		'UizeSite.Build.Util'
 	],
 	builder:function () {
+		var _visualTestsModuleNameFromWidgetClass = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass;
+
+		function _hasDeepReference (object,_deepReference) {
+			try {
+				eval ('object.' + _deepReference);
+				return true;
+			} catch (_error) {
+				return false;
+			}
+		}
 		return {
 			description:'Module reference page',
 			urlMatcher:function (_urlParts) {
@@ -66,7 +77,8 @@ Uize.module ({
 					_this = this,
 					_simpleDoc,
 					_tempCodePath = _inputs.tempCode,
-					_moduleName = _this.moduleNameFromTempPath (_tempCodePath)
+					_moduleName = _this.moduleNameFromTempPath (_tempCodePath),
+					_modulesTree = _this.readFile ({path:_inputs.modulesTree})
 				;
 				Uize.require (
 					_moduleName,
@@ -83,7 +95,7 @@ Uize.module ({
 								pathToRoot:'../',
 								result:'full',
 								module:_module,
-								modulesTree:_this.readFile ({path:_inputs.modulesTree}),
+								modulesTree:_modulesTree,
 								examples:_this.readFile ({path:_inputs.examplesByKeyword}) [_moduleName]
 							}
 						);
@@ -94,7 +106,10 @@ Uize.module ({
 					_moduleName,
 					_simpleDoc,
 					_inputs.simpleDocTemplate,
-					{hasToDo:_this.fileExists ({path:this.sourceUrl ('todo/modules/' + _moduleName + '.simple')})}
+					{
+						hasToDo:_this.fileExists ({path:this.sourceUrl ('todo/modules/' + _moduleName + '.simple')}),
+						hasVisualTests:_hasDeepReference (_modulesTree,_visualTestsModuleNameFromWidgetClass (_moduleName))
+					}
 				);
 			}
 		};
