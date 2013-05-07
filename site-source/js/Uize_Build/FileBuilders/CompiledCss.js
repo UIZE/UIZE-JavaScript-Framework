@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Build.FileBuilders.CompiledCss= module defines a file builder for CSS files compiled from =.css.source= files.
+		The =Uize.Build.FileBuilders.CompiledCss= module defines a file builder for CSS files compiled from =.csst= files.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -33,17 +33,17 @@ Uize.module ({
 	],
 	builder:function () {
 		return {
-			description:'Compiled CSS files, generated from .css.source files',
+			description:'Compiled CSS files, generated from .csst files',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
 				return (
 					_urlParts.fileType == 'css' &&
 					this.isBuiltUrl (_pathname) &&
-					this.fileExists ({path:this.sourceUrlFromBuiltUrl (_pathname) + '.source'})
+					this.fileExists ({path:this.sourceUrlFromBuiltUrl (_pathname) + 't'})
 				);
 			},
 			builderInputs:function (_urlParts) {
-				return {cssSource:this.sourceUrlFromBuiltUrl (_urlParts.pathname) + '.source'};
+				return {cssSource:this.sourceUrlFromBuiltUrl (_urlParts.pathname) + 't'};
 			},
 			builder:function (_inputs) {
 				var
@@ -54,6 +54,7 @@ Uize.module ({
 						true
 					).replace (/\./g,'_')
 				;
+				console.log (_cssClassPrefix);
 				return this.readFile ({path:_cssSource}).replace (
 					/`([^`]*)`/g,
 					function (_match,_cssClass) {

@@ -209,7 +209,7 @@ function _eval (_toEval) {
 								);
 							}
 						);
-					} else if (_fileExists (_modulePath.replace (/\.js$/,'.css.source'))) {
+					} else if (_fileExists (_modulePath.replace (/\.js$/,'.csst'))) {
 						_moduleText =
 							'Uize.module ({\n' +
 							'	name:\'' + _moduleName + '\',\n' +

@@ -55,7 +55,7 @@ Uize.module ({
 					return (
 						_this.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
 						_this.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
-						_this.fileExists ({path:_sourcePathSansExtension + '.css.source'}) ||
+						_this.fileExists ({path:_sourcePathSansExtension + '.csst'}) ||
 						_this.folderExists ({path:_sourcePathSansExtension})
 					);
 				} else {

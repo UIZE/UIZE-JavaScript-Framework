@@ -36,7 +36,7 @@ Uize.module ({
 			_modulesSourceCodePagesPath = '/reference/source-code/',
 			_jsExtension = '.js',
 			_jsJstExtension = '.js.jst',
-			_cssSourceExtension = '.css.source'
+			_cssSourceExtension = '.csst'
 		;
 
 		return {

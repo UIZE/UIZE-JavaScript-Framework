@@ -46,7 +46,7 @@ Uize.module ({
 				_fileSystem = Uize.Services.FileSystem.singleton (),
 				_compiledJstFilesByPath = {},
 				_package,
-				_jsModuleExtensionRegExp = /(\.js|\.js\.jst|\.css\.source)$/
+				_jsModuleExtensionRegExp = /(\.js|\.js\.jst|\.csst)$/
 			;
 
 		/*** Utility Functions ***/

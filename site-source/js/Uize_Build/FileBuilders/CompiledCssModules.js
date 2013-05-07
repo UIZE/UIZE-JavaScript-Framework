@@ -39,7 +39,7 @@ Uize.module ({
 				return (
 					_urlParts.fileType == 'js' &&
 					this.isTempUrl (_pathname) &&
-					this.fileExists ({path:this.sourceUrlFromTempUrl (_pathname).replace (/\.js$/,'.css.source')})
+					this.fileExists ({path:this.sourceUrlFromTempUrl (_pathname).replace (/\.js$/,'.csst')})
 				);
 			},
 			builderInputs:function (_urlParts) {
