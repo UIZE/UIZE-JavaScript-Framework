@@ -1,0 +1,77 @@
+.`` {
+	padding: 0;
+	width: 119px;
+	border: 3px solid #fff;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background: #d3d3d3;
+	/*
+	box-shadow: 5px 0 12px rgba(0,0,0,.7);
+	-moz-box-shadow: 5px 0 12px rgba(0,0,0,.7);
+	-webkit-box-shadow: 5px 0 12px rgba(0,0,0,.7);
+	*/
+	text-align: center;
+}
+
+.`title` {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000;
+	text-shadow: -1px -1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, 1px 1px 0 #fff;
+	letter-spacing: 2px;
+	padding: 2px 5px 3px 5px;
+	width: 109px;
+	text-transform: uppercase;
+}
+
+.`swatch`, .`asBg`, .`asColor` {
+	width: 105px;
+	padding: 1px;
+	margin: 0 5px;
+	border: 1px solid #666;
+	font-size: 11px;
+	text-align: center;
+}
+
+.`swatch` {
+	height: 75px;
+}
+
+.`asColor` {
+	position: relative;
+	margin-bottom: 5px;
+}
+
+.`onWhite`, .`onBlack` {
+	position: absolute;
+	top: 0;
+	width: 50%;
+	height: 100%;
+}
+
+.`whiteText` {
+	color: #fff;
+}
+
+.`blackText` {
+	color: #000;
+}
+
+.`onWhite` {
+	left: 0;
+	background-color: #fff;
+}
+
+.`onBlack` {
+	left: 50%;
+	background-color: #000;
+}
+
+.`subheader` {
+	font-size: 9px;
+	text-transform: uppercase;
+	text-align: center;
+	padding-top: 4px;
+}
+

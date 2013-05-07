@@ -31,7 +31,7 @@ NEW MODULE: Uize.Widget.SegmentDisplay.Seven
 NEW MODULE: Uize.Widget.SegmentDisplay
 	Announce this new widget.
 
-NEW MODULE: Uize.Widget.ColorInfo
+NEW MODULE: Uize.Widgets.ColorInfo.Widget
 	Announce this new widget.
 
 NEW MODULE: Uize.Widget.EdgeHugger

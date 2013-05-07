@@ -8,13 +8,15 @@
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="../css/widget.colorinfo.css"/>
 	<style tyle="text/css">
 		.colorSwatch {
 			width:1px;
 			height:340px;
 			float:left;
 			cursor:pointer;
+		}
+		.colorInfo {
+			display: none;
 		}
 	</style>
 </head>
@@ -70,7 +72,7 @@ Uize.module ({
 		'Uize.Color',
 		'Uize.Color.xUtil',
 		'Uize.Widget.ColorPicker',
-		'Uize.Widget.ColorInfo',
+		'Uize.Widgets.ColorInfo.Widget',
 		'Uize.Node',
 		'Uize.Node.Event',
 		'Uize.Tooltip',
@@ -123,7 +125,11 @@ Uize.module ({
 				.wire ('Changed.value',sortColorSwatches);
 
 		/*** add the color info widget ***/
-			var colorInfo = page.addChild ('colorInfo',Uize.Widget.ColorInfo);
+			var colorInfo = page.addChild (
+				'colorInfo',
+				Uize.Widgets.ColorInfo.Widget,
+				{extraClasses:'colorInfo',built:false}
+			);
 
 		/*** wire up the page widget ***/
 			page.wireUi ();

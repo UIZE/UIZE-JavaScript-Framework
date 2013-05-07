@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
 	<link rel="stylesheet" href="../css/widget.tabs.css"/>
-	<link rel="stylesheet" href="../css/widget.colorinfo.css"/>
 	<link rel="stylesheet" href="../examples/css/selector-links.css"/>
 	<link rel="stylesheet" href="../examples/css/params-table.css"/>
 	<link rel="stylesheet" href="../examples/css/params-inspector.css"/>
@@ -27,6 +26,9 @@
 		}
 		#page-colorGradient {
 			cursor:pointer;
+		}
+		.colorInfo {
+			display: none;
 		}
 	</style>
 </head>
@@ -298,7 +300,7 @@ Uize.module ({
 		'Uize.Fx',
 		'Uize.Color',
 		'Uize.Color.xUtil',
-		'Uize.Widget.ColorInfo',
+		'Uize.Widgets.ColorInfo.Widget',
 		'Uize.Node',
 		'Uize.Node.Event',
 		'Uize.Tooltip'
@@ -370,7 +372,11 @@ Uize.module ({
 			);
 
 		/*** add the color info widget ***/
-			var colorInfo = page.addChild ('colorInfo',Uize.Widget.ColorInfo);
+			var colorInfo = page.addChild (
+				'colorInfo',
+				Uize.Widgets.ColorInfo.Widget,
+				{extraClasses:'colorInfo',built:false}
+			);
 
 		/*** wire up the swatch mouseover and click behaviors ***/
 			function updateColorInfo () {colorInfo.set ({value:this.style.backgroundColor})}
