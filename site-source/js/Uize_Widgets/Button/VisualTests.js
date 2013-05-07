@@ -30,17 +30,48 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		var _allSizes = ['tiny','small','medium','large'];
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
-					text:'Cancel',
+					text:'CANCEL',
+					flavor:'normal',
+					enabled:[true,false],
+					selected:[false,true],
+					size:_allSizes
+				});
+				this.addStateCombinationTestCases ({
+					text:'START',
+					flavor:'positive',
+					enabled:[true,false],
+					selected:[false,true],
+					size:_allSizes
+				});
+				/*
+				this.addStateCombinationTestCases ({
+					text:'DELETE',
+					flavor:'negative',
+					enabled:[true,false],
+					selected:[false,true],
+					size:_allSizes
+				});
+				this.addStateCombinationTestCases ({
+					text:'SAVE',
+					flavor:'primary',
+					enabled:[true,false],
+					selected:[false,true],
+					size:_allSizes
+				});
+				*/
+				this.addStateCombinationTestCases ({
+					text:'Settings',
 					enabled:[true,false],
 					busy:[false,true],
 					selected:[false,true],
 					clickToSelect:[false,true],
 					clickToDeselect:[false,true],
 					state:['','over','down'],
-					size:['tiny','small','medium','large']
+					size:_allSizes
 				});
 			},
 

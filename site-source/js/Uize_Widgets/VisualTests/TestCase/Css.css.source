@@ -11,7 +11,7 @@
 	background: #f4f4f4;
 }
 
-.`testWidgetShell` {
+.`widgetShell` {
 	background: #fff;
 	padding: 8px;
 }

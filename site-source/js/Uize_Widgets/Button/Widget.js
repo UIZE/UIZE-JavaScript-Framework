@@ -112,7 +112,7 @@ Uize.module ({
 						}
 						_this._statePrecedenceMap [_stateCombinationNo] = _displayState;
 					}
-					_this.set ({_displayState:_displayState});
+					_this.set ({_displayState:_this._flavor + (_displayState && ('-' + _displayState))});
 
 					if (_this.isWired && _this._tooltip && Uize.Tooltip) {
 						var _newTooltipShown = _this._state == 'over' && _enabledInherited && !_this._selected;
@@ -529,7 +529,7 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				},
-				_tooltip:'tooltip'
+				_tooltip:'tooltip',
 					/*?
 						State Properties
 							tooltip
@@ -541,6 +541,11 @@ Uize.module ({
 								- the initial value is =undefined=
 								- in order for the value of this property to be honored, the =Uize.Tooltip= module must already be loaded, but the =Uize.Widgets.Button.Widget= module does not explicitly require the =Uize.Tooltip= module
 					*/
+				_flavor:{
+					name:'flavor',
+					value:'normal', // values can be 'normal' | 'primary' | 'positive' | 'negative'
+					onChange:_updateDisplayState
+				}
 			},
 
 			set:{

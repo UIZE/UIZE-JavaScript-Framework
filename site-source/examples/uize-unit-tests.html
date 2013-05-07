@@ -18,7 +18,6 @@
 			border-radius: 3px;
 		}
 		.testControlButton {
-			display:block;
 			float:left;
 			margin:0 2px;
 		}
@@ -31,10 +30,6 @@
 				margin:auto;
 				margin-top:10px;
 				background:#fff;
-			}
-			.progressBar {
-				width:100%;
-				height:100%;
 			}
 
 		.logShell {
@@ -149,7 +144,6 @@ Uize.module ({
 				Uize.Widgets.ProgressBar.Widget,
 				{
 					built:false,
-					extraClasses:'progressBar',
 					statusText:function (_input) {
 						var _totalSteps = _input.totalSteps;
 						return _totalSteps ? _input.stepsCompleted + ' of ' + _totalSteps + ' tests completed' : '';
@@ -166,6 +160,7 @@ Uize.module ({
 					built:false,
 					text:'START',
 					size:'small',
+					flavor:'positive',
 					extraClasses:'testControlButton'
 				}
 			).wire (
@@ -183,6 +178,7 @@ Uize.module ({
 					built:false,
 					text:'STOP',
 					size:'small',
+					flavor:'negative',
 					extraClasses:'testControlButton'
 				}
 			).wire (
