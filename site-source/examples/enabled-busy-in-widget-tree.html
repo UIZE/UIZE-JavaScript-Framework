@@ -74,15 +74,15 @@ Uize.module ({
 			UizeSite.Widgets.EnabledBusyDemo.Widget.set ({built:false});
 			var
 				testWidget = page.addChild ('testWidget',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:0}),
-				childTestWidget0 = testWidget.addChild (
-					'childTestWidget0',
+				childWidget0 = testWidget.addChild (
+					'childWidget0',
 					UizeSite.Widgets.EnabledBusyDemo.Widget,
 					{built:false,depth:1}
 				)
 			;
-			childTestWidget0.addChild ('childTestWidget0',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:2});
-			childTestWidget0.addChild ('childTestWidget1',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:2});
-			testWidget.addChild ('childTestWidget1',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:1});
+			childWidget0.addChild ('childWidget0',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:2});
+			childWidget0.addChild ('childWidget1',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:2});
+			testWidget.addChild ('childWidget1',UizeSite.Widgets.EnabledBusyDemo.Widget,{depth:1});
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
