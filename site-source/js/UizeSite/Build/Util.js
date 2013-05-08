@@ -58,6 +58,14 @@ Uize.module ({
 						? _widgetClass.replace (_widgetClassSuffixRegExp,'.VisualTests')
 						: ''
 				);
+			},
+
+			visualSamplerModuleNameFromWidgetClass:function (_widgetClass) {
+				return (
+					_widgetClassSuffixRegExp.test (_widgetClass)
+						? _widgetClass.replace (_widgetClassSuffixRegExp,'.VisualSampler')
+						: ''
+				);
 			}
 		};
 	}

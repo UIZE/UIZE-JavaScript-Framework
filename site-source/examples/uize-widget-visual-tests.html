@@ -3,13 +3,13 @@
 <head>
 	<title>UIZE Widget Visual Tests | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content=""/>
+	<meta name="keywords" content="widget Uize.Widgets.VisualTests.Widget Uize.Widgets.VisualTests.TestCase.Widget"/>
 	<meta name="description" content="See the visual tests for any widget that implements visual tests. Use this page to test a widget while you're developing it."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
 	<style type="text/css">
-		.testControl {
+		.selectorControl {
 			width:740px;
 			margin:auto;
 			padding:10px;
@@ -46,9 +46,9 @@
 		<p>This example lets you select and run any of the visual tests for UIZE widgets that implement visual tests. Simply select a widget from the dropdown menu (only widgets that implement visual tests will be listed in this menu).</p>
 	</div>
 
-	<div class="testControl">
+	<div class="selectorControl">
 		<div style="float:left; line-height:22px; margin-right:5px;">SELECT A WIDGET:</div>
-		<select id="page-testSelector" style="float:left; margin-right:15px;"></select>
+		<select id="page-selector" style="float:left; margin-right:15px;"></select>
 		<br style="clear:left;"/>
 	</div>
 
@@ -72,7 +72,7 @@ Uize.module ({
 		'use strict';
 
 		var
-			_testSelectorPlaceholderText = '-- NO WIDGET SELECTED --',
+			_selectorPlaceholderText = '-- NO WIDGET SELECTED --',
 			_visualTestsModuleNameFromWidgetClass = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass
 		;
 
@@ -93,16 +93,16 @@ Uize.module ({
 			_page.wireUi ();
 
 		/*** handle selection of test ***/
-			function _selectTest () {
+			function _handleSelection () {
 				var
-					_widgetClass = _page.getNodeValue ('testSelector'),
+					_widgetClass = _page.getNodeValue ('selector'),
 					_visualTests = _page.children.visualTests
 				;
 				if (_visualTests) {
 					_page.removeChild ('visualTests');
 					_visualTests.setNodeInnerHtml ('shell','');
 				}
-				_widgetClass == _testSelectorPlaceholderText ||
+				_widgetClass == _selectorPlaceholderText ||
 					Uize.require (
 						_visualTestsModuleNameFromWidgetClass (_widgetClass),
 						function (_visualTestsModule) {
@@ -111,19 +111,19 @@ Uize.module ({
 					)
 				;
 			}
-			_page.wireNode ('testSelector','change',_selectTest);
+			_page.wireNode ('selector','change',_handleSelection);
 
 		/*** initialize ***/
-			/*** populate test selector ***/
+			/*** populate selector ***/
 				Uize.map (
-					[_testSelectorPlaceholderText].concat (_testNames),
+					[_selectorPlaceholderText].concat (_testNames),
 					function (_testName) {return new Option (_testName,_testName)},
-					_page.getNode ('testSelector').options
+					_page.getNode ('selector').options
 				);
 
-			/*** initialize test selector, using widgetClass query param ***/
-				_page.setNodeValue ('testSelector',Uize.Url.fromParams (location.href).widgetClass);
-				_selectTest ();
+			/*** initialize selector, using query param ***/
+				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).widgetClass);
+				_handleSelection ();
 	}
 });
 
