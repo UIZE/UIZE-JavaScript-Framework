@@ -109,9 +109,7 @@ Uize.module ({
 			function _processNode (_path,_node) {
 				var _totalKeys = Uize.totalKeys (_node);
 				if (_totalKeys) {
-					_path && _totalKeys > 1 &&
-						_visualSamplerNamespaces.push (_path)
-					;
+					_totalKeys > 1 && _visualSamplerNamespaces.push (_path);
 					for (var _subNode in _node)
 						_processNode (_path + (_path && '.') + _subNode,_node [_subNode])
 					;
@@ -119,6 +117,27 @@ Uize.module ({
 			}
 			_processNode ('',_visualSamplerNamespacesTree);
 			_visualSamplerNamespaces.sort ();
+
+		/*** build lookup for visual sampler modules per namespace ***/
+			var _visualSamplerModulesByNamespace = {};
+			Uize.forEach (
+				_visualSamplerNamespaces,
+				function (_namespace) {
+					_visualSamplerModulesByNamespace [_namespace] = Uize.map (
+						Uize.Data.Matches.values (
+							_visualSamplerDirectNamespaces,
+							function (_visualSamplerNamespace) {
+								return (
+									!_namespace ||
+									_visualSamplerNamespace == _namespace ||
+									Uize.String.startsWith (_visualSamplerNamespace,_namespace + '.')
+								);
+							}
+						),
+						'value + ".VisualSampler"'
+					);
+				}
+			);
 
 		/*** create the example page widget ***/
 			var _page = window.page = UizeSite.Page.Example ();
@@ -137,19 +156,7 @@ Uize.module ({
 					_visualSamplers.setNodeInnerHtml ('shell','');
 				}
 				if (_selectedNamespace != _selectorPlaceholderText) {
-					var _visualSamplerModules = Uize.map (
-						Uize.Data.Matches.values (
-							_visualSamplerDirectNamespaces,
-							function (_visualSamplerNamespace) {
-								return (
-									!_selectedNamespace ||
-									_visualSamplerNamespace == _selectedNamespace ||
-									Uize.String.startsWith (_visualSamplerNamespace,_selectedNamespace + '.')
-								);
-							}
-						),
-						'value + ".VisualSampler"'
-					);
+					var _visualSamplerModules = _visualSamplerModulesByNamespace [_selectedNamespace];
 					Uize.require (
 						_visualSamplerModules,
 						function () {
@@ -173,8 +180,17 @@ Uize.module ({
 		/*** initialize ***/
 			/*** populate selector ***/
 				Uize.map (
-					[_selectorPlaceholderText,''].concat (_visualSamplerNamespaces),
-					function (_namespace) {return new Option (_namespace || 'ALL NAMESPACES',_namespace)},
+					[_selectorPlaceholderText].concat (_visualSamplerNamespaces),
+					function (_namespace) {
+						return new Option (
+							(_namespace || 'ALL NAMESPACES') + (
+								_namespace != _selectorPlaceholderText
+									? ' (' + _visualSamplerModulesByNamespace [_namespace].length + ')'
+									: ''
+							),
+							_namespace
+						);
+					},
 					_page.getNode ('selector').options
 				);
 
