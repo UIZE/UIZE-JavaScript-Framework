@@ -257,9 +257,10 @@ Uize.module ({
 						items:[
 							_explainer ('Creating a New UIZE Module'),
 							_explainer ('Creating a New UIZE Example Page'),
-							_appendix ('SOTU (State of the UIZE)','sotu'),
+							_divider,
 							_item ('UIZE Unit Tests','examples/'),
 							_item ('Widget Visual Tests','examples/'),
+							_item ('Widget Visual Samplers','examples/'),
 							{
 								title:'Performance Tests',
 								items:[
@@ -274,6 +275,8 @@ Uize.module ({
 									_perfTest ('String Starts With Substring Styles')
 								]
 							},
+							_divider,
+							_appendix ('SOTU (State of the UIZE)','sotu'),
 							{
 								title:'TO DO',
 								items:[
