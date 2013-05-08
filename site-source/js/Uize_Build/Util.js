@@ -142,7 +142,7 @@ Uize.module ({
 					});
 					return _modules.sort ();
 				},
-	
+
 				readSimpleDataFile:function (_simpleDataFilePath) {
 					return Uize.Data.Simple.parse ({
 						simple:_fileSystem.readFile ({path:_simpleDataFilePath}),

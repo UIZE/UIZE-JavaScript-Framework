@@ -1,0 +1,12 @@
+<%@
+	input ({
+		heading:'string',
+		body:'string'
+	});
+%><div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
+	<div class="<%= this.cssClass ('heading') %>"><%. heading %></div>
+	<div class="<%= this.cssClass ('body') %>">
+		<%. body %>
+	</div>
+</div>
+

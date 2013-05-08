@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.VisualTests.TestCase.Widget Class
+|    /    O /   |    MODULE : Uize.Widgets.BoxWithHeading.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -12,39 +12,34 @@
 /* Module Meta Data
 	type: Class
 	importance: 1
-	codeCompleteness: 5
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Widgets.VisualTests.TestCase.Widget= class implements a widget for a widget test case, to be used when building visual tests for widgets.
+		The =Uize.Widgets.BoxWithHeading.Widget= class implements a very basic widget for a box layout with a heading.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.VisualTests.TestCase.Widget',
-	superclass:'Uize.Widgets.BoxWithHeading.Widget',
+	name:'Uize.Widgets.BoxWithHeading.Widget',
+	superclass:'Uize.Widget.V2',
 	required:[
-		'Uize.Widgets.VisualTests.TestCase.Html',
-		'Uize.Json',
-		'Uize.Xml'
+		'Uize.Widgets.BoxWithHeading.Html',
+		'Uize.Widgets.BoxWithHeading.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var _class = _superclass.subclass ({
-			alphastructor:function () {
-				var _this = this;
-				_this.onChange (
-					'state',
-					function (_state) {_this.set ({heading:Uize.Xml.toAttributeValue (Uize.Json.to (_state))})}
-				);
+			set:{
+				html:Uize.Widgets.BoxWithHeading.Html
 			},
 
-			set:{
-				html:Uize.Widgets.VisualTests.TestCase.Html
+			staticProperties:{
+				cssModule:Uize.Widgets.BoxWithHeading.Css
 			}
 		});
 

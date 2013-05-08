@@ -190,6 +190,10 @@ Uize.module ({
 							;
 							_this.wire (_wirings);
 					}
+				},
+
+				superHtml:function (_input,_extraInput) {
+					return this.Class.superclass.get ('html').process.call (this,Uize.copy (_input,_extraInput));
 				}
 			},
 
