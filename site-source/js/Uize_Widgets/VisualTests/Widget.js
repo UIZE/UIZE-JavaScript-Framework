@@ -56,7 +56,7 @@ Uize.module ({
 
 				addStateTestCase:function (_state) {
 					var _this = this;
-					_this._testCases
+					return _this._testCases
 						.addChild ('testCase' + _this._totalTestCases++,_testCaseWidgetClass,{state:Uize.copy (_state)})
 						.addChild ('widget',_this.Class.widgetClass,_state)
 					;
