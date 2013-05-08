@@ -142,6 +142,7 @@ Uize.module ({
 							_visualSamplerDirectNamespaces,
 							function (_visualSamplerNamespace) {
 								return (
+									!_selectedNamespace ||
 									_visualSamplerNamespace == _selectedNamespace ||
 									Uize.String.startsWith (_visualSamplerNamespace,_selectedNamespace + '.')
 								);
@@ -149,32 +150,31 @@ Uize.module ({
 						),
 						'value + ".VisualSampler"'
 					);
-					console.log (_visualSamplerModules);
+					Uize.require (
+						_visualSamplerModules,
+						function () {
+							_visualSamplers = _page.addChild ('visualSamplers',Uize.Widget.V2);
+							Uize.forEach (
+								_visualSamplerModules,
+								function (_visualSamplerModule,_visualSamplerNo) {
+									_visualSamplers.addChild (
+										'visualSampler' + _visualSamplerNo,
+										Uize.getModuleByName (_visualSamplerModule)
+									);
+								}
+							);
+							_visualSamplers.insertUi ();
+						}
+					);
 				}
-				Uize.require (
-					_visualSamplerModules,
-					function () {
-						_visualSamplers = _page.addChild ('visualSamplers',Uize.Widget.V2);
-						Uize.forEach (
-							_visualSamplerModules,
-							function (_visualSamplerModule,_visualSamplerNo) {
-								_visualSamplers.addChild (
-									'visualSampler' + _visualSamplerNo,
-									Uize.getModuleByName (_visualSamplerModule)
-								);
-							}
-						);
-						_visualSamplers.insertUi ();
-					}
-				);
 			}
 			_page.wireNode ('selector','change',_handleSelection);
 
 		/*** initialize ***/
 			/*** populate selector ***/
 				Uize.map (
-					[_selectorPlaceholderText].concat (_visualSamplerNamespaces),
-					function (_namespace) {return new Option (_namespace,_namespace)},
+					[_selectorPlaceholderText,''].concat (_visualSamplerNamespaces),
+					function (_namespace) {return new Option (_namespace || 'ALL NAMESPACES',_namespace)},
 					_page.getNode ('selector').options
 				);
 
