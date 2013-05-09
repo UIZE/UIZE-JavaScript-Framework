@@ -204,8 +204,8 @@ Uize.module ({
 						_moduleName = _this.moduleName
 					;
 					if (!_cssAddedLookup [_moduleName]) {
-						_this.cssModule && _this.cssModule.add ();
 						_this.superclass._needCss && _this.superclass._needCss ();
+						_this.cssModule && _this.cssModule.add ();
 						_cssAddedLookup [_moduleName] = 1;
 					}
 				},
