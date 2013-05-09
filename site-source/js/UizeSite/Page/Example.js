@@ -51,12 +51,13 @@ Uize.module ({
 									_screen = window.screen,
 									_width = _screen.width - 50,
 									_height = _screen.height - 100,
+									_urlParts = Uize.Url.from (window.location.href),
 									_html =
 										[
 											'<html>',
 												'<head><title>DELVE</title></head>',
 												'<body>',
-													'<script src="http://www.uize.com/js/Uize.js"></script>',
+													'<script src="' + (_urlParts.protocol == 'file:' ? 'http://www.uize.com' : _urlParts.fullDomain) + '/js/Uize.js"></script>',
 													'<script type="text/javascript">',
 														'Uize.require (',
 															'\'UizeSite.DelvePageWriter\',',
