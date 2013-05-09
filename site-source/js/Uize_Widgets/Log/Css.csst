@@ -1,26 +1,15 @@
 .`` {
 	width: 100%;
-	background: #becacd;
-	padding: 2px;
-	border: 1px solid #566;
 }
 
 .`heading` {
 	position: relative;
-	height: 22px;
 	text-align: center;
-	padding: 2px 0;
-	background: #ddd;
-	border: 1px solid #abb;
-	border-bottom: none;
+	min-height: 17px;
 }
 
 .`heading` span {
-	font-size: 11px;
-	line-height: 20px;
 	letter-spacing: 2px;
-	text-shadow: 1px -1px 1px #fff, 1px 1px 0 #fff;
-	color: #000;
 }
 
 .`clearButton` {
@@ -29,14 +18,17 @@
 	top: 2px;
 }
 
+.`body` {
+	padding: 0 2px 2px 2px;
+}
+
 .`messages` {
 	font-family: Courier;
 	white-space: nowrap;
 	font-size: 10px;
 	color: #000;
+	border: 1px solid #ddd;
 	padding: 4px;
-	border: 1px solid #899;
-	background: #fff;
 	height: 140px;
 	overflow: auto;
 }

@@ -135,7 +135,7 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Log.Widget',
-	superclass:'Uize.Widget.V2',
+	superclass:'Uize.Widgets.BoxWithHeading.Widget',
 	required:[
 		'Uize.Widgets.Button.Widget',
 		'Uize.Xml',
