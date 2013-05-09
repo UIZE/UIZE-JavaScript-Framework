@@ -36,7 +36,10 @@ Uize.module ({
 			var _undefined = undefined;
 
 		/*** General Variables ***/
-			var _cssAddedLookup = {};
+			var
+				_trueFlag = {},
+				_cssAddedLookup = {}
+			;
 
 		/*** Utility Functions ***/
 			function _cssClassPrefixFromModuleName (_moduleName) {
@@ -203,10 +206,10 @@ Uize.module ({
 						_this = this,
 						_moduleName = _this.moduleName
 					;
-					if (!_cssAddedLookup [_moduleName]) {
+					if (_cssAddedLookup [_moduleName] != _trueFlag) {
+						_cssAddedLookup [_moduleName] = _trueFlag;
 						_this.superclass._needCss && _this.superclass._needCss ();
 						_this.cssModule && _this.cssModule.add ();
-						_cssAddedLookup [_moduleName] = 1;
 					}
 				},
 
