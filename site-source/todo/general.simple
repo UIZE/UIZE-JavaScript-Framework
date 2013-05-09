@@ -1266,11 +1266,6 @@ Code Development (in order of priority)
 	- ordering widget (for customizing table column order, etc.)
 
 BUGS
-	General
-		- examples/button-types.html - nodes type button
-			- when disabled or selected, busy cursor doesn't display
-			- in IE, when in normal state, busy cursor only display when mousing over certain regions
-
 	Firefox
 		- in the button-types example, the frames style button does not fire the "Click" event (seems to have something to do with the mousedown event handler's execution)
 
