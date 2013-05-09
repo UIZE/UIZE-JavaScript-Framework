@@ -15,9 +15,6 @@
 			float:left;
 			cursor:pointer;
 		}
-		.colorInfo {
-			display: none;
-		}
 	</style>
 </head>
 
@@ -125,16 +122,13 @@ Uize.module ({
 				.wire ('Changed.value',sortColorSwatches);
 
 		/*** add the color info widget ***/
-			var colorInfo = page.addChild (
-				'colorInfo',
-				Uize.Widgets.ColorInfo.Widget,
-				{extraClasses:'colorInfo',built:false}
-			);
+			var colorInfo = page.addChild ('colorInfo',Uize.Widgets.ColorInfo.Widget,{built:false});
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
 
 		/*** initialization ***/
+			colorInfo.setNodeStyle ('',{display:'none'});
 			page.setNodeInnerHtml ('colorSwatches',swatchesHtmlChunks.join (''));
 
 			/*** wire up the swatch mouseover and click behaviors ***/

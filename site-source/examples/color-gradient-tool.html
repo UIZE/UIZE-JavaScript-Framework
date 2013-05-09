@@ -27,9 +27,6 @@
 		#page-colorGradient {
 			cursor:pointer;
 		}
-		.colorInfo {
-			display: none;
-		}
 	</style>
 </head>
 
@@ -372,11 +369,7 @@ Uize.module ({
 			);
 
 		/*** add the color info widget ***/
-			var colorInfo = page.addChild (
-				'colorInfo',
-				Uize.Widgets.ColorInfo.Widget,
-				{extraClasses:'colorInfo',built:false}
-			);
+			var colorInfo = page.addChild ('colorInfo',Uize.Widgets.ColorInfo.Widget,{built:false});
 
 		/*** wire up the swatch mouseover and click behaviors ***/
 			function updateColorInfo () {colorInfo.set ({value:this.style.backgroundColor})}
@@ -386,7 +379,7 @@ Uize.module ({
 					mouseover:function () {Uize.Tooltip.showTooltip (colorInfo.getNode ())},
 					mouseout:function () {Uize.Tooltip.showTooltip (colorInfo.getNode (),false)},
 					click:function (event) {
-						Uize.Tooltip.showTooltip (colorInfo.getNode (),false);
+						Uize.Tooltip.hideTooltip (colorInfo.getNode ());
 						prompt (
 							'Here is the color you selected...',
 							Uize.Color.to (Uize.Node.getStyle (Uize.Node.Event.target (event),'backgroundColor'),'#hex')
@@ -398,6 +391,7 @@ Uize.module ({
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
+			colorInfo.setNodeStyle ('',{display:'none'});
 	}
 });
 
