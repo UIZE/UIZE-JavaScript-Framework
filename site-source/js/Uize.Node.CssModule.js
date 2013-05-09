@@ -50,103 +50,108 @@ Uize.module ({
 		return _superclass.subclass ({
 			staticMethods:{
 				add:function () {
-					var
-						_document = document,
-						_styleSheets = _document.styleSheets,
-						_head = _document.head || _document.getElementsByTagName ('head') [0],
-						_css = this.css,
-						_previousStyleSheetsLength = _styleSheets.length,
-						_styleNode = _document.createElement ('style')
-					;
-					if (Uize.isFunction (_css))
-						_css = _css.call (this,{pathToModules:Uize.pathToResources})
-					;
-					_styleNode.type = 'text/css';
-					_styleNode.textContent = _css;
-					_styleNode.id = 'UIZE_' + Uize.getGuid ();
-					_head.appendChild (_styleNode);
+					var _this = this;
+					if (!_this.added) {
+						var
+							_document = document,
+							_styleSheets = _document.styleSheets,
+							_head = _document.head || _document.getElementsByTagName ('head') [0],
+							_css = this.css,
+							_previousStyleSheetsLength = _styleSheets.length,
+							_styleNode = _document.createElement ('style')
+						;
+						if (Uize.isFunction (_css))
+							_css = _css.call (this,{pathToModules:Uize.pathToResources})
+						;
+						_styleNode.type = 'text/css';
+						_styleNode.textContent = _css;
+						_styleNode.id = 'UIZE_' + Uize.getGuid ();
+						_head.appendChild (_styleNode);
 
-					if (_styleSheets.length == _previousStyleSheetsLength) {
-						if (Uize.Node.isIe) {
-							/*** find all stylesheets created by UIZE ***/
-								var
-									_uizeStyleSheets = [],
-									_uizeStyleSheetsLength = 0
-								;
-								for (var _styleSheetNo = -1, _styleSheet; ++_styleSheetNo < _previousStyleSheetsLength;) {
-									if ((_styleSheet = _styleSheets [_styleSheetNo]).id.slice (0,5) == 'UIZE_')
-										_uizeStyleSheets [_uizeStyleSheetsLength++] = _styleSheet
+						if (_styleSheets.length == _previousStyleSheetsLength) {
+							if (Uize.Node.isIe) {
+								/*** find all stylesheets created by UIZE ***/
+									var
+										_uizeStyleSheets = [],
+										_uizeStyleSheetsLength = 0
 									;
-								}
+									for (var _styleSheetNo = -1, _styleSheet; ++_styleSheetNo < _previousStyleSheetsLength;) {
+										if ((_styleSheet = _styleSheets [_styleSheetNo]).id.slice (0,5) == 'UIZE_')
+											_uizeStyleSheets [_uizeStyleSheetsLength++] = _styleSheet
+										;
+									}
 
-							if (_uizeStyleSheetsLength) {
-								var
-									_uizeStyleSheetNo,
-									_useFirstEmptyUizeStyleSheetAtTail = function () {
-										/*** find last non-empty UIZE stylesheet ***/
+								if (_uizeStyleSheetsLength) {
+									var
+										_uizeStyleSheetNo,
+										_useFirstEmptyUizeStyleSheetAtTail = function () {
+											/*** find last non-empty UIZE stylesheet ***/
+												for (
+													_uizeStyleSheetNo = _uizeStyleSheetsLength;
+													--_uizeStyleSheetNo >= 0 && !_uizeStyleSheets [_uizeStyleSheetNo].cssRules.length;
+												);
+
+											var _availableUizeStyleSheetAtTail = _uizeStyleSheetNo + 1 < _uizeStyleSheetsLength;
+											if (_availableUizeStyleSheetAtTail)
+												_uizeStyleSheets [_uizeStyleSheetNo + 1].cssText = _css
+											;
+											return _availableUizeStyleSheetAtTail;
+										}
+									;
+
+									if (!_useFirstEmptyUizeStyleSheetAtTail ()) {
+										/*** find first non-full UIZE stylesheet ***/
 											for (
-												_uizeStyleSheetNo = _uizeStyleSheetsLength;
-												--_uizeStyleSheetNo >= 0 && !_uizeStyleSheets [_uizeStyleSheetNo].cssRules.length;
+												var _nonFullUizeStyleSheetNo = -1;
+												++_nonFullUizeStyleSheetNo < _uizeStyleSheetsLength &&
+												_uizeStyleSheets [_nonFullUizeStyleSheetNo].cssRules.length >= _rulesPerStylesheet;
 											);
 
-										var _availableUizeStyleSheetAtTail = _uizeStyleSheetNo + 1 < _uizeStyleSheetsLength;
-										if (_availableUizeStyleSheetAtTail)
-											_uizeStyleSheets [_uizeStyleSheetNo + 1].cssText = _css
-										;
-										return _availableUizeStyleSheetAtTail;
-									}
-								;
-
-								if (!_useFirstEmptyUizeStyleSheetAtTail ()) {
-									/*** find first non-full UIZE stylesheet ***/
-										for (
-											var _nonFullUizeStyleSheetNo = -1;
-											++_nonFullUizeStyleSheetNo < _uizeStyleSheetsLength &&
-											_uizeStyleSheets [_nonFullUizeStyleSheetNo].cssRules.length >= _rulesPerStylesheet;
-										);
-
-									if (_nonFullUizeStyleSheetNo < _uizeStyleSheetsLength) {
-										var
-											_styleRulesToPack = [],
-											_styleRulesToPackLength = 0
-										;
-
-										/*** gather rules from all non-full UIZE stylesheets ***/
-											for (
-												_uizeStyleSheetNo = _nonFullUizeStyleSheetNo - 1;
-												++_uizeStyleSheetNo < _uizeStyleSheetsLength;
-											) {
-												for (
-													var
-														_cssRuleNo = -1,
-														_cssRules = _uizeStyleSheets [_uizeStyleSheetNo].cssRules,
-														_cssRulesLength = _cssRules.length
-													;
-													++_cssRuleNo < _cssRulesLength;
-												)
-													_styleRulesToPack [_styleRulesToPackLength++] = _cssRules [_cssRuleNo].cssText
-												;
-											}
-
-										/*** efficiently pack rules from all non-full UIZE stylesheets ***/
-											for (
-												_uizeStyleSheetNo = _nonFullUizeStyleSheetNo - 1;
-												++_uizeStyleSheetNo < _uizeStyleSheetsLength;
-											)
-												_uizeStyleSheets [_uizeStyleSheetNo].cssText =
-													_styleRulesToPack.splice (0,_rulesPerStylesheet).join ('')
+										if (_nonFullUizeStyleSheetNo < _uizeStyleSheetsLength) {
+											var
+												_styleRulesToPack = [],
+												_styleRulesToPackLength = 0
 											;
 
-										_useFirstEmptyUizeStyleSheetAtTail ();
+											/*** gather rules from all non-full UIZE stylesheets ***/
+												for (
+													_uizeStyleSheetNo = _nonFullUizeStyleSheetNo - 1;
+													++_uizeStyleSheetNo < _uizeStyleSheetsLength;
+												) {
+													for (
+														var
+															_cssRuleNo = -1,
+															_cssRules = _uizeStyleSheets [_uizeStyleSheetNo].cssRules,
+															_cssRulesLength = _cssRules.length
+														;
+														++_cssRuleNo < _cssRulesLength;
+													)
+														_styleRulesToPack [_styleRulesToPackLength++] = _cssRules [_cssRuleNo].cssText
+													;
+												}
+
+											/*** efficiently pack rules from all non-full UIZE stylesheets ***/
+												for (
+													_uizeStyleSheetNo = _nonFullUizeStyleSheetNo - 1;
+													++_uizeStyleSheetNo < _uizeStyleSheetsLength;
+												)
+													_uizeStyleSheets [_uizeStyleSheetNo].cssText =
+														_styleRulesToPack.splice (0,_rulesPerStylesheet).join ('')
+												;
+
+											_useFirstEmptyUizeStyleSheetAtTail ();
+										}
 									}
 								}
 							}
 						}
+						_this.added = true;
 					}
 				}
 			},
 
 			staticProperties:{
+				added:false,
 				css:''
 			}
 		});
