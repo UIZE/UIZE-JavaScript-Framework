@@ -161,13 +161,11 @@ Uize.module ({
 					text:'START',
 					size:'small',
 					flavor:'positive',
-					extraClasses:'testControlButton'
-				}
-			).wire (
-				'Click',
-				function () {
-					_prepareToRunTests ();
-					_testSuite.run ();
+					extraClasses:'testControlButton',
+					action:function () {
+						_prepareToRunTests ();
+						_testSuite.run ();
+					}
 				}
 			);
 			_page.addChild (
@@ -179,11 +177,9 @@ Uize.module ({
 					text:'STOP',
 					size:'small',
 					flavor:'negative',
-					extraClasses:'testControlButton'
+					extraClasses:'testControlButton',
+					action:function () {_testSuite.stop ()}
 				}
-			).wire (
-				'Click',
-				function () {_testSuite.stop ()}
 			);
 
 		/*** add the log widget ***/

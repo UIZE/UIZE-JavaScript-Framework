@@ -231,9 +231,12 @@ Uize.module ({
 										NOTES
 										- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
 							*/
-							_isClickEvent && (_this._selected ? _this._clickToDeselect : _this._clickToSelect) &&
-								_this.set ({_selected:!_this._selected})
-							;
+							if (_isClickEvent) {
+								Uize.isFunction (_this._action) && _this._action ();
+								(_this._selected ? _this._clickToDeselect : _this._clickToSelect) &&
+									_this.set ({_selected:!_this._selected})
+								;
+							}
 						}
 					}
 				},
@@ -376,6 +379,14 @@ Uize.module ({
 			},
 
 			stateProperties:{
+				_action:'action',
+					/*?
+						State Properties
+							action
+
+								NOTES
+								- the initial value is =undefined=
+					*/
 				_allowClickWhenSelected:{
 					name:'allowClickWhenSelected',
 					onChange:_updateDisplayState
