@@ -73,6 +73,17 @@ Uize.module ({
 			},
 
 			instanceMethods:{
+				addChildren:function (_children,_commonProperties) {
+					for (var _childName in _children) {
+						var
+							_childProperties = Uize.copy (_children [_childName],_commonProperties),
+							_widgetClass = _childProperties.widgetClass
+						;
+						delete _childProperties.widgetClass;
+						this.addChild (_childName,_widgetClass,_childProperties);
+					}
+				},
+
 				childHtml:function (_properties) {
 					var
 						_this = this,
