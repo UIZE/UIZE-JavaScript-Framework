@@ -109,14 +109,9 @@
 		</script>
 	</div>
 
-	<!-- links for demonstrating with and without auto tooltips -->
+	<!-- buttons for demonstrating with and without auto tooltips -->
 
-	<center>
-		<a id="page-unwireAutoTooltips" href="javascript://" class="buttonLink">UNWIRE AUTO TOOLTIPS</a>
-		<a id="page-wireAutoTooltips" href="javascript://" class="buttonLink">WIRE AUTO TOOLTIPS</a>
-		<br/>
-		<br/>
-	</center>
+	<center id="page_buttons-shell" style="margin-bottom: 20px;"></center>
 
 	<!-- grid containing lots and lots of photo thumbnails -->
 
@@ -166,7 +161,9 @@ Uize.module ({
 		'Uize.Widget.ThumbZoom',
 		'Uize.Node',
 		'Uize.Template',
-		'Uize.Widget.AutoTooltip'
+		'Uize.Widget.AutoTooltip',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -180,11 +177,34 @@ Uize.module ({
 			page.addChild ('thumbZoom',Uize.Widget.ThumbZoom,{thumbNodes:thumbNodes,imageValidator:null});
 
 		/*** add the auto tooltip child widget ***/
-			page.addChild ('photoInfoTooltip',Uize.Widget.AutoTooltip,{nodes:thumbNodes,html:true});
+			var photoInfoTooltip = page.addChild ('photoInfoTooltip',Uize.Widget.AutoTooltip,{nodes:thumbNodes,html:true});
 
-		/*** wire up links for unwiring and wiring auto tooltips ***/
-			page.wireNode ('unwireAutoTooltips','click',function () {page.children.photoInfoTooltip.unwireUi ()});
-			page.wireNode ('wireAutoTooltips','click',function () {page.children.photoInfoTooltip.wireUi ()});
+		/*** add the buttons for unwiring and wiring auto tooltips ***/
+			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+			function toggleButtonEnabledStates () {
+				buttons.children.unwireAutoTooltips.toggle ('enabled');
+				buttons.children.wireAutoTooltips.toggle ('enabled');
+			}
+			buttons.addChildren (
+				{
+					unwireAutoTooltips:{
+						action:function () {
+							photoInfoTooltip.unwireUi ();
+							toggleButtonEnabledStates ();
+						},
+						text:'UNWIRE AUTO TOOLTIPS'
+					},
+					wireAutoTooltips:{
+						action:function () {
+							photoInfoTooltip.wireUi ();
+							toggleButtonEnabledStates ();
+						},
+						text:'WIRE AUTO TOOLTIPS',
+						enabled:false
+					}
+				},
+				{widgetClass:Uize.Widgets.Button.Widget}
+			);
 
 		/*** wire up the page widget ***/
 			page.wireUi ();

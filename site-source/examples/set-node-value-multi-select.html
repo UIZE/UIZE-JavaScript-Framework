@@ -33,12 +33,7 @@
 	<!-- various form elements and a span -->
 
 	<center>
-		<a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select',''); updateStateDisplay ()">Select None</a>
-		<a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select','*'); updateStateDisplay ()">Select All</a>
-		<a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select','Geothermal'); updateStateDisplay ()">Select Geothermal</a>
-		<a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select',['Biofuel','Biomass']); updateStateDisplay ()">Select Chemically Derived</a>
-		<a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select','Hydroelectricity,Wave,Tidal'); updateStateDisplay ()">Select Water Derived</a>
-		<a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select',page.getNodeValue ('select').concat ('Wind')); updateStateDisplay ()">Add Wind</a>
+		<div id="page_buttons-shell"></div>
 
 		<form style="margin-top:20px;" action="" method="GET">
 			<div class="exampleSectionHeading" style="width:180px; margin-bottom:2px;">Renewable Energy</div>
@@ -74,14 +69,55 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Node',
-		'Uize.Json'
+		'Uize.Json',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
 
 		/*** create the example page widget ***/
-			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
+			var page = window.page = UizeSite.Page.Example ();
 
+		/*** add the buttons ***/
+			page.addChild ('buttons',Uize.Widget.V2,{built:false}).addChildren (
+				{
+					selectNone:{
+						text:'Select None',
+						action:function () {page.setNodeValue ('select',''); updateStateDisplay ()}
+					},
+					selectAll:{
+						text:'Select All',
+						action:function () {page.setNodeValue ('select','*'); updateStateDisplay ()}
+					},
+					selectGeothermal:{
+						text:'Select Geothermal',
+						action:function () {page.setNodeValue ('select','Geothermal'); updateStateDisplay ()}
+					},
+					selectChemicallyDerived:{
+						text:'Select Chemically Derived',
+						action:function () {page.setNodeValue ('select',['Biofuel','Biomass']); updateStateDisplay ()}
+					},
+					selectWaterDerived:{
+						text:'Select Select Water Derived',
+						action:function () {
+							page.setNodeValue ('select','Hydroelectricity,Wave,Tidal');
+							updateStateDisplay ();
+						}
+					},
+					addWind:{
+						text:'Add Wind',
+						action:function () {
+							page.setNodeValue ('select',page.getNodeValue ('select').concat ('Wind'));
+							updateStateDisplay ();
+						}
+					}
+				},
+				{
+					widgetClass:Uize.Widgets.Button.Widget,
+					size:'tiny'
+				}
+			);
 		/*** functions for updating state display ***/
 			function updateStateDisplay () {
 				function setNodeValueAsJson (nodeName,value) {page.setNodeValue (nodeName,Uize.Json.to (value,'mini'))}

@@ -55,14 +55,9 @@
 
 	<div id="page_genericAutoTooltip" class="genericAutoTooltip"></div>
 
-	<!-- links for demonstrating with and without auto tooltips -->
+	<!-- buttons for demonstrating with and without auto tooltips -->
 
-	<center>
-		<a id="page-unwireAutoTooltips" href="javascript://" class="buttonLink">UNWIRE AUTO TOOLTIPS</a>
-		<a id="page-wireAutoTooltips" href="javascript://" class="buttonLink">WIRE AUTO TOOLTIPS</a>
-		<br/>
-		<br/>
-	</center>
+	<center id="page_buttons-shell" style="margin-bottom: 20px;"></center>
 
 	<!-- copy with links that have data tucked away in their title attributes -->
 
@@ -86,7 +81,9 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'Uize.Node',
 		'Uize.Widget.AutoTooltip',
-		'Uize.Templates.HashTable'
+		'Uize.Templates.HashTable',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -110,9 +107,33 @@ Uize.module ({
 		/*** wire up links to open in popup window ***/
 			page.wireNode (linkNodes,'click',function () {page.launchPopup ({url:this.href})});
 
-		/*** wire up links for unwiring and wiring auto tooltips ***/
-			page.wireNode ('unwireAutoTooltips','click',function () {genericAutoTooltip.unwireUi ()});
-			page.wireNode ('wireAutoTooltips','click',function () {genericAutoTooltip.wireUi ()});
+		/*** add the buttons for unwiring and wiring auto tooltips ***/
+			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+			function toggleButtonEnabledStates () {
+				buttons.children.unwireAutoTooltips.toggle ('enabled');
+				buttons.children.wireAutoTooltips.toggle ('enabled');
+			}
+			buttons.addChildren (
+				{
+					unwireAutoTooltips:{
+						action:function () {
+							genericAutoTooltip.unwireUi ();
+							toggleButtonEnabledStates ();
+						},
+						text:'UNWIRE AUTO TOOLTIPS'
+					},
+					wireAutoTooltips:{
+						action:function () {
+							genericAutoTooltip.wireUi ();
+							toggleButtonEnabledStates ();
+						},
+						text:'WIRE AUTO TOOLTIPS',
+						enabled:false
+					}
+				},
+				{widgetClass:Uize.Widgets.Button.Widget}
+			);
+
 
 		/*** wire up the page widget ***/
 			page.wireUi ();

@@ -52,7 +52,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td align="center"><a id="page-agitate" class="buttonLink" href="javascript://">AGITATE</a></td>
+			<td id="page_agitateButton-shell" align="center"></td>
 			<td></td>
 		</tr>
 	</table>
@@ -69,7 +69,8 @@ Uize.module ({
 		'Uize.Color',
 		'Uize.Color.xUtil',
 		'Uize.Widget.ColorPicker',
-		'Uize.Widget.ColorCube.Draggable'
+		'Uize.Widget.ColorCube.Draggable',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -119,11 +120,20 @@ Uize.module ({
 			setupColorCorner ('colorBottomLeft');
 			setupColorCorner ('colorBottomRight');
 
+		/*** add agitate button ***/
+			page.addChild (
+				'agitateButton',
+				Uize.Widgets.Button.Widget,
+				{
+					built:false,
+					text:'AGITATE',
+					size:'small',
+					action:agitate
+				}
+			);
+
 		/*** wire up the page widget ***/
 			page.wireUi ();
-
-		/*** wire agitate button ***/
-			page.wireNode ('agitate','click',agitate);
 	}
 });
 

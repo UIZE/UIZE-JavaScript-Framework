@@ -54,7 +54,7 @@
 			</tr>
 			<tr>
 				<td><input id="page-colorBottomLeft" type="text" size="6"/></td>
-				<td align="center"><a id="page-updateButton" class="buttonLink" href="javascript://">UPDATE</a></td>
+				<td id="page_updateButton-shell" align="center"></td>
 				<td><input id="page-colorBottomRight" type="text" size="6"/></td>
 			</tr>
 		</table>
@@ -67,7 +67,8 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.ColorCube'
+		'Uize.Widget.ColorCube',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -91,11 +92,20 @@ Uize.module ({
 			page.setNodeValue ('colorBottomLeft',colorCube.get ('colorBottomLeft'));
 			page.setNodeValue ('colorBottomRight',colorCube.get ('colorBottomRight'));
 
+		/*** add update button ***/
+			page.addChild (
+				'updateButton',
+				Uize.Widgets.Button.Widget,
+				{
+					built:false,
+					text:'UPDATE',
+					size:'small',
+					action:updateColorCubeFromInputs
+				}
+			);
+
 		/*** wire up the page widget ***/
 			page.wireUi ();
-
-		/*** wire update button ***/
-			page.wireNode ('updateButton','click',updateColorCubeFromInputs);
 	}
 });
 
