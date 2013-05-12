@@ -34,12 +34,7 @@
 
 	<!-- progress bar UI -->
 
-	<div style="text-align:center;">
-		<a id="page-toggleInProgress" href="javascript://" class="buttonLink">START TASK</a>
-	</div>
-
-	<br/>
-	<br/>
+	<div id="page_startStopButton-shell" style="text-align:center; margin-bottom: 20px;"></div>
 
 	<center id="page_progressBar-shell"></center>
 </div>
@@ -52,7 +47,8 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Bar.Progress'
+		'Uize.Widget.Bar.Progress',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -70,15 +66,16 @@ Uize.module ({
 				}
 			);
 
-		/*** wire up the link to start/stop the progress bar ***/
-			page.wireNode (
-				'toggleInProgress',
-				'click',
-				function () {
-					page.setNodeInnerHtml (
-						'toggleInProgress',
-						(page.children.progressBar.toggle ('inProgress') ? 'STOP' : 'START') + ' TASK'
-					);
+		/*** add the start/stop button ***/
+			page.addChild (
+				'startStopButton',
+				Uize.Widgets.Button.Widget,
+				{
+					text:'START TASK',
+					action:function () {
+						this.set ({text:(page.children.progressBar.toggle ('inProgress') ? 'STOP' : 'START') + ' TASK'});
+					},
+					built:false
 				}
 			);
 

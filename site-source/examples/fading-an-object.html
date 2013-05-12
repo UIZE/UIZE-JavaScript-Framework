@@ -65,7 +65,7 @@
 		</tr>
 	</table>
 	<br/>
-	<div style="text-align:center;"><a id="page-startFadeButton" class="buttonLink" href="javascript://">RANDOMIZE AND FADE</a></div>
+	<div id="page_startFadeButton-shell" style="text-align:center;"></div>
 </div>
 
 <!-- JavaScript code to make the static HTML "come alive" -->
@@ -78,7 +78,8 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'Uize.Json',
 		'Uize.Fade',
-		'Uize.Color'
+		'Uize.Color',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -109,30 +110,34 @@ Uize.module ({
 				}
 			);
 
-		/*** wire up the page widget ***/
-			page.wireUi ();
-
-		/*** wire up the fade start button ***/
-			page.wireNode (
+		/*** add the fade start button ***/
+			page.addChild (
 				'startFadeButton',
-				'click',
-				function () {
-					function makeRandomColorRgb (swatchImpliedNode) {
-						function getRandom0to255 () {return Math.round (Math.random () * 255)}
-						var rgb = {red:getRandom0to255 (),green:getRandom0to255 (),blue:getRandom0to255 ()};
-						setNodeBgColorFromRgb (swatchImpliedNode,rgb);
-						return rgb;
-					}
-					colorFader.set ({
-						startValue:[makeRandomColorRgb ('color0StartSwatch'),makeRandomColorRgb ('color1StartSwatch')],
-						endValue:[makeRandomColorRgb ('color0EndSwatch'),makeRandomColorRgb ('color1EndSwatch')],
-						quantization:1
-					});
-					displayColorFaderPropertyAsJson ('startValue');
-					displayColorFaderPropertyAsJson ('endValue');
-					colorFader.start ();
+				Uize.Widgets.Button.Widget,
+				{
+					text:'RANDOMIZE AND FADE',
+					action:function () {
+						function makeRandomColorRgb (swatchImpliedNode) {
+							function getRandom0to255 () {return Math.round (Math.random () * 255)}
+							var rgb = {red:getRandom0to255 (),green:getRandom0to255 (),blue:getRandom0to255 ()};
+							setNodeBgColorFromRgb (swatchImpliedNode,rgb);
+							return rgb;
+						}
+						colorFader.set ({
+							startValue:[makeRandomColorRgb ('color0StartSwatch'),makeRandomColorRgb ('color1StartSwatch')],
+							endValue:[makeRandomColorRgb ('color0EndSwatch'),makeRandomColorRgb ('color1EndSwatch')],
+							quantization:1
+						});
+						displayColorFaderPropertyAsJson ('startValue');
+						displayColorFaderPropertyAsJson ('endValue');
+						colorFader.start ();
+					},
+					built:false
 				}
 			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
 	}
 });
 

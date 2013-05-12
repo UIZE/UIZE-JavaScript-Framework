@@ -54,9 +54,7 @@
 
 	<div id="page_rotationViewer" class="rotationViewer insetBorderColor"></div>
 
-	<div style="text-align:center;">
-		<a href="javascript://" class="linkedJs buttonLink" title="spin (360,2700,Uize.Curve.easeInOutPow (4))">360 clockwise</a><a href="javascript://" class="linkedJs buttonLink" title="spin (-360,2700,Uize.Curve.easeInOutPow (4))">360 counter-clockwise</a><a href="javascript://" class="linkedJs buttonLink" title="spin (1080,4000,Uize.Curve.easeInOutPow (4))">3 spins</a><a href="javascript://" class="linkedJs buttonLink" title="spin (360,2700,Uize.Curve.Rubber.easeOutBounce (5,-2,1.5))">spin with bounce</a><a href="javascript://" class="linkedJs buttonLink" title="spin (360,4000,Uize.Curve.Mod.bend (Uize.Curve.Rubber.easeOutElastic (.1),3))">spin with elasticity</a>
-	</div>
+	<div id="page_spinButtons" style="text-align: center;"></div>
 </div>
 
 <!-- JavaScript code to make the static bar HTML "come alive" -->
@@ -70,7 +68,9 @@ Uize.module ({
 		'Uize.Widget.Drag',
 		'Uize.Fade.xFactory',
 		'Uize.Curve.Rubber',
-		'Uize.Curve.Mod'
+		'Uize.Curve.Mod',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -146,6 +146,38 @@ Uize.module ({
 			function spin (degrees,duration,curve) {
 				Uize.Fade.fade (updateRotation,rotation,rotation + degrees,duration,{quantization:1,curve:curve});
 			}
+
+		/*** add the buttons for triggering different spins ***/
+			page.addChild ('spinButtons',Uize.Widget.V2,{built:false})
+				.addChildren (
+					{
+						clockwise:{
+							text:'360 clockwise',
+							action:function () {spin (360,2700,Uize.Curve.easeInOutPow (4))}
+						},
+						counterClockwise:{
+							text:'360 counter-clockwise',
+							action:function () {spin (-360,2700,Uize.Curve.easeInOutPow (4))}
+						},
+						threeSpins:{
+							text:'3 spins',
+							action:function () {spin (1080,4000,Uize.Curve.easeInOutPow (4))}
+						},
+						withBounce:{
+							text:'spin with bounce',
+							action:function () {spin (360,2700,Uize.Curve.Rubber.easeOutBounce (5,-2,1.5))}
+						},
+						withElasticity:{
+							text:'spin with elasticity',
+							action:function () {spin (360,4000,Uize.Curve.Mod.bend (Uize.Curve.Rubber.easeOutElastic (.1),3))}
+						}
+					},
+					{
+						widgetClass:Uize.Widgets.Button.Widget,
+						size:'small'
+					}
+				)
+			;
 
 		/*** initialization ***/
 			Uize.Node.wire (window,'load',function () {spin (360,2700,Uize.Curve.easeInOutPow (4))});

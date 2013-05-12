@@ -32,12 +32,7 @@
 
 	<!-- swap HTML layout with UI to be wired up -->
 
-	<center>
-		<a id="page-content1" class="buttonLink" href="javascript://">Content 1</a>
-		<a id="page-content2" class="buttonLink" href="javascript://">Content 2</a>
-		<br/>
-		<br/>
-	</center>
+	<center id="page_buttons-shell" style="margin-bottom: 20px;"></center>
 	<div id="page_swap" style="position:relative; width:420px; height:320px; border:1px solid #555; margin:auto;"></div>
 </div>
 
@@ -49,7 +44,9 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Swap.Html'
+		'Uize.Widget.Swap.Html',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -75,24 +72,44 @@ Uize.module ({
 				}
 			).fade.set ({duration:1000});
 
+		/*** add the content selector buttons ***/
+			page.addChild ('buttons',Uize.Widget.V2,{built:false})
+				.addChildren (
+					{
+						content1:{
+							text:'Content 1',
+							action:function () {
+								page.children.swap.set ({
+									content:
+										'<div style="height:100%; background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top; padding:20px; font-family:Arial; font-size:30px; text-shadow:1px 0 2px #fff;">' +
+											'Sunlight can be converted into electricity using photovoltaics (PV).<br/><br/>' +
+											'<p style="font-size:20px; letter-spacing:5px; font-style:italic; text-shadow:1px 0 2px #fff;">' +
+												'A solar cell, or photovoltaic cell (PV), is a device that converts light into electric current using the photoelectric effect.' +
+											'</p>' +
+										'</div>'
+								});
+							}
+						},
+						content2:{
+							text:'Content 2',
+							action:function () {
+								page.children.swap.set ({
+									content:
+										'<div style="height:100%; background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228335039877617170&max_dim=500) no-repeat -2px -2px; padding:20px; font-family:Times; color:#ccc; font-size:23px; text-align:left; text-shadow:2px 2px 2px #000;">' +
+											'<hr style="height:10px; background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top;"/>' +
+											'Wind power is the conversion of wind energy into a useful form, such as electricity, using wind turbines. Large scale wind farms are typically connected to the local electric power transmission network, with smaller turbines being used to provide electricity to isolated locations.' +
+											'<hr style="height:10px; background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top;"/>' +
+										'</div>'
+								});
+							}
+						}
+					},
+					{widgetClass:Uize.Widgets.Button.Widget}
+				)
+			;
+
 		/*** wire up the page widget ***/
 			page.wireUi ();
-
-		/*** wire up the content selectors ***/
-			page.wireNode (
-				'content1',
-				'click',
-				function () {
-					page.children.swap.set ({content:'<div style="height:100%; background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top; padding:20px; font-family:Arial; font-size:30px; text-shadow:1px 0 2px #fff;">Sunlight can be converted into electricity using photovoltaics (PV).<br/><br/><p style="font-size:20px; letter-spacing:5px; font-style:italic; text-shadow:1px 0 2px #fff;">A solar cell, or photovoltaic cell (PV), is a device that converts light into electric current using the photoelectric effect.</p></div>'});
-				}
-			);
-			page.wireNode (
-				'content2',
-				'click',
-				function () {
-					page.children.swap.set ({content:'<div style="height:100%; background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228335039877617170&max_dim=500) no-repeat -2px -2px; padding:20px; font-family:Times; color:#ccc; font-size:23px; text-align:left; text-shadow:2px 2px 2px #000;"><hr style="height:10px; background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top;"/>Wind power is the conversion of wind energy into a useful form, such as electricity, using wind turbines. Large scale wind farms are typically connected to the local electric power transmission network, with smaller turbines being used to provide electricity to isolated locations.<hr style="height:10px; background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top;"/></div>'});
-				}
-			);
 	}
 });
 

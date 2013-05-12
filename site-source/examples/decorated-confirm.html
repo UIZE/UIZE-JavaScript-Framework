@@ -37,10 +37,7 @@
 		all the JavaScript and HTML necessary for the decorated dialogs is only loaded in and wired up when necessary. This is an example of lazy loading (or deferred loading). Because the dialog functionality is implemented in the <a href="../reference/Uize.Widget.Page.html"><code>Uize.Widget.Page</code></a> page widget class, any page that uses this class, and any widget that is on the page widget's widget tree, will have access to this functionality.</p>
 	</div>
 
-	<center>
-		<a id="page-confirm" href="javascript://" class="buttonLink">SHOW A DELETE CONFIRMATION</a>
-		<a id="page-inform" href="javascript://" class="buttonLink">SHOW AN INFO DIALOG</a>
-	</center>
+	<center id="page_buttons"></center>
 </div>
 
 <!-- JavaScript code to wire up the page -->
@@ -50,7 +47,9 @@
 Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
-		'UizeSite.Page.Example'
+		'UizeSite.Page.Example',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -58,51 +57,60 @@ Uize.module ({
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
+		/*** add the buttons for showing the dialogs ***/
+			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+
+			/*** add the button for showing the delete confirmation dialog ***/
+				buttons.addChild (
+					'showDeleteConfirmationDialog',
+					Uize.Widgets.Button.Widget,
+					{
+						text:'SHOW A DELETE CONFIRMATION',
+						action:function () {
+							page.confirm ({
+								title:'Confirm Delete',
+								message:'Are you sure you would like to delete the selected items?',
+								okText:'DELETE',
+								cancelText:'DON\'T DELETE',
+								yesHandler:
+									function () {
+										page.inform ({
+											title:'Items Deleted',
+											message:'Your items were successfully deleted.',
+											state:'success'
+										})
+									},
+								noHandler:
+									function () {
+										page.inform ({
+											title:'Canceled Delete!',
+											message:'You chose to NOT delete the items.',
+											state:'error'
+										})
+									}
+							});
+						}
+					}
+				);
+
+			/*** add the button for showing the info dialog ***/
+				buttons.addChild (
+					'showInfoDialog',
+					Uize.Widgets.Button.Widget,
+					{
+						text:'SHOW AN INFO DIALOG',
+						action:function () {
+							page.inform ({
+								title:'Decorated Inform Dialog',
+								message:'This is to inform you that the dialog window you are currently looking at is a decorated infom dialog. I hope this information is helpful to you.',
+								okText:'DONE'
+							})
+						}
+					}
+				);
+
 		/*** wire up the page widget ***/
 			page.wireUi ();
-
-		/*** wire up the delete confirmation link ***/
-			page.wireNode (
-				'confirm',
-				'click',
-				function () {
-					page.confirm ({
-						title:'Confirm Delete',
-						message:'Are you sure you would like to delete the selected items?',
-						okText:'DELETE',
-						cancelText:'DON\'T DELETE',
-						yesHandler:
-							function () {
-								page.inform ({
-									title:'Items Deleted',
-									message:'Your items were successfully deleted.',
-									state:'success'
-								})
-							},
-						noHandler:
-							function () {
-								page.inform ({
-									title:'Canceled Delete!',
-									message:'You chose to NOT delete the items.',
-									state:'error'
-								})
-							}
-					});
-				}
-			);
-
-		/*** wire up the inform link ***/
-			page.wireNode (
-				'inform',
-				'click',
-				function () {
-					page.inform ({
-						title:'Decorated Inform Dialog',
-						message:'This is to inform you that the dialog window you are currently looking at is a decorated infom dialog. I hope this information is helpful to you.',
-						okText:'DONE'
-					})
-				}
-			);
 	}
 });
 

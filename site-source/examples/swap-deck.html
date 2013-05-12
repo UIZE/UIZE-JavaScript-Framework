@@ -76,15 +76,7 @@
 
 	<!-- swap HTML layout with UI to be wired up -->
 
-	<center style="margin-bottom:5px;">
-		<a class="buttonLink linkedJs" href="javascript://" title="swap.set ({itemNo:0})">Item 0</a>
-		<a class="buttonLink linkedJs" href="javascript://" title="swap.set ({itemNo:1})">Item 1</a>
-		<a class="buttonLink linkedJs" href="javascript://" title="swap.set ({itemNo:2})">Item 2</a>
-		<a class="buttonLink linkedJs" href="javascript://" title="swap.set ({itemNo:3})">Item 3</a>
-		<a class="buttonLink linkedJs" href="javascript://" title="swap.set ({itemNo:4})">Item 4</a>
-		<a class="buttonLink linkedJs" href="javascript://" title="swap.set ({itemNo:5})">Item 5</a>
-		<br/>
-	</center>
+	<center id="page_buttons-shell" style="margin-bottom:5px;"></center>
 
 	<div id="page_swap" style="position:relative; width:500px; height:357px; border-width:10px; border-style:solid; margin:auto;" class="insetBorderColor">
 		<div id="page_swap-item0" class="deckItem" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&view=front&pid=228267745724726415&max_dim=500);">
@@ -140,7 +132,9 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Swap.Deck'
+		'Uize.Widget.Swap.Deck',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -166,6 +160,22 @@ Uize.module ({
 				}
 			);
 			swap.fade.set ({duration:1000})
+
+		/*** add the buttons for selecting items ***/
+			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+			Uize.forEach (
+				6,
+				function (_itemNo) {
+					buttons.addChild (
+						'item' + _itemNo,
+						Uize.Widgets.Button.Widget,
+						{
+							text:'Item ' + _itemNo,
+							action:function () {swap.set ({itemNo:_itemNo})}
+						}
+					);
+				}
+			);
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
