@@ -67,7 +67,10 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			function _updateUiText () {
-				this._text != _undefined && this.isWired && this.setNodeInnerHtml ('text',this._text);
+				var _this = this;
+				_this.isWired && _this._text != _undefined && 
+					_this.setNodeInnerHtml (_this.getNode ('text') || _this.getNode (),_this._text)
+				;
 				/*?
 					Implied Nodes
 						text Implied Node
@@ -262,11 +265,6 @@ Uize.module ({
 										click:_setStateAndFireEvent
 									}
 								);
-
-							/*** initialize text value if undefined ***/
-								_this._text == _undefined
-									&& _this.set ({_text:_this.getNodeValue('text')})
-								;
 
 							_superclass.prototype.wireUi.call (_this);
 						}
