@@ -40,17 +40,15 @@
 	<!-- select nodes that make up the UI of the Uize.Widget.SelectTree object -->
 
 	<center>
-	<a id="page-animalsLink" href="javascript://" class="buttonLink" title="click to populate selector with a hierarchy of animals (the initial default)">ANIMALS</a>&nbsp;
-	<a id="page-plantsLink" href="javascript://" class="buttonLink" title="click to populate selector with a hierarchy of plants">PLANTS</a><br/>
-	<br/>
-	<form>
-		<select id="page_selectTree-level1"></select>
-		<select id="page_selectTree-level2"></select>
-		<select id="page_selectTree-level3"></select>
-		<select id="page_selectTree-level4"></select>
-		<select id="page_selectTree-level5"></select>
-		<input id="page_selectTree-submitButton" type="submit" value="SUBMIT" onclick="return false">
-	</form>
+		<div id="page_buttons-shell" style="margin: 10px 0;"></div>
+		<form>
+			<select id="page_selectTree-level1"></select>
+			<select id="page_selectTree-level2"></select>
+			<select id="page_selectTree-level3"></select>
+			<select id="page_selectTree-level4"></select>
+			<select id="page_selectTree-level5"></select>
+			<input id="page_selectTree-submitButton" type="submit" value="SUBMIT" onclick="return false">
+		</form>
 	</center>
 </div>
 
@@ -63,7 +61,9 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Node',
-		'Uize.Widget.Tree.Select'
+		'Uize.Widget.Tree.Select',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -74,9 +74,24 @@ Uize.module ({
 		/*** create the Uize.Widget.SelectTree object ***/
 			var selectTree = page.addChild ('selectTree',Uize.Widget.Tree.Select,{items:animals});
 
-		/*** wire up items selector links ***/
-			page.wireNode ('animalsLink','click',function () {selectTree.set ({items:animals})});
-			page.wireNode ('plantsLink','click',function () {selectTree.set ({items:plants})});
+		/*** add the populator buttons ***/
+			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+			buttons.addChild (
+				'populateWithAnimals',
+				Uize.Widgets.Button.Widget,
+				{
+					text:'POPULATE WITH ANIMALS',
+					action:function () {selectTree.set ({items:animals})}
+				}
+			);
+			buttons.addChild (
+				'populateWithPlants',
+				Uize.Widgets.Button.Widget,
+				{
+					text:'POPULATE WITH PLANTS',
+					action:function () {selectTree.set ({items:plants})}
+				}
+			);
 
 		/*** wire up the page widget ***/
 			page.wireUi ();

@@ -47,8 +47,7 @@
 	<!-- various form elements and a span -->
 
 	<center>
-		<a id="page-setAllToFalse" href="javascript://" class="buttonLink">Set all to false</a>
-		<a id="page-setAllToTrue" href="javascript://" class="buttonLink">Set all to true</a>
+		<div id="page_buttons"></div>
 
 		<form style="margin-top:10px;">
 			<table class="paramsTable">
@@ -110,7 +109,9 @@
 Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
-		'UizeSite.Page.Example'
+		'UizeSite.Page.Example',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -126,12 +127,25 @@ Uize.module ({
 				);
 			}
 
+		/*** add the buttons ***/
+			page.addChild ('buttons',Uize.Widget.V2,{built:false})
+				.addChildren (
+					{
+						setAllToFalse:{
+							text:'Set all to false',
+							action:function () {setValueForAllNodes (false)}
+						},
+						setAllToTrue:{
+							text:'Set all to true',
+							action:function () {setValueForAllNodes (true)}
+						}
+					},
+					{widgetClass:Uize.Widgets.Button.Widget}
+				)
+			;
+
 		/*** wire up the page widget ***/
 			page.wireUi ();
-
-		/*** wire up the links for setting the values ***/
-			page.wireNode ('setAllToTrue','click',function () {setValueForAllNodes (true)});
-			page.wireNode ('setAllToFalse','click',function () {setValueForAllNodes (false)});
 
 		/*** initialize the value for the nodes ***/
 			setValueForAllNodes (false);

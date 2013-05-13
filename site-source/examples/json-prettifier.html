@@ -150,9 +150,7 @@
 			</tr>
 		</table>
 
-		<a id="page-serialize" class="buttonLink" href="javascript://">SERIALIZE AGAIN</a>
-		<a id="page-resetTestData" class="buttonLink" href="javascript://">RESET TEST DATA</a>
-
+		<div id="page_buttons"></div>
 		<br style="clear:left;"/>
 	</div>
 </div>
@@ -167,7 +165,9 @@ Uize.module ({
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
 		'Uize.Node.Form',
-		'UizeSite.TestData.Object'
+		'UizeSite.TestData.Object',
+		'Uize.Widget.V2',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -242,21 +242,32 @@ Uize.module ({
 				serializeUsingCurrentSettings ();
 			}
 
+		/*** add the buttons ***/
+			page.addChild ('buttons',Uize.Widget.V2,{built:false})
+				.addChildren (
+					{
+						serialize:{
+							text:'SERIALIZE AGAIN',
+							action:serializeUsingCurrentSettings
+						},
+						resetTestData:{
+							text:'RESET TEST DATA',
+							action:function () {
+								page.confirm ({
+									message:'Are you sure you would like to reset the source JSON to the test data?',
+									yesHandler:resetTestData
+								});
+							}
+						}
+					},
+					{widgetClass:Uize.Widgets.Button.Widget}
+				)
+			;
+
 		/*** wire up the page widget ***/
 			page.wireUi ();
 
 		/*** wire up additional UI ***/
-			page.wireNode ('serialize','click',serializeUsingCurrentSettings);
-			page.wireNode (
-				'resetTestData',
-				'click',
-				function () {
-					page.confirm ({
-						message:'Are you sure you would like to reset the source JSON to the test data?',
-						yesHandler:resetTestData
-					});
-				}
-			);
 			page.wireNode ('serializedJson','click',function () {this.select ()});
 
 			/*** wire preset links ***/

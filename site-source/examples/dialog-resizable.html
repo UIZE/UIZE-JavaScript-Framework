@@ -33,9 +33,7 @@
 		<p>To open the dialog, click the <b>"OPEN DIALOG"</b> button below.</p>
 	</div>
 
-	<center>
-		<p><a id="page-openDialogLink" href="javascript://" class="buttonLink">OPEN DIALOG</a></p>
-	</center>
+	<center id="page_launcherButton-shell" style="margin-bottom: 20px;"></center>
 
 	<!-- programmatic interface examples -->
 
@@ -63,7 +61,8 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'Uize.Widget.Dialog.xResizable',
 		'UizeSite.Templates.Dialog',
-		'Uize.String'
+		'Uize.String',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -90,11 +89,19 @@ Uize.module ({
 				}
 			);
 
+		/*** add the launcher button ***/
+			page.addChild (
+				'launcherButton',
+				Uize.Widgets.Button.Widget,
+				{
+					text:'OPEN DIALOG',
+					action:function () {dialog.set ({shown:true})},
+					built:false
+				}
+			);
+
 		/*** wire up the page widget ***/
 			page.wireUi ();
-
-		/*** wire up link for opening dialog ***/
-			page.wireNode ('openDialogLink','click',function () {dialog.set ({shown:true})});
 	}
 });
 

@@ -35,9 +35,7 @@
 		<!-- calculator widget's UI HTML gets dynamically inserted in here -->
 	</center>
 
-	<center style="padding-top:10px;">
-		<a id="page-launchWidgetInPopup" href="javascript:window.open ('../widgets/calculator/web.html','calculator','width=240, height=314, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no').focus (), undefined;" class="buttonLink">LAUNCH CALCULATOR IN POPUP</a>
-	</center>
+	<center id="page_launcherButton-shell" style="padding-top:10px;"></center>
 </div>
 
 <!-- JavaScript code to make the HTML "come alive" -->
@@ -49,7 +47,8 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Calculator',
-		'Uize.Templates.Calculator'
+		'Uize.Templates.Calculator',
+		'Uize.Widgets.Button.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -62,6 +61,23 @@ Uize.module ({
 				'calculator',
 				Uize.Widget.Calculator,
 				{built:false,html:Uize.Templates.Calculator}
+			);
+
+		/*** add the launcher button ***/
+			page.addChild (
+				'launcherButton',
+				Uize.Widgets.Button.Widget,
+				{
+					text:'LAUNCH CALCULATOR IN POPUP',
+					action:function () {
+						window.open (
+							'../widgets/calculator/web.html',
+							'calculator',
+							'width=240, height=314, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no'
+						).focus ()
+					},
+					built:false
+				}
 			);
 
 		/*** wire up the page widget ***/
