@@ -1,0 +1,71 @@
+.`` {
+	position: relative;
+}
+
+.`text` {
+	display: inline-block;
+}
+
+.`onIndicator` {
+	display: block;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	bottom: 5px;
+	background: rgba(150,150,150,.1);
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgba(0,0,0,.1) rgba(255,255,255,.8) rgba(255,255,255,.8) rgba(0,0,0,.1);
+	box-shadow: inset 1px 1px 4px rgba(0,0,0,.1);
+}
+
+.`normal-active` .`onIndicator` {
+	background: #0e0;
+	box-shadow: 0 0 4px #0f0;
+}
+
+.`normal-disabled` .`onIndicator` {
+	opacity: .5;
+}
+
+/*** styling for different sizes ***/
+	.`tiny` .`text` {
+		width: 26px;
+	}
+	.`tiny` .`onIndicator` {
+		width: 5px;
+		top: 3px;
+		right: 3px;
+		bottom: 3px;
+	}
+
+	.`small` .`text` {
+		width: 31px;
+	}
+	.`small` .`onIndicator` {
+		width: 7px;
+		top: 3px;
+		right: 3px;
+		bottom: 3px;
+	}
+
+	.`medium` .`text` {
+		width: 34px;
+	}
+	.`medium` .`onIndicator` {
+		width: 8px;
+		top: 4px;
+		right: 4px;
+		bottom: 4px;
+	}
+
+	.`large` .`text` {
+		width: 43px;
+	}
+	.`large` .`onIndicator` {
+		width: 11px;
+		top: 5px;
+		right: 5px;
+		bottom: 5px;
+	}
+
