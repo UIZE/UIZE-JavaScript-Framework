@@ -175,7 +175,7 @@ Uize.module ({
 
 				_updateUiRootNodeClasses:function () {
 					var _this = this;
-					if (_this.isWired) {
+					if (_this.isWired && _this.Class.enableRootNodeCssClasses) {
 						var _rootNode = _this.getNode ();
 						if (_rootNode) {
 							var _newClassName = _this.rootNodeCssClasses ();
@@ -230,7 +230,8 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				_stateToCssBindings:{}
+				_stateToCssBindings:{},
+				enableRootNodeCssClasses:true
 			},
 
 			stateProperties:{

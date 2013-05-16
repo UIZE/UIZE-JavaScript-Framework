@@ -25,6 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Dialog',
+	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Node',
 		'Uize.Widget.Button',
@@ -174,7 +175,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										close
-											An instance of the =Uize.Widget.Button= class, that lets the user close the dialog.
+											A button instance, that lets the user close the dialog.
 
 											When this button is clicked, the =Close= event is fired on the dialog instance.
 
@@ -189,7 +190,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										qualifiedOk
-											An instance of the =Uize.Widget.Button= class, that lets the user submit the dialog with a qualification.
+											A button instance, that lets the user submit the dialog with a qualification.
 
 											The =qualifiedOk= button is like a second =ok= button (kind of like an "ok, but with this one condition..." action). Having a second ok-like button is useful in a few cases, bust most dialogs will not provide markup for this button. When this button is clicked, the =Qualified Ok= event is fired on the dialog instance.
 
@@ -204,7 +205,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										ok
-											An instance of the =Uize.Widget.Button= class, that lets the user submit the dialog.
+											A button instance, that lets the user submit the dialog.
 
 											When this button is clicked, the =Ok= event is fired on the dialog instance. The text for this button can be controlled via the =okText= and =defaultOkText= state properties.
 
@@ -219,7 +220,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										cancel
-											An instance of the =Uize.Widget.Button= class, that lets the user cancel (and close) the dialog.
+											A button instance, that lets the user cancel (and close) the dialog.
 
 											When this button is clicked, the =Cancel= event is fired on the dialog instance. The text for this button can be controlled via the =cancelText= and =defaultCancelText= state properties.
 
@@ -240,7 +241,9 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = _Uize_Widget.Button.addChildButton;
+			_classPrototype._addChildButton = function (_name,_action) {
+				this.addChild (_name,this.Class.buttonWidgetClass).wire ('Click',_action);
+			};
 
 			_classPrototype._dismiss = function (_dismissalEvent) {
 				this.fire (_dismissalEvent).abort || this.set ({_shown:_false})
@@ -793,6 +796,9 @@ Uize.module ({
 					*/
 				}
 			});
+
+		_class.buttonWidgetClass = Uize.Widget.Button;
+		_class.enableRootNodeCssClasses = false;
 
 		return _class;
 	}

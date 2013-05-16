@@ -1,0 +1,56 @@
+<%@
+	input ({
+		idPrefix:'string',
+		contents:'string',
+		topLeftButtons:'string'
+	});
+	required (
+		'Uize.Widgets.Button.Widget'
+	);
+%><div id="<% .idPrefix %>-shield" class="<%= this.cssClass ('shield') %>"></div>
+
+<div id="<% .idPrefix %>" class="<%= this.rootNodeCssClasses () %>">
+	<div class="<%= this.cssClass ('shadow4') %>"></div>
+	<div class="<%= this.cssClass ('shadow3') %>"></div>
+	<div class="<%= this.cssClass ('shadow2') %>"></div>
+	<div class="<%= this.cssClass ('shadow') %>"></div>
+	<div class="<%= this.cssClass ('decoration') %>"></div>
+
+	<!-- sides -->
+		<div id="<% .idPrefix %>_resizer-west" class="<%= this.cssClass ('cornerEastWest') %> <%= this.cssClass ('edgeWest') %>"></div>
+		<div id="<% .idPrefix %>_resizer-east" class="<%= this.cssClass ('cornerEastWest') %> <%= this.cssClass ('edgeEast') %>"></div>
+		<div id="<% .idPrefix %>_resizer-north" class="<%= this.cssClass ('cornerNorthSouth') %> <%= this.cssClass ('edgeNorth') %>"></div>
+		<div id="<% .idPrefix %>_resizer-south" class="<%= this.cssClass ('cornerNorthSouth') %> <%= this.cssClass ('edgeSouth') %>"></div>
+
+	<!-- corners -->
+		<div id="<% .idPrefix %>_resizer-northWest" class="<%= this.cssClass ('cornerCorner') %> <%= this.cssClass ('edgeWest') %> <%= this.cssClass ('edgeNorth') %>"></div>
+		<div id="<% .idPrefix %>_resizer-northEast" class="<%= this.cssClass ('cornerCorner') %> <%= this.cssClass ('edgeEast') %> <%= this.cssClass ('edgeNorth') %>"></div>
+		<div id="<% .idPrefix %>_resizer-southWest" class="<%= this.cssClass ('cornerCorner') %> <%= this.cssClass ('edgeWest') %> <%= this.cssClass ('edgeSouth') %>"></div>
+		<div id="<% .idPrefix %>_resizer-southEast" class="<%= this.cssClass ('cornerCorner') %> <%= this.cssClass ('edgeEast') %> <%= this.cssClass ('edgeSouth') %>"></div>
+
+	<!-- title bar -->
+		<div class="<%= this.cssClass ('bar') %> <%= this.cssClass ('titleBar') %>">
+			<% .topLeftButtons %>
+			<div id="<% .idPrefix %>-title" class="<%= this.cssClass ('title') %>"></div>
+			<%=
+				this.childHtml ({
+					name:'close',
+					widgetClass:Uize.Widgets.Button.Widget,
+					text:'X',
+					size:'tiny'
+				})
+			%>
+		</div>
+
+	<!-- contents -->
+		<div id="<% .idPrefix %>-contents" class="<%= this.cssClass ('contents') %>">
+			<% .contents %>
+		</div>
+
+	<!-- status bar -->
+		<div class="<%= this.cssClass ('bar') %> <%= this.cssClass ('statusBar') %>">
+			<a id="<% .idPrefix %>_cancel" class="<%= this.cssClass ('cancelButton') %> button"><span id="<% .idPrefix %>_cancel-text">CANCEL</span></a>
+			<a id="<% .idPrefix %>_ok" class="<%= this.cssClass ('okButton') %> button"><span id="<% .idPrefix %>_ok-text">OK</span></a>
+		</div>
+</div>
+
