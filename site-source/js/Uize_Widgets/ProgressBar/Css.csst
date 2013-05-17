@@ -1,3 +1,4 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
 .`` {
 	position: relative;
 }
@@ -41,36 +42,39 @@
 }
 
 /*** different sizes ***/
+<%
+	var _sizes = Uize.Widgets.CssUtil.sizes;
+%>
 	.`tiny` {
-		height: 23px;
+		height: <%= _sizes.tiny.outer %>px;
 	}
 	.`tiny` .`statusText` {
-		font-size: 13px;
+		font-size: <%= _sizes.tiny.font %>px;
 		line-height: 20px;
 	}
 
 	.`small` {
-		height: 28px;
+		height: <%= _sizes.small.outer %>px;
 	}
 	.`small` .`statusText` {
-		font-size: 14px;
+		font-size: <%= _sizes.small.font %>px;
 		line-height: 24px;
 	}
 
 	.`medium` {
-		height: 38px;
+		height: <%= _sizes.medium.outer %>px;
 	}
 	.`medium` .`statusText` {
-		font-size: 17px;
+		font-size: <%= _sizes.medium.font %>px;
 		line-height: 34px;
 		letter-spacing: 1px;
 	}
 
 	.`large` {
-		height: 51px;
+		height: <%= _sizes.large.outer %>px;
 	}
 	.`large` .`statusText` {
-		font-size: 21px;
+		font-size: <%= _sizes.large.font %>px;
 		line-height: 46px;
 		letter-spacing: 2px;
 	}
