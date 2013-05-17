@@ -29,7 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledCss',
 	required:[
 		'Uize.Url',
-		'Uize.Build.Util'
+		'Uize.Build.Util',
+		'Uize.Template'
 	],
 	builder:function () {
 		return {
@@ -52,15 +53,17 @@ Uize.module ({
 					_cssClassPrefix = Uize.Build.Util.moduleNameFromModulePath (
 						_cssSource.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length),
 						true
-					).replace (/\./g,'_')
+					).replace (/\./g,'_'),
+					_template = Uize.Template.compile (
+						this.readFile ({path:_cssSource}).replace (
+							/`([^`]*)`/g,
+							function (_match,_cssClass) {return _cssClassPrefix + (_cssClass && '-') + _cssClass}
+						),
+						{result:'full'}
+					)
 				;
-				console.log (_cssClassPrefix);
-				return this.readFile ({path:_cssSource}).replace (
-					/`([^`]*)`/g,
-					function (_match,_cssClass) {
-						return _cssClassPrefix + (_cssClass && '-') + _cssClass;
-					}
-				);
+				Uize.require (_template.required);
+				return _template.templateFunction ();
 			}
 		};
 	}
