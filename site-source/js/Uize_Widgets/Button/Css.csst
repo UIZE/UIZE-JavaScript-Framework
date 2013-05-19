@@ -1,6 +1,19 @@
 <%@ required ('Uize.Widgets.CssUtil'); %>
 <%
 	var _borderWidth = 1;
+
+	function _buttonBgGradient (_topColor,_bottomColor,_fallbackColor) {
+		%>
+		background: <%= _fallbackColor %>; /* Old browsers */
+		background: -moz-linear-gradient(top,  <%= _topColor %> 0%, <%= _bottomColor %> 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,<%= _topColor %>), color-stop(100%,<%= _bottomColor %>)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  <%= _topColor %> 0%,<%= _bottomColor %> 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  <%= _topColor %> 0%,<%= _bottomColor %> 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  <%= _topColor %> 0%,<%= _bottomColor %> 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  <%= _topColor %> 0%,<%= _bottomColor %> 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='<%= _topColor %>', endColorstr='<%= _bottomColor %>',GradientType=0 ); /* IE6-9 */
+		<%
+	}
 %>
 /*** base styling ***/
 	.``, .``:link, .``:visited, .``:hover, .``:active {
@@ -23,16 +36,7 @@
 			border-color: #ccc #999 #999 #ccc;
 			color: #444;
 			text-shadow: 1px -1px 0 #fff, 1px 0px 0 #fff, 1px 1px 0 #fff;
-
-			/*** gradient ***/
-				background: #eee; /* Old browsers */
-				background: -moz-linear-gradient(top,  #ffffff 0%, #e0e0e0 100%); /* FF3.6+ */
-				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e0e0e0)); /* Chrome,Safari4+ */
-				background: -webkit-linear-gradient(top,  #ffffff 0%,#e0e0e0 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-linear-gradient(top,  #ffffff 0%,#e0e0e0 100%); /* Opera 11.10+ */
-				background: -ms-linear-gradient(top,  #ffffff 0%,#e0e0e0 100%); /* IE10+ */
-				background: linear-gradient(to bottom,  #ffffff 0%,#e0e0e0 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e0',GradientType=0 ); /* IE6-9 */
+			<% _buttonBgGradient ('#fff','#e0e0e0','#eee') %>
 		}
 
 		.`normal-over`,
@@ -81,16 +85,7 @@
 		.`positive`:active {
 			border-color: #9c9 #696 #585 #9c9;
 			color: #fff;
-
-			/*** gradient ***/
-				background: #5a2; /* Old browsers */
-				background: -moz-linear-gradient(top,  #8d4 0%, #592 100%); /* FF3.6+ */
-				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8d4), color-stop(100%,#592)); /* Chrome,Safari4+ */
-				background: -webkit-linear-gradient(top,  #8d4 0%,#592 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-linear-gradient(top,  #8d4 0%,#592 100%); /* Opera 11.10+ */
-				background: -ms-linear-gradient(top,  #8d4 0%,#592 100%); /* IE10+ */
-				background: linear-gradient(to bottom,  #8d4 0%,#592 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8d4', endColorstr='#592',GradientType=0 ); /* IE6-9 */
+			<% _buttonBgGradient ('#8d4','#592','#5a2') %>
 		}
 
 		.`positive-over`,
@@ -123,6 +118,55 @@
 		.`positive-disabled`:visited,
 		.`positive-disabled`:hover,
 		.`positive-disabled`:active {
+			border-color: #bc9;
+			background: #bd8;
+			filter: none;
+			color: rgba(255,255,255,.5);
+			text-shadow: none;
+			cursor: default;
+		}
+
+	/*** negative flavor ***/
+		.`negative`,
+		.`negative`:link,
+		.`negative`:visited,
+		.`negative`:hover,
+		.`negative`:active {
+			border-color: #9c9 #696 #585 #9c9;
+			color: #fff;
+			<% _buttonBgGradient ('#8d4','#592','#5a2') %>
+		}
+
+		.`negative-over`,
+		.`negative-over`:link,
+		.`negative-over`:visited,
+		.`negative-over`:hover,
+		.`negative-over`:active {
+			border-color: #7a7 #474 #474 #7a7;
+			color: #fff;
+			text-shadow: 1px -1px 1px rgba(0,0,0,.1), 1px 0px 1px rgba(0,0,0,.1), 1px 1px 1px rgba(0,0,0,.1);
+			background: #6b3;
+			filter: none;
+		}
+
+		.`negative-active`,
+		.`negative-active`:link,
+		.`negative-active`:visited,
+		.`negative-active`:hover,
+		.`negative-active`:active {
+			border-color: #584;
+			color: #fff;
+			text-shadow: 1px -1px 1px rgba(0,0,0,.1), 1px 0px 1px rgba(0,0,0,.1), 1px 1px 1px rgba(0,0,0,.1);
+			box-shadow: inset 0 4px 6px rgba(0,0,0,.1);
+			background: #7c4;
+			filter: none;
+		}
+
+		.`negative-disabled`,
+		.`negative-disabled`:link,
+		.`negative-disabled`:visited,
+		.`negative-disabled`:hover,
+		.`negative-disabled`:active {
 			border-color: #bc9;
 			background: #bd8;
 			filter: none;
