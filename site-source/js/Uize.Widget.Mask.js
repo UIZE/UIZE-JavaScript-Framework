@@ -167,7 +167,7 @@ Uize.module ({
 
 					_this.displayNode(_imgNode, _img);
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

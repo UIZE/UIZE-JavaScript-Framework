@@ -380,7 +380,7 @@ Uize.module ({
 
 			_classPrototype.wireUi = function () {
 				this.setNodeStyle ('',{overflow:'hidden'});
-				_superclass.prototype.wireUi.call (this);
+				_superclass.doMy (this,'wireUi');
 			};
 
 		/*** State Properties ***/

@@ -67,7 +67,7 @@ Uize.module ({
 						}
 					);
 				} else {
-					_superclass.prototype.setItemExpanded.call (_this,_itemSpecifier,_expanded);
+					_superclass.doMy (_this,'setItemExpanded',[_itemSpecifier,_expanded]);
 				}
 			};
 
@@ -151,7 +151,7 @@ Uize.module ({
 							}
 					});
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

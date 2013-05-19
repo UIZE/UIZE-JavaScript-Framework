@@ -85,7 +85,7 @@ Uize.module ({
 					)
 				);
 
-				_superclass.prototype.handleDialogSubmit.call(_this, _valueInfo);
+				_superclass.doMy (_this,'handleDialogSubmit',[_valueInfo]);
 			};
 
 		/*** State Properties ***/

@@ -98,7 +98,7 @@ Uize.module ({
 
 				if (_this.isWired) {
 					_this._updateUiText ();
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -112,7 +112,7 @@ Uize.module ({
 								&& _this.set ({_text:_this.getNodeValue('text')})
 							;
 
-						_superclass.prototype.wireUi.call (_this);
+						_superclass.doMy (_this,'wireUi');
 					}
 				}
 			};

@@ -146,17 +146,17 @@ Uize.module ({
 							This hook method is useful when a =Uize.Widget.Options= subclass wants specific data from each value object within the =values= state property passed to the option button child widget when it is created. This data is added to the =optionWidgetProperties= which are common accross all option buton child widgets.
 
 							EXAMPLE
-							...........................................................................................
-							_class.prototype.getOptionProperties = function(valueNo, valueObject) {
+							................................................................................
+							_class.prototype.getOptionProperties = function (valueNo, valueObject) {
 								return Uize.copyInto(
-									_superclass.prototype.getOptionProperties.call (this, valueNo, valueObject) || {},
+									_superclass.doMy (this,'getOptionProperties',[valueNo,valueObject]) || {},
 									{
 										value:valueObject.name,
 										valueDetails:valueObject.valueDetails
 									}
 								);
 							};
-							...........................................................................................
+							................................................................................
 
 							In the above example, the =getOptionProperties= hook method was overridden in a subclass to add =value= and =valueDetails= properties to the state properties that will be set on the option button child widget. These values are retrieved from the =valueObjectOBJ=.
 				*/
@@ -165,7 +165,7 @@ Uize.module ({
 				var _this = this;
 				if (_this.isWired) {
 					_this._updateUiOptionSelected();
-					_superclass.prototype.updateUi.call(_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -284,7 +284,7 @@ Uize.module ({
 							}
 						}
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 					_this._updateValueNo ();
 				}
 			};

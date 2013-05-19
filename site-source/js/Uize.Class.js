@@ -2572,6 +2572,10 @@ Uize.module ({
 				return _subclass;
 			};
 
+			_class.doMy = function (_instance,_methodName,_arguments) {
+				this.prototype [_methodName].apply (_instance,_arguments || _sacredEmptyArray);
+			};
+
 			_class.subclass = function (_arg0,_arg1) {
 				var _subclass;
 				if (arguments.length == 1 && !_isFunction (_arg0)) {

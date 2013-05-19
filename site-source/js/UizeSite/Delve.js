@@ -1724,7 +1724,7 @@ Uize.module ({
 					_this._updateUiWindowInspected ();
 					_this._updateUiTreeListDropdown ();
 					_this._updateUiVariousaTabs ();
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -1877,7 +1877,7 @@ Uize.module ({
 							}
 						);
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					_this.set ({_objectInspectedPath:_this._getPageWidgetName ()});
 				}

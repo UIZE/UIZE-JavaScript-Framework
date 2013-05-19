@@ -102,7 +102,7 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					/*** wire a click event to catch clicking on any preset link ***/
 						_this.wireNode (

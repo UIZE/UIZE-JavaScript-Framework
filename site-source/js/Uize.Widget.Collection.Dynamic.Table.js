@@ -43,7 +43,7 @@ Uize.module ({
 					var _dummyNode = document.createElement ('DIV');
 					_dummyNode.innerHTML =
 						'<table><tbody>' +
-						_superclass.prototype.processItemTemplate.call (_this, _templateNode) (_input) +
+						_superclass.doMy (_this,'processItemTemplate',[_templateNode]) (_input) +
 						'</tbody></table>'
 					;
 					return Uize.map (_dummyNode.firstChild.firstChild.childNodes,'value');

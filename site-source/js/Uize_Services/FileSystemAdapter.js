@@ -88,7 +88,7 @@ Uize.module ({
 					return _path.slice (0,((Math.max (_path.lastIndexOf ('/'),_path.lastIndexOf ('\\')) + 1) || 1) - 1);
 				}
 			}
-		});;
+		});
 	}
 });
 

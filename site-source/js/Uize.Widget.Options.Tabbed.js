@@ -114,7 +114,7 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 					var _valueNo = _this._lastShownTabBodyNo = _this.get ('valueNo');
 					Uize.forEach (
 						_this.get ('values'),

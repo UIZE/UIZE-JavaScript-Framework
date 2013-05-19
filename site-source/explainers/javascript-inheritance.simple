@@ -512,16 +512,16 @@ Dissecting a Subclass Module
 
 		The superclass reference can also be used when calling a superclass' version of an instance method, as in...
 
-		.....................................................................................
+		.............................................................................
 		_classPrototype.wireUi = function () {
 			var _this = this;
 			if (!_this.isWired) {
 				// do the wiring stuff
 
-				_superclass.prototype.wireUi.call (_this); // call superclass version of wireUi
+				_superclass.doMy (_this,'wireUi'); // call superclass version of wireUi
 			}
 		};
-		.....................................................................................
+		.............................................................................
 
 	Keeping a Class Reference
 		A reference to the newly created subclass is kept in a variable. By convention, this variable is named =_class=.

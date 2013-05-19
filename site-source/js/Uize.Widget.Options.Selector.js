@@ -94,7 +94,7 @@ Uize.module ({
 		/*** Public Methods ***/
 			_classPrototype.getOptionProperties = function(_valueNo, _valueObject) {
 				return Uize.copyInto(
-					_superclass.prototype.getOptionProperties.call (this, _valueNo, _valueObject) || {},
+					_superclass.doMy (this,'getOptionProperties',[_valueNo, _valueObject]) || {},
 					{
 						value:_valueObject.name,
 						valueDetails:_valueObject.valueDetails
@@ -109,7 +109,7 @@ Uize.module ({
 					// set the container for the options that get created
 					_this.set({container:_this.getNode('options')});
 
-					_superclass.prototype.wireUi.call(_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

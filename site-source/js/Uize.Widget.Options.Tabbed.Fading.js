@@ -76,7 +76,7 @@ Uize.module ({
 				;
 				if (_currentValueNo == _lastShownTabBodyNo) {
 					_fadeInProgress ||
-						_superclass.prototype.updateUiTabState.call (_this,_lastShownTabBodyNo,_currentValueNo)
+						_superclass.doMy (_this,'updateUiTabState',[_lastShownTabBodyNo,_currentValueNo])
 					;
 				} else {
 					if (_fadeInProgress) {

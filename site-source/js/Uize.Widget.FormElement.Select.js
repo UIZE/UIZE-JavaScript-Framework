@@ -127,7 +127,7 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					var
 						_values = _this._values,

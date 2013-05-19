@@ -76,7 +76,7 @@ Uize.module ({
 				this._updateUiState ();
 				this._updateUiMessage ();
 				this._updateUiMode ();
-				_superclass.prototype.updateUi.call (this);
+				_superclass.doMy (this,'updateUi');
 			};
 
 		/*** State Properties ***/

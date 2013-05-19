@@ -172,7 +172,7 @@ Uize.module ({
 					_this._itemsWiredMap = {};
 					_this._ensureItemWired ('');
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

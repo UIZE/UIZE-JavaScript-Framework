@@ -96,7 +96,7 @@ Uize.module ({
 					;
 					_this._limit || _this.set ({_limit:Math.pow(_this._base,_this._digits) - 1});
 
-					_superclass.prototype.wireUi.call( _this );
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

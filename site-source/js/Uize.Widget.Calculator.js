@@ -960,7 +960,7 @@ Uize.module ({
 						Keep the entry field focused, even when you click outside it, as long as you click on the root node of the widget, or one of the nodes on its tree.
 					*/
 					_this.wireNode ('','click',function () {_this.children.entry.focus ()});
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

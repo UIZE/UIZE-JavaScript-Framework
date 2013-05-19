@@ -189,7 +189,7 @@ Uize.module ({
 				wireUi:function () {
 					var _this = this;
 					if (!_this.isWired) {
-						_superclass.prototype.wireUi.call (_this);
+						_superclass.doMy (_this,'wireUi');
 
 						_this._updateUiRootNodeClasses ();
 

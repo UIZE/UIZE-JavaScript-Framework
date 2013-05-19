@@ -338,7 +338,7 @@ Uize.module ({
 					}
 					_this.wire ({'Changed.enabledInherited':function () {_this._updateUiCursor ()}});
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

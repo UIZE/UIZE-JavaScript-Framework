@@ -124,14 +124,14 @@ Uize.module ({
 						function () { _this._updateUiEnabled () }
 					);
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 					_this._updateUiMode ();
 					_this._updateUiEnabled ();
 				}

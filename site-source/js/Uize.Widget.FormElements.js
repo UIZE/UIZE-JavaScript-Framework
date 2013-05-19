@@ -37,18 +37,21 @@ Uize.module ({
 				var
 					_this = this,
 					_parentForm = _this.parent,
-					_childElement = _superclass.prototype.addChild.call (
+					_childElement = _superclass.doMy (
 						_this,
-						_childName,
-						_childInstanceOrClass || Uize.Widget.FormElement,
-						Uize.copyInto(
-							{
-								value:_parentForm
-									? (_this.parent.get('value') || {})[_childName]
-									: null
-							},
-							_elementProperties
-						)
+						'addChild',
+						[
+							_childName,
+							_childInstanceOrClass || Uize.Widget.FormElement,
+							Uize.copyInto(
+								{
+									value:_parentForm
+										? (_this.parent.get('value') || {})[_childName]
+										: null
+								},
+								_elementProperties
+							)
+						]
 					)
 				;
 

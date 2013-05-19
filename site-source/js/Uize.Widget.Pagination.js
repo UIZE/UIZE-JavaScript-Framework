@@ -156,7 +156,7 @@ Uize.module ({
 
 				if (_this.isWired) {
 					_this._updatePages();
-					_superclass.prototype.updateUi.call(_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -198,7 +198,7 @@ Uize.module ({
 						_addPageButton(_pageNo)
 					;
 
-					_superclass.prototype.wireUi.call(_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

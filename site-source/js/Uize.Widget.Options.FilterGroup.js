@@ -120,7 +120,7 @@ Uize.module ({
 					_this._updateUiTitle();
 					_this._updateUiExpanded();
 					_this._updateUiFilterVisibility();
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 

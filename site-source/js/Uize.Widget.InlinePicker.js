@@ -80,7 +80,7 @@ Uize.module ({
 
 				if (_this.isWired) {
 					_this.children.value.updateUi();
-					_superclass.prototype.updateUi.call(_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 

@@ -128,7 +128,7 @@ Uize.module ({
 						_newCount ('days',_this._startTime.days,99)
 					;
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 					if( _this._autoStart )
 						_this.resume();
 				}

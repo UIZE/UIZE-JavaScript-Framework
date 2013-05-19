@@ -143,7 +143,7 @@ Uize.module ({
 					/* NOTE:
 						For some inexplicable reason, calling updateUi on the superclass here improves the responsiveness of the marquee. This maintains the order of updating that existed prior to factoring out the common Uize.Widget.Resizer code from the old and defunct Uize.Widget.Marquee class. Something about updating the handles before updating the box (performed in the superclass) does not produce a favorable effect.
 					*/
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 
 					_this._updateUiHandlesPositions ();
 				}
@@ -182,7 +182,7 @@ Uize.module ({
 							_this.wireNode (_shell,{mousedown:_initiateDrag,touchstart:_initiateDrag});
 						}
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					_this._updateUiHandlesDisplayed ();
 				}

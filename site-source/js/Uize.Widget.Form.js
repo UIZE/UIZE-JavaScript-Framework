@@ -338,7 +338,7 @@ Uize.module ({
 					_this._updateUiWarning();
 					_this._foreachElement(  function(_element) { _element.updateUi()} );
 
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -375,7 +375,7 @@ Uize.module ({
 							);
 						}
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					_this._updateValue();
 					_this._validate();

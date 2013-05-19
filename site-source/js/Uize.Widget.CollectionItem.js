@@ -270,7 +270,7 @@ Uize.module ({
 							)
 						;
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

@@ -127,7 +127,7 @@ Uize.module ({
 						);
 						_this.wireNode ('contract','click',_showShort);
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

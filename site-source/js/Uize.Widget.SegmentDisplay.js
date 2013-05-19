@@ -109,7 +109,7 @@ Uize.module ({
 				if (!_this.isWired) {
 					_this._lastSegmentsState = null;
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

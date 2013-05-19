@@ -131,7 +131,7 @@ Uize.module ({
 					_this._updateUiSelectorValueDetails();
 					_this._updateUiSelectorState();
 					_this._updateUiSelectedState();
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -158,7 +158,7 @@ Uize.module ({
 						&& _displayNameNode.setAttribute('for', null)
 					;
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

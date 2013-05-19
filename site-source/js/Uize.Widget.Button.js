@@ -358,7 +358,7 @@ Uize.module ({
 								&& _this.set ({_text:_this.getNodeValue('text')})
 							;
 
-						_superclass.prototype.wireUi.call (_this);
+						_superclass.doMy (_this,'wireUi');
 					}
 				}
 			};

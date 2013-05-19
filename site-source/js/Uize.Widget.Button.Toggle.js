@@ -77,7 +77,7 @@ Uize.module ({
 				var _this = this;
 				if (_this.isWired) {
 					_this._updateUiTextAndTitle ();
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -85,7 +85,7 @@ Uize.module ({
 				var _this = this;
 				if (!_this.isWired) {
 					_this.wire ('Click',function () {_this.toggleButton ()});
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

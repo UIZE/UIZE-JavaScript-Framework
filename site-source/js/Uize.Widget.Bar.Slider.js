@@ -166,7 +166,7 @@ Uize.module ({
 						};
 						_this.wireNode ([_track,'full','empty'],{mousedown:_initiateDrag,touchstart:_initiateDrag});
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

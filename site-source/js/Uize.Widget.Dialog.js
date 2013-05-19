@@ -351,7 +351,7 @@ Uize.module ({
 				if (_this.isWired) {
 					_this._updateUiTitle ();
 
-					_superclass.prototype.updateUi.call(_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -378,7 +378,7 @@ Uize.module ({
 						_initializeDefaultProperty ('defaultOkText',_this.children.ok,'text');
 						_initializeDefaultProperty ('defaultCancelText',_this.children.cancel,'text');
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					_this.afterWireUi ();
 				}

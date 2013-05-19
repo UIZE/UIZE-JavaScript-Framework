@@ -1550,7 +1550,7 @@ Uize.module ({
 				_class.instanceMethods ({
 					kill:function () {
 						_Uize.callOn (this._children,'kill');
-						_superclass.prototype.kill.call (this);
+						_superclass.doMy (this,'kill');
 						/*?
 							Instance Methods
 								kill
@@ -1670,7 +1670,7 @@ Uize.module ({
 											// whole bunch
 											// of wiring
 
-											_superclass.prototype.wireUi.call (_this);
+											_superclass.doMy (_this,'wireUi');
 										}
 									};
 									................................................

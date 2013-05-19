@@ -102,7 +102,7 @@ Uize.module ({
 						UizeSite.Build.FileBuilders.TempExamplesModule,
 						UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule
 					);
-					_superclass.prototype.init.call (this,{},Uize.nop);
+					_superclass.doMy (this,'init',[{},Uize.nop]);
 					this.registerFileBuilders (
 						UizeSite.Build.FileBuilders.WidgetsToGoPages,
 						UizeSite.Build.FileBuilders.GoogleCodeSitemap,

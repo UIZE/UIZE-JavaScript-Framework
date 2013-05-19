@@ -461,7 +461,7 @@ Uize.module ({
 					// For future creation of item widgets we need to update the item widget properties to have all the UI building stuff
 					_this.set({itemWidgetProperties:Uize.copyInto(_itemWidgetProperties, _this.get('itemWidgetProperties') || {})});
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

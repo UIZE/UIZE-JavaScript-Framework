@@ -117,8 +117,7 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.checkIsEmpty = function() {
-				return _superclass.prototype.checkIsEmpty.call (this)
-					|| this.get('value') == this._placeholder
+				return _superclass.doMy (this,'checkIsEmpty') || this.get('value') == this._placeholder
 			};
 
 			_classPrototype.getCaretPosition = function () {
@@ -163,7 +162,7 @@ Uize.module ({
 			_classPrototype.updateUi = function() {
 				if (this.isWired) {
 					this._updateUiPlaceholder();
-					_superclass.prototype.updateUi.call(this);
+					_superclass.doMy (this,'updateUi');
 				}
 			};
 
@@ -184,7 +183,7 @@ Uize.module ({
 							_this.set ('value', _placeholder);
 					}
 
-					_superclass.prototype.wireUi.call(_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

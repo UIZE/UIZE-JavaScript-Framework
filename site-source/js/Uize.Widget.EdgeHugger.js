@@ -148,7 +148,7 @@ Uize.module ({
 							*/
 						);
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					/*** workaround for IE6's lack of support for fixed positioning ***/
 						if (navigator.appVersion.indexOf ('MSIE 6') > -1) {

@@ -228,7 +228,7 @@ Uize.module ({
 					/*** inject foot (if desired) ***/
 						_this._showFooter && Uize.Node.injectHtml (document.body,UizeSite.Templates.Footer.process ());
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

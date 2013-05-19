@@ -89,7 +89,7 @@ Uize.module ({
 						if (_theForm && !_this._formData)
 							_this._formData = _Uize_Node_Form.getValues(_theForm);
 
-						_superclass.prototype.wireUi.call (_this);
+						_superclass.doMy (_this,'wireUi');
 				}
 			};
 

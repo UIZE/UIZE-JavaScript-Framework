@@ -157,7 +157,7 @@ Uize.module ({
 					});
 					_this.addChild ('drag',_drag);
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

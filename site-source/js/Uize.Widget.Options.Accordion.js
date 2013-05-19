@@ -224,7 +224,7 @@ Uize.module ({
 
 					_this._updateUiTabBodies();
 
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -233,7 +233,7 @@ Uize.module ({
 				if (!_this.isWired) {
 					_this._previousTabNo = _this.get('valueNo');
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

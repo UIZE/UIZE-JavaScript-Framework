@@ -548,7 +548,7 @@ Uize.module({
 				if (_this.isWired) {
 					_this._updateSuggestionsPalette();
 
-					_superclass.prototype.updateUi.call(_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -614,7 +614,7 @@ Uize.module({
 					// disable browser autocomplete
 					_this.setNodeProperties('input', { autocomplete: "off" });
 
-					_superclass.prototype.wireUi.call(_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

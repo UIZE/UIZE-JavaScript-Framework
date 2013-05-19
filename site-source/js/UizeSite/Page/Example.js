@@ -100,7 +100,7 @@ Uize.module ({
 							)
 						;
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					/*** add tour interface, if necessary ***/
 						var _tour = Uize.Url.fromParams (location.href).tour;

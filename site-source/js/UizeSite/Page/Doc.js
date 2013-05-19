@@ -237,7 +237,7 @@ Uize.module ({
 							;
 							_wireNextLink ();
 
-						_superclass.prototype.wireUi.call (_this);
+						_superclass.doMy (_this,'wireUi');
 
 						_contents.setNodeStyle ('',{maxHeight:'none',overflow:'visible'});
 					}

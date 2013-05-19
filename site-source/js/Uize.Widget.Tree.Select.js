@@ -148,7 +148,7 @@ Uize.module ({
 						_this.wireNode ('level' + _levelNo,'change',_getOnItemSelectedHandler (_levelNo))
 					;
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 					_this._onItemSelected (0);
 				}
 			};

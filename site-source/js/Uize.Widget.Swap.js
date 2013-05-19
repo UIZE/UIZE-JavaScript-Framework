@@ -369,7 +369,7 @@ Uize.module ({
 				if (!this.isWired) {
 					this.setNodeStyle ('',{overflow:'hidden'});
 
-					_superclass.prototype.wireUi.call (this);
+					_superclass.doMy (this,'wireUi');
 				}
 			};
 

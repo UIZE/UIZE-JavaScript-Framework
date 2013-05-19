@@ -197,7 +197,7 @@ Uize.module ({
 					_this._updateUiValue();
 					_this._updateUiWarning();
 
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
@@ -373,7 +373,7 @@ Uize.module ({
 
 					_this._validate();
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

@@ -77,7 +77,7 @@ Uize.module ({
 				if (_this.isWired) {
 					_this._updateUiLabel();
 					_this._updateUiFeaturedState();
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 

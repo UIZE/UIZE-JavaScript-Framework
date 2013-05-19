@@ -120,14 +120,14 @@ Uize.module ({
 					)
 				);
 
-				_superclass.prototype.handleDialogSubmit.call(_this, _valueInfo);
+				_superclass.doMy (_this,'handleDialogSubmit',[_valueInfo]);
 			};
 
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {
 					_this._updateUiSelector();
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.doMy (_this,'updateUi');
 				}
 			};
 

@@ -175,7 +175,7 @@ Uize.module ({
 									- this implied node is optional
 						*/
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

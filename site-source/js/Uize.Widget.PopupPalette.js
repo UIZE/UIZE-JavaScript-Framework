@@ -157,7 +157,7 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.kill = function () {
 				delete _instances [this.instanceId];
-				_superclass.prototype.kill.call (this);
+				_superclass.doMy (this,'kill');
 			};
 
 			_classPrototype.wireUi = function () {
@@ -211,7 +211,7 @@ Uize.module ({
 							}
 						}
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

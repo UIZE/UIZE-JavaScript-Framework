@@ -73,7 +73,7 @@ Uize.module ({
 
 			_classPrototype.updateUi = function() {
 				this._updateUi();
-				_superclass.prototype.updateUi.call (this);
+				_superclass.doMy (this,'updateUi');
 			};
 
 			_classPrototype.wireUi = function () {
@@ -90,7 +90,7 @@ Uize.module ({
 						}
 					);
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

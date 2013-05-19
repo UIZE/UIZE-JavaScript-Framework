@@ -245,7 +245,7 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 
 					_this.setNodeInnerHtml ('messages',(_this._queuedLogMessagesHtml || []).join (''));
 					_this.setNodeProperties ('messages',{scrollTop:1000000});

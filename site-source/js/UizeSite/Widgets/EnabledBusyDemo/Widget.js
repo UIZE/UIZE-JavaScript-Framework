@@ -86,7 +86,7 @@ Uize.module ({
 							function () {_this.set ({busy:_valuesMap [_this.getNodeValue ('busySelector')]})}
 						);
 
-						_superclass.prototype.wireUi.call (_this);
+						_superclass.doMy (_this,'wireUi');
 					}
 				},
 

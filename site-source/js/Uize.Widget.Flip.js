@@ -93,7 +93,7 @@ Uize.module ({
 						_this._newContent = _contentNode.innerHTML
 					;
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 

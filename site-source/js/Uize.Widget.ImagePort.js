@@ -100,7 +100,7 @@ Uize.module ({
 					_this.setNodeStyle ('image',{position:'absolute'});
 					_this.portVsScaledDelta = [];
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.doMy (_this,'wireUi');
 				}
 			};
 
