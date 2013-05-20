@@ -37,7 +37,6 @@ Uize.module ({
 		var _class = _superclass.subclass ({
 			alphastructor:function () {
 				this._totalSamples = 0;
-				this.set ({heading:this.Class.widgetClass.moduleName});
 			},
 
 			omegastructor:function () {
