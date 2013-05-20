@@ -1119,6 +1119,75 @@ Uize.module ({
 								- test that state properties are inherited by subclasses
 						*/
 					]],
+					['Uize.Class.doMy',[
+						{
+							title:'Test that the instance method is called correctly when no arguments are passed',
+							test:function () {
+								var
+									_calledWithInstanceAsContext,
+									_Class = Uize.Class.subclass ({
+										instanceMethods:{
+											fooMethod:function () {_calledWithInstanceAsContext = this == _instance}
+										}
+									}),
+									_instance = _Class ()
+								;
+								_Class.doMy (_instance,'fooMethod');
+								return this.expect (true,_calledWithInstanceAsContext);
+							}
+						},
+						{
+							title:'Test that, when no arguments are passed to the Uize.Class.doMy method, no arguments are passed to the instance method when it is called',
+							test:function () {
+								var
+									_calledWithNoArguments,
+									_Class = Uize.Class.subclass ({
+										instanceMethods:{
+											fooMethod:function () {_calledWithNoArguments = !arguments.length}
+										}
+									}),
+									_instance = _Class ()
+								;
+								_Class.doMy (_instance,'fooMethod');
+								return this.expect (true,_calledWithNoArguments);
+							}
+						},
+						{
+							title:'Test that, when arguments are passed to the Uize.Class.doMy method, those same arguments are passed to the instance method when it is called',
+							test:function () {
+								var
+									_expectedArgumentsCalledWith = ['foo',3,false,'bar',[4,5,6]],
+									_actualArgumentsCalledWith,
+									_Class = Uize.Class.subclass ({
+										instanceMethods:{
+											fooMethod:function () {_actualArgumentsCalledWith = [].slice.call (arguments)}
+										}
+									}),
+									_instance = _Class ()
+								;
+								_Class.doMy (_instance,'fooMethod',_expectedArgumentsCalledWith);
+								return this.expect (_expectedArgumentsCalledWith,_actualArgumentsCalledWith);
+							}
+						},
+						{
+							title:'Test that the result returned by the instance method is returned by the Uize.Class.doMy method',
+							test:function () {
+								var
+									_expectedReturnValue = 'foo',
+									_actualReturnValue,
+									_Class = Uize.Class.subclass ({
+										instanceMethods:{
+											fooMethod:function () {return _expectedReturnValue}
+										}
+									}),
+									_instance = _Class (),
+									_actualReturnValue = _Class.doMy (_instance,'fooMethod')
+								;
+								;
+								return this.expect (_expectedReturnValue,_actualReturnValue);
+							}
+						}
+					]],
 					['Uize.Class.singleton',[
 						{
 							title:'Test that a singleton is an instance of the class on which the static method is called',
