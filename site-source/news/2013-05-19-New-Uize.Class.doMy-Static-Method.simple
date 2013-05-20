@@ -1,0 +1,100 @@
+The new =Uize.Class.doMy= static method, implemented in the =Uize.Class= base class and inherited by all subclasses, provides a convenient and semantically more elegant way to call an instance method of a class on a specified instance.
+
+DIFFERENT USAGES
+
+`Call a Class' Instance Method on an Instance, Without Supplying Arguments`
+.............................................................
+resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR);
+.............................................................
+
+`Call a Class' Instance Method on an Instance, Supplying Arguments`
+...........................................................................
+resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR,argumentsLIST);
+...........................................................................
+
+Calling a Superclass' Instance Methods
+	The =Uize.Class.doMy= method is most useful when calling a superclass' version of an instance method on an instance, and produces a more concise and readable form than the typical approach.
+
+	INSTEAD OF...
+	.............................................
+	_superclass.prototype.someMethod.call (this);
+	.............................................
+
+	USE...
+	.....................................
+	_superclass.doMy (this,'someMethod');
+	.....................................
+
+	The =Uize.Class.doMy= method also supports calling a superclass' instance methods with arguments, as follows...
+
+	INSTEAD OF...
+	...................................................................
+	_superclass.prototype.someMethod.apply (this,[arg1,arg2,...,argN]);
+	...................................................................
+
+	USE...
+	..........................................................
+	_superclass.doMy (this,'someMethod',[arg1,arg2,...,argN]);
+	..........................................................
+
+	As you can tell from the above before-and-after examples, using the =Uize.Class.doMy= method produces code that is both a bit more concise as well as mentally easier to parse.
+
+Call a Class' Instance Method on an Instance, Without Supplying Arguments
+	In its most simple form, a class' instance method can be called on an instance, without supplying arguments, by specifying just the instance reference and the instance method name as arguments.
+
+	SYNTAX
+	.............................................................
+	resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR);
+	.............................................................
+
+	EXAMPLE
+	...........................................................
+	return _superclass.subclass ({
+		instanceMethods:{
+			wireUi:function () {
+				if (!this.isWired) {
+					// do some wiring specific to this widget class
+
+					_superclass.doMy (this,'wireUi');
+				}
+			}
+		}
+	});
+	...........................................................
+
+	In the above example, a subclass is being created with an overrided implementation for the =wireUi= instance method. In this method, additional code is being executed (represented by the placeholder comment) before the superclass' version of the =wireUi= method is called on the instance.
+
+Call a Class' Instance Method on an Instance, Supplying Arguments
+	When an instance method of a class needs to be called with arguments, the arguments can be specified with the optional =argumentsLIST= argument.
+
+	SYNTAX
+	...........................................................................
+	resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR,argumentsLIST);
+	...........................................................................
+
+	EXAMPLE
+	........................................................
+	return _superclass.subclass ({
+		instanceMethods:{
+			someMethod:function (foo,bar,baz,qux) {
+				_superclass.doMy (this,'someMethod',[foo,bar]);
+
+				// now do extra stuff for subclass
+			}
+		}
+	});
+	........................................................
+
+	In the above example, a subclass is being created with an overrided implementation for the superclass' =someMethod= instance method. Now, the superclass' version of =someMethod= supports =foo= and =bar= arguments, while the overrided version also supports the additional =baz= and =qux= arguments. In the overrided implementation, we first call the superclass' version of the method on the instance, passing just the =foo= and =bar= arguments that it supports, after which the additional code in the overrided version is executed (represented by the comment placeholder, and presumably making use of the additional =baz= and =qux= arguments).
+
+Unit Tested and Documented
+	The new =Uize.Class.doMy= method is comprehensively unit tested and documented.
+
+Codebase Updated
+	The modules of the UIZE JavaScript Framework have been updated so that calls to superclass versions of overrided methods have been converted to using the =Uize.Class.doMy= method.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-05-19 - New Uize.Class.doMy Static Method
+....................................................................................
