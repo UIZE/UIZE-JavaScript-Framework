@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.ProgressBar.Widget= class implements a progress bar widget that supports horizontal and vertical orientations.
+		The =Uize.Widgets.ProgressBar.Widget= class implements a progress bar widget that supports several standard sizes and optional overlayed status text.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
