@@ -37,7 +37,7 @@ Uize.module ({
 					size:['tiny','small','medium','large'],
 					trackLength:400,
 					orientation:'horizontal',
-					value:750,            
+					value:750,
 					maxValue:1000
 				});
 				this.addStateCombinationTestCases ({
