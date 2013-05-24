@@ -68,7 +68,7 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			function _updateUiText () {
 				var _this = this;
-				_this.isWired && _this._text != _undefined && 
+				_this.isWired && _this._text != _undefined &&
 					_this.setNodeInnerHtml (_this.getNode ('text') || _this.getNode (),_this._text)
 				;
 				/*?
