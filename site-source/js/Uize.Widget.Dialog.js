@@ -242,7 +242,9 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._addChildButton = function (_name,_action) {
-				this.addChild (_name,this.Class.buttonWidgetClass).wire ('Click',_action);
+				var _button = this.addChild (_name,this.Class.buttonWidgetClass);
+				_button.wire ('Click',_action);
+				return _button;
 			};
 
 			_classPrototype._dismiss = function (_dismissalEvent) {
@@ -797,8 +799,10 @@ Uize.module ({
 				}
 			});
 
-		_class.buttonWidgetClass = Uize.Widget.Button;
-		_class.enableRootNodeCssClasses = false;
+		_class.staticProperties ({
+			buttonWidgetClass:Uize.Widget.Button,
+			enableRootNodeCssClasses:false
+		});
 
 		return _class;
 	}
