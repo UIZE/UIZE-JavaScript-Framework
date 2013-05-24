@@ -83,6 +83,23 @@ Uize.module ({
 				*/
 			}
 
+			function _updateUiDisplayedTipText () {
+				var _this = this;
+				_this.isWired && _this._displayedTipText != _undefined &&
+					_this.setNodeProperties ('',{title:_this._displayedTipText})
+				;
+				/*?
+					Implied Nodes
+						text Implied Node
+							An optional node whose contents will be replaced with the value of the =text= state property, if this property's value is not =null= or =undefined=.
+
+							The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+
+							NOTES
+							- this implied node is optional
+				*/
+			}
+
 			function _updateDisplayState () {
 				var _this = this;
 				if (_this._created) {
@@ -140,6 +157,15 @@ Uize.module ({
 					'Changed.enabledInherited':_setStateAndUpdateDisplayState
 				});
 				_updateDisplayState.call (_this);
+
+				_this.onChange (
+					function (tipText,enabledInherited,busyInherited) {
+						return tipText == _undefined ? _undefined : enabledInherited && !busyInherited ? tipText : '';
+					},
+					function (_displayedTipText) {
+						_this.set ({_displayedTipText:_displayedTipText});
+					}
+				);
 			},
 
 			instanceProperties:{
@@ -245,7 +271,10 @@ Uize.module ({
 				},
 
 				updateUi:function () {
-					this.isWired && _updateUiText.call (this);
+					if (this.isWired) {
+					 	_updateUiText.call (this);
+						_updateUiDisplayedTipText.call (this);
+					}
 				},
 
 				wireUi:function () {
@@ -538,6 +567,16 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				},
+				_displayedTipText:{
+					name:'displayedTipText',
+					onChange:_updateUiDisplayedTipText
+				},
+				_tipText:'tipText',
+					/*?
+						State Properties
+							tipText
+								.
+					*/
 				_tooltip:'tooltip',
 					/*?
 						State Properties
