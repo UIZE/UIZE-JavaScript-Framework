@@ -36,7 +36,6 @@ Uize.module ({
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
-					maxValue:[new Date],
 					size:Uize.keys (Uize.Widgets.CssUtil.sizes)
 				});
 			},
