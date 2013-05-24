@@ -1,0 +1,31 @@
+<%@
+	input ({idPrefix:'string'});
+%><%
+	var _size = input.size;
+%><div class="<%= this.rootNodeCssClasses () %>">
+	<div id="<%. idPrefix %>-controls" class="<%= this.cssClass ('controls') %>">
+		<div class="<%= this.cssClass ('indicator') %>">
+			<span id="<%. idPrefix %>-month">Month</span>
+			<span id="<%. idPrefix %>-year">Year</span>
+		</div>
+		<%=
+			this.childHtml ({
+				name:'previousMonth',
+				text:'&lt;',
+				tipText:'jump to previous month',
+				size:_size,
+				extraClasses:this.cssClass ('previousMonth')
+			})
+		%>
+		<%=
+			this.childHtml ({
+				name:'nextMonth',
+				text:'&gt;',
+				tipText:'jump to next month',
+				size:_size,
+				extraClasses:this.cssClass ('nextMonth')
+			})
+		%>
+	</div>
+	<div id="<%. idPrefix %>-grid" class="<%= this.cssClass ('grid') %>"></div>
+</div>

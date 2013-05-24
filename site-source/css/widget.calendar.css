@@ -112,6 +112,9 @@
 		text-shadow:0 -1px 1px #fff, 0 1px 1px #fff;
 	}
 	div.calendarGrid td a {
+		display:block;
+		width:100%;
+		text-align:center;
 		color:#344;
 	}
 	.calendarGrid th {

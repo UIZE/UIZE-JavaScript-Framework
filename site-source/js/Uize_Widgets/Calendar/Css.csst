@@ -1,0 +1,127 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
+.`` {
+	display: inline-block;
+	position: relative;
+}	background: #fff;
+
+/*** calendar controls ***/
+	.`controls` {
+		position: relative;
+	}
+	.`controls` .`indicator` {
+		display: block;
+		position: relative;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	/*** styling common to year and month navigation ***/
+		.`previousMonth`, .`nextMonth` {
+			position: absolute;
+			top: 0;
+		}
+		.`previousMonth` {
+			left: 0;
+		}
+		.`nextMonth` {
+			right: 0;
+		}
+
+/*** grid ***/
+	.`grid` {
+		text-align: center;
+	}
+
+	.`grid` a,
+	.`grid` a:link,
+	.`grid` a:visited,
+	.`grid` a:hover,
+	.`grid` a:active {
+		text-decoration: none;
+		border: none;
+	}
+
+	.`grid` th, .`grid` td a {
+		color: #000;
+	}
+	.`grid` td {
+		font-weight: normal;
+	}
+	.`grid` th {
+		font-weight: bold;
+	}
+	.`grid` td a {
+		display: block;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+	.`grid` th {
+		background: #eee;
+	}
+	.`grid` td a:hover {
+		background-color: #666;
+		color: #fff;
+	}
+	.`grid` td.`selected` a {
+		background-color: #ffa200;
+		font-weight: bold;
+		color: #fff;
+	}
+	.`grid` td.`grayed` {
+		color: #999;
+	}
+	.`grid` table {
+		border-collapse: collapse;
+	}
+	.`grid` th, .`grid` td {
+		border: 0;
+		padding: 0;
+	}
+
+/*** different sizes ***/
+<%
+	var _sizes = _cssUtil.sizes;
+	Uize.forEach (
+		_sizes,
+		function (_size,_sizeName) {
+			var
+				_sizeOuter = _size.outer,
+				_sizeFont = _size.font,
+				_padding = _sizeOuter - _sizeFont,
+				_paddingTop = Math.round (_padding / 2)
+			;
+			%>
+			/*** <%= _sizeName %> ***/
+				.`<%= _sizeName %>` .`grid` table {
+					margin-top: <%= {tiny:1,small:2,medium:3,large:4} [_sizeName] + 2 %>px;
+				}
+				.`<%= _sizeName %>` .`controls`,
+				.`<%= _sizeName %>` .`grid` td,
+				.`<%= _sizeName %>` .`grid` th {
+					font-size: <%= _sizeFont %>px;
+					vertical-align: center;
+				}
+				.`<%= _sizeName %>` .`controls` {
+					line-height: <%= _sizeFont %>px;
+					padding-top: <%= _paddingTop %>px;
+					padding-bottom: <%= _padding - _paddingTop %>px;
+				}
+				.`<%= _sizeName %>` .`grid` td a {
+					line-height: <%= _sizeFont %>px;
+					padding-top: <%= _paddingTop %>px;
+				}
+
+				.`<%= _sizeName %>` .`grid` th,
+				.`<%= _sizeName %>` .`grid` td {
+					width: <%= _sizeOuter %>px;
+					height: <%= _sizeOuter %>px;
+				}
+			<%
+		}
+	);
+%>
+

@@ -128,7 +128,7 @@
 		Navigation Buttons
 			The =Uize.Widget.Calendar= module implements support for month and year navigation in the form of navigation buttons.
 
-			The navigation button child widgets, which are all instances of the =Uize.Widget.Button= class, allow the user to navigate the calendar to a different month or year in order to select a date. Month navigation is offered via the =nextMonth= and =previousMonth= buttons, which are wired to control the value of the =month= state property. Year navigation is offered via the =nextYear= and =previousYear= buttons, which are wired to control the value of the =year= state property.
+			The navigation button child widgets, which are all button instances, allow the user to navigate the calendar to a different month or year in order to select a date. Month navigation is offered via the =nextMonth= and =previousMonth= buttons, which are wired to control the value of the =month= state property. Year navigation is offered via the =nextYear= and =previousYear= buttons, which are wired to control the value of the =year= state property.
 
 			The markup for the navigation button child widgets is optional, and a given implementation of a calendar widget's HTML does not need to offer the navigation buttons in its UI. If the navigation button markup is omitted, the application may elect to provide month and year navigation through some alternate UI. In other cases, a calendar widget's HTML may exclude just the markup for the year navigation buttons, especially in cases where the user is not likely to need to navigate to earlier or later years, or if date selection will be constrained to dates from a particular year.
 
@@ -156,6 +156,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Calendar',
+	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Widget.Button',
 		'Uize.Date',
@@ -171,7 +172,8 @@ Uize.module ({
 				_null = null,
 				_Uize_Date = Uize.Date,
 				_dayNames = _Uize_Date.dayNames,
-				_monthNames = _Uize_Date.monthNames
+				_monthNames = _Uize_Date.monthNames,
+				_formatDate = Uize.Date.Formatter.format
 			;
 
 		/*** Class Constructor ***/
@@ -188,7 +190,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										nextMonth
-											An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation buttons`, and that increments the value of the =month= state property.
+											A button instance, that is wired up as part of the `navigation buttons`, and that increments the value of the =month= state property.
 
 											When a non-null value is specified for the =maxValue= state property and incrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =nextMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
 
@@ -207,7 +209,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										previousMonth
-											An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation buttons`, and that decrements the value of the =month= state property.
+											A button instance, that is wired up as part of the `navigation buttons`, and that decrements the value of the =month= state property.
 
 											When a non-null value is specified for the =minValue= state property and decrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =previousMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
 
@@ -226,7 +228,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										nextYear
-											An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation buttons`, and that increments the value of the =year= state property.
+											A button instance, that is wired up as part of the `navigation buttons`, and that increments the value of the =year= state property.
 
 											When a non-null value is specified for the =maxValue= state property and incrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =nextYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
 
@@ -243,7 +245,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										previousYear
-											An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation buttons`, and that decrements the value of the =year= state property.
+											A button instance, that is wired up as part of the `navigation buttons`, and that decrements the value of the =year= state property.
 
 											When a non-null value is specified for the =minValue= state property and decrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =previousYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
 
@@ -263,7 +265,11 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
+			_classPrototype._addChildButton = function (_name,_action) {
+				var _button = this.addChild (_name,this.Class.buttonWidgetClass);
+				_button.wire ('Click',_action);
+				return _button;
+			};
 
 			var _snapView = _classPrototype._snapView = function () {
 				var
@@ -363,6 +369,11 @@ Uize.module ({
 						_firstEnabledDayNo != _lastDisplayedGridState._firstEnabledDayNo ||
 						_lastEnabledDayNo != _lastDisplayedGridState._lastEnabledDayNo
 					) {
+						var
+							_useV2CssClasses = _this.Class.useV2CssClasses,
+							_selectedCssClass = _useV2CssClasses ? _this.cssClass ('selected') : 'selected',
+							_grayedCssClass = _useV2CssClasses ? _this.cssClass ('grayed') : 'grayed'
+						;
 						if (_lastDisplayedGridState) {
 							/*** unwire previously wired day nodes ***/
 								for (var _dayNo = 0, _dayNodeName; ++_dayNo < 32;) {
@@ -381,13 +392,16 @@ Uize.module ({
 							_lastDisplayedGridState._firstEnabledDayNo = _firstEnabledDayNo;
 							_lastDisplayedGridState._lastEnabledDayNo = _lastEnabledDayNo;
 
-						var _gridStringChunks = ['<table class="calendarGrid" cellpadding="0" cellspacing="0"><tr>'];
+						var _gridStringChunks = ['<table' + (_useV2CssClasses ? '' : ' class="calendarGrid"') + ' cellpadding="0" cellspacing="0"><tr>'];
 
 						/*** build and replace the grid HTML ***/
 							/*** build the days header ***/
+								var _dayNameLength = _this._dayNameLength;
 								for (var _dayNo = -1; ++_dayNo < 7;)
 									_gridStringChunks.push (
-										'<th title="' + _dayNames [_dayNo] + '">' + _dayNames [_dayNo].charAt (0) + '</th>'
+										'<th title="' + _dayNames [_dayNo] + '">' +
+											_dayNames [_dayNo].slice (0,_dayNameLength) +
+										'</th>'
 									)
 								;
 								_gridStringChunks.push ('</tr><tr>');
@@ -401,14 +415,18 @@ Uize.module ({
 								for (var _rowNo = -1; ++_rowNo < 6;) {
 									_gridStringChunks.push ('<tr>');
 									for (var _columnNo = -1; ++_columnNo < 7;) {
+										var _day = new Date (_year,_month,_dayNo);
 										if (_dayNo > 0 && _dayNo <= _daysInMonth) {
-											var _selected = _dateAsInt (new Date (_year,_month,_dayNo)) == _valueAsInt;
+											var
+												_selected = _dateAsInt (new Date (_year,_month,_dayNo)) == _valueAsInt,
+												_tipText = _formatDate (_day,'{dayName}, {dayNo}{dayNoSuffix} of {monthName}, {YYYY}')
+											;
 											_gridStringChunks.push (
 												_dayNo >= _firstEnabledDayNo && _dayNo <= _lastEnabledDayNo
 													? (
-														'<td' + (_selected ? ' class="selected"' : '') + '><a href="javascript://" id="' + _idPrefix + '-day' + _dayNo + '" style="display:block; width:100%; text-align:center;">' + _dayNo + '</a></td>'
+														'<td' + (_selected ? ' class="' + _selectedCssClass + '"' : '') + ' title="' + _tipText + '"><a href="javascript://" id="' + _idPrefix + '-day' + _dayNo + '">' + _dayNo + '</a></td>'
 													) : (
-														'<td class="' + (_selected ? 'selected ' : '') + 'grayed">' + _dayNo + '</td>'
+														'<td class="' + (_selected ? _selectedCssClass + ' ' : '') + _grayedCssClass + '" title="' + _tipText + '">' + _dayNo + '</td>'
 													),
 												'</td>'
 											);
@@ -477,6 +495,10 @@ Uize.module ({
 				return _Uize_Date.Formatter.parse (_value,this._displayFormat) || null;
 			}
 			_class.stateProperties ({
+				_dayNameLength:{
+					name:'dayNameLength',
+					value:1
+				},
 				_displayFormat:'displayFormat',
 				_maxValue:{
 					name:'maxValue',
@@ -646,6 +668,11 @@ Uize.module ({
 					*/
 				}
 			});
+
+		_class.staticProperties ({
+			buttonWidgetClass:Uize.Widget.Button,
+			useV2CssClasses:false
+		});
 
 		return _class;
 	}
