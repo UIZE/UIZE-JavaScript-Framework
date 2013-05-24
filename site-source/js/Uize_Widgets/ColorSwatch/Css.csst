@@ -1,0 +1,46 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_borderWidth = _cssUtil.box.border.width
+	;
+%>
+.`` {
+	display: inline-block;
+	border-width: <%= _borderWidth %>px;
+	border-style: solid;
+	border-color: #ccc #999 #999 #ccc;
+	width: 20px;
+	height: 20px;
+}
+
+/*** different sizes ***/
+<%
+	var _sizes = _cssUtil.sizes;
+	function _sizeStyleProperties (_sizeName,_horizontalPadding) {
+		var
+			_size = _sizes [_sizeName],
+			_widthHeight = _size.outer - _borderWidth * 2
+		;
+		%>
+		width: <%= _widthHeight %>px;
+		height: <%= _widthHeight %>px;
+		<%
+	}
+%>
+	.`tiny` {
+		<% _sizeStyleProperties ('tiny') %>
+	}
+
+	.`small` {
+		<% _sizeStyleProperties ('small') %>
+	}
+
+	.`medium` {
+		<% _sizeStyleProperties ('medium') %>
+	}
+
+	.`large` {
+		<% _sizeStyleProperties ('large') %>
+	}
+

@@ -1,0 +1,47 @@
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Widgets.ColorSwatch.VisualSampler Class
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/* Module Meta Data
+	type: Class
+	importance: 1
+	codeCompleteness: 100
+	docCompleteness: 100
+*/
+
+/*?
+	Introduction
+		The =Uize.Widgets.ColorSwatch.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.ColorSwatch.Widget= class.
+
+		*DEVELOPERS:* `Chris van Rensburg`
+*/
+
+Uize.module ({
+	name:'Uize.Widgets.ColorSwatch.VisualSampler',
+	superclass:'Uize.Widgets.VisualSampler.Widget',
+	required:'Uize.Widgets.ColorSwatch.Widget',
+	builder:function (_superclass) {
+		'use strict';
+
+		return _superclass.subclass ({
+			omegastructor:function () {
+				this.addStateCombinationSamples ({
+					size:['tiny','small','medium','large'],
+					value:['red','green','blue','#f0f','#5f9ea0','#556b2f','#ffdead','#90ee90','#e99975','','#4c7cd1','#000','#fff','#888']
+				});
+			},
+
+			staticProperties:{
+				widgetClass:Uize.Widgets.ColorSwatch.Widget
+			}
+		});
+	}
+});
+
