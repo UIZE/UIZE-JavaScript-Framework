@@ -63,7 +63,7 @@ Uize.module ({
 						trackLength:300,
 						value:30,
 						maxValue:100,
-						size:['tiny','small','medium','large'],
+						size:['tiny','small','medium','large']
 					});
 			},
 
