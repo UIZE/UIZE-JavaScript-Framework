@@ -29,6 +29,12 @@ Uize.module ({
 		'use strict';
 
 		return {
+			box:{
+				border:{
+					color:'#ccc',
+					width:1
+				}
+			},
 			sizes:{
 				tiny:{
 					font:12,
