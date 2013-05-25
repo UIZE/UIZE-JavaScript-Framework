@@ -3,7 +3,7 @@
 <head>
 	<title>Color Theme Transformation | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="color Uize.Widget.Bar.Slider Uize.Color.xUtil"/>
+	<meta name="keywords" content="color Uize.Widgets.Slider.Widget Uize.Color.xUtil"/>
 	<meta name="description" content=""/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/labeled-horizontal-sliders.css"/>
 	<style type="text/css">
 		/*** labeled horizontal slider overrides ***/
-			.sliderPlaceholder {
+			.sliderSlot {
 				width:500px;
 			}
 
@@ -149,13 +149,13 @@
 			<tr>
 				<td class="sliderLabel">HUE RANGE</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_hueRangeSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_hueRangeSlider-shell" class="sliderSlot"></td>
 				<td class="sliderValueLabel sliderMaxValue">100</td>
 			</tr>
 			<tr>
 				<td class="sliderLabel">HUE SHIFT</td>
 				<td class="sliderValueLabel slideMinValue">-180</td>
-				<td id="page_hueShiftSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_hueShiftSlider-shell" class="sliderSlot"></td>
 				<td class="sliderValueLabel sliderMaxValue">+180</td>
 			</tr>
 			<tr>
@@ -164,13 +164,13 @@
 			<tr>
 				<td class="sliderLabel">SATURATION RANGE</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_saturationRangeSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_saturationRangeSlider-shell" class="sliderSlot"></td>
 				<td class="sliderValueLabel sliderMaxValue">100</td>
 			</tr>
 			<tr>
 				<td class="sliderLabel">SATURATION SHIFT</td>
 				<td class="sliderValueLabel slideMinValue">-100</td>
-				<td id="page_saturationShiftSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_saturationShiftSlider-shell" class="sliderSlot"></td>
 				<td class="sliderValueLabel sliderMaxValue">+100</td>
 			</tr>
 			<tr>
@@ -179,14 +179,20 @@
 			<tr>
 				<td class="sliderLabel">LIGHTNESS RANGE</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_lightnessRangeSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_lightnessRangeSlider-shell" class="sliderSlot"></td>
 				<td class="sliderValueLabel sliderMaxValue">100</td>
 			</tr>
 			<tr>
 				<td class="sliderLabel">LIGHTNESS SHIFT</td>
 				<td class="sliderValueLabel slideMinValue">-100</td>
-				<td id="page_lightnessShiftSlider"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_lightnessShiftSlider-shell" class="sliderSlot"></td>
 				<td class="sliderValueLabel sliderMaxValue">+100</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td id="page_reset-shell" style="text-align: center;"></td>
+				<td></td>
 			</tr>
 		</table>
 	</form>
@@ -200,8 +206,8 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Bar.Slider',
-		'Uize.Widget.Bar.Slider.xSkin',
+		'Uize.Widgets.Slider.Widget',
+		'Uize.Widgets.Button.Widget',
 		'Uize.Color',
 		'Uize.Color.xUtil'
 	],
@@ -209,6 +215,16 @@ Uize.module ({
 		'use strict';
 
 		/* TO DO:
+			- implement tabs for...
+				- source code
+				- transformed code
+			- add panel for color swatches for preview
+				- two swatches for each color in set - one to show original color, and the other to show transformed color
+				- each swatch to contain serialized color value (so, swatches need to be wide enough)
+				- mousing over color swatches to show color info tooltip
+			- make new slider widget with min and max buttons, both for showing range labels as well as allowing setting value directly to min or max values in range
+			- for each transformation slider, include text input field for display and entry of value
+
 			- factor out code for getting min color and getting max color (add some method to Uize.Color.xUtil)
 			- factor out code for transforming a set of colors (add some method to Uize.Color.xUtil)
 			- a means in the UI for resetting all the sliders to their neutral points
@@ -261,25 +277,6 @@ Uize.module ({
 					podHeadingStroke:'aaa',
 					podHeadingText:'2C3635',
 					podDivider:'aca'
-					/*
-					gutterBackground:'000',
-					contentStroke:'666',
-					contentBackground:'333',
-					contentText:'aaa',
-					contentHeadingBackground:'aaa',
-					contentHeadingStroke:'000',
-					contentHeadingText:'000',
-					contentDivider:'444',
-					contentLink:'ccc',
-					podBackground:'888',
-					podStroke:'fff',
-					podText:'333',
-					podLink:'000',
-					podHeadingBackground:'000',
-					podHeadingStroke:'fff',
-					podHeadingText:'fff',
-					podDivider:'666'
-					*/
 				},
 				colorThemeObjects = {},
 				transformedColorTheme = {}
@@ -411,14 +408,14 @@ Uize.module ({
 			function addSliderWidget (sliderName,minValue,maxValue,value) {
 				var slider = page.addChild (
 					sliderName,
-					Uize.Widget.Bar.Slider,
+					Uize.Widgets.Slider.Widget,
 					{
 						increments:0,
-						borderThickness:1,
-						borderTintColor:'#666',
-						borderTintLevel:100,
 						orientation:'horizontal',
 						built:false,
+						fullColor:'#fff',
+						emptyColor:'#fff',
+						size:'small',
 						minValue:minValue,
 						maxValue:maxValue,
 						value:value
@@ -435,6 +432,24 @@ Uize.module ({
 				lightnessRangeSlider = addSliderWidget ('lightnessRangeSlider',0,100,50),
 				lightnessShiftSlider = addSliderWidget ('lightnessShiftSlider',-100,100,0)
 			;
+
+		/*** add the reset button ***/
+			page.addChild (
+				'reset',
+				Uize.Widgets.Button.Widget,
+				{
+					text:'RESET',
+					built:false,
+					action:function () {
+						hueRangeSlider.set ({value:50});
+						hueShiftSlider.set ({value:0});
+						saturationRangeSlider.set ({value:50});
+						saturationShiftSlider.set ({value:0});
+						lightnessRangeSlider.set ({value:50});
+						lightnessShiftSlider.set ({value:0});
+					}
+				}
+			);
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
