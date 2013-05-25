@@ -67,9 +67,9 @@
 		color: #fff;
 	}
 	.`grid` td.`selected` a {
-		background-color: #ffa200;
+		background-color: <%= _cssUtil.selectedValue.bgColor %>;
 		font-weight: bold;
-		color: #fff;
+		color: <%= _cssUtil.selectedValue.color %>;
 	}
 	.`grid` td.`grayed` {
 		color: #999;

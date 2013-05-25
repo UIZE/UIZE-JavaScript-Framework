@@ -28,12 +28,18 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		var _highlightColor = '#ffa200';
+
 		return {
 			box:{
 				border:{
 					color:'#ccc',
 					width:1
 				}
+			},
+			selectedValue:{
+				color:'#fff',
+				bgColor:_highlightColor
 			},
 			sizes:{
 				tiny:{
