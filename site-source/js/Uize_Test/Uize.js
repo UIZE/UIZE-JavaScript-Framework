@@ -826,6 +826,56 @@ Uize.module ({
 								}
 							}
 					]],
+					['Uize.isArguments',[
+						['Test that a non-empty arguments list object is correctly considered to be an arguments object',
+							[(function () {return arguments}) ('foo','bar')],
+							true
+						],
+						['Test that an empty arguments list object is correctly considered to be an arguments object',
+							[(function () {return arguments}) ()],
+							true
+						],
+						['Test that a regular array is not considered to be an arguments object',
+							[['foo','bar']],
+							false
+						],
+						['Test that a listy object is not considered to be an arguments object',
+							{0:'foo',1:'bar',length:2},
+							false
+						],
+						['Test that a non-listy object is not considered to be an arguments object',
+							{foo:'bar'},
+							false
+						],
+						['Test that a function is not considered to be an arguments object',
+							function () {},
+							false
+						],
+						['Test that a regular expression is not considered to be an arguments object',
+							/foo/gi,
+							false
+						],
+						['Test that a string value is not considered to be an arguments object',
+							'foo',
+							false
+						],
+						['Test that a boolean value is not considered to be an arguments object',
+							true,
+							false
+						],
+						['Test that a number value is not considered to be an arguments object',
+							42,
+							false
+						],
+						['Test that the value undefined is not considered to be an arguments object',
+							undefined,
+							false
+						],
+						['Test that the value null is not considered to be an arguments object',
+							null,
+							false
+						]
+					]],
 					['Uize.isNumber',[
 						['Test that calling with no parameters returns false',[],false],
 						['Test that the value undefined is not regarded as a number',undefined,false],
