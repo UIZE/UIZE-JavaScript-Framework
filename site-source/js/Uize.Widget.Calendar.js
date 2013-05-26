@@ -176,102 +176,19 @@ Uize.module ({
 				_formatDate = Uize.Date.Formatter.format
 			;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					_null,
-					function () {
-						var _this = this;
+		/*** Utility Functions ***/
+			function _conformNullableDateValue (_value) {
+				return _Uize_Date.Formatter.parse (_value,this._displayFormat) || null;
+			}
 
-						/*** create buttons ***/
-							_this._nextMonthButton = _this._addChildButton (
-								'nextMonth',
-								function () {_this.set ({_month:_this._month + 1})}
-								/*?
-									Child Widgets
-										nextMonth
-											A button instance, that is wired up as part of the `navigation buttons`, and that increments the value of the =month= state property.
-
-											When a non-null value is specified for the =maxValue= state property and incrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =nextMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
-
-											When the =month= state property is set to the value =11= (the last month of the year), then incrementing its value will increment the value of the =year= state property and set the =month= property to =0=. Thus, the =nextMonth= button can be used to navigate across years (see `Month Wrapping Behavior`).
-
-											NOTES
-											- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =nextMonth= button
-											- see the companion =previousMonth= child widget
-											- see the related =nextYear= and =previousYear= child widgets
-											- this child widget is added in the constructor
-								*/
-							);
-							_this._previousMonthButton = _this._addChildButton (
-								'previousMonth',
-								function () {_this.set ({_month:_this._month - 1})}
-								/*?
-									Child Widgets
-										previousMonth
-											A button instance, that is wired up as part of the `navigation buttons`, and that decrements the value of the =month= state property.
-
-											When a non-null value is specified for the =minValue= state property and decrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =previousMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
-
-											When the =month= state property is set to the value =0= (the first month of the year), then decrementing its value will decrement the value of the =year= state property and set the =month= property to =11=. Thus, the =previousMonth= button can be used to navigate across years (see `Month Wrapping Behavior`).
-
-											NOTES
-											- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =previousMonth= button
-											- see the companion =nextMonth= child widget
-											- see the related =nextYear= and =previousYear= child widgets
-											- this child widget is added in the constructor
-								*/
-							);
-							_this._nextYearButton = _this._addChildButton (
-								'nextYear',
-								function () {_this.set ({_year:_this._year + 1})}
-								/*?
-									Child Widgets
-										nextYear
-											A button instance, that is wired up as part of the `navigation buttons`, and that increments the value of the =year= state property.
-
-											When a non-null value is specified for the =maxValue= state property and incrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =nextYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
-
-											NOTES
-											- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =nextYear= button
-											- see the companion =previousYear= child widget
-											- see the related =nextMonth= and =previousMonth= child widgets
-											- this child widget is added in the constructor
-								*/
-							);
-							_this._previousYearButton = _this._addChildButton (
-								'previousYear',
-								function () {_this.set ({_year:_this._year - 1})}
-								/*?
-									Child Widgets
-										previousYear
-											A button instance, that is wired up as part of the `navigation buttons`, and that decrements the value of the =year= state property.
-
-											When a non-null value is specified for the =minValue= state property and decrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =previousYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
-
-											NOTES
-											- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =previousYear= button
-											- see the companion =nextYear= child widget
-											- see the related =nextMonth= and =previousMonth= child widgets
-											- this child widget is added in the constructor
-								*/
-							);
-
-						_this._childWidgetsAdded = _true;
-						_this._updateUiNavButtonsState ();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = function (_name,_action) {
-				var _button = this.addChild (_name,this.Class.buttonWidgetClass);
+			function _addChildButton (_this,_name,_action) {
+				var _button = _this.addChild (_name,_this.Class.buttonWidgetClass);
 				_button.wire ('Click',_action);
 				return _button;
-			};
+			}
 
-			var _snapView = _classPrototype._snapView = function () {
+		/*** Private Instance Methods ***/
+			function _snapView () {
 				var
 					_this = this,
 					_minValueMaxValueAsRangeObject = {minValue:_this._minValue,maxValue:_this._maxValue}
@@ -284,9 +201,9 @@ Uize.module ({
 					_date = _this._minValue || _this._maxValue
 				;
 				_this.set ({_month:_date.getMonth (),_year:_date.getFullYear ()});
-			};
+			}
 
-			var _updateUiNavButtonsState = _classPrototype._updateUiNavButtonsState = function () {
+			function _updateUiNavButtonsState () {
 				var _this = this;
 				if (_this._childWidgetsAdded) {
 					var
@@ -304,9 +221,9 @@ Uize.module ({
 					_enableWidget (_this._previousYearButton,!_minValue || _minValue < _viewYearRange.minValue);
 					_enableWidget (_this._nextYearButton,!_maxValue || _maxValue > _viewYearRange.maxValue);
 				}
-			};
+			}
 
-			_classPrototype._updateUiMonthDisplay = function () {
+			function _updateUiMonthDisplay () {
 				this.isWired && this.setNodeValue ('month',_monthNames [this._month]);
 				/*?
 					Implied Nodes
@@ -319,9 +236,9 @@ Uize.module ({
 							- the markup for this implied node is optional
 							- see the companion =year Implied Node=
 				*/
-			};
+			}
 
-			_classPrototype._updateUiYearDisplay = function () {
+			function _updateUiYearDisplay () {
 				this.isWired && this.setNodeValue ('year',this._year);
 				/*?
 					Implied Nodes
@@ -334,9 +251,9 @@ Uize.module ({
 							- the markup for this implied node is optional
 							- see the companion =month Implied Node=
 				*/
-			};
+			}
 
-			var _updateUiGrid = _classPrototype._updateUiGrid = function () {
+			function _updateUiGrid () {
 				var _this = this;
 				if (_this.isWired) {
 					var
@@ -481,20 +398,103 @@ Uize.module ({
 				} else {
 					_this._lastDisplayedGridState = _null;
 				}
-			};
-
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				this._updateUiMonthDisplay ();
-				this._updateUiYearDisplay ();
-				this._updateUiGrid ();
-			};
-
-		/*** State Properties ***/
-			function _conformNullableDateValue (_value) {
-				return _Uize_Date.Formatter.parse (_value,this._displayFormat) || null;
 			}
-			_class.stateProperties ({
+
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var _this = this;
+
+				/*** create buttons ***/
+					_this._nextMonthButton = _addChildButton (
+						_this,
+						'nextMonth',
+						function () {_this.set ({_month:_this._month + 1})}
+						/*?
+							Child Widgets
+								nextMonth
+									A button instance, that is wired up as part of the `navigation buttons`, and that increments the value of the =month= state property.
+
+									When a non-null value is specified for the =maxValue= state property and incrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =nextMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
+
+									When the =month= state property is set to the value =11= (the last month of the year), then incrementing its value will increment the value of the =year= state property and set the =month= property to =0=. Thus, the =nextMonth= button can be used to navigate across years (see `Month Wrapping Behavior`).
+
+									NOTES
+									- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =nextMonth= button
+									- see the companion =previousMonth= child widget
+									- see the related =nextYear= and =previousYear= child widgets
+									- this child widget is added in the constructor
+						*/
+					);
+					_this._previousMonthButton = _addChildButton (
+						_this,
+						'previousMonth',
+						function () {_this.set ({_month:_this._month - 1})}
+						/*?
+							Child Widgets
+								previousMonth
+									A button instance, that is wired up as part of the `navigation buttons`, and that decrements the value of the =month= state property.
+
+									When a non-null value is specified for the =minValue= state property and decrementing the value of the =month= state property would take the view outside of the `valid date range`, then the =previousMonth= button will be disabled (for more info, see the section `Navigation Button State Management`).
+
+									When the =month= state property is set to the value =0= (the first month of the year), then decrementing its value will decrement the value of the =year= state property and set the =month= property to =11=. Thus, the =previousMonth= button can be used to navigate across years (see `Month Wrapping Behavior`).
+
+									NOTES
+									- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =previousMonth= button
+									- see the companion =nextMonth= child widget
+									- see the related =nextYear= and =previousYear= child widgets
+									- this child widget is added in the constructor
+						*/
+					);
+					_this._nextYearButton = _addChildButton (
+						_this,
+						'nextYear',
+						function () {_this.set ({_year:_this._year + 1})}
+						/*?
+							Child Widgets
+								nextYear
+									A button instance, that is wired up as part of the `navigation buttons`, and that increments the value of the =year= state property.
+
+									When a non-null value is specified for the =maxValue= state property and incrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =nextYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
+
+									NOTES
+									- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =nextYear= button
+									- see the companion =previousYear= child widget
+									- see the related =nextMonth= and =previousMonth= child widgets
+									- this child widget is added in the constructor
+						*/
+					);
+					_this._previousYearButton = _addChildButton (
+						_this,
+						'previousYear',
+						function () {_this.set ({_year:_this._year - 1})}
+						/*?
+							Child Widgets
+								previousYear
+									A button instance, that is wired up as part of the `navigation buttons`, and that decrements the value of the =year= state property.
+
+									When a non-null value is specified for the =minValue= state property and decrementing the value of the =year= state property would take the view outside of the `valid date range`, then the =previousYear= button will be disabled (for more info, see the section `Navigation Button State Management`).
+
+									NOTES
+									- the markup for this child widget is optional, and a given implementation of a calendar widget's HTML does not need to offer a =previousYear= button
+									- see the companion =nextYear= child widget
+									- see the related =nextMonth= and =previousMonth= child widgets
+									- this child widget is added in the constructor
+						*/
+					);
+
+				_this._childWidgetsAdded = _true;
+				_updateUiNavButtonsState.call (_this);
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					_updateUiMonthDisplay.call (this);
+					_updateUiYearDisplay.call (this);
+					_updateUiGrid.call (this);
+				}
+			},
+
+			stateProperties:{
 				_dayNameLength:{
 					name:'dayNameLength',
 					value:1
@@ -569,7 +569,7 @@ Uize.module ({
 						_yearOffset && this.set ({_year:this._year + _yearOffset});
 						return ((_value % 12) + 12) % 12;
 					},
-					onChange:[_classPrototype._updateUiMonthDisplay,_updateUiGrid,_updateUiNavButtonsState]
+					onChange:[_updateUiMonthDisplay,_updateUiGrid,_updateUiNavButtonsState]
 					/*?
 						State Properties
 							month
@@ -625,7 +625,7 @@ Uize.module ({
 					conformer:_conformNullableDateValue,
 					value:new Date,
 					onChange:[
-						function () {this._snapViewOnValueChange && this._snapView ()},
+						function () {this._snapViewOnValueChange && _snapView.call (this)},
 						_updateUiGrid,
 						_updateUiNavButtonsState
 					]
@@ -654,7 +654,7 @@ Uize.module ({
 				},
 				_year:{
 					name:'year',
-					onChange:[_classPrototype._updateUiYearDisplay,_updateUiGrid,_updateUiNavButtonsState]
+					onChange:[_updateUiYearDisplay,_updateUiGrid,_updateUiNavButtonsState]
 					/*?
 						State Properties
 							year
@@ -667,14 +667,13 @@ Uize.module ({
 								- see the related =snapViewOnValueChange= and =value= state properties
 					*/
 				}
-			});
+			},
 
-		_class.staticProperties ({
-			buttonWidgetClass:Uize.Widget.Button,
-			useV2CssClasses:false
+			staticProperties:{
+				buttonWidgetClass:Uize.Widget.Button,
+				useV2CssClasses:false
+			}
 		});
-
-		return _class;
 	}
 });
 
