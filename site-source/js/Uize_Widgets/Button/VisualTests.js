@@ -26,11 +26,14 @@
 Uize.module ({
 	name:'Uize.Widgets.Button.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.Button.Widget',
+	required:[
+		'Uize.Widgets.Button.Widget',
+		'Uize.Widgets.CssUtil'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
-		var _allSizes = ['tiny','small','medium','large'];
+		var _allSizes = Uize.keys (Uize.Widgets.CssUtil.sizes);
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
