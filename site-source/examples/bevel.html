@@ -9,6 +9,11 @@
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
 	<link rel="stylesheet" href="css/labeled-horizontal-sliders.css"/>
+	<style type="text/css">
+		 .sliderShell {
+		 	width: 333px;
+		 }
+	</style>
 </head>
 
 <body>
@@ -28,7 +33,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.Bevel.html"><code>Uize.Widget.Bevel</code></a> is created and is wired to a div that has an image set for its background. The widget overlays a bevel effect on top of the image. Two instances of <a href="../reference/Uize.Widget.Bar.Slider.html"><code>Uize.Widget.Bar.Slider</code></a> are created and their values are wired to control the bevel widget's <code>thickness</code> and <code>opacity</code> properties, respectively. Play around with the two sliders to see the effect.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.Bevel.html"><code>Uize.Widget.Bevel</code></a> is created and is wired to a div that has an image set for its background. The widget overlays a bevel effect on top of the image. Two instances of <a href="../reference/Uize.Widgets.Slider.Widget.html"><code>Uize.Widgets.Slider.Widget</code></a> are created and their values are bound through property adapters to the bevel widget's <code>thickness</code> and <code>opacity</code> properties, respectively. Play around with the two sliders to see the effect.</p>
 	</div>
 
 	<!-- page layout's "wireframe" with node for bevel object -->
@@ -46,13 +51,13 @@
 			<tr>
 				<td class="sliderLabel">BEVEL THICKNESS</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_bevelThickness"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_bevelThickness-shell" class="sliderShell"></td>
 				<td class="sliderValueLabel sliderMaxValue">30</td>
 			</tr>
 			<tr>
 				<td class="sliderLabel">BEVEL OPACITY</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_bevelOpacity"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_bevelOpacity-shell" class="sliderShell"></td>
 				<td class="sliderValueLabel sliderMaxValue">1</td>
 			</tr>
 		</table>
@@ -68,7 +73,8 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Bevel',
-		'Uize.Widget.Bar.Slider.xSkin'
+		'Uize.Widgets.Slider.Widget',
+		'Uize.Util.PropertyAdapter'
 	],
 	builder:function () {
 		'use strict';
@@ -87,49 +93,41 @@ Uize.module ({
 				}
 			);
 
-		/*** set defaults for properties whose values are the same for most sliders ***/
-			Uize.Widget.Bar.Slider.set ({
-				fullTintColor:'#fff',
-				fullTintLevel:60,
-				emptyTintColor:'#9aa',
-				emptyTintLevel:40,
-				borderThickness:1,
-				borderTintColor:'#666',
-				borderTintLevel:100,
-				knobSize:18,
-				orientation:'horizontal'
-			});
+		/*** add the slider widgets ***/
+			var commonProperties = {
+				orientation:'horizontal',
+				fullColor:'#999',
+				emptyColor:'#fff',
+				size:'tiny',
+				trackLength:'100%',
+				built:false
+			};
 
-		/*** add the Uize.Widget.Bar.Slider child widget for the bevel thickness selector ***/
-			page.addChild (
-				'bevelThickness',
-				Uize.Widget.Bar.Slider,
-				{
-					minValue:1,
-					maxValue:30,
-					value:page.children.bevel.get ('thickness'),
-					built:false
-				}
-			).wire (
-				'Changed.value',
-				function (_event) {page.children.bevel.set ({thickness:+_event.source})}
-			);
+			/*** add the slider widget for the bevel thickness selector ***/
+				page.addChild (
+					'bevelThickness',
+					Uize.Widgets.Slider.Widget,
+					Uize.copyInto ({minValue:1,maxValue:30},commonProperties)
+				);
 
-		/*** add the Uize.Widget.Bar.Slider child widget for the bevel opacity selector ***/
-			page.addChild (
-				'bevelOpacity',
-				Uize.Widget.Bar.Slider,
-				{
-					minValue:0,
-					maxValue:1,
-					value:page.children.bevel.get ('opacity'),
-					increments:0,
-					built:false
-				}
-			).wire (
-				'Changed.value',
-				function (_event) {page.children.bevel.set ({opacity:+_event.source})}
-			);
+			/*** add the slider widget for the bevel opacity selector ***/
+				page.addChild (
+					'bevelOpacity',
+					Uize.Widgets.Slider.Widget,
+					Uize.copyInto ({minValue:0,maxValue:1,increments:0},commonProperties)
+				);
+
+			/*** bind bevel properties to slider values ***/
+				var
+					thicknessPropertyAdapter = Uize.Util.PropertyAdapter ({
+						propertyA:[page.children.bevel,'thickness'],
+						propertyB:page.children.bevelThickness
+					}),
+					thicknessPropertyAdapter = Uize.Util.PropertyAdapter ({
+						propertyA:[page.children.bevel,'opacity'],
+						propertyB:page.children.bevelOpacity
+					})
+				;
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
