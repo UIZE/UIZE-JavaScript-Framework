@@ -38,7 +38,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.ImagePort.Draggable.html"><code>Uize.Widget.ImagePort.Draggable</code></a> is wired up to let you explore an image inside an image port. Click-and-drag on the image to pan it from side to side. Ctrl-click-and-drag up and down to zoom in and out, respectively. Additionally, sliders (instances of the <a href="../reference/Uize.Widget.Bar.Slider.html"><code>Uize.Widget.Bar.Slider</code></a> class) are wired up to control the <code>alignX</code> and <code>alignY</code> state properties of the widget, and a slider and two select boxes are wired up to control the <code>sizingValue</code>, <code>sizingUpperBound</code>, and <code>sizingLowerBound</code> state properties. Event handlers wire the widgets bidirectionally, so dragging inside the image port updates the sliders, and dragging the sliders updates the image port.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.ImagePort.Draggable.html"><code>Uize.Widget.ImagePort.Draggable</code></a> is wired up to let you explore an image inside an image port. Click-and-drag on the image to pan it from side to side. Ctrl-click-and-drag up and down to zoom in and out, respectively. Additionally, sliders (instances of the <a href="../reference/Uize.Widgets.Slider.Widget.html"><code>Uize.Widgets.Slider.Widget</code></a> class) are wired up to control the <code>alignX</code> and <code>alignY</code> state properties of the widget, and a slider and two select boxes are wired up to control the <code>sizingValue</code>, <code>sizingUpperBound</code>, and <code>sizingLowerBound</code> state properties. Event handlers wire the widgets bidirectionally, so dragging inside the image port updates the sliders, and dragging the sliders updates the image port.</p>
 	</div>
 
 	<form>
@@ -65,11 +65,9 @@
 					</div>
 				</td>
 				<td width="5"></td>
-				<td id="page_alignYSlider"><img src="../images/blank.gif" style="width:40px; height:300px;" alt=""/></td>
+				<td id="page_alignYSlider`" style="height:300px;"></td>
 				<td width="5"></td>
-				<td>
-					<div id="page_sizingValueSlider" style="width:40px; height:300px;"></div>
-				</td>
+				<td id="page_sizingValueSlider-shell" style="height:300px;"></td>
 				<td class="label" valign="center" style="padding-left:5px;">sizingValue (0 to 3)</td>
 			</tr>
 			<tr>
@@ -77,7 +75,7 @@
 			</tr>
 			<tr>
 				<td class="label" style="padding-right:5px;">alignX</td>
-				<td id="page_alignXSlider"><img src="../images/blank.gif" style="width:300px; height:40px;" alt=""/></td>
+				<td id="page_alignXSlider-shell" style="width:300px;"></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -102,7 +100,7 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.ImagePort.Draggable',
-		'Uize.Widget.Bar.Slider.xSkin'
+		'Uize.Widgets.Slider.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -135,24 +133,18 @@ Uize.module ({
 			}
 
 		/*** common values shared by alignX, alignY, and sizingValue sliders ***/
-			Uize.Widget.Bar.Slider.set ({
+			Uize.Widgets.Slider.Widget.set ({
 				value:.5,
-				fullTintColor:'#9aa',
-				fullTintLevel:50,
-				emptyTintColor:'#9aa',
-				emptyTintLevel:50,
-				borderThickness:3,
-				borderTintColor:'#455',
-				borderTintLevel:50,
+				fullColor:'#999',
+				trackLength:'100%',
 				increments:0,
-				knobSize:24,
 				built:false
 			});
 
 		/*** add the alignX slider child widget ***/
 			var alignXSlider = page.addChild (
 				'alignXSlider',
-				Uize.Widget.Bar.Slider,
+				Uize.Widgets.Slider.Widget,
 				{
 					minValue:0,
 					maxValue:1,
@@ -164,7 +156,7 @@ Uize.module ({
 		/*** add the alignY slider child widget ***/
 			var alignYSlider = page.addChild (
 				'alignYSlider',
-				Uize.Widget.Bar.Slider,
+				Uize.Widgets.Slider.Widget,
 				{
 					minValue:1,
 					maxValue:0,
@@ -176,10 +168,8 @@ Uize.module ({
 		/*** add the sizingValue slider child widget ***/
 			var sizingValueSlider = page.addChild (
 				'sizingValueSlider',
-				Uize.Widget.Bar.Slider,
+				Uize.Widgets.Slider.Widget,
 				{
-					fullTintColor:'#fff',
-					fullTintLevel:70,
 					minValue:0,
 					maxValue:8,
 					value:1,

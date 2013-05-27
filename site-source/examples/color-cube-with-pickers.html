@@ -35,20 +35,20 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.ColorCube.Draggable.html"><code>Uize.Widget.ColorCube.Draggable</code></a> provides a draggable color cube widget that shows the interpolated colors between four corner colors. Click-and-drag inside the cube to "smudge" the color space in different directions. Instances of <a href="../reference/Uize.Widget.ColorPicker.html"><code>Uize.Widget.ColorPicker</code></a> are wired up at each corner for changing the colors using sliders. The sliders control the cube, but dragging inside the cube also controls the sliders. Event handlers wire the widgets bidirectionally so their values stay in sync. Click the "AGITATE" button to randomize the corner colors.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.ColorCube.Draggable.html"><code>Uize.Widget.ColorCube.Draggable</code></a> provides a draggable color cube widget that shows the interpolated colors between four corner colors. Click-and-drag inside the cube to "smudge" the color space in different directions. Instances of <a href="../reference/Uize.Widgets.RgbSliders.Widget.html"><code>Uize.Widgets.RgbSliders.Widget</code></a> are wired up at each corner for changing the colors using sliders. The sliders control the cube, but dragging inside the cube also controls the sliders. Event handlers wire the widgets bidirectionally so their values stay in sync. Click the "AGITATE" button to randomize the corner colors.</p>
 	</div>
 
 	<!-- "wireframe" for the UI -->
 
 	<table border="0" cellspacing="0" cellpadding="3" style="margin:auto;">
 		<tr>
-			<td id="page_colorTopLeft" valign="top"></td>
+			<td id="page_colorTopLeft-shell" valign="top"></td>
 			<td id="page_colorCube" rowspan="2"></td>
-			<td id="page_colorTopRight" valign="top"></td>
+			<td id="page_colorTopRight-shell" valign="top"></td>
 		</tr>
 		<tr>
-			<td id="page_colorBottomLeft" valign="bottom"></td>
-			<td id="page_colorBottomRight" valign="bottom"></td>
+			<td id="page_colorBottomLeft-shell" valign="bottom"></td>
+			<td id="page_colorBottomRight-shell" valign="bottom"></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -68,7 +68,7 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'Uize.Color',
 		'Uize.Color.xUtil',
-		'Uize.Widget.ColorPicker',
+		'Uize.Widgets.RgbSliders.Widget',
 		'Uize.Widget.ColorCube.Draggable',
 		'Uize.Widgets.Button.Widget'
 	],
@@ -99,9 +99,9 @@ Uize.module ({
 					colorCube = page.children.colorCube,
 					colorPicker = page.addChild (
 						colorName,
-						Uize.Widget.ColorPicker,
+						Uize.Widgets.RgbSliders.Widget,
 						{
-							sliderWidth:33,
+							size:'small',
 							sliderHeight:110,
 							built:false
 						}

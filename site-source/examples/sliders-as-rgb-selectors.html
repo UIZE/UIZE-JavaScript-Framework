@@ -3,7 +3,7 @@
 <head>
 	<title>Sliders as RGB Selectors | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="color widget Uize.Color Uize.Widget.Bar.Slider"/>
+	<meta name="keywords" content="color widget Uize.Color Uize.Widgets.Slider.Widget"/>
 	<meta name="description" content="Get three sliders in the same room together and you've got yourself an RGB color selector. See how to get sliders to cooperate for the greater good."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -27,7 +27,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this simple example, three instances of <a href="../reference/Uize.Widget.Bar.Slider.html"><code>Uize.Widget.Bar.Slider</code></a> are wired up and used together by some simple logic to control the values of the red, green, and blue channels of an RGB color. As you drag the individual sliders, a color swatch above the sliders is updated to the current color.</p>
+		<p>In this simple example, three instances of <a href="../reference/Uize.Widgets.Slider.Widget.html"><code>Uize.Widgets.Slider.Widget</code></a> are wired up and used together by some simple logic to control the values of the red, green, and blue channels of an RGB color. As you drag the individual sliders, a color swatch above the sliders is updated to the current color.</p>
 	</div>
 
 	<!-- page layout's "wireframe" with slots for sliders' HTML -->
@@ -40,11 +40,11 @@
 			<td colspan="5" height="6"></td>
 		</tr>
 		<tr>
-			<td id="page_redSlider"><img src="../images/blank.gif" width="56" height="340" alt=""/></td>
+			<td id="page_redSlider-shell" style="height: 340px;"></td>
 			<td width="6"></td>
-			<td id="page_greenSlider"><img src="../images/blank.gif" width="56" height="340" alt=""/></td>
+			<td id="page_greenSlider-shell" style="height: 340px;"></td>
 			<td width="6"></td>
-			<td id="page_blueSlider"><img src="../images/blank.gif" width="56" height="340" alt=""/></td>
+			<td id="page_blueSlider-shell" style="height: 340px;"></td>
 		</tr>
 		<tr>
 			<td colspan="5" height="6"></td>
@@ -66,7 +66,7 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Color',
-		'Uize.Widget.Bar.Slider.xSkin'
+		'Uize.Widgets.Slider.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -83,16 +83,14 @@ Uize.module ({
 			function createChannelSlider (channel,color) {
 				page.addChild (
 					channel + 'Slider',
-					Uize.Widget.Bar.Slider,
+					Uize.Widgets.Slider.Widget,
 					{
-						fullTintColor:color,
+						fullColor:color,
 						minValue:0,
 						maxValue:255,
-						borderThickness:3,
-						borderTintColor:'#123',
-						borderTintLevel:50,
-						knobSize:35,
-						fullTintLevel:100,
+						size:'large',
+						orientation:'vertical',
+						trackLength:'100%',
 						built:false
 					}
 				).wire ('Changed.value',updateColorSwatch);

@@ -40,7 +40,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, the <code>Uize.Widget.Bevel.spawn</code> method is being used to spawn multiple <a href="../reference/Uize.Widget.Bevel.html"><code>Uize.Widget.Bevel</code></a> widget instances. This widget simply adds a bevel effect to the edge of the node to which it attaches. Instances are spawned for all div elements with a CSS class string of "bevelThumb". This is done by specifying a find expression object when calling the <code>Uize.Widget.Bevel.spawn</code> static method. Additionally, two slider widgets of the <a href="../reference/Uize.Widget.Bar.Slider.html"><code>Uize.Widget.Bar.Slider</code></a> class are instantiated and are wired up to control the <code>thickness</code> and <code>opacity</code> state properties for all the bevel widget instances. Each time the value of either slider changes, all <code>Uize.Widget.Bevel</code> instances are updated. The batch update is accomplished using the <code>Uize.callOn</code> static method, which allows a specified instance method or function to be called on all the instances contained inside the specified array - a form of convenience iterator.</p>
+		<p>In this example, the <code>Uize.Widget.Bevel.spawn</code> method is being used to spawn multiple <a href="../reference/Uize.Widget.Bevel.html"><code>Uize.Widget.Bevel</code></a> widget instances. This widget simply adds a bevel effect to the edge of the node to which it attaches. Instances are spawned for all div elements with a CSS class string of "bevelThumb". This is done by specifying a find expression object when calling the <code>Uize.Widget.Bevel.spawn</code> static method. Additionally, two slider widgets of the <a href="../reference/Uize.Widgets.Slider.Widget.html"><code>Uize.Widgets.Slider.Widget</code></a> class are instantiated and are wired up to control the <code>thickness</code> and <code>opacity</code> state properties for all the bevel widget instances. Each time the value of either slider changes, all <code>Uize.Widget.Bevel</code> instances are updated. The batch update is accomplished using the <code>Uize.callOn</code> static method, which allows a specified instance method or function to be called on all the instances contained inside the specified array - a form of convenience iterator.</p>
 	</div>
 
 	<!-- page layout's "wireframe" with slots for wipe objects -->
@@ -83,13 +83,13 @@
 			<tr>
 				<td class="sliderLabel">BEVEL THICKNESS</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_bevelThickness"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_bevelThickness-shell" class="sliderPlaceholder"></td>
 				<td class="sliderValueLabel sliderMaxValue">30</td>
 			</tr>
 			<tr>
 				<td class="sliderLabel">BEVEL OPACITY</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_bevelOpacity"><img src="../images/blank.gif" class="sliderPlaceholder" alt=""/></td>
+				<td id="page_bevelOpacity-shell" class="sliderPlaceholder"></td>
 				<td class="sliderValueLabel sliderMaxValue">1</td>
 			</tr>
 		</table>
@@ -105,7 +105,7 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Bevel',
-		'Uize.Widget.Bar.Slider.xSkin'
+		'Uize.Widgets.Slider.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -129,41 +129,35 @@ Uize.module ({
 			}
 
 		/*** set defaults for properties whose values are the same for most sliders ***/
-			Uize.Widget.Bar.Slider.set ({
-				fullTintColor:'#fff',
-				fullTintLevel:60,
-				emptyTintColor:'#9aa',
-				emptyTintLevel:40,
-				borderThickness:1,
-				borderTintColor:'#666',
-				borderTintLevel:100,
-				knobSize:18,
-				orientation:'horizontal'
+			Uize.Widgets.Slider.Widget.set ({
+				orientation:'horizontal',
+				fullColor:'#999',
+				size:'tiny',
+				trackLength:'100%',
+				built:false
 			});
 
-		/*** create the Uize.Widget.Bar.Slider object for the bevel thickness selector ***/
+		/*** create the Uize.Widgets.Slider.Widget object for the bevel thickness selector ***/
 			var bevelThickness = page.addChild (
 				'bevelThickness',
-				Uize.Widget.Bar.Slider,
+				Uize.Widgets.Slider.Widget,
 				{
 					minValue:1,
 					maxValue:10,
-					value:4,
-					built:false
+					value:4
 				}
 			);
 			bevelThickness.wire ('Changed.value',updateBevelInstances);
 
-		/*** create the Uize.Widget.Bar.Slider object for the bevel opacity selector ***/
+		/*** create the Uize.Widgets.Slider.Widget object for the bevel opacity selector ***/
 			var bevelOpacity = page.addChild (
 				'bevelOpacity',
-				Uize.Widget.Bar.Slider,
+				Uize.Widgets.Slider.Widget,
 				{
 					minValue:0,
 					maxValue:1,
 					value:.575,
-					increments:0,
-					built:false
+					increments:0
 				}
 			);
 			bevelOpacity.wire ('Changed.value',updateBevelInstances);

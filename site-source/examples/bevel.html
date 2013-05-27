@@ -9,11 +9,6 @@
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
 	<link rel="stylesheet" href="css/labeled-horizontal-sliders.css"/>
-	<style type="text/css">
-		 .sliderShell {
-		 	width: 333px;
-		 }
-	</style>
 </head>
 
 <body>
@@ -51,13 +46,13 @@
 			<tr>
 				<td class="sliderLabel">BEVEL THICKNESS</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_bevelThickness-shell" class="sliderShell"></td>
+				<td id="page_bevelThickness-shell" class="sliderPlaceholder"></td>
 				<td class="sliderValueLabel sliderMaxValue">30</td>
 			</tr>
 			<tr>
 				<td class="sliderLabel">BEVEL OPACITY</td>
 				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_bevelOpacity-shell" class="sliderShell"></td>
+				<td id="page_bevelOpacity-shell" class="sliderPlaceholder"></td>
 				<td class="sliderValueLabel sliderMaxValue">1</td>
 			</tr>
 		</table>
@@ -97,7 +92,6 @@ Uize.module ({
 			var commonProperties = {
 				orientation:'horizontal',
 				fullColor:'#999',
-				emptyColor:'#fff',
 				size:'tiny',
 				trackLength:'100%',
 				built:false

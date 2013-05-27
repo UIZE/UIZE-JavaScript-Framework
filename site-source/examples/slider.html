@@ -3,7 +3,7 @@
 <head>
 	<title>Basic Slider | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Widget.Bar.Slider"/>
+	<meta name="keywords" content="Uize.Widgets.Slider.Widget"/>
 	<meta name="description" content="See a very basic example of a slider widget that lets you select a value in the range of 0 to 200, with a display of the currently selected value."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -27,19 +27,12 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this very basic slider example, an instance of <a href="../reference/Uize.Widget.Bar.Slider.html"><code>Uize.Widget.Bar.Slider</code></a> is being wired up to slider markup in the page. The slider simply allows for selection of a value in the range of 0 to 200. The markup in the page helps to illustrate the DOM structure and implied nodes expected by the <code>Uize.Widget.Bar.Slider</code> class.</p>
+		<p>In this very basic slider example, an instance of the <a href="../reference/Uize.Widgets.Slider.Widget.html"><code>Uize.Widgets.Slider.Widget</code></a> class is being instantiated and inserted in the page. This slider simply allows for selection of a value in the range of 0 to 200.</p>
 	</div>
 
-	<!-- slider UI -->
+	<!-- slot for slider widget -->
 
-	<div style="position:relative; left:0px; top:0px; width:54px; height:341px; background:#455; margin:auto;">
-		<div id="page_slider-track" style="position:absolute; left:2px; top:2px; width:50px; height:315px; cursor:pointer;">
-			<img src="../js/Uize_Widget_Bar_Slider/track-bg-vertical.gif" style="position:absolute; left:0; top:0; width:100%; height:100%;" alt=""/>
-			<img id="page_slider-knob" src="../js/Uize_Widget_Bar_Slider/knob-vertical.gif" style="position:absolute; left:0; top:0; width:50px; height:35px; cursor:pointer;" border="0" hspace="0" vspace="0" alt=""/>
-		</div>
-		<div id="page_slider-value" style="position:absolute; left:2px; top:319px; width:50px; height:20px; font-family:Arial; font-size:17px; font-weight:bold; color:#555; background:#adbebf url(../images/brushed-metal.jpg) repeat left top; text-align:center;"></div>
-	</div>
-</div>
+	<center id="page_slider-shell"></center>
 
 <!-- JavaScript code to make the static slider HTML "come alive" -->
 
@@ -49,7 +42,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Bar.Slider'
+		'Uize.Widgets.Slider.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -57,8 +50,20 @@ Uize.module ({
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		/*** add the Uize.Widget.Bar.Slider child widget ***/
-			page.addChild ('slider',Uize.Widget.Bar.Slider,{minValue:0,maxValue:200});
+		/*** add the slider widget ***/
+			page.addChild (
+				'slider',
+				Uize.Widgets.Slider.Widget,
+				{
+					minValue:0,
+					maxValue:200,
+					value:50,
+					fullColor:'#999',
+					size:'large',
+					trackLength:400,
+					orientation:'vertical',
+					built:false
+				});
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
