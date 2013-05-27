@@ -24,12 +24,6 @@ New whenever Instance Method for Uize.Class
 New Uize.modulePathResolver Method
 	Announce.
 
-New Uize.isArguments Method
-	Announce.
-
-	- mention also improved Uize.forEach method, taking advantage of new =Uize.isArguments= method
-	- add unit tests
-
 Improved Uize.recordMatches, Uize.findRecord, and Uize.findRecordNo Methods
 	- match parameter can now be a value matcher function
 

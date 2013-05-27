@@ -1,0 +1,43 @@
+The new =Uize.isArguments= method, implemented in the =Uize= base module, tests if a value is a function arguments object.
+
+SYNTAX
+..................................................
+isArgumentsBOOL = Uize.isArguments (valueANYTYPE);
+..................................................
+
+A value is considered an arguments object if, and only if, the value is a reference to an instance of JavaScript's built-in =Arguments= object. Arguments objects are created when calling functions in JavaScript and are referenced within a called function by the special =arguments= keyword.
+
+While an arguments object is listy in nature (ie. it is an object having a =length= property whose value is a number), listy objects that are not instances of JavaScript's =Arguments= object are not considered arguments objects by the =Uize.isArguments= method. So, for example, the array =['foo','bar']= is not considered an arguments object, nor is the listy object ={0:'foo',1:'bar',length:2}=.
+
+The =Uize.isArguments= method is useful when wanting to distinguish between an arguments object and other listy objects in order to conditionalize the behavior for a function.
+
+EXAMPLES
+...................................................................................
+Uize.isArguments ((function () {return arguments}) ('foo','bar'));  // return true
+Uize.isArguments ((function () {return arguments}) ());             // return true
+
+Uize.isArguments (['foo','bar']);                                   // return false
+Uize.isArguments ({0:'foo',1:'bar',length:2});                      // return false
+Uize.isArguments ({foo:'bar'});                                     // return false
+Uize.isArguments (function () {});                                  // return false
+Uize.isArguments (/foo/gi);                                         // return false
+Uize.isArguments ('foo');                                           // return false
+Uize.isArguments (true);                                            // return false
+Uize.isArguments (42);                                              // return false
+Uize.isArguments (undefined);                                       // return false
+Uize.isArguments (null);                                            // return false
+...................................................................................
+
+Unit Tested and Documented
+	The new =Uize.isArguments= method is comprehensively unit tested and documented.
+
+Improved Uize.forEach Method
+	The impetus for providing the =Uize.isArguments= method came out of the desire to have the =Uize.forEach= method support iterating over the arguments of a function's =arguments= object, while still preserving the behavior of iterating over all the properties of other objects (including listy objects).
+
+	The =Uize.isArguments= method lets the =Uize.forEach= method distinguish between function arguments objects and other objects. Since the code was going to be added to the =Uize= module for the benefit of the =Uize.forEach= method, it was decided to expose it through a dedicated static method for the benefit of anybody else who might like to use it. So, with this update, the =Uize.forEach= method now supports iterating over the arguments in an =arguments= list.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-05-26 - New Uize.isArguments Method
+....................................................................................

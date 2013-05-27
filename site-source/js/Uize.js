@@ -42,6 +42,7 @@
 
 					- =Uize.canExtend= - tests if value is an object that can be extended with custom properties
 					- =Uize.inRange= - tests if value is within specified value range
+					- =Uize.isArguments= - tests if value is a function arguments object
 					- =Uize.isArray= - tests if value is an array
 					- =Uize.isBoolean= - tests if value is a boolean
 					- =Uize.isEmpty= - tests if an object or array is empty, or if a non-object value is "falsy"
@@ -89,7 +90,7 @@
 					The =Uize= module provides a number of static methods for iterating over properties of objects or elements of arrays.
 
 					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
-					- =Uize.forEach= - iterates over an array, object, or length, calling the specified iteration handler for each element or property
+					- =Uize.forEach= - iterates over an array, arguments object, object, or length range, calling the specified iteration handler for each element or property
 
 				Useful Value Transformers
 					The =Uize= module provides some value transformer methods for transforming or resolving values in ways that are either generally useful or useful to other UIZE modules.
@@ -322,7 +323,7 @@ Uize = (function () {
 			_uizeGuids = 0,
 			_sacredEmptyArray = [],
 			_scriptParentNode,
-			_interpreterSupportsArrayForEach = !!_Array.forEach,
+			_arrayInstanceForEach = _sacredEmptyArray.forEach,
 			_interpreterSupportsArrayIndexOf = !!(_Array.indexOf && _Array.lastIndexOf),
 			_whitespaceCharLettersLookup = {
 				'\n':'n',
@@ -1148,19 +1149,21 @@ Uize = (function () {
 					if (typeof _iterationHandler == _typeString)
 						_iterationHandler = _Function ('value,key,source',_iterationHandler)
 					;
-					if (_sourceIsArray || (_sourceIsObject && _isArguments (_source))) {
-						if (_sourceIsArray && _interpreterSupportsArrayForEach && !_allArrayElements) {
-							_source.forEach (_iterationHandler,_context);
+					if (_sourceIsObject) {
+						if (_sourceIsArray || _isArguments (_source)) {
+							if (_arrayInstanceForEach && !(_sourceIsArray && _allArrayElements)) {
+								_arrayInstanceForEach.call (_source,_iterationHandler,_context);
+							} else {
+								for (var _index = -1, _sourceLength = _source.length; ++_index < _sourceLength;)
+									(_allArrayElements || _index in _source) &&
+										_iterationHandler.call (_context,_source [_index],_index,_source)
+								;
+							}
 						} else {
-							for (var _index = -1, _sourceLength = _source.length; ++_index < _sourceLength;)
-								(_allArrayElements || _index in _source) &&
-									_iterationHandler.call (_context,_source [_index],_index,_source)
+							for (var _index in _source)
+								_iterationHandler.call (_context,_source [_index],_index,_source)
 							;
 						}
-					} else if (_sourceIsObject) {
-						for (var _index in _source)
-							_iterationHandler.call (_context,_source [_index],_index,_source)
-						;
 					} else if (typeof _source == _typeNumber) {
 						for (var _index = -1; ++_index < _source;)
 							_iterationHandler.call (_context,_index,_index,_source)
@@ -1171,14 +1174,29 @@ Uize = (function () {
 			/*?
 				Static Methods
 					Uize.forEach
-						Iterates over the specified array, object, or length, calling the specified iteration handler for each element or property.
+						Iterates over the specified array, arguments object, object, or length range, calling the specified iteration handler for each element or property.
 
 						DIFFERENT USAGES
 
-						`Basic Usage`
-						...............................................................
-						Uize.forEach (sourceARRAYorOBJorINT,iterationHandlerSTRorFUNC);
-						...............................................................
+						`Iterate Over the Elements of An Array`
+						.....................................................
+						Uize.forEach (sourceARRAY,iterationHandlerSTRorFUNC);
+						.....................................................
+
+						`Iterate Over the Arguments of an Arguments Object`
+						......................................................
+						Uize.forEach (argumentsOBJ,iterationHandlerSTRorFUNC);
+						......................................................
+
+						`Iterate Over the Properties of an Object`
+						...................................................
+						Uize.forEach (sourceOBJ,iterationHandlerSTRorFUNC);
+						...................................................
+
+						`Iterate Over the Integers in a Zero-based Value Range`
+						........................................................
+						Uize.forEach (rangeLengthINT,iterationHandlerSTRorFUNC);
+						........................................................
 
 						`Provide a Context for the Iteration Handler`
 						..............................................................................
@@ -1195,8 +1213,13 @@ Uize = (function () {
 						);
 						.............................
 
-						Basic Usage
+						Iterate Over the Elements of An Array
 							In its most basic usage, the =Uize.forEach= method can be used to iterate over the elements of an array, performing an action for each element.
+
+							SYNTAX
+							.....................................................
+							Uize.forEach (sourceARRAY,iterationHandlerSTRorFUNC);
+							.....................................................
 
 							EXAMPLE
 							.....................................................................
@@ -1208,6 +1231,71 @@ Uize = (function () {
 
 							Uize.forEach (fruits,createFruitWidget);
 							.....................................................................
+
+						Iterate Over the Arguments of an Arguments Object
+							The arguments of a function's arguments object can be iterated over by specifying a reference to the arguments object using the =argumentsOBJ= parameter.
+
+							SYNTAX
+							......................................................
+							Uize.forEach (argumentsOBJ,iterationHandlerSTRorFUNC);
+							......................................................
+
+							EXAMPLE
+							...........................................................
+							function multiplyAll () {
+								var result = 1;
+								Uize.forEach (arguments,function (arg) {result *= arg});
+								return result;
+							}
+							...........................................................
+
+							In the above example, we are implementing a =multiplyAll= function that is variadic in nature and will return a result that is the product of all of the arguments passed to it. We are using the =Uize.forEach= method to iterate over all arguments of the =arguments= object, modifying the result upon each iteration by multiplying it by the argument for each iteration.
+
+						Iterate Over the Properties of an Object
+							All the properties of an object can be iterated over, in the order in which the properties were defined on the object, by specifying the object using the =sourceOBJ= parameter.
+
+							SYNTAX
+							...................................................
+							Uize.forEach (sourceOBJ,iterationHandlerSTRorFUNC);
+							...................................................
+
+							EXAMPLE
+							.............................................
+							function uppserCaseKeys (obj) {
+								Uize.forEach (
+									obj,
+									function (value,key,source) {
+										delete source [key];
+										source [key.toUpperCase ()] = value;
+									}
+								);
+							}
+							.............................................
+
+							In the above example, we are implementing an =uppserCaseKeys= function that iterates over all the properties of an object and uppercases the keys (property names) of all the properties. It doesn't matter that we are deleting and adding properties during iterations, as it turns out, because the keys to use for the iteration are gathered at the beginning of the iteration process, so new properties that are added with uppercased keys will not be encountered during iteration.
+
+						Iterate Over the Integers in a Zero-based Value Range
+							The integers in a zero-based value range can be iterated over by specifying the length of the zero-based integer range using the =rangeLengthINT= parameter.
+
+							SYNTAX
+							........................................................
+							Uize.forEach (rangeLengthINT,iterationHandlerSTRorFUNC);
+							........................................................
+
+							The value of the =rangeLengthINT= parameter should be the value of the last integer in the range plus 1. So, for example, to iterate over the integers =0=, =1=, =2=, and =3=, the value =4= should be specified for the =rangeLengthINT= parameter.
+
+							Essentially, the statement =Uize.forEach (4,myIterationHandler)= would be equivalent to the statement =Uize.forEach ([0,1,2,3],myIterationHandler)=. And, more generally, the statement =Uize.forEach (n,myIterationHandler)= would be equivalent to the statement =Uize.forEach ([0,1,2,...,n - 1],myIterationHandler)=.
+
+							EXAMPLE
+							.....................................................
+							function factorial (n) {
+								var result = 1;
+								Uize.forEach (n,function (i) {result *= (i + 1)});
+								return result;
+							}
+							.....................................................
+
+							Naturally, the above example would not produce the most efficient implementation of an n-factorial function, since it involves a function call for each iteration - it is provided merely as illustration. This variation of the =Uize.forEach= is offered primarily as a convenience in cases where an iteration handler function is already to be used inside a regular JavaScript =for= loop, so using the =Uize.forEach= method in such cases will only occur one additional function call and will neaten up one's code a bit.
 
 						Provide a Context for the Iteration Handler
 							An iteration handler can be provided a context on which to be called by specifying the optional =contextANYTYPE= parameter.
@@ -1249,7 +1337,7 @@ Uize = (function () {
 
 						Parameters
 							sourceARRAYorOBJorINT
-								An array specifing elements over which to iterate, or an object specifying properties over which to iterate, or a positive integer specifying the number of times to iterate.
+								An array containing elements over which to iterate, a function arguments object containing arguments over which to iterate, an object containing properties over which to iterate, or a positive integer specifying a zero-based integer range over which to iterate.
 
 							iterationHandlerSTRorFUNC
 								A string or function, specifying code that should be executed for handling each iteration.
@@ -3075,6 +3163,43 @@ Uize = (function () {
 					typeof _value.callee == _typeFunction
 				)
 			);
+			/*?
+				Static Methods
+					Uize.isArguments
+						Returns a boolean, indicating whether or not the specified value is a function arguments object.
+
+						SYNTAX
+						..................................................
+						isArgumentsBOOL = Uize.isArguments (valueANYTYPE);
+						..................................................
+
+						A value is considered an arguments object if, and only if, the value is a reference to an instance of JavaScript's built-in =Arguments= object. Arguments objects are created when calling functions in JavaScript and are referenced within a called function by the special =arguments= keyword.
+
+						While an arguments object is listy in nature (ie. it is an object having a =length= property whose value is a number), listy objects that are not instances of JavaScript's =Arguments= object are not considered arguments objects by the =Uize.isArguments= method. So, for example, the array =['foo','bar']= is not considered an arguments object, nor is the listy object ={0:'foo',1:'bar',length:2}=.
+
+						The =Uize.isArguments= method is useful when wanting to distinguish between an arguments object and other listy objects in order to conditionalize the behavior for a function.
+
+						EXAMPLES
+						...................................................................................
+						Uize.isArguments ((function () {return arguments}) ('foo','bar'));  // return true
+						Uize.isArguments ((function () {return arguments}) ());             // return true
+
+						Uize.isArguments (['foo','bar']);                                   // return false
+						Uize.isArguments ({0:'foo',1:'bar',length:2});                      // return false
+						Uize.isArguments ({foo:'bar'});                                     // return false
+						Uize.isArguments (function () {});                                  // return false
+						Uize.isArguments (/foo/gi);                                         // return false
+						Uize.isArguments ('foo');                                           // return false
+						Uize.isArguments (true);                                            // return false
+						Uize.isArguments (42);                                              // return false
+						Uize.isArguments (undefined);                                       // return false
+						Uize.isArguments (null);                                            // return false
+						...................................................................................
+
+						NOTES
+						- compare to the related =Uize.isArray= and =Uize.isList= static methods
+						- see also the other `value testing methods`
+			*/
 		};
 
 		var _isFunction = _package.isFunction = function (_value) {
