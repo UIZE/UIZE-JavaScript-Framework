@@ -3,8 +3,8 @@
 <head>
 	<title>Color Picker | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="color touch ipad Uize.Widget.ColorPicker"/>
-	<meta name="description" content="See how three RGB color picker widgets - with sliders for red, green, and blue - can be used to tweak text color, background color, and border color."/>
+	<meta name="keywords" content="color touch ipad Uize.Widgets.RgbSliders.Widget"/>
+	<meta name="description" content="See how three RGB sliders widgets - with sliders for red, green, and blue - can be used to tweak text color, background color, and border color."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
@@ -32,7 +32,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, three instances of <a href="../reference/Uize.Widget.ColorPicker.html"><code>Uize.Widget.ColorPicker</code></a> are created, to control the text color, background color, and border color of the sample text to the left. Each color picker has a color swatch above the sliders, representing the current color selected by it.</p>
+		<p>In this example, three instances of <a href="../reference/Uize.Widgets.RgbSliders.Widget.html"><code>Uize.Widgets.RgbSliders.Widget</code></a> are created, to control the text color, background color, and border color of the sample text to the left. Each color picker has a color swatch above the sliders, representing the current color selected by it.</p>
 	</div>
 
 	<!-- "wireframe" for the UI -->
@@ -60,11 +60,11 @@
 				May the same <b>fate</b> befall the entrenched and recalcitrant fossil energy giants.<br/>
 			</td>
 			<td></td>
-			<td id="page_colorPicker"></td>
+			<td id="page_colorPicker-shell"></td>
 			<td></td>
-			<td id="page_backgroundColorPicker"></td>
+			<td id="page_backgroundColorPicker-shell"></td>
 			<td></td>
-			<td id="page_borderColorPicker"></td>
+			<td id="page_borderColorPicker-shell"></td>
 		</tr>
 	</table>
 </div>
@@ -77,7 +77,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.ColorPicker'
+		'Uize.Widgets.RgbSliders.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -85,16 +85,18 @@ Uize.module ({
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		/*** set up the color pickers for text color, background color, and border color ***/
+		/*** set up the color picker widgets for text color, background color, and border color ***/
 			function setupColorPicker (styleProperty,initialValue) {
-				function syncStylePropertyToPicker (_event) {
+				function syncStylePropertyToColorPicker (_event) {
 					page.getNode ('sampleNode').style [styleProperty] = '#' + colorPicker;
 				}
 				var colorPicker = page.addChild (
-					styleProperty + 'Picker',Uize.Widget.ColorPicker,{value:initialValue,built:false}
+					styleProperty + 'Picker',
+					Uize.Widgets.RgbSliders.Widget,
+					{value:initialValue,built:false}
 				);
-				colorPicker.wire ('Changed.value',syncStylePropertyToPicker);
-				syncStylePropertyToPicker ();
+				colorPicker.wire ('Changed.value',syncStylePropertyToColorPicker);
+				syncStylePropertyToColorPicker ();
 			}
 			setupColorPicker ('color','000000');
 			setupColorPicker ('backgroundColor','cccccc');

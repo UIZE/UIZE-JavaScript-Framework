@@ -68,7 +68,7 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'Uize.Color',
 		'Uize.Color.xUtil',
-		'Uize.Widget.ColorPicker',
+		'Uize.Widgets.RgbSliders.Widget',
 		'Uize.Widgets.ColorInfo.Widget',
 		'Uize.Node',
 		'Uize.Node.Event',
@@ -118,7 +118,7 @@ Uize.module ({
 			}
 
 		/*** add the RGB reference color picker ***/
-			page.addChild ('desiredColor',Uize.Widget.ColorPicker,{value:'00aaff',built:false})
+			page.addChild ('desiredColor',Uize.Widgets.RgbSliders.Widget,{value:'00aaff',built:false})
 				.wire ('Changed.value',sortColorSwatches);
 
 		/*** add the color info widget ***/

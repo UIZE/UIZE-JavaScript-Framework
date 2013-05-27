@@ -3,7 +3,7 @@
 <head>
 	<title>Color Pickers With Gradient | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="color Uize.Widget.ColorPicker"/>
+	<meta name="keywords" content="color Uize.Widgets.RgbSliders.Widget"/>
 	<meta name="description" content="See a demo of a dynamically generated color gradient, where the two end colors of the gradient can be modified using RGB color pickers with sliders."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -33,7 +33,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example combines use of two <a href="../reference/Uize.Widget.ColorPicker.html"><code>Uize.Widget.ColorPicker</code></a> instances with a single <a href="../reference/Uize.Widget.ColorCube.html"><code>Uize.Widget.ColorCube</code></a> instance to display a gradient between two colors you select. The color cube is turned into a simple gradient display by setting the value of its <code>divisionsY</code> state property to <code>1</code>, and then using only the <code>colorTopLeft</code> and <code>colorTopRight</code> state properties to change the gradient's color poles.</p>
+		<p>This example combines use of two <a href="../reference/Uize.Widgets.RgbSliders.Widget.html"><code>Uize.Widgets.RgbSliders.Widget</code></a> instances with a single <a href="../reference/Uize.Widget.ColorCube.html"><code>Uize.Widget.ColorCube</code></a> instance to display a gradient between two colors you select. The color cube is turned into a simple gradient display by setting the value of its <code>divisionsY</code> state property to <code>1</code>, and then using only the <code>colorTopLeft</code> and <code>colorTopRight</code> state properties to change the gradient's color poles.</p>
 	</div>
 
 	<!-- "wireframe" for the UI -->
@@ -60,7 +60,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.ColorPicker',
+		'Uize.Widgets.RgbSliders.Widget',
 		'Uize.Widget.ColorCube'
 	],
 	builder:function () {
@@ -86,7 +86,7 @@ Uize.module ({
 			function setupColorPicker (colorName,initialValue) {
 				var colorPicker = page.addChild (
 					colorName + 'Picker',
-					Uize.Widget.ColorPicker,
+					Uize.Widgets.RgbSliders.Widget,
 					{
 						value:colorCube.get (colorName),
 						built:false
