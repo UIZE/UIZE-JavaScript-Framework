@@ -1,4 +1,7 @@
 <%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
 .`` {
 	position: relative;
 }
@@ -32,12 +35,7 @@
 	border-style: solid;
 	border-color: #eee #666 #666 #eee;
 	color: #eee;
-	text-shadow:
-		-1px -1px 0 rgba(0,0,0,.4),
-		-1px 1px 0 rgba(0,0,0,.4),
-		1px -1px 0 rgba(0,0,0,.4),
-		1px 1px 0 rgba(0,0,0,.4)
-	;
+	<%= _cssUtil.pseudoStroke ('rgba(0,0,0,.4)') %>
 	text-align: center;
 }
 
@@ -52,7 +50,7 @@
 		font-size: <%= _sizes.tiny.font %>px;
 		line-height: 20px;
 	}
-
+                       
 	.`small` {
 		height: <%= _sizes.small.outer %>px;
 	}

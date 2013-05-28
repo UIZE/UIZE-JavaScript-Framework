@@ -1,6 +1,9 @@
 <%@ required ('Uize.Widgets.CssUtil'); %>
 <%
-	var _borderWidth = 1;
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_boxBorderWidth = _cssUtil.box.border.width
+	;
 
 	function _buttonBgGradient (_topColor,_bottomColor,_fallbackColor) {
 		%>
@@ -19,7 +22,7 @@
 	.``, .``:link, .``:visited, .``:hover, .``:active {
 		font-weight: bold;
 		display: inline-block;
-		border-width: <%= _borderWidth %>px;
+		border-width: <%= _boxBorderWidth %>px;
 		border-style: solid;
 		border-radius: 3px;
 		text-decoration: none;
@@ -182,13 +185,13 @@
 
 /*** styling for different sizes ***/
 <%
-	var _sizes = Uize.Widgets.CssUtil.sizes;
+	var _sizes = _cssUtil.sizes;
 	function _sizeStyleProperties (_sizeName,_horizontalPadding) {
 		var
 			_size = _sizes [_sizeName],
 			_sizeFont = _size.font,
 			_sizeOuter = _size.outer,
-			_padding = _sizeOuter - _borderWidth * 2 - _sizeFont,
+			_padding = _sizeOuter - _boxBorderWidth * 2 - _sizeFont,
 			_topPadding = Math.floor (_padding / 2)
 		;
 		%>font-size: <%= _sizeFont %>px;

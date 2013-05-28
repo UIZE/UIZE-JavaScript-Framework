@@ -79,7 +79,12 @@ Uize.module ({
 			instanceMethods:{
 				/*** Private Instance Methods ***/
 					_updateUiSwatch:function () {
-						this.isWired && this.setNodeStyle ('swatch',{background:'#' + this._value});
+						var _this = this;
+						if (_this.isWired) {
+							var _value = _this._value;
+							_this.setNodeStyle ('swatch',{background:'#' + _value});
+							_this.setNodeInnerHtml ('swatch','#' + _value);
+						}
 					},
 
 				/*** Public Instance Methods ***/

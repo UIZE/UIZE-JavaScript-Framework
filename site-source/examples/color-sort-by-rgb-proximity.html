@@ -118,7 +118,7 @@ Uize.module ({
 			}
 
 		/*** add the RGB reference color picker ***/
-			page.addChild ('desiredColor',Uize.Widgets.RgbSliders.Widget,{value:'00aaff',built:false})
+			page.addChild ('desiredColor',Uize.Widgets.RgbSliders.Widget,{value:'00aaff',sliderHeight:260,built:false})
 				.wire ('Changed.value',sortColorSwatches);
 
 		/*** add the color info widget ***/

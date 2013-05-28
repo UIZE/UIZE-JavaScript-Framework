@@ -58,6 +58,20 @@ Uize.module ({
 					font:21,
 					outer:51
 				}
+			},
+			pseudoStroke:function (_color) {
+				return (
+					'text-shadow:' +
+						'-1px -1px 0 ' + _color + ',' +
+						'-1px 0 0 ' + _color + ',' +
+						'-1px 1px 0 ' + _color + ',' +
+						'0 -1px 0 ' + _color + ',' +
+						'0 1px 0 ' + _color + ',' +
+						'1px -1px 0 ' + _color + ',' +
+						'1px 0 0 ' + _color + ',' +
+						'1px 1px 0 ' + _color +
+					';'
+				);
 			}
 		};
 	}

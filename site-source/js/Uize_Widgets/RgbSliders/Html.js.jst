@@ -15,29 +15,31 @@
 		);
 	}
 %>
-<table cellspacing="0" cellpadding="0">
+<table id="<%. idPrefix %>" class="<%= _this.rootNodeCssClasses () %>">
 	<tr>
-		<td id="<%= _this.nodeId ('swatch') %>" colspan="5" style="height:30px; border:1px solid #666;">&nbsp;</td>
+		<td colspan="5">
+			<div id="<%. idPrefix %>-swatch" colspan="5" class="<%= _this.cssClass ('swatch') %>">&nbsp;</div>
+		</td>
 	</tr>
 	<tr>
-		<td colspan="5" height="3"></td>
+		<td colspan="5" class="<%= this.cssClass ('verticalSpacer') %>"></td>
 	</tr>
 	<tr>
 		<%= _getSliderTdTag ('R') %>
-		<td style="width:3px"></td>
+		<td class="<%= this.cssClass ('horizontalSpacer') %>"></td>
 		<%= _getSliderTdTag ('G') %>
-		<td style="width:3px"></td>
+		<td class="<%= this.cssClass ('horizontalSpacer') %>"></td>
 		<%= _getSliderTdTag ('B') %>
 	</tr>
 	<tr>
-		<td colspan="5" height="3"></td>
+		<td colspan="5" class="<%= this.cssClass ('verticalSpacer') %>"></td>
 	</tr>
 	<tr>
-		<td style="background:#f00; height:15px; border:1px solid #666;">&nbsp;</td>
+		<td><div class="<%= this.cssClass ('sliderLabel') %>">R</div></td>
 		<td width="3"></td>
-		<td style="background:#0f0; height:15px; border:1px solid #666;">&nbsp;</td>
+		<td><div class="<%= this.cssClass ('sliderLabel') %>">G</div></td>
 		<td width="3"></td>
-		<td style="background:#00f; height:15px; border:1px solid #666;">&nbsp;</td>
+		<td><div class="<%= this.cssClass ('sliderLabel') %>">B</div></td>
 	</tr>
 </table>
 
