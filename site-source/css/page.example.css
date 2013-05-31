@@ -181,16 +181,22 @@ body {
 	/*** tour page info tooltip ***/
 		.tourPageTooltip {
 			display:none;
-			font-size:11px;
-			padding:0;
-			width:186px;
-			border:3px solid #fff;
-			border-radius:3px;
-			-moz-border-radius:3px;
-			-webkit-border-radius:3px;
-			background:#adbebf url(../images/brushed-metal.jpg) repeat left top;
+			padding: 10px;
 		}
 		/*** annotations ***/
+			.tourPageTooltip {
+			}
+			.tourPageTooltipBox {
+				font-size:11px;
+				padding:0;
+				width:186px;
+				border:3px solid #fff;
+				border-radius:3px;
+				-moz-border-radius:3px;
+				-webkit-border-radius:3px;
+				background:#eee;
+				box-shadow: 0 0 10px rgba(0,0,0,.5);
+			}
 			.tourPageTooltip .tourPageTitle {
 				font-size:11px;
 				font-weight:bold;
