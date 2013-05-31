@@ -1,0 +1,41 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_boxBorderWidth = _cssUtil.box.border.width
+	;
+%>
+.`` {
+	padding: 0;
+	position: relative;
+}
+
+/*** styling for different sizes ***/
+<%
+	var _sizes = _cssUtil.sizes;
+	function _sizeStyleProperties (_sizeName,_horizontalPadding) {
+		var
+			_size = _sizes [_sizeName],
+			_sizeOuter = _size.outer,
+			_widthHeight = _sizeOuter - _boxBorderWidth * 2
+		;
+		%>width: <%= _widthHeight %>px;
+		height: <%= _widthHeight %>px;<%
+	}
+%>
+	.`tiny` {
+		<% _sizeStyleProperties ('tiny',8) %>
+	}
+
+	.`small` {
+		<% _sizeStyleProperties ('small',9) %>
+	}
+
+	.`medium` {
+		<% _sizeStyleProperties ('medium',14) %>
+	}
+
+	.`large` {
+		<% _sizeStyleProperties ('large',17) %>
+	}
+
