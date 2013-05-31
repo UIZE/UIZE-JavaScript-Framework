@@ -1,0 +1,153 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	/* TODO:
+		- implement offset positioning for over and active states to emphasize arrow direction
+			- shift 1px for over, and 2px for active
+			- to simplify CSS, resolve state and direction in widget to CSS classes for X and Y...
+				- shiftLeft, shiftLeftMore, shiftRight, shiftRightMore
+				- shiftUp, shiftUpMore, shiftDown, shiftDownMore
+	*/
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_boxBorderWidth = _cssUtil.box.border.width
+	;
+%>
+
+.`arrowCenterPin` {
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	top: 50%;
+	left: 50%;
+}
+
+.`arrow` {
+	display: block;
+	position: absolute;
+	border: 20px;
+	border-style: solid;
+	border-color: #666;
+	opacity: .8;
+}
+
+/*** styling for different flavors ***/
+<%
+	function _flavorColorRule (_flavor) {
+		%>.`<%= _flavor %>` .`arrow`,
+		.`<%= _flavor %>-over` .`arrow`,
+		.`<%= _flavor %>-active` .`arrow`,
+		.`<%= _flavor %>-disabled` .`arrow` {
+			border-color: #fff;
+		}<%
+	}
+	_flavorColorRule ('positive');
+	_flavorColorRule ('negative');
+	_flavorColorRule ('primary');
+%>
+
+/*** styling for different directions ***/
+	.`right` .`arrow`,
+	.`up` .`arrow`,
+	.`down` .`arrow`,
+	.`upLeft` .`arrow`,
+	.`downLeft` .`arrow` {
+		border-right-color: transparent;
+	}
+	.`left` .`arrow`,
+	.`right` .`arrow`,
+	.`down` .`arrow`,
+	.`upLeft` .`arrow`,
+	.`upRight` .`arrow` {
+		border-bottom-color: transparent;
+	}
+	.`left` .`arrow`,
+	.`up` .`arrow`,
+	.`down` .`arrow`,
+	.`upRight` .`arrow`,
+	.`downRight` .`arrow` {
+		border-left-color: transparent;
+	}
+	.`left` .`arrow`,
+	.`right` .`arrow`,
+	.`up` .`arrow`,
+	.`downLeft` .`arrow`,
+	.`downRight` .`arrow` {
+		border-top-color: transparent;
+	}
+
+/*** styling for different states ***/
+<%
+	function _stateOpacityRule (_state,_opacity) {
+		%>.`normal-<%= _state %>` .`arrow`,
+		.`positive-<%= _state %>` .`arrow`,
+		.`negative-<%= _state %>` .`arrow`,
+		.`primary-<%= _state %>` .`arrow` {
+			opacity: <%= _opacity %>;
+		}<%
+	}
+	_stateOpacityRule ('over',.9);
+	_stateOpacityRule ('active',1);
+	_stateOpacityRule ('disabled',.4);
+%>
+
+/*** styling for different sizes ***/
+<%
+	var _sizes = _cssUtil.sizes;
+	function _sizeStyleRule (_sizeName,_horizontalPadding) {
+		var
+			_size = _sizes [_sizeName],
+			_sizeOuter = _size.outer,
+			_widthHeight = _sizeOuter - _boxBorderWidth * 2,
+			_arrowBaseWidth = _widthHeight * .7,
+			_halfArrowBaseWidth = _arrowBaseWidth / 2,
+			_halfArrowBaseWidthHeight = _arrowBaseWidth / 2,
+			_quarterArrowBaseWidthHeight = _arrowBaseWidth / 4,
+			_diagonalArrowWidthHeight = Math.sqrt (_arrowBaseWidth * _arrowBaseWidth / 2),
+			_diagonalArrowCenteringOffset = _diagonalArrowWidthHeight / 2
+		;
+		%>.`<%= _sizeName %>` .`arrow` {
+			border-width: <%= _halfArrowBaseWidth %>px;
+		}
+		.`<%= _sizeName %>`.`left` .`arrow`,
+		.`<%= _sizeName %>`.`right` .`arrow` {
+			top: <%= -_halfArrowBaseWidthHeight %>px;
+		}
+		.`<%= _sizeName %>`.`left` .`arrow` {
+			left: <%= -_halfArrowBaseWidthHeight - _quarterArrowBaseWidthHeight %>px;
+		}
+		.`<%= _sizeName %>`.`right` .`arrow` {
+			left: <%= -_quarterArrowBaseWidthHeight %>px;
+		}
+		.`<%= _sizeName %>`.`up` .`arrow`,
+		.`<%= _sizeName %>`.`down` .`arrow` {
+			left: <%= -_halfArrowBaseWidthHeight %>px;
+		}
+		.`<%= _sizeName %>`.`up` .`arrow` {
+			top: <%= -_halfArrowBaseWidthHeight - _quarterArrowBaseWidthHeight %>px;
+		}
+		.`<%= _sizeName %>`.`down` .`arrow` {
+			top: <%= -_quarterArrowBaseWidthHeight %>px;
+		}
+		.`<%= _sizeName %>`.`upLeft` .`arrow`,
+		.`<%= _sizeName %>`.`upRight` .`arrow`,
+		.`<%= _sizeName %>`.`downLeft` .`arrow`,
+		.`<%= _sizeName %>`.`downRight` .`arrow`,
+		.`<%= _sizeName %>`.`center` .`arrow` {
+			border-width: <%= _diagonalArrowWidthHeight / 2 %>px;
+		}
+		.`<%= _sizeName %>`.`upLeft` .`arrow`,
+		.`<%= _sizeName %>`.`upRight` .`arrow`,
+		.`<%= _sizeName %>`.`downLeft` .`arrow`,
+		.`<%= _sizeName %>`.`downRight` .`arrow`,
+		.`<%= _sizeName %>`.`center` .`arrow` {
+			top: <%= -_diagonalArrowCenteringOffset %>px;
+			left: <%= -_diagonalArrowCenteringOffset %>px;
+		}<%
+	}
+	_sizeStyleRule ('tiny');
+	_sizeStyleRule ('small');
+	_sizeStyleRule ('medium');
+	_sizeStyleRule ('large');
+%>
+
