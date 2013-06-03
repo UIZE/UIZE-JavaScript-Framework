@@ -40,6 +40,12 @@ Uize.module ({
 					directionY:[-1,0,1],
 					size:Uize.keys (Uize.Widgets.CssUtil.sizes)
 				});
+				this.addStateCombinationSamples ({
+					flavor:['positive','negative','primary'],
+					directionX:[-1,0,1],
+					directionY:[-1,0,1],
+					size:'medium'
+				});
 			},
 
 			staticProperties:{
