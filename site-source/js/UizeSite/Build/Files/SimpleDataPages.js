@@ -21,8 +21,6 @@
 		The =UizeSite.Build.Files.SimpleDataPages= package provides a method to recurse a folder structure and build pages from =.simpledata= files using =.jst= templates.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		The =UizeSite.Build.Files.SimpleDataPages= module is designed specifically to run in the context of Windows Script Host.
 */
 
 Uize.module ({

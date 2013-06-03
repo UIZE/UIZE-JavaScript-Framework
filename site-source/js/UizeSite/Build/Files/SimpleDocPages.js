@@ -21,8 +21,6 @@
 		The =UizeSite.Build.Files.SimpleDocPages= package provides a method to build all the SimpleDoc documentation for the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		The =UizeSite.Build.Files.SimpleDocPages= module is designed specifically to run in the context of Windows Script Host.
 */
 
 Uize.module ({

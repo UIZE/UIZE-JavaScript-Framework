@@ -21,8 +21,6 @@
 		The =Uize.Build.AuditStrings= package provides a method to audit all JavaScript files in a folder for literal strings - useful for internationalization.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		The =Uize.Build.AuditStrings= module is designed specifically to run in the context of Windows Script Host.
 */
 
 /*

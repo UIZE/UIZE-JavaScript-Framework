@@ -21,16 +21,13 @@
 		The =Uize.Build.NeatenJsFiles= package provides a way to recurse folder structures and neaten all JavaScript (.js) files by removing unnecessary trailing whitespace.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		The =Uize.Build.NeatenJsFiles= module is designed specifically to run in the context of Windows Script Host.
 */
 
 Uize.module ({
 	name:'Uize.Build.NeatenJsFiles',
 	required:[
 		'Uize.Build.Util',
-		'Uize.String.Lines',
-		'Uize.Build.AutoScruncher'
+		'Uize.String.Lines'
 	],
 	builder:function () {
 		'use strict';

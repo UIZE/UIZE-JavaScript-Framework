@@ -21,8 +21,6 @@
 		The =Uize.Build.UpdateCopyrightNotices= package provides a way to recurse folder structures and update the copyright notices for all JavaScript (.js) files to cover the current year.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		The =Uize.Build.UpdateCopyrightNotices= module is designed specifically to run in the context of Windows Script Host.
 */
 
 Uize.module ({
