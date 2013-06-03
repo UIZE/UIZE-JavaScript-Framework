@@ -39,7 +39,7 @@
 			border-color: #ccc #999 #999 #ccc;
 			color: #444;
 			text-shadow: 1px -1px 0 #fff, 1px 0px 0 #fff, 1px 1px 0 #fff;
-			<% _buttonBgGradient ('#fff','#e0e0e0','#eee') %>
+			<% _buttonBgGradient ('#ffffff','#e0e0e0','#eeeeee') %>
 		}
 
 		.`normal-over`,
@@ -88,7 +88,7 @@
 		.`positive`:active {
 			border-color: #9c9 #696 #585 #9c9;
 			color: #fff;
-			<% _buttonBgGradient ('#8d4','#592','#5a2') %>
+			<% _buttonBgGradient ('#88dd44','#559922','#55aa22') %>
 		}
 
 		.`positive-over`,
@@ -137,7 +137,7 @@
 		.`negative`:active {
 			border-color: #9c9 #696 #585 #9c9;
 			color: #fff;
-			<% _buttonBgGradient ('#8d4','#592','#5a2') %>
+			<% _buttonBgGradient ('#88dd44','#559922','#55aa22') %>
 		}
 
 		.`negative-over`,
