@@ -5317,6 +5317,10 @@ Uize = (function () {
 				*/
 			};
 
+		_package.package = function (_statics) {
+			return _package.copyInto (function () {},_statics);
+		};
+
 		_package.pairUp = function (_firstArg) {
 			var
 				_result = {},
