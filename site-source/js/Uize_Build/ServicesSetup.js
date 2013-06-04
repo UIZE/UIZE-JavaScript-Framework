@@ -29,11 +29,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.setup = function () {
+		return Uize.package ({
+			setup:function () {
 				/*** provide setup for FileSystem service ***/
 					var _isWsh = typeof ActiveXObject != 'undefined';
 					Uize.Services.Setup.provideServiceSetup (
@@ -44,9 +41,8 @@ Uize.module ({
 							_doneWithSetup ();
 						}
 					);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

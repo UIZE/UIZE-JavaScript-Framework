@@ -30,13 +30,12 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
 				_sacredEmptyObject = {},
 				_Uize_defaultNully = Uize.defaultNully
 			;
 
-		/*** Public Static Methods ***/
-			_package.fromCompactString = function (_compactStr,_encodingOptions) {
+		return Uize.package ({
+			fromCompactString:function (_compactStr,_encodingOptions) {
 				_encodingOptions || (_encodingOptions = _sacredEmptyObject);
 				var
 					_opener = _Uize_defaultNully (_encodingOptions.opener,'[') + '',
@@ -91,9 +90,9 @@ Uize.module ({
 					}
 				}
 				return _levels [0];
-			};
+			},
 
-			_package.toCompactString = function (_tree,_encodingOptions) {
+			toCompactString:function (_tree,_encodingOptions) {
 				_encodingOptions || (_encodingOptions = _sacredEmptyObject);
 				var
 					_opener = _Uize_defaultNully (_encodingOptions.opener,'[') + '',
@@ -117,9 +116,8 @@ Uize.module ({
 					return _paths.join (_separator);
 				}
 				return _toCompactString (_tree) || '';
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

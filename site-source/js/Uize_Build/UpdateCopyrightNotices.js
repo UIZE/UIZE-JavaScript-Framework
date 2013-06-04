@@ -29,17 +29,14 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
 		/*** General Variables ***/
 			var
 				_copyrightNoticeRegExp = /\(c\)\s*\d{4}(?:\s*-\s*(\d{4}))?/i,
 				_copyrightNoticeEndYearRegExp = /(-\s*)(\d{4})/
 			;
 
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return Uize.package ({
+			perform:function (_params) {
 				var _thisYear = (new Date).getFullYear ();
 				Uize.Build.Util.buildFiles (
 					Uize.copyInto (
@@ -85,9 +82,8 @@ Uize.module ({
 						{alwaysBuild:true}
 					)
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

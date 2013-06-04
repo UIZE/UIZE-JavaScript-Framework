@@ -29,14 +29,11 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return Uize.package ({
+			perform:function (_params) {
 				Uize.Build.Util.runUnitTests (_params.testModule,_params.silent == 'true');
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

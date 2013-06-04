@@ -40,7 +40,6 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
 				_true = true,
 				_false = false,
 				_undefined,
@@ -121,8 +120,23 @@ Uize.module ({
 					return _class;
 				}) ();
 
-		/*** Public Static Methods ***/
-			_package.dedupe = function (_source,_canonicalizer,_target) {
+			function _removeOrRetainValues (_source,_valuesToRemove,_canonicalizer,_target,_retain) {
+				var _valueIndexer = new _ValueIndexer (_canonicalizer);
+				_Uize.forEach (
+					_valuesToRemove,
+					function (_valueToRemove) {_valueIndexer.isIn (_valueToRemove,_true)},
+					0,
+					_true
+				);
+				_target = _Uize.Data.Matches.retain (
+					_source,function (_value) {return _valueIndexer.isIn (_value) == _retain},null,_target
+				);
+				_valueIndexer.cleanUp ();
+				return _target;
+			}
+
+		return Uize.package ({
+			dedupe:function (_source,_canonicalizer,_target) {
 				_target = _source;
 				/* TO DO
 					- support canonicalizers that can achieve the effect of loose type comparison
@@ -155,32 +169,16 @@ Uize.module ({
 				);
 				_valueIndexer.cleanUp ();
 				return _target;
-			};
+			},
 
-			function _removeOrRetainValues (_source,_valuesToRemove,_canonicalizer,_target,_retain) {
-				var _valueIndexer = new _ValueIndexer (_canonicalizer);
-				_Uize.forEach (
-					_valuesToRemove,
-					function (_valueToRemove) {_valueIndexer.isIn (_valueToRemove,_true)},
-					0,
-					_true
-				);
-				_target = _Uize.Data.Matches.retain (
-					_source,function (_value) {return _valueIndexer.isIn (_value) == _retain},null,_target
-				);
-				_valueIndexer.cleanUp ();
-				return _target;
-			}
-
-			_package.removeValues = function (_source,_valuesToRemove,_canonicalizer,_target) {
+			removeValues:function (_source,_valuesToRemove,_canonicalizer,_target) {
 				return _removeOrRetainValues (_source,_valuesToRemove,_canonicalizer,_target,_false);
-			};
+			},
 
-			_package.retainValues = function (_source,_valuesToRemove,_canonicalizer,_target) {
+			retainValues:function (_source,_valuesToRemove,_canonicalizer,_target) {
 				return _removeOrRetainValues (_source,_valuesToRemove,_canonicalizer,_target,_true);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

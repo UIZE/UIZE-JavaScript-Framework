@@ -25,10 +25,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.initialize = function () {
+		return Uize.package ({
+			initialize:function () {
 				Uize.Node.setStyle (document.body,{margin:0});
 				var
 					_html = UizeSite.Templates.DelvePageHtml.process ({
@@ -40,9 +38,8 @@ Uize.module ({
 					document.body,
 					'<iframe src="' + _srcAttributeValue + '" frameborder="0" style="width:100%; height:100%; border:0;"></iframe>'
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

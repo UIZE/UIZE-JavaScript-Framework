@@ -34,11 +34,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return Uize.package ({
+			perform:function (_params) {
 				var
 					_libraryModuleSuffixRegExp = /\.library$/i,
 					_modulesExcludingLibraryModules = Uize.Data.Matches.values (
@@ -73,9 +70,8 @@ Uize.module ({
 					})
 				;
 				Uize.Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true',_params.logFilePath);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

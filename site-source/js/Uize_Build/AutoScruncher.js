@@ -39,11 +39,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return Uize.package ({
+			perform:function (_params) {
 				var
 					_buildDate = Uize.Date.toIso8601 (),
 					_endsWithDotJsRegExp = /\.js$/,
@@ -210,9 +207,8 @@ Uize.module ({
 							}
 						)
 					);
-				};
-
-		return _package;
+			}
+		});
 	}
 });
 

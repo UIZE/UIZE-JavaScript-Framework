@@ -31,12 +31,11 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
-				_package = function () {},
 				_sacredEmptyObject = {}
 			;
 
-		/*** Public Static Methods ***/
-			_package.toList = function (_tree,_delimiter) {
+		return Uize.package ({
+			toList:function (_tree,_delimiter) {
 				if (_delimiter == _undefined)
 					_delimiter = '.'
 				;
@@ -49,9 +48,9 @@ Uize.module ({
 				}
 				_processTreeNode (_tree,'');
 				return _paths;
-			};
+			},
 
-			_package.fromList = function (_paths,_delimiter) {
+			fromList:function (_paths,_delimiter) {
 				if (_delimiter == _undefined)
 					_delimiter = '.'
 				;
@@ -76,8 +75,7 @@ Uize.module ({
 					;
 				}
 				return _tree;
-			};
-
-		return _package;
+			}
+		});
 	}
 });

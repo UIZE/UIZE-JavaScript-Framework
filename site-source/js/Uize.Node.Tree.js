@@ -600,17 +600,14 @@ Uize.module ({
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
-				_Uize_Node = Uize.Node
-			;
+			var _Uize_Node = Uize.Node;
 
 		/*** Utility Functions ***/
 			function _setItemExpanded (_item,_expanded) {if (!_expanded) _item.expanded = false}
 			function _isListNode (_node) {return _node && (_node.tagName == 'UL' || _node.tagName == 'OL')}
 
-		/*** Public Static Methods ***/
-			_package.getTreeFromList = function (_node) {
+		return Uize.package ({
+			getTreeFromList:function (_node) {
 				function _getText (_node) {
 					var _text = '';
 					if (_node) {
@@ -678,9 +675,9 @@ Uize.module ({
 							NOTES
 							- compare to the =Uize.Node.Tree.getTreeFromPage= static method
 				*/
-			};
+			},
 
-			_package.getTreeFromPage = function  (_levelClasses,_initialExpandedDepth) {
+			getTreeFromPage:function  (_levelClasses,_initialExpandedDepth) {
 				var
 					_levelClassMap = {},
 					_levelClassRegExp = [],
@@ -775,9 +772,8 @@ Uize.module ({
 							NOTES
 							- compare to the =Uize.Node.Tree.getTreeFromList= static method
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

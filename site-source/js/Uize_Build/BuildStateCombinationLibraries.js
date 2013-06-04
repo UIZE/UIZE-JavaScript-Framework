@@ -68,10 +68,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return Uize.package ({
+			perform:function (_params) {
 				var
 					_builtPath = _params.builtPath,
 					_modulesFolder = _params.modulesFolder,
@@ -157,9 +155,8 @@ Uize.module ({
 					);
 				}
 				_makeStateCombinationDeltaPackages ([]);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

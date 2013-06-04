@@ -89,9 +89,6 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
 		/*** General Variables ***/
 			var
 				_eventNames = [
@@ -119,8 +116,8 @@ Uize.module ({
 				_nonI18nStringsDictionaryLookup
 			;
 
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return Uize.package ({
+			perform:function (_params) {
 				var
 					_endsWithDotJsRegExp = /\.js$/,
 					_sourceFolderName = _params.sourceFolderName
@@ -206,9 +203,8 @@ Uize.module ({
 						}
 					)
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

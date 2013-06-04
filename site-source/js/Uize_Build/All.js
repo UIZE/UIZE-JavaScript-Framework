@@ -29,10 +29,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return Uize.package ({
+			perform:function (_params) {
 				var
 					_startTime = Uize.now (),
 					_buildSequence = _params.buildSequence,
@@ -61,9 +59,8 @@ Uize.module ({
 						;
 					}
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

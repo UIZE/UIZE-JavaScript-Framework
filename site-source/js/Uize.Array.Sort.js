@@ -210,10 +210,7 @@ Uize.module ({
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
-				_Function = Function
-			;
+			var _Function = Function;
 
 		/*** General Variables ***/
 			var
@@ -224,8 +221,8 @@ Uize.module ({
 				_descendingSimpleSort = _Function ('a,b','return a<b?1:a>b?-1:0')
 			;
 
-		/*** Public Static Methods ***/
-			_package.sortBy = function (_elements,_sortValueGenerator,_direction) {
+		return Uize.package ({
+			sortBy:function (_elements,_sortValueGenerator,_direction) {
 				var _elementsLength = _elements.length;
 				if (_elementsLength > 1) {
 					if (_sortValueGenerator != null) {
@@ -506,9 +503,8 @@ Uize.module ({
 
 									When we use the =directionINT= parameter to reverse the sort direction, we no longer need to use the array's length in the `sort value generator expression`. Instead, we can have a simpler expression that simply returns the key / index.
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

@@ -71,7 +71,6 @@ Uize.module({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
 				_true = true,
 				_false = false
 			;
@@ -146,8 +145,8 @@ Uize.module({
 		/*** Private Static Properties ***/
 			var _settings = {};
 
-		/*** Public Static Methods ***/
-			_package.scrunch = function (_sourceCode,_scruncherSettings) {
+		return Uize.package ({
+			scrunch:function (_sourceCode,_scruncherSettings) {
 				var
 					/*** report variables ***/
 						_uniqueIdentifiersScrunched = 0,
@@ -509,8 +508,7 @@ Uize.module({
 
 							In the above example, the =scruncherSettingsSTR= parameter is being used to direct the Scruncher to omit the source code's head comment when scrunching it.
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });

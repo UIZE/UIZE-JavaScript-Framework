@@ -34,25 +34,22 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.defineTemplateModule = function (_moduleName,_templateText) {
+		return Uize.package ({
+			defineTemplateModule:function (_moduleName,_templateText) {
 				var _compiledTemplate = Uize.Template.compile (_templateText,{result:'full'});
 				Uize.module ({
 					name:_moduleName,
 					required:_compiledTemplate.required,
 					builder:function () {
-						var _package = function () {};
-						_package.process = Function ('input',_compiledTemplate.code);
-						_package.input = _compiledTemplate.input;
-						return _package;
+						return Uize.package ({
+							process:Function ('input',_compiledTemplate.code),
+							input:_compiledTemplate.input
+						});
 					}
 				});
-			};
+			},
 
-			_package.buildTemplateModuleText = function (_moduleName,_templateText) {
+			buildTemplateModuleText:function (_moduleName,_templateText) {
 				var _compiledTemplate = Uize.Template.compile (_templateText,{result:'full'});
 				return Uize.Build.Util.moduleAsText ({
 					name:_moduleName,
@@ -61,25 +58,20 @@ Uize.module ({
 						'function () {',
 						'	\'use strict\';',
 						'',
-						'	var _package = function () {};',
-						'',
-						'	/*** Public Static Methods ***/',
-						'		_package.process = function (input) {',
+						'	return Uize.package ({',
+						'		process:function (input) {',
 						'			' +
 							Uize.String.Lines.indent (Uize.String.Lines.trimRight (_compiledTemplate.code),4,'\t',false),
-						'		};',
+						'		},',
 						'',
-						'	/*** Public Static Properties ***/',
-						'		_package.input = ' +
-							Uize.String.Lines.indent (Uize.Json.to (_compiledTemplate.input),3,'\t',false) + ';',
-						'',
-						'	return _package;',
+						'		input:' +
+							Uize.String.Lines.indent (Uize.Json.to (_compiledTemplate.input),3,'\t',false),
+						'	});',
 						'}'
 					].join ('\n')
 				});
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

@@ -92,13 +92,10 @@ Uize.module ({
 	required:'Uize.Xml',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
-				_Uize_Xml_toAttributeValue = Uize.Xml.toAttributeValue
-			;
+			var _Uize_Xml_toAttributeValue = Uize.Xml.toAttributeValue;
 
-		/*** Public Static Methods ***/
-			_package.process = function (_input) {
+		return Uize.package ({
+			process:function (_input) {
 				var
 					_indentChars = typeof _input.indentChars == 'string' ? _input.indentChars : '\t',
 					_listLines = []
@@ -145,15 +142,12 @@ Uize.module ({
 				}
 				_addListItems ({items:_input.items},'');
 				return _listLines.join ('\n');
-			};
-
-		/*** Public Static Properties ***/
-			_package.input = {
+			},
+			input:{
 				indentChars:'string',
 				items:'array'
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

@@ -32,9 +32,6 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
 		/*** General Variables ***/
 			var
 				_serviceProvisioning = Uize.Util.Needs (),
@@ -48,8 +45,8 @@ Uize.module ({
 				return _serviceSetupProvided [_module] == _trueFlag;
 			}
 
-		/*** Public Static Methods ***/
-			_package.provideServiceSetup = function (_serviceModuleName,_serviceAdapterModuleName,_serviceSetup) {
+		return Uize.package ({
+			provideServiceSetup:function (_serviceModuleName,_serviceAdapterModuleName,_serviceSetup) {
 				/*** override Uize.require in order to inject service setup ***/
 					if (!_uizeRequire) {
 						_uizeRequire = Uize.require;
@@ -88,9 +85,8 @@ Uize.module ({
 						);
 					}
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

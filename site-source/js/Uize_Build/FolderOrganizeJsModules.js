@@ -55,7 +55,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return {
+		return Uize.package ({
 			perform:function (_params) {
 				var
 					_modulesFolderPath = _params.sourcePath + '/' + _params.modulesFolder,
@@ -81,7 +81,7 @@ Uize.module ({
 					}
 				});
 			}
-		};
+		});
 	}
 });
 

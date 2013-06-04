@@ -98,7 +98,6 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
 				_true = true,
 				_false = false
 			;
@@ -425,7 +424,7 @@ Uize.module ({
 								- see related `mouse-exit-at-edge registered virtual DOM event`
 					*/
 
-		return _package;
+		return Uize.package ();
 	}
 });
 

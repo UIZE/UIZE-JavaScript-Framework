@@ -287,8 +287,8 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
-				_Uize_Date = Uize.Date
+				_Uize_Date = Uize.Date,
+				_format = _Uize_Date.format
 			;
 
 		/*** General Variables ***/
@@ -328,8 +328,8 @@ Uize.module ({
 				return -1;
 			}
 
-		/*** Public Static Methods ***/
-			_package.format = _package.toPretty = _Uize_Date.format;
+		return Uize.package ({
+			format:_format,
 				/*?
 					Static Methods
 						Uize.Date.Formatter.format
@@ -435,7 +435,9 @@ Uize.module ({
 							- when the value =''= (empty string), =null=, or =undefined= is specified for the =dateSTRorNUMorOBJ= parameter, then this parameter will be defaulted to the date at the time that the method is called (today's date, essentially)
 				*/
 
-			_package.parse = function (_date,_format) {
+			toPretty:_format,
+
+			parse:function (_date,_format) {
 				var _tokenName;
 
 				/*** return early for dates specified as Date object, null, undefined, empty string, or number ***/
@@ -714,9 +716,8 @@ Uize.module ({
 							- see the companion =Uize.Date.Formatter.format= static method
 							- the =Uize.Date.Formatter.parse= method does currently not support parsing the ={date}= `date component token`
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

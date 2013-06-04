@@ -31,12 +31,11 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
-				_null = null,
-				_package = function () {}
+				_null = null
 			;
 
-		/*** Public Static Methods ***/
-			_package.setCookie = function (_name,_value,_path,_expiration) {
+		return Uize.package ({
+			setCookie:function (_name,_value,_path,_expiration) {
 				if (_value === _undefined || _value == _null) {
 					_value = '';
 					_expiration = 'Mon, 1 Jan 1990 12:00:00 UTC';
@@ -76,9 +75,9 @@ Uize.module ({
 
 							When only a =cookieNameSTR= parameter is specified, the cookie specified by that parameter will be cleared.
 				*/
-			};
+			},
 
-			_package.getCookie = function (_name) {
+			getCookie:function (_name) {
 				var
 					_value = '',
 					_cookieStr = document.cookie
@@ -108,9 +107,8 @@ Uize.module ({
 							NOTES
 							- if there is no cookie stored by the specified name, then an empty string will be returned
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

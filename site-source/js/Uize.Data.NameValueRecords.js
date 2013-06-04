@@ -373,12 +373,11 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
-				_Uize_defaultNully = Uize.defaultNully,
-				_package = function () {}
+				_Uize_defaultNully = Uize.defaultNully
 			;
 
-		/*** Public Static Methods ***/
-			_package.fromHash = function (_hash,_nameProperty,_valueProperty) {
+		return Uize.package ({
+			fromHash:function (_hash,_nameProperty,_valueProperty) {
 				var _result = [];
 
 				if (Uize.isObject (_hash)) {
@@ -565,9 +564,9 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.Data.NameValueRecords.toHash= static method
 				*/
-			};
+			},
 
-			_package.toHash = function (_records,_nameProperty,_valueProperty) {
+			toHash:function (_records,_nameProperty,_valueProperty) {
 				var
 					_result = {},
 					_recordsLength = Uize.isArray (_records) && _records.length
@@ -826,8 +825,7 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.Data.NameValueRecords.fromHash= static method
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });

@@ -108,7 +108,6 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
 				_true = true,
 				_false = false,
 				_undefined
@@ -139,8 +138,8 @@ Uize.module ({
 				return new RegExp (Uize.escapeRegExpLiteral (_replaceStr),'g');
 			}
 
-		/*** Public Static Methods ***/
-			_package.from = function (_toDecode,_decodingOptions) {
+		return Uize.package ({
+			from:function (_toDecode,_decodingOptions) {
 				var
 					_columns = _getDefaultedOption (_decodingOptions,'columns'),
 					_hasHeader = _getDefaultedOption (_decodingOptions,'hasHeader'),
@@ -591,9 +590,9 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.Data.Csv.to= static method
 				*/
-			};
+			},
 
-			_package.to = function (_toEncode,_encodingOptions) {
+			to:function (_toEncode,_encodingOptions) {
 				var
 					_csvChunks = [],
 					_firstRow = _toEncode [0],
@@ -1183,9 +1182,8 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.Data.Csv.from= static method
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

@@ -34,7 +34,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return {
+		return Uize.package ({
 			perform:function (_params) {
 				var
 					_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -129,7 +129,7 @@ Uize.module ({
 
 				alert ('DEPLOY COMPLETE!!!');
 			}
-		};
+		});
 	}
 });
 

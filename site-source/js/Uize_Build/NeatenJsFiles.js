@@ -32,11 +32,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Public Static Methods ***/
-			_package.perform = function (_params) {
+		return Uize.package ({
+			perform:function (_params) {
 				Uize.Build.Util.buildFiles (
 					Uize.copyInto (
 						{
@@ -64,9 +61,8 @@ Uize.module ({
 						{alwaysBuild:true}
 					)
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 
