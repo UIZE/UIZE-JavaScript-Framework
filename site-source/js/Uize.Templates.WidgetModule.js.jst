@@ -1,0 +1,79 @@
+<%@
+	required (
+		'Uize.String',
+		'Uize.Json',
+		'Uize.String.Lines'
+	);
+	input ({
+		widgetNamespace:'string',
+		superclass:'string',
+		developers:'array',
+		hasHtml:'boolean',
+		hasCss:'boolean'
+	});
+%><%
+	var
+		_widgetNamespace = input.widgetNamespace,
+		_widgetModuleName = _widgetNamespace + '.Widget',
+		_hasHtml = input.hasHtml,
+		_hasCss = input.hasCss,
+		_htmlModuleName = _widgetNamespace + '.Html',
+		_cssModuleName = _widgetNamespace + '.Css',
+		_required = []
+	;
+	_hasHtml && _required.push (_htmlModuleName);
+	_hasCss && _required.push (_cssModuleName);
+%>/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : <%= _widgetModuleName %> Class
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)<%= (new Date ()).getFullYear () %> UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/* Module Meta Data
+	type: Class
+	importance: 1
+	codeCompleteness: 5
+	docCompleteness: 100
+*/
+
+/*?
+	Introduction
+		The =<%= _widgetModuleName %>= module implements a widget class.
+
+		*DEVELOPERS:* <%= Uize.String.hugJoin (input.developers || [],'`','`',', ') %>
+*/
+
+Uize.module ({
+	name:'<%= _widgetModuleName %>',
+	superclass:'<%= input.superclass || 'Uize.Widget.V2' %>',
+	required:<%= Uize.String.Lines.indent (Uize.Json.to (_required),1,'\t',false) %>,
+	builder:function (_superclass) {
+		'use strict';
+
+		return _superclass.subclass ({
+<%
+		if (_hasHtml) {
+%>			set:{
+				html:<%= _htmlModuleName %>
+			}<%
+			if (_hasCss) { %>,
+
+
+<% 		} else { %>
+<%			}
+		}
+		if (_hasCss) {
+%>			staticProperties:{
+				cssModule:<%= _cssModuleName %>
+			}
+<%
+		}
+%>		});
+	}
+});
+
