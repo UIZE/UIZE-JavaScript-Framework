@@ -1,0 +1,38 @@
+<%@
+	required ('Uize.Widgets.CssUtil');
+%><%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_boxBorderWidth = _cssUtil.box.border.width
+	;
+%>.`text` {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	font-size: bold;
+}
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var
+				_sizeOuter = _size.outer,
+				_widthHeight = _sizeOuter - _boxBorderWidth * 2
+			;
+			%>.`<%= _sizeName %>` {
+				font-size: <%= _widthHeight * .75 %>px;
+				line-height: <%= _widthHeight %>px;
+			}
+
+			.`<%= _sizeName %>`.`doubleChar` {
+				font-size: <%= _widthHeight * .55 %>px;
+			}<%
+		}
+	);
+%>
+
