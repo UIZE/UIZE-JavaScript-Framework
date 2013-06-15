@@ -327,28 +327,24 @@ Types of Modules
 		So, when declaring packages, there is no meaning to the concept of superclass. This means that the optional =superclass= parameter would not be applicable. Additionally, the value that is passed as a parameter to the specified builder function would not be valuable, and so your builder function can simply have no parameters.
 
 		PACKAGE MODULE
-		....................................
+		.....................................
 		Uize.module ({
 			name:'Uize.Node',
 			builder:function () {
 				'use strict';
 
-				var _package = function () {};
-
-				/*
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				*/
-
-				return _package;
+				return Uize.package ({
+					/*
+					...STATIC PROPERTIES HERE...
+					...STATIC PROPERTIES HERE...
+					...STATIC PROPERTIES HERE...
+					*/
+				});
 			}
 		});
-		....................................
+		.....................................
 
-		IMPORTANT
-
-		In the example above, notice how the package object being built by the builder function is initialized as an anonymous function. For the benefit of the inheritance mechanism of the UIZE JavaScript Framework, the package should be built upon a function and not an object. Making the package an object would result in deep cloning in certain cases of subclassing, and this is not desirable for performance reasons.
+		Because of certain aspects of the inheritance mechanism of the UIZE JavaScript Framework, packages should be function objects containing custom properties. To create the package function that is returned by the module's builder function, we call the =Uize.package= method. This method accepts a single object parameter that specifies the statics (methods and/or properties) for the package, and then returns a new anonymous function object with those statics copied into it.
 
 	Extension Module
 		Extension modules are modules of code that extend on the implementation of a class or package.

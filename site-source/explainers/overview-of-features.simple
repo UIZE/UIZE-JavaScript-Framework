@@ -2,17 +2,143 @@ Introduction
 	This document provides an overview of the comprehensive feature set of the UIZE JavaScript Framework, with examples and links to further explainers.
 
 Inheritance and Object Orientation
-	The UIZE JavaScript Framework implements a system for class inheritance that makes subclassing and object-oriented programming possible in JavaScript.
+	UIZE implements a system for class inheritance to facilitate object-oriented programming in JavaScript.
 
-	Subclassing is very easy in the UIZE JavaScript Framework. Creating a fresh subclass is as simple as the following statement...
+	Class features are provided in the =Uize.Class= module. You can create your own class very easily, simply by calling the =subclass= method on the =Uize.Class= base class, as follows...
 
-	..........................................
-	var MySubclass = MySuperclass.subclass ();
-	..........................................
+	.....................................
+	var MyCkass = Uize.Class.subclass ();
+	.....................................
 
-	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and declaring state properties or overriding the initial values of inherited state properties. Each class that you create using the framework inherits the =subclass= static method, so you can easily make further subclasses of them.
+	Declaring Features
+		Once you have your own class, you can modify it in numerous ways to declare features.
 
-	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, state properties declared on the superclass using the =Uize.Class.stateProperties= static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing =Uize.Class= subclasses, the =Uize.Class= base class also provides its subclasses with a `state interface` and an `event infrastructure`.
+		Mofifying the Class Manually
+			You can declare features on a class by modifying the class manually.
+
+			- assign properties on the class' =prototype= object to define instance methods and/or properties
+			- assign properties on the class to define static methods and/or properties
+
+			EXAMPLE
+			....................................................
+			MyClass.prototype.someInstanceMethod = function () {
+				// do some stuff
+			};
+
+			MyClass.someStaticMethod = function () {
+				// do some stuff
+			};
+			....................................................
+
+		Using the Feature Declaration Methods
+			You can declare features on a class using the various feature declaration static methods of the class that are inherited from the =Uize.Class= base class.
+
+			- call the =MyClass.instanceMethods= method to declare instance methods
+			- call the =MyClass.staticMethods= method to declare static methods
+			- call the =MyClass.stateProperties= method to declare state properties
+			- more feature declaration methods: =MyClass.instanceProperties=, =MyClass.staticProperties=, etc.
+
+			EXAMPLE
+			....................................
+			MyClass.instanceMethods ({
+				someInstanceMethod1:function () {
+					// do some stuff
+				},
+				someInstanceMethod2:function () {
+					// do some stuff
+				}
+			});
+
+			MyClass.staticMethods ({
+				someStaticMethod1:function () {
+					// do some stuff
+				},
+				someStaticMethod2:function () {
+					// do some stuff
+				}
+			});
+			....................................
+
+		Using the declare Static Method
+			As an alternative to calling the feature declaration methods individually, the =MyClass.declare= static can be used to combine all the feature declarations into a single method call...
+
+			.......................................
+			MyClass.declare ({
+				instanceMethods:{
+					someInstanceMethod1:function () {
+						// do some stuff
+					},
+					someInstanceMethod2:function () {
+						// do some stuff
+					}
+				},
+				staticMethods:{
+					someStaticMethod1:function () {
+						// do some stuff
+					},
+					someStaticMethod2:function () {
+						// do some stuff
+					}
+				}
+			});
+			.......................................
+
+		Declaring Features During Class Creation
+			As an even more concise form of declaring class features, the features can be optionally declared in the call to the =subclass= method.
+
+			.......................................
+			var MyClass = Uize.Class.subclass ({
+				instanceMethods:{
+					someInstanceMethod1:function () {
+						// do some stuff
+					},
+					someInstanceMethod2:function () {
+						// do some stuff
+					}
+				},
+				staticMethods:{
+					someStaticMethod1:function () {
+						// do some stuff
+					},
+					someStaticMethod2:function () {
+						// do some stuff
+					}
+				}
+			});
+			.......................................
+
+	Creating Further Subclasses
+		All subclasses that inherit from =Uize.Class= get a =subclass= static method, so you can make further subclasses just as easily...
+
+		...........................................................
+		var MyClass = Uize.Class.subclass ({
+			instanceMethods:{
+				fooMethod:function () {
+					alert ('foo');
+				},
+				barMethod:function () {
+					alert ('bar');
+				}
+			}
+		});
+
+		var MySubclass = MyClass.subclass ({
+			instanceMethods:{
+				barMethod:function () {
+					alert ('overridden bar');
+				}
+			}
+		});
+
+		var mySubclassInstance = new MySubclass ();
+		mySubclassInstance.fooMethod ();  // alerts "foo"
+		mySubclassInstance.barMethod ();  // alerts "overriden bar"
+		...........................................................
+
+	Inheritance
+		The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, state properties declared on the superclass using the =Uize.Class.stateProperties= static method, and static methods and properties assigned on the superclass.
+
+		The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing =Uize.Class= subclasses, the =Uize.Class= base class also provides its subclasses with a `state interface` and an `event infrastructure`.
 
 	For a more in-depth discussion on class inheritance, consult the explainer [[javascript-inheritance.html][JavaScript Inheritance]].
 
@@ -35,12 +161,22 @@ Modules and Dependency Resolution
 	});
 	........................................................................
 
-	In the above example, the package modules =Uize.Node= and =Uize.Color= (explicit dependencies) and the namespace module =MyNamespace= and class module =Uize.Widget= (implicit dependencies) must be loaded and built before the =MyNamespace.MyWidgetClass= module can be built. The properties of a module declaration make it possible to implement a number of different types of modules, including subclass modules, package modules, extension modules, anonymous modules, namespace modules, and alias modules.
+	DIRECT DEPENDENCIES
+	...........
+	Uize.Node
+	Uize.Color
+	MyNamespace
+	Uize.Widget
+	...........
+
+	In the above example, the package modules =Uize.Node= and =Uize.Color= (explicit dependencies) and the namespace module =MyNamespace= and class module =Uize.Widget= (implicit dependencies) must be loaded and built before the =MyNamespace.MyWidgetClass= module can be built.
+
+	The generic nature of the module declaration makes it possible to implement a number of different types of modules, including subclass modules, package modules, extension modules, anonymous modules, namespace modules, and alias modules.
 
 	For a more in-depth discussion of modules, see the explainer [[javascript-modules.html][JavaScript Modules]].
 
 State Interface
-	The UIZE JavaScript Framework implements a system to facilitate a state-oriented approach to software design.
+	UIZE implements a system to facilitate a state-oriented approach to software design.
 
 	The state interface is provided in the form of the state properties system, where state is changed by means of the generic =set= instance and static methods, and state is queried by means of the generic =get= instance and static methods. While methods exist in many classes to modify state, an emphasis is placed on using the state properties system as the primary means for modifying state of instances. The framework encourages creating interfaces using state properties combined with internal change handlers that respond to changes in state, rather than by creating methods for effecting changes in internal state.
 
@@ -88,7 +224,7 @@ State Interface
 	For a more in-depth discussion on state properties, consult the explainer [[state-properties.html][State Properties]].
 
 Event Infrastructure
-	The JavaScript language does not provide a built-in system for event-driven programming, so the UIZE JavaScript Framework provides an event system.
+	The JavaScript language does not provide a built-in system for event-driven programming, so UIZE provides an event system.
 
 	Such events can be dispatched (or "fired") from anywhere in the code in an ad hoc fashion, and listenable events do not need to be registered formally. Multiple handlers can be registered for the same event. Handlers can be registered for events that are never fired, without ill effects. Conversely, events can be dispatched that are never listened for, without ill effects.
 
@@ -111,7 +247,7 @@ Event Infrastructure
 	For a more in-depth discussion on events, consult the explainer [[javascript-event-system.html][JavaScript Event System]].
 
 Ajax / Asynchronous Communication
-	The UIZE JavaScript Framework provides features to enable Web applications to more easily perform asynchronous communication with a Web server, a technique that is often referred to broadly as [[http://www.wikipedia.org/Ajax_(programming)][Ajax]].
+	UIZE provides features to enable Web applications to more easily perform asynchronous communication with a Web server, a technique that is often referred to broadly as [[http://www.wikipedia.org/Ajax_(programming)][Ajax]].
 
 	The =Uize.Comm= base class provides a foundation for supporting asynchronous communication regardless of the mechanism employed, which could be a hidden =iframe=, the =XMLHttpRequest= object, or script tags (see [[http://www.wikipedia.org/AJAST_(Programming)][AJAST]]). This base class provides a caching mechanism for requests, a queueing mechanism in order to sequence successive asynchronous requests through a single communication object, and a standard interface for issuing requests. Various subclasses of the =Uize.Comm= base class implement support for different communication mechanisms.
 
@@ -163,7 +299,7 @@ DOM Manipulation
 Cross-compatibility and Browser Abstraction
 	A number of compatibility issues arise when developing applications that must run on a variety of different Web browsers.
 
-	The UIZE JavaScript Framework implements some abstractions to help with cross-browser development, such as abstracting the differences between how DOM events are implemented, or how opacity is supported in CSS. Most of these abstractions are implemented in the =Uize.Node= module.
+	UIZE implements some abstractions to help with cross-browser development, such as abstracting the differences between how DOM events are implemented, or how opacity is supported in CSS. Most of these abstractions are implemented in the =Uize.Node= module.
 
 	EXAMPLE
 	.........................................................................
@@ -173,7 +309,7 @@ Cross-compatibility and Browser Abstraction
 	The above example shows how the =Uize.Node.wire= static method of the =Uize.Node= module is used to wire a handler function to the =click= event of a DOM node with the id "myNode". The =Uize.Node.wire= method abstracts differences between the event systems of different browsers so that application developers don't need to conditionalize their code.
 
 Widgets Framework
-	The UIZE JavaScript Framework provides a system to facilitate the development of behavioral logic for widgets that can be embedded in HTML pages.
+	UIZE provides a system to facilitate the development of behavioral logic for widgets that can be embedded in HTML pages.
 
 	Functionality that can be inherited by widget classes is implemented in the =Uize.Widget= base class. The framework's widget system allows widgets to be arranged in a hierarchical tree structure, where each widget can have one parent widget and any number of child widgets. In this relationship, parent widgets can provide services to child widgets on their tree, and child widgets can inherit state from widgets higher up in the parent chain.
 
@@ -182,12 +318,12 @@ Widgets Framework
 	For a more in-depth discussion of UIZE's widget framework, consult the explainer [[javascript-widgets.html][JavaScript Widgets]].
 
 Progressive Enhancement / Unobtrusive JavaScript
-	The UIZE JavaScript Framework offers its fair share of features that can be "stitched on" to a page's markup, without the page's knowledge or deliberate consent.
+	UIZE offers its fair share of features that can be "stitched on" to a page's markup, without the page's knowledge or deliberate consent.
 
 	In the world of Web application development, there is a legitimate place for features that are implemented through the technique of *progressive enhancement* (sometimes referred to as unobtrusive JavaScript, or graceful degradation). Making tables sortable is a great example of how one can "stitch on" an enhanced user experience, without requiring much cooperation from the application development side of things. Other examples of progressive enhancement features provided in the framework are the lightweight image preview user interaction provided by the =Uize.Widget.ThumbZoom= widget class, and the ability of the =Uize.Widget.Tree.Menu= widget (and other subclasses of the =Uize.Widget.Tree= base class) to extract a hierarchical tree data structure from nested lists.
 
 Internationalization and Localization
-	The UIZE JavaScript Framework provides facilities (in =Uize.Widget=) to ease [[http://en.wikipedia.org/wiki/I18n][i18n]] (internationalization) and [[http://en.wikipedia.org/wiki/I18n][L10n]] (localization) of JavaScript code.
+	UIZE provides facilities (in =Uize.Widget=) to ease [[http://en.wikipedia.org/wiki/I18n][i18n]] (internationalization) and [[http://en.wikipedia.org/wiki/I18n][L10n]] (localization) of JavaScript code.
 
 	The =localized= state property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The =localize= instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.
 
@@ -211,7 +347,7 @@ Internationalization and Localization
 	For a more in-depth discussion of internationalization and localization, consult the explainer [[javascript-localization.html][JavaScript Localization]].
 
 JavaScript Templates
-	The UIZE JavaScript Framework implements a system for templating that allows the JavaScript language to be leveraged within templates, such templates being referred to as JavaScript templates.
+	UIZE implements a system for templating that allows the JavaScript language to be leveraged within templates, such templates being referred to as JavaScript templates.
 
 	This system allows for the use of programmatic logic and JavaScript control structures within a template for the purpose of rendering a result document. The template engine is implemented in the =Uize.Template= module, which provides a means for compiling a source template into a more performant JavaScript function. Once compiled into JavaScript functions, JavaScript templates can be used to generate text output for a variety of purposes, including, for example, the generation of HTML markup for widgets, the generation of complete HTML documents as part of a Web project build process, and the generation of RSS documents from a data source.
 
@@ -243,7 +379,7 @@ JavaScript Templates
 	For a more in-depth discussion, consult the explainer [[javascript-templates.html][JavaScript Templates]].
 
 Effects and Animation
-	The UIZE JavaScript Framework provides powerful features to support slick animation effects, with easing, bounce, elasticity, pulsing, and much more.
+	UIZE provides powerful features to support slick animation effects, with easing, bounce, elasticity, pulsing, and much more.
 
 	Effects and animation in the UIZE JavaScript Framework are achieved through use of a suite of associated modules. The =Uize.Fade= module provides the underpinnings of time-based animation and compound value interpolation, the =Uize.Fade.xFactory= extension module extends the =Uize.Fade= class with factory methods for creating, starting, and managing fades in a fade pool, and the =Uize.Fx= module provides static methods for initiating fades of CSS style properties.
 
@@ -264,7 +400,7 @@ Effects and Animation
 	For a more in-depth discussion, consult the explainer [[javascript-animation-and-effects.html][JavaScript Animation and Effects]].
 
 Documentation System
-	The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.
+	UIZE implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.
 
 	Document structure in this format is controlled through indentation, much like program structure can be governed by indentation in the [[http://www.wikipedia.org/Python_(programming_language)][Python programming language]]. A documentation builder script is provided that can run in Windows Script Host. This build script can recurse through all the folders of a Web site project, building HTML files from all Simple Doc files it finds, and extracting Simple Doc formatted documentation from specially flagged comments inside JavaScript module files and synthesizing these Simple Doc fragments together into Simple Doc documents for conversion into HTML documentation files.
 
@@ -308,7 +444,7 @@ Documentation System
 	For a more in-depth discussion of this documentation system, consult the explainer [[javascript-documentation-system.html][JavaScript Documentation System]].
 
 Code Compression
-	The UIZE JavaScript Framework provides a system for scrunching (minifying) JavaScript code - primarily to reduce its size, but also to obfuscate it.
+	UIZE provides a system for scrunching (minifying) JavaScript code - primarily to reduce its size, but also to obfuscate it.
 
 	While the network bandwidth that is used to transfer JavaScript code to the client can be reduced in order to reduce transfer time through the use of HTTP compression methods such as gzip, further code size reduction as well as a degree of code obfuscation can be achieved with the use of the Scruncher, a code minification utility that is provided as part of the UIZE JavaScript Framework. This utility can be accessed for individual use through a Web page interface, but can be more conveniently utilized as part of a build script that recurses through the folders of a Web site project and generates compressed and obfuscated code from all the JavaScript files it encounters.
 
@@ -369,7 +505,7 @@ Code Compression
 	For a more in-depth discussion of the Scruncher code compression system, consult the explainer [[all-about-scrunching.html][All About Scrunching]].
 
 Build Scripts
-	The UIZE JavaScript Framework provides a system for developing build scripts that can be run by Windows Scripting Host, for automating build tasks.
+	UIZE provides a system for developing build scripts that can be run by Windows Scripting Host, for automating build tasks.
 
 	Several build scripts are included with the framework, performing such tasks as:
 
@@ -385,7 +521,7 @@ Build Scripts
 
 More Features
 	Working with JSON
-		The UIZE JavaScript Framework provides functionality for serializing data to the JSON format, and deserializing from the JSON format.
+		UIZE provides functionality for serializing data to the JSON format, and deserializing from the JSON format.
 
 		JSON ([[http://en.wikipedia.org/wiki/Json][JavaScript Object Notation]]) is a useful format for representing arbitrary data structures. JSON is often used as a format of choice for delivering responses to Ajax requests back to the client, since the response data can be easily deserialized in this format using a simple =eval= statement.
 
@@ -394,7 +530,7 @@ More Features
 		For a more in-depth discussion, consult the reference for the =Uize.Json= module.
 
 	Working with Strings
-		The UIZE JavaScript Framework provides utility methods for working with strings in the =Uize.String= module.
+		UIZE provides utility methods for working with strings in the =Uize.String= module.
 
 		There seems to be no limit to the number of different string manipulation utilities that might come in handy in one situation or another. However, the =Uize.String= package module doesn't try to be all things to all people. In the interests of avoiding code bloat, the =Uize.String= module provides some of the more frequently needed string utilities, such as trimming whitespace, repeating a string segment, indenting a block of lines, camelCasing consecutive words, etc. More esoteric features can be implemented in application code, your own modules, or in extension modules to the =Uize.String= module.
 
@@ -420,21 +556,21 @@ More Features
 		For a more in-depth discussion, consult the reference for the =Uize.String= module.
 
 	Working with URLs
-		The UIZE JavaScript Framework provides utility methods for working with URLs in the =Uize.Url= module.
+		UIZE provides utility methods for working with URLs in the =Uize.Url= module.
 
 		URLs are highly relevant to browser based applications, but URLs also have value outside of this context. Therefore, utilities for working with URLs shouldn't be tied to the browser. The =Uize.Url= module can be used in other contexts, such as Windows Script Host, where one might want to use build scripts to build HTML pages for a Web site project, and you might need to manipulate URLs for generating HTML for links and the like. The URL utilities inside this module make it easier to: serialize a params object to a params / query string, parse params from a params / query string into an object hash, resolve a path and params object into a URL string, absolutize URLs, split URLs up into all their component pieces, etc.
 
 		For a more in-depth discussion, consult the reference for the =Uize.Url= module.
 
 	Working with Dates
-		The UIZE JavaScript Framework provides utility methods for working with dates in the =Uize.Date= module.
+		UIZE provides utility methods for working with dates in the =Uize.Date= module.
 
 		In the interests of code interoperability, extending native objects is not part of the design philosophy of the UIZE JavaScript Framework, so the methods of the =Uize.Date= module are *not* added to the prototype of JavaScript's =Date= object. You're encouraged to use the native methods of JavaScript's =Date= object as much as possible, and look to the static methods of the =Uize.Date= module for other capabilities. The date utilities inside this module make it easier to: encode dates to the =ISO 8601= format (YYYY-MM-DD), decode dates from the =ISO 8601= format, test if a date is recent, determine the number of days in a specific month of a specific year, convert a length of time from one unit to another, etc.
 
 		For a more in-depth discussion, consult the reference for the =Uize.Date= module.
 
 	Working with Colors
-		The UIZE JavaScript Framework provides a comprehensive framework for working with colors, with support for color spaces, a wide variety of color encodings, a framework for named colors, extension modules that define additional color spaces and named colors, and extensions that provide utilities for manipulating colors.
+		UIZE provides a comprehensive framework for working with colors, with support for color spaces, a wide variety of color encodings, a framework for named colors, extension modules that define additional color spaces and named colors, and extensions that provide utilities for manipulating colors.
 
 		Support for colors is provided in the =Uize.Color= module and its various extension modules, which offer the following functionality...
 
@@ -462,7 +598,7 @@ More Features
 	### Working with XML
 
 	Working with Data Structures
-		The UIZE JavaScript Framework provides utility methods for working with various types of data structures in the =Uize.Data= module.
+		UIZE provides utility methods for working with various types of data structures in the =Uize.Data= module.
 
 		In the interests of code interoperability, extending native objects is not part of the design philosophy of the UIZE JavaScript Framework, so the methods of the =Uize.Data= module are *not* added to the prototypes of JavaScript's native objects (such as the =Array= and =Object= natives). You're encouraged to use the methods of JavaScript's built-in object as much as possible, and look to the static methods of the =Uize.Data= module for other capabilities.
 
