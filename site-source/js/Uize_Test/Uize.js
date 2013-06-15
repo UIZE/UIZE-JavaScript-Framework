@@ -4054,6 +4054,70 @@ Uize.module ({
 					]],
 					['Uize.getPathToLibrary',[
 						/* TODO: implement tests */
+					]],
+					['Uize.package',[
+						{
+							title:'Test that the method returns a function object',
+							test:function () {
+								return this.expectFunction (Uize.package ());
+							}
+						},
+						{
+							title:'Test that the method returns a new function object each time it is called',
+							test:function () {
+								var
+									_package1 = Uize.package (),
+									_package2 = Uize.package (),
+									_package3 = Uize.package ()
+								;
+								return (
+									this.expectFunction (_package1) &&
+									this.expectFunction (_package2) &&
+									this.expectFunction (_package3) &&
+									_package1 != _package2 &&
+									_package2 != _package3 &&
+									_package3 != _package1
+								);
+							}
+						},
+						{
+							title:'Test that, when no statics are specified, the method returns a function object containing no additional properties',
+							test:function () {
+								var
+									_package = Uize.package (),
+									_function = function () {},
+									_packageHasExtraProperties = false
+								;
+								for (var _property in _package) {
+									if (_packageHasExtraProperties = !(_property in _function))
+										break
+									;
+								}
+								return this.expect (false,_packageHasExtraProperties);
+							}
+						},
+						{
+							title:'Test that, when statics are specified, those statics are all copied into the function object that is returned',
+							test:function () {
+								var
+									_method1 = function () {},
+									_method2 = function () {},
+									_statics = {
+										someProperty1:'foo',
+										someProperty2:'bar',
+										someMethod1:_method1,
+										someMethod2:_method2
+									},
+									_package = Uize.package (_statics)
+								;
+								return (
+									this.expect ('foo',_package.someProperty1) &&
+									this.expect ('bar',_package.someProperty2) &&
+									this.expect (_method1,_package.someMethod1) &&
+									this.expect (_method2,_package.someMethod2)
+								);
+							}
+						}
 					]]
 				]),
 				{
