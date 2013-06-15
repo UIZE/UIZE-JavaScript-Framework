@@ -1,0 +1,86 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_boxBorderWidth = _cssUtil.box.border.width,
+		_horizontalMargin = 2,
+		_cellPadding = 2,
+		_buttonShellPadding = 1,
+		_buttonShellBorderWidth = 1,
+		_entryPaddingRight = 5
+	;
+%>
+.`` {
+	display: inline-block;
+	padding: 4px;
+	background: #eee;
+	border-collapse: collapse;
+	border: none;
+}
+
+.`` td {
+	padding: <%= _cellPadding %>px;
+	margin: 0;
+}
+
+/*** entry field ***/
+	.`entryShell` {
+		position: relative;
+	}
+
+	input.`entry`, input.`entry`:focus {
+		font-family: Courier;
+		color: #0fb;
+		text-align: right;
+		padding: 0;
+		padding-right: <%= _entryPaddingRight %>px;
+		border: 1px solid #ccc;
+		border-color: #ccc #fff #fff #ccc;
+		background: #000;
+		outline: none;
+		text-shadow: 0 -3px 10px #0cf, 0 5px 10px #0fc, 0 0 4px #0fc, 0 0 3px #0cf;
+	}
+
+/*** buttons ***/
+	.`buttonShell` {
+		border-radius: 3px;
+		border: <%= _buttonShellBorderWidth %>px solid rgba(0,0,0,.1);
+		padding: <%= _buttonShellPadding %>px;
+	}
+
+	/*** digit buttons ***/
+		.`digitButton` {
+			border-color: rgba(0,128,255,.5);
+		}
+
+	/*** memory buttons ***/
+		.`memoryButton` {
+			border-color: rgba(255,128,0,.5);
+		}
+
+	/*** basic arithmetic buttons ***/
+		.`operatorButtonBasic` {
+			border-color: rgba(80,180,80,.5);
+		}
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var
+				_sizeOuter = _size.outer,
+				_entryBevelWidth = _size.sizeNo + 1
+			;%>
+	/*** <%= _sizeName %> ***/
+		.`<%= _sizeName %>` input.`entry`,
+		.`<%= _sizeName %>` input.`entry`:focus {
+			border-width: <%= _entryBevelWidth %>px;
+			font-size: <%= _sizeOuter * .8 %>px;
+			width: <%= (_sizeOuter + (_buttonShellPadding + _buttonShellBorderWidth) * 2) * 5 + _cellPadding * 2 * 4 - _entryBevelWidth * 2 - _entryPaddingRight %>px;
+			height: <%= _sizeOuter %>px;
+		}
+
+<%		}
+	);
+%>
