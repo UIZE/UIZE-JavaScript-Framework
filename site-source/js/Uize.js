@@ -34,6 +34,7 @@
 					- =Uize.module= - lets you declare a JavaScript module that can be required by other JavaScript modules
 					- =Uize.moduleLoader= - loads a JavaScript module (specified by its module name)
 					- =Uize.moduleUrlResolver= - resolves the specified JavaScript module name to a URL path
+					- =Uize.package= - creates a package function with the specified statics (methods and/or properties)
 					- =Uize.require= - ensures that all of the specified modules are loaded before calling the specified callback function, loading required modules as necessary
 					- =Uize.toString= - provides summary info for the module on which the method is called
 
@@ -371,9 +372,7 @@ Uize = (function () {
 				_canExtend (_source) && _operation (_target,_source);
 				if (_sourcesLength > _targetIsWithSources + 1) {
 					for (var _sourceNo = +_targetIsWithSources; ++_sourceNo < _sourcesLength;)
-						_canExtend (_source = _sources [_sourceNo]) &&
-							_operation (_target,_source)
-						;
+						_canExtend (_source = _sources [_sourceNo]) && _operation (_target,_source)
 					;
 				}
 			}
@@ -5319,6 +5318,59 @@ Uize = (function () {
 
 		_package.package = function (_statics) {
 			return _package.copyInto (function () {},_statics);
+			/*?
+				Static Methods
+					Uize.package
+						Lets you conveniently create a JavaScript package with a specified set of statics (static methods and/or static properties) in a single statement.
+
+						SYNTAX
+						........................................
+						packageFUNC = Uize.package (staticsOBJ);
+						........................................
+
+						The =Uize.package= method provides a more concise way of defining and returning a package function inside a module's =builder= function.
+
+						INSTEAD OF...
+						.........................................
+						builder:function () {
+							'use strict';
+
+							var _package = function () {};
+
+							_package.staticMethod1 = function () {
+								// implementation
+							};
+
+							_package.staticMethod2 = function () {
+								// implementation
+							};
+
+							return _package;
+						}
+						.........................................
+
+						USE...
+						.................................
+						builder:function () {
+							'use strict';
+
+							return Uize.package ({
+								staticMethod1:function () {
+									// implementation
+								},
+
+								staticMethod2:function () {
+									// implementation
+								}
+							});
+						}
+						.................................
+
+						For a more in-depth discussion of package modules, consult the [[../explainers/javascript-modules.html][JavaScript Modules]] explainer.
+
+						NOTES
+						- see also the other `module mechanism methods`
+			*/
 		};
 
 		_package.pairUp = function (_firstArg) {
