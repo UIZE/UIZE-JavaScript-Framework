@@ -1,0 +1,52 @@
+The new =Uize.package= method, implemented in the =Uize= base module, lets you conveniently create a JavaScript package with a specified set of statics (static methods and/or static properties) in a single statement.
+
+SYNTAX
+........................................
+packageFUNC = Uize.package (staticsOBJ);
+........................................
+
+The =Uize.package= method provides a more concise way of defining and returning a package function inside a module's =builder= function.
+
+INSTEAD OF...
+.........................................
+builder:function () {
+	'use strict';
+
+	var _package = function () {};
+
+	_package.staticMethod1 = function () {
+		// implementation
+	};
+
+	_package.staticMethod2 = function () {
+		// implementation
+	};
+
+	return _package;
+}
+.........................................
+
+USE...
+.................................
+builder:function () {
+	'use strict';
+
+	return Uize.package ({
+		staticMethod1:function () {
+			// implementation
+		},
+
+		staticMethod2:function () {
+			// implementation
+		}
+	});
+}
+.................................
+
+This new method is comprehensively unit tested and documented.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-06-11 - New Uize.package Method
+....................................................................................
