@@ -337,10 +337,43 @@
 					The `condition system` of the =Uize.Class= module is exposed through the following methods...
 
 					- =is= - returns whether or not a state property is truthy (useful when a state property represents a condition)
-					- =once= - registers code that is to be executed once a condition has been met
+					- =isMet= - returns whether or not a condition has been met
+					- =once= - registers a handler that is to be executed once a condition has been met, or immediately if the condition is already met
 					- =met= - sets a condition as having been met
 					- =unmet= - sets a condition as having not been met / no longer being met
-					- =isMet= - returns whether or not a condition has been met
+					- =whenever= - registers a handler that is to be executed each time a condition changes state
+
+			State Properties Derivation ~~ State Properties Derivations
+				.
+
+				Determinants
+					.
+
+				Determiner
+					.
+
+				Methods Supporting State Properties Derivations
+					.
+
+					- =onChange= - registers a handler that is to be executed each time a `state properties derivation` changes value, in addition to the first time the derivation's value is computed
+
+				Several Ways to Specify a Derivation
+					For convenience, a state properties derivation can be specified in a variety of ways.
+
+					As a String, Specifying a Single Determinant
+						.
+
+					As a Comma-separated String, Specifying Multiple Determinants
+						.
+
+					As an Array, Specifying Multiple Determinants
+						.
+
+					As a Colon-delimited String, Specifying Both Determinants and Determiner
+						.
+
+					As a Function, Specifying Both Determinants and Determiner
+						.
 
 			The "no new" Mechanism
 				The JavaScript =new= operator is optional when creating instances of =Uize.Class= subclasses, and you can make the =new= operator optional for your own object constructors using the newly added =Uize.noNew= static method.
@@ -1017,8 +1050,25 @@ Uize.module ({
 					return _wirings;
 				};
 
-				_classPrototype.onChange = function (_condition,_handler) {
-					return this._onChange (_condition,_handler);
+				_classPrototype.onChange = function (_derivation,_handler) {
+					return this._onChange (_derivation,_handler);
+					/*?
+						Instance Methods
+							onChange
+								Lets you register a handler function that should be executed each time the value of the specified `state properties derivation` changes.
+
+								SYNTAX
+								..........................................................................
+								wiringsOBJ = myInstance.onChange (derivationSTRorARRAYorFUNC,handlerFUNC);
+								..........................................................................
+
+								EXAMPLE
+								...
+								...
+
+								NOTES
+								- compare to the related =once= and =whenever= instance methods
+					*/
 				};
 
 				_classPrototype.once = function (_condition,_handler) {
