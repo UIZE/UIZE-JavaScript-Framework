@@ -43,18 +43,22 @@ Uize.module ({
 			},
 			sizes:{
 				tiny:{
+					sizeNo:1,
 					font:12,
 					outer:23
 				},
 				small:{
+					sizeNo:2,
 					font:13,
 					outer:28
 				},
 				medium:{
+					sizeNo:3,
 					font:15,
 					outer:38
 				},
 				large:{
+					sizeNo:4,
 					font:21,
 					outer:51
 				}
