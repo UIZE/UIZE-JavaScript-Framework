@@ -1,5 +1,5 @@
 <%@
-	input ({latestNews:'array'});
+	input ({overviewOfFeatures:'string'});
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,39 +10,73 @@
 	<meta name="verify-v1" content="qI/BGPY/WVnloHZD2XchAVELieGlCyY8u+oztOWs+cI="/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="css/page.css"/>
-	<link rel="stylesheet" href="css/widget.scrolly.css"/>
+	<link rel="stylesheet" href="css/page.simpledoc.css"/>
 	<script type="text/javascript" src="js/Uize.js"></script>
 	<style type="text/css">
 		body {
-			background:#465159 url(images/homepage-bg.gif) repeat-x left top;
-			background-attachment:fixed;
-			margin:0;
+			margin: 0;
 		}
 		.clearLeft {
-			clear:left;
+			clear: left;
 		}
 		/*** overrides for black text across the board ***/
 			a, a:link, a:visited, a:hover, a:active, code {
-				color:#000;
+				color: #000;
+			}
+
+		/*** override position of shareThisPanel (needs to be lower for this page) ***/
+			.shareThisPanel {
+				top: 190px;
 			}
 
 		/*** mantle ***/
 			.mantleBg {
-				width:100%;
-				height:100px;
-				background:#000 url(images/mantle6-bg.jpg) repeat-x left top;
+				position: absolute;
+				width: 100%;
+				height: 100px;
+				background: #000 url(images/mantle6-bg.jpg) repeat-x left top;
+				box-shadow: 0 5px 20px rgba(0,0,0,.6);
+				z-index: 2;
 			}
 			.mantle, .mantle img {
-				width:900px;
-				height:100px;
+				width: 900px;
+				height: 100px;
 			}
 			.mantle {
-				position:relative;
-				margin:auto;
+				position: relative;
+				margin: auto;
 			}
 			.mantle img {
-				position:absolute;
+				position: absolute;
 			}
+
+			/*** header links ***/
+				.headerLinks {
+					position: absolute;
+					top: 100px;
+					left: 0;
+					right: 0;
+					height: 30px;
+					background: #3f4854;
+					text-align: center;
+				}
+				.headerLinks,
+				.headerLinks a,
+				.headerLinks a:link,
+				.headerLinks a:visited,
+				.headerLinks a:hover,
+				.headerLinks a:active {
+					font-size: 12px;
+					color: #ccc;
+					border: none;
+					letter-spacing: 1px;
+					padding: 8px;
+				}
+				.headerLinks a:hover,
+				.headerLinks a:active {
+					color: #fff;
+					background: #000;
+				}
 
 			/*** home link ***/
 				#page-homeLink,
@@ -51,290 +85,130 @@
 				#page-homeLink:hover,
 				#page-homeLink:active,
 				.siteMenuIcon {
-					position:absolute;
-					display:block;
-					left:11px;
-					top:17px;
-					width:69px;
-					height:68px;
-					background:url(images/blank.gif);
-					border:none;
+					position: absolute;
+					display: block;
+					left: 11px;
+					top: 17px;
+					width: 69px;
+					height: 68px;
+					background: url(images/blank.gif);
+					border: none;
 				}
 
-		/*** subtitle / byline ***/
-			h1 {
-				position:relative;
-				font-size:11px;
-				font-weight:normal;
-				letter-spacing:1px;
-				text-align:center;
-				margin:0;
-				padding:2px 0 3px 0;
-				color:#fff;
-				text-shadow:1px 0 1px #000;
-				border-top:1px solid #aab;
-				border-bottom:1px solid #000;
+		/*** intro ***/
+			.intro {
+				position: absolute;
+				top: 130px;
+				left: 0;
+				right: 0;
+				z-index: 1;
 			}
-			h1 div {
-				position:absolute;
-				width:100%;
-				height:50%;
-				left:0;
-				margin:0;
-				padding:0;
-				bottom:0;
-				background:#000;
-				opacity:.15;
-				filter:alpha(opacity=15);
+			.introContent {
+				padding-top: 30px;
+				background: #728088;
+				height: 410px;
+				border-top: 1px solid rgba(255,255,255,.25);
+			}
+			.introContent h1 {
+				font-size: 24px;
+				font-weight: normal;
+				width: 850px;
+				margin: auto;
+				margin-top: 10px;
+				margin-bottom: 40px;
+				color: #eee;
+				text-shadow: 0 0 5px rgba(0,0,0,.5);
+			}
+			.introFeaturesLists {
+				position: relative;
+				width: 1000px;
+				margin: auto;
+				padding: 30px 20px 20px 20px;
+				height: 280px;
+				background: rgba(0,0,0,.15);
+				box-shadow: 8px 8px 30px -4px rgba(0,0,0,.2);
+				border-bottom: 1px solid rgba(0,0,0,.1);
+				border-right: 1px solid rgba(0,0,0,.1);
+			}
+			.introFeaturesListsHeading {
+				position: absolute;
+				top: -7px;
+				left: -7px;
+				background: #000;
+				color: #fff;
+				padding: 10px 20px;
+				box-shadow: 2px 2px 8px rgba(0,0,0,.4);
+				font-size: 14px;
+				letter-spacing: 2px;
+			}
+			.introFeaturesList {
+				float: left;
+			}
+			.introFeaturesList li {
+				margin-top: 10px;
+				font-size: 20px;
+				list-style-image: url(images/icons/check-mark.gif);
+			}
+			.introFeaturesList li a,
+			.introFeaturesList li a:link,
+			.introFeaturesList li a:visited,
+			.introFeaturesList li a:hover,
+			.introFeaturesList li a:active {
+				color: #fff;
+				text-shadow: 3px 2px 8px rgba(0,0,0,.2);
+				text-decoration: none;
+				border-bottom: 2px solid transparent;
+			}
+			.introFeaturesList li a:hover,
+			.introFeaturesList li a:active {
+				border-bottom: 2px solid #ffa200;
+			}
+			.introFadeout {
+				clear: left;
+				height: 100px;
+
+				/*** fadeout gradient ***/
+					background: -moz-linear-gradient(top,  rgba(114,128,136,1) 0%, rgba(114,128,136,1) 27%, rgba(114,128,136,0.78) 54%, rgba(114,128,136,0.5) 79%, rgba(114,128,136,0) 100%); /* FF3.6+ */
+					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(114,128,136,1)), color-stop(27%,rgba(114,128,136,1)), color-stop(54%,rgba(114,128,136,0.78)), color-stop(79%,rgba(114,128,136,0.5)), color-stop(100%,rgba(114,128,136,0))); /* Chrome,Safari4+ */
+					background: -webkit-linear-gradient(top,  rgba(114,128,136,1) 0%,rgba(114,128,136,1) 27%,rgba(114,128,136,0.78) 54%,rgba(114,128,136,0.5) 79%,rgba(114,128,136,0) 100%); /* Chrome10+,Safari5.1+ */
+					background: -o-linear-gradient(top,  rgba(114,128,136,1) 0%,rgba(114,128,136,1) 27%,rgba(114,128,136,0.78) 54%,rgba(114,128,136,0.5) 79%,rgba(114,128,136,0) 100%); /* Opera 11.10+ */
+					background: -ms-linear-gradient(top,  rgba(114,128,136,1) 0%,rgba(114,128,136,1) 27%,rgba(114,128,136,0.78) 54%,rgba(114,128,136,0.5) 79%,rgba(114,128,136,0) 100%); /* IE10+ */
+					background: linear-gradient(to bottom,  rgba(114,128,136,1) 0%,rgba(114,128,136,1) 27%,rgba(114,128,136,0.78) 54%,rgba(114,128,136,0.5) 79%,rgba(114,128,136,0) 100%); /* W3C */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#728088', endColorstr='#00728088',GradientType=0 ); /* IE6-9 */
 			}
 
-		/*** pods ***/
-			.pods {
-				width:956px;
-				margin:auto;
-			}
-			.pod {
-				position:relative;
-				float:left;
-				width:200px;
-				height:430px;
-				margin:18px 0 0 22px;
-				background:#becacd url(images/page-contents-bg.gif) repeat-x left top;
-				border:2px solid #889294;
-				border-radius:3px;
-				-moz-border-radius:3px;
-				-webkit-border-radius:3px;
-				box-shadow:5px -5px 18px rgba(0,0,0,.5);
-				-moz-box-shadow:7px -7px 18px rgba(0,0,0,.3);
-				-webkit-box-shadow:7px -7px 18px rgba(0,0,0,.3);
-				overflow:hidden;
-			}
-
-			.podHeading, .podHeading:link, .podHeading:visited, .podHeading:hover, .podHeading:active {
-				display:block;
-				text-align:center;
-				color:#fff;
-				font-size:14px;
-				text-transform:uppercase;
-				letter-spacing:4px;
-				padding:12px 0;
-				background:#3a4950;
-				border-top-left-radius:2px;
-				-moz-border-radius-topleft:2px;
-				-webkit-border-top-left-radius:2px;
-				border-top-right-radius:2px;
-				-moz-border-radius-topright:2px;
-				-webkit-border-top-right-radius:2px;
-				border-bottom:1px solid #555;
-				overflow:hidden;
-			}
-
-		/*** pod lists ***/
-			.pod ul {
-				padding-top:6px;
-				margin-right:6px;
-				padding-left:25px;
-				margin-top:0;
-				margin-left:0;
-				color:#000;
-			}
-			.pod li {
-				font-size:11px;
-				padding-bottom:7px;
-				list-style-image:url(js/Uize_Widget_Tree_List/arrows-orange-bullet.gif);
-			}
-			.pod li b {
-				color:#000;
-			}
-
-		/*** sub pods ***/
-			.subPod, .subPod:link, .subPod:visited, .subPod:hover, .subPod:active {
-				position:relative;
-				display:block;
-				font-size:11px;
-				color:#000;
-				border:1px solid #788;
-				border-radius:3px;
-				-moz-border-radius:3px;
-				-webkit-border-radius:3px;
-				margin:9px 7px;
-				padding:10px;
-				padding-right:0;
-				background:#b5bbbf url(images/left-highlight.png) repeat-y left top;
-				_background:none; /* hack for IE6 (which doesn't support png with alpha, and paints over content) */
-				text-decoration:none;
-			}
-			.subPod img {
-				border:none;
-				float:left;
-			}
-			.subPod img.logo {
-				width:31px;
-				height:31px;
-				margin-right:12px;
-				box-shadow:0px 0px 8px #000;
-				-moz-box-shadow:2px -2px 8px rgba(0,0,0,.6);
-				-webkit-box-shadow:0px 0px 8px #000;
-			}
-			.subPod .buttonLink {
-				display:block;
-				float:left;
-			}
-
-		/*** pod footer links ***/
-			.pod .podFooterLinks {
-				padding:4px;
-				background-color:#fff;
-			}
-			.pod .podFooterLinks a,
-			.pod .podFooterLinks a:link,
-			.pod .podFooterLinks a:visited,
-			.pod .podFooterLinks a:hover,
-			.pod .podFooterLinks a:active {
-				font-size:12px;
-				color:#000;
-				padding-left:20px;
-				border:none;
-				text-decoration:none;
-				background:transparent url(images/blank.gif) no-repeat left top;
-			}
-
-		/*** key features pod ***/
-			.podFeatures {
-				width:250px;
-				margin-left:0;
-			}
-			.podFeatures li {
-				list-style-image:url(images/icons/check-mark.gif);
-			}
-
-		/*** demos pod ***/
-			.podDemos {
-				width:106px;
-			}
-
-			/*** demos scrolly ***/
-				.scrollyVert {
-					padding-top:6px;
-				}
-				.scrollyVert .scrollyView {
-					background:none;
-					border:none;
-					margin-left:3px;
-					margin-bottom:7px;
-					width:96px;
-					padding:0;
-					padding-left:5px;
-					height:320px;
-				}
-				.scrollyVert .scrollyButton {
-					width:94px;
-					margin-left:5px;
-				}
-
-			/*** demo items ***/
-				a.demosItem, a.demosItem:link, a.demosItem:visited, a.demosItem:hover, a.demosItem:active {
-					display:block;
-					width:86px;
-					height:53px;
-					overflow:hidden;
-					background:#fff;
-					text-decoration:none;
-					border:1px solid #788;
-					padding:1px;
-					margin-top:7px;
-					box-shadow:2px -2px 2px rgba(0,0,0,.2);
-					-moz-box-shadow:2px -2px 2px rgba(0,0,0,.2);
-					-webkit-box-shadow:2px -2px 2px rgba(0,0,0,.2);
-				}
-				.demosItem img {
-					width:86px;
-					height:53px;
-					-ms-interpolation-mode:bicubic;
-					border:none;
-				}
-
-			/*** demo info tooltip ***/
-				.demoInfoTooltip {
-					display:none;
-					font-size:11px;
-					padding:0;
-					width:186px;
-					border:3px solid #fff;
-					border-radius:3px;
-					-moz-border-radius:3px;
-					-webkit-border-radius:3px;
-					background:#adbebf url(images/brushed-metal.jpg) repeat left top;
-					box-shadow:8px -8px 8px  rgba(0,0,0,.5);
-					-moz-box-shadow:9px -9px 9px rgba(0,0,0,.5);
-					-webkit-box-shadow:8px -8px 8px  rgba(0,0,0,.5);
-				}
-				.demoInfoTooltip img {
-					display:block;
-					width:172px;
-					height:106px;
-					padding:1px;
-					margin:0 5px;
-					border:1px solid #aaa;
-					background:#fff;
-				}
-				/*** annotations ***/
-					.demoInfoTooltip .demoTitle {
-						font-size:11px;
-						font-weight:bold;
-						color:#000;
-						text-shadow:-1px -1px 1px #fff, -1px 1px 1px #fff, 1px -1px 1px #fff, 1px 1px 1px #fff;
-						padding:3px 5px 5px 5px;
-						width:176px;
-						text-align:center;
-						border-radius:3px 3px 0 0;
-						-moz-border-radius:3px 3px 0 0;
-						-webkit-border-top-left-radius:3px;
-						-webkit-border-top-right-radius:3px;
-					}
-					.demoInfoTooltip .description {
-						color:#000;
-						border:1px solid #bcc;
-						background:#fff;
-						margin:5px;
-						margin-top:0;
-						padding:5px;
-					}
-
-		/*** community pod ***/
-			.podCommunity {
-				width:260px;
-			}
-
-		/*** news pod ***/
-			.podNews {
-				width:250px;
-			}
-			.podNews ul {
-				margin-bottom:0;
-				height:326px;
-				overflow:hidden;
-			}
-			.podNews li {
-				border-bottom:1px dotted #000;
-				padding:2px;
-				margin-bottom:3px;
-			}
-			.podNews li:first-child {
-				list-style-image:url(js/Uize_Widget_Tree_List/arrows-orange-collapsed.gif);
+		/*** main ***/
+			.main {
+				padding-top: 650px;
 			}
 
 		/*** fork me ribbon ***/
 			.forkMeOnGithub, .forkMeOnGithub:link, .forkMeOnGithub:visited, .forkMeOnGithub:hover, .forkMeOnGithub:active {
-				display:block;
-				position:absolute;
-				top:0;
-				right:0;
-				border:none;
-				background:url(images/forkme_right_darkblue_121621.png) left top no-repeat;
-				width:149px;
-				height:149px;
-				text-decoration:none;
+				display: block;
+				position: absolute;
+				top: 0;
+				right: 0;
+				border: none;
+				background: url(images/forkme_right_darkblue_121621.png) left top no-repeat;
+				width: 149px;
+				height: 149px;
+				text-decoration: none;
+				z-index: 3;
+			}
+
+		/*** SimpleDoc overrides ***/
+			.headingNumber {
+				display: none;
+			}
+			.heading1 {
+				background: #728088;
+				color: #fff;
+				font-size: 21px;
+				padding: 9px 12px;
+				text-shadow: 3px 2px 8px rgba(0,0,0,.2);
+				box-shadow: 5px 5px 10px -2px rgba(0,0,0,.4);
+				border: none;
+				border-left: 20px solid #000;
 			}
 
 	</style>
@@ -349,188 +223,72 @@
 	</div>
 </div>
 
-<h1>UIZE (pronounced "you eyes") is a powerful, open source, object oriented JavaScript framework - supporting widgets, AJAX, DOM, templates, and more.<div></div></h1>
-
-<a class="forkMeOnGithub" href="https://github.com/uize/uize-javascript-framework" title="Fork me on GitHub"></a>
+<div class="headerLinks">
+	<a href="javascript-examples.html" class="headerLink">DEMOS</a><!--
+	--><a href="explainers/getting-started.html" class="headerLink">GETTING STARTED</a><!--
+	--><a href="download.html" class="headerLink">DOWNLOAD</a><!--
+	--><a href="support.html" class="headerLink">SUPPORT</a><!--
+	--><a href="explainers/using-the-documentation.html" class="headerLink">DOCS</a><!--
+	--><a href="search-sections.html" class="headerLink">SEARCH</a><!--
+	--><a href="directory.html" class="headerLink">SITE MAP</a><!--
+	--><a href="latest-news.html" class="headerLink">LATEST NEWS</a><!--
+	--><a href="latest-news.rss" class="headerLink"><span style="background:url(images/icons/rss-16x16.gif) left top no-repeat; padding:1px 9px; margin-right: 5px;"></span>RSS FEED</a><!--
+	--><a href="http://www.twitter.com/uize" class="headerLink"><span style="background:url(images/icons/twitter-16x16.gif) left top no-repeat; padding:1px 9px; margin-right: 5px;"></span>TWITTER FEED</a>
+</div>
 
 <!-- node for demo info tooltip markup -->
 
-<div id="page_demoInfoTooltip" class="demoInfoTooltip">
-	<script type="text/jst">
-		<div class="demoTitle">[%.title%]</div>
-		<img src="images/example-thumbnails/[%.thumbnail%]"/>
-		<div class="description">[%.description%]</div>
-	</script>
+<div class="intro">
+	<div class="introContent">
+		<h1>
+			UIZE is pronounced "you eyes", and is a FREE, powerful, open source, OOP JavaScript framework for browsers, NodeJS, and other JavaScripty places.
+		</h1>
+		<div class="introFeaturesLists">
+			<div class="introFeaturesListsHeading">FEATURES</div>
+			<ul class="introFeaturesList">
+				<li><a href="#1">FREE and Open Source</a></li>
+				<li><a href="#2">Modules & Dependencies</a></li>
+				<li><a href="#3">Basic Utility Belt Features</a></li>
+				<li><a href="#4">Classes, Inheritance, OOP</a></li>
+				<li><a href="#5">State Properties and Binding</a></li>
+				<li><a href="#6">Event Infrastructure</a></li>
+				<li><a href="#7">Conditions, Barriers, Needs</a></li>
+			</ul>
+			<ul class="introFeaturesList">
+				<li><a href="#8">Ajax / Asynchronous Processes</a></li>
+				<li><a href="#9">DOM Manipulation</a></li>
+				<li><a href="#10">Widgets Framework</a></li>
+				<li><a href="#11">HTML & CSS Templating</a></li>
+				<li><a href="#12">Lots of Built-in Widgets</a></li>
+				<li><a href="#13">Internationalization / Localization</a></li>
+				<li><a href="#14">Testing Framework</a></li>
+			</ul>
+			<ul class="introFeaturesList">
+				<li><a href="#15">Templating System</a></li>
+				<li><a href="#16">Effects / Animation</a></li>
+				<li><a href="#17">Documentation System</a></li>
+				<li><a href="#18">Powerful Build System</a></li>
+				<li><a href="#19">Code Compression</a></li>
+				<li><a href="#20">Development Server (NodeJS)</a></li>
+				<li><a href="#21">Extensive Documentation</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="introFadeout"></div>
 </div>
 
-<div class="pods">
-	<div class="pod podFeatures">
-		<!--
-			You can call it an "Ajax Framework", an "Ajax Toolkit", a "JavaScript Framework", a "JavaScript API", a "JavaScript Toolkit", a "JavaScript Toolbox"... whatever you like! We call it the *UIZE JavaScript Framework* (or just "UIZE" for short). UIZE allows you to create more effective user interfaces in your Web-based applications and services.
-		-->
-		<a href="explainers/overview-of-features.html" class="podHeading">Key Features</a>
-		<ul>
-			<li>UIZE is <b>free</b> to use (<a href="license.html">available under MIT License or GNU General Public License</a>).</li>
-			<li>UIZE is <b>open source</b>.</li>
-			<li>UIZE <b>supports mobile</b> devices.</li>
-			<li>UIZE is <b>skinnable</b> with your own CSS.</li>
-			<li>UIZE is <b>server agnostic</b> - use it with any choice of server language and platform: Java (Apache TomCat), C# (IIS / ASP.NET), Visual Basic (IIS / ASP), C/C++, Perl (Perl / Apache), PHP, Ruby (Ruby on Rails), Python, etc.</li>
-			<li>UIZE has <a href="explainers/javascript-widgets.html"><b>lots of built-in widgets</b></a>: slideshow, calendar, date picker, slider, marquee, dialog, menu, mag view, etc.</li>
-			<li>UIZE offers <a href="explainers/overview-of-features.html"><b>many powerful features</b></a>: <a href="explainers/javascript-animation-and-effects.html">JavaScript Animation</a>, <a href="explainers/javascript-inheritance.html">JavaScript Inheritance</a>, <a href="explainers/javascript-event-system.html">JavaScript Events</a>, <a href="explainers/javascript-modules.html">JavaScript Modules</a>, <a href="explainers/javascript-libraries.html">JavaScript Libraries</a>, <a href="explainers/javascript-templates.html">JavaScript Templates</a>, <a href="explainers/javascript-widgets.html">JavaScript Widgets</a>, <a href="explainers/javascript-localization.html">JavaScript Localization</a>, <a href="explainers/javascript-documentation-system.html">JavaScript Documentation</a>, <a href="explainers/all-about-scrunching.html">JavaScript Code Compression</a>, <a href="explainers/javascript-build-scripts.html">JavaScript Build Scripts</a>.</li>
-			<li>UIZE <b>does not</b> extend native objects.</li>
-			<li>UIZE is in <a href="appendixes/credits.html"><b>active development</b></a>.</li>
-		</ul>
-	</div>
+<a class="forkMeOnGithub" href="https://github.com/uize/uize-javascript-framework" title="Fork me on GitHub"></a>
 
-	<div class="pod podDemos">
-		<a href="javascript-examples.html" class="podHeading">Demos</a>
-		<div class="scrollyVert">
-			<a id="page_demosScrolly_up" href="javascript://" class="scrollyButton button">
-				<div class="arrowUp arrow"></div>
-			</a>
-			<div id="page_demosScrolly-view" class="scrollyView">
-				<div style="height:0; line-height:0; font-size:0;">&nbsp;</div> <!-- FF hack because of collapsing top margin -->
-				<!--
-					- possibly add
-						- calculator widget
-						- date picker
-				-->
-
-				<!-- PAGE 1 -->
-					<a href="examples/scrolly-carousel.html" class="demosItem" title="TITLE: Scrolly Carousel | DESCRIPTION: See the scrolly widget being used to create a scrollable carousel, where scrolling through the pages is accompanied by a JavaScript animation effect. | THUMBNAIL: scrolly-carousel.gif">
-						<img src="images/example-thumbnails/scrolly-carousel.gif" alt=""/>
-					</a>
-					<a href="examples/image-wipe.html" class="demosItem" title="TITLE: Uize.Widget.ImageWipe | DESCRIPTION: See stunning image wipe animation effects you didn't believe possible with JavaScript. Choose from dozens of presets. Tweak values to make your own. | THUMBNAIL: image-wipe.gif">
-						<img src="images/example-thumbnails/image-wipe.gif" alt=""/>
-					</a>
-					<a href="examples/curve-explorer.html" class="demosItem" title="TITLE: Curve Explorer | DESCRIPTION: Add pizazz to JavaScript animations - bounce, easing, elasticity, and more. Visualize and experiment with preset curve functions. Or create your own! | THUMBNAIL: curve-explorer.gif">
-						<img src="images/example-thumbnails/curve-explorer.gif" alt=""/>
-					</a>
-					<a href="examples/bars.html" class="demosItem" title="TITLE: Bars For Data Comparison | DESCRIPTION: See an example that uses bar widgets to create a dynamic bar chart to compare nutritional data for fruits, with slick JavaScript animation effects. | THUMBNAIL: bars.gif">
-						<img src="images/example-thumbnails/bars.gif" alt=""/>
-					</a>
-					<a href="examples/color-sort-by-rgb-proximity.html" class="demosItem" title="TITLE: Color Sort by RGB Proximity | DESCRIPTION: When you have a limited palette of colors, how can you sort the colors to find the closest matches to a desired color? This example shows you how. | THUMBNAIL: color-sort-by-rgb-proximity.gif">
-						<img src="images/example-thumbnails/color-sort-by-rgb-proximity.gif" alt=""/>
-					</a>
-
-				<!-- PAGE 2 -->
-					<a href="examples/color-gradient-tool.html" class="demosItem" title="TITLE: Color Gradient Tool | DESCRIPTION: Explore a wide variety of color gradients - from basic gradients to intricate patterns. Tweak presets or build your own. Use gradients to pick colors. | THUMBNAIL: color-gradient-tool.gif">
-						<img src="images/example-thumbnails/color-gradient-tool.gif" alt=""/>
-					</a>
-					<a href="examples/animate-position-in-javascript.html" class="demosItem" title="TITLE: Animate Position in JavaScript | DESCRIPTION: See how to animate the position of an HTML element and how to apply amazingly realistic motion effects like easing, elasticity, bounce, and many more. | THUMBNAIL: animate-position-in-javascript.gif">
-						<img src="images/example-thumbnails/animate-position-in-javascript.gif" alt=""/>
-					</a>
-					<a href="examples/sortable-color-table.html" class="demosItem" title="TITLE: Sortable Color Table | DESCRIPTION: See all the standardized colors of the CSS 3 specification in a sortable table, where you can sort by name, hue, saturation, lightness, and more. | THUMBNAIL: sortable-color-table.gif">
-						<img src="images/example-thumbnails/sortable-color-table.gif" alt=""/>
-					</a>
-					<a href="examples/json-prettifier.html" class="demosItem" title="TITLE: JSON Prettifier | DESCRIPTION: Take ugly / unreadable JSON data and prettify it by re-serializing it. Make it look exactly how you want with the many serialization options provided. | THUMBNAIL: json-prettifier.gif">
-						<img src="images/example-thumbnails/json-prettifier.gif" alt=""/>
-					</a>
-					<a href="examples/slideshow-with-wipes.html" class="demosItem" title="TITLE: Slideshow With Wipes | DESCRIPTION: See an example of a JavaScript slideshow widget with stunning image wipe animation effects that you didn't believe were possible with just JavaScript. | THUMBNAIL: slideshow-with-wipes.gif">
-						<img src="images/example-thumbnails/slideshow-with-wipes.gif" alt=""/>
-					</a>
-
-				<!-- PAGE 3 -->
-					<a href="examples/collection-item-zooming.html" class="demosItem" title="TITLE: Zooming Collection Items | DESCRIPTION: Experience the zooming collection item widget. It gives you a lightweight and intuitive preview behavior, with a JavaScript animation zoom-in effect. | THUMBNAIL: collection-item-zooming.gif ">
-						<img src="images/example-thumbnails/collection-item-zooming.gif" alt=""/>
-					</a>
-					<a href="examples/collection-dynamic.html" class="demosItem" title="TITLE: Dynamic Collection | DESCRIPTION: See an example of a dynamic grid of images, where you can select one or more, drag-and-drop to rearrange, remove, select all, clear selection, etc. | THUMBNAIL: collection-dynamic.gif">
-						<img src="images/example-thumbnails/collection-dynamic.gif" alt=""/>
-					</a>
-					<a href="examples/hover-fader-stretching-menu.html" class="demosItem" title="TITLE: Hover Fader Stretching Menu | DESCRIPTION: Stretch the limits of what can be done with animated menus. Using JavaScript to animate CSS style properties can produce amazingly slick effects! | THUMBNAIL: hover-fader-stretching-menu.gif">
-						<img src="images/example-thumbnails/hover-fader-stretching-menu.gif" alt=""/>
-					</a>
-					<a href="examples/sliders-in-color-blender.html" class="demosItem" title="TITLE: Sliders in a Color Blender | DESCRIPTION: Three sliders for one RGB color selector. Three sliders for another. One slider to blend between the colors. Three sliders to show the blended color. | THUMBNAIL: sliders-in-color-blender.gif">
-						<img src="images/example-thumbnails/sliders-in-color-blender.gif" alt=""/>
-					</a>
-					<a href="examples/slideshow-of-data.html" class="demosItem" title="TITLE: Slideshow of Data | DESCRIPTION: Who says that a slideshow can only be used to display an image? See this demo - it uses a slideshow to display nutritional data for various fruits. | THUMBNAIL: slideshow-of-data.gif">
-						<img src="images/example-thumbnails/slideshow-of-data.gif" alt=""/>
-					</a>
-
-				<!-- PAGE 4 -->
-					<a href="examples/mag-view.html" class="demosItem" title="TITLE: Mag View | DESCRIPTION: Experience the image magnifier widget that lets you see a zoomed in version of a highlighted area of an image, with support for multiple zoom levels. | THUMBNAIL: mag-view.gif">
-						<img src="images/example-thumbnails/mag-view.gif" alt=""/>
-					</a>
-					<a href="examples/marquee-and-image-port.html" class="demosItem" title="TITLE: Marquee and Image Port | DESCRIPTION: See this demo for a drag-and-drop image crop interface, with an enlarged display of the cropped region. Drag to move it, or drag its edges to resize. | THUMBNAIL: marquee-and-image-port.gif">
-						<img src="images/example-thumbnails/marquee-and-image-port.gif" alt=""/>
-					</a>
-					<a href="examples/hover-fader-color-effects.html" class="demosItem" title="TITLE: Hover Fader Color Effects | DESCRIPTION: Who needs boring menus when you can have stunning menu animations that will have your users mesmerized! You have to see these effects to believe them. | THUMBNAIL: hover-fader-color-effects.gif">
-						<img src="images/example-thumbnails/hover-fader-color-effects.gif" alt=""/>
-					</a>
-					<a href="examples/hover-fader-for-thumbnails.html" class="demosItem" title="TITLE: Hover Fader for Thumbnails | DESCRIPTION: See how to liven up image thumbnails with some cool JavaScript animation! Diverse effects can be achieved by animating different CSS style properties. | THUMBNAIL: hover-fader-for-thumbnails.gif">
-						<img src="images/example-thumbnails/hover-fader-for-thumbnails.gif" alt=""/>
-					</a>
-					<a href="examples/auto-tooltip-photo-info.html" class="demosItem" title="TITLE: Auto Tooltip for Photo Info | DESCRIPTION: See how a fancy photo info tooltip can be added for multiple links, where the tooltip's HTML is built using data tucked in the links' title attribute. | THUMBNAIL: auto-tooltip-photo-info.gif">
-						<img src="images/example-thumbnails/auto-tooltip-photo-info.gif" alt=""/>
-					</a>
-			</div>
-			<a id="page_demosScrolly_down" href="javascript://" class="scrollyButton button">
-				<div class="arrowDown arrow"></div>
-			</a>
-		</div>
-	</div>
-
-	<div class="pod podCommunity">
-		<a href="explainers/getting-started.html" class="podHeading">Start Developing</a>
-		<a href="download.html" class="subPod" style="background-color:#fff; _background:none; font-size:17px; color:#000;">
-			<img src="images/icons/download.png" style="width:64px; height:64px; margin-right:5px;"/>
-			DOWNLOAD UIZE<br style="clear:none; margin-bottom:10px;"/>
-			<span style="font-size:11px;">Develop dazzling Web sites with rich client side interactivity.</span>
-			<div class="clearLeft"></div>
-		</a>
-		<a href="http://groups.google.com/group/uize" class="subPod" target="_blank">
-			<img src="images/google-31x31.gif" class="logo"/>
-			Join the UIZE JavaScript Framework Group on Google Groups.
-			<div class="clearLeft"></div>
-		</a>
-		<a href="http://www.linkedin.com/groups?about=&gid=2008070&trk=anet_ug_grppro" class="subPod" target="_blank">
-			<img src="images/linkedin-31x31.gif" class="logo"/>
-			Join the UIZE JavaScript Framework Group on LinkedIn. Get connected.
-			<div class="clearLeft"></div>
-		</a>
-		<a href="http://uize.blogspot.com/" class="subPod" target="_blank">
-			<img src="images/blogger-31x31.gif" class="logo"/>
-			Follow the official UIZE JavaScript Framework Blog on Blogspot.
-			<div class="clearLeft"></div>
-		</a>
-		<a href="http://www.zazzle.com/uize_merch*" class="subPod" target="_blank">
-			<img src="images/zazzle-31x31.gif" class="logo"/>
-			Buy UIZE shirts, mugs, and other swag at the UIZE store on Zazzle.
-			<div class="clearLeft"></div>
-		</a>
-		<div class="subPod podFooterLinks" style="margin-top:13px;">
-			<a href="explainers/using-the-documentation.html">DOCS</a>
-			<a href="search-sections.html">SEARCH</a>
-			<a href="directory.html">SITE MAP</a>
-		</div>
-	</div>
-
-	<div class="pod podNews"><%
-		var _latestNews = input.latestNews;
-%>		<a href="latest-news.html" class="podHeading">News - <%= _latestNews [0].title.slice (0,10) %></a>
-		<ul>
-<%
-		for (var _newsItemNo = -1, _newsItem; ++_newsItemNo < Math.min (_latestNews.length,10);) {
-%>			<li><%= (_newsItem = _latestNews [_newsItemNo]).description -> xmlAttributeValue %> [<a href="<%= _newsItem.path -> xmlAttributeValue %>">read more</a>]</li>
-<%
-		}
-%>		</ul>
-		<center>
-			<a href="latest-news.html" style="font-weight:bold; font-size:12px; padding-right:16px; background:transparent url(js/Uize_Widget_Tree_List/arrows-orange-collapsed.gif) no-repeat right center;">MORE LATEST NEWS</a>
-		</center>
-		<div class="subPod podFooterLinks">
-			<a href="latest-news.rss" style="background-image:url(images/icons/rss-16x16.gif); padding-right:25px;">RSS FEED</a>
-			<a href="http://www.twitter.com/uize" style="background-image:url(images/icons/twitter-16x16.gif);">TWITTER FEED</a>
-		</div>
-	</div>
+<div class="main">
+<%. overviewOfFeatures %>
 </div>
 
 <script type="text/javascript">
 
 Uize.module ({
 	required:[
-		'UizeSite.Page.Home.library',
-		'UizeSite.Page.Home'
+		'UizeSite.Page.library',
+		'UizeSite.Page.Home.library'
 	],
 	builder:function () {(window.page = UizeSite.Page.Home ()).wireUi ()}
 });

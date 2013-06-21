@@ -27,6 +27,7 @@
 
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.Homepage',
+	required:'Uize.Doc.Simple',
 	builder:function () {
 		return {
 			description:'Homepage',
@@ -36,12 +37,18 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				return {
 					template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst',
-					newsItems:this.memoryUrl ('news.index')
+					overviewOfFeaturesSimpleDoc:this.sourceUrl ('index-overview-of-features.simple'),
+					urlDictionary:this.memoryUrl ('url-dictionary')
 				};
 			},
 			builder:function (_inputs) {
 				return this.readFile ({path:_inputs.template}) ({
-					latestNews:this.readFile ({path:_inputs.newsItems}).slice (0,10)
+					overviewOfFeatures:Uize.Doc.Simple.build ({
+						data:this.readFile ({path:_inputs.overviewOfFeaturesSimpleDoc}),
+						urlDictionary:this.readFile ({path:_inputs.urlDictionary}),
+						contentsList:false,
+						pathToRoot:''
+					})
 				});
 			}
 		};

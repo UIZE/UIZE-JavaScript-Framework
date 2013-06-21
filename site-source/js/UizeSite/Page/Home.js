@@ -19,109 +19,56 @@
 Uize.module ({
 	name:'UizeSite.Page.Home',
 	required:[
-		'Uize.Node.Event',
 		'Uize.Widget.HoverFader',
-		'Uize.Widget.Scrolly',
-		'Uize.Widget.AutoTooltip',
-		'Uize.Template',
-		'Uize.Fx',
-		'Uize.Fx.xShadows',
-		'Uize.Curve',
-		'Uize.Curve.Rubber'
+		'Uize.Fx'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var _this = this;
 
-						/*** add the demos scrolly ***/
-							_this.addChild ('demosScrolly',Uize.Widget.Scrolly)
-								.fade.set ({curve:Uize.Curve.Rubber.easeOutBounce (3,.5),duration:1000});
-
-						/*** add the demo info auto tooltip behavior ***/
-							_this.addChild ('demoInfoTooltip',Uize.Widget.AutoTooltip,{nodes:{className:/\bdemosItem\b/},html:true});
-
-						/*** add hover fader for demos items and pod sections highlight effect ***/
-							_this.addChild (
-								'borderHoverFader',
-								Uize.Widget.HoverFader,
-								{
-									nodes:{className:/\b(subPod|demosItem)\b/},
-									defaultStyle:{borderColor:'788'},
-									hoverStyle:{borderColor:'f'},
-									fadeIn:{
-										duration:800,
-										curve:{
-											borderColor:[
-												Uize.Curve.easeOutPow (9),
-												Uize.Curve.easeInPow (2),
-												Uize.Curve.easeInPow (6)
-											]
-										}
-									},
-									fadeOut:{
-										duration:1200,
-										curve:{
-											borderColor:[
-												Uize.Curve.easeOutPow (4),
-												null,
-												Uize.Curve.easeInPow (3)
-											]
-										}
-									}
+				/*** add hover fader for demos items and pod sections highlight effect ***/
+					_this.addChild (
+						'headerLinksFader',
+						Uize.Widget.HoverFader,
+						{
+							nodes:{className:/\bheaderLink\b/},
+							defaultStyle:{
+								backgroundColor:'3f4854',
+								color:'c'
+							},
+							hoverStyle:{
+								backgroundColor:'f',
+								color:'0'
+							},
+							fadeIn:{
+								duration:800,
+								curve:{
+									backgroundColor:[
+										Uize.Curve.easeOutPow (9),
+										Uize.Curve.easeInPow (2),
+										Uize.Curve.easeInPow (6)
+									]
 								}
-							);
-
-						/*** add hover fader for pod heading highlight effect ***/
-							_this.addChild (
-								'podHeadingHoverFader',
-								Uize.Widget.HoverFader,
-								{
-									nodes:{className:/\bpodHeading\b/},
-									defaultStyle:{
-										color:'fff',
-										backgroundColor:'3a4950'
-									},
-									hoverStyle:{
-										color:'000',
-										backgroundColor:'fff'
-									},
-									fadeIn:{
-										duration:500,
-										curve:{
-											color:Uize.Curve.easeInPow (2),
-											backgroundColor:[
-												Uize.Curve.easeInPow (3),
-												Uize.Curve.easeOutPow (1.2),
-												Uize.Curve.easeOutPow (2.3)
-											]
-										}
-									},
-									fadeOut:{
-										duration:700,
-										curve:{
-											color:Uize.Curve.easeOutPow (7),
-											backgroundColor:[
-												Uize.Curve.easeOutPow (1.5),
-												Uize.Curve.easeInPow (1.5),
-												Uize.Curve.easeInPow (1.3)
-											]
-										}
-									}
+							},
+							fadeOut:{
+								duration:1200,
+								curve:{
+									backgroundColor:[
+										Uize.Curve.easeOutPow (4),
+										null,
+										Uize.Curve.easeInPow (3)
+									]
 								}
-							);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+							}
+						}
+					);
+			},
 
-			/*** Public Instance Methods ***/
-				_classPrototype.wireUi = function () {
+			instanceMethods:{
+				wireUi:function () {
 					var _this = this;
 					if (!_this.isWired) {
 						_superclass.doMy (_this,'wireUi');
@@ -138,15 +85,9 @@ Uize.module ({
 								function () {_this.children.podHeadingHoverFader.tickle (350)}
 							);
 					}
-				};
-
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
-				showFooter:false,
-				showShareThisPanel:false
-			});
-
-		return _class;
+				}
+			}
+		});
 	}
 });
 

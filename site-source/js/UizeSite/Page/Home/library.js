@@ -20,15 +20,7 @@ Uize.module ({
 	required:'UizeSite.Page.library',
 	builder:function () {
 		/* Library Contents
-			Uize.Fx.xShadows
 			Uize.Widget.HoverFader
-			Uize.Json
-			Uize.String
-			Uize.Template
-			Uize.Tooltip
-			Uize.Widget.AutoTooltip
-			Uize.Widget.Button
-			Uize.Widget.Scrolly
 			UizeSite.Page.Home
 		*/
 		Uize.module ({name:'UizeSite.Page.Home.library'});
