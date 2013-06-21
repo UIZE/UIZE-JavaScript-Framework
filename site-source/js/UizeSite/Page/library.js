@@ -37,6 +37,8 @@
 	Uize.Fx
 	Uize.Curve
 	Uize.Curve.Rubber
+	Uize.String
+	Uize.String.Replace
 	Uize.Xml
 	UizeSite.Templates
 	UizeSite.Templates.ShareThisPanel
