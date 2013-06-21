@@ -5,7 +5,8 @@
 .`` {
 	display: inline-block;
 	position: relative;
-}	background: #fff;
+	background: #fff;
+}
 
 /*** calendar controls ***/
 	.`controls` {
