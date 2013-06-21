@@ -57,7 +57,10 @@ Uize.module ({
 				return (
 					!this.params.isDev &&
 					Uize.String.startsWith (_pathname,this.builtUrl (this.params.modulesFolder + '/')) &&
-					Uize.String.endsWith (_pathname,'.library.js')
+					(
+						_urlParts.file == 'library.js' ||
+						Uize.String.endsWith (_pathname,'.library.js')
+					)
 				);
 			},
 			builderInputs:function (_urlParts) {
