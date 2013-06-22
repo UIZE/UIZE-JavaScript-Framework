@@ -89,7 +89,7 @@ Uize.module ({
 							(_moduleName = Uize.String.trim (_moduleName)) &&
 							_lineStartsWithIdentifierCharRegExp.test (_moduleName)
 						) {
-							Uize.String.endsWith ('->')
+							Uize.String.endsWith (_moduleName,'->')
 								? Uize.push (
 									_modules,
 									Uize.map (
