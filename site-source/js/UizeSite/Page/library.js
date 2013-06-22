@@ -41,8 +41,15 @@
 	Uize.String.Replace
 	Uize.Xml
 	UizeSite.Templates
-	UizeSite.Templates.ShareThisPanel
 	UizeSite.Templates.Footer
+	Uize.Json
+	Uize.Node.CssModule
+	Uize.Widget.V2
+	UizeSite.Widgets
+	UizeSite.Widgets.ShareThisPanel
+	UizeSite.Widgets.ShareThisPanel.Html
+	UizeSite.Widgets.ShareThisPanel.Css
+	UizeSite.Widgets.ShareThisPanel.Widget
 	UizeSite.Page
 */
 

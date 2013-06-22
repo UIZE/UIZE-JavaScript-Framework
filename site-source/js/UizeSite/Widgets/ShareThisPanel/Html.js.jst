@@ -2,12 +2,14 @@
 	required ('Uize.Url');
 	input ({title:'string',url:'string'});
 %>
-<% function _shareLink (_serviceName,_linkPrefix,_linkParams,_linkClass) { %>
-	<!-- <%= _serviceName %> -->
-		<a target="_blank" href="<%= Uize.Url.resolve (_linkPrefix,_linkParams) -> tagAttributeValue %>" class="shareThisLink <%= _linkClass %>"><%= _serviceName %>...</a>
-<% } %>
-<div id="page-shareThisPanel" class="shareThisPanel">
-	<div class="shareThisHeading">Share This Using...</div>
+<%
+	var _this = this;
+	function _shareLink (_serviceName,_linkPrefix,_linkParams,_serviceCode) {
+%><a target="_blank" href="<%= Uize.Url.resolve (_linkPrefix,_linkParams) -> tagAttributeValue %>" class="<%= _this.cssClass ('link') %> <%= _this.cssClass (_serviceCode) %>"><%= _serviceName %>...</a><%
+	}
+%>
+<div id="<%. idPrefix %>" class="<%= _this.rootNodeCssClasses () %>">
+	<div class="<%= _this.cssClass ('heading') %>">Share This Using...</div>
 <%
 	_shareLink (
 		'Personal E-mail',
@@ -208,6 +210,6 @@
 		'connotea'
 	);
 %>
-	<div class="shareThisFooter"></div>
+	<div class="<%= _this.cssClass ('footer') %>"></div>
 </div>
 

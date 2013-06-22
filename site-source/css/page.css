@@ -383,107 +383,10 @@
 	}
 
 /*** share this panel ***/
-	.shareThisPanel {
+	#page-shareThisPanel {
 		position:fixed;
 		left:-112px;
 		top:82px;
-		width:130px;
-		background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
-		border-right:1px solid #fff;
-		border-top:1px solid #eff;
-		box-shadow:1px 2px 17px rgba(0,0,0,.6);
-		border-radius:5px;
-		border-top-left-radius:0;
-		border-bottom-left-radius:0;
 		z-index:1;
-	}
-	.shareThisPanel .shareThisHeading, .shareThisPanel .shareThisFooter {
-		font-size:10px;
-		font-weight:bold;
-		color:#000;
-		text-shadow:1px 1px 0 #fff;
-		text-transform:uppercase;
-		padding:3px 3px;
-		height:14px;
-	}
-	.shareThisLink, .shareThisLink:link, .shareThisLink:visited, .shareThisLink:hover, .shareThisLink:active {
-		display:block;
-		border:none;
-		padding:2px 22px 2px 3px;
-		color:#123;
-		text-shadow:1px 1px 0 #eee;
-		font-size:11px;
-		white-space:nowrap;
-		background:transparent url(../images/blank.gif) no-repeat 113px center;
-		border-bottom:1px solid #abb;
-		border-top:1px solid #fff;
-	}
-	.shareThisLink:hover, .shareThisLink:active {
-		color:#fff;
-		text-shadow:1px 1px 0 #000;
-		background-color:#456;
-	}
-	.shareThisPanel .email {
-		background-image:url(../images/icons/email.png);
-	}
-	.shareThisPanel .facebook {
-		background-image:url(../images/icons/facebook.png);
-	}
-	.shareThisPanel .twitter {
-		background-image:url(../images/icons/twitter.png);
-	}
-	.shareThisPanel .stumbleUpon {
-		background-image:url(../images/icons/stumbleupon.png);
-	}
-	.shareThisPanel .delicious {
-		background-image:url(../images/icons/del.icio.us.png);
-	}
-	.shareThisPanel .digg {
-		background-image:url(../images/icons/digg.png);
-	}
-	.shareThisPanel .reddit {
-		background-image:url(../images/icons/reddit.png);
-	}
-	.shareThisPanel .friendFeed {
-		background-image:url(../images/icons/friendfeed.png);
-	}
-	.shareThisPanel .mySpace {
-		background-image:url(../images/icons/myspace.png);
-	}
-	.shareThisPanel .google {
-		background-image:url(../images/icons/google.png);
-	}
-	.shareThisPanel .linkedIn {
-		background-image:url(../images/icons/linkedin.png);
-	}
-	.shareThisPanel .mixx {
-		background-image:url(../images/icons/mixx.png);
-	}
-	.shareThisPanel .technorati {
-		background-image:url(../images/icons/technorati.png);
-	}
-	.shareThisPanel .posterous {
-		background-image:url(../images/icons/posterous.png);
-	}
-	.shareThisPanel .plurk {
-		background-image:url(../images/icons/plurk.png);
-	}
-	.shareThisPanel .pingFm {
-		background-image:url(../images/icons/pingfm.png);
-	}
-	.shareThisPanel .diigo {
-		background-image:url(../images/icons/diigo.gif);
-	}
-	.shareThisPanel .faves {
-		background-image:url(../images/icons/faves.png);
-	}
-	.shareThisPanel .misterWong {
-		background-image:url(../images/icons/mister-wong.gif);
-	}
-	.shareThisPanel .dzone {
-		background-image:url(../images/icons/dzone.gif);
-	}
-	.shareThisPanel .connotea {
-		background-image:url(../images/icons/connotea.gif);
 	}
 

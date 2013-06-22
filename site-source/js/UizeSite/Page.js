@@ -20,6 +20,7 @@ Uize.module ({
 	name:'UizeSite.Page',
 	superclass:'Uize.Widget.Page',
 	required:[
+		'Uize.Node',
 		'Uize.Node.VirtualEvent',
 		'UizeSite.SiteMap',
 		'Uize.Widget.Tree.Menu',
@@ -27,7 +28,7 @@ Uize.module ({
 		'Uize.Fx',
 		'Uize.Curve',
 		'Uize.Curve.Rubber',
-		'UizeSite.Templates.ShareThisPanel',
+		'UizeSite.Widgets.ShareThisPanel.Widget',
 		'UizeSite.Templates.Footer'
 	],
 	builder:function (_superclass) {
@@ -173,25 +174,15 @@ Uize.module ({
 
 					/*** inject share this panel (if desired) ***/
 						if (_this._showShareThisPanel) {
-							/*** inject the HTML ***/
-								var _getMetaTagContent = function (_metaTagName) {
-									/* ISSUE:
-										can't use name property in find object, because it doesn't seem to find the tags in FF. Perhaps getElementsByName is being used in Uize.Node.find, or something, and that doesn't work with meta tags? Weird!
-									*/
-									var _metaTag = Uize.Node.find ({
-										tagName:'meta',
-										self:function () {return this.name == _metaTagName}
-									}) [0];
-									return _metaTag ? _metaTag.content : '';
-								};
-								Uize.Node.injectHtml (
-									document.body,
-									UizeSite.Templates.ShareThisPanel.process ({
-										title:document.title.match (/^\s*(.*?)\s*(\||$)/) [1],
-										url:location.href,
-										keywords:_getMetaTagContent ('keywords'),
-										description:_getMetaTagContent ('description')
-									})
+							/*** add widget and inject its HTML ***/
+								Uize.Node.injectHtml (document.body,'<div id="page-shareThisPanel"></div>');
+								_this.addChild (
+									'shareThisPanel',
+									UizeSite.Widgets.ShareThisPanel.Widget,
+									{
+										container:_this.getNode ('shareThisPanel'),
+										built:false
+									}
 								);
 
 							/*** wire the slide-out behavior ***/
@@ -225,7 +216,7 @@ Uize.module ({
 								Uize.Fx.fadeStyle (_this.getNode ('shareThisPanel'),null,{opacity:.2},1000);
 						}
 
-					/*** inject foot (if desired) ***/
+					/*** inject footer (if desired) ***/
 						_this._showFooter && Uize.Node.injectHtml (document.body,UizeSite.Templates.Footer.process ());
 
 					_superclass.doMy (_this,'wireUi');

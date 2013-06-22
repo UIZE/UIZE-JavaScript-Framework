@@ -1,0 +1,107 @@
+.`` {
+	width: 130px;
+	background: #c9cfd6 url(bg.gif) repeat-x left top;
+	border-right: 1px solid #fff;
+	border-top: 1px solid #eff;
+	box-shadow: 1px 2px 17px rgba(0,0,0,.6);
+	border-radius: 5px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	z-index: 1;
+}
+
+.`heading`, .`footer` {
+	font-size: 10px;
+	font-weight: bold;
+	color: #000;
+	text-shadow: 1px 1px 0 #fff;
+	text-transform: uppercase;
+	padding: 3px 3px;
+	height: 14px;
+}
+
+.`link`, .`link`:link, .`link`:visited, .`link`:hover, .`link`:active {
+	display: block;
+	border: none;
+	padding: 2px 22px 2px 3px;
+	color: #123;
+	text-shadow: 1px 1px 0 #eee;
+	font-size: 11px;
+	white-space: nowrap;
+	background-repeat: no-repeat;
+	background-position: 113px center;
+	border-bottom: 1px solid #abb;
+	border-top: 1px solid #fff;
+}
+
+.`link`:hover, .`link`:active {
+	color: #fff;
+	text-shadow: 1px 1px 0 #000;
+	background-color: #456;
+}
+
+/*** styling for different sharing services ***/
+	.`email` {
+		background-image: url(email.png);
+	}
+	.`facebook` {
+		background-image: url(facebook.png);
+	}
+	.`twitter` {
+		background-image: url(twitter.png);
+	}
+	.`stumbleUpon` {
+		background-image: url(stumbleupon.png);
+	}
+	.`delicious` {
+		background-image: url(del.icio.us.png);
+	}
+	.`digg` {
+		background-image: url(digg.png);
+	}
+	.`reddit` {
+		background-image: url(reddit.png);
+	}
+	.`friendFeed` {
+		background-image: url(friendfeed.png);
+	}
+	.`mySpace` {
+		background-image: url(myspace.png);
+	}
+	.`google` {
+		background-image: url(google.png);
+	}
+	.`linkedIn` {
+		background-image: url(linkedin.png);
+	}
+	.`mixx` {
+		background-image: url(mixx.png);
+	}
+	.`technorati` {
+		background-image: url(technorati.png);
+	}
+	.`posterous` {
+		background-image: url(posterous.png);
+	}
+	.`plurk` {
+		background-image: url(plurk.png);
+	}
+	.`pingFm` {
+		background-image: url(pingfm.png);
+	}
+	.`diigo` {
+		background-image: url(diigo.gif);
+	}
+	.`faves` {
+		background-image: url(faves.png);
+	}
+	.`misterWong` {
+		background-image: url(mister-wong.gif);
+	}
+	.`dzone` {
+		background-image: url(dzone.gif);
+	}
+	.`connotea` {
+		background-image: url(connotea.gif);
+	}
+
