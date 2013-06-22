@@ -31,7 +31,8 @@ Uize.module ({
 		'Uize.String',
 		'Uize.String.Lines',
 		'Uize.Build.Util',
-		'Uize.Url'
+		'Uize.Url',
+		'Uize.Build.ModuleInfo'
 	],
 	builder:function () {
 		var
@@ -71,9 +72,11 @@ Uize.module ({
 					_libraryFileContents = _this.readFile ({path:_librarySourcePath}),
 					_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
 					_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
-					_modules = [],
-					_modulesLength = 0
+					_modules = []
 				;
+				function _moduleBuiltUrl (_moduleName) {
+					return _this.builtUrl (_this.getModuleUrl (_moduleName));
+				}
 				Uize.String.Lines.forEach (
 					_contentsCommentStartPos > -1
 						?
@@ -85,9 +88,18 @@ Uize.module ({
 						if (
 							(_moduleName = Uize.String.trim (_moduleName)) &&
 							_lineStartsWithIdentifierCharRegExp.test (_moduleName)
-						)
-							_modules [_modulesLength++] = _this.builtUrl (_this.getModuleUrl (_moduleName))
-						;
+						) {
+							Uize.String.endsWith ('->')
+								? Uize.push (
+									_modules,
+									Uize.map (
+										Uize.Build.ModuleInfo.traceDependencies (_moduleName.slice (0,-2),['Uize']),
+										_moduleBuiltUrl
+									)
+								)
+								: _modules.push (_moduleBuiltUrl (_moduleName))
+							;
+						}
 					}
 				);
 				return {
