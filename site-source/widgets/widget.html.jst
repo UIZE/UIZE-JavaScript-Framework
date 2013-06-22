@@ -6,7 +6,8 @@
 %><%
 	var
 		_widget = input.widget,
-		_widgetName = _widget.title.toLowerCase ()
+		_widgetName = _widget.title.toLowerCase (),
+		_cappedWidgetName = Uize.capFirstChar (_widgetName)
 	;
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -29,18 +30,13 @@
 <script type="text/javascript">
 
 Uize.module ({
-	required:[
-		'UizeSite.WidgetToGoPage.<%= Uize.capFirstChar (_widgetName) %>.library',
-		'UizeSite.WidgetToGoPage'
-	],
+	required:'UizeSite.WidgetToGoPage.<%= _cappedWidgetName %>.library',
 	builder:function () {
 		'use strict';
 
 		(
-			window.page = UizeSite.WidgetToGoPage ({
-				title:<%= _widget.title -> json %>,
-				widgetToGoClass:<%= _widget.widgetClassModule -> json %>,
-				widgetToGoHtml:<%= _widget.widgetTemplateModule -> json %>
+			window.page = UizeSite.WidgetToGoPage.<%= _cappedWidgetName %> ({
+				title:<%= _widget.title -> json %>
 			})
 		).wireUi ();
 	}

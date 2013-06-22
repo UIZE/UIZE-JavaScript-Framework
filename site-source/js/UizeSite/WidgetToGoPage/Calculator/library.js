@@ -17,24 +17,7 @@
 */
 
 /* Library Contents
-	UizeSite
-	Uize.Class
-	Uize.Node
-	Uize.Widget
-	Uize.Widget.Page
-	UizeSite.Templates
-	UizeSite.Templates.WidgetToGoTitle
-	Uize.Fade
-	Uize.Widget.Button
-	Uize.Widget.PopupPalette
-	UizeSite.WidgetToGoPage
-	Uize.Node.Event
-	Uize.Tooltip
-	Uize.Templates
-	Uize.Widget.TextInput
-	Uize.Widget.Calculator
-	Uize.Templates.Calculator
-	UizeSite.WidgetToGoPage.Calculator
+	UizeSite.WidgetToGoPage.Calculator->
 */
 
 Uize.module ({name:'UizeSite.WidgetToGoPage.Calculator.library'});
