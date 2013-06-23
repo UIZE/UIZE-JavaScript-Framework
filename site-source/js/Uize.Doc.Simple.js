@@ -23,14 +23,17 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module({
+Uize.module ({
 	name:'Uize.Doc.Simple',
 	required:[
 		'Uize.Data.Simple',
 		'Uize.String',
 		'Uize.Templates.List',
+		'Uize.String.Lines',
+		'Uize.Templates.Adoptable',
 		'Uize.Array.Sort',
-		'Uize.Xml'
+		'Uize.Xml',
+		'Uize.Json'
 	],
 	builder:function () {
 		'use strict';
@@ -39,7 +42,6 @@ Uize.module({
 			var
 				_undefined,
 				_string = 'string',
-				_package = function () {},
 				_Uize_String_limitLength = Uize.String.limitLength
 			;
 
@@ -55,14 +57,13 @@ Uize.module({
 				),
 				_sectionAliasesRegExp = /\s*~{2,}\s*/,
 				_objectTypeRegExp = /^\s*<<\s*([^<]*?)\s*>>\s*[\n\r]/,
+				_objectParamsIsJsonRegExp = /^\s*\{/,
 				_builtInObjectTemplates = {
 					html:function (_input) {
 						return _input.code;
 					},
-					image:function (_input) {
+					image:function (_input,_indent,_indentChars) {
 						var
-							_indent = _input.indent,
-							_indentChars = _input.indentChars,
 							_titleAsAttributeValue = Uize.Xml.toAttributeValue (_input.title || ''),
 							_subtitleAsAttributeValue = Uize.Xml.toAttributeValue (_input.subtitle || ''),
 							_titleAndSubtitle = _titleAsAttributeValue && _subtitleAsAttributeValue,
@@ -101,10 +102,8 @@ Uize.module({
 					samplecode:function (_input) {
 						return '<pre class="sample-code">' + _toSampleCode (_input.code || '') + '</pre>';
 					},
-					table:function (_input) {
+					table:function (_input,_indent,_indentChars) {
 						var
-							_indent = _input.indent,
-							_indentChars = _input.indentChars,
 							_htmlChunks = [_indent + '<table class="data">'],
 							_title = _input.title,
 							_rows = _input.data,
@@ -133,6 +132,15 @@ Uize.module({
 						}
 						_htmlChunks.push (_indent + '</table>');
 						return _htmlChunks.join ('\n');
+					},
+					widget:function (_input,_indent,_indentChars,_simpleDocBuildParams) {
+						var _widgetProperties = Uize.copy ({html:'shell'},_input);
+						if (_widgetProperties.name == _undefined)
+							_widgetProperties.name =
+								'widget' +
+								(_simpleDocBuildParams.totalWidgets = (_simpleDocBuildParams.totalWidgets || 0) + 1)
+						;
+						return Uize.String.Lines.indent (Uize.Templates.Adoptable.process (_widgetProperties),1,_indent);
 					}
 				},
 				_slashCharCodesMap = {47:1,92:1} // 47 is forward slash, 92 is backslash
@@ -147,8 +155,8 @@ Uize.module({
 				);
 			}
 
-		/*** Public Static Methods ***/
-			var _build = _package.build = function (_params) {
+		/*** Public Static Methods (implementation) ***/
+			function _build (_params) {
 				/* PARAMETERS:
 					canonicalizePeerSections
 						A boolean, indicating whether or not the contents of multiple peer sections of the same name should be consolidated into a single section of that name.
@@ -188,8 +196,9 @@ Uize.module({
 				*/
 				function _defaultedStringParam (_paramName,_defaultValue) {
 					var _paramValue = _params [_paramName];
-					return typeof _paramValue == _string ? _paramValue : _defaultValue;
+					return (_params [_paramName] = typeof _paramValue == _string ? _paramValue : _defaultValue);
 				}
+				_params = Uize.copy (_params);
 				var
 					_data = _params.data,
 					_urlDictionary = Uize.copyInto (Uize.lookup (_undefined,0,true),_params.urlDictionary),
@@ -202,7 +211,8 @@ Uize.module({
 					_levelListItemNos = [0],
 					_docLines = [],
 					_contentsTree = {items:[]},
-					_metaData = {}
+					_metaData = {},
+					_objectTemplates = Uize.copy (_builtInObjectTemplates,_params.objectTemplates)
 				;
 				if (typeof _data == _string)
 					_data = Uize.Data.Simple.parse ({simple:_data,parseName:false,ignoreWhitespaceLines:true})
@@ -516,23 +526,26 @@ Uize.module({
 										_objectType = _objectTypeMatch [1].toLowerCase (),
 										_objectTypeIsMetaData = _objectType == 'metadata'
 									;
-									if (_objectTypeIsMetaData || (_objectTemplate = _builtInObjectTemplates [_objectType])) {
-										_objectParams = Uize.Data.Simple.parse ({
-											simple:_value.slice (_objectTypeMatch [0].length),
-											collapseChildren:true,
-											ignoreWhitespaceLines:true
-										});
+									if (_objectTypeIsMetaData || (_objectTemplate = _objectTemplates [_objectType])) {
+										var _objectParamsStr = _value.slice (_objectTypeMatch [0].length);
+										console.log (_objectParamsStr);
+										_objectParams = _objectParamsIsJsonRegExp.test (_objectParamsStr)
+											? Uize.Json.from (_objectParamsStr)
+											: Uize.Data.Simple.parse ({
+												simple:_objectParamsStr,
+												collapseChildren:true,
+												ignoreWhitespaceLines:true
+											})
+										;
 										_objectTypeIsMetaData && Uize.copyInto (_metaData,_objectParams);
 									}
 								} else {
-									_objectTemplate = _builtInObjectTemplates.samplecode;
+									_objectTemplate = _objectTemplates.samplecode;
 									_objectParams = {code:_value};
 								}
-								if (_objectTemplate) {
-									_objectParams.indent = _indentStr;
-									_objectParams.indentChars = _indentChars;
-									_objectHtml = _objectTemplate (_objectParams);
-								}
+								if (_objectTemplate)
+									_objectHtml = _objectTemplate (_objectParams,_indentStr,_indentChars,_params)
+								;
 
 							if (_objectHtml != _undefined) {
 								_addDocLine ('');
@@ -771,17 +784,21 @@ Uize.module({
 						}
 						: _html
 				);
-			};
+			}
 
-			_package.toDocument = function (_simple,_simpleDocParams) {
+			function _toDocument (_simple,_simpleDocParams) {
 				return _build (Uize.copyInto ({data:_simple},_simpleDocParams));
-			};
+			}
 
-			var _toSampleCode = _package.toSampleCode = function (_sourceStr) {
+			function _toSampleCode (_sourceStr) {
 				return _sourceStr.replace (/\t/g,'  ').replace (/&/g,'&amp;').replace (/</g,'&lt;').replace (/>/g,'&gt;');
-			};
+			}
 
-			return _package;
+		return Uize.package ({
+			build:_build,
+			toDocument:_toDocument,
+			toSampleCode:_toSampleCode
+		});
 	}
 });
 
