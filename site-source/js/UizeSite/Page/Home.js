@@ -82,7 +82,7 @@ Uize.module ({
 								{curve:Uize.Curve.easeInOutPow (4)}
 							).wire (
 								'Done',
-								function () {_this.children.podHeadingHoverFader.tickle (350)}
+								function () {_this.children.headerLinksFader.tickle (100)}
 							);
 					}
 				}
