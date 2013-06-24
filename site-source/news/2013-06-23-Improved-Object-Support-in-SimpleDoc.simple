@@ -1,0 +1,118 @@
+The object block feature in SimpleDoc has been improved with the addition of support for specifying object block data in JSON format, along with support for widget object blocks.
+
+JSON Format for Object Block Data
+	In addition to being able to specify object block data in SimpleData format, it is now also possible to use JSON format.
+
+	So, for example, the following object block...
+
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	...........................................................................................
+	<< table >>
+
+	title: Nutritional Information for Various Fruits
+	data
+	:| Name     | Calories | Fat    | Carbs  | Fiber | Sugars | Protein | Calcium | Potassium |
+	:| Apples   | 52 kcal  | .17g   | 13.81g | 2.4g  | 10.39g | .26g    | 6g      | 107mg     |
+	:| Avocados | 160 kcal | 14.66g | 8.53g  | 6.7g  | .66g   | 2g      | 12g     | 485mg     |
+	:| Bananas  | 89 kcal  | .33g   | 22.84g | 2.6g  | 12.23g | 1.09g   | 5g      | 358mg     |
+	:| Dates    | 277 kcal | .15g   | 74.97g | 6.7g  | 66.47g | 1.81g   | 64g     | 696mg     |
+	:| Oranges  | 49 kcal  | .15g   | 12.54g | 2.2g  | 8.5g   | .91g    | 43g     | 166mg     |
+	:| Pears    | 58 kcal  | .12g   | 15.46g | 3.1g  | 9.8g   | .38g    | 9g      | 119mg     |
+	:| Plums    | 46 kcal  | .28g   | 11.42g | 1.4g  | 9.92g  | .7g     | 6g      | 157mg     |
+	...........................................................................................
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	...could also be written using JSON format as...
+
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	.................................................................................................
+	<< table >>
+
+	{
+		title: 'Nutritional Information for Various Fruits',
+		data: [
+			['Name', 'Calories', 'Fat', 'Carbs', 'Fiber', 'Sugars', 'Protein', 'Calcium', 'Potassium'],
+			['Apples', '52 kcal', '.17g', '13.81g', '2.4g', '10.39g', '.26g', '6g', '107mg'],
+			['Avocados', '160 kcal', '14.66g', '8.53g', '6.7g', '.66g', '2g', '12g', '485mg'],
+			['Bananas', '89 kcal', '.33g', '22.84g', '2.6g', '12.23g', '1.09g', '5g', '358mg'],
+			['Dates', '277 kcal', '.15g', '74.97g', '6.7g', '66.47g', '1.81g', '64g', '696mg'],
+			['Oranges', '49 kcal', '.15g', '12.54g', '2.2g', '8.5g', '.91g', '43g', '166mg'],
+			['Pears', '58 kcal', '.12g', '15.46g', '3.1g', '9.8g', '.38g', '9g', '119mg'],
+			['Plums', '46 kcal', '.28g', '11.42g', '1.4g', '9.92g', '.7g', '6g', '157mg']
+		]
+	}
+	.................................................................................................
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	This provision can be particularly useful for object block types where it is important to specify values using specific value types (boolean, number, string, etc.), such as when specifying widget properties in `widget object blocks`.
+
+	Open Curly Brace Means JSON
+		Choosing between treating the object block data as JSON formatted versus SimpleData formatted follows a very simple rule: if the first non-whitespace character of the object block data is a "{" (open curly bracket) character, then the data is treated as being JSON formatted.
+
+		Technically, this means that you couldn't have an object block type whose data supports root-level properties whose names begin with a curly brace and then use SimpleData format for specifying the object block data when embedding that object block type in documents. In practice, this just isn't a concern worth worrying about.
+
+Widget Object Blocks
+	SimpleDoc now supports widget object blocks, allowing you to embed encapsulated widgets in SimpleDoc documents.
+
+	In order to embed a widget at some place in a SimpleDoc document, simply add an object block of type "widget" and specify the properties for the widget using either SimpleData format or JSON format, paying attention to specify a valid widget class name using the =widgetClass= property.
+
+	EXAMPLE
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	...........................................
+	<< widget >>
+
+	widgetClass: Uize.Widgets.Calculator.Widget
+	size: tiny
+	...........................................
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	HOW IT LOOKS
+	...........................................
+	<< widget >>
+
+	widgetClass: Uize.Widgets.Calculator.Widget
+	size: tiny
+	...........................................
+
+	Voila! A fully functioning calculator widget inside this SimpleDoc document.
+
+	Specify Widget Properties Using SimpleData
+		In the cleanest form, widget properties can be specified in SimpleData format as follows...
+
+		EXAMPLE
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		...........................................
+		<< widget >>
+
+		widgetClass: Uize.Widgets.Calculator.Widget
+		size: small
+		...........................................
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		Bear in mind that using SimpleData format does not allow you to differentiate between string, number, and boolean types for property values - all non-array and non-object values for nodes in a SimpleData data structure are string. If it is important to the class of the widget being embedded that some properties have non-string type values, then you will need to `specify widget properties using JSON`.
+
+	Specify Widget Properties Using JSON
+		In cases where type for widget property values is important, widget properties can be specified in JSON format as follows...
+
+		EXAMPLE
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		.................................................
+		<< widget >>
+
+		{
+			widgetClass: 'Uize.Widgets.Calculator.Widget',
+			size: 'small'
+		}
+		.................................................
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	Encapsulated Widgets
+		In order for `widget object blocks` to be of practical use, the widget classes used will need to be for encapsulated widgets: widgets that encapsulate their associated HTML and CSS.
+
+		To preview UIZE's built-in encapsulated widgets, consult the [[../examples/widget-visual-samplers.html?namespace=Uize.Widgets][Widget Visual Samplers]] example page.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-06-23 - Improved Object Support in SimpleDoc
+....................................................................................
