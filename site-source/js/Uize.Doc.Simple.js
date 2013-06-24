@@ -528,7 +528,6 @@ Uize.module ({
 									;
 									if (_objectTypeIsMetaData || (_objectTemplate = _objectTemplates [_objectType])) {
 										var _objectParamsStr = _value.slice (_objectTypeMatch [0].length);
-										console.log (_objectParamsStr);
 										_objectParams = _objectParamsIsJsonRegExp.test (_objectParamsStr)
 											? Uize.Json.from (_objectParamsStr)
 											: Uize.Data.Simple.parse ({
