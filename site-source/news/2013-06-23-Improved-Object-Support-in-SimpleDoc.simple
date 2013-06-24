@@ -107,7 +107,7 @@ Widget Object Blocks
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	Encapsulated Widgets
-		In order for `widget object blocks` to be of practical use, the widget classes used will need to be for encapsulated widgets: widgets that encapsulate their associated HTML and CSS.
+		In order for `widget object blocks` to be of practical use, the widget classes used will need to be for encapsulated widgets - widgets that encapsulate their associated HTML and CSS.
 
 		To preview UIZE's built-in encapsulated widgets, consult the [[../examples/widget-visual-samplers.html?namespace=Uize.Widgets][Widget Visual Samplers]] example page.
 

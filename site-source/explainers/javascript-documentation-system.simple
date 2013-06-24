@@ -1465,11 +1465,47 @@ Object Blocks
 			Rules for Object Block Data
 				`Object block data` must conform to the following rules...
 
-				- Object block data must be specified using the SimpleData format.
+				- Object block data must be specified using either [[SimpleData Format for Object Block Data][SimpleData format]] or [[JSON Format for Object Block Data][JSON format]].
 				- The specific properties that can be specified in the object block data will depend on the type of the object block.
 				- Unlike in the case of the `object block type declaration`, property names for object block data are case-sensitive and must be specified using the correct case (as defined by the specific type of object block being used).
 				- The order of properties specified in the object block data is not important - they are like attributes of HTML tags in this sense and can appear in any order.
 				- Any properties specified in the object block data that are *not* supported by the type of object block being used (including properties that are specified using the incorrect case) will simply be ignored.
+
+			SimpleData Format for Object Block Data
+				In the cleanest form, `object block data` can be specified in SimpleData format as follows...
+
+				EXAMPLE
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				...........................................
+				<< widget >>
+
+				widgetClass: Uize.Widgets.Calculator.Widget
+				size: small
+				...........................................
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+				Bear in mind that using SimpleData format does not allow you to differentiate between string, number, and boolean types for property values - all non-array and non-object values for nodes in a SimpleData data structure are string. If it is important to the object block type that some properties of the object block data have non-string type values, then you will need to use `JSON format for object block data`.
+
+			JSON Format for Object Block Data
+				In cases where type for property values of the `object block data` is important (ie. boolean vs number vs string, etc.), the data can be specified in JSON format as follows...
+
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				.................................................
+				<< widget >>
+
+				{
+					widgetClass: 'Uize.Widgets.Calculator.Widget',
+					size: 'small'
+				}
+				.................................................
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+				This provision can be particularly useful for object block types where it is important to specify values using specific value types, such as when specifying widget properties in a `widget object block`.
+
+			Open Curly Brace Means JSON
+				Choosing between treating the object block data as JSON formatted versus SimpleData formatted follows a very simple rule: if the first non-whitespace character of the object block data is a "{" (open curly bracket) character, then the data is treated as being JSON formatted.
+
+				Technically, this means that you couldn't have an object block type whose data supports root-level properties whose names begin with a curly brace and then use SimpleData format for specifying the object block data when embedding that object block type in documents. In practice, this just isn't a concern worth worrying about.
 
 	Built-in Object Blocks
 		The SimpleDoc HTML document generator supports a number of built-in object blocks, including the `HTML object block`, the `samplecode object block`, and the `table object block`.
@@ -1880,6 +1916,65 @@ Object Blocks
 						::
 							8.53g
 					...................
+
+		widget Object Block
+			SimpleDoc supports widget object blocks, allowing you to embed encapsulated widgets in SimpleDoc documents.
+
+			In order to embed a widget at some place in a SimpleDoc document, simply add an object block of type "widget" and specify the properties for the widget using either SimpleData format or JSON format, paying attention to specify a valid widget class name using the =widgetClass= property.
+
+			EXAMPLE
+			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			...........................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Calculator.Widget
+			size: tiny
+			...........................................
+			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+			HOW IT LOOKS
+			...........................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Calculator.Widget
+			size: tiny
+			...........................................
+
+			Voila! A fully functioning calculator widget inside this SimpleDoc document.
+
+			Specify Widget Properties
+				Just like any other types of object blocks, `object block data` for widget object blocks can be specified using [[SimpleData Format for Object Block Data][SimpleData format]] or [[JSON Format for Object Block Data][JSON format]].
+
+				So, for example, the following widget object block...
+
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				...........................................
+				<< widget >>
+
+				widgetClass: Uize.Widgets.Calculator.Widget
+				size: tiny
+				...........................................
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+				...could also be written as...
+
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				.................................................
+				<< widget >>
+
+				{
+					widgetClass: 'Uize.Widgets.Calculator.Widget',
+					size: 'tiny'
+				}
+				.................................................
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+				Because the SimpleData format does not allow you to differentiate between string, number, and boolean types for property values - all non-array and non-object values for nodes in a SimpleData data structure are string - you may wish to stick with JSON format whenever embedding a `widget object block`, since there's a good change that some widget classes will require certain properties to be of specific types.
+
+			Encapsulated Widgets
+				In order for `widget object blocks` to be of practical use, the widget classes used will need to be for encapsulated widgets - widgets that encapsulate their associated HTML and CSS.
+
+				To preview UIZE's built-in encapsulated widgets, consult the [[../examples/widget-visual-samplers.html?namespace=Uize.Widgets][Widget Visual Samplers]] example page.
 
 Sample Code Blocks
 	Sample Code Blocks are a convenient way to insert blocks of sample code into a SimpleDoc document, using a concise shorthand syntax.
