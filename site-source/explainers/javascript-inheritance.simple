@@ -2,39 +2,130 @@ Introduction
 	The UIZE JavaScript Framework implements a system for class inheritance that makes subclassing and object-oriented programming possible in JavaScript.
 
 It's Easy
-	Subclassing is very easy in the UIZE JavaScript Framework. Creating a fresh subclass is as simple as the following statement...
+	UIZE implements a system for class inheritance to facilitate object-oriented programming in JavaScript.
 
-	..........................................
-	var MySubclass = MySuperclass.subclass ();
-	..........................................
+	Class features are provided in the =Uize.Class= module. You can create your own class very easily, simply by calling the =subclass= method on the =Uize.Class= base class, as follows...
 
-Where It's Implemented
-	The power of classes built using the UIZE JavaScript Framework is derived from the =Uize.Class= base class.
+	.....................................
+	var MyCkass = Uize.Class.subclass ();
+	.....................................
 
-	All classes inherit directly - or indirectly - from this class. While the =Uize.Class= module is not tiny, the core of the inheritance mechanism itself is quite tiny. What makes the =Uize.Class= module larger is that it provides not only an inheritance mechanism, but also a [[javascript-event-system.html][JavaScript Event System]] and a [[state-properties.html][State Properties]] system.
+Declaring Features
+	Once you have your own class, you can modify it in numerous ways to declare features.
 
-Fleshing Out a Subclass
-	Each class that you create using the framework inherits the =subclass= static method, so you can easily make further subclasses of them.
+	Mofifying the Class Manually
+		You can declare features on a class by modifying the class manually.
 
-	EXAMPLE
-	...................................................................................
-	var MyClass = Uize.Class.subclass (); // create a class
-	MyClass.prototype.foo = 'bar';        // create an instance property for the class
+		- assign properties on the class' =prototype= object to define instance methods and/or properties
+		- assign properties on the class to define static methods and/or properties
 
-	var MySubclass = MyClass.subclass (); // subclass the class
-	mySubclassInstance = new MySubclass;  // create an instance of the subclass
+		EXAMPLE
+		....................................................
+		MyClass.prototype.someInstanceMethod = function () {
+			// do some stuff
+		};
 
-	alert (mySubclassInstance.foo);       // alert the subclass instance's foo property
-	...................................................................................
+		MyClass.someStaticMethod = function () {
+			// do some stuff
+		};
+		....................................................
 
-	In this example, =MyClass= is a plain vanilla subclass of the =Uize.Class= base class. The property =foo= is assigned on its =prototype= and is shared by all instances. Now, a subclass of =MyClass= is created, by the name of =MySubclass=. An instance of =MySubclass= is created, and the value of its =foo= property is alerted. Unsurprisingly, what shows up in the alert dialog is the text "bar". Naturally, meaningful classes are a little more complex than this, but this demonstrates the basics.
+	Using the Feature Declaration Methods
+		You can declare features on a class using the various feature declaration static methods of the class that are inherited from the =Uize.Class= base class.
 
-	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as `non-inheritable statics`), and state properties declared on the superclass using the =Uize.Class.stateProperties= static method. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.
+		- call the =MyClass.instanceMethods= method to declare instance methods
+		- call the =MyClass.staticMethods= method to declare static methods
+		- call the =MyClass.stateProperties= method to declare state properties
+		- more feature declaration methods: =MyClass.instanceProperties=, =MyClass.staticProperties=, etc.
 
-Fleshing Out a Subclass
-	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and declaring state properties or overriding the initial values of inherited state properties.
+		EXAMPLE
+		....................................
+		MyClass.instanceMethods ({
+			someInstanceMethod1:function () {
+				// do some stuff
+			},
+			someInstanceMethod2:function () {
+				// do some stuff
+			}
+		});
 
-	Adding Instance Methods and Properties
+		MyClass.staticMethods ({
+			someStaticMethod1:function () {
+				// do some stuff
+			},
+			someStaticMethod2:function () {
+				// do some stuff
+			}
+		});
+		....................................
+
+	Using the declare Static Method
+		As an alternative to calling the feature declaration methods individually, the =MyClass.declare= static can be used to combine all the feature declarations into a single method call...
+
+		.......................................
+		MyClass.declare ({
+			instanceMethods:{
+				someInstanceMethod1:function () {
+					// do some stuff
+				},
+				someInstanceMethod2:function () {
+					// do some stuff
+				}
+			},
+			staticMethods:{
+				someStaticMethod1:function () {
+					// do some stuff
+				},
+				someStaticMethod2:function () {
+					// do some stuff
+				}
+			}
+		});
+		.......................................
+
+	Declaring Features During Class Creation
+		As an even more concise form of declaring class features, the features can be optionally declared in the call to the =subclass= method.
+
+		.......................................
+		var MyClass = Uize.Class.subclass ({
+			instanceMethods:{
+				someInstanceMethod1:function () {
+					// do some stuff
+				},
+				someInstanceMethod2:function () {
+					// do some stuff
+				}
+			},
+			staticMethods:{
+				someStaticMethod1:function () {
+					// do some stuff
+				},
+				someStaticMethod2:function () {
+					// do some stuff
+				}
+			}
+		});
+		.......................................
+
+### Supported Feature Types
+	The UIZE class system formally supports the following feature types with dedicated feature declaration methods...
+
+	Instance Methods
+		.
+
+	Instance Properties
+		.
+
+	Static Methods
+		.
+
+	Static Properties
+		.
+
+	State Properties
+		.
+
+	### Adding Instance Methods and Properties
 		Adding instance methods and properties to a subclass involves assigning properties on the subclass' prototype object.
 
 		EXAMPLE
@@ -48,7 +139,7 @@ Fleshing Out a Subclass
 
 		In the UIZE JavaScript Framework, instance methods and properties added to the prototype object of a class are copied to the prototype object of a subclass when creating that subclass. After a subclass is created, modifying the prototype object of its superclass has no effect on that subclass.
 
-	Adding Static Methods and Properties
+	### Adding Static Methods and Properties
 		Adding instance methods and properties to a subclass involves assigning properties on the subclass' prototype object.
 
 		EXAMPLE
@@ -64,7 +155,7 @@ Fleshing Out a Subclass
 
 		In the UIZE JavaScript Framework, static methods and properties assigned on a class are copied to a subclass when creating that subclass (unless they are registered as `non-inheritable statics`). After a subclass is created, modifying the static methods and properties of the superclass has no effect on that subclass.
 
-	Adding State Properties
+	### Adding State Properties
 		You can declare one or more state properties for a subclass, using the =MyClass.stateProperties= static method that is inherited from the =Uize.Class= base class.
 
 		EXAMPLE
@@ -111,52 +202,93 @@ Fleshing Out a Subclass
 
 			After the above code has executed, the class =MySubclass= will have the two state properties =foo= and =bar=.
 
+Creating Further Subclasses
+	All subclasses that inherit from =Uize.Class= get a =subclass= static method, so you can make further subclasses just as easily...
+
+	...........................................................
+	var MyClass = Uize.Class.subclass ({
+		instanceMethods:{
+			fooMethod:function () {
+				alert ('foo');
+			},
+			barMethod:function () {
+				alert ('bar');
+			}
+		}
+	});
+
+	var MySubclass = MyClass.subclass ({
+		instanceMethods:{
+			barMethod:function () {
+				alert ('overridden bar');
+			}
+		}
+	});
+
+	var mySubclassInstance = new MySubclass ();
+	mySubclassInstance.fooMethod ();  // alerts "foo"
+	mySubclassInstance.barMethod ();  // alerts "overriden bar"
+	...........................................................
+
+Inheritance
+	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, state properties declared on the superclass using the =Uize.Class.stateProperties= static method, and static methods and properties assigned on the superclass.
+
+	The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing =Uize.Class= subclasses, the =Uize.Class= base class also provides its subclasses with a `state interface` and an `event infrastructure`.
+
 Overriding a Superclass
+	Features that are inherited from a superclass can be overridden in exactly the same way as they are declared.
+
 	Overriding Instance Methods and Properties
 		Overriding instance methods and properties of a superclass is easy. It's just a matter of re-assigning.
 
 		EXAMPLE
-		.....................................................................................
-		var MyClass = Uize.Class.subclass ();      // create a class
-		MyClass.prototype.foo = function () {      // create an instance method
-			alert ('bar');
-		};
+		...................................................................................................
+		var MyClass = Uize.Class.subclass ({      // create a class with an instance method
+			instanceMethods:{
+				foo:function () {alert ('bar')}
+			}
+		});
 
-		var MySubclass = MyClass.subclass ();      // subclass the class
-		MySubclass.prototype.foo = function () {   // override inherited instance method
-			alert ('foo');
-			MyClass.prototype.foo.call (this);      // call foo method on superclass
-		};
+		var MySubclass = MyClass.subclass ({      // create subclass and override inherited instance method
+			instanceMethods:{
+				foo:function () {
+					alert ('foo');
+					MyClass.doMy (this,'foo');  // call superclass' version of foo instance method
+				}
+			}
+		});
 
-		myClassInstance = new MyClass;             // create an instance of the class
-		myClassInstance.foo ();                    // call foo method on instance of class
+		var myClassInstance = new MyClass;        // create an instance of the class
+		myClassInstance.foo ();                   // call foo method on instance of class
 
-		mySubclassInstance = new MySubclass;       // create an instance of the subclass
-		mySubclassInstance.foo ();                 // call foo method on instance of subclass
-		.....................................................................................
+		var mySubclassInstance = new MySubclass;  // create an instance of the subclass
+		mySubclassInstance.foo ();                // call foo method on instance of subclass
+		...................................................................................................
 
 		In this example, the =foo= instance method of the subclass has been overrided so that it first alerts the text "foo" and then calls the =foo= method implementation from the superclass and alerts the text "bar".
 
-		Typically, the code that implements the methods of a subclass is near (or in the same scope as) the code that creates the subclass, so the subclass knows its superclass. When you start to digging into subclass modules, you will encounter this reference to the superclass in the form of the =_superclass= variable (named such by convention).
+		Typically, the code that implements the methods of a subclass is near (or in the same scope as) the code that creates the subclass, so the subclass knows its superclass. When you start digging into subclass modules, you will encounter this reference to the superclass in the form of the =_superclass= variable (named such by convention).
 
 	Overriding Static Methods and Properties
 		Overriding static methods and properties of a superclass is easy. It's just a matter of re-assigning.
 
 		EXAMPLE
-		...............................................................................
-		var MyClass = Uize.Class.subclass ();      // create a class
-		MyClass.myStaticMethod = function () {     // create a static method
-			alert ('foo');
-		};
+		............................................................................................
+		var MyClass = Uize.Class.subclass ({  // create a class with a static method
+			staticMethods:{
+				myStaticMethod:function () {alert ('foo')}
+			}
+		});
 
-		var MySubclass = MyClass.subclass ();      // subclass the class
-		MySubclass.myStaticMethod = function () {  // override inherited static method
-			alert ('bar');
-		};
+		var MySubclass = MyClass.subclass ({  // create subclass, overriding inherited static method
+			staticMethods:{
+				myStaticMethod:function () {alert ('bar')}
+			}
+		});
 
-		myClass.myStaticMethod ();                 // call myStaticMethod on MyClass
-		mySubclass.myStaticMethod ();              // call myStaticMethod on MySubclass
-		...............................................................................
+		myClass.myStaticMethod ();            // call myStaticMethod on MyClass
+		mySubclass.myStaticMethod ();         // call myStaticMethod on MySubclass
+		............................................................................................
 
 		In this example, =MySubclass= is a subclass of =MyClass=, and both classes have a static method =myStaticMethod=. By subclassing =MyClass=, =MySubclass= inherits the implementation of =myStaticMethod= from =MyClass=. Re-assigning the =myStaticMethod= property of =MySubclass= overrides the inherited implementation without affecting =MyClass=. So, calling =myStaticMethod= on =MyClass= will product the text "foo" in an alert dialog, while calling =myStaticMethod= on =MySubclass= will product the text "bar" in an alert dialog.
 
@@ -168,34 +300,46 @@ Overriding a Superclass
 			The Instance Method Case
 				Within an instance method's implementation, one can use the =Class= instance property to reference the actual class of the instance - even in the superclass' code - as in...
 
-				.................................................................................
-				MyClass.prototype.myInstanceMethod = function () {
-					this.Class.myStaticMethod (); // call myStaticMethod static method on subclass
-				};
-				.................................................................................
+				.......................................................................................
+				var MyClass = Uize.Class.subclass ({
+					instanceMethods:{
+						myInstanceMethod:function () {
+							this.Class.myStaticMethod (); // call myStaticMethod static method on subclass
+						}
+					}
+				});
+				.......................................................................................
 
 				Now, in the case of an instance of =MyClass=, the =myStaticMethod= static method will be called on =MyClass=. However, in the case of an instance of =MySubclass= (that is a subclass of =MyClass=), the =myStaticMethod= static method will be called on =MySubclass=, even though the =myInstanceMethod= instance method is implemented by =MyClass=. If =MySubclass= didn't override the implementation inherited from =MyClass=, then there will be no difference in the outcome.
 
 				Let's take a look at an example...
 
 				EXAMPLE
-				..............................................................................
-				MyClass = Uize.Class.subclass ();          // create a class
-				MyClass.myStaticMethod = function () {     // create a static method
-					alert ('MyClass');
-				};
-				MyClass.myInstanceMethod = function () {   // create an instance method
-					this.Class.myStaticMethod ();
-				};
+				.........................................................................................
+				var MyClass = Uize.Class.subclass ({      // create a class
+					staticMethods:{
+						myStaticMethod:function () {
+							alert ('MyClass');
+						}
+					},
+					instanceMethods:{
+						myInstanceMethod:function () {
+							this.Class.myStaticMethod ();
+						}
+					}
+				});
 
-				MySubclass = MyClass.subclass ();          // subclass the class
-				MySubclass.myStaticMethod = function () {  // override inherited static method
-					alert ('MySubclass');
-				};
+				var MySubclass = MyClass.subclass ({      // subclass the class, overriding static method
+					staticMethods:{
+						myStaticMethod:function () {
+							alert ('MySubclass');
+						}
+					}
+				});
 
-				var _mySubclassInstance = new MySubclass;  // create instance of MySubclass
-				mySubclassInstance.myInstanceMethod ();    // call myInstanceMethod
-				..............................................................................
+				var mySubclassInstance = new MySubclass;  // create instance of MySubclass
+				mySubclassInstance.myInstanceMethod ();   // call myInstanceMethod
+				.........................................................................................
 
 				In this example, =MyClass= implements the static method =MyClass.myStaticMethod=. Now, =MySubclass= overrides the implementation of =myStaticMethod= inherited from =MyClass=. The implementation of =myInstanceMethod= (inherited from =MyClass=) uses the =Class= property to get a reference to the actual class of an instance on which the method is being called. So, when this method is called on the instance of =MySubclass= named =mySubclassInstance=, the overrided form of =myStaticMethod= (implemented by =MySubclass=) is called, resulting in the text "MySubclass" being displayed in the alert dialog - *not* the text "MyClass".
 
@@ -211,24 +355,32 @@ Overriding a Superclass
 				Let's take a look at an example...
 
 				EXAMPLE
-				...................................................................................
-				MyClass = Uize.Class.subclass ();               // create a class
-				MyClass.myStaticMethod = function () {          // create a static method
-					this.myOtherStaticMethod ();
-				};
-				MyClass.myOtherStaticMethod = function () {     // create another static method
-					alert ('MyClass');
-				};
+				...............................................................................................
+				MyClass = Uize.Class.subclass ({         // create a class with two static methods
+					staticMethods:{
+						myStaticMethod:function () {
+							this.myOtherStaticMethod ();
+						},
+						myOtherStaticMethod:function () {
+							alert ('MyClass');
+						}
+					}
+				});
 
-				MySubclass = MyClass.subclass ();               // subclass the class
-				MySubclass.myOtherStaticMethod = function () {  // override inherited static method
-					alert ('MySubclass');
-				};
+				MySubclass = MyClass.subclass ({         // create subclass, overriding inherited static method
+					staticMethods:{
+						myOtherStaticMethod:function () {
+							alert ('MySubclass');
+						}
+					}
+				});
 
-				MySubclass.myStaticMethod ();                   // call inherited static method
-				...................................................................................
+				MySubclass.myStaticMethod ();            // call inherited static method
+				...............................................................................................
 
-				In this example, =MyClass= implements the two static methods =MyClass.myStaticMethod= and =MyClass.myOtherStaticMethod=. The implementation of =MyClass.myStaticMethod= wants to always call the subclass' version of =myOtherStaticMethod=. So, instead of calling it as =MyClass.myOtherStaticMethod ()=, it calls it as =this.myOtherStaticMethod ()=. If =myStaticMethod= is called on =MyClass=, then =this= will be a reference to =MyClass=. However, if =myStaticMethod= is called on =MySubclass=, then =this= will be a reference to =MySubclass=. Consequently, using =this= guarantees that the subclass' version will be called. In this example, =MySubclass= overrides the implementation of =myOtherStaticMethod= inherited from =MyClass=, so the statement =MySubclass.myStaticMethod ()= will result in the text "MySubclass" being displayed in the alert dialog - *not* the text "MyClass".
+				In this example, =MyClass= implements the two static methods =MyClass.myStaticMethod= and =MyClass.myOtherStaticMethod=. The implementation of =MyClass.myStaticMethod= wants to always call the subclass' version of =myOtherStaticMethod=. So, instead of calling it as =MyClass.myOtherStaticMethod ()=, it calls it as =this.myOtherStaticMethod ()=.
+
+				Now, if =myStaticMethod= is called on =MyClass=, then =this= will be a reference to =MyClass=. However, if =myStaticMethod= is called on =MySubclass=, then =this= will be a reference to =MySubclass=. Consequently, using =this= guarantees that the subclass' version will be called. In this example, =MySubclass= overrides the implementation of =myOtherStaticMethod= inherited from =MyClass=, so the statement =MySubclass.myStaticMethod ()= will result in the text "MySubclass" being displayed in the alert dialog - *not* the text "MyClass".
 
 	Overriding State Property Values
 		The initial value for a state property inherited from a superclass can be overrided by calling the =MyClass.set= static method that is inherited from the =Uize.Class= base class.
@@ -236,67 +388,76 @@ Overriding a Superclass
 		The initial value for a state property is declared by specifying the =value= property in the profile for the state property, as follows...
 
 		EXAMPLE
-		...........................................................................
-		var MyClass = Uize.Class.subclass ();  // create a class
-		MyClass.stateProperties ({             // declare the foo state property
-			_foo:{
-				name:'foo',
-				onChange:function () {
-					// code to handle a change in foo's value
-				},
-				value:'bar'
+		..................................................................................
+		var MyClass = Uize.Class.subclass ({   // create a class with a foo state property
+			stateProperties:{
+				_foo:{
+					name:'foo',
+					onChange:function () {
+						// code to handle a change in foo's value
+					},
+					value:'bar'
+				}
 			}
 		});
 
 		var _myClassInstance = new MyClass;    // create instance of MyClass
 		alert (_myClassInstance.get ('foo'));  // alert value of foo state property
-		...........................................................................
+		..................................................................................
 
 		In the above example, the text "bar" will be displayed in the alert dialog.
 
 		Now, the initial value for the =foo= state property inherited from =MyClass= can be overrided in a subclass, as follows...
 
 		EXAMPLE
-		...............................................................................
-		var MyClass = Uize.Class.subclass ();      // create a class
-		MyClass.stateProperties ({                 // declare the foo state property
-			_foo:{
-				name:'foo',
-				onChange:function () {
-					// code to handle a change in foo's value
-				},
-				value:'bar'
+		..............................................................................................
+		var MyClass = Uize.Class.subclass ({   // create a class with a foo state property
+			stateProperties:{
+				_foo:{
+					name:'foo',
+					onChange:function () {
+						// code to handle a change in foo's value
+					},
+					value:'bar'
+				}
 			}
 		});
 
-		var MySubclass = MyClass.subclass ();      // subclass the class
-		MySubclass.set ({foo:'NOT BAR'});          // override initial value for foo
+		var MySubclass = MyClass.subclass ({   // subclass the class, overriding initial value for foo
+			set:{foo:'NOT BAR'}
+		});
 
 		var _mySubclassInstance = new MySubclass;  // create instance of MySubclass
 		alert (_mySubclassInstance.get ('foo'));   // alert value of foo state property
-		...............................................................................
+		..............................................................................................
 
-		In this example, we have now created a subclass of =MyClass= named =MySubclass=. The new subclass inherits the =foo= state property, along with its initial value of ='bar'= that is declared in =MyClass=. The =MySubclass.set= static method is then used to change the initial value of this state property to ='NOT BAR'=. Now, the fresh instance of =MySubclass= that is created, named =_mySubclassInstance=, will have the initial value ='NOT BAR'= for its =foo= state property, and the alert dialog will display this text.
+		In this example, we have now created a subclass of =MyClass= named =MySubclass=. The new subclass inherits the =foo= state property, along with its initial value of ='bar'= that is declared in =MyClass=. When creating the =MySubclass= subclass, we use the =set= declaration to change the initial value of this state property to ='NOT BAR'=. This is equivalent to calling =MySubclass.set=, but we can tuck it neatly into the subclassing statement. Now, the fresh instance of =MySubclass= that is created, named =_mySubclassInstance=, will have the initial value ='NOT BAR'= for its =foo= state property, and the alert dialog will display this text.
 
 Private vs. Public
 	By convention, private methods and properties - both instance and static - are distinguished from public methods and properties by prefixing their names with an underscore.
 
 	EXAMPLE
-	....................................................................................
-	_classPrototype.myPublicInstanceMethod = function () {    // public instance method
-		// do stuff
-	};
-	_class.myPublicStaticMethod = function () {               // public static method
-		// do stuff
-	};
+	........................................................................
+	var MyClass = Uize.Class.subclass ({
+		instanceMethods:{
+			_myPrivateInstanceMethod:function () {  // private instance method
+				// do stuff
+			},
+			myPublicInstanceMethod:function () {    // public instance method
+				// do stuff
+			}
+		},
 
-	_classPrototype._myPrivateInstanceMethod = function () {  // private instance method
-		// do stuff
-	};
-	_class._myPrivateStaticMethod = function () {             // private static method
-		// do stuff
-	};
-	....................................................................................
+		staticMethods:{
+			_myPrivateStaticMethod:function () {    // private static method
+				// do stuff
+			},
+			myPublicStaticMethod:function () {      // public static method
+				// do stuff
+			}
+		}
+	});
+	........................................................................
 
 	Technically, such private methods and properties are not thoroughly private and can be accessed as public methods or properties. However, because their names will be changed by the Scruncher when the code is scrunched to minimize its size, one cannot reliably access these methods and properties. This is a kind of "soft privacy".
 
@@ -333,10 +494,13 @@ Non-inheritable Statics
 
 		EXAMPLE
 		...........................................................................
-		MyClass = Uize.Class.subclass ();
-		MyClass.someUtilityFunction = function () {
-			// do something of great utility
-		};
+		MyClass = Uize.Class.subclass ({
+			staticMethods:{
+				someUtilityFunction:function () {
+					// do something of great utility
+				}
+			}
+		});
 		MyClass.nonInheritableStatics.someUtilityFunction = 1;
 
 		MyClassSubclass = MyClass.subclass ();
@@ -357,8 +521,11 @@ Non-inheritable Statics
 
 		EXAMPLE
 		..........................................................................
-		MyClass = Uize.Class.subclass ();
-		MyClass.someStaticProperty = 'foo';
+		MyClass = Uize.Class.subclass ({
+			staticProperties:{
+				someStaticProperty:'foo'
+			}
+		});
 		MyClass.nonInheritableStatics.someStaticProperty = 1;
 
 		MyClassSubclass = MyClass.subclass ();
@@ -396,16 +563,16 @@ Phases of Construction
 	alphastructor
 		The alphastructor is a function that is executed before the state properties for an instance are initialized, and before the =omegastructor= function is executed.
 
-		An alphastructor is declared by specifying a value for the first parameter when calling the =subclass= static method on the superclass.
+		An alphastructor is declared by specifying a value for the =alphastructor= property of the feature declaration object when calling the superclass' =subclass= method.
 
 		EXAMPLE
-		...................................
-		var MyClass = Uize.Class.subclass (
-			function () {
+		....................................
+		var MyClass = Uize.Class.subclass ({
+			alphastructor:function () {
 				this._someArray = [];
 			}
-		);
-		...................................
+		});
+		....................................
 
 		Code inside the alphastructor can set up private "scaffolding" type properties that need to be already in existence by the time any of the state properties are initialized. This allows =onChange= handlers for the state properties to count on certain foundation having been built.
 
@@ -414,11 +581,11 @@ Phases of Construction
 		EXAMPLE
 		......................................
 		var
-			MyClass = Uize.Class.subclass (
-				function () {
+			MyClass = Uize.Class.subclass ({
+				alphastructor:function () {
 					alert (this.get ('foo'));
 				}
-			),
+			}),
 			myClass = new MyClass ({foo:'bar'})
 		;
 		......................................

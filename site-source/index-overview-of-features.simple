@@ -267,7 +267,7 @@ Event Infrastructure
 
 	The =Uize.Class= base class provides a convenient infrastructure for supporting both static and instance events. Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the =Uize.Class= base class to allow code to manage the wiring and unwiring of event handlers for static and instance events. This provides all =Uize.Class= subclasses with a consistent event model.
 
-	For a more in-depth discussion on events, consult the explainer [[javascript-event-system.html][JavaScript Event System]].
+	For a more in-depth discussion on events, consult the explainer [[explainers/javascript-event-system.html][JavaScript Event System]].
 
 	###
 		- not the same as DOM events
@@ -348,7 +348,7 @@ Widgets Framework
 
 	Examples of widgets include: buttons, sliders for selecting continuous values, progress bars, calendar / date pickers, color pickers, sortable collections, tabbed interfaces, modal dialogs, slide shows, data table sorters, tree list controls, and hierarchical menus.
 
-	For a more in-depth discussion of UIZE's widget framework, consult the explainer [[javascript-widgets.html][JavaScript Widgets]].
+	For a more in-depth discussion of UIZE's widget framework, consult the explainer [[explainers/javascript-widgets.html][JavaScript Widgets]].
 
 HTML & CSS Templating
 	The versatile `templating system` employed by UIZE is relied upon heavily for the `HTML templates` and `CSS templates` that are used by encapsulated widgets.
@@ -468,9 +468,9 @@ Internationalization / Localization
 
 	In the above example, an instance of the =Uize.Widget= class is created, specifying a =localized= hash that contains just one localized string template named =welcomeMessage=. This string contains the substitution tokens ={firstName}=, ={state}=, and ={country}=. The =localize= instance method is called on the widget instance, with parameters specifying the name of the localized string to retrieve and dynamic data that should be substituted into its tokens. The result is then displayed to the user with the =alert= statement. Typically, localization will occur inside the implementation for a widget class, so this example is purely for illustrating the syntax.
 
-	*TIP*: To aid in internationalizing legacy code, a script is provided that can be run in Windows Script Host and that will recurse through the folders of a Web site project in order to compile a report of all the string literals contained inside JavaScript files, using a heuristic algorithm to bucket them according to their likelihood of being internationalizable strings (see [[javascript-build-scripts.html][JavaScript Build Scripts]]).
+	*TIP*: To aid in internationalizing legacy code, a script is provided that can be run in Windows Script Host and that will recurse through the folders of a Web site project in order to compile a report of all the string literals contained inside JavaScript files, using a heuristic algorithm to bucket them according to their likelihood of being internationalizable strings (see [[explainers/javascript-build-scripts.html][JavaScript Build Scripts]]).
 
-	For a more in-depth discussion of internationalization and localization, consult the explainer [[javascript-localization.html][JavaScript Localization]].
+	For a more in-depth discussion of internationalization and localization, consult the explainer [[explainers/javascript-localization.html][JavaScript Localization]].
 
 Testing Framework
 	UIZE provides a robust testing framework to support writing unit tests, functional tests, and performance tests.
@@ -531,7 +531,7 @@ Templating System
 
 	JavaScript template files can be compiled into JavaScript modules with the use of JavaScript build scripts, and such modules can then be required as dependencies and treated as regular JavaScript modules. Alternatively, JavaScript template source can be embedded in non-visible elements of a Web page, such as a hidden =textarea= tag or a =script= tag with a mime type of =text/jst=, and then retrieved and compiled by client code when the document loads.
 
-	For a more in-depth discussion, consult the explainer [[javascript-templates.html][JavaScript Templates]].
+	For a more in-depth discussion, consult the explainer [[explainers/javascript-templates.html][JavaScript Templates]].
 
 Effects / Animation
 	UIZE provides powerful features to support slick animation effects, with easing, bounce, elasticity, pulsing, and much more.
@@ -552,7 +552,7 @@ Effects / Animation
 
 	To add some pizazz to animations, the UIZE JavaScript Framework provides the =Uize.Curve=, =Uize.Curve.Mod=, and =Uize.Curve.Rubber= modules that let you stray from the bland world of linear animations and into an exotic world of animations driven by arbitrary curve functions, with built-in support for easing curves as well as curves that emulate the complex properties of motion, letting you achieve effects like bounce, springiness, wobble, elasticity, etc. Beyond the built-ins, you have the freedom to roll your own curve functions in order to achieve some of the craziest motion effects you could imagine.
 
-	For a more in-depth discussion, consult the explainer [[javascript-animation-and-effects.html][JavaScript Animation and Effects]].
+	For a more in-depth discussion, consult the explainer [[explainers/javascript-animation-and-effects.html][JavaScript Animation and Effects]].
 
 Documentation System
 	UIZE implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.
@@ -596,7 +596,7 @@ Documentation System
 	*/
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	For a more in-depth discussion of this documentation system, consult the explainer [[javascript-documentation-system.html][JavaScript Documentation System]].
+	For a more in-depth discussion of this documentation system, consult the explainer [[explainers/javascript-documentation-system.html][JavaScript Documentation System]].
 
 Powerful Build System ~~ Build System
 	UIZE provides a robust and extremely versatile and configurable build system that allows multi-level build relationships to be set up.
@@ -682,9 +682,9 @@ Code Compression
 	return _d;};
 	..................................................
 
-	For a more in-depth discussion of the Scruncher code compression system, consult the explainer [[all-about-scrunching.html][All About Scrunching]].
+	For a more in-depth discussion of the Scruncher code compression system, consult the explainer [[explainers/all-about-scrunching.html][All About Scrunching]].
 
-Development Server (NodeJS) ~~ Development Server
+Dev Server (NodeJS) ~~ Development Server
 	UIZE provides a NodeJS based development server that allows a project that involves many different types of built files to be developed without having to constantly run build scripts between changes.
 
 	The development server utilizes the `powerful build system` to build derived files whenever they are requested and are not current (ie. some of their dependencies have been modified since the last time they were built). The development server is used in the development of the UIZE framework, itself, and it can be used for any project for which static files will be generated as part of a build process.
