@@ -143,6 +143,19 @@ Uize.module ({
 					return _modules.sort ();
 				},
 
+				getJsModuleTodos:function (_params) {
+					var _todoExtensionRegExp = /\.todo$/;
+
+					return _fileSystem.getFiles ({
+						path:_params.sourcePath + '/' + _params.modulesFolder,
+						recursive:true,
+						pathMatcher:_todoExtensionRegExp,
+						pathTransformer:function (_path) {
+							return _moduleNameFromModulePath (_path.replace (_todoExtensionRegExp,''));
+						}
+					});
+				},
+
 				readSimpleDataFile:function (_simpleDataFilePath) {
 					return Uize.Data.Simple.parse ({
 						simple:_fileSystem.readFile ({path:_simpleDataFilePath}),

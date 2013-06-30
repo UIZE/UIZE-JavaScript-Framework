@@ -107,7 +107,7 @@ Uize.module ({
 					_simpleDoc,
 					_inputs.simpleDocTemplate,
 					{
-						hasToDo:_this.fileExists ({path:this.sourceUrl ('todo/modules/' + _moduleName + '.simple')}),
+						hasToDo:_this.fileExists ({path:this.sourceUrl (this.getModuleUrl (_moduleName,false) + '.todo')}),
 						hasVisualTests:_hasDeepReference (_modulesTree,_visualTestsModuleNameFromWidgetClass (_moduleName))
 					}
 				);

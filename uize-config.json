@@ -34,6 +34,7 @@
 		'Uize.Build.Files.JsModules',
 		'UizeSite.Build.Files.WidgetPages',
 		'UizeSite.Build.Files.SimpleDocPages',
+		'UizeSite.Build.Files.JavaScriptModulesToDoPages',
 		'UizeSite.Build.Files.SimpleDataPages',
 		'UizeSite.Build.Files.SourceCodePages',
 		'UizeSite.Build.Files.IndexPages'

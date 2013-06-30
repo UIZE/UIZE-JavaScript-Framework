@@ -25,14 +25,16 @@
 
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.IndexPages.JavaScriptModulesToDo',
-	required:'UizeSite.Build.FileBuilders.IndexPages',
+	required:[
+		'UizeSite.Build.FileBuilders.IndexPages',
+		'Uize.Build.Util'
+	],
 	builder:function () {
 		return UizeSite.Build.FileBuilders.IndexPages.getIndexPageUrlHandler (
 			'JavaScript modules TO DO index page',
 			'todo/modules',
-			'todo/modules',
-			'todo/modules',
-			/\.simple$/
+			function () {return Uize.Build.Util.getJsModuleTodos (this.params)},
+			'todo/modules'
 		);
 	}
 });
