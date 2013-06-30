@@ -21,6 +21,15 @@
 		The =Uize.Widgets.ColorSwatch.Widget= class implements a basic widget for previewing a color value...
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.ColorSwatch.Widget= class...
+
+			...................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.ColorSwatch.VisualSampler
+			...................................................
 */
 
 Uize.module ({

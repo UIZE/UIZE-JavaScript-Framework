@@ -22,6 +22,15 @@
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Log.Widget= class...
+
+			...........................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Log.VisualSampler
+			...........................................
+
 	In a Nutshell
 		Logging a Message
 			Logging a message can be accomplished quite easily, simply by calling the =log= instance method.

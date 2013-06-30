@@ -21,6 +21,15 @@
 		The =Uize.Widgets.Buttons.Char.Widget= module implements a widget class.
 
 		*DEVELOPERS:*
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Buttons.Char.Widget= class...
+
+			....................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Buttons.Char.VisualSampler
+			....................................................
 */
 
 Uize.module ({

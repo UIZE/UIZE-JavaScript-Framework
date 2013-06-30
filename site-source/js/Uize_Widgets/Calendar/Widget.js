@@ -21,6 +21,15 @@
 		The =Uize.Widgets.Calendar.Widget= class implements a very basic widget for a box layout with a heading.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Calendar.Widget= class...
+
+			................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Calendar.VisualSampler
+			................................................
 */
 
 Uize.module ({

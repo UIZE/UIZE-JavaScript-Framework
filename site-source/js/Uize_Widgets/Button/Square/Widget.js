@@ -21,6 +21,15 @@
 		The =Uize.Widgets.Button.Square.Widget= class implements a simple on/off toggler button widget class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Button.Square.Widget= class...
+
+			.....................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Button.Square.VisualSampler
+			.....................................................
 */
 
 Uize.module ({

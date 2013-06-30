@@ -21,6 +21,15 @@
 		The =Uize.Widgets.RgbSliders.Widget= class implements an RGB color picker interface, with sliders for adjusting levels for the red, green, and blue channels.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.RgbSliders.Widget= class...
+
+			..................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.RgbSliders.VisualSampler
+			..................................................
 */
 
 Uize.module ({

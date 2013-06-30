@@ -21,6 +21,15 @@
 		The =Uize.Widgets.Button.Toggle.OnOff.Widget= class implements a simple on/off toggler button widget class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Button.Toggle.OnOff.Widget= class...
+
+			...........................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Button.Toggle.OnOff.VisualSampler
+			...........................................................
 */
 
 Uize.module ({

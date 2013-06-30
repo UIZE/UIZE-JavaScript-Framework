@@ -22,6 +22,15 @@
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.ColorInfo.Widget= class...
+
+			.................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.ColorInfo.VisualSampler
+			.................................................
+
 		### In a Nutshell
 			- link to examples
 				- Color Sort by RGB Proximity

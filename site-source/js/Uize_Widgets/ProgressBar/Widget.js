@@ -21,6 +21,15 @@
 		The =Uize.Widgets.ProgressBar.Widget= class implements a progress bar widget that supports several standard sizes and optional overlayed status text.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.ProgressBar.Widget= class...
+
+			...................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.ProgressBar.VisualSampler
+			...................................................
 */
 
 Uize.module ({

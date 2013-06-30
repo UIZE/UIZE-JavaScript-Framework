@@ -21,6 +21,15 @@
 		The =Uize.Widgets.Slider.Widget= class implements a slider widget that supports several standard sizes and horizontal and vertical orientations.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Slider.Widget= class...
+
+			..............................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Slider.VisualSampler
+			..............................................
 */
 
 Uize.module ({

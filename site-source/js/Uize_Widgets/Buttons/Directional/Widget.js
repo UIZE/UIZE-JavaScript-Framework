@@ -21,6 +21,15 @@
 		The =Uize.Widgets.Buttons.Directional.Widget= class implements a directional arrow button that supports three different directions for each of the X and Y axes.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Buttons.Directional.Widget= class...
+
+			...........................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Buttons.Directional.VisualSampler
+			...........................................................
 */
 
 Uize.module ({

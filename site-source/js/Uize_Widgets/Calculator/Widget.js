@@ -21,6 +21,15 @@
 		The =Uize.Widgets.Calculator.Widget= module implements a widget class.
 
 		*DEVELOPERS:*
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Calculator.Widget= class...
+
+			..................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Calculator.VisualSampler
+			..................................................
 */
 
 Uize.module ({

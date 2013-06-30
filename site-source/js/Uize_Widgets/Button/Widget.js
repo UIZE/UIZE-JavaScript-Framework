@@ -21,6 +21,15 @@
 		The =Uize.Widgets.Button.Widget= class implements the button widget - the most basic and atomic widget that is used in the implementation of many other widgets.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Button.Widget= class...
+
+			..............................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Button.VisualSampler
+			..............................................
 */
 
 Uize.module ({

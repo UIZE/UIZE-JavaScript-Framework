@@ -21,6 +21,15 @@
 		The =Uize.Widgets.BoxWithHeading.Widget= class implements a very basic widget for a box layout with a heading.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.BoxWithHeading.Widget= class...
+
+			......................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.BoxWithHeading.VisualSampler
+			......................................................
 */
 
 Uize.module ({
