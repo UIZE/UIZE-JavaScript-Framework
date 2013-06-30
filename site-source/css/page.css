@@ -154,6 +154,7 @@
 			margin:0;
 			border:none;
 			border-bottom:1px solid #777;
+			box-shadow:0 0 15px rgba(0,0,0,.1);
 		}
 		.document-title a:link, .document-title a:visited, .document-title a:hover, .document-title a:active {
 			color:#444;
