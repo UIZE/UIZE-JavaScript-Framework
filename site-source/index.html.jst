@@ -119,12 +119,12 @@
 				color: #eee;
 				text-shadow: 0 0 5px rgba(0,0,0,.5);
 			}
-			.introFeaturesLists {
+			.introFeaturesLists table {
 				position: relative;
-				width: 910px;
-				margin: auto;
+				border: none;
+				border-collapse: collapse:
+				margin: 0;
 				padding: 35px 25px 25px 25px;
-				height: 280px;
 				background: rgba(0,0,0,.15);
 				box-shadow: 8px 8px 30px -4px rgba(0,0,0,.2);
 				border-bottom: 1px solid rgba(0,0,0,.1);
@@ -140,9 +140,6 @@
 				box-shadow: 2px 2px 8px rgba(0,0,0,.4);
 				font-size: 14px;
 				letter-spacing: 2px;
-			}
-			.introFeaturesList {
-				float: left;
 			}
 			.introFeaturesList li {
 				margin-top: 10px;
@@ -243,36 +240,46 @@
 		<h1>
 			UIZE is pronounced "you eyes", and is a FREE, powerful, open source, OOP JavaScript framework for browsers, NodeJS, and other JavaScripty places.
 		</h1>
-		<div class="introFeaturesLists">
-			<div class="introFeaturesListsHeading">FEATURES</div>
-			<ul class="introFeaturesList">
-				<li><a href="#1">FREE and Open Source</a></li>
-				<li><a href="#2">Modules & Dependencies</a></li>
-				<li><a href="#3">Basic Utility Belt Features</a></li>
-				<li><a href="#4">Classes, Inheritance, OOP</a></li>
-				<li><a href="#5">State Properties and Binding</a></li>
-				<li><a href="#6">Event Infrastructure</a></li>
-				<li><a href="#7">Conditions, Barriers, Needs</a></li>
-			</ul>
-			<ul class="introFeaturesList">
-				<li><a href="#8">Ajax / Asynchronous Processes</a></li>
-				<li><a href="#9">DOM Manipulation</a></li>
-				<li><a href="#10">Widgets Framework</a></li>
-				<li><a href="#11">HTML & CSS Templating</a></li>
-				<li><a href="#12">Lots of Built-in Widgets</a></li>
-				<li><a href="#13">Internationalization / Localization</a></li>
-				<li><a href="#14">Testing Framework</a></li>
-			</ul>
-			<ul class="introFeaturesList">
-				<li><a href="#15">Templating System</a></li>
-				<li><a href="#16">Effects / Animation</a></li>
-				<li><a href="#17">Documentation System</a></li>
-				<li><a href="#18">Powerful Build System</a></li>
-				<li><a href="#19">Code Compression</a></li>
-				<li><a href="#20">Dev Server (NodeJS)</a></li>
-				<li><a href="#21">Extensive Documentation</a></li>
-			</ul>
-		</div>
+		<center class="introFeaturesLists">
+			<table>
+				<tr>
+					<td>
+						<div class="introFeaturesListsHeading">FEATURES</div>
+						<ul class="introFeaturesList">
+							<li><a href="#1">FREE and Open Source</a></li>
+							<li><a href="#2">Modules & Dependencies</a></li>
+							<li><a href="#3">Basic Utility Belt Features</a></li>
+							<li><a href="#4">Classes, Inheritance, OOP</a></li>
+							<li><a href="#5">State Properties and Binding</a></li>
+							<li><a href="#6">Event Infrastructure</a></li>
+							<li><a href="#7">Conditions, Barriers, Needs</a></li>
+						</ul>
+					</td>
+					<td>
+						<ul class="introFeaturesList">
+							<li><a href="#8">Ajax / Asynchronous Processes</a></li>
+							<li><a href="#9">DOM Manipulation</a></li>
+							<li><a href="#10">Widgets Framework</a></li>
+							<li><a href="#11">HTML & CSS Templating</a></li>
+							<li><a href="#12">Lots of Built-in Widgets</a></li>
+							<li><a href="#13">Internationalization / Localization</a></li>
+							<li><a href="#14">Testing Framework</a></li>
+						</ul>
+					</td>
+					<td>
+						<ul class="introFeaturesList">
+							<li><a href="#15">Templating System</a></li>
+							<li><a href="#16">Effects / Animation</a></li>
+							<li><a href="#17">Documentation System</a></li>
+							<li><a href="#18">Powerful Build System</a></li>
+							<li><a href="#19">Code Compression</a></li>
+							<li><a href="#20">Dev Server (NodeJS)</a></li>
+							<li><a href="#21">Extensive Documentation</a></li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</center>
 	</div>
 	<div class="introFadeout"></div>
 </div>
