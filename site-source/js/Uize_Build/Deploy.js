@@ -21,6 +21,11 @@
 		The =Uize.Build.Deploy= package provides a method for deploying the built UIZE Web site to the s production environment.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		EXAMPLE
+		...............................
+		node build.js Uize.Build.Deploy
+		...............................
 */
 
 Uize.module ({

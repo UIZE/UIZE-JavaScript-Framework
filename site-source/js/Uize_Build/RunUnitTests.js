@@ -21,6 +21,12 @@
 		The =Uize.Build.RunUnitTests= module provides a method for testing all modules of the UIZE JavaScript Framework.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		EXAMPLES
+		.....................................................
+		node build.js Uize.Build.RunUnitTests useSource=false
+		node build.js Uize.Build.RunUnitTests useSource=true
+		.....................................................
 */
 
 Uize.module ({

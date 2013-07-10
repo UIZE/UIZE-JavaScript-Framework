@@ -21,6 +21,11 @@
 		The =Uize.Build.BuildStateCombinationLibraries= module provides a method for building JavaScript library files for all combinations of the specified states.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		EXAMPLE
+		........................................................................................................
+		node build.js Uize.Build.BuildStateCombinationLibraries stateDefinitionsPath=temp/state-definitions.json packageTargetPathTemplate=temp/state-combination-libraries/{previousStates}--{nextState}.js
+		........................................................................................................
 */
 
 /*

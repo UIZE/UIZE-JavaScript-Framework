@@ -21,6 +21,12 @@
 		The =Uize.Build.All= module provides a method for running all the build scripts necessary for building the UIZE JavaScript Framework in the correct sequence.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		EXAMPLES
+		......................................
+		node build.js Uize.Build.All
+		node build.js Uize.Build.All test=true
+		......................................
 */
 
 Uize.module ({
