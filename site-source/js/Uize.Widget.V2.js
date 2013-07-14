@@ -124,7 +124,9 @@ Uize.module ({
 						_html +=
 							'<script type="text/javascript">\n' +
 								'$' + _child.get ('idPrefix') + ' = ' +
-									Uize.Json.to (_suppliedState) +
+									Uize.Json.to (_suppliedState)
+										.replace (/<script/g,'<s\\cript')
+										.replace (/<\/script/g,'</s\\cript') +
 								';\n' +
 							'</script>'
 					;

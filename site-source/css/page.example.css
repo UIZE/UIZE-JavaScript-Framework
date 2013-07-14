@@ -1,102 +1,102 @@
 body {
-	background-image:url(../images/fold-marker.gif);
-	background-repeat:repeat-x;
-	background-position:left 592px;
-	background-attachment:fixed;
+	background-image: url(../images/fold-marker.gif);
+	background-repeat: repeat-x;
+	background-position: left 592px;
+	background-attachment: fixed;
 }
 .main {
-	padding-bottom:5px;
-	min-height:525px;
+	padding-bottom: 5px;
+	min-height: 525px;
 }
 
 /*** headings ***/
 	tr .heading, tr.headings td, .exampleSectionHeading {
-		color:#fff;
-		background:#000 url(../images/heading-bg.gif) left top repeat-x;
-		text-align:center;
-		border:1px solid #444;
+		color: #fff;
+		background: #000 url(../images/heading-bg.gif) left top repeat-x;
+		text-align: center;
+		border: 1px solid #444;
 	}
 	.exampleSectionHeading {
-		font-size:11px;
-		padding:2px 0;
-		letter-spacing:3px;
-		margin:10px 0;
-		text-transform:uppercase;
+		font-size: 11px;
+		padding: 2px 0;
+		letter-spacing: 3px;
+		margin: 10px 0;
+		text-transform: uppercase;
 	}
 	.fancyHeading {
-		color:#000;
-		background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top;
-		font-size:12px;
-		text-align:center;
-		letter-spacing:3px;
-		text-transform:uppercase;
-		padding:8px 12px;
-		text-shadow:1px 1px 1px #fff, 1px 0 1px #fff;
-		border:1px solid #666;
-		border-bottom:none;
-		border-top-left-radius:3px;
-		-moz-border-radius-topleft:3px;
-		-webkit-border-top-left-radius:3px;
-		border-top-right-radius:3px;
-		-moz-border-radius-topright:3px;
-		-webkit-border-top-right-radius:3px;
+		color: #000;
+		background: #adbebf url(../images/brushed-metal.jpg) repeat-x left top;
+		font-size: 12px;
+		text-align: center;
+		letter-spacing: 3px;
+		text-transform: uppercase;
+		padding: 8px 12px;
+		text-shadow: 1px 1px 1px #fff, 1px 0 1px #fff;
+		border: 1px solid #666;
+		border-bottom: none;
+		border-top-left-radius: 3px;
+		-moz-border-radius-topleft: 3px;
+		-webkit-border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		-moz-border-radius-topright: 3px;
+		-webkit-border-top-right-radius: 3px;
 	}
 
 /*** miscellaneous ***/
 	.insetBackgroundColor {
-		background:#afb6b8;
+		background: #afb6b8;
 	}
 	.insetBorderColor {
-		border-color:#afb6b8;
+		border-color: #afb6b8;
 	}
 	.darkInsetBackgroundColor {
-		background:#818b8f;
+		background: #818b8f;
 	}
 	.darkInsetBorderColor {
-		border-color:#818b8f;
+		border-color: #818b8f;
 	}
 
 /*** explanation ***/
 	.explanation {
-		position:relative;
-		background:#c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
-		padding:3px 3px 3px 10px;
-		margin:0 10px 25px 10px;
-		border:1px solid #ccc;
-		border-radius:3px;
-		-moz-border-radius:3px;
-		-webkit-border-radius:3px;
+		position: relative;
+		background: #c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
+		padding: 3px 3px 3px 10px;
+		margin: 0 10px 25px 10px;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
 	}
 	.explanation p {
-		margin:5px 4px;
-		color:#444;
+		margin: 5px 4px;
+		color: #444;
 	}
 
 /*** programmatic interface block ***/
 	.programmaticInterface {
-		padding:10px;
-		padding-right:3px;
-		margin:0 10px 0 10px;
-		background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
-		border:3px solid #fff;
-		border-radius:3px;
-		-moz-border-radius:3px;
-		-webkit-border-radius:3px;
+		padding: 10px;
+		padding-right: 3px;
+		margin: 0 10px 0 10px;
+		background: #c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+		border: 3px solid #fff;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
 	}
 	.programmaticInterface p {
-		margin:5px;
+		margin: 5px;
 	}
 	.programmaticInterface > ul {
 		padding-left:0;
 		margin:0;
 	}
 	.programmaticInterface ul li {
-		font-size:10px;
-		line-height:14px;
+		font-size: 10px;
+		line-height: 14px;
 		margin:0;
 	}
 	.programmaticInterface > ul li {
-		list-style-type:none;
+		list-style-type: none;
 	}
 
 	/*** JavaScript links ***/
@@ -105,69 +105,95 @@ body {
 		.programmaticInterface a:visited,
 		.programmaticInterface a:hover,
 		.programmaticInterface a:active {
-			white-space:nowrap;
+			white-space: nowrap;
 		}
 
 /*** examples tour styling ***/
+	.inTour {
+		margin-top: 76px;
+	}
+
+	.inTour #page-siteAssistant {
+		top: 76px;
+	}
+
+	.tourBar {
+		position: fixed;
+		top: 48px;
+		left: 0;
+		right: 0;
+		height: 28px;
+	}
+
 	/*** navigation buttons ***/
+		.tourButtonShell {
+			position: absolute;
+			top: 0;
+			width: 28px;
+			height: 100%;
+			background: #3f4854;
+		}
 		.tourButton, .tourButton:link, .tourButton:visited, .tourButton:hover, .tourButton:active {
-			display:block;
-			position:fixed;
-			top:255px;
-			width:45px;
-			height:77px;
-			border:none;
-			opacity:.3;
-			filter:alpha(opacity=30);
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: none;
+			opacity: .6;
+			filter: alpha(opacity=60);
 		}
 		.tourButton:hover {
-			opacity:.5;
-			filter:alpha(opacity=50);
+			opacity: .8;
+			filter: alpha(opacity=80);
 		}
 		.tourButton:active {
-			opacity:.7;
-			filter:alpha(opacity=70);
+			opacity: 1;
+			filter: alpha(opacity=100);
 		}
 
 		/*** previous button ***/
-			.tourButtonPrevious {
-				left:35px;
-				background:url(../examples/images/tour-arrow-previous.gif) no-repeat right top;
+			.tourButtonPreviousShell {
+				left: 0;
 			}
-			.tourButtonPrevious:active {
-				background-position:left top;
+			.tourButtonPrevious {
+				background: url(../examples/images/tour-arrow-previous.gif) no-repeat center center;
 			}
 
 		/*** next button ***/
-			.tourButtonNext {
-				right:35px;
-				background:url(../examples/images/tour-arrow-next.gif) no-repeat left top;
+			.tourButtonNextShell {
+				right: 0;
 			}
-			.tourButtonNext:active {
-				background-position:right top;
+			.tourButtonNext {
+				background: url(../examples/images/tour-arrow-next.gif) no-repeat center center;
 			}
 
 	/*** tour pages ***/
+		.tourPagesShell {
+			position: absolute;
+			top: 0;
+			left: 28px;
+			right: 28px;
+			height: 100%;
+		}
 		.tourPages {
-			position:fixed;
-			border-collapse:collapse;
-			width:100%;
-			height:10px;
-			left:0;
-			top:48px;
+			width: 100%;
+			height: 100%;
+			border-collapse: collapse;
 		}
 		.tourPages td {
-			padding:0;
+			padding: 0;
 		}
 		.tourPage, .tourPage:link, .tourPage:visited, .tourPage:hover, .tourPage:active {
-			display:block;
-			height:10px;
-			width:100%;
-			background:url(../examples/images/tour-page.gif) repeat-x left top;
-			border:none;
+			display: block;
+			height: 28px;
+			width: 100%;
+			background: url(../examples/images/tour-page.gif) repeat-x left top;
+			border: none;
 		}
 		.tourPage:hover {
-			background-position:left -10px;
+			background-position: left -28px;
 		}
 		.tourPage:active,
 		.tourCurrentPage,
@@ -175,56 +201,56 @@ body {
 		.tourCurrentPage:visited,
 		.tourCurrentPage:hover,
 		.tourCurrentPage:active {
-			background-position:left -20px;
+			background-position: left -56px;
 		}
 
 	/*** tour page info tooltip ***/
 		.tourPageTooltip {
-			display:none;
+			display: none;
 			padding: 10px;
 		}
 		/*** annotations ***/
 			.tourPageTooltip {
 			}
 			.tourPageTooltipBox {
-				font-size:11px;
+				font-size: 11px;
 				padding:0;
-				width:186px;
-				border:3px solid #fff;
-				border-radius:3px;
-				-moz-border-radius:3px;
-				-webkit-border-radius:3px;
-				background:#eee;
+				width: 186px;
+				border: 3px solid #fff;
+				border-radius: 3px;
+				-moz-border-radius: 3px;
+				-webkit-border-radius: 3px;
+				background: #eee;
 				box-shadow: 0 0 10px rgba(0,0,0,.5);
 			}
 			.tourPageTooltip .tourPageTitle {
-				font-size:11px;
-				font-weight:bold;
-				color:#000;
-				text-shadow:-1px -1px 1px #fff, -1px 1px 1px #fff, 1px -1px 1px #fff, 1px 1px 1px #fff;
-				padding:3px 5px 5px 5px;
-				width:176px;
-				text-align:center;
+				font-size: 11px;
+				font-weight: bold;
+				color: #000;
+				text-shadow: -1px -1px 1px #fff, -1px 1px 1px #fff, 1px -1px 1px #fff, 1px 1px 1px #fff;
+				padding: 3px 5px 5px 5px;
+				width: 176px;
+				text-align: center;
 			}
 			.tourPageTooltip .tourPageDescription, .tourPageTooltip .tourPageKeywords {
-				margin:5px;
+				margin: 5px;
 				margin-top:0;
-				padding:5px;
+				padding: 5px;
 			}
 			.tourPageTooltip .tourPageDescription {
-				color:#000;
-				border:1px solid #bcc;
-				background:#fff;
+				color: #000;
+				border: 1px solid #bcc;
+				background: #fff;
 				margin-bottom:0;
 			}
 			.tourPageTooltip .tourPageKeywords {
-				color:#245;
-				border:1px solid #fff;
-				background:#1e252e url(../images/tree-menu-bg.gif) repeat-x left top;
-				border-radius:0 0 3px 3px;
-				-moz-border-radius:0 0 3px 3px;
-				-webkit-border-bottom-left-radius:3px;
-				-webkit-border-bottom-right-radius:3px;
-				padding:1px 5px;
+				color: #245;
+				border: 1px solid #fff;
+				background: #1e252e url(../images/tree-menu-bg.gif) repeat-x left top;
+				border-radius: 0 0 3px 3px;
+				-moz-border-radius: 0 0 3px 3px;
+				-webkit-border-bottom-left-radius: 3px;
+				-webkit-border-bottom-right-radius: 3px;
+				padding: 1px 5px;
 			}
 

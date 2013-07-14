@@ -21,14 +21,10 @@ Uize.module ({
 	superclass:'Uize.Widget.Page',
 	required:[
 		'Uize.Node',
-		'Uize.Node.VirtualEvent',
 		'UizeSite.SiteMap',
 		'Uize.Widget.Tree.Menu',
 		'Uize.Url',
-		'Uize.Fx',
-		'Uize.Curve',
-		'Uize.Curve.Rubber',
-		'UizeSite.Widgets.ShareThisPanel.Widget',
+		'UizeSite.Widgets.SiteAssistant.Widget',
 		'UizeSite.Templates.Footer'
 	],
 	builder:function (_superclass) {
@@ -172,48 +168,33 @@ Uize.module ({
 						};
 						_this.wireNode ('homeLink','mouseover',_wireUpSiteMenu);
 
-					/*** inject share this panel (if desired) ***/
-						if (_this._showShareThisPanel) {
+					/*** inject site assistant (if desired) ***/
+						var _mainNode = Uize.Node.find ({tagName:'div',className:/\bmain\b/}) [0];
+						if (_this._showSiteAssistant && _mainNode) {
 							/*** add widget and inject its HTML ***/
-								Uize.Node.injectHtml (document.body,'<div id="page-shareThisPanel"></div>');
+								Uize.Node.injectHtml (document.body,'<div id="page-siteAssistant"></div>');
 								_this.addChild (
-									'shareThisPanel',
-									UizeSite.Widgets.ShareThisPanel.Widget,
+									'siteAssistant',
+									UizeSite.Widgets.SiteAssistant.Widget,
 									{
-										container:_this.getNode ('shareThisPanel'),
+										container:_this.getNode ('siteAssistant'),
 										built:false
 									}
 								);
 
-							/*** wire the slide-out behavior ***/
-								_this.wireNode (
-									'shareThisPanel',
-									{
-										mouseover:function () {
-											Uize.Fx.fadeStyle (this,null,{opacity:1},300)
-										},
-										'mouserest(250)':function () {
-											Uize.Fx.fadeStyle (this,null,{left:1},600,{curve:Uize.Curve.easeInOutPow (5)})
-										},
-										mouseout:function () {
-											Uize.Fx.fadeStyle (this,null,{opacity:.2},300).wire (
-												'Done',
-												function () {
-													Uize.Fx.fadeStyle (
-														_this.getNode ('shareThisPanel'),
-														null,
-														{left:-112},
-														1200,
-														{curve:Uize.Curve.Rubber.easeOutBounce (4,1.5)}
-													)
-												}
-											);
-										}
-									}
-								);
+							/*** maintain size of site assistant ***/
+								var _resizeSiteAssistant = function () {
+									var _newWidth =
+										(Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width) / 2
+									;
+									_this.setNodeStyle (
+										'siteAssistant',
+										_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
+									)
+								};
 
-							/*** reveal the panel ***/
-								Uize.Fx.fadeStyle (_this.getNode ('shareThisPanel'),null,{opacity:.2},1000);
+								_resizeSiteAssistant ();
+								Uize.Node.wire (window,'resize',_resizeSiteAssistant);
 						}
 
 					/*** inject footer (if desired) ***/
@@ -230,8 +211,8 @@ Uize.module ({
 					name:'showFooter',
 					value:true
 				},
-				_showShareThisPanel:{
-					name:'showShareThisPanel',
+				_showSiteAssistant:{
+					name:'showSiteAssistant',
 					value:true
 				}
 			});

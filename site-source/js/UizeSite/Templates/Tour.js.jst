@@ -27,8 +27,10 @@
 	var
 		_tourExamplesLength = _tourExamples.length,
 		_tourExampleUrlSuffix = '?tour=' + _tour,
-		_pageNo = -1,
-		_pageFileName = Uize.Url.from (input.pageUrl).fileName
+		_pageNo = Uize.indexIn (
+			Uize.map (_tourExamples,function (_tourExample) {return Uize.Url.from (_tourExample.path).fileName}),
+			Uize.Url.from (input.pageUrl).fileName
+		)
 	;
 
 	function _getExamplePageLink (_example) {
@@ -44,27 +46,30 @@
 	</div>
 </div>
 
-<table class="tourPages">
-	<tr><%
-		for (var _tourExampleNo = -1; ++_tourExampleNo < _tourExamplesLength;) {
-			var _tourExample = _tourExamples [_tourExampleNo];
-			if (_pageNo < 0 && _pageFileName == Uize.Url.from (_tourExample.path).fileName)
-				_pageNo = _tourExampleNo
-			;
-		%><td>
-			<a href="<%= _getExamplePageLink (_tourExample) %>" class="tourPage<%= _tourExampleNo == _pageNo ? ' tourCurrentPage' : '' %>"></a>
-		</td><%
+<div class="tourBar">
+	<div class="tourButtonShell tourButtonPreviousShell"><%
+		var _previousExample = _pageNo > 0 ? _tourExamples [_pageNo - 1] : null;
+		if (_previousExample) {
+		%><a href="<%= _getExamplePageLink (_previousExample) %>" class="tourButton tourButtonPrevious"></a><%
 		}
-	%></tr>
-</table>
-
-<% var _previousExample = _pageNo > 0 ? _tourExamples [_pageNo - 1] : null; %>
-<% if (_previousExample) { %>
-<a href="<%= _getExamplePageLink (_previousExample) %>" class="tourButton tourButtonPrevious"></a>
-<% } %>
-
-<% var _nextExample = _pageNo < _tourExamplesLength - 1 ? _tourExamples [_pageNo + 1] : null; %>
-<% if (_nextExample) { %>
-<a href="<%= _getExamplePageLink (_nextExample) %>" class="tourButton tourButtonNext"></a>
-<% } %>
+	%></div>
+	<div class="tourPagesShell">
+		<table class="tourPages">
+			<tr><%
+				for (var _tourExampleNo = -1; ++_tourExampleNo < _tourExamplesLength;) {
+					var _tourExample = _tourExamples [_tourExampleNo];
+				%><td>
+					<a href="<%= _getExamplePageLink (_tourExample) %>" class="tourPage<%= _tourExampleNo == _pageNo ? ' tourCurrentPage' : '' %>"></a>
+				</td><%
+				}
+			%></tr>
+		</table>
+	</div>
+	<div class="tourButtonShell tourButtonNextShell"><%
+		var _nextExample = _pageNo < _tourExamplesLength - 1 ? _tourExamples [_pageNo + 1] : null;
+		if (_nextExample) {
+		%><a href="<%= _getExamplePageLink (_nextExample) %>" class="tourButton tourButtonNext"></a><%
+		}
+	%></div>
+</div>
 

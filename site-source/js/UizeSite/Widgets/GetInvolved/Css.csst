@@ -1,0 +1,47 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_boxBorder = _cssUtil.box.border
+	;
+%>
+.`` {
+
+}
+
+.`link` {
+	display: block;
+	padding: 5px 5px 5px 41px;
+	background-position: 5px center;
+	background-repeat: no-repeat;
+	height: 31px;
+	line-height: 31px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.`link`, .`link`:link, .`link`:visited, .`link`:hover, .`link`:active {
+	font-weight: bold;
+	color: #000;
+	text-decoration: none;
+	background-color: #f3f3f3;
+	border: <%= _boxBorder.width %>px solid <%= _boxBorder.color %>;
+	border-radius: <%= _boxBorder.radius %>px;
+}
+
+.`link`:hover, .`link`:active {
+	background-color: #fff;
+	border-color: #aaa;
+}
+
+.`linkedIn` {
+	background-image: url(linkedin-31x31.gif);
+}
+
+.`google` {
+	background-image: url(google-31x31.gif);
+}
+
+.`linkSpacer` {
+	height: 6px;
+}

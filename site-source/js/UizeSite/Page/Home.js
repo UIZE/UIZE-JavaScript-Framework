@@ -20,6 +20,7 @@ Uize.module ({
 	name:'UizeSite.Page.Home',
 	required:[
 		'Uize.Widget.HoverFader',
+		'Uize.Curve',
 		'Uize.Fx'
 	],
 	builder:function (_superclass) {
@@ -86,6 +87,10 @@ Uize.module ({
 							);
 					}
 				}
+			},
+
+			set:{
+				showSiteAssistant:false
 			}
 		});
 	}

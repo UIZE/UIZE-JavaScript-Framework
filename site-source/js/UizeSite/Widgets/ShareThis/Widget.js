@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Widgets.ShareThisPanel.Widget Class
+|    /    O /   |    MODULE : UizeSite.Widgets.ShareThis.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2008-2013 UIZE
@@ -18,19 +18,19 @@
 
 /*?
 	Introduction
-		The =UizeSite.Widgets.ShareThisPanel.Widget= class implements a widget that lets users easily share a link to the page they are on, using a service of their choice.
+		The =UizeSite.Widgets.ShareThis.Widget= class implements a widget that lets users easily share a link to the page they are on, using a service of their choice.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'UizeSite.Widgets.ShareThisPanel.Widget',
+	name:'UizeSite.Widgets.ShareThis.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Node',
 		'Uize.Widgets.Button.Widget',
-		'UizeSite.Widgets.ShareThisPanel.Html',
-		'UizeSite.Widgets.ShareThisPanel.Css'
+		'UizeSite.Widgets.ShareThis.Html',
+		'UizeSite.Widgets.ShareThis.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -60,11 +60,11 @@ Uize.module ({
 			},
 
 			set:{
-				html:UizeSite.Widgets.ShareThisPanel.Html
+				html:UizeSite.Widgets.ShareThis.Html
 			},
 
 			staticProperties:{
-				cssModule:UizeSite.Widgets.ShareThisPanel.Css
+				cssModule:UizeSite.Widgets.ShareThis.Css
 			},
 
 			stateProperties:{

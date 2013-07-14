@@ -24,9 +24,20 @@
 				color: #000;
 			}
 
-		/*** override position of shareThisPanel (needs to be lower for this page) ***/
-			#page-shareThisPanel {
-				top: 190px;
+		/*** override position of siteAssistant (needs to be lower for this page) ***/
+			#page-siteAssistant {
+				top: 130px;
+			}
+
+		/*** header ***/
+			.header {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 130px;
+				border-bottom: 1px solid rgba(255,255,255,.25);
+				z-index: 1;
 			}
 
 		/*** mantle ***/
@@ -36,7 +47,7 @@
 				height: 100px;
 				background: #000 url(images/mantle6-bg.jpg) repeat-x left top;
 				box-shadow: 0 5px 20px rgba(0,0,0,.6);
-				z-index: 2;
+				z-index: 1;
 			}
 			.mantle, .mantle img {
 				width: 900px;
@@ -56,7 +67,7 @@
 					top: 100px;
 					left: 0;
 					right: 0;
-					height: 30px;
+					height: 15px;
 					background: #3f4854;
 					text-align: center;
 				}
@@ -71,6 +82,7 @@
 					border: none;
 					letter-spacing: 1px;
 					padding: 8px;
+					padding-bottom: 7px;
 				}
 				.headerLinks a:hover,
 				.headerLinks a:active {
@@ -95,19 +107,32 @@
 					border: none;
 				}
 
+			/*** fork me ribbon ***/
+				.forkMeOnGithub, .forkMeOnGithub:link, .forkMeOnGithub:visited, .forkMeOnGithub:hover, .forkMeOnGithub:active {
+					display: block;
+					position: absolute;
+					top: 0;
+					right: 0;
+					border: none;
+					background: url(images/forkme_right_darkblue_121621.png) left top no-repeat;
+					width: 149px;
+					height: 149px;
+					text-decoration: none;
+					z-index: 1;
+				}
+
 		/*** intro ***/
 			.intro {
 				position: absolute;
 				top: 130px;
 				left: 0;
 				right: 0;
-				z-index: 1;
+				z-index: 0;
 			}
 			.introContent {
 				padding-top: 30px;
 				background: #728088;
 				height: 410px;
-				border-top: 1px solid rgba(255,255,255,.25);
 			}
 			.introContent h1 {
 				font-size: 24px;
@@ -179,20 +204,6 @@
 				padding-top: 650px;
 			}
 
-		/*** fork me ribbon ***/
-			.forkMeOnGithub, .forkMeOnGithub:link, .forkMeOnGithub:visited, .forkMeOnGithub:hover, .forkMeOnGithub:active {
-				display: block;
-				position: absolute;
-				top: 0;
-				right: 0;
-				border: none;
-				background: url(images/forkme_right_darkblue_121621.png) left top no-repeat;
-				width: 149px;
-				height: 149px;
-				text-decoration: none;
-				z-index: 3;
-			}
-
 		/*** SimpleDoc overrides ***/
 			.headingNumber {
 				display: none;
@@ -213,24 +224,28 @@
 
 <body>
 
-<div class="mantleBg">
-	<div class="mantle">
-		<img id="page-mantleImage" src="images/mantle6.jpg" alt="UIZE JavaScript Framework" style="clip:rect(0,0,0,0);"/>
-		<a id="page-homeLink" href="directory.html" title="UIZE JavaScript Framework home"></a>
+<div class="header">
+	<div class="mantleBg">
+		<div class="mantle">
+			<img id="page-mantleImage" src="images/mantle6.jpg" alt="UIZE JavaScript Framework" style="clip:rect(0,0,0,0);"/>
+			<a id="page-homeLink" href="directory.html" title="UIZE JavaScript Framework home"></a>
+		</div>
 	</div>
-</div>
 
-<div class="headerLinks">
-	<a href="javascript-examples.html" class="headerLink">DEMOS</a><!--
-	--><a href="explainers/getting-started.html" class="headerLink">GETTING STARTED</a><!--
-	--><a href="download.html" class="headerLink">DOWNLOAD</a><!--
-	--><a href="support.html" class="headerLink">SUPPORT</a><!--
-	--><a href="explainers/using-the-documentation.html" class="headerLink">DOCS</a><!--
-	--><a href="search-sections.html" class="headerLink">SEARCH</a><!--
-	--><a href="directory.html" class="headerLink">SITE MAP</a><!--
-	--><a href="latest-news.html" class="headerLink">LATEST NEWS</a><!--
-	--><a href="latest-news.rss" class="headerLink"><span style="background:url(images/icons/rss-16x16.gif) left top no-repeat; padding:1px 9px; margin-right: 5px;"></span>RSS FEED</a><!--
-	--><a href="http://www.twitter.com/uize" class="headerLink"><span style="background:url(images/icons/twitter-16x16.gif) left top no-repeat; padding:1px 9px; margin-right: 5px;"></span>TWITTER FEED</a>
+	<div class="headerLinks">
+		<a href="javascript-examples.html" class="headerLink">DEMOS</a><!--
+		--><a href="explainers/getting-started.html" class="headerLink">GETTING STARTED</a><!--
+		--><a href="download.html" class="headerLink">DOWNLOAD</a><!--
+		--><a href="support.html" class="headerLink">SUPPORT</a><!--
+		--><a href="explainers/using-the-documentation.html" class="headerLink">DOCS</a><!--
+		--><a href="search-sections.html" class="headerLink">SEARCH</a><!--
+		--><a href="directory.html" class="headerLink">SITE MAP</a><!--
+		--><a href="latest-news.html" class="headerLink">LATEST NEWS</a><!--
+		--><a href="latest-news.rss" class="headerLink"><span style="background:url(images/icons/rss-16x16.gif) left top no-repeat; padding:1px 9px; margin-right: 5px;"></span>RSS FEED</a><!--
+		--><a href="http://www.twitter.com/uize" class="headerLink"><span style="background:url(images/icons/twitter-16x16.gif) left top no-repeat; padding:1px 9px; margin-right: 5px;"></span>TWITTER FEED</a>
+	</div>
+
+	<a class="forkMeOnGithub" href="https://github.com/uize/uize-javascript-framework" title="Fork me on GitHub"></a>
 </div>
 
 <!-- node for demo info tooltip markup -->
@@ -283,8 +298,6 @@
 	</div>
 	<div class="introFadeout"></div>
 </div>
-
-<a class="forkMeOnGithub" href="https://github.com/uize/uize-javascript-framework" title="Fork me on GitHub"></a>
 
 <div class="main">
 <%. overviewOfFeatures %>

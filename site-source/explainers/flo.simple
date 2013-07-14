@@ -1,0 +1,593 @@
+Introduction
+	The flo object facilitates writing mixed synchronous/asynchronous code using control flow structures familiar to anyone who knows how to write synchronous code (ie. anyone who can program).
+
+	Some key points...
+
+	- flo doesn't require compilation of your code
+	- flo works on the client / browser as well as on the server (NodeJS)
+	- flo works in older browsers (IE7, for example)
+	- flo supports mixed and dynamically synchronous / asynchronous execution well
+	- flo is small
+
+	The flo library provides a simple foundation for writing code that mixes synchronous and asynchronous execution, affording the benefits of synchronous coding control flow constructs to asynchronous code.
+
+### An Example
+	.
+
+	- function with loop, containing nested loop, with continue inside an if that's nested inside a switch, and with a return somewhere
+
+Basic Terminology
+	Flo Construct
+		A flo construct is a control flow construct that supports mixed synchronous/asynchronous execution.
+
+		Examples of flo constructs are blocks, loops, and conditional branches. Flo constructs are built from zero or more `flo statements`.
+
+	Flo Construct Method
+		A flo construct method is a method that creates a `flo instance generator` for a specific type of `flo construct`.
+
+		For example, the =flo.for= method is a flo construct method that creates a generator for instances of the for loop `flo construct`.
+
+	Flo Instance Generator
+		A flo instance generator is a function that, when called, creates a new `flo instance` and starts it running.
+
+	Flo Instance
+		A flo instance is a specific instance of execution of a `flo construct`.
+
+		A flo instance is created by calling a `flo instance generator` and manages execution of the `flo statements` for the `flo construct`.
+
+	Flo Statement ~~ Flo Statements
+		A flo construct is built from zero or more flo statements.
+
+Different Types of Flos
+	Block Flo
+		The block flow is the most basic type of flo and is the building block for all other types flo types.
+
+		The block flo is most analagous to a statement block in synchronous coding. A block is essentially a set of `flo statements` that is executed sequentially. Once all flo statements in a block have been executed, the callback for the block is called, which may be the continuation function for a parent block (see `Flos Can Have Children`).
+
+		Blocks Can be Aborted
+			.
+
+		Any Statement Can be Substituted by a Block
+			Since the signature of a block is identical to the signature of a `flo statement`, any statement can be substituted by a block.
+
+		Blocks Can be Nested
+			.
+
+
+		Flos Are Composable
+			The signature of a block flo is identical to the signature of a `flo statement`, which means that blocks (all types) are inherently composable.
+
+			It may at first seem counterintuitive that the =flo.for= method returns a function, for instance, and that you have to call that function it in order to run the loop. A more typical alternative, found in some other asynchronous libraries, is to have the asynchronous control flow methods execute their action immediately upon being called, but this makes composition a little more tedious. It also doesn't lend itself as well to allowing a control flow to be handed off to others to be invoked multiple times (possibly concurrently). Once again, you can still do this with these libraries, but it requires a bit more wrapper code.
+
+			ONE APPROACH
+			...
+			someLibrary.while (
+				testFunction,
+				iterationFunction,
+				callback
+			)
+			...
+
+			THE FLO APPROACH
+			...
+			flo.while (
+				testFunction,
+				iterationFunction
+			) (callback)
+			...
+
+			Sequenced Nested
+				ONE APPROACH
+				...
+				someLibrary.sequence (
+					function (next) {
+						someLibrary.while (
+							testFunction,
+							iterationFunction,
+							next
+						)
+					},
+					function (next) {
+						someLibrary.while (
+							testFunction,
+							iterationFunction,
+							next
+						)
+					},
+					callback
+				)
+				...
+
+				THE FLO APPROACH
+				...
+				flo.block (
+					flo.while (
+						testFunction,
+						iterationFunction
+					),
+					flo.while (
+						testFunction,
+						iterationFunction
+					)
+				) (callback)
+				...
+
+		An Undefined Statement is Skipped
+			.
+
+		Literal Result Statements
+			.
+
+		Flo Statement ~~ Flo Statements
+			The atomic unit of a flo is a flo statement.
+
+			How Flo Statements are Called
+				.
+
+				With Flo Instance as Context
+					.
+
+				The Continuation Function
+					.
+
+				Function Flo First Statement
+					.
+
+	Loop Flos
+		The flo library provides the basic looping control flow constructs that programmers will be familiar with.
+
+		The basic library doesn't aim to dramatically expand the types of looping constructs available - it is the intention that other extension / plug-in libraries might provide more exotic looping constructs for other types of applications.
+
+		The flo library provides the following methods for creating the most basic, tried and tested looping constructs...
+
+		- =do= - create a do...while flo
+		- =for= - create a for loop
+		- =forIn= - create a for...in loop
+		- =ongoing= - create an ongoing loop, like while (true)
+		- =while= - create a while flo
+
+		Breakable
+			All of the looping constructs provided in the flo library are breakable.
+
+			The way that flo works, you can break a loop (like an (a)synchronous while loop) from anywhere inside a deeply nested child flo, simply by calling the break method on the child flo object. The end result is exactly what you would expect from a normal, synchronous while loop - the loop is terminated and flow continues at the next statement after the loop.
+
+			Consider the following example...
+
+			...
+			flo.while (
+				function () {},
+				function () {}
+			);
+			...
+
+		I Can Has "While True"?
+			Yes, you most certainly can has "while true".
+
+			......................................................
+			var items = ['foo','bar','baz','qux','hello','world'];
+			function getAnotherItemAsync (callback) {
+				setTimeout (function () {
+					callback (items.shift ());
+				}, 100);
+			}
+
+			flo.while (
+				true,
+				function (next) {
+					getAnotherItemAsync (function (item) {
+						if (item == undefined) {
+							return next.flo.break ();
+						}
+						console.log (item);
+						next ();
+					});
+				}
+			) (function () {
+				console.log ('ran out of items');
+			});
+			......................................................
+
+			...or...
+
+			.........................................
+			flo.ongoing (function (next) {
+				getAnotherItemAsync (function (item) {
+					if (item == undefined) {
+						return next.flo.break ();
+					}
+					console.log (item);
+					next ();
+				});
+			}) (function () {
+				console.log ('ran out of items');
+			});
+			.........................................
+
+		Externally Breakable
+			.
+
+		Storing Loop State
+			.
+
+	Function Flos
+		.
+
+		- =function= - create a function flo
+
+		Receiving Arguments in a Function Flo
+			Function Flo First Statement
+				.
+
+		Returning from a Function Flo
+			.
+
+			Returning a Result
+				.
+
+				Passing the Result in the Return
+					.
+
+				Setting the Result Via Continuation
+					.
+
+			Calling a Function Flo
+				.
+
+	Conditional Flos
+		.
+
+		- =if= - create a multi-stage if...then...elseif...then...else... flo
+		- =switch= - create a multi-case switch flo
+
+	More About Flos
+		Flos are Repeatable
+			.
+
+		Flos are Composable
+			.
+
+		Flos Can Run Concurrently
+			.
+
+		Flos are Multi-instantiable
+			.
+
+		Flos Can Have Children
+			.
+
+Overview of the Methods
+	Flo Creation Methods
+		.
+
+		- =block= -
+		- =do= -
+		- =for= -
+		- =forIn= -
+		- =function= -
+		- =while= -
+
+	Control Flow Methods
+		.
+
+		- =abort= -
+		- =break= -
+		- =continue= -
+		- =next= -
+		- =return= -
+
+		Call Methods on the Current Flo
+			.
+
+			Current Flo Accessible on Continuation Function
+				.
+
+		Return on Control Flow Methods, Unless Last to Execute
+			.
+
+	Flo Error Handling Methods
+		.
+
+		- =try=
+		- =throw=
+
+Static Properties
+	abort
+		.
+
+	break
+		.
+
+	continue
+		.
+
+Methods
+	abort
+		Aborts execution of the `flo statements` in the flo on which the method is called.
+
+		SYNTAX
+		.....................
+		floInstance.abort ();
+		.....................
+
+		EXAMPLE
+		...
+		...
+
+	block
+		Creates a basic block flo that will sequentially execute
+
+
+
+	break
+		Breaks execution of the nearest loop up the flo chain.
+
+		SYNTAX
+		.....................
+		floInstance.break ();
+		.....................
+
+		EXAMPLE
+		...
+		flo.forIn (
+			fs.dir,
+			function (next) {
+				if (next.flo.value) {
+					next.flo.break ();
+				}
+			}
+		) (function () {console.log ('finished with asynchronous for')});
+		...
+
+		Must be Within a Loop or Switch Flo
+			If the =break= method is called on a flo and there is no breakable flo up the parent chain, then an error will be thrown.
+
+			A breakable flo is defined as either a loop flo (created by methods like =do=, =for=, =forIn=, and =while=) or a switch flow (created by the =switch= method).
+
+			EXAMPLE
+			...
+			...
+
+	do
+		Create a do...while loop flo
+
+		SYNTAX
+		.........................
+		floGenerator = flo.do (
+			iterationStatementFUNC
+			testStatementFUNC,
+		)
+		.........................
+
+		EXAMPLE
+		...
+		...
+
+	if
+		Creates an if flo, with support for an arbitrary number of optional elseif sections and an optional final else statement, and where any or all of the statements can be either synchronous or asynchronous.
+
+		DIFFERENT USAGES
+
+		`Create a Simple if...then Flo`
+		.....................
+		flo.if (
+			testStatementFUNC,
+			thenStatementFUNC
+		)
+		.....................
+
+		`Create an if...then...else Flo`
+		.....................
+		flo.if (
+			testStatementFUNC,
+			thenStatementFUNC,
+			elseStatementFUNC
+		)
+		.....................
+
+		`Create an if...then...elseif...then Flo`
+		...........................
+		flo.if (
+			testStatementFUNC,
+			thenStatementFUNC,
+			elseifTestStatementFUNC,
+			elseifThenStatementFUNC
+		)
+		...........................
+
+		`Create an if...then...elseif...then...else Flo`
+		...........................
+		flo.if (
+			testStatementFUNC,
+			thenStatementFUNC,
+			elseifTestStatementFUNC,
+			elseifThenStatementFUNC,
+			elseStatementFUNC
+		)
+		...........................
+
+	for
+		Creates a for flo, where any or all of the setup, test, advance, and iteration statements can be either synchronous or asynchronous.
+
+		SYNTAX
+		.........................
+		flo.for (
+			setupStatementFUNC,
+			testStatementFUNC,
+			advanceStatementFUNC,
+			iterationStatementFUNC
+		)
+		.........................
+
+		EXAMPLE
+		...
+		...
+
+	forIn
+		SYNTAX
+		................................
+		flo.forIn (
+			sourceGeneratorStatementFUNC,
+			iterationStatementFUNC
+		)
+		................................
+
+	next
+		Continues execution of the flo on which the method is called, optionally passing back a result value.
+
+		DIFFERENT USAGES
+
+		`Continue the Flo`
+		............
+		flo.next ();
+		............
+
+		`Continue the Flo, Passing a Result Value`
+		.........................
+		flo.next (resultANYTYPE);
+		.........................
+
+	return
+		Returns from the nearest function flo up the flo chain.
+
+		DIFFERENT USAGES
+
+		`Return from a Function Flo`
+		.............
+		flo.return ()
+		.............
+
+		Must be Within a Function Flo
+			If the =return= method is called on a flo and there is no function flo up the parent chain, then an error will be thrown.
+
+			EXAMPLE
+			...
+			...
+
+	switch
+		Creates a switch flo, with support for an arbitrary number of case sections and an optional default statement, and and where any or all of the statements can be either synchronous or asynchronous.
+
+		SYNTAX
+		.......................
+		flo.switch (
+			switchExpressionFUNC,
+
+			case0ExpressionFUNC,
+			case0StatementFUNC,
+
+			case1ExpressionFUNC,
+			case1StatementFUNC,
+
+			...
+
+			caseNExpressionFUNC,
+			caseNStatementFUNC,
+
+			defaultStatementFUNC
+		)
+		.......................
+
+		Breaking from a Switch Flo
+			.
+
+	while
+		.
+
+		SYNTAX
+		.........................
+		flo.while (
+			testStatementFUNC,
+			iterationStatementFUNC
+		)
+		.........................
+
+Advanced Topics
+	Flo Parenting
+		.
+
+	Error Handling
+		Throwing and Catching Errors
+			.
+
+	Storing Flow State
+		Using the flo Object
+			.
+
+		Using a Closure
+			.
+
+The Design Philosophy Behind Flo
+
+	Synchronous and Asynchronous, in Harmony
+		.
+		. equal partners... as such, it is the philosophy of flo that asynchronous coding be affored with an equivalent set of control flow structures as synchronous coding.
+
+		A Little More Overhead
+			Because asynchronous statements are wrapped in functions, there is more overhead to writing flo code than regular synchronous code.
+
+			The key point, however, is that makes it possible to apply approaches learned for synchronous coding to writing algorithms that may involve some asynchronous execution. That's not to say that there aren't cases where rethinking approaches may actually be appropriate and advantageous, particularly where it may be desirable to leverage parallel computing techniques, but that's somewhat orthogonal - asynchronous should not be conflated with parallelism, even though asynchronousness lends itself to concurrent approaches to some coding problems.
+
+	How Flo Came About
+		Flo was born out of frustration with promises, callbacks, and various async utility libraries (we won't name names).
+
+		Up until now, all approaches have failed to address the fundamental problem of not being able to write asynchronous code with the full set of control flow constructs that programmers have learned and come to rely so heavily upon in writing their synchronous code. Why? Is it an ideological matter? Is it technically impossible? Regardless of the reason(s), it had not been tackled for JavaScript.
+
+		Flo isn't intended to replace higher level constructs like needs / providers, conditions, observable tasks, promises, etc. Flo is intended to be orthogonal and complementary. Indeed, Flo can be a solid foundation upon which to implement many of these higher level constructs and still have them perform well when code is either synchronous or asynchronous in execution.
+
+	### Flat Code Society
+		.
+
+		The goal should not be to remove visual structure and indentation from code.
+
+		It's unfortunate that the callback approach can turn what are logically consecutive / sequential steps into something that calls for nested levels of indentation. This is a desirable side effect to address, but in wishing to address this unpleasantness we shouldn't throw the baby out with the bath water. We shouldn't, as a knee jerk response to callback nesting, go too far in the other direction and strive to eliminate all nesting and visual structure from our code. Besides callback nesting, indentation is not a property unique to asynchronous coding - synchronous code can become too indented for some people's tastes. When indentation becomes too much, code can be factored out into functions.
+
+	Where's the Dubya?
+		Flow.js got the dubya, so flo.js was forced to go without.
+
+		All the better, because it's even cooler than if it was named phlo (how phat would that have been?!?!) and it's one less letter to type.
+
+	Continuation, not Callback
+		In the flo philosophy, we prefer to think in terms of continuation functions rather than callbacks.
+
+		When one thinks in terms of callbacks, one thinks of execution flowing back through a callback tunnel. With flo, there is a flo manager and calling the =next= continuation function has the effect of returning control to this flo manager so that it can advance the statement pointer. This subtlety is especially important when multiple statements are chained together and they actually turn out to be synchronous in execution rather than asynchronous.
+
+	Don't Blow the Stack
+		Flo is designed to avoid blowing the stack in the event of an asynchronous process used inside an iteration loop becoming synchronous.
+
+		A common problem with using a callback pattern and then assuming that every function being called will execute asynchronously before calling their callback is that the call stack can grow quite large - even potentially overflowing - when the processes that were assumed to be asynchronous become synchronous (let's say as a result of memoizing or the use of some other form of in-memory caching system). When this occurs, a typical - and rather lame - workaround is to put the implementations for such functions inside a timeout or similar mechanism to force them to always be asynchronous. This is lame because it prevents getting all the performance benefits of tight, synchronous execution. Forcing execution down the asynchronous path can suck mightily for performance.
+
+		Flo avoids this problem by detecting whether `flo statements` call the continuation function synchronously and running through as many consecutive synchronous `flo statements` as possible in a single turn of the event loop without layering onto the call stack. With the continuation function approach and a flo manager, synchronous execution is detected and the continuation function can merely increment a counter in the flo manager's synchronous while loop rather than immediately calling the next function and thereby piling calls onto the call stack.
+
+		Flo takes a gentler approach to allowing synchronous and asynchronous execution to be intermingled, while still giving programmaers the tools they need to construct robust control flow logic that can handle any step in a flo becoming asynchronous (or synchronous) at some point in the future.
+
+	B'bye, Errbacks
+		.
+
+		Errbacks Suck
+			Making callback functions be responsible for passing errors along is about as retarded as making regular functions in synchronous coding be resposible for passing thrown errors along.
+
+			Error callbacks (errbacks, as some like to call them) are an ugly stopgap measure, necessitated by the fact that nobody spent enough time thinking hard about better alternative approaches.
+
+		Throwing and Catching
+			Flo introduces a superior alternative approach. And, surprise, surprise, it resembles an approach that will be very familiar to coders - throwing and catching errors.
+
+			Wait, what!?!?? You can't catch errors thrown inside something that's executed asynchronously, right?
+
+		No More Error Marshalling
+			.
+
+	Optimized for Speed
+		Flo is built around the assumption that performance is paramount and that any serious application will eventually require intense performance optimization.
+
+		Asynchronous Becomes Synchronous
+			Inevitably, performance optimization of an application will likely involve adding layers of in-memory caching to reduce the cost of performing asynchronous operations that access services.
+
+			In cases where in-memory caching is used to preempt asynchronous processes, the resultant effect should be as close to a simple synchronous function call with return value as possible. That means that the overhead associated with a control flow manager that is designed to deal with code execution being asynchronous should be as minimal as possible in order to achieve blazingly fast execution of as many processes in as little time as possible.
+
+			This line of thinking pretty much rules out the option of constructing objects like promises on every potentially synchronous or asynchronous step in a sequence or iteration. In particular, it also rules out the possibility of forcing every process that might execute synchronously to effectively execute asynchronously through use of mechanisms like =setTimeout= (in the browser) or =nextTick= (in NodeJS) - that would just be heavy handed and irresponsible.
+
+		Synchronous Becomes Asynchronous
+			.
+
+		Synchronous vs Asynchronous May be Dynamic
+			.
+

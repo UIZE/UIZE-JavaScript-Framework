@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Widgets.ShareThisPanel.VisualTests Class
+|    /    O /   |    MODULE : UizeSite.Widgets.ShareThis.VisualSampler Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,25 +18,25 @@
 
 /*?
 	Introduction
-		The =UizeSite.Widgets.ShareThisPanel.VisualTests= class implements a set of visual tests for the =UizeSite.Widgets.ShareThisPanel.Widget= class.
+		The =UizeSite.Widgets.ShareThis.VisualSampler= class implements a visual sampler widget for the =UizeSite.Widgets.ShareThis.Widget= class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'UizeSite.Widgets.ShareThisPanel.VisualTests',
-	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'UizeSite.Widgets.ShareThisPanel.Widget',
+	name:'UizeSite.Widgets.ShareThis.VisualSampler',
+	superclass:'Uize.Widgets.VisualSampler.Widget',
+	required:'UizeSite.Widgets.ShareThis.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				this.addStateTestCase ();
+				this.addSample ();
 			},
 
 			staticProperties:{
-				widgetClass:UizeSite.Widgets.ShareThisPanel.Widget
+				widgetClass:UizeSite.Widgets.ShareThis.Widget
 			}
 		});
 	}

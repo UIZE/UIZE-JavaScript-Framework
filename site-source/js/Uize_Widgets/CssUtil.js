@@ -34,7 +34,8 @@ Uize.module ({
 			box:{
 				border:{
 					color:'#ccc',
-					width:1
+					width:1,
+					radius:2
 				}
 			},
 			selectedValue:{

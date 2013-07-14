@@ -46,10 +46,10 @@
 	Uize.Node.CssModule
 	Uize.Widget.V2
 	UizeSite.Widgets
-	UizeSite.Widgets.ShareThisPanel
-	UizeSite.Widgets.ShareThisPanel.Html
-	UizeSite.Widgets.ShareThisPanel.Css
-	UizeSite.Widgets.ShareThisPanel.Widget
+	UizeSite.Widgets.SiteAssistant
+	UizeSite.Widgets.SiteAssistant.Html
+	UizeSite.Widgets.SiteAssistant.Css
+	UizeSite.Widgets.SiteAssistant.Widget
 	UizeSite.Page
 */
 

@@ -20,6 +20,7 @@ Uize.module ({
 	name:'UizeSite.Page.Example',
 	required:[
 		'Uize.Node',
+		'Uize.Node.Classes',
 		'Uize.Url'
 	],
 	builder:function (_superclass) {
@@ -104,7 +105,8 @@ Uize.module ({
 
 					/*** add tour interface, if necessary ***/
 						var _tour = Uize.Url.fromParams (location.href).tour;
-						_tour &&
+						if (_tour) {
+							Uize.Node.Classes.addClass (document.body,'inTour');
 							Uize.module ({
 								required:[
 									'UizeSite.Templates.Tour',
@@ -154,8 +156,8 @@ Uize.module ({
 											}
 										);
 								}
-							})
-						;
+							});
+						}
 				}
 			};
 
