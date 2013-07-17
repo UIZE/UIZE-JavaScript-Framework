@@ -1,0 +1,39 @@
+.`` {
+	position: relative;
+	text-align: center;
+	padding-bottom: 10px;
+	background: #becacd url(body-bg.gif) repeat-x left top;
+}
+
+.`` * {
+	font-size: 11px;
+}
+
+.`` a {
+	border: none;
+}
+
+.`legalese` {
+	font-size: 13px;
+	margin-bottom: 5px;
+	padding: 5px 0;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #999;
+	background: #b7babf url(bar-bg.jpg) repeat left top;
+	text-shadow: 0 -1px 1px #fff, 0 1px 1px #fff;
+}
+
+.`label` {
+	font-size: 10px;
+	padding-right: 5px;
+	text-transform: uppercase;
+}
+
+.`buySwag` {
+	margin-top: 20px;
+}
+
+.`buySwag` a {
+	font-size: 9px;
+	letter-spacing: 5px;
+}

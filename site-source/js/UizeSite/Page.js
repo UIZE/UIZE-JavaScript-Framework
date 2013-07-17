@@ -25,7 +25,7 @@ Uize.module ({
 		'Uize.Widget.Tree.Menu',
 		'Uize.Url',
 		'UizeSite.Widgets.SiteAssistant.Widget',
-		'UizeSite.Templates.Footer'
+		'UizeSite.Widgets.Footer.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -168,16 +168,17 @@ Uize.module ({
 						};
 						_this.wireNode ('homeLink','mouseover',_wireUpSiteMenu);
 
+					var _mainNode = Uize.Node.find ({tagName:'div',className:/\bmain\b/}) [0];
+
 					/*** inject site assistant (if desired) ***/
-						var _mainNode = Uize.Node.find ({tagName:'div',className:/\bmain\b/}) [0];
 						if (_this._showSiteAssistant && _mainNode) {
 							/*** add widget and inject its HTML ***/
-								Uize.Node.injectHtml (document.body,'<div id="page-siteAssistant"></div>');
+								Uize.Node.injectHtml (document.body,'<div id="page-siteAssistantShell"></div>');
 								_this.addChild (
 									'siteAssistant',
 									UizeSite.Widgets.SiteAssistant.Widget,
 									{
-										container:_this.getNode ('siteAssistant'),
+										container:_this.getNode ('siteAssistantShell'),
 										built:false
 									}
 								);
@@ -188,7 +189,7 @@ Uize.module ({
 										(Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width) / 2
 									;
 									_this.setNodeStyle (
-										'siteAssistant',
+										'siteAssistantShell',
 										_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
 									)
 								};
@@ -198,7 +199,17 @@ Uize.module ({
 						}
 
 					/*** inject footer (if desired) ***/
-						_this._showFooter && Uize.Node.injectHtml (document.body,UizeSite.Templates.Footer.process ());
+						if (_this._showFooter) {
+							Uize.Node.injectHtml (_mainNode,'<div id="page-footerShell"></div>');
+							_this.addChild (
+								'footer',
+								UizeSite.Widgets.Footer.Widget,
+								{
+									container:_this.getNode ('footerShell'),
+									built:false
+								}
+							);
+						}
 
 					_superclass.doMy (_this,'wireUi');
 				}

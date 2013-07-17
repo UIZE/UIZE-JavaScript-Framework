@@ -36,16 +36,21 @@
 	Uize.Color
 	Uize.Fx
 	Uize.Curve
-	Uize.Curve.Rubber
 	Uize.String
 	Uize.String.Replace
 	Uize.Xml
-	UizeSite.Templates
-	UizeSite.Templates.Footer
 	Uize.Json
 	Uize.Node.CssModule
 	Uize.Widget.V2
 	UizeSite.Widgets
+	UizeSite.Widgets.GetInvolved
+	UizeSite.Widgets.GetInvolved.Html
+	UizeSite.Widgets.GetInvolved.Css
+	UizeSite.Widgets.GetInvolved.Widget
+	UizeSite.Widgets.ShareThis
+	UizeSite.Widgets.ShareThis.Html
+	UizeSite.Widgets.ShareThis.Css
+	UizeSite.Widgets.ShareThis.Widget
 	UizeSite.Widgets.SiteAssistant
 	UizeSite.Widgets.SiteAssistant.Html
 	UizeSite.Widgets.SiteAssistant.Css
