@@ -40,7 +40,7 @@ Uize.module ({
 
 			staticProperties:{
 				cssModule:UizeSite.Widgets.SiteAssistant.Css
-			},
+			}
 		});
 
 		return _class;
