@@ -16,13 +16,9 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module ({
-	required:'UizeSite.Page.Example.library',
-	builder:function () {
-		/* Library Contents
-			UizeSite.Page.Example.Test
-		*/
-		Uize.module ({name:'UizeSite.Page.Example.Test.library'});
-	}
-});
+/* Library Contents
+	UizeSite.Page.Example.Test->
+*/
+
+Uize.module ({name:'UizeSite.Page.Example.Test.library'});
 

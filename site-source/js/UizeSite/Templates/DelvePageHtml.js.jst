@@ -22,24 +22,28 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
-		'UizeSite.Delve.library',
-		'UizeSite.Templates.DelveUiHtml',
-		'Uize.Node',
-		'UizeSite.Delve'
-	],
-	builder:function () {
-		/*** inject the guts of the page ***/
-			Uize.Node.injectHtml (document.body,UizeSite.Templates.DelveUiHtml.process ());
+Uize.require (
+	'UizeSite.Delve.library',
+	function () {
+		Uize.module ({
+			required:[
+				'UizeSite.Templates.DelveUiHtml',
+				'Uize.Node',
+				'UizeSite.Delve'
+			],
+			builder:function () {
+				/*** inject the guts of the page ***/
+					Uize.Node.injectHtml (document.body,UizeSite.Templates.DelveUiHtml.process ());
 
-		/*** create the example page widget ***/
-			var _page = window.page = UizeSite.Delve ({baseUrl:<%= _baseUrl -> json %>,window:top.opener});
+				/*** create the example page widget ***/
+					var _page = window.page = UizeSite.Delve ({baseUrl:<%= _baseUrl -> json %>,window:top.opener});
 
-		/*** wire up the page widget ***/
-			_page.wireUi ();
+				/*** wire up the page widget ***/
+					_page.wireUi ();
+			}
+		});
 	}
-});
+);
 
 </script>
 

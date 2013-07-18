@@ -214,37 +214,41 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
-		'UizeSite.Page.library',
-		'Uize.Node',
-		'Uize.Tooltip'
-	],
-	builder:function () {
-		'use strict';
+Uize.require (
+	'UizeSite.Page.library',
+	function () {
+		Uize.module ({
+			required:[
+				'Uize.Node',
+				'Uize.Tooltip'
+			],
+			builder:function () {
+				'use strict';
 
-		var page = window.page = UizeSite.Page ();
+				var page = window.page = UizeSite.Page ();
 
-		page.wireUi ();
+				page.wireUi ();
 
-		page.wireNode (
-			Uize.Node.find ({tagName:'A',href:/reference\/Uize/,title:/./}),
-			{
-				mouseover:function () {
-					if (this.oldTitle == null) {
-						this.oldTitle = this.title;
-						this.title = '';
+				page.wireNode (
+					Uize.Node.find ({tagName:'A',href:/reference\/Uize/,title:/./}),
+					{
+						mouseover:function () {
+							if (this.oldTitle == null) {
+								this.oldTitle = this.title;
+								this.title = '';
+							}
+							Uize.Node.setInnerHtml ('page-moduleDescriptionTooltip',this.oldTitle);
+							Uize.Tooltip.showTooltip ('page-moduleDescriptionTooltip');
+						},
+						mouseout:function () {
+							Uize.Tooltip.showTooltip ('page-moduleDescriptionTooltip',false);
+						}
 					}
-					Uize.Node.setInnerHtml ('page-moduleDescriptionTooltip',this.oldTitle);
-					Uize.Tooltip.showTooltip ('page-moduleDescriptionTooltip');
-				},
-				mouseout:function () {
-					Uize.Tooltip.showTooltip ('page-moduleDescriptionTooltip',false);
-				}
+				);
 			}
-		);
+		});
 	}
-});
+);
 
 </script>
 

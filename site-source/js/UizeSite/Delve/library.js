@@ -17,39 +17,7 @@
 */
 
 /* Library Contents
-	Uize.Class
-	Uize.Node
-	UizeSite
-	UizeSite.ModulesTree
-	Uize.Fade
-	Uize.Tooltip
-	Uize.Xml
-	Uize.Node.Tree
-	Uize.Widget
-	Uize.Widget.Tree
-	Uize.Widget.Tree.List
-	Uize.Node.Event
-	Uize.Widget.TextInput
-	Uize.Widget.Button
-	Uize.Widget.Options
-	Uize.Widget.Options.Tabbed
-	Uize.Json
-	Uize.String
-	Uize.Date
-	Uize.Date.Formatter
-	Uize.Widget.Log
-	Uize.Widget.Log.InstanceEvents
-	Uize.Widget.TableSort
-	Uize.Util
-	Uize.Util.Oop
-	Uize.Data
-	Uize.Data.PathsTree
-	Uize.Widget.Page
-	Uize.Templates
-	Uize.Templates.HashTable
-	UizeSite.Delve
-	UizeSite.Templates
-	UizeSite.Templates.DelveUiHtml
+	UizeSite.Delve->
 */
 
 Uize.module ({name:'UizeSite.Delve.library'});

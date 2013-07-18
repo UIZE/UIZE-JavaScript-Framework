@@ -16,14 +16,9 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module ({
-	required:'UizeSite.Page.library',
-	builder:function () {
-		/* Library Contents
-			Uize.Widget.HoverFader
-			UizeSite.Page.Home
-		*/
-		Uize.module ({name:'UizeSite.Page.Home.library'});
-	}
-});
+/* Library Contents
+	UizeSite.Page.Home->
+*/
+
+Uize.module ({name:'UizeSite.Page.Home.library'});
 

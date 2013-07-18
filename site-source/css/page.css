@@ -7,12 +7,12 @@
 		}
 		.main {
 			width: 780px;
-			min-height: 490px;
 			padding: 15px 14px;
 			margin: 0 auto 0 auto;
 			background: #f0f0f0;
 			border-left: 10px solid #55606a;
 			border-right: 10px solid #55606a;
+			padding-bottom: 0;
 		}
 		body, p, blockquote, td, ol {
 			color: #000;
@@ -367,6 +367,6 @@
 
 /*** footer shell ***/
 	#page-footerShell {
-		margin: 20px -14px -14px -14px;
+		margin: 40px -14px 0 -14px;
 	}
 

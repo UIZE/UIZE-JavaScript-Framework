@@ -166,11 +166,6 @@ Uize.module ({
 				_evaluator:'evaluator'
 			});
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
-				showFooter:false
-			});
-
 		return _class;
 	}
 });

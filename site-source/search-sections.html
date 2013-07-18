@@ -93,87 +93,91 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
-		'UizeSite.Page.library',
-		'UizeSite.Page',
-		'Uize.Node',
-		'Uize.Url',
-		'Uize.Widget.HoverFader',
-		'Uize.Curve'
-	],
-	builder:function () {
-		'use strict';
+Uize.require (
+	'UizeSite.Page.library',
+	function () {
+		Uize.module ({
+			required:[
+				'UizeSite.Page',
+				'Uize.Node',
+				'Uize.Url',
+				'Uize.Widget.HoverFader',
+				'Uize.Curve'
+			],
+			builder:function () {
+				'use strict';
 
-		/*** create the example page widget ***/
-			var _page = window.page = UizeSite.Page ();
+				/*** create the example page widget ***/
+					var _page = window.page = UizeSite.Page ();
 
-		/*** add hover fader for sections highlight effect ***/
-			_page.addChild (
-				'sectionHoverFader',
-				Uize.Widget.HoverFader,
-				{
-					nodes:{className:/\bsearchPod\b/},
-					defaultStyle:{borderColor:'122'},
-					hoverStyle:{borderColor:'f'},
-					fadeIn:{
-						duration:800,
-						curve:{borderColor:[Uize.Curve.easeOutPow (9),Uize.Curve.easeInPow (2),Uize.Curve.easeInPow (6)]}
-					},
-					fadeOut:{
-						duration:800,
-						curve:{borderColor:[Uize.Curve.easeOutPow (4),null,Uize.Curve.easeInPow (3)]}
-					}
-				}
-			);
+				/*** add hover fader for sections highlight effect ***/
+					_page.addChild (
+						'sectionHoverFader',
+						Uize.Widget.HoverFader,
+						{
+							nodes:{className:/\bsearchPod\b/},
+							defaultStyle:{borderColor:'122'},
+							hoverStyle:{borderColor:'f'},
+							fadeIn:{
+								duration:800,
+								curve:{borderColor:[Uize.Curve.easeOutPow (9),Uize.Curve.easeInPow (2),Uize.Curve.easeInPow (6)]}
+							},
+							fadeOut:{
+								duration:800,
+								curve:{borderColor:[Uize.Curve.easeOutPow (4),null,Uize.Curve.easeInPow (3)]}
+							}
+						}
+					);
 
-		/*** wire up the page widget ***/
-			_page.wireUi ();
+				/*** wire up the page widget ***/
+					_page.wireUi ();
 
-		/*** initialization ***/
-			/*** code for managing search term ***/
-				var
-					_searchQueryPreviewNodes = Uize.Node.find ({className:'searchQuery'}),
-					_searchQueryNode = _page.getNode ('searchQuery'),
-					_searchQuery = _page.getNodeValue (_searchQueryNode)
-				;
-				if (!_searchQuery) {
-					_searchQuery = location.search.slice (1);
-					if (_searchQuery) _searchQuery = '"' + Uize.Url.fromPiece (_searchQuery) + '"';
-				}
-				function _updateSearchTermPreviewNodes () {
-					Uize.Node.setInnerHtml (_searchQueryPreviewNodes,_searchQuery);
-				}
-				if (_searchQuery) {
-					_page.setNodeValue (_searchQueryNode,_searchQuery);
-					_updateSearchTermPreviewNodes ();
-				}
-				_page.wireNode (
-					_searchQueryNode,
-					'keyup',
-					function () {
-						var _newSearchTerm = _page.getNodeValue (_searchQueryNode);
-						if (_newSearchTerm != _searchQuery) {
-							_searchQuery = _newSearchTerm;
+				/*** initialization ***/
+					/*** code for managing search term ***/
+						var
+							_searchQueryPreviewNodes = Uize.Node.find ({className:'searchQuery'}),
+							_searchQueryNode = _page.getNode ('searchQuery'),
+							_searchQuery = _page.getNodeValue (_searchQueryNode)
+						;
+						if (!_searchQuery) {
+							_searchQuery = location.search.slice (1);
+							if (_searchQuery) _searchQuery = '"' + Uize.Url.fromPiece (_searchQuery) + '"';
+						}
+						function _updateSearchTermPreviewNodes () {
+							Uize.Node.setInnerHtml (_searchQueryPreviewNodes,_searchQuery);
+						}
+						if (_searchQuery) {
+							_page.setNodeValue (_searchQueryNode,_searchQuery);
 							_updateSearchTermPreviewNodes ();
 						}
-					}
-				);
+						_page.wireNode (
+							_searchQueryNode,
+							'keyup',
+							function () {
+								var _newSearchTerm = _page.getNodeValue (_searchQueryNode);
+								if (_newSearchTerm != _searchQuery) {
+									_searchQuery = _newSearchTerm;
+									_updateSearchTermPreviewNodes ();
+								}
+							}
+						);
 
-			/*** wire up search links ***/
-				function _wireSectionSearchLink (_linkName,_sectionUrl) {
-					_page.wireNode (_linkName,'click',function () {page.performSearch (_searchQuery,_sectionUrl)});
-				}
-				_wireSectionSearchLink ('searchEntireSite','');
-				_wireSectionSearchLink ('searchInExamples','/examples/source-code');
-				_wireSectionSearchLink ('searchInModules','/reference/source-code');
-				_wireSectionSearchLink ('searchInExplainers','/explainers');
+					/*** wire up search links ***/
+						function _wireSectionSearchLink (_linkName,_sectionUrl) {
+							_page.wireNode (_linkName,'click',function () {page.performSearch (_searchQuery,_sectionUrl)});
+						}
+						_wireSectionSearchLink ('searchEntireSite','');
+						_wireSectionSearchLink ('searchInExamples','/examples/source-code');
+						_wireSectionSearchLink ('searchInModules','/reference/source-code');
+						_wireSectionSearchLink ('searchInExplainers','/explainers');
 
-			/*** focus and select search query input ***/
-				_searchQueryNode.focus ();
-				_searchQueryNode.select ();
+					/*** focus and select search query input ***/
+						_searchQueryNode.focus ();
+						_searchQueryNode.select ();
+			}
+		});
 	}
-});
+);
 
 </script>
 

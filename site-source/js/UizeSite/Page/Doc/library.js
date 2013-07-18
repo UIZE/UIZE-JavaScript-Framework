@@ -16,15 +16,9 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module ({
-	required:'UizeSite.Page.library',
-	builder:function () {
-		/* Library Contents
-			Uize.Tooltip
-			Uize.Widget.Tree.List
-			UizeSite.Page.Doc
-		*/
-		Uize.module ({name:'UizeSite.Page.Doc.library'});
-	}
-});
+/* Library Contents
+	UizeSite.Page.Doc->
+*/
+
+Uize.module ({name:'UizeSite.Page.Doc.library'});
 

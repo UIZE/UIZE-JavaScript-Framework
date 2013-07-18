@@ -1,14 +1,3 @@
-body {
-	background-image: url(../images/fold-marker.gif);
-	background-repeat: repeat-x;
-	background-position: left 592px;
-	background-attachment: fixed;
-}
-.main {
-	padding-bottom: 5px;
-	min-height: 525px;
-}
-
 /*** headings ***/
 	tr .heading, tr.headings td, .exampleSectionHeading {
 		color: #fff;
