@@ -106,57 +106,23 @@ Uize.module ({
 					/*** add tour interface, if necessary ***/
 						var _tour = Uize.Url.fromParams (location.href).tour;
 						if (_tour) {
-							Uize.Node.Classes.addClass (document.body,'inTour');
-							Uize.module ({
-								required:[
-									'UizeSite.Templates.Tour',
-									'Uize.Tooltip',
-									'Uize.Url',
-									'UizeSite.Examples'
-								],
-								builder:function () {
-									/*** inject tour UI ***/
-										Uize.Node.injectHtml (
-											document.body,
-											UizeSite.Templates.Tour.process ({tour:_tour,pageUrl:location.href})
-										);
-
-									/*** wire up tour page tooltip behavior ***/
-										function _getTourExampleByUrl (_url) {
-											var _tourExamplesMap = _getTourExampleByUrl._map;
-											if (!_tourExamplesMap) {
-												_tourExamplesMap = _getTourExampleByUrl._map = {};
-												Uize.forEach (
-													UizeSite.Examples (),
-													function (_tourExample) {
-														_tourExamplesMap [Uize.Url.from (_tourExample.path).fileName] = _tourExample;
-													}
-												);
-											}
-											return _tourExamplesMap [Uize.Url.from (_url).fileName];
+							var _documentBody = document.body;
+							Uize.Node.Classes.addClass (_documentBody,'inTour');
+							Uize.Node.injectHtml (_documentBody,'<div id="page-tourBarShell"></div>');
+							Uize.require (
+								'UizeSite.Widgets.TourBar.Widget',
+								function () {
+									_this.addChild (
+										'tourBar',
+										UizeSite.Widgets.TourBar.Widget,
+										{
+											tour:_tour,
+											container:_this.getNode ('tourBarShell'),
+											built:false
 										}
-
-										_this.wireNode (
-											Uize.Node.find ({tagName:'a',className:/\b(tourPage|tourButton)\b/}),
-											{
-												mouseover:function () {
-													var _tourExample = _getTourExampleByUrl (this.getAttribute ('href'));
-
-													/*** update nodes to reflect tour page being moused over ***/
-														_this.setNodeValue ('tourPageTooltip-title',_tourExample.title);
-														_this.setNodeValue ('tourPageTooltip-description',_tourExample.description);
-														_this.setNodeValue (
-															'tourPageTooltip-keywords',
-															_tourExample.keywords || '-- NONE --'
-														);
-
-													Uize.Tooltip.showTooltip ('page-tourPageTooltip');
-												},
-												mouseout:function () {Uize.Tooltip.showTooltip ('page-tourPageTooltip',false)}
-											}
-										);
+									).insertUi ();
 								}
-							});
+							);
 						}
 				}
 			};
