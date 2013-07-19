@@ -3,6 +3,7 @@
 	border-radius: 3px;
 	overflow: hidden;
 	box-shadow: 0 0 7px rgba(0,0,0,.2);
+	margin-bottom: 10px;
 }
 
 .`heading` {
