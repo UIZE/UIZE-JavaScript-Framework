@@ -44,14 +44,6 @@
 %>
 
 <div id="<% .idPrefix %>" class="<%= this.rootNodeCssClasses () %>">
-	<div id="<% .idPrefix %>-tooltip" class="<%= this.cssClass ('tooltip') %>">
-		<div class="<%= this.cssClass ('tooltipBox') %>">
-			<div id="<% .idPrefix %>-tooltip-title" class="<%= this.cssClass ('tooltipTitle') %>"></div>
-			<div id="<% .idPrefix %>-tooltip-description" class="<%= this.cssClass ('tooltipDescription') %>"></div>
-			<div class="<%= this.cssClass ('tooltipKeywords') %>">TAGS: <span id="<% .idPrefix %>-tooltip-keywords"></span></div>
-		</div>
-	</div>
-
 	<div class="<%= this.cssClass ('buttonShell') %> <%= this.cssClass ('buttonPreviousShell') %>"><%
 		var _previousExample = _pageNo > 0 ? _tourExamples [_pageNo - 1] : null;
 		if (_previousExample) {

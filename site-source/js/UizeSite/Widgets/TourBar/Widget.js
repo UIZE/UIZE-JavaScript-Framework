@@ -32,7 +32,8 @@ Uize.module ({
 		'Uize.Url',
 		'Uize.Tooltip',
 		'UizeSite.Widgets.TourBar.Html',
-		'UizeSite.Widgets.TourBar.Css'
+		'UizeSite.Widgets.TourBar.Css',
+		'UizeSite.Widgets.ExampleInfoTooltip.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -40,6 +41,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.set ({_pageUrl:window.location.href});
+				this.addChild ('tooltip',UizeSite.Widgets.ExampleInfoTooltip.Widget,{built:false});
 			},
 
 			instanceMethods:{
@@ -62,22 +64,21 @@ Uize.module ({
 							return _tourExamplesMap [Uize.Url.from (_url).fileName];
 						};
 
-						var _tooltipNode = _this.getNode ('tooltip');
-						_this.globalizeNode (_tooltipNode);
+						var
+							_tooltip = _this.children.tooltip,
+							_tooltipNode = _tooltip.getNode ()
+						;
+						Uize.Node.display (_tooltipNode,false);
 						_this.wireNode (
 							Uize.Node.find ({root:_this.getNode (),tagName:'a'}),
 							{
 								mouseover:function () {
 									var _tourExample = _getTourExampleByUrl (this.getAttribute ('href'));
-
-									/*** update nodes to reflect tour page being moused over ***/
-										_this.setNodeValue ('tooltip-title',_tourExample.title);
-										_this.setNodeValue ('tooltip-description',_tourExample.description);
-										_this.setNodeValue (
-											'tooltip-keywords',
-											_tourExample.keywords || '-- NONE --'
-										);
-
+									_tooltip.set ({
+										title:_tourExample.title,
+										description:_tourExample.description,
+										keywords:_tourExample.keywords
+									});
 									Uize.Tooltip.showTooltip (_tooltipNode);
 								},
 								mouseout:function () {Uize.Tooltip.showTooltip (_tooltipNode,false)}
