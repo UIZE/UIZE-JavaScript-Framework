@@ -69,21 +69,6 @@
 				.highNumbersImportance .barFull {
 					background:#fc0;
 				}
-
-		.moduleDescriptionTooltip {
-			display:none;
-			font-size:11px;
-			max-width:250px;
-			padding:6px;
-			border:3px solid #fff;
-			border-radius:3px;
-			-moz-border-radius:3px;
-			-webkit-border-radius:3px;
-			background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
-			box-shadow:5px 5px 10px rgba(0,0,0,.6);
-			-moz-box-shadow:5px 5px 10px rgba(0,0,0,.6);
-			-webkit-box-shadow:5px 5px 10px rgba(0,0,0,.6);
-		}
 	</style>
 </head>
 
@@ -210,8 +195,6 @@
 
 </div>
 
-<div id="page-moduleDescriptionTooltip" class="moduleDescriptionTooltip"></div>
-
 <script type="text/javascript">
 
 Uize.require (
@@ -220,28 +203,38 @@ Uize.require (
 		Uize.module ({
 			required:[
 				'Uize.Node',
-				'Uize.Tooltip'
+				'Uize.Tooltip',
+				'UizeSite.Widgets.Tooltip.Widget'
 			],
 			builder:function () {
 				'use strict';
 
-				var page = window.page = UizeSite.Page ();
+				var
+					_page = window.page = UizeSite.Page (),
+					_tooltip = _page.addChild ('tooltip',UizeSite.Widgets.Tooltip.Widget,{built:false})
+				;
 
-				page.wireUi ();
+				_page.wireUi ();
 
-				page.wireNode (
+				var _tooltipNode = _tooltip.getNode ();
+
+				_page.wireNode (
 					Uize.Node.find ({tagName:'A',href:/reference\/Uize/,title:/./}),
 					{
 						mouseover:function () {
-							if (this.oldTitle == null) {
-								this.oldTitle = this.title;
-								this.title = '';
+							var _link = this;
+							if (_link.oldTitle == null) {
+								_link.oldTitle = _link.title;
+								_link.title = '';
 							}
-							Uize.Node.setInnerHtml ('page-moduleDescriptionTooltip',this.oldTitle);
-							Uize.Tooltip.showTooltip ('page-moduleDescriptionTooltip');
+							_tooltip.set ({
+								heading:Uize.Node.getText (_link),
+								body:_link.oldTitle
+							});
+							Uize.Tooltip.showTooltip (_tooltipNode);
 						},
 						mouseout:function () {
-							Uize.Tooltip.showTooltip ('page-moduleDescriptionTooltip',false);
+							Uize.Tooltip.showTooltip (_tooltipNode,false);
 						}
 					}
 				);
