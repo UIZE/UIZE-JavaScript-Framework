@@ -1,9 +1,12 @@
 .`` {
+	margin-bottom: 10px;
+}
+
+.`contents` {
 	border: 1px solid #f4f4f4;
 	border-radius: 3px;
 	overflow: hidden;
 	box-shadow: 0 0 7px rgba(0,0,0,.2);
-	margin-bottom: 10px;
 }
 
 .`heading` {

@@ -3,10 +3,12 @@
 		heading:'string',
 		body:'string'
 	});
-%><div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
-	<div class="<%= this.cssClass ('heading') %>"><%. heading %></div>
-	<div class="<%= this.cssClass ('body') %>">
-		<%. body %>
+%><div id="<%. idPrefix %>" class="<%= this.rootNodeCssClasses () %>">
+	<div class="<%= this.cssClass ('contents') %>">
+		<div id="<%. idPrefix %>-heading" class="<%= this.cssClass ('heading') %>"><%. heading %></div>
+		<div id="<%. idPrefix %>-body" class="<%= this.cssClass ('body') %>">
+			<%. body %>
+		</div>
 	</div>
 </div>
 

@@ -22,7 +22,8 @@ Uize.module ({
 		'Uize.Node',
 		'Uize.Node.Tree',
 		'Uize.Widget.Tree.List',
-		'Uize.Url'
+		'Uize.Url',
+		'UizeSite.Widgets.Tooltip.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -34,6 +35,13 @@ Uize.module ({
 					function () {
 						var _this = this;
 
+						/*** add the tooltip widgets ***/
+							var _contentsTooltip = _this.addChild (
+								'contentsTooltip',
+								UizeSite.Widgets.Tooltip.Widget,
+								{built:false}
+							);
+
 						/*** add the contents tree widget ***/
 							_this.addChild (
 								'contents',
@@ -42,7 +50,16 @@ Uize.module ({
 									levelClasses:['contents-tree-level1','contents-tree-level2','contents-tree-level3','contents-tree-level4'],
 									iconTheme:'arrows-black',
 									iconBgColor:'',
-									tooltip:'contentsTooltip',
+									tooltip:{
+										node:_contentsTooltip.nodeId (),
+										show:function (_item) {
+											_contentsTooltip.set ({
+												heading:_item.title,
+												body:_item.description
+											});
+											return true;
+										}
+									},
 									built:false
 								}
 								/*?
@@ -80,6 +97,9 @@ Uize.module ({
 				_classPrototype.wireUi = function () {
 					var _this = this;
 					if (!_this.isWired) {
+						/*** hide the tooltips ***/
+							_this.children.contentsTooltip.displayNode ('',false);
+
 						/*** populate contents tree's data ***/
 							var
 								_contents = _this.children.contents,
@@ -92,7 +112,6 @@ Uize.module ({
 						/*** insert HTML for contents tree and section link tooltips ***/
 							Uize.Node.injectHtml (
 								document.body,
-								'<div id="contentsTooltip" class="contents-tooltip"></div>' +
 								'<div id="bodyLinkTooltip" class="body-link-tooltip">' +
 									'<div id="bodyLinkTooltipTitle" class="body-link-tooltip-title"></div>' +
 									'<div id="bodyLinkTooltipDescription" class="body-link-tooltip-description"></div>' +

@@ -245,22 +245,6 @@
 		max-height: 100px;
 		overflow: auto;
 	}
-	.contents-tooltip {
-		display: none;
-		font-size: 11px;
-		color: #000;
-		padding: 3px 7px 10px 7px;
-		background: #c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
-		border: 3px solid #fff;
-		border-radius: 3px;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		box-shadow: 5px 5px 10px rgba(0,0,0,.6);
-		-moz-box-shadow: 5px 5px 10px rgba(0,0,0,.6);
-		-webkit-box-shadow: 5px 5px 10px rgba(0,0,0,.6);
-		max-width: 260px;
-		_width: 260px; /* hack for IE6 (which doesn't support max-width) */
-	}
 	.contents-tree-shell *,
 	.contents-tree-shell *:link,
 	.contents-tree-shell *:visited,

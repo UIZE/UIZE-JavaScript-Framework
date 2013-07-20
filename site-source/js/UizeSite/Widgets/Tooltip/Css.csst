@@ -1,0 +1,6 @@
+.`` {
+	padding: 10px;
+	max-width: 400px;
+	_width: 400px; /* hack for IE6 (which doesn't support max-width) */
+	margin: 0;
+}

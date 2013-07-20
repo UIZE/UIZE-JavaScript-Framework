@@ -83,7 +83,11 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					var _tooltip = _this._tooltip;
+					var
+						_tooltip = _this._tooltip,
+						_tooltipIsPlainObject = Uize.isPlainObject (_tooltip),
+						_tooltipNode = Uize.Node.getById (_tooltipIsPlainObject ? _tooltip.node : _tooltip)
+					;
 					_this.traverseTree ({
 						itemHandler:
 							function (_item,_itemSpecifier) {
@@ -93,29 +97,30 @@ Uize.module ({
 										{
 											mouseover:
 												function () {
-													var _tooltipNode = Uize.Node.getById (_tooltip);
 													if (_tooltipNode) {
-														var
-															_tooltipHtml,
-															_tooltipTemplate = _this._tooltipTemplate
-														;
-														if (_tooltipTemplate) {
-															_tooltipHtml = _tooltipTemplate.call (_this,_item);
+														var _tooltipHtml;
+														if (_tooltipIsPlainObject) {
+															_tooltipHtml = _tooltip.show (_item);
 														} else {
-															var _itemDescription = _item.description;
-															if (_itemDescription)
-																_tooltipHtml = _Uize_Xml_toAttributeValue (_itemDescription)
-															;
+															var _tooltipTemplate = _this._tooltipTemplate;
+															if (_tooltipTemplate) {
+																_tooltipHtml = _tooltipTemplate.call (_this,_item);
+															} else {
+																var _itemDescription = _item.description;
+																if (_itemDescription)
+																	_tooltipHtml = _Uize_Xml_toAttributeValue (_itemDescription)
+																;
+															}
+															_tooltipHtml && _Uize_Node.setInnerHtml (_tooltipNode,_tooltipHtml);
 														}
 														if (_tooltipHtml) {
-															_Uize_Node.setInnerHtml (_tooltipNode,_tooltipHtml);
 															_Uize_Tooltip.showTooltip (_tooltipNode,_true);
 															_this.fire ({name:'After Show Tooltip',item:_item});
 														}
 													}
 												},
 											mouseout:function () {
-												_Uize_Tooltip.showTooltip (_this._tooltip,_false);
+												_Uize_Tooltip.showTooltip (_tooltipNode,_false);
 												_this.fire ({name:'After Hide Tooltip',item:_item});
 											}
 										}
