@@ -23,7 +23,7 @@ Uize.module ({
 		'Uize.Node.Tree',
 		'Uize.Widget.Tree.List',
 		'Uize.Url',
-		'UizeSite.Widgets.Tooltip.Widget'
+		'Uize.Widgets.Tooltip.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -40,7 +40,7 @@ Uize.module ({
 						/*** add the tooltip widget ***/
 							var _tooltip = _this.addChild (
 								'tooltip',
-								UizeSite.Widgets.Tooltip.Widget,
+								Uize.Widgets.Tooltip.Widget,
 								{built:false}
 							);
 

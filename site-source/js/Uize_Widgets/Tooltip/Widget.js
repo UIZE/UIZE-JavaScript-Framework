@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Widgets.Tooltip.Widget Class
+|    /    O /   |    MODULE : Uize.Widgets.Tooltip.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,25 +18,25 @@
 
 /*?
 	Introduction
-		The =UizeSite.Widgets.Tooltip.Widget= module implements a widget class.
+		The =Uize.Widgets.Tooltip.Widget= module implements a widget class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
-			Below is a visual sampler of the =UizeSite.Widgets.Tooltip.Widget= class...
+			Below is a visual sampler of the =Uize.Widgets.Tooltip.Widget= class...
 
 			...................................................
 			<< widget >>
 
-			widgetClass: UizeSite.Widgets.Tooltip.VisualSampler
+			widgetClass: Uize.Widgets.Tooltip.VisualSampler
 			...................................................
 */
 
 Uize.module ({
-	name:'UizeSite.Widgets.Tooltip.Widget',
+	name:'Uize.Widgets.Tooltip.Widget',
 	superclass:'Uize.Widgets.BoxWithHeading.Widget',
 	required:[
-		'UizeSite.Widgets.Tooltip.Css'
+		'Uize.Widgets.Tooltip.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -70,7 +70,7 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				cssModule:UizeSite.Widgets.Tooltip.Css
+				cssModule:Uize.Widgets.Tooltip.Css
 			}
 		});
 	}

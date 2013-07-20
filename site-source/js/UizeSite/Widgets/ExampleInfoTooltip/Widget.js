@@ -34,7 +34,7 @@
 
 Uize.module ({
 	name:'UizeSite.Widgets.ExampleInfoTooltip.Widget',
-	superclass:'UizeSite.Widgets.Tooltip.Widget',
+	superclass:'Uize.Widgets.Tooltip.Widget',
 	required:'UizeSite.Widgets.ExampleInfoTooltip.Css',
 	builder:function (_superclass) {
 		'use strict';

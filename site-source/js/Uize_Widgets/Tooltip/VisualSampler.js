@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Widgets.Tooltip.VisualTests Class
+|    /    O /   |    MODULE : Uize.Widgets.Tooltip.VisualSampler Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,28 +18,28 @@
 
 /*?
 	Introduction
-		The =UizeSite.Widgets.Tooltip.VisualTests= class implements a set of visual tests for the =UizeSite.Widgets.Tooltip.Widget= class.
+		The =Uize.Widgets.Tooltip.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Tooltip.Widget= class.
 
 		*DEVELOPERS:* 
 */
 
 Uize.module ({
-	name:'UizeSite.Widgets.Tooltip.VisualTests',
-	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'UizeSite.Widgets.Tooltip.Widget',
+	name:'Uize.Widgets.Tooltip.VisualSampler',
+	superclass:'Uize.Widgets.VisualSampler.Widget',
+	required:'Uize.Widgets.Tooltip.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				this.addStateTestCase ({
+				this.addSample ({
 					heading:'5. Static Methods... 5.2. Uize.Color.cloneTuple',
 					body:'A method that is useful in the development of color space or encoding extensions, and that returns a tuple array, being a clone of the specified source tuple array.'
 				});
 			},
 
 			staticProperties:{
-				widgetClass:UizeSite.Widgets.Tooltip.Widget
+				widgetClass:Uize.Widgets.Tooltip.Widget
 			}
 		});
 	}
