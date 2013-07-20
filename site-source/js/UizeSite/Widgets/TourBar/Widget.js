@@ -21,6 +21,15 @@
 		The =UizeSite.Widgets.TourBar.Widget= module implements a widget class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =UizeSite.Widgets.TourBar.Widget= class...
+
+			...................................................
+			<< widget >>
+
+			widgetClass: UizeSite.Widgets.TourBar.VisualSampler
+			...................................................
 */
 
 Uize.module ({

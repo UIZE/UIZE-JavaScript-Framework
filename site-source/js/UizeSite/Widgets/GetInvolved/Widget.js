@@ -21,6 +21,15 @@
 		The =UizeSite.Widgets.GetInvolved.Widget= module implements a widget class.
 
 		*DEVELOPERS:* 
+
+		Visual Sampler
+			Below is a visual sampler of the =UizeSite.Widgets.GetInvolved.Widget= class...
+
+			.......................................................
+			<< widget >>
+
+			widgetClass: UizeSite.Widgets.GetInvolved.VisualSampler
+			.......................................................
 */
 
 Uize.module ({

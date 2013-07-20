@@ -21,6 +21,15 @@
 		The =UizeSite.Widgets.EnabledBusyDemo.Widget= class implements a widget that is used to demonstrate how the =enabled= and =busy= state properties behave with widgets in a widget tree.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =UizeSite.Widgets.EnabledBusyDemo.Widget= class...
+
+			...........................................................
+			<< widget >>
+
+			widgetClass: UizeSite.Widgets.EnabledBusyDemo.VisualSampler
+			...........................................................
 */
 
 Uize.module ({

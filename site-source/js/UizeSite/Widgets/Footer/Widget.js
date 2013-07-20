@@ -21,6 +21,15 @@
 		The =UizeSite.Widgets.Footer.Widget= module implements a widget class.
 
 		*DEVELOPERS:* 
+
+		Visual Sampler
+			Below is a visual sampler of the =UizeSite.Widgets.Footer.Widget= class...
+
+			..................................................
+			<< widget >>
+
+			widgetClass: UizeSite.Widgets.Footer.VisualSampler
+			..................................................
 */
 
 Uize.module ({

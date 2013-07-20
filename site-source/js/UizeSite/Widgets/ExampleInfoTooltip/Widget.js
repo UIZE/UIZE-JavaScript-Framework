@@ -21,6 +21,15 @@
 		The =UizeSite.Widgets.ExampleInfoTooltip.Widget= module implements a widget class.
 
 		*DEVELOPERS:*
+
+		Visual Sampler
+			Below is a visual sampler of the =UizeSite.Widgets.ExampleInfoTooltip.Widget= class...
+
+			..............................................................
+			<< widget >>
+
+			widgetClass: UizeSite.Widgets.ExampleInfoTooltip.VisualSampler
+			..............................................................
 */
 
 Uize.module ({

@@ -21,6 +21,15 @@
 		The =UizeSite.Widgets.SiteAssistant.Widget= class implements a widget that lets users easily share a link to the page they are on, using a service of their choice.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =UizeSite.Widgets.SiteAssistant.Widget= class...
+
+			.........................................................
+			<< widget >>
+
+			widgetClass: UizeSite.Widgets.SiteAssistant.VisualSampler
+			.........................................................
 */
 
 Uize.module ({
