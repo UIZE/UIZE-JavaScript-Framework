@@ -48,10 +48,10 @@
 /*** explanation ***/
 	.explanation {
 		position: relative;
-		background: #c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
+		background: #fff;
 		padding: 3px 3px 3px 10px;
 		margin: 0 10px 25px 10px;
-		border: 1px solid #ccc;
+		border: 1px solid #ddd;
 		border-radius: 3px;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
