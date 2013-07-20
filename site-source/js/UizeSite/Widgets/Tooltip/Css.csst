@@ -4,3 +4,8 @@
 	_width: 400px; /* hack for IE6 (which doesn't support max-width) */
 	margin: 0;
 }
+
+.`contents` {
+	box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+

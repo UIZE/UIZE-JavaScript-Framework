@@ -34,7 +34,6 @@ Uize.module ({
 			omegastructor:function () {
 				this.addSample ({
 					title:'3D Rotation Viewer',
-					keywords:'animation drag-and-drop ipad touch Uize.Widget.Drag Uize.Widget.Fade.xFactory',
 					description:'Easily create a 3D rotation viewer in UIZE that lets users rotate the view of an object a full 360 degrees using a mouse, or finger on the Apple iPad.'
 				});
 			},

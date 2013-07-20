@@ -84,9 +84,8 @@ Uize.module ({
 								mouseover:function () {
 									var _tourExample = _getTourExampleByUrl (this.getAttribute ('href'));
 									_tooltip.set ({
-										title:_tourExample.title,
-										description:_tourExample.description,
-										keywords:_tourExample.keywords
+										heading:_tourExample.title,
+										body:_tourExample.description
 									});
 									Uize.Tooltip.showTooltip (_tooltipNode);
 								},
