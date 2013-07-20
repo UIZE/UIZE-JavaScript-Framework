@@ -315,47 +315,6 @@
 			font-size: 11px;
 		}
 
-/*** body link tooltip ***/
-	.body-link-tooltip {
-		display: none;
-		background: #c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
-		border: 1px solid #999;
-		border-radius: 3px;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		max-width: 500px;
-		_width: 500px; /* hack for IE6 (which doesn't support max-width) */
-		overflow: hidden;
-	}
-	.body-link-tooltip .body-link-tooltip-title {
-		font-size: 10px;
-		color: #000;
-		text-shadow: 1px 1px 1px #fff;
-		padding: 5px;
-		background: #b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
-		border-top-left-radius: 2px;
-		-moz-border-radius-topleft: 2px;
-		-webkit-border-top-left-radius: 2px;
-		border-top-right-radius: 2px;
-		-moz-border-radius-topright: 2px;
-		-webkit-border-top-right-radius: 2px;
-		border-bottom: 1px solid #777;
-	}
-	.body-link-tooltip .body-link-tooltip-description {
-		border-top: 1px solid #fff;
-		padding: 3px 5px;
-		font-size: 12px;
-		color: #000;
-	}
-	.body-link-tooltip .body-link-tooltip-more {
-		font-size: 9px;
-		font-weight: bold;
-		letter-spacing: 2px;
-		color: #000;
-		text-align: right;
-		padding: 4px;
-	}
-
 /*** data tables ***/
 	table.data {
 		border-collapse: collapse;

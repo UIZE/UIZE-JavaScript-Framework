@@ -28,6 +28,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		var _sacredEmptyObject = {};
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
@@ -35,9 +37,9 @@ Uize.module ({
 					function () {
 						var _this = this;
 
-						/*** add the tooltip widgets ***/
-							var _contentsTooltip = _this.addChild (
-								'contentsTooltip',
+						/*** add the tooltip widget ***/
+							var _tooltip = _this.addChild (
+								'tooltip',
 								UizeSite.Widgets.Tooltip.Widget,
 								{built:false}
 							);
@@ -51,9 +53,9 @@ Uize.module ({
 									iconTheme:'arrows-black',
 									iconBgColor:'',
 									tooltip:{
-										node:_contentsTooltip.nodeId (),
+										node:_tooltip.nodeId (),
 										show:function (_item) {
-											_contentsTooltip.set ({
+											_tooltip.set ({
 												heading:_item.title,
 												body:_item.description
 											});
@@ -98,7 +100,7 @@ Uize.module ({
 					var _this = this;
 					if (!_this.isWired) {
 						/*** hide the tooltips ***/
-							_this.children.contentsTooltip.displayNode ('',false);
+							_this.children.tooltip.displayNode ('',false);
 
 						/*** populate contents tree's data ***/
 							var
@@ -108,16 +110,6 @@ Uize.module ({
 							_this.set ({contentsTreeItems:_contentsTreeItems});
 							_contents.set ({items:_contentsTreeItems});
 							_contents.setExpandedDepth (1);
-
-						/*** insert HTML for contents tree and section link tooltips ***/
-							Uize.Node.injectHtml (
-								document.body,
-								'<div id="bodyLinkTooltip" class="body-link-tooltip">' +
-									'<div id="bodyLinkTooltipTitle" class="body-link-tooltip-title"></div>' +
-									'<div id="bodyLinkTooltipDescription" class="body-link-tooltip-description"></div>' +
-									'<div class="body-link-tooltip-more">MORE...</div>' +
-								'</div>'
-							);
 
 						/*** wire up page actions ***/
 							var _pageTitle = document.title.match (/^\s*(.*?)\s*\|/) [1];
@@ -189,6 +181,7 @@ Uize.module ({
 
 						/*** wire up link tooltip behavior ***/
 							var
+								_tooltip = _this.children.tooltip,
 								_links = Uize.Node.find ({
 									root:Uize.Node.find ({className:'contents0'}) [0],
 									tagName:'A',
@@ -220,10 +213,15 @@ Uize.module ({
 																	_itemSpecifier.push (_sectionSpecifier - 1);
 																}
 															);
-															var _itemInfo = _contents.getItemInfoFromSpecifier (_itemSpecifier);
-															if (_itemInfo && _itemInfo.item) {
-																_title = _itemInfo.titleParts.slice (1).join (' ... ');
-																_description = _itemInfo.item.description || '';
+															var _item =
+																(
+																	_contents.getItemInfoFromSpecifier (_itemSpecifier) ||
+																	_sacredEmptyObject
+																).item
+															;
+															if (_item) {
+																_title = _item.title;
+																_description = _item.description || '';
 															}
 														} else {
 															var
@@ -239,13 +237,12 @@ Uize.module ({
 															}
 														}
 														if (_title && _description) {
-															Uize.Node.setValue ('bodyLinkTooltipTitle',_title);
-															Uize.Node.setValue ('bodyLinkTooltipDescription',_description);
-															Uize.Tooltip.showTooltip ('bodyLinkTooltip');
+															_tooltip.set ({heading:_title,body:_description});
+															Uize.Tooltip.showTooltip (_tooltip.getNode ());
 														}
 													},
 													onmouseout:function () {
-														Uize.Tooltip.showTooltip ('bodyLinkTooltip',false);
+														Uize.Tooltip.showTooltip (_tooltip.getNode (),false);
 													}
 												}
 											)
