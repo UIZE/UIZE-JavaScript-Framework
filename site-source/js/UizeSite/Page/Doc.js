@@ -143,19 +143,6 @@ Uize.module ({
 								);
 
 						/*** wire up behavior for scrolling to anchors ***/
-							/* TO DO: animated scrolling behavior
-								- what to wire the event on (document.body or document.documentElement?)
-								- how to cancel the event
-								- how to know that the thing being clicked is a link that is an anchor link
-								- calculate the position of the anchor
-								- scroll the document to the positio
-								- set the document location to the anchor
-								- have a timeout that watches on changes in the href
-									- if the anchor changes, scroll the position to the current anchor minus clearance amount
-
-								issues
-									- IE7 has a stupid issue where the getAttribute DOM method doesn't return the value from the document, but returns a resolved value, and for href for anchor links this contains the entire URL path, not just the anchor part
-							*/
 							var _titleBar = Uize.Node.find ({tagName:'h1',className:'document-title'}) [0];
 							Uize.Node.getStyle (_titleBar,'position') == 'fixed' &&
 								_this.wireNode (
