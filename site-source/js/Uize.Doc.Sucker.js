@@ -231,7 +231,7 @@ Uize.module({
 											? (
 												'\t\tINHERITANCE CHAIN\n' +
 												'\t\t' +
-													Uize.map (_inheritanceChain,'"=" + value.moduleName + "="').join (' -> ') +
+													Uize.map (_inheritanceChain,'"=" + value.moduleName + "="').join (' &minus;> ') +
 													'\n' +
 												'\n'
 											)

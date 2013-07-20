@@ -1231,7 +1231,7 @@ Uize.module ({
 									Uize.map (
 										_inheritanceChain,
 										function (_class) {return _getObjectLink (_class.moduleName)}
-									).join (' -> '),
+									).join (' &minus;> '),
 									'this is the root class',
 									true
 								);
