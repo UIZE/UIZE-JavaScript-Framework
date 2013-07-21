@@ -1,35 +1,30 @@
 .`` {
 	display: inline-block;
-	padding: 0;
-	width: 119px;
-	border: 3px solid #fff;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	background: #d3d3d3;
-	/*
-	box-shadow: 5px 0 12px rgba(0,0,0,.7);
-	-moz-box-shadow: 5px 0 12px rgba(0,0,0,.7);
-	-webkit-box-shadow: 5px 0 12px rgba(0,0,0,.7);
-	*/
-	text-align: center;
+	padding: 10px;
+	margin-bottom: 0;
 }
 
-.`title` {
-	font-size: 12px;
+.`contents` {
+	box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.`heading` {
+	font-family: "Courier New", "Courier";
 	font-weight: bold;
-	color: #000;
-	text-shadow: -1px -1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, 1px 1px 0 #fff;
-	letter-spacing: 2px;
-	padding: 2px 5px 3px 5px;
-	width: 109px;
 	text-transform: uppercase;
+	text-align: center;
+	font-size: 16px;
+	padding: 3px 0;
+}
+
+.`body` {
+	padding: 5px;
+	background: #fff;
 }
 
 .`swatch`, .`asBg`, .`asColor` {
 	width: 105px;
 	padding: 1px;
-	margin: 0 5px;
 	border: 1px solid #666;
 	font-size: 11px;
 	text-align: center;
@@ -41,7 +36,6 @@
 
 .`asColor` {
 	position: relative;
-	margin-bottom: 5px;
 }
 
 .`onWhite`, .`onBlack` {

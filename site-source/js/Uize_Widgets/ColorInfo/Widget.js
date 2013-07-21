@@ -39,7 +39,7 @@
 
 Uize.module ({
 	name:'Uize.Widgets.ColorInfo.Widget',
-	superclass:'Uize.Widget.V2',
+	superclass:'Uize.Widgets.BoxWithHeading.Widget',
 	required:[
 		'Uize.Color',
 		'Uize.Widgets.ColorInfo.Html',
@@ -52,7 +52,7 @@ Uize.module ({
 			var _this = this;
 			if (_this.isWired) {
 				var _colorAsHexRgb = Uize.Color.to (_this._value,'#hex');
-				_this.setNodeValue ('value',_colorAsHexRgb);
+				_this.setNodeValue ('heading',_colorAsHexRgb);
 				_this.setNodeStyle (['swatch','asBackground'],{backgroundColor:_colorAsHexRgb});
 				_this.setNodeStyle ('asForeground',{color:_colorAsHexRgb});
 				/*?
