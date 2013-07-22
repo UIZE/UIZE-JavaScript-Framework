@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Build.ListJsModules= package writes out a log file containing a list of all the JavaScript modules for a Web site.
 
-		This information might be useful when doing audits. This build script was first used when starting the initiative of updating all the modules in the codebase to use strict mode, so it was a useful way to seed a task list. The list of JavaScript modules is written out to the log file "all-js-modules.log" in the "logs" folder that is at the root of the UIZE project.
+		This information might be useful when doing audits. This build script was first used when starting the initiative of updating all the modules in the codebase to use strict mode, so it was a useful way to seed a task list. The list of JavaScript modules is written out to the log file "Uize.Build.ListJsModules.log" in the "logs" folder that is at the root of the UIZE project.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -41,7 +41,7 @@ Uize.module ({
 					_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 				;
 				_fileSystem.writeFile ({
-					path:'logs/all-js-modules.log',
+					path:'logs/Uize.Build.ListJsModules.log',
 					contents:_fileSystem.getFiles ({
 						path:_params.sourcePath,
 						recursive:true,
