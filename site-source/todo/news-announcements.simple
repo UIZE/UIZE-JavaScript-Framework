@@ -50,9 +50,6 @@ NEW MODULE: Uize.Widgets.ColorInfo.Widget
 NEW MODULE: Uize.Widget.EdgeHugger
 	Announce this new widget.
 
-IMPROVED MODULE: Uize.Build.AutoScruncher
-	Announce configurable handling of head comments.
-
 NEW PERFORMANCE TEST: Loop Optimization Approaches
 	Announce (but refactor as performance test module first).
 

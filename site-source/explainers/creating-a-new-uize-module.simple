@@ -199,7 +199,7 @@ Update Header Comments
 				- *Test* - for unit test or functional test modules (subclasses of the =Uize.Test= class)
 				- *Namespace* - for modules that define namespaces
 				- *Alias* - for modules that are merely aliases to other modules (provided for backwards compatibility)
-				- *Library* - for modules that define libraries of modules that are to be bundled together by the auto scruncher build script
+				- *Library* - for modules that define libraries of modules that are to be bundled together by the build system
 
 			importance
 				A number, in the range of =0= to =10=, indicating the overal importance of the module in the larger scheme of things.

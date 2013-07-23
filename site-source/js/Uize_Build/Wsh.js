@@ -22,7 +22,7 @@
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		The =Uize.Build.Wsh= module is used by various build scripts, such as the auto scruncher. It will only be of interest to you if you're writing or modifying build scripts that only run in the Windows Script Host environment.
+		The =Uize.Build.Wsh= module is used by a few build scripts. It will only be of interest to you if you're writing or modifying build scripts that only run in the Windows Script Host environment.
 */
 
 Uize.module ({
