@@ -5273,7 +5273,7 @@ Uize = (function () {
 								............................................................................
 					*/
 				}
-			) ('Uize.Build','Uize.Test','Uize.Services','Uize.Widgets');
+			) ('Uize.Build','Uize.Services','Uize.Templates','Uize.Test','Uize.Widgets');
 
 			_package.moduleUrlResolver = function (_moduleName) {
 				return _package.moduleUrlTemplate.replace (
