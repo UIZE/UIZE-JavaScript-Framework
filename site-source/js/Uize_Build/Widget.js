@@ -92,23 +92,6 @@ Uize.module ({
 					}
 
 				/*** create the widget module file ***/
-					/*
-					if (_hasHtml) {
-						_builderLines.push (
-							'		set:{',
-							'			html:' + _htmlModuleName,
-							'		}' + (_hasCss ? ',' : '')
-						);
-						_hasCss && _builderLines.push ('');
-					}
-					if (_hasCss) {
-						_builderLines.push (
-							'		staticProperties:{',
-							'			cssModule:' + _cssModuleName,
-							'		}'
-						);
-					}
-					*/
 					_fileSystem.writeFile ({
 						path:_getModulePath (_namespace + '.Widget'),
 						contents:Uize.Templates.WidgetModule.process ({
