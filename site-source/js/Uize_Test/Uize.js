@@ -4038,22 +4038,16 @@ Uize.module ({
 					]],
 
 					['Uize.toString',[
-						/* TODO: implement tests */
 					]],
 					['Uize.module',[
-						/* TODO: implement tests */
 					]],
 					['Uize.getModuleByName',[
-						/* TODO: implement tests */
 					]],
 					['Uize.moduleLoader',[
-						/* TODO: implement tests */
 					]],
 					['Uize.moduleUrlResolver',[
-						/* TODO: implement tests */
 					]],
 					['Uize.getPathToLibrary',[
-						/* TODO: implement tests */
 					]],
 					['Uize.package',[
 						{

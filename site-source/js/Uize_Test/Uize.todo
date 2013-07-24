@@ -1,0 +1,12 @@
+This is a TO DO document for the =Uize.Test.Uize= module.
+
+Missing Tests
+	Implement tests for the following methods...
+	
+	- =Uize.toString=
+	- =Uize.module=
+	- =Uize.getModuleByName=
+	- =Uize.moduleLoader=
+	- =Uize.moduleUrlResolver=
+	- =Uize.getPathToLibrary=
+

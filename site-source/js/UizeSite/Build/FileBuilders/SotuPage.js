@@ -25,15 +25,6 @@
 		Functions defined in the file builder are called as instance methods on an instance of a subclass of the =Uize.Services.FileBuilderAdapter= class, so the functions can access instance methods implemented in this class.
 */
 
-/* TODO:
-	- nice-to-haves, per module
-		- number of modules that require the module (ie. how shared is the module throughout framework, or is it more isolated)
-		- total number of modules (directly and indirectly) required by the module
-		- total scrunched size of all modules (directly and indirectly) required by the module
-		- creation date of the module
-		- developers for the module
-*/
-
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.SotuPage',
 	required:[

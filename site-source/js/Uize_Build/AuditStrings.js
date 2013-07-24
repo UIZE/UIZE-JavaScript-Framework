@@ -21,62 +21,81 @@
 		The =Uize.Build.AuditStrings= package provides a method to audit all JavaScript files in a folder for literal strings - useful for internationalization.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-*/
 
-/*
-	TO DO:
-		What's still being missed that should be recognized as non-internationalizable...
-			250x155 - width x height in pixels
+		This build script recurses through all folders of a project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files.
 
-			imageTextSpacingX - not being recognized as camelCase identifier because last capital is not followed by any lowercase characters
+		The build script groups the literal strings it finds inside a JavaScript file into four buckets...
 
-			disableGSDProducts, fixedPPI - consecutive caps
+		NON-INTERNATIONALIZABLE STRINGS
+			This category includes strings that are recognized by certain patterns as being non-internationalizable strings, including...
 
-			&amp; - any single entity should be filtered out
+			- DOM event names (eg. =click=)
+			- very JavaScript specific keywords (eg. =function=)
+			- HTML specific attribute names (eg. =href=)
+			- sufficiently distinctive HTML tag names (eg. =div=), file extensions (eg. =.gif=)
+			- strings that are only whitespace
+			- strings that have no letter characters
+			- hex formatted RGB color values (eg. =#ff0000=)
+			- module names (eg. =Uize.Widget.Bar=)
+			- any string starting with "Uize"
+			- underscore delimited identifiers (eg. =button_big_disabled=)
+			- Changed.[propertyName] events (eg. =Changed.value=), and the Changed.&#42; event
+			- sufficiently distinguishable URL paths (eg. =myfolder/mysubfolder/myfile.html=)
+			- camelCase identifiers (eg. =languageSortAscending=)
 
-			<zz:error_image_src> - just a tag, without contents should be detectable (open or close tags)
-			</tr><tr> - catch one or more just tags in a row (eg. <br/><br/><br/>)
+		LIKELY NON-INTERNATIONALIZABLE STRINGS
+			This category includes strings with only one letter character (eg. =a=), and strings that look like short url snippets (eg. =myfolder/mysubfolder=).
 
-			Content-length, Content-type - specific HTTP headers
+		POSSIBLY INTERNATIONALIZABLE STRINGS
+			This category includes strings that are not filtered out into either the `NON-INTERNATIONALIZABLE STRINGS`, `LIKELY NON-INTERNATIONALIZABLE STRINGS`, or `LIKELY INTERNATIONALIZABLE STRINGS` categories.
 
-			-1000px - /^(-?\d+)?px$/
+		LIKELY INTERNATIONALIZABLE STRINGS
+			This category includes strings that are not filtered out into either the `NON-INTERNATIONALIZABLE STRINGS` or `LIKELY NON-INTERNATIONALIZABLE STRINGS` categories and that contain three adjacent, space separated words, where the middle word is all lowecase.
 
-			womens_laceup_heel_womens5.5 - it looks like an identifier with underscores, but there's a period
+		Below is a snippet from the log file after this build script was run inside the =UIZE-JavaScript-Framework= folder of the UIZE Web site project...
 
-			sz500 - a word with multiple digits
+		LOG FILE SNIPPET
+		......................................................................................
+		***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.TableSort.js
+			TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.TableSort.js
+			BUILT (ALWAYS BUILD), BUILD DURATION: 188ms
+				NON-INTERNATIONALIZABLE STRINGS
+					 --- 92,101,189
+					TD --- 54
+					TR --- 142,249,274
+					Uize.Node --- 22
+					Uize.Widget.TableSort --- 21
+					headingLitClass --- 346
+					headingOverClass --- 342
+					languageSortAscending --- 350
+					languageSortDescending --- 355
+					click --- 292
+					rowOverClass --- 360
+					updateUi --- 339
 
-			top= - fragments of code (how to identify them?)
+				LIKELY NON-INTERNATIONALIZABLE STRINGS
 
-			-jiggler - hyphen starts a word
+				POSSIBLY INTERNATIONALIZABLE STRINGS
+					TH --- 55
+					tbody --- 50
+					thead --- 272
 
-			pd - two or more adjacent letters with no vowels (lowercase or uppercase)
+				LIKELY INTERNATIONALIZABLE STRINGS
+					Click to sort in ascending order --- 352
+					Click to sort in descending order --- 357
+		......................................................................................
 
-			- ff00ff - six letter hex format strings should be filtered to LIKELY NON-INTERNATIONALIZABLE STRINGS
+		A few things to notice about the format...
 
-			- miscellaneous
-				price?input=js&output=js
-				MultiProductFactory_form-designData
-				?private=true
-				&end=
-				create/
-				icon_medium icon_medium-
-				.value
-				_ctgy_in.value
-				window.parent.parent.document.frmParms.mat
-				resizable=yes,status=no,scrollbars=yes,location=no,toolbar=no,directories=no,menubar=no,width=470,innerWidth=470,height=400,innerHeight=400
+		- the strings are listed in ASCIIbetically sorted order
+		- to the right of each string is a listing of all the line numbers on which the string occurs
 
-		- switches
-			- a switch for levels of doubt
-				1: show only LIKELY INTERNATIONALIZABLE STRINGS
-				2: show LIKELY INTERNATIONALIZABLE STRINGS, POSSIBLY INTERNATIONALIZABLE STRINGS
-				3: show LIKELY INTERNATIONALIZABLE STRINGS, POSSIBLY INTERNATIONALIZABLE STRINGS, LIKELY NON-INTERNATIONALIZABLE STRINGS
-				4: show LIKELY INTERNATIONALIZABLE STRINGS, POSSIBLY INTERNATIONALIZABLE STRINGS, LIKELY NON-INTERNATIONALIZABLE STRINGS, NON-INTERNATIONALIZABLE STRINGS
-			- a switch for not showing headings for empty buckets
-			- a switch for not showing files for which all buckets that would be displayed are empty
+		THIS ONE'S SLOW
 
-		- summary for overal totals for all buckets, per file, and for all files
-		- ability to supply additional dictionaries of known non-internationalizable strings and likely non-internationalizable strings, and regular expressions as well
-		- idea: summary for cases where creating a variable for a string that is repeatedly used would save some space when the file is scrunched
+		Be warned: this build script can be quite slow to run, especially if you have a large project with many folders and many JavaScript files. It could take a few minutes to process all JavaScript files in a large project. You'll know when it's done running by the modified date of the associated log file, or you can watch the *WSCRIPT.EXE* process in the Windows Task Manager.
+
+		NOTES
+		- the summary info for this build script is output to the log file =Uize.Build.AuditStrings.log=
 */
 
 Uize.module ({

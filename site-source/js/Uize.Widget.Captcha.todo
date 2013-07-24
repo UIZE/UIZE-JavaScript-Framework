@@ -1,0 +1,3 @@
+This is a TO DO document for the =Uize.Widget.Captcha= module.
+
+Once the refactoring of =Uize.Widget.FormElement= is completed, the validation and value interface for this class should be folded into that, perhaps as a subclass.

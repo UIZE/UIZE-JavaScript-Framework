@@ -138,31 +138,6 @@ Uize.module ({
 		return Uize.package ({
 			dedupe:function (_source,_canonicalizer,_target) {
 				_target = _source;
-				/* TO DO
-					- support canonicalizers that can achieve the effect of loose type comparison
-						- one approach for a simple canonicalizer to perform loose type deduping would canonicalize primitive type values to strings, and map both null and undefined to a nully value object stand-in object
-
-							...............................
-							var nullyValueStandin = {};
-							function (value) {
-								return (
-									Uize.isPrimitive (value)
-										? value + ''
-										: Uize.isNully (value)
-											? nullyValueStandin
-											: value
-								);
-							}
-							...............................
-
-						- an alternative approach would allow a canonicalizer to return multiple equivalent canonical values
-							- when the canonicalizer sees a number value, it would return the number value, the string serialization of the number, and the boolean equivalent of the number
-							- when the canonicalizer sees a boolean value, it would return the number equivalent of the boolean, and the string serialization of the boolean
-							- when the canonicalizer sees the value null, it would return the value null, the value 0, and the value undefined
-							- problems with this approach are...
-								- canonicalizers should be able to return array values, so how would a canonicalizer that is to return multiple values differentiate that intent from simply returning an array as a canonicalized result? Perhaps the canonicalizer would have to have a property on it to indicate that it uses this signature, so that the return value would not have to be overloaded.
-								- if a canonicalizer could return multiple values, code that currently does the lookup and the insert would have to be wrapped in a loop to do multiple lookups and multiple inserts
-				*/
 				var _valueIndexer = new _ValueIndexer (_canonicalizer);
 				_target = _Uize.Data.Matches.remove (
 					_source,function (_value) {return _valueIndexer.isIn (_value,_true)},null,_target

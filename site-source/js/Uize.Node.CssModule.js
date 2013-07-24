@@ -23,11 +23,6 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-/* TODO:
-	- add support for removing CSS for a module (this will be tricky, given the packing that gets done for IE)
-	- add support for CSS being in the document already (such as when server renders HTML for a page)
-*/
-
 Uize.module ({
 	name:'Uize.Node.CssModule',
 	superclass:'Uize.Class',
