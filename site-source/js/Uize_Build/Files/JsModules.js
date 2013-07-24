@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Build.Files.JsModules= package builds all the JavaScript modules needed by a Web site that uses the UIZE JavaScript Framework.
+		The =Uize.Build.Files.JsModules= build script generates built [[javascript-modules.html][JavaScript modules]] from all the source JavaScript modules, [[javascript-templates.html][JavaScript template]] (=.js.jst=) files, and CSS template (=.csst=) files that it finds in the modules folder.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -101,7 +101,7 @@ Uize.module ({
 								})
 							);
 
-						/*** add generated namespace modules for folders under site's modules folder ***/
+						/*** add generated namespace modules for folders under UIZE site's modules folder ***/
 							_isUizeWebSite ||
 								this.addFiles (
 									_fileSystem.getFolders ({

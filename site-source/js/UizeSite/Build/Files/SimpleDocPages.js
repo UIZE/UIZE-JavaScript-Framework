@@ -18,9 +18,34 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.Files.SimpleDocPages= package provides a method to build all the SimpleDoc documentation for the UIZE Web site.
+		The =UizeSite.Build.Files.SimpleDocPages= build script recurses through all folders of the UIZE Web site project, building pages from all the Simple Doc (=.simple=) files that it finds, as well as building HTML reference documentation pages from all JavaScript modules that it finds in the modules folder.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Simple Doc Pages
+			An HTML page is generated for each Simple Doc (=.simple=) file.
+
+			The build script recurses through all the folders, finding Simple Doc (=.simple=) files. For each file, it builds an HTML page from the Simple Doc document, using the =~SIMPLE-DOC-TEMPLATE.html.jst= template file that is contained inside the same folder as the Simple Doc file. The built HTML page is then output to the same folder as the Simple Doc file, where the filename of the built file is the filename of the Simple Doc file with the =.simple= file extension replaced with the =.html= extension.
+
+			FILE NAMING EXAMPLE
+			..............................................................................
+			javascript-build-scripts.simple --> PRODUCES --> javascript-build-scripts.html
+			..............................................................................
+
+		Module Reference Pages
+			An HTML reference documentation page is generated for each JavaScript module contained inside the modules folder.
+
+			The build script iterates through all the JavaScript modules contained inside the modules folder (as specified by the =modulesFolder= build environment variable). For each file, it extracts all the Simple Doc comments, stitches all those comments together into a single Simple Doc document, and then builds an HTML page from that document, using the =~SIMPLE-DOC-TEMPLATE.html.jst= template file that is contained inside the =reference/= folder of the UIZE Web site project. The built HTML reference documentation page is then output to the =reference/= folder, where the filename of the built file is the filename of the JavaScript module with the =.js= file extension replaced with the =.html= extension.
+
+			FILE NAMING EXAMPLE
+			.............................................................
+			js/Uize.Widget.js --> PRODUCES --> reference/Uize.Widget.html
+			.............................................................
+
+		For more information on Simple Doc - such as its rules on document structure, inline formatting, etc. - refer to the explainer [[javascript-documentation-system.html][JavaScript Documentation System]].
+
+		NOTES
+		- the summary info for this build script is output to the log file =UizeSite.Build.Files.SimpleDocPages.log=
 */
 
 Uize.module ({

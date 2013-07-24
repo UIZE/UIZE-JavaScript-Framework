@@ -18,9 +18,23 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.Files.SourceCodePages= package provides a method for building the HTML pages for viewing the source code of the UIZE JavaScript modules and examples on the UIZE Web site.
+		The =UizeSite.Build.Files.SourceCodePages= build script builds HTML pages for viewing the source code of JavaScript modules and examples pages for the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		JavaScript Module Source Code Pages
+			A source code page is generated for every JavaScript module in the modules folder, including modules that are derived from JavaScript template (=.js.jst=) files and CSS template (=.csst=) files.
+
+			The build script iterates through all the JavaScript modules contained inside the modules folder, builds a source code page for each module using the JavaScript template =~SOURCE-CODE-TEMPLATE.html= contained inside the =reference/source-code= folder and places the built source code page inside that folder, where the source code page's filename is the name of the module with the file extension =.html= appended (eg. =Uize.Widget.html= for the =Uize.Widget= module).
+
+		Example Source Code Pages
+			A source code page is generated for every example page contained inside the =examples= folder.
+
+			The build script iterates through all the example pages contained inside the =examples= folder, ignoring experimental examples prefixed with a "~" (tilde) character, builds a source code page for each example using the JavaScript template =~SOURCE-CODE-TEMPLATE.html= contained inside the =examples/source-code= folder and places the built source code page inside that folder, where the source code page's filename is the same as the example page's filename.
+
+		NOTES
+		- the summary info for this build script is output to the log file =UizeSite.Build.Files.SourceCodePages.log= under the =logs= folder
+
 */
 
 Uize.module ({
