@@ -99,8 +99,7 @@ Uize.module ({
 				_classPrototype.wireUi = function () {
 					var _this = this;
 					if (!_this.isWired) {
-						/*** hide the tooltips ***/
-							_this.children.tooltip.displayNode ('',false);
+						var _tooltip = _this.children.tooltip;
 
 						/*** populate contents tree's data ***/
 							var
@@ -168,7 +167,6 @@ Uize.module ({
 
 						/*** wire up link tooltip behavior ***/
 							var
-								_tooltip = _this.children.tooltip,
 								_links = Uize.Node.find ({
 									root:Uize.Node.find ({className:'contents0'}) [0],
 									tagName:'A',
@@ -242,6 +240,7 @@ Uize.module ({
 
 						_superclass.doMy (_this,'wireUi');
 
+						_this.children.tooltip.displayNode ('',false);
 						_contents.setNodeStyle ('',{maxHeight:'none',overflow:'visible'});
 					}
 				};
