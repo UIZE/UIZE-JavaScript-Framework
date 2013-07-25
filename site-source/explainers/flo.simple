@@ -301,52 +301,6 @@ Static Properties
 		.
 
 Methods
-	abort
-		Aborts execution of the `flo statements` in the flo on which the method is called.
-
-		SYNTAX
-		.....................
-		floInstance.abort ();
-		.....................
-
-		EXAMPLE
-		...
-		...
-
-	block
-		Creates a basic block flo that will sequentially execute
-
-
-
-	break
-		Breaks execution of the nearest loop up the flo chain.
-
-		SYNTAX
-		.....................
-		floInstance.break ();
-		.....................
-
-		EXAMPLE
-		...
-		flo.forIn (
-			fs.dir,
-			function (next) {
-				if (next.flo.value) {
-					next.flo.break ();
-				}
-			}
-		) (function () {console.log ('finished with asynchronous for')});
-		...
-
-		Must be Within a Loop or Switch Flo
-			If the =break= method is called on a flo and there is no breakable flo up the parent chain, then an error will be thrown.
-
-			A breakable flo is defined as either a loop flo (created by methods like =do=, =for=, =forIn=, and =while=) or a switch flow (created by the =switch= method).
-
-			EXAMPLE
-			...
-			...
-
 	do
 		Create a do...while loop flo
 
