@@ -233,7 +233,7 @@ Uize.module ({
 					_templateLength = _template.length,
 					_blockFirstChunk = 'var output = [];',
 					_blockLastChunk = 'return output.join (\'\');',
-					_templateFunctionChunks = [_blockFirstChunk],
+					_templateFunctionChunks = ['var m = this, output = [];'],
 					_pushToOutputBuffer = [],
 					_tokenEnd = 0,
 					_tokenStart,

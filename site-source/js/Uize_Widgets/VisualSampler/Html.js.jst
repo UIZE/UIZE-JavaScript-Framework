@@ -1,15 +1,13 @@
 <%@
 	required ('Uize.Widgets.BoxWithHeading.Html');
-%><%
-	var _this = this;
 %><%=
 	Uize.Widgets.BoxWithHeading.Html.process.call (
-		_this,
+		m,
 		Uize.copy (
 			input,
 			{
-				heading:'WIDGET CLASS: ' + _this.Class.widgetClass.moduleName,
-				body:_this.childHtml ({name:'samples'})
+				heading:'WIDGET CLASS: ' + m.Class.widgetClass.moduleName,
+				body:m.childHtml ({name:'samples'})
 			}
 		)
 	)

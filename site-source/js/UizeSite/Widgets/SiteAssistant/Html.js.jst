@@ -7,21 +7,21 @@
 	);
 	input ({title:'string'});
 %>
-<div id="<%. idPrefix %>" class="<%= this.rootNodeCssClasses () %>">
-	<div class="<%= this.cssClass ('box') %>"><%=
-		this.childHtml ({
+<div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
+	<div class="<%= m.cssClass ('box') %>"><%=
+		m.childHtml ({
 			name:'getInvolvedBox',
 			widgetClass:Uize.Widgets.BoxWithHeading.Widget,
 			heading:'NEED HELP?',
-			body:this.childHtml ({name:'getInvolved',widgetClass:UizeSite.Widgets.GetInvolved.Widget})
+			body:m.childHtml ({name:'getInvolved',widgetClass:UizeSite.Widgets.GetInvolved.Widget})
 		})
 	%></div>
-	<div class="<%= this.cssClass ('box') %>"><%=
-		this.childHtml ({
+	<div class="<%= m.cssClass ('box') %>"><%=
+		m.childHtml ({
 			name:'shareThisBox',
 			widgetClass:Uize.Widgets.BoxWithHeading.Widget,
 			heading:'SHARE THIS LINK...',
-			body:this.childHtml ({name:'shareThis',widgetClass:UizeSite.Widgets.ShareThis.Widget})
+			body:m.childHtml ({name:'shareThis',widgetClass:UizeSite.Widgets.ShareThis.Widget})
 		})
 	%></div>
 </div>

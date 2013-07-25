@@ -43,29 +43,29 @@
 	}
 %>
 
-<div id="<% .idPrefix %>" class="<%= this.rootNodeCssClasses () %>">
-	<div class="<%= this.cssClass ('buttonShell') %> <%= this.cssClass ('buttonPreviousShell') %>"><%
+<div id="<% .idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
+	<div class="<%= m.cssClass ('buttonShell') %> <%= m.cssClass ('buttonPreviousShell') %>"><%
 		var _previousExample = _pageNo > 0 ? _tourExamples [_pageNo - 1] : null;
 		if (_previousExample) {
-		%><a href="<%= _getExamplePageLink (_previousExample) %>" class="<%= this.cssClass ('button') %> <%= this.cssClass ('buttonPrevious') %>"></a><%
+		%><a href="<%= _getExamplePageLink (_previousExample) %>" class="<%= m.cssClass ('button') %> <%= m.cssClass ('buttonPrevious') %>"></a><%
 		}
 	%></div>
-	<div class="<%= this.cssClass ('pagesShell') %>">
-		<table class="<%= this.cssClass ('pages') %>">
+	<div class="<%= m.cssClass ('pagesShell') %>">
+		<table class="<%= m.cssClass ('pages') %>">
 			<tr><%
 				for (var _tourExampleNo = -1; ++_tourExampleNo < _tourExamplesLength;) {
 					var _tourExample = _tourExamples [_tourExampleNo];
 				%><td>
-					<a href="<%= _getExamplePageLink (_tourExample) %>" class="<%= this.cssClass ('page') + (_tourExampleNo == _pageNo ? ' ' + this.cssClass ('currentPage') : '') %>"></a>
+					<a href="<%= _getExamplePageLink (_tourExample) %>" class="<%= m.cssClass ('page') + (_tourExampleNo == _pageNo ? ' ' + m.cssClass ('currentPage') : '') %>"></a>
 				</td><%
 				}
 			%></tr>
 		</table>
 	</div>
-	<div class="<%= this.cssClass ('buttonShell') %> <%= this.cssClass ('buttonNextShell') %>"><%
+	<div class="<%= m.cssClass ('buttonShell') %> <%= m.cssClass ('buttonNextShell') %>"><%
 		var _nextExample = _pageNo < _tourExamplesLength - 1 ? _tourExamples [_pageNo + 1] : null;
 		if (_nextExample) {
-		%><a href="<%= _getExamplePageLink (_nextExample) %>" class="<%= this.cssClass ('button') %> <%= this.cssClass ('buttonNext') %>"></a><%
+		%><a href="<%= _getExamplePageLink (_nextExample) %>" class="<%= m.cssClass ('button') %> <%= m.cssClass ('buttonNext') %>"></a><%
 		}
 	%></div>
 </div>

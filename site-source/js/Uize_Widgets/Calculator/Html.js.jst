@@ -2,15 +2,14 @@
 	input ({idPrefix:'string'});
 %><%
 	var
-		_this = this,
-		_buttonShellCssClass = _this.cssClass ('buttonShell'),
+		_buttonShellCssClass = m.cssClass ('buttonShell'),
 		_cssClassCache = {}
 	;
 
 	function _button (_name,_text,_tipText,_doubleChar,_buttonCategoryCssClass,_buttonSpecificCssClass) {
 		%><td>
-			<div class="<%= _buttonShellCssClass %> <%= _cssClassCache [_buttonCategoryCssClass] || (_cssClassCache [_buttonCategoryCssClass] = _this.cssClass (_buttonCategoryCssClass)) %> <%= _cssClassCache [_buttonSpecificCssClass] || (_cssClassCache [_buttonSpecificCssClass] = _this.cssClass (_buttonSpecificCssClass)) %>"><%=
-			_this.childHtml ({
+			<div class="<%= _buttonShellCssClass %> <%= _cssClassCache [_buttonCategoryCssClass] || (_cssClassCache [_buttonCategoryCssClass] = m.cssClass (_buttonCategoryCssClass)) %> <%= _cssClassCache [_buttonSpecificCssClass] || (_cssClassCache [_buttonSpecificCssClass] = m.cssClass (_buttonSpecificCssClass)) %>"><%=
+			m.childHtml ({
 				name:_name,
 				text:_text,
 				tipText:_tipText,
@@ -19,10 +18,10 @@
 			}) %></div>
 		</td><%
 	}
-%><table id="<% .idPrefix %>" class="<%= _this.rootNodeCssClasses () %>">
+%><table id="<% .idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
 	<tr>
-		<td colspan="5" class="<%= this.cssClass ('entryShell') %>">
-			<input id="<% .idPrefix %>_entry-input" type="text" class="<%= _this.cssClass ('entry') %>"/>
+		<td colspan="5" class="<%= m.cssClass ('entryShell') %>">
+			<input id="<% .idPrefix %>_entry-input" type="text" class="<%= m.cssClass ('entry') %>"/>
 		</td>
 	</tr>
 	<tr>

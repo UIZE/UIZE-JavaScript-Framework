@@ -1,22 +1,20 @@
 <%@
 	input ({idPrefix:'string'});
 	required ('Uize.Widgets.BoxWithHeading.Html');
-%><%
-	var _this = this;
 %><%@
 	startBlock ('body');
-%>	<div id="<%. idPrefix %>-swatch" class="<%= _this.cssClass ('swatch') %>"></div>
-	<div class="<%= _this.cssClass ('subheader') %>">As a background</div>
-	<div id="<%. idPrefix %>-asBackground" class="<%= _this.cssClass ('asBg') %>">
-		<span class="<%= _this.cssClass ('whiteText') %>">white text</span>&nbsp;&nbsp;
-		<span class="<%= _this.cssClass ('blackText') %>">black text</span>
+%>	<div id="<%. idPrefix %>-swatch" class="<%= m.cssClass ('swatch') %>"></div>
+	<div class="<%= m.cssClass ('subheader') %>">As a background</div>
+	<div id="<%. idPrefix %>-asBackground" class="<%= m.cssClass ('asBg') %>">
+		<span class="<%= m.cssClass ('whiteText') %>">white text</span>&nbsp;&nbsp;
+		<span class="<%= m.cssClass ('blackText') %>">black text</span>
 	</div>
-	<div class="<%= _this.cssClass ('subheader') %>">As a text color</div>
-	<div id="<%. idPrefix %>-asForeground" class="<%= _this.cssClass ('asColor') %>">
-		<div class="<%= _this.cssClass ('onWhite') %>"></div>
-		<div class="<%= _this.cssClass ('onBlack') %>"></div>
+	<div class="<%= m.cssClass ('subheader') %>">As a text color</div>
+	<div id="<%. idPrefix %>-asForeground" class="<%= m.cssClass ('asColor') %>">
+		<div class="<%= m.cssClass ('onWhite') %>"></div>
+		<div class="<%= m.cssClass ('onBlack') %>"></div>
 		<div style="position:relative; width:100%;">on white&nbsp;&nbsp;&nbsp;&nbsp;on black</div>
 	</div>
 <%@
 	endBlock ();
-%><%= Uize.Widgets.BoxWithHeading.Html.process.call (_this,Uize.copy (input,{body:body ()})) %>
+%><%= Uize.Widgets.BoxWithHeading.Html.process.call (m,Uize.copy (input,{body:body ()})) %>

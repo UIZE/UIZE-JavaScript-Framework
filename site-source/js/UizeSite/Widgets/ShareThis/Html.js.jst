@@ -3,12 +3,11 @@
 	input ({title:'string',url:'string'});
 %>
 <%
-	var _this = this;
 	function _shareLink (_serviceName,_linkPrefix,_linkParams,_serviceCode) {
-%><a target="_blank" href="<%= Uize.Url.resolve (_linkPrefix,_linkParams) -> tagAttributeValue %>" class="<%= _this.cssClass ('link') %> <%= _this.cssClass (_serviceCode) %>"><%= _serviceName %>...</a><%
+%><a target="_blank" href="<%= Uize.Url.resolve (_linkPrefix,_linkParams) -> tagAttributeValue %>" class="<%= m.cssClass ('link') %> <%= m.cssClass (_serviceCode) %>"><%= _serviceName %>...</a><%
 	}
 %>
-<div id="<%. idPrefix %>" class="<%= _this.rootNodeCssClasses () %>">
+<div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
 <%
 	_shareLink (
 		'Personal E-mail',

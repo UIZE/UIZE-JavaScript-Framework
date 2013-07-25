@@ -1,26 +1,24 @@
 <%@
 	input ({title:'string'});
 	required ('Uize.Widgets.BoxWithHeading.Html');
-%><%
-	var _this = this;
 %><%@
 	startBlock ('heading');
 %><span><%. title %></span>
-<%= _this.childHtml ({
+<%= m.childHtml ({
 	name:'clear',
 	size:'tiny',
 	text:'clear',
-	extraClasses:_this.cssClass ('clearButton')
+	extraClasses:m.cssClass ('clearButton')
 }) %>
 <%@
 	endBlock ();
 %><%@
 	startBlock ('body');
-%><div id="<%= _this.nodeId ('messages') %>" class="<%= _this.cssClass ('messages') %>"></div><%@
+%><div id="<%= m.nodeId ('messages') %>" class="<%= m.cssClass ('messages') %>"></div><%@
 	endBlock ();
 %><%=
 	Uize.Widgets.BoxWithHeading.Html.process.call (
-		_this,
+		m,
 		Uize.copy (
 			input,
 			{
