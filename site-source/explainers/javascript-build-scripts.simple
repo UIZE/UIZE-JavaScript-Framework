@@ -227,89 +227,41 @@ UIZE Config Options
 	Deprecated Config Options
 		The following UIZE config options were part of the old build system and have been deprecated with the adoption of the vastly improved build system.
 
-		alwaysBuild
-			A boolean, specifying whether the files that would be built by the build scripts should always be built, or if they should only be built if the source file has been modified since the last build.
-
-			Most of the build scripts are coded to only rebuild files if the source file was updated since the previous build (ie. the modification date of the source file is later than that of the built file). In cases where you want to force the scripts to rebuild all the files they would normally build, you can set =alwaysBuild= to =true=.
-
-		buildFolderPath
-			A string, specifying the path - relative to the folder containing the build scripts - to a folder into which built files should be placed.
-
-			When a value is specified for this optional build environment variable, built files will be populated into the specified build folder in a folder hierarchy that mirrors the folder hierarchy of the project. New folders are created inside the build folder as needed in order to house the built files. After the build scripts have run, the folder hierarchy inside the build folder will only match the folder hierarchy of the project if at least one file was built from every folder of the project, since folders are only created as needed for the built files. Of course, the build folder won't contain itself, since the build scripts don't consider the files inside the build folder as source material for building files (which is a good thing).
-
-			For an explanation of how this variable relates to the =sourceFolderName= build environment variable, consult the section `buildFolderPath vs sourceFolderName`.
-
-			NOTES
-			- if a value is specified for the related =sourceFolderName= build environment variable, then the =buildFolderPath= variable has no effect
-
 		doNotEnter
 			An array or regular expression, specifying folders that should not be entered by the build scripts.
 
 			For example, the regular expression value =/\\(css|images)$/= would prevent the build scripts from entering folders named =css= or =images=, and would be equivalent to the array value =['css','images']=. The benefit of a regular expression is that you can write matching rules to catch a host of different folders that you may wish the build scripts to avoid. As an example, the regular expression =/\\\.[^\\]*$/= would prevent the build scripts from entering folders that are prefixed with a "." (period character), which may indicate private or hidden system folders (eg. the Subversion source control system adds =.svn= folders to your project).
 
-			When a build script encounters a folder that the =doNotEnter= build environment variable indicates should not be entered, then the build script will not consider the files in that folder and will also not recurse deeper into the folder's subfolders. Such "do not enter" folders are, therefore, effectively dead ends. In addition to folders specified by the =doNotEnter= variable, the build scripts will also not enter any folder specified by the =buildFolderPath= build environment variable, so the build folder is implicitly a "do not enter" folder.
+			When a build script encounters a folder that the =doNotEnter= build environment variable indicates should not be entered, then the build script will not consider the files in that folder and will also not recurse deeper into the folder's subfolders. Such "do not enter" folders are, therefore, effectively dead ends.
 
 		dryRun
 			A boolean, specifying whether or not the build scripts should save built files.
 
-			By default, the build scripts will save the built files to the location determined by the values of the =buildFolderPath= and =sourceFolderName= UIZE config options. In cases where you just want to see what build actions are taken by a particular build script without having any files be modified, you can set =dryRun= to =true=.
-
-			When a build script is doing a dry run, it will still build the files and do everything that it normally would, except that it won't write the built files to the target location. A summary of all that would be done is output to a build script's associated log file(s), just as would be the case if you weren't doing a dry run. Doing a dry run and viewing the log files might be a good way to check that the target file paths are correct before doing a genuine build that would write files to the system.
+			In cases where you just want to see what build actions are taken by a particular build script without having any files be modified, you can set =dryRun= to =true=. When a build script is doing a dry run, it will still build the files and do everything that it normally would, except that it won't write the built files to the target location. A summary of all that would be done is output to a build script's associated log file(s), just as would be the case if you weren't doing a dry run. Doing a dry run and viewing the log files might be a good way to check that the target file paths are correct before doing a genuine build that would write files to the system.
 
 		sourceFolderName
 			A string, specifying the folder name for folders that contain source (ie. unscrunched) JavaScript files.
 
 			When a value is specified for this optional build environment variable, scrunched JavaScript files will be populated into the parent folder of the folder containing the source JavaScript files, and the name of the source folder must match the value of the =sourceFolderName= variable. For example, if the value of this variable is ='~source'=, then the JavaScript file with the path =js/~source/Uize.Color.js= will be scrunched because it is inside a folder named =~source=, and the scrunched file will be placed in the parent folder and have the path =js/Uize.Color.js=.
 
-			For an explanation of how this variable relates to the =buildFolderPath= build environment variable, consult the section `buildFolderPath vs sourceFolderName`.
+			You can locate your source JavaScript throughout the folder structure of your site in a specially named folder, where the scrunched version of JavaScript files in such folders are output to the parent folder.
 
-			NOTES
-			- if a value is specified for this variable, then the =buildFolderPath= build environment variable has no effect
+			You would have a folder structure something like...
 
-		buildFolderPath vs sourceFolderName
-			For certain build scripts the location for unscrunched and scrunched JavaScript files needs to be known.
+			....................................................
+			js/~source/Uize.Color.js
+			js/~source/Uize.Comm.Ajax.js     <-- source files
+			js/~source/Uize.Comm.Iframe.js
+			js/~source/Uize.Comm.Iframe.Upload.js
+			... ... ...
+			js/Uize.Color.js
+			js/Uize.Comm.Ajax.js             <-- scrunched files
+			js/Uize.Comm.Iframe.js
+			js/Uize.Comm.Iframe.Upload.js
+			... ... ...
+			....................................................
 
-			You can take one of two approaches in your project...
-
-			The buildFolderPath Approach
-				You can locate your source JavaScript throughout the folder structure of your site and then have the scrunched JavaScript be output to a separate build folder that contains a mirror of your site's folder hierarchy.
-
-				This is the =buildFolderPath= approach, and with this approach you would have a folder structure something like...
-
-				....................................................
-				js/Uize.Color.js
-				js/Uize.Comm.Ajax.js             <-- source files
-				js/Uize.Comm.Iframe.js
-				js/Uize.Comm.Iframe.Upload.js
-				... ... ...
-				bld/js/Uize.Color.js
-				bld/js/Uize.Comm.Ajax.js         <-- scrunched files
-				bld/js/Uize.Comm.Iframe.js
-				bld/js/Uize.Comm.Iframe.Upload.js
-				... ... ...
-				....................................................
-
-				Here, =buildFolderPath= is set to ='bld'=, while =sourceFolderName= is set to =''= (an empty string).
-
-			The sourceFolderName Approach
-				You can locate your source JavaScript throughout the folder structure of your site in a specially named folder, where the scrunched version of JavaScript files in such folders are output to the parent folder.
-
-				This is the =sourceFolderName= approach, and with this approach you would have a folder structure something like...
-
-				....................................................
-				js/~source/Uize.Color.js
-				js/~source/Uize.Comm.Ajax.js     <-- source files
-				js/~source/Uize.Comm.Iframe.js
-				js/~source/Uize.Comm.Iframe.Upload.js
-				... ... ...
-				js/Uize.Color.js
-				js/Uize.Comm.Ajax.js             <-- scrunched files
-				js/Uize.Comm.Iframe.js
-				js/Uize.Comm.Iframe.Upload.js
-				... ... ...
-				....................................................
-
-				Here, =sourceFolderName= is set to ='~source'=, while =buildFolderPath= is set to =''= (an empty string).
+			Here, =sourceFolderName= is set to ='~source'=.
 
 ### Writing Your Own Build Scripts
 	There's no saying that you need to be limited to the collection of convenient build scripts that are included with the UIZE JavaScript Framework download.
