@@ -137,10 +137,7 @@ Uize.module ({
 
 		return Uize.package ({
 			perform:function (_params) {
-				var
-					_endsWithDotJsRegExp = /\.js$/,
-					_sourceFolderName = _params.sourceFolderName
-				;
+				var _endsWithDotJsRegExp = /\.js$/;
 				if (!_nonI18nStringsDictionaryLookup)
 					_nonI18nStringsDictionaryLookup = Uize.lookup (_nonI18nStringsDictionary)
 				;
@@ -148,7 +145,7 @@ Uize.module ({
 					Uize.copyInto (
 						{
 							targetFolderPathCreator:function (_folderPath) {
-								return Uize.String.endsWith (_folderPath,_sourceFolderName) ? _folderPath : null;
+								return _folderPath;
 							},
 							targetFilenameCreator:function (_sourceFileName) {
 								return _endsWithDotJsRegExp.test (_sourceFileName) ? _sourceFileName : null;
@@ -218,7 +215,8 @@ Uize.module ({
 						_params,
 						{
 							alwaysBuild:true,
-							dryRun:true
+							dryRun:true,
+							rootFolderPath:_params.sourcePath
 						}
 					)
 				);

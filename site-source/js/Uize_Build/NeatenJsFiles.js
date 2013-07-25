@@ -58,7 +58,10 @@ Uize.module ({
 							}
 						},
 						_params,
-						{alwaysBuild:true}
+						{
+							alwaysBuild:true,
+							rootFolderPath:_params.sourcePath
+						}
 					)
 				);
 			}

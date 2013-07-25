@@ -42,15 +42,6 @@
 	testSequence:[
 		'build.js Uize.Build.RunUnitTests silent=true',
 		'build.js Uize.Build.RunUnitTests useSource=false silent=true'
-	],
-
-	/*** for the older build process ***/
-		alwaysBuild:false,
-		buildFolderPath:'site-built',
-		rootFolderPath:'site-source',
-		moduleFolderPath:'site-source/js',
-		doNotEnter:/\\(css|images|OLD|photos|Uize.*)$/,
-		dryRun:false,
-		sourceFolderName:''
+	]
 }
 
