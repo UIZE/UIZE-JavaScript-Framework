@@ -33,8 +33,8 @@ Uize.module ({
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addSample ({
-					title:'3D Rotation Viewer',
-					description:'Easily create a 3D rotation viewer in UIZE that lets users rotate the view of an object a full 360 degrees using a mouse, or finger on the Apple iPad.'
+					heading:'3D Rotation Viewer',
+					body:'Easily create a 3D rotation viewer in UIZE that lets users rotate the view of an object a full 360 degrees using a mouse, or finger on the Apple iPad.'
 				});
 			},
 
