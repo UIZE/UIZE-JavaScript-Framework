@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.GetInvolved.VisualSampler= class implements a visual sampler widget for the =UizeSite.Widgets.GetInvolved.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

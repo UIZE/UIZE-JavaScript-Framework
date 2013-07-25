@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Tooltip.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Tooltip.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

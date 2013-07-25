@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.TourBar.VisualSampler= class implements a visual sampler widget for the =UizeSite.Widgets.TourBar.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

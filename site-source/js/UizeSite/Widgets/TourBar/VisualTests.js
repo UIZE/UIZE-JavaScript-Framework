@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.TourBar.VisualTests= class implements a set of visual tests for the =UizeSite.Widgets.TourBar.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

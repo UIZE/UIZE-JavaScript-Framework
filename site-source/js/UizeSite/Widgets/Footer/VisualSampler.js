@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.Footer.VisualSampler= class implements a visual sampler widget for the =UizeSite.Widgets.Footer.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

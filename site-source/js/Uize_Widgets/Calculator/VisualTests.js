@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Calculator.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Calculator.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

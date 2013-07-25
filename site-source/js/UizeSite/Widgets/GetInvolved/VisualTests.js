@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.GetInvolved.VisualTests= class implements a set of visual tests for the =UizeSite.Widgets.GetInvolved.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

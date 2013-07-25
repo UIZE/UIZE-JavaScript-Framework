@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Calculator.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Calculator.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

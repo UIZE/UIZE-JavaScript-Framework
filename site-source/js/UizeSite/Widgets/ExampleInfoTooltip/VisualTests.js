@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.ExampleInfoTooltip.VisualTests= class implements a set of visual tests for the =UizeSite.Widgets.ExampleInfoTooltip.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
