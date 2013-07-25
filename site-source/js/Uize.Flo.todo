@@ -1,7 +1,8 @@
 Get it Ready for Release
-	- use it in a few places
-	- unit tests (only browser and NodeJS because of setTimeout availability?)
-	- documentation
+	- finish up implementation
+	- start using in a few places
+	- finish documentation
+	- implement unit tests (only browser and NodeJS because of setTimeout availability? Or create setTimeout patch for JScript in WSH?)
 
 - unresolved issues
 	- how do you know if an error has occured?
