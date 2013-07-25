@@ -19,7 +19,7 @@
 /*?
 	Introduction
 		The =Uize.Build.FileBuilders.SimpleDataPages= module defines a file builder for HTML pages derived from SimpleData (=.simpledata=) files.
-		
+
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		Functions defined in the file builder are called as instance methods on an instance of a subclass of the =Uize.Services.FileBuilderAdapter= class, so the functions can access instance methods implemented in this class.

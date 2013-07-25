@@ -182,7 +182,7 @@ Uize.module({
 													Uize.map (
 														_examples,
 														'"\\t\\t- [[" + value.url + "][" + value.title + "]] - " + value.description + "\\n"'
-													).join ('') 
+													).join ('')
 												)
 											: '\t\tThere are no dedicated showcase example pages for the =' + _moduleName + '= module.\n'
 									) +
