@@ -249,12 +249,13 @@ Uize.module ({
 						var
 							_this = this,
 							_children = _this.children,
-							_htmlChunks = [],
-							_htmlChunksLength = 0
+							_htmlChunks = ['<div id="' + _this.nodeId () + '">'],
+							_htmlChunksLength = 1
 						;
 						for (var _childName in _children)
 							_htmlChunks [_htmlChunksLength++] = _children [_childName].getHtml ()
 						;
+						_htmlChunks [_htmlChunksLength] = '</div>';
 						return _htmlChunks.join ('');
 					}
 				}
