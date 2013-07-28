@@ -230,7 +230,7 @@ Uize.module ({
 									);
 									_next ();
 								}
-							) ({breatheAfter:50}});
+							) ({breatheAfter:50});
 
 						_superclass.doMy (_this,'wireUi');
 
