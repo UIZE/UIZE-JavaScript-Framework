@@ -68,7 +68,8 @@ Uize.module ({
 		'Uize.Data.PathsTree',
 		'Uize.Data.Matches',
 		'Uize.String',
-		'Uize.Widget.V2'
+		'Uize.Widget.V2',
+		'Uize.Flo'
 	],
 	builder:function () {
 		'use strict';
@@ -154,25 +155,31 @@ Uize.module ({
 				if (_visualSamplers) {
 					_page.removeChild ('visualSamplers');
 					_visualSamplers.setNodeInnerHtml ('shell','');
+					_visualSamplers = null;
 				}
 				if (_selectedNamespace != _selectorPlaceholderText) {
-					var _visualSamplerModules = _visualSamplerModulesByNamespace [_selectedNamespace];
-					Uize.require (
-						_visualSamplerModules,
-						function () {
-							_visualSamplers = _page.addChild ('visualSamplers',Uize.Widget.V2);
-							Uize.forEach (
-								_visualSamplerModules,
-								function (_visualSamplerModule,_visualSamplerNo) {
+					(_visualSamplers = _page.addChild ('visualSamplers',Uize.Widget.V2,{built:false})).insertUi ();
+					var _visualSamplerProperties = {
+						built:false,
+						container:_visualSamplers.getNode (),
+						insertionMode:'inner bottom'
+					};
+					Uize.Flo.forEach (
+						function (_next) {_next (_visualSamplerModulesByNamespace [_selectedNamespace])},
+						function (_next) {
+							Uize.require (
+								_next.flo.value,
+								function (_visualSamplerModule) {
 									_visualSamplers.addChild (
-										'visualSampler' + _visualSamplerNo,
-										Uize.getModuleByName (_visualSamplerModule)
-									);
+										'visualSampler' + _next.flo.key,
+										_visualSamplerModule,
+										_visualSamplerProperties
+									).insertUi ();
+									_next ();
 								}
 							);
-							_visualSamplers.insertUi ();
 						}
-					);
+					) ({breatheAfter:500});
 				}
 			}
 			_page.wireNode ('selector','change',_handleSelection);

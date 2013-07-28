@@ -23,7 +23,8 @@ Uize.module ({
 		'Uize.Node.Tree',
 		'Uize.Widget.Tree.List',
 		'Uize.Url',
-		'Uize.Widgets.Tooltip.Widget'
+		'Uize.Widgets.Tooltip.Widget',
+		'Uize.Flo'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -166,77 +167,70 @@ Uize.module ({
 							;
 
 						/*** wire up link tooltip behavior ***/
-							var
-								_links = Uize.Node.find ({
-									root:Uize.Node.find ({className:'contents0'}) [0],
-									tagName:'A',
-									href:/.+/
-								}),
-								_linkNo = 0,
-								_wireNextLink = function () {
-									var _lastLinkNo = _links.length - 1;
-									if (_linkNo <= _lastLinkNo) {
-										for (
-											var _lastLinkToWireNo = Math.min (_lastLinkNo,_linkNo + 19);
-											_linkNo <= _lastLinkToWireNo;
-											_linkNo++
-										)
-											Uize.Node.wire (
-												_links [_linkNo],
-												{
-													onmouseover:function () {
-														var
-															_anchor = _getAnchorFromLinkTag (this),
-															_title,
-															_description
-														;
-														if (_anchor) {
-															var _itemSpecifier = [0];
-															_anchor.replace (
-																/\d+/g,
-																function (_sectionSpecifier) {
-																	_itemSpecifier.push (_sectionSpecifier - 1);
-																}
-															);
-															var _item =
-																(
-																	_contents.getItemInfoFromSpecifier (_itemSpecifier) ||
-																	_sacredEmptyObject
-																).item
-															;
-															if (_item) {
-																_title = _item.title;
-																_description = _item.description || '';
-															}
-														} else {
-															var
-																_href = this.getAttribute ('href'),
-																_urlParts = Uize.Url.from (_href)
-															;
-															if (
-																_urlParts.protocol == 'http:' &&
-																_urlParts.host.indexOf ('uize.com') == -1
-															) {
-																_title = 'LINK TO EXTERNAL SITE';
-																_description = _href;
-															}
+							Uize.Flo.forEach (
+								function (_next) {
+									_next (
+										Uize.Node.find ({
+											root:Uize.Node.find ({className:'contents0'}) [0],
+											tagName:'A',
+											href:/.+/
+										})
+									);
+								},
+								function (_next) {
+									Uize.Node.wire (
+										_next.flo.value,
+										{
+											onmouseover:function () {
+												var
+													_anchor = _getAnchorFromLinkTag (this),
+													_title,
+													_description
+												;
+												if (_anchor) {
+													var _itemSpecifier = [0];
+													_anchor.replace (
+														/\d+/g,
+														function (_sectionSpecifier) {
+															_itemSpecifier.push (_sectionSpecifier - 1);
 														}
-														if (_title && _description) {
-															_tooltip.set ({heading:_title,body:_description});
-															Uize.Tooltip.showTooltip (_tooltip.getNode ());
-														}
-													},
-													onmouseout:function () {
-														Uize.Tooltip.showTooltip (_tooltip.getNode (),false);
+													);
+													var _item =
+														(
+															_contents.getItemInfoFromSpecifier (_itemSpecifier) ||
+															_sacredEmptyObject
+														).item
+													;
+													if (_item) {
+														_title = _item.title;
+														_description = _item.description || '';
+													}
+												} else {
+													var
+														_href = this.getAttribute ('href'),
+														_urlParts = Uize.Url.from (_href)
+													;
+													if (
+														_urlParts.protocol == 'http:' &&
+														_urlParts.host.indexOf ('uize.com') == -1
+													) {
+														_title = 'LINK TO EXTERNAL SITE';
+														_description = _href;
 													}
 												}
-											)
-										;
-										setTimeout (_wireNextLink,0);
-									}
+												if (_title && _description) {
+													_tooltip.set ({heading:_title,body:_description});
+													Uize.Tooltip.showTooltip (_tooltip.getNode ());
+												}
+											},
+											onmouseout:function () {
+												Uize.Tooltip.showTooltip (_tooltip.getNode (),false);
+											}
+										}
+									);
+									_next ();
 								}
-							;
-							_wireNextLink ();
+							) ({breatheAfter:50}});
 
 						_superclass.doMy (_this,'wireUi');
 
