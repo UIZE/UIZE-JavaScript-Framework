@@ -21,25 +21,332 @@
 		The =Uize.Flo= module...
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Key Features
+			The =Uize.Flo= module offers a number of unique features that sets it apart from many other async libraries.
+
+			- *Supports Familiar Control Flow Constructs* - Unlike most async libraries, Flo supports familiar control flow constructs, with the ability to break from loop flos and return from "function" flos. Flo also supports multi-stage (a)synchronous if and switch conditional flos.
+			- *Supports Mixed Synchronous and Asynchronous Execution* - Unlike many async libraries that expect functions to be asynchronous (or even worse, force all synchronous execution to become asynchronous), Flo lets synchronous and asynchronous execution mix harmoniously, even allowing functions to dynamically be either synchronous or asynchronous, or to change between synchronous and asynchronous as an application evolves over time.
+			- *Has the Ability to Breathe* - Flo implements an innovative feature that allows you to configure a threshold for how long execution should remain synchronous before taking a "breath" by introducing an asynchronous interruption.
+			- *Regular Old Callbacks* - Unlike many other async libraries, Flo doesn not use promises or deferreds - just plain old callbacks - sweet and simple.
+			- *Works on Client and Server* - Flo works just as well in NodeJS as it does in a browser, so you can safely use it in code that might be executed on either side of the client-server divide.
+			- *No Compilation Required* - You don't need to set up any code pre-compilation process on a server, or anything like that, in order to use Flo in parts of your code - just require it and use it.
+			- *Works in Older Browsers* - Flo doesn't rely upon the features of newer versions of JavaScript, such as the =yield= statement, in order to work its magic. That means that your code using Flo can even run in IE7.
+			- *A Small Module* - The =Uize.Flo= module is relatively small for what it provides, at around 2K scrunched and gzipped.
+
+		### An Example
+			.
+
+	### In-depth
+		Basic Terminology
+			Flo Construct
+				A flo construct is a control flow construct that supports mixed synchronous/asynchronous execution.
+
+				Examples of flo constructs are blocks, loops, and conditional branches. Flo constructs are built from zero or more `flo statements`.
+
+			Flo Construct Method
+				A flo construct method is a method that creates a `flo instance generator` for a specific type of `flo construct`.
+
+				For example, the =flo.for= method is a flo construct method that creates a generator for instances of the for loop `flo construct`.
+
+			Flo Instance Generator
+				A flo instance generator is a function that, when called, creates a new `flo instance` and starts it running.
+
+			Flo Instance
+				A flo instance is a specific instance of execution of a `flo construct`.
+
+				A flo instance is created by calling a `flo instance generator` and manages execution of the `flo statements` for the `flo construct`.
+
+			Flo Statement ~~ Flo Statements
+				A flo construct is built from zero or more flo statements.
+
+		Different Types of Flos
+			Block Flo
+				The block flow is the most basic type of flo and is the building block for all other types flo types.
+
+				The block flo is most analagous to a statement block in synchronous coding. A block is essentially a set of `flo statements` that is executed sequentially. Once all flo statements in a block have been executed, the callback for the block is called, which may be the continuation function for a parent block (see `Flos Can Have Children`).
+
+				Blocks Can be Aborted
+					.
+
+				Any Statement Can be Substituted by a Block
+					Since the signature of a block is identical to the signature of a `flo statement`, any statement can be substituted by a block.
+
+				Blocks Can be Nested
+					.
+
+				Flos Are Composable
+					The signature of a block flo is identical to the signature of a `flo statement`, which means that blocks (all types) are inherently composable.
+
+					It may at first seem counterintuitive that the =flo.for= method returns a function, for instance, and that you have to call that function it in order to run the loop. A more typical alternative, found in some other asynchronous libraries, is to have the asynchronous control flow methods execute their action immediately upon being called, but this makes composition a little more tedious. It also doesn't lend itself as well to allowing a control flow to be handed off to others to be invoked multiple times (possibly concurrently). Once again, you can still do this with these libraries, but it requires a bit more wrapper code.
+
+					ONE APPROACH
+					...
+					someLibrary.while (
+						testFunction,
+						iterationFunction,
+						callback
+					)
+					...
+
+					THE FLO APPROACH
+					...
+					flo.while (
+						testFunction,
+						iterationFunction
+					) (callback)
+					...
+
+					Sequenced Nested
+						ONE APPROACH
+						...
+						someLibrary.sequence (
+							function (next) {
+								someLibrary.while (testFunction,iterationFunction,next);
+							},
+							function (next) {
+								someLibrary.while (testFunction,iterationFunction,next);
+							},
+							callback
+						)
+						...
+
+						THE FLO APPROACH
+						...
+						flo.block (
+							flo.while (testFunction,iterationFunction),
+							flo.while (testFunction,iterationFunction)
+						) (callback)
+						...
+
+				An Undefined Statement is Skipped
+					.
+
+				Literal Result Statements
+					.
+
+				Flo Statement ~~ Flo Statements
+					The atomic unit of a flo is a flo statement.
+
+					How Flo Statements are Called
+						.
+
+						With Flo Instance as Context
+							.
+
+						The Continuation Function
+							.
+
+						Function Flo First Statement
+							.
+
+			Loop Flos
+				The flo library provides the basic looping control flow constructs that programmers will be familiar with.
+
+				The basic library doesn't aim to dramatically expand the types of looping constructs available - it is the intention that other extension / plug-in libraries might provide more exotic looping constructs for other types of applications.
+
+				The flo library provides the following methods for creating the most basic, tried and tested looping constructs...
+
+				- =do= - create a do...while loop flo invoker
+				- =for= - create a for loop flo invoker
+				- =forIn= - create a for...in loop flo invoker
+				- =forEach= - create a foreach loop flo invoker
+				- =ongoing= - create an ongoing loop flo invoker (like a while-true type loop)
+				- =while= - create a while loop flo invoker
+
+				Breakable
+					All of the looping constructs provided in the flo library are breakable.
+
+					The way that flo works, you can break a loop (like an (a)synchronous while loop) from anywhere inside a deeply nested child flo, simply by calling the break method on the child flo object. The end result is exactly what you would expect from a normal, synchronous while loop - the loop is terminated and flow continues at the next statement after the loop.
+
+					Consider the following example...
+
+					...
+					flo.while (
+						function () {},
+						function () {}
+					);
+					...
+
+				I Can Has "While True"?
+					Yes, you most certainly can has "while true".
+
+					......................................................
+					var items = ['foo','bar','baz','qux','hello','world'];
+					function getAnotherItemAsync (callback) {
+						setTimeout (function () {
+							callback (items.shift ());
+						}, 100);
+					}
+
+					flo.while (
+						true,
+						function (next) {
+							getAnotherItemAsync (function (item) {
+								if (item == undefined) {
+									return next.flo.break ();
+								}
+								console.log (item);
+								next ();
+							});
+						}
+					) (function () {
+						console.log ('ran out of items');
+					});
+					......................................................
+
+					...or...
+
+					.........................................
+					flo.ongoing (function (next) {
+						getAnotherItemAsync (function (item) {
+							if (item == undefined) {
+								return next.flo.break ();
+							}
+							console.log (item);
+							next ();
+						});
+					}) (function () {
+						console.log ('ran out of items');
+					});
+					.........................................
+
+				Externally Breakable
+					.
+
+				Storing Loop State
+					.
+
+			Function Flos
+				.
+
+				- =function= - create a function flo
+
+				Receiving Arguments in a Function Flo
+					Function Flo First Statement
+						.
+
+				Returning from a Function Flo
+					.
+
+					Returning a Result
+						.
+
+						Passing the Result in the Return
+							.
+
+						Setting the Result Via Continuation
+							.
+
+					Calling a Function Flo
+						.
+
+			Conditional Flos
+				.
+
+				- =if= - create a multi-stage if...then...elseif...then...else... flo
+				- =switch= - create a multi-case switch flo
+
+			More About Flos
+				Flos are Repeatable
+					.
+
+				Flos are Composable
+					.
+
+				Flos Can Run Concurrently
+					.
+
+				Flos are Multi-instantiable
+					.
+
+				Flos Can Have Children
+					.
+
+		Overview of the Methods
+			Flo Creation Methods
+				.
+
+				- =block= -
+				- =do= -
+				- =for= -
+				- =forIn= -
+				- =function= -
+				- =while= -
+
+			Control Flow Methods
+				.
+
+				- =abort= -
+				- =break= -
+				- =continue= -
+				- =next= -
+				- =return= -
+
+				Call Methods on the Current Flo
+					.
+
+					Current Flo Accessible on Continuation Function
+						.
+
+				Return on Control Flow Methods, Unless Last to Execute
+					.
+
+			Flo Error Handling Methods
+				.
+
+				- =try=
+				- =throw=
+
+		Advanced Topics
+			Mixing Synchronous and Asynchronous
+				.
+
+			Learning How to Breathe
+				.
+
+			Flo Parenting
+				.
+
+			Error Handling
+				Throwing and Catching Errors
+					.
+
+			Storing Flo State
+				Using the flo Object
+					.
+
+				Using a Closure
+					.
 */
 
 Uize.module ({
 	name:'Uize.Flo',
 	builder:function () {
+		'use strict';
+
 		var
 			_isArray = Uize.isArray,
 			_isFunction = Uize.isFunction,
 			_arraySlice = [].slice,
-			_loopProperties = {isBreakable:true,isContinuable:true}
+			_loopProperties = {isBreakable:true,isContinuable:true},
+			_sacredEmptyObject = {}
 		;
 
 		/*** Utility Functions ***/
 			function _block (_creationFlo,_statements,_properties) {
-				return function () {
+				var _floInvoker = function () {
 					var
 						_arguments = arguments,
 						_argumentsLengthMinus1 = _arguments.length - 1,
-						_callback = _arguments [_argumentsLengthMinus1],
+						_lastArgument = _arguments [_argumentsLengthMinus1],
+						_invokationProperties = !_lastArgument
+							? _sacredEmptyObject
+							: Uize.isPlainObject (_lastArgument)
+								? _lastArgument
+								: {callback:_lastArgument}
+						,
+						_callback = _invokationProperties.callback,
 						_flo = new _class (_creationFlo,(_callback && _callback.flo) || this),
 						_floNext = _flo.floNext = function () {
 							arguments.length ? _next.apply (_flo,arguments) : _flo.next ();
@@ -48,13 +355,53 @@ Uize.module ({
 					_floNext.flo = _flo;
 					_flo.statements = _statements;
 					_flo.callback = _callback;
+					_flo.breathe =
+						(
+							'breatheAfter' in _floInvoker || 'breatheFor' in _floInvoker ||
+							'breatheAfter' in _invokationProperties || 'breatheFor' in _invokationProperties
+						)
+						? Uize.copy (_floInvoker,_invokationProperties,{lastBreath:Uize.now ()})
+						: _flo.parent && _flo.parent.breathe
+					;
 					_properties && Uize.copyInto (_flo,_properties);
 					if (_flo.isFunction)
 						_flo.arguments = _argumentsLengthMinus1 ? _arraySlice.call (_arguments,0,_argumentsLengthMinus1) : []
 					;
 					_flo.next ();
 					return _flo;
-				}
+				};
+				return _floInvoker;
+			}
+
+			function _forInOrEach (_creationFlo,_getItems,_iteration,_eachStyle) {
+				return _creationFlo.for (
+					_getItems,
+					function () {
+						var _flo = this;
+						if (_flo.keyNo == undefined) { // do one time initialization
+							/* TODO:
+								if for loop is each style...
+									- support iterator
+									- support number of iterations
+									- support range
+									- could support all these by coming up with a universal iterator wrapper and using it as authority
+							*/
+							var
+								_items = _flo.items = _flo.result,
+								_itemsIsArray = _flo.itemsIsArray = _eachStyle && Uize.isArray (_items)
+							;
+							_flo.totalKeys = _itemsIsArray ? _items.length : (_flo.keys = Uize.keys (_items)).length;
+							_flo.keyNo = 0;
+						}
+						var _doIteration = _flo.keyNo < _flo.totalKeys;
+						if (_doIteration)
+							_flo.value = _flo.items [_flo.key = _flo.itemsIsArray ? _flo.keyNo : _flo.keys [_flo.keyNo]]
+						;
+						_flo.next (_doIteration);
+					},
+					function () {this.keyNo++; this.next ()},
+					_iteration
+				);
 			}
 
 			function _next (_result) {
@@ -66,7 +413,11 @@ Uize.module ({
 				if (!_flo.inNext) {
 					var
 						_statements = _flo.statements,
-						_statement
+						_statement,
+						_breathe = _flo.breathe
+					;
+					if (_breathe)
+						_breathe.lastBreath = Uize.now ()
 					;
 					_flo.inNext = true;
 					while (_flo.isSynchronous) {
@@ -93,6 +444,12 @@ Uize.module ({
 									_flo.result = _statement
 								;
 								_flo.isSynchronous = true;
+							}
+						}
+						if (_flo.isSynchronous) {
+							if (_breathe && Uize.now () - _breathe.lastBreath >= (_breathe.breatheAfter || 0)) {
+								_flo.isSynchronous = false;
+								setTimeout (_flo.floNext,_breathe.breatheFor || 0);
 							}
 						}
 					}
@@ -181,6 +538,16 @@ Uize.module ({
 						Instance Methods
 							block
 								Creates a parented block flo that will sequentially execute a set of statements, where any or all of the statements can be either synchronous or asynchronous.
+
+								SYNTAX
+								............................
+								floInvokerFUNC = flo.block (
+									statement0FUNC,
+									statement1FUNC,
+									...,
+									statementNFUNC
+								);
+								............................
 					*/
 				},
 
@@ -253,6 +620,55 @@ Uize.module ({
 						}
 					}
 					return _block (this,_blockStatements);
+					/*?
+						Instance Methods
+							if
+								Creates an if flo, with support for an arbitrary number of optional elseif sections and an optional final else statement, and where any or all of the statements can be either synchronous or asynchronous.
+
+								DIFFERENT USAGES
+
+								`Create a Simple if...then Flo`
+								.........................
+								floInvokerFUNC = flo.if (
+									testStatementFUNC,
+									thenStatementFUNC
+								)
+								.........................
+
+								`Create an if...then...else Flo`
+								.........................
+								floInvokerFUNC = flo.if (
+									testStatementFUNC,
+									thenStatementFUNC,
+									elseStatementFUNC
+								)
+								.........................
+
+								`Create an if...then...elseif...then Flo`
+								...........................
+								floInvokerFUNC = flo.if (
+									testStatementFUNC,
+									thenStatementFUNC,
+									elseifTestStatementFUNC,
+									elseifThenStatementFUNC
+								)
+								...........................
+
+								`Create an if...then...elseif...then...else Flo`
+								...........................
+								floInvokerFUNC = flo.if (
+									testStatementFUNC,
+									thenStatementFUNC,
+									elseifTestStatementFUNC,
+									elseifThenStatementFUNC,
+									elseStatementFUNC
+								)
+								...........................
+
+						Static Methods
+							Uize.Flo.if
+								Same as for the =if= instance method, but creates a `flo invoker` with no imposed parent flo.
+					*/
 				},
 
 				for:function (_setup,_test,_updateCount,_iteration) {
@@ -268,43 +684,151 @@ Uize.module ({
 						],
 						_loopProperties
 					);
+					/*?
+						Instance Methods
+							for
+								Creates a for flo, where any or all of the setup, test, advance, and iteration statements can be either synchronous or asynchronous.
+
+								SYNTAX
+								.........................
+								floInvokerFUNC = flo.for (
+									setupStatementFUNC,
+									testStatementFUNC,
+									advanceStatementFUNC,
+									iterationStatementFUNC
+								)
+								.........................
+
+								EXAMPLE
+								...
+								...
+
+					*/
 				},
 
 				forIn:function (_getItems,_iteration) {
-					return this.for (
-						_getItems,
-						function () {
-							var _flo = this;
-							if (_flo.keyNo == undefined) {
-								// do one time initialization
-								_flo.keyNo = 0;
-								_flo.totalKeys = (_flo.keys = Uize.keys (_flo.items = _flo.result)).length;
-							}
-							var _doIteration = _flo.keyNo < _flo.totalKeys;
-							if (_doIteration)
-								_flo.value = _flo.items [_flo.key = _flo.keys [_flo.keyNo]]
-							;
-							_flo.next (_doIteration);
-						},
-						function () {this.keyNo++; this.next ()},
-						_iteration
-					);
+					return _forInOrEach (this,_getItems,_iteration);
+					/*?
+						Instance Methods
+							forIn
+								SYNTAX
+								................................
+								floInvokerFUNC = flo.forIn (
+									sourceGeneratorStatementFUNC,
+									iterationStatementFUNC
+								)
+								................................
+
+								NOTES
+					*/
+				},
+
+				forEach:function (_getItems,_iteration) {
+					return _forInOrEach (this,_getItems,_iteration,true);
+					/*?
+						Instance Methods
+							forEach
+								.
+
+								SYNTAX
+								................................
+								floInvokerFUNC = flo.while (
+									sourceGeneratorStatementFUNC,
+									iterationStatementFUNC
+								)
+								................................
+
+								NOTES
+					*/
 				},
 
 				while:function (_test,_iteration) {
 					return _block (this,[_test,_ifResultFalseAbortStatement,_iteration,_restartStatement],_loopProperties);
+					/*?
+						Instance Methods
+							while
+								.
+
+								SYNTAX
+								............................
+								floInvokerFUNC = flo.while (
+									testStatementFUNC,
+									iterationStatementFUNC
+								)
+								............................
+					*/
 				},
 
 				ongoing:function () {
 					return _block (this,_arraySlice.call (arguments,0).concat (_restartStatement),_loopProperties);
+					/*?
+						Instance Methods
+							ongoing
+								Returns a `flo invoker` function for invoking a flo that executes the specified one or more statements in an ongoing loop.
+
+								SYNTAX
+								..............................
+								floInvokerFUNC = flo.ongoing (
+									statement0FUNC,
+									statement1FUNC,
+									...,
+									statementNFUNC
+								)
+								..............................
+
+								Breaking an Ongoing Loop
+									Because an ongoing loop flo has no built-in terminating test step, it is your responsibility to break the loop. This can be done in one of two ways...
+
+									- *internal break* - within any statement of the flo or any sub-flo, the =break= instance method can be called to break the execution of the ongoing loop
+									- *external break* - provided that code external to the flo has a reference to the flo or one of its sub-flos, the =break= instance method can be called on such a reference in order to break execution of the ongoing loop
+
+								Beware of Synchronous Ongoing Loops
+									.
+
+								You May Want to Breathe
+									.
+					*/
 				},
 
 				do:function (_iteration,_test) {
 					return _block (this,[_iteration,_test,_ifResultFalseAbortStatement,_restartStatement],_loopProperties);
+					/*?
+						Instance Methods
+							do
+								Create a =do...while= loop flo
+
+								SYNTAX
+								.........................
+								floInvokerFUNC = flo.do (
+									iterationStatementFUNC
+									testStatementFUNC,
+								)
+								.........................
+
+								EXAMPLE
+								...
+								...
+					*/
 				},
 
 				try:function (_try,_catch) {
 					return _block (this,[_block (_flo,[_try],{isTry:true}),_abortStatement,_catch]);
+					/*?
+						Instance Methods
+							try
+								.
+
+								SYNTAX
+								..........................
+								floInvokerFUNC = flo.try (
+									tryStatementFUNC,
+									catchStatementFUNC
+								);
+								..........................
+
+								NOTES
+								- see also the related =throw= instance method
+					*/
 				},
 
 				switch:function () {
@@ -337,6 +861,37 @@ Uize.module ({
 						_blockStatements.push (_statements [_statementNo])
 					;
 					return _block (this,_blockStatements,{isBreakable:true});
+					/*?
+						Instance Methods
+							switch
+								Creates a switch flo, with support for an arbitrary number of case sections and an optional default statement, and and where any or all of the statements can be either synchronous or asynchronous.
+
+								SYNTAX
+								.............................
+								floInvokerFUNC = flo.switch (
+									switchExpressionFUNC,
+
+									case0ExpressionFUNC,
+									case0StatementFUNC,
+
+									case1ExpressionFUNC,
+									case1StatementFUNC,
+
+									...
+
+									caseNExpressionFUNC,
+									caseNStatementFUNC,
+
+									defaultStatementFUNC
+								)
+								.............................
+
+								Breaking from a Switch Flo
+									.
+
+							NOTES
+							- see also the related =if= instance method
+					*/
 				},
 
 				call:function () {
@@ -346,6 +901,24 @@ Uize.module ({
 
 				function:function () {
 					return _block (this,arguments,{isFunction:true});
+					/*?
+						Instance Methods
+							function
+								.
+
+								SYNTAX
+								...............................
+								floInvokerFUNC = flo.function (
+									statement0FUNC,
+									statement1FUNC,
+									...,
+									statementNFUNC
+								);
+								...............................
+
+								NOTES
+								- see also the related =return= instance method
+					*/
 				}
 			}
 		;
@@ -397,6 +970,23 @@ Uize.module ({
 				},
 
 				next:_next,
+					/*?
+						Instance Methods
+							next
+								Continues execution of the flo on which the method is called, optionally passing back a result value.
+
+								DIFFERENT USAGES
+
+								`Advance to the Next Statement`
+								............
+								flo.next ();
+								............
+
+								`Advance to the Next Statement, Passing a Result Value`
+								.........................
+								flo.next (resultANYTYPE);
+								.........................
+					*/
 
 				continue:function () {
 					_findApplicableFloUpFloChain (
@@ -408,6 +998,19 @@ Uize.module ({
 						},
 						'Can\'t call continue outside of a continuable flo'
 					);
+					/*?
+						Instance Methods
+							continue
+								.
+
+								SYNTAX
+								................
+								flo.continue ();
+								................
+
+								NOTES
+								- see also the related =break= instance method
+					*/
 				},
 
 				break:function () {
@@ -461,6 +1064,25 @@ Uize.module ({
 						},
 						'Can\'t call return outside of a function flo'
 					);
+					/*?
+						Instance Methods
+							return
+								Returns from the nearest function flo up the flo chain.
+
+								DIFFERENT USAGES
+
+								`Return from a Function Flo`
+								.............
+								flo.return ()
+								.............
+
+								Must be Within a Function Flo
+									If the =return= method is called on a flo and there is no function flo up the parent chain, then an error will be thrown.
+
+									EXAMPLE
+									...
+									...
+					*/
 				},
 
 				throw:function (_error) {
@@ -476,6 +1098,19 @@ Uize.module ({
 						},
 						_error
 					);
+					/*?
+						Instance Methods
+							throw
+								.
+
+								SYNTAX
+								..........................
+								flo.throw (errorSTRorOBJ);
+								..........................
+
+								NOTES
+								- see also the related =try= instance method
+					*/
 				}
 			}
 		);
