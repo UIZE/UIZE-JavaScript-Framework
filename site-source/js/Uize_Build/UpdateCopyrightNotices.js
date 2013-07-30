@@ -38,53 +38,47 @@ Uize.module ({
 		return Uize.package ({
 			perform:function (_params) {
 				var _thisYear = (new Date).getFullYear ();
-				Uize.Build.Util.buildFiles (
-					Uize.copyInto (
-						{
-							targetFolderPathCreator:function (_folderPath) {
-								return _folderPath;
-							},
-							targetFilenameCreator:function (_sourceFileName) {
-								return /\.(js|jst)$/.test (_sourceFileName) ? _sourceFileName : null;
-							},
-							fileBuilder:function (_sourceFileName,_sourceFileText) {
-								var _copyrightNoticeMatch = _sourceFileText.match (_copyrightNoticeRegExp);
-								if (_copyrightNoticeMatch) {
-									var _oldCopyrightNotice = _copyrightNoticeMatch [0];
-									if (_oldCopyrightNotice == '(c)' + _thisYear) {
-										_copyrightNoticeMatch = null;
-									} else {
-										var
-											_endYearMatch = _oldCopyrightNotice.match (_copyrightNoticeEndYearRegExp),
-											_newCopyrightNotice = _endYearMatch
-												? _oldCopyrightNotice.replace (_copyrightNoticeEndYearRegExp,'$1' + _thisYear)
-												: _oldCopyrightNotice + '-' + _thisYear,
-											_updatedaSourceFileText =
-												_sourceFileText.replace (_oldCopyrightNotice,_newCopyrightNotice)
-										;
-									}
-								}
-								return (
-									_copyrightNoticeMatch &&
-									_updatedaSourceFileText != _sourceFileText
-										? {
-											outputText:_updatedaSourceFileText,
-											logDetails:
-												'\t\tCopyright Notice Updated:\n' +
-												'\t\t\tWAS: ' + _oldCopyrightNotice + '\n' +
-												'\t\t\tNOW: ' + _newCopyrightNotice + '\n'
-										}
-										: {logDetails:'\t\tFILE ALREADY OK\n'}
-								);
+				Uize.Build.Util.buildFiles ({
+					targetFolderPathCreator:function (_folderPath) {
+						return _folderPath;
+					},
+					targetFilenameCreator:function (_sourceFileName) {
+						return /\.(js|jst)$/.test (_sourceFileName) ? _sourceFileName : null;
+					},
+					fileBuilder:function (_sourceFileName,_sourceFileText) {
+						var _copyrightNoticeMatch = _sourceFileText.match (_copyrightNoticeRegExp);
+						if (_copyrightNoticeMatch) {
+							var _oldCopyrightNotice = _copyrightNoticeMatch [0];
+							if (_oldCopyrightNotice == '(c)' + _thisYear) {
+								_copyrightNoticeMatch = null;
+							} else {
+								var
+									_endYearMatch = _oldCopyrightNotice.match (_copyrightNoticeEndYearRegExp),
+									_newCopyrightNotice = _endYearMatch
+										? _oldCopyrightNotice.replace (_copyrightNoticeEndYearRegExp,'$1' + _thisYear)
+										: _oldCopyrightNotice + '-' + _thisYear,
+									_updatedaSourceFileText =
+										_sourceFileText.replace (_oldCopyrightNotice,_newCopyrightNotice)
+								;
 							}
-						},
-						_params,
-						{
-							alwaysBuild:true,
-							rootFolderPath:_params.sourcePath
 						}
-					)
-				);
+						return (
+							_copyrightNoticeMatch &&
+							_updatedaSourceFileText != _sourceFileText
+								? {
+									outputText:_updatedaSourceFileText,
+									logDetails:
+										'\t\tCopyright Notice Updated:\n' +
+										'\t\t\tWAS: ' + _oldCopyrightNotice + '\n' +
+										'\t\t\tNOW: ' + _newCopyrightNotice + '\n'
+								}
+								: {logDetails:'\t\tFILE ALREADY OK\n'}
+						);
+					},
+					alwaysBuild:true,
+					rootFolderPath:_params.sourcePath,
+					logFilePath:_params.logFilePath
+				});
 			}
 		});
 	}

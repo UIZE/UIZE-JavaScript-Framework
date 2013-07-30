@@ -141,85 +141,79 @@ Uize.module ({
 				if (!_nonI18nStringsDictionaryLookup)
 					_nonI18nStringsDictionaryLookup = Uize.lookup (_nonI18nStringsDictionary)
 				;
-				Uize.Build.Util.buildFiles (
-					Uize.copyInto (
-						{
-							targetFolderPathCreator:function (_folderPath) {
-								return _folderPath;
-							},
-							targetFilenameCreator:function (_sourceFileName) {
-								return _endsWithDotJsRegExp.test (_sourceFileName) ? _sourceFileName : null;
-							},
-							fileBuilder:function (_sourceFileName,_sourceFileText) {
-								var
-									_scruncherResult = Uize.Build.Scruncher.scrunch (_sourceFileText,{AUDITSTRINGS:true}),
-									_stringsMap = _scruncherResult.stringsMap,
-									_strings = Uize.keys (_stringsMap),
-									_nonI18nStrings = [],
-									_likelyNonI18nStrings = [],
-									_possibleI18nStrings = [],
-									_likelyI18nStrings = []
-								;
-								_strings.sort ();
-								for (var _stringNo = -1, _stringsLength = _strings.length; ++_stringNo < _stringsLength;) {
-									var _string = _strings [_stringNo];
-									(
-										_nonI18nStringsDictionaryLookup [_string] ||
-											// ignore strings that are recognized as non-internationalizable strings
-										!/\S/.test (_string) ||
-											// ignore strings that are only whitespace (spaces, tabs, linebreaks, etc.)
-										!/[a-zA-Z]/.test (_string) ||
-											// ignore strings that have no letter characters
-										/^(#|0x)([0-9a-fA-F]{3}){1,2}$/.test (_string) ||
-											// ignore hex RGB color values
-										/^[A-Z][a-zA-Z0-9$_]*(\.[a-zA-Z0-9$_]+)+$/.test (_string) ||
-											// ignore what look like module names
-										/^Uize/i.test (_string) ||
-											// if it starts with "Uize", it's related to the framework
-										/^[a-zA-Z0-9$_]*_[a-zA-Z0-9$_]*$/.test (_string) ||
-											// ignore what look like underscore delimited identifiers
-										/^Changed\.(\*|[a-zA-Z0-1]+)$/.test (_string) ||
-											// ignore Changed.[propertyName] events
-										/^\S*[\/\\][\w_]+[\/\\]\S*$/.test (_string) ||
-											// ignore what look like URL paths
-										/^\$?[a-zA-Z][a-z0-9]*([A-Z][a-z0-9]+)+$/.test (_string)
-											// ignore what look obviously like camelCase identifiers
-										/* TO DO: catch strings that are only numbers */
-											? _nonI18nStrings
-											: (
-												/[a-zA-Z]{2,}/.test (_string) &&
-													// string must have at least two consecutive word characters
-												!/^\S*[\w_]+[\/\\][\w_]+\S*$/.test (_string)
-													// ignore what could be short URL snippets
-													? (
-														/\b[a-zA-Z][a-z]*\s[a-z]+\s[a-zA-Z][a-z]*\b/.test (_string)
-															? _likelyI18nStrings
-															: _possibleI18nStrings
-													) : _likelyNonI18nStrings
-											)
-									).push (_string + ' --- ' + _stringsMap [_string]);
-								}
-								return {
-									logDetails:
-										'\t\tNON-INTERNATIONALIZABLE STRINGS\n' +
-											Uize.String.hugJoin (_nonI18nStrings,'\t\t\t','\n') + '\n' +
-										'\t\tLIKELY NON-INTERNATIONALIZABLE STRINGS\n' +
-											Uize.String.hugJoin (_likelyNonI18nStrings,'\t\t\t','\n') + '\n' +
-										'\t\tPOSSIBLY INTERNATIONALIZABLE STRINGS\n' +
-											Uize.String.hugJoin (_possibleI18nStrings,'\t\t\t','\n') + '\n' +
-										'\t\tLIKELY INTERNATIONALIZABLE STRINGS\n' +
-											Uize.String.hugJoin (_likelyI18nStrings,'\t\t\t','\n')
-								};
-							}
-						},
-						_params,
-						{
-							alwaysBuild:true,
-							dryRun:true,
-							rootFolderPath:_params.sourcePath
+				Uize.Build.Util.buildFiles ({
+					targetFolderPathCreator:function (_folderPath) {
+						return _folderPath;
+					},
+					targetFilenameCreator:function (_sourceFileName) {
+						return _endsWithDotJsRegExp.test (_sourceFileName) ? _sourceFileName : null;
+					},
+					fileBuilder:function (_sourceFileName,_sourceFileText) {
+						var
+							_scruncherResult = Uize.Build.Scruncher.scrunch (_sourceFileText,{AUDITSTRINGS:true}),
+							_stringsMap = _scruncherResult.stringsMap,
+							_strings = Uize.keys (_stringsMap),
+							_nonI18nStrings = [],
+							_likelyNonI18nStrings = [],
+							_possibleI18nStrings = [],
+							_likelyI18nStrings = []
+						;
+						_strings.sort ();
+						for (var _stringNo = -1, _stringsLength = _strings.length; ++_stringNo < _stringsLength;) {
+							var _string = _strings [_stringNo];
+							(
+								_nonI18nStringsDictionaryLookup [_string] ||
+									// ignore strings that are recognized as non-internationalizable strings
+								!/\S/.test (_string) ||
+									// ignore strings that are only whitespace (spaces, tabs, linebreaks, etc.)
+								!/[a-zA-Z]/.test (_string) ||
+									// ignore strings that have no letter characters
+								/^(#|0x)([0-9a-fA-F]{3}){1,2}$/.test (_string) ||
+									// ignore hex RGB color values
+								/^[A-Z][a-zA-Z0-9$_]*(\.[a-zA-Z0-9$_]+)+$/.test (_string) ||
+									// ignore what look like module names
+								/^Uize/i.test (_string) ||
+									// if it starts with "Uize", it's related to the framework
+								/^[a-zA-Z0-9$_]*_[a-zA-Z0-9$_]*$/.test (_string) ||
+									// ignore what look like underscore delimited identifiers
+								/^Changed\.(\*|[a-zA-Z0-1]+)$/.test (_string) ||
+									// ignore Changed.[propertyName] events
+								/^\S*[\/\\][\w_]+[\/\\]\S*$/.test (_string) ||
+									// ignore what look like URL paths
+								/^\$?[a-zA-Z][a-z0-9]*([A-Z][a-z0-9]+)+$/.test (_string)
+									// ignore what look obviously like camelCase identifiers
+								/* TO DO: catch strings that are only numbers */
+									? _nonI18nStrings
+									: (
+										/[a-zA-Z]{2,}/.test (_string) &&
+											// string must have at least two consecutive word characters
+										!/^\S*[\w_]+[\/\\][\w_]+\S*$/.test (_string)
+											// ignore what could be short URL snippets
+											? (
+												/\b[a-zA-Z][a-z]*\s[a-z]+\s[a-zA-Z][a-z]*\b/.test (_string)
+													? _likelyI18nStrings
+													: _possibleI18nStrings
+											) : _likelyNonI18nStrings
+									)
+							).push (_string + ' --- ' + _stringsMap [_string]);
 						}
-					)
-				);
+						return {
+							logDetails:
+								'\t\tNON-INTERNATIONALIZABLE STRINGS\n' +
+									Uize.String.hugJoin (_nonI18nStrings,'\t\t\t','\n') + '\n' +
+								'\t\tLIKELY NON-INTERNATIONALIZABLE STRINGS\n' +
+									Uize.String.hugJoin (_likelyNonI18nStrings,'\t\t\t','\n') + '\n' +
+								'\t\tPOSSIBLY INTERNATIONALIZABLE STRINGS\n' +
+									Uize.String.hugJoin (_possibleI18nStrings,'\t\t\t','\n') + '\n' +
+								'\t\tLIKELY INTERNATIONALIZABLE STRINGS\n' +
+									Uize.String.hugJoin (_likelyI18nStrings,'\t\t\t','\n')
+						};
+					},
+					alwaysBuild:true,
+					dryRun:true,
+					rootFolderPath:_params.sourcePath,
+					logFilePath:_params.logFilePath
+				});
 			}
 		});
 	}

@@ -34,36 +34,30 @@ Uize.module ({
 
 		return Uize.package ({
 			perform:function (_params) {
-				Uize.Build.Util.buildFiles (
-					Uize.copyInto (
-						{
-							targetFolderPathCreator:function (_folderPath) {
-								return _folderPath;
-							},
-							targetFilenameCreator:function (_sourceFileName) {
-								return /\.js$/.test (_sourceFileName) ? _sourceFileName : null;
-							},
-							fileBuilder:function (_sourceFileName,_sourceFileText) {
-								var _neatenedSourceFileText = Uize.String.Lines.trimRight (_sourceFileText);
-								return (
-									_neatenedSourceFileText != _sourceFileText
-										? {
-											outputText:_neatenedSourceFileText,
-											logDetails:
-												'\t\tTrailing Whitespace Characters Removed: ' +
-													(_sourceFileText.length - _neatenedSourceFileText.length) + '\n'
-										}
-										: {logDetails:'\t\tFILE ALREADY OK\n'}
-								);
-							}
-						},
-						_params,
-						{
-							alwaysBuild:true,
-							rootFolderPath:_params.sourcePath
-						}
-					)
-				);
+				Uize.Build.Util.buildFiles ({
+					targetFolderPathCreator:function (_folderPath) {
+						return _folderPath;
+					},
+					targetFilenameCreator:function (_sourceFileName) {
+						return /\.js$/.test (_sourceFileName) ? _sourceFileName : null;
+					},
+					fileBuilder:function (_sourceFileName,_sourceFileText) {
+						var _neatenedSourceFileText = Uize.String.Lines.trimRight (_sourceFileText);
+						return (
+							_neatenedSourceFileText != _sourceFileText
+								? {
+									outputText:_neatenedSourceFileText,
+									logDetails:
+										'\t\tTrailing Whitespace Characters Removed: ' +
+											(_sourceFileText.length - _neatenedSourceFileText.length) + '\n'
+								}
+								: {logDetails:'\t\tFILE ALREADY OK\n'}
+						);
+					},
+					alwaysBuild:true,
+					rootFolderPath:_params.sourcePath,
+					logFilePath:_params.logFilePath
+				});
 			}
 		});
 	}
