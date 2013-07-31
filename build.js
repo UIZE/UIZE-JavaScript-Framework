@@ -128,7 +128,7 @@ function _eval (_toEval) {
 						}
 					;
 
-				/*** implementations for alert and confirm (absent in the WSH environment) ***/
+				/*** implementations for alert, confirm, and timeouts (absent in the WSH environment) ***/
 					function _popup (_message,_title,_buttonsAndIconMask) {
 						return (
 							(_popup._wscriptShell || (_popup._wscriptShell = new ActiveXObject ('wscript.shell'))).Popup (
@@ -139,9 +139,11 @@ function _eval (_toEval) {
 							)
 						);
 					}
+
 					alert = function (_message) {
 						_popup (_message,'Windows Script Host Alert',0 | 48 /* 0 = ok button only, 48 = warning icon */);
 					};
+
 					confirm = function (_message) {
 						return _popup (
 							_message,
@@ -149,6 +151,37 @@ function _eval (_toEval) {
 							1 | 32 /* 1 = ok and cancel, 32 = question mark icon */
 						) == 1;
 					};
+
+					var
+						_timeouts = [],
+						_timeoutsAdded = 0,
+						_timeoutByLookup = {}
+					;
+					setTimeout = function (_function,_timeFromNow) {
+						_timeouts.push (
+							_timeoutByLookup [_timeoutsAdded] = {
+								func:_function,
+								when:+new Date + Math.max (_timeFromNow || 0,0)
+							}
+						);
+						return _timeoutsAdded++;
+					};
+
+					clearTimeout = function (_timeoutId) {
+						var _timeout = _timeoutByLookup [_timeoutId];
+						if (_timeout) {
+							for (
+								var _timeoutNo = -1, _timeoutsLength = _timeouts.length;
+								++_timeoutNo < _timeoutsLength;
+							) {
+								if (_timeouts [_timeoutNo] == _timeout) {
+									_timeouts.splice (_timeoutNo,1);
+									break;
+								}
+							}
+						}
+					};
+
 					/* TO DO:
 						for prompt, try to figure out how to use VBSCRIPT's InputBox built-in function
 							http://wsh2.uw.hu/ch08c.html
@@ -243,7 +276,39 @@ function _eval (_toEval) {
 				function (_servicesSetup) {
 					_servicesSetup.setup ();
 					_buildModuleName &&
-						Uize.require (_buildModuleName,function (_buildModule) {_buildModule.perform (_params)})
+						Uize.require (
+							_buildModuleName,
+							function (_buildModule) {
+								_buildModule.perform (_params);
+								if (_isWsh) {
+									while (_timeouts.length) {
+										var
+											_nextTimeoutNo,
+											_minWhen = Infinity
+										;
+										for (
+											var _timeoutNo = -1, _timeoutsLength = _timeouts.length;
+											++_timeoutNo < _timeoutsLength;
+										) {
+											var _timeout = _timeouts [_timeoutNo];
+											if (_timeout.when < _minWhen) {
+												_minWhen = _timeout.when;
+												_nextTimeoutNo = _timeoutNo;
+											}
+										}
+										var
+											_nextTimeout = _timeouts [_nextTimeoutNo],
+											_sleepTime = _nextTimeout.when - new Date
+										;
+										_timeouts.splice (_nextTimeoutNo,1);
+										if (_sleepTime > 0)
+											WScript.Sleep (_sleepTime)
+										;
+										_nextTimeout.func ();
+									}
+								}
+							}
+						)
 					;
 				}
 			);
