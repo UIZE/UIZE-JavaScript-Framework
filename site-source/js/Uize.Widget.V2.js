@@ -175,17 +175,8 @@ Uize.module ({
 					return _cssClassNameGenerators [_thisClassName] (_className);
 				},
 
-				_updateUiRootNodeClasses:function () {
-					var _this = this;
-					if (_this.isWired && _this.Class.enableRootNodeCssClasses) {
-						var _rootNode = _this.getNode ();
-						if (_rootNode) {
-							var _newClassName = _this.rootNodeCssClasses ();
-							if (_newClassName != _rootNode.className)
-								_rootNode.className = _newClassName
-							;
-						}
-					}
+				_updateRootNodeClasses:function () {
+					this.Class.enableRootNodeCssClasses && this.set ({_rootNodeCssClasses:this.rootNodeCssClasses ()});
 				},
 
 				wireUi:function () {
@@ -193,16 +184,16 @@ Uize.module ({
 					if (!_this.isWired) {
 						_superclass.doMy (_this,'wireUi');
 
-						_this._updateUiRootNodeClasses ();
+						_this._updateRootNodeClasses ();
 
-						/*** wire up handlers for state properties that influence root node CSS classes ***/
+						/*** wire up handlers for state properties that have CSS and HTML bindings ***/
 							var
-								_updateUiRootNodeClasses = function () {_this._updateUiRootNodeClasses ()},
+								_updateRootNodeClasses = function () {_this._updateRootNodeClasses ()},
 								_wirings = {},
 								_stateToCssBindings = _this.Class._stateToCssBindings
 							;
 							for (var _property in _stateToCssBindings)
-								_wirings ['Changed.' + _property] = _updateUiRootNodeClasses
+								_wirings ['Changed.' + _property] = _updateRootNodeClasses
 							;
 							_this.wire (_wirings);
 					}
@@ -237,6 +228,17 @@ Uize.module ({
 			},
 
 			stateProperties:{
+				_rootNodeCssClasses:{
+					onChange:function () {
+						var
+							_this = this,
+							_rootNodeCssClasses = _this._rootNodeCssClasses
+						;
+						_this.isWired && _rootNodeCssClasses != _undefined &&
+							_this.setNodeProperties ('',{className:_rootNodeCssClasses})
+						;
+					}
+				},
 				_extraClasses:{
 					name:'extraClasses',
 					value:''
