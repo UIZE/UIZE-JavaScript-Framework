@@ -28,14 +28,44 @@
 			- *Supports Familiar Control Flow Constructs* - Unlike most async libraries, Flo supports familiar control flow constructs, with the ability to break from loop flos and return from "function" flos. Flo also supports multi-stage (a)synchronous if and switch conditional flos.
 			- *Supports Mixed Synchronous and Asynchronous Execution* - Unlike many async libraries that expect functions to be asynchronous (or even worse, force all synchronous execution to become asynchronous), Flo lets synchronous and asynchronous execution mix harmoniously, even allowing functions to dynamically be either synchronous or asynchronous, or to change between synchronous and asynchronous as an application evolves over time.
 			- *Has the Ability to Breathe* - Flo implements an innovative feature that allows you to configure a threshold for how long execution should remain synchronous before taking a "breath" by introducing an asynchronous interruption.
-			- *Regular Old Callbacks* - Unlike many other async libraries, Flo doesn not use promises or deferreds - just plain old callbacks - sweet and simple.
+			- *Uses Regular Old Callbacks* - Unlike many other async libraries, Flo does not use promises or deferreds - just plain old callbacks - sweet and simple.
 			- *Works on Client and Server* - Flo works just as well in NodeJS as it does in a browser, so you can safely use it in code that might be executed on either side of the client-server divide.
 			- *No Compilation Required* - You don't need to set up any code pre-compilation process on a server, or anything like that, in order to use Flo in parts of your code - just require it and use it.
-			- *Works in Older Browsers* - Flo doesn't rely upon the features of newer versions of JavaScript, such as the =yield= statement, in order to work its magic. That means that your code using Flo can even run in IE7.
+			- *Works in Older Browsers* - Flo doesn't rely upon the features of newer versions of JavaScript, such as the =yield= statement, in order to work its magic. That means that your code using Flo can even run in IE7 (see `A Note on Older Browsers`).
+			- *Unifies Error Handling*
 			- *A Small Module* - The =Uize.Flo= module is relatively small for what it provides, at around 2K scrunched and gzipped.
 
 		### An Example
 			.
+
+		A Note on Older Browsers
+			Because the =Uize.Flo= module provides methods for creating (a)synchronous control flow structures that are equivalent to JavaScript's built-in control flow structures, many of the methods are named after reserved words.
+
+			For example, the Flo equivalent of a =for= loop can be set up using the =Uize.Flo.for= method. This is not a problem in browsers that support ES5 (ECMAScript version 5) or later, but it will be a problem in some older browsers like IE8 and earlier. Because this restriction is going away, it was decided to not avoid this issue by coming up with different names for the methods (like some weird prefix character or uppercasing) but, instead, to rely on property name quoting for cases where older browser support is desired.
+
+			SAFE ONLY IN ES5 AND LATER
+			.........................
+			Uize.Flow.for (
+				setupStatementFUNC,
+				testStatementFUNC,
+				advanceStatementFUNC,
+				iterationStatementFUNC
+			);
+			.........................
+
+			SAFE FOR ALL
+			.........................
+			Uize.Flow ['for'] (
+				setupStatementFUNC,
+				testStatementFUNC,
+				advanceStatementFUNC,
+				iterationStatementFUNC
+			);
+			.........................
+
+			NOTES
+			- If you're using Flo inside an environment like NodeJS, then this is not an issue that you need to worry about.
+			- If you're writing your code in CoffeeScript, this issue is detected and the naked reserved word property names are automatically "clothed" in quotes for you when your code is compiled to JavaScript.
 
 	### In-depth
 		Basic Terminology
@@ -374,7 +404,7 @@ Uize.module ({
 			}
 
 			function _forInOrEach (_creationFlo,_getItems,_iteration,_eachStyle) {
-				return _creationFlo.for (
+				return _creationFlo ['for'] (
 					_getItems,
 					function () {
 						var _flo = this;
@@ -551,7 +581,7 @@ Uize.module ({
 					*/
 				},
 
-				if:function () {
+				'if':function () {
 					/*
 						an if...then...else if...then...else chain can be broken down into three basic types of statements...
 
@@ -671,7 +701,7 @@ Uize.module ({
 					*/
 				},
 
-				for:function (_setup,_test,_updateCount,_iteration) {
+				'for':function (_setup,_test,_updateCount,_iteration) {
 					return _block (
 						this,
 						[
@@ -742,7 +772,7 @@ Uize.module ({
 					*/
 				},
 
-				while:function (_test,_iteration) {
+				'while':function (_test,_iteration) {
 					return _block (this,[_test,_ifResultFalseAbortStatement,_iteration,_restartStatement],_loopProperties);
 					/*?
 						Instance Methods
@@ -790,7 +820,7 @@ Uize.module ({
 					*/
 				},
 
-				do:function (_iteration,_test) {
+				'do':function (_iteration,_test) {
 					return _block (this,[_iteration,_test,_ifResultFalseAbortStatement,_restartStatement],_loopProperties);
 					/*?
 						Instance Methods
@@ -811,7 +841,7 @@ Uize.module ({
 					*/
 				},
 
-				try:function (_try,_catch) {
+				'try':function (_try,_catch) {
 					return _block (this,[_block (_flo,[_try],{isTry:true}),_abortStatement,_catch]);
 					/*?
 						Instance Methods
@@ -831,7 +861,7 @@ Uize.module ({
 					*/
 				},
 
-				switch:function () {
+				'switch':function () {
 					/*
 						- first statement is expression to switch on
 						- if an even numbers of statements, then the last statement is the default case
@@ -899,7 +929,7 @@ Uize.module ({
 					}
 				},
 
-				function:function () {
+				'function':function () {
 					return _block (this,arguments,{isFunction:true});
 					/*?
 						Instance Methods
@@ -937,11 +967,11 @@ Uize.module ({
 						setTimeout (function () {_function.apply (_this,_arguments)},0);
 					};
 				},
-				break:function () {this.break ()},
+				'break':function () {this ['break'] ()},
 				breathe:function (duration) {
 					return function (next) {setTimeout (next,duration)}
 				},
-				continue:function () {this.continue ()},
+				'continue':function () {this ['continue'] ()},
 				next:function () {this.next ()}
 			}
 		);
@@ -988,7 +1018,7 @@ Uize.module ({
 								.........................
 					*/
 
-				continue:function () {
+				'continue':function () {
 					_findApplicableFloUpFloChain (
 						this,
 						'isContinuable',
@@ -1013,7 +1043,7 @@ Uize.module ({
 					*/
 				},
 
-				break:function () {
+				'break':function () {
 					_findApplicableFloUpFloChain (
 						this,
 						'isBreakable',
@@ -1053,7 +1083,7 @@ Uize.module ({
 					*/
 				},
 
-				return:function (_result) {
+				'return':function (_result) {
 					var _arguments = arguments;
 					_findApplicableFloUpFloChain (
 						this,
@@ -1085,7 +1115,7 @@ Uize.module ({
 					*/
 				},
 
-				throw:function (_error) {
+				'throw':function (_error) {
 					_error = _resolveError (_error);
 					_findApplicableFloUpFloChain (
 						this,
