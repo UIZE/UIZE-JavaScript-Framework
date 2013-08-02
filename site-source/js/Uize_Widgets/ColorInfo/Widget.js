@@ -48,39 +48,10 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		function _updateUiValue () {
-			var _this = this;
-			if (_this.isWired) {
-				var _colorAsHexRgb = Uize.Color.to (_this._value,'#hex');
-				_this.setNodeValue ('heading',_colorAsHexRgb);
-				_this.setNodeStyle (['swatch','asBackground'],{backgroundColor:_colorAsHexRgb});
-				_this.setNodeStyle ('asForeground',{color:_colorAsHexRgb});
-				/*?
-					Implied Nodes
-						value Implied Node
-							.
-
-						swatch
-							.
-
-						asBackground
-							.
-
-						asForeground
-							.
-				*/
-			}
-		}
-
 		return _superclass.subclass ({
-			instanceMethods:{
-				updateUi:_updateUiValue
-			},
-
 			stateProperties:{
 				_value:{
 					name:'value',
-					onChange:_updateUiValue,
 					value:'#000000'
 					/*?
 						State Properties
@@ -101,6 +72,29 @@ Uize.module ({
 
 			staticProperties:{
 				cssModule:Uize.Widgets.ColorInfo.Css
+			},
+
+			stateToHtmlBindings:{
+				value:function (_value) {
+					var _colorAsHexRgb = Uize.Color.to (_value,'#hex');
+					this.setNodeValue ('heading',_colorAsHexRgb);
+					this.setNodeStyle (['swatch','asBackground'],{backgroundColor:_colorAsHexRgb});
+					this.setNodeStyle ('asForeground',{color:_colorAsHexRgb});
+					/*?
+						Implied Nodes
+							value Implied Node
+								.
+
+							swatch
+								.
+
+							asBackground
+								.
+
+							asForeground
+								.
+					*/
+				}
 			}
 		});
 	}

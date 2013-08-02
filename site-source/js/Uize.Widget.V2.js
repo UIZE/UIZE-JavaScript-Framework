@@ -193,8 +193,6 @@ Uize.module ({
 					if (!_this.isWired) {
 						_superclass.doMy (_this,'wireUi');
 
-						_this._updateRootNodeClasses ();
-
 						/*** wire up handlers for state properties that have CSS bindings ***/
 							var
 								_stateToCssBindings = _this.Class._stateToCssBindings,
@@ -227,6 +225,12 @@ Uize.module ({
 								_wiringsForStateToHtmlBindings ['Changed.' + _property] = _getHtmlUpdaterForProperty (_property)
 							;
 							_this.wire (_wiringsForStateToHtmlBindings);
+
+						/*** update UI ***/
+							_this._updateRootNodeClasses ();
+							for (var _eventName in _wiringsForStateToHtmlBindings)
+								_wiringsForStateToHtmlBindings [_eventName] ()
+							;
 					}
 				},
 
