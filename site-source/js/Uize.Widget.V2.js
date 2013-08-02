@@ -67,6 +67,15 @@ Uize.module ({
 				);
 			}
 
+			function _resolvePropertyUpdater (_propertyName,_updater) {
+				if (typeof _updater == 'string')
+					_updater = function (_propertyValue) {
+						this.setNodeInnerHtml (_propertyName,_propertyValue);
+					}
+				;
+				return _updater;
+			}
+
 		var _class = _superclass.subclass ({
 			alphastructor:function () {
 				this.Class._needCss ();
@@ -186,16 +195,38 @@ Uize.module ({
 
 						_this._updateRootNodeClasses ();
 
-						/*** wire up handlers for state properties that have CSS and HTML bindings ***/
+						/*** wire up handlers for state properties that have CSS bindings ***/
 							var
+								_stateToCssBindings = _this.Class._stateToCssBindings,
 								_updateRootNodeClasses = function () {_this._updateRootNodeClasses ()},
-								_wirings = {},
-								_stateToCssBindings = _this.Class._stateToCssBindings
+								_wiringsForStateToCssBindings = {}
 							;
 							for (var _property in _stateToCssBindings)
-								_wirings ['Changed.' + _property] = _updateRootNodeClasses
+								_wiringsForStateToCssBindings ['Changed.' + _property] = _updateRootNodeClasses
 							;
-							_this.wire (_wirings);
+							_this.wire (_wiringsForStateToCssBindings);
+
+						/*** wire up handlers for state properties that have HTML bindings ***/
+							var
+								_getHtmlUpdaterForProperty = function (_property) {
+									var
+										_updaters = _stateToHtmlBindings [_property],
+										_updatersLength = _updaters.length
+									;
+									return function () {
+										var _propertyValue = _this.get (_property);
+										for (var _updaterNo = -1; ++_updaterNo < _updatersLength;)
+											_updaters [_updaterNo].call (_this,_propertyValue)
+										;
+									};
+								},
+								_stateToHtmlBindings = _this.Class._stateToHtmlBindings,
+								_wiringsForStateToHtmlBindings = {}
+							;
+							for (var _property in _stateToHtmlBindings)
+								_wiringsForStateToHtmlBindings ['Changed.' + _property] = _getHtmlUpdaterForProperty (_property)
+							;
+							_this.wire (_wiringsForStateToHtmlBindings);
 					}
 				},
 
@@ -219,11 +250,24 @@ Uize.module ({
 
 				stateToCssBindings:function (_bindings) {
 					Uize.copyInto (this._stateToCssBindings,Uize.map (_bindings,Uize.resolveTransformer));
+				},
+
+				stateToHtmlBindings:function (_bindings) {
+					var _stateToHtmlBindings = this._stateToHtmlBindings;
+					Uize.forEach (
+						_bindings,
+						function (_updater,_property) {
+							(_stateToHtmlBindings [_property] || (_stateToHtmlBindings [_property] = [])).push (
+								_resolvePropertyUpdater (_property,_updater)
+							);
+						}
+					);
 				}
 			},
 
 			staticProperties:{
 				_stateToCssBindings:{},
+				_stateToHtmlBindings:{},
 				enableRootNodeCssClasses:true
 			},
 

@@ -41,36 +41,17 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		function _updateUiHeading () {
-			this.isWired && this.setNodeInnerHtml ('heading',this.get ('heading'));
-		}
-
-		function _updateUiBody () {
-			if (this.isWired) {
-				var _bodyHtml = this.get ('body') || '';
-				this.setNodeInnerHtml ('body',_bodyHtml);
-				this.displayNode ('body',_bodyHtml);
-			}
-		}
-
 		return _superclass.subclass ({
-			omegastructor:function () {
-				var _this = this;
-				_this.wire ({
-					'Changed.heading':function () {_updateUiHeading.call (_this)},
-					'Changed.body':function () {_updateUiBody.call (_this)}
-				});
-			},
-
-			instanceMethods:{
-				updateUi:function () {
-					_updateUiHeading.call (this);
-					_updateUiBody.call (this);
-				}
-			},
-
 			staticProperties:{
 				cssModule:Uize.Widgets.Tooltip.Css
+			},
+
+			stateToHtmlBindings:{
+				heading:'heading',
+				body:function (_body) {
+					this.setNodeInnerHtml ('body',_body || '');
+					this.displayNode ('body',!!_body);
+				}
 			}
 		});
 	}
