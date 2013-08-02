@@ -242,7 +242,7 @@ Uize.module ({
 
 									/*** finish up if the test fails or if unit tests complete ***/
 										if (_test == _unitTests || !_test.get ('result')) {
-											_silent || alert (_test.getSynopsis ());
+											_silent || console.log (_test.getSynopsis ());
 											_logFilePath &&
 												_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
 											;
