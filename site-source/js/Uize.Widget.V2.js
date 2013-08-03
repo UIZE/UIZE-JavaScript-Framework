@@ -254,6 +254,34 @@ Uize.module ({
 
 				cssBindings:function (_bindings) {
 					Uize.copyInto (this._cssBindings,Uize.map (_bindings,Uize.resolveTransformer));
+					/*?
+						Static Methods
+							Uize.Widget.V2.cssBindings
+								Lets you declare one or more bindings of state properties to CSS classes on the root node.
+
+								SYNTAX
+								........................................
+								MyWidgetClass.cssBindings (bindingsOBJ);
+								........................................
+
+								EXAMPLE
+								......................................................
+								MyNamespace.MyWidgetClass = Uize.Widget.V2.subclass ({
+									stateProperties:{
+										size:{value:'small'}
+									},
+									htmlBindings:{
+										size:'value'
+									}
+								});
+								......................................................
+
+								### Types of CSS Bindings
+									Using an Expression String Class Name Generator
+										.
+									Using a Function Class Name Generator
+										.
+					*/
 				},
 
 				htmlBindings:function (_bindings) {
@@ -272,9 +300,9 @@ Uize.module ({
 								.
 
 								SYNTAX
-								..........................................
-								MyClass.htmlBindings (bindingsOBJ);
-								..........................................
+								.........................................
+								MyWidgetClass.htmlBindings (bindingsOBJ);
+								.........................................
 
 								EXAMPLE
 								......................................................
@@ -288,7 +316,7 @@ Uize.module ({
 								});
 								......................................................
 
-								### Forms of HTML Binding
+								### Types of HTML Binding
 									Binding to Inner HTML, with HTML-encoding
 										.
 
@@ -311,17 +339,7 @@ Uize.module ({
 			},
 
 			stateProperties:{
-				_rootNodeCssClasses:{
-					onChange:function () {
-						var
-							_this = this,
-							_rootNodeCssClasses = _this._rootNodeCssClasses
-						;
-						_this.isWired && _rootNodeCssClasses != _undefined &&
-							_this.setNodeProperties ('',{className:_rootNodeCssClasses})
-						;
-					}
-				},
+				_rootNodeCssClasses:{},
 				_extraClasses:{
 					name:'extraClasses',
 					value:''
@@ -344,6 +362,12 @@ Uize.module ({
 						return _htmlChunks.join ('');
 					}
 				}
+			}
+		});
+
+		_class.htmlBindings ({
+			_rootNodeCssClasses:function (_rootNodeCssClasses) {
+				_rootNodeCssClasses != _undefined && this.setNodeProperties ('',{className:_rootNodeCssClasses});
 			}
 		});
 
