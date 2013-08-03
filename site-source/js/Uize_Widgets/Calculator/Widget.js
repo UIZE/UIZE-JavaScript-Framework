@@ -77,7 +77,7 @@ Uize.module ({
 				enableRootNodeCssClasses:false
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				size:'value'
 			}
 		});

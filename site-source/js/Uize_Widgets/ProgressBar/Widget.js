@@ -96,7 +96,7 @@ Uize.module ({
 				value:0
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				size:'value'
 			},
 

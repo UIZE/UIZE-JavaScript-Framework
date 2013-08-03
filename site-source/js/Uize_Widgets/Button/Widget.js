@@ -609,7 +609,7 @@ Uize.module ({
 				html:Uize.Widgets.Button.Html
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				displayState:'value',
 				busyInherited:['','busy'],
 				size:'value'

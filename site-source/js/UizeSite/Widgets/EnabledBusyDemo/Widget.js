@@ -117,7 +117,7 @@ Uize.module ({
 				_depth:'depth'
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				depth:'"depth" + value'
 			}
 		});

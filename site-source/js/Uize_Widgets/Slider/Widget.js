@@ -96,7 +96,7 @@ Uize.module ({
 				orientation:'horizontal'
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				orientation:'value',
 				size:'value'
 			},

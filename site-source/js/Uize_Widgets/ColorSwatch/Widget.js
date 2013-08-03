@@ -85,7 +85,7 @@ Uize.module ({
 				cssModule:Uize.Widgets.ColorSwatch.Css
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				size:'value'
 			}
 		});

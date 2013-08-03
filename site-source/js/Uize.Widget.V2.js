@@ -151,12 +151,12 @@ Uize.module ({
 					var
 						_this = this,
 						_extraClasses = _this._extraClasses,
-						_stateToCssBindings = _this.Class._stateToCssBindings,
+						_cssBindings = _this.Class._cssBindings,
 						_cssClasses = [_this.cssClass ()],
 						_cssClassSuffix
 					;
-					for (var _property in _stateToCssBindings)
-						if (_cssClassSuffix = _stateToCssBindings [_property] (_this.get (_property)))
+					for (var _property in _cssBindings)
+						if (_cssClassSuffix = _cssBindings [_property] (_this.get (_property)))
 							_cssClasses.push (_this.cssClass (_cssClassSuffix))
 					;
 					return _cssClasses.join (' ') + (_extraClasses && ' ' + _extraClasses);
@@ -195,11 +195,11 @@ Uize.module ({
 
 						/*** wire up handlers for state properties that have CSS bindings ***/
 							var
-								_stateToCssBindings = _this.Class._stateToCssBindings,
+								_cssBindings = _this.Class._cssBindings,
 								_updateRootNodeClasses = function () {_this._updateRootNodeClasses ()},
 								_wiringsForStateToCssBindings = {}
 							;
-							for (var _property in _stateToCssBindings)
+							for (var _property in _cssBindings)
 								_wiringsForStateToCssBindings ['Changed.' + _property] = _updateRootNodeClasses
 							;
 							_this.wire (_wiringsForStateToCssBindings);
@@ -208,7 +208,7 @@ Uize.module ({
 							var
 								_getHtmlUpdaterForProperty = function (_property) {
 									var
-										_updaters = _stateToHtmlBindings [_property],
+										_updaters = _htmlBindings [_property],
 										_updatersLength = _updaters.length
 									;
 									return function () {
@@ -218,10 +218,10 @@ Uize.module ({
 										;
 									};
 								},
-								_stateToHtmlBindings = _this.Class._stateToHtmlBindings,
+								_htmlBindings = _this.Class._htmlBindings,
 								_wiringsForStateToHtmlBindings = {}
 							;
-							for (var _property in _stateToHtmlBindings)
+							for (var _property in _htmlBindings)
 								_wiringsForStateToHtmlBindings ['Changed.' + _property] = _getHtmlUpdaterForProperty (_property)
 							;
 							_this.wire (_wiringsForStateToHtmlBindings);
@@ -252,26 +252,61 @@ Uize.module ({
 					}
 				},
 
-				stateToCssBindings:function (_bindings) {
-					Uize.copyInto (this._stateToCssBindings,Uize.map (_bindings,Uize.resolveTransformer));
+				cssBindings:function (_bindings) {
+					Uize.copyInto (this._cssBindings,Uize.map (_bindings,Uize.resolveTransformer));
 				},
 
-				stateToHtmlBindings:function (_bindings) {
-					var _stateToHtmlBindings = this._stateToHtmlBindings;
+				htmlBindings:function (_bindings) {
+					var _htmlBindings = this._htmlBindings;
 					Uize.forEach (
 						_bindings,
 						function (_updater,_property) {
-							(_stateToHtmlBindings [_property] || (_stateToHtmlBindings [_property] = [])).push (
+							(_htmlBindings [_property] || (_htmlBindings [_property] = [])).push (
 								_resolvePropertyUpdater (_property,_updater)
 							);
 						}
 					);
+					/*?
+						Static Methods
+							Uize.Widget.V2.htmlBindings
+								.
+
+								SYNTAX
+								..........................................
+								MyClass.htmlBindings (bindingsOBJ);
+								..........................................
+
+								EXAMPLE
+								......................................................
+								MyNamespace.MyWidgetClass = Uize.Widget.V2.subclass ({
+									stateProperties:{
+										foo:{value:'bar'}
+									},
+									htmlBindings:{
+										foo:'foo'
+									}
+								});
+								......................................................
+
+								### Forms of HTML Binding
+									Binding to Inner HTML, with HTML-encoding
+										.
+
+									Binding to Inner HTML, As Is
+										.
+
+									Free Form Binding, Using a Function
+										.
+
+								NOTES
+								- see also the companion `Uize.Widget.V2.cssBindings` feature declaration method
+					*/
 				}
 			},
 
 			staticProperties:{
-				_stateToCssBindings:{},
-				_stateToHtmlBindings:{},
+				_cssBindings:{},
+				_htmlBindings:{},
 				enableRootNodeCssClasses:true
 			},
 

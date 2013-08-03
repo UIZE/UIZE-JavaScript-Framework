@@ -62,7 +62,7 @@ Uize.module ({
 				useV2CssClasses:true
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				size:'value'
 			}
 		});

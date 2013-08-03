@@ -46,7 +46,7 @@ Uize.module ({
 				cssModule:Uize.Widgets.Tooltip.Css
 			},
 
-			stateToHtmlBindings:{
+			htmlBindings:{
 				heading:'heading',
 				body:function (_body) {
 					this.setNodeInnerHtml ('body',_body || '');

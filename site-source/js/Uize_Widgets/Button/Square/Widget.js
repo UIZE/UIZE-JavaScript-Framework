@@ -77,7 +77,7 @@ Uize.module ({
 				directionNames:_directionNames
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				directionName:'value'
 			}
 		});

@@ -74,7 +74,7 @@ Uize.module ({
 				cssModule:Uize.Widgets.ColorInfo.Css
 			},
 
-			stateToHtmlBindings:{
+			htmlBindings:{
 				value:function (_value) {
 					var _colorAsHexRgb = Uize.Color.to (_value,'#hex');
 					this.setNodeValue ('heading',_colorAsHexRgb);

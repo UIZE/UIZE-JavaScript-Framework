@@ -58,7 +58,7 @@ Uize.module ({
 				cssModule:Uize.Widgets.Buttons.Char.Css
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				doubleChar:'value ? "doubleChar" : ""'
 			}
 		});

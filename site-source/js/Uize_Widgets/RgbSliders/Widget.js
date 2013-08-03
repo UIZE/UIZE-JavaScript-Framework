@@ -140,7 +140,7 @@ Uize.module ({
 				cssModule:Uize.Widgets.RgbSliders.Css
 			},
 
-			stateToCssBindings:{
+			cssBindings:{
 				size:'value'
 			}
 		});
