@@ -305,6 +305,29 @@ Uize.module ({
 								) ();
 								return this.expect (['a','b','c','d'],_actual);
 							}
+						},
+						{
+							title:'Test that an ongoing loop can be terminated by calling break on the flo reference that would be accessible externally',
+							test:function (_next) {
+								var
+									_this = this,
+									_items = ['a','b','c','d','e','f','g'],
+									_actual = [],
+									_flo = Uize.Flo.ongoing (
+										_async (
+											function (_next) {
+												_actual.push (_items.shift ());
+												_next ();
+											}
+										),
+										_async (function (_next) {_actual.length == 4 ? _flo ['break'] () : _next ()})
+									) (
+										function () {
+											_next (_this.expect (['a','b','c','d'],_actual));
+										}
+									)
+								;
+							}
 						}
 					]],
 					['Uize.Flo.switch',[

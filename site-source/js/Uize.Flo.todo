@@ -1,37 +1,49 @@
 Get it Ready for Release
 	- finish up implementation
-	- start using in a few places
 	- finish documentation
 	- implement unit tests (only browser and NodeJS because of setTimeout availability? Or create setTimeout patch for JScript in WSH?)
 
-- unresolved issues
-	- how do you know if an error has occured?
-		- the callback is passed more than one argument and the first argument is a string or an error object
-		- the single argument passed to the callback is an error object
-		- an error is caught using a try...catch
-			- how does flo know to wrap execution of a step in a try? (they can be costly)
-				- a try should wrap the while loop in the next method, and then call the .throw method on the current flo
+Unresolved Issues
+	Detecting Errors
+		How do you know if an error has occured?
+			More Than One Argument to Callback
+				The callback is passed more than one argument and the first argument is a string or an =Error= object.
+
+				This should cover the case for asynchronous methods that follow the NodeJS style.
+
+			Callback's Only Argument is Error
+				The callback only receives a single argument and its value is an =Error= object.
+
+				This addresses a more desirable unified return value approach, where an error is indicated by passing an =Error= object as the return value. Ajax-style methods that talk to a server and that experience an XHR error during communication would convert that error to an =Error= object and pass it as the result. A technically successful response from the server but where the server indicates an error in its response would also be converted to an =Error= object before being passed on, where the error information from the server would be set as extra properties on the =Error= object.
+
+			An Error is Caught
+				An error is caught using a =try...catch= around a chunk of synchronous execution.
+
+				Wrapping every statement of a flo in a =try...catch= could be costly, but this might be the only robust way of preventing errors in asynchronously executed code from dropping a flo on the floor. It should be sufficient to wrap the =while= loop in the =next= method and then call the =throw= instance method on the current flo if an error is caught.
 
 	how does flo know whether or not a step is asynchronous?
-		- if the function doesn't declare more arguments than those passed to it (1 in the case of not function block, and 1 or more in the case of a function type block), then it is assumed to be synchronous, even if it returns undefined
+		- if the function doesn't declare more arguments than those passed to it (one in the case of not function block, and one or more in the case of a function type block), then it is assumed to be synchronous, even if it returns undefined
 		- if a reference to next is returned, then it is asynchronous
 		- if a value other than next or undefined is returned, then it is synchronous
 
-	- need to address the issue of method names for JS interpreters (such as JScript) that don't permit naked property names that are also reserved keywords
 	- how to call a function, where the values of the arguments are determined as a result of asynchronous processes
-	- how to pass arguments to a function block defined using the scope.function method
-	- consider how ro support promises, if statements
+	- how to pass arguments to a function block defined using the flo.function method
+	- consider how to support promises (if at all)
 		- if a statement is a function that returns a promise, or will these likely all have to be wrapped for binding to a context and passing arguments?
 		- should flo statements be able to return promises, or should this just be wrapped when desired?
 	- what is the impact of recursion?
+		- probably the flo stack will increase in much the same way as the call stack would increase with traditional synchronous recursion
 		- is it possible to implement tail recursion optimization?
 
 Optimization
-	- for the synchronous execution call stack optimization, consider extending it to span across scopes, so that a nested scope structure can be executed through in a single loop
+	- for the synchronous execution call stack optimization, consider extending it to span across flos and flo levels, so that a nested scope structure can be executed through in a single loop
 
 Improvements
-	- consider supporting a yield statement (basically, pauses execution)
-	- consider providing manual step through ability
+	- figure out how to support =finally= in =try=
+	- consider supporting a =yield= statement (basically, pauses execution)
+	- step through
+		- consider providing manual step through ability
+		- could be timed chunks (long breath)
 	- literal result statements
 		- statements that are not of type function are treated as simple assignment of the result
 		- this is useful for switch...case blocks, where the case matches can be specified as string or number literals, rather than having to have functions for statements that are executed
@@ -113,16 +125,14 @@ Improvements
 		................
 
 	- features
-		- can add extra provision for doing multiple async things in parallel (but might be out of purview)
-		- syncTimeLimit
-		- forceAsync (equivalent to syncTimeLimit of 0?)
+		- can add extra provision for doing multiple async things in parallel (but might be out of purview of this module). Would have to figure out how break would behave (how to break or abort all child flos)
 		- parallel vs sequential
 		- degrees of parallelism (limit on number of parallel processes)
 		- parallel sequencing scheme? sequential clusters, or random clusters, or random individual, or etc.?
 		- implement (a)sync iterator
 			- as such, there doesn't need to be a dedicated async map. Instead, an async map should be an (a)sync iterator materialized / played out to produce an array through some method that applies generally to (a)sync iterators of all kinds
 			- if a dedicate map method is provided, at least implement it upon a foundation of (a)sync iterators
-			- this makes it possible to perform iterator math
+			- this makes it possible to perform iterator math using (a)synchronous iterators
 
 Design Notes
 	- don't conflate sync vs. async with serial vs. parallel processing
