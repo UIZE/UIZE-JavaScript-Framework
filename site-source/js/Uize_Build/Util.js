@@ -61,16 +61,93 @@ Uize.module ({
 		return _package = {
 			/*** Public Static Properties ***/
 				jsModuleExtensionRegExp:_jsModuleExtensionRegExp,
+					/*?
+						Static Properties
+							Uize.Build.Util.jsModuleExtensionRegExp
+								A regular expression that is used in determining source files for JavaScript modules.
+
+								This regular expression matches files with =.js= (JavaScript), =.js.jst= (JavaScript template), and =.csst= (CSS template) file extensions, and can be used in build scripts and file builder modules.
+					*/
 
 			/*** Public Static Methods ***/
 				moduleNameFromModulePath:_moduleNameFromModulePath,
+					/*?
+						Static Methods
+							Uize.Build.Util.moduleNameFromModulePath
+								Returns a string, representing the module name of the module located at the specified path.
+
+								SYNTAX
+								.........................................................................
+								moduleNameSTR = Uize.Build.Util.moduleNameFromModulePath (modulePathSTR);
+								.........................................................................
+
+								This method removes the file extension and replaces slashes and underscores with periods to address the way that module paths are constructed for folder organizated modules.
+
+								EXAMPLE
+								.............................................................................
+								Uize.Build.Util.moduleNameFromModulePath ('Uize_Templates/HashTable.js.jst');
+								.............................................................................
+
+								In the above example, the value ='Uize.Templates.HashTable'= would be returned.
+					*/
 
 				getPathToRoot:function (_path) {
 					return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
+					/*?
+						Static Methods
+							Uize.Build.Uril.getPathToRoot
+								Returns a string, containing zero or more "../" (back folder) path segments, representing a relative path from the specified relative path back to the root.
+
+								SYNTAX
+								................................................................
+								pathToRootSTR = Uize.Build.Util.getPathToRoot (relativePathSTR);
+								................................................................
+
+								This method is used by build scripts that build pages for nested sections of a site that may have links that are root-absolute and need to be converted to paths that are relative to the document being built. The implementation is very basic (ie. non-robust) and simply counts all the slashes in the specified path and builds a prefix with that many "../" (back folder) segments.
+
+								EXAMPLES
+								...............................................................................
+								Uize.Build.Util.getPathToRoot ('foo.html');              // returns ''
+								Uize.Build.Util.getPathToRoot ('foo/bar.html');          // returns '../'
+								Uize.Build.Util.getPathToRoot ('foo/bar/baz.html');      // returns '../../'
+								Uize.Build.Util.getPathToRoot ('foo/bar/baz/qux.html');  // returns '../../../'
+								...............................................................................
+
+					*/
 				},
 
 				getTitleFromFilename:function (_filename) {
-					return _filename.match (/(.*)\.[^\.]*$/) [1].replace (/-/g,' ');
+					return (
+						_filename
+							.match (/(.*)\.[^\.]*$/) [1]  // lost the extension
+							.replace (/-/g,' ')  // dashes become spaces
+							.replace (/(^|\s)[a-z]/g,function (_match) {return _match.toUpperCase ()})  // capitalize words
+					);
+					/*?
+						Static Methods
+							Uize.Build.Util.getTitleFromFilename
+								Returns a string, being a title that is generated from the specified filename.
+
+								SYNTAX
+								..............................................................
+								titleSTR = Uize.Build.Util.getTitleFromFilename (filenameSTR);
+								..............................................................
+
+								This method is used by build scripts that build HTML pages from a source format, where a title is needed for the HTML page but no pretty title is provided in the source file (such as in metadata, if the source format supports this). In such cases, a title can be derived from the filename using this method.
+
+								The method performs the following transformation on the specified filename...
+
+								- removes the file extension
+								- converts hyphens / dashes to spaces
+								- capitalizes all the words
+
+								EXAMPLE
+								.................................................................................
+								Uize.Build.Util.getTitleFromFilename ('javascript-animation-and-effects.simple');
+								.................................................................................
+
+								In the above example, the value ='Javascript Animation And Effects'= would be returned.
+					*/
 				},
 
 				getHtmlFileInfo:function (_filePath,_titleExtractor) {
