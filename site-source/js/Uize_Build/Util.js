@@ -156,6 +156,10 @@ Uize.module ({
 					});
 				},
 
+				getModuleNamespace:function (_moduleName) {
+					return _moduleName.slice (0,((_moduleName.indexOf ('.') + 1) || _moduleName.length + 1) - 1);
+				},
+
 				readSimpleDataFile:function (_simpleDataFilePath) {
 					return Uize.Data.Simple.parse ({
 						simple:_fileSystem.readFile ({path:_simpleDataFilePath}),

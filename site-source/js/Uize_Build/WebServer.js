@@ -42,9 +42,6 @@
 
 			isDev
 				.
-
-			scrunchedHeadComments
-				.
 */
 
 Uize.module ({
@@ -130,9 +127,6 @@ Uize.module ({
 									.
 
 								isDev
-									.
-
-								scrunchedHeadComments
 									.
 				*/
 			}

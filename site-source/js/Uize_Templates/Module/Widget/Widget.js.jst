@@ -23,22 +23,13 @@
 	;
 	_hasHtml && _required.push (_htmlModuleName);
 	_hasCss && _required.push (_cssModuleName);
-%>/*______________
-|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
-|     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : <%= _widgetModuleName %> Class
-|   /    / /    |
-|  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)<%= (new Date ()).getFullYear () %> UIZE
-|          /___ |   LICENSE : Available under MIT License or GNU General Public License
-|_______________|             http://www.uize.com/license.html
-*/
-
-/* Module Meta Data
+%><%
+	.headComment
+%>/* Module Meta Data
 	type: Class
 	importance: 1
 	codeCompleteness: 5
-	docCompleteness: 100
+	docCompleteness: 5
 */
 
 /*?

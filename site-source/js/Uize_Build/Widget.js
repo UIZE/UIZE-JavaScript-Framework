@@ -38,9 +38,10 @@ Uize.module ({
 	required:[
 		'Uize.Build.Util',
 		'Uize.Services.FileSystem',
-		'Uize.Templates.WidgetModule',
-		'Uize.Templates.WidgetVisualSamplerModule',
-		'Uize.Templates.WidgetVisualTestsModule'
+		'Uize.Templates.Module.Widget.Widget',
+		'Uize.Templates.Module.Widget.VisualSampler',
+		'Uize.Templates.Module.Widget.VisualTests',
+		'Uize.Flo'
 	],
 	builder:function () {
 		'use strict';
@@ -91,35 +92,62 @@ Uize.module ({
 						// TODO: make the Css folder
 					}
 
-				/*** create the widget module file ***/
-					_fileSystem.writeFile ({
-						path:_getModulePath (_namespace + '.Widget'),
-						contents:Uize.Templates.WidgetModule.process ({
-							widgetNamespace:_namespace,
-							developers:_developers,
-							superclass:_params.superclass,
-							hasHtml:_hasHtml,
-							hasCss:_hasCss
-						})
-					});
+				/*** create the JavaScript modules ***/
+					var
+						_headCommentModule = (_params.headComments || {}) [Uize.Build.Util.getModuleNamespace (_namespace)],
+						_headCommentGenerator
+					;
+					Uize.Flo.block (
+						function (_next) {
+							if (_headCommentModule) {
+								Uize.require (
+									_headCommentModule,
+									function (_headCommentModule) {
+										_headCommentGenerator = _headCommentModule.process;
+										_next ();
+									}
+								);
+							} else {
+								_next ()
+							}
+						},
+						function (_next) {
+							function _createJavaScriptModule (_moduleType,_templateParams) {
+								var _moduleName = _namespace + '.' + _moduleType;
+								_fileSystem.writeFile ({
+									path:_getModulePath (_moduleName),
+									contents:Uize.Templates.Module.Widget [_moduleType].process (
+										Uize.copyInto (
+											{
+												headComment:_headCommentGenerator
+													? _headCommentGenerator ({
+														moduleName:_moduleName,
+														creationYear:(new Date).getFullYear ()
+													})
+													: ''
+												,
+												widgetNamespace:_namespace,
+												developers:_developers
+											},
+											_templateParams
+										)
+									)
+								});
+							}
 
-				/*** create the visual sampler module file ***/
-					_fileSystem.writeFile ({
-						path:_getModulePath (_namespace + '.VisualSampler'),
-						contents:Uize.Templates.WidgetVisualSamplerModule.process ({
-							widgetNamespace:_namespace,
-							developers:_developers
-						})
-					});
-
-				/*** create the visual tests module file ***/
-					_fileSystem.writeFile ({
-						path:_getModulePath (_namespace + '.VisualTests'),
-						contents:Uize.Templates.WidgetVisualTestsModule.process ({
-							widgetNamespace:_namespace,
-							developers:_developers
-						})
-					});
+							_createJavaScriptModule (
+								'Widget',
+								{
+									superclass:_params.superclass,
+									hasHtml:_hasHtml,
+									hasCss:_hasCss
+								}
+							);
+							_createJavaScriptModule ('VisualSampler');
+							_createJavaScriptModule ('VisualTests');
+							_next ();
+						}
+					) ();
 			}
 		});
 	}

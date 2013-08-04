@@ -10,6 +10,10 @@
 		'UizeSite'
 	],
 	isDev:'false',
+	headComments:{
+		Uize:'Uize.Templates.Module.HeadComment',
+		UizeSite:'Uize.Templates.Module.HeadComment'
+	},
 	scrunchedHeadComments:{
 		Uize:
 			'/*\n' +

@@ -31,7 +31,8 @@ Uize.module ({
 		'Uize.Build.ModuleInfo',
 		'Uize.Util.Oop',
 		'Uize.Build.Scruncher',
-		'Uize.Date'
+		'Uize.Date',
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		var
@@ -92,9 +93,7 @@ Uize.module ({
 					var
 						_moduleName = _this.moduleNameFromTempPath (_jsTemp),
 						_scruncherSettings = {},
-						_headComment = _this.params.scrunchedHeadComments [
-							_moduleName.slice (0,((_moduleName.indexOf ('.') + 1) || _moduleName.length + 1) - 1)
-						],
+						_headComment = _this.params.scrunchedHeadComments [Uize.Build.Util.getModuleNamespace (_moduleName)],
 						_keepHeadComment = _headComment == undefined
 					;
 					if (!_keepHeadComment)
