@@ -6,19 +6,15 @@
 	sourcePath:'source',
 	uizePath:'../site-source',
 	modulesFolder:'js',
+	folderOrgNamespaces:[
+		'SampleSite'
+	],
 	isDev:'false',
+	headComments:{
+	},
 	scrunchedHeadComments:{
-		Uize:
-			'/*\n' +
-				'\tUIZE JAVASCRIPT FRAMEWORK\n' +
-				'\n' +
-				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
-				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
-			'*/\n',
-			SampleSite:
-				'/*\n' +
-					'\tSample Web Site\n' +
-				'*/\n'
+		Uize:'Uize.Templates.Module.ScrunchedHeadComment',
+		SampleSite:'SampleSite.Templates.Module.HeadComment'
 	},
 	staleBefore:'now',
 	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,

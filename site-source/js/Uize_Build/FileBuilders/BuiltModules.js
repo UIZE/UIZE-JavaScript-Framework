@@ -49,7 +49,27 @@ Uize.module ({
 				return _urlParts.fileType == 'js' && this.isBuiltUrl (_urlParts.folderPath);
 			},
 			builderInputs:function (_urlParts) {
-				return {jsTemp:this.tempUrlFromBuiltUrl (_urlParts.pathname)};
+				var
+					_this = this,
+					_jsTemp = _this.tempUrlFromBuiltUrl (_urlParts.pathname),
+					_builderInputs = {jsTemp:_jsTemp},
+					_params = _this.params
+				;
+				if (!_params.isDev) {
+					var
+						_moduleName = _this.moduleNameFromTempPath (_jsTemp),
+						_scrunchedHeadComments = _params.scrunchedHeadComments,
+						_scrunchedHeadCommentModule =
+							_scrunchedHeadComments &&
+							_scrunchedHeadComments [Uize.Build.Util.getModuleNamespace (_moduleName)]
+					;
+					if (_scrunchedHeadCommentModule)
+						_builderInputs.scrunchedHeadComment = _this.memoryUrl (
+							_params.modulesFolder + '/' + Uize.modulePathResolver (_scrunchedHeadCommentModule) + '.js.jst'
+						)
+					;
+				}
+				return _builderInputs;
 			},
 			builder:function (_inputs) {
 				var
@@ -93,8 +113,8 @@ Uize.module ({
 					var
 						_moduleName = _this.moduleNameFromTempPath (_jsTemp),
 						_scruncherSettings = {},
-						_headComment = _this.params.scrunchedHeadComments [Uize.Build.Util.getModuleNamespace (_moduleName)],
-						_keepHeadComment = _headComment == undefined
+						_scrunchedHeadComment = _inputs.scrunchedHeadComment,
+						_keepHeadComment = _scrunchedHeadComment == undefined
 					;
 					if (!_keepHeadComment)
 						_scruncherSettings.KEEPHEADCOMMENT = 'FALSE'
@@ -112,11 +132,10 @@ Uize.module ({
 						(
 							_keepHeadComment
 								? ''
-								: Uize.substituteInto (
-									_headComment,
-									{buildDate:Uize.Date.toIso8601 (),moduleName:_moduleName},
-									'{KEY}'
-								)
+								: _this.readFile ({path:_scrunchedHeadComment}) ({
+									buildDate:Uize.Date.toIso8601 (),
+									moduleName:_moduleName
+								})
 						) + _scruncherResult.scrunchedCode
 					;
 					/*

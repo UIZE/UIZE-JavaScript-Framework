@@ -15,20 +15,8 @@
 		UizeSite:'Uize.Templates.Module.HeadComment'
 	},
 	scrunchedHeadComments:{
-		Uize:
-			'/*\n' +
-				'\tUIZE JAVASCRIPT FRAMEWORK\n' +
-				'\n' +
-				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
-				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
-			'*/\n',
-		UizeSite:
-			'/*\n' +
-				'\tUIZE Web Site\n' +
-				'\n' +
-				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
-				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
-			'*/\n'
+		Uize:'Uize.Templates.Module.ScrunchedHeadComment',
+		UizeSite:'UizeSite.Templates.Module.ScrunchedHeadComment'
 	},
 	staleBefore:'now',
 	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,
