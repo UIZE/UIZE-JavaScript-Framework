@@ -37,6 +37,15 @@
 		The =<%= _widgetModuleName %>= module implements a widget class.
 
 		*DEVELOPERS:* <%= Uize.String.hugJoin (input.developers || [],'`','`',', ') %>
+
+		Visual Sampler
+			Below is a visual sampler of the =<%= _widgetModuleName %>= class...
+
+			.............<%= Uize.String.repeat ('.',_widgetModuleName.length) %>
+			<< widget >>
+
+			widgetClass: <%= _widgetModuleName %>
+			.............<%= Uize.String.repeat ('.',_widgetModuleName.length) %>
 */
 
 Uize.module ({

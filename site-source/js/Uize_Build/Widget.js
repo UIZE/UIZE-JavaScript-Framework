@@ -38,9 +38,9 @@ Uize.module ({
 	required:[
 		'Uize.Build.Util',
 		'Uize.Services.FileSystem',
-		'Uize.Templates.Module.Widget.Widget',
-		'Uize.Templates.Module.Widget.VisualSampler',
-		'Uize.Templates.Module.Widget.VisualTests',
+		'Uize.Build.Templates.Module.Widget.Widget',
+		'Uize.Build.Templates.Module.Widget.VisualSampler',
+		'Uize.Build.Templates.Module.Widget.VisualTests',
 		'Uize.Flo'
 	],
 	builder:function () {
@@ -116,7 +116,7 @@ Uize.module ({
 								var _moduleName = _namespace + '.' + _moduleType;
 								_fileSystem.writeFile ({
 									path:_getModulePath (_moduleName),
-									contents:Uize.Templates.Module.Widget [_moduleType].process (
+									contents:Uize.Build.Templates.Module.Widget [_moduleType].process (
 										Uize.copyInto (
 											{
 												headComment:_headCommentGenerator
