@@ -13,8 +13,8 @@
 	headComments:{
 	},
 	scrunchedHeadComments:{
-		Uize:'Uize.Templates.Module.ScrunchedHeadComment',
-		SampleSite:'SampleSite.Templates.Module.HeadComment'
+		Uize:'Uize.Build.Templates.Module.ScrunchedHeadComment',
+		SampleSite:'SampleSite.Build.Templates.Module.HeadComment'
 	},
 	staleBefore:'now',
 	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,

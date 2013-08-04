@@ -11,12 +11,12 @@
 	],
 	isDev:'false',
 	headComments:{
-		Uize:'Uize.Templates.Module.HeadComment',
-		UizeSite:'Uize.Templates.Module.HeadComment'
+		Uize:'Uize.Build.Templates.Module.HeadComment',
+		UizeSite:'Uize.Build.Templates.Module.HeadComment'
 	},
 	scrunchedHeadComments:{
-		Uize:'Uize.Templates.Module.ScrunchedHeadComment',
-		UizeSite:'UizeSite.Templates.Module.ScrunchedHeadComment'
+		Uize:'Uize.Build.Templates.Module.ScrunchedHeadComment',
+		UizeSite:'UizeSite.Build.Templates.Module.ScrunchedHeadComment'
 	},
 	staleBefore:'now',
 	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,

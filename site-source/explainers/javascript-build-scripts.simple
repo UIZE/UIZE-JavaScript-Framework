@@ -156,6 +156,9 @@ UIZE Config Options
 			- =creationYear= - the creation year (eg. =2013=) for the generated module
 			- =moduleName= - the name of the module being generated
 
+		NOTES
+		- see also the related =scrunchedHeadComments= config option
+
 	isDev
 		A boolean (or string value that is either ='true'= or ='false'=), specifying whether or not the build scripts should build files for dev mode.
 
@@ -192,6 +195,9 @@ UIZE Config Options
 
 			- =buildDate= - the date when the module is built, formatted as ISO8601 date string
 			- =moduleName= - the name of the module, so that the replacement head comment isn't totally generic
+
+		NOTES
+		- see also the related =headComments= config option
 
 	servicesSetup
 		A string, specifying the name of the module that should be loaded to perform the services setup when building your project.
