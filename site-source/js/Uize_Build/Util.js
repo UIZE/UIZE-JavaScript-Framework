@@ -95,7 +95,7 @@ Uize.module ({
 					return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
 					/*?
 						Static Methods
-							Uize.Build.Uril.getPathToRoot
+							Uize.Build.Util.getPathToRoot
 								Returns a string, containing zero or more "../" (back folder) path segments, representing a relative path from the specified relative path back to the root.
 
 								SYNTAX
@@ -162,8 +162,26 @@ Uize.module ({
 						title:_titleExtractor (_fileText.match (/<title>(.*?)<\/title>/) [1]),
 						keywords:_keywordsMatch ? _keywordsMatch [1] : '',
 						description:_descriptionMatch ? _descriptionMatch [1] : '',
-						imageSrc:_imageSrcMatch ? Uize.Url.toAbsolute (_folderToIndex,_imageSrcMatch [1]) : ''
+						imageSrc:_imageSrcMatch ? _imageSrcMatch [1] : ''
 					};
+					/*?
+						Static Methods
+							Uize.Build.Util.getHtmlFileInfo
+								Returns an object, providing information about the specified HTML file.
+
+								SYNTAX
+								...................................................................................
+								htmlFileInfoOBJ = Uize.Build.Util.getHtmlFileInfo (filePathSTR,titleExtractorFUNC);
+								...................................................................................
+
+								This method returns an object containing the following properties...
+
+								- =path= - the value specified for the =filePathSTR= parameter (echoed as a convenience)
+								- =title= - the value of the =title= tag of the document, modified by the function specified by the =titleExtractorFUNC= parameter
+								- =keywords= - the value of the =keywords= meta tag of the document (an empty string if the tag is not present)
+								- =description= - the value of the =description= meta tag of the document (an empty string if the tag is not present)
+								- =imageSrc= - the value of the =image_src= link tag of the document (an empty string if the tag is not present)
+					*/
 				},
 
 				getHtmlFilesInfo:function (_folderToIndex,_titleExtractor) {
@@ -178,10 +196,14 @@ Uize.module ({
 								}
 							}),
 							function (_path) {
-								return _package.getHtmlFileInfo (
+								var _htmlFileInfo = _package.getHtmlFileInfo (
 									_folderToIndex + '/' + Uize.Url.from (_path).file,
 									_titleExtractor
 								);
+								if (_htmlFileInfo.imageSrc)
+									_htmlFileInfo.imageSrc = Uize.Url.toAbsolute (_folderToIndex,_htmlFileInfo.imageSrc)
+								;
+								return _htmlFileInfo;
 							}
 						),
 						'value.title.toLowerCase ()'
@@ -190,6 +212,18 @@ Uize.module ({
 
 				getTestModuleName:function (_moduleName) {
 					return _moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName;
+					/*?
+						Static Methods
+							Uize.Build.Util.getTestModuleName
+								Returns a string, representing the name of the corresponding unit tests module for the specified module.
+
+								SYNTAX
+								......................................................................
+								testModuleNameSTR = Uize.Build.Util.getTestModuleName (moduleNameSTR);
+								......................................................................
+
+								This method follows the convention that the name for a unit tests module is derived from the module it is intended to test, by using the top level namespace for that module as a prefix, appending the path segment ".Test.", and then finally appending the name of the module. Using this rule, the test module for the module =MyNamespace.MyClass.MySubclass= would be named =MyNamespace.Test.MyNamespace.MyClass.MySubclass=.
+					*/
 				},
 
 				getJsModules:function (_params) {
@@ -218,6 +252,26 @@ Uize.module ({
 						}
 					});
 					return _modules.sort ();
+					/*?
+						Static Methods
+							Uize.Build.Util.getJsModules
+								Returns an array, containing the names of all the UIZE modules.
+
+								SYNTAX
+								..........................................................
+								jsModulesARRAY = Uize.Build.Util.getJsModules (paramsOBJ);
+								..........................................................
+
+								This array of module names returned by this method will include modules that are generated from JavaScript template (=.js.jst=) files, CSS template (=.csst=) files, and folder paths for folders that are under folder organized namespaces.
+
+								Params
+									The =paramsOBJ= object should have the following properties...
+
+									- =sourcePath= - a string, specifying the path where the source files of the project are located
+									- =modulesFolder= - a string, specifying the name of the folder containing the modules for the project (relative to the source path)
+
+									These two properties of the params object correspond to the same named properties of the UIZE config. Therefore, if your code has a reference to the UIZE config object, you can pass it as the =paramsOBJ= parameter to this method.
+					*/
 				},
 
 				getJsModuleTodos:function (_params) {
@@ -235,6 +289,23 @@ Uize.module ({
 
 				getModuleNamespace:function (_moduleName) {
 					return _moduleName.slice (0,((_moduleName.indexOf ('.') + 1) || _moduleName.length + 1) - 1);
+					/*?
+						Static Methods
+							Uize.Build.Util.getModuleNamespace
+								Returns a string, representing the top level namespace for the specified module.
+
+								SYNTAX
+								........................................................................
+								moduleNamespaceSTR = Uize.Build.Util.getModuleNamespace (moduleNameSTR);
+								........................................................................
+
+								EXAMPLES
+								.........................................................................................
+								Uize.Build.Util.getModuleNamespace ('Uize');                     // returns 'Uize'
+								Uize.Build.Util.getModuleNamespace ('Uize.Widgets.Log.Widget');  // returns 'Uize'
+								Uize.Build.Util.getModuleNamespace ('MyNamespace.MyClass');      // returns 'MyNamespace'
+								.........................................................................................
+					*/
 				},
 
 				readSimpleDataFile:function (_simpleDataFilePath) {
