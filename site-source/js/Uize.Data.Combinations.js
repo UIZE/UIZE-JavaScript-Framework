@@ -468,13 +468,13 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
+				_package,
 				_undefined,
 				_isList = Uize.isList
 			;
 
-		/*** Public Static Methods ***/
-			_package.generate = function (_combinationsSpecifier,_combinationTransformer,_combinationMatcher) {
+		return _package = Uize.package ({
+			generate:function (_combinationsSpecifier,_combinationTransformer,_combinationMatcher) {
 				var _combinations = [];
 				_package.forEach (
 					_combinationsSpecifier,
@@ -552,11 +552,9 @@ Uize.module ({
 							NOTES
 							- compare to the =Uize.Data.Combinations.forEach= static method
 				*/
-			};
+			},
 
-			_package.forEach = function (
-				_combinationsSpecifier,_iterationHandler,_combinationTransformer,_combinationMatcher
-			) {
+			forEach:function (_combinationsSpecifier,_iterationHandler,_combinationTransformer,_combinationMatcher) {
 				if (Uize.isObject (_combinationsSpecifier)) {
 					/*** normalize parameters ***/
 						if (_combinationTransformer != _undefined)
@@ -718,9 +716,8 @@ Uize.module ({
 							NOTES
 							- compare to the =Uize.Data.Combinations.generate= static method
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

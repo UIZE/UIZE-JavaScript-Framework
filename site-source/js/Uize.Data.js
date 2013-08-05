@@ -30,7 +30,6 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
 				_string = 'string',
 				_true = true,
 				_false = false,
@@ -41,10 +40,13 @@ Uize.module ({
 			;
 
 		/*** General Variables ***/
-			var _sacredEmptyObject = {};
+			var
+				_package,
+				_sacredEmptyObject = {}
+			;
 
-		/*** Public Static Methods ***/
-			_package.getColumn = function (_rows,_columnName,_onlyUniques) {
+		return _package = Uize.package ({
+			getColumn:function (_rows,_columnName,_onlyUniques) {
 				var _result = [];
 				if (_rows) {
 					var _uniqueValuesMap = _onlyUniques ? {} : _null;
@@ -124,9 +126,9 @@ Uize.module ({
 
 							In the above example, the variable =departments= would be an array with the value =['engineering','finance']=.
 				*/
-			};
+			},
 
-			_package.findRecords = function (_records,_match) {
+			findRecords:function (_records,_match) {
 				var _matchingRecords = [];
 				if (_records) {
 					for (var _recordNo = -1, _recordsLength = _records.length, _record; ++_recordNo < _recordsLength;)
@@ -188,9 +190,9 @@ Uize.module ({
 							NOTES
 							- see also the =Uize.findRecord=, =Uize.findRecordNo=, and =Uize.recordMatches= static methods of the =Uize.Class= base class
 				*/
-			};
+			},
 
-			_package.filter = function (_object,_propertyNames) {
+			filter:function (_object,_propertyNames) {
 				var
 					_this = this,
 					_result = {}
@@ -251,9 +253,9 @@ Uize.module ({
 							);
 							.................................
 				*/
-			};
+			},
 
-			_package.identical = function (_object1,_object2,_options) {
+			identical:function (_object1,_object2,_options) {
 				if (!_options) _options = _sacredEmptyObject;
 				var
 					_equality = _options.equality,
@@ -429,9 +431,9 @@ Uize.module ({
 							NOTES
 							- see also the =Uize.Data.clones= and =Uize.Data.conjoined= static methods
 				*/
-			};
+			},
 
-			_package.conjoined = function (_object1,_object2) {
+			conjoined:function (_object1,_object2) {
 				function _getObjectReferences (_object) {
 					var _objRefs = [];
 					function _accumulateObjRefs (_object) {
@@ -470,9 +472,9 @@ Uize.module ({
 							NOTES
 							- =Uize.Data.conjoined (myObjectOBJ,myObjectOBJ)= will return =true=, since they are one and the same (ie. conjoined at the root).
 				*/
-			};
+			},
 
-			_package.clones = function (_object1,_object2) {
+			clones:function (_object1,_object2) {
 				return (
 					_package.identical (_object1,_object2,{allowConjoined:_false}) &&
 					!_package.conjoined (_object1,_object2)
@@ -492,9 +494,9 @@ Uize.module ({
 							NOTES
 							- =Uize.Data.clones (myObjectOBJ,myObjectOBJ)= will return =false=, since they are one and the same and not clones.
 				*/
-			};
+			},
 
-			_package.intersection = function (_object1,_object2) {
+			intersection:function (_object1,_object2) {
 				var _result = {};
 				if (_object1 && _object2) {
 					for (var _propertyName in _object1) {
@@ -536,9 +538,8 @@ Uize.module ({
 
 							In the above example, the variable =employeeInCommon= would have the value ={firstName:'John',startYear:'2008'}=.
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

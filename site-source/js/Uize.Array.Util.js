@@ -30,7 +30,7 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
+				_package,
 				_undefined = undefined,
 				_ArrayPrototype = Array.prototype,
 				_ArrayPush = _ArrayPrototype.push,
@@ -40,8 +40,8 @@ Uize.module ({
 				_fullArraySpliceArgs = [0,_Infinity]
 			;
 
-		/*** Public Static Methods ***/
-			_package.replaceContents = function (_array1,_array2) {
+		return _package = Uize.package ({
+			replaceContents:function (_array1,_array2) {
 				if (_array1 != _array2) {
 					_array1.length = 0;
 					_array2 && _array2.length && _ArrayPush.apply (_array1,_array2);
@@ -79,9 +79,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Array.Util.swapContents= static method
 				*/
-			};
+			},
 
-			_package.swapContents = function (_array1,_array2) {
+			swapContents:function (_array1,_array2) {
 				if (_array1 != _array2) {
 					_ArrayPush.apply (
 						_array1,
@@ -115,9 +115,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Array.Util.replaceContents= static method
 				*/
-			};
+			},
 
-			_package.flatten = function (_sourceArray,_depth,_target) {
+			flatten:function (_sourceArray,_depth,_target) {
 				_depth = _depth == _undefined ? _Infinity : +_depth || 0;
 				var
 					_workingArray = _sourceArray,
@@ -199,9 +199,8 @@ Uize.module ({
 									[0,1,2,3,4,5,6,6,5,4,3,2,1,0]
 									.............................
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

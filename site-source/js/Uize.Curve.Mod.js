@@ -58,15 +58,15 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
+				_package,
 				_undefined,
 				_blendFloats = _host.blendFloats,
 				_resolve = _host.resolve,
 				_linear = _host.linear
 			;
 
-		/*** Public Static Methods ***/
-			_package.band = function (_curveFunction,_sizeX,_alignX,_sizeY,_alignY) {
+		return _package = Uize.package ({
+			band:function (_curveFunction,_sizeX,_alignX,_sizeY,_alignY) {
 				_curveFunction = _resolve (_curveFunction);
 				if (_sizeY == _undefined) _sizeY = 1;
 				var
@@ -132,9 +132,9 @@ Uize.module ({
 							NOTES
 							- numerical values for the =curveFUNCorFLOAT= parameter are resolved to curve functions using the =Uize.Curve.resolve= static method
 				*/
-			};
+			},
 
-			_package.bend = function (_curveFunction,_horizontalBend,_verticalBend) {
+			bend:function (_curveFunction,_horizontalBend,_verticalBend) {
 				_curveFunction = _resolve (_curveFunction);
 				var
 					_horizontalBendIsLinear = (_horizontalBend = _resolve (_horizontalBend,0,false,-1)) == _linear,
@@ -185,9 +185,9 @@ Uize.module ({
 							NOTES
 							- numerical values for the =curveFUNCorFLOAT=, =bendXFUNCorFLOAT=, and =bendYFUNCorFLOAT= parameters are resolved to curve functions using the =Uize.Curve.resolve= static method
 				*/
-			};
+			},
 
-			_package.blend = function (_curveFunctionA,_curveFunctionB,_blend) {
+			blend:function (_curveFunctionA,_curveFunctionB,_blend) {
 				if (_blend == _undefined) _blend = .5;
 
 				return (
@@ -264,9 +264,9 @@ Uize.module ({
 							NOTES
 							- numerical values for the =curve1FUNCorFLOAT= and =curve2FUNCorFLOAT= parameters are resolved to curve functions using the =Uize.Curve.resolve= static method
 				*/
-			};
+			},
 
-			_package.multiply = function (_curveFunctionA,_curveFunctionB) {
+			multiply:function (_curveFunctionA,_curveFunctionB) {
 				_curveFunctionA = _resolve (_curveFunctionA);
 				_curveFunctionB = _resolve (_curveFunctionB);
 				return function (_value) {return _curveFunctionA (_value) * _curveFunctionB (_value)}
@@ -285,9 +285,9 @@ Uize.module ({
 							NOTES
 							- numerical values for the =curve1FUNCorFLOAT= and =curve2FUNCorFLOAT= parameters are resolved to curve functions using the =Uize.Curve.resolve= static method
 				*/
-			};
+			},
 
-			_package.quantize = function (_curveFunction,_steps,_stepCurveFunction) {
+			quantize:function (_curveFunction,_steps,_stepCurveFunction) {
 				_curveFunction = _resolve (_curveFunction);
 				if (!_steps || _steps == Infinity) return _curveFunction;
 				if (typeof _stepCurveFunction == 'number') _stepCurveFunction = _package.band (1,0,_stepCurveFunction);
@@ -328,9 +328,9 @@ Uize.module ({
 							- compare to the =Uize.Curve.Mod.redraw= static method
 							- numerical values for the =curveFUNCorFLOAT= parameter are resolved to curve functions using the =Uize.Curve.resolve= static method
 				*/
-			};
+			},
 
-			_package.redraw = function (_curveFunction,_segments,_segmentCurveFunction,_alternatingRotate) {
+			redraw:function (_curveFunction,_segments,_segmentCurveFunction,_alternatingRotate) {
 				_curveFunction = _resolve (_curveFunction);
 				if (!_segments || _segments == Infinity) return _curveFunction;
 				_segmentCurveFunction = _resolve (_segmentCurveFunction);
@@ -386,9 +386,9 @@ Uize.module ({
 							- compare to the =Uize.Curve.Mod.quantize= static method
 							- numerical values for the =curveFUNCorFLOAT= and =segmentCurveFUNCorFLOAT= parameters are resolved to curve functions using the =Uize.Curve.resolve= static method
 				*/
-			};
+			},
 
-			_package.repeat = function (_curveFunction,_repeats,_stairsDegree,_alternatingFlipHorz,_alternatingFlipVert) {
+			repeat:function (_curveFunction,_repeats,_stairsDegree,_alternatingFlipHorz,_alternatingFlipVert) {
 				var
 					_curveFunctionLength = Uize.isArray (_curveFunction = _resolve (_curveFunction))
 						? _curveFunction.length
@@ -470,9 +470,9 @@ Uize.module ({
 							NOTES
 							- numerical values for the =curveFUNCorFLOATorARRAY= parameter are resolved to curve functions using the =Uize.Curve.resolve= static method
 				*/
-			};
+			},
 
-			_package.rotate = function (_curveFunction,_blendOfRotated) {
+			rotate:function (_curveFunction,_blendOfRotated) {
 				_curveFunction = _resolve (_curveFunction);
 				return (
 					_blendOfRotated == _undefined || _blendOfRotated == 1
@@ -515,9 +515,8 @@ Uize.module ({
 							NOTES
 							- numerical values for the =curveFUNCorFLOAT= parameter are resolved to curve functions using the =Uize.Curve.resolve= static method
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

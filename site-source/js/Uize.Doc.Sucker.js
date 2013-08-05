@@ -36,17 +36,15 @@ Uize.module({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
 		/*** General Variables ***/
 			var
+				_package,
 				_docCommentRegExp = /^\/\*\?/,
 				_featureTypeToSectionTitleSuffix = {Method:'Methods',Property:'Properties'}
 			;
 
-		/*** Public Static Methods ***/
-			_package.suckDoc = function (_javascriptSource,_module,_modulesTree,_examples) {
+		return _package = Uize.package ({
+			suckDoc:function (_javascriptSource,_module,_modulesTree,_examples) {
 				var _simpleDocChunks = [];
 				for (
 					var
@@ -361,9 +359,9 @@ Uize.module({
 							}
 				}
 				return _simpleDocChunks.join ('\n');
-			};
+			},
 
-			_package.toDocument = function (_javascriptSource,_params) {
+			toDocument:function (_javascriptSource,_params) {
 				/* PARAMETERS:
 					module
 						A reference to a module, for which the JavaScript source is providing documentation.
@@ -431,9 +429,8 @@ Uize.module({
 						)
 					)
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

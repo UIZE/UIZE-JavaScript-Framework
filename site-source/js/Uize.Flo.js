@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Package
+	type: Class
 	importance: 3
 	codeCompleteness: 70
 	docCompleteness: 5
