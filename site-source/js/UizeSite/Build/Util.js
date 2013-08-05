@@ -39,7 +39,7 @@ Uize.module ({
 				_widgetClassSuffixRegExp = /\.Widget$/
 			;
 
-		return {
+		return Uize.package ({
 			getIndexableFiles:function (_sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp) {
 				return _fileSystem.getFiles ({
 					path:_sourcePath + '/' + _indexableFolderUnderSource,
@@ -67,7 +67,7 @@ Uize.module ({
 						: ''
 				);
 			}
-		};
+		});
 	}
 });
 

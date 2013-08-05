@@ -54,7 +54,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return {
+		return Uize.package ({
 			perform:function (_params) {
 				var
 					_fileBuilder = Uize.Services.FileBuilder.singleton (),
@@ -130,7 +130,7 @@ Uize.module ({
 									.
 				*/
 			}
-		};
+		});
 	}
 });
 

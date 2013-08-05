@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Array Package
+|    /    O /   |    MODULE : Uize.Array Namespace
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Package
+	type: Namespace
 	importance: 4
 	codeCompleteness: 100
 	docCompleteness: 100

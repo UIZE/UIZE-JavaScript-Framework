@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Build.Files.JstDerivedPages Package
+|    /    O /   |    MODULE : Uize.Build.Files.JstDerivedPages Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Package
+	type: Class
 	importance: 6
 	codeCompleteness: 100
 	docCompleteness: 3

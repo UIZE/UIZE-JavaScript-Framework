@@ -32,12 +32,12 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return {
+		return Uize.package ({
 			setup:function () {
 				Uize.Build.ServicesSetup.setup (); // get base level of services setup
 				Uize.Services.Setup.provideServiceSetup ('Uize.Services.FileBuilder','UizeSite.Build.File');
 			}
-		};
+		});
 	}
 });
 

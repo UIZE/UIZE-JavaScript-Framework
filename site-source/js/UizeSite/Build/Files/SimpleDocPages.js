@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.Files.SimpleDocPages Package
+|    /    O /   |    MODULE : UizeSite.Build.Files.SimpleDocPages Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2005-2013 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Package
+	type: Class
 	importance: 5
 	codeCompleteness: 100
 	docCompleteness: 3
