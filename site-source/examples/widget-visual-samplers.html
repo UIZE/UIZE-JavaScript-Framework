@@ -86,7 +86,11 @@ Uize.module ({
 				_visualSamplerDirectNamespaces = Uize.Data.Matches.values (
 					_modulesList,
 					function (_moduleName) {
-						return _modulesLookup [_moduleName + '.Widget'] && _modulesLookup [_moduleName + '.VisualSampler'];
+						return (
+							!Uize.String.startsWith (_moduleName,'Uize.Build.') &&
+							_modulesLookup [_moduleName + '.Widget'] &&
+							_modulesLookup [_moduleName + '.VisualSampler']
+						);
 					}
 				),
 				_visualSamplerNamespaces = _visualSamplerDirectNamespaces.concat ()

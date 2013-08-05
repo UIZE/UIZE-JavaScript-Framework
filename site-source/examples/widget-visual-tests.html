@@ -82,7 +82,12 @@ Uize.module ({
 				_modulesLookup = Uize.lookup (_modulesList),
 				_testNames = Uize.Data.Matches.values (
 					_modulesList,
-					function (_moduleName) {return _modulesLookup [_visualTestsModuleNameFromWidgetClass (_moduleName)]}
+					function (_moduleName) {
+						return (
+							!Uize.String.startsWith (_moduleName,'Uize.Build.') &&
+							_modulesLookup [_visualTestsModuleNameFromWidgetClass (_moduleName)]
+						);
+					}
 				)
 			;
 
