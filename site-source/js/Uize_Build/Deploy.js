@@ -58,7 +58,7 @@ Uize.module ({
 							path:_ftpCommandsFilename,
 							contents:Uize.isArray (_ftpCommands) ? _ftpCommands.join ('\r\n') : _ftpCommands
 						});
-						Uize.Build.Wsh.execute ('ftp -s:' + _ftpCommandsFilename);
+						Uize.Build.Wsh.exec ('ftp -s:' + _ftpCommandsFilename);
 						_fileSystem.deleteFile ({path:_ftpCommandsFilename});
 					}
 
@@ -78,7 +78,7 @@ Uize.module ({
 							path:_sshCommandsPath,
 							contents:Uize.isArray (_sshCommands) ? _sshCommands.join ('\r\n') : _sshCommands
 						});
-						Uize.Build.Wsh.execute ('"' + _deployConfig.appPaths.SecureCRT + '" /SCRIPT "' + _sshCommandsPath + '"');
+						Uize.Build.Wsh.exec ('"' + _deployConfig.appPaths.SecureCRT + '" /SCRIPT "' + _sshCommandsPath + '"');
 						_fileSystem.deleteFile ({path:_sshCommandsPath});
 					}
 
@@ -105,7 +105,7 @@ Uize.module ({
 						_fileSystem.deleteFile ({path:_tempPath + '/' + _builtZipFilename});
 
 					/*** create built zip archive ***/
-						Uize.Build.Wsh.execute (
+						Uize.Build.Wsh.exec (
 							'"' + _deployConfig.appPaths ['7-Zip'] + '" a ' + _tempPath + '/' + _builtZipFilename + ' ' + _builtPath + ' -r'
 						);
 

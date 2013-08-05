@@ -342,10 +342,6 @@ Uize.module ({
 				return _error;
 			};
 
-			_package.execute = function (_command) {
-				_getWshShell ().Run (_command,0,true);
-			};
-
 			_package.runScripts = function (_scripts) {
 				return _package.exec (
 					Uize.map (Uize.isArray (_scripts) ? _scripts : [_scripts],'\'WScript \' + value')
