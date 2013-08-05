@@ -31,7 +31,7 @@
 
 Uize.module ({
 	name:'Uize.Build.All',
-	required:'Uize.Build.Util',
+	required:'Uize.Build.Wsh',
 	builder:function () {
 		'use strict';
 
@@ -54,7 +54,7 @@ Uize.module ({
 							}
 						);
 						if (_params.test == 'true')
-							_buildError = Uize.Build.Util.runScripts (_params.testSequence)
+							_buildError = Uize.Build.Wsh.runScripts (_params.testSequence)
 						;
 						_params.silent == 'true' ||
 							alert (

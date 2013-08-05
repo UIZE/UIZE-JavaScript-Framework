@@ -335,33 +335,6 @@ Uize.module ({
 					;
 				},
 
-				exec:function (_commands) {
-					var _error;
-					if (!Uize.isArray (_commands)) _commands = [_commands];
-					for (
-						var
-							_commandNo = -1,
-							_commandsLength = _commands.length,
-							_wshShell = new ActiveXObject ('WScript.Shell'),
-							_errorCode
-						;
-						++_commandNo < _commandsLength && !_error;
-					)
-						if (_errorCode = _wshShell.Run (_commands [_commandNo],0,true))
-							_error = {
-								script:_commands [_commandNo],
-								errorCode:_errorCode
-							}
-					;
-					return _error;
-				},
-
-				runScripts:function (_scripts) {
-					return _package.exec (
-						Uize.map (Uize.isArray (_scripts) ? _scripts : [_scripts],'\'WScript \' + value')
-					);
-				},
-
 				runUnitTests:function (_unitTestsClass,_silent,_logFilePath) {
 					function _runUnitTests (_unitTestsClass) {
 						var
