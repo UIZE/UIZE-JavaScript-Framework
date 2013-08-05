@@ -30,24 +30,41 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
 				_undefined,
 				_isFunction = Uize.isFunction
 			;
 
 		/*** General Variables ***/
 			var
+				_package,
 				_sacredEmptyArray = [],
 				_typicalPackageFunction = function () {},
 				_implicitMethodNames = {toString:1,valueOf:1}
 			;
 
-		/*** Public Static Methods ***/
-			_package.getFeatures = function (_instanceOrClass) {
+		/*** Utility Functions ***/
+			function _isClass (_object) {
+				return (
+					_object != _undefined &&
+					(
+						_isFunction (_object) ||
+						(
+							typeof _object == 'object' && !_object.constructor
+							/* NOTE:
+								In Internet Explorer, certain DOM object "classes" like HTMLBodyElement are reported as object, rather than function, and the value of their constructor property is undefined. Normally, the value of the constructor property for a non-null object is the constructor function for that object. In the case of the document.body element in IE, the constructor is a reference to HTMLBodyElement. That's all fine and good, but HTMLBodyElement is not a function. Instead, it's an object, whose constructor is undefined. We use this as an indication that the object is really a "class", until a better test is worked out.
+							*/
+						)
+					)
+				);
+			}
+
+		return _package = Uize.package ({
+			getFeatures:function (_instanceOrClass) {
 				var
 					_class = _package.resolveToClass (_instanceOrClass),
 					_features = []
 				;
+
 				if (_class) {
 					var _getFeaturesForContext = function (_contextName) {
 						var
@@ -80,6 +97,7 @@ Uize.module ({
 								)
 						;
 					};
+
 					_getFeaturesForContext ('instance');
 					_getFeaturesForContext ('static');
 					_package.isUizeClass (_class) && _getFeaturesForContext ('state');
@@ -98,7 +116,9 @@ Uize.module ({
 								);
 							}
 						);
+
 				}
+
 				return _features;
 				/*?
 					Static Methods
@@ -115,9 +135,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Util.Oop.getFeatureInfo= static method
 				*/
-			};
+			},
 
-			_package.inheritsFrom = function (_testInstanceOrClass,_baseInstanceOrClass) {
+			inheritsFrom:function (_testInstanceOrClass,_baseInstanceOrClass) {
 				if (_baseInstanceOrClass == _undefined) return _testInstanceOrClass == _undefined;
 				if (_testInstanceOrClass == _undefined) return _baseInstanceOrClass == Object;
 				var
@@ -128,24 +148,11 @@ Uize.module ({
 				;
 				while (_testClass != _baseClass && _isFunction (_testClass = _testClass.superclass));
 				return _testClass == _baseClass;
-			};
+			},
 
-			var _isClass = _package.isClass = function (_object) {
-				return (
-					_object != _undefined &&
-					(
-						_isFunction (_object) ||
-						(
-							typeof _object == 'object' && !_object.constructor
-							/* NOTE:
-								In Internet Explorer, certain DOM object "classes" like HTMLBodyElement are reported as object, rather than function, and the value of their constructor property is undefined. Normally, the value of the constructor property for a non-null object is the constructor function for that object. In the case of the document.body element in IE, the constructor is a reference to HTMLBodyElement. That's all fine and good, but HTMLBodyElement is not a function. Instead, it's an object, whose constructor is undefined. We use this as an indication that the object is really a "class", until a better test is worked out.
-							*/
-						)
-					)
-				);
-			};
+			isClass:_isClass,
 
-			_package.isPackage = function (_object) {
+			isPackage:function (_object) {
 				if (!_isClass (_object)) return false;
 
 				/*** object must be a function / constructor, so check to see if function has code ***/
@@ -180,9 +187,9 @@ Uize.module ({
 					;
 
 				return true;
-			};
+			},
 
-			_package.isUizeClass = function (_object) {
+			isUizeClass:function (_object) {
 				return (
 					_isClass (_object) &&
 					_isFunction (_object.subclass) &&
@@ -190,13 +197,13 @@ Uize.module ({
 					_isFunction (_object.set) &&
 					_isFunction (_object.get)
 				);
-			};
+			},
 
-			_package.isUizeClassInstance = function (_value) {
+			isUizeClassInstance:function (_value) {
 				return Uize.isObject (_value) && _package.isUizeClass (_value.constructor);
-			};
+			},
 
-			_package.getClassName = function (_class) {
+			getClassName:function (_class) {
 				return (
 					(_class != _undefined && _class.moduleName) ||
 					(
@@ -209,9 +216,9 @@ Uize.module ({
 						) [1]
 					) || ''
 				);
-			};
+			},
 
-			_package.getFeatureInfo = function (_class,_contextName,_featureName) {
+			getFeatureInfo:function (_class,_contextName,_featureName) {
 				function _returnClass () {return _class}
 				function _returnPrototype () {return _class.prototype}
 				function _returnSetGetProperties () {return _class.get ()}
@@ -267,9 +274,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Util.Oop.getFeatures= static method
 				*/
-			};
+			},
 
-			_package.getInheritanceChain = function (_class) {
+			getInheritanceChain:function (_class) {
 				var _inheritanceChain = [];
 				if (_package.isUizeClass (_class)) {
 					var _superclass = _class;
@@ -279,17 +286,16 @@ Uize.module ({
 					}
 				}
 				return _inheritanceChain;
-			};
+			},
 
-			_package.resolveToClass = function (_instanceOrClass) {
+			resolveToClass:function (_instanceOrClass) {
 				return (
 					_instanceOrClass == _undefined || _isFunction (_instanceOrClass)
 						? _instanceOrClass || _undefined
 						: _instanceOrClass.constructor
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

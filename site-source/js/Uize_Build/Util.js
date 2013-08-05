@@ -58,7 +58,7 @@ Uize.module ({
 				);
 			}
 
-		return _package = {
+		return _package = Uize.package ({
 			/*** Public Static Properties ***/
 				jsModuleExtensionRegExp:_jsModuleExtensionRegExp,
 					/*?
@@ -529,7 +529,7 @@ Uize.module ({
 									- If no =logFilePath= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the filename for the log file will be derived from the filename of the build script, with the ".js" file extension replaced with the extension ".log".
 					*/
 				}
-		};
+		});
 	}
 });
 
