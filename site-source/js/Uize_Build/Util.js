@@ -11,9 +11,9 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 3
+	importance: 2
 	codeCompleteness: 100
-	docCompleteness: 2
+	docCompleteness: 100
 */
 
 /*?
@@ -181,6 +181,9 @@ Uize.module ({
 								- =keywords= - the value of the =keywords= meta tag of the document (an empty string if the tag is not present)
 								- =description= - the value of the =description= meta tag of the document (an empty string if the tag is not present)
 								- =imageSrc= - the value of the =image_src= link tag of the document (an empty string if the tag is not present)
+
+								NOTES
+								- see also the related =Uize.Build.Util.getHtmlFilesInfo= static method
 					*/
 				},
 
@@ -208,6 +211,23 @@ Uize.module ({
 						),
 						'value.title.toLowerCase ()'
 					);
+					/*?
+						Static Methods
+							Uize.Build.Util.getHtmlFilesInfo
+								Returns an array of objects, representing the file info for all the HTML files in the specified folder.
+
+								SYNTAX
+								................................................................................................
+								htmlFilesInfoARRAY = Uize.Build.Util.getHtmlFilesInfo (folderToIndexPathSTR,titleExtractorFUNC);
+								................................................................................................
+
+								The returned array is sorted by the titles of the files, as represented by the =title= property of the file info objects and lowercased so that the sort is case-insensitive. This method uses the related =Uize.Build.Util.getHtmlFileInfo= method in its implementation to generate the info object for each file, so you can refer to the documentation for that method for more info on the contents of the file info objects.
+
+								Files are only considered to be HTML files if their filenames have a =.html= file extension. Files whose filenames begin with a "~" (tilde) character are excluded from the list, as this prefix is used to indicate files that are not yet ready for prime time and that should be ignored by certain build processes.
+
+								NOTES
+								- see also the related =Uize.Build.Util.getHtmlFileInfo= static method
+					*/
 				},
 
 				getTestModuleName:function (_moduleName) {
@@ -285,6 +305,16 @@ Uize.module ({
 							return _moduleNameFromModulePath (_path.replace (_todoExtensionRegExp,''));
 						}
 					});
+					/*?
+						Static Methods
+							Uize.Build.Util.getJsModuleTodos
+								Returns a string array, containing the module names of all the TODO files (files with a =.todo= file extension) under the modules folder of the project.
+
+								SYNTAX
+								..................................................................
+								jsModuleTodosARRAY = Uize.Build.Util.getJsModuleTodos (paramsOBJ);
+								..................................................................
+					*/
 				},
 
 				getModuleNamespace:function (_moduleName) {
@@ -313,6 +343,16 @@ Uize.module ({
 						simple:_fileSystem.readFile ({path:_simpleDataFilePath}),
 						collapseChildren:true
 					});
+					/*?
+						Static Methods
+							Uize.Build.Util.readSimpleDataFile
+								Returns an object that is parsed from the specified simple data file, with the children collapsed using the =collapseChildren= option of the SimpleData parser.
+
+								SYNTAX
+								...........................................................................
+								simpleDataOBJ = Uize.Build.Util.readSimpleDataFile (simpleDataFilePathSTR);
+								...........................................................................
+					*/
 				},
 
 				compileJstFile:function (_jstTemplatePath) {
@@ -326,6 +366,18 @@ Uize.module ({
 						Uize.require (_template.required);
 					}
 					return _template.templateFunction;
+					/*?
+						Static Methods
+							Uize.Build.Util.compileJstFile
+								Returns a template function, compiled from the specified JST (=.jst=) template file.
+
+								SYNTAX
+								...................................................................
+								templateFUNC = Uize.Build.Util.compileJstFile (jstTemplatePathSTR);
+								...................................................................
+
+								This method caches the compiled template function so that, if multiple requests are made to compile the same template file, the file is only read and the template compiled once. Any modules that are required by the template, using the =@required= template directive, are required so that the template function returned by this method is safe to call. If the specified JST template file does not exist, then the method returns the value =undefined=.
+					*/
 				},
 
 				processJstFile:function (_jstTemplatePath,_input) {
@@ -333,6 +385,21 @@ Uize.module ({
 					_template &&
 						_fileSystem.writeFile ({path:_jstTemplatePath.replace (/\.jst$/,''),contents:_template (_input)})
 					;
+					/*?
+						Static Methods
+							Uize.Build.Util.processJstFile
+								Compiles the specified JST template file, uses the compiled template function to process the specified input, and writes the result as a new file.
+
+								SYNTAX
+								.....................................................................
+								Uize.Build.Util.processJstFile (jstTemplatePathSTR,templateInputOBJ);
+								.....................................................................
+
+								This method writes the result as a file alongside the JST template file, where the name of the written file is the same as the template file but with the =.jst= suffix stripped off. So, for example, if the JST template file being processed were named *"homepage.html.jst"*, then the written file would be named *"homepage.html"*.
+
+								NOTES
+								- see also the related =Uize.Build.Util.compileJstFile= static method
+					*/
 				},
 
 				runUnitTests:function (_unitTestsClass,_silent,_logFilePath) {
@@ -381,19 +448,35 @@ Uize.module ({
 						? Uize.require (_unitTestsClass,_runUnitTests)
 						: _runUnitTests (_unitTestsClass)
 					;
+					/*?
+						Static Methods
+							Uize.Build.Util.runUnitTests
+								Runs the specified unit tests class, optionally outputting the results to a specified log file.
+
+								SYNTAX
+								..................................................................................
+								Uize.Build.Util.runUnitTests (unitTestsClassSTRorCLASS,silentBOOL,logFilePathSTR);
+								..................................................................................
+
+								Parameters
+									This method supports the following parameters...
+
+									- =unitTestsClassSTRorCLASS= - either a string, specifying the name of a unit tests module, or a reference to a unit tests module
+									- =silentBOOL= - a boolean, specifing whether or not the test runner should be silent (unless the value =true= is specified, the test runner will output a synopsis to the console)
+									- =logFilePathSTR= - a string, optionally specifying the path for where a log file should be written (if not specified, no log file will be written)
+					*/
 				},
 
 				moduleAsText:function (_moduleDefinition) {
 					var
 						_builder = _moduleDefinition.builder,
-						_builderSpecifiedAsString = typeof _builder == 'string',
-						_builderPlaceholder = '[BUILDER_PLACEHOLDER_' + Uize.now () + ']'
+						_builderPlaceholder = typeof _builder == 'string' ? '[BUILDER_PLACEHOLDER_' + Uize.now () + ']' : ''
 					;
-					if (_builderSpecifiedAsString)
+					if (_builderPlaceholder)
 						_moduleDefinition.builder = _builderPlaceholder
 					;
 					var _moduleText = 'Uize.module (' + Uize.Json.to (_moduleDefinition) + ');';
-					if (_builderSpecifiedAsString) {
+					if (_builderPlaceholder) {
 						var _builderPlaceholderPos = _moduleText.indexOf (_builderPlaceholder);
 						_moduleText =
 							_moduleText.slice (0,_builderPlaceholderPos - 1) +
@@ -402,6 +485,18 @@ Uize.module ({
 						;
 					}
 					return _moduleText;
+					/*?
+						Static Methods
+							Uize.Build.Util.moduleAsText
+								Returns a string, being the module specified by a module definition object serialized to its string form.
+
+								SYNTAX
+								...................................................................
+								moduleTextSTR = Uize.Build.Util.moduleAsText (moduleDefinitionOBJ);
+								...................................................................
+
+								If a string value is specified for the =builder= property of the module definition (rather than a builder function, in other words), then this value will be substituted as is for the builder in the serialized module. This makes it possible to provide the exact code for a module's builder, complete with comments and formatting that you wish to preserve in the serialized text version of the module. This can be useful in some build processes that generate modules.
+					*/
 				},
 
 				dataAsModule:function (_moduleName,_moduleData) {
@@ -415,13 +510,43 @@ Uize.module ({
 							'}'
 						].join ('\n')
 					});
+					/*?
+						Static Methods
+							Uize.Build.Util.dataAsModule
+								Returns a string, being the text for a data module wrapper for the specified data.
+
+								SYNTAX
+								...............................................................................
+								moduleTextSTR = Uize.Build.Util.dataAsModule (moduleNameSTR,moduleDataANYTYPE);
+								...............................................................................
+
+								This method first serializes the data specified by the =moduleDataANYTYPE= parameter, after which it wraps this serialized data in the form of a data module and then returns the text serialization of this module. If this text were then to be written to a file under the modules folder of a project, then it could be required by the name specified in the =moduleNameSTR= parameter.
+
+								NOTES
+								- see also the related =Uize.Build.Util.moduleAsText= and =Uize.Build.Util.writeDataModule= static methods
+					*/
 				},
 
 				writeDataModule:function (_modulesFolderPath,_moduleName,_moduleData) {
 					_fileSystem.writeFile ({
-						path:_modulesFolderPath + '/' + _moduleName + '.js',
+						path:_modulesFolderPath + '/' + Uize.modulePathResolver (_moduleName) + '.js',
 						contents:_package.dataAsModule (_moduleName,_moduleData)
 					});
+					/*?
+						Static Methods
+							Uize.Build.Util.writeDataModule
+								Wraps the specified data in a data module wrapper of the specified module name and writes the module under the specified modules folder path.
+
+								SYNTAX
+								.......................................................................................
+								Uize.Build.Util.writeDataModule (modulesFolderPathSTR,moduleNameSTR,moduleDataANYTYPE);
+								.......................................................................................
+
+								This method uses the =Uize.Build.Util.dataAsModule= static method to wrap the data specified by the =moduleDataANYTYPE= parameter as a data module of the name specified by the =moduleNameSTR= parameter and then writes the module under the modules folder path specified by the =modulesFolderPathSTR= parameter.
+
+								NOTES
+								- see also the related =Uize.Build.Util.dataAsModule= static method
+					*/
 				},
 
 				buildFiles:function (_params) {
