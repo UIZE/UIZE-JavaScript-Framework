@@ -138,24 +138,6 @@ Uize.module ({
 										)
 									;
 
-								/*** stitch in window size options ***/
-									_siteMenuItems0Items.push (
-										{title:'-'},
-										{
-											title:'WINDOW SIZE',
-											items:[
-												{
-													title:'1024 x 768',
-													link:'javascript:moveTo ((screen.width - 1024) >> 1,0); resizeTo (1024,768)'
-												},
-												{
-													title:'1024 x MAX HEIGHT',
-													link:'javascript:moveTo ((screen.width - 1024) >> 1,0); resizeTo (1024,screen.height)'
-												}
-											]
-										}
-									);
-
 							/*** add shell node for site menu, that will overlay homeLink node ***/
 								_this.injectNodeHtml (
 									_this.getNode ('homeLink').parentNode,
