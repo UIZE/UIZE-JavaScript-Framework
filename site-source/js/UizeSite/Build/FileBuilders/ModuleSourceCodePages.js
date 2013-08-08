@@ -71,7 +71,6 @@ Uize.module ({
 				;
 				return this.readFile ({path:_inputs.sourceCodeTemplate}) ({
 					moduleName:_urlParts.fileName,
-					sourcePath:_sourceCode.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length),
 					body:this.readFile ({path:_sourceCode})
 				});
 			}
