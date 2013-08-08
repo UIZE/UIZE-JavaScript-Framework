@@ -145,10 +145,10 @@
 		.`negative-over`:visited,
 		.`negative-over`:hover,
 		.`negative-over`:active {
-			border-color: #7a7 #474 #474 #7a7;
+			border-color: #ab7878 #784545 #784545 #ab7878;
 			color: #fff;
 			text-shadow: 1px -1px 1px rgba(0,0,0,.1), 1px 0px 1px rgba(0,0,0,.1), 1px 1px 1px rgba(0,0,0,.1);
-			background: #6b3;
+			background: #bc3434;
 			filter: none;
 		}
 
