@@ -135,9 +135,9 @@
 		.`negative`:visited,
 		.`negative`:hover,
 		.`negative`:active {
-			border-color: #9c9 #696 #585 #9c9;
+			border-color: #cc9999 #996666 #875454 #cc9999;
 			color: #fff;
-			<% _buttonBgGradient ('#88dd44','#559922','#55aa22') %>
+			<% _buttonBgGradient ('#dd4646','#9b2222','##aa2222') %>
 		}
 
 		.`negative-over`,
@@ -157,11 +157,11 @@
 		.`negative-active`:visited,
 		.`negative-active`:hover,
 		.`negative-active`:active {
-			border-color: #584;
+			border-color: #884444;
 			color: #fff;
 			text-shadow: 1px -1px 1px rgba(0,0,0,.1), 1px 0px 1px rgba(0,0,0,.1), 1px 1px 1px rgba(0,0,0,.1);
 			box-shadow: inset 0 4px 6px rgba(0,0,0,.1);
-			background: #7c4;
+			background: #cb4343;
 			filter: none;
 		}
 
@@ -170,8 +170,57 @@
 		.`negative-disabled`:visited,
 		.`negative-disabled`:hover,
 		.`negative-disabled`:active {
-			border-color: #bc9;
-			background: #bd8;
+			border-color: #cc9999;
+			background: #dd8888;
+			filter: none;
+			color: rgba(255,255,255,.5);
+			text-shadow: none;
+			cursor: default;
+		}
+
+	/*** primary flavor ***/
+		.`primary`,
+		.`primary`:link,
+		.`primary`:visited,
+		.`primary`:hover,
+		.`primary`:active {
+			border-color: #99bbcc #668899 #547687 #99bbcc;
+			color: #fff;
+			<% _buttonBgGradient ('#46abdd','#22729b','#227daa') %>
+		}
+
+		.`primary-over`,
+		.`primary-over`:link,
+		.`primary-over`:visited,
+		.`primary-over`:hover,
+		.`primary-over`:active {
+			border-color: #789aab #456778 #456778 #789aab;
+			color: #fff;
+			text-shadow: 1px -1px 1px rgba(0,0,0,.1), 1px 0px 1px rgba(0,0,0,.1), 1px 1px 1px rgba(0,0,0,.1);
+			background: #348fbc;
+			filter: none;
+		}
+
+		.`primary-active`,
+		.`primary-active`:link,
+		.`primary-active`:visited,
+		.`primary-active`:hover,
+		.`primary-active`:active {
+			border-color: #447188;
+			color: #fff;
+			text-shadow: 1px -1px 1px rgba(0,0,0,.1), 1px 0px 1px rgba(0,0,0,.1), 1px 1px 1px rgba(0,0,0,.1);
+			box-shadow: inset 0 4px 6px rgba(0,0,0,.1);
+			background: #439ecb;
+			filter: none;
+		}
+
+		.`primary-disabled`,
+		.`primary-disabled`:link,
+		.`primary-disabled`:visited,
+		.`primary-disabled`:hover,
+		.`primary-disabled`:active {
+			border-color: #99bbcc;
+			background: #88c1dd;
 			filter: none;
 			color: rgba(255,255,255,.5);
 			text-shadow: none;

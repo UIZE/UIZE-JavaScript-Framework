@@ -50,7 +50,6 @@ Uize.module ({
 					selected:[false,true],
 					size:_allSizes
 				});
-				/*
 				this.addStateCombinationTestCases ({
 					text:'DELETE',
 					flavor:'negative',
@@ -65,7 +64,6 @@ Uize.module ({
 					selected:[false,true],
 					size:_allSizes
 				});
-				*/
 				this.addStateCombinationTestCases ({
 					text:'Settings',
 					enabled:[true,false],
