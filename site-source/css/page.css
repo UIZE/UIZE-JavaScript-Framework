@@ -309,9 +309,9 @@
 			border: 1px solid #dee;
 			border-right-color: #889094;
 			border-bottom-color: #889094;
-			box-shadow: 0 0 20px rgba(0,0,0,.6);
-			-moz-box-shadow: 0 0 20px rgba(0,0,0,.6);
-			-webkit-box-shadow: 0 0 20px rgba(0,0,0,.6);
+			box-shadow: 0 0 14px rgba(0,0,0,.3);
+			-moz-box-shadow: 0 0 14px rgba(0,0,0,.3);
+			-webkit-box-shadow: 0 0 14px rgba(0,0,0,.3);
 			max-height: 630px;
 			overflow: auto;
 		}
