@@ -302,14 +302,14 @@
 			display: none;
 			position: absolute;
 			padding: 5px 0;
-			background: #c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+			background: #fff;
 			border: 1px solid #dee;
 			border-right-color: #889094;
 			border-bottom-color: #889094;
 			box-shadow: 0 0 20px rgba(0,0,0,.6);
 			-moz-box-shadow: 0 0 20px rgba(0,0,0,.6);
 			-webkit-box-shadow: 0 0 20px rgba(0,0,0,.6);
-			max-height: 590px;
+			max-height: 630px;
 			overflow: auto;
 		}
 		.subMenuShell .subMenuItem,
@@ -319,7 +319,7 @@
 		.subMenuShell .subMenuItem:active
 		{
 			display: block;
-			padding: 2px 45px 3px 10px;
+			padding: 3px 45px 4px 10px;
 			margin: 0 1px; /* NOTE: need a margin around links, or focus highlight causes menu shell to have scrollbars */
 			font-family: Arial;
 			font-size: 12px;
@@ -350,9 +350,8 @@
 		.subMenuShell .divider {
 			font-size: 0;
 			line-height: 0;
-			margin: 4px 10px;
-			border-top: solid 2px #fff;
-			border-bottom: solid 2px #afbcc4;
+			margin: 6px 10px;
+			border-top: solid 1px #ccc;
 		}
 
 /*** site menu ***/
