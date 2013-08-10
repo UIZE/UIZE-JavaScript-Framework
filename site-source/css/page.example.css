@@ -111,5 +111,7 @@
 		left: 0;
 		right: 0;
 		height: 28px;
+		z-index: 2;
+		box-shadow: 0 6px 12px rgba(0,0,0,.3);
 	}
 
