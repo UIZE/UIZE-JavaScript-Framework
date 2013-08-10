@@ -1,7 +1,7 @@
 /*** General ***/
 	/*** Common Properties ***/
 		body {
-			background: #728088;
+			background: #ccc;
 			margin: 48px 0 0 0;
 			_margin-top: 0; /* hack for IE6, because the title isn't fixed positioned for this browser */
 		}
@@ -10,8 +10,8 @@
 			padding: 15px 14px;
 			margin: 0 auto 0 auto;
 			background: #f0f0f0;
-			border-left: 10px solid #55606a;
-			border-right: 10px solid #55606a;
+			border-left: 10px solid #fff;
+			border-right: 10px solid #fff;
 			padding-bottom: 0;
 		}
 		body, p, blockquote, td, ol {
@@ -232,6 +232,9 @@
 				top: 10px;
 				letter-spacing: 0;
 			}
+			.document-title .pageActions .buttonLink {
+				margin: 0 1px;
+			}
 
 	/*** preamble paragraph ***/
 		.preamble {
@@ -378,10 +381,10 @@
 		position: fixed;
 		right: 0;
 		top: 48px;
-		z-index: 1;
 		width: 130px;
 		bottom: 0;
-		z-index: 1;
+		box-shadow: -2px 7px 6px 2px rgba(0,0,0,.3);
+		z-index: 3;
 	}
 
 /*** footer shell ***/
