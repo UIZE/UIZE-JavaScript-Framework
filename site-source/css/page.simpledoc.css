@@ -91,11 +91,15 @@
 			.heading3 {
 				font-size: 14px;
 				letter-spacing: 1px;
-				padding: 1px 0 4px 0;
+				padding: 6px 0 7px 15px;
 				margin-bottom:0;
 				margin-top: 25px;
-				border-bottom: 1px solid #899;
 				color: #000;
+				border: 1px solid #ccc;
+				background: #f8f8f8;
+				border-radius: 3px;
+				-moz-border-radius: 3px;
+				-webkit-border-radius: 3px;
 			}
 			.heading3 a, .heading3 a:visited {
 				color: #000;
@@ -113,10 +117,9 @@
 			.heading4 {
 				font-size: 12px;
 				letter-spacing: 2px;
-				background: #d8dbdf;
 				margin-bottom:0;
 				margin-top: 15px;
-				border: 1px solid #fff;
+				border-bottom: 1px solid #899;
 				border-radius: 2px;
 				-moz-border-radius: 2px;
 				-webkit-border-radius: 2px;
@@ -138,10 +141,9 @@
 			.heading5 {
 				font-size: 12px;
 				letter-spacing: 2px;
-				background: #e6eaef;
 				margin-bottom:0;
 				margin-top: 15px;
-				border: 1px solid #d0d0d0;
+				border-bottom: 1px solid #ccc;
 				border-radius: 2px;
 				-moz-border-radius: 2px;
 				-webkit-border-radius: 2px;
