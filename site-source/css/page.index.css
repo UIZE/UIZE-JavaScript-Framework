@@ -4,39 +4,41 @@
 }
 
 /*** list items ***/
-	#page-index li div {
-		padding: 10px 0;
-	}
-	#page-index li {
-		list-style-type: none;
-		list-style-position: inside;
-		border: 2px solid #fff;
+	#page-index a {
+		display: block;
+		border: 1px solid #f4f4f4;
 		border-radius: 3px;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		padding:0;
+		overflow: hidden;
+		box-shadow: 0 0 7px rgba(0,0,0,.2);
 		margin-bottom: 10px;
-		background: #cfd3d9;
+		background: #fff;
 	}
-	#page-index li .itemTitle {
-		background: #e6eaee;
-		padding: 3px 0 5px 10px;
-		border-top-left-radius: 3px;
-		-moz-border-radius-topleft: 3px;
-		-webkit-border-top-left-radius: 3px;
-		border-top-right-radius: 3px;
-		-moz-border-radius-topright: 3px;
-		-webkit-border-top-right-radius: 3px;
+	#page-index a:hover {
+		border-color: #aaa;
 	}
-	#page-index li .itemBody {
-		padding: 10px;
+	#page-index a {
+		text-decoration: none;
+		color: #000;
 	}
-	#page-index li a {
-		font-size: 12px;
-		letter-spacing: 1px;
-		margin-right:0;
+	#page-index a .itemTitle {
+		display: block;
+		padding: 4px 5px 8px 5px;
+		background: #f4f4f4;
 	}
-	#page-index li img.fileThumbnail {
+	#page-index a .itemTitleText {
+		font-weight: bold;
+		margin-right: 5px;
+	}
+	#page-index a span.arrow {
+		font-size: 9px;
+		padding: 0 12px 0 0;
+		background: transparent url(../images/icons/black-dotty-arrow-right.gif) no-repeat right top;
+	}
+	#page-index a .itemBody {
+		display: block;
+		padding: 8px;
+	}
+	#page-index a img.fileThumbnail {
 		float: right;
 		border: none;
 		width: 96px;
@@ -49,22 +51,15 @@
 		-webkit-box-shadow: 4px 4px 6px rgba(0,0,0,.5);
 	}
 
-/*** arrow ***/
-	span.arrow {
-		font-size: 9px;
-		padding: 0 12px 0px 0;
-		background: transparent url(../images/icons/black-dotty-arrow-right.gif) no-repeat right top;
-	}
-
 /*** tour promo (for examples index pages) ***/
 	.tourPromo {
-		background: #e6ecec;
+		background: #f4f4f4;
 		margin-top: 10px;
 		padding: 10px;
 		border-radius: 3px;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
-		border: 1px solid #abb;
+		border: 1px solid #ddd;
 	}
 	.tourPromo .tourPromoHeading {
 		font-size: 12px;
@@ -72,11 +67,11 @@
 		letter-spacing: 5px;
 		text-align: center;
 		padding: 4px;
-		border: 1px solid #abb;
+		border: 1px solid #ddd;
 		border-radius: 3px;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
-		background: #b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+		background: #fff;
 	}
 	.tourPromo .tourPromoText {
 		font-size: 11px;

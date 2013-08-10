@@ -39,9 +39,13 @@
 		display: block;
 		font-size: 19px;
 		font-family: Verdana;
+		font-weight: normal;
 		width: 20px;
 		height: 25px;
 		white-space: nowrap;
+		border-radius: 0;
+		padding: 2px 7px 3px 7px;
+		line-height: normal;
 	}
 
 	/*** overrides to maintain backwards compatibility with old dark styled site ***/

@@ -50,40 +50,58 @@
 		a.buttonLink, a.buttonLink:link, a.buttonLink:visited,
 		.button, .button:link, .button:visited, .button:hover, .button:active
 		{
+			font-weight: bold;
 			display: inline-block;
-			font-family: Arial;
-			font-size: 12px;
-			letter-spacing: 1px;
-			color: #044;
-			text-shadow: 0 -1px 2px #fff;
-			background: #c4cdd4 url(../images/button-bg.gif) left top repeat-x;
-			text-align: center;
+			border-width: 1px;
+			border-style: solid;
+			border-radius: 3px;
 			text-decoration: none;
-			padding: 3px 7px;
-			padding-top: 2px;
-			border: 1px solid #000;
-			border-color: #eee #999 #999 #eee;
+			cursor: pointer;
+			font-size: 13px;
+			line-height: 13px;
+			padding: 6px 9px 7px 9px;
+			border-color: #ccc #999 #999 #ccc;
+			text-align: center;
+			color: #444;
+			text-shadow: 1px -1px 0 #fff, 1px 0px 0 #fff, 1px 1px 0 #fff;
+			background: #eeeeee; /* Old browsers */
+			background: -moz-linear-gradient(top,  #ffffff 0%, #e0e0e0 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e0e0e0)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #ffffff 0%,#e0e0e0 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #ffffff 0%,#e0e0e0 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #ffffff 0%,#e0e0e0 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  #ffffff 0%,#e0e0e0 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e0',GradientType=0 ); /* IE6-9 */
 		}
+
 		a.buttonLink:hover,
 		.buttonOver, .buttonOver:link, .buttonOver:visited, .buttonOver:hover, .buttonOver:active
 		{
+			border-color: #aaa #777 #777 #aaa;
 			color: #222;
-			text-shadow: 0 -1px 2px #fff, 0 1px 2px #fff;
-			background-position: left -100px;
-			border-color: #889 #000 #334 #778;
+			text-shadow: 1px -1px 0 #fff, 1px 0px 0 #fff, 1px 1px 0 #fff;
+			background: #efefef;
+			filter: none;
 		}
+
 		a.buttonLink:active,
 		.buttonActive, .buttonActive:link, .buttonActive:visited, .buttonActive:hover, .buttonActive:active
 		{
+			border-color: #666;
 			color: #000;
-			text-shadow: 0 -1px 2px #fff, 0 1px 2px #fff;
-			background-position: left -200px;
-			border-color: #bbb #000 #223 #999;
+			text-shadow: 1px -1px 0 #fff, 1px 0px 0 #fff, 1px 1px 0 #fff;
+			box-shadow: inset 0 2px 4px rgba(0,0,0,.1);
+			background: #fff;
+			filter: none;
 		}
+
 		.buttonGrayed, .buttonGrayed:link, .buttonGrayed:visited, .buttonGrayed:hover, .buttonGrayed:active {
-			color: #abb;
-			background-position: left -300px;
-			border-color: #bcc;
+			border-color: #d3d3d3;
+			background: #e6e6e6;
+			filter: none;
+			color: #bbb;
+			text-shadow: none;
+			cursor: default;
 		}
 
 	code {
@@ -148,13 +166,23 @@
 			text-align: left;
 			color: #444;
 			font-weight: bold;
-			text-shadow: 1px -1px 1px #eee, 1px 1px 1px #eee;
-			background: #b7babf url(../images/title-bg-shiny.gif) repeat left top;
+			text-shadow: 1px -1px 1px #fff, 1px 1px 1px #fff;
 			padding: 14px 8px 14px 60px;
 			margin: 0;
 			border: none;
-			border-bottom: 1px solid #777;
-			box-shadow: 0 0 15px rgba(0,0,0,.1);
+			box-shadow: 0 1px 12px rgba(0,0,0,.3);
+
+			/*** gradient ***/
+				background: #ffffff; /* Old browsers */
+				/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+				background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZGVkZWQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+				background: -moz-linear-gradient(top,  #ffffff 0%, #ededed 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top,  #ffffff 0%,#ededed 100%); /* IE10+ */
+				background: linear-gradient(to bottom,  #ffffff 0%,#ededed 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-8 */
 		}
 		.document-title a:link, .document-title a:visited, .document-title a:hover, .document-title a:active {
 			color: #444;
@@ -202,24 +230,16 @@
 				right: 77px;
 				_right: 7px; /* hack for IE6, because the title isn't fixed positioned for this browser */
 				top: 10px;
-			}
-			.pageActions a.buttonLink,
-			.pageActions a.buttonLink:link,
-			.pageActions a.buttonLink:visited,
-			.pageActions a.buttonLink:hover,
-			.pageActions a.buttonLink:active {
-				font-size: 11px;
-				padding: 6px 9px;
-				background: none;
+				letter-spacing: 0;
 			}
 
 	/*** preamble paragraph ***/
 		.preamble {
 			position: relative;
-			background: #c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
+			background: #fff;
 			padding: 15px;
 			margin: 0 15px 25px 15px;
-			border: 1px solid #899;
+			border: 1px solid #ccc;
 			border-radius: 3px;
 			-moz-border-radius: 3px;
 			-webkit-border-radius: 3px;
@@ -358,7 +378,7 @@
 	#page-siteAssistantShell {
 		position: fixed;
 		right: 0;
-		top: 49px;
+		top: 48px;
 		z-index: 1;
 		width: 130px;
 		bottom: 0;

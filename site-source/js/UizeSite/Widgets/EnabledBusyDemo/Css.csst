@@ -21,14 +21,14 @@
 }
 
 .`depth0` {
-	background:#888;
+	background:#cfcfcf;
 }
 
 .`depth1` {
-	background:#aaa;
+	background:#e0e0e0;
 }
 
 .`depth2` {
-	background:#ddd;
+	background:#f4f4f4;
 }
 

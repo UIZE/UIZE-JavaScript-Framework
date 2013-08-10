@@ -2,7 +2,7 @@
 	position: relative;
 	text-align: center;
 	padding-bottom: 10px;
-	background: #becacd url(body-bg.gif) repeat-x left top;
+	background: #fff url(body-bg.gif) repeat-x left top;
 }
 
 .`` * {
@@ -16,10 +16,10 @@
 .`legalese` {
 	font-size: 13px;
 	margin-bottom: 5px;
-	padding: 5px 0;
+	padding: 8px 0;
 	border-top: 1px solid #fff;
-	border-bottom: 1px solid #999;
-	background: #b7babf url(bar-bg.jpg) repeat left top;
+	border-bottom: 1px solid #bbb;
+	background: #e4e4e4;
 	text-shadow: 0 -1px 1px #fff, 0 1px 1px #fff;
 }
 

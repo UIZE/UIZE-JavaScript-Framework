@@ -63,11 +63,10 @@
 
 /*** programmatic interface block ***/
 	.programmaticInterface {
+		background: #fff;
 		padding: 10px;
-		padding-right: 3px;
-		margin: 0 10px 0 10px;
-		background: #c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
-		border: 3px solid #fff;
+		margin: 25px 10px 0px 10px;
+		border: 1px solid #ddd;
 		border-radius: 3px;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
