@@ -10,8 +10,8 @@
 			padding: 15px 14px;
 			margin: 0 auto 0 auto;
 			background: #f0f0f0;
-			border-left: 10px solid #fff;
-			border-right: 10px solid #fff;
+			border-left: 1px solid #999;
+			border-right: 1px solid #999;
 			padding-bottom: 0;
 		}
 		body, p, blockquote, td, ol {
@@ -383,7 +383,7 @@
 		top: 48px;
 		width: 130px;
 		bottom: 0;
-		box-shadow: -2px 7px 6px 2px rgba(0,0,0,.3);
+		box-shadow: -1px 7px 6px 2px rgba(0,0,0,.2);
 		z-index: 3;
 	}
 

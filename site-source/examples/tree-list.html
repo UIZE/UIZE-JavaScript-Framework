@@ -24,11 +24,6 @@
 	</div>
 </h1>
 
-<!-- load in the JavaScript libraries that define the animals and plants hierarchical lists -->
-
-<script type="text/javascript" src="js/animals.js"></script>
-<script type="text/javascript" src="js/plants.js"></script>
-
 <div class="main">
 	<div style="margin:auto; width:752px;">
 		<div id="page_treeList-shell" class="contents-tree-shell" style="width:200px; height:460px; float:left; overflow:auto; margin-right:10px; border:1px solid #9aa; padding:10px; margin-left:20px; background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
@@ -65,13 +60,13 @@
 						</ul>
 					</li>
 					<li>
-						<a href="javascript://" class="linkedJs">treeList.set ({items:animals})</a><br/>
+						<a href="javascript://" class="linkedJs">treeList.set ({items:UizeSite.TestData.Animals ()})</a><br/>
 						<ul>
 							<li><a href="javascript://" class="linkedJs">treeList.collapseAllBut (['Pets','Dogs','Large Breeds'])</a></li>
 						</ul>
 					</li>
 					<li>
-						<a href="javascript://" class="linkedJs">treeList.set ({items:plants})</a><br/>
+						<a href="javascript://" class="linkedJs">treeList.set ({items:UizeSite.TestData.Plants ()})</a><br/>
 						<ul>
 							<li><a href="javascript://" class="linkedJs">treeList.collapseAllBut (['Trees','Deciduous'])</a></li>
 						</ul>
@@ -92,7 +87,10 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Tree.List',
-		'Uize.Node'
+		'Uize.Node',
+		'UizeSite.TestData.Animals',
+		'UizeSite.TestData.Plants',
+		'UizeSite.TestData.AnimalsAndPlants'
 	],
 	builder:function () {
 		'use strict';
@@ -102,10 +100,7 @@ Uize.module ({
 
 		/*** add the tree list child widget ***/
 			var
-				animalsAndPlants = [
-					{title:'Animals',items:animals},
-					{title:'Plants',items:plants}
-				],
+				animalsAndPlants = UizeSite.TestData.AnimalsAndPlants (),
 				treeList = page.addChild (
 					'treeList',
 					Uize.Widget.Tree.List,

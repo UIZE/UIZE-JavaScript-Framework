@@ -23,11 +23,6 @@
 	</div>
 </h1>
 
-<!-- load in the JavaScript libraries that define the animals and plants hierarchical menus -->
-
-<script type="text/javascript" src="js/animals.js"></script>
-<script type="text/javascript" src="js/plants.js"></script>
-
 <div class="main">
 	<!-- explanation copy -->
 
@@ -49,13 +44,13 @@
 				</ul>
 			</li>
 			<li>
-				<a href="javascript://" class="linkedJs">treeMenu.set ({items:animals})</a><br/>
+				<a href="javascript://" class="linkedJs">treeMenu.set ({items:UizeSite.TestData.Animals ()})</a><br/>
 				<ul>
 					<li><a href="javascript://" class="linkedJs">treeMenu.collapseAllBut (['Pets','Dogs','Large Breeds'])</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="javascript://" class="linkedJs">treeMenu.set ({items:plants})</a><br/>
+				<a href="javascript://" class="linkedJs">treeMenu.set ({items:UizeSite.TestData.Plants ()})</a><br/>
 				<ul>
 					<li><a href="javascript://" class="linkedJs">treeMenu.collapseAllBut (['Trees','Deciduous'])</a></li>
 				</ul>
@@ -74,7 +69,10 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Tree.Menu',
-		'Uize.Node'
+		'Uize.Node',
+		'UizeSite.TestData.Animals',
+		'UizeSite.TestData.Plants',
+		'UizeSite.TestData.AnimalsAndPlants'
 	],
 	builder:function () {
 		'use strict';
@@ -84,11 +82,7 @@ Uize.module ({
 
 		/*** add the tree menu child widget ***/
 			var
-				animalsAndPlants = [
-					{title:'Animals',items:animals},
-					{title:'-'},
-					{title:'Plants',items:plants}
-				],
+				animalsAndPlants = UizeSite.TestData.AnimalsAndPlants (),
 				treeMenu = page.addChild (
 					'treeMenu',
 					Uize.Widget.Tree.Menu,

@@ -30,11 +30,6 @@
 	</div>
 </h1>
 
-<!-- load in the JavaScript libraries that define the animals and plants hierarchical lists -->
-
-<script type="text/javascript" src="js/animals.js"></script>
-<script type="text/javascript" src="js/plants.js"></script>
-
 <div class="main">
 	<!-- select nodes that make up the UI of the Uize.Widget.SelectTree object -->
 
@@ -73,7 +68,9 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Tree.Select'
+		'Uize.Widget.Tree.Select',
+		'UizeSite.TestData.Animals',
+		'UizeSite.TestData.Plants'
 	],
 	builder:function () {
 		'use strict';
@@ -82,8 +79,8 @@ Uize.module ({
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** add the Uize.Widget.Tree.Select child widgets ***/
-			page.addChild ('animalsSelectTree',Uize.Widget.Tree.Select,{items:animals});
-			page.addChild ('plantsSelectTree',Uize.Widget.Tree.Select,{items:plants});
+			page.addChild ('animalsSelectTree',Uize.Widget.Tree.Select,{items:UizeSite.TestData.Animals ()});
+			page.addChild ('plantsSelectTree',Uize.Widget.Tree.Select,{items:UizeSite.TestData.Plants ()});
 
 		/*** wire up the page widget ***/
 			page.wireUi ();

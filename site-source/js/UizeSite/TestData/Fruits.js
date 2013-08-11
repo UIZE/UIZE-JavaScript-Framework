@@ -1,3 +1,19 @@
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : UizeSite.TestData.Fruits
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2007-2013 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/*?
+	Introduction
+		*DEVELOPERS:* `Chris van Rensburg`
+*/
+
 Uize.module ({
 	name:'UizeSite.TestData.Fruits',
 	required:'Uize.Data',

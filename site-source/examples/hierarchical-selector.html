@@ -31,11 +31,6 @@
 	</div>
 </h1>
 
-<!-- load in the JavaScript libraries that define the animals and plants hierarchical lists -->
-
-<script type="text/javascript" src="js/animals.js"></script>
-<script type="text/javascript" src="js/plants.js"></script>
-
 <div class="main">
 	<!-- select nodes that make up the UI of the Uize.Widget.SelectTree object -->
 
@@ -63,7 +58,9 @@ Uize.module ({
 		'Uize.Node',
 		'Uize.Widget.Tree.Select',
 		'Uize.Widget.V2',
-		'Uize.Widgets.Button.Widget'
+		'Uize.Widgets.Button.Widget',
+		'UizeSite.TestData.Animals',
+		'UizeSite.TestData.Plants'
 	],
 	builder:function () {
 		'use strict';
@@ -72,7 +69,7 @@ Uize.module ({
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** create the Uize.Widget.SelectTree object ***/
-			var selectTree = page.addChild ('selectTree',Uize.Widget.Tree.Select,{items:animals});
+			var selectTree = page.addChild ('selectTree',Uize.Widget.Tree.Select,{items:UizeSite.TestData.Animals ()});
 
 		/*** add the populator buttons ***/
 			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
@@ -81,7 +78,7 @@ Uize.module ({
 				Uize.Widgets.Button.Widget,
 				{
 					text:'POPULATE WITH ANIMALS',
-					action:function () {selectTree.set ({items:animals})}
+					action:function () {selectTree.set ({items:UizeSite.TestData.Animals ()})}
 				}
 			);
 			buttons.addChild (
@@ -89,7 +86,7 @@ Uize.module ({
 				Uize.Widgets.Button.Widget,
 				{
 					text:'POPULATE WITH PLANTS',
-					action:function () {selectTree.set ({items:plants})}
+					action:function () {selectTree.set ({items:UizeSite.TestData.Plants ()})}
 				}
 			);
 
