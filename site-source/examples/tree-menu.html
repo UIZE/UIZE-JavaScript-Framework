@@ -44,13 +44,13 @@
 				</ul>
 			</li>
 			<li>
-				<a href="javascript://" class="linkedJs">treeMenu.set ({items:UizeSite.TestData.Animals ()})</a><br/>
+				<a href="javascript://" class="linkedJs">treeMenu.set ({items:Uize.Test.TestData.Animals ()})</a><br/>
 				<ul>
 					<li><a href="javascript://" class="linkedJs">treeMenu.collapseAllBut (['Pets','Dogs','Large Breeds'])</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="javascript://" class="linkedJs">treeMenu.set ({items:UizeSite.TestData.Plants ()})</a><br/>
+				<a href="javascript://" class="linkedJs">treeMenu.set ({items:Uize.Test.TestData.Plants ()})</a><br/>
 				<ul>
 					<li><a href="javascript://" class="linkedJs">treeMenu.collapseAllBut (['Trees','Deciduous'])</a></li>
 				</ul>
@@ -70,9 +70,9 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'Uize.Widget.Tree.Menu',
 		'Uize.Node',
-		'UizeSite.TestData.Animals',
-		'UizeSite.TestData.Plants',
-		'UizeSite.TestData.AnimalsAndPlants'
+		'Uize.Test.TestData.Animals',
+		'Uize.Test.TestData.Plants',
+		'Uize.Test.TestData.AnimalsAndPlants'
 	],
 	builder:function () {
 		'use strict';
@@ -82,7 +82,7 @@ Uize.module ({
 
 		/*** add the tree menu child widget ***/
 			var
-				animalsAndPlants = UizeSite.TestData.AnimalsAndPlants (),
+				animalsAndPlants = Uize.Test.TestData.AnimalsAndPlants (),
 				treeMenu = page.addChild (
 					'treeMenu',
 					Uize.Widget.Tree.Menu,

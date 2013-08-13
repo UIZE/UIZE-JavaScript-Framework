@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.TestData.AnimalsAndPlants
+|    /    O /   |    MODULE : Uize.Test.TestData.AnimalsAndPlants
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -15,10 +15,10 @@
 */
 
 Uize.module ({
-	name:'UizeSite.TestData.AnimalsAndPlants',
+	name:'Uize.Test.TestData.AnimalsAndPlants',
 	required:[
-		'UizeSite.TestData.Animals',
-		'UizeSite.TestData.Plants'
+		'Uize.Test.TestData.Animals',
+		'Uize.Test.TestData.Plants'
 	],
 	builder:function () {
 		'use strict';
@@ -29,8 +29,8 @@ Uize.module ({
 			if (_cachedData && !_getCopy) return _cachedData;
 
 			var _data = [
-				{title:'Animals',items:UizeSite.TestData.Animals (true)},
-				{title:'Plants',items:UizeSite.TestData.Plants (true)}
+				{title:'Animals',items:Uize.Test.TestData.Animals (true)},
+				{title:'Plants',items:Uize.Test.TestData.Plants (true)}
 			];
 
 			return _getCopy ? _data : (_cachedData = _data);

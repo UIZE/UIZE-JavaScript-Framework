@@ -59,9 +59,9 @@
 
 			<div class="programmaticInterface" style="margin-top:0;">
 				<ul>
-					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:UizeSite.TestData.Animals ()}))</a><br/><br/></li>
-					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:UizeSite.TestData.Plants ()}))</a><br/><br/></li>
-					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:UizeSite.TestData.AnimalsAndPlants ()}))</a></li>
+					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:Uize.Test.TestData.Animals ()}))</a><br/><br/></li>
+					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:Uize.Test.TestData.Plants ()}))</a><br/><br/></li>
+					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:Uize.Test.TestData.AnimalsAndPlants ()}))</a></li>
 				</ul>
 			</div>
 		</div>
@@ -78,9 +78,9 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Templates.List',
-		'UizeSite.TestData.Animals',
-		'UizeSite.TestData.Plants',
-		'UizeSite.TestData.AnimalsAndPlants'
+		'Uize.Test.TestData.Animals',
+		'Uize.Test.TestData.Plants',
+		'Uize.Test.TestData.AnimalsAndPlants'
 	],
 	builder:function () {
 		'use strict';

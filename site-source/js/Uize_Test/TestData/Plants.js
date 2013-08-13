@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.TestData.Plants
+|    /    O /   |    MODULE : Uize.Test.TestData.Plants
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2007-2013 UIZE
@@ -15,7 +15,7 @@
 */
 
 Uize.module ({
-	name:'UizeSite.TestData.Plants',
+	name:'Uize.Test.TestData.Plants',
 	builder:function () {
 		'use strict';
 

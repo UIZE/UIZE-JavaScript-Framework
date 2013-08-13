@@ -26,14 +26,18 @@
 Uize.module ({
 	name:'Uize.Widgets.NavTree.List.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.NavTree.List.Widget',
+	required:[
+		'Uize.Widgets.NavTree.List.Widget',
+		'Uize.Test.TestData.Animals',
+		'Uize.Test.TestData.Plants'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				this.addStateTestCase ({
-				});
+				this.addStateTestCase ({items:Uize.Test.TestData.Animals ()});
+				this.addStateTestCase ({items:Uize.Test.TestData.Plants ()});
 			},
 
 			staticProperties:{

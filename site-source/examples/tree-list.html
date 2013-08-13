@@ -58,13 +58,13 @@
 						</ul>
 					</li>
 					<li>
-						<a href="javascript://" class="linkedJs">treeList.set ({items:UizeSite.TestData.Animals ()})</a><br/>
+						<a href="javascript://" class="linkedJs">treeList.set ({items:Uize.Test.TestData.Animals ()})</a><br/>
 						<ul>
 							<li><a href="javascript://" class="linkedJs">treeList.collapseAllBut (['Pets','Dogs','Large Breeds'])</a></li>
 						</ul>
 					</li>
 					<li>
-						<a href="javascript://" class="linkedJs">treeList.set ({items:UizeSite.TestData.Plants ()})</a><br/>
+						<a href="javascript://" class="linkedJs">treeList.set ({items:Uize.Test.TestData.Plants ()})</a><br/>
 						<ul>
 							<li><a href="javascript://" class="linkedJs">treeList.collapseAllBut (['Trees','Deciduous'])</a></li>
 						</ul>
@@ -86,9 +86,9 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'Uize.Widgets.NavTree.List.Widget',
 		'Uize.Node',
-		'UizeSite.TestData.Animals',
-		'UizeSite.TestData.Plants',
-		'UizeSite.TestData.AnimalsAndPlants'
+		'Uize.Test.TestData.Animals',
+		'Uize.Test.TestData.Plants',
+		'Uize.Test.TestData.AnimalsAndPlants'
 	],
 	builder:function () {
 		'use strict';
@@ -98,7 +98,7 @@ Uize.module ({
 
 		/*** add the tree list child widget ***/
 			var
-				animalsAndPlants = UizeSite.TestData.AnimalsAndPlants (),
+				animalsAndPlants = Uize.Test.TestData.AnimalsAndPlants (),
 				treeList = page.addChild (
 					'treeList',
 					Uize.Widgets.NavTree.List.Widget,

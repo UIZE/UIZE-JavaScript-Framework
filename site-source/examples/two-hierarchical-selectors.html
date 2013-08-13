@@ -69,8 +69,8 @@ Uize.module ({
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Tree.Select',
-		'UizeSite.TestData.Animals',
-		'UizeSite.TestData.Plants'
+		'Uize.Test.TestData.Animals',
+		'Uize.Test.TestData.Plants'
 	],
 	builder:function () {
 		'use strict';
@@ -79,8 +79,8 @@ Uize.module ({
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** add the Uize.Widget.Tree.Select child widgets ***/
-			page.addChild ('animalsSelectTree',Uize.Widget.Tree.Select,{items:UizeSite.TestData.Animals ()});
-			page.addChild ('plantsSelectTree',Uize.Widget.Tree.Select,{items:UizeSite.TestData.Plants ()});
+			page.addChild ('animalsSelectTree',Uize.Widget.Tree.Select,{items:Uize.Test.TestData.Animals ()});
+			page.addChild ('plantsSelectTree',Uize.Widget.Tree.Select,{items:Uize.Test.TestData.Plants ()});
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
