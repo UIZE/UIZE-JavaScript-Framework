@@ -33,10 +33,10 @@
 
 /*** miscellaneous ***/
 	.insetBackgroundColor {
-		background: #afb6b8;
+		background: #bbb;
 	}
 	.insetBorderColor {
-		border-color: #afb6b8;
+		border-color: #ccc;
 	}
 	.darkInsetBackgroundColor {
 		background: #818b8f;
