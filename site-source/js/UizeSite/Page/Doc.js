@@ -21,7 +21,7 @@ Uize.module ({
 	required:[
 		'Uize.Node',
 		'Uize.Node.Tree',
-		'Uize.Widget.Tree.List',
+		'Uize.Widgets.NavTree.List.Widget',
 		'Uize.Url',
 		'Uize.Widgets.Tooltip.Widget',
 		'Uize.Flo'
@@ -48,11 +48,8 @@ Uize.module ({
 						/*** add the contents tree widget ***/
 							_this.addChild (
 								'contents',
-								Uize.Widget.Tree.List,
+								Uize.Widgets.NavTree.List.Widget,
 								{
-									levelClasses:['contents-tree-level1','contents-tree-level2','contents-tree-level3','contents-tree-level4'],
-									iconTheme:'arrows-black',
-									iconBgColor:'',
 									tooltip:{
 										node:_tooltip.nodeId (),
 										show:function (_item) {
@@ -68,7 +65,7 @@ Uize.module ({
 								/*?
 									Child Widgets
 										contents
-											An instance of =Uize.Widget.Tree.List= that is used to provide an expandable/collapsible contents tree at the top of the document.
+											An instance of =Uize.Widgets.NavTree.List.Widget= that is used to provide an expandable/collapsible contents tree at the top of the document.
 								*/
 							);
 					}
@@ -105,7 +102,7 @@ Uize.module ({
 						/*** populate contents tree's data ***/
 							var
 								_contents = _this.children.contents,
-								_contentsTreeItems = Uize.Node.Tree.getTreeFromList (_contents.getNode ())
+								_contentsTreeItems = Uize.Node.Tree.getTreeFromList (_contents.getNode ('shell'))
 							;
 							_this.set ({contentsTreeItems:_contentsTreeItems});
 							_contents.set ({items:_contentsTreeItems});
@@ -235,7 +232,7 @@ Uize.module ({
 						_superclass.doMy (_this,'wireUi');
 
 						_this.children.tooltip.displayNode ('',false);
-						_contents.setNodeStyle ('',{maxHeight:'none',overflow:'visible'});
+						_contents.setNodeStyle ('shell',{maxHeight:'none',overflow:'visible'});
 					}
 				};
 

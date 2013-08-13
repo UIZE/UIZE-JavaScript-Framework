@@ -25,147 +25,45 @@
 
 Uize.module ({
 	name:'Uize.Widget.Tree.List',
-	required:[
-		'Uize.Node',
-		'Uize.Tooltip',
-		'Uize.Xml'
-	],
+	superclass:'Uize.Widget.Tree.ListAbstract',
 	builder:function (_superclass) {
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_undefined,
-				_true = true,
 				_false = false,
-				_pathToResources = Uize.pathToResources + 'Uize_Widget_Tree_List/',
-				_Uize_Node = Uize.Node,
-				_Uize_Tooltip = Uize.Tooltip,
-				_Uize_Xml_toAttributeValue = Uize.Xml.toAttributeValue
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
+				_pathToResources = Uize.pathToResources + 'Uize_Widget_Tree_List/'
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype.setItemExpanded = function (_itemSpecifier,_expanded) {
-				var _this = this;
-				if (_this.isWired) {
-					var _item = _this.getItemFromSpecifier (_itemSpecifier);
-					_this.displayNode (
-						_itemSpecifier + 'Children',
-						_item.expanded = typeof _expanded == 'boolean' ? _expanded : _item.expanded === _false
-					);
-					_this.setNodeProperties (
-						_itemSpecifier + 'Toggler',
-						{
-							src:_this._getTogglerSrc (_item),
-							title:_this._getTogglerTitle (_item)
-						}
-					);
-				} else {
-					_superclass.doMy (_this,'setItemExpanded',[_itemSpecifier,_expanded]);
-				}
-			};
+			function _getTogglerSrc (_this,_item) {
+				return _pathToResources + _this._iconTheme + '-' + (_item.expanded === _false ? 'collapsed' : 'expanded') + '.gif';
+			}
 
-			_classPrototype._getTogglerSrc = function (_item) {
-				return _pathToResources + this._iconTheme + '-' + (_item.expanded === _false ? 'collapsed' : 'expanded') + '.gif';
-			};
-
-			_classPrototype._getTogglerTitle = function (_item) {
-				return 'Click to ' + (_item.expanded === _false ? 'expand' : 'collapse');
-			};
-
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					var
-						_tooltip = _this._tooltip,
-						_tooltipIsPlainObject = Uize.isPlainObject (_tooltip),
-						_tooltipNode = Uize.Node.getById (_tooltipIsPlainObject ? _tooltip.node : _tooltip)
-					;
-					_this.traverseTree ({
-						itemHandler:
-							function (_item,_itemSpecifier) {
-								_tooltip &&
-									_this.wireNode (
-										_itemSpecifier + 'TitleLink',
-										{
-											mouseover:
-												function () {
-													if (_tooltipNode) {
-														var _tooltipHtml;
-														if (_tooltipIsPlainObject) {
-															_tooltipHtml = _tooltip.show (_item);
-														} else {
-															var _tooltipTemplate = _this._tooltipTemplate;
-															if (_tooltipTemplate) {
-																_tooltipHtml = _tooltipTemplate.call (_this,_item);
-															} else {
-																var _itemDescription = _item.description;
-																if (_itemDescription)
-																	_tooltipHtml = _Uize_Xml_toAttributeValue (_itemDescription)
-																;
-															}
-															_tooltipHtml && _Uize_Node.setInnerHtml (_tooltipNode,_tooltipHtml);
-														}
-														if (_tooltipHtml) {
-															_Uize_Tooltip.showTooltip (_tooltipNode,_true);
-															_this.fire ({name:'After Show Tooltip',item:_item});
-														}
-													}
-												},
-											mouseout:function () {
-												_Uize_Tooltip.showTooltip (_tooltipNode,_false);
-												_this.fire ({name:'After Hide Tooltip',item:_item});
-											}
-										}
-									)
-								;
-							},
-						beforeSubItemsHandler:
-							function (_item,_itemSpecifier) {
-								_this.wireNode (
-									[
-										_itemSpecifier + 'TogglerLink',
-										!_item.link || _this._linksAlwaysToggleExpanded
-											? (_itemSpecifier + 'TitleLink')
-											: _undefined
-									],
-									{
-										click:function (_event) {
-											if (_event.shiftKey || _event.ctrlKey || _event.metaKey) {
-												_this.setExpandedDepth (
-													_this.getItemFromSpecifier (_itemSpecifier).expanded !== _false
-														? 0
-														: (_event.shiftKey ? 1 : 1000),
-													_itemSpecifier
-												);
-												_event.cancelBubble = _true;
-											} else {
-												_this.setItemExpanded (_itemSpecifier);
-											}
-										},
-										focus:function () {this.blur ()}
-									}
-								);
+		return _superclass.subclass ({
+			instanceMethods:{
+				setItemExpanded:function (_itemSpecifier,_expanded) {
+					var _this = this;
+					if (_this.isWired) {
+						var _item = _this.getItemFromSpecifier (_itemSpecifier);
+						_this.displayNode (
+							_itemSpecifier + 'Children',
+							_item.expanded = typeof _expanded == 'boolean' ? _expanded : _item.expanded === _false
+						);
+						_this.setNodeProperties (
+							_itemSpecifier + 'Toggler',
+							{
+								src:_getTogglerSrc (_this,_item),
+								title:_this.getTogglerTitle (_item)
 							}
-					});
-
-					_superclass.doMy (_this,'wireUi');
+						);
+					} else {
+						_superclass.doMy (_this,'setItemExpanded',[_itemSpecifier,_expanded]);
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
-				_alwaysLinkHeadings:{
-					name:'alwaysLinkHeadings',
-					value:_false
-				},
+			stateProperties:{
 				_iconBgColor:{
 					name:'iconBgColor',
 					value:'#aaa'
@@ -178,27 +76,21 @@ Uize.module ({
 					name:'levelClasses',
 					value:[]
 				},
-				_linksAlwaysToggleExpanded:{
-					name:'linksAlwaysToggleExpanded',
-					value:_false
-				},
 				_spaceBeforeText:{
 					name:'spaceBeforeText',
 					value:7
-				},
-				_tooltip:'tooltip',
-				_tooltipTemplate:'tooltipTemplate'
-			});
+				}
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				html:{
 					process:function (input) {
 						var
 							_this = this,
+							_thisClass = _this.Class,
 							_htmlChunks = [],
 							_idPrefix = input.idPrefix,
-							_blankImageUrl = _class.getBlankImageUrl (),
+							_blankImageUrl = _thisClass.getBlankImageUrl (),
 							_dividerHtml = '<img src="' + _blankImageUrl + '" class="divider" align="center"/>',
 							_iconStyle = 'style="' + (input.iconBgColor ? ('background:' + input.iconBgColor + '; ') : '') + 'width:9px; height:9px;"',
 							_levelClasses = input.levelClasses,
@@ -209,7 +101,7 @@ Uize.module ({
 								function (_item,_itemSpecifier,_depth) {
 									var
 										_itemLink = _item.link,
-										_hasItems = _class.itemHasChildren (_item),
+										_hasItems = _thisClass.itemHasChildren (_item),
 										_depthSpacer = '<img src="' + _blankImageUrl + '" width="' + (_depth * (10 + input.spaceBeforeText)) + '" height="10"/>',
 										_levelClass = _levelClasses [Math.min (_depth,_levelClassesLengthMinus1)]
 									;
@@ -217,14 +109,14 @@ Uize.module ({
 										'<nobr>' +
 										_depthSpacer +
 										(
-											_class.itemIsDivider (_item)
+											_thisClass.itemIsDivider (_item)
 												? _dividerHtml
 												: (
 													'<span style="width:10px; height:10px; padding-right:' + input.spaceBeforeText + 'px;">' +
 													(
 														_hasItems
 															? (
-																'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TogglerLink" href="javascript://"><img id="' + _idPrefix + '-' + _itemSpecifier + 'Toggler" src="' + _this._getTogglerSrc (_item) + '" ' + _iconStyle + ' border="0" title="' + _this._getTogglerTitle (_item) + '"/></a>'
+																'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TogglerLink" href="javascript://"><img id="' + _idPrefix + '-' + _itemSpecifier + 'Toggler" src="' + _getTogglerSrc (_this,_item) + '" ' + _iconStyle + ' border="0" title="' + _this.getTogglerTitle (_item) + '"/></a>'
 															)
 															: '<img src="' + _pathToResources + input.iconTheme + '-bullet.gif" ' + _iconStyle + '"/>'
 													) + '</span>' +
@@ -249,9 +141,8 @@ Uize.module ({
 						return _htmlChunks.join ('');
 					}
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

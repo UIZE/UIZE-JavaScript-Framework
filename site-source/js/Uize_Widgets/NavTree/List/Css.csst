@@ -1,0 +1,111 @@
+.`` *,
+.`` *:link,
+.`` *:visited,
+.`` *:hover,
+.`` *:active
+{
+	font-family: Arial;
+	font-style: normal;
+	border-bottom: none;
+	color: #444;
+	text-decoration: none;
+}
+
+a.`item`:hover {
+	border-bottom: 1px solid #ffa200;
+}
+
+.`item` {
+	font-size: 11px;
+}
+
+.`depthSpacer` {
+	display: inline-block;
+	width: 15px;
+	height: 10px;
+}
+
+.`divider` {
+	display: inline-block;
+	border-top: 1px dotted #555;
+	width: 150px;
+	height: 0;
+	margin-bottom: 4px;
+}
+
+/*** bullet & toggler ***/
+	.`bulletShell` {
+		width: 10px;
+		height: 10px;
+		padding-right: 5px;
+	}
+	
+	.`bullet` {
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		background: url(bullet.gif) left top no-repeat;
+	}
+	
+	.`togglerLink` {
+		display: inline-block;
+		width: 9px;
+		height: 9px;
+		background-position: 0 0;
+		background-repeat: no-repeat;
+	}
+	
+	.`expanded` {
+		background-image: url(expanded.gif);
+	}
+
+	.`collapsed` {
+		background-image: url(collapsed.gif);
+	}
+
+/*** depth-specific styling ***/
+	.`depth0`,
+	.`depth0`:link,
+	.`depth0`:visited,
+	.`depth0`:hover,
+	.`depth0`:active
+	{
+		font-size: 14px;
+	}
+
+	.`depth1`,
+	.`depth1`:link,
+	.`depth1`:visited,
+	.`depth1`:hover,
+	.`depth1`:active
+	{
+		font-size: 14px;
+	}
+
+	.`depth2`,
+	.`depth2`:link,
+	.`depth2`:visited,
+	.`depth2`:hover,
+	.`depth2`:active
+	{
+		font-size: 13px;
+	}
+
+	.`depth3`,
+	.`depth3`:link,
+	.`depth3`:visited,
+	.`depth3`:hover,
+	.`depth3`:active
+	{
+		font-size: 12px;
+	}
+
+	.`depth4`,
+	.`depth4`:link,
+	.`depth4`:visited,
+	.`depth4`:hover,
+	.`depth4`:active
+	{
+		font-size: 11px;
+	}
+

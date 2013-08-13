@@ -3,12 +3,11 @@
 <head>
 	<title>Tree List From JSON | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="featured widget menu Uize.Widget.Tree.List"/>
+	<meta name="keywords" content="featured widget menu Uize.Widgets.NavTree.List.Widget"/>
 	<meta name="description" content="See a demo of a JavaScript expandable / collapsible tree list widget, that can be easily built from a JSON object and can even be dynamically updated."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="../css/widget.tree.list.css"/>
 </head>
 
 <body>
@@ -25,14 +24,13 @@
 </h1>
 
 <div class="main">
-	<div style="margin:auto; width:752px;">
-		<div id="page_treeList-shell" class="contents-tree-shell" style="width:200px; height:460px; float:left; overflow:auto; margin-right:10px; border:1px solid #9aa; padding:10px; margin-left:20px; background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
-"></div>
+	<div style="margin:auto; width:762px;">
+		<div id="page_treeList-shell" class="contents-tree-shell" style="width:210px; height:460px; float:left; overflow:auto; margin-right:10px; border:1px solid #9aa; padding:10px; margin-left:10px; background:#fff;"></div>
 		<div style="width:500px; float:left;">
 			<!-- explanation copy -->
 
 			<div class="explanation">
-				<p>In this example, an instance of <a href="../reference/Uize.Widget.Tree.List.html"><code>Uize.Widget.Tree.List</code></a> is instantiated to produce a multi-level contents tree. The markup for the list is generated when the widget is wired up. The structure for the markup is driven by a JSON data structure that is supplied to the <code>items</code> state property of the widget. This data structure is purely for demonstration purposes, so none of the items have active links specified (ie. clicking does nothing).</p>
+				<p>In this example, an instance of <a href="../reference/Uize.Widgets.NavTree.List.Widget.html"><code>Uize.Widgets.NavTree.List.Widget</code></a> is instantiated to produce a multi-level contents tree. The markup for the list is generated when the widget is wired up. The structure for the markup is driven by a JSON data structure that is supplied to the <code>items</code> state property of the widget. This data structure is purely for demonstration purposes, so none of the items have active links specified (ie. clicking does nothing).</p>
 
 				<p>If you hold down the shift key when clicking to expand a level, you can expand the contents of that level to only one level deep. This is convenient when trying to expand a tree bit by bit. Holding down the ctrl key when expanding a level will expand the contents of that level fully. Whenever you collapse a level and expand it again later, its contents are restored to the way they were before you collapsed the level.</p>
 
@@ -86,7 +84,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Tree.List',
+		'Uize.Widgets.NavTree.List.Widget',
 		'Uize.Node',
 		'UizeSite.TestData.Animals',
 		'UizeSite.TestData.Plants',
@@ -103,15 +101,11 @@ Uize.module ({
 				animalsAndPlants = UizeSite.TestData.AnimalsAndPlants (),
 				treeList = page.addChild (
 					'treeList',
-					Uize.Widget.Tree.List,
+					Uize.Widgets.NavTree.List.Widget,
 					{
 						items:animalsAndPlants,
 						alwaysLinkHeadings:true,
 						linksAlwaysToggleExpanded:true,
-						levelClasses:['contents-tree-level1','contents-tree-level2','contents-tree-level3','contents-tree-level4'],
-						iconTheme:'arrows-black',
-						iconBgColor:'',
-						spaceBeforeText:2,
 						built:false
 					}
 				)

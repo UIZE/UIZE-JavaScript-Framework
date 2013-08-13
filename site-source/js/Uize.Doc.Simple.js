@@ -766,7 +766,7 @@ Uize.module ({
 							(_contentsTreeItems.length > 1 || _contentsTreeItems [0].items.length)
 						)
 							? (
-								'<div id="page_contents" class="contents-tree-shell">\n' +
+								'<div id="page_contents-shell" class="contents-tree-shell">\n' +
 									Uize.Templates.List.process ({items:_contentsTreeItems}) + '\n' +
 								'</div>\n' +
 								'\n'

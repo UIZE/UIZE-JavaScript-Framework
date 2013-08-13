@@ -243,8 +243,8 @@
 				height: 10px;
 			}
 
-/*** Contents Trees ***/
-	#page_contents {
+/*** Contents Tree ***/
+	.contents-tree-shell {
 		position: relative;
 		padding: 15px;
 		margin: 3px 2px 20px 2px;
@@ -252,6 +252,8 @@
 		border-radius: 3px;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
+		max-height: 100px;
+		overflow: auto;
 
 		/*** gradient ***/
 			background: #ffffff; /* Old browsers */
@@ -265,79 +267,6 @@
 			background: linear-gradient(to bottom,  #ffffff 0%,#ededed 100%); /* W3C */
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-8 */
 	}
-	.contents-tree-shell {
-		max-height: 100px;
-		overflow: auto;
-	}
-	.contents-tree-shell *,
-	.contents-tree-shell *:link,
-	.contents-tree-shell *:visited,
-	.contents-tree-shell *:hover,
-	.contents-tree-shell *:active
-	{
-		font-family: Arial;
-		font-style: normal;
-		border-bottom: none;
-		color: #444;
-		background: none;
-	}
-
-	/*** common to all levels ***/
-		a.contents-tree-level1:hover,
-		a.contents-tree-level2:hover,
-		a.contents-tree-level3:hover,
-		a.contents-tree-level4:hover
-		{
-			border-bottom: 1px solid #ffa200;
-		}
-
-		/*** divider ***/
-			.contents-tree-shell .divider {
-				border-top: 1px dotted #567;
-				width: 150px;
-				height:0;
-				margin-top: -10px;
-			}
-
-	/*** level 1 ***/
-		.contents-tree-level1,
-		.contents-tree-level1:link,
-		.contents-tree-level1:visited,
-		.contents-tree-level1:hover,
-		.contents-tree-level1:active
-		{
-			font-size: 14px;
-		}
-
-	/*** level 2 ***/
-		.contents-tree-level2,
-		.contents-tree-level2:link,
-		.contents-tree-level2:visited,
-		.contents-tree-level2:hover,
-		.contents-tree-level2:active
-		{
-			font-size: 13px;
-		}
-
-	/*** level 3 ***/
-		.contents-tree-level3,
-		.contents-tree-level3:link,
-		.contents-tree-level3:visited,
-		.contents-tree-level3:hover,
-		.contents-tree-level3:active
-		{
-			font-size: 12px;
-		}
-
-	/*** level 4 ***/
-		.contents-tree-level4,
-		.contents-tree-level4:link,
-		.contents-tree-level4:visited,
-		.contents-tree-level4:hover,
-		.contents-tree-level4:active
-		{
-			font-size: 11px;
-		}
 
 /*** data tables ***/
 	table.data {

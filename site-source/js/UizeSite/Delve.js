@@ -20,7 +20,7 @@ Uize.module ({
 	name:'UizeSite.Delve',
 	required:[
 		'UizeSite.ModulesTree',
-		'Uize.Widget.Tree.List',
+		'Uize.Widgets.NavTree.List.Widget',
 		'Uize.Widget.TextInput',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Widget.Log.InstanceEvents',
@@ -428,20 +428,12 @@ Uize.module ({
 						/*** add tree list widget ***/
 							_this.addChild (
 								'treeList',
-								Uize.Widget.Tree.List,
+								Uize.Widgets.NavTree.List.Widget,
 								{
-									levelClasses:[
-										'tree-list-level1',
-										'tree-list-level2',
-										'tree-list-level3',
-										'tree-list-level4'
-									],
-									iconTheme:'arrows-black',
 									tooltip:'infoTooltip',
 									tooltipTemplate:function (_item) {
 										return _this._getInfoTooltipHtml (_this._lastTreeItemOverObjectPath = _item.objectPath);
 									},
-									iconBgColor:'',
 									built:false
 								}
 							).wire ({
