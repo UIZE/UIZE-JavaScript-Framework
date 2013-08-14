@@ -13,6 +13,9 @@
 		margin-bottom: 10px;
 		background: #fff;
 	}
+	#page-index a:hover .itemTitleText {
+		border-bottom: 1px dotted #f00;
+	}
 	#page-index a:hover {
 		border-color: #aaa;
 	}
