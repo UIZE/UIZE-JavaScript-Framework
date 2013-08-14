@@ -21,7 +21,6 @@ Uize.module ({
 	superclass:'Uize.Widget.Page',
 	required:[
 		'Uize.Node',
-		'UizeSite.Widgets.SiteMenu.Widget',
 		'Uize.Url',
 		'UizeSite.Widgets.SiteAssistant.Widget',
 		'UizeSite.Widgets.Footer.Widget'
@@ -89,29 +88,34 @@ Uize.module ({
 						/*** wire up mouseover on UIZE icon in title bar to load and show site menu ***/
 							var _wireUpSiteMenu = function () {
 								_this.unwireNode ('homeLink','mouseover',_wireUpSiteMenu);
-								var _siteMenu = page.addChild ('siteMenu',UizeSite.Widgets.SiteMenu.Widget,{built:false});
+								Uize.require (
+									'UizeSite.Widgets.SiteMenu.Widget',
+									function () {
+										var _siteMenu = page.addChild ('siteMenu',UizeSite.Widgets.SiteMenu.Widget,{built:false});
 
-								/*** stitch in the contents tree for this page ***/
-									var
-										_siteMenuItems0Items = _siteMenu.get ('items') [0].items,
-										_contentsTreeItems0 = _this._contentsTreeItems && _this._contentsTreeItems [0]
-									;
-									_contentsTreeItems0 &&
-										_siteMenuItems0Items.unshift (
-											{title:'ON THIS PAGE...',link:'',items:_contentsTreeItems0.items},
-											{title:'-'}
-										)
-									;
+										/*** stitch in the contents tree for this page ***/
+											var
+												_siteMenuItems0Items = _siteMenu.get ('items') [0].items,
+												_contentsTreeItems0 = _this._contentsTreeItems && _this._contentsTreeItems [0]
+											;
+											_contentsTreeItems0 &&
+												_siteMenuItems0Items.unshift (
+													{title:'ON THIS PAGE...',link:'',items:_contentsTreeItems0.items},
+													{title:'-'}
+												)
+											;
 
-								/*** add shell node for site menu, that will overlay homeLink node ***/
-									_this.injectNodeHtml (
-										_this.getNode ('homeLink').parentNode,
-										'<div id="page_siteMenu-shell" class="siteMenuShell"></div>'
-									);
+										/*** add shell node for site menu, that will overlay homeLink node ***/
+											_this.injectNodeHtml (
+												_this.getNode ('homeLink').parentNode,
+												'<div id="page_siteMenu-shell" class="siteMenuShell"></div>'
+											);
 
-								/*** wire menu ***/
-									_siteMenu.insertOrWireUi ();
-									_siteMenu.setExpandedDepth (1); // the mouseover event for the root level item (which sits above the UIZE logo) is not picked up by Safari on the iPad, so force the issue
+										/*** wire menu ***/
+											_siteMenu.insertOrWireUi ();
+											_siteMenu.setExpandedDepth (1); // the mouseover event for the root level item (which sits above the UIZE logo) is not picked up by Safari on the iPad, so force the issue
+									}
+								);
 							};
 							_this.wireNode ('homeLink','mouseover',_wireUpSiteMenu);
 
