@@ -5052,9 +5052,10 @@ Uize = (function () {
 								_module.moduleName = _name;
 								_module.pathToResources = _module == _package
 									? _getPathToLibrary ('Uize.js')
-									: _package.moduleUrlResolver (_name)
-										.replace (/\.js$/,'/')
-										.replace (/\./g,'_')
+									: _package.moduleUrlTemplate.replace (
+										_modulePathToken,
+										_package.modulePathResolver (_name).replace (/\./g,'_') + '/'
+									)
 									/*?
 										Static Properties
 											Uize.pathToResources
