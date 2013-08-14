@@ -3,7 +3,7 @@
 <head>
 	<title>Tree Menu From JSON | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="featured widget menu Uize.Widget.Tree.Menu"/>
+	<meta name="keywords" content="featured widget menu Uize.Widgets.NavTree.Menu.Widget"/>
 	<meta name="description" content="See a demo of JavaScript menus, that can be easily built from a JSON object and can even be dynamically updated. These menus also support separators."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -27,7 +27,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.Tree.Menu.html"><code>Uize.Widget.Tree.Menu</code></a> is instantiated to produce a multi-level menu. The markup for the menu is generated when the widget is wired up. The structure for the markup is driven by a JSON data structure that is supplied to the <code>items</code> state property of the widget. This data structure is purely for demonstration purposes, so none of the items have active links specified (ie. clicking does nothing). The generated markup does not contain any styling, and the decoration for the menu is controlled by separate CSS in the page. As you interact with the menu, notice how the selection path is highlighted as you go deeper into submenus. Lower down the page, below the menu, are some links that execute snippets of code to demonstrate the programmatic interface of the widget.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widgets.NavTree.Menu.Widget.html"><code>Uize.Widgets.NavTree.Menu.Widget</code></a> is instantiated to produce a multi-level menu. The markup for the menu is generated when the widget is wired up. The structure for the markup is driven by a JSON data structure that is supplied to the <code>items</code> state property of the widget. This data structure is purely for demonstration purposes, so none of the items have active links specified (ie. clicking does nothing). The generated markup does not contain any styling, and the decoration for the menu is controlled by separate CSS in the page. As you interact with the menu, notice how the selection path is highlighted as you go deeper into submenus. Lower down the page, below the menu, are some links that execute snippets of code to demonstrate the programmatic interface of the widget.</p>
 	</div>
 
 	<div id="page_treeMenu-shell" style="height:200px;"></div>
@@ -68,8 +68,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Tree.Menu',
-		'Uize.Node',
+		'Uize.Widgets.NavTree.Menu.Widget',
 		'Uize.Test.TestData.Animals',
 		'Uize.Test.TestData.Plants',
 		'Uize.Test.TestData.AnimalsAndPlants'
@@ -85,19 +84,9 @@ Uize.module ({
 				animalsAndPlants = Uize.Test.TestData.AnimalsAndPlants (),
 				treeMenu = page.addChild (
 					'treeMenu',
-					Uize.Widget.Tree.Menu,
+					Uize.Widgets.NavTree.Menu.Widget,
 					{
 						items:animalsAndPlants,
-						menuCssClass:'menuShell',
-						menuDividerClass:'divider',
-						menuItemActiveCssClass:'menuItemActive',
-						menuItemChildrenIndicatorCssClass:'menuItemWithChildren',
-						menuItemCssClass:'menuItem',
-						subMenuCssClass:'subMenuShell',
-						subMenuDividerClass:'divider',
-						subMenuItemActiveCssClass:'subMenuItemActive',
-						subMenuItemChildrenIndicatorCssClass:'subMenuItemWithChildren',
-						subMenuItemCssClass:'subMenuItem',
 						built:false
 					}
 				)

@@ -11,47 +11,44 @@
 		_depthSpacer = '<div class="' + m.cssClass ('depthSpacer') + '"></div>'
 	;
 	m.traverseTree ({
-		itemHandler:
-			function (_item,_itemSpecifier,_depth) {
-				var
-					_itemLink = _item.link,
-					_hasItems = _Class.itemHasChildren (_item),
-					_itemClasses = m.cssClass ('item') + ' ' + m.cssClass ('depth' + _depth)
-				;
-				_htmlChunks.push (
-					'<nobr>' +
-					Uize.String.repeat (_depthSpacer,_depth) +
-					(
-						_Class.itemIsDivider (_item)
-							? _dividerHtml
-							: (
-								'<span class="' + m.cssClass ('bulletShell') + '">' +
-								(
-									_hasItems
-										? (
-											'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TogglerLink" href="javascript://" class="' + m.cssClass ('togglerLink') + ' ' + m.cssClass (_item.expanded !== false ? 'expanded' : 'collapsed') + '" title="' + m.getTogglerTitle (_item) + '"></a>'
-										)
-										: '<div class="' + m.cssClass ('bullet') + '"></div>'
-								) + '</span>' +
-								(
-									_itemLink || (_hasItems && input.alwaysLinkHeadings)
-										? (
-											'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TitleLink" class="' + _itemClasses + '" href="' + (_itemLink || 'javascript://') + '">' + _item.title + '</a>'
-										)
-										: ('<span class="' + _itemClasses + '">' + _item.title + '</span>')
-								)
+		itemHandler:function (_item,_itemSpecifier,_depth) {
+			var
+				_itemLink = _item.link,
+				_hasItems = _Class.itemHasChildren (_item),
+				_itemClasses = m.cssClass ('item') + ' ' + m.cssClass ('depth' + _depth)
+			;
+			_htmlChunks.push (
+				'<nobr>' +
+				Uize.String.repeat (_depthSpacer,_depth) +
+				(
+					_Class.itemIsDivider (_item)
+						? _dividerHtml
+						: (
+							'<span class="' + m.cssClass ('bulletShell') + '">' +
+							(
+								_hasItems
+									? (
+										'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TogglerLink" href="javascript://" class="' + m.cssClass ('togglerLink') + ' ' + m.cssClass (_item.expanded !== false ? 'expanded' : 'collapsed') + '" title="' + m.getTogglerTitle (_item) + '"></a>'
+									)
+									: '<div class="' + m.cssClass ('bullet') + '"></div>'
+							) + '</span>' +
+							(
+								_itemLink || (_hasItems && input.alwaysLinkHeadings)
+									? (
+										'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TitleLink" class="' + _itemClasses + '" href="' + (_itemLink || 'javascript://') + '">' + _item.title + '</a>'
+									)
+									: ('<span class="' + _itemClasses + '">' + _item.title + '</span>')
 							)
-					) +
-					'</nobr><br/>'
-				);
-			},
-		beforeSubItemsHandler:
-			function (_item,_itemSpecifier) {
-				_htmlChunks.push ('<span id="' + _idPrefix + '-' + _itemSpecifier + 'Children" style="display:' + (_item.expanded !== false ? 'block' : 'none') + ';">');
-			},
+						)
+				) +
+				'</nobr><br/>'
+			);
+		},
+		beforeSubItemsHandler:function (_item,_itemSpecifier) {
+			_htmlChunks.push ('<span id="' + _idPrefix + '-' + _itemSpecifier + 'Children" style="display:' + (_item.expanded !== false ? 'block' : 'none') + ';">');
+		},
 		afterSubItemsHandler:function () {_htmlChunks.push ('</span>\n')}
 	});
-%>
-<div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
+%><div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
 <%= _htmlChunks.join ('') %>
 </div>

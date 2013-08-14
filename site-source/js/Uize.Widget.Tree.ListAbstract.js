@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.Tree.ListAbstract= class is an abstract class that provides common code to the =Uize.Widget.Tree.List= class and the newer =Uize.Widgets.Tree.List= V2 widget class.
+		The =Uize.Widget.Tree.ListAbstract= class is an abstract class that provides common code to the =Uize.Widget.Tree.List= class and the newer =Uize.Widgets.NavTree.List.Widget= V2 widget class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

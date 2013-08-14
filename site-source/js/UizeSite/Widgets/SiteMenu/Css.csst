@@ -1,0 +1,30 @@
+.`` {
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 38px;
+	height: 38px;
+	background: transparent url(uize-logo.gif) no-repeat left top;
+}
+
+.`menuItem`,
+.`menuItem`:link,
+.`menuItem`:visited,
+.`menuItem`:hover,
+.`menuItem`:active {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.`menuItemHasChildren`,
+.`menuItemHasChildren`:link,
+.`menuItemHasChildren`:visited,
+.`menuItemHasChildren`:hover,
+.`menuItemHasChildren`:active {
+	background: none;
+}

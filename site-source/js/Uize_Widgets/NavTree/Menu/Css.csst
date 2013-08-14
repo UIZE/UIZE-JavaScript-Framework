@@ -1,0 +1,115 @@
+/*** menu ***/
+	.`` {
+		background: #ddd;
+		height: 23px;
+	}
+
+	.`menuItem`,
+	.`menuItem`:link,
+	.`menuItem`:visited,
+	.`menuItem`:hover,
+	.`menuItem`:active {
+		padding: 2px 10px 2px 10px;
+		height: 20px;
+		text-align: center;
+		font-family: Arial;
+		font-size: 16px;
+		background: none;
+		border: none;
+		color: #000;
+		margin: 0 1px;
+		float: left;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.`menuItemActive`,
+	.`menuItemActive`:link,
+	.`menuItemActive`:visited,
+	.`menuItemActive`:hover,
+	.`menuItemActive`:active {
+		color: #fff;
+		background-color: #456;
+	}
+
+	.`menuItemHasChildren`,
+	.`menuItemHasChildren`:link,
+	.`menuItemHasChildren`:visited,
+	.`menuItemHasChildren`:hover,
+	.`menuItemHasChildren`:active {
+		padding-right: 20px;
+		background-image: url(menu-item-has-children.gif);
+		background-attachment: scroll;
+		background-repeat: no-repeat;
+		background-position: 95% 50%;
+	}
+
+	.`menuDivider` {
+		font-size: 0;
+		float: left;
+		height: 20px;
+		margin: 2px 4px;
+		border-left: solid 1px #aaa;
+		border-right: solid 1px #333;
+	}
+
+/*** submenu ***/
+	.`subMenu` {
+		display: none;
+		position: absolute;
+		padding: 5px 0;
+		background: #fff;
+		border: 1px solid #dee;
+		border-right-color: #889094;
+		border-bottom-color: #889094;
+		box-shadow: 0 0 14px rgba(0,0,0,.3);
+		-moz-box-shadow: 0 0 14px rgba(0,0,0,.3);
+		-webkit-box-shadow: 0 0 14px rgba(0,0,0,.3);
+		max-height: 630px;
+		overflow: auto;
+	}
+
+	.`subMenuItem`,
+	.`subMenuItem`:link,
+	.`subMenuItem`:visited,
+	.`subMenuItem`:hover,
+	.`subMenuItem`:active
+	{
+		display: block;
+		padding: 3px 45px 4px 10px;
+		margin: 0 1px; /* NOTE: need a margin around links, or focus highlight causes menu shell to have scrollbars */
+		font-family: Arial;
+		font-size: 12px;
+		color: #000;
+		border: none;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.`subMenuItemActive`,
+	.`subMenuItemActive`:link,
+	.`subMenuItemActive`:visited,
+	.`subMenuItemActive`:hover,
+	.`subMenuItemActive`:active
+	{
+		color: #fff;
+		background-color: #788;
+	}
+
+	.`subMenuItemHasChildren`,
+	.`subMenuItemHasChildren`:link,
+	.`subMenuItemHasChildren`:visited,
+	.`subMenuItemHasChildren`:hover,
+	.`subMenuItemHasChildren`:active {
+		background-image: url(submenu-item-has-children.gif);
+		background-attachment: scroll;
+		background-repeat: no-repeat;
+		background-position: right center;
+	}
+
+	.`subMenuDivider` {
+		font-size: 0;
+		line-height: 0;
+		margin: 6px 10px;
+		border-top: solid 1px #ccc;
+	}

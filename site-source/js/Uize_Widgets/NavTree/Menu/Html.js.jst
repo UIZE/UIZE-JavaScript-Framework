@@ -1,0 +1,31 @@
+<%@
+	input ({
+		idPrefix:'string'
+	});
+%><%
+	var
+		_idPrefix = input.idPrefix,
+		_htmlChunks = []
+	;
+	m.traverseTree ({
+		itemHandler:function (_item,_itemSpecifier,_depth) {
+			_htmlChunks.push (
+				m.Class.itemIsDivider (_item)
+					? (
+						'<div class="' + m.cssClass (_depth ? 'subMenuDivider' : 'menuDivider') + '" href="javascript://">&nbsp;</div>'
+					) : (
+						'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TitleLink" class="' + m.getItemClassName (_item,_depth) + '" href="' + (_item.link || 'javascript://') + '"' + (_item.link ? '' : ' style="cursor: default;"') + '>' + _item.title + '</a>'
+					)
+			);
+		},
+		beforeSubItemsHandler:function (_item,_itemSpecifier,_depth) {
+			_htmlChunks.push (
+				'<div id="' + _idPrefix + '-' + _itemSpecifier + 'Children" class="' + m.cssClass ('subMenu') + '">'
+			);
+		},
+		afterSubItemsHandler:function () {_htmlChunks.push ('</div>\n')}
+	});
+%><div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
+<%= _htmlChunks.join ('') %>
+<br style="clear: both;"/>
+</div>
