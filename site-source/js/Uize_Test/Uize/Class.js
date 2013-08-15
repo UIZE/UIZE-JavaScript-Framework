@@ -1057,7 +1057,7 @@ Uize.module ({
 			};
 		}
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test for Uize Base Class',
 			test:[
 				Uize.Test.staticMethodsTest ([

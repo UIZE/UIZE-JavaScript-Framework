@@ -36,7 +36,7 @@ Uize.module ({
 			_undefined
 		;
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test the performance of different approaches to testing for an undefined value',
 			test:[
 				{

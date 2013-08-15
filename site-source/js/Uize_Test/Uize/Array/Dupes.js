@@ -39,7 +39,7 @@ Uize.module ({
 			_functionB = function () {},
 			_functionC = function () {}
 		;
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Uize.Array.Dupes Module Test',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Array.Dupes'),

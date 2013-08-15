@@ -30,7 +30,7 @@ Uize.module ({
 
 		var _totalIterations = 2000000;
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test the performance of different approaches to building arrays',
 			test:[
 				{

@@ -292,7 +292,7 @@ Uize.module ({
 				_arguments [_targetArgumentNo] = _targetArgumentValue !== undefined ? _targetArgumentValue : _sourceArray;
 				_target = _host [_methodName].apply (_host,_arguments);
 			}
-			return Uize.Test.declare ({
+			return Uize.Test.resolve ({
 				title:'Test that the targetARRAYorBOOL parameter is handled correctly for various types of values',
 				test:[
 					{
@@ -381,7 +381,7 @@ Uize.module ({
 			});
 		}
 
-		var _class = Uize.Test.declare ({
+		var _class = Uize.Test.resolve ({
 			title:'Test for Uize Base Module',
 			test:[
 				Uize.Test.staticMethodsTest ([

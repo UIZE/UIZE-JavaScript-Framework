@@ -40,7 +40,7 @@ Uize.module ({
 			return _stringBuilder;
 		}
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test for Uize.String.Builder Module',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.String.Builder'),

@@ -193,7 +193,7 @@ Uize.module ({
 			};
 		}
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test for Uize.Date Module',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Date'),

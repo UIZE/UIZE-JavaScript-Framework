@@ -28,7 +28,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Uize.Data.NameValueRecords Module Test',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Data.NameValueRecords'),

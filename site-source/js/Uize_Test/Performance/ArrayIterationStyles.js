@@ -36,7 +36,7 @@ Uize.module ({
 			_elements [_elementNo] = _elementNo
 		;
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test the performance of different approaches to iterating over the elements of an array',
 			test:[
 				{

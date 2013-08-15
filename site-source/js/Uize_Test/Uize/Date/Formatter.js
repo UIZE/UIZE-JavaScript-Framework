@@ -89,7 +89,7 @@ Uize.module ({
 					_testDateTimeIsJustBeforeMidnight = _newDate (2001,1,1,23,59,59,999)
 		;
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test for Uize.Date.Formatter Module',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Date.Formatter'),

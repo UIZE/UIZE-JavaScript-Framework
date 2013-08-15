@@ -73,7 +73,7 @@ Uize.module ({
 			for (var _caseNo = -1, _casesLength = _cases.length; ++_caseNo < _casesLength;)
 				_test.push (_getCaseTest (_cases [_caseNo]))
 			;
-			return Uize.Test.declare (
+			return Uize.Test.resolve (
 				Uize.copyInto (
 					{
 						title:'STATIC METHOD TEST: ' + _methodFullName,
@@ -97,10 +97,10 @@ Uize.module ({
 						: _staticMethodTest
 				);
 			}
-			return Uize.Test.declare ({title:'Modify Classes Static Method Tests',test:_test});
+			return Uize.Test.resolve ({title:'Modify Classes Static Method Tests',test:_test});
 		}
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test for Uize.Node.Classes Module',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Node.Classes'),

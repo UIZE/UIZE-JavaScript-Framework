@@ -57,7 +57,7 @@ Uize.module ({
 			};
 		}
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test for Uize.Flo Module',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Flo'),

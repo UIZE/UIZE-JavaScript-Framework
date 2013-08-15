@@ -61,7 +61,7 @@ Uize.module ({
 							}
 						)
 					),
-					_unitTestSuite = Uize.Test.declare ({
+					_unitTestSuite = Uize.Test.resolve ({
 						title:'Unit Tests Suite',
 						test:Uize.map (
 							_modulesInDependencyOrder,

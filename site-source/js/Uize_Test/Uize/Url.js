@@ -32,7 +32,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test for Uize.Url Module',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Url'),

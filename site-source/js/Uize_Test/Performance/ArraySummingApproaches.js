@@ -55,7 +55,7 @@ Uize.module ({
 			_totalIterations = 500
 		;
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test the performance of different approaches to summing all the elements of an array',
 			test:[
 				{

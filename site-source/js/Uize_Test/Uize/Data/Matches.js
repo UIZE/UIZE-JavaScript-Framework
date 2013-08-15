@@ -550,7 +550,7 @@ Uize.module ({
 			}
 		}
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Uize.Data.Matches Module Test',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Data.Matches'),

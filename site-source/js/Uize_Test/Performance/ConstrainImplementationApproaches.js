@@ -42,7 +42,7 @@ Uize.module ({
 			return Math.min (Math.max (_value,Math.min (_limitA,_limitB)),Math.max (_limitA,_limitB));
 		}
 
-		return Uize.Test.declare ({
+		return Uize.Test.resolve ({
 			title:'Test the performance of different implementation approaches for constraining a value to a range',
 			test:[
 				{

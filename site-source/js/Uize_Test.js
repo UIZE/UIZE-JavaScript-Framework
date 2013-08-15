@@ -1423,7 +1423,7 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_class.addTest = function (_test) {
-				(this._test || (this._test = [])).push (this.declare (_test));
+				(this._test || (this._test = [])).push (this.resolve (_test));
 				return this;
 				/*?
 					Static Methods
@@ -1461,12 +1461,12 @@ Uize.module ({
 							}
 							.............................
 
-							The value of the =propertyFullNameSTR= parameter should be a string that fully qualifies the path for referencing a property in the global context (eg. ='Uize.Test.declare'=). The =Uize.Test.splitHostAndProperty= method splits this string into host and property strings, and packages these two string values into an object. Supplied our example value of ='Uize.Test.declare'=, the =Uize.Test.splitHostAndProperty= method would return the object ={host:'Uize.Test',property:'declare'}=.
+							The value of the =propertyFullNameSTR= parameter should be a string that fully qualifies the path for referencing a property in the global context (eg. ='Uize.Test.resolve'=). The =Uize.Test.splitHostAndProperty= method splits this string into host and property strings, and packages these two string values into an object. Supplied our example value of ='Uize.Test.resolve'=, the =Uize.Test.splitHostAndProperty= method would return the object ={host:'Uize.Test',property:'declare'}=.
 				*/
 			};
 
 			/*** factory methods for creating test classes using declarative syntax ***/
-				_class.declare = function (_test) {
+				_class.resolve = function (_test) {
 					if (!Uize.Util.Oop.inheritsFrom (_test,Uize.Test)) {
 						var _testProperties = _test;
 
@@ -1478,7 +1478,7 @@ Uize.module ({
 									++_subtestNo < _subtestsLength;
 								)
 									if ((_subtest = _subtests [_subtestNo]).constructor == Object)
-										_subtests [_subtestNo] = this.declare (_subtest)
+										_subtests [_subtestNo] = this.resolve (_subtest)
 								;
 							}
 
@@ -1487,12 +1487,12 @@ Uize.module ({
 					return _test;
 					/*?
 						Static Methods
-							Uize.Test.declare
+							Uize.Test.resolve
 								Returns a =Uize.Test= subclass, being the specified test object resolved to a test class.
 
 								SYNTAX
 								........................................
-								testCLASS = Uize.Test.declare (testOBJ);
+								testCLASS = Uize.Test.resolve (testOBJ);
 								........................................
 
 								testOBJ
@@ -1501,7 +1501,7 @@ Uize.module ({
 									In the event that the =testOBJ= parameter's value is a set of property value, a new subclass of the =Uize.Test= class is created, and its state properties are initialized with the values contained in the =testOBJ= object. The value of the =test= property receives special handling (see `Resolving Subtests`).
 
 								More Concise and Declarative
-									The =Uize.Test.declare= method allows for a more concise, declarative syntax for defining tests.
+									The =Uize.Test.resolve= method allows for a more concise, declarative syntax for defining tests.
 
 									INSTEAD OF...
 									..................................................
@@ -1514,26 +1514,26 @@ Uize.module ({
 
 									USE...
 									..................................................
-									Uize.Test.declare ({
+									Uize.Test.resolve ({
 										title:'Test that 2 + 2 equals 4',
 										test:function () {return this.expect (4,2 + 2)}
 									});
 									..................................................
 
 								Returns a Test Class
-									Because the =Uize.Test.declare= method returns a =Uize.Test= subclass, it can be used for declaring a child test in an array of child tests, as with all the other `test class factory methods` (see `Example 2: A Set of Tests` for an illustration of this).
+									Because the =Uize.Test.resolve= method returns a =Uize.Test= subclass, it can be used for declaring a child test in an array of child tests, as with all the other `test class factory methods` (see `Example 2: A Set of Tests` for an illustration of this).
 
 								Resolving Subtests
 									If a test properties object is specified for the =testOBJ= parameter (rather than a =Uize.Test= subclass), then the value of that object's =test= property is further resolved.
 
-									If the value of the =test= property is an array of child tests, then the elements of the child tests array are resolved to test classes by calling the =Uize.Test.declare= method for each of them, where each element value becomes the value of the =Uize.Test.declare= method's =testOBJ= parameter. For an example of this type of usage, see the `Example 2: A Set of Tests`.
+									If the value of the =test= property is an array of child tests, then the elements of the child tests array are resolved to test classes by calling the =Uize.Test.resolve= method for each of them, where each element value becomes the value of the =Uize.Test.resolve= method's =testOBJ= parameter. For an example of this type of usage, see the `Example 2: A Set of Tests`.
 
 								Example 1: A Single Test
-									In this example, a simple test class is being created using the =Uize.Test.declare= method.
+									In this example, a simple test class is being created using the =Uize.Test.resolve= method.
 
 									EXAMPLE
 									..................................................
-									Uize.Test.declare ({
+									Uize.Test.resolve ({
 										title:'Test that 2 + 2 equals 4',
 										test:function () {return this.expect (4,2 + 2)}
 									});
@@ -1546,14 +1546,14 @@ Uize.module ({
 
 									EXAMPLE
 									........................................................................
-									Uize.Test.declare ({
+									Uize.Test.resolve ({
 										title:'Test a whole bunch of things',
 										test:[
 											{
 												title:'Test that 2 + 2 equals 4',
 												test:function () {return this.expect (4,2 + 2)}
 											},
-											Uize.Test.declare ({
+											Uize.Test.resolve ({
 												title:'Test that true is equal to 1 in a simple equality test',
 												test:function () {return this.expect (true,1 == true)}
 											}),
@@ -1563,7 +1563,7 @@ Uize.module ({
 									});
 									........................................................................
 
-									The value of the =test= state property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see `Resolving Subtests`). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, the second is declared by calling the =Uize.Test.declare= method explicitly, and the remaining child tests are declared by calling the =Uize.Test.staticPropertyTest= static method.
+									The value of the =test= state property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see `Resolving Subtests`). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, the second is declared by calling the =Uize.Test.resolve= method explicitly, and the remaining child tests are declared by calling the =Uize.Test.staticPropertyTest= static method.
 
 								NOTES
 								- this method is one of the many available `test class factory methods`
@@ -1571,7 +1571,7 @@ Uize.module ({
 				};
 
 				_class.requiredModulesTest = function (_modules) {
-					return this.declare ({
+					return this.resolve ({
 						title:'REQUIRED MODULES TEST: ' + _modules,
 						test:function (_continue) {Uize.require (_modules,function () {_continue (true)})}
 					});
@@ -1595,7 +1595,7 @@ Uize.module ({
 
 									EXAMPLE
 									.............................................................
-									var testClassForUizeArrayOrder = Uize.Test.declare ({
+									var testClassForUizeArrayOrder = Uize.Test.resolve ({
 										title:'Uize.Array.Order Module Test',
 										test:[
 											Uize.Test.requiredModulesTest ('Uize.Array.Order'),
@@ -1608,7 +1608,7 @@ Uize.module ({
 									});
 									.............................................................
 
-									In the above example, a test class is being created for testing the =Uize.Array.Order= module, using the =Uize.Test.declare= static method (another of the `test class factory methods`). As you will notice, the very first child test in our test class is being created using the =Uize.Test.requiredModulesTest= method. This tests requiring the =Uize.Array.Order= module. If the test fails, then subsequent tests will not be performed. If the test succeeds, then the =Uize.Array.Order= module is guaranteed to be built and can be relied upon for the subsequent tests that will test the module's various features, such as its static methods.
+									In the above example, a test class is being created for testing the =Uize.Array.Order= module, using the =Uize.Test.resolve= static method (another of the `test class factory methods`). As you will notice, the very first child test in our test class is being created using the =Uize.Test.requiredModulesTest= method. This tests requiring the =Uize.Array.Order= module. If the test fails, then subsequent tests will not be performed. If the test succeeds, then the =Uize.Array.Order= module is guaranteed to be built and can be relied upon for the subsequent tests that will test the module's various features, such as its static methods.
 
 								NOTES
 								- this method is one of the many available `test class factory methods`
@@ -1620,7 +1620,7 @@ Uize.module ({
 						_hostAndProperty = _splitHostAndProperty (_propertyFullName),
 						_propertyHost = _hostAndProperty.host
 					;
-					return this.declare ({
+					return this.resolve ({
 						title:'Test that ' + _propertyFullName + ' exists and is a ' + _expectedType,
 						test:[
 							{
@@ -1724,7 +1724,7 @@ Uize.module ({
 					for (var _caseNo = -1, _casesLength = _cases.length; ++_caseNo < _casesLength;)
 						_test.push (_getCaseTest (_cases [_caseNo]))
 					;
-					var _testClass = _this.declare (
+					var _testClass = _this.resolve (
 						Uize.copyInto (
 							{
 								title:'STATIC METHOD TEST: ' + _methodFullName,
@@ -1752,7 +1752,7 @@ Uize.module ({
 								methodFullNameSTR
 									A string, specifying the full name of the static method, including the full host path.
 
-									For example, with the "declare" method of the =Uize.Test= module, the value specified for the =methodFullNameSTR= parameter would be ='Uize.Test.declare'=.
+									For example, with the "declare" method of the =Uize.Test= module, the value specified for the =methodFullNameSTR= parameter would be ='Uize.Test.resolve'=.
 
 								casesARRAY
 									An array, containing a sequence of test cases, all of which need to succeed in order for the static method test to succeed.
@@ -1791,7 +1791,7 @@ Uize.module ({
 										Asynchronous or Non-deterministic Cases
 											When a case is either asynchronous or non-deterministic (ie. you can't be guaranteed to always get the same result returned for the same argument values), then you cannot use the concise array syntax for declaring the case as you can with `synchronous and deterministic cases`.
 
-											Instead, you can use the object syntax accepted for the =testOBJ= parameter of the =Uize.Test.declare= static method, or you can provide a =Uize.Test= subclass (created by one of the `test class factory methods`, or otherwise created).
+											Instead, you can use the object syntax accepted for the =testOBJ= parameter of the =Uize.Test.resolve= static method, or you can provide a =Uize.Test= subclass (created by one of the `test class factory methods`, or otherwise created).
 
 								supplementalTestPropertiesOBJ
 									When the optional =supplementalTestPropertiesOBJ= parameter is specified, then additional values for the state properties of the created =Uize.Test= subclass can be specified.
@@ -1828,7 +1828,7 @@ Uize.module ({
 
 				_class.staticMethodsTest = function (_staticMethodsTest) {
 					var _this = this;
-					return _this.declare ({
+					return _this.resolve ({
 						title:'Static Method Tests',
 						test:Uize.map (
 							_staticMethodsTest,
@@ -1867,7 +1867,7 @@ Uize.module ({
 									..............................
 
 								staticMethodTestARRAYorOBJ
-									An array, specifying the parameter values for a call to the =Uize.Test.staticMethodTest= static method, or a value that can be used for the =testOBJ= parameter of the =Uize.Test.declare= static method and that will be resolved to a =Uize.Test= subclass.
+									An array, specifying the parameter values for a call to the =Uize.Test.staticMethodTest= static method, or a value that can be used for the =testOBJ= parameter of the =Uize.Test.resolve= static method and that will be resolved to a =Uize.Test= subclass.
 
 									If an array value is specified for the =staticMethodTestARRAYorOBJ= value type, then it should have the following structure...
 
@@ -1879,7 +1879,7 @@ Uize.module ({
 									]
 									...........................................................................
 
-									When a non-array value is specified for the =staticMethodTestARRAYorOBJ= value type, then it will be resolved to a =Uize.Test= subclass using the =Uize.Test.declare= static method.
+									When a non-array value is specified for the =staticMethodTestARRAYorOBJ= value type, then it will be resolved to a =Uize.Test= subclass using the =Uize.Test.resolve= static method.
 
 								EXAMPLE
 								.................................................................................
@@ -1958,7 +1958,7 @@ Uize.module ({
 				_class.testModuleTest = function (_testModule) {
 					var _loadTestModuleTest = this.requiredModulesTest (_testModule);
 					_loadTestModuleTest.set ({_title:'REQUIRE TEST MODULE: ' + _testModule});
-					return this.declare ({
+					return this.resolve ({
 						title:'TEST MODULE: ' + _testModule,
 						test:[
 							_loadTestModuleTest,
@@ -2010,7 +2010,7 @@ Uize.module ({
 
 				_class.testSuite = function (_testSuiteTitle,_testSuiteModules) {
 					var _this = this;
-					return _this.declare ({
+					return _this.resolve ({
 						title:_testSuiteTitle,
 						test:Uize.map (
 							_testSuiteModules,
