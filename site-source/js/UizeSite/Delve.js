@@ -65,6 +65,7 @@ Uize.module ({
 				_objectNotValidOrNotLoadedMessage = '-- object is undefined, not valid, or is not loaded on page --',
 				_reportDivider = '------------------------------------------------------------------------------',
 				_treeListDividerQuery = {_title:'- - - - - - - - - - - - - - - - - - - - - - - - - - - -'},
+				_treeItemLink = 'javascript:page.treeItemClicked ()',
 				_treeListQueries = {
 					/*** widget instance queries ***/
 						widgetsOnPageTree:{
@@ -73,16 +74,16 @@ Uize.module ({
 								var
 									_this = this,
 									_items = [],
-									_pageWidget = _this._getPageWidget ()
+									_pageWidget = _getPageWidget (_this)
 								;
 								if (_pageWidget) {
 									var _widgetToItem = function (_widget,_level) {
 										var
 											_item = {
-												title:_this._getWidgetName (_widget),
+												title:_getWidgetName (_this,_widget),
 												link:_treeItemLink,
 												expanded:!_level,
-												objectPath:_this._getWidgetPath (_widget)
+												objectPath:_getWidgetPath (_this,_widget)
 											},
 											_itemItems = []
 										;
@@ -110,14 +111,14 @@ Uize.module ({
 						},
 						widgetsOnPageList:{
 							_title:'All widgets on the page',
-							_itemsGenerator:function () {return this._getMatchingWidgetsTreeListItems ()}
+							_itemsGenerator:function () {return _getMatchingWidgetsTreeListItems (this)}
 						},
 						widgetsOnPageGroupedByClass:{
 							_title:'All widgets on the page, grouped by class',
 							_itemsGenerator:function () {
 								var
 									_this = this,
-									_instancesPerWidgetClassMap = _this._getInstancesPerWidgetClassMap (),
+									_instancesPerWidgetClassMap = _getInstancesPerWidgetClassMap (_this),
 									_widgetClasses = Uize.keys (_instancesPerWidgetClassMap)
 								;
 
@@ -159,7 +160,7 @@ Uize.module ({
 												items:Uize.map (
 													_widgetClassWidgets,
 													function (_widgetClassWidget) {
-														var _widgetPath = _this._getWidgetPath (_widgetClassWidget);
+														var _widgetPath = _getWidgetPath (_this,_widgetClassWidget);
 														return {
 															title:_widgetPath,
 															link:_treeItemLink,
@@ -177,7 +178,8 @@ Uize.module ({
 						widgetsDisabled:{
 							_title:'Widgets that are in the disabled state',
 							_itemsGenerator:function () {
-								return this._getMatchingWidgetsTreeListItems (
+								return _getMatchingWidgetsTreeListItems (
+									this,
 									function (_widget) {return !_widget.get ('enabledInherited')}
 								);
 							}
@@ -185,18 +187,19 @@ Uize.module ({
 						widgetsNotWired:{
 							_title:'Widgets that are not wired',
 							_itemsGenerator:function () {
-								return this._getMatchingWidgetsTreeListItems (function (_widget) {return !_widget.isWired});
+								return _getMatchingWidgetsTreeListItems (this,function (_widget) {return !_widget.isWired});
 							}
 						},
 						wiredWidgetsMissingSomeNodeDOM:{
 							_title:'Wired widgets that are missing some DOM nodes',
 							_itemsGenerator:function () {
 								var _this = this;
-								return _this._getMatchingWidgetsTreeListItems (
+								return _getMatchingWidgetsTreeListItems (
+									_this,
 									function (_widget) {
 										var _result = false;
 										if (_widget.isWired) {
-											var _nodeCache = _this._getWidgetNodeCache (_widget);
+											var _nodeCache = _getWidgetNodeCache (_this,_widget);
 											for (var _nodeName in _nodeCache) {
 												if (!_nodeCache [_nodeName]) {
 													_result = true;
@@ -213,11 +216,12 @@ Uize.module ({
 							_title:'Wired widgets that appear to missing all DOM nodes',
 							_itemsGenerator:function () {
 								var _this = this;
-								return _this._getMatchingWidgetsTreeListItems (
+								return _getMatchingWidgetsTreeListItems (
+									_this,
 									function (_widget) {
 										var _result = false;
 										if (_widget.isWired) {
-											var _nodeCache = _this._getWidgetNodeCache (_widget);
+											var _nodeCache = _getWidgetNodeCache (_this,_widget);
 											for (var _nodeName in _nodeCache) {
 												_result = true;
 												if (_nodeCache [_nodeName]) {
@@ -234,7 +238,8 @@ Uize.module ({
 						widgetsWithLocalizedStringsSpecified:{
 							_title:'Widgets for which localized strings are specified',
 							_itemsGenerator:function () {
-								return this._getMatchingWidgetsTreeListItems (
+								return _getMatchingWidgetsTreeListItems (
+									this,
 									function (_widget) {return !Uize.isEmpty (_widget.get ('localized'))}
 								);
 							}
@@ -242,7 +247,8 @@ Uize.module ({
 						widgetsWithRemappedNodes:{
 							_title:'Widgets that have some remapped DOM nodes',
 							_itemsGenerator:function () {
-								return this._getMatchingWidgetsTreeListItems (
+								return _getMatchingWidgetsTreeListItems (
+									this,
 									function (_widget) {return !Uize.isEmpty (_widget.get ('nodeMap'))}
 								);
 							}
@@ -250,7 +256,8 @@ Uize.module ({
 						widgetsWithValueInterface:{
 							_title:'Widgets that implement the value interface',
 							_itemsGenerator:function () {
-								return this._getMatchingWidgetsTreeListItems (
+								return _getMatchingWidgetsTreeListItems (
+									this,
 									function (_widget) {return 'value' in _widget.get ()}
 								);
 							}
@@ -283,50 +290,52 @@ Uize.module ({
 								}
 								return _itemsFromModulesTree (
 									'',
-									Uize.Data.PathsTree.fromList (_this._getBuiltModules (),'.'),
+									Uize.Data.PathsTree.fromList (_getBuiltModules (_this),'.'),
 									0
 								);
 							}
 						},
 						builtModulesList:{
 							_title:'All built modules (listed in build order)',
-							_itemsGenerator:function () {return this._getMatchingModulesTreeListItems ()}
+							_itemsGenerator:function () {return _getMatchingModulesTreeListItems (this)}
 						},
 						widgetClasses:{
 							_title:'All widgets classes',
 							_itemsGenerator:function () {
-								return this._getWidgetClassesTreeListItems ();
+								return _getWidgetClassesTreeListItems (this);
 							}
 						},
 						widgetClassesInstancesCreated:{
 							_title:'Widget classes with instances created',
 							_itemsGenerator:function () {
-								return this._getWidgetClassesTreeListItems (true);
+								return _getWidgetClassesTreeListItems (this,true);
 							}
 						},
 						widgetClassesNoInstancesCreated:{
 							_title:'Widget classes with no instances created',
 							_itemsGenerator:function () {
-								return this._getWidgetClassesTreeListItems (false);
+								return _getWidgetClassesTreeListItems (this,false);
 							}
 						},
 						nonWidgetClasses:{
 							_title:'All non-widget built modules',
 							_itemsGenerator:function () {
 								var _this = this;
-								return _this._getMatchingModulesTreeListItems (
-									function (_moduleName) {return !_this._isWidgetClass (_moduleName)}
+								return _getMatchingModulesTreeListItems (
+									_this,
+									function (_moduleName) {return !_isWidgetClass (_this,_moduleName)}
 								);
 							}
 						},
 						uizeModules:{
 							_title:'All UIZE built modules',
-							_itemsGenerator:function () {return this._getMatchingModulesTreeListItems (_isUizeModule)}
+							_itemsGenerator:function () {return _getMatchingModulesTreeListItems (this,_isUizeModule)}
 						},
 						nonUizeModules:{
 							_title:'All non-UIZE built modules',
 							_itemsGenerator:function () {
-								return this._getMatchingModulesTreeListItems (
+								return _getMatchingModulesTreeListItems (
+									this,
 									function (_moduleName) {return !_isUizeModule (_moduleName)}
 								);
 							}
@@ -338,28 +347,28 @@ Uize.module ({
 						allWidgetDomNodes:{
 							_title:'All accessed widget DOM nodes',
 							_itemsGenerator:function () {
-								return this._getMatchingWidgetDomNodesTreeListItems ();
+								return _getMatchingWidgetDomNodesTreeListItems (this);
 							}
 						},
 						allPresentWidgetDomNodes:{
 							_title:'All present accessed widget DOM nodes',
 							_itemsGenerator:function () {
-								return this._getMatchingWidgetDomNodesTreeListItems (function (_node) {return _node});
+								return _getMatchingWidgetDomNodesTreeListItems (this,function (_node) {return _node});
 							}
 						},
 						allMissingWidgetDomNodes:{
 							_title:'All missing accessed widget DOM nodes',
 							_itemsGenerator:function () {
-								return this._getMatchingWidgetDomNodesTreeListItems (function (_node) {return !_node});
+								return _getMatchingWidgetDomNodesTreeListItems (this,function (_node) {return !_node});
 							}
 						},
 						unaccessedWidgetDomNodes:{
 							_title:'All unaccessed widget DOM nodes',
-							_itemsGenerator:function () {return this._getUnaccessedDomNodesWithIdsTreeListItems (true)}
+							_itemsGenerator:function () {return _getUnaccessedDomNodesWithIdsTreeListItems (this,true)}
 						},
 						domNodesWithIdsNotBelongingToWidgets:{
 							_title:'DOM nodes with IDs not belonging to widgets',
-							_itemsGenerator:function () {return this._getUnaccessedDomNodesWithIdsTreeListItems (false)}
+							_itemsGenerator:function () {return _getUnaccessedDomNodesWithIdsTreeListItems (this,false)}
 						}
 				}
 			;
@@ -413,105 +422,89 @@ Uize.module ({
 				);
 			}
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var _this = this;
-
-						/*** Private Instance Properties ***/
-							_this._summaryLastObject = _this._featuresLastObject = _notInitialized;
-					},
-					function () {
-						var _this = this;
-
-						/*** add tree list widget ***/
-							_this.addChild (
-								'treeList',
-								Uize.Widgets.NavTree.List.Widget,
-								{
-									tooltip:'infoTooltip',
-									tooltipTemplate:function (_item) {
-										return _this._getInfoTooltipHtml (_this._lastTreeItemOverObjectPath = _item.objectPath);
-									},
-									built:false
-								}
-							).wire ({
-								'After Show Tooltip':
-									function (_event) {_this._highlightObjectInWindow (_event.item.objectPath)},
-								'After Hide Tooltip':
-									function () {_this._removeObjectHighlight ()}
-							});
-
-						/*** add object entry widget ***/
-							var _objectEntry = _this.addChild ('objectEntry',Uize.Widget.TextInput);
-							_objectEntry.wire (
-								'Changed.value',
-								function () {
-									_this.set ({_objectInspectedPath:_objectEntry + ''});
-									_this._updateDocumentationUrl ();
-								}
-							);
-
-						/*** add object inspector tabs widget ***/
-							_this.addChild (
-								'objectInspectorTabs',
-								Uize.Widget.Options.Tabbed,
-								{
-									bodyClassActive:'tabBodyActive',
-									bodyClassInactive:'tabBodyInactive',
-									value:'summary',
-									values:['summary','state','features','documentation','eventsLog']
-								}
-							).wire ('Changed.value',function () {_this._updateUiVariousaTabs ()});
-
-						/*** add summary wrapper widget (for wiring/unwiring objectLink tooltips) ***/
-							_this.addChild ('objectInspectorSummary',Uize.Widget);
-
-						/*** add state wrapper widget (for wiring/unwiring objectLink tooltips) ***/
-							_this.addChild ('objectInspectorState',Uize.Widget);
-
-						/*** add features wrapper widget (and features table sorter widget) ***/
-							_this.addChild ('objectInspectorFeatures',Uize.Widget)
-								.addChild (
-									'table',
-									Uize.Widget.TableSort,
-									{
-										headingOverClass:'headingOver',
-										headingLitClass:'headingLit',
-										rowOverClass:'rowOver',
-										cellTooltips:true
-									}
-								)
-							;
-
-						/*** add events log widget ***/
-							_this.addChild ('objectInspectorEventsLog',Uize.Widget.Log.InstanceEvents);
-
-						/*** initialization ***/
-							_this._updateTreeListItems ();
-							_this._updateObjectEntry ();
-							_this._updateEventsLog ();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._evalInWindow = function (_expression) {
-				var _window = this._window;
+			function _updateUiDocumentation () {
+				var _this = this;
+				if (_this.isWired && _this.children.objectInspectorTabs + '' == 'documentation') {
+					var _documentationUrl = _this._documentationUrl;
+					if (_documentationUrl != _this._lastDisplayedDocumentationUrl) {
+						var _contentWindow = _this.getNode ('documentation').contentWindow;
+						if (_contentWindow)
+							_contentWindow.location.href = _documentationUrl
+						;
+						_this._lastDisplayedDocumentationUrl = _documentationUrl;
+					}
+				}
+			}
+
+			function _updateUiVariousTabs () {
+				var _this = this;
+				_updateUiSummary (_this);
+				_updateUiState (_this);
+				_updateUiFeatures (_this);
+				_updateUiDocumentation.call (_this);
+			}
+
+			function _updateEventsLog () {
+				var _objectInspectorEventsLog = this.children.objectInspectorEventsLog;
+				_objectInspectorEventsLog &&
+					_objectInspectorEventsLog.set ({instance:this._objectInspected})
+				;
+			}
+
+			function _updateObjectEntry () {
+				var _objectEntry = this.children.objectEntry;
+				_objectEntry && _objectEntry.set ({value:this._objectInspectedPath});
+			}
+
+			function _updateTreeListItems () {
+				var
+					_this = this,
+					_treeList = _this.children.treeList
+				;
+				if (_treeList) {
+					var _itemsGenerator = _treeListQueries [_this._treeListQuery]._itemsGenerator;
+					_treeList.set ({items:_itemsGenerator ? _itemsGenerator.call (_this) : []})
+				}
+			}
+
+			function _updateUiTreeListDropdown () {
+				var _this = this;
+				if (_this.isWired) {
+					_this.setNodeValue ('treeListDropdown',_this._treeListQuery);
+				}
+			}
+
+			function _updateUiWindowInspected () {
+				var _this = this;
+				if (_this.isWired) {
+					var _window = _this._window;
+					_this.setNodeValue (
+						'windowInspected',
+						_window
+							? Uize.String.limitLength (_window.location.href,120)
+							: 'no window being inspected'
+					);
+					_this.setNodeProperties (
+						'windowInspected',
+						{title:_window ? _window.document.title : ''}
+					);
+				}
+			}
+
+			function _evalInWindow (_this,_expression) {
+				var _window = _this._window;
 				if (_window && _expression) {
 					try {return _window.eval ('(' + _expression + ')')} catch (_error) {}
 				}
-			};
+			}
 
-			_classPrototype._getInfoTooltipHtml = function (_objectPath) {
+			function _getInfoTooltipHtml (_this,_objectPath) {
 				var
-					_this = this,
-					_object = _this._resolveToObject (_objectPath),
+					_object = _resolveToObject (_this,_objectPath),
 					_whatItIs = _object == _undefined
 						? _whatItIs + ''
-						: _this._isWidget (_object)
+						: _isWidget (_this,_object)
 							? 'widget'
 							: Uize.Util.Oop.isUizeClass (_object)
 								? 'class'
@@ -540,7 +533,7 @@ Uize.module ({
 					_tooltipData ['localized strings'] =
 						Uize.totalKeys (_object.get ('localized')) || 'no localized strings'
 					;
-					_tooltipData ['DOM nodes'] = _this._getWidgetNodesInfo (_object)._summary;
+					_tooltipData ['DOM nodes'] = _getWidgetNodesInfo (_this,_object)._summary;
 				} else if (_whatItIs == 'class') {
 					_tooltipData.superclass =
 						Uize.Util.Oop.getClassName (_object.superclass) || 'this is the root class'
@@ -549,11 +542,12 @@ Uize.module ({
 						Uize.Util.Oop.getInheritanceChain (_object).length - 1 || 'this is the root class'
 					;
 					_tooltipData.subclasses =
-						_this._getSubclassesOfClassTreeListItems (_object).length || 'no subclasses on this page'
+						_getSubclassesOfClassTreeListItems (_this,_object).length || 'no subclasses on this page'
 					;
-					if (_this._isWidgetClass (_object))
+					if (_isWidgetClass (_this,_object))
 						_tooltipData ['widget instances'] =
-							_this._getMatchingWidgetsFromTree (
+							_getMatchingWidgetsFromTree (
+								_this,
 								function (_widget) {return _widget.constructor == _object}
 							).length || 'no instances of this class'
 					;
@@ -561,9 +555,9 @@ Uize.module ({
 					_tooltipData.id = _object.id;
 					_tooltipData.tag = _object.tagName;
 
-					var _widget = _this._getWidgetFromNodeId (_object.id);
+					var _widget = _getWidgetFromNodeId (_this,_object.id);
 					_tooltipData ['owner widget'] =
-						_widget ? _this._getWidgetPath (_widget) : 'not owned by a widget'
+						_widget ? _getWidgetPath (_this,_widget) : 'not owned by a widget'
 					;
 					_tooltipData ['owner widget class'] =
 						_widget ? Uize.Util.Oop.getClassName (_widget.constructor) : 'not owned by a widget'
@@ -576,48 +570,43 @@ Uize.module ({
 					'<div class="info-tooltip-heading">' + _objectPath + '</div>' +
 					Uize.Templates.HashTable.process (_tooltipData)
 				);
-			};
+			}
 
-			_classPrototype._getPageWidget = function () {
-				var _window = this._window;
+			function _getPageWidget (_this) {
+				var _window = _this._window;
 				return _window && (_window.zPage || _window.page);
-			};
+			}
 
-			_classPrototype._getPageWidgetName = function () {
-				var _pageWidget = this._getPageWidget ();
-				return _pageWidget && (_pageWidget == this._window.zPage ? 'zPage' : 'page');
-			};
+			function _getPageWidgetName (_this) {
+				var _pageWidget = _getPageWidget (_this);
+				return _pageWidget && (_pageWidget == _this._window.zPage ? 'zPage' : 'page');
+			}
 
-			_classPrototype._getWidgetName = function (_widget) {
+			function _getWidgetName (_this,_widget) {
 				return (
 					_widget.get ('name') ||
-					(_widget == this._getPageWidget () ? this._getPageWidgetName () : '')
+					(_widget == _getPageWidget (_this) ? _getPageWidgetName (_this) : '')
 				);
-			};
+			}
 
-			_classPrototype._getBuiltModules = function () {
-				var _openerUize = this._window.Uize;
+			function _getBuiltModules (_this) {
+				var _openerUize = _this._window.Uize;
 				return (
 					(_openerUize.getModulesBuilt && _openerUize.getModulesBuilt ()) ||
 					Uize.keys (_openerUize.getModuleByName ('*')) // NOTE: Uize.getModulesBuilt is deprecated */
 				);
-			};
+			}
 
-			_classPrototype._getWidgetPath = function (_widget) {
-				var
-					_this = this,
-					_widgetPath = []
-				;
+			function _getWidgetPath (_this,_widget) {
+				var _widgetPath = [];
 				while (_widget) {
-					_widgetPath.unshift (_this._getWidgetName (_widget));
+					_widgetPath.unshift (_getWidgetName (_this,_widget));
 					_widget = _widget.parent
 				}
 				return _widgetPath.join ('.children.');
-			};
+			}
 
-			_classPrototype._getWidgetNodeCache = function (_widget) {
-				var _this = this;
-
+			function _getWidgetNodeCache (_this,_widget) {
 				/*** discover node cache object name (if not already known) ***/
 					/* NOTE:
 						The node cache object is not part of the public interface for the Uize.Widget class, so we have to play some tricks in order to find it.
@@ -643,12 +632,11 @@ Uize.module ({
 					}
 
 				return _widget [_this._widgetNodeCachePropertyName] || {};
-			};
+			}
 
-			_classPrototype._getWidgetNodesInfo = function (_widget) {
+			function _getWidgetNodesInfo (_this,_widget) {
 				var
-					_this = this,
-					_nodeCache = _this._getWidgetNodeCache (_widget),
+					_nodeCache = _getWidgetNodeCache (_this,_widget),
 					_allNodesMap = Uize.copy (_nodeCache),
 					_idPrefix = _widget.get ('idPrefix'),
 					_nodeIdPrefix = _idPrefix + '-',
@@ -718,10 +706,9 @@ Uize.module ({
 								')'
 							: 'no DOM nodes'
 				};
-			};
+			}
 
-			_classPrototype._getWidgetFromNodeId = function (_nodeId) {
-				var _this = this;
+			function _getWidgetFromNodeId (_this,_nodeId) {
 				if (_nodeId) {
 					var
 						_findWidgetWithIdPrefix = function (_parent) {
@@ -742,19 +729,18 @@ Uize.module ({
 						_nodeNamePos = _nodeId.indexOf ('-'),
 						_idPrefix = _nodeNamePos > -1 ? _nodeId.slice (0,_nodeNamePos) : _nodeId
 					;
-					return _findWidgetWithIdPrefix (_this._getPageWidget ());
+					return _findWidgetWithIdPrefix (_getPageWidget (_this));
 				}
-			};
+			}
 
-			_classPrototype._resolveToObject = function (_object) {
-				return typeof _object == 'string' ? this._evalInWindow (_object) : _object;
-			};
+			function _resolveToObject (_this,_object) {
+				return typeof _object == 'string' ? _evalInWindow (_this,_object) : _object;
+			}
 
-			_classPrototype._getMatchingModulesTreeListItems = function (_moduleMatcher) {
+			function _getMatchingModulesTreeListItems (_this,_moduleMatcher) {
 				var
-					_this = this,
 					_items = [],
-					_builtModules = _this._getBuiltModules ()
+					_builtModules = _getBuiltModules (_this)
 				;
 				Uize.forEach (
 					_moduleMatcher ? _builtModules.sort () : _builtModules,
@@ -769,24 +755,22 @@ Uize.module ({
 					}
 				);
 				return _items;
-			};
+			}
 
-			_classPrototype._getSubclassesOfClassTreeListItems = function (_class) {
-				var _this = this;
-				return _this._getMatchingModulesTreeListItems (
+			function _getSubclassesOfClassTreeListItems (_this,_class) {
+				return _getMatchingModulesTreeListItems (
+					_this,
 					function (_moduleName) {
-						var _module = _this._resolveToObject (_moduleName);
+						var _module = _resolveToObject (_this,_moduleName);
 						return _module != _class && Uize.Util.Oop.inheritsFrom (_module,_class);
 					}
 				);
-			};
+			}
 
-			_classPrototype._getInstancesPerWidgetClassMap = function () {
-				var
-					_this = this,
-					_instancesPerWidgetClassMap = {}
-				;
-				_this._getMatchingWidgetsFromTree (
+			function _getInstancesPerWidgetClassMap (_this) {
+				var _instancesPerWidgetClassMap = {};
+				_getMatchingWidgetsFromTree (
+					_this,
 					function (_widget) {
 						var _widgetClass = _widget.constructor.moduleName;
 						(_instancesPerWidgetClassMap [_widgetClass] || (_instancesPerWidgetClassMap [_widgetClass] = []))
@@ -795,33 +779,28 @@ Uize.module ({
 					}
 				);
 				return _instancesPerWidgetClassMap;
-			};
+			}
 
-			_classPrototype._getWidgetClassesTreeListItems = function (_instancesCreated) {
-				var
-					_this = this,
-					_instancesPerWidgetClassMap = _this._getInstancesPerWidgetClassMap ()
-				;
-				return _this._getMatchingModulesTreeListItems (
+			function _getWidgetClassesTreeListItems (_this,_instancesCreated) {
+				var _instancesPerWidgetClassMap = _getInstancesPerWidgetClassMap (_this);
+				return _getMatchingModulesTreeListItems (
+					_this,
 					function (_moduleName) {
 						return (
 							(
 								_instancesCreated == _undefined ||
 								!!(_instancesPerWidgetClassMap [_moduleName] || _sacredEmptyObject).length == _instancesCreated
 							) &&
-							_this._isWidgetClass (_moduleName)
+							_isWidgetClass (_this,_moduleName)
 						);
 					}
 				);
-			};
+			}
 
-			_classPrototype._getMatchingWidgetsFromTree = function (_widgetMatcher) {
-				var
-					_this = this,
-					_widgets = []
-				;
+			function _getMatchingWidgetsFromTree (_this,_widgetMatcher) {
+				var _widgets = [];
 				function _processWidget (_widget,_widgetPath) {
-					_widgetPath += _this._getWidgetName (_widget);
+					_widgetPath += _getWidgetName (_this,_widget);
 					(!_widgetMatcher || _widgetMatcher (_widget)) && _widgets.push (_widgetPath);
 					_widgetPath += '.children.';
 					var _children = _widget.children;
@@ -829,14 +808,13 @@ Uize.module ({
 						_processWidget (_children [_childName],_widgetPath)
 					;
 				}
-				_processWidget (_this._getPageWidget (),'');
+				_processWidget (_getPageWidget (_this),'');
 				return _widgets;
-			};
+			}
 
-			_classPrototype._getMatchingWidgetsTreeListItems = function (_widgetMatcher) {
-				var _this = this;
+			function _getMatchingWidgetsTreeListItems (_this,_widgetMatcher) {
 				return Uize.map (
-					_this._getMatchingWidgetsFromTree (_widgetMatcher).sort (),
+					_getMatchingWidgetsFromTree (_this,_widgetMatcher).sort (),
 					function (_objectPath) {
 						return {
 							title:_objectPath,
@@ -845,18 +823,15 @@ Uize.module ({
 						};
 					}
 				);
-			};
+			}
 
-			_classPrototype._getMatchingWidgetDomNodesTreeListItems = function (_nodeMatcher) {
-				var
-					_this = this,
-					_items = []
-				;
+			function _getMatchingWidgetDomNodesTreeListItems (_this,_nodeMatcher) {
+				var _items = [];
 				function _processWidget (_widget) {
 					if (_widget) {
 						/*** iterate through widget's accessed DOM nodes ***/
 							var
-								_nodeCache = _this._getWidgetNodeCache (_widget),
+								_nodeCache = _getWidgetNodeCache (_this,_widget),
 								_objectPathPrefix
 							;
 							for (var _nodeName in _nodeCache) {
@@ -873,7 +848,7 @@ Uize.module ({
 									objectPath:
 										(
 											_objectPathPrefix ||
-											(_objectPathPrefix = _this._getWidgetPath (_widget) + '.getNode (\'')
+											(_objectPathPrefix = _getWidgetPath (_this,_widget) + '.getNode (\'')
 										) +
 											_nodeName +
 										'\')'
@@ -887,13 +862,12 @@ Uize.module ({
 							;
 					}
 				}
-				_processWidget (_this._getPageWidget ());
+				_processWidget (_getPageWidget (_this));
 				return _items;
-			};
+			}
 
-			_classPrototype._getUnaccessedDomNodesWithIdsTreeListItems = function (_widgetOrNotWidget) {
+			function _getUnaccessedDomNodesWithIdsTreeListItems (_this,_widgetOrNotWidget) {
 				var
-					_this = this,
 					_accessedNodesLookup = {},
 					_idPrefixMap = {}
 				;
@@ -904,7 +878,7 @@ Uize.module ({
 
 							/*** iterate through widget's accessed DOM nodes ***/
 								var
-									_nodeCache = _this._getWidgetNodeCache (_widget),
+									_nodeCache = _getWidgetNodeCache (_this,_widget),
 									_node,
 									_nodeId
 								;
@@ -921,7 +895,7 @@ Uize.module ({
 								;
 						}
 					}
-					_processWidget (_this._getPageWidget ());
+					_processWidget (_getPageWidget (_this));
 
 				return Uize.Array.Sort.sortBy (
 					Uize.map (
@@ -947,19 +921,19 @@ Uize.module ({
 					),
 					'value.title'
 				);
-			};
+			}
 
-			_classPrototype._isWidgetClass = function (_class) {
-				return Uize.Util.Oop.inheritsFrom (this._resolveToObject (_class),this._window.Uize.Widget);
-			};
+			function _isWidgetClass (_this,_class) {
+				return Uize.Util.Oop.inheritsFrom (_resolveToObject (_this,_class),_this._window.Uize.Widget);
+			}
 
-			_classPrototype._isWidget = function (_object) {
-				return Uize.isInstance (_object) && this._isWidgetClass (_object);
-			};
+			function _isWidget (_this,_object) {
+				return Uize.isInstance (_object) && _isWidgetClass (_this,_object);
+			}
 
-			_classPrototype._showReport = function (_title,_report) {
+			function _showReport (_this,_title,_report) {
 				var
-					_window = this.launchPopup ({
+					_window = _this.launchPopup ({
 						name:'delveReport',
 						width:980,
 						height:650
@@ -981,13 +955,10 @@ Uize.module ({
 				);
 				_document.close ();
 				_window.focus ();
-			};
+			}
 
-			_classPrototype._updateUiSummary = function () {
-				var
-					_this = this,
-					_object = _this._objectInspected
-				;
+			function _updateUiSummary (_this) {
+				var _object = _this._objectInspected;
 				if (
 					_this.isWired &&
 					_this.children.objectInspectorTabs + '' == 'summary' &&
@@ -999,8 +970,8 @@ Uize.module ({
 					;
 					if (_object != _undefined) {
 						var
-							_objectIsWidget = _this._isWidget (_object),
-							_objectIsWidgetClass = !_objectIsWidget && _this._isWidgetClass (_object)
+							_objectIsWidget = _isWidget (_this,_object),
+							_objectIsWidgetClass = !_objectIsWidget && _isWidgetClass (_this,_object)
 						;
 						_addTabContentsSection (
 							_htmlChunks,
@@ -1034,11 +1005,11 @@ Uize.module ({
 											Uize.map (
 												_widgets,
 												function (_widget) {
-													_widget = _this._resolveToObject (_widget);
+													_widget = _resolveToObject (_this,_widget);
 													return (
 														'<tr>' +
 															'<td>' +
-																_getObjectLink (_this._getWidgetPath (_widget)) +
+																_getObjectLink (_getWidgetPath (_this,_widget)) +
 															'</td>' +
 															'<td>' +
 																_getObjectLink (Uize.Util.Oop.getClassName (_widget.constructor)) +
@@ -1089,11 +1060,11 @@ Uize.module ({
 
 							/*** determine DOM nodes ***/
 								var
-									_nodesInfo = _this._getWidgetNodesInfo (_object),
+									_nodesInfo = _getWidgetNodesInfo (_this,_object),
 									_nodeCache = _nodesInfo._nodeCache,
 									_allNodesMap = _nodesInfo._allNodesMap,
 									_nodeNames = Uize.keys (_allNodesMap).sort (),
-									_getNodeMethodCallPrefix = _this._getWidgetPath (_object) + '.getNode (\''
+									_getNodeMethodCallPrefix = _getWidgetPath (_this,_object) + '.getNode (\''
 								;
 								_addTabContentsSection (
 									_htmlChunks,
@@ -1229,7 +1200,7 @@ Uize.module ({
 								);
 
 							/*** determine subclasses ***/
-								var _subclasses = _this._getSubclassesOfClassTreeListItems (_object);
+								var _subclasses = _getSubclassesOfClassTreeListItems (_this,_object);
 								_addTabContentsSection (
 									_htmlChunks,
 									'SUBCLASSES (ON THIS PAGE)',
@@ -1240,7 +1211,7 @@ Uize.module ({
 											return (
 												_getObjectLink (_item.title) +
 												(
-													_this._resolveToObject (_item.objectPath).superclass == _object
+													_resolveToObject (_this,_item.objectPath).superclass == _object
 														? ' - <b>DIRECT SUBCLASS</b>'
 														: ''
 												)
@@ -1255,19 +1226,20 @@ Uize.module ({
 								_objectIsWidgetClass &&
 									_addWidgetsSummarySection (
 										'INSTANCES OF THIS WIDGET CLASS',
-										_this._getMatchingWidgetsFromTree (
+										_getMatchingWidgetsFromTree (
+											_this,
 											function (_widget) {return _widget.constructor == _object}
 										),
 										'no widgets of this class instantiated'
 									)
 								;
 						} else if (Uize.Node.isNode (_object)) {
-							var _widget = _this._getWidgetFromNodeId (_object.id);
+							var _widget = _getWidgetFromNodeId (_this,_object.id);
 							_addTabContentsSection (
 								_htmlChunks,
 								'OWNER WIDGET',
 								'',
-								_widget ? _getObjectLink (_this._getWidgetPath (_widget)) : '',
+								_widget ? _getObjectLink (_getWidgetPath (_this,_widget)) : '',
 								'this node does not appear to belong to a widget',
 								true
 							);
@@ -1299,16 +1271,13 @@ Uize.module ({
 						_htmlChunks.push ('<br/>' + _objectNotValidOrNotLoadedMessage);
 					}
 
-					_this._rebuildTabContetsHtmlAndWireUi (_this.children.objectInspectorSummary,_htmlChunks);
+					_rebuildTabContetsHtmlAndWireUi (_this,_this.children.objectInspectorSummary,_htmlChunks);
  					_this._summaryLastObject = _object;
 				}
-			};
+			}
 
-			_classPrototype._updateUiState = function () {
-				var
-					_this = this,
-					_object = _this._objectInspected
-				;
+			function _updateUiState (_this) {
+				var _object = _this._objectInspected;
 				if (
 					_this.isWired &&
 					_this.children.objectInspectorTabs + '' == 'state' &&
@@ -1367,16 +1336,13 @@ Uize.module ({
 						_htmlChunks.push ('<br/>' + '-- object does not support a state properties state interface --');
 					}
 
-					_this._rebuildTabContetsHtmlAndWireUi (_this.children.objectInspectorState,_htmlChunks);
+					_rebuildTabContetsHtmlAndWireUi (_this,_this.children.objectInspectorState,_htmlChunks);
 					_this._stateLastObject = _object;
 				}
-			};
+			}
 
-			_classPrototype._updateUiFeatures = function () {
-				var
-					_this = this,
-					_object = _this._objectInspected
-				;
+			function _updateUiFeatures (_this) {
+				var _object = _this._objectInspected;
 				if (
 					_this.isWired &&
 					_this.children.objectInspectorTabs + '' == 'features' &&
@@ -1452,58 +1418,13 @@ Uize.module ({
 						_htmlChunks.push ('<br/>' + _objectNotValidOrNotLoadedMessage);
 					}
 
-					_this._rebuildTabContetsHtmlAndWireUi (_this.children.objectInspectorFeatures,_htmlChunks);
-					_this._featuresLastObject =  _object;
+					_rebuildTabContetsHtmlAndWireUi (_this,_this.children.objectInspectorFeatures,_htmlChunks);
+					_this._featuresLastObject = _object;
 				}
-			};
+			}
 
-			_classPrototype._updateUiVariousaTabs = function () {
-				var _this = this;
-				_this._updateUiSummary ();
-				_this._updateUiState ();
-				_this._updateUiFeatures ();
-				_this._updateUiDocumentation ();
-			};
-
-			_classPrototype._updateEventsLog = function () {
-				var _objectInspectorEventsLog = this.children.objectInspectorEventsLog;
-				_objectInspectorEventsLog &&
-					_objectInspectorEventsLog.set ({instance:this._objectInspected})
-				;
-			};
-
-			for (var _treeItemClickedMethodName in {_treeItemClicked:1});
-			var _treeItemLink = 'javascript:page.' + _treeItemClickedMethodName + ' ()';
-			_classPrototype._treeItemClicked = function () {
-				this.set ({_objectInspectedPath:this._lastTreeItemOverObjectPath});
-			};
-
-			_classPrototype._updateTreeListItems = function () {
+			function _updateDocumentationUrl (_this) {
 				var
-					_this = this,
-					_treeList = _this.children.treeList
-				;
-				if (_treeList) {
-					var _itemsGenerator = _treeListQueries [_this._treeListQuery]._itemsGenerator;
-					_treeList.set ({items:_itemsGenerator ? _itemsGenerator.call (_this) : []})
-				}
-			};
-
-			_classPrototype._updateUiTreeListDropdown = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this.setNodeValue ('treeListDropdown',_this._treeListQuery);
-				}
-			};
-
-			_classPrototype._updateObjectEntry = function () {
-				var _objectEntry = this.children.objectEntry;
-				_objectEntry && _objectEntry.set ({value:this._objectInspectedPath});
-			};
-
-			_classPrototype._updateDocumentationUrl = function () {
-				var
-					_this = this,
 					_objectInspected = _this._objectInspected,
 					_objectInspectedPath = _this._objectInspectedPath,
 					_className = _knownUizeModulesLookup [_objectInspectedPath] && _objectInspectedPath
@@ -1511,7 +1432,7 @@ Uize.module ({
 				if (!_className && _objectInspected != _undefined) {
 					_className = Uize.Util.Oop.getClassName (Uize.Util.Oop.resolveToClass (_objectInspected));
 					if (!_isUizeModule (_className)) {
-						var _class = _this._resolveToObject (_className);
+						var _class = _resolveToObject (_this,_className);
 						if (Uize.Util.Oop.isUizeClass (_class))
 							while (
 								(_className = (_class = _class.superclass).moduleName) &&
@@ -1536,55 +1457,20 @@ Uize.module ({
 							) || 'explainers/using-the-delve-tool.html'
 						)
 				});
-			};
+			}
 
-			_classPrototype._updateUiDocumentation = function () {
-				var _this = this;
-				if (_this.isWired && _this.children.objectInspectorTabs + '' == 'documentation') {
-					var _documentationUrl = _this._documentationUrl;
-					if (_documentationUrl != _this._lastDisplayedDocumentationUrl) {
-						var _contentWindow = _this.getNode ('documentation').contentWindow;
-						if (_contentWindow)
-							_contentWindow.location.href = _documentationUrl
-						;
-						_this._lastDisplayedDocumentationUrl = _documentationUrl;
-					}
-				}
-			};
-
-			_classPrototype._updateUiWindowInspected = function () {
-				var _this = this;
-				if (_this.isWired) {
-					var _window = _this._window;
-					_this.setNodeValue (
-						'windowInspected',
-						_window
-							? Uize.String.limitLength (_window.location.href,120)
-							: 'no window being inspected'
-					);
-					_this.setNodeProperties (
-						'windowInspected',
-						{title:_window ? _window.document.title : ''}
-					);
-				}
-			};
-
-			_classPrototype._refresh = function () {
-				var
-					_this = this,
-					_objectInspectedPath = _this._objectInspectedPath
-				;
-				_this._updateTreeListItems ();
-				_this._updateUiWindowInspected ();
+			function _refresh (_this) {
+				var _objectInspectedPath = _this._objectInspectedPath;
+				_updateTreeListItems.call (_this);
+				_updateUiWindowInspected.call (_this);
 				_this.set ({_objectInspectedPath:''}); // first set empty string, so resetting triggers reevaluation
 				_this.set ({_objectInspectedPath:_objectInspectedPath});
-			};
+			}
 
-			_classPrototype._highlightObjectInWindow = function (_objectPath) {
+			function _highlightObjectInWindow (_this,_objectPath) {
 				var
-					_this = this,
-					_object = _this._resolveToObject (_objectPath),
-					_objectIsWidget = _this._isWidget (_object),
+					_object = _resolveToObject (_this,_objectPath),
+					_objectIsWidget = _isWidget (_this,_object),
 					_objectIsNode = !_objectIsWidget && Uize.Node.isNode (_object)
 				;
 				if (_objectIsWidget || _objectIsNode) {
@@ -1612,7 +1498,7 @@ Uize.module ({
 							_processWidget = function (_widget) {
 								/*** iterate through accessed DOM nodes ***/
 									var
-										_nodeCache = _this._getWidgetNodeCache (_widget),
+										_nodeCache = _getWidgetNodeCache (_this,_widget),
 										_node
 									;
 									for (var _nodeName in _nodeCache)
@@ -1663,22 +1549,21 @@ Uize.module ({
 						Uize.Node.setOpacity (_this._highlightNode,.5);
 					}
 				}
-			};
+			}
 
-			_classPrototype._removeObjectHighlight = function () {
-				Uize.Node.remove (this._highlightNode);
-				this._highlightNode = null;
-			};
+			function _removeObjectHighlight (_this) {
+				Uize.Node.remove (_this._highlightNode);
+				_this._highlightNode = null;
+			}
 
-			_classPrototype._rebuildTabContetsHtmlAndWireUi = function (_wrapperWidget,_htmlChunks) {
-				var _this = this;
+			function _rebuildTabContetsHtmlAndWireUi (_this,_wrapperWidget,_htmlChunks) {
 				function _cleanupAfterObjectLinkPreview (_link) {
 					if (!_link.title) {
 						_link.title = _link.UizeSite_Delve_title;
 						// we'd like to do a cleanup, but we can't do a delete because of stupid IE throwing an error
 						// delete _link.UizeSite_Delve_title;
 						Uize.Tooltip.showTooltip ('infoTooltip',false);
-						_this._removeObjectHighlight ();
+						_removeObjectHighlight (_this);
 					}
 				}
 				_wrapperWidget.unwireUi ();
@@ -1695,9 +1580,9 @@ Uize.module ({
 						mouseover:function () {
 							var _title = this.UizeSite_Delve_title = this.title;
 							this.title = '';
-							Uize.Node.setInnerHtml ('infoTooltip',_this._getInfoTooltipHtml (_title));
+							Uize.Node.setInnerHtml ('infoTooltip',_getInfoTooltipHtml (_this,_title));
 							Uize.Tooltip.showTooltip ('infoTooltip',true);
-							_this._highlightObjectInWindow (_title);
+							_highlightObjectInWindow (_this,_title);
 						},
 						mouseout:function () {_cleanupAfterObjectLinkPreview (this)},
 						click:function () {
@@ -1707,176 +1592,261 @@ Uize.module ({
 						}
 					}
 				);
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiWindowInspected ();
-					_this._updateUiTreeListDropdown ();
-					_this._updateUiVariousaTabs ();
-					_superclass.doMy (_this,'updateUi');
-				}
-			};
 
-			_classPrototype.wireUi = function () {
+				/*** Private Instance Properties ***/
+					_this._summaryLastObject = _this._featuresLastObject = _notInitialized;
+			},
+			omegastructor:function () {
 				var _this = this;
-				if (!_this.isWired) {
-					/*** make sure to clean up when reloading ***/
-						_this.wireNode (
-							window,
-							'unload',
-							function () {
-								_this._removeObjectHighlight ();
-								_this.set ({objectInspectedPath:''});
-								/* NOTE:
-									Setting objectInspectedPath to an empty string on unload ensures that the events log widget is set to no longer watch anything, which results in it unwiring any currently wired event handlers. If the event handlers were allowed to remain wired in the page being inspected across reload of DELVE, then execution of the handlers later would cause JavaScript errors as a result of the handler function references becoming invalid from the reload.
-								*/
-							}
-						);
 
-					/*** wire link for refreshing tree list and object inspector ***/
-						_this.wireNode ('refresh','click',function () {_this._refresh ()});
-
-					/*** wire link for getting widget from DOM node ID ***/
-						_this.wireNode (
-							'getWidgetFromNodeId',
-							'click',
-							function () {
-								var _nodeId = prompt ('Enter a DOM node id...','');
-								if (_nodeId) {
-									var _widget = _this._getWidgetFromNodeId (_nodeId);
-									_widget
-										? _this.set ({_objectInspectedPath:_this._getWidgetPath (_widget)})
-										: alert ('The DOM node with the ID "' + _nodeId + '" does not appear belong to a widget.')
-									;
-								}
-							}
-						);
-
-					/*** wire help link ***/
-						_this.wireNode (
-							'help',
-							'click',
-							function () {
-								_this.children.objectInspectorTabs.set ({value:'documentation'});
-								_this.set ({_objectInspectedPath:''});
-							}
-						);
-
-					/*** wire close link ***/
-						_this.wireNode ('close','click',function () {top.close ()});
-
-					/*** populate and wire up tree list dropdown ***/
-						var _treeListDropdown = _this.getNode ('treeListDropdown');
-						if (_treeListDropdown) {
-							var _treeListDropdownOptions = _treeListDropdown.options;
-							for (var _treeListQueryName in _treeListQueries)
-								_treeListDropdownOptions [_treeListDropdownOptions.length] = new Option (
-									_treeListQueries [_treeListQueryName]._title,
-									_treeListQueryName
-								)
-							;
+				/*** add tree list widget ***/
+					_this.addChild (
+						'treeList',
+						Uize.Widgets.NavTree.List.Widget,
+						{
+							tooltip:'infoTooltip',
+							tooltipTemplate:function (_item) {
+								return _getInfoTooltipHtml (_this,_this._lastTreeItemOverObjectPath = _item.objectPath);
+							},
+							built:false
 						}
-						_this.wireNode (
-							_treeListDropdown,
-							'onchange',
-							function () {_this.set ({treeListQuery:_this.getNodeValue (_treeListDropdown)})}
-						);
+					).wire ({
+						'After Show Tooltip':
+							function (_event) {_highlightObjectInWindow (_this,_event.item.objectPath)},
+						'After Hide Tooltip':
+							function () {_removeObjectHighlight (_this)}
+					});
 
-					/*** wire up links for expanding tree list ***/
-						_this.wireNode (
-							'expandTreeListOneLevel',
-							'click',
-							function () {_this.children.treeList.setExpandedDepth (1)}
-						);
-						_this.wireNode (
-							'expandTreeListTwoLevels',
-							'click',
-							function () {_this.children.treeList.setExpandedDepth (2)}
-						);
-						_this.wireNode (
-							'expandTreeListThreeLevels',
-							'click',
-							function () {_this.children.treeList.setExpandedDepth (3)}
-						);
-						_this.wireNode (
-							'expandTreeListAll',
-							'click',
-							function () {_this.children.treeList.setExpandedDepth (Infinity)}
-						);
+				/*** add object entry widget ***/
+					var _objectEntry = _this.addChild ('objectEntry',Uize.Widget.TextInput);
+					_objectEntry.wire (
+						'Changed.value',
+						function () {
+							_this.set ({_objectInspectedPath:_objectEntry + ''});
+							_updateDocumentationUrl (_this);
+						}
+					);
 
-					/*** wire up link for getting items in the tree list as a report ***/
-						_this.wireNode (
-							'getTreeListItemsAsReport',
-							'click',
-							function () {
-								var
-									_reportTitle = _treeListQueries [_this._treeListQuery]._title,
-									_reportLines = []
-								;
-								_this.children.treeList.traverseTree ({
-									itemHandler:function (_item,_itemSpecifier,_depth) {
-										_reportLines.push (Uize.String.repeat ('\t',_depth) + _item.title);
-									}
-								});
-								_this._showReport (
-									_reportTitle,
-									'REPORT FOR: ' + _this._window.location.href + '\n' +
-									_reportDivider + '\n' +
-									'REPORT TYPE: ' + _reportTitle + ' (' + _reportLines.length + ' items)\n' +
-									_reportDivider + '\n' +
-									_reportLines.join ('\n')
-								);
+				/*** add object inspector tabs widget ***/
+					_this.addChild (
+						'objectInspectorTabs',
+						Uize.Widget.Options.Tabbed,
+						{
+							bodyClassActive:'tabBodyActive',
+							bodyClassInactive:'tabBodyInactive',
+							value:'summary',
+							values:['summary','state','features','documentation','eventsLog']
+						}
+					).wire ('Changed.value',function () {_updateUiVariousTabs.call (_this)});
+
+				/*** add summary wrapper widget (for wiring/unwiring objectLink tooltips) ***/
+					_this.addChild ('objectInspectorSummary',Uize.Widget);
+
+				/*** add state wrapper widget (for wiring/unwiring objectLink tooltips) ***/
+					_this.addChild ('objectInspectorState',Uize.Widget);
+
+				/*** add features wrapper widget (and features table sorter widget) ***/
+					_this.addChild ('objectInspectorFeatures',Uize.Widget)
+						.addChild (
+							'table',
+							Uize.Widget.TableSort,
+							{
+								headingOverClass:'headingOver',
+								headingLitClass:'headingLit',
+								rowOverClass:'rowOver',
+								cellTooltips:true
 							}
-						);
+						)
+					;
 
-					/*** wire up link for getting a summary of all available queries as a report ***/
-						_this.wireNode (
-							'getAllQueriesSummary',
-							'click',
-							function () {
-								var _querySummaries = [];
-								for (var _treeListQueryName in _treeListQueries) {
+				/*** add events log widget ***/
+					_this.addChild ('objectInspectorEventsLog',Uize.Widget.Log.InstanceEvents);
+
+				/*** initialization ***/
+					_updateTreeListItems.call (_this);
+					_updateObjectEntry.call (_this);
+					_updateEventsLog.call (_this);
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					var _this = this;
+					if (_this.isWired) {
+						_updateUiWindowInspected.call (_this);
+						_updateUiTreeListDropdown.call (_this);
+						_updateUiVariousTabs.call (_this);
+						_superclass.doMy (_this,'updateUi');
+					}
+				},
+
+				wireUi:function () {
+					var _this = this;
+					if (!_this.isWired) {
+						/*** make sure to clean up when reloading ***/
+							_this.wireNode (
+								window,
+								'unload',
+								function () {
+									_removeObjectHighlight (_this);
+									_this.set ({objectInspectedPath:''});
+									/* NOTE:
+										Setting objectInspectedPath to an empty string on unload ensures that the events log widget is set to no longer watch anything, which results in it unwiring any currently wired event handlers. If the event handlers were allowed to remain wired in the page being inspected across reload of DELVE, then execution of the handlers later would cause JavaScript errors as a result of the handler function references becoming invalid from the reload.
+									*/
+								}
+							);
+
+						/*** wire link for refreshing tree list and object inspector ***/
+							_this.wireNode ('refresh','click',function () {_refresh (_this)});
+
+						/*** wire link for getting widget from DOM node ID ***/
+							_this.wireNode (
+								'getWidgetFromNodeId',
+								'click',
+								function () {
+									var _nodeId = prompt ('Enter a DOM node id...','');
+									if (_nodeId) {
+										var _widget = _getWidgetFromNodeId (_this,_nodeId);
+										_widget
+											? _this.set ({_objectInspectedPath:_getWidgetPath (_this,_widget)})
+											: alert ('The DOM node with the ID "' + _nodeId + '" does not appear belong to a widget.')
+										;
+									}
+								}
+							);
+
+						/*** wire help link ***/
+							_this.wireNode (
+								'help',
+								'click',
+								function () {
+									_this.children.objectInspectorTabs.set ({value:'documentation'});
+									_this.set ({_objectInspectedPath:''});
+								}
+							);
+
+						/*** wire close link ***/
+							_this.wireNode ('close','click',function () {top.close ()});
+
+						/*** populate and wire up tree list dropdown ***/
+							var _treeListDropdown = _this.getNode ('treeListDropdown');
+							if (_treeListDropdown) {
+								var _treeListDropdownOptions = _treeListDropdown.options;
+								for (var _treeListQueryName in _treeListQueries)
+									_treeListDropdownOptions [_treeListDropdownOptions.length] = new Option (
+										_treeListQueries [_treeListQueryName]._title,
+										_treeListQueryName
+									)
+								;
+							}
+							_this.wireNode (
+								_treeListDropdown,
+								'onchange',
+								function () {_this.set ({treeListQuery:_this.getNodeValue (_treeListDropdown)})}
+							);
+
+						/*** wire up links for expanding tree list ***/
+							_this.wireNode (
+								'expandTreeListOneLevel',
+								'click',
+								function () {_this.children.treeList.setExpandedDepth (1)}
+							);
+							_this.wireNode (
+								'expandTreeListTwoLevels',
+								'click',
+								function () {_this.children.treeList.setExpandedDepth (2)}
+							);
+							_this.wireNode (
+								'expandTreeListThreeLevels',
+								'click',
+								function () {_this.children.treeList.setExpandedDepth (3)}
+							);
+							_this.wireNode (
+								'expandTreeListAll',
+								'click',
+								function () {_this.children.treeList.setExpandedDepth (Infinity)}
+							);
+
+						/*** wire up link for getting items in the tree list as a report ***/
+							_this.wireNode (
+								'getTreeListItemsAsReport',
+								'click',
+								function () {
 									var
-										_treeListQuery = _treeListQueries [_treeListQueryName],
-										_itemsGenerator = _treeListQuery._itemsGenerator,
-										_countItems = function (_items) {
-											if (!_items) return 0;
-											var _totalItems = _items.length;
-											for (var _itemNo = _totalItems; --_itemNo > -1;)
-												_totalItems += _countItems (_items [_itemNo].items)
-											;
-											return _totalItems;
-										}
+										_reportTitle = _treeListQueries [_this._treeListQuery]._title,
+										_reportLines = []
 									;
-									_querySummaries.push (
-										_treeListQuery._title +
-										(
-											_itemsGenerator
-												? (' -- ' + _countItems (_itemsGenerator.call (_this)) + ' items')
-												: ''
-										)
+									_this.children.treeList.traverseTree ({
+										itemHandler:function (_item,_itemSpecifier,_depth) {
+											_reportLines.push (Uize.String.repeat ('\t',_depth) + _item.title);
+										}
+									});
+									_showReport (
+										_this,
+										_reportTitle,
+										'REPORT FOR: ' + _this._window.location.href + '\n' +
+										_reportDivider + '\n' +
+										'REPORT TYPE: ' + _reportTitle + ' (' + _reportLines.length + ' items)\n' +
+										_reportDivider + '\n' +
+										_reportLines.join ('\n')
 									);
 								}
-								_this._showReport (
-									'Summary of all available queries',
-									'SUMMARY OF ALL AVAILABLE QUERIES FOR: ' + _this._window.location.href + '\n' +
-									_reportDivider + '\n' +
-									_querySummaries.join ('\n')
-								);
-							}
-						);
+							);
 
-					_superclass.doMy (_this,'wireUi');
+						/*** wire up link for getting a summary of all available queries as a report ***/
+							_this.wireNode (
+								'getAllQueriesSummary',
+								'click',
+								function () {
+									var _querySummaries = [];
+									for (var _treeListQueryName in _treeListQueries) {
+										var
+											_treeListQuery = _treeListQueries [_treeListQueryName],
+											_itemsGenerator = _treeListQuery._itemsGenerator,
+											_countItems = function (_items) {
+												if (!_items) return 0;
+												var _totalItems = _items.length;
+												for (var _itemNo = _totalItems; --_itemNo > -1;)
+													_totalItems += _countItems (_items [_itemNo].items)
+												;
+												return _totalItems;
+											}
+										;
+										_querySummaries.push (
+											_treeListQuery._title +
+											(
+												_itemsGenerator
+													? (' -- ' + _countItems (_itemsGenerator.call (_this)) + ' items')
+													: ''
+											)
+										);
+									}
+									_showReport (
+										_this,
+										'Summary of all available queries',
+										'SUMMARY OF ALL AVAILABLE QUERIES FOR: ' + _this._window.location.href + '\n' +
+										_reportDivider + '\n' +
+										_querySummaries.join ('\n')
+									);
+								}
+							);
 
-					_this.set ({_objectInspectedPath:_this._getPageWidgetName ()});
+						_superclass.doMy (_this,'wireUi');
+
+						_this.set ({_objectInspectedPath:_getPageWidgetName (_this)});
+					}
+				},
+
+				treeItemClicked:function () {
+					this.set ({_objectInspectedPath:this._lastTreeItemOverObjectPath});
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_baseUrl:{
 					name:'baseUrl',
 					value:''
@@ -1885,36 +1855,36 @@ Uize.module ({
 					*/
 				},
 				_documentationUrl:{
-					onChange:_classPrototype._updateUiDocumentation
+					onChange:_updateUiDocumentation
 				},
 				_objectInspected:{
 					name:'objectInspected',
 					onChange:[
-						_classPrototype._updateUiVariousaTabs,
-						_classPrototype._updateEventsLog
+						_updateUiVariousTabs,
+						_updateEventsLog
 					]
 				},
 				_objectInspectedPath:{
 					name:'objectInspectedPath',
 					conformer:function (_value) {
 						return (
-							!this._resolveToObject (_value) &&
+							!_resolveToObject (this,_value) &&
 							this._window && this._window.document.getElementById (_value)
 								? 'document.getElementById (\'' + _value + '\')'
 								: _value
 						);
 					},
 					onChange:[
-						function () {this.set ({_objectInspected:this._resolveToObject (this._objectInspectedPath)})},
-						_classPrototype._updateObjectEntry
+						function () {this.set ({_objectInspected:_resolveToObject (this,this._objectInspectedPath)})},
+						_updateObjectEntry
 					],
 					value:''
 				},
 				_treeListQuery:{
 					name:'treeListQuery',
 					onChange:[
-						_classPrototype._updateTreeListItems,
-						_classPrototype._updateUiTreeListDropdown
+						_updateTreeListItems,
+						_updateUiTreeListDropdown
 					],
 					value:'widgetsOnPageTree'
 				},
@@ -1922,13 +1892,12 @@ Uize.module ({
 					name:'window',
 					onChange:[
 						function () {this._widgetNodeCachePropertyName = _undefined},
-						_classPrototype._updateTreeListItems,
-						_classPrototype._updateUiWindowInspected
+						_updateTreeListItems,
+						_updateUiWindowInspected
 					]
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

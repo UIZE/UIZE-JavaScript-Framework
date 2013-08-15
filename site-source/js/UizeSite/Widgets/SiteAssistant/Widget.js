@@ -42,7 +42,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			set:{
 				html:UizeSite.Widgets.SiteAssistant.Html
 			},
@@ -51,8 +51,6 @@ Uize.module ({
 				cssModule:UizeSite.Widgets.SiteAssistant.Css
 			}
 		});
-
-		return _class;
 	}
 });
 

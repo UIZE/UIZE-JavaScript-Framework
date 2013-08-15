@@ -43,7 +43,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			set:{
 				dayNameLength:2,
 				html:Uize.Widgets.Calendar.Html
@@ -66,8 +66,6 @@ Uize.module ({
 				size:'value'
 			}
 		});
-
-		return _class;
 	}
 });
 

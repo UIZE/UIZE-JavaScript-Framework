@@ -34,7 +34,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			alphastructor:function () {
 				var _this = this;
 				_this.onChange (
@@ -47,8 +47,6 @@ Uize.module ({
 				html:Uize.Widgets.VisualTests.TestCase.Html
 			}
 		});
-
-		return _class;
 	}
 });
 

@@ -21,18 +21,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
-
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+		return _superclass.subclass ({
+			set:{
 				built:false,
 				height:80,
 				html:UizeSite.Templates.Dialog.Confirm,
 				width:450
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

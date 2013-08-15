@@ -42,7 +42,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			alphastructor:function () {
 				var _this = this;
 				_this.onChange ('selected',function (_selected) {_this.set ({text:_selected ? 'On' : 'Off'})});
@@ -58,8 +58,6 @@ Uize.module ({
 				cssModule:Uize.Widgets.Button.Toggle.OnOff.Css
 			}
 		});
-
-		return _class;
 	}
 });
 

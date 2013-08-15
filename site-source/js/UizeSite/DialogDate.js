@@ -19,19 +19,17 @@ Uize.module ({
 	superclass:'Uize.Widget.Dialog.Picker.Date',
 	required:'UizeSite.Templates.Dialog.Picker.Date',
 	builder:function (_superclass) {
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
+		'use strict';
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+		return _superclass.subclass ({
+			set:{
 				built:false,
 				height:145,
 				html:UizeSite.Templates.Dialog.Picker.Date,
 				title:'PICK DATE',
 				width:150
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

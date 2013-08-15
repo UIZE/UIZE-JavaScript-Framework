@@ -370,319 +370,314 @@ Uize.module ({
 		/*** General Variables ***/
 			var _needConditionPrefix = 'NEEDED_';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			_classPrototype.isNeeded = function (_need) {
-				return this.is (_needConditionPrefix + _need);
-				/*?
-					Instance Methods
-						isNeeded
-							Returns a boolean, indicating whether or not the specified need has yet been needed.
-
-							SYNTAX
-							......................................................
-							isNeededBOOL = myNeedsInstance.isNeeded (needNameSTR);
-							......................................................
-
-							The =isNeeded= method is provided primarily for situations where you wish to test if specific needs are needed, without actually interfering with or disrupting the `needer` or `provider` handlers that are set up. Unlike the =need= method, the =isNeeded= method does not have the effect of prompting execution of any provider code that is registered for the needs - it has merely an observing effect.
-
-							The =isNeeded= method can be useful when you are debugging / troubleshooting code that is using the =Uize.Util.Needs= class and is one of several available `troubleshooting aids`.
-
-							NOTES
-							- see the related =onceNeeded= instance method
-				*/
-			};
-
-			_classPrototype.onceNeeded = function (_needOrNeeds,_handler) {
-				return this.once (
-					typeof _needOrNeeds == 'string'
-						? _needConditionPrefix + _needOrNeeds
-						: Uize.map (_needOrNeeds,function (_need) {return _needConditionPrefix + _need}),
-					_handler
-				);
-				/*?
-					Instance Methods
-						onceNeeded
-							Lets you register a handler that should be executed once all of the specified needs have been needed.
-
-							DIFFERENT USAGES
-
-							`Register a Handler for Once a Single Need Has Been Needed`
-							..................................................................
-							wiringsOBJ = myNeedsInstance.onceNeeded (needNameSTR,handlerFUNC);
-							..................................................................
-
-							`Register a Handler for Once Multiple Needs Have Been Needed`
-							.....................................................................
-							wiringsOBJ = myNeedsInstance.onceNeeded (needNamesARRAY,handlerFUNC);
-							.....................................................................
-
-							The =onceNeeded= method is provided primarily for situations where you wish to observe when specific needs are needed, without actually interfering with or disrupting the `needer` or `provider` handlers that are set up. Unlike the =need= method, the =onceNeeded= method does not have the effect of prompting execution of any provider code that is registered for the needs - it has merely an observing effect.
-
-							The =onceNeeded= method can be useful when you are debugging / troubleshooting code that is using the =Uize.Util.Needs= class and is one of several available `troubleshooting aids`.
-
-							Register a Handler for Once a Single Need Has Been Needed
-								By specifying a =needNameSTR= parameter for the first argument when calling the =onceNeeded= method, handler code can be registered for once a single need has been needed.
+		return _superclass.subclass ({
+			instanceMethods:{
+				isNeeded:function (_need) {
+					return this.is (_needConditionPrefix + _need);
+					/*?
+						Instance Methods
+							isNeeded
+								Returns a boolean, indicating whether or not the specified need has yet been needed.
 
 								SYNTAX
+								......................................................
+								isNeededBOOL = myNeedsInstance.isNeeded (needNameSTR);
+								......................................................
+
+								The =isNeeded= method is provided primarily for situations where you wish to test if specific needs are needed, without actually interfering with or disrupting the `needer` or `provider` handlers that are set up. Unlike the =need= method, the =isNeeded= method does not have the effect of prompting execution of any provider code that is registered for the needs - it has merely an observing effect.
+
+								The =isNeeded= method can be useful when you are debugging / troubleshooting code that is using the =Uize.Util.Needs= class and is one of several available `troubleshooting aids`.
+
+								NOTES
+								- see the related =onceNeeded= instance method
+					*/
+				},
+
+				onceNeeded:function (_needOrNeeds,_handler) {
+					return this.once (
+						typeof _needOrNeeds == 'string'
+							? _needConditionPrefix + _needOrNeeds
+							: Uize.map (_needOrNeeds,function (_need) {return _needConditionPrefix + _need}),
+						_handler
+					);
+					/*?
+						Instance Methods
+							onceNeeded
+								Lets you register a handler that should be executed once all of the specified needs have been needed.
+
+								DIFFERENT USAGES
+
+								`Register a Handler for Once a Single Need Has Been Needed`
 								..................................................................
 								wiringsOBJ = myNeedsInstance.onceNeeded (needNameSTR,handlerFUNC);
 								..................................................................
 
-							Register a Handler for Once Multiple Needs Have Been Needed
-								By specifying a =needNamesARRAY= parameter for the first argument when calling the =onceNeeded= method, handler code can be registered for once multiple needs have all been needed.
-
-								SYNTAX
+								`Register a Handler for Once Multiple Needs Have Been Needed`
 								.....................................................................
 								wiringsOBJ = myNeedsInstance.onceNeeded (needNamesARRAY,handlerFUNC);
 								.....................................................................
 
-							NOTES
-							- see the related =isNeeded= instance method
-				*/
-			};
+								The =onceNeeded= method is provided primarily for situations where you wish to observe when specific needs are needed, without actually interfering with or disrupting the `needer` or `provider` handlers that are set up. Unlike the =need= method, the =onceNeeded= method does not have the effect of prompting execution of any provider code that is registered for the needs - it has merely an observing effect.
 
-			_classPrototype.need = function (_needOrNeeds,_needer) {
-				var
-					_this = this,
-					_wirings = _this.once (_needOrNeeds,_needer)
-				;
-				typeof _needOrNeeds == 'string'
-					? _this.met (_needConditionPrefix + _needOrNeeds)
-					: Uize.forEach (_needOrNeeds,function (_need) {_this.met (_needConditionPrefix + _need)})
-				;
-				return _wirings;
-				/*?
-					Instance Methods
-						need
-							Lets you register code that should only be executed once one or more needs have been satisfied, and invokes the `providers` of those needs if the providers have already been registered.
+								The =onceNeeded= method can be useful when you are debugging / troubleshooting code that is using the =Uize.Util.Needs= class and is one of several available `troubleshooting aids`.
 
-							DIFFERENT USAGES
+								Register a Handler for Once a Single Need Has Been Needed
+									By specifying a =needNameSTR= parameter for the first argument when calling the =onceNeeded= method, handler code can be registered for once a single need has been needed.
 
-							`Register Code That Has a Single Need`
-							...........................................................
-							wiringsOBJ = myNeedsInstance.need (needNameSTR,neederFUNC);
-							...........................................................
+									SYNTAX
+									..................................................................
+									wiringsOBJ = myNeedsInstance.onceNeeded (needNameSTR,handlerFUNC);
+									..................................................................
 
-							`Register Code That Has Multiple Needs`
-							..............................................................
-							wiringsOBJ = myNeedsInstance.need (needNamesARRAY,neederFUNC);
-							..............................................................
+								Register a Handler for Once Multiple Needs Have Been Needed
+									By specifying a =needNamesARRAY= parameter for the first argument when calling the =onceNeeded= method, handler code can be registered for once multiple needs have all been needed.
 
-							Register Code That Has a Single Need
-								By specifying a =needNameSTR= parameter for the first argument when calling the =need= method, handler code can be registered that has only a single need.
+									SYNTAX
+									.....................................................................
+									wiringsOBJ = myNeedsInstance.onceNeeded (needNamesARRAY,handlerFUNC);
+									.....................................................................
 
-								SYNTAX
+								NOTES
+								- see the related =isNeeded= instance method
+					*/
+				},
+
+				need:function (_needOrNeeds,_needer) {
+					var
+						_this = this,
+						_wirings = _this.once (_needOrNeeds,_needer)
+					;
+					typeof _needOrNeeds == 'string'
+						? _this.met (_needConditionPrefix + _needOrNeeds)
+						: Uize.forEach (_needOrNeeds,function (_need) {_this.met (_needConditionPrefix + _need)})
+					;
+					return _wirings;
+					/*?
+						Instance Methods
+							need
+								Lets you register code that should only be executed once one or more needs have been satisfied, and invokes the `providers` of those needs if the providers have already been registered.
+
+								DIFFERENT USAGES
+
+								`Register Code That Has a Single Need`
 								...........................................................
 								wiringsOBJ = myNeedsInstance.need (needNameSTR,neederFUNC);
 								...........................................................
 
-								Specifing a single need in a call to the =need= method is the most typical use case.
+								`Register Code That Has Multiple Needs`
+								..............................................................
+								wiringsOBJ = myNeedsInstance.need (needNamesARRAY,neederFUNC);
+								..............................................................
+
+								Register Code That Has a Single Need
+									By specifying a =needNameSTR= parameter for the first argument when calling the =need= method, handler code can be registered that has only a single need.
+
+									SYNTAX
+									...........................................................
+									wiringsOBJ = myNeedsInstance.need (needNameSTR,neederFUNC);
+									...........................................................
+
+									Specifing a single need in a call to the =need= method is the most typical use case.
+
+									EXAMPLE
+									....................................................
+									needsManager.need (
+										'auditSubsystem',
+										function (_auditSubsystem) {
+											// do something with the _auditSubsystem value
+										}
+									);
+									....................................................
+
+									In the above example, code is being registered that needs the "auditSubsystem".
+
+								Register Code That Has Multiple Needs
+									By specifying a =needNamesARRAY= parameter for the first argument when calling the =need= method, handler code can be registered that has multiple needs.
+
+									SYNTAX
+									..............................................................
+									wiringsOBJ = myNeedsInstance.need (needNamesARRAY,neederFUNC);
+									..............................................................
+
+									EXAMPLE
+									.........................................................................
+									needsManager.need (
+										['auditSubsystem','securitySubsystem','notificationSubsystem']
+										function (_auditSubsystem,_securitySubsystem,_notificationSubsystem) {
+											// do something with the needed subsystems
+										}
+									);
+									.........................................................................
+
+									In the above example, code is being registered that needs the "auditSubsystem", "securitySubsystem", and "notificationSubsystem".
+
+								Needer Function Signature
+									The handler function that is specified when calling the =need= method should expect to receive as many arguments as needs that were specified.
+
+									Once all the needs that are specified in a call to the =need= method have been provided, the handler for the needs will be called and the results for all the needs will be passed in as arguments to the function, in the order in which the needs were originally specified when calling the =need= method.
+
+									EXAMPLE
+									.........................................................................
+									needsManager.need (
+										['auditSubsystem','securitySubsystem','notificationSubsystem']
+										function (_auditSubsystem,_securitySubsystem,_notificationSubsystem) {
+											// do something with the needed subsystems
+										}
+									);
+									.........................................................................
+
+								Unwiring a Needer
+									While it is a highly unlikely use case, it is theoretically possible to unwire a handler for a need or set of needs.
+
+									Because the =need= method returns a wirings object that contains all the event wirings associated with the `needer` registration, this wirings object can be used to unwire the needer before it has been called. Consider the following example...
+
+									EXAMPLE
+									.......................................................................
+									// register the "auditSubsystem" needer
+									var needWirings = needsManager.need (
+										'auditSubsystem',
+										function (_auditSubsystem) {alert (_auditSubsystem)}
+									);
+
+									// unwire the "auditSubsystem" need wirings
+									needsManager.unwire (needWirings);
+
+									// register the "auditSubsystem" provider
+									needsManager.provide (
+										'auditSubsystem',
+										function (_provide) {
+											Uize.require (
+												'MyNamespace.AuditSubsystem',
+												function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
+											);
+										}
+									);
+									.......................................................................
+
+									In the above example, the =alert= statement inside the handler for the "auditSubsystem" need will never be executed, because the need handler is being unwired before the `provider` for the need is ever registered.
+					*/
+				},
+
+				provide:function (_need,_provider) {
+					var _this = this;
+					return (
+						_this.is (_need)
+							/* NOTE:
+								Allow for the possibility that the need was met explicitly by some other code before the provider is even registered (this is an edge case).
+							*/
+							? {} // if need is already met, return empty wirings object, since there will be nothing to unwire
+							: _this.once (
+								_needConditionPrefix + _need,
+								function () {
+									_this.is (_need) ||
+										/* NOTE:
+											Allow for the possibility that the need was met explicitly by some other code before the needer was registered (this is an edge case).
+										*/
+										_provider (
+											function (_provided) {
+												_this.is (_need) || _this.met (_need,_provided);
+												/* NOTE:
+													Allow for the possibility that the need was met by some other code while asynchronous provider code was being executed (this is an unlikely edge case).
+												*/
+											}
+										)
+									;
+								}
+							)
+					);
+					/*?
+						Instance Methods
+							provide
+								Lets you register a `provider` function for the specified need.
+
+								SYNTAX
+								................................................................
+								wiringsOBJ = myNeedsInstance.provide (needNameSTR,providerFUNC);
+								................................................................
+
+								The `provider` function specified by the =providerFUNC= parameter will be called the first time that the need specified by the =needNameSTR= parameter is needed via a call to the =need= method on the instance. When the provider function is called, it will be passed a single parameter, being the callback function that it should call in order to provide the needed result. The callback signature allows the need to be satisfied in a potentially asynchronous manner.
 
 								EXAMPLE
-								....................................................
+								.......................................................................
+								// create the Uize.Util.Needs instance
+								var needsManager = Uize.Util.Needs ();
+
+								// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+
+								// register the "auditSubsystem" provider
+								needsManager.provide (
+									'auditSubsystem',
+									function (_provide) {
+										var _auditSubsystem;
+										// do something to assign value for _auditSubsystem and set it up
+										_provide (_auditSubsystem);
+									}
+								);
+
+								// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+
+								// register the "auditSubsystem" needer
 								needsManager.need (
 									'auditSubsystem',
 									function (_auditSubsystem) {
 										// do something with the _auditSubsystem value
 									}
 								);
-								....................................................
-
-								In the above example, code is being registered that needs the "auditSubsystem".
-
-							Register Code That Has Multiple Needs
-								By specifying a =needNamesARRAY= parameter for the first argument when calling the =need= method, handler code can be registered that has multiple needs.
-
-								SYNTAX
-								..............................................................
-								wiringsOBJ = myNeedsInstance.need (needNamesARRAY,neederFUNC);
-								..............................................................
-
-								EXAMPLE
-								.........................................................................
-								needsManager.need (
-									['auditSubsystem','securitySubsystem','notificationSubsystem']
-									function (_auditSubsystem,_securitySubsystem,_notificationSubsystem) {
-										// do something with the needed subsystems
-									}
-								);
-								.........................................................................
-
-								In the above example, code is being registered that needs the "auditSubsystem", "securitySubsystem", and "notificationSubsystem".
-
-							Needer Function Signature
-								The handler function that is specified when calling the =need= method should expect to receive as many arguments as needs that were specified.
-
-								Once all the needs that are specified in a call to the =need= method have been provided, the handler for the needs will be called and the results for all the needs will be passed in as arguments to the function, in the order in which the needs were originally specified when calling the =need= method.
-
-								EXAMPLE
-								.........................................................................
-								needsManager.need (
-									['auditSubsystem','securitySubsystem','notificationSubsystem']
-									function (_auditSubsystem,_securitySubsystem,_notificationSubsystem) {
-										// do something with the needed subsystems
-									}
-								);
-								.........................................................................
-
-							Unwiring a Needer
-								While it is a highly unlikely use case, it is theoretically possible to unwire a handler for a need or set of needs.
-
-								Because the =need= method returns a wirings object that contains all the event wirings associated with the `needer` registration, this wirings object can be used to unwire the needer before it has been called. Consider the following example...
-
-								EXAMPLE
-								.......................................................................
-								// register the "auditSubsystem" needer
-								var needWirings = needsManager.need (
-									'auditSubsystem',
-									function (_auditSubsystem) {alert (_auditSubsystem)}
-								);
-
-								// unwire the "auditSubsystem" need wirings
-								needsManager.unwire (needWirings);
-
-								// register the "auditSubsystem" provider
-								needsManager.provide (
-									'auditSubsystem',
-									function (_provide) {
-										Uize.require (
-											'MyNamespace.AuditSubsystem',
-											function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
-										);
-									}
-								);
 								.......................................................................
 
-								In the above example, the =alert= statement inside the handler for the "auditSubsystem" need will never be executed, because the need handler is being unwired before the `provider` for the need is ever registered.
-				*/
-			};
+								In the above example, an instance of the =Uize.Util.Needs= class is created and assigned to the variable =needsManager=. In some part of the code, the =provide= method is being called on the instance in order to register a `provider` for the "auditSubsystem" need. In another part of the code, the =need= method is being called in order to register code that has a dependency on the "auditSubsystem" need.
 
-			_classPrototype.provide = function (_need,_provider) {
-				var _this = this;
-				return (
-					_this.is (_need)
-						/* NOTE:
-							Allow for the possibility that the need was met explicitly by some other code before the provider is even registered (this is an edge case).
-						*/
-						? {} // if need is already met, return empty wirings object, since there will be nothing to unwire
-						: _this.once (
-							_needConditionPrefix + _need,
-							function () {
-								_this.is (_need) ||
-									/* NOTE:
-										Allow for the possibility that the need was met explicitly by some other code before the needer was registered (this is an edge case).
-									*/
-									_provider (
-										function (_provided) {
-											_this.is (_need) || _this.met (_need,_provided);
-											/* NOTE:
-												Allow for the possibility that the need was met by some other code while asynchronous provider code was being executed (this is an unlikely edge case).
-											*/
+								It's worth noting that the registration of the provider and the `needer` can occur in any order and at any time. The needs mechanism will take care of ensuring that the provider code is only called once the need is actually needed, and that the needer code is only called once the need is actually provided.
+
+								Provider Function Signature
+									The `provider` function that is registered when calling the =provide= method should expect to receive a single parameter, being the callback function that it should call in order to provide the needed result once it is ready.
+
+									EXAMPLE
+									.......................................................................
+									needsManager.provide (
+										'auditSubsystem',
+										function (_provide) {
+											Uize.require (
+												'MyNamespace.AuditSubsystem',
+												function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
+											);
 										}
-									)
-								;
-							}
-						)
-				);
-				/*?
-					Instance Methods
-						provide
-							Lets you register a `provider` function for the specified need.
+									);
+									.......................................................................
 
-							SYNTAX
-							................................................................
-							wiringsOBJ = myNeedsInstance.provide (needNameSTR,providerFUNC);
-							................................................................
+								Unwiring a Provider
+									While it is a highly unlikely use case, it is theoretically possible to unregister a `provider` for a need or set of needs.
 
-							The `provider` function specified by the =providerFUNC= parameter will be called the first time that the need specified by the =needNameSTR= parameter is needed via a call to the =need= method on the instance. When the provider function is called, it will be passed a single parameter, being the callback function that it should call in order to provide the needed result. The callback signature allows the need to be satisfied in a potentially asynchronous manner.
+									Because the =provide= method returns a wirings object that contains all the event wirings associated with the provider registration, this wirings object can be used to unregister the provider before it has been called. Consider the following example...
 
-							EXAMPLE
-							.......................................................................
-							// create the Uize.Util.Needs instance
-							var needsManager = Uize.Util.Needs ();
+									EXAMPLE
+									.......................................................................
+									// register the "auditSubsystem" provider
+									var providerWirings = needsManager.provide (
+										'auditSubsystem',
+										function (_provide) {
+											Uize.require (
+												'MyNamespace.AuditSubsystem',
+												function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
+											);
+										}
+									);
 
-							// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+									// unregister the auditSubsystem provider
+									needsManager.unwire (providerWirings);
 
-							// register the "auditSubsystem" provider
-							needsManager.provide (
-								'auditSubsystem',
-								function (_provide) {
-									var _auditSubsystem;
-									// do something to assign value for _auditSubsystem and set it up
-									_provide (_auditSubsystem);
-								}
-							);
+									// register the "auditSubsystem" needer
+									needsManager.need (
+										'auditSubsystem',
+										function (_auditSubsystem) {alert (_auditSubsystem)}
+									);
+									.......................................................................
 
-							// ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...
-
-							// register the "auditSubsystem" needer
-							needsManager.need (
-								'auditSubsystem',
-								function (_auditSubsystem) {
-									// do something with the _auditSubsystem value
-								}
-							);
-							.......................................................................
-
-							In the above example, an instance of the =Uize.Util.Needs= class is created and assigned to the variable =needsManager=. In some part of the code, the =provide= method is being called on the instance in order to register a `provider` for the "auditSubsystem" need. In another part of the code, the =need= method is being called in order to register code that has a dependency on the "auditSubsystem" need.
-
-							It's worth noting that the registration of the provider and the `needer` can occur in any order and at any time. The needs mechanism will take care of ensuring that the provider code is only called once the need is actually needed, and that the needer code is only called once the need is actually provided.
-
-							Provider Function Signature
-								The `provider` function that is registered when calling the =provide= method should expect to receive a single parameter, being the callback function that it should call in order to provide the needed result once it is ready.
-
-								EXAMPLE
-								.......................................................................
-								needsManager.provide (
-									'auditSubsystem',
-									function (_provide) {
-										Uize.require (
-											'MyNamespace.AuditSubsystem',
-											function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
-										);
-									}
-								);
-								.......................................................................
-
-							Unwiring a Provider
-								While it is a highly unlikely use case, it is theoretically possible to unregister a `provider` for a need or set of needs.
-
-								Because the =provide= method returns a wirings object that contains all the event wirings associated with the provider registration, this wirings object can be used to unregister the provider before it has been called. Consider the following example...
-
-								EXAMPLE
-								.......................................................................
-								// register the "auditSubsystem" provider
-								var providerWirings = needsManager.provide (
-									'auditSubsystem',
-									function (_provide) {
-										Uize.require (
-											'MyNamespace.AuditSubsystem',
-											function (_AuditSubsystem) {_provide (new _AuditSubsystem ())}
-										);
-									}
-								);
-
-								// unregister the auditSubsystem provider
-								needsManager.unwire (providerWirings);
-
-								// register the "auditSubsystem" needer
-								needsManager.need (
-									'auditSubsystem',
-									function (_auditSubsystem) {alert (_auditSubsystem)}
-								);
-								.......................................................................
-
-								In the above example, the =alert= statement inside the handler for the "auditSubsystem" need will never be executed, because the `provider` for the "auditSubsystem" need is being unregistered before the `needer` is ever registered.
-				*/
-			};
-
-		return _class;
+									In the above example, the =alert= statement inside the handler for the "auditSubsystem" need will never be executed, because the `provider` for the "auditSubsystem" need is being unregistered before the `needer` is ever registered.
+					*/
+				}
+			}
+		});
 	}
 });
 

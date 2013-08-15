@@ -155,118 +155,112 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
-
-						/*** add the clear button ***/
-							_this.addChild (
-								'clear',
-								Uize.Widgets.Button.Widget,
-								{size:'tiny'}
-							).wire (
-								'Click',
-								function () {_this.clear ()}
-							);
-							/*?
-								Child Widgets
-									clear Child Widget
-										An instance of the =Uize.Widgets.Button.Widget= class, which is wired to call the =clear= instance method when it is clicked.
-
-										NOTES
-										- see the related =clear= instance method
-							*/
-
-						/*** initialize state ***/
-							_this._updateClearButtonState ();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateClearButtonState = function () {
-				var _clearButton = this.children.clear;
-				_clearButton && _clearButton.set ({enabled:this._isEmpty ? false : 'inherit'});
-			};
+			function _updateClearButtonState (_this) {
+				var _clearButton = _this.children.clear;
+				_clearButton && _clearButton.set ({enabled:_this._isEmpty ? false : 'inherit'});
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.clear = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var _this = this;
-				_this.isWired ? _this.setNodeInnerHtml ('messages','') : (_this._queuedLogMessagesHtml = null);
-				_this.set ({_isEmpty:true});
-				/*?
-					Instance Methods
-						clear
-							Clears the log messages displayed in the =messages= implied node.
 
-							SYNTAX
-							....................
-							myInstance.clear ();
-							....................
-
-							If the instance is not wired at the time that this method is called, then the `queued log messages` will be cleared. The =clear= instance method is called when the user clicks the =clear Child Widget=.
-
-							NOTES
-							- see the related =clear Child Widget=
-				*/
-			};
-
-			_classPrototype.log = function (_message) {
-				var
-					_this = this,
-					_messageHtml =
-						(_this._showTimestamp ? (Uize.Date.Formatter.format (null,_this._timestampFormat) + ' : ') : '') +
-						Uize.Xml.toAttributeValue (_message) +
-						'<br/>'
-				;
-				if (_this.isWired) {
-					_this.injectNodeHtml ('messages',_messageHtml);
-					_this.setNodeProperties ('messages',{scrollTop:1000000});
+				/*** add the clear button ***/
+					_this.addChild (
+						'clear',
+						Uize.Widgets.Button.Widget,
+						{size:'tiny'}
+					).wire (
+						'Click',
+						function () {_this.clear ()}
+					);
 					/*?
-						Implied Nodes
-							messages
-								A node that is used to display the messages being logged.
+						Child Widgets
+							clear Child Widget
+								An instance of the =Uize.Widgets.Button.Widget= class, which is wired to call the =clear= instance method when it is clicked.
 
-								Whenever a new message is logged, the contents of the =messages= implied node is added to. This node may be a =div=, =span=, =p= tag, or any other type that may contain arbitrary HTML. When the =clear= instance method is called, either programmatically or as a result of the user clicking the =clear Child Widget=, the =innerHTML= of the =messages= node will be replaced with nothing.
+								NOTES
+								- see the related =clear= instance method
 					*/
-				} else {
-					(_this._queuedLogMessagesHtml || (_this._queuedLogMessagesHtml = [])).push (_messageHtml);
+
+				/*** initialize state ***/
+					_updateClearButtonState (_this);
+			},
+
+			instanceMethods:{
+				clear:function () {
+					var _this = this;
+					_this.isWired ? _this.setNodeInnerHtml ('messages','') : (_this._queuedLogMessagesHtml = null);
+					_this.set ({_isEmpty:true});
+					/*?
+						Instance Methods
+							clear
+								Clears the log messages displayed in the =messages= implied node.
+
+								SYNTAX
+								....................
+								myInstance.clear ();
+								....................
+
+								If the instance is not wired at the time that this method is called, then the `queued log messages` will be cleared. The =clear= instance method is called when the user clicks the =clear Child Widget=.
+
+								NOTES
+								- see the related =clear Child Widget=
+					*/
+				},
+
+				log:function (_message) {
+					var
+						_this = this,
+						_messageHtml =
+							(_this._showTimestamp ? (Uize.Date.Formatter.format (null,_this._timestampFormat) + ' : ') : '') +
+							Uize.Xml.toAttributeValue (_message) +
+							'<br/>'
+					;
+					if (_this.isWired) {
+						_this.injectNodeHtml ('messages',_messageHtml);
+						_this.setNodeProperties ('messages',{scrollTop:1000000});
+						/*?
+							Implied Nodes
+								messages
+									A node that is used to display the messages being logged.
+
+									Whenever a new message is logged, the contents of the =messages= implied node is added to. This node may be a =div=, =span=, =p= tag, or any other type that may contain arbitrary HTML. When the =clear= instance method is called, either programmatically or as a result of the user clicking the =clear Child Widget=, the =innerHTML= of the =messages= node will be replaced with nothing.
+						*/
+					} else {
+						(_this._queuedLogMessagesHtml || (_this._queuedLogMessagesHtml = [])).push (_messageHtml);
+					}
+					_this.set ({_isEmpty:false});
+					/*?
+						Instance Methods
+							log
+								Logs the specified message by displaying it in the =messages= implied node.
+
+								SYNTAX
+								................................
+								myInstance.log (messageTextSTR);
+								................................
+
+								If the instance is not wired at the time that this method is called, then the specified log message will be added to the `queued log messages`. For a more detailed discussion on logging, see the section `Logging a Message`.
+					*/
+				},
+
+				wireUi:function () {
+					var _this = this;
+					if (!_this.isWired) {
+						_superclass.doMy (_this,'wireUi');
+
+						_this.setNodeInnerHtml ('messages',(_this._queuedLogMessagesHtml || []).join (''));
+						_this.setNodeProperties ('messages',{scrollTop:1000000});
+						_this._queuedLogMessagesHtml = null;
+					}
 				}
-				_this.set ({_isEmpty:false});
-				/*?
-					Instance Methods
-						log
-							Logs the specified message by displaying it in the =messages= implied node.
+			},
 
-							SYNTAX
-							................................
-							myInstance.log (messageTextSTR);
-							................................
-
-							If the instance is not wired at the time that this method is called, then the specified log message will be added to the `queued log messages`. For a more detailed discussion on logging, see the section `Logging a Message`.
-				*/
-			};
-
-			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_superclass.doMy (_this,'wireUi');
-
-					_this.setNodeInnerHtml ('messages',(_this._queuedLogMessagesHtml || []).join (''));
-					_this.setNodeProperties ('messages',{scrollTop:1000000});
-					_this._queuedLogMessagesHtml = null;
-				}
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_isEmpty:{
 					name:'isEmpty',
-					onChange:_classPrototype._updateClearButtonState,
+					onChange:function () {_updateClearButtonState (this)},
 					value:true
 					/*?
 						State Properties
@@ -310,9 +304,8 @@ Uize.module ({
 								- the initial value is ='{hh}:{mm}:{ss}.{zzz}'=
 					*/
 				}
-			});
+			},
 
-		_class.declare ({
 			set:{
 				html:Uize.Widgets.Log.Html
 			},
@@ -321,8 +314,6 @@ Uize.module ({
 				cssModule:Uize.Widgets.Log.Css
 			}
 		});
-
-		return _class;
 	}
 });
 

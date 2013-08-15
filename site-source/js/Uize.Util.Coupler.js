@@ -74,13 +74,7 @@ Uize.module ({
 		/*** General Variables ***/
 			var _syncFunctions = {};
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		/*** State Properties ***/
+		/*** Private Instance Methods ***/
 			function _updateCoupling () {
 				var
 					_this = this,
@@ -160,7 +154,9 @@ Uize.module ({
 					}
 				}
 			}
-			_class.stateProperties ({
+
+		return _superclass.subclass ({
+			stateProperties:{
 				_coupled:{
 					name:'coupled',
 					onChange:_updateCoupling,
@@ -206,9 +202,8 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

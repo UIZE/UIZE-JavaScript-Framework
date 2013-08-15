@@ -22,39 +22,31 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var _this = this;
 
-						/*** harvest inline settings ***/
-							var _presets = Uize.Data.Simple.parse ({
-								simple:_this.getNode ('inlinePresets').innerHTML,
-								collapseChildren:true
-							});
-							_this.setNodeInnerHtml ('inlinePresets','');
+				/*** harvest inline settings ***/
+					var _presets = Uize.Data.Simple.parse ({
+						simple:_this.getNode ('inlinePresets').innerHTML,
+						collapseChildren:true
+					});
+					_this.setNodeInnerHtml ('inlinePresets','');
 
-							/*** turn tabs into three spaces ***/
-								var _settingsPropertyName = _this._settingsPropertyName;
-								for (var _presetName in _presets) {
-									var _preset = _presets [_presetName];
-									_preset [_settingsPropertyName] = _preset [_settingsPropertyName].replace (/\t/g,'   ');
-								}
-
-							_this.set ({presets:_presets});
+					/*** turn tabs into three spaces ***/
+						var _settingsPropertyName = _this._settingsPropertyName;
+						for (var _presetName in _presets) {
+							var _preset = _presets [_presetName];
+							_preset [_settingsPropertyName] = _preset [_settingsPropertyName].replace (/\t/g,'   ');
 						}
-				),
-				_classPrototype = _class.prototype
-			;
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+					_this.set ({presets:_presets});
+			},
+
+			stateProperties:{
 				_settingsPropertyName:'settingsPropertyName'
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

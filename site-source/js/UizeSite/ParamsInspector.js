@@ -29,40 +29,9 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
-
-						/*** add tabs child widget ***/
-							_this.addChild (
-								'tabs',
-								Uize.Widget.Options.Tabbed,
-								{
-									bodyClassActive:'tabBodyActive',
-									bodyClassInactive:'tabBodyInactive',
-									values:['presets','params'],
-									value:'presets'
-								}
-							);
-
-						/*** add the preview button ***/
-							_this.addChild ('preview',Uize.Widget.Button)
-								.wire ('Click',function () {_this._firePresetSelectedEvent ()})
-							;
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._choosePreset = function (_presetName) {
-				var
-					_this = this,
-					_params = _this._params
-				;
+			function _choosePreset (_this,_presetName) {
+				var _params = _this._params;
 				Uize.Node.Form.setValues (
 					Uize.map (
 						_this._presets [_presetName],
@@ -70,61 +39,83 @@ Uize.module ({
 					),
 					_this.get ('idPrefix') + '_'
 				);
-			};
+			}
 
-			_classPrototype._firePresetSelectedEvent = function () {
-				this.fire ('Preset Selected');
-			};
+			function _firePresetSelectedEvent (_this) {
+				_this.fire ('Preset Selected');
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.getValues = function () {
-				var _params = this._params;
-				return (
-					Uize.map (
-						Uize.Node.Form.getValues (this.getNode (),true,this.get ('idPrefix') + '_'),
-						function (_value,_key) {
-							var _paramType = _params [_key];
-							return (
-								_paramType == 'json'
-									? Uize.Json.from (_value)
-									: Uize.isArray (_paramType)
-										? _value
-										: _paramType == 'integer' || _paramType == 'number' || typeof _paramType == 'object'
-											? +_value
-											: _value
-							);
-						},
-						false
-					)
-				);
-			};
-
-			_classPrototype.wireUi = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var _this = this;
-				if (!_this.isWired) {
-					_superclass.doMy (_this,'wireUi');
 
-					/*** wire a click event to catch clicking on any preset link ***/
-						_this.wireNode (
-							'presets',
-							'click',
-							function (_event) {
-								var _eventTarget = _event.target || _event.srcElement;
-								if (_eventTarget.tagName == 'A') {
-									_this._choosePreset (Uize.Node.getText (_eventTarget));
-									_this._firePresetSelectedEvent ();
+				/*** add tabs child widget ***/
+					_this.addChild (
+						'tabs',
+						Uize.Widget.Options.Tabbed,
+						{
+							bodyClassActive:'tabBodyActive',
+							bodyClassInactive:'tabBodyInactive',
+							values:['presets','params'],
+							value:'presets'
+						}
+					);
+
+				/*** add the preview button ***/
+					_this.addChild ('preview',Uize.Widget.Button)
+						.wire ('Click',function () {_firePresetSelectedEvent (_this)})
+					;
+			},
+
+			instanceMethods:{
+				getValues:function () {
+					var _params = this._params;
+					return (
+						Uize.map (
+							Uize.Node.Form.getValues (this.getNode (),true,this.get ('idPrefix') + '_'),
+							function (_value,_key) {
+								var _paramType = _params [_key];
+								return (
+									_paramType == 'json'
+										? Uize.Json.from (_value)
+										: Uize.isArray (_paramType)
+											? _value
+											: _paramType == 'integer' || _paramType == 'number' || typeof _paramType == 'object'
+												? +_value
+												: _value
+								);
+							},
+							false
+						)
+					);
+				},
+
+				wireUi:function () {
+					var _this = this;
+					if (!_this.isWired) {
+						_superclass.doMy (_this,'wireUi');
+
+						/*** wire a click event to catch clicking on any preset link ***/
+							_this.wireNode (
+								'presets',
+								'click',
+								function (_event) {
+									var _eventTarget = _event.target || _event.srcElement;
+									if (_eventTarget.tagName == 'A') {
+										_choosePreset (_this,Uize.Node.getText (_eventTarget));
+										_firePresetSelectedEvent (_this);
+									}
 								}
-							}
-						);
+							);
 
-					for (var _presetName in _this._presets) break;
-					_this._choosePreset (_presetName);
-					_this._firePresetSelectedEvent ();
+						for (var _presetName in _this._presets) break;
+						_choosePreset (_this,_presetName);
+						_firePresetSelectedEvent (_this);
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_params:{
 					name:'params',
 					value:{}
@@ -133,15 +124,13 @@ Uize.module ({
 					name:'presets',
 					value:{}
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				built:false,
 				html:UizeSite.Templates.ParamsInspector
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

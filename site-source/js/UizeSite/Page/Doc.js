@@ -31,70 +31,64 @@ Uize.module ({
 
 		var _sacredEmptyObject = {};
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
-
-						/*** add the tooltip widget ***/
-							var _tooltip = _this.addChild (
-								'tooltip',
-								Uize.Widgets.Tooltip.Widget,
-								{built:false}
-							);
-
-						/*** add the contents tree widget ***/
-							_this.addChild (
-								'contents',
-								Uize.Widgets.NavTree.List.Widget,
-								{
-									tooltip:{
-										node:_tooltip.nodeId (),
-										show:function (_item) {
-											_tooltip.set ({
-												heading:_item.title,
-												body:_item.description
-											});
-											return true;
-										}
-									},
-									built:false
-								}
-								/*?
-									Child Widgets
-										contents
-											An instance of =Uize.Widgets.NavTree.List.Widget= that is used to provide an expandable/collapsible contents tree at the top of the document.
-								*/
-							);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-			/*** Utility Functions ***/
-				function _getAnchorFromLinkTag (_linkTag) {
-					function _urlSansAnchor (_url) {
-						var _anchorPos = _url.indexOf ('#');
-						return _anchorPos > -1 ? _url.slice (0,_anchorPos) : _url;
-					}
-					var _href = _linkTag.getAttribute ('href');
-					return (
-						(
-							_href.charCodeAt (0) == 35 ||
-							(
-								_href.indexOf ('#') > -1 &&
-								_urlSansAnchor (_href) == _urlSansAnchor (location.href)
-							)
-						)
-							? _href.slice (_href.indexOf ('#') + 1)
-							: ''
-					);
+		/*** Utility Functions ***/
+			function _getAnchorFromLinkTag (_linkTag) {
+				function _urlSansAnchor (_url) {
+					var _anchorPos = _url.indexOf ('#');
+					return _anchorPos > -1 ? _url.slice (0,_anchorPos) : _url;
 				}
+				var _href = _linkTag.getAttribute ('href');
+				return (
+					(
+						_href.charCodeAt (0) == 35 ||
+						(
+							_href.indexOf ('#') > -1 &&
+							_urlSansAnchor (_href) == _urlSansAnchor (location.href)
+						)
+					)
+						? _href.slice (_href.indexOf ('#') + 1)
+						: ''
+				);
+			}
 
-			/*** Public Instance Methods ***/
-				_classPrototype.wireUi = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var _this = this;
+
+				/*** add the tooltip widget ***/
+					var _tooltip = _this.addChild (
+						'tooltip',
+						Uize.Widgets.Tooltip.Widget,
+						{built:false}
+					);
+
+				/*** add the contents tree widget ***/
+					_this.addChild (
+						'contents',
+						Uize.Widgets.NavTree.List.Widget,
+						{
+							tooltip:{
+								node:_tooltip.nodeId (),
+								show:function (_item) {
+									_tooltip.set ({
+										heading:_item.title,
+										body:_item.description
+									});
+									return true;
+								}
+							},
+							built:false
+						}
+						/*?
+							Child Widgets
+								contents
+									An instance of =Uize.Widgets.NavTree.List.Widget= that is used to provide an expandable/collapsible contents tree at the top of the document.
+						*/
+					);
+			},
+
+			instanceMethods:{
+				wireUi:function () {
 					var _this = this;
 					if (!_this.isWired) {
 						var _tooltip = _this.children.tooltip;
@@ -234,9 +228,9 @@ Uize.module ({
 						_this.children.tooltip.displayNode ('',false);
 						_contents.setNodeStyle ('shell',{maxHeight:'none',overflow:'visible'});
 					}
-				};
-
-		return _class;
+				}
+			}
+		});
 	}
 });
 

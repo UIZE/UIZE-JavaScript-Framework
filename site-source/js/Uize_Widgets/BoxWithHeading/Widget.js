@@ -42,7 +42,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			set:{
 				html:Uize.Widgets.BoxWithHeading.Html
 			},
@@ -51,8 +51,6 @@ Uize.module ({
 				cssModule:Uize.Widgets.BoxWithHeading.Css
 			}
 		});
-
-		return _class;
 	}
 });
 

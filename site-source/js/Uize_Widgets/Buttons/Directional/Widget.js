@@ -53,7 +53,7 @@ Uize.module ({
 			_this.set ({_directionName:_directionNames [_this._directionY + 1] [_this._directionX + 1]});
 		}
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			set:{
 				html:Uize.Widgets.Buttons.Directional.Html
 			},
@@ -81,8 +81,6 @@ Uize.module ({
 				directionName:'value'
 			}
 		});
-
-		return _class;
 	}
 });
 

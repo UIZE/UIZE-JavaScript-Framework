@@ -44,6 +44,7 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
+				_class,
 				_undefined,
 				_true = true,
 				_false = false
@@ -99,13 +100,13 @@ Uize.module ({
 				;
 				/*?
 					Implied Nodes
-						text Implied Node
-							An optional node whose contents will be replaced with the value of the =text= state property, if this property's value is not =null= or =undefined=.
+						Root Node
+							The root node is the implied node with the name =''= (empty string), and is required for this widget class.
 
-							The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+							The =className= property of this node is updated to reflect the state of the instance's =playing=, =selected=, and =state= state properties. In such cases, the value used to set the =className= property is constructed by using the values of the =state=, =selected=, =playing=, =busyInherited=, =enabledInherited=, and =statePrecedenceMap= state properties.
 
 							NOTES
-							- this implied node is optional
+							- this implied node is required
 				*/
 			}
 
@@ -152,7 +153,7 @@ Uize.module ({
 				}
 			}
 
-		var _class = _superclass.subclass ({
+		return _class = _superclass.subclass ({
 			omegastructor:function () {
 				var _this = this;
 				_this._created = _true;
@@ -615,19 +616,6 @@ Uize.module ({
 				size:'value'
 			}
 		});
-
-		/*?
-			Implied Nodes
-				Root Node
-					The root node is the implied node with the name =''= (empty string), and is required for this widget class.
-
-					The =className= property of this node is updated to reflect the state of the instance's =playing=, =selected=, and =state= state properties. In such cases, the value used to set the =className= property is constructed by using the values of the =state=, =selected=, =playing=, =busyInherited=, =enabledInherited=, and =statePrecedenceMap= state properties.
-
-					NOTES
-					- this implied node is required
-		*/
-
-		return _class;
 	}
 });
 

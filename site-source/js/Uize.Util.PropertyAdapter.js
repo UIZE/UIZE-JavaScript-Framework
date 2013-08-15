@@ -315,13 +315,19 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+		/*** Utility Functions ***/
+			function _conformPropertySpecifier (_value) {
+				if (_value) {
+					var _valueIsArray = Uize.isArray (_value);
+					if (_valueIsArray || Uize.isInstance (_value))
+						_value = _valueIsArray ? {instance:_value [0],property:_value [1]} : {instance:_value}
+					;
+					_value.property || (_value.property = 'value');
+				}
+				return _value;
+			}
 
-		/*** State Properties ***/
+		/*** Private Instance Methods ***/
 			function _updateConnection () {
 				var
 					_this = this,
@@ -384,17 +390,9 @@ Uize.module ({
 					}
 				}
 			}
-			function _conformPropertySpecifier (_value) {
-				if (_value) {
-					var _valueIsArray = Uize.isArray (_value);
-					if (_valueIsArray || Uize.isInstance (_value))
-						_value = _valueIsArray ? {instance:_value [0],property:_value [1]} : {instance:_value}
-					;
-					_value.property || (_value.property = 'value');
-				}
-				return _value;
-			}
-			_class.stateProperties ({
+
+		return _superclass.subclass ({
+			stateProperties:{
 				_connected:{
 					name:'connected',
 					onChange:_updateConnection,
@@ -457,9 +455,8 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

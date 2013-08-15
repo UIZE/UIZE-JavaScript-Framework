@@ -44,7 +44,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			omegastructor:function () {
 				var _this = this;
 
@@ -79,8 +79,6 @@ Uize.module ({
 			stateProperties:{
 			}
 		});
-
-		return _class;
 	}
 });
 

@@ -34,7 +34,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			alphastructor:function () {
 				this._totalSamples = 0;
 			},
@@ -66,8 +66,6 @@ Uize.module ({
 				html:Uize.Widgets.VisualSampler.Html
 			}
 		});
-
-		return _class;
 	}
 });
 

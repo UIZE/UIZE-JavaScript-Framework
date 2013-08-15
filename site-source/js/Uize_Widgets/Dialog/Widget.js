@@ -35,7 +35,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			set:{
 				html:Uize.Widgets.Dialog.Html
 			},
@@ -46,8 +46,6 @@ Uize.module ({
 				enableRootNodeCssClasses:true
 			}
 		});
-
-		return _class;
 	}
 });
 

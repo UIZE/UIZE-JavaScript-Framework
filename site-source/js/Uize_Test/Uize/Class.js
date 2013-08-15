@@ -1515,6 +1515,21 @@ Uize.module ({
 									]
 								}
 							]
+						},
+						{
+							title:'Test the onChange instance method',
+							test:[
+							]
+						},
+						{
+							title:'Test the whenever instance method',
+							test:[
+								/*
+								- test that handler is executed immediately
+								- test that handler is only executed when the computed value actually changes, not every time the determinants change
+								- test that a wirings object is returned that allows the change handler to be fully unwired
+								*/
+							]
 						}
 					]
 				},
