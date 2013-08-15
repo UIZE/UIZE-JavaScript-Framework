@@ -1095,6 +1095,29 @@ Uize.module ({
 
 								By design, the handler is executed immediately upon first computing the value of the derivation. This results in the text "100" being alerted, which is the rectangle's area at the time of registering the change handler. Next, we call the =set= method on the =rectangle= instance, setting the width to =20= and the height to =10=. This results in the area changing to =200= and the change handler is executed again, this time alerting the text "200". Finally, we call =set= one more time, this time setting the width to =10= and the height to =20=. Because the area of the rectangle after this set will still be =200=, the change handler is not executed again.
 
+								Change Handler Signature
+									The handler for a change event can expect to receive the following two parameters...
+
+									- *derived value* - the new computed value for the `state properties derivation`
+									- *determinants values* - an array, containing the values of all the determinants (ie. the state properties) used in deriving the value, in the order in which they occur in the definition for the derivation
+
+									EXAMPLE
+									........................................................................................
+									rectangle.onChange (
+										function (width,height) {return width * height},
+										function (area,determinants) {
+											alert ('Area: ' + area + ' (' + determinants [0] + ' x ' + determinants [1] + ')')
+										}
+									);
+									........................................................................................
+
+									In the above example, we are registering a handler for a `state properties derivation` that derives an area value from the =width= and =height= state properties of a =rectangle= instance. In addition to declaring an =area= argument for the derived value, the handler function is also declaring a =determinants= argument that can be used to inspect the values of the derivation's determinants (the =width= and =height= state properties, respectively). Because the derivation was declared with =width= first and =height= second, this will be the order of the properties' values in the array passed via the =determinants= argument.
+
+									Arguments Optional
+										While the *derived value* and *determinanrs values* parameters will be passed to the handler function, there's no requirement that a handler function declare arguments for them or use them.
+
+										In many cases, you may only care to know the new derived value and not need to know the specific values of the determinants. In such cases, your handler function can declare only a single argument for the derived value.
+
 								Unwiring onChange Handlers
 									The =onChange= instance method returns a `wirings object`, which provides a means with which to unwire all the event wirings associated with registering a handler using this method.
 
