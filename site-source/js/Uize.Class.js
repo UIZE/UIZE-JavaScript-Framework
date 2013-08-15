@@ -330,6 +330,9 @@
 
 				For an in-depth discussion of events, consult the [[../explainers/javascript-event-system.html][JavaScript Event System]] explainer.
 
+			Wirings Object ~~ Wirings Objects
+				.
+
 			Condition System
 				The =Uize.Class= module implements a condition system in the form of state properties combined with convenience methods that allow state properties to be treated semantically as conditions.
 
@@ -1062,9 +1065,38 @@ Uize.module ({
 								wiringsOBJ = myInstance.onChange (derivationSTRorARRAYorFUNC,handlerFUNC);
 								..........................................................................
 
+								The way that this method behaves is best illustrated by an example...
+
 								EXAMPLE
-								...
-								...
+								..........................................................................................
+								// create a Rectangle class with width and height state properties
+								var Rectangle = Uize.Class.subclass ({
+									stateProperties:{
+										width:{value:10},
+										height:{value:10}
+									}
+								});
+
+								// create an instance of the Rectangle class
+								var rectangle = Rectangle ();
+
+								// register a handler for when the computed area changes
+								// the value "100" will be alerted, since the handler is always executed initially
+								rectangle.onChange (
+									function (width,height) {return width * height},
+									function (area) {alert (area)}
+								);
+
+								rectangle.set ({width:20,height:10});  // area changes, so the value "200" will be alerted
+								rectangle.set ({width:10,height:20});  // area hasn't changed, so nothing will be alerted
+								..........................................................................................
+
+								In the above example, we are creating a simple =Rectangle= class with =width= and =height= state properties that each have an initial value of =10=. After creating an instance of this class, we register a handler for a `state properties derivation` that is defined to compute the rectangle's area from the values of its =width= and =state= properties.
+
+								By design, the handler is executed immediately upon first computing the value of the derivation. This results in the text "100" being alerted, which is the rectangle's area at the time of registering the change handler. Next, we call the =set= method on the =rectangle= instance, setting the width to =20= and the height to =10=. This results in the area changing to =200= and the change handler is executed again, this time alerting the text "200". Finally, we call =set= one more time, this time setting the width to =10= and the height to =20=. Because the area of the rectangle after this set will still be =200=, the change handler is not executed again.
+
+								Unwiring onChange Handlers
+									The =onChange= instance method returns a `wirings object`, which provides a means with which to unwire all the event wirings associated with registering a handler using this method.
 
 								NOTES
 								- compare to the related =once= and =whenever= instance methods
