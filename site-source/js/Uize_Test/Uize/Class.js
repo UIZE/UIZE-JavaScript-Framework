@@ -1528,6 +1528,13 @@ Uize.module ({
 								- test that handler is executed immediately
 								- test that handler is only executed when the computed value actually changes, not every time the determinants change
 								- test that a wirings object is returned that allows the change handler to be fully unwired
+								- test that the handler receives two arguments, being the derived value and an array containing the values of the determinants
+								- test that the derived value is computed correctly
+								- test that a function derivation is supported correctly
+								- test that a string derivation expression is supported correctly
+								- test that an array derivation is supported correctly
+								- test that a string property name derivation is supported correctly
+								- test that an array derivation is supported correctly
 								*/
 							]
 						}
