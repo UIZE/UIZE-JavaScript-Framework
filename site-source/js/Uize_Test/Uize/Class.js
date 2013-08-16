@@ -1519,23 +1519,173 @@ Uize.module ({
 						{
 							title:'Test the onChange instance method',
 							test:[
+								{
+									title:'Test that the handler is executed once upon registering a change handler',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													width:{value:9},
+													height:{value:11}
+												}
+											}),
+											_coverageAndOrder = [],
+											_instance = _Class ()
+										;
+										_instance.onChange (
+											function (width,height) {return width * height},
+											function (_area) {_coverageAndOrder.push (_area)}
+										);
+										return this.expect ([99],_coverageAndOrder);
+									}
+								},
+								{
+									title:'Test that handler is only executed when the computed value actually changes, not every time the determinants change',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													width:{value:9},
+													height:{value:11}
+												}
+											}),
+											_coverageAndOrder = [],
+											_instance = _Class ()
+										;
+										_instance.onChange (
+											function (width,height) {return width * height},
+											function (_area) {_coverageAndOrder.push (_area)}
+										);
+										_instance.set ({width:11,height:9});
+										_instance.set ({width:10,height:20});
+										_instance.set ({width:20,height:10});
+										_instance.set ({width:5,height:40});
+										_instance.set ({width:5,height:50});
+										return this.expect ([99,200,250],_coverageAndOrder);
+									}
+								},
+								{
+									title:'Test that a wirings object is returned that allows the change handler to be fully unwired',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													width:{value:9},
+													height:{value:11}
+												}
+											}),
+											_coverageAndOrder = [],
+											_instance = _Class (),
+											_wirings = _instance.onChange (
+												function (width,height) {return width * height},
+												function (_area) {_coverageAndOrder.push (_area)}
+											)
+										;
+										_instance.unwire (_wirings);
+										_instance.set ({width:10,height:20});
+										return (
+											this.expect ([99],_coverageAndOrder) &&
+											this.expect (['Changed.width','Changed.height'],Uize.keys (_wirings))
+										);
+									}
+								},
+								{
+									title:'Test that the handler receives two arguments, being the derived value and an array containing the values of the determinants',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													width:{value:9},
+													height:{value:11}
+												}
+											}),
+											_actualHandlerArguments,
+											_instance = _Class ()
+										;
+										_instance.onChange (
+											function (width,height) {return width * height},
+											function () {_actualHandlerArguments = Uize.copyList (arguments)}
+										);
+										return this.expect ([99,[9,11]],_actualHandlerArguments);
+									}
+								},
+								{
+									title:'Test that various types of derivation specifiers are supported correctly',
+									test:Uize.map (
+										[
+											{
+												title:'Test that a function derivation is supported correctly',
+												properties:{width:9,height:11},
+												derivation:function (width,height) {return width * height},
+												expectedDerivedValue:99
+											},
+											{
+												title:'Test that a string derivation expression is supported correctly',
+												properties:{width:9,height:11},
+												derivation:'width, height : width * height',
+												expectedDerivedValue:99
+											},
+											{
+												title:'Test that a properties array boolean derivation is supported correctly',
+												properties:{isSolid:true,isRound:false},
+												derivation:['isSolid','isRound'],
+												expectedDerivedValue:false
+											},
+											{
+												title:'Test that a properties array boolean derivation, with some inverted properties, is supported correctly',
+												properties:{isSolid:true,isRound:false},
+												derivation:['isSolid','!isRound'],
+												expectedDerivedValue:true
+											},
+											{
+												title:'Test that a properties list string boolean derivation is supported correctly',
+												properties:{isSolid:true,isRound:false},
+												derivation:'isSolid, isRound',
+												expectedDerivedValue:false
+											},
+											{
+												title:'Test that a properties list string boolean derivation, with some inverted properties, is supported correctly',
+												properties:{isSolid:true,isRound:false},
+												derivation:'isSolid, !isRound',
+												expectedDerivedValue:true
+											},
+											{
+												title:'Test that a string property name derivation is supported correctly',
+												properties:{LTUAE:42},
+												derivation:'LTUAE',
+												expectedDerivedValue:42
+											},
+											{
+												title:'Test that a string property name derivation, with inversion, is supported correctly',
+												properties:{isSolid:true},
+												derivation:'!isSolid',
+												expectedDerivedValue:false
+											}
+										],
+										function (_testInfo) {
+											return {
+												title:_testInfo.title,
+												test:function () {
+													var
+														_actualDerivedValue,
+														_Class = Uize.Class.subclass ({set:_testInfo.properties}),
+														_instance = _Class ()
+													;
+													_instance.onChange (
+														_testInfo.derivation,
+														function (_derivedValue) {_actualDerivedValue = _derivedValue}
+													);
+													return this.expect (_testInfo.expectedDerivedValue,_actualDerivedValue);
+												}
+											}
+										}
+									)
+								}
 							]
 						},
 						{
 							title:'Test the whenever instance method',
 							test:[
-								/*
-								- test that handler is executed immediately
-								- test that handler is only executed when the computed value actually changes, not every time the determinants change
-								- test that a wirings object is returned that allows the change handler to be fully unwired
-								- test that the handler receives two arguments, being the derived value and an array containing the values of the determinants
-								- test that the derived value is computed correctly
-								- test that a function derivation is supported correctly
-								- test that a string derivation expression is supported correctly
-								- test that an array derivation is supported correctly
-								- test that a string property name derivation is supported correctly
-								- test that an array derivation is supported correctly
-								*/
 							]
 						}
 					]
