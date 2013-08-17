@@ -5,7 +5,24 @@ Fix issue with section title aliases and canonicalization
 
 	This is because the canonicalization is done using the unaltered section title - complete with its section aliases. So, two sections that are ostensibly the same but that have different aliases are not viewed as the same because their titles including aliases are not identical. The solution would be to detect aliases in the title and canonicalize using just the displayed portion of the title.
 
-- improved automatic linking behavior
+Improve Table Support
+	Formalized Column Definition
+		Provide a way for columns to be formally described, with support for the following qualities...
+
+		- horizontal alignment for columns (left, center, right)
+		- logical (and limited) styling options for columns (that key into specific CSS classes)
+		- columns whose data is expected to be SimpleDoc formatted text (formatting, linking, etc.)
+		- ability to specify type for a column's data (eg. completion level, rating, time, etc.)
+
+	Sorting
+		Allow tables to be sortable.
+
+		The proposed `formalized column definition` feature can be leveraged for supporting this. In the formal definition for a column, whether or not a column is sortable and how it is to be sorted can be defined.
+
+	Rows as Objects
+		Add the ability to specify row data as objects, rather than an array, with named keys identifying columns.
+
+Improve Automatic Linking Behavior
 	- multiple branch disambiguation syntax (eg. Section : Section : Section)
 	- warnings
 		- for any ambiguity in links to sections of same name
@@ -20,27 +37,18 @@ Fix issue with section title aliases and canonicalization
 	- should never link to the section within that same section, unless...
 		- the link is in a much later paragraph in that section
 		- the link is in a subsection of that section
+	- no way to disambiguate for intra-document linking purposes when an instance method and a state property have the same name (happens with =wired= in doc for Uize.Widget, for example)
 
-- table improvements
-	- add ability to formally describe individual columns
-		- support for horizontal alignment for columns
-		- logical (and limited) styling options for columns (that key into specific CSS classes)
-		- columns can be declared as having SimpleDoc formatted text
-		- ability to specify type for a column's data (eg. completion level, rating, time, etc.)
-	- allow tables to be sortable (column description can qualify sorting behavior)
-	- ability to specify row data as object, rather than array, with named keys identifying columns
+Improve Bullet List Support
+	Need a more robust solution for defining bullet lists, particularly to allow nested lists, and nested contents within lists.
 
-- need a more robust solution for defining bullet lists, particularly to allow nested lists, and nested contents within lists
+HTML Encoding
+	Need to implement conversion of special characters to HTML entities.
 
-- conversion of special characters to HTML entities
-- formatting issues
+Fix Formatting Issues
 	- nested inline formatting
 	- some formatting is currently supported in inline code segments, which is a problem for use of "*", "+", "_", and other formatting characters in inline code.
 	- there is no formal way to escape the "=" character inside inline code segments
 	- there should be a way to escape all formatting characters
 	- a way to have bolded text that is not auto-linked
-
-Problems
-	- no way to disambiguate for intra-document linking purposes when an instance method and a state property have the same name (happens with =wired= in doc for Uize.Widget, for example)
-
 

@@ -48,8 +48,7 @@
 					- =Uize.Class.dualContextProperties= - lets you declare one or more `dual context` properties for the class
 					- =Uize.Class.stateProperties= - lets you declare one or more state properties for instances of the class
 
-					Add or Override Features
-						The `feature declaration methods` can be used either to add features that aren't inherited from the class' base class, or to override features that are inherited from the base class.
+					The `feature declaration methods` can be used either to add features that aren't inherited from the class' base class, or to override features that are inherited from the base class.
 
 					Declaring Multiple Features, Categorized by Type
 						Multiple features, categorized by type, can be declared for a class by either `declaring features by type when creating a class` or by `declaring features by type for an already created class`.
@@ -262,9 +261,6 @@
 
 				For an in-depth discussion of events, consult the [[../explainers/javascript-event-system.html][JavaScript Event System]] explainer.
 
-			Wirings Object ~~ Wirings Objects
-				.
-
 			Condition System
 				The =Uize.Class= module implements a condition system in the form of state properties combined with convenience methods that allow state properties to be treated semantically as conditions.
 
@@ -278,7 +274,7 @@
 					- =unmet= - sets a condition as having not been met / no longer being met
 					- =whenever= - registers a handler that is to be executed each time a condition changes state
 
-			State Properties Derivation ~~ State Properties Derivations
+			### State Properties Derivation ~~ State Properties Derivations
 				.
 
 				Determinants
@@ -695,6 +691,9 @@ Uize.module ({
 								........................................
 
 								The value for each property in this object should conform to the =eventHandlerSTRorFNorOBJ= parameter type.
+
+							### wiringsOBJ ~~ Wirings Object ~~ Wirings Objects
+								.
 					*/
 				};
 
