@@ -1,8 +1,8 @@
 Introduction
 	The UIZE JavaScript Framework implements a system for class inheritance that makes subclassing and object-oriented programming possible in JavaScript.
 
-It's Easy
-	UIZE implements a system for class inheritance to facilitate object-oriented programming in JavaScript.
+Creating Classes
+	UIZE's system for classes and inheritance makes it dead easy to create a class.
 
 	Class features are provided in the =Uize.Class= module. You can create your own class very easily, simply by calling the =subclass= method on the =Uize.Class= base class, as follows...
 
@@ -10,28 +10,87 @@ It's Easy
 	var MyCkass = Uize.Class.subclass ();
 	.....................................
 
+	Creating Further Subclasses
+		All subclasses that inherit from =Uize.Class= get a =subclass= static method, so you can make further subclasses just as easily...
+
+		...........................................................
+		var MyClass = Uize.Class.subclass ({
+			instanceMethods:{
+				fooMethod:function () {
+					alert ('foo');
+				},
+				barMethod:function () {
+					alert ('bar');
+				}
+			}
+		});
+
+		var MySubclass = MyClass.subclass ({
+			instanceMethods:{
+				barMethod:function () {
+					alert ('overridden bar');
+				}
+			}
+		});
+
+		var mySubclassInstance = new MySubclass ();
+		mySubclassInstance.fooMethod ();  // alerts "foo"
+		mySubclassInstance.barMethod ();  // alerts "overriden bar"
+		...........................................................
+
 Declaring Features
-	Once you have your own class, you can modify it in numerous ways to declare features.
+	For convenience, UIZE provides a few different ways of declaring a class' features to suit different situations.
 
-	Mofifying the Class Manually
-		You can declare features on a class by modifying the class manually.
+	Declaring Features During Class Creation
+		The most concise form of declaring class features allows the features to be optionally declared in the call to the =subclass= method.
 
-		- assign properties on the class' =prototype= object to define instance methods and/or properties
-		- assign properties on the class to define static methods and/or properties
+		.......................................
+		var MyClass = Uize.Class.subclass ({
+			instanceMethods:{
+				someInstanceMethod1:function () {
+					// do some stuff
+				},
+				someInstanceMethod2:function () {
+					// do some stuff
+				}
+			},
+			staticMethods:{
+				someStaticMethod1:function () {
+					// do some stuff
+				},
+				someStaticMethod2:function () {
+					// do some stuff
+				}
+			}
+		});
+		.......................................
 
-		EXAMPLE
-		....................................................
-		MyClass.prototype.someInstanceMethod = function () {
-			// do some stuff
-		};
+	Using the declare Static Method
+		If you already have a reference to a created class and you would like to declare multiple features of different types in a single method call, you can call the =MyClass.declare= static on the class.
 
-		MyClass.someStaticMethod = function () {
-			// do some stuff
-		};
-		....................................................
+		.......................................
+		MyClass.declare ({
+			instanceMethods:{
+				someInstanceMethod1:function () {
+					// do some stuff
+				},
+				someInstanceMethod2:function () {
+					// do some stuff
+				}
+			},
+			staticMethods:{
+				someStaticMethod1:function () {
+					// do some stuff
+				},
+				someStaticMethod2:function () {
+					// do some stuff
+				}
+			}
+		});
+		.......................................
 
 	Using the Feature Declaration Methods
-		You can declare features on a class using the various feature declaration static methods of the class that are inherited from the =Uize.Class= base class.
+		As an alternative to using the =MyClass.declare= static method, you can declare features on a class using the various feature declaration static methods of the class that are inherited from the =Uize.Class= base class.
 
 		- call the =MyClass.instanceMethods= method to declare instance methods
 		- call the =MyClass.staticMethods= method to declare static methods
@@ -59,53 +118,106 @@ Declaring Features
 		});
 		....................................
 
-	Using the declare Static Method
-		As an alternative to calling the feature declaration methods individually, the =MyClass.declare= static can be used to combine all the feature declarations into a single method call...
+	Modifying the Class Manually
+		In addition to the various convenient ways that are provided for declaring class features, you can also declare features by modifying a class manually.
 
-		.......................................
-		MyClass.declare ({
-			instanceMethods:{
-				someInstanceMethod1:function () {
-					// do some stuff
-				},
-				someInstanceMethod2:function () {
-					// do some stuff
-				}
+		- assign properties on the class' =prototype= object to define instance methods and/or properties
+		- assign properties on the class to define static methods and/or properties
+
+		EXAMPLE
+		....................................................
+		MyClass.prototype.someInstanceMethod = function () {
+			// do some stuff
+		};
+
+		MyClass.someStaticMethod = function () {
+			// do some stuff
+		};
+		....................................................
+
+		While this technique is not recommended, you may encounter older UIZE code that uses this technique for declaring class features, since the code may not yet have been updated since the newer approach to feature declaration was introduced.
+
+	Feature Declaration Methods
+		The =Uize.Class= module provides a number of methods that let you declare instance and/or static features of a class.
+
+		- =Uize.Class.declare= - lets you declare one or more features of one or more different `feature types` for the class
+		- =Uize.Class.alphastructor= - lets you declare the `alphastructor` for the class
+		- =Uize.Class.omegastructor= - lets you declare the `omegastructor` for the class
+		- =Uize.Class.instanceMethods= - lets you declare one or more instance methods for the class
+		- =Uize.Class.instanceProperties= - lets you declare one or more instance properties for the class
+		- =Uize.Class.staticMethods= - lets you declare one or more static methods for the class
+		- =Uize.Class.staticProperties= - lets you declare one or more static properties for the class
+		- =Uize.Class.dualContextMethods= - lets you declare one or more `dual context` methods for the class
+		- =Uize.Class.dualContextProperties= - lets you declare one or more `dual context` properties for the class
+		- =Uize.Class.stateProperties= - lets you declare one or more state properties for instances of the class
+
+	Declare Private or Public Features
+		The `feature declaration methods` can be used either to declare public features or private features.
+
+		In UIZE, there is no fundamental difference between private methods or properties and public methods or properties - it's all in the naming. By convention, private features are named with an "_" (underscore) prefix. This has its pros and cons, but one side effect of this is that either private or public features (or a mixture of both) can be declared using the `feature declaration methods`.
+
+		EXAMPLE
+		........................................
+		_class.instanceMethods ({
+			_privateInstanceMethod1:function () {
+				// implementation here
 			},
-			staticMethods:{
-				someStaticMethod1:function () {
-					// do some stuff
-				},
-				someStaticMethod2:function () {
-					// do some stuff
-				}
+			_privateInstanceMethod2:function () {
+				// implementation here
+			},
+			publicInstanceMethod1:function () {
+				// implementation here
+			},
+			publicInstanceMethod2:function () {
+				// implementation here
 			}
 		});
-		.......................................
+		........................................
 
-	Declaring Features During Class Creation
-		As an even more concise form of declaring class features, the features can be optionally declared in the call to the =subclass= method.
+		In the above example, one call to the =Uize.Class.instanceMethods= method is being used to declare the =_privateInstanceMethod1= and =_privateInstanceMethod2= private instance methods, along with the =publicInstanceMethod1= and =publicInstanceMethod2= public instance methods.
 
-		.......................................
-		var MyClass = Uize.Class.subclass ({
-			instanceMethods:{
-				someInstanceMethod1:function () {
-					// do some stuff
-				},
-				someInstanceMethod2:function () {
-					// do some stuff
-				}
+	Feature Declarations are Cumulative
+		All the `feature declaration methods` can be called as many times as desired, and calling them repeatedly is cumulative in nature.
+
+		This is useful, because it lets you break out declarations into different sections in your code if that makes your code more readable and/or manageable.
+
+		EXAMPLE
+		........................................
+		// Private Instance Methods
+		_class.instanceMethods ({
+			_privateInstanceMethod1:function () {
+				// implementation here
 			},
-			staticMethods:{
-				someStaticMethod1:function () {
-					// do some stuff
-				},
-				someStaticMethod2:function () {
-					// do some stuff
-				}
+			_privateInstanceMethod2:function () {
+				// implementation here
 			}
 		});
-		.......................................
+
+		// ... ... ... ... ... ... ... ... ...
+
+		// Public Instance Methods
+		_class.instanceMethods ({
+			publicInstanceMethod1:function () {
+				// implementation here
+			},
+			publicInstanceMethod2:function () {
+				// implementation here
+			}
+		});
+		........................................
+
+		In the above example, the =Uize.Class.instanceMethods= method is being called twice - in one section to declare private instance methods, and in the other section to declare public instance methods.
+
+	Dual Context
+		Dual context class features are features that exist both on the class as well as instances of the class.
+
+		Examples of dual context features are the various event system methods. For example, the =fire= instance method lets you fire an instance event, while the =Uize.Class.fire= static method lets you fire an event on a class. Both the instance and class methods for firing events share the same underlying implementation, where the implementation may contain minor conditionalizing when executing in the instance context versus executing in the class context.
+
+		In cases where it is possible (and possibly even desirable) to share the same function between an instance method and a class method, the =Uize.Class.dualContextMethods= static method can be used to declare such methods in a single statement, rather than separately calling both the =Uize.Class.instanceMethods= and =Uize.Class.staticMethods= methods.
+
+		Although a less likely scenario, it is also possible to declare dual context properties using the =Uize.Class.dualContextProperties= static method. This method is present mainly for symmetry and consistency.
+
+		For dual context features, it is assumed that the feature is named the same on both the instance and the class. In situations where this is not the case, one should just use the separate methods for defining instance features and class features.
 
 ### Supported Feature Types
 	The UIZE class system formally supports the following feature types with dedicated feature declaration methods...
@@ -201,34 +313,6 @@ Declaring Features
 			..........................................................................
 
 			After the above code has executed, the class =MySubclass= will have the two state properties =foo= and =bar=.
-
-Creating Further Subclasses
-	All subclasses that inherit from =Uize.Class= get a =subclass= static method, so you can make further subclasses just as easily...
-
-	...........................................................
-	var MyClass = Uize.Class.subclass ({
-		instanceMethods:{
-			fooMethod:function () {
-				alert ('foo');
-			},
-			barMethod:function () {
-				alert ('bar');
-			}
-		}
-	});
-
-	var MySubclass = MyClass.subclass ({
-		instanceMethods:{
-			barMethod:function () {
-				alert ('overridden bar');
-			}
-		}
-	});
-
-	var mySubclassInstance = new MySubclass ();
-	mySubclassInstance.fooMethod ();  // alerts "foo"
-	mySubclassInstance.barMethod ();  // alerts "overriden bar"
-	...........................................................
 
 Inheritance
 	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, state properties declared on the superclass using the =Uize.Class.stateProperties= static method, and static methods and properties assigned on the superclass.

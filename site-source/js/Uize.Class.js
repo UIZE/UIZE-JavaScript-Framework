@@ -48,76 +48,8 @@
 					- =Uize.Class.dualContextProperties= - lets you declare one or more `dual context` properties for the class
 					- =Uize.Class.stateProperties= - lets you declare one or more state properties for instances of the class
 
-					Declare Private or Public Features
-						The `feature declaration methods` can be used either to declare public features or private features.
-
-						In UIZE, there is no fundamental difference between private methods or properties and public methods or properties - it's all in the naming. By convention, private features are named with an "_" (underscore) prefix. This has its pros and cons, but one side effect of this is that either private or public features (or a mixture of both) can be declared using the `feature declaration methods`.
-
-						EXAMPLE
-						........................................
-						_class.instanceMethods ({
-							_privateInstanceMethod1:function () {
-								// implementation here
-							},
-							_privateInstanceMethod2:function () {
-								// implementation here
-							},
-							publicInstanceMethod1:function () {
-								// implementation here
-							},
-							publicInstanceMethod2:function () {
-								// implementation here
-							}
-						});
-						........................................
-
-						In the above example, one call to the =Uize.Class.instanceMethods= method is being used to declare the =_privateInstanceMethod1= and =_privateInstanceMethod2= private instance methods, along with the =publicInstanceMethod1= and =publicInstanceMethod2= public instance methods.
-
-					Feature Declarations are Cumulative
-						All the `feature declaration methods` can be called as many times as desired, and calling them repeatedly is cumulative in nature.
-
-						This is useful, because it lets you break out declarations into different sections in your code if that makes your code more readable and/or manageable.
-
-						EXAMPLE
-						........................................
-						// Private Instance Methods
-						_class.instanceMethods ({
-							_privateInstanceMethod1:function () {
-								// implementation here
-							},
-							_privateInstanceMethod2:function () {
-								// implementation here
-							}
-						});
-
-						// ... ... ... ... ... ... ... ... ...
-
-						// Public Instance Methods
-						_class.instanceMethods ({
-							publicInstanceMethod1:function () {
-								// implementation here
-							},
-							publicInstanceMethod2:function () {
-								// implementation here
-							}
-						});
-						........................................
-
-						In the above example, the =Uize.Class.instanceMethods= method is being called twice - in one section to declare private instance methods, and in the other section to declare public instance methods.
-
 					Add or Override Features
 						The `feature declaration methods` can be used either to add features that aren't inherited from the class' base class, or to override features that are inherited from the base class.
-
-					Dual Context
-						Dual context class features are features that exist both on the class as well as instances of the class.
-
-						Examples dual context features are the various `event system methods`. For example, the =fire= instance method lets you fire an instance event, while the =Uize.Class.fire= static method lets you fire an event on a class. Both the instance and class methods for firing events share the same underlying implementation, where the implementation may contain minor conditionalizing when executing in the instance context versus executing in the class context.
-
-						In cases where it is possible (and possibly even desirable) to share the same function between an instance method and a class method, the =Uize.Class.dualContextMethods= static method can be used to declare such methods in a single statement, rather than separately calling both the =Uize.Class.instanceMethods= and =Uize.Class.staticMethods= methods.
-
-						Although a less likely scenario, it is also possible to declare dual context properties using the =Uize.Class.dualContextProperties= static method. This method is present mainly for symmetry and consistency.
-
-						For dual context features, it is assumed that the feature is named the same on both the instance and the class. In situations where this is not the case, one should just use the separate methods for defining instance features and class features.
 
 					Declaring Multiple Features, Categorized by Type
 						Multiple features, categorized by type, can be declared for a class by either `declaring features by type when creating a class` or by `declaring features by type for an already created class`.
@@ -1848,7 +1780,7 @@ Uize.module ({
 									...........................................................................
 
 									NOTES
-									- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
+									- this method may be called multiple times for a class to cumulatively define or override features
 									- see the other `feature declaration methods`
 
 							Deprecated Features
@@ -3002,7 +2934,7 @@ Uize.module ({
 							In the above example, a widget class is being created by subclassing the =Uize.Widget= base class. Then, the =wireUi= and =updateUi= instance methods are being declared for the class by calling the =instanceMethods= method on the class.
 
 							NOTES
-							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
+							- this method may be called multiple times for a class to cumulatively define or override features
 							- see the other `feature declaration methods`
 
 						Uize.Class.instanceProperties
@@ -3025,7 +2957,7 @@ Uize.module ({
 
 							NOTES
 							- compare to the =Uize.Class.stateProperties= static method
-							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
+							- this method may be called multiple times for a class to cumulatively define or override features
 							- see the other `feature declaration methods`
 				*/
 			};
@@ -3043,7 +2975,7 @@ Uize.module ({
 							.........................................
 
 							NOTES
-							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
+							- this method may be called multiple times for a class to cumulatively define or override features
 							- see the other `feature declaration methods`
 
 						Uize.Class.staticProperties
@@ -3056,7 +2988,7 @@ Uize.module ({
 
 							NOTES
 							- compare to the =Uize.Class.stateProperties= static method
-							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
+							- this method may be called multiple times for a class to cumulatively define or override features
 							- see the other `feature declaration methods`
 				*/
 			};
@@ -3075,7 +3007,7 @@ Uize.module ({
 							...................................................
 
 							NOTES
-							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
+							- this method may be called multiple times for a class to cumulatively define or override features
 							- see the other `feature declaration methods`
 
 						Uize.Class.dualContextProperties
@@ -3088,7 +3020,7 @@ Uize.module ({
 
 							NOTES
 							- compare to the =Uize.Class.stateProperties= static method
-							- this method may be called multiple times for a class (see `Feature Declarations are Cumulative`)
+							- this method may be called multiple times for a class to cumulatively define or override features
 							- see the other `feature declaration methods`
 				*/
 			};

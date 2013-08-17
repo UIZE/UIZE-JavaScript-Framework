@@ -25,7 +25,7 @@ Sections of This Web Site
 	Explainers
 		Learn how to use the UIZE JavaScript Framework by reading through the various topic oriented documents in the [[../javascript-explainers.html][Explainers]] section.
 
-		This section covers things from a subject matter perspective, and deals with such topics as [[javascript-inheritance.html][JavaScript Inheritance]], [[javascript-event-system.html][JavaScript Events]], [[javascript-modules.html][JavaScript Modules]], [[javascript-templates.html][JavaScript Templates]], [[javascript-widgets.html][JavaScript Widgets]], [[javascript-localization.html][JavaScript Localization]], [[javascript-documentation-system.html][JavaScript Documentation]], [[all-about-scrunching.html][JavaScript Code Compression]], [[javascript-build-scripts.html][JavaScript Build Scripts]], and lots more.
+		This section covers things from a subject matter perspective, and deals with such topics as [[classes-and-inheritance.html][Classes and Inheritance]], [[javascript-event-system.html][JavaScript Events]], [[javascript-modules.html][JavaScript Modules]], [[javascript-templates.html][JavaScript Templates]], [[javascript-widgets.html][JavaScript Widgets]], [[javascript-localization.html][JavaScript Localization]], [[javascript-documentation-system.html][JavaScript Documentation]], [[all-about-scrunching.html][JavaScript Code Compression]], [[javascript-build-scripts.html][JavaScript Build Scripts]], and lots more.
 
 		Because the pages in this section are topic oriented, they will likely refer to many different module reference documents, link to examples, and cross-reference other explainers.
 

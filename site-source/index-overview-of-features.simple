@@ -130,7 +130,7 @@ Classes, Inheritance, OOP
 		});
 		.......................................
 
-	For a more detailed discussion of the UIZE approach to OOP, consult the [[explainers/javascript-inheritance.html][JavaScript Inheritance]] explainer.
+	For a more detailed discussion of the UIZE approach to OOP, consult the [[explainers/classes-and-inheritance.html][Classes and Inheritance]] explainer.
 
 State Properties and Binding
 	UIZE offers a mature and powerful state properties system so that classes can expose a state interface for their instances.

@@ -182,7 +182,7 @@ Uize.module ({
 								title:'MORE TOPICS...',
 								items:[
 									_explainer ('JavaScript Modules'),
-									_explainer ('JavaScript Inheritance'),
+									_explainer ('Classes and Inheritance'),
 									_explainer ('State Properties'),
 									_explainer ('JavaScript Event System'),
 									_divider,

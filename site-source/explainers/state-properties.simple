@@ -1147,7 +1147,7 @@ Advanced Topics
 		- class.set for overriding inherited initial =value=
 		- Change.property for watching on changes in value of state properties of superclass
 			- uses the regular UIZE event mechanism, so fundamentally not the same as "low level" onChange handlers
-		- there is more on state properties and inheritance in the explainer [[javascript-inheritance.html][JavaScript Inheritance]]
+		- there is more on state properties and inheritance in the explainer [[classes-and-inheritance.html][Classes and Inheritance]]
 		- cumulative nature of =Uize.Class.stateProperties=
 
 	### State Properties And Instance Construction
