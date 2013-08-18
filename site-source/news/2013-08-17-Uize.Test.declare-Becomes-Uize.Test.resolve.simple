@@ -1,0 +1,30 @@
+The =Uize.Test.declare= static method of the =Uize.Test= class has been renamed to =Uize.Test.resolve=.
+
+A Conflict Existed
+	The =Uize.Test.declare= method was used extensively for creating unit test classes using a more concise and convenient declarative form.
+
+	Unfortunately for the =Uize.Test= base class, the =Uize.Class= base class (from which the =Uize.Test= class is derived) implements a =Uize.Class.declare= static method that is available universally to subclasses as a means of declaring features for a class. The =Uize.Test= class was, naturally, overriding the inherited =declare= static method with a method of its own having the same name but completely different purpose.
+
+The Class System Wins out
+	Given the importance of the =Uize.Class.declare= method as a fundamental component of the [[../explainers/classes-and-inheritance.html][UIZE class mechanism]], it was decided to force a rename of the =Uize.Test.declare= static method.
+
+	Partly, this is to not allow this confusion to persist in the codebase. More importantly, however, it is to allow test base classes to be created for specific categories of tests, and to allow those test base classes to be able to declare features (such as instance and static methods) using the =declare= method inherited from the =Uize.Class= base class, should they so choose.
+
+Why Uize.Test.resolve
+	The =Uize.Test.declare= method has been renamed to =Uize.Test.resolve= since it essemtially resolves an object to a test class.
+
+	If a test class is passed to it, it returns the test class as is. The method has always behaved this way and it has, essentially, always been a resolver type method.
+
+Breaking Change
+	The rename of the =Uize.Test.declare= method to =Uize.Test.resolve= is a breaking change with no backwards compatibiliy provisions.
+
+	This means that any unit test modules that have already been written and that use this method need to be updated to use the method by its new name in order to continue to work. Renaming the =Uize.Test.declare= method to =Uize.Test.resolve= means that the =Uize.Test= class will no longer override and will, therefore, inherit the =Uize.Class.declare= method. So, unit test modules that are not updated will now be doing something different to what they thought there were doing.
+
+All UIZE Unit Tests Updated
+	All unit test modules of the UIZE JavaScript Framework have been modified to now use the newly renamed =Uize.Test.resolve method.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-08-17 - Uize.Test.declare Becomes Uize.Test.resolve
+....................................................................................
