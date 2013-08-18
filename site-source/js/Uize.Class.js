@@ -2741,7 +2741,7 @@ Uize.module ({
 							............................................................
 
 							Create a Subclass, Declaring Multiple Features by Type
-								As a convenience, the =Uize.Class.subclass= method supports a variation that takes a single object parameter, as a means of `declaring features by type when creating a class`.
+								As a convenience, the =Uize.Class.subclass= method supports a variation that takes a single object parameter, as a means of declaring features by type when creating a class.
 
 								SYNTAX
 								..................................................

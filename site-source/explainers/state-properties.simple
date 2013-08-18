@@ -27,7 +27,11 @@ Introduction
 	State Properties vs. Regular Properties
 		It is not uncommon for the implementation of a class to utilize a combination of regular old properties and state properties.
 
-		Regular properties are any old properties assigned on the class or its instances. State properties are specifically declared through the =MyClass.stateProperties= static method inherited from the =Uize.Class= base class.
+		Regular properties are any old properties assigned on the class or its instances. State properties are declared for a class using one of the following feature declaration approaches...
+
+		- during class creation, by specifying the =stateProperties= property in the optional features declaration object parameter of the =MyClass.subclass= method
+		- after class creation, by calling the dedicated =MyClass.stateProperties= static method inherited from the =Uize.Class= base class
+		- after class creation, by calling the =MyClass.declare= method on the class and specifying the =stateProperties= property in the features declaration object parameter of this method
 
 		Properties on Steroids
 			State properties are accessed through the =set= and =get= methods, unlike regular properties that are accessed normally.
