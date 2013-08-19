@@ -6,37 +6,67 @@ Creating Classes
 
 	Class features are provided in the =Uize.Class= module. You can create your own class very easily, simply by calling the =subclass= method on the =Uize.Class= base class, as follows...
 
-	.....................................
-	var MyCkass = Uize.Class.subclass ();
-	.....................................
+	..........................................................
+	var Rectangle = Uize.Class.subclass ({
+		stateProperties:{
+			width:{value:10},
+			height:{value:10}
+		},
+		instanceMethods:{
+			displayArea:function () {
+				alert (this.get ('width') * this.get ('height'));
+			}
+		}
+	});
+
+	var rectangle = Rectangle ();
+	rectangle.displayArea ();  // alerts "100"
+
+	var anotherRectangle = Rectangle ({width:5,height:15});
+	anotherRectangle.displayArea ();  // alerts "75"
+	..........................................................
 
 	Creating Further Subclasses
 		All subclasses that inherit from =Uize.Class= get a =subclass= static method, so you can make further subclasses just as easily...
 
-		...........................................................
-		var MyClass = Uize.Class.subclass ({
+		..........................................................................................
+		var Rectangle = Uize.Class.subclass ({
+			stateProperties:{
+				width:{value:10},
+				height:{value:10}
+			},
 			instanceMethods:{
-				fooMethod:function () {
-					alert ('foo');
-				},
-				barMethod:function () {
-					alert ('bar');
+				displayArea:function () {
+					alert (this.get ('width') * this.get ('height'));
 				}
 			}
 		});
 
-		var MySubclass = MyClass.subclass ({
+		var VerboseRectangle = Uize.Class.subclass ({
 			instanceMethods:{
-				barMethod:function () {
-					alert ('overridden bar');
+				displayArea:function () {
+					var
+						width = this.get ('width'),
+						height = this.get ('height')
+					;
+					alert ('The areas is: ' + width * height + ' (' + width + ' x ' + height + ' )');
 				}
 			}
 		});
 
-		var mySubclassInstance = new MySubclass ();
-		mySubclassInstance.fooMethod ();  // alerts "foo"
-		mySubclassInstance.barMethod ();  // alerts "overriden bar"
-		...........................................................
+		var rectangle = Rectangle ();
+		rectangle.displayArea ();  // alerts "100"
+
+		var verboseRectangle = VerboseRectangle ({width:5,height:15});
+		verboseRectangle.displayArea ();  // alerts "The area is: 75 (5 x 15)"
+		..........................................................................................
+
+### Creating Instances
+	Optional "new" Keyword
+		.
+
+	State Replaces Constructor Arguments
+		.
 
 Declaring Features
 	For convenience, UIZE provides a few different ways of declaring a class' features to suit different situations.
@@ -139,6 +169,198 @@ Declaring Features
 
 		While this technique is not recommended, you may encounter older UIZE code that uses this technique for declaring class features, since the code may not yet have been updated since the newer approach to feature declaration was introduced.
 
+	Features Declaration Object ~~ featuresByTypeOBJ
+		Both the =MyClass.subclass= and =MyClass.declare= static methods accept a =featuresByTypeOBJ= parameter, which allows multiple features of multiple different `feature types` to be specified in a single feature declaration object and, therefore, declared in a single method call.
+
+		Declaring Features by Type When Creating a Class
+			The =Uize.Class.subclass= method supports a variation that lets you `create a subclass, declaring multiple features by type` at the time of creating a class, by supplying just a single =featuresByTypeOBJ= parameter.
+
+			EXAMPLE
+			....................................
+			var MySubclass = MyClass.subclass ({
+				alphastructor:function () {
+					// implementation here
+				},
+				omegastructor:function () {
+					// implementation here
+				},
+				staticMethods:{
+					staticMethod1:function () {
+						// implementation here
+					},
+					staticMethod2:function () {
+						// implementation here
+					}
+				},
+				instanceMethods:{
+					instanceMethod1:function () {
+						// implementation here
+					},
+					instanceMethod2:function () {
+						// implementation here
+					}
+				},
+				stateProperties:{
+					stateProperty1:{
+						// property profile
+					},
+					stateProperty2:{
+						// property profile
+					}
+				}
+			});
+			....................................
+
+		Declaring Features by Type for an Already Created Class
+			One or more features of one or more different `feature types` can be declared for a class after the class has already been created, by calling the =Uize.Class.declare= method on the class and supplying a =featuresByTypeOBJ= parameter.
+
+			EXAMPLE
+			.....................................
+			var MyClass = Uize.Class.subclass ();
+
+			MyClass.declare ({
+				alphastructor:function () {
+					// implementation here
+				},
+				omegastructor:function () {
+					// implementation here
+				},
+				staticMethods:{
+					staticMethod1:function () {
+						// implementation here
+					},
+					staticMethod2:function () {
+						// implementation here
+					}
+				},
+				instanceMethods:{
+					instanceMethod1:function () {
+						// implementation here
+					},
+					instanceMethod2:function () {
+						// implementation here
+					}
+				},
+				stateProperties:{
+					stateProperty1:{
+						// property profile
+					},
+					stateProperty2:{
+						// property profile
+					}
+				}
+			});
+			.....................................
+
+		How the Features Declaration Object is Implemented
+			The properties of the =featuresByTypeOBJ= object should correspond to the names of the various `feature declaration methods` supported by the class being subclassed.
+
+			When features are specified, categorized by type, in the =featuresByTypeOBJ= parameter, the =Uize.Class.declare= and =Uize.Class.subclass= methods will iterate over the properties of the object, attempting to call a static method of the name of each property encountered, on the class being subclassed, and passing the value of the property as the first parameter of the feature declaration method.
+
+			So, for example, if the =Uize.Service.subclass= method is called to create a service class, and if a =featuresByTypeOBJ= parameter is specified, and if a =serviceMethods= property exists within the =featuresByTypeOBJ= object, then the =Uize.Service.serviceMethods= static method will be called and the value of the =serviceMethods= property from the =featuresByTypeOBJ= object will be passed as the single parameter to the =Uize.Service.serviceMethods= method.
+
+			To illustrate this by example...
+
+			THIS...
+			.........................................
+			var FileSystem = Uize.Service.subclass ({
+				serviceMethods:{
+					readFile:{
+						async:false
+					},
+					writeFile:{
+						async:false
+					},
+					getFiles:{
+						async:false
+					},
+					getFolder:{
+						async:false
+					},
+					// etc.
+					// etc.
+				}
+			});
+			.........................................
+
+			...IS EQUIVALENT TO...
+			..........................................
+			var FileSystem = Uize.Service.subclass ();
+
+			FileSystem.serviceMethods ({
+				readFile:{
+					async:false
+				},
+				writeFile:{
+					async:false
+				},
+				getFiles:{
+					async:false
+				},
+				getFolder:{
+					async:false
+				},
+				// etc.
+				// etc.
+			});
+			..........................................
+
+		Standard Properties of the Features Declaration Object
+			Support for the following standard properties of the `features declaration object` is built into the =Uize.Class= base class...
+
+			- =alphastructor= - lets you declare the `alphastructor` for the class
+			- =omegastructor= - lets you declare the `omegastructor` for the class
+			- =instanceMethods= - lets you declare one or more `instance methods` for the class
+			- =instanceProperties= - lets you declare one or more `instance properties` for the class
+			- =staticMethods= - lets you declare one or more `static methods` for the class
+			- =staticProperties= - lets you declare one or more `static properties` for the class
+			- =stateProperties= - lets you declare one or more `state properties` for instances of the class
+			- =dualContextMethods= - lets you declare one or more `dual context methods` for the class
+			- =dualContextProperties= - lets you declare one or more `dual context properties` for the class
+
+		More Feature Types for Specific Base Classes
+			Because of `how the features declaration object is implemented`, declaring multiple features, categorized by type, inherently supports new feature types introduced in subclasses.
+
+			In addition to the `standard properties of the features declaration object`, certain classes may introduce `class-specific feature types` for which new feature declaration static methods will be introduced. These new feature types will, by design, introduce additional properties that can be specified in the `features declaration object` when declaring features for subclasses of those classes. For more details, see the section `Class-specific Feature Types`.
+
+		Less Conventional Usages
+			Because of `how the features declaration object is implemented`, one can also do less conventional things along with declaring features in the =Uize.Class.subclass= and =Uize.Class.declare= methods.
+
+			For example, one can effectively call the =Uize.Class.set= static method to override the initial values of state properties that are inherited from the base class, as shown in the following example...
+
+			INSTEAD OF...
+			...............................................................
+			var MySliderWidgetSubclass = Uize.Widget.Bar.Slider.subclass ({
+				instanceMethods:{
+					// instance methods declared here
+				},
+				stateProperties:{
+					// state properties declared here
+				}
+			});
+
+			MySliderWidgetSubclass.set ({
+				minValue:-50,
+				maxValue:50
+			});
+			...............................................................
+
+			USE...
+			...............................................................
+			var MySliderWidgetSubclass = Uize.Widget.Bar.Slider.subclass ({
+				instanceMethods:{
+					// instance methods declared here
+				},
+				stateProperties:{
+					// state properties declared here
+				},
+				set:{
+					minValue:-50,
+					maxValue:50
+				}
+			});
+			...............................................................
+
 	Feature Declaration Methods
 		The =Uize.Class= module provides a number of methods that let you declare instance and/or static features of a class.
 
@@ -152,9 +374,6 @@ Declaring Features
 		- =Uize.Class.dualContextMethods= - lets you declare one or more `dual context methods` for the class
 		- =Uize.Class.dualContextProperties= - lets you declare one or more `dual context properties` for the class
 		- =Uize.Class.stateProperties= - lets you declare one or more `state properties` for instances of the class
-
-	Features Declaration Object ~~ featuresByTypeOBJ
-		.
 
 	Declare Private or Public Features
 		The `feature declaration methods` can be used either to declare public features or private features.
@@ -215,7 +434,7 @@ Declaring Features
 
 		In the above example, the =Uize.Class.instanceMethods= method is being called twice - in one section to declare private instance methods, and in the other section to declare public instance methods.
 
-	Dual Context
+	Dual Context Features
 		Dual context class features are features that exist both on the class as well as instances of the class.
 
 		Examples of dual context features are the various event system methods. For example, the =fire= instance method lets you fire an instance event, while the =Uize.Class.fire= static method lets you fire an event on a class. Both the instance and class methods for firing events share the same underlying implementation, where the implementation may contain minor conditionalizing when executing in the instance context versus executing in the class context.
@@ -375,7 +594,7 @@ Feature Types ~~ Feature Type ~~ Features
 		Declaring Instance Methods After Subclassing, Using MyClass.instanceMethods
 			Instance methods can be declared for a class after the class has already been created, by calling the =MyClass.instanceMethods= method on the class.
 
-			When calling the =MyClass.instanceMethods= method, an instance methods declaration object should be provided, containing instance method name to implementation function mappings.
+			When calling the =MyClass.instanceMethods= method, an instance methods declaration object should be provided, containing mappings of instance method names to implementation functions.
 
 			EXAMPLE
 			..............................................
@@ -487,7 +706,7 @@ Feature Types ~~ Feature Type ~~ Features
 		Declaring Static Methods After Subclassing, Using MyClass.instanceMethods
 			Static methods can be declared for a class after the class has already been created, by calling the =MyClass.staticMethods= method on the class.
 
-			When calling the =MyClass.staticMethods= method, a static methods declaration object should be provided, containing static method name to implementation function mappings.
+			When calling the =MyClass.staticMethods= method, a static methods declaration object should be provided, containing mappings of static method names to implementation functions.
 
 			EXAMPLE
 			............................................
@@ -620,15 +839,179 @@ Feature Types ~~ Feature Type ~~ Features
 			......................................................................
 
 	Dual Context Methods
-		.
+		Dual context methods are functions that are assigned on the class as well as on the =prototype= object of the class.
+
+		Because dual context methods are essentially just combined static and instance methods, all dual context methods of a superclass are inherited by a subclass through the copy operations used when inheriting static and instance methods. The exception to this is a dual context method where the static method is registered with `the MyClass.nonInheritableStatics static property` as being a `non-inheritable static`. Once a subclass is created, changing the inherited dual context methods on the superclass has no effect on the subclass.
+
+		Dual context methods can be declared for a class in any of the following ways...
+
+		Declaring Dual Context Methods During Subclassing
+			Dual context methods can be declared for a class when the class is created, by using the optional =featuresByTypeOBJ= parameter when calling the =Uize.Class.subclass= static method.
+
+			The `features declaration object` should contain an =dualContextMethods= property whose value should be an object containing mappings of dual context method names to implementation functions.
+
+			EXAMPLE
+			.....................................................
+			var MyClass = Uize.Class.subclass ({
+				dualContextMethods:{
+					foo:function () {
+						// implementation of foo dual context method
+					},
+					bar:function () {
+						// implementation of bar dual context method
+					}
+				}
+			});
+			.....................................................
+
+		Declaring Dual Context Methods After Subclassing, Using MyClass.declare
+			Dual context methods can be declared for a class after the class has already been created, by calling the =MyClass.declare= method on the class.
+
+			The `features declaration object` passed to the =MyClass.declare= method should contain an =dualContextMethods= property whose value should be an object containing mappings of dual context method names to implementation functions.
+
+			EXAMPLE
+			.....................................................
+			MyClass.declare ({
+				dualContextMethods:{
+					foo:function () {
+						// implementation of foo dual context method
+					},
+					bar:function () {
+						// implementation of bar dual context method
+					}
+				}
+			});
+			.....................................................
+
+		Declaring Dual Context Methods After Subclassing, Using MyClass.dualContextMethods
+			Dual context methods can be declared for a class after the class has already been created, by calling the =MyClass.dualContextMethods= method on the class.
+
+			When calling the =MyClass.dualContextMethods= method, a dual context methods declaration object should be provided, containing mappings of dual context method names to implementation functions.
+
+			EXAMPLE
+			..................................................
+			MyClass.dualContextMethods ({
+				foo:function () {
+					// implementation of foo dual context method
+				},
+				bar:function () {
+					// implementation of foo dual context method
+				}
+			});
+			..................................................
 
 	Dual Context Properties
-		.
+		Dual context properties are non-function type values that are assigned on the class as well as on the =prototype= object of the class.
+
+		Because dual context properties are essentially just combined static and instance properties, all dual context properties of a superclass are inherited by a subclass through the clone-copy operations used when inheriting static and instance properties. The exception to this is a dual context property where the static property is registered with `the MyClass.nonInheritableStatics static property` as being a `non-inheritable static`. Once a subclass is created, changing the inherited dual context properties on the superclass has no effect on the subclass.
+
+		Dual context properties can be declared for a class in any of the following ways...
+
+		Declaring Dual Context Properties During Subclassing
+			Dual context properties can be declared for a class when the class is created, by using the optional =featuresByTypeOBJ= parameter when calling the =Uize.Class.subclass= static method.
+
+			The `features declaration object` should contain an =dualContextProperties= property whose value should be an object containing mappings of dual context property names to initial values.
+
+			EXAMPLE
+			....................................
+			var MyClass = Uize.Class.subclass ({
+				dualContextProperties:{
+					foo:'bar',
+					baz:'qux'
+				}
+			});
+			....................................
+
+		Declaring Dual Context Properties After Subclassing, Using MyClass.declare
+			Dual context properties can be declared for a class after the class has already been created, by calling the =MyClass.declare= method on the class.
+
+			The `features declaration object` passed to the =MyClass.declare= method should contain an =dualContextProperties= property whose value should be an object containing mappings of dual context property names to initial values.
+
+			EXAMPLE
+			..........................
+			MyClass.declare ({
+				dualContextProperties:{
+					foo:'bar',
+					baz:'qux'
+				}
+			});
+			..........................
+
+		Declaring Dual Context Properties After Subclassing, Using MyClass.dualContextProperties
+			Dual context properties can be declared for a class after the class has already been created, by calling the =MyClass.dualContextProperties= method on the class.
+
+			When calling the =MyClass.dualContextProperties= method, a dual context properties declaration object should be provided, containing mappings of dual context property names to initial values.
+
+			EXAMPLE
+			................................
+			MyClass.dualContextProperties ({
+				foo:'bar',
+				baz:'qux'
+			});
+			................................
+
+Class-specific Feature Types
+	In addition to the standard `feature types` that are built into the =Uize.Class= base class, any class can introduce new class-specific feature types for which new feature declaration static methods will be introduced to allow features of those new types to be declared by subclasses of the class.
+
+	Service Methods, as an Example
+		For instance, the =Uize.Service= base class introduces the feature type of a service method and provides the =Uize.Service.serviceMethods= static method for declaring service methods.
+
+		So, inherently, service methods can be declared in the =featuresByTypeOBJ= parameter along with other feature types that were introduced in the =Uize.Class= base class (`instance methods`, `instance properties`, `static methods`, `static properties`, `state properties`, etc.), simply by specifying a =serviceMethods= property in the =featuresByTypeOBJ= object.
+
+	Your Own Feature Types
+		You can introduce your own new feature types, and these feature types will get the benefits of the generalized system for declaring features
+
+		Quite simply, if you implement a new base class of which multiple different subclasses will be created, and you define a static method that allows developers to declare features of a new feature type that is introduced in your base class, then features of that type can be declared in the =Uize.Class.subclass= and =Uize.Class.declare= methods.
+
+		Consider the following example...
+
+		EXAMPLE
+		.........................................................................
+		var ClassWithStateMonitors = Uize.Class.subclass ({
+			staticMethods:{
+				stateMonitors:function (monitorsByProperty) {
+					for (var property in monitorsByProperty) {
+						var monitor = monitorsByProperty [property];
+						// code to register monitor for state property
+					}
+				}
+			}
+		});
+
+		var Rectangle = ClassWithStateMonitors.subclass ({
+			stateProperties:{
+				width:{
+					conformer:function (value) {return Uize.constrain (value,1,50)},
+					value:10
+				},
+				height:{
+					conformer:function (value) {return Uize.constrain (value,1,50)},
+					value:10
+				}
+			},
+			stateMonitors:{
+				width:function () {
+					// monitoring code for width state property
+				},
+				height:function () {
+					// monitoring code for height state property
+				}
+			}
+		});
+		.........................................................................
+
+		In the above, very hypothetical example, the class =ClassWithStateMonitors= is being created and a =stateMonitors= static method is declared for it. This method is a feature declaration method for a new "state monitor" feature type. Nevermind what this feature does - it's a hypothetical example, after all.
+
+		Now, given this new =ClassWithStateMonitors= class, we can now create subclasses by calling =ClassWithStateMonitors.subclass=, and for any subclasses of it that we create, we can declare any number of "state monitor" type features by specifying a =stateMonitors= property in the =featuresByTypeOBJ= parameter that is passed to the =ClassWithStateMonitors.subclass= method.
+
+		In our hypothetical =Rectangle= subclass, we're declaring "state monitors" for the =width= and =height= state properties. Once again, let's not worry about what this mysterious "state monitor" feature does - the point is that we've created a new feature type at a particular class in the class hierarchy, and all classes that descend from that class can now declare features of that new type.
+
+		For concrete examples of `class-specific feature types`, you can refer to the =Uize.Service= and =Uize.Widget.V2= classes. The =Uize.Service= class introduces a =serviceMethods= feature type for the benefit of its subclasses, while the =Uize.Widget.V2= class introduces the =cssBindings= and =htmlBindings= feature types.
 
 Constructor Mechanism
 	When an instance of a UIZE class is created, construction involves three phases: the =alphastructor= phase, the state property initialization phase, and the =omegastructor= phase.
 
-	### Constructors are Cumulative
+	### No Constructor Arguments, in the Traditional Sense
 		.
 
 	### Two Phase Construction
@@ -674,6 +1057,9 @@ Constructor Mechanism
 
 		Omegastructor Chain
 			.
+
+	### Constructors are Cumulative
+		.
 
 Inheritance
 	The =Uize.Class= base class provides a mechanism for inheriting `features` declared for the class being subclassed, including the `alphastructor`, `omegastructor`, `static methods`, `static properties`, `instance methods`, `instance properties`, `state properties`, etc.
@@ -989,7 +1375,7 @@ Advanced Topics
 			- This technique is not useful for public instance properties that are expected to be assigned through the public interface, since assigning a value using the public name will not assign that same value to the private version.
 			- This technique *could* be used for public instance properties that are intended to be read only and are not intended to be set outside of the class' implementation code. The technique *could* also be used if the value of the property was an object and was never intended to be changed, even if the contents of the object is expected to be modified by code outside of the class' implementation.
 
-	Non-inheritable Statics
+	Non-inheritable Statics ~~ Non-inheritable Static
 		Unless otherwise specified, all static features - methods as well as properties - of a =Uize.Class= subclass are inherited in turn by their subclasses.
 
 		There are times, however, when there is no compelling reason for a static feature of a class to be inherited by its subclasses. In fact, in some cases too many inherited static features can just clutter subclasses in the class hierarchy with cruft that they neither need nor care about. In such cases, the inheritance system of the UIZE JavaScript Framework provides a way to "register" static features of a class as being non-inheritable. This is done using the =MyClass.nonInheritableStatics= static property.
@@ -1127,8 +1513,8 @@ Advanced Topics
 
 				In order to correctly support singletons in different scopes, your class should not store state for a singleton as statics on the class, but should instead use instance properties. Provided your classes are designed correctly, you can have multiple singletons instantiated for different scopes that you define, so that different sets of distributed code can share their own singleton instances, and for each differently scoped singleton the singleton may be initialized or set up in a different way.
 
-			Singleton Scope is Effectively Global
-				A `singleton scope` is effectively global for a given class.
+			Singleton Scope is Globalish
+				A `singleton scope` is effectively global for a given class (so, not global in an absolute sense, but globalish).
 
 				Therefore, if you have distributed code that is making use of the singleton feature and you are specifying a custom scope, you need to have a good degree of confidence that you won't have totally different code trying to use the same scope name for a singleton of a class where the initialization and usage of the singleton is different. This is the age old problem with things that are global in nature. The globalness of singletons is both the upside and the downside, so you should `use the singleton feature sparingly`.
 
@@ -1145,9 +1531,14 @@ Advanced Topics
 		Use the Singleton Feature Sparingly
 			While there are a few `compelling use cases for singletons`, one should nevertheless use the singleton feature sparingly and with caution.
 
-			The very advantage of singletons, which is that they can be shared by disparate pieces of code, can also become a disadvantage. Singletons can be regarded as being, in effect, globals in the scope of the class on which they are created, or the `singleton scope` in which they are created. This consequence brings with it the kinds of drawbacks that globals have more generally. Singletons aren't as egregious as global variables, and the `singleton scope` facility goes some way to alleviating the global nature of singletons. Nevertheless, before resorting to using singletons, consider first if there are other alternatives. In UIZE, you will find singletons mostly advocated for use with service classes.
+			The very advantage of singletons, which is that they can be shared by disparate pieces of code, can also become a disadvantage. Singletons can be regarded as being, in effect, globals in the scope of the class on which they are created, or the `singleton scope` in which they are created. This consequence brings with it the kinds of drawbacks that globals have more generally.
+
+			Singletons aren't as egregious as global variables, and the `singleton scope` facility goes some way to alleviating the globalish nature of singletons. Nevertheless, before resorting to using singletons, consider first if there are other alternatives. In UIZE, you will find singletons mostly advocated for use with service classes.
 
 	### OTHER NOTES
+		Implementing Dual Context Methods
+			.
+
 		Private Static Methods
 			- you really could just use global functions
 			- is it a method or a function?

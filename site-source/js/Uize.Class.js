@@ -38,213 +38,17 @@
 					The =Uize.Class= module provides a number of methods that let you declare instance and/or static features of a class.
 
 					- =Uize.Class.declare= - lets you declare one or more features of one or more different `feature types` for the class
-					- =Uize.Class.alphastructor= - lets you declare the `alphastructor` for the class
-					- =Uize.Class.omegastructor= - lets you declare the `omegastructor` for the class
+					- =Uize.Class.alphastructor= - lets you declare the alphastructor for the class
+					- =Uize.Class.omegastructor= - lets you declare the omegastructor for the class
 					- =Uize.Class.instanceMethods= - lets you declare one or more instance methods for the class
 					- =Uize.Class.instanceProperties= - lets you declare one or more instance properties for the class
 					- =Uize.Class.staticMethods= - lets you declare one or more static methods for the class
 					- =Uize.Class.staticProperties= - lets you declare one or more static properties for the class
-					- =Uize.Class.dualContextMethods= - lets you declare one or more `dual context` methods for the class
-					- =Uize.Class.dualContextProperties= - lets you declare one or more `dual context` properties for the class
+					- =Uize.Class.dualContextMethods= - lets you declare one or more dual context methods for the class
+					- =Uize.Class.dualContextProperties= - lets you declare one or more dual context properties for the class
 					- =Uize.Class.stateProperties= - lets you declare one or more state properties for instances of the class
 
-					The `feature declaration methods` can be used either to add features that aren't inherited from the class' base class, or to override features that are inherited from the base class.
-
-					Declaring Multiple Features, Categorized by Type
-						Multiple features, categorized by type, can be declared for a class by either `declaring features by type when creating a class` or by `declaring features by type for an already created class`.
-
-						Declaring Features by Type When Creating a Class
-							The =Uize.Class.subclass= method supports a variation that lets you `create a subclass, declaring multiple features by type` at the time of creating a class, by supplying just a single =featuresByTypeOBJ= parameter.
-
-							EXAMPLE
-							....................................
-							var MySubclass = MyClass.subclass ({
-								alphastructor:function () {
-									// implementation here
-								},
-								omegastructor:function () {
-									// implementation here
-								},
-								staticMethods:{
-									staticMethod1:function () {
-										// implementation here
-									},
-									staticMethod2:function () {
-										// implementation here
-									}
-								},
-								instanceMethods:{
-									instanceMethod1:function () {
-										// implementation here
-									},
-									instanceMethod2:function () {
-										// implementation here
-									}
-								},
-								stateProperties:{
-									stateProperty1:{
-										// property profile
-									},
-									stateProperty2:{
-										// property profile
-									}
-								}
-							});
-							....................................
-
-						Declaring Features by Type for an Already Created Class
-							One or more features of one or more different `feature types` can be declared for a class after the class has already been created, by calling the =Uize.Class.declare= method on the class and supplying a =featuresByTypeOBJ= parameter.
-
-							EXAMPLE
-							.....................................
-							var MyClass = Uize.Class.subclass ();
-
-							MyClass.declare ({
-								alphastructor:function () {
-									// implementation here
-								},
-								omegastructor:function () {
-									// implementation here
-								},
-								staticMethods:{
-									staticMethod1:function () {
-										// implementation here
-									},
-									staticMethod2:function () {
-										// implementation here
-									}
-								},
-								instanceMethods:{
-									instanceMethod1:function () {
-										// implementation here
-									},
-									instanceMethod2:function () {
-										// implementation here
-									}
-								},
-								stateProperties:{
-									stateProperty1:{
-										// property profile
-									},
-									stateProperty2:{
-										// property profile
-									}
-								}
-							});
-							.....................................
-
-						Feature Types
-							When a =featuresByTypeOBJ= parameter is passed to either the =Uize.Class.declare= or the =Uize.Class.declare= methods, the object may contain any of the following properties...
-
-							- =alphastructor= - lets you declare the `alphastructor` for the class
-							- =omegastructor= - lets you declare the `omegastructor` for the class
-							- =instanceMethods= - lets you declare one or more instance methods for the class
-							- =instanceProperties= - lets you declare one or more instance properties for the class
-							- =staticMethods= - lets you declare one or more static methods for the class
-							- =staticProperties= - lets you declare one or more static properties for the class
-							- =dualContextMethods= - lets you declare one or more `dual context` methods for the class
-							- =dualContextProperties= - lets you declare one or more `dual context` properties for the class
-							- =stateProperties= - lets you declare one or more state properties for instances of the class
-
-						How It's Implemented
-							The properties of the =featuresByTypeOBJ= object should correspond to the names of the various `feature declaration methods` supported by the class being subclassed.
-
-							When features are specified, categorized by type, in the =featuresByTypeOBJ= parameter, the =Uize.Class.declare= and =Uize.Class.subclass= methods will iterate over the properties of the object, attempting to call a static method of the name of each property encountered, on the class being subclassed, and passing the value of the property as the first parameter of the feature declaration method.
-
-							So, for example, if the =Uize.Service.subclass= method is called to create a service class, and if a =featuresByTypeOBJ= parameter is specified, and if a =serviceMethods= property exists within the =featuresByTypeOBJ= object, then the =Uize.Service.serviceMethods= static method will be called and the value of the =serviceMethods= property from the =featuresByTypeOBJ= object will be passed as the single parameter to the =Uize.Service.serviceMethods= method.
-
-							To illustrate this by example...
-
-							THIS...
-							.........................................
-							var FileSystem = Uize.Service.subclass ({
-								serviceMethods:{
-									readFile:{
-										async:false
-									},
-									writeFile:{
-										async:false
-									},
-									getFiles:{
-										async:false
-									},
-									getFolder:{
-										async:false
-									},
-									// etc.
-									// etc.
-								}
-							});
-							.........................................
-
-							...IS EQUIVALENT TO...
-							..........................................
-							var FileSystem = Uize.Service.subclass ();
-
-							FileSystem.declare ({
-								serviceMethods:{
-									readFile:{
-										async:false
-									},
-									writeFile:{
-										async:false
-									},
-									getFiles:{
-										async:false
-									},
-									getFolder:{
-										async:false
-									},
-									// etc.
-									// etc.
-								}
-							});
-							..........................................
-
-							More Feature Types for Specific Base Classes
-								Because of `how it's implemented`, `declaring multiple features, categorized by type`, inherently supports new feature types introduced in subclasses.
-
-								For instance, the =Uize.Service= base class introduces the feature type of a service method and provides the =Uize.Service.serviceMethods= static method for declaring service methods. So, inherently, service methods can be declared in the =featuresByTypeOBJ= parameter along with other feature types that were introduced in the =Uize.Class= base class (instance methods, instance properties, static methods, static properties, state properties, etc.), simply by specifying a =serviceMethods= property in the =featuresByTypeOBJ= object.
-
-								Therefore, if you implement a new base class of which multiple different subclasses will be created, and you define a static method that allows developers to declare features of a new feature type that is introduced in your base class, then features of that type can be declared in the =Uize.Class.subclass= and =Uize.Class.declare= methods.
-
-							Less Conventional Usages
-								Because of `how it's implemented`, one can also do less conventional things along with declaring features in the =Uize.Class.subclass= and =Uize.Class.declare= methods.
-
-								For example, one can effectively call the =Uize.Class.set= static method to override the initial values of state properties that are inherited from the base class, as shown in the following example...
-
-								THIS...
-								...............................................................
-								var MySliderWidgetSubclass = Uize.Widget.Bar.Slider.subclass ({
-									instanceMethods:{
-										// instance methods declared here
-									},
-									stateProperties:{
-										// state properties declared here
-									}
-								});
-
-								MySliderWidgetSubclass.set ({
-									minValue:-50,
-									maxValue:50
-								});
-								...............................................................
-
-								...COULD BE SHORTENED TO...
-								...............................................................
-								var MySliderWidgetSubclass = Uize.Widget.Bar.Slider.subclass ({
-									instanceMethods:{
-										// instance methods declared here
-									},
-									stateProperties:{
-										// state properties declared here
-									},
-									set:{
-										minValue:-50,
-										maxValue:50
-									}
-								});
-								...............................................................
+					The `feature declaration methods` can be used either to add features that aren't inherited from the class' superclass, or to override features that are inherited from its superclass. For an in-depth discussion of feature declaration, consult the [[../explainers/classes-and-inheritance.html][Classes and Inheritance]] explainer.
 
 			Event System
 				The =Uize.Class= module implements a powerful and versatile event system, which can be used for application events outside the context of browser DOM events.
@@ -2998,7 +2802,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Class.dualContextMethods
-							Lets you conveniently declare one or more `dual context` methods, by specifying the methods in an object.
+							Lets you conveniently declare one or more dual context methods, by specifying the methods in an object.
 
 							SYNTAX
 							...................................................
@@ -3010,7 +2814,7 @@ Uize.module ({
 							- see the other `feature declaration methods`
 
 						Uize.Class.dualContextProperties
-							Lets you conveniently declare one or more `dual context` properties, by specifying the properties and their initial values in an object.
+							Lets you conveniently declare one or more dual context properties, by specifying the properties and their initial values in an object.
 
 							SYNTAX
 							......................................................
@@ -3030,7 +2834,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Class.alphastructor
-							Lets you declare the `alphastructor` for the class.
+							Lets you declare the alphastructor for the class.
 
 							SYNTAX
 							..........................................
@@ -3048,7 +2852,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Class.omegastructor
-							Lets you declare the `omegastructor` for the class.
+							Lets you declare the omegastructor for the class.
 
 							SYNTAX
 							..........................................
@@ -3068,7 +2872,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Class.declare
-							Lets you declare one or more features of one or more different `feature types` for the class.
+							Lets you declare one or more features of one or more different feature types for the class.
 
 							SYNTAX
 							....................................
