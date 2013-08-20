@@ -30,7 +30,7 @@ Uize.module ({
 	builder:function () {
 		var _moduleBuiltSizeExtensionRegExp = /\.js\.builtsize$/;
 
-		return {
+		return Uize.package ({
 			description:'In-memory built size for module',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -45,7 +45,7 @@ Uize.module ({
 			builder:function (_inputs) {
 				return this.readFile ({path:_inputs.builtModule}).length;
 			}
-		};
+		});
 	}
 });
 

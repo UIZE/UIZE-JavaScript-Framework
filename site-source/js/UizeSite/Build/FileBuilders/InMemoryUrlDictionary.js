@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.Build.Util'
 	],
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'In-memory URL dictionary for SimpleDoc pages',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.memoryUrl ('url-dictionary');
@@ -92,7 +92,7 @@ Uize.module ({
 
 				return _urlDictionary;
 			}
-		};
+		});
 	}
 });
 

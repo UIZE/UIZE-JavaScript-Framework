@@ -29,7 +29,7 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.InMemoryParsedSimpleDataFiles',
 	required:'Uize.Data.Simple',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'In-memory parsed SimpleData files',
 			urlMatcher:function (_urlParts) {
 				return this.isMemoryUrl (_urlParts.pathname) && _urlParts.fileType == 'simpledata';
@@ -43,7 +43,7 @@ Uize.module ({
 					collapseChildren:true
 				});
 			}
-		};
+		});
 	}
 });
 

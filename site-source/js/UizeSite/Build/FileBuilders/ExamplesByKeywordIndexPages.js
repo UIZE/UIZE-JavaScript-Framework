@@ -30,7 +30,7 @@ Uize.module ({
 	builder:function () {
 		var _examplesKeywordRegExp = /^javascript-((.+?)-)?examples$/;
 
-		return {
+		return Uize.package ({
 			description:'Examples-by-keyword index page',
 			urlMatcher:function (_urlParts) {
 				return (
@@ -52,7 +52,7 @@ Uize.module ({
 					files:this.readFile ({path:_inputs.examplesByKeyword}) [_keyword] || []
 				});
 			}
-		};
+		});
 	}
 });
 

@@ -36,7 +36,7 @@ Uize.module ({
 			_indexableFileExtensionRegExp,
 			_sortOrder
 		) {
-			return {
+			return Uize.package ({
 				description:'In-memory HTML files index for the ' + _indexableFolderUnderBuilt + ' folder',
 				urlMatcher:function (_urlParts) {
 					return _urlParts.pathname == this.memoryUrl (_indexableFolderUnderBuilt + '.index');
@@ -71,10 +71,10 @@ Uize.module ({
 						_sortOrder
 					);
 				}
-			};
+			});
 		};
 
-		return {
+		return Uize.package ({
 			getInMemoryHtmlFilesIndexHandler:_getInMemoryHtmlFilesIndexHandler,
 
 			getIndexPageUrlHandler:function (
@@ -105,7 +105,7 @@ Uize.module ({
 					}
 				];
 			}
-		};
+		});
 	}
 });
 

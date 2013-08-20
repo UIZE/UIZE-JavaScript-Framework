@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Build.FileBuilders.SourceFiles Package
+|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.WidgetsToGo Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -11,26 +11,27 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 5
+	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Build.FileBuilders.SourceFiles= module defines a file builder for files that come from the source folder of a project.
+		The =UizeSite.Build.FileBuilders.WidgetsToGo= module defines a utilities package for the various Widget To Go file builder modules.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		Functions defined in the file builder are called as instance methods on an instance of a subclass of the =Uize.Services.FileBuilderAdapter= class, so the functions can access instance methods implemented in this class.
 */
 
 Uize.module ({
-	name:'Uize.Build.FileBuilders.SourceFiles',
+	name:'UizeSite.Build.FileBuilders.WidgetsToGo',
 	builder:function () {
 		return Uize.package ({
-			description:'Short-circuit handling for source files',
-			urlMatcher:function (_urlParts) {return this.isSourceUrl (_urlParts.folderPath)}
+			widgetsToGoPath:'widgets/',
+			threeFoldersDeepRegExp:/^([^\\\/]+)[\\\/]([^\\\/]+)[\\\/]([^\\\/]+)[\\\/][^\\\/]+$/,
+			urlizeWidgetTitle:function (_widget) {
+				return _widget.title.toLowerCase ().replace (/\s+/g,'-');
+			}
 		});
 	}
 });

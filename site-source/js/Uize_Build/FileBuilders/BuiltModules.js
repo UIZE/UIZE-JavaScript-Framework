@@ -43,7 +43,7 @@ Uize.module ({
 			}
 		;
 
-		return {
+		return Uize.package ({
 			description:'Built JavaScript module',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.fileType == 'js' && this.isBuiltUrl (_urlParts.folderPath);
@@ -147,7 +147,7 @@ Uize.module ({
 				}
 				return _result;
 			}
-		};
+		});
 	}
 });
 

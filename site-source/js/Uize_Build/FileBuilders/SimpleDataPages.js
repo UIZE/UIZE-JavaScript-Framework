@@ -29,7 +29,7 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.SimpleDataPages',
 	required:'Uize.Data.Simple',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'SimpleData pages',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -54,7 +54,7 @@ Uize.module ({
 					})
 				);
 			}
-		};
+		});
 	}
 });
 

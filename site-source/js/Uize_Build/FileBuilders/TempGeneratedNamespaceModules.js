@@ -30,7 +30,7 @@ Uize.module ({
 	required:'Uize.Build.Util',
 	builder:function () {
 		var _jsExtensionRegExp = /\.js$/;
-		return {
+		return Uize.package ({
 			description:'Generated JavaScript namespace modules under temp',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -53,7 +53,7 @@ Uize.module ({
 					)
 				});
 			}
-		};
+		});
 	}
 });
 

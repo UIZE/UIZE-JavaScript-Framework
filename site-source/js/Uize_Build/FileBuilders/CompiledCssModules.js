@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.Json'
 	],
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Compiled CSS modules, generated from built .css files',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -95,7 +95,7 @@ Uize.module ({
 					].join ('\n')
 				});
 			}
-		};
+		});
 	}
 });
 

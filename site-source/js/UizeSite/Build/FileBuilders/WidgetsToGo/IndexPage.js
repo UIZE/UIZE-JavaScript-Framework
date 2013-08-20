@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.Homepage Package
+|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.WidgetsToGo.IndexPage Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -11,14 +11,14 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 5
+	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.Homepage= module defines a file builder for the homepage of the UIZE Web site.
+		The =UizeSite.Build.FileBuilders.WidgetsToGo.IndexPage= module defines a file builder for the index page of the Widgets To Go section of the UIZE Web site.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -26,29 +26,34 @@
 */
 
 Uize.module ({
-	name:'UizeSite.Build.FileBuilders.Homepage',
-	required:'Uize.Doc.Simple',
+	name:'UizeSite.Build.FileBuilders.WidgetsToGo.IndexPage',
+	required:'UizeSite.Build.FileBuilders.WidgetsToGo',
 	builder:function () {
 		return Uize.package ({
-			description:'Homepage',
+			description:'Widgets To Go index page',
 			urlMatcher:function (_urlParts) {
-				return _urlParts.pathname == this.builtUrl ('index.html');
+				return _urlParts.pathname == this.builtUrl ('javascript-widgets.html');
 			},
 			builderInputs:function (_urlParts) {
 				return {
 					template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst',
-					overviewOfFeaturesSimpleDoc:this.sourceUrl ('index-overview-of-features.simple'),
-					urlDictionary:this.memoryUrl ('url-dictionary')
+					widgets:this.memoryUrl (UizeSite.Build.FileBuilders.WidgetsToGo.widgetsToGoPath + 'widgets.simpledata')
 				};
 			},
 			builder:function (_inputs) {
 				return this.readFile ({path:_inputs.template}) ({
-					overviewOfFeatures:Uize.Doc.Simple.build ({
-						data:this.readFile ({path:_inputs.overviewOfFeaturesSimpleDoc}),
-						urlDictionary:this.readFile ({path:_inputs.urlDictionary}),
-						contentsList:false,
-						pathToRoot:''
-					})
+					files:Uize.map (
+						this.readFile ({path:_inputs.widgets}).widgets,
+						function (_widget) {
+							var _widgetTitleUrlized = UizeSite.Build.FileBuilders.WidgetsToGo.urlizeWidgetTitle (_widget);
+							return {
+								title:_widget.title,
+								path:UizeSite.Build.FileBuilders.WidgetsToGo + _widgetTitleUrlized + '.html',
+								imageSrc:'images/widgets/' + _widgetTitleUrlized + '-96x96.gif',
+								description:_widget.description.short
+							};
+						}
+					)
 				});
 			}
 		});

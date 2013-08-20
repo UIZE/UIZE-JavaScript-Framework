@@ -31,7 +31,7 @@ Uize.module ({
 	builder:function () {
 		var _examplesSourceCodePagesPath = '/examples/source-code/';
 
-		return {
+		return Uize.package ({
 			description:'Example source code pages',
 			urlMatcher:function (_urlParts) {
 				return (
@@ -59,7 +59,7 @@ Uize.module ({
 					body:_sourceFileText
 				});
 			}
-		};
+		});
 	}
 });
 

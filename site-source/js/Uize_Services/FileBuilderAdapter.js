@@ -284,8 +284,7 @@ Uize.module ({
 					;
 					var
 						_filesConsideredCurrentLookup = _this._filesConsideredCurrentLookup,
-						_staleBefore = _params.staleBefore = Uize.toNumber (_params.staleBefore,-Infinity),
-						_chainDepth = -1
+						_staleBefore = _params.staleBefore = Uize.toNumber (_params.staleBefore,-Infinity)
 					;
 					_params.isDev = _params.isDev == 'true';
 					_this.params = _params;
@@ -293,14 +292,14 @@ Uize.module ({
 					function _ensureFileCurrent (_url) {
 						var
 							_startTime = Uize.now (),
-							_logIndent = Uize.String.repeat ('\t',++_chainDepth),
-							_log = ''
+							_log
 						;
 						if (_filesConsideredCurrentLookup [_url] == _trueFlag) {
-							_log =
-								_logIndent + 'file is considered current: ' + _url + '\n' +
-								_logIndent + '\tduration: ' + (Uize.now () - _startTime) + '\n'
-							;
+							_log = {
+								url:_url,
+								built:false,
+								duration:Uize.now () - _startTime
+							};
 						} else {
 							var
 								_urlParts = Uize.Url.from (_url),
@@ -328,14 +327,17 @@ Uize.module ({
 								if (_builderInputs || _builder) {
 									var
 										_path = _urlParts.pathname,
-										_subLogChunks = [],
-										_subLogChunk,
+										_subLogs = [],
+										_subLog,
 										_builderInputModifiedDate,
 										_maxBuilderInputModifiedDate = _staleBefore,
 										_processBuilderInput = function (_builderInput) {
 											if (typeof _builderInput == 'string') {
-												if (_subLogChunk = _ensureFileCurrent (_builderInput))
-													_subLogChunks.push (_subLogChunk)
+												if (
+													(_subLog = _ensureFileCurrent (_builderInput)) &&
+													(_subLog.built || _subLog.buildError)
+												)
+													_subLogs.push (_subLog)
 												;
 												if (
 													(_builderInputModifiedDate = _this.getModifiedDate ({path:_builderInput})) >
@@ -373,16 +375,18 @@ Uize.module ({
 										} catch (_error) {
 											_buildError = _error;
 										}
-										_log =
-											_logIndent + (_buildError ? '### BUILD FAILED ###' : '***** BUILT') + ': ' + _url + '\n' +
-											_logIndent + '\thandler: ' + _matchingHandler.description + '\n' +
-											_logIndent + '\tduration: ' + (Uize.now () - _startTime) + '\n' +
-											Uize.String.Lines.indent (
-												'builder inputs: ' + Uize.Json.to (_builderInputs,{keyDelimiter:': '}),
-												_chainDepth + 1
-											) + '\n' +
-											(_subLogChunks.length ? '\n' + _subLogChunks.join ('\n') : '') +
-											(_buildError ? _logIndent + '\nERROR: ' + _buildError : '')
+										_log = {
+											url:_url,
+											built:!_buildError,
+											handlerModule:_matchingHandler.moduleName,
+											duration:Uize.now () - _startTime,
+											builderInputs:_builderInputs
+										};
+										if (_subLogs.length)
+											_log.subLogs = _subLogs
+										;
+										if (_buildError)
+											_log.buildError = _buildError
 										;
 										if (_buildError) {
 											console.log (_buildError);
@@ -392,17 +396,17 @@ Uize.module ({
 											throw _buildError;
 										}
 									} else {
-										_log =
-											_logIndent + 'file is current: ' + _url + '\n' +
-											_logIndent + '\thandler: ' + _matchingHandler.description + '\n' +
-											_logIndent + '\tduration: ' + (Uize.now () - _startTime) + '\n'
-										;
+										_log = {
+											url:_url,
+											built:false,
+											handlerModule:_matchingHandler.moduleName,
+											duration:Uize.now () - _startTime
+										};
 										_filesConsideredCurrentLookup [_url] = _trueFlag;
 									}
 								}
 							}
 						}
-						_chainDepth--;
 						return _log;
 					}
 
@@ -412,15 +416,15 @@ Uize.module ({
 					;
 					var
 						_url = _params.url,
-						_logChunks = []
+						_log = []
 					;
 					Uize.isArray (_url)
-						? Uize.forEach (_url,function (_url) {_logChunks.push (_ensureFileCurrent (_pathPrefix + _url))})
-						: _logChunks.push (_ensureFileCurrent (_pathPrefix + _url))
+						? Uize.forEach (_url,function (_url) {_log.push (_ensureFileCurrent (_pathPrefix + _url))})
+						: _log.push (_ensureFileCurrent (_pathPrefix + _url))
 					;
-					var _log = _logChunks.join ('\n');
-					console.log (_log);
-					_callback && _callback (_log);
+					var _logAsJson = Uize.Json.to (_log,{keyDelimiter:': ',indentChars:'  '});
+					console.log (_logAsJson);
+					_callback && _callback (_logAsJson);
 				}
 			}
 		});

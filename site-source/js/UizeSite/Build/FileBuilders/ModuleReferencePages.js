@@ -43,7 +43,7 @@ Uize.module ({
 				return false;
 			}
 		}
-		return {
+		return Uize.package ({
 			description:'Module reference page',
 			urlMatcher:function (_urlParts) {
 				var _this = this;
@@ -112,7 +112,7 @@ Uize.module ({
 					}
 				);
 			}
-		};
+		});
 	}
 });
 

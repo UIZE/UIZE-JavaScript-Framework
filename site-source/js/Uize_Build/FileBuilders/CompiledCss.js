@@ -33,7 +33,7 @@ Uize.module ({
 		'Uize.Template'
 	],
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Compiled CSS files, generated from .csst files',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -65,7 +65,7 @@ Uize.module ({
 				Uize.require (_template.required);
 				return _template.templateFunction ();
 			}
-		};
+		});
 	}
 });
 

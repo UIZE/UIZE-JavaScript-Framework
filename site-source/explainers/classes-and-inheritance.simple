@@ -61,12 +61,33 @@ Creating Classes
 		verboseRectangle.displayArea ();  // alerts "The area is: 75 (5 x 15)"
 		..........................................................................................
 
-### Creating Instances
-	Optional "new" Keyword
-		.
+Creating Instances
+	When you create a class that calling the =Uize.Class.subclass= method, either on the =Uize.Class= base class or a subclass of it, creating instances is more convenient than regular classes.
+
+	The "new" Keyword is Optional
+		The =Uize.Class= base class implements a novel mechanism for constructors that makes the "new" keyword optional when creating instances.
+
+		This means that you can use the "new" keyword or not, and the end result will be the same.
+
+		THIS...
+		............................
+		var myInstance = MyClass ();
+		............................
+
+		IS EQUIVALENT TO...
+		................................
+		var myInstance = new MyClass ();
+		................................
 
 	State Replaces Constructor Arguments
-		.
+		The =Uize.Class= base class standardizes the constructor signature for all classes to an optional object that specifies initial state for a newly created instance.
+
+		EXAMPLE
+		................................................
+		var rectangle = Rectangle ({width:5,height:15});
+		................................................
+
+		This design choice focuses the design of classes on exposing anything that might affect construction through the `state properties system`, leading to better designed class interfaces. Being an object, the initial state object also allows state properties to be specified in any order, as well as allowing initial instance state for any and all properties to be optionally specified with sensible defaulting defined for state properties in the class' implementation. In contrast, the traditional approach to constructor arguments often suffers from increasingly complicated overloading of the constructor function as a class evolves to become richer.
 
 Declaring Features
 	For convenience, UIZE provides a few different ways of declaring a class' features to suit different situations.
@@ -1010,6 +1031,9 @@ Class-specific Feature Types
 
 Constructor Mechanism
 	When an instance of a UIZE class is created, construction involves three phases: the =alphastructor= phase, the state property initialization phase, and the =omegastructor= phase.
+
+	### The "no new" Mechanism
+		.
 
 	### No Constructor Arguments, in the Traditional Sense
 		.

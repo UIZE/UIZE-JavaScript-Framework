@@ -38,7 +38,7 @@ Uize.module ({
 			_metaDataCommentRegExp = /\/\*\s*Module\s*Meta\s*Data/i
 		;
 
-		return {
+		return Uize.package ({
 			description:'In-memory module metadata object',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -85,7 +85,7 @@ Uize.module ({
 				;
 				return _metaData;
 			}
-		};
+		});
 	}
 });
 

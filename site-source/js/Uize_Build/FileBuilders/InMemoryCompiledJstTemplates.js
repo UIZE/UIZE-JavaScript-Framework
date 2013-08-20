@@ -29,7 +29,7 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.InMemoryCompiledJstTemplates',
 	required:'Uize.Template',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'In-memory compiled JST templates',
 			urlMatcher:function (_urlParts) {
 				return this.isMemoryUrl (_urlParts.pathname) && _urlParts.fileType == 'jst';
@@ -42,7 +42,7 @@ Uize.module ({
 				Uize.require (_template.required);
 				return _template.templateFunction;
 			}
-		};
+		});
 	}
 });
 

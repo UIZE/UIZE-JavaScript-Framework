@@ -31,7 +31,7 @@ Uize.module ({
 	builder:function () {
 		var _examplesDataModuleName = 'UizeSite.Examples';
 
-		return {
+		return Uize.package ({
 			description:'Generated UizeSite.Examples module under temp',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.tempUrl (this.getModuleUrl (_examplesDataModuleName));
@@ -45,7 +45,7 @@ Uize.module ({
 					this.readFile ({path:_inputs.filesIndex})
 				);
 			}
-		};
+		});
 	}
 });
 

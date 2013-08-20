@@ -30,7 +30,7 @@ Uize.module ({
 	builder:function () {
 		var _examplesByModuleFile = 'javascript-examples-by-module.html';
 
-		return {
+		return Uize.package ({
 			description:'JavaScript examples by module index page',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.builtUrl (_examplesByModuleFile);
@@ -46,7 +46,7 @@ Uize.module ({
 					examples:this.readFile ({path:_inputs.examplesIndex})}
 				);
 			}
-		};
+		});
 	}
 });
 

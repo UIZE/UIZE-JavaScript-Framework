@@ -37,7 +37,7 @@ Uize.module ({
 			return _this.sourceUrl (_this.getModuleUrl (_urlParts.fileName,false) + '.todo');
 		}
 
-		return {
+		return Uize.package ({
 			description:'SimpleDoc pages',
 			urlMatcher:function (_urlParts) {
 				return (
@@ -72,7 +72,7 @@ Uize.module ({
 					_simpleDocTemplate
 				);
 			}
-		};
+		});
 	}
 });
 

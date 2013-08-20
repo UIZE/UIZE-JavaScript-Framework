@@ -29,7 +29,7 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.DirectoryPage',
 	required:'UizeSite.SiteMap',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Directory page',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.builtUrl ('directory.html');
@@ -49,7 +49,7 @@ Uize.module ({
 					})
 				});
 			}
-		};
+		});
 	}
 });
 

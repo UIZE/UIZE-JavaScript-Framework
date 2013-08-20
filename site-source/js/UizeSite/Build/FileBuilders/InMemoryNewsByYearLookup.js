@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryNewsByYearLookup',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'News-by-year lookup',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.memoryUrl ('news-by-year');
@@ -50,7 +50,7 @@ Uize.module ({
 				}
 				return _newsByYearLookup;
 			}
-		};
+		});
 	}
 });
 

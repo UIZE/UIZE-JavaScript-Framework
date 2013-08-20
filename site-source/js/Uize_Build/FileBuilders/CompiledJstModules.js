@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.Build.Util'
 	],
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Compiled JST modules, generated from .js.jst files',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -58,7 +58,7 @@ Uize.module ({
 					this.readFile ({path:_jstSource})
 				);
 			}
-		};
+		});
 	}
 });
 

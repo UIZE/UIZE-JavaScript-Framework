@@ -39,7 +39,7 @@ Uize.module ({
 			_cssSourceExtension = '.csst'
 		;
 
-		return {
+		return Uize.package ({
 			description:'Module source code pages',
 			urlMatcher:function (_urlParts) {
 				return (
@@ -74,7 +74,7 @@ Uize.module ({
 					body:this.readFile ({path:_sourceCode})
 				});
 			}
-		};
+		});
 	}
 });
 

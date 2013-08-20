@@ -33,7 +33,7 @@ Uize.module ({
 		'Uize.Url'
 	],
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'SimpleDoc pages',
 			urlMatcher:function (_urlParts) {
 				return (
@@ -68,7 +68,7 @@ Uize.module ({
 					_inputs.simpleDocTemplate
 				);
 			}
-		};
+		});
 	}
 });
 

@@ -61,7 +61,10 @@ Uize.module ({
 		'UizeSite.Build.FileBuilders.TempModulesTreeModule',
 		'UizeSite.Build.FileBuilders.TempExamplesModule',
 		'UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule',
-		'UizeSite.Build.FileBuilders.WidgetsToGoPages',
+		'UizeSite.Build.FileBuilders.WidgetsToGo.GoogleGadgetXmlPages',
+		'UizeSite.Build.FileBuilders.WidgetsToGo.IndexPage',
+		'UizeSite.Build.FileBuilders.WidgetsToGo.WidgetHomepages',
+		'UizeSite.Build.FileBuilders.WidgetsToGo.WidgetIframePages',
 		'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
 		'Uize.Build.FileBuilders.InMemoryHtmlInfo',
 		'UizeSite.Build.FileBuilders.IndexPages.JavaScriptModules',
@@ -105,7 +108,10 @@ Uize.module ({
 					);
 					_superclass.doMy (this,'init',[{},Uize.nop]);
 					this.registerFileBuilders (
-						UizeSite.Build.FileBuilders.WidgetsToGoPages,
+						UizeSite.Build.FileBuilders.WidgetsToGo.GoogleGadgetXmlPages,
+						UizeSite.Build.FileBuilders.WidgetsToGo.IndexPage,
+						UizeSite.Build.FileBuilders.WidgetsToGo.WidgetHomepages,
+						UizeSite.Build.FileBuilders.WidgetsToGo.WidgetIframePages,
 						UizeSite.Build.FileBuilders.GoogleCodeSitemap,
 						Uize.Build.FileBuilders.InMemoryHtmlInfo,
 						UizeSite.Build.FileBuilders.IndexPages.JavaScriptModules,

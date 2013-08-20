@@ -30,7 +30,7 @@ Uize.module ({
 	builder:function () {
 		var _newsByYearRegExp = /^(news-(\d{4})|latest-news)$/;
 
-		return {
+		return Uize.package ({
 			description:'News-by-year index page',
 			urlMatcher:function (_urlParts) {
 				return (
@@ -55,7 +55,7 @@ Uize.module ({
 					files:_year ? _newsItems : _newsItems.slice (0,50)
 				});
 			}
-		};
+		});
 	}
 });
 

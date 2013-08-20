@@ -29,7 +29,7 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryExamplesInfoForSiteMap',
 	required:'Uize.Data.Matches',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'In-memory examples-info-for-sitemap object',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.memoryUrl ('examples-info-for-sitemap');
@@ -47,7 +47,7 @@ Uize.module ({
 					tools:Uize.map (_examplesByKeyword.tool,'{title:value.title,path:value.path}')
 				};
 			}
-		};
+		});
 	}
 });
 

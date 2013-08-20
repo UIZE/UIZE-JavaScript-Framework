@@ -31,7 +31,7 @@ Uize.module ({
 	builder:function () {
 		var _examplesInfoForSiteMapModuleName = 'UizeSite.ExamplesInfoForSiteMap';
 
-		return {
+		return Uize.package ({
 			description:'Generated UizeSite.ExamplesInfoForSiteMap module under temp',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.tempUrl (this.getModuleUrl (_examplesInfoForSiteMapModuleName));
@@ -45,7 +45,7 @@ Uize.module ({
 					this.readFile ({path:_inputs.examplesInfoForSiteMap})
 				);
 			}
-		};
+		});
 	}
 });
 

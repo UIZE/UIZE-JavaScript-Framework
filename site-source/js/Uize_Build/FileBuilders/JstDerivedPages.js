@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.JstDerivedPages',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Pages derived from JST template files',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -43,7 +43,7 @@ Uize.module ({
 			builder:function (_inputs) {
 				return this.readFile ({path:_inputs.jstTemplate}) ();
 			}
-		};
+		});
 	}
 });
 

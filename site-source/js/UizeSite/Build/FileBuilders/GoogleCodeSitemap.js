@@ -29,7 +29,7 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
 	required:'Uize.Build.Util',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Google Code sitemap',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.builtUrl ('sitemap-code.xml');
@@ -40,7 +40,7 @@ Uize.module ({
 			builder:function (_inputs) {
 				return this.readFile ({path:_inputs.template}) ({modules:Uize.Build.Util.getJsModules (this.params)});
 			}
-		};
+		});
 	}
 });
 

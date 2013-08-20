@@ -30,7 +30,7 @@ Uize.module ({
 	required:'Uize.Url',
 	builder:function () {
 		var _htmlSimpledataFileExtensionRegExp = /\.html\.simpledata$/;
-		return {
+		return Uize.package ({
 			description:'HTML Pages Derived from .html.simpledata Files',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -55,7 +55,7 @@ Uize.module ({
 			builder:function (_inputs) {
 				return this.readFile ({path:_inputs.jstTemplate}) (this.readFile ({path:_inputs.simpledata}));
 			}
-		};
+		});
 	}
 });
 

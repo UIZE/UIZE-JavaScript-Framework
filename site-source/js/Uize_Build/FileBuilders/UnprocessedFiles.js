@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.UnprocessedFiles',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Files that are unprocessed',
 			urlMatcher:function (_urlParts) {
 				return (
@@ -40,7 +40,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				return {sourcePath:this.sourceUrlFromBuiltUrl (_urlParts.pathname)};
 			}
-		};
+		});
 	}
 });
 

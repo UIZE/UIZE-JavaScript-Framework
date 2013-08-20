@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.LatestNewsRssFeed',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Latest news RSS feed',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.builtUrl ('latest-news.rss');
@@ -54,7 +54,7 @@ Uize.module ({
 					)
 				});
 			}
-		};
+		});
 	}
 });
 

@@ -39,7 +39,7 @@ Uize.module ({
 			);
 		}
 
-		return {
+		return Uize.package ({
 			description:'SOTU (State of the UIZE) page',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.builtUrl ('appendixes/sotu.html');
@@ -120,7 +120,7 @@ Uize.module ({
 				}
 				return _this.readFile ({path:_inputs.jstSource}) ({modules:_modules});
 			}
-		};
+		});
 	}
 });
 

@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.Build.Util'
 	],
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'In-memory modules tree object',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.memoryUrl ('modules-tree');
@@ -40,7 +40,7 @@ Uize.module ({
 			builder:function () {
 				return Uize.Data.PathsTree.fromList (Uize.Build.Util.getJsModules (this.params),'.');
 			}
-		};
+		});
 	}
 });
 

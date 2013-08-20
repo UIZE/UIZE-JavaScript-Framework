@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryExamplesByKeywordLookup',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Examples-by-keyword lookup',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.memoryUrl ('examples-by-keyword');
@@ -64,7 +64,7 @@ Uize.module ({
 				}
 				return _examplesByKeyword;
 			}
-		};
+		});
 	}
 });
 

@@ -31,7 +31,7 @@ Uize.module ({
 	builder:function () {
 		var _htmlInfoExtensionRegExp = /\.html\.info$/;
 
-		return {
+		return Uize.package ({
 			description:'In-memory HTML page info object',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -50,7 +50,7 @@ Uize.module ({
 				_info.path = _info.path.slice (this.params.builtPath.length + 1);
 				return _info;
 			}
-		};
+		});
 	}
 });
 

@@ -51,7 +51,7 @@ Uize.module ({
 				'*/\n\n'
 		;
 
-		return {
+		return Uize.package ({
 			description:'JavaScript library modules',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -142,7 +142,7 @@ Uize.module ({
 					_libraryFileContents.slice (_contentsCommentEndPos + 2)
 				);
 			}
-		};
+		});
 	}
 });
 

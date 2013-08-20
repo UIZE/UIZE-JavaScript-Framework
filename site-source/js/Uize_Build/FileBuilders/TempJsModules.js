@@ -29,7 +29,7 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.TempJsModules',
 	required:'Uize.Build.Util',
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'Regular JavaScript modules under temp',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
@@ -42,7 +42,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				return {sourceJs:this.sourceUrlFromTempUrl (_urlParts.pathname)};
 			}
-		};
+		});
 	}
 });
 

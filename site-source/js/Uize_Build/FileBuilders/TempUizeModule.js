@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.Json'
 	],
 	builder:function () {
-		return {
+		return Uize.package ({
 			description:'The Uize JavaScript base module under temp',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.pathname == this.tempUrl (this.params.modulesFolder + '/Uize.js');
@@ -52,7 +52,7 @@ Uize.module ({
 					');\n'
 				);
 			}
-		};
+		});
 	}
 });
 
