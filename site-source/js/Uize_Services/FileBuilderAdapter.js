@@ -378,7 +378,7 @@ Uize.module ({
 										_log = {
 											url:_url,
 											built:!_buildError,
-											handlerModule:_matchingHandler.moduleName,
+											fileBuilder:_matchingHandler.moduleName || _matchingHandler.description,
 											duration:Uize.now () - _startTime,
 											builderInputs:_builderInputs
 										};
@@ -399,7 +399,7 @@ Uize.module ({
 										_log = {
 											url:_url,
 											built:false,
-											handlerModule:_matchingHandler.moduleName,
+											fileBuilder:_matchingHandler.moduleName || _matchingHandler.description,
 											duration:Uize.now () - _startTime
 										};
 										_filesConsideredCurrentLookup [_url] = _trueFlag;
