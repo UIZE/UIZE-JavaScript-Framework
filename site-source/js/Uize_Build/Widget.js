@@ -29,7 +29,7 @@
 		- superclass: optional, defaults to Uize.Widget.V2
 		- hasHtml: false|true, defaults to true
 		- hasCss: false|true, defaulst to true
-		- hasImages: false|true, defaults to false
+		- hasAssets: false|true, defaults to false
 		- developers: comma-separated list of developers
 */
 
@@ -59,7 +59,7 @@ Uize.module ({
 				_developers = _developers ? _developers.split (',') : [];
 
 				function _getModulePath (_moduleName,_sourceType) {
-					return _modulesPath + Uize.modulePathResolver (_moduleName) + '.' + (_sourceType || 'js');
+					return _modulesPath + Uize.modulePathResolver (_moduleName) + (_sourceType ? ('.' + _sourceType) : '');
 				}
 				/*** create the HTML module's source .js.jst file, if necessary ***/
 					_hasHtml && _fileSystem.writeFile ({
@@ -88,9 +88,9 @@ Uize.module ({
 					});
 
 				/*** create the CSS assets folder, if necessary ***/
-					if (_params.hasImages + '' == 'true') {
-						// TODO: make the Css folder
-					}
+					if (_params.hasAssets + '' == 'true')
+						_fileSystem.makeFolder ({path:_getModulePath (_namespace + '.Css')})
+					;
 
 				/*** create the JavaScript modules ***/
 					var
@@ -115,7 +115,7 @@ Uize.module ({
 							function _createJavaScriptModule (_moduleType,_templateParams) {
 								var _moduleName = _namespace + '.' + _moduleType;
 								_fileSystem.writeFile ({
-									path:_getModulePath (_moduleName),
+									path:_getModulePath (_moduleName,'js'),
 									contents:Uize.Build.Templates.Module.Widget [_moduleType].process (
 										Uize.copyInto (
 											{
