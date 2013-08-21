@@ -409,13 +409,6 @@ Uize.module ({
 					function () {
 						var _flo = this;
 						if (_flo.keyNo == undefined) { // do one time initialization
-							/* TODO:
-								if for loop is each style...
-									- support iterator
-									- support number of iterations
-									- support range
-									- could support all these by coming up with a universal iterator wrapper and using it as authority
-							*/
 							var
 								_items = _flo.items = _flo.result,
 								_itemsIsArray = _flo.itemsIsArray = _eachStyle && Uize.isArray (_items)

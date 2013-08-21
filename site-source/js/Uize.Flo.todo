@@ -1,3 +1,5 @@
+This is a TO DO document for the =Uize.Flo= module.
+
 Get it Ready for Release
 	- finish up implementation
 	- finish documentation
@@ -34,6 +36,13 @@ Unresolved Issues
 	- what is the impact of recursion?
 		- probably the flo stack will increase in much the same way as the call stack would increase with traditional synchronous recursion
 		- is it possible to implement tail recursion optimization?
+
+Uize.Flo.forEach
+	Support the following additional items types...
+		- iterator (synchronous, as well as asynchronous)
+		- total iterations
+		- range specifier
+		- could support all these by coming up with a universal (a)sync iterator wrapper and using it as authority
 
 Optimization
 	- for the synchronous execution call stack optimization, consider extending it to span across flos and flo levels, so that a nested scope structure can be executed through in a single loop

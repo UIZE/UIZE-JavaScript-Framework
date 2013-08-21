@@ -23,10 +23,6 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-/* TODO:
-	The _modifyClassesStaticMethodTest and _modifyClassesStaticMethodsTest methods are very similar in spirit to the Uize.Test.staticMethodTest and Uize.Test.staticMethodsTest methods of the Uize.Test class. Perhaps this pattern could be formalized with some refactoring so that there isn't so much duplication of code in test modules like this.
-*/
-
 Uize.module ({
 	name:'Uize.Test.Uize.Node.Classes',
 	builder:function () {
