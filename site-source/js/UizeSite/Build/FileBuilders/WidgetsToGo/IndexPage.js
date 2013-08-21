@@ -29,6 +29,7 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.WidgetsToGo.IndexPage',
 	required:'UizeSite.Build.FileBuilders.WidgetsToGo',
 	builder:function () {
+		var _widgetsToGoPath = UizeSite.Build.FileBuilders.WidgetsToGo.widgetsToGoPath;
 		return Uize.package ({
 			description:'Widgets To Go index page',
 			urlMatcher:function (_urlParts) {
@@ -37,7 +38,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				return {
 					template:this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst',
-					widgets:this.memoryUrl (UizeSite.Build.FileBuilders.WidgetsToGo.widgetsToGoPath + 'widgets.simpledata')
+					widgets:this.memoryUrl (_widgetsToGoPath + 'widgets.simpledata')
 				};
 			},
 			builder:function (_inputs) {
@@ -48,7 +49,7 @@ Uize.module ({
 							var _widgetTitleUrlized = UizeSite.Build.FileBuilders.WidgetsToGo.urlizeWidgetTitle (_widget);
 							return {
 								title:_widget.title,
-								path:UizeSite.Build.FileBuilders.WidgetsToGo + _widgetTitleUrlized + '.html',
+								path:_widgetsToGoPath + _widgetTitleUrlized + '.html',
 								imageSrc:'images/widgets/' + _widgetTitleUrlized + '-96x96.gif',
 								description:_widget.description.short
 							};
