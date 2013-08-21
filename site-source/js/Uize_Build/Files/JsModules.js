@@ -37,7 +37,8 @@ Uize.module ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
 					var
-						_fileSystem = this.fileSystem,
+						m = this,
+						_fileSystem = m.fileSystem,
 						_modulesFolder = _params.modulesFolder,
 						_sourcePath = _params.sourcePath,
 						_uizePath = _params.uizePath,
@@ -47,7 +48,7 @@ Uize.module ({
 						_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 					;
 					/*** add JavaScript modules located throughout site (not just modules folder) ***/
-						this.addFiles (
+						m.addFiles (
 							_fileSystem.getFiles ({
 								path:_sourcePath,
 								recursive:true,
@@ -58,7 +59,7 @@ Uize.module ({
 
 					/*** add JavaScript modules located in the UIZE modules folder (if not the UIZE Web site) ***/
 						_isUizeWebSite ||
-							this.addFiles (
+							m.addFiles (
 								_fileSystem.getFiles ({
 									path:_uizeModulesPath,
 									recursive:true,
@@ -73,19 +74,9 @@ Uize.module ({
 						;
 
 					/*** add URLs for generated namespace modules ***/
-						function _getFolderToModuleUrlTransformer (_modulesFolder,_modulePath) {
+						function _addFilesForGeneratedNamespaceModulesForFolders (_sourceModulesPath,_modulesFolder) {
 							var _moduleNameFromModulePath = Uize.Build.Util.moduleNameFromModulePath;
-							return function (_modulePath) {
-								return (
-									_modulesFolder + '/' +
-									Uize.modulePathResolver (_moduleNameFromModulePath (_modulePath)) +
-									'.js'
-								);
-							}
-						}
-
-						/*** add generated namespace modules for folders under site's modules folder ***/
-							this.addFiles (
+							m.addFiles (
 								_fileSystem.getFolders ({
 									path:_sourceModulesPath,
 									recursive:true,
@@ -97,28 +88,22 @@ Uize.module ({
 										*/
 										return true;
 									},
-									pathTransformer:_getFolderToModuleUrlTransformer (_modulesFolder)
+									pathTransformer:function (_modulePath) {
+										return (
+											_modulesFolder + '/' +
+											Uize.modulePathResolver (_moduleNameFromModulePath (_modulePath)) +
+											'.js'
+										);
+									}
 								})
 							);
+						}
 
-						/*** add generated namespace modules for folders under UIZE site's modules folder ***/
-							_isUizeWebSite ||
-								this.addFiles (
-									_fileSystem.getFolders ({
-										path:_uizeModulesPath,
-										recursive:true,
-										pathMatcher:function (_path) {
-											/* TODO:
-												for better efficiency, this should exclude...
-												- folders not under folder organized namespaces
-												- folders for which there are explicit corresponding JavaScript modules
-											*/
-											return true;
-										},
-										pathTransformer:_getFolderToModuleUrlTransformer ('js')
-									})
-								)
-							;
+						/*** folders under site's modules folder ***/
+							_addFilesForGeneratedNamespaceModulesForFolders (_sourceModulesPath,_modulesFolder);
+
+						/*** folders under UIZE site's modules folder ***/
+							_isUizeWebSite || _addFilesForGeneratedNamespaceModulesForFolders (_uizeModulesPath,'js');
 				}
 			}
 		});
