@@ -124,6 +124,11 @@ Uize.module ({
 						_callback (_fileSystemObject.FileExists (_path) || _fileSystemObject.FolderExists (_path));
 					},
 
+					makeFolder:function (_params,_callback) {
+						this._makeFolder (_params.path);
+						_callback ();
+					},
+
 					readFile:function (_params,_callback) {
 						var
 							_fileSystemObject = this._fileSystemObject,

@@ -181,6 +181,24 @@ Uize.module ({
 					*/
 				},
 
+				makeFolder:{
+					async:_false
+					/*?
+						Instance Methods
+							makeFolder
+								.
+
+								SYNTAX
+								..........................................
+								fileSystemInstance.makeFolder (paramsOBJ);
+								..........................................
+
+								Params
+									path
+										.
+					*/
+				},
+
 				readFile:{
 					async:_false
 					/*?

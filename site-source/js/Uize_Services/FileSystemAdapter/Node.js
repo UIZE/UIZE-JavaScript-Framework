@@ -138,6 +138,11 @@ Uize.module ({
 						_callback (this._pathExists (_params.path));
 					},
 
+					makeFolder:function (_params,_callback) {
+						this._makeFolder (_params.path);
+						_callback ();
+					},
+
 					readFile:function (_params,_callback) {
 						var
 							_fileSystem = this._fileSystem,
