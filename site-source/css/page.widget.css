@@ -74,12 +74,46 @@
 			display: none;
 		}
 
-	/*** menu ***/
+	/*** submenu ***/
 		.subMenuShell {
+			display: none;
+			position: absolute;
+			padding: 5px 0;
+			background: #fff;
+			border: 1px solid #dee;
+			border-right-color: #889094;
+			border-bottom-color: #889094;
+			box-shadow: 0 0 14px rgba(0,0,0,.3);
+			-moz-box-shadow: 0 0 14px rgba(0,0,0,.3);
+			-webkit-box-shadow: 0 0 14px rgba(0,0,0,.3);
+			max-height: 630px;
+			overflow: auto;
 			width: 222px;
+		}
+		.subMenuShell .subMenuItem,
+		.subMenuShell .subMenuItem:link,
+		.subMenuShell .subMenuItem:visited,
+		.subMenuShell .subMenuItem:hover,
+		.subMenuShell .subMenuItem:active
+		{
+			display: block;
+			padding: 3px 45px 4px 10px;
+			margin: 0 1px; /* NOTE: need a margin around links, or focus highlight causes menu shell to have scrollbars */
+			font-family: Arial;
+			font-size: 12px;
+			color: #000;
+			border: none;
+			text-decoration: none;
+			white-space: nowrap;
 		}
 		.subMenuShell .subMenuItem:hover {
 			color: #fff;
 			background-color: #456;
+		}
+		.subMenuShell .divider {
+			font-size: 0;
+			line-height: 0;
+			margin: 6px 10px;
+			border-top: solid 1px #ccc;
 		}
 
