@@ -738,6 +738,31 @@ Test Modules to Implement Next...
 	- =Uize.Test.Uize.Curve.Rubber=
 	- =Uize.Test.Uize.Curve.Mod=
 
+Function of X (fox)
+
+	...
+	Uize.fox = function (func) {
+		var fox = function (x) {
+			return func.call (x,Uize.copyList (arguments).slice (1));
+		};
+		fox.x = function () {
+			var args = arguments;
+			return function (x) {return func.apply (x,args)};
+		};
+		return fox;
+	};
+
+	var inRange = Uize.fox (
+		function (min,max) {
+			return this >= min && this <= max;
+		}
+
+	)
+
+	inRange (x,0,100);
+	inRange.x (0,100);
+	...
+
 Value Transformer Function
 	- a function that is flagged as a value transformer
 	- it is up to each function or method to determine if they will support value transformers or not
