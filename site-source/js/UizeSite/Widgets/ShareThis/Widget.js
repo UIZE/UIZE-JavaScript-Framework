@@ -77,6 +77,7 @@ Uize.module ({
 			},
 
 			stateProperties:{
+				url:{value:''}
 			}
 		});
 	}

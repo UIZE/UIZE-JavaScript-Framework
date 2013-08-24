@@ -133,30 +133,12 @@
 		'technorati'
 	);
 	_shareLink (
-		'Posterous',
-		'http://posterous.com/share',
-		{
-			linkto:input.url
-		},
-		'posterous'
-	);
-	_shareLink (
 		'Plurk',
 		'http://plurk.com/',
 		{
 			status:input.url
 		},
 		'plurk'
-	);
-	_shareLink (
-		'Ping.fm',
-		'http://ping.fm/ref/',
-		{
-			method:'microblog',
-			title:input.title,
-			link:input.url
-		},
-		'pingFm'
 	);
 	_shareLink (
 		'Diigo',
@@ -166,15 +148,6 @@
 			url:input.url
 		},
 		'diigo'
-	);
-	_shareLink (
-		'Faves',
-		'http://faves.com/Authoring.aspx',
-		{
-			t:input.title,
-			u:input.url
-		},
-		'faves'
 	);
 	_shareLink (
 		'Mister Wong',
@@ -196,16 +169,6 @@
 			description:input.description
 		},
 		'dzone'
-	);
-	_shareLink (
-		'Connotea',
-		'http://www.connotea.org/addpopup',
-		{
-			'continue':'confirm',
-			title:input.title,
-			uri:input.url
-		},
-		'connotea'
 	);
 %>
 </div>
