@@ -9,3 +9,10 @@
 	padding: 0 10px;
 }
 
+.`likeIframe` {
+	border: none;
+	overflow: hidden;
+	width: 100%;
+	height: 40px;
+}
+

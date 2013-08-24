@@ -43,12 +43,24 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
+			omegastructor:function () {
+				var _this = this;
+
+				if (typeof navigator != 'undefined') {
+					_this.set ({url:location.href});
+				}
+			},
+
 			set:{
 				html:UizeSite.Widgets.SiteAssistant.Html
 			},
 
 			staticProperties:{
 				cssModule:UizeSite.Widgets.SiteAssistant.Css
+			},
+
+			stateProperties:{
+				url:{value:''}
 			}
 		});
 	}

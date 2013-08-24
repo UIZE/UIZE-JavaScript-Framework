@@ -6,22 +6,39 @@
 		'UizeSite.Widgets.ShareThis.Widget'
 	);
 	input ({title:'string'});
-%>
-<div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
+%><%
+	@startBlock ('recommendThis');
+%>		<iframe
+			src="<%= Uize.Url.resolve ('//www.facebook.com/plugins/like.php',{href:input.url,width:189,height:35,colorscheme:'light',layout:'standard',action:'like',show_faces:false,send:true}) %>"
+			scrolling="no"
+			frameborder="0"
+			class="<%= m.cssClass ('likeIframe') %>"
+			allowTransparency="true"
+		></iframe><%
+	@endBlock ();
+%><div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
 	<div class="<%= m.cssClass ('box') %>"><%=
 		m.childHtml ({
-			name:'getInvolvedBox',
+			name:'recommendThisBox',
 			widgetClass:Uize.Widgets.BoxWithHeading.Widget,
-			heading:'NEED HELP?',
-			body:m.childHtml ({name:'getInvolved',widgetClass:UizeSite.Widgets.GetInvolved.Widget})
+			heading:'YOU LIKE?',
+			body:recommendThis ()
 		})
 	%></div>
 	<div class="<%= m.cssClass ('box') %>"><%=
 		m.childHtml ({
 			name:'shareThisBox',
 			widgetClass:Uize.Widgets.BoxWithHeading.Widget,
-			heading:'SHARE THIS LINK...',
+			heading:'YOU SHARE?',
 			body:m.childHtml ({name:'shareThis',widgetClass:UizeSite.Widgets.ShareThis.Widget})
+		})
+	%></div>
+	<div class="<%= m.cssClass ('box') %>"><%=
+		m.childHtml ({
+			name:'getInvolvedBox',
+			widgetClass:Uize.Widgets.BoxWithHeading.Widget,
+			heading:'NEED HELP?',
+			body:m.childHtml ({name:'getInvolved',widgetClass:UizeSite.Widgets.GetInvolved.Widget})
 		})
 	%></div>
 </div>
