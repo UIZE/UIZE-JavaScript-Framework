@@ -1,45 +1,27 @@
 <%@
 	required (
-		'Uize.Url',
 		'Uize.Widgets.BoxWithHeading.Widget',
 		'UizeSite.Widgets.GetInvolved.Widget',
+		'UizeSite.Widgets.LikeThis.Widget',
+		'UizeSite.Widgets.Follow.Widget',
 		'UizeSite.Widgets.ShareThis.Widget'
 	);
-	input ({title:'string'});
+	input ({url:'string'});
 %><%
-	@startBlock ('recommendThis');
-%>		<iframe
-			src="<%= Uize.Url.resolve ('//www.facebook.com/plugins/like.php',{href:input.url,width:189,height:35,colorscheme:'light',layout:'standard',action:'like',show_faces:false,send:true}) %>"
-			scrolling="no"
-			frameborder="0"
-			class="<%= m.cssClass ('likeIframe') %>"
-			allowTransparency="true"
-		></iframe><%
-	@endBlock ();
+	function _boxedChildWidget (_heading,_childName,_widgetClass) {%>
+		<div class="<%= m.cssClass ('box') %>"><%=
+			m.childHtml ({
+				name:_childName + 'Box',
+				widgetClass:Uize.Widgets.BoxWithHeading.Widget,
+				heading:_heading,
+				body:m.childHtml ({name:_childName,widgetClass:_widgetClass})
+			})
+		%></div><%
+	}
 %><div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
-	<div class="<%= m.cssClass ('box') %>"><%=
-		m.childHtml ({
-			name:'recommendThisBox',
-			widgetClass:Uize.Widgets.BoxWithHeading.Widget,
-			heading:'YOU LIKE?',
-			body:recommendThis ()
-		})
-	%></div>
-	<div class="<%= m.cssClass ('box') %>"><%=
-		m.childHtml ({
-			name:'shareThisBox',
-			widgetClass:Uize.Widgets.BoxWithHeading.Widget,
-			heading:'YOU SHARE?',
-			body:m.childHtml ({name:'shareThis',widgetClass:UizeSite.Widgets.ShareThis.Widget})
-		})
-	%></div>
-	<div class="<%= m.cssClass ('box') %>"><%=
-		m.childHtml ({
-			name:'getInvolvedBox',
-			widgetClass:Uize.Widgets.BoxWithHeading.Widget,
-			heading:'NEED HELP?',
-			body:m.childHtml ({name:'getInvolved',widgetClass:UizeSite.Widgets.GetInvolved.Widget})
-		})
-	%></div>
+	<% _boxedChildWidget ('YOU LIKE?','likeThis',UizeSite.Widgets.LikeThis.Widget); %>
+	<% _boxedChildWidget ('YOU FOLLOW?','follow',UizeSite.Widgets.Follow.Widget); %>
+	<% _boxedChildWidget ('YOU SHARE?','shareThis',UizeSite.Widgets.ShareThis.Widget); %>
+	<% _boxedChildWidget ('NEED HELP?','getInvolved',UizeSite.Widgets.GetInvolved.Widget); %>
 </div>
 

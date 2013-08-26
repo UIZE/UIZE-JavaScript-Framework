@@ -10,15 +10,6 @@
 <div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
 <%
 	_shareLink (
-		'Personal E-mail',
-		'mailto:',
-		{
-			subject:'Check this out',
-			body:input.title + '\n\n' + input.url
-		},
-		'email'
-	);
-	_shareLink (
 		'Facebook',
 		'http://www.facebook.com/share.php',
 		{
@@ -34,6 +25,18 @@
 			status:'Check out ' + input.title + ' over @uize ' + input.url
 		},
 		'twitter'
+	);
+	_shareLink (
+		'LinkedIn',
+		'http://www.linkedin.com/shareArticle',
+		{
+			mini:true,
+			title:input.title,
+			url:input.url,
+			summary:input.description,
+			source:'uize.com'
+		},
+		'linkedIn'
 	);
 	_shareLink (
 		'StumbleUpon',
@@ -73,6 +76,28 @@
 		'reddit'
 	);
 	_shareLink (
+		'Google Bookmarks',
+		'http://www.google.com/bookmarks/mark',
+		{
+			op:'edit',
+			title:input.title,
+			bkmk:input.url,
+			label:input.keywords,
+			annotation:input.description
+		},
+		'google'
+	);
+	_shareLink (
+		'Personal E-mail',
+		'mailto:',
+		{
+			subject:'Check this out',
+			body:input.title + '\n\n' + input.url
+		},
+		'email'
+	);
+	/*
+	_shareLink (
 		'FriendFeed',
 		'http://friendfeed.com/',
 		{
@@ -89,30 +114,6 @@
 			u:input.url
 		},
 		'mySpace'
-	);
-	_shareLink (
-		'Google Bookmarks',
-		'http://www.google.com/bookmarks/mark',
-		{
-			op:'edit',
-			title:input.title,
-			bkmk:input.url,
-			label:input.keywords,
-			annotation:input.description
-		},
-		'google'
-	);
-	_shareLink (
-		'LinkedIn',
-		'http://www.linkedin.com/shareArticle',
-		{
-			mini:true,
-			title:input.title,
-			url:input.url,
-			summary:input.description,
-			source:'uize.com'
-		},
-		'linkedIn'
 	);
 	_shareLink (
 		'Mixx',
@@ -170,6 +171,7 @@
 		},
 		'dzone'
 	);
+	*/
 %>
 </div>
 

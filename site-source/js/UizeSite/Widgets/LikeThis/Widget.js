@@ -1,10 +1,10 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Widgets.SiteAssistant.Widget Class
+|    /    O /   |    MODULE : UizeSite.Widgets.LikeThis.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2008-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -13,31 +13,31 @@
 	type: Class
 	importance: 1
 	codeCompleteness: 5
-	docCompleteness: 100
+	docCompleteness: 5
 */
 
 /*?
 	Introduction
-		The =UizeSite.Widgets.SiteAssistant.Widget= class implements a widget that lets users easily share a link to the page they are on, using a service of their choice.
+		The =UizeSite.Widgets.LikeThis.Widget= module implements a widget class.
 
-		*DEVELOPERS:* `Chris van Rensburg`
+		*DEVELOPERS:* 
 
 		Visual Sampler
-			Below is a visual sampler of the =UizeSite.Widgets.SiteAssistant.Widget= class...
+			Below is a visual sampler of the =UizeSite.Widgets.LikeThis.Widget= class...
 
-			.........................................................
+			.............................................
 			<< widget >>
 
-			widgetClass: UizeSite.Widgets.SiteAssistant.VisualSampler
-			.........................................................
+			widgetClass: UizeSite.Widgets.LikeThis.Widget
+			.............................................
 */
 
 Uize.module ({
-	name:'UizeSite.Widgets.SiteAssistant.Widget',
+	name:'UizeSite.Widgets.LikeThis.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
-		'UizeSite.Widgets.SiteAssistant.Html',
-		'UizeSite.Widgets.SiteAssistant.Css'
+		'UizeSite.Widgets.LikeThis.Html',
+		'UizeSite.Widgets.LikeThis.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -48,11 +48,11 @@ Uize.module ({
 			},
 
 			set:{
-				html:UizeSite.Widgets.SiteAssistant.Html
+				html:UizeSite.Widgets.LikeThis.Html
 			},
 
 			staticProperties:{
-				cssModule:UizeSite.Widgets.SiteAssistant.Css
+				cssModule:UizeSite.Widgets.LikeThis.Css
 			},
 
 			stateProperties:{
