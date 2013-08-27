@@ -30,6 +30,11 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
+				getPublicUrl:function () {
+					var _urlParts = Uize.Url.from (window.location.href);
+					return 'http://www.uize.com' + (_urlParts.protocol == 'file:' ? '' : _urlParts.pathname);
+				},
+					
 				getPathToRoot:function () {
 					var _homeLinkSrc = this.getNode ('homeLink').getAttribute ('href');
 					return _homeLinkSrc.slice (0,_homeLinkSrc.search (/[\w\-]+.html/));

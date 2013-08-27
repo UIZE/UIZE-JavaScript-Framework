@@ -61,7 +61,7 @@ Uize.module ({
 					};
 					_this.set ({
 						title:document.title.match (/^\s*(.*?)\s*(\||$)/) [1],
-						url:location.href,
+						url:(this.callInherited ('getPublicUrl') || Uize.nop) () || '',
 						keywords:_getMetaTagContent ('keywords'),
 						description:_getMetaTagContent ('description')
 					});

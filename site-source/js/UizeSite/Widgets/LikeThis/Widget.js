@@ -44,7 +44,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				typeof navigator != 'undefined' && this.set ({url:location.href});
+				this.set ({url:(this.callInherited ('getPublicUrl') || Uize.nop) () || ''});
 			},
 
 			set:{

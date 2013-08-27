@@ -43,20 +43,12 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				typeof navigator != 'undefined' && this.set ({url:location.href});
-			},
-
 			set:{
 				html:UizeSite.Widgets.SiteAssistant.Html
 			},
 
 			staticProperties:{
 				cssModule:UizeSite.Widgets.SiteAssistant.Css
-			},
-
-			stateProperties:{
-				url:{value:''}
 			}
 		});
 	}
