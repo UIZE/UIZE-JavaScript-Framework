@@ -137,7 +137,7 @@
 
 				EXAMPLE
 				...............................................................
-				page.addChildren (
+				page.addChild (
 					'imageSwap',
 					Uize.Widget.Swap.Image,
 					{
