@@ -298,7 +298,7 @@ Uize.module ({
 							_log = {
 								url:_url,
 								built:false,
-								duration:Uize.now () - _startTime
+								duration:Uize.since (_startTime)
 							};
 						} else {
 							var
@@ -379,7 +379,7 @@ Uize.module ({
 											url:_url,
 											built:!_buildError,
 											fileBuilder:_matchingHandler.moduleName || _matchingHandler.description,
-											duration:Uize.now () - _startTime,
+											duration:Uize.since (_startTime),
 											builderInputs:_builderInputs
 										};
 										if (_subLogs.length)
@@ -400,7 +400,7 @@ Uize.module ({
 											url:_url,
 											built:false,
 											fileBuilder:_matchingHandler.moduleName || _matchingHandler.description,
-											duration:Uize.now () - _startTime
+											duration:Uize.since (_startTime)
 										};
 										_filesConsideredCurrentLookup [_url] = _trueFlag;
 									}

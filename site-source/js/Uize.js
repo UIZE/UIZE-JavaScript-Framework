@@ -123,6 +123,7 @@
 					- =Uize.quarantine= - generates a quarantined version of the supplied function
 					- =Uize.resolveTransformer= - resolves the specified transformer (of any type) to a transformer function
 					- =Uize.substituteInto= - substitutes one or more substitution values into a string
+					- =Uize.since= - returns the amount of time in milliseconds since the specified date
 
 			Quarantined Code Execution
 				The =Uize= module provides static methods to facilitate the quarantined execution of JavaScript code, which can be divided into two types: `quarantined code evaluation` and `quarantined nested functions`.
@@ -5942,6 +5943,47 @@ Uize = (function () {
 						Using the above template, the value of the =duration= variable will indicate how long it took to perform the operations in the block between assigning the value for the =start= variable and the value for the =duration= variable.
 			*/
 		);
+
+		_package.since = function (_date) {
+			return Uize.now () - _date;
+			/*?
+				Static Methods
+					Uize.since
+						Returns an integer, representing the amount of time (in milliseconds) that has elapsed since the specified date.
+
+						SYNTAX
+						.........................................
+						elapsedMsINT = Uize.since (dateOBJorINT);
+						.........................................
+
+						The value provided for the =dateOBJorINT= parameter can be either a reference to an instance of JavaScript's built-in =Date= object, or an integer representing milliseconds since 1970 (POSIX time). The =Uize.since= method provides a semantically elegant way of dealing with the timing of processes in JavaScript and is provided merely as syntactic sugar.
+
+						INSTEAD OF...
+						..............................................
+						var start = Uize.now ();
+
+						// ... ... ... ... ... ... ... ... ... ... ...
+						// do some stuff that may take a bunch of time
+						// ... ... ... ... ... ... ... ... ... ... ...
+
+						var duration = Uize.now () - start;
+						..............................................
+
+						USE...
+						..............................................
+						var start = Uize.now ();
+
+						// ... ... ... ... ... ... ... ... ... ... ...
+						// do some stuff that may take a bunch of time
+						// ... ... ... ... ... ... ... ... ... ... ...
+
+						var duration = Uize.since (start);
+						..............................................
+
+						NOTES
+						- see the companion =Uize.now= static method
+			*/
+		};
 
 	/*** Public Static Properties ***/
 		_package.moduleUrlTemplate = _getPathToLibrary ('Uize.js',_modulePathToken);

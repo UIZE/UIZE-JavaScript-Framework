@@ -122,8 +122,6 @@ More Concise
 
 	In the above example, we are adding multiple button child widgets of the same widget class and of the same size (as specified in the =size= state property). Rather than calling the =addChild= method multiple times, each time passing the same common property values, we can use the =addChildren= method and tale advantage of its optional =commonPropertiesOBJ= parameter to avoid having to repeat the property values that are common to all the button child widgets.
 
-
-
 ....................................................................................
 << metadata >>
 

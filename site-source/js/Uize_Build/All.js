@@ -60,7 +60,7 @@ Uize.module ({
 							alert (
 								_buildError
 									? ('BUILD FAILED IN THE FOLLOWING SCRIPT:\n\n' + _buildError.script)
-									: 'BUILD ALL COMPLETE!!! (duration: ' + Math.round ((Uize.now () - _startTime) / 1000) + 's)'
+									: 'BUILD ALL COMPLETE!!! (duration: ' + Math.round (Uize.since (_startTime) / 1000) + 's)'
 							)
 						;
 					}

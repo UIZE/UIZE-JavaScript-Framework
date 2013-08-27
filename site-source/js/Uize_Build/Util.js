@@ -605,7 +605,7 @@ Uize.module ({
 											!_dryRun && _outputText != _undefined &&
 												_fileSystem.writeFile ({path:_targetFilePath,contents:_outputText})
 											;
-											_buildDuration = Uize.now () - _timeBeforeBuild;
+											_buildDuration = Uize.since (_timeBeforeBuild);
 										}
 										_logChunks.push (
 											(_buildReason ? '***** ' : '') + _sourceFilePath + '\n' +

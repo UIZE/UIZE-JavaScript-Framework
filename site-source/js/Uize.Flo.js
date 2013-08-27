@@ -470,7 +470,7 @@ Uize.module ({
 							}
 						}
 						if (_flo.isSynchronous) {
-							if (_breathe && Uize.now () - _breathe.lastBreath >= (_breathe.breatheAfter || 0)) {
+							if (_breathe && Uize.since (_breathe.lastBreath) >= (_breathe.breatheAfter || 0)) {
 								_flo.isSynchronous = false;
 								setTimeout (_flo.floNext,_breathe.breatheFor || 0);
 							}

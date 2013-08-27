@@ -100,7 +100,7 @@ Uize.module ({
 							_response.writeHead (404,{'Content-Type':'text/html'});
 						}
 						_response.end (_fileContents);
-						console.log ('PAGE DELIVERY TIME: ' + _requestUrl + ' (' + (Uize.now () - _startTime) + ')\n');
+						console.log ('PAGE DELIVERY TIME: ' + _requestUrl + ' (' + Uize.since (_startTime) + ')\n');
 					}
 				).listen (_port,_host);
 
