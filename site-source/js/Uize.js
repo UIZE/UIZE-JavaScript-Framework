@@ -589,7 +589,7 @@ Uize = (function () {
 		};
 
 		_package.inRange = function (_value,_limitA,_limitB) {
-			return _value == _package.constrain (_value,_limitA,_limitB);
+			return _value == _constrain (_value,_limitA,_limitB);
 			/*?
 				Static Methods
 					Uize.inRange
