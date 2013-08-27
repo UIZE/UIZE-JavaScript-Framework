@@ -1,0 +1,131 @@
+The new =addChildren= instance method, implemented in the =Uize.Widget.V2= class, lets you conveniently add multiple child widgets in a single method call, by specifying the children in an object that maps child names to child properties.
+
+DIFFERENT USAGES
+
+`Add Multiple Child Widgets`
+.....................................
+myInstance.addChildren (childrenOBJ);
+.....................................
+
+`Add Multiple Child Widgets, Specifying Properties That Are Common to All`
+.........................................................
+myInstance.addChildren (childrenOBJ,commonPropertiesOBJ);
+.........................................................
+
+Add Multiple Child Widgets
+	Multiple child widgets can be added in a single call, by specifying a single =childrenOBJ= parameter.
+
+	SYNTAX
+	.....................................
+	myInstance.addChildren (childrenOBJ);
+	.....................................
+
+	The value of the =childrenOBJ= parameter should be an object, where the name of a property should be the name of a child widget, and where the value of a property should be an object specifying values for a child widget's state properties. The widget class for a child widget should be specified using the special =widgetClass= widget property.
+
+	EXAMPLE
+	......................................
+	this.addChildren ({
+		ok:{
+			text:'OK',
+			widgetClass:Uize.Widgets.Button,
+			size:'small'
+		},
+		cancel:{
+			text:'CANCEL',
+			widgetClass:Uize.Widgets.Button,
+			size:'small'
+		},
+		reset:{
+			text:'RESET',
+			widgetClass:Uize.Widgets.Button,
+			size:'small'
+		}
+	});
+	......................................
+
+	In the above example, the =addChildren= method is being used to add three button child widgets.
+
+Add Multiple Child Widgets, Specifying Properties That Are Common to All
+	Multiple child widgets can be added in a single call, without repeating widget property values that are common to all children being added, by specifying the common property values in the optional =commonPropertiesOBJ= parameter.
+
+	SYNTAX
+	.........................................................
+	myInstance.addChildren (childrenOBJ,commonPropertiesOBJ);
+	.........................................................
+
+	EXAMPLE
+	......................................
+	this.addChildren (
+		{
+			ok:{text:'OK'},
+			cancel:{text:'CANCEL'},
+			reset:{text:'RESET'}
+		},
+		{
+			widgetClass:Uize.Widgets.Button,
+			size:'small'
+		}
+	);
+	......................................
+
+	In the above example, the =addChildren= method is being used to add three button child widgets of the same =Uize.Widgets.Button= widget class and with the same ='small'= value for their =size= state property. Because the widget class and size are the same for all the buttons being added, these values can be specified using the optional =commonPropertiesOBJ= parameter so that the values don't need to be repeated in the child properties object for each of the child widgets.
+
+More Concise
+	Using the =addChildren= method can produce more concise code in situations where you are adding multiple child widgets that share some common properties.
+
+	Consider the following example of adding multiple button child widgets...
+
+	INSTEAD OF...
+	.......................
+	this.addChild (
+		'ok',
+		Uize.Widgets.Button,
+		{
+			text:'OK',
+			size:'small'
+		}
+	);
+
+	this.addChild (
+		'cancel',
+		Uize.Widgets.Button,
+		{
+			text:'CANCEL',
+			size:'small'
+		}
+	);
+
+	this.addChild (
+		'reset',
+		Uize.Widgets.Button,
+		{
+			text:'RESET',
+			size:'small'
+		}
+	);
+	.......................
+
+	USE...
+	......................................
+	this.addChildren (
+		{
+			ok:{text:'OK'},
+			cancel:{text:'CANCEL'},
+			reset:{text:'RESET'}
+		},
+		{
+			widgetClass:Uize.Widgets.Button,
+			size:'small'
+		}
+	);
+	......................................
+
+	In the above example, we are adding multiple button child widgets of the same widget class and of the same size (as specified in the =size= state property). Rather than calling the =addChild= method multiple times, each time passing the same common property values, we can use the =addChildren= method and tale advantage of its optional =commonPropertiesOBJ= parameter to avoid having to repeat the property values that are common to all the button child widgets.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2013-08-26 - New addChildren Instance Method for Uize.Widget.V2
+....................................................................................
