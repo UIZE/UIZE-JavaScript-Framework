@@ -36,6 +36,14 @@ Uize.module ({
 					heading:'5. Static Methods... 5.2. Uize.Color.cloneTuple',
 					body:'A method that is useful in the development of color space or encoding extensions, and that returns a tuple array, being a clone of the specified source tuple array.'
 				});
+				this.addStateTestCase ({
+					heading:'A Tooltip With No Body',
+					body:''
+				});
+				this.addStateTestCase ({
+					heading:'',
+					body:'This is a tooltip<br/>that has no heading.'
+				});
 			},
 
 			staticProperties:{

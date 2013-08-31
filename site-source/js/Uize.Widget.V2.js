@@ -27,7 +27,8 @@ Uize.module ({
 	name:'Uize.Widget.V2',
 	required:[
 		'Uize.Json',
-		'Uize.Node'
+		'Uize.Node',
+		'Uize.Xml'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -65,15 +66,6 @@ Uize.module ({
 					'var classSuffix = (nodeName || \'\') && \'-\' + nodeName;' +
 					'return ' + _classNameGeneratorStr + ';'
 				);
-			}
-
-			function _resolvePropertyUpdater (_propertyName,_updater) {
-				if (typeof _updater == 'string')
-					_updater = function (_propertyValue) {
-						this.setNodeInnerHtml (_propertyName,_propertyValue);
-					}
-				;
-				return _updater;
 			}
 
 		var _class = _superclass.subclass ({
@@ -415,13 +407,46 @@ Uize.module ({
 				},
 
 				htmlBindings:function (_bindings) {
+					function _resolvePropertyUpdater (_propertyName,_updater) {
+						if (typeof _updater == 'string') {
+							var
+								_nodeNameAndBindingType = _updater.split (':'),
+								_nodeName = _nodeNameAndBindingType [0],
+								_bindingType = _nodeNameAndBindingType [1]
+							;
+							if (!_bindingType) {
+								_updater = function (_propertyValue) {
+									this.setNodeInnerHtml (
+										_nodeName,
+										Uize.Xml.toAttributeValue (_propertyValue == null ? '' : _propertyValue)
+									);
+								};
+							} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
+								_updater = function (_propertyValue) {
+									this.setNodeInnerHtml (_nodeName,_propertyValue == null ? '' : _propertyValue);
+								};
+							} else if (_bindingType == '?') {
+								_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
+							} else {
+								_updater = function (_propertyValue) {
+									this.setNodeProperties (_nodeName,Uize.pairUp (_bindingType,_propertyValue));
+								};
+							}
+						}
+						return _updater;
+					}
 					var _htmlBindings = this._htmlBindings;
 					Uize.forEach (
 						_bindings,
 						function (_updater,_property) {
-							(_htmlBindings [_property] || (_htmlBindings [_property] = [])).push (
-								_resolvePropertyUpdater (_property,_updater)
-							);
+							var _propertyHtmlBindings = _htmlBindings [_property] || (_htmlBindings [_property] = []);
+							function _resolveAndPushUpdater (_updater) {
+								_propertyHtmlBindings.push (_resolvePropertyUpdater (_property,_updater));
+							}
+							Uize.isArray (_updater)
+								? Uize.forEach (_updater,_resolveAndPushUpdater)
+								: _resolveAndPushUpdater (_updater)
+							;
 						}
 					);
 					/*?

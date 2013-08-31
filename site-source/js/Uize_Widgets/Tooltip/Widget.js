@@ -47,11 +47,8 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				heading:'heading',
-				body:function (_body) {
-					this.setNodeInnerHtml ('body',_body || '');
-					this.displayNode ('body',!!_body);
-				}
+				heading:['heading:html','heading:?'],
+				body:['body:html','body:?']
 			}
 		});
 	}
