@@ -31,7 +31,8 @@
 				left: 0;
 				right: 0;
 				height: 130px;
-				border-bottom: 1px solid rgba(255,255,255,.25);
+				border-bottom: 1px solid rgba(0,0,0,.1);
+				box-shadow: 0 2px 20px rgba(0,0,0,.05);
 				z-index: 1;
 			}
 
@@ -41,7 +42,7 @@
 				width: 100%;
 				height: 100px;
 				background: #000 url(images/mantle6-bg.jpg) repeat-x left top;
-				box-shadow: 0 5px 20px rgba(0,0,0,.6);
+				box-shadow: 0 2px 5px rgba(0,0,0,.3);
 				z-index: 1;
 			}
 			.mantle, .mantle img {
@@ -63,8 +64,9 @@
 					left: 0;
 					right: 0;
 					height: 15px;
-					background: #3f4854;
+					background: #fff;
 					text-align: center;
+					font-weight: bold;
 				}
 				.headerLinks,
 				.headerLinks a,
@@ -73,10 +75,10 @@
 				.headerLinks a:hover,
 				.headerLinks a:active {
 					font-size: 12px;
-					color: #ccc;
+					color: #000;
 					border: none;
 					letter-spacing: 1px;
-					padding: 8px;
+					padding: 8px 15px;
 					padding-bottom: 7px;
 				}
 				.headerLinks a:hover,
@@ -131,44 +133,57 @@
 			}
 			.introContent {
 				padding-top: 30px;
-				background: #728088;
-				height: 410px;
+				height: 420px;
+				border-bottom: 1px solid #aaa;
+				box-shadow: 0 5px 25px rgba(0,0,0,.2);
+
+				/*** gradient ***/
+					background: rgb(238,238,238); /* Old browsers */
+					/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+					background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+					background: -moz-linear-gradient(top,  rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%); /* FF3.6+ */
+					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,1)), color-stop(100%,rgba(204,204,204,1))); /* Chrome,Safari4+ */
+					background: -webkit-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Chrome10+,Safari5.1+ */
+					background: -o-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Opera 11.10+ */
+					background: -ms-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* IE10+ */
+					background: linear-gradient(to bottom,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-8 */
 			}
 			.introContent h1 {
-				font-size: 24px;
-				font-weight: normal;
-				width: 850px;
-				margin: auto;
-				margin-top: 10px;
-				margin-bottom: 40px;
-				color: #eee;
-				text-shadow: 0 0 5px rgba(0,0,0,.5);
+				position: relative;
+				font-size: 20px;
+				width: 760px;
+				margin: 12px auto;
+				padding: 30px 20px;
+				text-align: center;
+				color: #444;
+				background: rgba(255,255,255,.5);
+				box-shadow: 0 0 50px #fff;
+			}
+			.introContent h1 .quote {
+				position: absolute;
+				font-style: italic;
+				font-size: 60px;
+				color: #bbb;
+			}
+			.introContent h1 .leftQuote {
+				top: 0;
+				left: 0;
+			}
+			.introContent h1 .rightQuote {
+				bottom: 0;
+				right: 0;
 			}
 			.introFeaturesLists table {
 				position: relative;
 				border: none;
 				border-collapse: collapse:
 				margin: 0;
-				padding: 35px 25px 25px 25px;
-				background: rgba(0,0,0,.15);
-				box-shadow: 8px 8px 30px -4px rgba(0,0,0,.2);
-				border-bottom: 1px solid rgba(0,0,0,.1);
-				border-right: 1px solid rgba(0,0,0,.1);
-			}
-			.introFeaturesListsHeading {
-				position: absolute;
-				top: -7px;
-				left: -7px;
-				background: #000;
-				color: #fff;
-				padding: 10px 20px;
-				box-shadow: 2px 2px 8px rgba(0,0,0,.4);
-				font-size: 14px;
-				letter-spacing: 2px;
+				padding: 10px;
 			}
 			.introFeaturesList li {
 				margin-top: 10px;
-				font-size: 20px;
+				font-size: 18px;
 				list-style-image: url(images/icons/check-mark.gif);
 			}
 			.introFeaturesList li a,
@@ -176,8 +191,7 @@
 			.introFeaturesList li a:visited,
 			.introFeaturesList li a:hover,
 			.introFeaturesList li a:active {
-				color: #fff;
-				text-shadow: 3px 2px 8px rgba(0,0,0,.2);
+				color: #000;
 				text-decoration: none;
 				border-bottom: 2px solid transparent;
 			}
@@ -185,23 +199,25 @@
 			.introFeaturesList li a:active {
 				border-bottom: 2px solid #ffa200;
 			}
-			.introFadeout {
-				clear: left;
-				height: 100px;
 
-				/*** fadeout gradient ***/
-					background: -moz-linear-gradient(top,  rgba(114,128,136,1) 0%, rgba(114,128,136,1) 27%, rgba(114,128,136,0.78) 54%, rgba(114,128,136,0.5) 79%, rgba(114,128,136,0) 100%); /* FF3.6+ */
-					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(114,128,136,1)), color-stop(27%,rgba(114,128,136,1)), color-stop(54%,rgba(114,128,136,0.78)), color-stop(79%,rgba(114,128,136,0.5)), color-stop(100%,rgba(114,128,136,0))); /* Chrome,Safari4+ */
-					background: -webkit-linear-gradient(top,  rgba(114,128,136,1) 0%,rgba(114,128,136,1) 27%,rgba(114,128,136,0.78) 54%,rgba(114,128,136,0.5) 79%,rgba(114,128,136,0) 100%); /* Chrome10+,Safari5.1+ */
-					background: -o-linear-gradient(top,  rgba(114,128,136,1) 0%,rgba(114,128,136,1) 27%,rgba(114,128,136,0.78) 54%,rgba(114,128,136,0.5) 79%,rgba(114,128,136,0) 100%); /* Opera 11.10+ */
-					background: -ms-linear-gradient(top,  rgba(114,128,136,1) 0%,rgba(114,128,136,1) 27%,rgba(114,128,136,0.78) 54%,rgba(114,128,136,0.5) 79%,rgba(114,128,136,0) 100%); /* IE10+ */
-					background: linear-gradient(to bottom,  rgba(114,128,136,1) 0%,rgba(114,128,136,1) 27%,rgba(114,128,136,0.78) 54%,rgba(114,128,136,0.5) 79%,rgba(114,128,136,0) 100%); /* W3C */
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#728088', endColorstr='#00728088',GradientType=0 ); /* IE6-9 */
+		/*** socialPanel ***/
+			.socialPanel {
+				position: fixed;
+				top: 154px;
+				right: 20px;
+				padding: 10px;
+				border-radius: 3px;
+				box-shadow: 0 0 20px rgba(0,0,0,.2);
+				background: #eee;
+				width: 169px;
+			}
+			#page_likeThis-shell {
+				margin-bottom: 30px;
 			}
 
 		/*** main ***/
 			.main {
-				padding-top: 650px;
+				padding-top: 600px;
 			}
 
 		/*** SimpleDoc overrides ***/
@@ -233,16 +249,14 @@
 	</div>
 
 	<div class="headerLinks">
-		<a href="javascript-examples.html" class="headerLink">DEMOS</a><!--
+		<a href="javascript-feature-tours.html?tour=all" class="headerLink">DEMOS / EXAMPLES</a><!--
 		--><a href="explainers/getting-started.html" class="headerLink">GETTING STARTED</a><!--
 		--><a href="download.html" class="headerLink">DOWNLOAD</a><!--
 		--><a href="support.html" class="headerLink">SUPPORT</a><!--
 		--><a href="explainers/using-the-documentation.html" class="headerLink">DOCS</a><!--
 		--><a href="search-sections.html" class="headerLink">SEARCH</a><!--
 		--><a href="directory.html" class="headerLink">SITE MAP</a><!--
-		--><a href="latest-news.html" class="headerLink">LATEST NEWS</a><!--
-		--><a href="latest-news.rss" class="headerLink"><span style="background:url(images/icons/rss-16x16.gif) left top no-repeat; padding:1px 9px; margin-right: 5px;"></span>RSS FEED</a><!--
-		--><a href="http://www.twitter.com/uize" class="headerLink"><span style="background:url(images/icons/twitter-16x16.gif) left top no-repeat; padding:1px 9px; margin-right: 5px;"></span>TWITTER FEED</a>
+		--><a href="latest-news.html" class="headerLink">LATEST NEWS</a>
 	</div>
 
 	<a class="forkMeOnGithub" href="https://github.com/uize/uize-javascript-framework" title="Fork me on GitHub"></a>
@@ -253,13 +267,14 @@
 <div class="intro">
 	<div class="introContent">
 		<h1>
+			<div class="quote leftQuote">&ldquo;</div>
 			UIZE is pronounced "you eyes", and is a FREE, powerful, open source, OOP JavaScript framework for browsers, NodeJS, and other JavaScripty places.
+			<div class="quote rightQuote">&bdquo;</div>
 		</h1>
 		<center class="introFeaturesLists">
 			<table>
 				<tr>
 					<td>
-						<div class="introFeaturesListsHeading">FEATURES</div>
 						<ul class="introFeaturesList">
 							<li><a href="#1">FREE and Open Source</a></li>
 							<li><a href="#2">Modules & Dependencies</a></li>
@@ -296,7 +311,11 @@
 			</table>
 		</center>
 	</div>
-	<div class="introFadeout"></div>
+</div>
+
+<div class="socialPanel">
+	<div id="page_likeThis-shell"></div>
+	<div id="page_follow-shell"></div>
 </div>
 
 <div class="main">

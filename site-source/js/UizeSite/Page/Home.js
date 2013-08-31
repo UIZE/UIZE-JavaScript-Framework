@@ -21,7 +21,9 @@ Uize.module ({
 	required:[
 		'Uize.Widget.HoverFader',
 		'Uize.Curve',
-		'Uize.Fx'
+		'Uize.Fx',
+		'UizeSite.Widgets.LikeThis.Widget',
+		'UizeSite.Widgets.Follow.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -30,6 +32,10 @@ Uize.module ({
 			omegastructor:function () {
 				var _this = this;
 
+				/*** add the social panel widgets ***/
+					_this.addChild ('likeThis',UizeSite.Widgets.LikeThis.Widget,{built:false});
+					_this.addChild ('follow',UizeSite.Widgets.Follow.Widget,{built:false});
+
 				/*** add hover fader for demos items and pod sections highlight effect ***/
 					_this.addChild (
 						'headerLinksFader',
@@ -37,12 +43,12 @@ Uize.module ({
 						{
 							nodes:{className:/\bheaderLink\b/},
 							defaultStyle:{
-								backgroundColor:'3f4854',
-								color:'c'
-							},
-							hoverStyle:{
 								backgroundColor:'f',
 								color:'0'
+							},
+							hoverStyle:{
+								backgroundColor:'3f4854',
+								color:'c'
 							},
 							fadeIn:{
 								duration:800,
