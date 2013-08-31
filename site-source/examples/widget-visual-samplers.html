@@ -206,7 +206,7 @@ Uize.module ({
 				);
 
 			/*** initialize selector, using query param ***/
-				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).namespace);
+				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).namespace || 'Uize.Widgets');
 				_handleSelection ();
 	}
 });
