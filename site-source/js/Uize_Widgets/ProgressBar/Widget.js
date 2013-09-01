@@ -54,9 +54,9 @@ Uize.module ({
 								? statusText.call (
 									this,
 									{
-											stepsCompleted:value,
-											totalSteps:maxValue,
-											percentComplete:Math.round (value / maxValue * 100)
+										stepsCompleted:value,
+										totalSteps:maxValue,
+										percentComplete:Math.round (value / maxValue * 100)
 									}
 								)
 								: ''
