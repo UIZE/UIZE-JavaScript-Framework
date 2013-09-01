@@ -52,7 +52,10 @@ Uize.module ({
 			stateProperties:{
 				_value:{
 					name:'value',
-					value:'#000000'
+					value:'#000000',
+					onChange:function () {
+						this.set ({_valueAsHexRgb:Uize.Color.to (this.get ('value'),'#hex')});
+					}
 					/*?
 						State Properties
 							value
@@ -63,6 +66,9 @@ Uize.module ({
 								NOTES
 								- the initial value is ='#000000'=
 					*/
+				},
+				_valueAsHexRgb:{
+					name:'valueAsHexRgb'
 				}
 			},
 
@@ -75,14 +81,14 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				value:function (_value) {
-					var _colorAsHexRgb = Uize.Color.to (_value,'#hex');
-					this.setNodeValue ('heading',_colorAsHexRgb);
-					this.setNodeStyle (['swatch','asBackground'],{backgroundColor:_colorAsHexRgb});
-					this.setNodeStyle ('asForeground',{color:_colorAsHexRgb});
+				valueAsHexRgb:[
+					'heading',
+					'swatch:style.backgroundColor',
+					'asBackground:style.backgroundColor',
+					'asForeground:style.color'
 					/*?
 						Implied Nodes
-							value Implied Node
+							heading Implied Node
 								.
 
 							swatch
@@ -94,7 +100,7 @@ Uize.module ({
 							asForeground
 								.
 					*/
-				}
+				]
 			}
 		});
 	}
