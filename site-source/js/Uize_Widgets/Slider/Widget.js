@@ -47,34 +47,13 @@ Uize.module ({
 			omegastructor:function () {
 				var _this = this;
 
-				_this.once (
-					'wired',
-					function () {
-						_this.onChange (
-							function (orientation,trackLength) {
-								return (
-									orientation == 'horizontal'
-										? {width:trackLength,height:''}
-										: {width:'',height:trackLength}
-								);
-							},
-							function (_dimsStyle) {_this.isWired && _this.setNodeStyle ('',_dimsStyle)}
-						);
-
-						_this.onChange (
-							'emptyColor',
-							function (_emptyColor) {
-								_this.isWired && _emptyColor && _this.setNodeStyle ('empty',{backgroundColor:_emptyColor});
-							}
-						);
-
-						_this.onChange (
-							'fullColor',
-							function (_fullColor) {
-								_this.isWired && _fullColor && _this.setNodeStyle ('full',{backgroundColor:_fullColor});
-							}
-						);
-					}
+				_this.onChange (
+					function (orientation,trackLength) {return orientation == 'horizontal' ? trackLength : ''},
+					function (_displayedStyleWidth) {_this.set ({_displayedStyleWidth:_displayedStyleWidth})}
+				);
+				_this.onChange (
+					function (orientation,trackLength) {return orientation == 'horizontal' ? '' : trackLength},
+					function (_displayedStyleHeight) {_this.set ({_displayedStyleHeight:_displayedStyleHeight})}
 				);
 			},
 
@@ -88,7 +67,9 @@ Uize.module ({
 					value:''
 				},
 				_emptyColor:'emptyColor',
-				_fullColor:'fullColor'
+				_fullColor:'fullColor',
+				_displayedStyleWidth:'displayedStyleWidth',
+				_displayedStyleHeight:'displayedStyleHeight'
 			},
 
 			set:{
@@ -99,6 +80,13 @@ Uize.module ({
 			cssBindings:{
 				orientation:'value',
 				size:'value'
+			},
+
+			htmlBindings:{
+				emptyColor:'empty:style.backgroundColor',
+				fullColor:'full:style.backgroundColor',
+				displayedStyleWidth:':style.width',
+				displayedStyleHeight:':style.height'
 			},
 
 			staticProperties:{
