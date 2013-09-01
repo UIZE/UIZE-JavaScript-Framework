@@ -43,18 +43,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		function _updateUiValue () {
-			var _this = this;
-			if (_this.isWired) {
-				_this.setNodeStyle ('',{backgroundColor:Uize.Color.to (_this._value,'#hex')});
-			}
-		}
-
 		return _superclass.subclass ({
-			instanceMethods:{
-				updateUi:_updateUiValue
-			},
-
 			stateProperties:{
 				_size:{
 					name:'size',
@@ -62,7 +51,7 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
-					onChange:_updateUiValue,
+					onChange:function () {this.set ({_valueAsHexRgb:Uize.Color.to (this.get ('value'),'#hex')})},
 					value:'#000000'
 					/*?
 						State Properties
@@ -74,7 +63,8 @@ Uize.module ({
 								NOTES
 								- the initial value is ='#000000'=
 					*/
-				}
+				},
+				_valueAsHexRgb:{name:'valueAsHexRgb'}
 			},
 
 			set:{
@@ -87,6 +77,10 @@ Uize.module ({
 
 			cssBindings:{
 				size:'value'
+			},
+
+			htmlBindings:{
+				valueAsHexRgb:':style.backgroundColor'
 			}
 		});
 	}

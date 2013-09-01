@@ -53,9 +53,7 @@ Uize.module ({
 				_value:{
 					name:'value',
 					value:'#000000',
-					onChange:function () {
-						this.set ({_valueAsHexRgb:Uize.Color.to (this.get ('value'),'#hex')});
-					}
+					onChange:function () {this.set ({_valueAsHexRgb:Uize.Color.to (this.get ('value'),'#hex')})}
 					/*?
 						State Properties
 							value
@@ -67,9 +65,7 @@ Uize.module ({
 								- the initial value is ='#000000'=
 					*/
 				},
-				_valueAsHexRgb:{
-					name:'valueAsHexRgb'
-				}
+				_valueAsHexRgb:{name:'valueAsHexRgb'}
 			},
 
 			set:{
