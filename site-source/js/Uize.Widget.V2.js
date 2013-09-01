@@ -264,10 +264,34 @@ Uize.module ({
 					;
 
 					return _html;
+					/*?
+						Instance Methods
+							childHtml
+								Returns the HTML for a child widget that can then be inserted into the HTML for the widget.
+
+								SYNTAX
+								......................................................
+								childHtml = myInstance.childHtml (childPropertiesOBJ);
+								......................................................
+
+								The =childHtml= method is intended primarily for use within the HTML generator (usually a JST template) for a widget.
+					*/
 				},
 
-				nodeId:function (_nodeId) {
-					return Uize.Node.joinIdPrefixAndNodeId (this.get ('idPrefix'),_nodeId || '');
+				nodeId:function (_nodeName) {
+					return Uize.Node.joinIdPrefixAndNodeId (this.get ('idPrefix'),_nodeName || '');
+					/*?
+						Instance Methods
+							nodeId
+								Returns a string, representing the fully namespaced ID for the specified node of the widget.
+
+								SYNTAX
+								............................................
+								nodeIdSTR = myInstance.nodeId (nodeNameSTR);
+								............................................
+
+								The =nodeId= method is intended primarily for use within the HTML generator (usually a JST template) for a widget.
+					*/
 				},
 
 				rootNodeCssClasses:function () {
@@ -495,6 +519,12 @@ Uize.module ({
 										.
 
 									Binding to Inner HTML, As Is
+										.
+
+									Binding to Properties
+										.
+
+									Binding to Style Properties
 										.
 
 									Free Form Binding, Using a Function
