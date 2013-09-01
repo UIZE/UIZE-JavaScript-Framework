@@ -67,13 +67,7 @@ Uize.module ({
 			},
 
 			stateProperties:{
-				_displayedStatusText:{
-					name:'displayedStatusText',
-					onChange:function () {
-						var _this = this;
-						_this.once ('isWired',function () {_this.setNodeValue ('statusText',_this._displayedStatusText)});
-					}
-				},
+				_displayedStatusText:'displayedStatusText',
 
 				_size:{
 					name:'size',
@@ -98,6 +92,10 @@ Uize.module ({
 
 			cssBindings:{
 				size:'value'
+			},
+
+			htmlBindings:{
+				displayedStatusText:'statusText:html'
 			},
 
 			staticProperties:{
