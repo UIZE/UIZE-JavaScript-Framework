@@ -28,7 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Json',
 		'Uize.Node',
-		'Uize.Xml'
+		'Uize.Xml',
+		'Uize.String'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -282,6 +283,19 @@ Uize.module ({
 							_cssClasses.push (_this.cssClass (_cssClassSuffix))
 					;
 					return _cssClasses.join (' ') + (_extraClasses && ' ' + _extraClasses);
+					/*?
+						Instance Methods
+							rootNodeCssClasses
+								Returns a string, representing the CSS classes string that is applied to the root node of the widget.
+
+								SYNTAX
+								.................................................
+								cssClassesSTR = myInstance.rootNodeCssClasses ();
+								.................................................
+
+								NOTES
+								- see also the related =cssClass= instance method and the =cssBindings= static method
+					*/
 				},
 
 				cssClass:function (_className) {
@@ -319,12 +333,12 @@ Uize.module ({
 							var
 								_cssBindings = _this.Class._cssBindings,
 								_updateRootNodeClasses = function () {_this._updateRootNodeClasses ()},
-								_wiringsForStateToCssBindings = {}
+								_wiringsForCssBindings = {}
 							;
 							for (var _property in _cssBindings)
-								_wiringsForStateToCssBindings ['Changed.' + _property] = _updateRootNodeClasses
+								_wiringsForCssBindings ['Changed.' + _property] = _updateRootNodeClasses
 							;
-							_this.wire (_wiringsForStateToCssBindings);
+							_this.wire (_wiringsForCssBindings);
 
 						/*** wire up handlers for state properties that have HTML bindings ***/
 							var
@@ -341,17 +355,17 @@ Uize.module ({
 									};
 								},
 								_htmlBindings = _this.Class._htmlBindings,
-								_wiringsForStateToHtmlBindings = {}
+								_wiringsForHtmlBindings = {}
 							;
 							for (var _property in _htmlBindings)
-								_wiringsForStateToHtmlBindings ['Changed.' + _property] = _getHtmlUpdaterForProperty (_property)
+								_wiringsForHtmlBindings ['Changed.' + _property] = _getHtmlUpdaterForProperty (_property)
 							;
-							_this.wire (_wiringsForStateToHtmlBindings);
+							_this.wire (_wiringsForHtmlBindings);
 
 						/*** update UI ***/
 							_this._updateRootNodeClasses ();
-							for (var _eventName in _wiringsForStateToHtmlBindings)
-								_wiringsForStateToHtmlBindings [_eventName] ()
+							for (var _eventName in _wiringsForHtmlBindings)
+								_wiringsForHtmlBindings [_eventName] ()
 							;
 					}
 				},
@@ -427,6 +441,11 @@ Uize.module ({
 								};
 							} else if (_bindingType == '?') {
 								_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
+							} else if (Uize.String.startsWith (_bindingType,'style.')) {
+								var _stylePropertyName = _bindingType.slice (6);
+								_updater = function (_propertyValue) {
+									this.setNodeStyle (_nodeName,Uize.pairUp (_stylePropertyName,_propertyValue));
+								};
 							} else {
 								_updater = function (_propertyValue) {
 									this.setNodeProperties (_nodeName,Uize.pairUp (_bindingType,_propertyValue));
