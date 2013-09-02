@@ -79,30 +79,22 @@ Uize.module ({
 								if (_pageWidget) {
 									var _widgetToItem = function (_widget,_level) {
 										var
-											_item = {
-												title:_getWidgetName (_this,_widget),
-												link:_treeItemLink,
-												expanded:!_level,
-												objectPath:_getWidgetPath (_this,_widget)
-											},
-											_itemItems = []
+											_children = _widget.children,
+											_childNames = Uize.keys (_children).sort ()
 										;
 										_level++;
-										for (
-											var
-												_childNo = -1,
-												_children = _widget.children,
-												_childNames = Uize.keys (_children).sort (),
-												_childNamesLength = _childNames.length
-											;
-											++_childNo < _childNamesLength;
-										)
-											_itemItems.push (_widgetToItem (_children [_childNames [_childNo]],_level))
-										;
-										if (_itemItems.length)
-											_item.items = _itemItems
-										;
-										return _item;
+										return {
+											title:_getWidgetName (_this,_widget),
+											link:_treeItemLink,
+											expanded:_level == 1,
+											objectPath:_getWidgetPath (_this,_widget),
+											items:_childNames.length
+												? Uize.map (
+													_childNames,
+													function (_childName) {return _widgetToItem (_children [_childName],_level)}
+												)
+												: undefined
+										};
 									};
 									_items [0] = _widgetToItem (_pageWidget,0);
 								}
