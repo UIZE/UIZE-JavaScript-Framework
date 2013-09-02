@@ -222,7 +222,6 @@
 
 Uize.module ({
 	name:'Uize.Build.ModuleInfo',
-	required:'Uize.Services.FileSystem',
 	builder:function () {
 		'use strict';
 
@@ -233,9 +232,6 @@ Uize.module ({
 				_trueFlagValue = {},
 				_forEach = Uize.forEach
 			;
-
-		/*** General Variables ***/
-			var _fileSystem = Uize.Services.FileSystem.singleton ();
 
 		/*** Public Static Methods ***/
 			_package.getDefinitionFromCode = Uize.quarantine (
