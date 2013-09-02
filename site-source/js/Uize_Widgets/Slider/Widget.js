@@ -43,6 +43,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		var _superUpdateUi = _superclass.prototype.updateUi;
+
 		return _superclass.subclass ({
 			omegastructor:function () {
 				var _this = this;
@@ -85,8 +87,8 @@ Uize.module ({
 			htmlBindings:{
 				emptyColor:'empty:style.backgroundColor',
 				fullColor:'full:style.backgroundColor',
-				displayedStyleWidth:':style.width',
-				displayedStyleHeight:':style.height'
+				displayedStyleWidth:[':style.width',_superUpdateUi],
+				displayedStyleHeight:[':style.height',_superUpdateUi]
 			},
 
 			staticProperties:{
