@@ -227,14 +227,12 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_package = function () {},
-				_false = false,
-				_trueFlagValue = {},
-				_forEach = Uize.forEach
+				_package,
+				_trueFlagValue = {}
 			;
 
-		/*** Public Static Methods ***/
-			_package.getDefinitionFromCode = Uize.quarantine (
+		return _package = Uize.package ({
+			getDefinitionFromCode:Uize.quarantine (
 				function (_moduleCode) {
 					var
 						_result,
@@ -258,9 +256,9 @@ Uize.module ({
 							NOTES
 							- compare to the related =Uize.Build.ModuleInfo.getDefinition= static method
 					*/
-			);
+			),
 
-			_package.getDefinition = function (_moduleName) {
+			getDefinition:function (_moduleName) {
 				var _definition = {name:_moduleName};
 				if (_moduleName != 'Uize') {
 					try {
@@ -290,9 +288,9 @@ Uize.module ({
 							NOTES
 							- compare to the related =Uize.Build.ModuleInfo.getDefinitionFromCode= static method
 					*/
-			};
+			},
 
-			var _getDirectDependencies = _package.getDirectDependencies = function (_moduleName) {
+			getDirectDependencies:function (_moduleName) {
 				var _definition = _package.getDefinition (_moduleName);
 				return _definition ? Uize.resolveModuleDefinition (_definition).required : [];
 				/*?
@@ -312,20 +310,20 @@ Uize.module ({
 							NOTES
 							- compare to the related =Uize.Build.ModuleInfo.traceDependencies= static method
 				*/
-			};
+			},
 
-			_package.traceDependencies = function (_modules,_excludeModules) {
+			traceDependencies:function (_modules,_excludeModules) {
 				var
 					_excludeModulesLookup = Uize.lookup (_excludeModules,_trueFlagValue),
 					_modulesNeeded = []
 				;
 				function _traceDependencies (_modules) {
-					_forEach (
+					Uize.forEach (
 						_modules.sort (),
 						function (_moduleName) {
 							if (_excludeModulesLookup [_moduleName] != _trueFlagValue) {
 								_excludeModulesLookup [_moduleName] = _trueFlagValue;
-								_traceDependencies (_getDirectDependencies (_moduleName));
+								_traceDependencies (_package.getDirectDependencies (_moduleName));
 								_modulesNeeded.push (_moduleName);
 							}
 						}
@@ -354,9 +352,8 @@ Uize.module ({
 							NOTES
 							- compare to the related =Uize.Build.ModuleInfo.getDirectDependencies= static method
 					*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 
