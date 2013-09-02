@@ -1,20 +1,13 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+New Uize.Util.Dependencies Module
+	.
+
 Major Build Process Improvements
 
 	- _Uize.Build.CompileJstModules.js subsumed by WSH-Uize.Build.Files.JsModules
 	- built code no longer in the source tree
 	- build process can now be run with either WSH or NodeJS
-
-### Bugs to fix
-	- examples with fruits images broken because of Zazzle changes
-		- Slideshow of Data
-		- Scrolly Carousel
-
-New onChange Instance Method for Uize.Class
-	- document
-	- add unit tests
-	- announce
 
 New whenever Instance Method for Uize.Class
 	- document
