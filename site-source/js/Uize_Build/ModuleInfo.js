@@ -222,13 +222,14 @@
 
 Uize.module ({
 	name:'Uize.Build.ModuleInfo',
+	required:'Uize.Util.Dependencies',
 	builder:function () {
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package,
-				_trueFlagValue = {}
+				_traceDependencies = Uize.Util.Dependencies.traceDependencies
 			;
 
 		return _package = Uize.package ({
@@ -313,25 +314,11 @@ Uize.module ({
 			},
 
 			traceDependencies:function (_modules,_excludeModules) {
-				var
-					_excludeModulesLookup = Uize.lookup (_excludeModules,_trueFlagValue),
-					_modulesNeeded = []
-				;
-				function _traceDependencies (_modules) {
-					Uize.forEach (
-						_modules.sort (),
-						function (_moduleName) {
-							if (_excludeModulesLookup [_moduleName] != _trueFlagValue) {
-								_excludeModulesLookup [_moduleName] = _trueFlagValue;
-								_traceDependencies (_package.getDirectDependencies (_moduleName));
-								_modulesNeeded.push (_moduleName);
-							}
-						}
-					);
-				}
-				_traceDependencies (['Uize'].concat (typeof _modules == 'string' ? [_modules] : _modules));
-
-				return _modulesNeeded;
+				return _traceDependencies (
+					['Uize'].concat (typeof _modules == 'string' ? [_modules] : _modules),
+					_package.getDirectDependencies,
+					_excludeModules
+				);
 				/*?
 					Static Methods
 						Uize.Build.ModuleInfo.traceDependencies
