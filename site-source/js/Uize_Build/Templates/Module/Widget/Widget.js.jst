@@ -15,6 +15,7 @@
 	var
 		_widgetNamespace = input.widgetNamespace,
 		_widgetModuleName = _widgetNamespace + '.Widget',
+		_widgetVisualSamplerModuleName = _widgetNamespace + '.VisualSampler',
 		_hasHtml = input.hasHtml,
 		_hasCss = input.hasCss,
 		_htmlModuleName = _widgetNamespace + '.Html',
@@ -41,11 +42,11 @@
 		Visual Sampler
 			Below is a visual sampler of the =<%= _widgetModuleName %>= class...
 
-			.............<%= Uize.String.repeat ('.',_widgetModuleName.length) %>
+			.............<%= Uize.String.repeat ('.',_widgetVisualSamplerModuleName.length) %>
 			<< widget >>
 
-			widgetClass: <%= _widgetModuleName %>
-			.............<%= Uize.String.repeat ('.',_widgetModuleName.length) %>
+			widgetClass: <%= _widgetVisualSamplerModuleName %>
+			.............<%= Uize.String.repeat ('.',_widgetVisualSamplerModuleName.length) %>
 */
 
 Uize.module ({
