@@ -33,7 +33,8 @@ Uize.module ({
 		'Uize.Array.Sort',
 		'Uize.Json',
 		'Uize.Templates.HashTable',
-		'Uize.Tooltip'
+		'Uize.Tooltip',
+		'Uize.Data.Matches'
 	],
 	superclass:'Uize.Widget.Page',
 	builder:function (_superclass) {
@@ -110,61 +111,42 @@ Uize.module ({
 							_itemsGenerator:function () {
 								var
 									_this = this,
-									_instancesPerWidgetClassMap = _getInstancesPerWidgetClassMap (_this),
-									_widgetClasses = Uize.keys (_instancesPerWidgetClassMap)
+									_instancesPerWidgetClassMap = _getInstancesPerWidgetClassMap (_this)
 								;
-
-								/*** sort widget classes, from those with most instance to those with least instances ***/
+								return Uize.map (
 									Uize.Array.Sort.sortBy (
-										_widgetClasses,
+										Uize.Data.Matches.values (
+											Uize.keys (_instancesPerWidgetClassMap),
+											function (_widgetClass) {return _instancesPerWidgetClassMap [_widgetClass].length}
+										),
 										function (_widgetClass) {
 											return (
 												((10000 - _instancesPerWidgetClassMap [_widgetClass].length) + '').slice (1) +
 												_widgetClass
 											);
 										}
-									);
-
-								/*** generate items ***/
-									var _items = [];
-									for (
-										var
-											_widgetClassNo = -1,
-											_widgetClassesLength = _widgetClasses.length,
-											_widgetClass,
-											_widgetClassWidgets,
-											_widgetClassWidgetsLength
-										;
-										++_widgetClassNo < _widgetClassesLength;
-									) {
-										if (
-											_widgetClassWidgetsLength =
-												(
-													_widgetClassWidgets =
-														_instancesPerWidgetClassMap [_widgetClass = _widgetClasses [_widgetClassNo]]
-												).length
-										)
-											_items.push ({
-												title:_widgetClass + ' (' + _widgetClassWidgetsLength + ')',
-												link:_treeItemLink,
-												expanded:false,
-												objectPath:_widgetClass,
-												items:Uize.map (
-													_widgetClassWidgets,
-													function (_widgetClassWidget) {
-														var _widgetPath = _getWidgetPath (_this,_widgetClassWidget);
-														return {
-															title:_widgetPath,
-															link:_treeItemLink,
-															objectPath:_widgetPath
-														};
-													}
-												)
-											})
-										;
+									),
+									function (_widgetClass) {
+										var _widgetClassWidgets = _instancesPerWidgetClassMap [_widgetClass];
+										return {
+											title:_widgetClass + ' (' + _widgetClassWidgets.length + ')',
+											link:_treeItemLink,
+											expanded:false,
+											objectPath:_widgetClass,
+											items:Uize.map (
+												_widgetClassWidgets,
+												function (_widgetClassWidget) {
+													var _widgetPath = _getWidgetPath (_this,_widgetClassWidget);
+													return {
+														title:_widgetPath,
+														link:_treeItemLink,
+														objectPath:_widgetPath
+													};
+												}
+											)
+										};
 									}
-
-								return _items;
+								);
 							}
 						},
 						widgetsDisabled:{
