@@ -245,22 +245,19 @@ Uize.module ({
 							_itemsGenerator:function () {
 								var _this = this;
 								function _itemsFromModulesTree (_namespace,_modulesTree,_level) {
-									if (_modulesTree) {
-										var
-											_items = [],
-											_moduleName
-										;
-										for (var _property in _modulesTree)
-											_items.push ({
-												title:_moduleName = _namespace + (_namespace && '.') + _property,
+									return _modulesTree && Uize.map (
+										Uize.keys (_modulesTree).sort (),
+										function (_property) {
+											var _moduleName = _namespace + (_namespace && '.') + _property;
+											return {
+												title:_moduleName,
 												link:_treeItemLink,
 												expanded:!_level,
 												objectPath:_moduleName,
 												items:_itemsFromModulesTree (_moduleName,_modulesTree [_property],_level + 1)
-											})
-										;
-										return _items;
-									}
+											};
+										}
+									);
 								}
 								return _itemsFromModulesTree (
 									'',
