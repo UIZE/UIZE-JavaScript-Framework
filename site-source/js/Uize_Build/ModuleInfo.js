@@ -320,14 +320,9 @@ Uize.module ({
 
 			_package.traceDependencies = function (_modules,_excludeModules) {
 				var
-					_excludeModulesLookup = {},
+					_excludeModulesLookup = Uize.lookup (_excludeModules,_trueFlagValue),
 					_modulesNeeded = []
 				;
-				_forEach (
-					_excludeModules,
-					function (_excludeModule) {_excludeModulesLookup [_excludeModule] = _trueFlagValue}
-				);
-
 				function _traceDependencies (_modules) {
 					_forEach (
 						_modules.sort (),

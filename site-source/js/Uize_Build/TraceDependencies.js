@@ -34,7 +34,14 @@ Uize.module ({
 
 		return Uize.package ({
 			perform:function (_params) {
-				console.log (Uize.Json.to (Uize.Build.ModuleInfo.traceDependencies (_params.moduleName)));
+				console.log (
+					Uize.Json.to (
+						Uize.Build.ModuleInfo.traceDependencies (
+							_params.moduleName,
+							_params.excludeModules && _params.excludeModules.split (',')
+						)
+					)
+				);
 			}
 		});
 	}
