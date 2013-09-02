@@ -16,34 +16,6 @@ hr {
 	letter-spacing:0;
 }
 
-/*** info tooltip ***/
-	.info-tooltip {
-		display: none;
-		border: 1px solid #eee;
-		padding: 3px;
-		background: #c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
-		box-shadow: 6px -6px 8px rgba(0,0,0,.4);
-		-moz-box-shadow: 6px -6px 8px rgba(0,0,0,.4);
-		-webkit-box-shadow: 6px -6px 8px rgba(0,0,0,.4);
-		max-width: 800px;
-		_width: 600px; /* hack for IE6 (which doesn't support max-width) */
-		max-height: 600px;
-		_height: 600px; /* hack for IE6 (which doesn't support max-height) */
-		overflow: hidden;
-		border-radius: 3px;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-	}
-	.info-tooltip-heading {
-		font-size: 11px;
-		font-weight: bold;
-		padding: 3px 8px 5px 8px;
-		text-align: center;
-		white-space: nowrap;
-		color: #000;
-		background: #fff url(../images/heading-bg-light.gif) repeat left top;
-	}
-
 /*** Panes ***/
 	.leftPane, .rightPane {
 		position: absolute;

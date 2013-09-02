@@ -56,11 +56,7 @@ Uize.module ({
 				var _this = this;
 
 				/*** add the tooltip widget ***/
-					var _tooltip = _this.addChild (
-						'tooltip',
-						Uize.Widgets.Tooltip.Widget,
-						{built:false}
-					);
+					var _tooltip = _this.addChild ('tooltip',Uize.Widgets.Tooltip.Widget,{built:false});
 
 				/*** add the contents tree widget ***/
 					_this.addChild (

@@ -13,7 +13,7 @@
 	type: Class
 	importance: 3
 	codeCompleteness: 100
-	docCompleteness: 92
+	docCompleteness: 80
 */
 
 /*?
@@ -53,9 +53,12 @@ Uize.module ({
 			_classPrototype._updateUiTooltipHtml = function () {
 				var _this = this;
 				if (_this.isWired) {
-					var _data = _this._data;
-					_data && _this.buildHtml (_data);
-					Uize.Tooltip.showTooltip (_this.getNode (),!!_data);
+					var
+						_data = _this._data,
+						_tooltipWidget = _this._tooltipWidget
+					;
+					_data && (_tooltipWidget ? _tooltipWidget.set ({data:_data}) : _this.buildHtml (_data));
+					Uize.Tooltip.showTooltip ((_tooltipWidget || _this).getNode (),!!_data);
 				}
 			};
 
@@ -233,7 +236,8 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-				}
+				},
+				_tooltipWidget:'tooltipWidget'
 			});
 
 		return _class;

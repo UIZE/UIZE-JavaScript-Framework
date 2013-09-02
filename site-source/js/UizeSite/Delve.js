@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.Data.PathsTree',
 		'Uize.Array.Sort',
 		'Uize.Json',
-		'Uize.Templates.HashTable',
+		'Uize.Widgets.Tooltip.KeysValues.Widget',
 		'Uize.Tooltip',
 		'Uize.Data.Matches'
 	],
@@ -470,7 +470,7 @@ Uize.module ({
 				}
 			}
 
-			function _getInfoTooltipHtml (_this,_objectPath) {
+			function _updateInfoTooltip (_this,_objectPath) {
 				var
 					_object = _resolveToObject (_this,_objectPath),
 					_whatItIs = _object == _undefined
@@ -537,10 +537,14 @@ Uize.module ({
 				if (Uize.Util.Oop.isUizeClassInstance (_object) && 'value' in _object.get ())
 					_tooltipData.value = _object.valueOf ()
 				;
-				return (
-					'<div class="info-tooltip-heading">' + _objectPath + '</div>' +
-					Uize.Templates.HashTable.process (_tooltipData)
-				);
+				_this.children.infoTooltip.set ({
+					heading:_objectPath,
+					data:_tooltipData
+				});
+			}
+
+			function _showInfoTooltip (_this,_mustShow) {
+				Uize.Tooltip.showTooltip (_this.children.infoTooltip.getNode (),_mustShow);
 			}
 
 			function _getPageWidget (_this) {
@@ -1533,7 +1537,7 @@ Uize.module ({
 						_link.title = _link.UizeSite_Delve_title;
 						// we'd like to do a cleanup, but we can't do a delete because of stupid IE throwing an error
 						// delete _link.UizeSite_Delve_title;
-						Uize.Tooltip.showTooltip ('infoTooltip',false);
+						_showInfoTooltip (_this,false);
 						_removeObjectHighlight (_this);
 					}
 				}
@@ -1551,8 +1555,8 @@ Uize.module ({
 						mouseover:function () {
 							var _title = this.UizeSite_Delve_title = this.title;
 							this.title = '';
-							Uize.Node.setInnerHtml ('infoTooltip',_getInfoTooltipHtml (_this,_title));
-							Uize.Tooltip.showTooltip ('infoTooltip',true);
+							_updateInfoTooltip (_this,_title);
+							_showInfoTooltip (_this,true);
 							_highlightObjectInWindow (_this,_title);
 						},
 						mouseout:function () {_cleanupAfterObjectLinkPreview (this)},
@@ -1575,14 +1579,20 @@ Uize.module ({
 			omegastructor:function () {
 				var _this = this;
 
+				/*** add the info tooltip widget ***/
+					var _infoTooltip = _this.addChild ('infoTooltip',Uize.Widgets.Tooltip.KeysValues.Widget,{built:false});
+
 				/*** add tree list widget ***/
 					_this.addChild (
 						'treeList',
 						Uize.Widgets.NavTree.List.Widget,
 						{
-							tooltip:'infoTooltip',
-							tooltipTemplate:function (_item) {
-								return _getInfoTooltipHtml (_this,_this._lastTreeItemOverObjectPath = _item.objectPath);
+							tooltip:{
+								node:_infoTooltip.nodeId (),
+								show:function (_item) {
+									_updateInfoTooltip (_this,_this._lastTreeItemOverObjectPath = _item.objectPath);
+									return true;
+								}
 							},
 							built:false
 						}

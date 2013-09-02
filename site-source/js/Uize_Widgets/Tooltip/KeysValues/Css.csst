@@ -1,0 +1,42 @@
+.`` {
+	max-width: 600px;
+	_width: 600px; /* hack for IE6 (which doesn't support max-width) */
+	max-height: 600px;
+	_height: 600px; /* hack for IE6 (which doesn't support max-height) */
+	overflow: hidden;
+}
+
+.`heading` {
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.`body` {
+	padding: 2px;
+}
+
+.`table` {
+	width: 100%;
+	background: #ddd;
+}
+
+.`tableKey`, .`tableValue` {
+	font-size: 10px;
+	color: #000;
+}
+
+.`tableKey` {
+	text-align: right;
+	text-transform: uppercase;
+	background: #fff;
+	padding-left: 6px;
+	padding-right: 4px;
+}
+
+.`tableValue` {
+	text-align: left;
+	background: #f4f4f4;
+	padding-left: 4px;
+	padding-right: 6px;
+}
