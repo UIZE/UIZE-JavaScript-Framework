@@ -43,7 +43,7 @@ Uize.module ({
 			},
 
 			set:{
-				html:Uize.Widgets.VisualTests.TestCase.Html,
+				html:Uize.Widgets.VisualTests.TestCase.Html
 			}
 		});
 	}
