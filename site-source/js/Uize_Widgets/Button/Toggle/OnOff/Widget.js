@@ -43,15 +43,16 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			alphastructor:function () {
-				var _this = this;
-				_this.onChange ('selected',function (_selected) {_this.set ({text:_selected ? 'On' : 'Off'})});
-			},
-
 			set:{
 				html:Uize.Widgets.Button.Toggle.OnOff.Html,
 				clickToSelect:true,
 				clickToDeselect:true
+			},
+
+			stateProperties:{
+				text:{
+					derived:'selected: selected ? "On" : "Off"'
+				}
 			},
 
 			staticProperties:{

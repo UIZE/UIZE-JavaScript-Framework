@@ -75,17 +75,6 @@ Uize.module ({
 				*/
 			};
 
-		/*** Wiring Methods ***/
-			_classPrototype.wireUi = function () {
-				var
-					_this = this
-				;
-
-				if (!_this.isWired) {
-					_superclass.doMy (_this,'wireUi')
-				}
-			};
-
 		/*** State Properties ***/
 			_class.stateProperties ({
 				_isValid:{

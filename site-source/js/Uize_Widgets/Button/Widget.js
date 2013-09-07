@@ -167,15 +167,6 @@ Uize.module ({
 					'Changed.enabledInherited':_setStateAndUpdateDisplayState
 				});
 				_updateDisplayState.call (_this);
-
-				_this.onChange (
-					function (tipText,enabledInherited,busyInherited) {
-						return tipText == _undefined ? _undefined : enabledInherited && !busyInherited ? tipText : '';
-					},
-					function (_displayedTipText) {
-						_this.set ({_displayedTipText:_displayedTipText});
-					}
-				);
 			},
 
 			instanceProperties:{
@@ -579,6 +570,9 @@ Uize.module ({
 				},
 				_displayedTipText:{
 					name:'displayedTipText',
+					derived:function (tipText,enabledInherited,busyInherited) {
+						return tipText == _undefined ? _undefined : enabledInherited && !busyInherited ? tipText : '';
+					},
 					onChange:_updateUiDisplayedTipText
 				},
 				_tipText:'tipText',

@@ -42,43 +42,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _directionNames = [
-			['upLeft','up','upRight'],
-			['left','','right'],
-			['downLeft','down','downRight']
-		];
-
-		function _deriveDirectionName () {
-			var _this = this;
-			_this.set ({_directionName:_directionNames [_this._directionY + 1] [_this._directionX + 1]});
-		}
-
 		return _superclass.subclass ({
 			set:{
 				html:Uize.Widgets.Button.Square.Html
 			},
 
-			stateProperties:{
-				_directionX:{
-					name:'directionX',
-					value:0,
-					onChange:_deriveDirectionName
-				},
-				_directionY:{
-					name:'directionY',
-					value:0,
-					onChange:_deriveDirectionName
-				},
-				_directionName:'directionName'
-			},
-
 			staticProperties:{
-				cssModule:Uize.Widgets.Button.Square.Css,
-				directionNames:_directionNames
-			},
-
-			cssBindings:{
-				directionName:'value'
+				cssModule:Uize.Widgets.Button.Square.Css
 			}
 		});
 	}

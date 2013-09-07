@@ -85,27 +85,6 @@ Uize.module ({
 					];
 			},
 
-			instanceMethods:{
-				/*** Private Instance Methods ***/
-					_updateUiSwatch:function () {
-						var _this = this;
-						if (_this.isWired) {
-							var _value = _this._value;
-							_this.setNodeStyle ('swatch',{background:'#' + _value});
-							_this.setNodeInnerHtml ('swatch','#' + _value);
-						}
-					},
-
-				/*** Public Instance Methods ***/
-					updateUi:function () {
-						var _this = this;
-						if (_this.isWired) {
-							Uize.callOn (_this.children,'updateUi');
-							_this._updateUiSwatch ();
-						}
-					}
-			},
-
 			stateProperties:{
 				_sliderHeight:'sliderHeight',
 				_size:{
@@ -126,9 +105,12 @@ Uize.module ({
 						_children.sliderG.set ({value:_colorTuple [1]});
 						_children.sliderB.set ({value:_colorTuple [2]});
 						_this._settingSliders = _false;
-						_this._updateUiSwatch ();
 					},
 					value:'000000'
+				},
+				_valueAsHexRgb:{
+					name:'valueAsHexRgb',
+					derived:'value: "#" + value'
 				}
 			},
 
@@ -142,6 +124,10 @@ Uize.module ({
 
 			cssBindings:{
 				size:'value'
+			},
+
+			htmlBindings:{
+				valueAsHexRgb:['swatch:html','swatch:style.background']
 			}
 		});
 	}

@@ -48,11 +48,6 @@ Uize.module ({
 			['downLeft','down','downRight']
 		];
 
-		function _deriveDirectionName () {
-			var _this = this;
-			_this.set ({_directionName:_directionNames [_this._directionY + 1] [_this._directionX + 1]});
-		}
-
 		return _superclass.subclass ({
 			set:{
 				html:Uize.Widgets.Buttons.Directional.Html
@@ -61,15 +56,16 @@ Uize.module ({
 			stateProperties:{
 				_directionX:{
 					name:'directionX',
-					value:0,
-					onChange:_deriveDirectionName
+					value:0
 				},
 				_directionY:{
 					name:'directionY',
-					value:0,
-					onChange:_deriveDirectionName
+					value:0
 				},
-				_directionName:'directionName'
+				_directionName:{
+					name:'directionName',
+					derived:function (directionX,directionY) {return _directionNames [directionY + 1] [directionX + 1]}
+				}
 			},
 
 			staticProperties:{

@@ -35,16 +35,15 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			alphastructor:function () {
-				var _this = this;
-				_this.onChange (
-					'state',
-					function (_state) {_this.set ({heading:Uize.Xml.toAttributeValue (Uize.Json.to (_state))})}
-				);
+			stateProperties:{
+				state:{},
+				heading:{
+					derived:function (state) {return Uize.Xml.toAttributeValue (Uize.Json.to (state))}
+				}
 			},
 
 			set:{
-				html:Uize.Widgets.VisualTests.TestCase.Html
+				html:Uize.Widgets.VisualTests.TestCase.Html,
 			}
 		});
 	}

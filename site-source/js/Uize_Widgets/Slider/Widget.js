@@ -46,19 +46,6 @@ Uize.module ({
 		var _superUpdateUi = _superclass.prototype.updateUi;
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				var _this = this;
-
-				_this.onChange (
-					function (orientation,trackLength) {return orientation == 'horizontal' ? trackLength : ''},
-					function (_displayedStyleWidth) {_this.set ({_displayedStyleWidth:_displayedStyleWidth})}
-				);
-				_this.onChange (
-					function (orientation,trackLength) {return orientation == 'horizontal' ? '' : trackLength},
-					function (_displayedStyleHeight) {_this.set ({_displayedStyleHeight:_displayedStyleHeight})}
-				);
-			},
-
 			stateProperties:{
 				_size:{
 					name:'size',
@@ -70,8 +57,14 @@ Uize.module ({
 				},
 				_emptyColor:'emptyColor',
 				_fullColor:'fullColor',
-				_displayedStyleWidth:'displayedStyleWidth',
-				_displayedStyleHeight:'displayedStyleHeight'
+				_displayedStyleWidth:{
+					name:'displayedStyleWidth',
+					derived:'orientation,trackLength: orientation == "horizontal" ? trackLength : ""'
+				},
+				_displayedStyleHeight:{
+					name:'displayedStyleHeight',
+					derived:'orientation,trackLength: orientation == "horizontal" ? "" : trackLength'
+				}
 			},
 
 			set:{

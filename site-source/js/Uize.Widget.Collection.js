@@ -1013,7 +1013,7 @@ Uize.module ({
 			_class.stateProperties ({
 				_allSelected:{
 					name:'allSelected',
-					value:_false
+					derived:'totalSelected,totalItems: totalSelected > 0 && totalSelected == totalItems'
 					/*?
 						State Properties
 							allSelected
@@ -1031,7 +1031,7 @@ Uize.module ({
 				},
 				_isEmpty:{
 					name:'isEmpty',
-					value:_true
+					derived:'totalItems: !totalItems'
 					/*?
 						State Properties
 							isEmpty
@@ -1175,7 +1175,7 @@ Uize.module ({
 					*/
 				_oneSelected:{
 					name:'oneSelected',
-					value:_false
+					derived:'totalSelected: totalSelected == 1'
 					/*?
 						State Properties
 							oneSelected
@@ -1209,7 +1209,7 @@ Uize.module ({
 				},
 				_someSelected:{
 					name:'someSelected',
-					value:_false
+					derived:'totalSelected: totalSelected > 0'
 					/*?
 						State Properties
 							someSelected
@@ -1227,10 +1227,7 @@ Uize.module ({
 				},
 				_totalItems:{
 					name:'totalItems',
-					onChange:function () {
-						this.set ({_isEmpty:!this._totalItems});
-						this._updateUiTotalItems ();
-					}
+					onChange:function () {this._updateUiTotalItems ()}
 					/*?
 						State Properties
 							totalItems
@@ -1246,18 +1243,7 @@ Uize.module ({
 				},
 				_totalSelected:{
 					name:'totalSelected',
-					value:0,
-					onChange:function () {
-						var
-							_this = this,
-							_totalSelected = _this._totalSelected
-						;
-						_this.set ({
-							_oneSelected:_totalSelected == 1,
-							_someSelected:_totalSelected > 0,
-							_allSelected:_totalSelected > 0 && _totalSelected == _this._totalItems
-						});
-					}
+					value:0
 					/*?
 						State Properties
 							totalSelected

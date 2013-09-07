@@ -44,11 +44,10 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				var _this = this;
-
-				_this.onChange (
-					function (statusText,value,maxValue) {
+			stateProperties:{
+				_displayedStatusText:{
+					name:'displayedStatusText',
+					derived:function (statusText,value,maxValue) {
 						return (
 							statusText
 								? statusText.call (
@@ -61,13 +60,8 @@ Uize.module ({
 								)
 								: ''
 						);
-					},
-					function (_displayedStatusText) {_this.set ({_displayedStatusText:_displayedStatusText})}
-				);
-			},
-
-			stateProperties:{
-				_displayedStatusText:'displayedStatusText',
+					}
+				},
 
 				_size:{
 					name:'size',

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Tooltip.KeysValues.Widget= module implements a widget class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 
 		Visual Sampler
 			Below is a visual sampler of the =Uize.Widgets.Tooltip.KeysValues.Widget= class...
@@ -40,36 +40,33 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				var m = this;
-
-				m.onChange (
-					'data',
-					function (_data) {
-						var _bodyChunks = [];
-						if (_data) {
+			stateProperties:{
+				_data:'data',
+				body:{
+					derived:function (data) {
+						var
+							m = this,
+							_bodyChunks = []
+						;
+						if (data) {
 							_bodyChunks.push ('<table class="' + m.cssClass ('table') + '" cellspacing="1">');
 							var
 								_keyCssClass = m.cssClass ('tableKey'),
 								_valueCssClass = m.cssClass ('tableValue')
 							;
-							for (var _key in _data)
+							for (var _key in data)
 								_bodyChunks.push (
 									'<tr valign="top">' +
 										'<td class="' + _keyCssClass + '">' + _key + '</td>' +
-										'<td class="' + _valueCssClass + '">' + _data [_key] + '</td>' +
+										'<td class="' + _valueCssClass + '">' + data [_key] + '</td>' +
 									'</tr>'
 								)
 							;
 							_bodyChunks.push ('</table>');
 						}
-						m.set ({body:_bodyChunks.join ('')});
+						return _bodyChunks.join ('');
 					}
-				);
-			},
-
-			stateProperties:{
-				_data:'data'
+				}
 			},
 
 			staticProperties:{

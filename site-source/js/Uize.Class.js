@@ -207,6 +207,7 @@
 
 Uize.module ({
 	name:'Uize.Class',
+	required:'Uize.Util.Dependencies',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -232,7 +233,8 @@ Uize.module ({
 					_isInstance = _Uize.isInstance,
 					_isObject = _Uize.isObject,
 					_noNew = _Uize.noNew,
-					_pairUp = _Uize.pairUp
+					_pairUp = _Uize.pairUp,
+					_traceDependencies = _Uize.Util.Dependencies.traceDependencies
 			;
 
 		/*** General Variables ***/
@@ -312,8 +314,8 @@ Uize.module ({
 			function _getPropertyProfile (_this,_propertyPublicOrPrivateName) {
 				var _class = _getClass (_this);
 				return (
-					_class._propertyProfilesByPublicNames [_propertyPublicOrPrivateName] ||
-					_class._propertyProfilesByPrivateNames [_propertyPublicOrPrivateName]
+					_class._propertyProfilesByPublicName [_propertyPublicOrPrivateName] ||
+					_class._propertyProfilesByPrivateName [_propertyPublicOrPrivateName]
 				);
 			}
 
@@ -768,7 +770,7 @@ Uize.module ({
 					function _checkDerivedValue () {
 						var
 							_determinantsValues = _determinantsValuesHarvester.call (_this),
-							_derivedValue = _determiner.apply (0,_determinantsValues)
+							_derivedValue = _determiner.apply (_this,_determinantsValues)
 						;
 						if (_lastDerivedValue == _firstCallFlag || _derivedValue != _lastDerivedValue) {
 							_isOnceMode && _derivedValue && _wirings && _this.unwire (_wirings);
@@ -1286,7 +1288,7 @@ Uize.module ({
 
 				_classPrototype.isMet = function (_condition) {
 					var _derivation = _resolveDerivation (_condition);
-					return _derivation._determiner.apply (0,_derivation._determinantsValuesHarvester.call (this));
+					return _derivation._determiner.apply (this,_derivation._determinantsValuesHarvester.call (this));
 					/*?
 						Instance Methods
 							isMet
@@ -1361,10 +1363,10 @@ Uize.module ({
 							*/
 							var
 								_class = _getClass (_this),
-								_propertyProfilesByPrivateNames = _class._propertyProfilesByPrivateNames
+								_propertyProfilesByPrivateName = _class._propertyProfilesByPrivateName
 							;
-							for (var _propertyPrivateName in _propertyProfilesByPrivateNames)
-								_result [_propertyProfilesByPrivateNames [_propertyPrivateName]._publicName] =
+							for (var _propertyPrivateName in _propertyProfilesByPrivateName)
+								_result [_propertyProfilesByPrivateName [_propertyPrivateName]._publicName] =
 									_this [_propertyPrivateName]
 							;
 							if (_isInstance (_this)) {
@@ -1527,33 +1529,73 @@ Uize.module ({
 					function (_propertyProfiles) {
 						var
 							_this = this,
-							_propertyProfilesByPrivateNames = _this._propertyProfilesByPrivateNames,
-							_propertyProfilesByPublicNames = _this._propertyProfilesByPublicNames
+							_propertyProfilesByPrivateName = _this._propertyProfilesByPrivateName,
+							_propertyProfilesByPublicName = _this._propertyProfilesByPublicName,
+							_declaredDerivedProperties
 						;
 						for (var _propertyPrivateName in _propertyProfiles) {
 							var
-								_propertyData = _propertyProfiles [_propertyPrivateName],
-								_propertyDataIsObject = _isObject (_propertyData),
+								_rawPropertyProfile = _propertyProfiles [_propertyPrivateName],
+								_rawPropertyProfileIsObject = _isObject (_rawPropertyProfile),
 								_propertyPublicName =
-									(_propertyDataIsObject ? _propertyData.name : _propertyData) || _propertyPrivateName,
+									(_rawPropertyProfileIsObject ? _rawPropertyProfile.name : _rawPropertyProfile) ||
+									_propertyPrivateName,
 								_propertyPrimaryPublicName = _propertyPublicName,
-								_propertyProfile = _propertyProfilesByPrivateNames [_propertyPrivateName] = {_privateName:_propertyPrivateName}
+								_propertyProfile =
+									_propertyProfilesByPublicName [_propertyPrivateName] ||
+									_propertyProfilesByPrivateName [_propertyPrivateName]
 							;
-							if (_propertyPublicName.indexOf ('|') > -1) {
-								var _pseudonyms = _propertyPublicName.split ('|');
-								_propertyPrimaryPublicName = _pseudonyms [0];
-								_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicNames);
-							} else {
-								_propertyProfilesByPublicNames [_propertyPublicName] = _propertyProfile;
+							if (!_propertyProfile) {
+								_propertyProfile =
+									_propertyProfilesByPrivateName [_propertyPrivateName] = {_privateName:_propertyPrivateName}
+								;
+								if (_propertyPublicName.indexOf ('|') > -1) {
+									var _pseudonyms = _propertyPublicName.split ('|');
+									_propertyPrimaryPublicName = _pseudonyms [0];
+									_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicName);
+								} else {
+									_propertyProfilesByPublicName [_propertyPublicName] = _propertyProfile;
+								}
+								_propertyProfile._publicName = _propertyPrimaryPublicName;
 							}
-							_propertyProfile._publicName = _propertyPrimaryPublicName;
-							if (_propertyDataIsObject) {
-								if (_propertyData.onChange) _propertyProfile._onChange = _propertyData.onChange;
-								if (_propertyData.conformer) _propertyProfile._conformer = _propertyData.conformer;
-								_this [_propertyPrivateName] = _propertyData.value;
+							if (_rawPropertyProfileIsObject) {
+								if (_rawPropertyProfile.onChange) _propertyProfile._onChange = _rawPropertyProfile.onChange;
+								if (_rawPropertyProfile.conformer) _propertyProfile._conformer = _rawPropertyProfile.conformer;
+								if (_rawPropertyProfile.derived) {
+									_declaredDerivedProperties = true;
+									var _derivation = _resolveDerivation (_rawPropertyProfile.derived);
+									_derivation._determinantsChanged = new _Function (
+										'o',
+										'return ' + _map (_derivation._determinants,"'\"' + value + '\" in o'").join (' || ')
+									);
+									_propertyProfile._derivation = _derivation;
+								}
+								if ('value' in _rawPropertyProfile)
+									_this [_propertyPrivateName] = _rawPropertyProfile.value
+								;
 							}
 						}
-						_this._instancePropertyDefaults = this.get ();
+						var _instancePropertyDefaults = _this.get ();
+						_this._instancePropertyDefaults = _instancePropertyDefaults;
+						if (_declaredDerivedProperties) {
+							var
+								_derivedProperties = [],
+								_nonDerivedProperties = []
+							;
+							for (var _propertyPublicName in _instancePropertyDefaults) {
+								var _propertyProfile = _propertyProfilesByPublicName [_propertyPublicName];
+								(_propertyProfile._derivation ? _derivedProperties : _nonDerivedProperties).push (
+									_propertyPublicName
+								);
+							}
+							_this._derivedProperties = _traceDependencies (
+								_derivedProperties,
+								function (_derivedProperty) {
+									return _propertyProfilesByPublicName [_derivedProperty]._derivation._determinants;
+								},
+								_nonDerivedProperties
+							);
+						}
 						/*?
 							Static Methods
 								Uize.Class.stateProperties
@@ -1633,10 +1675,11 @@ Uize.module ({
 						_this = this,
 						_thisIsInstance = _isInstance (_this),
 						_class = _thisIsInstance ? _this.Class : _this,
-						_propertyProfilesByPublicNames = _class._propertyProfilesByPublicNames,
-						_propertyProfilesByPrivateNames = _class._propertyProfilesByPrivateNames,
+						_propertyProfilesByPublicName = _class._propertyProfilesByPublicName,
+						_propertyProfilesByPrivateName = _class._propertyProfilesByPrivateName,
 						_propertyProfile,
 						_onChangeHandlers,
+						_propertiesChanged = {},
 						_onChangeHandlerAddedFlagName,
 						_onChangeHandler,
 						_hasChangedHandlers = _thisIsInstance && _this._hasChangedHandlers,
@@ -1647,15 +1690,52 @@ Uize.module ({
 						_propertyPublicName,
 						_propertiesToDeclare,
 						_propertyValue,
-						_propertiesBeingSet
+						_propertiesBeingSet,
+						_derivedProperties = _class._derivedProperties || _sacredEmptyArray,
+						_propertiesKeys = [],
+						_propertyPublicOrPrivateName
 					;
-					for (var _propertyPublicOrPrivateName in _properties) {
-						_propertyValue = _properties [_propertyPublicOrPrivateName];
-						if (
-							_propertyProfile =
-								_propertyProfilesByPublicNames [_propertyPublicOrPrivateName] ||
-								_propertyProfilesByPrivateNames [_propertyPublicOrPrivateName]
-						) {
+					for (_propertyPublicOrPrivateName in _properties) {
+						_propertyProfile =
+							_propertyProfilesByPublicName [_propertyPublicOrPrivateName] ||
+							_propertyProfilesByPrivateName [_propertyPublicOrPrivateName]
+						;
+						if (!_propertyProfile || !_propertyProfile._derivation)
+							_propertiesKeys.push (_propertyPublicOrPrivateName)
+						;
+					}
+					for (
+						var
+							_propertyNo = -1,
+							_propertiesKeysLength = _propertiesKeys.length,
+							_propertiesKeysPlusDerivedLength =
+								_propertiesKeysLength + (_thisIsInstance && _derivedProperties.length)
+						;
+						++_propertyNo < _propertiesKeysPlusDerivedLength;
+					) {
+						var _isDerivedProperty = _propertyNo >= _propertiesKeysLength;
+						_propertyPublicOrPrivateName = _isDerivedProperty
+							? _derivedProperties [_propertyNo - _propertiesKeysLength]
+							: _propertiesKeys [_propertyNo]
+						;
+						_propertyProfile =
+							_propertyProfilesByPublicName [_propertyPublicOrPrivateName] ||
+							_propertyProfilesByPrivateName [_propertyPublicOrPrivateName]
+						;
+						if (_isDerivedProperty) {
+							var _derived = _propertyProfile._derivation;
+							if (_derived._determinantsChanged (_propertiesChanged)) {
+								_propertyValue = _derived._determiner.apply (
+									_this,
+									_derived._determinantsValuesHarvester.call (_this)
+								);
+							} else {
+								continue;
+							}
+						} else {
+							_propertyValue = _properties [_propertyPublicOrPrivateName];
+						}
+						if (_propertyProfile) {
 							_propertyPrivateName = _propertyProfile._privateName;
 							_propertyPublicName = _propertyProfile._publicName;
 						} else {
@@ -1684,6 +1764,10 @@ Uize.module ({
 						;
 						if (_propertyValue !== _this [_propertyPrivateName]) {
 							if (_thisIsInstance) {
+								_propertiesChanged [_propertyPublicName] =
+									_propertiesChanged [_propertyPrivateName] = 1
+								;
+
 								/*** build up list of events to fire for 'Changed.' event handlers ***/
 									_hasChangedDotStarHandlers && (
 										(_propertiesForChangedDotStar || (_propertiesForChangedDotStar = {}))
@@ -1692,6 +1776,7 @@ Uize.module ({
 									_hasChangedHandlers && _hasChangedHandlers [_propertyPublicName] &&
 										(_changedEventsToFire || (_changedEventsToFire = [])).push (_propertyPublicName)
 									;
+
 								/*** build up list of onChange handlers to execute ***/
 									var _processOnChangeHandler = function (_onChangeHandler) {
 										if (_isFunction (_onChangeHandler)) {
@@ -1725,7 +1810,9 @@ Uize.module ({
 								_onChangeHandler.call (_this,_propertiesBeingSet);
 							}
 						}
-						_propertiesForChangedDotStar && _this.fire ({name:'Changed.*',properties:_propertiesForChangedDotStar});
+						_propertiesForChangedDotStar &&
+							_this.fire ({name:'Changed.*',properties:_propertiesForChangedDotStar})
+						;
 						if (_changedEventsToFire) {
 							for (
 								var _changedEventNo = -1, _changedEventsToFireLength = _changedEventsToFire.length;
@@ -2406,8 +2493,8 @@ Uize.module ({
 					(_subclass._alphastructor = _alphastructor) && _alphastructors.push (_alphastructor);
 					(_subclass._omegastructor = _omegastructor) && _omegastructors.push (_omegastructor);
 
-				_subclass._propertyProfilesByPrivateNames || (_subclass._propertyProfilesByPrivateNames = {});
-				_subclass._propertyProfilesByPublicNames || (_subclass._propertyProfilesByPublicNames = {});
+				_subclass._propertyProfilesByPrivateName || (_subclass._propertyProfilesByPrivateName = {});
+				_subclass._propertyProfilesByPublicName || (_subclass._propertyProfilesByPublicName = {});
 
 				return _subclass;
 			};
