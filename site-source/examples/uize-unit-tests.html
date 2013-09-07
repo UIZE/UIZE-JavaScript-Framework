@@ -239,14 +239,14 @@ Uize.module ({
 					if (!_RunAllTests) {
 						var _test = [];
 						for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
-							/^Performance(\..*)?$/.test (_testName = _testNames [_testNo]) ||
+							/^(Performance|TestData)(\..*)?$/.test (_testName = _testNames [_testNo]) ||
 								_test.push (
 									_testsSubTreeLookup [_testName]
 										? Uize.Test.testModuleTest ('Uize.Test.' + _testName)
 										: Uize.Test.requiredModulesTest (_testName)
 								)
 						;
-						_RunAllTests = Uize.Test.declare ({title:'UIZE Unit Tests',test:_test});
+						_RunAllTests = Uize.Test.resolve ({title:'UIZE Unit Tests',test:_test});
 					}
 					_instantiateTestSuite (_RunAllTests);
 				} else if (_testsSubTreeLookup [_testName]) {
