@@ -46,18 +46,18 @@ Uize.module ({
 			},
 			builderInputs:function (_urlParts) {
 				var
-					_this = this,
+					m = this,
 					_inputs = {
 						jsModule:
-							_this.tempUrlFromMemoryUrl (_urlParts.pathname.replace (_moduleMetaDataExtensionRegExp,'.js'))
+							m.tempUrlFromMemoryUrl (_urlParts.pathname.replace (_moduleMetaDataExtensionRegExp,'.js'))
 					},
 					_testModulePath =
-						_this.params.modulesFolder + '/' +
+						m.params.modulesFolder + '/' +
 						Uize.Build.Util.getTestModuleName (_urlParts.file.replace (_moduleMetaDataExtensionRegExp,'')) +
 						'.js'
 				;
-				if (_this.fileExists ({path:_this.sourceUrl (_testModulePath)}))
-					_inputs.testModuleMetaData = _this.memoryUrl (_testModulePath + '.metadata')
+				if (m.fileExists ({path:m.sourceUrl (_testModulePath)}))
+					_inputs.testModuleMetaData = m.memoryUrl (_testModulePath + '.metadata')
 				;
 				return _inputs;
 			},

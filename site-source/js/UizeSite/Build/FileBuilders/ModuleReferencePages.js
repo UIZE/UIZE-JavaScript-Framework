@@ -46,68 +46,68 @@ Uize.module ({
 		return Uize.package ({
 			description:'Module reference page',
 			urlMatcher:function (_urlParts) {
-				var _this = this;
+				var m = this;
 				if (
 					_urlParts.fileType == 'html' &&
-					_urlParts.folderPath == _this.builtUrl ('reference/')
+					_urlParts.folderPath == m.builtUrl ('reference/')
 				) {
-					var _sourcePathSansExtension = _this.sourceUrl (_this.getModuleUrl (_urlParts.fileName,false));
+					var _sourcePathSansExtension = m.sourceUrl (m.getModuleUrl (_urlParts.fileName,false));
 					return (
-						_this.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
-						_this.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
-						_this.fileExists ({path:_sourcePathSansExtension + '.csst'}) ||
-						_this.folderExists ({path:_sourcePathSansExtension})
+						m.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
+						m.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
+						m.fileExists ({path:_sourcePathSansExtension + '.csst'}) ||
+						m.folderExists ({path:_sourcePathSansExtension})
 					);
 				} else {
 					return false;
 				}
 			},
 			builderInputs:function (_urlParts) {
-				var _this = this;
+				var m = this;
 				return {
-					tempCode:_this.tempUrl (_this.getModuleUrl (_urlParts.fileName)),
-					simpleDocTemplate:_this.memoryUrl ('reference/~SIMPLE-DOC-TEMPLATE.html.jst'),
-					modulesTree:_this.memoryUrl ('modules-tree'),
-					urlDictionary:_this.memoryUrl ('url-dictionary'),
-					examplesByKeyword:_this.memoryUrl ('examples-by-keyword')
+					tempCode:m.tempUrl (m.getModuleUrl (_urlParts.fileName)),
+					simpleDocTemplate:m.memoryUrl ('reference/~SIMPLE-DOC-TEMPLATE.html.jst'),
+					modulesTree:m.memoryUrl ('modules-tree'),
+					urlDictionary:m.memoryUrl ('url-dictionary'),
+					examplesByKeyword:m.memoryUrl ('examples-by-keyword')
 				};
 			},
 			builder:function (_inputs) {
 				var
-					_this = this,
+					m = this,
 					_simpleDoc,
 					_tempCodePath = _inputs.tempCode,
-					_moduleName = _this.moduleNameFromTempPath (_tempCodePath),
-					_modulesTree = _this.readFile ({path:_inputs.modulesTree})
+					_moduleName = m.moduleNameFromTempPath (_tempCodePath),
+					_modulesTree = m.readFile ({path:_inputs.modulesTree})
 				;
 				Uize.require (
 					_moduleName,
 					function (_module) {
 						var
-							_urlDictionary = _this.readFile ({path:_inputs.urlDictionary}),
+							_urlDictionary = m.readFile ({path:_inputs.urlDictionary}),
 							_moduleUrlFromDictionary = _urlDictionary [_moduleName]
 						;
 						_urlDictionary [_moduleName] = null;
 						_simpleDoc = Uize.Doc.Sucker.toDocument (
-							_this.readFile ({path:_tempCodePath}),
+							m.readFile ({path:_tempCodePath}),
 							{
 								urlDictionary:_urlDictionary,
 								pathToRoot:'../',
 								result:'full',
 								module:_module,
 								modulesTree:_modulesTree,
-								examples:_this.readFile ({path:_inputs.examplesByKeyword}) [_moduleName]
+								examples:m.readFile ({path:_inputs.examplesByKeyword}) [_moduleName]
 							}
 						);
 						_urlDictionary [_moduleName] = _moduleUrlFromDictionary;
 					}
 				);
-				return _this.processSimpleDoc (
+				return m.processSimpleDoc (
 					_moduleName,
 					_simpleDoc,
 					_inputs.simpleDocTemplate,
 					{
-						hasToDo:_this.fileExists ({path:this.sourceUrl (this.getModuleUrl (_moduleName,false) + '.todo')}),
+						hasToDo:m.fileExists ({path:this.sourceUrl (this.getModuleUrl (_moduleName,false) + '.todo')}),
 						hasVisualTests:_hasDeepReference (_modulesTree,_visualTestsModuleNameFromWidgetClass (_moduleName))
 					}
 				);

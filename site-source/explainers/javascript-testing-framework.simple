@@ -284,7 +284,7 @@ Test Synopsis
 		EXAMPLE
 		........................................................................................
 		var
-			MyTestClass = Uize.Test.declare ({
+			MyTestClass = Uize.Test.resolve ({
 				title:'This is the root test',
 				test:[
 					{
@@ -457,9 +457,9 @@ Test Class Factory Methods
 	Each of these factory methods accepts some parameters to qualify the `test class` that it creates, and then returns a unique subclass of the =Uize.Test= class that is "keyed" to the parameters that were supplied. For example, a test class can be created to test that the module =Uize.Data= can be required and built using the statement =Uize.Test.requiredModulesTest ('Uize.Data')=. In this example, the =modulesSTRorARRAY= parameter accepted by the =Uize.Test.requiredModulesTest= method specifies which module (or modules) should be required and tested to see if requiring them is successful. Other test class factory methods accept different parameters, depending on the kind of test classes they create.
 
 	Basic Test Declaration Factory Method
-		While a basic `test class` can be created by subclassing the =Uize.Test= class and then setting values for the class' state properties, a more convenient approach is to use the =Uize.Test.declare= static method.
+		While a basic `test class` can be created by subclassing the =Uize.Test= class and then setting values for the class' state properties, a more convenient approach is to use the =Uize.Test.resolve= static method.
 
-		The =Uize.Test.declare= method is the most basic of the available `test class factory methods`. It accepts a single parameter, being an object that contains values for the state properties of the =Uize.Test= class.
+		The =Uize.Test.resolve= method is the most basic of the available `test class factory methods`. It accepts a single parameter, being an object that contains values for the state properties of the =Uize.Test= class.
 
 		INSTEAD OF...
 		..................................................
@@ -472,13 +472,13 @@ Test Class Factory Methods
 
 		USE...
 		..................................................
-		Uize.Test.declare ({
+		Uize.Test.resolve ({
 			title:'Test that 2 + 2 equals 4',
 			test:function () {return this.expect (4,2 + 2)}
 		});
 		..................................................
 
-		The =Uize.Test.declare= method returns a =Uize.Test= subclass, so it can be used for declaring a child test in an array of child tests, as with all the other `test class factory methods`. For a more in-depth discussion of the =Uize.Test.declare= method, consult the reference documentation for the =Uize.Test= module.
+		The =Uize.Test.resolve= method returns a =Uize.Test= subclass, so it can be used for declaring a child test in an array of child tests, as with all the other `test class factory methods`. For a more in-depth discussion of the =Uize.Test.resolve= method, consult the reference documentation for the =Uize.Test= module.
 
 	Factory Methods for Fancier Test Declarations
 		Beyond the `basic test declaration factory method`, factory methods also exist for creating test classes in a declarative fashion for some fancier types of tests.
@@ -598,7 +598,7 @@ Test Module
 			builder:function () {
 				'use strict';
 
-				return Uize.Test.declare ({
+				return Uize.Test.resolve ({
 					title:'MyCompanySite.CommonUtils Test',
 					test:[
 						Uize.Test.requiredModulesTest ('MyCompanySite.CommonUtils'),
@@ -613,7 +613,7 @@ Test Module
 		});
 		........................................................................
 
-		In the above example, the `test module` =MyCompanySite.Test.MyCompanySite.CommonUtils= defines a `test class` that tests the =MyCompanySite.CommonUtils= module. The =builder= function uses the =Uize.Test.declare= method to define the test class in a declarative fashion and then returns a reference to the class. The test class has two `Child Tests`, the first of which tests requiring of the module being tested, and the second of which tests all the module's static methods (you'll have to just imagine the code that replaces those comments).
+		In the above example, the `test module` =MyCompanySite.Test.MyCompanySite.CommonUtils= defines a `test class` that tests the =MyCompanySite.CommonUtils= module. The =builder= function uses the =Uize.Test.resolve= method to define the test class in a declarative fashion and then returns a reference to the class. The test class has two `Child Tests`, the first of which tests requiring of the module being tested, and the second of which tests all the module's static methods (you'll have to just imagine the code that replaces those comments).
 
 		One thing you'll notice by looking at the code is that the `test module` is not requiring the module that it is testing - there isn't even a =required= property in the module declaration (the call to the =Uize.module= method) in this case. This is because the module being tested will be required dynamically when an instance of the test class is run, as soon as the `required modules test` is encountered, which happens to be the first test (defined by calling the =Uize.Test.requiredModulesTest= method). This has the benefit that loading the =MyCompanySite.Test.MyCompanySite.CommonUtils= test module does not incur loading of the module that it tests - only when the test is run will the module being tested be loaded, as necessary.
 

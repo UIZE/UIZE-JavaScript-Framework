@@ -50,21 +50,21 @@ Uize.module ({
 			},
 			builderInputs:function (_urlParts) {
 				var
-					_this = this,
-					_jsTemp = _this.tempUrlFromBuiltUrl (_urlParts.pathname),
+					m = this,
+					_jsTemp = m.tempUrlFromBuiltUrl (_urlParts.pathname),
 					_builderInputs = {jsTemp:_jsTemp},
-					_params = _this.params
+					_params = m.params
 				;
 				if (!_params.isDev) {
 					var
-						_moduleName = _this.moduleNameFromTempPath (_jsTemp),
+						_moduleName = m.moduleNameFromTempPath (_jsTemp),
 						_scrunchedHeadComments = _params.scrunchedHeadComments,
 						_scrunchedHeadCommentModule =
 							_scrunchedHeadComments &&
 							_scrunchedHeadComments [Uize.Build.Util.getModuleNamespace (_moduleName)]
 					;
 					if (_scrunchedHeadCommentModule)
-						_builderInputs.scrunchedHeadComment = _this.memoryUrl (
+						_builderInputs.scrunchedHeadComment = m.memoryUrl (
 							_params.modulesFolder + '/' + Uize.modulePathResolver (_scrunchedHeadCommentModule) + '.js.jst'
 						)
 					;
@@ -73,9 +73,9 @@ Uize.module ({
 			},
 			builder:function (_inputs) {
 				var
-					_this = this,
+					m = this,
 					_jsTemp = _inputs.jsTemp,
-					_result = _this.readFile ({path:_jsTemp})
+					_result = m.readFile ({path:_jsTemp})
 				;
 				function _getModuleInheritanceDepth (_moduleName,_moduleCode) {
 					if (_moduleName in _moduleInheritanceDepthLookup) {
@@ -86,9 +86,9 @@ Uize.module ({
 							_superclassKnown
 						;
 						if (!_moduleCode) {
-							var _moduleUrl = _this.getModuleUrl (_moduleName);
-							_this.buildFile (Uize.copy (_this.params,{url:_moduleUrl}));
-							_moduleCode = _this.readFile ({path:_this.builtUrl (_moduleUrl)});
+							var _moduleUrl = m.getModuleUrl (_moduleName);
+							m.buildFile (Uize.copy (m.params,{url:_moduleUrl}));
+							_moduleCode = m.readFile ({path:m.builtUrl (_moduleUrl)});
 						}
 						var _moduleDefinition = Uize.Build.ModuleInfo.getDefinitionFromCode (_moduleCode);
 						if (_moduleDefinition && (_superclassKnown = 'superclass' in _moduleDefinition)) {
@@ -109,9 +109,9 @@ Uize.module ({
 						return _moduleInheritanceDepthLookup [_moduleName] = _inheritanceDepth;
 					}
 				}
-				if (!_this.params.isDev) {
+				if (!m.params.isDev) {
 					var
-						_moduleName = _this.moduleNameFromTempPath (_jsTemp),
+						_moduleName = m.moduleNameFromTempPath (_jsTemp),
 						_scruncherSettings = {},
 						_scrunchedHeadComment = _inputs.scrunchedHeadComment,
 						_keepHeadComment = _scrunchedHeadComment == undefined
@@ -132,7 +132,7 @@ Uize.module ({
 						(
 							_keepHeadComment
 								? ''
-								: _this.readFile ({path:_scrunchedHeadComment}) ({
+								: m.readFile ({path:_scrunchedHeadComment}) ({
 									buildDate:Uize.Date.toIso8601 (),
 									moduleName:_moduleName
 								})

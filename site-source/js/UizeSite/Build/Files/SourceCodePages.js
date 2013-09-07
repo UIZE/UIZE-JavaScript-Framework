@@ -50,12 +50,12 @@ Uize.module ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
 					var
-						_this = this,
+						m = this,
 						_sourcePath = _params.sourcePath
 					;
 
 					/*** add URLs for source code pages for the JavaScript modules ***/
-						_this.addFiles (
+						m.addFiles (
 							Uize.map (
 								Uize.Build.Util.getJsModules (_params).sort (),
 								'"reference/source-code/" + value + ".html"'
@@ -63,7 +63,7 @@ Uize.module ({
 						);
 
 					/*** add URLs for source code pages for the examples ***/
-						_this.addFiles (
+						m.addFiles (
 							Uize.map (
 								UizeSite.Build.Util.getIndexableFiles (_sourcePath,'examples',/\.html$/),
 								'"examples/source-code/" + value'

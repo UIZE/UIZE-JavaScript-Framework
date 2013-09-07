@@ -46,7 +46,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				if (typeof navigator != 'undefined') {
 					var _getMetaTagContent = function (_metaTagName) {
@@ -59,7 +59,7 @@ Uize.module ({
 						}) [0];
 						return _metaTag ? _metaTag.content : '';
 					};
-					_this.set ({
+					m.set ({
 						title:document.title.match (/^\s*(.*?)\s*(\||$)/) [1],
 						url:(this.callInherited ('getPublicUrl') || Uize.nop) () || '',
 						keywords:_getMetaTagContent ('keywords'),

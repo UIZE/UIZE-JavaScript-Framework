@@ -88,11 +88,11 @@ Uize.module ({
 				},
 
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
+					var m = this;
+					if (!m.isWired) {
 						/*** wire up mouseover on UIZE icon in title bar to load and show site menu ***/
 							var _wireUpSiteMenu = function () {
-								_this.unwireNode ('homeLink','mouseover',_wireUpSiteMenu);
+								m.unwireNode ('homeLink','mouseover',_wireUpSiteMenu);
 								Uize.require (
 									'UizeSite.Widgets.SiteMenu.Widget',
 									function () {
@@ -101,7 +101,7 @@ Uize.module ({
 										/*** stitch in the contents tree for this page ***/
 											var
 												_siteMenuItems0Items = _siteMenu.get ('items') [0].items,
-												_contentsTreeItems0 = _this._contentsTreeItems && _this._contentsTreeItems [0]
+												_contentsTreeItems0 = m._contentsTreeItems && m._contentsTreeItems [0]
 											;
 											_contentsTreeItems0 &&
 												_siteMenuItems0Items.unshift (
@@ -111,8 +111,8 @@ Uize.module ({
 											;
 
 										/*** add shell node for site menu, that will overlay homeLink node ***/
-											_this.injectNodeHtml (
-												_this.getNode ('homeLink').parentNode,
+											m.injectNodeHtml (
+												m.getNode ('homeLink').parentNode,
 												'<div id="page_siteMenu-shell" class="siteMenuShell"></div>'
 											);
 
@@ -122,19 +122,19 @@ Uize.module ({
 									}
 								);
 							};
-							_this.wireNode ('homeLink','mouseover',_wireUpSiteMenu);
+							m.wireNode ('homeLink','mouseover',_wireUpSiteMenu);
 
 						var _mainNode = Uize.Node.find ({tagName:'div',className:/\bmain\b/}) [0];
 
 						/*** inject site assistant (if desired) ***/
-							if (_this._showSiteAssistant && _mainNode) {
+							if (m._showSiteAssistant && _mainNode) {
 								/*** add widget and inject its HTML ***/
 									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistantShell"></div>');
-									_this.addChild (
+									m.addChild (
 										'siteAssistant',
 										UizeSite.Widgets.SiteAssistant.Widget,
 										{
-											container:_this.getNode ('siteAssistantShell'),
+											container:m.getNode ('siteAssistantShell'),
 											built:false
 										}
 									);
@@ -144,7 +144,7 @@ Uize.module ({
 										var _newWidth =
 											(Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width) / 2
 										;
-										_this.setNodeStyle (
+										m.setNodeStyle (
 											'siteAssistantShell',
 											_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
 										)
@@ -155,19 +155,19 @@ Uize.module ({
 							}
 
 						/*** inject footer (if desired) ***/
-							if (_this._showFooter) {
+							if (m._showFooter) {
 								Uize.Node.injectHtml (_mainNode,'<div id="page-footerShell"></div>');
-								_this.addChild (
+								m.addChild (
 									'footer',
 									UizeSite.Widgets.Footer.Widget,
 									{
-										container:_this.getNode ('footerShell'),
+										container:m.getNode ('footerShell'),
 										built:false
 									}
 								);
 							}
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 					}
 				}
 			},

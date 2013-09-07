@@ -66,16 +66,16 @@ Uize.module ({
 			},
 			builderInputs:function (_urlParts) {
 				var
-					_this = this,
+					m = this,
 					_pathname = _urlParts.pathname,
-					_librarySourcePath = _this.sourceUrlFromBuiltUrl (_pathname),
-					_libraryFileContents = _this.readFile ({path:_librarySourcePath}),
+					_librarySourcePath = m.sourceUrlFromBuiltUrl (_pathname),
+					_libraryFileContents = m.readFile ({path:_librarySourcePath}),
 					_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
 					_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
 					_modules = []
 				;
 				function _moduleBuiltUrl (_moduleName) {
-					return _this.builtUrl (_this.getModuleUrl (_moduleName));
+					return m.builtUrl (m.getModuleUrl (_moduleName));
 				}
 				Uize.String.Lines.forEach (
 					_contentsCommentStartPos > -1
@@ -120,8 +120,8 @@ Uize.module ({
 					);
 				}
 				var
-					_this = this,
-					_libraryFileContents = _this.readFile ({path:_inputs.librarySource}),
+					m = this,
+					_libraryFileContents = m.readFile ({path:_inputs.librarySource}),
 					_contentsCommentStartPos = _libraryFileContents.search (_contentsCommentRegExp),
 					_contentsCommentEndPos = _libraryFileContents.indexOf ('*/',_contentsCommentStartPos),
 					_libraryUsesUizeModules,
@@ -131,7 +131,7 @@ Uize.module ({
 							if (!_libraryUsesUizeModules)
 								_libraryUsesUizeModules = Uize.String.startsWith (Uize.Url.from (_modulePath).fileName,'Uize')
 							;
-							return _stripModuleHeaderComment (_this.readFile ({path:_modulePath}));
+							return _stripModuleHeaderComment (m.readFile ({path:_modulePath}));
 						}
 					)
 				;

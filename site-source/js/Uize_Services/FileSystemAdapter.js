@@ -33,7 +33,7 @@ Uize.module ({
 			instanceMethods:{
 				_getItemsInFolderRecursive:function (_params,_mustBeFolder) {
 					var
-						_this = this,
+						m = this,
 						_result = [],
 						_path = _params.path,
 						_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
@@ -47,7 +47,7 @@ Uize.module ({
 						;
 						Uize.push (
 							_result,
-							_this.getItemsInFolder (
+							m.getItemsInFolder (
 								{
 									path:_pathPlusSubPath,
 									pathMatcher:function (_itemPath) {
@@ -62,7 +62,7 @@ Uize.module ({
 						);
 						if (_recursive) {
 							Uize.forEach (
-								_this.getItemsInFolder ({path:_pathPlusSubPath},true),
+								m.getItemsInFolder ({path:_pathPlusSubPath},true),
 								function (_folderName) {_addItemsFromFolder (_subPath + (_subPath && '/') + _folderName)}
 							);
 						}

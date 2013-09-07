@@ -24,7 +24,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** add performTest child buttonm ***/
 					var _performTestButton = Uize.Widget.Button.addChildButton.call (
@@ -32,16 +32,16 @@ Uize.module ({
 						'performTest',
 						function () {
 							_performTestButton.set ({busy:true});
-							_this.setNodeInnerHtml (
+							m.setNodeInnerHtml (
 								'testResults',
 								'<div style="font-size:30px; text-align:center;">BUSY PERFORMING TEST</div>' +
 								'<div style="font-size:11px; text-align:center;">-- you get no progress bar because we don\'t want to pollute the results --</div>'
 							);
 							setTimeout (
 								function () {
-									_this.performTest (
+									m.performTest (
 										function (_testResults) {
-											_this.setNodeInnerHtml ('testResults',_testResults);
+											m.setNodeInnerHtml ('testResults',_testResults);
 											/*?
 												Implied Nodes
 													testResults

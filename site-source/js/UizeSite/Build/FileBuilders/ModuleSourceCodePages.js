@@ -49,17 +49,17 @@ Uize.module ({
 			},
 			builderInputs:function (_urlParts) {
 				var
-					_this = this,
-					_moduleUrl = _this.getModuleUrl (_urlParts.fileName,false),
-					_sourcePathSansExtension = _this.sourceUrl (_moduleUrl)
+					m = this,
+					_moduleUrl = m.getModuleUrl (_urlParts.fileName,false),
+					_sourcePathSansExtension = m.sourceUrl (_moduleUrl)
 				;
 				return {
 					sourceCode:
-						_this.fileExists ({path:_sourcePathSansExtension + _jsJstExtension})
+						m.fileExists ({path:_sourcePathSansExtension + _jsJstExtension})
 							? _sourcePathSansExtension + _jsJstExtension
-							: _this.fileExists ({path:_sourcePathSansExtension + _cssSourceExtension})
+							: m.fileExists ({path:_sourcePathSansExtension + _cssSourceExtension})
 								? _sourcePathSansExtension + _cssSourceExtension
-								: _this.tempUrl (_moduleUrl) + _jsExtension
+								: m.tempUrl (_moduleUrl) + _jsExtension
 					,
 					sourceCodeTemplate:this.memoryUrl (_modulesSourceCodePagesPath + '~SOURCE-CODE-TEMPLATE.html.jst')
 				};

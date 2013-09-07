@@ -32,9 +32,9 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 				function _addTestCaseWithDummyMessages (_totalMessages) {
-					var _log = _this.addStateTestCase ();
+					var _log = m.addStateTestCase ();
 					Uize.forEach (_totalMessages,function () {_log.log ('a log message')});
 				}
 				_addTestCaseWithDummyMessages (0);

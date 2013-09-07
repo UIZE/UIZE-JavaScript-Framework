@@ -33,8 +33,8 @@ Uize.module ({
 		'Uize.String'
 	],
 	builder:function () {
-		function _todoSourceFilePath (_this,_urlParts) {
-			return _this.sourceUrl (_this.getModuleUrl (_urlParts.fileName,false) + '.todo');
+		function _todoSourceFilePath (m,_urlParts) {
+			return m.sourceUrl (m.getModuleUrl (_urlParts.fileName,false) + '.todo');
 		}
 
 		return Uize.package ({

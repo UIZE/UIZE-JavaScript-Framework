@@ -45,16 +45,16 @@ Uize.module ({
 
 			instanceMethods:{
 				addStateCombinationSamples:function (_stateCombinationsSpecifier) {
-					var _this = this;
+					var m = this;
 					Uize.Data.Combinations.forEach (
 						_stateCombinationsSpecifier,
-						function (_state) {_this.addSample (_state)}
+						function (_state) {m.addSample (_state)}
 					);
 				},
 
 				addSample:function (_state) {
-					var _this = this;
-					return _this._samples.addChild ('sample' + _this._totalSamples++,_this.Class.widgetClass,_state);
+					var m = this;
+					return m._samples.addChild ('sample' + m._totalSamples++,m.Class.widgetClass,_state);
 				}
 			},
 

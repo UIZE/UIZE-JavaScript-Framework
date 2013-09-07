@@ -41,22 +41,22 @@ Uize.module ({
 
 			instanceMethods:{
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
+					var m = this;
+					if (!m.isWired) {
 						/*** insert the title HTML ***/
 							Uize.Node.injectHtml (
 								document.body,
 								UizeSite.Templates.WidgetToGoTitle.process ({
-									idPrefix:_this.get ('idPrefix'),
+									idPrefix:m.get ('idPrefix'),
 									title:document.title
 								})
 							);
 
 						/*** add the main child widget ***/
 							Uize.require (
-								[_this._widgetToGoClass,_this._widgetToGoHtml],
+								[m._widgetToGoClass,m._widgetToGoHtml],
 								function (_widgetToGoClass,_widgetToGoHtml) {
-									_this.addChild (
+									m.addChild (
 										'widget',
 										_widgetToGoClass,
 										{
@@ -69,8 +69,8 @@ Uize.module ({
 
 						/*** wire up the menu links ***/
 							var
-								_menu = _this.children.menu,
-								_widgetHomepageUrl = '../' + _this._title.toLowerCase ().replace (/\s+/g,'-') + '.html',
+								_menu = m.children.menu,
+								_widgetHomepageUrl = '../' + m._title.toLowerCase ().replace (/\s+/g,'-') + '.html',
 								_launchPopup = function (_name,_url,_width,_height,_haveStuff) {
 									page.launchPopup ({
 										name:_name,
@@ -104,7 +104,7 @@ Uize.module ({
 								}
 							);
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 					}
 				}
 			},

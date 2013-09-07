@@ -47,18 +47,18 @@ Uize.module ({
 
 			instanceMethods:{
 				addStateCombinationTestCases:function (_stateCombinationsSpecifier) {
-					var _this = this;
+					var m = this;
 					Uize.Data.Combinations.forEach (
 						_stateCombinationsSpecifier,
-						function (_state) {_this.addStateTestCase (_state)}
+						function (_state) {m.addStateTestCase (_state)}
 					);
 				},
 
 				addStateTestCase:function (_state) {
-					var _this = this;
-					return _this._testCases
-						.addChild ('testCase' + _this._totalTestCases++,_testCaseWidgetClass,{state:Uize.copy (_state)})
-						.addChild ('widget',_this.Class.widgetClass,_state)
+					var m = this;
+					return m._testCases
+						.addChild ('testCase' + m._totalTestCases++,_testCaseWidgetClass,{state:Uize.copy (_state)})
+						.addChild ('widget',m.Class.widgetClass,_state)
 					;
 				}
 			},

@@ -50,15 +50,15 @@ Uize.module ({
 
 				perform:function (_params) {
 					var
-						_this = this,
-						_fileSystem = _this.fileSystem = Uize.Services.FileSystem.singleton (),
-						_filesToBuild = _this.filesToBuild = []
+						m = this,
+						_fileSystem = m.fileSystem = Uize.Services.FileSystem.singleton (),
+						_filesToBuild = m.filesToBuild = []
 					;
-					_this.fileBuilder = Uize.Services.FileBuilder.singleton ();
-					_this.determineFilesToBuild (_params);
+					m.fileBuilder = Uize.Services.FileBuilder.singleton ();
+					m.determineFilesToBuild (_params);
 					_fileSystem.writeFile ({
 						path:_params.logFilePath,
-						contents:_this.fileBuilder.buildFile (Uize.copyInto ({url:_filesToBuild},_params))
+						contents:m.fileBuilder.buildFile (Uize.copyInto ({url:_filesToBuild},_params))
 					});
 				}
 			},

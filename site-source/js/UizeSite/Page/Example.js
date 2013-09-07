@@ -29,17 +29,17 @@ Uize.module ({
 		return _superclass.subclass ({
 			instanceMethods:{
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
+					var m = this;
+					if (!m.isWired) {
 						/*** add the DELVE button ***/
-							_this.injectNodeHtml (
+							m.injectNodeHtml (
 								'actions',
-								'<a id="' + _this.get ('idPrefix') + '-delve" href="javascript://" class="buttonLink" title="Launch the DELVE tool to inspect the inner workings of this page">DELVE</a>',
+								'<a id="' + m.get ('idPrefix') + '-delve" href="javascript://" class="buttonLink" title="Launch the DELVE tool to inspect the inner workings of this page">DELVE</a>',
 								'inner bottom'
 							);
 
 						/*** wire up the DELVE link ***/
-							_this.wireNode (
+							m.wireNode (
 								'delve',
 								'click',
 								function () {
@@ -88,15 +88,15 @@ Uize.module ({
 							);
 
 						/*** wire programmatic links ***/
-							_this._evaluator &&
-								_this.wireNode (
+							m._evaluator &&
+								m.wireNode (
 									Uize.Node.find ({tagName:'A',className:/\blinkedJs\b/}),
 									'click',
-									function () {_this._evaluator (this.title || this.innerHTML)}
+									function () {m._evaluator (this.title || this.innerHTML)}
 								)
 							;
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 
 						/*** add tour interface, if necessary ***/
 							var _tour = Uize.Url.fromParams (location.href).tour;
@@ -107,12 +107,12 @@ Uize.module ({
 								Uize.require (
 									'UizeSite.Widgets.TourBar.Widget',
 									function () {
-										_this.addChild (
+										m.addChild (
 											'tourBar',
 											UizeSite.Widgets.TourBar.Widget,
 											{
 												tour:_tour,
-												container:_this.getNode ('tourBarShell'),
+												container:m.getNode ('tourBarShell'),
 												built:false
 											}
 										).insertUi ();

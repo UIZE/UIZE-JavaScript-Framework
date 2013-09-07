@@ -50,10 +50,10 @@ Uize.module ({
 		function _async (_function) {
 			return function () {
 				var
-					_this = this,
+					m = this,
 					_arguments = arguments
 				;
-				setTimeout (function () {_function.apply (_this,_arguments)},0);
+				setTimeout (function () {_function.apply (m,_arguments)},0);
 			};
 		}
 
@@ -67,7 +67,7 @@ Uize.module ({
 							title:'Test aborting from a block',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b'],
 									_actual = []
 								;
@@ -78,7 +78,7 @@ Uize.module ({
 									_asyncPushActualAndNext (_actual,'c')
 								) (
 									function () {
-										_next (_this.expect (_expected,_actual));
+										_next (m.expect (_expected,_actual));
 									}
 								);
 							}
@@ -89,7 +89,7 @@ Uize.module ({
 							title:'Test that the statements of a block are executed in the correct order when all statements execute asynchronously',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c'],
 									_actual = []
 								;
@@ -99,7 +99,7 @@ Uize.module ({
 									_asyncPushActualAndNext (_actual,'c')
 								) (
 									function () {
-										_next (_this.expect (_expected,_actual));
+										_next (m.expect (_expected,_actual));
 									}
 								);
 							}
@@ -108,7 +108,7 @@ Uize.module ({
 							title:'Test that the statements of a block are executed in the correct order when all statements execute synchronously',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c'],
 									_actual = []
 								;
@@ -118,7 +118,7 @@ Uize.module ({
 									_syncPushActualAndNext (_actual,'c')
 								) (
 									function () {
-										_next (_this.expect (_expected,_actual));
+										_next (m.expect (_expected,_actual));
 									}
 								);
 							}
@@ -127,7 +127,7 @@ Uize.module ({
 							title:'Test that nested blocks are supported correctly',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','A','B','1','2','C','c'],
 									_actual = []
 								;
@@ -146,7 +146,7 @@ Uize.module ({
 									_asyncPushActualAndNext (_actual,'c')
 								) (
 									function () {
-										_next (_this.expect (_expected,_actual));
+										_next (m.expect (_expected,_actual));
 									}
 								);
 							}
@@ -180,7 +180,7 @@ Uize.module ({
 							title:'Test that a while loop where the statements are asynchronous is handled correctly',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c','d','e','f','g'],
 									_actual = [],
 									_items = _expected.concat ()
@@ -190,7 +190,7 @@ Uize.module ({
 									_async (function (_next) {_next (_items.length)})
 								) (
 									function () {
-										_next (_this.expect (_expected,_actual));
+										_next (m.expect (_expected,_actual));
 									}
 								);
 							}
@@ -199,7 +199,7 @@ Uize.module ({
 							title:'Test that a while loop where the statements are synchronous is handled correctly',
 							test:function () {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c','d','e','f','g'],
 									_actual = [],
 									_items = _expected.concat ()
@@ -208,7 +208,7 @@ Uize.module ({
 									function (_next) {_actual.push (_items.shift ()); _next ();},
 									function (_next) {_next (_items.length)}
 								) ();
-								return _this.expect (_expected,_actual);
+								return m.expect (_expected,_actual);
 							}
 						}
 					]],
@@ -217,7 +217,7 @@ Uize.module ({
 							title:'Test that a for loop where the statements are asynchronous is handled correctly',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c','d','e','f','g'],
 									_actual = [],
 									_itemNo,
@@ -230,7 +230,7 @@ Uize.module ({
 									_async (function (_next) {_actual.push (_items [_itemNo]); _next ()})
 								) (
 									function () {
-										_next (_this.expect (_expected,_actual));
+										_next (m.expect (_expected,_actual));
 									}
 								);
 							}
@@ -239,7 +239,7 @@ Uize.module ({
 							title:'Test that a for loop where the statements are synchronous is handled correctly',
 							test:function () {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c','d','e','f','g'],
 									_actual = [],
 									_itemNo,
@@ -251,7 +251,7 @@ Uize.module ({
 									function (_next) {_itemNo++; _next ()},
 									function (_next) {_actual.push (_items [_itemNo]); _next ()}
 								) ();
-								return _this.expect (_expected,_actual);
+								return m.expect (_expected,_actual);
 							}
 						}
 					]],
@@ -270,7 +270,7 @@ Uize.module ({
 							title:'Test that an ongoing loop can be terminated with an internal break',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_items = ['a','b','c','d','e','f','g'],
 									_actual = []
 								;
@@ -284,7 +284,7 @@ Uize.module ({
 									_async (function (_next) {_actual.length == 4 ? _next.flo ['break'] () : _next ()})
 								) (
 									function () {
-										_next (_this.expect (['a','b','c','d'],_actual));
+										_next (m.expect (['a','b','c','d'],_actual));
 									}
 								);
 							}
@@ -310,7 +310,7 @@ Uize.module ({
 							title:'Test that an ongoing loop can be terminated by calling break on the flo reference that would be accessible externally',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_items = ['a','b','c','d','e','f','g'],
 									_actual = [],
 									_flo = Uize.Flo.ongoing (
@@ -323,7 +323,7 @@ Uize.module ({
 										_async (function (_next) {_actual.length == 4 ? _flo ['break'] () : _next ()})
 									) (
 										function () {
-											_next (_this.expect (['a','b','c','d'],_actual));
+											_next (m.expect (['a','b','c','d'],_actual));
 										}
 									)
 								;
@@ -339,7 +339,7 @@ Uize.module ({
 							title:'Test that a while loop where the statements are asynchronous is handled correctly',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c','d','e','f','g'],
 									_actual = [],
 									_items = _expected.concat ()
@@ -349,7 +349,7 @@ Uize.module ({
 									_async (function (_next) {_actual.push (_items.shift ()); _next ();})
 								) (
 									function () {
-										_next (_this.expect (_expected,_actual));
+										_next (m.expect (_expected,_actual));
 									}
 								);
 							}
@@ -358,7 +358,7 @@ Uize.module ({
 							title:'Test that a while loop where the statements are synchronous is handled correctly',
 							test:function () {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c','d','e','f','g'],
 									_actual = [],
 									_items = _expected.concat ()
@@ -367,7 +367,7 @@ Uize.module ({
 									function (_next) {_next (_items.length)},
 									function (_next) {_actual.push (_items.shift ()); _next ();}
 								) ();
-								return _this.expect (_expected,_actual);
+								return m.expect (_expected,_actual);
 							}
 						}
 					]]
@@ -379,7 +379,7 @@ Uize.module ({
 							title:'Test that, when breathing is enabled, asynchronous breaks are introduced between all statements in a block of synchronous statements',
 							test:function (_next) {
 								var
-									_this = this,
+									m = this,
 									_expected = ['a','b','c'],
 									_actual = []
 								;
@@ -391,8 +391,8 @@ Uize.module ({
 									breatheAfter:0,
 									callback:function () {
 										_next (
-											_this.expect (['a'],_actualImmediatelyAfterFloInvokation) &&
-											_this.expect (_expected,_actual)
+											m.expect (['a'],_actualImmediatelyAfterFloInvokation) &&
+											m.expect (_expected,_actual)
 										);
 									}
 								});

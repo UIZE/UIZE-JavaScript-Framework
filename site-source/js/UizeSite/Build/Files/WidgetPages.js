@@ -33,7 +33,7 @@ Uize.module ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
 					var
-						_this = this,
+						m = this,
 						_widgetsFolder = 'widgets'
 					;
 					Uize.forEach (
@@ -42,7 +42,7 @@ Uize.module ({
 						).widgets,
 						function (_widget) {
 							var _widgetFilesPathPrefix = _widgetsFolder + '/' + _widget.title.toLowerCase ();
-							_this.addFiles (
+							m.addFiles (
 								_widgetFilesPathPrefix + '.html',        // homepage
 								_widgetFilesPathPrefix + '/gadget.xml',  // Google Gadget XML
 								_widgetFilesPathPrefix + '/web.html',    // Web version

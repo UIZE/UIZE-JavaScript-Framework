@@ -58,14 +58,14 @@ Uize.module ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
 					var
-						_this = this,
+						m = this,
 						_sourcePath = _params.sourcePath
 					;
 
 					/*** add URLs for all .simple files (explainers, appendixes, JavaScript reference pages, etc.) ***/
 						var _dotSimpleExtensionRegExp = /\.simple$/;
-						_this.addFiles (
-							_this.fileSystem.getFiles ({
+						m.addFiles (
+							m.fileSystem.getFiles ({
 								path:_sourcePath,
 								recursive:true,
 								pathMatcher:_dotSimpleExtensionRegExp,
@@ -74,7 +74,7 @@ Uize.module ({
 						);
 
 					/*** add URLs for all JavaScript module reference files ***/
-						_this.addFiles (
+						m.addFiles (
 							Uize.map (
 								Uize.Build.Util.getJsModules (_params).sort (),
 								'"reference/" + value + ".html"'

@@ -126,15 +126,15 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			alphastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** Private Instance Properties ***/
-					_this._filesConsideredCurrentLookup = {};
-					_this._objectCache = {};
+					m._filesConsideredCurrentLookup = {};
+					m._objectCache = {};
 
 				/*** Public Instance Properties ***/
-					_this.fileSystem = Uize.Services.FileSystem.singleton ();
-					_this.urlHandlers = [];
+					m.fileSystem = Uize.Services.FileSystem.singleton ();
+					m.urlHandlers = [];
 			},
 
 			instanceMethods:{
@@ -177,65 +177,65 @@ Uize.module ({
 				/*** abstractions of various methods of the file system service to support object storage ***/
 					writeFile:function (_params) {
 						var
-							_this = this,
+							m = this,
 							_path = _params.path
 						;
-						_this.isMemoryUrl (_path)
+						m.isMemoryUrl (_path)
 							? (
-								_this._objectCache [_path] = {
+								m._objectCache [_path] = {
 									contents:_params.contents,
 									modifiedDate:new Date
 								}
 							)
-							: _this.fileSystem.writeFile (_params)
+							: m.fileSystem.writeFile (_params)
 						;
 					},
 
 					readFile:function (_params) {
 						var
-							_this = this,
+							m = this,
 							_path = _params.path
 						;
 						return (
-							_this.isMemoryUrl (_path)
-								? (_this._objectCache [_path] || _sacredEmptyObject).contents
-								: _this.fileSystem.readFile (_params)
+							m.isMemoryUrl (_path)
+								? (m._objectCache [_path] || _sacredEmptyObject).contents
+								: m.fileSystem.readFile (_params)
 						);
 					},
 
 					getModifiedDate:function (_params) {
 						var
-							_this = this,
+							m = this,
 							_path = _params.path
 						;
 						return (
-							_this.isMemoryUrl (_path)
-								? (_this._objectCache [_path] || _sacredEmptyObject).modifiedDate
-								: _this.fileSystem.getModifiedDate (_params)
+							m.isMemoryUrl (_path)
+								? (m._objectCache [_path] || _sacredEmptyObject).modifiedDate
+								: m.fileSystem.getModifiedDate (_params)
 						);
 					},
 
 					fileExists:function (_params) {
 						var
-							_this = this,
+							m = this,
 							_path = _params.path
 						;
 						return (
-							_this.isMemoryUrl (_path)
-								? !!_this._objectCache [_path]
-								: _this.fileSystem.fileExists (_params)
+							m.isMemoryUrl (_path)
+								? !!m._objectCache [_path]
+								: m.fileSystem.fileExists (_params)
 						);
 					},
 
 					folderExists:function (_params) {
 						var
-							_this = this,
+							m = this,
 							_path = _params.path
 						;
 						return (
-							_this.isMemoryUrl (_path)
-								? !!_this._objectCache [_path]
-								: _this.fileSystem.folderExists (_params)
+							m.isMemoryUrl (_path)
+								? !!m._objectCache [_path]
+								: m.fileSystem.folderExists (_params)
 							);
 					},
 
@@ -278,16 +278,16 @@ Uize.module ({
 					},
 
 				buildFile:function (_params,_callback) {
-					var _this = this;
+					var m = this;
 					if (_params.filesModified)
-						_this._filesConsideredCurrentLookup = {}
+						m._filesConsideredCurrentLookup = {}
 					;
 					var
-						_filesConsideredCurrentLookup = _this._filesConsideredCurrentLookup,
+						_filesConsideredCurrentLookup = m._filesConsideredCurrentLookup,
 						_staleBefore = _params.staleBefore = Uize.toNumber (_params.staleBefore,-Infinity)
 					;
 					_params.isDev = _params.isDev == 'true';
-					_this.params = _params;
+					m.params = _params;
 
 					function _ensureFileCurrent (_url) {
 						var
@@ -308,20 +308,20 @@ Uize.module ({
 							for (
 								var
 									_urlHandlerNo = -1,
-									_urlHandlers = _this.urlHandlers,
+									_urlHandlers = m.urlHandlers,
 									_urlHandlersLength = _urlHandlers.length,
 									_urlHandler
 								;
 								++_urlHandlerNo < _urlHandlersLength;
 							) {
-								if ((_urlHandler = _urlHandlers [_urlHandlerNo]).urlMatcher.call (_this,_urlParts)) {
+								if ((_urlHandler = _urlHandlers [_urlHandlerNo]).urlMatcher.call (m,_urlParts)) {
 									_matchingHandler = _urlHandler;
 									break;
 								}
 							}
 							if (_matchingHandler) {
 								var
-									_builderInputs = (_matchingHandler.builderInputs || Uize.nop).call (_this,_urlParts),
+									_builderInputs = (_matchingHandler.builderInputs || Uize.nop).call (m,_urlParts),
 									_builder = _matchingHandler.builder
 								;
 								if (_builderInputs || _builder) {
@@ -340,7 +340,7 @@ Uize.module ({
 													_subLogs.push (_subLog)
 												;
 												if (
-													(_builderInputModifiedDate = _this.getModifiedDate ({path:_builderInput})) >
+													(_builderInputModifiedDate = m.getModifiedDate ({path:_builderInput})) >
 													_maxBuilderInputModifiedDate
 												)
 													_maxBuilderInputModifiedDate = _builderInputModifiedDate
@@ -353,21 +353,21 @@ Uize.module ({
 									_processBuilderInput (_builderInputs);
 
 									if (
-										!_this.fileExists ({path:_path}) ||
-										_this.getModifiedDate ({path:_path}) < _maxBuilderInputModifiedDate
+										!m.fileExists ({path:_path}) ||
+										m.getModifiedDate ({path:_path}) < _maxBuilderInputModifiedDate
 									) {
 										var _buildError;
 										try {
 											if (_builder) {
-												_this.writeFile ({
+												m.writeFile ({
 													path:_url,
-													contents:_builder.call (_this,_builderInputs,_urlParts)
+													contents:_builder.call (m,_builderInputs,_urlParts)
 												});
-												if (_this.isMemoryUrl (_url))
-													_this._objectCache [_url].modifiedDate = _maxBuilderInputModifiedDate
+												if (m.isMemoryUrl (_url))
+													m._objectCache [_url].modifiedDate = _maxBuilderInputModifiedDate
 												;
 											} else {
-												_this.fileSystem.copyFile ({
+												m.fileSystem.copyFile ({
 													path:Uize.values (_builderInputs) [0],targetPath:_url
 												});
 											}
@@ -410,9 +410,9 @@ Uize.module ({
 						return _log;
 					}
 
-					var _pathPrefix = _this.params.pathPrefix;
+					var _pathPrefix = m.params.pathPrefix;
 					if (_pathPrefix == _undefined)
-						_pathPrefix = _this.params.builtPath + '/'
+						_pathPrefix = m.params.builtPath + '/'
 					;
 					var
 						_url = _params.url,

@@ -79,11 +79,11 @@ Uize.module ({
 				/*** Public Instance Methods ***/
 					copyFile:function (_params,_callback) {
 						var
-							_this = this,
+							m = this,
 							_targetPath = _params.targetPath
 						;
-						_this._makeFolder (_getParentFolderPath (_targetPath));
-						_this._fileSystemObject.CopyFile (_params.path,_targetPath,true);
+						m._makeFolder (_getParentFolderPath (_targetPath));
+						m._fileSystemObject.CopyFile (_params.path,_targetPath,true);
 						_callback ();
 					},
 
@@ -145,13 +145,13 @@ Uize.module ({
 
 					writeFile:function (_params,_callback) {
 						var
-							_this = this,
+							m = this,
 							_path = _params.path
 						;
-						_this._makeFolder (_getParentFolderPath (_path));
+						m._makeFolder (_getParentFolderPath (_path));
 
 						/*** write text to file and close ***/
-							var _file = _this._fileSystemObject.CreateTextFile (_path);
+							var _file = m._fileSystemObject.CreateTextFile (_path);
 							_file.Write (_params.contents);
 							_file.Close ();
 

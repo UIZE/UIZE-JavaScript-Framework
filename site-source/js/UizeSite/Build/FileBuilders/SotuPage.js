@@ -46,21 +46,21 @@ Uize.module ({
 			},
 			builderInputs:function (_urlParts) {
 				var
-					_this = this,
-					_params = _this.params,
+					m = this,
+					_params = m.params,
 					_inputs = {
-						jstSource:_this.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst',
-						referencesIndex:_this.memoryUrl ('reference.index'),
-						examplesByKeyword:_this.memoryUrl ('examples-by-keyword')
+						jstSource:m.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst',
+						referencesIndex:m.memoryUrl ('reference.index'),
+						examplesByKeyword:m.memoryUrl ('examples-by-keyword')
 					}
 				;
 				Uize.forEach (
 					Uize.Build.Util.getJsModules (_params),
 					function (_moduleName) {
 						if (_isModuleForSotu (_moduleName)) {
-							var _moduleUrl = _this.getModuleUrl (_moduleName);
-							_inputs ['moduleBuiltSize_' + _moduleName] = _this.memoryUrl (_moduleUrl + '.builtsize');
-							_inputs ['moduleMetaData_' + _moduleName] = _this.memoryUrl (_moduleUrl + '.metadata');
+							var _moduleUrl = m.getModuleUrl (_moduleName);
+							_inputs ['moduleBuiltSize_' + _moduleName] = m.memoryUrl (_moduleUrl + '.builtsize');
+							_inputs ['moduleMetaData_' + _moduleName] = m.memoryUrl (_moduleUrl + '.metadata');
 						}
 					}
 				);
@@ -68,9 +68,9 @@ Uize.module ({
 			},
 			builder:function (_inputs) {
 				var
-					_this = this,
-					_moduleReferenceFiles = _this.readFile ({path:_inputs.referencesIndex}),
-					_examplesByKeyword = _this.readFile ({path:_inputs.examplesByKeyword}),
+					m = this,
+					_moduleReferenceFiles = m.readFile ({path:_inputs.referencesIndex}),
+					_examplesByKeyword = m.readFile ({path:_inputs.examplesByKeyword}),
 					_modules = []
 				;
 				for (
@@ -83,7 +83,7 @@ Uize.module ({
 					;
 					if (_isModuleForSotu (_moduleName)) {
 						var
-							_metaData = _this.readFile ({path:_inputs ['moduleMetaData_' + _moduleName]}),
+							_metaData = m.readFile ({path:_inputs ['moduleMetaData_' + _moduleName]}),
 							_directSubmodules = 0,
 							_nestedSubmodules = 0
 						;
@@ -114,11 +114,11 @@ Uize.module ({
 							docCompleteness:+_metaData.docCompleteness || 0,
 							testCompleteness:+_metaData.testCompleteness || 0,
 							keywords:_metaData.keywords || '',
-							scrunchedFileSize:_this.readFile ({path:_inputs ['moduleBuiltSize_' + _moduleName]})
+							scrunchedFileSize:m.readFile ({path:_inputs ['moduleBuiltSize_' + _moduleName]})
 						});
 					}
 				}
-				return _this.readFile ({path:_inputs.jstSource}) ({modules:_modules});
+				return m.readFile ({path:_inputs.jstSource}) ({modules:_modules});
 			}
 		});
 	}

@@ -45,7 +45,7 @@ Uize.module ({
 			},
 			builder:function (_inputs) {
 				var
-					_this = this,
+					m = this,
 					_urlDictionary = {}
 				;
 
@@ -54,7 +54,7 @@ Uize.module ({
 						for (
 							var
 								_listingNo = -1,
-								_listings = _this.readFile ({path:_inputs [_inputName]}).listings,
+								_listings = m.readFile ({path:_inputs [_inputName]}).listings,
 								_listingsLength = _listings.length,
 								_listing
 							;
@@ -70,7 +70,7 @@ Uize.module ({
 
 				/*** add links to module reference pages ***/
 					Uize.forEach (
-						Uize.Build.Util.getJsModules (_this.params),
+						Uize.Build.Util.getJsModules (m.params),
 						function (_moduleName) {
 							_urlDictionary [_moduleName] = '/reference/' + _moduleName + '.html';
 						}
@@ -81,8 +81,8 @@ Uize.module ({
 						_simpleModuleExtensionRegExp = /\.simple$/,
 						_javaScriptReferenceFolder = 'javascript-reference'
 					;
-					_this.fileSystem.getFiles ({
-						path:_this.sourceUrl (_javaScriptReferenceFolder),
+					m.fileSystem.getFiles ({
+						path:m.sourceUrl (_javaScriptReferenceFolder),
 						pathMatcher:_simpleModuleExtensionRegExp,
 						pathTransformer:function (_filePath) {
 							var _fileName = Uize.Url.from (_filePath).file.replace (_simpleModuleExtensionRegExp,'');

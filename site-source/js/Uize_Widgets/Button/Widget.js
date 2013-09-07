@@ -77,9 +77,9 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			function _updateUiText () {
-				var _this = this;
-				_this.isWired && _this._text != _undefined &&
-					_this.setNodeInnerHtml (_this.getNode ('text') || _this.getNode (),_this._text)
+				var m = this;
+				m.isWired && m._text != _undefined &&
+					m.setNodeInnerHtml (m.getNode ('text') || m.getNode (),m._text)
 				;
 				/*?
 					Implied Nodes
@@ -94,9 +94,9 @@ Uize.module ({
 			}
 
 			function _updateUiDisplayedTipText () {
-				var _this = this;
-				_this.isWired && _this._displayedTipText != _undefined &&
-					_this.setNodeProperties ('',{title:_this._displayedTipText})
+				var m = this;
+				m.isWired && m._displayedTipText != _undefined &&
+					m.setNodeProperties ('',{title:m._displayedTipText})
 				;
 				/*?
 					Implied Nodes
@@ -111,25 +111,25 @@ Uize.module ({
 			}
 
 			function _updateDisplayState () {
-				var _this = this;
-				if (_this._created) {
+				var m = this;
+				if (m._created) {
 					var
-						_enabledInherited = _this.get ('enabledInherited'),
-						_busyInherited = _this.get ('busyInherited'),
+						_enabledInherited = m.get ('enabledInherited'),
+						_busyInherited = m.get ('busyInherited'),
 						_stateCombinationNo =
 							/* disabled state  */ (!_enabledInherited ? 16 : 0) |
-							/* default state */ (!_this._state || _busyInherited ? 8 : 0) |
-							/* over state    */ (_this == _overButton ? 4 : 0) |
-							/* active state  */ (_this._state == 'down' || _this._selected ? 2 : 0) |
-							/* playing state */ (_this._playing ? 1 : 0)
+							/* default state */ (!m._state || _busyInherited ? 8 : 0) |
+							/* over state    */ (m == _overButton ? 4 : 0) |
+							/* active state  */ (m._state == 'down' || m._selected ? 2 : 0) |
+							/* playing state */ (m._playing ? 1 : 0)
 						,
-						_displayState = _this._statePrecedenceMap [_stateCombinationNo]
+						_displayState = m._statePrecedenceMap [_stateCombinationNo]
 					;
 					if (_displayState == _undefined) {
 						for (
 							var
 								_stateNo = -1,
-								_statePrecedence = _this._statePrecedence,
+								_statePrecedence = m._statePrecedence,
 								_statePrecedenceLength = _statePrecedence.length
 							;
 							++_stateNo < _statePrecedenceLength;
@@ -140,14 +140,14 @@ Uize.module ({
 								break;
 							}
 						}
-						_this._statePrecedenceMap [_stateCombinationNo] = _displayState;
+						m._statePrecedenceMap [_stateCombinationNo] = _displayState;
 					}
-					_this.set ({_displayState:_this._flavor + (_displayState && ('-' + _displayState))});
+					m.set ({_displayState:m._flavor + (_displayState && ('-' + _displayState))});
 
-					if (_this.isWired && _this._tooltip && Uize.Tooltip) {
-						var _newTooltipShown = _this._state == 'over' && _enabledInherited && !_this._selected;
-						_newTooltipShown != _this._tooltipShown &&
-							Uize.Tooltip.showTooltip (_this._tooltip,_this._tooltipShown = _newTooltipShown)
+					if (m.isWired && m._tooltip && Uize.Tooltip) {
+						var _newTooltipShown = m._state == 'over' && _enabledInherited && !m._selected;
+						_newTooltipShown != m._tooltipShown &&
+							Uize.Tooltip.showTooltip (m._tooltip,m._tooltipShown = _newTooltipShown)
 						;
 					}
 				}
@@ -155,18 +155,18 @@ Uize.module ({
 
 		return _class = _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
-				_this._created = _true;
+				var m = this;
+				m._created = _true;
 
 				function _setStateAndUpdateDisplayState () {
-					_this._isClickable () || _this.set ({_state:''});
-					_updateDisplayState.call (_this);
+					m._isClickable () || m.set ({_state:''});
+					_updateDisplayState.call (m);
 				}
-				_this.wire ({
+				m.wire ({
 					'Changed.busyInherited':_setStateAndUpdateDisplayState,
 					'Changed.enabledInherited':_setStateAndUpdateDisplayState
 				});
-				_updateDisplayState.call (_this);
+				_updateDisplayState.call (m);
 			},
 
 			instanceProperties:{
@@ -175,28 +175,28 @@ Uize.module ({
 
 			instanceMethods:{
 				_isClickable:function (_ignoreSelected) {
-					var _this = this;
+					var m = this;
 					return !!(
-						_this.get ('enabledInherited') && !_this.get ('busyInherited') &&
-						(_ignoreSelected || !_this._selected || _this._clickToDeselect || _this._allowClickWhenSelected)
+						m.get ('enabledInherited') && !m.get ('busyInherited') &&
+						(_ignoreSelected || !m._selected || m._clickToDeselect || m._allowClickWhenSelected)
 					);
 				},
 
 				_setStateAndFireEvent:function (_domEvent) {
-					var _this = this;
-					if (_this.isWired) {
+					var m = this;
+					if (m.isWired) {
 						var
 							_domEventType = _domEvent.type,
 							_isClickEvent = _domEventType == 'click',
-							_isClickable = _this._isClickable (_domEventType == 'dblclick')
+							_isClickable = m._isClickable (_domEventType == 'dblclick')
 						;
 
 						/*** deferred wiring of other events (for performance) ***/
-							if (!_this._allEventsWired) {
-								_this._allEventsWired = _true;
-								var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
-								_this.wireNode (
-									_this._rootNode,
+							if (!m._allEventsWired) {
+								m._allEventsWired = _true;
+								var _setStateAndFireEvent = function (_domEvent) {m._setStateAndFireEvent (_domEvent)};
+								m.wireNode (
+									m._rootNode,
 									{
 										mouseout:_setStateAndFireEvent,
 										mousedown:_setStateAndFireEvent,
@@ -209,8 +209,8 @@ Uize.module ({
 						if (_isClickEvent) _domEvent.cancelBubble = _true;
 						if (_isClickable) {
 							var _eventInfo = _eventInfoMap [_domEventType];
-							_this.set ({_state:_eventInfo [0]});
-							_this.fire ({name:_eventInfo [1],domEvent:_domEvent});
+							m.set ({_state:_eventInfo [0]});
+							m.fire ({name:_eventInfo [1],domEvent:_domEvent});
 							/*?
 								Instance Events
 									Click
@@ -262,9 +262,9 @@ Uize.module ({
 										- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
 							*/
 							if (_isClickEvent) {
-								Uize.isFunction (_this._action) && _this._action ();
-								(_this._selected ? _this._clickToDeselect : _this._clickToSelect) &&
-									_this.set ({_selected:!_this._selected})
+								Uize.isFunction (m._action) && m._action ();
+								(m._selected ? m._clickToDeselect : m._clickToSelect) &&
+									m.set ({_selected:!m._selected})
 								;
 							}
 						}
@@ -279,16 +279,16 @@ Uize.module ({
 				},
 
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
-						var _rootNode = _this._rootNode = _this.getNode ();
+					var m = this;
+					if (!m.isWired) {
+						var _rootNode = m._rootNode = m.getNode ();
 						if (_rootNode) {
 							/*** wire up event handlers ***/
-								if (_this._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
+								if (m._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
 									_rootNode.onclick = Uize.returnTrue
 								;
-								var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
-								_this.wireNode (
+								var _setStateAndFireEvent = function (_domEvent) {m._setStateAndFireEvent (_domEvent)};
+								m.wireNode (
 									_rootNode,
 									{
 										mouseover:_setStateAndFireEvent,
@@ -296,7 +296,7 @@ Uize.module ({
 									}
 								);
 
-							_superclass.doMy (_this,'wireUi');
+							_superclass.doMy (m,'wireUi');
 						}
 					}
 				}
@@ -309,7 +309,7 @@ Uize.module ({
 			staticMethods:{
 				addChildButton:function (_buttonName,_clickHandler) {
 					var
-						_this = this,
+						m = this,
 						_button
 					;
 					function _wireButtonClickEvent () {
@@ -317,22 +317,22 @@ Uize.module ({
 							'Click',
 							function (_event) {
 								if (_clickHandler)
-									typeof _clickHandler == 'string' ? _this.fire (_clickHandler) : _clickHandler (_event)
+									typeof _clickHandler == 'string' ? m.fire (_clickHandler) : _clickHandler (_event)
 								;
-								_this.fire (_event);
+								m.fire (_event);
 							}
 						);
 					}
-					if (Uize.isInstance (_this)) {
+					if (Uize.isInstance (m)) {
 						/* NOTE: being used as an instance method, stitched in on some other widget class */
-						_button = _this.children [_buttonName];
+						_button = m.children [_buttonName];
 						if (!_button) {
-							_button = _this.addChild (_buttonName,_class);
+							_button = m.addChild (_buttonName,_class);
 							_wireButtonClickEvent ();
 						}
 					} else {
 						/* NOTE: being used as a static method */
-						_button = new _this ({idPrefix:_buttonName,name:_buttonName,_followLink:_true});
+						_button = new m ({idPrefix:_buttonName,name:_buttonName,_followLink:_true});
 						_wireButtonClickEvent ();
 						(window [_button.instanceId] = _button).wireUi ();
 					}
@@ -498,14 +498,14 @@ Uize.module ({
 					name:'state',
 					onChange:[
 						function () {
-							var _this = this;
-							if (!_this._state) {
-								if (_overButton == _this)
+							var m = this;
+							if (!m._state) {
+								if (_overButton == m)
 									_overButton = _undefined
 								;
-							} else if (_this._state == 'over') {
-								_overButton && _overButton != _this && _overButton.set ({_state:''});
-								_overButton = _this;
+							} else if (m._state == 'over') {
+								_overButton && _overButton != m && _overButton.set ({_state:''});
+								_overButton = m;
 							}
 						},
 						_updateDisplayState
@@ -533,12 +533,12 @@ Uize.module ({
 					onChange:[
 						function () {
 							var
-								_this = this,
+								m = this,
 								_statePrecedenceAsJoinedStr =
-									_this._statePrecedence._asJoinedStr ||
-									(_this._statePrecedence._asJoinedStr = _this._statePrecedence.join (','))
+									m._statePrecedence._asJoinedStr ||
+									(m._statePrecedence._asJoinedStr = m._statePrecedence.join (','))
 							;
-							_this._statePrecedenceMap =
+							m._statePrecedenceMap =
 								_statePrecedenceMaps [_statePrecedenceAsJoinedStr] ||
 								(_statePrecedenceMaps [_statePrecedenceAsJoinedStr] = {})
 							;

@@ -24,23 +24,23 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** harvest inline settings ***/
 					var _presets = Uize.Data.Simple.parse ({
-						simple:_this.getNode ('inlinePresets').innerHTML,
+						simple:m.getNode ('inlinePresets').innerHTML,
 						collapseChildren:true
 					});
-					_this.setNodeInnerHtml ('inlinePresets','');
+					m.setNodeInnerHtml ('inlinePresets','');
 
 					/*** turn tabs into three spaces ***/
-						var _settingsPropertyName = _this._settingsPropertyName;
+						var _settingsPropertyName = m._settingsPropertyName;
 						for (var _presetName in _presets) {
 							var _preset = _presets [_presetName];
 							_preset [_settingsPropertyName] = _preset [_settingsPropertyName].replace (/\t/g,'   ');
 						}
 
-					_this.set ({presets:_presets});
+					m.set ({presets:_presets});
 			},
 
 			stateProperties:{

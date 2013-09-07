@@ -42,16 +42,16 @@ Uize.module ({
 					return _urlParts.pathname == this.memoryUrl (_indexableFolderUnderBuilt + '.index');
 				},
 				builderInputs:function (_urlParts) {
-					var _this = this;
+					var m = this;
 					return Uize.map (
 						Uize.isFunction (_indexableFolderUnderSource)
-							? _indexableFolderUnderSource.call (_this)
+							? _indexableFolderUnderSource.call (m)
 							: UizeSite.Build.Util.getIndexableFiles (
-								_this.params.sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp
+								m.params.sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp
 							)
 						,
 						function (_filePath) {
-							return _this.memoryUrl (
+							return m.memoryUrl (
 								_indexableFolderUnderBuilt + '/' +
 								(
 									_indexableFileExtensionRegExp
@@ -64,9 +64,9 @@ Uize.module ({
 					);
 				},
 				builder:function (_inputs) {
-					var _this = this;
+					var m = this;
 					return Uize.Array.Sort.sortBy (
-						Uize.map (_inputs,function (_fileInfoPath) {return _this.readFile ({path:_fileInfoPath})}),
+						Uize.map (_inputs,function (_fileInfoPath) {return m.readFile ({path:_fileInfoPath})}),
 						'value.title',
 						_sortOrder
 					);

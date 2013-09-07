@@ -30,14 +30,14 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** add the social panel widgets ***/
-					_this.addChild ('likeThis',UizeSite.Widgets.LikeThis.Widget,{built:false});
-					_this.addChild ('follow',UizeSite.Widgets.Follow.Widget,{built:false});
+					m.addChild ('likeThis',UizeSite.Widgets.LikeThis.Widget,{built:false});
+					m.addChild ('follow',UizeSite.Widgets.Follow.Widget,{built:false});
 
 				/*** add hover fader for demos items and pod sections highlight effect ***/
-					_this.addChild (
+					m.addChild (
 						'headerLinksFader',
 						Uize.Widget.HoverFader,
 						{
@@ -76,9 +76,9 @@ Uize.module ({
 
 			instanceMethods:{
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
-						_superclass.doMy (_this,'wireUi');
+					var m = this;
+					if (!m.isWired) {
+						_superclass.doMy (m,'wireUi');
 
 						/*** reveal the mantle image ***/
 							Uize.Fx.fadeStyle (
@@ -89,7 +89,7 @@ Uize.module ({
 								{curve:Uize.Curve.easeInOutPow (4)}
 							).wire (
 								'Done',
-								function () {_this.children.headerLinksFader.tickle (100)}
+								function () {m.children.headerLinksFader.tickle (100)}
 							);
 					}
 				}

@@ -45,25 +45,25 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** add child button widgets ***/
-					_this._addChildButton (
+					m._addChildButton (
 						'button1',
 						function () {
-							alert (_this.get ('idPrefix') + ' --- click button 1');
+							alert (m.get ('idPrefix') + ' --- click button 1');
 						}
 					);
-					_this._addChildButton (
+					m._addChildButton (
 						'button2',
 						function () {
-							alert (_this.get ('idPrefix') + ' --- click button 2');
+							alert (m.get ('idPrefix') + ' --- click button 2');
 						}
 					);
 
 				/*** code to update UI whenever enabled and busy state properties change ***/
-					var _updateUi = function () {_this.updateUi ()};
-					_this.wire ({
+					var _updateUi = function () {m.updateUi ()};
+					m.wire ({
 						'Changed.enabled':_updateUi,
 						'Changed.busy':_updateUi
 					});
@@ -73,29 +73,29 @@ Uize.module ({
 				_addChildButton:Uize.Widgets.Button.Widget.addChildButton,
 
 				updateUi:function () {
-					var _this = this;
-					if (_this.isWired) {
-						_this.setNodeValue ('enabledSelector',_this.get ('enabled'));
-						_this.setNodeValue ('busySelector',_this.get ('busy'));
+					var m = this;
+					if (m.isWired) {
+						m.setNodeValue ('enabledSelector',m.get ('enabled'));
+						m.setNodeValue ('busySelector',m.get ('busy'));
 					}
 				},
 
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
+					var m = this;
+					if (!m.isWired) {
 						var _valuesMap = {'false':false,'true':true,inherit:'inherit'};
-						_this.wireNode (
+						m.wireNode (
 							'enabledSelector',
 							'change',
-							function () {_this.set ({enabled:_valuesMap [_this.getNodeValue ('enabledSelector')]})}
+							function () {m.set ({enabled:_valuesMap [m.getNodeValue ('enabledSelector')]})}
 						);
-						_this.wireNode (
+						m.wireNode (
 							'busySelector',
 							'change',
-							function () {_this.set ({busy:_valuesMap [_this.getNodeValue ('busySelector')]})}
+							function () {m.set ({busy:_valuesMap [m.getNodeValue ('busySelector')]})}
 						);
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 					}
 				},
 

@@ -55,9 +55,9 @@ Uize.module ({
 
 			instanceMethods:{
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
-						_superclass.doMy (_this,'wireUi');
+					var m = this;
+					if (!m.isWired) {
+						_superclass.doMy (m,'wireUi');
 
 						var _getTourExampleByUrl = function (_url) {
 							var _tourExamplesMap = _getTourExampleByUrl._map;
@@ -74,12 +74,12 @@ Uize.module ({
 						};
 
 						var
-							_tooltip = _this.children.tooltip,
+							_tooltip = m.children.tooltip,
 							_tooltipNode = _tooltip.getNode ()
 						;
 						Uize.Node.display (_tooltipNode,false);
-						_this.wireNode (
-							Uize.Node.find ({root:_this.getNode (),tagName:'a'}),
+						m.wireNode (
+							Uize.Node.find ({root:m.getNode (),tagName:'a'}),
 							{
 								mouseover:function () {
 									var _tourExample = _getTourExampleByUrl (this.getAttribute ('href'));

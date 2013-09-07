@@ -30,27 +30,27 @@ Uize.module ({
 		'use strict';
 
 		/*** Private Instance Methods ***/
-			function _choosePreset (_this,_presetName) {
-				var _params = _this._params;
+			function _choosePreset (m,_presetName) {
+				var _params = m._params;
 				Uize.Node.Form.setValues (
 					Uize.map (
-						_this._presets [_presetName],
+						m._presets [_presetName],
 						function (_value,_key) {return _params [_key] == 'json' ? Uize.Json.to (_value,'mini') : _value}
 					),
-					_this.get ('idPrefix') + '_'
+					m.get ('idPrefix') + '_'
 				);
 			}
 
-			function _firePresetSelectedEvent (_this) {
-				_this.fire ('Preset Selected');
+			function _firePresetSelectedEvent (m) {
+				m.fire ('Preset Selected');
 			}
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** add tabs child widget ***/
-					_this.addChild (
+					m.addChild (
 						'tabs',
 						Uize.Widget.Options.Tabbed,
 						{
@@ -62,8 +62,8 @@ Uize.module ({
 					);
 
 				/*** add the preview button ***/
-					_this.addChild ('preview',Uize.Widget.Button)
-						.wire ('Click',function () {_firePresetSelectedEvent (_this)})
+					m.addChild ('preview',Uize.Widget.Button)
+						.wire ('Click',function () {_firePresetSelectedEvent (m)})
 					;
 			},
 
@@ -91,26 +91,26 @@ Uize.module ({
 				},
 
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
-						_superclass.doMy (_this,'wireUi');
+					var m = this;
+					if (!m.isWired) {
+						_superclass.doMy (m,'wireUi');
 
 						/*** wire a click event to catch clicking on any preset link ***/
-							_this.wireNode (
+							m.wireNode (
 								'presets',
 								'click',
 								function (_event) {
 									var _eventTarget = _event.target || _event.srcElement;
 									if (_eventTarget.tagName == 'A') {
-										_choosePreset (_this,Uize.Node.getText (_eventTarget));
-										_firePresetSelectedEvent (_this);
+										_choosePreset (m,Uize.Node.getText (_eventTarget));
+										_firePresetSelectedEvent (m);
 									}
 								}
 							);
 
-						for (var _presetName in _this._presets) break;
-						_choosePreset (_this,_presetName);
-						_firePresetSelectedEvent (_this);
+						for (var _presetName in m._presets) break;
+						_choosePreset (m,_presetName);
+						_firePresetSelectedEvent (m);
 					}
 				}
 			},

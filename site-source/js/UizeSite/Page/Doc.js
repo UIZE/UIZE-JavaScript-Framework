@@ -53,13 +53,13 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** add the tooltip widget ***/
-					var _tooltip = _this.addChild ('tooltip',Uize.Widgets.Tooltip.Widget,{built:false});
+					var _tooltip = m.addChild ('tooltip',Uize.Widgets.Tooltip.Widget,{built:false});
 
 				/*** add the contents tree widget ***/
-					_this.addChild (
+					m.addChild (
 						'contents',
 						Uize.Widgets.NavTree.List.Widget,
 						{
@@ -85,16 +85,16 @@ Uize.module ({
 
 			instanceMethods:{
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
-						var _tooltip = _this.children.tooltip;
+					var m = this;
+					if (!m.isWired) {
+						var _tooltip = m.children.tooltip;
 
 						/*** populate contents tree's data ***/
 							var
-								_contents = _this.children.contents,
+								_contents = m.children.contents,
 								_contentsTreeItems = Uize.Node.Tree.getTreeFromList (_contents.getNode ('shell'))
 							;
-							_this.set ({contentsTreeItems:_contentsTreeItems});
+							m.set ({contentsTreeItems:_contentsTreeItems});
 							_contents.set ({items:_contentsTreeItems});
 							_contents.setExpandedDepth (1);
 
@@ -102,28 +102,28 @@ Uize.module ({
 							var _pageTitle = document.title.match (/^\s*(.*?)\s*\|/) [1];
 
 							/*** search link ***/
-								_this.wireNode (
+								m.wireNode (
 									'search',
 									'click',
 									function () {
-										location.href = _this.getPathToRoot () + 'search-sections.html?' + _pageTitle;
+										location.href = m.getPathToRoot () + 'search-sections.html?' + _pageTitle;
 									}
 								);
 
 							/*** examples link ***/
-								_this.wireNode (
+								m.wireNode (
 									'examples',
 									'click',
-									function () {_this.performSearch ('"' + _pageTitle + '"','/examples')}
+									function () {m.performSearch ('"' + _pageTitle + '"','/examples')}
 								);
 
 							/*** test link ***/
-								_this.wireNode (
+								m.wireNode (
 									'test',
 									'click',
 									function () {
 										location.href = Uize.Url.resolve (
-											_this.getPathToRoot () + 'examples/uize-unit-tests.html',
+											m.getPathToRoot () + 'examples/uize-unit-tests.html',
 											{runtest:Uize.Url.from (location.href).fileName.replace (/^Uize\.Test\./,'')}
 										);
 									}
@@ -132,7 +132,7 @@ Uize.module ({
 						/*** wire up behavior for scrolling to anchors ***/
 							var _titleBar = Uize.Node.find ({tagName:'h1',className:'document-title'}) [0];
 							Uize.Node.getStyle (_titleBar,'position') == 'fixed' &&
-								_this.wireNode (
+								m.wireNode (
 									document.body,
 									'click',
 									function (_event) {
@@ -219,9 +219,9 @@ Uize.module ({
 								}
 							) ({breatheAfter:50});
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 
-						_this.children.tooltip.displayNode ('',false);
+						m.children.tooltip.displayNode ('',false);
 						_contents.setNodeStyle ('shell',{maxHeight:'none',overflow:'visible'});
 					}
 				}

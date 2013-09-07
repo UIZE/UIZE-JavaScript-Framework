@@ -53,15 +53,15 @@ Uize.module ({
 
 					_makeFolder:function (_path) {
 						var
-							_this = this,
-							_fileSystem = _this._fileSystem
+							m = this,
+							_fileSystem = m._fileSystem
 						;
-						if (!_this._pathExists (_path)) {
+						if (!m._pathExists (_path)) {
 							var
 								_pathToCreate = _path,
 								_pathsToCreate = []
 							;
-							while (_pathToCreate && !_this._pathExists (_pathToCreate)) {
+							while (_pathToCreate && !m._pathExists (_pathToCreate)) {
 								_pathsToCreate.push (_pathToCreate);
 								_pathToCreate = _getParentFolderPath (_pathToCreate);
 							}
@@ -77,7 +77,7 @@ Uize.module ({
 				/*** Overridden Extensibility Methods ***/
 					getItemsInFolder:function (_params,_mustBeFolder) {
 						var
-							_this = this,
+							m = this,
 							_path = _params.path,
 							_pathMatcher = Uize.resolveMatcher (_params.pathMatcher),
 							_pathTransformer = Uize.resolveTransformer (_params.pathTransformer),
@@ -89,7 +89,7 @@ Uize.module ({
 							this._fileSystem.readdirSync (_path),
 							function (_itemSubPath) {
 								if (
-									_this._pathExists (_subPathPrefix + _itemSubPath,_mustBeFolder) &&
+									m._pathExists (_subPathPrefix + _itemSubPath,_mustBeFolder) &&
 									_pathMatcher (_itemSubPath)
 								)
 									_result.push (_pathTransformer (_itemSubPath))
@@ -102,13 +102,13 @@ Uize.module ({
 				/*** Public Instance Methods ***/
 					copyFile:function (_params,_callback) {
 						var
-							_this = this,
+							m = this,
 							_targetPath = _params.targetPath
 						;
-						_this._makeFolder (_getParentFolderPath (_targetPath));
-						_this._fileSystem.writeFileSync (
+						m._makeFolder (_getParentFolderPath (_targetPath));
+						m._fileSystem.writeFileSync (
 							_targetPath,
-							_this._fileSystem.readFileSync (_params.path)
+							m._fileSystem.readFileSync (_params.path)
 						);
 						_callback ();
 					},

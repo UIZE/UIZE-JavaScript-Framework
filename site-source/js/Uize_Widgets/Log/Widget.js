@@ -156,23 +156,23 @@ Uize.module ({
 		'use strict';
 
 		/*** Private Instance Methods ***/
-			function _updateClearButtonState (_this) {
-				var _clearButton = _this.children.clear;
-				_clearButton && _clearButton.set ({enabled:_this._isEmpty ? false : 'inherit'});
+			function _updateClearButtonState (m) {
+				var _clearButton = m.children.clear;
+				_clearButton && _clearButton.set ({enabled:m._isEmpty ? false : 'inherit'});
 			}
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** add the clear button ***/
-					_this.addChild (
+					m.addChild (
 						'clear',
 						Uize.Widgets.Button.Widget,
 						{size:'tiny'}
 					).wire (
 						'Click',
-						function () {_this.clear ()}
+						function () {m.clear ()}
 					);
 					/*?
 						Child Widgets
@@ -184,14 +184,14 @@ Uize.module ({
 					*/
 
 				/*** initialize state ***/
-					_updateClearButtonState (_this);
+					_updateClearButtonState (m);
 			},
 
 			instanceMethods:{
 				clear:function () {
-					var _this = this;
-					_this.isWired ? _this.setNodeInnerHtml ('messages','') : (_this._queuedLogMessagesHtml = null);
-					_this.set ({_isEmpty:true});
+					var m = this;
+					m.isWired ? m.setNodeInnerHtml ('messages','') : (m._queuedLogMessagesHtml = null);
+					m.set ({_isEmpty:true});
 					/*?
 						Instance Methods
 							clear
@@ -211,15 +211,15 @@ Uize.module ({
 
 				log:function (_message) {
 					var
-						_this = this,
+						m = this,
 						_messageHtml =
-							(_this._showTimestamp ? (Uize.Date.Formatter.format (null,_this._timestampFormat) + ' : ') : '') +
+							(m._showTimestamp ? (Uize.Date.Formatter.format (null,m._timestampFormat) + ' : ') : '') +
 							Uize.Xml.toAttributeValue (_message) +
 							'<br/>'
 					;
-					if (_this.isWired) {
-						_this.injectNodeHtml ('messages',_messageHtml);
-						_this.setNodeProperties ('messages',{scrollTop:1000000});
+					if (m.isWired) {
+						m.injectNodeHtml ('messages',_messageHtml);
+						m.setNodeProperties ('messages',{scrollTop:1000000});
 						/*?
 							Implied Nodes
 								messages
@@ -228,9 +228,9 @@ Uize.module ({
 									Whenever a new message is logged, the contents of the =messages= implied node is added to. This node may be a =div=, =span=, =p= tag, or any other type that may contain arbitrary HTML. When the =clear= instance method is called, either programmatically or as a result of the user clicking the =clear Child Widget=, the =innerHTML= of the =messages= node will be replaced with nothing.
 						*/
 					} else {
-						(_this._queuedLogMessagesHtml || (_this._queuedLogMessagesHtml = [])).push (_messageHtml);
+						(m._queuedLogMessagesHtml || (m._queuedLogMessagesHtml = [])).push (_messageHtml);
 					}
-					_this.set ({_isEmpty:false});
+					m.set ({_isEmpty:false});
 					/*?
 						Instance Methods
 							log
@@ -246,13 +246,13 @@ Uize.module ({
 				},
 
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
-						_superclass.doMy (_this,'wireUi');
+					var m = this;
+					if (!m.isWired) {
+						_superclass.doMy (m,'wireUi');
 
-						_this.setNodeInnerHtml ('messages',(_this._queuedLogMessagesHtml || []).join (''));
-						_this.setNodeProperties ('messages',{scrollTop:1000000});
-						_this._queuedLogMessagesHtml = null;
+						m.setNodeInnerHtml ('messages',(m._queuedLogMessagesHtml || []).join (''));
+						m.setNodeProperties ('messages',{scrollTop:1000000});
+						m._queuedLogMessagesHtml = null;
 					}
 				}
 			},
