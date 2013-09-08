@@ -763,8 +763,8 @@ Uize.module ({
 						_derivation = _resolveDerivation (_derivation),
 						_determinantsValuesHarvester = _derivation._determinantsValuesHarvester,
 						_determiner = _derivation._determiner,
-						_firstCallFlag = {},
-						_lastDerivedValue = _firstCallFlag,
+						_isFirstCall = true,
+						_lastDerivedValue,
 						_wirings
 					;
 					function _checkDerivedValue () {
@@ -772,9 +772,13 @@ Uize.module ({
 							_determinantsValues = _determinantsValuesHarvester.call (_this),
 							_derivedValue = _determiner.apply (_this,_determinantsValues)
 						;
-						if (_lastDerivedValue == _firstCallFlag || _derivedValue != _lastDerivedValue) {
+						if (_isOnceMode || _isWheneverMode)
+							_derivedValue = !!_derivedValue
+						;
+						if (_isFirstCall || _derivedValue !== _lastDerivedValue) {
+							_isFirstCall = false;
 							_isOnceMode && _derivedValue && _wirings && _this.unwire (_wirings);
-							(_isOnceMode || _isWheneverMode)
+							_isOnceMode || _isWheneverMode
 								? _derivedValue && (_isOnceMode || !_derivedValue != !_lastDerivedValue) &&
 									_handler.apply (0,_determinantsValues)
 								: _handler.call (0,_derivedValue,_determinantsValues)
