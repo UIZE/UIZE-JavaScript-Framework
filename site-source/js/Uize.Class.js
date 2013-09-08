@@ -1113,12 +1113,62 @@ Uize.module ({
 									Now, because the properties affecting the condition have been specified as "width, height, depth", the value of these state properties will be passed as arguments to the handler in the order =width=, =height=, and =depth=. In this case, the handler function is choosing to declare these function arguments, using the same names for the sake of clarity - you could ignore the arguments if you didn't care about the specific values at the time the condition is met, or you could use the arguments but name them differently. In this example, the =alert= statement will alert the text "10(W) x 11(H) x 12(D)".
 
 								NOTES
+								- compare to the related =whenever= instance method
 								- see the other `condition system methods`
 					*/
 				};
 
 				_classPrototype.whenever = function (_condition,_handler) {
 					return this._onChange (_condition,_handler,_constOnChangeModeWhenever);
+					/*?
+						Instance Methods
+							whenever
+								Lets you register a handler that should be executed whenever the specified condition becomes met (ie. changes from being falsy to being truthy).
+
+								The =whenever= method is useful when using one or more state properties to form a condition, and where you wish to register code that should be executed every time the condition changes state from not being met to being met, and immediately if the condition is already met at the time that the =whenever= method is called.
+
+								DIFFERENT USAGES
+
+								`Execute Code Whenever a State Property Becomes Truthy`
+								....................................................................
+								wiringsOBJ = myInstance.whenever (propertyConditionSTR,handlerFUNC);
+								....................................................................
+
+								`Execute Code Once Multiple State Properties Become Truthy`
+								.............................................................................
+								wiringsOBJ = myInstance.whenever (propertiesConditionARRAYorSTR,handlerFUNC);
+								.............................................................................
+
+								`Execute Code Whenever a Compound Condition Becomes Met`
+								..........................................................................
+								wiringsOBJ = myInstance.whenever (compoundConditionSTRorFUNC,handlerFUNC);
+								..........................................................................
+
+								Execute Code Whenever a State Property Becomes Truthy
+
+									SYNTAX
+									....................................................................
+									wiringsOBJ = myInstance.whenever (propertyConditionSTR,handlerFUNC);
+									....................................................................
+
+								Execute Code Once Multiple State Properties Become Truthy
+
+									SYNTAX
+									.............................................................................
+									wiringsOBJ = myInstance.whenever (propertiesConditionARRAYorSTR,handlerFUNC);
+									.............................................................................
+
+								Execute Code Whenever a Compound Condition Becomes Met
+
+									SYNTAX
+									..........................................................................
+									wiringsOBJ = myInstance.whenever (compoundConditionSTRorFUNC,handlerFUNC);
+									..........................................................................
+
+								NOTES
+								- compare to the related =once= instance method
+								- see the other `condition system methods`
+					*/
 				};
 
 				_classPrototype.is = function (_property) {
