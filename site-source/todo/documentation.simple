@@ -1,5 +1,20 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
+Basic Wireframe Documentation for *ALL* Modules
+	Add at least a single line summary for every feature of every module.
+
+	This applies to...
+
+	- instance methods
+	- instance properties
+	- static methods
+	- static properties
+	- state properties
+	- implied nodes (widgets)
+	- instance events
+	- static events
+	- etc.
+
 Restructure UIZE Web Site to be UIZE Application
 	Restructure the UIZE Web site project to be an application using the UIZE JavaScript Framework core.
 
@@ -20,24 +35,26 @@ Restructure UIZE Web Site to be UIZE Application
 			temp/
 	............................
 
+Improved Location of Source Code
+	For examples, modules, put source code into a peer folder, rather than child folder.
+
+	So...
+
+	- examples/
+	- examples-source-code/
+	- reference
+	- reference-source-code/
+
+	- must add 301 redirect rules in .htaccess
+	- must update .jst files that generate reference pages and source code pages, to link to correct places
+	- must update examples to link to source code files correctly
+	- must update search page to allow separate searching in source code folders
+	- benefit: users can search only within source code, or only documents
+
 Move Away From VARIATION N
 	For methods that support multiple variations, move away from the "VARIATION N" approach to listing those variations.
 
 	Instead, move to the newer "DIFFERENT USAGES" section, with descriptive use case oriented titles for the different usages and links to more detailed descriptions with examples.
-
-Improve Social Network Sharing
-	Improve the social network sharing in pages of the UIZE Web site by adding a new widget for Facebook liking and other stuff.
-
-	While the slide out sharing widget on the left is neat in its own way, its not direct and to the point enough and doesn't acknowledge the reality that Facebook and Twitter are currently the primary means for virality. Add an always visible widget somewhere near the top right in the gutter that shows likes, lets users easily like, and possibly shows FB friends for FB authenticated users. Look into the widgets that are provided by FB, Twitter, and Google.
-
-JavaScript Services
-	Create an guide to explain the approach UIZE takes to services.
-
-Conditions
-	Document the conditions system that is implemented in the =Uize.Class= base class.
-
-Needs and Providers
-	Document the needs management system that is implemented in the =Uize.Util.Needs= class.
 
 JIT File Builder Web Server
 	Document the Web server functionality (under dev section initially) that is used by the UIZE Web site and that employs the same code as the build process.
@@ -58,109 +75,8 @@ Issues With Auto-generated Documentation
 
 		This is simply because the initial value in the subclass is a clone of the initial value in the base class and not a shared reference. The initial value is a clone because the whole property definition is a clone. Not sure what the solution is.
 
-DELVE tool improvements
-	- polling to watch the window and detect when the window has been reloaded, and then auto-refresh view
-	- polling (or some other mechanism) to keep DELVE in sync with changing contents in the page being inspected
-		- when rebuilding the tree list, ideally retain the expanded state of nodes in the tree
-
-	Bugs / Issues
-		- improve page widget detection method
-			- currently breaks on some pages because of presence of global variable named page that is not page widget
-			- eg. http://www.webreference.com/js/column5/methods.html
-		- DELVE fails during launch on iPad
-
-	State Tab
-		- to be an inspector UI, with form elements for viewing and modifying values of state properties
-		- to be wired to observe object's Changed.* event in order to keep values synchronized
-		- yellow fade effect (or equivalent) for highlighting state properties that have recently changed value
-		- link to documentation for every state property (link to class that introduces property)
-		- count of the number of times the value has changed since being watched (good for judging volume of activity)
-		- property name linked to get summary (as with current behavior with state properties table in summary tab)
-
-	- wire up a menu for the UIZE logo, as a spillover for more features
-
-	- for tree list, show total number of items somewhere in UI
-	- write reference documentation
-
-	Uber Report Improvements
-		- possibly provide percentage results (eg. % of widgets that are missing all DOM nodes)
-		- possible conclusions section
-
-	Events Log Improvements
-		- serialize the other properties of the event object
-		- for the source property, make it a linked object (this may mean having to make the log message generator configurable in Uize.Widget.Log.InstanceEvents, and providing some custom handling in DELVE)
-
-	Features Tab
-		- maintain sort state across rewirings (ie. sort should be a property)
-		- ability to filter the data in the table (say I only care about instance methods, for example)
-		- link to documentation for every feature
-
-	Summary Tab
-		- have sections be collapsible, with collapsible state remembered across updates
-			- this possibly argues in favor of not rebuilding the entire contents, but only rebuilding the contents for sections, and then showing / hiding sections relevant to the object inspected)
-			- this might be an acceptable vehicle for an animated expand/collapse widget
-		- for widgets...
-			- unaccessed DOM nodes table
-				- DOM nodes whose IDs suggest the nodes belong to the widget, but the node is not in the node cache
-
-	- issue with serializing children property of widget, because of circular references
-		- add handling for instances of Uize classes to Uize.Json
-		- add handling of DOM objects to Uize.Json
-
-	- for object entry, implement history feature
-		- back
-		- forward
-		- up arrow / down arrow
-		- history droplist
-		- note: in FF, undo and redo provide a kind of history
-
-	- select widget by clicking on node in page being inspected
-		- mouseover nodes of widgets to show info tooltip about node and owner widget
-			- would require wiring mouseover, mouseout, and click events for all nodes of all widgets
-
-	- ability to spawn multiple DELVE tools inspecting the same document
-		- good for watching events on multiple different objects at the same time, or seeing different tree list contents
-	- automatic expanding of tree list to reveal current widget or module, when tree list is showing all widgets or all modules as a tree
-	- idea (from Jason) - ability to e-mail the state of DELVE to someone else, as a way of showing another person what you were seeing. This could involve creating a bookmarklet URL that captures the state of DELVE, such as the object inspected, the active tab, the URL of the page being inspected, etc.
-
-	- different contents for tree list...
-		- widget instance queries
-			- widgets that don't appear to have any HTML (for them, directly, or their children)
-			- only widgets that are wired
-			- widgets that were adopted
-
-			- widgets for which DOM events have fired?
-			- widgets of a specific class?
-			- widgets whose class inherits from a specific class?
-
-		- module queries
-			- widgets classes that have no subclasses and of which no instances have been created
-
-		- DOM node queries
-			- DOM nodes that have ids, but that don't appear to belong to widget instances
-				- DOM nodes that have not been accessed by any widget, and whose id structure does not appear to fit with any widget on the page
-			- DOM nodes that appear to belong to widgets, but that haven't been accessed by those widgets
-			- DOM nodes that are missing according to a widget's node cache, but are actually present
-
-		- localized string queries
-			- all localized strings
-
-		- stuff that's already interspersed in the summary tab info
-			- children of a specific widget
-			- parent chain for a specific widget
-			- siblings of a specific widget
-
-			- all subclasses of a specific class
-
-Kill acceleration and deceleration
-	Kill acceleration and deceleration state properties of Uize.Fade class.
-
-	Pages still to update...
-
-	- C:/~uize/UIZE-JavaScript-Framework/examples/hover-fader-for-thumbnails.html
-	- C:/~uize/UIZE-JavaScript-Framework/examples/fading-links.html
-
 Finish "Creating a New UIZE Example Page" Guide
+	.
 
 iPad issues
 	- outstanding
@@ -357,31 +273,8 @@ General Tips
 
 - explain about layer library modules (as used by the UIZE Web site)
 
-Pull All Images from Zazzle...
-	- use more product images from Zazzle for slideshow widgets and such
-		- have slideshows and such, containing UIZE merch product images
-
-URLs that could use a UIZE slideshow experience
-	- http://www.100abandonedhouses.com/
-
 URLs to link to somewhere in docs
 	- http://dean.edwards.name/weblog/2007/03/rules/
-
-Improved Location of Source Code
-	For examples, modules, put source code into a peer folder, rather than child folder.
-
-	So...
-
-	- examples/
-	- examples-source-code/
-	- reference
-	- reference-source-code/
-
-	- must add 301 redirect rules in .htaccess
-	- must update .jst files that generate reference pages and source code pages, to link to correct places
-	- must update examples to link to source code files correctly
-	- must update search page to allow separate searching in source code folders
-	- benefit: users can search only within source code, or only documents
 
 For Framework Developers
 	Documentation Style Guide
@@ -417,6 +310,15 @@ For Framework Developers
 	- Releasing a Build
 
 New Guides
+	Services
+		Create an guide to explain the approach UIZE takes to services.
+
+	Conditions
+		Document the conditions system that is implemented in the =Uize.Class= base class.
+
+	Needs and Providers
+		Document the needs management system that is implemented in the =Uize.Util.Needs= class.
+
 	Ajax
 		- specifying params
 		- GET vs. POST
@@ -442,10 +344,10 @@ New Guides
 			- Uize.Widget.TableSort
 		- code beside concept
 
-	JavaScript Drag-and-drop
+	Drag-and-drop
 		- Uize.Widget.Drag (for drag handles)
 
-	JavaScript Interfaces
+	Interfaces
 		- The Value Interface
 		- The ValueAndValues Interface
 		- The ValueAndRange Interface
@@ -609,21 +511,6 @@ Miscellaneous
 		...............................................................
 
 		Can't do this with JavaScript 1.6's map method (or the map methods in any other framework), because the map function can't reference the newly created target array.
-
-Basic Wireframe Documentation for *ALL* Modules
-	Add at least a single line summary for every feature of every module.
-
-	This applies to...
-
-	- instance methods
-	- instance properties
-	- static methods
-	- static properties
-	- state properties
-	- implied nodes (widgets)
-	- instance events
-	- static events
-	- etc.
 
 XHTML Validation Problems
 	When running the UIZE documentation pages through an XHTML validator to test for well-formedness, the following problems are revealed...

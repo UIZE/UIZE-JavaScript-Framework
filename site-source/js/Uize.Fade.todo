@@ -20,4 +20,11 @@ This is a TO DO document for the =Uize.Fade= module.
 
 - consider changing the implementation of reverse, to instead swap the start and end values (or offer an additional property for this kind of fade reversing)
 
+Kill acceleration and deceleration
+	Kill acceleration and deceleration state properties of Uize.Fade class.
+
+	Pages still to update...
+
+	- C:/~uize/UIZE-JavaScript-Framework/examples/hover-fader-for-thumbnails.html
+	- C:/~uize/UIZE-JavaScript-Framework/examples/fading-links.html
 

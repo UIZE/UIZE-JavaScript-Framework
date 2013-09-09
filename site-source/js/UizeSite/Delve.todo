@@ -1,0 +1,105 @@
+This is a TO DO document for the =UizeSite.Delve= module.
+
+Stay in Sync
+	Detect Reload
+		Poll to watch the window and detect when the window has been reloaded, and then auto-refresh view.
+
+	Keep in Sync
+		Poll (or use some other mechanism) to keep DELVE in sync with changing contents in the page being inspected
+
+		When rebuilding the tree list, ideally retain the expanded state of nodes in the tree.
+
+Bugs / Issues
+	Improve Page Widget Detection
+		- currently breaks on some pages because of presence of global variable named page that is not page widget
+		- eg. http://www.webreference.com/js/column5/methods.html
+
+	iPad Issue
+		DELVE fails during launch on iPad.
+
+State Tab
+	- to be an inspector UI, with form elements for viewing and modifying values of state properties
+	- to be wired to observe object's Changed.* event in order to keep values synchronized
+	- yellow fade effect (or equivalent) for highlighting state properties that have recently changed value
+	- link to documentation for every state property (link to class that introduces property)
+	- count of the number of times the value has changed since being watched (good for judging volume of activity)
+	- property name linked to get summary (as with current behavior with state properties table in summary tab)
+
+Miscellaneous
+	- wire up a menu for the UIZE logo, as a spillover for more features
+	- for tree list, show total number of items somewhere in UI
+	- write reference documentation
+
+Uber Report Improvements
+	- possibly provide percentage results (eg. % of widgets that are missing all DOM nodes)
+	- possible conclusions section
+
+Events Log Improvements
+	- serialize the other properties of the event object
+	- for the source property, make it a linked object (this may mean having to make the log message generator configurable in Uize.Widget.Log.InstanceEvents, and providing some custom handling in DELVE)
+
+Features Tab
+	- maintain sort state across rewirings (ie. sort should be a property)
+	- ability to filter the data in the table (say I only care about instance methods, for example)
+	- link to documentation for every feature
+
+Summary Tab
+	- have sections be collapsible, with collapsible state remembered across updates
+		- this possibly argues in favor of not rebuilding the entire contents, but only rebuilding the contents for sections, and then showing / hiding sections relevant to the object inspected)
+		- this might be an acceptable vehicle for an animated expand/collapse widget
+	- for widgets...
+		- unaccessed DOM nodes table
+			- DOM nodes whose IDs suggest the nodes belong to the widget, but the node is not in the node cache
+
+- issue with serializing children property of widget, because of circular references
+	- add handling for instances of Uize classes to Uize.Json
+	- add handling of DOM objects to Uize.Json
+
+History Feature
+	For object entry, implement history feature...
+
+	- back
+	- forward
+	- up arrow / down arrow
+	- history droplist
+	- note: in FF, undo and redo provide a kind of history
+
+- select widget by clicking on node in page being inspected
+	- mouseover nodes of widgets to show info tooltip about node and owner widget
+		- would require wiring mouseover, mouseout, and click events for all nodes of all widgets
+
+- ability to spawn multiple DELVE tools inspecting the same document
+	- good for watching events on multiple different objects at the same time, or seeing different tree list contents
+- automatic expanding of tree list to reveal current widget or module, when tree list is showing all widgets or all modules as a tree
+- idea (from Jason Li of Zazzle) - ability to e-mail the state of DELVE to someone else, as a way of showing another person what you were seeing. This could involve creating a bookmarklet URL that captures the state of DELVE, such as the object inspected, the active tab, the URL of the page being inspected, etc.
+
+New Contents for Tree List
+	New Widget Instance Queries
+		- widgets that don't appear to have any HTML (for them, directly, or their children)
+		- only widgets that are wired
+		- widgets that were adopted
+
+		- widgets for which DOM events have fired?
+		- widgets of a specific class?
+		- widgets whose class inherits from a specific class?
+
+	Module Queries
+		- widget classes that have no subclasses and of which no instances have been created (ie. they're not abstract / base classes, so it's expected that they might be instantiated at some point)
+
+	DOM node queries
+		- DOM nodes that have ids, but that don't appear to belong to widget instances
+			- DOM nodes that have not been accessed by any widget, and whose id structure does not appear to fit with any widget on the page
+		- DOM nodes that appear to belong to widgets, but that haven't been accessed by those widgets
+		- DOM nodes that are missing according to a widget's node cache, but are actually present
+
+	Localized String Queries
+		- all localized strings
+
+	Stuff That's Already Interspersed in the Summary Tab Info
+		- children of a specific widget
+		- parent chain for a specific widget
+		- siblings of a specific widget
+
+		- all subclasses of a specific class
+
+

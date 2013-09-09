@@ -50,6 +50,21 @@
 
 					The `feature declaration methods` can be used either to add features that aren't inherited from the class' superclass, or to override features that are inherited from its superclass. For an in-depth discussion of feature declaration, consult the [[../guides/classes-and-inheritance.html][Classes and Inheritance]] guide.
 
+			The "no new" Mechanism
+				The =Uize.Class= base class implements a novel mechanism for constructors that makes the "new" keyword optional when creating instances.
+
+				Because the =Uize.Class= base class utilizes `the "no new" mechanism`, one can create instances of any =Uize.Class= subclass either using the =new= operator or not. This means that you can use the "new" keyword or not with UIZE classes (as well as your own classes), and the end result will be the same.
+
+				THIS...
+				............................
+				var myInstance = MyClass ();
+				............................
+
+				IS EQUIVALENT TO...
+				................................
+				var myInstance = new MyClass ();
+				................................
+
 			Event System
 				The =Uize.Class= module implements a powerful and versatile event system, which can be used for application events outside the context of browser DOM events.
 
@@ -77,6 +92,101 @@
 					- =met= - sets a condition as having been met
 					- =unmet= - sets a condition as having not been met / no longer being met
 					- =whenever= - registers a handler that is to be executed each time a condition changes state
+
+				Specifying Conditions
+					.
+
+					Condition Function
+						A compound condition can be specified as a function, where the names of the function's arguments indicate the state properties that affect the condition and where the function's body evaluates the condition.
+
+						EXAMPLE
+						..............................................................................
+						myFishTankWater.once (
+							function (width,height,depth) {return width * height * depth > 1000},
+							function () {
+								// execute code, now that the water volume of the fish tank exceeds 1000
+							}
+						}
+						..............................................................................
+
+						In the above example, a compound condition is specified using a function. The arguments of the function - =width=, =height=, and =depth= - indicate that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The function's body, =return width &#42; height &#42; depth > 1000=, evaluates the condition to be =true= when the volume of the fish tank's water is greater than =1000=.
+
+						When code is registered to be executed once the product of the =width=, =height=, and =depth= properties is greater than =1000=, if this condition is not yet met when the =once= method is called, the method will wire handlers for the =Changed.width=, =Changed.height=, and =Changed.depth= events and will re-evaluate the condition function every time any of the properties that affect the condition change value. Once the condition function returns a truthy result, the handler for the compound condition will be executed and the handlers that were wired for the =Changed.*= events will be unwired.
+
+					Condition Expression String
+						A compound condition can be specified as an expression string, where the names of the state properties affecting the condition are specified along with an expression string for evaluating the condition.
+
+						A condition expression string is formatted with two parts separated by a ":" (colon) delimiter, where the part before the colon is a comma-separated list of the state properties affecting the condition, and the part after the colon is an expression to be used for evaluating the condition.
+
+						EXAMPLE
+						..............................................................................
+						myFishTankWater.once (
+							'width, height, depth : width * height * depth > 1000',
+							function () {
+								// execute code, now that the water volume of the fish tank exceeds 1000
+							}
+						}
+						..............................................................................
+
+						In the above example, a compound condition is specified using a `condition expression string`. In this string, the part before the colon - "width, height, depth" - indicates that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The part after the colon - "width &#42; height &#42; depth > 1000" - evaluates the condition to be =true= when the volume of the fish tank's water (ie. the product of the =width=, =height=, and =depth= properties) is greater than =1000=.
+
+					Condition Inversion
+						As a convenience, the =once= method supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.
+
+						EXAMPLE
+						................................................................
+						myCollectionWidget.once (
+							'!isEmpty',
+							function () {
+								// do something now that the collection is no longer empty
+							}
+						);
+						................................................................
+
+						In the above example, code is being registered to execute once the =isEmpty= state property is =false=. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= state property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a property's value becomes falsy, rather than once the property's value becomes truthy (which is the standard behavior for the =once= method).
+
+						Condition Inversion with Multiple Property Conditions
+							Condition inversion can be used both with single state property conditions as well as multiple property conditions.
+
+							EXAMPLE
+							................................................................
+							myCollectionWidget.once (
+								['wired','!isEmpty'],
+								function () {
+									// do something now that the collection is wired and no longer empty
+								}
+							);
+							...........................................................................
+
+							In the above example, code is being registered to be executed once the =wired= state property is truthy and the =isEmpty= state property is falsy. Condition inversion can also be used when the state properties are specified as a comma-separated list string, so specifying the condition as =['wired','!isEmpty']= is equivalent to specifying it as ='wired, !isEmpty'=.
+
+				Wirings Object
+					The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the condition becomes met.
+
+					This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the condition is met when the =once= method is called, then the returned wirings object will be an empty object.
+
+				Handler Arguments
+					The handler code that is registered to be executed once a condition is met will be passed the values of all the state properties that affect the condition as arguments.
+
+					EXAMPLE
+					...................................................................
+					myFishTankWater.once (
+						'width, height, depth : width * height * depth > 1000',
+						function (width,height,depth) {
+							alert (width + '(W) x ' + height + '(H) x ' + depth + '(D)');
+						}
+					}
+
+					myFishTankWater.set ({
+						width:10,
+						height:11,
+						depth:12
+					});
+					...................................................................
+
+					In the above example, code is being registered to be executed once the product of the =width=, =height=, and =depth= properties of the =myFishTankWater= instance exceeds =1000=. Once the call to the =set= method has been executed, the volume of the fish tank's water will be =1320= and the handler will be executed.
+
+					Now, because the properties affecting the condition have been specified as "width, height, depth", the value of these state properties will be passed as arguments to the handler in the order =width=, =height=, and =depth=. In this case, the handler function is choosing to declare these function arguments, using the same names for the sake of clarity - you could ignore the arguments if you didn't care about the specific values at the time the condition is met, or you could use the arguments but name them differently. In this example, the =alert= statement will alert the text "10(W) x 11(H) x 12(D)".
 
 			### State Properties Derivation ~~ State Properties Derivations
 				.
@@ -109,21 +219,6 @@
 
 					As a Function, Specifying Both Determinants and Determiner
 						.
-
-			The "no new" Mechanism
-				The =Uize.Class= base class implements a novel mechanism for constructors that makes the "new" keyword optional when creating instances.
-
-				Because the =Uize.Class= base class utilizes `the "no new" mechanism`, one can create instances of any =Uize.Class= subclass either using the =new= operator or not. This means that you can use the "new" keyword or not with UIZE classes (as well as your own classes), and the end result will be the same.
-
-				THIS...
-				............................
-				var myInstance = MyClass ();
-				............................
-
-				IS EQUIVALENT TO...
-				................................
-				var myInstance = new MyClass ();
-				................................
 */
 
 Uize.module ({
@@ -936,102 +1031,13 @@ Uize.module ({
 									wiringsOBJ = myInstance.once (compoundConditionSTRorFUNC,handlerFUNC);
 									......................................................................
 
-									Condition Function
-										A compound condition can be specified as a function, where the names of the function's arguments indicate the state properties that affect the condition and where the function's body evaluates the condition.
-
-										EXAMPLE
-										..............................................................................
-										myFishTankWater.once (
-											function (width,height,depth) {return width * height * depth > 1000},
-											function () {
-												// execute code, now that the water volume of the fish tank exceeds 1000
-											}
-										}
-										..............................................................................
-
-										In the above example, a compound condition is specified using a function. The arguments of the function - =width=, =height=, and =depth= - indicate that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The function's body, =return width &#42; height &#42; depth > 1000=, evaluates the condition to be =true= when the volume of the fish tank's water is greater than =1000=.
-
-										When code is registered to be executed once the product of the =width=, =height=, and =depth= properties is greater than =1000=, if this condition is not yet met when the =once= method is called, the method will wire handlers for the =Changed.width=, =Changed.height=, and =Changed.depth= events and will re-evaluate the condition function every time any of the properties that affect the condition change value. Once the condition function returns a truthy result, the handler for the compound condition will be executed and the handlers that were wired for the =Changed.*= events will be unwired.
-
-									Condition Expression String
-										A compound condition can be specified as an expression string, where the names of the state properties affecting the condition are specified along with an expression string for evaluating the condition.
-
-										A condition expression string is formatted with two parts separated by a ":" (colon) delimiter, where the part before the colon is a comma-separated list of the state properties affecting the condition, and the part after the colon is an expression to be used for evaluating the condition.
-
-										EXAMPLE
-										..............................................................................
-										myFishTankWater.once (
-											'width, height, depth : width * height * depth > 1000',
-											function () {
-												// execute code, now that the water volume of the fish tank exceeds 1000
-											}
-										}
-										..............................................................................
-
-										In the above example, a compound condition is specified using a `condition expression string`. In this string, the part before the colon - "width, height, depth" - indicates that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The part after the colon - "width &#42; height &#42; depth > 1000" - evaluates the condition to be =true= when the volume of the fish tank's water (ie. the product of the =width=, =height=, and =depth= properties) is greater than =1000=.
-
 								Immediate Execution if Condition Already Met
 									If the condition specified in the call to the =once= method is already met at the time that the method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately.
 
 									Otherwise, handlers will be wired for the =Changed.*= (value change) events for all the state properties that affect the condition. The condition evaluator will be executed each time any of the watched properties change value. As soon as the condition becomes met (ie. the condition evaluator produces a truthy result), the handlers wired to watch the value change events of the properties will be unwired and the handler function registered for the condition will be executed. By design, the handler is only executed for the first time that the condition becomes met.
 
-								Condition Inversion
-									As a convenience, the =once= method supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.
-
-									EXAMPLE
-									................................................................
-									myCollectionWidget.once (
-										'!isEmpty',
-										function () {
-											// do something now that the collection is no longer empty
-										}
-									);
-									................................................................
-
-									In the above example, code is being registered to execute once the =isEmpty= state property is =false=. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= state property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a property's value becomes falsy, rather than once the property's value becomes truthy (which is the standard behavior for the =once= method).
-
-									Condition Inversion with Multiple Property Conditions
-										Condition inversion can be used both with single state property conditions as well as multiple property conditions.
-
-										EXAMPLE
-										................................................................
-										myCollectionWidget.once (
-											['wired','!isEmpty'],
-											function () {
-												// do something now that the collection is wired and no longer empty
-											}
-										);
-										...........................................................................
-
-										In the above example, code is being registered to be executed once the =wired= state property is truthy and the =isEmpty= state property is falsy. Condition inversion can also be used when the state properties are specified as a comma-separated list string, so specifying the condition as =['wired','!isEmpty']= is equivalent to specifying it as ='wired, !isEmpty'=.
-
-								Wirings Object
-									The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the condition becomes met.
-
-									This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the condition is met when the =once= method is called, then the returned wirings object will be an empty object.
-
-								Handler Arguments
-									The handler code that is registered to be executed once a condition is met will be passed the values of all the state properties that affect the condition as arguments.
-
-									EXAMPLE
-									...................................................................
-									myFishTankWater.once (
-										'width, height, depth : width * height * depth > 1000',
-										function (width,height,depth) {
-											alert (width + '(W) x ' + height + '(H) x ' + depth + '(D)');
-										}
-									}
-
-									myFishTankWater.set ({
-										width:10,
-										height:11,
-										depth:12
-									});
-									...................................................................
-
-									In the above example, code is being registered to be executed once the product of the =width=, =height=, and =depth= properties of the =myFishTankWater= instance exceeds =1000=. Once the call to the =set= method has been executed, the volume of the fish tank's water will be =1320= and the handler will be executed.
-
-									Now, because the properties affecting the condition have been specified as "width, height, depth", the value of these state properties will be passed as arguments to the handler in the order =width=, =height=, and =depth=. In this case, the handler function is choosing to declare these function arguments, using the same names for the sake of clarity - you could ignore the arguments if you didn't care about the specific values at the time the condition is met, or you could use the arguments but name them differently. In this example, the =alert= statement will alert the text "10(W) x 11(H) x 12(D)".
+								For More Information
+									.
 
 								NOTES
 								- compare to the related =whenever= instance method
