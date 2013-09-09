@@ -123,6 +123,7 @@ Uize.module ({
 
 				_data = [
 					_item ('Home','','index'),
+					_divider,
 					_item ('DOWNLOAD'),
 					{
 						title:'Getting Started',
@@ -138,29 +139,11 @@ Uize.module ({
 							_guide ('The Philosophy of UIZE','philosophy-of-uize')
 						]
 					},
-					{
-						title:'Latest News',
-						link:'latest-news.html',
-						items:[
-							_news (2013),
-							_news (2012),
-							_news (2011),
-							_news (2010),
-							_news (2009),
-							_news (2008),
-							_news (2006)
-						]
-					},
 					_divider,
 					{
 						title:'Examples',
 						link:'javascript-examples.html',
 						items:_examplesSubmenuItems
-					},
-					_appendix ('Showcase'),
-					{
-						title:'Widgets To Go',
-						link:'javascript-widgets.html'
 					},
 					{
 						title:'Tools',
@@ -181,6 +164,7 @@ Uize.module ({
 								]
 							)
 					},
+					_appendix ('Showcase'),
 					_divider,
 					{
 						title:'Guides',
@@ -204,8 +188,8 @@ Uize.module ({
 							_guide ('Testing Framework','javascript-testing-framework'),
 							_guide ('Documentation System','javascript-documentation-system'),
 							_guide ('All About Scrunching'),
-							_divider,
 							_guide ('Strict Mode','javascript-strict-mode'),
+							_divider,
 							_guide ('Troubleshooting','javascript-troubleshooting'),
 							_guide ('Using the DELVE Tool'),
 							_divider,
@@ -217,20 +201,16 @@ Uize.module ({
 					},
 					_modulesReferenceItem,
 					{
-						title:'JavaScript Reference',
-						link:'javascript-reference.html',
+						title:'Latest News',
+						link:'latest-news.html',
 						items:[
-							_javaScriptReference ('Array'),
-							_javaScriptReference ('Boolean'),
-							_javaScriptReference ('Date'),
-							_javaScriptReference ('Function'),
-							_javaScriptReference ('Math'),
-							_javaScriptReference ('Number'),
-							_javaScriptReference ('Object'),
-							_javaScriptReference ('RegExp'),
-							_javaScriptReference ('String'),
-							_javaScriptReference ('Window'),
-							_javaScriptReference ('XMLHTTPRequest')
+							_news (2013),
+							_news (2012),
+							_news (2011),
+							_news (2010),
+							_news (2009),
+							_news (2008),
+							_news (2006)
 						]
 					},
 					{
@@ -304,6 +284,28 @@ Uize.module ({
 							}
 							*/
 						]
+					},
+					{
+						title:'JavaScript Reference',
+						link:'javascript-reference.html',
+						items:[
+							_javaScriptReference ('Array'),
+							_javaScriptReference ('Boolean'),
+							_javaScriptReference ('Date'),
+							_javaScriptReference ('Function'),
+							_javaScriptReference ('Math'),
+							_javaScriptReference ('Number'),
+							_javaScriptReference ('Object'),
+							_javaScriptReference ('RegExp'),
+							_javaScriptReference ('String'),
+							_javaScriptReference ('Window'),
+							_javaScriptReference ('XMLHTTPRequest')
+						]
+					},
+					_divider,
+					{
+						title:'Widgets To Go',
+						link:'javascript-widgets.html'
 					},
 					_divider,
 					_item ('SUPPORT'),
