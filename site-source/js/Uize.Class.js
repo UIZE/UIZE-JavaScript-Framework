@@ -111,98 +111,19 @@
 						.
 
 			The "no new" Mechanism
-				The JavaScript =new= operator is optional when creating instances of =Uize.Class= subclasses, and you can make the =new= operator optional for your own object constructors using the newly added =Uize.noNew= static method.
+				The =Uize.Class= base class implements a novel mechanism for constructors that makes the "new" keyword optional when creating instances.
 
-				Creating Instances of Uize Classes
-					Because the =Uize.Class= base class utilizes `the "no new" mechanism`, one can create instances of any =Uize.Class= subclass either using the =new= operator or not.
+				Because the =Uize.Class= base class utilizes `the "no new" mechanism`, one can create instances of any =Uize.Class= subclass either using the =new= operator or not. This means that you can use the "new" keyword or not with UIZE classes (as well as your own classes), and the end result will be the same.
 
-					EXAMPLE
-					................................................................................
-					// this works
-					var mySlider1 = new Uize.Widget.Bar.Slider ({minValue:0,maxValue:100,value:50});
+				THIS...
+				............................
+				var myInstance = MyClass ();
+				............................
 
-					// Look ma, no "new"!!!
-					var mySlider2 = Uize.Widget.Bar.Slider ({minValue:0,maxValue:100,value:50});
-					................................................................................
-
-				All Uize Classes Get the Benefit
-					Because of the way in which `the "no new" mechanism` is implemented in the =Uize.Class= base class, any class that is derived from a =Uize.Class= base class using the =subclass= method gets the same benefit, including classes that you create for your own applications.
-
-					This means, for example, that any widget class you create by subclassing the =Uize.Widget= class will get the same benefit. Consider the following example...
-
-					EXAMPLE
-					..................................................
-					// we create a widget class
-					var MyWidgetClass = Uize.Widget.subclass ();
-
-					// this works
-					var myWidgetClassInstance1 = new MyWidgetClass ();
-
-					// Look ma, no "new"!!!
-					var myWidgetClassInstance2 = MyWidgetClass ();
-					..................................................
-
-				Applies for Other Uize Objects
-					`The "no new" mechanism`, that is implemented in the =Uize.noNew= static method, has been applied to various other =Uize= objects (such as the =Uize.Color= object) that are lightweight objects rather than full =Uize.Class= subclasses.
-
-					So, for example, one can create instances of the =Uize.Color= object or the =Uize.String.Builder= object without needing to use the =new= operator. Consider the following example...
-
-					EXAMPLE
-					.........................................
-					// this works
-					var fuchsia = new Uize.Color ('#ff0fff');
-
-					// Look ma, no "new"!!!
-					var olive = Uize.Color ('#808000');
-					.........................................
-
-				Using the Uize.noNew Method
-					An object constructor that supports `the "no new" mechanism` can easily be created using the =Uize.noNew= static method.
-
-					In cases where you're creating =Uize.Class= subclasses, you don't need to worry about the =Uize.noNew= method because `the "no new" mechanism` is built right into the =Uize.Class= base class, so `all Uize classes get the benefit`. However, in cases where you're defining your own lightweight objects, you can use the =Uize.noNew= method to create an object constructor where the =new= operator is optional. Consider the following example...
-
-					EXAMPLE
-					............................................................
-					// define the Food object
-					var Food = Uize.noNew (
-						function (name,type) {
-							this.name = name;
-							this.type = type;
-						}
-					);
-
-					// create an instance of Food using the new operator
-					var apple = new Food ('apple','fruit');
-					alert (apple.type);  // alerts the text "fruit"
-
-					// create an instance of Food without using the new operator
-					var rice = Food ('rice','grain');
-					alert (rice.type);  // alerts the text "grain"
-					............................................................
-
-					What you'll notice from the above example is that the =Uize.noNew= method is quite simple - it takes a single parameter, which is the constructor function that initializes the new instance. This means that you can easily take an existing object constructor function and upgrade it to one that supports `the "no new" mechanism` by wrapping it inside a call to the =Uize.noNew= method, which then returns a wrapper constructor that becomes your new object constructor. Consider the following before-and-after example...
-
-					BEFORE
-					..............................................
-					// must always use "new" with this constructor
-					function Food (name,type) {
-						this.name = name;
-						this.type = type;
-					}
-					..............................................
-
-					AFTER
-					..........................................
-					// "new" is optional with this constructor
-					var Food = Uize.noNew (
-						function (name,type) {
-							this.name = name;
-							this.type = type;
-						}
-					);
-					..........................................
-
-					Notice that you need to assign the result of the =Uize.noNew= method call, and so your original constructor function no longer should have the name.
+				IS EQUIVALENT TO...
+				................................
+				var myInstance = new MyClass ();
+				................................
 */
 
 Uize.module ({
