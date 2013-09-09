@@ -1,0 +1,1099 @@
+Introduction
+	This document discusses the DELVE tool, explaining its purpose, uses, features, user interface, and providing tips on its use.
+
+	What is DELVE?
+		DELVE is a Web based tool that lets developers *delve* into the inner workings of pages that use the UIZE JavaScript Framework.
+
+		Among other things, DELVE lets you...
+
+		- see a tree or flattened list of all the widgets instantiated on a page
+		- see a tree or flattened list of all the modules built for a page
+		- see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing implied node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances *have not* been created, and many more different types of lists / reports of useful information
+		- see a summary for various objects, such as widget instances, class or package modules, DOM nodes, functions and methods, etc.
+		- see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, state properties, etc.
+		- for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, implied nodes, etc.
+		- for widget classes, see a summary of all the instances of such classes on the page
+		- easily get documentation for a widget's class, or any UIZE module (whether loaded on the page or not)
+		- watch all the events for a specific widget on the page
+		- and much more...
+
+	What DELVE Is Not
+		DELVE is *not* a replacement for developer tools like Firefox's Firebug, Internet Explorer's Developer Tools, Opera's Dragonfly, Safari's Web Inspector, or Chrome's Developer Tools.
+
+		The developer tools that are built into most modern browsers all provide very powerful and full featured DOM inspectors, CSS editors, JavaScript debuggers and profilers, error consoles, etc. What they don't provide is an understanding of the higher level UIZE JavaScript Framework. The DELVE tool aims to complement the built-in developer tools, providing a way that developers using UIZE can get a meaningful and framework aware view on what's happening on a page.
+
+	DELVE is Gentle
+		DELVE is intentionally designed to be very gentle on any page that it is inspecting.
+
+		Unlike some other Web based developer tools that can be launched from a simple bookmarklet, DELVE does not add any script tags to the page it is inspecting, nor does it define heaps of foreign JavaScript objects in the inspected page.
+
+		DELVE is designed to limit contamination of the page being inspected to the absolute minimum. This makes it easier to continue using a tool like Firebug while simultanesouly using DELVE, without being confused by things showing up in a Firebug view that aren't truly a part of the page being inspected, and without having the JavaScript code in the page being inspected crippled by some interoperability issue between the version of UIZE used in the DELVE tool and the framework (or frameworks) used in the page being inspected. All the JavaScript code needed for running the DELVE tool runs in the separate DELVE window. Even the `object highlighting` feature that highlights DOM nodes and widgets in the page being inspected, by adding a highlight overlay to the page, does so only temporarily in order to avoid pollution of the page (see `Highlight In, Highlight Out`).
+
+	DELVE Supports Multiple Browsers
+		The DELVE tool is designed to be browser agnostic and has been tested to work in *Firefox*, *Internet Explorer*, *Safari*, *Chrome*, and *Opera*.
+
+	Nothing to Install
+		DELVE is a completely Web based tool, so nothing needs to be installed in order to use it.
+
+		Furthermore, DELVE doesn't require the cooperation of the page that it inspects. So, if you're authoring a Web page that uses UIZE, you don't need to put the page into any special debug mode or anything like that in order to be able to use DELVE to inspect the page.
+
+	Launching DELVE
+		DELVE can be launched from a simple bookmarklet - there's no software download or installation required.
+
+		The DELVE Bookmarklet
+			To get DELVE into your browser, click-and-drag the DELVE link below onto your browser's bookmarks (aka favorites) toolbar, or into the bookmarks menu or sidebar.
+
+			BOOKMARKLET
+			================================================================================================================
+			................................................................................................................
+			<< HTML >>
+
+			code::
+				<a href="javascript:(function(){var _a=window.screen,_b=_a.width-50,_c=_a.height-100,_d=[&apos;&lt;html&gt;&apos;,&apos;&lt;head&gt;&lt;title&gt;DELVE&lt;/title&gt;&lt;/head&gt;&apos;,&apos;&lt;body&gt;&apos;,&apos;&lt;script src=&quot;http://www.uize.com/js/Uize.js&quot;&gt;&lt;/script&gt;&apos;,&apos;&lt;script type=&quot;text/javascript&quot;&gt;&apos;,&apos;Uize.require (&apos;,&apos;\&apos;UizeSite.DelvePageWriter\&apos;,&apos;,&apos;function (_DelvePageWriter) {&apos;,&apos;_DelvePageWriter.initialize ();&apos;,&apos;}&apos;,&apos;);&apos;,&apos;&lt;/script&gt;&apos;,&apos;&lt;/body&gt;&apos;,&apos;&lt;/html&gt;&apos;].join(&apos;\n&apos;),_e=window.open(&apos;javascript:\&apos;&apos;+_d.replace(/&apos;/g,&apos;\\\&apos;&apos;)+&apos;\&apos;&apos;,&apos;reportPopup&apos;,[&apos;width=&apos;+_b,&apos;height=&apos;+_c,&apos;left=&apos;+Math.max((_a.width-_b-10)&gt;&gt;1,0),&apos;top=&apos;+Math.max((_a.height-_c-40)&gt;&gt;1,0),&apos;toolbar=no&apos;,&apos;location=no&apos;,&apos;directories=no&apos;,&apos;status=no&apos;,&apos;menubar=no&apos;,&apos;resizable=yes&apos;,&apos;scrollbars=no&apos;].join(&apos;,&apos;));_e.focus();})();">DELVE</a> &nbsp;&larr; drag the link to your bookmarks toolbar (or click it to try it now)
+			................................................................................................................
+			================================================================================================================
+
+		DELVE In UIZE Example Pages
+			The DELVE tool can be conveniently launched from any one of the example pages on the UIZE Web site.
+
+			Every example page has a *"DELVE"* button in the title bar, sitting on the right hand side next to the *"SOURCE CODE"* button. Clicking the *"DELVE"* button in the example pages is just like using the bookmarklet - it'll open up the DELVE tool with the example page being the page that is inspected.
+
+		Launching DELVE in Opera
+			When using the DELVE tool with Opera, you will need to pluck the DELVE tab out of the current browser window in order to get it into a separate window.
+
+			When using the bookmarklet to launch the DELVE tool in Opera, DELVE is opened up in a new tab of the current browser window, rather than in a completely new window. This is a behavior of the browser, not the DELVE tool. If you want DELVE and the page you're inspecting with DELVE to be side by side (most likely), then you will need to click-and-drag on the DELVE tab and then "drop" it somewhere outside the browser's main window in order to have DELVE in a separate window (which you can then take to a separate monitor, if you're fortunate enough to have a dual monitor setup).
+
+		Fullscreening DELVE
+			Fullscreening the DELVE tool makes it possible to see more useful information for the page being inspected.
+
+			Fullscreening is, of course, only a viable option if you are lucky enough to have a dual monitor setup. You won't likely want to be fullscreening DELVE if you only have a single monitor or are working on a laptop / notebook. But, if you do have a secondary monitor that you can dedicate to developer tools, then fullscreening DELVE is the way to go. Less browser chrome means more screen real estate for stuff that really matters.
+
+			In Firefox, Chrome, Internet Explorer, and Opera, the DELVE window can be put into fullscreen mode simply by hitting the *F11* key. The same key can be used to turn off fullscreen mode for the window. At the time of this writing, Apple's Safari browser does not appear to support a chromeless fullscreen mode, so the best you'll be able to do in that browser is the standard window maximizing behavior of your operating system.
+
+	Using DELVE With Other Tools
+		DELVE is not intended to replace other, more generalized browser debugging tools - it can, in fact, be used quite effectively alongside popular tools like Firebug.
+
+		Taking DOM Node IDs Into DELVE
+			DOM node IDs can be easily taken into DELVE so that a widget that the node may belong to can be inspected further.
+
+			In the UIZE JavaScript Framework, widgets have associated DOM nodes that they wire up with event handlers or manipulate to reflect state. If you are using a tool like Firebug to dig around in the DOM for a document and you stumble upon a DOM node of interest that you suspect is being used by a widget (the value for the node's =id= attribute will give it away), then you can copy the node's ID and take it into the DELVE tool to inspect further. There are two ways you can do this...
+
+			+. You can paste the DOM node ID into the `object entry input` in `the right pane` of the DELVE tool. As long as the node's ID isn't also the name of a global variable in the page being inspected, DELVE will recognize it as a DOM node id and will provide a summary for it in the right pane's `summary tab`. If DELVE is able to identify the widget that owns the DOM node, then the summary will contain an *OWNER WIDGET* section with a link to the DOM node's owner.
+
+			+. You can click on the `GET WIDGET FROM NODE ID button` that is located in `the title bar` of the DELVE tool. After clicking this button, you'll get a prompt where you can paste in your DOM node ID. After hitting enter, DELVE will try to identify the widget that owns the DOM node. If it can, then it will display a summary for that widget in the `summary tab`.
+
+		Taking DOM Node IDs From DELVE
+			DOM node IDs can be taken from the DELVE tool into another debugging tool like Firebug.
+
+			DELVE provides a number of ways to obtain IDs for DOM nodes that belong to widgets. When inspecting an object that is a widget, the summary for the widget that is displayed in the `summary tab` will contain a *DOM NODES* section in which the IDs of various DOM nodes that belong to the widget are listed. Also, various `DOM node queries` that are listed in the `tree list query` will produce results sets of DOM nodes.
+
+			However one comes by a DOM node in the DELVE tool, an expression that returns a reference to the node will be present in the `object entry input` in `the right pane`. You can copy this expression, switch over to a tool like Firebug, and then paste the expression into that tool's command line and evaluate it. Firebug, for one, will display a result upon evaluating the expression that is linked, and clicking on the linked result will take you to the HTML viewer with that DOM node selected. From there, you can use Firebug's other powerful debugging and inspecting facilities to mess with HTML code, CSS style rules, etc.
+
+The Title Bar
+	The Title Bar sits at the top of the DELVE tool's UI, displaying the `page inspected` on its left side, and featuring various `title bar buttons` on its right side.
+
+	Page Inspected
+		The page that is currently being inspected by the DELVE tool is displayed on the left side of `the title bar` of the tool.
+
+		The page being inspected is represented by its URL. Mousing over the URL will produce a tooltip with the page's title.
+
+	Title Bar Buttons
+		Located on the right side of `the title bar` of the DELVE tool are various buttons for quickly activating certain functions.
+
+		Refresh Button
+			Located with the `title bar buttons`, the Refresh Button lets you refresh the DELVE tool's view of the page being inspected.
+
+			Using the Refresh Button will update both the `tree list query results` in `the left pane`, as well as the contents of the active tab in `the right pane`. The Refresh Button is useful when the page being inspected has been modified since the DELVE tool was launched. The currently selected `tree list query` will not be changed, nor which tab is active in `the right pane` - only the contents will be refreshed.
+
+		Get Widget From Node ID Button
+			Located with the `title bar buttons`, the Get Widget From Node ID Button provides a convenient way to find the widget that owns a DOM node with a specific ID.
+
+			For more information on using this button, see the section `Taking DOM Node IDs Into DELVE`.
+
+		Help Button
+			Located with the `title bar buttons`, the Help Button provides access to the help documentation for the DELVE tool.
+
+			Using the Help Button will load the [[using-the-delve-tool.html][Using the DELVE Tool]] guide into the `documentation tab` in `the right pane` of the DELVE tool.
+
+		Close Button
+			Located with the `title bar buttons`, the Close Button provides a convenient way to close the DELVE tool window when it is in fullscreen mode.
+
+			Being a browser-based tool, the DELVE tool window naturally has a close button - just like any other browser window. However, when the DELVE tool is put into fullscreen mode (see `Fullscreening DELVE`), the regular browser window chrome and all its associated buttons go away - including the window close button. The Close Button of the DELVE tool, therefore, is provided as a redundant control that is visible even in fullscreen mode.
+
+The Left Pane
+	The Left Pane of the DELVE tool lets you select a `tree list query` from one of the many available `tree list queries` using the `tree list query selector`, and then view the set of `tree list query results` produced by that query.
+
+	Tree List Query
+		A Tree List Query is a query that runs against the page being inspected and produces a set of `tree list query results` that are displayed underneath the `tree list query selector` and `tree list actions`.
+
+		An example of a Tree List Query is the `All widgets on the page, as a tree` query, which produces a results set that is a hierarchical tree of all the widgets on the page. A Tree List Query can produce a results set with one or more different types of items, including items that are widget instances, modules, or DOM nodes. Some queries produce results sets with mixed types of items, such as the `All widgets on the page, grouped by class` query, which produces a result set containing both widget classes *and* widget instances. The DELVE tool supports a wide variety of different `tree list queries`, which can be selected by using the `tree list query selector`.
+
+	Tree List Query Selector
+		The Tree List Query Selector is a droplist control that sits at the top of `the left pane`, above the `tree list actions` and `tree list query results`, and that lets you select one of the many available `tree list queries`.
+
+	Tree List Queries
+		The DELVE tool provides a wide variety of different queries to serve different needs, divided into three main categories: `widget instance queries`, `module queries`, and `DOM node queries`.
+
+		Widget Instance Queries
+			A wide variety of widget instance queries are provided for finding widgets in the document that match certain criteria.
+
+			All widgets on the page, as a tree
+				A hierarchical tree of all the widgets on the page, where each widget is listed only by its name (eg. just =option0= instead of =page.childred.tab.children.option0=).
+
+				This query provides an exact representation of the widget tree of the page, with the page widget (the root widget) as the top level item in the tree list. Progressively open up the various levels of the tree list to dig into the structure of the page's widget tree, or use the *expand all* action to lay bare the entire contents of the tree.
+
+			All widgets on the page
+				A flat list of all the widgets on the page, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+
+				This query is useful if you want to get a report listing all the widgets on the page, with their full dereferencing paths. Use the *as report* action to get the entire list of widget paths in a pop-up window, from where you can copy it to your clipboard and paste it into an e-mail, an implementation notes document, or wherever. Widget paths can then later be copied from that e-mail or document and pasted back into the `object entry input` in order to inspect the widget again (you must be back inspecting the same page, of course).
+
+			All widgets on the page, grouped by class
+				A two level tree of all the widgets on the page, grouped by widget class, where the top level is the widget classes, and where the items under each widget class is a list of all the instances of that widget class on the page.
+
+				Widget classes are sorted in order of the number of instances created, from those classes with the most instances created, to those with the least instances created. For classes with the same number of instances created, the classes are subsorted by name. The number of instances of a widget class created is indicated in parentheses after the widget class' name. Widget classes are listed with full dereferencing paths (eg. =Uize.Widget.Page=), and widget instances are listed under each class with fully qualified dereferencing paths (eg. =page.childred.tab.children.option0=).
+
+				This query is useful to get a quick glance at the prevalence of different widget classes in the widget tree. This information might be helpful when deciding what widget classes should be optimized for performance, or which classes should be more rigorously tested and/or code reviewed.
+
+			Widgets that are in the disabled state
+				A flat list of all the widgets on the page that are in the disabled state, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+
+				Disabled widgets are widgets where the value of the =enabledInherited= state property is =false=. This property will be =false= if the widget's =enabled= state property is set to =false=, or if its =enabled= property is set to ='inherit'= and the disabled state is inherited from its parent. It might be interesting to see just how many widgets on a page are in the disabled state at any one time in the use of the page.
+
+			Widgets that are not wired
+				A flat list of all the widgets on the page that are not yet wired, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+
+				Any widgets that are not yet wired after the page widget has already been wired may be an indication of something important. It may be by design that some widgets create child widgets and don't immediately wire them up, or unwire them later for certain reasons. It is, however, not a common implementation choice, so lots of unwired widgets may be an indication of some issue, or an explanation for why some part of a page's UI is not functioning as expected.
+
+			Wired widgets that are missing some DOM nodes
+				A flat list of all the widgets on the page that are wired and that are missing some accessed DOM nodes, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+
+				This query may be useful in troubleshooting situations where a widget is not functioning as expected. For a more in-depth discussion, consult the section `Issues With Missing DOM Nodes`.
+
+			Wired widgets that appear to missing all DOM nodes
+				A flat list of all the widgets on the page that are wired and that are missing all accessed DOM nodes, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+
+				This query may be useful in troubleshooting situations where a widget is not functioning as expected. For a more in-depth discussion, consult the section `Issues With Missing DOM Nodes`. Widgets that are missing all DOM nodes are also considered to be missing some DOM nodes, so such widgets will also be listed in the results set for the =Wired widgets that are missing some DOM nodes= query.
+
+			Widgets for which localized strings are specified
+				A flat list of all the widgets on the page for which localized strings have been specified, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+
+				This query is useful when doing internationalization and localization work for a page, and provides one way of performing a casual audit of the page to see how extensively the widgets make use of localized strings. When selecting a widget from the query's results set, the actual localized strings can be viewed under the `LOCALIZED STRINGS` section in the `summary tab`. Also, the number of localized strings for a widget in the results set can be seen at a glance in the `object info tooltip`. The system of localization in the UIZE JavaScript Framework (see the [[javascript-localization.html][JavaScript Localization]] guide) allows a widget to "inherit" localized strings from up its parent chain, so keep that in mind when viewing the results set.
+
+			Widgets that have some remapped DOM nodes
+				A flat list of all the widgets on the page that have some remapped DOM nodes, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+
+				A widget is considered to have remapped DOM nodes when the value of its =nodeMap= state property is a non-empty object with one or more node name to remapped node mappings. This query might be useful when learning how node remapping works and how and where it used in widgets in real world applications (so, this query is probably of more academic than diagnostic value).
+
+			Widgets that implement the value interface
+				A flat list of all the widgets on the page that implement the value interface, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+
+				A widget is considered to implement the value interface if the class of which it is an instance declares the =value= state property. Widgets that implement the value interface are fun to play around with, because they most often are the widgets used in a page for obtaining input from a user. When selecting a widget from the query's results set, the actual value for the widget can be viewed in the table of state properties displayed in the `state tab`. If you then click on the "set" action in the row for the =value= state property, you will get a setter expression that you can use to modify the value for the widget and see how the UI responds in the page being inspected.
+
+		Module Queries
+			A number of module queries are provided for finding JavaScript modules that have been built for the page and that match certain criteria.
+
+			All built modules, as a tree
+				A hierarchical tree of all the JavaScript modules built for the page, where each module is listed only by its name (eg. just =Page= instead of =Uize.Widget.Page=).
+
+				This query provides an exact representation of the module hierarchy for the page. Progressively open up the various levels of the tree list to dig into the structure of the module hierarchy (and, to some extent, class hierarchy), or use the *expand all* action to lay bare the entire contents of the tree. Click on any of the modules listed in the tree to inspect the module further in the `summary tab`, to see its automatically detectable features in the `features tab`, or to read documentation for it in the `documentation tab`.
+
+			All built modules (listed in build order)
+				A flat list of all the modules built for the page, where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
+
+				Modules are listed in the order in which they are built, which is a good indication of the order in which they are needed (ie. dependency order). This query can be useful when creating JavaScript library files (see the [[javascript-libraries.html][JavaScript Libraries]] guide for more details). You can use the `as report` tree list action to get the list of built modules in plain text form in a pop-up window. From there, you can copy the list and then paste it into a library file you are creating or updating (make sure to leave out the =Uize.Class= base class, though, since that is usually loaded in with its own =script= tag).
+
+			All widgets classes
+				A flat list of all the modules built for the page that are widget classes (ie. subclasses of the =Uize.Widget= base class), where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
+
+				Modules are listed in the order in which they are built. For any module listed in the results set for this query, the module can be inspected and the instances of the class on the page (if any) will be shown under the `INSTANCES OF THIS WIDGET CLASS` section in the `summary tab`. Also, the number of instances created for a class will be displayed in the `object info tooltip` when mousing over the class in the query results set.
+
+			Widget classes with instances created
+				A flat list of all the modules built for the page that are widget classes (ie. subclasses of the =Uize.Widget= base class) and of which instances have been created, where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
+
+				Modules are listed in the order in which they are built. For any module listed in the results set for this query, the module can be inspected and the instances of the class on the page will be shown under the `INSTANCES OF THIS WIDGET CLASS` section in the `summary tab`. Also, the number of instances created for a class will be displayed in the `object info tooltip` when mousing over the class in the query results set.
+
+			Widget classes with no instances created
+				A flat list of all the modules built for the page that are widget classes (ie. subclasses of the =Uize.Widget= base class) and of which *no* instances have been created, where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Bar.Slider.Plus=).
+
+				Modules are listed in the order in which they are built. A widget class built for a page may have no instances created if it is purely a base class for some other widget subclass of which instances *are* created, or the need to create instances may not yet have arisen due to the current state of the page and the user's interaction with it, or the widget class may be loaded unnecessarily (possibly in some JavaScript library). This query may, at a glance, provides hints as to how a page may be optimized to load less JavaScript code.
+
+			All non-widget built modules
+				A flat list of all the modules built for the page that are *not* widget classes (ie. *not* subclasses of the =Uize.Widget= base class), where each module is listed with a fully qualified dereferencing path (eg. =Uize.Util.Coupler=).
+
+				Modules in the results set for this query may be all sorts of non widget class modules, including other kinds of class modules, package modules, extension modules, and any other kind of module (see [[javascript-modules.html][JavaScript Modules]]) that doesn't define a =Uize.Widget= subclass.
+
+			All UIZE built modules
+				A flat list of all the modules built for the page that are under the =Uize= namespace (ie. part of the UIZE JavaScript Framework), where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
+
+				This query may be useful in providing an at-a-glance sense of how extensively modules provided with the UIZE JavaScript Framework are utilized in a page, versus proprietary modules that are created specifically for a Web site or Web application. The query also provides clues as to which parts of the framework are being utilized most heavily.
+
+			All non-UIZE built modules
+				A flat list of all the modules built for the page that are *not* under the =Uize= namespace (ie. *not* part of the UIZE JavaScript Framework), where each module is listed with a fully qualified dereferencing path (eg. =MySite.MyPageWidgetClass=).
+
+				This query may be useful in providing an at-a-glance sense of how many proprietary modules are needed for a specific Web site or Web application (versus just using the modules that come bundled with the framework). This may provide some good direction on features that should be considered for addition to the framework. The query may also be helpful in narrowing down the list of modules if you're hunting specifically for a module that you know is proprietary and not part of the framework.
+
+		DOM Node Queries
+			A number of DOM node queries are provided for finding DOM nodes in the page being inspected that match certain criteria.
+
+			All accessed widget DOM nodes
+				A flat list of all the accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
+
+				DOM nodes are considered accessed widget DOM nodes if some widget in the entire widget tree contains a mapping for it in its node cache (ie. the widget tried to access it). The results set for this query may contain listings for DOM nodes that are present as well as DOM nodes that are missing. For DOM nodes that are present, the ID used when listing a node in the results set will be the value of the node's =id= attribute. For DOM nodes that are *not* present, the ID used when listing a node will be constructed using the value of the =idPrefix= state property of the widget that owns it, and the listing will have the suffix "[MISSING]".
+
+			All present accessed widget DOM nodes
+				A flat list of all the present accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
+
+				DOM nodes are considered present accessed widget DOM nodes if some widget in the entire widget tree contains a non-null mapping for it in its node cache (ie. the widget tried to access the node and the node existed at the time). The ID used when listing a node in the results set will be the value of the node's =id= attribute.
+
+			All missing accessed widget DOM nodes
+				A flat list of all the missing accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
+
+				DOM nodes are considered missing accessed widget DOM nodes if some widget in the entire widget tree contains a null mapping for it in its node cache (ie. the widget tried to access the node and the node did not exist at the time). The ID used when listing a node will be constructed using the value of the =idPrefix= state property of the widget that owns it, and the listing will have the suffix "[MISSING]".
+
+			All unaccessed widget DOM nodes
+				A flat list of all `widget DOM nodes` that have not been accessed by widgets (see `Unaccessed Widget DOM Nodes`), where each node is listed by its ID with a prepended "#" (pound) character.
+
+				This query may be useful when troubleshooting problems where widgets are not functioning as expected. There are number of valid reasons why widget DOM nodes may not have been accessed, but the presence of a very large number of unaccessed widget DOM nodes could also be an indication of some underlying problem.
+
+			DOM nodes with IDs not belonging to widgets
+				A flat list of all DOM nodes that have IDs but that do not appear to belong to widgets, where each node is listed by its ID with a prepended "#" (pound) character.
+
+				DOM nodes are considered to *not* belong to widgets if they have not been accessed by any widget in the entire widget tree *and* their ID is also not consistent with the value of the =idPrefix= state property for any widget in the entire widget tree. Web developers creating the HTML for a Web page may assign IDs to DOM nodes for the sake of CSS selectors in stylesheets, and these IDs are unlikely to conform to the ID syntax for widgets.
+
+				DOM nodes that are not recognized as belonging to widgets but that look like they are intended for widgets could be an indication of an underlying problem. This query may be useful when troubleshooting problems where widgets are not functioning as expected. A DOM node that is not considered to belong to a widget on the page, but whose ID syntax looks like the ID syntax for a widget DOM node, could be an indication of any of the following...
+
+				- There may be an error in the code that generates the HTML containing the DOM nodes, where the =idPrefix= being used to generate the DOM node ID does not correctly match the =idPrefix= being used for the widget for which the HTML is intended.
+
+				- There may be an error in the JavaScript code that instantiates the widget that is supposed to wire up the HTML containing the DOM node, where the widget name or an explicitly specified =idPrefix= value does not correctly match the =idPrefix= being used by the code generating the HTML. It could even be an error in the name specified for some other widget up the parent chain that leads to cascading mismatches for all widgets in the widget tree underneath it.
+
+				- The HTML containing the DOM node may have been put in the page erroneously, and it may be superfluous and an indication for doing optimization and cruft cleanup.
+
+				- Some logic error in the JavaScript, or even a deliberate optimization, may have resulted in the widget that is to wire up the HTML containing the DOM node to not have been instantiated, and the HTML is just waiting around to be used at a later stage.
+
+				A very large number of DOM nodes that are not recognized as belonging to widgets but that look like they are intended for widgets may be an indication of a more catastrophic failure in the wiring up of the page.
+
+	Tree List Actions
+		A number of tree list actions are provided, in the form of links that are located just underneath the `tree list query selector`.
+
+		The tree list actions are divided into two main types: `expand / collapse actions` and `report actions`.
+
+		Expand / Collapse Actions
+			Various expand / collapse `tree list actions` are offered as a convenience to make it easier to control the expanded depth of the entire hierarchical contents of the `tree list query results`.
+
+			1 level
+				The "1 level" tree list action sets the expanded depth of the entire tree to one level deep.
+
+				EXAMPLE
+				..............
+				page
+					colorPicker
+				..............
+
+			2 levels
+				The "2 levels" tree list action sets the expanded depth of the entire tree to two levels deep.
+
+				EXAMPLE
+				..............
+				page
+					colorPicker
+						sliderR
+						sliderG
+						sliderB
+				..............
+
+			3 levels
+				The "3 levels" tree list action sets the expanded depth of the entire tree to three levels deep.
+
+				EXAMPLE
+				..............
+				page
+					colorPicker
+						sliderR
+							drag
+						sliderG
+							drag
+						sliderB
+							drag
+				..............
+
+			expand all
+				The "expand all" tree list action expands all levels of the entire hierarchy of the `tree list query results`.
+
+		Report Actions
+			The report actions provide reports, in plain text form in a popup window, based upon the results sets produced by all the available `tree list queries`.
+
+			Using Reports
+				Reports can be useful when troubleshooting issues during development, and where it may be helpful to alert another developer to some problem or to solicit another engineer's advice / feedback / comments on a situation.
+
+				A report that provides an indication of some state that the page is in might be useful data for the person who has to do an analysis and provide some assessment. In such cases, a plain text report can be copied from the popup window and then pasted into an e-mail, or otherwise shared with somebody who can then weigh in on the issue.
+
+			as report
+				The "as report" tree list action produces a report containing the `tree list query results` for the currently selected `tree list query`, in plain text form in a popup window.
+
+				Indentation is used in the plain text report to reflect the hierarchy of the items in the tree list. Also, some tree list queries don't display full dereferencing paths for results. An example of this is the `All widgets on the page, as a tree` query, where each widget is listed only by its name (eg. just =option0= instead of =page.childred.tab.children.option0=). For such queries, there is usually a corresponding flat list version of the query, where the tree will have no hierarchical structure and where the results *are* listed with full dereferencing paths. The `All widgets on the page` query, for instance, produces the same results set as the `All widgets on the page, as a tree` query, but there will be no indentation in the report that is produced when using the `as report` action, and items will have full dereferencing paths.
+
+			uber summary
+				The "uber summary" tree list action produces a summary for all of the available `tree list queries`, in plain text form in a popup window.
+
+				Using the "uber summary" action causes the entire set of `tree list queries` to be performed in sequence. What's captured in the "uber summary" popup window is the names of all the queries and the number of results that were produced for each. Scanning this list might prompt further investigation with individual queries. Where you might not go through the rigmarole of manually cycling through each one of the queries in the `tree list query selector`, the "uber summary" action makes it easy to see at a glance where further investigation might be warranted. For instance, you might see from the list of queries an unusually high number of results for a particular query, and this might point to some problem or a case of poor optimization. Or some number may be surprisingly low.
+
+	Tree List Query Results
+		When a `tree list query` is selected using the `tree list query selector`, the results set is displayed as a hierchical tree of `object links` underneath the `tree list query selector` and `tree list actions`.
+
+		`Mousing over an object link` in the results set will cause an `object info tooltip` to be displayed, and may also trigger `object highlighting` for the object so that it can be seen more easily in the page being inspected. `Clicking an object link` will cause the text in the `object entry input` to be replaced with the expression (see `Object Link Expression`) that the `object link` represents, which in turn will cause `the object inspector` in `the right pane` to be updated to reflect the new object that is being inspected.
+
+		While the results set for a `tree list query` is technically always a tree list, there are a number of queries that produce "trees" where all the items are at the root, and these are effectively flat lists. An example of this is the `All widgets on the page` query.
+
+The Right Pane
+	The Right Pane of the DELVE tool lets you inspect an object in great detail, where the object can be an object that is linked to by one of the `tree list query results` in `the left pane` of the DELVE tool, the result of an expression that you enter manually using the `object entry input`, or an object that is linked to from the contents of one of `the object inspector` tabs.
+
+	The Object Inspector
+		The Object Inspector is an interface that occupies `the right pane` of the DELVE tool and that lets you inspect any object that is defined in the page being inspected.
+
+		The object inspector consists of the `object entry input` and a series of inspector views that are presented in a tabbed interface, such as the `summary tab`, `state tab`, `features tab`, `documentation tab`, and `events tab`.
+
+	Object Entry Input
+		The Object Entry Input is a text input field that sits at the top of `the object inspector` in `the right pane` of the DELVE tool, and that lets you view and edit the expression that produces the object being inspected.
+
+		Auto Evaluation
+			The `object entry input` supports auto evaluation of expressions while they are being entered or edited in the text input field.
+
+			This means that you *don't* need to hit the "Enter" key when you're done entering or editing an expression. It also means that you might need to occasionally be careful as you're entering an expression, since an interim state of the expression might be valid, but you might not anticipate that that interim version will be executed. It will.
+
+			Auto Evaluation Updates Active Tab
+				Changing the expression in the `object entry input` always updates the *active* tab.
+
+				So, if the `summary tab` is the current active tab when the expression changes, then the `summary tab` will be updated to provide a summary for the new object being inspected. If the `state tab` is the active tab at the time, then the `state tab` will be updated to display the state (if applicable) for the new object being inspected. This same principle applies for all the other tabs.
+
+				Because of the `auto evaluation` feature, if you're entering an expression like =Uize.Widget.Page=, the active tab will be updated at various points during the entering of the expression where the expression enters into a valid state. So, for example, if the active tab was the `summary tab`, then entering the expression =Uize.Widget.Page= would update the `summary tab` when the expression's text gets to =Uize=, then again when the expression's text gets to =Uize.Widget=, and then finally when the expression's text gets to =Uize.Widget.Page=.
+
+		Entering Object Paths
+			Object paths, such as =Uize.Widget.Page= or =page.children.colorPicker.children.sliderR=, can be entered into the `object entry input`.
+
+		Entering DOM Node IDs
+			DOM node IDs can be conveniently entered straight into the `object entry input` in order to further inspect DOM nodes that may belong to widgets (and even those that may not).
+
+			Whenever text is entered into the `object entry input` that exactly matches the ID of a DOM node that exists in the page being inspected, then the DOM node ID will be automatically converted to a valid expression that would return a reference to the node object, so that the node can then become the inspected object.
+
+			So, for example, if a DOM node with the ID "page_colorPicker_sliderR" exists in the page being inspected, then entering that ID into the object entry input will result in the ID being automatically converted to the expression =document.getElementById ('page_colorPicker_sliderR')=. From the summary info that is then displayed for the DOM node in the `summary tab`, it will be possible to see which widget the node belongs to by looking for the `OWNER WIDGET` section (see `Summary for DOM Nodes`). In this example, our DOM node belongs to the widget =page.children.colorPicker.children.sliderR=.
+
+			Defined Objects Take Priority
+				When `entering DOM node IDs` into the `object entry input`, objects that are defined in the page being inspected, and that happen to have exactly the same name in the global namespace as the node ID being entered, will take priority over the DOM node.
+
+				So, for example, if you were entering the DOM node ID "page_colorPicker_sliderR" and there just happened to be a global variable by that name defined in the global namespace of the page being inspected (which is admittedly rather unlikely), then the global variable will take priority over the DOM node and will become the object being inspected, instead of the DOM node ID being converted into a =document.getElementById= expression.
+
+		Entering Recognized But Not Loaded UIZE Modules
+			Entering the names of modules that are recognized as belonging to the UIZE JavaScript Framework, but that are not loaded on the page being inspected, is handled in a special manner by the `documentation tab`.
+
+			Even though the other tabs will regard the module name of the unloaded UIZE module as an `invalid expression`, the `documentation tab` will still provide documentation for the UIZE module. This is a useful behavior, since it makes getting reference documentation inside the DELVE tool for any UIZE module as simple as switching to the `documentation tab` and typing in the module's name in the `object entry input`.
+
+		Entering Expressions
+			Beyond `entering object paths`, `entering DOM node IDs`, and `entering recognized but not loaded UIZE modules`, absolutely any expression can be entered into the `object entry input`.
+
+			So, for example, the expression =2 + 3= can be entered, and the result of evaluating that expression - while not very interesting - can be inspected further in the various tabs of `the object inspector`. In the example of the expression =2 + 3=, the inspected object will be the result of evaluating that expression in the page being inspected, which will be the value =5=. A more compelling example of being able to enter arbitrary expressions into the `object entry input` is the case of entering a setter expression for a state property of a widget instance, such as the expression =page.children.colorPicker.children.sliderR.set ('value',176)=.
+
+		Invalid Expression
+			An Invalid Expression is an expression that is entered into the `object entry input` that throws an exception when it is evaluated in the page being inspected.
+
+			For example, when `entering object paths` such as =Uize.Widget.Page=, the `auto evaluation` feature will cause all of the following expressions to be evaluated automatically...
+
+			...........
+			U
+			Ui
+			Uiz
+			Uize
+			Uize.
+			Uize.W
+			Uize.Wi
+			Uize.Wid
+			Uize.Widg
+			Uize.Widge
+			Uize.Widget
+			...........
+
+			Of the above expressions, only the expressions =Uize= and =Uize.Widget= are likely to be valid, and all the other partially complete expressions are likely invalid. Whenever the current expression not valid, `the object inspector` will behave just as if the value =undefined= had been entered.
+
+		Object Navigation Updates Object Entry Input
+			Whenever you navigate to a new object by clicking on an `object link` (see also `object navigation`), the `object entry input` will be updated with the `object link expression` for the `object link` that was clicked on.
+
+	Summary Tab
+		The Summary Tab displays summary information for the object being inspected, where the type of information displayed depends on the type of object being inspected.
+
+		Summary for Invalid Objects
+			When the expression entered in the `object entry input` is an `invalid expression`, then the `summary tab` will contain simply a message to the effect that the object is undefined, not valid, or not loaded on the page.
+
+			In such cases, there will be no other info sections in the summary tab.
+
+		Summary for All Valid Objects
+			When the expression entered in the `object entry input` is a valid expression, then the `summary tab` will contain at least the `SUMMARY FOR` and `INSTANCE OF` sections, regardless of what the type of the object is.
+
+			SUMMARY FOR
+				The SUMMARY FOR section displays in the `summary tab` for all valid objects, and displays the text of the expression entered into the `object entry input` - this is merely to reinforce what the summary info is for.
+
+			INSTANCE OF
+				The INSTANCE OF section displays in the `summary tab` for all valid objects, and displays the class or object of which the object being inspected is an instance.
+
+				So, for example, if the expression was =2 + 3=, then the result of the expression would be a number and the INSTANCE OF section would display "Number". If the expression entered was ='hello, world'=, then the INSTANCE OF section would display "String". If the expression entered was =3 &gt; 2=, then the result of the expression would be a boolean and the INSTANCE OF section would display "Boolean". If the expression was an object path to a button widget, then the INSTANCE OF section would display "Uize.Widget.Button". And so on.
+
+				The object or class displayed in the INSTANCE OF section is an `object link`, where the `object link text` and the `object link expression` are both the name or dereferencing path for the object / class in the global namespace. This means that clicking on the link will let you further inspect the object or class of which the object being inspected is an instance. This can be particularly useful for widget instances, since clicking on the class for the widget will take you to the summary info for the widget's class, and in the summary for the class you will be able to see all other `instances of this widget class`.
+
+		Summary for All UIZE Subclasses
+			When the expression entered in the `object entry input` is a valid dereferencing path for a =Uize.Class= subclass that is defined on the page being inspected, then the `summary tab` will contain the `INHERITANCE CHAIN` and `SUBCLASSES (ON THIS PAGE)` sections.
+
+			INHERITANCE CHAIN
+				The INHERITANCE CHAIN section displays in the `summary tab` for all objects that are =Uize.Class= subclasses, and displays the entire inheritance chain (ie. all superclasses) for the class being inspected.
+
+				The inheritance chain for a class is displayed as a series of classes, separated by "->" (arrow) delimiters, starting on the left with the root class (ie. =Uize.Class=) and ending on the right with the class being inspected. Each one of the classes listed in the chain is an `object link` that links to the class, so you can navigate to anywhere in the inheritance chain for the class being inspected with a single click.
+
+				Additionally, the inheritance depth for the class being inspected is displayed in the subtitle of the INHERITANCE CHAIN section's heading. This is the same value that would be displayed in the [[INHERITANCE DEPTH (all classes)][INHERITANCE DEPTH]] row of the `object info tooltip` that shows when `mousing over an object link` for a class.
+
+			SUBCLASSES (ON THIS PAGE)
+				The SUBCLASSES (ON THIS PAGE) section displays in the `summary tab` for all objects that are =Uize.Class= subclasses, and displays a list of all the classes on the page being inspected that inherit (directly or indirectly) from the class being inspected.
+
+				Subclasses that are direct subclasses of the class being inspected are indicated with the suffix *"- DIRECT SUBCLASS"* appended after their names. Each subclass is listed as an `object link`, where clicking on the link will let you further inspect the subclass. Additionally, the number of subclasses on the page of the class being inspected is displayed in the subtitle of the SUBCLASSES (ON THIS PAGE) section's heading. This is the same value that would be displayed in the [[SUBCLASSES (all classes)][SUBCLASSES]] row of the `object info tooltip` that shows when `mousing over an object link` for a class.
+
+				If the class being inspected is a widget class and it has no subclasses on the page, then it is not a base class for some other widget class. You might, therefore, expect there to be some instances of the class created on the page, which you would see listed in the `INSTANCES OF THIS WIDGET CLASS` section. If there are no instances created, it may just be that the situation has not yet arisen where it is appropriate for instances to be created, or it may be an indication of some problem with the code for the page, or an opportunity to optimize the page so that it's not loading in unused widget class modules.
+
+		Summary for Widget Classes
+			When the expression entered in the `object entry input` is a valid dereferencing path for a widget class (ie. a subclass of the =Uize.Widget= base class) that is defined on the page being inspected, then the `summary tab` will contain the `INSTANCES OF THIS WIDGET CLASS` section.
+
+			INSTANCES OF THIS WIDGET CLASS
+				The INSTANCES OF THIS WIDGET CLASS section displays in the `summary tab` for all objects that are widget classes, and displays a list of all the instances of the widget class that are in the widget tree for the page.
+
+				The instances of the widget class being inspected are displayed in a `widget instances table`. Additionally, the number of instances of the widget class is displayed in the subtitle of the INSTANCES OF THIS WIDGET CLASS section's heading. If a widget class has no instances in the page's widget tree, and if the widget class is not a base class for some other widget class (see `SUBCLASSES (ON THIS PAGE)`), then it may either be that the situation has not yet arisen where it is appropriate for instances to be created, or it may be an indication of some problem with the code for the page, or an opportunity to optimize the page so that it's not loading in unused widget class modules.
+
+		Summary for Widget Instances
+			When the expression entered in the `object entry input` is a valid dereferencing path for a widget instance (ie. an instance of a subclass of the =Uize.Widget= base class) that is defined on the page being inspected, then the `summary tab` will contain a number of sections providing more information about the widget, such as its relationship to other widgets on the page, its DOM nodes, localized strings, etc.
+
+			PARENTAGE
+				The PARENTAGE section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the widget instances up the parent chain, from the widget's immediate parent widget, all the way to the root widget of the widget tree (ie. the page widget).
+
+				The widgets in the parent chain for the widget being inspected are displayed in a `widget instances table`. Additionally, the number of widgets up the parent chain, from the widget's immediate parent to the root widget, is displayed in the subtitle of the PARENTAGE section's heading. For the page widget, which is at the root of the widget tree, no parentage list will be displayed - a message to the effect that the widget has no parents will be displayed in place of the `widget instances table`, and the number of widgets will be displayed as "0" in the subtitle of the PARENTAGE section's heading.
+
+			CHILDREN
+				The CHILDREN section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the child widgets of the widget being inspected.
+
+				The children of the widget being inspected are displayed in a `widget instances table`. Additionally, the number of children is displayed in the subtitle of the CHILDREN section's heading. For widgets that don't have any chilren, no children list will be displayed - a message to the effect that the widget has no children will be displayed in place of the `widget instances table`, and the number of widgets will be displayed as "0" in the subtitle of the CHILDREN section's heading.
+
+			SIBLINGS
+				The SIBLINGS section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the siblings of the widget being inspected.
+
+				Siblings for a widget are defined as other children (ie. not including itself) of the widget's parent. The siblings of the widget being inspected are displayed in a `widget instances table`. Additionally, the number of siblings is displayed in the subtitle of the SIBLINGS section's heading. For widgets that don't have any siblings (either an only child, or a widget like the page widget that has no parent), no siblings list will be displayed - a message to the effect that the widget has no siblings will be displayed in place of the `widget instances table`, and the number of widgets will be displayed as "0" in the subtitle of the SIBLINGS section's heading.
+
+			DOM NODES
+				The DOM NODES section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the `widget DOM nodes` for the widget being inspected.
+
+				A `widget DOM nodes summary` is displayed in the subtitle of the DOM NODES section's heading. The `widget DOM nodes` for the widget being inspected are displayed in a table, with a row for each DOM node, and various columns used in describing each node, as described below...
+
+				NODE NAME
+					The NODE NAME column of the `DOM NODES` table displays the name of the DOM node from its owner widget's perspective (sometimes referred to as the *implied node* name).
+
+					The node name displayed in this column is the name that would be used to specify the node when calling one of the many implied node methods (eg. =getNode=, =setNodeStyle=, =displayNode=, etc.) implemented in the =Uize.Widget= base class. For the special case of the root node for a widget, which is specified by the node name =''= (an ampty string), the name is displayed in this columne as *[ROOT NODE]*. Each node name in the NODE NAME column is an `object link`, where the `object link expression` is a call to the =getNode= instance method of the widget that would return a reference to the DOM node (eg. =page.children.colorPicker.children.sliderR.getNode ('')=). This means that clicking on a node name will let you further inspect the DOM node in the `summary tab`, where additional DOM node-specific information will be displayed (see `Summary for DOM Nodes`).
+
+				ACCESSED
+					The ACCESSED column of the `DOM NODES` table displays either the text "yes" or *"NO"*, indicating whether or not a DOM node has been accessed by the widget.
+
+					For a thorough definition of accessed vs. unaccessed `widget DOM nodes`, consult the sections `Accessed Widget DOM Nodes` and `Unaccessed Widget DOM Nodes`.
+
+				EXISTS
+					The EXISTS column of the `DOM NODES` table displays either the text "present" or *"MISSING"*, indicating whether or not a DOM node exists in the DOM of the page being inspected.
+
+					For a thorough definition of present vs. missing `widget DOM nodes`, consult the sections `Present Accessed Widget DOM Nodes` and `Missing Accessed Widget DOM Nodes`.
+
+				ID
+					The ID column of the `DOM NODES` table displays either the value of a DOM node's =id= attribute (for present DOM nodes), or the text "-----" if a DOM node is missing (see the description for the `EXISTS` column).
+
+				TAG
+					The TAG column of the `DOM NODES` table displays either the value of a DOM node's =tagName= property (for present DOM nodes), or the text "-----" if a DOM node is missing (see the description for the `EXISTS` column).
+
+			LOCALIZED STRINGS
+				The LOCALIZED STRINGS section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the `specified localized strings` for the widget being inspected.
+
+				The specified localized strings for the widget being inspected are displayed in a table with NAME and VALUE columns. Additionally, the number of localized strings is displayed in the subtitle of the LOCALIZED STRINGS section's heading. For widgets that don't have any specified localized strings, no localized strings table will be displayed - a message to the effect that there are no localized strings specified for the widget will be displayed in place of the table, and the number of localized strings will be displayed as "0" in the subtitle of the LOCALIZED STRINGS section's heading.
+
+				Linked String Names
+					Each localized string name in the NAME column is an `object link`, where the `object link expression` is a call to the =localize= instance method of the widget being inspected.
+
+					This means that clicking on a localized string name will let you perform the localization operation for the string, complete with any applicable token substitutions. The =localize= instance method returns a fully localized string as its result, after substitution has been performed, so the `summary tab` will display the result of the localization operation for a string.
+
+					To use an example, let's say that we were inspecting a widget =page.children.productAttributes=, that this widget had the localized string "oosChooseDifferent" specified, and that the value specified for this localized string was ='Please choose a different {option}.'=, then clicking on the name of the localized string in the LOCALIZED STRINGS table would navigate `the object inspector` to the expression =page.children.productAttributes.localize ('oosChooseDifferent',{option:''})=. The `summary tab` would be inspecting the string result of evaluating this expression, and changing the value specified for the =option= token in the =localize= call would be reflected in an updated summary in the `summary tab`.
+
+			HTML
+				The HTML section displays in the `summary tab` for all objects that are widget instances, and displays the HTML for the widget being inspected (provided that the widget's HTML can be discovered).
+
+				The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (ie. there's a valid node specified for the =container= state property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (ie. the implied node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (ie. the implied node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.
+
+				If the HTML for the widget cannot be discovered by DELVE, then a message to the effect that the widget has no container node, shell node, or root node will be displayed. If DELVE can't discover the HTML for the widget being inspected, it might be that the widget's HTML is not in the page, or it might just be that the HTML is actually there but it has no shell or root node (not all widgets require that their HTML have a shell or root node) and there is no container node specified for the widget. It could also be that there is a mismatch between the =idPrefix= specified for the widget and the =idPrefix= used when generating the HTML intended for the widget.
+
+		Summary for DOM Nodes
+			When the expression entered in the `object entry input` returns a DOM node reference when it is evaluated in the page being inspected, then the `summary tab` will contain the `OWNER WIDGET`, `ID`, `TAG`, and `HTML` sections.
+
+			OWNER WIDGET
+				The OWNER WIDGET section displays in the `summary tab` for all objects that are DOM nodes, and displays the widget that owns the DOM node being inspected (if it can be discovered).
+
+				The owner widget for the DOM node being inspected is determined by traversing the entire widget tree for the page being inspected, until a widget is found whose =idPrefix= is consistent with the ID of the DOM node being inspected. If an owner widget can be discovered, then a `widget link` for that widget will be displayed. If the DOM node being inspected does not appear to belong to a widget (not all DOM nodes do belong to widgets, after all), then a message to this effect will be displayed (ie. you won't just see a blank line).
+
+			ID
+				The ID section displays in the `summary tab` for all objects that are DOM nodes, and displays the value of the =id= attribute for the DOM node being inspected.
+
+				If the DOM node being inspected does not have an ID specified, then the ID section will display a message to this the effect (ie. you won't just see a blank line).
+
+			TAG
+				The TAG section displays in the `summary tab` for all objects that are DOM nodes, and displays the value of the =tagName= property for the DOM node being inspected.
+
+			HTML
+				The HTML section displays in the `summary tab` for all objects that are DOM nodes, and displays the outer HTML of the DOM node being inspected.
+
+		Summary for Functions, Methods, and Non-UIZE Classes
+			When the expression entered in the `object entry input` returns a reference to a function that is not a constructor for a =Uize.Class= subclass (it could be just a plain function, a method, or the constructor for a non-UIZE class or object), then the `summary tab` will contain the `CODE` section.
+
+			CODE
+				The CODE section displays in the `summary tab` for all objects that are function references (and that are not a constructor for a =Uize.Class= subclass), and displays the code for the function being inspected.
+
+				The code that is displayed for the function being inspected is obtained by a simple =toString= serialization of the function object. This means that the function's code may not appear exactly as it does in the actual code where it is defined, and the serialization may differ slightly (in purely cosmetic ways) from one browser to the next.
+
+		Summary for All Other Values
+			When the expression entered in the `object entry input` is neither a function, nor an instance of a =Uize.Class= subclass, nor a DOM node, then the `summary tab` will contain the `TO STRING` and `JSON SERIALIZATION` sections.
+
+			TO STRING
+				The TO STRING section displays in the `summary tab` for all objects that are not functions, instances of =Uize.Class= subclasses, or DOM nodes, and displays the =toString= serialization of the object being inspected.
+
+				The =toString= serialization of the object being inspected will depend on its type - it's really up to the object's particular implementation of the =toString= method. Because the =toString= serialization can sometimes be quite different to a `JSON serialization` and may provide additional useful clues when troubleshooting, the =toString= serialization is provided in addition to the JSON serialization displayed in the `JSON SERIALIZATION` section.
+
+			JSON SERIALIZATION
+				The JSON SERIALIZATION section displays in the `summary tab` for all objects that are not functions, instances of =Uize.Class= subclasses, or DOM nodes, and displays the JSON serialization of the object being inspected.
+
+				The object being inspected is serialized to JSON using the =Uize.Json= module. This module tries to do as good a job as possible at serializing all types of values (such as instances of JavaScript's built-in =Date= object, =RegExp= object, =Boolean= object, =String= object, etc.), but not all types of objects can be successfully serialized. Values that cannot be serialized are replaced with ={}= (an empty object).
+
+		Widget Instances Table
+			A Widget Instances Table is a table that lists a number of widgets.
+
+			A widget instances table has a row for each widget, with WIDGET PATH and CLASS columns used for describing each widget. The WIDGET PATH column displays a `widget link` for a widget, while the CLASS column displays an `object link` for the widget's class. Every item of the WIDGET PATH and CLASS columns is an `object link`, so a widget instances table can be used to navigate `the object inspector` to a new widget or widget class (depending on which column you click in). Widget instance tables can be found in the `INSTANCES OF THIS WIDGET CLASS`, `PARENTAGE`, `CHILDREN`, and `SIBLINGS` sections of the `summary tab`.
+
+		Widget Object Link Text Formatting
+			The `object link text` for any `object link` that is for a widget instance, and that shows up in any of the tabs in `the right pane` of the DELVE tool, is formatted in a special way to make the full dereferencing path for the widget easier to read.
+
+			Specifically, the widget names in the dereferencing path are bolded, while the ".children." separators between widget names are not. This downplays the =children= object of every widget that contains its child widgets, making it easier to see the important information contained in the paths. So, for example, the dereferencing path =page.children.colorPicker.children.sliderR= would be formatted as *page*.children.*colorPicker*.children.*sliderR*. Reading this, it's quickly clear that the path is dereferencing the =sliderR= child widget of the =colorPicker= child widget of the =page= widget.
+
+	State Tab
+		The State Tab displays the current state of the object being inspected, if the object is an instance of a =Uize.Class= subclass, or a =Uize.Class= subclass.
+
+		The state for an instance of a =Uize.Class= subclass is represented by the instance values of all of its state properties. The state for a =Uize.Class= subclass (*not* an instance) is represented by the static values of all its state properties. The state for the object being inspected is displayed in the `state properties table`.
+
+		Objects Without a State Interface
+			If the object being inspected is neither an *instance* of a =Uize.Class= subclass, nor a =Uize.Class= subclass, then the object is not considered to have a state interface.
+
+			For objects that do not support a state interface, the `state tab` will contain only a message to the effect that the object does not support a state properties state interface - there will be no `state properties table`.
+
+		State Properties Table
+			The State Properties Table displays all the public state properties for the instance or class being inspected.
+
+			The state properties table is comprised of three columns: the `NAME` column, the `ACTIONS` column, and the `VALUE` column. The state properties listed in the table are sorted by name, in ascending alphabetical order.
+
+		Name
+			The Name column of the `state properties table` displays the name for a state property.
+
+			The name for each state property listed in the `state properties table` is an `object link`, where the `object link text` is the state property's name, and the `object link expression` is a getter expression that can be used to query the value of the state property - the same expression that is used for `the get action`.
+
+		Actions
+			The Actions column of the `state properties table` provides two useful actions for each state property: `the get action` and `the set action`.
+
+			The Get Action
+				The Get Action is an `object link` whose `object link expression` is a getter expression that can be used to query the value of the state property.
+
+				Instance Getter or Static Getter
+					The getter expression linked to by `the get action` will be either a call to the =get= instance method or a call to the =MyClass.get= static method, depending on whether the object being inspected is an instance of a =Uize.Class= subclass, or an actual subclass.
+
+					For example, if the object being inspected was an instance of the =Uize.Widget.Page= class that is assigned to the global variable =page=, then the getter expression for the =idPrefix= state property would be =page.get ('idPrefix')=. On the other hand, if the object being inspected was the actual =Uize.Widget.Page= class, then the getter expression for the =idPrefix= state property would be =Uize.Widget.Page.get ('idPrefix')=.
+
+				When the Get Action is Useful
+					`The get action` can be useful when the simple =toString= serialization of a state property that is displayed in the `VALUE` column of the `state properties table` is less than satisfactory.
+
+					In such cases, using the get action for a state property will provide a more complete (and useful) view of that property's value in the `summary tab`. The getter expression that is linked to by the get action is the same getter expression that is linked to by the linked state property names in the `NAME` column.
+
+			The Set Action
+				The Set Action is an `object link` whose `object link expression` is a setter expression that can be used to set the value of the state property.
+
+				Instance Setter or Static Setter
+					The setter expression linked to by `the set action` will be either a call to the =set= instance method or a call to the =MyClass.set= static method, depending on whether the object being inspected is an instance of a =Uize.Class= subclass, or an actual subclass.
+
+					For example, if the object being inspected was an instance of the =Uize.Widget.Page= class that is assigned to the global variable =page=, then the getter expression for the =enabled= state property would be =page.set ('enabled',#)=. On the other hand, if the object being inspected was the actual =Uize.Widget.Page= class, then the getter expression for the =enabled= state property would be =Uize.Widget.Page.get ('enabled',#)=.
+
+				Deliberately Incapacitated
+					The setter expression linked to by `the set action` link is deliberately incapacitated by using a placeholder "#" (pound character) where the state property's new value should go.
+
+					This has the effect of ensuring that merely clicking on `the set action` doesn't actually change the value of the state property before you get a chance to enter your own value. Because the initial state of the setter expression is invalid, it fails. Replace the "#" with a valid value and the setter expression does its thing.
+
+				When the Set Action is Useful
+					`The set action` can be useful when troubleshooting, or even when just experimenting with the state interface for widgets on a page.
+
+					Once you've got a setter expression for the state property of a widget in the `object entry input`, then you can go to town playing with different values and seeing how the UI of the widget responds.
+
+		Value
+			The Value column of the `state properties table` displays the value for a state property, using a simple =toString= serialization.
+
+			Because the value of a state property is displayed using a =toString= serialization, the displayed value can be less than satisfactory in some cases. In such cases, `the get action` comes in handy, since it allows you to get a more complete (and useful) view of a state property's value in the `summary tab`.
+
+	Features Tab
+		The Features Tab displays the public features that can be automatically detected for a class in a sortable features table.
+
+		Always Features of a Class
+			The `features tab` always displays features of a *class* - even if the object being inspected is an *instance* of a class.
+
+			So, if the object being inspected is a =Uize.Class= subclass, then the detectable features of that class will be displayed in the `features table`. However, if the inspected object is an instance of a =Uize.Class= subclass, then the features of the instance's class will be displayed in the Features Table.
+
+		Automatically Detectable Features
+			Features that can be automatically detected for a class include: static methods, static properties, instance methods, instance properties, and state properties.
+
+			Features are detected by iterating through the properties of the class to discover static features (static methods and static properties), and by iterating through the properties of the class' =prototype= object to discover instance features (instance methods and instance properties). State properties are detected by calling the =MyClass.get= static method with no parameter specified.
+
+		Features Table
+			The Features Table is table, whose `columns are sortable`, that displays all the `automatically detectable features` for a class.
+
+		Features Table Columns
+			Each feature listed in the `features table` is described by information listed in a number of columns - such as `Name`, `Access`, `Context`, etc. - described in further detail below...
+
+			Name
+				The Name column displays the name for a feature.
+
+				For instance features, the name displayed in this column will be the name of the property of the =prototype= object. For example, the name displayed for the =wireUi= instance method would be simply "wireUi". For static features, the name displayed will be the full dereferencing path for the static feature. For example, the =Uize.Widget.Page.stateProperties= static method of the =Uize.Widget.Page= class would be displayed as "Uize.Widget.Page.stateProperties".
+
+				Displayed names for all features, except state properties, are `navigable values`. Instance features are linked to inspect the feature on the =prototype= object of the class. For example, the `object link` for the =wireUi= instance method of the =Uize.Widget.Page= class would have the `object link expression` of =Uize.Widget.Page.prototype.wireUi=. In this case, clicking on the feature name will let you inspect the function that implements the =wireUi= instance method for this class.
+
+				By contrast, static features are simply linked to those features on the class object. For example, the `object link` for the =Uize.Widget.Page.stateProperties= static method of the =Uize.Widget.Page= class would have the `object link expression` of =Uize.Widget.Page.stateProperties=. In this case, clicking on the feature name will let you inspect the function that implements the =Uize.Widget.Page.stateProperties= static method.
+
+			Access
+				The Access column displays the access control for a feature.
+
+				Since the `features table` currently only displays what are considered to be public features, the value displayed in this column will always be "Public".
+
+			Context
+				The Context column displays the context in which a feature is defined and accessible.
+
+				A feature is considered to exist in one of the following three contexts...
+
+				- *Static* - features that are defined and accessible on the class object, such as the =Uize.Widget.Page.stateProperties= static method of the =Uize.Widget.Page= class
+
+				- *Instance* - features that are defined on the =prototype= object of a class, and that are accessible on instances of the class, such as the =wireUi= instance method of the =Uize.Widget.Page= class
+
+				- *State* - State properties are considered to be neither exclusively in the *Instance* context nor exclusively in the *Static* context, since they combine aspects of both. Instead, state properties are given their own dedicated *State* context. They are regarded as "Property" `type` features in the *State* context.
+
+			Type
+				The Type column displays the type of a feature.
+
+				A feature is considered to be one of the following three types...
+
+				- *Method* - Static and instance properties that are function references, and that are *not* references to =Uize.Class= subclasses (which are separately regarded as *Module* type features), are considered to be *Method* type features. This applies to static methods as well as instance methods.
+
+				- *Property* - Static and instance properties that are not function references are considered to be *Property* type features. This applies to static properties as well as instance properties.
+
+				- *Module* - Static and instance properties that are references to =Uize.Class= subclasses are considered to be *Module* type features. So, for example, both =Uize.Widget.Button= and =Uize.Widget.Page= would be considered *Module* type features of the =Uize.Widget= class. A side effect of this definition is that the =MyClass.superclass= static property (implemented in the =Uize.Class= base class) is considered to be a *Module* type feature, as is the =Class= instance property (also implemented in the =Uize.Class= base class).
+
+			Introduced In
+				The Introduced In column displays the class in which the feature was first introduced.
+
+				Knowing the class in which a feature was introduced can be useful when troubleshooting a problem. You might want to find the very first implementation of a feature to use as a reference when looking at an override of the implementation in a subclass (or the class being inspected).
+
+				How Introduced In Is Determined
+					The class in which a feature was first introduced is determined according to the `context` of the feature.
+
+					For static features, the class is determined by going up the inheritance chain towards the root class, finding the first class in which the feature is present in the class object. For instance features, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the class' =prototype= object. For state properties, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the object returned by a call to the =get= static method with no parameter specified (ie. a "get all").
+
+			Last Overridden In
+				The Last Overridden In column displays the last class in which the feature was overridden.
+
+				Knowing the class in which a feature was last overridden can be useful when troubleshooting a problem, as the last class in which a feature was overridden would be a prime suspect to examine first when that feature is not behaving as it should. If it's suspected that the last override of the feature introduced some issue, then you can use the `Introduced In` column to find out where to go to see the original implementation (which you can then use as a reference).
+
+				How Last Overridden In Is Determined
+					The class in which a feature was last overridden is determined by going up the inheritance chain towards the root class, and finding the earliest class in which the feature is still present and has the same value / implementation as the class being inspected.
+
+					Upon each iteration up the inheritance chain, the feature's value / implementation is obtained according to the `context` of the feature: for static features, the feature is obtained from the class object; for instance features, the feature is obtained from the class' =prototype= object; for state properties, the feature is obtained by a call to the =get= static method with no parameter specified (ie. a "get all").
+
+			When Introduced In and Last Overridden In Are the Same
+				The class that a feature was `Introduced In` can be the same as the class that the feature was `Last Overridden In`.
+
+				This can be the case if the feature was only introduced for the first time in the class that is being inspected. It can also be the case if the feature was introduced in some base class up the inheritance chain and was never overridden in any subclass, including the class being inspected.
+
+		Columns Are Sortable
+			For convenience, it is possible to sort the features listed in the `features table` by any one of the `features table columns`.
+
+			To sort the table by a specific column, simply click on that column's header. When first selecting a new column to sort on, the values in that column are sorted in ascending order. To sort a column in descending order, first make sure the table is sorted by that column and then click on the column's header a second time to reverse the sort order. Every time you click on the header of the current sort column, the sort order for the column is reversed.
+
+			Sorting the `features table` by a column can be useful in a number of different cases. For example, if you're trying to find a specific feature quickly and you happen to know the name of that feature, then you can sort the table by its `Name` column, so that you can then scan your eyes down the column to the right place in the sorted names. Two other columns that can be useful to sort the table by are the `Introduced In` and `Last Overridden In` columns. Sorting either of these two columns in descending order (ie. clicking their headers twice) is an easy way to get a quick sense of which features are either unique to the class being inspected, or were recently introduced or overridden in the class' inheritance chain, because all such features will sort to the top.
+
+			The `features table` is not initially sorted by any particular column, but the features *are* sorted according to a multi-level `initial sort`.
+
+		Initial Sort
+			The features listed in the `features table` are not initially sorted by any specific column (see `Columns Are Sortable`), but are instead sorted with a multi-level sort.
+
+			The features are sorted with the `Access` column as the primary sort key, the `Context` column as the secondary sort key, the `Type` column as the tertiary sort key, and the `Name` column as the quarternary (and final) sort key. This results in an initial sorting that sorts the features into the following groupings...
+
+			................................
+			<< table >>
+
+			title: INITIAL SORT GROUPINGS
+			data
+			:| ACCESS | CONTEXT |   TYPE   |
+			:| Public | Instance| Method   |
+			:| Public | Instance| Module   |
+			:| Public | Instance| Property |
+			:| Public | State | Property |
+			:| Public | Static  | Method   |
+			:| Public | Static  | Module   |
+			:| Public | Static  | Property |
+			................................
+
+			Once you sort the table explicitly by one of the `features table columns` (see `Columns Are Sortable`), the `initial sort` is blown away and you can't get it back except by using the `REFRESH button`.
+
+		Navigable Values
+			Values in the `Name`, `Introduced In`, and `Last Overridden In` columns of the `Features Table` are navigable values, meaning they are [[Object Link][object links]] that can link to the objects / expressions they represent and can be clicked on to inspect those objects / expressions further.
+
+			For example, a class that is listed in the `Introduced In` column can be clicked on in order to inspect that class further. Values in the `Name` column are linked with an `object link expression` that is dependent on the `context` of the feature (see the documentation for the `Name` column for more details on this). Whenever a navigable column value is clicked, the `summary tab` is automatically focused to provide a summary for the object / expression represented by the link that was clicked on.
+
+	Documentation Tab
+		The Documentation Tab can be used to obtain documentation for the object that is currently being inspected, or it can just be used to get help on using the DELVE tool, or to browse the documentation for the UIZE JavaScript Framework more generally.
+
+		Documentation Tab Auto Updates
+			The documentation page that is shown in the `documentation tab` is determined by the object that is currently being inspected by the `the object inspector`, and it is automatically updated in response to changes in the object being inspected.
+
+			So, for example, you could be viewing the documentation for the =Uize.Widget.Page= class because the currently selected object is the page widget, and then you click on one of the `tree list query results` in the `the left pane` that happens to be an instance of the =Uize.Widget.Button= class. The documentation page will automatically be updated to show the documentation for the =Uize.Widget.Button= class.
+
+		How the Documentation Page is Determined
+			The documentation page that is shown in the `documentation tab` is determined according to the following rules...
+
+			- If the object being inspected is a =Uize.Class= subclass or an instance of a =Uize.Class= subclass, then the documentation page will be for the last UIZE class in the inheritance chain. For example, if the object being inspected was a page widget instance that was an instance of =MySite.MyPageWidget=, and =MySite.MyPageWidget= inherited from =Uize.Widget.Page=, which inherited from =Uize.Widget=, which inherited from =Uize.Class=, then the documentation page would be the documentation for the =Uize.Widget.Page= module - not the =Uize.Widget= or =Uize.Class= modules.
+
+			- If the object entered in the `object entry input` is a valid UIZE module (such as =Uize.Widget.Bar.Slider=), but that module is not loaded on the page being inspected, then the documentation for the specified UIZE module will still be shown. This behavior provides a convenient way for viewing `documentation for unloaded UIZE modules`.
+
+			- If the object entered in the `object entry input` is neither a =Uize.Class= subclass or instance of a =Uize.Class= subclass loaded on the page being inspected, nor a valid UIZE module that is not loaded on the page being inspected, then the documentation shown will be the `DELVE tool help documentation` (ie. this documentation).
+
+		Documentation for Unloaded UIZE Modules
+			As mentioned in the section `How the Documentation Page is Determined`, the DELVE tool can be used to conveniently obtain documentation for any module that is known to be part of the UIZE JavaScript Framework.
+
+			Simply type in the fully qualified name of a valid UIZE module (eg. =Uize.Widget.Bar.Slider=) in the `object entry input`. The `documentation tab` will be automatically updated to show documentation for that module - even if the module is not loaded on the page being inspected.
+
+		DELVE Tool Help Documentation
+			The DELVE Tool Help Documentation discusses the DELVE tool, explaining its purpose, uses, features, user interface, and providing tips on its use.
+
+			In case you hadn't noticed, *this is* the DELVE Tool Help Documentation. When using the DELVE tool, the help documentation can be brought up at any time by clicking the `HELP button` that is located alongside the other `title bar buttons` in `the title bar` of the DELVE tool.
+
+	Events Tab
+		The Events Tab lets you watch events for the object being inspected, provided that the object is a `watchable object`.
+
+		Watchable Object
+			Not all objects being inspected are supported for event watching in the `events tab`.
+
+			The DELVE tool currently supports automatically watching events on instances of any =Uize.Class= subclass - that includes widget instances as well as non-widget instances - as well as =Uize.Class= subclasses, themselves. For =Uize.Class= subclasses and subclass instances - including classes and instances of classes in a site-specific non-UIZE namespace - event watching is automatic and does not require any cooperation from the code in order to enable the event watching.
+
+			Non-watchable Object
+				Whenever the object being inspected is set to a non-watchable object, the event log will be cleared and a message, to the effect that there is no valid object to watch, will be logged.
+
+		Types of Events Logged
+			The `events tab` can automatically log all `property change events` for instances of =Uize.Class= subclasses, as well as all instance `custom events` for instances of =Uize.Class= subclasses and all static Custom Events for =Uize.Class= subclasses.
+
+			Property Change Events
+				Property Change Events are events that are fired whenever one or more of the state properties for an instance of a =Uize.Class= subclass are changed during a set operation.
+
+				Unlike `custom events`, `property change events` are only applicable to *instances* and not to classes. Whenever Property Change Events are logged, an object specifying all the properties that have changed value, along with their new values, is serialized to a one line JSON formatted string and appended to the log message.
+
+				EXAMPLE
+				........................................................................................
+				23:20:58.185 : PROPERTIES CHANGED: {alignX:0.7542372881355932,alignY:0.5847457627118644}
+				........................................................................................
+
+			Custom Events
+				Custom Events are events that are fired deliberately in the implementation for =Uize.Class= subclasses, and all such events are automatically logged in the `events tab`.
+
+				Custom Events can be fired on instances (as instance events) by calling the =fire= instance method, and they can be fired on classes (as static events) by calling the =MyClass.fire= static method. If the object being inspected is either an instance of a =Uize.Class= subclass or a =Uize.Class= subclass, then its Custom Events are automatically logged.
+
+				Whenever Custom Events are logged, the event object is serialized to a one line JSON formatted string and appended to the log message. Certain contents of the event object may not be serializable, however, such as the value of the =source= property. In such an event, an empty object will appear in place of the unserializable value.
+
+				EXAMPLE
+				...............................................................................
+				23:21:56.522 : INSTANCE EVENT: {name:'Palette Dismissed',bubble:true,source:{}}
+				...............................................................................
+
+				Static Events Also Supported
+					While instance `custom events` are far more common than static custom events in a class' implementation, a =Uize.Class= subclass is considered a `watchable object` and static custom events - if they are fired on a class that's being watched - will be logged.
+
+		Log Message Timestamps
+			The log message for every event that is logged in the `events tab` is prefixed with a timestamp that captures exactly, right down to the millisecond, when the event was logged.
+
+			EXAMPLE
+			......................................................
+			00:00:20.990 : INSTANCE EVENT: {name:'Over',source:{}}
+			......................................................
+
+			In the above example, the logged event took place at 20 seconds past midnight (yes, that's when I was writing this documentation). The format of the timestamp is =HH:MM:SS.sss=, where =HH= represents hours in 24 hour format (military time), =MM= represents minutes, =SS= represents seconds, and =sss= represents milliseconds (thousandths of a second).
+
+		Clearing the Events Log
+			The events log can be cleared very easily at any time by clicking on the *"CLEAR"* button that is located at the top right of the events log.
+
+			Also, the events log is automatically cleared every time that the object being inspected changes.
+
+	Object Navigation
+		Every `object link` that appears in the contents of a tab in `the right pane` of the DELVE tool presents an opportunity to navigate through the tree of widgets, their DOM nodes, classes, features of classes, etc.
+
+		Auto Focusing of Summary Tab
+			`Clicking an object link` has the effect of always focusing the `summary tab`, regardless of which tab contains the `object link`.
+
+		No Forward Button, Back Button, or History
+			Currently, there are no forward or back buttons, nor any history droplist accompanying the `object entry input`.
+
+			This means that navigation is not quite like a browser. However, in certain browsers (such as Firefox) the undo (Ctrl-Z or Cmd-Z) and redo (Ctrl-Y or Cmd-Y) functions behave in a similar way to navigation history, with the undo function taking you back to previous inspected objects, and redo taking you forward towards the end of the undo history. To use undo and redo like this, make sure that the `object entry input` text box is focused.
+
+Universal Features
+	The various features described in this section are universal to the DELVE tool and each feature may be encountered in various places in the tool.
+
+	Object Link
+		An Object Link is a link that can appear in various places in the DELVE tool - such as in the `tree list query results`, or in the contents of the `summary tab`, `state tab`, and `features tab` of `the object inspector` - and that links to an object so that it can be inspected in `the object inspector` in `the right pane` of the DELVE tool.
+
+		An `object link` is comprised of `object link text` and an associated `object link expression`.
+
+		Object Link Text
+			The Object Link Text is the display text for an `object link`.
+
+			The Object Link Text may sometimes be shorter than or otherwise different from the `object link expression` (see `Object Link Expression vs Object Link Text`). For objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text is formatted in a special way to make is easier to read (see `Widget Object Link Text Formatting`).
+
+		Object Link Expression
+			The Object Link Expression is a valid expression that returns the object being inspected as the result of its evaluation.
+
+			The Object Link Expression may sometimes be longer than or otherwise different from the `object link text` (see `Object Link Expression vs Object Link Text`). An Object Link Expression can be a simple object dereferencing path (such as =page.children.colorPicker.children.sliderR= or =Uize.Widget.Page=), or it can be something more complex like a method call (such as =page.children.colorPicker.children.sliderR.getNode ('knob')= or =page.children.colorPicker.get ('value')=).
+
+			When `clicking an object link`, it is the Object Link Expression and *not* the `object link text` that is placed into the `object entry input`, since the pretty display text for the `object link` is not guaranteed to evaluate to the object to be inspected - sometimes it would, but  often it would not.
+
+		Mousing Over an Object Link
+			Whenever you mouse over an `object link`, regardless of where it appears in the DELVE tool, an `object preview` will be presented so that you can learn more about the object before committing to navigating to it in `the object inspector`.
+
+		Clicking an Object Link
+			Clicking on an `object link` causes the text in the `object entry input` to be replaced with the `object link expression` that the Object Link represents, which in turn will cause `the object inspector` to be updated to reflect the new object that is being inspected.
+
+			If an Object Link is clicked in the `tree list query results` in `the left pane` of the DELVE tool, then the currently active tab in `the object inspector` will not be changed - whatever the current tab happens to be, its contents will be updated to reflect the new object being inspected. If, on the other hand, an Object Link is clicked in any of the tabs in `the object inspector` (such as the `summary tab`, `state tab`, or `features tab`), then the active tab will automatically be switched to the `summary tab`, which will then be updated to reflect the new object being inspected.
+
+		Object Link Expression vs Object Link Text
+			The expression represented by an Object Link is sometimes - but often not - the same as the text of an Object Link.
+
+			Where Object Link Text And Object Link Expression Match
+				An example of where an object link's expression matches the object link's text is the items of the `tree list query results` for the `All widgets on the page` query.
+
+				With this query, each item in the results set is a `widget link`, where both the `object link text` and the `object link expression` are identical and are the full dereferencing path for the widget.
+
+			Where Object Link Text And Object Link Expression Differ
+				An example of where an object link's expression does *not* match an object link's text is in the items of the `tree list query results` for the `All widgets on the page, as a tree` query.
+
+				With this query, each item in the results set is a widget, but each object link's text is just the widget's name while the object link's expression is the full dereferencing path for the widget. When viewing all the widgets on the page as a hierarchical tree, it's not as useful to see the widgets listed with their full dereferencing paths displayed. However, the items in the tree still need to link to the widgets and so the expression for every link is a full dereferencing path.
+
+			Object Link Expressions Can Be Big and Messy
+				In some cases there is just no space available for the entire expression to be the link text, and in other cases the expression is not even the most compelling or useful representation and would be inelegant, confusing, or even overwhelming to use as the link text.
+
+				An example of this can be found in the `DOM NODES` section of the `summary tab` when the object being inspected is a widget instance. The *NODE NAME* column of this table contains object links for the widget's DOM nodes, where the object link's text for a DOM node is just the name of the node, while the object link's expression is a complete expression for accessing the DOM node through the widget (for `accessed widget dom nodes`) or a complete expression for accessing the DOM node using =document.getElementById= (for `unaccessed widget dom nodes`). In this situation, not displaying the object link expression for `widget DOM nodes` is much more pleasant on the eyes and also more useful.
+
+		Widget Link
+			A Widget Link is a specific kind of `object link` where both the `object link text` and `object link expression` are identical and are the full dereferencing path for the widget.
+
+			Clicking on a widget link will behave just as with generally `clicking an object link`, and would navigate `the object inspector` to the widget so that it can be inspected further, with widget specific information displaying in the `summary tab` (see the section `Summary for Widget Instances` for more details). When a widget link shows up in any of the tabs in `the right pane` of the DELVE tool, it is formatted in a special way to make the full dereferencing path for the widget easier to read (see `Widget Object Link Text Formatting`).
+
+	Object Preview
+		Whenever you mouse over an `object link`, a preview is provided in the form of an `object info tooltip` and `object highlighting` in the page being inspected (if the object is a widget or DOM node).
+
+		Object Info Tooltip
+			An `object info tooltip` that is shown when mousing over an `object link` provides a quick summary of certain aspects of an object.
+
+			The tooltip contains a data table, with values for a number of different summary info items. The summary info that is shown in the tooltip will differ, depending on the type of object being linked to. For example, a link to a widget instance will display info for the widget's class, its depth in the widget tree, the number of children it has, etc. On the other hand, a link to a class will display info for the class' superclass, its inheritance depth, the number of subclasses created of it on the page, etc.
+
+			Info items that may show up in the tooltip's data table include...
+
+			WHAT IT IS (all objects)
+				Shown for all objects, the text displayed will be one of: *"null"*, *"undefined"*, *"widget"* (for widget instances), *"class"* (for =Uize.Class= subclasses), *"DOM node"* (for DOM nodes), *"simple object"* (for instances of JavaScript's built-in =Object= object, or else the type of the object as reported by JavaScript's =typeof= operator (eg. *"number"*, *"string"*, *"boolean"*, etc.).
+
+			INSTANCE OF (anything non-null)
+				Shown for any value that is not =null= or =undefined=, the text displayed will be the global name of the class of which the object is an instance.
+
+				For instances of =Uize.Class= subclasses, the text displayed will be the name of the module that implements the class (eg. *"Uize.Widget.Bar.Slider"*). For instances of other objects, it will be the name of the constructor function (eg. *"Number"*, *"String"*, *"Boolean"*, *"RegExp"*, etc.). For classes and functions, the text displayed will be *"Function"*. For DOM nodes, it will be the name of the DOM object of which the DOM node is an instance (eg. *"HTMLAnchorElement"*, *"HTMLDivElement"*, *"HTMLImageElement"*, etc.).
+
+			SUPERCLASS (all classes)
+				Shown only for objects that are =Uize.Class= subclasses, the text displayed will be the global name of the class' superclass.
+
+				For the =Uize.Class= base class, the text displayed will be *"this is the root class"*, since the =Uize.Class= class is the root class for all classes that use the UIZE JavaScript Framework.
+
+			INHERITANCE DEPTH (all classes)
+				Shown only for objects that are =Uize.Class= subclasses, the text displayed will be the inheritance depth of the class.
+
+				Inheritance depth is how deep the class is in the class hierarchy. Put another way, it's how many subclasses removed the class is from the =Uize.Class= base class. So, for example, for the class =Uize.Widget.Button= the text displayed would be *"2"*, since the =Uize.Widget.Button= class is two subclasses removed from the =Uize.Class= base class. For the =Uize.Class= base class, itself, the text displayed will be *"this is the root class"*.
+
+			SUBCLASSES (all classes)
+				Shown only for objects that are =Uize.Class= subclasses, the text displayed will be the number of modules built for the page that are subclasses of the class - directly or indirectly.
+
+				So, for example, if only the class modules =Uize.Class=, =Uize.Widget=, and =Uize.Widget.Button= have been built for the page, then the text displayed for the =Uize.Class= class would be *"2"*. This is because both the =Uize.Widget= and =Uize.Widget.Button= classes inherit from =Uize.Class=. For classes that have no subclasses on the page that inherit from them, the text displayed will be *"no subclasses on this page"*. So, in our example, the text displayed for the =Uize.Widget.Button= class would be *"no subclasses on this page"*, since it is at the end of the inheritance chain.
+
+			WIDGET INSTANCES (all widget classes)
+				Shown only for objects that are widget classes (ie. =Uize.Widget=, or a subclass thereof), the text displayed will be the number of instances of the widget class that have been created on the page.
+
+				For widget classes of which no instances have been created, the text displayed will be *"no instances of this class"*.
+
+			DEPTH IN TREE (all widget instances)
+				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be the depth of the widget instance in the widget tree.
+
+				Depth in tree is how deep the widget instance is in the widget tree of which the page widget is the root widget. Put another way, it's how many levels removed the instance is from the page widget. So, for example, for the widget instance =page.children.colorPicker.children.sliderR=, the text displayed would be *"2"*, since the =page.children.colorPicker.children.sliderR= widget is two levels removed from the =page= widget. For the page widget, itself, the text displayed will be *"this is the root widget"*.
+
+			CHILDREN (all widget instances)
+				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the number of child widgets that the widget has.
+
+				For widgets that do not have any child widgets, the text displayed will be *"no children"*.
+
+			SIBLINGS (all widget instances)
+				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the widget's sibling widgets.
+
+				The number of siblings of a widget will be the count of the number of children of that widget's parent widget, minus one. For widgets that do not have any sibling widgets (ie. only child widgets, or the page widget), the text displayed will be *"no siblings"*.
+
+			LOCALIZED STRINGS (all widget instances)
+				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the number of `specified localized strings` for the widget.
+
+				For widgets for which no localized strings are specified, the text displayed will be *"no localized strings"*.
+
+			DOM NODES (all widget instances)
+				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a summary of all the DOM nodes that belong to the widget.
+
+				The DOM nodes summary text displayed in the `object info tooltip` is the same text that is displayed in the header of the `DOM NODES` section in the `summary for widget instances` that is shown in the `summary tab` when the object being inspected is a widget instance. For a detailed description of the text displayed, see the section `Widget DOM Nodes Summary`.
+
+			ID (all DOM nodes)
+				Shown only for objects that are DOM nodes, the text displayed will be the value of the node's =id= property.
+
+			TAG (all DOM nodes)
+				Shown only for objects that are DOM nodes, the text displayed will be the value of the node's =tagName= property, which indicates the tag type of the node.
+
+				For div tags, the text displayed will be *"DIV"*. For image tags, the text displayed will be *"IMG"*. For anchor tags, the text displayed will be *"A"*. And so on.
+
+			OWNER WIDGET (all DOM nodes)
+				Shown only for objects that are DOM nodes, the text displayed will be the full dereferencing path for the widget that "owns" the node.
+
+				A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the =idPrefix= state property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be *"not owned by a widget"*.
+
+			OWNER WIDGET CLASS (all DOM nodes)
+				Shown only for objects that are DOM nodes, the text displayed will be the full dereferencing path for the widget class of the widget that "owns" the node.
+
+				A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the =idPrefix= state property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be *"not owned by a widget"*.
+
+			VALUE (all instances with value interface)
+				Shown only for objects that are instances of =Uize.Class= subclasses that implement the value interface, the text displayed will be a simple =toString= serialization of the value of the instance's =value= state property.
+
+		Object Highlighting
+			Object Highlighting lets you see where widgets and DOM nodes are in the page being inspected.
+
+			Whenever `mousing over an object link` where that object is either a widget instance (ie. an instance of =Uize.Widget=, or a subclass thereof) or a DOM node, an attempt will be made to highlight the DOM in the page being inspected. The highlight that is shown in the page attempts to best indicate the object's position and dimensions, with a semi-opaque rectangle overlay that appears above the object being highlighted. Object Highlighting, along with the `object info tooltip` that is shown when mousing over object links, is part of the overall `object preview` that is shown for object links. Object Highighting is handled different between objects that are widgets (see `Widget Highlighting`) and DOM nodes (see `DOM Node Highlighting`).
+
+			DOM Node Highlighting
+				For highlighting of a DOM node, the position and dimensions of the node are determined as accurately as possible, and then the highlight overlay is placed at the calculated coordinates.
+
+				If a DOM node to be highlighted is not visible on the page, then no highlight will be shown (see `Non-visible DOM Nodes`).
+
+			Widget Highlighting
+				For highlighting of a widget, the position and dimensions of the entire widget are determined, as accurately as possible, as the outer bounding rectangle that contains all of the `widget DOM nodes` of the widget, along with all of the widget's child widgets.
+
+				Because the process of calculating a widget's coordinates can be recursive in nature (because the widget may have child widgets, which may in turn have their own child widgets, etc.), the process gets slower the closer a widget is to the root of the widget tree and it has a bigger tree of its own underneath it. The page widget, which *is* the root of the widget tree, can be quite slow to compute coordinates on.
+
+			Non-visible DOM Nodes
+				In some cases, a node to be highlighted (or that is part of a widget to be highlighted) may not be visible in the page.
+
+				This could be as a result of a style rule, applied to the node, that is setting its =display= style property to =none= or its =visibility= style property to =hidden=. Or it could be that some other DOM node up the node's parent chain is not visible, or that the DOM node is part of some other node's content overflow that is either hidden or scrolled out of view. Whatever the reason, if a DOM node to be highlighted is not visible, then no highlight will be shown. If a DOM node is not visible and it is part of a widget to be highlighted, then the outer bounds that are calculated for the `widget highlighting` will not be affected by the non-visible DOM node.
+
+			Highlight In, Highlight Out
+				The `object highlighting` feature is implemented to be unobtrusive and to avoid polluting the DOM of the page being inspected (see `DELVE is Gentle`).
+
+				To that end, the DOM that is added to the page being inspected, that creates the highlight effect, is only added as needed to highlight an object being previewed, and then it is removed immediately when the preview is no longer shown. So, once you're done interacting in the DELVE window and have used the `object highlighting` feature to see where something is in the page, you can then switch over to the page and some other debugging tool (such as Firebug) and not have to worry about encountering extraneous cruft added by DELVE.
+
+	Widget DOM Nodes Summary
+		The Widget DOM Nodes Summary is a one line summary of all the DOM nodes that belong to a specific widget.
+
+		Where You'll See the Widget DOM Nodes Summary
+			The Widget DOM Nodes Summary is shown in two places in the DELVE tool...
+
+			+. The `widget DOM nodes summary` is shown as the text for the `DOM NODES (all widget instances)` row of the `object info tooltip` that is displayed when mousing over an `object link` for an object that is a widget instance (ie. an instance of =Uize.Widget=, or a subclass thereof)
+			+. The `widget DOM nodes summary` is shown as the subtitle in the header of the `DOM NODES` section in the `summary for widget instances` that is shown in the `summary tab` when the object being inspected is a widget instance
+
+		What the Widget DOM Nodes Summary Looks Like
+			The `widget DOM nodes summary` is constructed according to a set of rules, described below...
+
+			For widgets that have no `widget DOM nodes`, the summary text will be *"no DOM nodes"*. For widgets that have some `widget DOM nodes`, the summary text will be the number of DOM nodes with a further breakdown of the different types of DOM nodes in parentheses. For widgets for which all of the DOM nodes have been accessed (see `Accessed Widget DOM Nodes`), the parenthetical text will be *"all accessed"*. For widgets for which none of the DOM nodes have been accessed (see `Unaccessed Widget DOM Nodes`), the parenthetical text will be *"none accessed*". For widgets for which some of the DOM nodes have been accessed and some have not, the parenthetical text will be *"X accessed, Y unaccessed"*.
+
+			Furthermore, for widgets for which some or all of the DOM nodes have been accessed, a further breakdown will be appended to indicate how many DOM nodes are known to be missing (see `Missing Accessed Widget DOM Nodes` and `Present Accessed Widget DOM Nodes`). For widgets for which all DOM nodes have been accessed, the appended text will be either *"all present*" (if all accessed DOM nodes were present), or *"all missing*" (if all accessed DOM nodes were missing). For widgets for which not all DOM nodes have been accessed, or for which not all DOM nodes are present or missing, the appended text will be *"X known missing"*.
+
+			EXAMPLES OF WIDGET DOM NODES SUMMARY TEXT
+			.............................................
+			no DOM nodes
+			3 (none accessed)
+			3 (all accessed, all present)
+			3 (all accessed, all missing)
+			3 (all accessed, 2 known missing)
+			3 (2 accessed, 1 unaccessed, 2 known missing)
+			.............................................
+
+Definitions of Terms
+	Accessed Widget DOM Nodes
+		DOM nodes are considered accessed `widget DOM nodes` if some widget in the entire widget tree contains a mapping for such a node in its node cache (ie. the widget tried to access it).
+
+		The number of `accessed widget DOM nodes` for a widget is not necessarily an indication of the number of DOM nodes that the widget addresses in its implementation, since it may be that the widget has not yet gotten into certain states that would cause certain nodes to be accessed.
+
+		Accessed widget DOM nodes are further broken down into two subgroups: `Present Accessed Widget DOM Nodes` and `Missing Accessed Widget DOM Nodes`.
+
+	Specified Localized Strings
+		Specified Localized Strings are those localized strings that are explicitly specified for a widget instance.
+
+		Localized strings can be explicitly specified for a widget by setting an object value for the widget's =localized= state property, so the number of localized strings specified for a widget is the number of properties in the =localized= object specified for the widget.
+
+		Bear in mind that the system of localization in the UIZE JavaScript Framework (see the [[javascript-localization.html][JavaScript Localization]] guide) allows a widget to "inherit" localized strings from up its parent chain, so the number of localized strings specified for a widget does not always give an indication of how many localized strings the widget uses in its implementation.
+
+	Present Accessed Widget DOM Nodes
+		Present Accessed Widgeet DOM Nodes are `accessed widget DOM nodes` that were present in the page the first time the widget tried to access them, so references to them are stored in the widget's node cache.
+
+	Missing Accessed Widget DOM Nodes
+		Missing Accessed Widgeet DOM Nodes are `accessed widget DOM nodes` that were *not* present in the page when the widget first tried to access them, so =null= references are stored for them in the widget's node cache.
+
+		An accessed DOM node may be considered missing even though there is HTML for it in the page, since it is possible that the HTML for the node did not exist in the page when the widget first tried to access the node.
+
+	Unaccessed Widget DOM Nodes
+		DOM nodes are considered unaccessed `widget DOM nodes` if such a node has *not* been accessed by a widget (so there is no entry for the node in any widget's node cache), but the node's ID is consistent with the value of the =idPrefix= state property for some widget in the entire widget tree.
+
+		A node may be considered an unaccessed widget DOM node even if it is actually never addressed in the implementation of the widget instance that is considered to be its owner. This is because the person writing the code to generate the HTML for a widget may mistakenly add IDs for some DOM nodes inside that HTML that makes those nodes appear as nodes that the widget uses - even though they are not. Another possibility might be that the HTML being used for a widget is actually HTML intended for a subclass of that widget's class. In such cases, extra nodes that are addressed in the implementation of the widget subclass are not known to the base class - they will be ignored, but they will still appear to belong to instances of that base class because of their ID structure.
+
+		###
+			What Do Unaccessed DOM Nodes Indicate?
+				It is not too unusual for some of a widget's DOM nodes to not have been accessed, since a situation may not yet have arisen in the page that would cause the widget to access certain of its DOM nodes. It is also possible, however, that an unaccessed DOM node may be an indication of stale markup generated for the widget, where the widget's implementation had once but no longer addresses a specific node that is still in the HTML
+
+	Widget DOM Nodes
+		Widget DOM Nodes is the union of all `accessed widget DOM nodes` and `unaccessed widget DOM nodes`.
+
+### Important Considerations
+	Delving Into Non-UIZE Pages
+		.
+
+	When to Launch DELVE
+		.
+
+		- not too soon, naturally
+
+	Heavily Dynamic Documents
+		.
+
+	How DELVE Finds the Page Widget
+		.
+
+	Reloading the Page Being Inspected
+		.
+
+	Navigating Away From the Page Being Inspected
+		.
+
+Issues That DELVE Helps To Troubleshoot
+	Issues With Missing DOM Nodes
+		Some functionality on a page may not work as designed if the page is missing some DOM nodes that are needed in order for one or more widgets to function correctly.
+
+		Widgets are considered to be missing DOM nodes if the node cache for the widget contains some mappings of DOM node names to =null= values, indicating that an attempt was made to access a node in the DOM and the node was not present in the DOM at the time of the access (leading to the cached =null= value). Widgets are considered to be missing *all* DOM nodes if the node cache for the widget contains *only* mappings of DOM node names to =null= values, indicating that, for every attempt to access a node in the DOM, the node was not present in the DOM at the time of the access (leading to the cached =null= value).
+
+		It may be that the widget is missing its DOM nodes because of a problem with putting its HTML into the page, or because of a mismatch between the IDs used for the nodes in the HTML and the =idPrefix= for the widget (ie. the DOM nodes are present in the page but the widget is not finding them). It may also be that the DOM nodes are absent by design, since widgets can be implemented to have optional DOM nodes. Even when missing DOM nodes is acceptable by design, the scale of missing DOM nodes may provide guidance on refactoring widget code for performance, since all DOM node accesses come with some small cost.
+
+		To help you in locating widgets that are missing DOM nodes, the DELVE tool provides two `widget instance queries`: the `Wired widgets that are missing some DOM nodes` and `Wired widgets that appear to missing all DOM nodes` queries.
+
+	### Modules Loaded Unnecessarily
+		.
+

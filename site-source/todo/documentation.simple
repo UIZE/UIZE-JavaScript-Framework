@@ -31,7 +31,7 @@ Improve Social Network Sharing
 	While the slide out sharing widget on the left is neat in its own way, its not direct and to the point enough and doesn't acknowledge the reality that Facebook and Twitter are currently the primary means for virality. Add an always visible widget somewhere near the top right in the gutter that shows likes, lets users easily like, and possibly shows FB friends for FB authenticated users. Look into the widgets that are provided by FB, Twitter, and Google.
 
 JavaScript Services
-	Create an explainer to explain the approach UIZE takes to services.
+	Create an guide to explain the approach UIZE takes to services.
 
 Conditions
 	Document the conditions system that is implemented in the =Uize.Class= base class.
@@ -160,7 +160,7 @@ Kill acceleration and deceleration
 	- C:/~uize/UIZE-JavaScript-Framework/examples/hover-fader-for-thumbnails.html
 	- C:/~uize/UIZE-JavaScript-Framework/examples/fading-links.html
 
-Finish "Creating a New UIZE Example Page" Explainer
+Finish "Creating a New UIZE Example Page" Guide
 
 iPad issues
 	- outstanding
@@ -407,16 +407,16 @@ For Framework Developers
 
 	- Deprecating Features
 	- Renaming UIZE Modules
-	- Creating a New Explainer
+	- Creating a New Guide
 		Add an Entry to the Site Map
-		Announce the New Explainer
+		Announce the New Guide
 			- refer to Announcing a New Development
 	- Announcing a New Development
 	- Registering New Developers
 	- Registering New Contributing Organizations
 	- Releasing a Build
 
-New Explainers
+New Guides
 	Ajax
 		- specifying params
 		- GET vs. POST
@@ -468,10 +468,10 @@ New Explainers
 Search on Selected Text
 	- for any content document, pop open search pop-up when selecting text (as long as text is not more than a certain max length, and does not contain linebreaks -- must make sure that this feature wouldn't be annoying, so perhaps only for documentation pages? Don't want to confuse this search feature with normal interaction with form fields).
 
-Explainer: JavaScript Localization
+Guide: JavaScript Localization
 	default localized strings (could be English)
 
-Explainer: JavaScript Libraries
+Guide: JavaScript Libraries
 	- feedback from Ben
 		I read over the JavaScript Library Documentation and here are my suggestions:
 
@@ -479,19 +479,19 @@ Explainer: JavaScript Libraries
 
 		- In the 2. Where They Live section, I think it'd be helpful to actually list where the default JavaScript modules folder is (both the source and built versions) just so someone reading can know exactly what you're referring to.
 
-		- In the 3.1.2.3. Don't Require List Modules I understand what you're getting at in the paragraph about not requiring the modules so the onus is on the modules that actually need those modules to require them properly. I think what's confusing is that if you don't know how the framework works in "source-mode" (i.e. all the modules are loaded dynamically) then the paragraph seems pretty confusing.  I think either it needs some examples of what you're trying to explain or at least a reference to the explainer section that talks about the source-mode module loading
+		- In the 3.1.2.3. Don't Require List Modules I understand what you're getting at in the paragraph about not requiring the modules so the onus is on the modules that actually need those modules to require them properly. I think what's confusing is that if you don't know how the framework works in "source-mode" (i.e. all the modules are loaded dynamically) then the paragraph seems pretty confusing.  I think either it needs some examples of what you're trying to explain or at least a reference to the guide section that talks about the source-mode module loading
 
 		- In 3.2 The Built Version I think you may want to play up the performance benefits mention in 1. Introduction about saving http requests because that's when the benefits come in (in the built version).  Maybe here is where you can do an analysis using the UizeSite page widget library file (if not in the intro)
 
-		- In 4. How To use Them it seems to me that the example in 4.1 Sourcing the Source Version looks the same as the example in 4.2 Source in the Built Version.  This also got me thinking.  In Zazzle we have a function that listens to a config entry as to whether to use the source JS.  How does Uize.com (or any other site for that matter) determine which version to use?  Most likely people will just copy what they developed locally to their website.  Maybe a suggestion on how to implement that in the Build Scripts explainer (I did a cursory search and didn't find anything) would help
+		- In 4. How To use Them it seems to me that the example in 4.1 Sourcing the Source Version looks the same as the example in 4.2 Source in the Built Version.  This also got me thinking.  In Zazzle we have a function that listens to a config entry as to whether to use the source JS.  How does Uize.com (or any other site for that matter) determine which version to use?  Most likely people will just copy what they developed locally to their website.  Maybe a suggestion on how to implement that in the Build Scripts guide (I did a cursory search and didn't find anything) would help
 
 		- It seems that the paragraph in 4.3 Requiring a JavaScript Library sort of explains what I was just talking about, although I still don't see how the module loading mechanism knows to use the built version of the modules.  Is that because the script tag sourcing of the Uize.js module would be changed to point to the built version (and thus the module loading mechanism knows where to find the rest)?
 
 		- I think an example of what you mean in 7.1. Pages Should Always Work Without Libraries would be nice
 
-		Looking at all my suggestions, I think I understand now where my confusions lie.  In some regards I'm a visual learner so I like to see things rather than just read or hear them.  So for the more tricky explanation, an example of what you're talking about would clear things up for me.  Towards the end of the explainer it seems that you talked about some of the things I was mentioning earlier on the explainer, so maybe some well-placed links to further in the document might help as well.
+		Looking at all my suggestions, I think I understand now where my confusions lie.  In some regards I'm a visual learner so I like to see things rather than just read or hear them.  So for the more tricky explanation, an example of what you're talking about would clear things up for me.  Towards the end of the guide it seems that you talked about some of the things I was mentioning earlier on the guide, so maybe some well-placed links to further in the document might help as well.
 
-		But overall after reading the explainer, I think you really need to beat the developer over the head as to why library files are useful.  There's all this explanation of how they were and some dancing you have to do, but only a little bit on why you would actually use them.
+		But overall after reading the guide, I think you really need to beat the developer over the head as to why library files are useful.  There's all this explanation of how they were and some dancing you have to do, but only a little bit on why you would actually use them.
 
 	- feedback from Tim
 		General:
@@ -516,7 +516,7 @@ Explainer: JavaScript Libraries
 		7.1
 			A gentle reminder of how multiple module declarations of the same module won't lead to multiple requests might be helpful
 
-Explainer: JavaScript Modules
+Guide: JavaScript Modules
 	Uize.module -> Parameters -> required
 		Order Unimportant
 			It's worth mentioning and explaining why order is not important in the required list
@@ -628,7 +628,7 @@ Basic Wireframe Documentation for *ALL* Modules
 XHTML Validation Problems
 	When running the UIZE documentation pages through an XHTML validator to test for well-formedness, the following problems are revealed...
 
-	- "JavaScript Templates" explainer has issue with "<%" and ">" chars not being entities. This is a problem for SimpleDoc in general.
+	- "JavaScript Templates" guide has issue with "<%" and ">" chars not being entities. This is a problem for SimpleDoc in general.
 	- for all pages when run locally, need default style language
 	- for pages delivered by server, no char encoding specified in response headers (refer to zazzle.com response headers)
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

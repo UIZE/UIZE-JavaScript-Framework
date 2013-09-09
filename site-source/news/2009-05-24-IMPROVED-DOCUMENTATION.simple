@@ -15,7 +15,7 @@ Smaller Download
 Improved Cross-linking
 	There is now more effective cross-linking between documents, with many previously unlinked module names now linked to their associated reference documents.
 
-	Basically, just about anywhere that there was previously an unlinked module name there is now a linked module name. Module names are automatically linked to their reference documents from all SimpleDoc documents, including explainers, appendixes, module reference documents, and various other miscellaneous SimpleDoc documents.
+	Basically, just about anywhere that there was previously an unlinked module name there is now a linked module name. Module names are automatically linked to their reference documents from all SimpleDoc documents, including guides, appendixes, module reference documents, and various other miscellaneous SimpleDoc documents.
 
 
 

@@ -18,14 +18,14 @@
 
 /*?
 	Introduction
-		The =Uize.Template= module implements a [[../explainers/javascript-templates.html][JavaScript Templates]] system, with rich template functionality that fully leverages the JavaScript language.
+		The =Uize.Template= module implements a [[../guides/javascript-templates.html][JavaScript Templates]] system, with rich template functionality that fully leverages the JavaScript language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		Definition of Terms
 			For the sake of this document, a number of commonly used terms are defined below.
 
-			This is not, however, an exhaustive list of all the terms or concepts that comprise the JavaScript templates system. If you are not already familiar with this system, consult the [[../explainers/javascript-templates.html][JavaScript Templates]] explainer for background reading.
+			This is not, however, an exhaustive list of all the terms or concepts that comprise the JavaScript templates system. If you are not already familiar with this system, consult the [[../guides/javascript-templates.html][JavaScript Templates]] guide for background reading.
 
 			Encoding
 				The =Uize.Template= module supports the concept of an encoding.

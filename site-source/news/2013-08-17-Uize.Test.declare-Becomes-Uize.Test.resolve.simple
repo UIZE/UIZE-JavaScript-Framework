@@ -6,7 +6,7 @@ A Conflict Existed
 	Unfortunately for the =Uize.Test= base class, the =Uize.Class= base class (from which the =Uize.Test= class is derived) implements a =Uize.Class.declare= static method that is available universally to subclasses as a means of declaring features for a class. The =Uize.Test= class was, naturally, overriding the inherited =declare= static method with a method of its own having the same name but completely different purpose.
 
 The Class System Wins out
-	Given the importance of the =Uize.Class.declare= method as a fundamental component of the [[../explainers/classes-and-inheritance.html][UIZE class mechanism]], it was decided to force a rename of the =Uize.Test.declare= static method.
+	Given the importance of the =Uize.Class.declare= method as a fundamental component of the [[../guides/classes-and-inheritance.html][UIZE class mechanism]], it was decided to force a rename of the =Uize.Test.declare= static method.
 
 	Partly, this is to not allow this confusion to persist in the codebase. More importantly, however, it is to allow test base classes to be created for specific categories of tests, and to allow those test base classes to be able to declare features (such as instance and static methods) using the =declare= method inherited from the =Uize.Class= base class, should they so choose.
 

@@ -1429,7 +1429,7 @@ Uize.module ({
 											? 'javascript-reference/' + _className + '.html'
 											: null
 								)
-							) || 'explainers/using-the-delve-tool.html'
+							) || 'guides/using-the-delve-tool.html'
 						)
 				});
 			}

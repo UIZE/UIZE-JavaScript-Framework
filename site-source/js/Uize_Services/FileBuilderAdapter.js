@@ -30,7 +30,7 @@
 			- so, for example, a handler for scrunched JavaScript modules can rely on a handler for compiled JST modules, so that if a .jst source file is modified, requesting the scrunched compiled JST module will result in the .jst source file first being compiled to a JST source module, and then being scrunched to a scrunched JST module
 		- handlers can also register build needs
 		- handlers can have multiple inputs
-			- a handler for a SimpleDoc explainer HTML URL will have at least two direct inputs...
+			- a handler for a SimpleDoc guide HTML URL will have at least two direct inputs...
 				- the .simple source file
 				- the .jst JavaScript template used to build the HTML file
 		- some handlers may need to check multiple files to determine if the current built result is current

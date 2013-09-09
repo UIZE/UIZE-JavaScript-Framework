@@ -2,7 +2,7 @@ The widget adoption mechanism implemented in the =Uize.Widget.Page= widget class
 
 The declarative spawning mechanism makes it easy to spawn a series of widgets for a series of DOM nodes, where each of those DOM nodes is a root node for a spawned widget instance. Using this mechanism, you can quickly wire up a bunch of tables in a document to be sortable using the =Uize.Widget.TableSort= class, or a bunch of images to have a zoom in effect on hover using the =Uize.Widget.CollectionItem.Zooming= class. And by using a find expression object to specify the DOM nodes for which widgets should be spawned, it is not necessary to know how many widgets need to be spawned when writing the widget adoption declaration - the number of widgets spawned will automatically change as needed as the HTML on the page changes.
 
-To learn more, read the section `Declarative Spawning` in the [[../explainers/javascript-widgets.html][JavaScript Widgets]] explainer.
+To learn more, read the section `Declarative Spawning` in the [[../guides/javascript-widgets.html][JavaScript Widgets]] guide.
 
 
 

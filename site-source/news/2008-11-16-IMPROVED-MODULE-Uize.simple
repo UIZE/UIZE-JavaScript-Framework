@@ -33,7 +33,7 @@ Uize.valueOf
 Name Property Optional in State Property Profiles
 	When registering state properties using the =Uize.registerProperties= static method, it is now possible to omit the public name for a property and it will default to the private name.
 
-	This may be useful in certain special cases, as outlined in more detail in the [[../explainers/state-properties.html][State Properties explainer]] (see the section on =Public Name Defaulting=, which talks about =Naked State Properties= and =Private State Properties=).
+	This may be useful in certain special cases, as outlined in more detail in the [[../guides/state-properties.html][State Properties guide]] (see the section on =Public Name Defaulting=, which talks about =Naked State Properties= and =Private State Properties=).
 
 New Variation of set Method
 	A new variation of the =set= method that accepts the two parameters =propertyNameSTR= and =propertyValueANYTYPE= makes it possible to use an expression or the value of a variable for specifying the name of the property to set.

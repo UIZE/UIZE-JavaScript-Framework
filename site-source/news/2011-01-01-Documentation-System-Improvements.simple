@@ -1,4 +1,4 @@
-The [[../explainers/javascript-documentation-system.html][JavaScript Documentation System]], that is used to produce all the documentation for the UIZE JavaScript Framework, has been improved in a number of ways.
+The [[../guides/javascript-documentation-system.html][JavaScript Documentation System]], that is used to produce all the documentation for the UIZE JavaScript Framework, has been improved in a number of ways.
 
 Styling for Nine Levels Deep
 	While the SimpleDoc format that is used for the documentation has always supported an arbitrry number of levels of document structure depth, the CSS styling has only ever addressed the first five levels.

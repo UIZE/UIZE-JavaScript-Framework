@@ -69,7 +69,7 @@ Uize.module ({
 								link:(_section || '') + (_link || _title.toLowerCase ().replace (/\W+/g,'-')) + '.html'
 							}
 						},
-						_explainer = function (_title,_link) {return _item (_title,'explainers/',_link)},
+						_guide = function (_title,_link) {return _item (_title,'guides/',_link)},
 						_news = function (_year) {return _item (_year + ' News','','news-' + _year)},
 						_javaScriptReference = function (_title,_link) {return _item (_title,'javascript-reference/',_link)},
 						_appendix = function (_title,_link) {return _item (_title,'appendixes/',_link)},
@@ -126,16 +126,16 @@ Uize.module ({
 					_item ('DOWNLOAD'),
 					{
 						title:'Getting Started',
-						link:'explainers/getting-started.html',
+						link:'guides/getting-started.html',
 						items:[
-							_explainer ('Getting Started With UIZE','getting-started'),
+							_guide ('Getting Started With UIZE','getting-started'),
 							_divider,
-							_explainer ('Introduction to UIZE'),
-							_explainer ('Overview of Features'),
-							_explainer ('Using the Documentation'),
-							_explainer ('Building UIZE-powered Pages'),
+							_guide ('Introduction to UIZE'),
+							_guide ('Overview of Features'),
+							_guide ('Using the Documentation'),
+							_guide ('Building UIZE-powered Pages'),
 							_divider,
-							_explainer ('The Philosophy of UIZE','philosophy-of-uize')
+							_guide ('The Philosophy of UIZE','philosophy-of-uize')
 						]
 					},
 					{
@@ -167,8 +167,8 @@ Uize.module ({
 						link:'javascript-tool-examples.html',
 						items:
 							[
-								_item ('The DELVE Tool','','explainers/using-the-delve-tool'),
-								_explainer ('JavaScript Bookmarklets'),
+								_item ('The DELVE Tool','','guides/using-the-delve-tool'),
+								_guide ('JavaScript Bookmarklets'),
 								_divider
 							].concat (
 								Uize.map (
@@ -183,36 +183,36 @@ Uize.module ({
 					},
 					_divider,
 					{
-						title:'Explainers',
-						link:'javascript-explainers.html',
+						title:'Guides',
+						link:'javascript-guides.html',
 						items:[
-							_explainer ('Getting Started With UIZE','getting-started'),
+							_guide ('Getting Started With UIZE','getting-started'),
 							_divider,
-							_explainer ('Modules','javascript-modules'),
-							_explainer ('Classes and Inheritance'),
-							_explainer ('State Properties'),
-							_explainer ('Event System','javascript-event-system'),
+							_guide ('Modules','javascript-modules'),
+							_guide ('Classes and Inheritance'),
+							_guide ('State Properties'),
+							_guide ('Event System','javascript-event-system'),
 							_divider,
-							_explainer ('DOM Events','javascript-dom-events'),
-							_explainer ('Widgets','javascript-widgets'),
-							_explainer ('Localization','javascript-localization'),
-							_explainer ('Templates','javascript-templates'),
-							_explainer ('Animation and Effects','javascript-animation-and-effects'),
+							_guide ('DOM Events','javascript-dom-events'),
+							_guide ('Widgets','javascript-widgets'),
+							_guide ('Localization','javascript-localization'),
+							_guide ('Templates','javascript-templates'),
+							_guide ('Animation and Effects','javascript-animation-and-effects'),
 							_divider,
-							_explainer ('Libraries','javascript-libraries'),
-							_explainer ('Build Scripts','javascript-build-scripts'),
-							_explainer ('Testing Framework','javascript-testing-framework'),
-							_explainer ('Documentation System','javascript-documentation-system'),
-							_explainer ('All About Scrunching'),
+							_guide ('Libraries','javascript-libraries'),
+							_guide ('Build Scripts','javascript-build-scripts'),
+							_guide ('Testing Framework','javascript-testing-framework'),
+							_guide ('Documentation System','javascript-documentation-system'),
+							_guide ('All About Scrunching'),
 							_divider,
-							_explainer ('Strict Mode','javascript-strict-mode'),
-							_explainer ('Troubleshooting','javascript-troubleshooting'),
-							_explainer ('Using the DELVE Tool'),
+							_guide ('Strict Mode','javascript-strict-mode'),
+							_guide ('Troubleshooting','javascript-troubleshooting'),
+							_guide ('Using the DELVE Tool'),
 							_divider,
-							_explainer ('General Constructs'),
-							_explainer ('Bookmarklets','javascript-bookmarklets'),
+							_guide ('General Constructs'),
+							_guide ('Bookmarklets','javascript-bookmarklets'),
 							_divider,
-							_item ('Index of JavaScript Explainers','','javascript-explainers')
+							_item ('Index of JavaScript Guides','','javascript-guides')
 						]
 					},
 					_modulesReferenceItem,
@@ -260,8 +260,8 @@ Uize.module ({
 					{
 						title:'UIZE Development',
 						items:[
-							_explainer ('Creating a New UIZE Module'),
-							_explainer ('Creating a New UIZE Example Page'),
+							_guide ('Creating a New UIZE Module'),
+							_guide ('Creating a New UIZE Example Page'),
 							_divider,
 							_item ('UIZE Unit Tests','examples/'),
 							_item ('Widget Visual Tests','examples/'),

@@ -1,0 +1,208 @@
+Introduction
+	The JavaScript language does not provide a built-in system for event-driven programming, so the UIZE JavaScript Framework provides an event system.
+
+	The UIZE JavaScript Framework provides a robust event system that enables applications to utilize custom events - disctinct from the system of DOM events that is provided by the Web browser context, allowing applications to be built around the principles of event-driven programming.
+
+	JavaScript Has No Events
+		Technically speaking, the JavaScript language does not provide a built-in event mechanism to facilitate event based programming and the wiring of JavaScript object instances together through events.
+
+		The events that we may think of as being JavaScript events are, in fact, browser events (or DOM events) available to JavaScript code that runs inside the browser. So, the events (and the event mechanism) available to JavaScript code depend on the host / context for the language.
+
+		To complement the JavaScript language, UIZE provides a JavaScript event system that can be used by all JavaScript classes built on this framework, and any JavaScript applications that use classes built on the framework. This event mechanism operates in any context in which your JavaScript code executes - whether it be a Web browser or Windows Script Host.
+
+	DOM events vs. UIZE events
+		In contrast to UIZE events, DOM events are events that originate from HTML elements / DOM nodes in a document.
+
+		DOM events are unique to the Web browser environment, whereas UIZE events are supported in any environment that is supported by the UIZE JavaScript Framework, such as Microsoft's Windows Script Host and Adobe's ExtendScript environments. For more information on dealing with DOM events in the context of the UIZE JavaScript Framework, consult the guide [[javascript-dom-events.html][JavaScript DOM Events]].
+
+	All Classes are Invited to the Party
+		The UIZE JavaScript Framework provides an event mechanism that is available for all classes created using the framework.
+
+		The event mechanism is implemented in the =Uize.Class= base class, so any class that derives - however indirectly - from this base class can leverage this mechanismm. This, of course, also applies to widgets, since widget classes derive from the =Uize.Widget= base class, which derives from the =Uize.Class= base class.
+
+	It's Easy
+		Events can easily be fired by any instance of any class created in the UIZE JavaScript Framework - at any arbitrary place in its code - by simply using the =fire= instance method, as follows...
+
+		.........................................
+		myInstance.fire ('My Custom Event Name');
+		.........................................
+
+		Code can wire event handlers for events by using the =wire= method, as follows...
+
+		........................................
+		myInstance.wire (
+			'My Custom Event Name',
+			function () {/* do something here */}
+		);
+		........................................
+
+	Static Events and Instance Events
+		The =Uize.Class= base class provides a convenient infrastructure for supporting both static (ie. class) and instance events.
+
+		Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the =Uize.Class= base class to allow code to manage the wiring and unwiring of event handlers at both the instance and class levels.
+
+		The syntax for wiring handlers on static events is identical to wiring handlers on instance events, except that the method is called on the class rather than an instance.
+
+		EXAMPLE
+		.....................
+		MyClass.wire (
+			'My Static Event',
+			function () {
+				// do something
+			}
+		);
+		.....................
+
+	Fire at Will
+		Events are *fired*, using the =fire= instance and static methods.
+
+		They can be fired from anywhere in your code, even from deep within nested closures, so you can provide further hooks as needed without having to radically restructure your code around hook points.
+
+The Event Object
+	When an event is fired, all handlers wired for that event are called sequentially - in the order in which they were wired.
+
+	Each handler function can expect to receive a single parameter, being an object that represents the event being fired. The event object contains properties that describe the event, including some standard properties that are set by the event mechanism itself, and any arbitrary custom properties set by the code firing the event.
+
+	Standard Event Properties
+		The event mechanism supports standard properties of the event object that are set by the event mechanism itself, such as...
+
+		PROPERTIES
+		- =name= - a string, representing the name of the event being fired
+		- =source= - an object reference, representing the instance or class that originated the event
+		- =bubble= - a boolean, specifying whether or not the event should bubble up the parent chain of a widget tree (only application to widget instances)
+
+		EXAMPLE
+		.........................................
+		myInstance.fire ('My Custom Event Name');
+		.........................................
+
+		For a handler that is wired for the above event, the event object will have the value ='My Custom Event Name'= for its =name= property, and a reference to the instance =myInstance= for its =source= property. The event object is passed as the single parameter to wired handlers when they are called, so the following handler function would alert the value =true=, for example...
+
+		...................................................................................
+		myInstance.wire (
+			'My Custom Event Name',
+			function (_event) {
+				alert (_event.name == 'My Custom Event Name' && _event.source == myInstance);
+			}
+		);
+		...................................................................................
+
+		Not really a useful handler, but it illustrates the point.
+
+	Custom Event Properties
+		In addition to the standard event properties, your code can add any aribitrary properties to the event object when firing an event.
+
+		This is done by using the form of the =fire= method that takes an event object as a parameter. To extend on the previous example, we could add a custom property to the event object for the ='My Custom Event Name'= event, as follows...
+
+		EXAMPLE
+		............................................................................
+		myInstance.fire ({name:'My Custom Event Name',customProperty:'some value'});
+		............................................................................
+
+		Now, the handlers for this event will be able to access the =customProperty= property on the event object in the same way as the standard =name= and =source= properties (as shown in the previous example). When using the above form of the =fire= method, you must specify the name of the event you're firing by using the =name= property of the event object.
+
+Relaying Events
+	Because any handler for an event receives a reference to the event object, and because the =fire= method can take a reference to an event object, it is possible to "relay" an event from one instance to another.
+
+	Manually Relaying an Event
+		You can relay an event to another instance quite easily by just calling the =fire= instance on that other instance, and passing it a reference to the event object to be relayed.
+
+		EXAMPLE
+		....................................................
+		myWidget.wire (
+			'Some Crazy Event',
+			function (_event) {myWidget.parent.fire (_event)}
+		);
+		....................................................
+
+		In the above example, whenever ='Some Crazy Event'= is fired on the =myWidget= instance, the wired handler will relay it to its parent by calling the =fire= method on its parent and passing the event object.
+
+	Dedicated Event Relay Facility
+		In addition to being able to manually relay events using the =fire= instance method and the =Uize.Class.fire= static method, the UIZE JavaScript Framework provides a dedicated facility for relaying events.
+
+		To relay an event to a =Uize.Class= subclass or an instance of a =Uize.Class= subclass, simple specify a reference to the class or instance as the handler for the event you wish to relay, as shown in the example below.
+
+		INSTEAD OF...
+		....................................................
+		myWidget.wire (
+			'Some Crazy Event',
+			function (_event) {myWidget.parent.fire (_event)}
+		);
+		....................................................
+
+		USE...
+		...................................................
+		myWidget.wire ('Some Crazy Event',myWidget.parent);
+		...................................................
+
+		So, why use the manual approach when there's this dedicated facility? Well, the manual approach could come in handy if you wish to modify the event object before relaying it, or if you wish to perform other actions before the event is relayed.
+
+	Knowing the Source of Relayed Events
+		When passing an event object reference to the =fire= method, a previously set value for the =source= property is not overwritten.
+
+		This has the implication that subsequent handlers receiving a relayed event can always know the originating source, since events are relayed by firing the event to be relayed on the target, and the event being relayed already has a value set for the =source= property.
+
+		EXAMPLE
+		.....................................................................
+		var
+			instance1 = Uize.Class (),
+			instance2 = Uize.Class ()
+		;
+		instance1.wire ('Some Crazy Event',instance2);
+		instance2.wire (
+			'Some Crazy Event',
+			function (eventObj) {
+				alert (eventObj.source == instance1); // alerts the text "true"
+			}
+		);
+		instance1.fire ('Some Crazy Event');
+		.....................................................................
+
+	Event Bubbling
+		Another built-in facility for `relaying events` is event bubbling.
+
+		Event bubbling allows events originating from widgets (instances of a =Uize.Widget= subclass) to bubble up the parent chain, until the root of the widget tree is reached, or the event is handled and bubbling is canceled. Bubbling is both activated and canceled by using the =bubble= property of the event object. Consider the following example...
+
+		EXAMPLE
+		.......................................................................................
+		var
+			widget = Uize.Widget (),
+			childWidget = widget.addChild ('child',Uize.Widget),
+			grandchildWidget = childWidget.addChild ('grandchild',Uize.Widget)
+		;
+		widget.wire (
+			'Some Crazy Event',
+			function () {alert ('HELLO?')} // doesn't get executed, because bubbling is canceled
+		);
+		childWidget.wire (
+			'Some Crazy Event',
+			function (eventObj) {
+				alert (eventObj.source.get ('name')); // alerts the text "grandchild"
+				eventObj.bubble = false;
+			}
+		);
+		grandchildWidget.fire ({name:'Some Crazy Event',bubble:true});
+		.......................................................................................
+
+		In the above example, three plain vanilla widget instances are created (instances of the =Uize.Widget= base class). The first instance (=widget=) serves as the root of a widget tree, where the second instance (=childWidget=) is a child, and the third instance (=grandchildWidget=) is a grandchild. Then, a handler is wired for the =Some Crazy Event= instance event on the root widget, and a handler is also wired for this event on the child widget.
+
+		The =fire= instance method is called on the grandchild widget in order to fire the event =Some Crazy Event=. The object form is used when specifying the event to fire, so that the value =true= can be specified for the =bubble= property. This causes the event to bubble up to grandchild's parent widget (=childWidget= in this case), where it is handled by the event handler that was wired on =childWidget=. This handler alerts the value of the =name= state property for the originating source of the event, which is obtained by using the =source= property of the event object. This causes the text ='grandchild'= to be displayed in the alert dialog.
+
+		Finally, further bubbling of the event is canceled by setting the =bubble= property of the event object to =false=. As a result, the handler wired for this event on the root widget never gets executed.
+
+### other things to discuss
+	- emphasize the fire-n-wire metaphor
+	- event management methods (fire, wire, unwire)
+		- provide more details on these
+			- discuss variations for wiring and unwiring multiple handlers in single call
+			- discuss string vs object form for specifying events when firing events
+		- advanced topics
+			- adding or removing handlers for an event while executing a handler for that event
+	- DOM node events vs UIZE events
+	- state property changed events
+		- Changed.[propertyName] events
+		- Changed.* event
+	- returning results from event handlers (adding to or modifying the event object)
+	- when should I create an event?
+		- is the event to indicate that an event has occurred, or that a state has changed? If a state has changed, then firing an event for it suggests that it is state that is interesting to the world outside the class' implementation. So, then, does this state have a corresponding state property in the class' state interface? The problem with events indicating state change, is that the state can only be know about at the time the event occurs, and requires a handler to be wired to the event. Using a state property instead allows the Changed.[propertyName] virtual event mechanism to be used, but it also allows the state to be queried using the =get= method at any time other than just when the state changes.
+

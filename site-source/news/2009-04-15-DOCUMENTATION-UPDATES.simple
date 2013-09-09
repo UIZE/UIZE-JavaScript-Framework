@@ -6,7 +6,7 @@ Documentation has been added for...
 
 The following corrections have been made...
 
-- an error in the JavaScript Widgets explainer has been corrected
+- an error in the JavaScript Widgets guide has been corrected
 - inaccurate descriptions of the =value= and =values= state properties of the =Uize.Widget.Options= class have been corrected
 
 

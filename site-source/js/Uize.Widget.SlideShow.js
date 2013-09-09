@@ -82,7 +82,7 @@
 
 					HOW IT'S DISPLAYED
 
-					Now, if a child widget instance is found that corresponds to a slide property, then the =value= state property for that child widget will be set to the value of the slide property for the current slide. This means that child widgets that are implicitly bound to slide properties must implement the `value interface` (ie. provide a =value= state property). If the state property that logically represents the value in the child widget's class is not publicly named =value=, then one could modify the class to declare =value= as a public alias for that property (for more details, consult the explainer [[../explainers/state-properties.html][State Properties]]).
+					Now, if a child widget instance is found that corresponds to a slide property, then the =value= state property for that child widget will be set to the value of the slide property for the current slide. This means that child widgets that are implicitly bound to slide properties must implement the `value interface` (ie. provide a =value= state property). If the state property that logically represents the value in the child widget's class is not publicly named =value=, then one could modify the class to declare =value= as a public alias for that property (for more details, consult the guide [[../guides/state-properties.html][State Properties]]).
 
 					If the `child widget bindings` facility is not successful in implicitly binding a slide property to a child widget, then the `implied node bindings` facility will be employed.
 

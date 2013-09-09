@@ -14,19 +14,19 @@ Hear about all the latest developments and stay up-to-date on new features by su
 
 SEARCH TIPS
 
-Having a hard time finding information on something in particular? Use the convenient *"SEARCH"* bar located in the lower left - at the very bottom of the contents menu pane. Search for anything within the UIZE Web site. For useful tips on searching the UIZE Web site, consult the explainer [[explainers/using-the-documentation.html][Using the Documentation]].
+Having a hard time finding information on something in particular? Use the convenient *"SEARCH"* bar located in the lower left - at the very bottom of the contents menu pane. Search for anything within the UIZE Web site. For useful tips on searching the UIZE Web site, consult the guide [[guides/using-the-documentation.html][Using the Documentation]].
 
 TROUBLESHOOTING
 
-For tips on troubleshooting your projects, consult the explainer [[explainers/javascript-troubleshooting.html][JavaScript Troubleshooting]].
+For tips on troubleshooting your projects, consult the guide [[guides/javascript-troubleshooting.html][JavaScript Troubleshooting]].
 
 DOCUMENTATION
 
 Has the documentation not answered your questions?
 
-- Get explanations for key functionality and learn how to solve specific problems - like developing your own UIZE subclasses, building your own widgets, localizing your JavaScript code for an international audience, using JavaScript Templates, scrunching down the size of your JavaScript files, and more - by reading through the documents in the *"Explainers"* section.
+- Get explanations for key functionality and learn how to solve specific problems - like developing your own UIZE subclasses, building your own widgets, localizing your JavaScript code for an international audience, using JavaScript Templates, scrunching down the size of your JavaScript files, and more - by reading through the documents in the *"Guides"* section.
 - Learn about specific UIZE modules by consulting the reference documents in the *"Module Reference"* section.
 - See how modules are used in real life by inspecting the various examples under the *"Examples"* section, and use the convenient *"SOURCE"* button in their title bar to inspect their sample code and see how they are implemented.
 
-To learn how to get the most out of the documentation on the UIZE Web site, consult the explainer [[explainers/using-the-documentation.html][Using the Documentation]].
+To learn how to get the most out of the documentation on the UIZE Web site, consult the guide [[guides/using-the-documentation.html][Using the Documentation]].
 

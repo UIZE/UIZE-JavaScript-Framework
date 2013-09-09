@@ -1,7 +1,7 @@
 Uize.Template
 	The UIZE JavaScript Framework now has support for JavaScript templates.
 
-	Support is provided in the form of the =Uize.Template= package. This package provides a way to "compile" JavaScript templates to output generator functions, so that the template string only needs to be parsed once and so that the functions generated in this way are efficient when called repeatedly to generate output with different input values. Look for an explanation of this new feature under the explainer "JavaScript Templates".
+	Support is provided in the form of the =Uize.Template= package. This package provides a way to "compile" JavaScript templates to output generator functions, so that the template string only needs to be parsed once and so that the functions generated in this way are efficient when called repeatedly to generate output with different input values. Look for an explanation of this new feature under the guide "JavaScript Templates".
 
 Uize.Url (and Uize.Comm deprecations)
 	The new =Uize.Url= package provides convenient methods for encoding and decoding URLs and URL query params.

@@ -41,10 +41,10 @@ Uize.module ({
 							'appendixes/sotu.html'
 						);
 
-					/*** add URLs for index pages for modules, examples, examples by module, explainers, and widgets ***/
+					/*** add URLs for index pages for modules, examples, examples by module, guides, and widgets ***/
 						m.addFiles (
 							'appendixes.html',
-							'javascript-explainers.html',
+							'javascript-guides.html',
 							'javascript-examples.html',
 							'javascript-examples-by-module.html',
 							'javascript-modules-index.html',

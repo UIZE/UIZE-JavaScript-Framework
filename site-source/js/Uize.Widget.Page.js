@@ -28,7 +28,7 @@
 		Widget Adoption
 			This class implements a widget adoption mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (ie. requiring no JavaScript to be previously loaded).
 
-			For more information on this feature, and for a discussion of some of the other features of the =Uize.Widget.Page= class, consult the explainer [[../explainers/javascript-widgets.html][JavaScript Widgets]] and see under the section `Page Widget`.
+			For more information on this feature, and for a discussion of some of the other features of the =Uize.Widget.Page= class, consult the guide [[../guides/javascript-widgets.html][JavaScript Widgets]] and see under the section `Page Widget`.
 
 		Hook Methods
 			The =Uize.Widget.Page= class supports a number of "hook methods" that are primarily of interest to developers of the UIZE JavaScript Framework and are not intended to be used in applications, and that are only public because they form an interface between separate modules.

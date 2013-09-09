@@ -80,7 +80,7 @@ In Conclusion
 		Upon upgrading the codebase to use strict mode, care was taken to ensure that all the unit tests pass, and a testing sweep was made through the example pages to verify that all functionality demonstrated in them is still healthy.
 
 	More Details
-		For more complete details on UIZE and JavaScript strict mode, and to dig deeper into the specifics of caveats and restrictions, consult the explainer [[../explainers/javascript-strict-mode.html][JavaScript Strict Mode]].
+		For more complete details on UIZE and JavaScript strict mode, and to dig deeper into the specifics of caveats and restrictions, consult the guide [[../guides/javascript-strict-mode.html][JavaScript Strict Mode]].
 
 ....................................................................................
 << metadata >>

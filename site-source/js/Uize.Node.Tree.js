@@ -33,7 +33,7 @@
 		Using a Tree Data Object
 			A `tree data object` can be used in any number of ways, but is commonly used for building tree-based user interface elements such as contents lists, structured dropdown menus, etc.
 
-			A number of widget class support data in the `tree data object` format, such as the =Uize.Widget.Tree.List=, =Uize.Widget.Tree.Menu=, and =Uize.Widget.Tree.Select= classes. Outside of widgets, tree data objects can be used to drive the generation of HTML, in build scripts or Web applications, using [[../explainers/javascript-templates.html][JavaScript Templates]]. To see tree data objects in action, see the [[../examples/tree-list.html][Tree List From JSON]] and [[../examples/tree-menu.html][Tree Menu From JSON]] examples.
+			A number of widget class support data in the `tree data object` format, such as the =Uize.Widget.Tree.List=, =Uize.Widget.Tree.Menu=, and =Uize.Widget.Tree.Select= classes. Outside of widgets, tree data objects can be used to drive the generation of HTML, in build scripts or Web applications, using [[../guides/javascript-templates.html][JavaScript Templates]]. To see tree data objects in action, see the [[../examples/tree-list.html][Tree List From JSON]] and [[../examples/tree-menu.html][Tree Menu From JSON]] examples.
 
 		Tree Item
 			A tree item is a single item in an array of items that make up a `tree data object`.

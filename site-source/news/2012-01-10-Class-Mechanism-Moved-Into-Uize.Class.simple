@@ -36,7 +36,7 @@ The new Uize.Class Module
 	All classes created by subclassing the =Uize.Class= module will still get the benefits of a built-in events mechanism, properties mechanism, and inheritance mechanism. The various features of the =Uize.Class= module are tested in the =Uize.Test.Uize.Class= test module.
 
 All Uize Code Updated
-	Needless to say, this was a mighty big change that affected numerous modules, but even more so affected the many explainers and reference documents of the framework.
+	Needless to say, this was a mighty big change that affected numerous modules, but even more so affected the many guides and reference documents of the framework.
 
 	Thankfully, the entire codebase and all documentation has been updated to reflect the change, and before long we will forget that there ever was such a thing as the "Uize base class", and we will only think of the new =Uize.Class= module when we think of a base class for inheritance for the UIZE JavaScript Framework.
 
@@ -91,9 +91,9 @@ Updating Your Own Code
 		Your modules may not look exactly as shown above, but it should be clear once you inspect them. This should be a one line change to a small number - if any - of your custom modules.
 
 	Add Uize.Class to Any Library Files
-		If you've created any [[../explainers/javascript-libraries.html][JavaScript libraries]] to optimize the load time of your Web pages, you should update them to add an entry for the new =Uize.Class= module.
+		If you've created any [[../guides/javascript-libraries.html][JavaScript libraries]] to optimize the load time of your Web pages, you should update them to add an entry for the new =Uize.Class= module.
 
-		For any [[../explainers/javascript-libraries.html][JavaScript library]] (=.library.js=) files that you may have created, chances are that they will be loading in some module - like the =Uize.Node= module - that requires the =Uize.Class= module. To ensure that the load performance for your production ready pages isn't tripped up by a separate HTTP request for the =Uize.Class= module, add an entry in your library files, right before the first module that depends on the =Uize.Class= module (typically, this will be the =Uize.Node= module).
+		For any [[../guides/javascript-libraries.html][JavaScript library]] (=.library.js=) files that you may have created, chances are that they will be loading in some module - like the =Uize.Node= module - that requires the =Uize.Class= module. To ensure that the load performance for your production ready pages isn't tripped up by a separate HTTP request for the =Uize.Class= module, add an entry in your library files, right before the first module that depends on the =Uize.Class= module (typically, this will be the =Uize.Node= module).
 
 		THE OLD WAY
 		................................................

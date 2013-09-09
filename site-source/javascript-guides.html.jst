@@ -1,0 +1,9 @@
+<%@
+	required ('UizeSite.Templates.IndexPage');
+	input ({files:'array'});
+%><%= UizeSite.Templates.IndexPage.process ({
+	title:'JavaScript Guides',
+	description:'The documentation of the UIZE JavaScript Framework includes many informative and comprehensive guides that discuss various topics in great detail.',
+	files:input.files
+}) %>
+

@@ -1374,7 +1374,7 @@ Uize.module ({
 							resultBOOL = myTest.run ();
 							...........................
 
-							In the event that running of the instance's test(s) is asynchronous, the =run= method will return the value =Uize.Test.isAsync=, and the instance's =isAsync= state property will be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer.
+							In the event that running of the instance's test(s) is asynchronous, the =run= method will return the value =Uize.Test.isAsync=, and the instance's =isAsync= state property will be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide.
 
 							Callback Function For Asynchronous Tests
 								When the optional =callbackFUNC= parameter is specified, a callback function can be specified that will be called once running of the instance's test(s) is complete, in the event that running of the instance's test(s) is asynchronous.
@@ -1415,7 +1415,7 @@ Uize.module ({
 					Uize.Test.isAsync
 						A read-only special value that is used to indicate that running of a test instance's test(s) is asynchronous.
 
-						When a test instance is known to be asynchronous, the instance's =result= state property will be set to the value =Uize.Test.isAsync=. In this situation, the instance's =isAsync= state property will also be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer.
+						When a test instance is known to be asynchronous, the instance's =result= state property will be set to the value =Uize.Test.isAsync=. In this situation, the instance's =isAsync= state property will also be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide.
 
 						NOTES
 						- see the related =isAsync= and =result= state properties
@@ -1588,7 +1588,7 @@ Uize.module ({
 								modulesSTRorARRAY
 									The value of the =modulesSTRorARRAY= parameter can be a string, specifying the full name of a single module or a comma-separated list of the full names for multiple modules, or an array of the full names for multiple modules.
 
-									Essentially, the value specified for the =modulesSTRorARRAY= parameter can be any value that is acceptable for the =required= property in a =Uize.module= declaration (see the explainer [[../explainers/javascript-modules.html][JavaScript Modules]] for a refresher on modules).
+									Essentially, the value specified for the =modulesSTRorARRAY= parameter can be any value that is acceptable for the =required= property in a =Uize.module= declaration (see the guide [[../guides/javascript-modules.html][JavaScript Modules]] for a refresher on modules).
 
 								An Example
 									The =Uize.Test.requiredModulesTest= method is useful for creating a first test in a series of tests for a module that is being tested. Consider the following example...
@@ -2101,7 +2101,7 @@ Uize.module ({
 							isAsync
 								A boolean, indicating whether or not running the test instance's test(s) is asynchronous.
 
-								The value =undefined= is equivalent to the boolean value =false=. When a test is run in the browser context, the value of this property is coerced to =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer.
+								The value =undefined= is equivalent to the boolean value =false=. When a test is run in the browser context, the value of this property is coerced to =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide.
 
 								NOTES
 								- see the related =Uize.Test.isAsync= static property
@@ -2206,7 +2206,7 @@ Uize.module ({
 								The Simple Test Case
 									In the case of a simple test that has no child tests, the value of the =test= property should be a reference to the function that performs the test action.
 
-									This function will be executed when the test is run by calling the =run= instance method. When the function is called, it will be called as an instance method of the test instance, so it will have access to the instance for the purpose of calling any of the `expectation methods`, or for accessing state of the instance through its various state properties. The function should expect to receive a single parameter, being a continuation function that can be called in case the test is asynchronous (see the section on `Asynchronous Tests` in the [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer for more details). In the case of synchronous tests, the test function should return a boolean value, indicating whether the test passed or failed.
+									This function will be executed when the test is run by calling the =run= instance method. When the function is called, it will be called as an instance method of the test instance, so it will have access to the instance for the purpose of calling any of the `expectation methods`, or for accessing state of the instance through its various state properties. The function should expect to receive a single parameter, being a continuation function that can be called in case the test is asynchronous (see the section on `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide for more details). In the case of synchronous tests, the test function should return a boolean value, indicating whether the test passed or failed.
 
 								The Child Tests Case
 									In the case of a test that is serving as a parent for a set of child tests, the value of the =test= property will be an array of child test instances.

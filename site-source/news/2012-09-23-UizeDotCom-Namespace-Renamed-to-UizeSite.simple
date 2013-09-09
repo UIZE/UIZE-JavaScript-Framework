@@ -5,7 +5,7 @@ The UIZE Web site has always been available on the top level domains *.com*, *.o
 Update Your DELVE Bookmarklet
 	Be aware that the DELVE bookmarklet referenced a module under the defunct =UizeDotCom= namespace and will therefore no longer work with this namespace change.
 
-	If you have a DELVE bookmarklet saved in your browser, you should update it with the new one that is listed in the [[../explainers/using-the-delve-tool.html][Using The Delve Tool]] explainer.
+	If you have a DELVE bookmarklet saved in your browser, you should update it with the new one that is listed in the [[../guides/using-the-delve-tool.html][Using The Delve Tool]] guide.
 
 ....................................................................................
 << metadata >>

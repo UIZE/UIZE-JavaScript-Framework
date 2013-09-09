@@ -1,0 +1,17 @@
+<%@
+	required ('UizeSite.Templates.SimpleDoc');
+	input ({title:'string',description:'string',body:'string'});
+%><%@ startBlock ('displayTitleHtml') %>
+	<a href="../javascript-guides.html" class="breadcrumb breadcrumbWithArrow">GUIDES</a>
+	<% .title %>
+<%@ endBlock () %><%=
+	UizeSite.Templates.SimpleDoc.process ({
+		title:input.title,
+		section:'Documentation',
+		description:input.description || 'This is an guide or tutorial document for the UIZE JavaScript Framework.',
+		pathToRoot:'../',
+		displayTitleHtml:displayTitleHtml (),
+		body:input.body
+	})
+%>
+

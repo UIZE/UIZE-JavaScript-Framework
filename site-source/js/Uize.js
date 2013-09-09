@@ -4760,7 +4760,7 @@ Uize = (function () {
 
 							When the special value ='*'= (wildcard character) is specified for the =moduleNameSTR= parameter, then the =Uize.getModuleByName= method returns an object that serves as a lookup table for all the modules that have been built, where each property's name is the name of a module and each property's value is a reference to the module.
 
-							Module name to module reference mappings are added to the object in the order in which the modules are built. Therefore, if you write a =for...in= loop to iterate through the properties of the object, then you can build up an array of the names of the modules that have been built, in the correct dependency order. And if you execute such code in a Web page, then you can build up a list of all the modules that were built for that page. If the page only loads in a few modules using =script= tags that are in the page's initial HTML, then the list resulting from executing your code will give an indication of how many additional modules were loaded in dynamically by the module loader mechanism. The list of all the modules built on a page can be used as the basis for creating a JavaScript library file (see [[../explainers/javascript-libraries.html][JavaScript Libraries]]).
+							Module name to module reference mappings are added to the object in the order in which the modules are built. Therefore, if you write a =for...in= loop to iterate through the properties of the object, then you can build up an array of the names of the modules that have been built, in the correct dependency order. And if you execute such code in a Web page, then you can build up a list of all the modules that were built for that page. If the page only loads in a few modules using =script= tags that are in the page's initial HTML, then the list resulting from executing your code will give an indication of how many additional modules were loaded in dynamically by the module loader mechanism. The list of all the modules built on a page can be used as the basis for creating a JavaScript library file (see [[../guides/javascript-libraries.html][JavaScript Libraries]]).
 
 							EXAMPLE
 							..............................................
@@ -4804,7 +4804,7 @@ Uize = (function () {
 
 							The =Uize.resolveModuleDefinition= method is not intended for use in general application development but is intended for specialized build processes, such as dependency tracing performed during the creation of JavaScript packages.
 
-							For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+							For an in-depth discussion of modules, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
 							NOTES
 							- see also the other `module mechanism methods`
@@ -5013,7 +5013,7 @@ Uize = (function () {
 
 								In addition to being a little bit cleaner and more concise, as well as a bit more semantically elegant, the =Uize.require= method also supports passing references to required modules in `the callbackFUNC parameter`.
 
-							For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+							For an in-depth discussion of modules, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
 							NOTES
 							- see also the other `module mechanism methods`
@@ -5179,7 +5179,7 @@ Uize = (function () {
 							});
 							......................................................................................
 
-							For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+							For an in-depth discussion of modules, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
 							NOTES
 							- see also the =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
@@ -5223,7 +5223,7 @@ Uize = (function () {
 							};
 							.................................................................................
 
-							For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+							For an in-depth discussion of modules, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
 							NOTES
 							- see the related =Uize.moduleUrlResolver= static method and the =Uize.moduleUrlTemplate= static property
@@ -5310,7 +5310,7 @@ Uize = (function () {
 
 							The module URL returned by your function will be used by the built-in =Uize.moduleLoader= module loader function. If you override the built-in module loader by specifying your own value for the =Uize.moduleLoader= static method, then the =Uize.moduleUrlResolver= static method will only be applicable if your custom module loader uses this method. Similarly, the built-in =Uize.moduleUrlResolver= implementation uses the =Uize.moduleUrlTemplate= static property. So, if you supply your own custom module URL resolver by overriding the =Uize.moduleUrlResolver= static method, then it is your choice as to whether or not you use the value of the =Uize.moduleUrlTemplate= property.
 
-							For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+							For an in-depth discussion of modules, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
 							NOTES
 							- see the related =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
@@ -5368,7 +5368,7 @@ Uize = (function () {
 						}
 						.................................
 
-						For a more in-depth discussion of package modules, consult the [[../explainers/javascript-modules.html][JavaScript Modules]] explainer.
+						For a more in-depth discussion of package modules, consult the [[../guides/javascript-modules.html][JavaScript Modules]] guide.
 
 						NOTES
 						- see also the other `module mechanism methods`
@@ -5997,7 +5997,7 @@ Uize = (function () {
 						Uize.moduleUrlTemplate = 'http://www.somedomain.com/js/[#modulePath]';
 						......................................................................
 
-						For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+						For an in-depth discussion of modules, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
 						NOTES
 						- see also the =Uize.module= and =Uize.moduleLoader= static methods

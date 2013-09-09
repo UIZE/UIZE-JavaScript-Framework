@@ -64,7 +64,7 @@ Eliminate Private Methods As Properties
 	In all modules in the UIZE codebase, eliminate all private instance and static methods in favor of functions that get passed the context as the first argument.
 
 	NOTES
-	- update explainer documentation on classes, inheritance, feature declaration, and such to no longer recommend defining private methods as "_" prefixed properties on the instance or class
+	- update guide documentation on classes, inheritance, feature declaration, and such to no longer recommend defining private methods as "_" prefixed properties on the instance or class
 	- there will be a few cases where private instance methods are provided as =onChange= handlers for state properties - these will have to be left as is, and if they are also called on =this=, then they will have to be called using the =call= or =apply= methods
 
 Convert to Using Uize.require Where Possible

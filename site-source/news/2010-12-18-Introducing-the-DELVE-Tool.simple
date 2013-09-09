@@ -1,4 +1,4 @@
-The UIZE project is excited to announce the release of [[../explainers/using-the-delve-tool.html][DELVE]], a powerful new Web based tool that lets developers *delve* into the inner workings of pages that use the UIZE JavaScript Framework.
+The UIZE project is excited to announce the release of [[../guides/using-the-delve-tool.html][DELVE]], a powerful new Web based tool that lets developers *delve* into the inner workings of pages that use the UIZE JavaScript Framework.
 
 This is the first release version of the DELVE tool. While it can still be considered to be in a public beta state, it already sports a powerful array of features that will help developers to be more productive when writing UIZE powered Web pages and rich Internet applications.
 
@@ -17,7 +17,7 @@ Among other things, DELVE lets you...
 
 DELVE is a completely Web based tool, so nothing needs to be installed in order to use it - it is launched from a simple bookmarklet. Furthermore, DELVE doesn't require the cooperation of the page that it inspects. So, if you're authoring a Web page that uses UIZE, you don't need to put the page into any special debug mode or anything like that in order to be able to use DELVE to inspect the page.
 
-[[../explainers/using-the-delve-tool.html][LEARN MORE]]
+[[../guides/using-the-delve-tool.html][LEARN MORE]]
 
 
 

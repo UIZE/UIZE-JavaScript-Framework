@@ -29,7 +29,7 @@
 
 			BACKGROUND READING
 
-			For an in-depth discussion on animation in the UIZE JavaScript Framework, and for a discussion on how this module fits into the larger picture, consult the explainer [[../explainers/javascript-animation-and-effects.html][JavaScript Animation and Effects]] and read through the section `Animating CSS Style Properties`.
+			For an in-depth discussion on animation in the UIZE JavaScript Framework, and for a discussion on how this module fits into the larger picture, consult the guide [[../guides/javascript-animation-and-effects.html][JavaScript Animation and Effects]] and read through the section `Animating CSS Style Properties`.
 
 		Why An Extension?
 			Because support for shadow effects by Web browsers is likely to take some time to become pervasive, support for fading the shadow CSS properties is not built directly into the =Uize.Fx= base module, but is instead provided in this separate extension.

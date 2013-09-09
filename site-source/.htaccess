@@ -12,16 +12,17 @@
 		Redirect 301 /examples/source-code/window-resizable.html http://www.uize.com/examples/source-code/dialog-resizable.html
 		Redirect 301 /examples/pretty-json-serializing.html http://www.uize.com/examples/json-prettifier.html
 
-	# renamed explainers
-		Redirect 301 /explainers/all-about-events.html http://www.uize.com/explainers/javascript-event-system.html
-		Redirect 301 /explainers/all-about-modules.html http://www.uize.com/explainers/javascript-modules.html
-		Redirect 301 /explainers/all-about-simpledoc.html http://www.uize.com/explainers/javascript-documentation-system.html
-		Redirect 301 /explainers/all-about-templates.html http://www.uize.com/explainers/javascript-templates.html
-		Redirect 301 /explainers/all-about-widgets.html http://www.uize.com/explainers/javascript-widgets.html
-		Redirect 301 /explainers/javascript-inheritance.html http://www.uize.com/explainers/classes-and-inheritance.html
-		Redirect 301 /explainers/modules.html http://www.uize.com/explainers/javascript-modules.html
-		Redirect 301 /explainers/set-get-properties.html http://www.uize.com/explainers/state-properties.html
-		Redirect 301 /tools/scruncher/introduction-to-the-scruncher.html http://www.uize.com/explainers/all-about-scrunching.html
+	# renamed guides
+		Redirect 301 /explainers/all-about-events.html http://www.uize.com/guides/javascript-event-system.html
+		Redirect 301 /explainers/all-about-modules.html http://www.uize.com/guides/javascript-modules.html
+		Redirect 301 /explainers/all-about-simpledoc.html http://www.uize.com/guides/javascript-documentation-system.html
+		Redirect 301 /explainers/all-about-templates.html http://www.uize.com/guides/javascript-templates.html
+		Redirect 301 /explainers/all-about-widgets.html http://www.uize.com/guides/javascript-widgets.html
+		Redirect 301 /explainers/javascript-inheritance.html http://www.uize.com/guides/classes-and-inheritance.html
+		Redirect 301 /explainers/modules.html http://www.uize.com/guides/javascript-modules.html
+		Redirect 301 /explainers/set-get-properties.html http://www.uize.com/guides/state-properties.html
+		Redirect 301 /tools/scruncher/introduction-to-the-scruncher.html http://www.uize.com/guides/all-about-scrunching.html
+		RedirectMatch 301 ^/explainers/(.+)$ http://www.uize.com/guides/$1
 
 	# renamed modules
 		Redirect 301 /reference/Uize.serialize.html http://www.uize.com/reference/Uize.Json.html
@@ -71,10 +72,15 @@
 	RedirectMatch 301 ^/(about|blog|community|documentation|welcome-to-uize)\.html$ http://www.uize.com
 
 # prevent folder browsing
-	RedirectMatch 301 ^/(appendixes|explainers|tests)/?$ http://www.uize.com
+	RedirectMatch 301 ^/appendixes/?$ http://www.uize.com/appendixes.html
 	RedirectMatch 301 ^/examples/?$ http://www.uize.com/javascript-examples.html
+	RedirectMatch 301 ^/(explainers|guides)/?$ http://www.uize.com/javascript-guides.html
+	RedirectMatch 301 ^/javascript-reference/?$ http://www.uize.com/javascript-reference.html
+	RedirectMatch 301 ^/news/?$ http://www.uize.com/latest-news.html
 	RedirectMatch 301 ^/reference/?$ http://www.uize.com/javascript-modules-index.html
+	RedirectMatch 301 ^/tests/?$ http://www.uize.com/examples/uize-unit-tests.html
 	RedirectMatch 301 ^/tools/?$ http://www.uize.com/javascript-tool-examples.html
+	RedirectMatch 301 ^/widgets/?$ http://www.uize.com/javascript-widgets.html
 
 # using images from tomkidding.com Web site
 	RedirectMatch 301 ^/photos/(.*)/(.*)$ http://www.tomkidding.com/artworks/photos/small/$2

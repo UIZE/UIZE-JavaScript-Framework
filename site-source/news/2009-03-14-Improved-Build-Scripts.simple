@@ -8,7 +8,7 @@ The various build scripts that are bundled with the UIZE JavaScript Framework do
 
 - The new =_build-strings-audit-report.js= build script recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files. This build script can be useful when internationalizing the JavaScript files of a Web site project.
 
-For more information about build scripts, consult the explainer [[../explainers/javascript-build-scripts.html][JavaScript Build Scripts]].
+For more information about build scripts, consult the guide [[../guides/javascript-build-scripts.html][JavaScript Build Scripts]].
 
 
 

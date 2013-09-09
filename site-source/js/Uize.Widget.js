@@ -569,7 +569,7 @@ Uize.module ({
 
 									Typically, a localized resource will be a string. In some cases, such strings will have substitution tokens and the =localize= method will need to be called with one or more substitution values. In exceptional cases, plain old token substitution may not be adequate and more sophisticated string construction may be necessary. In such cases, a function type resource can be used.
 
-									For a detailed discussion of this feature, complete with examples, consult the section `Function Type Localized Resources` of the explainer [[../explainers/javascript-localization.html][JavaScript Localization]].
+									For a detailed discussion of this feature, complete with examples, consult the section `Function Type Localized Resources` of the guide [[../guides/javascript-localization.html][JavaScript Localization]].
 
 								NOTES
 								- see also the =localized= state property.
@@ -1848,7 +1848,7 @@ Uize.module ({
 							children ~~ children State Property
 								A special state property that provides a way to distribute widget properties to any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree.
 
-								For a detailed discussion of the =children= state property, consult the [[../explainers/javascript-widgets.html][JavaScript Widgets]] explainer and read through specifically the section entitled "The children State Property".
+								For a detailed discussion of the =children= state property, consult the [[../guides/javascript-widgets.html][JavaScript Widgets]] guide and read through specifically the section entitled "The children State Property".
 
 								NOTES
 								- see also the companion `children instance property`

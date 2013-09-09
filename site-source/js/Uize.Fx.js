@@ -27,7 +27,7 @@
 
 			BACKGROUND READING
 
-			For an in-depth discussion on animation in the UIZE JavaScript Framework, and for a discussion on how this module fits into the larger picture, consult the explainer [[../explainers/javascript-animation-and-effects.html][JavaScript Animation and Effects]] and read through the section `Animating CSS Style Properties`.
+			For an in-depth discussion on animation in the UIZE JavaScript Framework, and for a discussion on how this module fits into the larger picture, consult the guide [[../guides/javascript-animation-and-effects.html][JavaScript Animation and Effects]] and read through the section `Animating CSS Style Properties`.
 
 		Extensions For CSS3 Support
 			Support for fading the values of CSS3 style properties that are not yet universally supported by Web browsers is provided in the form of extension modules under the =Uize.Fx= namespace.

@@ -48,7 +48,7 @@
 					- =Uize.Class.dualContextProperties= - lets you declare one or more dual context properties for the class
 					- =Uize.Class.stateProperties= - lets you declare one or more state properties for instances of the class
 
-					The `feature declaration methods` can be used either to add features that aren't inherited from the class' superclass, or to override features that are inherited from its superclass. For an in-depth discussion of feature declaration, consult the [[../explainers/classes-and-inheritance.html][Classes and Inheritance]] explainer.
+					The `feature declaration methods` can be used either to add features that aren't inherited from the class' superclass, or to override features that are inherited from its superclass. For an in-depth discussion of feature declaration, consult the [[../guides/classes-and-inheritance.html][Classes and Inheritance]] guide.
 
 			Event System
 				The =Uize.Class= module implements a powerful and versatile event system, which can be used for application events outside the context of browser DOM events.
@@ -63,7 +63,7 @@
 					- =Uize.Class.unwire= - unwires handlers for one or more events on a class
 					- =Uize.Class.wire= - wires handlers for one or more events on a class
 
-				For an in-depth discussion of events, consult the [[../explainers/javascript-event-system.html][JavaScript Event System]] explainer.
+				For an in-depth discussion of events, consult the [[../guides/javascript-event-system.html][JavaScript Event System]] guide.
 
 			Condition System
 				The =Uize.Class= module implements a condition system in the form of state properties combined with convenience methods that allow state properties to be treated semantically as conditions.

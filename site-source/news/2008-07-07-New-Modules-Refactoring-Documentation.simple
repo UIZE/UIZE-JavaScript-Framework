@@ -1,7 +1,7 @@
 IMPROVED TOOL: Scruncher
 	The [[../examples/javascript-scruncher.html][JavaScript Scruncher tool]] has been updated and improved to have a tabbed interface, initial test data, an explanation, and contemporary coding style.
 
-	Additionally, the documentation about scrunching has been fleshed out and made more comprehensive in the explainer [[../explainers/all-about-scrunching.html][All About Scrunching]]. Finally, reference documentation has been created for the =Uize.Scruncher= module.
+	Additionally, the documentation about scrunching has been fleshed out and made more comprehensive in the guide [[../guides/all-about-scrunching.html][All About Scrunching]]. Finally, reference documentation has been created for the =Uize.Scruncher= module.
 
 NEW MODULE: Uize.Date
 	A new =Uize.Date= utility module has been added, with static methods for displaying and parsing dates in ISO 8601 format and some other date-related utility methods. [[Uize.Date][Documentation]] is complete.

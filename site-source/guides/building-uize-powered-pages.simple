@@ -1,0 +1,177 @@
+Introduction
+	This document explains how to build your own UIZE-powered Web pages, with sophisticated user interactions.
+
+	BEFORE YOU START
+
+	This document assumes that you have already [[../download.html][downloaded]] the UIZE JavaScript Framework, and followed the [[getting-started.html][Getting Started With UIZE]] guide to set up the UIZE JavaScript Framework for use in your Web site project. You may also optionally read through the [[overview-of-features.html][Overview of Features]] guide as a background to the topics that will be discussed in this document.
+
+### typical questions
+	- What JavaScript needs to be sourced in on a page?
+	- Where should JavaScript be sourced in on a page?
+
+Anatomy of a Typical Page
+	Sourcing in JavaScript Modules
+		To start using the UIZE JavaScript Framework on a Web page, you'll want to load some of its JavaScript on the page.
+
+		At the very least, you'll want to load in the =Uize.js= file that defines the =Uize= base module for the framework and that implements a module loader mechanism that can dynamically load other modules required by your page.
+
+		There are three recommended places where you can include =script= tags for sourcing in UIZE JavaScript modules.
+
+		In the Head
+			It is safe and reliable to source in UIZE JavaScript modules in the head of the document.
+
+			EXAMPLE
+			.....................................................................
+			<html>
+			<head>
+				<title>My UIZE-enhanced Web Page</title>
+				<link rel="stylesheet" type="text/css" href="css/site-theme.css"/>
+				<script src="js/~source/Uize.js"></script>
+			</head>
+			<body>
+				... ... ...
+				... ... ...
+				... ... ...
+			</body>
+			.....................................................................
+
+		Start of Body
+			It is safe and reliable to source in UIZE JavaScript modules after the open body tag, and before any open tags for child nodes of the body that are layout elements.
+
+			EXAMPLE
+			.....................................................................
+			<html>
+			<head>
+				<title>My UIZE-enhanced Web Page</title>
+				<link rel="stylesheet" type="text/css" href="css/site-theme.css"/>
+			</head>
+			<body>
+				<script src="js/~source/Uize.js"></script>
+				... ... ...
+				... ... ...
+				... ... ...
+			</body>
+			.....................................................................
+
+		End of Body
+			It is safe and reliable to source in UIZE JavaScript modules at the bottom of the document's body, after the close tag for the last child node of the body that is a layout element.
+
+			EXAMPLE
+			.....................................................................
+			<html>
+			<head>
+				<title>My UIZE-enhanced Web Page</title>
+				<link rel="stylesheet" type="text/css" href="css/site-theme.css"/>
+			</head>
+			<body>
+				... ... ...
+				... ... ...
+				... ... ...
+				<script src="js/~source/Uize.js"></script>
+			</body>
+			.....................................................................
+
+		Earlier-in-the-document Pros & Cons
+			There are pros and cons to the earlier-in-the-document placements of the =script= tags for sourcing in JavaScript modules.
+
+			CON
+
+			The earlier in the document that you place the =script= tags, the longer it will typically take before the user sees any of the page render in the browser. This is because browsers handle loading external JavaScript files synchronously, meaning that the browser doesn't continue parsing the rest of the document until the entire external JavaScript file is loaded.
+
+			PRO
+
+			The earlier in the document that you place the =script= tags, the less time lag there will be between the user seeing the document and it becoming fully interactive. If you don't stall the rendering of the document until the JavaScript is loaded, the user will see the document and all the user interface controls that will become active once they are wired up by JavaScript code that will load later.
+
+		Splitting the Difference
+			You can use a hybrid approach to choosing where to source in external JavaScript files, in order to split the difference between the pros and cons of each.
+
+			If you want to get some of the benefits of sourcing in JavaScript earlier in the document and some of the benefits of sourcing them later in the document, you could choose to load in some "core" JavaScript files - that are shared by all pages in the site - early in the document (say, for example, in the =head=), and then load in the page specific JavaScript files further down in the document. Such an approach can help make it so that neither of those two critical delay periods is too perceptibly long for the user.
+
+	Page Widget Setup Code
+		Page Widget Example
+			EXAMPLE
+			.........................................................................................
+			<html>
+			<head>
+				<title>My UIZE-enhanced Web Page</title>
+				<link rel="stylesheet" type="text/css" href="css/site-theme.css"/>
+				<script src="js/~source/Uize.js"></script>
+			</head>
+			<body>
+				... ... ...
+				... ... ...
+				... ... ...
+				<script type="text/javascript">
+					Uize.module ({
+						required:[
+							'Uize.Widget.Page',
+							'Uize.Widget.Bar.Slider'
+						],
+						builder:function () {
+							'use strict';
+
+							/*** create the example page widget ***/
+								var page = window.page = UizeSite.Page.Example ();
+
+							/*** add the Uize.Widget.Bar.Slider child widget ***/
+								page.addChild ('slider',Uize.Widget.Bar.Slider,{minValue:0,maxValue:200});
+
+							/*** wire up the page widget ***/
+								page.wireUi ();
+						}
+					});
+				</script>
+			</body>
+			.........................................................................................
+
+		### should be at the end of the document, at the root level in the =body= tag, not inside any unclosed tags in the body of the document
+
+		Only Need One Script Tag
+			Once you've sourced in the "Uize.js" file, you shouldn't need to source in any other JavaScript modules built on top of the UIZE JavaScript Framework using =script= tags, because the module loader mechanism will handle that for you, as long as your module declarations correctly require all the modules that will be used.
+
+			Taking another look at the `page widget example` shown earlier, the code inside the =builder= function of the module declaration can rely on the =Uize.Widget.Page= and =Uize.Widget.Bar.Slider= modules being loaded, even though there are no =script= tags in the document loading the external JavaScript files that define these modules. That's because the module loader mechanism implemented in the =Uize= base module - that *was* loaded in with the =script= tag - takes care of dynamically loading all modules declared in the =required= list of the module declaration (including all modules that are required by those modules), if they are not already loaded. This takes a load of your mind as a developer, because you don't have to worry about resolving all those complex dependencies across all the modules that your code uses.
+
+			For a more in-depth discussion of the module loader mechanism, you can consult the guide [[javascript-modules.html][JavaScript Modules]].
+
+		### what is the page widget, exactly?
+			- encapsulates a set of logic that may be common to a series of pages throughout an entire section of a Web site
+				- for example, a news Web site might make a special page widget subclass for pages that are news stories, where there is some base client-side functionality that is common to all such news story pages
+				- an object-oriented rather than a chaotic / ad hoc approach to sharing client code across multiple pages
+					- note: for ad hoc injection of widgets on pages that require special JavaScript code to support their client-side interaction, the UIZE JavaScript Framework also supports a system of widget adoption (see the section `Widget Adoption` in the guide [[javascript-widgets.html][JavaScript Widgets]]).
+			- the examples in the UIZE Web site all use the =UizeSite.Page.Example= class, which is a subclass of =UizeSite.Page=, which is a subclass of =Uize.Widget.Page=
+
+	### The "Code Beside"
+		You can still have JavaScript files, such as code besides, that use UIZE and that are located in different folders of your site, but these JavaScript files cannot be loaded using the module loader mechanism (more on that later).
+
+		### Code Beside Not Required
+			- what is it, really?
+				- usually a subclass of =Uize.Page= (or some other subclass of =Uize.Page=)
+			- when is it recommended?
+				- large amount of JavaScript, so
+			- examples in UIZE Web site typically don't use code besides, so that
+
+		### JavaScript Library Files
+			- not essential, but an optimization
+			- when in source mode, should do nothing
+			- can be loaded in with script tags, or can be required as modules
+
+	### TO COVER
+		- how the example pages in the UIZE Web site are *not* like the pages of your own site
+			- use a library file that is specific to the example pages of the UIZE Web site
+			- often have widget markup in the HTML source, not generated by any server-side code
+
+	### Using Widgets
+		- which widget do you want to use?
+		- when you know what widget you want to use, find an example that uses it
+		- where does the HTML come from?
+			- the [[][JavaScript Widgets]] system of the UIZE JavaScript Framework doesn't care where the HTML for widgets comes from or how it gets into an HTML page. This is an important design choice for the framework, because it provides an application with flexibility in how it builds / generates HTML markup for widgets.
+			- several approaches
+				- could be in the page, as plain HTML
+					- many of the examples in the UIZE Web site use this approach, because it helps to illustrate the HTML markup needed by a widget (it would be less clear if the widget markup were in a separate file)
+				- could come from a JavaScript template
+					- some of the example in the UIZE Web site use this approach, especially for widgets that are used in multiple examples and that have more complex markup (such as the slideshow or dialog widgets)
+				- could be generated on the server side by a control or some other device of the server platform's component architecture
+					- `Zazzle Inc.` uses .NET's control framework for generating the markup for widgets
+
+### What Next?
+

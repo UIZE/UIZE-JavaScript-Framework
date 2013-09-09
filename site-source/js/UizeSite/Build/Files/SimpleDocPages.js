@@ -42,7 +42,7 @@
 			js/Uize.Widget.js --> PRODUCES --> reference/Uize.Widget.html
 			.............................................................
 
-		For more information on Simple Doc - such as its rules on document structure, inline formatting, etc. - refer to the explainer [[javascript-documentation-system.html][JavaScript Documentation System]].
+		For more information on Simple Doc - such as its rules on document structure, inline formatting, etc. - refer to the guide [[javascript-documentation-system.html][JavaScript Documentation System]].
 
 		NOTES
 		- the summary info for this build script is output to the log file =UizeSite.Build.Files.SimpleDocPages.log=
@@ -62,7 +62,7 @@ Uize.module ({
 						_sourcePath = _params.sourcePath
 					;
 
-					/*** add URLs for all .simple files (explainers, appendixes, JavaScript reference pages, etc.) ***/
+					/*** add URLs for all .simple files (guides, appendixes, JavaScript reference pages, etc.) ***/
 						var _dotSimpleExtensionRegExp = /\.simple$/;
 						m.addFiles (
 							m.fileSystem.getFiles ({
