@@ -82,7 +82,7 @@
 		line-height: 15px;
 		padding: 7px 0 10px 0;
 	}
-	.tourPromo .buttonLink {
-		float: right;
+	.tourPromo .tourPromoButtonShell {
+		text-align: center;
 	}
 
