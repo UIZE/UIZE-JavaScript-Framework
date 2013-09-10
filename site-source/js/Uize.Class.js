@@ -80,21 +80,93 @@
 
 				For an in-depth discussion of events, consult the [[../guides/javascript-event-system.html][JavaScript Event System]] guide.
 
+			State Properties Derivation ~~ State Properties Derivations
+				A state properties derivation is simply an expression that produces a derived value from one or more of the state properties of a class.
+
+				EXAMPLE
+				....................................................................................
+				var CubeClass = Uize.Class.subclass ({
+					stateProperties:{
+						width:{value:10},
+						height:{value:20},
+						depth:{value:15},
+						volume:{derived:function (width,height,depth) {return width * height * depth}}
+					}
+				});
+
+				var cubeInstance = CubeClass ();
+				alert (cubeInstance.get ('volume'));  // alerts the text "3000"
+				....................................................................................
+
+				In the above example, the class =CubeClass= is being created with the state properties =width=, =height=, and =depth=, and with the derived property =volume=. The way that the value of the =volume= property is derived is specified using the function =function (width,height,depth) {return width &#42; height &#42; depth}=, which tells the =Uize.Class= module to compute the value using the =width=, =height=, and =depth= state properties as the `determinants`, and the expression =width &#42; height &#42; depth= as the computation.
+
+				Derived properties is just one way in which `state properties derivations` can be used. One can also use such derivations with the =onChange= instance method, and when `specifying conditions` with the =isMet=, =once=, and =whenever= instance methods of the `condition system`.
+
+			###
+				Determinants
+					.
+
+				Determiner
+					.
+
+				Methods Supporting State Properties Derivations
+					.
+
+					- =onChange= - registers a handler that is to be executed each time a `state properties derivation` changes value, in addition to the first time the derivation's value is computed
+
+				Several Ways to Specify a Derivation
+					For convenience, a state properties derivation can be specified in a variety of ways.
+
+					As a String, Specifying a Single Determinant
+						.
+
+					As a Comma-separated String, Specifying Multiple Determinants
+						.
+
+					As an Array, Specifying Multiple Determinants
+						.
+
+					As a Colon-delimited String, Specifying Both Determinants and Determiner
+						.
+
+					As a Function, Specifying Both Determinants and Determiner
+						.
+
 			Condition System
 				The =Uize.Class= module implements a condition system in the form of state properties combined with convenience methods that allow state properties to be treated semantically as conditions.
 
 				Condition System Methods
 					The `condition system` of the =Uize.Class= module is exposed through the following methods...
 
-					- =is= - returns whether or not a state property is truthy (useful when a state property represents a condition)
+					- =is= - returns whether or not a state property is truthy (useful when a single state property represents a condition)
 					- =isMet= - returns whether or not a condition has been met
 					- =once= - registers a handler that is to be executed once a condition has been met, or immediately if the condition is already met
-					- =met= - sets a condition as having been met
-					- =unmet= - sets a condition as having not been met / no longer being met
+					- =met= - sets the value of a state property to =true= (useful when a single state property represents a condition)
+					- =unmet= - sets the value of a state property to =false= (useful when a single state property represents a condition)
 					- =whenever= - registers a handler that is to be executed each time a condition changes state
 
 				Specifying Conditions
 					.
+
+					- `property condition string` - a string, specifying the name of a single state property (as in ='isEmpty'=), with optional `condition inversion` (as in ='!isEmpty'=)
+					- `properties condition string or array` - a string, specifying a comma-separated list of state properties (as in ='wired,isEmpty'=), with optional `condition inversion` (as in ='wired,!isEmpty'=), or  an array of strings, specifying one or more state properties (as in =['wired','isEmpty']=), with optional `condition inversion` (as in =['wired','!isEmpty']=)
+					- `condition function` - a function, specifying a `state properties derivation`, as in =function (wired,isEmpty) {return wired && !isEmpty}=
+					- `condition expression string` - a string, specifying a `state properties derivation`, as in =wired,isEmpty: wired && !isEmpty'=
+
+					Property Condition String ~~ propertyConditionSTR
+						.
+
+						The =propertyConditionSTR= parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating `condition inversion`.
+
+					Properties Condition String or Array ~~ propertiesConditionARRAYorSTR
+						.
+
+						Any property name can be prefixed with a "!" (exclamation mark) to achieve `condition inversion` for the property.
+
+						Whitespace Ignored
+							When a comma-separated list string is specified, all whitespace in the string is ignored.
+
+							This means that whitespace around the property names is ignored, so the value ='phase1Done,phase2Done,phase3Done'= is equivalent to the value ='phase1Done, phase2Done , phase3Done'=. This also means that whitespace around the optional "!" (exclamation mark) prefix is ignored, so the value ='wired, !isEmpty'= is equivalent to the value ='wired, ! isEmpty'=.
 
 					Condition Function
 						A compound condition can be specified as a function, where the names of the function's arguments indicate the state properties that affect the condition and where the function's body evaluates the condition.
@@ -166,7 +238,7 @@
 					This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the condition is met when the =once= method is called, then the returned wirings object will be an empty object.
 
 				Handler Arguments
-					The handler code that is registered to be executed once a condition is met will be passed the values of all the state properties that affect the condition as arguments.
+					The handler code that is registered to be executed when a condition is met will be passed the values of all the state properties that affect the condition as arguments.
 
 					EXAMPLE
 					...................................................................
@@ -187,38 +259,6 @@
 					In the above example, code is being registered to be executed once the product of the =width=, =height=, and =depth= properties of the =myFishTankWater= instance exceeds =1000=. Once the call to the =set= method has been executed, the volume of the fish tank's water will be =1320= and the handler will be executed.
 
 					Now, because the properties affecting the condition have been specified as "width, height, depth", the value of these state properties will be passed as arguments to the handler in the order =width=, =height=, and =depth=. In this case, the handler function is choosing to declare these function arguments, using the same names for the sake of clarity - you could ignore the arguments if you didn't care about the specific values at the time the condition is met, or you could use the arguments but name them differently. In this example, the =alert= statement will alert the text "10(W) x 11(H) x 12(D)".
-
-			### State Properties Derivation ~~ State Properties Derivations
-				.
-
-				Determinants
-					.
-
-				Determiner
-					.
-
-				Methods Supporting State Properties Derivations
-					.
-
-					- =onChange= - registers a handler that is to be executed each time a `state properties derivation` changes value, in addition to the first time the derivation's value is computed
-
-				Several Ways to Specify a Derivation
-					For convenience, a state properties derivation can be specified in a variety of ways.
-
-					As a String, Specifying a Single Determinant
-						.
-
-					As a Comma-separated String, Specifying Multiple Determinants
-						.
-
-					As an Array, Specifying Multiple Determinants
-						.
-
-					As a Colon-delimited String, Specifying Both Determinants and Determiner
-						.
-
-					As a Function, Specifying Both Determinants and Determiner
-						.
 */
 
 Uize.module ({
@@ -948,80 +988,62 @@ Uize.module ({
 
 									SYNTAX
 									.........................................................................
-									wiringsOBJ = myInstance.once (propertiesConditionARRAYorSTR,handlerFUNC);
+									wiringsOBJ = myInstance.once (propertiesConditionSTRorARRAY,handlerFUNC);
 									.........................................................................
 
-									propertiesConditionARRAYorSTR
-										The value specified for the =propertiesConditionARRAYorSTR= parameter may be an array of property names or a comma-separated list string.
+									The properties can be specified using a =propertiesConditionSTRorARRAY=, specifying a comma-separated list of state properties, or using a =propertiesConditionARRAY=, specifying a string array of state property names.
 
-										Whichever form is used, any property name can be prefixed with a "!" (exclamation mark) to achieve `condition inversion` for the property.
+									EXAMPLE 1: Array of Property Names
+										Multiple state properties can be specified using an array of state property names.
 
-										Summary of different forms...
+										EXAMPLE
+										........................................................
+										myInstance.once (
+											['phase1Done','phase2Done','phase3Done'],
+											function () {
+												// execute code now that all three phases are done
+											}
+										);
+										........................................................
 
-										- array of property names: =['phase1Done','phase2Done','phase3Done']=
-										- array of property names with `condition inversion`: =['wired','!isEmpty']=
-										- comma-separated list string: ='phase1Done, phase2Done, phase3Done'=
-										- comma-separated list with `condition inversion`: ='wired, !isEmpty'=
+									EXAMPLE 2: Comma-separated List String
+										Multiple state properties can be specified using a comma-separated list string.
 
-										Whitespace Ignored for Comma-separated List String
-											If a comma-separated list string is specified, all whitespace in the string is ignored.
+										EXAMPLE
+										........................................................
+										myInstance.once (
+											'phase1Done, phase2Done, phase3Done',
+											function () {
+												// execute code now that all three phases are done
+											}
+										);
+										........................................................
 
-											This means that whitespace around the property names is ignored, so the value ='phase1Done,phase2Done,phase3Done'= is equivalent to the value ='phase1Done, phase2Done , phase3Done'=. This also means that whitespace around the optional "!" (exclamation mark) prefix is ignored, so the value ='wired, !isEmpty'= is equivalent to the value ='wired, ! isEmpty'=.
+									EXAMPLE 3: Array of Property Names, with Condition Inversion
+										Multiple state properties can be specified using an array of state property names, where some of the property names in the array are prefixed with the optional "!" to indicate `condition inversion`.
 
-									Examples
-										The following examples illustrate the different ways in which multiple properties can be specified.
+										EXAMPLE
+										.................................................................................
+										myCollection.once (
+											['wired','!isEmpty'],
+											function () {
+												// execute code now that the collection widget is wired and no longer empty
+											}
+										);
+										.................................................................................
 
-										EXAMPLE: Array of Property Names
-											Multiple state properties can be specified using an array of state property names.
+									EXAMPLE 4: Comma-separated List String, with Condition Inversion
+										Multiple state properties can be specified using a comma-separated list string, where some of the property names in the list are prefixed with the optional "!" to indicate `condition inversion`.
 
-											EXAMPLE
-											........................................................
-											myInstance.once (
-												['phase1Done','phase2Done','phase3Done'],
-												function () {
-													// execute code now that all three phases are done
-												}
-											);
-											........................................................
-
-										EXAMPLE: Comma-separated List String
-											Multiple state properties can be specified using a comma-separated list string.
-
-											EXAMPLE
-											........................................................
-											myInstance.once (
-												'phase1Done, phase2Done, phase3Done',
-												function () {
-													// execute code now that all three phases are done
-												}
-											);
-											........................................................
-
-										EXAMPLE: Array of Property Names, with Condition Inversion
-											Multiple state properties can be specified using an array of state property names, where some of the property names in the array are prefixed with the optional "!" to indicate `condition inversion`.
-
-											EXAMPLE
-											.................................................................................
-											myCollection.once (
-												['wired','!isEmpty'],
-												function () {
-													// execute code now that the collection widget is wired and no longer empty
-												}
-											);
-											.................................................................................
-
-										EXAMPLE: Comma-separated List String, with Condition Inversion
-											Multiple state properties can be specified using a comma-separated list string, where some of the property names in the list are prefixed with the optional "!" to indicate `condition inversion`.
-
-											EXAMPLE
-											.................................................................................
-											myCollection.once (
-												'wired, !isEmpty',
-												function () {
-													// execute code now that the collection widget is wired and no longer empty
-												}
-											);
-											.................................................................................
+										EXAMPLE
+										.................................................................................
+										myCollection.once (
+											'wired, !isEmpty',
+											function () {
+												// execute code now that the collection widget is wired and no longer empty
+											}
+										);
+										.................................................................................
 
 								Execute Code Once a Compound Condition is Met
 									Code can be registered to be executed once a compound condition is met, by specifying the compound condition in the form of a condition function or condition expression string.
@@ -1037,7 +1059,9 @@ Uize.module ({
 									Otherwise, handlers will be wired for the =Changed.*= (value change) events for all the state properties that affect the condition. The condition evaluator will be executed each time any of the watched properties change value. As soon as the condition becomes met (ie. the condition evaluator produces a truthy result), the handlers wired to watch the value change events of the properties will be unwired and the handler function registered for the condition will be executed. By design, the handler is only executed for the first time that the condition becomes met.
 
 								For More Information
-									.
+									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
+
+									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods.
 
 								NOTES
 								- compare to the related =whenever= instance method
@@ -1072,11 +1096,38 @@ Uize.module ({
 								..........................................................................
 
 								Execute Code Whenever a State Property Becomes Truthy
+									In its most basic usage, code can be registered to be executed whenever a single state property becomes truthy or falsy.
 
 									SYNTAX
 									....................................................................
 									wiringsOBJ = myInstance.whenever (propertyConditionSTR,handlerFUNC);
 									....................................................................
+
+									The =propertyConditionSTR= parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating `condition inversion`. If simply the name of a state property is specified, then the handler code specified by the =handlerFUNC= parameter will be executed whenever the property becomes truthy. If the optional "!" prefix is specified, then the handler code will be executed whenever the property becomes falsy.
+
+									EXAMPLE 1
+									.......................................................
+									myWidget.whenever (
+										'wired',
+										function () {
+											// do something whenever the widget becomes wired
+										}
+									);
+									.......................................................
+
+									In the above example, a handler is being registered to be executed whenever the widget =myWidget= becomes wired (ie. the value of its =wired= state property becomes =true=). This allows code to be registered that will be executed the first time a widget becomes wired, but also on subsequent occasions if the widget is unwired and then rewired.
+
+									EXAMPLE 2
+									...............................................................
+									myCollectionWidget.once (
+										'!isEmpty',
+										function () {
+											// do something whenever the collection becomes non-empty
+										}
+									);
+									...............................................................
+
+									In the above example, code is being registered to execute whenever the =isEmpty= state property becomes =false=.
 
 								Execute Code Once Multiple State Properties Become Truthy
 
@@ -1091,6 +1142,16 @@ Uize.module ({
 									..........................................................................
 									wiringsOBJ = myInstance.whenever (compoundConditionSTRorFUNC,handlerFUNC);
 									..........................................................................
+
+								Immediate Execution if Condition Already Met
+									If the condition specified in the call to the =whenever= method is already met at the time that the method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately.
+
+									Handlers will also be wired for the =Changed.*= (value change) events for all the state properties that affect the condition. The condition evaluator will be executed each time any of the watched properties change value. Whenever the condition becomes met (ie. the condition evaluator produces a truthy result after previously having produced a falsy result), the handler function registered for the condition will be executed.
+
+								For More Information
+									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
+
+									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods.
 
 								NOTES
 								- compare to the related =once= instance method
@@ -1316,10 +1377,10 @@ Uize.module ({
 									isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
 									..........................................................
 
-								Specifying Conditions
-									When using the =isMet= method, conditions are specified in exactly the same as with the =once= method.
+								For More Information
+									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
 
-									Rather than redundantly providing comprehensive examples for the different usages of the =isMet= method and the different ways in which conditions can be specified, instead please consult the reference for the =once= method. While the =once= method lets you register a handler function that should be executed once a condition is met, the =isMet= method simply tests if a condition is met and returns a boolean result.
+									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods.
 
 								NOTES
 								- see the other `condition system methods`
