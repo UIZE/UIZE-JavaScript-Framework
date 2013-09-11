@@ -146,7 +146,9 @@
 					- =whenever= - registers a handler that is to be executed each time a condition changes state
 
 				Specifying Conditions
-					.
+					The =isMet=, =once=, and =whenever= instance methods all support specifying conditions in a number of convenient different ways to suit different situations.
+
+					A condition can be specified in the form of a...
 
 					- `property condition string` - a string, specifying the name of a single state property (as in ='isEmpty'=), with optional `condition inversion` (as in ='!isEmpty'=)
 					- `properties condition string or array` - a string, specifying a comma-separated list of state properties (as in ='wired,isEmpty'=), with optional `condition inversion` (as in ='wired,!isEmpty'=), or  an array of strings, specifying one or more state properties (as in =['wired','isEmpty']=), with optional `condition inversion` (as in =['wired','!isEmpty']=)
@@ -154,14 +156,89 @@
 					- `condition expression string` - a string, specifying a `state properties derivation`, as in =wired,isEmpty: wired && !isEmpty'=
 
 					Property Condition String ~~ propertyConditionSTR
-						.
+						In the simplest case, where a single state property is being used to represent a condition, just the name of the property can be specified using the =propertyConditionSTR= parameter.
 
-						The =propertyConditionSTR= parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating `condition inversion`.
+						EXAMPLE 1
+						........................................................
+						myWidget.once (
+							'wired',
+							function () {
+								// do something now that the widget has been wired
+							}
+						);
+						........................................................
+
+						In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= state property becomes =true=).
+
+						EXAMPLE 2
+						................................................................
+						myCollectionWidget.once (
+							'!isEmpty',
+							function () {
+								// do something now that the collection is no longer empty
+							}
+						);
+						................................................................
+
+						In the above example, code is being registered to execute once the =isEmpty= state property is =false=. The value of the =propertyConditionSTR= parameter may be prefixed with an optional "!" (exclamation mark) prefix for indicating `condition inversion`.
 
 					Properties Condition String or Array ~~ propertiesConditionARRAYorSTR
-						.
+						In the case of a compound "and" style condition that involves multiple state properties, the condition can be specified either as a string containing a comma-separated list of property names, or as an array of strings specifying the property names.
 
-						Any property name can be prefixed with a "!" (exclamation mark) to achieve `condition inversion` for the property.
+						EXAMPLE 1: Comma-separated List String
+							Multiple state properties can be specified using a comma-separated list string.
+
+							EXAMPLE
+							........................................................
+							myInstance.once (
+								'phase1Done, phase2Done, phase3Done',
+								function () {
+									// execute code now that all three phases are done
+								}
+							);
+							........................................................
+
+						EXAMPLE 2: Array of Property Names
+							Multiple state properties can be specified using an array of state property names.
+
+							EXAMPLE
+							........................................................
+							myInstance.once (
+								['phase1Done','phase2Done','phase3Done'],
+								function () {
+									// execute code now that all three phases are done
+								}
+							);
+							........................................................
+
+						EXAMPLE 3: Comma-separated List String, with Condition Inversion
+							Multiple state properties can be specified using a comma-separated list string, where some of the property names in the list are prefixed with the optional "!" to indicate `condition inversion`.
+
+							EXAMPLE
+							.................................................................................
+							myCollection.once (
+								'wired, !isEmpty',
+								function () {
+									// execute code now that the collection widget is wired and no longer empty
+								}
+							);
+							.................................................................................
+
+						EXAMPLE 4: Array of Property Names, with Condition Inversion
+							Multiple state properties can be specified using an array of state property names, where some of the property names in the array are prefixed with the optional "!" to indicate `condition inversion`.
+
+							EXAMPLE
+							.................................................................................
+							myCollection.once (
+								['wired','!isEmpty'],
+								function () {
+									// execute code now that the collection widget is wired and no longer empty
+								}
+							);
+							.................................................................................
+
+						Inversion of Property Values
+							Any property name can be prefixed with a "!" (exclamation mark) to achieve `condition inversion` for the individual property.
 
 						Whitespace Ignored
 							When a comma-separated list string is specified, all whitespace in the string is ignored.
@@ -959,91 +1036,15 @@ Uize.module ({
 
 									The =propertyConditionSTR= parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating `condition inversion`. If simply the name of a state property is specified, then the handler code specified by the =handlerFUNC= parameter will be executed once the property is truthy. If the optional "!" prefix is specified, then the handler code will be executed once the property is falsy.
 
-									EXAMPLE 1
-									........................................................
-									myWidget.once (
-										'wired',
-										function () {
-											// do something now that the widget has been wired
-										}
-									);
-									........................................................
-
-									In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= state property becomes =true=).
-
-									EXAMPLE 2
-									................................................................
-									myCollectionWidget.once (
-										'!isEmpty',
-										function () {
-											// do something now that the collection is no longer empty
-										}
-									);
-									................................................................
-
-									In the above example, code is being registered to execute once the =isEmpty= state property is =false=.
-
 								Execute Code Once Multiple State Properties Are Truthy or Falsy
-									Code can be registered to be executed once all properties in a set of state properties become truthy or falsy, by specifying the state properties as an array of property names or as a comma-separated list string.
+									Code can be registered to be executed once all properties in a set of state properties become truthy or falsy, by specifying the state properties using the =propertiesConditionSTRorARRAY= parameter.
 
 									SYNTAX
 									.........................................................................
 									wiringsOBJ = myInstance.once (propertiesConditionSTRorARRAY,handlerFUNC);
 									.........................................................................
 
-									The properties can be specified using a =propertiesConditionSTRorARRAY=, specifying a comma-separated list of state properties, or using a =propertiesConditionARRAY=, specifying a string array of state property names.
-
-									EXAMPLE 1: Array of Property Names
-										Multiple state properties can be specified using an array of state property names.
-
-										EXAMPLE
-										........................................................
-										myInstance.once (
-											['phase1Done','phase2Done','phase3Done'],
-											function () {
-												// execute code now that all three phases are done
-											}
-										);
-										........................................................
-
-									EXAMPLE 2: Comma-separated List String
-										Multiple state properties can be specified using a comma-separated list string.
-
-										EXAMPLE
-										........................................................
-										myInstance.once (
-											'phase1Done, phase2Done, phase3Done',
-											function () {
-												// execute code now that all three phases are done
-											}
-										);
-										........................................................
-
-									EXAMPLE 3: Array of Property Names, with Condition Inversion
-										Multiple state properties can be specified using an array of state property names, where some of the property names in the array are prefixed with the optional "!" to indicate `condition inversion`.
-
-										EXAMPLE
-										.................................................................................
-										myCollection.once (
-											['wired','!isEmpty'],
-											function () {
-												// execute code now that the collection widget is wired and no longer empty
-											}
-										);
-										.................................................................................
-
-									EXAMPLE 4: Comma-separated List String, with Condition Inversion
-										Multiple state properties can be specified using a comma-separated list string, where some of the property names in the list are prefixed with the optional "!" to indicate `condition inversion`.
-
-										EXAMPLE
-										.................................................................................
-										myCollection.once (
-											'wired, !isEmpty',
-											function () {
-												// execute code now that the collection widget is wired and no longer empty
-											}
-										);
-										.................................................................................
+									The =propertiesConditionSTRorARRAY= parameter allows the state properties to be specified either as a comma-separated list string, or as an array of property name strings. In either form, the name of any property can be prefixed with a "!" (exclamation mark) character to achieve `condition inversion` for the individual property.
 
 								Execute Code Once a Compound Condition is Met
 									Code can be registered to be executed once a compound condition is met, by specifying the compound condition in the form of a condition function or condition expression string.
@@ -1104,30 +1105,6 @@ Uize.module ({
 									....................................................................
 
 									The =propertyConditionSTR= parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating `condition inversion`. If simply the name of a state property is specified, then the handler code specified by the =handlerFUNC= parameter will be executed whenever the property becomes truthy. If the optional "!" prefix is specified, then the handler code will be executed whenever the property becomes falsy.
-
-									EXAMPLE 1
-									.......................................................
-									myWidget.whenever (
-										'wired',
-										function () {
-											// do something whenever the widget becomes wired
-										}
-									);
-									.......................................................
-
-									In the above example, a handler is being registered to be executed whenever the widget =myWidget= becomes wired (ie. the value of its =wired= state property becomes =true=). This allows code to be registered that will be executed the first time a widget becomes wired, but also on subsequent occasions if the widget is unwired and then rewired.
-
-									EXAMPLE 2
-									...............................................................
-									myCollectionWidget.once (
-										'!isEmpty',
-										function () {
-											// do something whenever the collection becomes non-empty
-										}
-									);
-									...............................................................
-
-									In the above example, code is being registered to execute whenever the =isEmpty= state property becomes =false=.
 
 								Execute Code Once Multiple State Properties Become Truthy
 
