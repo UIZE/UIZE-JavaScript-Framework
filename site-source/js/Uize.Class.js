@@ -13,7 +13,7 @@
 	type: Class
 	importance: 10
 	codeCompleteness: 100
-	docCompleteness: 100
+	docCompleteness: 95
 */
 
 /*?
