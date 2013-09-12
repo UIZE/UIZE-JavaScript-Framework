@@ -245,7 +245,7 @@
 
 							This means that whitespace around the property names is ignored, so the value ='phase1Done,phase2Done,phase3Done'= is equivalent to the value ='phase1Done, phase2Done , phase3Done'=. This also means that whitespace around the optional "!" (exclamation mark) prefix is ignored, so the value ='wired, !isEmpty'= is equivalent to the value ='wired, ! isEmpty'=.
 
-					Condition Function
+					Condition Function ~~ compoundConditionFUNC
 						A compound condition can be specified as a function, where the names of the function's arguments indicate the state properties that affect the condition and where the function's body evaluates the condition.
 
 						EXAMPLE
@@ -262,7 +262,7 @@
 
 						When code is registered to be executed once the product of the =width=, =height=, and =depth= properties is greater than =1000=, if this condition is not yet met when the =once= method is called, the method will wire handlers for the =Changed.width=, =Changed.height=, and =Changed.depth= events and will re-evaluate the condition function every time any of the properties that affect the condition change value. Once the condition function returns a truthy result, the handler for the compound condition will be executed and the handlers that were wired for the =Changed.*= events will be unwired.
 
-					Condition Expression String
+					Condition Expression String ~~ compoundConditionSTR
 						A compound condition can be specified as an expression string, where the names of the state properties affecting the condition are specified along with an expression string for evaluating the condition.
 
 						A condition expression string is formatted with two parts separated by a ":" (colon) delimiter, where the part before the colon is a comma-separated list of the state properties affecting the condition, and the part after the colon is an expression to be used for evaluating the condition.
@@ -314,28 +314,32 @@
 
 					This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the condition is met when the =once= method is called, then the returned wirings object will be an empty object.
 
-				Handler Arguments
-					The handler code that is registered to be executed when a condition is met will be passed the values of all the state properties that affect the condition as arguments.
+				Condition Handler
+					Condition Handler Arguments
+						The handler code that is registered to be executed when a condition is met will be passed the values of all the state properties that affect the condition as arguments.
 
-					EXAMPLE
-					...................................................................
-					myFishTankWater.once (
-						'width, height, depth : width * height * depth > 1000',
-						function (width,height,depth) {
-							alert (width + '(W) x ' + height + '(H) x ' + depth + '(D)');
+						EXAMPLE
+						...................................................................
+						myFishTankWater.once (
+							'width, height, depth : width * height * depth > 1000',
+							function (width,height,depth) {
+								alert (width + '(W) x ' + height + '(H) x ' + depth + '(D)');
+							}
 						}
-					}
 
-					myFishTankWater.set ({
-						width:10,
-						height:11,
-						depth:12
-					});
-					...................................................................
+						myFishTankWater.set ({
+							width:10,
+							height:11,
+							depth:12
+						});
+						...................................................................
 
-					In the above example, code is being registered to be executed once the product of the =width=, =height=, and =depth= properties of the =myFishTankWater= instance exceeds =1000=. Once the call to the =set= method has been executed, the volume of the fish tank's water will be =1320= and the handler will be executed.
+						In the above example, code is being registered to be executed once the product of the =width=, =height=, and =depth= properties of the =myFishTankWater= instance exceeds =1000=. Once the call to the =set= method has been executed, the volume of the fish tank's water will be =1320= and the handler will be executed.
 
-					Now, because the properties affecting the condition have been specified as "width, height, depth", the value of these state properties will be passed as arguments to the handler in the order =width=, =height=, and =depth=. In this case, the handler function is choosing to declare these function arguments, using the same names for the sake of clarity - you could ignore the arguments if you didn't care about the specific values at the time the condition is met, or you could use the arguments but name them differently. In this example, the =alert= statement will alert the text "10(W) x 11(H) x 12(D)".
+						Now, because the properties affecting the condition have been specified as "width, height, depth", the value of these state properties will be passed as arguments to the handler in the order =width=, =height=, and =depth=. In this case, the handler function is choosing to declare these function arguments, using the same names for the sake of clarity - you could ignore the arguments if you didn't care about the specific values at the time the condition is met, or you could use the arguments but name them differently. In this example, the =alert= statement will alert the text "10(W) x 11(H) x 12(D)".
+
+					### Condition Handler Context
+						.
 */
 
 Uize.module ({
@@ -1037,32 +1041,33 @@ Uize.module ({
 									The =propertyConditionSTR= parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating `condition inversion`. If simply the name of a state property is specified, then the handler code specified by the =handlerFUNC= parameter will be executed once the property is truthy. If the optional "!" prefix is specified, then the handler code will be executed once the property is falsy.
 
 								Execute Code Once Multiple State Properties Are Truthy or Falsy
-									Code can be registered to be executed once all properties in a set of state properties become truthy or falsy, by specifying the state properties using the =propertiesConditionSTRorARRAY= parameter.
+									Code can be registered to be executed once a compound "and" style condition involving multiple state properties become truthy, by specifying the state properties using the =propertiesConditionSTRorARRAY= parameter.
 
 									SYNTAX
 									.........................................................................
 									wiringsOBJ = myInstance.once (propertiesConditionSTRorARRAY,handlerFUNC);
 									.........................................................................
 
-									The =propertiesConditionSTRorARRAY= parameter allows the state properties to be specified either as a comma-separated list string, or as an array of property name strings. In either form, the name of any property can be prefixed with a "!" (exclamation mark) character to achieve `condition inversion` for the individual property.
+									The =propertiesConditionSTRorARRAY= parameter allows the state properties to be specified either as a comma-separated list string, or as an array of property name strings. In either form, the name of any property can be prefixed with a "!" (exclamation mark) character to achieve `condition inversion` for the individual property. The condition, as a whole, is truthy when all of the state property sub-parts of the condition are truthy (taking into account optional inversion for any state property).
 
 								Execute Code Once a Compound Condition is Met
-									Code can be registered to be executed once a compound condition is met, by specifying the compound condition in the form of a condition function or condition expression string.
+									Code can be registered to be executed once a compound condition is met, by specifying the compound condition in the form of a `condition function` or `condition expression string`.
 
 									SYNTAX
-									......................................................................
-									wiringsOBJ = myInstance.once (compoundConditionSTRorFUNC,handlerFUNC);
-									......................................................................
+									.................................................................
+									wiringsOBJ = myInstance.once (compoundConditionFUNC,handlerFUNC);
+									wiringsOBJ = myInstance.once (compoundConditionSTR,handlerFUNC);
+									.................................................................
 
 								Immediate Execution if Condition Already Met
 									If the condition specified in the call to the =once= method is already met at the time that the method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately.
 
-									Otherwise, handlers will be wired for the =Changed.*= (value change) events for all the state properties that affect the condition. The condition evaluator will be executed each time any of the watched properties change value. As soon as the condition becomes met (ie. the condition evaluator produces a truthy result), the handlers wired to watch the value change events of the properties will be unwired and the handler function registered for the condition will be executed. By design, the handler is only executed for the first time that the condition becomes met.
+									Otherwise, handlers will be wired for the =Changed.*= (value change) events for all the state properties that affect the condition (the `determinants`). The condition evaluator will be executed each time any of the watched properties change value. As soon as the condition becomes met (ie. the condition evaluator produces a truthy result), the handlers wired to watch the value change events of the properties will be unwired and the handler function registered for the condition will be executed. By design, the handler is only executed for the first time that the condition becomes met.
 
 								For More Information
 									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
 
-									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods.
+									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods. See also the section on the `condition handler` for information on the arguments it receives and the context on which it is called.
 
 								NOTES
 								- compare to the related =whenever= instance method
@@ -1081,12 +1086,12 @@ Uize.module ({
 
 								DIFFERENT USAGES
 
-								`Execute Code Whenever a State Property Becomes Truthy`
+								`Execute Code Whenever a State Property Becomes Truthy or Falsy`
 								....................................................................
 								wiringsOBJ = myInstance.whenever (propertyConditionSTR,handlerFUNC);
 								....................................................................
 
-								`Execute Code Once Multiple State Properties Become Truthy`
+								`Execute Code Whenever Multiple State Properties Become Truthy or Falsy`
 								.............................................................................
 								wiringsOBJ = myInstance.whenever (propertiesConditionARRAYorSTR,handlerFUNC);
 								.............................................................................
@@ -1096,7 +1101,7 @@ Uize.module ({
 								wiringsOBJ = myInstance.whenever (compoundConditionSTRorFUNC,handlerFUNC);
 								..........................................................................
 
-								Execute Code Whenever a State Property Becomes Truthy
+								Execute Code Whenever a State Property Becomes Truthy or Falsy
 									In its most basic usage, code can be registered to be executed whenever a single state property becomes truthy or falsy.
 
 									SYNTAX
@@ -1106,29 +1111,34 @@ Uize.module ({
 
 									The =propertyConditionSTR= parameter specifies the name of a state property, with an optional "!" (exclamation mark) prefix for indicating `condition inversion`. If simply the name of a state property is specified, then the handler code specified by the =handlerFUNC= parameter will be executed whenever the property becomes truthy. If the optional "!" prefix is specified, then the handler code will be executed whenever the property becomes falsy.
 
-								Execute Code Once Multiple State Properties Become Truthy
+								Execute Code Whenever Multiple State Properties Become Truthy or Falsy
+									Code can be registered to be executed whenever a compound "and" style condition involving multiple state properties become truthy, by specifying the state properties using the =propertiesConditionSTRorARRAY= parameter.
 
 									SYNTAX
 									.............................................................................
 									wiringsOBJ = myInstance.whenever (propertiesConditionARRAYorSTR,handlerFUNC);
 									.............................................................................
 
+									The =propertiesConditionSTRorARRAY= parameter allows the state properties to be specified either as a comma-separated list string, or as an array of property name strings. In either form, the name of any property can be prefixed with a "!" (exclamation mark) character to achieve `condition inversion` for the individual property. The condition, as a whole, is truthy when all of the state property sub-parts of the condition are truthy (taking into account optional inversion for any state property).
+
 								Execute Code Whenever a Compound Condition Becomes Met
+									Code can be registered to be executed whenever a compound condition becomes met, by specifying the compound condition in the form of a `condition function` or `condition expression string`.
 
 									SYNTAX
-									..........................................................................
-									wiringsOBJ = myInstance.whenever (compoundConditionSTRorFUNC,handlerFUNC);
-									..........................................................................
+									.....................................................................
+									wiringsOBJ = myInstance.whenever (compoundConditionFUNC,handlerFUNC);
+									wiringsOBJ = myInstance.whenever (compoundConditionSTR,handlerFUNC);
+									.....................................................................
 
 								Immediate Execution if Condition Already Met
 									If the condition specified in the call to the =whenever= method is already met at the time that the method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately.
 
-									Handlers will also be wired for the =Changed.*= (value change) events for all the state properties that affect the condition. The condition evaluator will be executed each time any of the watched properties change value. Whenever the condition becomes met (ie. the condition evaluator produces a truthy result after previously having produced a falsy result), the handler function registered for the condition will be executed.
+									Handlers will also be wired for the =Changed.*= (value change) events for all the state properties that affect the condition (the `determinants`). The condition evaluator will be executed each time any of the watched properties change value. Whenever the condition becomes met (ie. the condition evaluator produces a truthy result after previously having produced a falsy result), the handler function registered for the condition will be executed.
 
 								For More Information
 									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
 
-									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods.
+									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods. See also the section on the `condition handler` for information on the arguments it receives and the context on which it is called.
 
 								NOTES
 								- compare to the related =once= instance method
