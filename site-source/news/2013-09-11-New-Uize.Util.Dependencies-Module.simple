@@ -1,0 +1,52 @@
+The new =Uize.Util.Dependencies= utility module provides methods for working with dependency relationships in a generic way.
+
+The =Uize.Util.Dependencies= module is used by the =Uize.Build.ModuleInfo= build utility module to trace module dependencies, but the methods of the =Uize.Util.Dependencies= module are expressed in sufficiently generic terms that the module can be used for many types of items that have dependency relationships.
+
+The module provides a =Uize.Util.Dependencies.traceDependencies= static method, which returns an array, containing the dependencies that are required - both directly and indirectly - by the specified root dependency (or dependencies), and excluding the optionally specified exclude list.
+
+SYNTAX
+..............................................................
+dependenciesARRAY = Uize.Util.Dependencies.traceDependencies (
+	rootDependenciesSTRorARRAY,
+	getDirectDependenciesFUNC,
+	excludeDependenciesSTRorARRAY  // optional
+);
+..............................................................
+
+EXAMPLE
+.........................................................................
+var directDepsLookup = {
+	foo:['bar','baz','qux'],
+	bar:['baz','qux'],
+	baz:['qux'],
+	qux:[]
+};
+
+function getDirectDeps (dep) {
+	return directDepsLookup [dep];
+}
+
+alert (  // alerts "qux,baz,bar,foo"
+	Uize.Util.Dependencies.traceDependencies (['foo','qux'],getDirectDeps)
+);
+
+alert (  // alerts "qux,baz"
+	Uize.Util.Dependencies.traceDependencies ('baz',getDirectDeps)
+);
+
+alert (  // alerts "baz,bar,foo"
+	Uize.Util.Dependencies.traceDependencies ('foo',getDirectDeps,['qux'])
+);
+.........................................................................
+
+In the above example, we have created a =directDepsLookup= object, which maps the names of dependencies to their direct dependencies (it's not important what type of things we're dealing with). Then, we've created a simple =getDirectDeps= function that looks up the direct dependencies for a specified dependency from the =directDepsLookup= lookup and returns those dependencies. When we call the =Uize.Util.Dependencies.traceDependencies= method, we supply the =getDirectDeps= function for the method's =getDirectDependenciesFUNC= parameter.
+
+In a real world usage, the function value provided for the =getDirectDependenciesFUNC= parameter would have an understanding of the type of dependencies that are being dealt with. This approach provides the maximum flexibility for the user of the =Uize.Util.Dependencies.traceDependencies= method, keeping the responsibility of this method to simply performing the recursive tracing algorithm.
+
+For complete documentation, consult the reference for the =Uize.Util.Dependencies= module.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-09-11 - New Uize.Util.Dependencies Module
+....................................................................................

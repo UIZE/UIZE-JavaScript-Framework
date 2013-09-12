@@ -91,6 +91,38 @@ Uize.module ({
 
 							In order for this method to be able to trace dependencies, a function must be specified for the =getDirectDependenciesFUNC= parameter that can be used to obtain a list of the direct dependencies for any given dependency. Provided with this function, the =Uize.Util.Dependencies.traceDependencies= method can recursively trace out the dependency list and return the list of all dependencies - both direct and indirect - listed in dependency order and ASCIIbetically sub-sorted.
 
+							EXAMPLE
+							.........................................................................
+							var directDepsLookup = {
+								foo:['bar','baz','qux'],
+								bar:['baz','qux'],
+								baz:['qux'],
+								qux:[]
+							};
+
+							function getDirectDeps (dep) {
+								return directDepsLookup [dep];
+							}
+
+							alert (  // alerts "qux,baz,bar,foo"
+								Uize.Util.Dependencies.traceDependencies (['foo','qux'],getDirectDeps)
+							);
+
+							alert (  // alerts "qux,baz"
+								Uize.Util.Dependencies.traceDependencies ('baz',getDirectDeps)
+							);
+
+							alert (  // alerts "baz,bar,foo"
+								Uize.Util.Dependencies.traceDependencies ('foo',getDirectDeps,['qux'])
+							);
+							.........................................................................
+
+							The above example is very hypothetical and over simplified, but it demonstrates the basics of how the =Uize.Util.Dependencies.traceDependencies= method can be used.
+
+							In the example, we have created a =directDepsLookup= object, which maps the names of dependencies to their direct dependencies (it's not important what type of things we're dealing with). Then, we've created a simple =getDirectDeps= function that looks up the direct dependencies for a specified dependency from the =directDepsLookup= lookup and returns those dependencies. When we call the =Uize.Util.Dependencies.traceDependencies= method, we supply the =getDirectDeps= function for the method's =getDirectDependenciesFUNC= parameter.
+
+							In a real world usage, the function value provided for the =getDirectDependenciesFUNC= parameter would have an understanding of the type of dependencies that are being dealt with. This approach provides the maximum flexibility for the user of the =Uize.Util.Dependencies.traceDependencies= method, keeping the responsibility of this method to simply performing the recursive tracing algorithm.
+
 							NOTES
 							- compare to the related =Uize.Util.Dependencies.getDirectDependencies= static method
 					*/
