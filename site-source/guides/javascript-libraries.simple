@@ -310,7 +310,7 @@ Building Them
 Real World Examples
 	For some "living and breathing", real world examples of JavaScript libraries in action, take a look at the library files used by the UIZE Web site.
 
-	If you've already [[../download.html][downloaded]] the UIZE JavaScript Framework and followed the instructions in the [[getting-started.html][Getting Started With UIZE]] guide, then you can take a peek inside the =UIZE-JavaScript-Framework/js/~source= folder and look at the contents of the library files, like =UizeSite.Page.Doc.library.js=, =UizeSite.Page.Example.library.js=, etc.
+	If you've already [[../download.html][downloaded]] the UIZE JavaScript Framework and followed the instructions in the [[getting-started.html][Getting Started With UIZE]] guide, then you can take a peek inside the =UIZE-JavaScript-Framework/site-source/js= folder and look at the contents of the library files, like =UizeSite.Page.Doc.library.js=, =UizeSite.Page.Example.library.js=, etc.
 
 Important Considerations
 	Pages Should Always Work Without Libraries

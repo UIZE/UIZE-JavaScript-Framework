@@ -26,7 +26,7 @@ Anatomy of a Typical Page
 			<head>
 				<title>My UIZE-enhanced Web Page</title>
 				<link rel="stylesheet" type="text/css" href="css/site-theme.css"/>
-				<script src="js/~source/Uize.js"></script>
+				<script src="js/Uize.js"></script>
 			</head>
 			<body>
 				... ... ...
@@ -46,7 +46,7 @@ Anatomy of a Typical Page
 				<link rel="stylesheet" type="text/css" href="css/site-theme.css"/>
 			</head>
 			<body>
-				<script src="js/~source/Uize.js"></script>
+				<script src="js/Uize.js"></script>
 				... ... ...
 				... ... ...
 				... ... ...
@@ -67,7 +67,7 @@ Anatomy of a Typical Page
 				... ... ...
 				... ... ...
 				... ... ...
-				<script src="js/~source/Uize.js"></script>
+				<script src="js/Uize.js"></script>
 			</body>
 			.....................................................................
 
@@ -95,7 +95,7 @@ Anatomy of a Typical Page
 			<head>
 				<title>My UIZE-enhanced Web Page</title>
 				<link rel="stylesheet" type="text/css" href="css/site-theme.css"/>
-				<script src="js/~source/Uize.js"></script>
+				<script src="js/Uize.js"></script>
 			</head>
 			<body>
 				... ... ...

@@ -55,9 +55,9 @@
 		Below is a snippet from the log file after this build script was run inside the =UIZE-JavaScript-Framework= folder of the UIZE Web site project...
 
 		LOG FILE SNIPPET
-		......................................................................................
-		***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.TableSort.js
-			TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.TableSort.js
+		..........................................................................................
+		***** C:\~uize\UIZE-JavaScript-Framework\site-source\js\Uize.Widget.TableSort.js
+			TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\site-source\js\Uize.Widget.TableSort.js
 			BUILT (ALWAYS BUILD), BUILD DURATION: 188ms
 				NON-INTERNATIONALIZABLE STRINGS
 					 --- 92,101,189
@@ -83,7 +83,7 @@
 				LIKELY INTERNATIONALIZABLE STRINGS
 					Click to sort in ascending order --- 352
 					Click to sort in descending order --- 357
-		......................................................................................
+		..........................................................................................
 
 		A few things to notice about the format...
 

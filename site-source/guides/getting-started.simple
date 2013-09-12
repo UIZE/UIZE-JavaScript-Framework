@@ -203,23 +203,6 @@ Create Your UIZE Project
 
 				You'll either have to copy those over, or otherwise massage your copies of the example pages so that they use your own CSS and assets. Also, some example pages use JavaScript code that is specific to the UIZE Web site, such as compiled JavaScript templates used for generating HTML for widgets, or JavaScript files that define test data to drive some of the examples.
 
-		Switch to Using Source JavaScript
-			Regardless of whether you hack the example pages inside the =UIZE-JavaScript-Framework/examples= folder or create your own copies of them in your Web site project, it will be useful to switch the pages over to using the source versions of the JavaScript files.
-
-			Fortunately, this is very easy to do. All the source JavaScript files are located in the =~source= subfolder inside the JavaScript folder. Simply locate the =script= tag in the HTML that sources in the =Uize.js= file and add in the subfolder =~source=, right after the name of the folder that contains the JavaScript files.
-
-			INSTEAD OF...
-			...........................................................
-			<script type="text/javascript src="../js/Uize.js"></script>
-			...........................................................
-
-			USE...
-			...................................................................
-			<script type="text/javascript src="../js/~source/Uize.js"></script>
-			...................................................................
-
-			The folder from which you load the =Uize.js= file will be the folder from which all other dynamically loaded modules will be loaded. You'll want to do most of your development and troubleshooting using the source files, and then switch over to using scrunched JavaScript when your UIZE'd pages are pushed live.
-
 ### Setting Up the Build Scripts
 	The UIZE JavaScript Framework provides a number of convenient build scripts that will ease tasks like scrunching (aka compressing or minifying) JavaScript files.
 
