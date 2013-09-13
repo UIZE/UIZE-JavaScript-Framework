@@ -121,10 +121,7 @@ Uize.module ({
 							}
 						});
 
-						_this.wire (
-							'Changed.valueNo',
-							function () { _this._updateUiTabBodies() }
-						);
+						_this.wire ('Changed.valueNo',function () { _this._updateUiTabBodies() });
 					}
 				),
 				_classPrototype = _class.prototype

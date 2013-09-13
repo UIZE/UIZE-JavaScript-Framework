@@ -219,9 +219,9 @@ Uize.module ({
 						/*** Initialization ***/
 							_this.fade.wire (
 								'Changed.value',
-								function () {
+								function (_event) {
 									if (_this.isWired) {
-										var _value = +_this.fade;
+										var _value = _event.newValue;
 										if (_this._previousItem && _this._crossFade) {
 											var
 												_crossFadeSize = _this._crossFadeSize,

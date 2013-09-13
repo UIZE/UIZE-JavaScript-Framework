@@ -145,7 +145,7 @@ Uize.module ({
 									*NOTE:* For optimization, the =resizer= child widget is only created if a dialog is made resizable by setting its =resizable= state property to =true=. Therefore, be careful to first set a dialog to be resizable before attempting to access the =resizer= child widget for modifying its state.
 						*/
 					).wire ({
-						'Changed.inDrag':function () {_this.set ({inDrag:_resizer.get ('inDrag')})},
+						'Changed.inDrag':function (_event) {_this.set ({inDrag:_event.newValue})},
 						'Drag Start':_this,
 						'Drag Done':function (_event) {
 							_this.set ({

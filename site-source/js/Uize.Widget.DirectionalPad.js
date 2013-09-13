@@ -119,10 +119,7 @@ Uize.module ({
 				;
 
 				if (!_this.isWired) {
-					_this.wire (
-						'Changed.enabled',
-						function () { _this._updateUiEnabled () }
-					);
+					_this.wire ('Changed.enabled',function () { _this._updateUiEnabled () });
 
 					_superclass.doMy (_this,'wireUi');
 				}

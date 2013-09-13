@@ -118,9 +118,9 @@ Uize.module({
 								_this.set('value', _preFocusQuery);
 								_this._preventRequests = _false;
 							},
-							'Changed.focused': function () {
+							'Changed.focused': function (_event) {
 								var _suggestions = _this.children.suggestions;
-								if (_this.get('focused'))
+								if (_event.newValue)
 									_preFocusQuery = _this + _emptyString;
 								_this._updateSuggestionsPalette();
 							},
@@ -129,7 +129,7 @@ Uize.module({
 							// widget and by the user. When the widget changes the value of the input (eg to show
 							// the currently selected/hovered suggestion), we don't want new suggestions to be
 							// requested.
-							'Changed.tentativeValue': function (_event) {
+							'Changed.tentativeValue': function () {
 								if (!_this._preventRequests && _this.get('focused')) {
 									clearTimeout(_this._typeSuggestTimeout);
 									if (_this._ignoreNextRequestDelay) {
@@ -237,8 +237,8 @@ Uize.module({
 				_suggestions.wire({
 					// When a suggestion is highlighted (eg hovered over), it is shown in the textbox.
 					// When no suggestions are highlighted, the original query will be shown.
-					'Changed.tentativeValue': function () {
-						_this._showOnHover && _this._suggestionHoverHandler(_suggestions.get('tentativeValue'))
+					'Changed.tentativeValue': function (_event) {
+						_this._showOnHover && _this._suggestionHoverHandler(_event.newValue)
 					},
 
 					// When a suggestion is clicked, the value of this widget is set to the suggestion

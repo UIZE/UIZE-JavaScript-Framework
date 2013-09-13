@@ -41,18 +41,18 @@ Uize.module ({
 
 							/*** keep options widget synchronized to slideshow ***/
 								_this.wire ({
-									'Changed.slideNo':function () {_this.children.options.set ({value:_this.get ('slideNo')})},
+									'Changed.slideNo':function (_event) {_this.children.options.set ({value:_event.newValue})},
 									'Changed.totalSlides':function () {_this._updateOptionsValueAndValues ()}
 								});
 
 							/*** keep slideshow synchronized to options widget ***/
 								_options.wire (
 									'Changed.value',
-									function () {
-										var _tentativeValue = _options.get('value');
-										if (_tentativeValue != _this.get ('slideNo')) {
+									function (_event) {
+										var _newSlideNo = _event.newValue;
+										if (_newSlideNo != _this.get ('slideNo')) {
 											_this.stopThenResume ();
-											_this.set ({slideNo:_tentativeValue});
+											_this.set ({slideNo:_newSlideNo});
 										}
 									}
 								);

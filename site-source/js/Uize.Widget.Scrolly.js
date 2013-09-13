@@ -142,9 +142,7 @@ Uize.module ({
 						/*** Initialization ***/
 							_this.fade.wire (
 								'Changed.value',
-								function () {
-									_this.isWired && _this.setNodeProperties ('view',_this.fade.valueOf ());
-								}
+								function (_event) {_this.isWired && _this.setNodeProperties ('view',_event.newValue)}
 							);
 					},
 					function () {

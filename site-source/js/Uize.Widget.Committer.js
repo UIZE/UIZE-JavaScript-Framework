@@ -192,10 +192,8 @@ Uize.module ({
 				// any events that get wired here need to be unwired in _classPrototype.removeWatchedProperties.
 				_watchedPropertyInstance.wire (
 					'Changed.' + _watchedPropertyName,
-					function () {
-						_this._uncommittedValues [_watchedPropertyAlias] =
-							_watchedPropertyInstance.get (_watchedPropertyName)
-						;
+					function (_event) {
+						_this._uncommittedValues [_watchedPropertyAlias] = _event.newValue;
 						_this.fire ('Changed.uncommittedValues');
 						_this._updateSummaryStateProperties ();
 

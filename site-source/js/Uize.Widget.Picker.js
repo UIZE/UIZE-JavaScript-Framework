@@ -87,7 +87,7 @@ Uize.module ({
 						/*** watch focus by user ***/
 							_this.wire (
 								'Changed.focused',
-								function () { _this.get('focused') && !_this._allowManualEntry && _pickValue () }
+								function (_event) { _event.newValue && !_this._allowManualEntry && _pickValue () }
 							);
 
 						/*** watch click on input node ***/

@@ -204,7 +204,7 @@ Uize.module ({
 									_target = _this [_pTarget],
 									_context = _target.context,
 									_handler = _target.handler,
-									_value = _this.valueOf ()
+									_value = _event.newValue
 								;
 								(typeof _handler == 'string' ? _context [_handler] : _handler)
 									[Uize.isArray (_value) ? 'apply' : 'call'] (_context,_value)

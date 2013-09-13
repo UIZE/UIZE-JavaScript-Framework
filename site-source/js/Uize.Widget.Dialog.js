@@ -74,7 +74,7 @@ Uize.module ({
 								*/
 							).wire (
 								'Changed.value',
-								function () {_this.set ({_currentShieldOpacity:+_this._shieldFade})}
+								function (_event) {_this.set ({_currentShieldOpacity:_event.newValue})}
 							);
 							_this.wire ({
 								'Drag Start':
@@ -128,7 +128,7 @@ Uize.module ({
 											_dragStartRootNodePos [0] = parseInt (_Uize_Node.getStyle (_rootNode,'left'));
 											_dragStartRootNodePos [1] = parseInt (_Uize_Node.getStyle (_rootNode,'top'));
 										},
-									'Changed.inDrag':function () {_this.set ({_inDrag:_this._drag.get ('inDrag')})},
+									'Changed.inDrag':function (_event) {_this.set ({_inDrag:_event.newValue})},
 									'Drag Start':_this,
 										/*?
 											Instance Events

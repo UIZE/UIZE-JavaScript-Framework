@@ -85,17 +85,16 @@ Uize.module ({
 									var _childElement = _event.element;
 
 									_childElement.wire({
-										'Changed.isDirtyInherited':function() {
-											_childElement.get('isDirtyInherited')
-												&& _this.set({_isDirty:_true})
+										'Changed.isDirtyInherited':function(_event) {
+											_event.newValue && _this.set({_isDirty:_true})
 										},
 										Ok:function() { _this._submit() },
-										'Changed.focused':function() {
+										'Changed.focused':function(_event) {
 											// NOTE: so unfortunately the browsers support an autofill feature that
 											// will prepopulate fields, but it doesn't fire onChange events for
 											// each field.  So when we blur a text field, we ensure that all of the
 											// programmatic values for fields match the DOM values
-											!_childElement.get('focused')
+											!_event.newValue
 												&& _this._foreachElement(
 													function(_element, _elementName, _elementIsForm) {
 														if (!_elementIsForm) {

@@ -82,10 +82,7 @@ Uize.module ({
 
 					/*** wire up links ***/
 						_this.fade.wire ({
-							'Changed.value':
-								function () {
-									_Uize_Node.setStyle(_shell,{height:_this.fade});
-								},
+							'Changed.value':function (_event) {_Uize_Node.setStyle(_shell,{height:_event.newValue})},
 							Done:
 								function () {
 									if( _currentShownDiv == _short ) {

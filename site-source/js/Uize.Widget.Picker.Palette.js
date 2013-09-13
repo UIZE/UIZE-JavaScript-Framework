@@ -44,8 +44,8 @@ Uize.module ({
 
 						_this.wire(
 							'Changed.valueDetails',
-							function() {
-								_this.set({_tentativeValueDetails:_this.get('valueDetails')});
+							function(_event) {
+								_this.set({_tentativeValueDetails:_event.newValue});
 								_this._updateUiSelector();
 							}
 						);

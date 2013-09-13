@@ -83,8 +83,8 @@ Uize.module ({
 										// Changed.value will be fired prior to Changed.valueDetails, so break flow so that the valueDetails can be synced before the 'Submission Complete' event is fired
 										&& setTimeout(
 											function() {
-										_fireSubmissionComplete (_this._keepOpen);
-										_this._keepOpen || _this.set ({shown:_false});
+												_fireSubmissionComplete (_this._keepOpen);
+												_this._keepOpen || _this.set ({shown:_false});
 											},
 											0
 										)
@@ -100,7 +100,7 @@ Uize.module ({
 						/*** add the keepOpen button ***/
 							_this.addChild ('keepOpen',Uize.Widget.Button.Checkbox).wire (
 								'Changed.selected',
-								function (_event) {_this.set ({_keepOpen:_event.source.get ('selected')})}
+								function (_event) {_this.set ({_keepOpen:_event.newValue})}
 								/*?
 									Child Widget
 										keepOpen Child Widget

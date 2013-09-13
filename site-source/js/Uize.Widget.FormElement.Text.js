@@ -45,10 +45,10 @@ Uize.module ({
 
 						_this.wire(
 							'Changed.focused',
-							function() {
+							function(_event) {
 								if (_this.isWired) {
 									var
-										_focused = _this.get('focused'),
+										_focused = _event.newValue,
 										_placeholder = _this._placeholder
 									;
 

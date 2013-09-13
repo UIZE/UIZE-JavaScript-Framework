@@ -55,7 +55,7 @@ Uize.module ({
 							});
 							_this.fade.wire ({
 								'Changed.value':
-									function () {_this.setNodeOpacity ('palette',_this.fade)},
+									function (_event) {_this.setNodeOpacity ('palette',_event.newValue)},
 								Done:
 									function () {_this._showPalette (_this._shown)}
 							});

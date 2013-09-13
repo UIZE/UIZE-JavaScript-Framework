@@ -447,8 +447,8 @@ Uize.module ({
 
 				_itemWidget.wire ({
 					'Changed.selected':
-						function () {
-							if (_itemWidget.get ('selected')) {
+						function (_event) {
+							if (_event.newValue) {
 								_this._selectionMode == 'single' &&
 									_this.selectAll (_false,_this._lastSelectedItemWidget = _itemWidget)
 									/* NOTE:

@@ -221,10 +221,7 @@ Uize.module ({
 									})
 								;
 								_showFade.wire ({
-									'Changed.value':
-										function () {
-											_Uize_Node.setStyle (_zoomedImageNode,_showFade.valueOf ());
-										},
+									'Changed.value':function (_event) {_Uize_Node.setStyle (_zoomedImageNode,_event.newValue)},
 									Done:
 										function () {
 											_Uize_Node.setOpacity (_shield,0);
@@ -233,20 +230,11 @@ Uize.module ({
 										}
 								});
 								_hideFade.wire ({
-									'Changed.value':
-										function () {
-											_Uize_Node.setOpacity (_zoomedImageNode,_hideFade);
-										},
-									Done:
-										function () {
-											_Uize_Node.display (_zoomedImageNode,_false);
-										}
+									'Changed.value':function (_event) {_Uize_Node.setOpacity (_zoomedImageNode,_event.newValue)},
+									Done:function () {_Uize_Node.display (_zoomedImageNode,_false)}
 								});
 								_shieldFade.wire ({
-									'Changed.value':
-										function () {
-											_Uize_Node.setOpacity (_shield,_shieldFade);
-										}
+									'Changed.value':function (_event) {_Uize_Node.setOpacity (_shield,_event.newValue)}
 								});
 							}
 						}

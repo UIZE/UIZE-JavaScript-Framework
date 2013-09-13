@@ -48,8 +48,8 @@ Uize.module ({
 						var _this = this;
 						_this.wire (
 							'Changed.over',
-							function () {
-								if (!_this.get ('over')) {
+							function (_event) {
+								if (!_event.newValue) {
 									_this.isWired && _this.unwireNode (document.documentElement,'mousemove');
 									_this.set ({inUse:_false});
 								}
@@ -429,7 +429,7 @@ Uize.module ({
 													_this._fade ||
 														(_this._fade = Uize.Fade ()).wire (
 															'Changed.value',
-															function () {_this.set ({_displayedZoomPower:+_this._fade})}
+															function (_event) {_this.set ({_displayedZoomPower:_event.newValue})}
 														)
 													;
 

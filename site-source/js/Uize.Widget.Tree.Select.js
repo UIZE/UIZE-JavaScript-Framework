@@ -50,7 +50,7 @@ Uize.module ({
 						/*** handle change in items ***/
 							_this.wire (
 								'Changed.items',
-								function () {
+								function (_event) {
 									function _burrowDeeper (_item,_currentDepth) {
 										_this._totalLevels = Math.max (_this._totalLevels,_currentDepth);
 										if (_class.itemHasChildren (_item)) {
@@ -62,7 +62,7 @@ Uize.module ({
 											;
 										}
 									}
-									var _rootItem = {items:_this.get ('items')};
+									var _rootItem = {items:_event.newValue};
 									_this._levels = [[_rootItem]];
 									_this._totalLevels = 0;
 									_burrowDeeper (_rootItem,0);
