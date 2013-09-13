@@ -1803,7 +1803,10 @@ Uize.module ({
 											[_propertyPublicName] = _propertyValue
 									);
 									_hasChangedHandlers && _hasChangedHandlers [_propertyPublicName] &&
-										(_changedEventsToFire || (_changedEventsToFire = [])).push (_propertyPublicName)
+										(_changedEventsToFire || (_changedEventsToFire = [])).push (
+											_propertyPublicName,
+											_propertyValue
+										)
 									;
 
 								/*** build up list of onChange handlers to execute ***/
@@ -1844,10 +1847,13 @@ Uize.module ({
 						;
 						if (_changedEventsToFire) {
 							for (
-								var _changedEventNo = -1, _changedEventsToFireLength = _changedEventsToFire.length;
-								++_changedEventNo < _changedEventsToFireLength;
+								var _changedEventNo = -1, _totalChangedEventsToFire = _changedEventsToFire.length / 2;
+								++_changedEventNo < _totalChangedEventsToFire;
 							)
-								_this.fire ('Changed.' + _changedEventsToFire [_changedEventNo])
+								_this.fire ({
+									name:'Changed.' + _changedEventsToFire [_changedEventNo * 2],
+									newValue:_changedEventsToFire [_changedEventNo * 2 + 1]
+								})
 							;
 							/*?
 								Instance Events

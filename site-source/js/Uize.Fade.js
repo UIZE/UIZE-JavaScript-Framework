@@ -88,7 +88,9 @@ Uize.module ({
 					)
 				;
 				if (_value != _valueUnchanged)
-					_value != _this._value ? _this.set ({_value:_value}) : _this.fire ('Changed.value')
+					_value != _this._value
+						? _this.set ({_value:_value})
+						: _this.fire ({name:'Changed.value',newValue:_value})
 				;
 			};
 

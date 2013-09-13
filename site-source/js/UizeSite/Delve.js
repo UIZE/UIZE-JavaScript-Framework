@@ -1604,11 +1604,10 @@ Uize.module ({
 					});
 
 				/*** add object entry widget ***/
-					var _objectEntry = m.addChild ('objectEntry',Uize.Widget.TextInput);
-					_objectEntry.wire (
+					m.addChild ('objectEntry',Uize.Widget.TextInput).wire (
 						'Changed.value',
-						function () {
-							m.set ({_objectInspectedPath:_objectEntry + ''});
+						function (_event) {
+							m.set ({_objectInspectedPath:_event.newValue});
 							_updateDocumentationUrl (m);
 						}
 					);

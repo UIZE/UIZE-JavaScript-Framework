@@ -192,7 +192,7 @@ Uize.module ({
 						'Changed.inProgress':
 							function (_event) {
 								var _this = _event.source;
-								_this.get ('inProgress')
+								_event.newValue
 									? _fadePool.push (_this)
 									: _fadePool.splice (Uize.indexIn (_fadePool,_this),1)
 								;
