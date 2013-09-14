@@ -97,35 +97,35 @@ Uize.module ({
 					},
 					onChange:function () {
 						var
-							_this = this,
-							_lastWiring = _this._lastWiring,
-							_instance = _this._instance
+							m = this,
+							_lastWiring = m._lastWiring,
+							_instance = m._instance
 						;
 
 						/*** unwire event handlers of previously watched instance ***/
 							_lastWiring && _lastWiring._instance.unwire (_lastWiring._eventsToHandlersMap);
 
 						/*** clear log ***/
-							_this.clear ();
-							_this.log (_this.localize (_instance ? 'startedWatching' : 'nothingToWatch'));
+							m.clear ();
+							m.log (m.localize (_instance ? 'startedWatching' : 'nothingToWatch'));
 
 						/*** wire up handlers to watch all events of instance ***/
-							_this._lastWiring = _instance
+							m._lastWiring = _instance
 								? {
 									_instance:_instance,
 									_eventsToHandlersMap:{
 										'*':
 											function (_event) {
 												if (!Uize.String.startsWith (_event.name,'Changed.')) {
-													_this.log (
-														_this.localize ('customInstanceEvent') + ': ' + Uize.Json.to (_event,'mini')
+													m.log (
+														m.localize ('customInstanceEvent') + ': ' + Uize.Json.to (_event,'mini')
 													);
 												}
 											},
 										'Changed.*':
 											function (_event) {
-												_this.log (
-													_this.localize ('propertiesChangedEvent') + ': ' +
+												m.log (
+													m.localize ('propertiesChangedEvent') + ': ' +
 													Uize.Json.to (_event.properties,'mini')
 												);
 											}
@@ -133,7 +133,7 @@ Uize.module ({
 								}
 								: _undefined
 							;
-							_instance && _instance.wire (_this._lastWiring._eventsToHandlersMap);
+							_instance && _instance.wire (m._lastWiring._eventsToHandlersMap);
 					}
 					/*?
 						State Properties

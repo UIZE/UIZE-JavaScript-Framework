@@ -218,11 +218,11 @@ Uize.module ({
 
 				childHtml:function (_properties) {
 					var
-						_this = this,
+						m = this,
 						_childName = _properties.name,
 						_widgetClass = Uize.getModuleByName (_properties.widgetClass) || _class,
 						_widgetClassName = _widgetClass.moduleName,
-						_children = _this.children
+						_children = m.children
 					;
 
 					delete _properties.name;
@@ -232,8 +232,8 @@ Uize.module ({
 
 					/*** if child name not specified, generate one using widget class module name ***/
 						if (!_childName) {
-							_this._generatedChildNames || (_this._generatedChildNames = 0);
-							_childName = 'generatedChildName' + _this._generatedChildNames++;
+							m._generatedChildNames || (m._generatedChildNames = 0);
+							_childName = 'generatedChildName' + m._generatedChildNames++;
 						}
 
 					var
@@ -243,7 +243,7 @@ Uize.module ({
 					;
 					_child
 						? _child.set (_properties)
-						: (_child = _this.addChild (_childName,_widgetClass,_properties))
+						: (_child = m.addChild (_childName,_widgetClass,_properties))
 					;
 					_html = _child.get ('built')
 						? _child.getHtml ()
@@ -296,15 +296,15 @@ Uize.module ({
 
 				rootNodeCssClasses:function () {
 					var
-						_this = this,
-						_extraClasses = _this._extraClasses,
-						_cssBindings = _this.Class._cssBindings,
-						_cssClasses = [_this.cssClass ()],
+						m = this,
+						_extraClasses = m._extraClasses,
+						_cssBindings = m.Class._cssBindings,
+						_cssClasses = [m.cssClass ()],
 						_cssClassSuffix
 					;
 					for (var _property in _cssBindings)
-						if (_cssClassSuffix = _cssBindings [_property] (_this.get (_property)))
-							_cssClasses.push (_this.cssClass (_cssClassSuffix))
+						if (_cssClassSuffix = _cssBindings [_property] (m.get (_property)))
+							_cssClasses.push (m.cssClass (_cssClassSuffix))
 					;
 					return _cssClasses.join (' ') + (_extraClasses && ' ' + _extraClasses);
 					/*?
@@ -349,20 +349,20 @@ Uize.module ({
 				},
 
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
-						_superclass.doMy (_this,'wireUi');
+					var m = this;
+					if (!m.isWired) {
+						_superclass.doMy (m,'wireUi');
 
 						/*** wire up handlers for state properties that have CSS bindings ***/
 							var
-								_cssBindings = _this.Class._cssBindings,
-								_updateRootNodeClasses = function () {_this._updateRootNodeClasses ()},
+								_cssBindings = m.Class._cssBindings,
+								_updateRootNodeClasses = function () {m._updateRootNodeClasses ()},
 								_wiringsForCssBindings = {}
 							;
 							for (var _property in _cssBindings)
 								_wiringsForCssBindings ['Changed.' + _property] = _updateRootNodeClasses
 							;
-							_this.wire (_wiringsForCssBindings);
+							m.wire (_wiringsForCssBindings);
 
 						/*** wire up handlers for state properties that have HTML bindings ***/
 							var
@@ -372,22 +372,22 @@ Uize.module ({
 										_updatersLength = _updaters.length
 									;
 									return function () {
-										var _propertyValue = _this.get (_property);
+										var _propertyValue = m.get (_property);
 										for (var _updaterNo = -1; ++_updaterNo < _updatersLength;)
-											_updaters [_updaterNo].call (_this,_propertyValue)
+											_updaters [_updaterNo].call (m,_propertyValue)
 										;
 									};
 								},
-								_htmlBindings = _this.Class._htmlBindings,
+								_htmlBindings = m.Class._htmlBindings,
 								_wiringsForHtmlBindings = {}
 							;
 							for (var _property in _htmlBindings)
 								_wiringsForHtmlBindings ['Changed.' + _property] = _getHtmlUpdaterForProperty (_property)
 							;
-							_this.wire (_wiringsForHtmlBindings);
+							m.wire (_wiringsForHtmlBindings);
 
 						/*** update UI ***/
-							_this._updateRootNodeClasses ();
+							m._updateRootNodeClasses ();
 							for (var _eventName in _wiringsForHtmlBindings)
 								_wiringsForHtmlBindings [_eventName] ()
 							;
@@ -402,13 +402,13 @@ Uize.module ({
 			staticMethods:{
 				_needCss:function () {
 					var
-						_this = this,
-						_moduleName = _this.moduleName
+						m = this,
+						_moduleName = m.moduleName
 					;
 					if (_cssAddedLookup [_moduleName] != _trueFlag) {
 						_cssAddedLookup [_moduleName] = _trueFlag;
-						_this.superclass._needCss && _this.superclass._needCss ();
-						_this.cssModule && _this.cssModule.add ();
+						m.superclass._needCss && m.superclass._needCss ();
+						m.cssModule && m.cssModule.add ();
 					}
 				},
 
@@ -554,9 +554,9 @@ Uize.module ({
 				html:{
 					process:function () {
 						var
-							_this = this,
-							_children = _this.children,
-							_htmlChunks = ['<div id="' + _this.nodeId () + '">'],
+							m = this,
+							_children = m.children,
+							_htmlChunks = ['<div id="' + m.nodeId () + '">'],
 							_htmlChunksLength = 1
 						;
 						for (var _childName in _children)

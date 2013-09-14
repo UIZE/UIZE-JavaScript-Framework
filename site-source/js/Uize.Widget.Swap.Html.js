@@ -38,9 +38,9 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 						/*** Private Instance Properties ***/
-							_this._currentItemNo = 0;
+							m._currentItemNo = 0;
 					}
 				),
 				_classPrototype = _class.prototype
@@ -55,17 +55,17 @@ Uize.module ({
 				_content:{
 					name:'content|value',
 					onChange:function () {
-						var _this = this;
-						if (_this.isWired) {
+						var m = this;
+						if (m.isWired) {
 							var
-								_currentItem = _this.getNode ('item' + _this._currentItemNo),
-								_nextItemNo = 1 - _this._currentItemNo,
-								_nextItem = _this.getNode ('item' + _nextItemNo)
+								_currentItem = m.getNode ('item' + m._currentItemNo),
+								_nextItemNo = 1 - m._currentItemNo,
+								_nextItem = m.getNode ('item' + _nextItemNo)
 							;
-							_this.prepareForNextItem (_currentItem,_nextItem);
-							_nextItem.innerHTML = _this._content;
-							_this._currentItemNo = _nextItemNo;
-							_this.setCurrentItem (_nextItem);
+							m.prepareForNextItem (_currentItem,_nextItem);
+							_nextItem.innerHTML = m._content;
+							m._currentItemNo = _nextItemNo;
+							m.setCurrentItem (_nextItem);
 						}
 					},
 					value:''

@@ -77,8 +77,8 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			function _updateCoupling () {
 				var
-					_this = this,
-					_wirings = _this._wirings
+					m = this,
+					_wirings = m._wirings
 				;
 
 				/*** unwire wirings from any previous coupling ***/
@@ -86,13 +86,13 @@ Uize.module ({
 						for (var _wiringNo = -1, _wiringsLength = _wirings.length, _wiring; ++_wiringNo < _wiringsLength;)
 							(_wiring = _wirings [_wiringNo])._instance.unwire (_wiring._eventName,_wiring._handler)
 						;
-						_wirings = _this._wirings = null;
+						_wirings = m._wirings = null;
 					}
 
-				if (_this._coupled) {
+				if (m._coupled) {
 					var
-						_instances = _this._instances,
-						_properties = _this._properties
+						_instances = m._instances,
+						_properties = m._properties
 					;
 					if (_instances && _properties) {
 						/*** synchronize all other instances to first instance ***/
@@ -133,7 +133,7 @@ Uize.module ({
 							}
 
 						/*** wire events for coupling instances together ***/
-							_wirings = _this._wirings = [];
+							_wirings = m._wirings = [];
 							var
 								_eventName = 'Changed.' + (_propertiesLength > 1 ? '*' : _properties [0]),
 								_wireCouplingHandler = function (_controllingInstance,_controlledInstance) {

@@ -49,18 +49,18 @@ Uize.module ({
 				},
 
 				wireUi:function () {
-					var _this = this;
-					if (!_this.isWired) {
+					var m = this;
+					if (!m.isWired) {
 						var
-							_tooltip = _this._tooltip,
+							_tooltip = m._tooltip,
 							_tooltipIsPlainObject = Uize.isPlainObject (_tooltip),
 							_tooltipNode = Uize.Node.getById (_tooltipIsPlainObject ? _tooltip.node : _tooltip)
 						;
-						_this.traverseTree ({
+						m.traverseTree ({
 							itemHandler:
 								function (_item,_itemSpecifier) {
 									_tooltip &&
-										_this.wireNode (
+										m.wireNode (
 											_itemSpecifier + 'TitleLink',
 											{
 												mouseover:
@@ -70,9 +70,9 @@ Uize.module ({
 															if (_tooltipIsPlainObject) {
 																_tooltipHtml = _tooltip.show (_item);
 															} else {
-																var _tooltipTemplate = _this._tooltipTemplate;
+																var _tooltipTemplate = m._tooltipTemplate;
 																if (_tooltipTemplate) {
-																	_tooltipHtml = _tooltipTemplate.call (_this,_item);
+																	_tooltipHtml = _tooltipTemplate.call (m,_item);
 																} else {
 																	var _itemDescription = _item.description;
 																	if (_itemDescription)
@@ -83,13 +83,13 @@ Uize.module ({
 															}
 															if (_tooltipHtml) {
 																_Uize_Tooltip.showTooltip (_tooltipNode,_true);
-																_this.fire ({name:'After Show Tooltip',item:_item});
+																m.fire ({name:'After Show Tooltip',item:_item});
 															}
 														}
 													},
 												mouseout:function () {
 													_Uize_Tooltip.showTooltip (_tooltipNode,_false);
-													_this.fire ({name:'After Hide Tooltip',item:_item});
+													m.fire ({name:'After Hide Tooltip',item:_item});
 												}
 											}
 										)
@@ -97,25 +97,25 @@ Uize.module ({
 								},
 							beforeSubItemsHandler:
 								function (_item,_itemSpecifier) {
-									_this.wireNode (
+									m.wireNode (
 										[
 											_itemSpecifier + 'TogglerLink',
-											!_item.link || _this._linksAlwaysToggleExpanded
+											!_item.link || m._linksAlwaysToggleExpanded
 												? (_itemSpecifier + 'TitleLink')
 												: undefined
 										],
 										{
 											click:function (_event) {
 												if (_event.shiftKey || _event.ctrlKey || _event.metaKey) {
-													_this.setExpandedDepth (
-														_this.getItemFromSpecifier (_itemSpecifier).expanded !== _false
+													m.setExpandedDepth (
+														m.getItemFromSpecifier (_itemSpecifier).expanded !== _false
 															? 0
 															: (_event.shiftKey ? 1 : 1000),
 														_itemSpecifier
 													);
 													_event.cancelBubble = _true;
 												} else {
-													_this.setItemExpanded (_itemSpecifier);
+													m.setItemExpanded (_itemSpecifier);
 												}
 											},
 											focus:function () {this.blur ()}
@@ -124,7 +124,7 @@ Uize.module ({
 								}
 						});
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 					}
 				}
 			},

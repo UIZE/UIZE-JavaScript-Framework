@@ -349,16 +349,16 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						function _updateOperandFromEntry () {
-							var _value = _this._isEntryValid () ? +_entry : _undefined;
-							_this.set (_this._activeOperand,_value);
-							_this.set ({_value:_value});
+							var _value = m._isEntryValid () ? +_entry : _undefined;
+							m.set (m._activeOperand,_value);
+							m.set ({_value:_value});
 						}
 
 						/*** add entry form element ***/
-							var _entry = _this.addChild ('entry',Uize.Widget.TextInput,{value:_this._value});
+							var _entry = m.addChild ('entry',Uize.Widget.TextInput,{value:m._value});
 							/*?
 								Child Widgets
 									entry
@@ -367,9 +367,9 @@ Uize.module ({
 										When the calculator is in the `error state`, the =entry= child widget will be set to the value ='ERROR'=. For more information on using the =entry= text input field to drive the calculator, see the section `Using the Regular Keyboard`.
 							*/
 							function _releaseLastButtonClicked () {
-								if (_this._lastButtonClicked) {
-									_this._lastButtonClicked.set ({state:''});
-									_this._lastButtonClicked = _undefined;
+								if (m._lastButtonClicked) {
+									m._lastButtonClicked.set ({state:''});
+									m._lastButtonClicked = _undefined;
 								}
 							}
 							function _handleKeyEvent (_event) {
@@ -386,9 +386,9 @@ Uize.module ({
 								if (_keyChar) {
 									var _buttonId = _entryCharToButtonIdMap [_keyChar];
 									if (_buttonId) {
-										var _button = _this.children [_buttonId];
+										var _button = m.children [_buttonId];
 										if (_button.get ('enabledInherited')) {
-											(_this._lastButtonClicked = _button).set ({state:'down'});
+											(m._lastButtonClicked = _button).set ({state:'down'});
 											if (!_isKeyEscape && (!_digitButtonsMap [_buttonId] || _mustClearEntry ())) {
 												/* NOTE:
 													There's a weird issue with FF, where handling and aborting ESC here doesn't result in the entry widget's input field being reset, but we do want the button click simulation to happen as early as possible, otherwise it's not even noticeable.
@@ -407,7 +407,7 @@ Uize.module ({
 							_entry.wire ({
 								'Changed.value':function () {
 									_updateOperandFromEntry ();
-									_this._updateUiOperatorButtonsState ();
+									m._updateUiOperatorButtonsState ();
 								},
 								'Key Press':_handleKeyEvent,
 								'Key Up':_releaseLastButtonClicked
@@ -420,7 +420,7 @@ Uize.module ({
 						/*** add child buttons ***/
 							function _addChildButton (_buttonId,_clickHandler) {
 								return Uize.Widget.Button.addChildButton.call (
-									_this,
+									m,
 									_buttonId,
 									function (_event) {
 										_clickHandler (_event);
@@ -428,14 +428,14 @@ Uize.module ({
 									}
 								);
 							}
-							function _clearOnNextDigit () {_this.set ({_clearOnNextDigit:_true})}
+							function _clearOnNextDigit () {m.set ({_clearOnNextDigit:_true})}
 
 							/*** add number entry buttons ***/
 								function _mustClearEntry () {
 									var _entryValue = _entry + '';
 									return (
-										_this._clearOnNextDigit ||
-										!_this._isEntryValid () ||
+										m._clearOnNextDigit ||
+										!m._isEntryValid () ||
 										_entryValue == '0' ||
 										_entryValue == '-0'
 									);
@@ -446,10 +446,10 @@ Uize.module ({
 										_entryValue = _entry + '',
 										_leadingChars = _mustClearEntry () ? (_entryValue == '-0' ? '-' : '') : _entryValue
 									;
-									_this._activeOperand == 'operandA' && _this._clearOnNextDigit &&
-										_this.set ({operator:_undefined})
+									m._activeOperand == 'operandA' && m._clearOnNextDigit &&
+										m.set ({operator:_undefined})
 									;
-									_this.set ({_clearOnNextDigit:_false});
+									m.set ({_clearOnNextDigit:_false});
 									_setEntryValue ((_leadingChars || (_digitChar == '.' ? '0' : '')) + _digitChar);
 								}
 								for (var _digitButtonId in _digitButtonsMap)
@@ -551,11 +551,11 @@ Uize.module ({
 									function _calculateResult () {
 										var
 											_result,
-											_operandA = _this._operandA,
-											_operandB = _this._operandB
+											_operandA = m._operandA,
+											_operandB = m._operandB
 										;
-										_operandB == _undefined && _this.set ({_operandB:_operandB = _operandA});
-										switch (_this._operator) {
+										_operandB == _undefined && m.set ({_operandB:_operandB = _operandA});
+										switch (m._operator) {
 											case 'divide':
 												_result = _operandA / _operandB;
 												break;
@@ -569,7 +569,7 @@ Uize.module ({
 												_result = _operandA + _operandB;
 												break;
 										}
-										_this.set ({
+										m.set ({
 											_activeOperand:'operandA',
 											_operandA:_result
 										});
@@ -577,7 +577,7 @@ Uize.module ({
 										_clearOnNextDigit ();
 									}
 									function _usePendingCalculation () {
-										!_this._clearOnNextDigit && _this._operator && _calculateResult ();
+										!m._clearOnNextDigit && m._operator && _calculateResult ();
 									}
 									var _equals = _addChildButton (
 										'equals',
@@ -604,8 +604,8 @@ Uize.module ({
 
 								/*** memory operators ***/
 									function _memoryPlus (_sign) {
-										_this._activeOperand == 'operandB' && _this._operator && _calculateResult ();
-										_this.set ({_memory:(_this._memory || 0) + _entry * _sign});
+										m._activeOperand == 'operandB' && m._operator && _calculateResult ();
+										m.set ({_memory:(m._memory || 0) + _entry * _sign});
 										_clearOnNextDigit ();
 									}
 									_addChildButton (
@@ -651,7 +651,7 @@ Uize.module ({
 									_addChildButton (
 										'memoryRecall',
 										function () {
-											_setEntryValue (_this._memory);
+											_setEntryValue (m._memory);
 											_clearOnNextDigit ();
 										}
 										/*?
@@ -672,7 +672,7 @@ Uize.module ({
 									_addChildButton (
 										'memoryClear',
 										function () {
-											_this.set ({_memory:_undefined});
+											m.set ({_memory:_undefined});
 											_clearOnNextDigit ();
 										}
 										/*?
@@ -694,11 +694,11 @@ Uize.module ({
 								/*** binary operators ***/
 									function _startEnteringNegativeNumber () {
 										if (
-											_this._operator
-												? _this._clearOnNextDigit && _this._operandB == _undefined
-												: !_this._operandA
+											m._operator
+												? m._clearOnNextDigit && m._operandB == _undefined
+												: !m._operandA
 										) {
-											_this.set ({_clearOnNextDigit:_false});
+											m.set ({_clearOnNextDigit:_false});
 											_setEntryValue ('-0');
 											return _true;
 										}
@@ -707,8 +707,8 @@ Uize.module ({
 										var _buttonId = _event.source.get ('name');
 										if (_buttonId != 'subtract' || !_startEnteringNegativeNumber ()) {
 											_usePendingCalculation ();
-											_this.set ({_operator:_undefined}); // we want onChange to get invoked
-											_this.set ({_operator:_buttonId});
+											m.set ({_operator:_undefined}); // we want onChange to get invoked
+											m.set ({_operator:_buttonId});
 										}
 									}
 									for (var _buttonId in _binaryOperatorsMap)
@@ -806,19 +806,19 @@ Uize.module ({
 										'percent',
 										function () {
 											var
-												_operator = _this._operator,
+												_operator = m._operator,
 												_entryValue = _entry / 100
 											;
-											_operator && _this._activeOperand == 'operandA' &&
-												_this.set ({_operator:_operator = _undefined})
+											_operator && m._activeOperand == 'operandA' &&
+												m.set ({_operator:_operator = _undefined})
 											;
 											if (_operator == 'subtract' || _operator == 'add') {
 												_entryValue = _operator == 'subtract' ? 1 - _entryValue : 1 + _entryValue;
-												_setEntryValue (_this._operandA);
-												_this.set ({_operator:'multiply'});
+												_setEntryValue (m._operandA);
+												m.set ({_operator:'multiply'});
 											}
 											_setEntryValue (_entryValue);
-											_operator ? _calculateResult () : _this.set ({_operator:'multiply'});
+											_operator ? _calculateResult () : m.set ({_operator:'multiply'});
 										}
 										/*?
 											Child Widgets
@@ -854,7 +854,7 @@ Uize.module ({
 									function _clearEntry () {_setEntryValue (0)}
 									function _clear () {
 										_clearEntry ();
-										_this.set ({
+										m.set ({
 											_operandA:0,
 											_operandB:_undefined,
 											_operator:_undefined
@@ -899,10 +899,10 @@ Uize.module ({
 									/*** clear, initiated by escape key from entry widget ***/
 										_entry.wire ('Cancel',_clear);
 
-						_this._childrenAdded = _true;
+						m._childrenAdded = _true;
 
-						_this._updateUiMemoryButtonsState ();
-						_this._updateUiOperatorButtonsState ();
+						m._updateUiMemoryButtonsState ();
+						m._updateUiOperatorButtonsState ();
 					}
 				),
 				_classPrototype = _class.prototype
@@ -914,54 +914,54 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiMemoryButtonsState = function () {
-				var _this = this;
-				if (_this._childrenAdded) {
-					var _enabledProperty = _getEnabledProperty (_this._memory != _undefined);
-					_this.children.memoryRecall.set (_enabledProperty);
-					_this.children.memoryClear.set (_enabledProperty);
+				var m = this;
+				if (m._childrenAdded) {
+					var _enabledProperty = _getEnabledProperty (m._memory != _undefined);
+					m.children.memoryRecall.set (_enabledProperty);
+					m.children.memoryClear.set (_enabledProperty);
 				}
 			};
 
 			_classPrototype._updateUiPointButtonState = function () {
-				var _this = this;
-				_this._childrenAdded &&
-					_this.children.point.set (
-						_getEnabledProperty (_this._clearOnNextDigit || (_this.children.entry + '').indexOf ('.') == -1)
+				var m = this;
+				m._childrenAdded &&
+					m.children.point.set (
+						_getEnabledProperty (m._clearOnNextDigit || (m.children.entry + '').indexOf ('.') == -1)
 					)
 				;
 			};
 
 			_classPrototype._updateUiEqualsButtonState = function () {
-				var _this = this;
-				_this._childrenAdded &&
-					_this.children.equals.set (_getEnabledProperty (_this._operator && _this._isEntryValid ()))
+				var m = this;
+				m._childrenAdded &&
+					m.children.equals.set (_getEnabledProperty (m._operator && m._isEntryValid ()))
 				;
 			};
 
 			_classPrototype._updateUiOperatorButtonsState = function () {
-				var _this = this;
-				if (_this._childrenAdded) {
+				var m = this;
+				if (m._childrenAdded) {
 					var
-						_children = _this.children,
-						_enabledProperty = _getEnabledProperty (_this._isEntryValid ())
+						_children = m.children,
+						_enabledProperty = _getEnabledProperty (m._isEntryValid ())
 					;
 					for (var _buttonId in _buttonsRequiringValidEntry)
 						_children [_buttonId].set (_enabledProperty)
 					;
 				}
-				_this._updateUiPointButtonState ();
-				_this._updateUiEqualsButtonState ();
+				m._updateUiPointButtonState ();
+				m._updateUiEqualsButtonState ();
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					/* NOTE:
 						Keep the entry field focused, even when you click outside it, as long as you click on the root node of the widget, or one of the nodes on its tree.
 					*/
-					_this.wireNode ('','click',function () {_this.children.entry.focus ()});
-					_superclass.doMy (_this,'wireUi');
+					m.wireNode ('','click',function () {m.children.entry.focus ()});
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
@@ -1057,12 +1057,12 @@ Uize.module ({
 					name:'operator',
 					onChange:[
 						function () {
-							var _this = this;
-							_this.set ({
+							var m = this;
+							m.set ({
 								_operandB:_undefined,
-								_activeOperand:'operand' + (_this._operator ? 'B' : 'A')
+								_activeOperand:'operand' + (m._operator ? 'B' : 'A')
 							});
-							_this._operator && _this.set ({_clearOnNextDigit:_true});
+							m._operator && m.set ({_clearOnNextDigit:_true});
 						},
 						_classPrototype._updateUiEqualsButtonState
 					]

@@ -51,27 +51,27 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiTooltipHtml = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_data = _this._data,
-						_tooltipWidget = _this._tooltipWidget
+						_data = m._data,
+						_tooltipWidget = m._tooltipWidget
 					;
-					_data && (_tooltipWidget ? _tooltipWidget.set ({data:_data}) : _this.buildHtml (_data));
-					Uize.Tooltip.showTooltip ((_tooltipWidget || _this).getNode (),!!_data);
+					_data && (_tooltipWidget ? _tooltipWidget.set ({data:_data}) : m.buildHtml (_data));
+					Uize.Tooltip.showTooltip ((_tooltipWidget || m).getNode (),!!_data);
 				}
 			};
 
 			_classPrototype._updateWiringTooltipNodes = function () {
 				var
-					_this = this,
+					m = this,
 					_tooltipDataById = {},
 					_tooltipOldTitleById = {}
 				;
-				if (_this.isWired) {
+				if (m.isWired) {
 					/* TO DO: Must do something to unwire existing nodes and wire up new nodes. */
-					_this.wireNode (
-						_this._nodes = Uize.Node.find (_this._nodes),
+					m.wireNode (
+						m._nodes = Uize.Node.find (m._nodes),
 						{
 							mouseover:
 								function () {
@@ -81,13 +81,13 @@ Uize.module ({
 										_tooltipData = _tooltipDataById [_nodeId]
 									;
 									if (_tooltipData === _undefined) {
-										var _dataAttribute = _this._dataAttribute;
+										var _dataAttribute = m._dataAttribute;
 										if (_dataAttribute == _auto)
 											_dataAttribute = _node.title ? _title : 'alt'
 										;
 										var _tooltipDataStr = _node.getAttribute (_dataAttribute);
 										_tooltipData = _tooltipDataById [_nodeId] =
-											_tooltipDataStr ? _this._dataDecoder (_tooltipDataStr) : null
+											_tooltipDataStr ? m._dataDecoder (_tooltipDataStr) : null
 										;
 										if (_tooltipData && _dataAttribute == _title)
 											_tooltipOldTitleById [_nodeId] = _node.title
@@ -96,7 +96,7 @@ Uize.module ({
 									if (_tooltipOldTitleById [_nodeId])
 										_node.title = ''
 									;
-									_this.set ({_data:_tooltipData});
+									m.set ({_data:_tooltipData});
 								},
 							mouseout:
 								function () {
@@ -105,7 +105,7 @@ Uize.module ({
 										_nodeOldTitle = _tooltipOldTitleById [_node.id]
 									;
 									if (_nodeOldTitle) _node.title = _nodeOldTitle;
-									_this.set ({_data:null});
+									m.set ({_data:null});
 								}
 						}
 					);
@@ -118,11 +118,11 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_superclass.doMy (_this,'wireUi');
+				var m = this;
+				if (!m.isWired) {
+					_superclass.doMy (m,'wireUi');
 
-					_this._updateWiringTooltipNodes ();
+					m._updateWiringTooltipNodes ();
 				}
 			};
 

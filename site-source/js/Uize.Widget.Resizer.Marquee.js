@@ -46,14 +46,14 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** watch for state changes that would require updating displayed handles ***/
 							function _updateUiHandlesDisplayedAndPositions () {
-								_this._updateUiHandlesDisplayed ();
-								_this._updateUiHandlesPositions ();
+								m._updateUiHandlesDisplayed ();
+								m._updateUiHandlesPositions ();
 							}
-							_this.wire ({
+							m.wire ({
 								'Changed.inDrag':_updateUiHandlesDisplayedAndPositions,
 								'Changed.creatingNew':_updateUiHandlesDisplayedAndPositions,
 								'Changed.fixedX':_updateUiHandlesDisplayedAndPositions,
@@ -68,28 +68,28 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiHandlesDisplayed = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_inDrag = _this.get ('inDrag'),
-						_creatingNew = _this.get ('creatingNew'),
-						_fixedX = _this.get ('fixedX'),
-						_fixedY = _this.get ('fixedY'),
-						_activeHandleEffectivePointIdX = _this.get ('activeHandleEffectivePointIdX'),
-						_activeHandleEffectivePointIdY = _this.get ('activeHandleEffectivePointIdY'),
+						_inDrag = m.get ('inDrag'),
+						_creatingNew = m.get ('creatingNew'),
+						_fixedX = m.get ('fixedX'),
+						_fixedY = m.get ('fixedY'),
+						_activeHandleEffectivePointIdX = m.get ('activeHandleEffectivePointIdX'),
+						_activeHandleEffectivePointIdY = m.get ('activeHandleEffectivePointIdY'),
 						_pointIdsMap = _class.pointIdsMap
 					;
 					for (var _handleName in _pointIdsMap) {
 						if (_handleName != 'move') {
 							var _pointIds = _pointIdsMap [_handleName];
-							_this.displayNode (
+							m.displayNode (
 								_handleName,
 								(
 									!_creatingNew &&
 									(!_fixedX || _pointIds [0] == .5) &&
 									(!_fixedY || _pointIds [1] == .5) &&
 									(
-										!_this._hideOtherHandlesInDrag || !_inDrag ||
+										!m._hideOtherHandlesInDrag || !_inDrag ||
 										(
 											_pointIds [0] == _activeHandleEffectivePointIdX &&
 											_pointIds [1] == _activeHandleEffectivePointIdY
@@ -106,21 +106,21 @@ Uize.module ({
 				/* NOTE:
 					one might be tempted to optimize this code so that the positioning of the handles is not updated while they are not visible, so I tried this, but it actually turned out to incur greater re-rendering cost in IE -- go figure!
 				*/
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_left = _this.get ('left'),
-						_top = _this.get ('top'),
-						_widthMinus1 = _this.get ('width') - 1,
-						_heightMinus1 = _this.get ('height') - 1,
+						_left = m.get ('left'),
+						_top = m.get ('top'),
+						_widthMinus1 = m.get ('width') - 1,
+						_heightMinus1 = m.get ('height') - 1,
 						_pointIdsMap = _class.pointIdsMap,
-						_handlesAlign = _this._handlesAlign || _sacredEmptyObject
+						_handlesAlign = m._handlesAlign || _sacredEmptyObject
 					;
 					for (var _handleName in _pointIdsMap) {
 						if (_handleName != 'move') {
 							var
 								_pointIds = _pointIdsMap [_handleName],
-								_handleNode = _this.getNode (_handleName),
+								_handleNode = m.getNode (_handleName),
 								_handleDims = _Uize_Node.getDimensions (_handleNode),
 								_handleAlign = _handlesAlign [_handleName] || _centerAlign
 							;
@@ -138,53 +138,53 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					/* NOTE:
 						For some inexplicable reason, calling updateUi on the superclass here improves the responsiveness of the marquee. This maintains the order of updating that existed prior to factoring out the common Uize.Widget.Resizer code from the old and defunct Uize.Widget.Marquee class. Something about updating the handles before updating the box (performed in the superclass) does not produce a favorable effect.
 					*/
-					_superclass.doMy (_this,'updateUi');
+					_superclass.doMy (m,'updateUi');
 
-					_this._updateUiHandlesPositions ();
+					m._updateUiHandlesPositions ();
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					/*** wire up the marquee shell ***/
-						if (_this._shellLive) {
+						if (m._shellLive) {
 							var
-								_shell = _this.getNode ('shell'),
+								_shell = m.getNode ('shell'),
 								_initiateDrag = function (_event) {
-									if (_this.get ('enabledInherited')) {
+									if (m.get ('enabledInherited')) {
 										_event || (_event = event);
 										var
-											_handleName = _this.get ('aspectRatio') == null ? 'northWest' : 'southEast',
+											_handleName = m.get ('aspectRatio') == null ? 'northWest' : 'southEast',
 												/* NOTE:
 													because we have the don't-swap-sides hack for when an aspect ratio is set, we can only create marquee by dragging from top left to bottom right, and so we start drag with the bottom right handle
 												*/
 											_shellCoords = _Uize_Node.getCoords (_shell),
 											_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
 										;
-										_this.set ({creatingNew:_true});
-										_this.setPositionDuringDrag (
+										m.set ({creatingNew:_true});
+										m.setPositionDuringDrag (
 											_eventAbsPos.left - _shellCoords.left,
 											_eventAbsPos.top - _shellCoords.top,
-											_this.get ('minWidth'),
-											_this.get ('minHeight')
+											m.get ('minWidth'),
+											m.get ('minHeight')
 										);
-										return _this.children [_handleName].initiate (_event);
+										return m.children [_handleName].initiate (_event);
 									}
 								}
 							;
 							_Uize_Node.setStyle (_shell,{cursor:'crosshair'});
-							_this.wireNode (_shell,{mousedown:_initiateDrag,touchstart:_initiateDrag});
+							m.wireNode (_shell,{mousedown:_initiateDrag,touchstart:_initiateDrag});
 						}
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 
-					_this._updateUiHandlesDisplayed ();
+					m._updateUiHandlesDisplayed ();
 				}
 			};
 

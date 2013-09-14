@@ -160,16 +160,16 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function (_properties) {
-						var _this = this;
+						var m = this;
 
 						/*** Private Instance Properties ***/
-							_this._panes = [];
-							_this._imageDims = [0,0];
-							_this._currentItemNo = 0;
-							_this._imagesLoaded = [];
+							m._panes = [];
+							m._imageDims = [0,0];
+							m._currentItemNo = 0;
+							m._imagesLoaded = [];
 
 						/*** Public Instance Properties ***/
-							_this.fade = Uize.Fade ();
+							m.fade = Uize.Fade ();
 							/*?
 								Instance Properties
 									fade
@@ -179,17 +179,17 @@ Uize.module ({
 							*/
 
 						/*** Initialization ***/
-							_this.fade.wire (
+							m.fade.wire (
 								'Changed.value',
 								function () {
 									for (
 										var
 											_paneNo = -1,
-											_panes = _this._panes,
+											_panes = m._panes,
 											_panesLength = _panes.length,
-											_paneNodes = _this._paneNodes,
-											_paneProgressDelay = _this._paneProgressDelay,
-											_progress = _this.fade * (100 + (_panesLength - 1) * _paneProgressDelay)
+											_paneNodes = m._paneNodes,
+											_paneProgressDelay = m._paneProgressDelay,
+											_progress = m.fade * (100 + (_panesLength - 1) * _paneProgressDelay)
 										;
 										++_paneNo < _panesLength;
 									) {
@@ -219,7 +219,7 @@ Uize.module ({
 												_paneCoords [1],_paneCoords [2],_paneCoords [3],_paneCoords [0]
 											)
 										;
-										var _opacity = _this._dissolve ? _paneProgressFraction : 1;
+										var _opacity = m._dissolve ? _paneProgressFraction : 1;
 										_opacity !== _pane._opacity &&
 											_Uize_Node.setOpacity (_paneNode,_pane._opacity = _opacity)
 										;
@@ -247,13 +247,13 @@ Uize.module ({
 
 			_classPrototype.setCurrentItem = function (_currentItem) {
 				var
-					_this = this,
-					_divisionsX = _this._divisionsX,
-					_divisionsY = _this._divisionsY,
-					_imageDims = _this._imageDims
+					m = this,
+					_divisionsX = m._divisionsX,
+					_divisionsY = m._divisionsY,
+					_imageDims = m._imageDims
 				;
-				_this._previousItem = _this._currentItem;
-				_this._currentItem = _currentItem;
+				m._previousItem = m._currentItem;
+				m._currentItem = _currentItem;
 
 				/*** calculate sizes for rows and columns ***/
 					var
@@ -262,7 +262,7 @@ Uize.module ({
 					;
 					function _sigma (_n) {return _n * (_n + 1) / 2}
 					var
-						_currentPaneSizeX = (_imageDims [0] / _divisionsX) * _this._firstPaneSizeX / 100,
+						_currentPaneSizeX = (_imageDims [0] / _divisionsX) * m._firstPaneSizeX / 100,
 						_paneSizeIncrementX = (_imageDims [0] - _currentPaneSizeX * _divisionsX) / _sigma (_divisionsX - 1)
 					;
 					for (var _xDivisionNo = -1; ++_xDivisionNo < _divisionsX;) {
@@ -270,7 +270,7 @@ Uize.module ({
 						_currentPaneSizeX += _paneSizeIncrementX;
 					}
 					var
-						_currentPaneSizeY = (_imageDims [1] / _divisionsY) * _this._firstPaneSizeY / 100,
+						_currentPaneSizeY = (_imageDims [1] / _divisionsY) * m._firstPaneSizeY / 100,
 						_paneSizeIncrementY = (_imageDims [1] - _currentPaneSizeY * _divisionsY) / _sigma (_divisionsY - 1)
 					;
 					for (var _yDivisionNo = -1; ++_yDivisionNo < _divisionsY;) {
@@ -318,7 +318,7 @@ Uize.module ({
 						return _valueA + (_valueB - _valueA) * _blendPercent / 100;
 					}
 					var
-						_top = _this._panes.length = 0,
+						_top = m._panes.length = 0,
 						_divisionNo,
 						_currentAlignX, _currentAlignY,
 						_currentAllToFull,
@@ -328,12 +328,12 @@ Uize.module ({
 						var _left = 0;
 						for (var _xDivisionNo = -1; ++_xDivisionNo < _divisionsX;) {
 							_divisionNo = _yDivisionNo * _divisionsX + _xDivisionNo;
-							_currentAlignX = _getInterpolatedValue (_this._alignX);
-							_currentAlignY = _getInterpolatedValue (_this._alignY);
-							_currentPaneSeedSizeX = _getInterpolatedValue (_this._paneSeedSizeX);
-							_currentPaneSeedSizeY = _getInterpolatedValue (_this._paneSeedSizeY);
-							_currentPaneSeedContext = _getInterpolatedValue (_this._paneSeedContext);
-							_currentAllToFull = _getInterpolatedValue (_this._allToFull);
+							_currentAlignX = _getInterpolatedValue (m._alignX);
+							_currentAlignY = _getInterpolatedValue (m._alignY);
+							_currentPaneSeedSizeX = _getInterpolatedValue (m._paneSeedSizeX);
+							_currentPaneSeedSizeY = _getInterpolatedValue (m._paneSeedSizeY);
+							_currentPaneSeedContext = _getInterpolatedValue (m._paneSeedContext);
+							_currentAllToFull = _getInterpolatedValue (m._allToFull);
 							var
 								_right = _left + _paneW [_xDivisionNo],
 								_bottom = _top + _paneH [_yDivisionNo],
@@ -355,7 +355,7 @@ Uize.module ({
 									_blendValues (_bottom,_imageDims [1],_currentAllToFull)
 								]
 							;
-							_this._panes [_divisionNo] = {
+							m._panes [_divisionNo] = {
 								_coords:[],
 								_initCoords:[
 									_initCoords [0],_initCoords [1],
@@ -372,10 +372,10 @@ Uize.module ({
 					}
 
 				/*** carry out pane order scheme ***/
-					Uize.Array.Order.reorder (_this._panes,_this._paneOrderScheme,false);
+					Uize.Array.Order.reorder (m._panes,m._paneOrderScheme,false);
 
 				/*** configure Uize.Fade object and start fade ***/
-					_this.fade.start ({startValue:0,endValue:1});
+					m.fade.start ({startValue:0,endValue:1});
 			};
 
 			_classPrototype.wireUi = function () {
@@ -638,38 +638,38 @@ Uize.module ({
 				_src:{
 					name:'src|value',
 					onChange:function () {
-						var _this = this;
-						if (_this.isWired) {
-							if (_this.fade.get ('inProgress')) {
-								_this.fade.set ({value:1});
+						var m = this;
+						if (m.isWired) {
+							if (m.fade.get ('inProgress')) {
+								m.fade.set ({value:1});
 								/* NOTE: make sure this is the best way to handle this */
-								_this.fade.stop ();
+								m.fade.stop ();
 							}
 							var
-								_currentItem = _this.getNode ('item' + _this._currentItemNo),
-								_nextItemNo = 1 - _this._currentItemNo,
-								_nextItem = _this.getNode ('item' + _nextItemNo)
+								_currentItem = m.getNode ('item' + m._currentItemNo),
+								_nextItemNo = 1 - m._currentItemNo,
+								_nextItem = m.getNode ('item' + _nextItemNo)
 							;
-							_this.prepareForNextItem (_currentItem,_nextItem);
+							m.prepareForNextItem (_currentItem,_nextItem);
 							var
-								_paneNodes = _this._paneNodes,
+								_paneNodes = m._paneNodes,
 								_loadNextImage = function () {
 									var
-										_image = _this._imagesLoaded [_this._src],
+										_image = m._imagesLoaded [m._src],
 										_paneNodesLength = _paneNodes.length,
-										_src = _this._src,
+										_src = m._src,
 										_totalLoaded = 0
 									;
 									function _nextImageLoaded () {
 										/*** update the img node ("this" is a reference to the img node firing the event) ***/
 											this.Uize_Widget_ImageWipe_src = _src;
-											_this.unwireNode (this);
+											m.unwireNode (this);
 
 										if (++_totalLoaded == _paneNodesLength) {
 											_currentItem.style.zIndex = '0';
 											_nextItem.style.zIndex = '1';
-											_this._currentItemNo = _nextItemNo;
-											_this.setCurrentItem (_nextItem);
+											m._currentItemNo = _nextItemNo;
+											m.setCurrentItem (_nextItem);
 										}
 									}
 									for (var _paneNodeNo = -1; ++_paneNodeNo < _paneNodesLength;) {
@@ -680,7 +680,7 @@ Uize.module ({
 											*/
 											_nextImageLoaded ();
 										} else {
-											_this.wireNode (
+											m.wireNode (
 												_paneNode,
 												{
 													load:_nextImageLoaded,
@@ -693,7 +693,7 @@ Uize.module ({
 									}
 								}
 							;
-							if (_this._imagesLoaded [_this._src]) {
+							if (m._imagesLoaded [m._src]) {
 								_loadNextImage ();
 							} else {
 								var _imageLoader = new Image;
@@ -703,14 +703,14 @@ Uize.module ({
 								_imageLoader.onload = _imageLoader.onerror = _imageLoader.onabort =
 									function () {
 										_imageLoader = null;
-										_this._imagesLoaded [_this._src] = {
-											_width:_this._width || this.width,
-											_height:_this._height || this.height
+										m._imagesLoaded [m._src] = {
+											_width:m._width || this.width,
+											_height:m._height || this.height
 										};
 										_loadNextImage ();
 									}
 								;
-								_imageLoader.src = _this._src;
+								_imageLoader.src = m._src;
 							}
 						}
 					}
@@ -736,19 +736,19 @@ Uize.module ({
 				html:{
 					process:function (input) {
 						var
-							_this = this,
-							_shellNode = _this.getNode (),
+							m = this,
+							_shellNode = m.getNode (),
 							_shellSize = _Uize_Node.getDimensions (_shellNode),
 							_background = input.background || _Uize_Node.Util.getEffectiveBgColor (_shellNode),
 							_htmlChunks = []
 						;
-						_this._imageDims = [_shellSize.width,_shellSize.height];
+						m._imageDims = [_shellSize.width,_shellSize.height];
 						for (var _itemNo = -1; ++_itemNo < 2;) {
 							_htmlChunks.push (
 								'<div id="' + input.idPrefix + '-item' + _itemNo + '" style="position:absolute; margin:0px; padding:0px; left:0px; top:0px; width:' + _shellSize.width + 'px; height:' + _shellSize.height + 'px; overflow:hidden;">'
 							);
 							for (var _paneNo = -1; ++_paneNo < input.divisionsX * input.divisionsY;)
-								_htmlChunks.push ('<img src="' + _class.getBlankImageUrl () + '" style="position:absolute; left:0px; top:0px; width:' + _this._imageDims [0] + 'px; height:' + _this._imageDims [1] + 'px; background:' + _background + ';"/>')
+								_htmlChunks.push ('<img src="' + _class.getBlankImageUrl () + '" style="position:absolute; left:0px; top:0px; width:' + m._imageDims [0] + 'px; height:' + m._imageDims [1] + 'px; background:' + _background + ';"/>')
 							;
 							_htmlChunks.push ('</div>');
 						}

@@ -40,18 +40,18 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 						/*** Private Instance Properties ***/
-							_this._imageNo = -1;
-							_this._running = _false;
-							_this._advanceTimeout = null;
+							m._imageNo = -1;
+							m._running = _false;
+							m._advanceTimeout = null;
 
 						/*** Initialization ***/
-							_this.fade.wire (
+							m.fade.wire (
 								'Done',
 								function () {
-									if (_this._running && (_this._imageNo < _this._images.length - 1 || _this._loop))
-										_this._advanceTimeout = setTimeout (function () {_this._advance ()},_this._interval)
+									if (m._running && (m._imageNo < m._images.length - 1 || m._loop))
+										m._advanceTimeout = setTimeout (function () {m._advance ()},m._interval)
 									;
 								}
 							);
@@ -70,14 +70,14 @@ Uize.module ({
 
 			_classPrototype._advance = function () {
 				var
-					_this = this,
-					_cycleSettings = _this._cycleSettings
+					m = this,
+					_cycleSettings = m._cycleSettings
 				;
-				_this._clearAdvanceTimeout ();
+				m._clearAdvanceTimeout ();
 				_cycleSettings &&
-					_this.set (_cycleSettings [_this._cycleSettingNo = (_this._cycleSettingNo + 1) % _cycleSettings.length])
+					m.set (_cycleSettings [m._cycleSettingNo = (m._cycleSettingNo + 1) % _cycleSettings.length])
 				;
-				_this.set ({src:_this._images [_this._imageNo = (_this._imageNo + 1) % _this._images.length]});
+				m.set ({src:m._images [m._imageNo = (m._imageNo + 1) % m._images.length]});
 			};
 
 		/*** Public Instance Methods ***/

@@ -121,29 +121,29 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						function _addText() {
-							if (_this.children.add.get ('enabledInherited')) {
+							if (m.children.add.get ('enabledInherited')) {
 								var
-									_listItemText = _this._itemConformer ? _this._itemConformer (_input + '') : _input + '',
-									_selectedIndex = Uize.indexIn (_this._list,_listItemText)
+									_listItemText = m._itemConformer ? m._itemConformer (_input + '') : _input + '',
+									_selectedIndex = Uize.indexIn (m._list,_listItemText)
 								;
 								if (_selectedIndex < 0) {
-									_this._addNewOption (_listItemText);
-									var _list = _this._list.concat ();
-									_this._sort == 'prepend' ? _list.unshift (_listItemText) : _list.push (_listItemText);
-									_this.set ({_list:_list});
-								} else if (_this._listNode) {
-									_this._listNode.selectedIndex = _selectedIndex;
+									m._addNewOption (_listItemText);
+									var _list = m._list.concat ();
+									m._sort == 'prepend' ? _list.unshift (_listItemText) : _list.push (_listItemText);
+									m.set ({_list:_list});
+								} else if (m._listNode) {
+									m._listNode.selectedIndex = _selectedIndex;
 								}
-								_this._updateUiRemoveButtonState ();
+								m._updateUiRemoveButtonState ();
 								_clearInputNode();
 							}
 						}
 
 						/*** add text input widget ***/
-							var _input = _this.addChild ('input',Uize.Widget.TextInput,{minLength:1});
+							var _input = m.addChild ('input',Uize.Widget.TextInput,{minLength:1});
 								/*?
 									Child Widgets
 										input
@@ -164,11 +164,11 @@ Uize.module ({
 									_addText ();
 								},
 								Cancel:_clearInputNode,
-								'Changed.isValid':function () {_this._updateUiAddButtonState ()}
+								'Changed.isValid':function () {m._updateUiAddButtonState ()}
 							});
 
 						/*** button widgets ***/
-							_this._addChildButton ('add',_addText);
+							m._addChildButton ('add',_addText);
 								/*?
 									Child Widgets
 										add
@@ -182,7 +182,7 @@ Uize.module ({
 											- see the related =input= child widget
 											- this child widget is added in the constructor
 								*/
-							_this._addChildButton ('remove',function () {_this._removeSelected ()});
+							m._addChildButton ('remove',function () {m._removeSelected ()});
 								/*?
 									Child Widgets
 										remove
@@ -195,9 +195,9 @@ Uize.module ({
 											- this child widget is added in the constructor
 								*/
 
-						_this._childWidgetsAdded = true;
-						_this._updateUiAddButtonState ();
-						_this._updateUiRemoveButtonState ();
+						m._childWidgetsAdded = true;
+						m._updateUiAddButtonState ();
+						m._updateUiRemoveButtonState ();
 					}
 				),
 				_classPrototype = _class.prototype
@@ -235,11 +235,11 @@ Uize.module ({
 			};
 
 			_classPrototype._removeSelected = function () {
-				var _this = this;
-				if (_this._listNode) {
+				var m = this;
+				if (m._listNode) {
 					var
 						_selectedIndices = [],
-						_options = _this._listNode.options,
+						_options = m._listNode.options,
 						_optionsLength = _options.length
 					;
 					if (_optionsLength) {
@@ -247,17 +247,17 @@ Uize.module ({
 							_options [_optionNo].selected && _selectedIndices.push (_optionNo)
 						;
 						if (_selectedIndices.length == 1) {
-							var _input = _this.children.input;
-							_input.set ({value:_this._list [_selectedIndices [0]]});
+							var _input = m.children.input;
+							_input.set ({value:m._list [_selectedIndices [0]]});
 							_input.focus ();
 						}
-						var _list = _this._list.concat ();
+						var _list = m._list.concat ();
 						for (var _indexToRemoveNo = _selectedIndices.length; --_indexToRemoveNo >= 0;) {
 							var _indexToRemove = _selectedIndices [_indexToRemoveNo];
-							_this._removeOption (_indexToRemove);
+							m._removeOption (_indexToRemove);
 							_list.splice (_indexToRemove, 1);
 						}
-						_this.set ({_list:_list});
+						m.set ({_list:_list});
 					}
 				}
 			};
@@ -285,22 +285,22 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiRemoveButtonState = function () {
-				var _this = this;
-				_this._childWidgetsAdded &&
-					_this._setButtonEnabled ('remove',_this._listNode && _this._listNode.selectedIndex > -1)
+				var m = this;
+				m._childWidgetsAdded &&
+					m._setButtonEnabled ('remove',m._listNode && m._listNode.selectedIndex > -1)
 				;
 			};
 
 			_classPrototype._updateUiList = function() {
 				var
-					_this = this,
-					_listNode = _this._listNode
+					m = this,
+					_listNode = m._listNode
 				;
-				if (_this.isWired && _listNode) {
+				if (m.isWired && _listNode) {
 					var
 						_options = _listNode.options,
 						_optionsLength = _options.length,
-						_list = _this._list,
+						_list = m._list,
 						_listLength = _list.length,
 						_optionNo
 					;
@@ -320,21 +320,21 @@ Uize.module ({
 						if (_listLength > _optionsLength) {
 							// more options than in select element, so add new options
 							for (_optionNo = _optionsLength - 1; ++_optionNo < _listLength;)
-								_this._addNewOption (_list [_optionNo],true)
+								m._addNewOption (_list [_optionNo],true)
 							;
 						} else if (_listLength < _optionsLength) {
 							// fewer options than in select element, so remove extras
 							for (_optionNo = _optionsLength; --_optionNo >= _listLength;)
-								_this._removeOption(_optionNo)
+								m._removeOption(_optionNo)
 							;
 						}
 
 					/*** make sure newly added options are selected ***/
-						if (_this._lastDisplayedList) {
+						if (m._lastDisplayedList) {
 							var
 								_selectedHash = {},
 								_selected = [],
-								_lastDisplayedList = _this._lastDisplayedList,
+								_lastDisplayedList = m._lastDisplayedList,
 								_optionNo
 							;
 							for (_optionNo = _listLength; --_optionNo >= 0;)
@@ -346,42 +346,42 @@ Uize.module ({
 							for (var _listItemText in _selectedHash)
 								_selected.push (_listItemText)
 							;
-							_this.setNodeValue (_listNode,_selected);
+							m.setNodeValue (_listNode,_selected);
 
 							/* or, if there was a filter out option in Uize.Data.filter...
-								_this.setNodeValue (
+								m.setNodeValue (
 									_listNode,
 									Uize.keys (
-										Uize.Data.filter (Uize.lookup (_list),_this._lastDisplayedList,true)
+										Uize.Data.filter (Uize.lookup (_list),m._lastDisplayedList,true)
 									)
 								)
 							*/
 						}
-						_this._lastDisplayedList = _list;
+						m._lastDisplayedList = _list;
 
-					_this._updateUiRemoveButtonState ();
+					m._updateUiRemoveButtonState ();
 				}
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiList ();
-					_this._updateUiRemoveButtonState ();
+				var m = this;
+				if (m.isWired) {
+					m._updateUiList ();
+					m._updateUiRemoveButtonState ();
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this.wireNode (
-						_this._listNode = _this.getNode ('list'),
+				var m = this;
+				if (!m.isWired) {
+					m.wireNode (
+						m._listNode = m.getNode ('list'),
 						{
 							keyup:
-								function (_domEvent) {Uize.Node.Event.isKeyDelete (_domEvent) && _this._removeSelected ()},
+								function (_domEvent) {Uize.Node.Event.isKeyDelete (_domEvent) && m._removeSelected ()},
 							click:
-								function () {_this._updateUiRemoveButtonState ()}
+								function () {m._updateUiRemoveButtonState ()}
 						}
 						/*?
 							Implied Nodes
@@ -395,7 +395,7 @@ Uize.module ({
 						*/
 					);
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

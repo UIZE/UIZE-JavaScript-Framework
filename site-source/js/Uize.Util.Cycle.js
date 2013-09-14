@@ -39,19 +39,19 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 						/*** Private Instance Properties ***/
-							_this._cycleNo = 0;
-							_this._running = _false;
-							_this._advanceTimeout = null;
+							m._cycleNo = 0;
+							m._running = _false;
+							m._advanceTimeout = null;
 
 						/*** Initialization ***/
 							/*
-							_this.fade.wire (
+							m.fade.wire (
 								'Done',
 								function () {
-									if (_this._running && (_this._cycleNo < _this._images.length - 1 || _this._loop))
-										_this._advanceTimeout = setTimeout (function () {_this._advance ()},_this._interval)
+									if (m._running && (m._cycleNo < m._images.length - 1 || m._loop))
+										m._advanceTimeout = setTimeout (function () {m._advance ()},m._interval)
 									;
 								}
 							);
@@ -71,10 +71,10 @@ Uize.module ({
 
 			_classPrototype._advance = function () {
 				var
-					_this = this,
-					_bindings = _this._bindings
+					m = this,
+					_bindings = m._bindings
 				;
-				_this._clearAdvanceTimeout ();
+				m._clearAdvanceTimeout ();
 				if (_bindings) {
 					for (
 						var _bindingNo = -1, _bindingsLength = _bindings.length;
@@ -85,7 +85,7 @@ Uize.module ({
 							_source = Uize.values (_binding.source),
 							_target = _binding.target
 						;
-						var _sourceValue = _source [_this._cycleNo % _source.length];
+						var _sourceValue = _source [m._cycleNo % _source.length];
 						if (_binding.sourceProperty)
 							_sourceValue = _sourceValue [_binding.sourceProperty]
 						;
@@ -95,10 +95,10 @@ Uize.module ({
 						;
 					}
 				}
-				if (_this._running)
-					_this._advanceTimeout = setTimeout (function () {_this._advance ()},_this._interval)
+				if (m._running)
+					m._advanceTimeout = setTimeout (function () {m._advance ()},m._interval)
 				;
-				_this._cycleNo++;
+				m._cycleNo++;
 			};
 
 		/*** Public Instance Methods ***/

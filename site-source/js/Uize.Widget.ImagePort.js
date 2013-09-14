@@ -56,61 +56,61 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiPosition = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_paramsForGetScaledRect = _this._paramsForGetScaledRect,
-						_scaledImageCoords = _this.getScaledRect (_paramsForGetScaledRect)
+						_paramsForGetScaledRect = m._paramsForGetScaledRect,
+						_scaledImageCoords = m.getScaledRect (_paramsForGetScaledRect)
 					;
-					_this.setNodeStyle ('image',_scaledImageCoords);
-					_this.set ({
+					m.setNodeStyle ('image',_scaledImageCoords);
+					m.set ({
 						_alignApplicableX:
-							!!(_this.portVsScaledDelta [0] = _paramsForGetScaledRect.portWidth - _scaledImageCoords.width),
+							!!(m.portVsScaledDelta [0] = _paramsForGetScaledRect.portWidth - _scaledImageCoords.width),
 						_alignApplicableY:
-							!!(_this.portVsScaledDelta [1] = _paramsForGetScaledRect.portHeight - _scaledImageCoords.height)
+							!!(m.portVsScaledDelta [1] = _paramsForGetScaledRect.portHeight - _scaledImageCoords.height)
 					});
 				}
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					var _shellDims = _Uize_Node.getDimensions (_this.getNode ());
-					if (!_this._imageNaturalWidth) {
-						var _imageDims = _Uize_Node.getDimensions (_this.getNode ('image'));
-						_this._imageNaturalWidth = _imageDims.width;
-						_this._imageNaturalHeight = _imageDims.height;
+				var m = this;
+				if (m.isWired) {
+					var _shellDims = _Uize_Node.getDimensions (m.getNode ());
+					if (!m._imageNaturalWidth) {
+						var _imageDims = _Uize_Node.getDimensions (m.getNode ('image'));
+						m._imageNaturalWidth = _imageDims.width;
+						m._imageNaturalHeight = _imageDims.height;
 					}
-					_this._paramsForGetScaledRect = {
+					m._paramsForGetScaledRect = {
 						portWidth:_shellDims.width,
 						portHeight:_shellDims.height,
-						rectWidth:_this._imageNaturalWidth,
-						rectHeight:_this._imageNaturalHeight
+						rectWidth:m._imageNaturalWidth,
+						rectHeight:m._imageNaturalHeight
 					};
-					Uize.Node.isIe && _this.setNodeStyle ('image',{msInterpolationMode:'bicubic'});
-					_this._updateUiPosition ();
+					Uize.Node.isIe && m.setNodeStyle ('image',{msInterpolationMode:'bicubic'});
+					m._updateUiPosition ();
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this.setNodeStyle ('',{overflow:'hidden'});
-					_this.setNodeStyle ('image',{position:'absolute'});
-					_this.portVsScaledDelta = [];
+				var m = this;
+				if (!m.isWired) {
+					m.setNodeStyle ('',{overflow:'hidden'});
+					m.setNodeStyle ('image',{position:'absolute'});
+					m.portVsScaledDelta = [];
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
 		/*** Public Instance-Static Methods ***/
 			_classPrototype.getScaledRect = _class.getScaledRect = function (_params) {
 				function _getDefaultedProperty (_propertyName) {
-					return _params [_propertyName] !== _undefined ? _params [_propertyName] : _this.get (_propertyName);
+					return _params [_propertyName] !== _undefined ? _params [_propertyName] : m.get (_propertyName);
 				}
 				var
-					_this = this,
+					m = this,
 					_portWidth = _params.portWidth,
 					_portHeight = _params.portHeight,
 					_rectWidth = _params.rectWidth,
@@ -141,10 +141,10 @@ Uize.module ({
 					return _sizing == 'fit' ? _fitArea : (_sizing == 'fill' ? _fillArea : 0);
 				}
 				function _getDefaultedProperty (_propertyName) {
-					return _params [_propertyName] !== _undefined ? _params [_propertyName] : _this.get (_propertyName);
+					return _params [_propertyName] !== _undefined ? _params [_propertyName] : m.get (_propertyName);
 				}
 				var
-					_this = this,
+					m = this,
 					_portWidth = _params.portWidth,
 					_portHeight = _params.portHeight,
 					_rectWidth = _params.rectWidth,

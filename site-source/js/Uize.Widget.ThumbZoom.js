@@ -54,10 +54,10 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Public Instance Properties ***/
-							_this.showFade = Uize.Fade ({
+							m.showFade = Uize.Fade ({
 								duration:350,
 								curve:Uize.Fade.celeration (1,0),
 								quantization:1
@@ -70,7 +70,7 @@ Uize.module ({
 											- see the related =hideFade= and =shieldFade= instance properties
 								*/
 							});
-							_this.hideFade = Uize.Fade ({
+							m.hideFade = Uize.Fade ({
 								duration:250,
 								curve:Uize.Fade.celeration (0,1),
 								startValue:1,
@@ -84,7 +84,7 @@ Uize.module ({
 											- see the related =showFade= and =shieldFade= instance properties
 								*/
 							});
-							_this.shieldFade = Uize.Fade ({
+							m.shieldFade = Uize.Fade ({
 								duration:3000,
 								curve:Uize.Fade.celeration (1,0),
 								startValue:0,
@@ -100,11 +100,11 @@ Uize.module ({
 							});
 					},
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** create loading progress widget ***/
-							if (_this._showLoadingProgress)
-								_this._loadingProgress = _this.addChild ('loadingProgress',_Uize_Widget.Bar.Progress)
+							if (m._showLoadingProgress)
+								m._loadingProgress = m.addChild ('loadingProgress',_Uize_Widget.Bar.Progress)
 								/*?
 									Child Widgets
 										loadingProgress
@@ -118,20 +118,20 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					if (_this._showLoadingProgress && !_this._loadingProgress.getNode ()) {
+				var m = this;
+				if (!m.isWired) {
+					if (m._showLoadingProgress && !m._loadingProgress.getNode ()) {
 						/* TO DO:
 							- wireUi may get called after the document has loaded, so insertUi has to put the progress bar DOM into the page without using writeln
 						*/
-						_this._loadingProgress.insertUi ();
-						_this._loadingProgress.setNodeStyle ('',{position:'absolute'});
+						m._loadingProgress.insertUi ();
+						m._loadingProgress.setNodeStyle ('',{position:'absolute'});
 					}
 					var
 						_thumbNode, _zoomedImageNode,
-						_showFade = _this.showFade,
-						_hideFade = _this.hideFade,
-						_shieldFade = _this.shieldFade,
+						_showFade = m.showFade,
+						_hideFade = m.hideFade,
+						_shieldFade = m.shieldFade,
 						_prepareZoomedImageNode = function () {
 							if (!_zoomedImageNode) {
 								_zoomedImageNode = document.createElement ('img');
@@ -143,11 +143,11 @@ Uize.module ({
 										zIndex:50001
 									}
 								);
-								_this.wireNode (
+								m.wireNode (
 									_zoomedImageNode,
 									'load',
 									function (_event) {
-										_this._showLoadingProgress && _this._loadingProgress.set ({inProgress:_false});
+										m._showLoadingProgress && m._loadingProgress.set ({inProgress:_false});
 										_Uize_Node.display (_zoomedImageNode);
 										_Uize_Node.setOpacity (_zoomedImageNode,1);
 										var
@@ -251,23 +251,23 @@ Uize.module ({
 							;
 							if (_linkNode) {
 								var _href = _linkNode.getAttribute ('href');
-								if ((_this._imageValidator || /./).test (_href)) {
+								if ((m._imageValidator || /./).test (_href)) {
 									_prepareZoomedImageNode ();
 									/* TO DO:
 										if the src is the same as the zoomedImageNode, then don't wait for the load event
 									*/
 
 									/*** position progress bar and activate ***/
-										if (_this._showLoadingProgress) {
+										if (m._showLoadingProgress) {
 											var _coords = _Uize_Node.getCoords (_thumbNode);
-											_this._loadingProgress.setNodeStyle (
+											m._loadingProgress.setNodeStyle (
 												'',
 												{
 													left:_coords.x + 3,
-													top:_coords.y + _coords.height - 1 - _this._loadingProgress.getNode ().offsetHeight - 3
+													top:_coords.y + _coords.height - 1 - m._loadingProgress.getNode ().offsetHeight - 3
 												}
 											);
-											_this._loadingProgress.set ({inProgress:_true});
+											m._loadingProgress.set ({inProgress:_true});
 										}
 
 									/*** initiate loading of large image ***/
@@ -282,10 +282,10 @@ Uize.module ({
 							return !_clickHandled;
 						};
 						_Uize_Node.doForAll (
-							_Uize_Node.find (_this._thumbNodes),
+							_Uize_Node.find (m._thumbNodes),
 							function (_node) {
 								_node.onclick = Uize.returnFalse;
-								_this.wireNode (_node,'click',_handleThumbNodeClick);
+								m.wireNode (_node,'click',_handleThumbNodeClick);
 							}
 						);
 				}

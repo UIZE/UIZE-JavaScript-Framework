@@ -181,8 +181,8 @@ Uize.module ({
 				return _Uize_Date.Formatter.parse (_value,this._displayFormat) || null;
 			}
 
-			function _addChildButton (_this,_name,_action) {
-				var _button = _this.addChild (_name,_this.Class.buttonWidgetClass);
+			function _addChildButton (m,_name,_action) {
+				var _button = m.addChild (_name,m.Class.buttonWidgetClass);
 				_button.wire ('Click',_action);
 				return _button;
 			}
@@ -190,36 +190,36 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			function _snapView () {
 				var
-					_this = this,
-					_minValueMaxValueAsRangeObject = {minValue:_this._minValue,maxValue:_this._maxValue}
+					m = this,
+					_minValueMaxValueAsRangeObject = {minValue:m._minValue,maxValue:m._maxValue}
 				;
-				_this._value && !_Uize_Date.inRange (_this._value,_minValueMaxValueAsRangeObject) &&
-					_this.set ({_value:_null})
+				m._value && !_Uize_Date.inRange (m._value,_minValueMaxValueAsRangeObject) &&
+					m.set ({_value:_null})
 				;
-				var _date = _this._value || new Date;
+				var _date = m._value || new Date;
 				if (!_Uize_Date.inRange (_date,_minValueMaxValueAsRangeObject))
-					_date = _this._minValue || _this._maxValue
+					_date = m._minValue || m._maxValue
 				;
-				_this.set ({_month:_date.getMonth (),_year:_date.getFullYear ()});
+				m.set ({_month:_date.getMonth (),_year:_date.getFullYear ()});
 			}
 
 			function _updateUiNavButtonsState () {
-				var _this = this;
-				if (_this._childWidgetsAdded) {
+				var m = this;
+				if (m._childWidgetsAdded) {
 					var
-						_firstOfViewMonth = new Date (_this._year,_this._month,1),
+						_firstOfViewMonth = new Date (m._year,m._month,1),
 						_viewMonthRange = _Uize_Date.getRangeAround (_firstOfViewMonth,'month'),
 						_viewYearRange = _Uize_Date.getRangeAround (_firstOfViewMonth,'year'),
-						_minValue = _this._minValue,
-						_maxValue = _this._maxValue,
+						_minValue = m._minValue,
+						_maxValue = m._maxValue,
 						_enableWidget = function (_widget,_mustEnable) {
 							_widget.set ({enabled:_mustEnable ? 'inherit' : _false});
 						}
 					;
-					_enableWidget (_this._previousMonthButton,!_minValue || _minValue < _viewMonthRange.minValue);
-					_enableWidget (_this._nextMonthButton,!_maxValue || _maxValue > _viewMonthRange.maxValue);
-					_enableWidget (_this._previousYearButton,!_minValue || _minValue < _viewYearRange.minValue);
-					_enableWidget (_this._nextYearButton,!_maxValue || _maxValue > _viewYearRange.maxValue);
+					_enableWidget (m._previousMonthButton,!_minValue || _minValue < _viewMonthRange.minValue);
+					_enableWidget (m._nextMonthButton,!_maxValue || _maxValue > _viewMonthRange.maxValue);
+					_enableWidget (m._previousYearButton,!_minValue || _minValue < _viewYearRange.minValue);
+					_enableWidget (m._nextYearButton,!_maxValue || _maxValue > _viewYearRange.maxValue);
 				}
 			}
 
@@ -254,8 +254,8 @@ Uize.module ({
 			}
 
 			function _updateUiGrid () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
 						_dateAsInt = function (_date,_defaultValue) {
 							return (
@@ -264,11 +264,11 @@ Uize.module ({
 									: _defaultValue
 							);
 						},
-						_value = _this._value,
-						_minValue = _this._minValue,
-						_maxValue = _this._maxValue,
-						_year = _this._year,
-						_month = _this._month,
+						_value = m._value,
+						_minValue = m._minValue,
+						_maxValue = m._maxValue,
+						_year = m._year,
+						_month = m._month,
 						_daysInMonth = _Uize_Date.getDaysInMonth (_month,_year),
 						_firstDayOfMonth = new Date (_year,_month,1),
 						_firstDayOfMonthAsInt = _dateAsInt (_firstDayOfMonth),
@@ -276,7 +276,7 @@ Uize.module ({
 							Uize.constrain (_dateAsInt (_minValue,0) - _firstDayOfMonthAsInt + 1,1,_daysInMonth + 1),
 						_lastEnabledDayNo =
 							Uize.constrain (_dateAsInt (_maxValue,Infinity) - _firstDayOfMonthAsInt + 1,-1,_daysInMonth),
-						_lastDisplayedGridState = _this._lastDisplayedGridState
+						_lastDisplayedGridState = m._lastDisplayedGridState
 					;
 					if (
 						!_lastDisplayedGridState ||
@@ -287,21 +287,21 @@ Uize.module ({
 						_lastEnabledDayNo != _lastDisplayedGridState._lastEnabledDayNo
 					) {
 						var
-							_useV2CssClasses = _this.Class.useV2CssClasses,
-							_selectedCssClass = _useV2CssClasses ? _this.cssClass ('selected') : 'selected',
-							_grayedCssClass = _useV2CssClasses ? _this.cssClass ('grayed') : 'grayed'
+							_useV2CssClasses = m.Class.useV2CssClasses,
+							_selectedCssClass = _useV2CssClasses ? m.cssClass ('selected') : 'selected',
+							_grayedCssClass = _useV2CssClasses ? m.cssClass ('grayed') : 'grayed'
 						;
 						if (_lastDisplayedGridState) {
 							/*** unwire previously wired day nodes ***/
 								for (var _dayNo = 0, _dayNodeName; ++_dayNo < 32;) {
-									_this.unwireNode (_dayNodeName = 'day' + _dayNo);
-									_this.flushNodeCache (_dayNodeName);
+									m.unwireNode (_dayNodeName = 'day' + _dayNo);
+									m.flushNodeCache (_dayNodeName);
 								}
 						}
 
 						/*** update last displayed state ***/
 							if (!_lastDisplayedGridState)
-								_lastDisplayedGridState = _this._lastDisplayedGridState = {}
+								_lastDisplayedGridState = m._lastDisplayedGridState = {}
 							;
 							_lastDisplayedGridState._value = _value;
 							_lastDisplayedGridState._month = _month;
@@ -313,7 +313,7 @@ Uize.module ({
 
 						/*** build and replace the grid HTML ***/
 							/*** build the days header ***/
-								var _dayNameLength = _this._dayNameLength;
+								var _dayNameLength = m._dayNameLength;
 								for (var _dayNo = -1; ++_dayNo < 7;)
 									_gridStringChunks.push (
 										'<th title="' + _dayNames [_dayNo] + '">' +
@@ -326,7 +326,7 @@ Uize.module ({
 							/*** build the day selectors ***/
 								var
 									_valueAsInt = _dateAsInt (_value,_null),
-									_idPrefix = _this.get ('idPrefix'),
+									_idPrefix = m.get ('idPrefix'),
 									_dayNo = 1 - _firstDayOfMonth.getDay ()
 								;
 								for (var _rowNo = -1; ++_rowNo < 6;) {
@@ -356,7 +356,7 @@ Uize.module ({
 								}
 
 							_gridStringChunks.push ('</table>');
-							_this.setNodeInnerHtml ('grid',_gridStringChunks.join (''));
+							m.setNodeInnerHtml ('grid',_gridStringChunks.join (''));
 								/*?
 									Implied Nodes
 										grid
@@ -373,10 +373,10 @@ Uize.module ({
 								var
 									_dayNo = _daysInMonth + 1,
 									_wireDaySelector = function (_dayNo) {
-										_this.wireNode (
+										m.wireNode (
 											'day' + _dayNo,
 											'click',
-											function () {_this.set ({_value:new Date (_year,_month,_dayNo)})}
+											function () {m.set ({_value:new Date (_year,_month,_dayNo)})}
 										);
 										/*?
 											Implied Nodes
@@ -396,19 +396,19 @@ Uize.module ({
 							;
 					}
 				} else {
-					_this._lastDisplayedGridState = _null;
+					m._lastDisplayedGridState = _null;
 				}
 			}
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** create buttons ***/
-					_this._nextMonthButton = _addChildButton (
-						_this,
+					m._nextMonthButton = _addChildButton (
+						m,
 						'nextMonth',
-						function () {_this.set ({_month:_this._month + 1})}
+						function () {m.set ({_month:m._month + 1})}
 						/*?
 							Child Widgets
 								nextMonth
@@ -425,10 +425,10 @@ Uize.module ({
 									- this child widget is added in the constructor
 						*/
 					);
-					_this._previousMonthButton = _addChildButton (
-						_this,
+					m._previousMonthButton = _addChildButton (
+						m,
 						'previousMonth',
-						function () {_this.set ({_month:_this._month - 1})}
+						function () {m.set ({_month:m._month - 1})}
 						/*?
 							Child Widgets
 								previousMonth
@@ -445,10 +445,10 @@ Uize.module ({
 									- this child widget is added in the constructor
 						*/
 					);
-					_this._nextYearButton = _addChildButton (
-						_this,
+					m._nextYearButton = _addChildButton (
+						m,
 						'nextYear',
-						function () {_this.set ({_year:_this._year + 1})}
+						function () {m.set ({_year:m._year + 1})}
 						/*?
 							Child Widgets
 								nextYear
@@ -463,10 +463,10 @@ Uize.module ({
 									- this child widget is added in the constructor
 						*/
 					);
-					_this._previousYearButton = _addChildButton (
-						_this,
+					m._previousYearButton = _addChildButton (
+						m,
 						'previousYear',
-						function () {_this.set ({_year:_this._year - 1})}
+						function () {m.set ({_year:m._year - 1})}
 						/*?
 							Child Widgets
 								previousYear
@@ -482,8 +482,8 @@ Uize.module ({
 						*/
 					);
 
-				_this._childWidgetsAdded = _true;
-				_updateUiNavButtonsState.call (_this);
+				m._childWidgetsAdded = _true;
+				_updateUiNavButtonsState.call (m);
 			},
 
 			instanceMethods:{

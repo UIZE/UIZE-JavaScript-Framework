@@ -330,8 +330,8 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			function _updateConnection () {
 				var
-					_this = this,
-					_wirings = _this._wirings
+					m = this,
+					_wirings = m._wirings
 				;
 
 				function _wireOrUnwireWirings (_wiringMethodName) {
@@ -342,14 +342,14 @@ Uize.module ({
 
 				/*** unwire wirings from any previous connection ***/
 					if (_wirings)
-						_wirings = _this._wirings = _wireOrUnwireWirings ('unwire')
+						_wirings = m._wirings = _wireOrUnwireWirings ('unwire')
 					;
 
-				if (_this._connected) {
+				if (m._connected) {
 					var
-						_propertyA = _this._propertyA,
-						_propertyB = _this._propertyB,
-						_valueAdapter = _this._valueAdapter,
+						_propertyA = m._propertyA,
+						_propertyB = m._propertyB,
+						_valueAdapter = m._valueAdapter,
 						_driver,
 						_synchronize = function (_aToB) {
 							var
@@ -374,7 +374,7 @@ Uize.module ({
 							_synchronize (true);
 
 						/*** wire events for connecting properties ***/
-							_wirings = _this._wirings = [
+							_wirings = m._wirings = [
 								{
 									_instance:_propertyA.instance,
 									_eventName:'Changed.' + _propertyA.property,

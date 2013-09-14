@@ -40,11 +40,11 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** add drag child widget ***/
 							var
-								_drag = _this.addChild ('drag',Uize.Widget.Drag,{idPrefixConstruction:'same as parent'}),
+								_drag = m.addChild ('drag',Uize.Widget.Drag,{idPrefixConstruction:'same as parent'}),
 								_dragStartAlign = [],
 								_dragStartSizingValue, _dragMode
 							;
@@ -52,19 +52,19 @@ Uize.module ({
 								'Drag Start':
 									function (_event) {
 										_dragMode = _event.domEvent.ctrlKey ? 'sizing' : 'alignment';
-										_this.set ({_inDrag:_true});
-										_dragStartSizingValue = _this.get ('sizingValue');
-										_dragStartAlign [0] = _this.get ('alignX');
-										_dragStartAlign [1] = _this.get ('alignY');
+										m.set ({_inDrag:_true});
+										_dragStartSizingValue = m.get ('sizingValue');
+										_dragStartAlign [0] = m.get ('alignX');
+										_dragStartAlign [1] = m.get ('alignY');
 									},
 								'Drag Update':
 									function (_event) {
 										if (_dragMode == 'sizing') {
-											_this.set ({
+											m.set ({
 												sizingValue:Uize.constrain (
 													_dragStartSizingValue + (0 - _drag.eventDeltaPos [1]) / 100,
-													_this._minSizingValue,
-													_this._maxSizingValue
+													m._minSizingValue,
+													m._maxSizingValue
 												)
 											});
 										} else {
@@ -73,8 +73,8 @@ Uize.module ({
 													Uize.constrain (
 														_dragStartAlign [_axis] + _drag.eventDeltaPos [_axis] *
 															(
-																_this.portVsScaledDelta [_axis]
-																	? (1 / _this.portVsScaledDelta [_axis])
+																m.portVsScaledDelta [_axis]
+																	? (1 / m.portVsScaledDelta [_axis])
 																	: 0
 															),
 														0,
@@ -82,25 +82,25 @@ Uize.module ({
 													)
 												);
 											};
-											_this.set ({
+											m.set ({
 												alignX:_calculateNewAlignValue (0),
 												alignY:_calculateNewAlignValue (1)
 											});
 										}
 									},
 								'Drag Done':
-									function () {_this.set ({_inDrag:_false})}
+									function () {m.set ({_inDrag:_false})}
 							});
 
 						/*** manage cursor state ***/
 							function _updateUiCursor () {
 								var
-									_alignApplicableX = _this.get ('alignApplicableX'),
-									_alignApplicableY = _this.get ('alignApplicableY')
+									_alignApplicableX = m.get ('alignApplicableX'),
+									_alignApplicableY = m.get ('alignApplicableY')
 								;
-								_this.children.drag.set ({
+								m.children.drag.set ({
 									cursor:
-										_this._inZoomMode
+										m._inZoomMode
 											? 'n-resize'
 											: _alignApplicableX && _alignApplicableY
 												? 'move'
@@ -111,7 +111,7 @@ Uize.module ({
 														: 'not-allowed'
 								});
 							}
-							_this.wire ({
+							m.wire ({
 								'Changed.alignApplicableX':_updateUiCursor,
 								'Changed.alignApplicableY':_updateUiCursor,
 								'Changed.inZoomMode':_updateUiCursor
@@ -123,8 +123,8 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					/*** maintain inZoomMode state ***/
 						/* NOTE:
 							- Unfortunately, must watch for ctrl pressed at document level (can't do it at the root node level).
@@ -133,15 +133,15 @@ Uize.module ({
 								- Opera seems to only reflect a cursor change on a more radical repaint / re-render (not sure exactly what it's logic is).
 								- None of the browsers can pick up the key events if the document isn't focused (eg. the location field is focused instead).
 						*/
-						_this.wireNode (
+						m.wireNode (
 							document,
 							{
-								keydown:function (_event) {_event.ctrlKey && _this.set ({_inZoomMode:_true})},
-								keyup:function () {_this.set ({_inZoomMode:_false})}
+								keydown:function (_event) {_event.ctrlKey && m.set ({_inZoomMode:_true})},
+								keyup:function () {m.set ({_inZoomMode:_false})}
 							}
 						);
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 				}
 			};
 

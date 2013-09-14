@@ -70,84 +70,84 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._isColumnNextSortOrderAscending = function (_columnNo) {
-				var _this = this;
+				var m = this;
 				return (
-					_columnNo == _this._headingNoSorted
-						? !_this._ascendingOrder
+					_columnNo == m._headingNoSorted
+						? !m._ascendingOrder
 						:
 							(
-								(_this._dominantSortOrderByColumn && _this._dominantSortOrderByColumn [_columnNo]) ||
-								_this._dominantSortOrder
+								(m._dominantSortOrderByColumn && m._dominantSortOrderByColumn [_columnNo]) ||
+								m._dominantSortOrder
 							) == 'ascending'
 				);
 			};
 
 			_classPrototype._updateColumnUi = function (_columnNo) {
-				var _this = this;
-				if (_this.isWired) {
-					var _heading = _this._headings [_columnNo];
+				var m = this;
+				if (m.isWired) {
+					var _heading = m._headings [_columnNo];
 					_heading.className =
 						(
-							_columnNo == _this._headingNoSorted
-								? _this._headingLitClass
+							_columnNo == m._headingNoSorted
+								? m._headingLitClass
 								: (
-									_columnNo == _this._headingNoOver
-										? _this._headingOverClass
-										: _this._headingsOldClasses [_columnNo]
+									_columnNo == m._headingNoOver
+										? m._headingOverClass
+										: m._headingsOldClasses [_columnNo]
 								)
 						) || ''
 					;
-					_heading.title = _this._isColumnNextSortOrderAscending (_columnNo)
-						? _this._languageSortAscending
-						: _this._languageSortDescending
+					_heading.title = m._isColumnNextSortOrderAscending (_columnNo)
+						? m._languageSortAscending
+						: m._languageSortDescending
 					;
 				}
 			};
 
 			_classPrototype._updateRowUi = function (_row) {
-				var _this = this;
-				if (_this.isWired && _row)
-					_row.className = (_row == _this._rowOver ? _this._rowOverClass : _row.Uize_Widget_TableSort_oldClassName) || ''
+				var m = this;
+				if (m.isWired && _row)
+					_row.className = (_row == m._rowOver ? m._rowOverClass : _row.Uize_Widget_TableSort_oldClassName) || ''
 				;
 			};
 
 			_classPrototype._headingMouseover = function (_columnNo) {
-				var _this = this;
-				_this._headingMouseout ();
-				_this._headingNoOver = _columnNo;
-				_this._updateColumnUi (_columnNo);
+				var m = this;
+				m._headingMouseout ();
+				m._headingNoOver = _columnNo;
+				m._updateColumnUi (_columnNo);
 			};
 
 			_classPrototype._headingMouseout = function () {
-				var _this = this;
-				if (_this._headingNoOver != _null) {
-					var _lastHeadingNoOver = _this._headingNoOver;
-					_this._headingNoOver = _null;
-					_this._updateColumnUi (_lastHeadingNoOver);
+				var m = this;
+				if (m._headingNoOver != _null) {
+					var _lastHeadingNoOver = m._headingNoOver;
+					m._headingNoOver = _null;
+					m._updateColumnUi (_lastHeadingNoOver);
 				}
 			};
 
 			_classPrototype._rowMouseover = function (_row) {
-				var _this = this;
-				_this._rowMouseout ();
-				_this._rowOver = _row;
-				_this._updateRowUi (_row);
+				var m = this;
+				m._rowMouseout ();
+				m._rowOver = _row;
+				m._updateRowUi (_row);
 			};
 
 			_classPrototype._rowMouseout = function () {
-				var _this = this;
-				if (_this._rowOver) {
-					var _lastRowOver = _this._rowOver;
-					_this._rowOver = _null;
-					_this._updateRowUi (_lastRowOver);
+				var m = this;
+				if (m._rowOver) {
+					var _lastRowOver = m._rowOver;
+					m._rowOver = _null;
+					m._updateRowUi (_lastRowOver);
 				}
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.sort = function (_columnNo) {
 				var
-					_this = this,
-					_table = _this.getNode ()
+					m = this,
+					_table = m.getNode ()
 				;
 				if (_table) {
 					var
@@ -159,15 +159,15 @@ Uize.module ({
 						_columnIsNumber = _true,
 						_columnIsDate = _true
 					;
-					_this._ascendingOrder = _this._isColumnNextSortOrderAscending (_columnNo);
+					m._ascendingOrder = m._isColumnNextSortOrderAscending (_columnNo);
 
 					/*** initialize sort map, harvest sort column's values, and inspect to determine type ***/
 						for (var _rowNo = -1; ++_rowNo < _rowsLength;) {
 							_columnSortMap [_rowNo] = _rowNo;
 							/* NOTE: conditionalized to skip over the headings row (if in table body) and any rows with too few cells */
-							if (_rowNo != _this._headingsRowNo) {
+							if (_rowNo != m._headingsRowNo) {
 								var _cells = _getRowCells (_rows [_rowNo]);
-								if (_cells.length == _this._headings.length) {
+								if (_cells.length == m._headings.length) {
 									var _cellText = _Uize_Node.getText (_cells [_columnNo]);
 									if (_cellText) {
 										_columnIsDate = _columnIsDate && !isNaN (+new Date (_cellText));
@@ -186,7 +186,7 @@ Uize.module ({
 							_compareNumbers = _compareGeneral, // for now, at least
 							_columnIsDateOrNumber = _columnIsDate || _columnIsNumber,
 							_comparisonFunction = _columnIsDateOrNumber ? _compareNumbers : _compareGeneral,
-							_incorrectComparisonFunctionResult = _this._ascendingOrder ? 1 : -1,
+							_incorrectComparisonFunctionResult = m._ascendingOrder ? 1 : -1,
 							_skipRow = function (_sortMapIndex) {
 								return _columnValues [_columnSortMap [_sortMapIndex]] === _undefined;
 							}
@@ -232,41 +232,41 @@ Uize.module ({
 						;
 
 					/*** update the heading UI to reflect new sort status ***/
-						if (_columnNo != _this._headingNoSorted) {
-							if (_this._headingNoSorted != _null) {
-								var _lastHeadingNoSorted = _this._headingNoSorted;
-								_this._headingNoSorted = _null;
-								_this._updateColumnUi (_lastHeadingNoSorted);
+						if (_columnNo != m._headingNoSorted) {
+							if (m._headingNoSorted != _null) {
+								var _lastHeadingNoSorted = m._headingNoSorted;
+								m._headingNoSorted = _null;
+								m._updateColumnUi (_lastHeadingNoSorted);
 							}
-							_this._headingNoSorted = _columnNo;
-							_this._updateColumnUi (_columnNo);
+							m._headingNoSorted = _columnNo;
+							m._updateColumnUi (_columnNo);
 						}
 				}
 			};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					for (var _columnNo = -1; ++_columnNo < _this._headings.length;)
-						_this._updateColumnUi (_columnNo)
+				var m = this;
+				if (m.isWired) {
+					for (var _columnNo = -1; ++_columnNo < m._headings.length;)
+						m._updateColumnUi (_columnNo)
 					;
-					_this._updateRowUi (_this._rowOver);
+					m._updateRowUi (m._rowOver);
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					/*** Initialize Instance Properties ***/
-						_this._headings = [];
-						_this._headingsOldClasses = [];
-						_this._headingNoOver = _this._headingNoSorted = _this._rowOver = _null;
-						_this._ascendingOrder = _true;
+						m._headings = [];
+						m._headingsOldClasses = [];
+						m._headingNoOver = m._headingNoSorted = m._rowOver = _null;
+						m._ascendingOrder = _true;
 
-					var _table = _this.getNode ();
+					var _table = m.getNode ();
 					if (_table) {
 						var
-							_tableBody = _getTableBody (_this.getNode ()),
+							_tableBody = _getTableBody (m.getNode ()),
 							_tableBodyRows = _getChildNodesByTagName (_tableBody,'TR')
 						;
 						/*** find column headings row (could be in table head or table body) ***/
@@ -285,8 +285,8 @@ Uize.module ({
 									for (var _rowNo = -1, _rowsLength = _rows.length; ++_rowNo < _rowsLength;) {
 										var _rowCells = _getRowCells (_rows [_rowNo]);
 										if (_rowCells.length == _maxColumns) {
-											_this._headings = _rowCells;
-											_this._headingsRowNo = _rowNo;
+											m._headings = _rowCells;
+											m._headingsRowNo = _rowNo;
 											break;
 										}
 									}
@@ -298,20 +298,20 @@ Uize.module ({
 								if (!_tableHeadRows.length) _tableHeadRows = [_tableHeads [0]];
 								_tryFindHeadings (_tableHeadRows);
 							}
-							_this._headingsRowNo = -1;
-							_this._headings.length || _tryFindHeadings (_tableBodyRows);
+							m._headingsRowNo = -1;
+							m._headings.length || _tryFindHeadings (_tableBodyRows);
 
 						/*** wire up headings ***/
 							Uize.forEach (
-								_this._headings,
+								m._headings,
 								function (_heading,_headingNo) {
-									_this._headingsOldClasses [_headingNo] = _heading.className;
-									_this.wireNode (
+									m._headingsOldClasses [_headingNo] = _heading.className;
+									m.wireNode (
 										_heading,
 										{
-											mouseover:function () {_this._headingMouseover (_headingNo)},
-											mouseout:function () {_this._headingMouseout ()},
-											click:function () {_this.sort (_headingNo)}
+											mouseover:function () {m._headingMouseover (_headingNo)},
+											mouseout:function () {m._headingMouseout ()},
+											click:function () {m.sort (_headingNo)}
 										}
 									);
 								}
@@ -323,16 +323,16 @@ Uize.module ({
 									_rowNo = -1,
 									_tableBodyRowsLength = _tableBodyRows.length,
 									_headingsText = Uize.map (
-										_this._headings,
+										m._headings,
 										function (_heading) {return _Uize_Node.getText (_heading)}
 									),
 									_wireRow = function (_row) {
 										_row.Uize_Widget_TableSort_oldClassName = _row.className;
-										_this.wireNode (
+										m.wireNode (
 											_row,
 											{
-												mouseover:function () {_this._rowMouseover (_row)},
-												mouseout:function () {_this._rowMouseout ()}
+												mouseover:function () {m._rowMouseover (_row)},
+												mouseout:function () {m._rowMouseout ()}
 											}
 										);
 									}
@@ -340,17 +340,17 @@ Uize.module ({
 								++_rowNo < _tableBodyRowsLength;
 							) {
 								/* NOTE: conditionalized to skip over the headings row (if in table body) and any rows with too few cells */
-								if (_rowNo != _this._headingsRowNo) {
+								if (_rowNo != m._headingsRowNo) {
 									var
 										_row = _tableBodyRows [_rowNo],
 										_cells = _getRowCells (_row)
 									;
-									_cells.length == _this._headings.length && _wireRow (_row);
+									_cells.length == m._headings.length && _wireRow (_row);
 									for (var _cellNo = -1; ++_cellNo < _cells.length;) {
 										if (
-											_this._cellTooltipsByColumn && _cellNo in _this._cellTooltipsByColumn
-												? _this._cellTooltipsByColumn [_cellNo]
-												: _this._cellTooltips
+											m._cellTooltipsByColumn && _cellNo in m._cellTooltipsByColumn
+												? m._cellTooltipsByColumn [_cellNo]
+												: m._cellTooltips
 										)
 											_cells [_cellNo].title = _headingsText [_cellNo]
 										;
@@ -359,7 +359,7 @@ Uize.module ({
 							}
 					}
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

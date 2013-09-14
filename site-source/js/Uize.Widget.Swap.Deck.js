@@ -120,9 +120,9 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 						/*** Private Instance Properties ***/
-							_this._currentItemNo = -1;
+							m._currentItemNo = -1;
 					}
 				),
 				_classPrototype = _class.prototype
@@ -141,25 +141,25 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiDeck = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this.showNode (_this._itemNodeNames,false);
-					_this.displayNode (_this._itemNodeNames);
+				var m = this;
+				if (m.isWired) {
+					m.showNode (m._itemNodeNames,false);
+					m.displayNode (m._itemNodeNames);
 				}
 			};
 
 			_classPrototype._updateUiItemNo = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_currentItem = _this.getNode (_this._getItemNodeName (_this._currentItemNo)),
-						_nextItem = _this.getNode (_this._getItemNodeName (_this._itemNo))
+						_currentItem = m.getNode (m._getItemNodeName (m._currentItemNo)),
+						_nextItem = m.getNode (m._getItemNodeName (m._itemNo))
 					;
-					_this._updateUiDeck ();
-					_this.prepareForNextItem (_currentItem,_nextItem);
-					_this.setCurrentItem (_nextItem);
-					_this.showNode ([_currentItem,_nextItem]);
-					_this._currentItemNo = _this._itemNo;
+					m._updateUiDeck ();
+					m.prepareForNextItem (_currentItem,_nextItem);
+					m.setCurrentItem (_nextItem);
+					m.showNode ([_currentItem,_nextItem]);
+					m._currentItemNo = m._itemNo;
 				}
 			};
 
@@ -193,10 +193,10 @@ Uize.module ({
 				_totalItems:{
 					name:'totalItems',
 					onChange:function () {
-						var _this = this;
-						_this._itemNodeNames = Uize.map (
-							_this._totalItems,
-							function (_junkValue,_itemNo) {return _this._getItemNodeName (_itemNo)}
+						var m = this;
+						m._itemNodeNames = Uize.map (
+							m._totalItems,
+							function (_junkValue,_itemNo) {return m._getItemNodeName (_itemNo)}
 						);
 					},
 					value:0

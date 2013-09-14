@@ -444,12 +444,12 @@ Uize.module ({
 
 				need:function (_needOrNeeds,_needer) {
 					var
-						_this = this,
-						_wirings = _this.once (_needOrNeeds,_needer)
+						m = this,
+						_wirings = m.once (_needOrNeeds,_needer)
 					;
 					typeof _needOrNeeds == 'string'
-						? _this.met (_needConditionPrefix + _needOrNeeds)
-						: Uize.forEach (_needOrNeeds,function (_need) {_this.met (_needConditionPrefix + _need)})
+						? m.met (_needConditionPrefix + _needOrNeeds)
+						: Uize.forEach (_needOrNeeds,function (_need) {m.met (_needConditionPrefix + _need)})
 					;
 					return _wirings;
 					/*?
@@ -559,23 +559,23 @@ Uize.module ({
 				},
 
 				provide:function (_need,_provider) {
-					var _this = this;
+					var m = this;
 					return (
-						_this.is (_need)
+						m.is (_need)
 							/* NOTE:
 								Allow for the possibility that the need was met explicitly by some other code before the provider is even registered (this is an edge case).
 							*/
 							? {} // if need is already met, return empty wirings object, since there will be nothing to unwire
-							: _this.once (
+							: m.once (
 								_needConditionPrefix + _need,
 								function () {
-									_this.is (_need) ||
+									m.is (_need) ||
 										/* NOTE:
 											Allow for the possibility that the need was met explicitly by some other code before the needer was registered (this is an edge case).
 										*/
 										_provider (
 											function (_provided) {
-												_this.is (_need) || _this.met (_need,_provided);
+												m.is (_need) || m.met (_need,_provided);
 												/* NOTE:
 													Allow for the possibility that the need was met by some other code while asynchronous provider code was being executed (this is an unlikely edge case).
 												*/

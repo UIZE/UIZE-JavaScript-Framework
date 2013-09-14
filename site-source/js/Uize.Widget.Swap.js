@@ -186,10 +186,10 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 						/*** Private Instance Properties ***/
-							_this._viewFinalCoords =
-								_this.viewFinalCoords = [0,0,0,0]
+							m._viewFinalCoords =
+								m.viewFinalCoords = [0,0,0,0]
 								/*?
 									Instance Properties
 										viewFinalCoords
@@ -199,10 +199,10 @@ Uize.module ({
 											- this property is intended to be used by subclasses
 								*/
 							;
-							_this._cycleNo = 0;
+							m._cycleNo = 0;
 
 						/*** Public Instance Properties ***/
-							_this.fade = Uize.Fade ({
+							m.fade = Uize.Fade ({
 								duration:850,
 								curve:Uize.Fade.celeration (.5,0),
 								startValue:0,
@@ -217,34 +217,34 @@ Uize.module ({
 							});
 
 						/*** Initialization ***/
-							_this.fade.wire (
+							m.fade.wire (
 								'Changed.value',
 								function (_event) {
-									if (_this.isWired) {
+									if (m.isWired) {
 										var _value = _event.newValue;
-										if (_this._previousItem && _this._crossFade) {
+										if (m._previousItem && m._crossFade) {
 											var
-												_crossFadeSize = _this._crossFadeSize,
+												_crossFadeSize = m._crossFadeSize,
 												_fadeInStartPoint = _crossFadeSize < 0
-													? 1 - (1 + _crossFadeSize) * (1 - _this._crossFadeAlign)
-													: (1 - _crossFadeSize) * _this._crossFadeAlign
+													? 1 - (1 + _crossFadeSize) * (1 - m._crossFadeAlign)
+													: (1 - _crossFadeSize) * m._crossFadeAlign
 												,
 												_fadeOutEndPoint = _fadeInStartPoint + _crossFadeSize
 											;
-											_this._updateItem (
-												_this._currentItem,
+											m._updateItem (
+												m._currentItem,
 												_fadeInStartPoint != 1
 													? Uize.constrain ((_value - 1) / (1 - _fadeInStartPoint) + 1,0,1)
 													: _value == 1 ? 1 : 0
 											);
-											_this._updateItem (
-												_this._previousItem,
+											m._updateItem (
+												m._previousItem,
 												_fadeOutEndPoint
 													? Uize.constrain (1 - _value / _fadeOutEndPoint,0,1)
 													: _value ? 0 : 1
 											);
 										} else {
-											_this._updateItem (_this._currentItem,_value);
+											m._updateItem (m._currentItem,_value);
 										}
 									}
 								}
@@ -257,31 +257,31 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._updateItem = function (_item,_value,_updateAllProperties) {
 				var
-					_this = this,
-					_styleProperties = _this._dissolve
+					m = this,
+					_styleProperties = m._dissolve
 						? _Uize_Node.Util.getOpacityProperties (_value)
 						: _updateAllProperties ? _Uize_Node.Util.getOpacityProperties (1) : {}
 				;
-				if (_updateAllProperties || _this._viewSeedSizeX != 1 || _this._viewSeedSizeY != 1) {
+				if (_updateAllProperties || m._viewSeedSizeX != 1 || m._viewSeedSizeY != 1) {
 					for (var _coordNo = -1; ++_coordNo < 4;)
 						_viewCoords [_coordNo] = _blendValues (
-							_this._viewSeedCoords [_coordNo],_this._viewFinalCoords [_coordNo],_value
+							m._viewSeedCoords [_coordNo],m._viewFinalCoords [_coordNo],_value
 						)
 					;
-					if (_updateAllProperties || _this._viewContentAlignX !== 'none' || _this._viewContentAlignY !== 'none') {
+					if (_updateAllProperties || m._viewContentAlignX !== 'none' || m._viewContentAlignY !== 'none') {
 						for (var _axis = -1; ++_axis < 2;) {
 							var
-								_viewContentAlign = _axis ? _this._viewContentAlignY : _this._viewContentAlignX,
+								_viewContentAlign = _axis ? m._viewContentAlignY : m._viewContentAlignX,
 								_noViewContentAlign = _viewContentAlign == 'none'
 							;
 							_pos [_axis] = _noViewContentAlign
 								? 0
 								: _blendValues (
 									_viewCoords [0 + _axis],
-									_viewCoords [2 + _axis] - _this._viewFinalCoords [2 + _axis],
+									_viewCoords [2 + _axis] - m._viewFinalCoords [2 + _axis],
 									_viewContentAlign == 'auto'
-										? (_this._viewSeedCoords [_axis] + _this._viewSeedCoords [_axis + 2])
-											/ 2 / _this._viewFinalCoords [_axis + 2]
+										? (m._viewSeedCoords [_axis] + m._viewSeedCoords [_axis + 2])
+											/ 2 / m._viewFinalCoords [_axis + 2]
 										: _viewContentAlign
 								)
 							;
@@ -304,26 +304,26 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.prepareForNextItem = function (_currentItem,_nextItem) {
 				var
-					_this = this,
-					_node = _this.getNode () || _nextItem,
+					m = this,
+					_node = m.getNode () || _nextItem,
 					_viewFinalDimsW = parseInt (_Uize_Node.getStyle (_node,'width')),
 					_viewFinalDimsH = parseInt (_Uize_Node.getStyle (_node,'height'))
 				;
-				_this.fade.stop ();
-				_this._cyclingPropertySets &&
-					_this.set (_this._cyclingPropertySets [_this._cycleNo++ % _this._cyclingPropertySets.length])
+				m.fade.stop ();
+				m._cyclingPropertySets &&
+					m.set (m._cyclingPropertySets [m._cycleNo++ % m._cyclingPropertySets.length])
 				;
-				_this._viewFinalCoords [2] = _viewFinalDimsW - 1;
-				_this._viewFinalCoords [3] = _viewFinalDimsH - 1;
+				m._viewFinalCoords [2] = _viewFinalDimsW - 1;
+				m._viewFinalCoords [3] = _viewFinalDimsH - 1;
 				var
-					_seedW = Math.max (0,_viewFinalDimsW * _this._viewSeedSizeX),
-					_seedH = Math.max (0,_viewFinalDimsH * _this._viewSeedSizeY),
-					_seedL = (_viewFinalDimsW - _seedW) * _this._viewSeedAlignX,
-					_seedT = (_viewFinalDimsH - _seedH) * _this._viewSeedAlignY
+					_seedW = Math.max (0,_viewFinalDimsW * m._viewSeedSizeX),
+					_seedH = Math.max (0,_viewFinalDimsH * m._viewSeedSizeY),
+					_seedL = (_viewFinalDimsW - _seedW) * m._viewSeedAlignX,
+					_seedT = (_viewFinalDimsH - _seedH) * m._viewSeedAlignY
 				;
-				_this._viewSeedCoords = [_seedL,_seedT,_seedL + _seedW - 1,_seedT + _seedH - 1];
-				_currentItem && _this._updateItem (_currentItem,1,_true);
-				_nextItem && _this._updateItem (_nextItem,0,_true);
+				m._viewSeedCoords = [_seedL,_seedT,_seedL + _seedW - 1,_seedT + _seedH - 1];
+				_currentItem && m._updateItem (_currentItem,1,_true);
+				_nextItem && m._updateItem (_nextItem,0,_true);
 				/*?
 					Instance Methods
 						prepareForNextItem
@@ -343,10 +343,10 @@ Uize.module ({
 			};
 
 			_classPrototype.setCurrentItem = function (_currentItem) {
-				var _this = this;
-				_this.setNodeStyle (_this._previousItem = _this._currentItem,{zIndex:0});
-				_this.setNodeStyle (_this._currentItem = _currentItem,{zIndex:1});
-				_this.fade.start ();
+				var m = this;
+				m.setNodeStyle (m._previousItem = m._currentItem,{zIndex:0});
+				m.setNodeStyle (m._currentItem = _currentItem,{zIndex:1});
+				m.fade.start ();
 				/*?
 					Instance Methods
 						setCurrentItem

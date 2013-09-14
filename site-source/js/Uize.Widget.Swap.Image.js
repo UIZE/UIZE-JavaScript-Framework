@@ -33,39 +33,39 @@ Uize.module ({
 			var _Uize_Node = Uize.Node;
 
 		function _updateUiSrc () {
-			var _this = this;
-			if (_this.isWired) {
+			var m = this;
+			if (m.isWired) {
 				var
-					_currentItem = _this.getNode ('item' + _this._currentItemNo),
-					_nextItemNo = 1 - _this._currentItemNo,
-					_nextItem = _this.getNode ('item' + _nextItemNo),
-					_nextItemImg = _this.getNode ('item' + _nextItemNo + 'Image')
+					_currentItem = m.getNode ('item' + m._currentItemNo),
+					_nextItemNo = 1 - m._currentItemNo,
+					_nextItem = m.getNode ('item' + _nextItemNo),
+					_nextItemImg = m.getNode ('item' + _nextItemNo + 'Image')
 				;
 				_nextItem.style.padding = '0px';
-				_this.prepareForNextItem (_currentItem,_nextItem);
+				m.prepareForNextItem (_currentItem,_nextItem);
 
 				var _loadNextImage = function () {
-					var _image = _this._imagesLoaded [_this._src];
+					var _image = m._imagesLoaded [m._src];
 					_Uize_Node.setStyle (
 						_nextItem,
 						{
-							paddingLeft:(_this.viewFinalCoords [2] + 1 - _image._width) / 2,
-							paddingTop:(_this.viewFinalCoords [3] + 1 - _image._height) / 2
+							paddingLeft:(m.viewFinalCoords [2] + 1 - _image._width) / 2,
+							paddingTop:(m.viewFinalCoords [3] + 1 - _image._height) / 2
 						}
 					);
 					function _nextImageLoaded () {
-						_nextItemImg.Uize_Widget_ImageSwap_src = _this._src;
-						_this.unwireNode (_nextItemImg);
-						_this._currentItemNo = _nextItemNo;
-						_this.setCurrentItem (_nextItem);
+						_nextItemImg.Uize_Widget_ImageSwap_src = m._src;
+						m.unwireNode (_nextItemImg);
+						m._currentItemNo = _nextItemNo;
+						m.setCurrentItem (_nextItem);
 					}
-					if (_nextItemImg.Uize_Widget_ImageSwap_src === _this._src) {
+					if (_nextItemImg.Uize_Widget_ImageSwap_src === m._src) {
 						/* NOTE:
 							In IE 5.2 and Safari 1.3- on Mac OS X, the load event for an IMG node is not fired when that node's src is set again to its current value. So, when switching back and forth between two image URLs, the load event cannot be relied upon for triggering the reveal, since we're toggling between two IMG nodes and sometimes an IMG node used to display an image will already have loaded that image from a previous toggle.
 						*/
 						_nextImageLoaded ();
 					} else {
-						_this.wireNode (
+						m.wireNode (
 							_nextItemImg,
 							{
 								load:_nextImageLoaded,
@@ -73,12 +73,12 @@ Uize.module ({
 								abort:_nextImageLoaded
 							}
 						);
-						if (_Uize_Node.isIe && /\.png$/i.test (_this._src)) {
-							_nextItemImg.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + _this._src + '\', sizingMethod=\'crop\')';
-							_nextItemImg.src = _this.Class.getBlankImageUrl ();
+						if (_Uize_Node.isIe && /\.png$/i.test (m._src)) {
+							_nextItemImg.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + m._src + '\', sizingMethod=\'crop\')';
+							_nextItemImg.src = m.Class.getBlankImageUrl ();
 						}
 						else {
-							_nextItemImg.src = _this._src;
+							_nextItemImg.src = m._src;
 							_nextItemImg.style.filter = null;
 						}
 
@@ -86,7 +86,7 @@ Uize.module ({
 						_nextItemImg.height = _image._height;
 					}
 				};
-				if (_this._imagesLoaded [_this._src]) {
+				if (m._imagesLoaded [m._src]) {
 					_loadNextImage ();
 				} else {
 					var _imageLoader = new Image;
@@ -96,25 +96,25 @@ Uize.module ({
 					_imageLoader.onload = _imageLoader.onerror = _imageLoader.onabort =
 						function () {
 							_imageLoader = null;
-							_this._imagesLoaded [_this._src] = {
-								_width:_this._width || this.width,
-								_height:_this._height || this.height
+							m._imagesLoaded [m._src] = {
+								_width:m._width || this.width,
+								_height:m._height || this.height
 							};
 							_loadNextImage ();
 						}
 					;
-					_imageLoader.src = _this._src;
+					_imageLoader.src = m._src;
 				}
 			}
 		}
 
 		return _superclass.subclass ({
 			alphastructor:function () {
-				var _this = this;
+				var m = this;
 
 				/*** Private Instance Properties ***/
-					_this._currentItemNo = 0;
-					_this._imagesLoaded = {};
+					m._currentItemNo = 0;
+					m._imagesLoaded = {};
 			},
 
 			instanceMethods:{
@@ -138,7 +138,7 @@ Uize.module ({
 				html:{
 					process:function (input) {
 						var
-							_this = this,
+							m = this,
 							_shellNode = this.getNode (),
 							_shellSize = _Uize_Node.getDimensions (_shellNode),
 							_background = input.background || _Uize_Node.Util.getEffectiveBgColor (_shellNode)
@@ -149,7 +149,7 @@ Uize.module ({
 								'" style="position:absolute; margin:0px; padding:0px; left:0px; top:0px; width:' + _shellSize.width +
 								'px; height:' + _shellSize.height + 'px; background:' + _background +
 								'; overflow:hidden;"><img id="' + input.idPrefix + '-item' + _itemNo + 'Image" src="' +
-								_this.Class.getBlankImageUrl () + '"' +
+								m.Class.getBlankImageUrl () + '"' +
 								(typeof input.width == 'number' ? (' width="' + input.width + '"') : '') +
 								(typeof input.height == 'number' ? (' height="' + input.height + '"') : '') + '/></div>'
 							);

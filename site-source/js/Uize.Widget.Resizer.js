@@ -83,54 +83,54 @@ Uize.module ({
 			};
 
 			_classPrototype._updateHandlesEnabled = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					for (var _handleName in _pointIdsMap) {
 						var _pointIds = _pointIdsMap [_handleName];
-						_this.children [_handleName].set ({
+						m.children [_handleName].set ({
 							enabled:
-								_this._canResizeAxis (0,_pointIds) || _this._canResizeAxis (1,_pointIds) ? 'inherit' : _false
+								m._canResizeAxis (0,_pointIds) || m._canResizeAxis (1,_pointIds) ? 'inherit' : _false
 						});
 					}
 				}
 			};
 
 			_classPrototype._updateShellBounds = function () {
-				var _this = this;
-				if (_this.isWired && !(_this._bounds = _this._constrainBounds)) {
-					var _shellDims = _Uize_Node.getDimensions (_this.getNode ('shell'));
+				var m = this;
+				if (m.isWired && !(m._bounds = m._constrainBounds)) {
+					var _shellDims = _Uize_Node.getDimensions (m.getNode ('shell'));
 					if (_shellDims.width && _shellDims.height)
-						_this._bounds = [0,0,_shellDims.width - 1,_shellDims.height - 1]
+						m._bounds = [0,0,_shellDims.width - 1,_shellDims.height - 1]
 					;
 				}
 			};
 
 			_classPrototype._updateShellBoundsAndConformDims = function () {
-				var _this = this;
-				_this._updateShellBounds ();
-				var _bounds = _this._bounds;
+				var m = this;
+				m._updateShellBounds ();
+				var _bounds = m._bounds;
 				if (_bounds) {
-					_this._maxDims = [_bounds [2] - _bounds [0] + 1,_bounds [3] - _bounds [1] + 1];
-					_this._conformDims ();
+					m._maxDims = [_bounds [2] - _bounds [0] + 1,_bounds [3] - _bounds [1] + 1];
+					m._conformDims ();
 				}
 			};
 
 			var _conformDims = _classPrototype._conformDims = function () {
-				var _this = this;
-				if (_this.isWired && (!_this._inDrag || _this._creatingNew)) {
-					_this._updateShellBounds ();
-					if (_this._bounds) {
+				var m = this;
+				if (m.isWired && (!m._inDrag || m._creatingNew)) {
+					m._updateShellBounds ();
+					if (m._bounds) {
 						var
-							_constrain = _this._constrain,
-							_bounds = _this._bounds,
-							_maxDims = _this._maxDims,
-							_left = _this._left,
-							_top = _this._top,
-							_width = _this._width,
-							_height = _this._height,
+							_constrain = m._constrain,
+							_bounds = m._bounds,
+							_maxDims = m._maxDims,
+							_left = m._left,
+							_top = m._top,
+							_width = m._width,
+							_height = m._height,
 							_conformedWidth,
 							_conformedHeight,
-							_aspectRatio = _this._aspectRatio
+							_aspectRatio = m._aspectRatio
 						;
 						if (_aspectRatio != null) {
 							/* TO DO:
@@ -143,9 +143,9 @@ Uize.module ({
 							_conformedHeight = _height;
 						} else {
 							_conformedWidth =
-								Uize.constrain (_width,_this._minWidth,_constrain ? _maxDims [0] : Infinity);
+								Uize.constrain (_width,m._minWidth,_constrain ? _maxDims [0] : Infinity);
 							_conformedHeight =
-								Uize.constrain (_height,_this._minHeight,_constrain ? _maxDims [1] : Infinity);
+								Uize.constrain (_height,m._minHeight,_constrain ? _maxDims [1] : Infinity);
 						}
 						var
 							_conformedLeft =
@@ -157,7 +157,7 @@ Uize.module ({
 							_conformedLeft != _left || _conformedTop != _top ||
 							_conformedWidth != _width || _conformedHeight != _height
 						)
-							_this.set ({
+							m.set ({
 								_left:_conformedLeft,
 								_top:_conformedTop,
 								_width:_conformedWidth,
@@ -170,49 +170,49 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.setPositionDuringDrag = function (_left,_top,_width,_height) {
-				var _this = this;
-				if (_left != _this._left || _top != _this._top || _width != _this._width || _height != _this._height) {
-					_this.set ({
+				var m = this;
+				if (_left != m._left || _top != m._top || _width != m._width || _height != m._height) {
+					m.set ({
 						left:_left,
 						top:_top,
 						width:_width,
 						height:_height
 					});
-					_this.fire ('Position Changed');
+					m.fire ('Position Changed');
 				}
 			};
 
 			_classPrototype.getCoords = function () {
-				var _this = this;
-				return {left:_this._left,top:_this._top,width:_this._width,height:_this._height};
+				var m = this;
+				return {left:m._left,top:m._top,width:m._width,height:m._height};
 			};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					Uize.forEach (
-						_this._areaNodes,
+						m._areaNodes,
 						function _setAreaDims (_areaNode) {
 							function _getBorderWidth (_side) {
 								return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
 							}
-							var _area = _this.getNode (_areaNode);
+							var _area = m.getNode (_areaNode);
 							if (_area) {
 								var _newAreaWidth = Math.max (
-									_this._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
+									m._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
 								);
 								if (_isIe)
-									_newAreaWidth == _this._lastAreaWidth [_areaNode]
-										? _this.displayNode ('jiggler',_this._jigglerShown = !_this._jigglerShown)
-										: (_this._lastAreaWidth [_areaNode] = _newAreaWidth)
+									_newAreaWidth == m._lastAreaWidth [_areaNode]
+										? m.displayNode ('jiggler',m._jigglerShown = !m._jigglerShown)
+										: (m._lastAreaWidth [_areaNode] = _newAreaWidth)
 								;
 								_Uize_Node.setStyle (
 									_area,
 									{
-										left:_this._left,
-										top:_this._top,
+										left:m._left,
+										top:m._top,
 										width:_newAreaWidth,
-										height:Math.max (_this._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
+										height:Math.max (m._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
 									}
 								);
 							}
@@ -222,8 +222,8 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					/*** wire up the drag handles ***/
 						var
 							_bounds,
@@ -233,15 +233,15 @@ Uize.module ({
 							_Uize_Widget_Drag = Uize.Widget.Drag,
 							_wireHandle = function (_handleName) {
 								_pointIds = _pointIdsMap [_handleName];
-								var _dragHandle = _this.addChild (
+								var _dragHandle = m.addChild (
 									_handleName,
 									_Uize_Widget_Drag,
 									{
 										cursor:_handleName == 'move'
 											? _handleName
 											: _handleName.charAt (0) + (_handleName.match (/[A-Z]|$/)) [0] + '-resize',
-										dragRestTime:_this._dragRestTime,
-										node:_this.getNode (_handleName),
+										dragRestTime:m._dragRestTime,
+										node:m.getNode (_handleName),
 										resizerInfo:{
 											_handleName:_handleName,
 											_pointIds:_pointIds
@@ -250,39 +250,39 @@ Uize.module ({
 								);
 								_dragHandle.wire ({
 									'Before Drag Start':
-										function (_event) {_this.fire (_event)},
+										function (_event) {m.fire (_event)},
 									'Drag Start':
 										function (_event) {
-											_this._activeHandle = _event.source;
-											_this.set ({_inDrag:_true});
-											_this._updateShellBoundsAndConformDims ();
-											_bounds = _this._bounds;
+											m._activeHandle = _event.source;
+											m.set ({_inDrag:_true});
+											m._updateShellBoundsAndConformDims ();
+											_bounds = m._bounds;
 											_shellCenter = [_bounds [2] / 2,_bounds [3] / 2];
 											_dragStartCoords = [
-												_this._left,
-												_this._top,
-												_this._left + _this._width - 1,
-												_this._top + _this._height -1
+												m._left,
+												m._top,
+												m._left + m._width - 1,
+												m._top + m._height -1
 											];
-											_this.fire (_event);
+											m.fire (_event);
 										},
 									'Drag Update':
 										function () {
 											var
-												_aspectRatio = _this._aspectRatio,
-												_resizerInfo = _this._activeHandle.resizerInfo,
+												_aspectRatio = m._aspectRatio,
+												_resizerInfo = m._activeHandle.resizerInfo,
 												_pointIds = _resizerInfo._pointIds,
 												_effectivePointIds = _pointIds.concat (),
 												_newCoords = _dragStartCoords.concat ()
 											;
 											function _updateAxisCoords (_axis) {
-												if (_this._canResizeAxis (_axis,_pointIds)) {
+												if (m._canResizeAxis (_axis,_pointIds)) {
 													var
 														_pointIdForAxis = _pointIds [_axis],
 														_offset = _dragHandle.eventDeltaPos [_axis]
 													;
 													if (_pointIdForAxis == 'both') {
-														if (_this._constrain)
+														if (m._constrain)
 															_offset = Uize.constrain (
 																_offset,
 																_bounds [_axis] - _newCoords [_axis],
@@ -294,7 +294,7 @@ Uize.module ({
 													} else {
 														var _coordNo = _axis + _pointIdForAxis * 2;
 														_newCoords [_coordNo] += _offset;
-														if (_this._constrain)
+														if (m._constrain)
 															_newCoords [_coordNo] = Uize.constrain (
 																_newCoords [_coordNo],
 																_bounds [_axis],
@@ -317,8 +317,8 @@ Uize.module ({
 											_updateAxisCoords (1);
 											var
 												_newDims = [
-													Math.max (_newCoords [2] - _newCoords [0] + 1,_this._minWidth),
-													Math.max (_newCoords [3] - _newCoords [1] + 1,_this._minHeight)
+													Math.max (_newCoords [2] - _newCoords [0] + 1,m._minWidth),
+													Math.max (_newCoords [3] - _newCoords [1] + 1,m._minHeight)
 												],
 												_newCenter = [
 													(_newCoords [0] + _newCoords [2]) / 2,
@@ -336,7 +336,7 @@ Uize.module ({
 															],
 															_setDimWithConstraint = function (_axis,_maxDim) {
 																_newDims [_axis] = _dimsFromAspectRatio [_axis];
-																if (_this._constrain) {
+																if (m._constrain) {
 																	_newDims [_axis] = Math.min (_newDims [_axis],_maxDim);
 																	_newDims [1 - _axis] =
 																		_newDims [_axis] * Math.pow (_aspectRatio,_axis * 2 - 1)
@@ -386,20 +386,20 @@ Uize.module ({
 													_updateNewCoord (1);
 												}
 
-											_this.set ({
+											m.set ({
 												activeHandleEffectivePointIdX:_effectivePointIds [0],
 												activeHandleEffectivePointIdY:_effectivePointIds [1]
 											});
-											_this.setPositionDuringDrag (_newCoords [0],_newCoords [1],_newDims [0],_newDims [1]);
+											m.setPositionDuringDrag (_newCoords [0],_newCoords [1],_newDims [0],_newDims [1]);
 										},
 									'Drag Rest':
-										function (_event) {_this.fire (_event)},
+										function (_event) {m.fire (_event)},
 									'Drag Done':
 										function (_event) {
-											_this.set ({_inDrag:_false});
-											_this.fire (_event);
-											_this.set ({_creatingNew:_false});
-											_this.updateUi ();
+											m.set ({_inDrag:_false});
+											m.fire (_event);
+											m.set ({_creatingNew:_false});
+											m.updateUi ();
 										}
 								});
 							}
@@ -407,22 +407,22 @@ Uize.module ({
 						for (var _handleName in _pointIdsMap)
 							_wireHandle (_handleName)
 						;
-						_this._updateHandlesEnabled ();
+						m._updateHandlesEnabled ();
 
 					/*** insert the jiggler node for repaint issue in IE ***/
 						if (_isIe) {
-							var _areaNode = _this.getNode (_this._areaNodes [0]);
+							var _areaNode = m.getNode (m._areaNodes [0]);
 							if (_areaNode) {
 								var _jiggler = document.createElement ('div');
-								_jiggler.id = _this.get ('idPrefix') + '-jiggler';
+								_jiggler.id = m.get ('idPrefix') + '-jiggler';
 								_Uize_Node.setStyle (_jiggler,{position:'absolute'});
 								_areaNode.appendChild (_jiggler);
 							}
 						}
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 
-					_this._updateShellBoundsAndConformDims ();
+					m._updateShellBoundsAndConformDims ();
 				}
 			};
 
