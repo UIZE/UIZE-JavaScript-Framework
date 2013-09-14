@@ -22,6 +22,23 @@ Proposed Simplified Interface
 		);
 		.....................................
 
+		EXAMPLE - WITH CHAINING
+		........................
+		Uize.Node ('#myNodeId')
+			.style ({
+				border: '1px',
+				background: '#ccc'
+			})
+			.display (false)
+			.on (
+				'click',
+				function () {
+					// do something
+				}
+			)
+		;
+		........................
+
 	Node Blob Management
 		The =Uize.Node= object provides methods for managing the set of nodes that make up the node blob that the object represents.
 
