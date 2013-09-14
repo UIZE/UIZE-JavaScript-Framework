@@ -43,13 +43,13 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Private Instance Properties ***/
-							_this._totalProcesses = _this._totalProcessesTime = 0;
-							(_this._fade = Uize.Fade ({duration:4000})).wire (
+							m._totalProcesses = m._totalProcessesTime = 0;
+							(m._fade = Uize.Fade ({duration:4000})).wire (
 								'Changed.value',
-								function (_event) {_this.set ({value:_event.newValue})}
+								function (_event) {m.set ({value:_event.newValue})}
 							);
 					}
 				),
@@ -63,11 +63,11 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_superclass.doMy (_this,'wireUi');
+				var m = this;
+				if (!m.isWired) {
+					_superclass.doMy (m,'wireUi');
 
-					_this._updateUiShown ();
+					m._updateUiShown ();
 				}
 			};
 
@@ -77,29 +77,29 @@ Uize.module ({
 					name:'inProgress',
 					onChange:function () {
 						var
-							_this = this,
+							m = this,
 							_nowMs = Uize.now ()
 						;
-						if (_this._inProgress) _this._startTime = _nowMs;
-						if (!_this._inProgress && typeof _this._startTime == 'number') {
-							_this._totalProcesses++;
-							_this._totalProcessesTime += _nowMs - _this._startTime;
+						if (m._inProgress) m._startTime = _nowMs;
+						if (!m._inProgress && typeof m._startTime == 'number') {
+							m._totalProcesses++;
+							m._totalProcessesTime += _nowMs - m._startTime;
 						}
-						if (_this.isWired) {
+						if (m.isWired) {
 							var _updateShown = function () {
-								if (_this._vanishTimeout) {
-									clearTimeout (_this._vanishTimeout);
-									_this._vanishTimeout = _null;
+								if (m._vanishTimeout) {
+									clearTimeout (m._vanishTimeout);
+									m._vanishTimeout = _null;
 								}
-								_this._updateUiShown ();
+								m._updateUiShown ();
 							};
-							if (_this._inProgress) {
-								_this._fade.start ({duration:(_this._totalProcesses > 0 ? _this._totalProcessesTime / _this._totalProcesses : 3000) * _this._paddingFactor});
+							if (m._inProgress) {
+								m._fade.start ({duration:(m._totalProcesses > 0 ? m._totalProcessesTime / m._totalProcesses : 3000) * m._paddingFactor});
 								_updateShown ();
 							} else {
-								_this._fade.stop ();
-								_this._fade.set ({value:100});
-								_this._vanishTimeout = setTimeout (_updateShown,_this._vanishTime);
+								m._fade.stop ();
+								m._fade.set ({value:100});
+								m._vanishTimeout = setTimeout (_updateShown,m._vanishTime);
 							}
 						}
 					},

@@ -43,14 +43,14 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Private Instance Properties ***/
-							_this._requestQueue = [];
-							_this._responseCache = {};
+							m._requestQueue = [];
+							m._responseCache = {};
 
 						/*** Public Instance Properties ***/
-							_this.requestQueue = _this._requestQueue;
+							m.requestQueue = m._requestQueue;
 							/*?
 								Instance Properties
 									requestQueue
@@ -199,13 +199,13 @@ Uize.module ({
 			};
 
 			_classPrototype.request = function (_request) {
-				var _this = this;
+				var m = this;
 				_resolveRequestUrl (_request);
-				if (_this._getCachedResponse (_request)) {
-					setTimeout (function () {_this._callResponseCallback (_request)},0);
+				if (m._getCachedResponse (_request)) {
+					setTimeout (function () {m._callResponseCallback (_request)},0);
 				} else {
-					_this.queueRequest (_request);
-					_this.useQueue ();
+					m.queueRequest (_request);
+					m.useQueue ();
 				}
 				/*?
 					Instance Methods
@@ -270,7 +270,7 @@ Uize.module ({
 			};
 
 			_classPrototype.queueRequest = function (_request) {
-				var _this = this;
+				var m = this;
 				_resolveRequestUrl (_request);
 				delete _request.completed; // in case the request object was already used for a previous request and completed was set to true (we don't want the repeated request wrapped up prematurely)
 				if (!_request.requestMethod) _request.requestMethod = 'GET';
@@ -278,47 +278,47 @@ Uize.module ({
 				if (typeof _request.cache != 'string')
 					_request.cache = _request.cache ? 'memory' : 'never'
 				;
-				_this._requestQueue [_request.cutToHead ? 'unshift' : 'push'] (_request);
-				_this._fireRequestQueueUpdatedEvent ();
+				m._requestQueue [_request.cutToHead ? 'unshift' : 'push'] (_request);
+				m._fireRequestQueueUpdatedEvent ();
 			};
 
 			_classPrototype.useQueue = function () {
 				var
-					_this = this,
-					_requestQueue = _this._requestQueue,
+					m = this,
+					_requestQueue = m._requestQueue,
 					_requestQueueLength = _requestQueue.length
 				;
-				if (!_this._usingQueue && _requestQueueLength) {
-					_this._usingQueue = _true;
+				if (!m._usingQueue && _requestQueueLength) {
+					m._usingQueue = _true;
 
 					var
 						_cleanFromQueue = function () {
 							var _request;
 							while (
-								(_request = _requestQueue [0]) && (_this._getCachedResponse (_request) || _request.completed)
+								(_request = _requestQueue [0]) && (m._getCachedResponse (_request) || _request.completed)
 							)
-								_this._callResponseCallback (_requestQueue.shift ())
+								m._callResponseCallback (_requestQueue.shift ())
 							;
-							_this._usingQueue = _false;
-							_this._fireRequestQueueUpdatedEvent ();
+							m._usingQueue = _false;
+							m._fireRequestQueueUpdatedEvent ();
 
-							_requestQueue.length && setTimeout (function () {_this.useQueue ()},1);
+							_requestQueue.length && setTimeout (function () {m.useQueue ()},1);
 								/* TO DO:
 									- determine whether or not it's necessary and/or OK to set a timeout in the AJAX case
 									- determine if it's OK in the IFRAME case to do the location back before this timeout is set
 								*/
 						},
 						_handleSingleRequest = function (_request) {
-							if (_this._getCachedResponse (_request)) {
+							if (m._getCachedResponse (_request)) {
 								_cleanFromQueue ();
 							} else {
-								_this.fire ({name:'Perform Request',request:_request});
+								m.fire ({name:'Perform Request',request:_request});
 								/*?
 									Instance Events
 										Perform Request
 											The =Perform Request= instance event fires each time before a request is performed - for both single requests as well as batch requests. The event object contains a "request" property, which is a reference to the request object for the request about to be performed.
 								*/
-								_this.performRequest (
+								m.performRequest (
 									_request,
 									function () {
 										_request.completed = _true;
@@ -362,7 +362,7 @@ Uize.module ({
 									var _requestsInBatchRequest = [];
 									for (var _requestNo = -1; ++_requestNo < _requestsToBatchLength;) {
 										var _request = _requestsToBatch [_requestNo];
-										if (!_this._getCachedResponse (_request)) {
+										if (!m._getCachedResponse (_request)) {
 											_request.completed = _false;
 											_requestsInBatchRequest.push (_request);
 										}
@@ -378,8 +378,8 @@ Uize.module ({
 												only package up as a batch request if there turn out to be more than one non-cached requests
 											*/
 											var _batchRequest = _batchingAgent.buildRequest (_requestsInBatchRequest);
-											_this.fire ({name:'Perform Request',request:_batchRequest});
-											_this.performRequest (
+											m.fire ({name:'Perform Request',request:_batchRequest});
+											m.performRequest (
 												_batchRequest,
 												function () {
 													var

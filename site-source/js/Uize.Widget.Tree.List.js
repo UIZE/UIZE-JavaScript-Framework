@@ -36,29 +36,29 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			function _getTogglerSrc (_this,_item) {
-				return _pathToResources + _this._iconTheme + '-' + (_item.expanded === _false ? 'collapsed' : 'expanded') + '.gif';
+			function _getTogglerSrc (m,_item) {
+				return _pathToResources + m._iconTheme + '-' + (_item.expanded === _false ? 'collapsed' : 'expanded') + '.gif';
 			}
 
 		return _superclass.subclass ({
 			instanceMethods:{
 				setItemExpanded:function (_itemSpecifier,_expanded) {
-					var _this = this;
-					if (_this.isWired) {
-						var _item = _this.getItemFromSpecifier (_itemSpecifier);
-						_this.displayNode (
+					var m = this;
+					if (m.isWired) {
+						var _item = m.getItemFromSpecifier (_itemSpecifier);
+						m.displayNode (
 							_itemSpecifier + 'Children',
 							_item.expanded = typeof _expanded == 'boolean' ? _expanded : _item.expanded === _false
 						);
-						_this.setNodeProperties (
+						m.setNodeProperties (
 							_itemSpecifier + 'Toggler',
 							{
-								src:_getTogglerSrc (_this,_item),
-								title:_this.getTogglerTitle (_item)
+								src:_getTogglerSrc (m,_item),
+								title:m.getTogglerTitle (_item)
 							}
 						);
 					} else {
-						_superclass.doMy (_this,'setItemExpanded',[_itemSpecifier,_expanded]);
+						_superclass.doMy (m,'setItemExpanded',[_itemSpecifier,_expanded]);
 					}
 				}
 			},
@@ -86,8 +86,8 @@ Uize.module ({
 				html:{
 					process:function (input) {
 						var
-							_this = this,
-							_thisClass = _this.Class,
+							m = this,
+							_thisClass = m.Class,
 							_htmlChunks = [],
 							_idPrefix = input.idPrefix,
 							_blankImageUrl = _thisClass.getBlankImageUrl (),
@@ -96,7 +96,7 @@ Uize.module ({
 							_levelClasses = input.levelClasses,
 							_levelClassesLengthMinus1 = _levelClasses.length - 1
 						;
-						_this.traverseTree ({
+						m.traverseTree ({
 							itemHandler:
 								function (_item,_itemSpecifier,_depth) {
 									var
@@ -116,7 +116,7 @@ Uize.module ({
 													(
 														_hasItems
 															? (
-																'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TogglerLink" href="javascript://"><img id="' + _idPrefix + '-' + _itemSpecifier + 'Toggler" src="' + _getTogglerSrc (_this,_item) + '" ' + _iconStyle + ' border="0" title="' + _this.getTogglerTitle (_item) + '"/></a>'
+																'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TogglerLink" href="javascript://"><img id="' + _idPrefix + '-' + _itemSpecifier + 'Toggler" src="' + _getTogglerSrc (m,_item) + '" ' + _iconStyle + ' border="0" title="' + m.getTogglerTitle (_item) + '"/></a>'
 															)
 															: '<img src="' + _pathToResources + input.iconTheme + '-bullet.gif" ' + _iconStyle + '"/>'
 													) + '</span>' +

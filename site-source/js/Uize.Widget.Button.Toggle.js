@@ -39,26 +39,26 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			var _updateUiTextAndTitle = _classPrototype._updateUiTextAndTitle = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_valueObject = _this._valueObject,
+						_valueObject = m._valueObject,
 						_text = '',
 						_title = ''
 					;
 					if (_valueObject) {
-						var _nextValueObject = _this._values [_this._getNextValueNo ()];
+						var _nextValueObject = m._values [m._getNextValueNo ()];
 						_text = Uize.substituteInto (
-							_this._textTemplate,
-							_this._textShowNext ? _nextValueObject : _valueObject
+							m._textTemplate,
+							m._textShowNext ? _nextValueObject : _valueObject
 						);
 						_title = Uize.substituteInto (
-							_this._titleTemplate,
-							_this._titleShowNext ? _nextValueObject : _valueObject
+							m._titleTemplate,
+							m._titleShowNext ? _nextValueObject : _valueObject
 						);
 					}
-					_this.set ('text',_text);
-					_this.setNodeProperties ('',{title:_title});
+					m.set ('text',_text);
+					m.setNodeProperties ('',{title:_title});
 				}
 			};
 
@@ -74,18 +74,18 @@ Uize.module ({
 			_classPrototype.toggleButton = function () {this.set ({_valueNo:this._getNextValueNo ()})};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiTextAndTitle ();
-					_superclass.doMy (_this,'updateUi');
+				var m = this;
+				if (m.isWired) {
+					m._updateUiTextAndTitle ();
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this.wire ('Click',function () {_this.toggleButton ()});
-					_superclass.doMy (_this,'wireUi');
+				var m = this;
+				if (!m.isWired) {
+					m.wire ('Click',function () {m.toggleButton ()});
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
@@ -121,12 +121,12 @@ Uize.module ({
 				_valueNo:{
 					name:'valueNo',
 					onChange:function () {
-						var _this = this;
-						_this.set ({
-							_valueObject:_this._values && _this._valueNo != _null ? _this._values [_this._valueNo] : _null
+						var m = this;
+						m.set ({
+							_valueObject:m._values && m._valueNo != _null ? m._values [m._valueNo] : _null
 						});
-						_this.set ({_value:_this._valueObject ? _this._valueObject.value : _null});
-						_this._updateUiTextAndTitle ();
+						m.set ({_value:m._valueObject ? m._valueObject.value : _null});
+						m._updateUiTextAndTitle ();
 					},
 					value:_null
 				},
@@ -137,12 +137,12 @@ Uize.module ({
 				_values:{
 					name:'values',
 					onChange:function () {
-						var _this = this;
-						if (_this._values) {
-							_this._valueNo = _null;
-							_this.set ({_valueNo:0});
+						var m = this;
+						if (m._values) {
+							m._valueNo = _null;
+							m.set ({_valueNo:0});
 						} else {
-							_this._updateUiTextAndTitle ();
+							m._updateUiTextAndTitle ();
 						}
 					},
 					value:_null

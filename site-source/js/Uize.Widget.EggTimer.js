@@ -34,12 +34,12 @@ Uize.module ({
 				_superclass = Uize.Widget,
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Private Instance Properties ***/
-							_this._timeout = null;
-							_this._running = false;
-							_this._callAdvance = function () {_this.advance ()};
+							m._timeout = null;
+							m._running = false;
+							m._callAdvance = function () {m.advance ()};
 					}
 				),
 				_classPrototype = _class.prototype
@@ -47,21 +47,21 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.advance = function () {
-				var _this = this;
-				if( _this._running ) {
-					_this.children.seconds.down();
-					_this._timeout = setTimeout( _this._callAdvance, 1000 );
+				var m = this;
+				if( m._running ) {
+					m.children.seconds.down();
+					m._timeout = setTimeout( m._callAdvance, 1000 );
 				}
 			};
 
 			_classPrototype.resetTo = function (_timeObject) {
-				var _this = this;
-				_this._running = false;
-				_this.set ({startTime:_timeObject});
-				_this._showSeconds && _this.children.seconds.setCount( _timeObject.seconds );
-				_this._showMinutes && _this.children.minutes.setCount( _timeObject.minutes );
-				_this._showHours && _this.children.hours.setCount( _timeObject.hours );
-				_this._showDays && _this.children.days.setCount( _timeObject.days );
+				var m = this;
+				m._running = false;
+				m.set ({startTime:_timeObject});
+				m._showSeconds && m.children.seconds.setCount( _timeObject.seconds );
+				m._showMinutes && m.children.minutes.setCount( _timeObject.minutes );
+				m._showHours && m.children.hours.setCount( _timeObject.hours );
+				m._showDays && m.children.days.setCount( _timeObject.days );
 			};
 
 			_classPrototype.reset = function () {
@@ -69,9 +69,9 @@ Uize.module ({
 			};
 
 			_classPrototype.resume = function () {
-				var _this = this;
-				_this._running = true;
-				_this._timeout = setTimeout( _this._callAdvance, 1000 );
+				var m = this;
+				m._running = true;
+				m._timeout = setTimeout( m._callAdvance, 1000 );
 			};
 
 			_classPrototype.stop = function () {
@@ -79,19 +79,19 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					var
-						_idPrefix = _this.get ('idPrefix'),
+						_idPrefix = m.get ('idPrefix'),
 						_newCount = function (_name, _count, _limit) {
-							var _countWidget = _this.addChild (
+							var _countWidget = m.addChild (
 								_name,
 								Uize.Widget.Count,
 								{
 									digits: 2,
 									limit: _limit,
-									numbersImagesPath:_this._numbersImagesPath,
-									numbersFiletype:_this._numbersFiletype
+									numbersImagesPath:m._numbersImagesPath,
+									numbersFiletype:m._numbersFiletype
 								}
 							);
 							_countWidget.wireUi();
@@ -99,38 +99,38 @@ Uize.module ({
 							return _countWidget;
 						},
 						_zero = function () {
-							if( (!_this._showMinutes || (_this._showMinutes && !_this.children.minutes.getCount()))
-								&& (!_this._showHours || (_this._showHours && !_this.children.hours.getCount()))
-								&& (!_this._showDays || (_this._showDays && !_this.children.days.getCount())) ) {
-								_this._running = false;
-								_this.fire('zero');
-								if(_this._redirectUrl != '')
-									document.location.href=_this._redirectUrl;
+							if( (!m._showMinutes || (m._showMinutes && !m.children.minutes.getCount()))
+								&& (!m._showHours || (m._showHours && !m.children.hours.getCount()))
+								&& (!m._showDays || (m._showDays && !m.children.days.getCount())) ) {
+								m._running = false;
+								m.fire('zero');
+								if(m._redirectUrl != '')
+									document.location.href=m._redirectUrl;
 							}
 						}
 					;
-					_this._showSeconds &&
-						_newCount ('seconds',_this._startTime.seconds,59)
+					m._showSeconds &&
+						_newCount ('seconds',m._startTime.seconds,59)
 							.wire ({
 								zero:_zero,
-								limit:function () {_this._showMinutes && _this.children.minutes.down ()}
+								limit:function () {m._showMinutes && m.children.minutes.down ()}
 							})
 					;
-					_this._showMinutes &&
-						_newCount ('minutes',_this._startTime.minutes,59)
-							.wire ('limit',function () {_this._showHours && _this.children.hours.down ()})
+					m._showMinutes &&
+						_newCount ('minutes',m._startTime.minutes,59)
+							.wire ('limit',function () {m._showHours && m.children.hours.down ()})
 					;
-					_this._showHours &&
-						_newCount ('hours',_this._startTime.hours,23)
-						.wire ('limit',function () {_this._showDays && _this.children.days.down ()})
+					m._showHours &&
+						_newCount ('hours',m._startTime.hours,23)
+						.wire ('limit',function () {m._showDays && m.children.days.down ()})
 					;
-					_this._showDays &&
-						_newCount ('days',_this._startTime.days,99)
+					m._showDays &&
+						_newCount ('days',m._startTime.days,99)
 					;
 
-					_superclass.doMy (_this,'wireUi');
-					if( _this._autoStart )
-						_this.resume();
+					_superclass.doMy (m,'wireUi');
+					if( m._autoStart )
+						m.resume();
 				}
 			};
 

@@ -668,11 +668,11 @@ Client Services
 		{
 			service:'enableProfile',
 			performService:function (_params,_directives) {
-				var _this = this;
+				var m = this;
 				Uize.module ({
 					required:'Zazzle.Services.MemberProfile',
 					builder:function () {
-						Zazzle.Services.MemberProfile.enable (_params,_this);
+						Zazzle.Services.MemberProfile.enable (_params,m);
 					}
 				});
 			}
@@ -1119,18 +1119,19 @@ Key Aspects of a Framework
 
 		.........................................................
 		_classPrototype.cancel = function () {
-			if (_this._timeout) {
-				clearTimeout (_this._timeout);
-				_this._timeout = _null;
+			var m = this;
+			if (m._timeout) {
+				clearTimeout (m._timeout);
+				m._timeout = _null;
 			}
 		}
 		_classPrototype.perform (_actionFunction) { // support optional delay param
 			var
-				_this = this,
-				_delay = _this._delay
+				m = this,
+				_delay = m._delay
 			;
-			_this.cancel ();
-			_delay ? (_this._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();
+			m.cancel ();
+			_delay ? (m._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();
 		};
 		.........................................................
 
@@ -1153,10 +1154,10 @@ Key Aspects of a Framework
 					_timeout,
 					_caller = function () {
 						var
-							_this = this,
+							m = this,
 							_arguments = arguments
 						;
-						return (_timeout = setTimeout (function () {_callMethod.apply (_this,_arguments)},_delay));
+						return (_timeout = setTimeout (function () {_callMethod.apply (m,_arguments)},_delay));
 					}
 				;
 				(_caller.cancel = function () {if (_timeout) _timeout = clearTimeout (_timeout)}) ();
@@ -1170,20 +1171,20 @@ Key Aspects of a Framework
 	Sample Usage
 		Approach 1
 			.........................................................
-			_this._delayedAction = Uize.Delayed ({delay:1000});
-			_this.wireNode (
+			m._delayedAction = Uize.Delayed ({delay:1000});
+			m.wireNode (
 				node,
 				{
-					mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},
-					mouseout:function () {_this._delayed.cancel ()}
+					mouseover:function () {m._delayed.perform (function () {m.doSomething ()})},
+					mouseout:function () {m._delayed.cancel ()}
 				}
 			);
 			.........................................................
 
 		Approach 2
 			.........................................................
-			var _delayedCaller = Uize.caller (_this,'doSomething',null,1000);
-			_this.wireNode (
+			var _delayedCaller = Uize.caller (m,'doSomething',null,1000);
+			m.wireNode (
 				node,
 				{
 					mouseover:_delayedCaller,
@@ -1194,8 +1195,8 @@ Key Aspects of a Framework
 
 	Thoughts
 		.........................................................
-		function () {_this.setNodeStyle ('blah',{color:'#000'})}
-		Uize.caller (_this,'setNodeStyle,['blah',{color:'#000'}])
+		function () {m.setNodeStyle ('blah',{color:'#000'})}
+		Uize.caller (m,'setNodeStyle,['blah',{color:'#000'}])
 
 		Uize.defer
 		.........................................................

@@ -116,10 +116,10 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Public Instance Properties ***/
-							_this.fade = Uize.Fade ({
+							m.fade = Uize.Fade ({
 								duration:400,
 								curve:Uize.Fade.celeration (0,1),
 								quantization:1
@@ -140,26 +140,26 @@ Uize.module ({
 							});
 
 						/*** Initialization ***/
-							_this.fade.wire (
+							m.fade.wire (
 								'Changed.value',
-								function (_event) {_this.isWired && _this.setNodeProperties ('view',_event.newValue)}
+								function (_event) {m.isWired && m.setNodeProperties ('view',_event.newValue)}
 							);
 					},
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** create the button widgets ***/
 							function _addNavigationButton (_buttonName,_shiftX,_shiftY) {
-								_this._addChildButton (
+								m._addChildButton (
 									_buttonName,
 									function (_event) {
 										var
 											_factor = _event.domEvent.shiftKey ? Infinity : 1,
 											_properties = {}
 										;
-										if (_shiftX) _properties._pageX = _this._pageX + _shiftX * _factor;
-										if (_shiftY) _properties._pageY = _this._pageY + _shiftY * _factor;
-										_this.set (_properties);
+										if (_shiftX) _properties._pageX = m._pageX + _shiftX * _factor;
+										if (_shiftY) _properties._pageY = m._pageY + _shiftY * _factor;
+										m.set (_properties);
 									}
 								)
 							}
@@ -220,11 +220,11 @@ Uize.module ({
 			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
 
 			_classPrototype._displayAxisButtons = function (_axis,_decButtonName,_incButtonName) {
-				var _this = this;
-				_this.isWired &&
-					_this.displayNode (
-						[_this.children [_decButtonName].getNode (),_this.children [_incButtonName].getNode ()],
-						_this._showButtonsWhenNotScrollable || _this.get ('isScrollable' + _axis)
+				var m = this;
+				m.isWired &&
+					m.displayNode (
+						[m.children [_decButtonName].getNode (),m.children [_incButtonName].getNode ()],
+						m._showButtonsWhenNotScrollable || m.get ('isScrollable' + _axis)
 					)
 				;
 			};
@@ -280,9 +280,9 @@ Uize.module ({
 
 		/*** State Properties ***/
 			function _handlePageChange () {
-				var _this = this;
-				if (_this.isWired) {
-					var _viewNode = _this.getNode ('view');
+				var m = this;
+				if (m.isWired) {
+					var _viewNode = m.getNode ('view');
 						/*?
 							Implied Nodes
 								view
@@ -290,14 +290,14 @@ Uize.module ({
 
 									The =overflow= CSS style property for this node should be set to =hidden=, either in an inline =style= attribute, an inline stylesheet, or an external stylesheet.
 						*/
-					_this.fade.start ({
+					m.fade.start ({
 						startValue:{
 							scrollLeft:_viewNode.scrollLeft,
 							scrollTop:_viewNode.scrollTop
 						},
 						endValue:{
-							scrollLeft:_this._pageX * _viewNode.offsetWidth,
-							scrollTop:_this._pageY * _viewNode.offsetHeight
+							scrollLeft:m._pageX * _viewNode.offsetWidth,
+							scrollTop:m._pageY * _viewNode.offsetHeight
 						}
 					});
 				}

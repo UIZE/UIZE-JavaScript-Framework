@@ -41,10 +41,10 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Private Instance Properties ***/
-							_this._imageDims = [0,0];
+							m._imageDims = [0,0];
 					}
 				),
 				_classPrototype = _class.prototype
@@ -53,17 +53,17 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUi = function () {
 				var
-					_this = this,
-					_node = _this.getNode ()
+					m = this,
+					_node = m.getNode ()
 				;
 				if (_node) {
-					_this._imageDims [0] = _node.offsetWidth;
-					_this._imageDims [1] = _node.offsetHeight;
+					m._imageDims [0] = _node.offsetWidth;
+					m._imageDims [1] = _node.offsetHeight;
 					var
-						_boxModelDimOffset = (_Uize_Node.isIe == 'Microsoft Internet Explorer' && document.compatMode != 'CSS1Compat') ? 0 : _this._thickness * 2,
-						_borderCommon = 'solid ' + _this._thickness + 'px ',
+						_boxModelDimOffset = (_Uize_Node.isIe == 'Microsoft Internet Explorer' && document.compatMode != 'CSS1Compat') ? 0 : m._thickness * 2,
+						_borderCommon = 'solid ' + m._thickness + 'px ',
 						_html =
-							'<div style="width:' + (_this._imageDims [0] - _boxModelDimOffset) + 'px; height:' + (_this._imageDims [1] - _boxModelDimOffset) + 'px; border-left:' + _borderCommon + '#ccc; border-top:' + _borderCommon + '#fff; border-right:' + _borderCommon + '#444; border-bottom:' + _borderCommon + '#000;' + _Uize_Node.Util.getOpacityStr (_this._opacity) + '">' +
+							'<div style="width:' + (m._imageDims [0] - _boxModelDimOffset) + 'px; height:' + (m._imageDims [1] - _boxModelDimOffset) + 'px; border-left:' + _borderCommon + '#ccc; border-top:' + _borderCommon + '#fff; border-right:' + _borderCommon + '#444; border-bottom:' + _borderCommon + '#000;' + _Uize_Node.Util.getOpacityStr (m._opacity) + '">' +
 							'&nbsp' +
 							'</div>'
 					;

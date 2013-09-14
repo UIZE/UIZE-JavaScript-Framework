@@ -50,7 +50,7 @@ Uize.module ({
 							);
 						}
 						var
-							_this = this,
+							m = this,
 							_Uize_Node = Uize.Node,
 							_Uize_Node_Util_getOpacityStr = _Uize_Node.Util.getOpacityStr,
 							_idPrefix = _input.idPrefix,
@@ -58,7 +58,7 @@ Uize.module ({
 							_orientationNo = _orientation == 'vertical' ? 1 : 0,
 							_borderThickness = _input.borderThickness != _undefined ? _input.borderThickness : 5,
 							_knobSize = _input.knobSize != _undefined ? _input.knobSize : 15,
-							_shell = _this.getNode (),
+							_shell = m.getNode (),
 							_shellDims = _Uize_Node.getDimensions (_shell),
 							_dimAttributes = ['width','height'],
 							_outerDims = _shell

@@ -65,7 +65,6 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 10000,
 					_iterationNo,
 					_sourceStr = Uize.String.repeat ('this is my string with a bunch of different stuff in it',500),
@@ -80,7 +79,7 @@ Uize.module ({
 					_identicalButLastCharDifferent = _identicalButMissingLastChar + _charNotInSource,
 					_firstCharAtStartButSecondCharDoesntMatch = _sourceStr.charAt (0) + _charNotInSource
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						/*** substring is longer ***/
 							function () {

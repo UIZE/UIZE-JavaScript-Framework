@@ -1168,14 +1168,14 @@ Uize.module ({
 
 			_classPrototype.getSynopsis = function () {
 				var
-					_this = this,
-					_result = _this._result,
+					m = this,
+					_result = m._result,
 					_synopsis = (_result ? 'PASSED' : 'FAILED') + '\n',
-					_reasonForFailure = _this._reasonForFailure
+					_reasonForFailure = m._reasonForFailure
 				;
 				/*** add the breadcrumbs ***/
 					var
-						_testParent = _this,
+						_testParent = m,
 						_testBreadcrumbs = [],
 						_testBreadcrumbsStr = '',
 						_testBreadcrumbIndent = ''
@@ -1195,9 +1195,9 @@ Uize.module ({
 				/*** add the time information ***/
 					_synopsis +=
 						_synopsisDivider +
-						'TIME STARTED: ' + _this._startTime + '\n' +
-						'TIME ENDED: ' + _this._endTime + '\n' +
-						'DURATION: ' + _this._duration + 'ms\n'
+						'TIME STARTED: ' + m._startTime + '\n' +
+						'TIME ENDED: ' + m._endTime + '\n' +
+						'DURATION: ' + m._duration + 'ms\n'
 					;
 
 				if (!_result && _reasonForFailure)
@@ -1222,9 +1222,9 @@ Uize.module ({
 			};
 
 			_classPrototype.stop = function () {
-				var _this = this;
-				Uize.isArray (_this._test) && Uize.callOn (_this._test,'stop');
-				_this.set ({_inProgress:false});
+				var m = this;
+				Uize.isArray (m._test) && Uize.callOn (m._test,'stop');
+				m.set ({_inProgress:false});
 				/*?
 					Instance Methods
 						stop
@@ -1248,12 +1248,12 @@ Uize.module ({
 					Ultimately, this code should find its way into the onChange handler for the inProgress state property, and then this method can be supplanted by a simple start method that only stops the test and then sets the inProgress property to true, making the interface for this class more in line with the Uize.Fade class.
 				*/
 				var
-					_this = this,
-					_test = _this._test,
+					m = this,
+					_test = m._test,
 					_testResult = _true
 				;
-				_this.stop ();
-				_this.set ({
+				m.stop ();
+				m.set ({
 					_inProgress:_true,
 					_progress:0,
 					_startTime:new Date,
@@ -1264,7 +1264,7 @@ Uize.module ({
 					_result:_undefined,
 					_reasonForFailure:_undefined
 				});
-				_this.fire ({name:'Start',bubble:_true});
+				m.fire ({name:'Start',bubble:_true});
 				/*?
 					Instance Events
 						Start
@@ -1278,18 +1278,18 @@ Uize.module ({
 					if (_testResult !== _true && _testResult !== _undefined && _testResult != _isAsync)
 						_testResult = _false
 					;
-					_this.set ({_result:_testResult});
+					m.set ({_result:_testResult});
 					if (_testResult == _isAsync) {
-						_this.set ({_isAsync:_true});
+						m.set ({_isAsync:_true});
 					} else {
 						var _endTime = new Date;
-						_this.set ({
-							_duration:_endTime - _this._startTime,
+						m.set ({
+							_duration:_endTime - m._startTime,
 							_endTime:_endTime,
 							_progress:1
 						});
-						_this.stop (); // TO DO: why is this being called here, and will this lead to excessive recursive calling of stop on subtests, even when test running is not aborted?
-						_this.fire ({name:'Done',bubble:_true});
+						m.stop (); // TO DO: why is this being called here, and will this lead to excessive recursive calling of stop on subtests, even when test running is not aborted?
+						m.fire ({name:'Done',bubble:_true});
 						/*?
 							Instance Events
 								Done
@@ -1299,7 +1299,7 @@ Uize.module ({
 									- this event bubbles
 									- see the companion =Start= instance event
 						*/
-						_this._isAsync && _callback && _callback (_testResult);
+						m._isAsync && _callback && _callback (_testResult);
 					}
 				}
 				if (Uize.isArray (_test)) {
@@ -1307,12 +1307,12 @@ Uize.module ({
 						_testLength = _test.length,
 						_testNo = -1,
 						_continue = function () {
-							_this.set ({_progress:(_testNo + 1) / _testLength});
+							m.set ({_progress:(_testNo + 1) / _testLength});
 							function _setResultAndContinue (_result) {
 								_testResult = _result;
 								_continue ();
 							}
-							while (_this._inProgress && _testResult === _true && ++_testNo < _testLength)
+							while (m._inProgress && _testResult === _true && ++_testNo < _testLength)
 								_testResult = _test [_testNo].run (_setResultAndContinue)
 							;
 							_updateResultProperty ();
@@ -1325,7 +1325,7 @@ Uize.module ({
 						var
 							_returned = _false,
 							_testFunctionReturnValue = _test.call (
-								_this,
+								m,
 								function (_result) {
 									_testResult = _result;
 									_returned && _updateResultProperty ();
@@ -1337,7 +1337,7 @@ Uize.module ({
 						;
 						_returned = true;
 					} catch (_error) {
-						_this.set ({
+						m.set ({
 							_reasonForFailure:
 								'JavaScript Error...\n' +
 								'ERROR NAME: ' + _error.name + '\n' +
@@ -1683,11 +1683,11 @@ Uize.module ({
 
 				_class.staticMethodTest = function (_methodFullName,_cases,_testProperties,_caseTestProperties) {
 					var
-						_this = this,
+						m = this,
 						_hostAndProperty = _splitHostAndProperty (_methodFullName),
 						_methodHostName = _hostAndProperty.host,
 						_methodName = _hostAndProperty.property,
-						_test = [_this.staticPropertyTest (_methodFullName,'function')]
+						_test = [m.staticPropertyTest (_methodFullName,'function')]
 					;
 					function _getCaseTest (_case) {
 						var
@@ -1724,7 +1724,7 @@ Uize.module ({
 					for (var _caseNo = -1, _casesLength = _cases.length; ++_caseNo < _casesLength;)
 						_test.push (_getCaseTest (_cases [_caseNo]))
 					;
-					var _testClass = _this.resolve (
+					var _testClass = m.resolve (
 						Uize.copyInto (
 							{
 								title:'STATIC METHOD TEST: ' + _methodFullName,
@@ -1827,15 +1827,15 @@ Uize.module ({
 				};
 
 				_class.staticMethodsTest = function (_staticMethodsTest) {
-					var _this = this;
-					return _this.resolve ({
+					var m = this;
+					return m.resolve ({
 						title:'Static Method Tests',
 						test:Uize.map (
 							_staticMethodsTest,
 							function (_staticMethodTest) {
 								return (
 									Uize.isArray (_staticMethodTest)
-										? _this.staticMethodTest.apply (_this,_staticMethodTest)
+										? m.staticMethodTest.apply (m,_staticMethodTest)
 										: _staticMethodTest
 								);
 							}
@@ -1966,14 +1966,14 @@ Uize.module ({
 								title:'RUN TEST MODULE: ' + _testModule,
 								test:function (_continue) {
 									var
-										_this = this,
+										m = this,
 										_testModuleInstance = Uize.getModuleByName (_testModule) ()
 									;
 									_testModuleInstance.wire (
 										'Done',
 										function (_event) {
 											var _eventSource = _event.source;
-											_eventSource._reasonForFailure && _this.set ({
+											_eventSource._reasonForFailure && m.set ({
 												_reasonForFailure:
 													'running test module failed with the following synopsis...\n\n' +
 													_eventSource.getSynopsis ()
@@ -2009,12 +2009,12 @@ Uize.module ({
 				};
 
 				_class.testSuite = function (_testSuiteTitle,_testSuiteModules) {
-					var _this = this;
-					return _this.resolve ({
+					var m = this;
+					return m.resolve ({
 						title:_testSuiteTitle,
 						test:Uize.map (
 							_testSuiteModules,
-							function (_testSuiteModule) {return _this.testModuleTest (_testSuiteModule)}
+							function (_testSuiteModule) {return m.testModuleTest (_testSuiteModule)}
 						)
 					});
 					/*?
@@ -2183,8 +2183,8 @@ Uize.module ({
 					name:'test',
 					conformer:function (_value) {
 						if (Uize.isArray (_value)) {
-							var _this = this;
-							_value = Uize.map (_value,function (_subtest) {return new _subtest ({parent:_this})});
+							var m = this;
+							_value = Uize.map (_value,function (_subtest) {return new _subtest ({parent:m})});
 							/*?
 								Instance Properties
 									parent

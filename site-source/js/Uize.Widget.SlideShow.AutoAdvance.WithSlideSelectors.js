@@ -34,15 +34,15 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** add the options widget ***/
-							var _options = _this.addChild ('options',Uize.Widget.Options);
+							var _options = m.addChild ('options',Uize.Widget.Options);
 
 							/*** keep options widget synchronized to slideshow ***/
-								_this.wire ({
-									'Changed.slideNo':function (_event) {_this.children.options.set ({value:_event.newValue})},
-									'Changed.totalSlides':function () {_this._updateOptionsValueAndValues ()}
+								m.wire ({
+									'Changed.slideNo':function (_event) {m.children.options.set ({value:_event.newValue})},
+									'Changed.totalSlides':function () {m._updateOptionsValueAndValues ()}
 								});
 
 							/*** keep slideshow synchronized to options widget ***/
@@ -50,19 +50,19 @@ Uize.module ({
 									'Changed.value',
 									function (_event) {
 										var _newSlideNo = _event.newValue;
-										if (_newSlideNo != _this.get ('slideNo')) {
-											_this.stopThenResume ();
-											_this.set ({slideNo:_newSlideNo});
+										if (_newSlideNo != m.get ('slideNo')) {
+											m.stopThenResume ();
+											m.set ({slideNo:_newSlideNo});
 										}
 									}
 								);
 
 						/* HACK!!! */
-							_this.wire ('Changed.slideNo',function () {_this.wipeDone ()});
+							m.wire ('Changed.slideNo',function () {m.wipeDone ()});
 
 						/*** initialization ***/
-							_this._updateOptionsValueAndValues ();
-							_this.set ({slideNo:_this._startSlideNo}); // HACK
+							m._updateOptionsValueAndValues ();
+							m.set ({slideNo:m._startSlideNo}); // HACK
 					}
 				),
 				_classPrototype = _class.prototype

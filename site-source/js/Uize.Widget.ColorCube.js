@@ -43,16 +43,16 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** create the color objects that will be used in interpolation ***/
-							_this._colorObjectTopLeft = new _Uize_Color;
-							_this._colorObjectTopRight = new _Uize_Color;
-							_this._colorObjectBottomLeft = new _Uize_Color;
-							_this._colorObjectBottomRight = new _Uize_Color;
-							_this._colorObjectLeft = new _Uize_Color;
-							_this._colorObjectRight = new _Uize_Color;
-							_this._colorObjectPoint = new _Uize_Color;
+							m._colorObjectTopLeft = new _Uize_Color;
+							m._colorObjectTopRight = new _Uize_Color;
+							m._colorObjectBottomLeft = new _Uize_Color;
+							m._colorObjectBottomRight = new _Uize_Color;
+							m._colorObjectLeft = new _Uize_Color;
+							m._colorObjectRight = new _Uize_Color;
+							m._colorObjectPoint = new _Uize_Color;
 					}
 				),
 				_classPrototype = _class.prototype
@@ -60,21 +60,21 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			var _updateUi = _classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_colorObjectTopLeft = _this._colorObjectTopLeft.from (_this._colorTopLeft),
-						_colorObjectTopRight = _this._colorObjectTopRight.from (_this._colorTopRight),
-						_colorObjectBottomLeft = _this._colorObjectBottomLeft.from (_this._colorBottomLeft),
-						_colorObjectBottomRight = _this._colorObjectBottomRight.from (_this._colorBottomRight),
+						_colorObjectTopLeft = m._colorObjectTopLeft.from (m._colorTopLeft),
+						_colorObjectTopRight = m._colorObjectTopRight.from (m._colorTopRight),
+						_colorObjectBottomLeft = m._colorObjectBottomLeft.from (m._colorBottomLeft),
+						_colorObjectBottomRight = m._colorObjectBottomRight.from (m._colorBottomRight),
 						_primaryEncoding = _colorObjectTopLeft.encoding,
-						_colorObjectLeft = _this._colorObjectLeft.setEncoding (_primaryEncoding),
-						_colorObjectRight = _this._colorObjectRight.setEncoding (_primaryEncoding),
-						_colorObjectPoint = _this._colorObjectPoint.setEncoding (_primaryEncoding),
-						_divisionsX = _this._divisionsX,
-						_divisionsY = _this._divisionsY,
-						_divisionSizeX = _this._divisionSizeX,
-						_divisionSizeY = _this._divisionSizeY,
+						_colorObjectLeft = m._colorObjectLeft.setEncoding (_primaryEncoding),
+						_colorObjectRight = m._colorObjectRight.setEncoding (_primaryEncoding),
+						_colorObjectPoint = m._colorObjectPoint.setEncoding (_primaryEncoding),
+						_divisionsX = m._divisionsX,
+						_divisionsY = m._divisionsY,
+						_divisionSizeX = m._divisionSizeX,
+						_divisionSizeY = m._divisionSizeY,
 						_nodeNameSuffix
 					;
 
@@ -85,7 +85,7 @@ Uize.module ({
 						_colorObjectRight.blend (_colorObjectTopRight,_colorObjectBottomRight,_blendY);
 						for (var _divisionX = -1; ++_divisionX < _divisionsX;) {
 							_colorObjectPoint.blend (_colorObjectLeft,_colorObjectRight,_divisionX * _divisionSizeX);
-							_this.getNode ('x' + _divisionX + _nodeNameSuffix).style.backgroundColor =
+							m.getNode ('x' + _divisionX + _nodeNameSuffix).style.backgroundColor =
 								_colorObjectPoint.to ('RGB string')
 							;
 						}

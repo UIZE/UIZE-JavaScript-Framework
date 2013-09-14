@@ -67,7 +67,6 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_globalEvalIterations = 10000,
 					_globalEvaledFunctionIterations = 1000000,
 					_iterationNo,
@@ -78,7 +77,7 @@ Uize.module ({
 					functionDefinedUsingFunctionObjectBasedGlobalEvalSource =
 						'functionDefinedUsingFunctionObjectBasedGlobalEval = function () {Uize.Widget.Page}'
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							/*** time the duration for calling function defined normally in global scope ***/

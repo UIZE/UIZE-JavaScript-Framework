@@ -34,17 +34,17 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** make play button ***/
-							(_this._play = _this._addChildButton ('play',function () {_this.toggle ('playing')}))
-								.set ({playing:_this._playing})
+							(m._play = m._addChildButton ('play',function () {m.toggle ('playing')}))
+								.set ({playing:m._playing})
 							;
 
 						/*** pause auto-advance if the user interacts with the slideshow ***/
 							function _handleButtonClick (_buttonName) {
-								_this.children [_buttonName].wire (
-									'Click',function () {_this._playing && _this.stopThenResume ()}
+								m.children [_buttonName].wire (
+									'Click',function () {m._playing && m.stopThenResume ()}
 								);
 							}
 							_handleButtonClick ('previous');
@@ -60,40 +60,40 @@ Uize.module ({
 			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
 
 			_classPrototype._clearAutoAdvanceTimeout = function () {
-				var _this = this;
-				if (_this._autoAdvanceTimeout) {
-					clearTimeout (_this._autoAdvanceTimeout);
-					_this._autoAdvanceTimeout = null;
+				var m = this;
+				if (m._autoAdvanceTimeout) {
+					clearTimeout (m._autoAdvanceTimeout);
+					m._autoAdvanceTimeout = null;
 				}
 			};
 
 			_classPrototype._clearResumeTimeout = function () {
-				var _this = this;
-				if (_this._resumeTimeout) {
-					clearTimeout (_this._resumeTimeout);
-					_this._resumeTimeout = null;
+				var m = this;
+				if (m._resumeTimeout) {
+					clearTimeout (m._resumeTimeout);
+					m._resumeTimeout = null;
 				}
 			};
 
 			_classPrototype._autoAdvance = function () {
-				var _this = this;
-				_this._clearAutoAdvanceTimeout ();
-				_this.advance (1);
+				var m = this;
+				m._clearAutoAdvanceTimeout ();
+				m.advance (1);
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wipeDone = function () {
-				var _this = this;
-				if (_this._playing) {
-					_this._clearAutoAdvanceTimeout ();
-					_this._autoAdvanceTimeout = setTimeout (function () {_this._autoAdvance ()},_this._interSlideTime);
+				var m = this;
+				if (m._playing) {
+					m._clearAutoAdvanceTimeout ();
+					m._autoAdvanceTimeout = setTimeout (function () {m._autoAdvance ()},m._interSlideTime);
 				}
 			};
 
 			_classPrototype.stopThenResume = function () {
-				var _this = this;
-				_this.set ({_playing:false});
-				_this._resumeTimeout = setTimeout (function () {_this.set ({_playing:true})},_this._idleResumeTime);
+				var m = this;
+				m.set ({_playing:false});
+				m._resumeTimeout = setTimeout (function () {m.set ({_playing:true})},m._idleResumeTime);
 			};
 
 		/*** State Properties ***/
@@ -109,20 +109,20 @@ Uize.module ({
 				_playing:{
 					name:'playing',
 					onChange:function () {
-						var _this = this;
-						if (_this._playing) {
-						if (_this._interSlideTime && _this._interSlideTime < 0) {
-							_this.set({ playing: false });
+						var m = this;
+						if (m._playing) {
+						if (m._interSlideTime && m._interSlideTime < 0) {
+							m.set({ playing: false });
 						} else {
-							_this._clearResumeTimeout ();
-							_this._clearAutoAdvanceTimeout ();
-							_this._autoAdvanceTimeout = setTimeout (function () {_this._autoAdvance ()},_this._interSlideTime);
+							m._clearResumeTimeout ();
+							m._clearAutoAdvanceTimeout ();
+							m._autoAdvanceTimeout = setTimeout (function () {m._autoAdvance ()},m._interSlideTime);
 						}
 						} else {
-							_this._clearAutoAdvanceTimeout ();
-							_this._clearResumeTimeout ();
+							m._clearAutoAdvanceTimeout ();
+							m._clearResumeTimeout ();
 						}
-						_this._play && _this._play.set ({playing:_this._playing});
+						m._play && m._play.set ({playing:m._playing});
 					},
 					value:false
 				}

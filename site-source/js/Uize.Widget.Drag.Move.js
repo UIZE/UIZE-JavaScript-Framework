@@ -39,7 +39,7 @@ Uize.module ({
 				_class = _superclass.subclass (
 					function () {
 						var
-							_this = this,
+							m = this,
 							_sideNames = [
 								['left','right'],
 								['top','bottom']
@@ -48,10 +48,10 @@ Uize.module ({
 							_dragSideUnits = [],
 							_dragStartNodePos = []
 						;
-						_this.wire ({
+						m.wire ({
 							'Drag Start':
 								function () {
-									var _node = _this._getNodeToMove ();
+									var _node = m._getNodeToMove ();
 									function _captureAxisStartInfo (_axis) {
 										function _getPosUnit (_posStr) {
 											var _unitMatch = _posStr.match (/(px|%)\s*$/);
@@ -71,12 +71,12 @@ Uize.module ({
 								},
 							'Drag Update':
 								function () {
-									var _node = _this._getNodeToMove ();
+									var _node = m._getNodeToMove ();
 									function _setAxisPos (_axis) {
 										var
 											_dragSide = _dragSides [_axis],
 											_dragSideUnit = _dragSideUnits [_axis],
-											_dragSidePos = (_dragStartNodePos [_axis] + _this.eventDeltaPos [_axis] * (_dragSide ? -1 : 1))
+											_dragSidePos = (_dragStartNodePos [_axis] + m.eventDeltaPos [_axis] * (_dragSide ? -1 : 1))
 										;
 										if (_dragSideUnit == '%')
 											_dragSidePos = _dragSidePos / _node.offsetParent ['offset' + (_axis ? 'Height' : 'Width')] * 100

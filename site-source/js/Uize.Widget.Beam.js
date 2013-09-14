@@ -42,22 +42,22 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			var _updateUi = _classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_width = _this._width,
-						_height = _this._height,
-						_beamThinSizePixels = Math.round (_height * _this._thinSize),
-						_middleTop = Math.round (_height - _beamThinSizePixels) * _this._thinAlign,
+						_width = m._width,
+						_height = m._height,
+						_beamThinSizePixels = Math.round (_height * m._thinSize),
+						_middleTop = Math.round (_height - _beamThinSizePixels) * m._thinAlign,
 						_middleBottom = _middleTop + _beamThinSizePixels - 1
 					;
-					_this.setNodeStyle ('',_this.get (['left','top','width','height']));
-					_this.setNodeStyle ('diamondTopLeft',{left:0,top:0,width:_width,height:_middleTop});
-					_this.setNodeStyle (
+					m.setNodeStyle ('',m.get (['left','top','width','height']));
+					m.setNodeStyle ('diamondTopLeft',{left:0,top:0,width:_width,height:_middleTop});
+					m.setNodeStyle (
 						'diamondBottomLeft',
 						{left:0,top:_middleTop + _beamThinSizePixels,width:_width,height:_height - _beamThinSizePixels - _middleTop}
 					);
-					_this.setNodeStyle ('middle',{left:0,top:_middleTop,width:_width,height:_beamThinSizePixels});
+					m.setNodeStyle ('middle',{left:0,top:_middleTop,width:_width,height:_beamThinSizePixels});
 				}
 			};
 

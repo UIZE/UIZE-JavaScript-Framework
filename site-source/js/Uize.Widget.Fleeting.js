@@ -40,25 +40,25 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Private Instance Properties ***/
-							_this._lifeTimeout = null;
-							_this._showFade = Uize.Fade ({
+							m._lifeTimeout = null;
+							m._showFade = Uize.Fade ({
 								curve:Uize.Fade.celeration (0,1),
 								duration:750
 							});
-							_this._showFade.wire ({
+							m._showFade.wire ({
 								Start:function () {
-									_this._shown
-										&& _this.displayNode ('',_this._shown)
+									m._shown
+										&& m.displayNode ('',m._shown)
 									},
 								'Changed.value':function () {
-									_this.setNodeOpacity ('', _this._showFade)
+									m.setNodeOpacity ('', m._showFade)
 									},
 								Done:function () {
-									!_this._shown
-										&& _this.displayNode ('', _this._shown)
+									!m._shown
+										&& m.displayNode ('', m._shown)
 									}
 							});
 					}
@@ -83,36 +83,36 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.show = function () {
-				var _this = this;
+				var m = this;
 
-				if (_this._lifeTimeout != null) {
-					clearTimeout (_this._timeout);
-					_this._timeout = null;
+				if (m._lifeTimeout != null) {
+					clearTimeout (m._timeout);
+					m._timeout = null;
 				}
 
-				_this.set ({_shown:_true});
+				m.set ({_shown:_true});
 			};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
-					_this._updateUiText ();
-					_superclass.doMy (_this,'updateUi');
+				if (m.isWired) {
+					m._updateUiText ();
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					var _rootNode = _this._rootNode = _this.getNode ();
+				var m = this;
+				if (!m.isWired) {
+					var _rootNode = m._rootNode = m.getNode ();
 					if (_rootNode) {
 						/*** initialize text value if undefined ***/
-							_this._text == _undefined
-								&& _this.set ({_text:_this.getNodeValue('text')})
+							m._text == _undefined
+								&& m.set ({_text:m.getNodeValue('text')})
 							;
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 					}
 				}
 			};
@@ -130,26 +130,26 @@ Uize.module ({
 				_shown:{
 					name:'shown',
 					onChange:function () {
-						var _this = this;
+						var m = this;
 
-						if (_this.isWired) {
-							_this._shown
-								&& _this.fire ('Before Show');
+						if (m.isWired) {
+							m._shown
+								&& m.fire ('Before Show');
 
-						_this._showFade.start ({
-							startValue: _this._shown ? 0 : _this._maxOpacity,
-								endValue:_this._shown ? _this._maxOpacity : 0
+						m._showFade.start ({
+							startValue: m._shown ? 0 : m._maxOpacity,
+								endValue:m._shown ? m._maxOpacity : 0
 						});
 
-							if (_this._shown)
-								_this._lifeTimeout = setTimeout(
-									function() { _this.set({_shown:_false}) },
-									_this._lifeSpan
+							if (m._shown)
+								m._lifeTimeout = setTimeout(
+									function() { m.set({_shown:_false}) },
+									m._lifeSpan
 								)
 							;
 
-							!_this._shown
-								&& _this.fire('After Hide');
+							!m._shown
+								&& m.fire('After Hide');
 						}
 					},
 					value:_false

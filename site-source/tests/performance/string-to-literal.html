@@ -53,13 +53,12 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 30000,
 					_iterationNo,
 					_string = 'sfs fsd fzx \'zc \r xcvd fasdf \n asf \'asdf \r\r dfsad\'f\' sadf \\sa fas dfas df\\\\as dfasd f\r',
 					_quoteChar = '\''
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							/*** time the duration for using a chained replace approach ***/

@@ -43,13 +43,13 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			alphastructor:function () {
-				var _this = this;
+				var m = this;
 
-				_this._color = Uize.Color ();
+				m._color = Uize.Color ();
 
 				/*** Initialization ***/
 					function _addSlider (_sliderName,_sliderColor) {
-						var _slider = _this.addChild (
+						var _slider = m.addChild (
 							_sliderName,
 							Uize.Widget.Bar.Slider,
 							{
@@ -68,15 +68,15 @@ Uize.module ({
 						_slider.wire (
 							'Changed.value',
 							function () {
-								if (!_this._settingSliders) {
-									var _children = _this.children;
-									_this.set ({_value:_this._color.from (_this._rgbSliders).to ('hex')});
+								if (!m._settingSliders) {
+									var _children = m.children;
+									m.set ({_value:m._color.from (m._rgbSliders).to ('hex')});
 								}
 							}
 						);
 						return _slider;
 					}
-					_this._rgbSliders = [
+					m._rgbSliders = [
 						_addSlider ('sliderR','#f00'),_addSlider ('sliderG','#0f0'),_addSlider ('sliderB','#00f')
 					];
 			},
@@ -89,10 +89,10 @@ Uize.module ({
 
 				/*** Public Instance Methods ***/
 					updateUi:function () {
-						var _this = this;
-						if (_this.isWired) {
-							Uize.callOn (_this.children,'updateUi');
-							_this._updateUiSwatch ();
+						var m = this;
+						if (m.isWired) {
+							Uize.callOn (m.children,'updateUi');
+							m._updateUiSwatch ();
 						}
 					}
 			},
@@ -103,16 +103,16 @@ Uize.module ({
 					conformer:function (_value) {return Uize.Color.to (_value,'hex')},
 					onChange:function () {
 						var
-							_this = this,
-							_children = _this.children,
-							_colorTuple = _this._color.from (this._value).tuple
+							m = this,
+							_children = m.children,
+							_colorTuple = m._color.from (this._value).tuple
 						;
-						_this._settingSliders = _true;
+						m._settingSliders = _true;
 						_children.sliderR.set ({value:_colorTuple [0]});
 						_children.sliderG.set ({value:_colorTuple [1]});
 						_children.sliderB.set ({value:_colorTuple [2]});
-						_this._settingSliders = _false;
-						_this._updateUiSwatch ();
+						m._settingSliders = _false;
+						m._updateUiSwatch ();
 					},
 					value:'000000'
 				}

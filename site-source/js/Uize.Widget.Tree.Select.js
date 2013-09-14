@@ -40,19 +40,19 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function (_properties) {
-						var _this = this;
+						var m = this;
 
 						/*** Private Instance Properties ***/
-							_this._levels = _null;
-							_this._totalLevels = 0;
-							_this._selectionComplete = _false;
+							m._levels = _null;
+							m._totalLevels = 0;
+							m._selectionComplete = _false;
 
 						/*** handle change in items ***/
-							_this.wire (
+							m.wire (
 								'Changed.items',
 								function (_event) {
 									function _burrowDeeper (_item,_currentDepth) {
-										_this._totalLevels = Math.max (_this._totalLevels,_currentDepth);
+										m._totalLevels = Math.max (m._totalLevels,_currentDepth);
 										if (_class.itemHasChildren (_item)) {
 											for (
 												var _itemNo = -1, _itemItems = _item.items, _itemItemsLength = _itemItems.length;
@@ -63,11 +63,11 @@ Uize.module ({
 										}
 									}
 									var _rootItem = {items:_event.newValue};
-									_this._levels = [[_rootItem]];
-									_this._totalLevels = 0;
+									m._levels = [[_rootItem]];
+									m._totalLevels = 0;
 									_burrowDeeper (_rootItem,0);
-									_this._updateUi ();
-									_this._onItemSelected (0);
+									m._updateUi ();
+									m._onItemSelected (0);
 								}
 							);
 					}
@@ -77,28 +77,28 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					for (var _levelNo = 0; ++_levelNo <= _this._maxLevels;)
-						_this.displayNode ('level' + _levelNo,_levelNo <= _this._totalLevels)
+				var m = this;
+				if (m.isWired) {
+					for (var _levelNo = 0; ++_levelNo <= m._maxLevels;)
+						m.displayNode ('level' + _levelNo,_levelNo <= m._totalLevels)
 					;
 				}
 			};
 
 			_classPrototype._onItemSelected = function (_thisLevelNo) {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_thisLevel = _this._levels [_thisLevelNo],
-						_thisSelect = _this.getNode ('level' + _thisLevelNo),
+						_thisLevel = m._levels [_thisLevelNo],
+						_thisSelect = m.getNode ('level' + _thisLevelNo),
 						_nextLevelNo = _thisLevelNo + 1,
 						_enableSelect = function (_select,_mustEnable) {
 							_select.disabled = !_mustEnable;
-							_this.displayNode (_select,_mustEnable || _this._displayDisabledSelects);
+							m.displayNode (_select,_mustEnable || m._displayDisabledSelects);
 						}
 					;
-					for (var _levelNo = _nextLevelNo - 1; ++_levelNo <= _this._totalLevels;) {
-						var _select = _this.getNode ('level' + _levelNo);
+					for (var _levelNo = _nextLevelNo - 1; ++_levelNo <= m._totalLevels;) {
+						var _select = m.getNode ('level' + _levelNo);
 						_select.options.length = 0;
 						_enableSelect (_select,_false);
 					}
@@ -108,24 +108,24 @@ Uize.module ({
 						_itemSelectedHasChildren = _class.itemHasChildren (_itemSelected),
 						_selectionComplete = _thisItemNo > -1 && !_itemSelectedHasChildren
 					;
-					_this.setNodeProperties ('submitButton',{disabled:!_selectionComplete});
+					m.setNodeProperties ('submitButton',{disabled:!_selectionComplete});
 					if (_itemSelectedHasChildren) {
 						/* populate values for the next level's select box */
-						_this._levels.length = _nextLevelNo + 1;
-						_this._levels [_nextLevelNo] = _itemSelected.items;
+						m._levels.length = _nextLevelNo + 1;
+						m._levels [_nextLevelNo] = _itemSelected.items;
 						var
-							_nextSelect = _this.getNode ('level' + _nextLevelNo),
+							_nextSelect = m.getNode ('level' + _nextLevelNo),
 							_addOption = function (_optionText) {
 								_nextSelect.options [_nextSelect.options.length] = new Option (_optionText);
 							}
 						;
-						_addOption (_this._chooseText);
+						_addOption (m._chooseText);
 						Uize.forEach (_itemSelected.items,function (_item) {_addOption (_item.title)});
 						_enableSelect (_nextSelect,_true);
 					}
-					if (_selectionComplete != _this._selectionComplete) {
-						_this.fire ('Selection ' + (_selectionComplete ? 'Complete' : 'Incomplete'));
-						_this._selectionComplete = _selectionComplete;
+					if (_selectionComplete != m._selectionComplete) {
+						m.fire ('Selection ' + (_selectionComplete ? 'Complete' : 'Incomplete'));
+						m._selectionComplete = _selectionComplete;
 					}
 				}
 			};
@@ -134,22 +134,22 @@ Uize.module ({
 			_classPrototype.updateUi = _classPrototype._updateUi;
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					for (
 						var
 							_levelNo = 0,
 							_getOnItemSelectedHandler = function (_levelNo) {
-								return function () {_this._onItemSelected (_levelNo)};
+								return function () {m._onItemSelected (_levelNo)};
 							}
 						;
-						++_levelNo <= _this._maxLevels;
+						++_levelNo <= m._maxLevels;
 					)
-						_this.wireNode ('level' + _levelNo,'change',_getOnItemSelectedHandler (_levelNo))
+						m.wireNode ('level' + _levelNo,'change',_getOnItemSelectedHandler (_levelNo))
 					;
 
-					_superclass.doMy (_this,'wireUi');
-					_this._onItemSelected (0);
+					_superclass.doMy (m,'wireUi');
+					m._onItemSelected (0);
 				}
 			};
 

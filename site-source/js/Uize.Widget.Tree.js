@@ -36,11 +36,11 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			function _canonicalizeItemSpecifier (_this,_itemSpecifier) {
+			function _canonicalizeItemSpecifier (m,_itemSpecifier) {
 				return (
 					typeof _itemSpecifier == 'string'
 						? _itemSpecifier
-						: _this.getItemInfoFromSpecifier (_itemSpecifier).itemSpecifier
+						: m.getItemInfoFromSpecifier (_itemSpecifier).itemSpecifier
 				);
 			}
 
@@ -52,13 +52,13 @@ Uize.module ({
 
 				getItemInfoFromSpecifier:function (_itemSpecifier) {
 					var
-						_this = this,
+						m = this,
 						_item,
-						_items = _this._items,
+						_items = m._items,
 						_canonicalItemSpecifier = [],
 						_titleParts = [],
 						_itemSpecifierWasArray = Uize.isArray (_itemSpecifier),
-						_itemDelimiter = _this._itemDelimiter,
+						_itemDelimiter = m._itemDelimiter,
 						_itemSpecifierLevels = _itemSpecifierWasArray ? _itemSpecifier : _itemSpecifier.split (_itemDelimiter),
 						_itemSpecifierLevelsLength = _itemSpecifierLevels.length
 					;
@@ -84,11 +84,11 @@ Uize.module ({
 				},
 
 				setExpandedDepth:function (_expandedDepth,_itemSpecifier) {
-					var _this = this;
-					_this.traverseTree ({
+					var m = this;
+					m.traverseTree ({
 						itemHandler:
 							function (_item,_itemSpecifier,_depth) {
-								_this.setItemExpanded (_itemSpecifier,_depth < _expandedDepth);
+								m.setItemExpanded (_itemSpecifier,_depth < _expandedDepth);
 							},
 						itemSpecifier:_itemSpecifier
 					});
@@ -105,14 +105,14 @@ Uize.module ({
 
 				collapseAllBut:function (_expandedItemSpecifier) {
 					var
-						_this = this,
-						_itemDelimiter = _this._itemDelimiter
+						m = this,
+						_itemDelimiter = m._itemDelimiter
 					;
-					_expandedItemSpecifier = _canonicalizeItemSpecifier (_this,_expandedItemSpecifier);
-					_this.traverseTree ({
+					_expandedItemSpecifier = _canonicalizeItemSpecifier (m,_expandedItemSpecifier);
+					m.traverseTree ({
 						itemHandler:
 							function (_item,_itemSpecifier) {
-								_this.setItemExpanded (
+								m.setItemExpanded (
 									_itemSpecifier,
 									!(_expandedItemSpecifier + _itemDelimiter).indexOf (_itemSpecifier + _itemDelimiter)
 								);
@@ -122,9 +122,9 @@ Uize.module ({
 
 				traverseTree:function (_params) {
 					var
-						_this = this,
+						m = this,
 						_itemSpecifier = _params.itemSpecifier,
-						_itemDelimiter = _this._itemDelimiter,
+						_itemDelimiter = m._itemDelimiter,
 						_nop = Uize.nop,
 						_itemHandler = _params.itemHandler || _nop,
 						_beforeSubItemsHandler = _params.beforeSubItemsHandler || _nop,
@@ -145,10 +145,10 @@ Uize.module ({
 						;
 					}
 					if (_itemSpecifier) {
-						_itemSpecifier = _canonicalizeItemSpecifier (_this,_itemSpecifier);
-						_traverseItem (_this.getItemFromSpecifier (_itemSpecifier),_itemSpecifier,0);
+						_itemSpecifier = _canonicalizeItemSpecifier (m,_itemSpecifier);
+						_traverseItem (m.getItemFromSpecifier (_itemSpecifier),_itemSpecifier,0);
 					} else {
-						_traverseItems (_this._items,'',0);
+						_traverseItems (m._items,'',0);
 					}
 				}
 			},
@@ -176,10 +176,10 @@ Uize.module ({
 					name:'items',
 					value:[],
 					onChange:function () {
-						var _this = this;
-						if (_this.isWired) {
-							_this.removeUi ();
-							_this.insertUi ();
+						var m = this;
+						if (m.isWired) {
+							m.removeUi ();
+							m.insertUi ();
 						}
 					}
 				},

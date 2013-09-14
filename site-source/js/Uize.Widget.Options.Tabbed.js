@@ -33,8 +33,8 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function() {
-						var _this = this;
-						_this.wire ('Changed.value',function () {_this._updateUiTabContent ()});
+						var m = this;
+						m.wire ('Changed.value',function () {m._updateUiTabContent ()});
 					}
 				),
 				_classPrototype = _class.prototype
@@ -54,30 +54,30 @@ Uize.module ({
 			};
 
 			_classPrototype._updateTabBodyClass = function(_valueNo, _currentValueNo) {
-				var _this = this;
+				var m = this;
 
 				if (_valueNo > -1)
-					_this.setNodeProperties (
-						_this._getTabBodyNode (_valueNo),
-						{className:_valueNo == _currentValueNo ? _this._bodyClassActive : _this._bodyClassInactive}
+					m.setNodeProperties (
+						m._getTabBodyNode (_valueNo),
+						{className:_valueNo == _currentValueNo ? m._bodyClassActive : m._bodyClassInactive}
 					)
 				;
 			};
 
 			_classPrototype._updateUiTabContent = function () {
-				var _this = this;
-				if (_this.isWired) {
-					var _currentValueNo = _this.get ('valueNo');
-					if (_this._tabCanBeSelected (_currentValueNo)) {
-						_this.updateUiTabState (_this._lastShownTabBodyNo,_currentValueNo);
-						_this._lastShownTabBodyNo = _currentValueNo;
+				var m = this;
+				if (m.isWired) {
+					var _currentValueNo = m.get ('valueNo');
+					if (m._tabCanBeSelected (_currentValueNo)) {
+						m.updateUiTabState (m._lastShownTabBodyNo,_currentValueNo);
+						m._lastShownTabBodyNo = _currentValueNo;
 					} else {
 						for (
-							var  _valueNo = -1, _values = _this.get ('values'), _valuesLength = _values.length;
+							var  _valueNo = -1, _values = m.get ('values'), _valuesLength = _values.length;
 							++_valueNo < _valuesLength;
 						) {
-							if (_this._tabCanBeSelected (_valueNo)) {
-								_this.set ({value:_values [_valueNo]});
+							if (m._tabCanBeSelected (_valueNo)) {
+								m.set ({value:_values [_valueNo]});
 								break;
 							}
 						}
@@ -112,13 +112,13 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_superclass.doMy (_this,'wireUi');
-					var _valueNo = _this._lastShownTabBodyNo = _this.get ('valueNo');
+				var m = this;
+				if (!m.isWired) {
+					_superclass.doMy (m,'wireUi');
+					var _valueNo = m._lastShownTabBodyNo = m.get ('valueNo');
 					Uize.forEach (
-						_this.get ('values'),
-						function (_value,_tabNo) {_this._updateTabBodyClass (_tabNo, _valueNo)}
+						m.get ('values'),
+						function (_value,_tabNo) {m._updateTabBodyClass (_tabNo, _valueNo)}
 					);
 				}
 			};

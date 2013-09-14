@@ -1671,7 +1671,7 @@ Advanced Topics
 		Private Instance Methods
 			- two approaches
 				- function whose first argument is context / this
-				- function that is called as instance method on context, using _myPrivateMethod.call (_this)
+				- function that is called as instance method on context, using _myPrivateMethod.call (this)
 
 		Public Static Properties
 			- accessing subclass' value from superclass

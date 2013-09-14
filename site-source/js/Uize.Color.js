@@ -253,10 +253,10 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_objectPrototype.from = function (_color) {
-				var _this = this;
+				var m = this;
 				if (_color instanceof _object) {
-					_this.encoding = _color.encoding;
-					_setTupleFromArray (_color.tuple,_this.tuple);
+					m.encoding = _color.encoding;
+					_setTupleFromArray (_color.tuple,m.tuple);
 				} else {
 					var _encoding;
 					if (arguments.length == 3) {
@@ -294,11 +294,11 @@ Uize.module ({
 						_encodingProfile = _encodings [_encoding = 'RGB int'];
 						_color = 0;
 					}
-					_encodingProfile.from (_color,_this.tuple);
-					_this.encoding = _encoding;
+					_encodingProfile.from (_color,m.tuple);
+					m.encoding = _encoding;
 				}
 
-				return _this;
+				return m;
 				/*?
 					Instance Methods
 						from

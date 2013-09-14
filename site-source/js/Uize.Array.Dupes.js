@@ -60,8 +60,8 @@ Uize.module ({
 
 					_classPrototype.isIn = function (_value,_addToIfNot) {
 						var
-							_this = this,
-							_canonicalizer = _this._canonicalizer,
+							m = this,
+							_canonicalizer = m._canonicalizer,
 							_canonicalizedValue = _canonicalizer ? _canonicalizer (_value) : _value,
 							_wasIn = _false
 						;
@@ -71,7 +71,7 @@ Uize.module ({
 						) {
 							var
 								_typeofCanonicalizedValue = typeof _canonicalizedValue,
-								_valuesLookup = _this._valuesLookup
+								_valuesLookup = m._valuesLookup
 							;
 							if (
 								(_valuesLookup [_canonicalizedValue] || (_valuesLookup [_canonicalizedValue] = {})) [
@@ -86,7 +86,7 @@ Uize.module ({
 							if (_canonicalizedValue.tagged == _objectTaggerValue) {
 								_wasIn = _true;
 							} else if (_addToIfNot) {
-								(_this._taggedObjects || (_this._taggedObjects = [])).push ({
+								(m._taggedObjects || (m._taggedObjects = [])).push ({
 									_object:_canonicalizedValue,
 									_hadTaggedProperty:_canonicalizedValue.hasOwnProperty ('tagged'),
 									_taggedPropertyOldValue:_canonicalizedValue.tagged

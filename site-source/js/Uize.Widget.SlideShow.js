@@ -173,13 +173,13 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** add navigation buttons ***/
-							_this._addChildButton ('previous',function () {_this.advance (-1)});
-							_this._addChildButton ('next',function () {_this.advance (1)});
-							_this._addChildButton ('first',function () {_this.set ({_slideNo:0})});
-							_this._addChildButton ('last',function () {_this.set ({_slideNo:_this._totalSlides - 1})});
+							m._addChildButton ('previous',function () {m.advance (-1)});
+							m._addChildButton ('next',function () {m.advance (1)});
+							m._addChildButton ('first',function () {m.set ({_slideNo:0})});
+							m._addChildButton ('last',function () {m.set ({_slideNo:m._totalSlides - 1})});
 							/*?
 								Child Widgets
 									first
@@ -212,7 +212,7 @@ Uize.module ({
 							*/
 
 						/*** Initialization ***/
-							_this.updateUi (); // doing this early, because some updates are properties for child widgets
+							m.updateUi (); // doing this early, because some updates are properties for child widgets
 					}
 				),
 				_classPrototype = _class.prototype
@@ -223,19 +223,19 @@ Uize.module ({
 
 			_classPrototype._conformSlideNo = function (_slide) {
 				var
-					_this = this,
+					m = this,
 					_result = -1,
-					_totalSlides = _this._getTotalSlides ()
+					_totalSlides = m._getTotalSlides ()
 				;
 				if (_totalSlides) {
 					if (_slide == _undefined || typeof _slide == 'number') {
-						_result = _slide == _undefined ? _this._slideNo : _slide;
-						_result = _this._wrap
+						_result = _slide == _undefined ? m._slideNo : _slide;
+						_result = m._wrap
 							? ((_result % _totalSlides) + _totalSlides) % _totalSlides
 							: Uize.constrain (_result,0,_totalSlides - 1)
 						;
 					} else {
-						_result = Uize.indexIn (_this._slides,_slide);
+						_result = Uize.indexIn (m._slides,_slide);
 					}
 				}
 				return _result;
@@ -251,50 +251,50 @@ Uize.module ({
 
 			_classPrototype._updateUiButtonsEnabled = function () {
 				var
-					_this = this,
-					_children = _this.children
+					m = this,
+					_children = m.children
 				;
 				if (_children.previous) {
 					var
 						_updateButtonState = function (_buttonName,_canNavigate) {
 							_children [_buttonName].set ({enabled:_totalSlides && _canNavigate ? 'inherit' : false});
 						},
-						_totalSlides = _this._totalSlides,
-						_slideNo = _this._slideNo,
+						_totalSlides = m._totalSlides,
+						_slideNo = m._slideNo,
 						_notAtFirst = !!_slideNo,
 						_notAtLast = _slideNo != _totalSlides - 1
 					;
-					_updateButtonState ('previous',_notAtFirst || _this._wrap);
+					_updateButtonState ('previous',_notAtFirst || m._wrap);
 					_updateButtonState ('first',_notAtFirst);
-					_updateButtonState ('next',_notAtLast || _this._wrap);
+					_updateButtonState ('next',_notAtLast || m._wrap);
 					_updateButtonState ('last',_notAtLast);
 				}
 			};
 
 			_classPrototype._updateUiSlideProperty = function (_propertyName,_propertyValue,_propertyNodeId) {
 				var
-					_this = this,
+					m = this,
 					_propertyBinding =
-						(_this._slideBindings || _sacredEmptyObject) [_propertyName] ||
-						_this.children ['slide' + Uize.capFirstChar (_propertyName)]
+						(m._slideBindings || _sacredEmptyObject) [_propertyName] ||
+						m.children ['slide' + Uize.capFirstChar (_propertyName)]
 				;
 				_propertyBinding
 					? (
 						Uize.isFunction (_propertyBinding)
-							? _propertyBinding.call (_this,_propertyValue)
+							? _propertyBinding.call (m,_propertyValue)
 							: _propertyBinding.set ({value:_propertyValue})
 					)
-					: _this.isWired && _this.setNodeValue (_propertyNodeId || _propertyName,_propertyValue)
+					: m.isWired && m.setNodeValue (_propertyNodeId || _propertyName,_propertyValue)
 				;
 			};
 
 			_classPrototype._updateUiSlide = function () {
 				var
-					_this = this,
-					_slide = _this._slide
+					m = this,
+					_slide = m._slide
 				;
 				for (var _slideProperty in _slide)
-					_this._updateUiSlideProperty (_slideProperty,_slide [_slideProperty],'slide_' + _slideProperty)
+					m._updateUiSlideProperty (_slideProperty,_slide [_slideProperty],'slide_' + _slideProperty)
 					/*?
 						Child Widgets
 							slide[PropertyName]
@@ -325,12 +325,12 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				_this._updateUiButtonsEnabled ();
-				_this._updateUiSlideNo ();
-				_this._updateUiProgress ();
-				_this._updateUiTotalSlides ();
-				_this._updateUiSlide ();
+				var m = this;
+				m._updateUiButtonsEnabled ();
+				m._updateUiSlideNo ();
+				m._updateUiProgress ();
+				m._updateUiTotalSlides ();
+				m._updateUiSlide ();
 			};
 
 			_classPrototype.advance = function (_direction) {

@@ -50,12 +50,12 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype.validate = _classPrototype._validate = function() {
 				var
-					_this = this,
-					_validator = _this._validator,
-					_value = _this + '',
+					m = this,
+					_validator = m._validator,
+					_value = m + '',
 					_valueLength = _value.length,
 					_isValid =
-						_valueLength >= _this._minLength && _valueLength <= _this._maxLength &&
+						_valueLength >= m._minLength && _valueLength <= m._maxLength &&
 						(
 							_validator == _null ||
 							(
@@ -64,23 +64,23 @@ Uize.module ({
 									: (Uize.isFunction (_validator) ? _validator (_value) : _value == _validator)
 							)
 						),
-					_forceUiDisplay = !_isValid && _this._isValid == _isValid
+					_forceUiDisplay = !_isValid && m._isValid == _isValid
 				;
-				_this._isValid != _isValid
-					? _this.set ({_isValid:_isValid})
-					: _isValid ? 0 : _this._displayWarningUi ()
+				m._isValid != _isValid
+					? m.set ({_isValid:_isValid})
+					: _isValid ? 0 : m._displayWarningUi ()
 				;
 			};
 
 			_classPrototype._displayWarningUi = function() {
 				if (this.isWired) {
 					var
-						_this = this,
-						_displayError = _this._showWarning && !_this._isValid
+						m = this,
+						_displayError = m._showWarning && !m._isValid
 					;
 					// if we're able to give visual indicators, then change the textInput color and pop up the icon/tooltip duo.
-					_this.setNodeProperties([_this._inputNode,'label'],{className:_displayError ? 'error' : 'good'});
-					_this.setNodeStyle('warningIcon', {display:_displayError ? 'inline' : 'none'});
+					m.setNodeProperties([m._inputNode,'label'],{className:_displayError ? 'error' : 'good'});
+					m.setNodeStyle('warningIcon', {display:_displayError ? 'inline' : 'none'});
 				}
 			};
 
@@ -123,116 +123,116 @@ Uize.module ({
 
 			_classPrototype.updateUi = function () {
 				var
-					_this = this,
-					_inputNode = _this._inputNode
+					m = this,
+					_inputNode = m._inputNode
 				;
-				if (_this.isWired && _inputNode) {
-					_inputNode.disabled = !_this.get('enabled');
+				if (m.isWired && _inputNode) {
+					_inputNode.disabled = !m.get('enabled');
 
-					if (_inputNode.value != _this._value)
-						_inputNode.value = _this._value
+					if (_inputNode.value != m._value)
+						_inputNode.value = m._value
 					;
 				}
 
 				// there can (not) be only one!
-				(_this._validateOnExit ^ _this._currentNodeEventIsBlur) || _this._validate();
+				(m._validateOnExit ^ m._currentNodeEventIsBlur) || m._validate();
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this._inputNode = _this.getNode ('input');
+				var m = this;
+				if (!m.isWired) {
+					m._inputNode = m.getNode ('input');
 
-					if (_this._inputNode) {
-						_this._inputNodeIsInputTag = _this._inputNode.tagName == 'INPUT';
+					if (m._inputNode) {
+						m._inputNodeIsInputTag = m._inputNode.tagName == 'INPUT';
 
-						_this.wireNode (
-							_this._inputNode,
+						m.wireNode (
+							m._inputNode,
 							{
 								keydown:function (_domEvent) {
 									if (
-										_this._inputNodeIsInputTag &&
+										m._inputNodeIsInputTag &&
 										Uize.Node.Event.isKeyEnter (_domEvent) &&
-										_this.fire ({name:'Ok',domEvent:_domEvent}).cancelSubmit
+										m.fire ({name:'Ok',domEvent:_domEvent}).cancelSubmit
 									) {
-										var _inputNodeForm = _this._inputNode.form;
+										var _inputNodeForm = m._inputNode.form;
 										if (_inputNodeForm) {
-											_this._storedFormOnsubmit = _inputNodeForm.onsubmit;
-											_this._blockedFormSubmit = _true;
+											m._storedFormOnsubmit = _inputNodeForm.onsubmit;
+											m._blockedFormSubmit = _true;
 											_inputNodeForm.onsubmit = Uize.returnFalse;
 										}
 									}
 								},
 								keypress:function (_domEvent) {
-									_this._keyAborted = _this.fire ({name:'Key Press',domEvent:_domEvent}).abort &&
+									m._keyAborted = m.fire ({name:'Key Press',domEvent:_domEvent}).abort &&
 										Uize.Node.Event.abort (_domEvent)
 									;
 								},
 								keyup:function (_domEvent) {
-									if (_this._keyAborted) {
-										_this._keyAborted = _false;
+									if (m._keyAborted) {
+										m._keyAborted = _false;
 									} else {
-										if (_this._blockedFormSubmit) {
-											_this._inputNode.form.onsubmit = _this._storedFormOnsubmit;
-											_this._storedFormOnsubmit = _this._blockedFormSubmit = _undefined;
+										if (m._blockedFormSubmit) {
+											m._inputNode.form.onsubmit = m._storedFormOnsubmit;
+											m._storedFormOnsubmit = m._blockedFormSubmit = _undefined;
 										}
 										Uize.Node.Event.isKeyEscape (_domEvent) &&
-											_this.fire ({name:'Cancel',domEvent:_domEvent})
+											m.fire ({name:'Cancel',domEvent:_domEvent})
 										;
-										_this.set ({_value:_this._inputNode.value});
-										_this.updateUi (); // the conformer might result in the value not being the current text
-										_this._deferUiWarning && _this.set ({showWarning:_true});
+										m.set ({_value:m._inputNode.value});
+										m.updateUi (); // the conformer might result in the value not being the current text
+										m._deferUiWarning && m.set ({showWarning:_true});
 									}
-									_this.fire ({name:'Key Up',domEvent:_domEvent});
+									m.fire ({name:'Key Up',domEvent:_domEvent});
 								},
 								blur:function() {
-									_this._blurClass &&
-										_this.setNodeProperties(
-											_this._inputNode,
+									m._blurClass &&
+										m.setNodeProperties(
+											m._inputNode,
 											{
-												className:_this._inputNode.className.replace(_this._focusClass, _this._blurClass)
+												className:m._inputNode.className.replace(m._focusClass, m._blurClass)
 											}
 										)
 									;
-									_this._currentNodeEventIsBlur = _true;
-									_this._validateOnExit && _this._value == _this._inputNode.value
-										? _this._validate() // force an update
-										: _this.set ({_value:_this._inputNode.value}) // catch any last values that might have been missed by blurring
+									m._currentNodeEventIsBlur = _true;
+									m._validateOnExit && m._value == m._inputNode.value
+										? m._validate() // force an update
+										: m.set ({_value:m._inputNode.value}) // catch any last values that might have been missed by blurring
 									;
-									_this.set ({_inFocus:_false});
-									_this.fire('Blur');
-									_this._currentNodeEventIsBlur = _false;
+									m.set ({_inFocus:_false});
+									m.fire('Blur');
+									m._currentNodeEventIsBlur = _false;
 								},
 								focus:function() {
-									_this._focusClass &&
-										_this.setNodeProperties(
-											_this._inputNode,
+									m._focusClass &&
+										m.setNodeProperties(
+											m._inputNode,
 											{
-												className:_this._inputNode.className.replace(_this._blurClass, _this._focusClass)
+												className:m._inputNode.className.replace(m._blurClass, m._focusClass)
 											}
 										)
 									;
-									_this._inputNode.value && _this.set({_value:_this._inputNode.value});
-									_this.set ({_inFocus:_true});
-									_this.fire('Focus');
+									m._inputNode.value && m.set({_value:m._inputNode.value});
+									m.set ({_inFocus:_true});
+									m.fire('Focus');
 								}
 							}
 						);
 					}
 
 					//set up the tooltip warnings
-					_this.wireNode (
+					m.wireNode (
 						'warningIcon',
 						{
 							mouseover:function() {
-								Uize.Node.setInnerHtml (_this._tooltip, _this._selectWarningMessage());
-								Uize.Tooltip.showTooltip (_this._tooltip,_true);
+								Uize.Node.setInnerHtml (m._tooltip, m._selectWarningMessage());
+								Uize.Tooltip.showTooltip (m._tooltip,_true);
 							},
-							mouseout:function() {Uize.Tooltip.hideTooltip(_this._tooltip)}
+							mouseout:function() {Uize.Tooltip.hideTooltip(m._tooltip)}
 						}
 					);
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
@@ -294,10 +294,10 @@ Uize.module ({
 					conformer:function (_value) {
 						_value += '';
 						var
-							_this = this,
-							_maxLength = _this._maxLength
+							m = this,
+							_maxLength = m._maxLength
 						;
-						if (_this._filterType == 'LAN' && /[^a-z0-9]/.test (_value))
+						if (m._filterType == 'LAN' && /[^a-z0-9]/.test (_value))
 							_value = _value.toLowerCase ().replace(/[^a-z0-9]/g,'')
 						;
 						if (_value.length > _maxLength)

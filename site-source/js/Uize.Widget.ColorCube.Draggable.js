@@ -82,10 +82,10 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					var
-						_shell = _this.getNode (),
+						_shell = m.getNode (),
 						_drag = Uize.Widget.Drag ({node:_shell}),
 						_xSideNames = ['Left','Right'],
 						_ySideNames = ['Top','Bottom'],
@@ -99,14 +99,14 @@ Uize.module ({
 					_drag.wire ({
 						'Drag Start':
 							function (_event) {
-								_this.set ({_inDrag:_true});
+								m.set ({_inDrag:_true});
 								_cubeCoords = _Uize_Node.getCoords (_shell);
 								_cubeCoordsArray = [_cubeCoords.left,_cubeCoords.top,_cubeCoords.right,_cubeCoords.bottom];
 								function _initCornerColorAtDragStart (_cornerName) {
 									(
 										_cornerColorsAtDragStart [_cornerName] ||
 										(_cornerColorsAtDragStart [_cornerName] = Uize.Color ())
-									).from (_this.get (_cornerName));
+									).from (m.get (_cornerName));
 								}
 								_initCornerColorAtDragStart ('colorTopLeft');
 								_initCornerColorAtDragStart ('colorTopRight');
@@ -149,15 +149,15 @@ Uize.module ({
 								_setCornerColor (0,1);
 								_setCornerColor (1,0);
 								_setCornerColor (1,1);
-								_this.set (_newPropertyValues);
-								_this.fire ('Colors Changed');
+								m.set (_newPropertyValues);
+								m.fire ('Colors Changed');
 							},
 						'Drag Done':
-							function () {_this.set ({_inDrag:_false})}
+							function () {m.set ({_inDrag:_false})}
 					});
-					_this.addChild ('drag',_drag);
+					m.addChild ('drag',_drag);
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

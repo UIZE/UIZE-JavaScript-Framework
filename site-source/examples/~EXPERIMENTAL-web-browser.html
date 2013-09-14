@@ -50,15 +50,15 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** add back and forward buttons ***/
 							function _addNavigationButton (_buttonName,_direction) {
-								var _button = _this.addChild (_buttonName,Uize.Widget.Button);
+								var _button = m.addChild (_buttonName,Uize.Widget.Button);
 								_button.wire (
 									'Click',
 									function () {
-										var _contentWindow = _this.getNode ('iframe').contentWindow;
+										var _contentWindow = m.getNode ('iframe').contentWindow;
 										if (_contentWindow && _contentWindow.history) {
 											try {
 												_contentWindow.history.go (_direction);
@@ -73,14 +73,14 @@ Uize.module ({
 							_addNavigationButton ('forward',1);
 
 						/*** add location widget ***/
-							var _location = _this.addChild ('location',Uize.Widget.TextInput);
+							var _location = m.addChild ('location',Uize.Widget.TextInput);
 
 							function _clearLocation () {_location.set ({value:''})};
 
 							_location.wire ({
 								Ok:function (_event) {
 									_event.cancelSubmit = true;
-									var _contentWindow = _this.getNode ('iframe').contentWindow;
+									var _contentWindow = m.getNode ('iframe').contentWindow;
 									if (_contentWindow)
 										_contentWindow.location.href = _location + ''
 									;

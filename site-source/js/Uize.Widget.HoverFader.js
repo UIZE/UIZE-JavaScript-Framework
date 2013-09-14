@@ -117,10 +117,10 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.tickle = function (_fadeProperties) {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_nodes = _this._nodes,
+						_nodes = m._nodes,
 						_nodesLengthMinus1 = _nodes.length - 1,
 						_lastNodeNo
 					;
@@ -131,7 +131,7 @@ Uize.module ({
 							;
 							var _direction = _nodeNo > _lastNodeNo ? 1 : -1;
 							while (_lastNodeNo != _nodeNo)
-								_this._mouseoutNode (_nodes [_lastNodeNo += _direction])
+								m._mouseoutNode (_nodes [_lastNodeNo += _direction])
 							;
 						},
 						0,
@@ -190,19 +190,19 @@ Uize.module ({
 
 			_classPrototype.wireUi = function () {
 				var
-					_this = this,
-					_nodes = _this._nodes
+					m = this,
+					_nodes = m._nodes
 				;
-				if (!_this.isWired && _nodes) {
-					_this.wireNode (
-						_this._nodes = Uize.Node.find (_nodes),
+				if (!m.isWired && _nodes) {
+					m.wireNode (
+						m._nodes = Uize.Node.find (_nodes),
 						{
-							mouseover:function () {_this._mouseoverNode (this)},
-							mouseout:function () {_this._mouseoutNode (this)}
+							mouseover:function () {m._mouseoverNode (this)},
+							mouseout:function () {m._mouseoutNode (this)}
 						}
 					);
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

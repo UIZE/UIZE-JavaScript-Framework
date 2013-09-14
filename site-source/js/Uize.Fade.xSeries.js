@@ -61,13 +61,13 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_class.prototype.getSeries = function (_valuesLength) {
 				var
-					_this = this,
+					m = this,
 					_values = [],
 					_valuesLengthMinus1 = Math.max (_valuesLength - 1,1)
 				;
 				for (var _valueNo = -1; ++_valueNo < _valuesLength;) {
-					_this.set ({progress:_valueNo / _valuesLengthMinus1});
-					_values.push (Uize.clone (_this.valueOf ()));
+					m.set ({progress:_valueNo / _valuesLengthMinus1});
+					_values.push (Uize.clone (m.valueOf ()));
 				}
 				return _values;
 				/*?

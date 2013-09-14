@@ -57,12 +57,12 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
+					m = this,
 					_totalNodes = 1000,
 					_totalIterations = 40,
 					_iterationNo
 				;
-				_this.executeFunctionsWithPause (
+				m.executeFunctionsWithPause (
 					[
 						function () {
 							/*** put the nodes into the page ***/
@@ -73,7 +73,7 @@ Uize.module ({
 										'<div id="nodeTestB' + _nodeNo + '" style="position:absolute; left:0px; top:0px; width:0px; height:0px;"></div>'
 									)
 								;
-								_this.setNodeInnerHtml ('testNodes',_nodesHtmlChunks.join (''));
+								m.setNodeInnerHtml ('testNodes',_nodesHtmlChunks.join (''));
 						},
 						function () {
 							/*** test with node caching ***/

@@ -58,7 +58,6 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 1000000,
 					_iterationNo,
 					_testObject = {
@@ -66,7 +65,7 @@ Uize.module ({
 						stringTypeMarker:'dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd'
 					}
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							/*** testing if marker property in object ***/

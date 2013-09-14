@@ -954,10 +954,10 @@ Uize.module ({
 				async:function (_function) {
 					return function () {
 						var
-							_this = this,
+							m = this,
 							_arguments = arguments
 						;
-						setTimeout (function () {_function.apply (_this,_arguments)},0);
+						setTimeout (function () {_function.apply (m,_arguments)},0);
 					};
 				},
 				'break':function () {this ['break'] ()},

@@ -231,18 +231,18 @@ Function Type Localized Resources
 
 		In the above example, an instance of the fictitious =SomeNamespace.ProductWidgetClass= widget class is being added as a child widget of the page widget. The localized resource =buyConfirmation= is being declared for this instance. The implementation of a =buyWithConfirm= instance method of the =SomeNamespace.ProductWidgetClass= class calls the =localize= method to localize this resource, passing a single substitution value for the title of the product, and then displays the localized confirmation message in a confirm dialog, as shown in the code below...
 
-		.....................................................................
+		.............................................................
 		_classPrototype.buyWithConfirm = function () {
-			var _this = this;
-			_this.confirm ({
-				title:_this.localize ('buyConfirmationTitle'),
-				message:_this.localize ('buyConfirmation',_this._productTitle),
+			var m = this;
+			m.confirm ({
+				title:m.localize ('buyConfirmationTitle'),
+				message:m.localize ('buyConfirmation',m._productTitle),
 				yesHandler:function () {
 					// code here to perform the buy action
 				}
 			});
 		};
-		.....................................................................
+		.............................................................
 
 		Now, typically, the =buyConfirmation= resource would just be a string, and the product title would simply be substituted in, as in the following code...
 

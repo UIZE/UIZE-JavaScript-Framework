@@ -4649,23 +4649,23 @@ Uize = (function () {
 		/*** Barrier object ***/
 			var
 				_Barrier = function () {
-					var _this = this;
-					_this._doneLookup = {};
-					_this._doneResults = {};
-					_this._doneHandlers = {};
+					var m = this;
+					m._doneLookup = {};
+					m._doneResults = {};
+					m._doneHandlers = {};
 				},
 				_BarrierPrototype = _Barrier.prototype
 			;
 
 			_BarrierPrototype.done = function (_condition,_result) {
 				var
-					_this = this,
-					_doneHandlers = _this._doneHandlers [_condition]
+					m = this,
+					_doneHandlers = m._doneHandlers [_condition]
 				;
-				_this._doneLookup [_condition] = _trueFlag;
-				_this._doneResults [_condition] = _result;
+				m._doneLookup [_condition] = _trueFlag;
+				m._doneResults [_condition] = _result;
 				if (_doneHandlers) {
-					delete _this._doneHandlers [_condition];
+					delete m._doneHandlers [_condition];
 					for (
 						var _doneHandlerNo = -1, _doneHandlersLength = _doneHandlers.length;
 						++_doneHandlerNo < _doneHandlersLength;
@@ -4676,7 +4676,7 @@ Uize = (function () {
 			};
 
 			_BarrierPrototype.once = function (_conditions,_handler) {
-				var _this = this;
+				var m = this;
 				if (_isList (_conditions) && _conditions.length < 2)
 					_conditions = _conditions [0]
 				;
@@ -4691,7 +4691,7 @@ Uize = (function () {
 					_forEach (
 						_conditions,
 						function (_condition,_conditionNo) {
-							_this.once (
+							m.once (
 								_condition,
 								function (_result) {
 									_results [_conditionNo] = _result;
@@ -4701,9 +4701,9 @@ Uize = (function () {
 						}
 					);
 				} else {
-					_this._doneLookup [_conditions] == _trueFlag
-						? _handler (_this._doneResults [_conditions])
-						: (_this._doneHandlers [_conditions] || (_this._doneHandlers [_conditions] = [])).push (_handler)
+					m._doneLookup [_conditions] == _trueFlag
+						? _handler (m._doneResults [_conditions])
+						: (m._doneHandlers [_conditions] || (m._doneHandlers [_conditions] = [])).push (_handler)
 					;
 				}
 			};
@@ -5076,14 +5076,14 @@ Uize = (function () {
 									*/
 									_module.toString = function () {
 										var
-											_this = this,
-											_moduleName = _getClass (_this).moduleName,
-											_isClass = _this.subclass
+											m = this,
+											_moduleName = _getClass (m).moduleName,
+											_isClass = m.subclass
 										;
 										return (
 											'[' +
 												(
-													_isInstance (_this) || (!_isClass && !_moduleName)
+													_isInstance (m) || (!_isClass && !_moduleName)
 														? _typeObject
 														: _isClass ? 'class' : 'package'
 												) +
@@ -5212,8 +5212,8 @@ Uize = (function () {
 							EXAMPLE
 							.................................................................................
 							Uize.moduleLoader = function (_moduleToLoad,_callback) {
-								_this._commObject.request ({
-									url:[_this.get ('env').service + 'getjs',{filename:_moduleToLoad + '.js'}],
+								m._commObject.request ({
+									url:[m.get ('env').service + 'getjs',{filename:_moduleToLoad + '.js'}],
 									returnType:'json',
 									requestMethod:'GET',
 									callback:function (_responseObject) {
@@ -5822,13 +5822,13 @@ Uize = (function () {
 					_constructorCallIsShim = _false;
 					return this;
 				} else {
-					var _this = this;
-					if (_this == _undefined || _this.constructor != _constructorSupportingNoNew) {
+					var m = this;
+					if (m == _undefined || m.constructor != _constructorSupportingNoNew) {
 						_constructorCallIsShim = _true;
-						_this = new _constructorSupportingNoNew;
+						m = new _constructorSupportingNoNew;
 					}
-					_constructor.apply (_this,arguments);
-					return _this;
+					_constructor.apply (m,arguments);
+					return m;
 				}
 			}
 			return _constructorSupportingNoNew;

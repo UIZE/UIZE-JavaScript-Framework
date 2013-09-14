@@ -52,7 +52,6 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 1000000,
 					_iterationNo,
 					_string = 'right',
@@ -60,7 +59,7 @@ Uize.module ({
 					_possibleValuesString = '[left][center][right][top][bottom]',
 					_possibleValuesHash = {left:1,center:1,right:1,top:1,bottom:1}
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							for (_iterationNo = _totalIterations; --_iterationNo >= 0;)

@@ -38,7 +38,7 @@ Uize.module ({
 				getItemClassName:function (_item,_depth) {
 					var _this = this;
 					return (
-						(_depth ? _this._subMenuItemCssClass : _this._menuItemCssClass) +
+						(_depth ? m._subMenuItemCssClass : m._menuItemCssClass) +
 						(
 							_item.expanded
 								? (' ' + (_depth ? _this._subMenuItemActiveCssClass : _this._menuItemActiveCssClass))

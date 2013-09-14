@@ -58,7 +58,6 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 6000,
 					_iterationNo,
 					_optimizedRepeat = Uize.String.repeat
@@ -66,7 +65,7 @@ Uize.module ({
 				function _typicalRepeat (_stringToRepeat,_repeatTimes) {
 					return new Array (_repeatTimes + 1).join (_stringToRepeat);
 				}
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							/*** small string, many repeats - typical repeat approach ***/

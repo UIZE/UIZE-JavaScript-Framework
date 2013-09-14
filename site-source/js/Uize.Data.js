@@ -193,10 +193,7 @@ Uize.module ({
 			},
 
 			filter:function (_object,_propertyNames) {
-				var
-					_this = this,
-					_result = {}
-				;
+				var _result = {};
 				if (_object && _propertyNames) {
 					for (
 						var _propertyNameNo = -1, _propertyNamesLength = _propertyNames.length;

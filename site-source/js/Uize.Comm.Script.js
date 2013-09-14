@@ -48,9 +48,9 @@ Uize.module({
 		/*** Public Methods ***/
 			_classPrototype.performRequest = function(_request, _callback) {
 				var
-					_this = this,
+					m = this,
 					_callbacks = _class._callbacks,
-					_serverHandlesCallback = _this._callbackMode == 'server',
+					_serverHandlesCallback = m._callbackMode == 'server',
 					_scriptNode = document.createElement('script')
 				;
 				_callbacks.push(
@@ -60,7 +60,7 @@ Uize.module({
 					}
 				);
 
-				var _callbackName = 'Uize.Comm.Script.' + _this._callbackHashName + '[' + (_callbacks.length - 1) + ']';
+				var _callbackName = 'Uize.Comm.Script.' + m._callbackHashName + '[' + (_callbacks.length - 1) + ']';
 
 				_scriptNode.src = Uize.Url.resolve([
 					_request.url,

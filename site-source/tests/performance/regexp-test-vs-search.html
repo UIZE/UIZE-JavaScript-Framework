@@ -55,13 +55,12 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 500000,
 					_stringToTest = 'asd as asda s da987da da987ad as da897da7s d8a7s6d78a6sd as 765a67sd a',
 					_regExp = /^[ a-z0-9]+$/,
 					_iterationNo
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							/*** measure duration using regExp.test ***/

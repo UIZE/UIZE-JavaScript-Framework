@@ -58,13 +58,12 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 10000,
 					_iterationNo,
 					_builtString,
 					_stringToRepeat = '0123456789012345678901234567890123456789012345678901234567890123456789'
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							/*** string "incrementing" concatenation ***/

@@ -48,8 +48,8 @@ Uize.module ({
 				_log ('SERVICE WARNING: ' + _message);
 			}
 
-			function _methodCaller (_this,_methodName) {
-				return function () {return _this [_methodName].apply (_this,arguments)};
+			function _methodCaller (m,_methodName) {
+				return function () {return m [_methodName].apply (m,arguments)};
 			}
 
 		var _class = _superclass.subclass ({
@@ -60,8 +60,8 @@ Uize.module ({
 			staticMethods:{
 				serviceMethods:function (_serviceMethods) {
 					var
-						_this = this,
-						_thisServiceMethods = _this._serviceMethods,
+						m = this,
+						_thisServiceMethods = m._serviceMethods,
 						_serviceMethodPublicWrappers = {}
 					;
 					function _declareServiceMethod (_methodName,_methodProfile) {
@@ -69,7 +69,7 @@ Uize.module ({
 
 						function _methodError (_message) {return '<< ' + _methodName + ' >> ' + _message}
 
-						if (_this.prototype [_methodName])
+						if (m.prototype [_methodName])
 							throw new Error (
 								_methodError ('You may not override a non-service public method with a service method')
 							)
@@ -90,8 +90,8 @@ Uize.module ({
 
 						_serviceMethodPublicWrappers [_methodName] = function (_params,_callback) {
 							var
-								_this = this,
-								_adapter = _this.get ('adapter'),
+								m = this,
+								_adapter = m.get ('adapter'),
 								_methodIsAsync = _methodProfile.async
 							;
 							if (!_methodIsAsync) {
@@ -102,7 +102,7 @@ Uize.module ({
 										)
 									)
 								;
-								if (!_isInitMethod && !_this.get ('initialized'))
+								if (!_isInitMethod && !m.get ('initialized'))
 									throw new Error (
 										_methodError (
 											'In order to call a synchronous service method, the service must already be initialized'
@@ -146,7 +146,7 @@ Uize.module ({
 												throw _error;
 											}
 										} else {
-											_isInitMethod && _this.set ('initialized',_true);
+											_isInitMethod && m.set ('initialized',_true);
 											_onSuccess && _onSuccess (_result);
 										}
 									}
@@ -206,7 +206,7 @@ Uize.module ({
 							if (_methodIsAsync)
 								_takingTooLongTimeout = setTimeout (
 									function () {
-										var _initialized = _this.get ('initialized');
+										var _initialized = m.get ('initialized');
 										_warn (
 											_methodError (
 												_adapter && _initialized
@@ -225,28 +225,28 @@ Uize.module ({
 							;
 							if (_isInitMethod) {
 								_params.serviceInterface = {
-									fire:_methodCaller (_this,'fire'),
-									wire:_methodCaller (_this,'wire'),
-									set:_methodCaller (_this,'set'),
-									get:_methodCaller (_this,'get')
+									fire:_methodCaller (m,'fire'),
+									wire:_methodCaller (m,'wire'),
+									set:_methodCaller (m,'set'),
+									get:_methodCaller (m,'get')
 								};
-								_params.service = _this;
-								_this.once ('adapter',_callAdapterMethod);
+								_params.service = m;
+								m.once ('adapter',_callAdapterMethod);
 							} else {
 								if (!_adapter) {
 									_warn (_methodError ('Adapter is not yet set when service method is called'));
-								} else if (!_this.get ('initialized')) {
+								} else if (!m.get ('initialized')) {
 									_warn (
 										_methodError (
 											'Service adapter is set but not yet initialized when service method is called'
 										)
 									);
 								}
-								_this.once (
+								m.once (
 									'adapter',
 									function () {
-										_adapter = _this.get ('adapter');
-										_this.once ('initialized',_callAdapterMethod);
+										_adapter = m.get ('adapter');
+										m.once ('initialized',_callAdapterMethod);
 									}
 								);
 							}
@@ -262,7 +262,7 @@ Uize.module ({
 							? function (_methodName) {_declareServiceMethod (_methodName)}
 							: function (_methodProfile,_methodName) {_declareServiceMethod (_methodName,_methodProfile)}
 					);
-					Uize.copyInto (_this.prototype,_serviceMethodPublicWrappers);
+					Uize.copyInto (m.prototype,_serviceMethodPublicWrappers);
 					/*?
 						Static Methods
 							Uize.Service.serviceMethods

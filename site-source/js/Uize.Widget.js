@@ -58,12 +58,12 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function (_properties) {
-						var _this = this;
+						var m = this;
 
 						if (_properties) {
 							/*** try to harvest declarative widget properties ***/
 								var _declarativeWidgetProperties =
-									_this._harvestDeclarativeWidgetProperties (_properties.idPrefix,_properties.parent)
+									m._harvestDeclarativeWidgetProperties (_properties.idPrefix,_properties.parent)
 								;
 								_declarativeWidgetProperties && _Uize.copyInto (_properties,_declarativeWidgetProperties);
 
@@ -71,10 +71,10 @@ Uize.module ({
 						}
 
 						/*** Private Instance Properties ***/
-							_this._unappliedChildrenProperties = {};
+							m._unappliedChildrenProperties = {};
 
 						/*** Public Instance Properties ***/
-							_this.children = _this._children = {};
+							m.children = m._children = {};
 								/*?
 									Instance Properties
 										children ~~ children Instance Property
@@ -136,11 +136,11 @@ Uize.module ({
 
 				_applyDeclarativeWidgetProperties:function () {
 					var
-						_this = this,
+						m = this,
 						_declarativeWidgetProperties =
-							_this._harvestDeclarativeWidgetProperties (_this._idPrefix,_this.parent)
+							m._harvestDeclarativeWidgetProperties (m._idPrefix,m.parent)
 					;
-					_declarativeWidgetProperties && _this.set (_declarativeWidgetProperties);
+					_declarativeWidgetProperties && m.set (_declarativeWidgetProperties);
 				},
 
 				_constructIdPrefix:function (
@@ -578,13 +578,13 @@ Uize.module ({
 
 				getHtml:function (_alternateTemplateInput) {
 					var
-						_this = this,
-						_html = _this._html
+						m = this,
+						_html = m._html
 					;
 					if (_html != _undefined) {
 						if (_html === _true) {
-							var _nodeToInjectInto = _this._getNodeToInjectInto ();
-							_html = _this._html = _Uize.Template && _nodeToInjectInto
+							var _nodeToInjectInto = m._getNodeToInjectInto ();
+							_html = m._html = _Uize.Template && _nodeToInjectInto
 								? {
 									process:_Uize.Template.compile (
 										(
@@ -598,19 +598,19 @@ Uize.module ({
 							;
 							if (!_html) return;
 						}
-						_this._idPrefix || _this.set ({_idPrefix:_this.instanceId});
+						m._idPrefix || m.set ({_idPrefix:m.instanceId});
 						var
 							_templateInput = _Uize.copyInto (
 								{
 									pathToResources:_Uize.pathToResources,
 									blankGif:_class.getBlankImageUrl ()
 								},
-								_alternateTemplateInput || _this.get ()
+								_alternateTemplateInput || m.get ()
 							),
 							_htmlFuncOutput
 						;
 						_html = typeof _html != _typeString && _isFunction (_html.process)
-							? _html.process.call (_this,_templateInput)
+							? _html.process.call (m,_templateInput)
 							: _isFunction (_html)
 								? typeof (_htmlFuncOutput = _html (_templateInput)) === 'string'
 									? _Uize.substituteInto (_htmlFuncOutput, _templateInput)
@@ -623,18 +623,18 @@ Uize.module ({
 
 				buildHtml:function (_alternateTemplateInput) {
 					var
-						_this = this,
-						_html = _this.getHtml (_alternateTemplateInput)
+						m = this,
+						_html = m.getHtml (_alternateTemplateInput)
 					;
 					if (_html != _undefined) {
-						var _nodeToInjectInto = _this._getNodeToInjectInto ();
+						var _nodeToInjectInto = m._getNodeToInjectInto ();
 						_Uize_Node.injectHtml (
 							_nodeToInjectInto || document.body,
 							_html,
-							_this._insertionMode || (_nodeToInjectInto ? 'inner replace' : 'inner bottom')
+							m._insertionMode || (_nodeToInjectInto ? 'inner replace' : 'inner bottom')
 						);
-						_this._nodeCache = _null;
-						_this.set ({_built:_true});
+						m._nodeCache = _null;
+						m.set ({_built:_true});
 					}
 					/*?
 						Instance Methods
@@ -672,15 +672,15 @@ Uize.module ({
 						if (_nodeBlob === _null) return _null;
 						_nodeBlob = '';
 					}
-					var _this = this;
-					if (_this._nodeMap && typeof _nodeBlob == _typeString) {
-						var _remappedNode = _this._nodeMap [_nodeBlob];
+					var m = this;
+					if (m._nodeMap && typeof _nodeBlob == _typeString) {
+						var _remappedNode = m._nodeMap [_nodeBlob];
 						if (_remappedNode !== _undefined)
 							_nodeBlob = _remappedNode
 						;
 					}
 					if (typeof _nodeBlob == _typeString) {
-						return _Uize_Node_getById (_nodeBlob,_this._idPrefix,_this._nodeCache || (_this._nodeCache = {}));
+						return _Uize_Node_getById (_nodeBlob,m._idPrefix,m._nodeCache || (m._nodeCache = {}));
 					} else if (_Uize_Node_isNode (_nodeBlob)) {
 						return _nodeBlob;
 					} else {
@@ -688,8 +688,8 @@ Uize.module ({
 						_Uize_Node_doForAll (
 							_nodeBlob,
 							function (_node) {(_result || (_result = [])).push (_node)},
-							_this._idPrefix,
-							_this._nodeCache || (_this._nodeCache = {})
+							m._idPrefix,
+							m._nodeCache || (m._nodeCache = {})
 						);
 						return _result;
 					}
@@ -749,14 +749,14 @@ Uize.module ({
 
 				globalizeNode:function (_impliedNode) {
 					var
-						_this = this,
+						m = this,
 						_docBody = document.body
 					;
 					_Uize_Node_doForAll (
-						_this.getNode (_impliedNode),
+						m.getNode (_impliedNode),
 						function (_node) {
 							if (_node.parentNode != _docBody) {
-								(_this._globalizedNodes || (_this._globalizedNodes = [])).push (_node);
+								(m._globalizedNodes || (m._globalizedNodes = [])).push (_node);
 								_Uize_Node.setStyle (_node,{position:'absolute',left:-10000,top:-10000});
 								_docBody.appendChild (_node);
 							}
@@ -1323,13 +1323,13 @@ Uize.module ({
 					addChild:function (_childName,_childInstanceOrClass,_properties) {
 						if (!_properties) _properties = {};
 						var
-							_this = this,
-							_idPrefix = _this._idPrefix,
+							m = this,
+							_idPrefix = m._idPrefix,
 							_child = _Uize.isInstance (_childInstanceOrClass) ? _childInstanceOrClass : _null,
 							_childIdPrefix = 'idPrefix' in _properties ? _properties.idPrefix : _properties.node,
 							_childIdPrefixConstruction = _properties.idPrefixConstruction
 						;
-						_properties.parent = _this;
+						_properties.parent = m;
 						if (_childName == _undefined) _childName = _properties.name;
 						if (_child) {
 							if (_childName == _undefined) _childName = _child._name;
@@ -1338,7 +1338,7 @@ Uize.module ({
 								_childIdPrefixConstruction = _child._idPrefixConstruction
 							;
 						}
-						_properties.idPrefix = _this._constructIdPrefix (
+						_properties.idPrefix = m._constructIdPrefix (
 							_idPrefix,
 							_childIdPrefix,
 							_properties.name = _childName,
@@ -1348,7 +1348,7 @@ Uize.module ({
 
 						/*** apply unapplied data for child (set through children state property) ***/
 							var
-								_unappliedChildrenProperties = _this._unappliedChildrenProperties,
+								_unappliedChildrenProperties = m._unappliedChildrenProperties,
 								_unappliedChildrenPropertiesForChild = _unappliedChildrenProperties [_childName]
 							;
 							if (_unappliedChildrenPropertiesForChild) {
@@ -1357,7 +1357,7 @@ Uize.module ({
 							}
 
 						_child && _child.set (_properties);
-						return _this._children [_childName] = _child || new _childInstanceOrClass (_properties);
+						return m._children [_childName] = _child || new _childInstanceOrClass (_properties);
 						/*?
 							Instance Methods
 								addChild
@@ -1496,11 +1496,11 @@ Uize.module ({
 					},
 
 					callInherited:function (_property) {
-						var _this = this;
+						var m = this;
 						return (
 							function () {
 								var
-									_provider = _this.getProvider (_property),
+									_provider = m.getProvider (_property),
 									_result
 								;
 								if (_provider) {
@@ -1663,14 +1663,14 @@ Uize.module ({
 
 									................................................
 									_classPrototype.wireUi = function () {
-										var _this = this;
-										if (!_this.isWired) {
+										var m = this;
+										if (!m.isWired) {
 
 											// do a
 											// whole bunch
 											// of wiring
 
-											_superclass.doMy (_this,'wireUi');
+											_superclass.doMy (m,'wireUi');
 										}
 									};
 									................................................
@@ -1724,7 +1724,7 @@ Uize.module ({
 
 			_class.spawn = function (_properties,_parent) {
 				var
-					_this = this,
+					m = this,
 					_instances = [],
 					_instance,
 					_parentIdPrefixPlus = _parent && _parent._idPrefix ? _parent._idPrefix + '_' : '',
@@ -1740,11 +1740,11 @@ Uize.module ({
 									_node.id.slice (0,_parentIdPrefixPlusLength) == _parentIdPrefixPlus
 										? _node.id.slice (_parentIdPrefixPlusLength)
 										: 'generatedChildName' + _Uize.getGuid (),
-									_this,
+									m,
 									_properties
 								)
 							)
-							: (_instance = new _this (_properties)).insertOrWireUi ()
+							: (_instance = new m (_properties)).insertOrWireUi ()
 						;
 						_instances.push (_instance);
 					}
@@ -1933,32 +1933,32 @@ Uize.module ({
 					},
 					onChange:function () {
 						var
-							_this = this,
-							_idPrefix = _this._idPrefix
+							m = this,
+							_idPrefix = m._idPrefix
 						;
-						_this._nodeCache = _null;
+						m._nodeCache = _null;
 						if (_idPrefix != _undefined) {
-							_this._applyDeclarativeWidgetProperties ();
+							m._applyDeclarativeWidgetProperties ();
 
 							/*** set the idPrefix for every child widget that doesn't have a value set for this property ***/
 								var
-									_children = _this._children,
+									_children = m._children,
 									_child
 								;
 								for (var _childName in _children)
 									(_child = _children [_childName]).set ({
 										_idPrefix:
-											_this._constructIdPrefix (
+											m._constructIdPrefix (
 												_idPrefix,_child._idPrefix,_childName,_child._idPrefixConstruction
 											)
 									})
 								;
 
 							/*** rewire the widget, if it's already wired ***/
-								if (_this.isWired) {
+								if (m.isWired) {
 									// perhaps any previously wired nodes should also be unwired first
-									_this.set ({wired:_false});
-									_this.wireUi ();
+									m.set ({wired:_false});
+									m.wireUi ();
 								}
 						}
 					}

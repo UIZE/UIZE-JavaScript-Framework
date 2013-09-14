@@ -59,12 +59,12 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
+					m = this,
 					_totalNodes = 1000,
 					_totalIterations = 40,
 					_iterationNo
 				;
-				_this.executeFunctionsWithPause (
+				m.executeFunctionsWithPause (
 					[
 						function () {
 							/*** inject the test nodes into the page ***/
@@ -72,7 +72,7 @@ Uize.module ({
 								for (var _nodeNo = -1; ++_nodeNo < _totalNodes;)
 									_nodesHtmlChunks.push ('<input id="node' + _nodeNo + '" name="node' + _nodeNo + '" type="text" style="position:absolute; left:-1000px; top:-1000px;"/>')
 								;
-								_this.setNodeInnerHtml ('testNodes',_nodesHtmlChunks.join (''));
+								m.setNodeInnerHtml ('testNodes',_nodesHtmlChunks.join (''));
 						},
 						function () {
 							/*** test lookup by document.getElementById ***/

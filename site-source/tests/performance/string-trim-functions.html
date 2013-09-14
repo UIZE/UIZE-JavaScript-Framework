@@ -69,7 +69,6 @@ Uize.module ({
 
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 1000,
 					_iterationNo,
 					_largeStringWithoutPadding = 'dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd dsfas fasd fa sad h asd fjh sadjas dj asg fasj hdafsd jsa djhasgd asd',
@@ -79,7 +78,7 @@ Uize.module ({
 					_tenSpaces = '          ',
 					_1000Spaces = _tenSpaces.replace (/ /g,_tenSpaces).replace (/ /g,_tenSpaces)
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							// do nothing

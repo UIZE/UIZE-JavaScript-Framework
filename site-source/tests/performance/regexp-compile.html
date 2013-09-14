@@ -55,12 +55,11 @@ Uize.module ({
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
 				var
-					_this = this,
 					_totalIterations = 100000,
 					_iterationNo,
 					_attributesStr = 'src="myimage.gif" width="640" height="480" alt="My Image"'
 				;
-				_this.executeFunctionsWithPause (
+				this.executeFunctionsWithPause (
 					[
 						function () {
 							var _allDigitsRegExp =

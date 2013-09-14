@@ -397,7 +397,7 @@ Uize.module ({
 
 												When designing JavaScript classes, it is sometimes necessary in the class's implementation to set intervals, timeouts, or the event handlers of HTML nodes that make up an instance's user interface, so that they execute methods of the instance. Sometimes this must be done by generating JavaScript code that is to be interpreted. This generated code must, therefore, be able to reference its instance using a global identifier, because the code will be executed in a global context.
 
-												If the constructor of your class uses the automatically generated value of an instance's =instanceId= property to assign a global reference to the instance, with a statement like =window [_this.instanceId] &#61; _this=, then the =instanceId= property can be used when generating JavaScript code that is to execute methods on the instance. Consider the following example...
+												If the constructor of your class uses the automatically generated value of an instance's =instanceId= property to assign a global reference to the instance, with a statement like =window [m.instanceId] &#61; m=, then the =instanceId= property can be used when generating JavaScript code that is to execute methods on the instance. Consider the following example...
 
 												..................................................................
 												MyClass.prototype.click = function () {
@@ -448,16 +448,16 @@ Uize.module ({
 			;
 
 		/*** Property System Support Code ***/
-			function _getPropertyProfile (_this,_propertyPublicOrPrivateName) {
-				var _class = _getClass (_this);
+			function _getPropertyProfile (m,_propertyPublicOrPrivateName) {
+				var _class = _getClass (m);
 				return (
 					_class._propertyProfilesByPublicName [_propertyPublicOrPrivateName] ||
 					_class._propertyProfilesByPrivateName [_propertyPublicOrPrivateName]
 				);
 			}
 
-			function _getPropertyPrivateName (_this,_propertyPublicOrPrivateName) {
-				var _propertyProfile = _getPropertyProfile (_this,_propertyPublicOrPrivateName);
+			function _getPropertyPrivateName (m,_propertyPublicOrPrivateName) {
+				var _propertyProfile = _getPropertyProfile (m,_propertyPublicOrPrivateName);
 				return _propertyProfile ? _propertyProfile._privateName : _propertyPublicOrPrivateName;
 			}
 
@@ -466,17 +466,17 @@ Uize.module ({
 				_class._abstractEventName = _classPrototype._abstractEventName = function (_eventName,_managementFunction) {
 					if (_eventName.charCodeAt (0) == 67 && !_eventName.indexOf ('Changed.')) {
 						var
-							_this = this,
+							m = this,
 							_propertyPublicName = _eventName.slice (8),
-							_propertyProfile = _getPropertyProfile (_this,_propertyPublicName)
+							_propertyProfile = _getPropertyProfile (m,_propertyPublicName)
 						;
 						if (_propertyProfile && _propertyPublicName != _propertyProfile._publicName)
 							// use the canonical public name, since a pseudonym could have been specified
 							_eventName = 'Changed.' + (_propertyPublicName = _propertyProfile._publicName)
 						;
 						_managementFunction (_eventName);
-						(_this._hasChangedHandlers || (_this._hasChangedHandlers = {})) [_propertyPublicName] =
-							_this._eventHandlers && _this._eventHandlers [_eventName]
+						(m._hasChangedHandlers || (m._hasChangedHandlers = {})) [_propertyPublicName] =
+							m._eventHandlers && m._eventHandlers [_eventName]
 						;
 					} else {
 						_managementFunction (_eventName);
@@ -486,12 +486,12 @@ Uize.module ({
 		/*** Public Instance-Static Methods ***/
 			/*** Event System Methods ***/
 				_class.wire = _classPrototype.wire = function (_eventNameOrEventsMap,_handler) {
-					var _this = this;
+					var m = this;
 					if (arguments.length == 2) {
-						_this._abstractEventName (
+						m._abstractEventName (
 							_eventNameOrEventsMap,
 							function (_eventName) {
-								var _eventHandlers = _this._eventHandlers || (_this._eventHandlers = {});
+								var _eventHandlers = m._eventHandlers || (m._eventHandlers = {});
 								(_eventHandlers [_eventName] || (_eventHandlers [_eventName] = [])).push (
 									{
 										_eventName:_eventName,
@@ -646,8 +646,8 @@ Uize.module ({
 					*/
 					if (typeof _event != _typeObject) _event = {name:_event};
 					var
-						_this = this,
-						_eventHandlers = _this._eventHandlers
+						m = this,
+						_eventHandlers = m._eventHandlers
 					;
 					if (_eventHandlers) {
 						var
@@ -655,7 +655,7 @@ Uize.module ({
 							_handlersForAnyEvent = _eventHandlers ['*']
 						;
 						if (_handlersForThisEvent || _handlersForAnyEvent) {
-							_event.source || (_event.source = _this);
+							_event.source || (_event.source = m);
 							var
 								_handlers = _handlersForAnyEvent && _handlersForThisEvent
 									? _handlersForAnyEvent.concat (_handlersForThisEvent)
@@ -690,9 +690,9 @@ Uize.module ({
 							}
 						}
 					}
-					if (_event.bubble && _this.parent && _isInstance (_this)) {
-						_event.source || (_event.source = _this);
-						_this.parent.fire (_event);
+					if (_event.bubble && m.parent && _isInstance (m)) {
+						_event.source || (_event.source = m);
+						m.parent.fire (_event);
 					}
 					return _event;
 					/*?
@@ -740,16 +740,16 @@ Uize.module ({
 
 				_class.unwire = _classPrototype.unwire = function (_eventNameOrEventsMap,_handler) {
 					var
-						_this = this,
-						_eventHandlers = _this._eventHandlers
+						m = this,
+						_eventHandlers = m._eventHandlers
 					;
 					if (_eventHandlers) {
 						if (_isObject (_eventNameOrEventsMap)) {
 							for (var _eventName in _eventNameOrEventsMap)
-								_this.unwire (_eventName,_eventNameOrEventsMap [_eventName])
+								m.unwire (_eventName,_eventNameOrEventsMap [_eventName])
 							;
 						} else {
-							_this._abstractEventName (
+							m._abstractEventName (
 								_eventNameOrEventsMap,
 								function (_eventName) {
 									var _handlersForEventName = _eventHandlers [_eventName];
@@ -894,7 +894,7 @@ Uize.module ({
 
 				_classPrototype._onChange = function (_derivation,_handler,_mode) {
 					var
-						_this = this,
+						m = this,
 						_isOnceMode = _mode == _constOnChangeModeOnce,
 						_isWheneverMode = _mode == _constOnChangeModeWhenever,
 						_derivation = _resolveDerivation (_derivation),
@@ -906,15 +906,15 @@ Uize.module ({
 					;
 					function _checkDerivedValue () {
 						var
-							_determinantsValues = _determinantsValuesHarvester.call (_this),
-							_derivedValue = _determiner.apply (_this,_determinantsValues)
+							_determinantsValues = _determinantsValuesHarvester.call (m),
+							_derivedValue = _determiner.apply (m,_determinantsValues)
 						;
 						if (_isOnceMode || _isWheneverMode)
 							_derivedValue = !!_derivedValue
 						;
 						if (_isFirstCall || _derivedValue !== _lastDerivedValue) {
 							_isFirstCall = false;
-							_isOnceMode && _derivedValue && _wirings && _this.unwire (_wirings);
+							_isOnceMode && _derivedValue && _wirings && m.unwire (_wirings);
 							_isOnceMode || _isWheneverMode
 								? _derivedValue && (_isOnceMode || !_derivedValue != !_lastDerivedValue) &&
 									_handler.apply (0,_determinantsValues)
@@ -926,7 +926,7 @@ Uize.module ({
 					_checkDerivedValue ();
 					_isOnceMode && _lastDerivedValue
 						? (_wirings = {})
-						: _this.wire (_wirings = _lookup (_derivation._changedEventNames,_checkDerivedValue))
+						: m.wire (_wirings = _lookup (_derivation._changedEventNames,_checkDerivedValue))
 					;
 					return _wirings;
 				};
@@ -1383,7 +1383,7 @@ Uize.module ({
 						return this [_getPropertyPrivateName (this,_property)];
 					} else {
 						var
-							_this = this,
+							m = this,
 							_result = {}
 						;
 						if (!_property) {
@@ -1391,17 +1391,17 @@ Uize.module ({
 								Driven off of private names to ensure that there is only one property in the object for each actual state property, otherwise you can end up in bad situations.
 							*/
 							var
-								_class = _getClass (_this),
+								_class = _getClass (m),
 								_propertyProfilesByPrivateName = _class._propertyProfilesByPrivateName
 							;
 							for (var _propertyPrivateName in _propertyProfilesByPrivateName)
 								_result [_propertyProfilesByPrivateName [_propertyPrivateName]._publicName] =
-									_this [_propertyPrivateName]
+									m [_propertyPrivateName]
 							;
-							if (_isInstance (_this)) {
-								var _adHocProperties = _this._adHocProperties;
+							if (_isInstance (m)) {
+								var _adHocProperties = m._adHocProperties;
 								if (_adHocProperties)
-									for (_property in _adHocProperties) _result [_property] = _this [_property]
+									for (_property in _adHocProperties) _result [_property] = m [_property]
 								;
 							}
 						} else if (_isArray (_property)) {
@@ -1410,11 +1410,11 @@ Uize.module ({
 								++_subPropertyNo < _totalSubProperties;
 							) {
 								var _subProperty = _property [_subPropertyNo];
-								_result [_subProperty] = _this [_getPropertyPrivateName (_this,_subProperty)];
+								_result [_subProperty] = m [_getPropertyPrivateName (m,_subProperty)];
 							}
 						} else {
 							for (var _subProperty in _property)
-								_result [_subProperty] = _this [_getPropertyPrivateName (_this,_subProperty)]
+								_result [_subProperty] = m [_getPropertyPrivateName (m,_subProperty)]
 							;
 						}
 						return _result;
@@ -1557,9 +1557,9 @@ Uize.module ({
 				_class.registerProperties = /* DEPRECATED 2013-01-02 */
 					function (_propertyProfiles) {
 						var
-							_this = this,
-							_propertyProfilesByPrivateName = _this._propertyProfilesByPrivateName,
-							_propertyProfilesByPublicName = _this._propertyProfilesByPublicName,
+							m = this,
+							_propertyProfilesByPrivateName = m._propertyProfilesByPrivateName,
+							_propertyProfilesByPublicName = m._propertyProfilesByPublicName,
 							_declaredDerivedProperties
 						;
 						for (var _propertyPrivateName in _propertyProfiles) {
@@ -1600,12 +1600,12 @@ Uize.module ({
 									_propertyProfile._derivation = _derivation;
 								}
 								if ('value' in _rawPropertyProfile)
-									_this [_propertyPrivateName] = _rawPropertyProfile.value
+									m [_propertyPrivateName] = _rawPropertyProfile.value
 								;
 							}
 						}
-						var _instancePropertyDefaults = _this.get ();
-						_this._instancePropertyDefaults = _instancePropertyDefaults;
+						var _instancePropertyDefaults = m.get ();
+						m._instancePropertyDefaults = _instancePropertyDefaults;
 						if (_declaredDerivedProperties) {
 							var
 								_derivedProperties = [],
@@ -1617,7 +1617,7 @@ Uize.module ({
 									_propertyPublicName
 								);
 							}
-							_this._derivedProperties = _traceDependencies (
+							m._derivedProperties = _traceDependencies (
 								_derivedProperties,
 								function (_derivedProperty) {
 									return _propertyProfilesByPublicName [_derivedProperty]._derivation._determinants;
@@ -1701,9 +1701,9 @@ Uize.module ({
 							: _lookup (_properties,_arguments [1])
 					;
 					var
-						_this = this,
-						_thisIsInstance = _isInstance (_this),
-						_class = _thisIsInstance ? _this.Class : _this,
+						m = this,
+						_thisIsInstance = _isInstance (m),
+						_class = _thisIsInstance ? m.Class : m,
 						_propertyProfilesByPublicName = _class._propertyProfilesByPublicName,
 						_propertyProfilesByPrivateName = _class._propertyProfilesByPrivateName,
 						_propertyProfile,
@@ -1711,7 +1711,7 @@ Uize.module ({
 						_propertiesChanged = {},
 						_onChangeHandlerAddedFlagName,
 						_onChangeHandler,
-						_hasChangedHandlers = _thisIsInstance && _this._hasChangedHandlers,
+						_hasChangedHandlers = _thisIsInstance && m._hasChangedHandlers,
 						_hasChangedDotStarHandlers = _hasChangedHandlers && _hasChangedHandlers ['*'],
 						_propertiesForChangedDotStar,
 						_changedEventsToFire,
@@ -1755,8 +1755,8 @@ Uize.module ({
 							var _derived = _propertyProfile._derivation;
 							if (_derived._determinantsChanged (_propertiesChanged)) {
 								_propertyValue = _derived._determiner.apply (
-									_this,
-									_derived._determinantsValuesHarvester.call (_this)
+									m,
+									_derived._determinantsValuesHarvester.call (m)
 								);
 							} else {
 								continue;
@@ -1772,7 +1772,7 @@ Uize.module ({
 							_propertyProfile = _thisIsInstance ? {} : {value:_propertyValue};
 							_thisIsInstance
 								? (
-									(_this._adHocProperties || (_this._adHocProperties = {})) [_propertyPublicOrPrivateName] =
+									(m._adHocProperties || (m._adHocProperties = {})) [_propertyPublicOrPrivateName] =
 										true
 								) : (
 									(_propertiesToDeclare || (_propertiesToDeclare = {})) [_propertyPublicOrPrivateName] =
@@ -1786,12 +1786,12 @@ Uize.module ({
 									? (
 										/*** if there's a registered conformer, execute it and adjust the value ***/
 										_propertyValue = _propertyProfile._conformer.call (
-											_this,_propertyValue,_this [_propertyPrivateName]
+											m,_propertyValue,m [_propertyPrivateName]
 										)
 									)
 									: _propertyValue
 						;
-						if (_propertyValue !== _this [_propertyPrivateName]) {
+						if (_propertyValue !== m [_propertyPrivateName]) {
 							if (_thisIsInstance) {
 								_propertiesChanged [_propertyPublicName] =
 									_propertiesChanged [_propertyPrivateName] = 1
@@ -1814,21 +1814,21 @@ Uize.module ({
 										if (_isFunction (_onChangeHandler)) {
 											if (!_onChangeHandlers) {
 												_onChangeHandlers = [];
-												_onChangeHandlerAddedFlagName = _this.instanceId + '_handlerAlreadyAdded';
+												_onChangeHandlerAddedFlagName = m.instanceId + '_handlerAlreadyAdded';
 											}
 											if (!_onChangeHandler [_onChangeHandlerAddedFlagName]) {
 												_onChangeHandler [_onChangeHandlerAddedFlagName] = 1;
 												_onChangeHandlers.push (_onChangeHandler);
 											}
 										} else if (typeof _onChangeHandler == _typeString) {
-											_processOnChangeHandler (_this [_onChangeHandler]);
+											_processOnChangeHandler (m [_onChangeHandler]);
 										} else if (_isArray (_onChangeHandler)) {
 											_forEach (_onChangeHandler,_processOnChangeHandler);
 										}
 									};
 									_propertyProfile._onChange && _processOnChangeHandler (_propertyProfile._onChange);
 							}
-							_this [_propertyPrivateName] = _propertyValue;
+							m [_propertyPrivateName] = _propertyValue;
 						}
 					}
 					_propertiesToDeclare && _class.stateProperties (_propertiesToDeclare);
@@ -1839,18 +1839,18 @@ Uize.module ({
 								++_handlerNo < _onChangeHandlersLength;
 							) {
 								delete (_onChangeHandler = _onChangeHandlers [_handlerNo]) [_onChangeHandlerAddedFlagName];
-								_onChangeHandler.call (_this,_propertiesBeingSet);
+								_onChangeHandler.call (m,_propertiesBeingSet);
 							}
 						}
 						_propertiesForChangedDotStar &&
-							_this.fire ({name:'Changed.*',properties:_propertiesForChangedDotStar})
+							m.fire ({name:'Changed.*',properties:_propertiesForChangedDotStar})
 						;
 						if (_changedEventsToFire) {
 							for (
 								var _changedEventNo = -1, _totalChangedEventsToFire = _changedEventsToFire.length / 2;
 								++_changedEventNo < _totalChangedEventsToFire;
 							)
-								_this.fire ({
+								m.fire ({
 									name:'Changed.' + _changedEventsToFire [_changedEventNo * 2],
 									newValue:_changedEventsToFire [_changedEventNo * 2 + 1]
 								})

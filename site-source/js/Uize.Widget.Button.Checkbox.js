@@ -32,10 +32,10 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** initialization ***/
-							_this.wire ('Click',function () {_this.toggle ('selected')});
+							m.wire ('Click',function () {m.toggle ('selected')});
 					}
 				)
 			;

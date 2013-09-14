@@ -474,7 +474,7 @@ General Code Size Optimization
 
 		ANOTHER EXAMPLE
 		...
-		var _handlers = _this._handlers || (_this._handlers = []);
+		var _handlers = this._handlers || (this._handlers = []);
 		// use _handlers reference many times, modify its contents and such
 		...
 

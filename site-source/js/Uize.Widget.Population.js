@@ -192,17 +192,17 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.getOutput = function () {
-				var _this = this;
+				var m = this;
 				return (
 					_populate (
-						_this._templateStr,
-						_this._templateItem,
-						_this._items,
-						_this._itemPhantomProperties,
-						_this._itemPrefix,
-						_this._itemSuffix,
-						_this._outputPrefix,
-						_this._outputSuffix
+						m._templateStr,
+						m._templateItem,
+						m._items,
+						m._itemPhantomProperties,
+						m._itemPrefix,
+						m._itemSuffix,
+						m._outputPrefix,
+						m._outputSuffix
 					)
 				);
 				/*?
@@ -236,22 +236,22 @@ Uize.module ({
 
 			_classPrototype.updateUi = function () {
 				var
-					_this = this,
-					_changesSinceLastUpdate = _this._changesSinceLastUpdate
+					m = this,
+					_changesSinceLastUpdate = m._changesSinceLastUpdate
 				;
 				if (
-					_this.isWired &&
+					m.isWired &&
 					(_changesSinceLastUpdate._templateStr || _changesSinceLastUpdate._items) &&
-					_this.get ('enabledInherited')
+					m.get ('enabledInherited')
 				) {
 					var _nodeToInjectInto =
-						Uize.Node.getById (_this.get ('container')) || _this.getNode ('shell') || _this.getNode ()
+						Uize.Node.getById (m.get ('container')) || m.getNode ('shell') || m.getNode ()
 					;
 					if (_nodeToInjectInto) {
-						if (!_this._templateStr) _this._templateStr = _nodeToInjectInto.innerHTML;
-						var _newHtml = _this.getHtml ();
-						if (_newHtml !== _this._oldHtml)
-							_nodeToInjectInto.innerHTML = _this._oldHtml = _newHtml
+						if (!m._templateStr) m._templateStr = _nodeToInjectInto.innerHTML;
+						var _newHtml = m.getHtml ();
+						if (_newHtml !== m._oldHtml)
+							_nodeToInjectInto.innerHTML = m._oldHtml = _newHtml
 						;
 						_changesSinceLastUpdate._templateStr = _changesSinceLastUpdate._items = _false;
 					}

@@ -77,20 +77,20 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._updateValue = function () {
 				var
-					_this = this,
+					m = this,
 					_value = _blendValues (
-						_this._startValue,
-						_this._endValue,
-						_this._progress,
-						_this._quantization,
-						_this._curve,
-						_this._value
+						m._startValue,
+						m._endValue,
+						m._progress,
+						m._quantization,
+						m._curve,
+						m._value
 					)
 				;
 				if (_value != _valueUnchanged)
-					_value != _this._value
-						? _this.set ({_value:_value})
-						: _this.fire ({name:'Changed.value',newValue:_value})
+					_value != m._value
+						? m.set ({_value:_value})
+						: m.fire ({name:'Changed.value',newValue:_value})
 				;
 			};
 
@@ -442,10 +442,10 @@ Uize.module ({
 				_inProgress:{
 					name:'inProgress',
 					onChange:function () {
-						var _this = this;
-						if (_this._inProgress) {
-							_this._startTime = _now ();
-							_this.fire ('Start');
+						var m = this;
+						if (m._inProgress) {
+							m._startTime = _now ();
+							m.fire ('Start');
 								/*?
 									Instance Events
 										Start
@@ -454,13 +454,13 @@ Uize.module ({
 											NOTES
 											- see also the =Done= instance event.
 								*/
-							_this._value = _this._progress = null;
+							m._value = m._progress = null;
 								/* NOTES:
 									- this is to make sure there are always initial change events for these properties. However, maybe with the model of registering handlers on these properties, it shouldn't be necessary (or maybe it's not even appropriate) to coerce this change in this place. Maybe it's OK for the user of this class to only be informed when the value or progress actually changes.
 								*/
-							_this._advance ();
+							m._advance ();
 
-							_activeFades.push (_this);
+							_activeFades.push (m);
 							_updateAnyActiveFades ();
 						}
 					},

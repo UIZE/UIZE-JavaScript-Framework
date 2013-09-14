@@ -191,17 +191,17 @@ Uize.module ({
 					).wire ({
 						'Changed.inProgress':
 							function (_event) {
-								var _this = _event.source;
+								var m = _event.source;
 								_event.newValue
-									? _fadePool.push (_this)
-									: _fadePool.splice (Uize.indexIn (_fadePool,_this),1)
+									? _fadePool.push (m)
+									: _fadePool.splice (Uize.indexIn (_fadePool,m),1)
 								;
 							},
 						'Changed.value':
 							function (_event) {
 								var
-									_this = _event.source,
-									_target = _this [_pTarget],
+									m = _event.source,
+									_target = m [_pTarget],
 									_context = _target.context,
 									_handler = _target.handler,
 									_value = _event.newValue

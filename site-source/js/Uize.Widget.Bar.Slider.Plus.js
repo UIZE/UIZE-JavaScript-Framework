@@ -40,7 +40,7 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** add the buttons for adjusting the slider's value ***/
 							function _stepButtonHandler (_event) {
@@ -49,20 +49,20 @@ Uize.module ({
 								}
 								var
 									_domEvent = _event.domEvent,
-									_divisions = _domEvent.shiftKey ? _this._stepsCoarse : (_domEvent.ctrlKey ? _this._stepsFine : _this._stepsNormal),
-									_minValue = _this.get ('minValue'),
-									_divisionSize = (_this.get ('maxValue') - _minValue) / _divisions,
+									_divisions = _domEvent.shiftKey ? m._stepsCoarse : (_domEvent.ctrlKey ? m._stepsFine : m._stepsNormal),
+									_minValue = m.get ('minValue'),
+									_divisionSize = (m.get ('maxValue') - _minValue) / _divisions,
 									_direction = _event.source.get ('name') == 'stepToMin' ? -1 : 1
 								;
-								_this.set ({value:(Math [_direction < 0 ? 'ceil' : 'floor'] (_roundOffJsMathError ((_this - _minValue) / _divisionSize)) + _direction) * _divisionSize + _minValue});
+								m.set ({value:(Math [_direction < 0 ? 'ceil' : 'floor'] (_roundOffJsMathError ((m - _minValue) / _divisionSize)) + _direction) * _divisionSize + _minValue});
 							}
-							_this._addChildButton ('setToMin',function () {_this.set ({value:_this.get ('minValue')})});
-							_this._addChildButton ('setToMax',function () {_this.set ({value:_this.get ('maxValue')})});
-							_this._addChildButton ('stepToMin',_stepButtonHandler);
-							_this._addChildButton ('stepToMax',_stepButtonHandler);
+							m._addChildButton ('setToMin',function () {m.set ({value:m.get ('minValue')})});
+							m._addChildButton ('setToMax',function () {m.set ({value:m.get ('maxValue')})});
+							m._addChildButton ('stepToMin',_stepButtonHandler);
+							m._addChildButton ('stepToMax',_stepButtonHandler);
 
-							_this.wire ('Changed.value',function () {_this._updateButtonsState ()});
-							_this._updateButtonsState ();
+							m.wire ('Changed.value',function () {m._updateButtonsState ()});
+							m._updateButtonsState ();
 					}
 				),
 				_classPrototype = _class.prototype
@@ -73,11 +73,11 @@ Uize.module ({
 
 			_classPrototype._updateButtonsState = function () {
 				var
-					_this = this,
-					_children = _this.children,
-					_value = +_this,
-					_toMinEnabled = _value != _this.get ('minValue') ? 'inherit' : false,
-					_toMaxEnabled = _value != _this.get ('maxValue') ? 'inherit' : false
+					m = this,
+					_children = m.children,
+					_value = +m,
+					_toMinEnabled = _value != m.get ('minValue') ? 'inherit' : false,
+					_toMaxEnabled = _value != m.get ('maxValue') ? 'inherit' : false
 				;
 				_children.setToMin.set ({enabled:_toMinEnabled});
 				_children.setToMax.set ({enabled:_toMaxEnabled});

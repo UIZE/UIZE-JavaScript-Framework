@@ -49,68 +49,68 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._conformValue = function (_value) {
 				var
-					_this = this,
-					_minValue = _this._minValidValue == _undefined ? _this._minValue : _this._minValidValue,
-					_increments = _this._increments
+					m = this,
+					_minValue = m._minValidValue == _undefined ? m._minValue : m._minValidValue,
+					_increments = m._increments
 				;
 				return (
 					Uize.constrain (
 						_increments ? (_minValue + Math.round ((_value - _minValue) / _increments) * _increments) : _value,
 						_minValue,
-						_this._maxValidValue == _undefined ? _this._maxValue : _this._maxValidValue
+						m._maxValidValue == _undefined ? m._maxValue : m._maxValidValue
 					)
 				);
 			};
 
 			_classPrototype._updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					var
-						_orientationNo = _this._orientationNo,
-						_trackDimsObj = _Uize_Node.getDimensions (_this._trackNode),
+						_orientationNo = m._orientationNo,
+						_trackDimsObj = _Uize_Node.getDimensions (m._trackNode),
 						_trackDims = [_trackDimsObj.width,_trackDimsObj.height],
-						_knobNode = _this._knobNode,
+						_knobNode = m._knobNode,
 						_knobDimsObj = _Uize_Node.getDimensions (_knobNode),
 						_knobDims = [_knobDimsObj.width,_knobDimsObj.height],
-						_scaleFunc = _this._scaleFunc,
-						_scaleMin = _scaleFunc(_this._minValue),
-						_scaleMax = _scaleFunc(_this._maxValue),
-						_scaleVal = _scaleFunc(_this._value),
+						_scaleFunc = m._scaleFunc,
+						_scaleMin = _scaleFunc(m._minValue),
+						_scaleMax = _scaleFunc(m._maxValue),
+						_scaleVal = _scaleFunc(m._value),
 						_knobVirtualPos = Math.round ((_scaleVal - _scaleMin) / (_scaleMax - _scaleMin) * (_trackDims [_orientationNo] - _knobDims [_orientationNo])),
 						_knobPos = _orientationNo ? _trackDims [1] - _knobDims [1] - _knobVirtualPos : _knobVirtualPos,
 						_knobCenter = Math.round (_knobPos + _knobDims [_orientationNo] / 2),
-						_value = Uize.isNumber (_this._decimalPlacesToDisplay)
-							? _this._value.toFixed (_this._decimalPlacesToDisplay)
-							: _this._value
+						_value = Uize.isNumber (m._decimalPlacesToDisplay)
+							? m._value.toFixed (m._decimalPlacesToDisplay)
+							: m._value
 					;
 					if (_knobNode) {
 						_knobNode.style [_orientationNo ? 'top' : 'left'] = _knobPos + 'px';
 						_knobNode.title = _value;
 					}
-					_this._fullNode &&
+					m._fullNode &&
 						_Uize_Node.setClipRect (
-							_this._fullNode,
+							m._fullNode,
 							_orientationNo ? _knobCenter : 0,
 							_orientationNo ? _trackDims [0] : _knobCenter,
 							_trackDims [1],
 							0
 						)
 					;
-					_this._emptyNode &&
+					m._emptyNode &&
 						_Uize_Node.setClipRect (
-							_this._emptyNode,
+							m._emptyNode,
 							0,
 							_trackDims [0],
 							_orientationNo ? _knobCenter : _trackDims [1],
 							_orientationNo ? 0 : _knobCenter
 						)
 					;
-					_this._valueNode &&
+					m._valueNode &&
 						_Uize_Node.setInnerHtml (
-							_this._valueNode,
-							Uize.isNumber (_this._decimalPlacesToDisplay)
-								? _this._value.toFixed (_this._decimalPlacesToDisplay)
-								: _this._value
+							m._valueNode,
+							Uize.isNumber (m._decimalPlacesToDisplay)
+								? m._value.toFixed (m._decimalPlacesToDisplay)
+								: m._value
 						)
 					;
 				}
@@ -120,10 +120,10 @@ Uize.module ({
 			_classPrototype.updateUi = _classPrototype._updateUi;
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this._orientationNo = _this._orientation == 'vertical' ? 1 : 0;
-					_this._trackNode = _this.getNode ('track');
+				var m = this;
+				if (!m.isWired) {
+					m._orientationNo = m._orientation == 'vertical' ? 1 : 0;
+					m._trackNode = m.getNode ('track');
 						/*?
 							Implied Nodes
 								track
@@ -132,7 +132,7 @@ Uize.module ({
 									NOTES
 									- this implied node is required
 						*/
-					_this._knobNode = _this.getNode ('knob');
+					m._knobNode = m.getNode ('knob');
 						/*?
 							Implied Nodes
 								knob
@@ -141,7 +141,7 @@ Uize.module ({
 									NOTES
 									- this implied node is required
 						*/
-					_this._fullNode = _this.getNode ('full');
+					m._fullNode = m.getNode ('full');
 						/*?
 							Implied Nodes
 								full
@@ -153,7 +153,7 @@ Uize.module ({
 									- this implied node is optional
 									- compare to the =empty= implied node
 						*/
-					_this._emptyNode = _this.getNode ('empty');
+					m._emptyNode = m.getNode ('empty');
 						/*?
 							Implied Nodes
 								empty
@@ -165,7 +165,7 @@ Uize.module ({
 									- this implied node is optional
 									- compare to the =full= implied node
 						*/
-					_this._valueNode = _this.getNode ('value');
+					m._valueNode = m.getNode ('value');
 						/*?
 							Implied Nodes
 								value
@@ -175,7 +175,7 @@ Uize.module ({
 									- this implied node is optional
 						*/
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
@@ -189,9 +189,9 @@ Uize.module ({
 
 		/*** State Properties ***/
 			function _conformValueAndUpdateUi () {
-				var _this = this;
-				_this.set ({_value:_this._conformValue (_this._value)});
-				_this._updateUi ();
+				var m = this;
+				m.set ({_value:m._conformValue (m._value)});
+				m._updateUi ();
 			}
 
 			_class.stateProperties ({
