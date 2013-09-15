@@ -1,0 +1,25 @@
+The new =whenever= instance method, implemented in the =Uize.Class= base class module, provides a way to register a handler that should be executed whenever a specified condition becomes met.
+
+The =whenever= method is useful when using one or more state properties to form a condition, and where you wish to register code that should be executed every time the condition changes state from not being met to being met, and immediately if the condition is already met at the time that the =whenever= method is called.
+
+EXAMPLE
+..............................................................................
+myFishTankWater.once (
+	function (width,height,depth) {return width * height * depth > 1000},
+	function () {
+		// execute code, now that the water volume of the fish tank exceeds 1000
+	}
+}
+..............................................................................
+
+In the above example, a compound condition is specified using a function. The arguments of the function - =width=, =height=, and =depth= - indicate that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The function's body, =return width &#42; height &#42; depth > 1000=, evaluates the condition to be =true= when the volume of the fish tank's water is greater than =1000=.
+
+When code is registered to be executed whenever the product of the =width=, =height=, and =depth= properties is greater than =1000=, if this condition is already met when the =whenever= method is called, then the handler will be executed immediately. The method will also wire handlers for the =Changed.width=, =Changed.height=, and =Changed.depth= events and will re-evaluate the condition function every time any of the properties that affect the condition change value. Whenever the result of the condition expression changes from =false= to =true=, the registered handler will be executed.
+
+As with the =once= instance method, the =whenever= method provides a versatile way of specifying conditions to suit different situations. For comprehensive documentation on the =whenever= method and the other methods of the condition system, consult the reference for the =Uize.Class= module.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-09-15 - New whenever Instance Method for Classes
+....................................................................................
