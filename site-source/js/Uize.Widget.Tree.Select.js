@@ -29,64 +29,17 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_null = null,
-				_true = true,
-				_false = false
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function (_properties) {
-						var m = this;
-
-						/*** Private Instance Properties ***/
-							m._levels = _null;
-							m._totalLevels = 0;
-							m._selectionComplete = _false;
-
-						/*** handle change in items ***/
-							m.wire (
-								'Changed.items',
-								function (_event) {
-									function _burrowDeeper (_item,_currentDepth) {
-										m._totalLevels = Math.max (m._totalLevels,_currentDepth);
-										if (_class.itemHasChildren (_item)) {
-											for (
-												var _itemNo = -1, _itemItems = _item.items, _itemItemsLength = _itemItems.length;
-												++_itemNo < _itemItemsLength;
-											)
-												_burrowDeeper (_itemItems [_itemNo],_currentDepth + 1)
-											;
-										}
-									}
-									var _rootItem = {items:_event.newValue};
-									m._levels = [[_rootItem]];
-									m._totalLevels = 0;
-									_burrowDeeper (_rootItem,0);
-									m._updateUi ();
-									m._onItemSelected (0);
-								}
-							);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUi = function () {
+			function _updateUi () {
 				var m = this;
 				if (m.isWired) {
 					for (var _levelNo = 0; ++_levelNo <= m._maxLevels;)
 						m.displayNode ('level' + _levelNo,_levelNo <= m._totalLevels)
 					;
 				}
-			};
+			}
 
-			_classPrototype._onItemSelected = function (_thisLevelNo) {
-				var m = this;
+			function _onItemSelected (m,_thisLevelNo) {
 				if (m.isWired) {
 					var
 						_thisLevel = m._levels [_thisLevelNo],
@@ -100,12 +53,12 @@ Uize.module ({
 					for (var _levelNo = _nextLevelNo - 1; ++_levelNo <= m._totalLevels;) {
 						var _select = m.getNode ('level' + _levelNo);
 						_select.options.length = 0;
-						_enableSelect (_select,_false);
+						_enableSelect (_select,false);
 					}
 					var
 						_thisItemNo = _thisSelect ? _thisSelect.selectedIndex - 1 : 0,
 						_itemSelected = _thisLevel [_thisItemNo],
-						_itemSelectedHasChildren = _class.itemHasChildren (_itemSelected),
+						_itemSelectedHasChildren = m.Class.itemHasChildren (_itemSelected),
 						_selectionComplete = _thisItemNo > -1 && !_itemSelectedHasChildren
 					;
 					m.setNodeProperties ('submitButton',{disabled:!_selectionComplete});
@@ -121,43 +74,77 @@ Uize.module ({
 						;
 						_addOption (m._chooseText);
 						Uize.forEach (_itemSelected.items,function (_item) {_addOption (_item.title)});
-						_enableSelect (_nextSelect,_true);
+						_enableSelect (_nextSelect,true);
 					}
 					if (_selectionComplete != m._selectionComplete) {
 						m.fire ('Selection ' + (_selectionComplete ? 'Complete' : 'Incomplete'));
 						m._selectionComplete = _selectionComplete;
 					}
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = _classPrototype._updateUi;
-
-			_classPrototype.wireUi = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
-				if (!m.isWired) {
-					for (
-						var
-							_levelNo = 0,
-							_getOnItemSelectedHandler = function (_levelNo) {
-								return function () {m._onItemSelected (_levelNo)};
+
+				/*** Private Instance Properties ***/
+					m._levels = null;
+					m._totalLevels = 0;
+					m._selectionComplete = false;
+
+				/*** handle change in items ***/
+					m.wire (
+						'Changed.items',
+						function (_event) {
+							function _burrowDeeper (_item,_currentDepth) {
+								m._totalLevels = Math.max (m._totalLevels,_currentDepth);
+								if (m.Class.itemHasChildren (_item)) {
+									for (
+										var _itemNo = -1, _itemItems = _item.items, _itemItemsLength = _itemItems.length;
+										++_itemNo < _itemItemsLength;
+									)
+										_burrowDeeper (_itemItems [_itemNo],_currentDepth + 1)
+									;
+								}
 							}
+							var _rootItem = {items:_event.newValue};
+							m._levels = [[_rootItem]];
+							m._totalLevels = 0;
+							_burrowDeeper (_rootItem,0);
+							_updateUi.call (m);
+							_onItemSelected (m,0);
+						}
+					);
+			},
+
+			instanceMethods:{
+				updateUi:_updateUi,
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						for (
+							var
+								_levelNo = 0,
+								_getOnItemSelectedHandler = function (_levelNo) {
+									return function () {_onItemSelected (m,_levelNo)};
+								}
+							;
+							++_levelNo <= m._maxLevels;
+						)
+							m.wireNode ('level' + _levelNo,'change',_getOnItemSelectedHandler (_levelNo))
 						;
-						++_levelNo <= m._maxLevels;
-					)
-						m.wireNode ('level' + _levelNo,'change',_getOnItemSelectedHandler (_levelNo))
-					;
 
-					_superclass.doMy (m,'wireUi');
-					m._onItemSelected (0);
+						_superclass.doMy (m,'wireUi');
+						_onItemSelected (m,0);
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_displayDisabledSelects:{
 					name:'displayDisabledSelects',
-					value:_true
+					value:true
 				},
 				_chooseText:{
 					name:'chooseText',
@@ -167,9 +154,8 @@ Uize.module ({
 					name:'maxLevels',
 					value:20
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

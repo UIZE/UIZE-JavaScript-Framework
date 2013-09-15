@@ -29,64 +29,47 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false
-			;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-
-						/*** add the buttons for adjusting the slider's value ***/
-							function _stepButtonHandler (_event) {
-								function _roundOffJsMathError (_value) {
-									return Math.round (_value * Math.pow (10,14)) / Math.pow (10,14); /* NOTE: this is a workaround for a REALLY ridiculous math inaccuracy in JavaScript when certain numbers are involved in multiplications. For example, .07 * 100 gives you 7.000000000000001 !!! */
-								}
-								var
-									_domEvent = _event.domEvent,
-									_divisions = _domEvent.shiftKey ? m._stepsCoarse : (_domEvent.ctrlKey ? m._stepsFine : m._stepsNormal),
-									_minValue = m.get ('minValue'),
-									_divisionSize = (m.get ('maxValue') - _minValue) / _divisions,
-									_direction = _event.source.get ('name') == 'stepToMin' ? -1 : 1
-								;
-								m.set ({value:(Math [_direction < 0 ? 'ceil' : 'floor'] (_roundOffJsMathError ((m - _minValue) / _divisionSize)) + _direction) * _divisionSize + _minValue});
-							}
-							m._addChildButton ('setToMin',function () {m.set ({value:m.get ('minValue')})});
-							m._addChildButton ('setToMax',function () {m.set ({value:m.get ('maxValue')})});
-							m._addChildButton ('stepToMin',_stepButtonHandler);
-							m._addChildButton ('stepToMax',_stepButtonHandler);
-
-							m.wire ('Changed.value',function () {m._updateButtonsState ()});
-							m._updateButtonsState ();
+				function _stepButtonHandler (_event) {
+					function _roundOffJsMathError (_value) {
+						return Math.round (_value * Math.pow (10,14)) / Math.pow (10,14); /* NOTE: this is a workaround for a REALLY ridiculous math inaccuracy in JavaScript when certain numbers are involved in multiplications. For example, .07 * 100 gives you 7.000000000000001 !!! */
 					}
-				),
-				_classPrototype = _class.prototype
-			;
+					var
+						_domEvent = _event.domEvent,
+						_divisions = _domEvent.shiftKey ? m._stepsCoarse : (_domEvent.ctrlKey ? m._stepsFine : m._stepsNormal),
+						_minValue = m.get ('minValue'),
+						_divisionSize = (m.get ('maxValue') - _minValue) / _divisions,
+						_direction = _event.source.get ('name') == 'stepToMin' ? -1 : 1
+					;
+					m.set ({value:(Math [_direction < 0 ? 'ceil' : 'floor'] (_roundOffJsMathError ((m - _minValue) / _divisionSize)) + _direction) * _divisionSize + _minValue});
+				}
 
-		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
+				var _addChildButton = Uize.Widget.Button.addChildButton;
+				_addChildButton.call (m,'setToMin',function () {m.set ({value:m.get ('minValue')})});
+				_addChildButton.call (m,'setToMax',function () {m.set ({value:m.get ('maxValue')})});
+				_addChildButton.call (m,'stepToMin',_stepButtonHandler);
+				_addChildButton.call (m,'stepToMax',_stepButtonHandler);
 
-			_classPrototype._updateButtonsState = function () {
-				var
-					m = this,
-					_children = m.children,
-					_value = +m,
-					_toMinEnabled = _value != m.get ('minValue') ? 'inherit' : false,
-					_toMaxEnabled = _value != m.get ('maxValue') ? 'inherit' : false
-				;
-				_children.setToMin.set ({enabled:_toMinEnabled});
-				_children.setToMax.set ({enabled:_toMaxEnabled});
-				_children.stepToMin.set ({enabled:_toMinEnabled});
-				_children.stepToMax.set ({enabled:_toMaxEnabled});
-			};
+				m.onChange (
+					'value',
+					function (_value) {
+						var
+							_children = m.children,
+							_toMinEnabled = _value != m.get ('minValue') ? 'inherit' : false,
+							_toMaxEnabled = _value != m.get ('maxValue') ? 'inherit' : false
+						;
+						_children.setToMin.set ({enabled:_toMinEnabled});
+						_children.setToMax.set ({enabled:_toMaxEnabled});
+						_children.stepToMin.set ({enabled:_toMinEnabled});
+						_children.stepToMax.set ({enabled:_toMaxEnabled});
+					}
+				);
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_stepsCoarse:{
 					name:'stepsCoarse',
 					value:2
@@ -99,9 +82,8 @@ Uize.module ({
 					name:'stepsNormal',
 					value:5
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

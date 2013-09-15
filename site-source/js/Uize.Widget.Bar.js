@@ -35,19 +35,11 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
-				_true = true,
-				_false = false,
 				_Uize_Node = Uize.Node
 			;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._conformValue = function (_value) {
+			function _conformValue (_value) {
 				var
 					m = this,
 					_minValue = m._minValidValue == _undefined ? m._minValue : m._minValidValue,
@@ -60,9 +52,9 @@ Uize.module ({
 						m._maxValidValue == _undefined ? m._maxValue : m._maxValidValue
 					)
 				);
-			};
+			}
 
-			_classPrototype._updateUi = function () {
+			function _updateUi () {
 				var m = this;
 				if (m.isWired) {
 					var
@@ -114,87 +106,89 @@ Uize.module ({
 						)
 					;
 				}
-			};
-
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = _classPrototype._updateUi;
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m._orientationNo = m._orientation == 'vertical' ? 1 : 0;
-					m._trackNode = m.getNode ('track');
-						/*?
-							Implied Nodes
-								track
-									The =track= implied node acts as a "guide" in which a bar's knob is to move. This node should be transparent when using the optional =full= and =empty= implied nodes, in order for those nodes to be visible to the user. When not using those nodes, the track image can be set in the CSS style for this node or can be a child node.
-
-									NOTES
-									- this implied node is required
-						*/
-					m._knobNode = m.getNode ('knob');
-						/*?
-							Implied Nodes
-								knob
-									The =knob= implied node acts as an indicator for a bar's current value and - for sliders - is wired up for drag-and-drop and provides the user a way to change the value. This node must be a child node of the =track= implied node.
-
-									NOTES
-									- this implied node is required
-						*/
-					m._fullNode = m.getNode ('full');
-						/*?
-							Implied Nodes
-								full
-									The optional =full= implied node acts as an indicator for the "full" side of a bar. For vertical bars, the full side is on the bottom side of the knob. For horizontal bars, the full side is on the left side of the knob.
-
-									To display correctly, this node should occupy the same space in the layout as the optional =empty= implied node and must have the same dimension on the axis of the knob's motion (ie. height for vertical bars, and width for horizontal bars) as the =track= implied node. It's not necessary that this node occupy the same space in the layout as the =track= implied node - the full/empty indicators could be off to the side, outside of the bar's track. However, in many cases you'll see bars with the full/empty indicators right over the track.
-
-									NOTES
-									- this implied node is optional
-									- compare to the =empty= implied node
-						*/
-					m._emptyNode = m.getNode ('empty');
-						/*?
-							Implied Nodes
-								empty
-									The optional =empty= implied node acts as an indicator for the "empty" side of a bar. For vertical bars, the empty side is on the top side of the knob. For horizontal bars, the empty side is on the right side of the knob.
-
-									To display correctly, this node should occupy the same space in the layout as the optional =full= implied node and must have the same dimension on the axis of the knob's motion (ie. height for vertical bars, and width for horizontal bars) as the =track= implied node. It's not necessary that this node occupy the same space in the layout as the =track= implied node - the full/empty indicators could be off to the side, outside of the bar's track. However, in many cases you'll see bars with the full/empty indicators right over the track.
-
-									NOTES
-									- this implied node is optional
-									- compare to the =full= implied node
-						*/
-					m._valueNode = m.getNode ('value');
-						/*?
-							Implied Nodes
-								value
-									The optional =value= implied node provides a convenient way to display a bar's current value. When this node is present, its innerHTML will be set to the bar's value, every time it changes.
-
-									NOTES
-									- this implied node is optional
-						*/
-
-					_superclass.doMy (m,'wireUi');
-				}
-			};
-
-		/*** Public Static Properties ***/
-			_class.presets = {};
-				/*?
-					Static Properties
-						Uize.Widget.Bar.presets
-							[DOCUMENT]
-				*/
-
-		/*** State Properties ***/
-			function _conformValueAndUpdateUi () {
-				var m = this;
-				m.set ({_value:m._conformValue (m._value)});
-				m._updateUi ();
 			}
 
-			_class.stateProperties ({
+			function _conformValueAndUpdateUi () {
+				var m = this;
+				m.set ({_value:_conformValue.call (m,m._value)});
+				_updateUi.call (m);
+			}
+
+		return _superclass.subclass ({
+			instanceMethods:{
+				updateUi:_updateUi,
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m._orientationNo = m._orientation == 'vertical' ? 1 : 0;
+						m._trackNode = m.getNode ('track');
+							/*?
+								Implied Nodes
+									track
+										The =track= implied node acts as a "guide" in which a bar's knob is to move. This node should be transparent when using the optional =full= and =empty= implied nodes, in order for those nodes to be visible to the user. When not using those nodes, the track image can be set in the CSS style for this node or can be a child node.
+
+										NOTES
+										- this implied node is required
+							*/
+						m._knobNode = m.getNode ('knob');
+							/*?
+								Implied Nodes
+									knob
+										The =knob= implied node acts as an indicator for a bar's current value and - for sliders - is wired up for drag-and-drop and provides the user a way to change the value. This node must be a child node of the =track= implied node.
+
+										NOTES
+										- this implied node is required
+							*/
+						m._fullNode = m.getNode ('full');
+							/*?
+								Implied Nodes
+									full
+										The optional =full= implied node acts as an indicator for the "full" side of a bar. For vertical bars, the full side is on the bottom side of the knob. For horizontal bars, the full side is on the left side of the knob.
+
+										To display correctly, this node should occupy the same space in the layout as the optional =empty= implied node and must have the same dimension on the axis of the knob's motion (ie. height for vertical bars, and width for horizontal bars) as the =track= implied node. It's not necessary that this node occupy the same space in the layout as the =track= implied node - the full/empty indicators could be off to the side, outside of the bar's track. However, in many cases you'll see bars with the full/empty indicators right over the track.
+
+										NOTES
+										- this implied node is optional
+										- compare to the =empty= implied node
+							*/
+						m._emptyNode = m.getNode ('empty');
+							/*?
+								Implied Nodes
+									empty
+										The optional =empty= implied node acts as an indicator for the "empty" side of a bar. For vertical bars, the empty side is on the top side of the knob. For horizontal bars, the empty side is on the right side of the knob.
+
+										To display correctly, this node should occupy the same space in the layout as the optional =full= implied node and must have the same dimension on the axis of the knob's motion (ie. height for vertical bars, and width for horizontal bars) as the =track= implied node. It's not necessary that this node occupy the same space in the layout as the =track= implied node - the full/empty indicators could be off to the side, outside of the bar's track. However, in many cases you'll see bars with the full/empty indicators right over the track.
+
+										NOTES
+										- this implied node is optional
+										- compare to the =full= implied node
+							*/
+						m._valueNode = m.getNode ('value');
+							/*?
+								Implied Nodes
+									value
+										The optional =value= implied node provides a convenient way to display a bar's current value. When this node is present, its innerHTML will be set to the bar's value, every time it changes.
+
+										NOTES
+										- this implied node is optional
+							*/
+
+						_superclass.doMy (m,'wireUi');
+					}
+				}
+			},
+
+			staticProperties:{
+				presets:{}
+					/*?
+						Static Properties
+							Uize.Widget.Bar.presets
+								[DOCUMENT]
+					*/
+			},
+
+			stateProperties:{
 				_decimalPlacesToDisplay:'decimalPlacesToDisplay',
 					/*?
 						State Properties
@@ -272,8 +266,8 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
-					conformer:_classPrototype._conformValue,
-					onChange:_classPrototype._updateUi,
+					conformer:_conformValue,
+					onChange:_updateUi,
 					value:0
 					/*?
 						State Properties
@@ -281,9 +275,8 @@ Uize.module ({
 								[DOCUMENT]
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

@@ -32,47 +32,28 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
-				_null = null
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** Private Instance Properties ***/
-							m._totalProcesses = m._totalProcessesTime = 0;
-							(m._fade = Uize.Fade ({duration:4000})).wire (
-								'Changed.value',
-								function (_event) {m.set ({value:_event.newValue})}
-							);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiShown = function () {
-				this.showNode ('',this._inProgress);
-			};
+			function _updateUiShown () {
+				this.isWired && this.showNode ('',this._inProgress);
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
-				if (!m.isWired) {
-					_superclass.doMy (m,'wireUi');
 
-					m._updateUiShown ();
-				}
-			};
+				/*** Private Instance Properties ***/
+					m._totalProcesses = m._totalProcessesTime = 0;
+					(m._fade = Uize.Fade ({duration:4000})).wire (
+						'Changed.value',
+						function (_event) {m.set ({value:_event.newValue})}
+					);
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			instanceMethods:{
+				updateUi:_updateUiShown
+			},
+
+			stateProperties:{
 				_inProgress:{
 					name:'inProgress',
 					onChange:function () {
@@ -89,9 +70,9 @@ Uize.module ({
 							var _updateShown = function () {
 								if (m._vanishTimeout) {
 									clearTimeout (m._vanishTimeout);
-									m._vanishTimeout = _null;
+									m._vanishTimeout = null;
 								}
-								m._updateUiShown ();
+								_updateUiShown.call (m);
 							};
 							if (m._inProgress) {
 								m._fade.start ({duration:(m._totalProcesses > 0 ? m._totalProcessesTime / m._totalProcesses : 3000) * m._paddingFactor});
@@ -103,7 +84,7 @@ Uize.module ({
 							}
 						}
 					},
-					value:_false
+					value:false
 					/*?
 						State Properties
 							inProgress
@@ -128,15 +109,13 @@ Uize.module ({
 								[DOCUMENT]
 					*/
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				html:Uize.Templates.ProgressBar,
 				orientation:'horizontal'
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

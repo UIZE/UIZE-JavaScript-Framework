@@ -344,631 +344,624 @@ Uize.module ({
 			;
 			function _getEnabledProperty (_enabled) {return _enabled ? _enabledTrueProperty : _enabledFalseProperty}
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-
-						function _updateOperandFromEntry () {
-							var _value = m._isEntryValid () ? +_entry : _undefined;
-							m.set (m._activeOperand,_value);
-							m.set ({_value:_value});
-						}
-
-						/*** add entry form element ***/
-							var _entry = m.addChild ('entry',Uize.Widget.TextInput,{value:m._value});
-							/*?
-								Child Widgets
-									entry
-										An instance of the =Uize.Widget.TextInput= class, that is used both to display the calculator's current value and also to allow the user to enter numbers and trigger operations by `using the regular keyboard`.
-
-										When the calculator is in the `error state`, the =entry= child widget will be set to the value ='ERROR'=. For more information on using the =entry= text input field to drive the calculator, see the section `Using the Regular Keyboard`.
-							*/
-							function _releaseLastButtonClicked () {
-								if (m._lastButtonClicked) {
-									m._lastButtonClicked.set ({state:''});
-									m._lastButtonClicked = _undefined;
-								}
-							}
-							function _handleKeyEvent (_event) {
-								_releaseLastButtonClicked ();
-								var
-									_domEvent = _event.domEvent,
-									_isKeyEscape = Uize.Node.Event.isKeyEscape (_domEvent),
-									_keyChar = _isKeyEscape
-										? ' '
-										: Uize.Node.Event.isKeyEnter (_domEvent)
-											? '='
-											: String.fromCharCode (Uize.Node.Event.charCode (_domEvent))
-								;
-								if (_keyChar) {
-									var _buttonId = _entryCharToButtonIdMap [_keyChar];
-									if (_buttonId) {
-										var _button = m.children [_buttonId];
-										if (_button.get ('enabledInherited')) {
-											(m._lastButtonClicked = _button).set ({state:'down'});
-											if (!_isKeyEscape && (!_digitButtonsMap [_buttonId] || _mustClearEntry ())) {
-												/* NOTE:
-													There's a weird issue with FF, where handling and aborting ESC here doesn't result in the entry widget's input field being reset, but we do want the button click simulation to happen as early as possible, otherwise it's not even noticeable.
-												*/
-												_button.fire ({name:'Click',domEvent:_domEvent});
-												_event.abort = _true;
-											}
-										} else {
-											_event.abort = _true;
-										}
-									} else if (_invalidEntryChars.indexOf (_keyChar) > -1) {
-										_event.abort = _true;
-									}
-								}
-							}
-							_entry.wire ({
-								'Changed.value':function () {
-									_updateOperandFromEntry ();
-									m._updateUiOperatorButtonsState ();
-								},
-								'Key Press':_handleKeyEvent,
-								'Key Up':_releaseLastButtonClicked
-							});
-							function _setEntryValue (_value) {
-								_entry.set ({value:isNaN (_value) ? 'ERROR' : (_value + '') || '0'});
-								_updateOperandFromEntry (); // setting the value of the entry widget may not trigger a Changed.value event
-							}
-
-						/*** add child buttons ***/
-							function _addChildButton (_buttonId,_clickHandler) {
-								return Uize.Widget.Button.addChildButton.call (
-									m,
-									_buttonId,
-									function (_event) {
-										_clickHandler (_event);
-										_entry.focus ();
-									}
-								);
-							}
-							function _clearOnNextDigit () {m.set ({_clearOnNextDigit:_true})}
-
-							/*** add number entry buttons ***/
-								function _mustClearEntry () {
-									var _entryValue = _entry + '';
-									return (
-										m._clearOnNextDigit ||
-										!m._isEntryValid () ||
-										_entryValue == '0' ||
-										_entryValue == '-0'
-									);
-								}
-								function _digitClickHandler (_event) {
-									var
-										_digitChar = _digitButtonsMap [_event.source.get ('name')],
-										_entryValue = _entry + '',
-										_leadingChars = _mustClearEntry () ? (_entryValue == '-0' ? '-' : '') : _entryValue
-									;
-									m._activeOperand == 'operandA' && m._clearOnNextDigit &&
-										m.set ({operator:_undefined})
-									;
-									m.set ({_clearOnNextDigit:_false});
-									_setEntryValue ((_leadingChars || (_digitChar == '.' ? '0' : '')) + _digitChar);
-								}
-								for (var _digitButtonId in _digitButtonsMap)
-									_addChildButton (_digitButtonId,_digitClickHandler)
-									/*?
-										Child Widgets
-											digit0
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "0" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
-
-											digit1
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "1" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
-
-											digit2
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "2" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
-
-											digit3
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "3" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit2=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
-
-											digit4
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "4" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
-
-											digit5
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "5" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
-
-											digit6
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "6" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit7=, =digit8=, =digit9=, and =point= child widgets
-
-											digit7
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "7" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit8=, =digit9=, and =point= child widgets
-
-											digit8
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "8" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit9=, and =point= child widgets
-
-											digit9
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "9" into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, and =point= child widgets
-
-											point
-												An instance of the =Uize.Widget.Button= class, that lets the user enter the "." (decimal point) character into the value in the =entry= child widget.
-
-												For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
-
-												NOTES
-												- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, and =digit9= child widgets
-									*/
-								;
-
-							/*** add operator buttons ***/
-								/*** equals button ***/
-									function _calculateResult () {
-										var
-											_result,
-											_operandA = m._operandA,
-											_operandB = m._operandB
-										;
-										_operandB == _undefined && m.set ({_operandB:_operandB = _operandA});
-										switch (m._operator) {
-											case 'divide':
-												_result = _operandA / _operandB;
-												break;
-											case 'multiply':
-												_result = _operandA * _operandB;
-												break;
-											case 'subtract':
-												_result = _operandA - _operandB;
-												break;
-											case 'add':
-												_result = _operandA + _operandB;
-												break;
-										}
-										m.set ({
-											_activeOperand:'operandA',
-											_operandA:_result
-										});
-										_setEntryValue (_result);
-										_clearOnNextDigit ();
-									}
-									function _usePendingCalculation () {
-										!m._clearOnNextDigit && m._operator && _calculateResult ();
-									}
-									var _equals = _addChildButton (
-										'equals',
-										_calculateResult
-										/*?
-											Child Widgets
-												equals
-													An instance of the =Uize.Widget.Button= class, that lets the user complete the pending binary operation, or compound a completed binary operation.
-
-													Clicking the =equals= button has the following effects...
-
-													- completes the pending binary operation (see the section `Operation Completion`), or compounds an already completed binary operation (see the section `Compounding Binary Operations`)
-													- sets the value of the =activeOperand= state property to ='operandA'=
-													- sets the value of the =operandA= state property and the value of the =entry= child widget to the result of the calculation
-													- sets the value of the =activeOperand= state property to ='operandA'=
-													- sets the value of the =clearOnNextDigit= state property to =true=
-
-													This button's function can also be triggered by a number of other interactions with the calculator widget (for more info, see the section `Operation Completion`).
-
-													NOTES
-													- this button will be disabled if the calculator is in the `error state`, or if there is not a pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
-										*/
-									);
-
-								/*** memory operators ***/
-									function _memoryPlus (_sign) {
-										m._activeOperand == 'operandB' && m._operator && _calculateResult ();
-										m.set ({_memory:(m._memory || 0) + _entry * _sign});
-										_clearOnNextDigit ();
-									}
-									_addChildButton (
-										'memoryPlus',
-										function () {_memoryPlus (1)}
-										/*?
-											Child Widgets
-												memoryPlus
-													An instance of the =Uize.Widget.Button= class, that lets the user add a value to the calculator's memory.
-
-													Clicking the =memoryPlus= button has the following effects...
-
-													- completes any pending binary operation (see the section `Operation Completion`)
-													- sets the value of the =memory= state property to its current value plus the value of the =entry= child widget
-													- sets the value of the =clearOnNextDigit= state property to =true=
-
-													NOTES
-													- see the companion =memoryMinus= child widget
-													- see the related =memoryRecall= and =memoryClear= child widgets
-													- this button will be disabled if the calculator is in the `error state`
-										*/
-									);
-									_addChildButton (
-										'memoryMinus',
-										function () {_memoryPlus (-1)}
-										/*?
-											Child Widgets
-												memoryMinus
-													An instance of the =Uize.Widget.Button= class, that lets the user subtract a value from the calculator's memory.
-
-													Clicking the =memoryMinus= button has the following effects...
-
-													- completes any pending binary operation (see the section `Operation Completion`)
-													- sets the value of the =memory= state property to its current value minus the value of the =entry= child widget
-													- sets the value of the =clearOnNextDigit= state property to =true=
-
-													NOTES
-													- see the companion =memoryPlus= child widget
-													- see the related =memoryRecall= and =memoryClear= child widgets
-													- this button will be disabled if the calculator is in the `error state`
-										*/
-									);
-									_addChildButton (
-										'memoryRecall',
-										function () {
-											_setEntryValue (m._memory);
-											_clearOnNextDigit ();
-										}
-										/*?
-											Child Widgets
-												memoryRecall
-													An instance of the =Uize.Widget.Button= class, that lets the user recall the calculator's memory.
-
-													Clicking the =memoryRecall= button has the following effects...
-
-													- sets the value of the =entry= child widget to the value of the =memory= state property
-													- sets the value of the =clearOnNextDigit= state property to =true=
-
-													NOTES
-													- see the related =memoryPlus=, =memoryMinus=, and =memoryClear= child widgets
-													- this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= state property is =undefined=)
-										*/
-									);
-									_addChildButton (
-										'memoryClear',
-										function () {
-											m.set ({_memory:_undefined});
-											_clearOnNextDigit ();
-										}
-										/*?
-											Child Widgets
-												memoryClear
-													An instance of the =Uize.Widget.Button= class, that lets the user clear the calculator's memory.
-
-													Clicking the =memoryClear= button has the following effects...
-
-													- sets the value of the =memory= state property to =undefined=
-													- sets the value of the =clearOnNextDigit= state property to =true=
-
-													NOTES
-													- see the related =memoryPlus=, =memoryMinus=, and =memoryRecall= child widgets
-													- this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= state property is =undefined=)
-										*/
-									);
-
-								/*** binary operators ***/
-									function _startEnteringNegativeNumber () {
-										if (
-											m._operator
-												? m._clearOnNextDigit && m._operandB == _undefined
-												: !m._operandA
-										) {
-											m.set ({_clearOnNextDigit:_false});
-											_setEntryValue ('-0');
-											return _true;
-										}
-									}
-									function _binaryOperatorButtonClickHandler (_event) {
-										var _buttonId = _event.source.get ('name');
-										if (_buttonId != 'subtract' || !_startEnteringNegativeNumber ()) {
-											_usePendingCalculation ();
-											m.set ({_operator:_undefined}); // we want onChange to get invoked
-											m.set ({_operator:_buttonId});
-										}
-									}
-									for (var _buttonId in _binaryOperatorsMap)
-										_addChildButton (_buttonId,_binaryOperatorButtonClickHandler)
-										/*?
-											Child Widgets
-												add
-													An instance of the =Uize.Widget.Button= class, that lets the user set up the addition binary operation.
-
-													Clicking the =add= button has the following effects...
-
-													- completes any pending binary operation (see the section `Operation Completion`)
-													- sets the value of the =operator= state property to ='add'=
-
-													This button's function can also be triggered using the "+" (addition / plus character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
-
-													NOTES
-													- the =add= function is one of the `binary operators`
-													- see the related =divide=, =multiply=, and =subtract= child widgets
-													- this button will be disabled if the calculator is in the `error state`
-
-												divide
-													An instance of the =Uize.Widget.Button= class, that lets the user set up the division binary operation.
-
-													Clicking the =divide= button has the following effects...
-
-													- completes any pending binary operation (see the section `Operation Completion`)
-													- sets the value of the =operator= state property to ='divide'=
-
-													This button's function can also be triggered using the "/" (division / forward slash character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
-
-													NOTES
-													- the =divide= function is one of the `binary operators`
-													- see the related =add=, =multiply=, and =subtract= child widgets
-													- this button will be disabled if the calculator is in the `error state`
-
-												multiply
-													An instance of the =Uize.Widget.Button= class, that lets the user set up the multiplication binary operation.
-
-													Clicking the =multiply= button has the following effects...
-
-													- completes any pending binary operation (see the section `Operation Completion`)
-													- sets the value of the =operator= state property to ='multiply'=
-
-													This button's function can also be triggered using the "&#42;" (multiply / star / asterisk character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
-
-													NOTES
-													- the =multiply= function is one of the `binary operators`
-													- see the related =add=, =divide=, and =subtract= child widgets
-													- this button will be disabled if the calculator is in the `error state`
-
-												subtract
-													An instance of the =Uize.Widget.Button= class, that lets the user set up the subtraction binary operation.
-
-													If a binary operation has already been set up (ie. the value of the =operator= state property is no longer =undefined=) but a value has not yet been entered for the second operand (ie. the =operandB= state property is still set to =undefined=), then clicking this button will make it behave as a negation operation. For more info on this behavior, see the section `Subtraction as Negation`.
-
-													Otherwise, clicking the =subtract= button has the following effects...
-
-													- completes any pending binary operation (see the section `Operation Completion`)
-													- sets the value of the =operator= state property to ='subtract'=
-
-													This button's function can also be triggered using the "-" (minus / dash / hyphen character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
-
-													NOTES
-													- the =subtract= function is one of the `binary operators`
-													- see the related =add=, =divide=, and =multiply= child widgets
-													- this button will be disabled if the calculator is in the `error state`
-										*/
-									;
-
-								/*** extended operators ***/
-									_addChildButton (
-										'negate',
-										function () {
-											if (!_startEnteringNegativeNumber ()) {
-												var _entryValue = _entry + '';
-												_setEntryValue (
-													_entryValue.indexOf ('-') > -1 ? _entryValue.replace ('-','') : '-' + _entryValue
-												);
-											}
-										}
-										/*?
-											Child Widgets
-												negate
-													An instance of the =Uize.Widget.Button= class, that lets the user perform the negation (sign inversion) operation on the current value of the =entry= child widget.
-
-													The negation operation can be used even when the current =entry= value is =0=, producing the value =-0= (for more info, see the section `Entering Negative Numbers`). Using the =negate= operator repeatedly will toggle the sign of the current =entry= value back and forth between positive and negative.
-
-													NOTES
-													- the =negate= function is one of the `unary operators`
-													- this button will be disabled if the calculator is in the `error state`
-										*/
-									);
-									_addChildButton (
-										'percent',
-										function () {
-											var
-												_operator = m._operator,
-												_entryValue = _entry / 100
-											;
-											_operator && m._activeOperand == 'operandA' &&
-												m.set ({_operator:_operator = _undefined})
-											;
-											if (_operator == 'subtract' || _operator == 'add') {
-												_entryValue = _operator == 'subtract' ? 1 - _entryValue : 1 + _entryValue;
-												_setEntryValue (m._operandA);
-												m.set ({_operator:'multiply'});
-											}
-											_setEntryValue (_entryValue);
-											_operator ? _calculateResult () : m.set ({_operator:'multiply'});
-										}
-										/*?
-											Child Widgets
-												percent
-													An instance of the =Uize.Widget.Button= class, that lets the user perform the percent operation.
-
-													The percent function will behave as either a unary or binary operator, depending on the current state of the calculator (for a detailed explanation of this, see the section `Versatile Percent Function`). This button's function can also be triggered using the "%" (percent character) key on the keyboard. For more info, see the section `Using the Regular Keyboard`.
-
-													NOTES
-													- this button will be disabled if the calculator is in the `error state`
-										*/
-									);
-									_addChildButton (
-										'squareRoot',
-										function () {
-											_setEntryValue (Math.sqrt (+_entry));
-											_clearOnNextDigit ();
-										}
-										/*?
-											Child Widgets
-												squareRoot
-													An instance of the =Uize.Widget.Button= class, that lets the user perform the square root operation on the current value of the =entry= child widget.
-
-													If the value of the =entry= child widget is negative, then clicking the =squareRoot= button will put the calculator widget into the `error state`.
-
-													NOTES
-													- the =squareRoot= function is one of the `unary operators`
-													- this button will be disabled if the calculator is in the `error state`
-										*/
-									);
-
-								/*** clear buttons ***/
-									function _clearEntry () {_setEntryValue (0)}
-									function _clear () {
-										_clearEntry ();
-										m.set ({
-											_operandA:0,
-											_operandB:_undefined,
-											_operator:_undefined
-										});
-									}
-									_addChildButton (
-										'clearEntry',
-										_clearEntry
-										/*?
-											Child Widgets
-												clearEntry
-													An instance of the =Uize.Widget.Button= class, that lets the user clear the value of the =entry= child widget.
-
-													Clicking the =clearEntry= button has the effect of setting the value of the =entry= child widget to =0=. To clear the currently pending binary operation as well as the current entry in the =entry= child widget, the =clear= button can be used.
-
-													NOTES
-													- see the companion =clear= child widget
-										*/
-									);
-									_addChildButton (
-										'clear',
-										_clear
-										/*?
-											Child Widgets
-												clear
-													An instance of the =Uize.Widget.Button= class, that lets the user clear the currently pending binary operation and the value of the =entry= child widget.
-
-													Clicking the =clear= button has the following effects...
-
-													- sets the value of the =entry= child widget to =0=
-													- sets the value of the =operandA= state property to =0=
-													- sets the value of the =operandB= state property to =undefined=
-													- sets the value of the =operator= state property to =undefined=
-
-													This button's function can also be triggered using the =Esc= or =Spacebar= keys on the keyboard (for more info, see the section `Using the Regular Keyboard`). To clear only the current entry in the =entry= child widget, the =clearEntry= button can be used.
-
-													NOTES
-													- see the companion =clearEntry= child widget
-										*/
-									);
-
-									/*** clear, initiated by escape key from entry widget ***/
-										_entry.wire ('Cancel',_clear);
-
-						m._childrenAdded = _true;
-
-						m._updateUiMemoryButtonsState ();
-						m._updateUiOperatorButtonsState ();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+			function _conformToNumber (_value) {return isNaN (_value) ? _undefined : +_value}
 
 		/*** Private Instance Methods ***/
-			_classPrototype._isEntryValid = function () {
-				return !isNaN ((this.children.entry + '') || '?');
-			};
+			function _isEntryValid (m) {
+				return !isNaN ((m.children.entry + '') || '?');
+			}
 
-			_classPrototype._updateUiMemoryButtonsState = function () {
+			function _updateUiMemoryButtonsState () {
 				var m = this;
 				if (m._childrenAdded) {
 					var _enabledProperty = _getEnabledProperty (m._memory != _undefined);
 					m.children.memoryRecall.set (_enabledProperty);
 					m.children.memoryClear.set (_enabledProperty);
 				}
-			};
+			}
 
-			_classPrototype._updateUiPointButtonState = function () {
+			function _updateUiPointButtonState () {
 				var m = this;
 				m._childrenAdded &&
 					m.children.point.set (
 						_getEnabledProperty (m._clearOnNextDigit || (m.children.entry + '').indexOf ('.') == -1)
 					)
 				;
-			};
+			}
 
-			_classPrototype._updateUiEqualsButtonState = function () {
+			function _updateUiEqualsButtonState () {
 				var m = this;
 				m._childrenAdded &&
-					m.children.equals.set (_getEnabledProperty (m._operator && m._isEntryValid ()))
+					m.children.equals.set (_getEnabledProperty (m._operator && _isEntryValid (m)))
 				;
-			};
+			}
 
-			_classPrototype._updateUiOperatorButtonsState = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
-				if (m._childrenAdded) {
-					var
-						_children = m.children,
-						_enabledProperty = _getEnabledProperty (m._isEntryValid ())
-					;
-					for (var _buttonId in _buttonsRequiringValidEntry)
-						_children [_buttonId].set (_enabledProperty)
-					;
+
+				function _updateOperandFromEntry () {
+					var _value = _isEntryValid (m) ? +_entry : _undefined;
+					m.set (m._activeOperand,_value);
+					m.set ({_value:_value});
 				}
-				m._updateUiPointButtonState ();
-				m._updateUiEqualsButtonState ();
-			};
 
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					/* NOTE:
-						Keep the entry field focused, even when you click outside it, as long as you click on the root node of the widget, or one of the nodes on its tree.
+				function _updateOperatorButtonsState () {
+					if (m._childrenAdded) {
+						var
+							_children = m.children,
+							_enabledProperty = _getEnabledProperty (_isEntryValid (m))
+						;
+						for (var _buttonId in _buttonsRequiringValidEntry)
+							_children [_buttonId].set (_enabledProperty)
+						;
+					}
+					_updateUiPointButtonState.call (m);
+					_updateUiEqualsButtonState.call (m);
+				}
+
+				/*** add entry form element ***/
+					var _entry = m.addChild ('entry',Uize.Widget.TextInput,{value:m._value});
+					/*?
+						Child Widgets
+							entry
+								An instance of the =Uize.Widget.TextInput= class, that is used both to display the calculator's current value and also to allow the user to enter numbers and trigger operations by `using the regular keyboard`.
+
+								When the calculator is in the `error state`, the =entry= child widget will be set to the value ='ERROR'=. For more information on using the =entry= text input field to drive the calculator, see the section `Using the Regular Keyboard`.
 					*/
-					m.wireNode ('','click',function () {m.children.entry.focus ()});
-					_superclass.doMy (m,'wireUi');
+					function _releaseLastButtonClicked () {
+						if (m._lastButtonClicked) {
+							m._lastButtonClicked.set ({state:''});
+							m._lastButtonClicked = _undefined;
+						}
+					}
+					function _handleKeyEvent (_event) {
+						_releaseLastButtonClicked ();
+						var
+							_domEvent = _event.domEvent,
+							_isKeyEscape = Uize.Node.Event.isKeyEscape (_domEvent),
+							_keyChar = _isKeyEscape
+								? ' '
+								: Uize.Node.Event.isKeyEnter (_domEvent)
+									? '='
+									: String.fromCharCode (Uize.Node.Event.charCode (_domEvent))
+						;
+						if (_keyChar) {
+							var _buttonId = _entryCharToButtonIdMap [_keyChar];
+							if (_buttonId) {
+								var _button = m.children [_buttonId];
+								if (_button.get ('enabledInherited')) {
+									(m._lastButtonClicked = _button).set ({state:'down'});
+									if (!_isKeyEscape && (!_digitButtonsMap [_buttonId] || _mustClearEntry ())) {
+										/* NOTE:
+											There's a weird issue with FF, where handling and aborting ESC here doesn't result in the entry widget's input field being reset, but we do want the button click simulation to happen as early as possible, otherwise it's not even noticeable.
+										*/
+										_button.fire ({name:'Click',domEvent:_domEvent});
+										_event.abort = _true;
+									}
+								} else {
+									_event.abort = _true;
+								}
+							} else if (_invalidEntryChars.indexOf (_keyChar) > -1) {
+								_event.abort = _true;
+							}
+						}
+					}
+					_entry.wire ({
+						'Changed.value':function () {
+							_updateOperandFromEntry ();
+							_updateOperatorButtonsState ();
+						},
+						'Key Press':_handleKeyEvent,
+						'Key Up':_releaseLastButtonClicked
+					});
+					function _setEntryValue (_value) {
+						_entry.set ({value:isNaN (_value) ? 'ERROR' : (_value + '') || '0'});
+						_updateOperandFromEntry (); // setting the value of the entry widget may not trigger a Changed.value event
+					}
+
+				/*** add child buttons ***/
+					function _addChildButton (_buttonId,_clickHandler) {
+						return Uize.Widget.Button.addChildButton.call (
+							m,
+							_buttonId,
+							function (_event) {
+								_clickHandler (_event);
+								_entry.focus ();
+							}
+						);
+					}
+					function _clearOnNextDigit () {m.set ({_clearOnNextDigit:_true})}
+
+					/*** add number entry buttons ***/
+						function _mustClearEntry () {
+							var _entryValue = _entry + '';
+							return (
+								m._clearOnNextDigit ||
+								!_isEntryValid (m) ||
+								_entryValue == '0' ||
+								_entryValue == '-0'
+							);
+						}
+						function _digitClickHandler (_event) {
+							var
+								_digitChar = _digitButtonsMap [_event.source.get ('name')],
+								_entryValue = _entry + '',
+								_leadingChars = _mustClearEntry () ? (_entryValue == '-0' ? '-' : '') : _entryValue
+							;
+							m._activeOperand == 'operandA' && m._clearOnNextDigit &&
+								m.set ({operator:_undefined})
+							;
+							m.set ({_clearOnNextDigit:_false});
+							_setEntryValue ((_leadingChars || (_digitChar == '.' ? '0' : '')) + _digitChar);
+						}
+						for (var _digitButtonId in _digitButtonsMap)
+							_addChildButton (_digitButtonId,_digitClickHandler)
+							/*?
+								Child Widgets
+									digit0
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "0" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
+
+									digit1
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "1" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
+
+									digit2
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "2" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
+
+									digit3
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "3" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit2=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
+
+									digit4
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "4" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit5=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
+
+									digit5
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "5" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit6=, =digit7=, =digit8=, =digit9=, and =point= child widgets
+
+									digit6
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "6" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit7=, =digit8=, =digit9=, and =point= child widgets
+
+									digit7
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "7" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit8=, =digit9=, and =point= child widgets
+
+									digit8
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "8" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit9=, and =point= child widgets
+
+									digit9
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the digit "9" into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, and =point= child widgets
+
+									point
+										An instance of the =Uize.Widget.Button= class, that lets the user enter the "." (decimal point) character into the value in the =entry= child widget.
+
+										For a detailed discussion of the digit child widgets, see the section `Number Entry Buttons`.
+
+										NOTES
+										- see the companion =digit0=, =digit1=, =digit2=, =digit3=, =digit4=, =digit5=, =digit6=, =digit7=, =digit8=, and =digit9= child widgets
+							*/
+						;
+
+					/*** add operator buttons ***/
+						/*** equals button ***/
+							function _calculateResult () {
+								var
+									_result,
+									_operandA = m._operandA,
+									_operandB = m._operandB
+								;
+								_operandB == _undefined && m.set ({_operandB:_operandB = _operandA});
+								switch (m._operator) {
+									case 'divide':
+										_result = _operandA / _operandB;
+										break;
+									case 'multiply':
+										_result = _operandA * _operandB;
+										break;
+									case 'subtract':
+										_result = _operandA - _operandB;
+										break;
+									case 'add':
+										_result = _operandA + _operandB;
+										break;
+								}
+								m.set ({
+									_activeOperand:'operandA',
+									_operandA:_result
+								});
+								_setEntryValue (_result);
+								_clearOnNextDigit ();
+							}
+							function _usePendingCalculation () {
+								!m._clearOnNextDigit && m._operator && _calculateResult ();
+							}
+							var _equals = _addChildButton (
+								'equals',
+								_calculateResult
+								/*?
+									Child Widgets
+										equals
+											An instance of the =Uize.Widget.Button= class, that lets the user complete the pending binary operation, or compound a completed binary operation.
+
+											Clicking the =equals= button has the following effects...
+
+											- completes the pending binary operation (see the section `Operation Completion`), or compounds an already completed binary operation (see the section `Compounding Binary Operations`)
+											- sets the value of the =activeOperand= state property to ='operandA'=
+											- sets the value of the =operandA= state property and the value of the =entry= child widget to the result of the calculation
+											- sets the value of the =activeOperand= state property to ='operandA'=
+											- sets the value of the =clearOnNextDigit= state property to =true=
+
+											This button's function can also be triggered by a number of other interactions with the calculator widget (for more info, see the section `Operation Completion`).
+
+											NOTES
+											- this button will be disabled if the calculator is in the `error state`, or if there is not a pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
+								*/
+							);
+
+						/*** memory operators ***/
+							function _memoryPlus (_sign) {
+								m._activeOperand == 'operandB' && m._operator && _calculateResult ();
+								m.set ({_memory:(m._memory || 0) + _entry * _sign});
+								_clearOnNextDigit ();
+							}
+							_addChildButton (
+								'memoryPlus',
+								function () {_memoryPlus (1)}
+								/*?
+									Child Widgets
+										memoryPlus
+											An instance of the =Uize.Widget.Button= class, that lets the user add a value to the calculator's memory.
+
+											Clicking the =memoryPlus= button has the following effects...
+
+											- completes any pending binary operation (see the section `Operation Completion`)
+											- sets the value of the =memory= state property to its current value plus the value of the =entry= child widget
+											- sets the value of the =clearOnNextDigit= state property to =true=
+
+											NOTES
+											- see the companion =memoryMinus= child widget
+											- see the related =memoryRecall= and =memoryClear= child widgets
+											- this button will be disabled if the calculator is in the `error state`
+								*/
+							);
+							_addChildButton (
+								'memoryMinus',
+								function () {_memoryPlus (-1)}
+								/*?
+									Child Widgets
+										memoryMinus
+											An instance of the =Uize.Widget.Button= class, that lets the user subtract a value from the calculator's memory.
+
+											Clicking the =memoryMinus= button has the following effects...
+
+											- completes any pending binary operation (see the section `Operation Completion`)
+											- sets the value of the =memory= state property to its current value minus the value of the =entry= child widget
+											- sets the value of the =clearOnNextDigit= state property to =true=
+
+											NOTES
+											- see the companion =memoryPlus= child widget
+											- see the related =memoryRecall= and =memoryClear= child widgets
+											- this button will be disabled if the calculator is in the `error state`
+								*/
+							);
+							_addChildButton (
+								'memoryRecall',
+								function () {
+									_setEntryValue (m._memory);
+									_clearOnNextDigit ();
+								}
+								/*?
+									Child Widgets
+										memoryRecall
+											An instance of the =Uize.Widget.Button= class, that lets the user recall the calculator's memory.
+
+											Clicking the =memoryRecall= button has the following effects...
+
+											- sets the value of the =entry= child widget to the value of the =memory= state property
+											- sets the value of the =clearOnNextDigit= state property to =true=
+
+											NOTES
+											- see the related =memoryPlus=, =memoryMinus=, and =memoryClear= child widgets
+											- this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= state property is =undefined=)
+								*/
+							);
+							_addChildButton (
+								'memoryClear',
+								function () {
+									m.set ({_memory:_undefined});
+									_clearOnNextDigit ();
+								}
+								/*?
+									Child Widgets
+										memoryClear
+											An instance of the =Uize.Widget.Button= class, that lets the user clear the calculator's memory.
+
+											Clicking the =memoryClear= button has the following effects...
+
+											- sets the value of the =memory= state property to =undefined=
+											- sets the value of the =clearOnNextDigit= state property to =true=
+
+											NOTES
+											- see the related =memoryPlus=, =memoryMinus=, and =memoryRecall= child widgets
+											- this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= state property is =undefined=)
+								*/
+							);
+
+						/*** binary operators ***/
+							function _startEnteringNegativeNumber () {
+								if (
+									m._operator
+										? m._clearOnNextDigit && m._operandB == _undefined
+										: !m._operandA
+								) {
+									m.set ({_clearOnNextDigit:_false});
+									_setEntryValue ('-0');
+									return _true;
+								}
+							}
+							function _binaryOperatorButtonClickHandler (_event) {
+								var _buttonId = _event.source.get ('name');
+								if (_buttonId != 'subtract' || !_startEnteringNegativeNumber ()) {
+									_usePendingCalculation ();
+									m.set ({_operator:_undefined}); // we want onChange to get invoked
+									m.set ({_operator:_buttonId});
+								}
+							}
+							for (var _buttonId in _binaryOperatorsMap)
+								_addChildButton (_buttonId,_binaryOperatorButtonClickHandler)
+								/*?
+									Child Widgets
+										add
+											An instance of the =Uize.Widget.Button= class, that lets the user set up the addition binary operation.
+
+											Clicking the =add= button has the following effects...
+
+											- completes any pending binary operation (see the section `Operation Completion`)
+											- sets the value of the =operator= state property to ='add'=
+
+											This button's function can also be triggered using the "+" (addition / plus character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
+
+											NOTES
+											- the =add= function is one of the `binary operators`
+											- see the related =divide=, =multiply=, and =subtract= child widgets
+											- this button will be disabled if the calculator is in the `error state`
+
+										divide
+											An instance of the =Uize.Widget.Button= class, that lets the user set up the division binary operation.
+
+											Clicking the =divide= button has the following effects...
+
+											- completes any pending binary operation (see the section `Operation Completion`)
+											- sets the value of the =operator= state property to ='divide'=
+
+											This button's function can also be triggered using the "/" (division / forward slash character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
+
+											NOTES
+											- the =divide= function is one of the `binary operators`
+											- see the related =add=, =multiply=, and =subtract= child widgets
+											- this button will be disabled if the calculator is in the `error state`
+
+										multiply
+											An instance of the =Uize.Widget.Button= class, that lets the user set up the multiplication binary operation.
+
+											Clicking the =multiply= button has the following effects...
+
+											- completes any pending binary operation (see the section `Operation Completion`)
+											- sets the value of the =operator= state property to ='multiply'=
+
+											This button's function can also be triggered using the "&#42;" (multiply / star / asterisk character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
+
+											NOTES
+											- the =multiply= function is one of the `binary operators`
+											- see the related =add=, =divide=, and =subtract= child widgets
+											- this button will be disabled if the calculator is in the `error state`
+
+										subtract
+											An instance of the =Uize.Widget.Button= class, that lets the user set up the subtraction binary operation.
+
+											If a binary operation has already been set up (ie. the value of the =operator= state property is no longer =undefined=) but a value has not yet been entered for the second operand (ie. the =operandB= state property is still set to =undefined=), then clicking this button will make it behave as a negation operation. For more info on this behavior, see the section `Subtraction as Negation`.
+
+											Otherwise, clicking the =subtract= button has the following effects...
+
+											- completes any pending binary operation (see the section `Operation Completion`)
+											- sets the value of the =operator= state property to ='subtract'=
+
+											This button's function can also be triggered using the "-" (minus / dash / hyphen character) key on the keyboard (for more info, see the section `Using the Regular Keyboard`).
+
+											NOTES
+											- the =subtract= function is one of the `binary operators`
+											- see the related =add=, =divide=, and =multiply= child widgets
+											- this button will be disabled if the calculator is in the `error state`
+								*/
+							;
+
+						/*** extended operators ***/
+							_addChildButton (
+								'negate',
+								function () {
+									if (!_startEnteringNegativeNumber ()) {
+										var _entryValue = _entry + '';
+										_setEntryValue (
+											_entryValue.indexOf ('-') > -1 ? _entryValue.replace ('-','') : '-' + _entryValue
+										);
+									}
+								}
+								/*?
+									Child Widgets
+										negate
+											An instance of the =Uize.Widget.Button= class, that lets the user perform the negation (sign inversion) operation on the current value of the =entry= child widget.
+
+											The negation operation can be used even when the current =entry= value is =0=, producing the value =-0= (for more info, see the section `Entering Negative Numbers`). Using the =negate= operator repeatedly will toggle the sign of the current =entry= value back and forth between positive and negative.
+
+											NOTES
+											- the =negate= function is one of the `unary operators`
+											- this button will be disabled if the calculator is in the `error state`
+								*/
+							);
+							_addChildButton (
+								'percent',
+								function () {
+									var
+										_operator = m._operator,
+										_entryValue = _entry / 100
+									;
+									_operator && m._activeOperand == 'operandA' &&
+										m.set ({_operator:_operator = _undefined})
+									;
+									if (_operator == 'subtract' || _operator == 'add') {
+										_entryValue = _operator == 'subtract' ? 1 - _entryValue : 1 + _entryValue;
+										_setEntryValue (m._operandA);
+										m.set ({_operator:'multiply'});
+									}
+									_setEntryValue (_entryValue);
+									_operator ? _calculateResult () : m.set ({_operator:'multiply'});
+								}
+								/*?
+									Child Widgets
+										percent
+											An instance of the =Uize.Widget.Button= class, that lets the user perform the percent operation.
+
+											The percent function will behave as either a unary or binary operator, depending on the current state of the calculator (for a detailed explanation of this, see the section `Versatile Percent Function`). This button's function can also be triggered using the "%" (percent character) key on the keyboard. For more info, see the section `Using the Regular Keyboard`.
+
+											NOTES
+											- this button will be disabled if the calculator is in the `error state`
+								*/
+							);
+							_addChildButton (
+								'squareRoot',
+								function () {
+									_setEntryValue (Math.sqrt (+_entry));
+									_clearOnNextDigit ();
+								}
+								/*?
+									Child Widgets
+										squareRoot
+											An instance of the =Uize.Widget.Button= class, that lets the user perform the square root operation on the current value of the =entry= child widget.
+
+											If the value of the =entry= child widget is negative, then clicking the =squareRoot= button will put the calculator widget into the `error state`.
+
+											NOTES
+											- the =squareRoot= function is one of the `unary operators`
+											- this button will be disabled if the calculator is in the `error state`
+								*/
+							);
+
+						/*** clear buttons ***/
+							function _clearEntry () {_setEntryValue (0)}
+							function _clear () {
+								_clearEntry ();
+								m.set ({
+									_operandA:0,
+									_operandB:_undefined,
+									_operator:_undefined
+								});
+							}
+							_addChildButton (
+								'clearEntry',
+								_clearEntry
+								/*?
+									Child Widgets
+										clearEntry
+											An instance of the =Uize.Widget.Button= class, that lets the user clear the value of the =entry= child widget.
+
+											Clicking the =clearEntry= button has the effect of setting the value of the =entry= child widget to =0=. To clear the currently pending binary operation as well as the current entry in the =entry= child widget, the =clear= button can be used.
+
+											NOTES
+											- see the companion =clear= child widget
+								*/
+							);
+							_addChildButton (
+								'clear',
+								_clear
+								/*?
+									Child Widgets
+										clear
+											An instance of the =Uize.Widget.Button= class, that lets the user clear the currently pending binary operation and the value of the =entry= child widget.
+
+											Clicking the =clear= button has the following effects...
+
+											- sets the value of the =entry= child widget to =0=
+											- sets the value of the =operandA= state property to =0=
+											- sets the value of the =operandB= state property to =undefined=
+											- sets the value of the =operator= state property to =undefined=
+
+											This button's function can also be triggered using the =Esc= or =Spacebar= keys on the keyboard (for more info, see the section `Using the Regular Keyboard`). To clear only the current entry in the =entry= child widget, the =clearEntry= button can be used.
+
+											NOTES
+											- see the companion =clearEntry= child widget
+								*/
+							);
+
+							/*** clear, initiated by escape key from entry widget ***/
+								_entry.wire ('Cancel',_clear);
+
+				m._childrenAdded = _true;
+
+				_updateUiMemoryButtonsState.call (m);
+				_updateOperatorButtonsState ();
+			},
+
+			instanceMethods:{
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						/* NOTE:
+							Keep the entry field focused, even when you click outside it, as long as you click on the root node of the widget, or one of the nodes on its tree.
+						*/
+						m.wireNode ('','click',function () {m.children.entry.focus ()});
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			function _conformToNumber (_value) {return isNaN (_value) ? _undefined : +_value}
-
-			_class.stateProperties ({
+			stateProperties:{
 				_activeOperand:{
 					name:'activeOperand',
 					value:'operandA'
@@ -987,7 +980,7 @@ Uize.module ({
 				},
 				_clearOnNextDigit:{
 					name:'clearOnNextDigit',
-					onChange:_classPrototype._updateUiPointButtonState
+					onChange:_updateUiPointButtonState
 					/*?
 						State Properties
 							clearOnNextDigit
@@ -1007,7 +1000,7 @@ Uize.module ({
 				},
 				_memory:{
 					name:'memory',
-					onChange:_classPrototype._updateUiMemoryButtonsState
+					onChange:_updateUiMemoryButtonsState
 					/*?
 						State Properties
 							memory
@@ -1064,7 +1057,7 @@ Uize.module ({
 							});
 							m._operator && m.set ({_clearOnNextDigit:_true});
 						},
-						_classPrototype._updateUiEqualsButtonState
+						_updateUiEqualsButtonState
 					]
 					/*?
 						State Properties
@@ -1095,13 +1088,12 @@ Uize.module ({
 								- the initial value is =0=
 					*/
 				}
-			});
+			},
 
-		_class.staticProperties ({
-			enableRootNodeCssClasses:false
+			staticProperties:{
+				enableRootNodeCssClasses:false
+			}
 		});
-
-		return _class;
 	}
 });
 

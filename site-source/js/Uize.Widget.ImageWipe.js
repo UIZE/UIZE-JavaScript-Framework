@@ -151,240 +151,231 @@ Uize.module ({
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
-			var
-				_null = null,
-				_Uize_Node = Uize.Node
-			;
+			var _Uize_Node = Uize.Node;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function (_properties) {
-						var m = this;
+		return _superclass.subclass ({
+			alphastructor:function (_properties) {
+				var m = this;
 
-						/*** Private Instance Properties ***/
-							m._panes = [];
-							m._imageDims = [0,0];
-							m._currentItemNo = 0;
-							m._imagesLoaded = [];
+				/*** Private Instance Properties ***/
+					m._panes = [];
+					m._imageDims = [0,0];
+					m._currentItemNo = 0;
+					m._imagesLoaded = [];
 
-						/*** Public Instance Properties ***/
-							m.fade = Uize.Fade ();
-							/*?
-								Instance Properties
-									fade
-										An instance of the =Uize.Fade= class that drives the animation for the image wipe effect.
+				/*** Public Instance Properties ***/
+					m.fade = Uize.Fade ();
+					/*?
+						Instance Properties
+							fade
+								An instance of the =Uize.Fade= class that drives the animation for the image wipe effect.
 
-										This property allows access to the fade instance that drives the wipe animation. This allows you to modify properties of the animation, such as the =curve= and any of the other state properties supported by the =Uize.Fade= class.
-							*/
-
-						/*** Initialization ***/
-							m.fade.wire (
-								'Changed.value',
-								function () {
-									for (
-										var
-											_paneNo = -1,
-											_panes = m._panes,
-											_panesLength = _panes.length,
-											_paneNodes = m._paneNodes,
-											_paneProgressDelay = m._paneProgressDelay,
-											_progress = m.fade * (100 + (_panesLength - 1) * _paneProgressDelay)
-										;
-										++_paneNo < _panesLength;
-									) {
-										var
-											_pane = _panes [_paneNo],
-											_paneInitCoords = _pane._initCoords,
-											_paneFinalCoords = _pane._finalCoords,
-											_paneCoords = _pane._coords,
-											_paneProgressFraction =
-												Uize.constrain (_progress - _paneNo * _paneProgressDelay,0,100) / 100,
-											_paneCoordsChanged
-										;
-										for (var _coordPoint = -1, _newPaneCoord; ++_coordPoint < 4;) {
-											if (
-												(_newPaneCoord =
-													Math.round (_paneInitCoords [_coordPoint] + (_paneFinalCoords [_coordPoint] - _paneInitCoords [_coordPoint]) * _paneProgressFraction)
-												) !== _paneCoords [_coordPoint]
-											) {
-												_paneCoords [_coordPoint] = _newPaneCoord;
-												_paneCoordsChanged = true;
-											}
-										}
-										var _paneNode = _paneNodes [_paneNo];
-										_paneCoordsChanged &&
-											_Uize_Node.setClipRect (
-												_paneNode,
-												_paneCoords [1],_paneCoords [2],_paneCoords [3],_paneCoords [0]
-											)
-										;
-										var _opacity = m._dissolve ? _paneProgressFraction : 1;
-										_opacity !== _pane._opacity &&
-											_Uize_Node.setOpacity (_paneNode,_pane._opacity = _opacity)
-										;
-									}
-								}
-							);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			_classPrototype.prepareForNextItem = function (_currentItem,_nextItem) {
-				var _currentItemPaneNodes = this._paneNodes;
-				if (_currentItemPaneNodes) {
-					/* NOTE:
-						for better performance (especially in IE, it seems), make sure there is only one pane node for displaying the current item underneath the pane nodes for the next item
+								This property allows access to the fade instance that drives the wipe animation. This allows you to modify properties of the animation, such as the =curve= and any of the other state properties supported by the =Uize.Fade= class.
 					*/
-					_Uize_Node.display (_currentItemPaneNodes,false);
-					_Uize_Node.display (_currentItemPaneNodes [0]);
-					_Uize_Node.setStyle (_currentItemPaneNodes [0],{clip:'rect(auto, auto, auto, auto)',opacity:1});
-				}
-				_Uize_Node.display (this._paneNodes = _nextItem.getElementsByTagName ('IMG'));
-			};
 
-			_classPrototype.setCurrentItem = function (_currentItem) {
-				var
-					m = this,
-					_divisionsX = m._divisionsX,
-					_divisionsY = m._divisionsY,
-					_imageDims = m._imageDims
-				;
-				m._previousItem = m._currentItem;
-				m._currentItem = _currentItem;
-
-				/*** calculate sizes for rows and columns ***/
-					var
-						_paneW = [],
-						_paneH = []
-					;
-					function _sigma (_n) {return _n * (_n + 1) / 2}
-					var
-						_currentPaneSizeX = (_imageDims [0] / _divisionsX) * m._firstPaneSizeX / 100,
-						_paneSizeIncrementX = (_imageDims [0] - _currentPaneSizeX * _divisionsX) / _sigma (_divisionsX - 1)
-					;
-					for (var _xDivisionNo = -1; ++_xDivisionNo < _divisionsX;) {
-						_paneW [_xDivisionNo] = _currentPaneSizeX;
-						_currentPaneSizeX += _paneSizeIncrementX;
-					}
-					var
-						_currentPaneSizeY = (_imageDims [1] / _divisionsY) * m._firstPaneSizeY / 100,
-						_paneSizeIncrementY = (_imageDims [1] - _currentPaneSizeY * _divisionsY) / _sigma (_divisionsY - 1)
-					;
-					for (var _yDivisionNo = -1; ++_yDivisionNo < _divisionsY;) {
-						_paneH [_yDivisionNo] = _currentPaneSizeY;
-						_currentPaneSizeY += _paneSizeIncrementY;
-					}
-
-				/*** generate pane coordinates ***/
-					function _getInterpolatedValue (_valueSpec) {
-						var _result;
-						if (typeof _valueSpec == 'number') {
-							_result = _valueSpec;
-						} else if (typeof _valueSpec == 'object') {
-							var _keyIndex, _keyContext;
-							if (_valueSpec.keyedTo == 'column') {
-								_keyIndex = _xDivisionNo;
-								_keyContext = _divisionsX - 1;
-							} else if (_valueSpec.keyedTo == 'row') {
-								_keyIndex = _yDivisionNo;
-								_keyContext = _divisionsY - 1;
-							} else if (_valueSpec.keyedTo == 'pane') {
-								_keyIndex = _divisionNo;
-								_keyContext = _divisionsX * _divisionsY - 1;
-							} else if (_valueSpec.keyedTo == 'random') {
-								_keyIndex = Math.random ();
-								_keyContext = 1;
-							}
-							if (_valueSpec.inverse === true)
-								_keyIndex = _keyContext - _keyIndex
-							;
-							if (typeof _valueSpec.wraps == 'number')
-								_keyIndex =
-									(
-										_valueSpec.wrapMode === 'triangle' &&
-										Math.floor (_keyIndex * _valueSpec.wraps / (_keyContext + 1)) % 2 == 1
-											? (_keyContext - _keyIndex)
-											: _keyIndex
-									) * _valueSpec.wraps % (_keyContext + 1)
-							;
-							_result = _valueSpec.start + (_valueSpec.end - _valueSpec.start) * _keyIndex / Math.max (_keyContext,1);
-						}
-						return _result;
-					}
-					function _blendValues (_valueA,_valueB,_blendPercent) {
-						return _valueA + (_valueB - _valueA) * _blendPercent / 100;
-					}
-					var
-						_top = m._panes.length = 0,
-						_divisionNo,
-						_currentAlignX, _currentAlignY,
-						_currentAllToFull,
-						_currentPaneSeedSizeX, _currentPaneSeedSizeY, _currentPaneSeedContext
-					;
-					for (var _yDivisionNo = -1; ++_yDivisionNo < _divisionsY;) {
-						var _left = 0;
-						for (var _xDivisionNo = -1; ++_xDivisionNo < _divisionsX;) {
-							_divisionNo = _yDivisionNo * _divisionsX + _xDivisionNo;
-							_currentAlignX = _getInterpolatedValue (m._alignX);
-							_currentAlignY = _getInterpolatedValue (m._alignY);
-							_currentPaneSeedSizeX = _getInterpolatedValue (m._paneSeedSizeX);
-							_currentPaneSeedSizeY = _getInterpolatedValue (m._paneSeedSizeY);
-							_currentPaneSeedContext = _getInterpolatedValue (m._paneSeedContext);
-							_currentAllToFull = _getInterpolatedValue (m._allToFull);
+				m.fade.wire (
+					'Changed.value',
+					function () {
+						for (
 							var
-								_right = _left + _paneW [_xDivisionNo],
-								_bottom = _top + _paneH [_yDivisionNo],
-								_paneSeedContextL = _blendValues (_left,0,_currentPaneSeedContext),
-								_paneSeedContextT = _blendValues (_top,0,_currentPaneSeedContext),
-								_paneSeedContextR = _blendValues (_right,_imageDims [0],_currentPaneSeedContext),
-								_paneSeedContextB = _blendValues (_bottom,_imageDims [1],_currentPaneSeedContext),
-								_seedW = (_paneSeedContextR - _paneSeedContextL) * _currentPaneSeedSizeX / 100,
-								_seedH = (_paneSeedContextB - _paneSeedContextT) * _currentPaneSeedSizeY / 100,
-								_seedLeft = _paneSeedContextL + (_paneSeedContextR - _paneSeedContextL - _seedW) * _currentAlignX,
-								_seedRight = _seedLeft + _seedW,
-								_seedTop = _paneSeedContextT + (_paneSeedContextB - _paneSeedContextT - _seedH) * _currentAlignY,
-								_seedBottom = _seedTop + _seedH,
-								_initCoords = [_seedLeft,_seedTop,_seedRight,_seedBottom],
-								_finalCoords = [
-									_blendValues (_left,0,_currentAllToFull),
-									_blendValues (_top,0,_currentAllToFull),
-									_blendValues (_right,_imageDims [0],_currentAllToFull),
-									_blendValues (_bottom,_imageDims [1],_currentAllToFull)
-								]
+								_paneNo = -1,
+								_panes = m._panes,
+								_panesLength = _panes.length,
+								_paneNodes = m._paneNodes,
+								_paneProgressDelay = m._paneProgressDelay,
+								_progress = m.fade * (100 + (_panesLength - 1) * _paneProgressDelay)
 							;
-							m._panes [_divisionNo] = {
-								_coords:[],
-								_initCoords:[
-									_initCoords [0],_initCoords [1],
-									_initCoords [2],_initCoords [3]
-								],
-								_finalCoords:[
-									_finalCoords [0],_finalCoords [1],
-									_finalCoords [2],_finalCoords [3]
-								]
-							};
-							_left += _paneW [_xDivisionNo];
+							++_paneNo < _panesLength;
+						) {
+							var
+								_pane = _panes [_paneNo],
+								_paneInitCoords = _pane._initCoords,
+								_paneFinalCoords = _pane._finalCoords,
+								_paneCoords = _pane._coords,
+								_paneProgressFraction =
+									Uize.constrain (_progress - _paneNo * _paneProgressDelay,0,100) / 100,
+								_paneCoordsChanged
+							;
+							for (var _coordPoint = -1, _newPaneCoord; ++_coordPoint < 4;) {
+								if (
+									(_newPaneCoord =
+										Math.round (_paneInitCoords [_coordPoint] + (_paneFinalCoords [_coordPoint] - _paneInitCoords [_coordPoint]) * _paneProgressFraction)
+									) !== _paneCoords [_coordPoint]
+								) {
+									_paneCoords [_coordPoint] = _newPaneCoord;
+									_paneCoordsChanged = true;
+								}
+							}
+							var _paneNode = _paneNodes [_paneNo];
+							_paneCoordsChanged &&
+								_Uize_Node.setClipRect (
+									_paneNode,
+									_paneCoords [1],_paneCoords [2],_paneCoords [3],_paneCoords [0]
+								)
+							;
+							var _opacity = m._dissolve ? _paneProgressFraction : 1;
+							_opacity !== _pane._opacity &&
+								_Uize_Node.setOpacity (_paneNode,_pane._opacity = _opacity)
+							;
 						}
-						_top += _paneH [_yDivisionNo];
 					}
+				);
+			},
 
-				/*** carry out pane order scheme ***/
-					Uize.Array.Order.reorder (m._panes,m._paneOrderScheme,false);
+			instanceMethods:{
+				prepareForNextItem:function (_currentItem,_nextItem) {
+					var _currentItemPaneNodes = this._paneNodes;
+					if (_currentItemPaneNodes) {
+						/* NOTE:
+							for better performance (especially in IE, it seems), make sure there is only one pane node for displaying the current item underneath the pane nodes for the next item
+						*/
+						_Uize_Node.display (_currentItemPaneNodes,false);
+						_Uize_Node.display (_currentItemPaneNodes [0]);
+						_Uize_Node.setStyle (_currentItemPaneNodes [0],{clip:'rect(auto, auto, auto, auto)',opacity:1});
+					}
+					_Uize_Node.display (this._paneNodes = _nextItem.getElementsByTagName ('IMG'));
+				},
 
-				/*** configure Uize.Fade object and start fade ***/
-					m.fade.start ({startValue:0,endValue:1});
-			};
+				setCurrentItem:function (_currentItem) {
+					var
+						m = this,
+						_divisionsX = m._divisionsX,
+						_divisionsY = m._divisionsY,
+						_imageDims = m._imageDims
+					;
+					m._previousItem = m._currentItem;
+					m._currentItem = _currentItem;
 
-			_classPrototype.wireUi = function () {
-				this.setNodeStyle ('',{overflow:'hidden'});
-				_superclass.doMy (this,'wireUi');
-			};
+					/*** calculate sizes for rows and columns ***/
+						var
+							_paneW = [],
+							_paneH = []
+						;
+						function _sigma (_n) {return _n * (_n + 1) / 2}
+						var
+							_currentPaneSizeX = (_imageDims [0] / _divisionsX) * m._firstPaneSizeX / 100,
+							_paneSizeIncrementX = (_imageDims [0] - _currentPaneSizeX * _divisionsX) / _sigma (_divisionsX - 1)
+						;
+						for (var _xDivisionNo = -1; ++_xDivisionNo < _divisionsX;) {
+							_paneW [_xDivisionNo] = _currentPaneSizeX;
+							_currentPaneSizeX += _paneSizeIncrementX;
+						}
+						var
+							_currentPaneSizeY = (_imageDims [1] / _divisionsY) * m._firstPaneSizeY / 100,
+							_paneSizeIncrementY = (_imageDims [1] - _currentPaneSizeY * _divisionsY) / _sigma (_divisionsY - 1)
+						;
+						for (var _yDivisionNo = -1; ++_yDivisionNo < _divisionsY;) {
+							_paneH [_yDivisionNo] = _currentPaneSizeY;
+							_currentPaneSizeY += _paneSizeIncrementY;
+						}
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+					/*** generate pane coordinates ***/
+						function _getInterpolatedValue (_valueSpec) {
+							var _result;
+							if (typeof _valueSpec == 'number') {
+								_result = _valueSpec;
+							} else if (typeof _valueSpec == 'object') {
+								var _keyIndex, _keyContext;
+								if (_valueSpec.keyedTo == 'column') {
+									_keyIndex = _xDivisionNo;
+									_keyContext = _divisionsX - 1;
+								} else if (_valueSpec.keyedTo == 'row') {
+									_keyIndex = _yDivisionNo;
+									_keyContext = _divisionsY - 1;
+								} else if (_valueSpec.keyedTo == 'pane') {
+									_keyIndex = _divisionNo;
+									_keyContext = _divisionsX * _divisionsY - 1;
+								} else if (_valueSpec.keyedTo == 'random') {
+									_keyIndex = Math.random ();
+									_keyContext = 1;
+								}
+								if (_valueSpec.inverse === true)
+									_keyIndex = _keyContext - _keyIndex
+								;
+								if (typeof _valueSpec.wraps == 'number')
+									_keyIndex =
+										(
+											_valueSpec.wrapMode === 'triangle' &&
+											Math.floor (_keyIndex * _valueSpec.wraps / (_keyContext + 1)) % 2 == 1
+												? (_keyContext - _keyIndex)
+												: _keyIndex
+										) * _valueSpec.wraps % (_keyContext + 1)
+								;
+								_result = _valueSpec.start + (_valueSpec.end - _valueSpec.start) * _keyIndex / Math.max (_keyContext,1);
+							}
+							return _result;
+						}
+						function _blendValues (_valueA,_valueB,_blendPercent) {
+							return _valueA + (_valueB - _valueA) * _blendPercent / 100;
+						}
+						var
+							_top = m._panes.length = 0,
+							_divisionNo,
+							_currentAlignX, _currentAlignY,
+							_currentAllToFull,
+							_currentPaneSeedSizeX, _currentPaneSeedSizeY, _currentPaneSeedContext
+						;
+						for (var _yDivisionNo = -1; ++_yDivisionNo < _divisionsY;) {
+							var _left = 0;
+							for (var _xDivisionNo = -1; ++_xDivisionNo < _divisionsX;) {
+								_divisionNo = _yDivisionNo * _divisionsX + _xDivisionNo;
+								_currentAlignX = _getInterpolatedValue (m._alignX);
+								_currentAlignY = _getInterpolatedValue (m._alignY);
+								_currentPaneSeedSizeX = _getInterpolatedValue (m._paneSeedSizeX);
+								_currentPaneSeedSizeY = _getInterpolatedValue (m._paneSeedSizeY);
+								_currentPaneSeedContext = _getInterpolatedValue (m._paneSeedContext);
+								_currentAllToFull = _getInterpolatedValue (m._allToFull);
+								var
+									_right = _left + _paneW [_xDivisionNo],
+									_bottom = _top + _paneH [_yDivisionNo],
+									_paneSeedContextL = _blendValues (_left,0,_currentPaneSeedContext),
+									_paneSeedContextT = _blendValues (_top,0,_currentPaneSeedContext),
+									_paneSeedContextR = _blendValues (_right,_imageDims [0],_currentPaneSeedContext),
+									_paneSeedContextB = _blendValues (_bottom,_imageDims [1],_currentPaneSeedContext),
+									_seedW = (_paneSeedContextR - _paneSeedContextL) * _currentPaneSeedSizeX / 100,
+									_seedH = (_paneSeedContextB - _paneSeedContextT) * _currentPaneSeedSizeY / 100,
+									_seedLeft = _paneSeedContextL + (_paneSeedContextR - _paneSeedContextL - _seedW) * _currentAlignX,
+									_seedRight = _seedLeft + _seedW,
+									_seedTop = _paneSeedContextT + (_paneSeedContextB - _paneSeedContextT - _seedH) * _currentAlignY,
+									_seedBottom = _seedTop + _seedH,
+									_initCoords = [_seedLeft,_seedTop,_seedRight,_seedBottom],
+									_finalCoords = [
+										_blendValues (_left,0,_currentAllToFull),
+										_blendValues (_top,0,_currentAllToFull),
+										_blendValues (_right,_imageDims [0],_currentAllToFull),
+										_blendValues (_bottom,_imageDims [1],_currentAllToFull)
+									]
+								;
+								m._panes [_divisionNo] = {
+									_coords:[],
+									_initCoords:[
+										_initCoords [0],_initCoords [1],
+										_initCoords [2],_initCoords [3]
+									],
+									_finalCoords:[
+										_finalCoords [0],_finalCoords [1],
+										_finalCoords [2],_finalCoords [3]
+									]
+								};
+								_left += _paneW [_xDivisionNo];
+							}
+							_top += _paneH [_yDivisionNo];
+						}
+
+					/*** carry out pane order scheme ***/
+						Uize.Array.Order.reorder (m._panes,m._paneOrderScheme,false);
+
+					/*** configure Uize.Fade object and start fade ***/
+						m.fade.start ({startValue:0,endValue:1});
+				},
+
+				wireUi:function () {
+					this.setNodeStyle ('',{overflow:'hidden'});
+					_superclass.doMy (this,'wireUi');
+				}
+			},
+
+			stateProperties:{
 				_alignX:{
 					name:'alignX',
 					value:{start:1,end:0,keyedTo:'column'}
@@ -729,10 +720,9 @@ Uize.module ({
 								An alias to the =src= state property, establishing the =src= property as the public value interface for this class.
 					*/
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				html:{
 					process:function (input) {
 						var
@@ -748,16 +738,15 @@ Uize.module ({
 								'<div id="' + input.idPrefix + '-item' + _itemNo + '" style="position:absolute; margin:0px; padding:0px; left:0px; top:0px; width:' + _shellSize.width + 'px; height:' + _shellSize.height + 'px; overflow:hidden;">'
 							);
 							for (var _paneNo = -1; ++_paneNo < input.divisionsX * input.divisionsY;)
-								_htmlChunks.push ('<img src="' + _class.getBlankImageUrl () + '" style="position:absolute; left:0px; top:0px; width:' + m._imageDims [0] + 'px; height:' + m._imageDims [1] + 'px; background:' + _background + ';"/>')
+								_htmlChunks.push ('<img src="' + m.Class.getBlankImageUrl () + '" style="position:absolute; left:0px; top:0px; width:' + m._imageDims [0] + 'px; height:' + m._imageDims [1] + 'px; background:' + _background + ';"/>')
 							;
 							_htmlChunks.push ('</div>');
 						}
 						return _htmlChunks.join ('');
 					}
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

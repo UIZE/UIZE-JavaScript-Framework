@@ -36,21 +36,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_undefined,
-				_auto = 'auto',
-				_title = 'title'
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiTooltipHtml = function () {
+			function _updateUiTooltipHtml () {
 				var m = this;
 				if (m.isWired) {
 					var
@@ -60,9 +47,9 @@ Uize.module ({
 					_data && (_tooltipWidget ? _tooltipWidget.set ({data:_data}) : m.buildHtml (_data));
 					Uize.Tooltip.showTooltip ((_tooltipWidget || m).getNode (),!!_data);
 				}
-			};
+			}
 
-			_classPrototype._updateWiringTooltipNodes = function () {
+			function _updateWiringTooltipNodes () {
 				var
 					m = this,
 					_tooltipDataById = {},
@@ -80,16 +67,16 @@ Uize.module ({
 										_nodeId = _node.id || (_node.id = Uize.getGuid ()),
 										_tooltipData = _tooltipDataById [_nodeId]
 									;
-									if (_tooltipData === _undefined) {
+									if (_tooltipData === undefined) {
 										var _dataAttribute = m._dataAttribute;
-										if (_dataAttribute == _auto)
-											_dataAttribute = _node.title ? _title : 'alt'
+										if (_dataAttribute == 'auto')
+											_dataAttribute = _node.title ? 'title' : 'alt'
 										;
 										var _tooltipDataStr = _node.getAttribute (_dataAttribute);
 										_tooltipData = _tooltipDataById [_nodeId] =
 											_tooltipDataStr ? m._dataDecoder (_tooltipDataStr) : null
 										;
-										if (_tooltipData && _dataAttribute == _title)
+										if (_tooltipData && _dataAttribute == 'title')
 											_tooltipOldTitleById [_nodeId] = _node.title
 										;
 									}
@@ -110,27 +97,26 @@ Uize.module ({
 						}
 					);
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				this._updateUiTooltipHtml ();
-			};
+		return _superclass.subclass ({
+			instanceMethods:{
+				updateUi:_updateUiTooltipHtml,
 
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					_superclass.doMy (m,'wireUi');
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						_superclass.doMy (m,'wireUi');
 
-					m._updateWiringTooltipNodes ();
+						_updateWiringTooltipNodes.call (m);
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_data:{
 					name:'data',
-					onChange:_classPrototype._updateUiTooltipHtml
+					onChange:_updateUiTooltipHtml
 					/*?
 						State Properties
 							data
@@ -225,7 +211,7 @@ Uize.module ({
 				},
 				_nodes:{
 					name:'nodes',
-					onChange:_classPrototype._updateWiringTooltipNodes
+					onChange:_updateWiringTooltipNodes
 					/*?
 						State Properties
 							nodes
@@ -238,9 +224,8 @@ Uize.module ({
 					*/
 				},
 				_tooltipWidget:'tooltipWidget'
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

@@ -49,17 +49,6 @@ Uize.module ({
 				_isIe = _Uize_Node.isIe
 			;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						/*** Private Instance Properties ***/
-							this._lastAreaWidth = {};
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** General Variables ***/
 			var
 				_ieQuirkyBoxes = _isIe && document.compatMode != 'CSS1Compat',
@@ -77,48 +66,47 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._canResizeAxis = function (_axis,_pointIds) {
+			function _canResizeAxis (m,_axis,_pointIds) {
 				var _pointIdForAxis = _pointIds [_axis];
-				return _pointIdForAxis != .5 && (_pointIdForAxis == 'both' || !(_axis ? this._fixedY : this._fixedX));
-			};
+				return _pointIdForAxis != .5 && (_pointIdForAxis == 'both' || !(_axis ? m._fixedY : m._fixedX));
+			}
 
-			_classPrototype._updateHandlesEnabled = function () {
+			function _updateHandlesEnabled () {
 				var m = this;
 				if (m.isWired) {
 					for (var _handleName in _pointIdsMap) {
 						var _pointIds = _pointIdsMap [_handleName];
 						m.children [_handleName].set ({
 							enabled:
-								m._canResizeAxis (0,_pointIds) || m._canResizeAxis (1,_pointIds) ? 'inherit' : _false
+								_canResizeAxis (m,0,_pointIds) || _canResizeAxis (m,1,_pointIds) ? 'inherit' : _false
 						});
 					}
 				}
-			};
+			}
 
-			_classPrototype._updateShellBounds = function () {
-				var m = this;
+			function _updateShellBounds (m) {
 				if (m.isWired && !(m._bounds = m._constrainBounds)) {
 					var _shellDims = _Uize_Node.getDimensions (m.getNode ('shell'));
 					if (_shellDims.width && _shellDims.height)
 						m._bounds = [0,0,_shellDims.width - 1,_shellDims.height - 1]
 					;
 				}
-			};
+			}
 
-			_classPrototype._updateShellBoundsAndConformDims = function () {
+			function _updateShellBoundsAndConformDims () {
 				var m = this;
-				m._updateShellBounds ();
+				_updateShellBounds (m);
 				var _bounds = m._bounds;
 				if (_bounds) {
 					m._maxDims = [_bounds [2] - _bounds [0] + 1,_bounds [3] - _bounds [1] + 1];
-					m._conformDims ();
+					_conformDims.call (m);
 				}
-			};
+			}
 
-			var _conformDims = _classPrototype._conformDims = function () {
+			function _conformDims () {
 				var m = this;
 				if (m.isWired && (!m._inDrag || m._creatingNew)) {
-					m._updateShellBounds ();
+					_updateShellBounds (m);
 					if (m._bounds) {
 						var
 							_constrain = m._constrain,
@@ -166,276 +154,281 @@ Uize.module ({
 						;
 					}
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.setPositionDuringDrag = function (_left,_top,_width,_height) {
-				var m = this;
-				if (_left != m._left || _top != m._top || _width != m._width || _height != m._height) {
-					m.set ({
-						left:_left,
-						top:_top,
-						width:_width,
-						height:_height
-					});
-					m.fire ('Position Changed');
-				}
-			};
-
-			_classPrototype.getCoords = function () {
-				var m = this;
-				return {left:m._left,top:m._top,width:m._width,height:m._height};
-			};
-
-			_classPrototype.updateUi = function () {
-				var m = this;
-				if (m.isWired) {
-					Uize.forEach (
-						m._areaNodes,
-						function _setAreaDims (_areaNode) {
-							function _getBorderWidth (_side) {
-								return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
-							}
-							var _area = m.getNode (_areaNode);
-							if (_area) {
-								var _newAreaWidth = Math.max (
-									m._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
-								);
-								if (_isIe)
-									_newAreaWidth == m._lastAreaWidth [_areaNode]
-										? m.displayNode ('jiggler',m._jigglerShown = !m._jigglerShown)
-										: (m._lastAreaWidth [_areaNode] = _newAreaWidth)
-								;
-								_Uize_Node.setStyle (
-									_area,
-									{
-										left:m._left,
-										top:m._top,
-										width:_newAreaWidth,
-										height:Math.max (m._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
-									}
-								);
-							}
-						}
-					);
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					/*** wire up the drag handles ***/
-						var
-							_bounds,
-							_shellCenter,
-							_pointIds,
-							_dragStartCoords,
-							_Uize_Widget_Drag = Uize.Widget.Drag,
-							_wireHandle = function (_handleName) {
-								_pointIds = _pointIdsMap [_handleName];
-								var _dragHandle = m.addChild (
-									_handleName,
-									_Uize_Widget_Drag,
-									{
-										cursor:_handleName == 'move'
-											? _handleName
-											: _handleName.charAt (0) + (_handleName.match (/[A-Z]|$/)) [0] + '-resize',
-										dragRestTime:m._dragRestTime,
-										node:m.getNode (_handleName),
-										resizerInfo:{
-											_handleName:_handleName,
-											_pointIds:_pointIds
-										}
-									}
-								);
-								_dragHandle.wire ({
-									'Before Drag Start':
-										function (_event) {m.fire (_event)},
-									'Drag Start':
-										function (_event) {
-											m._activeHandle = _event.source;
-											m.set ({_inDrag:_true});
-											m._updateShellBoundsAndConformDims ();
-											_bounds = m._bounds;
-											_shellCenter = [_bounds [2] / 2,_bounds [3] / 2];
-											_dragStartCoords = [
-												m._left,
-												m._top,
-												m._left + m._width - 1,
-												m._top + m._height -1
-											];
-											m.fire (_event);
-										},
-									'Drag Update':
-										function () {
-											var
-												_aspectRatio = m._aspectRatio,
-												_resizerInfo = m._activeHandle.resizerInfo,
-												_pointIds = _resizerInfo._pointIds,
-												_effectivePointIds = _pointIds.concat (),
-												_newCoords = _dragStartCoords.concat ()
-											;
-											function _updateAxisCoords (_axis) {
-												if (m._canResizeAxis (_axis,_pointIds)) {
-													var
-														_pointIdForAxis = _pointIds [_axis],
-														_offset = _dragHandle.eventDeltaPos [_axis]
-													;
-													if (_pointIdForAxis == 'both') {
-														if (m._constrain)
-															_offset = Uize.constrain (
-																_offset,
-																_bounds [_axis] - _newCoords [_axis],
-																_bounds [_axis + 2] - _newCoords [_axis + 2]
-															)
-														;
-														_newCoords [_axis] += _offset;
-														_newCoords [_axis + 2] += _offset;
-													} else {
-														var _coordNo = _axis + _pointIdForAxis * 2;
-														_newCoords [_coordNo] += _offset;
-														if (m._constrain)
-															_newCoords [_coordNo] = Uize.constrain (
-																_newCoords [_coordNo],
-																_bounds [_axis],
-																_bounds [_axis + 2]
-															)
-														;
-														if (_aspectRatio == null && _newCoords [_axis] > _newCoords [_axis + 2]) {
-															/* NOTE:
-																for now we don't swap the coordinates around when they cross over if an aspect ratio is set, since we haven't dealt with the weird calculation issues that arise and lead to strange behaviors where the resizer moves around
-															*/
-															var _temp = _newCoords [_axis];
-															_newCoords [_axis] = _newCoords [_axis + 2];
-															_newCoords [_axis + 2] = _temp;
-															_effectivePointIds [_axis] = 1 - _effectivePointIds [_axis];
-														}
-													}
-												}
-											}
-											_updateAxisCoords (0);
-											_updateAxisCoords (1);
-											var
-												_newDims = [
-													Math.max (_newCoords [2] - _newCoords [0] + 1,m._minWidth),
-													Math.max (_newCoords [3] - _newCoords [1] + 1,m._minHeight)
-												],
-												_newCenter = [
-													(_newCoords [0] + _newCoords [2]) / 2,
-													(_newCoords [1] + _newCoords [3]) / 2
-												]
-											;
-
-											/*** handle explicit aspect ratio ***/
-												if (_aspectRatio != null) {
-													if (_newDims [0] / _newDims [1] != _aspectRatio) {
-														var
-															_dimsFromAspectRatio = [
-																_newDims [1] * _aspectRatio,
-																_newDims [0] / _aspectRatio
-															],
-															_setDimWithConstraint = function (_axis,_maxDim) {
-																_newDims [_axis] = _dimsFromAspectRatio [_axis];
-																if (m._constrain) {
-																	_newDims [_axis] = Math.min (_newDims [_axis],_maxDim);
-																	_newDims [1 - _axis] =
-																		_newDims [_axis] * Math.pow (_aspectRatio,_axis * 2 - 1)
-																	;
-																}
-															},
-															_updateDimByCenterPoint = function (_axis) {
-																_setDimWithConstraint (
-																	_axis,
-																	(
-																		_newCenter [_axis] <
-																		_shellCenter [_axis]
-																			? (_newCenter [_axis] + .5)
-																			: _bounds [_axis + 2] - _newCenter [_axis]
-																	) * 2
-																);
-															},
-															_updateDimByCornerPoint = function (_axis) {
-																_setDimWithConstraint (
-																	_axis,
-																	(
-																		_pointIds [_axis]
-																			? _bounds [_axis + 2] - _newCoords [_axis]
-																			: _newCoords [_axis + 2]
-																	) + 1
-																);
-															}
-														;
-														if (_pointIds [0] == .5) {
-															_updateDimByCenterPoint (0);
-														} else if (_pointIds [1] == .5) {
-															_updateDimByCenterPoint (1);
-														} else if (_newDims [1] * _dimsFromAspectRatio [0] > _newDims [0] * _dimsFromAspectRatio [1]) {
-															_updateDimByCornerPoint (0);
-														} else {
-															_updateDimByCornerPoint (1);
-														}
-													}
-													var _updateNewCoord = function (_axis) {
-														if (!_pointIds [_axis]) {
-															_newCoords [_axis] = _newCoords [_axis + 2] - _newDims [_axis] + 1;
-														} else if (_pointIds [_axis] == .5) {
-															_newCoords [_axis] = _newCenter [_axis] - (_newDims [_axis] - 1) / 2;
-														}
-													};
-													_updateNewCoord (0);
-													_updateNewCoord (1);
-												}
-
-											m.set ({
-												activeHandleEffectivePointIdX:_effectivePointIds [0],
-												activeHandleEffectivePointIdY:_effectivePointIds [1]
-											});
-											m.setPositionDuringDrag (_newCoords [0],_newCoords [1],_newDims [0],_newDims [1]);
-										},
-									'Drag Rest':
-										function (_event) {m.fire (_event)},
-									'Drag Done':
-										function (_event) {
-											m.set ({_inDrag:_false});
-											m.fire (_event);
-											m.set ({_creatingNew:_false});
-											m.updateUi ();
-										}
-								});
-							}
-						;
-						for (var _handleName in _pointIdsMap)
-							_wireHandle (_handleName)
-						;
-						m._updateHandlesEnabled ();
-
-					/*** insert the jiggler node for repaint issue in IE ***/
-						if (_isIe) {
-							var _areaNode = m.getNode (m._areaNodes [0]);
-							if (_areaNode) {
-								var _jiggler = document.createElement ('div');
-								_jiggler.id = m.get ('idPrefix') + '-jiggler';
-								_Uize_Node.setStyle (_jiggler,{position:'absolute'});
-								_areaNode.appendChild (_jiggler);
-							}
-						}
-
-					_superclass.doMy (m,'wireUi');
-
-					m._updateShellBoundsAndConformDims ();
-				}
-			};
-
-		/*** Public Static Properties ***/
-			_class.pointIdsMap = _pointIdsMap;
-
-		/*** State Properties ***/
+		/*** State Property onChange Handlers ***/
 			var
 				_updateUi = 'updateUi',
-				_fixedOnChange = [_updateUi,_classPrototype._updateHandlesEnabled],
+				_fixedOnChange = [_updateUi,_updateHandlesEnabled],
 				_conformDimsAndUpdateUi = [_conformDims,_updateUi]
 			;
-			_class.stateProperties ({
+
+		return _superclass.subclass ({
+			alphastructor:function () {
+				/*** Private Instance Properties ***/
+					this._lastAreaWidth = {};
+			},
+
+			instanceMethods:{
+				setPositionDuringDrag:function (_left,_top,_width,_height) {
+					var m = this;
+					if (_left != m._left || _top != m._top || _width != m._width || _height != m._height) {
+						m.set ({
+							left:_left,
+							top:_top,
+							width:_width,
+							height:_height
+						});
+						m.fire ('Position Changed');
+					}
+				},
+
+				getCoords:function () {
+					var m = this;
+					return {left:m._left,top:m._top,width:m._width,height:m._height};
+				},
+
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						Uize.forEach (
+							m._areaNodes,
+							function _setAreaDims (_areaNode) {
+								function _getBorderWidth (_side) {
+									return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
+								}
+								var _area = m.getNode (_areaNode);
+								if (_area) {
+									var _newAreaWidth = Math.max (
+										m._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
+									);
+									if (_isIe)
+										_newAreaWidth == m._lastAreaWidth [_areaNode]
+											? m.displayNode ('jiggler',m._jigglerShown = !m._jigglerShown)
+											: (m._lastAreaWidth [_areaNode] = _newAreaWidth)
+									;
+									_Uize_Node.setStyle (
+										_area,
+										{
+											left:m._left,
+											top:m._top,
+											width:_newAreaWidth,
+											height:Math.max (m._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
+										}
+									);
+								}
+							}
+						);
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						/*** wire up the drag handles ***/
+							var
+								_bounds,
+								_shellCenter,
+								_pointIds,
+								_dragStartCoords,
+								_Uize_Widget_Drag = Uize.Widget.Drag,
+								_wireHandle = function (_handleName) {
+									_pointIds = _pointIdsMap [_handleName];
+									var _dragHandle = m.addChild (
+										_handleName,
+										_Uize_Widget_Drag,
+										{
+											cursor:_handleName == 'move'
+												? _handleName
+												: _handleName.charAt (0) + (_handleName.match (/[A-Z]|$/)) [0] + '-resize',
+											dragRestTime:m._dragRestTime,
+											node:m.getNode (_handleName),
+											resizerInfo:{
+												_handleName:_handleName,
+												_pointIds:_pointIds
+											}
+										}
+									);
+									_dragHandle.wire ({
+										'Before Drag Start':
+											function (_event) {m.fire (_event)},
+										'Drag Start':
+											function (_event) {
+												m._activeHandle = _event.source;
+												m.set ({_inDrag:_true});
+												_updateShellBoundsAndConformDims.call (m);
+												_bounds = m._bounds;
+												_shellCenter = [_bounds [2] / 2,_bounds [3] / 2];
+												_dragStartCoords = [
+													m._left,
+													m._top,
+													m._left + m._width - 1,
+													m._top + m._height -1
+												];
+												m.fire (_event);
+											},
+										'Drag Update':
+											function () {
+												var
+													_aspectRatio = m._aspectRatio,
+													_resizerInfo = m._activeHandle.resizerInfo,
+													_pointIds = _resizerInfo._pointIds,
+													_effectivePointIds = _pointIds.concat (),
+													_newCoords = _dragStartCoords.concat ()
+												;
+												function _updateAxisCoords (_axis) {
+													if (_canResizeAxis (m,_axis,_pointIds)) {
+														var
+															_pointIdForAxis = _pointIds [_axis],
+															_offset = _dragHandle.eventDeltaPos [_axis]
+														;
+														if (_pointIdForAxis == 'both') {
+															if (m._constrain)
+																_offset = Uize.constrain (
+																	_offset,
+																	_bounds [_axis] - _newCoords [_axis],
+																	_bounds [_axis + 2] - _newCoords [_axis + 2]
+																)
+															;
+															_newCoords [_axis] += _offset;
+															_newCoords [_axis + 2] += _offset;
+														} else {
+															var _coordNo = _axis + _pointIdForAxis * 2;
+															_newCoords [_coordNo] += _offset;
+															if (m._constrain)
+																_newCoords [_coordNo] = Uize.constrain (
+																	_newCoords [_coordNo],
+																	_bounds [_axis],
+																	_bounds [_axis + 2]
+																)
+															;
+															if (_aspectRatio == null && _newCoords [_axis] > _newCoords [_axis + 2]) {
+																/* NOTE:
+																	for now we don't swap the coordinates around when they cross over if an aspect ratio is set, since we haven't dealt with the weird calculation issues that arise and lead to strange behaviors where the resizer moves around
+																*/
+																var _temp = _newCoords [_axis];
+																_newCoords [_axis] = _newCoords [_axis + 2];
+																_newCoords [_axis + 2] = _temp;
+																_effectivePointIds [_axis] = 1 - _effectivePointIds [_axis];
+															}
+														}
+													}
+												}
+												_updateAxisCoords (0);
+												_updateAxisCoords (1);
+												var
+													_newDims = [
+														Math.max (_newCoords [2] - _newCoords [0] + 1,m._minWidth),
+														Math.max (_newCoords [3] - _newCoords [1] + 1,m._minHeight)
+													],
+													_newCenter = [
+														(_newCoords [0] + _newCoords [2]) / 2,
+														(_newCoords [1] + _newCoords [3]) / 2
+													]
+												;
+
+												/*** handle explicit aspect ratio ***/
+													if (_aspectRatio != null) {
+														if (_newDims [0] / _newDims [1] != _aspectRatio) {
+															var
+																_dimsFromAspectRatio = [
+																	_newDims [1] * _aspectRatio,
+																	_newDims [0] / _aspectRatio
+																],
+																_setDimWithConstraint = function (_axis,_maxDim) {
+																	_newDims [_axis] = _dimsFromAspectRatio [_axis];
+																	if (m._constrain) {
+																		_newDims [_axis] = Math.min (_newDims [_axis],_maxDim);
+																		_newDims [1 - _axis] =
+																			_newDims [_axis] * Math.pow (_aspectRatio,_axis * 2 - 1)
+																		;
+																	}
+																},
+																_updateDimByCenterPoint = function (_axis) {
+																	_setDimWithConstraint (
+																		_axis,
+																		(
+																			_newCenter [_axis] <
+																			_shellCenter [_axis]
+																				? (_newCenter [_axis] + .5)
+																				: _bounds [_axis + 2] - _newCenter [_axis]
+																		) * 2
+																	);
+																},
+																_updateDimByCornerPoint = function (_axis) {
+																	_setDimWithConstraint (
+																		_axis,
+																		(
+																			_pointIds [_axis]
+																				? _bounds [_axis + 2] - _newCoords [_axis]
+																				: _newCoords [_axis + 2]
+																		) + 1
+																	);
+																}
+															;
+															if (_pointIds [0] == .5) {
+																_updateDimByCenterPoint (0);
+															} else if (_pointIds [1] == .5) {
+																_updateDimByCenterPoint (1);
+															} else if (_newDims [1] * _dimsFromAspectRatio [0] > _newDims [0] * _dimsFromAspectRatio [1]) {
+																_updateDimByCornerPoint (0);
+															} else {
+																_updateDimByCornerPoint (1);
+															}
+														}
+														var _updateNewCoord = function (_axis) {
+															if (!_pointIds [_axis]) {
+																_newCoords [_axis] = _newCoords [_axis + 2] - _newDims [_axis] + 1;
+															} else if (_pointIds [_axis] == .5) {
+																_newCoords [_axis] = _newCenter [_axis] - (_newDims [_axis] - 1) / 2;
+															}
+														};
+														_updateNewCoord (0);
+														_updateNewCoord (1);
+													}
+
+												m.set ({
+													activeHandleEffectivePointIdX:_effectivePointIds [0],
+													activeHandleEffectivePointIdY:_effectivePointIds [1]
+												});
+												m.setPositionDuringDrag (_newCoords [0],_newCoords [1],_newDims [0],_newDims [1]);
+											},
+										'Drag Rest':
+											function (_event) {m.fire (_event)},
+										'Drag Done':
+											function (_event) {
+												m.set ({_inDrag:_false});
+												m.fire (_event);
+												m.set ({_creatingNew:_false});
+												m.updateUi ();
+											}
+									});
+								}
+							;
+							for (var _handleName in _pointIdsMap)
+								_wireHandle (_handleName)
+							;
+							_updateHandlesEnabled.call (m);
+
+						/*** insert the jiggler node for repaint issue in IE ***/
+							if (_isIe) {
+								var _areaNode = m.getNode (m._areaNodes [0]);
+								if (_areaNode) {
+									var _jiggler = document.createElement ('div');
+									_jiggler.id = m.get ('idPrefix') + '-jiggler';
+									_Uize_Node.setStyle (_jiggler,{position:'absolute'});
+									_areaNode.appendChild (_jiggler);
+								}
+							}
+
+						_superclass.doMy (m,'wireUi');
+
+						_updateShellBoundsAndConformDims.call (m);
+					}
+				}
+			},
+
+			stateProperties:{
 				_activeHandleEffectivePointIdX:'activeHandleEffectivePointIdX',
 				_activeHandleEffectivePointIdY:'activeHandleEffectivePointIdY',
 				_areaNodes:{
@@ -455,7 +448,7 @@ Uize.module ({
 				_constrainBounds:{
 					name:'constrainBounds',
 					value:null,
-					onChange:_classPrototype._updateShellBoundsAndConformDims
+					onChange:_updateShellBoundsAndConformDims
 				},
 				_creatingNew:{
 					name:'creatingNew',
@@ -510,9 +503,12 @@ Uize.module ({
 					onChange:_conformDimsAndUpdateUi,
 					value:200
 				}
-			});
+			},
 
-		return _class;
+			staticProperties:{
+				pointIdsMap:_pointIdsMap
+			}
+		});
 	}
 });
 

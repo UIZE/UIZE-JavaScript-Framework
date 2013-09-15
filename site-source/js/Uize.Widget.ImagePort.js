@@ -34,15 +34,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
-				_true = true,
-				_false = false,
 				_Uize_Node = Uize.Node
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
 			;
 
 		/*** Utility Functions ***/
@@ -55,8 +47,7 @@ Uize.module ({
 			}
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiPosition = function () {
-				var m = this;
+			function _updateUiPosition (m) {
 				if (m.isWired) {
 					var
 						_paramsForGetScaledRect = m._paramsForGetScaledRect,
@@ -72,112 +63,114 @@ Uize.module ({
 				}
 			};
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				var m = this;
-				if (m.isWired) {
-					var _shellDims = _Uize_Node.getDimensions (m.getNode ());
-					if (!m._imageNaturalWidth) {
-						var _imageDims = _Uize_Node.getDimensions (m.getNode ('image'));
-						m._imageNaturalWidth = _imageDims.width;
-						m._imageNaturalHeight = _imageDims.height;
-					}
-					m._paramsForGetScaledRect = {
-						portWidth:_shellDims.width,
-						portHeight:_shellDims.height,
-						rectWidth:m._imageNaturalWidth,
-						rectHeight:m._imageNaturalHeight
-					};
-					Uize.Node.isIe && m.setNodeStyle ('image',{msInterpolationMode:'bicubic'});
-					m._updateUiPosition ();
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m.setNodeStyle ('',{overflow:'hidden'});
-					m.setNodeStyle ('image',{position:'absolute'});
-					m.portVsScaledDelta = [];
-
-					_superclass.doMy (m,'wireUi');
-				}
-			};
-
-		/*** Public Instance-Static Methods ***/
-			_classPrototype.getScaledRect = _class.getScaledRect = function (_params) {
-				function _getDefaultedProperty (_propertyName) {
-					return _params [_propertyName] !== _undefined ? _params [_propertyName] : m.get (_propertyName);
-				}
-				var
-					m = this,
-					_portWidth = _params.portWidth,
-					_portHeight = _params.portHeight,
-					_rectWidth = _params.rectWidth,
-					_rectHeight = _params.rectHeight,
-					_coordConverter = _getDefaultedProperty ('coordConverter'),
-					_fillScaleFactorWidth = _portWidth / _rectWidth,
-					_fillScaleFactorHeight = _portHeight / _rectHeight,
-					_fitFillScaleFactors = {
-						fit:Math.min (_fillScaleFactorWidth,_fillScaleFactorHeight),
-						fill:Math.max (_fillScaleFactorWidth,_fillScaleFactorHeight)
-					},
-					_scaleFactorLowerBound = _fitFillScaleFactors [_getDefaultedProperty ('sizingLowerBound')] || 0,
-					_scaleFactorUpperBound = _fitFillScaleFactors [_getDefaultedProperty ('sizingUpperBound')] || 0,
-					_scaleFactor = Math.min (_scaleFactorLowerBound + (_scaleFactorUpperBound - _scaleFactorLowerBound) * _getDefaultedProperty ('sizingValue'),_getDefaultedProperty ('maxScaling')),
-					_scaledWidth = _rectWidth * _scaleFactor,
-					_scaledHeight = _rectHeight * _scaleFactor
-				;
-				return {
-					left:_coordConverter ((_portWidth - _scaledWidth) * _getDefaultedProperty ('alignX')),
-					top:_coordConverter ((_portHeight - _scaledHeight) * _getDefaultedProperty ('alignY')),
-					width:_coordConverter (_scaledWidth),
-					height:_coordConverter (_scaledHeight)
-				};
-			};
-
-			_classPrototype.getSizingAndAlign = _class.getSizingAndAlign = function (_params) {
-				function _getScaledArea (_sizing) {
-					return _sizing == 'fit' ? _fitArea : (_sizing == 'fill' ? _fillArea : 0);
-				}
-				function _getDefaultedProperty (_propertyName) {
-					return _params [_propertyName] !== _undefined ? _params [_propertyName] : m.get (_propertyName);
-				}
-				var
-					m = this,
-					_portWidth = _params.portWidth,
-					_portHeight = _params.portHeight,
-					_rectWidth = _params.rectWidth,
-					_rectHeight = _params.rectHeight,
-					_rectArea = _rectWidth * _rectHeight,
-					_fillScaleFactorWidth = _portWidth / _rectWidth,
-					_fillScaleFactorHeight = _portHeight / _rectHeight,
-					_fitScaleFactor = Math.min (_fillScaleFactorWidth,_fillScaleFactorHeight),
-					_fillScaleFactor = Math.max (_fillScaleFactorWidth,_fillScaleFactorHeight),
-					_fitFillAreas = {
-						fit:_fitScaleFactor * _fitScaleFactor * _rectArea,
-						fill:_fillScaleFactor * _fillScaleFactor * _rectArea
-					},
-					_scaledAreaLowerBound = _fitFillAreas [_getDefaultedProperty ('sizingLowerBound')] || 0,
-					_scaledAreaUpperBound = _fitFillAreas [_getDefaultedProperty ('sizingUpperBound')] || 0
-				;
-				return {
-					sizingValue:
-						Math.sqrt (_rectArea - _scaledAreaLowerBound) /
-						Math.sqrt (_scaledAreaUpperBound - _scaledAreaLowerBound)
-					,
-					alignX:_getAlignForAxis (_params.rectX,_rectWidth,_portWidth),
-					alignY:_getAlignForAxis (_params.rectY,_rectHeight,_portHeight)
-				};
-			};
-
-		/*** State Properties ***/
 			function _updateAfterPositionChanged () {
-				this._updateUiPosition ();
+				_updateUiPosition (this);
 				this.fire ('Position Changed');
 			}
 
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						var _shellDims = _Uize_Node.getDimensions (m.getNode ());
+						if (!m._imageNaturalWidth) {
+							var _imageDims = _Uize_Node.getDimensions (m.getNode ('image'));
+							m._imageNaturalWidth = _imageDims.width;
+							m._imageNaturalHeight = _imageDims.height;
+						}
+						m._paramsForGetScaledRect = {
+							portWidth:_shellDims.width,
+							portHeight:_shellDims.height,
+							rectWidth:m._imageNaturalWidth,
+							rectHeight:m._imageNaturalHeight
+						};
+						Uize.Node.isIe && m.setNodeStyle ('image',{msInterpolationMode:'bicubic'});
+						_updateUiPosition (m);
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m.setNodeStyle ('',{overflow:'hidden'});
+						m.setNodeStyle ('image',{position:'absolute'});
+						m.portVsScaledDelta = [];
+
+						_superclass.doMy (m,'wireUi');
+					}
+				}
+			},
+
+			dualContextMethods:{
+				getScaledRect:function (_params) {
+					function _getDefaultedProperty (_propertyName) {
+						return _params [_propertyName] !== _undefined ? _params [_propertyName] : m.get (_propertyName);
+					}
+					var
+						m = this,
+						_portWidth = _params.portWidth,
+						_portHeight = _params.portHeight,
+						_rectWidth = _params.rectWidth,
+						_rectHeight = _params.rectHeight,
+						_coordConverter = _getDefaultedProperty ('coordConverter'),
+						_fillScaleFactorWidth = _portWidth / _rectWidth,
+						_fillScaleFactorHeight = _portHeight / _rectHeight,
+						_fitFillScaleFactors = {
+							fit:Math.min (_fillScaleFactorWidth,_fillScaleFactorHeight),
+							fill:Math.max (_fillScaleFactorWidth,_fillScaleFactorHeight)
+						},
+						_scaleFactorLowerBound = _fitFillScaleFactors [_getDefaultedProperty ('sizingLowerBound')] || 0,
+						_scaleFactorUpperBound = _fitFillScaleFactors [_getDefaultedProperty ('sizingUpperBound')] || 0,
+						_scaleFactor = Math.min (_scaleFactorLowerBound + (_scaleFactorUpperBound - _scaleFactorLowerBound) * _getDefaultedProperty ('sizingValue'),_getDefaultedProperty ('maxScaling')),
+						_scaledWidth = _rectWidth * _scaleFactor,
+						_scaledHeight = _rectHeight * _scaleFactor
+					;
+					return {
+						left:_coordConverter ((_portWidth - _scaledWidth) * _getDefaultedProperty ('alignX')),
+						top:_coordConverter ((_portHeight - _scaledHeight) * _getDefaultedProperty ('alignY')),
+						width:_coordConverter (_scaledWidth),
+						height:_coordConverter (_scaledHeight)
+					};
+				},
+
+				getSizingAndAlign:function (_params) {
+					function _getScaledArea (_sizing) {
+						return _sizing == 'fit' ? _fitArea : (_sizing == 'fill' ? _fillArea : 0);
+					}
+					function _getDefaultedProperty (_propertyName) {
+						return _params [_propertyName] !== _undefined ? _params [_propertyName] : m.get (_propertyName);
+					}
+					var
+						m = this,
+						_portWidth = _params.portWidth,
+						_portHeight = _params.portHeight,
+						_rectWidth = _params.rectWidth,
+						_rectHeight = _params.rectHeight,
+						_rectArea = _rectWidth * _rectHeight,
+						_fillScaleFactorWidth = _portWidth / _rectWidth,
+						_fillScaleFactorHeight = _portHeight / _rectHeight,
+						_fitScaleFactor = Math.min (_fillScaleFactorWidth,_fillScaleFactorHeight),
+						_fillScaleFactor = Math.max (_fillScaleFactorWidth,_fillScaleFactorHeight),
+						_fitFillAreas = {
+							fit:_fitScaleFactor * _fitScaleFactor * _rectArea,
+							fill:_fillScaleFactor * _fillScaleFactor * _rectArea
+						},
+						_scaledAreaLowerBound = _fitFillAreas [_getDefaultedProperty ('sizingLowerBound')] || 0,
+						_scaledAreaUpperBound = _fitFillAreas [_getDefaultedProperty ('sizingUpperBound')] || 0
+					;
+					return {
+						sizingValue:
+							Math.sqrt (_rectArea - _scaledAreaLowerBound) /
+							Math.sqrt (_scaledAreaUpperBound - _scaledAreaLowerBound)
+						,
+						alignX:_getAlignForAxis (_params.rectX,_rectWidth,_portWidth),
+						alignY:_getAlignForAxis (_params.rectY,_rectHeight,_portHeight)
+					};
+				}
+			},
+
+			stateProperties:{
 				_alignApplicableX:'alignApplicableX', // read only
 				_alignApplicableY:'alignApplicableY', // read only
 				_alignX:{
@@ -214,9 +207,8 @@ Uize.module ({
 					onChange:_updateAfterPositionChanged,
 					value:1
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

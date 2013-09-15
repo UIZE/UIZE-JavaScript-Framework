@@ -39,20 +39,12 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_true = true,
-				_false = false,
 				_Uize_Node = Uize.Node,
 				_Uize_Widget_Drag = Uize.Widget.Drag
 			;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._fireValueChangeAfterRestEvent = function () {
+			function _fireValueChangeAfterRestEvent () {
 				this._valueChangeRestTimeout = null;
 				this.fire ('Value Change After Rest');
 				/*?
@@ -64,9 +56,9 @@ Uize.module ({
 
 							This event is useful when wiring up sliders to drive updates that might be costly, such as complex changes to the DOM or updates that require requests to a server. In these cases, wiring into the =Value Change After Rest= event lets you conveniently tune how rapid-fire the costly updates are.
 				*/
-			};
+			}
 
-			_classPrototype._setValueInDrag = function (_value) {
+			function _setValueInDrag (_value) {
 				var
 					m = this,
 					_oldValue = +m
@@ -76,108 +68,112 @@ Uize.module ({
 					if (m.isWired && m.children.drag.get ('inDrag')) {
 						if (m._valueChangeRestTimeout) clearTimeout (m._valueChangeRestTimeout);
 						m._valueChangeRestTimeout = setTimeout (
-							function () {m._fireValueChangeAfterRestEvent ()},
+							function () {_fireValueChangeAfterRestEvent.call (m)},
 							m._restTime
 						);
 					} else {
-						m._fireValueChangeAfterRestEvent ();
+						_fireValueChangeAfterRestEvent.call (m);
 					}
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					var
-						_track = m.getNode ('track'),
-						_knob = m.getNode ('knob'),
-						_orientationNo, _trackDimsObj, _trackDims, _knobDimsObj, _knobDims,
-						_scaleFunc = m.get ('scaleFunc'),
-						_valueFunc = m.get ('valueFunc'),
-						_calculateCommonCoords = function () {
-							_orientationNo = m.get ('orientation') == 'vertical' ? 1 : 0;
-							_trackDimsObj = _Uize_Node.getDimensions (_track);
-							_trackDims = [_trackDimsObj.width,_trackDimsObj.height];
-							_knobDimsObj = _Uize_Node.getDimensions (_knob);
-							_knobDims = [_knobDimsObj.width,_knobDimsObj.height];
-						},
-						_pixelsToScale = function (_pixels) {
-							var
-								_scaleMax = _scaleFunc (m.get ('maxValue')),
-								_scaleMin = _scaleFunc (m.get ('minValue'))
-							;
-							return (
-								_pixels * (1 - _orientationNo * 2) * (_scaleMax - _scaleMin)
-								/ (_trackDims [_orientationNo] - _knobDims [_orientationNo])
-							);
-						}
-					;
-					/*** wire up the knob's drag object ***/
+		return _superclass.subclass ({
+			instanceMethods:{
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
 						var
-							_drag = m.addChild ('drag',_Uize_Widget_Drag,{node:_knob}),
-							_dragStartValue
+							_track = m.getNode ('track'),
+							_knob = m.getNode ('knob'),
+							_orientationNo, _trackDimsObj, _trackDims, _knobDimsObj, _knobDims,
+							_scaleFunc = m.get ('scaleFunc'),
+							_valueFunc = m.get ('valueFunc'),
+							_calculateCommonCoords = function () {
+								_orientationNo = m.get ('orientation') == 'vertical' ? 1 : 0;
+								_trackDimsObj = _Uize_Node.getDimensions (_track);
+								_trackDims = [_trackDimsObj.width,_trackDimsObj.height];
+								_knobDimsObj = _Uize_Node.getDimensions (_knob);
+								_knobDims = [_knobDimsObj.width,_knobDimsObj.height];
+							},
+							_pixelsToScale = function (_pixels) {
+								var
+									_scaleMax = _scaleFunc (m.get ('maxValue')),
+									_scaleMin = _scaleFunc (m.get ('minValue'))
+								;
+								return (
+									_pixels * (1 - _orientationNo * 2) * (_scaleMax - _scaleMin)
+									/ (_trackDims [_orientationNo] - _knobDims [_orientationNo])
+								);
+							}
 						;
-						_drag.wire ({
-							'Drag Start':
-								function () {
-									m.set ({_inDrag:_true});
+						/*** wire up the knob's drag object ***/
+							var
+								_drag = m.addChild ('drag',_Uize_Widget_Drag,{node:_knob}),
+								_dragStartValue
+							;
+							_drag.wire ({
+								'Drag Start':
+									function () {
+										m.set ({_inDrag:true});
+										_calculateCommonCoords ();
+										_dragStartValue = +m;
+									},
+								'Drag Update':
+									function () {
+										_setValueInDrag.call (
+											m,
+											_valueFunc (
+												_scaleFunc (_dragStartValue) +
+												_pixelsToScale ([_drag.eventDeltaPos [0],_drag.eventDeltaPos [1]] [_orientationNo])
+											)
+										);
+									},
+								'Drag Done':
+									function () {
+										m.set ({_inDrag:false});
+										clearTimeout (m._valueChangeRestTimeout);
+										m._valueChangeRestTimeout = null;
+										_fireValueChangeAfterRestEvent.call (m);
+									}
+							});
+
+						/*** wire up the slider's track ***/
+							var _initiateDrag = function (_event) {
+								if (m.get ('enabledInherited')) {
 									_calculateCommonCoords ();
-									_dragStartValue = +m;
-								},
-							'Drag Update':
-								function () {
-									m._setValueInDrag (
+									var
+										_trackCoords = _Uize_Node.getCoords (_track),
+										_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
+									;
+									_setValueInDrag.call (
+										m,
 										_valueFunc (
-											_scaleFunc (_dragStartValue) +
-											_pixelsToScale ([_drag.eventDeltaPos [0],_drag.eventDeltaPos [1]] [_orientationNo])
+											_scaleFunc (m.get ('minValue')) +
+											_pixelsToScale (
+												(_orientationNo ? _eventAbsPos.top : _eventAbsPos.left)
+												- _knobDims [_orientationNo] / 2 * (1 - _orientationNo * 2)
+												- (_orientationNo ? _trackCoords.bottom : _trackCoords.x)
+											)
 										)
 									);
-								},
-							'Drag Done':
-								function () {
-									m.set ({_inDrag:_false});
-									clearTimeout (m._valueChangeRestTimeout);
-									m._valueChangeRestTimeout = null;
-									m._fireValueChangeAfterRestEvent ();
+									return _drag.initiate (_event);
 								}
-						});
+							};
+							m.wireNode ([_track,'full','empty'],{mousedown:_initiateDrag,touchstart:_initiateDrag});
 
-					/*** wire up the slider's track ***/
-						var _initiateDrag = function (_event) {
-							if (m.get ('enabledInherited')) {
-								_calculateCommonCoords ();
-								var
-									_trackCoords = _Uize_Node.getCoords (_track),
-									_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
-								;
-								m._setValueInDrag (
-									_valueFunc (
-										_scaleFunc (m.get ('minValue')) +
-										_pixelsToScale (
-											(_orientationNo ? _eventAbsPos.top : _eventAbsPos.left)
-											- _knobDims [_orientationNo] / 2 * (1 - _orientationNo * 2)
-											- (_orientationNo ? _trackCoords.bottom : _trackCoords.x)
-										)
-									)
-								);
-								return _drag.initiate (_event);
-							}
-						};
-						m.wireNode ([_track,'full','empty'],{mousedown:_initiateDrag,touchstart:_initiateDrag});
-
-					_superclass.doMy (m,'wireUi');
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** Public Static Properties ***/
-			_class.presets = {};
+			staticProperties:{
+				presets:{}
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_inDrag:{
 					name:'inDrag',
-					value:_false
+					value:false
 					/*?
 						State Properties
 							inDrag
@@ -218,9 +214,8 @@ Uize.module ({
 								- the initial value is a function that has no effect
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

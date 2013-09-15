@@ -106,136 +106,23 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** Public Instance Properties ***/
-							m.fade = Uize.Fade ({
-								duration:400,
-								curve:Uize.Fade.celeration (0,1),
-								quantization:1
-								/*?
-									Instance Properties
-										fade
-											An instance of the =Uize.Fade= class that is used to animate the scrolling of the contents of the =view= implied node.
-
-											The =fade= instance is created during the construction of the =Uize.Widget.Scrolly= instance, so the fade properties can be modified immediately after the scrolly is created. The behavior of the animation can be controlled by setting values for the various state properties of the =fade= instance, such as its =curve=, =duration=, and other state properties.
-
-											EXAMPLE
-											...........................................................................
-											page.addChild ('myScrolly',Uize.Widget.Scrolly).fade.set ({duration:1000});
-											...........................................................................
-
-											In the above example, an instance of the =Uize.Widget.Scrolly= class is added as a child widget of a page widget instance, and then its fade duration is set to =1000= (ie. one second). Because the =addChild= instance method returns a reference to the child widget being added, and because the =fade= instance is created during construction of the =Uize.Widget.Scrolly= instance, the =set= instance method can be called in a chained fashion.
-								*/
-							});
-
-						/*** Initialization ***/
-							m.fade.wire (
-								'Changed.value',
-								function (_event) {m.isWired && m.setNodeProperties ('view',_event.newValue)}
-							);
-					},
-					function () {
-						var m = this;
-
-						/*** create the button widgets ***/
-							function _addNavigationButton (_buttonName,_shiftX,_shiftY) {
-								m._addChildButton (
-									_buttonName,
-									function (_event) {
-										var
-											_factor = _event.domEvent.shiftKey ? Infinity : 1,
-											_properties = {}
-										;
-										if (_shiftX) _properties._pageX = m._pageX + _shiftX * _factor;
-										if (_shiftY) _properties._pageY = m._pageY + _shiftY * _factor;
-										m.set (_properties);
-									}
-								)
-							}
-							_addNavigationButton ('left',-1,0);
-								/*?
-									Child Widgets
-										left
-											An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node left by one page.
-
-											Clicking this button has the effect of decrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll left, such as when the =view= implied node is already scrolled all the way to the left (ie. the value of =pageX= is =0=).
-
-											NOTES
-											- see the related =pageX= state property
-											- see the companion =right= child widget, and the related =up= and =down= child widgets
-								*/
-							_addNavigationButton ('right',1,0);
-								/*?
-									Child Widgets
-										right
-											An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node right by one page.
-
-											Clicking this button has the effect of incrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll right, such as when the =view= implied node is already scrolled all the way to the right (ie. the value of =pageX= is equal to the value of =maxPageX=).
-
-											NOTES
-											- see the related =pageX= state property
-											- see the companion =left= child widget, and the related =up= and =down= child widgets
-								*/
-							_addNavigationButton ('up',0,-1);
-								/*?
-									Child Widgets
-										up
-											An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node up by one page.
-
-											Clicking this button has the effect of decrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll up, such as when the =view= implied node is already scrolled all the way to the top (ie. the value of =pageY= is =0=).
-
-											NOTES
-											- see the related =pageY= state property
-											- see the companion =down= child widget, and the related =left= and =right= child widgets
-								*/
-							_addNavigationButton ('down',0,1);
-								/*?
-									Child Widgets
-										down
-											An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node down by one page.
-
-											Clicking this button has the effect of incrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll down, such as when the =view= implied node is already scrolled all the way to the bottom (ie. the value of =pageY= is equal to the value of =maxPageY=).
-
-											NOTES
-											- see the related =pageY= state property
-											- see the companion =up= child widget, and the related =left= and =right= child widgets
-								*/
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
-
-			_classPrototype._displayAxisButtons = function (_axis,_decButtonName,_incButtonName) {
-				var m = this;
+			function _displayAxisButtons (m,_axis,_decButtonName,_incButtonName) {
 				m.isWired &&
 					m.displayNode (
 						[m.children [_decButtonName].getNode (),m.children [_incButtonName].getNode ()],
 						m._showButtonsWhenNotScrollable || m.get ('isScrollable' + _axis)
 					)
 				;
-			};
+			}
 
-			_classPrototype._updateMaxPageProperty = function (_axisName) {
-				if (this.isWired) {
+			function _updateMaxPageProperty (m,_axisName) {
+				if (m.isWired) {
 					var
-						_viewNode = this.getNode ('view'),
+						_viewNode = m.getNode ('view'),
 						_axisDimSuffix = _axisName == 'X' ? 'Width' : 'Height'
 					;
-					this.set (
+					m.set (
 						'maxPage' + _axisName,
 						_viewNode
 							? Math.max (
@@ -245,40 +132,34 @@ Uize.module ({
 							: 0
 					);
 				}
-			};
+			}
 
-			_classPrototype._conformPageValue = function (_newValue,_axisName) {
-				this._updateMaxPageProperty (_axisName);
+			function _conformPageValue (m,_newValue,_axisName) {
+				_updateMaxPageProperty (m,_axisName);
 				return (
 					Uize.isNumber (_newValue = +_newValue)
-						? Uize.constrain (_newValue,0,this.get ('maxPage' + _axisName) || 0)
-						: this.get ('page' + _axisName)
+						? Uize.constrain (_newValue,0,m.get ('maxPage' + _axisName) || 0)
+						: m.get ('page' + _axisName)
 				);
-			};
+			}
 
-			_classPrototype._updateButtonsEnabled = function (_axisName) {
+			function _updateButtonsEnabled (m,_axisName) {
 				var
-					_page = this.get ('page' + _axisName),
-					_children = this.children
+					_page = m.get ('page' + _axisName),
+					_children = m.children
 				;
 				function _enableButton (_buttonName,_enabled) {
 					var _button = _children [_buttonName];
-					_button && _button.set ({enabled:_enabled ? 'inherit' : _false});
+					_button && _button.set ({enabled:_enabled ? 'inherit' : false});
 				}
 				_enableButton (_axisName == 'X' ? 'left' : 'up',_page);
-				_enableButton (_axisName == 'X' ? 'right' : 'down',(this.get ('maxPage' + _axisName) - _page + 1 || 2) > 1);
+				_enableButton (_axisName == 'X' ? 'right' : 'down',(m.get ('maxPage' + _axisName) - _page + 1 || 2) > 1);
 					/* NOTE:
 						If maxPage is NaN, then maxPage - page is also NaN. Then, adding 1 still gives NaN, OR'ing with 2 gives you 2, which is greater than 1. This makes maxPage - page == NaN behave like 1 or above, rather than 0, but still makes 0 behave like 0 (ie. 0 + 1 || 2 is 1, which is not greater than 1).
 					*/
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				this._updateMaxPageProperty ('X');
-				this._updateMaxPageProperty ('Y');
-			};
-
-		/*** State Properties ***/
+		/*** State Property onChange Handlers ***/
 			function _handlePageChange () {
 				var m = this;
 				if (m.isWired) {
@@ -302,16 +183,124 @@ Uize.module ({
 					});
 				}
 			}
-			function _updateButtonsEnabledX () {this._updateButtonsEnabled ('X')}
-			function _updateButtonsEnabledY () {this._updateButtonsEnabled ('Y')}
-			function _displayAxisButtonsX () {this._displayAxisButtons ('X','left','right')}
-			function _displayAxisButtonsY () {this._displayAxisButtons ('Y','up','down')}
+			function _updateButtonsEnabledX () {_updateButtonsEnabled (this,'X')}
+			function _updateButtonsEnabledY () {_updateButtonsEnabled (this,'Y')}
+			function _displayAxisButtonsX () {_displayAxisButtons (this,'X','left','right')}
+			function _displayAxisButtonsY () {_displayAxisButtons (this,'Y','up','down')}
 
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			alphastructor:function () {
+				var m = this;
+
+				/*** Public Instance Properties ***/
+					m.fade = Uize.Fade ({
+						duration:400,
+						curve:Uize.Fade.celeration (0,1),
+						quantization:1
+						/*?
+							Instance Properties
+								fade
+									An instance of the =Uize.Fade= class that is used to animate the scrolling of the contents of the =view= implied node.
+
+									The =fade= instance is created during the construction of the =Uize.Widget.Scrolly= instance, so the fade properties can be modified immediately after the scrolly is created. The behavior of the animation can be controlled by setting values for the various state properties of the =fade= instance, such as its =curve=, =duration=, and other state properties.
+
+									EXAMPLE
+									...........................................................................
+									page.addChild ('myScrolly',Uize.Widget.Scrolly).fade.set ({duration:1000});
+									...........................................................................
+
+									In the above example, an instance of the =Uize.Widget.Scrolly= class is added as a child widget of a page widget instance, and then its fade duration is set to =1000= (ie. one second). Because the =addChild= instance method returns a reference to the child widget being added, and because the =fade= instance is created during construction of the =Uize.Widget.Scrolly= instance, the =set= instance method can be called in a chained fashion.
+						*/
+					});
+
+				/*** Initialization ***/
+					m.fade.wire (
+						'Changed.value',
+						function (_event) {m.isWired && m.setNodeProperties ('view',_event.newValue)}
+					);
+			},
+			omegastructor:function () {
+				var m = this;
+
+				/*** create the button widgets ***/
+					var _addChildButton = Uize.Widget.Button.addChildButton;
+					function _addNavigationButton (_buttonName,_shiftX,_shiftY) {
+						_addChildButton.call (
+							m,
+							_buttonName,
+							function (_event) {
+								var
+									_factor = _event.domEvent.shiftKey ? Infinity : 1,
+									_properties = {}
+								;
+								if (_shiftX) _properties._pageX = m._pageX + _shiftX * _factor;
+								if (_shiftY) _properties._pageY = m._pageY + _shiftY * _factor;
+								m.set (_properties);
+							}
+						)
+					}
+					_addNavigationButton ('left',-1,0);
+						/*?
+							Child Widgets
+								left
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node left by one page.
+
+									Clicking this button has the effect of decrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll left, such as when the =view= implied node is already scrolled all the way to the left (ie. the value of =pageX= is =0=).
+
+									NOTES
+									- see the related =pageX= state property
+									- see the companion =right= child widget, and the related =up= and =down= child widgets
+						*/
+					_addNavigationButton ('right',1,0);
+						/*?
+							Child Widgets
+								right
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node right by one page.
+
+									Clicking this button has the effect of incrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll right, such as when the =view= implied node is already scrolled all the way to the right (ie. the value of =pageX= is equal to the value of =maxPageX=).
+
+									NOTES
+									- see the related =pageX= state property
+									- see the companion =left= child widget, and the related =up= and =down= child widgets
+						*/
+					_addNavigationButton ('up',0,-1);
+						/*?
+							Child Widgets
+								up
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node up by one page.
+
+									Clicking this button has the effect of decrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll up, such as when the =view= implied node is already scrolled all the way to the top (ie. the value of =pageY= is =0=).
+
+									NOTES
+									- see the related =pageY= state property
+									- see the companion =down= child widget, and the related =left= and =right= child widgets
+						*/
+					_addNavigationButton ('down',0,1);
+						/*?
+							Child Widgets
+								down
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node down by one page.
+
+									Clicking this button has the effect of incrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll down, such as when the =view= implied node is already scrolled all the way to the bottom (ie. the value of =pageY= is equal to the value of =maxPageY=).
+
+									NOTES
+									- see the related =pageY= state property
+									- see the companion =up= child widget, and the related =left= and =right= child widgets
+						*/
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					_updateMaxPageProperty (this,'X');
+					_updateMaxPageProperty (this,'Y');
+				}
+			},
+
+			stateProperties:{
 				_isScrollableX:{
 					name:'isScrollableX',
 					onChange:_displayAxisButtonsX,
-					value:_false
+					value:false
 					/*?
 						State Properties
 							isScrollableX
@@ -326,7 +315,7 @@ Uize.module ({
 				_isScrollableY:{
 					name:'isScrollableY',
 					onChange:_displayAxisButtonsY,
-					value:_false
+					value:false
 					/*?
 						State Properties
 							isScrollableY
@@ -388,7 +377,7 @@ Uize.module ({
 				},
 				_pageX:{
 					name:'pageX',
-					conformer:function (_value) {return this._conformPageValue (_value,'X')},
+					conformer:function (_value) {return _conformPageValue (this,_value,'X')},
 					onChange:[_handlePageChange,_updateButtonsEnabledX],
 					value:0
 					/*?
@@ -410,7 +399,7 @@ Uize.module ({
 				},
 				_pageY:{
 					name:'pageY',
-					conformer:function (_value) {return this._conformPageValue (_value,'Y')},
+					conformer:function (_value) {return _conformPageValue (this,_value,'Y')},
 					onChange:[_handlePageChange,_updateButtonsEnabledY],
 					value:0
 					/*?
@@ -433,7 +422,7 @@ Uize.module ({
 				_showButtonsWhenNotScrollable:{
 					name:'showButtonsWhenNotScrollable',
 					onChange:[_displayAxisButtonsX,_displayAxisButtonsY],
-					value:_true
+					value:true
 					/*?
 						State Properties
 							showButtonsWhenNotScrollable
@@ -446,9 +435,8 @@ Uize.module ({
 								- the initial value is =true=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 
