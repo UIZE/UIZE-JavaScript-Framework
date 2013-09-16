@@ -524,12 +524,12 @@ Uize.module ({
 								Event handlers registered using this method will handle events fired for the instance using the =fire= instance method, and not those events fired using the =Uize.Class.fire= static method. A =Uize.Class= subclass may not provide any instance events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the =eventHandlerSTRorFNorOBJ= parameter may be of string, function, or object type.
 
 								EXAMPLE
-								...........................................................
+								......................................................................
 								mySlider.wire (
 									'Changed.value',
-									function () {Uize.Node.setValue ('valueField',mySlider)}
+									function (event) {Uize.Node.setValue ('valueField',event.newValue)}
 								);
-								...........................................................
+								......................................................................
 
 								VARIATION
 								.............................................
@@ -539,16 +539,16 @@ Uize.module ({
 								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =wire= instance method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
 
 								EXAMPLE
-								...................................................................................
+								.............................................................................
 								mySlider.wire ({
 									'Changed.value':
-										function () {Uize.Node.setValue ('valueField',mySlider)},
+										function (event) {Uize.Node.setValue ('valueField',event.newValue)},
 									'Changed.maxValue':
-										function () {Uize.Node.setValue ('maxValueField',mySlider.get ('maxValue'))},
+										function (event) {Uize.Node.setValue ('maxValueField',event.newValue)},
 									'Changed.minValue':
-										function () {Uize.Node.setValue ('minValueField',mySlider.get ('minValue'))}
+										function (event) {Uize.Node.setValue ('minValueField',event.newValue)}
 								});
-								...................................................................................
+								.............................................................................
 
 								SPECIAL VALUES
 								- the string value ="*"= acts as a wildcard when specified for the =eventNameSTR= parameter, meaning that the specified handler should be executed for all events of the instance
@@ -1895,6 +1895,37 @@ Uize.module ({
 											The =Changed.[propertyName]= event only fires for a particular state property when the value for that property is *changed* by using the =set= method. So, if the =set= method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.
 
 											Additionally, if a =conformer= is registered for the property and the action of the conformer results in the property value not being changed, then no event will be fired - even if the value specified in the =set= call is different to the current value of the property. This can be the case if the value is at an edge of its valid range, an attempt is made to set the value outside of its valid range, and the conformer has the action of constraining the value so that it remains at the same edge of its valid range.
+
+										Event Object Contains newValue Property
+											When a =Changed.[propertyName]= event fires for a particular state property that has changed value, the event object that is passed as an argument to any handlers of the event will contain a =newValue= property to indicate the new value of the state property.
+
+											This makes it possible to access the new value of the state property without having to access the instance that owns the property and call its =get= method.
+
+											INSTEAD OF...
+											..........................................................
+											myWidget.addChild ('slider',Uize.Widget.Bar.Slider).wire (
+												'Changed.value',
+												function (event) {
+													console.log (event.source.get ('value'));
+												}
+											);
+											..........................................................
+
+											USE...
+											..........................................................
+											myWidget.addChild ('slider',Uize.Widget.Bar.Slider).wire (
+												'Changed.value',
+												function (event) {
+													console.log (event.newValue);
+												}
+											);
+											..........................................................
+
+											In the above example, we're adding a slider child widget to the =myWidget= parent widget. Because the =addChild= instance method returns a reference to the added child widget, we can chain a call to the child's =wire= method in order to wire a handler for its =Changed.value= event.
+
+											Now, without the =newValue= property of the event object, we could either access the new value by getting to the instance through the =source= object of the event (as in =event.source.get ('value')=), or we could dereference the child widget from the =myWidget= parent (as in =myWidget.children.slider.get ('value')=).
+
+											Both of these approaches are more cumbersome than simply using the =newValue= property that is provided as part of the event object for =Changed.[propertyName]= events.
 
 										NOTES
 										- compare to the related =Changed.*= instance event
