@@ -2702,6 +2702,25 @@ Uize.module ({
 								},
 								{
 									title:
+										'Test that the event object for a Changed.[propertyName] event contains a newValue property that contains the new value for the property whose value has changed',
+									test:function () {
+										var
+											_Subclass = Uize.Class.subclass ({
+												stateProperties:{myProperty:{value:'initial value'}}
+											}),
+											_instance = new _Subclass,
+											_valueOfNewValueProperty
+										;
+										_instance.wire (
+											'Changed.myProperty',
+											function (_event) {_valueOfNewValueProperty = _event.newValue}
+										);
+										_instance.set ({myProperty:'new value'});
+										return this.expect ('new value',_valueOfNewValueProperty);
+									}
+								},
+								{
+									title:
 										'Test that the Changed.[propertyName] events for state properties that have changed value are fired after all the onChange handlers for the properties have been executed',
 									test:function () {
 										var
