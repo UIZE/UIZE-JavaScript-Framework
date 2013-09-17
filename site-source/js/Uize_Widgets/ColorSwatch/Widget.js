@@ -65,7 +65,7 @@ Uize.module ({
 				},
 				_valueAsHexRgb:{
 					name:'valueAsHexRgb',
-					derived:function (value) {return Uize.Color.to (this.get ('value'),'#hex')}
+					derived:'value: Uize.Color.to (value,"#hex")'
 				}
 			},
 

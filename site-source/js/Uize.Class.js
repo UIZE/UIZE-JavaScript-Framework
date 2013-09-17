@@ -84,21 +84,21 @@
 				A state properties derivation is simply an expression that produces a derived value from one or more of the state properties of a class.
 
 				EXAMPLE
-				....................................................................................
+				...................................................................
 				var CubeClass = Uize.Class.subclass ({
 					stateProperties:{
 						width:{value:10},
 						height:{value:20},
 						depth:{value:15},
-						volume:{derived:function (width,height,depth) {return width * height * depth}}
+						volume:{derived:'width,height,depth: width * height * depth'}
 					}
 				});
 
 				var cubeInstance = CubeClass ();
 				alert (cubeInstance.get ('volume'));  // alerts the text "3000"
-				....................................................................................
+				...................................................................
 
-				In the above example, the class =CubeClass= is being created with the state properties =width=, =height=, and =depth=, and with the derived property =volume=. The way that the value of the =volume= property is derived is specified using the function =function (width,height,depth) {return width &#42; height &#42; depth}=, which tells the =Uize.Class= module to compute the value using the =width=, =height=, and =depth= state properties as the `determinants`, and the expression =width &#42; height &#42; depth= as the computation.
+				In the above example, the class =CubeClass= is being created with the state properties =width=, =height=, and =depth=, and with the derived property =volume=. The way that the value of the =volume= property is derived is specified using the derivation expression string ='width,height,depth: width * height * depth'=, which tells the =Uize.Class= module to compute the value using the =width=, =height=, and =depth= state properties as the `determinants`, and the expression =width &#42; height &#42; depth= as the computation.
 
 				Derived properties is just one way in which `state properties derivations` can be used. One can also use such derivations with the =onChange= instance method, and when `specifying conditions` with the =isMet=, =once=, and =whenever= instance methods of the `condition system`.
 

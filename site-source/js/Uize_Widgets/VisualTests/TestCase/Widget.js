@@ -38,7 +38,7 @@ Uize.module ({
 			stateProperties:{
 				state:{},
 				heading:{
-					derived:function (state) {return Uize.Xml.toAttributeValue (Uize.Json.to (state))}
+					derived:'state: Uize.Xml.toAttributeValue (Uize.Json.to (state))'
 				}
 			},
 

@@ -570,9 +570,8 @@ Uize.module ({
 				},
 				_displayedTipText:{
 					name:'displayedTipText',
-					derived:function (tipText,enabledInherited,busyInherited) {
-						return tipText == _undefined ? _undefined : enabledInherited && !busyInherited ? tipText : '';
-					},
+					derived:
+						'tipText,enabledInherited,busyInherited: tipText == undefined ? undefined : enabledInherited && !busyInherited ? tipText : ""',
 					onChange:_updateUiDisplayedTipText
 				},
 				_tipText:'tipText',
