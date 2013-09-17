@@ -1,0 +1,60 @@
+ChoiceAnalyzer
+	Child Widgets
+		- one IdealChoice
+		- multiple Choice
+
+	State Properties
+		- choiceMatrix
+
+	Behaviors
+		- when weight of any quality in IdealChoice changes, that value is distributed to all Choice instances
+		- from the choiceMatrix property, an IdealChoice and multiple Choice child widgets are created
+
+ChoiceAbstract
+	Child Widgets
+		- one ChoiceHeading
+		- multiple choice quality (default widget class is )
+		- one ChoiceScore
+
+	State Properties
+		- title
+		- choiceQualities
+
+	Behaviors
+		- when the weight or value of any quality changes, those values are distributed to the ChoiceScore widget
+		- from the choiceQualities property, multiple choice quality widgets are created
+
+IdealChoice
+	Subclasses ChoiceAbstract.
+
+	Sets widget class for choice quality to IdealChoiceQuality.
+
+Choice
+	Subclasses ChoiceAbstract.
+
+	Sets widget class for choice quality to ChoiceQuality.
+
+ChoiceQualityAbstract
+	State Properties
+		- weight
+		- value
+
+IdealChoiceQuality
+	Subclasses ChoiceQualityAbstract.
+
+	Child Widgets
+		- Spinner (text input with decrement and increment buttons) for editing weight
+
+	Sets value as being derived and always one.
+
+ChoiceQuality
+	Subclasses ChoiceQualityAbstract.
+
+	Child Widgets
+		- SliderWithInput for editing value
+
+ChoiceScore
+	State Properties
+		- title
+		- score (derived)
+
