@@ -1017,7 +1017,7 @@ Changed Events
 		The =Changed.[propertyName]= virtual event lets you watch on changes in value for specified state properties.
 
 		EXAMPLE
-		.....................................................................................
+		......................................................................................
 		var MyClass = Uize.Class.subclass ();
 		MyClass.stateProperties ({
 			_percentLoaded:{
@@ -1028,19 +1028,50 @@ Changed Events
 		});
 		var myClass = new MyClass;
 		myClass.wire (
-			'Changed.percentLoaded',  // name of changed event for percentLoaded
-			function () {alert (myClass.get ('percentLoaded'))}
+			'Changed.percentLoaded',  // name of changed event for percentLoaded stete property
+			function (event) {alert (event.newValue)}
 		);
 		myClass.set ({percentLoaded:10});   // will alert the text 10
 		myClass.set ({percentLoaded:25});   // will alert the text 25
 		myClass.set ({percentLoaded:66});   // will alert the text 66
 		myClass.set ({percentLoaded:200});  // will alert the text 100 (because of conformer)
 		myClass.set ({percentLoaded:300});  // does nothing (because value doesn't change)
-		.....................................................................................
+		......................................................................................
 
 		In the above example, a handler is being registered for the changed event of the =percentLoaded= state property, which is named =Changed.percentLoaded= (basically, any state property has a changed virtual event that is named after that property, with "Changed." prefixed).
 
 		Now, the handler for this event alerts the current value for the property. So, the first four of the =set= statements in the example will result in the value of =percentLoaded= changing, which will fire the =Changed.percentLoaded= virtual event, whose handler will display the current value in an alert dialog. Important to note is that the last =set= statement will not cause the value of =percentLoaded= to change. That's because the =conformer= function constrains its value to the range of =0= to =100=, and the previous attempt to set its value to =200= caused it to be constrained to the maximum in its range. Once constrained to =100=, attempting to set its value to =300= wouldn't budge it any higher from =100=. So, the last =set= statement doesn't cause the =Changed.percentLoaded= event to be fired, and no alert dialog.
+
+		Event Object Contains newValue Property
+			When a =Changed.[propertyName]= event fires for a particular state property that has changed value, the event object that is passed as an argument to any handlers of the event will contain a =newValue= property to indicate the new value of the state property.
+
+			This makes it possible to access the new value of the state property without having to access the instance that owns the property in order to call its =get= method to get the value for the property.
+
+			INSTEAD OF...
+			..........................................................
+			myWidget.addChild ('slider',Uize.Widget.Bar.Slider).wire (
+				'Changed.value',
+				function (event) {
+					console.log (event.source.get ('value'));
+				}
+			);
+			..........................................................
+
+			USE...
+			..........................................................
+			myWidget.addChild ('slider',Uize.Widget.Bar.Slider).wire (
+				'Changed.value',
+				function (event) {
+					console.log (event.newValue);
+				}
+			);
+			..........................................................
+
+			In the above example, we're adding a slider child widget to the =myWidget= parent widget. Because the =addChild= instance method returns a reference to the added child widget, we can chain a call to the child's =wire= method in order to wire a handler for its =Changed.value= event.
+
+			Now, without the =newValue= property of the event object, we could either access the new value by getting to the instance through the =source= object of the event (as in =event.source.get ('value')=), or we could dereference the child widget from the =myWidget= parent (as in =myWidget.children.slider.get ('value')=).
+
+			Both of these approaches are more cumbersome than simply using the =newValue= property that is provided as part of the event object for =Changed.[propertyName]= events.
 
 		### Changed.[propertyName] vs. onChange
 			- redundancy optimization with onChange, but not Changed.[propertyName]

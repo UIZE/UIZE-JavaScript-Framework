@@ -1,0 +1,37 @@
+The =Changed.[propertyName]= event, that fires when a state property of a UIZE class instance changes value, has been improved with the addition of a =newValue= property in the event object.
+
+Now, when a =Changed.[propertyName]= event fires for a particular state property that has changed value, the event object that is passed as an argument to any handlers of the event will contain a =newValue= property to indicate the new value of the state property.
+
+This makes it possible to access the new value of the state property without having to access the instance that owns the property in order to call its =get= method to get the value for the property.
+
+INSTEAD OF...
+..........................................................
+myWidget.addChild ('slider',Uize.Widget.Bar.Slider).wire (
+	'Changed.value',
+	function (event) {
+		console.log (event.source.get ('value'));
+	}
+);
+..........................................................
+
+USE...
+..........................................................
+myWidget.addChild ('slider',Uize.Widget.Bar.Slider).wire (
+	'Changed.value',
+	function (event) {
+		console.log (event.newValue);
+	}
+);
+..........................................................
+
+In the above example, we're adding a slider child widget to the =myWidget= parent widget. Because the =addChild= instance method returns a reference to the added child widget, we can chain a call to the child's =wire= method in order to wire a handler for its =Changed.value= event.
+
+Now, without the =newValue= property of the event object, we could either access the new value by getting to the instance through the =source= object of the event (as in =event.source.get ('value')=), or we could dereference the child widget from the =myWidget= parent (as in =myWidget.children.slider.get ('value')=).
+
+Both of these approaches are more cumbersome than simply using the =newValue= property that is provided as part of the event object for =Changed.[propertyName]= events.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-09-16 - Improved Property Changed Events
+....................................................................................
