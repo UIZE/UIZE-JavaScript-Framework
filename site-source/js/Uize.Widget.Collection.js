@@ -145,17 +145,7 @@ Uize.module ({
 							_this._addControlButton (
 								'selectAll',
 								function () {_this.selectAll ()},
-								{
-									affectedBy:['allSelected','totalItems','selectionMode','isEmpty'],
-									stateEvaluator:
-										function () {
-											return (
-												!this._allSelected &&
-												!this._isEmpty &&
-												(this._selectionMode != 'single' || this._totalItems == 1)
-											)
-										}
-								}
+								'allSelected,totalItems,selectionMode,isEmpty: !allSelected && !isEmpty && (selectionMode != "single" || totalItems == 1)'
 								/*?
 									Child Widgets
 										selectAll Child Widget
@@ -220,30 +210,12 @@ Uize.module ({
 					_this = this,
 					_buttonWidget = Uize.Widget.Button.addChildButton.call (_this,_buttonName,_clickHandler)
 				;
-				if (typeof _enabledWhen == 'string' && (_enabledWhen = _enabledWhen.replace (' ',''))) {
-					var
-						_propertyName = _enabledWhen.replace ('!',''),
-						_negative = _enabledWhen.charAt (0) == '!'
-					;
-					_enabledWhen = {
-						affectedBy:_propertyName,
-						stateEvaluator:function () {return _this.get (_propertyName) != _negative}
-					};
-				}
-				if (_enabledWhen) {
-					var
-						_updateButtonEnabled = function () {
-							_buttonWidget.set ({enabled:_enabledWhen.stateEvaluator.call (_this) ? 'inherit' : _false});
-						},
-						_affectedBy = _enabledWhen.affectedBy
-					;
-					if (typeof _affectedBy == 'string') _affectedBy = [_affectedBy];
-					Uize.forEach (
-						_affectedBy,
-						function (_affectedByProperty) {_this.wire ('Changed.' + _affectedByProperty,_updateButtonEnabled)}
-					);
-					_updateButtonEnabled ();
-				};
+				if (_enabledWhen)
+					_this.onChange (
+						_enabledWhen,
+						function (_enabled) {_buttonWidget.set ({enabled:_enabled ? 'inherit' : _false})}
+					)
+				;
 				return _buttonWidget;
 				/*?
 					Instance Methods
@@ -251,9 +223,13 @@ Uize.module ({
 							For advanced developers only, this is a subclassing hook that lets you add a button child widget with the specified name, with a specified click handler function, and whose enabled state is determined by a specified condition.
 
 							SYNTAX
-							.............................................................................................
-							buttonOBJ = myInstance.addControlButton (buttonNameSTR,clickHandlerFUNC,enabledWhenSTRorOBJ);
-							.............................................................................................
+							.................................................................................
+							buttonOBJ = myInstance.addControlButton (
+								buttonNameSTR,               // name of button child widget
+								clickHandlerFUNC,            // code to execute when button is clicked
+								enabledWhenSTRorARRAYorFUNC  // condition under which button should be enabled
+							);
+							.................................................................................
 
 							This method returns a reference to the button child widget created.
 
@@ -263,28 +239,28 @@ Uize.module ({
 							clickHandlerFUNC
 								A function reference, specifying a function that should be executed when the button is clicked and in the enabled state.
 
-							enabledWhenSTRorOBJ
-								A string or object, specifying a rule that should be used for determining when the button is enabled and when it is not.
+							enabledWhenSTRorARRAYorFUNC
+								A string, array, or function, specifying the condition under which the button should be enabled.
 
-								The value of this parameter can be of type string or type object. When a string value is specified for this parameter, then the value should be the name of a state property of the collection widget whose value will determine the button's enabled state. An optional "!" (exclamation mark) prefix allows you to not the value of the state property specified in the =enabledWhenSTRorOBJ= parameter.
+								EXAMPLE
+								......................................
+								myCollection.addControlButton (
+									'selectAll',
+									function () {
+										// code here to select all items
+									},
+									'!allSelected,!isEmpty'
+								);
+								......................................
 
-								A much more versatile way of declaring the enabled state rule for the button is to specify an object type value for the =enabledWhenSTRorOBJ= parameter. An object specified for this parameter should have the following structure...
+								In the above example, the "selectAll" button that is being added is to be enabled only when the values of both the =allSelected= and =isEmpty= state properties of the collection widget are =false=. There's no sense having the "selectAll" button be enabled when all the items are already selected. Similarly, there's no sense having the button be enabled when there are no items to select.
 
-								.......................................................................................
-								{
-									affectedBy     : affectedBySTRorARRAY,  // which properties affect the enabled state
-									stateEvaluator : stateEvaluatorFUNC     // a function for calculating enabled state
-								}
-								.......................................................................................
-
-								The value of the =affectedBy= property of this object allows you to declare the name of a single state property of the collection widget instance that affects the enabled state of the button, or an array of the names of multiple state properties of the instance that affect the button's enabled state. The collection widget instance will watch on a change in the value of this property or properties, and will execute the state evaluator function specified in the =stateEvaluator= property each time there is such a change.
-
-								The function you specify in the =stateEvaluator= property should return a boolean value, indicating whether or not the button should be enabled. Your function will not receive any parameters, but it *will* be called as an instance method on the collection instance, so it will be able to access the values of the state properties that affect the button's enabled state by using the =get= instance method. For good examples of how the =addControlButton= method can be used in the creation of your own subclasses, look at the implementation of this class.
+								The value specified for the =enabledWhenSTRorARRAYorFUNC= parameter can be any valid condition expression, as supported by the condition system of the =Uize.Class= base class. For more information, consult the reference for that class and read the section on specifying conditions.
 
 							VARIATION 1
-							.........................................................................................
-							buttonOBJ = myInstance.addControlButton (buttonNameSTR,eventNameSTR,enabledWhenSTRorOBJ);
-							.........................................................................................
+							.................................................................................................
+							buttonOBJ = myInstance.addControlButton (buttonNameSTR,eventNameSTR,enabledWhenSTRorARRAYorFUNC);
+							.................................................................................................
 
 							When the =eventNameSTR= parameter is specified in place of the =clickHandlerFUNC= parameter, then an event of the name specified by the =eventNameSTR= parameter will be fired on the button child widget.
 
@@ -294,7 +270,7 @@ Uize.module ({
 							buttonOBJ = myInstance.addControlButton (buttonNameSTR,eventNameSTR);
 							.........................................................................
 
-							When the =enabledWhenSTRorOBJ= parameter is omitted, then no enabled state management will be performed and you will have to implement your own enabled state management, if desired.
+							When the =enabledWhenSTRorARRAYorFUNC= parameter is omitted, then no enabled state management will be performed and you will have to implement your own enabled state management, if desired.
 
 							NOTES
 							- this is a hook method that can be used by a subclass
