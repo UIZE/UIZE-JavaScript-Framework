@@ -261,13 +261,17 @@ Uize.module ({
 						);
 					},
 
-					moduleNameFromTempPath:function (_tempPath) {
-						var _modulesTempPath = this.tempUrl (this.params.modulesFolder + '/');
+					moduleNameFromPath:function (_path,_pathType) {
+						var _modulesPath = this [_pathType + 'Url'] (this.params.modulesFolder + '/');
 						return (
-							_startsWith (_tempPath,_modulesTempPath)
-								? Uize.Build.Util.moduleNameFromModulePath (_tempPath.slice (_modulesTempPath.length),true)
+							_startsWith (_path,_modulesPath)
+								? Uize.Build.Util.moduleNameFromModulePath (_path.slice (_modulesPath.length),true)
 								: ''
 						);
+					},
+
+					moduleNameFromTempPath:function (_path) {
+						return this.moduleNameFromPath (_path,'temp');
 					},
 
 					getModuleUrl:function (_moduleName,_includeExtension) {

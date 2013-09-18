@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Module Info | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="tool"/>
+	<meta name="description" content="View detailed info for any module, including a full dependency visualization."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.selectorControl {
+			width:740px;
+			margin:auto;
+			padding:10px;
+			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
+			border:1px solid #899;
+			border-radius: 3px;
+		}
+
+		.moduleInfo {
+			margin: 20px auto;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Module Info
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/module-info.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example lets you view vital statistics for any module, including a breakdown of the module's dependencies and how they contribute to the overal load / weight for the module. Simply select a module from the dropdown menu.</p>
+	</div>
+
+	<div class="selectorControl">
+		<div style="float:left; line-height:22px; margin-right:5px;">SELECT A MODULE:</div>
+		<select id="page-selector" style="float:left; margin-right:15px;"></select>
+		<br style="clear:left;"/>
+	</div>
+
+	<div style="height:4px;"></div>
+
+	<div id="page_moduleInfo-shell" class="moduleInfo"></div>
+</div>
+
+<script type="text/javascript">
+
+/*
+	- create in-memory file builder for module direct dependencies
+	- use module direct dependencies file builder in module info file builder
+	- create dedicated file builder for temp compressed js modules
+	- modify file builder for built JS modules to use either temp compressed or temp uncompressed module, depending on config (so, both compressed and uncompressed can co-exist and switching isDebug wouldn't always cause all modules to be rebuilt)
+	- modify in-memory builtsize file builder to always reference size of compressed module under temp
+	- create files builder module for the build process
+	- update module info page to trace dependencies by iteratively loading module info modules
+		- have to update the Uize.Util.Dependencies module to support async method for getting direct dependencies
+*/
+
+Uize.module ({
+	required:[
+		'UizeSite.Page.Example',
+		'UizeSite.ModulesTree',
+		'Uize.Url',
+		'Uize.Data.PathsTree'
+	],
+	builder:function () {
+		'use strict';
+
+		var _selectorPlaceholderText = '-- NO MODULE SELECTED --';
+
+		/*** prepare list of all modules ***/
+			var _modulesList = Uize.Data.PathsTree.toList (UizeSite.ModulesTree ());
+
+		/*** create the example page widget ***/
+			var _page = window.page = UizeSite.Page.Example ();
+
+		/*** wire up the page widget ***/
+			_page.wireUi ();
+
+		/*** handle selection of test ***/
+			function _handleSelection () {
+				var _moduleName = _page.getNodeValue ('selector');
+				if (_moduleName != _selectorPlaceholderText) {
+					Uize.require (
+						'UizeSite.ModuleInfo.' + _moduleName,
+						function (_moduleInfo) {
+							console.log (_moduleInfo ());
+						}
+					);
+				}
+			}
+			_page.wireNode ('selector','change',_handleSelection);
+
+		/*** initialize ***/
+			/*** populate selector ***/
+				Uize.map (
+					[_selectorPlaceholderText].concat (_modulesList),
+					function (_moduleName) {return new Option (_moduleName,_moduleName)},
+					_page.getNode ('selector').options
+				);
+
+			/*** initialize selector, using query param ***/
+				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).module);
+				_handleSelection ();
+	}
+});
+
+</script>
+
+</body>
+</html>
