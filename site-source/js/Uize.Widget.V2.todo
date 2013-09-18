@@ -1,91 +1,127 @@
-Add Feature for Declaring UI Updaters
-	Add a class feature that allows uiUpdates to be declared.
+Implement Next Generation Localization
 
-	............................................
-	uiUpdaters:[
-		{
-			properties:['width','height','scale'],
-			updater:function () {
+	Locale Strings as State Properties
+		All locale strings should be represented as state properties.
+
+		Type for Locale String State Properties
+			The values of these locale string state properties can be either string type (in the simple case) or function type (in the case of strings accepting inputs).
+
+		Binding Locale Strings to HTML
+			Represented as state properties, locale strings can be bound to the HTML using the same binding techniques used for binding other state properties.
+
+			- for locale strings that don't accept inputs, the string state properties can be bound directly to the HTML
+			- for locale strings that accept inputs, derived properties can be created that accept state properties inputs and the locale string itself as determinants, and the value of the derived property can be bound to the HTML
+
+		Namespacing of Locale String State Properties
+			In order to prevent state properties that represent locale strings from competing with other state properties, a naming convention can be used to put them in their own unique namespace.
+
+			For example, all locale string state properties could be put under a namespace prefix such as "$", "str_", "loc_", etc.
+
+		A Single Locale Strings State Property
+			As an alternative to representing individual locale strings as separate state property, one could use a single object state property to represent all locale strings.
+
+			In order for this to be viable, it would be necessary to support more granular changed events and binding of properties of state property object values to HTML.
+
+	The locale State Property
+		There should be a =locale= state property, whose value should affect the loading a locale strings module for the class.
+
+		Locale and Locale Strings Module
+			Whenever the value of the =locale= state property changes, a locale stirngs module should be loaded if necessary (ie. not already loaded), and the values of the locale strings from the module should be used to set the corresponding locale string state properties on the instance.
+
+			The =locale= state property should be a tree-inherited property, so that a locale change on a widget is propagated to all its child widgets, which are set by default to inherit the value of the property from the parent. Optionally, any widget can choose to not inherit the parent's value and explicitly set their own.
+
+		Locale and Theme
+			Whenever the value of the =locale= state property changes, an optional locale-specific theme CSS module can be loaded.
+
+Implement New Binding Features
+	Add Feature for Declaring UI Updaters
+		Add a class feature that allows uiUpdates to be declared.
+
+		............................................
+		uiUpdaters:[
+			{
+				properties:['width','height','scale'],
+				updater:function () {
+				}
+			},
+			function (width,height,scale) {
+
 			}
-		},
-		function (width,height,scale) {
+		]
+		............................................
 
-		}
-	]
-	............................................
+	Add Feature for Declaring Child Widgets
+		It will be interesting to see from real world use cases how declarative this can realistically be made.
 
-Add Feature for Declaring Child Widgets
-	It will be interesting to see from real world use cases how declarative this can realistically be made.
+		It may only be in the truly most simple cases where declaring child widgets at the class level is workable. Often there is associated, instance-specific, programmatic setup and initialization that may be needed.
 
-	It may only be in the truly most simple cases where declaring child widgets at the class level is workable. Often there is associated, instance-specific, programmatic setup and initialization that may be needed.
+	Add Feature for Declaring Child State Bindings
+		A way to declare one or more bindings of state properties to child widget state properties.
 
-Add Feature for Declaring Child State Bindings
-	A way to declare one or more bindings of state properties to child widget state properties.
+		- support one-directional or bi-directional bindings
+		- support optional value transformation (in both directions)
 
-	- support one-directional or bi-directional bindings
-	- support optional value transformation (in both directions)
+	Add Feature for Declaring DOM Event Wirings
+		Provide a way to declare one or more DOM node events that should be wired for the widget.
 
-Add Feature for Declaring DOM Event Wirings
-	Provide a way to declare one or more DOM node events that should be wired for the widget.
-
-	EXAMPLE
-	.................................................
-	eventBindings:{
-		marquee:{click:this.set ({editMode:true})},
-		edit:{
-			blur:function () {
-				this.set ({
-					blinkText,this.getNodeValue ('edit'),
-					editMode:false
-				});
+		EXAMPLE
+		.................................................
+		eventBindings:{
+			marquee:{click:this.set ({editMode:true})},
+			edit:{
+				blur:function () {
+					this.set ({
+						blinkText,this.getNodeValue ('edit'),
+						editMode:false
+					});
+				}
 			}
 		}
-	}
-	.................................................
+		.................................................
 
-Add Feature to Declare Self and Child Event Wirings
-	Provide a way to declare wirings for instance events and child widget events.
+	Add Feature to Declare Self and Child Event Wirings
+		Provide a way to declare wirings for instance events and child widget events.
 
-Add Feature for Declaring UI Wirer
-	Provide a way to declare the UI wirer for a widget.
+	Add Feature for Declaring UI Wirer
+		Provide a way to declare the UI wirer for a widget.
 
-	EXAMPLE
-	..........................
-	Uize.Widget.V2.subclass ({
-		uiWirer:function () {
-			var m = this;
-			// do wiring stuff
-		}
-	});
-	..........................
-
-	When the =wireUi= method of the =Uize.Widget.V2= base class is executed, it will iterate through all the declared UI wirers for the class, from the shallowest base class to the deepest subclass. Adding a way to declare the UI wirer for a widget class would have the following benefits...
-
-	- the code inside the UI wirer function would not need to be wrapped inside a =if (m.isWired)= safety check, since this would be taken care of by the =wireUI= implementation in the base class
-	- the UI wirer function would not need to call the UI wirer for the superclass, since this would be taken care of by the =wireUI= implementation in the base class (an added benefit of the UI wirer declarative approach is that it would enforce the additive subclassing pattern, so every wirer would count on the fact that the wirers for all shallower classes along the inheritance chain have already been executed by the time that the UI wirer for the current subclass is executed)
-
-	Passing the Instance Reference
-		As an enhancement, it might be desirable to pass the instance reference as the first argument, so that it doesn't need to be captured with an additional statement to assign a local variable, as in...
-
+		EXAMPLE
 		..........................
 		Uize.Widget.V2.subclass ({
-			uiWirer:function (m) {
+			uiWirer:function () {
+				var m = this;
 				// do wiring stuff
 			}
 		});
 		..........................
 
-Consolidating Node and Child Bindings
-	Is there an elegant way to consolidate bindings for DOM nodes and child widgets, such that...
+		When the =wireUi= method of the =Uize.Widget.V2= base class is executed, it will iterate through all the declared UI wirers for the class, from the shallowest base class to the deepest subclass. Adding a way to declare the UI wirer for a widget class would have the following benefits...
 
-	- an implementation could escalate from node to child widget without having to rewrite binding logic
-	- two different templates for the same widget could implement something as node or widget, and everything would still work
-	- binding could be written in the same way and in the same sections for either nodes or child widgets
+		- the code inside the UI wirer function would not need to be wrapped inside a =if (m.isWired)= safety check, since this would be taken care of by the =wireUI= implementation in the base class
+		- the UI wirer function would not need to call the UI wirer for the superclass, since this would be taken care of by the =wireUI= implementation in the base class (an added benefit of the UI wirer declarative approach is that it would enforce the additive subclassing pattern, so every wirer would count on the fact that the wirers for all shallower classes along the inheritance chain have already been executed by the time that the UI wirer for the current subclass is executed)
 
-	In order for this to work, node IDs and child widget names would need to share the same namespace, which is not something that has previously been required. Also, certain types of DOM node bindings, such as style bindings and innerHTML bindings would not be application to child widget bindings. Only child widget state property and DOM node attribute bindings could be treated as equivalent.
+		Passing the Instance Reference
+			As an enhancement, it might be desirable to pass the instance reference as the first argument, so that it doesn't need to be captured with an additional statement to assign a local variable, as in...
+
+			..........................
+			Uize.Widget.V2.subclass ({
+				uiWirer:function (m) {
+					// do wiring stuff
+				}
+			});
+			..........................
+
+	Consolidating Node and Child Bindings
+		Is there an elegant way to consolidate bindings for DOM nodes and child widgets, such that...
+
+		- an implementation could escalate from node to child widget without having to rewrite binding logic
+		- two different templates for the same widget could implement something as node or widget, and everything would still work
+		- binding could be written in the same way and in the same sections for either nodes or child widgets
+
+		In order for this to work, node IDs and child widget names would need to share the same namespace, which is not something that has previously been required. Also, certain types of DOM node bindings, such as style bindings and innerHTML bindings would not be application to child widget bindings. Only child widget state property and DOM node attribute bindings could be treated as equivalent.
 
 
-	Child Widget Equivalent of Style Object Bindings
-		Perhaps bindings to the style object could be treated as bindings on the style of a child widget's root node, but this could be quite complicated for rendering of HTML, since the HTML generation for a child widget is opaque to the template for a widget and cannot be easily co-compiled.
+		Child Widget Equivalent of Style Object Bindings
+			Perhaps bindings to the style object could be treated as bindings on the style of a child widget's root node, but this could be quite complicated for rendering of HTML, since the HTML generation for a child widget is opaque to the template for a widget and cannot be easily co-compiled.
 
-		Perhaps a more reasonable approach would be to treat bindings to the style object of a child widget as bindings to a =style= state property that is implemented in the =Uize.Widget.V2= base class and that is bound to the style object of the widget's root node. Then, bindings to a child widget's style object would be propagated through the =style= state property of the child widget to its root node's =style= property.
+			Perhaps a more reasonable approach would be to treat bindings to the style object of a child widget as bindings to a =style= state property that is implemented in the =Uize.Widget.V2= base class and that is bound to the style object of the widget's root node. Then, bindings to a child widget's style object would be propagated through the =style= state property of the child widget to its root node's =style= property.
