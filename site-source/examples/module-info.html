@@ -63,9 +63,10 @@
 	- create dedicated file builder for temp compressed js modules
 	- modify file builder for built JS modules to use either temp compressed or temp uncompressed module, depending on config (so, both compressed and uncompressed can co-exist and switching isDebug wouldn't always cause all modules to be rebuilt)
 	- modify in-memory builtsize file builder to always reference size of compressed module under temp
-	- create files builder module for the build process
 	- update module info page to trace dependencies by iteratively loading module info modules
-		- have to update the Uize.Util.Dependencies module to support async method for getting direct dependencies
+		- must support async method for getting direct dependencies (see how to leverage Uize.Flo)
+		- once completed, maybe put this logic into a Uize.Util.Dependencies.Async module
+	- create files builder module for the build process
 */
 
 Uize.module ({
@@ -73,7 +74,8 @@ Uize.module ({
 		'UizeSite.Page.Example',
 		'UizeSite.ModulesTree',
 		'Uize.Url',
-		'Uize.Data.PathsTree'
+		'Uize.Data.PathsTree',
+		'Uize.Flo'
 	],
 	builder:function () {
 		'use strict';
@@ -89,14 +91,71 @@ Uize.module ({
 		/*** wire up the page widget ***/
 			_page.wireUi ();
 
+		/*** dependency tracing logic (asynchronous) ***/
+			var _moduleInfoLookup = {};
+
+			// NOTE: work out how to feed this back into the Uize.Util.Dependencies module
+			function _traceDependenciesAsync (_rootDependencies,_getDirectDependencies,_excludeDependencies,_callback) {
+				function _resolveDependenciesList (_dependencies) {
+					return (
+						!_dependencies
+							? []
+							: typeof _dependencies == 'string'
+								? _dependencies.split (',')
+								: _dependencies
+					);
+				}
+				var
+					_excludeDependenciesLookup = Uize.lookup (
+						_resolveDependenciesList (_excludeDependencies),
+						_trueFlagValue
+					),
+					_dependenciesNeeded = []
+				;
+				function _traceDependencies (_dependencies,_callback) {
+					Uize.Flo.forEach (
+						function (_next) {_next (_dependencies.sort ())},
+						function (_dependency) {
+							if (_excludeDependenciesLookup [_dependency] != _trueFlagValue) {
+								_excludeDependenciesLookup [_dependency] = _trueFlagValue;
+								_traceDependencies (_getDirectDependencies (_dependency));
+								_dependenciesNeeded.push (_dependency);
+							}
+						}
+					);
+				}
+				_traceDependencies (
+					_resolveDependenciesList (_rootDependencies),
+					function () {_callback (_dependenciesNeeded)}
+				);
+			}
+
+			function _getModuleInfo (_moduleName,_callback) {
+				var _moduleInfo = _moduleInfoLookup [_moduleName];
+				_moduleInfo
+					? _callback (_moduleInfo)
+					: Uize.require (
+						'UizeSite.ModuleInfo.' + _moduleName,
+						function (_moduleInfo) {_callback (_moduleInfoLookup [_moduleName] = _moduleInfo ())}
+					)
+				;
+			}
+
+			function _getModuleDirectDependencies (_moduleName,_callback) {
+				_getModuleInfo (
+					_moduleName,
+					function (_moduleInfo) {_callback (_moduleInfo.directDependencies)}
+				);
+			}
+
 		/*** handle selection of test ***/
 			function _handleSelection () {
 				var _moduleName = _page.getNodeValue ('selector');
 				if (_moduleName != _selectorPlaceholderText) {
-					Uize.require (
-						'UizeSite.ModuleInfo.' + _moduleName,
+					_getModuleInfo (
+						_moduleName,
 						function (_moduleInfo) {
-							console.log (_moduleInfo ());
+							console.log (_moduleInfo);
 						}
 					);
 				}
