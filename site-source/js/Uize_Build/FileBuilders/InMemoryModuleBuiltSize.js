@@ -11,7 +11,7 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 5
+	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 100
 */

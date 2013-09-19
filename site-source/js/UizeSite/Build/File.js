@@ -93,6 +93,7 @@ Uize.module ({
 		'Uize.Build.FileBuilders.SimpleDataPages',
 		'Uize.Build.FileBuilders.InMemoryModuleMetadata',
 		'Uize.Build.FileBuilders.InMemoryModuleBuiltSize',
+		'Uize.Build.FileBuilders.InMemoryModuleDirectDependencies',
 		'UizeSite.Build.FileBuilders.SotuPage'
 	],
 	builder:function (_superclass) {
@@ -141,6 +142,7 @@ Uize.module ({
 						Uize.Build.FileBuilders.SimpleDataPages,
 						Uize.Build.FileBuilders.InMemoryModuleMetadata,
 						Uize.Build.FileBuilders.InMemoryModuleBuiltSize,
+						Uize.Build.FileBuilders.InMemoryModuleDirectDependencies,
 						UizeSite.Build.FileBuilders.SotuPage
 					);
 					_callback ();

@@ -43,7 +43,7 @@ Uize.module ({
 		}
 
 		return Uize.package ({
-			description:'Generated module info modules under temp',
+			description:'Generated module info modules under built',
 			urlMatcher:function (_urlParts) {
 				var _pathname = _urlParts.pathname;
 				return (
@@ -61,7 +61,8 @@ Uize.module ({
 				;
 				return {
 					metaData:m.memoryUrl (_moduleUrl + '.metadata'),
-					builtSize:m.memoryUrl (_moduleUrl + '.builtsize')
+					builtSize:m.memoryUrl (_moduleUrl + '.builtsize'),
+					directDependencies:m.memoryUrl (_moduleUrl + '.deps')
 				};
 			},
 			builder:function (_inputs,_urlParts) {
@@ -69,7 +70,8 @@ Uize.module ({
 					_moduleNameFromBuiltPath (this,_urlParts.pathname),
 					{
 						metaData:this.readFile ({path:_inputs.metaData}),
-						builtSize:this.readFile ({path:_inputs.builtSize})
+						builtSize:this.readFile ({path:_inputs.builtSize}),
+						directDependencies:this.readFile ({path:_inputs.directDependencies})
 					}
 				);
 			}

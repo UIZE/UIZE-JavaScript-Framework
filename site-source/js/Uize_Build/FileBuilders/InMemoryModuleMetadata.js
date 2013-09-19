@@ -11,14 +11,14 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 5
+	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Build.FileBuilders.InMemoryModuleMetadata= module defines a file builder for the in-memory metadata object for each UIZE module.
+		The =Uize.Build.FileBuilders.InMemoryModuleMetadata= module defines a file builder for the in-memory metadata object for each JavaScript module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

@@ -21,6 +21,12 @@
 		.moduleInfo {
 			margin: 20px auto;
 		}
+
+		.moduleInfoItem {
+			width: 100%;
+			border: 1px solid #ccc;
+			text-align: center;
+		}
 	</style>
 </head>
 
@@ -52,21 +58,58 @@
 
 	<div style="height:4px;"></div>
 
-	<div id="page_moduleInfo-shell" class="moduleInfo"></div>
+	<div id="page-moduleTotalSize"></div>
+	<div id="page-moduleInfo" class="moduleInfo"></div>
 </div>
 
 <script type="text/javascript">
 
 /*
-	- create in-memory file builder for module direct dependencies
-	- use module direct dependencies file builder in module info file builder
+	- interesting top level summary to show
+		- name
+		- description
+		- type of module
+		- meta data (as shown in SOTU table)
+
+		- total dependencies (direct and indirect, excluding module)
+		- total number of direct dependencies (excluding module)
+		- total number of indirect dependencies (excluding module)
+		- sizes
+			- total compressed size of module and all dependencies
+			- compressed size of module alone (and percentage of total)
+			- total compressed size of all dependencies (and percentage of total)
+		- how many modules throughout the codebase rely on this module (requires scanning entire codebase)
+		- link to documentation
+	- for any module in the dependency list
+		- same information as shown in top level summary for module, but in a tooltip
+		- linkable to switch the currently selected module
+	- questions to answer
+		- if I add or remove direct dependencies to a module...
+			- how is the overal module dependency list and size affected
+			- how is the size of other dependent modules affected (as a percentage change on their current total size)
+		- if I change the size of a module...
+			- how is the size of other dependent modules affected (as a percentage change on their current total size)
+		- basically, provide information on consquences on the codebase to making typical kinds of changes
+			- like optimizing code of a module
+			- like adding or removing dependencies
+		- what's the impact of making a change?
+			- taking into account the modules that are affected and how important they are / how in use they are by other modules
+		- for any module in the dependency list, which modules are using it directly
+	- list of all dependencies, including self
+		- showing the following fields (sortable on any of them)
+			- module name
+			- dependency index
+			- dependency level
+			- direct dependencies
+			- size (compressed)
+			- size (compressed), as a percent of total
+			- total size contribution (size of self plus all non-shared dependencies)
+			- used by how many other modules in this dependency graph
+			- size of non-shared dependencies in this dependency graph
 	- create dedicated file builder for temp compressed js modules
 	- modify file builder for built JS modules to use either temp compressed or temp uncompressed module, depending on config (so, both compressed and uncompressed can co-exist and switching isDebug wouldn't always cause all modules to be rebuilt)
 	- modify in-memory builtsize file builder to always reference size of compressed module under temp
-	- update module info page to trace dependencies by iteratively loading module info modules
-		- must support async method for getting direct dependencies (see how to leverage Uize.Flo)
-		- once completed, maybe put this logic into a Uize.Util.Dependencies.Async module
-	- create files builder module for the build process
+	- create files builder module for the build process to build all the module info modules
 */
 
 Uize.module ({
@@ -75,7 +118,7 @@ Uize.module ({
 		'UizeSite.ModulesTree',
 		'Uize.Url',
 		'Uize.Data.PathsTree',
-		'Uize.Flo'
+		'Uize.Util.Dependencies.Async'
 	],
 	builder:function () {
 		'use strict';
@@ -92,43 +135,10 @@ Uize.module ({
 			_page.wireUi ();
 
 		/*** dependency tracing logic (asynchronous) ***/
-			var _moduleInfoLookup = {};
-
-			// NOTE: work out how to feed this back into the Uize.Util.Dependencies module
-			function _traceDependenciesAsync (_rootDependencies,_getDirectDependencies,_excludeDependencies,_callback) {
-				function _resolveDependenciesList (_dependencies) {
-					return (
-						!_dependencies
-							? []
-							: typeof _dependencies == 'string'
-								? _dependencies.split (',')
-								: _dependencies
-					);
-				}
-				var
-					_excludeDependenciesLookup = Uize.lookup (
-						_resolveDependenciesList (_excludeDependencies),
-						_trueFlagValue
-					),
-					_dependenciesNeeded = []
-				;
-				function _traceDependencies (_dependencies,_callback) {
-					Uize.Flo.forEach (
-						function (_next) {_next (_dependencies.sort ())},
-						function (_dependency) {
-							if (_excludeDependenciesLookup [_dependency] != _trueFlagValue) {
-								_excludeDependenciesLookup [_dependency] = _trueFlagValue;
-								_traceDependencies (_getDirectDependencies (_dependency));
-								_dependenciesNeeded.push (_dependency);
-							}
-						}
-					);
-				}
-				_traceDependencies (
-					_resolveDependenciesList (_rootDependencies),
-					function () {_callback (_dependenciesNeeded)}
-				);
-			}
+			var
+				_moduleInfoLookup = {},
+				_trueFlagValue = {}
+			;
 
 			function _getModuleInfo (_moduleName,_callback) {
 				var _moduleInfo = _moduleInfoLookup [_moduleName];
@@ -141,21 +151,106 @@ Uize.module ({
 				;
 			}
 
-			function _getModuleDirectDependencies (_moduleName,_callback) {
-				_getModuleInfo (
-					_moduleName,
-					function (_moduleInfo) {_callback (_moduleInfo.directDependencies)}
+		/*** handle selection of test ***/
+			function _generateDependencyBreakdownTable (_moduleName,_dependencies) {
+				var
+					_htmlChunks = [
+						'<table border="1">',
+							'<tr>',
+								'<td>Segment</td>',
+								'<td>Count</td>',
+								'<td>Size (bytes)</td>',
+								'<td>Size (%)</td>',
+							'</tr>'
+					],
+					_totalSize = 0,
+					_directDependenciesLookup = Uize.lookup (_moduleInfoLookup [_moduleName].directDependencies)
+				;
+				Uize.forEach (
+					_dependencies,
+					function (_moduleName) {_totalSize += _moduleInfoLookup [_moduleName].builtSize}
 				);
+				function _addDependenciesSegment (_segmentName,_segmentMatcher) {
+					var
+						_count = 0,
+						_size = 0
+					;
+					Uize.forEach (
+						_dependencies,
+						function (_moduleName) {
+							if (_segmentMatcher (_moduleName)) {
+								_count++;
+								_size += _moduleInfoLookup [_moduleName].builtSize;
+							}
+						}
+					);
+					_htmlChunks.push (
+						'<tr>',
+							'<td>' + _segmentName + '</td>',
+							'<td style="text-align: right">' + _count + '</td>',
+							'<td style="text-align: right">' + _size + '</td>',
+							'<td style="text-align: right">' + (_size / _totalSize * 100).toFixed (2) + ' %</td>',
+						'</tr>'
+					);
+				}
+				_addDependenciesSegment ('Module',function (_dependency) {return _dependency == _moduleName});
+				_addDependenciesSegment (
+					'Direct Dependencies',
+					function (_dependency) {return _dependency != _moduleName && _directDependenciesLookup [_dependency]}
+				);
+				_addDependenciesSegment (
+					'Indirect Dependencies',
+					function (_dependency) {return _dependency != _moduleName && !_directDependenciesLookup [_dependency]}
+				);
+				_addDependenciesSegment ('Total',Uize.returnTrue);
+				_htmlChunks.push (
+					'</table>'
+				);
+				return _htmlChunks.join ('');
 			}
 
-		/*** handle selection of test ***/
 			function _handleSelection () {
 				var _moduleName = _page.getNodeValue ('selector');
 				if (_moduleName != _selectorPlaceholderText) {
-					_getModuleInfo (
+					Uize.Util.Dependencies.Async.traceDependencies (
 						_moduleName,
-						function (_moduleInfo) {
-							console.log (_moduleInfo);
+						function (_moduleName,_callback) {
+							_getModuleInfo (
+								_moduleName,
+								function (_moduleInfo) {_callback (_moduleInfo.directDependencies)}
+							);
+						},
+						[],
+						function (_dependencies) {
+							var
+								_totalSize = 0,
+								_htmlChunks = [],
+								_minModuleSize = Infinity,
+								_maxModuleSize = -Infinity,
+								_totalSize = 0
+							;
+							Uize.forEach (
+								_dependencies,
+								function (_moduleName) {
+									var _moduleSize = _moduleInfoLookup [_moduleName].builtSize;
+									_totalSize += _moduleSize;
+									_minModuleSize = Math.min (_minModuleSize,_moduleSize);
+									_maxModuleSize = Math.max (_minModuleSize,_moduleSize);
+								}
+							);
+							Uize.forEach (
+								_dependencies,
+								function (_moduleName) {
+									var _moduleSize = _moduleInfoLookup [_moduleName].builtSize;
+									_htmlChunks.unshift (
+										'<div class="moduleInfoItem" style="height: ' + Math.max (20,_moduleSize / 100) + 'px;">' +
+											_moduleName + ' (' + _moduleSize + ' bytes)' +
+										'</div>'
+									);
+								}
+							);
+							page.setNodeInnerHtml ('moduleTotalSize',_generateDependencyBreakdownTable (_moduleName,_dependencies));
+							page.setNodeInnerHtml ('moduleInfo',_htmlChunks.join (''));
 						}
 					);
 				}
