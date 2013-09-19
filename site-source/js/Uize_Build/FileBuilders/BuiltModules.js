@@ -27,125 +27,17 @@
 
 Uize.module ({
 	name:'Uize.Build.FileBuilders.BuiltModules',
-	required:[
-		'Uize.Build.ModuleInfo',
-		'Uize.Util.Oop',
-		'Uize.Build.Scruncher',
-		'Uize.Date',
-		'Uize.Build.Util'
-	],
 	builder:function () {
-		var
-			_scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-			_endsWithDotJsRegExp = /\.js$/,
-			_moduleInheritanceDepthLookup = {
-				Uize:0 // pre-cache this in order to prevent loading and re-evaluating the Uize base module
-			}
-		;
+		var _dotJsRegExp = /\.js$/;
 
 		return Uize.package ({
-			description:'Built JavaScript module',
+			description:'Built JavaScript modules',
 			urlMatcher:function (_urlParts) {
 				return _urlParts.fileType == 'js' && this.isBuiltUrl (_urlParts.folderPath);
 			},
 			builderInputs:function (_urlParts) {
-				var
-					m = this,
-					_jsTemp = m.tempUrlFromBuiltUrl (_urlParts.pathname),
-					_builderInputs = {jsTemp:_jsTemp},
-					_params = m.params
-				;
-				if (!_params.isDev) {
-					var
-						_moduleName = m.moduleNameFromTempPath (_jsTemp),
-						_scrunchedHeadComments = _params.scrunchedHeadComments,
-						_scrunchedHeadCommentModule =
-							_scrunchedHeadComments &&
-							_scrunchedHeadComments [Uize.Build.Util.getModuleNamespace (_moduleName)]
-					;
-					if (_scrunchedHeadCommentModule)
-						_builderInputs.scrunchedHeadComment = m.memoryUrl (
-							_params.modulesFolder + '/' + Uize.modulePathResolver (_scrunchedHeadCommentModule) + '.js.jst'
-						)
-					;
-				}
-				return _builderInputs;
-			},
-			builder:function (_inputs) {
-				var
-					m = this,
-					_jsTemp = _inputs.jsTemp,
-					_result = m.readFile ({path:_jsTemp})
-				;
-				function _getModuleInheritanceDepth (_moduleName,_moduleCode) {
-					if (_moduleName in _moduleInheritanceDepthLookup) {
-						return _moduleInheritanceDepthLookup [_moduleName];
-					} else {
-						var
-							_inheritanceDepth = 0,
-							_superclassKnown
-						;
-						if (!_moduleCode) {
-							var _moduleUrl = m.getModuleUrl (_moduleName);
-							m.buildFile (Uize.copy (m.params,{url:_moduleUrl}));
-							_moduleCode = m.readFile ({path:m.builtUrl (_moduleUrl)});
-						}
-						var _moduleDefinition = Uize.Build.ModuleInfo.getDefinitionFromCode (_moduleCode);
-						if (_moduleDefinition && (_superclassKnown = 'superclass' in _moduleDefinition)) {
-							var _superclass = _moduleDefinition.superclass;
-							if (_superclass)
-								_inheritanceDepth = _getModuleInheritanceDepth (_superclass) + 1
-							;
-						}
-						_superclassKnown ||
-							Uize.require (
-								_moduleName,
-								function (_module) {
-									_inheritanceDepth = Uize.Util.Oop.getInheritanceChain (_module).length;
-								}
-							)
-						;
-						_moduleInheritanceDepthLookup [_moduleName] = _inheritanceDepth;
-						return _moduleInheritanceDepthLookup [_moduleName] = _inheritanceDepth;
-					}
-				}
-				if (!m.params.isDev) {
-					var
-						_moduleName = m.moduleNameFromTempPath (_jsTemp),
-						_scruncherSettings = {},
-						_scrunchedHeadComment = _inputs.scrunchedHeadComment,
-						_keepHeadComment = _scrunchedHeadComment == undefined
-					;
-					if (!_keepHeadComment)
-						_scruncherSettings.KEEPHEADCOMMENT = 'FALSE'
-					;
-					if (_moduleName) {
-						var _inheritanceDepth = _getModuleInheritanceDepth (_moduleName,_result);
-						_scruncherSettings.MAPPINGS =
-							'=' +
-							(_inheritanceDepth ? _scruncherPrefixChars.charAt (_inheritanceDepth - 1) : '') +
-							',' + _moduleName.replace (/\./g,'_')
-						;
-					}
-					var _scruncherResult = Uize.Build.Scruncher.scrunch (_result,_scruncherSettings);
-					_result =
-						(
-							_keepHeadComment
-								? ''
-								: m.readFile ({path:_scrunchedHeadComment}) ({
-									buildDate:Uize.Date.toIso8601 (),
-									moduleName:_moduleName
-								})
-						) + _scruncherResult.scrunchedCode
-					;
-					/*
-					return {
-						outputText:_result,
-						logDetails:Uize.String.Lines.indent (_scruncherResult.report,2) + '\n'
-					};
-					*/
-				}
-				return _result;
+				var _jsTemp = this.tempUrlFromBuiltUrl (_urlParts.pathname);
+				return {jsModule:this.params.isDev ? _jsTemp : _jsTemp.replace (_dotJsRegExp,'.min.js')};
 			}
 		});
 	}

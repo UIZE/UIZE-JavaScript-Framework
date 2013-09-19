@@ -39,7 +39,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				return {
 					builtModule:
-						this.builtUrlFromMemoryUrl (_urlParts.pathname).replace (_moduleBuiltSizeExtensionRegExp,'.js')
+						this.tempUrlFromMemoryUrl (_urlParts.pathname).replace (_moduleBuiltSizeExtensionRegExp,'.min.js')
 				};
 			},
 			builder:function (_inputs) {

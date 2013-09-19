@@ -106,9 +106,6 @@
 			- total size contribution (size of self plus all non-shared dependencies)
 			- used by how many other modules in this dependency graph
 			- size of non-shared dependencies in this dependency graph
-	- create dedicated file builder for temp compressed js modules
-	- modify file builder for built JS modules to use either temp compressed or temp uncompressed module, depending on config (so, both compressed and uncompressed can co-exist and switching isDebug wouldn't always cause all modules to be rebuilt)
-	- modify in-memory builtsize file builder to always reference size of compressed module under temp
 	- create files builder module for the build process to build all the module info modules
 */
 
