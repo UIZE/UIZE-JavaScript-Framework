@@ -33,17 +33,21 @@ Uize.module ({
 		/*** General Variables ***/
 			var _trueFlagValue = {};
 
+		/*** Utility Functions ***/
+			function _resolveDependenciesList (_dependencies) {
+				return (
+					!_dependencies
+						? []
+						: typeof _dependencies == 'string'
+							? _dependencies.split (',')
+							: _dependencies
+				);
+			}
+
 		return Uize.package ({
+			resolveDependenciesList:_resolveDependenciesList,
+
 			traceDependencies:function (_rootDependencies,_getDirectDependencies,_excludeDependencies) {
-				function _resolveDependenciesList (_dependencies) {
-					return (
-						!_dependencies
-							? []
-							: typeof _dependencies == 'string'
-								? _dependencies.split (',')
-								: _dependencies
-					);
-				}
 				var
 					_excludeDependenciesLookup = Uize.lookup (
 						_resolveDependenciesList (_excludeDependencies),
