@@ -240,8 +240,8 @@ Uize.module ({
 					divider1:_treeListDividerQuery,
 
 					/*** module queries ***/
-						builtModulesTree:{
-							_title:'All built modules, as a tree',
+						loadedModulesTree:{
+							_title:'All loaded modules, as a tree',
 							_itemsGenerator:function () {
 								var m = this;
 								function _itemsFromModulesTree (_namespace,_modulesTree,_level) {
@@ -261,13 +261,13 @@ Uize.module ({
 								}
 								return _itemsFromModulesTree (
 									'',
-									Uize.Data.PathsTree.fromList (_getBuiltModules (m),'.'),
+									Uize.Data.PathsTree.fromList (_getLoadedModules (m),'.'),
 									0
 								);
 							}
 						},
-						builtModulesList:{
-							_title:'All built modules (listed in build order)',
+						loadedModulesList:{
+							_title:'All loaded modules (listed in build order)',
 							_itemsGenerator:function () {return _getMatchingModulesTreeListItems (this)}
 						},
 						widgetClasses:{
@@ -289,7 +289,7 @@ Uize.module ({
 							}
 						},
 						nonWidgetClasses:{
-							_title:'All non-widget built modules',
+							_title:'All non-widget loaded modules',
 							_itemsGenerator:function () {
 								var m = this;
 								return _getMatchingModulesTreeListItems (
@@ -299,11 +299,11 @@ Uize.module ({
 							}
 						},
 						uizeModules:{
-							_title:'All UIZE built modules',
+							_title:'All UIZE loaded modules',
 							_itemsGenerator:function () {return _getMatchingModulesTreeListItems (this,_isUizeModule)}
 						},
 						nonUizeModules:{
-							_title:'All non-UIZE built modules',
+							_title:'All non-UIZE loaded modules',
 							_itemsGenerator:function () {
 								return _getMatchingModulesTreeListItems (
 									this,
@@ -564,7 +564,7 @@ Uize.module ({
 				);
 			}
 
-			function _getBuiltModules (m) {
+			function _getLoadedModules (m) {
 				var _openerUize = m._window.Uize;
 				return (
 					(_openerUize.getModulesBuilt && _openerUize.getModulesBuilt ()) ||
@@ -715,16 +715,16 @@ Uize.module ({
 			function _getMatchingModulesTreeListItems (m,_moduleMatcher) {
 				var
 					_items = [],
-					_builtModules = _getBuiltModules (m)
+					_loadedModules = _getLoadedModules (m)
 				;
 				Uize.forEach (
-					_moduleMatcher ? _builtModules.sort () : _builtModules,
-					function (_builtModule) {
-						_builtModule && (!_moduleMatcher || _moduleMatcher (_builtModule)) &&
+					_moduleMatcher ? _loadedModules.sort () : _loadedModules,
+					function (_module) {
+						_module && (!_moduleMatcher || _moduleMatcher (_module)) &&
 							_items.push ({
-								title:_builtModule,
+								title:_module,
 								link:_treeItemLink,
-								objectPath:_builtModule
+								objectPath:_module
 							})
 						;
 					}
