@@ -1,4 +1,10 @@
-<%@ required ('Uize.Data') %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@
+	required (
+		'Uize.Data',
+		'Uize.Color',
+		'Uize.Color.xUtil'
+	)
+%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>SOTU (State of the UIZE) | UIZE JavaScript Framework</title>
@@ -12,63 +18,39 @@
 	<style type="text/css">
 		/*** column-specific table cell decorations ***/
 			table.data tr.heading td {
-				padding-left:5px;
-				padding-right:5px;
+				padding-left: 5px;
+				padding-right: 5px;
 			}
 			table.data td.moduleName {
-				text-align:left;
-				font-size:11px;
+				text-align: left;
+				font-size: 11px;
 			}
 			table.data td.moduleName a {
-				border:none;
+				border: none;
 			}
 			table.data td.moduleType {
-				font-size:11px;
+				font-size: 11px;
 			}
 			table.data td.numericalValue {
-				text-align:right;
-				font-size:10px;
-				letter-spacing:1px;
+				text-align: right;
+				font-size: 12px;
+				letter-spacing: 1px;
 			}
 
 		/*** bar ***/
 			.bar {
-				position:relative;
-				width:100%;
-				height:6px;
-				background:#0a0;
+				position: relative;
+				width: 100%;
+				height: 10px;
+				background: #000;
 			}
-			.bar .barFull {
-				position:absolute;
-				left:0;
-				top:0;
-				background:#c52;
-				height:100%;
+			.bar .barColor {
+				position: absolute;
+				left: 1px;
+				top: 1px;
+				right: 1px;
+				bottom: 1px;
 			}
-
-			/*** high numbers good bars ***/
-				.highNumbersGood {
-					background:#c52;
-				}
-				.highNumbersGood .barFull {
-					background:#0a0;
-				}
-
-			/*** high numbers neutral bars ***/
-				.highNumbersNeutral {
-					background:#fff;
-				}
-				.highNumbersNeutral .barFull {
-					background:#90f;
-				}
-
-			/*** high numbers importance bars ***/
-				.highNumbersImportance {
-					background:#fff;
-				}
-				.highNumbersImportance .barFull {
-					background:#fc0;
-				}
 	</style>
 </head>
 
@@ -110,8 +92,8 @@
 		<td>Nested<br/>Sub-<br/>mod.</td>
 	</tr>
 <%@
-	startBlock ('bar','width,className')
-%><div class="bar <%= className %>"><div class="barFull" style="width:<%= Math.round (width) %>%;"></div></div><%@
+	startBlock ('bar','percent,colorMin,colorMax')
+%><div class="bar"><div class="barColor" style="background: <%= Uize.Color.blend (colorMin,colorMax,percent / 100,'#hex') %>;"></div></div><%@
 	endBlock ()
 %><%
 	var modules = input.modules;
@@ -151,31 +133,35 @@
 			<%= module.type %>
 		</td>
 		<td class="numericalValue">
-			<%= bar (module.importance * 10,'highNumbersImportance') %>
+			<%= bar (module.importance * 10,{hue:200,saturation:100,lightness:0},{hue:200,saturation:100,lightness:75}) %>
 			<%= module.importance %>
 		</td>
 		<td class="numericalValue">
-			<%= bar (module.codeCompleteness,'highNumbersGood') %><%= module.codeCompleteness.toFixed (1) %>%
+			<%= bar (module.codeCompleteness,{hue:0,saturation:100,lightness:50},{hue:120,saturation:100,lightness:50}) %>
+			<%= module.codeCompleteness.toFixed (1) %>
 		</td>
 		<td class="numericalValue">
-			<%= bar (module.docCompleteness,'highNumbersGood') %><%= module.docCompleteness.toFixed (1) %>%
+			<%= bar (module.docCompleteness,{hue:0,saturation:100,lightness:50},{hue:120,saturation:100,lightness:50}) %>
+			<%= module.docCompleteness.toFixed (1) %>%
 		</td>
 		<td class="numericalValue">
-			<%= bar (module.testCompleteness,'highNumbersGood') %><%= module.testCompleteness.toFixed (1) %>%
+			<%= bar (module.testCompleteness,{hue:0,saturation:100,lightness:50},{hue:120,saturation:100,lightness:50}) %>
+			<%= module.testCompleteness.toFixed (1) %>%
 		</td>
 		<td class="numericalValue">
-			<%= bar (getPercentThroughRange (module.examples,examplesMinMax),'highNumbersGood') %><%= module.examples %>
+			<%= bar (getPercentThroughRange (module.examples,examplesMinMax),{hue:0,saturation:100,lightness:50},{hue:120,saturation:100,lightness:50}) %>
+			<%= module.examples %>
 		</td>
 		<td class="numericalValue">
-			<%= bar (getPercentThroughRange (module.scrunchedFileSize,scrunchedFileSizeMinMax)) %>
+			<%= bar (getPercentThroughRange (module.scrunchedFileSize,scrunchedFileSizeMinMax),{hue:120,saturation:100,lightness:50},{hue:0,saturation:100,lightness:50}) %>
 			<%= module.scrunchedFileSize %>
 		</td>
 		<td class="numericalValue">
-			<%= bar (getPercentThroughRange (module.directSubmodules,directSubmodulesMinMax),'highNumbersImportance') %>
+			<%= bar (getPercentThroughRange (module.directSubmodules,directSubmodulesMinMax),{hue:200,saturation:100,lightness:0},{hue:200,saturation:100,lightness:75}) %>
 			<%= module.directSubmodules %>
 		</td>
 		<td class="numericalValue">
-			<%= bar (getPercentThroughRange (module.nestedSubmodules,nestedSubmodulesMinMax),'highNumbersImportance') %>
+			<%= bar (getPercentThroughRange (module.nestedSubmodules,nestedSubmodulesMinMax),{hue:200,saturation:100,lightness:0},{hue:200,saturation:100,lightness:75}) %>
 			<%= module.nestedSubmodules %>
 		</td>
 	</tr>

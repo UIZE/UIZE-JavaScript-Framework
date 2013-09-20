@@ -1,0 +1,54 @@
+<%@
+	required (
+		'Uize.Data',
+		'Uize.Color',
+		'Uize.Color.xUtil'
+	)
+%><%
+	var
+		_input = input,
+		_columns = _input.columns,
+		_rows = _input.rows,
+		_columnMinMax = []
+	;
+
+	Uize.forEach (
+		_columns,
+		function (_column,_columnNo) {
+			var _columnValues = Uize.Data.getColumn (_rows,_columnNo);
+			if (!('minValue' in _column)) _column.minValue = Uize.min (_columnValues);
+			if (!('maxValue' in _column)) _column.maxValue = Uize.max (_columnValues);
+		}
+	);
+%><table id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
+	<tr class="<%= m.cssClass ('title') %>">
+		<td colspan="<%= _columns.length %>"><%. title %></td>
+	</tr>
+	<tr class="<%= m.cssClass ('heading') %>">
+		<%= Uize.map (_columns,'"<td>" + value.title + "</td>"').join ('') %>
+	</tr>
+	<% Uize.forEach (
+		_rows,
+		function (_row) {
+			%><tr><%
+				Uize.forEach (
+					_row,
+					function (_columnValue,_columnNo) {
+						var _column = _columns [_columnNo];
+						%><td class="<%= m.cssClass (_columnNo ? 'numericalValue' : 'rowName') %>">
+							<% if (_columnNo) { %>
+							<div class="<%= m.cssClass ('bar') %>">
+								<% var _fraction = (_columnValue - _column.minValue) / (_column.maxValue - _column.minValue); %>
+								<div class="<%= m.cssClass ('barColor') %>" style="background: <%= Uize.Color.blend (_column.minColor,_column.maxColor,_fraction,'#hex') %>;">
+									<div class="<%= m.cssClass ('barFull') %>" style="width: <%= (1 - _fraction) * 100 %>%;"></div>
+								</div>
+							</div>
+							<% } %>
+							<%= _columnValue %>
+						</td><%
+					}
+				);
+			%></tr><%
+		}
+	); %>
+</table>

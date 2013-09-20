@@ -17,16 +17,6 @@
 			border:1px solid #899;
 			border-radius: 3px;
 		}
-
-		.moduleInfo {
-			margin: 20px auto;
-		}
-
-		.moduleInfoItem {
-			width: 100%;
-			border: 1px solid #ccc;
-			text-align: center;
-		}
 	</style>
 </head>
 
@@ -59,7 +49,7 @@
 	<div style="height:4px;"></div>
 
 	<div id="page-moduleTotalSize"></div>
-	<div id="page-moduleInfo" class="moduleInfo"></div>
+	<div id="page_moduleStatsTable-shell"></div>
 </div>
 
 <script type="text/javascript">
@@ -97,14 +87,10 @@
 		- for any module in the dependency list, which modules are using it directly
 	- list of all dependencies, including self
 		- showing the following fields (sortable on any of them)
-			- module name
-			- dependency index
-			- dependency level
-			- direct dependencies
-			- size (compressed)
 			- size (compressed), as a percent of total
+			- dependency level (0 (self), 1 (direct dependencies), 2 (the rest))
 			- total size contribution (size of self plus all non-shared dependencies)
-			- used by how many other modules in this dependency graph
+			- local sharedness (used by how many other modules in this dependency graph)
 			- size of non-shared dependencies in this dependency graph
 	- create files builder module for the build process to build all the module info modules
 */
@@ -115,7 +101,8 @@ Uize.module ({
 		'UizeSite.ModulesTree',
 		'Uize.Url',
 		'Uize.Data.PathsTree',
-		'Uize.Util.Dependencies.Async'
+		'Uize.Util.Dependencies.Async',
+		'Uize.Widgets.SimpleStatsTable.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -248,6 +235,46 @@ Uize.module ({
 							);
 							page.setNodeInnerHtml ('moduleTotalSize',_generateDependencyBreakdownTable (_moduleName,_dependencies));
 							page.setNodeInnerHtml ('moduleInfo',_htmlChunks.join (''));
+							var _moduleStatsTable = page.children.moduleStatsTable;
+							_moduleStatsTable
+								? _moduleStatsTable.removeUi ()
+								: (_moduleStatsTable = page.addChild ('moduleStatsTable',Uize.Widgets.SimpleStatsTable.Widget))
+							;
+							_moduleStatsTable.set ({
+								title:'Dependencies for The Selected Module',
+								columns:[
+									{
+										title:'Module Name'
+									},
+									{
+										title:'Dependency Index',
+										minColor:'hsl(200,100,0)',
+										maxColor:'hsl(200,100,75)'
+									},
+									{
+										title:'Direct Dependencies',
+										minColor:'hsl(120,100,50)',
+										maxColor:'hsl(0,100,50)'
+									},
+									{
+										title:'Compressed Size',
+										minColor:'hsl(120,100,50)',
+										maxColor:'hsl(0,100,50)'
+									}
+								],
+								rows:Uize.map (
+									_dependencies,
+									function (_moduleName,_dependencyIndex) {
+										return [
+											_moduleName,
+											_dependencyIndex,
+											_moduleInfoLookup [_moduleName].directDependencies.length,
+											_moduleInfoLookup [_moduleName].builtSize
+										];
+									}
+								).reverse ()
+							});
+							_moduleStatsTable.insertUi ();
 						}
 					);
 				}
