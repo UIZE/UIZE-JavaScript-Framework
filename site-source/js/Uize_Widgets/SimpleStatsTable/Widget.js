@@ -44,6 +44,7 @@ Uize.module ({
 	name:'Uize.Widgets.SimpleStatsTable.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
+		'Uize.Widget.TableSort',
 		'Uize.Widgets.SimpleStatsTable.Html',
 		'Uize.Widgets.SimpleStatsTable.Css'
 	],
@@ -51,6 +52,10 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
+			omegastructor:function () {
+				this.addChild ('tableSorter',Uize.Widget.TableSort,{idPrefixConstruction:'same as parent'});
+			},
+
 			set:{
 				html:Uize.Widgets.SimpleStatsTable.Html
 			},

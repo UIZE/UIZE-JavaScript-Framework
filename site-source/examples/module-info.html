@@ -238,7 +238,19 @@ Uize.module ({
 							var _moduleStatsTable = page.children.moduleStatsTable;
 							_moduleStatsTable
 								? _moduleStatsTable.removeUi ()
-								: (_moduleStatsTable = page.addChild ('moduleStatsTable',Uize.Widgets.SimpleStatsTable.Widget))
+								: (
+									_moduleStatsTable = page.addChild (
+										'moduleStatsTable',
+										Uize.Widgets.SimpleStatsTable.Widget,
+										{
+											children:{
+												tableSorter:{
+													dominantSortOrderByColumn:['ascending','descending','descending','descending']
+												}
+											}
+										}
+									)
+								)
 							;
 							_moduleStatsTable.set ({
 								title:'Dependencies for The Selected Module',
