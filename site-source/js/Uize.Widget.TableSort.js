@@ -143,7 +143,8 @@ Uize.module ({
 							_rowsLength = _rows.length,
 							_columnValues = [],
 							_columnSortMap = [],
-							_columnIsNumber = _true,
+							_columnHasNumerals = _true,
+							_columnIsPureNumber = _true,
 							_columnIsDate = _true
 						;
 						m._ascendingOrder = _isColumnNextSortOrderAscending (m,_columnNo);
@@ -157,13 +158,15 @@ Uize.module ({
 									if (_cells.length == m._headings.length) {
 										var _cellText = _Uize_Node.getText (_cells [_columnNo]);
 										if (_cellText) {
-											_columnIsDate = _columnIsDate && !isNaN (+new Date (_cellText));
-											_columnIsNumber = _columnIsNumber && /\d/.test (_cellText);
+											_columnIsDate = _columnIsDate && !Uize.isNaN (+new Date (_cellText));
+											_columnIsPureNumber = _columnIsPureNumber && !Uize.isNaN (+_cellText);
+											_columnHasNumerals = _columnHasNumerals && /\d/.test (_cellText);
 											_columnValues [_rowNo] = _cellText;
 										}
 									}
 								}
 							}
+							_columnIsDate = _columnIsDate && !_columnIsPureNumber;
 
 						/*** sort the sort map ***/
 							var
@@ -171,21 +174,27 @@ Uize.module ({
 									return _valueA == _valueB ? 0 : (_valueA < _valueB ? -1 : 1);
 								},
 								_compareNumbers = _compareGeneral, // for now, at least
-								_columnIsDateOrNumber = _columnIsDate || _columnIsNumber,
+								_columnIsDateOrNumber = _columnIsDate || _columnHasNumerals,
 								_comparisonFunction = _columnIsDateOrNumber ? _compareNumbers : _compareGeneral,
 								_incorrectComparisonFunctionResult = m._ascendingOrder ? 1 : -1,
 								_skipRow = function (_sortMapIndex) {
 									return _columnValues [_columnSortMap [_sortMapIndex]] === undefined;
-								}
+								},
+								_columnValue
 							;
 							/*** for number and date columns, convert text values to numbers for more efficient sort ***/
 								if (_columnIsDateOrNumber) {
 									for (var _rowNo = -1; ++_rowNo < _rowsLength;) {
-										if (!_skipRow (_rowNo))
-											_columnValues [_rowNo] = _columnIsDate
-												? +new Date (_columnValues [_rowNo])
-												: +_columnValues [_rowNo].replace (/[^\d\.]/g,'')
-										;
+										if (!_skipRow (_rowNo)) {
+											_columnValue = _columnValues [_rowNo];
+											_columnValues [_rowNo] = +(
+												_columnIsPureNumber
+													? _columnValue
+													: _columnIsDate
+														? new Date (_columnValue)
+														: _columnValue.replace (/[^\d\.]/g,'')
+											);
+										}
 									}
 								}
 							/* NOTES:
