@@ -1,0 +1,15 @@
+/*** column heading highlight states ***/
+	.`` tr td.`headingOver`, .`` tr td.`headingSelected` {
+		color: #000;
+		cursor: pointer;
+	}
+	.`` tr td.`headingOver` {
+		background: #ddd;
+	}
+	.`` tr td.`headingSelected` {
+		background: #ccc;
+	}
+	.`` tr.`rowOver` td {
+		background: #eee;
+	}
+

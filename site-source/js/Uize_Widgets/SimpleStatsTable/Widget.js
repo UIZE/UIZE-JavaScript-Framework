@@ -32,19 +32,10 @@
 			........................................................
 */
 
-/* TODO:
-	- implement sorting
-	- support configurable tooltip handler for item name column
-	- support configurable click action for item name column
-	- support configurable value formatting per column
-	- support any column not being a value type column (would handle case of module type column in SOTU table)
-*/
-
 Uize.module ({
 	name:'Uize.Widgets.SimpleStatsTable.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
-		'Uize.Widget.TableSort',
 		'Uize.Widgets.SimpleStatsTable.Html',
 		'Uize.Widgets.SimpleStatsTable.Css'
 	],
@@ -52,10 +43,6 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				this.addChild ('tableSorter',Uize.Widget.TableSort,{idPrefixConstruction:'same as parent'});
-			},
-
 			set:{
 				html:Uize.Widgets.SimpleStatsTable.Html
 			},

@@ -1,6 +1,6 @@
 .`` {
 	border-collapse: collapse;
-	background: #eee;
+	background: #fff;
 	margin: auto;
 }
 
@@ -31,28 +31,13 @@
 	text-transform: uppercase;
 }
 
-/*** column heading highlight states ***/
-	.`` tr td.headingOver, .`` tr td.headingLit {
-		color: #000;
-		cursor: pointer;
-	}
-	.`` tr td.headingOver {
-		background: #ddd;
-	}
-	.`` tr td.headingLit {
-		background: #ccc;
-	}
-	.`` tr.rowOver td {
-		background: #fff;
-	}
-
-.`` tr.sectionSeparator td {
+.`` tr.`sectionSeparator` td {
 	background: #bbb;
 	font-size: 1px;
 	line-height: 1px;
 }
 
-.`` tr.rowSeparator td {
+.`` tr.`rowSeparator` td {
 	background: #fff;
 	font-size:0;
 	line-height: 1px;
@@ -65,8 +50,9 @@
 
 .`` .`rowName` {
 	text-align: left;
+	padding-left: 5px;
+	padding-right: 5px;
 	font-size: 11px;
-	background: #fff;
 }
 
 .`` .`rowName` a {
@@ -86,6 +72,7 @@
 		height: 10px;
 		background: #000;
 	}
+
 	.`barColor` {
 		position: absolute;
 		left: 1px;
@@ -93,6 +80,7 @@
 		right: 1px;
 		bottom: 1px;
 	}
+
 	.`barFull` {
 		position: absolute;
 		right: 0;
