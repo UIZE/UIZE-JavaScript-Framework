@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Module Info | JavaScript Examples | UIZE JavaScript Framework</title>
+	<title>Dependency Analyzer | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="keywords" content="tool"/>
 	<meta name="description" content="View detailed info for any module, including a full dependency visualization."/>
@@ -27,9 +27,9 @@
 <h1 class="document-title">
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
 	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
-	Module Info
+	Dependency Analyzer
 	<div id="page-actions" class="pageActions">
-		<a href="source-code/module-info.html" class="buttonLink">SOURCE</a>
+		<a href="source-code/dependency-analyzer.html" class="buttonLink">SOURCE</a>
 	</div>
 </h1>
 
@@ -37,7 +37,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example lets you view vital statistics for any module, including a breakdown of the module's dependencies and how they contribute to the overal load / weight for the module. Simply select a module from the dropdown menu.</p>
+		<p>This example lets you analyze the dependencies for any module, allowing you to view a breakdown of the module's dependencies and how they contribute to the overal load / weight for the module. Simply select a module from the dropdown menu.</p>
 	</div>
 
 	<div class="selectorControl">
@@ -366,7 +366,10 @@ Uize.module ({
 				);
 
 			/*** initialize selector, using query param ***/
-				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).module);
+				_page.setNodeValue (
+					'selector',
+					Uize.Url.fromParams (location.href).module || 'Uize.Widgets.Calculator.Widget'
+				);
 				_handleSelection ();
 	}
 });
