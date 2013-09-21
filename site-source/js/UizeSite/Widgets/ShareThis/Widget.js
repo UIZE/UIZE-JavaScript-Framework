@@ -37,7 +37,6 @@ Uize.module ({
 	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Node',
-		'Uize.Widgets.Button.Widget',
 		'UizeSite.Widgets.ShareThis.Html',
 		'UizeSite.Widgets.ShareThis.Css'
 	],
