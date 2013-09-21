@@ -1,0 +1,17 @@
+This is a TO DO document for the =Uize.Widgets.SimpleStatsTable.Sortable.Widget= module.
+
+Configurable Tooltip Handlers
+	Support configurable tooltip handlers for any column.
+
+	In the case of the SOTU table, there would be a tooltip handler for the module name column that would show the name and description of the module. In the case of the module info tool, there would be a tooltip handler for the module name column that would show name, description, and basic stats for the module.
+
+Configurable Click Action
+	Support optional link property for the value for any column.
+
+	When a link is specified, the value would be wrapped in an =a= tag.
+
+Configurable Value Formatters
+	Support configurable value formatting per column.
+
+	A value formatter would be resolved as a value transformer using =Uize.resolveTransformer=.
+

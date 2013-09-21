@@ -32,13 +32,6 @@
 			.................................................................
 */
 
-/* TODO:
-	- support configurable tooltip handler for item name column
-	- support configurable click action for item name column
-	- support configurable value formatting per column
-	- support any column not being a value type column (would handle case of module type column in SOTU table)
-*/
-
 Uize.module ({
 	name:'Uize.Widgets.SimpleStatsTable.Sortable.Widget',
 	superclass:'Uize.Widgets.SimpleStatsTable.Widget',

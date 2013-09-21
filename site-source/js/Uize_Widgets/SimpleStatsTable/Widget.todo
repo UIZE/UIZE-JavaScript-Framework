@@ -1,0 +1,7 @@
+This is a TO DO document for the =Uize.Widgets.SimpleStatsTable.Widget= module.
+
+Heading Tooltips
+	Add support for tooltips for headings.
+
+	Heading tooltips would provide explanations for what the headings mean. For the =Uize.Widgets.SimpleStatsTable.Sortable=, these heading tooltips would have to be integrated into the sort messaging. Perhaps this could be something that is handled by =Uize.Widget.TableSort= class - if it sees existing =title= attributes for headings, it should incorporate the existing tooltip text into the new sort message tooltip somehow.
+
