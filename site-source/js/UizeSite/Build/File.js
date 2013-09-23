@@ -61,6 +61,7 @@ Uize.module ({
 		'UizeSite.Build.FileBuilders.TempModulesTreeModule',
 		'UizeSite.Build.FileBuilders.TempExamplesModule',
 		'UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule',
+		'UizeSite.Build.FileBuilders.TempSotuModule',
 		'UizeSite.Build.FileBuilders.ModuleInfoModules',
 		'UizeSite.Build.FileBuilders.WidgetsToGo.GoogleGadgetXmlPages',
 		'UizeSite.Build.FileBuilders.WidgetsToGo.IndexPage',
@@ -93,8 +94,7 @@ Uize.module ({
 		'Uize.Build.FileBuilders.SimpleDataPages',
 		'Uize.Build.FileBuilders.InMemoryModuleMetadata',
 		'Uize.Build.FileBuilders.InMemoryModuleBuiltSize',
-		'Uize.Build.FileBuilders.InMemoryModuleDirectDependencies',
-		'UizeSite.Build.FileBuilders.SotuPage'
+		'Uize.Build.FileBuilders.InMemoryModuleDirectDependencies'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -107,6 +107,7 @@ Uize.module ({
 						UizeSite.Build.FileBuilders.TempModulesTreeModule,
 						UizeSite.Build.FileBuilders.TempExamplesModule,
 						UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule,
+						UizeSite.Build.FileBuilders.TempSotuModule,
 						UizeSite.Build.FileBuilders.ModuleInfoModules
 					);
 					_superclass.doMy (this,'init',[{},Uize.nop]);
@@ -142,8 +143,7 @@ Uize.module ({
 						Uize.Build.FileBuilders.SimpleDataPages,
 						Uize.Build.FileBuilders.InMemoryModuleMetadata,
 						Uize.Build.FileBuilders.InMemoryModuleBuiltSize,
-						Uize.Build.FileBuilders.InMemoryModuleDirectDependencies,
-						UizeSite.Build.FileBuilders.SotuPage
+						Uize.Build.FileBuilders.InMemoryModuleDirectDependencies
 					);
 					_callback ();
 				}

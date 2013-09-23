@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.SotuPage Package
+|    /    O /   |    MODULE : UizeSite.Build.FileBuilders.TempSotuModule Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
@@ -11,14 +11,14 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 5
+	importance: 2
 	codeCompleteness: 100
 	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.SotuPage= module defines a file builder for the SOTU (State of the UIZE) page of the UIZE Web site.
+		The =UizeSite.Build.FileBuilders.TempSotuModule= module defines a file builder for the generated =UizeSite.Sotu= module in the site temp folder.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -26,52 +26,74 @@
 */
 
 Uize.module ({
-	name:'UizeSite.Build.FileBuilders.SotuPage',
+	name:'UizeSite.Build.FileBuilders.TempSotuModule',
 	required:[
 		'Uize.String',
 		'Uize.Build.Util'
 	],
 	builder:function () {
+		var _sotuModuleName = 'UizeSite.Sotu';
+
 		function _isModuleForSotu (_moduleName) {
 			return (
 				(_moduleName == 'Uize' || Uize.String.startsWith (_moduleName,'Uize.')) &&
+				_moduleName != _sotuModuleName &&
 				!Uize.String.startsWith (_moduleName,'Uize.Test.')
 			);
 		}
 
 		return Uize.package ({
-			description:'SOTU (State of the UIZE) page',
+			description:'Generated UizeSite.Sotu module under temp',
 			urlMatcher:function (_urlParts) {
-				return _urlParts.pathname == this.builtUrl ('appendixes/sotu.html');
+				return _urlParts.pathname == this.tempUrl (this.getModuleUrl (_sotuModuleName));
 			},
 			builderInputs:function (_urlParts) {
 				var
 					m = this,
 					_params = m.params,
-					_inputs = {
-						jstSource:m.memoryUrlFromBuiltUrl (_urlParts.pathname) + '.jst',
-						referencesIndex:m.memoryUrl ('reference.index'),
-						examplesByKeyword:m.memoryUrl ('examples-by-keyword')
-					}
+					_moduleBuiltSize = {},
+					_moduleMetaData = {}
 				;
 				Uize.forEach (
 					Uize.Build.Util.getJsModules (_params),
 					function (_moduleName) {
 						if (_isModuleForSotu (_moduleName)) {
 							var _moduleUrl = m.getModuleUrl (_moduleName);
-							_inputs ['moduleBuiltSize_' + _moduleName] = m.memoryUrl (_moduleUrl + '.builtsize');
-							_inputs ['moduleMetaData_' + _moduleName] = m.memoryUrl (_moduleUrl + '.metadata');
+							_moduleBuiltSize [_moduleName] = m.memoryUrl (_moduleUrl + '.builtsize');
+							_moduleMetaData [_moduleName] = m.memoryUrl (_moduleUrl + '.metadata');
 						}
 					}
 				);
-				return _inputs;
+				return {
+					referencesIndex:m.memoryUrl ('reference.index'),
+					examplesByKeyword:m.memoryUrl ('examples-by-keyword'),
+					moduleBuiltSize:_moduleBuiltSize,
+					moduleMetaData:_moduleMetaData
+				};
 			},
 			builder:function (_inputs) {
 				var
 					m = this,
+					_moduleBuiltSize = _inputs.moduleBuiltSize,
+					_moduleMetaData = _inputs.moduleMetaData,
 					_moduleReferenceFiles = m.readFile ({path:_inputs.referencesIndex}),
 					_examplesByKeyword = m.readFile ({path:_inputs.examplesByKeyword}),
-					_modules = []
+					_modules = [
+						[
+							'name',
+							'type',
+							'importance',
+							'codeCompleteness',
+							'docCompleteness',
+							'testCompleteness',
+							'examples',
+							'scrunchedFileSize',
+							'directSubmodules',
+							'nestedSubmodules',
+							'description',
+							'keywords'
+						]
+					]
 				;
 				for (
 					var _moduleReferenceFileNo = -1, _moduleReferenceFilesLength = _moduleReferenceFiles.length;
@@ -83,7 +105,7 @@ Uize.module ({
 					;
 					if (_isModuleForSotu (_moduleName)) {
 						var
-							_metaData = m.readFile ({path:_inputs ['moduleMetaData_' + _moduleName]}),
+							_metaData = m.readFile ({path:_moduleMetaData [_moduleName]}),
 							_directSubmodules = 0,
 							_nestedSubmodules = 0
 						;
@@ -102,23 +124,23 @@ Uize.module ({
 							}
 						}
 
-						_modules.push ({
-							name:_moduleName,
-							description:_moduleReferenceFile.description,
-							examples:(_examplesByKeyword [_moduleName] || []).length,
-							directSubmodules:_directSubmodules,
-							nestedSubmodules:_nestedSubmodules,
-							type:_metaData.type || 'Unknown',
-							importance:+_metaData.importance || 0,
-							codeCompleteness:+_metaData.codeCompleteness || 0,
-							docCompleteness:+_metaData.docCompleteness || 0,
-							testCompleteness:+_metaData.testCompleteness || 0,
-							keywords:_metaData.keywords || '',
-							scrunchedFileSize:m.readFile ({path:_inputs ['moduleBuiltSize_' + _moduleName]})
-						});
+						_modules.push ([
+							_moduleName,
+							_metaData.type || 'Unknown',
+							+_metaData.importance || 0,
+							+_metaData.codeCompleteness || 0,
+							+_metaData.docCompleteness || 0,
+							+_metaData.testCompleteness || 0,
+							(_examplesByKeyword [_moduleName] || []).length,
+							m.readFile ({path:_moduleBuiltSize [_moduleName]}),
+							_directSubmodules,
+							_nestedSubmodules,
+							_moduleReferenceFile.description,
+							_metaData.keywords || ''
+						]);
 					}
 				}
-				return m.readFile ({path:_inputs.jstSource}) ({modules:_modules});
+				return Uize.Build.Util.dataAsModule (_sotuModuleName,_modules);
 			}
 		});
 	}

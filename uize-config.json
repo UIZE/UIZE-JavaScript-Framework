@@ -18,12 +18,13 @@
 		Uize:'Uize.Build.Templates.Module.ScrunchedHeadComment',
 		UizeSite:'UizeSite.Build.Templates.Module.ScrunchedHeadComment'
 	},
-	staleBefore:'now',
 	staticFilePathMatcher:/\.(gif|jpg|png|ico|html|css|htaccess|txt)$/,
 	deployConfigPath:'../deploy.config.json',
+	modulesToStub:/^(UizeSite\.Sotu)$/,
 	buildSequence:[
 		'Uize.Build.Files.UnprocessedFiles',
 		'Uize.Build.Files.JsModules',
+		'UizeSite.Build.Files.GeneratedJsModules',
 		'UizeSite.Build.Files.WidgetPages',
 		'UizeSite.Build.Files.SimpleDocPages',
 		'UizeSite.Build.Files.JavaScriptModulesToDoPages',

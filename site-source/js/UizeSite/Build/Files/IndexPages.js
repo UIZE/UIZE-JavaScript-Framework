@@ -37,8 +37,7 @@ Uize.module ({
 						m.addFiles (
 							'index.html',
 							'directory.html',
-							'sitemap-code.xml',
-							'appendixes/sotu.html'
+							'sitemap-code.xml'
 						);
 
 					/*** add URLs for index pages for modules, examples, examples by module, guides, and widgets ***/

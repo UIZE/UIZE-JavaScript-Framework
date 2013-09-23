@@ -3,7 +3,7 @@
 <head>
 	<title>Dependency Analyzer | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="tool"/>
+	<meta name="keywords" content="tool Uize.Widgets.SimpleStatsTable.Widget Uize.Widgets.SimpleStatsTable.Sortable.Widget"/>
 	<meta name="description" content="View detailed info for any module, including a full dependency visualization."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -16,6 +16,19 @@
 			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
 			border:1px solid #899;
 			border-radius: 3px;
+		}
+
+		.overviewTable {
+			border-collapse: collapse;
+			width: 100%;
+			margin: 10px 0;
+		}
+		.overviewTable td {
+			padding: 0;
+		}
+
+		.Uize_Widgets_SimpleStatsTable_Css {
+			width: 100%;
 		}
 	</style>
 </head>
@@ -37,7 +50,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example lets you analyze the dependencies for any module, allowing you to view a breakdown of the module's dependencies and how they contribute to the overal load / weight for the module. Simply select a module from the dropdown menu.</p>
+		<p>This tool lets you analyze the dependencies for any module, allowing you to view a breakdown of the module's dependencies and how they contribute to the overal load / weight for the module. Simply select a module from the dropdown menu.</p>
 	</div>
 
 	<div class="selectorControl">
@@ -48,23 +61,25 @@
 
 	<div style="height:4px;"></div>
 
-	<div id="page_dependenciesOverviewTable-shell"></div>
-	<div id="page_metadataTable-shell"></div>
+	<table class="overviewTable">
+		<tr>
+			<td id="page_dependenciesOverviewTable-shell"></td>
+			<td id="page_metadataTable-shell"></td>
+		</tr>
+	</table>
+
 	<div id="page_dependenciesListTable-shell"></div>
 </div>
 
 <script type="text/javascript">
 
-/*
+/* TODO
 	- interesting top level summary to show
 		- name
 		- description
 		- type of module
-		- how many modules throughout the codebase rely on this module (requires scanning entire codebase)
 		- link to documentation
-	- for any module in the dependency list
-		- same information as shown in top level summary for module, but in a tooltip
-		- linkable to switch the currently selected module
+		- how many modules throughout the codebase rely on this module (requires scanning entire codebase)
 	- questions to answer
 		- if I add or remove direct dependencies to a module...
 			- how is the overal module dependency list and size affected
@@ -93,7 +108,12 @@ Uize.module ({
 		'Uize.Data.PathsTree',
 		'Uize.Util.Dependencies.Async',
 		'Uize.Widgets.SimpleStatsTable.Widget',
-		'Uize.Widgets.SimpleStatsTable.Sortable.Widget'
+		'Uize.Widgets.SimpleStatsTable.Sortable.Widget',
+		'Uize.Xml',
+		'UizeSite.Sotu',
+		'Uize.Node',
+		'Uize.Tooltip',
+		'Uize.Widgets.Tooltip.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -103,8 +123,19 @@ Uize.module ({
 		/*** prepare list of all modules ***/
 			var _modulesList = Uize.Data.PathsTree.toList (UizeSite.ModulesTree ());
 
+		/*** build the module description lookup ***/
+			// NOTE: this will go away when we have descriptions in the module info modules
+			var _moduleDescriptionLookup = {};
+			Uize.forEach (
+				UizeSite.Sotu (),
+				function (_moduleSotuInfo) {_moduleDescriptionLookup [_moduleSotuInfo [0]] = _moduleSotuInfo [10]}
+			);
+
 		/*** create the example page widget ***/
-			var _page = window.page = UizeSite.Page.Example ();
+			var
+				_page = window.page = UizeSite.Page.Example (),
+				_tooltip = _page.addChild ('tooltip',Uize.Widgets.Tooltip.Widget,{built:false})
+			;
 
 		/*** wire up the page widget ***/
 			_page.wireUi ();
@@ -128,7 +159,17 @@ Uize.module ({
 
 		/*** handle selection of test ***/
 			function _handleSelection () {
-				var _moduleName = _page.getNodeValue ('selector');
+				var
+					_moduleName = _page.getNodeValue ('selector'),
+					_pageChildren = _page.children,
+					_dependenciesOverviewTable = _pageChildren.dependenciesOverviewTable,
+					_metadataTable = _pageChildren.metadataTable,
+					_dependenciesListTable = _pageChildren.dependenciesListTable
+				;
+				_dependenciesOverviewTable && _dependenciesOverviewTable.removeUi ();
+				_metadataTable && _metadataTable.removeUi ();
+				_dependenciesListTable && _dependenciesListTable.removeUi ();
+
 				if (_moduleName != _selectorPlaceholderText) {
 					Uize.Util.Dependencies.Async.traceDependencies (
 						_moduleName,
@@ -150,27 +191,85 @@ Uize.module ({
 								function (_moduleName) {_totalSize += _moduleInfoLookup [_moduleName].builtSize}
 							);
 
-							/*** update the metadata table ***/
-								var
-									_metadata = _moduleInfo.metaData,
-									_metadataTable = page.children.metadataTable
-								;
-								console.log (_metadata);
-								_metadataTable
-									? _metadataTable.removeUi ()
-									: (
-										_metadataTable = page.addChild (
-											'metadataTable',
-											Uize.Widgets.SimpleStatsTable.Widget
-										)
+							/*** update the dependencies overview table ***/
+								var _rows = [];
+								function _addDependenciesSegment (_segmentName,_segmentMatcher) {
+									var
+										_count = 0,
+										_size = 0
+									;
+									Uize.forEach (
+										_dependencies,
+										function (_moduleName) {
+											if (_segmentMatcher (_moduleName)) {
+												_count++;
+												_size += _moduleInfoLookup [_moduleName].builtSize;
+											}
+										}
+									);
+									_rows.push ([_segmentName,_count,_size,_size / 1024,_size / _totalSize * 100]);
+								}
+								_addDependenciesSegment ('Module',function (_dependency) {return _dependency == _moduleName});
+								_addDependenciesSegment (
+									'Direct Dependencies',
+									function (_dependency) {return _dependency != _moduleName && _directDependenciesLookup [_dependency]}
+								);
+								_addDependenciesSegment (
+									'Indirect Dependencies',
+									function (_dependency) {return _dependency != _moduleName && !_directDependenciesLookup [_dependency]}
+								);
+								_addDependenciesSegment ('Total',Uize.returnTrue);
+
+								_dependenciesOverviewTable || (
+									_dependenciesOverviewTable = page.addChild (
+										'dependenciesOverviewTable',
+										Uize.Widgets.SimpleStatsTable.Widget
 									)
-								;
+								);
+								_dependenciesOverviewTable.set ({
+									title:'Overview of Dependencies',
+									columns:[
+										{title:'Segment'},
+										{
+											title:'MOdules',
+											minColor:'hsl(120,100,50)',
+											maxColor:'hsl(0,100,50)'
+										},
+										{
+											title:'Size (bytes)',
+											minColor:'hsl(120,100,50)',
+											maxColor:'hsl(0,100,50)',
+											formatter:'value + " bytes"'
+										},
+										{
+											title:'Size (KB)',
+											minColor:'hsl(120,100,50)',
+											maxColor:'hsl(0,100,50)',
+											formatter:'value.toFixed (1) + " KB"'
+										},
+										{
+											title:'Size (%)',
+											minColor:'hsl(120,100,50)',
+											maxColor:'hsl(0,100,50)',
+											formatter:'value.toFixed (1) + "%"'
+										}
+									],
+									rows:_rows
+								});
+								_dependenciesOverviewTable.insertUi ();
+
+							/*** update the metadata table ***/
+								var _metadata = _moduleInfo.metaData;
+								_metadataTable || (
+									_metadataTable = page.addChild (
+										'metadataTable',
+										Uize.Widgets.SimpleStatsTable.Widget
+									)
+								);
 								_metadataTable.set ({
 									title:'Module Metadata',
 									columns:[
-										{
-											title:'Key'
-										},
+										{title:'Key'},
 										{
 											title:'Estimate',
 											minColor:'hsl(0,100,50)',
@@ -188,98 +287,33 @@ Uize.module ({
 								});
 								_metadataTable.insertUi ();
 
-							/*** update the dependencies overview table ***/
-								var _rows = [];
-								function _addDependenciesSegment (_segmentName,_segmentMatcher) {
-									var
-										_count = 0,
-										_size = 0
-									;
-									Uize.forEach (
-										_dependencies,
-										function (_moduleName) {
-											if (_segmentMatcher (_moduleName)) {
-												_count++;
-												_size += _moduleInfoLookup [_moduleName].builtSize;
-											}
-										}
-									);
-									_rows.push ([_segmentName,_count,_size,(_size / _totalSize * 100).toFixed (2)]);
-								}
-								_addDependenciesSegment ('Module',function (_dependency) {return _dependency == _moduleName});
-								_addDependenciesSegment (
-									'Direct Dependencies',
-									function (_dependency) {return _dependency != _moduleName && _directDependenciesLookup [_dependency]}
-								);
-								_addDependenciesSegment (
-									'Indirect Dependencies',
-									function (_dependency) {return _dependency != _moduleName && !_directDependenciesLookup [_dependency]}
-								);
-								_addDependenciesSegment ('Total',Uize.returnTrue);
-
-								var _dependenciesOverviewTable = page.children.dependenciesOverviewTable;
-								_dependenciesOverviewTable
-									? _dependenciesOverviewTable.removeUi ()
-									: (
-										_dependenciesOverviewTable = page.addChild (
-											'dependenciesOverviewTable',
-											Uize.Widgets.SimpleStatsTable.Widget
-										)
-									)
-								;
-								_dependenciesOverviewTable.set ({
-									title:'Overview of Dependencies',
-									columns:[
-										{
-											title:'Segment'
-										},
-										{
-											title:'Count',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)'
-										},
-										{
-											title:'Size (bytes)',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)'
-										},
-										{
-											title:'Size (%)',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)'
-										}
-									],
-									rows:_rows
-								});
-								_dependenciesOverviewTable.insertUi ();
-
 							/*** update the dependencies list table ***/
-								var _dependenciesListTable = page.children.dependenciesListTable;
-								_dependenciesListTable
-									? _dependenciesListTable.removeUi ()
-									: (
-										_dependenciesListTable = page.addChild (
-											'dependenciesListTable',
-											Uize.Widgets.SimpleStatsTable.Sortable.Widget,
-											{
-												children:{
-													tableSorter:{
-														dominantSortOrder:'descending',
-														dominantSortOrderByColumn:{
-															0:'ascending',
-															2:'ascending'
-														}
+								_dependenciesListTable || (
+									_dependenciesListTable = page.addChild (
+										'dependenciesListTable',
+										Uize.Widgets.SimpleStatsTable.Sortable.Widget,
+										{
+											children:{
+												tableSorter:{
+													cellTooltips:false,
+													dominantSortOrder:'descending',
+													dominantSortOrderByColumn:{
+														0:'ascending',
+														2:'ascending'
 													}
 												}
 											}
-										)
+										}
 									)
-								;
+								);
 								_dependenciesListTable.set ({
 									title:'Complete List of Dependencies',
 									columns:[
 										{
-											title:'Module Name'
+											title:'Module Name',
+											formatter:function (_moduleName) {
+												return '<a href="?module=' + _moduleName + '">' + _moduleName + '</a>';
+											}
 										},
 										{
 											title:'Order',
@@ -305,7 +339,8 @@ Uize.module ({
 											minColor:'hsl(0,100,50)',
 											maxColor:'hsl(120,100,50)',
 											minValue:0,
-											maxValue:100
+											maxValue:100,
+											formatter:'value + "%"'
 										},
 										{
 											title:'Direct Deps',
@@ -317,12 +352,14 @@ Uize.module ({
 											minColor:'hsl(120,100,50)',
 											maxColor:'hsl(0,100,50)',
 											minValue:0,
-											maxValue:100
+											maxValue:100,
+											formatter:'value.toFixed (1) + "%"'
 										},
 										{
-											title:'Scrunched',
+											title:'Size (bytes)',
 											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)'
+											maxColor:'hsl(0,100,50)',
+											formatter:'value + " bytes"'
 										}
 									],
 									rows:Uize.map (
@@ -344,13 +381,36 @@ Uize.module ({
 												+_metadata.importance || 0,
 												+_metadata.codeCompleteness || 0,
 												_moduleInfo.directDependencies.length,
-												(_size / _totalSize * 100).toFixed (2),
+												_size / _totalSize * 100,
 												_size
 											];
 										}
 									).reverse ()
 								});
 								_dependenciesListTable.insertUi ();
+
+								/*** wire up module name tooltip ***/
+									var _tooltipNode = _tooltip.getNode ();
+
+									_page.wireNode (
+										Uize.Node.find ({root:_dependenciesListTable.getNode (),tagName:'A',href:/\?module=/}),
+										{
+											mouseover:function () {
+												var
+													_link = this,
+													_moduleName = Uize.Node.getText (_link)
+												;
+												_tooltip.set ({
+													heading:_moduleName,
+													body:_moduleDescriptionLookup [_moduleName]
+												});
+												Uize.Tooltip.showTooltip (_tooltipNode);
+											},
+											mouseout:function () {
+												Uize.Tooltip.showTooltip (_tooltipNode,false);
+											}
+										}
+									);
 						}
 					);
 				}
@@ -371,6 +431,7 @@ Uize.module ({
 					Uize.Url.fromParams (location.href).module || 'Uize.Widgets.Calculator.Widget'
 				);
 				_handleSelection ();
+
 	}
 });
 

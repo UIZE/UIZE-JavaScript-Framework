@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.TempExamplesModule= module defines a file builder for the generated UizeSite.Examples module in the site temp folder.
+		The =UizeSite.Build.FileBuilders.TempExamplesModule= module defines a file builder for the generated =UizeSite.Examples= module in the site temp folder.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

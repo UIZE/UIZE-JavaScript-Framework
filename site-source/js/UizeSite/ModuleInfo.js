@@ -1,4 +1,4 @@
-/* this is a stub namespace for the generated module info modules */
+/* this is a stub for this generated module */
 
 Uize.module ({name:'UizeSite.ModuleInfo'});
 

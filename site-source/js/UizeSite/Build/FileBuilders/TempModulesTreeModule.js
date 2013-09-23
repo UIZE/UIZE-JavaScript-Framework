@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =UizeSite.Build.FileBuilders.TempModulesTreeModule= module defines a file builder for the generated UizeSite.ModulesTree module in the site temp folder.
+		The =UizeSite.Build.FileBuilders.TempModulesTreeModule= module defines a file builder for the generated =UizeSite.ModulesTree= module in the site temp folder.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

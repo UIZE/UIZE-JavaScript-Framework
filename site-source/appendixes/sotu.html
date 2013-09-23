@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>SOTU (State of the UIZE) | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="UIZE JavaScript Framework"/>
+	<meta name="description" content="This document provides a sortable table of data and statistical information for the JavaScript modules that make up the UIZE JavaScript Framework."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	SOTU (State of the UIZE)
+</h1>
+
+<div class="main">
+
+<div class="explanation">
+	<p>This document provides an overview of the state of all the modules that make up the UIZE JavaScript Framework. For developers of UIZE modules, use this document as a guide on where work is needed. The table below provides information on various aspects of UIZE modules: things such as estimated code completeness, estimated documentation completeness, unit test completeness, scrunched file size, etc.</p>
+
+	<p>The table's columns are sortable, so if you want to sort the modules by documentation completeness, you can do so clicking on the "<b>DOC</b>" heading. Or, if you want to see all modules of a certain type, sort by the "<b>MODULE TYPE</b>" column and then scroll to the module type you're interested in - they'll all be clumped together. The "<b>IMPORT.</b>" column is a high level assessment of the importance of modules in the grand scheme of things, so this can also inform where effort is invested in writing documentation and tests.</p>
+</div>
+
+<div id="page_sotuTable-shell"></div>
+
+<script type="text/javascript">
+
+Uize.require (
+	'UizeSite.Page.library',
+	function () {
+		'use strict';
+
+		var _page = window.page = UizeSite.Page ();
+		_page.wireUi ();
+
+		Uize.require (
+			[
+				'Uize.Node',
+				'Uize.Tooltip',
+				'Uize.Widgets.Tooltip.Widget',
+				'UizeSite.Sotu',
+				'Uize.Widgets.SimpleStatsTable.Sortable.Widget',
+				'Uize.Xml'
+			],
+			function () {
+				var _tooltip = _page.addChild ('tooltip',Uize.Widgets.Tooltip.Widget);
+
+				var _sortTable = _page.addChild (
+					'sotuTable',
+					Uize.Widgets.SimpleStatsTable.Sortable.Widget,
+					{
+						title:'Data and Statistics for UIZE Modules',
+						columns:[
+							{
+								title:'Module Name',
+								formatter:function (_moduleName) {
+									return (
+										'<a href="../reference/' + _moduleName + '.html" title="' + Uize.Xml.toAttributeValue (this [10]) + '">' +
+											_moduleName +
+										'</a>'
+									);
+								}
+							},
+							{title:'Module<br/>Type'},
+							{
+								title:'Import.',
+								minColor:'hsl(200,100,0)',
+								maxColor:'hsl(200,100,75)',
+								minValue:0,
+								maxValue:10
+							},
+							{
+								title:'Code<br/>%',
+								minColor:'hsl(0,100,50)',
+								maxColor:'hsl(120,100,50)',
+								minValue:0,
+								maxValue:100,
+								formatter:'value.toFixed (1) + "%"'
+							},
+							{
+								title:'Doc<br/>%',
+								minColor:'hsl(0,100,50)',
+								maxColor:'hsl(120,100,50)',
+								minValue:0,
+								maxValue:100,
+								formatter:'value.toFixed (1) + "%"'
+							},
+							{
+								title:'Test<br/>%',
+								minColor:'hsl(0,100,50)',
+								maxColor:'hsl(120,100,50)',
+								minValue:0,
+								maxValue:100,
+								formatter:'value.toFixed (1) + "%"'
+							},
+							{
+								title:'Example<br/>Pages',
+								minColor:'hsl(0,100,50)',
+								maxColor:'hsl(120,100,50)'
+							},
+							{
+								title:'Scrunch<br/>Size',
+								minColor:'hsl(120,100,50)',
+								maxColor:'hsl(0,100,50)'
+							},
+							{
+								title:'Direct<br/>Sub-<br/>mod.',
+								minColor:'hsl(200,100,0}',
+								maxColor:'hsl(200,100,75)'
+							},
+							{
+								title:'Nested<br/>Sub-<br/>mod.',
+								minColor:'hsl(200,100,0}',
+								maxColor:'hsl(200,100,75)'
+							}
+						],
+						rows:UizeSite.Sotu ().slice (1),
+						children:{
+							tableSorter:{
+								cellTooltips:false,
+								dominantSortOrder:'descending',
+								dominantSortOrderByColumn:[
+									'ascending',
+									'ascending',
+									'descending',
+									'ascending',
+									'ascending',
+									'ascending',
+									'ascending',
+									'descending',
+									'descending',
+									'descending'
+								]
+							}
+						}
+					}
+				);
+
+				_sortTable.insertUi ();
+
+				/*** wire up module name tooltip ***/
+					_tooltip.insertUi ();
+					var _tooltipNode = _tooltip.getNode ();
+
+					_page.wireNode (
+						Uize.Node.find ({tagName:'A',href:/reference\/Uize/,title:/./}),
+						{
+							mouseover:function () {
+								var _link = this;
+								if (_link.oldTitle == null) {
+									_link.oldTitle = _link.title;
+									_link.title = '';
+								}
+								_tooltip.set ({
+									heading:Uize.Node.getText (_link),
+									body:_link.oldTitle
+								});
+								Uize.Tooltip.showTooltip (_tooltipNode);
+							},
+							mouseout:function () {
+								Uize.Tooltip.showTooltip (_tooltipNode,false);
+							}
+						}
+					);
+			}
+		);
+	}
+);
+
+</script>
+
+</body></html>
