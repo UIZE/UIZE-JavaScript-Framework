@@ -74,6 +74,8 @@
 <script type="text/javascript">
 
 /* TODO
+	- fix issue with test completeness being 0 for all modules
+	- improve description for generated modules
 	- interesting top level summary to show
 		- name
 		- description
@@ -94,10 +96,8 @@
 		- for any module in the dependency list, which modules are using it directly
 	- list of all dependencies, including self
 		- showing the following fields (sortable on any of them)
-			- dependency level (0 (self), 1 (direct dependencies), 2 (the rest))
 			- unique size contribution (size of self plus all non-shared dependencies)
 			- local sharedness (used by how many other modules in this dependency graph)
-	- create files builder module for the build process to build all the module info modules
 */
 
 Uize.module ({
@@ -299,7 +299,8 @@ Uize.module ({
 													dominantSortOrder:'descending',
 													dominantSortOrderByColumn:{
 														0:'ascending',
-														2:'ascending'
+														1:'ascending',
+														3:'ascending'
 													}
 												}
 											}
@@ -315,6 +316,7 @@ Uize.module ({
 												return '<a href="?module=' + _moduleName + '">' + _moduleName + '</a>';
 											}
 										},
+										{title:'Type'},
 										{
 											title:'Order',
 											minColor:'hsl(200,100,0)',
@@ -372,6 +374,7 @@ Uize.module ({
 											;
 											return [
 												_dependency,
+												_metadata.type,
 												_dependencyIndex,
 												_dependency == _moduleName
 													? 0
