@@ -158,9 +158,14 @@ Uize.module ({
 									if (_cells.length == m._headings.length) {
 										var _cellText = _Uize_Node.getText (_cells [_columnNo]);
 										if (_cellText) {
-											_columnIsDate = _columnIsDate && !Uize.isNaN (+new Date (_cellText));
-											_columnIsPureNumber = _columnIsPureNumber && !Uize.isNaN (+_cellText);
-											_columnHasNumerals = _columnHasNumerals && /\d/.test (_cellText);
+											var _cellTestIsPureNumber = !Uize.isNaN (+_cellText);
+											_columnIsPureNumber = _columnIsPureNumber && _cellTestIsPureNumber;
+											_columnIsDate =
+												_columnIsDate && !_cellTestIsPureNumber && !Uize.isNaN (+new Date (_cellText))
+											;
+											_columnHasNumerals =
+												_columnHasNumerals && (_cellTestIsPureNumber || /\d/.test (_cellText))
+											;
 											_columnValues [_rowNo] = _cellText;
 										}
 									}
