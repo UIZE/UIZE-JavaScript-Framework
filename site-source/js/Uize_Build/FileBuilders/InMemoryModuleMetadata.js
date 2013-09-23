@@ -71,13 +71,22 @@ Uize.module ({
 							_moduleText.slice (_metaDataCommentStartPos,_metaDataCommentEndPos)
 								.replace (_metaDataCommentRegExp,'')
 						: '',
-					_metaData = _metaDataText
-						?
-							Uize.Data.Simple.parse ({
-								simple:Uize.String.Lines.normalizeIndent (_metaDataText),
-								collapseChildren:true
-							})
-						: {},
+					_metaData = Uize.copyInto (
+						{
+							type:'Unknown',
+							importance:0,
+							codeCompleteness:100,
+							docCompleteness:100,
+							testCompleteness:100
+						},
+						_metaDataText
+							?
+								Uize.Data.Simple.parse ({
+									simple:Uize.String.Lines.normalizeIndent (_metaDataText),
+									collapseChildren:true
+								})
+							: null
+					),
 					_testModuleMetaData = _inputs.testModuleMetaData
 				;
 				if (_testModuleMetaData)

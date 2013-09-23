@@ -126,7 +126,7 @@ Uize.module ({
 
 						_modules.push ([
 							_moduleName,
-							_metaData.type || 'Unknown',
+							_metaData.type,
 							+_metaData.importance || 0,
 							+_metaData.codeCompleteness || 0,
 							+_metaData.docCompleteness || 0,
