@@ -96,15 +96,15 @@
 Uize.require (
 	'UizeSite.Page.library',
 	function () {
-		Uize.module ({
-			required:[
+		Uize.require (
+			[
 				'UizeSite.Page',
 				'Uize.Node',
 				'Uize.Url',
 				'Uize.Widget.HoverFader',
 				'Uize.Curve'
 			],
-			builder:function () {
+			function () {
 				'use strict';
 
 				/*** create the example page widget ***/
@@ -175,7 +175,7 @@ Uize.require (
 						_searchQueryNode.focus ();
 						_searchQueryNode.select ();
 			}
-		});
+		);
 	}
 );
 

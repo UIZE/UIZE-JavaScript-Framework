@@ -123,14 +123,14 @@ Alternate Array Representations
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Data.Simple',
 		'Uize.Json'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create a page widget subclass ***/
@@ -180,7 +180,7 @@ Uize.module ({
 		/*** wire up the page widget ***/
 			page.wireUi ();
 	}
-});
+);
 
 </script>
 

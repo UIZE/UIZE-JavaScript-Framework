@@ -22,12 +22,12 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'Uize.Url',
 		'UizeSite.Examples'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		var
@@ -58,19 +58,19 @@ Uize.module ({
 		if (_startExample) {
 			location.replace (_startExample.path + '?tour=' + _tour);
 		} else {
-			Uize.module ({
-				required:'UizeSite.Page.library',
-				builder:function () {
+			Uize.require (
+				'UizeSite.Page.library',
+				function () {
 					/*** create the example page widget ***/
 						var _page = window.page = UizeSite.Page ();
 			
 					/*** wire up the page widget ***/
 						_page.wireUi ();
 				}
-			});
+			);
 		}
 	}
-});
+);
 
 </script>
 

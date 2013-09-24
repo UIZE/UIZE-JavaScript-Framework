@@ -1046,7 +1046,7 @@ Widget Adoption
 			The initial value for the =idPrefix= state property in the =Uize.Widget.Page= class is ='page'=, so unless you change that in your own subclasses of =Uize.Widget.Page= you should be able to start all your widget adoption statements with =window.$page_=.
 
 			INCORRECT
-			..................................................................................
+			..............................................................................
 			<script type="text/javascript">
 				window.$page_widgetName = {widgetClass:'WidgetClassName'};
 			</script>
@@ -1054,14 +1054,14 @@ Widget Adoption
 			... ... ...
 			... ... ...
 			<script type="text/javascript">
-				Uize.module ({
-					required:'Uize.Widget.Page',
-					builder:function () {
+				Uize.require (
+					'Uize.Widget.Page',
+					function () {
 						(window.page = Uize.Widget.Page ({idPrefix:'mySitePage'})).wireUi ();
 					}
-				});
+				);
 			</script>
-			..................................................................................
+			..............................................................................
 
 			In the above example, the declaration for the adopted widget should start with =window.$mySitePage_widgetName=, because ='mySitePage'= is the =idPrefix= specified for the page widget in its instantiation.
 

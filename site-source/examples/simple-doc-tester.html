@@ -57,15 +57,15 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Doc.Simple',
 		'UizeSite.Templates.SimpleDocSample',
 		'Uize.Templates.SimpleDoc'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/* TO DO:
@@ -128,7 +128,7 @@ Uize.module ({
 		/*** initialize sample data ***/
 			page.setNodeValue ('simpleDocSource',UizeSite.Templates.SimpleDocSample.process ());
 	}
-});
+);
 
 </script>
 

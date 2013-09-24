@@ -97,8 +97,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
@@ -106,7 +106,7 @@ Uize.module ({
 		'Uize.Template',
 		'Uize.Template.Module'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create a page widget subclass ***/
@@ -185,7 +185,7 @@ Uize.module ({
 		/*** initialize ***/
 			updateSourceCodeFromInput ();
 	}
-});
+);
 
 </script>
 

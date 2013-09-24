@@ -281,13 +281,13 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.TableSort'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -307,7 +307,7 @@ Uize.module ({
 		/*** wire up the page widget ***/
 			page.wireUi ();
 	}
-});
+);
 
 </script>
 

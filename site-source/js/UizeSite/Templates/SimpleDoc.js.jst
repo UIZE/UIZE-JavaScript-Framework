@@ -35,13 +35,13 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Doc.library',
 		'UizeSite.Page.Doc'
 	],
-	builder:function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
-});
+	function () {(window.page = UizeSite.Page.Doc ()).wireUi ()}
+);
 
 </script>
 

@@ -102,12 +102,12 @@ Anatomy of a Typical Page
 				... ... ...
 				... ... ...
 				<script type="text/javascript">
-					Uize.module ({
-						required:[
+					Uize.require (
+						[
 							'Uize.Widget.Page',
 							'Uize.Widget.Bar.Slider'
 						],
-						builder:function () {
+						function () {
 							'use strict';
 
 							/*** create the example page widget ***/
@@ -119,7 +119,7 @@ Anatomy of a Typical Page
 							/*** wire up the page widget ***/
 								page.wireUi ();
 						}
-					});
+					);
 				</script>
 			</body>
 			.........................................................................................

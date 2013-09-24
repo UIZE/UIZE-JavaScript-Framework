@@ -514,8 +514,8 @@ Ease Into Accelerating Direction Change Twirls
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'UizeSite.ParamsInspector.InlinePresets',
@@ -526,7 +526,7 @@ Uize.module ({
 		'Uize.Json',
 		'Uize.Node'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -630,7 +630,7 @@ Uize.module ({
 		/*** wire up the page widget ***/
 			page.wireUi ();
 	}
-});
+);
 
 </script>
 

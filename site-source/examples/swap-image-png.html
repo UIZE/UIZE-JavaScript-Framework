@@ -39,13 +39,13 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Swap.Image'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -79,7 +79,7 @@ Uize.module ({
 			wireImageLink (1,'../images/icons/crystal/Crystal_Clear_action_apply.png');
 			wireImageLink (2,'../images/icons/crystal/Crystal_Clear_action_stop.png');
 	}
-});
+);
 
 </script>
 

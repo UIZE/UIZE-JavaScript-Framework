@@ -31,14 +31,14 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:'UizeSite.Page.Doc.library',
-	builder:function () {
+Uize.require (
+	'UizeSite.Page.Doc.library',
+	function () {
 		(window.page = UizeSite.Page.Doc ()).wireUi ();
 
 		page.children.contents.collapseAllBut (['Site Map','Examples']);
 	}
-});
+);
 
 </script>
 

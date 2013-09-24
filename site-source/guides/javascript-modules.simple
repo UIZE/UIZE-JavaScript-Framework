@@ -191,12 +191,12 @@ Uize.module
 				As you can see from the above two snippets of code, the two modules =MyNamespace.MyModule1= and =MyNamespace.MyModule2= require each other. Now, if we declare an anonymous module that requires =MyNamespace.MyModule1=, the code in its =builder= function will never execute...
 
 				......................................................................
-				Uize.module ({
-					required:'MyNamespace.MyModule1',
-					builder:function () {
+				Uize.require (
+					'MyNamespace.MyModule1',
+					function () {
 						alert ('I will never be executed. How ever so terribly sad!!!');
 					}
-				});
+				);
 				......................................................................
 
 				From a certain perspective, not being executed might be considered a desirable outcome. However, when it comes to your code that you would like to be executed, it is frustrating to be thwarted by a dreaded circular dependency.

@@ -430,23 +430,25 @@ Guide: JavaScript Modules
 		You can have multiple consecutive module declarations that share common required modules and things will work correctly, rather than some of the required modules being loaded multiple times (which would cause all sorts of problems with modules stomping over themselves when re-declaring themselves and thereby crippling code).
 
 		EXAMPLE
-		..................................................
+		.......................................
 		Uize.module ({
+			name:'MyNamespace.Module1',
 			required:'Uize.Widget',
 			builder:function () {
-				alert ('build the first anonymous module');
+				alert ('build the first module');
 			}
 		});
 
 		Uize.module ({
+			name:'MyNamespace.Module1',
 			required:'Uize.Widget',
 			builder:function () {
-				alert ('build the second anonymous module');
+				alert ('build the second module');
 			}
 		});
-		..................................................
+		.......................................
 
-		The first anonymous module being declared requires the =Uize.Widget= module. If this module is not already loaded, then the module loader mechanism will load it asynchronously. The second anonymous module declaration occurs immediately after the first (because this code is synchronous), and it also requires the =Uize.Widget= module. A second request to load this required module externally is *not* made, because the module loader mechanism knows that loading of the module is already in progress.
+		The first module being declared requires the =Uize.Widget= module. If this module is not already loaded, then the module loader mechanism will load it asynchronously. The second module declaration occurs immediately after the first (because this code is synchronous), and it also requires the =Uize.Widget= module. A second request to load this required module externally is *not* made, because the module loader mechanism knows that loading of the module is already in progress.
 
 	Named Inline Module Required By Subsequent Anonymous Inline Module
 		You can have an inline module declaration that requires other external modules, and subsequent inline module declarations that require that first module will correctly wait until it is built - rather than trying to load it externally

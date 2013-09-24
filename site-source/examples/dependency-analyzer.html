@@ -100,8 +100,8 @@
 			- local sharedness (used by how many other modules in this dependency graph)
 */
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example',
 		'UizeSite.ModulesTree',
 		'Uize.Url',
@@ -115,7 +115,7 @@ Uize.module ({
 		'Uize.Tooltip',
 		'Uize.Widgets.Tooltip.Widget'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		var _selectorPlaceholderText = '-- NO MODULE SELECTED --';
@@ -436,7 +436,7 @@ Uize.module ({
 				_handleSelection ();
 
 	}
-});
+);
 
 </script>
 

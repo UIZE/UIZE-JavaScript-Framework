@@ -62,9 +62,9 @@
 
 				EXAMPLE
 				.....................................................................................
-				Uize.module ({
-					required:'Uize.Widget.Dialog.xResizable',
-					builder:function () {
+				Uize.require (
+					'Uize.Widget.Dialog.xResizable',
+					function () {
 						(MyNamespace.MyDialog = Uize.Widget.Dialog.subclass ()).set ({resizable:true});
 
 						var
@@ -72,7 +72,7 @@
 							myDialog2 = new MyNamespace.MyDialog ({resizable:false}) // non-resizable
 						;
 					}
-				});
+				);
 				.....................................................................................
 
 				In the above example, instances of the =MyNamespace.MyDialog= class are automatically resizable. It is still possible to suppress resizability by explicitly setting =resizable= to =false= during construction, as is the case with the =myDialog2= instance created in this example.
@@ -123,12 +123,12 @@ Uize.module ({
 									The interface of the =Uize.Widget.Resizer= class can be used to qualify how the dialog is resizable. For example, a dialog could be made only vertically resizable as follows...
 
 									........................................................................
-									Uize.module ({
-										required:[
+									Uize.require (
+										[
 											'Uize.Widget.Page',
 											'Uize.Widget.Dialog.xResizable'
 										],
-										builder:function () {
+										function () {
 											var page = window.page = Uize.Widget.Page ();
 
 											page.addChild (
@@ -137,7 +137,7 @@ Uize.module ({
 												fixedX:true
 											});
 										}
-									});
+									);
 									........................................................................
 
 									In the above example, notice how the =resizer= child widget is being dereferenced off the =children= property immediately after adding the dialog child widget. This is possible because the =addChild= instance method returns a reference to the child widget being added (the dialog in this case). Setting the =fixedX= state property of the =resizer= instance to =true= causes the dialog to be resizable only in the Y-axis (vertically).

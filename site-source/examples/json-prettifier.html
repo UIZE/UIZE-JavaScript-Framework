@@ -159,8 +159,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
@@ -169,7 +169,7 @@ Uize.module ({
 		'Uize.Widget.V2',
 		'Uize.Widgets.Button.Widget'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -289,7 +289,7 @@ Uize.module ({
 			choosePreset ('pretty');
 			resetTestData ();
 	}
-});
+);
 
 </script>
 

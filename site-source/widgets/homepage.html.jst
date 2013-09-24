@@ -89,10 +89,10 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:'UizeSite.Page.library',
-	builder:function () {(window.page = UizeSite.Page ()).wireUi ()}
-});
+Uize.require (
+	'UizeSite.Page.library',
+	function () {(window.page = UizeSite.Page ()).wireUi ()}
+);
 
 </script>
 

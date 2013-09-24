@@ -45,8 +45,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Swap.Image.Cycle',
@@ -55,7 +55,7 @@ Uize.module ({
 		'Uize.Data',
 		'UizeSite.TestData.Photos'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -84,7 +84,7 @@ Uize.module ({
 			page.wireNode ('start','click',function () {page.children.swapImageCycle.start ()});
 			page.wireNode ('stop','click',function () {page.children.swapImageCycle.stop ()});
 	}
-});
+);
 
 </script>
 

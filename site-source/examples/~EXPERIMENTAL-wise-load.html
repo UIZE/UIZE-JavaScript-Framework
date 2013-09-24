@@ -74,9 +74,9 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:'Uize.Node',
-	builder:function () {
+Uize.require (
+	'Uize.Node',
+	function () {
 		'use strict';
 
 		/*** find all images that need "wise load" applied to them ***/
@@ -104,7 +104,7 @@ Uize.module ({
 
 		loadImagesBecomingSeen ();
 	}
-});
+);
 
 </script>
 

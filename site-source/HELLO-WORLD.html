@@ -62,12 +62,12 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'Uize.Widget.HoverFader',
 		'Uize.Curve.Rubber'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the hover fader child widget ***/
@@ -86,7 +86,7 @@ Uize.module ({
 			Uize.Fx.fadeStyle ('helloWorld',{opacity:0},{opacity:1},2000);
 			setTimeout (function () {hoverFader.tickle (50)},2500);
 	}
-});
+);
 
 </script>
 

@@ -99,8 +99,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Node',
@@ -108,7 +108,7 @@ Uize.module ({
 		'Uize.Widgets.Slider.Widget',
 		'Uize.Widget.Resizer.Marquee'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -214,7 +214,7 @@ Uize.module ({
 			page.wireNode ('sizingUpperBound','change',updateImagePortSettings);
 			page.wireNode ('sizingLowerBound','change',updateImagePortSettings);
 	}
-});
+);
 
 </script>
 

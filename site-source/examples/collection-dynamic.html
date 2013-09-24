@@ -46,8 +46,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Collection.Dynamic',
@@ -56,7 +56,7 @@ Uize.module ({
 		'Uize.Templates.CollectionItem',
 		'UizeSite.TestData.Photos'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -107,7 +107,7 @@ Uize.module ({
 			}
 			collection.add (items);
 	}
-});
+);
 
 </script>
 

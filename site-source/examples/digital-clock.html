@@ -167,15 +167,15 @@ document.writeln (styleTag);
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.SegmentDisplay.Seven',
 		'Uize.Templates.SevenSegmentDisplay',
 		'Uize.Date.Formatter'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -206,7 +206,7 @@ Uize.module ({
 			updateClockDisplay ();
 			setInterval (updateClockDisplay,1000);
 	}
-});
+);
 
 </script>
 

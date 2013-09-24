@@ -202,8 +202,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widgets.Slider.Widget',
@@ -211,7 +211,7 @@ Uize.module ({
 		'Uize.Color',
 		'Uize.Color.xUtil'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/* TO DO:
@@ -457,7 +457,7 @@ Uize.module ({
 		/*** initialize ***/
 			transformColorThemeAndUpdatePreview ();
 	}
-});
+);
 
 </script>
 

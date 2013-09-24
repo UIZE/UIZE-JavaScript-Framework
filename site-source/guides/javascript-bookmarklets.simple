@@ -428,9 +428,9 @@ Useful Troubleshooting Bookmarklets
 			...........................................................................................
 			(function () {
 				function _performBookmarkletAction () {
-					Uize.module ({
-						required:['Uize.Fade','Uize.Fade.xFactory','Uize.Curve.Rubber'],
-						builder:function () {
+					Uize.require (
+						['Uize.Fade','Uize.Fade.xFactory','Uize.Curve.Rubber'],
+						function () {
 							var _newTitle = document.title;
 							Uize.Fade.fade (
 								function (_value) {document.title = _newTitle.slice (0,_value)},
@@ -440,7 +440,7 @@ Useful Troubleshooting Bookmarklets
 								{quantization:1,curve:Uize.Curve.Rubber.easeOutBounce (4,1.5)}
 							)
 						}
-					})
+					)
 				}
 				if (window.Uize)
 					_performBookmarkletAction ()

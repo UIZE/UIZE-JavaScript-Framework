@@ -80,14 +80,14 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Resizer.Marquee',
 		'Uize.Util.Coupler'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -136,7 +136,7 @@ Uize.module ({
 			page.wireNode ('coupled','click',updateCoupledFromCheckbox);
 			updateCoupledFromCheckbox ();
 	}
-});
+);
 
 </script>
 

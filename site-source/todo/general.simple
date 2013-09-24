@@ -306,6 +306,7 @@ Version Support in Module Mechanism
 		VARIATION 1
 		...............................................................
 		Uize.module ({
+			name:'MyNamescpae.MyModule',
 			required:[
 				'Uize.Curve',     // end up getting version 2, let's say
 				'Uize.Curve.Mod'  // end up getting version 3, let's say
@@ -321,6 +322,7 @@ Version Support in Module Mechanism
 		VARIATION 2
 		...............................................................
 		Uize.module ({
+			name:'MyNamescpae.MyModule',
 			required:{
 				_Uize_Curve:'Uize.Curve',         // end up getting version 2, let's say
 				_Uize_Curve_Mod:'Uize.Curve.Mod'  // end up getting version 3, let's say
@@ -352,6 +354,7 @@ Version Support in Module Mechanism
 		VARIATION 1
 		...............................................................
 		Uize.module ({
+			name:'MyNamescpae.MyModule',
 			required:[
 				'Uize.Curve[2]',      // require version 2 of this module
 				'Uize.Curve.Mod[3-]'  // require version 3 or higher of this module
@@ -367,6 +370,7 @@ Version Support in Module Mechanism
 		VARIATION 2
 		...............................................................
 		Uize.module ({
+			name:'MyNamescpae.MyModule',
 			required:{
 				_Uize_Curve:'Uize.Curve[2]',          // require version 2 of this module
 				_Uize_Curve_Mod:'Uize.Curve.Mod[3-]'  // require version 3 or higher of this module
@@ -384,6 +388,7 @@ Version Support in Module Mechanism
 		EXAMPLE
 		...............................................................
 		Uize.module ({
+			name:'MyNamescpae.MyModule',
 			required:{
 				_Uize_Curve:{
 					name:'Uize.Curve',
@@ -526,6 +531,7 @@ Version Support in Module Mechanism
 			EXAMPLE
 			....................................................................................................
 			Uize.module ({
+				name:'MyNamescpae.MyModule',
 				required:{
 					_Uize_Curve:{
 						name:'Uize.Curve',
@@ -669,12 +675,12 @@ Client Services
 			service:'enableProfile',
 			performService:function (_params,_directives) {
 				var m = this;
-				Uize.module ({
-					required:'Zazzle.Services.MemberProfile',
-					builder:function () {
+				Uize.require (
+					'Zazzle.Services.MemberProfile',
+					function () {
 						Zazzle.Services.MemberProfile.enable (_params,m);
 					}
-				});
+				);
 			}
 		}
 		...

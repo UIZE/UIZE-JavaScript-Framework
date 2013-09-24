@@ -80,8 +80,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widgets.Button.Widget',
@@ -93,7 +93,7 @@ Uize.module ({
 		'Uize.Url',
 		'Uize.Test'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		var
@@ -276,7 +276,7 @@ Uize.module ({
 				_page.setNodeValue ('testSelector',_runTest || _runAllModuleTests);
 				_selectTest (function () {_runTest && _testSuite.run ()});
 	}
-});
+);
 
 </script>
 

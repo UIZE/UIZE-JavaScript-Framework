@@ -105,15 +105,15 @@ Uize.module ({
 	}
 });
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Browser',
 		'Uize.Node',
 		'Uize.Node.VirtualEvent'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -125,7 +125,7 @@ Uize.module ({
 		/*** wire up the page widget ***/
 			page.wireUi ();
 	}
-});
+);
 
 </script>
 

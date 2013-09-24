@@ -57,8 +57,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example',
 		'UizeSite.ModulesTree',
 		'UizeSite.Build.Util',
@@ -69,7 +69,7 @@ Uize.module ({
 		'Uize.Widget.V2',
 		'Uize.Flo'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		var
@@ -207,7 +207,7 @@ Uize.module ({
 				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).namespace || 'Uize.Widgets');
 				_handleSelection ();
 	}
-});
+);
 
 </script>
 

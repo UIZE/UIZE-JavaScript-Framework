@@ -286,8 +286,8 @@ Peach to Red With Black Lines
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'UizeSite.ParamsInspector.InlinePresets',
@@ -302,7 +302,7 @@ Uize.module ({
 		'Uize.Node.Event',
 		'Uize.Tooltip'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -393,7 +393,7 @@ Uize.module ({
 			page.wireUi ();
 			colorInfo.setNodeStyle ('',{display:'none'});
 	}
-});
+);
 
 </script>
 

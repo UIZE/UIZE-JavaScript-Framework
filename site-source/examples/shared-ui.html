@@ -71,14 +71,14 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Bar.Slider',
 		'Uize.Node'
 	],
-	builder:function () {
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -152,7 +152,7 @@ Uize.module ({
 			page.children.sliderFontSize.wire ('Changed.value',updateSampleFontSize);
 			updateSampleFontSize ();
 	}
-});
+);
 
 </script>
 

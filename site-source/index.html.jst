@@ -324,10 +324,10 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:'UizeSite.Page.Home.library',
-	builder:function () {(window.page = UizeSite.Page.Home ()).wireUi ()}
-});
+Uize.require (
+	'UizeSite.Page.Home.library',
+	function () {(window.page = UizeSite.Page.Home ()).wireUi ()}
+);
 
 </script>
 

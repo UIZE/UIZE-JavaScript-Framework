@@ -29,9 +29,9 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:'UizeSite.WidgetToGoPage.<%= _cappedWidgetName %>.library',
-	builder:function () {
+Uize.require (
+	'UizeSite.WidgetToGoPage.<%= _cappedWidgetName %>.library',
+	function () {
 		'use strict';
 
 		(
@@ -40,7 +40,7 @@ Uize.module ({
 			})
 		).wireUi ();
 	}
-});
+);
 
 </script>
 

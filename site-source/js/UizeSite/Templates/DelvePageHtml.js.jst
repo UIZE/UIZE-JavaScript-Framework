@@ -24,13 +24,13 @@
 Uize.require (
 	'UizeSite.Delve.library',
 	function () {
-		Uize.module ({
-			required:[
+		Uize.require (
+			[
 				'UizeSite.Templates.DelveUiHtml',
 				'Uize.Node',
 				'UizeSite.Delve'
 			],
-			builder:function () {
+			function () {
 				/*** inject the guts of the page ***/
 					Uize.Node.injectHtml (document.body,UizeSite.Templates.DelveUiHtml.process ());
 
@@ -40,7 +40,7 @@ Uize.require (
 				/*** wire up the page widget ***/
 					_page.wireUi ();
 			}
-		});
+		);
 	}
 );
 

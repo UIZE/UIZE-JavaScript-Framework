@@ -44,9 +44,9 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:'UizeSite.Page.Example.Test.library',
-	builder:function () {
+Uize.require (
+	'UizeSite.Page.Example.Test.library',
+	function () {
 		'use strict';
 
 		/*** create the example page widget ***/
@@ -116,7 +116,7 @@ Uize.module ({
 		/*** wire up the page widget ***/
 			page.wireUi ();
 	}
-});
+);
 
 </script>
 

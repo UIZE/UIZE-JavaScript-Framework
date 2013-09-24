@@ -225,8 +225,8 @@
 
 <script type="text/javascript">
 
-Uize.module ({
-	required:[
+Uize.require (
+	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 
@@ -235,10 +235,10 @@ Uize.module ({
 		'Uize.Curve.Rubber',
 		'Uize.Curve.Mod'
 	],
-	builder:function () {
+	function () {
 		(window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}})).wireUi ();
 	}
-});
+);
 
 </script>
 
