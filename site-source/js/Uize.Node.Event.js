@@ -111,10 +111,10 @@ Uize.module ({
 
 			_package.fix = function (_event) {
 				_event || (_event = event);
-				_event.target = _package.target (_event);
-				_event.relatedTarget = _package.relatedTarget (_event);
-				_event.charCode = _package.charCode (_event);
-				_event.keyCode = _package.keyCode (_event);
+				
+				for (var _propertyName in {target:1, relatedTarget:1, charCode:1, keyCode:1})
+					_propertyName in _event || (_event[_propertyName] = _package[_propertyName](_event))
+				;
 				_event.preventDefault || (_event.preventDefault = _preventDefault);
 				_event.stopPropagation || (_event.stopPropagation = _stopPropagation);
 
