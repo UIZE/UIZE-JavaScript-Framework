@@ -1,5 +1,45 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
+Code Size Optimization
+	- review deprecated features and kill as many as possible
+		- C:/~uize/UIZE-JavaScript-Framework/site-source/js/Uize.Node.js
+			- Uize.Node.returnFalse and Uize.Node.returnTrue static methods
+	- switch all modules over to using m for capturing this
+	- new and more compact module declaration syntax for pure namespace modules...
+
+		INSTEAD OF...
+		.................................
+		Uize.module ({name:'Uize.Util'});
+		.................................
+
+		USE...
+		..........................
+		Uize.module ('Uize.Util');
+		..........................
+
+	- look at migrating some lesser used features out of core modules into new / other modules
+		- Uize
+		- Uize.Class
+		- Uize.Node
+		- Uize.Widget
+		- Uize.Widget.V2
+
+	- implement lighter weight JSON module that can be used by Uize.Widget.V2
+
+	- implement new feature for ui wirers for widgets and switch away from old wireUi approach
+		- gone is the need for the "if (this.isWired)" safety wrapper and the "_superclass.doMy ('wireUi')" call to the superclass' implementation
+
+	- make sure to use Uize.require in place of anonymous modules
+
+	- tougher
+		- for =Uize.Node=, explore eliminating dependency on =Uize.Class=
+
+		- make all namespace modules purely namespace modules
+			- violators...
+				- =Uize.String=
+				- =Uize.Data=
+				- =Uize.Date=
+
 Folder Organization of JavaScript Modules
 	Support the ability to have JavaScript modules optionally organized inside folders, rather than all being in a flat list inside a single folder.
 
@@ -71,7 +111,6 @@ Convert to Using Uize.require Where Possible
 	Convert all usages of the =Uize.module= method for declaring anonymous modules over to using the =Uize.require= method.
 
 Possible New Namespaces
-	* Uize.Math
 	- Uize.Web (or Uize.Browser? or Uize.Html? or Uize.WebBrowser? or Uize.Wb? or Uize.Www?)
 	- Uize.Crypto
 
