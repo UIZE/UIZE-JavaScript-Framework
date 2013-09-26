@@ -107,9 +107,6 @@ Eliminate Private Methods As Properties
 	- update guide documentation on classes, inheritance, feature declaration, and such to no longer recommend defining private methods as "_" prefixed properties on the instance or class
 	- there will be a few cases where private instance methods are provided as =onChange= handlers for state properties - these will have to be left as is, and if they are also called on =this=, then they will have to be called using the =call= or =apply= methods
 
-Convert to Using Uize.require Where Possible
-	Convert all usages of the =Uize.module= method for declaring anonymous modules over to using the =Uize.require= method.
-
 Possible New Namespaces
 	- Uize.Web (or Uize.Browser? or Uize.Html? or Uize.WebBrowser? or Uize.Wb? or Uize.Www?)
 	- Uize.Crypto
@@ -345,7 +342,7 @@ Version Support in Module Mechanism
 		VARIATION 1
 		...............................................................
 		Uize.module ({
-			name:'MyNamescpae.MyModule',
+			name:'MyNamespace.MyModule',
 			required:[
 				'Uize.Curve',     // end up getting version 2, let's say
 				'Uize.Curve.Mod'  // end up getting version 3, let's say
@@ -361,7 +358,7 @@ Version Support in Module Mechanism
 		VARIATION 2
 		...............................................................
 		Uize.module ({
-			name:'MyNamescpae.MyModule',
+			name:'MyNamespace.MyModule',
 			required:{
 				_Uize_Curve:'Uize.Curve',         // end up getting version 2, let's say
 				_Uize_Curve_Mod:'Uize.Curve.Mod'  // end up getting version 3, let's say
@@ -393,7 +390,7 @@ Version Support in Module Mechanism
 		VARIATION 1
 		...............................................................
 		Uize.module ({
-			name:'MyNamescpae.MyModule',
+			name:'MyNamespace.MyModule',
 			required:[
 				'Uize.Curve[2]',      // require version 2 of this module
 				'Uize.Curve.Mod[3-]'  // require version 3 or higher of this module
@@ -409,7 +406,7 @@ Version Support in Module Mechanism
 		VARIATION 2
 		...............................................................
 		Uize.module ({
-			name:'MyNamescpae.MyModule',
+			name:'MyNamespace.MyModule',
 			required:{
 				_Uize_Curve:'Uize.Curve[2]',          // require version 2 of this module
 				_Uize_Curve_Mod:'Uize.Curve.Mod[3-]'  // require version 3 or higher of this module
@@ -427,7 +424,7 @@ Version Support in Module Mechanism
 		EXAMPLE
 		...............................................................
 		Uize.module ({
-			name:'MyNamescpae.MyModule',
+			name:'MyNamespace.MyModule',
 			required:{
 				_Uize_Curve:{
 					name:'Uize.Curve',
@@ -570,7 +567,7 @@ Version Support in Module Mechanism
 			EXAMPLE
 			....................................................................................................
 			Uize.module ({
-				name:'MyNamescpae.MyModule',
+				name:'MyNamespace.MyModule',
 				required:{
 					_Uize_Curve:{
 						name:'Uize.Curve',
@@ -587,6 +584,44 @@ Version Support in Module Mechanism
 	Issues to Address
 		- if one has a reference to a module, such as in a tool like the Delve tool, how does one determine what the filename of a module is for the purpose of linking to reference documentation?
 		- if a `variation qualifier` is used to indicate a very specific variation of a module, and if that variation is not yet loaded, how does the module loader mechanism know where to obtain a variation that matches the criteria of the `variation qualifier`?
+
+	### More Thoughts
+		Some Basic Principles
+
+			- a module should be able to require a module in its scope, where the module supplied to satisfy the request may differ to the module supplied to the same request by a different module
+
+			- the way that required modules are resolved to actual modules should be specified as part of environment configuration / behavior and should not be explicitly defined in the module requiring the modules
+
+			- the way that required modules are resolved to actual modules should inform the dynamic loading process as well as the build / packaging process
+
+			- any module should be able to be loaded in a different way
+
+			- it should be possible for required modules to be mapped to names / aliases that are used internally by the requiring module
+
+			- it should be possible for a required module to be specified in qualitative terms rather than in resource location / identifier terms (such as by specifying a required interface or capabilities, and version ranges)
+
+			POSSIBLE SYNTAX
+			......................................
+			Module (
+				'Foo.Bar',
+				{
+					Slider:'Uize.Widgets.Slider'
+				},
+				function (_module) {
+					var _slider = _module.Slider ();
+				}
+			)
+			......................................
+
+		Static Methods
+			- =Module.require=
+
+		Instance Methods
+			- =require= - requires one or more modules within the scope of the current module
+			- =module= - declares an inner module
+
+		Module Instances
+			In order for two instances of the same module to behave differently in terms of the modules that they require and are given, the two instances truly need to be different module instances. This means that the
 
 JavaScript Language Unit Tests
 	Implement unit tests for all features of the JavaScript language.
