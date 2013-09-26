@@ -973,7 +973,7 @@ Uize.module ({
 									['Test that, when a matcher matches some elements of an array source, only those matching elements are retained',
 										[
 											['','hey','','there','foo','','','bar'],
-											function (_value) {return _value}
+											Uize.returnX
 										],
 										['hey','there','foo','bar']
 									],
@@ -996,7 +996,7 @@ Uize.module ({
 									['Test that, when a matcher matches some properties of an object source, only those matching properties are retained',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
-											function (_value) {return _value}
+											Uize.returnX
 										],
 										{prop1:'hey',prop3:'there',prop4:'foo',prop7:'bar'}
 									],
