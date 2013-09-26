@@ -1,62 +1,76 @@
-This is a TO DO document for the proposed =Uize.Widgets.ChoiceAnalyzer= module.
+This is a TO DO document for the proposed =ChoiceAnalyzer.Widget= module.
 
-ChoiceAnalyzer
+ChoiceAnalyzer.Widget
 	Child Widgets
-		- one IdealChoice
-		- multiple Choice
+		- 1 x =ChoiceAnalyzer.Choice.Ideal.Widget=
+		- n x =ChoiceAnalyzer.Choice.Candidate.Widget=
 
 	State Properties
-		- choiceMatrix
+		- =choiceMatrix=
 
 	Behaviors
-		- when weight of any quality in IdealChoice changes, that value is distributed to all Choice instances
-		- from the choiceMatrix property, an IdealChoice and multiple Choice child widgets are created
+		- when weight of any quality in =ChoiceAnalyzer.Choice.Ideal.Widget= changes, that value is distributed to all =ChoiceAnalyzer.Choice.Candidate.Widget= instances
+		- from the choiceMatrix property, 1 x =ChoiceAnalyzer.Choice.Ideal.Widget= and n x =ChoiceAnalyzer.Choice.Candidate.Widget= child widgets are created
 
-ChoiceAbstract
+ChoiceAnalyzer.Choice.Widget
+	Abstract class.
+
 	Child Widgets
-		- one ChoiceHeading
-		- multiple choice quality (default widget class is )
-		- one ChoiceScore
+		- 1 x =ChoiceAnalyzer.Choice.Heading.Widget=
+		- n x =qualityWidgetClass= (default widget class is =ChoiceAnalyzer.Choice.Quality.Widget=)
+		- 1 x =ChoiceAnalyzer.Choice.Score.Widget=
 
 	State Properties
-		- title
-		- choiceQualities
+		- =title=
+		- =qualities=
+
+			............................
+			[
+				{
+					title:qualityTitleSTR,
+					weight:weightNUM,
+					value:valueNUM
+				}
+			]
+			............................
 
 	Behaviors
-		- when the weight or value of any quality changes, those values are distributed to the ChoiceScore widget
-		- from the choiceQualities property, multiple choice quality widgets are created
+		- when the =weight= or =value= of any quality changes, those values are distributed to the =ChoiceAnalyzer.Choice.Score.Widget= widget
+		- from the qualities property, n x =qualityWidgetClass= widgets are created
 
-IdealChoice
-	Subclasses ChoiceAbstract.
+ChoiceAnalyzer.Choice.Ideal
+	Subclasses =ChoiceAnalyzer.Choice.Widget=.
 
-	Sets widget class for choice quality to IdealChoiceQuality.
+	Sets =qualityWidgetClass= to =ChoiceAnalyzer.Choice.Ideal.Quality.Widget=.
 
-Choice
-	Subclasses ChoiceAbstract.
+ChoiceAnalyzer.Choice.Candidate.Widget
+	Subclasses =ChoiceAnalyzer.Choice.Widget=.
 
-	Sets widget class for choice quality to ChoiceQuality.
+	Sets =qualityWidgetClass= to =ChoiceAnalyzer.Choice.Candidate.Quality.Widget=.
 
-ChoiceQualityAbstract
+ChoiceAnalyzer.Choice.Quality.Widget
+	Abstract class.
+
 	State Properties
-		- weight
-		- value
+		- =weight=
+		- =value=
 
-IdealChoiceQuality
-	Subclasses ChoiceQualityAbstract.
+ChoiceAnalyzer.Choice.Ideal.Quality.Widget
+	Subclasses =ChoiceAnalyzer.Choice.Quality.Widget=.
 
 	Child Widgets
-		- Spinner (text input with decrement and increment buttons) for editing weight
+		- 1 x =Spinner.Widget= (text input with decrement and increment buttons) for editing =weight=
 
-	Sets value as being derived and always one.
+	Sets =value= as being derived and always one.
 
-ChoiceQuality
-	Subclasses ChoiceQualityAbstract.
+ChoiceAnalyzer.Choice.Candidate.Quality.Widget
+	Subclasses =ChoiceAnalyzer.Choice.Quality.Widget=.
 
 	Child Widgets
-		- SliderWithInput for editing value
+		- 1 x =Slider.WithInput.Widget= (for editing value)
 
-ChoiceScore
+ChoiceAnalyzer.Choice.Score.Widget
 	State Properties
-		- title
-		- score (derived)
+		- =title=
+		- =score= (derived)
 

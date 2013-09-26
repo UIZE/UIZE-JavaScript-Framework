@@ -11,7 +11,7 @@
 
 /* Module Meta Data
 	type: Class
-	importance: 5
+	importance: 2
 	codeCompleteness: 100
 	docCompleteness: 2
 */
@@ -185,7 +185,7 @@ Uize.module ({
 				},
 				_coordConverter:{
 					name:'coordConverter',
-					value:function (_number) {return _number}
+					value:Uize.returnX
 				},
 				_maxScaling:{
 					name:'maxScaling',
