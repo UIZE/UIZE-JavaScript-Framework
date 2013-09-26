@@ -11,7 +11,7 @@
 
 /* Module Meta Data
 	type: Class
-	importance: 5
+	importance: 2
 	codeCompleteness: 100
 	docCompleteness: 2
 */
