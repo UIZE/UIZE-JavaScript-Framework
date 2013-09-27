@@ -1,44 +1,145 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
 Code Size Optimization
-	- review deprecated features and kill as many as possible
-		- C:/~uize/UIZE-JavaScript-Framework/site-source/js/Uize.Node.js
-			- Uize.Node.returnFalse and Uize.Node.returnTrue static methods
-	- switch all modules over to using m for capturing this
-	- new and more compact module declaration syntax for pure namespace modules...
+	Kill Deprecated Features
+		Review deprecated features and kill as many as possible.
 
-		INSTEAD OF...
-		.................................
-		Uize.module ({name:'Uize.Util'});
-		.................................
+		Uize.Node
+			- =Uize.Node.returnFalse= and =Uize.Node.returnTrue= static methods are no longer needed since they were migrated to =Uize=
 
-		USE...
-		..........................
-		Uize.module ('Uize.Util');
-		..........................
+		Uize.Class
+			- =MyClass.registerProperties=
 
-	- look at migrating some lesser used features out of core modules into new / other modules
-		- Uize
-		- Uize.Class
-		- Uize.Node
-		- Uize.Widget
-		- Uize.Widget.V2
+		Uize
+			- =Uize.globalEval=
 
-	- implement lighter weight JSON module that can be used by Uize.Widget.V2
+		Uize.Service
+			- =Uize.Service.declareServiceMethods=
 
-	- implement new feature for ui wirers for widgets and switch away from old wireUi approach
-		- gone is the need for the "if (this.isWired)" safety wrapper and the "_superclass.doMy ('wireUi')" call to the superclass' implementation
+	Use "m" for "this"
+		Switch all modules over to using "m" for capturing a reference to this.
 
-	- make sure to use Uize.require in place of anonymous modules
+		Because "_this" is scrunched to "a_a" (for example) in most modules, using simply unscrunched "m" will reduce size, especially given how pervasive "_this" is. Furthermore, typing "m." is much smoother and more natural than typing "_this.", and it will also reduce clutter / noise in the source. All in all, "m." wins at all levels. It beats "self.", "me.", "my.", "_." (which I've seen in some code), and most anything else in terms of typing friction.
 
-	- tougher
-		- for =Uize.Node=, explore eliminating dependency on =Uize.Class=
+		Probably will want to wait on doing this for the modules that have changes in pending pull requests.
 
-		- make all namespace modules purely namespace modules
-			- violators...
-				- =Uize.String=
-				- =Uize.Data=
-				- =Uize.Date=
+	Improved Module Declaration Semantics
+		Compact Namespace Module Declaration
+			Support a new and more compact module declaration syntax for pure namespace modules...
+
+			INSTEAD OF...
+			.................................
+			Uize.module ({name:'Uize.Util'});
+			.................................
+
+			USE...
+			..........................
+			Uize.module ('Uize.Util');
+			..........................
+
+		Module Declaration Short Form
+			Support a new short form for module declaration as an alternative to the object form.
+
+			INSTEAD OF...
+			....................................
+			Uize.module ({
+				name:'MyNamespace.MyModule',
+				required:[
+					'RequiredModule1',
+					'RequiredModule2'
+				],
+				builder:function () {
+					// build and return the module
+				}
+			});
+			....................................
+
+			USE...
+			.....................................
+			Uize.module (
+				'MyNamespace.MyModule',
+				[
+					'RequiredModule1',
+					'RequiredModule2'
+				],
+				function () {
+					// build and return the module
+				}
+			);
+			.....................................
+
+			OR...
+			.....................................
+			Uize.module ([
+				'MyNamespace.MyModule',
+				[
+					'RequiredModule1',
+					'RequiredModule2'
+				],
+				function () {
+					// build and return the module
+				}
+			]);
+			.....................................
+
+	Migrate Features
+		Look at migrating some lesser used features out of core modules into new / other modules.
+
+		Uize
+			Specific features to be decided.
+
+		Uize.Class
+			Specific features to be decided.
+
+		Uize.Node
+			Factor out Positioning Methods
+				Factor out the positioning-related methods into a separate =Uize.Node.Pos= module.
+
+				- =Uize.Node.getCoords=
+				- =Uize.Node.doRectanglesOverlap=
+				- =Uize.Node.setCoords=
+				- =Uize.Node.centerInWindow=
+				- =Uize.Node.setAbsPos=
+				- =Uize.Node.getEventAbsPos=
+				- =Uize.Node.setAbsPosAdjacentTo=
+
+		Uize.Widget
+			Specific features to be decided.
+
+		Uize.Widget.V2
+			Specific features to be decided.
+
+		Uize.String
+			Factor out Uize.String.split
+				Move the =Uize.String.split= static method into its own separate module, since it's only used in a tiny number of places and addresses an edge case issue with some IE versions that is going away.
+
+	Lightweight JSON Module
+		Implement lighter weight JSON module that can be used by =Uize.Widget.V2=.
+
+		It's time. There are now enough clients that support the built-in =JSON= object that it's time to create a lightweight, non-pretty print serializer and parser for JSON objects that can be used in the =Uize.Widget.V2= module and other modules where control over formatting is not needed.
+
+	Improvements in Uize.Widget
+		Implement Way of Declaring UI Wirers
+			Implement a new feature for UI wirers for widgets and switch away from old =wireUi= approach.
+
+			Gone will be the need for the "if (this.isWired)" safety wrapper and the "_superclass.doMy ('wireUi')" call to the superclass' implementation.
+
+	Tougher to Accomplish
+		Eliminate Uize.Class Dependency in Uize.Node
+			For the =Uize.Node= module, explore eliminating the dependency on =Uize.Class=.
+
+			The =Uize.Class= module is used purely for creating a wrapper for managing event wiring on the =window= object. Perhaps this can be factored out into a module that represents the browser window, or perhaps there's a cheaper way to implement the wrapper. The latter option is more desirable, since it is the least disruptive to other modules that use =Uize.Node=.
+
+		Pure Namespace Modules at Second Level
+			Try to make all modules at the second level purely namespace modules.
+
+			Current violators...
+
+			- =Uize.String=
+			- =Uize.Data=
+			- =Uize.Date=
+
+			The above modules include code that then becomes baggage for all modules under those namespaces.
 
 Folder Organization of JavaScript Modules
 	Support the ability to have JavaScript modules optionally organized inside folders, rather than all being in a flat list inside a single folder.
