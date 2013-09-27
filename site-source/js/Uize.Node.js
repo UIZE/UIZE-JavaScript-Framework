@@ -1676,7 +1676,12 @@ Uize.module ({
 						;
 						if (_isIe && 'opacity' in _properties)
 							_nodeStyle.filter =
-								(_propertyValue = Math.round(_properties.opacity * 100)) < 100 && !_Uize.isEmpty(_properties.opacity)
+								// NOTE: if the value is an empty string, it will be turned into #, which will produce NaN
+								// when multiplied by 100, and NaN is not less than 100. For the number 0, the string '0' will
+								// be retained and coerced back to 0 when multiplied. This is more compact and does not involve
+								// an additional function call, which is more important for animations for opacity where it is
+								// called repeatedly.
+								(_propertyValue = Math.round ((_properties.opacity + '' || '#') * 100) < 100)
 									? 'alpha(opacity=' + _propertyValue + ')'
 									: ''
 						;

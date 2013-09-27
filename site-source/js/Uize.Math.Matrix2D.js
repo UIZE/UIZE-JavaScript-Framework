@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Matrix2D Object
+|    /    O /   |    MODULE : Uize.Math.Matrix2D Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)1997-2013 UIZE
@@ -18,18 +18,18 @@
 
 /*?
 	Introduction
-		The =Uize.Matrix2D= module provides support for building and applying 2-D affine transformations in a 2-dimensional plane.
+		The =Uize.Math.Matrix2D= module provides support for building and applying 2-D affine transformations in a 2-dimensional plane.
 
 		*DEVELOPERS:* `Petar Ivanov` & `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 		
 		Not a Uize Subclass
-			First off, it's worth emphasizing that the =Uize.Matrix2D= object is not a =Uize.Class= subclass, but a very lightweight object.
+			First off, it's worth emphasizing that the =Uize.Math.Matrix2D= object is not a =Uize.Class= subclass, but a very lightweight object.
 
-			As such, the =Uize.Matrix2D= object does not support events, does not provide state properties, does not inherit subclassing facilities from the =Uize.Class= base class, etc. This object is deliberately designed to be very lightweight and to have a really tiny footprint - in the spirit of JavaScript's native objects, such as =String=, =Number=, =Date=, and the like.
+			As such, the =Uize.Math.Matrix2D= object does not support events, does not provide state properties, does not inherit subclassing facilities from the =Uize.Class= base class, etc. This object is deliberately designed to be very lightweight and to have a really tiny footprint - in the spirit of JavaScript's native objects, such as =String=, =Number=, =Date=, and the like.
 */
 
 Uize.module ({
-	name:'Uize.Matrix2D',
+	name:'Uize.Math.Matrix2D',
 	builder:function () {
 		'use strict'; // http://www.nczonline.net/blog/2012/03/13/its-time-to-start-using-javascript-strict-mode/
 
@@ -54,16 +54,16 @@ Uize.module ({
 						
 						/*?
 							Constructor
-								Creates an instance of the =Uize.Matrix2D= object from the specified coefficients.
+								Creates an instance of the =Uize.Math.Matrix2D= object from the specified coefficients.
 	
 								SYNTAX
 								.....................................
-								var matrixOBJ = Uize.Matrix2D(xxFLOAT, yxFLOAT, xyFLOAT, yyFLOT, xFLOAT, yFLOAT);
+								var matrixOBJ = Uize.Math.Matrix2D(xxFLOAT, yxFLOAT, xyFLOAT, yyFLOT, xFLOAT, yFLOAT);
 								.....................................
 
 								EXAMPLE
 								..................................................................
-								var matrix = Uize.Matrix2D (2.0, 3.0, 4.0, 5.0, 6.0, 7.0);
+								var matrix = Uize.Math.Matrix2D (2.0, 3.0, 4.0, 5.0, 6.0, 7.0);
 								..................................................................
 								
 								This will resultant in a matrix that looks like...
@@ -75,14 +75,14 @@ Uize.module ({
 								
 								VARIATION 1
 								.....................................
-								var matrixOBJ = Uize.Matrix2D(coefficientsARRAY);
+								var matrixOBJ = Uize.Math.Matrix2D(coefficientsARRAY);
 								.....................................
 
 								In this variation, the coefficients, instead of being passed as individual parameters, are passed as a 6-element array.
 
 								EXAMPLE
 								..................................................................
-								var matrix = Uize.Matrix2D ([2.0, 3.0, 4.0, 5.0, 6.0, 7.0]);
+								var matrix = Uize.Math.Matrix2D ([2.0, 3.0, 4.0, 5.0, 6.0, 7.0]);
 								..................................................................
 								
 								This will resultant in a matrix that looks like...
@@ -94,14 +94,14 @@ Uize.module ({
 								
 								VARIATION 2
 								.....................................
-								var matrixOBJ = Uize.Matrix2D();
+								var matrixOBJ = Uize.Math.Matrix2D();
 								.....................................
 
-								When no parameters are passed to the =Uize.Matrix2D= `constructor`, the matrix is initialized as the identity matrix.
+								When no parameters are passed to the =Uize.Math.Matrix2D= `constructor`, the matrix is initialized as the identity matrix.
 
 								EXAMPLE
 								..................................................................
-								var identityMatrix = Uize.Matrix2D ();
+								var identityMatrix = Uize.Math.Matrix2D ();
 								..................................................................
 								
 								This will resultant in a matrix that looks like...
@@ -138,7 +138,7 @@ Uize.module ({
 				/*?
 					Instance Methods
 						clone
-							Makes a copy of the 2-D matrix, returning a reference to the cloned =Uize.Matrix2D= object.
+							Makes a copy of the 2-D matrix, returning a reference to the cloned =Uize.Math.Matrix2D= object.
 
 							SYNTAX
 							.....................................................
@@ -146,7 +146,7 @@ Uize.module ({
 							.....................................................
 
 							NOTES
-							- Returns a reference to the cloned =Uize.Matrix2D= object
+							- Returns a reference to the cloned =Uize.Math.Matrix2D= object
 				*/
 			};
 			
@@ -175,8 +175,8 @@ Uize.module ({
 
 							EXAMPLE
 							.....................................................
-							var matrix = Uize.Matrix2D(1,0,0,1,20,30);
-							matrix.multiply(Uize.Matrix2D(2,0,0,2,8,9));
+							var matrix = Uize.Math.Matrix2D(1,0,0,1,20,30);
+							matrix.multiply(Uize.Math.Matrix2D(2,0,0,2,8,9));
 							.....................................................
 							
 							The matrix created in the previous example would be...
@@ -188,7 +188,7 @@ Uize.module ({
 
 							NOTES
 							- The other transformation is added after the orignal one (i.e. appended).
-							- Returns a reference to the same =Uize.Matrix2D= object
+							- Returns a reference to the same =Uize.Math.Matrix2D= object
 				*/
 			};
 			
@@ -212,7 +212,7 @@ Uize.module ({
 
 							EXAMPLE
 							.....................................................
-							var matrix = Uize.Matrix2D();
+							var matrix = Uize.Math.Matrix2D();
 							matrix.rotate(Math.PI / 4);
 							.....................................................
 
@@ -227,7 +227,7 @@ Uize.module ({
 							- The rotation is added after the original transformation (i.e. appended).
 							- =angleFLOAT= is in radians
 							- Positive rotation is a rotation from positive X-axis towards positive Y-axis
-							- Returns a reference to the same =Uize.Matrix2D= object
+							- Returns a reference to the same =Uize.Math.Matrix2D= object
 
 				*/
 			};
@@ -248,7 +248,7 @@ Uize.module ({
 
 							EXAMPLE
 							.....................................................
-							var matrix = Uize.Matrix2D(1,2,3,4,20,30);
+							var matrix = Uize.Math.Matrix2D(1,2,3,4,20,30);
 							matrix.scale(10, 100);
 							.....................................................
 
@@ -261,7 +261,7 @@ Uize.module ({
 
 							NOTES
 							- The scaling transformation is added after the original one (i.e. appended).
-							- Returns a reference to the same =Uize.Matrix2D= object
+							- Returns a reference to the same =Uize.Math.Matrix2D= object
 				*/
 			};
 
@@ -300,7 +300,7 @@ Uize.module ({
 
 							EXAMPLE
 							.....................................................
-							var matrix = Uize.Matrix2D(1,0,0,1,20,30);
+							var matrix = Uize.Math.Matrix2D(1,0,0,1,20,30);
 							matrix.translate(8, 9);
 							.....................................................
 
@@ -313,7 +313,7 @@ Uize.module ({
 
 							NOTES
 							- The translation is added after the original transformation (i.e appended).
-							- Returns a reference to the same =Uize.Matrix2D= object
+							- Returns a reference to the same =Uize.Math.Matrix2D= object
 				*/
 			};
 			
@@ -333,7 +333,7 @@ Uize.module ({
 
 							EXAMPLE
 							.....................................................
-							var matrix = Uize.Matrix2D();
+							var matrix = Uize.Math.Matrix2D();
 							matrix.rotate(Math.PI / 2);
 							matrix.translate(20,30);
 							var matrixArray = matrix.values();
@@ -377,7 +377,7 @@ Uize.module ({
 
 							EXAMPLE
 							.....................................................
-							var matrix = Uize.Matrix2D();
+							var matrix = Uize.Math.Matrix2D();
 							matrix.rotate(Math.PI / 2);
 							var vector = matrix.xForm(1,0);
 							.....................................................
@@ -393,7 +393,7 @@ Uize.module ({
 
 							EXAMPLE
 							.....................................................
-							var matrix = Uize.Matrix2D();
+							var matrix = Uize.Math.Matrix2D();
 							matrix.rotate(Math.PI / 2);
 							var vector = matrix.xForm({x:1, y:0});
 							.....................................................
