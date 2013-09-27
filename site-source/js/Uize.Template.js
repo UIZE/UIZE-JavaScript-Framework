@@ -132,7 +132,8 @@ Uize.module ({
 	name:'Uize.Template',
 	required:[
 		'Uize.String',
-		'Uize.String.Replace'
+		'Uize.String.Replace',
+		'Uize.String.Split'
 	],
 	builder:function () {
 		'use strict';
@@ -144,7 +145,7 @@ Uize.module ({
 				_false = false,
 				_string = 'string',
 				_Uize_String = Uize.String,
-				_Uize_String_splitInTwo = _Uize_String.splitInTwo,
+				_Uize_String_splitInTwo = _Uize_String.Split.splitInTwo,
 				_Uize_String_trim = _Uize_String.trim,
 				_jsonStringLiteralEscaper = _Uize_String.Replace.replacerByLookup ({
 					'\\':'\\\\',

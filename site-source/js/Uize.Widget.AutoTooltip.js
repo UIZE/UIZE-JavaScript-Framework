@@ -31,7 +31,8 @@ Uize.module ({
 	name:'Uize.Widget.AutoTooltip',
 	required:[
 		'Uize.Tooltip',
-		'Uize.String'
+		'Uize.String',
+		'Uize.String.Split'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -159,7 +160,7 @@ Uize.module ({
 								_nameValueStr = _nameValueMatch [2]
 							;
 							if (_nameValueStr) {
-								var _nameValue = Uize.String.splitInTwo (_nameValueStr,/\s*:\s*/);
+								var _nameValue = Uize.String.Split.splitInTwo (_nameValueStr,/\s*:\s*/);
 								_result [_dataKeyTransformer (_nameValue [0])] = _nameValue [1];
 								_sourceStr = _sourceStr.substr (_nameValueMatch [1].length);
 							} else {
