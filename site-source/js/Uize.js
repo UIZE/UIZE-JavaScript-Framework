@@ -4467,9 +4467,7 @@ Uize = (function () {
 			*/
 		);
 
-		_package.laxEval =
-		_package.globalEval = /* DEPRECATED 2013-01-14 */
-		_Function (
+		_package.laxEval = _Function (
 			'return eval (arguments [0])'
 			/*?
 				Static Methods
@@ -5256,7 +5254,7 @@ Uize = (function () {
 					);
 					/*?
 						Static Methods
-							Uise.addFolderOrgNamespaces
+							Uize.addFolderOrgNamespaces
 								DIFFERENT USAGES
 
 								`Add a Single Folder Organized Namespace`
