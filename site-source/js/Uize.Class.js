@@ -1553,122 +1553,119 @@ Uize.module ({
 				};
 
 
-				_class.stateProperties =
-				_class.registerProperties = /* DEPRECATED 2013-01-02 */
-					function (_propertyProfiles) {
+				_class.stateProperties = function (_propertyProfiles) {
+					var
+						m = this,
+						_propertyProfilesByPrivateName = m._propertyProfilesByPrivateName,
+						_propertyProfilesByPublicName = m._propertyProfilesByPublicName,
+						_declaredDerivedProperties
+					;
+					for (var _propertyPrivateName in _propertyProfiles) {
 						var
-							m = this,
-							_propertyProfilesByPrivateName = m._propertyProfilesByPrivateName,
-							_propertyProfilesByPublicName = m._propertyProfilesByPublicName,
-							_declaredDerivedProperties
+							_rawPropertyProfile = _propertyProfiles [_propertyPrivateName],
+							_rawPropertyProfileIsObject = _isObject (_rawPropertyProfile),
+							_propertyPublicName =
+								(_rawPropertyProfileIsObject ? _rawPropertyProfile.name : _rawPropertyProfile) ||
+								_propertyPrivateName,
+							_propertyPrimaryPublicName = _propertyPublicName,
+							_propertyProfile =
+								_propertyProfilesByPublicName [_propertyPrivateName] ||
+								_propertyProfilesByPrivateName [_propertyPrivateName]
 						;
-						for (var _propertyPrivateName in _propertyProfiles) {
-							var
-								_rawPropertyProfile = _propertyProfiles [_propertyPrivateName],
-								_rawPropertyProfileIsObject = _isObject (_rawPropertyProfile),
-								_propertyPublicName =
-									(_rawPropertyProfileIsObject ? _rawPropertyProfile.name : _rawPropertyProfile) ||
-									_propertyPrivateName,
-								_propertyPrimaryPublicName = _propertyPublicName,
-								_propertyProfile =
-									_propertyProfilesByPublicName [_propertyPrivateName] ||
-									_propertyProfilesByPrivateName [_propertyPrivateName]
+						if (!_propertyProfile) {
+							_propertyProfile =
+								_propertyProfilesByPrivateName [_propertyPrivateName] = {_privateName:_propertyPrivateName}
 							;
-							if (!_propertyProfile) {
-								_propertyProfile =
-									_propertyProfilesByPrivateName [_propertyPrivateName] = {_privateName:_propertyPrivateName}
-								;
-								if (_propertyPublicName.indexOf ('|') > -1) {
-									var _pseudonyms = _propertyPublicName.split ('|');
-									_propertyPrimaryPublicName = _pseudonyms [0];
-									_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicName);
-								} else {
-									_propertyProfilesByPublicName [_propertyPublicName] = _propertyProfile;
-								}
-								_propertyProfile._publicName = _propertyPrimaryPublicName;
+							if (_propertyPublicName.indexOf ('|') > -1) {
+								var _pseudonyms = _propertyPublicName.split ('|');
+								_propertyPrimaryPublicName = _pseudonyms [0];
+								_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicName);
+							} else {
+								_propertyProfilesByPublicName [_propertyPublicName] = _propertyProfile;
 							}
-							if (_rawPropertyProfileIsObject) {
-								if (_rawPropertyProfile.onChange) _propertyProfile._onChange = _rawPropertyProfile.onChange;
-								if (_rawPropertyProfile.conformer) _propertyProfile._conformer = _rawPropertyProfile.conformer;
-								if (_rawPropertyProfile.derived) {
-									_declaredDerivedProperties = true;
-									var _derivation = _resolveDerivation (_rawPropertyProfile.derived);
-									_derivation._determinantsChanged = new _Function (
-										'o',
-										'return ' + _map (_derivation._determinants,"'\"' + value + '\" in o'").join (' || ')
-									);
-									_propertyProfile._derivation = _derivation;
-								}
-								if ('value' in _rawPropertyProfile)
-									m [_propertyPrivateName] = _rawPropertyProfile.value
-								;
-							}
+							_propertyProfile._publicName = _propertyPrimaryPublicName;
 						}
-						var _instancePropertyDefaults = m.get ();
-						m._instancePropertyDefaults = _instancePropertyDefaults;
-						if (_declaredDerivedProperties) {
-							var
-								_derivedProperties = [],
-								_nonDerivedProperties = []
-							;
-							for (var _propertyPublicName in _instancePropertyDefaults) {
-								var _propertyProfile = _propertyProfilesByPublicName [_propertyPublicName];
-								(_propertyProfile._derivation ? _derivedProperties : _nonDerivedProperties).push (
-									_propertyPublicName
+						if (_rawPropertyProfileIsObject) {
+							if (_rawPropertyProfile.onChange) _propertyProfile._onChange = _rawPropertyProfile.onChange;
+							if (_rawPropertyProfile.conformer) _propertyProfile._conformer = _rawPropertyProfile.conformer;
+							if (_rawPropertyProfile.derived) {
+								_declaredDerivedProperties = true;
+								var _derivation = _resolveDerivation (_rawPropertyProfile.derived);
+								_derivation._determinantsChanged = new _Function (
+									'o',
+									'return ' + _map (_derivation._determinants,"'\"' + value + '\" in o'").join (' || ')
 								);
+								_propertyProfile._derivation = _derivation;
 							}
-							m._derivedProperties = _traceDependencies (
-								_derivedProperties,
-								function (_derivedProperty) {
-									return _propertyProfilesByPublicName [_derivedProperty]._derivation._determinants;
-								},
-								_nonDerivedProperties
+							if ('value' in _rawPropertyProfile)
+								m [_propertyPrivateName] = _rawPropertyProfile.value
+							;
+						}
+					}
+					var _instancePropertyDefaults = m.get ();
+					m._instancePropertyDefaults = _instancePropertyDefaults;
+					if (_declaredDerivedProperties) {
+						var
+							_derivedProperties = [],
+							_nonDerivedProperties = []
+						;
+						for (var _propertyPublicName in _instancePropertyDefaults) {
+							var _propertyProfile = _propertyProfilesByPublicName [_propertyPublicName];
+							(_propertyProfile._derivation ? _derivedProperties : _nonDerivedProperties).push (
+								_propertyPublicName
 							);
 						}
-						/*?
-							Static Methods
-								Uize.Class.stateProperties
-									Lets you declare one or more state properties for instances of the class.
+						m._derivedProperties = _traceDependencies (
+							_derivedProperties,
+							function (_derivedProperty) {
+								return _propertyProfilesByPublicName [_derivedProperty]._derivation._determinants;
+							},
+							_nonDerivedProperties
+						);
+					}
+					/*?
+						Static Methods
+							Uize.Class.stateProperties
+								Lets you declare one or more state properties for instances of the class.
 
-									SYNTAX
-									..................................................
-									MyClass.stateProperties (propertiesDefinitionOBJ);
-									..................................................
+								SYNTAX
+								..................................................
+								MyClass.stateProperties (propertiesDefinitionOBJ);
+								..................................................
 
-									The object specified in =propertiesDefinitionOBJ= parameter must conform to a specific structure. Each property of this object represents a property to be declared for the class, where the property name specifies the internal name to be used for the class property and the property's string value specifies the class property's public name. As an alternative to a string value, the property's value can be an object whose =name= property specifies the class property's public name and where an optional =onChange= property specifies a handler function that should be executed every time the value of the class property changes. This is all best illustrated with an example...
+								The object specified in =propertiesDefinitionOBJ= parameter must conform to a specific structure. Each property of this object represents a property to be declared for the class, where the property name specifies the internal name to be used for the class property and the property's string value specifies the class property's public name. As an alternative to a string value, the property's value can be an object whose =name= property specifies the class property's public name and where an optional =onChange= property specifies a handler function that should be executed every time the value of the class property changes. This is all best illustrated with an example...
 
-									EXAMPLE
-									...........................................................................
-									MyClass.stateProperties (
-										{
-											_propertylName:'property1Name',
-											_property2Name:'property2Name',
-											_property3Name:{
-												name:'property3Name',
-												onChange:function () {
-													// code to be performed when the value of this property changes
-												}
+								EXAMPLE
+								...........................................................................
+								MyClass.stateProperties (
+									{
+										_propertylName:'property1Name',
+										_property2Name:'property2Name',
+										_property3Name:{
+											name:'property3Name',
+											onChange:function () {
+												// code to be performed when the value of this property changes
 											}
 										}
-									);
-									...........................................................................
+									}
+								);
+								...........................................................................
 
-									NOTES
-									- this method may be called multiple times for a class to cumulatively define or override features
-									- see the other `feature declaration methods`
+								NOTES
+								- this method may be called multiple times for a class to cumulatively define or override features
+								- see the other `feature declaration methods`
 
-							Deprecated Features
-								Uize.Class.registerProperties -- DEPRECATED 2013-01-02
-									The =Uize.Class.registerProperties= static method has been deprecated in favor of the newly added =Uize.Class.stateProperties= static method.
+						Deprecated Features
+							Uize.Class.registerProperties -- DEPRECATED 2013-01-02
+								The =Uize.Class.registerProperties= static method has been deprecated in favor of the newly added =Uize.Class.stateProperties= static method.
 
-									......................................................................
-									Uize.Class.registerProperties >> BECOMES >> Uize.Class.stateProperties
-									......................................................................
+								......................................................................
+								Uize.Class.registerProperties >> BECOMES >> Uize.Class.stateProperties
+								......................................................................
 
-									The =Uize.Class.stateProperties= method is essentially just a renaming of the deprecated =Uize.Class.registerProperties= method and behaves in exactly the same way. The new name was chosen to be consistent with documentation that refers to these properties universally as state properties. The new name is also more concise.
-						*/
-					}
-				;
+								The =Uize.Class.stateProperties= method is essentially just a renaming of the deprecated =Uize.Class.registerProperties= method and behaves in exactly the same way. The new name was chosen to be consistent with documentation that refers to these properties universally as state properties. The new name is also more concise.
+					*/
+				};
 
 				_class.set = _classPrototype.set = function (_properties) {
 					/* NOTE:
