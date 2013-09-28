@@ -2508,21 +2508,6 @@ Uize.module ({
 					);
 			}
 
-		/*** Deprecated Features ***/
-			_package.returnFalse = _Uize_returnFalse;
-				/*?
-					Deprecated Features
-						Uize.returnFalse
-							.
-				*/
-
-			_package.returnTrue = _Uize.returnTrue;
-				/*?
-					Deprecated Features
-						Uize.returnTrue
-							.
-				*/
-
 		return _package;
 	}
 });
