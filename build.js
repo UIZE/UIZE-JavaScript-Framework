@@ -262,7 +262,7 @@ function _eval (_toEval) {
 				function (_uizeCode) {
 					_eval (_uizeCode);
 					if (!_isWsh)
-						Uize.globalEval = Uize.laxEval = _eval // this actually *needs* to be overridden for NodeJS context
+						Uize.laxEval = _eval // this actually *needs* to be overridden for NodeJS context
 					;
 					_modulePathResolver = Uize.modulePathResolver;
 					Uize.moduleLoader = _moduleLoader;
