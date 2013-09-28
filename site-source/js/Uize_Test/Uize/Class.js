@@ -1986,12 +1986,6 @@ Uize.module ({
 										var _instance = new _Subclass;
 										return this.expect ({myProperty1:undefined,myProperty2:undefined},_instance.get ());
 									}
-								},
-								{
-									title:'Test that the deprecated Uize.Class.registerProperties method is still supported and is simply a reference to the Uize.Class.stateProperties method',
-									test:function () {
-										return this.expectSameAs (Uize.Class.registerProperties,Uize.Class.stateProperties);
-									}
 								}
 							]
 						},
