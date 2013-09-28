@@ -1,0 +1,18 @@
+This is a TO DO document for the proposed =Uize.Web.xDrag= module.
+
+Proposed New Methods
+	draggable
+		Makes the set of elements draggable, optionally firing events
+		
+		NOTES
+		- draggable([startFUNC[, updateFUNC[, endFUNC]]])
+		- draggable(eventsOBJ)
+		- Wraps =Uize.Widget.Drag=
+		
+	undraggable
+		Stops making the set of elements draggable, based on the events fired
+		
+		NOTES
+		- draggable([startFUNC[, updateFUNC[, endFUNC]]])
+		- draggable(eventsOBJ)
+		- Wraps =Uize.Widget.Drag=
