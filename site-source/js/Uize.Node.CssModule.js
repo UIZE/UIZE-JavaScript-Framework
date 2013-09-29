@@ -26,7 +26,6 @@
 Uize.module ({
 	name:'Uize.Node.CssModule',
 	superclass:'Uize.Class',
-	required:'Uize.Node',
 	builder:function (_superclass) {
 		'use strict';
 
