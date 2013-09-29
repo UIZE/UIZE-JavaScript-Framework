@@ -5406,10 +5406,11 @@ Uize = (function () {
 				},
 
 				resolveModuleDefinition:_resolveModuleDefinition = function (_definition) {
+					if (_isString (_definition)) _definition = {name:_definition};
 					var
 						_name = _definition.name = _definition.name || '',
 						_host = _definition.host = _name.substr (0,_name.lastIndexOf ('.')),
-						_superclass = _definition.superclass = _definition.superclass || _host,
+						_superclass = _definition.superclass || _host,
 						_required = _definition.required
 					;
 					_required = _definition.required = _isString (_required) ? _required.split (',') : _required || [];
@@ -5420,7 +5421,7 @@ Uize = (function () {
 					/*?
 						Static Methods
 							Uize.resolveModuleDefinition
-								Resolves the specified module definition object by defaulting its properties and expanding them as necessary, modifying and returning the original definition object.
+								Resolves the specified module definition object by defaulting its properties and expanding them as necessary, returning the resolved definition object.
 
 								SYNTAX
 								.........................................................................
@@ -5714,7 +5715,7 @@ Uize = (function () {
 				},
 
 				module:function (_definition) {
-					var _name = _resolveModuleDefinition (_definition).name;
+					var _name = (_definition = _resolveModuleDefinition (_definition)).name;
 					if (!_name || _moduleDefinitionsClaimed [_name] != _trueFlag) {
 						_moduleDefinitionsClaimed [_name] = _modulesAlreadyInvoked [_name] = _trueFlag;
 						var _required = _definition.required;
@@ -5726,16 +5727,14 @@ Uize = (function () {
 									_builder = _definition.builder
 								;
 								if (_builder) {
-									var _requiredLookup = {};
-									for (var _requiredNo = _required.length; --_requiredNo >= 0;) {
+									for (var _requiredNo = _required.length, _requiredLookup = {}; --_requiredNo >= 0;) {
 										var _requireModule = _required [_requiredNo];
 										_requiredLookup [_requireModule] = _modulesByName [_requireModule];
 									}
-									var _superclass = _definition.superclass;
-									_module = _superclass
-										? _builder (_modulesByName [_superclass],_requiredLookup)
-										: _builder (_requiredLookup)
-									;
+									_module = _builder (
+										_modulesByName [_definition.superclass || _definition.host || ''],
+										_requiredLookup
+									);
 								}
 								_name &&
 									(_Function (_name + '=arguments[0]')) (

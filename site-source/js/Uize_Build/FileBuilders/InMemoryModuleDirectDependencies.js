@@ -50,9 +50,7 @@ Uize.module ({
 					*/
 					_inputs.jsModule == this.tempUrl (this.params.modulesFolder + '/Uize.js')
 						? []
-						: Uize.resolveModuleDefinition (
-							Uize.Build.ModuleInfo.getDefinitionFromCode (this.readFile ({path:_inputs.jsModule}))
-						).required
+						: Uize.Build.ModuleInfo.getDefinitionFromCode (this.readFile ({path:_inputs.jsModule})).required
 				);
 			}
 		});
