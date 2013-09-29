@@ -55,23 +55,25 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				var
 					m = this,
-					_moduleUrl = m.getModuleUrl (
-						_moduleNameFromBuiltPath (m,_urlParts.pathname).slice (_moduleInfoModulesNamespaceLength)
-					)
+					_moduleName = _moduleNameFromBuiltPath (m,_urlParts.pathname).slice (_moduleInfoModulesNamespaceLength),
+					_moduleUrl = m.getModuleUrl (_moduleName)
 				;
 				return {
+					reference:m.builtUrl ('reference/' + _moduleName + '.html'),
 					metaData:m.memoryUrl (_moduleUrl + '.metadata'),
 					builtSize:m.memoryUrl (_moduleUrl + '.builtsize'),
 					directDependencies:m.memoryUrl (_moduleUrl + '.deps')
 				};
 			},
 			builder:function (_inputs,_urlParts) {
+				var m = this;
 				return Uize.Build.Util.dataAsModule (
-					_moduleNameFromBuiltPath (this,_urlParts.pathname),
+					_moduleNameFromBuiltPath (m,_urlParts.pathname),
 					{
-						metaData:this.readFile ({path:_inputs.metaData}),
-						builtSize:this.readFile ({path:_inputs.builtSize}),
-						directDependencies:this.readFile ({path:_inputs.directDependencies})
+						description:Uize.Build.Util.getHtmlFileInfo (_inputs.reference).description,
+						metaData:m.readFile ({path:_inputs.metaData}),
+						builtSize:m.readFile ({path:_inputs.builtSize}),
+						directDependencies:m.readFile ({path:_inputs.directDependencies})
 					}
 				);
 			}

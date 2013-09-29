@@ -110,7 +110,6 @@ Uize.require (
 		'Uize.Widgets.SimpleStatsTable.Widget',
 		'Uize.Widgets.SimpleStatsTable.Sortable.Widget',
 		'Uize.Xml',
-		'UizeSite.Sotu',
 		'Uize.Node',
 		'Uize.Tooltip',
 		'Uize.Widgets.Tooltip.Widget'
@@ -122,14 +121,6 @@ Uize.require (
 
 		/*** prepare list of all modules ***/
 			var _modulesList = Uize.Data.PathsTree.toList (UizeSite.ModulesTree ());
-
-		/*** build the module description lookup ***/
-			// NOTE: this will go away when we have descriptions in the module info modules
-			var _moduleDescriptionLookup = {};
-			Uize.forEach (
-				UizeSite.Sotu (),
-				function (_moduleSotuInfo) {_moduleDescriptionLookup [_moduleSotuInfo [0]] = _moduleSotuInfo [10]}
-			);
 
 		/*** create the example page widget ***/
 			var
@@ -405,7 +396,7 @@ Uize.require (
 												;
 												_tooltip.set ({
 													heading:_moduleName,
-													body:_moduleDescriptionLookup [_moduleName]
+													body:_moduleInfoLookup [_moduleName].description
 												});
 												Uize.Tooltip.showTooltip (_tooltipNode);
 											},
