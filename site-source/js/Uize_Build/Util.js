@@ -479,7 +479,13 @@ Uize.module ({
 					if (Uize.isEmpty (_moduleDefinition.required))
 						delete _moduleDefinition.required
 					;
-					var _moduleText = 'Uize.module (' + Uize.Json.to (_moduleDefinition) + ');';
+					var _moduleText =
+						'Uize.module (' +
+							Uize.Json.to (
+								Uize.keys (_moduleDefinition) == 'name' ? _moduleDefinition.name : _moduleDefinition
+							) +
+						');'
+					;
 					if (_builderPlaceholder) {
 						var _builderPlaceholderPos = _moduleText.indexOf (_builderPlaceholder);
 						_moduleText =
