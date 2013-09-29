@@ -279,6 +279,28 @@ Uize.require (
 								_metadataTable.insertUi ();
 
 							/*** update the dependencies list table ***/
+								/*** calculate local sharedness of modules ***/
+									/* NOTE:
+										This builds a lookup table that maps each dependency to the other dependencies within the local dependency tree that directly depend on it. For any dependency in the dependency tree, this provides an indication of the local sharedness of the dependency. This can be useful when contemplating whether the dependencies list could be reduced in size by eliminating the dependency on any given module. If a module is shared as a direct dependency by more than one module, then it will be harder to eliminate the dependency on it.
+									*/
+									var _localUsedByLookup = {};
+									_localUsedByLookup [_moduleName] = [];
+									Uize.forEach (
+										_dependencies,
+										function (_dependency) {
+											Uize.forEach (
+												_moduleInfoLookup [_dependency].directDependencies,
+												function (_directDependency) {
+													(
+														_localUsedByLookup [_directDependency] ||
+														(_localUsedByLookup [_directDependency] = [])
+													).push (_dependency)
+												}
+											);
+										}
+									);
+									_localUsedByLookup.Uize = _dependencies.slice (0,-1);
+
 								_dependenciesListTable || (
 									_dependenciesListTable = page.addChild (
 										'dependenciesListTable',
@@ -336,12 +358,18 @@ Uize.require (
 											formatter:'value + "%"'
 										},
 										{
-											title:'Direct Deps',
+											title:'Dir. Deps',
 											minColor:'hsl(120,100,50)',
 											maxColor:'hsl(0,100,50)'
 										},
 										{
-											title:'% of Total',
+											title:'Shared',
+											minColor:'hsl(200,100,75)',
+											maxColor:'hsl(200,100,75)',
+											minValue:0
+										},
+										{
+											title:'Size (%)',
 											minColor:'hsl(120,100,50)',
 											maxColor:'hsl(0,100,50)',
 											minValue:0,
@@ -375,6 +403,7 @@ Uize.require (
 												+_metadata.importance || 0,
 												+_metadata.codeCompleteness || 0,
 												_moduleInfo.directDependencies.length,
+												_localUsedByLookup [_dependency].length,
 												_size / _totalSize * 100,
 												_size
 											];
