@@ -1,5 +1,15 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+New Uize.String.Split Module
+	- =Uize.String.split= becomes =Uize.String.split.split=
+	- =Uize.String.splitInTwo= becomes =Uize.String.split.splitInTwo=
+
+New Short Form for Namespace Modules
+	.
+
+Various Deprecated Features Killed
+	.
+
 Major Build Process Improvements
 
 	- _Uize.Build.CompileJstModules.js subsumed by WSH-Uize.Build.Files.JsModules
