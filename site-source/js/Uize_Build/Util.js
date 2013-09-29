@@ -468,12 +468,16 @@ Uize.module ({
 				},
 
 				moduleAsText:function (_moduleDefinition) {
+					_moduleDefinition = Uize.copy (_moduleDefinition);
 					var
 						_builder = _moduleDefinition.builder,
 						_builderPlaceholder = typeof _builder == 'string' ? '[BUILDER_PLACEHOLDER_' + Uize.now () + ']' : ''
 					;
 					if (_builderPlaceholder)
 						_moduleDefinition.builder = _builderPlaceholder
+					;
+					if (Uize.isEmpty (_moduleDefinition.required))
+						delete _moduleDefinition.required
 					;
 					var _moduleText = 'Uize.module (' + Uize.Json.to (_moduleDefinition) + ');';
 					if (_builderPlaceholder) {
