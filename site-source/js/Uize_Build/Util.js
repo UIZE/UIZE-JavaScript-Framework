@@ -159,7 +159,7 @@ Uize.module ({
 					;
 					return {
 						path:_filePath,
-						title:_titleExtractor (_fileText.match (/<title>(.*?)<\/title>/) [1]),
+						title:(_titleExtractor || Uize.returnX) (_fileText.match (/<title>(.*?)<\/title>/) [1]),
 						keywords:_keywordsMatch ? _keywordsMatch [1] : '',
 						description:_descriptionMatch ? _descriptionMatch [1] : '',
 						imageSrc:_imageSrcMatch ? _imageSrcMatch [1] : ''
@@ -188,7 +188,6 @@ Uize.module ({
 				},
 
 				getHtmlFilesInfo:function (_folderToIndex,_titleExtractor) {
-					if (!_titleExtractor) _titleExtractor = Uize.returnX;
 					return Uize.Array.Sort.sortBy (
 						Uize.map (
 							_fileSystem.getFiles ({
