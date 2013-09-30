@@ -301,6 +301,24 @@ Uize.require (
 									);
 									_localUsedByLookup.Uize = _dependencies.slice (0,-1);
 
+								/*** calculate size contribution uniquely attributable to module ***/
+									var _uniqueSizeLookup = {};
+									function _calculateUniqueSize (_moduleName) {
+										if (!(_moduleName in _uniqueSizeLookup)) {
+											_uniqueSizeLookup [_moduleName] = _moduleInfoLookup [_moduleName].builtSize;
+											Uize.forEach (
+												_moduleInfoLookup [_moduleName].directDependencies,
+												function (_dependency) {
+													_calculateUniqueSize (_dependency);
+													if (_localUsedByLookup [_dependency].length == 1)
+														_uniqueSizeLookup [_moduleName] += _uniqueSizeLookup [_dependency]
+													;
+												}
+											);
+										}
+									}
+									_calculateUniqueSize (_moduleName);
+
 								_dependenciesListTable || (
 									_dependenciesListTable = page.addChild (
 										'dependenciesListTable',
@@ -381,6 +399,12 @@ Uize.require (
 											minColor:'hsl(120,100,50)',
 											maxColor:'hsl(0,100,50)',
 											formatter:'value + " bytes"'
+										},
+										{
+											title:'Unique',
+											minColor:'hsl(120,100,50)',
+											maxColor:'hsl(0,100,50)',
+											formatter:'value + " bytes"'
 										}
 									],
 									rows:Uize.map (
@@ -405,7 +429,8 @@ Uize.require (
 												_moduleInfo.directDependencies.length,
 												_localUsedByLookup [_dependency].length,
 												_size / _totalSize * 100,
-												_size
+												_size,
+												_uniqueSizeLookup [_dependency]
 											];
 										}
 									).reverse ()
