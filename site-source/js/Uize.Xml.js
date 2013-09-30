@@ -29,16 +29,14 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
-				_true = true,
-				_false = false,
-				_sacredEmptyObject = {}
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_package,
+				_sacredEmptyObject = {},
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
+				_toAttributeValue,
+				_fromAttributeValue,
 				_entityMap,
 				_getEntityMap = function () {
 					return _entityMap || (
@@ -56,8 +54,8 @@ Uize.module ({
 				return {upper:'toUpperCase',lower:'toLowerCase'} [_options.nameCase] || 'valueOf';
 			}
 
-		/*** Public Static Methods ***/
-			var _toAttributeValue = _package.toAttributeValue = Uize.String.Replace.replacerByLookup ({
+		return Uize.package ({
+			toAttributeValue:_toAttributeValue = Uize.String.Replace.replacerByLookup ({
 				'&':'&amp;',
 				'"':'&quot;',
 				'\'':'&apos;',
@@ -86,9 +84,9 @@ Uize.module ({
 							NOTES
 							- see also the corresponding =Uize.Xml.fromAttributeValue= static method
 				*/
-			});
+			}),
 
-			var _fromAttributeValue = _package.fromAttributeValue = function (_toDecode) {
+			fromAttributeValue:_fromAttributeValue = function (_toDecode) {
 				return (
 					(_toDecode += '') &&
 					_toDecode.replace (
@@ -128,9 +126,9 @@ Uize.module ({
 							NOTES
 							- see also the corresponding =Uize.Xml.toAttributeValue= static method
 				*/
-			};
+			},
 
-			_package.fromAttributes = function (_toDecode,_options) {
+			fromAttributes:function (_toDecode,_options) {
 				var _attributesObj = {};
 				if (_toDecode) {
 					_options = _options || _sacredEmptyObject;
@@ -210,9 +208,9 @@ Uize.module ({
 							- when parsing the attributes string, all attribute values are treated as strings
 							- see also the corresponding =Uize.Xml.toAttributes= static method
 				*/
-			};
+			},
 
-			_package.toAttributes = function (_toEncode,_options) {
+			toAttributes:function (_toEncode,_options) {
 				var
 					_nameCaseMethodName = _getNameCaseMethodName (_options = _options || _sacredEmptyObject),
 					_quoteChar = _options.quoteChar || '"',
@@ -221,6 +219,7 @@ Uize.module ({
 				;
 				/*** change name case of attributes, in a way that collapses duplicates that may otherwise arise ***/
 					if (_nameCaseMethodName != 'valueOf') {
+						/* NOTE: this is something that could be captured for re-use in a map-keys type method */
 						var _oldToEncode = _toEncode;
 						_toEncode = {};
 						for (var _attributeName in _oldToEncode)
@@ -234,6 +233,30 @@ Uize.module ({
 					)
 				;
 				return _attributesStrChunks.join (' ');
+				/* if we didn't care about last duplicate attribute winning, this would be a more optimized implementation
+					var
+						_nameCaseMethodName = _getNameCaseMethodName (_options = _options || _sacredEmptyObject),
+						_quoteChar = _options.quoteChar || '"',
+						_equalPlusQuoteChar = '=' + _quoteChar,
+						_attributesStrChunks = [],
+						_attributeUsedLookup = {},
+						_trueFlag = {},
+						_attributeCasedName
+					;
+					for (var _attributeName in _toEncode) {
+						if (
+							_attributeName &&
+							_attributeUsedLookup [_attributeCasedName = _attributeName [_nameCaseMethodName] ()] != _trueFlag
+						) {
+							_attributeUsedLookup [_attributeCasedName] = _trueFlag;
+							_attributesStrChunks.push (
+								_attributeCasedName + _equalPlusQuoteChar +
+								_toAttributeValue (_toEncode [_attributeName]) + _quoteChar
+							);
+						}
+					}
+					return _attributesStrChunks.join (' ');
+				*/
 				/*?
 					Static Methods
 						Uize.Xml.toAttributes
@@ -275,35 +298,36 @@ Uize.module ({
 							..................................................................
 
 							nameCase
-								A string, specifying the case for attribute names that are generated from the keys of the attributes object. This property is optional. By default, attribute names are identical to the keys in the attributes object. This property allows you to coerce the case in order to conform the attributes string for your specific use case.
+								A string, specifying the case for attribute names that are generated from the keys of the attributes object.
 
-							EXAMPLE
-							........................
-							Uize.Xml.toAttributes (
-								{
-									SRC:'myimage.gif',
-									WIDTH:'640',
-									HEIGHT:'480',
-									ALT:'My Image'
-								}
-								{nameCase:'lower'}
-							);
-							........................
+								This property is optional. By default, attribute names are identical to the keys in the attributes object. This property allows you to coerce the case in order to conform the attributes string for your specific use case.
 
-							The above attributes object contains keys that are all uppercase. Specifying the value ='lower'= for the =nameCase= property of the =optionsOBJ= parameter will cause the encoding to produce an attributes string with all lowercase attribute names, as in...
+								EXAMPLE
+								........................
+								Uize.Xml.toAttributes (
+									{
+										SRC:'myimage.gif',
+										WIDTH:'640',
+										HEIGHT:'480',
+										ALT:'My Image'
+									}
+									{nameCase:'lower'}
+								);
+								........................
 
-							...........................................................
-							'src="myimage.gif" width="640" height="480" alt="My Image"'
-							...........................................................
+								The above attributes object contains keys that are all uppercase. Specifying the value ='lower'= for the =nameCase= property of the =optionsOBJ= parameter will cause the encoding to produce an attributes string with all lowercase attribute names, as in...
+
+								...........................................................
+								'src="myimage.gif" width="640" height="480" alt="My Image"'
+								...........................................................
 
 							NOTES
 							- all attribute values are enclosed in double quotes
 							- empty string attribute values are always fully serialized (eg. =myattribute&#61;""=)
 							- see also the corresponding =Uize.Xml.fromParams= static method
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 
