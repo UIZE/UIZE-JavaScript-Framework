@@ -36,6 +36,7 @@ Uize.module ({
 		'Uize.Build.FileBuilders.TempUizeModule',
 		'Uize.Build.FileBuilders.TempJsModules',
 		'Uize.Build.FileBuilders.CompiledCss',
+		'Uize.Build.FileBuilders.CompressedCssFiles',
 		'Uize.Build.FileBuilders.CompiledCssModules',
 		'Uize.Build.FileBuilders.CompiledJstModules',
 		'Uize.Build.FileBuilders.TempGeneratedNamespaceModules'
@@ -57,6 +58,7 @@ Uize.module ({
 						Uize.Build.FileBuilders.TempUizeModule,
 						Uize.Build.FileBuilders.TempJsModules,
 						Uize.Build.FileBuilders.CompiledCss,
+						Uize.Build.FileBuilders.CompressedCssFiles,
 						Uize.Build.FileBuilders.CompiledCssModules,
 						Uize.Build.FileBuilders.CompiledJstModules,
 						Uize.Build.FileBuilders.TempGeneratedNamespaceModules
