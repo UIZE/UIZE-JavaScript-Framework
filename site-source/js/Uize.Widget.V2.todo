@@ -33,6 +33,19 @@ Implement Next Generation Localization
 		Locale and Theme
 			Whenever the value of the =locale= state property changes, an optional locale-specific theme CSS module can be loaded.
 
+	Locale String Modules
+		Locale string modules are organized into a specific folder under a widget's namespace folder by convention, and named according to a convention that incorporates the locale code.
+
+		Locale String Modules as Implicit Dependencies
+			In order to improve the user experience when the UI is rendered, locale string modules can be injected as implicit dependencies by the module system, based upon an environment setting for locale.
+
+			This will support both the dynamic loading of locale string modules as dependencies of the widget modules that need them, as well as packaging of the locale string modules along with the widget modules that use them.
+
+	Multi-dimensionality
+		The system for localization should support the possibility of additional dimensions beyond merely region and language, in order to support partner-branded versions of an application.
+
+		It's possible that partner variants of the localization could be supported through the theme mechanism. Ideally, the addition of a new dimension that may affect the locale string modules and other aspects of the UI can be done without needing to update the code to support the new dimension.
+
 Implement New Binding Features
 	Add Feature for Declaring UI Updaters
 		Add a class feature that allows uiUpdates to be declared.
@@ -125,3 +138,8 @@ Implement New Binding Features
 			Perhaps bindings to the style object could be treated as bindings on the style of a child widget's root node, but this could be quite complicated for rendering of HTML, since the HTML generation for a child widget is opaque to the template for a widget and cannot be easily co-compiled.
 
 			Perhaps a more reasonable approach would be to treat bindings to the style object of a child widget as bindings to a =style= state property that is implemented in the =Uize.Widget.V2= base class and that is bound to the style object of the widget's root node. Then, bindings to a child widget's style object would be propagated through the =style= state property of the child widget to its root node's =style= property.
+
+Possible New Tree-inherited Properties
+	- =theme=
+	- =locale=
+

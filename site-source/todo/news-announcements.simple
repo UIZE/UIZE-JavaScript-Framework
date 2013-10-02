@@ -8,7 +8,17 @@ New Short Form for Namespace Modules
 	.
 
 Various Deprecated Features Killed
-	.
+	Uize.Node
+		- =Uize.Node.returnFalse= and =Uize.Node.returnTrue= static methods are no longer needed since they were migrated to =Uize=
+
+	Uize.Class
+		- =MyClass.registerProperties=
+
+	Uize
+		- =Uize.globalEval=
+
+	Uize.Service
+		- =Uize.Service.declareServiceMethods=
 
 Major Build Process Improvements
 

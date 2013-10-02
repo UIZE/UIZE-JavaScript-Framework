@@ -4,18 +4,6 @@ Code Size Optimization
 	Kill Deprecated Features
 		Review deprecated features and kill as many as possible.
 
-		Uize.Node
-			- =Uize.Node.returnFalse= and =Uize.Node.returnTrue= static methods are no longer needed since they were migrated to =Uize=
-
-		Uize.Class
-			- =MyClass.registerProperties=
-
-		Uize
-			- =Uize.globalEval=
-
-		Uize.Service
-			- =Uize.Service.declareServiceMethods=
-
 	Use "m" for "this"
 		Switch all modules over to using "m" for capturing a reference to this.
 
@@ -336,17 +324,6 @@ Safe Privates
 	- how does one provide private names for state properties? Provide an example.
 	- should multiple calls to the =priv= method on the same class for the same named private always return the same result? If so, this would suggest that external code could probe around and easily discover the internal name for a private.
 	- how is the mapping / registry of privates for a class inherited by a subclass? Does it have to be?
-
-Mixins
-	Add support for mix-ins.
-
-	Mixing in would...
-	- copy all properties of the prototype
-	- copy all static properties
-	- copy in all information of declared state properties
-
-	ISSUES
-	- namespace conflict for all instance properties
 
 Rethinking Module Definitions
 
