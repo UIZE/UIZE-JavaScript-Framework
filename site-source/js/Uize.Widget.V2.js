@@ -28,7 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Json',
 		'Uize.Node',
-		'Uize.Xml',
+		'Uize.Util.Html.Encode',
 		'Uize.String'
 	],
 	builder:function (_superclass) {
@@ -40,7 +40,8 @@ Uize.module ({
 		/*** General Variables ***/
 			var
 				_trueFlag = {},
-				_cssAddedLookup = {}
+				_cssAddedLookup = {},
+				_htmlEncode = Uize.Util.Html.Encode.encode
 			;
 
 		/*** Utility Functions ***/
@@ -456,7 +457,7 @@ Uize.module ({
 								_updater = function (_propertyValue) {
 									this.setNodeInnerHtml (
 										_nodeName,
-										Uize.Xml.toAttributeValue (_propertyValue == null ? '' : _propertyValue)
+										_htmlEncode (_propertyValue == null ? '' : _propertyValue)
 									);
 								};
 							} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {

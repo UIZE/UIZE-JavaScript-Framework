@@ -46,7 +46,7 @@ Uize.require (
 				'Uize.Widgets.Tooltip.Widget',
 				'UizeSite.Sotu',
 				'Uize.Widgets.SimpleStatsTable.Sortable.Widget',
-				'Uize.Xml'
+				'Uize.Util.Html.Encode'
 			],
 			function () {
 				var _tooltip = _page.addChild ('tooltip',Uize.Widgets.Tooltip.Widget);
@@ -61,7 +61,7 @@ Uize.require (
 								title:'Module Name',
 								formatter:function (_moduleName) {
 									return (
-										'<a href="../reference/' + _moduleName + '.html" title="' + Uize.Xml.toAttributeValue (this [10]) + '">' +
+										'<a href="../reference/' + _moduleName + '.html" title="' + Uize.Util.Html.Encode.encode (this [10]) + '">' +
 											_moduleName +
 										'</a>'
 									);
