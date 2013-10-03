@@ -89,10 +89,10 @@
 
 Uize.module ({
 	name:'Uize.Templates.List',
-	required:'Uize.Xml',
+	required:'Uize.Util.Html.Encode',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
-			var _Uize_Xml_toAttributeValue = Uize.Xml.toAttributeValue;
+			var _htmlEncode = Uize.Util.Html.Encode.encode;
 
 		return Uize.package ({
 			process:function (_input) {
@@ -114,7 +114,7 @@ Uize.module ({
 										'<a href="' + _item.link + '"' +
 										(
 											_item.description
-												? (' title="' + _Uize_Xml_toAttributeValue (_item.description) + '"')
+												? (' title="' + _htmlEncode (_item.description) + '"')
 												: ''
 										)
 										+ '>'

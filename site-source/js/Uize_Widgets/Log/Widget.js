@@ -147,13 +147,16 @@ Uize.module ({
 	superclass:'Uize.Widgets.BoxWithHeading.Widget',
 	required:[
 		'Uize.Widgets.Button.Widget',
-		'Uize.Xml',
+		'Uize.Util.Html.Encode',
 		'Uize.Date.Formatter',
 		'Uize.Widgets.Log.Html',
 		'Uize.Widgets.Log.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
+
+		/*** Variables for Scruncher Optimization ***/
+			var _htmlEncode = Uize.Util.Html.Encode.encode;
 
 		/*** Private Instance Methods ***/
 			function _updateClearButtonState (m) {
@@ -214,7 +217,7 @@ Uize.module ({
 						m = this,
 						_messageHtml =
 							(m._showTimestamp ? (Uize.Date.Formatter.format (null,m._timestampFormat) + ' : ') : '') +
-							Uize.Xml.toAttributeValue (_message) +
+							_htmlEncode (_message) +
 							'<br/>'
 					;
 					if (m.isWired) {
