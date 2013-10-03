@@ -36,12 +36,6 @@ Uize.module ({
 		return Uize.package ({
 			description:'Compressed CSS files',
 			urlMatcher:function (_urlParts) {
-				console.log (_urlParts.pathname);
-				console.log (
-					_urlParts.fileExtension == _cssFileExtension &&
-					this.isTempUrl (_urlParts.folderPath) &&
-					Uize.String.endsWith (_urlParts.file,_compressedCssFileExtension)
-				);
 				return (
 					_urlParts.fileType == 'css' &&
 					this.isTempUrl (_urlParts.folderPath) &&
