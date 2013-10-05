@@ -1,9 +1,6 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
 Code Size Optimization
-	Kill Deprecated Features
-		Review deprecated features and kill as many as possible.
-
 	Use "m" for "this"
 		Switch all modules over to using "m" for capturing a reference to this.
 
@@ -12,19 +9,6 @@ Code Size Optimization
 		Probably will want to wait on doing this for the modules that have changes in pending pull requests.
 
 	Improved Module Declaration Semantics
-		Compact Namespace Module Declaration
-			Support a new and more compact module declaration syntax for pure namespace modules...
-
-			INSTEAD OF...
-			.................................
-			Uize.module ({name:'Uize.Util'});
-			.................................
-
-			USE...
-			..........................
-			Uize.module ('Uize.Util');
-			..........................
-
 		Module Declaration Short Form
 			Support a new short form for module declaration as an alternative to the object form.
 
