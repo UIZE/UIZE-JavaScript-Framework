@@ -4114,7 +4114,7 @@ Uize.module ({
 						var _result;
 
 						/*** declare MyNamespace namespace ***/
-							Uize.module ({name:'MyNamespace'});
+							Uize.module ('MyNamespace');
 
 						/*** declare module with data records for engineering employees ***/
 							Uize.module ({

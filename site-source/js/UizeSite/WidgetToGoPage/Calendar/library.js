@@ -20,5 +20,5 @@
 	UizeSite.WidgetToGoPage.Calendar->
 */
 
-Uize.module ({name:'UizeSite.WidgetToGoPage.Calendar.library'});
+Uize.module ('UizeSite.WidgetToGoPage.Calendar.library');
 

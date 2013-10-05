@@ -60,7 +60,7 @@
 			eg. myVariable += (myArray [a ++ ] - 5) ; BECOMES--> myVariable+=(myArray[a++]-5);
 */
 
-Uize.module({
+Uize.module ({
 	name:'Uize.Build.Scruncher',
 	required:[
 		'Uize.Xml',

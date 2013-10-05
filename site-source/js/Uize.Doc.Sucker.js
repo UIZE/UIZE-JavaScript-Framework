@@ -23,7 +23,7 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module({
+Uize.module ({
 	name:'Uize.Doc.Sucker',
 	required:[
 		'Uize.Build.Scruncher',

@@ -20,5 +20,5 @@
 	UizeSite.Page.Example.Test->
 */
 
-Uize.module ({name:'UizeSite.Page.Example.Test.library'});
+Uize.module ('UizeSite.Page.Example.Test.library');
 

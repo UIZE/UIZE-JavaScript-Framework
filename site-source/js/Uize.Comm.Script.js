@@ -25,7 +25,7 @@
 		In order to implement support for communication through =script= tags, this class overrides the implementation of the =performRequest= instance method inherited from the =Uize.Comm= base class. There are no additional methods provided by this class - all the interface is provided in the =Uize.Comm= superclass.
 */
 
-Uize.module({
+Uize.module ({
 	name:'Uize.Comm.Script',
 	required:'Uize.Url',
 	builder:function(_superclass) {

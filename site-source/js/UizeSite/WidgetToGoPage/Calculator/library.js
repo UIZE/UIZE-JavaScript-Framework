@@ -20,5 +20,5 @@
 	UizeSite.WidgetToGoPage.Calculator->
 */
 
-Uize.module ({name:'UizeSite.WidgetToGoPage.Calculator.library'});
+Uize.module ('UizeSite.WidgetToGoPage.Calculator.library');
 

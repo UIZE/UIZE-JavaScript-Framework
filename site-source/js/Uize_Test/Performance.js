@@ -23,5 +23,5 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module ({name:'Uize.Test.Performance'});
+Uize.module ('Uize.Test.Performance');
 

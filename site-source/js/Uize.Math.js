@@ -23,5 +23,5 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module ({name:'Uize.Math'});
+Uize.module ('Uize.Math');
 
