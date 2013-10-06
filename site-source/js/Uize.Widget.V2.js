@@ -69,6 +69,11 @@ Uize.module ({
 				);
 			}
 
+		/*** Private Instance Methods ***/
+			function _updateRootNodeClasses (m) {
+				m.Class.enableRootNodeCssClasses && m.set ({_rootNodeCssClasses:m.rootNodeCssClasses ()});
+			}
+
 		var _class = _superclass.subclass ({
 			alphastructor:function () {
 				this.Class._needCss ();
@@ -336,10 +341,6 @@ Uize.module ({
 					return _cssClassNameGenerators [_thisClassName] (_className);
 				},
 
-				_updateRootNodeClasses:function () {
-					this.Class.enableRootNodeCssClasses && this.set ({_rootNodeCssClasses:this.rootNodeCssClasses ()});
-				},
-
 				wireUi:function () {
 					var m = this;
 					if (!m.isWired) {
@@ -348,11 +349,11 @@ Uize.module ({
 						/*** wire up handlers for state properties that have CSS bindings ***/
 							var
 								_cssBindings = m.Class._cssBindings,
-								_updateRootNodeClasses = function () {m._updateRootNodeClasses ()},
+								_boundUpdateRootNodeClasses = function () {_updateRootNodeClasses (m)},
 								_wiringsForCssBindings = {}
 							;
 							for (var _property in _cssBindings)
-								_wiringsForCssBindings ['Changed.' + _property] = _updateRootNodeClasses
+								_wiringsForCssBindings ['Changed.' + _property] = _boundUpdateRootNodeClasses
 							;
 							m.wire (_wiringsForCssBindings);
 
@@ -379,7 +380,7 @@ Uize.module ({
 							m.wire (_wiringsForHtmlBindings);
 
 						/*** update UI ***/
-							m._updateRootNodeClasses ();
+							_updateRootNodeClasses (m);
 							for (var _eventName in _wiringsForHtmlBindings)
 								_wiringsForHtmlBindings [_eventName] ()
 							;
