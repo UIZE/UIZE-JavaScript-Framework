@@ -28,19 +28,22 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
-				_undefined
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+				_hasPadding,
+				_endsWith,
+				_limitLength,
+				_repeat,
+				_trim,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_nonWhitespaceCharRegExp = new RegExp ('[^ \\n\\r\\t\\f\\x0b\\xa0\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u200b\\u2028\\u2029\\u3000]'),
 				_whiteSpaceCharCodes = {
 					9:1, 10:1, 11:1, 12:1, 13:1, 32:1, 160:1, 8192:1, 8193:1, 8194:1, 8195:1, 8196:1, 8197:1, 8198:1, 8199:1, 8200:1, 8201:1, 8202:1, 8203:1, 8232:1, 8233:1, 12288:1
-				}
-			;
+				},
+				_repeaterArray = []
+		;
 
 		/*** Utility Functions ***/
 			var _manySpaces, _manySpacesLength;
@@ -88,13 +91,13 @@ Uize.module ({
 				);
 			}
 
-		/*** Public Static Methods ***/
-			_package.contains = function (_sourceStr,_subStr) {
+		return Uize.package ({
+			contains:function (_sourceStr,_subStr) {
 				return (
 					_subStr.length <= _sourceStr.length &&
 					(
-						_package.startsWith (_sourceStr,_subStr) ||
-						_package.endsWith (_sourceStr,_subStr) ||
+						_stringHasPrefixOrSuffix (_sourceStr,_subStr) ||
+						_endsWith (_sourceStr,_subStr) ||
 						_sourceStr.indexOf (_subStr) > -1
 					)
 				);
@@ -132,9 +135,9 @@ Uize.module ({
 							- see the related =Uize.String.startsWith= and =Uize.String.endsWith= static methods
 							- this method is case sensitive
 				*/
-			};
+			},
 
-			_package.endsWith = function (_sourceStr,_subStr) {
+			endsWith:_endsWith = function (_sourceStr,_subStr) {
 				return _stringHasPrefixOrSuffix (_sourceStr,_subStr,true);
 				/*?
 					Static Methods
@@ -167,9 +170,9 @@ Uize.module ({
 							- see the related =Uize.String.contains= static method
 							- when the value =''= (empty string) is specified for the =subSTR= parameter, this method will return =true= (all strings can be said to end with an empty string)
 				*/
-			};
+			},
 
-			var _hasPadding = _package.hasPadding = function (_sourceStr) {
+			hasPadding:_hasPadding = function (_sourceStr) {
 				var _sourceStrLength = _sourceStr.length;
 				return !!(
 					_sourceStrLength &&
@@ -201,9 +204,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.String.trim= static method
 				*/
-			};
+			},
 
-			_package.hugJoin = function (_items,_prefix,_suffix,_separator) {
+			hugJoin:function (_items,_prefix,_suffix,_separator) {
 				return (
 					_items.length
 						? (
@@ -288,9 +291,9 @@ Uize.module ({
 							action: "close"
 							................
 				*/
-			};
+			},
 
-			_package.joinUsingSuffixPriority = function (_prefix,_suffix,_maxLength) {
+			joinUsingSuffixPriority:function (_prefix,_suffix,_maxLength) {
 				var _suffixLength = _suffix.length;
 				return (
 					_maxLength < _suffixLength
@@ -316,9 +319,9 @@ Uize.module ({
 
 							In the above example, this method would produce the result ='Some Greate Produ - Customized'=.
 				*/
-			};
+			},
 
-			var _limitLength = _package.limitLength = function (_sourceStr,_maxLength) {
+			limitLength:_limitLength = function (_sourceStr,_maxLength) {
 				var
 					_continuationStr = '...',
 					_continuationStrLength = _continuationStr.length
@@ -357,17 +360,14 @@ Uize.module ({
 
 							Notice how, once the limit of =15= characters has been hit, all the resulting strings are only 15 characters long, with the last three characters being the ellipsis periods.
 				*/
-			};
+			},
 
-			var
-				_repeaterArray = [],
-				_repeat = _package.repeat = function (_sourceStr,_repeatTimes) {
-					if (_repeatTimes < 1 || !_sourceStr) return '';
-					if (_repeatTimes == 1) return _sourceStr;
-					if (_sourceStr == ' ') return _getManySpaces (_repeatTimes);
-					_repeaterArray.length = _repeatTimes + 1;
-					return _repeaterArray.join (_sourceStr);
-				}
+			repeat:_repeat = function (_sourceStr,_repeatTimes) {
+				if (_repeatTimes < 1 || !_sourceStr) return '';
+				if (_repeatTimes == 1) return _sourceStr;
+				if (_sourceStr == ' ') return _getManySpaces (_repeatTimes);
+				_repeaterArray.length = _repeatTimes + 1;
+				return _repeaterArray.join (_sourceStr);
 				/*?
 					Static Methods
 						Uize.String.repeat
@@ -395,9 +395,9 @@ Uize.module ({
 
 							The value of the =sourceSTR= parameter can contain any number of any characters. In the above example, a string containing ten =br= tags is being generated.
 				*/
-			;
+			},
 
-			_package.startsWith = _stringHasPrefixOrSuffix;
+			startsWith:_stringHasPrefixOrSuffix,
 				/*?
 					Static Methods
 						Uize.String.startsWith
@@ -430,7 +430,7 @@ Uize.module ({
 							- when the value =''= (empty string) is specified for the =subSTR= parameter, this method will return =true= (all strings can be said to start with an empty string)
 				*/
 
-			_package.toCamel = function (_source,_capFirstChar) {
+			toCamel:function (_source,_capFirstChar) {
 				return (
 					(Uize.isArray (_source) ? _source.join (' ') : _source).toLowerCase (
 					).replace (
@@ -495,9 +495,9 @@ Uize.module ({
 
 							Naturally, the optional =capFirstCharBOOL= parameter can also be used when the =stringSegmentsARRAY= parameter is specified.
 				*/
-			};
+			},
 
-			_package.trim = function (_sourceStr,_side) {
+			trim:_trim = function (_sourceStr,_side) {
 				/* NOTES:
 					- performance
 						- return early for empty string and string with no padding (avoid doing any string operation if there is no whitespace to trim)
@@ -545,10 +545,10 @@ Uize.module ({
 							- see the companion =Uize.String.trimLeft= and =Uize.String.trimRight= static methods
 							- see the related =Uize.String.hasPadding= static method
 				*/
-			};
+			},
 
-			_package.trimLeft = function (_sourceStr) {
-				return _package.trim (_sourceStr,-1);
+			trimLeft:function (_sourceStr) {
+				return _trim (_sourceStr,-1);
 				/*?
 					Static Methods
 						Uize.String.trimLeft
@@ -575,10 +575,10 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.String.trim= and =Uize.String.trimRight= static methods
 				*/
-			};
+			},
 
-			_package.trimRight = function (_sourceStr) {
-				return _package.trim (_sourceStr,1);
+			trimRight:function (_sourceStr) {
+				return _trim (_sourceStr,1);
 				/*?
 					Static Methods
 						Uize.String.trimRight
@@ -605,9 +605,8 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.String.trim= and =Uize.String.trimLeft= static methods
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 
