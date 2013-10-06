@@ -64,7 +64,7 @@ Code Size Optimization
 				Moreover, as it is used for classes for the string serialization overriding, it actually introduces obstacles and annoyanes during debugging with =console.log=. If this were removed, the Delve tool would probably need to be updated. Perhaps this method could be moved to =Uize.Util.Oop=. Would need to also update documentation that speaks to how the old behavior could be used in debugging and troubleshooting.
 
 		Uize.Class
-			Specific features to be decided.
+			Remove =Uize.Class.valueOf= static method.
 
 		Uize.Node
 			Factor out Positioning Methods
