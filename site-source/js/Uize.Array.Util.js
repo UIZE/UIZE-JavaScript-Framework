@@ -31,7 +31,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package,
-				_undefined = undefined,
+				_undefined,
 				_ArrayPrototype = Array.prototype,
 				_ArrayPush = _ArrayPrototype.push,
 				_ArrayConcat = _ArrayPrototype.concat,

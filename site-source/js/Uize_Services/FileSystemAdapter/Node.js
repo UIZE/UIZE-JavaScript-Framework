@@ -31,7 +31,7 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_undefined = undefined,
+				_undefined,
 				_true = true,
 				_false = false
 			;
