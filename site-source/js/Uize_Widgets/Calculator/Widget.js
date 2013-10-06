@@ -34,9 +34,8 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Calculator.Widget',
-	superclass:'Uize.Widget.Calculator',
+	superclass:'Uize.Widget.CalculatorAbstract',
 	required:[
-		'Uize.Widget.Button',
 		'Uize.Widgets.Buttons.Char.Widget',
 		'Uize.Widgets.Calculator.Html',
 		'Uize.Widgets.Calculator.Css'
@@ -45,22 +44,6 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			instanceMethods:{
-				addChild:function (_childName,_childInstanceOrClass,_properties) {
-					return _superclass.doMy (
-						this,
-						'addChild',
-						[
-							_childName,
-							_childInstanceOrClass == Uize.Widget.Button
-								? Uize.Widgets.Buttons.Char.Widget
-								: _childInstanceOrClass,
-							_properties
-						]
-					);
-				}
-			},
-
 			set:{
 				html:Uize.Widgets.Calculator.Html
 			},
@@ -73,6 +56,7 @@ Uize.module ({
 			},
 
 			staticProperties:{
+				buttonWidgetClass:Uize.Widgets.Buttons.Char.Widget,
 				cssModule:Uize.Widgets.Calculator.Css,
 				enableRootNodeCssClasses:false
 			},
