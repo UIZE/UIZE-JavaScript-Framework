@@ -508,7 +508,7 @@ Uize.module ({
 						);
 					} else if (_isObject (_eventNameOrEventsMap)) {
 						for (var _eventName in _eventNameOrEventsMap)
-							this.wire (_eventName,_eventNameOrEventsMap [_eventName])
+							m.wire (_eventName,_eventNameOrEventsMap [_eventName])
 						;
 					}
 					/*?
@@ -1672,6 +1672,7 @@ Uize.module ({
 						Yes, there are functions _getClass and _getPropertyPrivateName that could be used (and were at one point), but this code needs to be tuned for performance since set is a touch point in so many places.
 					*/
 					var
+						m = this,
 						_arguments = arguments,
 						_argumentsLength = _arguments.length
 					;
@@ -1698,7 +1699,6 @@ Uize.module ({
 							: _lookup (_properties,_arguments [1])
 					;
 					var
-						m = this,
 						_thisIsInstance = _isInstance (m),
 						_class = _thisIsInstance ? m.Class : m,
 						_propertyProfilesByPublicName = _class._propertyProfilesByPublicName,
@@ -1929,7 +1929,7 @@ Uize.module ({
 							*/
 						}
 					} else {
-						_class._instancePropertyDefaults = this.get ();
+						_class._instancePropertyDefaults = m.get ();
 					}
 					/*?
 						Instance Methods
@@ -2553,8 +2553,8 @@ Uize.module ({
 						_alphastructors = _subclass._alphastructors = (_class._alphastructors || _sacredEmptyArray).concat (),
 						_omegastructors = _subclass._omegastructors = (_class._omegastructors || _sacredEmptyArray).concat ()
 					;
-					(_subclass._alphastructor = _alphastructor) && _alphastructors.push (_alphastructor);
-					(_subclass._omegastructor = _omegastructor) && _omegastructors.push (_omegastructor);
+					_alphastructor && _alphastructors.push (_alphastructor);
+					_omegastructor && _omegastructors.push (_omegastructor);
 
 				_subclass._propertyProfilesByPrivateName || (_subclass._propertyProfilesByPrivateName = {});
 				_subclass._propertyProfilesByPublicName || (_subclass._propertyProfilesByPublicName = {});
@@ -2659,13 +2659,11 @@ Uize.module ({
 			};
 
 			_class.subclass = function (_arg0,_arg1) {
-				var _subclass;
-				if (arguments.length == 1 && !_isFunction (_arg0)) {
-					(_subclass = _createSubclass (this)).declare (_arg0);
-				} else {
-					_subclass = _createSubclass (this,_arg0,_arg1);
-				}
-				return _subclass;
+				return (
+					arguments.length == 1 && !_isFunction (_arg0)
+						? _createSubclass (this).declare (_arg0)
+						: _createSubclass (this,_arg0,_arg1)
+				);
 				/*?
 					Static Methods
 						Uize.Class.subclass
@@ -2979,8 +2977,7 @@ Uize.module ({
 			};
 
 			_class.alphastructor = function (_alphastructor) {
-				this._alphastructor && this._alphastructors.length--;
-				(this._alphastructor = _alphastructor) && this._alphastructors.push (_alphastructor);
+				this._alphastructors.push (_alphastructor);
 				/*?
 					Static Methods
 						Uize.Class.alphastructor
@@ -2997,8 +2994,7 @@ Uize.module ({
 			};
 
 			_class.omegastructor = function (_omegastructor) {
-				this._omegastructor && this._omegastructors.length--;
-				(this._omegastructor = _omegastructor) && this._omegastructors.push (_omegastructor);
+				this._omegastructors.push (_omegastructor);
 				/*?
 					Static Methods
 						Uize.Class.omegastructor
@@ -3015,10 +3011,10 @@ Uize.module ({
 			};
 
 			_class.declare = function (_featuresByType) {
-				if (_featuresByType)
-					for (var _featureType in _featuresByType)
-						_isFunction (this [_featureType]) && this [_featureType] (_featuresByType [_featureType])
+				for (var _featureType in _featuresByType)
+					this [_featureType] (_featuresByType [_featureType])
 				;
+				return this;
 				/*?
 					Static Methods
 						Uize.Class.declare
