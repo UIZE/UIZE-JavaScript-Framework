@@ -26,7 +26,6 @@
 Uize.module ({
 	name:'Uize.Widget.V2',
 	required:[
-		'Uize.Json',
 		'Uize.Node',
 		'Uize.Util.Html.Encode',
 		'Uize.String'
@@ -35,7 +34,7 @@ Uize.module ({
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
-			var _undefined = undefined;
+			var _undefined;
 
 		/*** General Variables ***/
 			var
@@ -229,7 +228,7 @@ Uize.module ({
 					delete _properties.name;
 					delete _properties.widgetClass;
 
-					var _suppliedState = Uize.copy (_properties);
+					var _inlineState = Uize.copy (_properties);
 
 					/*** if child name not specified, generate one using widget class module name ***/
 						if (!_childName) {
@@ -251,19 +250,11 @@ Uize.module ({
 						: '<div id="' + _child.nodeId ('shell') + '"></div>'
 					;
 					_childExisted ||
-						Uize.copyInto (_suppliedState,{widgetClass:_widgetClassName})
+						Uize.copyInto (_inlineState,{widgetClass:_widgetClassName})
 					;
-					if (!Uize.isEmpty (_suppliedState))
-						_html +=
-							'<script type="text/javascript">\n' +
-								'$' + _child.get ('idPrefix') + ' = ' +
-									Uize.Json.to (_suppliedState)
-										.replace (/<script/g,'<s\\cript')
-										.replace (/<\/script/g,'</s\\cript') +
-								';\n' +
-							'</script>'
+					if (!Uize.isEmpty (_inlineState))
+						_child.inlineState = _inlineState
 					;
-
 					return _html;
 					/*?
 						Instance Methods
