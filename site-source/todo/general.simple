@@ -1,6 +1,11 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
 Code Size Optimization
+	Lightweight JSON Module
+		Implement lighter weight JSON module that can be used by =Uize.Widget.V2=.
+
+		It's time. There are now enough clients that support the built-in =JSON= object that it's time to create a lightweight, non-pretty print serializer and parser for JSON objects that can be used in the =Uize.Widget.V2= module and other modules where control over formatting is not needed.
+
 	Use "m" for "this"
 		Switch all modules over to using "m" for capturing a reference to this.
 
@@ -82,16 +87,18 @@ Code Size Optimization
 			Specific features to be decided.
 
 		Uize.Widget.V2
-			Specific features to be decided.
+			Expose the functionality as a mixin, so that the V2 widget capabilities can be mised into existing =Uize.Widget= subclasses, rather than having to rebase those widget classes (which then impacts all their subclasses).
 
 		Uize.String
-			Factor out Uize.String.split
-				Move the =Uize.String.split= static method into its own separate module, since it's only used in a tiny number of places and addresses an edge case issue with some IE versions that is going away.
+			Factor Out Trim Related Methods Into Uize.String.Trim
+				Move the trim related methods into a separate =Uize.String.Trim= module.
 
-	Lightweight JSON Module
-		Implement lighter weight JSON module that can be used by =Uize.Widget.V2=.
-
-		It's time. There are now enough clients that support the built-in =JSON= object that it's time to create a lightweight, non-pretty print serializer and parser for JSON objects that can be used in the =Uize.Widget.V2= module and other modules where control over formatting is not needed.
+				..................................................................
+				Uize.String.trim        >> BECOMES >>  Uize.String.Trim.trim
+				Uize.String.trimLeft    >> BECOMES >>  Uize.String.Trim.trimLeft
+				Uize.String.trimRight   >> BECOMES >>  Uize.String.Trim.trimRight
+				Uize.String.hasPadding  >> BECOMES >>  Uize.String.Trim.hasPadding
+				..................................................................
 
 	Improvements in Uize.Widget
 		Implement Way of Declaring UI Wirers
