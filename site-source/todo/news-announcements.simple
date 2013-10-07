@@ -4,6 +4,9 @@ New Uize.String.Split Module
 	- =Uize.String.split= becomes =Uize.String.split.split=
 	- =Uize.String.splitInTwo= becomes =Uize.String.split.splitInTwo=
 
+New Uize.String.Camel Module
+	- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
+
 New Short Form for Namespace Modules
 	Compact Namespace Module Declaration
 		Support a new and more compact module declaration syntax for pure namespace modules...

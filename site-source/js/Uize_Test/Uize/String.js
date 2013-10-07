@@ -373,64 +373,6 @@ Uize.module ({
 							}
 						}
 					]],
-					['Uize.String.toCamel',[
-						['Test single lowercased word with no delimiters',
-							'hello',
-							'hello'
-						],
-						['Test single uppercased word with no delimiters',
-							'HELLO',
-							'hello'
-						],
-						['Test single lowercased word with no delimiters, but capitalize first character',
-							['hello',true],
-							'Hello'
-						],
-						['Test single uppercased word with no delimiters, but capitalize first character',
-							['HELLO',true],
-							'Hello'
-						],
-						['Test three lowercased words with space delimiters',
-							'hello there john',
-							'helloThereJohn'
-						],
-						['Test three lowercased words with space delimiters, capitalize first character',
-							['hello there john',true],
-							'HelloThereJohn'
-						],
-						['Test three uppercased words with space delimiters',
-							'HELLO THERE JOHN',
-							'helloThereJohn'
-						],
-						['Test three uppercased words with space delimiters, capitalize first character',
-							['HELLO THERE JOHN',true],
-							'HelloThereJohn'
-						],
-						['Test mixture of comma and space as delimiters',
-							'city, state, zip',
-							'cityStateZip'
-						],
-						['Test period character as delimiter',
-							'www.uize.com',
-							'wwwUizeCom'
-						],
-						['Test mixture of slashes and periods as delimiters',
-							'theme/css/button.css',
-							'themeCssButtonCss'
-						],
-						['Test hyphen character as delimiter',
-							'nav-arrow-horz-next',
-							'navArrowHorzNext'
-						],
-						['Test hyphen character as delimiter, with leading redundant hyphens',
-							'--hyphens-are-cool--',
-							'hyphensAreCool'
-						],
-						['Test specifying array instead of source string',
-							[['employee address','city','state','zip']],
-							'employeeAddressCityStateZip'
-						]
-					]],
 					['Uize.String.trim',[
 						['Test that trimming empty string produces empty string','',''],
 						['Test that trimming string with no padding returns the same string','hello','hello'],

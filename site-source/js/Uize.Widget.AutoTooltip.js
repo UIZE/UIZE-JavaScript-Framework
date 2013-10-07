@@ -31,7 +31,7 @@ Uize.module ({
 	name:'Uize.Widget.AutoTooltip',
 	required:[
 		'Uize.Tooltip',
-		'Uize.String',
+		'Uize.String.Camel',
 		'Uize.String.Split'
 	],
 	builder:function (_superclass) {
@@ -208,7 +208,7 @@ Uize.module ({
 				},
 				_dataKeyTransformer:{
 					name:'dataKeyTransformer',
-					value:Uize.String.toCamel
+					value:Uize.String.Camel.to
 				},
 				_nodes:{
 					name:'nodes',
