@@ -1,5 +1,98 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
+Support External Code
+	Implement support for code that is external to the UIZE site.
+
+	When this feature is enabled / configured by a user of UIZE, it should provide the following benefits to the developer...
+
+	Module Reference Integration
+
+		- generated pages
+			- reference page
+			- TO DO document (if =.todo= file is present)
+			- source code page
+
+		- links
+			- source code page
+			- unit tests
+			- visual tests for V2 widgets
+
+		- inline preview of visual sampler for V2 widgets
+
+	Presence in Tools
+		.
+
+		- Dependency Analyzer
+		- SOTU
+		- UIZE Unit Tests
+		- Widget Visual Tests
+		- Widget Visual Samplers
+		- DELVE
+
+	A UIZE Site Configuration
+		This can be viewed as a configuration for the UIZE Web site project, and not a general configuration for UIZE.
+
+	Implementation Considerations
+		.
+
+		- it's worth thinking about whether there should be a one-namespace-per-project limitation, or whether the mapping should be deliberately handled in a different way to support multiple namespaces per project
+
+		Loading Modules in build.js
+			The =build.js= bootstrapping script must support loading modules from multiple paths, depending on the relative paths configured for the various external code namespaces.
+
+		Folder Organized Namespaces
+			Currently, the folder organized namespaces for a project are specified in the =uize-config.json= file for a project.
+
+			This implies that the =build.js= script would need to read the config files for all external code projects - currently the code assumes that there is a single config file. One possibility would be to move the folder organized namespaces configuration into a new file under the code folder and formalize support in =uize-config.json= for multiple code folders rather than just one.
+
+			Naturally, if you're pulling in code from multiple sources that may belong to other UIZE projects, you don't want to duplicate the folder organized namespaces config - you want to be able to retrieve that config from the external source folders.
+
+		File Builders
+			.
+
+		Module Lists
+			.
+
+		Build Configuration of External Code
+			.
+
+			- =modulesFolder=
+			- =folderOrgNamespaces=
+			- =headComments=
+			- =scrunchedHeadComments=
+			- =staticFilePathMatcher=
+			- =modulesToStub=
+
+	Implementation Approaches
+		Implement as a File Service Configuration
+			One possibility for implementing inclusion of external code might be providing a configuration capability in the file system service to allow the contents of various folders to be merged in.
+
+			With this approach, a configuration would be provided for the modules folder that would define multiple virtual sources. With this configuration in place, various methods would behave differently when dealing with paths under this folder's path. Specifically, listing folder contents would have to list the contents for the multiple folders and merge the results. Similarly, reading a file would have to try all the folders until the specified file is found in one of the folders.
+
+		Implement Using Symbolic Links
+			On operating systems that support symblic links, a temptingly simple approach would be to just implement the inclusion of external code using symbolic links.
+
+			Modules Folder to Contain Subfolders
+				In order to use symbolic links to implement this feature, it would be necessary to allow the modules folder to contain subfolders that would contain the code linked in from multiple sources.
+
+				The current assumption in the code is that all the code starts from the root of the modules folder, and the only provision for subfolders is with folder organized namespaces. In order to rely on folder organized namespaces, with symbolic links inside the modules folder to the various namespace folders of external project code, all namespaces would need to be purely namespaces and not code implementations inside JavaScript files. This is not currently true of the =Uize= namespace, because this namespace is defined by =Uize.js=.
+
+				It might be ok to have this be a limitation for now that would only apply for non-UIZE site projects if they wanted to use symbolic links to pull in the UIZE modules. But it wouldn't be a blocker for using this technique with the UIZE site and symblic linking in code from external projects.
+
+			No Windows Support
+				A downside of this approach is that it won't work on operating systems that don't support symblic links.
+
+				Basically, this would eliminate support for this feature on Windows.
+
+	Usage Considerations
+		.
+
+		UIZE Version Compatibility
+			.
+
+		File Builder Compatibility
+			.
+
 Basic Wireframe Documentation for *ALL* Modules
 	Add at least a single line summary for every feature of every module.
 
