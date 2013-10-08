@@ -1,5 +1,28 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
+Site Nav Left Pane
+	Implement a left pane site nav for the site.
+
+	Remaining to do...
+
+	- wrap the entire nav tree inside a box with heading, so it doesn't feel so visually lost, and give it a heading so it's obvious what it's for
+	- reconcile the old site menu (possibly eliminate it)
+	- implement responsive logic to show just site nav when not sufficient gutter for both site nav and site assistant, and have layout be non-centered
+	- figure out how to get item text to wrap (there's currently a =nobr= tag around items)
+
+Scroll to Top
+	Implement animated scroll-to-top feature (arrow can be near bottom left in main content region.
+
+Improve Header
+	Make header be strictly a site header.
+
+	- to the header, add "UIZE JavaScript Framework" text that is linked to the homepage
+	- to the header, add a general search input box on the right side (as is typical in sites)
+	- move all contents that is currently in the header to within the main content region, at the top
+		- the page title
+		- the various buttons (possibly turn these into visually lighter weight pipe separated action links)
+	- adjust CSS to get rid of lines that separate the header from the gutter panes (it's a side effect of the drop shadows on the panes)
+
 Support External Code
 	Implement support for code that is external to the UIZE site.
 
