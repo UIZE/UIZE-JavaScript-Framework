@@ -251,7 +251,7 @@
 /*** site nav and site assistant panes ***/
 	#page-siteNavShell, #page-siteAssistantShell {
 		position: fixed;
-		top: 48px;
+		top: 46px;
 		width: 130px;
 		bottom: 0;
 		z-index: 3;
