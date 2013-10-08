@@ -248,15 +248,26 @@
 			-webkit-border-radius: 3px;
 		}
 
-/*** site assistant shell ***/
-	#page-siteAssistantShell {
+/*** site nav and site assistant panes ***/
+	#page-siteNavShell, #page-siteAssistantShell {
 		position: fixed;
-		right: 0;
 		top: 48px;
 		width: 130px;
 		bottom: 0;
-		box-shadow: -1px 7px 6px 2px rgba(0,0,0,.2);
 		z-index: 3;
+		background: #d2d2d2 url(../images/side-pane-bg.gif) left top repeat-x;
+	}
+	#page-siteNavShell {
+		left: 0;
+		box-shadow: 1px 7px 6px 2px rgba(0,0,0,.2);
+		overflow: hidden;
+	}
+	#page-siteNavShell:hover {
+		overflow: auto;
+	}
+	#page-siteAssistantShell {
+		right: 0;
+		box-shadow: -1px 7px 6px 2px rgba(0,0,0,.2);
 	}
 
 /*** footer shell ***/

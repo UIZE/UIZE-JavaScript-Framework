@@ -96,7 +96,8 @@ Uize.module ({
 			},
 
 			set:{
-				showSiteAssistant:false
+				showSiteAssistant:false,
+				showSiteNav:false
 			}
 		});
 	}

@@ -22,6 +22,7 @@ Uize.module ({
 	required:[
 		'Uize.Node',
 		'Uize.Url',
+		'UizeSite.Widgets.SiteNav.Widget',
 		'UizeSite.Widgets.SiteAssistant.Widget',
 		'UizeSite.Widgets.Footer.Widget'
 	],
@@ -34,7 +35,7 @@ Uize.module ({
 					var _urlParts = Uize.Url.from (window.location.href);
 					return 'http://www.uize.com' + (_urlParts.protocol == 'file:' ? '' : _urlParts.pathname);
 				},
-					
+
 				getPathToRoot:function () {
 					var _homeLinkSrc = this.getNode ('homeLink').getAttribute ('href');
 					return _homeLinkSrc.slice (0,_homeLinkSrc.search (/[\w\-]+.html/));
@@ -126,9 +127,24 @@ Uize.module ({
 
 						var _mainNode = Uize.Node.find ({tagName:'div',className:/\bmain\b/}) [0];
 
-						/*** inject site assistant (if desired) ***/
-							if (m._showSiteAssistant && _mainNode) {
-								/*** add widget and inject its HTML ***/
+						if (_mainNode) {
+							/*** inject site nav (if desired) ***/
+								if (m._showSiteNav) {
+									// add widget and inject its HTML
+									Uize.Node.injectHtml (document.body,'<div id="page-siteNavShell"></div>');
+									m.addChild (
+										'siteNav',
+										UizeSite.Widgets.SiteNav.Widget,
+										{
+											container:m.getNode ('siteNavShell'),
+											built:false
+										}
+									);
+								}
+
+							/*** inject site assistant (if desired) ***/
+								if (m._showSiteAssistant) {
+									// add widget and inject its HTML
 									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistantShell"></div>');
 									m.addChild (
 										'siteAssistant',
@@ -138,21 +154,27 @@ Uize.module ({
 											built:false
 										}
 									);
+								}
 
-								/*** maintain size of site assistant ***/
-									var _resizeSiteAssistant = function () {
-										var _newWidth =
-											(Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width) / 2
-										;
-										m.setNodeStyle (
-											'siteAssistantShell',
-											_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
-										)
-									};
-
-									_resizeSiteAssistant ();
-									Uize.Node.wire (window,'resize',_resizeSiteAssistant);
-							}
+							/*** manage resizing of gutter panes ***/
+								var _resizeGutterPanes = function () {
+									var
+										_gutterWidth =
+											(Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width),
+										_newWidth = _gutterWidth / 2
+									;
+									m._showSiteNav && m.setNodeStyle (
+										'siteNavShell',
+										_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
+									);
+									m._showSiteAssistant && m.setNodeStyle (
+										'siteAssistantShell',
+										_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
+									);
+								};
+								_resizeGutterPanes ();
+								Uize.Node.wire (window,'resize',_resizeGutterPanes);
+						}
 
 						/*** inject footer (if desired) ***/
 							if (m._showFooter) {
@@ -180,6 +202,10 @@ Uize.module ({
 				},
 				_showSiteAssistant:{
 					name:'showSiteAssistant',
+					value:true
+				},
+				_showSiteNav:{
+					name:'showSiteNav',
 					value:true
 				}
 			},
