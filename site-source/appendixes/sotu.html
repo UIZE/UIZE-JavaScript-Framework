@@ -8,6 +8,11 @@
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.Uize_Widgets_SimpleStatsTable_Css {
+			width: 100%;
+		}
+	</style>
 </head>
 
 <body>
@@ -81,7 +86,7 @@ Uize.require (
 								maxColor:'hsl(120,100,50)',
 								minValue:0,
 								maxValue:100,
-								formatter:'value.toFixed (1) + "%"'
+								formatter:'Math.round (value) + "%"'
 							},
 							{
 								title:'Doc<br/>%',
@@ -89,7 +94,7 @@ Uize.require (
 								maxColor:'hsl(120,100,50)',
 								minValue:0,
 								maxValue:100,
-								formatter:'value.toFixed (1) + "%"'
+								formatter:'Math.round (value) + "%"'
 							},
 							{
 								title:'Test<br/>%',
@@ -97,7 +102,7 @@ Uize.require (
 								maxColor:'hsl(120,100,50)',
 								minValue:0,
 								maxValue:100,
-								formatter:'value.toFixed (1) + "%"'
+								formatter:'Math.round (value) + "%"'
 							},
 							{
 								title:'Example<br/>Pages',
@@ -105,7 +110,7 @@ Uize.require (
 								maxColor:'hsl(120,100,50)'
 							},
 							{
-								title:'Scrunch<br/>Size',
+								title:'Size',
 								minColor:'hsl(120,100,50)',
 								maxColor:'hsl(0,100,50)'
 							},
