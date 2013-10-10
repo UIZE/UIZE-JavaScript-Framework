@@ -141,7 +141,21 @@ Implement Next Generation Localization
 				In cases where the appropriate currency can't be determined from either the locale in which the application is offered or the locale of the user, the application may wish to make the currency selectable by the user, and the application may also wish to display monetary amounts in two or more currencies. A traveler in the United Kingdom, for example, may have a combination of Pund Sterling and Euros in their wallet and it may be convenient to see amounts in both currencies, with the secondary / non-dominant currency shown in a separate column or in parentheses.
 
 			Number Formatting Versus Currency
-				.
+				Number formatting and currency formatting can be distinct from one another and should not be conflated.
+
+				For example, in an application that displays amounts denominated in Euros in Germany, there would be an expectation for the correct Euro currency symbol to be used as well as the appropriate use of the period character to delimit thousands and the comma character to indicate the decimal position.
+
+				AMOUNTS DISPLAYED IN GERMANY
+				..........................
+				€ 1.234,56  (US $1.973,04)
+				..........................
+
+				In contrast, if a Euro-denominated amount were to be displayed as a comparison alongside a US dollar amount to users in the US, there would be an expectation for the thousands in the Euro amount to be delimited using commas and the decimal place indicated by a period.
+
+				AMOUNTS DISPLAYED IN US
+				..........................
+				€ 1,234.56  (US $1,973.04)
+				..........................
 
 Implement New Binding Features
 	Add Feature for Declaring UI Updaters
