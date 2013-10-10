@@ -159,18 +159,39 @@ Uize.module ({
 							/*** manage resizing of gutter panes ***/
 								var _resizeGutterPanes = function () {
 									var
-										_gutterWidth =
-											(Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width),
-										_newWidth = _gutterWidth / 2
+										_showSiteNav = m._showSiteNav,
+										_showSiteAssistant = m._showSiteAssistant
 									;
-									m._showSiteNav && m.setNodeStyle (
-										'siteNavShell',
-										_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
-									);
-									m._showSiteAssistant && m.setNodeStyle (
-										'siteAssistantShell',
-										_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
-									);
+									if (_showSiteNav || _showSiteAssistant) {
+										var
+											_gutterWidth =
+												Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width,
+											_halfGutterWidth = _gutterWidth / 2,
+											_showBoth = _showSiteNav && _showSiteAssistant,
+											_showPane = function (_mustShow,_node,_width) {
+												_mustShow && m.setNodeStyle (
+													_node,
+													_width ? {display:'block',width:_width} : {display:'none'}
+												);
+											},
+											_newWidth = _showBoth ? _halfGutterWidth : _gutterWidth,
+											_siteNavWidth = _newWidth,
+											_siteAssistantWidth = _newWidth
+										;
+										if (_showBoth && _newWidth <= 170) {
+											_siteNavWidth = _gutterWidth;
+											_siteAssistantWidth = 0;
+										}
+										if (_siteNavWidth <= 170) {
+											_siteNavWidth = 0;
+										}
+										_showPane (_showSiteNav,'siteNavShell',_siteNavWidth);
+										_showPane (_showSiteAssistant,'siteAssistantShell',_siteAssistantWidth);
+										m.setNodeStyle (
+											_mainNode,
+											{marginRight:_siteAssistantWidth == 0 && !!_siteNavWidth ? '0' : 'auto'}
+										);
+									}
 								};
 								_resizeGutterPanes ();
 								Uize.Node.wire (window,'resize',_resizeGutterPanes);
