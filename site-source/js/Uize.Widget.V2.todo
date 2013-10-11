@@ -113,50 +113,6 @@ Implement Next Generation Localization
 
 			- consider supporting string resources scoped to a conditionalization block (the goal is to allow very flexible construction, with the ability to locally have translated variants of parts / portions of the ultimate translation, but to have those sub-parts still be "in the clear"  and outside of programmatic / scripting code)
 
-	Multi-dimensionality
-		The system for localization should support the possibility of additional dimensions beyond merely region and language, in order to support partner-branded versions of an application.
-
-		It's possible that partner variants of the localization could be supported through the theme mechanism. Ideally, the addition of a new dimension that may affect the locale string modules and other aspects of the UI can be done without needing to update the code to support the new dimension.
-
-	Serialization of Types
-		Various value types that can be displayed to the user, either alone or as substitutions in locale strings, may have locale specific serializations.
-
-		Locale-specific formatting of a number value, for instance, can be viewed as a form of locale-specific serialization to string of number type values.
-
-		Curreny Values
-			Currency values may have locale-specific formatting, but locale should not be confused with currency.
-
-			No Canonical Currency Units
-				Canonical values don't exist for currency values in the same way as they do with linear dimension values.
-
-				Conversion between different currencies must involve a central monetary exchange service that is aware of the up-to-date intercurrency exchange rates - it is not possible to implement static code as part of an internationalization utilities library that can perform conversion for the purpose of display.
-
-				Therefore, a currency value type should always carry the currency for the value independent of the locale setting for the application.
-
-			No One-to-one Locale-to-currency Mapping
-				There is not a one-to-one mapping between locale and currency.
-
-				Certain locales may have an associated currency (or currencies), but it can't be assumed that there is a specific currency for a specific locale. Panama, for example, supports both the US Dollar and the Panamanian Balboa.
-
-				In cases where the appropriate currency can't be determined from either the locale in which the application is offered or the locale of the user, the application may wish to make the currency selectable by the user, and the application may also wish to display monetary amounts in two or more currencies. A traveler in the United Kingdom, for example, may have a combination of Pund Sterling and Euros in their wallet and it may be convenient to see amounts in both currencies, with the secondary / non-dominant currency shown in a separate column or in parentheses.
-
-			Number Formatting Versus Currency
-				Number formatting and currency formatting can be distinct from one another and should not be conflated.
-
-				For example, in an application that displays amounts denominated in Euros in Germany, there would be an expectation for the correct Euro currency symbol to be used as well as the appropriate use of the period character to delimit thousands and the comma character to indicate the decimal position.
-
-				AMOUNTS DISPLAYED IN GERMANY
-				..........................
-				€ 1.234,56  (US $1.973,04)
-				..........................
-
-				In contrast, if a Euro-denominated amount were to be displayed as a comparison alongside a US dollar amount to users in the US, there would be an expectation for the thousands in the Euro amount to be delimited using commas and the decimal place indicated by a period.
-
-				AMOUNTS DISPLAYED IN US
-				..........................
-				€ 1,234.56  (US $1,973.04)
-				..........................
-
 Implement New Binding Features
 	Add Feature for Declaring UI Updaters
 		Add a class feature that allows uiUpdates to be declared.
