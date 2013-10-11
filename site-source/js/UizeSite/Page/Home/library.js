@@ -20,5 +20,5 @@
 	UizeSite.Page.Home->
 */
 
-Uize.module ({name:'UizeSite.Page.Home.library'});
+Uize.module ('UizeSite.Page.Home.library');
 

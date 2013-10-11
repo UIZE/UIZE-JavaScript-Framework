@@ -1,9 +1,5 @@
 This is a TO DO document for the =Uize.Widget= module.
 
-Possible New Tree-inherited Properties
-	- theme
-	- locale
-
 Proposed Shortenings
 	- myWidget.getNode -> myWidget.node
 

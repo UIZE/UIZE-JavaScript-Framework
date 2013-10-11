@@ -22,6 +22,7 @@ Uize.module ({
 	required:[
 		'Uize.Node',
 		'Uize.Url',
+		'UizeSite.Widgets.SiteNav.Widget',
 		'UizeSite.Widgets.SiteAssistant.Widget',
 		'UizeSite.Widgets.Footer.Widget'
 	],
@@ -34,7 +35,7 @@ Uize.module ({
 					var _urlParts = Uize.Url.from (window.location.href);
 					return 'http://www.uize.com' + (_urlParts.protocol == 'file:' ? '' : _urlParts.pathname);
 				},
-					
+
 				getPathToRoot:function () {
 					var _homeLinkSrc = this.getNode ('homeLink').getAttribute ('href');
 					return _homeLinkSrc.slice (0,_homeLinkSrc.search (/[\w\-]+.html/));
@@ -126,33 +127,78 @@ Uize.module ({
 
 						var _mainNode = Uize.Node.find ({tagName:'div',className:/\bmain\b/}) [0];
 
-						/*** inject site assistant (if desired) ***/
-							if (m._showSiteAssistant && _mainNode) {
-								/*** add widget and inject its HTML ***/
-									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistantShell"></div>');
+						if (_mainNode) {
+							/*** inject site nav (if desired) ***/
+								if (m._showSiteNav) {
+									// add widget and inject its HTML
+									Uize.Node.injectHtml (
+										document.body,
+										'<div id="page-siteNavPane"><div id="page-siteNavShell"></div></div>'
+									);
+									m.addChild (
+										'siteNav',
+										UizeSite.Widgets.SiteNav.Widget,
+										{
+											container:m.getNode ('siteNavShell'),
+											built:false
+										}
+									);
+								}
+
+							/*** inject site assistant (if desired) ***/
+								if (m._showSiteAssistant) {
+									// add widget and inject its HTML
+									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistantPane"></div>');
 									m.addChild (
 										'siteAssistant',
 										UizeSite.Widgets.SiteAssistant.Widget,
 										{
-											container:m.getNode ('siteAssistantShell'),
+											container:m.getNode ('siteAssistantPane'),
 											built:false
 										}
 									);
+								}
 
-								/*** maintain size of site assistant ***/
-									var _resizeSiteAssistant = function () {
-										var _newWidth =
-											(Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width) / 2
+							/*** manage resizing of gutter panes ***/
+								var _resizeGutterPanes = function () {
+									var
+										_showSiteNav = m._showSiteNav,
+										_showSiteAssistant = m._showSiteAssistant
+									;
+									if (_showSiteNav || _showSiteAssistant) {
+										var
+											_gutterWidth =
+												Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width,
+											_halfGutterWidth = _gutterWidth / 2,
+											_showBoth = _showSiteNav && _showSiteAssistant,
+											_showPane = function (_mustShow,_node,_width) {
+												_mustShow && m.setNodeStyle (
+													_node,
+													_width ? {display:'block',width:_width} : {display:'none'}
+												);
+											},
+											_newWidth = _showBoth ? _halfGutterWidth : _gutterWidth,
+											_siteNavWidth = _newWidth,
+											_siteAssistantWidth = _newWidth
 										;
+										if (_showBoth && _newWidth <= 170) {
+											_siteNavWidth = _gutterWidth;
+											_siteAssistantWidth = 0;
+										}
+										if (_siteNavWidth <= 170) {
+											_siteNavWidth = 0;
+										}
+										_showPane (_showSiteNav,'siteNavPane',_siteNavWidth);
+										_showPane (_showSiteAssistant,'siteAssistantPane',_siteAssistantWidth);
 										m.setNodeStyle (
-											'siteAssistantShell',
-											_newWidth > 170 ? {display:'block',width:_newWidth} : {display:'none'}
-										)
-									};
-
-									_resizeSiteAssistant ();
-									Uize.Node.wire (window,'resize',_resizeSiteAssistant);
-							}
+											_mainNode,
+											{marginRight:_siteAssistantWidth == 0 && !!_siteNavWidth ? '0' : 'auto'}
+										);
+									}
+								};
+								_resizeGutterPanes ();
+								Uize.Node.wire (window,'resize',_resizeGutterPanes);
+						}
 
 						/*** inject footer (if desired) ***/
 							if (m._showFooter) {
@@ -180,6 +226,10 @@ Uize.module ({
 				},
 				_showSiteAssistant:{
 					name:'showSiteAssistant',
+					value:true
+				},
+				_showSiteNav:{
+					name:'showSiteNav',
 					value:true
 				}
 			},

@@ -23,7 +23,7 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module({
+Uize.module ({
 	name:'Uize.String.Discombobulator',
 	builder:function () {
 		'use strict';

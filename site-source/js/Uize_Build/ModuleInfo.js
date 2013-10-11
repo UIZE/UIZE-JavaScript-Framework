@@ -229,19 +229,23 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_package,
-				_traceDependencies = Uize.Util.Dependencies.traceDependencies
+				_traceDependencies = Uize.Util.Dependencies.traceDependencies,
+				_getRawDefinitionFromCode = Uize.quarantine (
+					function (_moduleCode) {
+						var
+							_result,
+							Uize = {module:function (_definition) {_result = _definition}}
+						;
+						eval (_moduleCode);
+						return _result;
+					}
+				)
 			;
 
 		return _package = Uize.package ({
-			getDefinitionFromCode:Uize.quarantine (
-				function (_moduleCode) {
-					var
-						_result,
-						Uize = {module: function (_definition) {_result = _definition}}
-					;
-					eval (_moduleCode);
-					return _result;
-				}
+			getDefinitionFromCode:function (_moduleCode) {
+				var _definition = _getRawDefinitionFromCode (_moduleCode);
+				return _definition && Uize.resolveModuleDefinition (_definition);
 				/*?
 					Static Methods
 						Uize.Build.ModuleInfo.getDefinitionFromCode
@@ -257,7 +261,7 @@ Uize.module ({
 							NOTES
 							- compare to the related =Uize.Build.ModuleInfo.getDefinition= static method
 					*/
-			),
+			},
 
 			getDefinition:function (_moduleName) {
 				var _definition = {name:_moduleName};
@@ -293,7 +297,7 @@ Uize.module ({
 
 			getDirectDependencies:function (_moduleName) {
 				var _definition = _package.getDefinition (_moduleName);
-				return _definition ? Uize.resolveModuleDefinition (_definition).required : [];
+				return (_definition && _definition.required) || [];
 				/*?
 					Static Methods
 						Uize.Build.ModuleInfo.getDirectDependencies

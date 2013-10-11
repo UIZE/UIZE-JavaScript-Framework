@@ -380,8 +380,6 @@ Uize.module ({
 			}
 		});
 
-		_class.declareServiceMethods = _class.serviceMethods; /* DEPRECATED 2013-01-09 */
-
 		return _class;
 	}
 });

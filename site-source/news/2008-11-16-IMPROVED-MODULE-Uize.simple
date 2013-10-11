@@ -28,7 +28,7 @@ Uize.toString
 Uize.valueOf
 	Less compelling than the new =Uize.toString= static implementation, the =valueOf= intrinsic method is now also implemented as a static method on =Uize= subclasses.
 
-	This change is more for parity than anything else. This means that you can access the static value of a class' =value= state property by involving the class reference in an expression, such as =+Uize.Widget.Bar.Slider=, or =Uize.Widget.ColorPicker + ''=.
+	This change is more for parity than anything else. This means that you can access the static value of a class' =value= state property by involving the class reference in an expression, such as =+Uize.Widget.Bar.Slider=, or =Uize.Widgets.RgbSliders.Widget + ''=.
 
 Name Property Optional in State Property Profiles
 	When registering state properties using the =Uize.registerProperties= static method, it is now possible to omit the public name for a property and it will default to the private name.

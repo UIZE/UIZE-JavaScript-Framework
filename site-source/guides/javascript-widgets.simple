@@ -43,15 +43,15 @@ Introduction
 		Not to be confused with "widgetry" (which we do a lot of in the UIZE JavaScript Framework), the inherent parent-child relationship of widgets in the UIZE JavaScript Framework means that one can construct an arbitrarily complex "tree" of widgets.
 
 		EXAMPLE
-		..........................................
+		.........................................
 		page
-		page.children.colorPicker
-		page.children.colorPicker.children.sliderR
-		page.children.colorPicker.children.sliderG
-		page.children.colorPicker.children.sliderB
-		..........................................
+		page.children.rgbSliders
+		page.children.rgbSliders.children.sliderR
+		page.children.rgbSliders.children.sliderG
+		page.children.rgbSliders.children.sliderB
+		.........................................
 
-		The above representation depicts a widget tree with a =page= widget instance at the root of the tree. The =page= widget instance has one child widget, named =colorPicker=, which is an instance of the =Uize.Widget.ColorPicker= class. The =colorPicker= widget has three child widgets - =sliderR=, =sliderG=, and =sliderB= - which are added in the implementation of the =Uize.Widget.ColorPicker= class.
+		The above representation depicts a widget tree with a =page= widget instance at the root of the tree. The =page= widget instance has one child widget, named =rgbSliders=, which is an instance of the =Uize.Widgets.RgbSliders.Widget= class. The =rgbSliders= widget has three child widgets - =sliderR=, =sliderG=, and =sliderB= - which are added in the implementation of the =Uize.Widgets.RgbSliders.Widget= class.
 
 		The hierarchical nature of the widget tree brings the same kinds of benefits to the use of widgets in an application as the Document Object Model brings to document structure, or nested encapsulation brings to good functional programming, or folder structure brings to file management. Hierarchy is a pervasive phenomenon in complex systems of all kinds, and the widgets want some of that sweet hierarchy juice as well.
 

@@ -268,6 +268,7 @@ Uize.module ({
 									_todo ('Modules'),
 									_todo ('Documentation'),
 									_todo ('General'),
+									_todo ('Localization'),
 									_todo ('News Announcements'),
 									_todo ('External Site Integration')
 								]

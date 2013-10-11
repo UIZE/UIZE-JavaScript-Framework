@@ -159,7 +159,7 @@ Uize.module ({
 					;
 					return {
 						path:_filePath,
-						title:_titleExtractor (_fileText.match (/<title>(.*?)<\/title>/) [1]),
+						title:(_titleExtractor || Uize.returnX) (_fileText.match (/<title>(.*?)<\/title>/) [1]),
 						keywords:_keywordsMatch ? _keywordsMatch [1] : '',
 						description:_descriptionMatch ? _descriptionMatch [1] : '',
 						imageSrc:_imageSrcMatch ? _imageSrcMatch [1] : ''
@@ -188,7 +188,6 @@ Uize.module ({
 				},
 
 				getHtmlFilesInfo:function (_folderToIndex,_titleExtractor) {
-					if (!_titleExtractor) _titleExtractor = Uize.returnX;
 					return Uize.Array.Sort.sortBy (
 						Uize.map (
 							_fileSystem.getFiles ({
@@ -468,6 +467,7 @@ Uize.module ({
 				},
 
 				moduleAsText:function (_moduleDefinition) {
+					_moduleDefinition = Uize.copy (_moduleDefinition);
 					var
 						_builder = _moduleDefinition.builder,
 						_builderPlaceholder = typeof _builder == 'string' ? '[BUILDER_PLACEHOLDER_' + Uize.now () + ']' : ''
@@ -475,7 +475,16 @@ Uize.module ({
 					if (_builderPlaceholder)
 						_moduleDefinition.builder = _builderPlaceholder
 					;
-					var _moduleText = 'Uize.module (' + Uize.Json.to (_moduleDefinition) + ');';
+					if (Uize.isEmpty (_moduleDefinition.required))
+						delete _moduleDefinition.required
+					;
+					var _moduleText =
+						'Uize.module (' +
+							Uize.Json.to (
+								Uize.keys (_moduleDefinition) == 'name' ? _moduleDefinition.name : _moduleDefinition
+							) +
+						');'
+					;
 					if (_builderPlaceholder) {
 						var _builderPlaceholderPos = _moduleText.indexOf (_builderPlaceholder);
 						_moduleText =

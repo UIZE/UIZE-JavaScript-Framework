@@ -25,7 +25,7 @@ Uize.module ({
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Widget.Log.InstanceEvents',
 		'Uize.Widget.TableSort',
-		'Uize.Xml',
+		'Uize.Util.Html.Encode',
 		'Uize.Util.Oop',
 		'Uize.Node',
 		'Uize.String',
@@ -41,7 +41,10 @@ Uize.module ({
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+			var
+				_undefined,
+				_htmlEncode = Uize.Util.Html.Encode.encode
+			;
 
 		/*** Utility Functions ***/
 			function _getNodeOuterHtml (_node) {
@@ -351,7 +354,7 @@ Uize.module ({
 					'<a' +
 						' href="javascript://"' +
 						' class="objectLink"' +
-						' title="' + Uize.Xml.toAttributeValue (_objectPath || _linkText) + '"' +
+						' title="' + _htmlEncode (_objectPath || _linkText) + '"' +
 					'>' +
 						(
 							_linkText.indexOf (_childrenDelimiter) > -1
@@ -923,7 +926,7 @@ Uize.module ({
 								'<title>REPORT: ' + _title + '</title>',
 							'</head>',
 							'<body>',
-								'<pre>' + Uize.Xml.toAttributeValue (_report) + '</pre>',
+								'<pre>' + _htmlEncode (_report) + '</pre>',
 							'</body>',
 						'</html>'
 					].join ('\n')
@@ -1150,7 +1153,7 @@ Uize.module ({
 									_htmlChunks,
 									'HTML',
 									'',
-									Uize.Xml.toAttributeValue (
+									_htmlEncode (
 										_widgetNode
 											? _getNodeOuterHtml (_widgetNode)
 											: 'this widget has no container node, shell node, or root node'
@@ -1224,7 +1227,7 @@ Uize.module ({
 								_htmlChunks,
 								'HTML',
 								'',
-								Uize.Xml.toAttributeValue (_getNodeOuterHtml (_object)),
+								_htmlEncode (_getNodeOuterHtml (_object)),
 								'',
 								true
 							);
@@ -1232,14 +1235,14 @@ Uize.module ({
 							// do nothing, since state is shown in the state tab
 						} else if (Uize.isFunction (_object)) {
 							_addTabContentsSection (
-								_htmlChunks,'CODE','',Uize.Xml.toAttributeValue (_object.toString ()),'',true
+								_htmlChunks,'CODE','',_htmlEncode (_object.toString ()),'',true
 							);
 						} else {
 							_addTabContentsSection (
-								_htmlChunks,'TO STRING','',Uize.Xml.toAttributeValue (_object.toString ()),'',true
+								_htmlChunks,'TO STRING','',_htmlEncode (_object.toString ()),'',true
 							);
 							_addTabContentsSection (
-								_htmlChunks,'JSON SERIALIZATION','',Uize.Xml.toAttributeValue (Uize.Json.to (_object)),'',true
+								_htmlChunks,'JSON SERIALIZATION','',_htmlEncode (Uize.Json.to (_object)),'',true
 							);
 						}
 					} else {
@@ -1294,7 +1297,7 @@ Uize.module ({
 											' | ',
 											_getObjectLink ('set',_propertySetMethodCallPrefix + _property + '\',#)'),
 										'</td>',
-										'<td>' + Uize.Xml.toAttributeValue (_propertyValues [_property]) + '</td>',
+										'<td>' + _htmlEncode (_propertyValues [_property]) + '</td>',
 									'</tr>'
 								)
 						;

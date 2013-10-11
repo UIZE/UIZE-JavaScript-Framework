@@ -2752,12 +2752,6 @@ Uize.module ({
 							}
 						}
 					]],
-					{
-						title:'Test that the deprecated Uize.globalEval method is still supported and is simply a reference to the Uize.laxEval method',
-						test:function () {
-							return this.expectSameAs (Uize.globalEval,Uize.laxEval);
-						}
-					},
 					['Uize.global',[
 						{
 							title:'Test that the method returns a reference to the global object',
@@ -4120,7 +4114,7 @@ Uize.module ({
 						var _result;
 
 						/*** declare MyNamespace namespace ***/
-							Uize.module ({name:'MyNamespace'});
+							Uize.module ('MyNamespace');
 
 						/*** declare module with data records for engineering employees ***/
 							Uize.module ({

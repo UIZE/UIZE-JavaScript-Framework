@@ -33,6 +33,86 @@ Implement Next Generation Localization
 		Locale and Theme
 			Whenever the value of the =locale= state property changes, an optional locale-specific theme CSS module can be loaded.
 
+	Locale String Modules
+		Locale string modules are organized into a specific folder under a widget's namespace folder by convention, and named according to a convention that incorporates the locale code.
+
+		Locale String Modules as Implicit Dependencies
+			In order to improve the user experience when the UI is rendered, locale string modules can be injected as implicit dependencies by the module system, based upon an environment setting for locale.
+
+			This will support both the dynamic loading of locale string modules as dependencies of the widget modules that need them, as well as packaging of the locale string modules along with the widget modules that use them.
+
+		Specifying Strings for Variant Selection
+
+			EXAMPLE - ICU MESSAGE FORMAT
+			..........................................................................
+			{gender_of_host, select,
+				female {
+					{num_guests, plural, offset:1
+						=0 {{host} does not give a party.}
+						=1 {{host} invites {guest} to her party.}
+						=2 {{host} invites {guest} and one other person to her party.}
+						other {{host} invites {guest} and # other people to her party.}
+					}
+				}
+				male {
+					{num_guests, plural, offset:1
+						=0 {{host} does not give a party.}
+						=1 {{host} invites {guest} to his party.}
+						=2 {{host} invites {guest} and one other person to his party.}
+						other {{host} invites {guest} and # other people to his party.}
+					}
+				}
+				other {
+					{num_guests, plural, offset:1
+						=0 {{host} does not give a party.}
+						=1 {{host} invites {guest} to their party.}
+						=2 {{host} invites {guest} and one other person to their party.}
+						other {{host} invites {guest} and # other people to their party.}
+					}
+				}
+			}
+			..........................................................................
+
+			UIZE FORMAT
+			....................................................................................
+			invitation
+				host.gender == 'female'
+					num_guests == 0: {host} does not give a party.
+					num_guests == 1: {host} invites {guest} to her party.
+					num_guests == 2: invites {guest} and one other person to her party.
+					else: {host} invites {guest} and {num_guests - 1} other people to her party.
+				host.gender == 'male'
+					num_guests == 0: {host} does not give a party.
+					num_guests == 1: {host} invites {guest} to his party.
+					num_guests == 2: invites {guest} and one other person to his party.
+					else: {host} invites {guest} and {num_guests - 1} other people to his party.
+				else
+					num_guests == 0: {host} does not give a party.
+					num_guests == 1: {host} invites {guest} to their party.
+					num_guests == 2: invites {guest} and one other person to their party.
+					else: {host} invites {guest} and {num_guests - 1} other people to their party.
+			....................................................................................
+
+
+			UIZE FORMAT - ALTERNATE
+			..................................................................................................
+			invitation
+				host.gender == 'female' && num_guests == 0: {host} does not give a party.
+				host.gender == 'female' && num_guests == 1: {host} invites {guest} to her party.
+				host.gender == 'female' && num_guests == 2: invites {guest} and one other person to her party.
+				host.gender == 'female': {host} invites {guest} and {num_guests - 1} other people to her party.
+				host.gender == 'male' && num_guests == 0: {host} does not give a party.
+				host.gender == 'male' && num_guests == 1: {host} invites {guest} to his party.
+				host.gender == 'male' && num_guests == 2: invites {guest} and one other person to his party.
+				host.gender == 'male': {host} invites {guest} and {num_guests - 1} other people to his party.
+				num_guests == 0: {host} does not give a party.
+				num_guests == 1: {host} invites {guest} to their party.
+				num_guests == 2: invites {guest} and one other person to their party.
+				else: {host} invites {guest} and {num_guests - 1} other people to their party.
+			..................................................................................................
+
+			- consider supporting string resources scoped to a conditionalization block (the goal is to allow very flexible construction, with the ability to locally have translated variants of parts / portions of the ultimate translation, but to have those sub-parts still be "in the clear"  and outside of programmatic / scripting code)
+
 Implement New Binding Features
 	Add Feature for Declaring UI Updaters
 		Add a class feature that allows uiUpdates to be declared.
@@ -125,3 +205,8 @@ Implement New Binding Features
 			Perhaps bindings to the style object could be treated as bindings on the style of a child widget's root node, but this could be quite complicated for rendering of HTML, since the HTML generation for a child widget is opaque to the template for a widget and cannot be easily co-compiled.
 
 			Perhaps a more reasonable approach would be to treat bindings to the style object of a child widget as bindings to a =style= state property that is implemented in the =Uize.Widget.V2= base class and that is bound to the style object of the widget's root node. Then, bindings to a child widget's style object would be propagated through the =style= state property of the child widget to its root node's =style= property.
+
+Possible New Tree-inherited Properties
+	- =theme=
+	- =locale=
+

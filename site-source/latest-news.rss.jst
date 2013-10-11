@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%@ required ('Uize.Date','Uize.Xml','Uize.Url') %><%
+<%@ required ('Uize.Date','Uize.Util.Html.Encode','Uize.Url') %><%
 	function pubDate (date) {
 		return Uize.Date.resolve (date).toUTCString ().replace ('UTC','UT');
 	}
@@ -26,7 +26,7 @@
 	for (var itemNo = -1, items = input.items, itemsLength = items.length; ++itemNo < itemsLength;) {
 		var
 			item = items [itemNo],
-			linkXmlText = Uize.Xml.toAttributeValue (item.link)
+			linkXmlText = Uize.Util.Html.Encode.encode (item.link)
 		;
 %>
 		<item>

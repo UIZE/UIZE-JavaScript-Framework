@@ -181,13 +181,13 @@ Uize.module ({
 				return _Uize_Date.Formatter.parse (_value,this._displayFormat) || null;
 			}
 
+		/*** Private Instance Methods ***/
 			function _addChildButton (m,_name,_action) {
 				var _button = m.addChild (_name,m.Class.buttonWidgetClass);
 				_button.wire ('Click',_action);
 				return _button;
 			}
 
-		/*** Private Instance Methods ***/
 			function _snapView () {
 				var
 					m = this,

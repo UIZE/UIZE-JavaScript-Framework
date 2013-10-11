@@ -25,11 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Data',
-	required:[
-		'Uize.Test',
-		'Uize.Class',
-		'Uize.Class.Value'
-	],
+	required:'Uize.Test',
 	builder:function () {
 		'use strict';
 

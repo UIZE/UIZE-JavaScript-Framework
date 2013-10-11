@@ -137,11 +137,14 @@ Uize.module ({
 	name:'Uize.Widget.Log',
 	required:[
 		'Uize.Widget.Button',
-		'Uize.Xml',
+		'Uize.Util.Html.Encode',
 		'Uize.Date.Formatter'
 	],
 	builder:function (_superclass) {
 		'use strict';
+
+		/*** Variables for Scruncher Optimization ***/
+			var _htmlEncode = Uize.Util.Html.Encode.encode;
 
 		/*** Class Constructor ***/
 			var
@@ -201,7 +204,7 @@ Uize.module ({
 					m = this,
 					_messageHtml =
 						(m._showTimestamp ? (Uize.Date.Formatter.format (null,m._timestampFormat) + ' : ') : '') +
-						Uize.Xml.toAttributeValue (_message) +
+						_htmlEncode (_message) +
 						'<br/>'
 				;
 				if (m.isWired) {

@@ -28,7 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Node',
 		'Uize.Tooltip',
-		'Uize.Xml'
+		'Uize.Util.Html.Encode'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -39,7 +39,7 @@ Uize.module ({
 				_false = false,
 				_Uize_Node = Uize.Node,
 				_Uize_Tooltip = Uize.Tooltip,
-				_Uize_Xml_toAttributeValue = Uize.Xml.toAttributeValue
+				_htmlEncode = Uize.Util.Html.Encode.encode
 			;
 
 		return _superclass.subclass ({
@@ -76,7 +76,7 @@ Uize.module ({
 																} else {
 																	var _itemDescription = _item.description;
 																	if (_itemDescription)
-																		_tooltipHtml = _Uize_Xml_toAttributeValue (_itemDescription)
+																		_tooltipHtml = _htmlEncode (_itemDescription)
 																	;
 																}
 																_tooltipHtml && _Uize_Node.setInnerHtml (_tooltipNode,_tooltipHtml);

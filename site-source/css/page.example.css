@@ -101,7 +101,7 @@
 		margin-top: 76px;
 	}
 
-	.inTour #page-siteAssistantShell {
+	.inTour #page-siteNavPane, .inTour #page-siteAssistantPane {
 		top: 76px;
 	}
 

@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.String.Lines',
 		'Uize.Templates.Adoptable',
 		'Uize.Array.Sort',
-		'Uize.Xml',
+		'Uize.Util.Html.Encode',
 		'Uize.Json'
 	],
 	builder:function () {
@@ -42,7 +42,8 @@ Uize.module ({
 			var
 				_undefined,
 				_string = 'string',
-				_Uize_String_limitLength = Uize.String.limitLength
+				_Uize_String_limitLength = Uize.String.limitLength,
+				_htmlEncode = Uize.Util.Html.Encode.encode
 			;
 
 		/*** General Variables ***/
@@ -64,10 +65,10 @@ Uize.module ({
 					},
 					image:function (_input,_indent,_indentChars) {
 						var
-							_titleAsAttributeValue = Uize.Xml.toAttributeValue (_input.title || ''),
-							_subtitleAsAttributeValue = Uize.Xml.toAttributeValue (_input.subtitle || ''),
+							_titleAsAttributeValue = _htmlEncode (_input.title || ''),
+							_subtitleAsAttributeValue = _htmlEncode (_input.subtitle || ''),
 							_titleAndSubtitle = _titleAsAttributeValue && _subtitleAsAttributeValue,
-							_urlAsAttributeValue = Uize.Xml.toAttributeValue (_input.url),
+							_urlAsAttributeValue = _htmlEncode (_input.url),
 							_imageAlt =
 								_titleAsAttributeValue +
 								(_titleAndSubtitle && ' (') + _subtitleAsAttributeValue + (_titleAndSubtitle && ')')
@@ -79,8 +80,8 @@ Uize.module ({
 										' src="' + _urlAsAttributeValue + '"' +
 										' title="' + _imageAlt + '"' +
 										' alt="' + _imageAlt + '"' +
-										(_input.width ? ' width="' + Uize.Xml.toAttributeValue (_input.width) + '"' : '') +
-										(_input.height ? ' height="' + Uize.Xml.toAttributeValue (_input.height) + '"' : '') +
+										(_input.width ? ' width="' + _htmlEncode (_input.width) + '"' : '') +
+										(_input.height ? ' height="' + _htmlEncode (_input.height) + '"' : '') +
 									'/>',
 								_indent + _indent + '</a>',
 								_indent + _indent + '<div>',
@@ -693,7 +694,7 @@ Uize.module ({
 										: ''
 								) + _headingSansAliases,
 							_headingPath = (_parentHeadingPath ? (_parentHeadingPath + ' -> ') : '') + _headingTitle,
-							_headingPathAsTitleAttribute = ' title="' + Uize.Xml.toAttributeValue (_headingPath) + '"',
+							_headingPathAsTitleAttribute = ' title="' + _htmlEncode (_headingPath) + '"',
 							_headingDisplayPrefix = _hasNumbering
 								? (
 									(

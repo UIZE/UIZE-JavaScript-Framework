@@ -29,7 +29,7 @@ Uize.module ({
 	required:[
 		'Uize.Widgets.VisualTests.TestCase.Html',
 		'Uize.Json',
-		'Uize.Xml'
+		'Uize.Util.Html.Encode'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -38,7 +38,7 @@ Uize.module ({
 			stateProperties:{
 				state:{},
 				heading:{
-					derived:'state: Uize.Xml.toAttributeValue (Uize.Json.to (state))'
+					derived:'state: Uize.Util.Html.Encode.encode (Uize.Json.to (state))'
 				}
 			},
 

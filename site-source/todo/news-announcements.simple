@@ -1,5 +1,47 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+New Uize.String.Split Module
+	- =Uize.String.split= becomes =Uize.String.split.split=
+	- =Uize.String.splitInTwo= becomes =Uize.String.split.splitInTwo=
+
+New Uize.String.Camel Module
+	- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
+
+New Uize.Util.Html.Entities Module
+	.
+
+New Uize.Util.Html.Encode Module
+	.
+
+New Short Form for Namespace Modules
+	A new and more compact module declaration syntax for pure namespace modules...
+
+	INSTEAD OF...
+	.................................
+	Uize.module ({name:'Uize.Util'});
+	.................................
+
+	USE...
+	..........................
+	Uize.module ('Uize.Util');
+	..........................
+
+	### TODO
+		- make sure to update guide on modules
+
+Various Deprecated Features Killed
+	Uize.Node
+		- =Uize.Node.returnFalse= and =Uize.Node.returnTrue= static methods are no longer needed since they were migrated to =Uize=
+
+	Uize.Class
+		- =MyClass.registerProperties=
+
+	Uize
+		- =Uize.globalEval=
+
+	Uize.Service
+		- =Uize.Service.declareServiceMethods=
+
 Major Build Process Improvements
 
 	- _Uize.Build.CompileJstModules.js subsumed by WSH-Uize.Build.Files.JsModules

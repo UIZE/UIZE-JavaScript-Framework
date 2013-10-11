@@ -20,5 +20,5 @@
 	UizeSite.Delve->
 */
 
-Uize.module ({name:'UizeSite.Delve.library'});
+Uize.module ('UizeSite.Delve.library');
 

@@ -26,21 +26,21 @@
 Uize.module ({
 	name:'Uize.Widget.V2',
 	required:[
-		'Uize.Json',
 		'Uize.Node',
-		'Uize.Xml',
+		'Uize.Util.Html.Encode',
 		'Uize.String'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
-			var _undefined = undefined;
+			var _undefined;
 
 		/*** General Variables ***/
 			var
 				_trueFlag = {},
-				_cssAddedLookup = {}
+				_cssAddedLookup = {},
+				_htmlEncode = Uize.Util.Html.Encode.encode
 			;
 
 		/*** Utility Functions ***/
@@ -67,6 +67,11 @@ Uize.module ({
 					'var classSuffix = (nodeName || \'\') && \'-\' + nodeName;' +
 					'return ' + _classNameGeneratorStr + ';'
 				);
+			}
+
+		/*** Private Instance Methods ***/
+			function _updateRootNodeClasses (m) {
+				m.Class.enableRootNodeCssClasses && m.set ({_rootNodeCssClasses:m.rootNodeCssClasses ()});
 			}
 
 		var _class = _superclass.subclass ({
@@ -228,7 +233,7 @@ Uize.module ({
 					delete _properties.name;
 					delete _properties.widgetClass;
 
-					var _suppliedState = Uize.copy (_properties);
+					var _inlineState = Uize.copy (_properties);
 
 					/*** if child name not specified, generate one using widget class module name ***/
 						if (!_childName) {
@@ -250,19 +255,11 @@ Uize.module ({
 						: '<div id="' + _child.nodeId ('shell') + '"></div>'
 					;
 					_childExisted ||
-						Uize.copyInto (_suppliedState,{widgetClass:_widgetClassName})
+						Uize.copyInto (_inlineState,{widgetClass:_widgetClassName})
 					;
-					if (!Uize.isEmpty (_suppliedState))
-						_html +=
-							'<script type="text/javascript">\n' +
-								'$' + _child.get ('idPrefix') + ' = ' +
-									Uize.Json.to (_suppliedState)
-										.replace (/<script/g,'<s\\cript')
-										.replace (/<\/script/g,'</s\\cript') +
-								';\n' +
-							'</script>'
+					if (!Uize.isEmpty (_inlineState))
+						_child.inlineState = _inlineState
 					;
-
 					return _html;
 					/*?
 						Instance Methods
@@ -344,10 +341,6 @@ Uize.module ({
 					return _cssClassNameGenerators [_thisClassName] (_className);
 				},
 
-				_updateRootNodeClasses:function () {
-					this.Class.enableRootNodeCssClasses && this.set ({_rootNodeCssClasses:this.rootNodeCssClasses ()});
-				},
-
 				wireUi:function () {
 					var m = this;
 					if (!m.isWired) {
@@ -356,11 +349,11 @@ Uize.module ({
 						/*** wire up handlers for state properties that have CSS bindings ***/
 							var
 								_cssBindings = m.Class._cssBindings,
-								_updateRootNodeClasses = function () {m._updateRootNodeClasses ()},
+								_boundUpdateRootNodeClasses = function () {_updateRootNodeClasses (m)},
 								_wiringsForCssBindings = {}
 							;
 							for (var _property in _cssBindings)
-								_wiringsForCssBindings ['Changed.' + _property] = _updateRootNodeClasses
+								_wiringsForCssBindings ['Changed.' + _property] = _boundUpdateRootNodeClasses
 							;
 							m.wire (_wiringsForCssBindings);
 
@@ -387,7 +380,7 @@ Uize.module ({
 							m.wire (_wiringsForHtmlBindings);
 
 						/*** update UI ***/
-							m._updateRootNodeClasses ();
+							_updateRootNodeClasses (m);
 							for (var _eventName in _wiringsForHtmlBindings)
 								_wiringsForHtmlBindings [_eventName] ()
 							;
@@ -456,7 +449,7 @@ Uize.module ({
 								_updater = function (_propertyValue) {
 									this.setNodeInnerHtml (
 										_nodeName,
-										Uize.Xml.toAttributeValue (_propertyValue == null ? '' : _propertyValue)
+										_htmlEncode (_propertyValue == null ? '' : _propertyValue)
 									);
 								};
 							} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {

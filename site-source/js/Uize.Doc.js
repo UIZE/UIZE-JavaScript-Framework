@@ -23,5 +23,5 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-Uize.module ({name:'Uize.Doc'});
+Uize.module ('Uize.Doc');
 
