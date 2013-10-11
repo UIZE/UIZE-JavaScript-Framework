@@ -131,7 +131,10 @@ Uize.module ({
 							/*** inject site nav (if desired) ***/
 								if (m._showSiteNav) {
 									// add widget and inject its HTML
-									Uize.Node.injectHtml (document.body,'<div id="page-siteNavShell"></div>');
+									Uize.Node.injectHtml (
+										document.body,
+										'<div id="page-siteNavPane"><div id="page-siteNavShell"></div></div>'
+									);
 									m.addChild (
 										'siteNav',
 										UizeSite.Widgets.SiteNav.Widget,
@@ -145,12 +148,12 @@ Uize.module ({
 							/*** inject site assistant (if desired) ***/
 								if (m._showSiteAssistant) {
 									// add widget and inject its HTML
-									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistantShell"></div>');
+									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistantPane"></div>');
 									m.addChild (
 										'siteAssistant',
 										UizeSite.Widgets.SiteAssistant.Widget,
 										{
-											container:m.getNode ('siteAssistantShell'),
+											container:m.getNode ('siteAssistantPane'),
 											built:false
 										}
 									);
@@ -185,8 +188,8 @@ Uize.module ({
 										if (_siteNavWidth <= 170) {
 											_siteNavWidth = 0;
 										}
-										_showPane (_showSiteNav,'siteNavShell',_siteNavWidth);
-										_showPane (_showSiteAssistant,'siteAssistantShell',_siteAssistantWidth);
+										_showPane (_showSiteNav,'siteNavPane',_siteNavWidth);
+										_showPane (_showSiteAssistant,'siteAssistantPane',_siteAssistantWidth);
 										m.setNodeStyle (
 											_mainNode,
 											{marginRight:_siteAssistantWidth == 0 && !!_siteNavWidth ? '0' : 'auto'}
