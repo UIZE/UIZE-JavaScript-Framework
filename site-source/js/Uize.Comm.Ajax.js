@@ -59,20 +59,24 @@ Uize.module ({
 					),
 					_requestData = _request.data || '',
 					_requestMethod = _request.requestMethod,
-					_requestMethodIsPost = _requestMethod == 'POST'
-				;
-				if (!_this._xmlHttpRequest)
-					_this._xmlHttpRequest = window.XMLHttpRequest
+					_requestMethodIsPost = _requestMethod == 'POST',
+					_xmlHttpRequest = _this._xmlHttpRequest
+						|| (_this._xmlHttpRequest = window.XMLHttpRequest
 						? new XMLHttpRequest
 						: new ActiveXObject ('Microsoft.XMLHTTP')
+						)
 					;
-				_this._xmlHttpRequest.onreadystatechange = function () {
-					if (_this._xmlHttpRequest.readyState == 4) {
-						_this._xmlHttpRequest.onreadystatechange = _nop;
-						if (_this._xmlHttpRequest.status == 200) {
-							var _responseText = _this._xmlHttpRequest.responseText;
+
+				_xmlHttpRequest.onreadystatechange = function () {
+					if (_xmlHttpRequest.readyState == 4) {
+						_xmlHttpRequest.onreadystatechange = _nop;
+						
+						var _status = _xmlHttpRequest.status;
+						
+						if (_status == 200) {
+							var _responseText = _xmlHttpRequest.responseText;
 							if (_returnTypeIsObject || _returnType == 'xml')
-								_request.responseXml = _this._xmlHttpRequest.responseXML
+								_request.responseXml = _xmlHttpRequest.responseXML
 							;
 							if (_returnTypeIsObject || _returnType == 'text')
 								_request.responseText = _responseText
@@ -82,11 +86,12 @@ Uize.module ({
 									? Function ('var a=[' + _responseText + '];return a.pop()') ()
 									: null
 							;
-							_this._xmlHttpRequest.abort ();
+							_xmlHttpRequest.abort ();
 							_callback ();
-						} else {
+						}
+						else {
 							//alert ('There was a problem retrieving the data:\n' + _this._xmlHttpRequest.statusText);
-							_this._xmlHttpRequest.abort ();
+							_xmlHttpRequest.abort ();
 						}
 					}
 				};
@@ -101,7 +106,7 @@ Uize.module ({
 					_request.contentType != 'multipart/form-data'
 						&& _this._xmlHttpRequest.setRequestHeader('Content-type', _request.contentType || 'application/x-www-form-urlencoded')
 					;
-					_this._xmlHttpRequest.setRequestHeader('Content-length', _requestData.length);
+					//_this._xmlHttpRequest.setRequestHeader('Content-length', _requestData.length);
 				}
 				_this._xmlHttpRequest.send (_requestData);
 			};

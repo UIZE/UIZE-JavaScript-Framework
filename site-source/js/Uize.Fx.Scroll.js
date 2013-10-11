@@ -95,12 +95,17 @@ Uize.module ({
 					_scrollableContainerNodeDone = false
 				;
 				
-				function _isNodeVisible(_nodeCoords) {
+				function _isNodeVisible(_nodeCoords, _windowIsContainer) {
 					var
 						_nodeLeft = _nodeCoords.x,
 						_nodeTop = _nodeCoords.y,
 						_nodeWidth = _nodeCoords.width,
-						_nodeHieght = _nodeCoords.height
+						_nodeHieght = _nodeCoords.height,
+						
+						_containerScrollX = _windowIsContainer ? _windowScrollX : _scrollableContainerNode.scrollLeft,
+						_containerScrollY = _windowIsContainer ? _windowScrollY : _scrollableContainerNode.scrollTop,
+						_containerWidth = _windowIsContainer ? _windowWidth : _scrollableContainerNodeCoords.width,
+						_containerHeight = _windowIsContainer ? _windowHeight : _scrollableContainerNodeCoords.height
 					;
 
 					// There are two forms of node visibility: full & partial
@@ -109,12 +114,12 @@ Uize.module ({
 					//           window view port, but the entire node does not have to be
 					return _Uize_Node.doRectanglesOverlap(
 							_nodeLeft, _nodeTop, _nodeWidth, 1,
-							_windowScrollX, _windowScrollY, _windowWidth, _windowHeight
+							_containerScrollX, _containerScrollY, _containerWidth, _containerHeight
 						)
 						&& (
 							!_scrollParams.fullVisibility
-								|| (_nodeLeft + _nodeWidth <= _windowScrollX + _windowWidth
-									&& _nodeTop + _nodeHieght <= _windowScrollY + _windowHeight
+								|| (_nodeLeft + _nodeWidth <= _containerScrollX + _containerWidth
+									&& _nodeTop + _nodeHieght <= _containerScrollY + _containerHeight
 								)
 						)
 					;
@@ -174,7 +179,7 @@ Uize.module ({
 					_scrollableBodyNode,
 					_scrollNodeCoords.y,
 					function() { _bodyNodeDone = true },
-					(_scrollParams.scrollToTop || !_isNodeVisible(_scrollNodeCoords))
+					(_scrollParams.scrollToTop || !_isNodeVisible(_scrollNodeCoords, true))
 				);
 				/*?
 					Static Methods

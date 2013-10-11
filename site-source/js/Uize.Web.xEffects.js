@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Extension
 	importance: 5
-	codeCompleteness: 100
+	codeCompleteness: 80
 	docCompleteness: 50
 */
 

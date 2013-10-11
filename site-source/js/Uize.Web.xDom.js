@@ -93,6 +93,192 @@ Uize.module ({
 		
 		/*** Public Instance Methods ***/
 			/** Insertion **/
+				var 
+					_makeInjectHtmlMethod = function(_methodName, _injectMode) {
+						_objectPrototype[_methodName] = function() {
+							var _this = this;
+
+							_Uize.forEach(
+								arguments,
+								function(_arg) {
+									_this._handleSetAction(
+										_arg,
+										function(_node, _content) { _Uize_Node.injectHtml(_node, _content, _injectMode) }
+									);
+								}
+							);
+
+							return _this;
+						};
+					},
+					_makeIsOnNodeTreeMethod = function(_objectNodesAreRoot) {
+						// NOTE: the goal of this function is to add the "contains" & "contained" methods to the prototype
+						// which are basically the same, just with the root & node parameters swapped
+						_objectPrototype[_objectNodesAreRoot ? 'contains' : 'contained'] = function(_nodeParam, _returnAll) {
+							return this._handleGetAction(
+								function(_node) {
+									return _Uize_Node.isOnNodeTree(
+										_objectNodesAreRoot ? _nodeParam : _node,
+										_objectNodesAreRoot ? _node : _nodeParam
+									);
+								},
+								_returnAll
+							);
+						};
+					}
+				;
+				
+				_makeInjectHtmlMethod('after', 'outer bottom');
+					/*?
+						Instance Methods
+							after
+								Inserts string content after each node in the set of matched DOM nodes.
+	
+								SYNTAX
+								........................................................
+								myWeb = myWeb.after(contentSTR);
+								........................................................
+	
+								VARIATION 1
+								........................................................
+								myWeb = myWeb.after(contentFUNC);
+								........................................................
+	
+								VARIATION 2
+								........................................................
+								myWeb = myWeb.after(content1STR, content2STR, ...);
+								........................................................
+	
+								VARIATION 3
+								........................................................
+								myWeb = myWeb.after(content1FUNC, content2FUNC, ...);
+								........................................................
+								
+								NOTES
+								- Returns a reference to the same =Uize.Web= object
+					*/
+				_makeInjectHtmlMethod('append');
+					/*?
+						Instance Methods
+							append
+								Inserts string content to the end of each node in the set of matched DOM nodes.
+	
+								SYNTAX
+								........................................................
+								myWeb = myWeb.append(contentSTR);
+								........................................................
+	
+								VARIATION 1
+								........................................................
+								myWeb = myWeb.append(contentFUNC);
+								........................................................
+	
+								VARIATION 2
+								........................................................
+								myWeb = myWeb.append(content1STR, content2STR, ...);
+								........................................................
+	
+								VARIATION 3
+								........................................................
+								myWeb = myWeb.append(content1FUNC, content2FUNC, ...);
+								........................................................
+								
+								NOTES
+								- Returns a reference to the same =Uize.Web= object
+					*/
+				_makeInjectHtmlMethod('before', 'outer top');
+					/*?
+						Instance Methods
+							before
+								Inserts string content before each node in the set of matched DOM nodes.
+	
+								SYNTAX
+								........................................................
+								myWeb = myWeb.before(contentSTR);
+								........................................................
+	
+								VARIATION 1
+								........................................................
+								myWeb = myWeb.before(contentFUNC);
+								........................................................
+	
+								VARIATION 2
+								........................................................
+								myWeb = myWeb.before(content1STR, content2STR, ...);
+								........................................................
+	
+								VARIATION 3
+								........................................................
+								myWeb = myWeb.before(content1FUNC, content2FUNC, ...);
+								........................................................
+								
+								NOTES
+								- Returns a reference to the same =Uize.Web= object
+					*/
+
+				_makeIsOnNodeTreeMethod();
+					/*?
+						Instance Methods
+							contained
+								Checks the current matched set of DOM nodes and returns =true= if they are contained by the specified DOM node, =false= otherwise.
+	
+								SYNTAX
+								........................................................
+								isContainedBOOL = myWeb.contained(nodeBLOB); // one matched node
+								isContainedARRAY = myWeb.contained(nodeBLOB); // multiple matched nodes
+								........................................................
+								
+								NOTES
+								- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
+								- See also related =contains= method
+					*/
+
+				_makeIsOnNodeTreeMethod(_true);
+					/*?
+						Instance Methods
+							contains
+								Checks the current matched set of DOM nodes and returns =true= if they are contain the specified DOM node, =false= otherwise.
+	
+								SYNTAX
+								........................................................
+								containsBOOL = myWeb.contains(nodeBLOB); // one matched node
+								containsARRAY = myWeb.contains(nodeBLOB); // multiple matched nodes
+								........................................................
+								
+								NOTES
+								- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
+								- See also related =contained= method
+					*/
+
+				_makeInjectHtmlMethod('prepend', 'inner top');
+					/*?
+						Instance Methods
+							prepend
+								Inserts string content to the beginning of each node in the set of matched DOM nodes.
+	
+								SYNTAX
+								........................................................
+								myWeb = myWeb.prepend(contentSTR);
+								........................................................
+	
+								VARIATION 1
+								........................................................
+								myWeb = myWeb.prepend(contentFUNC);
+								........................................................
+	
+								VARIATION 2
+								........................................................
+								myWeb = myWeb.prepend(content1STR, content2STR, ...);
+								........................................................
+	
+								VARIATION 3
+								........................................................
+								myWeb = myWeb.prepend(content1FUNC, content2FUNC, ...);
+								........................................................
+								
+								NOTES
+								- Returns a reference to the same =Uize.Web= object
+					*/
 			
 			/** Removal **/
 				_objectPrototype.detach = function(_selector) {
