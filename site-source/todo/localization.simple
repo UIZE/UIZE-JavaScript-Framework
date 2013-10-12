@@ -32,6 +32,9 @@ General Requirements for a Localization System
 
 				Now, in the worst case, the translation service may translate the locale string for the most rudimentary substitution, providing only a single base variant. In the best case scenario, the translation service may translate the locale string for all possible logical values of gender and quantity. In between these two extreme cases, a translation service may translate the locale string separately for possible values for gender and for possible values of quantity, but not combinations of the possible values. In such a case, the order of the translated strings can determine whether a matching translation for a possible value of gender takes priority over a matching value for a possible value of quantity, or vice versa.
 
+			Pluralization
+				- [[http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html][Language Plural Rules (CLDR)]]
+
 		Number Formatting
 			The localization system should support formatting a number correctly for the locale.
 
@@ -62,6 +65,13 @@ General Requirements for a Localization System
 			...................................................................
 			joinDate: You activated your service on {activationDate:date,short}
 			...................................................................
+
+		Additional Types to Format
+			Additionally, the localization system should support the following type formatting...
+
+			- Time Formatting
+			- Phone Number Formatting
+			- Mailing Address Formatting
 
 		Measurement Units
 			The localization system should provide support for localizing measurement values for a locale, which may involve converting the measurement values from values expressed in a canonical system of units, such as the SI / metric system, to measurement values expressed in a system like the Imperial System.
@@ -233,7 +243,61 @@ Useful Background Information
 	ARB
 		[[https://code.google.com/p/arb/wiki/ApplicationResourceBundleSpecification][ARB]] (Application Resource Bundle) is a file format advanced by Google to package and organize localization resources.
 
+		The ARB format makes use of ICU Message Format for resource strings.
+
+	CLDR
+		[[https://sites.google.com/site/cldr/][CLDR]] (Unicode Common Locale Data Repository) is a project of the Unicode Consortium that is intended as a central repository for locale information.
+
+		Data from the CLDR project is incorporated in various ways into operating systems, Web browsers, and software development frameworks to allow applications to be localized. The data is available in LDML format (XML-based) as well as JSON format.
+
+	JavaScript Intl Object
+		The =Intl= object is being developed as part of a future version of ECMAScript to provide JavaScript with facilities for locale specific formatting.
+
+		The =Intl= object serves as a namespace and provides objects for string collation, date time formatting, and number formatting. See [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl]]
+
 ### Requirements of a Localization System
+	- formatting
+		- basic
+			- numbers
+			- dates
+			- times
+			- currencies
+			- calendars
+
+	- string collation
+	- string truncation / abbreviation
+	- string segmentation / hyphenation
+
+	- resource selection
+		- multi-dimensional overrides system
+			- dimensions
+				- locale
+				- more specific locale
+				- brand / partner
+				- user demographic (possibly)
+			- dimension prioritization
+				- effectively a fallbacks mechanism
+			- could apply to any resources
+		- ideally, doesn't need to be duplicated for different technologies
+		- language selection should ideally be based upon the likelihood of the user understanding the language as well as the language(s) to which a resource has been localized
+
+	- specifying resource strings
+		- all resource strings are defined in a neutral base / master file that...
+			- contains no translations
+			- contains definitions of types for substitutions
+			- contains optional default formatting options for substitutions
+			- contains meta data that can provide cues to the translators (eg. context of usage, notes on screen real-estate limits / constraints, notes on tone of language, etc.)
+			- example values for substitutions
+
+		- for substitutions, support the ability to define custom types that can have their own per-language example values
+
+	- tracking resource usage
+		- can be used to determine priority for localization of resource to a given language
+		- can be used to determine if resource is defunct / no longer in use
+		- can be used to determine quality / rigor for translating a given resource
+			- if multiple variants should be translated, or if an acceptable, generic translation should be provided
+		- may be more valuable in determining value of translating larger resources, such as entire knowledgebase articles
+
 	- it should be possible to load the necessary module for defining the strings for a locale as a direct dependency for a module, before the module itself is built
 	- it should be possible to build a package containing all the locale modules necessary for a specific locale
 	- it should be possible to set the locale for an entire widget tree, and have all the widgets in the widget tree reflect the new locale (therefore, locale should be a tree inherited property, like enabled and busy)
@@ -252,8 +316,6 @@ Useful Background Information
 	greeting { user.gender == 'male' } : Hello, mister <%. user.name %>.
 	greeting { user.gender == 'female' } : Hello, missis <%. user.name %>.
 	....................
-
-
 
 	....................
 	{person} gave you {count} {gift}
