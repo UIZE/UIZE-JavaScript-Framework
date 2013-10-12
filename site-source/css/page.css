@@ -215,8 +215,8 @@
 			.siteMenuShell {
 				position: absolute;
 				display: block;
-				left: 4px;
-				_left: -47px; /* hack for IE6, because its context for absolute positioning is the box excluding padding */
+				left: 10px;
+				_left: -41px; /* hack for IE6, because its context for absolute positioning is the box excluding padding */
 				top: 4px;
 				width: 38px;
 				height: 38px;
@@ -264,7 +264,7 @@
 	#page-siteNavShell {
 		position: absolute;
 		left: 10px;
-		top: 10px;
+		top: 0;
 		right: 10px;
 		bottom: 10px;
 		padding: 4px;
