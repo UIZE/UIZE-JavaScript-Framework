@@ -1,3 +1,9 @@
+/*** document title bar ***/
+	.document-title {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
 /*** headings ***/
 	tr .heading, tr.headings td, .exampleSectionHeading {
 		color: #fff;

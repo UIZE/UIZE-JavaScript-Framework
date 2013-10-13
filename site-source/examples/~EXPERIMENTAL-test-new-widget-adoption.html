@@ -13,16 +13,20 @@
 
 <script type="text/javascript" src="../js/Uize.js"></script>
 
-<h1 class="document-title">
+<h1 class="header">
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
-	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
-	Test New Widget Adoption
-	<div id="page-actions" class="pageActions">
-		<a href="source-code/___.html" class="buttonLink">SOURCE</a>
-	</div>
+	<a href="../index.html" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
 </h1>
 
 <div class="main">
+	<h1 class="document-title">
+		<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+		Test New Widget Adoption
+		<div class="pageActionsShell">
+			<div id="page-actions" class="pageActions"><a href="source-code/test-new-widget-adoption.html" class="buttonLink">SOURCE</a></div>
+		</div>
+	</h1>
+	
 	<!-- explanation copy -->
 
 	<div class="explanation">
@@ -102,7 +106,7 @@ Uize.require (
 		'use strict';
 
 		/*** create the example page widget ***/
-			var page = window.page = Uize.Widget.Page ();
+			var page = window.page = UizeSite.Page.Example ();
 
 			page.addChild('parent', Uize.Widget.ParentWidget);
 
