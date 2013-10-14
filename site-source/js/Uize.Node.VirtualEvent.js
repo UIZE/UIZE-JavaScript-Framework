@@ -1008,7 +1008,7 @@ Uize.module ({
 									- see related `remain-in-state registered virtual DOM events`
 						*/
 
-					_makeRemainInStateEventMaker ('mouseRemainOver',500,'mouseover',['mouseout','mousedown']);
+					_makeRemainInStateEventMaker ('mouseRemainOver',500,['mouseover','mousemove'],['mouseout','mousedown'],_false);
 						/*?
 							Static Methods
 								Uize.Node.VirtualEvent.mouseRemainOver
