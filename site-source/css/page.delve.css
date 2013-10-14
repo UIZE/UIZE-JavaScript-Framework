@@ -16,18 +16,6 @@ hr {
 	letter-spacing:0;
 }
 
-/*** page actions ***/
-	.header .pageActions {
-		position: absolute;
-		right: 77px;
-		_right: 7px; /* hack for IE6, because the title isn't fixed positioned for this browser */
-		top: 10px;
-		letter-spacing: 0;
-	}
-	.heading .pageActions .buttonLink {
-		margin: 0 1px;
-	}
-
 /*** Panes ***/
 	.leftPane, .rightPane {
 		position: absolute;
