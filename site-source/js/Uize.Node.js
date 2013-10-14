@@ -103,35 +103,34 @@ Uize.module ({
 			;
 
 		/*** Utility Functions ***/
-			var
-				_captureMousePos = _package._captureMousePos = function (_event) {
-					_mousePos.clientX = _event.clientX;
-					_mousePos.clientY = _event.clientY;
-					_mousePos.pageX = _event.pageX;
-					_mousePos.pageY = _event.pageY;
-				},
-				_getElementById = function(_nodeId) {
-					var _result = document.getElementById (_nodeId);
-					return (!_isIe || (_result && _result.id == _nodeId)) ? _result : _null;
-					/* WORKAROUND:
-						stupid issue in IE, where document.getElementById will return a reference to a node that has a name attribute with the specified ID value, if no node has an id with that value
-					*/
-				},
-				_resolveStringEventName = function(_eventName) {
-					return (
-						_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
-							? _package.VirtualEvent.resolve (_eventName)
-							: _eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110
-								? _eventName.slice (2)
-								: _eventName
-					);
-				}
-			;
+			function _captureMousePos (_event) {
+				_mousePos.clientX = _event.clientX;
+				_mousePos.clientY = _event.clientY;
+				_mousePos.pageX = _event.pageX;
+				_mousePos.pageY = _event.pageY;
+			}
+
+			function _getElementById (_nodeId) {
+				var _result = document.getElementById (_nodeId);
+				return (!_isIe || (_result && _result.id == _nodeId)) ? _result : _null;
+				/* WORKAROUND:
+					stupid issue in IE, where document.getElementById will return a reference to a node that has a name attribute with the specified ID value, if no node has an id with that value
+				*/
+			}
+
+			function _resolveStringEventName (_eventName) {
+				return (
+					_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
+						? _package.VirtualEvent.resolve (_eventName)
+						: _eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110
+							? _eventName.slice (2)
+							: _eventName
+				);
+			}
 
 		/*** Public Static Methods ***/
-			var _getDocumentScrollElement = _package.getDocumentScrollElement = function() {
+			var _getDocumentScrollElement = _package.getDocumentScrollElement = function () {
 				return document [_isSafari ? 'body' : 'documentElement']
-			};
 				/*?
 					Static Methods
 						Uize.Node.getDocumentScrollElement
@@ -149,7 +148,8 @@ Uize.module ({
 							Uize.Node.getDocumentScrollElement ().scrollTop = 0;  // scroll to the top of the page
 							.........................................................................................
 				*/
-			
+			};
+
 			var
 				_tableDisplayValuePrefix = 'table-',
 				_tableRowDisplayValue = _tableDisplayValuePrefix + 'row',
@@ -1375,7 +1375,7 @@ Uize.module ({
 					: (_coordMargin || {x:0,y:0})
 				;
 				var
-					_documentElement = _getDocumentScrollElement(),
+					_documentElement = _getDocumentScrollElement (),
 					_viewDims = _getDimensions (window)
 				;
 				_doForAll (
@@ -1611,11 +1611,9 @@ Uize.module ({
 						;
 						if (_isIe && 'opacity' in _properties)
 							_nodeStyle.filter =
-								// NOTE: if the value is an empty string, it will be turned into #, which will produce NaN
-								// when multiplied by 100, and NaN is not less than 100. For the number 0, the string '0' will
-								// be retained and coerced back to 0 when multiplied. This is more compact and does not involve
-								// an additional function call, which is more important for animations for opacity where it is
-								// called repeatedly.
+								/* NOTE:
+									if the value is an empty string, it will be turned into #, which will produce NaN when multiplied by 100, and NaN is not less than 100. For the number 0, the string '0' will be retained and coerced back to 0 when multiplied. This is more compact and does not involve an additional function call, which is more important for animations for opacity where it is called repeatedly.
+								*/
 								(_propertyValue = Math.round ((_properties.opacity + '' || '#') * 100) < 100)
 									? 'alpha(opacity=' + _propertyValue + ')'
 									: ''
@@ -1727,8 +1725,7 @@ Uize.module ({
 								_node.checked = _value == 'true';
 							} else if (_nodeType == 'radio') {
 								_node.checked = _node.value == _value;
-							}
-							else {	// text, password, hidden, HTML5 types, etc.
+							} else {	// text, password, hidden, HTML5 types, etc.
 								_node.value = _value
 							}
 						} else if (_nodeTagName == 'SELECT') {
@@ -2196,6 +2193,7 @@ Uize.module ({
 				*/
 			};
 
+			_package._captureMousePos = _captureMousePos; // NOTE: this is needed for the quarantined mouseover handler
 			var
 				_quarantine = Uize.quarantine,
 				_makeWindowEventHandlerCaller = _quarantine (
