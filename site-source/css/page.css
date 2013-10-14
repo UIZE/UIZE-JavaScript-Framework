@@ -186,6 +186,8 @@
 		}
 		.header a:link, .header a:visited, .header a:hover, .header a:active {
 			color: #444;
+		}
+		.header a.homeLinkText {
 			border: none;
 		}
 
