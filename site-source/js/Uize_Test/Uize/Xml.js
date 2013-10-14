@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Test.Uize.Xml',
 	required:[
 		'Uize.Util.Html.Encode',
-		'Uize.Class.Value',
+		'Uize.Class.Value'
 	],
 	builder:function () {
 		'use strict';
