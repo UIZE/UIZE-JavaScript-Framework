@@ -103,36 +103,53 @@ Uize.module ({
 			;
 
 		/*** Utility Functions ***/
-			var _captureMousePos = _package._captureMousePos = function (_event) {
-				_mousePos.clientX = _event.clientX;
-				_mousePos.clientY = _event.clientY;
-				_mousePos.pageX = _event.pageX;
-				_mousePos.pageY = _event.pageY;
-			};
-
-			function _getElementById (_nodeId) {
-				var _result = document.getElementById (_nodeId);
-				return (!_isIe || (_result && _result.id == _nodeId)) ? _result : _null;
-				/* WORKAROUND:
-					stupid issue in IE, where document.getElementById will return a reference to a node that has a name attribute with the specified ID value, if no node has an id with that value
-				*/
-			}
-
-			function _getDocumentScrollElement () {
-				return document [_isSafari ? 'body' : 'documentElement'];
-			}
-
-			function _resolveStringEventName (_eventName) {
-				return (
-					_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
-						? _package.VirtualEvent.resolve (_eventName)
-						: _eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110
-							? _eventName.slice (2)
-							: _eventName
-				);
-			}
+			var
+				_captureMousePos = _package._captureMousePos = function (_event) {
+					_mousePos.clientX = _event.clientX;
+					_mousePos.clientY = _event.clientY;
+					_mousePos.pageX = _event.pageX;
+					_mousePos.pageY = _event.pageY;
+				},
+				_getElementById = function(_nodeId) {
+					var _result = document.getElementById (_nodeId);
+					return (!_isIe || (_result && _result.id == _nodeId)) ? _result : _null;
+					/* WORKAROUND:
+						stupid issue in IE, where document.getElementById will return a reference to a node that has a name attribute with the specified ID value, if no node has an id with that value
+					*/
+				},
+				_resolveStringEventName = function(_eventName) {
+					return (
+						_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
+							? _package.VirtualEvent.resolve (_eventName)
+							: _eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110
+								? _eventName.slice (2)
+								: _eventName
+					);
+				}
+			;
 
 		/*** Public Static Methods ***/
+			var _getDocumentScrollElement = _package.getDocumentScrollElement = function() {
+				return document [_isSafari ? 'body' : 'documentElement']
+			};
+				/*?
+					Static Methods
+						Uize.Node.getDocumentScrollElement
+							A utility function that returns the DOM node on which you can scroll the document.
+
+							SYNTAX
+							................................................
+							Uize.Node.getDocumentScrollElement ();
+							................................................
+
+							This method abstracts the difference between WebKit browsers (Safari, Chrome, etc.) and other browsers as to which DOM node is the one that allows changing the scrolling position of the document.
+
+							EXAMPLE
+							.........................................................................................
+							Uize.Node.getDocumentScrollElement ().scrollTop = 0;  // scroll to the top of the page
+							.........................................................................................
+				*/
+			
 			var
 				_tableDisplayValuePrefix = 'table-',
 				_tableRowDisplayValue = _tableDisplayValuePrefix + 'row',
@@ -1358,7 +1375,7 @@ Uize.module ({
 					: (_coordMargin || {x:0,y:0})
 				;
 				var
-					_documentElement = document [_isSafari ? 'body' : 'documentElement'],
+					_documentElement = _getDocumentScrollElement(),
 					_viewDims = _getDimensions (window)
 				;
 				_doForAll (
@@ -1594,7 +1611,12 @@ Uize.module ({
 						;
 						if (_isIe && 'opacity' in _properties)
 							_nodeStyle.filter =
-								(_propertyValue = Math.round (_properties.opacity * 100)) < 100
+								// NOTE: if the value is an empty string, it will be turned into #, which will produce NaN
+								// when multiplied by 100, and NaN is not less than 100. For the number 0, the string '0' will
+								// be retained and coerced back to 0 when multiplied. This is more compact and does not involve
+								// an additional function call, which is more important for animations for opacity where it is
+								// called repeatedly.
+								(_propertyValue = Math.round ((_properties.opacity + '' || '#') * 100) < 100)
 									? 'alpha(opacity=' + _propertyValue + ')'
 									: ''
 						;
@@ -1701,12 +1723,13 @@ Uize.module ({
 							_node.value = _value;
 						} else if (_nodeTagName == 'INPUT') {
 							var _nodeType = _node.type;
-							if (_nodeType == 'text' || _nodeType == _hidden || _nodeType == 'password') {
-								_node.value = _value;
-							} else if (_nodeType == 'checkbox') {
+							if (_nodeType == 'checkbox') {
 								_node.checked = _value == 'true';
 							} else if (_nodeType == 'radio') {
 								_node.checked = _node.value == _value;
+							}
+							else {	// text, password, hidden, HTML5 types, etc.
+								_node.value = _value
 							}
 						} else if (_nodeTagName == 'SELECT') {
 							if (!_value) {
@@ -2332,13 +2355,13 @@ Uize.module ({
 								var _eventPropertyName = 'on' + _eventName;
 								_node == window
 									? _windowEventVehicle.wire (_eventName,_handlerCaller)
-									: _isIe
+									: _node.attachEvent
 										? _node.attachEvent (_eventPropertyName,_handlerCaller)
 										: _node.addEventListener (_eventName,_handlerCaller,_false)
 								;
 								if (
 									_nodeTagName == 'A' &&
-									(_eventName == 'mousedown' || _eventName == 'click') && !_node [_eventPropertyName]
+									(_eventName == 'mousedown' || _eventName == 'click' || _eventName == 'touchstart') && !_node [_eventPropertyName]
 								)
 									_node [_eventPropertyName] = _Uize_returnFalse
 								;
@@ -2493,7 +2516,7 @@ Uize.module ({
 						_documentLoadedTimeout = setTimeout (function () {_windowEventVehicle.fire ('load')},15000)
 					;
 					_Uize.forEach (
-						['focus','blur','load','beforeunload','unload','resize','scroll'],
+						['focus','blur','load','beforeunload','unload','resize','scroll','hashchange'],
 						function (_windowEventName) {
 							var
 								_windowEventPropertyName = 'on' + _windowEventName,
