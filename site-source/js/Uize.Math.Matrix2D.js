@@ -239,7 +239,7 @@ Uize.module ({
 				/*?
 					Instance Methods
 						scale
-							Applies the scale vector (specified by =xScaleFLOAT= and =yScaleFLOAT) to this matrix by appending the scale vector.
+							Applies the scale vector (specified by =xScaleFLOAT= and =yScaleFLOAT=) to this matrix by appending the scale vector.
 
 							SYNTAX
 							.....................................................
