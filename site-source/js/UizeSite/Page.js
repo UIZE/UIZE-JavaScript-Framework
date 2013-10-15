@@ -41,6 +41,11 @@ Uize.module ({
 					return _homeLinkSrc.slice (0,_homeLinkSrc.search (/[\w\-]+.html/));
 				},
 
+				navigateTo:function (_rootRelativeUrl,_queryParams) {
+					var _path = this.getPathToRoot () + _rootRelativeUrl;
+					location.href = _queryParams ? Uize.Url.resolve (_path,_queryParams) : _path;
+				},
+
 				performSearch:function (_searchQuery,_sectionUrl) {
 					location.href = Uize.Url.resolve (
 						'http://www.google.com/search',

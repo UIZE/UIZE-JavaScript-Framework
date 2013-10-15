@@ -105,9 +105,7 @@ Uize.module ({
 								m.wireNode (
 									'search',
 									'click',
-									function () {
-										location.href = m.getPathToRoot () + 'search-sections.html?' + _pageTitle;
-									}
+									function () {m.navigateTo ('search-sections.html?' + _pageTitle)}
 								);
 
 							/*** examples link ***/
@@ -117,14 +115,21 @@ Uize.module ({
 									function () {m.performSearch ('"' + _pageTitle + '"','/examples')}
 								);
 
+							/*** search link ***/
+								m.wireNode (
+									'deps',
+									'click',
+									function () {m.navigateTo ('examples/dependency-analyzer.html',{module:_pageTitle})}
+								);
+
 							/*** test link ***/
 								m.wireNode (
 									'test',
 									'click',
 									function () {
-										location.href = Uize.Url.resolve (
-											m.getPathToRoot () + 'examples/uize-unit-tests.html',
-											{runtest:Uize.Url.from (location.href).fileName.replace (/^Uize\.Test\./,'')}
+										m.navigateTo (
+											'examples/uize-unit-tests.html',
+											{runtest:_pageTitle.replace (/^Uize\.Test\./,'')}
 										);
 									}
 								);
