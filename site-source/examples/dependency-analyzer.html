@@ -78,7 +78,6 @@
 <script type="text/javascript">
 
 /* TODO
-	- fix issue with test completeness being 0 for all modules
 	- improve description for generated modules
 	- interesting top level summary to show
 		- name
@@ -470,10 +469,12 @@ Uize.require (
 
 		/*** initialize ***/
 			/*** populate selector ***/
-				Uize.map (
+				var _selectorOptions = _page.getNode ('selector').options;
+				Uize.forEach (
 					[_selectorPlaceholderText].concat (_modulesList),
-					function (_moduleName) {return new Option (_moduleName,_moduleName)},
-					_page.getNode ('selector').options
+					function (_moduleName,_moduleNo) {
+						_selectorOptions [_moduleNo] = new Option (_moduleName,_moduleName);
+					}
 				);
 
 			/*** initialize selector, using query param ***/
