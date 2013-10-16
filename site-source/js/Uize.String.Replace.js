@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.String.Replace= module provides methods for working with multi-line strings, supporting indenting, changing linebreaks, modifying lines, etc.
+		The =Uize.String.Replace= module provides methods for replacing substrings in a string by specifying a replacement lookup.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
