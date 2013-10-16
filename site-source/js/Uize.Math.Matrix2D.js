@@ -21,7 +21,7 @@
 		The =Uize.Math.Matrix2D= module provides support for building and applying 2-D affine transformations in a 2-dimensional plane.
 
 		*DEVELOPERS:* `Petar Ivanov` & `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
-		
+
 		Not a Uize Subclass
 			First off, it's worth emphasizing that the =Uize.Math.Matrix2D= object is not a =Uize.Class= subclass, but a very lightweight object.
 
@@ -31,9 +31,9 @@
 Uize.module ({
 	name:'Uize.Math.Matrix2D',
 	builder:function () {
-		'use strict'; // http://www.nczonline.net/blog/2012/03/13/its-time-to-start-using-javascript-strict-mode/
+		'use strict';
 
-		var 
+		var
 			_Uize = Uize
 		;
 
@@ -41,9 +41,9 @@ Uize.module ({
 			var
 				_object = _Uize.noNew (
 					function (_coefficients) {
-						var _this = this;
-						
-						_this._setCoefficients(
+						var m = this;
+
+						m._setCoefficients(
 							_Uize.isArray(_coefficients)
 								? _coefficients
 								: (arguments.length == 6
@@ -51,11 +51,10 @@ Uize.module ({
 									: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0] // identity matrix
 								)
 						);
-						
 						/*?
 							Constructor
 								Creates an instance of the =Uize.Math.Matrix2D= object from the specified coefficients.
-	
+
 								SYNTAX
 								.....................................
 								var matrixOBJ = Uize.Math.Matrix2D(xxFLOAT, yxFLOAT, xyFLOAT, yyFLOT, xFLOAT, yFLOAT);
@@ -65,14 +64,14 @@ Uize.module ({
 								..................................................................
 								var matrix = Uize.Math.Matrix2D (2.0, 3.0, 4.0, 5.0, 6.0, 7.0);
 								..................................................................
-								
+
 								This will resultant in a matrix that looks like...
-								
+
 								..................................................................
 								:| 2.0 | 3.0 | 6.0 |
 								:| 4.0 | 5.0 | 7.0 |
 								..................................................................
-								
+
 								VARIATION 1
 								.....................................
 								var matrixOBJ = Uize.Math.Matrix2D(coefficientsARRAY);
@@ -84,14 +83,14 @@ Uize.module ({
 								..................................................................
 								var matrix = Uize.Math.Matrix2D ([2.0, 3.0, 4.0, 5.0, 6.0, 7.0]);
 								..................................................................
-								
+
 								This will resultant in a matrix that looks like...
-								
+
 								..................................................................
 								:| 2.0 | 3.0 | 6.0 |
 								:| 4.0 | 5.0 | 7.0 |
 								..................................................................
-								
+
 								VARIATION 2
 								.....................................
 								var matrixOBJ = Uize.Math.Matrix2D();
@@ -103,9 +102,9 @@ Uize.module ({
 								..................................................................
 								var identityMatrix = Uize.Math.Matrix2D ();
 								..................................................................
-								
+
 								This will resultant in a matrix that looks like...
-								
+
 								EXAMPLE
 								..................................................................
 								:| 1 | 0 | 0 |
@@ -120,21 +119,20 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_objectPrototype._setCoefficients = function (_coefficients) {
-				var _this = this;
+				var m = this;
 
-				_this._XX = +_coefficients[0];
-				_this._YX = +_coefficients[1];
-				_this._XY = +_coefficients[2];
-				_this._YY = +_coefficients[3];
-				_this._X =  +_coefficients[4];
-				_this._Y =  +_coefficients[5];
+				m._XX = +_coefficients[0];
+				m._YX = +_coefficients[1];
+				m._XY = +_coefficients[2];
+				m._YY = +_coefficients[3];
+				m._X =  +_coefficients[4];
+				m._Y =  +_coefficients[5];
 			};
 
 
 		/*** Public Instance Methods ***/
 			_objectPrototype.clone = function() {
 				return _object(this.values());
-				
 				/*?
 					Instance Methods
 						clone
@@ -149,20 +147,20 @@ Uize.module ({
 							- Returns a reference to the cloned =Uize.Math.Matrix2D= object
 				*/
 			};
-			
-			_objectPrototype.multiply = function(_other) {
-				var _this = this;
 
-				_this._setCoefficients([
-					_other._XX * _this._XX + _other._YX * _this._XY,
-					_other._XX * _this._YX + _other._YX * _this._YY,
-					_other._XY * _this._XX + _other._YY * _this._XY,
-					_other._XY * _this._YX + _other._YY * _this._YY,
-					_other._XX * _this._X + _other._YX * _this._Y + _other._X,
-					_other._XY * _this._X + _other._YY * _this._Y + _other._Y
+			_objectPrototype.multiply = function(_other) {
+				var m = this;
+
+				m._setCoefficients([
+					_other._XX * m._XX + _other._YX * m._XY,
+					_other._XX * m._YX + _other._YX * m._YY,
+					_other._XY * m._XX + _other._YY * m._XY,
+					_other._XY * m._YX + _other._YY * m._YY,
+					_other._XX * m._X + _other._YX * m._Y + _other._X,
+					_other._XY * m._X + _other._YY * m._Y + _other._Y
 				]);
 
-				return _this;
+				return m;
 				/*?
 					Instance Methods
 						multiply
@@ -178,7 +176,7 @@ Uize.module ({
 							var matrix = Uize.Math.Matrix2D(1,0,0,1,20,30);
 							matrix.multiply(Uize.Math.Matrix2D(2,0,0,2,8,9));
 							.....................................................
-							
+
 							The matrix created in the previous example would be...
 
 							.....................................................
@@ -191,7 +189,7 @@ Uize.module ({
 							- Returns a reference to the same =Uize.Math.Matrix2D= object
 				*/
 			};
-			
+
 			_objectPrototype.rotate = function (_angle) {
 				var
 					_cos = Math.cos(_angle),
@@ -199,7 +197,6 @@ Uize.module ({
 				;
 
 				return this.multiply(_object(_cos, -_sin, _sin, _cos, 0, 0));
-				
 				/*?
 					Instance Methods
 						rotate
@@ -231,11 +228,10 @@ Uize.module ({
 
 				*/
 			};
-			
+
 
 			_objectPrototype.scale = function (_xScale, _yScale) {
 				return this.multiply(_object(_xScale, 0, 0, _yScale, 0, 0));
-
 				/*?
 					Instance Methods
 						scale
@@ -267,7 +263,6 @@ Uize.module ({
 
 			_objectPrototype.toString = function() {
 				return this.values() + '';
-
 				/*?
 					Instance Methods
 						toString
@@ -279,15 +274,14 @@ Uize.module ({
 							.....................................................
 				*/
 			};
-			
+
 			_objectPrototype.translate = function(_x, _y) {
-				var _this = this;
-				
-				_this._X += _x;
-				_this._Y += _y;
-				
-				return _this;
-				
+				var m = this;
+
+				m._X += _x;
+				m._Y += _y;
+
+				return m;
 				/*?
 					Instance Methods
 						translate
@@ -316,11 +310,10 @@ Uize.module ({
 							- Returns a reference to the same =Uize.Math.Matrix2D= object
 				*/
 			};
-			
-			_objectPrototype.values = function () {
-				var _this = this;
-				return [_this._XX, _this._YX, _this._XY, _this._YY, _this._X, _this._Y];
 
+			_objectPrototype.values = function () {
+				var m = this;
+				return [m._XX, m._YX, m._XY, m._YY, m._X, m._Y];
 				/*?
 					Instance Methods
 						values
@@ -338,7 +331,7 @@ Uize.module ({
 							matrix.translate(20,30);
 							var matrixArray = matrix.values();
 							.....................................................
-							
+
 							The array returned in the previous example would be =[0,-1,1,0,20,30]=.
 
 							NOTES
@@ -349,8 +342,8 @@ Uize.module ({
 
 			_objectPrototype.xForm = function(_param1, _param2) {
 				var
-					_this = this,
-					
+					m = this,
+
 					// assume two parameters
 					_x = +_param1,
 					_y = +_param2
@@ -360,10 +353,10 @@ Uize.module ({
 					_x = +_param1.x;
 					_y = +_param1.y;
 				}
-				
+
 				return {
-					x:_this._XX * _x + _this._YX * _y + _this._X,
-					y:_this._XY * _x + _this._YY * _y + _this._Y
+					x:m._XX * _x + m._YX * _y + m._X,
+					y:m._XY * _x + m._YY * _y + m._Y
 				};
 				/*?
 					Instance Methods
@@ -381,14 +374,14 @@ Uize.module ({
 							matrix.rotate(Math.PI / 2);
 							var vector = matrix.xForm(1,0);
 							.....................................................
-							
+
 							The vector returned in the previous example would be ={x:0, y:1}=.
-							
+
 							VARIATION
 							.....................................................
 							var vectorOBJ = matrix.xForm(vectorOBJ);
 							.....................................................
-							
+
 							In this variation, the 2-D vector is specified a simple object, =vectorOBJ=, with 2 properties =x= and =y=.
 
 							EXAMPLE
@@ -397,7 +390,7 @@ Uize.module ({
 							matrix.rotate(Math.PI / 2);
 							var vector = matrix.xForm({x:1, y:0});
 							.....................................................
-							
+
 							The vector returned in the previous example would be ={x:0, y:1}=.
 
 							NOTES
