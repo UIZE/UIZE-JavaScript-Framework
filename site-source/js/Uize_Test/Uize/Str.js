@@ -31,7 +31,7 @@ Uize.module ({
 
 		return Uize.Test.resolve ({
 			title:'Test for Uize.Str Module',
-			test:Uize.Test.requiredModulesTest ('Uize.Str')
+			test:[Uize.Test.requiredModulesTest ('Uize.Str')]
 		});
 	}
 });
