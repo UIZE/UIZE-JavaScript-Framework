@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.String.Split Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Str.Split Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
@@ -18,22 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.String.Split= module defines a suite of unit tests for the =Uize.String.Split= module.
+		The =Uize.Test.Uize.Str.Split= module defines a suite of unit tests for the =Uize.Str.Split= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.String.Split',
+	name:'Uize.Test.Uize.Str.Split',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.String.Split Module',
+			title:'Test for Uize.Str.Split Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.String.Split'),
+				Uize.Test.requiredModulesTest ('Uize.Str.Split'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.String.Split.split',[
+					['Uize.Str.Split.split',[
 						/*** test string type splitters ***/
 							['Test that splitting an empty string using an empty string for the splitter produces an empty array',
 								['',''],
@@ -160,7 +160,7 @@ Uize.module ({
 								['FOO','BAR','FOREVER']
 							]
 					]],
-					['Uize.String.Split.splitInTwo',[
+					['Uize.Str.Split.splitInTwo',[
 						['Test using a string splitter',
 							['TITLE: The Matrix: Reloaded',': '],
 							['TITLE','The Matrix: Reloaded']

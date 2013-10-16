@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.String.Replace Package
+|    /    O /   |    MODULE : Uize.Str.Replace Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.String.Replace= module provides methods for replacing substrings in a string by specifying a replacement lookup.
+		The =Uize.Str.Replace= module provides methods for replacing substrings in a string by specifying a replacement lookup.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.String.Replace',
+	name:'Uize.Str.Replace',
 	builder:function () {
 		'use strict';
 
@@ -59,12 +59,12 @@ Uize.module ({
 				}
 				/*?
 					Static Methods
-						Uize.String.Replace.replacerByLookup
+						Uize.Str.Replace.replacerByLookup
 							.
 
 							SYNTAX
 							............................................................................
-							replacerFUNC = Uize.String.Replace.replacerByLookup (replacementsLookupOBJ);
+							replacerFUNC = Uize.Str.Replace.replacerByLookup (replacementsLookupOBJ);
 							............................................................................
 				*/
 			};
@@ -73,12 +73,12 @@ Uize.module ({
 				return _package.replacerByLookup (_replacementsLookup) (_sourceStr);
 				/*?
 					Static Methods
-						Uize.String.Replace.replaceByLookup
+						Uize.Str.Replace.replaceByLookup
 							.
 
 							SYNTAX
 							..................................................................................
-							resultSTR = Uize.String.Replace.replaceByLookup (sourceSTR,replacementsLookupOBJ);
+							resultSTR = Uize.Str.Replace.replaceByLookup (sourceSTR,replacementsLookupOBJ);
 							..................................................................................
 				*/
 			};

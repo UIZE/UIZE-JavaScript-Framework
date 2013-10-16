@@ -27,8 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.V2',
 	required:[
 		'Uize.Node',
-		'Uize.Util.Html.Encode',
-		'Uize.String'
+		'Uize.Util.Html.Encode'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -458,7 +457,7 @@ Uize.module ({
 								};
 							} else if (_bindingType == '?') {
 								_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
-							} else if (Uize.String.startsWith (_bindingType,'style.')) {
+							} else if (_bindingType.slice (0,6) == 'style.') {
 								var _stylePropertyName = _bindingType.slice (6);
 								_updater = function (_propertyValue) {
 									this.setNodeStyle (_nodeName,Uize.pairUp (_stylePropertyName,_propertyValue));
