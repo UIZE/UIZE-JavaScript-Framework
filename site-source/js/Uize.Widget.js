@@ -48,6 +48,8 @@ Uize.module ({
 				_undefined,
 				_Uize_Node = _Uize.Node,
 				_doForAll = _Uize_Node.doForAll,
+				_callOn = _Uize.callOn,
+				_substituteInto = _Uize.substituteInto,
 
 			/*** References for Performance Optimization ***/
 				_isNode = _Uize_Node.isNode,
@@ -57,7 +59,7 @@ Uize.module ({
 				_nodeInstanceMethods = {}
 		;
 
-		Uize.forEach (
+		_Uize.forEach (
 			[
 				['get','Style'],
 					/*?
@@ -392,7 +394,7 @@ Uize.module ({
 					_propertyInheritedPrivateName,
 					{
 						name:_propertyPublicNames [1],
-						onChange:function () {_Uize.callOn (this._children,_checkInherited)},
+						onChange:function () {_callOn (this._children,_checkInherited)},
 						value:_defaultValue
 					}
 				);
@@ -769,7 +771,7 @@ Uize.module ({
 							return (
 								_isFunction (_localizedResource)
 									? _localizedResource.call (this,_substitutions)
-									: _Uize.substituteInto (_localizedResource,_substitutions,_tokenNaming || '{KEY}')
+									: _substituteInto (_localizedResource,_substitutions,_tokenNaming || '{KEY}')
 							);
 							/*?
 								Instance Methods
@@ -917,9 +919,9 @@ Uize.module ({
 									? _html.process.call (m,_templateInput)
 									: _isFunction (_html)
 										? typeof (_htmlFuncOutput = _html (_templateInput)) === 'string'
-											? _Uize.substituteInto (_htmlFuncOutput, _templateInput)
+											? _substituteInto (_htmlFuncOutput, _templateInput)
 											: _htmlFuncOutput
-										: _Uize.substituteInto (_html, _templateInput)
+										: _substituteInto (_html, _templateInput)
 								;
 							}
 							return _html;
@@ -1583,7 +1585,7 @@ Uize.module ({
 
 					/*** Overridable Wiring and Updating Methods ***/
 						kill:function () {
-							_Uize.callOn (this._children,'kill');
+							_callOn (this._children,'kill');
 							_superclass.doMy (this,'kill');
 							/*?
 								Instance Methods
@@ -1642,7 +1644,7 @@ Uize.module ({
 							m.removeNode ();
 							_Uize_Node.remove (m._globalizedNodes);
 							m._globalizedNodes = _undefined;
-							_Uize.callOn (m._children,'removeUi');
+							_callOn (m._children,'removeUi');
 							m.set ({_built:_false});
 							/*?
 								Instance Methods
@@ -1682,7 +1684,7 @@ Uize.module ({
 							if (!m.isWired) {
 								_applyDeclarativeWidgetProperties (m);
 								m.set ({wired:_true});
-								_Uize.callOn (m._children,'insertOrWireUi');
+								_callOn (m._children,'insertOrWireUi');
 								m.updateUi ();
 							}
 							/*?
@@ -1722,7 +1724,7 @@ Uize.module ({
 							if (m.isWired) {
 								m._nodeCache = _null;
 								m.unwireNode ();
-								_Uize.callOn (m._children,'unwireUi');
+								_callOn (m._children,'unwireUi');
 								m.set ({wired:_false});
 							}
 							/*?
@@ -2104,7 +2106,7 @@ Uize.module ({
 						_parentIdPrefixPlusLength = _parentIdPrefixPlus.length
 					;
 					_doForAll (
-						_Uize.Node.find (_properties.idPrefix),
+						_Uize_Node.find (_properties.idPrefix),
 						function (_node) {
 							_properties.idPrefix = _node;
 							_parent
