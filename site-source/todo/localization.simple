@@ -258,18 +258,15 @@ Useful Background Information
 	Miscellaneous
 		- [[http://www.w3.org/International/multilingualweb/rome/slides/01-davis_weinstein.pdf][Innovations in 18n at Google]]
 
+	ISO Standards
+		Some relevant ISO standards...
+
+		- [[http://en.wikipedia.org/wiki/ISO_639][ISO 639]] - language codes
+		- [[http://en.wikipedia.org/wiki/ISO_3166][ISO 3166]] - codes for countries, dependent territories, areas of geographical interest
+		- [[http://en.wikipedia.org/wiki/ISO_4217][ISO 4217]] - currency codes
+		- [[http://en.wikipedia.org/wiki/ISO_8601][ISO 8601]] - dates / times
+
 Localization Guidelines
-	The Canonical String Principle
-		The canonical string principle states that for any resource string there should be an authoritative, canonical form.
-
-		Furthermore, as a matter of process / workflow, it should be possible to create translations of the string for all supported languages and replace any existing translations with the new translations without any ill effect. Adhering to this principle implies that the ongoing translation process should *NOT* rely upon the history of previous translations for strings.
-
-		Specifically, developers should not introduce variances in translations of a string for specific languages with the expectation that a translator will be able to correctly carry over / map those variances to new translations as the canonical string is changed over time.
-
-		Consider an example where a developer decides to style a specific part of a translated string only for a specific language, possibly to address some issue of layout in that language, and possibly by adding markup, markdown, or wikitext formatting to some part of the string. If the UI is later changed and the canonical string is modified, it might be impossible for the translator to understand how to map the language specific styling to the new translation.
-
-		To avoid these kinds of problems, the canonical string should be regarded as the only authority, and all translations of a string should be regarded as derived / generated. A better solution in such situations would be for the developer or translators to add metadata for the canonical string that notes any language-specific considerations for translating the string.
-
 	Avoid HTML in Locale Strings
 		Embedding HTML in resource strings should be avoided.
 
@@ -294,7 +291,8 @@ Localization Guidelines
 
 				For legal documents, any of the recommended `alternatives to carte blanche HTML` would be acceptable.
 
-			- *E-mail Templates* -
+			E-mail Templates
+				.
 
 		Most Problematic Issues
 			The following problematic issues can arise when embedding HTML markup inside resource strings...
@@ -349,7 +347,11 @@ Localization Guidelines
 				Translation services may also employ crude metrics for calculating the fees charged for their service that may take into account string size, and extra HTML will increase string size. A charge inflated by embedded HTML may slip past the person managing the relationship will the translation service. The safest policy in this case is to not have HTML inside resource strings.
 
 			Unnoticed Bugs Creep In
-				.
+				When HTML is embedded in resource strings, bugs can creep in as a result of refactoring changes.
+
+				When refactoring changes are made in the larger codebase that interact with the resource strings, but where the corresponding changes that would need to be made in the resource strings are neglected, then bugs can arise that can go undetected by the developer. This is especially true for resource strings that only appear in the UI under very specific conditions that are not easy for the developer to replicate (such as when the user account needs to be in a specific uncommon state).
+
+				Changes that would need to be made in the resource strings can be neglected in any or all the translated versions of a string. In particular, a developer is not likely to test the application for all supported locales after their change, so bugs can slip in that affect just certain locales that are not the dominant locale used by the developer during development.
 
 		Alternatives to Carte Blanche HTML
 			There are at least two reasonable alternatives to allowing developers carte blanche in embedding HTML markup in resource stirngs.
@@ -368,19 +370,40 @@ Localization Guidelines
 				- [[http://en.wikipedia.org/wiki/Markdown][Markdown]] - used on github, stackoverflow, and some notable others
 
 		Policing and Auditing
-			In order to enforce the decided policies with respect to embedded formatting in resource strings, conformance and auditing tools should be instituted.
+			In order to enforce the chosen policies with respect to embedded formatting in resource strings, conformance sanity checks should be instituted.
 
-			Pre-commit Hooks
-				.
+			Opportunities to perform sanity checking include...
 
-			Audit Scripts
-				.
+			- *Build Process Integration* - An obvious opportunity to sanity check resource string files would be during a build process - either as part of CI (Continuous Integration) deploy process, or as part of a staging deploy process. This oppotunity for sanity checking is not the most ideal as it doesn't catch issues all that early.
+
+			- *Pre-commit Hooks* - Pre-commit hooks can be instituted for the source control system in order to sanity check any changes to resource string files contained in commits.
+
+			- *Upon Every Save* - If the build system being used during development supports file system watchers and automating rebuilding on file saves, then resource string sanity checking can be performed automatically upon every save to a resource string file in a similar manner to immediate sanity checking for JavaScript files or other file types that are subject to tidy / lint policies.
+
+			- *Manual Audits* - The resource string sanity checker should be runnable manually on a project's entire codebase via an audit script. This is particularly useful as a stopgap measure before better integrations are put in place, or when first initiating compliance for legacy resource string files that were created before a continuous sanity checking process was instituted.
 
 	Limit Resource String Size
-		.
+		The size of resource strings should generally be limited, ideally to single sentences.
+
+		When creating large, paragraph long resource strings, the entire strings can be re-translated when only portions of them change in the future. Translators often charge per word and are not necessarily incentivized to translate less and may only optimized out redundancies as granular as the individual resource string level but not within the resource strings. Maintaining more granular strings will help to minimze ongoing translation costs.
 
 	Limit Parameterization That Has Declension Effects
-		.
+		The number of different parameters that have declension effects should generally be limited for resource strings, especially since numerous permutations can be required for some languages.
+
+		Consider the example of ="{personA} gave {quantity} {object} to {personB}"=. Now, the token ={personA}= is a gendered value, as is ={personB}=. In some languages, depenending on the value, token ={object}= could also be gendered. Also, it has pluralization declension effects because a quantity of it is being specified is the sentence. Because of the numerous possible values for these substitutions, a number of variations would need to be produced when translating to languages such as French.
+
+		The permutation effect can also come into play when not breaking up large resource strings into numerous, sufficiently small resource strings. In a large paragraph of text, or a resource string that contains multiple paragraphs of text, different substitution tokens could appear innocently in different parts of the large block of text, and the values for these different tokens may impose their own declension effects that combine to produce multiple translation permutations for the string as a whole.
+
+	The Canonical String Principle
+		The canonical string principle states that for any resource string there should be an authoritative, canonical form.
+
+		Furthermore, as a matter of process / workflow, it should be possible to create translations of the string for all supported languages and replace any existing translations with the new translations without any ill effect. Adhering to this principle implies that the ongoing translation process should *NOT* rely upon the history of previous translations for strings.
+
+		Specifically, developers should not introduce variances in translations of a string for specific languages with the expectation that a translator will be able to correctly carry over / map those variances to new translations as the canonical string is changed over time.
+
+		Consider an example where a developer decides to style a specific part of a translated string only for a specific language, possibly to address some issue of layout in that language, and possibly by adding markup, markdown, or wikitext formatting to some part of the string. If the UI is later changed and the canonical string is modified, it might be impossible for the translator to understand how to map the language specific styling to the new translation.
+
+		To avoid these kinds of problems, the canonical string should be regarded as the only authority, and all translations of a string should be regarded as derived / generated. A better solution in such situations would be for the developer or translators to add metadata for the canonical string that notes any language-specific considerations for translating the string.
 
 ### Requirements of a Localization System
 	- formatting
