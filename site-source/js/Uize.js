@@ -6021,7 +6021,7 @@ Uize = (function () {
 	/*** Uize base module specific configuration of the module mechanism ***/
 		_package.moduleUrlTemplate = _package.getPathToLibrary ('Uize.js',_modulePathToken);
 		_package.addFolderOrgNamespaces (
-			'Uize.Build','Uize.Loc','Uize.Services','Uize.Templates','Uize.Test','Uize.Widgets'
+			_package.map (['Build','Loc','Services','Templates','Test','Widgets'],'"Uize." + value')
 		);
 		_package.module ({name:'Uize',builder:function () {return _package}});
 
