@@ -40,6 +40,22 @@ General Requirements for a Localization System
 
 			Most locales, for example, will require a "." (period character) to be used to indicate the decimal point, while some specific locales will require that a "," (comma character) be used.
 
+			Properties of locale specific number formatting...
+
+			- *Digit Group Separator* - a "," (comma character) in many locales, but a "." (period character) in some locales and a " " (space character) in some others
+			- *Digit Grouping* - for most locales it is groups of three, but for Hindi it is only a group of three for hundreds and groups of two digits for all digits above the hundreds group
+			- *Fractional Part Separator* - a "." (period character) in many locales, but a "," (comma character) in some locales
+			- *Digit Characters* - some languages use specific characters, and not all languages have ten digit characters (Japanese has 11 digit characters, with a special character for the number 10)
+
+		Specific Numerical Type Formatting
+			Certain numerical types, such as currency values, percent values, measurement values, etc. have special formatting considerations that differ by locale.
+
+			- *Measurements* - Different types of measurements can be expressed in different units for different locales. For example, users in the USA may prefer to see fuel efficiency ratings for vehicles shown in MPG (Miles Per Gallon), while users in Europe would prefer L/100 km (Liters Per 100 kilometers). Formatting in this case would involve a value conversion as well as appending a different units suffix.
+
+			- *Percentages* - In most locales, the percent symbol for percentage values will be displayed before the number, while in some locales it should be displayed after the number.
+
+			- *Currency Values* - Formatting of currency values can involve locale specific number formatting, currency symbol, and currency symbol placement.
+
 		Currency Formatting
 			The localization system should support formatting of currency values appropriately for a locale.
 
@@ -65,6 +81,21 @@ General Requirements for a Localization System
 			...................................................................
 			joinDate: You activated your service on {activationDate:date,short}
 			...................................................................
+
+		Time Formatting
+			.
+
+			### Time Elapsed Formatting
+				.
+
+				moments ago
+				over a minute ago
+				over an hour ago
+				several hours ago
+				yesterday
+				3 days ago
+				over 2 weeks ago
+				etc.
 
 		Additional Types to Format
 			Additionally, the localization system should support the following type formatting...
@@ -226,6 +257,51 @@ Serialization of Types
 			..........................
 			€ 1,234.56  (US $1,973.04)
 			..........................
+
+Types in the Context of Localization
+	Locale Specific Serialization
+		Every type should be able to have a locale specific serialization.
+
+		Locale specific serializations may support multiple serialization options. For example, a date type can support narrow, short, or long options for displaying month. A number type can support displaying digit grouping or not.
+
+		Inheriting Serialization Options
+			A type that inherits from a more basic type, such as a currency type that inherits from the basic number type, should inherit the display options from that basic type.
+
+			So, a currency type would allow display of grouping to be specified as a serialization option, but would also extend an option for display of the currency type (either the currency symbol or the currency code).
+
+	Types When Used in Resource Strings
+		Serialization Options Inherited from Master
+			When a token is defined for a resource string in the master resource strings file, any serialization options defined for the token should be inherited by the locale specific translations of the resource string, but should also be overridable for specific locales.
+
+			For example, for a specific string it might be decided that it is desirable for a date token to use the long option for month when formatting the substituted date values. Then, for a specific language (such as German), it might become evident during testing in German that the layout does not have sufficient room to accommodate long month names, so the narrow option could be specified explicitly for the token in the German translation.
+
+	Extensible System for Types for Resource Strings
+		The resource string system should support an extensible system for types, so that support for new types can be added over time.
+
+		A dependency management system should be employed so that the localization client code does not need to grow ever larger and larger as support for more type formatting of substitution values is added. Instead, when a resource strings file is compiled to a module, the type formatting used in resource strings throughout the file can be used to determine the specific type module and locale specific formatter module dependencies for just the resulting compiled resource strings module.
+
+		Such an approach would be much like the encodings system in UIZE's JST templates. The only thing that grows in the base is the registry of encodings to modules and methods to support those encodings, but the actual type formatting code does not become a dependency for all templates - only those encoding modules that are in use by the JST template being compiled.
+
+		If either a raw value (like a raw number) is passed as a substitution value and is cast to a type through a formatting option in the resource string, or if a value of a certain type is passed as a substitution value and is cast to a different type in the resource string, then the resource strings module has a dependency on the type module for the type used in formatting the resource string.
+
+	Type Example Values
+		Every type should be able to define associated test values that exhibit extremes in behavior or side effects for the type, or just offer convenience when testing the localization to a specific locale.
+
+		Types can have different test values associated with (but not exclusive to) different locales. For example, when testing locale strings in French, a =PersonName= type could have test values that are distinctively French names, but there's no saying that French names couldn't appear for other locales, especially considering how globalized and multicultural the world is.
+
+		So, locale specific example values for the =PersonName= type would be useful mostly as hints when testing for specific locales, especially to the extent that an application localized to s specific locale may have a predominance of users with names associated with that locale.
+
+	Specifying Types
+		Specifying Types Should be Required
+			.
+
+		Casting Types
+			.
+
+	Occurrence Specific Formatting
+		A substitution token may be used more than once in the same string, and it should not be assumed that every occurrence has the same formatting options.
+
+		As such, different formatting options may be applied for different occurrences of the same token in a string, or the value may even be cast to a different type in a specific occurrence.
 
 Useful Background Information
 	ICU
@@ -408,13 +484,8 @@ Localization Guidelines
 ### Requirements of a Localization System
 	- formatting
 		- basic
-			- numbers
-			- dates
-			- times
-			- currencies
 			- calendars
 
-	- string collation
 	- string truncation / abbreviation
 	- string segmentation / hyphenation
 
@@ -452,26 +523,27 @@ Localization Guidelines
 	- it should be possible to build a package containing all the locale modules necessary for a specific locale
 	- it should be possible to set the locale for an entire widget tree, and have all the widgets in the widget tree reflect the new locale (therefore, locale should be a tree inherited property, like enabled and busy)
 
-	Sample File
+	Examples
+		Sample File
 
-	....................
-	start: Start
-	stop: Stop
-	greeting: Hello, <%. user.name %>
-	removeSelectedItemsConfirmation: Are you sure you would like to remove the <% totalItems %> selected items?
-	....................
+		....................
+		start: Start
+		stop: Stop
+		greeting: Hello, <%. user.name %>
+		removeSelectedItemsConfirmation: Are you sure you would like to remove the <% totalItems %> selected items?
+		....................
 
-	....................
-	greeting : Hello, <%. user.name %>.
-	greeting { user.gender == 'male' } : Hello, mister <%. user.name %>.
-	greeting { user.gender == 'female' } : Hello, missis <%. user.name %>.
-	....................
+		....................
+		greeting : Hello, <%. user.name %>.
+		greeting { user.gender == 'male' } : Hello, mister <%. user.name %>.
+		greeting { user.gender == 'female' } : Hello, missis <%. user.name %>.
+		....................
 
-	....................
-	{person} gave you {count} {gift}
-	....................
+		....................
+		{person} gave you {count} {gift}
+		....................
 
-	person can be male/female
-	count can be 0, 1, 2, more
-	gift can be male, female, neuter
+		person can be male/female
+		count can be 0, 1, 2, more
+		gift can be male, female, neuter
 
