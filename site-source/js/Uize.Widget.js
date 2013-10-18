@@ -61,6 +61,31 @@ Uize.module ({
 
 		_Uize.forEach (
 			[
+				['display',''],
+					/*?
+						Instance Methods
+							displayNode
+								Lets you display or hide the specified implied node, using the =display= CSS style property.
+
+								SYNTAX
+								...............................................................
+								myWidget.displayNode (impliedNodeSTRorBLOB,mustDisplayANYTYPE);
+								...............................................................
+
+								While typically a Boolean, the =mustDisplayANYTYPE= parameter can be of any type and the node will be displayed if it resolves to =true=, and hidden if it resolves to =false= - with the exception of =undefined=, when the node will be displayed (see explanation below).
+
+								VARIATIONS
+								............................................
+								myWidget.displayNode (impliedNodeSTRorBLOB);
+								............................................
+
+								When no =mustDisplayANYTYPE= parameter is specified (or when its value is =undefined=), the node will be displayed.
+
+								NOTES
+								- compare to the =showNode= instance method
+								- compare to the =Uize.Node.display= static method
+					*/
+
 				['get','Style'],
 					/*?
 						Instance Methods
@@ -112,31 +137,6 @@ Uize.module ({
 								- compare to the =Uize.Node.getValue= static method
 					*/
 
-				['display',''],
-					/*?
-						Instance Methods
-							displayNode
-								Lets you display or hide the specified implied node, using the =display= CSS style property.
-
-								SYNTAX
-								...............................................................
-								myWidget.displayNode (impliedNodeSTRorBLOB,mustDisplayANYTYPE);
-								...............................................................
-
-								While typically a Boolean, the =mustDisplayANYTYPE= parameter can be of any type and the node will be displayed if it resolves to =true=, and hidden if it resolves to =false= - with the exception of =undefined=, when the node will be displayed (see explanation below).
-
-								VARIATIONS
-								............................................
-								myWidget.displayNode (impliedNodeSTRorBLOB);
-								............................................
-
-								When no =mustDisplayANYTYPE= parameter is specified (or when its value is =undefined=), the node will be displayed.
-
-								NOTES
-								- compare to the =showNode= instance method
-								- compare to the =Uize.Node.display= static method
-					*/
-
 				['inject','Html'],
 					/*?
 						Instance Methods
@@ -160,82 +160,6 @@ Uize.module ({
 								NOTES
 								- compare to the =setNodeInnerHtml= instance method
 								- compare to the =Uize.Node.injectHtml= static method
-					*/
-
-				['set','Properties'],
-					/*?
-						Instance Methods
-							setNodeProperties
-								Sets the specified properties for the specified implied node (or nodes).
-
-								SYNTAX
-								................................................................
-								myWidget.setNodeProperties (impliedNodeSTRorBLOB,propertiesOBJ);
-								................................................................
-
-								EXAMPLE
-								............................
-								myWidget.setNodeProperties (
-									'thumbnail',
-									{
-										src:...,
-										width:...,
-										height:...,
-										title:...
-									}
-								);
-								............................
-
-								NOTES
-								- compare to the =Uize.Node.setProperties= static method
-					*/
-
-				['set','Opacity'],
-					/*?
-						Instance Methods
-							setNodeOpacity
-								Sets the opacity (and, therefore, the transparency) of the specified implied node (or nodes).
-
-								SYNTAX
-								.................................................................
-								myWidget.setNodeOpacity (impliedNodeSTRorBLOB,opacityFLOATorOBJ);
-								.................................................................
-
-								The value of the =opacityFLOATorOBJ= parameter should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if an instance of a =Uize.Class= subclass is specified, then a value will be obtained by invoking the instance's =valueOf Intrinsic Method=.
-
-								NOTES
-								- compare to the =Uize.Node.setOpacity= static method
-					*/
-
-				['set','Style'],
-					/*?
-						Instance Methods
-							setNodeStyle
-								Sets values for an arbitrary set of style attributes for the specified implied node (or nodes).
-
-								SYNTAX
-								..............................................................
-								myWidget.setNodeStyle (impliedNodeSTRorBLOB,propertyValueSTR);
-								..............................................................
-
-								EXAMPLE
-								..................................................
-								myWidget.setNodeStyle (
-									'selector',
-									{
-										display:'block',
-										position:'absolute',
-										visibility:'inherit',
-										top:'100px'
-									}
-								);
-								..................................................
-
-								When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. Instances of =Uize.Class= subclasses can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Node.setStyle= static method.
-
-								NOTES
-								- see also the companion =getNodeStyle= instance method
-								- compare to the =Uize.Node.getStyle= and =Uize.Node.setStyle= static methods
 					*/
 
 				['set','ClipRect'],
@@ -276,6 +200,82 @@ Uize.module ({
 								NOTES
 								- compare to the =injectNodeHtml= instance method
 								- compare to the =Uize.Node.setInnerHtml= static method
+					*/
+
+				['set','Opacity'],
+					/*?
+						Instance Methods
+							setNodeOpacity
+								Sets the opacity (and, therefore, the transparency) of the specified implied node (or nodes).
+
+								SYNTAX
+								.................................................................
+								myWidget.setNodeOpacity (impliedNodeSTRorBLOB,opacityFLOATorOBJ);
+								.................................................................
+
+								The value of the =opacityFLOATorOBJ= parameter should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if an instance of a =Uize.Class= subclass is specified, then a value will be obtained by invoking the instance's =valueOf Intrinsic Method=.
+
+								NOTES
+								- compare to the =Uize.Node.setOpacity= static method
+					*/
+
+				['set','Properties'],
+					/*?
+						Instance Methods
+							setNodeProperties
+								Sets the specified properties for the specified implied node (or nodes).
+
+								SYNTAX
+								................................................................
+								myWidget.setNodeProperties (impliedNodeSTRorBLOB,propertiesOBJ);
+								................................................................
+
+								EXAMPLE
+								............................
+								myWidget.setNodeProperties (
+									'thumbnail',
+									{
+										src:...,
+										width:...,
+										height:...,
+										title:...
+									}
+								);
+								............................
+
+								NOTES
+								- compare to the =Uize.Node.setProperties= static method
+					*/
+
+				['set','Style'],
+					/*?
+						Instance Methods
+							setNodeStyle
+								Sets values for an arbitrary set of style attributes for the specified implied node (or nodes).
+
+								SYNTAX
+								..............................................................
+								myWidget.setNodeStyle (impliedNodeSTRorBLOB,propertyValueSTR);
+								..............................................................
+
+								EXAMPLE
+								..................................................
+								myWidget.setNodeStyle (
+									'selector',
+									{
+										display:'block',
+										position:'absolute',
+										visibility:'inherit',
+										top:'100px'
+									}
+								);
+								..................................................
+
+								When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. Instances of =Uize.Class= subclasses can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Node.setStyle= static method.
+
+								NOTES
+								- see also the companion =getNodeStyle= instance method
+								- compare to the =Uize.Node.getStyle= and =Uize.Node.setStyle= static methods
 					*/
 
 				['set','Value'],
