@@ -70,7 +70,7 @@ Uize.module ({
 				_multiLineStrRegExp = /\r\n|\n|\r/
 		;
 
-		return Uize.package ({
+		return _package = Uize.package ({
 			forEach:function (_sourceStr,_lineHandler) {
 				if (_sourceStr) {
 					var
