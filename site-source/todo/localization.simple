@@ -82,7 +82,7 @@ General Requirements for a Localization System
 			joinDate: You activated your service on {activationDate:date,short}
 			...................................................................
 
-		Time Formatting
+		### Time Formatting
 			.
 
 			### Time Elapsed Formatting
@@ -270,10 +270,68 @@ Types in the Context of Localization
 			So, a currency type would allow display of grouping to be specified as a serialization option, but would also extend an option for display of the currency type (either the currency symbol or the currency code).
 
 	Types When Used in Resource Strings
+		Specifying Types
+			When a resource string expects substitution values, the type for every value expected by the string should be specified.
+
+			Specifying Types Should be Required
+				It should be a requirement that the type be specified for every substitution value expected by a resource string.
+
+				This is to ensure that translators always have sufficient information that can be obtained purely from the resource string files to inform their translation process, without having to rely on the resource files being used in the running application with type information supplied only at runtime.
+
+				With type information contained inside the resource string files, tools with awareness of types can supply `type example values` to aid in the translation process and allow string translations to be previewed before being re-integrated into the codebase and then deployed to a staging area. `Policing and auditing` tools can be employed to enforce this requirement when sanity checking the resource string files.
+
+			Casting Types
+				For any substitution token of a resource string, it should be possible to cast a supplied value of a given type to a different, compatible type.
+
+				Casting from Raw
+					In the most basic case, it should be possible to cast raw number type values to special types such as currencies, measurements, percents, etc. for the purpose of applying locale-specific formatting.
+
+				Casting for Different Formatting Options
+					In some cases, it might be desirable to cast a value that has a supplied type to another type that defines additional formatting options that are desired for the localization.
+
+					An example of this might be receiving a date type value for a substitution token and casting the value to a time ago type for displaying how long ago a date is from the present time. In the same resource string, it might be desirable to use a substitution token to display a date value, while using a number substition token in parentheses to display the time ago equivalent of the same date.
+
+					EXAMPLE
+					............................................................................
+					Your enrollment was approved on {approvalDate:Date} ({approvalDate:TimeAgo})
+					............................................................................
+
+				When Casting is Possible
+					A value of a certain type should be castable to a different type if...
+
+					Meaning is Not Broken
+						Meaning should not be fundamentally broken in the process of casting a value from one type to another.
+
+						For example, casting a distance type value to a currency type value would fundamentally break the meaning. On the other hand, casting from a date type value to a time type value would not fundamentally break the meaning, since time of day is contained within / implied by a date value.
+
+					The Cast Value Remains Correct
+						A cast value can have less precision than the original value, but the value may not be fundamentally incorrect.
+
+						If, for example, a color type value was cast to a shade type value that had possible values of dark, medium-dark, medium, medium-light, and light, precision would be lost but the value would not be incorrect. If, on the other hand, a currency in US dollars value was cast to a currency in Japenese Yen value, without applying the appropriate currency exchange rate, the cast value would most likely be incorrect.
+
+				### Casting for the Sake of Formatting Options
+
+					- the target type is fundamentally the same as the source type, except that the target type's definition defines additional `type formatting options` or `type example values`
+
+
+
+					- the type of the source value is less restrictive than the type being cast to
+						- casting a raw number to a linear distance
+					- the source value contains information that can be extracted to produce a value of the target type
+						- casting a date value to a time value by extracting just the time of day information from the date value
+
 		Serialization Options Inherited from Master
 			When a token is defined for a resource string in the master resource strings file, any serialization options defined for the token should be inherited by the locale specific translations of the resource string, but should also be overridable for specific locales.
 
 			For example, for a specific string it might be decided that it is desirable for a date token to use the long option for month when formatting the substituted date values. Then, for a specific language (such as German), it might become evident during testing in German that the layout does not have sufficient room to accommodate long month names, so the narrow option could be specified explicitly for the token in the German translation.
+
+		Occurrence-specific Formatting
+			A substitution token may be used more than once in the same string, and it should not be assumed that every occurrence has the same formatting options.
+
+			As such, different formatting options may be applied for different occurrences of the same token in a string, or the value may even be cast to a different type in a specific occurrence.
+
+		### Locale-specific Type Formatting Defaults
+			.
 
 	Extensible System for Types for Resource Strings
 		The resource string system should support an extensible system for types, so that support for new types can be added over time.
@@ -290,18 +348,6 @@ Types in the Context of Localization
 		Types can have different test values associated with (but not exclusive to) different locales. For example, when testing locale strings in French, a =PersonName= type could have test values that are distinctively French names, but there's no saying that French names couldn't appear for other locales, especially considering how globalized and multicultural the world is.
 
 		So, locale specific example values for the =PersonName= type would be useful mostly as hints when testing for specific locales, especially to the extent that an application localized to s specific locale may have a predominance of users with names associated with that locale.
-
-	Specifying Types
-		Specifying Types Should be Required
-			.
-
-		Casting Types
-			.
-
-	Occurrence Specific Formatting
-		A substitution token may be used more than once in the same string, and it should not be assumed that every occurrence has the same formatting options.
-
-		As such, different formatting options may be applied for different occurrences of the same token in a string, or the value may even be cast to a different type in a specific occurrence.
 
 Useful Background Information
 	ICU
