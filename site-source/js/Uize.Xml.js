@@ -47,7 +47,6 @@ Uize.module ({
 
 		return Uize.package ({
 			toAttributeValue:_toAttributeValue,
-				/* NOTE: what else needs to be entitized? Characters from extended character set? */
 				/*?
 					Static Methods
 						Uize.Xml.toAttributeValue

@@ -11,7 +11,7 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 4
+	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 100
 */
@@ -94,14 +94,14 @@ Uize.module ({
 					_bodyNodeDone = false,
 					_scrollableContainerNodeDone = false
 				;
-				
+
 				function _isNodeVisible(_nodeCoords, _windowIsContainer) {
 					var
 						_nodeLeft = _nodeCoords.x,
 						_nodeTop = _nodeCoords.y,
 						_nodeWidth = _nodeCoords.width,
 						_nodeHieght = _nodeCoords.height,
-						
+
 						_containerScrollX = _windowIsContainer ? _windowScrollX : _scrollableContainerNode.scrollLeft,
 						_containerScrollY = _windowIsContainer ? _windowScrollY : _scrollableContainerNode.scrollTop,
 						_containerWidth = _windowIsContainer ? _windowWidth : _scrollableContainerNodeCoords.width,
@@ -145,7 +145,7 @@ Uize.module ({
 								_commonFadeProperties
 							)
 						);
-						
+
 						_fade.wire({
 							'Changed.value':function() { _node.scrollTop = +_fade; },
 							Done:_done
@@ -198,36 +198,36 @@ Uize.module ({
 							..............................
 							Uize.Fx.scrollToNode (targetNodeSTRorOBJ);
 							..............................
-							
+
 							This method walks up the node parentage hierarchy in order to determine the closest ancestor to the target node that either is a scrollable container or is the root document that should be scrolled. In the event that the scrollable container is also not in view, the entire page is scrolled to bring that container node into view, while simultaneously scrolling the contents of the container to bring the target node into view within it.
-							
+
 							By default it performs a smooth ease-in/ease-out scroll, but the curve function can be overridden in the =scrollParamsOBJ=.
-							
+
 							targetNodeSTRorOBJ
 								The node (or string ID of the node) to which to scroll.
-								
+
 								A "falsy" value for =targetNodeSTRorOBJ= will resolve to the document root.
-								
+
 							scrollParamsOBJ
 								An object, specifying additional override params to control the scroll animation.
-								
+
 								curveOBJ
 									Overrides the default ease-in/ease-out curve used for animating the scroll.
-									
+
 								durationINT
 									Overrides the default duration (750) of the scroll animation in milliseconds.
-									
+
 								fullVisibilityBOOL
 									Determines whether or not the =targetNodeSTRorOBJ= to which we are scrolling needs to be fully contained within the window in order to prevent scrolling to the top of the =targetNodeSTRorOBJ=. Default value is =false=.
-									
+
 									A value of =false= means that as long as a single pixel of the =targetNodeSTRorOBJ= is within view, no scrolling will happen. A value of =true= means that unless the entire =targetNodeSTRorOBJ= is within view, scrolling will happen.
-									
+
 								scrollToTopBOOL
 									When =true=, forces a scroll of the element to the top of the viewport, even if the entire element is already fully visible.
 
 								callbackFUNC
 									A callback function to be called once scrolling complete.
-									
+
 							EXAMPLE
 							......
 							Uize.Fx.scrollToNode(

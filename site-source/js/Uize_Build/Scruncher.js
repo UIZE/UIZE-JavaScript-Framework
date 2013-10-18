@@ -65,7 +65,7 @@ Uize.module ({
 	required:[
 		'Uize.Xml',
 		'Uize.String',
-		'Uize.String.Split'
+		'Uize.Str.Split'
 	],
 	builder:function () {
 		'use strict';
@@ -222,7 +222,7 @@ Uize.module ({
 							_mappings = [];
 							var _mappingPairs = _settings.MAPPINGS.split (',');
 							for (var _pairNo = -1; ++_pairNo < _mappingPairs.length;) {
-								var _sourcePrefixAndTargetPrefix = Uize.String.Split.splitInTwo (_mappingPairs [_pairNo],'=');
+								var _sourcePrefixAndTargetPrefix = Uize.Str.Split.splitInTwo (_mappingPairs [_pairNo],'=');
 								_mappings [_pairNo] = new _Mapping (
 									_sourcePrefixAndTargetPrefix [0],
 									_sourcePrefixAndTargetPrefix [1]

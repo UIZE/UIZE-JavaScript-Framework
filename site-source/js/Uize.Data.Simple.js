@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Data.Simple',
 	required:[
 		'Uize.String',
-		'Uize.String.Split',
+		'Uize.Str.Split',
 		'Uize.String.Lines'
 	],
 	builder:function () {
@@ -313,7 +313,7 @@ Uize.module ({
 										My Array: | value 1 | value 2 | value 3 | value 4 |
 
 									*/
-									_value = Uize.String.Split.split (
+									_value = Uize.Str.Split.split (
 										_value.replace (_arrayStartRegExp,'').replace (_arrayEndRegExp,''),
 										_arrayDelimiterRegExp
 									)

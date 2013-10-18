@@ -27,21 +27,21 @@ Uize.module ({
 	name:'Uize.Widget.V2',
 	required:[
 		'Uize.Node',
-		'Uize.Util.Html.Encode',
-		'Uize.String'
+		'Uize.Util.Html.Encode'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+				_copyInto = Uize.copyInto,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_trueFlag = {},
 				_cssAddedLookup = {},
 				_htmlEncode = Uize.Util.Html.Encode.encode
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _cssClassPrefixFromModuleName (_moduleName) {
@@ -224,7 +224,12 @@ Uize.module ({
 				childHtml:function (_properties) {
 					var
 						m = this,
-						_childName = _properties.name,
+						_childName =
+							_properties.name ||
+							(
+								'generatedChildName' + 
+								(m._generatedChildNames == _undefined ? (m._generatedChildNames = 0) : m._generatedChildNames++)
+							),
 						_widgetClass = Uize.getModuleByName (_properties.widgetClass) || _class,
 						_widgetClassName = _widgetClass.moduleName,
 						_children = m.children
@@ -233,15 +238,8 @@ Uize.module ({
 					delete _properties.name;
 					delete _properties.widgetClass;
 
-					var _inlineState = Uize.copy (_properties);
-
-					/*** if child name not specified, generate one using widget class module name ***/
-						if (!_childName) {
-							m._generatedChildNames || (m._generatedChildNames = 0);
-							_childName = 'generatedChildName' + m._generatedChildNames++;
-						}
-
 					var
+						_inlineState = Uize.copy (_properties),
 						_html = '',
 						_child = _children [_childName],
 						_childExisted = !!_child
@@ -255,7 +253,7 @@ Uize.module ({
 						: '<div id="' + _child.nodeId ('shell') + '"></div>'
 					;
 					_childExisted ||
-						Uize.copyInto (_inlineState,{widgetClass:_widgetClassName})
+						_copyInto (_inlineState,{widgetClass:_widgetClassName})
 					;
 					if (!Uize.isEmpty (_inlineState))
 						_child.inlineState = _inlineState
@@ -406,7 +404,7 @@ Uize.module ({
 				},
 
 				cssBindings:function (_bindings) {
-					Uize.copyInto (this._cssBindings,Uize.map (_bindings,Uize.resolveTransformer));
+					_copyInto (this._cssBindings,Uize.map (_bindings,Uize.resolveTransformer));
 					/*?
 						Static Methods
 							Uize.Widget.V2.cssBindings
@@ -458,7 +456,7 @@ Uize.module ({
 								};
 							} else if (_bindingType == '?') {
 								_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
-							} else if (Uize.String.startsWith (_bindingType,'style.')) {
+							} else if (_bindingType.slice (0,6) == 'style.') {
 								var _stylePropertyName = _bindingType.slice (6);
 								_updater = function (_propertyValue) {
 									this.setNodeStyle (_nodeName,Uize.pairUp (_stylePropertyName,_propertyValue));
@@ -568,7 +566,7 @@ Uize.module ({
 			}
 		});
 
-		Uize.copyInto (
+		_copyInto (
 			_class.nonInheritableStatics,
 			{
 				_cssClassNameGenerators:1,

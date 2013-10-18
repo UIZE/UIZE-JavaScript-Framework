@@ -28,16 +28,20 @@
 
 <script type="text/javascript" src="../js/Uize.js"></script>
 
-<h1 class="document-title">
+<h1 class="header">
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
-	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
-	Tiled Zoom and Pan
-	<div id="page-actions" class="pageActions">
-		<a href="source-code/~EXPERIMENTAL-image-port-zoom-and-pan-tiled.html" class="buttonLink">SOURCE</a>
-	</div>
+	<a href="../index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
 </h1>
 
 <div class="main">
+	<h1 class="document-title">
+		<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+		Tiled Zoom and Pan
+		<div class="pageActionsShell">
+			<div id="page-actions" class="pageActions"><a href="source-code/image-port-zoom-and-pan-tiled.html" class="buttonLink">SOURCE</a></div>
+		</div>
+	</h1>
+	
 	<table border="0" cellspacing="1" cellpadding="0" style="margin:auto;">
 		<tr>
 			<td>
@@ -135,7 +139,7 @@ Uize.require (
 							);
 						}
 					);
-					setImageForMatrix = function (imageSrc) {
+					window.setImageForMatrix = function (imageSrc) {
 						for (var imagePortNodeNo = -1; ++imagePortNodeNo < imagePortNodes.length;) {
 							var
 								rowNo = Math.floor (imagePortNodeNo / totalRowsAndColumns),

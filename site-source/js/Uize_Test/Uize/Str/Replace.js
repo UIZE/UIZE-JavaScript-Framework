@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.String.Replace Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Str.Replace Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,22 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.String.Replace= module defines a suite of unit tests for the =Uize.String.Replace= module.
+		The =Uize.Test.Uize.Str.Replace= module defines a suite of unit tests for the =Uize.Str.Replace= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.String.Replace',
+	name:'Uize.Test.Uize.Str.Replace',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.String.Replace Module',
+			title:'Test for Uize.Str.Replace Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.String.Replace'),
+				Uize.Test.requiredModulesTest ('Uize.Str.Replace'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.String.Replace.replaceByLookup',[
+					['Uize.Str.Replace.replaceByLookup',[
 						['',
 							[
 								'hello, the dog jumped over the foo. bar bar cat sheep, hello any wool. yes dog, yes dog, three bags there.',
@@ -68,7 +68,7 @@ Uize.module ({
 							'&lt;script type=&quot;text/javascript&quot;&gt;feline &amp;amp; canine&lt;/script&gt;'
 						]
 					]],
-					['Uize.String.Replace.replacerByLookup',[
+					['Uize.Str.Replace.replacerByLookup',[
 					]]
 				])
 			]

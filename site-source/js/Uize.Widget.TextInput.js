@@ -37,18 +37,11 @@ Uize.module ({
 			var
 				_true = true,
 				_false = false,
-				_null = null,
 				_undefined
 			;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype.validate = _classPrototype._validate = function() {
+			function _validate () {
 				var
 					m = this,
 					_validator = m._validator,
@@ -57,7 +50,7 @@ Uize.module ({
 					_isValid =
 						_valueLength >= m._minLength && _valueLength <= m._maxLength &&
 						(
-							_validator == _null ||
+							_validator == null ||
 							(
 								_validator instanceof RegExp
 									? _validator.test (_value)
@@ -68,176 +61,176 @@ Uize.module ({
 				;
 				m._isValid != _isValid
 					? m.set ({_isValid:_isValid})
-					: _isValid ? 0 : m._displayWarningUi ()
+					: _isValid ? 0 : _displayWarningUi (m)
 				;
-			};
+			}
 
-			_classPrototype._displayWarningUi = function() {
-				if (this.isWired) {
-					var
-						m = this,
-						_displayError = m._showWarning && !m._isValid
-					;
+			function _displayWarningUi (m) {
+				if (m.isWired) {
+					var _displayError = m._showWarning && !m._isValid;
 					// if we're able to give visual indicators, then change the textInput color and pop up the icon/tooltip duo.
 					m.setNodeProperties([m._inputNode,'label'],{className:_displayError ? 'error' : 'good'});
 					m.setNodeStyle('warningIcon', {display:_displayError ? 'inline' : 'none'});
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.blur = function () {
-				this._inputNode && this._inputNode.blur ()
-				/*?
-					Instance Methods
-						blur
-							Blur the =input= implied node of the instance.
+		return _superclass.subclass ({
+			instanceMethods:{
+				validate:_validate,
 
-							SYNTAX
-							....................
-							myTextInput.blur ();
-							....................
+				blur:function () {
+					this._inputNode && this._inputNode.blur ()
+					/*?
+						Instance Methods
+							blur
+								Blur the =input= implied node of the instance.
 
-							NOTES
-							- see the companion =focus= instance method
-				*/
-			};
+								SYNTAX
+								....................
+								myTextInput.blur ();
+								....................
 
-			_classPrototype.focus = function () {
-				this._inputNode && this._inputNode.focus ()
-				/*?
-					Instance Methods
-						focus
-							Focuses the =input= implied node of the instance.
+								NOTES
+								- see the companion =focus= instance method
+					*/
+				},
 
-							SYNTAX
-							.....................
-							myTextInput.focus ();
-							.....................
+				focus:function () {
+					this._inputNode && this._inputNode.focus ()
+					/*?
+						Instance Methods
+							focus
+								Focuses the =input= implied node of the instance.
 
-							NOTES
-							- see the companion =blur= instance method
-				*/
-			};
+								SYNTAX
+								.....................
+								myTextInput.focus ();
+								.....................
 
-			_classPrototype.selectWarningMessage = function () { return this._selectWarningMessage() };
+								NOTES
+								- see the companion =blur= instance method
+					*/
+				},
 
-			_classPrototype.updateUi = function () {
-				var
-					m = this,
-					_inputNode = m._inputNode
-				;
-				if (m.isWired && _inputNode) {
-					_inputNode.disabled = !m.get('enabled');
+				selectWarningMessage:function () { return this._selectWarningMessage() },
 
-					if (_inputNode.value != m._value)
-						_inputNode.value = m._value
+				updateUi:function () {
+					var
+						m = this,
+						_inputNode = m._inputNode
 					;
-				}
+					if (m.isWired && _inputNode) {
+						_inputNode.disabled = !m.get('enabled');
 
-				// there can (not) be only one!
-				(m._validateOnExit ^ m._currentNodeEventIsBlur) || m._validate();
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m._inputNode = m.getNode ('input');
-
-					if (m._inputNode) {
-						m._inputNodeIsInputTag = m._inputNode.tagName == 'INPUT';
-
-						m.wireNode (
-							m._inputNode,
-							{
-								keydown:function (_domEvent) {
-									if (
-										m._inputNodeIsInputTag &&
-										Uize.Node.Event.isKeyEnter (_domEvent) &&
-										m.fire ({name:'Ok',domEvent:_domEvent}).cancelSubmit
-									) {
-										var _inputNodeForm = m._inputNode.form;
-										if (_inputNodeForm) {
-											m._storedFormOnsubmit = _inputNodeForm.onsubmit;
-											m._blockedFormSubmit = _true;
-											_inputNodeForm.onsubmit = Uize.returnFalse;
-										}
-									}
-								},
-								keypress:function (_domEvent) {
-									m._keyAborted = m.fire ({name:'Key Press',domEvent:_domEvent}).abort &&
-										Uize.Node.Event.abort (_domEvent)
-									;
-								},
-								keyup:function (_domEvent) {
-									if (m._keyAborted) {
-										m._keyAborted = _false;
-									} else {
-										if (m._blockedFormSubmit) {
-											m._inputNode.form.onsubmit = m._storedFormOnsubmit;
-											m._storedFormOnsubmit = m._blockedFormSubmit = _undefined;
-										}
-										Uize.Node.Event.isKeyEscape (_domEvent) &&
-											m.fire ({name:'Cancel',domEvent:_domEvent})
-										;
-										m.set ({_value:m._inputNode.value});
-										m.updateUi (); // the conformer might result in the value not being the current text
-										m._deferUiWarning && m.set ({showWarning:_true});
-									}
-									m.fire ({name:'Key Up',domEvent:_domEvent});
-								},
-								blur:function() {
-									m._blurClass &&
-										m.setNodeProperties(
-											m._inputNode,
-											{
-												className:m._inputNode.className.replace(m._focusClass, m._blurClass)
-											}
-										)
-									;
-									m._currentNodeEventIsBlur = _true;
-									m._validateOnExit && m._value == m._inputNode.value
-										? m._validate() // force an update
-										: m.set ({_value:m._inputNode.value}) // catch any last values that might have been missed by blurring
-									;
-									m.set ({_inFocus:_false});
-									m.fire('Blur');
-									m._currentNodeEventIsBlur = _false;
-								},
-								focus:function() {
-									m._focusClass &&
-										m.setNodeProperties(
-											m._inputNode,
-											{
-												className:m._inputNode.className.replace(m._blurClass, m._focusClass)
-											}
-										)
-									;
-									m._inputNode.value && m.set({_value:m._inputNode.value});
-									m.set ({_inFocus:_true});
-									m.fire('Focus');
-								}
-							}
-						);
+						if (_inputNode.value != m._value)
+							_inputNode.value = m._value
+						;
 					}
 
-					//set up the tooltip warnings
-					m.wireNode (
-						'warningIcon',
-						{
-							mouseover:function() {
-								Uize.Node.setInnerHtml (m._tooltip, m._selectWarningMessage());
-								Uize.Tooltip.showTooltip (m._tooltip,_true);
-							},
-							mouseout:function() {Uize.Tooltip.hideTooltip(m._tooltip)}
+					// there can (not) be only one!
+					(m._validateOnExit ^ m._currentNodeEventIsBlur) || _validate.call(m);
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m._inputNode = m.getNode ('input');
+
+						if (m._inputNode) {
+							m._inputNodeIsInputTag = m._inputNode.tagName == 'INPUT';
+
+							m.wireNode (
+								m._inputNode,
+								{
+									keydown:function (_domEvent) {
+										if (
+											m._inputNodeIsInputTag &&
+											Uize.Node.Event.isKeyEnter (_domEvent) &&
+											m.fire ({name:'Ok',domEvent:_domEvent}).cancelSubmit
+										) {
+											var _inputNodeForm = m._inputNode.form;
+											if (_inputNodeForm) {
+												m._storedFormOnsubmit = _inputNodeForm.onsubmit;
+												m._blockedFormSubmit = _true;
+												_inputNodeForm.onsubmit = Uize.returnFalse;
+											}
+										}
+									},
+									keypress:function (_domEvent) {
+										m._keyAborted = m.fire ({name:'Key Press',domEvent:_domEvent}).abort &&
+											Uize.Node.Event.abort (_domEvent)
+										;
+									},
+									keyup:function (_domEvent) {
+										if (m._keyAborted) {
+											m._keyAborted = _false;
+										} else {
+											if (m._blockedFormSubmit) {
+												m._inputNode.form.onsubmit = m._storedFormOnsubmit;
+												m._storedFormOnsubmit = m._blockedFormSubmit = _undefined;
+											}
+											Uize.Node.Event.isKeyEscape (_domEvent) &&
+												m.fire ({name:'Cancel',domEvent:_domEvent})
+											;
+											m.set ({_value:m._inputNode.value});
+											m.updateUi (); // the conformer might result in the value not being the current text
+											m._deferUiWarning && m.set ({showWarning:_true});
+										}
+										m.fire ({name:'Key Up',domEvent:_domEvent});
+									},
+									blur:function() {
+										m._blurClass &&
+											m.setNodeProperties(
+												m._inputNode,
+												{
+													className:m._inputNode.className.replace(m._focusClass, m._blurClass)
+												}
+											)
+										;
+										m._currentNodeEventIsBlur = _true;
+										m._validateOnExit && m._value == m._inputNode.value
+											? _validate.call(m) // force an update
+											: m.set ({_value:m._inputNode.value}) // catch any last values that might have been missed by blurring
+										;
+										m.set ({_inFocus:_false});
+										m.fire('Blur');
+										m._currentNodeEventIsBlur = _false;
+									},
+									focus:function() {
+										m._focusClass &&
+											m.setNodeProperties(
+												m._inputNode,
+												{
+													className:m._inputNode.className.replace(m._blurClass, m._focusClass)
+												}
+											)
+										;
+										m._inputNode.value && m.set({_value:m._inputNode.value});
+										m.set ({_inFocus:_true});
+										m.fire('Focus');
+									}
+								}
+							);
 						}
-					);
 
-					_superclass.doMy (m,'wireUi');
+						//set up the tooltip warnings
+						m.wireNode (
+							'warningIcon',
+							{
+								mouseover:function() {
+									Uize.Node.setInnerHtml (m._tooltip, m._selectWarningMessage());
+									Uize.Tooltip.showTooltip (m._tooltip,_true);
+								},
+								mouseout:function() {Uize.Tooltip.hideTooltip(m._tooltip)}
+							}
+						);
+
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_blurClass:{
 					name:'blurClass',
 					value:''
@@ -261,7 +254,7 @@ Uize.module ({
 				},
 				_isValid:{
 					name:'isValid',
-					onChange:function() { this._displayWarningUi() },
+					onChange:function() { _displayWarningUi(this) },
 					value:_false
 				},
 				_maxLength:{
@@ -277,7 +270,7 @@ Uize.module ({
 				},
 				_showWarning:{
 					name:'showWarning',
-					onChange:function() { this._displayWarningUi() },
+					onChange:function() { _displayWarningUi(this) },
 					value:_false
 				},
 				_tooltip:'tooltip',
@@ -305,20 +298,19 @@ Uize.module ({
 						;
 						return _value;
 					},
-					onChange:_classPrototype.updateUi,
+					onChange:'updateUi',
 					value:''
 				},
 				_warningMessages:{
 					name:'warningMessages',
-					value:_null
+					value:null
 				},
 				_filterType:'filterType'
 					/***
 					LAN - lowerAlphaNumeric
 					***/
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

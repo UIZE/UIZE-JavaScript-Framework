@@ -42,16 +42,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_class,
 				_undefined,
 				_true = true,
-				_false = false
-			;
+				_false = false,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_overButton,
 
 				/*** state precedence mechanism ***/
@@ -73,7 +71,7 @@ Uize.module ({
 						click:['over','Click'],
 						dblclick:['over','Double Click']
 					}
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _updateUiText () {
@@ -153,13 +151,107 @@ Uize.module ({
 				}
 			}
 
+			function _isClickable (m,_ignoreSelected) {
+				return !!(
+					m.get ('enabledInherited') && !m.get ('busyInherited') &&
+					(_ignoreSelected || !m._selected || m._clickToDeselect || m._allowClickWhenSelected)
+				);
+			}
+
+			function _setStateAndFireEvent (m,_domEvent) {
+				if (m.isWired) {
+					var
+						_domEventType = _domEvent.type,
+						_isClickEvent = _domEventType == 'click'
+					;
+
+					/*** deferred wiring of other events (for performance) ***/
+						if (!m._allEventsWired) {
+							m._allEventsWired = _true;
+							var _callSetStateAndFireEvent = function (_domEvent) {_setStateAndFireEvent (m,_domEvent)};
+							m.wireNode (
+								m._rootNode,
+								{
+									mouseout:_callSetStateAndFireEvent,
+									mousedown:_callSetStateAndFireEvent,
+									mouseup:_callSetStateAndFireEvent,
+									dblclick:_callSetStateAndFireEvent
+								}
+							);
+						}
+
+					if (_isClickEvent) _domEvent.cancelBubble = _true;
+					if (_isClickable (m,_domEventType == 'dblclick')) {
+						var _eventInfo = _eventInfoMap [_domEventType];
+						m.set ({_state:_eventInfo [0]});
+						m.fire ({name:_eventInfo [1],domEvent:_domEvent});
+						/*?
+							Instance Events
+								Click
+									An instance event that is fired when the user clicks the instance's =Root Node=.
+
+									This event is fired after the related =Up= instance event. When this event is fired, the value of the =state= state property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
+
+									NOTES
+									- see the companion =Double Click=, =Down=, =Out=, =Over=, and =Up= instance events
+
+								Double Click
+									An instance event that is fired when the user double clicks the instance's =Root Node=.
+
+									This event is fired after the related =Up= and =Click= instance events. When this event is fired, the value of the =state= state property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
+
+									NOTES
+									- see the companion =Click=, =Down=, =Out=, =Over=, and =Up= instance events
+
+								Down
+									An instance event that is fired when the user mouses down on the instance's =Root Node=.
+
+									When this event is fired, the value of the =state= state property will be ='down'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
+
+									NOTES
+									- see the companion =Click=, =Double Click=, =Out=, =Over=, and =Up= instance events
+
+								Out
+									An instance event that is fired when the user mouses out of the instance's =Root Node=.
+
+									When this event is fired, the value of the =state= state property will be =''= (empty string). The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
+
+									NOTES
+									- see the companion =Click=, =Double Click=, =Down=, =Over=, and =Up= instance events
+
+								Over
+									An instance event that is fired when the user mouses over the instance's =Root Node=.
+
+									When this event is fired, the value of the =state= state property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
+
+									NOTES
+									- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Up= instance events
+
+								Up
+									An instance event that is fired when the user mouses up after first having moused down on the instance's =Root Node=.
+
+									This event is fired before the related =Click= instance event. When this event is fired, the value of the =state= state property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
+
+									NOTES
+									- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
+						*/
+						if (_isClickEvent) {
+							Uize.isFunction (m._action) && m._action ();
+							(m._selected ? m._clickToDeselect : m._clickToSelect) &&
+								m.set ({_selected:!m._selected})
+							;
+						}
+					}
+				}
+			}
+
 		return _class = _superclass.subclass ({
 			omegastructor:function () {
 				var m = this;
 				m._created = _true;
 
 				function _setStateAndUpdateDisplayState () {
-					m._isClickable () || m.set ({_state:''});
+					_isClickable (m) || m.set ({_state:''});
 					_updateDisplayState.call (m);
 				}
 				m.wire ({
@@ -174,103 +266,6 @@ Uize.module ({
 			},
 
 			instanceMethods:{
-				_isClickable:function (_ignoreSelected) {
-					var m = this;
-					return !!(
-						m.get ('enabledInherited') && !m.get ('busyInherited') &&
-						(_ignoreSelected || !m._selected || m._clickToDeselect || m._allowClickWhenSelected)
-					);
-				},
-
-				_setStateAndFireEvent:function (_domEvent) {
-					var m = this;
-					if (m.isWired) {
-						var
-							_domEventType = _domEvent.type,
-							_isClickEvent = _domEventType == 'click',
-							_isClickable = m._isClickable (_domEventType == 'dblclick')
-						;
-
-						/*** deferred wiring of other events (for performance) ***/
-							if (!m._allEventsWired) {
-								m._allEventsWired = _true;
-								var _setStateAndFireEvent = function (_domEvent) {m._setStateAndFireEvent (_domEvent)};
-								m.wireNode (
-									m._rootNode,
-									{
-										mouseout:_setStateAndFireEvent,
-										mousedown:_setStateAndFireEvent,
-										mouseup:_setStateAndFireEvent,
-										dblclick:_setStateAndFireEvent
-									}
-								);
-							}
-
-						if (_isClickEvent) _domEvent.cancelBubble = _true;
-						if (_isClickable) {
-							var _eventInfo = _eventInfoMap [_domEventType];
-							m.set ({_state:_eventInfo [0]});
-							m.fire ({name:_eventInfo [1],domEvent:_domEvent});
-							/*?
-								Instance Events
-									Click
-										An instance event that is fired when the user clicks the instance's =Root Node=.
-
-										This event is fired after the related =Up= instance event. When this event is fired, the value of the =state= state property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
-
-										NOTES
-										- see the companion =Double Click=, =Down=, =Out=, =Over=, and =Up= instance events
-
-									Double Click
-										An instance event that is fired when the user double clicks the instance's =Root Node=.
-
-										This event is fired after the related =Up= and =Click= instance events. When this event is fired, the value of the =state= state property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
-
-										NOTES
-										- see the companion =Click=, =Down=, =Out=, =Over=, and =Up= instance events
-
-									Down
-										An instance event that is fired when the user mouses down on the instance's =Root Node=.
-
-										When this event is fired, the value of the =state= state property will be ='down'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
-
-										NOTES
-										- see the companion =Click=, =Double Click=, =Out=, =Over=, and =Up= instance events
-
-									Out
-										An instance event that is fired when the user mouses out of the instance's =Root Node=.
-
-										When this event is fired, the value of the =state= state property will be =''= (empty string). The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
-
-										NOTES
-										- see the companion =Click=, =Double Click=, =Down=, =Over=, and =Up= instance events
-
-									Over
-										An instance event that is fired when the user mouses over the instance's =Root Node=.
-
-										When this event is fired, the value of the =state= state property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
-
-										NOTES
-										- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Up= instance events
-
-									Up
-										An instance event that is fired when the user mouses up after first having moused down on the instance's =Root Node=.
-
-										This event is fired before the related =Click= instance event. When this event is fired, the value of the =state= state property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
-
-										NOTES
-										- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
-							*/
-							if (_isClickEvent) {
-								Uize.isFunction (m._action) && m._action ();
-								(m._selected ? m._clickToDeselect : m._clickToSelect) &&
-									m.set ({_selected:!m._selected})
-								;
-							}
-						}
-					}
-				},
-
 				updateUi:function () {
 					if (this.isWired) {
 					 	_updateUiText.call (this);
@@ -287,12 +282,12 @@ Uize.module ({
 								if (m._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
 									_rootNode.onclick = Uize.returnTrue
 								;
-								var _setStateAndFireEvent = function (_domEvent) {m._setStateAndFireEvent (_domEvent)};
+								var _callSetStateAndFireEvent = function (_domEvent) {_setStateAndFireEvent (m,_domEvent)};
 								m.wireNode (
 									_rootNode,
 									{
-										mouseover:_setStateAndFireEvent,
-										click:_setStateAndFireEvent
+										mouseover:_callSetStateAndFireEvent,
+										click:_callSetStateAndFireEvent
 									}
 								);
 
@@ -325,14 +320,13 @@ Uize.module ({
 					}
 					if (Uize.isInstance (m)) {
 						/* NOTE: being used as an instance method, stitched in on some other widget class */
-						_button = m.children [_buttonName];
-						if (!_button) {
+						if (!(_button = m.children [_buttonName])) {
 							_button = m.addChild (_buttonName,_class);
 							_wireButtonClickEvent ();
 						}
 					} else {
 						/* NOTE: being used as a static method */
-						_button = new m ({idPrefix:_buttonName,name:_buttonName,_followLink:_true});
+						_button = m ({idPrefix:_buttonName,name:_buttonName,_followLink:_true});
 						_wireButtonClickEvent ();
 						(window [_button.instanceId] = _button).wireUi ();
 					}

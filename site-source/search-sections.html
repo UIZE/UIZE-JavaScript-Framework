@@ -8,54 +8,55 @@
 	<link rel="stylesheet" href="css/page.simpledoc.css"/>
 	<style type="text/css">
 		.searchPod {
-			position:relative;
-			background:#adbebf url(images/brushed-metal.jpg) repeat left top;
-			border:2px solid #122;
-			font-size:15px;
-			margin-bottom:20px;
-			padding-bottom:60px;
+			position: relative;
+			background: #f8f8f8;
+			border: 1px solid #122;
+			font-size: 15px;
+			margin-bottom: 20px;
+			padding-bottom: 60px;
 		}
 		.searchPod .searchLink {
-			position:absolute;
-			right:15px;
-			bottom:15px;
-			width:200px;
-			border-radius:3px;
-			-moz-border-radius:3px;
-			-webkit-border-radius:3px;
+			position: absolute;
+			right: 15px;
+			bottom: 15px;
+			width: 200px;
+			border-radius: 3px;
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
 		}
 		.searchPod .label {
-			letter-spacing:1px;
-			color:#000;
-			font-weight:bold;
-			margin-right:10px;
-			padding-left:10px;
-			border-left:30px solid #eee;
-			border-radius-topleft:3px;
-			-moz-border-radius-topleft:3px;
-			-webkit-border-radius-topleft:3px;
-			border-radius-bottomleft:3px;
-			-moz-border-radius-bottomleft:3px;
-			-webkit-border-radius-bottomleft:3px;
+			letter-spacing: 1px;
+			color: #000;
+			font-weight: bold;
+			margin-right: 10px;
+			padding-left: 10px;
+			border-left: 30px solid #eee;
+			border-radius-topleft: 3px;
+			-moz-border-radius-topleft: 3px;
+			-webkit-border-radius-topleft: 3px;
+			border-radius-bottomleft: 3px;
+			-moz-border-radius-bottomleft: 3px;
+			-webkit-border-radius-bottomleft: 3px;
 		}
 		#page-searchQuery {
-			width:780px;
-			font-family:verdana;
-			font-size:14px;
-			font-weight:bold;
-			letter-spacing:2px;
-			text-indent:5px;
-			margin:0 0 0 5px;
-			border-radius:3px;
-			-moz-border-radius:3px;
-			-webkit-border-radius:3px;
+			display: block;
+			width: 745px;
+			font-family: verdana;
+			font-size: 14px;
+			font-weight: bold;
+			letter-spacing: 2px;
+			text-indent: 5px;
+			margin: 0 auto 20px auto;
+			border-radius: 3px;
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
 		}
 		.document-title {
-			padding-top:12px;
-			padding-bottom:13px;
+			padding-top: 12px;
+			padding-bottom: 13px;
 		}
 		.searchQuery {
-			font-weight:bold;
+			font-weight: bold;
 		}
 	</style>
 </head>
@@ -64,12 +65,18 @@
 
 <script type="text/javascript" src="js/Uize.js"></script>
 
-<h1 class="document-title">
+<h1 class="header">
 	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
-	Search query <input id="page-searchQuery" type="text"/>
+	<a href="index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
 </h1>
 
 <div class="main">
+	<h1 class="document-title">
+		Search uize.com by Section
+	</h1>
+
+	<input id="page-searchQuery" type="text"/>
+
 	<div class="preamble searchPod">
 		<span class="label">ENTIRE SITE :</span>Search the entire site for all references to <span class="searchQuery"></span>...
 		<a id="page-searchEntireSite" href="javascript://" class="buttonLink searchLink">SEARCH ENTIRE SITE &gt;&gt;</a>

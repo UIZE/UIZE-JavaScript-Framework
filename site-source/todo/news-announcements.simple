@@ -1,16 +1,25 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
-New Uize.String.Split Module
-	- =Uize.String.split= becomes =Uize.String.split.split=
-	- =Uize.String.splitInTwo= becomes =Uize.String.split.splitInTwo=
+NEW MODULE: Uize.Str.Split
+	- =Uize.String.split= becomes =Uize.Str.Split.split=
+	- =Uize.String.splitInTwo= becomes =Uize.Str.Split.splitInTwo=
 
-New Uize.String.Camel Module
+NEW MODULE: Uize.Str.Replace
 	- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
+
+NEW MODULE: Uize.Str.Camel
+	- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
+
+NEW NAMESPACE: Uize.Str
+	.
 
 New Uize.Util.Html.Entities Module
 	.
 
 New Uize.Util.Html.Encode Module
+	.
+
+NEW NAMESPACE: Uize.Math
 	.
 
 New Short Form for Namespace Modules

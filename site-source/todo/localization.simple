@@ -7,7 +7,7 @@ General Requirements for a Localization System
 		A localization system should support the following basic features...
 
 		String Selection by Key
-			The localization system should be able to select an appropriate string by key, from a set of locale strings, that is translated for one of the supported locales.
+			The localization system should be able to select an appropriate string by key, from a set of resource strings, that is translated for one of the supported locales.
 
 			To support the possibility of all strings for all UI components for all locales being present within the same database (possibly as a side effect of a certain translation work flow processes, the key used to identify a string may contain the following parts...
 
@@ -18,31 +18,50 @@ General Requirements for a Localization System
 			- variant identifier
 
 		String Substitution
-			The localization should support substitution of values into an arbitrary number of tokens inside locale strings.
+			The localization should support substitution of values into an arbitrary number of tokens inside resource strings.
 
 			Furthermore, the substitution system should support values being of specific types which can inform formatting of their values and provide cues to a `string variant sub-selection` mechanism that can select available variants that best match the qualities of the substitution values.
 
 		String Variant Sub-selection
-			In cases where genders and/or quantities need to affect the translation of a locale string for a specific language, the localization systems needs to support the sub-selection of the best string variant.
+			In cases where genders and/or quantities need to affect the translation of a resource string for a specific language, the localization systems needs to support the sub-selection of the best string variant.
 
 			Since string variants may not be necessary (and may not exist) for all languages, the string variant sub-selection mechanism should support a system for fallbacks, such that a more generic variant is selected unless a more specific variant is defined. To allow the desired priority to be controlled, a simple algorithm can be employed that iterates through all the defined variants and selects the last matching variant, leaving it up to the author of the translations to order the variants from most general to most specific.
 
 			An Example
 				To illustrate this with an example, say that a string has two substitutions, one for a person's name and the other for an object, where the person's name will have an associated gender and the object will have an associated quantity, both of which will be provided as translation cues to the string variant sub-selection mechanism.
 
-				Now, in the worst case, the translation service may translate the locale string for the most rudimentary substitution, providing only a single base variant. In the best case scenario, the translation service may translate the locale string for all possible logical values of gender and quantity. In between these two extreme cases, a translation service may translate the locale string separately for possible values for gender and for possible values of quantity, but not combinations of the possible values. In such a case, the order of the translated strings can determine whether a matching translation for a possible value of gender takes priority over a matching value for a possible value of quantity, or vice versa.
+				Now, in the worst case, the translation service may translate the resource string for the most rudimentary substitution, providing only a single base variant. In the best case scenario, the translation service may translate the resource string for all possible logical values of gender and quantity. In between these two extreme cases, a translation service may translate the resource string separately for possible values for gender and for possible values of quantity, but not combinations of the possible values. In such a case, the order of the translated strings can determine whether a matching translation for a possible value of gender takes priority over a matching value for a possible value of quantity, or vice versa.
+
+			Pluralization
+				- [[http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html][Language Plural Rules (CLDR)]]
 
 		Number Formatting
 			The localization system should support formatting a number correctly for the locale.
 
 			Most locales, for example, will require a "." (period character) to be used to indicate the decimal point, while some specific locales will require that a "," (comma character) be used.
 
+			Properties of locale specific number formatting...
+
+			- *Digit Group Separator* - a "," (comma character) in many locales, but a "." (period character) in some locales and a " " (space character) in some others
+			- *Digit Grouping* - for most locales it is groups of three, but for Hindi it is only a group of three for hundreds and groups of two digits for all digits above the hundreds group
+			- *Fractional Part Separator* - a "." (period character) in many locales, but a "," (comma character) in some locales
+			- *Digit Characters* - some languages use specific characters, and not all languages have ten digit characters (Japanese has 11 digit characters, with a special character for the number 10)
+
+		Specific Numerical Type Formatting
+			Certain numerical types, such as currency values, percent values, measurement values, etc. have special formatting considerations that differ by locale.
+
+			- *Measurements* - Different types of measurements can be expressed in different units for different locales. For example, users in the USA may prefer to see fuel efficiency ratings for vehicles shown in MPG (Miles Per Gallon), while users in Europe would prefer L/100 km (Liters Per 100 kilometers). Formatting in this case would involve a value conversion as well as appending a different units suffix.
+
+			- *Percentages* - In most locales, the percent symbol for percentage values will be displayed before the number, while in some locales it should be displayed after the number.
+
+			- *Currency Values* - Formatting of currency values can involve locale specific number formatting, currency symbol, and currency symbol placement.
+
 		Currency Formatting
 			The localization system should support formatting of currency values appropriately for a locale.
 
 			Formatting a currency value correctly involves a combination of using the appropriate currency unit symbol and placement, along with the appropriate number formatting for the locale. It is not the responsibility of the localization system to perform currency conversion based upon prevailing exchange rates - that can remain the responsibility of the application.
 
-			In the case of substituting currency values into locale strings, it should not be the responsibility of the code providing the currency value substitution to perform pre-processing of the currency value in order to format it, but ideally the currency value provided to the substitution mechanism would be of a type that would cue the locale string processing code to invoke the appropriate formatting before value substitution. Either the value type can be provided to the locale string processing code, or the value type for a particular token could be explicitly provided in a descriptor for the token, as in...
+			In the case of substituting currency values into resource strings, it should not be the responsibility of the code providing the currency value substitution to perform pre-processing of the currency value in order to format it, but ideally the currency value provided to the substitution mechanism would be of a type that would cue the resource string processing code to invoke the appropriate formatting before value substitution. Either the value type can be provided to the resource string processing code, or the value type for a particular token could be explicitly provided in a descriptor for the token, as in...
 
 			...........................................................................
 			amountPaid: The amount of {paid:currency} has been debited to your account.
@@ -51,17 +70,39 @@ General Requirements for a Localization System
 		Date Formatting
 			The localization system should support formatting a date correctly for the locale, including the appropriate translations of day and month names.
 
-			As with `currency formatting`, when date type values are substituted into locale strings, it should not be required that the code providing the date value perform any pre-processing, but the substitution mechanism should be able to perform formatting of the date value as needed as part of producing the translated string.
+			As with `currency formatting`, when date type values are substituted into resource strings, it should not be required that the code providing the date value perform any pre-processing, but the substitution mechanism should be able to perform formatting of the date value as needed as part of producing the translated string.
 
 			.............................................................
 			joinDate: You activated your service on {activationDate:date}
 			.............................................................
 
-			Optionally, formatting cues may be provided - either as ancillary data that is provided along with and as part of the date value, or as an additional descriptor for the token in the locale string.
+			Optionally, formatting cues may be provided - either as ancillary data that is provided along with and as part of the date value, or as an additional descriptor for the token in the resource string.
 
 			...................................................................
 			joinDate: You activated your service on {activationDate:date,short}
 			...................................................................
+
+		Time Formatting
+			.
+
+			### Time Elapsed Formatting
+				.
+
+				moments ago
+				over a minute ago
+				over an hour ago
+				several hours ago
+				yesterday
+				3 days ago
+				over 2 weeks ago
+				etc.
+
+		Additional Types to Format
+			Additionally, the localization system should support the following type formatting...
+
+			- Time Formatting
+			- Phone Number Formatting
+			- Mailing Address Formatting
 
 		Measurement Units
 			The localization system should provide support for localizing measurement values for a locale, which may involve converting the measurement values from values expressed in a canonical system of units, such as the SI / metric system, to measurement values expressed in a system like the Imperial System.
@@ -125,19 +166,19 @@ General Requirements for a Localization System
 
 	Desired Characteristics of Localization System
 		Live Locale Switching
-			To increase the productivity of those doing translation for of locale strings along with those doing visual testing of localized UI, it should ideally be possibly to switch between locales without incurring a costly full reload of the page or app.
+			To increase the productivity of those doing translation for of resource strings along with those doing visual testing of localized UI, it should ideally be possibly to switch between locales without incurring a costly full reload of the page or app.
 
-			All UI components would ideally be implemented to allow updated locale strings to be dynamically propagated into the UI, and the app environment would support the ability to switch locale and have the necessary locale strings for the new locale be loaded for all the localized UI controls.
+			All UI components would ideally be implemented to allow updated resource strings to be dynamically propagated into the UI, and the app environment would support the ability to switch locale and have the necessary resource strings for the new locale be loaded for all the localized UI controls.
 
 			Live locale switching would ideally be supported at a UI component level, with the ability to use a locale switcher for an individual component. When a component is switched to a new locale, all of its child components and their child components (ie. the entire component tree beneath it) should be switched to the new locale as well.
 
 		Dynamic / Live Updating
-			In order to enable more responsive tools for translating locale strings and instantly previewing the translations in the UI, the UI framework's localization mechanism should ideally support dynamically updating the UI as locale strings are modified.
+			In order to enable more responsive tools for translating resource strings and instantly previewing the translations in the UI, the UI framework's localization mechanism should ideally support dynamically updating the UI as resource strings are modified.
 
 			Given such a live updating mechanism, translators can then visually preview their translations and correct layout issues immediately by making choices between different candidate translations to achieve the best layout for the language they are translating for, rather than having problems slip in and only be discovered during localization QA testing or - even worse - once the code has already been pushed to a production environment.
 
 		Media Template Processing
-			While it is desirable to compose locale strings into the presentation as part of a runtime rendering process, it is sometimes not possible to render all parts of the presentation dynamically.
+			While it is desirable to compose resource strings into the presentation as part of a runtime rendering process, it is sometimes not possible to render all parts of the presentation dynamically.
 
 			In cases where it is necessary to localize media assets that cannot be rendered dynamically, because of performance issues or a lack of the rendering technology in the client, it is desirable to have a system in place to allow for rendering of templatized media of various types, either as part of a build process or as an ob-demand process that is load optimized through a type of caching facility.
 
@@ -147,17 +188,17 @@ General Requirements for a Localization System
 			For any UI component system, whether implemented for Web technologies or native operating system frameworks, certain inheritance characteristics should be supported.
 
 			Inheriting Locale Strings From a Superclass
-				For a UI component class that extends / subclasses a UI component base class / superclass, the locale strings of the superclass should be inheritable.
+				For a UI component class that extends / subclasses a UI component base class / superclass, the resource strings of the superclass should be inheritable.
 
 				In this way, a UI component subclass can extend its superclass and gain the benefit of all the localization that has already been done for it, without having to duplicate that effort. The same types of reuse patterns that one may with to employ with other aspects of the code one should also be able to apply to localization.
 
 			Overriding Inherited Locale Strings
-				For locale strings inherited from a UI component's superclass, it should be possible to override any or all of them.
+				For resource strings inherited from a UI component's superclass, it should be possible to override any or all of them.
 
-				As with other inherited features, overriding a locale string in a UI component subclass should have no effect on the component's superclass and instances of both should be able to coexist in the page together without any conflict.
+				As with other inherited features, overriding a resource string in a UI component subclass should have no effect on the component's superclass and instances of both should be able to coexist in the page together without any conflict.
 
 			Declaring Additional Locale Strings
-				For any UI component subclass, it should be possible to augment the set of locale strings inherited from its superclass by declaring additional locale strings for the subclass.
+				For any UI component subclass, it should be possible to augment the set of resource strings inherited from its superclass by declaring additional resource strings for the subclass.
 
 Special Requirements for Web Localization
 	Concurrency on the Client
@@ -173,13 +214,13 @@ Special Requirements for Web Localization
 		In order to support encapsulation of locale-specific resources, the localization system should provide support for harvesting locale resources that are distributed throughout a codebase, potentially combining the resources together in a flat database for submission to a translation service, and then redistributing the translated resources to their correct original places throughout the codebase.
 
 	Locale Strings as Dependencies
-		A set of locale strings needed by a UI component should be expressed as a dependency of the UI component, in order to provide a standard mechanism by which to load them dynamically during development and by which to package them along with other JavaScript code for deployment to a production environment.
+		A set of resource strings needed by a UI component should be expressed as a dependency of the UI component, in order to provide a standard mechanism by which to load them dynamically during development and by which to package them along with other JavaScript code for deployment to a production environment.
 
 		Parameterized Dependency
-			Because it is not possible for a UI component's code to know what locale the code will be run in, expressing a dependency on a set of locale strings can only go as far as providing a base guide, where the runtime environment will determine what exact module is required based upon the locale set for the environment at the time of loading the UI component.
+			Because it is not possible for a UI component's code to know what locale the code will be run in, expressing a dependency on a set of resource strings can only go as far as providing a base guide, where the runtime environment will determine what exact module is required based upon the locale set for the environment at the time of loading the UI component.
 
 Serialization of Types
-	Various value types that can be displayed to the user, either alone or as substitutions in locale strings, may have locale specific serializations.
+	Various value types that can be displayed to the user, either alone or as substitutions in resource strings, may have locale specific serializations.
 
 	Locale-specific formatting of a number value, for instance, can be viewed as a form of locale-specific serialization to string of number type values.
 
@@ -217,6 +258,51 @@ Serialization of Types
 			€ 1,234.56  (US $1,973.04)
 			..........................
 
+Types in the Context of Localization
+	Locale Specific Serialization
+		Every type should be able to have a locale specific serialization.
+
+		Locale specific serializations may support multiple serialization options. For example, a date type can support narrow, short, or long options for displaying month. A number type can support displaying digit grouping or not.
+
+		Inheriting Serialization Options
+			A type that inherits from a more basic type, such as a currency type that inherits from the basic number type, should inherit the display options from that basic type.
+
+			So, a currency type would allow display of grouping to be specified as a serialization option, but would also extend an option for display of the currency type (either the currency symbol or the currency code).
+
+	Types When Used in Resource Strings
+		Serialization Options Inherited from Master
+			When a token is defined for a resource string in the master resource strings file, any serialization options defined for the token should be inherited by the locale specific translations of the resource string, but should also be overridable for specific locales.
+
+			For example, for a specific string it might be decided that it is desirable for a date token to use the long option for month when formatting the substituted date values. Then, for a specific language (such as German), it might become evident during testing in German that the layout does not have sufficient room to accommodate long month names, so the narrow option could be specified explicitly for the token in the German translation.
+
+	Extensible System for Types for Resource Strings
+		The resource string system should support an extensible system for types, so that support for new types can be added over time.
+
+		A dependency management system should be employed so that the localization client code does not need to grow ever larger and larger as support for more type formatting of substitution values is added. Instead, when a resource strings file is compiled to a module, the type formatting used in resource strings throughout the file can be used to determine the specific type module and locale specific formatter module dependencies for just the resulting compiled resource strings module.
+
+		Such an approach would be much like the encodings system in UIZE's JST templates. The only thing that grows in the base is the registry of encodings to modules and methods to support those encodings, but the actual type formatting code does not become a dependency for all templates - only those encoding modules that are in use by the JST template being compiled.
+
+		If either a raw value (like a raw number) is passed as a substitution value and is cast to a type through a formatting option in the resource string, or if a value of a certain type is passed as a substitution value and is cast to a different type in the resource string, then the resource strings module has a dependency on the type module for the type used in formatting the resource string.
+
+	Type Example Values
+		Every type should be able to define associated test values that exhibit extremes in behavior or side effects for the type, or just offer convenience when testing the localization to a specific locale.
+
+		Types can have different test values associated with (but not exclusive to) different locales. For example, when testing locale strings in French, a =PersonName= type could have test values that are distinctively French names, but there's no saying that French names couldn't appear for other locales, especially considering how globalized and multicultural the world is.
+
+		So, locale specific example values for the =PersonName= type would be useful mostly as hints when testing for specific locales, especially to the extent that an application localized to s specific locale may have a predominance of users with names associated with that locale.
+
+	Specifying Types
+		Specifying Types Should be Required
+			.
+
+		Casting Types
+			.
+
+	Occurrence Specific Formatting
+		A substitution token may be used more than once in the same string, and it should not be assumed that every occurrence has the same formatting options.
+
+		As such, different formatting options may be applied for different occurrences of the same token in a string, or the value may even be cast to a different type in a specific occurrence.
+
 Useful Background Information
 	ICU
 		[[http://en.wikipedia.org/wiki/International_Components_for_Unicode][ICU]] (International Components for Unicode) is a project first developed by Taligent and then later absorbed into IBM after they acquired Taligent.
@@ -233,33 +319,231 @@ Useful Background Information
 	ARB
 		[[https://code.google.com/p/arb/wiki/ApplicationResourceBundleSpecification][ARB]] (Application Resource Bundle) is a file format advanced by Google to package and organize localization resources.
 
+		The ARB format makes use of ICU Message Format for resource strings.
+
+	CLDR
+		[[https://sites.google.com/site/cldr/][CLDR]] (Unicode Common Locale Data Repository) is a project of the Unicode Consortium that is intended as a central repository for locale information.
+
+		Data from the CLDR project is incorporated in various ways into operating systems, Web browsers, and software development frameworks to allow applications to be localized. The data is available in LDML format (XML-based) as well as JSON format.
+
+	JavaScript Intl Object
+		The =Intl= object is being developed as part of a future version of ECMAScript to provide JavaScript with facilities for locale specific formatting.
+
+		The =Intl= object serves as a namespace and provides objects for string collation, date time formatting, and number formatting. See [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl]]
+
+	Miscellaneous
+		- [[http://www.w3.org/International/multilingualweb/rome/slides/01-davis_weinstein.pdf][Innovations in 18n at Google]]
+
+	ISO Standards
+		Some relevant ISO standards...
+
+		- [[http://en.wikipedia.org/wiki/ISO_639][ISO 639]] - language codes
+		- [[http://en.wikipedia.org/wiki/ISO_3166][ISO 3166]] - codes for countries, dependent territories, areas of geographical interest
+		- [[http://en.wikipedia.org/wiki/ISO_4217][ISO 4217]] - currency codes
+		- [[http://en.wikipedia.org/wiki/ISO_8601][ISO 8601]] - dates / times
+
+Localization Guidelines
+	Avoid HTML in Locale Strings
+		Embedding HTML in resource strings should be avoided.
+
+		Areas of Temptation
+			The areas where it is tempting to embed HTML into resource strings includes various areas where there often larger blocks of text to translate and where it is perceived as too onerous to separate strings from structure.
+
+			Such areas include...
+
+			Marketing Pages
+				Marketing pages can have large, multi-paragraph blocks of text that contain HTML markup for layout and styling.
+
+				Often these pages originate from a CMS system and they are built initially without the mind to localization. It might be assumed that the content will vary so dramatically by locale that it's not feasible to create a single structure with common sentences that can be translated per locale. Even when possible, the upfront cost of creating a separation of structure and strings is not perceived as having a worthwhile payoff at the time.
+
+				When it comes time to localize the content, the apparent path of least resistance might be to provide the pages, as is, to translators to translate. If the pages continue to live and evolve over time, then the pain of not investing in separating structure from strings become apparent.
+
+			Legal Documents
+				Much like marketing pages, legal documents like EULA and TOS documents tend to be large documents that already contain embedded HTML by the time that consideration is given to translating them to different languages.
+
+				One would be hard pressed trying to find a writer of a legal document who would author the document as a structure template and a set of resource strings. Deconstructing a legal document into a template and a set of resource strings would also present an obstacle to the legal team when it comes time to update portions of the document.
+
+				Furthermore, specific locales may actually impose different legal frameworks that may require a specific legal document to differ in its content from one locale to another. For these reasons, the only viable approach may be to translate such documents in their entirety. Fortunately, legal documents do not generally require token substitution.
+
+				For legal documents, any of the recommended `alternatives to carte blanche HTML` would be acceptable.
+
+			E-mail Templates
+				.
+
+		Most Problematic Issues
+			The following problematic issues can arise when embedding HTML markup inside resource strings...
+
+			Inline Style in Resource Strings
+				To address some issue with layout, a developer may be tempted to embed inline =style= attributes inside the HTML that is embedded in the resource strings.
+
+				This could arise if a developer takes a lazy approach to addressing a layout issue with a language where longer average word length breaks the layout in some way. A developer may slip in a =font-size= inline style to quickly resolve a bug for a language such as German, for instance.
+
+				Embedding inline style in resource strings has the following issues...
+
+				- *Maintenance Pain* - Just as with inlining style in HTML templates, inlining CSS style in HTML inside resource strings can produce pain with maintenance of the codebase as it evolves and is refactored, since styling is now distributed rather than being consolidated in CSS files.
+
+				- *Obliteration Upon Re-translation* - If specific styling exceptions are placed in the translated resource strings for specific languages, those language specific modifications can easily suffer from obliteration if the canonical string is modified in future and the translator re-translates the text from the canonical string to produce new translated versions per language.
+
+			Inline Code or Binding Logic
+				In the situation of a portion of a string needing to be dynamic, it might be tempting for a developer to embed the templating language's data binding tokens inside a resource string.
+
+				This is problematic for several reasons, including...
+
+				- *Maintenance Pain* - With some data binding logic embedded inside resource strings, the logic of the application is now distributed and harder to maintain and there is an increased likelihood of bugs arising during refactoring of the application where changes are made in some parts of the code but the developer misses making corresponding changes in the translated strings for all supported languages.
+
+				- *Translation Correctness* - In a case where a string starts out as having no dynamic parts and then later it is decided that a name, quantity, or other value needs to be substituted into it, it might be tempting to the developer to simply add a data-binding token / expression into the resource string and rely on the data binding facilities of the UI technology. This might work according to the grammatical rules of the developer's spoken language, but it's quite possible it will not work for all other languages.
+
+			Inline URLs or HREFs
+				In string resources that contain linked text or inline images, it might be tempting to a developer to include URLs inside resource strings, particularly where the URLs may differ by locale / language.
+
+				This situation may more likely arise in resource strings for marketing pages or legal documents. In any event, including fully resolved URLs inside resource strings should be avoided. Instead, such strings should be parameterized and the application should supply the URLs (possibly locale specific) as substitution tokens to the localization methods. This permits the URLs to be processed separately through the selection / fallback mechanism of the localization system.
+
+		Downsides of Embedding HTML in Resource Strings
+			To dispell any doubts about the importance of avoiding HTML in resource strings, consider the following numerous downsides of embedding HTML...
+
+			Increased Translation Complexity
+				Embedded HTML can complicate the translation process by increasing the complexity of the resource strings.
+
+				This is especially true if portions of sentences are enclosed in formatting markup. Dependending on the grammar of the language being translated to, it may not be so obvious how to map the formatting from the canonical string to the translated string. In any event, it takes extra care to preserve the intent of the formatting markup and ensure that the formatting doesn't literally get lost in translation.
+
+			Increased Refactoring Effort
+				Having HTML embedded inside resource strings can increase refactoring effort as an application grows and is localized to more locales.
+
+				Certainly, HTML inside resource strings can complicate refactoring as text searches will need to cover resource strings as well. If HTML embedded in a resource string interacts with and has dependencies on the context in which it is used (such as relying on CSS classes), then the resource string will need to be updated along with the related changes in CSS and/or JavaScript.
+
+				Now, if the resource string is already translated for several languages, then the HTML embedded in the various translations will need to be updated as well. Alternatively, deployment will have to wait on re-translation from the canonical string in order for the translated versions of the resource string to reflect the change in the HTML embedded in the canonical string.
+
+				Having to update resource strings as part of layout change refactoring is clearly undesirable.
+
+			Increased Re-translation Costs
+				HTML embedded inside resource strings is sometimes associated with larger resource strings that have not been split up into multiple smaller strings.
+
+				If this is the case, re-translation costs can increase as a result of having to re-translate multi-sentence resource strings where only one sentence has been modified. Translators are not financially incentivized to reduce their redundant translation effort and may only perform delta optimization as granular as individual resource strings and not at the granularity of changed segments of large strings.
+
+				Translation services may also employ crude metrics for calculating the fees charged for their service that may take into account string size, and extra HTML will increase string size. A charge inflated by embedded HTML may slip past the person managing the relationship will the translation service. The safest policy in this case is to not have HTML inside resource strings.
+
+			Unnoticed Bugs Creep In
+				When HTML is embedded in resource strings, bugs can creep in as a result of refactoring changes.
+
+				When refactoring changes are made in the larger codebase that interact with the resource strings, but where the corresponding changes that would need to be made in the resource strings are neglected, then bugs can arise that can go undetected by the developer. This is especially true for resource strings that only appear in the UI under very specific conditions that are not easy for the developer to replicate (such as when the user account needs to be in a specific uncommon state).
+
+				Changes that would need to be made in the resource strings can be neglected in any or all the translated versions of a string. In particular, a developer is not likely to test the application for all supported locales after their change, so bugs can slip in that affect just certain locales that are not the dominant locale used by the developer during development.
+
+		Alternatives to Carte Blanche HTML
+			There are at least two reasonable alternatives to allowing developers carte blanche in embedding HTML markup in resource stirngs.
+
+			HTML Subset
+				A very limited set of HTML tags could be supported to provide basic formatting ability without permitting layout to be implemented within HTML in resource strings.
+
+				Tags supported could include =b=, =i=, =strong=, =p=, =br=, =ul=, =ol=, =li=, and other basic tags. A downside of this approach is that it might not be entirely clear that there are limits to the HTML tags that can be used and developers may frequently hit up against the frustration of not being able to go that one step further by adding a CSS class or an inline =style= attribute or some other tag that could solve their immediate problem.
+
+			Wikitext / Markdown
+				A wikitext / markdown language could be supported to allow minimal control over formatting and logical layout.
+
+				A wikitext / markdown language, for example, may be sufficient for the purposes of legal documents. Using this approach, it would be plainly clear to a developer that they're in wikitext territory and there is no freedom to embed HTML. Furthermore, the localization system could explicitly prevent HTML by scanning for HTML tags and producing errors that would be seen by the developer, or HTML could be displayed literally and a warning produced for the developer. Audit scripts could also be employed to detect unwanted HTML inside resource strings.
+
+				- [[http://en.wikipedia.org/wiki/Creole_(markup)][Creole]] - an effort to create a standard wiki markup language
+				- [[http://en.wikipedia.org/wiki/Markdown][Markdown]] - used on github, stackoverflow, and some notable others
+
+		Policing and Auditing
+			In order to enforce the chosen policies with respect to embedded formatting in resource strings, conformance sanity checks should be instituted.
+
+			Opportunities to perform sanity checking include...
+
+			- *Build Process Integration* - An obvious opportunity to sanity check resource string files would be during a build process - either as part of CI (Continuous Integration) deploy process, or as part of a staging deploy process. This oppotunity for sanity checking is not the most ideal as it doesn't catch issues all that early.
+
+			- *Pre-commit Hooks* - Pre-commit hooks can be instituted for the source control system in order to sanity check any changes to resource string files contained in commits.
+
+			- *Upon Every Save* - If the build system being used during development supports file system watchers and automating rebuilding on file saves, then resource string sanity checking can be performed automatically upon every save to a resource string file in a similar manner to immediate sanity checking for JavaScript files or other file types that are subject to tidy / lint policies.
+
+			- *Manual Audits* - The resource string sanity checker should be runnable manually on a project's entire codebase via an audit script. This is particularly useful as a stopgap measure before better integrations are put in place, or when first initiating compliance for legacy resource string files that were created before a continuous sanity checking process was instituted.
+
+	Limit Resource String Size
+		The size of resource strings should generally be limited, ideally to single sentences.
+
+		When creating large, paragraph long resource strings, the entire strings can be re-translated when only portions of them change in the future. Translators often charge per word and are not necessarily incentivized to translate less and may only optimized out redundancies as granular as the individual resource string level but not within the resource strings. Maintaining more granular strings will help to minimze ongoing translation costs.
+
+	Limit Parameterization That Has Declension Effects
+		The number of different parameters that have declension effects should generally be limited for resource strings, especially since numerous permutations can be required for some languages.
+
+		Consider the example of ="{personA} gave {quantity} {object} to {personB}"=. Now, the token ={personA}= is a gendered value, as is ={personB}=. In some languages, depenending on the value, token ={object}= could also be gendered. Also, it has pluralization declension effects because a quantity of it is being specified is the sentence. Because of the numerous possible values for these substitutions, a number of variations would need to be produced when translating to languages such as French.
+
+		The permutation effect can also come into play when not breaking up large resource strings into numerous, sufficiently small resource strings. In a large paragraph of text, or a resource string that contains multiple paragraphs of text, different substitution tokens could appear innocently in different parts of the large block of text, and the values for these different tokens may impose their own declension effects that combine to produce multiple translation permutations for the string as a whole.
+
+	The Canonical String Principle
+		The canonical string principle states that for any resource string there should be an authoritative, canonical form.
+
+		Furthermore, as a matter of process / workflow, it should be possible to create translations of the string for all supported languages and replace any existing translations with the new translations without any ill effect. Adhering to this principle implies that the ongoing translation process should *NOT* rely upon the history of previous translations for strings.
+
+		Specifically, developers should not introduce variances in translations of a string for specific languages with the expectation that a translator will be able to correctly carry over / map those variances to new translations as the canonical string is changed over time.
+
+		Consider an example where a developer decides to style a specific part of a translated string only for a specific language, possibly to address some issue of layout in that language, and possibly by adding markup, markdown, or wikitext formatting to some part of the string. If the UI is later changed and the canonical string is modified, it might be impossible for the translator to understand how to map the language specific styling to the new translation.
+
+		To avoid these kinds of problems, the canonical string should be regarded as the only authority, and all translations of a string should be regarded as derived / generated. A better solution in such situations would be for the developer or translators to add metadata for the canonical string that notes any language-specific considerations for translating the string.
+
 ### Requirements of a Localization System
+	- formatting
+		- basic
+			- calendars
+
+	- string truncation / abbreviation
+	- string segmentation / hyphenation
+
+	- resource selection
+		- multi-dimensional overrides system
+			- dimensions
+				- locale
+				- more specific locale
+				- brand / partner
+				- user demographic (possibly)
+			- dimension prioritization
+				- effectively a fallbacks mechanism
+			- could apply to any resources
+		- ideally, doesn't need to be duplicated for different technologies
+		- language selection should ideally be based upon the likelihood of the user understanding the language as well as the language(s) to which a resource has been localized
+
+	- specifying resource strings
+		- all resource strings are defined in a neutral base / master file that...
+			- contains no translations
+			- contains definitions of types for substitutions
+			- contains optional default formatting options for substitutions
+			- contains meta data that can provide cues to the translators (eg. context of usage, notes on screen real-estate limits / constraints, notes on tone of language, etc.)
+			- example values for substitutions
+
+		- for substitutions, support the ability to define custom types that can have their own per-language example values
+
+	- tracking resource usage
+		- can be used to determine priority for localization of resource to a given language
+		- can be used to determine if resource is defunct / no longer in use
+		- can be used to determine quality / rigor for translating a given resource
+			- if multiple variants should be translated, or if an acceptable, generic translation should be provided
+		- may be more valuable in determining value of translating larger resources, such as entire knowledgebase articles
+
 	- it should be possible to load the necessary module for defining the strings for a locale as a direct dependency for a module, before the module itself is built
 	- it should be possible to build a package containing all the locale modules necessary for a specific locale
 	- it should be possible to set the locale for an entire widget tree, and have all the widgets in the widget tree reflect the new locale (therefore, locale should be a tree inherited property, like enabled and busy)
 
-	Sample File
+	Examples
+		Sample File
 
-	....................
-	start: Start
-	stop: Stop
-	greeting: Hello, <%. user.name %>
-	removeSelectedItemsConfirmation: Are you sure you would like to remove the <% totalItems %> selected items?
-	....................
+		....................
+		start: Start
+		stop: Stop
+		greeting: Hello, <%. user.name %>
+		removeSelectedItemsConfirmation: Are you sure you would like to remove the <% totalItems %> selected items?
+		....................
 
-	....................
-	greeting : Hello, <%. user.name %>.
-	greeting { user.gender == 'male' } : Hello, mister <%. user.name %>.
-	greeting { user.gender == 'female' } : Hello, missis <%. user.name %>.
-	....................
+		....................
+		greeting : Hello, <%. user.name %>.
+		greeting { user.gender == 'male' } : Hello, mister <%. user.name %>.
+		greeting { user.gender == 'female' } : Hello, missis <%. user.name %>.
+		....................
 
+		....................
+		{person} gave you {count} {gift}
+		....................
 
-
-	....................
-	{person} gave you {count} {gift}
-	....................
-
-	person can be male/female
-	count can be 0, 1, 2, more
-	gift can be male, female, neuter
+		person can be male/female
+		count can be 0, 1, 2, more
+		gift can be male, female, neuter
 

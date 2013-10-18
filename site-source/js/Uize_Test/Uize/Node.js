@@ -30,9 +30,7 @@ Uize.module ({
 
 		return Uize.Test.resolve ({
 			title:'Test for Uize.Node Module',
-			test:[
-				Uize.Test.requiredModulesTest ('Uize.Node')
-			]
+			test:[Uize.Test.requiredModulesTest ('Uize.Node')]
 		});
 	}
 });

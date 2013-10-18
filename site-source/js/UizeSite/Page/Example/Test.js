@@ -103,6 +103,15 @@ Uize.module ({
 
 								This method's implementation should be overrided by a particular test page, to perform the test specific to that page. Your implementation should expect to receive one parameter, =reportResultsFUNC=, being a function that should be called to report back the results of the test once it has completed. The =reportResultsFUNC= callback function expects one string parameter, being a report of the test's results in HTML format, which will be placed into the =testResults= implied node.
 					*/
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m.wireNode ('viewSource','click',function () {m.viewSource (window.location.href,document.title)});
+
+						_superclass.doMy (m,'wireUi');
+					}
 				}
 			}
 		});

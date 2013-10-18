@@ -348,104 +348,569 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_undefined,
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_typeString = 'string',
-				_typeObject = 'object',
 				_Function = Function,
 
 				/*** references to utility methods of Uize ***/
 					_Uize = Uize,
-					_clone = _Uize.clone,
 					_copyInto = _Uize.copyInto,
 					_forEach = _Uize.forEach,
 					_map = _Uize.map,
 					_lookup = _Uize.lookup,
 					_getClass = _Uize.getClass,
-					_getGuid = _Uize.getGuid,
-					_eval = _Uize.eval,
 					_isArray = _Uize.isArray,
 					_isFunction = _Uize.isFunction,
 					_isInstance = _Uize.isInstance,
 					_isObject = _Uize.isObject,
-					_noNew = _Uize.noNew,
-					_pairUp = _Uize.pairUp,
-					_traceDependencies = _Uize.Util.Dependencies.traceDependencies
-			;
+					_traceDependencies = _Uize.Util.Dependencies.traceDependencies,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_sacredEmptyArray = [],
 				_sacredEmptyObject = {},
 				_constOnChangeModeOnce = 1,
-				_constOnChangeModeWhenever = 2
+				_constOnChangeModeWhenever = 2,
+				_derivationCache = {}
+		;
+
+		function _createSubclass (_class,_alphastructor,_omegastructor) {
+			function _toString () {
+				var
+					_propertiesLines = [],
+					_Uize_toString = _Uize.toString
+				;
+				_forEach (
+					this.get (),
+					function (_propertyValue,_propertyName) {
+						_propertiesLines.push (
+							_propertyName + ' : ' +
+							(
+								_propertyValue && (_isInstance (_propertyValue) || _isFunction (_propertyValue))
+									? _Uize_toString.call (_propertyValue)
+									: _propertyValue
+							)
+						);
+					}
+				);
+				return _Uize_toString.call (this) + '\n\n' + _propertiesLines.sort ().join ('\n');
+			}
+
+			function _valueOf () {
+				return this [_getPropertyPrivateName (this,'value')];
+				/*?
+					Instance Methods
+						toString Intrinsic Method
+							Returns a string, providing summary info for the instance on which the method is called.
+
+							SYNTAX
+							............................................
+							instanceSummarySTR = myInstance.toString ();
+							............................................
+
+							The string returned by this method provides a summary that includes the instance's class name and the state of its state properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of =Uize.Class= subclasses during debugging and troubleshooting. The =toString Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the =alert= global function.
+
+							EXAMPLE
+							.............................
+							alert (page.children.slider);
+							.............................
+
+							In the above example, if the =page= widget has a =slider= child widget that is an instance of the class =Uize.Widget.Bar.Slider=, then the output of the =alert= statement could look something like...
+
+							EXAMPLE OUTPUT
+							........................................
+							[object Uize.Widget.Bar.Slider]
+
+							built : true
+							busy : inherit
+							busyInherited : false
+							confirm : undefined
+							container : undefined
+							decimalPlacesToDisplay : undefined
+							enabled : inherit
+							enabledInherited : true
+							html : undefined
+							idPrefix : page_slider
+							idPrefixConstruction : concatenated
+							inDrag : false
+							increments : 1
+							inform : undefined
+							insertionMode: undefined
+							localized : undefined
+							maxValidValue : undefined
+							maxValue : 200
+							minValidValue : undefined
+							minValue : 0
+							name : slider
+							nodeMap : undefined
+							orientation : vertical
+							parent : [class MyCompanySite.Page]
+							restTime : 250
+							scaleFunc : [object Function]
+							value : 0
+							valueFunc : [object Function]
+							wired : true
+							........................................
+
+							In certain contexts, providing a reference to a =Uize.Class= subclass instance as a parameter to some method will result in the =valueOf Intrinsic Method= of that instance being invoked in order to coerce it to a simple value. If it is your desire to have the instance summary be used rather than the instance's value, then you should explicitly call the =toString Intrinsic Method=, as follows...
+
+							EXAMPLE
+							........................................................................................
+							Uize.Node.setInnerHtml ('sliderWidgetSummaryForDebug',page.children.slider.toString ());
+							Uize.Node.setInnerHtml ('sliderWidgetCurrentValue',page.children.slider);
+							........................................................................................
+
+							In this example, the =sliderWidgetSummaryForDebug= node will contain the summary info for the instance, while the =sliderWidgetCurrentValue= node will just show the slider widget's current value.
+
+							NOTES
+							- see also the =Uize.toString= static intrinsic method
+
+						valueOf Intrinsic Method
+							Returns the value of the instance's =value= state property.
+
+							SYNTAX
+							.............................................
+							instanceValueANYTYPE = myInstance.valueOf ();
+							.............................................
+
+							The =valueOf Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a value, such as when using an object reference in an expression.
+
+							EXAMPLE
+							..........................................................................
+							var markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
+							..........................................................................
+
+							In the above example, the page widget has a slider child widget that is an instance of the class =Uize.Widget.Bar.Slider= and that lets the user choose a markup percentage between =0= and =100=. In the above expression, the slider widget is being divided by 100. Rather than giving you a hundred *really* tiny slider widgets (not all that useful), JavaScript automatically invokes the =valueOf Intrinsic Method=. The implementation of this instance method in the =Uize.Class= base class results in the slider's current value being returned so that it can then be used in the expression.
+
+							The following three statements are equivalent...
+
+							....................................................................................
+							markedUpPrice = price * (1 + page.children.markupPercentSlider.get ('value') / 100);
+							markedUpPrice = price * (1 + page.children.markupPercentSlider.valueOf () / 100);
+							markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
+							....................................................................................
+
+							In certain contexts, providing a reference to a =Uize.Class= subclass instance as a parameter to some method will result in the =toString Intrinsic Method= of that instance being invoked in order to resolve it to a string value. If it is your desire to have the value used rather than the instance summary, then you should explicitly call the =valueOf Intrinsic Method=, as follows...
+
+							EXAMPLE
+							.....................................................
+							alert (page.children.markupPercentSlider.valueOf ());
+							.....................................................
+
+							In this example, the current value of the =markupPercentSlider= widget will be displayed in the alert dialog, rather than the instance summary. You can also use shortcuts, as follows...
+
+							COERCE TO NUMBER
+							...........................................
+							alert (+page.children.markupPercentSlider);
+							...........................................
+
+							COERCE TO STRING
+							................................................
+							alert (page.children.titleTextInputWidget + '');
+							................................................
+
+							Both of the above examples will cause JavaScript to invoke the =valueOf Intrinsic Method= rather than the =toString Intrinsic Method=, but the first will coerce the value to a number type, while the second will coerce the value to a string type.
+
+							NOTES
+							- compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
+							- see also the =Uize.Class.valueOf= static intrinsic method
+							- if the instance's class does not declare a =value= state property, then this method will return the value of the instance's =value= property, and if the instance has no =value= property, then this method will simply return =undefined=
+
+					Static Methods
+						Uize.Class.valueOf
+							Returns the value of the class' =value= state property.
+
+							SYNTAX
+							.......................................
+							classValueANYTYPE = MyClass.valueOf ();
+							.......................................
+
+							The =Uize.Class.valueOf= static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. =Uize.Widget.Bar.Slider + 0=). This static method is implemented primarily to provide parity with the =valueOf Intrinsic Method=. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the =value= state property.
+
+							NOTES
+							- compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
+							- see also the =valueOf Intrinsic Method=
+							- if the class does not declare a =value= state property, then this method will return the value of the class' =value= property, and if the class has no =value= property, then this method will simply return =undefined=
+				*/
+			}
+
+			var
+				_classPrototype = _class.prototype,
+				_subclass = _Uize.noNew (
+					function () {
+						for (
+							var _alphastructorNo = -1, _alphastructorsLength = _alphastructors.length;
+							++_alphastructorNo < _alphastructorsLength;
+						)
+							_alphastructors [_alphastructorNo].apply (this,arguments)
+						;
+						for (
+							var _omegastructorNo = -1, _omegastructorsLength = _omegastructors.length;
+							++_omegastructorNo < _omegastructorsLength;
+						)
+							_omegastructors [_omegastructorNo].apply (this,arguments)
+						;
+					}
+				),
+				_subclassPrototype = _subclass.prototype
 			;
+
+			/*** Inherit static properties (excluding prototype) and methods from base class ***/
+				var
+					_propertyValue,
+					_nonInheritableStatics = _class.nonInheritableStatics || _sacredEmptyObject,
+					_clone = _Uize.clone
+				;
+				for (var _property in _class)
+					if (
+						!_nonInheritableStatics [_property] &&
+						(_propertyValue = _class [_property]) != _classPrototype &&
+						!(
+							_isFunction (_propertyValue) &&
+							_propertyValue.moduleName &&
+							/[A-Z]/.test (_property.charAt (0))
+						)
+					)
+						_subclass [_property] = _clone (_propertyValue)
+				;
+
+			/*** Prepare instance properties and methods ***/
+				/*** Inherit instance properties and methods from base class (from prototype) ***/
+					_copyInto (_subclassPrototype,_classPrototype);
+
+					/*** Make sure toString and valueOf are copied ***/
+						/* NOTE: in IE, toString and valueOf aren't enumerable properties of the prototype object */
+						_subclassPrototype.toString = _toString;
+						_subclassPrototype.valueOf = _valueOf;
+
+				/*** Non-inherited Public Instance Properties ***/
+					_subclassPrototype.Class = _subclass;
+						/*?
+							Instance Properties
+								Class
+									A reference to the class's constructor.
+
+									You can use this to interrogate an object instance to see if it is of a certain class, as illustrated in the following example...
+
+									EXAMPLE
+									.......................................................
+									if (myInstance.Class == Uize.Widget.Bar.Slider) {
+										// do something for sliders
+									} else if (myInstance.Class == Uize.Widget.Tree.Menu) {
+										// do something for tree menus
+									} else if (myInstance.Class == Uize.Widget.ImageWipe) {
+										// do something for wipes
+									}
+									.......................................................
+
+									The above example is admittedly a little abstract. It is hard to imagine the exact scenario that may come up where some code is handed object instances where their class will not be known. But, when such a case comes up, the =Class= property has got your back.
+						*/
+
+				/*** Non-inherited Public Static Properties ***/
+					_subclass.nonInheritableStatics = {_singletons:1,nonInheritableStatics:1,toString:0,valueOf:0};
+						/*?
+							Static Properties
+								Uize.Class.nonInheritableStatics
+									A lookup object, automatically created for a class, in which you can register the static features (methods or properties) of the class that should *not* be inherited when that class is subclassed.
+
+									Each property of the =Uize.Class.nonInheritableStatics= lookup object represents a single static feature of the class that should not be inherited by subclasses, where the name of each property should be the name of a static feature (excluding the module name), and the value of each property should be a truthy value (such as =true=, =1=, ='foo'=, =[]=, ={}=, etc.). After a class has been created, non-inheritable statics can be registered for that class by assigning properties to the class' =MyClass.nonInheritableStatics= static property, as shown in the example below...
+
+									EXAMPLE
+									...........................................................................
+									var MyClass = Uize.Class.subclass ();
+									MyClass.someUtilityFunction = function () {
+										// do something of great utility
+									};
+									MyClass.nonInheritableStatics.someUtilityFunction = 1;
+
+									MyClassSubclass = MyClass.subclass ();
+									alert (MyClassSubclass.someUtilityFunction); // alerts the text "undefined"
+									...........................................................................
+
+									In the above example, the =MyClass.someUtilityFunction= static method of the class =MyClass= has been registered as a non-inheritable static. This is done by the statement =MyClass.nonInheritableStatics.someUtilityFunction &#61; 1=. Now, when the =MyClassSubclass= class is created by calling the =MyClass.subclass= method, the new subclass that is created does not get the =someUtilityFunction= static feature. Therefore, the =alert= statement displays the text "undefined" in the alert dialog.
+
+									nonInheritableStatics is a Non-inheritable Static
+										When a class is created, the =MyClass.nonInheritableStatics= static property is automatically initialized on that class to a fresh object with the value ={nonInheritableStatics:1}=.
+
+										This initial mapping means that the =MyClass.nonInheritableStatics= static property is, itself, not inheritable by subclasses - subclasses get their own fresh object. So, in our example, when the =MyClassSubclass= subclass is created, its fresh =MyClassSubclass.nonInheritableStatics= property does *not* have an entry for the =someUtilityFunction= static feature, because it does not have that static feature and the contents of the =MyClass.someUtilityFunction= object is not inherited by the =MyClassSubclass= class.
+						*/
+
+					_subclass.superclass = _class;
+						/*?
+							Static Properties
+								Uize.Class.superclass
+									A reference to the class' superclass.
+
+									SYNTAX
+									....................................
+									superclassOBJ = classOBJ.superclass;
+									....................................
+
+									EXAMPLE
+									............................................................................
+									var MyWidgetClass = Uize.Widget.subclass ();
+									alert (MyWidgetClass.superclass == Uize.Widget); // displays the text "true"
+									............................................................................
+						*/
+
+				/*** Non-inherited Public Static Methods ***/
+					_subclass.toString = _toString;
+					_subclass.valueOf = _valueOf;
+
+			/*** Initialize Alphastructors and Omegastructors ***/
+				var
+					_alphastructors = _subclass._alphastructors = (_class._alphastructors || _sacredEmptyArray).concat (),
+					_omegastructors = _subclass._omegastructors = (_class._omegastructors || _sacredEmptyArray).concat ()
+				;
+				_alphastructor && _alphastructors.push (_alphastructor);
+				_omegastructor && _omegastructors.push (_omegastructor);
+
+			_subclass._propertyProfilesByPrivateName || (_subclass._propertyProfilesByPrivateName = {});
+			_subclass._propertyProfilesByPublicName || (_subclass._propertyProfilesByPublicName = {});
+
+			return _subclass;
+		}
 
 		/*** Class Constructor ***/
-			var
-				_class = _createSubclass (
-					function () {},
-					/*** alphastructor ***/
-						function () {
-							/*** Public Instance Properties ***/
-								this.instanceId = _getGuid ();
-									/*?
-										Instance Properties
-											instanceId
-												An automatically generated name, that can be used as a means of identifying the specific instance in other code.
+			var _class = _createSubclass (
+				function () {},
+				/*** alphastructor ***/
+					function () {
+						/*** Public Instance Properties ***/
+							this.instanceId = _Uize.getGuid ();
+								/*?
+									Instance Properties
+										instanceId
+											An automatically generated name, that can be used as a means of identifying the specific instance in other code.
 
-												When designing JavaScript classes, it is sometimes necessary in the class's implementation to set intervals, timeouts, or the event handlers of HTML nodes that make up an instance's user interface, so that they execute methods of the instance. Sometimes this must be done by generating JavaScript code that is to be interpreted. This generated code must, therefore, be able to reference its instance using a global identifier, because the code will be executed in a global context.
+											When designing JavaScript classes, it is sometimes necessary in the class's implementation to set intervals, timeouts, or the event handlers of HTML nodes that make up an instance's user interface, so that they execute methods of the instance. Sometimes this must be done by generating JavaScript code that is to be interpreted. This generated code must, therefore, be able to reference its instance using a global identifier, because the code will be executed in a global context.
 
-												If the constructor of your class uses the automatically generated value of an instance's =instanceId= property to assign a global reference to the instance, with a statement like =window [m.instanceId] &#61; m=, then the =instanceId= property can be used when generating JavaScript code that is to execute methods on the instance. Consider the following example...
+											If the constructor of your class uses the automatically generated value of an instance's =instanceId= property to assign a global reference to the instance, with a statement like =window [m.instanceId] &#61; m=, then the =instanceId= property can be used when generating JavaScript code that is to execute methods on the instance. Consider the following example...
 
-												..................................................................
-												MyClass.prototype.click = function () {
-													// do something when the button is clicked
-												};
+											..................................................................
+											MyClass.prototype.click = function () {
+												// do something when the button is clicked
+											};
 
-												MyClass.prototype.insertButton = function () {
-													document.writeln (
-														'<input ' +
-															'type="button" ' +
-															'onclick="' + this.instanceId + '.click (); return false"' +
-														'/>'
-													);
-												};
-												..................................................................
+											MyClass.prototype.insertButton = function () {
+												document.writeln (
+													'<input ' +
+														'type="button" ' +
+														'onclick="' + this.instanceId + '.click (); return false"' +
+													'/>'
+												);
+											};
+											..................................................................
 
-												In the above example, we see a segment of the implementation for a =Uize.Class= subclass named =MyClass=. The =insertButton= instance method is writing HTML into the document, and the =input= tag that is created has an =onclick= attribute that registers an event handler that will execute the =click= method of that instance when clicked. That's because the global identifier by the name stored in the =instanceId= property is a reference to the instance.
+											In the above example, we see a segment of the implementation for a =Uize.Class= subclass named =MyClass=. The =insertButton= instance method is writing HTML into the document, and the =input= tag that is created has an =onclick= attribute that registers an event handler that will execute the =click= method of that instance when clicked. That's because the global identifier by the name stored in the =instanceId= property is a reference to the instance.
 
-												NOTES
-												- the =instanceId= property's value is guaranteed to be unique for all instances of all =Uize.Class= subclasses in a document, but not across frames in a frameset, or across multiple pages in a Web site
-									*/
-						},
-					/*** omegastructor ***/
-						function (_properties) {
-							/*** Initialize Properties ***/
-								_properties || (_properties = _sacredEmptyObject);
-								var
-									_propertiesForSet = {},
-									_instancePropertyDefaults = this.Class._instancePropertyDefaults,
-									_property,
-									_propertyDefault
+											NOTES
+											- the =instanceId= property's value is guaranteed to be unique for all instances of all =Uize.Class= subclasses in a document, but not across frames in a frameset, or across multiple pages in a Web site
+								*/
+					},
+				/*** omegastructor ***/
+					function (_properties) {
+						/*** Initialize Properties ***/
+							_properties || (_properties = _sacredEmptyObject);
+							var
+								_propertiesForSet = {},
+								_instancePropertyDefaults = this.Class._instancePropertyDefaults,
+								_property,
+								_propertyDefault
+							;
+							for (_property in _instancePropertyDefaults) {
+								if (_property in _properties)
+									_propertiesForSet [_property] = _properties [_property];
+								else if ((_propertyDefault = _instancePropertyDefaults [_property]) !== undefined)
+									_propertiesForSet [_property] = _propertyDefault
 								;
-								for (_property in _instancePropertyDefaults) {
-									if (_property in _properties)
-										_propertiesForSet [_property] = _properties [_property];
-									else if ((_propertyDefault = _instancePropertyDefaults [_property]) !== _undefined)
-										_propertiesForSet [_property] = _propertyDefault
-									;
-								}
-								for (_property in _properties)
-									_property in _propertiesForSet || (_propertiesForSet [_property] = _properties [_property])
-								;
-								this.set (_propertiesForSet);
-						}
-				),
-				_classPrototype = _class.prototype,
-				_classNonInheritableStatics = _class.nonInheritableStatics
-			;
+							}
+							for (_property in _properties)
+								_property in _propertiesForSet || (_propertiesForSet [_property] = _properties [_property])
+							;
+							this.set (_propertiesForSet);
+					}
+			);
+
+			/*** Seed Feature Declaration Methods ***/
+				_class.instanceMethods = _class.instanceProperties = function (_instanceFeatures) {
+					_copyInto (this.prototype,_instanceFeatures);
+					/*?
+						Static Methods
+							Uize.Class.instanceMethods
+								Lets you conveniently declare one or more instance methods, by specifying the methods in an object.
+
+								SYNTAX
+								.............................................
+								MyClass.instanceMethods (instanceMethodsOBJ);
+								.............................................
+
+								EXAMPLE
+								...................................................
+								var MyWidgetClass = Uize.Widget.subclass ();
+
+								MyWidgetClass.instanceMethods ({
+									wireUi:function () {
+										// implementation of wireUi instance method
+									},
+
+									updateUi:function () {
+										// implementation of updateUi instance method
+									}
+								});
+								...................................................
+
+								In the above example, a widget class is being created by subclassing the =Uize.Widget= base class. Then, the =wireUi= and =updateUi= instance methods are being declared for the class by calling the =instanceMethods= method on the class.
+
+								NOTES
+								- this method may be called multiple times for a class to cumulatively define or override features
+								- see the other `feature declaration methods`
+
+							Uize.Class.instanceProperties
+								Lets you conveniently declare one or more instance properties, by specifying the properties and their initial values in an object.
+
+								SYNTAX
+								...................................................
+								MyClass.instanceProperties (instancePropertiesOBJ);
+								...................................................
+
+								EXAMPLE
+								.............................
+								MyClass.instanceProperties ({
+									timeoutMs:2000,
+									retryAttempts:5
+								});
+								.............................
+
+								In the above example, the =Uize.Class.instanceProperties= method is being used to declare the =timeoutMs= and =retryAttempts= instance properties.
+
+								NOTES
+								- compare to the =Uize.Class.stateProperties= static method
+								- this method may be called multiple times for a class to cumulatively define or override features
+								- see the other `feature declaration methods`
+					*/
+				};
+
+				_class.staticMethods = _class.staticProperties = function (_staticFeatures) {
+					_copyInto (this,_staticFeatures);
+					/*?
+						Static Methods
+							Uize.Class.staticMethods
+								Lets you conveniently declare one or more static methods, by specifying the methods in an object.
+
+								SYNTAX
+								.........................................
+								MyClass.staticMethods (staticMethodsOBJ);
+								.........................................
+
+								NOTES
+								- this method may be called multiple times for a class to cumulatively define or override features
+								- see the other `feature declaration methods`
+
+							Uize.Class.staticProperties
+								Lets you conveniently declare one or more static properties, by specifying the properties and their initial values in an object.
+
+								SYNTAX
+								............................................
+								MyClass.staticMethods (staticPropertiesOBJ);
+								............................................
+
+								NOTES
+								- compare to the =Uize.Class.stateProperties= static method
+								- this method may be called multiple times for a class to cumulatively define or override features
+								- see the other `feature declaration methods`
+					*/
+				};
+
+				_class.dualContextMethods = _class.dualContextProperties = function (_dualContextFeatures) {
+					_copyInto (this,_dualContextFeatures);
+					_copyInto (this.prototype,_dualContextFeatures);
+					/*?
+						Static Methods
+							Uize.Class.dualContextMethods
+								Lets you conveniently declare one or more dual context methods, by specifying the methods in an object.
+
+								SYNTAX
+								...................................................
+								MyClass.dualContextMethods (dualContextMethodsOBJ);
+								...................................................
+
+								NOTES
+								- this method may be called multiple times for a class to cumulatively define or override features
+								- see the other `feature declaration methods`
+
+							Uize.Class.dualContextProperties
+								Lets you conveniently declare one or more dual context properties, by specifying the properties and their initial values in an object.
+
+								SYNTAX
+								......................................................
+								MyClass.dualContextMethods (dualContextPropertiesOBJ);
+								......................................................
+
+								NOTES
+								- compare to the =Uize.Class.stateProperties= static method
+								- this method may be called multiple times for a class to cumulatively define or override features
+								- see the other `feature declaration methods`
+					*/
+				};
+
+				_class.declare = function (_featuresByType) {
+					for (var _featureType in _featuresByType)
+						this [_featureType] (_featuresByType [_featureType])
+					;
+					return this;
+					/*?
+						Static Methods
+							Uize.Class.declare
+								Lets you declare one or more features of one or more different feature types for the class.
+
+								SYNTAX
+								....................................
+								MyClass.declare (featuresByTypeOBJ);
+								....................................
+
+								For convenience, the =Uize.Class.declare= method lets you declare features of various types, in the same way as they can be declared when using the variation of the =Uize.Class.subclass= method that supports specifying features in a =featuresByTypeOBJ= object. The =Uize.Class.declare= method lets you declare additional features at any time after first creating a class, using the same semantics as supported by the =Uize.Class.subclass= method.
+
+								EXAMPLE
+								...................................
+								MyClass.declare ({
+									alphastructor:function () {
+										// implementation here
+									},
+									omegastructor:function () {
+										// implementation here
+									},
+									staticMethods:{
+										staticMethod1:function () {
+											// implementation here
+										},
+										staticMethod2:function () {
+											// implementation here
+										}
+									},
+									instanceMethods:{
+										instanceMethod1:function () {
+											// implementation here
+										},
+										instanceMethod2:function () {
+											// implementation here
+										}
+									},
+									stateProperties:{
+										stateProperty1:{
+											// property profile
+										},
+										stateProperty2:{
+											// property profile
+										}
+									}
+								});
+								...................................
+
+								NOTES
+								- see the other `feature declaration methods`
+					*/
+				};
 
 		/*** Property System Support Code ***/
 			function _getPropertyProfile (m,_propertyPublicOrPrivateName) {
@@ -461,478 +926,134 @@ Uize.module ({
 				return _propertyProfile ? _propertyProfile._privateName : _propertyPublicOrPrivateName;
 			}
 
-		/*** Private Instance-Static Methods ***/
-			/*** Event System Methods ***/
-				_class._abstractEventName = _classPrototype._abstractEventName = function (_eventName,_managementFunction) {
-					if (_eventName.charCodeAt (0) == 67 && !_eventName.indexOf ('Changed.')) {
-						var
-							m = this,
-							_propertyPublicName = _eventName.slice (8),
-							_propertyProfile = _getPropertyProfile (m,_propertyPublicName)
-						;
-						if (_propertyProfile && _propertyPublicName != _propertyProfile._publicName)
-							// use the canonical public name, since a pseudonym could have been specified
-							_eventName = 'Changed.' + (_propertyPublicName = _propertyProfile._publicName)
-						;
-						_managementFunction (_eventName);
-						(m._hasChangedHandlers || (m._hasChangedHandlers = {})) [_propertyPublicName] =
-							m._eventHandlers && m._eventHandlers [_eventName]
-						;
-					} else {
-						_managementFunction (_eventName);
-					}
-				};
-
-		/*** Public Instance-Static Methods ***/
-			/*** Event System Methods ***/
-				_class.wire = _classPrototype.wire = function (_eventNameOrEventsMap,_handler) {
-					var m = this;
-					if (arguments.length == 2) {
-						m._abstractEventName (
-							_eventNameOrEventsMap,
-							function (_eventName) {
-								var _eventHandlers = m._eventHandlers || (m._eventHandlers = {});
-								(_eventHandlers [_eventName] || (_eventHandlers [_eventName] = [])).push (
-									{
-										_eventName:_eventName,
-										_handler:
-											_isFunction (_handler)
-												? _handler
-												: typeof _handler == _typeString
-													? _Function (_handler)
-													: function (_event) {_handler.fire (_event)},
-										_originalHandler:_handler
-									}
-								);
-							}
-						);
-					} else if (_isObject (_eventNameOrEventsMap)) {
-						for (var _eventName in _eventNameOrEventsMap)
-							m.wire (_eventName,_eventNameOrEventsMap [_eventName])
-						;
-					}
-					/*?
-						Instance Methods
-							wire
-								Lets you wire a handler for a specific instance event, or handlers for multiple instance events.
-
-								SYNTAX
-								........................................................
-								myInstance.wire (eventNameSTR,eventHandlerSTRorFNorOBJ);
-								........................................................
-
-								Event handlers registered using this method will handle events fired for the instance using the =fire= instance method, and not those events fired using the =Uize.Class.fire= static method. A =Uize.Class= subclass may not provide any instance events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the =eventHandlerSTRorFNorOBJ= parameter may be of string, function, or object type.
-
-								EXAMPLE
-								......................................................................
-								mySlider.wire (
-									'Changed.value',
-									function (event) {Uize.Node.setValue ('valueField',event.newValue)}
-								);
-								......................................................................
-
-								VARIATION
-								.............................................
-								myInstance.wire (eventNamesToHandlersMapOBJ);
-								.............................................
-
-								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =wire= instance method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
-
-								EXAMPLE
-								.............................................................................
-								mySlider.wire ({
-									'Changed.value':
-										function (event) {Uize.Node.setValue ('valueField',event.newValue)},
-									'Changed.maxValue':
-										function (event) {Uize.Node.setValue ('maxValueField',event.newValue)},
-									'Changed.minValue':
-										function (event) {Uize.Node.setValue ('minValueField',event.newValue)}
-								});
-								.............................................................................
-
-								SPECIAL VALUES
-								- the string value ="*"= acts as a wildcard when specified for the =eventNameSTR= parameter, meaning that the specified handler should be executed for all events of the instance
-
-								NOTES
-								- see the related =fire= and =unwire= instance methods
-								- compare to the =Uize.Class.fire=, =Uize.Class.wire=, and =Uize.Class.unwire= static methods
-
-						Static Methods
-							Uize.Class.wire
-								Lets you wire a handler for a static event of the class, or handlers for multiple static events.
-
-								SYNTAX
-								.....................................................
-								MyClass.wire (eventNameSTR,eventHandlerSTRorFNorOBJ);
-								.....................................................
-
-								Event handlers registered using this method will handle events fired for the class using the =Uize.Class.fire= static method, and not those events fired using the =fire= instance method. A =Uize.Class= subclass may not provide any static events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the =eventHandlerSTRorFNorOBJ= parameter may be of string, function, or object type.
-
-								VARIATION
-								..........................................
-								MyClass.wire (eventNamesToHandlersMapOBJ);
-								..........................................
-
-								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =Uize.Class.wire= static method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
-
-								SPECIAL VALUES
-								- the string value ="*"= acts as a wildcard when specified for the =eventNameSTR= parameter, meaning that the specified handler should be executed for all events of the class
-
-								NOTES
-								- see the related =Uize.Class.fire= and =Uize.Class.unwire= static methods
-								- compare to the =fire=, =wire=, and =unwire= instance methods
-
-						Parameters
-							eventHandlerSTRorFNorOBJ
-								All of the instance and static methods for adding and removing event handlers allow handlers to be specified in a number of different ways.
-
-								Function Type Handlers
-									By far the most common type of handler used when wiring event handlers is a function reference.
-
-									A function registered as a handler for an event should expect to receive one parameter, being a reference to the event object that is associated to the event.
-
-								String Type Handlers
-									When a string value is specified for the =eventHandlerSTRorFNorOBJ= parameter, a function object will be constructed from that string for the purpose of handling the event.
-
-									One limitation of this handler type is that, unlike `function type handlers`, a code string specified by the =eventHandlerSTRorFNorOBJ= parameter cannot reference the event object.
-
-								Object Type Handlers
-									When a reference to a =Uize.Class= subclass or an instance of a =Uize.Class= subclass is specified for the =eventHandlerSTRorFNorOBJ= parameter, then the event for which the handler is registered will be fired on that instance or class.
-
-									This facility provides a means for "relaying" instance or class events to another instance or class.
-
-									EXAMPLE
-									.....................................................
-									myWidget.children.someButton.wire ('Click',myWidget);
-									.....................................................
-
-									In the above example, a handler is being registered for the ='Click'= event of a button (an instance of the =Uize.Widget.Button= class) that is a child widget of =myWidget=. By specifying =myWidget= as the handler for the =Click= event, that event will get relayed to =myWidget=. This means that other code can now register handlers on the =Click= event for =myWidget=, and those handlers will handle the =Click= event being relayed from the button widget.
-
-									Object handlers added in this way can be removed by using the =unwire= instance method and the =Uize.Class.unwire= static method, just as with any other type of handler, as in...
-
-									.......................................................
-									myWidget.children.someButton.unwire ('Click',myWidget);
-									.......................................................
-
-								Value for Removing Must Match Value Used for Adding
-									However a handler is specified when wiring an event, that is how it must be specified in order to unwire the event.
-
-									If you specified a function reference as the handler when wiring an event, then you must specify that same, identical function reference in order to unwire that event. If you specified a code string as the handler, then you must specify the exact same code string in order to unwire that event. If you specified a reference to a =Uize.Class= subclass or an instance of a =Uize.Class= subclass as the handler when wiring an event, then you must specify the exact same object reference in order to unwire the event.
-
-							eventNamesToHandlersMapOBJ
-								An object, specifying handlers for multiple events using event-name-to-handler mappings, where the key of each property is an event name and the value of each property is an event's corresponding handler.
-
-								The contents of this object should be of the form...
-
-								........................................
-								{
-									event1Name:event1HandlerSTRorFNorOBJ,
-									event2Name:event2HandlerSTRorFNorOBJ,
-									...
-									eventNName:eventNHandlerSTRorFNorOBJ
-								}
-								........................................
-
-								The value for each property in this object should conform to the =eventHandlerSTRorFNorOBJ= parameter type.
-
-							### wiringsOBJ ~~ Wirings Object ~~ Wirings Objects
-								.
-					*/
-				};
-
-				_class.fire = _classPrototype.fire = function (_event) {
-					/*	NOTES
-						- this code is deliberately optimized for performance and not code size, since event firing is a mechanism that is heavily utilized. This will explain some patterns here that may seem slightly out of character, with seemingly redundant code or a lack of typical factoring out.
-					*/
-					if (typeof _event != _typeObject) _event = {name:_event};
-					var
-						m = this,
-						_eventHandlers = m._eventHandlers
-					;
-					if (_eventHandlers) {
-						var
-							_handlersForThisEvent = _eventHandlers [_event.name],
-							_handlersForAnyEvent = _eventHandlers ['*']
-						;
-						if (_handlersForThisEvent || _handlersForAnyEvent) {
-							_event.source || (_event.source = m);
-							var
-								_handlers = _handlersForAnyEvent && _handlersForThisEvent
-									? _handlersForAnyEvent.concat (_handlersForThisEvent)
-									: _handlersForAnyEvent || _handlersForThisEvent
-								,
-								_totalHandlers = _handlers.length
-							;
-							if (_totalHandlers == 1) {
-								_handlers [0]._handler (_event);
-							} else if (_totalHandlers == 2) {
-								/* NOTE:
-									Since we make a copy of the handlers array in the case of multiple handlers (in order to avoid issues where the handlers array may be modified by the handlers themselves), this optimization for two handlers catches most cases of multiple handlers in a complex application. This avoids copying an array and also the overhead of an iterator.
-								*/
-								var
-									_handler0 = _handlers [0]._handler,
-									_handler1 = _handlers [1]._handler
-								;
-								_handler0 (_event);
-								_handler1 (_event);
-							} else {
-								if (!_handlersForAnyEvent || !_handlersForThisEvent)
-									_handlers = _handlers.concat ()
-								;
-								/* NOTE:
-									When executing multiple handlers, it is necessary to make a copy of the handlers array, since it is possible that one of the handlers might execute code that affects the handlers array (eg. by using the removeHandler method).
-
-									What this means is that when an event is fired, all the handlers registered for that event at the time that it fires will be executed. Event handlers for that event that are removed by one of its handlers will still be executed, and event handlers for that event that are added by one of its handlers will not be executed.
-								*/
-								for (var _handlerNo = -1; ++_handlerNo < _totalHandlers;)
-									_handlers [_handlerNo]._handler (_event)
-								;
-							}
-						}
-					}
-					if (_event.bubble && m.parent && _isInstance (m)) {
-						_event.source || (_event.source = m);
-						m.parent.fire (_event);
-					}
-					return _event;
-					/*?
-						Instance Methods
-							fire
-								Lets you fire an event for an instance of the class.
-
-								SYNTAX
-								..........................................
-								eventOBJ = myInstance.fire (eventNameSTR);
-								..........................................
-
-								VARIATION
-								......................................
-								eventOBJ = myInstance.fire (eventOBJ);
-								......................................
-
-								When an object is specified instead of a string value, then extra event properties can be bundled with the event and will then be available to all handlers that are executed. When using this form, the =eventOBJ= object must have a =name= property that specifies the name of the event being fired.
-
-								NOTES
-								- see the related =wire= and =unwire= instance methods
-								- compare to the =Uize.Class.fire=, =Uize.Class.wire=, and =Uize.Class.unwire= static methods
-
-						Static Methods
-							Uize.Class.fire
-								Lets you fire a static event for the class.
-
-								SYNTAX
-								.......................................
-								eventOBJ = MyClass.fire (eventNameSTR);
-								.......................................
-
-								VARIATION
-								........................
-								MyClass.fire (eventOBJ);
-								........................
-
-								When an object is specified instead of a string value, then extra event properties can be bundled with the event and will then be available to all handlers that are executed. When using this form, the =eventOBJ= object must have a =name= property that specifies the name of the event being fired.
-
-								NOTES
-								- see the related =Uize.Class.wire= and =Uize.Class.unwire= static methods
-								- compare to the =fire=, =wire=, and =unwire= instance methods
-					*/
-				};
-
-				_class.unwire = _classPrototype.unwire = function (_eventNameOrEventsMap,_handler) {
-					var
-						m = this,
-						_eventHandlers = m._eventHandlers
-					;
-					if (_eventHandlers) {
-						if (_isObject (_eventNameOrEventsMap)) {
-							for (var _eventName in _eventNameOrEventsMap)
-								m.unwire (_eventName,_eventNameOrEventsMap [_eventName])
-							;
-						} else {
-							m._abstractEventName (
-								_eventNameOrEventsMap,
-								function (_eventName) {
-									var _handlersForEventName = _eventHandlers [_eventName];
-									if (_handlersForEventName) {
-										if (_handler) {
-											/* TO DO:
-												this is a candidate for factoring out as a generally useful array manipulation method: removeAllOfValue
-											*/
-											for (var _handlerNo = _handlersForEventName.length; --_handlerNo >= 0;)
-												_handlersForEventName [_handlerNo]._originalHandler == _handler && _handlersForEventName.splice (_handlerNo,1)
-											;
-										}
-										(_handler && _handlersForEventName.length) || delete _eventHandlers [_eventName];
-									}
-								}
-							);
-						}
-					}
-					/*?
-						Instance Methods
-							unwire
-								Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.
-
-								SYNTAX
-								..........................................................
-								myInstance.unwire (eventNameSTR,eventHandlerSTRorFNorOBJ);
-								..........................................................
-
-								VARIATION 1
-								.................................
-								myInstance.unwire (eventNameSTR);
-								.................................
-
-								When no =eventHandlerSTRorFNorOBJ= parameter is specified, then all handlers registered for the event specified in the =eventNameSTR= parameter will be removed.
-
-								VARIATION 2
-								...............................................
-								myInstance.unwire (eventNamesToHandlersMapOBJ);
-								...............................................
-
-								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =unwire= instance method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
-
-								NOTES
-								- see the related =fire= and =wire= instance methods
-								- compare to the =Uize.Class.fire=, =Uize.Class.wire=, and =Uize.Class.unwire= static methods
-
-						Static Methods
-							Uize.Class.unwire
-								Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.
-
-								SYNTAX
-								.......................................................
-								MyClass.unwire (eventNameSTR,eventHandlerSTRorFNorOBJ);
-								.......................................................
-
-								VARIATION 1
-								..............................
-								MyClass.unwire (eventNameSTR);
-								..............................
-
-								When no =eventHandlerSTRorFNorOBJ= parameter is specified, then all handlers registered for the event specified in the =eventNameSTR= parameter will be removed.
-
-								VARIATION 2
-								............................................
-								MyClass.unwire (eventNamesToHandlersMapOBJ);
-								............................................
-
-								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =Uize.Class.unwire= static method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
-
-								NOTES
-								- see the related =Uize.Class.fire= and =Uize.Class.wire= static methods
-								- compare to the =fire=, =wire=, and =unwire= instance methods
-					*/
-				};
-
-				var _derivationCache = {};
-				function _resolveDerivation (_derivation) {
-					/* NOTE: this code will eventually be used also for derived properties */
-					var
-						_derivationCacheKey = _derivation + '',
-						_resolvedDerivation = _derivationCache [_derivationCacheKey]
-					;
-					function _getDeterminantsFromListStr (_determinantsStr) {
-						return _determinantsStr.replace (/\s+/g,'').split (',');
-					}
-					if (!_resolvedDerivation) {
-						var
-							_determinants,
-							_determiner
-						;
-						if (_isFunction (_derivation)) {
-							_determinants = _getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]);
-							_determiner = _derivation;
-						} else {
-							if (typeof _derivation == 'string') {
-								var _separatorPos = _derivation.indexOf (':');
-								if (_separatorPos > -1) {
-									_determiner = _Function (
-										_determinants = _getDeterminantsFromListStr (_derivation.slice (0,_separatorPos)),
-										'return ' + _derivation.slice (_separatorPos + 1)
-									);
-								} else {
-									_derivation = _getDeterminantsFromListStr (_derivation);
-								}
-							}
-							if (_isArray (_derivation)) {
-								_determinants = [];
-								if (_derivation.length) {
-									var
-										_determinerArgs = [],
-										_determinerOperands = []
-									;
-									_forEach (
-										_derivation,
-										function (_determinant,_determinantNo) {
-											var
-												_inverted = _determinant.charCodeAt (0) == 33,
-												_argName = 'a' + _determinantNo
-											;
-											_determinants.push (_inverted ? _determinant.slice (1) : _determinant);
-											_determinerArgs.push (_argName);
-											_determinerOperands.push ((_inverted ? '!' : '') + _argName);
-										}
-									);
-									_determiner = _Function (_determinerArgs,'return ' + _determinerOperands.join (' && '));
-								} else {
-									_determiner = _Uize.returnTrue;
-								}
-							}
-						}
-						_resolvedDerivation = _derivationCache [_derivationCacheKey] = {
-							_determinants:_determinants,
-							_determinantsValuesHarvester:_Function (
-								'return [' + _map (_determinants,'"this.get(\'" + value + "\')"').join (',') + ']'
-							),
-							_determiner:_determiner,
-							_changedEventNames:_map (_determinants,'"Changed." + value')
-						};
-					}
-					return _resolvedDerivation;
+			function _resolveDerivation (_derivation) {
+				/* NOTE: this code will eventually be used also for derived properties */
+				var
+					_derivationCacheKey = _derivation + '',
+					_resolvedDerivation = _derivationCache [_derivationCacheKey]
+				;
+				function _getDeterminantsFromListStr (_determinantsStr) {
+					return _determinantsStr.replace (/\s+/g,'').split (',');
 				}
-
-				_classPrototype._onChange = function (_derivation,_handler,_mode) {
+				if (!_resolvedDerivation) {
 					var
-						m = this,
-						_isOnceMode = _mode == _constOnChangeModeOnce,
-						_isWheneverMode = _mode == _constOnChangeModeWhenever,
-						_derivation = _resolveDerivation (_derivation),
-						_determinantsValuesHarvester = _derivation._determinantsValuesHarvester,
-						_determiner = _derivation._determiner,
-						_isFirstCall = true,
-						_lastDerivedValue,
-						_wirings
+						_determinants,
+						_determiner
 					;
-					function _checkDerivedValue () {
-						var
-							_determinantsValues = _determinantsValuesHarvester.call (m),
-							_derivedValue = _determiner.apply (m,_determinantsValues)
-						;
-						if (_isOnceMode || _isWheneverMode)
-							_derivedValue = !!_derivedValue
-						;
-						if (_isFirstCall || _derivedValue !== _lastDerivedValue) {
-							_isFirstCall = false;
-							_isOnceMode && _derivedValue && _wirings && m.unwire (_wirings);
-							_isOnceMode || _isWheneverMode
-								? _derivedValue && (_isOnceMode || !_derivedValue != !_lastDerivedValue) &&
-									_handler.apply (0,_determinantsValues)
-								: _handler.call (0,_derivedValue,_determinantsValues)
-							;
-							_lastDerivedValue = _derivedValue;
+					if (_isFunction (_derivation)) {
+						_determinants = _getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]);
+						_determiner = _derivation;
+					} else {
+						if (typeof _derivation == 'string') {
+							var _separatorPos = _derivation.indexOf (':');
+							if (_separatorPos > -1) {
+								_determiner = _Function (
+									_determinants = _getDeterminantsFromListStr (_derivation.slice (0,_separatorPos)),
+									'return ' + _derivation.slice (_separatorPos + 1)
+								);
+							} else {
+								_derivation = _getDeterminantsFromListStr (_derivation);
+							}
+						}
+						if (_isArray (_derivation)) {
+							_determinants = [];
+							if (_derivation.length) {
+								var
+									_determinerArgs = [],
+									_determinerOperands = []
+								;
+								_forEach (
+									_derivation,
+									function (_determinant,_determinantNo) {
+										var
+											_inverted = _determinant.charCodeAt (0) == 33,
+											_argName = 'a' + _determinantNo
+										;
+										_determinants.push (_inverted ? _determinant.slice (1) : _determinant);
+										_determinerArgs.push (_argName);
+										_determinerOperands.push ((_inverted ? '!' : '') + _argName);
+									}
+								);
+								_determiner = _Function (_determinerArgs,'return ' + _determinerOperands.join (' && '));
+							} else {
+								_determiner = _Uize.returnTrue;
+							}
 						}
 					}
-					_checkDerivedValue ();
-					_isOnceMode && _lastDerivedValue
-						? (_wirings = {})
-						: m.wire (_wirings = _lookup (_derivation._changedEventNames,_checkDerivedValue))
-					;
-					return _wirings;
-				};
+					_resolvedDerivation = _derivationCache [_derivationCacheKey] = {
+						_determinants:_determinants,
+						_determinantsValuesHarvester:_Function (
+							'return [' + _map (_determinants,'"this.get(\'" + value + "\')"').join (',') + ']'
+						),
+						_determiner:_determiner,
+						_changedEventNames:_map (_determinants,'"Changed." + value')
+					};
+				}
+				return _resolvedDerivation;
+			}
 
-				_classPrototype.onChange = function (_derivation,_handler) {
-					return this._onChange (_derivation,_handler);
+			function _onChange (m,_derivation,_handler,_mode) {
+				var
+					_isOnceMode = _mode == _constOnChangeModeOnce,
+					_isWheneverMode = _mode == _constOnChangeModeWhenever,
+					_derivation = _resolveDerivation (_derivation),
+					_determinantsValuesHarvester = _derivation._determinantsValuesHarvester,
+					_determiner = _derivation._determiner,
+					_isFirstCall = true,
+					_lastDerivedValue,
+					_wirings
+				;
+				function _checkDerivedValue () {
+					var
+						_determinantsValues = _determinantsValuesHarvester.call (m),
+						_derivedValue = _determiner.apply (m,_determinantsValues)
+					;
+					if (_isOnceMode || _isWheneverMode)
+						_derivedValue = !!_derivedValue
+					;
+					if (_isFirstCall || _derivedValue !== _lastDerivedValue) {
+						_isFirstCall = false;
+						_isOnceMode && _derivedValue && _wirings && m.unwire (_wirings);
+						_isOnceMode || _isWheneverMode
+							? _derivedValue && (_isOnceMode || !_derivedValue != !_lastDerivedValue) &&
+								_handler.apply (0,_determinantsValues)
+							: _handler.call (0,_derivedValue,_determinantsValues)
+						;
+						_lastDerivedValue = _derivedValue;
+					}
+				}
+				_checkDerivedValue ();
+				_isOnceMode && _lastDerivedValue
+					? (_wirings = {})
+					: m.wire (_wirings = _lookup (_derivation._changedEventNames,_checkDerivedValue))
+				;
+				return _wirings;
+			}
+
+		/*** Event System Support Code ***/
+			function _abstractEventName (m,_eventName,_managementFunction) {
+				if (_eventName.charCodeAt (0) == 67 && !_eventName.indexOf ('Changed.')) {
+					var
+						_propertyPublicName = _eventName.slice (8),
+						_propertyProfile = _getPropertyProfile (m,_propertyPublicName)
+					;
+					if (_propertyProfile && _propertyPublicName != _propertyProfile._publicName)
+						// use the canonical public name, since a pseudonym could have been specified
+						_eventName = 'Changed.' + (_propertyPublicName = _propertyProfile._publicName)
+					;
+					_managementFunction (_eventName);
+					(m._hasChangedHandlers || (m._hasChangedHandlers = {})) [_propertyPublicName] =
+						m._eventHandlers && m._eventHandlers [_eventName]
+					;
+				} else {
+					_managementFunction (_eventName);
+				}
+			}
+
+		return _class.declare ({
+			instanceMethods:{
+				onChange:function (_derivation,_handler) {
+					return _onChange (this,_derivation,_handler);
 					/*?
 						Instance Methods
 							onChange
@@ -1002,10 +1123,10 @@ Uize.module ({
 								NOTES
 								- compare to the related =once= and =whenever= instance methods
 					*/
-				};
+				},
 
-				_classPrototype.once = function (_condition,_handler) {
-					return this._onChange (_condition,_handler,_constOnChangeModeOnce);
+				once:function (_condition,_handler) {
+					return _onChange (this,_condition,_handler,_constOnChangeModeOnce);
 					/*?
 						Instance Methods
 							once
@@ -1073,10 +1194,10 @@ Uize.module ({
 								- compare to the related =whenever= instance method
 								- see the other `condition system methods`
 					*/
-				};
+				},
 
-				_classPrototype.whenever = function (_condition,_handler) {
-					return this._onChange (_condition,_handler,_constOnChangeModeWhenever);
+				whenever:function (_condition,_handler) {
+					return _onChange (this,_condition,_handler,_constOnChangeModeWhenever);
 					/*?
 						Instance Methods
 							whenever
@@ -1144,9 +1265,9 @@ Uize.module ({
 								- compare to the related =once= instance method
 								- see the other `condition system methods`
 					*/
-				};
+				},
 
-				_classPrototype.is = function (_property) {
+				is:function (_property) {
 					return !!this [_getPropertyPrivateName (this,_property)];
 					/*?
 						Instance Methods
@@ -1172,9 +1293,68 @@ Uize.module ({
 								NOTES
 								- see the other `condition system methods`
 					*/
-				};
+				},
 
-				_classPrototype.met = function (_propertyOrProperties) {
+				isMet:function (_condition) {
+					var _derivation = _resolveDerivation (_condition);
+					return _derivation._determiner.apply (this,_derivation._determinantsValuesHarvester.call (this));
+					/*?
+						Instance Methods
+							isMet
+								Returns a boolean, indicating whether or not the specified condition is met.
+
+								DIFFERENT USAGES
+
+								`Test if a State Property is Truthy or Falsy`
+								....................................................
+								isMetBOOL = myInstance.isMet (propertyConditionSTR);
+								....................................................
+
+								`Test if Multiple State Properties Are Truthy or Falsy`
+								.............................................................
+								isMetBOOL = myInstance.isMet (propertiesConditionARRAYorSTR);
+								.............................................................
+
+								`Test if a Compound Condition is Met`
+								..........................................................
+								isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
+								..........................................................
+
+								Test if a State Property is Truthy or Falsy
+									In its most basic usage, the =isMet= method can be used to test if a single state property becomes truthy or falsy.
+
+									SYNTAX
+									....................................................
+									isMetBOOL = myInstance.isMet (propertyConditionSTR);
+									....................................................
+
+								Test if Multiple State Properties Are Truthy or Falsy
+									One can test if all properties in a set of state properties are truthy or falsy, by specifying the state properties as an array of property names or as a comma-separated list string.
+
+									SYNTAX
+									.............................................................
+									isMetBOOL = myInstance.isMet (propertiesConditionARRAYorSTR);
+									.............................................................
+
+								Test if a Compound Condition is Met
+									One can test if a compound condition has been met, by specifying the compound condition in the form of a condition function or condition expression string.
+
+									SYNTAX
+									..........................................................
+									isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
+									..........................................................
+
+								For More Information
+									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
+
+									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods.
+
+								NOTES
+								- see the other `condition system methods`
+					*/
+				},
+
+				met:function (_propertyOrProperties) {
 					this.set (_propertyOrProperties,true);
 					/*?
 						Instance Methods
@@ -1247,9 +1427,9 @@ Uize.module ({
 								- see the companion =unmet= instance method
 								- see the other `condition system methods`
 					*/
-				};
+				},
 
-				_classPrototype.unmet = function (_propertyOrProperties) {
+				unmet:function (_propertyOrProperties) {
 					this.set (_propertyOrProperties,false);
 					/*?
 						Instance Methods
@@ -1313,69 +1493,467 @@ Uize.module ({
 								- see the companion =met= instance method
 								- see the other `condition system methods`
 					*/
-				};
+				},
 
-				_classPrototype.isMet = function (_condition) {
-					var _derivation = _resolveDerivation (_condition);
-					return _derivation._determiner.apply (this,_derivation._determinantsValuesHarvester.call (this));
+				kill:function () {
+					var _instanceId = this.instanceId;
+					_Uize.eval ('if(typeof ' + _instanceId + '!=\'undefined\')' + _instanceId + '=null');
 					/*?
 						Instance Methods
-							isMet
-								Returns a boolean, indicating whether or not the specified condition is met.
+							kill
+								Nulls out the global variable (or property of the =window= object) of the name =instanceId=.
+
+								This method may be useful if global (or window object level) references are made to instances of a class, usually for the purpose of group management, or the implementation of certain kinds of state exclusivity amongst instances of a class. This method is also intended to be overridden by subclasses where additional destructor style code may be desired.
+					*/
+				}
+			},
+
+			staticMethods:{
+				subclass:function (_arg0,_arg1) {
+					return (
+						arguments.length == 1 && !_isFunction (_arg0)
+							? _createSubclass (this).declare (_arg0)
+							: _createSubclass (this,_arg0,_arg1)
+					);
+					/*?
+						Static Methods
+							Uize.Class.subclass
+								Lets you subclass the =Uize.Class= base class or any subclass of =Uize.Class=.
 
 								DIFFERENT USAGES
 
-								`Test if a State Property is Truthy or Falsy`
-								....................................................
-								isMetBOOL = myInstance.isMet (propertyConditionSTR);
-								....................................................
+								`Create a Subclass, Declaring Multiple Features by Type`
+								..................................................
+								MyClass = Uize.Class.subclass (featuresByTypeOBJ);
+								..................................................
 
-								`Test if Multiple State Properties Are Truthy or Falsy`
-								.............................................................
-								isMetBOOL = myInstance.isMet (propertiesConditionARRAYorSTR);
-								.............................................................
+								`Create a Subclass, Specifying Only an Alphastructor`
+								..................................................
+								MyClass = Uize.Class.subclass (alphastructorFUNC);
+								..................................................
 
-								`Test if a Compound Condition is Met`
-								..........................................................
-								isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
-								..........................................................
+								`Create a Subclass, Specifying Both Alphastructor and Omegastructor`
+								....................................................................
+								MyClass = Uize.Class.subclass (alphastructorFUNC,omegastructorFUNC);
+								....................................................................
 
-								Test if a State Property is Truthy or Falsy
-									In its most basic usage, the =isMet= method can be used to test if a single state property becomes truthy or falsy.
+								`Create a Subclass, Specifying Only an Omegastructor`
+								............................................................
+								MyClass = Uize.Class.subclass (null,omegastructorFUNC);
+								MyClass = Uize.Class.subclass (undefined,omegastructorFUNC);
+								............................................................
 
-									SYNTAX
-									....................................................
-									isMetBOOL = myInstance.isMet (propertyConditionSTR);
-									....................................................
-
-								Test if Multiple State Properties Are Truthy or Falsy
-									One can test if all properties in a set of state properties are truthy or falsy, by specifying the state properties as an array of property names or as a comma-separated list string.
+								Create a Subclass, Declaring Multiple Features by Type
+									As a convenience, the =Uize.Class.subclass= method supports a variation that takes a single object parameter, as a means of declaring features by type when creating a class.
 
 									SYNTAX
-									.............................................................
-									isMetBOOL = myInstance.isMet (propertiesConditionARRAYorSTR);
-									.............................................................
+									..................................................
+									MyClass = Uize.Class.subclass (featuresByTypeOBJ);
+									..................................................
 
-								Test if a Compound Condition is Met
-									One can test if a compound condition has been met, by specifying the compound condition in the form of a condition function or condition expression string.
+									Using this variation, one or more features of various different `feature types` can be conveniently declared during the subclass creation. When using this variation, setting the alphastructor and/or omegastructor for the class being created must be done by specifying values for the =alphastructor= and/or =omegastructor= properties of the =featuresByTypeOBJ= object.
+
+									EXAMPLE
+									....................................
+									var MySubclass = MyClass.subclass ({
+										alphastructor:function () {
+											// implementation here
+										},
+										omegastructor:function () {
+											// implementation here
+										},
+										staticMethods:{
+											staticMethod1:function () {
+												// implementation here
+											},
+											staticMethod2:function () {
+												// implementation here
+											}
+										},
+										instanceMethods:{
+											instanceMethod1:function () {
+												// implementation here
+											},
+											instanceMethod2:function () {
+												// implementation here
+											}
+										},
+										stateProperties:{
+											stateProperty1:{
+												// property profile
+											},
+											stateProperty2:{
+												// property profile
+											}
+										}
+									});
+									....................................
+
+								Create a Subclass, Specifying Only an Alphastructor
+									A subclass can be created with just an `alphastructor` set, by specifying just a single =alphastructorFUNC= function type parameter.
 
 									SYNTAX
-									..........................................................
-									isMetBOOL = myInstance.isMet (compoundConditionSTRorFUNC);
-									..........................................................
+									..................................................
+									MyClass = Uize.Class.subclass (alphastructorFUNC);
+									..................................................
 
-								For More Information
-									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
+									Consider the following example...
 
-									For more information, consult the section on the `condition system`. In particular, see the in-depth section on `specifying conditions`, which covers the common way in which conditions can be specified when using the =isMet=, =once=, and =whenever= instance methods.
+									EXAMPLE
+									.......................................
+									var MyClass = Uize.Class.subclass (
+										function () {
+											this.foo = 'How unoriginal!';
+										}
+									);
+
+									var MySubclass = MyClass.subclass (
+										function () {
+											this.bar = this.foo + ' Indeed!';
+										}
+									);
+									.......................................
+
+									In the above example, =MySubclass= is a subclass of =MyClass=, which is in turn a subclass of the =Uize.Class= base class. Now, when an instance of =MySubSubclass= gets created, the constructor of =MyClass= and then the constructor of =MySubSubclass= will be executed in the initialization of the instance, and the instance will have both =foo= and =bar= properties, where the =bar= property will have a value of "How unoriginal! Indeed!".
+
+								Create a Subclass, Specifying Both Alphastructor and Omegastructor
+									A subclass can be created with both an `alphastructor` and an `omegastructor` set, by specifying the =alphastructorFUNC= and =omegastructorFUNC= function type parameters.
+
+									SYNTAX
+									....................................................................
+									MyClass = Uize.Class.subclass (alphastructorFUNC,omegastructorFUNC);
+									....................................................................
+
+								Create a Subclass, Specifying Only an Omegastructor
+									A subclass can be created with just an `omegastructor` set, by specifying the =alphastructorFUNC= and =omegastructorFUNC= parameters and specifying the value =null= or =undefined= for the =alphastructorFUNC= parameter.
+
+									SYNTAX
+									............................................................
+									MyClass = Uize.Class.subclass (null,omegastructorFUNC);
+									MyClass = Uize.Class.subclass (undefined,omegastructorFUNC);
+									............................................................
+					*/
+				},
+
+				alphastructor:function (_alphastructor) {
+					this._alphastructors.push (_alphastructor);
+					/*?
+						Static Methods
+							Uize.Class.alphastructor
+								Lets you declare the alphastructor for the class.
+
+								SYNTAX
+								..........................................
+								MyClass.alphastructor (alphastructorFUNC);
+								..........................................
 
 								NOTES
-								- see the other `condition system methods`
+								- see the other `feature declaration methods`
 					*/
-				};
+				},
 
-			/*** State Property System Methods ***/
-				_class.get = _classPrototype.get = function (_property) {
+				omegastructor:function (_omegastructor) {
+					this._omegastructors.push (_omegastructor);
+					/*?
+						Static Methods
+							Uize.Class.omegastructor
+								Lets you declare the omegastructor for the class.
+
+								SYNTAX
+								..........................................
+								MyClass.omegastructor (omegastructorFUNC);
+								..........................................
+
+								NOTES
+								- see the other `feature declaration methods`
+					*/
+				},
+
+				stateProperties:function (_propertyProfiles) {
+					var
+						m = this,
+						_propertyProfilesByPrivateName = m._propertyProfilesByPrivateName,
+						_propertyProfilesByPublicName = m._propertyProfilesByPublicName,
+						_declaredDerivedProperties
+					;
+					for (var _propertyPrivateName in _propertyProfiles) {
+						var
+							_rawPropertyProfile = _propertyProfiles [_propertyPrivateName],
+							_rawPropertyProfileIsObject = _isObject (_rawPropertyProfile),
+							_propertyPublicName =
+								(_rawPropertyProfileIsObject ? _rawPropertyProfile.name : _rawPropertyProfile) ||
+								_propertyPrivateName,
+							_propertyPrimaryPublicName = _propertyPublicName,
+							_propertyProfile =
+								_propertyProfilesByPublicName [_propertyPrivateName] ||
+								_propertyProfilesByPrivateName [_propertyPrivateName]
+						;
+						if (!_propertyProfile) {
+							_propertyProfile =
+								_propertyProfilesByPrivateName [_propertyPrivateName] = {_privateName:_propertyPrivateName}
+							;
+							if (_propertyPublicName.indexOf ('|') > -1) {
+								var _pseudonyms = _propertyPublicName.split ('|');
+								_propertyPrimaryPublicName = _pseudonyms [0];
+								_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicName);
+							} else {
+								_propertyProfilesByPublicName [_propertyPublicName] = _propertyProfile;
+							}
+							_propertyProfile._publicName = _propertyPrimaryPublicName;
+						}
+						if (_rawPropertyProfileIsObject) {
+							if (_rawPropertyProfile.onChange) _propertyProfile._onChange = _rawPropertyProfile.onChange;
+							if (_rawPropertyProfile.conformer) _propertyProfile._conformer = _rawPropertyProfile.conformer;
+							if (_rawPropertyProfile.derived) {
+								_declaredDerivedProperties = true;
+								var _derivation = _resolveDerivation (_rawPropertyProfile.derived);
+								_derivation._determinantsChanged = new _Function (
+									'o',
+									'return ' + _map (_derivation._determinants,"'\"' + value + '\" in o'").join (' || ')
+								);
+								_propertyProfile._derivation = _derivation;
+							}
+							if ('value' in _rawPropertyProfile)
+								m [_propertyPrivateName] = _rawPropertyProfile.value
+							;
+						}
+					}
+					var _instancePropertyDefaults = m.get ();
+					m._instancePropertyDefaults = _instancePropertyDefaults;
+					if (_declaredDerivedProperties) {
+						var
+							_derivedProperties = [],
+							_nonDerivedProperties = []
+						;
+						for (var _propertyPublicName in _instancePropertyDefaults) {
+							var _propertyProfile = _propertyProfilesByPublicName [_propertyPublicName];
+							(_propertyProfile._derivation ? _derivedProperties : _nonDerivedProperties).push (
+								_propertyPublicName
+							);
+						}
+						m._derivedProperties = _traceDependencies (
+							_derivedProperties,
+							function (_derivedProperty) {
+								return _propertyProfilesByPublicName [_derivedProperty]._derivation._determinants;
+							},
+							_nonDerivedProperties
+						);
+					}
+					/*?
+						Static Methods
+							Uize.Class.stateProperties
+								Lets you declare one or more state properties for instances of the class.
+
+								SYNTAX
+								..................................................
+								MyClass.stateProperties (propertiesDefinitionOBJ);
+								..................................................
+
+								The object specified in =propertiesDefinitionOBJ= parameter must conform to a specific structure. Each property of this object represents a property to be declared for the class, where the property name specifies the internal name to be used for the class property and the property's string value specifies the class property's public name. As an alternative to a string value, the property's value can be an object whose =name= property specifies the class property's public name and where an optional =onChange= property specifies a handler function that should be executed every time the value of the class property changes. This is all best illustrated with an example...
+
+								EXAMPLE
+								...........................................................................
+								MyClass.stateProperties (
+									{
+										_propertylName:'property1Name',
+										_property2Name:'property2Name',
+										_property3Name:{
+											name:'property3Name',
+											onChange:function () {
+												// code to be performed when the value of this property changes
+											}
+										}
+									}
+								);
+								...........................................................................
+
+								NOTES
+								- this method may be called multiple times for a class to cumulatively define or override features
+								- see the other `feature declaration methods`
+
+						Deprecated Features
+							Uize.Class.registerProperties -- DEPRECATED 2013-01-02
+								The =Uize.Class.registerProperties= static method has been deprecated in favor of the newly added =Uize.Class.stateProperties= static method.
+
+								......................................................................
+								Uize.Class.registerProperties >> BECOMES >> Uize.Class.stateProperties
+								......................................................................
+
+								The =Uize.Class.stateProperties= method is essentially just a renaming of the deprecated =Uize.Class.registerProperties= method and behaves in exactly the same way. The new name was chosen to be consistent with documentation that refers to these properties universally as state properties. The new name is also more concise.
+					*/
+				},
+
+				doMy:function (_instance,_methodName,_arguments) {
+					return this.prototype [_methodName].apply (_instance,_arguments || _sacredEmptyArray);
+					/*?
+						Static Methods
+							Uize.Class.doMy
+								Lets you call an instance method of the class on a specified instance.
+
+								DIFFERENT USAGES
+
+								`Call a Class' Instance Method on an Instance, Without Supplying Arguments`
+								.............................................................
+								resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR);
+								.............................................................
+
+								`Call a Class' Instance Method on an Instance, Supplying Arguments`
+								...........................................................................
+								resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR,argumentsLIST);
+								...........................................................................
+
+								Calling a Superclass' Instance Methods
+									The =Uize.Class.doMy= method is most useful when calling a superclass' version of an instance method on an instance, and produces a more concise and readable form than the typical approach.
+
+									INSTEAD OF...
+									.............................................
+									_superclass.prototype.someMethod.call (this);
+									.............................................
+
+									USE...
+									.....................................
+									_superclass.doMy (this,'someMethod');
+									.....................................
+
+									The =Uize.Class.doMy= method also supports calling a superclass' instance methods with arguments, as follows...
+
+									INSTEAD OF...
+									...................................................................
+									_superclass.prototype.someMethod.apply (this,[arg1,arg2,...,argN]);
+									...................................................................
+
+									USE...
+									..........................................................
+									_superclass.doMy (this,'someMethod',[arg1,arg2,...,argN]);
+									..........................................................
+
+									As you can tell from the above before-and-after examples, using the =Uize.Class.doMy= method produces code that is both a bit more concise as well as mentally easier to parse.
+
+								Call a Class' Instance Method on an Instance, Without Supplying Arguments
+									In its most simple form, a class' instance method can be called on an instance, without supplying arguments, by specifying just the instance reference and the instance method name as arguments.
+
+									SYNTAX
+									.............................................................
+									resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR);
+									.............................................................
+
+									EXAMPLE
+									...........................................................
+									return _superclass.subclass ({
+										instanceMethods:{
+											wireUi:function () {
+												if (!this.isWired) {
+													// do some wiring specific to this widget class
+
+													_superclass.doMy (this,'wireUi');
+												}
+											}
+										}
+									});
+									...........................................................
+
+									In the above example, a subclass is being created with an overrided implementation for the =wireUi= instance method. In this method, additional code is being executed (represented by the placeholder comment) before the superclass' version of the =wireUi= method is called on the instance.
+
+								Call a Class' Instance Method on an Instance, Supplying Arguments
+									When an instance method of a class needs to be called with arguments, the arguments can be specified with the optional =argumentsLIST= argument.
+
+									SYNTAX
+									...........................................................................
+									resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR,argumentsLIST);
+									...........................................................................
+
+									EXAMPLE
+									........................................................
+									return _superclass.subclass ({
+										instanceMethods:{
+											someMethod:function (foo,bar,baz,qux) {
+												_superclass.doMy (this,'someMethod',[foo,bar]);
+
+												// now do extra stuff for subclass
+											}
+										}
+									});
+									........................................................
+
+									In the above example, a subclass is being created with an overrided implementation for the superclass' =someMethod= instance method. Now, the superclass' version of =someMethod= supports =foo= and =bar= arguments, while the overrided version also supports the additional =baz= and =qux= arguments. In the overrided implementation, we first call the superclass' version of the method on the instance, passing just the =foo= and =bar= arguments that it supports, after which the additional code in the overrided version is executed (represented by the comment placeholder, and presumably making use of the additional =baz= and =qux= arguments).
+					*/
+				},
+
+				singleton:function (_scope,_properties) {
+					var
+						m = this,
+						_singletons = m._singletons || (m._singletons = {}),
+						_singleton = _singletons [_scope || (_scope = '')]
+					;
+					_singleton
+						? _properties && _singleton.set (_properties)
+						: (_singleton = _singletons [_scope] = m (_properties))
+					;
+					return _singleton;
+					/*?
+						Static Methods
+							Uize.Class.singleton
+								Returns a singleton for the class for the optionally specified scope (default is empty scope).
+
+								DIFFERENT USAGES
+
+								`Get a Singleton for a Class`
+								....................................
+								singletonOBJ = MyClass.singleton ();
+								....................................
+
+								`Get a Singleton for a Class for a Specific Scope`
+								............................................
+								singletonOBJ = MyClass.singleton (scopeSTR);
+								............................................
+
+								`Get a Singleton for a Class for a Specific Scope, Specifying Initial State`
+								..........................................................
+								singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
+								..........................................................
+
+								Get a Singleton for a Class
+									When no parameters are specified, this method will return a singleton for the class in the default scope.
+
+									SYNTAX
+									....................................
+									singletonOBJ = MyClass.singleton ();
+									....................................
+
+									When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the default scope, then that instance will be returned. Otherwise, a singleton instance will be created for the default scope and then returned.
+
+								Get a Singleton for a Class for a Specific Scope
+									When the optional =scopeSTR= parameter is specified, this method will return a singleton for the class in the specified scope.
+
+									SYNTAX
+									............................................
+									singletonOBJ = MyClass.singleton (scopeSTR);
+									............................................
+
+									When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be returned. Otherwise, a singleton instance will be created for the specified scope and then returned.
+
+								Get a Singleton for a Class for a Specific Scope, Specifying Initial State
+									When the optional =propertiesOBJ= parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its state properties set using the =propertiesOBJ= object.
+
+									SYNTAX
+									..........................................................
+									singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
+									..........................................................
+
+									When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be set to the state specified by the =propertiesOBJ= parameter and then returned. Otherwise, a singleton instance will be created for the specified scope, with its state initialized using the =propertiesOBJ= parameter, and then returned.
+
+								Singleton Scope
+									As a convenience, the =Uize.Class.singleton= static method lets you optionally specify a scope when getting singleton instances, using the =scopeSTR= parameter.
+
+									If no =scopeSTR= parameter is specified when getting a singleton for a class, then the default scope (an empty string) will be used. Therefore, the statement =MyClass.singleton ()= is equivalent to the statement =MyClass.singleton ('')=.
+
+									A scope provides multiple different bits of related but distributed code to get a reference to the same singleton by specifying the same scope, while still allowing other code to share references to a different singleton created using a different scope.
+					*/
+				}
+			},
+
+			dualContextMethods:{
+				get:function (_property) {
 					if (typeof _property == _typeString) {
 						/* NOTE:
 							Because the get method gets hit so heavily, optimize it to do as little as possible in the most common use case (where parameter is a string, being the name of the property), so no creation of and assignment to local variables.
@@ -1550,124 +2128,9 @@ Uize.module ({
 								- see also the =Uize.Class.set= static method
 								- see also the =get= and =set= instance methods
 					*/
-				};
+				},
 
-
-				_class.stateProperties = function (_propertyProfiles) {
-					var
-						m = this,
-						_propertyProfilesByPrivateName = m._propertyProfilesByPrivateName,
-						_propertyProfilesByPublicName = m._propertyProfilesByPublicName,
-						_declaredDerivedProperties
-					;
-					for (var _propertyPrivateName in _propertyProfiles) {
-						var
-							_rawPropertyProfile = _propertyProfiles [_propertyPrivateName],
-							_rawPropertyProfileIsObject = _isObject (_rawPropertyProfile),
-							_propertyPublicName =
-								(_rawPropertyProfileIsObject ? _rawPropertyProfile.name : _rawPropertyProfile) ||
-								_propertyPrivateName,
-							_propertyPrimaryPublicName = _propertyPublicName,
-							_propertyProfile =
-								_propertyProfilesByPublicName [_propertyPrivateName] ||
-								_propertyProfilesByPrivateName [_propertyPrivateName]
-						;
-						if (!_propertyProfile) {
-							_propertyProfile =
-								_propertyProfilesByPrivateName [_propertyPrivateName] = {_privateName:_propertyPrivateName}
-							;
-							if (_propertyPublicName.indexOf ('|') > -1) {
-								var _pseudonyms = _propertyPublicName.split ('|');
-								_propertyPrimaryPublicName = _pseudonyms [0];
-								_lookup (_pseudonyms,_propertyProfile,_propertyProfilesByPublicName);
-							} else {
-								_propertyProfilesByPublicName [_propertyPublicName] = _propertyProfile;
-							}
-							_propertyProfile._publicName = _propertyPrimaryPublicName;
-						}
-						if (_rawPropertyProfileIsObject) {
-							if (_rawPropertyProfile.onChange) _propertyProfile._onChange = _rawPropertyProfile.onChange;
-							if (_rawPropertyProfile.conformer) _propertyProfile._conformer = _rawPropertyProfile.conformer;
-							if (_rawPropertyProfile.derived) {
-								_declaredDerivedProperties = true;
-								var _derivation = _resolveDerivation (_rawPropertyProfile.derived);
-								_derivation._determinantsChanged = new _Function (
-									'o',
-									'return ' + _map (_derivation._determinants,"'\"' + value + '\" in o'").join (' || ')
-								);
-								_propertyProfile._derivation = _derivation;
-							}
-							if ('value' in _rawPropertyProfile)
-								m [_propertyPrivateName] = _rawPropertyProfile.value
-							;
-						}
-					}
-					var _instancePropertyDefaults = m.get ();
-					m._instancePropertyDefaults = _instancePropertyDefaults;
-					if (_declaredDerivedProperties) {
-						var
-							_derivedProperties = [],
-							_nonDerivedProperties = []
-						;
-						for (var _propertyPublicName in _instancePropertyDefaults) {
-							var _propertyProfile = _propertyProfilesByPublicName [_propertyPublicName];
-							(_propertyProfile._derivation ? _derivedProperties : _nonDerivedProperties).push (
-								_propertyPublicName
-							);
-						}
-						m._derivedProperties = _traceDependencies (
-							_derivedProperties,
-							function (_derivedProperty) {
-								return _propertyProfilesByPublicName [_derivedProperty]._derivation._determinants;
-							},
-							_nonDerivedProperties
-						);
-					}
-					/*?
-						Static Methods
-							Uize.Class.stateProperties
-								Lets you declare one or more state properties for instances of the class.
-
-								SYNTAX
-								..................................................
-								MyClass.stateProperties (propertiesDefinitionOBJ);
-								..................................................
-
-								The object specified in =propertiesDefinitionOBJ= parameter must conform to a specific structure. Each property of this object represents a property to be declared for the class, where the property name specifies the internal name to be used for the class property and the property's string value specifies the class property's public name. As an alternative to a string value, the property's value can be an object whose =name= property specifies the class property's public name and where an optional =onChange= property specifies a handler function that should be executed every time the value of the class property changes. This is all best illustrated with an example...
-
-								EXAMPLE
-								...........................................................................
-								MyClass.stateProperties (
-									{
-										_propertylName:'property1Name',
-										_property2Name:'property2Name',
-										_property3Name:{
-											name:'property3Name',
-											onChange:function () {
-												// code to be performed when the value of this property changes
-											}
-										}
-									}
-								);
-								...........................................................................
-
-								NOTES
-								- this method may be called multiple times for a class to cumulatively define or override features
-								- see the other `feature declaration methods`
-
-						Deprecated Features
-							Uize.Class.registerProperties -- DEPRECATED 2013-01-02
-								The =Uize.Class.registerProperties= static method has been deprecated in favor of the newly added =Uize.Class.stateProperties= static method.
-
-								......................................................................
-								Uize.Class.registerProperties >> BECOMES >> Uize.Class.stateProperties
-								......................................................................
-
-								The =Uize.Class.stateProperties= method is essentially just a renaming of the deprecated =Uize.Class.registerProperties= method and behaves in exactly the same way. The new name was chosen to be consistent with documentation that refers to these properties universally as state properties. The new name is also more concise.
-					*/
-				};
-
-				_class.set = _classPrototype.set = function (_properties) {
+				set:function (_properties) {
 					/* NOTE:
 						Yes, there are functions _getClass and _getPropertyPrivateName that could be used (and were at one point), but this code needs to be tuned for performance since set is a touch point in so many places.
 					*/
@@ -1695,7 +2158,7 @@ Uize.module ({
 								set (propertyNamesARRAY,propertyValueANYTYPE)
 						*/
 						_properties = _argumentsLength > 2 || typeof _properties == _typeString
-							? _pairUp.apply (0,_arguments)
+							? _Uize.pairUp.apply (0,_arguments)
 							: _lookup (_properties,_arguments [1])
 					;
 					var
@@ -2207,9 +2670,9 @@ Uize.module ({
 								- see also the =get= and =set= instance methods
 
 					*/
-				};
+				},
 
-				_class.toggle = _classPrototype.toggle = function (_propertyName) {
+				toggle:function (_propertyName) {
 					var _value = !this.get (_propertyName);
 					this.set (_propertyName,_value);
 					return _value;
@@ -2250,825 +2713,351 @@ Uize.module ({
 
 								As you can see, using the =Uize.Class.toggle= method produces more concise code.
 					*/
-				};
+				},
 
-		/*** Public Instance Methods ***/
-			_classPrototype.kill = function () {
-				var _instanceId = this.instanceId;
-				_eval ('if(typeof ' + _instanceId + '!=\'undefined\')' + _instanceId + '=null');
-				/*?
-					Instance Methods
-						kill
-							Nulls out the global variable (or property of the =window= object) of the name =instanceId=.
-
-							This method may be useful if global (or window object level) references are made to instances of a class, usually for the purpose of group management, or the implementation of certain kinds of state exclusivity amongst instances of a class. This method is also intended to be overridden by subclasses where additional destructor style code may be desired.
-				*/
-			};
-
-		/*** Inheritance Mechanism ***/
-			function _createSubclass (_class,_alphastructor,_omegastructor) {
-				function _toString () {
-					var
-						_propertiesLines = [],
-						_Uize_toString = _Uize.toString
-					;
-					_forEach (
-						this.get (),
-						function (_propertyValue,_propertyName) {
-							_propertiesLines.push (
-								_propertyName + ' : ' +
-								(
-									_propertyValue && (_isInstance (_propertyValue) || _isFunction (_propertyValue))
-										? _Uize_toString.call (_propertyValue)
-										: _propertyValue
-								)
-							);
-						}
-					);
-					return _Uize_toString.call (this) + '\n\n' + _propertiesLines.sort ().join ('\n');
-				}
-
-				function _valueOf () {
-					return this [_getPropertyPrivateName (this,'value')];
+				wire:function (_eventNameOrEventsMap,_handler) {
+					var m = this;
+					if (arguments.length == 2) {
+						_abstractEventName (
+							m,
+							_eventNameOrEventsMap,
+							function (_eventName) {
+								var _eventHandlers = m._eventHandlers || (m._eventHandlers = {});
+								(_eventHandlers [_eventName] || (_eventHandlers [_eventName] = [])).push (
+									{
+										_eventName:_eventName,
+										_handler:
+											_isFunction (_handler)
+												? _handler
+												: typeof _handler == _typeString
+													? _Function (_handler)
+													: function (_event) {_handler.fire (_event)},
+										_originalHandler:_handler
+									}
+								);
+							}
+						);
+					} else if (_isObject (_eventNameOrEventsMap)) {
+						for (var _eventName in _eventNameOrEventsMap)
+							m.wire (_eventName,_eventNameOrEventsMap [_eventName])
+						;
+					}
 					/*?
 						Instance Methods
-							toString Intrinsic Method
-								Returns a string, providing summary info for the instance on which the method is called.
+							wire
+								Lets you wire a handler for a specific instance event, or handlers for multiple instance events.
 
 								SYNTAX
-								............................................
-								instanceSummarySTR = myInstance.toString ();
-								............................................
+								........................................................
+								myInstance.wire (eventNameSTR,eventHandlerSTRorFNorOBJ);
+								........................................................
 
-								The string returned by this method provides a summary that includes the instance's class name and the state of its state properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of =Uize.Class= subclasses during debugging and troubleshooting. The =toString Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the =alert= global function.
-
-								EXAMPLE
-								.............................
-								alert (page.children.slider);
-								.............................
-
-								In the above example, if the =page= widget has a =slider= child widget that is an instance of the class =Uize.Widget.Bar.Slider=, then the output of the =alert= statement could look something like...
-
-								EXAMPLE OUTPUT
-								........................................
-								[object Uize.Widget.Bar.Slider]
-
-								built : true
-								busy : inherit
-								busyInherited : false
-								confirm : undefined
-								container : undefined
-								decimalPlacesToDisplay : undefined
-								enabled : inherit
-								enabledInherited : true
-								html : undefined
-								idPrefix : page_slider
-								idPrefixConstruction : concatenated
-								inDrag : false
-								increments : 1
-								inform : undefined
-								insertionMode: undefined
-								localized : undefined
-								maxValidValue : undefined
-								maxValue : 200
-								minValidValue : undefined
-								minValue : 0
-								name : slider
-								nodeMap : undefined
-								orientation : vertical
-								parent : [class MyCompanySite.Page]
-								restTime : 250
-								scaleFunc : [object Function]
-								value : 0
-								valueFunc : [object Function]
-								wired : true
-								........................................
-
-								In certain contexts, providing a reference to a =Uize.Class= subclass instance as a parameter to some method will result in the =valueOf Intrinsic Method= of that instance being invoked in order to coerce it to a simple value. If it is your desire to have the instance summary be used rather than the instance's value, then you should explicitly call the =toString Intrinsic Method=, as follows...
+								Event handlers registered using this method will handle events fired for the instance using the =fire= instance method, and not those events fired using the =Uize.Class.fire= static method. A =Uize.Class= subclass may not provide any instance events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the =eventHandlerSTRorFNorOBJ= parameter may be of string, function, or object type.
 
 								EXAMPLE
-								........................................................................................
-								Uize.Node.setInnerHtml ('sliderWidgetSummaryForDebug',page.children.slider.toString ());
-								Uize.Node.setInnerHtml ('sliderWidgetCurrentValue',page.children.slider);
-								........................................................................................
+								......................................................................
+								mySlider.wire (
+									'Changed.value',
+									function (event) {Uize.Node.setValue ('valueField',event.newValue)}
+								);
+								......................................................................
 
-								In this example, the =sliderWidgetSummaryForDebug= node will contain the summary info for the instance, while the =sliderWidgetCurrentValue= node will just show the slider widget's current value.
-
-								NOTES
-								- see also the =Uize.toString= static intrinsic method
-
-							valueOf Intrinsic Method
-								Returns the value of the instance's =value= state property.
-
-								SYNTAX
+								VARIATION
 								.............................................
-								instanceValueANYTYPE = myInstance.valueOf ();
+								myInstance.wire (eventNamesToHandlersMapOBJ);
 								.............................................
 
-								The =valueOf Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a value, such as when using an object reference in an expression.
+								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =wire= instance method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
 
 								EXAMPLE
-								..........................................................................
-								var markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
-								..........................................................................
+								.............................................................................
+								mySlider.wire ({
+									'Changed.value':
+										function (event) {Uize.Node.setValue ('valueField',event.newValue)},
+									'Changed.maxValue':
+										function (event) {Uize.Node.setValue ('maxValueField',event.newValue)},
+									'Changed.minValue':
+										function (event) {Uize.Node.setValue ('minValueField',event.newValue)}
+								});
+								.............................................................................
 
-								In the above example, the page widget has a slider child widget that is an instance of the class =Uize.Widget.Bar.Slider= and that lets the user choose a markup percentage between =0= and =100=. In the above expression, the slider widget is being divided by 100. Rather than giving you a hundred *really* tiny slider widgets (not all that useful), JavaScript automatically invokes the =valueOf Intrinsic Method=. The implementation of this instance method in the =Uize.Class= base class results in the slider's current value being returned so that it can then be used in the expression.
-
-								The following three statements are equivalent...
-
-								....................................................................................
-								markedUpPrice = price * (1 + page.children.markupPercentSlider.get ('value') / 100);
-								markedUpPrice = price * (1 + page.children.markupPercentSlider.valueOf () / 100);
-								markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
-								....................................................................................
-
-								In certain contexts, providing a reference to a =Uize.Class= subclass instance as a parameter to some method will result in the =toString Intrinsic Method= of that instance being invoked in order to resolve it to a string value. If it is your desire to have the value used rather than the instance summary, then you should explicitly call the =valueOf Intrinsic Method=, as follows...
-
-								EXAMPLE
-								.....................................................
-								alert (page.children.markupPercentSlider.valueOf ());
-								.....................................................
-
-								In this example, the current value of the =markupPercentSlider= widget will be displayed in the alert dialog, rather than the instance summary. You can also use shortcuts, as follows...
-
-								COERCE TO NUMBER
-								...........................................
-								alert (+page.children.markupPercentSlider);
-								...........................................
-
-								COERCE TO STRING
-								................................................
-								alert (page.children.titleTextInputWidget + '');
-								................................................
-
-								Both of the above examples will cause JavaScript to invoke the =valueOf Intrinsic Method= rather than the =toString Intrinsic Method=, but the first will coerce the value to a number type, while the second will coerce the value to a string type.
+								SPECIAL VALUES
+								- the string value ="*"= acts as a wildcard when specified for the =eventNameSTR= parameter, meaning that the specified handler should be executed for all events of the instance
 
 								NOTES
-								- compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
-								- see also the =Uize.Class.valueOf= static intrinsic method
-								- if the instance's class does not declare a =value= state property, then this method will return the value of the instance's =value= property, and if the instance has no =value= property, then this method will simply return =undefined=
+								- see the related =fire= and =unwire= instance methods
+								- compare to the =Uize.Class.fire=, =Uize.Class.wire=, and =Uize.Class.unwire= static methods
 
 						Static Methods
-							Uize.Class.valueOf
-								Returns the value of the class' =value= state property.
+							Uize.Class.wire
+								Lets you wire a handler for a static event of the class, or handlers for multiple static events.
 
 								SYNTAX
-								.......................................
-								classValueANYTYPE = MyClass.valueOf ();
-								.......................................
+								.....................................................
+								MyClass.wire (eventNameSTR,eventHandlerSTRorFNorOBJ);
+								.....................................................
 
-								The =Uize.Class.valueOf= static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. =Uize.Widget.Bar.Slider + 0=). This static method is implemented primarily to provide parity with the =valueOf Intrinsic Method=. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the =value= state property.
+								Event handlers registered using this method will handle events fired for the class using the =Uize.Class.fire= static method, and not those events fired using the =fire= instance method. A =Uize.Class= subclass may not provide any static events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the =eventHandlerSTRorFNorOBJ= parameter may be of string, function, or object type.
+
+								VARIATION
+								..........................................
+								MyClass.wire (eventNamesToHandlersMapOBJ);
+								..........................................
+
+								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =Uize.Class.wire= static method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
+
+								SPECIAL VALUES
+								- the string value ="*"= acts as a wildcard when specified for the =eventNameSTR= parameter, meaning that the specified handler should be executed for all events of the class
 
 								NOTES
-								- compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
-								- see also the =valueOf Intrinsic Method=
-								- if the class does not declare a =value= state property, then this method will return the value of the class' =value= property, and if the class has no =value= property, then this method will simply return =undefined=
+								- see the related =Uize.Class.fire= and =Uize.Class.unwire= static methods
+								- compare to the =fire=, =wire=, and =unwire= instance methods
+
+						Parameters
+							eventHandlerSTRorFNorOBJ
+								All of the instance and static methods for adding and removing event handlers allow handlers to be specified in a number of different ways.
+
+								Function Type Handlers
+									By far the most common type of handler used when wiring event handlers is a function reference.
+
+									A function registered as a handler for an event should expect to receive one parameter, being a reference to the event object that is associated to the event.
+
+								String Type Handlers
+									When a string value is specified for the =eventHandlerSTRorFNorOBJ= parameter, a function object will be constructed from that string for the purpose of handling the event.
+
+									One limitation of this handler type is that, unlike `function type handlers`, a code string specified by the =eventHandlerSTRorFNorOBJ= parameter cannot reference the event object.
+
+								Object Type Handlers
+									When a reference to a =Uize.Class= subclass or an instance of a =Uize.Class= subclass is specified for the =eventHandlerSTRorFNorOBJ= parameter, then the event for which the handler is registered will be fired on that instance or class.
+
+									This facility provides a means for "relaying" instance or class events to another instance or class.
+
+									EXAMPLE
+									.....................................................
+									myWidget.children.someButton.wire ('Click',myWidget);
+									.....................................................
+
+									In the above example, a handler is being registered for the ='Click'= event of a button (an instance of the =Uize.Widget.Button= class) that is a child widget of =myWidget=. By specifying =myWidget= as the handler for the =Click= event, that event will get relayed to =myWidget=. This means that other code can now register handlers on the =Click= event for =myWidget=, and those handlers will handle the =Click= event being relayed from the button widget.
+
+									Object handlers added in this way can be removed by using the =unwire= instance method and the =Uize.Class.unwire= static method, just as with any other type of handler, as in...
+
+									.......................................................
+									myWidget.children.someButton.unwire ('Click',myWidget);
+									.......................................................
+
+								Value for Removing Must Match Value Used for Adding
+									However a handler is specified when wiring an event, that is how it must be specified in order to unwire the event.
+
+									If you specified a function reference as the handler when wiring an event, then you must specify that same, identical function reference in order to unwire that event. If you specified a code string as the handler, then you must specify the exact same code string in order to unwire that event. If you specified a reference to a =Uize.Class= subclass or an instance of a =Uize.Class= subclass as the handler when wiring an event, then you must specify the exact same object reference in order to unwire the event.
+
+							eventNamesToHandlersMapOBJ
+								An object, specifying handlers for multiple events using event-name-to-handler mappings, where the key of each property is an event name and the value of each property is an event's corresponding handler.
+
+								The contents of this object should be of the form...
+
+								........................................
+								{
+									event1Name:event1HandlerSTRorFNorOBJ,
+									event2Name:event2HandlerSTRorFNorOBJ,
+									...
+									eventNName:eventNHandlerSTRorFNorOBJ
+								}
+								........................................
+
+								The value for each property in this object should conform to the =eventHandlerSTRorFNorOBJ= parameter type.
+
+							### wiringsOBJ ~~ Wirings Object ~~ Wirings Objects
+								.
+					*/
+				},
+
+				fire:function (_event) {
+					/*	NOTES
+						- this code is deliberately optimized for performance and not code size, since event firing is a mechanism that is heavily utilized. This will explain some patterns here that may seem slightly out of character, with seemingly redundant code or a lack of typical factoring out.
+					*/
+					if (typeof _event != 'object') _event = {name:_event};
+					var
+						m = this,
+						_eventHandlers = m._eventHandlers
+					;
+					if (_eventHandlers) {
+						var
+							_handlersForThisEvent = _eventHandlers [_event.name],
+							_handlersForAnyEvent = _eventHandlers ['*']
+						;
+						if (_handlersForThisEvent || _handlersForAnyEvent) {
+							_event.source || (_event.source = m);
+							var
+								_handlers = _handlersForAnyEvent && _handlersForThisEvent
+									? _handlersForAnyEvent.concat (_handlersForThisEvent)
+									: _handlersForAnyEvent || _handlersForThisEvent
+								,
+								_totalHandlers = _handlers.length
+							;
+							if (_totalHandlers == 1) {
+								_handlers [0]._handler (_event);
+							} else if (_totalHandlers == 2) {
+								/* NOTE:
+									Since we make a copy of the handlers array in the case of multiple handlers (in order to avoid issues where the handlers array may be modified by the handlers themselves), this optimization for two handlers catches most cases of multiple handlers in a complex application. This avoids copying an array and also the overhead of an iterator.
+								*/
+								var
+									_handler0 = _handlers [0]._handler,
+									_handler1 = _handlers [1]._handler
+								;
+								_handler0 (_event);
+								_handler1 (_event);
+							} else {
+								if (!_handlersForAnyEvent || !_handlersForThisEvent)
+									_handlers = _handlers.concat ()
+								;
+								/* NOTE:
+									When executing multiple handlers, it is necessary to make a copy of the handlers array, since it is possible that one of the handlers might execute code that affects the handlers array (eg. by using the removeHandler method).
+
+									What this means is that when an event is fired, all the handlers registered for that event at the time that it fires will be executed. Event handlers for that event that are removed by one of its handlers will still be executed, and event handlers for that event that are added by one of its handlers will not be executed.
+								*/
+								for (var _handlerNo = -1; ++_handlerNo < _totalHandlers;)
+									_handlers [_handlerNo]._handler (_event)
+								;
+							}
+						}
+					}
+					if (_event.bubble && m.parent && _isInstance (m)) {
+						_event.source || (_event.source = m);
+						m.parent.fire (_event);
+					}
+					return _event;
+					/*?
+						Instance Methods
+							fire
+								Lets you fire an event for an instance of the class.
+
+								SYNTAX
+								..........................................
+								eventOBJ = myInstance.fire (eventNameSTR);
+								..........................................
+
+								VARIATION
+								......................................
+								eventOBJ = myInstance.fire (eventOBJ);
+								......................................
+
+								When an object is specified instead of a string value, then extra event properties can be bundled with the event and will then be available to all handlers that are executed. When using this form, the =eventOBJ= object must have a =name= property that specifies the name of the event being fired.
+
+								NOTES
+								- see the related =wire= and =unwire= instance methods
+								- compare to the =Uize.Class.fire=, =Uize.Class.wire=, and =Uize.Class.unwire= static methods
+
+						Static Methods
+							Uize.Class.fire
+								Lets you fire a static event for the class.
+
+								SYNTAX
+								.......................................
+								eventOBJ = MyClass.fire (eventNameSTR);
+								.......................................
+
+								VARIATION
+								........................
+								MyClass.fire (eventOBJ);
+								........................
+
+								When an object is specified instead of a string value, then extra event properties can be bundled with the event and will then be available to all handlers that are executed. When using this form, the =eventOBJ= object must have a =name= property that specifies the name of the event being fired.
+
+								NOTES
+								- see the related =Uize.Class.wire= and =Uize.Class.unwire= static methods
+								- compare to the =fire=, =wire=, and =unwire= instance methods
+					*/
+				},
+
+				unwire:function (_eventNameOrEventsMap,_handler) {
+					var
+						m = this,
+						_eventHandlers = m._eventHandlers
+					;
+					if (_eventHandlers) {
+						if (_isObject (_eventNameOrEventsMap)) {
+							for (var _eventName in _eventNameOrEventsMap)
+								m.unwire (_eventName,_eventNameOrEventsMap [_eventName])
+							;
+						} else {
+							_abstractEventName (
+								m,
+								_eventNameOrEventsMap,
+								function (_eventName) {
+									var _handlersForEventName = _eventHandlers [_eventName];
+									if (_handlersForEventName) {
+										if (_handler) {
+											/* TO DO:
+												this is a candidate for factoring out as a generally useful array manipulation method: removeAllOfValue
+											*/
+											for (var _handlerNo = _handlersForEventName.length; --_handlerNo >= 0;)
+												_handlersForEventName [_handlerNo]._originalHandler == _handler && _handlersForEventName.splice (_handlerNo,1)
+											;
+										}
+										(_handler && _handlersForEventName.length) || delete _eventHandlers [_eventName];
+									}
+								}
+							);
+						}
+					}
+					/*?
+						Instance Methods
+							unwire
+								Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.
+
+								SYNTAX
+								..........................................................
+								myInstance.unwire (eventNameSTR,eventHandlerSTRorFNorOBJ);
+								..........................................................
+
+								VARIATION 1
+								.................................
+								myInstance.unwire (eventNameSTR);
+								.................................
+
+								When no =eventHandlerSTRorFNorOBJ= parameter is specified, then all handlers registered for the event specified in the =eventNameSTR= parameter will be removed.
+
+								VARIATION 2
+								...............................................
+								myInstance.unwire (eventNamesToHandlersMapOBJ);
+								...............................................
+
+								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =unwire= instance method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
+
+								NOTES
+								- see the related =fire= and =wire= instance methods
+								- compare to the =Uize.Class.fire=, =Uize.Class.wire=, and =Uize.Class.unwire= static methods
+
+						Static Methods
+							Uize.Class.unwire
+								Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.
+
+								SYNTAX
+								.......................................................
+								MyClass.unwire (eventNameSTR,eventHandlerSTRorFNorOBJ);
+								.......................................................
+
+								VARIATION 1
+								..............................
+								MyClass.unwire (eventNameSTR);
+								..............................
+
+								When no =eventHandlerSTRorFNorOBJ= parameter is specified, then all handlers registered for the event specified in the =eventNameSTR= parameter will be removed.
+
+								VARIATION 2
+								............................................
+								MyClass.unwire (eventNamesToHandlersMapOBJ);
+								............................................
+
+								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =Uize.Class.unwire= static method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
+
+								NOTES
+								- see the related =Uize.Class.fire= and =Uize.Class.wire= static methods
+								- compare to the =fire=, =wire=, and =unwire= instance methods
 					*/
 				}
-
-				var
-					_classPrototype = _class.prototype,
-					_subclass = _noNew (
-						function () {
-							for (
-								var _alphastructorNo = -1, _alphastructorsLength = _alphastructors.length;
-								++_alphastructorNo < _alphastructorsLength;
-							)
-								_alphastructors [_alphastructorNo].apply (this,arguments)
-							;
-							for (
-								var _omegastructorNo = -1, _omegastructorsLength = _omegastructors.length;
-								++_omegastructorNo < _omegastructorsLength;
-							)
-								_omegastructors [_omegastructorNo].apply (this,arguments)
-							;
-						}
-					),
-					_subclassPrototype = _subclass.prototype
-				;
-
-				/*** Inherit static properties (excluding prototype) and methods from base class ***/
-					var
-						_propertyValue,
-						_nonInheritableStatics = _class.nonInheritableStatics || _sacredEmptyObject
-					;
-					for (var _property in _class)
-						if (
-							!_nonInheritableStatics [_property] &&
-							(_propertyValue = _class [_property]) != _classPrototype &&
-							!(
-								_isFunction (_propertyValue) &&
-								_propertyValue.moduleName &&
-								/[A-Z]/.test (_property.charAt (0))
-							)
-						)
-							_subclass [_property] = _clone (_propertyValue)
-					;
-
-				/*** Prepare instance properties and methods ***/
-					/*** Inherit instance properties and methods from base class (from prototype) ***/
-						_copyInto (_subclassPrototype,_classPrototype);
-
-						/*** Make sure toString and valueOf are copied ***/
-							/* NOTE: in IE, toString and valueOf aren't enumerable properties of the prototype object */
-							_subclassPrototype.toString = _toString;
-							_subclassPrototype.valueOf = _valueOf;
-
-					/*** Non-inherited Public Instance Properties ***/
-						_subclassPrototype.Class = _subclass;
-							/*?
-								Instance Properties
-									Class
-										A reference to the class's constructor.
-
-										You can use this to interrogate an object instance to see if it is of a certain class, as illustrated in the following example...
-
-										EXAMPLE
-										.......................................................
-										if (myInstance.Class == Uize.Widget.Bar.Slider) {
-											// do something for sliders
-										} else if (myInstance.Class == Uize.Widget.Tree.Menu) {
-											// do something for tree menus
-										} else if (myInstance.Class == Uize.Widget.ImageWipe) {
-											// do something for wipes
-										}
-										.......................................................
-
-										The above example is admittedly a little abstract. It is hard to imagine the exact scenario that may come up where some code is handed object instances where their class will not be known. But, when such a case comes up, the =Class= property has got your back.
-							*/
-
-					/*** Non-inherited Public Static Properties ***/
-						_subclass.nonInheritableStatics = {_singletons:1,nonInheritableStatics:1,toString:0,valueOf:0};
-							/*?
-								Static Properties
-									Uize.Class.nonInheritableStatics
-										A lookup object, automatically created for a class, in which you can register the static features (methods or properties) of the class that should *not* be inherited when that class is subclassed.
-
-										Each property of the =Uize.Class.nonInheritableStatics= lookup object represents a single static feature of the class that should not be inherited by subclasses, where the name of each property should be the name of a static feature (excluding the module name), and the value of each property should be a truthy value (such as =true=, =1=, ='foo'=, =[]=, ={}=, etc.). After a class has been created, non-inheritable statics can be registered for that class by assigning properties to the class' =MyClass.nonInheritableStatics= static property, as shown in the example below...
-
-										EXAMPLE
-										...........................................................................
-										var MyClass = Uize.Class.subclass ();
-										MyClass.someUtilityFunction = function () {
-											// do something of great utility
-										};
-										MyClass.nonInheritableStatics.someUtilityFunction = 1;
-
-										MyClassSubclass = MyClass.subclass ();
-										alert (MyClassSubclass.someUtilityFunction); // alerts the text "undefined"
-										...........................................................................
-
-										In the above example, the =MyClass.someUtilityFunction= static method of the class =MyClass= has been registered as a non-inheritable static. This is done by the statement =MyClass.nonInheritableStatics.someUtilityFunction &#61; 1=. Now, when the =MyClassSubclass= class is created by calling the =MyClass.subclass= method, the new subclass that is created does not get the =someUtilityFunction= static feature. Therefore, the =alert= statement displays the text "undefined" in the alert dialog.
-
-										nonInheritableStatics is a Non-inheritable Static
-											When a class is created, the =MyClass.nonInheritableStatics= static property is automatically initialized on that class to a fresh object with the value ={nonInheritableStatics:1}=.
-
-											This initial mapping means that the =MyClass.nonInheritableStatics= static property is, itself, not inheritable by subclasses - subclasses get their own fresh object. So, in our example, when the =MyClassSubclass= subclass is created, its fresh =MyClassSubclass.nonInheritableStatics= property does *not* have an entry for the =someUtilityFunction= static feature, because it does not have that static feature and the contents of the =MyClass.someUtilityFunction= object is not inherited by the =MyClassSubclass= class.
-							*/
-
-						_subclass.superclass = _class;
-							/*?
-								Static Properties
-									Uize.Class.superclass
-										A reference to the class' superclass.
-
-										SYNTAX
-										....................................
-										superclassOBJ = classOBJ.superclass;
-										....................................
-
-										EXAMPLE
-										............................................................................
-										var MyWidgetClass = Uize.Widget.subclass ();
-										alert (MyWidgetClass.superclass == Uize.Widget); // displays the text "true"
-										............................................................................
-							*/
-
-					/*** Non-inherited Public Static Methods ***/
-						_subclass.toString = _toString;
-						_subclass.valueOf = _valueOf;
-
-				/*** Initialize Alphastructors and Omegastructors ***/
-					var
-						_alphastructors = _subclass._alphastructors = (_class._alphastructors || _sacredEmptyArray).concat (),
-						_omegastructors = _subclass._omegastructors = (_class._omegastructors || _sacredEmptyArray).concat ()
-					;
-					_alphastructor && _alphastructors.push (_alphastructor);
-					_omegastructor && _omegastructors.push (_omegastructor);
-
-				_subclass._propertyProfilesByPrivateName || (_subclass._propertyProfilesByPrivateName = {});
-				_subclass._propertyProfilesByPublicName || (_subclass._propertyProfilesByPublicName = {});
-
-				return _subclass;
-			};
-
-			_class.doMy = function (_instance,_methodName,_arguments) {
-				return this.prototype [_methodName].apply (_instance,_arguments || _sacredEmptyArray);
-				/*?
-					Static Methods
-						Uize.Class.doMy
-							Lets you call an instance method of the class on a specified instance.
-
-							DIFFERENT USAGES
-
-							`Call a Class' Instance Method on an Instance, Without Supplying Arguments`
-							.............................................................
-							resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR);
-							.............................................................
-
-							`Call a Class' Instance Method on an Instance, Supplying Arguments`
-							...........................................................................
-							resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR,argumentsLIST);
-							...........................................................................
-
-							Calling a Superclass' Instance Methods
-								The =Uize.Class.doMy= method is most useful when calling a superclass' version of an instance method on an instance, and produces a more concise and readable form than the typical approach.
-
-								INSTEAD OF...
-								.............................................
-								_superclass.prototype.someMethod.call (this);
-								.............................................
-
-								USE...
-								.....................................
-								_superclass.doMy (this,'someMethod');
-								.....................................
-
-								The =Uize.Class.doMy= method also supports calling a superclass' instance methods with arguments, as follows...
-
-								INSTEAD OF...
-								...................................................................
-								_superclass.prototype.someMethod.apply (this,[arg1,arg2,...,argN]);
-								...................................................................
-
-								USE...
-								..........................................................
-								_superclass.doMy (this,'someMethod',[arg1,arg2,...,argN]);
-								..........................................................
-
-								As you can tell from the above before-and-after examples, using the =Uize.Class.doMy= method produces code that is both a bit more concise as well as mentally easier to parse.
-
-							Call a Class' Instance Method on an Instance, Without Supplying Arguments
-								In its most simple form, a class' instance method can be called on an instance, without supplying arguments, by specifying just the instance reference and the instance method name as arguments.
-
-								SYNTAX
-								.............................................................
-								resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR);
-								.............................................................
-
-								EXAMPLE
-								...........................................................
-								return _superclass.subclass ({
-									instanceMethods:{
-										wireUi:function () {
-											if (!this.isWired) {
-												// do some wiring specific to this widget class
-
-												_superclass.doMy (this,'wireUi');
-											}
-										}
-									}
-								});
-								...........................................................
-
-								In the above example, a subclass is being created with an overrided implementation for the =wireUi= instance method. In this method, additional code is being executed (represented by the placeholder comment) before the superclass' version of the =wireUi= method is called on the instance.
-
-							Call a Class' Instance Method on an Instance, Supplying Arguments
-								When an instance method of a class needs to be called with arguments, the arguments can be specified with the optional =argumentsLIST= argument.
-
-								SYNTAX
-								...........................................................................
-								resultANYTYPE = MyClass.doMy (instanceOBJ,instanceMethodSTR,argumentsLIST);
-								...........................................................................
-
-								EXAMPLE
-								........................................................
-								return _superclass.subclass ({
-									instanceMethods:{
-										someMethod:function (foo,bar,baz,qux) {
-											_superclass.doMy (this,'someMethod',[foo,bar]);
-
-											// now do extra stuff for subclass
-										}
-									}
-								});
-								........................................................
-
-								In the above example, a subclass is being created with an overrided implementation for the superclass' =someMethod= instance method. Now, the superclass' version of =someMethod= supports =foo= and =bar= arguments, while the overrided version also supports the additional =baz= and =qux= arguments. In the overrided implementation, we first call the superclass' version of the method on the instance, passing just the =foo= and =bar= arguments that it supports, after which the additional code in the overrided version is executed (represented by the comment placeholder, and presumably making use of the additional =baz= and =qux= arguments).
-				*/
-			};
-
-			_class.subclass = function (_arg0,_arg1) {
-				return (
-					arguments.length == 1 && !_isFunction (_arg0)
-						? _createSubclass (this).declare (_arg0)
-						: _createSubclass (this,_arg0,_arg1)
-				);
-				/*?
-					Static Methods
-						Uize.Class.subclass
-							Lets you subclass the =Uize.Class= base class or any subclass of =Uize.Class=.
-
-							DIFFERENT USAGES
-
-							`Create a Subclass, Declaring Multiple Features by Type`
-							..................................................
-							MyClass = Uize.Class.subclass (featuresByTypeOBJ);
-							..................................................
-
-							`Create a Subclass, Specifying Only an Alphastructor`
-							..................................................
-							MyClass = Uize.Class.subclass (alphastructorFUNC);
-							..................................................
-
-							`Create a Subclass, Specifying Both Alphastructor and Omegastructor`
-							....................................................................
-							MyClass = Uize.Class.subclass (alphastructorFUNC,omegastructorFUNC);
-							....................................................................
-
-							`Create a Subclass, Specifying Only an Omegastructor`
-							............................................................
-							MyClass = Uize.Class.subclass (null,omegastructorFUNC);
-							MyClass = Uize.Class.subclass (undefined,omegastructorFUNC);
-							............................................................
-
-							Create a Subclass, Declaring Multiple Features by Type
-								As a convenience, the =Uize.Class.subclass= method supports a variation that takes a single object parameter, as a means of declaring features by type when creating a class.
-
-								SYNTAX
-								..................................................
-								MyClass = Uize.Class.subclass (featuresByTypeOBJ);
-								..................................................
-
-								Using this variation, one or more features of various different `feature types` can be conveniently declared during the subclass creation. When using this variation, setting the alphastructor and/or omegastructor for the class being created must be done by specifying values for the =alphastructor= and/or =omegastructor= properties of the =featuresByTypeOBJ= object.
-
-								EXAMPLE
-								....................................
-								var MySubclass = MyClass.subclass ({
-									alphastructor:function () {
-										// implementation here
-									},
-									omegastructor:function () {
-										// implementation here
-									},
-									staticMethods:{
-										staticMethod1:function () {
-											// implementation here
-										},
-										staticMethod2:function () {
-											// implementation here
-										}
-									},
-									instanceMethods:{
-										instanceMethod1:function () {
-											// implementation here
-										},
-										instanceMethod2:function () {
-											// implementation here
-										}
-									},
-									stateProperties:{
-										stateProperty1:{
-											// property profile
-										},
-										stateProperty2:{
-											// property profile
-										}
-									}
-								});
-								....................................
-
-							Create a Subclass, Specifying Only an Alphastructor
-								A subclass can be created with just an `alphastructor` set, by specifying just a single =alphastructorFUNC= function type parameter.
-
-								SYNTAX
-								..................................................
-								MyClass = Uize.Class.subclass (alphastructorFUNC);
-								..................................................
-
-								Consider the following example...
-
-								EXAMPLE
-								.......................................
-								var MyClass = Uize.Class.subclass (
-									function () {
-										this.foo = 'How unoriginal!';
-									}
-								);
-
-								var MySubclass = MyClass.subclass (
-									function () {
-										this.bar = this.foo + ' Indeed!';
-									}
-								);
-								.......................................
-
-								In the above example, =MySubclass= is a subclass of =MyClass=, which is in turn a subclass of the =Uize.Class= base class. Now, when an instance of =MySubSubclass= gets created, the constructor of =MyClass= and then the constructor of =MySubSubclass= will be executed in the initialization of the instance, and the instance will have both =foo= and =bar= properties, where the =bar= property will have a value of "How unoriginal! Indeed!".
-
-							Create a Subclass, Specifying Both Alphastructor and Omegastructor
-								A subclass can be created with both an `alphastructor` and an `omegastructor` set, by specifying the =alphastructorFUNC= and =omegastructorFUNC= function type parameters.
-
-								SYNTAX
-								....................................................................
-								MyClass = Uize.Class.subclass (alphastructorFUNC,omegastructorFUNC);
-								....................................................................
-
-							Create a Subclass, Specifying Only an Omegastructor
-								A subclass can be created with just an `omegastructor` set, by specifying the =alphastructorFUNC= and =omegastructorFUNC= parameters and specifying the value =null= or =undefined= for the =alphastructorFUNC= parameter.
-
-								SYNTAX
-								............................................................
-								MyClass = Uize.Class.subclass (null,omegastructorFUNC);
-								MyClass = Uize.Class.subclass (undefined,omegastructorFUNC);
-								............................................................
-				*/
-			};
-
-			_class.singleton = function (_scope,_properties) {
-				var
-					_singletons = this._singletons || (this._singletons = {}),
-					_singleton = _singletons [_scope || (_scope = '')]
-				;
-				_singleton
-					? _properties && _singleton.set (_properties)
-					: (_singleton = _singletons [_scope] = this (_properties))
-				;
-				return _singleton;
-				/*?
-					Static Methods
-						Uize.Class.singleton
-							Returns a singleton for the class for the optionally specified scope (default is empty scope).
-
-							DIFFERENT USAGES
-
-							`Get a Singleton for a Class`
-							....................................
-							singletonOBJ = MyClass.singleton ();
-							....................................
-
-							`Get a Singleton for a Class for a Specific Scope`
-							............................................
-							singletonOBJ = MyClass.singleton (scopeSTR);
-							............................................
-
-							`Get a Singleton for a Class for a Specific Scope, Specifying Initial State`
-							..........................................................
-							singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
-							..........................................................
-
-							Get a Singleton for a Class
-								When no parameters are specified, this method will return a singleton for the class in the default scope.
-
-								SYNTAX
-								....................................
-								singletonOBJ = MyClass.singleton ();
-								....................................
-
-								When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the default scope, then that instance will be returned. Otherwise, a singleton instance will be created for the default scope and then returned.
-
-							Get a Singleton for a Class for a Specific Scope
-								When the optional =scopeSTR= parameter is specified, this method will return a singleton for the class in the specified scope.
-
-								SYNTAX
-								............................................
-								singletonOBJ = MyClass.singleton (scopeSTR);
-								............................................
-
-								When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be returned. Otherwise, a singleton instance will be created for the specified scope and then returned.
-
-							Get a Singleton for a Class for a Specific Scope, Specifying Initial State
-								When the optional =propertiesOBJ= parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its state properties set using the =propertiesOBJ= object.
-
-								SYNTAX
-								..........................................................
-								singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
-								..........................................................
-
-								When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be set to the state specified by the =propertiesOBJ= parameter and then returned. Otherwise, a singleton instance will be created for the specified scope, with its state initialized using the =propertiesOBJ= parameter, and then returned.
-
-							Singleton Scope
-								As a convenience, the =Uize.Class.singleton= static method lets you optionally specify a scope when getting singleton instances, using the =scopeSTR= parameter.
-
-								If no =scopeSTR= parameter is specified when getting a singleton for a class, then the default scope (an empty string) will be used. Therefore, the statement =MyClass.singleton ()= is equivalent to the statement =MyClass.singleton ('')=.
-
-								A scope provides multiple different bits of related but distributed code to get a reference to the same singleton by specifying the same scope, while still allowing other code to share references to a different singleton created using a different scope.
-				*/
-			};
-
-			_class.instanceMethods = _class.instanceProperties = function (_instanceFeatures) {
-				_copyInto (this.prototype,_instanceFeatures);
-				/*?
-					Static Methods
-						Uize.Class.instanceMethods
-							Lets you conveniently declare one or more instance methods, by specifying the methods in an object.
-
-							SYNTAX
-							.............................................
-							MyClass.instanceMethods (instanceMethodsOBJ);
-							.............................................
-
-							EXAMPLE
-							...................................................
-							var MyWidgetClass = Uize.Widget.subclass ();
-
-							MyWidgetClass.instanceMethods ({
-								wireUi:function () {
-									// implementation of wireUi instance method
-								},
-
-								updateUi:function () {
-									// implementation of updateUi instance method
-								}
-							});
-							...................................................
-
-							In the above example, a widget class is being created by subclassing the =Uize.Widget= base class. Then, the =wireUi= and =updateUi= instance methods are being declared for the class by calling the =instanceMethods= method on the class.
-
-							NOTES
-							- this method may be called multiple times for a class to cumulatively define or override features
-							- see the other `feature declaration methods`
-
-						Uize.Class.instanceProperties
-							Lets you conveniently declare one or more instance properties, by specifying the properties and their initial values in an object.
-
-							SYNTAX
-							...................................................
-							MyClass.instanceProperties (instancePropertiesOBJ);
-							...................................................
-
-							EXAMPLE
-							.............................
-							MyClass.instanceProperties ({
-								timeoutMs:2000,
-								retryAttempts:5
-							});
-							.............................
-
-							In the above example, the =Uize.Class.instanceProperties= method is being used to declare the =timeoutMs= and =retryAttempts= instance properties.
-
-							NOTES
-							- compare to the =Uize.Class.stateProperties= static method
-							- this method may be called multiple times for a class to cumulatively define or override features
-							- see the other `feature declaration methods`
-				*/
-			};
-
-			_class.staticMethods = _class.staticProperties = function (_staticFeatures) {
-				_copyInto (this,_staticFeatures);
-				/*?
-					Static Methods
-						Uize.Class.staticMethods
-							Lets you conveniently declare one or more static methods, by specifying the methods in an object.
-
-							SYNTAX
-							.........................................
-							MyClass.staticMethods (staticMethodsOBJ);
-							.........................................
-
-							NOTES
-							- this method may be called multiple times for a class to cumulatively define or override features
-							- see the other `feature declaration methods`
-
-						Uize.Class.staticProperties
-							Lets you conveniently declare one or more static properties, by specifying the properties and their initial values in an object.
-
-							SYNTAX
-							............................................
-							MyClass.staticMethods (staticPropertiesOBJ);
-							............................................
-
-							NOTES
-							- compare to the =Uize.Class.stateProperties= static method
-							- this method may be called multiple times for a class to cumulatively define or override features
-							- see the other `feature declaration methods`
-				*/
-			};
-
-			_class.dualContextMethods = _class.dualContextProperties = function (_dualContextFeatures) {
-				_copyInto (this,_dualContextFeatures);
-				_copyInto (this.prototype,_dualContextFeatures);
-				/*?
-					Static Methods
-						Uize.Class.dualContextMethods
-							Lets you conveniently declare one or more dual context methods, by specifying the methods in an object.
-
-							SYNTAX
-							...................................................
-							MyClass.dualContextMethods (dualContextMethodsOBJ);
-							...................................................
-
-							NOTES
-							- this method may be called multiple times for a class to cumulatively define or override features
-							- see the other `feature declaration methods`
-
-						Uize.Class.dualContextProperties
-							Lets you conveniently declare one or more dual context properties, by specifying the properties and their initial values in an object.
-
-							SYNTAX
-							......................................................
-							MyClass.dualContextMethods (dualContextPropertiesOBJ);
-							......................................................
-
-							NOTES
-							- compare to the =Uize.Class.stateProperties= static method
-							- this method may be called multiple times for a class to cumulatively define or override features
-							- see the other `feature declaration methods`
-				*/
-			};
-
-			_class.alphastructor = function (_alphastructor) {
-				this._alphastructors.push (_alphastructor);
-				/*?
-					Static Methods
-						Uize.Class.alphastructor
-							Lets you declare the alphastructor for the class.
-
-							SYNTAX
-							..........................................
-							MyClass.alphastructor (alphastructorFUNC);
-							..........................................
-
-							NOTES
-							- see the other `feature declaration methods`
-				*/
-			};
-
-			_class.omegastructor = function (_omegastructor) {
-				this._omegastructors.push (_omegastructor);
-				/*?
-					Static Methods
-						Uize.Class.omegastructor
-							Lets you declare the omegastructor for the class.
-
-							SYNTAX
-							..........................................
-							MyClass.omegastructor (omegastructorFUNC);
-							..........................................
-
-							NOTES
-							- see the other `feature declaration methods`
-				*/
-			};
-
-			_class.declare = function (_featuresByType) {
-				for (var _featureType in _featuresByType)
-					this [_featureType] (_featuresByType [_featureType])
-				;
-				return this;
-				/*?
-					Static Methods
-						Uize.Class.declare
-							Lets you declare one or more features of one or more different feature types for the class.
-
-							SYNTAX
-							....................................
-							MyClass.declare (featuresByTypeOBJ);
-							....................................
-
-							For convenience, the =Uize.Class.declare= method lets you declare features of various types, in the same way as they can be declared when using the variation of the =Uize.Class.subclass= method that supports specifying features in a =featuresByTypeOBJ= object. The =Uize.Class.declare= method lets you declare additional features at any time after first creating a class, using the same semantics as supported by the =Uize.Class.subclass= method.
-
-							EXAMPLE
-							...................................
-							MyClass.declare ({
-								alphastructor:function () {
-									// implementation here
-								},
-								omegastructor:function () {
-									// implementation here
-								},
-								staticMethods:{
-									staticMethod1:function () {
-										// implementation here
-									},
-									staticMethod2:function () {
-										// implementation here
-									}
-								},
-								instanceMethods:{
-									instanceMethod1:function () {
-										// implementation here
-									},
-									instanceMethod2:function () {
-										// implementation here
-									}
-								},
-								stateProperties:{
-									stateProperty1:{
-										// property profile
-									},
-									stateProperty2:{
-										// property profile
-									}
-								}
-							});
-							...................................
-
-							NOTES
-							- see the other `feature declaration methods`
-				*/
-			};
-
-		return _class;
+			}
+		});
 	}
 });
 

@@ -61,17 +61,17 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
-				_undefined
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_package,
+				_undefined,
 
-		/*** General Variables ***/
-			var _multiLineStrRegExp = /\r\n|\n|\r/;
+			/*** General Variables ***/
+				_multiLineStrRegExp = /\r\n|\n|\r/
+		;
 
-		/*** Static Methods ***/
-			_package.forEach = function (_sourceStr,_lineHandler) {
+		return _package = Uize.package ({
+			forEach:function (_sourceStr,_lineHandler) {
 				if (_sourceStr) {
 					var
 						_lineNo = 0,
@@ -157,9 +157,9 @@ Uize.module ({
 							NOTES
 							- compare to the =Uize.String.Lines.modify= static method
 				*/
-			};
+			},
 
-			_package.getIndentRange = function (_sourceStr,_indentChars) {
+			getIndentRange:function (_sourceStr,_indentChars) {
 				var
 					_minValue = Infinity,
 					_maxValue = -_minValue
@@ -293,9 +293,9 @@ Uize.module ({
 							- lines in multi-line strings can be terminated with a carriage return (CR) character, a linefeed (LF) character, or a combination of carriage return plus linefeed (CRLF) characters
 							- lines with only whitespace are not considered when calculating indent range values
 				*/
-			};
+			},
 
-			_package.getLinebreakType = function (_sourceStr,_defaultLinebreakChars) {
+			getLinebreakType:function (_sourceStr,_defaultLinebreakChars) {
 				var _firstLinebreakMatch = _sourceStr.match (/\r\n|\n|\r/);
 				return _firstLinebreakMatch ? _firstLinebreakMatch [0] : (_defaultLinebreakChars || '\n');
 				/*?
@@ -332,9 +332,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.String.Lines.switchLinebreakType= static method
 				*/
-			};
+			},
 
-			_package.indent = function (_sourceStr,_indentAmount,_indentChars,_indentFirstLine) {
+			indent:function (_sourceStr,_indentAmount,_indentChars,_indentFirstLine) {
 				if (_indentChars == _undefined) _indentChars = '\t';
 				if (!_sourceStr || !_indentAmount || !_indentChars) return _sourceStr;
 				/* TO DO:
@@ -400,9 +400,9 @@ Uize.module ({
 							NOTES
 							- when indenting a multi-line string, empty lines are not indented
 				*/
-			};
+			},
 
-			_package.modify = function (_sourceStr,_lineModifier) {
+			modify:function (_sourceStr,_lineModifier) {
 				var
 					_lineNo = 0,
 					_modifiedLine
@@ -508,12 +508,12 @@ Uize.module ({
 							NOTES
 							- compare to the =Uize.String.Lines.forEach= static method
 				*/
-			};
+			},
 
-			_package.normalizeIndent = function (_sourceStr,_indentChars) {
+			normalizeIndent:function (_sourceStr,_indentChars) {
 				return _package.indent (
 					_sourceStr,
-					-Uize.String.Lines.getIndentRange (_sourceStr,_indentChars).minValue,
+					-_package.getIndentRange (_sourceStr,_indentChars).minValue,
 					_indentChars
 				);
 				/*?
@@ -560,9 +560,9 @@ Uize.module ({
 								'   line 4'
 								..................
 				*/
-			};
+			},
 
-			_package.removeBlanks = function (_sourceStr,_onlyCompletelyEmpty) {
+			removeBlanks:function (_sourceStr,_onlyCompletelyEmpty) {
 				function _isNonEmptyString (_line) {return !!_line}
 				return _package.removeMatching (_sourceStr,_onlyCompletelyEmpty ? _isNonEmptyString : Uize.String.trim,1);
 				/*?
@@ -632,9 +632,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.String.Lines.removeMatching= and =Uize.String.Lines.retainMatching= static methods
 				*/
-			};
+			},
 
-			_package.removeMatching = function (_sourceStr,_match,_retain) {
+			removeMatching:function (_sourceStr,_match,_retain) {
 				_retain = !!_retain;
 				return _package.modify (
 					_sourceStr,
@@ -700,9 +700,9 @@ Uize.module ({
 							- see the companion =Uize.String.Lines.retainMatching= static method
 							- see the related =Uize.String.Lines.removeBlanks= static method
 				*/
-			};
+			},
 
-			_package.retainMatching = function (_sourceStr,_match) {
+			retainMatching:function (_sourceStr,_match) {
 				return _package.removeMatching (_sourceStr,_match,1);
 				/*?
 					Static Methods
@@ -761,9 +761,9 @@ Uize.module ({
 							- see the companion =Uize.String.Lines.removeMatching= static method
 							- see the related =Uize.String.Lines.removeBlanks= static method
 				*/
-			};
+			},
 
-			_package.split = function (_sourceStr) {
+			split:function (_sourceStr) {
 				return (_sourceStr.indexOf ('\r') + 1 ? _sourceStr.replace (/\r\n?/g,'\n') : _sourceStr).split ('\n');
 					/* NOTE:
 						There's a silly issue with the way that Microsoft's JScript handles splitting a string when the splitter is a regular expression. Essentially, multiple consecutive occurrences of a match for a regular expression do not result in empty string elements populating the split call's resulting array - instead, multiple consecutive splitter matches seem to be collapsed down and effectively treated as a single split point. This behavior is problematic, because empty lines are then completely lost - as if they never even existed. Curiously, though, using the same regular expression that would have been used in a split call in a replace method call does what one would expect. So, we replace the \r\n with '\n' and then split on the string literal '\n' (rather than a regular expression).
@@ -789,9 +789,9 @@ Uize.module ({
 
 							This method handles an issue in Internet Explorer where using the split method of the =String= object with a linebreak regular expression collapses consecutive linebreaks in the string being split, resulting in an innacurate reflection of the number of lines in a multi-line string, and not accurately reflecting the presence of empty lines.
 				*/
-			};
+			},
 
-			_package.switchIndentType = function (_sourceStr,_oldIndentChars,_newIndentChars) {
+			switchIndentType:function (_sourceStr,_oldIndentChars,_newIndentChars) {
 				if (_oldIndentChars == _undefined) _oldIndentChars = '    ';
 				if (_newIndentChars == _undefined) _newIndentChars = '\t';
 				var
@@ -872,9 +872,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.String.Lines.switchLinebreakType= static method
 				*/
-			};
+			},
 
-			_package.switchLinebreakType = function (_sourceStr,_linebreakChars) {
+			switchLinebreakType:function (_sourceStr,_linebreakChars) {
 				return _sourceStr.replace (/\r\n|\n|\r/g,_linebreakChars == null ? '\n' : _linebreakChars);
 				/*?
 					Static Methods
@@ -960,9 +960,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.String.Lines.getLinebreakType= static method
 				*/
-			};
+			},
 
-			_package.trim = function (_sourceStr,_side) {
+			trim:function (_sourceStr,_side) {
 				return _package.modify (_sourceStr,function (_line) {return Uize.String.trim (_line,_side)});
 				/*?
 					Static Methods
@@ -998,9 +998,9 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.String.Lines.trimLeft= and =Uize.String.Lines.trimRight= static methods
 				*/
-			};
+			},
 
-			_package.trimLeft = function (_sourceStr) {
+			trimLeft:function (_sourceStr) {
 				return _package.trim (_sourceStr,-1);
 				/*?
 					Static Methods
@@ -1036,9 +1036,9 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.String.Lines.trim= and =Uize.String.Lines.trimRight= static methods
 				*/
-			};
+			},
 
-			_package.trimRight = function (_sourceStr) {
+			trimRight:function (_sourceStr) {
 				return _package.trim (_sourceStr,1);
 				/*?
 					Static Methods
@@ -1074,9 +1074,8 @@ Uize.module ({
 							NOTES
 							- see the companion =Uize.String.Lines.trim= and =Uize.String.Lines.trimLeft= static methods
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

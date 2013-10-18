@@ -43,15 +43,15 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.performRequest = function (_request,_callback) {
 				var
-					_this = this,
+					m = this,
 					_returnType = _request.returnType,
 					_returnTypeIsObject = _returnType == 'object',
-					_origUrl = Uize.Url.fromParams(_request.url),
+					_origUrl = Uize.Url.fromParams (_request.url),
 					_requestUrl = Uize.Url.resolve (
 						_request.url,
 						Uize.copyInto (
-						{
-							rnd:_request.cache == 'never' ? Uize.Url.getCacheDefeatStr () : null
+							{
+								rnd:_request.cache == 'never' ? Uize.Url.getCacheDefeatStr () : null
 							},
 							_origUrl.comm_mode ? null : {comm_mode:'ajax'},
 							_origUrl.output ? null : {output:'js'}
@@ -60,20 +60,17 @@ Uize.module ({
 					_requestData = _request.data || '',
 					_requestMethod = _request.requestMethod,
 					_requestMethodIsPost = _requestMethod == 'POST',
-					_xmlHttpRequest = _this._xmlHttpRequest
-						|| (_this._xmlHttpRequest = window.XMLHttpRequest
-						? new XMLHttpRequest
-						: new ActiveXObject ('Microsoft.XMLHTTP')
-						)
-					;
+					_xmlHttpRequest = m._xmlHttpRequest || (
+						m._xmlHttpRequest = window.XMLHttpRequest
+							? new XMLHttpRequest
+							: new ActiveXObject ('Microsoft.XMLHTTP')
+					);
 
 				_xmlHttpRequest.onreadystatechange = function () {
 					if (_xmlHttpRequest.readyState == 4) {
 						_xmlHttpRequest.onreadystatechange = _nop;
-						
-						var _status = _xmlHttpRequest.status;
-						
-						if (_status == 200) {
+
+						if (_xmlHttpRequest.status == 200) {
 							var _responseText = _xmlHttpRequest.responseText;
 							if (_returnTypeIsObject || _returnType == 'xml')
 								_request.responseXml = _xmlHttpRequest.responseXML
@@ -90,7 +87,7 @@ Uize.module ({
 							_callback ();
 						}
 						else {
-							//alert ('There was a problem retrieving the data:\n' + _this._xmlHttpRequest.statusText);
+							//alert ('There was a problem retrieving the data:\n' + m._xmlHttpRequest.statusText);
 							_xmlHttpRequest.abort ();
 						}
 					}
@@ -100,15 +97,18 @@ Uize.module ({
 					_requestData = _requestUrl.substr (_queryPos + 1);
 					_requestUrl = _requestUrl.slice (0,_queryPos);
 				}
-				_this._xmlHttpRequest.open (_requestMethod,_requestUrl,true);
+				m._xmlHttpRequest.open (_requestMethod,_requestUrl,true);
 				if (_requestMethodIsPost) {
 					// don't set the content-type request header if it's multipart/form-data; the built-in FormData object will take care of that
-					_request.contentType != 'multipart/form-data'
-						&& _this._xmlHttpRequest.setRequestHeader('Content-type', _request.contentType || 'application/x-www-form-urlencoded')
+					_request.contentType != 'multipart/form-data' &&
+						m._xmlHttpRequest.setRequestHeader (
+							'Content-type',
+							_request.contentType || 'application/x-www-form-urlencoded'
+						)
 					;
-					//_this._xmlHttpRequest.setRequestHeader('Content-length', _requestData.length);
+					//m._xmlHttpRequest.setRequestHeader ('Content-length', _requestData.length);
 				}
-				_this._xmlHttpRequest.send (_requestData);
+				m._xmlHttpRequest.send (_requestData);
 			};
 
 		return _class;

@@ -20,37 +20,40 @@
 
 <script type="text/javascript" src="../js/Uize.js"></script>
 
-<h1 class="document-title">
+<h1 class="header">
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
-	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
-	CSV / JSON Converter
-	<div id="page-actions" class="pageActions">
-		<a href="source-code/web-browser.html" class="buttonLink">SOURCE</a>
-	</div>
+	<a href="../index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
 </h1>
 
 <div class="main">
-
-<div>JSON</div>
-<textarea id="page-dataAsJson">
-[
-	{firstName:'jo|hn',lastName:'wol#les'},
-	{lastName:'boyd',firstName:'billy'}
-]
-</textarea>
-<!--
-[
-	[' john "cat" katzenberg ','dog'],
-	[' apple ','pear']
-]
--->
-<br/>
-
-<div>CSV</div>
-<textarea id="page-dataAsCsv">
-#jo|hn#|#wol##les#
-billy|boyd
-</textarea>
+	<h1 class="document-title">
+		<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+		CSV / JSON Converter
+		<div class="pageActionsShell">
+			<div id="page-actions" class="pageActions"><a href="source-code/csv-json-converter.html" class="buttonLink">SOURCE</a></div>
+		</div>
+	</h1>
+	
+	<div>JSON</div>
+	<textarea id="page-dataAsJson">
+	[
+		{firstName:'jo|hn',lastName:'wol#les'},
+		{lastName:'boyd',firstName:'billy'}
+	]
+	</textarea>
+	<!--
+	[
+		[' john "cat" katzenberg ','dog'],
+		[' apple ','pear']
+	]
+	-->
+	<br/>
+	
+	<div>CSV</div>
+	<textarea id="page-dataAsCsv">
+	#jo|hn#|#wol##les#
+	billy|boyd
+	</textarea>
 
 </div>
 

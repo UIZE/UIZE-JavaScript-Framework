@@ -65,7 +65,7 @@ Uize.module ({
 			},
 
 			set:{
-				items:[{title:'',link:'index.html',items:UizeSite.SiteMap ()}]
+				items:[{title:'',link:'index.html',items:Uize.clone (UizeSite.SiteMap ())}]
 			}
 		});
 	}

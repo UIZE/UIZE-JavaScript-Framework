@@ -312,15 +312,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_undefined
-			;
+				_undefined,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_binaryOperatorsMap = {divide:1,multiply:1,subtract:1,add:1},
 				_unaryOperatorsMap = {negate:1,percent:1,squareRoot:1},
 				_buttonsRequiringValidEntry =
@@ -333,14 +331,12 @@ Uize.module ({
 				_digitButtonsMap = {
 					digit0:'0', digit1:'1', digit2:'2', digit3:'3', digit4:'4', digit5:'5', digit6:'6', digit7:'7', digit8:'8', digit9:'9', point:'.'
 				},
-				_invalidEntryChars = '`~!@#$^&()_{}[]\\|:;"\'<,>?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-			;
-
-		/*** Utility Functions ***/
-			var
+				_invalidEntryChars = '`~!@#$^&()_{}[]\\|:;"\'<,>?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 				_enabledTrueProperty = {enabled:'inherit'},
 				_enabledFalseProperty = {enabled:false}
 			;
+
+		/*** Utility Functions ***/
 			function _getEnabledProperty (_enabled) {return _enabled ? _enabledTrueProperty : _enabledFalseProperty}
 
 			function _conformToNumber (_value) {return isNaN (_value) ? _undefined : +_value}

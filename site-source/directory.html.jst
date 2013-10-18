@@ -17,12 +17,14 @@
 
 <script type="text/javascript" src="js/Uize.js"></script>
 
-<h1 class="document-title">
+<h1 class="header">
 	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
-	Site Map
+	<a href="index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
 </h1>
 
 <div class="main">
+	<h1 class="document-title">Site Map</h1>
+
 	<div class="preamble">This document provides a directory / site map for the UIZE JavaScript Framework.</div>
 	<div id="page_contents-shell" class="contents-tree-shell">
 <%= Uize.Templates.List.process ({items:[{title:'Site Map',items:input.siteMap}]}) %>
