@@ -25,7 +25,11 @@
 
 Uize.module ({
 	name:'Uize.String',
-	required:'Uize.Str.Trim',
+	required:[
+		'Uize.Str.Camel',
+		'Uize.Str.Split',
+		'Uize.Str.Trim'
+	],
 	builder:function () {
 		'use strict';
 
@@ -36,6 +40,7 @@ Uize.module ({
 				_limitLength,
 				_repeat,
 				_Uize_Str = Uize.Str,
+				_Uize_Str_Split = _Uize_Str.Split,
 				_Uize_Str_Trim = _Uize_Str.Trim,
 
 			/*** General Variables ***/
@@ -393,6 +398,9 @@ Uize.module ({
 							- when the value =''= (empty string) is specified for the =subSTR= parameter, this method will return =true= (all strings can be said to start with an empty string)
 				*/
 
+			toCamel:_Uize_Str.Camel.to,
+			split:_Uize_Str_Split.split,
+			splitInTwo:_Uize_Str_Split.splitInTwo,
 			hasPadding:_Uize_Str_Trim.hasPadding,
 			trim:_Uize_Str_Trim.trim,
 			trimLeft:_Uize_Str_Trim.trimLeft,
