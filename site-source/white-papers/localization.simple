@@ -289,7 +289,7 @@ Types in the Context of Localization
 				Casting for Different Formatting Options
 					In some cases, it might be desirable to cast a value that has a supplied type to another type that defines additional formatting options that are desired for the localization.
 
-					An example of this might be receiving a date type value for a substitution token and casting the value to a time ago type for displaying how long ago a date is from the present time. In the same resource string, it might be desirable to use a substitution token to display a date value, while using a number substition token in parentheses to display the time ago equivalent of the same date.
+					An example of this might be receiving a date type value for a substitution token and casting the value to a time ago type for displaying how long ago a date is from the present time. In the same resource string, it might be desirable to use a substitution token to display a date value, while using another substition token in parentheses to display the time ago equivalent of the same date.
 
 					EXAMPLE
 					............................................................................
@@ -309,16 +309,17 @@ Types in the Context of Localization
 
 						If, for example, a color type value was cast to a shade type value that had possible values of dark, medium-dark, medium, medium-light, and light, precision would be lost but the value would not be incorrect. If, on the other hand, a currency in US dollars value was cast to a currency in Japenese Yen value, without applying the appropriate currency exchange rate, the cast value would most likely be incorrect.
 
-				### Casting for the Sake of Formatting Options
+				Extending Types to Add Formatting Options
+					Types can be defined to extend other types simply to offer additional formatting options or `type example values`, but in no way fundamentally change the meaning of the type.
 
-					- the target type is fundamentally the same as the source type, except that the target type's definition defines additional `type formatting options` or `type example values`
+					This pattern of extending is useful for manageing code so that the type system's code can be layered. The alternative would be for there to be only one type definition for any give type of value, and that single definition would have to grow in size to include all possible ways of formatting values of that type.
 
+					In situations where type extending is used to provide additional formatting options or example values, a resource string may cast a value of Type A to Type B, where Type B extends Type A by adding the formatting options that are desired by the resource string.
 
+				Types Can Have Resource Strings
+					The definitions for certain types, themselves, may have dependencies on resource strings.
 
-					- the type of the source value is less restrictive than the type being cast to
-						- casting a raw number to a linear distance
-					- the source value contains information that can be extracted to produce a value of the target type
-						- casting a date value to a time value by extracting just the time of day information from the date value
+					Therefore, the type system should support localization in the same way as projects with resource strings that will leverage the type system. Take the example of a date type. In order to serialize date values for a specific locale, the type will require translated names for days and months for that locale for the formatting options that show day and/or month. Moreover, formatting of numbers may involve selection of characters from a digits set resource string to support certain locales that don't use the Western 0-9 characters.
 
 		Serialization Options Inherited from Master
 			When a token is defined for a resource string in the master resource strings file, any serialization options defined for the token should be inherited by the locale specific translations of the resource string, but should also be overridable for specific locales.
@@ -331,7 +332,7 @@ Types in the Context of Localization
 			As such, different formatting options may be applied for different occurrences of the same token in a string, or the value may even be cast to a different type in a specific occurrence.
 
 		### Locale-specific Type Formatting Defaults
-			.
+			It might be desirable for
 
 	Extensible System for Types for Resource Strings
 		The resource string system should support an extensible system for types, so that support for new types can be added over time.

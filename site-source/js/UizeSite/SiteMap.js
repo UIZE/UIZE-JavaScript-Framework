@@ -70,6 +70,7 @@ Uize.module ({
 							}
 						},
 						_guide = function (_title,_link) {return _item (_title,'guides/',_link)},
+						_whitePaper = function (_title,_link) {return _item (_title,'white-papers/',_link)},
 						_news = function (_year) {return _item (_year + ' News','','news-' + _year)},
 						_javaScriptReference = function (_title,_link) {return _item (_title,'javascript-reference/',_link)},
 						_appendix = function (_title,_link) {return _item (_title,'appendixes/',_link)},
@@ -268,7 +269,6 @@ Uize.module ({
 									_todo ('Modules'),
 									_todo ('Documentation'),
 									_todo ('General'),
-									_todo ('Localization'),
 									_todo ('News Announcements'),
 									_todo ('External Site Integration')
 								]
@@ -284,6 +284,13 @@ Uize.module ({
 								]
 							}
 							*/
+						]
+					},
+					{
+						title:'White Papers',
+						link:'javascript-white-papers.html',
+						items:[
+							_whitePaper ('Localization')
 						]
 					},
 					{
