@@ -1,14 +1,14 @@
-This is a TO DO document for the =Uize.String.Lines= module.
+This is a TO DO document for the =Uize.Str.Lines= module.
 
 Possible New Methods
-	Uize.String.Lines.removeLineNumbering ??
+	Uize.Str.Lines.removeLineNumbering ??
 		Would remove line numbering from all the lines of a multi-line string.
 
-		Since this seems kind of esoteric, perhaps it could be put into a =Uize.String.Lines.Numbering= module, which would have methods like =Uize.String.Lines.Numbering.addNumbering= and =Uize.String.Lines.Numbering.removeNumbering=.
+		Since this seems kind of esoteric, perhaps it could be put into a =Uize.Str.Lines.Numbering= module, which would have methods like =Uize.Str.Lines.Numbering.addNumbering= and =Uize.Str.Lines.Numbering.removeNumbering=.
 
-	Uize.String.Lines.consolidateBlanks
+	Uize.Str.Lines.consolidateBlanks
 		................................................................................
-		Uize.String.Lines.consolidateBlanks = function (_sourceStr) {
+		Uize.Str.Lines.consolidateBlanks = function (_sourceStr) {
 			var _previousIsBlank;
 			return _package.modify (
 				_sourceStr,
@@ -24,24 +24,24 @@ Possible New Methods
 		};
 		................................................................................
 
-	Uize.String.Lines.pad
+	Uize.Str.Lines.pad
 		.
 
 	Rearranging Lines
-		Uize.String.Lines.sort
+		Uize.Str.Lines.sort
 			................................................................................
 			function sortMultilineStr (sourceStr) {
 				return (
-					Uize.String.Lines.split (sourceStr).sort (
+					Uize.Str.Lines.split (sourceStr).sort (
 						function (a,b) {return a < b ? -1 : 1}
 					).join (
-						Uize.String.Lines.getLinebreakType (sourceStr)
+						Uize.Str.Lines.getLinebreakType (sourceStr)
 					)
 				);
 			}
 			................................................................................
 
-		Uize.String.Lines.reverse
+		Uize.Str.Lines.reverse
 			.
 
 

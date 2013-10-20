@@ -4,9 +4,6 @@ Uize.String.lengthize (sourceSTR,lengthINT,alignFLOAT,padBOOL,truncateBOOL,tilde
 	- how does this relate to Uize.String.limitLength? (is limitLength a special case of lengthize?)
 	- should the defaults for the extended parameters result in it effectively being a pad? If so, should there be a pad method that is just an alias to lengthize?
 
-Uize.String.fromCamel
-	yeah?
-
 Uize.String.toDelimited & Uize.String.fromDelimited
 	Uize.String.[someMethodName]
 		- how are word starts denoted
@@ -18,5 +15,4 @@ Uize.String.toDelimited & Uize.String.fromDelimited
 			- invalid char replacement mode
 				- one replacement char per invalid char
 				- one replacement char per one or more invalid chars
-
 

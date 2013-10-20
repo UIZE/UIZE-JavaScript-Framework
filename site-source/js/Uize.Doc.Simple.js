@@ -27,9 +27,9 @@ Uize.module ({
 	name:'Uize.Doc.Simple',
 	required:[
 		'Uize.Data.Simple',
-		'Uize.String',
 		'Uize.Templates.List',
-		'Uize.String.Lines',
+		'Uize.Str.Lines',
+		'Uize.Str.Limit',
 		'Uize.Templates.Adoptable',
 		'Uize.Array.Sort',
 		'Uize.Util.Html.Encode',
@@ -42,7 +42,7 @@ Uize.module ({
 			var
 				_undefined,
 				_string = 'string',
-				_Uize_String_limitLength = Uize.String.limitLength,
+				_limitLength = Uize.Str.Limit.limitLength,
 				_htmlEncode = Uize.Util.Html.Encode.encode
 			;
 
@@ -141,7 +141,7 @@ Uize.module ({
 								'widget' +
 								(_simpleDocBuildParams.totalWidgets = (_simpleDocBuildParams.totalWidgets || 0) + 1)
 						;
-						return Uize.String.Lines.indent (Uize.Templates.Adoptable.process (_widgetProperties),1,_indent);
+						return Uize.Str.Lines.indent (Uize.Templates.Adoptable.process (_widgetProperties),1,_indent);
 					}
 				},
 				_slashCharCodesMap = {47:1,92:1} // 47 is forward slash, 92 is backslash
@@ -712,7 +712,7 @@ Uize.module ({
 								description:
 									_children [0].children.length
 										? ''
-										: _Uize_String_limitLength (_translateInlineFormatting (_children [0].value),400),
+										: _limitLength (_translateInlineFormatting (_children [0].value),400),
 								link:_headingPrefix ? ('#' + _headingPrefix) : '',
 								items:[]
 							}

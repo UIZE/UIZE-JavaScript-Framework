@@ -60,8 +60,7 @@ Uize.module ({
 	superclass:'Uize.Service.Adapter',
 	required:[
 		'Uize.Url',
-		'Uize.String',
-		'Uize.String.Lines',
+		'Uize.Str.Has',
 		'Uize.Array.Util',
 		'Uize.Services.FileSystem',
 		'Uize.Json',
@@ -73,7 +72,7 @@ Uize.module ({
 		/*** General Variables ***/
 			var
 				_undefined,
-				_startsWith = Uize.String.startsWith,
+				_hasPrefix = Uize.Str.Has.hasPrefix,
 				_sacredEmptyObject = {},
 				_trueFlag = {}
 			;
@@ -81,7 +80,7 @@ Uize.module ({
 		/*** Utility Functions ***/
 			function _makeUrlTesterMethod (_pathType) {
 				_pathType += 'Path';
-				return function (_url) {return _startsWith (_url,this.params [_pathType] + '/')};
+				return function (_url) {return _hasPrefix (_url,this.params [_pathType] + '/')};
 			}
 
 			function _makeUrlTransformerMethod (_pathTypeToRemove,_pathTypeToPrepend) {
@@ -98,7 +97,7 @@ Uize.module ({
 							;
 							return (
 								(
-									_startsWith (_urlMinusOldPath,'/' + _params.modulesFolder + '/Uize')
+									_hasPrefix (_urlMinusOldPath,'/' + _params.modulesFolder + '/Uize')
 										? _params.uizePath
 										: _params [_pathTypeToPrepend]
 								) +
@@ -264,7 +263,7 @@ Uize.module ({
 					moduleNameFromPath:function (_path,_pathType) {
 						var _modulesPath = this [_pathType + 'Url'] (this.params.modulesFolder + '/');
 						return (
-							_startsWith (_path,_modulesPath)
+							_hasPrefix (_path,_modulesPath)
 								? Uize.Build.Util.moduleNameFromModulePath (_path.slice (_modulesPath.length),true)
 								: ''
 						);

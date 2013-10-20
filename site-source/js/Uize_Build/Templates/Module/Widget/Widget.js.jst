@@ -1,8 +1,9 @@
 <%@
 	required (
-		'Uize.String',
+		'Uize.Array.Join',
 		'Uize.Json',
-		'Uize.String.Lines'
+		'Uize.Str.Lines',
+		'Uize.Str.Repeat'
 	);
 	input ({
 		widgetNamespace:'string',
@@ -37,22 +38,22 @@
 	Introduction
 		The =<%= _widgetModuleName %>= module implements a widget class.
 
-		*DEVELOPERS:* <%= Uize.String.hugJoin (input.developers || [],'`','`',', ') %>
+		*DEVELOPERS:* <%= Uize.Array.Join.hugJoin (input.developers || [],'`','`',', ') %>
 
 		Visual Sampler
 			Below is a visual sampler of the =<%= _widgetModuleName %>= class...
 
-			.............<%= Uize.String.repeat ('.',_widgetVisualSamplerModuleName.length) %>
+			.............<%= Uize.Str.Repeat.repeat ('.',_widgetVisualSamplerModuleName.length) %>
 			<< widget >>
 
 			widgetClass: <%= _widgetVisualSamplerModuleName %>
-			.............<%= Uize.String.repeat ('.',_widgetVisualSamplerModuleName.length) %>
+			.............<%= Uize.Str.Repeat.repeat ('.',_widgetVisualSamplerModuleName.length) %>
 */
 
 Uize.module ({
 	name:'<%= _widgetModuleName %>',
 	superclass:'<%= input.superclass || 'Uize.Widget.V2' %>',
-	required:<%= Uize.String.Lines.indent (Uize.Json.to (_required),1,'\t',false) %>,
+	required:<%= Uize.Str.Lines.indent (Uize.Json.to (_required),1,'\t',false) %>,
 	builder:function (_superclass) {
 		'use strict';
 

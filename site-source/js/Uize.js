@@ -444,7 +444,6 @@ Uize = (function () {
 							In the above example, the instance method =displayPropertyValue= is being defined for a hypothetical widget class. This method accepts a string parameter, being the name of a state property whose value should be displayed in the page in an implied node of the widget, and where the implied node's name is constructed from the prefix ='valueOf'= and the name of the state property with its first letter capitalized. Using this method to display the value of a =width= state property, the value of this property would be displayed in the implied node named =valueOfWidth=.
 
 							NOTES
-							- this method is implemented in the =Uize= base module rather than the =Uize.String= module because it is generally useful in many other modules and =Uize.Class= subclasses that don't otherwise want to require the entire =Uize.String= module
 							- if the first character of the source string is already capitalized, then the returned value will be the same as the source string
 							- see also the other `useful value transformers`
 				*/

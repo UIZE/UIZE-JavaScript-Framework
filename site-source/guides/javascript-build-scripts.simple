@@ -289,7 +289,7 @@ UIZE Config Options
 			- =Uize.Json=
 			- =Uize.Service= (and all submodules)
 			- =Uize.Services= (and all submodules, but only build-compatible service adapters)
-			- =Uize.String= (and all submodules)
+			- =Uize.Str= (and all submodules)
 			- =Uize.Template= (and all submodules)
 			- =Uize.Templates= (and all submodules)
 			- =Uize.Test= (and all submodules)

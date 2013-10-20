@@ -1,5 +1,5 @@
 <%@
-	required ('Uize.String');
+	required ('Uize.Array.Join');
 	input ({
 		title:'string',
 		urls:'object',
@@ -56,7 +56,7 @@
 
 	<div class="widgetInfoPane">
 		<ul class="featuresList"><%=
-			Uize.String.hugJoin (input.features,'\t\t\t<li>','</li>\n')
+			Uize.Array.Join.hugJoin (input.features,'\t\t\t<li>','</li>\n')
 		%></ul>
 
 		<p>This widget is built using the <a href="../reference/<% .widgetClassModule %>.html"><% .widgetClassModule %></a> module of the UIZE JavaScript Framework. To see more JavaScript examples, view the <a href="../javascript-examples.html">Javascript Examples</a> index page.</p>

@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Str.Camel',
-	required:'Uize.Class.Value',
 	builder:function () {
 		'use strict';
 

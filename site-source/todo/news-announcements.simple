@@ -1,22 +1,54 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
-NEW MODULE: Uize.Str.Split
-	- =Uize.String.split= becomes =Uize.Str.Split.split=
-	- =Uize.String.splitInTwo= becomes =Uize.Str.Split.splitInTwo=
+Uize.String Restructuring
 
-NEW MODULE: Uize.Str.Replace
-	- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
+	Uize.Array.Join
+		- =Uize.String.hugJoin= becomes =Uize.Array.Join.hugJoin=
 
-NEW MODULE: Uize.Str.Camel
-	- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
+	Uize.Str.Split
+		- =Uize.String.split= becomes =Uize.Str.Split.split=
+		- =Uize.String.splitInTwo= becomes =Uize.Str.Split.splitInTwo=
+	
+	Uize.Str.Replace
+		- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
+	
+	Uize.Str.Camel
+		- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
+	
+	Uize.Str
+		.
+	
+	New Modules
 
-NEW NAMESPACE: Uize.Str
+		- =Uize.Array.Join= - methods migrated from the =Uize.String= module
+		- =Uize.Str.Camel= - methods migrated from the =Uize.String= module
+		- =Uize.Str.Has= - methods migrated from the =Uize.String= module
+		- =Uize.Str.Limit= - methods migrated from the =Uize.String= module
+		- =Uize.Str.Repeat= - methods migrated from the =Uize.String= module
+		- =Uize.Str.Split= - methods migrated from the =Uize.String= module
+		- =Uize.Str.Trim= - methods migrated from the =Uize.String= module
+
+	Migrated Modules
+
+		- =Uize.Str.Builder= - migrated from the =Uize.String= namespace
+		- =Uize.Str.Discombobulator= - migrated from the =Uize.String= namespace
+		- =Uize.Str.Lines= - migrated from the =Uize.String= namespace
+		- =Uize.Str.Replace= - migrated from the =Uize.String= namespace
+
+	### TODO
+		- go through all the modules under Uize.Str and verify correct documentation and such
+		- go through all test modules for new Uize.Str modules and double check correctness
+
+	Uize.String Module Deprecated
+		.
+
+NEW MODULE: Uize.Math.Blend
 	.
 
-New Uize.Util.Html.Entities Module
+NEW MODULE: Uize.Util.Html.Entities
 	.
 
-New Uize.Util.Html.Encode Module
+NEW MODULE: Uize.Util.Html.Encode
 	.
 
 NEW NAMESPACE: Uize.Math

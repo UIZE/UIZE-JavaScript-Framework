@@ -739,20 +739,20 @@ More Features
 		For a more in-depth discussion, consult the reference for the =Uize.Json= module.
 
 	Working with Strings
-		UIZE provides utility methods for working with strings in the =Uize.String= module.
+		UIZE provides utility methods for working with strings in various modules under the =Uize.Str= namespace.
 
-		There seems to be no limit to the number of different string manipulation utilities that might come in handy in one situation or another. However, the =Uize.String= package module doesn't try to be all things to all people. In the interests of avoiding code bloat, the =Uize.String= module provides some of the more frequently needed string utilities, such as trimming whitespace, repeating a string segment, indenting a block of lines, camelCasing consecutive words, etc. More esoteric features can be implemented in application code, your own modules, or in extension modules to the =Uize.String= module.
+		Modules under the =Uize.Str= namespace offer utilities for trimming whitespace padding, repeating substrings, joining strings in various ways, splitting strings, creating lookup based substring replacers, creating performant string builder objects, testing for the presence of prefixes or suffixes, working with multi-line strings, and more.
 
-		In the interests of code interoperability, extending native objects is not part of the design philosophy of the UIZE JavaScript Framework, so the string methods of the =Uize.String= module are *not* added to the prototype of JavaScript's =String= object. You're encouraged to use the native methods of JavaScript's =String= object as much as possible, and look to the static methods of the =Uize.String= module for other capabilities.
+		In the interests of code interoperability, extending native objects is not part of the design philosophy of the UIZE JavaScript Framework, so the string methods provided in the various modules under the =Uize.Str= namespace are *not* added to the prototype of JavaScript's =String= object. You're encouraged to use the native methods of JavaScript's =String= object as much as possible, and look to the static methods in the =Uize.Str= namespace modules for other capabilities.
 
 		EXAMPLE
-		...................................................
+		.......................................................
 		alert (
-			Uize.String.repeat ('-',70) + '\n' +
-			Uize.String.repeat ('Hello, world! ',5) + '\n' +
-			Uize.String.repeat ('=',70)
+			Uize.Str.Repeat.repeat ('-',70) + '\n' +
+			Uize.Str.Repeat.repeat ('Hello, world! ',5) + '\n' +
+			Uize.Str.Repeat.repeat ('=',70)
 		);
-		...................................................
+		.......................................................
 
 		The above example will display an alert dialog with the output...
 
@@ -762,7 +762,7 @@ More Features
 		======================================================================
 		......................................................................
 
-		For a more in-depth discussion, consult the reference for the =Uize.String= module.
+		For a more in-depth discussion, consult the references for the various modules under the =Uize.Str= namespace.
 
 	Working with URLs
 		UIZE provides utility methods for working with URLs in the =Uize.Url= module.

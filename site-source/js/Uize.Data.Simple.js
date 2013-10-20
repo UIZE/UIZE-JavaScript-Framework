@@ -26,9 +26,9 @@
 Uize.module ({
 	name:'Uize.Data.Simple',
 	required:[
-		'Uize.String',
+		'Uize.Str.Lines',
 		'Uize.Str.Split',
-		'Uize.String.Lines'
+		'Uize.Str.Trim'
 	],
 	builder:function () {
 		'use strict';
@@ -75,7 +75,7 @@ Uize.module ({
 						value:'',
 						children:[]
 					},
-					_lines = Uize.String.Lines.split (_simple),
+					_lines = Uize.Str.Lines.split (_simple),
 					_linesLength = _lines.length,
 					_linesLengthMinus1 = _linesLength - 1,
 					_lineNo,
@@ -117,7 +117,7 @@ Uize.module ({
 				}
 
 				for (_lineNo = -1; ++_lineNo < _linesLength;) {
-					if ((_line = _lines [_lineNo]) && (!_ignoreWhitespaceLines || Uize.String.trim (_line))) {
+					if ((_line = _lines [_lineNo]) && (!_ignoreWhitespaceLines || Uize.Str.Trim.trim (_line))) {
 						if (_commentBlockRegExp.test (_line)) {
 							/* support for multi-line comment blocks, as in the example...
 								#[

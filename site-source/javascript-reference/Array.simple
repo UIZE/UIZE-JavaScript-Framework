@@ -812,7 +812,7 @@ Instance Methods
 			;
 			............................................................
 
-			### mention Uize.String.hugJoin
+			### mention Uize.Array.Join.hugJoin
 
 		NOTES
 		- compare to the =toString= instance method

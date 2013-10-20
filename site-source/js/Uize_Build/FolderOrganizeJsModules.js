@@ -50,7 +50,7 @@ Uize.module ({
 	required:[
 		'Uize.Services.FileSystem',
 		'Uize.Build.Util',
-		'Uize.String'
+		'Uize.Str.Has'
 	],
 	builder:function () {
 		'use strict';
@@ -66,7 +66,7 @@ Uize.module ({
 				_fileSystem.getFiles ({
 					path:_modulesFolderPath,
 					pathMatcher:function (_path) {
-						return _jsModuleExtensionRegExp.test (_path) && Uize.String.startsWith (_path,_namespacePrefix);
+						return _jsModuleExtensionRegExp.test (_path) && Uize.Str.Has.hasPrefix (_path,_namespacePrefix);
 					},
 					pathTransformer:function (_path) {
 						_fileSystem.copyFile ({

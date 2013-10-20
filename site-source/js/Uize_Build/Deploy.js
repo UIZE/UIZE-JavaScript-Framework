@@ -32,7 +32,7 @@ Uize.module ({
 	name:'Uize.Build.Deploy',
 	required:[
 		'Uize.Build.Wsh',
-		'Uize.String',
+		'Uize.Array.Join',
 		'Uize.Services.FileSystem',
 		'Uize.Json'
 	],
@@ -94,7 +94,7 @@ Uize.module ({
 								'/M MD5 ' +
 								_siteInfo.domain +
 							'\');',
-							Uize.String.hugJoin (_actions,'crt.Screen.Send(\'','\\n\');'),
+							Uize.Array.Join.hugJoin (_actions,'crt.Screen.Send(\'','\\n\');'),
 							'crt.Screen.Send(\'exit\\n\');',
 							'if (crt.Screen.WaitForString(\'logout\',60)) crt.Quit();'
 						]);

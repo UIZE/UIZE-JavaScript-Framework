@@ -27,7 +27,7 @@ Uize.module ({
 	name:'UizeSite.Build.Util',
 	required:[
 		'Uize.Url',
-		'Uize.String',
+		'Uize.Str.Has',
 		'Uize.Services.FileSystem'
 	],
 	builder:function () {
@@ -46,7 +46,7 @@ Uize.module ({
 					pathMatcher:function (_filePath) {
 						return (
 							_indexableFileExtensionRegExp.test (_filePath) &&
-							!Uize.String.startsWith (Uize.Url.from (_filePath).fileName,'~')
+							!Uize.Str.Has.hasPrefix (Uize.Url.from (_filePath).fileName,'~')
 						);
 					}
 				});

@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Build.NeatenJsFiles',
 	required:[
 		'Uize.Build.Util',
-		'Uize.String.Lines'
+		'Uize.Str.Lines'
 	],
 	builder:function () {
 		'use strict';
@@ -42,7 +42,7 @@ Uize.module ({
 						return /\.js$/.test (_sourceFileName) ? _sourceFileName : null;
 					},
 					fileBuilder:function (_sourceFileName,_sourceFileText) {
-						var _neatenedSourceFileText = Uize.String.Lines.trimRight (_sourceFileText);
+						var _neatenedSourceFileText = Uize.Str.Lines.trimRight (_sourceFileText);
 						return (
 							_neatenedSourceFileText != _sourceFileText
 								? {

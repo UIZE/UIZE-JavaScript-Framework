@@ -44,7 +44,7 @@ Uize.module({
 		'Uize.Data.NameValueRecords',
 		'Uize.Node',
 		'Uize.Node.Event',
-		'Uize.String',
+		'Uize.Str.Trim',
 		'Uize.Widget.Options.Selector'
 	],
 	builder: function (_superclass) {
@@ -61,7 +61,7 @@ Uize.module({
 				_Uize_Data = _Uize.Data,
 				_Uize_Node = _Uize.Node,
 				_Uize_Node_Event = _Uize_Node.Event,
-				_Uize_String = Uize.String
+				_trim = Uize.Str.Trim.trim
 			;
 
 		/*** Class Constructor ***/
@@ -301,9 +301,11 @@ Uize.module({
 			};
 
 			_classPrototype._getNormalizedQuery = function (_tokenInfo) {
-				return _tokenInfo ?
-					_Uize_String.trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ') :
-					_emptyString
+				return (
+					_tokenInfo
+						? _trim (_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ')
+						: _emptyString
+				);
 			};
 
 			_classPrototype._getTokenInfo = function (_input, _position) {

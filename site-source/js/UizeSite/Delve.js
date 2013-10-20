@@ -28,7 +28,10 @@ Uize.module ({
 		'Uize.Util.Html.Encode',
 		'Uize.Util.Oop',
 		'Uize.Node',
-		'Uize.String',
+		'Uize.Str.Has',
+		'Uize.Str.Limit',
+		'Uize.Str.Repeat',
+		'Uize.Array.Join',
 		'Uize.Data.PathsTree',
 		'Uize.Array.Sort',
 		'Uize.Json',
@@ -358,7 +361,7 @@ Uize.module ({
 					'>' +
 						(
 							_linkText.indexOf (_childrenDelimiter) > -1
-								? Uize.String.hugJoin (
+								? Uize.Array.Join.hugJoin (
 									_linkText.split (_childrenDelimiter),
 									'<b>',
 									'</b>',
@@ -371,7 +374,7 @@ Uize.module ({
 			}
 
 			function _isUizeModule (_moduleName) {
-				return Uize.String.startsWith (_moduleName,'Uize');
+				return Uize.Str.Has.hasPrefix (_moduleName,'Uize');
 			}
 
 			function _addTabContentsSection (
@@ -456,7 +459,7 @@ Uize.module ({
 					m.setNodeValue (
 						'windowInspected',
 						_window
-							? Uize.String.limitLength (_window.location.href,120)
+							? Uize.Str.Limit.limitLength (_window.location.href,120)
 							: 'no window being inspected'
 					);
 					m.setNodeProperties (
@@ -638,7 +641,7 @@ Uize.module ({
 						if (
 							_nodeId &&
 							!(_nodeId in _nodeCacheIdLookup) &&
-							(_nodeId == _idPrefix || Uize.String.startsWith (_nodeId,_nodeIdPrefix))
+							(_nodeId == _idPrefix || Uize.Str.Has.hasPrefix (_nodeId,_nodeIdPrefix))
 						) {
 							_totalUnaccessedNodes++;
 							_allNodesMap [_nodeId.slice (_nodeIdPrefixLength)] = this;
@@ -1765,7 +1768,7 @@ Uize.module ({
 									;
 									m.children.treeList.traverseTree ({
 										itemHandler:function (_item,_itemSpecifier,_depth) {
-											_reportLines.push (Uize.String.repeat ('\t',_depth) + _item.title);
+											_reportLines.push (Uize.Str.Repeat.repeat ('\t',_depth) + _item.title);
 										}
 									});
 									_showReport (
