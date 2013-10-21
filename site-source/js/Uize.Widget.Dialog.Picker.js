@@ -100,7 +100,7 @@ Uize.module ({
 						/*** add the keepOpen button ***/
 							_this.addChild ('keepOpen',Uize.Widget.Button.Checkbox).wire (
 								'Changed.selected',
-								function (_event) {_this.set ({_keepOpen:_event.newValue})}
+								function (_event) {_this.set ({_keepOpen:_event.source.get ('selected')})}
 								/*?
 									Child Widget
 										keepOpen Child Widget
@@ -110,12 +110,10 @@ Uize.module ({
 
 						/*** add event handlers ***/
 							function _handleDismiss() {
-								_this._submittedValue
-									&& _this.fire ({
-											name:'Submission Complete',
-											result:{value:_this._initialValue}
-										})
-								;
+								if (_this._submittedValue) {
+									_this.children.value.set({value: _this._initialValue});
+									_fireSubmissionComplete(_false);
+								}
 							}
 							_this.wire ({
 								Ok:function () {_fireSubmissionComplete ()},
@@ -205,7 +203,7 @@ Uize.module ({
 
 		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
-				shieldOpacity:0
+				shieldOpacity:0.01
 			});
 
 		return _class;

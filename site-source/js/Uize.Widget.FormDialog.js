@@ -47,13 +47,14 @@ Uize.module ({
 
 						_form.wire(
 							'Changed.okToSubmit',
-							function(_event) {
-								_event.newValue
+							function() {
+								_form.get('okToSubmit')
 									&& _this.handleFormValue(
-										function() {
+										function(_info) {
 											_this.fire ({
 												name:'Submission Complete',
-												result:_form.get('value')
+												result:_form.get('value'),
+												info:_info
 											});
 
 											_this.set({shown:_false});

@@ -44,7 +44,7 @@ Uize.module({
 		'Uize.Data.NameValueRecords',
 		'Uize.Node',
 		'Uize.Node.Event',
-		'Uize.String',
+		'Uize.Str.Trim',
 		'Uize.Widget.Options.Selector'
 	],
 	builder: function (_superclass) {
@@ -61,7 +61,9 @@ Uize.module({
 				_Uize_Data = _Uize.Data,
 				_Uize_Node = _Uize.Node,
 				_Uize_Node_Event = _Uize_Node.Event,
-				_Uize_String = Uize.String
+				_Uize_Str_Trim = _Uize.Str.Trim,
+				_supportsPlaceholder = typeof document != 'undefined'
+					&& 'placeholder' in document.createElement('input')
 			;
 
 		/*** Class Constructor ***/
@@ -79,6 +81,7 @@ Uize.module({
 						_this._preventRequests = _false;
 						_this._typedQueryTokenInfo = _null;
 						_this._tokenInfo = _null;
+						_this._canUpdateLastTypedQuery = _true;
 						_this._suggestionHoverHandler = function (_suggestion) {
 							var
 								_displayInfo = _suggestion ?
@@ -118,10 +121,15 @@ Uize.module({
 								_this.set('value', _preFocusQuery);
 								_this._preventRequests = _false;
 							},
-							'Changed.focused': function (_event) {
-								var _suggestions = _this.children.suggestions;
-								if (_event.newValue)
+							'Changed.focused': function () {
+								if (_this.get('focused')) {
 									_preFocusQuery = _this + _emptyString;
+									_this._typedQueryTokenInfo = _this._tokenInfo = _this._getTokenInfo(
+										_this.get('tentativeValue'),
+										_this.getCaretPosition()
+									);
+									_this._updateSuggestions();
+								}
 								_this._updateSuggestionsPalette();
 							},
 
@@ -196,7 +204,7 @@ Uize.module({
 						});
 					}
 				),
-				_classPrototype = _class.prototype;
+				_classPrototype = _class.prototype
 		;
 		/*** General Variables ***/
 			var _highlightModes = { none: 1, query: 1, remaining: 1 };
@@ -204,7 +212,7 @@ Uize.module({
 		/*** Private Helper Functions ***/
 			// Returns a conformer which constrains values to be atleast the given minimum
 			function _constrainAtLeast(_min) {
-				return function (_value) { return Uize.constrain(_value, _min, Infinity) }
+				return function (_value) { return Uize.constrain(_value, _min, Infinity) };
 			}
 
 			// Returns x (mod y) in modular arithmetic
@@ -215,6 +223,7 @@ Uize.module({
 			_classPrototype._addAndWireSuggestions = function () {
 				var
 					_this = this,
+					_cssClassSelected = _this._cssClassSelected,
 					_suggestions = _this.addChild(
 						'suggestions',
 						_this._optionsWidgetClass || Uize.Widget.Options.Selector,
@@ -223,9 +232,9 @@ Uize.module({
 								built: _false,
 								html: _true,
 								optionWidgetProperties: {
-									cssClassActive: 'selectedSuggestion',
-									cssClassSelected: 'selectedSuggestion',
-									cssClassTentativeSelected: 'selectedSuggestion'
+									cssClassActive:_cssClassSelected,
+									cssClassSelected:_cssClassSelected,
+									cssClassTentativeSelected:_cssClassSelected
 								},
 								values: []
 							},
@@ -237,8 +246,8 @@ Uize.module({
 				_suggestions.wire({
 					// When a suggestion is highlighted (eg hovered over), it is shown in the textbox.
 					// When no suggestions are highlighted, the original query will be shown.
-					'Changed.tentativeValue': function (_event) {
-						_this._showOnHover && _this._suggestionHoverHandler(_event.newValue)
+					'Changed.tentativeValue': function () {
+						_this._showOnHover && _this._suggestionHoverHandler(_suggestions.get('tentativeValue'));
 					},
 
 					// When a suggestion is clicked, the value of this widget is set to the suggestion
@@ -246,6 +255,7 @@ Uize.module({
 					'Option Event': function (_event) {
 						if (_event.childEvent.name === 'Click') {
 							_this._showOnHover || _this._suggestionHoverHandler(_suggestions.get('tentativeValue'));
+							_this._canUpdateLastTypedQuery = _false;
 							_this.set('focused', _true);
 							_this._fireSuggestionSelected(_event.childEvent.source);
 						}
@@ -301,9 +311,13 @@ Uize.module({
 			};
 
 			_classPrototype._getNormalizedQuery = function (_tokenInfo) {
+				var _normalizedQuery = _tokenInfo && _Uize_Str_Trim.trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ');
 				return _tokenInfo ?
-					_Uize_String.trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ') :
-					_emptyString
+						(!_supportsPlaceholder && _normalizedQuery == this.get('defaultValue') ? 
+							_emptyString :
+							_normalizedQuery)
+						: _emptyString
+					;
 			};
 
 			_classPrototype._getTokenInfo = function (_input, _position) {
@@ -375,7 +389,6 @@ Uize.module({
 			_classPrototype._handleKeyboardControl = function (_domEvent) {
 				var
 					_this = this,
-					_separator = _this._querySeparators,
 					_suggestions = _this.children.suggestions
 				;
 
@@ -436,24 +449,32 @@ Uize.module({
 				var
 					_this = this,
 					_children = _this.children,
-					_normalizedQuery = _this._getNormalizedQuery(_this._typedQueryTokenInfo);
+					_normalizedQuery = _this._getNormalizedQuery(_this._typedQueryTokenInfo),
+					_defaultValue = _this.get('defaultValue')
+				;
+
+				_this._canUpdateLastTypedQuery &&
+					_this.set({ lastTypedQuery: _normalizedQuery })
 				;
 
 				if (
-					_normalizedQuery != _this.get('defaultValue') &&
+					(_normalizedQuery != _defaultValue || (_normalizedQuery == _defaultValue && !_defaultValue)) &&
 					_normalizedQuery.length >= _this._numCharsBeforeSuggest &&
-					_this._numSuggestions
+					_this._numSuggestions &&
+					_this._serviceUrl != _undefined
 				) {
 					_this.ajax(
-						Uize.pairUp(
-							'serviceUrl', _this._serviceUrl,
-							_this._serviceQueryParamName, _normalizedQuery,
-							_this._serviceNumSuggestionsParamName, _this._numSuggestions
+						Uize.copyInto( 
+							Uize.pairUp(
+								'serviceUrl', _this._serviceUrl,
+								_this._serviceQueryParamName, _normalizedQuery,
+								_this._serviceNumSuggestionsParamName, _this._numSuggestions
+							),
+							_this._additionalAutoSuggestParams || {}
 						),
-						//{
-							//cache: 'memory',
-							//callbackSuccess: function (_response) {
-							function (_response) {
+						{
+							cache: 'memory',
+							callbackSuccess: function (_response) {
 								var _suggestions = _children.suggestions;
 								(_suggestions || _this._addAndWireSuggestions()).set({
 									tentativeValue: _null,
@@ -478,7 +499,7 @@ Uize.module({
 									)
 								});
 								_this._updateSuggestionsPalette();
-							// }
+							}
 						}
 					);
 				} else if (_children.suggestions) {
@@ -501,17 +522,21 @@ Uize.module({
 						_focused = _this.get('focused'),
 						_hasSuggestions = _this.children.suggestions && _this.children.suggestions.get('values').length
 					;
+					
 					if (_focused && _hasSuggestions) {
+						_this.displayNode('trending', !_this._lastTypedQuery);
 						// The palette must have display:true to be positioned
 						_this.showNode(_suggestionsPaletteNode, _false);
 						_this.displayNode(_suggestionsPaletteNode);
-						_Uize_Node.setAbsPosAdjacentTo(_suggestionsPaletteNode, _inputNode, 'y');
-						// We want the palette to be at least as wide as the input and as wide as needed to display every
-						// suggestion.
-						_this.setNodeStyle(
-							_suggestionsPaletteNode,
-							{ minWidth: _Uize_Node.getDimensions(_inputNode).width }
-						);
+						if (_this.get('autoPositionSuggestionsPalette')) {
+							_Uize_Node.setAbsPosAdjacentTo(_suggestionsPaletteNode, _inputNode, 'y');
+							// We want the palette to be at least as wide as the input and as wide as needed to display every
+							// suggestion.
+							_this.setNodeStyle(
+								_suggestionsPaletteNode,
+								{ minWidth: _Uize_Node.getDimensions(_inputNode).width }
+							);
+						}
 						_this.showNode(_suggestionsPaletteNode);
 					} else if (_this.getNodeStyle('suggestionsPalette', 'display') != 'none') {
 						// When the input loses focus, the following line is executed. When a suggestion is clicked,
@@ -612,7 +637,7 @@ Uize.module({
 					}
 
 					// disable browser autocomplete
-					_this.setNodeProperties('input', { autocomplete: "off" });
+					_this.setNodeProperties('input', { autocomplete: 'off' });
 
 					_superclass.doMy (_this,'wireUi');
 				}
@@ -620,6 +645,10 @@ Uize.module({
 
 		/*** State Properties ***/
 			_class.stateProperties({
+				_additionalAutoSuggestParams:{
+					name: 'additionalAutoSuggestParams',
+					value: {}
+				},
 				_allowKeypress: {
 					name: 'allowKeypress',
 					value: _true
@@ -632,6 +661,15 @@ Uize.module({
 								- the initial value is =true=
 					*/
 				},
+				_autoPositionSuggestionsPalette: {
+					name: 'autoPositionSuggestionsPalette',
+					value: true
+					/*?
+						State Properties
+							autoPositionSuggestionsPalette
+								Set this to false to use the default CSS positioning for the suggestions palette.
+					*/
+				},
 				_cssClassHighlight: {
 					name: 'cssClassHighlight',
 					value: 'suggestionHighlight'
@@ -642,6 +680,18 @@ Uize.module({
 
 								NOTES
 								- the initial value is ='suggestionHighlight'=
+					*/
+				},
+				_cssClassSelected:{
+					name:'cssClassSelected',
+					value:'selectedSuggestion'
+					/*?
+						State Properties
+							cssClassSelected
+								A string, indicating the CSS class used for the (tentatively) selected suggestion
+
+								NOTES
+								- the initial value is ='selectedSuggestion'=
 					*/
 				},
 				_highlightMode: {
@@ -658,9 +708,21 @@ Uize.module({
 								- the initial value is ='query'=
 					*/
 				},
+				_lastTypedQuery:{
+					name:'lastTypedQuery'
+					/*?
+						State Properties
+							lastTypedQuery
+								A read only string, specifies the last query used for auto suggest
+
+								NOTES
+								- the initial value is =undefined=
+								- Read Only
+					*/
+				},
 				_numCharsBeforeSuggest: {
 					name: 'numCharsBeforeSuggest',
-					conformer: _constrainAtLeast(1),
+					conformer: _constrainAtLeast(0),
 					value: 1
 					/*?
 						State Properties
@@ -670,7 +732,7 @@ Uize.module({
 								The primary use of such a minimum is to increase the relevance of the returned suggestions.
 
 								NOTES
-								- the value must be at least 1
+								- the value must be at least 0
 								- the initial value is =1=
 					*/
 				},
@@ -698,7 +760,7 @@ Uize.module({
 								name: _term,
 								displayName: _formattedTerm
 							}
-						}
+						};
 					}
 					/*?
 						State Properties
@@ -770,9 +832,9 @@ Uize.module({
 									suffix: _term.substr(_normalizedQuery.length),
 									fullWord: _term
 
-								}
+								};
 							}
-						)
+						);
 					}
 					/*?
 						State Properties

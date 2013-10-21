@@ -52,13 +52,13 @@ Uize.module ({
 						}
 
 						function _syncValueDetails(_propertyName) {
-							var
-								_propertyValue = _this.get(_propertyName),
-								_valueDetails = _valueDetailsCache[_propertyValue]
-							;
+							var _valueDetails = _valueDetailsCache[_propertyValue];
 
 							if (_valueDetails === _undefined) {
-								var _valueObject = Uize.findRecord (_this.get('values'), {name:_propertyValue});
+								var
+									_propertyValue = _this.get(_propertyName),
+									_valueObject = Uize.findRecord (_this.get('values'), {name:_propertyValue})
+								;
 
 								_addToValueDetailsCache(
 									_propertyValue,
@@ -73,10 +73,10 @@ Uize.module ({
 							'Changed.tentativeValue':function() { _syncValueDetails(_tentativeValueString) },
 							'Changed.value':function() { _syncValueDetails(_valueString) },
 							'Changed.tentativeValueDetails':function() {
-								_addToValueDetailsCache(_this.get(_tentativeValueString), _this._tentativeValueDetails)
+								_addToValueDetailsCache(_this.get(_tentativeValueString), _this._tentativeValueDetails);
 							},
 							'Changed.valueDetails':function() {
-								_addToValueDetailsCache(_this.get(_valueString), _this._valueDetails)
+								_addToValueDetailsCache(_this.get(_valueString), _this._valueDetails);
 							},
 							'Changed.values':function() {
 								_valueDetailsCache = {};

@@ -44,6 +44,18 @@ Uize.module ({
 				}
 			);
 
+		/*** Public Instance Methods ***/
+			_class.prototype.getValueObject = function (_name) {
+				var _undefined;
+				return Uize.findRecord (
+					this._values,
+					{
+						name:_name == _undefined
+							? this + ''
+							: _name
+					}
+				);
+			};
 		/*** State Properties ***/
 			_class.stateProperties ({
 				_tentativeValueNo:{	// read-only

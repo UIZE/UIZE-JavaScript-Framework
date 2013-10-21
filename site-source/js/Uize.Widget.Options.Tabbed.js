@@ -25,6 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Options.Tabbed',
+	required:'Uize.Node.Classes',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -57,11 +58,16 @@ Uize.module ({
 				var m = this;
 
 				if (_valueNo > -1)
-					m.setNodeProperties (
-						m._getTabBodyNode (_valueNo),
-						{className:_valueNo == _currentValueNo ? m._bodyClassActive : m._bodyClassInactive}
-					)
-				;
+				{
+					var _isValue = _valueNo == _currentValueNo,
+						_bodyClassActive = m._bodyClassActive,
+						_bodyClassInactive = m._bodyClassInactive,
+						_tabBody = m._getTabBodyNode(_valueNo)
+					;
+
+					Uize.Node.Classes.addClass(_tabBody, _isValue ? _bodyClassActive : _bodyClassInactive);
+					Uize.Node.Classes.removeClass(_tabBody, _isValue ? _bodyClassInactive : _bodyClassActive);
+				}
 			};
 
 			_classPrototype._updateUiTabContent = function () {
@@ -71,7 +77,8 @@ Uize.module ({
 					if (m._tabCanBeSelected (_currentValueNo)) {
 						m.updateUiTabState (m._lastShownTabBodyNo,_currentValueNo);
 						m._lastShownTabBodyNo = _currentValueNo;
-					} else {
+					}
+					else if (m._mustHaveSelectedTab){
 						for (
 							var  _valueNo = -1, _values = m.get ('values'), _valuesLength = _values.length;
 							++_valueNo < _valuesLength;
@@ -126,7 +133,11 @@ Uize.module ({
 		/*** State Properties ***/
 			_class.stateProperties ({
 				_bodyClassActive:'bodyClassActive',
-				_bodyClassInactive:'bodyClassInactive'
+				_bodyClassInactive:'bodyClassInactive',
+				_mustHaveSelectedTab:{
+					name:'mustHaveSelectedTab',
+					value:true
+				}
 			});
 
 		return _class;

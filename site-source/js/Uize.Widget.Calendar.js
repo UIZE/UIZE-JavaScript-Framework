@@ -171,8 +171,6 @@ Uize.module ({
 				_false = false,
 				_null = null,
 				_Uize_Date = Uize.Date,
-				_dayNames = _Uize_Date.dayNames,
-				_monthNames = _Uize_Date.monthNames,
 				_formatDate = Uize.Date.Formatter.format
 			;
 
@@ -224,7 +222,7 @@ Uize.module ({
 			}
 
 			function _updateUiMonthDisplay () {
-				this.isWired && this.setNodeValue ('month',_monthNames [this._month]);
+				this.isWired && this.setNodeValue ('month',this._monthNames [this._month]);
 				/*?
 					Implied Nodes
 						month Implied Node
@@ -313,7 +311,10 @@ Uize.module ({
 
 						/*** build and replace the grid HTML ***/
 							/*** build the days header ***/
-								var _dayNameLength = m._dayNameLength;
+								var
+									_dayNameLength = m._dayNameLength,
+									_dayNames = m._dayNames
+								;
 								for (var _dayNo = -1; ++_dayNo < 7;)
 									_gridStringChunks.push (
 										'<th title="' + _dayNames [_dayNo] + '">' +
@@ -495,6 +496,10 @@ Uize.module ({
 			},
 
 			stateProperties:{
+				_dayNames:{
+					name:'dayNames',
+					value:_Uize_Date.dayNames
+				},
 				_dayNameLength:{
 					name:'dayNameLength',
 					value:1
@@ -605,6 +610,10 @@ Uize.module ({
 								- see the companion =year= state property
 								- see the related =snapViewOnValueChange= and =value= state properties
 					*/
+				},
+				_monthNames:{
+					name:'monthNames',
+					value:_Uize_Date.monthNames
 				},
 				_snapViewOnValueChange:{
 					name:'snapViewOnValueChange',
