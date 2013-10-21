@@ -11,15 +11,15 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 5
+	importance: 4
 	codeCompleteness: 100
 	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Str.Has= module eases working with strings, and supports trimming, camel-casing, multi-line indenting, starts-with / ends-with tests, and more.
-
+		The =Uize.Str.Has= module provides methods for testing if a string starts with, ends with, or contains a specified substring.
+		
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
@@ -82,7 +82,7 @@ Uize.module ({
 							If a source string starts with or ends with a substring, then that source string also has the substring. In other words, if =Uize.Str.Has.hasPrefix (sourceStr,subStr)= returns =true=, or if =Uize.Str.Has.hasSuffix (sourceStr,subStr)= returns =true=, then =Uize.Str.Has.has (sourceStr,subStr)= must also return =true=.
 
 							EXAMPLES
-							............................................................................
+							........................................................................
 							Uize.Str.Has.has ('JavaScript','Java');                 // returns true
 							Uize.Str.Has.has ('JavaScript','JavaScript');           // returns true
 							Uize.Str.Has.has ('JavaScript','Script');               // returns true
@@ -97,7 +97,7 @@ Uize.module ({
 							Uize.Str.Has.has ('JavaScript','JavaScript   ');        // returns false
 							Uize.Str.Has.has ('JavaScript','   JavaScript');        // returns false
 							Uize.Str.Has.has ('JavaScript','JavaScript Framework'); // returns false
-							............................................................................
+							........................................................................
 
 							NOTES
 							- see the related =Uize.Str.Has.hasPrefix= and =Uize.Str.Has.hasSuffix= static methods
@@ -120,7 +120,7 @@ Uize.module ({
 							The test that this method performs is case and space sensitive. In cases where you need to test without regards to case or whitespace, it is best to construct a regular expression using the "$" (anchor to end) metacharacter and the =i= (case-insensitivity) switch.
 
 							EXAMPLES
-							............................................................................
+							..............................................................................
 							Uize.Str.Has.hasSuffix ('JavaScript','Java');                 // returns false
 							Uize.Str.Has.hasSuffix ('Java','JavaScript');                 // returns false
 							Uize.Str.Has.hasSuffix ('JavaScript','JavaScript');           // returns true
@@ -131,7 +131,7 @@ Uize.module ({
 							Uize.Str.Has.hasSuffix ('JavaScript','Script');               // returns true
 							Uize.Str.Has.hasSuffix ('JavaScript','JavaScript Framework'); // returns false
 							Uize.Str.Has.hasSuffix ('JavaScript','');                     // returns true
-							............................................................................
+							..............................................................................
 
 							NOTES
 							- see the companion =Uize.Str.Has.hasPrefix= static method

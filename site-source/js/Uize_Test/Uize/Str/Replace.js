@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Test
 	importance: 1
-	codeCompleteness: 4
+	codeCompleteness: 20
 	docCompleteness: 100
 */
 

@@ -29,18 +29,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return Uize.Test.resolve ({
-			title:'Test for Uize.String.Replace Module',
-			test:[
-				Uize.Test.requiredModulesTest ('Uize.String.Replace'),
-				{
-					title:'Test that the deprecated Uize.String.Replace module is simply a reference to the Uize.Str.Replace module',
-					test:function () {
-						return this.expectSameAs (Uize.Str.Replace,Uize.String.Replace);
-					}
-				}
-			]
-		});
+		return Uize.Test.moduleAliasTest ('Uize.String.Replace','Uize.Str.Replace');
 	}
 });
 

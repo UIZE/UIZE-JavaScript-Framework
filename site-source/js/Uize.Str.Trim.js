@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Str.Trim= module provides methods for detecting and removing padding around single line strings.
+		The =Uize.Str.Trim= module provides methods for detecting and removing whitespace padding around single line strings.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

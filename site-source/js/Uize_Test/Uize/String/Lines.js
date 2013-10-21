@@ -29,18 +29,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return Uize.Test.resolve ({
-			title:'Test for Uize.String.Lines Module',
-			test:[
-				Uize.Test.requiredModulesTest ('Uize.String.Lines'),
-				{
-					title:'Test that the deprecated Uize.String.Lines module is simply a reference to the Uize.Str.Lines module',
-					test:function () {
-						return this.expectSameAs (Uize.Str.Lines,Uize.String.Lines);
-					}
-				}
-			]
-		});
+		return Uize.Test.moduleAliasTest ('Uize.String.Lines','Uize.Str.Lines');
 	}
 });
 
