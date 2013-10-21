@@ -1,6 +1,6 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
-Uize.String Restructuring
+Uize.String Module Deprecated
 
 	Uize.Array.Join
 		- =Uize.String.hugJoin= becomes =Uize.Array.Join.hugJoin=
