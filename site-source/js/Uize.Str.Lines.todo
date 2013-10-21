@@ -14,7 +14,7 @@ Possible New Methods
 				_sourceStr,
 				function (_line) {
 					var
-						_isBlank = !Uize.String.trim (_line),
+						_isBlank = !Uize.Str.Trim.trim (_line),
 						_keepLine = !_isBlank || !_previousIsBlank
 					;
 					_previousIsBlank = _isBlank;

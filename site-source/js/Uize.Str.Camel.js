@@ -13,7 +13,7 @@
 	type: Package
 	importance: 1
 	codeCompleteness: 50
-	docCompleteness: 70
+	docCompleteness: 100
 */
 
 /*?

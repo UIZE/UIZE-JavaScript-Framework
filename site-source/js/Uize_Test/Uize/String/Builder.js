@@ -25,22 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.String.Builder',
-	required:'Uize.Str.Builder',
 	builder:function () {
 		'use strict';
 
-		return Uize.Test.resolve ({
-			title:'Test for Uize.String.Builder Module',
-			test:[
-				Uize.Test.requiredModulesTest ('Uize.String.Builder'),
-				{
-					title:'Test that the deprecated Uize.String.Builder module is simply a reference to the Uize.Str.Builder module',
-					test:function () {
-						return this.expectSameAs (Uize.Str.Builder,Uize.String.Builder);
-					}
-				}
-			]
-		});
+		return Uize.Test.moduleAliasTest ('Uize.String.Builder','Uize.Str.Builder');
 	}
 });
 

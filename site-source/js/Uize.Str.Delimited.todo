@@ -1,0 +1,16 @@
+This is a proposal document for a =Uize.Str.Delimited= module.
+
+It is anticipated that this method could be used as the basic for methods like =urlize=, to take a source string that is delimited according to one set of rules and convert it to a target string that is delimited according to a different set of rules. This process involves creating a canonical words array form from the source and then creating a delimited string from that words array.
+
+Uize.Str.Delimited.to & Uize.Str.Delimited.from
+	Uize.Str.Delimited.to
+		- how are word starts denoted
+			- delimiter character eg. '_', '-', ':'
+			- first char of each word capped
+				- first char of first word capped
+			- char validator
+			- invalid char replacement char
+			- invalid char replacement mode
+				- one replacement char per invalid char
+				- one replacement char per one or more invalid chars
+

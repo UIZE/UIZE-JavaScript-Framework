@@ -25,22 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.String.Discombobulator',
-	required:'Uize.Str.Discombobulator',
 	builder:function () {
 		'use strict';
 
-		return Uize.Test.resolve ({
-			title:'Test for Uize.String.Discombobulator Module',
-			test:[
-				Uize.Test.requiredModulesTest ('Uize.String.Discombobulator'),
-				{
-					title:'Test that the deprecated Uize.String.Discombobulator module is simply a reference to the Uize.Str.Discombobulator module',
-					test:function () {
-						return this.expectSameAs (Uize.Str.Discombobulator,Uize.String.Discombobulator);
-					}
-				}
-			]
-		});
+		return Uize.Test.moduleAliasTest ('Uize.String.Discombobulator','Uize.Str.Discombobulator');
 	}
 });
 

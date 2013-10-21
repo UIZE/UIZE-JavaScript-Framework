@@ -2055,6 +2055,25 @@ Uize.module ({
 					*/
 				};
 
+				_class.moduleAliasTest = function (_moduleAliasName,_moduleTrueName) {
+					return Uize.Test.resolve ({
+						title:'Test for the ' + _moduleAliasName + ' Alias Module',
+						test:[
+							Uize.Test.requiredModulesTest (_moduleAliasName),
+							Uize.Test.requiredModulesTest (_moduleTrueName),
+							{
+								title:'Test that the ' + _moduleAliasName + ' module is simply an alias / reference to the ' + _moduleTrueName + ' module',
+								test:function () {
+									return this.expectSameAs (
+										Uize.getModuleByName (_moduleAliasName),
+										Uize.getModuleByName (_moduleTrueName)
+									);
+								}
+							}
+						]
+					});
+				};
+
 		/*** State Properties ***/
 			_class.stateProperties ({
 				_duration:'duration',

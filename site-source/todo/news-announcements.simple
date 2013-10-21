@@ -36,8 +36,8 @@ Uize.String Restructuring
 		- =Uize.Str.Replace= - migrated from the =Uize.String= namespace
 
 	### TODO
-		- go through all the modules under Uize.Str and verify correct documentation and such
-		- go through all test modules for new Uize.Str modules and double check correctness
+		- add docs to deprecated Uize.String module to indicate where methods have been migrated to
+		- create new announcement
 
 	Uize.String Module Deprecated
 		.

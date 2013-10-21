@@ -11,9 +11,9 @@
 
 /* Module Meta Data
 	type: Package
-	importance: 6
+	importance: 1
 	codeCompleteness: 100
-	docCompleteness: 100
+	docCompleteness: 50
 */
 
 /*?
@@ -21,6 +21,9 @@
 		The =Uize.String= module eases working with strings, and supports trimming, camel-casing, multi-line indenting, starts-with / ends-with tests, and more.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		The deprecated =Uize.String= module aggregates methods from various modules in order to provide backwards compatibility for the static methods that have been migrated into separate modules under the =Uize.Str= and =Uize.Array= namespaces. For full details, consult the [[../news/2013-??-??-Uize.String-module-deprecated.html][news announcement]] for this change.
+
 */
 
 Uize.module ({
