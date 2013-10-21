@@ -1,0 +1,17 @@
+<%@
+	required ('UizeSite.Templates.SimpleDoc');
+	input ({title:'string',description:'string',body:'string'});
+%><%@ startBlock ('displayTitleHtml') %>
+	<a href="../javascript-white-papers.html" class="breadcrumb breadcrumbWithArrow">WHITE PAPERS</a>
+	<% .title %>
+<%@ endBlock () %><%=
+	UizeSite.Templates.SimpleDoc.process ({
+		title:input.title,
+		section:'Documentation',
+		description:input.description || 'This is a white paper document.',
+		pathToRoot:'../',
+		displayTitleHtml:displayTitleHtml (),
+		body:input.body
+	})
+%>
+

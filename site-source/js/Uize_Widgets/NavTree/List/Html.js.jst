@@ -1,5 +1,5 @@
 <%@
-	required ('Uize.String');
+	required ('Uize.Str.Repeat');
 	input ({
 		idPrefix:'string'
 	});
@@ -20,7 +20,7 @@
 			;
 			_htmlChunks.push (
 				'<nobr>' +
-				Uize.String.repeat (_depthSpacer,_depth) +
+				Uize.Str.Repeat.repeat (_depthSpacer,_depth) +
 				(
 					_Class.itemIsDivider (_item)
 						? _dividerHtml

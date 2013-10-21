@@ -27,7 +27,7 @@
 
 Uize.module ({
 	name:'Uize.Build.FileBuilders.CompressedCssFiles',
-	required:'Uize.String',
+	required:'Uize.Str.Has',
 	builder:function () {
 		var
 			_cssFileExtension = '.css',
@@ -39,7 +39,7 @@ Uize.module ({
 				return (
 					_urlParts.fileType == 'css' &&
 					this.isTempUrl (_urlParts.folderPath) &&
-					Uize.String.endsWith (_urlParts.file,_compressedCssFileExtension)
+					Uize.Str.Has.hasSuffix (_urlParts.file,_compressedCssFileExtension)
 				);
 			},
 			builderInputs:function (_urlParts) {

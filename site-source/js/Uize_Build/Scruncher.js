@@ -64,7 +64,7 @@ Uize.module ({
 	name:'Uize.Build.Scruncher',
 	required:[
 		'Uize.Xml',
-		'Uize.String',
+		'Uize.Str.Has',
 		'Uize.Str.Split'
 	],
 	builder:function () {
@@ -178,7 +178,7 @@ Uize.module ({
 					_tokenTerminated = _false,
 					_currentBlock = '',
 					_currentLine = '',
-					_Uize_String_startsWith = Uize.String.startsWith
+					_hasPrefix = Uize.Str.Has.hasPrefix
 				;
 				/*** initialize settings ***/
 					/* IDEA:
@@ -344,7 +344,7 @@ Uize.module ({
 						if (_tokenType == _WORD) {
 							for (var _mappingNo = -1; ++_mappingNo < _mappings.length;) {
 								var _mapping = _mappings [_mappingNo];
-								if (_Uize_String_startsWith (_currentToken,_mapping._sourcePrefix + '_')) {
+								if (_hasPrefix (_currentToken,_mapping._sourcePrefix + '_')) {
 									_incidencesOfIdentifiersScrunched++;
 									var _scrunchedToken = _mapping._scrunchMap [_currentToken] || '';
 									if (!_scrunchedToken) {

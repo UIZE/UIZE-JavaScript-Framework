@@ -1884,7 +1884,7 @@ Uize.module ({
 								EXAMPLE
 								.................................................................................
 								Uize.Test.staticMethodsTest ([
-									['Uize.String.trimLeft',[
+									['Uize.Str.Trim.trimLeft',[
 										['Test that left-trimming empty string produces empty string',
 											'',
 											''
@@ -1914,7 +1914,7 @@ Uize.module ({
 											'hello\t\t'
 										]
 									]],
-									['Uize.String.trimRight',[
+									['Uize.Str.Trim.trimRight',[
 										['Test that right-trimming empty string produces empty string',
 											'',
 											''
@@ -1947,7 +1947,7 @@ Uize.module ({
 								]);
 								.................................................................................
 
-								In the above (rather long) example, static method tests are being declared for the =Uize.String.trimLeft= and =Uize.String.trimRight= static methods of the =Uize.String= module.
+								In the above (rather long) example, static method tests are being declared for the =Uize.Str.Trim.trimLeft= and =Uize.Str.Trim.trimRight= static methods of the =Uize.Str.Trim= module.
 
 								NOTES
 								- see the related =Uize.Test.staticMethodTest= static method

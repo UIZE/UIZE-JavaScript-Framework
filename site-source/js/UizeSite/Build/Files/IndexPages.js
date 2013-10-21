@@ -48,6 +48,7 @@ Uize.module ({
 							'javascript-examples-by-module.html',
 							'javascript-modules-index.html',
 							'javascript-reference.html',
+							'javascript-white-papers.html',
 							'javascript-widgets.html',
 							'todo/modules.html'
 						);

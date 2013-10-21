@@ -1,0 +1,9 @@
+<%@
+	required ('UizeSite.Templates.IndexPage');
+	input ({files:'array'});
+%><%= UizeSite.Templates.IndexPage.process ({
+	title:'JavaScript White Papers',
+	description:'Various white papers have been written to explore in depth certain facets of building applications and frameworks using ECMAScript (aka JavaScript).',
+	files:input.files
+}) %>
+

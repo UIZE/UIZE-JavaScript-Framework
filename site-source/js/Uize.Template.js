@@ -131,9 +131,9 @@
 Uize.module ({
 	name:'Uize.Template',
 	required:[
-		'Uize.String',
 		'Uize.Str.Replace',
-		'Uize.Str.Split'
+		'Uize.Str.Split',
+		'Uize.Str.Trim'
 	],
 	builder:function () {
 		'use strict';
@@ -145,7 +145,7 @@ Uize.module ({
 				_false = false,
 				_string = 'string',
 				_splitInTwo = Uize.Str.Split.splitInTwo,
-				_trim = Uize.String.trim,
+				_trim = Uize.Str.Trim.trim,
 				_jsonStringLiteralEscaper = Uize.Str.Replace.replacerByLookup ({
 					'\\':'\\\\',
 					'\n':'\\n',
@@ -377,13 +377,13 @@ Uize.module ({
 											This applies both to duplicates that may occur within a single =@required= call, as well as duplicates that may arise across multiple =@required= calls. While duplicates are not a very likely occurrence, this protection does exist to prevent duplicates in the =required= property of the =Uize.Template.compile= method's full form result object.
 
 											EXAMPLE
-											..........................................................
+											...........................................................
 											<%@ required ('Uize.Xml,Uize.Json,Uize.Color,Uize.Xml') %>
 											<%@ required ('Uize.Color') %>
-											<%@ required (['Uize.Date','Uize.String','Uize.Date']) %>
-											..........................................................
+											<%@ required (['Uize.Date','Uize.Str.Trim','Uize.Date']) %>
+											...........................................................
 
-											In the above example, the very first =@required= call has two entries for the =Uize.Xml= module. Then, the second call repeats the =Uize.Color= module that occurred in the first call. Finally, the third call, while using the array form for specifying the required modules, has a duplicate entry for the =Uize.Date= module. In this example, the final list of required modules would be =['Uize.Xml','Uize.Json','Uize.Color','Uize.Date','Uize.String']=.
+											In the above example, the very first =@required= call has two entries for the =Uize.Xml= module. Then, the second call repeats the =Uize.Color= module that occurred in the first call. Finally, the third call, while using the array form for specifying the required modules, has a duplicate entry for the =Uize.Date= module. In this example, the final list of required modules would be =['Uize.Xml','Uize.Json','Uize.Color','Uize.Date','Uize.Str.Trim']=.
 							*/
 						}
 						function input (_inputProfiles) {

@@ -30,7 +30,7 @@ Uize.module ({
 	required:[
 		'UizeSite.Build.FileBuilders.WidgetsToGo',
 		'Uize.Data.Matches',
-		'Uize.String'
+		'Uize.Str.Has'
 	],
 	builder:function () {
 		return Uize.package ({
@@ -38,7 +38,7 @@ Uize.module ({
 			urlMatcher:function (_urlParts) {
 				return (
 					_urlParts.fileType == 'html' &&
-					Uize.String.startsWith (
+					Uize.Str.Has.hasPrefix (
 						_urlParts.folderPath,
 						this.builtUrl (UizeSite.Build.FileBuilders.WidgetsToGo.widgetsToGoPath)
 					) &&

@@ -68,7 +68,8 @@ Uize.require (
 		'UizeSite.Build.Util',
 		'Uize.Url',
 		'Uize.Data.PathsTree',
-		'Uize.Data.Matches'
+		'Uize.Data.Matches',
+		'Uize.Str.Has'
 	],
 	function () {
 		'use strict';
@@ -86,7 +87,7 @@ Uize.require (
 					_modulesList,
 					function (_moduleName) {
 						return (
-							!Uize.String.startsWith (_moduleName,'Uize.Build.') &&
+							!Uize.Str.Has.hasPrefix (_moduleName,'Uize.Build.') &&
 							_modulesLookup [_visualTestsModuleNameFromWidgetClass (_moduleName)]
 						);
 					}

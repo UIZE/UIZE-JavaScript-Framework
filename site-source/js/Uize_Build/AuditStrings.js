@@ -103,7 +103,7 @@ Uize.module ({
 	required:[
 		'Uize.Build.Util',
 		'Uize.Build.Scruncher',
-		'Uize.String'
+		'Uize.Array.Join'
 	],
 	builder:function () {
 		'use strict';
@@ -200,13 +200,13 @@ Uize.module ({
 						return {
 							logDetails:
 								'\t\tNON-INTERNATIONALIZABLE STRINGS\n' +
-									Uize.String.hugJoin (_nonI18nStrings,'\t\t\t','\n') + '\n' +
+									Uize.Array.Join.hugJoin (_nonI18nStrings,'\t\t\t','\n') + '\n' +
 								'\t\tLIKELY NON-INTERNATIONALIZABLE STRINGS\n' +
-									Uize.String.hugJoin (_likelyNonI18nStrings,'\t\t\t','\n') + '\n' +
+									Uize.Array.Join.hugJoin (_likelyNonI18nStrings,'\t\t\t','\n') + '\n' +
 								'\t\tPOSSIBLY INTERNATIONALIZABLE STRINGS\n' +
-									Uize.String.hugJoin (_possibleI18nStrings,'\t\t\t','\n') + '\n' +
+									Uize.Array.Join.hugJoin (_possibleI18nStrings,'\t\t\t','\n') + '\n' +
 								'\t\tLIKELY INTERNATIONALIZABLE STRINGS\n' +
-									Uize.String.hugJoin (_likelyI18nStrings,'\t\t\t','\n')
+									Uize.Array.Join.hugJoin (_likelyI18nStrings,'\t\t\t','\n')
 						};
 					},
 					alwaysBuild:true,

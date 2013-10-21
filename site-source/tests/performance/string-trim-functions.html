@@ -51,7 +51,7 @@
 Uize.require (
 	[
 		'UizeSite.Page.Example.Test.library',
-		'Uize.String'
+		'Uize.Str.Trim'
 	],
 	function () {
 		'use strict';
@@ -69,7 +69,7 @@ Uize.require (
 				return str.slice(0, i + 1);
 			}
 
-			var _Uize_String_trim = Uize.String.trim;
+			var _Uize_Str_Trim_trim = Uize.Str.Trim.trim;
 
 			page.performTest = function (_reportResults) {
 				var
@@ -96,7 +96,7 @@ Uize.require (
 						function () {
 							/*** measure duration of repeatedly trimming ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
-									_Uize_String_trim (_largeStringWithPadding);
+									_Uize_Str_Trim_trim (_largeStringWithPadding);
 								}
 						},
 						function () {
@@ -108,7 +108,7 @@ Uize.require (
 						function () {
 							/*** measure duration of repeatedly trimming ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
-									_Uize_String_trim (_smallStringOneSpacePadding);
+									_Uize_Str_Trim_trim (_smallStringOneSpacePadding);
 								}
 						},
 						function () {
@@ -120,7 +120,7 @@ Uize.require (
 						function () {
 							/*** measure duration of repeatedly trimming ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
-									_Uize_String_trim (_largeStringWithoutPadding);
+									_Uize_Str_Trim_trim (_largeStringWithoutPadding);
 								}
 						},
 						function () {
@@ -132,7 +132,7 @@ Uize.require (
 						function () {
 							/*** measure duration of repeatedly trimming ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
-									_Uize_String_trim (_1000Spaces);
+									_Uize_Str_Trim_trim (_1000Spaces);
 								}
 						},
 						function () {
@@ -144,7 +144,7 @@ Uize.require (
 						function () {
 							/*** measure duration of repeatedly trimming ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
-									_Uize_String_trim (_emptyStr);
+									_Uize_Str_Trim_trim (_emptyStr);
 								}
 						}
 					],

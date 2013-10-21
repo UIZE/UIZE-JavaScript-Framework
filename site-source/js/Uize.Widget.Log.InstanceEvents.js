@@ -67,7 +67,7 @@ Uize.module ({
 	name:'Uize.Widget.Log.InstanceEvents',
 	required:[
 		'Uize.Json',
-		'Uize.String'
+		'Uize.Str.Has'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -116,7 +116,7 @@ Uize.module ({
 									_eventsToHandlersMap:{
 										'*':
 											function (_event) {
-												if (!Uize.String.startsWith (_event.name,'Changed.')) {
+												if (!Uize.Str.Has.hasPrefix (_event.name,'Changed.')) {
 													m.log (
 														m.localize ('customInstanceEvent') + ': ' + Uize.Json.to (_event,'mini')
 													);

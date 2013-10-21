@@ -33,7 +33,7 @@ Uize.module ({
 		'Uize.Build.Scruncher',
 		'Uize.Date',
 		'Uize.Build.Util',
-		'Uize.String'
+		'Uize.Str.Has'
 	],
 	builder:function () {
 		var
@@ -50,7 +50,7 @@ Uize.module ({
 				return (
 					_urlParts.fileType == 'js' &&
 					this.isTempUrl (_urlParts.folderPath) &&
-					Uize.String.endsWith (_urlParts.file,_compressedJsFileExtension)
+					Uize.Str.Has.hasSuffix (_urlParts.file,_compressedJsFileExtension)
 				);
 			},
 			builderInputs:function (_urlParts) {

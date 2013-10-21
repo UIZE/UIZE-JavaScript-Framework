@@ -27,8 +27,8 @@ Uize.module ({
 	name:'Uize.Doc.Sucker',
 	required:[
 		'Uize.Build.Scruncher',
-		'Uize.String',
-		'Uize.String.Lines',
+		'Uize.Array.Join',
+		'Uize.Str.Lines',
 		'Uize.Data.Simple',
 		'Uize.Doc.Simple',
 		'Uize.Util.Oop'
@@ -57,7 +57,7 @@ Uize.module ({
 				) {
 					_docCommentRegExp.test (_comment = _comments [_commentNo]) &&
 						_simpleDocChunks.push (
-							Uize.String.Lines.normalizeIndent (_comment.replace (_docCommentRegExp,'').replace (/\*\/$/,''))
+							Uize.Str.Lines.normalizeIndent (_comment.replace (_docCommentRegExp,'').replace (/\*\/$/,''))
 						)
 					;
 				}
@@ -331,7 +331,7 @@ Uize.module ({
 									'\t\t\t' +
 									(
 										_modulesUnderNamespace.length
-											? Uize.String.hugJoin (_modulesUnderNamespace,'=' + _moduleName + '.','=',' | ')
+											? Uize.Array.Join.hugJoin (_modulesUnderNamespace,'=' + _moduleName + '.','=',' | ')
 											: 'There are no modules directly under this namespace.'
 									) + '\n' +
 									'\n'

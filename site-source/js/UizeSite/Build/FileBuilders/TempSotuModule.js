@@ -28,17 +28,20 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.TempSotuModule',
 	required:[
-		'Uize.String',
+		'Uize.Str.Has',
 		'Uize.Build.Util'
 	],
 	builder:function () {
-		var _sotuModuleName = 'UizeSite.Sotu';
+		var
+			_sotuModuleName = 'UizeSite.Sotu',
+			_hasPrefix = Uize.Str.Has.hasPrefix
+		;
 
 		function _isModuleForSotu (_moduleName) {
 			return (
-				(_moduleName == 'Uize' || Uize.String.startsWith (_moduleName,'Uize.')) &&
+				(_moduleName == 'Uize' || _hasPrefix (_moduleName,'Uize.')) &&
 				_moduleName != _sotuModuleName &&
-				!Uize.String.startsWith (_moduleName,'Uize.Test.')
+				!_hasPrefix (_moduleName,'Uize.Test.')
 			);
 		}
 
@@ -118,7 +121,7 @@ Uize.module ({
 							++_submoduleNo < _moduleReferenceFilesLength;
 						) {
 							var _submoduleName = _moduleReferenceFiles [_submoduleNo].title;
-							if (Uize.String.startsWith (_submoduleName,_moduleNamePlusDot)) {
+							if (_hasPrefix (_submoduleName,_moduleNamePlusDot)) {
 								_nestedSubmodules++;
 								_submoduleName.indexOf ('.',_moduleNamePlusDotLength) == -1 && _directSubmodules++;
 							}

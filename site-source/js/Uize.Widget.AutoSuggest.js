@@ -61,7 +61,7 @@ Uize.module({
 				_Uize_Data = _Uize.Data,
 				_Uize_Node = _Uize.Node,
 				_Uize_Node_Event = _Uize_Node.Event,
-				_Uize_Str_Trim = _Uize.Str.Trim,
+				_trim = Uize.Str.Trim.trim,
 				_supportsPlaceholder = typeof document != 'undefined'
 					&& 'placeholder' in document.createElement('input')
 			;
@@ -311,13 +311,13 @@ Uize.module({
 			};
 
 			_classPrototype._getNormalizedQuery = function (_tokenInfo) {
-				var _normalizedQuery = _tokenInfo && _Uize_Str_Trim.trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ');
+				var _normalizedQuery = _tokenInfo && _trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ');
 				return _tokenInfo ?
-						(!_supportsPlaceholder && _normalizedQuery == this.get('defaultValue') ? 
-							_emptyString :
-							_normalizedQuery)
-						: _emptyString
-					;
+					(!_supportsPlaceholder && _normalizedQuery == this.get('defaultValue') ? 
+						_emptyString :
+						_normalizedQuery)
+					: _emptyString
+				;
 			};
 
 			_classPrototype._getTokenInfo = function (_input, _position) {

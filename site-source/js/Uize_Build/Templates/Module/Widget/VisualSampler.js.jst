@@ -1,5 +1,5 @@
 <%@
-	required ('Uize.String');
+	required ('Uize.Array.Join');
 	input ({
 		widgetNamespace:'string',
 		developers:'string'
@@ -23,7 +23,7 @@
 	Introduction
 		The =<%= _visualSamplerModuleName %>= class implements a visual sampler widget for the =<%= _widgetModuleName %>= class.
 
-		*DEVELOPERS:* <%= Uize.String.hugJoin (input.developers || [],'`','`',', ') %>
+		*DEVELOPERS:* <%= Uize.Array.Join.hugJoin (input.developers || [],'`','`',', ') %>
 */
 
 Uize.module ({

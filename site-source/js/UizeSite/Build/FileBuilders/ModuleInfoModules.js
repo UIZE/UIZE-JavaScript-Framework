@@ -29,7 +29,7 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.ModuleInfoModules',
 	required:[
 		'Uize.Build.Util',
-		'Uize.String'
+		'Uize.Str.Has'
 	],
 	builder:function () {
 		var
@@ -49,7 +49,7 @@ Uize.module ({
 				return (
 					this.isBuiltUrl (_pathname) &&
 					_jsModuleExtensionRegExp.test (_pathname) &&
-					Uize.String.startsWith (_moduleNameFromBuiltPath (this,_pathname),_moduleInfoModulesNamespace)
+					Uize.Str.Has.hasPrefix (_moduleNameFromBuiltPath (this,_pathname),_moduleInfoModulesNamespace)
 				);
 			},
 			builderInputs:function (_urlParts) {

@@ -28,8 +28,9 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.BuiltLibraryModules',
 	required:[
-		'Uize.String',
-		'Uize.String.Lines',
+		'Uize.Str.Has',
+		'Uize.Str.Lines',
+		'Uize.Str.Trim',
 		'Uize.Build.Util',
 		'Uize.Url',
 		'Uize.Build.ModuleInfo'
@@ -57,10 +58,10 @@ Uize.module ({
 				var _pathname = _urlParts.pathname;
 				return (
 					!this.params.isDev &&
-					Uize.String.startsWith (_pathname,this.builtUrl (this.params.modulesFolder + '/')) &&
+					Uize.Str.Has.hasPrefix (_pathname,this.builtUrl (this.params.modulesFolder + '/')) &&
 					(
 						_urlParts.file == 'library.js' ||
-						Uize.String.endsWith (_pathname,'.library.js')
+						Uize.Str.Has.hasSuffix (_pathname,'.library.js')
 					)
 				);
 			},
@@ -77,7 +78,7 @@ Uize.module ({
 				function _moduleBuiltUrl (_moduleName) {
 					return m.builtUrl (m.getModuleUrl (_moduleName));
 				}
-				Uize.String.Lines.forEach (
+				Uize.Str.Lines.forEach (
 					_contentsCommentStartPos > -1
 						?
 							_libraryFileContents.slice (_contentsCommentStartPos,_contentsCommentEndPos)
@@ -86,10 +87,10 @@ Uize.module ({
 					,
 					function (_moduleName) {
 						if (
-							(_moduleName = Uize.String.trim (_moduleName)) &&
+							(_moduleName = Uize.Str.Trim.trim (_moduleName)) &&
 							_lineStartsWithIdentifierCharRegExp.test (_moduleName)
 						) {
-							Uize.String.endsWith (_moduleName,'->')
+							Uize.Str.Has.hasSuffix (_moduleName,'->')
 								? Uize.push (
 									_modules,
 									Uize.map (
@@ -129,7 +130,7 @@ Uize.module ({
 						_inputs.modules,
 						function (_modulePath) {
 							if (!_libraryUsesUizeModules)
-								_libraryUsesUizeModules = Uize.String.startsWith (Uize.Url.from (_modulePath).fileName,'Uize')
+								_libraryUsesUizeModules = Uize.Str.Has.hasPrefix (Uize.Url.from (_modulePath).fileName,'Uize')
 							;
 							return _stripModuleHeaderComment (m.readFile ({path:_modulePath}));
 						}

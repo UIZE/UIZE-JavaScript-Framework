@@ -30,7 +30,7 @@ Uize.module ({
 	required:[
 		'Uize.Build.Util',
 		'Uize.Data.Simple',
-		'Uize.String.Lines'
+		'Uize.Str.Lines'
 	],
 	builder:function () {
 		var
@@ -82,7 +82,7 @@ Uize.module ({
 						_metaDataText
 							?
 								Uize.Data.Simple.parse ({
-									simple:Uize.String.Lines.normalizeIndent (_metaDataText),
+									simple:Uize.Str.Lines.normalizeIndent (_metaDataText),
 									collapseChildren:true
 								})
 							: null

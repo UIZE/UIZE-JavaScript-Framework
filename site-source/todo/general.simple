@@ -89,17 +89,6 @@ Code Size Optimization
 		Uize.Widget.V2
 			Expose the functionality as a mixin, so that the V2 widget capabilities can be mised into existing =Uize.Widget= subclasses, rather than having to rebase those widget classes (which then impacts all their subclasses).
 
-		Uize.String
-			Factor Out Trim Related Methods Into Uize.String.Trim
-				Move the trim related methods into a separate =Uize.String.Trim= module.
-
-				..................................................................
-				Uize.String.trim        >> BECOMES >>  Uize.String.Trim.trim
-				Uize.String.trimLeft    >> BECOMES >>  Uize.String.Trim.trimLeft
-				Uize.String.trimRight   >> BECOMES >>  Uize.String.Trim.trimRight
-				Uize.String.hasPadding  >> BECOMES >>  Uize.String.Trim.hasPadding
-				..................................................................
-
 	Improvements in Uize.Widget
 		Implement Way of Declaring UI Wirers
 			Implement a new feature for UI wirers for widgets and switch away from old =wireUi= approach.
@@ -117,7 +106,7 @@ Code Size Optimization
 
 			Current violators...
 
-			- =Uize.String=
+			- =Uize.Fx=
 			- =Uize.Data=
 			- =Uize.Date=
 
@@ -198,7 +187,7 @@ Code to Factor Out
 	Code to factor out of widget classes into non-Web specific modules...
 
 	- =Uize.Widget.ImagePort= - pure rectangle scaling math should be factored out into a new =Uize.Math.RectScaler= module
-	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.String.Population= module (or =Uize.Template.Population=?)
+	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.Str.Population= module (or =Uize.Template.Population=?)
 	- =Uize.Widget.Tree= - model stuff for the data structure that represents a tree (=Uize.Data.Tree=?)
 
 General Drag and Drop Framework
@@ -264,7 +253,7 @@ Iterator Interface
 			For example, the =Uize.Fade= module supports wrapping a =Uize.Fade= value series as an iterator.
 
 			- =Uize.Data.Combinations=
-			- =Uize.String.Lines=
+			- =Uize.Str.Lines=
 			- =Uize.Color.xUtil=
 			- =Uize.Curve=
 

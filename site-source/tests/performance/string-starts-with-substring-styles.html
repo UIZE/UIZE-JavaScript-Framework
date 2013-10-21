@@ -25,11 +25,11 @@
 			<div id="page-actions" class="pageActions"><a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a></div>
 		</div>
 	</h1>
-	
+
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This test page demonstrates the performance of the <code>Uize.String.startsWith</code> static method, as compared to the performance of two other, less optimized techniques for testing if one string starts with another string.</p>
+		<p>This test page demonstrates the performance of the <code>Uize.Str.Has.hasPrefix</code> static method, as compared to the performance of two other, less optimized techniques for testing if one string starts with another string.</p>
 	</div>
 
 	<!-- test results -->
@@ -49,7 +49,8 @@
 Uize.require (
 	[
 		'UizeSite.Page.Example.Test.library',
-		'Uize.String'
+		'Uize.Str.Has',
+		'Uize.Str.Repeat
 	],
 	function () {
 		'use strict';
@@ -58,11 +59,11 @@ Uize.require (
 			var page = window.page = UizeSite.Page.Example.Test ();
 
 		/*** some other approaches ***/
-			Uize.String.startsWithUsingSliceEqualsSubstr = function (_string,_subStr) {
+			Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr = function (_string,_subStr) {
 				return _string.slice (0,_subStr.length) == _subStr;
 			};
 
-			Uize.String.startsWithUsingIndexOfEquals0 = function (_string,_subStr) {
+			Uize.Str.Has.hasPrefixUsingIndexOfEquals0 = function (_string,_subStr) {
 				return !_string.indexOf (_subStr);
 			};
 
@@ -71,7 +72,7 @@ Uize.require (
 				var
 					_totalIterations = 10000,
 					_iterationNo,
-					_sourceStr = Uize.String.repeat ('this is my string with a bunch of different stuff in it',500),
+					_sourceStr = Uize.Str.Repeat.repeat ('this is my string with a bunch of different stuff in it',500),
 					_identical = _sourceStr,
 					_emptyString = '',
 					_charNotInSource = '*',
@@ -89,19 +90,19 @@ Uize.require (
 							function () {
 								/*** substring is longer - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_sourceStrPlusOneChar)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_sourceStrPlusOneChar)
 									;
 							},
 							function () {
 								/*** substring is longer - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_sourceStrPlusOneChar)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_sourceStrPlusOneChar)
 									;
 							},
 							function () {
-								/*** substring identical, but last char different - using Uize.String.startsWith ***/
+								/*** substring identical, but last char different - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_sourceStrPlusOneChar)
+										Uize.Str.Has.hasPrefix (_sourceStr,_sourceStrPlusOneChar)
 									;
 							},
 
@@ -109,19 +110,19 @@ Uize.require (
 							function () {
 								/*** substring identical but missing last char - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButMissingLastChar)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_identicalButMissingLastChar)
 									;
 							},
 							function () {
 								/*** substring identical but missing last char - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButMissingLastChar)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_identicalButMissingLastChar)
 									;
 							},
 							function () {
-								/*** substring identical but missing last char - using Uize.String.startsWith ***/
+								/*** substring identical but missing last char - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_identicalButMissingLastChar)
+										Uize.Str.Has.hasPrefix (_sourceStr,_identicalButMissingLastChar)
 									;
 							},
 
@@ -129,19 +130,19 @@ Uize.require (
 							function () {
 								/*** substring identical but missing first char - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButMissingFirstChar)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_identicalButMissingFirstChar)
 									;
 							},
 							function () {
 								/*** substring identical but missing first char - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButMissingFirstChar)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_identicalButMissingFirstChar)
 									;
 							},
 							function () {
-								/*** substring identical but missing first char - using Uize.String.startsWith ***/
+								/*** substring identical but missing first char - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_identicalButMissingFirstChar)
+										Uize.Str.Has.hasPrefix (_sourceStr,_identicalButMissingFirstChar)
 									;
 							},
 
@@ -149,19 +150,19 @@ Uize.require (
 							function () {
 								/*** substring identical but first char different - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButFirstCharDifferent)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_identicalButFirstCharDifferent)
 									;
 							},
 							function () {
 								/*** substring identical but first char different - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButFirstCharDifferent)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_identicalButFirstCharDifferent)
 									;
 							},
 							function () {
-								/*** substring identical but first char different - using Uize.String.startsWith ***/
+								/*** substring identical but first char different - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_identicalButFirstCharDifferent)
+										Uize.Str.Has.hasPrefix (_sourceStr,_identicalButFirstCharDifferent)
 									;
 							},
 
@@ -169,19 +170,19 @@ Uize.require (
 							function () {
 								/*** substring identical but last char different - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButLastCharDifferent)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_identicalButLastCharDifferent)
 									;
 							},
 							function () {
 								/*** substring identical but last char different - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButLastCharDifferent)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_identicalButLastCharDifferent)
 									;
 							},
 							function () {
-								/*** substring identical but last char different - using Uize.String.startsWith ***/
+								/*** substring identical but last char different - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_identicalButLastCharDifferent)
+										Uize.Str.Has.hasPrefix (_sourceStr,_identicalButLastCharDifferent)
 									;
 							},
 
@@ -189,19 +190,19 @@ Uize.require (
 							function () {
 								/*** substring identical but shorter and different at end - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButShorterAndDifferentAtEnd)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_identicalButShorterAndDifferentAtEnd)
 									;
 							},
 							function () {
 								/*** substring identical but shorter and different at end - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButShorterAndDifferentAtEnd)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_identicalButShorterAndDifferentAtEnd)
 									;
 							},
 							function () {
-								/*** substring identical but shorter and different at end - using Uize.String.startsWith ***/
+								/*** substring identical but shorter and different at end - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_identicalButShorterAndDifferentAtEnd)
+										Uize.Str.Has.hasPrefix (_sourceStr,_identicalButShorterAndDifferentAtEnd)
 									;
 							},
 
@@ -209,19 +210,19 @@ Uize.require (
 							function () {
 								/*** substring is a char not in source - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_charNotInSource)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_charNotInSource)
 									;
 							},
 							function () {
 								/*** substring is a char not in source - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_charNotInSource)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_charNotInSource)
 									;
 							},
 							function () {
-								/*** substring is a char not in source - using Uize.String.startsWith ***/
+								/*** substring is a char not in source - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_charNotInSource)
+										Uize.Str.Has.hasPrefix (_sourceStr,_charNotInSource)
 									;
 							},
 
@@ -229,19 +230,19 @@ Uize.require (
 							function () {
 								/*** substring is an empty string - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_emptyString)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_emptyString)
 									;
 							},
 							function () {
 								/*** substring is an empty string - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_emptyString)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_emptyString)
 									;
 							},
 							function () {
-								/*** substring is an empty string - using Uize.String.startsWith ***/
+								/*** substring is an empty string - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_emptyString)
+										Uize.Str.Has.hasPrefix (_sourceStr,_emptyString)
 									;
 							},
 
@@ -249,19 +250,19 @@ Uize.require (
 							function () {
 								/*** first char at start but second char doesn't match - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
 									;
 							},
 							function () {
 								/*** first char at start but second char doesn't match - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
 									;
 							},
 							function () {
-								/*** first char at start but second char doesn't match - using Uize.String.startsWith ***/
+								/*** first char at start but second char doesn't match - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
+										Uize.Str.Has.hasPrefix (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
 									;
 							},
 
@@ -269,19 +270,19 @@ Uize.require (
 							function () {
 								/*** substring identical - slice equals substring ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identical)
+										Uize.Str.Has.hasPrefixUsingSliceEqualsSubstr (_sourceStr,_identical)
 									;
 							},
 							function () {
 								/*** substring identical - indexOf substring equals zero ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identical)
+										Uize.Str.Has.hasPrefixUsingIndexOfEquals0 (_sourceStr,_identical)
 									;
 							},
 							function () {
-								/*** substring identical - using Uize.String.startsWith ***/
+								/*** substring identical - using Uize.Str.Has.hasPrefix ***/
 									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
-										Uize.String.startsWith (_sourceStr,_identical)
+										Uize.Str.Has.hasPrefix (_sourceStr,_identical)
 									;
 							}
 					],
@@ -294,61 +295,61 @@ Uize.require (
 								/*** substring is longer ***/
 									'<p><b>substring is longer - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring is longer - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring is longer - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is longer - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** substring identical but missing last char ***/
 									'<p><b>substring identical but missing last char - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring identical but missing last char - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring identical but missing last char - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but missing last char - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** substring identical but missing first char ***/
 									'<p><b>substring identical but missing first char - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring identical but missing first char - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring identical but missing first char - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but missing first char - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** substring identical but first char different ***/
 									'<p><b>substring identical but first char different - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring identical but first char different - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring identical but first char different - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but first char different - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** substring identical but last char different ***/
 									'<p><b>substring identical but last char different - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring identical but last char different - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring identical but last char different - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but last char different - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** substring identical but shorter and different at end ***/
 									'<p><b>substring identical but shorter and different at end - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring identical but shorter and different at end - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring identical but shorter and different at end - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but shorter and different at end - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** substring is a char not in source ***/
 									'<p><b>substring is a char not in source - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring is a char not in source - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring is a char not in source - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is a char not in source - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** substring is an empty string ***/
 									'<p><b>substring is an empty string - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring is an empty string - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring is an empty string - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is an empty string - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** first char at start but second char doesn't match ***/
 									'<p><b>first char at start but second char doesn\'t match - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>first char at start but second char doesn\'t match - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>first char at start but second char doesn\'t match - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>first char at start but second char doesn\'t match - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<hr/>\n' +
 
 								/*** substring identical ***/
 									'<p><b>substring identical - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
 									'<p><b>substring identical - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
-									'<p><b>substring identical - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n'
+									'<p><b>substring identical - using Uize.Str.Has.hasPrefix :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n'
 							);
 					}
 				);

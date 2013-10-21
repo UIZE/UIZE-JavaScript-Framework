@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Template.Module',
 	required:[
 		'Uize.Template',
-		'Uize.String.Lines',
+		'Uize.Str.Lines',
 		'Uize.Json',
 		'Uize.Build.Util'
 	],
@@ -61,11 +61,11 @@ Uize.module ({
 						'	return Uize.package ({',
 						'		process:function (input) {',
 						'			' +
-							Uize.String.Lines.indent (Uize.String.Lines.trimRight (_compiledTemplate.code),4,'\t',false),
+							Uize.Str.Lines.indent (Uize.Str.Lines.trimRight (_compiledTemplate.code),4,'\t',false),
 						'		},',
 						'',
 						'		input:' +
-							Uize.String.Lines.indent (Uize.Json.to (_compiledTemplate.input),3,'\t',false),
+							Uize.Str.Lines.indent (Uize.Json.to (_compiledTemplate.input),3,'\t',false),
 						'	});',
 						'}'
 					].join ('\n')

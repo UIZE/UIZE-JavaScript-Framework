@@ -106,7 +106,7 @@ Uize.require (
 		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
-		'Uize.String.Lines',
+		'Uize.Str.Lines',
 		'Uize.Template',
 		'Uize.Template.Module'
 	],
@@ -125,7 +125,7 @@ Uize.require (
 							this.templateFunction = compiledTemplate.templateFunction
 							page.setNodeValue (
 								'compiledForm',
-								'function (input) {\n' + Uize.String.Lines.indent (compiledTemplate.code,1,'\t') + '\n}'
+								'function (input) {\n' + Uize.Str.Lines.indent (compiledTemplate.code,1,'\t') + '\n}'
 							);
 							page.setNodeValue (
 								'jstModule',

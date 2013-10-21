@@ -1,5 +1,5 @@
 <%@
-	required ('Uize.String.Lines');
+	required ('Uize.Str.Lines');
 	input ({
 		title:'string',
 		displayTitle:'string',
@@ -59,7 +59,7 @@
 <div class="infoRow">
 	<% if (moreInfoLink) { %><a href="<%= moreInfoLink %>" target="_blank" class="imageLink"><% } %><img src="<% .pathToRoot %>images/<%= imageFolder %>/<%= listingName.toLowerCase ().replace (/ /g,'-') %>.png" alt="<%= listingNamePlusSubTitle -> tagAttributeValue %>"/><% if (moreInfoLink) { %></a><% } %>
 	<% for (
-		var lineNo = -1, lines = Uize.String.Lines.split (listing.text), linesLength = lines.length;
+		var lineNo = -1, lines = Uize.Str.Lines.split (listing.text), linesLength = lines.length;
 		++lineNo < linesLength;
 	) { %>
 	<p><%= lines [lineNo] %></p>

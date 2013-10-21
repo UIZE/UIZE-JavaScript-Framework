@@ -102,7 +102,7 @@
 
 Uize.module ({
 	name:'Uize.Data.Csv',
-	required:'Uize.String',
+	required:'Uize.Str.Trim',
 	builder:function () {
 		'use strict';
 
@@ -110,7 +110,10 @@ Uize.module ({
 			var
 				_true = true,
 				_false = false,
-				_undefined
+				_undefined,
+				_Uize_Str_Trim = Uize.Str.Trim,
+				_trim = _Uize_Str_Trim.trim,
+				_hasPadding = _Uize_Str_Trim.hasPadding
 			;
 
 		/*** General Variables ***/
@@ -131,7 +134,8 @@ Uize.module ({
 			}
 
 			function _getEscapedQuoteChar (_options) {
-				return Uize.String.repeat (_getDefaultedOption (_options,'quoteChar'),2);
+				var _quoteChar = _getDefaultedOption (_options,'quoteChar');
+				return _quoteChar + _quoteChar;
 			}
 
 			function _globalLiteralRegExp (_replaceStr) {
@@ -168,7 +172,7 @@ Uize.module ({
 					) [
 						_rowTypeIsObject && _rowNo > -1 ? _columns [_columnNo] : _columnNo
 					] =
-						_trimPaddingOnParse ? Uize.String.trim (_value) : _value
+						_trimPaddingOnParse ? _trim (_value) : _value
 					;
 					_columnNo++;
 				}
@@ -603,7 +607,7 @@ Uize.module ({
 					_quoteChar = _getDefaultedOption (_encodingOptions,'quoteChar'),
 					_rowType = _getDefaultedOption (_encodingOptions,'rowType'),
 					_valueDelimiter = _getDefaultedOption (_encodingOptions,'valueDelimiter'),
-					_valueDelimiterHasPadding = Uize.String.hasPadding (_valueDelimiter),
+					_valueDelimiterHasPadding = _hasPadding (_valueDelimiter),
 					_escapedQuoteChar = _getEscapedQuoteChar (_encodingOptions),
 					_quoteRegExp = _globalLiteralRegExp (_quoteChar),
 					_rowTypeIsObject = _rowType == 'object' || (_rowType == 'auto' && _firstRow && !Uize.isArray (_firstRow))
@@ -625,7 +629,7 @@ Uize.module ({
 							_quoteCharForValue =
 								_valueHasQuoteChar ||
 								_alwaysQuote ||
-								(_trimPaddingOnParse ? Uize.String.hasPadding (_columnValue) : _valueDelimiterHasPadding) ||
+								(_trimPaddingOnParse ? _hasPadding (_columnValue) : _valueDelimiterHasPadding) ||
 								_columnValue.indexOf (_valueDelimiter) > -1 ||
 								_columnValue.indexOf ('\n') > -1 ||
 								_columnValue.indexOf ('\r') > -1
