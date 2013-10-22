@@ -155,11 +155,11 @@ Uize.module ({
 						? 250
 						: _this._hideWhenOut
 				;
-				
+
 				_this._clearDismissTimeout ();
-				
+
 				function _hide() { _this.set ({_shown:_false}) }
-				
+
 				_hideTimeout
 					? (
 						_this._dismissTimeout = setTimeout (

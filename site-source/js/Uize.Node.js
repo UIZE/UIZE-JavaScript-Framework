@@ -1079,7 +1079,7 @@ Uize.module ({
 										var _activeXObject = new ActiveXObject('Microsoft.XMLDOM');
 										_activeXObject.async = _false;
 										_activeXObject.loadXML('<foo>' + _htmlToInject.replace(/&/g, '&amp;') + '</foo>');
-	
+
 										var
 											_xmlChildNodes = _activeXObject.documentElement.childNodes,
 											_convertToHtmlNode = function(_xmlNode) {
@@ -1087,13 +1087,13 @@ Uize.module ({
 												switch (_xmlNode.nodeType) {
 													case 1: // element
 														_htmlNode = document.createElement(_xmlNode.tagName);
-														
+
 														// add attributes
 														for (var _attributeNo = -1; ++_attributeNo < _xmlNode.attributes.length;) {
 															var _attribute = _xmlNode.attributes[_attributeNo];
 															_htmlNode.setAttribute(_attribute.nodeName, _attribute.nodeValue);
 														}
-														
+
 														// handle scripts specially but just getting text contents
 														if (_htmlNode.tagName == 'SCRIPT')
 															_htmlNode.text = _xmlNode.text;
@@ -1101,13 +1101,13 @@ Uize.module ({
 															// all others iterate through child nodes and get their html equivalents
 															for (var _childNodeNo = -1; ++_childNodeNo < _xmlNode.childNodes.length;) {
 																var _htmlChildNode = _convertToHtmlNode(_xmlNode.childNodes[_childNodeNo]);
-																
+
 																_htmlChildNode
 																	&& _htmlNode.appendChild(_htmlChildNode)
 																;
 															}
 														}
-														
+
 														break;
 													case 3:	// text
 														_htmlNode = document.createTextNode(_xmlNode.nodeValue);
@@ -1119,14 +1119,14 @@ Uize.module ({
 												return _htmlNode;
 											}
 										;
-										
+
 										// iterate through XML nodes and convert to their HTML equivalents
 										for (var _nodeNo = -1; ++_nodeNo < _xmlChildNodes.length;)
 											_nodesToInject.push(
 												_convertToHtmlNode(_xmlChildNodes[_nodeNo])
 											)
 										;
-										
+
 										// we have an array of nodes as opposed to a NodeList
 										_areNodes = _true;
 									}

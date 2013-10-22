@@ -46,7 +46,7 @@ Uize.module ({
 				_Uize_Node = _Uize.Node,
 				_Uize_Node_Event = _Uize_Node.Event
 			;
-			
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
@@ -57,7 +57,7 @@ Uize.module ({
 				),
 				_classPrototype = _class.prototype
 			;
-		
+
 		/*** Private Instance Methods ***/
 			_classPrototype._recaptchaObjectCreate = function () {
 				var
@@ -65,11 +65,11 @@ Uize.module ({
 					_recaptchaInputId = 'recaptcha_response_field',
 					_recaptchaObject = _this._recaptchaObject
 				;
-				
+
 				if (_this.isWired) {
 					// if the recaptcha node already exists, unwire it
 					_Uize_Node.unwire (_recaptchaInputId);
-	
+
 					_recaptchaObject
 						&& _recaptchaObject.create (
 							_this._key,
@@ -88,7 +88,7 @@ Uize.module ({
 											}
 										})
 									}
-	
+
 									_Uize_Node.wire (
 										_recaptchaInputId,
 										{
@@ -106,7 +106,7 @@ Uize.module ({
 														isFinished:_false
 													});
 												}
-	
+
 												_fire ('Key Up', _event);
 											},
 											blur:function (_event) {
@@ -135,10 +135,10 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.checkIsEmpty = function() {
 				var _value = this.valueOf();
-				
+
 				return !_value || !_value.response
 			};
-			
+
 			_classPrototype.initializeCaptcha = _classPrototype._initializeCaptcha = function () {
 				var _this = this;
 				// check to see if the Recaptcha object has already been sourced in. If not, we'll have to make a script call to load it.
@@ -170,12 +170,12 @@ Uize.module ({
 
 			_classPrototype.restore = function() {
 				var _this = this;
-				
+
 				_this.set({isValid:_false});
 				_this._initializeCaptcha();
 				_superclass.prototype.wireUi.call (_this);
 			};
-		
+
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
@@ -239,13 +239,13 @@ Uize.module ({
 						_this = this,
 						_isValid = _this.get('isValid')
 					;
-					
+
 					if (_this.isWired) {
 						var
 							_recaptchaObj = _this._recaptchaObject,
 							_responseField = _recaptchaObj ? _recaptchaObj.get_response () : ''
 						;
-	
+
 						// isValid only gets set to true once the user has actually entered a valid term. There's no need to validate
 						// again afterwards.
 						if (!_this.get ('isValid') && _recaptchaObj && _responseField) {
@@ -263,16 +263,16 @@ Uize.module ({
 								requestMethod:'GET',
 								callback:function (_response) {
 									var _responseIsValid = _response.isValid;
-	
+
 									_this.set ({
 										isValid:_responseIsValid,
 										_validationToken:_response.token
 									});
-	
+
 									// if the response was not valid then destroy and create a new instance of the captcha
 									// unless there was no value.
 									if (!_responseIsValid && _responseField) _this._recaptchaObjectCreate ();
-	
+
 									Uize.isFunction (_callback) && _callback ( _responseIsValid );
 								}
 							});

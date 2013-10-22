@@ -77,9 +77,9 @@ Uize.module ({
 
 		/*** Public Methods ***/
 			_classPrototype.getDialogWidgetProperties = function() { return _null };
-			
+
 			_classPrototype.getMoreDialogEventHandlers = function() { return _null };
-			
+
 			_classPrototype.getMooringNode = function() {
 				return this.children.selector.getNode () || this.getNode ('input')
 			};
@@ -105,12 +105,12 @@ Uize.module ({
 					)
 				);
 			};
-			
+
 			_classPrototype.pickValue = function() {
 				var _this = this;
-				
+
 				_this.set({focused:false});
-				
+
 				var
 					_mooringNode = _this.getMooringNode(),
 					_mooringNodeDims = Uize.Node.getDimensions (_mooringNode),
@@ -158,7 +158,7 @@ Uize.module ({
 							}
 						}
 					);
-							
+
 					_superclass.prototype.wireUi.call (_this);
 				}
 			};

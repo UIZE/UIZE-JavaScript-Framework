@@ -38,13 +38,13 @@ Uize.module ({
 					null,
 					function() {
 						var _this = this;
-						
+
 						// Sync tentativeValue & tentativeValueDetails back and forth with value widget
 						Uize.Util.Coupler({
 							instances:[_this, _this.children.value],
 							properties:['tentativeValue', 'tentativeValueDetails']
 						});
-						
+
 						_this.wire(
 							'After Show',
 							function() {
@@ -56,11 +56,11 @@ Uize.module ({
 				),
 				_classPrototype = _class.prototype
 			;
-			
+
 		/*** Private Methods ***/
 			_classPrototype._updateUiMinWidth = function() {
 				var _this = this;
-				
+
 				if (_this.isWired && _this._minWidth) {
 					_this.setNodeStyle (
 						'',

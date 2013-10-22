@@ -66,10 +66,10 @@ Uize.module ({
 					_mooringNode = this.getMooringNode(),
 					_undefined
 				;
-				
+
 				return _mooringNode ? _Uize_Node.getDimensions(_mooringNode).width : _undefined;
 			};
-		
+
 			_classPrototype._updateUiSelector = function() {
 				var _this = this;
 
@@ -109,7 +109,7 @@ Uize.module ({
 					_mooringNode = _this.getMooringNode(),
 					_undefined
 				;
-				
+
 				return Uize.copyInto(
 					_superclass.prototype.getDialogWidgetProperties.call(_this) || {},
 					{
@@ -120,14 +120,14 @@ Uize.module ({
 					}
 				);
 			};
-			
+
 			_classPrototype.getMoreDialogEventHandlers = function() {
 				var
 					_this = this,
 					_selector = _this.children.selector,
 					_undefined
 				;
-				
+
 				function _addSyncHandler(_propertyName) {
 					return Uize.pairUp(
 						'Changed.' + _propertyName,
@@ -149,21 +149,21 @@ Uize.module ({
 					{
 						'Before Show':function(_event) {
 							var _palette = _this.palette = _event.source;
-							
+
 							_selector.set({selected:_true});
 							_this.set({focused:_true});
 							_palette.set({
 								minWidth:_this._getMooringNodeWidth()
 							});
-							
+
 							if (!_this._movedPalette) {
 								_this._movedPalette = _true;
-								
+
 								var
 									_paletteRoot = _palette.getNode(),
 									_documentBody = document.body
 								;
-						
+
 								// Need to move the root and the shield to the body root to ensure that it will be on top of everything,
 								// if it already isn't there
 								if (_paletteRoot && _paletteRoot.parentNode != _documentBody) {
@@ -171,7 +171,7 @@ Uize.module ({
 
 									// detach from current place in DOM
 									_Uize_Node.remove([_paletteRoot, _paletteShield]);
-									
+
 									_paletteShield && _documentBody.appendChild(_paletteShield);
 									_documentBody.appendChild(_paletteRoot);
 								}

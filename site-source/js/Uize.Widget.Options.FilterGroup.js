@@ -81,7 +81,7 @@ Uize.module ({
 						}
 					)
 				;
-				
+
 				_this.displayNode(
 					'',
 					_this.getInherited('allowMultiple') === _false

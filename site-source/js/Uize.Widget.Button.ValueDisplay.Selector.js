@@ -155,9 +155,9 @@ Uize.module ({
 							if (
 								(_checked && !_this.get('clickToSelect'))
 									|| (!_checked && !_this.get('clickToDeselect'))
-							) { 
+							) {
 								_this.set({selected:_checked});
-								
+
 								// Options widget just watches on click of its buttons, so in order for
 								// it to know that clicking the radio has changed the value, we need to
 								// fire click

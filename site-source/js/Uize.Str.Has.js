@@ -19,7 +19,7 @@
 /*?
 	Introduction
 		The =Uize.Str.Has= module provides methods for testing if a string starts with, ends with, or contains a specified substring.
-		
+
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 

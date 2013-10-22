@@ -313,7 +313,7 @@ Uize.module({
 			_classPrototype._getNormalizedQuery = function (_tokenInfo) {
 				var _normalizedQuery = _tokenInfo && _trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ');
 				return _tokenInfo ?
-					(!_supportsPlaceholder && _normalizedQuery == this.get('defaultValue') ? 
+					(!_supportsPlaceholder && _normalizedQuery == this.get('defaultValue') ?
 						_emptyString :
 						_normalizedQuery)
 					: _emptyString
@@ -464,7 +464,7 @@ Uize.module({
 					_this._serviceUrl != _undefined
 				) {
 					_this.ajax(
-						Uize.copyInto( 
+						Uize.copyInto(
 							Uize.pairUp(
 								'serviceUrl', _this._serviceUrl,
 								_this._serviceQueryParamName, _normalizedQuery,
@@ -522,7 +522,7 @@ Uize.module({
 						_focused = _this.get('focused'),
 						_hasSuggestions = _this.children.suggestions && _this.children.suggestions.get('values').length
 					;
-					
+
 					if (_focused && _hasSuggestions) {
 						_this.displayNode('trending', !_this._lastTypedQuery);
 						// The palette must have display:true to be positioned

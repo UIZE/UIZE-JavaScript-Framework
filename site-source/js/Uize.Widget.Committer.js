@@ -191,7 +191,7 @@ Uize.module ({
 					_watchedPropertyInstance = _watchedPropertyProfile.instance,
 					_watchedPropertyName = _watchedPropertyProfile.name
 				;
-				
+
 				function _updateSummaryStateProperties() { _this._updateSummaryStateProperties() }
 
 				// any events that get wired here need to be unwired in _classPrototype.removeWatchedProperties.
@@ -214,7 +214,7 @@ Uize.module ({
 							}
 					}
 				);
-				
+
 				// any events that are wired here need to be unwired in removeWatchedProperties.
 				_watchedPropertyInstance.wire({
 					'Changed.isValid':_updateSummaryStateProperties,
@@ -519,7 +519,7 @@ Uize.module ({
 						State Properties
 							ignoreDisabled
 								A boolean, specifying whether or not any disabled =watchedProperties= will be ignored.
-								
+
 								When the value of this property is set to =true=, then the =allClear=, =allValid=, =anyNotCommitted=, =anyNotInitial=, and =readyToCommit= read-only set-get properties will not take into account any disabled =watchedProperties= in their calculation.
 
 								NOTES

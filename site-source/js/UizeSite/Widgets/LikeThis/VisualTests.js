@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.LikeThis.VisualTests= class implements a set of visual tests for the =UizeSite.Widgets.LikeThis.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({

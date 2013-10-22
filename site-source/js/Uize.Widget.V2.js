@@ -227,7 +227,7 @@ Uize.module ({
 						_childName =
 							_properties.name ||
 							(
-								'generatedChildName' + 
+								'generatedChildName' +
 								(m._generatedChildNames == _undefined ? (m._generatedChildNames = 0) : m._generatedChildNames++)
 							),
 						_widgetClass = Uize.getModuleByName (_properties.widgetClass) || _class,

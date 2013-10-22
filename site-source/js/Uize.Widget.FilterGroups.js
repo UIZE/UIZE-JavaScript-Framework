@@ -36,7 +36,7 @@ Uize.module ({
 			var
 				_true = true,
 				_null = null,
-				
+
 				_Uize = Uize
 			;
 

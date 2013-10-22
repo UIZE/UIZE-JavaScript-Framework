@@ -38,7 +38,7 @@ Uize.module ({
 							_this = this,
 							_updateUiDisplayState = function() { _this._updateUiDisplayState() }
 						;
-						
+
 						_this.wire({
 							'Changed.enabledInherited':_updateUiDisplayState,
 							'Changed.selected':_updateUiDisplayState
@@ -80,7 +80,7 @@ Uize.module ({
 						_Uize_Node_Classes = Uize.Node.Classes,
 						_rootNode = _this.getNode()
 					;
-					
+
 					_Uize_Node_Classes.setState(
 						_rootNode,
 						['', _this._cssClassFeatured],

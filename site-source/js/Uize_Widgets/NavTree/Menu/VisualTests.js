@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.NavTree.Menu.VisualTests= class implements a set of visual tests for the =Uize.Widgets.NavTree.Menu.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({

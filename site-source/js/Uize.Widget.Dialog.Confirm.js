@@ -75,7 +75,7 @@ Uize.module ({
 			_classPrototype.handleConfirm = function(_event) {
 				this.fire ({name:'Submission Complete',result:_event.name == 'Ok'})
 			};
-		
+
 			_classPrototype.updateUi = function () {
 				this._updateUiState ();
 				this._updateUiMessage ();

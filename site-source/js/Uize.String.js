@@ -19,7 +19,7 @@
 /*?
 	Introduction
 		The =Uize.String= module is a deprecated module *(DEPRECATED 2013-10-21)*.
-		
+
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		Deprecated
