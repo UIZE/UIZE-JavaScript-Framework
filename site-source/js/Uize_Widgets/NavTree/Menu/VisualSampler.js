@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.NavTree.Menu.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.NavTree.Menu.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

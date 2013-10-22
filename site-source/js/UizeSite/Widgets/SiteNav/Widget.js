@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.SiteNav.Widget= module implements a widget class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
 			Below is a visual sampler of the =UizeSite.Widgets.SiteNav.Widget= class...

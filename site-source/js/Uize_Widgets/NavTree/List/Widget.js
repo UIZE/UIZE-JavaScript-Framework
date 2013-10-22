@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.NavTree.List.Widget= module implements a widget class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
 			Below is a visual sampler of the =Uize.Widgets.NavTree.List.Widget= class...

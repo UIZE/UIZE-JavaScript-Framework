@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.SimpleStatsTable.VisualTests= class implements a set of visual tests for the =Uize.Widgets.SimpleStatsTable.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
