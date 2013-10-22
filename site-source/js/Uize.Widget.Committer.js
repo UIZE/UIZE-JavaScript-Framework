@@ -233,7 +233,7 @@ Uize.module ({
 				var _this = this;
 				_this._clearAutoCommitTimeout ();
 				if (_this._readyToCommit) {
-					_this.set ({_committedValues:Uize.copyInto ({},_this._uncommittedValues)});
+					_this.set ({_committedValues:Uize.copy (_this._uncommittedValues)});
 					_this.fire ('Commit');
 					/*?
 						Instance Events
@@ -295,9 +295,9 @@ Uize.module ({
 				Uize.copyInto (_this._watchedProperties || (_this._watchedProperties = {}), _propertiesAdded);
 
 				_this.set ({
-					_committedValues:Uize.copyInto ({}, _this._committedValues, _committedValues),
-					_uncommittedValues:Uize.copyInto ({}, _this._uncommittedValues, _uncommittedValues),
-					_initialValues:Uize.copyInto ({}, _this._initialValues, _initialValues)
+					_committedValues:Uize.copy (_this._committedValues, _committedValues),
+					_uncommittedValues:Uize.copy (_this._uncommittedValues, _uncommittedValues),
+					_initialValues:Uize.copy (_this._initialValues, _initialValues)
 				});
 				_this._updateSummaryStateProperties ();
 
