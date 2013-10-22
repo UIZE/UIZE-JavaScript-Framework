@@ -248,6 +248,37 @@ Quick Win Additions (in order of priority / usefulness)
 			- returns true is the value is falsy
 			- useful for methods that accept value matchers
 
+Uize.bind
+	SYNTAX
+	.................................................................
+	var boundFunction = Uize.bind (contextOBJ,functionOBJ,argsARRAY);
+	.................................................................
+
+	IMPLEMENTATION
+	...................................................................
+	var _bind = Uize.nop.bind || function (_context) {
+		var
+			_args = [].slice.call (arguments,1),
+			_function = this
+		;
+		return function () {
+			return _function.apply (_context,_args.concat (Uize.copyList (arguments)));
+		};
+	};
+
+	_class.prototype.bind = function (_method) {
+		var
+			_context = this,
+			_args = arguments
+		;
+		_args = _args.length > 1 && [].slice.call (_args,1);
+		if (typeof _function == 'string')
+			_function = _context [_function]
+		;
+		return _args ? _bind.apply (_function,[_context].concat (_args)) : _bind.call (_function,_context);
+	};
+	...................................................................
+
 Uize.willCall
 	Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.
 

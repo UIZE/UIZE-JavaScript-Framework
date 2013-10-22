@@ -594,3 +594,47 @@ Localization Guidelines
 		count can be 0, 1, 2, more
 		gift can be male, female, neuter
 
+	multi-dimensional resource selection mechanism, with fallback heuristics
+
+		- support an arbitrary number of dimensions
+		- support fallback heuristic
+
+		- scenario
+			- user is very fluent in French, moderately fluent in German, but has very limited English
+			- app is fully localized to English, fully localized to German, and partially localized to French
+
+		- simple algorithm
+			- user's fluency in languages is represented simply by an ordered list
+
+		- fallback from Mexican Spanish to Spane Spanish
+
+		- have a concept of how similar languages are to one another
+		- choose the language that is the "shortest distance" to the desired language
+		- choose a language based upon
+		- always present the user with a choice of language
+
+		- present languages to user for app in region, with...
+			- shorlist of language used in region, ranked by prevalence
+			- full list of all languages supported for the app
+
+		- considering that resource strings may need to be pulled from multiple files in some situations, should multiple files be sent to the client? Perhaps a better approach would be to produce a new file for the given situation, that integrates just the needed resource strings necessary, which may original from multiple files. What are the inputs into producing a specific file?
+
+		componentID,locale,userLanguagesList,brand
+		componentID,locale,userLanguagesList,brand,subBrand
+		componentID,locale,userLanguagesList,brand,subBrand,userDemographic
+
+		- should be usable during build process
+			- two aspects to this...
+				- choosing which combinations to pre-build
+				- choosing which combination to use when building packages of multiple modules
+
+		- from the perspective of a component (UI or not)
+			- component declares (somehow, to be decided) the resource strings that it needs
+			- localization system aggregates needed resource strings into a single request to obtain the appropriate strings, supplying the values for all the dimensions that may impact the translated strings returned
+			-
+
+		- ability to query the resource strings database to find
+			- all strings for a component for a specific brand
+			- all strings for a component for a specific locale
+			- all strings for a component for a specific brand and locale
+
