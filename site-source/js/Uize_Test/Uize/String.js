@@ -38,39 +38,11 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		function _migratedStaticMethodsTest (_migratedMethods) {
-			return {
-				title:'Test that various deprecated static methods that have been migrated are still supported and map correctly to their new locations',
-				test:Uize.map (
-					_migratedMethods,
-					function (_migratedMethod) {
-						var
-							_oldName = _migratedMethod [0],
-							_newName = _migratedMethod [1]
-						;
-						return {
-							title:'Test that the deprecated ' + _oldName + ' method still exists and is simply a reference to the new ' + _newName + ' method',
-							test:function () {
-								function _getStatic (_staticName) {
-									var _methodPos = _staticName.lastIndexOf ('.');
-									return Uize.getModuleByName (_staticName.slice (0,_methodPos)) [
-										_staticName.slice (_methodPos + 1)
-									];
-								}
-								var _newStatic = _getStatic (_newName);
-								return this.expectFunction (_newStatic) && this.expectSameAs (_getStatic (_oldName),_newStatic);
-							}
-						};
-					}
-				)
-			};
-		}
-
 		return Uize.Test.resolve ({
 			title:'Test for Uize.String Module',
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.String'),
-				_migratedStaticMethodsTest ([
+				Uize.Test.migratedStaticMethodsTest ([
 					['Uize.String.contains','Uize.Str.Has.has'],
 					['Uize.String.endsWith','Uize.Str.Has.hasSuffix'],
 					['Uize.String.hasPadding','Uize.Str.Trim.hasPadding'],
