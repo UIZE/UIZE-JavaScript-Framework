@@ -225,7 +225,7 @@ Uize.module ({
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.clearAll = function() {
+			_classPrototype.clearAll = function () {
 				this._setAllValues ('clear')
 			};
 
@@ -402,11 +402,11 @@ Uize.module ({
 				*/
 			};
 
-			_classPrototype.restoreInitial = function() {
+			_classPrototype.restoreInitial = function () {
 				this._setAllValues ('initial')
 			};
 
-			_classPrototype.restorePrevious = function() {
+			_classPrototype.restorePrevious = function () {
 				this._setAllValues ('committed')
 			};
 

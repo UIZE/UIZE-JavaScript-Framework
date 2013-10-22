@@ -33,7 +33,7 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					null,
-					function() {
+					function () {
 						var m = this;
 						m.wire ('Changed.value',function () {m._updateUiTabContent ()});
 					}
@@ -54,7 +54,7 @@ Uize.module ({
 				return this.tabExists (_value) && this.getOptionButton (_value).get ('enabled')
 			};
 
-			_classPrototype._updateTabBodyClass = function(_valueNo, _currentValueNo) {
+			_classPrototype._updateTabBodyClass = function (_valueNo, _currentValueNo) {
 				var m = this;
 
 				if (_valueNo > -1)

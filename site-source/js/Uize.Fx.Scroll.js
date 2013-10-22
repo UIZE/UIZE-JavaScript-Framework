@@ -38,7 +38,7 @@ Uize.module ({
 			;
 
 		return Uize.package ({
-			scrollToNode:function(_targetNode, _scrollParams) {
+			scrollToNode:function (_targetNode, _scrollParams) {
 				var
 					_Uize_Node = Uize.Node,
 					_Uize_Node_getDimensions = _Uize_Node.getDimensions,
@@ -47,7 +47,7 @@ Uize.module ({
 					_document = document,
 					_bodyNode = _document.body,
 					_documentElement = _document.documentElement,
-					_getNodeHeight = function(_node) {return _Uize_Node_getDimensions(_node).height}
+					_getNodeHeight = function (_node) {return _Uize_Node_getDimensions(_node).height}
 				;
 
 				_targetNode = _Uize_Node.getById(_targetNode) || _bodyNode;
@@ -148,7 +148,7 @@ Uize.module ({
 						);
 
 						_fade.wire({
-							'Changed.value':function() { _node.scrollTop = +_fade; },
+							'Changed.value':function () { _node.scrollTop = +_fade; },
 							Done:_done
 						});
 
@@ -167,7 +167,7 @@ Uize.module ({
 				_wireAndStartFade(
 					_scrollableContainerNode,
 					_scrollableContainerNode.scrollTop + _targetNodeCoords.y - _scrollableContainerNodeCoords.y,
-					function() { _scrollableContainerNodeDone = true },
+					function () { _scrollableContainerNodeDone = true },
 					!_scrollableContainerNodeIsBodyNode && (_scrollParams.scrollToTop || !_isNodeVisible(_targetNodeCoords))
 				);
 
@@ -179,7 +179,7 @@ Uize.module ({
 				_wireAndStartFade(
 					_scrollableBodyNode,
 					_scrollNodeCoords.y,
-					function() { _bodyNodeDone = true },
+					function () { _bodyNodeDone = true },
 					_scrollParams.scrollToTop || !_isNodeVisible(_scrollNodeCoords, true)
 				);
 				/*?
@@ -236,7 +236,7 @@ Uize.module ({
 								{
 									curve:Uize.Curve.easeInPow(.5),
 									duration:1500,
-									callback:function() { alert('finished') }
+									callback:function () { alert('finished') }
 								}
 							......
 				*/

@@ -1082,7 +1082,7 @@ Uize.module ({
 
 										var
 											_xmlChildNodes = _activeXObject.documentElement.childNodes,
-											_convertToHtmlNode = function(_xmlNode) {
+											_convertToHtmlNode = function (_xmlNode) {
 												var _htmlNode;
 												switch (_xmlNode.nodeType) {
 													case 1: // element

@@ -40,7 +40,7 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					null,
-					function() {
+					function () {
 						var
 							m = this,
 							_selector = m.children.selector
@@ -48,7 +48,7 @@ Uize.module ({
 
 						m.wire(
 							'Changed.valueDetails',
-							function() {
+							function () {
 								m.set({_tentativeValueDetails:m.get('valueDetails')});
 								m._updateUiSelector();
 							}
@@ -61,7 +61,7 @@ Uize.module ({
 			;
 
 		/*** Private Methods ***/
-			_classPrototype._getMooringNodeWidth = function() {
+			_classPrototype._getMooringNodeWidth = function () {
 				var
 					_mooringNode = this.getMooringNode(),
 					_undefined
@@ -70,7 +70,7 @@ Uize.module ({
 				return _mooringNode ? _Uize_Node.getDimensions(_mooringNode).width : _undefined;
 			};
 
-			_classPrototype._updateUiSelector = function() {
+			_classPrototype._updateUiSelector = function () {
 				var m = this;
 
 				// basically we want to the selector button from jumping in size when the value details are updated
@@ -103,7 +103,7 @@ Uize.module ({
 			};
 
 		/*** Public Methods ***/
-			_classPrototype.getDialogWidgetProperties = function() {
+			_classPrototype.getDialogWidgetProperties = function () {
 				var
 					m = this,
 					_mooringNode = m.getMooringNode(),
@@ -121,7 +121,7 @@ Uize.module ({
 				);
 			};
 
-			_classPrototype.getMoreDialogEventHandlers = function() {
+			_classPrototype.getMoreDialogEventHandlers = function () {
 				var
 					m = this,
 					_selector = m.children.selector,
@@ -131,7 +131,7 @@ Uize.module ({
 				function _addSyncHandler(_propertyName) {
 					return Uize.pairUp(
 						'Changed.' + _propertyName,
-						function(_event) {
+						function (_event) {
 							m.palette = _event.source;
 
 							var _dialogPropertyValue = m.palette.get(_propertyName);
@@ -147,7 +147,7 @@ Uize.module ({
 					_addSyncHandler('tentativeValue'),
 					_addSyncHandler('tentativeValueDetails'),
 					{
-						'Before Show':function(_event) {
+						'Before Show':function (_event) {
 							var _palette = m.palette = _event.source;
 
 							_selector.set({selected:_true});
@@ -177,7 +177,7 @@ Uize.module ({
 								}
 							}
 						},
-						'After Hide':function() {
+						'After Hide':function () {
 							m.set({focused:_false});
 							_selector.set({selected:_false});
 							m.palette = _undefined;
@@ -204,7 +204,7 @@ Uize.module ({
 					name:'tentativeValueDetails',
 					onChange:[
 						/** One-way sync tentative value details to selector button **/
-						function() {
+						function () {
 							var m = this;
 
 							m._syncTentativeValue

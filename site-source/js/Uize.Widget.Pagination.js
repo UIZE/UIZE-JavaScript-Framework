@@ -39,11 +39,11 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					null,
-					function() {
+					function () {
 						var _this = this;
 
-						_this._addChildButton('prev', function() { _this._gotoPage(_this._value - 1) } );
-						_this._addChildButton('next', function() { _this._gotoPage(_this._value + 1) } );
+						_this._addChildButton('prev', function () { _this._gotoPage(_this._value - 1) } );
+						_this._addChildButton('next', function () { _this._gotoPage(_this._value + 1) } );
 					}
 				),
 				_classPrototype = _class.prototype
@@ -52,9 +52,9 @@ Uize.module ({
 		/*** Private Methods ***/
 			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
 
-			_classPrototype._calculateMaxPages = function() { return Math.ceil(this._numResults / this._pageSize) };
+			_classPrototype._calculateMaxPages = function () { return Math.ceil(this._numResults / this._pageSize) };
 
-			_classPrototype._calculatePagesStart = function() {
+			_classPrototype._calculatePagesStart = function () {
 				var
 					_this = this,
 					_value = _this._value,
@@ -75,9 +75,9 @@ Uize.module ({
 					return _minPagesStart;
 			};
 
-			_classPrototype._gotoPage = function(_pageNumber) { this.set({_value:_pageNumber}) };
+			_classPrototype._gotoPage = function (_pageNumber) { this.set({_value:_pageNumber}) };
 
-			_classPrototype._updatePages = function() {
+			_classPrototype._updatePages = function () {
 				var
 					_this = this,
 					_children = _this.children,
@@ -151,7 +151,7 @@ Uize.module ({
 			};
 
 		/*** Public Methods ***/
-			_classPrototype.updateUi = function() {
+			_classPrototype.updateUi = function () {
 				var _this = this;
 
 				if (_this.isWired) {
@@ -160,7 +160,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype.wireUi = function() {
+			_classPrototype.wireUi = function () {
 				var
 					_this = this
 				;
@@ -179,9 +179,9 @@ Uize.module ({
 							while (_childExists('page' + ++_this._numPagesToShow));
 
 					_this._showFirstPage
-						&& _this._addChildButton('first', function() { _this._gotoPage(1) } );
+						&& _this._addChildButton('first', function () { _this._gotoPage(1) } );
 					_this._showLastPage
-						&& _this._addChildButton('last', function() { _this._gotoPage(_this._calculateMaxPages()) } );
+						&& _this._addChildButton('last', function () { _this._gotoPage(_this._calculateMaxPages()) } );
 
 					for (
 						var
@@ -189,7 +189,7 @@ Uize.module ({
 							_addPageButton = function (_pageNo) {
 								_this._addChildButton(
 									'page' + _pageNo,
-									function() { _this._gotoPage(_this._calculatePagesStart() + _pageNo) }
+									function () { _this._gotoPage(_this._calculatePagesStart() + _pageNo) }
 								)
 							}
 						;
@@ -217,7 +217,7 @@ Uize.module ({
 				},
 				_pageSize:{
 					name:'pageSize',
-					conformer:function(_newPageSize) { return _newPageSize ? _newPageSize : 30 },
+					conformer:function (_newPageSize) { return _newPageSize ? _newPageSize : 30 },
 					onChange:[
 						_classPrototype._calculateMaxPages,
 						_classPrototype._updatePages
@@ -226,7 +226,7 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
-					conformer:function(_newValue) {
+					conformer:function (_newValue) {
 						var _maxPages = this._calculateMaxPages();
 
 						return _newValue ? (!_maxPages || _newValue < _maxPages ? _newValue : _maxPages) : 1

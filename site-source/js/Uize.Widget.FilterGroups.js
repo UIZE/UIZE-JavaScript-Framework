@@ -44,7 +44,7 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					_null,
-					function() {
+					function () {
 						var
 							m = this
 						;
@@ -56,7 +56,7 @@ Uize.module ({
 			;
 
 		/*** Private Methods ***/
-			_classPrototype._forAll = function(_function) {
+			_classPrototype._forAll = function (_function) {
 				for (
 					var _valueNo = -1, _valuesLength = this._values.length, _children = this.children;
 					++_valueNo < _valuesLength;
@@ -64,14 +64,14 @@ Uize.module ({
 					if (_function (_children ['filterGroup' + _valueNo],_valueNo) === false) break;
 			};
 
-			_classPrototype._updateSelectedFilters = function(_changedValue) {
+			_classPrototype._updateSelectedFilters = function (_changedValue) {
 				var m = this;
 
 				if (m.isWired) {
 					var _selectedFilters = [];
 
 					m._forAll(
-						function(_filterGroupWidget) {
+						function (_filterGroupWidget) {
 							var _value = _filterGroupWidget.valueOf();
 							_value
 								&& _selectedFilters.push(_value);
@@ -92,7 +92,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._setFilterGroupsSelectedFilter = function() {
+			_classPrototype._setFilterGroupsSelectedFilter = function () {
 				var m = this;
 
 				if (m.isWired) {
@@ -103,7 +103,7 @@ Uize.module ({
 						_selectedFilterLookup = {}
 					;
 					m._forAll(
-						function(_filterGroupWidget) {
+						function (_filterGroupWidget) {
 							var _filterToSet = _null;
 
 							for (var _selectedFilterNo = -1; ++_selectedFilterNo < _selectedFilters.length;) {
@@ -125,7 +125,7 @@ Uize.module ({
 			};
 
 		/*** Public Methods ***/
-			_classPrototype.updateCounts = function(_counts) {
+			_classPrototype.updateCounts = function (_counts) {
 				var
 					m = this,
 					_countsLength = _counts.length
@@ -135,7 +135,7 @@ Uize.module ({
 					_counts
 						&& _countsLength
 						&& m._forAll(
-							function(_filterGroupWidget, _filterGroupNo) {
+							function (_filterGroupWidget, _filterGroupNo) {
 								_filterGroupNo < _countsLength
 									&& _filterGroupWidget.updateCounts(_counts[_filterGroupNo])
 							}
@@ -163,7 +163,7 @@ Uize.module ({
 							)
 						).wire(
 							'Changed.value',
-							function(_event) { m._updateSelectedFilters(_event.source.valueOf()) }
+							function (_event) { m._updateSelectedFilters(_event.source.valueOf()) }
 						)
 					;
 
@@ -178,7 +178,7 @@ Uize.module ({
 			_class.stateProperties ({
 				_allowMultiple:{
 					name:'allowMultiple',
-					onChange:function() {
+					onChange:function () {
 						var
 							m = this,
 							_valueLength = m._value.length
@@ -193,7 +193,7 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
-					conformer:function(_value) {
+					conformer:function (_value) {
 						_value = _Uize.isArray(_value) ? _value : [];
 						var _valueLength = _value.length;
 						return this._allowMultiple || _valueLength == 1 ? _value : _value.splice(_valueLength-1,1);

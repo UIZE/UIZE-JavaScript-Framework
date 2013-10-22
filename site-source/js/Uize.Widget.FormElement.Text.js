@@ -27,7 +27,7 @@
 Uize.module ({
 	name:'Uize.Widget.FormElement.Text',
 	required:'Uize.Node',
-	builder:function(_superclass) {
+	builder:function (_superclass) {
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
@@ -40,12 +40,12 @@ Uize.module ({
 			var
 				_class = _superclass.subclass(
 					null,
-					function() {
+					function () {
 						var _this = this;
 
 						_this.wire(
 							'Changed.focused',
-							function(_event) {
+							function (_event) {
 								if (_this.isWired) {
 									var
 										_focused = _event.newValue,
@@ -94,11 +94,11 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateMoreValidators = function() {
+			_classPrototype._updateMoreValidators = function () {
 				var _this = this;
 
 				_this._moreValidators = [
-					function(_value) {
+					function (_value) {
 						var
 							_valueString = _value + '',
 							_valueLength = _value != null ? _valueString.length : 0
@@ -109,14 +109,14 @@ Uize.module ({
 				];
 			};
 
-			_classPrototype._updateUiPlaceholder = function() {
+			_classPrototype._updateUiPlaceholder = function () {
 				this.isWired
 					&& _supportsPlaceholder
 					&& this.setNodeProperties('input', {placeholder:this._placeholder})
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.checkIsEmpty = function() {
+			_classPrototype.checkIsEmpty = function () {
 				return _superclass.doMy (this,'checkIsEmpty') || this.get('value') == this._placeholder
 			};
 
@@ -157,9 +157,9 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype.getMoreValidators = function() { return this._moreValidators };
+			_classPrototype.getMoreValidators = function () { return this._moreValidators };
 
-			_classPrototype.updateUi = function() {
+			_classPrototype.updateUi = function () {
 				if (this.isWired) {
 					this._updateUiPlaceholder();
 					_superclass.doMy (this,'updateUi');

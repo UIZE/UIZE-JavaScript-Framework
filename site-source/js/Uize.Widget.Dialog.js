@@ -366,7 +366,7 @@ Uize.module ({
 					_this.wireNode(
 						'shield',
 						'click',
-						function() { _this._dismissOnShieldClick && _this._dismiss ('Close') }
+						function () { _this._dismissOnShieldClick && _this._dismiss ('Close') }
 					);
 
 					/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/

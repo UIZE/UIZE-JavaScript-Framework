@@ -58,13 +58,13 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
-					function() {
+					function () {
 						// this is just a dummy private variable so that when we are examining
 						// child widgets, we'll know we're dealing with a form widget (or subclass)
 						// and not a form element widget
 						this.isForm = this._isForm = _true;
 					},
-					function() {
+					function () {
 						var
 							_this = this,
 							_committer = _this.addChild('committer', _Uize_Widget.Committer, {watchedProperties:{}}),
@@ -81,22 +81,22 @@ Uize.module ({
 						// Wire form elements container
 							_elements.wire(
 								'Element Added',
-								function(_event) {
+								function (_event) {
 									var _childElement = _event.element;
 
 									_childElement.wire({
-										'Changed.isDirtyInherited':function(_event) {
+										'Changed.isDirtyInherited':function (_event) {
 											_event.newValue && _this.set({_isDirty:_true})
 										},
-										Ok:function() { _this._submit() },
-										'Changed.focused':function(_event) {
+										Ok:function () { _this._submit() },
+										'Changed.focused':function (_event) {
 											// NOTE: so unfortunately the browsers support an autofill feature that
 											// will prepopulate fields, but it doesn't fire onChange events for
 											// each field.  So when we blur a text field, we ensure that all of the
 											// programmatic values for fields match the DOM values
 											!_event.newValue
 												&& _this._foreachElement(
-													function(_element, _elementName, _elementIsForm) {
+													function (_element, _elementName, _elementIsForm) {
 														if (!_elementIsForm) {
 															var _nodeValue = _element.getNodeValue('input');
 
@@ -133,8 +133,8 @@ Uize.module ({
 							_committer.wire({
 								'Changed.committedValues':_updateValue,
 								'Changed.uncommittedValues':_updateValue,
-								'Changed.allValid':function() { _this._validate() }/*,
-								'Changed.anyNotCommitted':function() {
+								'Changed.allValid':function () { _this._validate() }/*,
+								'Changed.anyNotCommitted':function () {
 									_committer.get('anyNotCommitted')
 										|| _this.set({_isFinished:_true})
 								}*/
@@ -143,7 +143,7 @@ Uize.module ({
 						Uize.Widget.Button.addChildButton.call(
 							_this,
 							'submit',
-							function() { _this._submit() }
+							function () { _this._submit() }
 						);
 
 						_this._isInitialized = _true;
@@ -153,24 +153,24 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildElement = function(_elementName, _elementClass, _elementProperties) {
+			_classPrototype._addChildElement = function (_elementName, _elementClass, _elementProperties) {
 				return this._elements.addChild(_elementName, _elementClass, _elementProperties)
 			};
 
-			_classPrototype._foreachElement = function(_function) {
+			_classPrototype._foreachElement = function (_function) {
 				if (this._elements) {
 					var _elements = this._elements.children;
 
 					for (var _elementName in _elements) {
 						var _element = _elements[_elementName];
 
-						_function(_element, _element.get('name'), _element.isForm);
+						_function (_element, _element.get('name'), _element.isForm);
 					}
 				}
 			};
 
 			// Note: duplicated from Uize.Widget.FormElement.  mix-in?
-			_classPrototype._getParentForm = function() {
+			_classPrototype._getParentForm = function () {
 				var
 					_parentElementsWidget = this.parent,
 					_parentForm
@@ -186,7 +186,7 @@ Uize.module ({
 				return _parentForm;
 			};
 
-			_classPrototype._restore = function(_committerMethod) {
+			_classPrototype._restore = function (_committerMethod) {
 				var _this = this;
 
 				_this.set({
@@ -195,11 +195,11 @@ Uize.module ({
 					_isDirty:'inherit'
 				});
 
-				_this._foreachElement(  function(_element) { _element.restore()} );
+				_this._foreachElement(  function (_element) { _element.restore()} );
 				_this._committer[_committerMethod]();
 			};
 
-			_classPrototype._submit = function() {
+			_classPrototype._submit = function () {
 				this.set({
 					_isDirty:_true,
 					_isFinished:_true,
@@ -207,13 +207,13 @@ Uize.module ({
 				})
 			};
 
-			_classPrototype._updateSummaryStateProperties = function() {
+			_classPrototype._updateSummaryStateProperties = function () {
 				var _this = this;
 
 				_this.set({_okToSubmit:_this._isSubmitting && _this._isValid});
 			};
 
-			_classPrototype._updateFormAttributes = function() {
+			_classPrototype._updateFormAttributes = function () {
 				var _this = this;
 
 				if (_this.isWired) {
@@ -229,7 +229,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._updateValue = function() {
+			_classPrototype._updateValue = function () {
 				var
 					_this = this,
 					_committer = _this._committer
@@ -247,7 +247,7 @@ Uize.module ({
 				});
 			};
 
-			_classPrototype._updateUiWarning = function() {
+			_classPrototype._updateUiWarning = function () {
 				var
 					_this = this,
 					_formWarnings = _this._formWarnings,
@@ -266,16 +266,16 @@ Uize.module ({
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.addForm = function(_formName, _formClass, _formProperties) {
+			_classPrototype.addForm = function (_formName, _formClass, _formProperties) {
 				return this._addChildElement(_formName, _formClass || _Uize_Widget.Form, _formProperties)
 			};
 
-			_classPrototype.addFormElement = function(_formElementName, _formElementClass, _formElementProperties) {
+			_classPrototype.addFormElement = function (_formElementName, _formElementClass, _formElementProperties) {
 				return this._addChildElement(_formElementName, _formElementClass || _Uize_Widget.FormElement, _formElementProperties)
 			};
 
 			// NOTE: can be overidden by subclasses
-			_classPrototype.checkIsEmpty = function() {
+			_classPrototype.checkIsEmpty = function () {
 				var
 					_elements = this._elements.children,
 					_isEmpty = _true
@@ -292,7 +292,7 @@ Uize.module ({
 			};
 
 			// Note: duplicated from Uize.Widget.FormElement.  mix-in?
-			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function() {
+			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function () {
 				var
 					_this = this,
 					_warningShownWhen = _this._warningShownWhen,
@@ -319,13 +319,13 @@ Uize.module ({
 				});
 			};
 
-			_classPrototype.clear = function() { this._restore('clearAll') };
+			_classPrototype.clear = function () { this._restore('clearAll') };
 
-			_classPrototype.getFormElement = function(_elementName) {
+			_classPrototype.getFormElement = function (_elementName) {
 				return this._elements.children[_elementName]
 			};
 
-			_classPrototype.reset = function() { this._restore('restoreInitial') };
+			_classPrototype.reset = function () { this._restore('restoreInitial') };
 
 			_classPrototype.submit = _classPrototype._submit;
 
@@ -335,13 +335,13 @@ Uize.module ({
 				if (_this.isWired) {
 					_this._updateFormAttributes();
 					_this._updateUiWarning();
-					_this._foreachElement(  function(_element) { _element.updateUi()} );
+					_this._foreachElement(  function (_element) { _element.updateUi()} );
 
 					_superclass.doMy (_this,'updateUi');
 				}
 			};
 
-			_classPrototype.validate = _classPrototype._validate = function() {
+			_classPrototype.validate = _classPrototype._validate = function () {
 				this.set({_isValid:this._committer.get('allValid')})
 			};
 
@@ -397,7 +397,7 @@ Uize.module ({
 				},
 				_isDirty:{
 					name:'isDirty',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
 							_parentForm = _this._getParentForm(),
@@ -417,7 +417,7 @@ Uize.module ({
 				},
 				_isFinished:{
 					name:'isFinished',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
 						if (_this._isFinished) {
@@ -433,7 +433,7 @@ Uize.module ({
 				},
 				_isSubmitting:{
 					name:'isSubmitting',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
 						_this._isSubmitting
@@ -453,7 +453,7 @@ Uize.module ({
 				},
 				_isValid:{
 					name:'isValid',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
 						// if the form is invalid then we are no longer submitting
@@ -471,7 +471,7 @@ Uize.module ({
 				},
 				_okToSubmit:{ // readonly
 					name:'okToSubmit',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
 						if (_this._okToSubmit && _this._useNormalSubmit) {
@@ -496,7 +496,7 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
 							_elements = _this._elements.children,
@@ -521,7 +521,7 @@ Uize.module ({
 				},
 				_warningAllowed:{
 					name:'warningAllowed',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
 							_parentForm = _this._getParentForm(),
@@ -541,10 +541,10 @@ Uize.module ({
 				},
 				_warningShown:{
 					name:'warningShown',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
-						_this._foreachElement( function(_element) { _element.checkWarningShown() } );
+						_this._foreachElement( function (_element) { _element.checkWarningShown() } );
 						_this._updateUiWarning();
 					},
 					value:_false

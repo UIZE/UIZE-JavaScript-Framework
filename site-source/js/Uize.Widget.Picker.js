@@ -50,7 +50,7 @@ Uize.module ({
 					function () {
 						var
 							m = this,
-							_pickValue = function() { m.pickValue() }
+							_pickValue = function () { m.pickValue() }
 						;
 
 						/*** watch focus by user ***/
@@ -76,15 +76,15 @@ Uize.module ({
 			;
 
 		/*** Public Methods ***/
-			_classPrototype.getDialogWidgetProperties = function() { return _null };
+			_classPrototype.getDialogWidgetProperties = function () { return _null };
 
-			_classPrototype.getMoreDialogEventHandlers = function() { return _null };
+			_classPrototype.getMoreDialogEventHandlers = function () { return _null };
 
-			_classPrototype.getMooringNode = function() {
+			_classPrototype.getMooringNode = function () {
 				return this.children.selector.getNode () || this.getNode ('input')
 			};
 
-			_classPrototype.handleDialogSubmit = function(_valueInfo) {
+			_classPrototype.handleDialogSubmit = function (_valueInfo) {
 				var
 					m = this,
 					_value = _valueInfo.value,
@@ -106,7 +106,7 @@ Uize.module ({
 				);
 			};
 
-			_classPrototype.pickValue = function() {
+			_classPrototype.pickValue = function () {
 				var m = this;
 
 				m.set({focused:false});
@@ -114,7 +114,7 @@ Uize.module ({
 				var
 					_mooringNode = m.getMooringNode(),
 					_mooringNodeDims = Uize.Node.getDimensions (_mooringNode),
-					_possiblyFocus = function() {
+					_possiblyFocus = function () {
 						m._allowManualEntry && m.set({focused:true})
 					}
 				;
@@ -201,7 +201,7 @@ Uize.module ({
 				_selectorButtonWidgetProperties:'selectorButtonWidgetProperties',
 				_valueDetails:{
 					name:'valueDetails',
-					onChange:function() {
+					onChange:function () {
 						var _selector = this.children.selector;
 
 						_selector

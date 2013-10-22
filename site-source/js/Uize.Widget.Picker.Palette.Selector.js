@@ -33,7 +33,7 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					null,
-					function() {
+					function () {
 						var m = this;
 
 						function _syncValueDetails() {
@@ -69,7 +69,7 @@ Uize.module ({
 				);
 			};
 
-			_classPrototype.getMoreDialogEventHandlers = function() {
+			_classPrototype.getMoreDialogEventHandlers = function () {
 				var
 					m = this,
 					_undefined
@@ -78,7 +78,7 @@ Uize.module ({
 				function _addHandler(_propertyName) {
 					return Uize.pairUp(
 						'Changed.' + _propertyName,
-						function(_event) {
+						function (_event) {
 							var _dialogPropertyValue = _event.source.get(_propertyName);
 
 							_dialogPropertyValue !== _undefined

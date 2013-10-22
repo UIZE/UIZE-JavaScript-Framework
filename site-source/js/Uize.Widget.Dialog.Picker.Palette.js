@@ -36,7 +36,7 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					null,
-					function() {
+					function () {
 						var m = this;
 
 						// Sync tentativeValue & tentativeValueDetails back and forth with value widget
@@ -47,7 +47,7 @@ Uize.module ({
 
 						m.wire(
 							'After Show',
-							function() {
+							function () {
 								m.children.value.updateUi();
 								m._updateUiMinWidth();
 							}
@@ -58,7 +58,7 @@ Uize.module ({
 			;
 
 		/*** Private Methods ***/
-			_classPrototype._updateUiMinWidth = function() {
+			_classPrototype._updateUiMinWidth = function () {
 				var m = this;
 
 				if (m.isWired && m._minWidth) {
@@ -84,12 +84,12 @@ Uize.module ({
 				},
 				_tentativeValue:{
 					name:'tentativeValue',
-					onChange:function() {
+					onChange:function () {
 						var m = this;
 
 						// Changed.tentativeValue could be fired prior to Changed.tentativeValueDetails, so break flow so that the tentativeValueDetails can be synced before the 'Submission Complete' event is fired
 						setTimeout(
-							function() {
+							function () {
 								m.fireSubmissionComplete (
 									true,
 									{

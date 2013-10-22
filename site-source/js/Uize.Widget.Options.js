@@ -53,7 +53,7 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiOptionSelected = function() {
+			_classPrototype._updateUiOptionSelected = function () {
 				var _this = this;
 				if (_this.isWired && _this._valueNo != _this._lastValueNo) {
 					function _setOptionSelected (_optionNo,_selected) {
@@ -128,7 +128,7 @@ Uize.module ({
 				*/
 			};
 
-			_classPrototype.getOptionProperties = function(_valueNo, _valueObject) {
+			_classPrototype.getOptionProperties = function (_valueNo, _valueObject) {
 				return _null
 			};
 				/*?
@@ -305,7 +305,7 @@ Uize.module ({
 			_class.stateProperties ({
 				_ensureValueInValues:{
 					name:'ensureValueInValues',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 						_this.set({_value:_getValidValue.call(_this, _this._value)});
 					},

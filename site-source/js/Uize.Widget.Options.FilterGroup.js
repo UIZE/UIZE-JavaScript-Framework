@@ -46,7 +46,7 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiExpanded = function() {
+			_classPrototype._updateUiExpanded = function () {
 				var m = this;
 
 				m.isWired
@@ -58,7 +58,7 @@ Uize.module ({
 				;
 			};
 
-			_classPrototype._updateUiFilterVisibility = function() {
+			_classPrototype._updateUiFilterVisibility = function () {
 				var
 					m = this,
 					_allZero = _true
@@ -66,7 +66,7 @@ Uize.module ({
 
 				m.isWired
 					&& m.forAll(
-						function(_filterWidget) {
+						function (_filterWidget) {
 							var
 								_filterCount = _filterWidget.get('count'),
 								_displayFilter = !m._hideWhenZero
@@ -89,12 +89,12 @@ Uize.module ({
 				);
 			};
 
-			_classPrototype._updateUiTitle = function() {
+			_classPrototype._updateUiTitle = function () {
 				this.isWired && this.setNodeInnerHtml('title', this._title)
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.updateCounts = function(_counts) {
+			_classPrototype.updateCounts = function (_counts) {
 				var
 					m = this,
 					_countsLength = _counts.length
@@ -107,7 +107,7 @@ Uize.module ({
 					_counts
 						&& _countsLength
 						&& m.forAll(
-							function(_filterWidget, _filterNo) {
+							function (_filterWidget, _filterNo) {
 								_filterNo < _countsLength
 									&& _filterWidget.set({count:_counts[_filterNo]})
 							}

@@ -133,7 +133,7 @@ Uize.module ({
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.checkIsEmpty = function() {
+			_classPrototype.checkIsEmpty = function () {
 				var _value = this.valueOf();
 
 				return !_value || !_value.response
@@ -168,7 +168,7 @@ Uize.module ({
 				*/
 			};
 
-			_classPrototype.restore = function() {
+			_classPrototype.restore = function () {
 				var m = this;
 
 				m.set({isValid:_false});

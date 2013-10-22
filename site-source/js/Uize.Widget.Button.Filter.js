@@ -33,10 +33,10 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					null,
-					function() {
+					function () {
 						var
 							m = this,
-							_updateUiDisplayState = function() { m._updateUiDisplayState() }
+							_updateUiDisplayState = function () { m._updateUiDisplayState() }
 						;
 
 						m.wire({
@@ -49,7 +49,7 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiLabel = function() {
+			_classPrototype._updateUiLabel = function () {
 				var m = this;
 
 				if (m.isWired) {
@@ -72,7 +72,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._updateUiDisplayState = function() {
+			_classPrototype._updateUiDisplayState = function () {
 				var m = this;
 
 				if (m.isWired) {

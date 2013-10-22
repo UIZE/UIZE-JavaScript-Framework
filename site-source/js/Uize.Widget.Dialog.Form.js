@@ -93,7 +93,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype.getResult = function() {
+			_classPrototype.getResult = function () {
 				var
 					_this = this,
 					_formData = _Uize_Node_Form.getValues(_this._theForm)
@@ -106,7 +106,7 @@ Uize.module ({
 				_formData:{
 					name:'formData',
 					value:null,
-					onChange:function() {
+					onChange:function () {
 						_Uize_Node_Form.setValues(this._formData);
 					}
 				}

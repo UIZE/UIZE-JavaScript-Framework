@@ -65,10 +65,10 @@ Uize.module ({
 							}
 
 							m.wire({
-								'Changed.value':function() { _setValueDisplayWidget('value') },
-								'Changed.valueDetails':function() { _setValueDisplayWidget('valueDetails') },
-								'Changed.tentativeValue':function() { m._syncTentativeValue && _setValueDisplayWidget('value', 'tentativeValue') },
-								'Changed.tentativeValueDetails':function() { m._syncTentativeValue && _setValueDisplayWidget('valueDetails', 'tentativeValueDetails') }
+								'Changed.value':function () { _setValueDisplayWidget('value') },
+								'Changed.valueDetails':function () { _setValueDisplayWidget('valueDetails') },
+								'Changed.tentativeValue':function () { m._syncTentativeValue && _setValueDisplayWidget('value', 'tentativeValue') },
+								'Changed.tentativeValueDetails':function () { m._syncTentativeValue && _setValueDisplayWidget('valueDetails', 'tentativeValueDetails') }
 							});
 
 							_setValueDisplayWidget('value');
@@ -78,7 +78,7 @@ Uize.module ({
 			;
 
 		/*** Public Methods ***/
-			_class.prototype.updateUi = function() {
+			_class.prototype.updateUi = function () {
 				var m = this;
 
 				if (m.isWired) {
@@ -91,20 +91,20 @@ Uize.module ({
 			_class.stateProperties ({
 				_pipedProperties:{
 					name:'pipedProperties',
-					onChange:function() {
+					onChange:function () {
 						var
 							m = this,
 							_previousPipedProperties = m._previousPipedProperties,
 							_pipedProperties = m._pipedProperties,
 							_children = m.children,
-							_buildChangedEventName = function(_propertyName) { return 'Changed.' + _propertyName },
-							_syncProperty = function(_propertyName) {
+							_buildChangedEventName = function (_propertyName) { return 'Changed.' + _propertyName },
+							_syncProperty = function (_propertyName) {
 								var _valueWidget = _children.value;
 								_valueWidget
 									&& _valueWidget.set(_propertyName, m.get(_propertyName))
 								;
 							},
-							_pipeChangedEvent = function(_event) {
+							_pipeChangedEvent = function (_event) {
 								var _eventName = _event.name;
 								_syncProperty(_eventName.substr(_eventName.indexOf('.') + 1));
 							}
@@ -145,7 +145,7 @@ Uize.module ({
 				_tentativeValueDetails:'tentativeValueDetails',
 				_valueDetails:{
 					name:'valueDetails',
-					onChange:function() { this.set({_tentativeValueDetails:this._valueDetails}) }
+					onChange:function () { this.set({_tentativeValueDetails:this._valueDetails}) }
 				},
 				_valueDisplayWidgetClass:'valueDisplayWidgetClass',
 				_valueDisplayWidgetProperties:'valueDisplayWidgetProperties',

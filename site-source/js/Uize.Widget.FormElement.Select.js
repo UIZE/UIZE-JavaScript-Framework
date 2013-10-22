@@ -31,13 +31,13 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
-					function() {this._values = []},
-					function() {
+					function () {this._values = []},
+					function () {
 						var m = this;
 
 						m.wire(
 							'Changed.value',
-							function() {
+							function () {
 								if (m.isWired) {
 									var _selectNode = m.getNode('input');
 
@@ -52,7 +52,7 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiValues = function() {
+			_classPrototype._updateUiValues = function () {
 				var m = this;
 
 				if (m.isWired) {

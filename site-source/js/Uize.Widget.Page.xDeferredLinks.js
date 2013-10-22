@@ -15,7 +15,7 @@ Uize.module ({
 	builder:function (_class) {
 		'use strict';
 
-		_class.prototype.wireDeferredLinks = function() {
+		_class.prototype.wireDeferredLinks = function () {
 			var
 				_this = this,
 				_links = _this.deferredLinks,
@@ -36,7 +36,7 @@ Uize.module ({
 						_this.wireNode(
 							_linkNode,
 							'click',
-							function() {
+							function () {
 								_this.launchPopup(
 									Uize.copyInto(
 										{

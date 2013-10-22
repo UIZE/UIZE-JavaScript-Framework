@@ -34,7 +34,7 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					null,
-					function() {
+					function () {
 						var
 							m = this,
 							_false = false,
@@ -47,10 +47,10 @@ Uize.module ({
 
 						_form.wire(
 							'Changed.okToSubmit',
-							function() {
+							function () {
 								_form.get('okToSubmit')
 									&& m.handleFormValue(
-										function(_info) {
+										function (_info) {
 											m.fire ({
 												name:'Submission Complete',
 												result:_form.get('value'),
@@ -65,24 +65,24 @@ Uize.module ({
 						);
 
 						m.wire({
-							Ok:function(_event) {
+							Ok:function (_event) {
 								_form.submit();
 								_event.abort = true;
 							},
-							'Before Show':function() {
+							'Before Show':function () {
 								if (m._value)
 									_form.set({value:Uize.clone(m._value)})
 								;
 							},
-							'After Show':function() { _form.updateUi() },
-							'After Hide':function() { _form.reset() }
+							'After Show':function () { _form.updateUi() },
+							'After Hide':function () { _form.reset() }
 						});
 					}
 				)
 			;
 
 		/*** Public Methods ***/
-			_class.prototype.handleFormValue = function(_callback) { _callback() };
+			_class.prototype.handleFormValue = function (_callback) { _callback() };
 
 		/*** State Properties ***/
 			_class.stateProperties ({

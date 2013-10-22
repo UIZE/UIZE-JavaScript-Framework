@@ -33,7 +33,7 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					null,
-					function() {
+					function () {
 						var
 							m = this,
 							_valueString = 'value',
@@ -70,15 +70,15 @@ Uize.module ({
 						}
 
 						m.wire({
-							'Changed.tentativeValue':function() { _syncValueDetails(_tentativeValueString) },
-							'Changed.value':function() { _syncValueDetails(_valueString) },
-							'Changed.tentativeValueDetails':function() {
+							'Changed.tentativeValue':function () { _syncValueDetails(_tentativeValueString) },
+							'Changed.value':function () { _syncValueDetails(_valueString) },
+							'Changed.tentativeValueDetails':function () {
 								_addToValueDetailsCache(m.get(_tentativeValueString), m._tentativeValueDetails);
 							},
-							'Changed.valueDetails':function() {
+							'Changed.valueDetails':function () {
 								_addToValueDetailsCache(m.get(_valueString), m._valueDetails);
 							},
-							'Changed.values':function() {
+							'Changed.values':function () {
 								_valueDetailsCache = {};
 								_addToValueDetailsCache(m.valueOf(), m._valueDetails);
 							}
@@ -92,7 +92,7 @@ Uize.module ({
 			;
 
 		/*** Public Methods ***/
-			_classPrototype.getOptionProperties = function(_valueNo, _valueObject) {
+			_classPrototype.getOptionProperties = function (_valueNo, _valueObject) {
 				return Uize.copyInto(
 					_superclass.doMy (this,'getOptionProperties',[_valueNo, _valueObject]) || {},
 					{
@@ -102,7 +102,7 @@ Uize.module ({
 				)
 			};
 
-			_classPrototype.wireUi = function() {
+			_classPrototype.wireUi = function () {
 				var m = this;
 
 				if (!m.isWired) {

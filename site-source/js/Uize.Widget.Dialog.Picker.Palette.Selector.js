@@ -35,14 +35,14 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass (
 				null,
-				function() {
+				function () {
 					var
 						m = this,
 						_valueWidget = m.children.value
 					;
 					m.wire(
 						'After Show',
-						function() { _valueWidget.updateUi() }
+						function () { _valueWidget.updateUi() }
 					);
 					Uize.Util.Coupler({
 						instances:[m, _valueWidget],

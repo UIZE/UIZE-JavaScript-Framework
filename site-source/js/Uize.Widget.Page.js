@@ -55,7 +55,7 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					_null,
-					function() { _class.xDeferredLinks && this.wireDeferredLinks() }
+					function () { _class.xDeferredLinks && this.wireDeferredLinks() }
 				),
 				_classPrototype = _class.prototype
 			;
@@ -402,7 +402,7 @@ Uize.module ({
 							Using a setTimeout here to ensure that the dialog is shown in an asynchronous manner. We were getting in situations where a dialog would be shown, OK would be pressed, and the OK handler executed in such a way that the dialog would be reshown.  Then once the dialog was reshown, the set({shown:false}) for the first dialog would execute, but hide the second dialog.  We'd like the hiding to happen before the second dialog is shown and this should guarantee that by effectively breaking the thread of execution.
 						*/
 
-						function() {
+						function () {
 							function _callHandler (_handlerProperty,_handlerParams) {
 								var _handler = _params [_handlerProperty];
 								_handler && _handler.apply (0,_handlerParams);

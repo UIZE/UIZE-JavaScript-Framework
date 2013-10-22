@@ -73,7 +73,7 @@ Uize.module ({
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.handleConfirm = function(_event) {
+			_classPrototype.handleConfirm = function (_event) {
 				this.fire ({name:'Submission Complete',result:_event.name == 'Ok'})
 			};
 

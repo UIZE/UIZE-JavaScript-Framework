@@ -27,7 +27,7 @@
 Uize.module ({
 	name:'Uize.Widget.FormElementWarning',
 	required:'Uize.Node.Classes',
-	builder:function(_superclass) {
+	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_true = true,
@@ -41,7 +41,7 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiFocused = function() {
+			_classPrototype._updateUiFocused = function () {
 				var m = this;
 
 				m.isWired
@@ -53,22 +53,22 @@ Uize.module ({
 				;
 			};
 
-			_classPrototype._updateUiMessage = function() {
+			_classPrototype._updateUiMessage = function () {
 				this.isWired && this.setNodeInnerHtml('text', this._getMessage())
 			};
 
-			_classPrototype._updateUiShown = function() {
+			_classPrototype._updateUiShown = function () {
 				this.isWired && this.displayNode('', this._shown)
 			};
 
 
 		/*** Public Instance Methods ***/
-			_classPrototype.getMessage = _classPrototype._getMessage = function() {
+			_classPrototype.getMessage = _classPrototype._getMessage = function () {
 				var _message = this._message;
 				return Uize.isFunction (_message) ? _message() : _message;
 			};
 
-			_classPrototype.updateUi = function() {
+			_classPrototype.updateUi = function () {
 				var m = this;
 
 				if (m.isWired) {
@@ -89,8 +89,8 @@ Uize.module ({
 					m.wireNode (
 						'',
 						{
-							mouseover:function() { _focus(_true) },
-							mouseout:function() { _focus(_false) }
+							mouseover:function () { _focus(_true) },
+							mouseout:function () { _focus(_false) }
 						}
 					);
 

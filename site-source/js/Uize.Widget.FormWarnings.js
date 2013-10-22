@@ -82,7 +82,7 @@ Uize.module ({
 			_class.stateProperties({
 				_shown:{
 					name:'shown',
-					onChange:function() {
+					onChange:function () {
 						this.isWired
 							&& this.displayNode('', this._shown)
 					},
@@ -90,7 +90,7 @@ Uize.module ({
 				},
 				_watchedElements:{
 					name:'watchedElements',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 						Uize.forEach (
 							_this._watchedElements,

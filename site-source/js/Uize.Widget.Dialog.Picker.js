@@ -82,7 +82,7 @@ Uize.module ({
 									!m._beforeShow
 										// Changed.value will be fired prior to Changed.valueDetails, so break flow so that the valueDetails can be synced before the 'Submission Complete' event is fired
 										&& setTimeout(
-											function() {
+											function () {
 												_fireSubmissionComplete (m._keepOpen);
 												m._keepOpen || m.set ({shown:_false});
 											},
@@ -147,7 +147,7 @@ Uize.module ({
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.fireSubmissionComplete = function(_keepOpen, _result) {
+			_classPrototype.fireSubmissionComplete = function (_keepOpen, _result) {
 				var m = this;
 
 				m.get ('shown')
