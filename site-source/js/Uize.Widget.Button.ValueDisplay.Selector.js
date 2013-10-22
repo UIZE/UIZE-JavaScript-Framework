@@ -76,7 +76,7 @@ Uize.module ({
 						;
 					}
 
-					_this.web().display(_valueDetails);
+					_this.displayNode('',_valueDetails);
 				}
 			};
 
