@@ -26,7 +26,10 @@
 Uize.module ({
 	name:'Uize.Widget.InlinePicker',
 	superclass:'Uize.Widget.FormElement',
-	required:'Uize.Util.Coupler',
+	required:[
+		'Uize.Widget.Button.ValueDisplay',
+		'Uize.Util.Coupler'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -93,20 +96,19 @@ Uize.module ({
 							_this = this,
 							_previousPipedProperties = _this._previousPipedProperties,
 							_pipedProperties = _this._pipedProperties,
-							_children = _this.children
+							_children = _this.children,
+							_buildChangedEventName = function(_propertyName) { return 'Changed.' + _propertyName },
+							_syncProperty = function(_propertyName) {
+								var _valueWidget = _children.value;
+								_valueWidget
+									&& _valueWidget.set(_propertyName, _this.get(_propertyName))
+								;
+							},
+							_pipeChangedEvent = function(_event) {
+								var _eventName = _event.name;
+								_syncProperty(_eventName.substr(_eventName.indexOf('.') + 1));
+							}
 						;
-
-						function _buildChangedEventName(_propertyName) { return 'Changed.' + _propertyName }
-						function _pipeChangedEvent(_event) {
-							var
-								_eventName = _event.name,
-								_propertyName = _eventName.substr(_eventName.indexOf('.') + 1),
-								_valueWidget = _children.value
-							;
-							_valueWidget
-								&& _valueWidget.set(_propertyName, _this.get(_propertyName))
-							;
-						}
 
 						/*** unwire previous piped properties ***/
 							Uize.forEach (
@@ -121,6 +123,7 @@ Uize.module ({
 								_pipedProperties,
 								function (_pipedProperty) {
 									_this.wire (_buildChangedEventName(_pipedProperty),_pipeChangedEvent);
+									_syncProperty(_pipedProperty);
 								}
 							);
 

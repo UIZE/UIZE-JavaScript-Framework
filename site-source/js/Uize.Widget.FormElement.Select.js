@@ -31,7 +31,7 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
-					null,
+					function() {this._values = []},
 					function() {
 						var _this = this;
 
@@ -130,7 +130,7 @@ Uize.module ({
 					_superclass.doMy (_this,'wireUi');
 
 					var
-						_values = _this._values,
+						_values = _this._values || [],
 						_selectNode = _this.getNode('input')
 					;
 
@@ -179,8 +179,7 @@ Uize.module ({
 				},
 				_values:{
 					name:'values',
-					onChange:_classPrototype._updateUiValues,
-					value:[]
+					onChange:_classPrototype._updateUiValues
 				}
 			});
 
