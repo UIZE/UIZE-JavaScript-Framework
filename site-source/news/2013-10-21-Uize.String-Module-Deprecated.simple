@@ -1,0 +1,64 @@
+The =Uize.String= module has been deprecated in favor of various, smaller modules under the =Uize.Str= and =Uize.Array= namespaces.
+
+The Rationale
+	The =Uize.String= module has been deprecated, with its various utility methods split amongst numerous smaller modules, in order to allow developers to deploy more compact code.
+
+	With the new arrangement of smaller modules under the purely namespace =Uize.Str= module, it is now possible to use just some parts of the functionality without dragging along all of the baggage. Many of the methods in the =Uize.String= module were only infrequently used. The new arrangement of methods in mini modules provides a better strategy for making new functionality available in future without leading to bloat.
+
+Backwards Compatibility
+	In order to maintain backwards compatibility while this module is still in the deprecated state, and before it is killed entirely, this module aggregates methods from the various newer modules contained under the =Uize.Str= and =Uize.Array= namespaces.
+
+	All the static methods that have been migrated to other modules are still supported in this module and behave in exactly the same way as before.
+
+Update Your Code
+	In order to update your code to prepare for the eventual expiration of this backwards compatibility provision, you should change all calls to the methods of the =Uize.String= module in your code, according to the following map...
+
+	..........................................................................................
+	Uize.String.hugJoin                  >> BECOMES >>  Uize.Array.Join.hugJoin
+
+	Uize.String.limitLength              >> BECOMES >>  Uize.Str.Limit.limitLength
+	Uize.String.joinUsingSuffixPriority  >> BECOMES >>  Uize.Str.Limit.joinUsingSuffixPriority
+
+	Uize.String.contains                 >> BECOMES >>  Uize.Str.Has.has
+	Uize.String.startsWith               >> BECOMES >>  Uize.Str.Has.hasPrefix
+	Uize.String.endsWith                 >> BECOMES >>  Uize.Str.Has.hasSuffix
+
+	Uize.String.toCamel                  >> BECOMES >>  Uize.Str.Camel.to
+
+	Uize.String.repeat                   >> BECOMES >>  Uize.Str.Repeat.repeat
+
+	Uize.String.split                    >> BECOMES >>  Uize_Str_Split.split
+	Uize.String.splitInTwo               >> BECOMES >>  Uize_Str_Split.splitInTwo
+
+	Uize.String.hasPadding               >> BECOMES >>  Uize.Str.Trim.hasPadding
+	Uize.String.trim                     >> BECOMES >>  Uize.Str.Trim.trim
+	Uize.String.trimLeft                 >> BECOMES >>  Uize.Str.Trim.trimLeft
+	Uize.String.trimRight                >> BECOMES >>  Uize.Str.Trim.trimRight
+	..........................................................................................
+
+New Modules
+	In order to create homes for the various static methods that were migrated from the deprecated =Uize.String= module, the following new modules were created...
+
+	- =Uize.Array.Join= - methods for joining array elements
+	- =Uize.Str.Camel= - methods for working with CamelCase
+	- =Uize.Str.Has= - methods for testing for presence of prefix, suffix, or substring
+	- =Uize.Str.Limit= - methods for limiting the length of strings
+	- =Uize.Str.Repeat= - methods for repeating strings
+	- =Uize.Str.Split= - methods for splitting strings
+	- =Uize.Str.Trim=- methods for dealing with whitespace padding
+
+Migrated Modules
+	Because the =Uize.String= module has been deprecated, the following modules that were using it purely as a namespace, have been migrated to under the new =Uize.Str= namespace...
+
+	....................................................................
+	Uize.String.Builder          >> BECOMES >>  Uize.Str.Builder
+	Uize.String.Discombobulator  >> BECOMES >>  Uize.Str.Discombobulator
+	Uize.String.Lines            >> BECOMES >>  Uize.Str.Lines
+	Uize.String.Replace          >> BECOMES >>  Uize.Str.Replace
+	....................................................................
+
+....................................................................................
+<< metadata >>
+
+title: 2013-10-21 - Uize.String Module Deprecated
+....................................................................................

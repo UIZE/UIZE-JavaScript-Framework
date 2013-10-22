@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.String.Builder= module is deprecated and is an alias to the =Uize.Str.Builder= module, which is effectively the same module migrated to under the =Uize.Str= namespace.
+		The =Uize.String.Builder= module is deprecated *(DEPRECATED 2013-10-21)* and is an alias to the =Uize.Str.Builder= module, which is effectively the same module migrated to under the =Uize.Str= namespace.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
