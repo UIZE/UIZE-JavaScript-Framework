@@ -33,16 +33,16 @@ Uize.module ({
 				_class = _superclass.subclass (
 					function() {this._values = []},
 					function() {
-						var _this = this;
+						var m = this;
 
-						_this.wire(
+						m.wire(
 							'Changed.value',
 							function() {
-								if (_this.isWired) {
-									var _selectNode = _this.getNode('input');
+								if (m.isWired) {
+									var _selectNode = m.getNode('input');
 
 									_selectNode
-										&& _this.set({_valueNo:_selectNode.selectedIndex})
+										&& m.set({_valueNo:_selectNode.selectedIndex})
 								}
 							}
 						);
@@ -53,22 +53,22 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiValues = function() {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
-						_oldValue = _this.get('value'),
-						_values = _this._values,
-						_selectNode = _this.getNode('input')
+						_oldValue = m.get('value'),
+						_values = m._values,
+						_selectNode = m.getNode('input')
 					;
 
-					if (_values && _selectNode && _this.get('type') == 'select-one') {
+					if (_values && _selectNode && m.get('type') == 'select-one') {
 						var _valueFound = false;
 
 						// setting the value to null was commented out to fix bug 9574.
 						// it wasn't deleted in case its exclusion caused another bug.
-						//_this.set({value:null});
-						_this._valueNo = -1;
+						//m.set({value:null});
+						m._valueNo = -1;
 
 						// iterate through the values in values object, replacing the Option nodes
 						// adding new ones if necessary
@@ -96,7 +96,7 @@ Uize.module ({
 								catch(_ex) { _selectNode.add(_optionNode) }
 							}
 
-							_this.setNodeProperties(
+							m.setNodeProperties(
 								_optionNode,
 								{
 									value:_valueObjectName,
@@ -118,29 +118,29 @@ Uize.module ({
 						;
 
 						if (!(_valueFound && _oldValue) && _values.length)
-							_this.set({value:_values[0].name});
+							m.set({value:_values[0].name});
 					}
 				}
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_superclass.doMy (_this,'wireUi');
+				var m = this;
+				if (!m.isWired) {
+					_superclass.doMy (m,'wireUi');
 
 					var
-						_values = _this._values || [],
-						_selectNode = _this.getNode('input')
+						_values = m._values || [],
+						_selectNode = m.getNode('input')
 					;
 
 					if (_values.length)	// values data exists so update the <option>s in the <select> tag
-						_this._updateUiValues();
-					else if (_selectNode && _this.get('type') == 'select-one') { // build values from <select> tag <option>s
+						m._updateUiValues();
+					else if (_selectNode && m.get('type') == 'select-one') { // build values from <select> tag <option>s
 						// iterate through each option and add to values state property
 						for (
 							var
-								_value = _this.get('value'),
+								_value = m.get('value'),
 								_options = _selectNode.options,
 								_optionNo = -1,
 								_optionsLength = _options.length
@@ -164,8 +164,8 @@ Uize.module ({
 						}
 
 						// set valueNo to be selectedIndex && sync up the value in case it has changed
-						(_this._valueNo = _selectNode.selectedIndex) > -1
-							&& _this.set({value:_values[_this._valueNo].name})
+						(m._valueNo = _selectNode.selectedIndex) > -1
+							&& m.set({value:_values[m._valueNo].name})
 						;
 					}
 				}

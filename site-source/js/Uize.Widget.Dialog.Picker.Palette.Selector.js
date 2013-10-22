@@ -37,15 +37,15 @@ Uize.module ({
 				null,
 				function() {
 					var
-						_this = this,
-						_valueWidget = _this.children.value
+						m = this,
+						_valueWidget = m.children.value
 					;
-					_this.wire(
+					m.wire(
 						'After Show',
 						function() { _valueWidget.updateUi() }
 					);
 					Uize.Util.Coupler({
-						instances:[_this, _valueWidget],
+						instances:[m, _valueWidget],
 						properties:['valueNo', 'tentativeValueNo']
 					});
 				}

@@ -35,11 +35,11 @@ Uize.module ({
 					null,
 					function() {
 						var
-							_this = this,
-							_updateUiDisplayState = function() { _this._updateUiDisplayState() }
+							m = this,
+							_updateUiDisplayState = function() { m._updateUiDisplayState() }
 						;
 
-						_this.wire({
+						m.wire({
 							'Changed.enabledInherited':_updateUiDisplayState,
 							'Changed.selected':_updateUiDisplayState
 						});
@@ -50,22 +50,22 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiLabel = function() {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
-						_label = _this._label,
-						_labelWithCount = _this.localize(
+						_label = m._label,
+						_labelWithCount = m.localize(
 							'filterWithCount',
 							{
 								filterLabel:_label,
-								count:_this._count
+								count:m._count
 							}
 						)
 					;
 
-					_this.set({
-						text:_this._showCount && _labelWithCount
+					m.set({
+						text:m._showCount && _labelWithCount
 							? _labelWithCount
 							: _label
 					});
@@ -73,39 +73,39 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiDisplayState = function() {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
 						_Uize_Node_Classes = Uize.Node.Classes,
-						_rootNode = _this.getNode()
+						_rootNode = m.getNode()
 					;
 
 					_Uize_Node_Classes.setState(
 						_rootNode,
-						['', _this._cssClassFeatured],
-						_this._featured
+						['', m._cssClassFeatured],
+						m._featured
 					);
 					_Uize_Node_Classes.setState(
 						_rootNode,
-						['', _this._cssClassDisabled],
-						!_this.get('enabledInherited')
+						['', m._cssClassDisabled],
+						!m.get('enabledInherited')
 					);
 					_Uize_Node_Classes.setState(
 						_rootNode,
-						['', _this._cssClassSelected],
-						_this.get('selected')
+						['', m._cssClassSelected],
+						m.get('selected')
 					);
 				}
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiLabel();
-					_this._updateUiDisplayState();
-					_superclass.prototype.updateUi.call (_this);
+				var m = this;
+				if (m.isWired) {
+					m._updateUiLabel();
+					m._updateUiDisplayState();
+					_superclass.prototype.updateUi.call (m);
 				}
 			};
 

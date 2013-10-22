@@ -39,15 +39,15 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
-						function _updateUiSelectorState() { _this._updateUiSelectorState() }
-						_this.wire ({
+						function _updateUiSelectorState() { m._updateUiSelectorState() }
+						m.wire ({
 							'Changed.busyInherited':_updateUiSelectorState,
 							'Changed.enabledInherited':_updateUiSelectorState,
 							'Changed.state':_updateUiSelectorState,
-							'Changed.selected':function() { _this._updateUiSelectedState() },
-							'Changed.valueDetails':function() { _this._updateUiSelectorValueDetails() }
+							'Changed.selected':function() { m._updateUiSelectedState() },
+							'Changed.valueDetails':function() { m._updateUiSelectorValueDetails() }
 						});
 
 					}
@@ -62,41 +62,41 @@ Uize.module ({
 
 			_classPrototype._updateUiSelectorValueDetails = function() {
 				var
-					_this = this,
-					_valueDetails = _this.get('valueDetails')
+					m = this,
+					_valueDetails = m.get('valueDetails')
 				;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					if (_valueDetails) {
 						_valueDetails.value != null
-							&& _this._setInputNodeProperties({value:_valueDetails.name})
+							&& m._setInputNodeProperties({value:_valueDetails.name})
 						;
 						_valueDetails.displayName != null
-							&& _this.setNodeInnerHtml('displayName', _valueDetails.displayName)
+							&& m.setNodeInnerHtml('displayName', _valueDetails.displayName)
 						;
 					}
 
-					_this.displayNode('',_valueDetails);
+					m.displayNode('',_valueDetails);
 				}
 			};
 
 			_classPrototype._updateUiSelectorState = function() {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
-						_state = _this.get('state'),
-						_enabled = _this.get ('enabledInherited') && !_this.get ('busyInherited')
+						_state = m.get('state'),
+						_enabled = m.get ('enabledInherited') && !m.get ('busyInherited')
 					;
 
-					_this._setInputNodeProperties({
+					m._setInputNodeProperties({
 						readOnly:!_enabled,
 						disabled:!_enabled
 					});
 
 					_Uize_Node_Classes.setState(
-						_this.getNode(),
-						['', _this._cssClassTentativeSelected, _this._cssClassActive, _this._cssClassDisabled],
+						m.getNode(),
+						['', m._cssClassTentativeSelected, m._cssClassActive, m._cssClassDisabled],
 						(!_enabled
 							? 3
 							: (_state == 'down'
@@ -108,16 +108,16 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiSelectedState = function () {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
-					var _selected = _this.get('selected');
+				if (m.isWired) {
+					var _selected = m.get('selected');
 
-					_this._setInputNodeProperties({checked:_selected});
+					m._setInputNodeProperties({checked:_selected});
 
 					_Uize_Node_Classes.setState(
-						_this.getNode(),
-						_this._cssClassSelected,
+						m.getNode(),
+						m._cssClassSelected,
 						_selected
 					);
 				}
@@ -125,24 +125,24 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiSelectorValueDetails();
-					_this._updateUiSelectorState();
-					_this._updateUiSelectedState();
-					_superclass.doMy (_this,'updateUi');
+				var m = this;
+				if (m.isWired) {
+					m._updateUiSelectorValueDetails();
+					m._updateUiSelectorState();
+					m._updateUiSelectedState();
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					var
-						_inputNode = _this.getNode('input'),
-						_displayNameNode = _this.getNode('displayName')
+						_inputNode = m.getNode('input'),
+						_displayNameNode = m.getNode('displayName')
 					;
 
-					_this.wireNode(
+					m.wireNode(
 						_inputNode,
 						'change',
 						function (_event) {
@@ -153,15 +153,15 @@ Uize.module ({
 							// clicking the checkbox ends up setting selcted to false and then back true
 							// because of clickToSelect & clickToDeselect
 							if (
-								(_checked && !_this.get('clickToSelect'))
-									|| (!_checked && !_this.get('clickToDeselect'))
+								(_checked && !m.get('clickToSelect'))
+									|| (!_checked && !m.get('clickToDeselect'))
 							) {
-								_this.set({selected:_checked});
+								m.set({selected:_checked});
 
 								// Options widget just watches on click of its buttons, so in order for
 								// it to know that clicking the radio has changed the value, we need to
 								// fire click
-								_this.fire({name:'Click', domEvent:_event});
+								m.fire({name:'Click', domEvent:_event});
 							}
 						}
 					);
@@ -175,7 +175,7 @@ Uize.module ({
 						&& _displayNameNode.removeAttribute('for')
 					;
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

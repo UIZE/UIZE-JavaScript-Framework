@@ -37,19 +37,19 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function() {
-						var _this = this;
+						var m = this;
 
 						// Sync tentativeValue & tentativeValueDetails back and forth with value widget
 						Uize.Util.Coupler({
-							instances:[_this, _this.children.value],
+							instances:[m, m.children.value],
 							properties:['tentativeValue', 'tentativeValueDetails']
 						});
 
-						_this.wire(
+						m.wire(
 							'After Show',
 							function() {
-								_this.children.value.updateUi();
-								_this._updateUiMinWidth();
+								m.children.value.updateUi();
+								m._updateUiMinWidth();
 							}
 						);
 					}
@@ -59,18 +59,18 @@ Uize.module ({
 
 		/*** Private Methods ***/
 			_classPrototype._updateUiMinWidth = function() {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired && _this._minWidth) {
-					_this.setNodeStyle (
+				if (m.isWired && m._minWidth) {
+					m.setNodeStyle (
 						'',
-						{minWidth:_this._minWidth}
+						{minWidth:m._minWidth}
 					);
 					Uize.Node.isIe
 						&& Uize.Node.ieMajorVersion <= 7
-						&& _this.setNodeStyle (
+						&& m.setNodeStyle (
 							'valueShell',
-							{minWidth:_this._minWidth}
+							{minWidth:m._minWidth}
 						)
 					;
 				}
@@ -85,16 +85,16 @@ Uize.module ({
 				_tentativeValue:{
 					name:'tentativeValue',
 					onChange:function() {
-						var _this = this;
+						var m = this;
 
 						// Changed.tentativeValue could be fired prior to Changed.tentativeValueDetails, so break flow so that the tentativeValueDetails can be synced before the 'Submission Complete' event is fired
 						setTimeout(
 							function() {
-								_this.fireSubmissionComplete (
+								m.fireSubmissionComplete (
 									true,
 									{
-										tentativeValue:_this._tentativeValue,
-										tentativeValueDetails:_this._tentativeValueDetails
+										tentativeValue:m._tentativeValue,
+										tentativeValueDetails:m._tentativeValueDetails
 									}
 								)
 							},

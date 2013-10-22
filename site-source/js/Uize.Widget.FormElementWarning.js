@@ -42,13 +42,13 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiFocused = function() {
-				var _this = this;
+				var m = this;
 
-				_this.isWired
+				m.isWired
 					&& Uize.Node.Classes.setState(
-						_this.getNode(),
-						['', _this._cssClassFocused],
-						_this._focused
+						m.getNode(),
+						['', m._cssClassFocused],
+						m._focused
 					)
 				;
 			};
@@ -69,24 +69,24 @@ Uize.module ({
 			};
 
 			_classPrototype.updateUi = function() {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
-					_this._updateUiMessage();
-					_this._updateUiShown();
-					_this._updateUiFocused();
+				if (m.isWired) {
+					m._updateUiMessage();
+					m._updateUiShown();
+					m._updateUiFocused();
 
-					_superclass.prototype.updateUi.call (_this);
+					_superclass.prototype.updateUi.call (m);
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (!_this.isWired) {
-					var _focus = function (_focused) { _this.set({ _focused: _focused }) };
+				if (!m.isWired) {
+					var _focus = function (_focused) { m.set({ _focused: _focused }) };
 
-					_this.wireNode (
+					m.wireNode (
 						'',
 						{
 							mouseover:function() { _focus(_true) },
@@ -94,11 +94,11 @@ Uize.module ({
 						}
 					);
 
-					_this._message == null
-						&& _this.set({_message:_this.getNodeValue('text')})
+					m._message == null
+						&& m.set({_message:m.getNodeValue('text')})
 					;
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.prototype.wireUi.call (m);
 				}
 			};
 

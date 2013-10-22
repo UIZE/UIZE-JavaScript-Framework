@@ -34,18 +34,18 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function() {
-						var _this = this;
+						var m = this;
 
 						function _syncValueDetails() {
-							var _valueObject = _this.getValueObject();
+							var _valueObject = m.getValueObject();
 
-							_this.set({
+							m.set({
 								valueDetails:_valueObject
 									? _valueObject.valueDetails
 									: null
 							});
 						}
-						_this.wire({
+						m.wire({
 							'Changed.value': _syncValueDetails,
 							'Changed.values': _syncValueDetails
 						});
@@ -71,7 +71,7 @@ Uize.module ({
 
 			_classPrototype.getMoreDialogEventHandlers = function() {
 				var
-					_this = this,
+					m = this,
 					_undefined
 				;
 
@@ -82,14 +82,14 @@ Uize.module ({
 							var _dialogPropertyValue = _event.source.get(_propertyName);
 
 							_dialogPropertyValue !== _undefined
-								&& _this.set(_propertyName, _dialogPropertyValue)
+								&& m.set(_propertyName, _dialogPropertyValue)
 							;
 				}
 					);
 				}
 
 				return Uize.copyInto(
-					_superclass.prototype.getMoreDialogEventHandlers.call(_this) || {},
+					_superclass.prototype.getMoreDialogEventHandlers.call(m) || {},
 					_addHandler('valueNo'),
 					_addHandler('tentativeValueNo')
 				);

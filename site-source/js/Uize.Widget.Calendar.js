@@ -222,7 +222,8 @@ Uize.module ({
 			}
 
 			function _updateUiMonthDisplay () {
-				this.isWired && this.setNodeValue ('month',this._monthNames [this._month]);
+				var m = this;
+				m.isWired && m.setNodeValue ('month',m._monthNames [m._month]);
 				/*?
 					Implied Nodes
 						month Implied Node

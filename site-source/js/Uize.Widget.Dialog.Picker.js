@@ -52,19 +52,19 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** submit value ***/
 							function _fireSubmissionComplete (_keepOpen) {
 								var
-									_valueWidget = _this.children.value,
+									_valueWidget = m.children.value,
 									_valueDetails = _valueWidget.get('valueDetails'),
 									_undefined
 								;
 
-								_this._submittedValue = _true;
+								m._submittedValue = _true;
 
-								_this.fireSubmissionComplete(
+								m.fireSubmissionComplete(
 									_keepOpen,
 									Uize.copyInto(
 										{value:_valueWidget.valueOf ()},
@@ -76,15 +76,15 @@ Uize.module ({
 							}
 
 						/*** add the value child widget ***/
-							_this.addChild ('value',_this._valueWidgetClass).wire (
+							m.addChild ('value',m._valueWidgetClass).wire (
 								'Changed.value',
 								function () {
-									!_this._beforeShow
+									!m._beforeShow
 										// Changed.value will be fired prior to Changed.valueDetails, so break flow so that the valueDetails can be synced before the 'Submission Complete' event is fired
 										&& setTimeout(
 											function() {
-												_fireSubmissionComplete (_this._keepOpen);
-												_this._keepOpen || _this.set ({shown:_false});
+												_fireSubmissionComplete (m._keepOpen);
+												m._keepOpen || m.set ({shown:_false});
 											},
 											0
 										)
@@ -98,9 +98,9 @@ Uize.module ({
 							);
 
 						/*** add the keepOpen button ***/
-							_this.addChild ('keepOpen',Uize.Widget.Button.Checkbox).wire (
+							m.addChild ('keepOpen',Uize.Widget.Button.Checkbox).wire (
 								'Changed.selected',
-								function (_event) {_this.set ({_keepOpen:_event.source.get ('selected')})}
+								function (_event) {m.set ({_keepOpen:_event.source.get ('selected')})}
 								/*?
 									Child Widget
 										keepOpen Child Widget
@@ -110,12 +110,12 @@ Uize.module ({
 
 						/*** add event handlers ***/
 							function _handleDismiss() {
-								if (_this._submittedValue) {
-									_this.children.value.set({value: _this._initialValue});
+								if (m._submittedValue) {
+									m.children.value.set({value: m._initialValue});
 									_fireSubmissionComplete(_false);
 								}
 							}
-							_this.wire ({
+							m.wire ({
 								Ok:function () {_fireSubmissionComplete ()},
 								Cancel:_handleDismiss,
 								Close:_handleDismiss,
@@ -127,15 +127,15 @@ Uize.module ({
 
 										Absent the above facilities, we do a workaround and track that we're in the beforeShow state so that the value change event handler on the value widget's value state property doesn't commit the value and dismiss the dialog.
 									*/
-									_this._beforeShow = _true;
-									_this.children.value.set (_this.get ((_this._pipedProperties || []).concat ('value')));
-									_this._initialValue = _this._value;
-									_this._beforeShow = _this._submittedValue = _false;
+									m._beforeShow = _true;
+									m.children.value.set (m.get ((m._pipedProperties || []).concat ('value')));
+									m._initialValue = m._value;
+									m._beforeShow = m._submittedValue = _false;
 								}
 							});
 
-						_this._widgetsAdded = _true;
-						_this._updateUiKeepOpenState ();
+						m._widgetsAdded = _true;
+						m._updateUiKeepOpenState ();
 					}
 				),
 				_classPrototype = _class.prototype
@@ -148,10 +148,10 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.fireSubmissionComplete = function(_keepOpen, _result) {
-				var _this = this;
+				var m = this;
 
-				_this.get ('shown')
-					&& _this.fire ({
+				m.get ('shown')
+					&& m.fire ({
 						name:'Submission Complete',
 						result:_result,
 						keepOpen:_keepOpen

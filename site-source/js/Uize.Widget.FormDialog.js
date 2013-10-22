@@ -36,11 +36,11 @@ Uize.module ({
 					null,
 					function() {
 						var
-							_this = this,
+							m = this,
 							_false = false,
-							_form = _this.addChild(
+							_form = m.addChild(
 								'form',
-								_this._formWidgetClass,
+								m._formWidgetClass,
 								{useNormalSubmit:_false}
 							)
 						;
@@ -49,29 +49,29 @@ Uize.module ({
 							'Changed.okToSubmit',
 							function() {
 								_form.get('okToSubmit')
-									&& _this.handleFormValue(
+									&& m.handleFormValue(
 										function(_info) {
-											_this.fire ({
+											m.fire ({
 												name:'Submission Complete',
 												result:_form.get('value'),
 												info:_info
 											});
 
-											_this.set({shown:_false});
+											m.set({shown:_false});
 										}
 									)
 								;
 							}
 						);
 
-						_this.wire({
+						m.wire({
 							Ok:function(_event) {
 								_form.submit();
 								_event.abort = true;
 							},
 							'Before Show':function() {
-								if (_this._value)
-									_form.set({value:Uize.clone(_this._value)})
+								if (m._value)
+									_form.set({value:Uize.clone(m._value)})
 								;
 							},
 							'After Show':function() { _form.updateUi() },

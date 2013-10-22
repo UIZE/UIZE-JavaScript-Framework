@@ -42,19 +42,19 @@ Uize.module ({
 					null,
 					function() {
 						var
-							_this = this,
-							_selector = _this.children.selector
+							m = this,
+							_selector = m.children.selector
 						;
 
-						_this.wire(
+						m.wire(
 							'Changed.valueDetails',
 							function() {
-								_this.set({_tentativeValueDetails:_this.get('valueDetails')});
-								_this._updateUiSelector();
+								m.set({_tentativeValueDetails:m.get('valueDetails')});
+								m._updateUiSelector();
 							}
 						);
 
-						_this._previousValueDisplayShellWidth = 0;
+						m._previousValueDisplayShellWidth = 0;
 					}
 				),
 				_classPrototype = _class.prototype
@@ -71,21 +71,21 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiSelector = function() {
-				var _this = this;
+				var m = this;
 
 				// basically we want to the selector button from jumping in size when the value details are updated
 				// in the value display, but since we don't know what data can go in it ahead of time, we can only
 				// ensure that the button never shrinks in size.
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
-						_valueDisplayShellNode = _this.children.selector.getNode('valueDisplayShell'),
+						_valueDisplayShellNode = m.children.selector.getNode('valueDisplayShell'),
 						_valueDisplayShellNodeWidth = _Uize_Node.getDimensions(_valueDisplayShellNode).width,
-						_valueDisplayShellNodeMaxWidth = parseInt(_this.getNodeStyle(_valueDisplayShellNode, 'maxWidth')),
-						_previousValueDisplayShellWidth = _this._previousValueDisplayShellWidth
+						_valueDisplayShellNodeMaxWidth = parseInt(m.getNodeStyle(_valueDisplayShellNode, 'maxWidth')),
+						_previousValueDisplayShellWidth = m._previousValueDisplayShellWidth
 					;
 
 					if (_previousValueDisplayShellWidth && _valueDisplayShellNodeWidth < _previousValueDisplayShellWidth) {
-						_this.setNodeStyle(
+						m.setNodeStyle(
 							_valueDisplayShellNode,
 							{
 								minWidth:_valueDisplayShellNodeMaxWidth
@@ -95,9 +95,9 @@ Uize.module ({
 						);
 					}
 					else if (_valueDisplayShellNodeWidth) {
-						_this._previousValueDisplayShellWidth = _valueDisplayShellNodeWidth;
-						_this.palette
-							&& _this.palette.set({minWidth:_this._getMooringNodeWidth()});
+						m._previousValueDisplayShellWidth = _valueDisplayShellNodeWidth;
+						m.palette
+							&& m.palette.set({minWidth:m._getMooringNodeWidth()});
 					}
 				}
 			};
@@ -105,26 +105,26 @@ Uize.module ({
 		/*** Public Methods ***/
 			_classPrototype.getDialogWidgetProperties = function() {
 				var
-					_this = this,
-					_mooringNode = _this.getMooringNode(),
+					m = this,
+					_mooringNode = m.getMooringNode(),
 					_undefined
 				;
 
 				return Uize.copyInto(
-					_superclass.prototype.getDialogWidgetProperties.call(_this) || {},
+					_superclass.prototype.getDialogWidgetProperties.call(m) || {},
 					{
-						parent:_this,
+						parent:m,
 						offsetX:'adjacent',	// we want the dialog to show up next to the selector button to look like a droplist palette
 						offsetY:'adjacent',
-						minWidth:_this._getMooringNodeWidth()
+						minWidth:m._getMooringNodeWidth()
 					}
 				);
 			};
 
 			_classPrototype.getMoreDialogEventHandlers = function() {
 				var
-					_this = this,
-					_selector = _this.children.selector,
+					m = this,
+					_selector = m.children.selector,
 					_undefined
 				;
 
@@ -132,32 +132,32 @@ Uize.module ({
 					return Uize.pairUp(
 						'Changed.' + _propertyName,
 						function(_event) {
-							_this.palette = _event.source;
+							m.palette = _event.source;
 
-							var _dialogPropertyValue = _this.palette.get(_propertyName);
+							var _dialogPropertyValue = m.palette.get(_propertyName);
 							_dialogPropertyValue !== _undefined
-								&& _this.set(_propertyName, _dialogPropertyValue)
+								&& m.set(_propertyName, _dialogPropertyValue)
 							;
 						}
 					);
 				}
 
 				return Uize.copyInto(
-					_superclass.prototype.getMoreDialogEventHandlers.call(_this) || {},
+					_superclass.prototype.getMoreDialogEventHandlers.call(m) || {},
 					_addSyncHandler('tentativeValue'),
 					_addSyncHandler('tentativeValueDetails'),
 					{
 						'Before Show':function(_event) {
-							var _palette = _this.palette = _event.source;
+							var _palette = m.palette = _event.source;
 
 							_selector.set({selected:_true});
-							_this.set({focused:_true});
+							m.set({focused:_true});
 							_palette.set({
-								minWidth:_this._getMooringNodeWidth()
+								minWidth:m._getMooringNodeWidth()
 							});
 
-							if (!_this._movedPalette) {
-								_this._movedPalette = _true;
+							if (!m._movedPalette) {
+								m._movedPalette = _true;
 
 								var
 									_paletteRoot = _palette.getNode(),
@@ -178,19 +178,19 @@ Uize.module ({
 							}
 						},
 						'After Hide':function() {
-							_this.set({focused:_false});
+							m.set({focused:_false});
 							_selector.set({selected:_false});
-							_this.palette = _undefined;
+							m.palette = _undefined;
 						}
 					}
 				);
 			};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiSelector();
-					_superclass.doMy (_this,'updateUi');
+				var m = this;
+				if (m.isWired) {
+					m._updateUiSelector();
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 
@@ -205,10 +205,10 @@ Uize.module ({
 					onChange:[
 						/** One-way sync tentative value details to selector button **/
 						function() {
-							var _this = this;
+							var m = this;
 
-							_this._syncTentativeValue
-								&& _this.children.selector.set({valueDetails:_this._tentativeValueDetails})
+							m._syncTentativeValue
+								&& m.children.selector.set({valueDetails:m._tentativeValueDetails})
 							;
 						},
 						_classPrototype._updateUiSelector

@@ -47,29 +47,29 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiExpanded = function() {
-				var _this = this;
+				var m = this;
 
-				_this.isWired
+				m.isWired
 					&& _Uize_Node_Classes.setState(
-						_this.getNode('options'),
-						['', _this._expandedCssClass],
-						_this._expanded
+						m.getNode('options'),
+						['', m._expandedCssClass],
+						m._expanded
 					)
 				;
 			};
 
 			_classPrototype._updateUiFilterVisibility = function() {
 				var
-					_this = this,
+					m = this,
 					_allZero = _true
 				;
 
-				_this.isWired
-					&& _this.forAll(
+				m.isWired
+					&& m.forAll(
 						function(_filterWidget) {
 							var
 								_filterCount = _filterWidget.get('count'),
-								_displayFilter = !_this._hideWhenZero
+								_displayFilter = !m._hideWhenZero
 									|| _filterCount
 							;
 
@@ -82,10 +82,10 @@ Uize.module ({
 					)
 				;
 
-				_this.displayNode(
+				m.displayNode(
 					'',
-					_this.getInherited('allowMultiple') === _false
-						|| (!_allZero && _this.get('values').length > 1)
+					m.getInherited('allowMultiple') === _false
+						|| (!_allZero && m.get('values').length > 1)
 				);
 			};
 
@@ -96,17 +96,17 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.updateCounts = function(_counts) {
 				var
-					_this = this,
+					m = this,
 					_countsLength = _counts.length
 				;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					// NOTE: the count parameter for each filter in the values set
 					// will be out of sync...
 
 					_counts
 						&& _countsLength
-						&& _this.forAll(
+						&& m.forAll(
 							function(_filterWidget, _filterNo) {
 								_filterNo < _countsLength
 									&& _filterWidget.set({count:_counts[_filterNo]})
@@ -114,17 +114,17 @@ Uize.module ({
 						)
 					;
 
-					_this._updateUiFilterVisibility();
+					m._updateUiFilterVisibility();
 				}
 			};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiTitle();
-					_this._updateUiExpanded();
-					_this._updateUiFilterVisibility();
-					_superclass.doMy (_this,'updateUi');
+				var m = this;
+				if (m.isWired) {
+					m._updateUiTitle();
+					m._updateUiExpanded();
+					m._updateUiFilterVisibility();
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 

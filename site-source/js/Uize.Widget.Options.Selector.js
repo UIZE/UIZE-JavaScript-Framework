@@ -35,7 +35,7 @@ Uize.module ({
 					null,
 					function() {
 						var
-							_this = this,
+							m = this,
 							_valueString = 'value',
 							_tentativeValueString = 'tentativeValue',
 							_valueDetailsCache = {},
@@ -56,8 +56,8 @@ Uize.module ({
 
 							if (_valueDetails === _undefined) {
 								var
-									_propertyValue = _this.get(_propertyName),
-									_valueObject = Uize.findRecord (_this.get('values'), {name:_propertyValue})
+									_propertyValue = m.get(_propertyName),
+									_valueObject = Uize.findRecord (m.get('values'), {name:_propertyValue})
 								;
 
 								_addToValueDetailsCache(
@@ -66,21 +66,21 @@ Uize.module ({
 								);
 							}
 
-							_this.set(_propertyName + 'Details', _valueDetails);
+							m.set(_propertyName + 'Details', _valueDetails);
 						}
 
-						_this.wire({
+						m.wire({
 							'Changed.tentativeValue':function() { _syncValueDetails(_tentativeValueString) },
 							'Changed.value':function() { _syncValueDetails(_valueString) },
 							'Changed.tentativeValueDetails':function() {
-								_addToValueDetailsCache(_this.get(_tentativeValueString), _this._tentativeValueDetails);
+								_addToValueDetailsCache(m.get(_tentativeValueString), m._tentativeValueDetails);
 							},
 							'Changed.valueDetails':function() {
-								_addToValueDetailsCache(_this.get(_valueString), _this._valueDetails);
+								_addToValueDetailsCache(m.get(_valueString), m._valueDetails);
 							},
 							'Changed.values':function() {
 								_valueDetailsCache = {};
-								_addToValueDetailsCache(_this.valueOf(), _this._valueDetails);
+								_addToValueDetailsCache(m.valueOf(), m._valueDetails);
 							}
 						});
 
@@ -103,13 +103,13 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function() {
-				var _this = this;
+				var m = this;
 
-				if (!_this.isWired) {
+				if (!m.isWired) {
 					// set the container for the options that get created
-					_this.set({container:_this.getNode('options')});
+					m.set({container:m.getNode('options')});
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

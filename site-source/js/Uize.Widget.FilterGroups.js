@@ -46,10 +46,10 @@ Uize.module ({
 					_null,
 					function() {
 						var
-							_this = this
+							m = this
 						;
 
-						_this._previousSelectedFilters = _this._value;
+						m._previousSelectedFilters = m._value;
 					}
 				),
 				_classPrototype = _class.prototype
@@ -65,12 +65,12 @@ Uize.module ({
 			};
 
 			_classPrototype._updateSelectedFilters = function(_changedValue) {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var _selectedFilters = [];
 
-					_this._forAll(
+					m._forAll(
 						function(_filterGroupWidget) {
 							var _value = _filterGroupWidget.valueOf();
 							_value
@@ -78,31 +78,31 @@ Uize.module ({
 						}
 					);
 
-					if (!_Uize.Data.clones(_selectedFilters, _this._previousSelectedFilters)) {
-						_selectedFilters = _this._allowMultiple || !_changedValue
+					if (!_Uize.Data.clones(_selectedFilters, m._previousSelectedFilters)) {
+						_selectedFilters = m._allowMultiple || !_changedValue
 							? _selectedFilters
 							: (_Uize.indexIn(_selectedFilters, _changedValue) > -1
 								? [_changedValue]
 								: _selectedFilters
 							)
 						;
-						_this._previousSelectedFilters = _selectedFilters;
-						_this.set({_value:_selectedFilters});
+						m._previousSelectedFilters = _selectedFilters;
+						m.set({_value:_selectedFilters});
 					}
 				}
 			};
 
 			_classPrototype._setFilterGroupsSelectedFilter = function() {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
-						_selectedFilters = _this._value,
-						_filterGroupsData = _this._values,
-						_children = _this.children,
+						_selectedFilters = m._value,
+						_filterGroupsData = m._values,
+						_children = m.children,
 						_selectedFilterLookup = {}
 					;
-					_this._forAll(
+					m._forAll(
 						function(_filterGroupWidget) {
 							var _filterToSet = _null;
 
@@ -127,14 +127,14 @@ Uize.module ({
 		/*** Public Methods ***/
 			_classPrototype.updateCounts = function(_counts) {
 				var
-					_this = this,
+					m = this,
 					_countsLength = _counts.length
 				;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					_counts
 						&& _countsLength
-						&& _this._forAll(
+						&& m._forAll(
 							function(_filterGroupWidget, _filterGroupNo) {
 								_filterGroupNo < _countsLength
 									&& _filterGroupWidget.updateCounts(_counts[_filterGroupNo])
@@ -145,32 +145,32 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (!_this.isWired) {
+				if (!m.isWired) {
 					var
-						_selectedFilters = _this._value,
-						_filterGroupsData = _this._values
+						_selectedFilters = m._value,
+						_filterGroupsData = m._values
 					;
 
 					for (var _filterGroupNo = -1; ++_filterGroupNo < _filterGroupsData.length;)
-						_this.addChild (
+						m.addChild (
 							'filterGroup' + _filterGroupNo,
 							_Uize.Widget.Options.FilterGroup,
 							_Uize.copyInto(
-								{ensureValueInValues:_this._allowMultiple},
+								{ensureValueInValues:m._allowMultiple},
 								_Uize.clone(_filterGroupsData[_filterGroupNo])
 							)
 						).wire(
 							'Changed.value',
-							function(_event) { _this._updateSelectedFilters(_event.source.valueOf()) }
+							function(_event) { m._updateSelectedFilters(_event.source.valueOf()) }
 						)
 					;
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 
-					_this._setFilterGroupsSelectedFilter();
-					_this._updateSelectedFilters();
+					m._setFilterGroupsSelectedFilter();
+					m._updateSelectedFilters();
 				}
 			};
 
@@ -180,13 +180,13 @@ Uize.module ({
 					name:'allowMultiple',
 					onChange:function() {
 						var
-							_this = this,
-							_valueLength = _this._value.length
+							m = this,
+							_valueLength = m._value.length
 						;
 
-						!_this._allowMultiple
+						!m._allowMultiple
 							&& _valueLength > 1
-							&& _this.set({_value:_this._value.splice(_valueLength-1,1)})
+							&& m.set({_value:m._value.splice(_valueLength-1,1)})
 						;
 					},
 					value:_true

@@ -49,21 +49,21 @@ Uize.module ({
 					_null,
 					function () {
 						var
-							_this = this,
-							_pickValue = function() { _this.pickValue() }
+							m = this,
+							_pickValue = function() { m.pickValue() }
 						;
 
 						/*** watch focus by user ***/
-							_this.wire (
+							m.wire (
 								'Changed.focused',
-								function () { _this.get('focused') && !_this._allowManualEntry && _pickValue () }
+								function () { m.get('focused') && !m._allowManualEntry && _pickValue () }
 							);
 
 						/*** add selector button */
-							_this.addChild (
+							m.addChild (
 								'selector',
-								_this._selectorButtonWidgetClass || Uize.Widget.Button.ValueDisplay,
-								_this._selectorButtonWidgetProperties
+								m._selectorButtonWidgetClass || Uize.Widget.Button.ValueDisplay,
+								m._selectorButtonWidgetProperties
 							).wire ('Click',_pickValue);
 								/*?
 									Child Widgets
@@ -86,20 +86,20 @@ Uize.module ({
 
 			_classPrototype.handleDialogSubmit = function(_valueInfo) {
 				var
-					_this = this,
+					m = this,
 					_value = _valueInfo.value,
 					_valueDetails = _valueInfo.valueDetails,
 					_undefined
 				;
 
-				_this.set(
+				m.set(
 					Uize.copyInto(
 						{},
 						_valueDetails !== _undefined ? {valueDetails:_valueDetails} : _undefined,
 						_value !== _undefined
 							? ({
 								value:_value != _null
-									? (_this._valueFormatter ? _this._valueFormatter.call (_this,_value) : _value)
+									? (m._valueFormatter ? m._valueFormatter.call (m,_value) : _value)
 									: ''
 							}) : _undefined
 					)
@@ -107,59 +107,59 @@ Uize.module ({
 			};
 
 			_classPrototype.pickValue = function() {
-				var _this = this;
+				var m = this;
 
-				_this.set({focused:false});
+				m.set({focused:false});
 
 				var
-					_mooringNode = _this.getMooringNode(),
+					_mooringNode = m.getMooringNode(),
 					_mooringNodeDims = Uize.Node.getDimensions (_mooringNode),
 					_possiblyFocus = function() {
-						_this._allowManualEntry && _this.set({focused:true})
+						m._allowManualEntry && m.set({focused:true})
 					}
 				;
 
-				_this.callInherited ('useDialog') ({
-					component:_this._dialogComponent
-						? Uize.copyInto(_this._dialogComponent, {value:_this.get('value')})
+				m.callInherited ('useDialog') ({
+					component:m._dialogComponent
+						? Uize.copyInto(m._dialogComponent, {value:m.get('value')})
 						: _null,
-					widgetClassName:_this._dialogWidgetClass,
+					widgetClassName:m._dialogWidgetClass,
 					widgetProperties:
 						Uize.copyInto (
 							{
-								name:_this._dialogName || 'dialog' + _this._dialogWidgetClass.replace (/\./g,''),
-								picker:_this,
+								name:m._dialogName || 'dialog' + m._dialogWidgetClass.replace (/\./g,''),
+								picker:m,
 								mooringNode:_mooringNode,
 								offsetX:_mooringNodeDims.width >> 1,
 								offsetY:_mooringNodeDims.height >> 1
 							},
-							_this.getDialogWidgetProperties(),
-							_this.get ((_this._pipedProperties || []).concat ('value', 'valueDetails'))
+							m.getDialogWidgetProperties(),
+							m.get ((m._pipedProperties || []).concat ('value', 'valueDetails'))
 						),
 					submitHandler:function (_valueInfo,_event) {
-						_this.handleDialogSubmit(_valueInfo);
+						m.handleDialogSubmit(_valueInfo);
 						_event && _event.keepOpen || _possiblyFocus ();
 					},
 					dismissHandler:_possiblyFocus,
-					widgetEventHandlers:_this.getMoreDialogEventHandlers()
+					widgetEventHandlers:m.getMoreDialogEventHandlers()
 				});
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this.wireNode (
+				var m = this;
+				if (!m.isWired) {
+					m.wireNode (
 						'input',
 						'mousedown',
 						function (_event) {
-							if (!_this._allowManualEntry) {
+							if (!m._allowManualEntry) {
 								Uize.Node.Event.abort (_event);
 								_pickValue ();
 							}
 						}
 					);
 
-					_superclass.prototype.wireUi.call (_this);
+					_superclass.prototype.wireUi.call (m);
 				}
 			};
 

@@ -39,11 +39,11 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** add event handlers ***/
-							function _handleConfirm(_event) { _this.handleConfirm(_event) }
-							_this.wire ({
+							function _handleConfirm(_event) { m.handleConfirm(_event) }
+							m.wire ({
 								Ok:_handleConfirm,
 								Cancel:_handleConfirm,
 								Close:_handleConfirm
@@ -64,7 +64,8 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiMessage = function () {
-				this.isWired && this._message != null && this.setNodeInnerHtml ('message',this._message)
+				var m = this;
+				m.isWired && m._message != null && m.setNodeInnerHtml ('message',m._message)
 			};
 
 			_classPrototype._updateUiMode = function () {
@@ -77,10 +78,11 @@ Uize.module ({
 			};
 
 			_classPrototype.updateUi = function () {
-				this._updateUiState ();
-				this._updateUiMessage ();
-				this._updateUiMode ();
-				_superclass.doMy (this,'updateUi');
+				var m = this;
+				m._updateUiState ();
+				m._updateUiMessage ();
+				m._updateUiMode ();
+				_superclass.doMy (m,'updateUi');
 			};
 
 		/*** State Properties ***/
@@ -93,10 +95,11 @@ Uize.module ({
 				_mode:{
 					name:'mode',
 					onChange:function () {
-						this._mode.indexOf ('Custom') < 0 &&
-							this.set ({defaultTitle:this.localize (this._mode == 'confirm' ? 'confirm' : 'attention')})
+						var m = this;
+						m._mode.indexOf ('Custom') < 0 &&
+							m.set ({defaultTitle:m.localize (m._mode == 'confirm' ? 'confirm' : 'attention')})
 						;
-						this._updateUiMode ();
+						m._updateUiMode ();
 					},
 					value:'confirm'
 				},

@@ -39,36 +39,36 @@ Uize.module ({
 					null,
 					function () {
 						var
-							_this = this,
+							m = this,
 
-							_valueWidget = _this.addChild(
+							_valueWidget = m.addChild(
 								'value',
-								_this._valueWidgetClass,
-								_this.get ((_this._pipedProperties || []).concat ('value'))
+								m._valueWidgetClass,
+								m.get ((m._pipedProperties || []).concat ('value'))
 							),
-							_valueDisplayWidget = _this.addChild(
+							_valueDisplayWidget = m.addChild(
 								'valueDisplay',
-								_this._valueDisplayWidgetClass || Uize.Widget.Button.ValueDisplay,
-								_this._valueDisplayWidgetProperties
+								m._valueDisplayWidgetClass || Uize.Widget.Button.ValueDisplay,
+								m._valueDisplayWidgetProperties
 							)
 						;
 
 						// Sync value & value details back and forth with value widget
 						Uize.Util.Coupler({
-							instances:[_this, _valueWidget],
+							instances:[m, _valueWidget],
 							properties:['value', 'valueDetails', 'tentativeValue', 'tentativeValueDetails']
 						});
 
 						/** One-way sync value & value details to value display widget **/
 							function _setValueDisplayWidget(_propertyName, _propertyNameToGet) {
-								_valueDisplayWidget.set(_propertyName, _this.get(_propertyNameToGet || _propertyName))
+								_valueDisplayWidget.set(_propertyName, m.get(_propertyNameToGet || _propertyName))
 							}
 
-							_this.wire({
+							m.wire({
 								'Changed.value':function() { _setValueDisplayWidget('value') },
 								'Changed.valueDetails':function() { _setValueDisplayWidget('valueDetails') },
-								'Changed.tentativeValue':function() { _this._syncTentativeValue && _setValueDisplayWidget('value', 'tentativeValue') },
-								'Changed.tentativeValueDetails':function() { _this._syncTentativeValue && _setValueDisplayWidget('valueDetails', 'tentativeValueDetails') }
+								'Changed.tentativeValue':function() { m._syncTentativeValue && _setValueDisplayWidget('value', 'tentativeValue') },
+								'Changed.tentativeValueDetails':function() { m._syncTentativeValue && _setValueDisplayWidget('valueDetails', 'tentativeValueDetails') }
 							});
 
 							_setValueDisplayWidget('value');
@@ -79,11 +79,11 @@ Uize.module ({
 
 		/*** Public Methods ***/
 			_class.prototype.updateUi = function() {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
-					_this.children.value.updateUi();
-					_superclass.doMy (_this,'updateUi');
+				if (m.isWired) {
+					m.children.value.updateUi();
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 
@@ -93,15 +93,15 @@ Uize.module ({
 					name:'pipedProperties',
 					onChange:function() {
 						var
-							_this = this,
-							_previousPipedProperties = _this._previousPipedProperties,
-							_pipedProperties = _this._pipedProperties,
-							_children = _this.children,
+							m = this,
+							_previousPipedProperties = m._previousPipedProperties,
+							_pipedProperties = m._pipedProperties,
+							_children = m.children,
 							_buildChangedEventName = function(_propertyName) { return 'Changed.' + _propertyName },
 							_syncProperty = function(_propertyName) {
 								var _valueWidget = _children.value;
 								_valueWidget
-									&& _valueWidget.set(_propertyName, _this.get(_propertyName))
+									&& _valueWidget.set(_propertyName, m.get(_propertyName))
 								;
 							},
 							_pipeChangedEvent = function(_event) {
@@ -114,7 +114,7 @@ Uize.module ({
 							Uize.forEach (
 								_previousPipedProperties,
 								function (_pipedProperty) {
-									_this.unwire (_buildChangedEventName (_pipedProperty),_pipeChangedEvent);
+									m.unwire (_buildChangedEventName (_pipedProperty),_pipeChangedEvent);
 								}
 							);
 
@@ -122,12 +122,12 @@ Uize.module ({
 							Uize.forEach (
 								_pipedProperties,
 								function (_pipedProperty) {
-									_this.wire (_buildChangedEventName(_pipedProperty),_pipeChangedEvent);
+									m.wire (_buildChangedEventName(_pipedProperty),_pipeChangedEvent);
 									_syncProperty(_pipedProperty);
 								}
 							);
 
-						_this._previousPipedProperties = _this._pipedProperties;
+						m._previousPipedProperties = m._pipedProperties;
 					}
 				},
 					/*?
