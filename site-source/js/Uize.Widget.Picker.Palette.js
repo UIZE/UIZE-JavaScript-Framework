@@ -30,7 +30,11 @@ Uize.module ({
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
-			var _Uize_Node = Uize.Node;
+			var
+				_true = true,
+				_false = false,
+				_Uize_Node = Uize.Node
+			;
 
 		/*** Class Constructor ***/
 			var
@@ -44,8 +48,8 @@ Uize.module ({
 
 						_this.wire(
 							'Changed.valueDetails',
-							function(_event) {
-								_this.set({_tentativeValueDetails:_event.newValue});
+							function() {
+								_this.set({_tentativeValueDetails:_this.get('valueDetails')});
 								_this._updateUiSelector();
 							}
 						);
@@ -57,6 +61,15 @@ Uize.module ({
 			;
 
 		/*** Private Methods ***/
+			_classPrototype._getMooringNodeWidth = function() {
+				var
+					_mooringNode = this.getMooringNode(),
+					_undefined
+				;
+				
+				return _mooringNode ? _Uize_Node.getDimensions(_mooringNode).width : _undefined;
+			};
+		
 			_classPrototype._updateUiSelector = function() {
 				var _this = this;
 
@@ -71,7 +84,7 @@ Uize.module ({
 						_previousValueDisplayShellWidth = _this._previousValueDisplayShellWidth
 					;
 
-					if (_previousValueDisplayShellWidth && _valueDisplayShellNodeWidth < _previousValueDisplayShellWidth)
+					if (_previousValueDisplayShellWidth && _valueDisplayShellNodeWidth < _previousValueDisplayShellWidth) {
 						_this.setNodeStyle(
 							_valueDisplayShellNode,
 							{
@@ -80,47 +93,97 @@ Uize.module ({
 									: _previousValueDisplayShellWidth
 							}
 						);
-					else if (_valueDisplayShellNodeWidth)
+					}
+					else if (_valueDisplayShellNodeWidth) {
 						_this._previousValueDisplayShellWidth = _valueDisplayShellNodeWidth;
+						_this.palette
+							&& _this.palette.set({minWidth:_this._getMooringNodeWidth()});
+					}
 				}
 			};
 
 		/*** Public Methods ***/
 			_classPrototype.getDialogWidgetProperties = function() {
 				var
-					_mooringNode = this.children.selector.getNode () || this.getNode ('input'),
+					_this = this,
+					_mooringNode = _this.getMooringNode(),
 					_undefined
 				;
-
-				return {
-					offsetX:'adjacent',	// we want the dialog to show up next to the selector button to look like a droplist palette
-					offsetY:'adjacent',
-					minWidth:_mooringNode
-						? Uize.Node.getDimensions(_mooringNode).width
-						: _undefined
-				};
+				
+				return Uize.copyInto(
+					_superclass.prototype.getDialogWidgetProperties.call(_this) || {},
+					{
+						parent:_this,
+						offsetX:'adjacent',	// we want the dialog to show up next to the selector button to look like a droplist palette
+						offsetY:'adjacent',
+						minWidth:_this._getMooringNodeWidth()
+					}
+				);
 			};
-
-			_classPrototype.handleDialogSubmit = function(_valueInfo) {
+			
+			_classPrototype.getMoreDialogEventHandlers = function() {
 				var
 					_this = this,
+					_selector = _this.children.selector,
 					_undefined
 				;
+				
+				function _addSyncHandler(_propertyName) {
+					return Uize.pairUp(
+						'Changed.' + _propertyName,
+						function(_event) {
+							_this.palette = _event.source;
 
-				function _createSetObject(_propertyName) {
-					var _propertyValue = _valueInfo[_propertyName];
-					return _propertyValue !== _undefined ? Uize.pairUp(_propertyName, _propertyValue) : _undefined
+							var _dialogPropertyValue = _this.palette.get(_propertyName);
+							_dialogPropertyValue !== _undefined
+								&& _this.set(_propertyName, _dialogPropertyValue)
+							;
+						}
+					);
 				}
 
-				_this.set(
-					Uize.copyInto(
-						{},
-						_createSetObject('tentativeValueDetails'),
-						_createSetObject('tentativeValue')
-					)
-				);
+				return Uize.copyInto(
+					_superclass.prototype.getMoreDialogEventHandlers.call(_this) || {},
+					_addSyncHandler('tentativeValue'),
+					_addSyncHandler('tentativeValueDetails'),
+					{
+						'Before Show':function(_event) {
+							var _palette = _this.palette = _event.source;
+							
+							_selector.set({selected:_true});
+							_this.set({focused:_true});
+							_palette.set({
+								minWidth:_this._getMooringNodeWidth()
+							});
+							
+							if (!_this._movedPalette) {
+								_this._movedPalette = _true;
+								
+								var
+									_paletteRoot = _palette.getNode(),
+									_documentBody = document.body
+								;
+						
+								// Need to move the root and the shield to the body root to ensure that it will be on top of everything,
+								// if it already isn't there
+								if (_paletteRoot && _paletteRoot.parentNode != _documentBody) {
+									var _paletteShield = _palette.getNode('shield');
 
-				_superclass.doMy (_this,'handleDialogSubmit',[_valueInfo]);
+									// detach from current place in DOM
+									_Uize_Node.remove([_paletteRoot, _paletteShield]);
+									
+									_paletteShield && _documentBody.appendChild(_paletteShield);
+									_documentBody.appendChild(_paletteRoot);
+								}
+							}
+						},
+						'After Hide':function() {
+							_this.set({focused:_false});
+							_selector.set({selected:_false});
+							_this.palette = _undefined;
+						}
+					}
+				);
 			};
 
 			_classPrototype.updateUi = function () {
@@ -135,7 +198,7 @@ Uize.module ({
 			_class.stateProperties ({
 				_syncTentativeValue:{
 					name:'syncTentativeValue',
-					value:true
+					value:_true
 				},
 				_tentativeValueDetails:{
 					name:'tentativeValueDetails',
@@ -151,6 +214,11 @@ Uize.module ({
 						_classPrototype._updateUiSelector
 					]
 				}
+			});
+
+		/*** Override Initial Values for Inherited State Properties ***/
+			_class.set ({
+				dialogName:'palette'
 			});
 
 		return _class;

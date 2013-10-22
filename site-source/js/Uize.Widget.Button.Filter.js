@@ -31,7 +31,20 @@ Uize.module ({
 
 		/*** Class Constructor ***/
 			var
-				_class = _superclass.subclass (),
+				_class = _superclass.subclass (
+					null,
+					function() {
+						var
+							_this = this,
+							_updateUiDisplayState = function() { _this._updateUiDisplayState() }
+						;
+						
+						_this.wire({
+							'Changed.enabledInherited':_updateUiDisplayState,
+							'Changed.selected':_updateUiDisplayState
+						});
+					}
+				),
 				_classPrototype = _class.prototype
 			;
 
@@ -59,16 +72,31 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._updateUiFeaturedState = function() {
+			_classPrototype._updateUiDisplayState = function() {
 				var _this = this;
 
-				_this.isWired
-					&& Uize.Node.Classes.setState(
-						_this.getNode(),
-						['', _this._featuredCssClass],
+				if (_this.isWired) {
+					var
+						_Uize_Node_Classes = Uize.Node.Classes,
+						_rootNode = _this.getNode()
+					;
+					
+					_Uize_Node_Classes.setState(
+						_rootNode,
+						['', _this._cssClassFeatured],
 						_this._featured
-					)
-				;
+					);
+					_Uize_Node_Classes.setState(
+						_rootNode,
+						['', _this._cssClassDisabled],
+						!_this.get('enabledInherited')
+					);
+					_Uize_Node_Classes.setState(
+						_rootNode,
+						['', _this._cssClassSelected],
+						_this.get('selected')
+					);
+				}
 			};
 
 		/*** Public Instance Methods ***/
@@ -76,8 +104,8 @@ Uize.module ({
 				var _this = this;
 				if (_this.isWired) {
 					_this._updateUiLabel();
-					_this._updateUiFeaturedState();
-					_superclass.doMy (_this,'updateUi');
+					_this._updateUiDisplayState();
+					_superclass.prototype.updateUi.call (_this);
 				}
 			};
 
@@ -87,14 +115,24 @@ Uize.module ({
 					name:'count',
 					onChange:_classPrototype._updateUiLabel
 				},
+				_cssClassDisabled:{
+					name:'cssClassDisabled',
+					onChange:_classPrototype._updateUiDisplayState,
+					value:''
+				},
+				_cssClassFeatured:{
+					name:'cssClassFeatured',
+					onChange:_classPrototype._updateUiDisplayState,
+					value:''
+				},
+				_cssClassSelected:{
+					name:'cssClassSelected',
+					onChange:_classPrototype._updateUiDisplayState,
+					value:''
+				},
 				_featured:{
 					name:'featured',
-					onChange:_classPrototype._updateUiFeaturedState
-				},
-				_featuredCssClass:{
-					name:'featuredCssClass',
-					onChange:_classPrototype._updateUiFeaturedState,
-					value:''
+					onChange:_classPrototype._updateUiDisplayState
 				},
 				_label:{
 					name:'label',

@@ -50,8 +50,8 @@ Uize.module ({
 					_requestUrl = Uize.Url.resolve (
 						_request.url,
 						Uize.copyInto (
-						{
-							rnd:_request.cache == 'never' ? Uize.Url.getCacheDefeatStr () : null
+							{
+								rnd:_request.cache == 'never' ? Uize.Url.getCacheDefeatStr () : null
 							},
 							_origUrl.comm_mode ? null : {comm_mode:'ajax'},
 							_origUrl.output ? null : {output:'js'}
@@ -85,7 +85,8 @@ Uize.module ({
 							;
 							_xmlHttpRequest.abort ();
 							_callback ();
-						} else {
+						}
+						else {
 							//alert ('There was a problem retrieving the data:\n' + m._xmlHttpRequest.statusText);
 							_xmlHttpRequest.abort ();
 						}

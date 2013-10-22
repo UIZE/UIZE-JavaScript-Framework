@@ -53,9 +53,13 @@ Uize.module ({
 				_targetNode = _Uize_Node.getById(_targetNode) || _bodyNode;
 				_scrollParams = _scrollParams || {};
 
-				var _scrollableContainerNode = _targetNode;
+				var
+					_scrollableContainerNode = _targetNode,
+					_overflowScrollLookup = {auto:1,scroll:1}
+				;
 
 				// First find the ancestor node of _targetNode that is scrollable.  This is determined by
+				// a node whose overflow-y is either 'auto' or 'scroll' OR
 				// a node whose height is less than of its child node (which is an ancestor of _targetNode).
 				// We need to check this instead of just scrolling the entire page because the node we want to
 				// scroll to could be inside of a scrollable div.
@@ -63,15 +67,12 @@ Uize.module ({
 					_scrollableContainerNode = _scrollableContainerNode.parentNode;
 
 					if (_scrollableContainerNode.parentNode != _documentElement) {
-						var _siblings = _scrollableContainerNode.children,
-							_siblingsLength = _siblings ? _siblings.length : 0,
-							_contentHeights = 0;
-
-						for (;--_siblingsLength >= 0;)
-							_contentHeights += _getNodeHeight(_siblings[_siblingsLength]);
-
-						if (_contentHeights > _getNodeHeight(_scrollableContainerNode))
+						if (_Uize_Node.getStyle(_scrollableContainerNode, 'overflowY') in _overflowScrollLookup)
 							break;
+						if (_getNodeHeight(_scrollableContainerNode) > _getNodeHeight(_scrollableContainerNode.parentNode)) {
+							_scrollableContainerNode = _scrollableContainerNode.parentNode;
+							break;
+						}
 					}
 				}
 
@@ -179,16 +180,16 @@ Uize.module ({
 					_scrollableBodyNode,
 					_scrollNodeCoords.y,
 					function() { _bodyNodeDone = true },
-					(_scrollParams.scrollToTop || !_isNodeVisible(_scrollNodeCoords, true))
+					_scrollParams.scrollToTop || !_isNodeVisible(_scrollNodeCoords, true)
 				);
 				/*?
 					Static Methods
-						Uize.Fx.scrollToNode
+						Uize.Fx.Scroll.scrollToNode
 							Scrolls the window/document vertically to bring a specified target node into view at the top of the window.
 
 							SYNTAX
 							..............................
-							Uize.Fx.scrollToNode (
+							Uize.Fx.Scroll.scrollToNode (
 								targetNodeSTRorOBJ,
 								scrollParamsOBJ
 							);
@@ -196,7 +197,7 @@ Uize.module ({
 
 							VARIATION
 							..............................
-							Uize.Fx.scrollToNode (targetNodeSTRorOBJ);
+							Uize.Fx.Scroll.scrollToNode (targetNodeSTRorOBJ);
 							..............................
 
 							This method walks up the node parentage hierarchy in order to determine the closest ancestor to the target node that either is a scrollable container or is the root document that should be scrolled. In the event that the scrollable container is also not in view, the entire page is scrolled to bring that container node into view, while simultaneously scrolling the contents of the container to bring the target node into view within it.
@@ -230,7 +231,7 @@ Uize.module ({
 
 							EXAMPLE
 							......
-							Uize.Fx.scrollToNode(
+							Uize.Fx.Scroll.scrollToNode(
 								'foo',
 								{
 									curve:Uize.Curve.easeInPow(.5),

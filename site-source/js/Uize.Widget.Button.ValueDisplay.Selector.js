@@ -69,15 +69,14 @@ Uize.module ({
 				if (_this.isWired) {
 					if (_valueDetails) {
 						_valueDetails.value != null
-							&& _this._setInputNodeProperties({value:_valueDetails.value})
+							&& _this._setInputNodeProperties({value:_valueDetails.name})
 						;
 						_valueDetails.displayName != null
 							&& _this.setNodeInnerHtml('displayName', _valueDetails.displayName)
 						;
 					}
-					else
-						_this.displayNode('', false)
-					;
+
+					_this.web().display(_valueDetails);
 				}
 			};
 
@@ -118,7 +117,7 @@ Uize.module ({
 
 					_Uize_Node_Classes.setState(
 						_this.getNode(),
-						['', _this._cssClassSelected],
+						_this._cssClassSelected,
 						_selected
 					);
 				}
@@ -140,13 +139,31 @@ Uize.module ({
 				if (!_this.isWired) {
 					var
 						_inputNode = _this.getNode('input'),
-						_displayNameNode = _this.getNode('displayName');
+						_displayNameNode = _this.getNode('displayName')
 					;
 
 					_this.wireNode(
 						_inputNode,
 						'change',
-						function () { _this.set({selected:_inputNode.checked}) }
+						function (_event) {
+							var _checked = _inputNode.checked;
+
+							// NOTE: in some browsers (like Safari), clicking the input node, not only
+							// fires the 'change' event, but also 'click' for the root node, so
+							// clicking the checkbox ends up setting selcted to false and then back true
+							// because of clickToSelect & clickToDeselect
+							if (
+								(_checked && !_this.get('clickToSelect'))
+									|| (!_checked && !_this.get('clickToDeselect'))
+							) { 
+								_this.set({selected:_checked});
+								
+								// Options widget just watches on click of its buttons, so in order for
+								// it to know that clicking the radio has changed the value, we need to
+								// fire click
+								_this.fire({name:'Click', domEvent:_event});
+							}
+						}
 					);
 
 					// NOTE: in the case where the display name is a <label> tag w/ a for
@@ -155,7 +172,7 @@ Uize.module ({
 					// Once this widget is wired on the client-side we don't need the <label>
 					// interaction to check the input for us any longer
 					_displayNameNode
-						&& _displayNameNode.setAttribute('for', null)
+						&& _displayNameNode.removeAttribute('for')
 					;
 
 					_superclass.doMy (_this,'wireUi');
