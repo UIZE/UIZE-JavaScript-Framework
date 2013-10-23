@@ -1089,8 +1089,14 @@ Uize.module ({
 														_htmlNode = document.createElement(_xmlNode.tagName);
 
 														// add attributes
-														for (var _attributeNo = -1; ++_attributeNo < _xmlNode.attributes.length;) {
-															var _attribute = _xmlNode.attributes[_attributeNo];
+														for (
+															var
+																_xmlNodeAttributes = _xmlNode.attributes,
+																_attributeNo = _xmlNodeAttributes.length
+															;
+															--_attributeNo >= 0;
+														) {
+															var _attribute = _xmlNodeAttributes[_attributeNo];
 															_htmlNode.setAttribute(_attribute.nodeName, _attribute.nodeValue);
 														}
 
