@@ -264,12 +264,12 @@ Uize.require (
 		/*** initialize ***/
 			/*** populate test selector ***/
 				var
-					_testSelector = _page.getNode ('testSelector'),
-					_testSelectorOptions = _testSelector.options
+					_selector = _page.getNode ('testSelector'),
+					_selectorOptions = _selector.options
 				;
-				_testSelectorOptions [_testSelectorOptions.length] = new Option (_runAllModuleTests,_runAllModuleTests);
+				_selectorOptions [_selectorOptions.length] = new Option (_runAllModuleTests,_runAllModuleTests);
 				for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
-					_testSelectorOptions [_testSelectorOptions.length] = new Option (
+					_selectorOptions [_selectorOptions.length] = new Option (
 						(_testName = _testNames [_testNo]) + (_testsSubTreeLookup [_testName] ? '' : ' *'),
 						_testName
 					)
