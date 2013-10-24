@@ -156,7 +156,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Calendar',
-	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Widget.Button',
 		'Uize.Date',

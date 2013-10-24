@@ -36,16 +36,16 @@ Uize.module ({
 	name:'Uize.Widgets.Slider.Widget',
 	superclass:'Uize.Widget.Bar.Slider',
 	required:[
+		'Uize.Widget.V2Mixin',
 		'Uize.Widgets.Slider.Html',
-		'Uize.Widgets.Slider.Css',
-		'Uize.Template'
+		'Uize.Widgets.Slider.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var _superUpdateUi = _superclass.prototype.updateUi;
 
-		return _superclass.subclass ({
+		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
 			stateProperties:{
 				_size:{
 					name:'size',
