@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Dialog',
-	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Node',
 		'Uize.Widget.Button',
@@ -800,8 +799,7 @@ Uize.module ({
 			});
 
 		_class.staticProperties ({
-			buttonWidgetClass:Uize.Widget.Button,
-			enableRootNodeCssClasses:false
+			buttonWidgetClass:Uize.Widget.Button
 		});
 
 		return _class;

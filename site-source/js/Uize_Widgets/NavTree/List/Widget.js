@@ -36,6 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.NavTree.List.Widget',
 	superclass:'Uize.Widget.Tree.ListAbstract',
 	required:[
+		'Uize.Widget.V2Mixin',
 		'Uize.Widgets.NavTree.List.Html',
 		'Uize.Widgets.NavTree.List.Css',
 		'Uize.Node.Classes'
@@ -45,7 +46,7 @@ Uize.module ({
 
 		var _Uize_Node_Classes = Uize.Node.Classes;
 
-		return _superclass.subclass ({
+		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
 			instanceMethods:{
 				setItemExpanded:function (_itemSpecifier,_expanded) {
 					var m = this;
