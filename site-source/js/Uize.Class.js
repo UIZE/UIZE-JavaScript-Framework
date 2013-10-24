@@ -538,18 +538,17 @@ Uize.module ({
 				_classPrototype = _class.prototype,
 				_subclass = _Uize.noNew (
 					function () {
-						for (
-							var _alphastructorNo = -1, _alphastructorsLength = _alphastructors.length;
-							++_alphastructorNo < _alphastructorsLength;
-						)
-							_alphastructors [_alphastructorNo].apply (this,arguments)
+						var
+							m = this,
+							_arguments = arguments
 						;
-						for (
-							var _omegastructorNo = -1, _omegastructorsLength = _omegastructors.length;
-							++_omegastructorNo < _omegastructorsLength;
-						)
-							_omegastructors [_omegastructorNo].apply (this,arguments)
-						;
+						function _applyAll (_functions) {
+							for (var _functionNo = -1, _functionsLength = _functions.length; ++_functionNo < _functionsLength;)
+								_functions [_functionNo].apply (m,_arguments)
+							;
+						}
+						_applyAll (_alphastructors);
+						_applyAll (_omegastructors);
 					}
 				),
 				_subclassPrototype = _subclass.prototype
@@ -1707,7 +1706,7 @@ Uize.module ({
 							if (_rawPropertyProfile.derived) {
 								_declaredDerivedProperties = true;
 								var _derivation = _resolveDerivation (_rawPropertyProfile.derived);
-								_derivation._determinantsChanged = new _Function (
+								_derivation._determinantsChanged = _Function (
 									'o',
 									'return ' + _map (_derivation._determinants,"'\"' + value + '\" in o'").join (' || ')
 								);
