@@ -5735,11 +5735,20 @@ Uize = (function () {
 										_requiredLookup
 									);
 								}
-								_name &&
-									(_Function (_name + '=arguments[0]')) (
-										_module = _modulesByName [_name] = _module || function () {}
-									)
-								;
+								if (_name) {
+									_module = _modulesByName [_name] = _module || function () {};
+
+									// create a reference on the host
+									(_Function (_name + '=arguments[0]')) (_module);
+
+									// this is needed for the Uize.Class inheritance mechanism
+									var _lastPeriodPos = _name.lastIndexOf ('.');
+									if (_lastPeriodPos > -1)
+										(_package.eval (_name.slice (0,_lastPeriodPos)).nonInheritableStatics || {}) [
+											_name.slice (_lastPeriodPos + 1)
+										] = 1
+									;
+								}
 								if (_isFunction (_module)) {
 									_module.moduleName = _name;
 									_module.pathToResources = _module == _package

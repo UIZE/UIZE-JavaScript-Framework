@@ -535,7 +535,6 @@ Uize.module ({
 			}
 
 			var
-				_classPrototype = _class.prototype,
 				_subclass = _Uize.noNew (
 					function () {
 						var
@@ -556,26 +555,17 @@ Uize.module ({
 
 			/*** Inherit static properties (excluding prototype) and methods from base class ***/
 				var
-					_propertyValue,
 					_nonInheritableStatics = _class.nonInheritableStatics || _sacredEmptyObject,
 					_clone = _Uize.clone
 				;
 				for (var _property in _class)
-					if (
-						!_nonInheritableStatics [_property] &&
-						(_propertyValue = _class [_property]) != _classPrototype &&
-						!(
-							_isFunction (_propertyValue) &&
-							_propertyValue.moduleName &&
-							/[A-Z]/.test (_property.charAt (0))
-						)
-					)
-						_subclass [_property] = _clone (_propertyValue)
+					if (!_nonInheritableStatics [_property] && _property != 'prototype')
+						_subclass [_property] = _clone (_class [_property])
 				;
 
 			/*** Prepare instance properties and methods ***/
 				/*** Inherit instance properties and methods from base class (from prototype) ***/
-					_copyInto (_subclassPrototype,_classPrototype);
+					_copyInto (_subclassPrototype,_class.prototype);
 
 					/*** Make sure toString and valueOf are copied ***/
 						/* NOTE: in IE, toString and valueOf aren't enumerable properties of the prototype object */
@@ -1717,8 +1707,7 @@ Uize.module ({
 							;
 						}
 					}
-					var _instancePropertyDefaults = m.get ();
-					m._instancePropertyDefaults = _instancePropertyDefaults;
+					var _instancePropertyDefaults = m._instancePropertyDefaults = m.get ();
 					if (_declaredDerivedProperties) {
 						var
 							_derivedProperties = [],
