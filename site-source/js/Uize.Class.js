@@ -365,6 +365,7 @@ Uize.module ({
 					_isInstance = _Uize.isInstance,
 					_isObject = _Uize.isObject,
 					_traceDependencies = _Uize.Util.Dependencies.traceDependencies,
+					_applyAll = _Uize.applyAll,
 
 			/*** General Variables ***/
 				_sacredEmptyArray = [],
@@ -537,17 +538,9 @@ Uize.module ({
 			var
 				_subclass = _Uize.noNew (
 					function () {
-						var
-							m = this,
-							_arguments = arguments
-						;
-						function _applyAll (_functions) {
-							for (var _functionNo = -1, _functionsLength = _functions.length; ++_functionNo < _functionsLength;)
-								_functions [_functionNo].apply (m,_arguments)
-							;
-						}
-						_applyAll (_alphastructors);
-						_applyAll (_omegastructors);
+						var _arguments = arguments;
+						_applyAll (this,_alphastructors,_arguments);
+						_applyAll (this,_omegastructors,_arguments);
 					}
 				),
 				_subclassPrototype = _subclass.prototype

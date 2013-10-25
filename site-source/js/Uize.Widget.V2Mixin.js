@@ -35,12 +35,15 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_copyInto = Uize.copyInto,
+				_Uize = Uize,
+				_copyInto = _Uize.copyInto,
+				_applyAll = _Uize.applyAll,
+				_forEach = _Uize.forEach,
 
 			/*** General Variables ***/
 				_trueFlag = {},
 				_cssAddedLookup = {},
-				_htmlEncode = Uize.Util.Html.Encode.encode
+				_htmlEncode = _Uize.Util.Html.Encode.encode
 		;
 
 		/*** Utility Functions ***/
@@ -97,25 +100,15 @@ Uize.module ({
 								m.wire (_wiringsForCssBindings);
 
 							/*** wire up handlers for state properties that have HTML bindings ***/
-								var
-									_getHtmlUpdaterForProperty = function (_property) {
-										var
-											_updaters = _htmlBindings [_property],
-											_updatersLength = _updaters.length
-										;
-										return function () {
-											var _propertyValue = m.get (_property);
-											for (var _updaterNo = -1; ++_updaterNo < _updatersLength;)
-												_updaters [_updaterNo].call (m,_propertyValue)
-											;
+								var _wiringsForHtmlBindings = {};
+								_forEach (
+									m.Class.v2HtmlBindings,
+									function (_bindings,_property) {
+										_wiringsForHtmlBindings ['Changed.' + _property] = function () {
+											_applyAll (m,_bindings,[m.get (_property)])
 										};
-									},
-									_htmlBindings = m.Class.v2HtmlBindings,
-									_wiringsForHtmlBindings = {}
-								;
-								for (var _property in _htmlBindings)
-									_wiringsForHtmlBindings ['Changed.' + _property] = _getHtmlUpdaterForProperty (_property)
-								;
+									}
+								);
 								m.wire (_wiringsForHtmlBindings);
 
 							/*** update UI ***/
@@ -131,7 +124,7 @@ Uize.module ({
 					addChildren:function (_children,_commonProperties) {
 						for (var _childName in _children) {
 							var
-								_childProperties = Uize.copy (_children [_childName],_commonProperties),
+								_childProperties = _Uize.copy (_children [_childName],_commonProperties),
 								_widgetClass = _childProperties.widgetClass
 							;
 							delete _childProperties.widgetClass;
@@ -278,7 +271,7 @@ Uize.module ({
 									'generatedChildName' +
 									(m.v2GeneratedChildNames == _undefined ? (m.v2GeneratedChildNames = 0) : m.v2GeneratedChildNames++)
 								),
-							_widgetClass = Uize.getModuleByName (_properties.widgetClass) || _class,
+							_widgetClass = _Uize.getModuleByName (_properties.widgetClass) || _class,
 							_widgetClassName = _widgetClass.moduleName,
 							_children = m.children
 						;
@@ -287,7 +280,7 @@ Uize.module ({
 						delete _properties.widgetClass;
 
 						var
-							_inlineState = Uize.copy (_properties),
+							_inlineState = _Uize.copy (_properties),
 							_html = '',
 							_child = _children [_childName],
 							_childExisted = !!_child
@@ -303,7 +296,7 @@ Uize.module ({
 						_childExisted ||
 							_copyInto (_inlineState,{widgetClass:_widgetClassName})
 						;
-						if (!Uize.isEmpty (_inlineState))
+						if (!_Uize.isEmpty (_inlineState))
 							_child.inlineState = _inlineState
 						;
 						return _html;
@@ -322,7 +315,7 @@ Uize.module ({
 					},
 
 					nodeId:function (_nodeName) {
-						return Uize.Node.joinIdPrefixAndNodeId (this.get ('idPrefix'),_nodeName || '');
+						return _Uize.Node.joinIdPrefixAndNodeId (this.get ('idPrefix'),_nodeName || '');
 						/*?
 							Instance Methods
 								nodeId
@@ -387,7 +380,7 @@ Uize.module ({
 					},
 
 					superHtml:function (_input,_extraInput) {
-						return this.Class.superclass.get ('html').process.call (this,Uize.copy (_input,_extraInput));
+						return this.Class.superclass.get ('html').process.call (this,_Uize.copy (_input,_extraInput));
 					}
 				},
 
@@ -405,7 +398,7 @@ Uize.module ({
 					},
 
 					cssBindings:function (_bindings) {
-						_copyInto (this.v2CssBindings,Uize.map (_bindings,Uize.resolveTransformer));
+						_copyInto (this.v2CssBindings,_Uize.map (_bindings,_Uize.resolveTransformer));
 						/*?
 							Static Methods
 								Uize.Widget.V2Mixin.cssBindings
@@ -460,26 +453,26 @@ Uize.module ({
 								} else if (_bindingType.slice (0,6) == 'style.') {
 									var _stylePropertyName = _bindingType.slice (6);
 									_updater = function (_propertyValue) {
-										this.setNodeStyle (_nodeName,Uize.pairUp (_stylePropertyName,_propertyValue));
+										this.setNodeStyle (_nodeName,_Uize.pairUp (_stylePropertyName,_propertyValue));
 									};
 								} else {
 									_updater = function (_propertyValue) {
-										this.setNodeProperties (_nodeName,Uize.pairUp (_bindingType,_propertyValue));
+										this.setNodeProperties (_nodeName,_Uize.pairUp (_bindingType,_propertyValue));
 									};
 								}
 							}
 							return _updater;
 						}
 						var _htmlBindings = this.v2HtmlBindings;
-						Uize.forEach (
+						_forEach (
 							_bindings,
 							function (_updater,_property) {
 								var _propertyHtmlBindings = _htmlBindings [_property] || (_htmlBindings [_property] = []);
 								function _resolveAndPushUpdater (_updater) {
 									_propertyHtmlBindings.push (_resolvePropertyUpdater (_property,_updater));
 								}
-								Uize.isArray (_updater)
-									? Uize.forEach (_updater,_resolveAndPushUpdater)
+								_Uize.isArray (_updater)
+									? _forEach (_updater,_resolveAndPushUpdater)
 									: _resolveAndPushUpdater (_updater)
 								;
 							}
@@ -535,7 +528,7 @@ Uize.module ({
 				},
 
 				stateProperties:{
-					v2RootNodeCssClasses:{},
+					v2RootNodeCssClasses:{value:''},
 					extraClasses:{value:''}
 				},
 
@@ -545,23 +538,20 @@ Uize.module ({
 							var
 								m = this,
 								_children = m.children,
-								_htmlChunks = ['<div id="' + m.nodeId () + '">'],
-								_htmlChunksLength = 1
+								_htmlChunks = [],
+								_htmlChunksLength = 0
 							;
 							for (var _childName in _children)
 								_htmlChunks [_htmlChunksLength++] = _children [_childName].getHtml ()
 							;
-							_htmlChunks [_htmlChunksLength] = '</div>';
-							return _htmlChunks.join ('');
+							return '<div id="' + m.nodeId () + '">' + _htmlChunks.join ('') + '</div>';
 						}
 					}
 				}
 			});
 
 			_class.htmlBindings ({
-				v2RootNodeCssClasses:function (_v2RootNodeCssClasses) {
-					_v2RootNodeCssClasses != _undefined && this.setNodeProperties ('',{className:_v2RootNodeCssClasses});
-				}
+				v2RootNodeCssClasses:':className'
 			});
 
 			_copyInto (

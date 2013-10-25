@@ -1976,6 +1976,13 @@ Uize = (function () {
 				*/
 			},
 
+			applyAll:function (_context,_functions,_arguments) {
+				_arguments || (_arguments = _sacredEmptyArray);
+				for (var _functionNo = -1, _functionsLength = _functions.length; ++_functionNo < _functionsLength;)
+					_functions [_functionNo].apply (_context,_arguments)
+				;
+			},
+
 			callOn:function (_target,_method,_arguments) {
 				var
 					_methodIsString = _isString (_method),
