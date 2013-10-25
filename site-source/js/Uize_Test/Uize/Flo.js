@@ -177,7 +177,7 @@ Uize.module ({
 					]],
 					['Uize.Flo.do',[
 						{
-							title:'Test that a while loop where the statements are asynchronous is handled correctly',
+							title:'Test that a do loop where the statements are asynchronous is handled correctly',
 							test:function (_next) {
 								var
 									m = this,
@@ -196,7 +196,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that a while loop where the statements are synchronous is handled correctly',
+							title:'Test that a do loop where the statements are synchronous is handled correctly',
 							test:function () {
 								var
 									m = this,
@@ -258,6 +258,63 @@ Uize.module ({
 					['Uize.Flo.forEach',[
 					]],
 					['Uize.Flo.forIn',[
+						{
+							title:'Test that a forIn loop where the statements are asynchronous is handled correctly',
+							test:function (_next) {
+								var
+									m = this,
+									_source = {foo:'bar',hello:'world'},
+									_actualKeyNos = [],
+									_actualKeys = [],
+									_actualValues = []
+								;
+								Uize.Flo.forIn (
+									_async (function (_next) {_next (_source)}),
+									_async (
+										function (_next) {
+											_actualKeyNos.push (this.keyNo);
+											_actualKeys.push (this.key);
+											_actualValues.push (this.value);
+											_next ();
+										}
+									)
+								) (
+									function () {
+										_next (
+											m.expect ([0,1],_actualKeyNos) &&
+											m.expect (['foo','hello'],_actualKeys) &&
+											m.expect (['bar','world'],_actualValues)
+										);
+									}
+								);
+							}
+						},
+						{
+							title:'Test that a forIn loop where the statements are synchronous is handled correctly',
+							test:function () {
+								var
+									m = this,
+									_source = {foo:'bar',hello:'world'},
+									_actualKeyNos = [],
+									_actualKeys = [],
+									_actualValues = []
+								;
+								Uize.Flo.forIn (
+									function (_next) {_next (_source)},
+									function (_next) {
+										_actualKeyNos.push (this.keyNo);
+										_actualKeys.push (this.key);
+										_actualValues.push (this.value);
+										_next ();
+									}
+								) ();
+								return (
+									m.expect ([0,1],_actualKeyNos) &&
+									m.expect (['foo','hello'],_actualKeys) &&
+									m.expect (['bar','world'],_actualValues)
+								);
+							}
+						}
 					]],
 					['Uize.Flo.function',[
 					]],
