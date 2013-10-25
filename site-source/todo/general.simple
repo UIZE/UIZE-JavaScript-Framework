@@ -86,9 +86,6 @@ Code Size Optimization
 		Uize.Widget
 			Specific features to be decided.
 
-		Uize.Widget.V2
-			Expose the functionality as a mixin, so that the V2 widget capabilities can be mised into existing =Uize.Widget= subclasses, rather than having to rebase those widget classes (which then impacts all their subclasses).
-
 	Improvements in Uize.Widget
 		Implement Way of Declaring UI Wirers
 			Implement a new feature for UI wirers for widgets and switch away from old =wireUi= approach.

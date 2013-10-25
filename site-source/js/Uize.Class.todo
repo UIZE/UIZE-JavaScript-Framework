@@ -3,13 +3,13 @@ This is a TO DO document for the =Uize.Class= module.
 Mixins
 	Add support for mix-ins.
 
-	The mixin Feature Declaration Method
-		The =MyClass.mixin= feature declaration method allows one to specify one or more mixins that should be applied to the class.
+	The mixins Feature Declaration Method
+		The =MyClass.mixins= feature declaration method allows one to specify one or more mixins that should be applied to the class.
 
 		EXAMPLE
-		.............................
-		_class.mixin (Uize.Web.Mixin);
-		.............................
+		..............................
+		_class.mixins (Uize.Web.Mixin);
+		..............................
 
 		Declaring Mixins During Subclassing
 			As with any of the feature declaration methods, the features can also be declared in the features object when calling the =MyClass.subclass= static method to create a new subclass.
@@ -25,7 +25,7 @@ Mixins
 						instanceMethods:{
 							// ...
 						},
-						mixin:Uize.Web.Mixin
+						mixins:Uize.Web.Mixin
 					});
 				}
 			});
@@ -76,7 +76,7 @@ Mixins
 		.......................................
 
 	How Features are Mixed in
-		When the =MyClass.mixin= static method is called, the features of the classes that are specified are mixed into the class on which the =MyClass.mixin= method is called, in the order in which the mixin classes are specified.
+		When the =MyClass.mixins= static method is called, the features of the classes that are specified are mixed into the class on which the =MyClass.mixins= method is called, in the order in which the mixin classes are specified.
 
 		Copying Static Properties
 			.
@@ -127,6 +127,102 @@ Mixins
 			To a tool like the DELVE tool, feature discovery will attribute mixed in methods to the classes in the inheritance chain into which they were mixed in - not the mixin modules in which they are implemented. The only way to overcome this would be to tag the functions with the modules in which they are implemented. This would involve somehow providing the mixin module also as a reference when declaring features, but it is unclear how this reference would be passed. Additionally, tagging as can be done with function references cannot be accomplished with instance properties, static properties, or state properties.
 
 			All of this suggests that features should be declared in a more formalized manner and that classes on which features are declared should possibly maintain a registry of the features and where they were introduced and overridden.
+
+	Exmaples
+
+		AGGREGATOR MIXIN
+		............................................
+		Uize.module ({
+			name:'MyNamespace.MyAggregatorMixinABC',
+			required:[
+				'MyNamespace.MySmallMixinA',
+				'MyNamespace.MySmallMixinB',
+				'MyNamespace.MySmallMixinC'
+			],
+			builder:function () {
+				return function (_class) {
+					MyNamespace.MySmallMixinA (_class);
+					MyNamespace.MySmallMixinB (_class);
+					MyNamespace.MySmallMixinC (_class);
+					return _class;
+				};
+			}
+		});
+		............................................
+
+		SMALL MIXIN
+		....................................
+		Uize.module ({
+			name:'MyNamespace.MySmallMixinA',
+			builder:function () {
+				return function (_class) {
+					_class.declare ({
+						instanceMethods:{
+							// ...
+						},
+						staticMethods:{
+							// ...
+						},
+						stateProperties:{
+							// ...
+						}
+					});
+					return _class;
+				};
+			}
+		});
+		....................................
+
+		USING A SINGLE MIXIN
+		............................................................................
+		Uize.module ({
+			name:'MyNamespace.MyWidgetClass',
+			required:'MyNamespace.MySmallMixinA',
+			superclass:'Uize.Widget',
+			builder:function (_superclass) {
+				return MyNamespace.MySmallMixinA (_superclass.subclass ()).declare ({
+					instanceMethods:{
+						// ...
+					},
+					staticMethods:{
+						// ...
+					},
+					stateProperties:{
+						// ...
+					}
+				});
+			}
+		});
+		............................................................................
+
+		USING MULTIPLE MIXINS
+		......................................
+		Uize.module ({
+			name:'MyNamespace.MyWidgetClass',
+			required:[
+				'MyNamespace.MySmallMixinA',
+				'MyNamespace.MySmallMixinC'
+			],
+			superclass:'Uize.Widget',
+			builder:function (_superclass) {
+				return _superclass.subclass ({
+					mixins:[
+						MyNamespace.MySmallMixinA,
+						MyNamespace.MySmallMixinC
+					],
+					instanceMethods:{
+						// ...
+					},
+					staticMethods:{
+						// ...
+					},
+					stateProperties:{
+						// ...
+					}
+				});
+			}
+		});
+		......................................
 
 The bind Instance Method
 	Would provide a convenient way to bind the instance as a context to an instance method and arguments.
