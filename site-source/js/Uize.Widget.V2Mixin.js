@@ -314,22 +314,6 @@ Uize.module ({
 						*/
 					},
 
-					nodeId:function (_nodeName) {
-						return _Uize.Node.joinIdPrefixAndNodeId (this.get ('idPrefix'),_nodeName || '');
-						/*?
-							Instance Methods
-								nodeId
-									Returns a string, representing the fully namespaced ID for the specified node of the widget.
-
-									SYNTAX
-									............................................
-									nodeIdSTR = myInstance.nodeId (nodeNameSTR);
-									............................................
-
-									The =nodeId= method is intended primarily for use within the HTML generator (usually a JST template) for a widget.
-						*/
-					},
-
 					rootNodeCssClasses:function () {
 						var
 							m = this,
