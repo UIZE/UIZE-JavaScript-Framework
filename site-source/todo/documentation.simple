@@ -5,9 +5,6 @@ Site Nav Left Pane
 
 	Remaining to do...
 
-	- wrap the entire nav tree inside a box with heading, so it doesn't feel so visually lost, and give it a heading so it's obvious what it's for
-	- reconcile the old site menu (possibly eliminate it)
-	- implement responsive logic to show just site nav when not sufficient gutter for both site nav and site assistant, and have layout be non-centered
 	- figure out how to get item text to wrap (there's currently a =nobr= tag around items)
 
 Scroll to Top
