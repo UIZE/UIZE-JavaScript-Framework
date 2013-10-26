@@ -1509,7 +1509,7 @@ Uize.module ({
 
 						getInherited:function (_property) {
 							var _provider = this.getProvider (_property);
-							return _provider ? _provider.get (_property) : _undefined;
+							return _provider && _provider.get (_property);
 							/*?
 								Instance Methods
 									getInherited
