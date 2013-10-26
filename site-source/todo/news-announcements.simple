@@ -1,5 +1,15 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+NEW NAMESPACE: Uize.Math
+	.
+
+New Uize.applyAll Static Method
+	Still to do...
+
+	- finish documentation
+	- create unit tests
+	- write news announcement
+
 NEW MODULE: Uize.Util.Html.Entities
 	.
 
@@ -7,9 +17,6 @@ NEW MODULE: Uize.Util.Html.Encode
 	.
 
 NEW MODULE: Uize.Math.Blend
-	.
-
-NEW NAMESPACE: Uize.Math
 	.
 
 New Short Form for Namespace Modules
