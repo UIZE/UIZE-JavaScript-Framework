@@ -62,28 +62,6 @@ Uize.module ({
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Flo'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.Flo.abort',[
-						{
-							title:'Test aborting from a block',
-							test:function (_next) {
-								var
-									m = this,
-									_expected = ['a','b'],
-									_actual = []
-								;
-								Uize.Flo.block (
-									_asyncPushActualAndNext (_actual,'a'),
-									_asyncPushActualAndNext (_actual,'b'),
-									function (_next) {setTimeout (function () {_next.flo.abort ()},0)},
-									_asyncPushActualAndNext (_actual,'c')
-								) (
-									function () {
-										_next (m.expect (_expected,_actual));
-									}
-								);
-							}
-						}
-					]],
 					['Uize.Flo.block',[
 						{
 							title:'Test that the statements of a block are executed in the correct order when all statements execute asynchronously',
@@ -167,13 +145,275 @@ Uize.module ({
 							}
 						}
 					]],
-					['Uize.Flo.break',[
+					['Uize.Flo.abort',[
+						{
+							title:'Test aborting from a block',
+							test:function (_next) {
+								var
+									m = this,
+									_expected = ['a','b'],
+									_actual = []
+								;
+								Uize.Flo.block (
+									_asyncPushActualAndNext (_actual,'a'),
+									_asyncPushActualAndNext (_actual,'b'),
+									function (_next) {setTimeout (function () {_next.flo.abort ()},0)},
+									_asyncPushActualAndNext (_actual,'c')
+								) (
+									function () {
+										_next (m.expect (_expected,_actual));
+									}
+								);
+							}
+						}
+					]],
+					['Uize.Flo.if',[
+						{
+							title:'Test that synchronous statements are handled correctly',
+							test:[
+								{
+									title:'Test a basic if, where the statements are synchronous and the condition is false',
+									test:function () {
+										var _statementsExecuted = [];
+										Uize.Flo ['if'] (
+											function (_next) {_next (false)},
+											function (_next) {_statementsExecuted.push ('if'); _next ()}
+										) ();
+										return this.expect ([],_statementsExecuted);
+									}
+								},
+								{
+									title:'Test a basic if, where the statements are synchronous and the condition is true',
+									test:function () {
+										var _statementsExecuted = [];
+										Uize.Flo ['if'] (
+											function (_next) {_next (true)},
+											function (_next) {_statementsExecuted.push ('if'); _next ()}
+										) ();
+										return this.expect (['if'],_statementsExecuted);
+									}
+								},
+								{
+									title:'Test an if-else, where the statements are synchronous and the condition is false',
+									test:function () {
+										var _statementsExecuted = [];
+										Uize.Flo ['if'] (
+											function (_next) {_next (false)},
+											function (_next) {_statementsExecuted.push ('if'); _next ()},
+											function (_next) {_statementsExecuted.push ('else'); _next ()}
+										) ();
+										return this.expect (['else'],_statementsExecuted);
+									}
+								},
+								{
+									title:'Test an if-else, where the statements are synchronous and the condition is true',
+									test:function () {
+										var _statementsExecuted = [];
+										Uize.Flo ['if'] (
+											function (_next) {_next (true)},
+											function (_next) {_statementsExecuted.push ('if'); _next ()},
+											function (_next) {_statementsExecuted.push ('else'); _next ()}
+										) ();
+										return this.expect (['if'],_statementsExecuted);
+									}
+								},
+								{
+									title:'Test an if-then-elseif, where the statements are synchronous and the first condition is false and the elseif condition is also false',
+									test:function () {
+										var _statementsExecuted = [];
+										Uize.Flo ['if'] (
+											function (_next) {_next (false)},
+											function (_next) {_statementsExecuted.push ('if'); _next ()},
+											function (_next) {_next (false)},
+											function (_next) {_statementsExecuted.push ('else-if'); _next ()}
+										) ();
+										return this.expect ([],_statementsExecuted);
+									}
+								},
+								{
+									title:'Test an if-then-elseif, where the statements are synchronous and the first condition is false and the elseif condition is true',
+									test:function () {
+										var _statementsExecuted = [];
+										Uize.Flo ['if'] (
+											function (_next) {_next (false)},
+											function (_next) {_statementsExecuted.push ('if'); _next ()},
+											function (_next) {_next (true)},
+											function (_next) {_statementsExecuted.push ('else-if'); _next ()}
+										) ();
+										return this.expect (['else-if'],_statementsExecuted);
+									}
+								},
+								{
+									title:'Test an if-then-elseif-else, where the statements are synchronous and the first condition is false and the elseif condition is also false',
+									test:function () {
+										var _statementsExecuted = [];
+										Uize.Flo ['if'] (
+											function (_next) {_next (false)},
+											function (_next) {_statementsExecuted.push ('if'); _next ()},
+											function (_next) {_next (false)},
+											function (_next) {_statementsExecuted.push ('else-if'); _next ()},
+											function (_next) {_statementsExecuted.push ('else'); _next ()}
+										) ();
+										return this.expect (['else'],_statementsExecuted);
+									}
+								},
+								{
+									title:'Test an if-then-elseif-else, where the statements are synchronous and the first condition is false and the elseif condition is true',
+									test:function () {
+										var _statementsExecuted = [];
+										Uize.Flo ['if'] (
+											function (_next) {_next (false)},
+											function (_next) {_statementsExecuted.push ('if'); _next ()},
+											function (_next) {_next (true)},
+											function (_next) {_statementsExecuted.push ('else-if'); _next ()},
+											function (_next) {_statementsExecuted.push ('else'); _next ()}
+										) ();
+										return this.expect (['else-if'],_statementsExecuted);
+									}
+								}
+							]
+						},
+						{
+							title:'Test that asynchronous statements are handled correctly',
+							test:[
+								{
+									title:'Test a basic if, where the statements are asynchronous and the condition is false',
+									test:function (_next) {
+										var
+											m = this,
+											_statementsExecuted = []
+										;
+										Uize.Flo ['if'] (
+											_async (function (_next) {_next (false)}),
+											_async (function (_next) {_statementsExecuted.push ('if'); _next ()})
+										) (
+											function () {_next (m.expect ([],_statementsExecuted))}
+										);
+									}
+								},
+								{
+									title:'Test a basic if, where the statements are asynchronous and the condition is true',
+									test:function (_next) {
+										var
+											m = this,
+											_statementsExecuted = []
+										;
+										Uize.Flo ['if'] (
+											_async (function (_next) {_next (true)}),
+											_async (function (_next) {_statementsExecuted.push ('if'); _next ()})
+										) (
+											function () {_next (m.expect (['if'],_statementsExecuted))}
+										);
+									}
+								},
+								{
+									title:'Test an if-else, where the statements are asynchronous and the condition is false',
+									test:function (_next) {
+										var
+											m = this,
+											_statementsExecuted = []
+										;
+										Uize.Flo ['if'] (
+											_async (function (_next) {_next (false)}),
+											_async (function (_next) {_statementsExecuted.push ('if'); _next ()}),
+											_async (function (_next) {_statementsExecuted.push ('else'); _next ()})
+										) (
+											function () {_next (m.expect (['else'],_statementsExecuted))}
+										);
+									}
+								},
+								{
+									title:'Test an if-else, where the statements are asynchronous and the condition is true',
+									test:function (_next) {
+										var
+											m = this,
+											_statementsExecuted = []
+										;
+										Uize.Flo ['if'] (
+											_async (function (_next) {_next (true)}),
+											_async (function (_next) {_statementsExecuted.push ('if'); _next ()}),
+											_async (function (_next) {_statementsExecuted.push ('else'); _next ()})
+										) (
+											function () {_next (m.expect (['if'],_statementsExecuted))}
+										);
+									}
+								},
+								{
+									title:'Test an if-then-elseif, where the statements are asynchronous and the first condition is false and the elseif condition is also false',
+									test:function (_next) {
+										var
+											m = this,
+											_statementsExecuted = []
+										;
+										Uize.Flo ['if'] (
+											_async (function (_next) {_next (false)}),
+											_async (function (_next) {_statementsExecuted.push ('if'); _next ()}),
+											_async (function (_next) {_next (false)}),
+											_async (function (_next) {_statementsExecuted.push ('else-if'); _next ()})
+										) (
+											function () {_next (m.expect ([],_statementsExecuted))}
+										);
+									}
+								},
+								{
+									title:'Test an if-then-elseif, where the statements are asynchronous and the first condition is false and the elseif condition is true',
+									test:function (_next) {
+										var
+											m = this,
+											_statementsExecuted = []
+										;
+										Uize.Flo ['if'] (
+											_async (function (_next) {_next (false)}),
+											_async (function (_next) {_statementsExecuted.push ('if'); _next ()}),
+											_async (function (_next) {_next (true)}),
+											_async (function (_next) {_statementsExecuted.push ('else-if'); _next ()})
+										) (
+											function () {_next (m.expect (['else-if'],_statementsExecuted))}
+										);
+									}
+								},
+								{
+									title:'Test an if-then-elseif-else, where the statements are asynchronous and the first condition is false and the elseif condition is also false',
+									test:function (_next) {
+										var
+											m = this,
+											_statementsExecuted = []
+										;
+										Uize.Flo ['if'] (
+											_async (function (_next) {_next (false)}),
+											_async (function (_next) {_statementsExecuted.push ('if'); _next ()}),
+											_async (function (_next) {_next (false)}),
+											_async (function (_next) {_statementsExecuted.push ('else-if'); _next ()}),
+											_async (function (_next) {_statementsExecuted.push ('else'); _next ()})
+										) (
+											function () {_next (m.expect (['else'],_statementsExecuted))}
+										);
+									}
+								},
+								{
+									title:'Test an if-then-elseif-else, where the statements are asynchronous and the first condition is false and the elseif condition is true',
+									test:function (_next) {
+										var
+											m = this,
+											_statementsExecuted = []
+										;
+										Uize.Flo ['if'] (
+											_async (function (_next) {_next (false)}),
+											_async (function (_next) {_statementsExecuted.push ('if'); _next ()}),
+											_async (function (_next) {_next (true)}),
+											_async (function (_next) {_statementsExecuted.push ('else-if'); _next ()}),
+											_async (function (_next) {_statementsExecuted.push ('else'); _next ()})
+										) (
+											function () {_next (m.expect (['else-if'],_statementsExecuted))}
+										);
+									}
+								}
+							]
+						}
+					]],
+					['Uize.Flo.switch',[
 					]],
 					['Uize.Flo.breathe',[
-					]],
-					['Uize.Flo.call',[
-					]],
-					['Uize.Flo.continue',[
 					]],
 					['Uize.Flo.do',[
 						{
@@ -207,6 +447,43 @@ Uize.module ({
 								Uize.Flo ['do'] (
 									function (_next) {_actual.push (_items.shift ()); _next ();},
 									function (_next) {_next (_items.length)}
+								) ();
+								return m.expect (_expected,_actual);
+							}
+						}
+					]],
+					['Uize.Flo.while',[
+						{
+							title:'Test that a while loop where the statements are asynchronous is handled correctly',
+							test:function (_next) {
+								var
+									m = this,
+									_expected = ['a','b','c','d','e','f','g'],
+									_actual = [],
+									_items = _expected.concat ()
+								;
+								Uize.Flo ['while'] (
+									_async (function (_next) {_next (_items.length)}),
+									_async (function (_next) {_actual.push (_items.shift ()); _next ();})
+								) (
+									function () {
+										_next (m.expect (_expected,_actual));
+									}
+								);
+							}
+						},
+						{
+							title:'Test that a while loop where the statements are synchronous is handled correctly',
+							test:function () {
+								var
+									m = this,
+									_expected = ['a','b','c','d','e','f','g'],
+									_actual = [],
+									_items = _expected.concat ()
+								;
+								Uize.Flo ['while'] (
+									function (_next) {_next (_items.length)},
+									function (_next) {_actual.push (_items.shift ()); _next ();}
 								) ();
 								return m.expect (_expected,_actual);
 							}
@@ -256,71 +533,6 @@ Uize.module ({
 						}
 					]],
 					['Uize.Flo.forEach',[
-					]],
-					['Uize.Flo.forIn',[
-						{
-							title:'Test that a forIn loop where the statements are asynchronous is handled correctly',
-							test:function (_next) {
-								var
-									m = this,
-									_source = {foo:'bar',hello:'world'},
-									_actualKeyNos = [],
-									_actualKeys = [],
-									_actualValues = []
-								;
-								Uize.Flo.forIn (
-									_async (function (_next) {_next (_source)}),
-									_async (
-										function (_next) {
-											_actualKeyNos.push (this.keyNo);
-											_actualKeys.push (this.key);
-											_actualValues.push (this.value);
-											_next ();
-										}
-									)
-								) (
-									function () {
-										_next (
-											m.expect ([0,1],_actualKeyNos) &&
-											m.expect (['foo','hello'],_actualKeys) &&
-											m.expect (['bar','world'],_actualValues)
-										);
-									}
-								);
-							}
-						},
-						{
-							title:'Test that a forIn loop where the statements are synchronous is handled correctly',
-							test:function () {
-								var
-									m = this,
-									_source = {foo:'bar',hello:'world'},
-									_actualKeyNos = [],
-									_actualKeys = [],
-									_actualValues = []
-								;
-								Uize.Flo.forIn (
-									function (_next) {_next (_source)},
-									function (_next) {
-										_actualKeyNos.push (this.keyNo);
-										_actualKeys.push (this.key);
-										_actualValues.push (this.value);
-										_next ();
-									}
-								) ();
-								return (
-									m.expect ([0,1],_actualKeyNos) &&
-									m.expect (['foo','hello'],_actualKeys) &&
-									m.expect (['bar','world'],_actualValues)
-								);
-							}
-						}
-					]],
-					['Uize.Flo.function',[
-					]],
-					['Uize.Flo.if',[
-					]],
-					['Uize.Flo.next',[
 					]],
 					['Uize.Flo.ongoing',[
 						{
@@ -387,48 +599,94 @@ Uize.module ({
 							}
 						}
 					]],
-					['Uize.Flo.switch',[
-					]],
-					['Uize.Flo.try',[
-					]],
-					['Uize.Flo.while',[
+					['Uize.Flo.forIn',[
 						{
-							title:'Test that a while loop where the statements are asynchronous is handled correctly',
+							title:'Test that a forIn loop where the statements are asynchronous is handled correctly',
 							test:function (_next) {
 								var
 									m = this,
-									_expected = ['a','b','c','d','e','f','g'],
-									_actual = [],
-									_items = _expected.concat ()
+									_source = {foo:'bar',hello:'world'},
+									_actualKeyNos = [],
+									_actualKeys = [],
+									_actualValues = []
 								;
-								Uize.Flo ['while'] (
-									_async (function (_next) {_next (_items.length)}),
-									_async (function (_next) {_actual.push (_items.shift ()); _next ();})
+								Uize.Flo.forIn (
+									_async (function (_next) {_next (_source)}),
+									_async (
+										function (_next) {
+											_actualKeyNos.push (this.keyNo);
+											_actualKeys.push (this.key);
+											_actualValues.push (this.value);
+											_next ();
+										}
+									)
 								) (
 									function () {
-										_next (m.expect (_expected,_actual));
+										_next (
+											m.expect ([0,1],_actualKeyNos) &&
+											m.expect (['foo','hello'],_actualKeys) &&
+											m.expect (['bar','world'],_actualValues)
+										);
 									}
 								);
 							}
 						},
 						{
-							title:'Test that a while loop where the statements are synchronous is handled correctly',
+							title:'Test that a forIn loop where the statements are synchronous is handled correctly',
 							test:function () {
 								var
 									m = this,
-									_expected = ['a','b','c','d','e','f','g'],
-									_actual = [],
-									_items = _expected.concat ()
+									_source = {foo:'bar',hello:'world'},
+									_actualKeyNos = [],
+									_actualKeys = [],
+									_actualValues = []
 								;
-								Uize.Flo ['while'] (
-									function (_next) {_next (_items.length)},
-									function (_next) {_actual.push (_items.shift ()); _next ();}
+								Uize.Flo.forIn (
+									function (_next) {_next (_source)},
+									function (_next) {
+										_actualKeyNos.push (this.keyNo);
+										_actualKeys.push (this.key);
+										_actualValues.push (this.value);
+										_next ();
+									}
 								) ();
-								return m.expect (_expected,_actual);
+								return (
+									m.expect ([0,1],_actualKeyNos) &&
+									m.expect (['foo','hello'],_actualKeys) &&
+									m.expect (['bar','world'],_actualValues)
+								);
 							}
 						}
+					]],
+					['Uize.Flo.break',[
+					]],
+					['Uize.Flo.continue',[
+					]],
+					['Uize.Flo.next',[
+					]],
+					['Uize.Flo.function',[
+					]],
+					['Uize.Flo.call',[
+					]],
+					['Uize.Flo.try',[
 					]]
 				]),
+				{
+					title:'Test the instance methods',
+					test:[
+						{
+							title:'Test that the continue instance method works correctly',
+							test:[
+								/*
+									- test that the continue instance method works correctly for a do loop
+									- test that the continue instance method works correctly for a while loop
+									- test that the continue instance method works correctly for a for loop
+									- test that the continue instance method works correctly for a forIn loop
+								*/
+							]
+						}
+					]
+				},
 				{
 					title:'Test breathing features',
 					test:[
