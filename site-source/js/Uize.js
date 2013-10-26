@@ -90,6 +90,7 @@
 				Iterator Methods
 					The =Uize= module provides a number of static methods for iterating over properties of objects or elements of arrays.
 
+					- =Uize.applyAll= - calls a list of functions on a specified context, with an optional arguments list
 					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
 					- =Uize.forEach= - iterates over an array, arguments object, object, or length range, calling the specified iteration handler for each element or property
 
@@ -1981,6 +1982,38 @@ Uize = (function () {
 				for (var _functionNo = -1, _functionsLength = _functions.length; ++_functionNo < _functionsLength;)
 					_functions [_functionNo].apply (_context,_arguments)
 				;
+				/*?
+					Static Methods
+						Uize.applyAll
+							Calls the specified list of functions on the specified context, with an optional list of arguments.
+
+							DIFFERENT USAGES
+
+							`Call Multiple Functions as Methods on a Context`
+							.............................................
+							Uize.applyAll (contextANYTYPE,functionsLIST);
+							.............................................
+
+							`Call Multiple Functions as Methods on a Context, with an Arguments List`
+							...........................................................
+							Uize.applyAll (contextANYTYPE,functionsLIST,argumentsLIST);
+							...........................................................
+
+							Call Multiple Functions as Methods on a Context
+								SYNTAX
+								.............................................
+								Uize.applyAll (contextANYTYPE,functionsLIST);
+								.............................................
+
+							Call Multiple Functions as Methods on a Context, with an Arguments List
+								SYNTAX
+								...........................................................
+								Uize.applyAll (contextANYTYPE,functionsLIST,argumentsLIST);
+								...........................................................
+
+							NOTES
+							- see also the other `iterator methods`
+				*/
 			},
 
 			callOn:function (_target,_method,_arguments) {
