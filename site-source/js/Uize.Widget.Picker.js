@@ -40,131 +40,128 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _null = null;
+		var
+			/*** Variables for Scruncher Optimization ***/
+			 _null = null
+		;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					_null,
-					function () {
-						var
-							m = this,
-							_pickValue = function () { m.pickValue() }
-						;
-
-						/*** watch focus by user ***/
-							m.wire (
-								'Changed.focused',
-								function () { m.get('focused') && !m._allowManualEntry && _pickValue () }
-							);
-
-						/*** add selector button */
-							m.addChild (
-								'selector',
-								m._selectorButtonWidgetClass || Uize.Widget.Button.ValueDisplay,
-								m._selectorButtonWidgetProperties
-							).wire ('Click',_pickValue);
-								/*?
-									Child Widgets
-										selector
-											.
-								*/
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Methods ***/
-			_classPrototype.getDialogWidgetProperties = function () { return _null };
-
-			_classPrototype.getMoreDialogEventHandlers = function () { return _null };
-
-			_classPrototype.getMooringNode = function () {
-				return this.children.selector.getNode () || this.getNode ('input')
-			};
-
-			_classPrototype.handleDialogSubmit = function (_valueInfo) {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var
 					m = this,
-					_value = _valueInfo.value,
-					_valueDetails = _valueInfo.valueDetails,
-					_undefined
+					_pickValue = function () { m.pickValue() }
 				;
 
-				m.set(
-					Uize.copyInto(
-						{},
-						_valueDetails !== _undefined ? {valueDetails:_valueDetails} : _undefined,
-						_value !== _undefined
-							? ({
-								value:_value != _null
-									? (m._valueFormatter ? m._valueFormatter.call (m,_value) : _value)
-									: ''
-							}) : _undefined
-					)
-				);
-			};
-
-			_classPrototype.pickValue = function () {
-				var m = this;
-
-				m.set({focused:false});
-
-				var
-					_mooringNode = m.getMooringNode(),
-					_mooringNodeDims = Uize.Node.getDimensions (_mooringNode),
-					_possiblyFocus = function () {
-						m._allowManualEntry && m.set({focused:true})
-					}
-				;
-
-				m.callInherited ('useDialog') ({
-					component:m._dialogComponent
-						? Uize.copyInto(m._dialogComponent, {value:m.get('value')})
-						: _null,
-					widgetClassName:m._dialogWidgetClass,
-					widgetProperties:
-						Uize.copyInto (
-							{
-								name:m._dialogName || 'dialog' + m._dialogWidgetClass.replace (/\./g,''),
-								picker:m,
-								mooringNode:_mooringNode,
-								offsetX:_mooringNodeDims.width >> 1,
-								offsetY:_mooringNodeDims.height >> 1
-							},
-							m.getDialogWidgetProperties(),
-							m.get ((m._pipedProperties || []).concat ('value', 'valueDetails'))
-						),
-					submitHandler:function (_valueInfo,_event) {
-						m.handleDialogSubmit(_valueInfo);
-						_event && _event.keepOpen || _possiblyFocus ();
-					},
-					dismissHandler:_possiblyFocus,
-					widgetEventHandlers:m.getMoreDialogEventHandlers()
-				});
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m.wireNode (
-						'input',
-						'mousedown',
-						function (_event) {
-							if (!m._allowManualEntry) {
-								Uize.Node.Event.abort (_event);
-								_pickValue ();
-							}
-						}
+				/*** watch focus by user ***/
+					m.wire (
+						'Changed.focused',
+						function () { m.get('focused') && !m._allowManualEntry && _pickValue () }
 					);
 
-					_superclass.prototype.wireUi.call (m);
-				}
-			};
+				/*** add selector button */
+					m.addChild (
+						'selector',
+						m._selectorButtonWidgetClass || Uize.Widget.Button.ValueDisplay,
+						m._selectorButtonWidgetProperties
+					).wire ('Click',_pickValue);
+						/*?
+							Child Widgets
+								selector
+									.
+						*/
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			instanceMethods:{
+				getDialogWidgetProperties:function () { return _null },
+
+				getMoreDialogEventHandlers:function () { return _null },
+
+				getMooringNode:function () {
+					return this.children.selector.getNode () || this.getNode ('input')
+				},
+
+				handleDialogSubmit:function (_valueInfo) {
+					var
+						m = this,
+						_value = _valueInfo.value,
+						_valueDetails = _valueInfo.valueDetails,
+						_undefined
+					;
+
+					m.set(
+						Uize.copyInto(
+							{},
+							_valueDetails !== _undefined ? {valueDetails:_valueDetails} : _undefined,
+							_value !== _undefined
+								? ({
+									value:_value != _null
+										? (m._valueFormatter ? m._valueFormatter.call (m,_value) : _value)
+										: ''
+								}) : _undefined
+						)
+					);
+				},
+
+				pickValue:function () {
+					var m = this;
+
+					m.set({focused:false});
+
+					var
+						_mooringNode = m.getMooringNode(),
+						_mooringNodeDims = Uize.Node.getDimensions (_mooringNode)
+					;
+
+					function _possiblyFocus () {
+						m._allowManualEntry && m.set({focused:true});
+					}
+
+					m.callInherited ('useDialog') ({
+						component:m._dialogComponent
+							? Uize.copyInto(m._dialogComponent, {value:m.get('value')})
+							: _null,
+						widgetClassName:m._dialogWidgetClass,
+						widgetProperties:
+							Uize.copyInto (
+								{
+									name:m._dialogName || 'dialog' + m._dialogWidgetClass.replace (/\./g,''),
+									picker:m,
+									mooringNode:_mooringNode,
+									offsetX:_mooringNodeDims.width >> 1,
+									offsetY:_mooringNodeDims.height >> 1
+								},
+								m.getDialogWidgetProperties(),
+								m.get ((m._pipedProperties || []).concat ('value', 'valueDetails'))
+							),
+						submitHandler:function (_valueInfo,_event) {
+							m.handleDialogSubmit(_valueInfo);
+							_event && _event.keepOpen || _possiblyFocus ();
+						},
+						dismissHandler:_possiblyFocus,
+						widgetEventHandlers:m.getMoreDialogEventHandlers()
+					});
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m.wireNode (
+							'input',
+							'mousedown',
+							function (_event) {
+								if (!m._allowManualEntry) {
+									Uize.Node.Event.abort (_event);
+									_pickValue ();
+								}
+							}
+						);
+
+						_superclass.prototype.wireUi.call (m);
+					}
+				}
+			},
+
+			stateProperties:{
 				_allowManualEntry:{
 					name:'allowManualEntry',
 					value:true
@@ -217,14 +214,12 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				value:_null
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

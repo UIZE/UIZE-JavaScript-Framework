@@ -32,45 +32,26 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_null = null,
-
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_Uize = Uize
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					_null,
-					function () {
-						var
-							m = this
-						;
-
-						m._previousSelectedFilters = m._value;
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Methods ***/
-			_classPrototype._forAll = function (_function) {
+			function _forAll (m,_function) {
 				for (
-					var _valueNo = -1, _valuesLength = this._values.length, _children = this.children;
+					var _valueNo = -1, _valuesLength = m._values.length, _children = m.children;
 					++_valueNo < _valuesLength;
 				)
 					if (_function (_children ['filterGroup' + _valueNo],_valueNo) === false) break;
-			};
+			}
 
-			_classPrototype._updateSelectedFilters = function (_changedValue) {
-				var m = this;
-
+			function _updateSelectedFilters (m,_changedValue) {
 				if (m.isWired) {
 					var _selectedFilters = [];
 
-					m._forAll(
+					_forAll(
+						m,
 						function (_filterGroupWidget) {
 							var _value = _filterGroupWidget.valueOf();
 							_value
@@ -90,11 +71,9 @@ Uize.module ({
 						m.set({_value:_selectedFilters});
 					}
 				}
-			};
+			}
 
-			_classPrototype._setFilterGroupsSelectedFilter = function () {
-				var m = this;
-
+			function _setFilterGroupsSelectedFilter (m) {
 				if (m.isWired) {
 					var
 						_selectedFilters = m._value,
@@ -102,9 +81,10 @@ Uize.module ({
 						_children = m.children,
 						_selectedFilterLookup = {}
 					;
-					m._forAll(
+					_forAll(
+						m,
 						function (_filterGroupWidget) {
-							var _filterToSet = _null;
+							var _filterToSet = null;
 
 							for (var _selectedFilterNo = -1; ++_selectedFilterNo < _selectedFilters.length;) {
 								var _selectedFilter = _selectedFilters[_selectedFilterNo];
@@ -113,7 +93,7 @@ Uize.module ({
 									_filterGroupWidget.getValueNoFromValue(_selectedFilter) > -1
 								) {
 									_filterToSet = _selectedFilter;
-									_selectedFilterLookup[_selectedFilter] = _true;
+									_selectedFilterLookup[_selectedFilter] = true;
 									break;
 								}
 							}
@@ -122,60 +102,66 @@ Uize.module ({
 						}
 					);
 				}
-			};
+			}
 
-		/*** Public Methods ***/
-			_classPrototype.updateCounts = function (_counts) {
-				var
-					m = this,
-					_countsLength = _counts.length
-				;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				this._previousSelectedFilters = this._value;
+			},
 
-				if (m.isWired) {
-					_counts
-						&& _countsLength
-						&& m._forAll(
-							function (_filterGroupWidget, _filterGroupNo) {
-								_filterGroupNo < _countsLength
-									&& _filterGroupWidget.updateCounts(_counts[_filterGroupNo])
-							}
-						)
-					;
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-
-				if (!m.isWired) {
+			instanceMethods:{
+				updateCounts:function (_counts) {
 					var
-						_selectedFilters = m._value,
-						_filterGroupsData = m._values
+						m = this,
+						_countsLength = _counts.length
 					;
 
-					for (var _filterGroupNo = -1; ++_filterGroupNo < _filterGroupsData.length;)
-						m.addChild (
-							'filterGroup' + _filterGroupNo,
-							_Uize.Widget.Options.FilterGroup,
-							_Uize.copyInto(
-								{ensureValueInValues:m._allowMultiple},
-								_Uize.clone(_filterGroupsData[_filterGroupNo])
+					if (m.isWired) {
+						_counts
+							&& _countsLength
+							&& _forAll(
+								m,
+								function (_filterGroupWidget, _filterGroupNo) {
+									_filterGroupNo < _countsLength
+										&& _filterGroupWidget.updateCounts(_counts[_filterGroupNo])
+								}
 							)
-						).wire(
-							'Changed.value',
-							function (_event) { m._updateSelectedFilters(_event.source.valueOf()) }
-						)
-					;
+						;
+					}
+				},
 
-					_superclass.doMy (m,'wireUi');
+				wireUi:function () {
+					var m = this;
 
-					m._setFilterGroupsSelectedFilter();
-					m._updateSelectedFilters();
+					if (!m.isWired) {
+						var
+							_selectedFilters = m._value,
+							_filterGroupsData = m._values
+						;
+
+						for (var _filterGroupNo = -1; ++_filterGroupNo < _filterGroupsData.length;)
+							m.addChild (
+								'filterGroup' + _filterGroupNo,
+								_Uize.Widget.Options.FilterGroup,
+								_Uize.copyInto(
+									{ensureValueInValues:m._allowMultiple},
+									_Uize.clone(_filterGroupsData[_filterGroupNo])
+								)
+							).wire(
+								'Changed.value',
+								function (_event) { _updateSelectedFilters(m,_event.source.valueOf()) }
+							)
+						;
+
+						_superclass.doMy (m,'wireUi');
+
+						_setFilterGroupsSelectedFilter(m);
+						_updateSelectedFilters(m);
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_allowMultiple:{
 					name:'allowMultiple',
 					onChange:function () {
@@ -189,7 +175,7 @@ Uize.module ({
 							&& m.set({_value:m._value.splice(_valueLength-1,1)})
 						;
 					},
-					value:_true
+					value:true
 				},
 				_value:{
 					name:'value',
@@ -198,16 +184,15 @@ Uize.module ({
 						var _valueLength = _value.length;
 						return this._allowMultiple || _valueLength == 1 ? _value : _value.splice(_valueLength-1,1);
 					},
-					onChange:_classPrototype._setFilterGroupsSelectedFilter,
+					onChange:function () {_setFilterGroupsSelectedFilter (this)},
 					value:[]
 				},
 				_values:{
 					name:'values',
 					value:[]
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

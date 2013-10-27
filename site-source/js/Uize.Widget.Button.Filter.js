@@ -29,27 +29,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var
-							m = this,
-							_updateUiDisplayState = function () { m._updateUiDisplayState() }
-						;
-
-						m.wire({
-							'Changed.enabledInherited':_updateUiDisplayState,
-							'Changed.selected':_updateUiDisplayState
-						});
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiLabel = function () {
+			function _updateUiLabel () {
 				var m = this;
 
 				if (m.isWired) {
@@ -70,9 +51,9 @@ Uize.module ({
 							: _label
 					});
 				}
-			};
+			}
 
-			_classPrototype._updateUiDisplayState = function () {
+			function _updateUiDisplayState () {
 				var m = this;
 
 				if (m.isWired) {
@@ -97,54 +78,66 @@ Uize.module ({
 						m.get('selected')
 					);
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				var m = this;
-				if (m.isWired) {
-					m._updateUiLabel();
-					m._updateUiDisplayState();
-					_superclass.prototype.updateUi.call (m);
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var
+					m = this,
+					_boundUpdateUiDisplayState = function () { _updateUiDisplayState.call(m) }
+				;
+
+				m.wire({
+					'Changed.enabledInherited':_boundUpdateUiDisplayState,
+					'Changed.selected':_boundUpdateUiDisplayState
+				});
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						_updateUiLabel.call(m);
+						_updateUiDisplayState.call(m);
+						_superclass.prototype.updateUi.call (m);
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_count:{
 					name:'count',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
 				},
 				_cssClassDisabled:{
 					name:'cssClassDisabled',
-					onChange:_classPrototype._updateUiDisplayState,
+					onChange:_updateUiDisplayState,
 					value:''
 				},
 				_cssClassFeatured:{
 					name:'cssClassFeatured',
-					onChange:_classPrototype._updateUiDisplayState,
+					onChange:_updateUiDisplayState,
 					value:''
 				},
 				_cssClassSelected:{
 					name:'cssClassSelected',
-					onChange:_classPrototype._updateUiDisplayState,
+					onChange:_updateUiDisplayState,
 					value:''
 				},
 				_featured:{
 					name:'featured',
-					onChange:_classPrototype._updateUiDisplayState
+					onChange:_updateUiDisplayState
 				},
 				_label:{
 					name:'label',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
 				},
 				_showCount:{
 					name:'showCount',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

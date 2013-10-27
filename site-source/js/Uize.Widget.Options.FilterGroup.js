@@ -32,23 +32,15 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_Uize_Node_Classes = Uize.Node.Classes
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiExpanded = function () {
-				var m = this;
-
+			function _updateUiExpanded (m) {
 				m.isWired
 					&& _Uize_Node_Classes.setState(
 						m.getNode('options'),
@@ -56,13 +48,10 @@ Uize.module ({
 						m._expanded
 					)
 				;
-			};
+			}
 
-			_classPrototype._updateUiFilterVisibility = function () {
-				var
-					m = this,
-					_allZero = _true
-				;
+			function _updateUiFilterVisibility (m) {
+				var _allZero = _true;
 
 				m.isWired
 					&& m.forAll(
@@ -87,77 +76,76 @@ Uize.module ({
 					m.getInherited('allowMultiple') === _false
 						|| (!_allZero && m.get('values').length > 1)
 				);
-			};
+			}
 
-			_classPrototype._updateUiTitle = function () {
-				this.isWired && this.setNodeInnerHtml('title', this._title)
-			};
+			function _updateUiTitle (m) {
+				m.isWired && m.setNodeInnerHtml('title', m._title)
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateCounts = function (_counts) {
-				var
-					m = this,
-					_countsLength = _counts.length
-				;
-
-				if (m.isWired) {
-					// NOTE: the count parameter for each filter in the values set
-					// will be out of sync...
-
-					_counts
-						&& _countsLength
-						&& m.forAll(
-							function (_filterWidget, _filterNo) {
-								_filterNo < _countsLength
-									&& _filterWidget.set({count:_counts[_filterNo]})
-							}
-						)
+		return _superclass.subclass ({
+			instanceMethods:{
+				updateCounts:function (_counts) {
+					var
+						m = this,
+						_countsLength = _counts.length
 					;
 
-					m._updateUiFilterVisibility();
-				}
-			};
+					if (m.isWired) {
+						// NOTE: the count parameter for each filter in the values set
+						// will be out of sync...
 
-			_classPrototype.updateUi = function () {
-				var m = this;
-				if (m.isWired) {
-					m._updateUiTitle();
-					m._updateUiExpanded();
-					m._updateUiFilterVisibility();
-					_superclass.doMy (m,'updateUi');
-				}
-			};
+						_counts
+							&& _countsLength
+							&& m.forAll(
+								function (_filterWidget, _filterNo) {
+									_filterNo < _countsLength
+										&& _filterWidget.set({count:_counts[_filterNo]})
+								}
+							)
+						;
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+						_updateUiFilterVisibility(m);
+					}
+				},
+
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						_updateUiTitle(m);
+						_updateUiExpanded(m);
+						_updateUiFilterVisibility(m);
+						_superclass.doMy (m,'updateUi');
+					}
+				}
+			},
+
+			stateProperties:{
 				_expanded:{
 					name:'expanded',
-					onChange:_classPrototype._updateUiExpanded,
+					onChange:function () {_updateUiExpanded (this)},
 					value:_false
 				},
 				_expandedCssClass:{
 					name:'expandedCssClass',
-					onChange:_classPrototype._updateUiExpanded,
+					onChange:function () {_updateUiExpanded (this)},
 					value:''
 				},
 				_hideWhenZero:{
 					name:'hideWhenZero',
-					onChange:_classPrototype._updateUiFilterVisibility,
+					onChange:function () {_updateUiFilterVisibility (this)},
 					value:_true
 				},
 				_title:{
 					name:'title',
-					onChange:_classPrototype._updateUiTitle,
+					onChange:function () {_updateUiTitle (this)},
 					value:''
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				optionWidgetClass:Uize.Widget.Button.Filter
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

@@ -37,31 +37,22 @@ Uize.module ({
 		'Uize.Node.Event'
 	],
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
-			var
+		'use strict';
+
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
-				_Uize_Node_Event = _Uize_Node.Event
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						this._commObject = new Uize.Comm.Script ({callbackMode:'client'})
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+				_Uize_Node_Event = _Uize_Node.Event,
+				_isFunction = _Uize.isFunction
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._recaptchaObjectCreate = function () {
+			function _recaptchaObjectCreate (m) {
 				var
-					m = this,
 					_recaptchaInputId = 'recaptcha_response_field',
 					_recaptchaObject = m._recaptchaObject
 				;
@@ -130,63 +121,68 @@ Uize.module ({
 						)
 					;
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.checkIsEmpty = function () {
-				var _value = this.valueOf();
+		return _superclass.subclass ({
+			omegastructor:function () {
+				this._commObject = new _Uize.Comm.Script ({callbackMode:'client'})
+			},
 
-				return !_value || !_value.response
-			};
+			instanceMethods:{
+				checkIsEmpty:function () {
+					var _value = this.valueOf();
 
-			_classPrototype.initializeCaptcha = _classPrototype._initializeCaptcha = function () {
-				var m = this;
-				// check to see if the Recaptcha object has already been sourced in. If not, we'll have to make a script call to load it.
-				if (!(m._recaptchaObject = window.Recaptcha) && m._loadingUrl)
-					m._commObject.request (
-						{
-							url:[m._loadingUrl],
-							returnType:'json',
-							requestMethod:'GET',
-							callback:function () {
-								(m._recaptchaObject = window.Recaptcha) ?
-									m._recaptchaObjectCreate () :
-										m.inform ({
-											state:'error',
-											message:m.localize('loadingError')
-										})
-								;
+					return !_value || !_value.response
+				},
+
+				initializeCaptcha:function () {
+					var m = this;
+					// check to see if the Recaptcha object has already been sourced in. If not, we'll have to make a script call to load it.
+					if (!(m._recaptchaObject = window.Recaptcha) && m._loadingUrl)
+						m._commObject.request (
+							{
+								url:[m._loadingUrl],
+								returnType:'json',
+								requestMethod:'GET',
+								callback:function () {
+									(m._recaptchaObject = window.Recaptcha) ?
+										_recaptchaObjectCreate (m) :
+											m.inform ({
+												state:'error',
+												message:m.localize('loadingError')
+											})
+									;
+								}
 							}
-						}
-					);
-				else m._recaptchaObjectCreate ();
+						);
+					else _recaptchaObjectCreate (m);
 
-				/*?
-					Instance Methods
-						initializeCaptcha
-							Overridden method that loads the external Recaptcha JS object (if it isn't in the page already) and creates the UI provided by reCAPTCHA.
-				*/
-			};
+					/*?
+						Instance Methods
+							initializeCaptcha
+								Overridden method that loads the external Recaptcha JS object (if it isn't in the page already) and creates the UI provided by reCAPTCHA.
+					*/
+				},
 
-			_classPrototype.restore = function () {
-				var m = this;
+				restore:function () {
+					var m = this;
 
-				m.set({isValid:_false});
-				m._initializeCaptcha();
-				_superclass.prototype.wireUi.call (m);
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m._initializeCaptcha ();
-
+					m.set({isValid:_false});
+					m.initializeCaptcha();
 					_superclass.prototype.wireUi.call (m);
-				}
-			};
+				},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m.initializeCaptcha ();
+
+						_superclass.prototype.wireUi.call (m);
+					}
+				}
+			},
+
+			stateProperties:{
 				_loadingUrl:'loadingUrl',
 				/*?
 					Set-get properties
@@ -222,9 +218,9 @@ Uize.module ({
 								A string containing a nonce returned by the validation service to be returned when the form is submitted.
 					*/
 				}
-			});
+			},
 
-			_class.set ({
+			set:{
 				isValid:_false, // reCaptcha is never valid at the beginning
 				validator:function (_value, _callback) {	// NOTE: this should never be overwritten
 					/**
@@ -271,21 +267,20 @@ Uize.module ({
 
 									// if the response was not valid then destroy and create a new instance of the captcha
 									// unless there was no value.
-									if (!_responseIsValid && _responseField) m._recaptchaObjectCreate ();
+									if (!_responseIsValid && _responseField) _recaptchaObjectCreate (m);
 
-									Uize.isFunction (_callback) && _callback ( _responseIsValid );
+									_isFunction (_callback) && _callback ( _responseIsValid );
 								}
 							});
 							_isValid = null;
-						} else Uize.isFunction (_callback) && _callback (m.get ('isValid'));
+						} else _isFunction (_callback) && _callback (m.get ('isValid'));
 					}
 
 					return _isValid;
 				},
 				validateWhen:'finished'
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

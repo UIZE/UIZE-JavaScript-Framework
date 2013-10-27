@@ -29,52 +29,41 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-						m.wire ('Changed.value',function () {m._updateUiTabContent ()});
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Node_Classes = Uize.Node.Classes
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._resolveToValueNo = function (_valueOrValueNo) {
-				return Uize.isNumber (_valueOrValueNo) ? _valueOrValueNo : this.getValueNoFromValue (_valueOrValueNo);
-			};
+			function _resolveToValueNo (m,_valueOrValueNo) {
+				return Uize.isNumber (_valueOrValueNo) ? _valueOrValueNo : m.getValueNoFromValue (_valueOrValueNo);
+			}
 
-			_classPrototype._getTabBodyNode = function (_valueOrValueNo) {
-				return this.getNode ('option' + this._resolveToValueNo (_valueOrValueNo) + 'TabBody')
-			};
+			function _getTabBodyNode (m,_valueOrValueNo) {
+				return m.getNode ('option' + _resolveToValueNo (m,_valueOrValueNo) + 'TabBody')
+			}
 
-			_classPrototype._tabCanBeSelected = function (_value) {
-				return this.tabExists (_value) && this.getOptionButton (_value).get ('enabled')
-			};
+			function _tabCanBeSelected (m,_value) {
+				return m.tabExists (_value) && m.getOptionButton (_value).get ('enabled')
+			}
 
-			_classPrototype._updateTabBodyClass = function (_valueNo, _currentValueNo) {
-				var m = this;
-
+			function _updateTabBodyClass (m, _valueNo, _currentValueNo) {
 				if (_valueNo > -1)
 				{
 					var _isValue = _valueNo == _currentValueNo,
 						_bodyClassActive = m._bodyClassActive,
 						_bodyClassInactive = m._bodyClassInactive,
-						_tabBody = m._getTabBodyNode(_valueNo)
+						_tabBody = _getTabBodyNode(m,_valueNo)
 					;
-
-					Uize.Node.Classes.addClass(_tabBody, _isValue ? _bodyClassActive : _bodyClassInactive);
-					Uize.Node.Classes.removeClass(_tabBody, _isValue ? _bodyClassInactive : _bodyClassActive);
+					_Uize_Node_Classes.addClass(_tabBody, _isValue ? _bodyClassActive : _bodyClassInactive);
+					_Uize_Node_Classes.removeClass(_tabBody, _isValue ? _bodyClassInactive : _bodyClassActive);
 				}
-			};
+			}
 
-			_classPrototype._updateUiTabContent = function () {
-				var m = this;
+			function _updateUiTabContent (m) {
 				if (m.isWired) {
 					var _currentValueNo = m.get ('valueNo');
-					if (m._tabCanBeSelected (_currentValueNo)) {
+					if (_tabCanBeSelected (m,_currentValueNo)) {
 						m.updateUiTabState (m._lastShownTabBodyNo,_currentValueNo);
 						m._lastShownTabBodyNo = _currentValueNo;
 					}
@@ -83,64 +72,69 @@ Uize.module ({
 							var  _valueNo = -1, _values = m.get ('values'), _valuesLength = _values.length;
 							++_valueNo < _valuesLength;
 						) {
-							if (m._tabCanBeSelected (_valueNo)) {
+							if (_tabCanBeSelected (m,_valueNo)) {
 								m.set ({value:_values [_valueNo]});
 								break;
 							}
 						}
 					}
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.enableTab = function (_value,_mustEnable) {
-				this.getOptionButton (_value).set ({enabled:_mustEnable ? 'inherit' : false});
-				this._updateUiTabContent ();
-			};
-
-			_classPrototype.getOptionButton = function (_valueOrValueNo) {
-				return this.children ['option' + this._resolveToValueNo (_valueOrValueNo)];
-			};
-
-			_classPrototype.getTabBodyNode = _classPrototype._getTabBodyNode;
-
-			_classPrototype.tabExists = function (_valueOrValueNo) {
-				var _optionButton = this.getOptionButton (_valueOrValueNo);
-				return (
-					_optionButton && (_optionButton.getNode () || this._getTabBodyNode (_valueOrValueNo))
-						? true
-						: false
-				);
-			};
-
-			_classPrototype.updateUiTabState = function (_lastShownTabBodyNo,_currentValueNo) {
-				this._updateTabBodyClass (_lastShownTabBodyNo, _currentValueNo);
-				this._updateTabBodyClass (_currentValueNo, _currentValueNo);
-			};
-
-			_classPrototype.wireUi = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
-				if (!m.isWired) {
-					_superclass.doMy (m,'wireUi');
-					var _valueNo = m._lastShownTabBodyNo = m.get ('valueNo');
-					Uize.forEach (
-						m.get ('values'),
-						function (_value,_tabNo) {m._updateTabBodyClass (_tabNo, _valueNo)}
-					);
-				}
-			};
+				m.wire ('Changed.value',function () {_updateUiTabContent (m)});
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			instanceMethods:{
+				enableTab:function (_value,_mustEnable) {
+					this.getOptionButton (_value).set ({enabled:_mustEnable ? 'inherit' : false});
+					_updateUiTabContent (this);
+				},
+
+				getOptionButton:function (_valueOrValueNo) {
+					return this.children ['option' + _resolveToValueNo (this,_valueOrValueNo)];
+				},
+
+				getTabBodyNode:_getTabBodyNode,
+
+				tabExists:function (_valueOrValueNo) {
+					var _optionButton = this.getOptionButton (_valueOrValueNo);
+					return (
+						_optionButton && (_optionButton.getNode () || _getTabBodyNode (this,_valueOrValueNo))
+							? true
+							: false
+					);
+				},
+
+				updateUiTabState:function (_lastShownTabBodyNo,_currentValueNo) {
+					_updateTabBodyClass (this,_lastShownTabBodyNo, _currentValueNo);
+					_updateTabBodyClass (this,_currentValueNo, _currentValueNo);
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						_superclass.doMy (m,'wireUi');
+						var _valueNo = m._lastShownTabBodyNo = m.get ('valueNo');
+						Uize.forEach (
+							m.get ('values'),
+							function (_value,_tabNo) {_updateTabBodyClass (m, _tabNo, _valueNo)}
+						);
+					}
+				}
+			},
+
+			stateProperties:{
 				_bodyClassActive:'bodyClassActive',
 				_bodyClassInactive:'bodyClassInactive',
 				_mustHaveSelectedTab:{
 					name:'mustHaveSelectedTab',
 					value:true
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

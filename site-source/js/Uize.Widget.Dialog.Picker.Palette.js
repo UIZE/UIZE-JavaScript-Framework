@@ -32,35 +32,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-
-						// Sync tentativeValue & tentativeValueDetails back and forth with value widget
-						Uize.Util.Coupler({
-							instances:[m, m.children.value],
-							properties:['tentativeValue', 'tentativeValueDetails']
-						});
-
-						m.wire(
-							'After Show',
-							function () {
-								m.children.value.updateUi();
-								m._updateUiMinWidth();
-							}
-						);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Methods ***/
-			_classPrototype._updateUiMinWidth = function () {
-				var m = this;
-
+			function _updateUiMinWidth (m) {
 				if (m.isWired && m._minWidth) {
 					m.setNodeStyle (
 						'',
@@ -74,13 +47,31 @@ Uize.module ({
 						)
 					;
 				}
-			};
+			}
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
+
+				// Sync tentativeValue & tentativeValueDetails back and forth with value widget
+				Uize.Util.Coupler({
+					instances:[m, m.children.value],
+					properties:['tentativeValue', 'tentativeValueDetails']
+				});
+
+				m.wire(
+					'After Show',
+					function () {
+						m.children.value.updateUi();
+						_updateUiMinWidth(m);
+					}
+				);
+			},
+
+			stateProperties:{
 				_minWidth:{
 					name:'minWidth',
-					onChange:_classPrototype._updateUiMinWidth
+					onChange:function () {_updateUiMinWidth (this)}
 				},
 				_tentativeValue:{
 					name:'tentativeValue',
@@ -104,14 +95,12 @@ Uize.module ({
 					value:null
 				},
 				_tentativeValueDetails:'tentativeValueDetails'
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				dismissOnShieldClick:true
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

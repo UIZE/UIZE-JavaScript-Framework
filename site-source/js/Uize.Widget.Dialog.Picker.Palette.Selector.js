@@ -32,30 +32,28 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass (
-				null,
-				function () {
-					var
-						m = this,
-						_valueWidget = m.children.value
-					;
-					m.wire(
-						'After Show',
-						function () { _valueWidget.updateUi() }
-					);
-					Uize.Util.Coupler({
-						instances:[m, _valueWidget],
-						properties:['valueNo', 'tentativeValueNo']
-					});
-				}
-			);
-
-		/*** State Properties ***/
+		/*** Private Instance Methods ***/
 			function _fireSubmissionComplete(_propertiesChanged) {
 				this.fireSubmissionComplete(true, _propertiesChanged)
 			}
-			_class.stateProperties ({
+
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var
+					m = this,
+					_valueWidget = m.children.value
+				;
+				m.wire(
+					'After Show',
+					function () { _valueWidget.updateUi() }
+				);
+				Uize.Util.Coupler({
+					instances:[m, _valueWidget],
+					properties:['valueNo', 'tentativeValueNo']
+				});
+			},
+
+			stateProperties:{
 				_tentativeValueNo:{
 					name:'tentativeValueNo',	// read-only
 					onChange:_fireSubmissionComplete,
@@ -70,16 +68,14 @@ Uize.module ({
 					name:'values',
 					value:[]
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				pipedProperties:['values'],
 				valueWidgetClass:Uize.Widget.Options.Selector,
 				shieldOpacity:.01
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

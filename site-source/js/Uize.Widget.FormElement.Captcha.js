@@ -32,26 +32,24 @@
 Uize.module ({
 	name:'Uize.Widget.FormElement.Captcha',
 	builder:function (_superclass) {
-		/*** Constructor ***/
-			var
-				_class = _superclass.subclass ()
-			;
+		'use strict';
 
-		/*** Public Instance Methods ***/
-			_class.prototype.initializeCaptcha = function () {
-				/*?
-					Instance Methods
-						initializeCaptcha
-							Loads and processes any data needed in order to display the captcha. This could include sourcing in external JS scripts, creating an external JS object, inserting the UI, etc. This is an empty method in =Uize.Widget.FormElement.Captcha= and should be overridden by any subclasses.
+		return _superclass.subclass ({
+			instanceMethods:{
+				initializeCaptcha:function () {
+					/*?
+						Instance Methods
+							initializeCaptcha
+								Loads and processes any data needed in order to display the captcha. This could include sourcing in external JS scripts, creating an external JS object, inserting the UI, etc. This is an empty method in =Uize.Widget.FormElement.Captcha= and should be overridden by any subclasses.
 
-							SYNTAX
-							..............................
-							myWidget.initializeCaptcha ();
-							..............................
-				 */
-			};
-
-		return _class;
+								SYNTAX
+								..............................
+								myWidget.initializeCaptcha ();
+								..............................
+					 */
+				}
+			}
+		});
 	}
 });
 

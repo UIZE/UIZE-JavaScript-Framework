@@ -164,14 +164,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_null = null,
 				_Uize_Date = Uize.Date,
 				_formatDate = Uize.Date.Formatter.format
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _conformNullableDateValue (_value) {

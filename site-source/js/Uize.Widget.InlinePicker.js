@@ -33,62 +33,57 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var
-							m = this,
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var
+					m = this,
 
-							_valueWidget = m.addChild(
-								'value',
-								m._valueWidgetClass,
-								m.get ((m._pipedProperties || []).concat ('value'))
-							),
-							_valueDisplayWidget = m.addChild(
-								'valueDisplay',
-								m._valueDisplayWidgetClass || Uize.Widget.Button.ValueDisplay,
-								m._valueDisplayWidgetProperties
-							)
-						;
+					_valueWidget = m.addChild(
+						'value',
+						m._valueWidgetClass,
+						m.get ((m._pipedProperties || []).concat ('value'))
+					),
+					_valueDisplayWidget = m.addChild(
+						'valueDisplay',
+						m._valueDisplayWidgetClass || Uize.Widget.Button.ValueDisplay,
+						m._valueDisplayWidgetProperties
+					)
+				;
 
-						// Sync value & value details back and forth with value widget
-						Uize.Util.Coupler({
-							instances:[m, _valueWidget],
-							properties:['value', 'valueDetails', 'tentativeValue', 'tentativeValueDetails']
-						});
+				// Sync value & value details back and forth with value widget
+				Uize.Util.Coupler({
+					instances:[m, _valueWidget],
+					properties:['value', 'valueDetails', 'tentativeValue', 'tentativeValueDetails']
+				});
 
-						/** One-way sync value & value details to value display widget **/
-							function _setValueDisplayWidget(_propertyName, _propertyNameToGet) {
-								_valueDisplayWidget.set(_propertyName, m.get(_propertyNameToGet || _propertyName))
-							}
-
-							m.wire({
-								'Changed.value':function () { _setValueDisplayWidget('value') },
-								'Changed.valueDetails':function () { _setValueDisplayWidget('valueDetails') },
-								'Changed.tentativeValue':function () { m._syncTentativeValue && _setValueDisplayWidget('value', 'tentativeValue') },
-								'Changed.tentativeValueDetails':function () { m._syncTentativeValue && _setValueDisplayWidget('valueDetails', 'tentativeValueDetails') }
-							});
-
-							_setValueDisplayWidget('value');
-							_setValueDisplayWidget('valueDetails');
+				/** One-way sync value & value details to value display widget **/
+					function _setValueDisplayWidget(_propertyName, _propertyNameToGet) {
+						_valueDisplayWidget.set(_propertyName, m.get(_propertyNameToGet || _propertyName))
 					}
-				)
-			;
 
-		/*** Public Methods ***/
-			_class.prototype.updateUi = function () {
-				var m = this;
+					m.wire({
+						'Changed.value':function () { _setValueDisplayWidget('value') },
+						'Changed.valueDetails':function () { _setValueDisplayWidget('valueDetails') },
+						'Changed.tentativeValue':function () { m._syncTentativeValue && _setValueDisplayWidget('value', 'tentativeValue') },
+						'Changed.tentativeValueDetails':function () { m._syncTentativeValue && _setValueDisplayWidget('valueDetails', 'tentativeValueDetails') }
+					});
 
-				if (m.isWired) {
-					m.children.value.updateUi();
-					_superclass.doMy (m,'updateUi');
+					_setValueDisplayWidget('value');
+					_setValueDisplayWidget('valueDetails');
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+
+					if (m.isWired) {
+						m.children.value.updateUi();
+						_superclass.doMy (m,'updateUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_pipedProperties:{
 					name:'pipedProperties',
 					onChange:function () {
@@ -159,9 +154,8 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				_valueWidgetClass:'valueWidgetClass'
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

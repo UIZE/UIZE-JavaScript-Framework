@@ -28,33 +28,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {this._values = []},
-					function () {
-						var m = this;
-
-						m.wire(
-							'Changed.value',
-							function () {
-								if (m.isWired) {
-									var _selectNode = m.getNode('input');
-
-									_selectNode
-										&& m.set({_valueNo:_selectNode.selectedIndex})
-								}
-							}
-						);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiValues = function () {
-				var m = this;
-
+			function _updateUiValues (m) {
 				if (m.isWired) {
 					var
 						_oldValue = m.get('value'),
@@ -121,69 +96,87 @@ Uize.module ({
 							m.set({value:_values[0].name});
 					}
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
+
+		return _superclass.subclass ({
+			alphastructor:function () {this._values = []},
+			omegastructor:function () {
 				var m = this;
-				if (!m.isWired) {
-					_superclass.doMy (m,'wireUi');
 
-					var
-						_values = m._values || [],
-						_selectNode = m.getNode('input')
-					;
+				m.wire(
+					'Changed.value',
+					function () {
+						if (m.isWired) {
+							var _selectNode = m.getNode('input');
 
-					if (_values.length)	// values data exists so update the <option>s in the <select> tag
-						m._updateUiValues();
-					else if (_selectNode && m.get('type') == 'select-one') { // build values from <select> tag <option>s
-						// iterate through each option and add to values state property
-						for (
-							var
-								_value = m.get('value'),
-								_options = _selectNode.options,
-								_optionNo = -1,
-								_optionsLength = _options.length
-							;
-							++_optionNo < _optionsLength;
-						) {
-							var
-								_optionNode = _options[_optionNo],
-								_optionValue = _optionNode.value,
-								_optionText = _optionNode.text,
-								_valueObjectName = _optionValue != null ? _optionValue : _optionText
-							;
-
-							_values.push({
-								name:_valueObjectName,
-								displayName:_optionText
-							});
-
-							if (_valueObjectName == _value)
-								_optionNode.selected = true;
+							_selectNode
+								&& m.set({_valueNo:_selectNode.selectedIndex})
 						}
+					}
+				);
+			},
 
-						// set valueNo to be selectedIndex && sync up the value in case it has changed
-						(m._valueNo = _selectNode.selectedIndex) > -1
-							&& m.set({value:_values[m._valueNo].name})
+			instanceMethods:{
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						_superclass.doMy (m,'wireUi');
+
+						var
+							_values = m._values || [],
+							_selectNode = m.getNode('input')
 						;
+
+						if (_values.length)	// values data exists so update the <option>s in the <select> tag
+							_updateUiValues(m);
+						else if (_selectNode && m.get('type') == 'select-one') { // build values from <select> tag <option>s
+							// iterate through each option and add to values state property
+							for (
+								var
+									_value = m.get('value'),
+									_options = _selectNode.options,
+									_optionNo = -1,
+									_optionsLength = _options.length
+								;
+								++_optionNo < _optionsLength;
+							) {
+								var
+									_optionNode = _options[_optionNo],
+									_optionValue = _optionNode.value,
+									_optionText = _optionNode.text,
+									_valueObjectName = _optionValue != null ? _optionValue : _optionText
+								;
+
+								_values.push({
+									name:_valueObjectName,
+									displayName:_optionText
+								});
+
+								if (_valueObjectName == _value)
+									_optionNode.selected = true;
+							}
+
+							// set valueNo to be selectedIndex && sync up the value in case it has changed
+							(m._valueNo = _selectNode.selectedIndex) > -1
+								&& m.set({value:_values[m._valueNo].name})
+							;
+						}
 					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties({
+			stateProperties:{
 				_valueNo:{	// readonly
 					name:'valueNo',
 					value:-1
 				},
 				_values:{
 					name:'values',
-					onChange:_classPrototype._updateUiValues
+					onChange:function () {_updateUiValues (this)}
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 
