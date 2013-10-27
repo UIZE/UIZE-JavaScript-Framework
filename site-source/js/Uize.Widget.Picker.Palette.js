@@ -101,7 +101,7 @@ Uize.module ({
 					;
 
 					return _copyInto(
-						_superclass.prototype.getDialogWidgetProperties.call(m) || {},
+						_superclass.doMy(m,'getDialogWidgetProperties') || {},
 						{
 							parent:m,
 							offsetX:'adjacent',	// we want the dialog to show up next to the selector button to look like a droplist palette
@@ -133,7 +133,7 @@ Uize.module ({
 					}
 
 					return _copyInto(
-						_superclass.prototype.getMoreDialogEventHandlers.call(m) || {},
+						_superclass.doMy(m,'getMoreDialogEventHandlers') || {},
 						_addSyncHandler('tentativeValue'),
 						_addSyncHandler('tentativeValueDetails'),
 						{

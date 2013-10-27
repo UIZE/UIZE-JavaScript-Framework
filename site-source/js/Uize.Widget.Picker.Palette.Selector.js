@@ -68,7 +68,7 @@ Uize.module ({
 					}
 
 					return Uize.copyInto(
-						_superclass.prototype.getMoreDialogEventHandlers.call(m) || {},
+						_superclass.doMy(m,'getMoreDialogEventHandlers') || {},
 						_addHandler('valueNo'),
 						_addHandler('tentativeValueNo')
 					);

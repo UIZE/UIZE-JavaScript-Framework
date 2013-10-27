@@ -169,7 +169,7 @@ Uize.module ({
 
 					m.set({isValid:_false});
 					m.initializeCaptcha();
-					_superclass.prototype.wireUi.call (m);
+					_superclass.doMy (m,'wireUi');
 				},
 
 				wireUi:function () {
@@ -177,7 +177,7 @@ Uize.module ({
 					if (!m.isWired) {
 						m.initializeCaptcha ();
 
-						_superclass.prototype.wireUi.call (m);
+						_superclass.doMy (m,'wireUi');
 					}
 				}
 			},

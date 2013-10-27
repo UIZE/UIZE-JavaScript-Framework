@@ -156,7 +156,7 @@ Uize.module ({
 							}
 						);
 
-						_superclass.prototype.wireUi.call (m);
+						_superclass.doMy (m,'wireUi');
 					}
 				}
 			},

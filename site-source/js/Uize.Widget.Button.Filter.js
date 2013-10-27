@@ -99,7 +99,7 @@ Uize.module ({
 					if (m.isWired) {
 						_updateUiLabel.call(m);
 						_updateUiDisplayState.call(m);
-						_superclass.prototype.updateUi.call (m);
+						_superclass.doMy (m,'updateUi');
 					}
 				}
 			},
