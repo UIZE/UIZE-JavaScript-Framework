@@ -22,7 +22,7 @@
 	<meta name="keywords" content="<%= _widgetName %> widget embed blog iframe bookmarklet"/>
 	<meta name="description" content="<%= _description -> tagAttributeValue %>"/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
-	
+
 	<!-- for Facebook Share (http://wiki.developers.facebook.com/index.php/Facebook_Share/Specifying_Meta_Tags) -->
 		<meta name="title" content="<%= _widgetName %>"/>
 		<link rel="image_src" href="../images/widgets/<%= _widgetNameForUrl %>-96x96.gif"/>
@@ -36,10 +36,9 @@
 
 <script type="text/javascript" src="../js/Uize.js"></script>
 
-<h1 class="document-title">
+<h1 class="header">
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
-	<a href="../javascript-widgets.html" class="breadcrumb breadcrumbWithArrow">WIDGETS</a>
-	<% .title %>
+	<a href="../index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
 </h1>
 
 <%
@@ -50,6 +49,11 @@
 		_widgetWebUrl = 'http://www.uize.com/widgets/' + _widgetNameForUrl + '/web.html'
 	;
 %><div class="main">
+	<h1 class="document-title">
+		<a href="../javascript-widgets.html" class="breadcrumb breadcrumbWithArrow">WIDGETS TO GO</a>
+		<% .title %>
+	</h1>
+
 	<div class="preamble">
 		<%= _description %>
 	</div>
