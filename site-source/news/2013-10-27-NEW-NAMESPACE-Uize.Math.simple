@@ -1,0 +1,13 @@
+The new =Uize.Math= namespace has been created to provide a home for various math-related modules of the UIZE JavaScript Framework.
+
+To get things started, the new =Uize.Math= namespace houses the following modules...
+
+- =Uize.Math.Blend= - supports blending two values to produce a new, interpolated value, with support for blending arbitrarily complex data structures and interpolation curve functions (and structures)
+- =Uize.Math.LogicalPos= - supports logical sizing behaviors such as fit and fill, and logical positioning behaviors such as left, center, and right aligned, or top, center, and bottom aligned, among others
+- =Uize.Math.Matrix2D= - provides support for building and applying 2-D affine transformations in a 2-dimensional plane
+
+....................................................................................
+<< metadata >>
+
+title: 2013-10-27 - NEW NAMESPACE: Uize.Math
+....................................................................................

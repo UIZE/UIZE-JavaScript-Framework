@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Str Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Math Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,19 +18,19 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Str= module defines a simple unit test for the =Uize.Str= namespace module.
+		The =Uize.Test.Uize.Math= module defines a simple unit test for the =Uize.Math= namespace module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Str',
+	name:'Uize.Test.Uize.Math',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.Str Module',
-			test:[Uize.Test.requiredModulesTest ('Uize.Str')]
+			title:'Test for Uize.Math Module',
+			test:[Uize.Test.requiredModulesTest ('Uize.Math')]
 		});
 	}
 });
