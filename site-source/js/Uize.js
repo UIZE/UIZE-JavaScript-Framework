@@ -1987,6 +1987,8 @@ Uize = (function () {
 						Uize.applyAll
 							Calls the specified list of functions on the specified context, with an optional list of arguments.
 
+							The =Uize.applyAll= method can be useful for executing a list of event handlers, queued callbacks, a chain of constructors, etc.
+
 							DIFFERENT USAGES
 
 							`Call Multiple Functions as Methods on a Context`
@@ -1999,19 +2001,37 @@ Uize = (function () {
 							Uize.applyAll (contextANYTYPE,functionsLIST,argumentsLIST);
 							...........................................................
 
+							`Call Multiple Functions with an Arguments List`
+							..............................................
+							Uize.applyAll (0,functionsLIST,argumentsLIST);
+							..............................................
+
 							Call Multiple Functions as Methods on a Context
+								In the simplest usage, a list of functions can be called as methods on a context by specifying the context as the first argument and the list of functions as the second.
+
 								SYNTAX
 								.............................................
 								Uize.applyAll (contextANYTYPE,functionsLIST);
 								.............................................
 
 							Call Multiple Functions as Methods on a Context, with an Arguments List
+								In order to call a list of functions as methods on a context and with the same set of arguments for each call, the arguments list can be specified using the optional =argumentsLIST= third argument.
+
 								SYNTAX
 								...........................................................
 								Uize.applyAll (contextANYTYPE,functionsLIST,argumentsLIST);
 								...........................................................
 
+							Call Multiple Functions with an Arguments List
+								In cases where you wish to call a list of functions with the same set of arguments for each call, but where you don't wish them to be called as methods on a context, you can simply specify the value =0= for the first argument.
+
+								SYNTAX
+								..............................................
+								Uize.applyAll (0,functionsLIST,argumentsLIST);
+								..............................................
+
 							NOTES
+							- compare to the =Uize.callOn= static method
 							- see also the other `iterator methods`
 				*/
 			},
