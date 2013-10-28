@@ -97,7 +97,7 @@ Uize.module ({
 					return this.children ['option' + _resolveToValueNo (this,_valueOrValueNo)];
 				},
 
-				getTabBodyNode:_getTabBodyNode,
+				getTabBodyNode:function (_valueOrValueNo) {return _getTabBodyNode (this,_valueOrValueNo)},
 
 				tabExists:function (_valueOrValueNo) {
 					var _optionButton = this.getOptionButton (_valueOrValueNo);
