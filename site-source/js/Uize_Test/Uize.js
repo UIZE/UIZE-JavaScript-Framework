@@ -3489,6 +3489,90 @@ Uize.module ({
 								}
 							}
 					]],
+					['Uize.applyAll',[
+						{
+							title:'Test that an array of functions is executed in the correct sequence, and called on the specified context for every call',
+							test:function () {
+								var
+									_actualCalls = [],
+									_actualContexts = [],
+									_context = {}
+								;
+								Uize.applyAll (
+									_context,
+									[
+										function () {
+											_actualCalls.push ('a');
+											_actualContexts.push (this);
+										},
+										function () {
+											_actualCalls.push ('b');
+											_actualContexts.push (this);
+										},
+										function () {
+											_actualCalls.push ('c');
+											_actualContexts.push (this);
+										}
+									]
+								);
+								return (
+									this.expect (['a','b','c'],_actualCalls) &&
+									this.expect ([_context,_context,_context],_actualContexts)
+								);
+							}
+						},
+						{
+							title:'Test that a list object of functions is treated in the same way as an array of functions',
+							test:function () {
+								var
+									_actualCalls = [],
+									_actualContexts = [],
+									_context = {}
+								;
+								Uize.applyAll (
+									_context,
+									{
+										2:function () {
+											_actualCalls.push ('c');
+											_actualContexts.push (this);
+										},
+										1:function () {
+											_actualCalls.push ('b');
+											_actualContexts.push (this);
+										},
+										0:function () {
+											_actualCalls.push ('a');
+											_actualContexts.push (this);
+										},
+										length:3
+									}
+								);
+								return (
+									this.expect (['a','b','c'],_actualCalls) &&
+									this.expect ([_context,_context,_context],_actualContexts)
+								);
+							}
+						},
+						{
+							title:'Test that, when an optional arguments list is provided, the arguments list is used for each function call',
+							test:function () {
+								var
+									_argsForCalls = ['foo','bar',42,true,null,undefined,NaN],
+									_seenArgsForCalls = []
+								;
+								Uize.applyAll (
+									0,
+									[
+										function () {_seenArgsForCalls.push (Uize.copyList (arguments))},
+										function () {_seenArgsForCalls.push (Uize.copyList (arguments))},
+										function () {_seenArgsForCalls.push (Uize.copyList (arguments))}
+									],
+									_argsForCalls
+								);
+								return this.expect ([_argsForCalls,_argsForCalls,_argsForCalls],_seenArgsForCalls);
+							}
+						}
+					]],
 					['Uize.callOn',[
 						{
 							title:'Test that specifying null for the object results in no action',
