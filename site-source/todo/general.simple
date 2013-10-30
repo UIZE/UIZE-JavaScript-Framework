@@ -158,9 +158,6 @@ Code to Factor Out
 General Drag and Drop Framework
 	Virtual dom events to mimic new HTML5 dnd events.
 
-Types for Properties
-	Can be used by interpolation code (such as fades).
-
 Iterator Interface
 	Instance Methods
 		- =first= - rewinds the iterator to the beginning and returns the value for the first iteration

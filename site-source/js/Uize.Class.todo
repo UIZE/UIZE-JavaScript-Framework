@@ -461,6 +461,8 @@ Handle Simple Type in Place of Constructor Properties
 Improvements to Property Mechanism
 	New Profile Features
 		type
+			Can be used by interpolation code (such as fades).
+
 			Basic types...
 
 			- string (coerce with value + '', implicit initial value is '')
