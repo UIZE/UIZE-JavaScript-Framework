@@ -47,16 +47,14 @@ The =builder= function for the module is called only once all dependencies - dir
 
 The system for loading module dependencies is built into the base =Uize.js= file, so all that's needed to bootstrap a page for basic development is to add a script tag to load that file.
 
-.................................................................
-<script src="http://www.uize.com/js/Uize.js"></script>
+	<script src="http://www.uize.com/js/Uize.js"></script>
 
-<script type="text/javascript">
-	Uize.require (
-		'Uize.Widgets.Calculator.Widget',
-		function () {Uize.Widgets.Calculator.Widget ().insertUi ()}
-	);
-</script>
-.................................................................
+	<script type="text/javascript">
+		Uize.require (
+			'Uize.Widgets.Calculator.Widget',
+			function () {Uize.Widgets.Calculator.Widget ().insertUi ()}
+		);
+	</script>
 
 If you copy-and-paste the above code into some HTML page (maybe you've got one you're working on), you will see a glorious calculator widget added to the page. Because of the highly modular nature of the UIZE codebase, there's actually a bunch of individual modules that will be loaded. All this is taken care of for you.
 
@@ -116,9 +114,7 @@ UIZE makes it dead easy to create classes that come with support for events (tha
 
 Making a class in UIZE is as easy as calling the =subclass= static method of a class that you want to extend, as follows...
 
-...............................................
-var MyWidgetClass = Uize.Widget.V2.subclass ();
-...............................................
+	var MyWidgetClass = Uize.Widget.V2.subclass ();
 
 In the above example, =MyWidgetClass= is now a subclass of UIZE's V2 (version 2) widget base class. The new =MyWidgetClass= class inherits all of the instance methods and property, state properties, and inheritable static methods and properties from the =Uize.Widget.V2= base class.
 
@@ -126,26 +122,24 @@ In the above example, =MyWidgetClass= is now a subclass of UIZE's V2 (version 2)
 
 Declaring features for a newly created class can be done in a number of different ways, but by far the simplest and most elegant is to declare all the new features or overridden features in an optional features declaration object that is passed to the =subclass= method, as follows...
 
-.......................................
-var MyClass = Uize.Class.subclass ({
-	instanceMethods:{
-		someInstanceMethod1:function () {
-			// do some stuff
+	var MyClass = Uize.Class.subclass ({
+		instanceMethods:{
+			someInstanceMethod1:function () {
+				// do some stuff
+			},
+			someInstanceMethod2:function () {
+				// do some stuff
+			}
 		},
-		someInstanceMethod2:function () {
-			// do some stuff
+		staticMethods:{
+			someStaticMethod1:function () {
+				// do some stuff
+			},
+			someStaticMethod2:function () {
+				// do some stuff
+			}
 		}
-	},
-	staticMethods:{
-		someStaticMethod1:function () {
-			// do some stuff
-		},
-		someStaticMethod2:function () {
-			// do some stuff
-		}
-	}
-});
-.......................................
+	});
 
 For a more detailed discussion of the UIZE approach to OOP, consult the [[guides/classes-and-inheritance.html][Classes and Inheritance]] guide.
 
@@ -157,36 +151,34 @@ UIZE offers a mature and powerful state properties system so that classes can ex
 The state properties system goes beyond regular object properties, and even beyond the newer [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty][properties capabilities of ECMAScript 5]], providing powerful constructs like conformers, optimized onChange handlers, aliases (for deprecating old names), and value changed events using the built-in `event infrastructure`.
 
 EXAMPLE
-.....................................................................................
-function calculateVolume () {
-	this.set ({volume:this.get ('width') * this.get ('depth') * this.get ('height')});
-}
+	function calculateVolume () {
+		this.set ({volume:this.get ('width') * this.get ('depth') * this.get ('height')});
+	}
 
-var Room = Uize.Class.subclass ({
-	stateProperties:{
-		width:{
-			value:10,
-			conformer:function (newValue) {return Uize.constrain (newValue,10,50)},
-			onChange:calculateVolume
-		},
-		depth:{
-			value:10,
-			conformer:function (newValue) {return Uize.constrain (newValue,10,50)},
-			onChange:calculateVolume
-		},
-		height:{
-			value:10,
-			conformer:function (newValue) {return Uize.constrain (newValue,9,25)},
-			onChange:calculateVolume
-		},
-		volume:{
-			onChange:function () {
-				// code to display volume info in UI
+	var Room = Uize.Class.subclass ({
+		stateProperties:{
+			width:{
+				value:10,
+				conformer:function (newValue) {return Uize.constrain (newValue,10,50)},
+				onChange:calculateVolume
+			},
+			depth:{
+				value:10,
+				conformer:function (newValue) {return Uize.constrain (newValue,10,50)},
+				onChange:calculateVolume
+			},
+			height:{
+				value:10,
+				conformer:function (newValue) {return Uize.constrain (newValue,9,25)},
+				onChange:calculateVolume
+			},
+			volume:{
+				onChange:function () {
+					// code to display volume info in UI
+				}
 			}
 		}
-	}
-});
-.....................................................................................
+	});
 
 In this example we're creating a =Room= class with the state properties =width=, =depth=, =height=, and =volume=.
 
@@ -204,28 +196,26 @@ The =calculateVolume= function gets called as though an instance method (ie. wit
 
 Now let's take a look at what happens when we try setting the values of the state properties in a few different situations.
 
-..................................................................................................
-var livingRoom = Room ({width:15,depth:20,height:19}); // initialized with values for properties
-alert (livingRoom.get ('volume'));              // alerts 5700
+	var livingRoom = Room ({width:15,depth:20,height:19}); // initialized with values for properties
+	alert (livingRoom.get ('volume'));              // alerts 5700
 
-livingRoom.set ({width:15,depth:20,height:19}); // no change in properties, volume unchanged
-alert (livingRoom.get ('volume'));              // alerts 5700
+	livingRoom.set ({width:15,depth:20,height:19}); // no change in properties, volume unchanged
+	alert (livingRoom.get ('volume'));              // alerts 5700
 
-livingRoom.set ({width:18,depth:18,height:22}); // volume is only calculated once
-alert (livingRoom.get ('volume'));              // alerts 7128
+	livingRoom.set ({width:18,depth:18,height:22}); // volume is only calculated once
+	alert (livingRoom.get ('volume'));              // alerts 7128
 
-livingRoom.set ({width:55,depth:60,height:30}); // property values are constrained at upper bounds
-alert (livingRoom.get ('width'));               // alerts 50
-alert (livingRoom.get ('depth'));               // alerts 50
-alert (livingRoom.get ('height'));              // alerts 25
-alert (livingRoom.get ('volume'));              // alerts 62500
+	livingRoom.set ({width:55,depth:60,height:30}); // property values are constrained at upper bounds
+	alert (livingRoom.get ('width'));               // alerts 50
+	alert (livingRoom.get ('depth'));               // alerts 50
+	alert (livingRoom.get ('height'));              // alerts 25
+	alert (livingRoom.get ('volume'));              // alerts 62500
 
-livingRoom.set ({width:99,depth:99,height:99}); // properties remain constrained, volume unchanged
-alert (livingRoom.get ('width'));               // alerts 50
-alert (livingRoom.get ('depth'));               // alerts 50
-alert (livingRoom.get ('height'));              // alerts 25
-alert (livingRoom.get ('volume'));              // alerts 62500
-..................................................................................................
+	livingRoom.set ({width:99,depth:99,height:99}); // properties remain constrained, volume unchanged
+	alert (livingRoom.get ('width'));               // alerts 50
+	alert (livingRoom.get ('depth'));               // alerts 50
+	alert (livingRoom.get ('height'));              // alerts 25
+	alert (livingRoom.get ('volume'));              // alerts 62500
 
 There are effectively five different places where we're setting values for the state properties: once as part of instance creation, and then on four subsequent occasions...
 
@@ -240,22 +230,20 @@ There are effectively five different places where we're setting values for the s
 Every state property that is declared for a class gets the benefit of changed events that fire automatically when the value of the state property changes.
 
 EXAMPLE
-....................................................
-var MyClass = Uize.Class.subclass ({
-	stateProperties:{
-		foo:{value:'bar'}
-	}
-});
+	var MyClass = Uize.Class.subclass ({
+		stateProperties:{
+			foo:{value:'bar'}
+		}
+	});
 
-var myClassInstance = MyClass ();
+	var myClassInstance = MyClass ();
 
-myClassInstance.wire (
-	'Changed.foo',
-	function () {alert (myClassInstance.get ('foo'))}
-);
+	myClassInstance.wire (
+		'Changed.foo',
+		function () {alert (myClassInstance.get ('foo'))}
+	);
 
-myClassInstance.set ({foo:'qux'});
-....................................................
+	myClassInstance.set ({foo:'qux'});
 
 In this example, we've created the class =MyClass= and declared that it has a state property named =foo= with an initial value of ='bar'=. After creating an instance of this class, =myClassInstance=, we wire a handler for the =Changed.foo= event, which is an event that will automatically be fired by UIZE whenever the value of the =foo= state property changes. After wiring the handler, we use the =set= method to set the =foo= property to the new value ='qux'=. This causes the =Changed.foo= event to be fired and the =alert= statement is hit, which alerts the new value ='qux'=.
 
@@ -278,14 +266,12 @@ The JavaScript language does not provide a built-in system for event-driven prog
 Such events can be fired (aka published, dispatched, triggered, emitted, etc.) from anywhere in the code in an ad hoc fashion, and listenable events do not need to be registered formally. Multiple handlers can be registered for the same event. Handlers can be registered for events that are never fired, without ill effects. Conversely, events can be dispatched that are never listened for, without ill effects.
 
 EXAMPLE
-....................................................................
-var myWidget = Uize.Widget ();
-myWidget.wire (
-	'My Arbitrary Event',
-	function (event) {alert (event.message)}
-);
-myWidget.fire ({name:'My Arbitrary Event',message:'Hello, world!'});
-....................................................................
+	var myWidget = Uize.Widget ();
+	myWidget.wire (
+		'My Arbitrary Event',
+		function (event) {alert (event.message)}
+	);
+	myWidget.fire ({name:'My Arbitrary Event',message:'Hello, world!'});
 
 In the above example, an instance of the =Uize.Widget= class is created, a handler is registered on an arbitrarily named event (='My Arbitrary Event'=), and then the =fire= instance method is called on the widget in order to fire that event. The event object contains an additional =message= property, whose value is alerted in the handler that was registered for the event.
 
@@ -314,23 +300,21 @@ UIZE provides features to enable Web applications to more easily perform asynchr
 The =Uize.Comm= base class provides a foundation for supporting asynchronous communication regardless of the mechanism employed, which could be a hidden =iframe=, the =XMLHttpRequest= object, or script tags (see [[http://www.wikipedia.org/AJAST_(Programming)][AJAST]]). This base class provides a caching mechanism for requests, a queueing mechanism in order to sequence successive asynchronous requests through a single communication object, and a standard interface for issuing requests. Various subclasses of the =Uize.Comm= base class implement support for different communication mechanisms.
 
 EXAMPLE
-.............................................
-Uize.Comm.Ajax ().request ({
-	url:[
-		'/service/search',
-		{
-			productFilter:'movies',
-			genre:'comedy',
-			sort:'popular',
-			results:100
+	Uize.Comm.Ajax ().request ({
+		url:[
+			'/service/search',
+			{
+				productFilter:'movies',
+				genre:'comedy',
+				sort:'popular',
+				results:100
+			}
+		],
+		returnType:'json',
+		callback:function (searchResults) {
+			// do something with the search results
 		}
-	],
-	returnType:'json',
-	callback:function (searchResults) {
-		// do something with the search results
-	}
-});
-.............................................
+	});
 
 In the above example, an instance of the =Uize.Comm.Ajax= class is created and immediately used to perform an asynchronous request to a hypothetical search service using the =XMLHttpRequest= object. The anonymous function specified for the callback property is executed once the request has successfully executed, and the result from the server is passed as a parameter to the callback function as a JSON object.
 
@@ -344,17 +328,15 @@ While a design goal of the UIZE JavaScript Framework is to support multiple diff
 As such, there exist a number of modules designed specifically to assist with inspection of and manipulation of a Web page's Document Object Model. Among other things, these modules provide static methods for: iterating across a range HTML elements and performing operations on each, finding a set of HTML elements by means of a match expression, getting and setting Cascading Style Sheet (CSS) style properties, insertion of HTML markup, management of DOM event listeners, and querying and modifying coordinates.
 
 EXAMPLE
-...................................
-Uize.Node.setStyle (
-	['myNode1','myNode2','myNode3'],
-	{
-		width:'100px',
-		height:'20px',
-		backgroundColor:'#000',
-		fontFamily:'Times'
-	}
-);
-...................................
+	Uize.Node.setStyle (
+		['myNode1','myNode2','myNode3'],
+		{
+			width:'100px',
+			height:'20px',
+			backgroundColor:'#000',
+			fontFamily:'Times'
+		}
+	);
 
 The above example demonstrates how the =Uize.Node.setStyle= static method of the =Uize.Node= module is used to set the =width=, =height=, =backgroundColor=, and =fontFamily= CSS style properties for the three nodes with the ids "myNode1", "myNode2", and "myNode3".
 
@@ -385,16 +367,14 @@ HTML template functions are called as instance methods of widget instances and c
 Below is an example of an HTML template taken from the [[Uize.Widgets.ProgressBar.Widget][progress bar]] widget...
 
 EXAMPLE
-....................................................................................................
-<div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
-	<div id="<%= this.nodeId ('track') %>" class="<%= this.cssClass ('track') %>">
-		<div class="<%= this.cssClass ('trackBg') %>"></div>
-		<div id="<%= this.nodeId ('full') %>" class="<%= this.cssClass ('trackFull') %>"></div>
-		<div id="<%= this.nodeId ('empty') %>" class="<%= this.cssClass ('trackEmpty') %>"></div>
-		<div id="<%= this.nodeId ('statusText') %>" class="<%= this.cssClass ('statusText') %>"></div>
+	<div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
+		<div id="<%= this.nodeId ('track') %>" class="<%= this.cssClass ('track') %>">
+			<div class="<%= this.cssClass ('trackBg') %>"></div>
+			<div id="<%= this.nodeId ('full') %>" class="<%= this.cssClass ('trackFull') %>"></div>
+			<div id="<%= this.nodeId ('empty') %>" class="<%= this.cssClass ('trackEmpty') %>"></div>
+			<div id="<%= this.nodeId ('statusText') %>" class="<%= this.cssClass ('statusText') %>"></div>
+		</div>
 	</div>
-</div>
-....................................................................................................
 
 ### CSS Templates
 
@@ -405,53 +385,51 @@ CSS templates can require JavaScript modules through use of the =@required= dire
 Below is an example of a CSS template taken from the [[Uize.Widgets.ColorSwatch.Widget][color swatch]] widget...
 
 EXAMPLE
-.................................................................
-<%@ required ('Uize.Widgets.CssUtil'); %>
-<%
-	var
-		_cssUtil = Uize.Widgets.CssUtil,
-		_borderWidth = _cssUtil.box.border.width
-	;
-%>
-.`` {
-	display: inline-block;
-	border-width: <%= _borderWidth %>px;
-	border-style: solid;
-	border-color: #ccc #999 #999 #ccc;
-	width: 20px;
-	height: 20px;
-}
-
-/*** different sizes ***/
-<%
-	var _sizes = _cssUtil.sizes;
-	function _sizeStyleProperties (_sizeName,_horizontalPadding) {
+	<%@ required ('Uize.Widgets.CssUtil'); %>
+	<%
 		var
-			_size = _sizes [_sizeName],
-			_widthHeight = _size.outer - _borderWidth * 2
+			_cssUtil = Uize.Widgets.CssUtil,
+			_borderWidth = _cssUtil.box.border.width
 		;
-		%>
-		width: <%= _widthHeight %>px;
-		height: <%= _widthHeight %>px;
-		<%
-	}
-%>
-	.`tiny` {
-		<% _sizeStyleProperties ('tiny') %>
-	}
-
-	.`small` {
-		<% _sizeStyleProperties ('small') %>
+	%>
+	.`` {
+		display: inline-block;
+		border-width: <%= _borderWidth %>px;
+		border-style: solid;
+		border-color: #ccc #999 #999 #ccc;
+		width: 20px;
+		height: 20px;
 	}
 
-	.`medium` {
-		<% _sizeStyleProperties ('medium') %>
-	}
+	/*** different sizes ***/
+	<%
+		var _sizes = _cssUtil.sizes;
+		function _sizeStyleProperties (_sizeName,_horizontalPadding) {
+			var
+				_size = _sizes [_sizeName],
+				_widthHeight = _size.outer - _borderWidth * 2
+			;
+			%>
+			width: <%= _widthHeight %>px;
+			height: <%= _widthHeight %>px;
+			<%
+		}
+	%>
+		.`tiny` {
+			<% _sizeStyleProperties ('tiny') %>
+		}
 
-	.`large` {
-		<% _sizeStyleProperties ('large') %>
-	}
-.................................................................
+		.`small` {
+			<% _sizeStyleProperties ('small') %>
+		}
+
+		.`medium` {
+			<% _sizeStyleProperties ('medium') %>
+		}
+
+		.`large` {
+			<% _sizeStyleProperties ('large') %>
+		}
 
 Lots of Built-in Widgets
 ------------------------
@@ -484,17 +462,15 @@ UIZE provides facilities (in =Uize.Widget=) to ease [[http://en.wikipedia.org/wi
 The =localized= state property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The =localize= instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.
 
 EXAMPLE
-..........................................................................
-myWidget = Uize.Widget ({
-	localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}
-});
-alert (
-	myWidget.localize (
-		'welcomeMessage',
-		{firstName:'Chris',state:'California',country:'USA'}
-	)
-);
-..........................................................................
+	myWidget = Uize.Widget ({
+		localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}
+	});
+	alert (
+		myWidget.localize (
+			'welcomeMessage',
+			{firstName:'Chris',state:'California',country:'USA'}
+		)
+	);
 
 In the above example, an instance of the =Uize.Widget= class is created, specifying a =localized= hash that contains just one localized string template named =welcomeMessage=. This string contains the substitution tokens ={firstName}=, ={state}=, and ={country}=. The =localize= instance method is called on the widget instance, with parameters specifying the name of the localized string to retrieve and dynamic data that should be substituted into its tokens. The result is then displayed to the user with the =alert= statement. Typically, localization will occur inside the implementation for a widget class, so this example is purely for illustrating the syntax.
 
@@ -532,36 +508,32 @@ This system allows for the use of programmatic logic and JavaScript control stru
 The template engine is implemented in the =Uize.Template= module, which provides a means for compiling a source template into a more performant JavaScript function. Once compiled into JavaScript functions, JavaScript templates can be used to generate text output for a variety of purposes, including, for example, the generation of HTML markup for widgets, the generation of complete HTML documents as part of a Web project build process, and the generation of RSS documents from a data source.
 
 EXAMPLE
-................................................................................
-var helloWorldTemplate = Uize.Template.compile (
-	'<% for (var i = 0; i < input.repeats; i++) { %>' +
-	'<p><% .message %></p>\n' +
-	'<% } %>'
-);
+	var helloWorldTemplate = Uize.Template.compile (
+		'<% for (var i = 0; i < input.repeats; i++) { %>' +
+		'<p><% .message %></p>\n' +
+		'<% } %>'
+	);
 
-var myTemplateOutput = helloWorldTemplate ({repeats:5,message:'Hello World !'});
+	var myTemplateOutput = helloWorldTemplate ({repeats:5,message:'Hello World !'});
 
-/* myTemplateOutput will now have the value...
+	/* myTemplateOutput will now have the value...
 
-<p>Hello World !</p>
-<p>Hello World !</p>
-<p>Hello World !</p>
-<p>Hello World !</p>
-<p>Hello World !</p>
+	<p>Hello World !</p>
+	<p>Hello World !</p>
+	<p>Hello World !</p>
+	<p>Hello World !</p>
+	<p>Hello World !</p>
 
-*/
-................................................................................
+	*/
 
 In the above example, a JavaScript template in a string literal is being compiled to a JavaScript function, and then that function is being called with input data that is supplied to the template function. The result is assigned to a variable.
 
 In practice, JavaScript templates are contained inside separate files with the extension =.jst= in order that the template source not be subject to a further level of escaping within JavaScript string literals.
 
 AS A JST FILE
-...............................................
-<% for (var i = 0; i < input.repeats; i++) { %>
-<p><% .message %></p>
-<% } %>
-...............................................
+	<% for (var i = 0; i < input.repeats; i++) { %>
+	<p><% .message %></p>
+	<% } %>
 
 JavaScript template files can be compiled into JavaScript modules with the use of JavaScript build scripts, and such modules can then be required as dependencies and treated as regular JavaScript modules. Alternatively, JavaScript template source can be embedded in non-visible elements of a Web page, such as a hidden =textarea= tag or a =script= tag with a mime type of =text/jst=, and then retrieved and compiled by client code when the document loads.
 
@@ -575,16 +547,14 @@ UIZE provides powerful features to support slick animation effects, with easing,
 Effects and animation in the UIZE JavaScript Framework are achieved through use of a suite of associated modules. The =Uize.Fade= module provides the underpinnings of time-based animation and compound value interpolation, the =Uize.Fade.xFactory= extension module extends the =Uize.Fade= class with factory methods for creating, starting, and managing fades in a fade pool, and the =Uize.Fx= module provides static methods for initiating fades of CSS style properties.
 
 EXAMPLE
-.......................................................................................
-// fade from thin border/thick padding to thick border/thin padding over 1/4 second
-Uize.Fx.fadeStyle ('myNode',{borderWidth:1,padding:20},{borderWidth:20,padding:1},250);
+	// fade from thin border/thick padding to thick border/thin padding over 1/4 second
+	Uize.Fx.fadeStyle ('myNode',{borderWidth:1,padding:20},{borderWidth:20,padding:1},250);
 
-// fade from current colors to white text on black background over two seconds
-Uize.Fx.fadeStyle ('myNode',null,{color:'#fff',backgroundColor:'#000'},2000);
+	// fade from current colors to white text on black background over two seconds
+	Uize.Fx.fadeStyle ('myNode',null,{color:'#fff',backgroundColor:'#000'},2000);
 
-// fade font size from 30px back to current size over a half second
-Uize.Fx.fadeStyle ('myNode',{fontSize:30},null,500);
-.......................................................................................
+	// fade font size from 30px back to current size over a half second
+	Uize.Fx.fadeStyle ('myNode',{fontSize:30},null,500);
 
 To add some pizazz to animations, the UIZE JavaScript Framework provides the =Uize.Curve=, =Uize.Curve.Mod=, and =Uize.Curve.Rubber= modules that let you stray from the bland world of linear animations and into an exotic world of animations driven by arbitrary curve functions, with built-in support for easing curves as well as curves that emulate the complex properties of motion, letting you achieve effects like bounce, springiness, wobble, elasticity, etc. Beyond the built-ins, you have the freedom to roll your own curve functions in order to achieve some of the craziest motion effects you could imagine.
 
@@ -600,39 +570,37 @@ Document structure in this format is controlled through indentation, much like p
 The following example shows the documentation for the =to= instance method of the =Uize.Color= module. Notice how the documentation comment is indicated with the question mark immediately following the comment begin characters =/*=.
 
 EXAMPLE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/*?
-	Instance Methods
-		to
-			Returns the current color of the instance, encoded to the specified format.
+	/*?
+		Instance Methods
+			to
+				Returns the current color of the instance, encoded to the specified format.
 
-			SYNTAX
-			.........................................
-			encodedColor = colorOBJ.to (encodingSTR);
-			.........................................
+				SYNTAX
+				.........................................
+				encodedColor = colorOBJ.to (encodingSTR);
+				.........................................
 
-			The =encodingSTR= parameter supports a wide variety of different `color encodings`.
+				The =encodingSTR= parameter supports a wide variety of different `color encodings`.
 
-			EXAMPLES
-			.............................................................................
-			var fuchsia = Uize.Color ('fuchsia');
-			fuchsia.to ('color');       // produces a new Uize.Color object
-			fuchsia.to ('hex');         // produces 'ff00ff'
-			fuchsia.to ('#hex');        // produces '#ff00ff'
-			fuchsia.to ('name');        // produces 'fuchsia'
-			fuchsia.to ('RGB array');   // produces [255,0,255]
-			fuchsia.to ('RGB int');     // produces 16711935
-			fuchsia.to ('RGB object');  // produces {red:255,green:0,blue:255}
-			fuchsia.to ('RGB string');  // produces 'rgb(255,0,255)'
-			fuchsia.to ('HSL array');   // produces [300,100,50]
-			fuchsia.to ('HSL object');  // produces {hue:300,saturation:100,lightness:50}
-			fuchsia.to ('HSL string');  // produces 'hsl(300,100,50)'
-			.............................................................................
+				EXAMPLES
+				.............................................................................
+				var fuchsia = Uize.Color ('fuchsia');
+				fuchsia.to ('color');       // produces a new Uize.Color object
+				fuchsia.to ('hex');         // produces 'ff00ff'
+				fuchsia.to ('#hex');        // produces '#ff00ff'
+				fuchsia.to ('name');        // produces 'fuchsia'
+				fuchsia.to ('RGB array');   // produces [255,0,255]
+				fuchsia.to ('RGB int');     // produces 16711935
+				fuchsia.to ('RGB object');  // produces {red:255,green:0,blue:255}
+				fuchsia.to ('RGB string');  // produces 'rgb(255,0,255)'
+				fuchsia.to ('HSL array');   // produces [300,100,50]
+				fuchsia.to ('HSL object');  // produces {hue:300,saturation:100,lightness:50}
+				fuchsia.to ('HSL string');  // produces 'hsl(300,100,50)'
+				.............................................................................
 
-			NOTES
-			- see the related =Uize.Color.to= static method
-*/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				NOTES
+				- see the related =Uize.Color.to= static method
+	*/
 
 For a more in-depth discussion of this documentation system, consult the guide [[guides/javascript-documentation-system.html][JavaScript Documentation System]].
 
@@ -683,48 +651,44 @@ Obfuscation that is provided by the Scruncher is an artifact of the code compres
 The two examples below show first an extract of JavaScript code, and second the compressed and obfuscated form of that code. Notice how, in the compressed version of the code, private identifiers that were prefixed with an underscore in the source code have been reduced down to enumerated forms (eg. =_a=, =_b=, =_c=). For the sake of readability in this example, the =LineCompacting= setting is turned off for the compressed code.
 
 SOURCE CODE
-..............................................................................................
-/*ScruncherSettings Mappings="=" LineCompacting="FALSE"*/
+	/*ScruncherSettings Mappings="=" LineCompacting="FALSE"*/
 
-_package.toAbsolute = function (_baseUrl,_url) {
-	if (_package.from (_url).fullDomain) return _url;
-		// return early with URL to resolve against base, if URL is absolute
+	_package.toAbsolute = function (_baseUrl,_url) {
+		if (_package.from (_url).fullDomain) return _url;
+			// return early with URL to resolve against base, if URL is absolute
 
-	var _result = _baseUrl.slice (0,_baseUrl.search (/[\/\\][^\/\\]*$/) + 1);
-		// remove everything after the last slash, but keep the last slash
-	while (_url) {
-		var
-			_slashPos = (_url.search (/[\/\\]/) + 1 || _url.length + 1) - 1,
-			_folderName = _url.slice (0,_slashPos)
-		;
-		_result = _folderName == '..'
-			? _result.slice (0,_result.search (/[\/\\][^\/\\]*[\/\\]$/) + 1) // remove end folder
-			: _result + _folderName + _url.charAt (_slashPos)
-		;
-		_url = _url.slice (_slashPos + 1);
-	}
-	return _result;
-};
-..............................................................................................
+		var _result = _baseUrl.slice (0,_baseUrl.search (/[\/\\][^\/\\]*$/) + 1);
+			// remove everything after the last slash, but keep the last slash
+		while (_url) {
+			var
+				_slashPos = (_url.search (/[\/\\]/) + 1 || _url.length + 1) - 1,
+				_folderName = _url.slice (0,_slashPos)
+			;
+			_result = _folderName == '..'
+				? _result.slice (0,_result.search (/[\/\\][^\/\\]*[\/\\]$/) + 1) // remove end folder
+				: _result + _folderName + _url.charAt (_slashPos)
+			;
+			_url = _url.slice (_slashPos + 1);
+		}
+		return _result;
+	};
 
 SCRUNCHED CODE
-..................................................
-_a.toAbsolute=function(_b,_c){
-if(_a.from(_c).fullDomain)return _c;
-var _d=_b.slice(0,_b.search(/[\/\\][^\/\\]*$/)+1);
-while(_c){
-var
- _e=(_c.search(/[\/\\]/)+1||_c.length+1)-1,
-_f=_c.slice(0,_e)
-;
-_d=_f=='..'
-?_d.slice(0,_d.search(/[\/\\][^\/\\]*[\/\\]$/)+1)
-:_d+_f+_c.charAt(_e)
-;
-_c=_c.slice(_e+1);
-}
-return _d;};
-..................................................
+	_a.toAbsolute=function(_b,_c){
+	if(_a.from(_c).fullDomain)return _c;
+	var _d=_b.slice(0,_b.search(/[\/\\][^\/\\]*$/)+1);
+	while(_c){
+	var
+	 _e=(_c.search(/[\/\\]/)+1||_c.length+1)-1,
+	_f=_c.slice(0,_e)
+	;
+	_d=_f=='..'
+	?_d.slice(0,_d.search(/[\/\\][^\/\\]*[\/\\]$/)+1)
+	:_d+_f+_c.charAt(_e)
+	;
+	_c=_c.slice(_e+1);
+	}
+	return _d;};
 
 For a more in-depth discussion of the Scruncher code compression system, consult the guide [[guides/all-about-scrunching.html][All About Scrunching]].
 
