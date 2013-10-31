@@ -62,13 +62,13 @@ If you copy-and-paste the above code into some HTML page (maybe you've got one y
 
 Rest assured, when it comes time to get a project ready for production, UIZE provides ways to build JavaScript packages using the same dependency resolution system so that you can reduce the number of HTTP requests made by your application and thereby improve its load time.
 
-You can either rely on the built-in UIZE support for building JavaScript library files, or you can craft your own more sophisticated packager using the raw build methods for tracing dependencies of modules. And, because UIZE supports `all kinds of modules`, you can even build your `HTML templates` and `CSS templates` for UI widgets into the same JavaScript package as your JavaScript logic.
+You can either rely on the built-in UIZE support for building JavaScript library files, or you can craft your own more sophisticated packager using the raw build methods for tracing dependencies of modules. And, because UIZE supports all kinds of modules, you can even build your HTML templates and CSS templates for UI widgets into the same JavaScript package as your JavaScript logic.
 
 ### All Kinds of Modules
 
 Because UIZE's module mechanism is very generic in nature (you can define anything in your =builder= function), it lends itself to being used as a wrapper for all types of content.
 
-In the UIZE widgets, for example, JavaScript modules are used to wrap `HTML templates` and `CSS templates`, allowing all the materials needed by a widget to be packaged into the same file (even the images if you implement [[http://en.wikipedia.org/wiki/Base64][base64 encoding]] for inlining of images in the wrapped CSS modules).
+In the UIZE widgets, for example, JavaScript modules are used to wrap HTML templates and CSS templates, allowing all the materials needed by a widget to be packaged into the same file (even the images if you implement [[http://en.wikipedia.org/wiki/Base64][base64 encoding]] for inlining of images in the wrapped CSS modules).
 
 Different flavors of JavaScript modules include...
 
@@ -79,12 +79,12 @@ Different flavors of JavaScript modules include...
 - HTML template modules
 - JavaScript library modules
 
-What's more, using the `powerful build system` and the `development server`, you can create your own URL handlers for new types of source files that should be ultimately wrapped in the form of JavaScript modules.
+What's more, using the powerful build system and the development server, you can create your own URL handlers for new types of source files that should be ultimately wrapped in the form of JavaScript modules.
 
 Basic Utility Belt Features
 ---------------------------
 
-UIZE provides a bunch of utility belt features right in the =Uize= base module, so you get that in addition to the `modules & dependency resolution` system.
+UIZE provides a bunch of utility belt features right in the =Uize= base module, so you get that in addition to the modules & dependency resolution system.
 
 Utility belt features include...
 
@@ -108,7 +108,7 @@ Instead of throwing everything including the kitchen sink into the =Uize= base m
 Classes, Inheritance, OOP
 -------------------------
 
-UIZE makes it dead easy to create classes that come with support for events (thanks to a built-in `event infrastructure`) and `state properties and binding`.
+UIZE makes it dead easy to create classes that come with support for events (thanks to a built-in event infrastructure) and state properties and binding.
 
 ### Creating a Class
 
@@ -148,7 +148,7 @@ State Properties and Binding
 
 UIZE offers a mature and powerful state properties system so that classes can expose a state interface for their instances.
 
-The state properties system goes beyond regular object properties, and even beyond the newer [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty][properties capabilities of ECMAScript 5]], providing powerful constructs like conformers, optimized onChange handlers, aliases (for deprecating old names), and value changed events using the built-in `event infrastructure`.
+The state properties system goes beyond regular object properties, and even beyond the newer [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty][properties capabilities of ECMAScript 5]], providing powerful constructs like conformers, optimized onChange handlers, aliases (for deprecating old names), and value changed events using the built-in event infrastructure.
 
 EXAMPLE
 	function calculateVolume () {
@@ -356,7 +356,7 @@ For a more in-depth discussion of UIZE's widget framework, consult the guide [[g
 HTML & CSS Templating
 ---------------------
 
-The versatile `templating system` employed by UIZE is relied upon heavily for the `HTML templates` and `CSS templates` that are used by encapsulated widgets.
+The versatile templating system employed by UIZE is relied upon heavily for the HTML templates and CSS templates that are used by encapsulated widgets.
 
 ### HTML Templates
 
@@ -378,7 +378,7 @@ EXAMPLE
 
 ### CSS Templates
 
-CSS templates are JavaScript templates that are compiled to CSS files by the `build system`, and additionally wrapped as CSS modules that can be required as dependencies of widget modules.
+CSS templates are JavaScript templates that are compiled to CSS files by the build system, and additionally wrapped as CSS modules that can be required as dependencies of widget modules.
 
 CSS templates can require JavaScript modules through use of the =@required= directive. This allows CSS templates to declare dependencies on modules that define shared values for styles that are to be common across multiple different CSS files, as well as functions from CSS utility modules. While not the same as systems like [[http://lesscss.org][LESS]] and [[http://sass-lang.com][SASS]], UIZE's CSS templates system can be used to accomplish a lot of the same objectives of factoring out shared theme-wide styles and creating reusable functions for simplifying the creation of more complex style rules.
 
@@ -446,7 +446,7 @@ The built-in widget modules are divided into two main groups...
 To preview some of the many built-in widgets, you can take a look at...
 
 - [[examples/widget-visual-samplers.html?namespace=Uize.Widgets][Widget Visual Samplers]] - this provides a way to get a quick sample of some of the features of the encapsulated widgets (the ones with their own HTML and CSS)
-- [[javascript-feature-tours.html?tour=widget][Widget Tour]] - this will take you on a page-by-page tour of many of the widget example pages included as part of the `extensive documentation`
+- [[javascript-feature-tours.html?tour=widget][Widget Tour]] - this will take you on a page-by-page tour of many of the widget example pages included as part of the extensive documentation
 
 ### Make Your Own
 
@@ -623,7 +623,7 @@ The build system takes care of the following responsibilities...
 
 The build system has the following compelling features...
 
-- =integrated with development server= - the build system integrates with the `development server` that runs in NodeJS and takes care of automatically rebuilding any files that have become invalidated by changes made to any source files from which they may be derived - directly or indirectly
+- =integrated with development server= - the build system integrates with the development server that runs in NodeJS and takes care of automatically rebuilding any files that have become invalidated by changes made to any source files from which they may be derived - directly or indirectly
 - =builds incrementally= - the build system can build files incrementally as needed and based upon changes that may invalidate one or more built files
 - =dependency based= - the build system is entirely dependency based, so there's no more worries about things being out-of-date because you couldn't remember the right set of build steps - all the dependencies for a build product are known and can be traced recursively, so all build steps necessary to update a file are performed in the correct order, and only as much work as is necessary is done
 - =one-to-many, many-to-one= - the build system supports one-to-many and many-to-one build relationships, so one file can be involved as a dependency in building many other files (eg. a source JavaScript file is used for building a compressed JavaScript file, a reference documentation file, a source code viewer HTML file, etc.), and many files can be used in building a single file (eg. a JavaScript source file and a documentation template file are involved in building a reference documentation HTML file)
@@ -697,14 +697,14 @@ Dev Server (NodeJS)
 
 UIZE provides a NodeJS based development server that allows a project that involves many different types of built files to be developed without having to constantly run build scripts between changes.
 
-The development server utilizes the `powerful build system` to build derived files whenever they are requested and are not current (ie. some of their dependencies have been modified since the last time they were built). The development server is used in the development of the UIZE framework, itself, and it can be used for any project for which static files will be generated as part of a build process.
+The development server utilizes the powerful build system to build derived files whenever they are requested and are not current (ie. some of their dependencies have been modified since the last time they were built). The development server is used in the development of the UIZE framework, itself, and it can be used for any project for which static files will be generated as part of a build process.
 
 With the right configuration of your application server, you can pull all the static files that would be built as part of your build process from the development server running on your localhost. That way, you get the best of both worlds - you can keep using your existing server platform while using the UIZE development server for pre-processing of source code for static files.
 
 Extensive Documentation
 ------------------------
 
-UIZE comes with extensive documentation, thanks in large parts to the built-in SimpleDoc `documentation system` and the `powerful build system`.
+UIZE comes with extensive documentation, thanks in large parts to the built-in SimpleDoc documentation system and the powerful build system.
 
 The UIZE documentation includes...
 
