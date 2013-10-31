@@ -151,6 +151,7 @@ UIZE offers a mature and powerful state properties system so that classes can ex
 The state properties system goes beyond regular object properties, and even beyond the newer [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty][properties capabilities of ECMAScript 5]], providing powerful constructs like conformers, optimized onChange handlers, aliases (for deprecating old names), and value changed events using the built-in event infrastructure.
 
 EXAMPLE
+
 	function calculateVolume () {
 		this.set ({volume:this.get ('width') * this.get ('depth') * this.get ('height')});
 	}
@@ -230,6 +231,7 @@ There are effectively five different places where we're setting values for the s
 Every state property that is declared for a class gets the benefit of changed events that fire automatically when the value of the state property changes.
 
 EXAMPLE
+
 	var MyClass = Uize.Class.subclass ({
 		stateProperties:{
 			foo:{value:'bar'}
@@ -266,6 +268,7 @@ The JavaScript language does not provide a built-in system for event-driven prog
 Such events can be fired (aka published, dispatched, triggered, emitted, etc.) from anywhere in the code in an ad hoc fashion, and listenable events do not need to be registered formally. Multiple handlers can be registered for the same event. Handlers can be registered for events that are never fired, without ill effects. Conversely, events can be dispatched that are never listened for, without ill effects.
 
 EXAMPLE
+
 	var myWidget = Uize.Widget ();
 	myWidget.wire (
 		'My Arbitrary Event',
@@ -300,6 +303,7 @@ UIZE provides features to enable Web applications to more easily perform asynchr
 The =Uize.Comm= base class provides a foundation for supporting asynchronous communication regardless of the mechanism employed, which could be a hidden =iframe=, the =XMLHttpRequest= object, or script tags (see [[http://www.wikipedia.org/AJAST_(Programming)][AJAST]]). This base class provides a caching mechanism for requests, a queueing mechanism in order to sequence successive asynchronous requests through a single communication object, and a standard interface for issuing requests. Various subclasses of the =Uize.Comm= base class implement support for different communication mechanisms.
 
 EXAMPLE
+
 	Uize.Comm.Ajax ().request ({
 		url:[
 			'/service/search',
@@ -328,6 +332,7 @@ While a design goal of the UIZE JavaScript Framework is to support multiple diff
 As such, there exist a number of modules designed specifically to assist with inspection of and manipulation of a Web page's Document Object Model. Among other things, these modules provide static methods for: iterating across a range HTML elements and performing operations on each, finding a set of HTML elements by means of a match expression, getting and setting Cascading Style Sheet (CSS) style properties, insertion of HTML markup, management of DOM event listeners, and querying and modifying coordinates.
 
 EXAMPLE
+
 	Uize.Node.setStyle (
 		['myNode1','myNode2','myNode3'],
 		{
@@ -367,6 +372,7 @@ HTML template functions are called as instance methods of widget instances and c
 Below is an example of an HTML template taken from the [[Uize.Widgets.ProgressBar.Widget][progress bar]] widget...
 
 EXAMPLE
+
 	<div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
 		<div id="<%= this.nodeId ('track') %>" class="<%= this.cssClass ('track') %>">
 			<div class="<%= this.cssClass ('trackBg') %>"></div>
@@ -385,6 +391,7 @@ CSS templates can require JavaScript modules through use of the =@required= dire
 Below is an example of a CSS template taken from the [[Uize.Widgets.ColorSwatch.Widget][color swatch]] widget...
 
 EXAMPLE
+
 	<%@ required ('Uize.Widgets.CssUtil'); %>
 	<%
 		var
@@ -462,6 +469,7 @@ UIZE provides facilities (in =Uize.Widget=) to ease [[http://en.wikipedia.org/wi
 The =localized= state property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The =localize= instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.
 
 EXAMPLE
+
 	myWidget = Uize.Widget ({
 		localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}
 	});
@@ -508,6 +516,7 @@ This system allows for the use of programmatic logic and JavaScript control stru
 The template engine is implemented in the =Uize.Template= module, which provides a means for compiling a source template into a more performant JavaScript function. Once compiled into JavaScript functions, JavaScript templates can be used to generate text output for a variety of purposes, including, for example, the generation of HTML markup for widgets, the generation of complete HTML documents as part of a Web project build process, and the generation of RSS documents from a data source.
 
 EXAMPLE
+
 	var helloWorldTemplate = Uize.Template.compile (
 		'<% for (var i = 0; i < input.repeats; i++) { %>' +
 		'<p><% .message %></p>\n' +
@@ -531,6 +540,7 @@ In the above example, a JavaScript template in a string literal is being compile
 In practice, JavaScript templates are contained inside separate files with the extension =.jst= in order that the template source not be subject to a further level of escaping within JavaScript string literals.
 
 AS A JST FILE
+
 	<% for (var i = 0; i < input.repeats; i++) { %>
 	<p><% .message %></p>
 	<% } %>
@@ -547,6 +557,7 @@ UIZE provides powerful features to support slick animation effects, with easing,
 Effects and animation in the UIZE JavaScript Framework are achieved through use of a suite of associated modules. The =Uize.Fade= module provides the underpinnings of time-based animation and compound value interpolation, the =Uize.Fade.xFactory= extension module extends the =Uize.Fade= class with factory methods for creating, starting, and managing fades in a fade pool, and the =Uize.Fx= module provides static methods for initiating fades of CSS style properties.
 
 EXAMPLE
+
 	// fade from thin border/thick padding to thick border/thin padding over 1/4 second
 	Uize.Fx.fadeStyle ('myNode',{borderWidth:1,padding:20},{borderWidth:20,padding:1},250);
 
@@ -570,6 +581,7 @@ Document structure in this format is controlled through indentation, much like p
 The following example shows the documentation for the =to= instance method of the =Uize.Color= module. Notice how the documentation comment is indicated with the question mark immediately following the comment begin characters =/*=.
 
 EXAMPLE
+
 	/*?
 		Instance Methods
 			to
@@ -651,6 +663,7 @@ Obfuscation that is provided by the Scruncher is an artifact of the code compres
 The two examples below show first an extract of JavaScript code, and second the compressed and obfuscated form of that code. Notice how, in the compressed version of the code, private identifiers that were prefixed with an underscore in the source code have been reduced down to enumerated forms (eg. =_a=, =_b=, =_c=). For the sake of readability in this example, the =LineCompacting= setting is turned off for the compressed code.
 
 SOURCE CODE
+
 	/*ScruncherSettings Mappings="=" LineCompacting="FALSE"*/
 
 	_package.toAbsolute = function (_baseUrl,_url) {
@@ -674,6 +687,7 @@ SOURCE CODE
 	};
 
 SCRUNCHED CODE
+
 	_a.toAbsolute=function(_b,_c){
 	if(_a.from(_c).fullDomain)return _c;
 	var _d=_b.slice(0,_b.search(/[\/\\][^\/\\]*$/)+1);
