@@ -19,67 +19,69 @@ UIZE implements an elegant and clean system for defining JavaScript modules of m
 
 Defining a module in UIZE is as simple as calling the =Uize.module= method, as follows...
 
-........................................
-Uize.module ({
-	name:'MyNamespace.MyModule',
-	required:[
-		'Uize.Color',
-		'Uize.Data.Matches',
-		'MyNamespace.MyOtherModule'
-	],
-	builder:function () {
-		var myModule;
+	Uize.module ({
+		name:'MyNamespace.MyModule',
+		required:[
+			'Uize.Color',
+			'Uize.Data.Matches',
+			'MyNamespace.MyOtherModule'
+		],
+		builder:function () {
+			var myModule;
 
-		// do stuff to initialize myModule
-		// ... ... ... ... ... ... ...
-		// ... ... ... ... ... ... ...
+			// do stuff to initialize myModule
+			// ... ... ... ... ... ... ...
+			// ... ... ... ... ... ... ...
 
-		return myModule
-	}
-});
-........................................
+			return myModule
+		}
+	});
 
-Dependency Resolution
-	The way that the module system works, any modules that are declared as direct dependencies in the =required= property of the module definition are loaded first.
+### Dependency Resolution
 
-	The =builder= function for the module is called only once all dependencies - direct or indirect - are loaded. This means that you never have to worry about dependencies of other modules and figuring out comprehensive lists of all the code that a page might need. If you follow the practice of always declaring just your own direct dependencies for the module you're working on, then UIZE does all the recursive dependency tracing for you and the module loader takes care of loading what's still needed (not already loaded because something else had needed it).
+The way that the module system works, any modules that are declared as direct dependencies in the =required= property of the module definition are loaded first.
 
-Built Into the Base Module
-	The system for loading module dependencies is built into the base =Uize.js= file, so all that's needed to bootstrap a page for basic development is to add a script tag to load that file.
+The =builder= function for the module is called only once all dependencies - direct or indirect - are loaded. This means that you never have to worry about dependencies of other modules and figuring out comprehensive lists of all the code that a page might need. If you follow the practice of always declaring just your own direct dependencies for the module you're working on, then UIZE does all the recursive dependency tracing for you and the module loader takes care of loading what's still needed (not already loaded because something else had needed it).
 
-	.................................................................
-	<script src="http://www.uize.com/js/Uize.js"></script>
+### Built Into the Base Module
 
-	<script type="text/javascript">
-		Uize.require (
-			'Uize.Widgets.Calculator.Widget',
-			function () {Uize.Widgets.Calculator.Widget ().insertUi ()}
-		);
-	</script>
-	.................................................................
+The system for loading module dependencies is built into the base =Uize.js= file, so all that's needed to bootstrap a page for basic development is to add a script tag to load that file.
 
-	If you copy-and-paste the above code into some HTML page (maybe you've got one you're working on), you will see a glorious calculator widget added to the page. Because of the highly modular nature of the UIZE codebase, there's actually a bunch of individual modules that will be loaded. All this is taken care of for you.
+.................................................................
+<script src="http://www.uize.com/js/Uize.js"></script>
 
-Packaging
-	Rest assured, when it comes time to get a project ready for production, UIZE provides ways to build JavaScript packages using the same dependency resolution system so that you can reduce the number of HTTP requests made by your application and thereby improve its load time.
+<script type="text/javascript">
+	Uize.require (
+		'Uize.Widgets.Calculator.Widget',
+		function () {Uize.Widgets.Calculator.Widget ().insertUi ()}
+	);
+</script>
+.................................................................
 
-	You can either rely on the built-in UIZE support for building JavaScript library files, or you can craft your own more sophisticated packager using the raw build methods for tracing dependencies of modules. And, because UIZE supports `all kinds of modules`, you can even build your `HTML templates` and `CSS templates` for UI widgets into the same JavaScript package as your JavaScript logic.
+If you copy-and-paste the above code into some HTML page (maybe you've got one you're working on), you will see a glorious calculator widget added to the page. Because of the highly modular nature of the UIZE codebase, there's actually a bunch of individual modules that will be loaded. All this is taken care of for you.
 
-All Kinds of Modules
-	Because UIZE's module mechanism is very generic in nature (you can define anything in your =builder= function), it lends itself to being used as a wrapper for all types of content.
+### Packaging
 
-	In the UIZE widgets, for example, JavaScript modules are used to wrap `HTML templates` and `CSS templates`, allowing all the materials needed by a widget to be packaged into the same file (even the images if you implement [[http://en.wikipedia.org/wiki/Base64][base64 encoding]] for inlining of images in the wrapped CSS modules).
+Rest assured, when it comes time to get a project ready for production, UIZE provides ways to build JavaScript packages using the same dependency resolution system so that you can reduce the number of HTTP requests made by your application and thereby improve its load time.
 
-	Different flavors of JavaScript modules include...
+You can either rely on the built-in UIZE support for building JavaScript library files, or you can craft your own more sophisticated packager using the raw build methods for tracing dependencies of modules. And, because UIZE supports `all kinds of modules`, you can even build your `HTML templates` and `CSS templates` for UI widgets into the same JavaScript package as your JavaScript logic.
 
-	- class modules
-	- package modules
-	- JSON / data modules
-	- CSS template modules
-	- HTML template modules
-	- JavaScript library modules
+### All Kinds of Modules
 
-	What's more, using the `powerful build system` and the `development server`, you can create your own URL handlers for new types of source files that should be ultimately wrapped in the form of JavaScript modules.
+Because UIZE's module mechanism is very generic in nature (you can define anything in your =builder= function), it lends itself to being used as a wrapper for all types of content.
+
+In the UIZE widgets, for example, JavaScript modules are used to wrap `HTML templates` and `CSS templates`, allowing all the materials needed by a widget to be packaged into the same file (even the images if you implement [[http://en.wikipedia.org/wiki/Base64][base64 encoding]] for inlining of images in the wrapped CSS modules).
+
+Different flavors of JavaScript modules include...
+
+- class modules
+- package modules
+- JSON / data modules
+- CSS template modules
+- HTML template modules
+- JavaScript library modules
+
+What's more, using the `powerful build system` and the `development server`, you can create your own URL handlers for new types of source files that should be ultimately wrapped in the form of JavaScript modules.
 
 Basic Utility Belt Features
 ---------------------------
@@ -95,51 +97,55 @@ Utility belt features include...
 - *dummy functions*, like =Uize.nop=, =Uize.returnFalse=, =Uize.returnTrue=, and =Uize.returnX=
 - *general utility methods*, like =Uize.eval=, =Uize.global=, =Uize.noNew=, =Uize.now=, =Uize.quarantine=, etc.
 
-Avoiding Bloat
-	While it's nice to have some of these types of utility methods always close at hand, we don't want the =Uize= base module to become bloatware and so we haven't added some of the more esoteric utilities that you might find in some other popular toolbelt JavaScript libraries.
+### Avoiding Bloat
 
-	The utility methods that make their way into the =Uize= base module are given careful consideration, and are often given the greenlight because they are needed by other core modules that are very likely to be used, so why not make them public for all to use.
+While it's nice to have some of these types of utility methods always close at hand, we don't want the =Uize= base module to become bloatware and so we haven't added some of the more esoteric utilities that you might find in some other popular toolbelt JavaScript libraries.
 
-Util Namespaces
-	Instead of throwing everything including the kitchen sink into the =Uize= base module, utilities for other kinds of situations are organized into other namespaces in the framework, such as the =Uize.Util=, =Uize.Node.Util=, =Uize.Color.xUtil=, =Uize.Build.Util=, and =Uize.Array.Util= namespaces.
+The utility methods that make their way into the =Uize= base module are given careful consideration, and are often given the greenlight because they are needed by other core modules that are very likely to be used, so why not make them public for all to use.
+
+### Util Namespaces
+
+Instead of throwing everything including the kitchen sink into the =Uize= base module, utilities for other kinds of situations are organized into other namespaces in the framework, such as the =Uize.Util=, =Uize.Node.Util=, =Uize.Color.xUtil=, =Uize.Build.Util=, and =Uize.Array.Util= namespaces.
 
 Classes, Inheritance, OOP
 -------------------------
 
 UIZE makes it dead easy to create classes that come with support for events (thanks to a built-in `event infrastructure`) and `state properties and binding`.
 
-Creating a Class
-	Making a class in UIZE is as easy as calling the =subclass= static method of a class that you want to extend, as follows...
+### Creating a Class
 
-	...............................................
-	var MyWidgetClass = Uize.Widget.V2.subclass ();
-	...............................................
+Making a class in UIZE is as easy as calling the =subclass= static method of a class that you want to extend, as follows...
 
-	In the above example, =MyWidgetClass= is now a subclass of UIZE's V2 (version 2) widget base class. The new =MyWidgetClass= class inherits all of the instance methods and property, state properties, and inheritable static methods and properties from the =Uize.Widget.V2= base class.
+...............................................
+var MyWidgetClass = Uize.Widget.V2.subclass ();
+...............................................
 
-Declaring Features
-	Declaring features for a newly created class can be done in a number of different ways, but by far the simplest and most elegant is to declare all the new features or overridden features in an optional features declaration object that is passed to the =subclass= method, as follows...
+In the above example, =MyWidgetClass= is now a subclass of UIZE's V2 (version 2) widget base class. The new =MyWidgetClass= class inherits all of the instance methods and property, state properties, and inheritable static methods and properties from the =Uize.Widget.V2= base class.
 
-	.......................................
-	var MyClass = Uize.Class.subclass ({
-		instanceMethods:{
-			someInstanceMethod1:function () {
-				// do some stuff
-			},
-			someInstanceMethod2:function () {
-				// do some stuff
-			}
+### Declaring Features
+
+Declaring features for a newly created class can be done in a number of different ways, but by far the simplest and most elegant is to declare all the new features or overridden features in an optional features declaration object that is passed to the =subclass= method, as follows...
+
+.......................................
+var MyClass = Uize.Class.subclass ({
+	instanceMethods:{
+		someInstanceMethod1:function () {
+			// do some stuff
 		},
-		staticMethods:{
-			someStaticMethod1:function () {
-				// do some stuff
-			},
-			someStaticMethod2:function () {
-				// do some stuff
-			}
+		someInstanceMethod2:function () {
+			// do some stuff
 		}
-	});
-	.......................................
+	},
+	staticMethods:{
+		someStaticMethod1:function () {
+			// do some stuff
+		},
+		someStaticMethod2:function () {
+			// do some stuff
+		}
+	}
+});
+.......................................
 
 For a more detailed discussion of the UIZE approach to OOP, consult the [[guides/classes-and-inheritance.html][Classes and Inheritance]] guide.
 
@@ -184,78 +190,83 @@ var Room = Uize.Class.subclass ({
 
 In this example we're creating a =Room= class with the state properties =width=, =depth=, =height=, and =volume=.
 
-Range Type Conformers
-	The =width= and =depth= properties both have a conformer that constrains their value to a range of =10= to =50=, while the =height= property has a conformer that constrains its value to a range of =9= to =25=.
+### Range Type Conformers
 
-Optimized onChange Handler
-	All three of these properties share the same reference to the =calculateVolume= function, which gets called only once during a set if any or all of the properties change value during the set (this is a smart optimization of UIZE).
+The =width= and =depth= properties both have a conformer that constrains their value to a range of =10= to =50=, while the =height= property has a conformer that constrains its value to a range of =9= to =25=.
 
-	The =calculateVolume= function gets called as though an instance method (ie. with the instance as context), so it can use the =this= keyword. It uses the =get= instance method to obtain the current values of the three dimension properties to calculate the volume of the room and then sets a new value on the =volume= state property, making this property effectively a derived property.
+### Optimized onChange Handler
 
-Looking at Some Outcomes
-	Now let's take a look at what happens when we try setting the values of the state properties in a few different situations.
+All three of these properties share the same reference to the =calculateVolume= function, which gets called only once during a set if any or all of the properties change value during the set (this is a smart optimization of UIZE).
 
-	..................................................................................................
-	var livingRoom = Room ({width:15,depth:20,height:19}); // initialized with values for properties
-	alert (livingRoom.get ('volume'));              // alerts 5700
+The =calculateVolume= function gets called as though an instance method (ie. with the instance as context), so it can use the =this= keyword. It uses the =get= instance method to obtain the current values of the three dimension properties to calculate the volume of the room and then sets a new value on the =volume= state property, making this property effectively a derived property.
 
-	livingRoom.set ({width:15,depth:20,height:19}); // no change in properties, volume unchanged
-	alert (livingRoom.get ('volume'));              // alerts 5700
+### Looking at Some Outcomes
 
-	livingRoom.set ({width:18,depth:18,height:22}); // volume is only calculated once
-	alert (livingRoom.get ('volume'));              // alerts 7128
+Now let's take a look at what happens when we try setting the values of the state properties in a few different situations.
 
-	livingRoom.set ({width:55,depth:60,height:30}); // property values are constrained at upper bounds
-	alert (livingRoom.get ('width'));               // alerts 50
-	alert (livingRoom.get ('depth'));               // alerts 50
-	alert (livingRoom.get ('height'));              // alerts 25
-	alert (livingRoom.get ('volume'));              // alerts 62500
+..................................................................................................
+var livingRoom = Room ({width:15,depth:20,height:19}); // initialized with values for properties
+alert (livingRoom.get ('volume'));              // alerts 5700
 
-	livingRoom.set ({width:99,depth:99,height:99}); // properties remain constrained, volume unchanged
-	alert (livingRoom.get ('width'));               // alerts 50
-	alert (livingRoom.get ('depth'));               // alerts 50
-	alert (livingRoom.get ('height'));              // alerts 25
-	alert (livingRoom.get ('volume'));              // alerts 62500
-	..................................................................................................
+livingRoom.set ({width:15,depth:20,height:19}); // no change in properties, volume unchanged
+alert (livingRoom.get ('volume'));              // alerts 5700
 
-	There are effectively five different places where we're setting values for the state properties: once as part of instance creation, and then on four subsequent occasions...
+livingRoom.set ({width:18,depth:18,height:22}); // volume is only calculated once
+alert (livingRoom.get ('volume'));              // alerts 7128
 
-	+. Immediately after the =livingRoom= instance is created, the value of the =volume= state property is =5700=, being calculated during construction of the instance from the values set for the =width=, =depth=, and =height= properties.
-	+. Next, the =set= method is called in an attempt to set the values of the dimension properties to their exact current values. This results in no change in the dimension property values, the =calculateVolume= function is not called for any of the =onChange= handlers, and the value of the =volume= property remains unchanged.
-	+. Next, the =set= method is called and different values are specified for each of the dimension properties. This results in the shared =calculateVolume= change handler function being called only once, and the value of the =volume= property is now set to =7128=.
-	+. Next, the =set= method is called and values are specified for the dimension properties that are all outside of the range bounds enforced by their =conformer= functions. This results in the values being constrained at the upper limits of the ranges and there is a change in the values of all the properties. The shared =calculateVolume= change handler function is still called only once, and the value of the =volume= property is now set to =62500=.
-	+. Finally, the =set= method is called once again in an attempt to set values for the dimension properties that are above the upper range bounds enforced by their =conformer= functions. This results in the values being constrained at the upper limits of the ranges, but this time there is no change in the values of the properties because they were already constrained at their upper limits. The shared =calculateVolume= change handler function is not called (none of the properties' values have changed), and the value of the =volume= property remains unchanged at =62500=.
+livingRoom.set ({width:55,depth:60,height:30}); // property values are constrained at upper bounds
+alert (livingRoom.get ('width'));               // alerts 50
+alert (livingRoom.get ('depth'));               // alerts 50
+alert (livingRoom.get ('height'));              // alerts 25
+alert (livingRoom.get ('volume'));              // alerts 62500
 
-Changed Events
-	Every state property that is declared for a class gets the benefit of changed events that fire automatically when the value of the state property changes.
+livingRoom.set ({width:99,depth:99,height:99}); // properties remain constrained, volume unchanged
+alert (livingRoom.get ('width'));               // alerts 50
+alert (livingRoom.get ('depth'));               // alerts 50
+alert (livingRoom.get ('height'));              // alerts 25
+alert (livingRoom.get ('volume'));              // alerts 62500
+..................................................................................................
 
-	EXAMPLE
-	....................................................
-	var MyClass = Uize.Class.subclass ({
-		stateProperties:{
-			foo:{value:'bar'}
-		}
-	});
+There are effectively five different places where we're setting values for the state properties: once as part of instance creation, and then on four subsequent occasions...
 
-	var myClassInstance = MyClass ();
++. Immediately after the =livingRoom= instance is created, the value of the =volume= state property is =5700=, being calculated during construction of the instance from the values set for the =width=, =depth=, and =height= properties.
++. Next, the =set= method is called in an attempt to set the values of the dimension properties to their exact current values. This results in no change in the dimension property values, the =calculateVolume= function is not called for any of the =onChange= handlers, and the value of the =volume= property remains unchanged.
++. Next, the =set= method is called and different values are specified for each of the dimension properties. This results in the shared =calculateVolume= change handler function being called only once, and the value of the =volume= property is now set to =7128=.
++. Next, the =set= method is called and values are specified for the dimension properties that are all outside of the range bounds enforced by their =conformer= functions. This results in the values being constrained at the upper limits of the ranges and there is a change in the values of all the properties. The shared =calculateVolume= change handler function is still called only once, and the value of the =volume= property is now set to =62500=.
++. Finally, the =set= method is called once again in an attempt to set values for the dimension properties that are above the upper range bounds enforced by their =conformer= functions. This results in the values being constrained at the upper limits of the ranges, but this time there is no change in the values of the properties because they were already constrained at their upper limits. The shared =calculateVolume= change handler function is not called (none of the properties' values have changed), and the value of the =volume= property remains unchanged at =62500=.
 
-	myClassInstance.wire (
-		'Changed.foo',
-		function () {alert (myClassInstance.get ('foo'))}
-	);
+### Changed Events
 
-	myClassInstance.set ({foo:'qux'});
-	....................................................
+Every state property that is declared for a class gets the benefit of changed events that fire automatically when the value of the state property changes.
 
-	In this example, we've created the class =MyClass= and declared that it has a state property named =foo= with an initial value of ='bar'=. After creating an instance of this class, =myClassInstance=, we wire a handler for the =Changed.foo= event, which is an event that will automatically be fired by UIZE whenever the value of the =foo= state property changes. After wiring the handler, we use the =set= method to set the =foo= property to the new value ='qux'=. This causes the =Changed.foo= event to be fired and the =alert= statement is hit, which alerts the new value ='qux'=.
+EXAMPLE
+....................................................
+var MyClass = Uize.Class.subclass ({
+	stateProperties:{
+		foo:{value:'bar'}
+	}
+});
 
-Binding Properties Together
-	UIZE providers numerous utility modules for conveniently binding state properties together in straightforward or more elaborate ways.
+var myClassInstance = MyClass ();
 
-	Property binding utility modules include...
+myClassInstance.wire (
+	'Changed.foo',
+	function () {alert (myClassInstance.get ('foo'))}
+);
 
-	- =Uize.Util.Coupler= - lets you couple two or more instances (of any class) together, synchronizing a set of any number of their state properties between all instances (eg. synchronizing the =width=, =depth=, and =height= properties across any number of different =Room= instances)
-	- =Uize.Util.PropertyAdapter= - lets you connect any two properties of any two instance so that they remain synchronized bi-directionally, with an optional value transformer that can allows for the value to be transformed in different ways for each direction (eg. synchronizing two color properties where the color is stored in different formats in each of the properties)
+myClassInstance.set ({foo:'qux'});
+....................................................
+
+In this example, we've created the class =MyClass= and declared that it has a state property named =foo= with an initial value of ='bar'=. After creating an instance of this class, =myClassInstance=, we wire a handler for the =Changed.foo= event, which is an event that will automatically be fired by UIZE whenever the value of the =foo= state property changes. After wiring the handler, we use the =set= method to set the =foo= property to the new value ='qux'=. This causes the =Changed.foo= event to be fired and the =alert= statement is hit, which alerts the new value ='qux'=.
+
+### Binding Properties Together
+
+UIZE providers numerous utility modules for conveniently binding state properties together in straightforward or more elaborate ways.
+
+Property binding utility modules include...
+
+- =Uize.Util.Coupler= - lets you couple two or more instances (of any class) together, synchronizing a set of any number of their state properties between all instances (eg. synchronizing the =width=, =depth=, and =height= properties across any number of different =Room= instances)
+- =Uize.Util.PropertyAdapter= - lets you connect any two properties of any two instance so that they remain synchronized bi-directionally, with an optional value transformer that can allows for the value to be transformed in different ways for each direction (eg. synchronizing two color properties where the color is stored in different formats in each of the properties)
 
 For a more detailed discussion of the state properties system, consult the [[guides/state-properties.html][State Properties]] guide.
 
@@ -283,19 +294,6 @@ The event system implemented by the UIZE JavaScript Framework is orthogonal to t
 The =Uize.Class= base class provides a convenient infrastructure for supporting both static and instance events. Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the =Uize.Class= base class to allow code to manage the wiring and unwiring of event handlers for static and instance events. This provides all =Uize.Class= subclasses with a consistent event model.
 
 For a more in-depth discussion on events, consult the guide [[guides/javascript-event-system.html][JavaScript Event System]].
-
-###
-	- not the same as DOM events
-	- can be used in non-browser environments like NodeJS, WSH (Windows Script Host)
-	- instance as well as static events
-	- all classes get events
-	- events don't need handlers
-	- handlers don't need events
-	- multiple handlers per event
-	- wildcard event
-	- property changed events
-	- wildcard changed event
-	- convenient forms for wiring multiple handlers, unwiring multiple handlers, unwiring all handlers for an event or an instance
 
 Conditions, Barriers, Needs
 ---------------------------
@@ -378,80 +376,82 @@ HTML & CSS Templating
 
 The versatile `templating system` employed by UIZE is relied upon heavily for the `HTML templates` and `CSS templates` that are used by encapsulated widgets.
 
-HTML Templates
-	HTML templates are JST templates (=.js.jst= files) that are compiled to efficient JavaScript functions and wrapped in JavaScript modules so that they can be required as dependencies.
+### HTML Templates
 
-	HTML template functions are called as instance methods of widget instances and can, therefore, call the widget's public instance methods as part of process of generating the HTML string for a widget. For instance, a widget's template can call the =childHtml= instance method on the widget in order to get the HTML for a child widget so that it can be added to the HTML in the desired place.
+HTML templates are JST templates (=.js.jst= files) that are compiled to efficient JavaScript functions and wrapped in JavaScript modules so that they can be required as dependencies.
 
-	Below is an example of an HTML template taken from the [[Uize.Widgets.ProgressBar.Widget][progress bar]] widget...
+HTML template functions are called as instance methods of widget instances and can, therefore, call the widget's public instance methods as part of process of generating the HTML string for a widget. For instance, a widget's template can call the =childHtml= instance method on the widget in order to get the HTML for a child widget so that it can be added to the HTML in the desired place.
 
-	EXAMPLE
-	....................................................................................................
-	<div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
-		<div id="<%= this.nodeId ('track') %>" class="<%= this.cssClass ('track') %>">
-			<div class="<%= this.cssClass ('trackBg') %>"></div>
-			<div id="<%= this.nodeId ('full') %>" class="<%= this.cssClass ('trackFull') %>"></div>
-			<div id="<%= this.nodeId ('empty') %>" class="<%= this.cssClass ('trackEmpty') %>"></div>
-			<div id="<%= this.nodeId ('statusText') %>" class="<%= this.cssClass ('statusText') %>"></div>
-		</div>
+Below is an example of an HTML template taken from the [[Uize.Widgets.ProgressBar.Widget][progress bar]] widget...
+
+EXAMPLE
+....................................................................................................
+<div id="<%= this.nodeId () %>" class="<%= this.rootNodeCssClasses () %>">
+	<div id="<%= this.nodeId ('track') %>" class="<%= this.cssClass ('track') %>">
+		<div class="<%= this.cssClass ('trackBg') %>"></div>
+		<div id="<%= this.nodeId ('full') %>" class="<%= this.cssClass ('trackFull') %>"></div>
+		<div id="<%= this.nodeId ('empty') %>" class="<%= this.cssClass ('trackEmpty') %>"></div>
+		<div id="<%= this.nodeId ('statusText') %>" class="<%= this.cssClass ('statusText') %>"></div>
 	</div>
-	....................................................................................................
+</div>
+....................................................................................................
 
-CSS Templates
-	CSS templates are JavaScript templates that are compiled to CSS files by the `build system`, and additionally wrapped as CSS modules that can be required as dependencies of widget modules.
+### CSS Templates
 
-	CSS templates can require JavaScript modules through use of the =@required= directive. This allows CSS templates to declare dependencies on modules that define shared values for styles that are to be common across multiple different CSS files, as well as functions from CSS utility modules. While not the same as systems like [[http://lesscss.org][LESS]] and [[http://sass-lang.com][SASS]], UIZE's CSS templates system can be used to accomplish a lot of the same objectives of factoring out shared theme-wide styles and creating reusable functions for simplifying the creation of more complex style rules.
+CSS templates are JavaScript templates that are compiled to CSS files by the `build system`, and additionally wrapped as CSS modules that can be required as dependencies of widget modules.
 
-	Below is an example of a CSS template taken from the [[Uize.Widgets.ColorSwatch.Widget][color swatch]] widget...
+CSS templates can require JavaScript modules through use of the =@required= directive. This allows CSS templates to declare dependencies on modules that define shared values for styles that are to be common across multiple different CSS files, as well as functions from CSS utility modules. While not the same as systems like [[http://lesscss.org][LESS]] and [[http://sass-lang.com][SASS]], UIZE's CSS templates system can be used to accomplish a lot of the same objectives of factoring out shared theme-wide styles and creating reusable functions for simplifying the creation of more complex style rules.
 
-	EXAMPLE
-	.................................................................
-	<%@ required ('Uize.Widgets.CssUtil'); %>
-	<%
+Below is an example of a CSS template taken from the [[Uize.Widgets.ColorSwatch.Widget][color swatch]] widget...
+
+EXAMPLE
+.................................................................
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_borderWidth = _cssUtil.box.border.width
+	;
+%>
+.`` {
+	display: inline-block;
+	border-width: <%= _borderWidth %>px;
+	border-style: solid;
+	border-color: #ccc #999 #999 #ccc;
+	width: 20px;
+	height: 20px;
+}
+
+/*** different sizes ***/
+<%
+	var _sizes = _cssUtil.sizes;
+	function _sizeStyleProperties (_sizeName,_horizontalPadding) {
 		var
-			_cssUtil = Uize.Widgets.CssUtil,
-			_borderWidth = _cssUtil.box.border.width
+			_size = _sizes [_sizeName],
+			_widthHeight = _size.outer - _borderWidth * 2
 		;
-	%>
-	.`` {
-		display: inline-block;
-		border-width: <%= _borderWidth %>px;
-		border-style: solid;
-		border-color: #ccc #999 #999 #ccc;
-		width: 20px;
-		height: 20px;
+		%>
+		width: <%= _widthHeight %>px;
+		height: <%= _widthHeight %>px;
+		<%
+	}
+%>
+	.`tiny` {
+		<% _sizeStyleProperties ('tiny') %>
 	}
 
-	/*** different sizes ***/
-	<%
-		var _sizes = _cssUtil.sizes;
-		function _sizeStyleProperties (_sizeName,_horizontalPadding) {
-			var
-				_size = _sizes [_sizeName],
-				_widthHeight = _size.outer - _borderWidth * 2
-			;
-			%>
-			width: <%= _widthHeight %>px;
-			height: <%= _widthHeight %>px;
-			<%
-		}
-	%>
-		.`tiny` {
-			<% _sizeStyleProperties ('tiny') %>
-		}
+	.`small` {
+		<% _sizeStyleProperties ('small') %>
+	}
 
-		.`small` {
-			<% _sizeStyleProperties ('small') %>
-		}
+	.`medium` {
+		<% _sizeStyleProperties ('medium') %>
+	}
 
-		.`medium` {
-			<% _sizeStyleProperties ('medium') %>
-		}
-
-		.`large` {
-			<% _sizeStyleProperties ('large') %>
-		}
-	.................................................................
+	.`large` {
+		<% _sizeStyleProperties ('large') %>
+	}
+.................................................................
 
 Lots of Built-in Widgets
 ------------------------
@@ -470,10 +470,11 @@ To preview some of the many built-in widgets, you can take a look at...
 - [[examples/widget-visual-samplers.html?namespace=Uize.Widgets][Widget Visual Samplers]] - this provides a way to get a quick sample of some of the features of the encapsulated widgets (the ones with their own HTML and CSS)
 - [[javascript-feature-tours.html?tour=widget][Widget Tour]] - this will take you on a page-by-page tour of many of the widget example pages included as part of the `extensive documentation`
 
-Make Your Own
-	If no built-in widget meets your exact needs you can easily build your own custom widgets - either from scratch by subclassing the =Uize.Widget.V2= base class, or by subclassing one of the existing built-in widget classes.
+### Make Your Own
 
-	For a detailed discussion of UIZE widgets with guidelines on how to make your own, consult the [[guides/javascript-widgets.html][JavaScript Widgets]] guide.
+If no built-in widget meets your exact needs you can easily build your own custom widgets - either from scratch by subclassing the =Uize.Widget.V2= base class, or by subclassing one of the existing built-in widget classes.
+
+For a detailed discussion of UIZE widgets with guidelines on how to make your own, consult the [[guides/javascript-widgets.html][JavaScript Widgets]] guide.
 
 Internationalization / Localization
 -----------------------------------
@@ -640,25 +641,27 @@ Powerful Build System
 
 UIZE provides a robust and extremely versatile and configurable build system that allows multi-level build relationships to be set up.
 
-Responsibilities of the Build System
-	The build system takes care of the following responsibilities...
+### Responsibilities of the Build System
 
-	- =compiling from source= - the build system can be configured to support any number of different source file formats, including UIZE source file formats like =.js.jst= (JavaScript templates), =.csst= (CSS templates), =.simple= (SimpleDoc), along with popular Open Source formats like =.less= for which JavaScript based processing code is available
-	- =compressing code= - the build system can be configured to compress any number of different types of files (such as JavaScript and CSS), using any compressors that are implemented in JavaScript (such as UIZE's built-in JavaScript Scruncher, or other Open Source minifiers like [[https://github.com/mishoo/UglifyJS][UglifyJS]])
-	- =gzipping code= - along with compressing code, the build system can also be configured to create gzipped versions of any number of different types of files
-	- =building packages= - the build system can be configured to create packages in order to bundle multiple files into a single file to reduce HTTP requests when you deploy a project to production
-	- =lots of other crazy stuff= - that you make it do, since you can configure and extend the build system to do just about anything (it might even brew coffee for you, if you are a powerful enough JavaScript ninja)
+The build system takes care of the following responsibilities...
 
-Key Features of the Build System
-	The build system has the following compelling features...
+- =compiling from source= - the build system can be configured to support any number of different source file formats, including UIZE source file formats like =.js.jst= (JavaScript templates), =.csst= (CSS templates), =.simple= (SimpleDoc), along with popular Open Source formats like =.less= for which JavaScript based processing code is available
+- =compressing code= - the build system can be configured to compress any number of different types of files (such as JavaScript and CSS), using any compressors that are implemented in JavaScript (such as UIZE's built-in JavaScript Scruncher, or other Open Source minifiers like [[https://github.com/mishoo/UglifyJS][UglifyJS]])
+- =gzipping code= - along with compressing code, the build system can also be configured to create gzipped versions of any number of different types of files
+- =building packages= - the build system can be configured to create packages in order to bundle multiple files into a single file to reduce HTTP requests when you deploy a project to production
+- =lots of other crazy stuff= - that you make it do, since you can configure and extend the build system to do just about anything (it might even brew coffee for you, if you are a powerful enough JavaScript ninja)
 
-	- =integrated with development server= - the build system integrates with the `development server` that runs in NodeJS and takes care of automatically rebuilding any files that have become invalidated by changes made to any source files from which they may be derived - directly or indirectly
-	- =builds incrementally= - the build system can build files incrementally as needed and based upon changes that may invalidate one or more built files
-	- =dependency based= - the build system is entirely dependency based, so there's no more worries about things being out-of-date because you couldn't remember the right set of build steps - all the dependencies for a build product are known and can be traced recursively, so all build steps necessary to update a file are performed in the correct order, and only as much work as is necessary is done
-	- =one-to-many, many-to-one= - the build system supports one-to-many and many-to-one build relationships, so one file can be involved as a dependency in building many other files (eg. a source JavaScript file is used for building a compressed JavaScript file, a reference documentation file, a source code viewer HTML file, etc.), and many files can be used in building a single file (eg. a JavaScript source file and a documentation template file are involved in building a reference documentation HTML file)
-	- =entirely written in JS= - the build system is written entirely in JavaScript, which means you can leverage all your JavaScript skills in configuring and extending it. It also means that any of the UIZE modules or modules from your own project can be loaded during the build process so you can use them in writing your build processes
-	- =works in NodeJS as well as WSH (Windows Script Host)= - because the build system uses a file system service that abstracts the environment's file system API, the build system can be run in NodeJS, WSH (Windows Script Host), or any environment for which an adapter has been written for the file system service
-	- =blazingly fast= - the build system is written from the ground up to be highly efficient and blazingly fast, and its incremental build characteristic means you don't waste time rebuilding stuff that's entirely unrelated to what you've modified or stuff that may already be completely current
+### Key Features of the Build System
+
+The build system has the following compelling features...
+
+- =integrated with development server= - the build system integrates with the `development server` that runs in NodeJS and takes care of automatically rebuilding any files that have become invalidated by changes made to any source files from which they may be derived - directly or indirectly
+- =builds incrementally= - the build system can build files incrementally as needed and based upon changes that may invalidate one or more built files
+- =dependency based= - the build system is entirely dependency based, so there's no more worries about things being out-of-date because you couldn't remember the right set of build steps - all the dependencies for a build product are known and can be traced recursively, so all build steps necessary to update a file are performed in the correct order, and only as much work as is necessary is done
+- =one-to-many, many-to-one= - the build system supports one-to-many and many-to-one build relationships, so one file can be involved as a dependency in building many other files (eg. a source JavaScript file is used for building a compressed JavaScript file, a reference documentation file, a source code viewer HTML file, etc.), and many files can be used in building a single file (eg. a JavaScript source file and a documentation template file are involved in building a reference documentation HTML file)
+- =entirely written in JS= - the build system is written entirely in JavaScript, which means you can leverage all your JavaScript skills in configuring and extending it. It also means that any of the UIZE modules or modules from your own project can be loaded during the build process so you can use them in writing your build processes
+- =works in NodeJS as well as WSH (Windows Script Host)= - because the build system uses a file system service that abstracts the environment's file system API, the build system can be run in NodeJS, WSH (Windows Script Host), or any environment for which an adapter has been written for the file system service
+- =blazingly fast= - the build system is written from the ground up to be highly efficient and blazingly fast, and its incremental build characteristic means you don't waste time rebuilding stuff that's entirely unrelated to what you've modified or stuff that may already be completely current
 
 For more information on the build system, consult the [[guides/javascript-build-scripts.html][JavaScript Build Scripts]] guide.
 
