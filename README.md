@@ -1,16 +1,18 @@
 UIZE JavaScript Framework
 =========================
 
+UIZE is pronounced "you eyes", and is a FREE, powerful, open source, OOP JavaScript framework for browsers, NodeJS, and other JavaScripty places.
+
 FREE and Open Source
 --------------------
 
 UIZE is free to use and all the source is available for all to view and fork on GitHub.
 
 - *Free to Use* - UIZE is absolutely free to use - no catches, no one time purchase fees, no per seat developer licenses.
-- *Dual License* - The UIZE JavaScript Framework - including all code and examples - is available under either the [[http://en.wikipedia.org/wiki/MIT_License][MIT License]] or the [[http://en.wikipedia.org/wiki/GNU_General_Public_License][GNU General Public License]] - you choose. [[http://en.wikipedia.org/wiki/Dual_license][Dual licensing]] means you get to choose the licensing terms that are right for your project or application. There is nothing special for you to do - simply [[download.html][download]] the UIZE JavaScript Framework, and start using it under the licensing terms of your choice. Go ahead and use UIZE with complete peace of mind.
-- *Open Source* - UIZE is proudly contributed to the OpenSource community and is available for forking on [[https://github.com/uize/uize-javascript-framework][GitHub]]. Being on GitHub means that you can conveniently fork the project and control your destiny by adapting things when needed.
+- *Dual License* - The UIZE JavaScript Framework - including all code and examples - is available under either the [MIT License](http://en.wikipedia.org/wiki/MIT_License) or the [GNU General Public License](http://en.wikipedia.org/wiki/GNU_General_Public_License) - you choose. [Dual licensing](http://en.wikipedia.org/wiki/Dual_license) means you get to choose the licensing terms that are right for your project or application. There is nothing special for you to do - simply [download]([Using the Documentation]download.html) the UIZE JavaScript Framework, and start using it under the licensing terms of your choice. Go ahead and use UIZE with complete peace of mind.
+- *Open Source* - UIZE is proudly contributed to the OpenSource community and is available for forking on [GitHub](https://github.com/uize/uize-javascript-framework). Being on GitHub means that you can conveniently fork the project and control your destiny by adapting things when needed.
 
-For more information, consult the [[license.html][license page]].
+For more information, consult the [license page](http://www.uize.com/license.html).
 
 Modules & Dependency Resolution
 -------------------------------
@@ -68,7 +70,7 @@ You can either rely on the built-in UIZE support for building JavaScript library
 
 Because UIZE's module mechanism is very generic in nature (you can define anything in your `builder` function), it lends itself to being used as a wrapper for all types of content.
 
-In the UIZE widgets, for example, JavaScript modules are used to wrap HTML templates and CSS templates, allowing all the materials needed by a widget to be packaged into the same file (even the images if you implement [[http://en.wikipedia.org/wiki/Base64][base64 encoding]] for inlining of images in the wrapped CSS modules).
+In the UIZE widgets, for example, JavaScript modules are used to wrap HTML templates and CSS templates, allowing all the materials needed by a widget to be packaged into the same file (even the images if you implement [base64 encoding](http://en.wikipedia.org/wiki/Base64) for inlining of images in the wrapped CSS modules).
 
 Different flavors of JavaScript modules include...
 
@@ -141,14 +143,14 @@ Declaring features for a newly created class can be done in a number of differen
 		}
 	});
 
-For a more detailed discussion of the UIZE approach to OOP, consult the [[guides/classes-and-inheritance.html][Classes and Inheritance]] guide.
+For a more detailed discussion of the UIZE approach to OOP, consult the [Classes and Inheritance](http://www.uize.com/guides/classes-and-inheritance.html) guide.
 
 State Properties and Binding
 ----------------------------
 
 UIZE offers a mature and powerful state properties system so that classes can expose a state interface for their instances.
 
-The state properties system goes beyond regular object properties, and even beyond the newer [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty][properties capabilities of ECMAScript 5]], providing powerful constructs like conformers, optimized onChange handlers, aliases (for deprecating old names), and value changed events using the built-in event infrastructure.
+The state properties system goes beyond regular object properties, and even beyond the newer [properties capabilities of ECMAScript 5](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty), providing powerful constructs like conformers, optimized onChange handlers, aliases (for deprecating old names), and value changed events using the built-in event infrastructure.
 
 EXAMPLE
 
@@ -258,7 +260,7 @@ Property binding utility modules include...
 - `Uize.Util.Coupler` - lets you couple two or more instances (of any class) together, synchronizing a set of any number of their state properties between all instances (eg. synchronizing the `width`, `depth`, and `height` properties across any number of different `Room` instances)
 - `Uize.Util.PropertyAdapter` - lets you connect any two properties of any two instance so that they remain synchronized bi-directionally, with an optional value transformer that can allows for the value to be transformed in different ways for each direction (eg. synchronizing two color properties where the color is stored in different formats in each of the properties)
 
-For a more detailed discussion of the state properties system, consult the [[guides/state-properties.html][State Properties]] guide.
+For a more detailed discussion of the state properties system, consult the [State Properties](http://www.uize.com/guides/state-properties.html) guide.
 
 Event Infrastructure
 --------------------
@@ -282,7 +284,7 @@ The event system implemented by the UIZE JavaScript Framework is orthogonal to t
 
 The `Uize.Class` base class provides a convenient infrastructure for supporting both static and instance events. Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the `Uize.Class` base class to allow code to manage the wiring and unwiring of event handlers for static and instance events. This provides all `Uize.Class` subclasses with a consistent event model.
 
-For a more in-depth discussion on events, consult the guide [[guides/javascript-event-system.html][JavaScript Event System]].
+For a more in-depth discussion on events, consult the guide [JavaScript Event System](http://www.uize.com/guides/javascript-event-system.html).
 
 Conditions, Barriers, Needs
 ---------------------------
@@ -298,9 +300,9 @@ The conditions, barriers, and needs / providers mechanisms make it possible to m
 Ajax / Asynchronous Processes
 -----------------------------
 
-UIZE provides features to enable Web applications to more easily perform asynchronous communication with a Web server, a technique that is often referred to broadly as [[http://www.wikipedia.org/Ajax_(programming)][Ajax]].
+UIZE provides features to enable Web applications to more easily perform asynchronous communication with a Web server, a technique that is often referred to broadly as [Ajax](http://www.wikipedia.org/Ajax_(programming)).
 
-The `Uize.Comm` base class provides a foundation for supporting asynchronous communication regardless of the mechanism employed, which could be a hidden `iframe`, the `XMLHttpRequest` object, or script tags (see [[http://www.wikipedia.org/AJAST_(Programming)][AJAST]]). This base class provides a caching mechanism for requests, a queueing mechanism in order to sequence successive asynchronous requests through a single communication object, and a standard interface for issuing requests. Various subclasses of the `Uize.Comm` base class implement support for different communication mechanisms.
+The `Uize.Comm` base class provides a foundation for supporting asynchronous communication regardless of the mechanism employed, which could be a hidden `iframe`, the `XMLHttpRequest` object, or script tags (see [AJAST](http://www.wikipedia.org/AJAST_(Programming))). This base class provides a caching mechanism for requests, a queueing mechanism in order to sequence successive asynchronous requests through a single communication object, and a standard interface for issuing requests. Various subclasses of the `Uize.Comm` base class implement support for different communication mechanisms.
 
 EXAMPLE
 
@@ -356,7 +358,7 @@ Functionality that can be inherited by widget classes is implemented in the `Uiz
 
 Examples of widgets include: buttons, sliders for selecting continuous values, progress bars, calendar / date pickers, color pickers, sortable collections, tabbed interfaces, modal dialogs, slide shows, data table sorters, tree list controls, and hierarchical menus.
 
-For a more in-depth discussion of UIZE's widget framework, consult the guide [[guides/javascript-widgets.html][JavaScript Widgets]].
+For a more in-depth discussion of UIZE's widget framework, consult the guide [JavaScript Widgets](http://www.uize.com/guides/javascript-widgets.html).
 
 HTML & CSS Templating
 ---------------------
@@ -369,7 +371,7 @@ HTML templates are JST templates (`.js.jst` files) that are compiled to efficien
 
 HTML template functions are called as instance methods of widget instances and can, therefore, call the widget's public instance methods as part of process of generating the HTML string for a widget. For instance, a widget's template can call the `childHtml` instance method on the widget in order to get the HTML for a child widget so that it can be added to the HTML in the desired place.
 
-Below is an example of an HTML template taken from the [[Uize.Widgets.ProgressBar.Widget][progress bar]] widget...
+Below is an example of an HTML template taken from the progress bar (`Uize.Widgets.ProgressBar.Widget`) widget...
 
 EXAMPLE
 
@@ -386,9 +388,9 @@ EXAMPLE
 
 CSS templates are JavaScript templates that are compiled to CSS files by the build system, and additionally wrapped as CSS modules that can be required as dependencies of widget modules.
 
-CSS templates can require JavaScript modules through use of the `@required` directive. This allows CSS templates to declare dependencies on modules that define shared values for styles that are to be common across multiple different CSS files, as well as functions from CSS utility modules. While not the same as systems like [[http://lesscss.org][LESS]] and [[http://sass-lang.com][SASS]], UIZE's CSS templates system can be used to accomplish a lot of the same objectives of factoring out shared theme-wide styles and creating reusable functions for simplifying the creation of more complex style rules.
+CSS templates can require JavaScript modules through use of the `@required` directive. This allows CSS templates to declare dependencies on modules that define shared values for styles that are to be common across multiple different CSS files, as well as functions from CSS utility modules. While not the same as systems like [LESS](http://lesscss.org) and [SASS](http://sass-lang.com), UIZE's CSS templates system can be used to accomplish a lot of the same objectives of factoring out shared theme-wide styles and creating reusable functions for simplifying the creation of more complex style rules.
 
-Below is an example of a CSS template taken from the [[Uize.Widgets.ColorSwatch.Widget][color swatch]] widget...
+Below is an example of a CSS template taken from the color swatch (Uize.Widgets.ColorSwatch.Widget) widget...
 
 EXAMPLE
 
@@ -452,19 +454,19 @@ The built-in widget modules are divided into two main groups...
 
 To preview some of the many built-in widgets, you can take a look at...
 
-- [[examples/widget-visual-samplers.html?namespace=Uize.Widgets][Widget Visual Samplers]] - this provides a way to get a quick sample of some of the features of the encapsulated widgets (the ones with their own HTML and CSS)
-- [[javascript-feature-tours.html?tour=widget][Widget Tour]] - this will take you on a page-by-page tour of many of the widget example pages included as part of the extensive documentation
+- [Widget Visual Samplers](http://www.uize.com/examples/widget-visual-samplers.html?namespace=Uize.Widgets) - this provides a way to get a quick sample of some of the features of the encapsulated widgets (the ones with their own HTML and CSS)
+- [Widget Tour](http://www.uize.com/javascript-feature-tours.html?tour=widget) - this will take you on a page-by-page tour of many of the widget example pages included as part of the extensive documentation
 
 ### Make Your Own
 
 If no built-in widget meets your exact needs you can easily build your own custom widgets - either from scratch by subclassing the `Uize.Widget.V2` base class, or by subclassing one of the existing built-in widget classes.
 
-For a detailed discussion of UIZE widgets with guidelines on how to make your own, consult the [[guides/javascript-widgets.html][JavaScript Widgets]] guide.
+For a detailed discussion of UIZE widgets with guidelines on how to make your own, consult the [JavaScript Widgets](http://www.uize.com/guides/javascript-widgets.html) guide.
 
 Internationalization / Localization
 -----------------------------------
 
-UIZE provides facilities (in `Uize.Widget`) to ease [[http://en.wikipedia.org/wiki/I18n][i18n]] (internationalization) and [[http://en.wikipedia.org/wiki/I18n][L10n]] (localization) of JavaScript code.
+UIZE provides facilities (in `Uize.Widget`) to ease [i18n](http://en.wikipedia.org/wiki/I18n) (internationalization) and [L10n](http://en.wikipedia.org/wiki/I18n) (localization) of JavaScript code.
 
 The `localized` state property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The `localize` instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.
 
@@ -482,9 +484,9 @@ EXAMPLE
 
 In the above example, an instance of the `Uize.Widget` class is created, specifying a `localized` hash that contains just one localized string template named `welcomeMessage`. This string contains the substitution tokens `{firstName}`, `{state}`, and `{country}`. The `localize` instance method is called on the widget instance, with parameters specifying the name of the localized string to retrieve and dynamic data that should be substituted into its tokens. The result is then displayed to the user with the `alert` statement. Typically, localization will occur inside the implementation for a widget class, so this example is purely for illustrating the syntax.
 
-*TIP*: To aid in internationalizing legacy code, a script is provided that can be run in Windows Script Host and that will recurse through the folders of a Web site project in order to compile a report of all the string literals contained inside JavaScript files, using a heuristic algorithm to bucket them according to their likelihood of being internationalizable strings (see [[guides/javascript-build-scripts.html][JavaScript Build Scripts]]).
+*TIP*: To aid in internationalizing legacy code, a script is provided that can be run in Windows Script Host and that will recurse through the folders of a Web site project in order to compile a report of all the string literals contained inside JavaScript files, using a heuristic algorithm to bucket them according to their likelihood of being internationalizable strings (see [JavaScript Build Scripts](http://www.uize.com/guides/javascript-build-scripts.html)).
 
-For a more in-depth discussion of internationalization and localization, consult the guide [[guides/javascript-localization.html][JavaScript Localization]].
+For a more in-depth discussion of internationalization and localization, consult the guide [JavaScript Localization](http://www.uize.com/guides/javascript-localization.html).
 
 Testing Framework
 -----------------
@@ -504,7 +506,7 @@ The testing framework has the following key benefits...
 - *test result retention* - after a test tree is run, all the instances created for running the test tree are retained, so the times taken and other information can be evaluated / analyzed afterwards - the data isn't all lost in some cryptic, text-based log file
 - *multi-instantiation* - because every test is a class, and every test run is an instance of a test class, an entire test suite can theoretically be multi-instantiated, and test suites like this that include asynchronous tests could even be multi-instantiated and run concurrently (at the very least, results from different runs can be compared from the different instances)
 
-For more information on the testing framework, consult the guide [[guides/javascript-testing-framework.html][JavaScript Testing Framework]].
+For more information on the testing framework, consult the guide [JavaScript Testing Framework](http://www.uize.com/guides/javascript-testing-framework.html).
 
 Templating System
 -----------------
@@ -547,7 +549,7 @@ AS A JST FILE
 
 JavaScript template files can be compiled into JavaScript modules with the use of JavaScript build scripts, and such modules can then be required as dependencies and treated as regular JavaScript modules. Alternatively, JavaScript template source can be embedded in non-visible elements of a Web page, such as a hidden `textarea` tag or a `script` tag with a mime type of `text/jst`, and then retrieved and compiled by client code when the document loads.
 
-For a more in-depth discussion, consult the guide [[guides/javascript-templates.html][JavaScript Templates]].
+For a more in-depth discussion, consult the guide [JavaScript Templates](http://www.uize.com/guides/javascript-templates.html).
 
 Effects / Animation
 -------------------
@@ -569,14 +571,14 @@ EXAMPLE
 
 To add some pizazz to animations, the UIZE JavaScript Framework provides the `Uize.Curve`, `Uize.Curve.Mod`, and `Uize.Curve.Rubber` modules that let you stray from the bland world of linear animations and into an exotic world of animations driven by arbitrary curve functions, with built-in support for easing curves as well as curves that emulate the complex properties of motion, letting you achieve effects like bounce, springiness, wobble, elasticity, etc. Beyond the built-ins, you have the freedom to roll your own curve functions in order to achieve some of the craziest motion effects you could imagine.
 
-For a more in-depth discussion, consult the guide [[guides/javascript-animation-and-effects.html][JavaScript Animation and Effects]].
+For a more in-depth discussion, consult the guide [JavaScript Animation and Effects](http://www.uize.com/guides/javascript-animation-and-effects.html).
 
 Documentation System
 --------------------
 
 UIZE implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.
 
-Document structure in this format is controlled through indentation, much like program structure can be governed by indentation in the [[http://www.wikipedia.org/Python_(programming_language)][Python programming language]]. A documentation builder script is provided that can run in Windows Script Host. This build script can recurse through all the folders of a Web site project, building HTML files from all Simple Doc files it finds, and extracting Simple Doc formatted documentation from specially flagged comments inside JavaScript module files and synthesizing these Simple Doc fragments together into Simple Doc documents for conversion into HTML documentation files.
+Document structure in this format is controlled through indentation, much like program structure can be governed by indentation in the [Python programming language](http://www.wikipedia.org/Python_(programming_language)). A documentation builder script is provided that can run in Windows Script Host. This build script can recurse through all the folders of a Web site project, building HTML files from all Simple Doc files it finds, and extracting Simple Doc formatted documentation from specially flagged comments inside JavaScript module files and synthesizing these Simple Doc fragments together into Simple Doc documents for conversion into HTML documentation files.
 
 The following example shows the documentation for the `to` instance method of the `Uize.Color` module. Notice how the documentation comment is indicated with the question mark immediately following the comment begin characters `/*`.
 
@@ -614,7 +616,7 @@ EXAMPLE
 				- see the related `Uize.Color.to` static method
 	*/
 
-For a more in-depth discussion of this documentation system, consult the guide [[guides/javascript-documentation-system.html][JavaScript Documentation System]].
+For a more in-depth discussion of this documentation system, consult the guide [JavaScript Documentation System](http://www.uize.com/guides/javascript-documentation-system.html).
 
 Powerful Build System
 ---------------------
@@ -626,7 +628,7 @@ UIZE provides a robust and extremely versatile and configurable build system tha
 The build system takes care of the following responsibilities...
 
 - `compiling from source` - the build system can be configured to support any number of different source file formats, including UIZE source file formats like `.js.jst` (JavaScript templates), `.csst` (CSS templates), `.simple` (SimpleDoc), along with popular Open Source formats like `.less` for which JavaScript based processing code is available
-- `compressing code` - the build system can be configured to compress any number of different types of files (such as JavaScript and CSS), using any compressors that are implemented in JavaScript (such as UIZE's built-in JavaScript Scruncher, or other Open Source minifiers like [[https://github.com/mishoo/UglifyJS][UglifyJS]])
+- `compressing code` - the build system can be configured to compress any number of different types of files (such as JavaScript and CSS), using any compressors that are implemented in JavaScript (such as UIZE's built-in JavaScript Scruncher, or other Open Source minifiers like [UglifyJS](https://github.com/mishoo/UglifyJS))
 - `gzipping code` - along with compressing code, the build system can also be configured to create gzipped versions of any number of different types of files
 - `building packages` - the build system can be configured to create packages in order to bundle multiple files into a single file to reduce HTTP requests when you deploy a project to production
 - `lots of other crazy stuff` - that you make it do, since you can configure and extend the build system to do just about anything (it might even brew coffee for you, if you are a powerful enough JavaScript ninja)
@@ -643,7 +645,7 @@ The build system has the following compelling features...
 - `works in NodeJS as well as WSH (Windows Script Host)` - because the build system uses a file system service that abstracts the environment's file system API, the build system can be run in NodeJS, WSH (Windows Script Host), or any environment for which an adapter has been written for the file system service
 - `blazingly fast` - the build system is written from the ground up to be highly efficient and blazingly fast, and its incremental build characteristic means you don't waste time rebuilding stuff that's entirely unrelated to what you've modified or stuff that may already be completely current
 
-For more information on the build system, consult the [[guides/javascript-build-scripts.html][JavaScript Build Scripts]] guide.
+For more information on the build system, consult the [JavaScript Build Scripts](http://www.uize.com/guides/javascript-build-scripts.html) guide.
 
 Code Compression
 ----------------
@@ -704,7 +706,7 @@ SCRUNCHED CODE
 	}
 	return _d;};
 
-For a more in-depth discussion of the Scruncher code compression system, consult the guide [[guides/all-about-scrunching.html][All About Scrunching]].
+For a more in-depth discussion of the Scruncher code compression system, consult the guide [All About Scrunching](http://www.uize.com/guides/all-about-scrunching.html).
 
 Dev Server (NodeJS)
 -------------------
@@ -722,15 +724,15 @@ UIZE comes with extensive documentation, thanks in large parts to the built-in S
 
 The UIZE documentation includes...
 
-- [[javascript-modules-index.html][*reference documentation for every module*]], containing at least generated implementation informtion and top quality hand written documentation in many of the more important / critical modules
-- [[javascript-guides.html][*in-depth guides*]] on numerous topics, such as modules, inheritance, the state properties system, the event system, widgets, localization, templating, animation and effects, build scripts, the testing framework, etc.
-- [[latest-news.html][*new announcements*]] for almost every new feature that is introduced
-- [[javascript-examples.html][*tons of examples*]] that demonstrate how to use UIZE, and that are available in tours and are linked to from reference documentation
-- [[javascript-tool-examples.html][*numerous tools*]] to aid in development
-- [[examples/uize-unit-tests.html][*UIZE unit tests runner*]] so the unit tests can be run in a browser
-- [[examples/widget-visual-samplers.html?namespace=Uize.Widgets][*widget visual samplers*]] to allow widgets to be browsed and sampled by namespace
-- [[examples/widget-visual-tests.html][*widget visual tests*]] to allow visual tests for widgets to be run in a browser
+- [reference documentation for every module](http://www.uize.com/javascript-modules-index.html), containing at least generated implementation informtion and top quality hand written documentation in many of the more important / critical modules
+- [in-depth guides](http://www.uize.com/javascript-guides.html) on numerous topics, such as modules, inheritance, the state properties system, the event system, widgets, localization, templating, animation and effects, build scripts, the testing framework, etc.
+- [new announcements](http://www.uize.com/latest-news.html) for almost every new feature that is introduced
+- [tons of examples](http://www.uize.com/javascript-examples.html) that demonstrate how to use UIZE, and that are available in tours and are linked to from reference documentation
+- [numerous tools](http://www.uize.com/javascript-tool-examples.html) to aid in development
+- [UIZE unit tests runner](http://www.uize.com/examples/uize-unit-tests.html) so the unit tests can be run in a browser
+- [widget visual samplers](http://www.uize.com/examples/widget-visual-samplers.html?namespace=Uize.Widgets) to allow widgets to be browsed and sampled by namespace
+- [widget visual tests](http://www.uize.com/examples/widget-visual-tests.html) to allow visual tests for widgets to be run in a browser
 - and, of course, more good stuff
 
-For more info, consule the guide [[guides/using-the-documentation.html][Using the Documentation]].
+For more info, consule the guide [Using the Documentation](http://www.uize.com/guides/using-the-documentation.html).
 
