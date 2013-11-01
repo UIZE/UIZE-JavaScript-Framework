@@ -64,8 +64,8 @@ Uize.module ({
 						_this.wire ({
 							'Changed.busyInherited':_updateUiState,
 							'Changed.enabledInherited':_updateUiState,
-							Blur:function() { _warningWidget.set({collapsed:_true}) },
-							Focus:function() { _warningWidget.set({collapsed:_false}) }
+							Blur:function () { _warningWidget.set({collapsed:_true}) },
+							Focus:function () { _warningWidget.set({collapsed:_false}) }
 						});
 
 						_this._warningWidget = _warningWidget;
@@ -77,9 +77,9 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._getInputNode = function() { return this.getNode('input') };
+			_classPrototype._getInputNode = function () { return this.getNode('input') };
 
-			_classPrototype._getParentForm = function() {
+			_classPrototype._getParentForm = function () {
 				var
 					_parentElementsWidget = this.parent,
 					_parentForm
@@ -114,7 +114,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._updateUiWarning = function() {
+			_classPrototype._updateUiWarning = function () {
 				var
 					_this = this,
 					_warningShown = _this._warningShown,
@@ -144,9 +144,9 @@ Uize.module ({
 			// NOTE: can be overidden by subclasses
 			_classPrototype.fireOkOnEnter = Uize.returnTrue;
 
-			_classPrototype.checkIsEmpty = function() { return this._value == _null || this._value == '' };
+			_classPrototype.checkIsEmpty = function () { return this._value == _null || this._value == '' };
 
-			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function() {
+			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function () {
 				var
 					_this = this,
 					_warningShownWhen = _this._warningShownWhen,
@@ -177,11 +177,11 @@ Uize.module ({
 			// To be overridden as necessary by subclasses (should return an array)
 			_classPrototype.getMoreValidators = _undefined;
 
-			_classPrototype.getRootNode = function() {
+			_classPrototype.getRootNode = function () {
 				return this.getNode() || this.getNode('input')
 			};
 
-			_classPrototype.restore = function() {
+			_classPrototype.restore = function () {
 				this.set({
 					_finishedAtLeastOnce:_false,
 					_isDirty:'inherit',
@@ -201,7 +201,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype.validate = _classPrototype._validate = function() {
+			_classPrototype.validate = _classPrototype._validate = function () {
 				var _this = this;
 
 				if (_this._isInitialized) {
@@ -261,7 +261,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype.wireUi = function() {
+			_classPrototype.wireUi = function () {
 				var _this = this;
 
 				if (!_this.isWired) {
@@ -398,7 +398,7 @@ Uize.module ({
 				},
 				_focused:{
 					name:'focused',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
 							_warningWidget = _this.children.warning
@@ -430,7 +430,7 @@ Uize.module ({
 				},
 				_isDirty:{
 					name:'isDirty',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
 							_parentForm = _this._getParentForm(),
@@ -450,7 +450,7 @@ Uize.module ({
 				},
 				_isFinished:{
 					name:'isFinished',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
 						if (_this._isFinished && _this._isInitialized) {
@@ -471,7 +471,7 @@ Uize.module ({
 				},
 				_tentativeValue:{	// readonly
 					name:'tentativeValue',
-					onChange:function() {
+					onChange:function () {
 						this._validateWhen == _tentativeValueChanged
 							&& this._validate()
 					},
@@ -501,7 +501,7 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
-					conformer:function(_value) {
+					conformer:function (_value) {
 						var _this = this;
 
 						// conform the value to boolean if type is checkbox
@@ -509,7 +509,7 @@ Uize.module ({
 
 						return Uize.isFunction (this._valueConformer) ? this._valueConformer(_value) : _value
 					},
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
 						// As long as the widget is not wired & the value changes, update the initial value
@@ -536,7 +536,7 @@ Uize.module ({
 				_valueConformer:'valueConformer',
 				_warningAllowed:{
 					name:'warningAllowed',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
 							_parentForm = _this._getParentForm(),
@@ -557,7 +557,7 @@ Uize.module ({
 				_warningMessage:{
 					name:'warningMessage',
 					onChange:[
-						function() {
+						function () {
 							var _this = this;
 
 							if (!_this.isWired)
@@ -568,7 +568,7 @@ Uize.module ({
 				},
 				_warningMessageProperties:{ // for the warning
 					name:'warningMessageProperties',
-					onChange:function() {  this._warningWidget.set(this._warningMessageProperties) }
+					onChange:function () {  this._warningWidget.set(this._warningMessageProperties) }
 				},
 				_warningShown:{
 					name:'warningShown',

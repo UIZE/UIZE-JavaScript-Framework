@@ -192,20 +192,25 @@ Uize.require (
 
 		/*** initialize ***/
 			/*** populate selector ***/
-				Uize.map (
-					[_selectorPlaceholderText].concat (_visualSamplerNamespaces),
-					function (_namespace) {
-						return new Option (
-							(_namespace || 'ALL NAMESPACES') + (
-								_namespace != _selectorPlaceholderText
-									? ' (' + _visualSamplerModulesByNamespace [_namespace].length + ')'
-									: ''
-							),
-							_namespace
-						);
-					},
-					_page.getNode ('selector').options
-				);
+				var
+					_selector = _page.getNode ('selector'),
+					_selectorOptions = _selector.options
+				;
+				_selectorOptions [_selectorOptions.length] = new Option (_selectorPlaceholderText,'');
+				for (
+					var
+						_visualSamplerNamespaceNo = -1,
+						_visualSamplerNamespacesLength = _visualSamplerNamespaces.length,
+						_namespace
+					;
+					++_visualSamplerNamespaceNo < _visualSamplerNamespacesLength;
+				)
+					_selectorOptions [_selectorOptions.length] = new Option (
+						((_namespace = _visualSamplerNamespaces [_visualSamplerNamespaceNo]) || 'ALL NAMESPACES') +
+						' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
+						_namespace
+					)
+				;
 
 			/*** initialize selector, using query param ***/
 				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).namespace || 'Uize.Widgets');

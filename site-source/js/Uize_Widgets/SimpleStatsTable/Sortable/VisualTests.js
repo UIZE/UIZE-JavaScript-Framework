@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.SimpleStatsTable.Sortable.VisualTests= class implements a set of visual tests for the =Uize.Widgets.SimpleStatsTable.Sortable.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

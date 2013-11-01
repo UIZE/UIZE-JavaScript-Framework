@@ -118,7 +118,7 @@ Uize.module ({
 							}
 						;
 						_this.wireNode ('expand', 'click',
-							function() {
+							function () {
 								_this.fire ({name:'Expand', handler:_showLong}).handled || _showLong();
 							}
 						);

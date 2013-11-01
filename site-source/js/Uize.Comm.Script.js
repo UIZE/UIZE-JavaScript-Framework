@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'Uize.Comm.Script',
 	required:'Uize.Url',
-	builder:function(_superclass) {
+	builder:function (_superclass) {
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
@@ -37,7 +37,7 @@ Uize.module ({
 		/*** Constructor ***/
 			var
 				_class = _superclass.subclass(
-					function() {
+					function () {
 						for (this._callbackHashName in {_callbacks:1});
 						if (!_class._callbacks) _class._callbacks = [];
 					}
@@ -46,7 +46,7 @@ Uize.module ({
 			;
 
 		/*** Public Methods ***/
-			_classPrototype.performRequest = function(_request, _callback) {
+			_classPrototype.performRequest = function (_request, _callback) {
 				var
 					m = this,
 					_callbacks = _class._callbacks,
@@ -54,7 +54,7 @@ Uize.module ({
 					_scriptNode = document.createElement('script')
 				;
 				_callbacks.push(
-					function(_response) {
+					function (_response) {
 						_request['response' + Uize.capFirstChar (_request.returnType)] = _response;
 						_callback();
 					}

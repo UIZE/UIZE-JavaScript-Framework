@@ -131,7 +131,7 @@ Uize.module ({
 
 
 		/*** Public Instance Methods ***/
-			_objectPrototype.clone = function() {
+			_objectPrototype.clone = function () {
 				return _object(this.values());
 				/*?
 					Instance Methods
@@ -148,7 +148,7 @@ Uize.module ({
 				*/
 			};
 
-			_objectPrototype.multiply = function(_other) {
+			_objectPrototype.multiply = function (_other) {
 				var m = this;
 
 				m._setCoefficients([
@@ -261,7 +261,7 @@ Uize.module ({
 				*/
 			};
 
-			_objectPrototype.toString = function() {
+			_objectPrototype.toString = function () {
 				return this.values() + '';
 				/*?
 					Instance Methods
@@ -275,7 +275,7 @@ Uize.module ({
 				*/
 			};
 
-			_objectPrototype.translate = function(_x, _y) {
+			_objectPrototype.translate = function (_x, _y) {
 				var m = this;
 
 				m._X += _x;
@@ -340,7 +340,7 @@ Uize.module ({
 				*/
 			};
 
-			_objectPrototype.xForm = function(_param1, _param2) {
+			_objectPrototype.xForm = function (_param1, _param2) {
 				var
 					m = this,
 

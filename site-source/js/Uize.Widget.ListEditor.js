@@ -230,7 +230,7 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._removeOption = function(_listItemNo) {
+			_classPrototype._removeOption = function (_listItemNo) {
 				this._listNode && this._listNode.remove (_listItemNo);
 			};
 
@@ -291,7 +291,7 @@ Uize.module ({
 				;
 			};
 
-			_classPrototype._updateUiList = function() {
+			_classPrototype._updateUiList = function () {
 				var
 					m = this,
 					_listNode = m._listNode

@@ -90,6 +90,7 @@
 				Iterator Methods
 					The =Uize= module provides a number of static methods for iterating over properties of objects or elements of arrays.
 
+					- =Uize.applyAll= - calls a list of functions on a specified context, with an optional arguments list
 					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
 					- =Uize.forEach= - iterates over an array, arguments object, object, or length range, calling the specified iteration handler for each element or property
 
@@ -1973,6 +1974,65 @@ Uize = (function () {
 							NOTES
 							- compare to the =Uize.forEach= static method
 							- see also the other `basic data utilities`
+				*/
+			},
+
+			applyAll:function (_context,_functions,_arguments) {
+				_arguments || (_arguments = _sacredEmptyArray);
+				for (var _functionNo = -1, _functionsLength = _functions.length; ++_functionNo < _functionsLength;)
+					_functions [_functionNo].apply (_context,_arguments)
+				;
+				/*?
+					Static Methods
+						Uize.applyAll
+							Calls the specified list of functions on the specified context, with an optional list of arguments.
+
+							The =Uize.applyAll= method can be useful for executing a list of event handlers, queued callbacks, a chain of constructors, etc.
+
+							DIFFERENT USAGES
+
+							`Call Multiple Functions as Methods on a Context`
+							.............................................
+							Uize.applyAll (contextANYTYPE,functionsLIST);
+							.............................................
+
+							`Call Multiple Functions as Methods on a Context, with an Arguments List`
+							...........................................................
+							Uize.applyAll (contextANYTYPE,functionsLIST,argumentsLIST);
+							...........................................................
+
+							`Call Multiple Functions with an Arguments List`
+							..............................................
+							Uize.applyAll (0,functionsLIST,argumentsLIST);
+							..............................................
+
+							Call Multiple Functions as Methods on a Context
+								In the simplest usage, a list of functions can be called as methods on a context by specifying the context as the first argument and the list of functions as the second.
+
+								SYNTAX
+								.............................................
+								Uize.applyAll (contextANYTYPE,functionsLIST);
+								.............................................
+
+							Call Multiple Functions as Methods on a Context, with an Arguments List
+								In order to call a list of functions as methods on a context and with the same set of arguments for each call, the arguments list can be specified using the optional =argumentsLIST= third argument.
+
+								SYNTAX
+								...........................................................
+								Uize.applyAll (contextANYTYPE,functionsLIST,argumentsLIST);
+								...........................................................
+
+							Call Multiple Functions with an Arguments List
+								In cases where you wish to call a list of functions with the same set of arguments for each call, but where you don't wish them to be called as methods on a context, you can simply specify the value =0= for the first argument.
+
+								SYNTAX
+								..............................................
+								Uize.applyAll (0,functionsLIST,argumentsLIST);
+								..............................................
+
+							NOTES
+							- compare to the =Uize.callOn= static method
+							- see also the other `iterator methods`
 				*/
 			},
 
@@ -5735,11 +5795,20 @@ Uize = (function () {
 										_requiredLookup
 									);
 								}
-								_name &&
-									(_Function (_name + '=arguments[0]')) (
-										_module = _modulesByName [_name] = _module || function () {}
-									)
-								;
+								if (_name) {
+									_module = _modulesByName [_name] = _module || function () {};
+
+									// create a reference on the host
+									(_Function (_name + '=arguments[0]')) (_module);
+
+									// this is needed for the Uize.Class inheritance mechanism
+									var _lastPeriodPos = _name.lastIndexOf ('.');
+									if (_lastPeriodPos > -1)
+										(_package.eval (_name.slice (0,_lastPeriodPos)).nonInheritableStatics || {}) [
+											_name.slice (_lastPeriodPos + 1)
+										] = 1
+									;
+								}
 								if (_isFunction (_module)) {
 									_module.moduleName = _name;
 									_module.pathToResources = _module == _package

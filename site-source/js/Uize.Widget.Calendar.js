@@ -156,7 +156,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Calendar',
-	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Widget.Button',
 		'Uize.Date',
@@ -165,14 +164,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_null = null,
 				_Uize_Date = Uize.Date,
 				_formatDate = Uize.Date.Formatter.format
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _conformNullableDateValue (_value) {
@@ -222,7 +221,8 @@ Uize.module ({
 			}
 
 			function _updateUiMonthDisplay () {
-				this.isWired && this.setNodeValue ('month',this._monthNames [this._month]);
+				var m = this;
+				m.isWired && m.setNodeValue ('month',m._monthNames [m._month]);
 				/*?
 					Implied Nodes
 						month Implied Node

@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Dialog',
-	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Node',
 		'Uize.Widget.Button',
@@ -366,7 +365,7 @@ Uize.module ({
 					_this.wireNode(
 						'shield',
 						'click',
-						function() { _this._dismissOnShieldClick && _this._dismiss ('Close') }
+						function () { _this._dismissOnShieldClick && _this._dismiss ('Close') }
 					);
 
 					/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/
@@ -800,8 +799,7 @@ Uize.module ({
 			});
 
 		_class.staticProperties ({
-			buttonWidgetClass:Uize.Widget.Button,
-			enableRootNodeCssClasses:false
+			buttonWidgetClass:Uize.Widget.Button
 		});
 
 		return _class;

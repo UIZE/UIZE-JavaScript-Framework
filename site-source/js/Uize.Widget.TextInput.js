@@ -178,7 +178,7 @@ Uize.module ({
 										}
 										m.fire ({name:'Key Up',domEvent:_domEvent});
 									},
-									blur:function() {
+									blur:function () {
 										m._blurClass &&
 											m.setNodeProperties(
 												m._inputNode,
@@ -196,7 +196,7 @@ Uize.module ({
 										m.fire('Blur');
 										m._currentNodeEventIsBlur = _false;
 									},
-									focus:function() {
+									focus:function () {
 										m._focusClass &&
 											m.setNodeProperties(
 												m._inputNode,
@@ -217,11 +217,11 @@ Uize.module ({
 						m.wireNode (
 							'warningIcon',
 							{
-								mouseover:function() {
+								mouseover:function () {
 									Uize.Node.setInnerHtml (m._tooltip, m._selectWarningMessage());
 									Uize.Tooltip.showTooltip (m._tooltip,_true);
 								},
-								mouseout:function() {Uize.Tooltip.hideTooltip(m._tooltip)}
+								mouseout:function () {Uize.Tooltip.hideTooltip(m._tooltip)}
 							}
 						);
 
@@ -254,7 +254,7 @@ Uize.module ({
 				},
 				_isValid:{
 					name:'isValid',
-					onChange:function() { _displayWarningUi(this) },
+					onChange:function () { _displayWarningUi(this) },
 					value:_false
 				},
 				_maxLength:{
@@ -270,7 +270,7 @@ Uize.module ({
 				},
 				_showWarning:{
 					name:'showWarning',
-					onChange:function() { _displayWarningUi(this) },
+					onChange:function () { _displayWarningUi(this) },
 					value:_false
 				},
 				_tooltip:'tooltip',

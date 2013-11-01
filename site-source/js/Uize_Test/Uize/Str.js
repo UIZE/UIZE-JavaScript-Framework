@@ -18,14 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Str= module defines a suite of unit tests for the =Uize.Str= module.
+		The =Uize.Test.Uize.Str= module defines a simple unit test for the =Uize.Str= namespace module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
 	name:'Uize.Test.Uize.Str',
-	required:'Uize.Class.Value',
 	builder:function () {
 		'use strict';
 

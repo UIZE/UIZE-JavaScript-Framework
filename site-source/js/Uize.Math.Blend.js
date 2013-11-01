@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Math.Blend= package module supports blending two values values to produce a new, interpolated value, with support for blending arbitrarily complex data structures and interpolation curve functions (and structures).
+		The =Uize.Math.Blend= package module supports blending two values to produce a new, interpolated value, with support for blending arbitrarily complex data structures and interpolation curve functions (and structures).
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

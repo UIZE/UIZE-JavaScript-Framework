@@ -35,7 +35,7 @@ Uize.module ({
 			;
 
 		/*** Public Static Methods ***/
-			_package.doForAll = function(_root, _function) {
+			_package.doForAll = function (_root, _function) {
 				_Uize_Node.doForAll (
 					_Uize_Node.find ({
 						root:_root,
@@ -184,10 +184,10 @@ Uize.module ({
 				*/
 			};
 
-			_package.setEnabled = function(_root, _mustEnable) {
+			_package.setEnabled = function (_root, _mustEnable) {
 				_package.doForAll(
 					_root,
-					function(_node) { _Uize_Node.setProperties(_node, {disabled:_mustEnable == false ? 'disabled' : ''}) }
+					function (_node) { _Uize_Node.setProperties(_node, {disabled:_mustEnable == false ? 'disabled' : ''}) }
 				)
 				/*?
 					Static Methods

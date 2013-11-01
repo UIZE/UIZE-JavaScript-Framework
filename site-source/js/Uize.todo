@@ -248,6 +248,58 @@ Quick Win Additions (in order of priority / usefulness)
 			- returns true is the value is falsy
 			- useful for methods that accept value matchers
 
+Uize.exify
+	Adds an =x= property to a function to allow "function of x" value transformers to be easily manufactured from the function with specific values for the function's non-x arguments.
+
+	IMPLEMENTATION
+	........................................................................................
+	Uize.exify = function (_function,_wrapOriginal) {
+		return Uize.copyInto (
+			_wrapOriginal ? function () {return _function.apply (this,arguments)} : _function,
+			{
+				x:function () {
+					var
+						_function = this,
+						_arguments = Uize.copyList (arguments)
+					;
+					return function (x) {return _function.apply (this,[x].concat (_arguments))};
+				}
+			}
+		);
+	};
+	........................................................................................
+
+	EXAMPLE 1
+		DEFINE
+		.............................................................................
+		Uize.divide = Uize.exify (function (x,denominator) {return x / denominator});
+		.............................................................................
+
+		USE
+		...................
+		Uize.divide (10,2);
+		Uize.divide.x (2);
+		...................
+
+	EXAMPLE 2
+		DEFINE
+		.............................................................................................................
+		Uize.round = Uize.exify (Math.round,true); // wrap original, so as not to modify native function's properties
+		.............................................................................................................
+
+	EXAMPLE 3
+
+		DEFINE
+		.......................................................................
+		Uize.isType = Uize.exify (function (x,type) {return typeof x == type});
+		.......................................................................
+
+		USE
+		.........................................
+		Uize.isNumber = Uize.isType.x ('number');
+		Uize.isString = Uize.isType.x ('string');
+		.........................................
+
 Uize.willCall
 	Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.
 

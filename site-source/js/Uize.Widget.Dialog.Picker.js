@@ -41,134 +41,128 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_false = false,
 				_true = true
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
-
-						/*** submit value ***/
-							function _fireSubmissionComplete (_keepOpen) {
-								var
-									_valueWidget = _this.children.value,
-									_valueDetails = _valueWidget.get('valueDetails'),
-									_undefined
-								;
-
-								_this._submittedValue = _true;
-
-								_this.fireSubmissionComplete(
-									_keepOpen,
-									Uize.copyInto(
-										{value:_valueWidget.valueOf ()},
-										_valueDetails !== _undefined
-											? {valueDetails:_valueDetails}
-											: _undefined
-									)
-								);
-							}
-
-						/*** add the value child widget ***/
-							_this.addChild ('value',_this._valueWidgetClass).wire (
-								'Changed.value',
-								function () {
-									!_this._beforeShow
-										// Changed.value will be fired prior to Changed.valueDetails, so break flow so that the valueDetails can be synced before the 'Submission Complete' event is fired
-										&& setTimeout(
-											function() {
-												_fireSubmissionComplete (_this._keepOpen);
-												_this._keepOpen || _this.set ({shown:_false});
-											},
-											0
-										)
-									;
-								}
-								/*?
-									Child Widget
-										value
-											.
-								*/
-							);
-
-						/*** add the keepOpen button ***/
-							_this.addChild ('keepOpen',Uize.Widget.Button.Checkbox).wire (
-								'Changed.selected',
-								function (_event) {_this.set ({_keepOpen:_event.source.get ('selected')})}
-								/*?
-									Child Widget
-										keepOpen Child Widget
-											.
-								*/
-							);
-
-						/*** add event handlers ***/
-							function _handleDismiss() {
-								if (_this._submittedValue) {
-									_this.children.value.set({value: _this._initialValue});
-									_fireSubmissionComplete(_false);
-								}
-							}
-							_this.wire ({
-								Ok:function () {_fireSubmissionComplete ()},
-								Cancel:_handleDismiss,
-								Close:_handleDismiss,
-								'Before Show':function () {
-									/* WORKAROUND:
-										Ideally, the dialog class would have a state state property to indicate whether or not the dialog is actually shown, versus it just being desired to be shown because the shown state property is set to true.
-
-										Another high level concept is the idea of whether or not the value of a state property is completely reflected, which could also apply to widgets that display images, where a url state property may change in order to change the image, but where the new value may not be completely reflected until the image has completed loading.
-
-										Absent the above facilities, we do a workaround and track that we're in the beforeShow state so that the value change event handler on the value widget's value state property doesn't commit the value and dismiss the dialog.
-									*/
-									_this._beforeShow = _true;
-									_this.children.value.set (_this.get ((_this._pipedProperties || []).concat ('value')));
-									_this._initialValue = _this._value;
-									_this._beforeShow = _this._submittedValue = _false;
-								}
-							});
-
-						_this._widgetsAdded = _true;
-						_this._updateUiKeepOpenState ();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiKeepOpenState = function () {
-				this._widgetsAdded && this.children.keepOpen.set ({selected:this._keepOpen})
-			};
+			function _updateUiKeepOpenState (m) {
+				m._widgetsAdded && m.children.keepOpen.set ({selected:m._keepOpen})
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.fireSubmissionComplete = function(_keepOpen, _result) {
-				var _this = this;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
 
-				_this.get ('shown')
-					&& _this.fire ({
-						name:'Submission Complete',
-						result:_result,
-						keepOpen:_keepOpen
+				/*** submit value ***/
+					function _fireSubmissionComplete (_keepOpen) {
+						var
+							_valueWidget = m.children.value,
+							_valueDetails = _valueWidget.get('valueDetails'),
+							_undefined
+						;
+
+						m._submittedValue = _true;
+
+						m.fireSubmissionComplete(
+							_keepOpen,
+							Uize.copyInto(
+								{value:_valueWidget.valueOf ()},
+								_valueDetails !== _undefined
+									? {valueDetails:_valueDetails}
+									: _undefined
+							)
+						);
+					}
+
+				/*** add the value child widget ***/
+					m.addChild ('value',m._valueWidgetClass).wire (
+						'Changed.value',
+						function () {
+							!m._beforeShow
+								// Changed.value will be fired prior to Changed.valueDetails, so break flow so that the valueDetails can be synced before the 'Submission Complete' event is fired
+								&& setTimeout(
+									function () {
+										_fireSubmissionComplete (m._keepOpen);
+										m._keepOpen || m.set ({shown:_false});
+									},
+									0
+								)
+							;
+						}
 						/*?
-							Instance Events
-								Submission Complete
+							Child Widget
+								value
 									.
 						*/
-					})
-				;
-			};
+					);
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				/*** add the keepOpen button ***/
+					m.addChild ('keepOpen',Uize.Widget.Button.Checkbox).wire (
+						'Changed.selected',
+						function (_event) {m.set ({_keepOpen:_event.source.get ('selected')})}
+						/*?
+							Child Widget
+								keepOpen Child Widget
+									.
+						*/
+					);
+
+				/*** add event handlers ***/
+					function _handleDismiss() {
+						if (m._submittedValue) {
+							m.children.value.set({value: m._initialValue});
+							_fireSubmissionComplete(_false);
+						}
+					}
+					m.wire ({
+						Ok:function () {_fireSubmissionComplete ()},
+						Cancel:_handleDismiss,
+						Close:_handleDismiss,
+						'Before Show':function () {
+							/* WORKAROUND:
+								Ideally, the dialog class would have a state state property to indicate whether or not the dialog is actually shown, versus it just being desired to be shown because the shown state property is set to true.
+
+								Another high level concept is the idea of whether or not the value of a state property is completely reflected, which could also apply to widgets that display images, where a url state property may change in order to change the image, but where the new value may not be completely reflected until the image has completed loading.
+
+								Absent the above facilities, we do a workaround and track that we're in the beforeShow state so that the value change event handler on the value widget's value state property doesn't commit the value and dismiss the dialog.
+							*/
+							m._beforeShow = _true;
+							m.children.value.set (m.get ((m._pipedProperties || []).concat ('value')));
+							m._initialValue = m._value;
+							m._beforeShow = m._submittedValue = _false;
+						}
+					});
+
+				m._widgetsAdded = _true;
+				_updateUiKeepOpenState (m);
+			},
+
+			instanceMethods:{
+				fireSubmissionComplete:function (_keepOpen, _result) {
+					var m = this;
+
+					m.get ('shown')
+						&& m.fire ({
+							name:'Submission Complete',
+							result:_result,
+							keepOpen:_keepOpen
+							/*?
+								Instance Events
+									Submission Complete
+										.
+							*/
+						})
+					;
+				}
+			},
+
+			stateProperties:{
 				_keepOpen:{
 					name:'keepOpen',
-					onChange:_classPrototype._updateUiKeepOpenState,
+					onChange:function () {_updateUiKeepOpenState (this)},
 					value:_false
 					/*?
 						State Properties
@@ -199,14 +193,12 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				shieldOpacity:0.01
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

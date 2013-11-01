@@ -365,6 +365,7 @@ Uize.module ({
 					_isInstance = _Uize.isInstance,
 					_isObject = _Uize.isObject,
 					_traceDependencies = _Uize.Util.Dependencies.traceDependencies,
+					_applyAll = _Uize.applyAll,
 
 			/*** General Variables ***/
 				_sacredEmptyArray = [],
@@ -535,21 +536,11 @@ Uize.module ({
 			}
 
 			var
-				_classPrototype = _class.prototype,
 				_subclass = _Uize.noNew (
 					function () {
-						for (
-							var _alphastructorNo = -1, _alphastructorsLength = _alphastructors.length;
-							++_alphastructorNo < _alphastructorsLength;
-						)
-							_alphastructors [_alphastructorNo].apply (this,arguments)
-						;
-						for (
-							var _omegastructorNo = -1, _omegastructorsLength = _omegastructors.length;
-							++_omegastructorNo < _omegastructorsLength;
-						)
-							_omegastructors [_omegastructorNo].apply (this,arguments)
-						;
+						var _arguments = arguments;
+						_applyAll (this,_alphastructors,_arguments);
+						_applyAll (this,_omegastructors,_arguments);
 					}
 				),
 				_subclassPrototype = _subclass.prototype
@@ -557,26 +548,17 @@ Uize.module ({
 
 			/*** Inherit static properties (excluding prototype) and methods from base class ***/
 				var
-					_propertyValue,
 					_nonInheritableStatics = _class.nonInheritableStatics || _sacredEmptyObject,
 					_clone = _Uize.clone
 				;
 				for (var _property in _class)
-					if (
-						!_nonInheritableStatics [_property] &&
-						(_propertyValue = _class [_property]) != _classPrototype &&
-						!(
-							_isFunction (_propertyValue) &&
-							_propertyValue.moduleName &&
-							/[A-Z]/.test (_property.charAt (0))
-						)
-					)
-						_subclass [_property] = _clone (_propertyValue)
+					if (!_nonInheritableStatics [_property] && _property != 'prototype')
+						_subclass [_property] = _clone (_class [_property])
 				;
 
 			/*** Prepare instance properties and methods ***/
 				/*** Inherit instance properties and methods from base class (from prototype) ***/
-					_copyInto (_subclassPrototype,_classPrototype);
+					_copyInto (_subclassPrototype,_class.prototype);
 
 					/*** Make sure toString and valueOf are copied ***/
 						/* NOTE: in IE, toString and valueOf aren't enumerable properties of the prototype object */
@@ -1707,7 +1689,7 @@ Uize.module ({
 							if (_rawPropertyProfile.derived) {
 								_declaredDerivedProperties = true;
 								var _derivation = _resolveDerivation (_rawPropertyProfile.derived);
-								_derivation._determinantsChanged = new _Function (
+								_derivation._determinantsChanged = _Function (
 									'o',
 									'return ' + _map (_derivation._determinants,"'\"' + value + '\" in o'").join (' || ')
 								);
@@ -1718,8 +1700,7 @@ Uize.module ({
 							;
 						}
 					}
-					var _instancePropertyDefaults = m.get ();
-					m._instancePropertyDefaults = _instancePropertyDefaults;
+					var _instancePropertyDefaults = m._instancePropertyDefaults = m.get ();
 					if (_declaredDerivedProperties) {
 						var
 							_derivedProperties = [],

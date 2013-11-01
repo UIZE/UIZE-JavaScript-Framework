@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.LikeThis.VisualSampler= class implements a visual sampler widget for the =UizeSite.Widgets.LikeThis.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

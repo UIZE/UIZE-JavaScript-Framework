@@ -29,74 +29,53 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function() {
-						var _this = this;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
 
-						function _syncValueDetails() {
-							var _valueObject = _this.getValueObject();
+				function _syncValueDetails() {
+					var _valueObject = m.getValueObject();
 
-							_this.set({
-								valueDetails:_valueObject
-									? _valueObject.valueDetails
-									: null
-							});
-						}
-						_this.wire({
-							'Changed.value': _syncValueDetails,
-							'Changed.values': _syncValueDetails
-						});
-						
-						_syncValueDetails();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			_classPrototype.getValueObject = function (_name) {
-				var _undefined;
-				return Uize.findRecord (
-					this._values,
-					{
-						name:_name == _undefined
-							? this + ''
-							: _name
-					}
-				);
-			};
-			
-			_classPrototype.getMoreDialogEventHandlers = function() {
-				var
-					_this = this,
-					_undefined
-				;
-				
-				function _addHandler(_propertyName) {
-					return Uize.pairUp(
-						'Changed.' + _propertyName,
-						function(_event) {
-							var _dialogPropertyValue = _event.source.get(_propertyName);
-							
-							_dialogPropertyValue !== _undefined
-								&& _this.set(_propertyName, _dialogPropertyValue)
-							;
+					m.set({valueDetails:_valueObject ? _valueObject.valueDetails : null});
 				}
+				m.wire({
+					'Changed.value': _syncValueDetails,
+					'Changed.values': _syncValueDetails
+				});
+
+				_syncValueDetails();
+			},
+
+			instanceMethods:{
+				getValueObject:function (_name) {
+					return Uize.findRecord (this._values,{name:_name == undefined ? this + '' : _name});
+				},
+
+				getMoreDialogEventHandlers:function () {
+					var m = this;
+
+					function _addHandler(_propertyName) {
+						return Uize.pairUp(
+							'Changed.' + _propertyName,
+							function (_event) {
+								var _dialogPropertyValue = _event.source.get(_propertyName);
+
+								_dialogPropertyValue !== undefined
+									&& m.set(_propertyName, _dialogPropertyValue)
+								;
+							}
+						);
+					}
+
+					return Uize.copyInto(
+						_superclass.doMy(m,'getMoreDialogEventHandlers') || {},
+						_addHandler('valueNo'),
+						_addHandler('tentativeValueNo')
 					);
 				}
+			},
 
-				return Uize.copyInto(
-					_superclass.prototype.getMoreDialogEventHandlers.call(_this) || {},
-					_addHandler('valueNo'),
-					_addHandler('tentativeValueNo')
-				);
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_tentativeValueNo:{
 					name:'tentativeValueNo',	// read-only
 					value:-1
@@ -109,16 +88,14 @@ Uize.module ({
 					name:'values',
 					value:[]
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				pipedProperties:['values', 'valueNo', 'tentativeValueNo'],
 				selectorButtonWidgetClass:Uize.Widget.Button.ValueDisplay.Selector,
 				dialogWidgetClass:'Uize.Widget.Dialog.Picker.Palette.Selector'
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

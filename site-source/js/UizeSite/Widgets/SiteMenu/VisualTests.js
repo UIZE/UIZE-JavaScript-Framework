@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.SiteMenu.VisualTests= class implements a set of visual tests for the =UizeSite.Widgets.SiteMenu.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

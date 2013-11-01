@@ -30,69 +30,63 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function() {
-						var
-							_this = this,
-							_false = false,
-							_form = _this.addChild(
-								'form',
-								_this._formWidgetClass,
-								{useNormalSubmit:_false}
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var
+					m = this,
+					_false = false,
+					_form = m.addChild(
+						'form',
+						m._formWidgetClass,
+						{useNormalSubmit:_false}
+					)
+				;
+
+				_form.wire(
+					'Changed.okToSubmit',
+					function () {
+						_form.get('okToSubmit')
+							&& m.handleFormValue(
+								function (_info) {
+									m.fire ({
+										name:'Submission Complete',
+										result:_form.get('value'),
+										info:_info
+									});
+
+									m.set({shown:_false});
+								}
 							)
 						;
-
-						_form.wire(
-							'Changed.okToSubmit',
-							function() {
-								_form.get('okToSubmit')
-									&& _this.handleFormValue(
-										function(_info) {
-											_this.fire ({
-												name:'Submission Complete',
-												result:_form.get('value'),
-												info:_info
-											});
-
-											_this.set({shown:_false});
-										}
-									)
-								;
-							}
-						);
-
-						_this.wire({
-							Ok:function(_event) {
-								_form.submit();
-								_event.abort = true;
-							},
-							'Before Show':function() {
-								if (_this._value)
-									_form.set({value:Uize.clone(_this._value)})
-								;
-							},
-							'After Show':function() { _form.updateUi() },
-							'After Hide':function() { _form.reset() }
-						});
 					}
-				)
-			;
+				);
 
-		/*** Public Methods ***/
-			_class.prototype.handleFormValue = function(_callback) { _callback() };
+				m.wire({
+					Ok:function (_event) {
+						_form.submit();
+						_event.abort = true;
+					},
+					'Before Show':function () {
+						if (m._value)
+							_form.set({value:Uize.clone(m._value)})
+						;
+					},
+					'After Show':function () { _form.updateUi() },
+					'After Hide':function () { _form.reset() }
+				});
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			instanceMethods:{
+				handleFormValue:function (_callback) { _callback() }
+			},
+
+			stateProperties:{
 				_formWidgetClass:{
 					name:'formWidgetClass',
 					value:Uize.Widget.Form
 				},
 				_value:'value'
-			});
-
-		return _class;
+			}
+		});
 	}
 });

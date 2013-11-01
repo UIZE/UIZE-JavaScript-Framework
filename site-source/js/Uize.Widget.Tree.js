@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Tree',
-	superclass:'Uize.Widget.V2',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -161,10 +160,6 @@ Uize.module ({
 				itemIsDivider:function (_item) {
 					return !!_item && _item.title == '-' && !this.itemHasChildren (_item);
 				}
-			},
-
-			staticProperties:{
-				enableRootNodeCssClasses:false
 			},
 
 			stateProperties:{

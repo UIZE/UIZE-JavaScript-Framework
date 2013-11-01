@@ -92,7 +92,7 @@ Uize.module ({
 						}
 
 						(m.fade = new _Uize_Fade).wire({
-							Start:function() {
+							Start:function () {
 								_tabBodyStart(m._previousTabNo);
 								_tabBodyStart(m.get('valueNo'));
 								_previousTabNodeHeight = _Uize_Node.getDimensions(
@@ -100,7 +100,7 @@ Uize.module ({
 								).height;
 								_newTabNodeHeight = m.fade.get('endValue');
 							},
-							'Changed.value':function() {
+							'Changed.value':function () {
 								var _newHeight = +m.fade;
 
 								// Since we have only one fade object, the previous tab body node height
@@ -113,7 +113,7 @@ Uize.module ({
 								;
 								_setTabBodyHeight(m.get('valueNo'), _newHeight);
 							},
-							Done:function() {
+							Done:function () {
 								var _newValueNo = m.get('valueNo');
 								_tabBodyDone(m._previousTabNo, _false);
 								_tabBodyDone(_newValueNo, _true);
@@ -136,7 +136,7 @@ Uize.module ({
 				return this.getNode ('option' + this._resolveToValueNo (_valueOrValueNo) + 'TabBody')
 			};
 
-			_classPrototype._updateUiTabBodies = function() {
+			_classPrototype._updateUiTabBodies = function () {
 				var
 					m = this,
 					_previousTabNo = m._previousTabNo,
@@ -178,7 +178,7 @@ Uize.module ({
 					}
 					else
 						m.forAll(
-							function(_optionButton, _optionNo) {
+							function (_optionButton, _optionNo) {
 								// hide all the tab bodies that should be hidden
 								m.displayNode(
 									m._getTabBodyNode(_optionNo),

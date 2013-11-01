@@ -14,7 +14,7 @@
 	importance: 5
 	codeCompleteness: 80
 	testCompleteness: 0
-	docCompleteness: 0
+	docCompleteness: 3
 */
 
 /*?
@@ -27,100 +27,85 @@
 Uize.module ({
 	name:'Uize.Widget.FormElementWarning',
 	required:'Uize.Node.Classes',
-	builder:function(_superclass) {
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+	builder:function (_superclass) {
+		'use strict';
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiFocused = function() {
-				var _this = this;
-				
-				_this.isWired
+			function _updateUiFocused (m) {
+				m.isWired
 					&& Uize.Node.Classes.setState(
-						_this.getNode(),
-						['', _this._cssClassFocused],
-						_this._focused
+						m.getNode(),
+						['', m._cssClassFocused],
+						m._focused
 					)
 				;
-			};
-			
-			_classPrototype._updateUiMessage = function() {
-				this.isWired && this.setNodeInnerHtml('text', this._getMessage())
-			};
-			
-			_classPrototype._updateUiShown = function() {
-				this.isWired && this.displayNode('', this._shown)
-			};
+			}
 
+			function _updateUiMessage (m) {
+				m.isWired && m.setNodeInnerHtml('text', m.getMessage())
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.getMessage = _classPrototype._getMessage = function() {
-				var _message = this._message;
-				return Uize.isFunction (_message) ? _message() : _message;
-			};
-			
-			_classPrototype.updateUi = function() {
-				var _this = this;
-				
-				if (_this.isWired) {
-					_this._updateUiMessage();
-					_this._updateUiShown();
-					_this._updateUiFocused();
-					
-					_superclass.prototype.updateUi.call (_this);
+			function _updateUiShown (m) {
+				m.isWired && m.displayNode('', m._shown)
+			}
+
+		return _superclass.subclass ({
+			instanceMethods:{
+				getMessage:function () {
+					var _message = this._message;
+					return Uize.isFunction (_message) ? _message() : _message;
+				},
+
+				updateUi:function () {
+					if (m.isWired) {
+						_updateUiMessage(m);
+						_updateUiShown(m);
+						_updateUiFocused(m);
+
+						_superclass.doMy (m,'updateUi');
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+
+					if (!m.isWired) {
+						var _focus = function (_focused) { m.set({ _focused: _focused }) };
+
+						m.wireNode (
+							'',
+							{
+								mouseover:function () { _focus(true) },
+								mouseout:function () { _focus(false) }
+							}
+						);
+
+						m._message == null
+							&& m.set({_message:m.getNodeValue('text')})
+						;
+
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-			_classPrototype.wireUi = function () {
-				var _this = this;
-
-				if (!_this.isWired) {
-					var _focus = function (_focused) { _this.set({ _focused: _focused }) };
-
-					_this.wireNode (
-						'',
-						{
-							mouseover:function() { _focus(_true) },
-							mouseout:function() { _focus(_false) }
-						}
-					);
-					
-					_this._message == null
-						&& _this.set({_message:_this.getNodeValue('text')})
-					;
-
-					_superclass.prototype.wireUi.call (_this);
-				}
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties({
+			stateProperties:{
 				_cssClassFocused:'cssClassFocused',
 				_focused:{
 					name:'focused',
-					onChange:_classPrototype._updateUiFocused,
-					value:_false
+					onChange:function () {_updateUiFocused (this)},
+					value:false
 				},
 				_message:{
 					name:'message',
-					onChange:_classPrototype._updateUiMessage
+					onChange:function () {_updateUiMessage (this)}
 				},
 				_shown:{
 					name:'shown',
-					onChange:_classPrototype._updateUiShown,
-					value:_false
+					onChange:function () {_updateUiShown (this)},
+					value:false
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });

@@ -304,7 +304,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.CalculatorAbstract',
-	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Widget.TextInput',
 		'Uize.Node.Event'
@@ -1088,8 +1087,7 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				buttonWidgetClass:null,
-				enableRootNodeCssClasses:false
+				buttonWidgetClass:null
 			}
 		});
 	}

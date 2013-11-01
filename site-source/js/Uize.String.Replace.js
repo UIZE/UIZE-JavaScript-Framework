@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.String.Replace= module is deprecated and is an alias to the =Uize.Str.Replace= module, which is effectively the same module migrated to under the =Uize.Str= namespace.
+		The =Uize.String.Replace= module is deprecated *(DEPRECATED 2013-10-21)* and is an alias to the =Uize.Str.Replace= module, which is effectively the same module migrated to under the =Uize.Str= namespace.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

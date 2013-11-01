@@ -29,122 +29,115 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function() {
-						var
-							_this = this,
-							_updateUiDisplayState = function() { _this._updateUiDisplayState() }
-						;
-						
-						_this.wire({
-							'Changed.enabledInherited':_updateUiDisplayState,
-							'Changed.selected':_updateUiDisplayState
-						});
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiLabel = function() {
-				var _this = this;
+			function _updateUiLabel () {
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
-						_label = _this._label,
-						_labelWithCount = _this.localize(
+						_label = m._label,
+						_labelWithCount = m.localize(
 							'filterWithCount',
 							{
 								filterLabel:_label,
-								count:_this._count
+								count:m._count
 							}
 						)
 					;
 
-					_this.set({
-						text:_this._showCount && _labelWithCount
+					m.set({
+						text:m._showCount && _labelWithCount
 							? _labelWithCount
 							: _label
 					});
 				}
-			};
+			}
 
-			_classPrototype._updateUiDisplayState = function() {
-				var _this = this;
+			function _updateUiDisplayState () {
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
 						_Uize_Node_Classes = Uize.Node.Classes,
-						_rootNode = _this.getNode()
+						_rootNode = m.getNode()
 					;
-					
+
 					_Uize_Node_Classes.setState(
 						_rootNode,
-						['', _this._cssClassFeatured],
-						_this._featured
+						['', m._cssClassFeatured],
+						m._featured
 					);
 					_Uize_Node_Classes.setState(
 						_rootNode,
-						['', _this._cssClassDisabled],
-						!_this.get('enabledInherited')
+						['', m._cssClassDisabled],
+						!m.get('enabledInherited')
 					);
 					_Uize_Node_Classes.setState(
 						_rootNode,
-						['', _this._cssClassSelected],
-						_this.get('selected')
+						['', m._cssClassSelected],
+						m.get('selected')
 					);
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiLabel();
-					_this._updateUiDisplayState();
-					_superclass.prototype.updateUi.call (_this);
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var
+					m = this,
+					_boundUpdateUiDisplayState = function () { _updateUiDisplayState.call(m) }
+				;
+
+				m.wire({
+					'Changed.enabledInherited':_boundUpdateUiDisplayState,
+					'Changed.selected':_boundUpdateUiDisplayState
+				});
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						_updateUiLabel.call(m);
+						_updateUiDisplayState.call(m);
+						_superclass.doMy (m,'updateUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_count:{
 					name:'count',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
 				},
 				_cssClassDisabled:{
 					name:'cssClassDisabled',
-					onChange:_classPrototype._updateUiDisplayState,
+					onChange:_updateUiDisplayState,
 					value:''
 				},
 				_cssClassFeatured:{
 					name:'cssClassFeatured',
-					onChange:_classPrototype._updateUiDisplayState,
+					onChange:_updateUiDisplayState,
 					value:''
 				},
 				_cssClassSelected:{
 					name:'cssClassSelected',
-					onChange:_classPrototype._updateUiDisplayState,
+					onChange:_updateUiDisplayState,
 					value:''
 				},
 				_featured:{
 					name:'featured',
-					onChange:_classPrototype._updateUiDisplayState
+					onChange:_updateUiDisplayState
 				},
 				_label:{
 					name:'label',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
 				},
 				_showCount:{
 					name:'showCount',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

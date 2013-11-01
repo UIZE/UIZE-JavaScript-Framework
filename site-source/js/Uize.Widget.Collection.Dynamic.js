@@ -456,7 +456,7 @@ Uize.module ({
 
 					// Update the already created item widgets if the UI hasn't been built yet
 					_this.get('built')
-						|| _this.forAll( function(_itemWidget) { _itemWidget.set(_itemWidgetProperties) } );
+						|| _this.forAll( function (_itemWidget) { _itemWidget.set(_itemWidgetProperties) } );
 
 					// For future creation of item widgets we need to update the item widget properties to have all the UI building stuff
 					_this.set({itemWidgetProperties:Uize.copyInto(_itemWidgetProperties, _this.get('itemWidgetProperties') || {})});

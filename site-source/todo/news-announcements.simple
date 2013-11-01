@@ -1,57 +1,15 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
-Uize.String Module Deprecated
-
-	Uize.Array.Join
-		- =Uize.String.hugJoin= becomes =Uize.Array.Join.hugJoin=
-
-	Uize.Str.Split
-		- =Uize.String.split= becomes =Uize.Str.Split.split=
-		- =Uize.String.splitInTwo= becomes =Uize.Str.Split.splitInTwo=
-	
-	Uize.Str.Replace
-		- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
-	
-	Uize.Str.Camel
-		- =Uize.String.toCamel= becomes =Uize.String.Camel.to=
-	
-	Uize.Str
-		.
-	
-	New Modules
-
-		- =Uize.Array.Join= - methods migrated from the =Uize.String= module
-		- =Uize.Str.Camel= - methods migrated from the =Uize.String= module
-		- =Uize.Str.Has= - methods migrated from the =Uize.String= module
-		- =Uize.Str.Limit= - methods migrated from the =Uize.String= module
-		- =Uize.Str.Repeat= - methods migrated from the =Uize.String= module
-		- =Uize.Str.Split= - methods migrated from the =Uize.String= module
-		- =Uize.Str.Trim= - methods migrated from the =Uize.String= module
-
-	Migrated Modules
-
-		- =Uize.Str.Builder= - migrated from the =Uize.String= namespace
-		- =Uize.Str.Discombobulator= - migrated from the =Uize.String= namespace
-		- =Uize.Str.Lines= - migrated from the =Uize.String= namespace
-		- =Uize.Str.Replace= - migrated from the =Uize.String= namespace
-
-	### TODO
-		- add docs to deprecated Uize.String module to indicate where methods have been migrated to
-		- create new announcement
-
-	Uize.String Module Deprecated
-		.
-
-NEW MODULE: Uize.Math.Blend
-	.
-
 NEW MODULE: Uize.Util.Html.Entities
 	.
 
 NEW MODULE: Uize.Util.Html.Encode
 	.
 
-NEW NAMESPACE: Uize.Math
+NEW MODULE: Uize.Math.LogicalPos
+	.
+
+NEW MODULE: Uize.Math.Blend
 	.
 
 New Short Form for Namespace Modules

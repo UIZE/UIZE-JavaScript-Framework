@@ -33,207 +33,224 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_null = null,
-				_Uize_Node = Uize.Node
-			;
+				_Uize_Node = Uize.Node,
+				_addChildButton = Uize.Widget.Button.addChildButton,
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
-
-						/*** set up the fade instance ***/
-							_this.fade = Uize.Fade ({
-								duration:750,
-								curve:Uize.Fade.celeration (0,1)
-							});
-							_this.fade.wire ({
-								'Changed.value':
-									function (_event) {_this.setNodeOpacity ('palette',_event.newValue)},
-								Done:
-									function () {_this._showPalette (_this._shown)}
-							});
-							/*?
-								Instance Properties
-									fade
-										An instance of the =Uize.Fade= class that is used to animate the optional fade in and out effect when the popup palette is shown or hidden.
-
-										Because this instance is exposed through a public property, you can use this reference to modify the behavior of the fade in/out effect.
-							*/
-
-						/*** create the selector button ***/
-							var
-								_selector = _this._selector = _this._addChildButton (
-									'selector',
-									function () {_this.toggle ('shown')}
-								),
-								_delayTimeout
-							;
-							_selector.set ({clickToDeselect:_true});
-							_this._updateSelectorSelectedState ();
-							function _handleSelectorOverOut (_event) {
-								var
-									_isOver = _event.name == 'Over',
-									_showWhenOver = _this._showWhenOver
-								;
-
-								function _show() { _this.set ({_shown:_true}) }
-
-								if (_isOver) {
-									if (_showWhenOver === _true || _showWhenOver === 0)
-										_show();
-									else if (_showWhenOver > 0)
-										_delayTimeout = setTimeout(_show, _showWhenOver);
-
-									_this._over()
-								} else {
-									clearTimeout(_delayTimeout);
-									_this._out();
-								}
-							}
-							_selector.wire ({
-								Down:_setMouseDownOnPaletteTrue,
-								Over:_handleSelectorOverOut,
-								Out:_handleSelectorOverOut
-							});
-							/*?
-								Child Widgets
-									selector
-										An instance of =Uize.Widget.Button= that lets the user trigger the popup palette.
-							*/
-
-						/*** Initialization ***/
-							_instances [_this.instanceId] = _this;
-					}
-				),
-				_classPrototype = _class.prototype,
+			/*** General Variables ***/
 				_instances = {}
-			;
+		;
+
+		/*** Code for Managing Exclusive Display ***/
+			function _hideAllExclusiveExcept (_instanceToPermitShown) {
+				for (var _instanceName in _instances) {
+					var _instance = _instances [_instanceName];
+					_instance != _instanceToPermitShown && _instance._exclusive &&
+						_instance.set ({_shown:_false})
+					;
+				}
+			}
+
+			function _setMouseDownOnPaletteTrue () {_mouseDownOnPalette = _true}
+
+			if (typeof navigator != 'undefined') {
+				var
+					_mouseDownOnPalette = _false,
+					_oldOnmousedown = document.onmousedown
+				;
+				document.onmousedown = function (_event) {
+					_mouseDownOnPalette
+						? (_mouseDownOnPalette = _false)
+						: _hideAllExclusiveExcept ()
+					;
+					Uize.isFunction (_oldOnmousedown) && _oldOnmousedown (_event || event);
+				};
+			}
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateSelectorSelectedState = function () {this._selector.set ({selected:this._shown})};
+			function _updateSelectorSelectedState (m) {m._selector.set ({selected:m._shown})};
 
-			_classPrototype._shouldTouchTimeouts = function () {
-				return this._shown && (this._showWhenOver !== _false || this._hideWhenOut !== _false);
-			};
-			_classPrototype._over = function () {
-				this._shouldTouchTimeouts () && this._clearDismissTimeout ();
-				this.fire('Over');
-			};
-			_classPrototype._out = function () {
-				this._shouldTouchTimeouts () && this._setDismissTimeout ();
-				this.fire('Out');
-			};
+			function _shouldTouchTimeouts (m) {
+				return m._shown && (m._showWhenOver !== _false || m._hideWhenOut !== _false);
+			}
 
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
+			function _over (m) {
+				_shouldTouchTimeouts (m) && m._clearDismissTimeout ();
+				m.fire('Over');
+			}
 
-			_classPrototype._showPalette = function (_mustShow) {
-				var _this = this;
-				_this.displayNode ('palette',_mustShow);
-				_mustShow && _this.setNodeStyle ('palette',{filter:''});
-				_this.fire ({name:'Palette ' + (_mustShow ? 'Shown' : 'Dismissed'), bubble:_true});
-			};
+			function _out (m) {
+				_shouldTouchTimeouts (m) && _setDismissTimeout (m);
+				m.fire('Out');
+			}
 
-			_classPrototype._clearDismissTimeout = function () {
-				var _this = this;
-				if (_this._dismissTimeout) {
-					clearTimeout (_this._dismissTimeout);
-					_this._dismissTimeout = null;
+			function _showPalette (m,_mustShow) {
+				m.displayNode ('palette',_mustShow);
+				_mustShow && m.setNodeStyle ('palette',{filter:''});
+				m.fire ({name:'Palette ' + (_mustShow ? 'Shown' : 'Dismissed'), bubble:_true});
+			}
+
+			function _clearDismissTimeout (m) {
+				if (m._dismissTimeout) {
+					clearTimeout (m._dismissTimeout);
+					m._dismissTimeout = null;
 				}
-			};
+			}
 
-			_classPrototype._setDismissTimeout = function () {
-				var
-					_this = this,
-					_hideTimeout = !Uize.isNumber(_this._hideWhenOut)
-						? 250
-						: _this._hideWhenOut
-				;
-				
-				_this._clearDismissTimeout ();
-				
-				function _hide() { _this.set ({_shown:_false}) }
-				
+			function _setDismissTimeout (m) {
+				var _hideTimeout = !Uize.isNumber(m._hideWhenOut) ? 250 : m._hideWhenOut;
+
+				_clearDismissTimeout (m);
+
+				function _hide() { m.set ({_shown:_false}) }
+
 				_hideTimeout
 					? (
-						_this._dismissTimeout = setTimeout (
+						m._dismissTimeout = setTimeout (
 							_hide,
-							!Uize.isNumber(_this._hideWhenOut) ? 250 : _this._hideWhenOut
+							!Uize.isNumber(m._hideWhenOut) ? 250 : m._hideWhenOut
 						)
 					)
 					: _hide()
 				;
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.kill = function () {
-				delete _instances [this.instanceId];
-				_superclass.doMy (this,'kill');
-			};
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
 
-			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					/*** capture mousedown event for palette ***/
-						_this.wireNode (
-							'palette',
-							{
-								mousedown:_setMouseDownOnPaletteTrue,
-								mouseup:
-									function (_event) {
-										_this._hideOnClick && _event.target != _this.getNode ('palette') &&
-											/* NOTE:
-												There is an issue/behavior in Firefox where clicking on the scrollbar for a scrollable div fires the click event for that div. Other browser do not behave that way. Without this additional check, using a scrollable div for a droplist style popup palette would dismiss the palette - not the desired effect!
-											*/
-											_this.set ({_shown:_false})
-										;
-									},
-								mouseover:function () {_this._over ()},
-								mouseout:function () {_this._out ()}
-							}
-						);
+				/*** set up the fade instance ***/
+					m.fade = Uize.Fade ({
+						duration:750,
+						curve:Uize.Fade.celeration (0,1)
+					});
+					m.fade.wire ({
+						'Changed.value':
+							function (_event) {m.setNodeOpacity ('palette',_event.newValue)},
+						Done:
+							function () {_showPalette (m,m._shown)}
+					});
+					/*?
+						Instance Properties
+							fade
+								An instance of the =Uize.Fade= class that is used to animate the optional fade in and out effect when the popup palette is shown or hidden.
 
-					/*** wire up palette close button ***/
-						_this.wireNode ('paletteClose','click',function () {_this.set ({_shown:_false})});
+								Because this instance is exposed through a public property, you can use this reference to modify the behavior of the fade in/out effect.
+					*/
 
-					/*** move palette to child of root, if positioning is absolute ***/
-						if (_this._positioning != 'none') {
-							var
-								_docBody = document.body,
-								_paletteNode = _this.getNode ('palette')
-							;
-							if (_paletteNode && _paletteNode.parentNode != _docBody) {
-								/* IMPORTANT:
-									There is a problem in Firefox where moving palettes to the root of the DOM like this adds entries to the browser's history for palettes that contain iframes - go figure!
-								*/
-								_docBody.insertBefore (_paletteNode,_docBody.childNodes [0]);
-								_this.setNodeStyle (
-									_paletteNode,
-									{
-										zIndex:10000,
-										position:'absolute',
-										left:'',
-										top:'',
-										right:'',
-										bottom:'',
-										width:_this.getNodeStyle (_paletteNode, 'width')
-									}
-								);
-							}
+				/*** create the selector button ***/
+					var
+						_selector = m._selector = _addChildButton.call (
+							m,
+							'selector',
+							function () {m.toggle ('shown')}
+						),
+						_delayTimeout
+					;
+					_selector.set ({clickToDeselect:_true});
+					_updateSelectorSelectedState (m);
+					function _handleSelectorOverOut (_event) {
+						var
+							_isOver = _event.name == 'Over',
+							_showWhenOver = m._showWhenOver
+						;
+
+						function _show() { m.set ({_shown:_true}) }
+
+						if (_isOver) {
+							if (_showWhenOver === _true || _showWhenOver === 0)
+								_show();
+							else if (_showWhenOver > 0)
+								_delayTimeout = setTimeout(_show, _showWhenOver);
+
+							_over(m)
+						} else {
+							clearTimeout(_delayTimeout);
+							_out(m);
 						}
+					}
+					_selector.wire ({
+						Down:_setMouseDownOnPaletteTrue,
+						Over:_handleSelectorOverOut,
+						Out:_handleSelectorOverOut
+					});
+					/*?
+						Child Widgets
+							selector
+								An instance of =Uize.Widget.Button= that lets the user trigger the popup palette.
+					*/
 
-					_superclass.doMy (_this,'wireUi');
+				/*** Initialization ***/
+					_instances [m.instanceId] = m;
+			},
+
+			instanceMethods:{
+				kill:function () {
+					delete _instances [this.instanceId];
+					_superclass.doMy (this,'kill');
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						/*** capture mousedown event for palette ***/
+							m.wireNode (
+								'palette',
+								{
+									mousedown:_setMouseDownOnPaletteTrue,
+									mouseup:
+										function (_event) {
+											m._hideOnClick && _event.target != m.getNode ('palette') &&
+												/* NOTE:
+													There is an issue/behavior in Firefox where clicking on the scrollbar for a scrollable div fires the click event for that div. Other browser do not behave that way. Without this additional check, using a scrollable div for a droplist style popup palette would dismiss the palette - not the desired effect!
+												*/
+												m.set ({_shown:_false})
+											;
+										},
+									mouseover:function () {_over (m)},
+									mouseout:function () {_out (m)}
+								}
+							);
+
+						/*** wire up palette close button ***/
+							m.wireNode ('paletteClose','click',function () {m.set ({_shown:_false})});
+
+						/*** move palette to child of root, if positioning is absolute ***/
+							if (m._positioning != 'none') {
+								var
+									_docBody = document.body,
+									_paletteNode = m.getNode ('palette')
+								;
+								if (_paletteNode && _paletteNode.parentNode != _docBody) {
+									/* IMPORTANT:
+										There is a problem in Firefox where moving palettes to the root of the DOM like this adds entries to the browser's history for palettes that contain iframes - go figure!
+									*/
+									_docBody.insertBefore (_paletteNode,_docBody.childNodes [0]);
+									m.setNodeStyle (
+										_paletteNode,
+										{
+											zIndex:10000,
+											position:'absolute',
+											left:'',
+											top:'',
+											right:'',
+											bottom:'',
+											width:m.getNodeStyle (_paletteNode, 'width')
+										}
+									);
+								}
+							}
+
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_exclusive:{
 					name:'exclusive',
 					value:_true
@@ -254,26 +271,26 @@ Uize.module ({
 					name:'shown',
 					onChange:function () {
 						var
-							_this = this,
-							_shown = _this._shown,
-							_positioning = _this._positioning
+							m = this,
+							_shown = m._shown,
+							_positioning = m._positioning
 						;
-						_this._selector && _this._updateSelectorSelectedState ();
-						if (_this.isWired) {
-							_this._clearDismissTimeout ();
+						m._selector && _updateSelectorSelectedState (m);
+						if (m.isWired) {
+							_clearDismissTimeout (m);
 							if (_shown) {
-								_this.fire ('Before Palette Shown');
-								_this._exclusive && _hideAllExclusiveExcept (_this);
+								m.fire ('Before Palette Shown');
+								m._exclusive && _hideAllExclusiveExcept (m);
 								if (_positioning != 'none') {
 									var
-										_paletteNode = _this.getNode ('palette'),
+										_paletteNode = m.getNode ('palette'),
 										_nodeToPositionAdjacentTo =
 											Uize.isFunction (_positioning)
 												? _positioning(_paletteNode)
-												: _this._selector.getNode (),
+												: m._selector.getNode (),
 										_displayHiddenForPositioning = function (_before) {
-											_this.showNode ('palette',!_before);
-											_this.displayNode ('palette',_before);
+											m.showNode ('palette',!_before);
+											m.displayNode ('palette',_before);
 										}
 									;
 									if (_Uize_Node.isNode(_nodeToPositionAdjacentTo)) {
@@ -284,14 +301,14 @@ Uize.module ({
 								}
 							}
 							/*** start opacity fade ***/
-								if (_this.fade.get ('duration') > 0) {
-									_shown && _this.displayNode ('palette');
-									_this.fade.start ({
+								if (m.fade.get ('duration') > 0) {
+									_shown && m.displayNode ('palette');
+									m.fade.start ({
 										startValue:_shown ? 0 : 1,
 										endValue:_shown ? 1 : 0
 									});
 								} else {
-									_this._showPalette (_shown);
+									_showPalette (m,_shown);
 								}
 						}
 					},
@@ -301,36 +318,8 @@ Uize.module ({
 					name:'showWhenOver',
 					value:_false	// false - no hover, true - hover, Number - hover delay
 				}
-			});
-
-		/*** Code for Managing Exclusive Display ***/
-			function _hideAllExclusiveExcept (_instanceToPermitShown) {
-				for (var _instanceName in _instances) {
-					var _instance = _instances [_instanceName];
-					_instance != _instanceToPermitShown && _instance._exclusive &&
-						_instance.set ({_shown:_false})
-					;
-				}
 			}
-
-			function _setMouseDownOnPaletteTrue () {_mouseDownOnPalette = _true}
-
-			if (typeof navigator != 'undefined') {
-				var
-					_mouseDownOnPalette = _false,
-					_oldOnmousedown = document.onmousedown
-				;
-				document.onmousedown = function (_event) {
-					if (!_event) _event = event;
-					_mouseDownOnPalette
-						? (_mouseDownOnPalette = _false)
-						: _hideAllExclusiveExcept ()
-					;
-					Uize.isFunction (_oldOnmousedown) && _oldOnmousedown (_event);
-				};
-			}
-
-		return _class;
+		});
 	}
 });
 

@@ -46,7 +46,7 @@ Uize.module ({
 			;
 
 		/*** Private Methods ***/
-			_classPrototype._setImageNode = function() {
+			_classPrototype._setImageNode = function () {
 				var
 					m = this,
 					_img = m._img,

@@ -37,22 +37,6 @@ Uize.module ({
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Xml'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.Xml.toAttributeValue',[
-						{
-							title:'Test that the Uize.Xml.toAttributeValue method is simply an alias to the Uize.Util.Html.Encode.encode method',
-							test:function () {
-								return this.expect (Uize.Util.Html.Encode.encode,Uize.Xml.toAttributeValue);
-							}
-						}
-					]],
-					['Uize.Xml.fromAttributeValue',[
-						{
-							title:'Test that the Uize.Xml.fromAttributeValue method is simply an alias to the Uize.Util.Html.Encode.decode method',
-							test:function () {
-								return this.expect (Uize.Util.Html.Encode.decode,Uize.Xml.fromAttributeValue);
-							}
-						}
-					]],
 					['Uize.Xml.toAttributes',[
 						['Test that calling with no parameters produces an empty string',
 							[],
@@ -213,6 +197,10 @@ Uize.module ({
 							{quot:'"',amp:'&',apos:'\'',lt:'<',gt:'>',lf:'\n',cr:'\r'}
 						]
 					]]
+				]),
+				Uize.Test.migratedStaticMethodsTest ([
+					['Uize.Xml.toAttributeValue','Uize.Util.Html.Encode.encode'],
+					['Uize.Xml.fromAttributeValue','Uize.Util.Html.Encode.decode']
 				])
 			]
 		});
