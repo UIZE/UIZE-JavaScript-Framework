@@ -77,7 +77,7 @@ Uize.module ({
 												challenge:_recaptchaObject.get_challenge (),
 												token:m._validationToken
 											}
-										})
+										});
 									}
 
 									_Uize_Node.wire (
@@ -100,22 +100,18 @@ Uize.module ({
 
 												_fire ('Key Up', _event);
 											},
-											blur:function (_event) {
+											blur:function () {
 												_setValue ();
 												m.set ({focused:_false});
 											},
-											focus:function (_event) {
-												m.set ({focused:_true})
-											},
-											click:function (_event) {
-												_fire ('Click', _event)
-											},
+											focus:function () { m.set ({focused:_true}) },
+											click:function (_event) { _fire ('Click', _event) },
 											keydown:function (_event) {
 												m._lastKeyDown = _event.keyCode;
 												_fire ('Key Down', _event);
 											}
 										}
-									)
+									);
 								}
 							}
 						)
@@ -125,14 +121,14 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				this._commObject = new _Uize.Comm.Script ({callbackMode:'client'})
+				this._commObject = new _Uize.Comm.Script ({callbackMode:'client'});
 			},
 
 			instanceMethods:{
 				checkIsEmpty:function () {
 					var _value = this.valueOf();
 
-					return !_value || !_value.response
+					return !_value || !_value.response;
 				},
 
 				initializeCaptcha:function () {
@@ -210,6 +206,7 @@ Uize.module ({
 					onChange:function () {
 						this.isWired
 							&& this.setNodeValue ('token', this._validationToken)
+						;
 					},
 					value:''
 					/*?

@@ -45,12 +45,12 @@ Uize.module ({
 			}
 
 			function _resolveRequestUrl (_request) {
-				_request.url = Uize.Url.resolve (_request.url) // resolves it, in case it's an array
+				_request.url = Uize.Url.resolve (_request.url); // resolves it, in case it's an array
 			}
 
 		/*** Private Instance Methods ***/
 			function _getCachedResponse (m,_request) {
-				return _request.cache == 'memory' ? m._responseCache [_request.url] : null
+				return _request.cache == 'memory' ? m._responseCache [_request.url] : null;
 			}
 
 			function _callResponseCallback (m,_request) {
@@ -417,6 +417,7 @@ Uize.module ({
 						(_elementNo += _direction) >= 0 && _elementNo <= _elementsLengthMinus1 && _mustContinue !== _false
 							? _processElementAsync (_elements [_elementNo],_processNextElement,_elementNo)
 							: _completion ? _completion (_elementsLengthMinus1 + 1) : 0
+						;
 					}
 					_processNextElement ();
 					/*?

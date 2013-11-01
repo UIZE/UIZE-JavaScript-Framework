@@ -77,8 +77,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			omegastructor:function () {
 				var
-					m = this,
-					_selector = m.children.selector
+					m = this
 				;
 
 				m.wire(
@@ -95,9 +94,7 @@ Uize.module ({
 			instanceMethods:{
 				getDialogWidgetProperties:function () {
 					var
-						m = this,
-						_mooringNode = m.getMooringNode(),
-						_undefined
+						m = this
 					;
 
 					return _copyInto(

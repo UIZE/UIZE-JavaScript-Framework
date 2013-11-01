@@ -37,7 +37,6 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_null = null,
 				_Uize_Node = Uize.Node,
 				_addChildButton = Uize.Widget.Button.addChildButton,
 
@@ -72,7 +71,7 @@ Uize.module ({
 			}
 
 		/*** Private Instance Methods ***/
-			function _updateSelectorSelectedState (m) {m._selector.set ({selected:m._shown})};
+			function _updateSelectorSelectedState (m) {m._selector.set ({selected:m._shown})}
 
 			function _shouldTouchTimeouts (m) {
 				return m._shown && (m._showWhenOver !== _false || m._hideWhenOut !== _false);
@@ -167,7 +166,7 @@ Uize.module ({
 							else if (_showWhenOver > 0)
 								_delayTimeout = setTimeout(_show, _showWhenOver);
 
-							_over(m)
+							_over(m);
 						} else {
 							clearTimeout(_delayTimeout);
 							_out(m);

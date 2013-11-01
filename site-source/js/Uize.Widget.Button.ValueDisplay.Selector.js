@@ -36,7 +36,7 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			function _setInputNodeProperties (m,_nodeProperties) {
-				m.isWired && m.setNodeProperties('input', _nodeProperties)
+				m.isWired && m.setNodeProperties('input', _nodeProperties);
 			}
 
 			function _updateUiSelectorValueDetails (m) {

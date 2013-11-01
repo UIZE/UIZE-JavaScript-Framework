@@ -33,8 +33,8 @@ Uize.module ({
 		'use strict';
 
 		/*** Private Instance Methods ***/
-			function _fireSubmissionComplete(_propertiesChanged) {
-				this.fireSubmissionComplete(true, _propertiesChanged)
+			function _fireSubmissionComplete (_propertiesChanged) {
+				this.fireSubmissionComplete (true, _propertiesChanged);
 			}
 
 		return _superclass.subclass ({

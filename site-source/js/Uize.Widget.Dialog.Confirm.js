@@ -39,11 +39,11 @@ Uize.module ({
 			}
 
 			function _updateUiMessage (m) {
-				m.isWired && m._message != null && m.setNodeInnerHtml ('message',m._message)
+				m.isWired && m._message != null && m.setNodeInnerHtml ('message',m._message);
 			}
 
 			function _updateUiMode (m) {
-				m.isWired && m.children.cancel.showNode ('',!m._mode.indexOf ('confirm'))
+				m.isWired && m.children.cancel.showNode ('',!m._mode.indexOf ('confirm'));
 			}
 
 		return _superclass.subclass ({
@@ -61,7 +61,7 @@ Uize.module ({
 
 			instanceMethods:{
 				handleConfirm:function (_event) {
-					this.fire ({name:'Submission Complete',result:_event.name == 'Ok'})
+					this.fire ({name:'Submission Complete',result:_event.name == 'Ok'});
 				},
 
 				updateUi:function () {

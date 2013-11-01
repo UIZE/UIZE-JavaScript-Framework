@@ -42,7 +42,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-			 _null = null
+				_null = null
 		;
 
 		return _superclass.subclass ({
@@ -77,7 +77,7 @@ Uize.module ({
 				getMoreDialogEventHandlers:function () { return _null },
 
 				getMooringNode:function () {
-					return this.children.selector.getNode () || this.getNode ('input')
+					return this.children.selector.getNode () || this.getNode ('input');
 				},
 
 				handleDialogSubmit:function (_valueInfo) {
@@ -151,7 +151,7 @@ Uize.module ({
 							function (_event) {
 								if (!m._allowManualEntry) {
 									Uize.Node.Event.abort (_event);
-									_pickValue ();
+									m.pickValue ();
 								}
 							}
 						);

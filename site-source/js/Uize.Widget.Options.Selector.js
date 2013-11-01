@@ -49,7 +49,7 @@ Uize.module ({
 				}
 
 				function _syncValueDetails(_propertyName) {
-					var _valueDetails = _valueDetailsCache[_propertyValue];
+					var _valueDetails = _valueDetailsCache[_propertyName];
 
 					if (_valueDetails === _undefined) {
 						var
@@ -58,7 +58,7 @@ Uize.module ({
 						;
 
 						_addToValueDetailsCache(
-							_propertyValue,
+							_propertyName,
 							_valueDetails = (_valueObject ? _valueObject.valueDetails : null)
 						);
 					}
@@ -93,7 +93,7 @@ Uize.module ({
 							value:_valueObject.name,
 							valueDetails:_valueObject.valueDetails
 						}
-					)
+					);
 				},
 
 				wireUi:function () {
