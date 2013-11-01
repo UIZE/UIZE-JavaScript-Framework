@@ -1598,6 +1598,31 @@ Uize.module ({
 										- see also the =getProvider=, =getInherited=, and =setInherited= instance methods
 							*/
 						},
+						
+						childId:function (_childName) {
+							return _constructIdPrefix (this._idPrefix, this._idPrefix, _childName, this._idPrefixConstruction);
+							/*?
+								Instance Methods
+									childId
+										Returns the ID prefix of a child widget with the specified =childNameSTR=.
+			
+										SYNTAX
+										..................................................
+										childIdPrefixSTR = myWidget.childId(childNameSTR);
+										..................................................
+			
+										EXAMPLE
+										...........................................
+										var childIdPrefix = mySlider.childId('child');
+										...........................................
+			
+										Assuming an =idPrefix= of ="page_slider"=, the example would return ="page_slider_child"=.
+			
+										NOTES
+										- See related =addChild= instance method in =Uize.Widget=
+										- See also =Uize.Widget.constructIdPrefix= static method
+							*/
+						},
 
 					/*** Overridable Wiring and Updating Methods ***/
 						kill:function () {
