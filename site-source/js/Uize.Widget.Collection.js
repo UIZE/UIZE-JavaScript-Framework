@@ -110,6 +110,11 @@ Uize.module ({
 				_class = _superclass.subclass (
 					function () {
 						var _this = this;
+						
+						// Initialize the items array here (as opposed to the default value when registering the
+						// set-get property), since that default is static and gets shared between all instances
+						// which casues problems
+						_this._items = [];
 
 						/*** Private Instance Properties ***/
 							_this._itemWidgetNameUniquifier = 0;
@@ -278,7 +283,7 @@ Uize.module ({
 			};
 
 			_classPrototype._fireItemsChangedEvent = function () {
-				this.fire ('Items Changed')
+				this.fire ('Items Changed');
 				/*?
 					Instance Events
 						Items Changed
@@ -317,73 +322,56 @@ Uize.module ({
 				this.removeChild (_itemWidget);
 			};
 
-			_classPrototype._removeWithConfirm = function (_itemWidgetsToRemove,_byUser) {
+		/*** Public Instance Methods ***/
+			_classPrototype.addChild = function(_childName, _childInstanceOrClass, _properties) {
+				// NOTE: Overriding addChild for the case that a collection item is added to the collection
+				// via widget adoption.  If this is the case, the code won't go through the normal addItemWidget
+				// and the item widget won't have the necessary events wired on it and it won't get added to the
+				// itemWidgets property
 				var
 					_this = this,
-					_itemWidgetsToRemoveLength = _itemWidgetsToRemove.length
+					_childWidget = _superclass.prototype.addChild.call (
+						_this,
+						_childName,
+						_childInstanceOrClass,
+						_properties
+					)
 				;
-				if (_itemWidgetsToRemoveLength) {
-					var _remove = function () {_this.remove (_itemWidgetsToRemove,_byUser)};
-					if (_byUser) {
-						_this.confirm ({
-							message:
-								_this.localize (
-									_itemWidgetsToRemoveLength == 1 ? 'removeItemConfirmation' : 'removeItemsConfirmation',
-									{
-										0:_itemWidgetsToRemoveLength,
-										itemsToRemove:_itemWidgetsToRemove
-									}
-									/*?
-										Localizable Strings
-											removeItemConfirmation
-												A localizable string, that will be displayed as the message in a confirmation dialog when the user chooses to remove a single item from the collection.
 
-												NOTES
-												- see the companion =removeItemsConfirmation= localizable string
-												- see the related =removeItemConfirmationTitle= and =removeItemsConfirmationTitle= localizable strings
+				if (_this.isCollectionItem(_childWidget)) {
+					_this.wireItemWidget (_childWidget);
+					_this._itemWidgets.push (_childWidget);
 
-											removeItemsConfirmation
-												A localizable string, that will be displayed as the message in a confirmation dialog when the user chooses to remove multiple items from the collection.
-
-												NOTES
-												- see the companion =removeItemConfirmation= localizable string
-												- see the related =removeItemConfirmationTitle= and =removeItemsConfirmationTitle= localizable strings
-									*/
-								),
-							title:
-								_this.localize (
-									_itemWidgetsToRemoveLength == 1 ? 'removeItemConfirmationTitle' : 'removeItemsConfirmationTitle',
-									{
-										0:_itemWidgetsToRemoveLength,
-										itemsToRemove:_itemWidgetsToRemove
-									}
-									/*?
-										Localizable Strings
-											removeItemConfirmationTitle
-												A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove a single item from the collection.
-
-												NOTES
-												- see the companion =removeItemsConfirmationTitle= localizable string
-												- see the related =removeItemConfirmation= and =removeItemsConfirmation= localizable strings
-
-											removeItemsConfirmationTitle
-												A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove multiple items from the collection.
-
-												NOTES
-												- see the companion =removeItemConfirmationTitle= localizable string
-												- see the related =removeItemConfirmation= and =removeItemsConfirmation= localizable strings
-									*/
-								),
-							yesHandler:_remove
-						});
-					} else {
-						// silent removal that wasn't directly initiated by the user
-						_remove ();
+					// In the event that we're adding this child via adoption, the items property won't have
+					// an entry for the properties of the item widget, so add it in explicitly
+					if (_this._items.length < _this._itemWidgets.length) {
+						(_this._items = (!_this._items.length ? [] : _this._items)).push(_childWidget.get('properties'));
+						_this._fireItemsChangedEvent ();
 					}
 				}
+
+				return _childWidget;
 			};
 
-		/*** Public Instance Methods ***/
+		
+			_classPrototype.isCollectionItem = function (_childWidget) {
+				var
+					_this = this
+				;
+				// test to make sure the widget being added is actually a collection item widget
+				return (_this._itemWidgetClass && _childWidget.Class.moduleName == _this._itemWidgetClass.moduleName);
+				/*?
+					Instance Methods
+						isCollectionItem
+							This is a hook method, overrideable by subclasses, which checks to see if the widget being added through widget adoption is a collection item
+
+							SYNTAX
+							.....................................................................................
+							bool = myInstance.isCollectionItem (itemWidget);
+							.....................................................................................
+				*/
+			};
+			
 			_classPrototype.addItemWidget = function (_widgetName,_widgetProperties) {
 				var
 					_this = this,
@@ -394,8 +382,6 @@ Uize.module ({
 					)
 				;
 
-				_this.wireItemWidget (_itemWidget);
-				_this._itemWidgets.push (_itemWidget);
 				_this.isWired && _itemWidget.insertOrWireUi ();
 				return _itemWidget;
 				/*?
@@ -449,7 +435,7 @@ Uize.module ({
 							var
 								_domEvent = _event.domEvent,
 								_shiftKey = _domEvent && _domEvent.shiftKey,
-								_ctrlKey = (!_shiftKey && _event.forceToggle) || (_domEvent && _domEvent.ctrlKey),
+								_ctrlKey = (!_shiftKey && _event.forceToggle) || (_domEvent && (_domEvent.ctrlKey || _domEvent.metaKey)),
 								_selectWithModifier = _ctrlKey || _shiftKey
 							;
 							_selectWithModifier && Uize.Node.Event.abort (_domEvent); // prevent browser spawning new window
@@ -475,7 +461,7 @@ Uize.module ({
 							for (var widgetNo = -1; ++widgetNo < _itemWidgets.length;)
 								if (_itemWidgets[widgetNo] == _itemWidget) _index = widgetNo;
 							_this._items [_index] = Uize.clone (_itemWidget.get ('properties'));
-							_this._fireItemsChangedEvent ()
+							_this._fireItemsChangedEvent ();
 						},
 					Remove:
 						function (_event) {
@@ -537,7 +523,7 @@ Uize.module ({
 
 			_classPrototype.getItemWidgetProperties = function () {
 				/* NOTE: can be overrided by subclasses in order to stitch in additional item widget properties */
-				return this._itemWidgetProperties
+				return this._itemWidgetProperties;
 				/*?
 					Instance Methods
 						getItemWidgetProperties
@@ -755,9 +741,7 @@ Uize.module ({
 				*/
 			};
 
-			_classPrototype.updateUi = function () {
-				this._updateUiTotalItems ()
-			};
+			_classPrototype.updateUi = function () { this._updateUiTotalItems () };
 
 			_classPrototype.remove = function (_itemWidgetsToRemove,_byUser) {
 				var _this = this;
@@ -824,6 +808,72 @@ Uize.module ({
 							- see the related =Remove= instance event
 							- see the related =remove Child Widget=
 				*/
+			};
+
+			_classPrototype.removeWithConfirm = _classPrototype._removeWithConfirm = function (_itemWidgetsToRemove,_byUser) {
+				var
+					_this = this,
+					_itemWidgetsToRemoveLength = _itemWidgetsToRemove.length
+				;
+				if (_itemWidgetsToRemoveLength) {
+					var _remove = function() {_this.remove (_itemWidgetsToRemove,_byUser)};
+					if (_byUser) {
+						_this.confirm ({
+							message:
+								_this.localize (
+									_itemWidgetsToRemoveLength == 1 ? 'removeItemConfirmation' : 'removeItemsConfirmation',
+									{
+										0:_itemWidgetsToRemoveLength,
+										itemsToRemove:_itemWidgetsToRemove
+									}
+									/*?
+										Localizable Strings
+											removeItemConfirmation
+												A localizable string, that will be displayed as the message in a confirmation dialog when the user chooses to remove a single item from the collection.
+
+												NOTES
+												- see the companion =removeItemsConfirmation= localizable string
+												- see the related =removeItemConfirmationTitle= and =removeItemsConfirmationTitle= localizable strings
+
+											removeItemsConfirmation
+												A localizable string, that will be displayed as the message in a confirmation dialog when the user chooses to remove multiple items from the collection.
+
+												NOTES
+												- see the companion =removeItemConfirmation= localizable string
+												- see the related =removeItemConfirmationTitle= and =removeItemsConfirmationTitle= localizable strings
+									*/
+								),
+							title:
+								_this.localize (
+									_itemWidgetsToRemoveLength == 1 ? 'removeItemConfirmationTitle' : 'removeItemsConfirmationTitle',
+									{
+										0:_itemWidgetsToRemoveLength,
+										itemsToRemove:_itemWidgetsToRemove
+									}
+									/*?
+										Localizable Strings
+											removeItemConfirmationTitle
+												A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove a single item from the collection.
+
+												NOTES
+												- see the companion =removeItemsConfirmationTitle= localizable string
+												- see the related =removeItemConfirmation= and =removeItemsConfirmation= localizable strings
+
+											removeItemsConfirmationTitle
+												A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove multiple items from the collection.
+
+												NOTES
+												- see the companion =removeItemConfirmationTitle= localizable string
+												- see the related =removeItemConfirmation= and =removeItemsConfirmation= localizable strings
+									*/
+								),
+							yesHandler:_remove
+						});
+					} else {
+						// silent removal that wasn't directly initiated by the user
+						_remove ();
+					}
+				}
 			};
 
 			_classPrototype.finishRemove = function (_itemWidgetsToRemove,_byUser) {
@@ -966,7 +1016,7 @@ Uize.module ({
 			};
 
 			_classPrototype.selectNone = function () {
-				this.selectAll (_false)
+				this.selectAll (_false);
 				/*?
 					Instance Methods
 						selectNone
@@ -1203,7 +1253,7 @@ Uize.module ({
 				},
 				_totalItems:{
 					name:'totalItems',
-					onChange:function () {this._updateUiTotalItems ()}
+					onChange:_classPrototype._updateUiTotalItems
 					/*?
 						State Properties
 							totalItems

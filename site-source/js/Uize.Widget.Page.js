@@ -62,7 +62,7 @@ Uize.module ({
 
 		/*** Utility Functions ***/
 			function _getCallbackFromDirectives (_directives) {
-				return (Uize.isFunction (_directives) && _directives) || (_directives && _directives.callback) || Object
+				return (Uize.isFunction (_directives) && _directives) || (_directives && _directives.callback) || Object;
 			}
 
 		/*** Private Instance Methods ***/
@@ -78,7 +78,10 @@ Uize.module ({
 						mode:_mode,
 						state:_params.state || _defaultState,
 						okText:_params.okText || _null,
-						cancelText:_params.cancelText || _null
+						cancelText:_params.cancelText || _null,
+						mooringNode:_params.mooringNode || _null,
+						offsetX:_params.offsetX || _null,
+						offsetY:_params.offsetY || _null
 					},
 					submitHandler:function (_confirmed) {
 						var _handler = _params.callback || (_confirmed ? _params.yesHandler : _params.noHandler);
@@ -212,20 +215,33 @@ Uize.module ({
 					_this = this,
 					_rootNodeId = _injectionParams.rootNodeId,
 					_callback = _getCallbackFromDirectives (_loaderDirectives),
+					_loaderDirectivesIsValidObject = typeof _loaderDirectives == 'object' && _loaderDirectives,
 					_loadHtmlCallbackObject = {
 						callback:function (_html) {
-							var
-								_documentBody = document.body,
-								_node = _injectionParams.node != undefined
-									? _this.getNode (_injectionParams.node)
-									: (_rootNodeId ? _Uize_Node.getById (_rootNodeId + '-shell') : _null) || _documentBody
+							function _injectHmtl() {
+								var
+									_documentBody = document.body,
+									_node = _injectionParams.node != undefined
+										? _this.getNode (_injectionParams.node)
+										: (_rootNodeId ? _Uize_Node.getById (_rootNodeId + '-shell') : _null) || _documentBody
+								;
+
+								_Uize_Node.injectHtml (
+									_node,
+									_html,
+									_injectionParams.injectMode || (_node == _documentBody ? 'inner bottom' : 'inner replace')
+								);
+	
+								// Need to break synchronous execution of the page between HTML injection
+								// and child widget adoption so the browser has time to insert any widget data
+								// into the window object
+								setTimeout(function() { _this._adoptChildWidgets (_callback) }, 0);
+							}
+							
+							_loaderDirectivesIsValidObject && _loaderDirectivesIsValidObject.beforeInject
+								? _loaderDirectivesIsValidObject.beforeInject(_injectHmtl, _html)
+								: _injectHmtl()
 							;
-							_Uize_Node.injectHtml (
-								_node,
-								_html,
-								_injectionParams.injectMode || (_node == _documentBody ? 'inner bottom' : 'inner replace')
-							);
-							_this._adoptChildWidgets (_callback);
 						}
 					}
 				;
@@ -233,8 +249,8 @@ Uize.module ({
 					? _callback ()
 					: _this.loadHtml (
 						_htmlParams,
-						typeof _loaderDirectives == 'object' && _loaderDirectives
-							? Uize.copy (_loaderDirectives,_loadHtmlCallbackObject)
+						_loaderDirectivesIsValidObject
+							? Uize.copyInto ({},_loaderDirectives,_loadHtmlCallbackObject)
 							: _loadHtmlCallbackObject
 					)
 				;
@@ -376,6 +392,16 @@ Uize.module ({
 				*/
 			};
 
+			_classPrototype.flushAjaxCache = function (/*_requestOrUrl*/) {
+				/*?
+					Instance Methods
+						flushAjaxCache
+							A stub implementation of the =flushAjaxCache= instance method that should be overridden by page widget subclasses to flush the cache of Ajax requests.
+
+							This method should expect to receive the =requestOrUrl= parameter expected by =Uize.Comm.flushCache()=.
+				*/
+			};
+
 			_classPrototype.useDialog = function (_params) {
 				var
 					_this = this,
@@ -392,11 +418,12 @@ Uize.module ({
 					;
 					_componentProfile = {
 						name:_component.name,
+						node:_component.rootNode,	// the node to inject into
 						rootNodeId:_rootNodeId,
 						params:Uize.copyInto ({idPrefix:_rootNodeId},_component.params)
 					};
 				}
-				function _showDialog (_loadType) {
+				function _showDialog () {
 					setTimeout(
 						/* NOTE:
 							Using a setTimeout here to ensure that the dialog is shown in an asynchronous manner. We were getting in situations where a dialog would be shown, OK would be pressed, and the OK handler executed in such a way that the dialog would be reshown.  Then once the dialog was reshown, the set({shown:false}) for the first dialog would execute, but hide the second dialog.  We'd like the hiding to happen before the second dialog is shown and this should guarantee that by effectively breaking the thread of execution.
@@ -413,11 +440,15 @@ Uize.module ({
 								_callHandler ('dismissHandler',_handlerParams);
 							}
 							function _handleShownOrHide(_event) {
+								var _eventName = _event.name;
+								_callHandler(_eventName, [_event]);
 								_this.fire({
-									name:'Dialog ' + _event.name,
+									name:'Dialog ' + _eventName,
 									dialogWidget:_event.source
-								})
+								});
 							}
+							
+							_dialogWidget.set ({shown:_false});
 							/*** store handlers as properties of widget, in order to be able to remove them on reuse ***/
 								/* WORKAROUND:
 									this is a horrible workaround, since there is currently no elegant way to remove event handlers based upon an owner ID, or wiring IDs
@@ -435,16 +466,19 @@ Uize.module ({
 										...store reference to previous handlers on widget instance
 								*/
 								_dialogWidget.unwire (_dialogWidget.eventHandlersForUseDialog || {});
-								_dialogWidget.eventHandlersForUseDialog = {
-									'Submission Complete':
-										function (_event) {_callHandler ('submitHandler',[_event.result,_event])},
-									Close:_handleCloseOrCancel,
-									Cancel:_handleCloseOrCancel,
-									'Before Show':_handleShownOrHide,
-									'After Show':_handleShownOrHide,
-									'Before Hide':_handleShownOrHide,
-									'After Hide':_handleShownOrHide
-								};
+								_dialogWidget.eventHandlersForUseDialog = Uize.copyInto (
+									{
+										'Submission Complete':
+											function (_event) {_callHandler ('submitHandler',[_event.result,_event])},
+										Close:_handleCloseOrCancel,
+										Cancel:_handleCloseOrCancel,
+										'Before Show':_handleShownOrHide,
+										'After Show':_handleShownOrHide,
+										'Before Hide':_handleShownOrHide,
+										'After Hide':_handleShownOrHide
+									},
+									_params.widgetEventHandlers
+								);
 								_dialogWidget.wire (_dialogWidget.eventHandlersForUseDialog);
 
 							_dialogWidget.set (_dialogWidgetProperties);
@@ -456,9 +490,9 @@ Uize.module ({
 				if (
 					_dialogWidget &&
 					(
-						_dialogWidget.componentProfile == _componentProfile ||
+						_dialogWidget._componentProfile == _componentProfile ||
 							// HACK: avoid requiring Uize.Data for most cases (it's a component specific thing)
-						Uize.Data.identical (_dialogWidget.componentProfile,_componentProfile)
+						Uize.Data.identical (_dialogWidget._componentProfile,_componentProfile)
 					)
 				) {
 					_showDialog ('subsequent');
@@ -477,12 +511,11 @@ Uize.module ({
 									? _dialogWidget.set (_dialogWidgetProperties)
 									: (
 										_dialogWidget = _dialogWidgetParent.addChild (
-											_dialogWidgetName,_dialogWidgetClass,_dialogWidgetProperties
+											_dialogWidgetName, _dialogWidgetClass, _dialogWidgetProperties
 										)
 									)
 								;
-								_dialogWidget.componentProfile = _componentProfile;
-								_dialogWidget.wire (_params.widgetEventHandlers);
+								_dialogWidget._componentProfile = _componentProfile;
 								_dialogWidget.insertOrWireUi ();
 								_showDialog (_refetch ? 'refetched' : 'initial');
 							}
@@ -491,6 +524,7 @@ Uize.module ({
 					_componentProfile
 						? _this.loadHtmlIntoNode (
 							{
+								node:_componentProfile.node,
 								rootNodeId:_componentProfile.rootNodeId,
 								injectMode:'inner bottom',
 								alwaysReplace:_false

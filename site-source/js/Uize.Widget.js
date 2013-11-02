@@ -442,7 +442,7 @@ Uize.module ({
 							function () {
 								var _confirmed = _builtInConfirmFallback ();
 								(_params.callback || (_confirmed ? _params.yesHandler : _params.noHandler) || _Uize.nop)
-								(_confirmed)
+									(_confirmed);
 							},
 							0
 						)
@@ -590,7 +590,7 @@ Uize.module ({
 						inform:function (_params) {
 							_tryUseConfirmInheritedFromTree (
 								this,'inform',_params,function () {alert (_params.message); return _true}
-							)
+							);
 							/*?
 								Instance Methods
 									inform
@@ -645,7 +645,7 @@ Uize.module ({
 							this.callInherited ('performAjax') (
 								_serviceParams,
 								_isFunction (_requestParams) ? {callback:_requestParams} : _requestParams || {}
-							)
+							);
 							/*?
 								Instance Methods
 									ajax
