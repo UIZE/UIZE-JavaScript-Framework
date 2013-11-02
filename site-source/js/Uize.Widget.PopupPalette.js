@@ -78,7 +78,7 @@ Uize.module ({
 			}
 
 			function _over (m) {
-				_shouldTouchTimeouts (m) && m._clearDismissTimeout ();
+				_shouldTouchTimeouts (m) && _clearDismissTimeout (m);
 				m.fire('Over');
 			}
 
