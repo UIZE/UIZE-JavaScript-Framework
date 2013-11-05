@@ -44,7 +44,8 @@ Uize.module ({
 			;
 
 		return _package = Uize.package ({
-			suckDoc:function (_javascriptSource,_module,_modulesTree,_examples) {
+			suckDoc:function (_javascriptSource,_module,_modulesTree,_examples,_pathToRoot) {
+				_pathToRoot || (_pathToRoot = '');
 				var _simpleDocChunks = [];
 				for (
 					var
@@ -179,7 +180,9 @@ Uize.module ({
 													'\t\tThe following example pages are good showcases for the =' + _moduleName + '= module...\n' +
 													Uize.map (
 														_examples,
-														'"\\t\\t- [[" + value.url + "][" + value.title + "]] - " + value.description + "\\n"'
+														function (_example) {
+															return '\t\t- [[' + _pathToRoot + _example.path + '][' + _example.title + ']] - ' + _example.description + '\n';
+														}
 													).join ('')
 												)
 											: '\t\tThere are no dedicated showcase example pages for the =' + _moduleName + '= module.\n'
@@ -400,7 +403,8 @@ Uize.module ({
 									_javascriptSource,
 									_extractParam ('module'),
 									_extractParam ('modulesTree'),
-									_extractParam ('examples')
+									_extractParam ('examples'),
+									_params.pathToRoot
 								),
 								sectionsToSort:[
 									/*** methods ***/
