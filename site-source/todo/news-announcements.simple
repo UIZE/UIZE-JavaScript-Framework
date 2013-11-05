@@ -3,6 +3,9 @@ This document lists official news announcements that need to be created for deve
 NEW MODULE: Uize.Util.Html.Entities
 	.
 
+NEW MODULE: Uize.Util.Html.EntityInfo
+	.
+
 NEW MODULE: Uize.Util.Html.Encode
 	.
 

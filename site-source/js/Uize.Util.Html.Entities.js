@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Util.Html.Entities= package defines utility methods for looking up HTML entity codes from character codes, and vice versa.
+		The =Uize.Util.Html.Entities= package defines lookup objects that map HTML HTML entity codes to character codes, and vice versa.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
