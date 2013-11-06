@@ -1,0 +1,394 @@
+Introduction
+	.
+
+	PROPOSAL
+		This document is a proposal for a feature and is written in the style of describing the feature as though it were already implemented (ie. documentation for a future feature).
+
+Mixins as Augmenter Modules
+	.
+
+	Mixins Aren't Standalones
+		.
+
+	Classes Can't be Mixins
+		.
+
+Class Mixins
+	.
+
+	Defining Class Mixin Modules
+		.
+
+		A Class Mixin as a Features Object
+			.
+
+			EXAMPLE
+			...
+			Uize.module ({
+				name:'MyNamespace.WidthAndHeightMixin',
+				builder:function () {
+					return {
+						stateProperties:{
+							width:{value:0},
+							height:{value:0}
+						}
+					};
+				}
+			});
+			...
+
+		A Class Mixin as a Class Augmenter
+			When a class mixin is implemented as a class augmenter, the module simply defines an augmenter function that will be called and passed a reference to the class that is to be augmented as the single argument.
+
+			The augmenter function can then call any of the feature declaration methods on the class to add features to it or override features already defined for the class.
+
+			EXAMPLE
+			...
+			Uize.module ({
+				name:'MyNamespace.WidthAndHeightMixin',
+				builder:function () {
+					return function (_class) {
+						_class.stateProperties ({
+							width:{value:0},
+							height:{value:0}
+						});
+					};
+				}
+			});
+			...
+
+		When to Use a Class Augmenter
+			.
+
+	Using Class Mixin Modules
+		.
+
+		The MyClass.mixin Static Method
+			The =MyClass.mixin= feature declaration method allows one to specify one or more mixins that should be applied to the class.
+
+			EXAMPLE
+			...................................
+			_class.mixin (MyNamespace.MyMixin);
+			...................................
+
+			Declaring Mixins During Subclassing
+				As with any of the feature declaration methods, the mixins can also be declared in the features object when calling the =MyClass.subclass= static method to create a new subclass.
+
+				Using a Single Class Mixin Module
+					.
+
+					EXAMPLE
+					...
+					Uize.module ({
+						name:'MyNamespace.Rect',
+						superclass:'Uize.Class',
+						required:'MyNamespace.WidthAndHeightMixin',
+						builder:function (_superclass) {
+							return _superclass.subclass ({
+								mixin:MyNamespace.WidthAndHeightMixin
+							});
+						}
+					});
+					...
+
+				Using Multiple Class Mixin Modules
+					.
+
+					EXAMPLE
+					...
+					Uize.module ({
+						name:'MyNamespace.Rect',
+						superclass:'Uize.Class',
+						required:[
+							'MyNamespace.WidthAndHeightMixin',
+							'MyNamespace.AreaMixin'
+						],
+						builder:function (_superclass) {
+							return _superclass.subclass ({
+								mixin:[MyNamespace.WidthAndHeightMixin,MyNamespace.AreaMixin]
+							});
+						}
+					});
+					...
+
+			Applying a Mixin to an Existing Class
+				.
+
+				EXAMPLE
+				...
+				MyNamespace.Rect.mixin (MyNamespace.WidthAndHeightMixin);
+				...
+
+				Applying an Augmenter Mixin by Function Call
+					.
+
+					EXAMPLE
+					...................................................
+					// a width-and-height mixin, implemented as a class augmenter function
+					Uize.module ({
+						name:'MyNamespace.WidthAndHeightMixin',
+						builder:function () {
+							return function (_class) {
+								_class.stateProperties ({
+									width:{value:0},
+									height:{value:0}
+								});
+							};
+						}
+					});
+
+					// a rectangle class that uses the width-and-height mixin by function call
+					Uize.module ({
+						name:'MyNamespace.Rect',
+						superclass:'Uize.Class',
+						required:'MyNamespace.WidthAndHeightMixin',
+						builder:function (_superclass) {
+							var _class = _superclass.subclass ();
+							// ... ... ... ...
+							// ... ... ... ...
+							MyNamespace.WidthAndHeightMixin (_class);
+							// ... ... ... ...
+							// ... ... ... ...
+							return _class;
+						}
+					});
+					...................................................
+
+
+					SAFER
+					...................................................
+					// a rectangle class that uses the width-and-height mixin by function call
+					Uize.module ({
+						name:'MyNamespace.Rect',
+						superclass:'Uize.Class',
+						required:'MyNamespace.WidthAndHeightMixin',
+						builder:function (_superclass) {
+							var _class = _superclass.subclass ();
+							// ... ... ... ...
+							// ... ... ... ...
+							_class.mixin (MyNamespace.WidthAndHeightMixin);
+							// ... ... ... ...
+							// ... ... ... ...
+							return _class;
+						}
+					});
+					...................................................
+
+	Mixin Functionality Organized Into Layers
+		.
+
+		EXAMPLE
+		...
+		// a width-and-height mixin
+		Uize.module ({
+			name:'MyNamespace.WidthAndHeightMixin',
+			builder:function () {
+				return {
+					stateProperties:{
+						width:{value:0},
+						height:{value:0}
+					}
+				};
+			}
+		});
+
+		// an area mixin
+		Uize.module ({
+			name:'MyNamespace.AreaMixin',
+			builder:function () {
+				return {
+					stateProperties:{
+						area:{derived:'width,height: width * height'}
+					}
+				};
+			}
+		});
+
+		// a depth mixin
+		Uize.module ({
+			name:'MyNamespace.DepthMixin',
+			builder:function () {
+				return {
+					stateProperties:{
+						width:{depth:0}
+					}
+				};
+			}
+		});
+
+		// a volume mixin
+		Uize.module ({
+			name:'MyNamespace.VolumeMixin',
+			builder:function () {
+				return {
+					stateProperties:{
+						volume:{derived:'width,height,depth: width * height * depth'}
+					}
+				};
+			}
+		});
+
+		// a rectangle class that uses the width-and-height and area mixins
+		Uize.module ({
+			name:'MyNamespace.Rect',
+			superclass:'Uize.Class',
+			required:[
+				'MyNamespace.WidthAndHeightMixin',
+				'MyNamespace.AreaMixin'
+			],
+			builder:function (_superclass) {
+				return _superclass.subclass ({
+					mixin:[MyNamespace.WidthAndHeightMixin,MyNamespace.AreaMixin]
+				});
+			}
+		});
+
+		// a cuboid class that subclasses the rect class and uses the depth and volume mixins
+		Uize.module ({
+			name:'MyNamespace.Cuboid',
+			superclass:'MyNamespace.Rect',
+			required:[
+				'MyNamespace.DepthMixin',
+				'MyNamespace.VolumeMixin'
+			],
+			builder:function (_superclass) {
+				return _superclass.subclass ({
+					mixin:[MyNamespace.DepthMixin,MyNamespace.VolumeMixin]
+				});
+			}
+		});
+		...
+
+	Aggregating Class Mixins
+		.
+
+		Aggregating Class Mixins Using the Augmenter Approach
+			.
+
+			EXAMPLE
+			...
+			Uize.module ({
+				name:'MyNamespace.RectMixin',
+				required:[
+					'MyNamespace.WidthAndHeightMixin',
+					'MyNamespace.AreaMixin'
+				],
+				builder:function () {
+					return function (_class) {
+						_class.mixin ([
+							MyNamespace.WidthAndHeightMixin,
+							MyNamespace.AreaMixin
+						]);
+					];
+				}
+			});
+			...
+
+		Aggregating Class Mixins Using the Mixins List Approach
+			.
+
+			EXAMPLE
+			...
+			Uize.module ({
+				name:'MyNamespace.RectMixin',
+				required:[
+					'MyNamespace.WidthAndHeightMixin',
+					'MyNamespace.AreaMixin'
+				],
+				builder:function () {
+					return [
+						MyNamespace.WidthAndHeightMixin,
+						MyNamespace.AreaMixin
+					];
+				}
+			});
+			...
+
+		Layered Aggregation of Mixins
+			.
+
+			EXAMPLE
+			...
+			// a rect mixin
+			Uize.module ({
+				name:'MyNamespace.RectMixin',
+				required:[
+					'MyNamespace.WidthAndHeightMixin',
+					'MyNamespace.AreaMixin'
+				],
+				builder:function () {
+					return [
+						MyNamespace.WidthAndHeightMixin,
+						MyNamespace.AreaMixin
+					];
+				}
+			});
+
+			// a cuboid mixin
+			Uize.module ({
+				name:'MyNamespace.RectMixin',
+				required:[
+					'MyNamespace.RectMixin',
+					'MyNamespace.DepthMixin',
+					'MyNamespace.VolumeMixin'
+				],
+				builder:function () {
+					return [
+						MyNamespace.RectMixin,
+						MyNamespace.DepthMixin,
+						MyNamespace.VolumeMixin
+					];
+				}
+			});
+			...
+
+Object Mixins
+	.
+
+	The Uize.mixin Method
+		.
+
+Mutual Compatibility
+	.
+
+	Compatibility Between Host and Mixin
+		A mixin will likely have an expectation of the host in which it is to be mixed into.
+
+		A mixin may expect to be mixed in to a specific class or subclass thereof, and may expect specific features to be present that may be used in the mixin's implementation.
+
+	Compatibility Between Mixins
+		.
+
+	Shared Objects and Privates
+		.
+
+		Avoid Namespace Conflicts for Privates
+			.
+
+Considerations for Implementing Mixins
+	Be Careful With Private Static Properties
+		.
+
+		Be Careful with Using Module Scope Variables
+			.
+
+	Avoid Order Requirements Amongst Mixins
+		.
+
+Open Questions
+	Can Mixins be Standalone?
+		For example, if two widget classes existed that implemented some part of a UI, would it be possible to create a new subclass and then mixin those two widget classes?
+
+		An issue with mixing in standalone classes is that one can perform duplicate / redundant / wasted effort in copying in the guts of the classes to be mixed in. Ideally, if one create a new widget class and wanted to mix in the features of two other widget classes, only the modications made in those widget classes to the features inherited from the widget base class would be carried on the class into which the classes are being mixed in.
+
+		So, if widget A, widget B, and widget C all subclassed =Uize.Widget=, then mixing in widget B and widget C into widget A would only mix in the feature deltas between =Uize.Widget= and widget B and =Uize.Widget= and widget C. In order to achieve this, the mixin logic would need to trace up the inheritance chain and find the common base class for all the classes involved.
+
+		In reality, it may be more practical to require mixins to be implemented in a specific way - not as standalone classes but as class augmenters that have a specific expectation of the classes that they are to augment.
+
+	Determining Where Features are Introduced
+		With an implementation that treats a `mixin as an augmenter`, there is no way to programmatically determine that a feature that is mixed into a class actually originates from a mixin.
+
+		To a tool like the DELVE tool, feature discovery will attribute mixed in methods to the classes in the inheritance chain into which they were mixed in - not the mixin modules in which they are implemented. The only way to overcome this would be to tag the functions with the modules in which they are implemented. This would involve somehow providing the mixin module also as a reference when declaring features, but it is unclear how this reference would be passed. Additionally, tagging as can be done with function references cannot be accomplished with instance properties, static properties, or state properties.
+
+		All of this suggests that features should be declared in a more formalized manner and that classes on which features are declared should possibly maintain a registry of the features and where they were introduced and overridden.
+
