@@ -25,10 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.V2Mixin',
-	required:[
-		'Uize.Node',
-		'Uize.Util.Html.Encode'
-	],
+	required:'Uize.Node',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -42,8 +39,7 @@ Uize.module ({
 
 			/*** General Variables ***/
 				_trueFlag = {},
-				_cssAddedLookup = {},
-				_htmlEncode = _Uize.Util.Html.Encode.encode
+				_cssAddedLookup = {}
 		;
 
 		/*** Utility Functions ***/
@@ -423,9 +419,9 @@ Uize.module ({
 								;
 								if (!_bindingType) {
 									_updater = function (_propertyValue) {
-										this.setNodeInnerHtml (
+										this.setNodeValue (
 											_nodeName,
-											_htmlEncode (_propertyValue == null ? '' : _propertyValue)
+											_propertyValue == null ? '' : _propertyValue
 										);
 									};
 								} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
