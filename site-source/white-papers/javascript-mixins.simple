@@ -13,6 +13,66 @@ Mixins as Augmenter Modules
 	Classes Can't be Mixins
 		.
 
+The Uize.mixin Method
+	.
+
+	DIFFERENT USAGES
+
+	`Mix in a Set of Features, by Specifying an Augmenter Function`
+	.........................................................
+	sourceFUNCorOBJ = Uize.mixin (sourceFUNCorOBJ,mixinFUNC);
+	.........................................................
+
+	`Mix in a Set of Features, by Specifying a Features Object`
+	........................................................
+	sourceFUNCorOBJ = Uize.mixin (sourceFUNCorOBJ,mixinOBJ);
+	........................................................
+
+	`Mix in Multiple Mixins, by Specifying an Array of Mixins`
+	...........................................................
+	sourceFUNCorOBJ = Uize.mixin (sourceFUNCorOBJ,mixinsARRAY);
+	...........................................................
+
+	`Mix in One or More Mixins, Specifying an Optional Mixer Function`
+	.......................................................................
+	sourceFUNCorOBJ = Uize.mixin (FUNCorOBJ,mixinOrMixinsFUNCorOBJorARRAY);
+	.......................................................................
+
+	Process...
+
+	- if mixinOrMixins is a function, then it is called with the source as an argument
+	- if mixinOrMixins is an array, then the array is iterated over and Uize.mixin is called for each element with source as first argument and element as second argument
+	- if mixinOrMixins is an object, then...
+		- if source supports a declare method
+			- then the declare method is called on the source, with mixinOrMixins as the single argument
+			- else the mixinOrMixins object is merged into the source
+
+	IMPLEMENTATION
+	..........................................................
+	Uize.mixin = function (_source,_mixinOrMixins,_mixer) {
+		function _mixIntoSource (_mixinOrMixins) {
+			Uize.isFunction (_mixinOrMixins)
+				? _mixinOrMixins (_source)
+				: Uize.isArray (_mixinOrMixins)
+					? Uize.forEach (_mixinOrMixins,_mixIntoSource)
+					: _mixer
+						? _mixer (_source,_mixinOrMixins)
+						: Uize.mergeInto (_source,_mixinOrMixins)
+			;
+		}
+		_mixIntoSource (_mixinOrMixins);
+		return _source;
+	};
+
+	function _mixer (_source,_mixin) {
+		_source.declare (_mixin);
+	}
+
+	Uize.Class.mixin = function (_mixinOrMixins) {
+		return Uize.mixin (this,_mixinOrMixins,_mixer);
+	};
+	..........................................................
+
 Class Mixins
 	.
 
@@ -344,9 +404,6 @@ Class Mixins
 
 Object Mixins
 	.
-
-	The Uize.mixin Method
-		.
 
 Mutual Compatibility
 	.
