@@ -58,7 +58,7 @@ Uize.module ({
 
 				/** One-way sync value & value details to value display widget **/
 					function _setValueDisplayWidget(_propertyName, _propertyNameToGet) {
-						_valueDisplayWidget.set(_propertyName, m.get(_propertyNameToGet || _propertyName))
+						_valueDisplayWidget.set(_propertyName, m.get(_propertyNameToGet || _propertyName));
 					}
 
 					m.wire({

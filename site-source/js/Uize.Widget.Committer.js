@@ -119,7 +119,7 @@ Uize.module ({
 					_watchedPropertyName = _watchedPropertyProfile.name
 				;
 
-				function _boundUpdateSummaryStateProperties() { m._updateSummaryStateProperties() }
+				function _boundUpdateSummaryStateProperties() { _updateSummaryStateProperties(m) }
 
 				// any events that get wired here need to be unwired in _classPrototype.removeWatchedProperties.
 				_watchedPropertyInstance.wire (
@@ -137,7 +137,7 @@ Uize.module ({
 								m._autoCommitTimeout = setTimeout (
 									function () {m.commit ()},
 									m._autoCommitDelay
-								)
+								);
 							}
 					}
 				);
@@ -214,9 +214,7 @@ Uize.module ({
 			},
 
 			instanceMethods:{
-				clearAll:function () {
-					_setAllValues (this,'clear')
-				},
+				clearAll:function () { _setAllValues (this,'clear') },
 
 				commit:function () {
 					var m = this;
@@ -391,13 +389,9 @@ Uize.module ({
 					*/
 				},
 
-				restoreInitial:function () {
-					_setAllValues (this,'initial')
-				},
+				restoreInitial:function () { _setAllValues (this,'initial') },
 
-				restorePrevious:function () {
-					_setAllValues (this,'committed')
-				}
+				restorePrevious:function () { _setAllValues (this,'committed') }
 			},
 
 			stateProperties:{

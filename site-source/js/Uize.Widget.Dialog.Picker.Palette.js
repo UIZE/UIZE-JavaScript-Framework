@@ -87,7 +87,7 @@ Uize.module ({
 										tentativeValue:m._tentativeValue,
 										tentativeValueDetails:m._tentativeValueDetails
 									}
-								)
+								);
 							},
 							0
 						);

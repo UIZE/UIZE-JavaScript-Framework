@@ -41,13 +41,9 @@ Uize.module ({
 				;
 			}
 
-			function _updateUiMessage (m) {
-				m.isWired && m.setNodeInnerHtml('text', m.getMessage())
-			}
+			function _updateUiMessage (m) { m.isWired && m.setNodeInnerHtml('text', m.getMessage()) }
 
-			function _updateUiShown (m) {
-				m.isWired && m.displayNode('', m._shown)
-			}
+			function _updateUiShown (m) { m.isWired && m.displayNode('', m._shown) }
 
 		return _superclass.subclass ({
 			instanceMethods:{
@@ -57,6 +53,8 @@ Uize.module ({
 				},
 
 				updateUi:function () {
+					var m = this;
+
 					if (m.isWired) {
 						_updateUiMessage(m);
 						_updateUiShown(m);

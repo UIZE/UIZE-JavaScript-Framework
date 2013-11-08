@@ -40,11 +40,11 @@ Uize.module ({
 			}
 
 			function _getTabBodyNode (m,_valueOrValueNo) {
-				return m.getNode ('option' + _resolveToValueNo (m,_valueOrValueNo) + 'TabBody')
+				return m.getNode ('option' + _resolveToValueNo (m,_valueOrValueNo) + 'TabBody');
 			}
 
 			function _tabCanBeSelected (m,_value) {
-				return m.tabExists (_value) && m.getOptionButton (_value).get ('enabled')
+				return m.tabExists (_value) && m.getOptionButton (_value).get ('enabled');
 			}
 
 			function _updateTabBodyClass (m, _valueNo, _currentValueNo) {
