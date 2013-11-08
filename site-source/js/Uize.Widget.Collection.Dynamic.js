@@ -76,7 +76,7 @@ Uize.module ({
 							// one way operation
 							_drag.wire (
 								'Changed.inDrag',
-								function () {_this.set ({_inDrag:_drag.get ('inDrag')})}
+								function (_event) {_this.set ({_inDrag:_event.newValue})}
 							);
 
 							function _setInDrag (_inDrag) {

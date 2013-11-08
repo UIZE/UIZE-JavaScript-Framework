@@ -110,10 +110,10 @@ Uize.module ({
 				_class = _superclass.subclass (
 					function () {
 						var _this = this;
-						
-						// Initialize the items array here (as opposed to the default value when registering the
-						// set-get property), since that default is static and gets shared between all instances
-						// which casues problems
+
+						/* NOTE:
+							Initialize the items array here (as opposed to the default value when registering the set-get property), since that default is static and gets shared between all instances which casues problems
+						*/
 						_this._items = [];
 
 						/*** Private Instance Properties ***/
@@ -324,18 +324,12 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.addChild = function(_childName, _childInstanceOrClass, _properties) {
-				// NOTE: Overriding addChild for the case that a collection item is added to the collection
-				// via widget adoption.  If this is the case, the code won't go through the normal addItemWidget
-				// and the item widget won't have the necessary events wired on it and it won't get added to the
-				// itemWidgets property
+				/* NOTE:
+					Overriding addChild for the case that a collection item is added to the collection via widget adoption.  If this is the case, the code won't go through the normal addItemWidget and the item widget won't have the necessary events wired on it and it won't get added to the itemWidgets property
+				*/
 				var
 					_this = this,
-					_childWidget = _superclass.prototype.addChild.call (
-						_this,
-						_childName,
-						_childInstanceOrClass,
-						_properties
-					)
+					_childWidget = _superclass.doMy (_this,'addChild',[_childName,_childInstanceOrClass,_properties])
 				;
 
 				if (_this.isCollectionItem(_childWidget)) {
@@ -353,7 +347,7 @@ Uize.module ({
 				return _childWidget;
 			};
 
-		
+
 			_classPrototype.isCollectionItem = function (_childWidget) {
 				var
 					_this = this
@@ -371,7 +365,7 @@ Uize.module ({
 							.....................................................................................
 				*/
 			};
-			
+
 			_classPrototype.addItemWidget = function (_widgetName,_widgetProperties) {
 				var
 					_this = this,

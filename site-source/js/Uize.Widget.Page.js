@@ -231,13 +231,13 @@ Uize.module ({
 									_html,
 									_injectionParams.injectMode || (_node == _documentBody ? 'inner bottom' : 'inner replace')
 								);
-	
-								// Need to break synchronous execution of the page between HTML injection
-								// and child widget adoption so the browser has time to insert any widget data
-								// into the window object
+
+								/* NOTE:
+									Need to break synchronous execution of the page between HTML injection and child widget adoption so the browser has time to insert any widget data into the window object
+								*/
 								setTimeout(function() { _this._adoptChildWidgets (_callback) }, 0);
 							}
-							
+
 							_loaderDirectivesIsValidObject && _loaderDirectivesIsValidObject.beforeInject
 								? _loaderDirectivesIsValidObject.beforeInject(_injectHmtl, _html)
 								: _injectHmtl()
@@ -250,7 +250,7 @@ Uize.module ({
 					: _this.loadHtml (
 						_htmlParams,
 						_loaderDirectivesIsValidObject
-							? Uize.copyInto ({},_loaderDirectives,_loadHtmlCallbackObject)
+							? Uize.copy (_loaderDirectives,_loadHtmlCallbackObject)
 							: _loadHtmlCallbackObject
 					)
 				;
@@ -447,7 +447,7 @@ Uize.module ({
 									dialogWidget:_event.source
 								});
 							}
-							
+
 							_dialogWidget.set ({shown:_false});
 							/*** store handlers as properties of widget, in order to be able to remove them on reuse ***/
 								/* WORKAROUND:

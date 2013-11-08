@@ -36,7 +36,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_Uize = Uize,
-				
+
 				_classPrototype = _class.prototype
 			;
 
@@ -127,31 +127,31 @@ Uize.module ({
 			_classPrototype.adaptFormValuesToItemProperties = function (_formValues) { return _formValues };
 			_classPrototype.adaptItemPropertiesToFormValues = function (_itemProperties) { return _itemProperties };
 
-			_classPrototype.mergeItemProperties = function (_oldItemProperties, _newItemProperties) { 
-				return _Uize.copyInto({},_oldItemProperties, _newItemProperties);
+			_classPrototype.mergeItemProperties = function (_oldItemProperties, _newItemProperties) {
+				return _Uize.copy(_oldItemProperties, _newItemProperties);
 			};
 
-			_classPrototype.serializeItemProperties = function (_itemProperties) { 
-				var 
+			_classPrototype.serializeItemProperties = function (_itemProperties) {
+				var
 					_serializedProperties = _Uize.clone(_itemProperties),
 					_keys = _Uize.keys(_serializedProperties)
 				;
-				for (var _keyIndex in _keys) { 
-					var 
+				for (var _keyIndex in _keys) {
+					var
 						_propertyName = _keys[_keyIndex],
 						_propertyValue = _serializedProperties[_propertyName]
 					;
 
 					if (_Uize.isPlainObject (_propertyValue)) {
-						var 
+						var
 							_isPropertyValueFlat = _true,
 							_keys2 = _Uize.keys(_propertyValue)
 						;
 						for (var _keyIndex2 in _keys2) {
 							_Uize.isPlainObject (_propertyValue[_keys2[_keyIndex2]]) && (_isPropertyValueFlat = _false);
 						}
-						
-						if (_isPropertyValueFlat) 
+
+						if (_isPropertyValueFlat)
 							_serializedProperties[_propertyName] = _Uize.Url.toParams(_propertyValue);
 						else
 							_serializedProperties[_propertyName] = _Uize.Json.to(_propertyValue);
@@ -164,7 +164,7 @@ Uize.module ({
 				var _this = this;
 				if (_this.isWired) {
 
-					var 
+					var
 						_formDialogJsClass = _this.get('formDialogJsClass'),
 						_itemProperties = (_itemWidget && _itemWidget.get('properties')) || {}
 					;
@@ -173,14 +173,14 @@ Uize.module ({
 						_this.callInherited('useDialog')({
 							component: {
 								name: _formDialogJsClass,
-								params: _Uize.copyInto({}, _dialogParams, _this.adaptItemPropertiesToFormValues(_itemProperties), _this._formDialogParams)
+								params: _Uize.copy(_dialogParams, _this.adaptItemPropertiesToFormValues(_itemProperties), _this._formDialogParams)
 							},
 							widgetProperties: { name: 'itemFormDialog' },
 							submitHandler: function (_newProperties) {
 								if (_itemWidget) {
 									_itemWidget.set({properties:_this.mergeItemProperties(_itemProperties, _this.adaptFormValuesToItemProperties(_newProperties))});
 									_this.fire({name:'Item.edited', bubble:_true});
-								} 
+								}
 								else {
 									_this.addNewItem(_this.adaptFormValuesToItemProperties(_newProperties));
 								}
@@ -207,7 +207,7 @@ Uize.module ({
 
 			_classPrototype.addItemHandler = function (_dialogParams) {
 				var _this = this;
-				_this.isWired && 
+				_this.isWired &&
 					_this.launchFormDialog(_dialogParams)
 				;
 			};
