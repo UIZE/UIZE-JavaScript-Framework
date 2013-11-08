@@ -77,7 +77,7 @@ Uize.module ({
 							);
 							_this.wire ({
 								'Drag Start':
-									function (_event) {
+									function () {
 										if (!_this._draggedSinceShown) {
 											_this._draggedSinceShown = _true;
 											_this.fire ('First Drag Since Shown');
@@ -106,7 +106,7 @@ Uize.module ({
 													parseInt (_Uize_Node.getStyle (_rootNode,'left')) - _mooringCoords.left,
 												offsetY:
 													parseInt (_Uize_Node.getStyle (_rootNode,'top')) - _mooringCoords.top
-											})
+											});
 										}
 									}
 							});
@@ -122,7 +122,7 @@ Uize.module ({
 							(_this._drag = _this.addChild ('drag',_Uize_Widget_Drag,{cursor:'move'}))
 								.wire ({
 									'Before Drag Start':
-										function (_event) {
+										function () {
 											_rootNode = _this.getNode ();
 											_dragStartRootNodePos [0] = parseInt (_Uize_Node.getStyle (_rootNode,'left'));
 											_dragStartRootNodePos [1] = parseInt (_Uize_Node.getStyle (_rootNode,'top'));
@@ -139,7 +139,7 @@ Uize.module ({
 													- see the related =Drag Done= instance event
 										*/
 									'Drag Update':
-										function (_event) {
+										function () {
 											var _eventDeltaPos = _this._drag.eventDeltaPos;
 											_Uize_Node.setStyle (
 												_rootNode,
@@ -247,63 +247,7 @@ Uize.module ({
 			};
 
 			_classPrototype._dismiss = function (_dismissalEvent) {
-				this.fire (_dismissalEvent).abort || this.set ({_shown:_false})
-			};
-
-			var _updateUiPositionIfShown = _classPrototype._updateUiPositionIfShown = _classPrototype.updateUiPositionIfShown = function () {
-				var _this = this;
-				if (_this.isWired && _this._shown && !_this._inDrag) {
-					_Uize_Widget_Drag.resizeShield (_this.getNode ('shield'));
-					/*?
-						Implied Nodes
-							Root Node
-								A node that is the root for all of the dialog's HTML, excluding the =shield= implied node.
-
-								When a dialog is shown, its =Root Node= and =shield= implied nodes are displayed. Conversely, when a dialog is hidden, both its =Root Node= and =shield= implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the =Root Node= is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its =width= and =height= state properties, the dimensions of the =Root Node= are modified through CSS. All chrome for the dialog should therefore be "pinned" to the =Root Node=, so that when the dialog is moved and resized, the chrome goes along for the ride.
-
-							shield
-								A node that will be sized to fill the entire browser view port, in order to block events to the page behind the dialog.
-
-								When the dialog is shown, the =shield= implied node is shown along with the =Root Node=. The shield can be set to hide when the user drag or resizes the dialog by setting the =hideShieldOnDrag= state property to =true=. When the dialog is shown, the shield can be hidden by setting the =shieldShown= state property to =false=. Even though the shield won't be visible, it will still block events to the page behind the dialog.
-
-								NOTES
-								- see also the =currentShieldOpacity=, =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties
-								- see also the =shieldFade= instance property
-					*/
-					if (_this._autoPosition) {
-						var
-							_rootNode = _this.getNode (),
-							_mooringNode = _Uize_Node.getById (_this._mooringNode),
-							_offsetX = _this._offsetX,
-							_offsetY = _this._offsetY
-						;
-						if (!_mooringNode || _offsetX == _undefined || _offsetY == _undefined)
-							_Uize_Node.centerInWindow (_rootNode)
-						;
-						if (_mooringNode) {
-							if (_offsetX == 'adjacent' || _offsetY == 'adjacent') {
-								_Uize_Node.setAbsPosAdjacentTo (_rootNode, _mooringNode);
-							}
-							else {
-								var _mooringCoords = _Uize_Node.getCoords (_mooringNode);
-								_Uize_Node.setStyle (
-									_rootNode,
-									Uize.copy (
-										_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,
-										_offsetY != _undefined ? {top:_mooringCoords.top + _offsetY} : _undefined
-									)
-								);
-							}
-						}
-					}
-				}
-			};
-
-			var _updateUiDimsIfShown = _classPrototype._updateUiDimsIfShown = function () {
-				var _this = this;
-				_this.isWired && _this._shown && !_this._inDrag &&
-					_this.setNodeStyle ('',{width:_this._width,height:_this._height})
-				;
+				this.fire (_dismissalEvent).abort || this.set ({_shown:_false});
 			};
 
 			_classPrototype._updateUiShieldOpacity = function () {
@@ -346,6 +290,115 @@ Uize.module ({
 			/*** Hook Methods for Uize.Widget.Dialog.xResizable ***/
 				_classPrototype.atEndOfOmegaStructor = _classPrototype.afterWireUi = Uize.nop;
 
+			_classPrototype.responsiveUpdateUiPositionAndDimensions = function () {
+				var
+					_this = this,
+					_rootNode = _this.getNode(),
+					_nodeToSetDimension = _this.getNode(_this._nodeToSetDimension)
+				;
+				
+				// first clean out any max width/height from previous update
+				_this.setNodeStyle(
+					_nodeToSetDimension,
+					{
+						maxWidth:'',
+						maxHeight:''
+					}
+				);
+				
+				// next determine if the dialog is too big
+				var
+					_windowCoords = _Uize_Node.getCoords(window),
+					_rootNodeDims = _Uize_Node.getDimensions(_rootNode),
+					_nodeToSetIsRoot = _nodeToSetDimension == _rootNode,
+					_nodeToSetDims = _nodeToSetIsRoot ? _rootNodeDims : _Uize_Node.getDimensions(_nodeToSetDimension)
+				;
+
+				// set max width/height such that the root node will be 100% in either dimension
+				_this.setNodeStyle(
+					_nodeToSetDimension,
+					{
+						maxWidth:_rootNodeDims.width > _windowCoords.width ? _windowCoords.width - (_rootNodeDims.width - _nodeToSetDims.width) : '',
+						maxHeight:_rootNodeDims.height > _windowCoords.height ? _windowCoords.height - (_rootNodeDims.height - _nodeToSetDims.height) : ''
+					}
+				);
+				
+				// update the root node dims object if we set max width/height above
+				if (_rootNodeDims.width > _windowCoords.width || _rootNodeDims.height > _windowCoords.height)
+					_rootNodeDims = _Uize_Node.getDimensions(_rootNode);
+				
+				// lastly center position if small enough or 0,0 if too big
+				var
+					_leftCentered = _windowCoords.x + ((_windowCoords.width - _rootNodeDims.width) >> 1),
+					_topCentered = _windowCoords.y + ((_windowCoords.height - _rootNodeDims.height) >> 1)
+				;
+				
+				_this.setNodeStyle(
+					_rootNode,
+					{
+						left: _leftCentered > 0 ? _leftCentered : 0,
+						top: _topCentered > 0 ? _topCentered : 0
+					}
+				);
+			};
+
+			_classPrototype.updateUiPositionIfShown = function () {
+				var _this = this;
+				if (_this.isWired && _this._shown && !_this._inDrag) {
+					_Uize_Widget_Drag.resizeShield (_this.getNode ('shield'));
+					/*?
+						Implied Nodes
+							Root Node
+								A node that is the root for all of the dialog's HTML, excluding the =shield= implied node.
+
+								When a dialog is shown, its =Root Node= and =shield= implied nodes are displayed. Conversely, when a dialog is hidden, both its =Root Node= and =shield= implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the =Root Node= is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its =width= and =height= state properties, the dimensions of the =Root Node= are modified through CSS. All chrome for the dialog should therefore be "pinned" to the =Root Node=, so that when the dialog is moved and resized, the chrome goes along for the ride.
+
+							shield
+								A node that will be sized to fill the entire browser view port, in order to block events to the page behind the dialog.
+
+								When the dialog is shown, the =shield= implied node is shown along with the =Root Node=. The shield can be set to hide when the user drag or resizes the dialog by setting the =hideShieldOnDrag= state property to =true=. When the dialog is shown, the shield can be hidden by setting the =shieldShown= state property to =false=. Even though the shield won't be visible, it will still block events to the page behind the dialog.
+
+								NOTES
+								- see also the =currentShieldOpacity=, =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties
+								- see also the =shieldFade= instance property
+					*/
+					if (_this._autoPosition) {
+						var
+							_rootNode = _this.getNode (),
+							_mooringNode = _Uize_Node.getById (_this._mooringNode),
+							_offsetX = _this._offsetX,
+							_offsetY = _this._offsetY
+						;
+						if (!_mooringNode || _offsetX == _undefined || _offsetY == _undefined) {
+							_this.responsiveUpdateUiPositionAndDimensions();
+							//_Uize_Node.centerInWindow(_rootNode);
+						}
+						if (_mooringNode) {
+							if (_offsetX == 'adjacent' || _offsetY == 'adjacent') {
+								_Uize_Node.setAbsPosAdjacentTo (_rootNode, _mooringNode);
+							}
+							else {
+								var _mooringCoords = _Uize_Node.getCoords (_mooringNode);
+								_Uize_Node.setStyle (
+									_rootNode,
+									Uize.copy (
+										_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,
+										_offsetY != _undefined ? {top:_mooringCoords.top + _offsetY} : _undefined
+									)
+								);
+							}
+						}
+					}
+				}
+			};
+
+			_classPrototype.updateUiDimsIfShown = function () {
+				var _this = this;
+				_this.isWired && _this._shown && !_this._inDrag &&
+					_this.setNodeStyle (_this.getNode(_this._nodeToSetDimension),{width:_this._width,height:_this._height})
+				;
+			};
+
 			_classPrototype.updateUi = function () {
 				var _this = this;
 
@@ -359,7 +412,7 @@ Uize.module ({
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
-					_this.wireNode (window,'resize',function () {_this._updateUiPositionIfShown ()});
+					_this.wireNode (window,'resize',function () {_this.updateUiPositionIfShown ()});
 					_this._drag.set ({node:_this.getNode ('title')});
 
 					_this.wireNode(
@@ -386,6 +439,10 @@ Uize.module ({
 			};
 
 		/*** State Properties ***/
+			var
+				_updateUiDimsIfShown = 'updateUiDimsIfShown',
+				_updateUiPositionIfShown = 'updateUiPositionIfShown'
+			;
 			_class.stateProperties ({
 				_autoPosition:{
 					name:'autoPosition',
@@ -557,6 +614,25 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				},
+				_nodeToSetDimension: {
+					name: 'nodeToSetDimension',
+					onChange: [
+						_updateUiDimsIfShown,
+						_updateUiPositionIfShown
+					],
+					value:''
+					/*?
+						State Properties
+							nodeToSetDimension
+								A node reference or node ID for a node to which the =height= and =width= should be set.
+			
+								The default value is the root node. Setting this property is useful when the main content of the dialog is in a child node.
+			
+								NOTES
+								- see the companion =height= set-get property
+								- see the companion =width= set-get property
+					*/
+				},
 				_offsetX:{
 					name:'offsetX',
 					onChange:_updateUiPositionIfShown,
@@ -623,7 +699,7 @@ Uize.module ({
 				_shieldOpacity:{
 					name:'shieldOpacity',
 					onChange:function () {
-						this._shieldShown && this.set ({_currentShieldOpacity:this._shieldOpacity})
+						this._shieldShown && this.set ({_currentShieldOpacity:this._shieldOpacity});
 					},
 					value:.3
 					/*?
@@ -643,7 +719,6 @@ Uize.module ({
 						if (_this.isWired && _this._shown) {
 							if (_this._shieldShown) {
 								if (_browserHasSelectShowThroughIssue && _this.getNode ('shield')) {
-									var _ie6SelectHackShield = _this.getNode ('ie6SelectHackShield');
 									if (!_this._dismissOnShieldClick && !_this.getNode ('ie6SelectHackShield')) {
 										_this.flushNodeCache ('ie6SelectHackShield');
 										_this.injectNodeHtml (
@@ -713,8 +788,8 @@ Uize.module ({
 										_this.displayNode ('',_hideWithVisibility);
 									};
 									_hideWithVisibilityForDimensionGetting (_true);
-									_this._updateUiDimsIfShown ();
-									_this._updateUiPositionIfShown ();
+									_this.updateUiDimsIfShown ();
+									_this.updateUiPositionIfShown ();
 									_hideWithVisibilityForDimensionGetting (_false);
 							} else {
 								_totalShown--;
