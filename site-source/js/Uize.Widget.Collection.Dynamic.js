@@ -48,7 +48,7 @@ Uize.module ({
 				_class = _superclass.subclass (
 					_null,
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** watch for dragging of items ***/
 							var
@@ -69,20 +69,20 @@ Uize.module ({
 								_insertionMarkerDims,
 								_axisPosName,
 								_axisDimName,
-								_drag = _this.addChild ('drag',Uize.Widget.Drag,{nodeMap:{'':_null}}),
+								_drag = m.addChild ('drag',Uize.Widget.Drag,{nodeMap:{'':_null}}),
 								_ignoreDrag = _false
 							;
 
 							// one way operation
 							_drag.wire (
 								'Changed.inDrag',
-								function (_event) {_this.set ({_inDrag:_event.newValue})}
+								function (_event) {m.set ({_inDrag:_event.newValue})}
 							);
 
 							function _setInDrag (_inDrag) {
 								var
-									_opacity = _inDrag ? _this._itemVestigeOpacity : 1,
-									_draggingTooltip = _this.getNode ('tooltipDragging')
+									_opacity = _inDrag ? m._itemVestigeOpacity : 1,
+									_draggingTooltip = m.getNode ('tooltipDragging')
 								;
 								for (var _itemDraggedNo = _itemsDraggedLength; --_itemDraggedNo > -1;)
 									_itemsDragged [_itemDraggedNo].setNodeOpacity ('',_opacity)
@@ -90,7 +90,7 @@ Uize.module ({
 								_inDrag &&
 									_Uize_Node.setInnerHtml (
 										_draggingTooltip,
-										_this.localize (
+										m.localize (
 											'draggingToReorder' + (_itemsDraggedLength > 1 ? 'Plural' : 'Singular'),
 											{totalItems:_itemsDraggedLength}
 										)
@@ -101,24 +101,24 @@ Uize.module ({
 							_drag.wire ({
 								'Drag Start':
 								function () {
-									_itemDisplayOrderNo = _this._itemDisplayOrder == 'reverse' ? 1 : 0;
+									_itemDisplayOrderNo = m._itemDisplayOrder == 'reverse' ? 1 : 0;
 
 									_itemInitiatingDrag.set ({over:_false});
 
 									/*** determine items being dragged ***/
 										var _itemInitiatingDragIsSelected = _itemInitiatingDrag.get ('selected');
 										if (!_itemInitiatingDragIsSelected) {
-											_this.selectAll (_false);
-											_this._ensureItemDraggedIsSelected && _itemInitiatingDrag.set ({selected:_true});
+											m.selectAll (_false);
+											m._ensureItemDraggedIsSelected && _itemInitiatingDrag.set ({selected:_true});
 										}
 
-										if (!_this._dragIgnoresLocked) {
+										if (!m._dragIgnoresLocked) {
 											// if drag obeys the locked property, the locked objects are not draggable.
 											if (_itemInitiatingDragIsSelected) {
 												for (
 													var
 														_itemsSelectedIdx = -1,
-														_itemsToDrag = _this.getSelected (),
+														_itemsToDrag = m.getSelected (),
 														_itemsToDragLength = _itemsToDrag.length
 													;
 													++_itemsSelectedIdx < _itemsToDragLength;
@@ -128,7 +128,7 @@ Uize.module ({
 													;
 
 												// cancel drag if nothing is selected
-												_ignoreDrag = !_this.get ('totalSelected');
+												_ignoreDrag = !m.get ('totalSelected');
 											}
 											else if (_itemInitiatingDrag.get ('locked'))
 												_ignoreDrag = _true
@@ -136,13 +136,13 @@ Uize.module ({
 										}
 
 										_itemsDragged =
-											_itemInitiatingDragIsSelected ? _this.getSelected () : [_itemInitiatingDrag]
+											_itemInitiatingDragIsSelected ? m.getSelected () : [_itemInitiatingDrag]
 										;
 										_itemsDraggedLength = _itemsDragged.length;
 
 									/*** capture coords for item widgets (for performance during drag) ***/
 										_itemsCoords = [];
-										_this.forAll (
+										m.forAll (
 											function (_itemWidget) {
 												_itemsCoords.push (_Uize_Node.getCoords (_itemWidget.getNode ()));
 											}
@@ -163,7 +163,7 @@ Uize.module ({
 										_axisPosName = _orientationNo ? 'top' : 'left';
 										_axisDimName = _orientationNo ? 'height' : 'width';
 										_insertPointItem = _insertPointModeNo = _insertPointCoords = _lastInsertPointItem = _lastInsertPointModeNo = _null;
-										_insertionMarkerNode = _this.getNode ('insertionMarker');
+										_insertionMarkerNode = m.getNode ('insertionMarker');
 										_insertionMarkerDims = _Uize_Node.getDimensions (_insertionMarkerNode);
 
 										/*** expand drop coordinates for item widgets (performance optimization) ***/
@@ -193,7 +193,7 @@ Uize.module ({
 											_dragEventPos = _drag.eventPos
 										;
 										_Uize_Tooltip.positionTooltip (
-											_this.getNode ('tooltipDragging'),
+											m.getNode ('tooltipDragging'),
 											{pageX:_dragEventPos [0],pageY:_dragEventPos [1]}
 										);
 
@@ -208,7 +208,7 @@ Uize.module ({
 										}
 										if (!_pointWithinCoords (_itemWidgetOverCoords)) {
 											_itemWidgetOver = _itemWidgetOverCoords = _null;
-											_this.forAll (
+											m.forAll (
 												function (_itemWidget,_itemWidgetNo) {
 													var _itemWidgetCoords = _itemsCoords [_itemWidgetNo];
 													if (_pointWithinCoords (_itemWidgetCoords)) {
@@ -239,7 +239,7 @@ Uize.module ({
 											_insertPointItem != _lastInsertPointItem ||
 											_insertPointModeNo != _lastInsertPointModeNo
 										) {
-											_this.displayNode (_insertionMarkerNode,!!_insertPointItem);
+											m.displayNode (_insertionMarkerNode,!!_insertPointItem);
 											if (_insertPointItem) {
 												var _insertionMarkerCoords = Uize.clone (_insertPointCoords);
 												_insertionMarkerCoords [_axisPosName] +=
@@ -258,11 +258,11 @@ Uize.module ({
 									function () {
 										if (_drag.get ('dragStarted')) {
 											_setInDrag (_false);
-											_this.displayNode ('insertionMarker',_false);
+											m.displayNode ('insertionMarker',_false);
 
 											var _finishDrag = function () {
 												if (_insertPointItem && !_ignoreDrag && !_drag.get ('dragCancelled')) {
-													var _itemWidgets = _this.itemWidgets;
+													var _itemWidgets = m.itemWidgets;
 
 													/*** handle the 'after' insert mode ***/
 														if (_insertPointModeNo ^ _itemDisplayOrderNo) {
@@ -284,22 +284,22 @@ Uize.module ({
 
 													/*** perform the move ***/
 														for (var _itemDraggedNo = -1; ++_itemDraggedNo < _itemsDraggedLength;)
-															_this.move (_itemsDragged [_itemDraggedNo],_insertPointItem)
+															m.move (_itemsDragged [_itemDraggedNo],_insertPointItem)
 														;
 
 													/*** fire events informing of move ***/
-														_this.fire ('Items Reordered');
-														_this._fireItemsChangedEvent ();
+														m.fire ('Items Reordered');
+														m._fireItemsChangedEvent ();
 												}
 											};
-											_this._confirmToDrag
-												? _this.confirm ({
+											m._confirmToDrag
+												? m.confirm ({
 													state:'warning',
-													title:_this.localize ('confirmDragToReorderTitle'),
-													message:_this.localize ('confirmDragToReorderPrompt'),
+													title:m.localize ('confirmDragToReorderTitle'),
+													message:m.localize ('confirmDragToReorderPrompt'),
 													yesHandler:function () {
-														_this._confirmToDrag = _false;
-														_this.fire ('Drag Confirmed');
+														m._confirmToDrag = _false;
+														m.fire ('Drag Confirmed');
 														_finishDrag ();
 													},
 													noHandler:function () {
@@ -313,10 +313,10 @@ Uize.module ({
 							});
 
 							/*** initiate drag using the drag widget, and let it do the rest ***/
-								_this.wire (
+								m.wire (
 									'Item Mouse Down',
 									function (_event) {
-										if (_this._dragToReorder) {
+										if (m._dragToReorder) {
 											_itemInitiatingDrag = _event.source;
 											_drag.initiate (_event.domEvent);
 										}
@@ -331,14 +331,14 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._addItem = function (_widgetProperties) {
 				var
-					_this = this,
+					m = this,
 					_propertiesProperty = _widgetProperties.properties,
-					_itemWidgetName = _this.makeItemWidgetName (_propertiesProperty)
+					_itemWidgetName = m.makeItemWidgetName (_propertiesProperty)
 				;
 
-				_this.get ('items').push (_propertiesProperty);
+				m.get ('items').push (_propertiesProperty);
 
-				return _this.addItemWidget (_itemWidgetName,_widgetProperties);
+				return m.addItemWidget (_itemWidgetName,_widgetProperties);
 			};
 
 			_classPrototype._fireItemsChangedEvent = function () {this.fire ('Items Changed')};
@@ -347,46 +347,46 @@ Uize.module ({
 			var _selectedProperty = {selected:_true};
 			_classPrototype.add = function (_itemsToAdd) {
 				var
-					_this = this,
+					m = this,
 					_itemWidgetsAdded = []
 				;
 
 				if (!Uize.isArray (_itemsToAdd)) _itemsToAdd = [_itemsToAdd];
 				var _itemsToAddLength = _itemsToAdd.length;
 				if (_itemsToAddLength) {
-					_this._makeNewlyAddedSelected && _this.selectAll (_false);
-					var _commonProperties = _this._makeNewlyAddedSelected ? _selectedProperty : _null;
+					m._makeNewlyAddedSelected && m.selectAll (_false);
+					var _commonProperties = m._makeNewlyAddedSelected ? _selectedProperty : _null;
 					for (var _itemToAddNo = -1; ++_itemToAddNo < _itemsToAddLength;)
 						_itemWidgetsAdded.push (
-							_this._addItem (Uize.copyInto (_itemsToAdd [_itemToAddNo],_commonProperties))
+							m._addItem (Uize.copyInto (_itemsToAdd [_itemToAddNo],_commonProperties))
 						)
 					;
 				}
-				_this._fireItemsChangedEvent ();
+				m._fireItemsChangedEvent ();
 
 				return _itemWidgetsAdded;
 			};
 
 			_classPrototype.getItemWidgetProperties = function () {
-				var _this = this;
+				var m = this;
 				return (
 					Uize.copyInto (
 						{
 							previewTooltip:
-								function () {return _this._dragToReorder ? _this.getNode ('tooltipDragToReorder') : _null}
+								function () {return m._dragToReorder ? m.getNode ('tooltipDragToReorder') : _null}
 						},
-						_this.get ('itemWidgetProperties')
+						m.get ('itemWidgetProperties')
 					)
 				);
 			};
 
 			_classPrototype.move = function (_itemWidgetToMove, _insertionPointItem) {
 				var
-					_this = this,
-					_insertAfter = _this._itemDisplayOrder == 'reverse',
+					m = this,
+					_insertAfter = m._itemDisplayOrder == 'reverse',
 					_insertionPointNode = _insertionPointItem ? _insertionPointItem.getNode () : _null,
-					_items = _this.get ('items'),
-					_itemWidgets = _this.itemWidgets,
+					_items = m.get ('items'),
+					_itemWidgets = m.itemWidgets,
 					_rootNode = _itemWidgetToMove.getNode().parentNode,
 					_node = _itemWidgetToMove.getNode (),
 					_nodeToInsertBefore = _insertAfter
@@ -427,20 +427,20 @@ Uize.module ({
 			_classPrototype.afterWireUi = function () {};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (!_this.isWired) {
+				if (!m.isWired) {
 					var
 						_docBody = document.body,
-						_insertionMarkerNode = _this.getNode ('insertionMarker'),
+						_insertionMarkerNode = m.getNode ('insertionMarker'),
 						_itemWidgetProperties = {},
-						_itemTemplateNode = _this.getNode ('itemTemplate')
+						_itemTemplateNode = m.getNode ('itemTemplate')
 					;
 
 					// Pull insertion marker to root
 					if (_insertionMarkerNode && _insertionMarkerNode.parentNode != _docBody) {
 						_docBody.insertBefore (_insertionMarkerNode, _docBody.childNodes[0]);
-						_this.setNodeStyle (
+						m.setNodeStyle (
 							_insertionMarkerNode,
 							{
 								display:'none',
@@ -455,23 +455,23 @@ Uize.module ({
 					}
 
 					if (_itemTemplateNode)
-						_itemWidgetProperties.html = _this.processItemTemplate (_itemTemplateNode)
-						;
+						_itemWidgetProperties.html = m.processItemTemplate (_itemTemplateNode)
+					;
 
 					_itemWidgetProperties.built = _false;
-					_itemWidgetProperties.container = _this.getNode ('items');
-					_itemWidgetProperties.insertionMode = _this._itemDisplayOrder == 'reverse' ? 'inner top' : 'inner bottom';
+					_itemWidgetProperties.container = m.getNode ('items');
+					_itemWidgetProperties.insertionMode = m._itemDisplayOrder == 'reverse' ? 'inner top' : 'inner bottom';
 
 					// Update the already created item widgets if the UI hasn't been built yet
-					_this.get('built')
-						|| _this.forAll( function (_itemWidget) { _itemWidget.set(_itemWidgetProperties) } );
+					m.get('built')
+						|| m.forAll( function (_itemWidget) { _itemWidget.set(_itemWidgetProperties) } );
 
 					// For future creation of item widgets we need to update the item widget properties to have all the UI building stuff
-					_this.set({itemWidgetProperties:Uize.copyInto(_itemWidgetProperties, _this.get('itemWidgetProperties') || {})});
+					m.set({itemWidgetProperties:Uize.copyInto(_itemWidgetProperties, m.get('itemWidgetProperties') || {})});
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 
-					_this.afterWireUi();
+					m.afterWireUi();
 				}
 			};
 

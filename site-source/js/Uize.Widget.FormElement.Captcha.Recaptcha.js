@@ -43,7 +43,6 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
 				_Uize_Node_Event = _Uize_Node.Event,
