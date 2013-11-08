@@ -111,7 +111,7 @@ Uize.module ({
 							var _selectNode = m.getNode('input');
 
 							_selectNode
-								&& m.set({_valueNo:_selectNode.selectedIndex})
+								&& m.set({_valueNo:_selectNode.selectedIndex});
 						}
 					}
 				);

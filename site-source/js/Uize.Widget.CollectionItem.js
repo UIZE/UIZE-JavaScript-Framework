@@ -78,7 +78,7 @@ Uize.module ({
 						/*** add remove button ***/
 							_this._addChildButton (
 								'remove',
-								function (_event) {_this.fire ({name:'Remove',byUser:_true})}
+								function () {_this.fire ({name:'Remove',byUser:_true})}
 								/*?
 									Child Widgets
 										remove
@@ -172,7 +172,7 @@ Uize.module ({
 			};
 
 			_classPrototype._selectItem = function (_domEvent,_forceToggle) {
-				this.fire ({name:'Click Selected',domEvent:_domEvent,forceToggle:_forceToggle})
+				this.fire ({name:'Click Selected',domEvent:_domEvent,forceToggle:_forceToggle});
 				/*?
 					Instance Events
 						Click Selected
@@ -228,7 +228,7 @@ Uize.module ({
 											- this implied node is deprecated
 								*/
 							_fireItemMouseDownEvent = function (_event) {
-								_this.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true})
+								_this.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true});
 								/*?
 									Instance Events
 										Item Mouse Down
@@ -245,7 +245,7 @@ Uize.module ({
 							{
 								mouseover:function () {_this.set ({_over:_true})},
 								mouseout:function () {_this.set ({_over:_false})},
-								touchstart:_fireItemMouseDownEvent,
+								touchend:_fireItemMouseDownEvent,
 								mousedown:_fireItemMouseDownEvent
 							}
 						);
@@ -409,7 +409,7 @@ Uize.module ({
 						var
 							_properties = this._properties
 						;
-						'title' in _properties && this.set ({_title:_properties.title})
+						_properties && 'title' in _properties && this.set ({_title:_properties.title});
 					}
 					/*?
 						State Properties
@@ -450,6 +450,7 @@ Uize.module ({
 						if (_properties) {
 							_properties.title = _this._title;
 							_this._updateUiTitle ();
+							_this.fire({ name: 'Title Changed', bubble: _true, value: _this._title });
 						}
 					}
 					/*?

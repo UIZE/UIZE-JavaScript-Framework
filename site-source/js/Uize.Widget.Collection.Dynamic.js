@@ -69,8 +69,15 @@ Uize.module ({
 								_insertionMarkerDims,
 								_axisPosName,
 								_axisDimName,
-								_drag = _this.addChild ('drag',Uize.Widget.Drag,{nodeMap:{'':_null}})
+								_drag = _this.addChild ('drag',Uize.Widget.Drag,{nodeMap:{'':_null}}),
+								_ignoreDrag = _false
 							;
+
+							// one way operation
+							_drag.wire (
+								'Changed.inDrag',
+								function () {_this.set ({_inDrag:_drag.get ('inDrag')})}
+							);
 
 							function _setInDrag (_inDrag) {
 								var
@@ -121,10 +128,10 @@ Uize.module ({
 													;
 
 												// cancel drag if nothing is selected
-												_this.get ('totalSelected') || _drag.set ({dragCancelled:_true});
+												_ignoreDrag = !_this.get ('totalSelected');
 											}
 											else if (_itemInitiatingDrag.get ('locked'))
-												_drag.set ({dragCancelled:_true})
+												_ignoreDrag = _true
 											;
 										}
 
@@ -181,9 +188,8 @@ Uize.module ({
 										_setInDrag (_true);
 									},
 								'Drag Update':
-									function (_event) {
+									function () {
 										var
-											_documentElement = document.documentElement,
 											_dragEventPos = _drag.eventPos
 										;
 										_Uize_Tooltip.positionTooltip (
@@ -249,13 +255,13 @@ Uize.module ({
 										_drag.set ({cursor:_insertPointItem || _itemWidgetOver ? 'move' : 'not-allowed'});
 									},
 								'Drag Done':
-									function (_event) {
+									function () {
 										if (_drag.get ('dragStarted')) {
 											_setInDrag (_false);
 											_this.displayNode ('insertionMarker',_false);
 
 											var _finishDrag = function () {
-												if (_insertPointItem && !_drag.get ('dragCancelled')) {
+												if (_insertPointItem && !_ignoreDrag && !_drag.get ('dragCancelled')) {
 													var _itemWidgets = _this.itemWidgets;
 
 													/*** handle the 'after' insert mode ***/
@@ -381,7 +387,7 @@ Uize.module ({
 					_insertionPointNode = _insertionPointItem ? _insertionPointItem.getNode () : _null,
 					_items = _this.get ('items'),
 					_itemWidgets = _this.itemWidgets,
-					_rootNode = _this.getNode ('items'),
+					_rootNode = _itemWidgetToMove.getNode().parentNode,
 					_node = _itemWidgetToMove.getNode (),
 					_nodeToInsertBefore = _insertAfter
 						? (_insertionPointNode ? _insertionPointNode.nextSibling : _rootNode.childNodes[0])
@@ -417,6 +423,8 @@ Uize.module ({
 					: function (_input) {return _nodeInnerHtml.replace (/ITEMWIDGETNAME/g, _input.name)}
 				;
 			};
+
+			_classPrototype.afterWireUi = function () {};
 
 			_classPrototype.wireUi = function () {
 				var _this = this;
@@ -462,6 +470,8 @@ Uize.module ({
 					_this.set({itemWidgetProperties:Uize.copyInto(_itemWidgetProperties, _this.get('itemWidgetProperties') || {})});
 
 					_superclass.doMy (_this,'wireUi');
+
+					_this.afterWireUi();
 				}
 			};
 
@@ -489,6 +499,7 @@ Uize.module ({
 						If true, an unselected item that is dragged will be selected. If false, an unselected item that is dragged will remain unselected.
 					*/
 				},
+				_inDrag:'inDrag', // get only
 				_itemDisplayOrder:{
 					name:'itemDisplayOrder',
 					value:'normal' // normal | reverse
@@ -506,4 +517,3 @@ Uize.module ({
 		return _class;
 	}
 });
-

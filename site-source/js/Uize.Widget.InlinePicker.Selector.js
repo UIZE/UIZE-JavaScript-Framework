@@ -38,7 +38,7 @@ Uize.module ({
 				Uize.Util.Coupler({
 					instances:[this, this.children.value],
 					properties:['valueNo', 'tentativeValueNo']
-				})
+				});
 			},
 
 			instanceMethods:{

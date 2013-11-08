@@ -49,7 +49,7 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			function _updateUiKeepOpenState (m) {
-				m._widgetsAdded && m.children.keepOpen.set ({selected:m._keepOpen})
+				m._widgetsAdded && m.children.keepOpen.set ({selected:m._keepOpen});
 			}
 
 		return _superclass.subclass ({

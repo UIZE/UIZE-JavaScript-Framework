@@ -78,9 +78,7 @@ Uize.module ({
 				);
 			}
 
-			function _updateUiTitle (m) {
-				m.isWired && m.setNodeInnerHtml('title', m._title)
-			}
+			function _updateUiTitle (m) { m.isWired && m.setNodeInnerHtml('title', m._title) }
 
 		return _superclass.subclass ({
 			instanceMethods:{
@@ -99,7 +97,7 @@ Uize.module ({
 							&& m.forAll(
 								function (_filterWidget, _filterNo) {
 									_filterNo < _countsLength
-										&& _filterWidget.set({count:_counts[_filterNo]})
+										&& _filterWidget.set({count:_counts[_filterNo]});
 								}
 							)
 						;

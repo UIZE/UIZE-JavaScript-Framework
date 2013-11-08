@@ -442,7 +442,7 @@ Uize.module ({
 							function () {
 								var _confirmed = _builtInConfirmFallback ();
 								(_params.callback || (_confirmed ? _params.yesHandler : _params.noHandler) || _Uize.nop)
-								(_confirmed)
+									(_confirmed);
 							},
 							0
 						)
@@ -590,7 +590,7 @@ Uize.module ({
 						inform:function (_params) {
 							_tryUseConfirmInheritedFromTree (
 								this,'inform',_params,function () {alert (_params.message); return _true}
-							)
+							);
 							/*?
 								Instance Methods
 									inform
@@ -645,7 +645,7 @@ Uize.module ({
 							this.callInherited ('performAjax') (
 								_serviceParams,
 								_isFunction (_requestParams) ? {callback:_requestParams} : _requestParams || {}
-							)
+							);
 							/*?
 								Instance Methods
 									ajax
@@ -1596,6 +1596,31 @@ Uize.module ({
 
 										NOTES
 										- see also the =getProvider=, =getInherited=, and =setInherited= instance methods
+							*/
+						},
+						
+						childId:function (_childName) {
+							return _constructIdPrefix (this._idPrefix, this._idPrefix, _childName, this._idPrefixConstruction);
+							/*?
+								Instance Methods
+									childId
+										Returns the ID prefix of a child widget with the specified =childNameSTR=.
+			
+										SYNTAX
+										..................................................
+										childIdPrefixSTR = myWidget.childId(childNameSTR);
+										..................................................
+			
+										EXAMPLE
+										...........................................
+										var childIdPrefix = mySlider.childId('child');
+										...........................................
+			
+										Assuming an =idPrefix= of ="page_slider"=, the example would return ="page_slider_child"=.
+			
+										NOTES
+										- See related =addChild= instance method in =Uize.Widget=
+										- See also =Uize.Widget.constructIdPrefix= static method
 							*/
 						},
 

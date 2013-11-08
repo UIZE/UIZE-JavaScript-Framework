@@ -77,8 +77,6 @@ Uize.module ({
 				if (m.isWired) {
 					var
 						_selectedFilters = m._value,
-						_filterGroupsData = m._values,
-						_children = m.children,
 						_selectedFilterLookup = {}
 					;
 					_forAll(
@@ -124,6 +122,7 @@ Uize.module ({
 								function (_filterGroupWidget, _filterGroupNo) {
 									_filterGroupNo < _countsLength
 										&& _filterGroupWidget.updateCounts(_counts[_filterGroupNo])
+									;
 								}
 							)
 						;
@@ -135,7 +134,6 @@ Uize.module ({
 
 					if (!m.isWired) {
 						var
-							_selectedFilters = m._value,
 							_filterGroupsData = m._values
 						;
 
