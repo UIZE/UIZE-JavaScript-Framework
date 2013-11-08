@@ -77,7 +77,7 @@ Uize.module({
 
 			// Returns x (mod y) in modular arithmetic
 			function _mod(_x, _y) { return ((_x % _y) + _y) % _y }
-			
+
 			// Allows for delayed wiring of suggestions widget incase suggestions are never requested
 			function _addAndWireSuggestions (m) {
 				var
@@ -165,11 +165,11 @@ Uize.module({
 					position: _tokens.splice(0, _index + 1).join('').length
 				};
 			}
-			
+
 			function _getNormalizedQuery (m, _tokenInfo) {
 				var _normalizedQuery = _tokenInfo && _trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ');
 				return _tokenInfo ?
-					(!_supportsPlaceholder && _normalizedQuery == m.get('defaultValue') ? 
+					(!_supportsPlaceholder && _normalizedQuery == m.get('defaultValue') ?
 						_emptyString :
 						_normalizedQuery)
 					: _emptyString
@@ -317,7 +317,7 @@ Uize.module({
 					m._serviceUrl != _undefined
 				) {
 					m.ajax(
-						_Uize.copyInto( 
+						_Uize.copyInto(
 							_Uize.pairUp(
 								'serviceUrl', m._serviceUrl,
 								m._serviceQueryParamName, _normalizedQuery,
@@ -373,7 +373,7 @@ Uize.module({
 						_suggestions = m.children.suggestions,
 						_hasSuggestions = _suggestions && _suggestions.get('values').length
 					;
-					
+
 					if (_focused && _hasSuggestions) {
 						m.displayNode('trending', !m._lastTypedQuery);
 						// The palette must have display:true to be positioned
