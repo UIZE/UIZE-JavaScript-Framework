@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>HTML Entities Table | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="Uize.Widget.TableSort Uize.Util.Html.Entities Uize.Util.Html.EntityInfo"/>
+	<meta name="description" content="See all the HTML entities in a sortable table."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.datatable.css"/>
+	<style tyle="text/css">
+		table.data tr td {
+			text-align: center;
+		}
+		table.data tr td.entityPreview {
+			font-size: 30px;
+			background: #fff;
+			padding: 8px 0;
+		}
+		table.data tr td.entityDescription {
+			text-align: left;
+			padding-left: 8px;
+			padding-right: 8px;
+		}
+		table.data tr td.entityDescription a {
+			text-decoration: none;
+			border: none;
+			color: #000;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="header">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
+</h1>
+
+<div class="main">
+	<h1 class="document-title">
+		<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+		HTML Entities Table
+		<div class="pageActionsShell">
+			<div id="page-actions" class="pageActions"><a href="source-code/html-entities-table.html" class="buttonLink">SOURCE</a></div>
+		</div>
+	</h1>
+
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>The table shown below lists all the HTML named entities (as defined by various ISO standards), and showcases the <a href="../reference/Uize.Util.Html.Entities.html"><code>Uize.Util.Html.Entities</code></a> and <a href="../reference/Uize.Util.Html.EntityInfo.html"><code>Uize.Util.Html.EntityInfo</code></a> modules of the UIZE JavaScript Framework, with the <code>Uize.Util.Html.EntityInfo</code> module providing the descriptions for the entities.</p>
+		<p>The table is sortable by description, character code, and entity name. For convenience, the description text is segmented from most generic to most specific characteristics, allowing a sort on the description column to easily provide logical grouping and subgrouping. Also, the description for each entity is linked to Wikipedia for further information on each entity.</p>
+	</div>
+
+	<!-- wireframe for sortable color table -->
+
+	<center id="page_entitiesTable-shell">
+	</center>
+</div>
+
+<!-- JavaScript code to generate the color table and wire it up with the sortable behavior -->
+
+<script type="text/javascript">
+
+Uize.require (
+	[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Util.Html.Entities',
+		'Uize.Util.Html.EntityInfo',
+		'Uize.Widget.TableSort'
+	],
+	function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** build the color table ***/
+			var
+				tableHtmlChunks = [
+					'<table id="page_entitiesTable" class="data">',
+						'<tr class="title">' +
+							'<td colspan="10">Sortable Table of HTML Entities</td>' +
+						'</tr>' +
+						'<tr class="heading">' +
+							'<td>Preview</td>' +
+							'<td>Description</td>' +
+							'<td>Code</td>' +
+							'<td>Named Entity</td>' +
+							'<td>Code Entity</td>' +
+						'</tr>'
+				],
+				charCodeToEntityNameLookup = Uize.Util.Html.Entities.charCodeToEntityNameLookup,
+				charCodeToEntityInfoLookup = Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup
+			;
+			for (var charCode in charCodeToEntityNameLookup) {
+				var _char = String.fromCharCode (charCode);
+				tableHtmlChunks.push (
+					'<tr>' +
+						'<td class="entityPreview">' +
+							_char +
+						'</td>' +
+						'<td class="entityDescription">' +
+							'<a href="http://en.wikipedia.org/wiki/' + encodeURIComponent (_char) + '">' +
+								charCodeToEntityInfoLookup [charCode].join (', ') +
+							'</a>' +
+						'</td>' +
+						'<td>' +
+							charCode +
+						'</td>' +
+						'<td>' +
+							'&amp;' + charCodeToEntityNameLookup [charCode] + ';' +
+						'</td>' +
+						'<td>' +
+							'&amp;#' + charCode + ';' +
+						'</td>' +
+					'</tr>'
+				);
+			}
+			tableHtmlChunks.push ('</table>');
+
+		/*** add a Uize.Widget.TableSort child widget ***/
+			page.addChild (
+				'entitiesTable',
+				Uize.Widget.TableSort,
+				{
+					headingOverClass:'headingOver',
+					headingLitClass:'headingLit',
+					rowOverClass:'rowOver',
+					html:tableHtmlChunks.join (''),
+					built:false
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** sort the table by description ***/
+			page.children.entitiesTable.sort (1);
+	}
+);
+
+</script>
+
+</body>
+</html>
+

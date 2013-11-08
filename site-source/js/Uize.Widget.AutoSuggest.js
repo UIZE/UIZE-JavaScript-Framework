@@ -147,6 +147,75 @@ Uize.module({
 				_updateSuggestionsPalette(m);
 			}
 
+			// Allows for delayed wiring of suggestions widget incase suggestions are never requested
+			function _addAndWireSuggestions (m) {
+				var
+					_cssClassSelected = m._cssClassSelected,
+					_suggestions = m.addChild(
+						'suggestions',
+						m._optionsWidgetClass || _Uize.Widget.Options.Selector,
+						_Uize.copyInto(
+							{
+								built: _false,
+								html: _true,
+								optionWidgetProperties: {
+									cssClassActive:_cssClassSelected,
+									cssClassSelected:_cssClassSelected,
+									cssClassTentativeSelected:_cssClassSelected
+								},
+								values: []
+							},
+							m._optionsWidgetProperties
+						)
+					)
+				;
+
+				_suggestions.wire({
+					// When a suggestion is highlighted (eg hovered over), it is shown in the textbox.
+					// When no suggestions are highlighted, the original query will be shown.
+					'Changed.tentativeValue': function () {
+						m._showOnHover && _suggestionHoverHandler(m, _suggestions.get('tentativeValue'));
+					},
+
+					// When a suggestion is clicked, the value of this widget is set to the suggestion
+					// and we submit.
+					'Option Event': function (_event) {
+						if (_event.childEvent.name === 'Click') {
+							m._showOnHover || _suggestionHoverHandler(m, _suggestions.get('tentativeValue'));
+							m._canUpdateLastTypedQuery = _false;
+							m.set('focused', _true);
+							_fireSuggestionSelected(m, _event.childEvent.source);
+						}
+					}
+				});
+
+				_suggestions.wireUi();
+
+				return _suggestions;
+			}
+
+			function _fireSuggestionSelected (m, _option) {
+				m.fire({
+					name: 'Suggestion Selected',
+					option: _option
+				});
+				/*?
+				Instance Events
+				Suggestion Selected
+				This event fires when a suggestion is selected (click or enter).
+
+				When this event fires, the event object will have an =option= property whose value is the option widget representing the suggestion.
+				*/
+				m._typedQueryTokenInfo = m._tokenInfo;
+				m.children.suggestions.set({
+					tentativeValue: _null,
+					tentativeValueNo: -1,
+					value: _null,
+					values: []
+				});
+				_updateSuggestionsPalette(m);
+			}
+
 			function _getDisplay (_tokenInfo, _suggestion) {
 				var
 					_tokens = _tokenInfo.tokens.concat(),
@@ -374,6 +443,249 @@ Uize.module({
 						_hasSuggestions = _suggestions && _suggestions.get('values').length
 					;
 					
+					if (_focused && _hasSuggestions) {
+						m.displayNode('trending', !m._lastTypedQuery);
+						// The palette must have display:true to be positioned
+						m.showNode(_suggestionsPaletteNode, _false);
+						m.displayNode(_suggestionsPaletteNode);
+						if (m.get('autoPositionSuggestionsPalette')) {
+							_Uize_Node.setAbsPosAdjacentTo(_suggestionsPaletteNode, _inputNode, 'y');
+							// We want the palette to be at least as wide as the input and as wide as needed to display every
+							// suggestion.
+							m.setNodeStyle(
+								_suggestionsPaletteNode,
+								{ minWidth: _Uize_Node.getDimensions(_inputNode).width }
+							);
+						}
+						m.showNode(_suggestionsPaletteNode);
+					} else if (m.getNodeStyle('suggestionsPalette', 'display') != 'none') {
+						// When the input loses focus, the following line is executed. When a suggestion is clicked,
+						// the input loses focus. The blur event will fire before the Click event. We must wait until
+						// the Click event is fired before setting display:none on the palette.
+						setTimeout(
+							function () {
+								m.displayNode(_suggestionsPaletteNode, _false);
+								_suggestions && _suggestions.set({
+									tentativeValue: _null,
+									tentativeValueNo: -1,
+									value: _null,
+									values: []
+								});
+							},
+							200
+						);
+					}
+				}
+			}
+
+			function _getNormalizedQuery (m, _tokenInfo) {
+				var _normalizedQuery = _tokenInfo && _trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ');
+				return _tokenInfo ?
+					(!_supportsPlaceholder && _normalizedQuery == m.get('defaultValue') ?
+						_emptyString :
+						_normalizedQuery)
+					: _emptyString
+				;
+			}
+
+			function _getTokenInfo (m, _input, _position) {
+				var
+					_separators = m._querySeparators,
+					_quotes = m._queryQuotes,
+					_inputLength = _input.length,
+					_queryIndex = _position,
+					_tokens = [],
+					_index = -1,
+					_curToken = _emptyString,
+					_curChar = _emptyString,
+					_inQuotes = _false,
+					_curQuotes = _emptyString,
+					_tokenIndex = 0
+				;
+
+				if (_separators) {
+					_separators = _Uize.lookup(_Uize.isArray(_separators) ? _separators : [_separators]);
+					_quotes =
+						_quotes ?
+							_Uize_Data.NameValueRecords.toHash(
+								_Uize.isArray(_quotes) ?
+									typeof _quotes[0] === 'object' ?
+										_quotes :
+										_Uize.map(_quotes, function (_quote) { return { open: _quote, close: _quote} }) :
+									typeof _quotes === 'object' ?
+										[_quotes] :
+										[{ open: _quotes, close: _quotes}],
+								'open',
+								'close'
+							) :
+							{}
+					;
+
+					while (++_index < _inputLength) {
+						_curChar = _input[_index];
+						if (!_inQuotes && (_curQuotes = _quotes[_curChar])) {
+							_inQuotes = _true;
+							_curToken += _curChar;
+						} else if (_inQuotes && _curChar === _curQuotes) {
+							_inQuotes = _false;
+							_curToken += _curChar;
+						} else if (!_inQuotes && _separators[_curChar]) {
+							_tokens.push(_curToken);
+							_tokens.push(_curChar);
+							_curToken = _emptyString;
+						} else {
+							_curToken += _curChar;
+						}
+					}
+					if (_curToken || !_tokens.length) _tokens.push(_curToken);
+				} else
+					_tokens.push(_input);
+
+				if (_position == -1)
+					_tokenIndex = -1;
+				else
+					while (_tokenIndex < _tokens.length - 1 && (_position -= _tokens[_tokenIndex].length) > 0) _tokenIndex++;
+
+				return {
+					query: _input,
+					queryIndex: _queryIndex,
+					tokens: _tokens,
+					tokenIndex: _tokenIndex
+				};
+			}
+
+			function _handleKeyboardControl (m, _domEvent) {
+				var _suggestions = m.children.suggestions;
+
+				if (m.isWired) {
+					if (
+						m._allowKeypress &&
+						_suggestions &&
+						m.getNodeStyle('suggestionsPalette', 'display') != 'none'
+					) {
+						// "hover" over suggestions via up/down arrows
+						if (_Uize_Node_Event.isKeyUpArrow(_domEvent) || _Uize_Node_Event.isKeyDownArrow(_domEvent)) {
+							var
+								_curNumSuggestions = _suggestions.get('values').length,
+								_increment =
+									_Uize_Node_Event.isKeyUpArrow(_domEvent) ? -1 :
+									_Uize_Node_Event.isKeyDownArrow(_domEvent) ? 1 :
+									0,
+								_curValueNo = _suggestions.get('tentativeValueNo'),
+								_curSuggestion = _suggestions.children['option' + _curValueNo],
+								_nextSuggestion = _suggestions.children[
+									'option' +
+									(_mod(_curValueNo + 1 + _increment, _curNumSuggestions + 1) - 1)
+								]
+							;
+							if (_increment && _curSuggestion) {
+								_curSuggestion.set('state', _emptyString);
+								_curSuggestion.fire('Out');
+							}
+							if (_increment && _nextSuggestion) {
+								_nextSuggestion.set('state', 'over');
+								_nextSuggestion.fire('Over');
+							}
+							m._showOnMouseover ||
+									_suggestionHoverHandler(m, _suggestions.get('tentativeValue'));
+							// select a "hovered over" suggestion using enter or tab
+						} else if (
+							_suggestions.get('tentativeValue') &&
+							(
+								_Uize_Node_Event.isKeyEnter(_domEvent) ||
+								_Uize_Node_Event.isKeyTab(_domEvent)
+							)
+						) {
+							_fireSuggestionSelected(m, _suggestions.children['option' + _suggestions.get('tentativeValueNo')]);
+							// select first suggestion on tab
+						} else if (_Uize_Node_Event.isKeyTab(_domEvent)) {
+							var _firstSuggestion = _suggestions.children['option0'];
+							_firstSuggestion.set('state', 'over');
+							_firstSuggestion.fire('Over');
+							_fireSuggestionSelected(m, _firstSuggestion);
+						}
+					}
+				}
+			}
+
+			function _updateSuggestions (m) {
+				function _highlight(_text) { return '<span class="' + m._cssClassHighlight + '">' + _text + '</span>' }
+
+				var
+					_children = m.children,
+					_suggestions = _children.suggestions,
+					_normalizedQuery = _getNormalizedQuery(m, m._typedQueryTokenInfo),
+					_defaultValue = m.get('defaultValue')
+				;
+
+				m._canUpdateLastTypedQuery &&
+					m.set({ lastTypedQuery: _normalizedQuery })
+				;
+
+				if (
+					(_normalizedQuery != _defaultValue || (_normalizedQuery == _defaultValue && !_defaultValue)) &&
+					_normalizedQuery.length >= m._numCharsBeforeSuggest &&
+					m._numSuggestions &&
+					m._serviceUrl != _undefined
+				) {
+					m.ajax(
+						_Uize.copyInto(
+							_Uize.pairUp(
+								'serviceUrl', m._serviceUrl,
+								m._serviceQueryParamName, _normalizedQuery,
+								m._serviceNumSuggestionsParamName, m._numSuggestions
+							),
+							m._additionalAutoSuggestParams || {}
+						),
+						{
+							cache: 'memory',
+							callbackSuccess: function (_response) {
+								(_suggestions || _addAndWireSuggestions(m)).set({
+									tentativeValue: _null,
+									tentativeValueNo: -1,
+									values: _Uize.map(
+										m._responseAdapter(_normalizedQuery, _response),
+										function (_suggestion) {
+											var
+												_term = _suggestion.fullWord,
+												_highlightMode = m._highlightMode,
+												_formattedTerm =
+													_highlightMode === 'none' ? _term :
+													_highlightMode === 'query' ? _suggestion.prefix + _highlight(_normalizedQuery) + _suggestion.suffix :
+													_suggestion.fullWord.indexOf(_normalizedQuery) === 0 ? _highlight(_suggestion.prefix) + _normalizedQuery + _highlight(_suggestion.suffix):
+													_highlight(_suggestion.fullWord)
+														/* NOTE:
+															Hightlight the whole word if the word doesn't start with the normalizedQuery. This is the case when the normalized query is spelled wrong and the suggestion comes from the spell checker
+														*/
+											;
+											return m._optionDataAdapter(_term, _formattedTerm);
+										}
+									)
+								});
+								_updateSuggestionsPalette(m);
+							}
+						}
+					);
+				} else if (_suggestions) {
+					_suggestions.set({
+						tentativeValue: _null,
+						tentativeValueNo: -1,
+						values: []
+					});
+					_updateSuggestionsPalette(m);
+				}
+			}
+
+			function _updateSuggestionsPalette (m) {
+				if (m.isWired) {
+					var
+						_inputNode = m.getNode('input'),
+						_suggestionsPaletteNode = m.getNode('suggestionsPalette'),
+						_focused = m.get('focused'),
+						_suggestions = m.children.suggestions,
+						_hasSuggestions = _suggestions && _suggestions.get('values').length
+					;
+
 					if (_focused && _hasSuggestions) {
 						m.displayNode('trending', !m._lastTypedQuery);
 						// The palette must have display:true to be positioned

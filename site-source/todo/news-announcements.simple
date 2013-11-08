@@ -1,16 +1,17 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
-NEW MODULE: Uize.Util.Html.Entities
-	.
+Various Deprecated Features Killed
+	Uize.Node
+		- =Uize.Node.returnFalse= and =Uize.Node.returnTrue= static methods are no longer needed since they were migrated to =Uize=
 
-NEW MODULE: Uize.Util.Html.Encode
-	.
+	Uize.Class
+		- =MyClass.registerProperties=
 
-NEW MODULE: Uize.Math.LogicalPos
-	.
+	Uize
+		- =Uize.globalEval=
 
-NEW MODULE: Uize.Math.Blend
-	.
+	Uize.Service
+		- =Uize.Service.declareServiceMethods=
 
 New Short Form for Namespace Modules
 	A new and more compact module declaration syntax for pure namespace modules...
@@ -28,18 +29,20 @@ New Short Form for Namespace Modules
 	### TODO
 		- make sure to update guide on modules
 
-Various Deprecated Features Killed
-	Uize.Node
-		- =Uize.Node.returnFalse= and =Uize.Node.returnTrue= static methods are no longer needed since they were migrated to =Uize=
+NEW MODULE: Uize.Util.Html.Entities
+	.
 
-	Uize.Class
-		- =MyClass.registerProperties=
+NEW MODULE: Uize.Util.Html.EntityInfo
+	.
 
-	Uize
-		- =Uize.globalEval=
+NEW MODULE: Uize.Util.Html.Encode
+	.
 
-	Uize.Service
-		- =Uize.Service.declareServiceMethods=
+NEW MODULE: Uize.Math.LogicalPos
+	.
+
+NEW MODULE: Uize.Math.Blend
+	.
 
 Major Build Process Improvements
 

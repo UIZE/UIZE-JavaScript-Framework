@@ -56,11 +56,11 @@ Uize.module ({
 						this._properties = {};
 					},
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** add select button ***/
-							_this._addChildButton (
-								'select',function (_event) {_this._selectItem (_event.domEvent,_true)}
+							m._addChildButton (
+								'select',function (_event) {m._selectItem (_event.domEvent,_true)}
 								/*?
 									Child Widgets
 										select
@@ -73,12 +73,12 @@ Uize.module ({
 								clickToSelect:_true,
 								clickToDeselect:_true
 							});
-							_this._setSelectorState ();
+							m._setSelectorState ();
 
 						/*** add remove button ***/
-							_this._addChildButton (
+							m._addChildButton (
 								'remove',
-								function () {_this.fire ({name:'Remove',byUser:_true})}
+								function () {m.fire ({name:'Remove',byUser:_true})}
 								/*?
 									Child Widgets
 										remove
@@ -126,13 +126,13 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiState = function () {
-				var _this = this;
-				if (_this.isWired) {
+				var m = this;
+				if (m.isWired) {
 					/*** set CSS class for root node ***/
 						Uize.Node.Classes.setState(
-							_this.getNode(),
-							['', _this._cssClassOver, _this._cssClassActive],
-							(_this._selected ? 2 : _this._over && 1) || 0
+							m.getNode(),
+							['', m._cssClassOver, m._cssClassActive],
+							(m._selected ? 2 : m._over && 1) || 0
 							/*?
 								Implied Nodes
 									Root Node
@@ -147,14 +147,14 @@ Uize.module ({
 
 					/*** set CSS class for preview node ***/
 						var
-							_cssClassImage = _this._cssClassImage,
-							_cssClassImageOver = _this._cssClassImageOver
+							_cssClassImage = m._cssClassImage,
+							_cssClassImageOver = m._cssClassImageOver
 						;
 						typeof _cssClassImage == 'string' && typeof _cssClassImageOver == 'string' &&
 							Uize.Node.Classes.setState(
-								_this.getNode('preview'),
+								m.getNode('preview'),
 								[_cssClassImage, _cssClassImageOver],
-								_this._over
+								m._over
 								/*?
 									Implied Nodes
 										preview
@@ -196,19 +196,19 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					// NOTE: Ideally want to get rid of cssClassBase because we're using Uize.Node.Classes, but for backwards compatibility, need to still
 					// minimally support it.  If there was a case that an application was passing in cssClassBase in order to get the item to have a certain
 					// class (and it wasn't already in the markup), we need to set it here, so that would still operate correctly.
-					var _rootNode = _this.getNode();
-					if (_this._cssClassBase && _rootNode)
-						_rootNode.className = _this._cssClassBase
+					var _rootNode = m.getNode();
+					if (m._cssClassBase && _rootNode)
+						_rootNode.className = m._cssClassBase
 					;
 
 					/*** wire up the preview shell node ***/
 						var
-							_previewShellNode = _this.getNode ('previewShell') || 'imageLink',
+							_previewShellNode = m.getNode ('previewShell') || 'imageLink',
 								/*?
 									Implied Nodes
 										previewShell
@@ -228,7 +228,7 @@ Uize.module ({
 											- this implied node is deprecated
 								*/
 							_fireItemMouseDownEvent = function (_event) {
-								_this.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true});
+								m.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true});
 								/*?
 									Instance Events
 										Item Mouse Down
@@ -240,25 +240,25 @@ Uize.module ({
 								*/
 							}
 						;
-						_this.wireNode (
+						m.wireNode (
 							_previewShellNode,
 							{
-								mouseover:function () {_this.set ({_over:_true})},
-								mouseout:function () {_this.set ({_over:_false})},
+								mouseover:function () {m.set ({_over:_true})},
+								mouseout:function () {m.set ({_over:_false})},
 								touchend:_fireItemMouseDownEvent,
 								mousedown:_fireItemMouseDownEvent
 							}
 						);
 
-						if (_this._previewClickAction)
-							_this.wireNode (
+						if (m._previewClickAction)
+							m.wireNode (
 								_previewShellNode,
 								'click',
 								function (_event) {
-									var _forceToggle = _this._previewClickAction == 'Toggle Selected';
-									_forceToggle || _this._previewClickAction == 'Select'
-										? _this._selectItem (_event,_forceToggle)
-										: _this.fire ({name:'Click Preview',bubble:_true});
+									var _forceToggle = m._previewClickAction == 'Toggle Selected';
+									_forceToggle || m._previewClickAction == 'Select'
+										? m._selectItem (_event,_forceToggle)
+										: m.fire ({name:'Click Preview',bubble:_true});
 											/*?
 												Instance Events
 													Click Preview
@@ -270,7 +270,7 @@ Uize.module ({
 							)
 						;
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
@@ -356,9 +356,9 @@ Uize.module ({
 					name:'over',
 					onChange:[
 						function () {
-							var _this = this;
-							_this.isWired && _this._previewTooltip && Uize.Tooltip &&
-								Uize.Tooltip.showTooltip (_this._previewTooltip,_this._over)
+							var m = this;
+							m.isWired && m._previewTooltip && Uize.Tooltip &&
+								Uize.Tooltip.showTooltip (m._previewTooltip,m._over)
 							;
 						},
 						_classPrototype._updateUiState
@@ -444,13 +444,13 @@ Uize.module ({
 					name:'title',
 					onChange:function () {
 						var
-							_this = this,
-							_properties = _this._properties
+							m = this,
+							_properties = m._properties
 						;
 						if (_properties) {
-							_properties.title = _this._title;
-							_this._updateUiTitle ();
-							_this.fire({ name: 'Title Changed', bubble: _true, value: _this._title });
+							_properties.title = m._title;
+							m._updateUiTitle ();
+							m.fire({ name: 'Title Changed', bubble: _true, value: m._title });
 						}
 					}
 					/*?

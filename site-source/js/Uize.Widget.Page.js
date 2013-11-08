@@ -67,10 +67,10 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._showConfirmDialog = function (_mode,_defaultState,_params) {
-				var _this = this;
-				_this.useDialog ({
-					component:_this._confirmDialog.component,
-					widgetClassName:_this._confirmDialog.widgetClassName || 'Uize.Widget.Dialog.Confirm',
+				var m = this;
+				m.useDialog ({
+					component:m._confirmDialog.component,
+					widgetClassName:m._confirmDialog.widgetClassName || 'Uize.Widget.Dialog.Confirm',
 					widgetProperties:{
 						name:'confirmDialog',
 						title:_params.title || '',
@@ -93,8 +93,8 @@ Uize.module ({
 			_classPrototype._adoptChildWidgets = function (_callback) {
 				_callback = _callback || Object;
 				var
-					_this = this,
-					_idPrefix = _this.get ('idPrefix'),
+					m = this,
+					_idPrefix = m.get ('idPrefix'),
 					_window = window
 				;
 
@@ -157,7 +157,7 @@ Uize.module ({
 									_traverseChild (_parent,_childName,_children [_childName])
 								;
 							}
-							_traverseChildren (_this,_childrenToAdoptTree);
+							_traverseChildren (m,_childrenToAdoptTree);
 						};
 
 						/*** recurse tree, determining required widget class modules ***/
@@ -178,7 +178,7 @@ Uize.module ({
 						Uize.require (
 							_requiredModules,
 							function () {
-								_this.set ({children:_childrenToAdoptTree});
+								m.set ({children:_childrenToAdoptTree});
 
 								/*** recurse tree, adopting all widgets ***/
 									_traverseChildrenToAdoptTree (
@@ -195,7 +195,7 @@ Uize.module ({
 											}
 											return _child;
 										},
-										_this.isWired && function (_child) {Uize.callOn (_child,'insertOrWireUi')}
+										m.isWired && function (_child) {Uize.callOn (_child,'insertOrWireUi')}
 											/* NOTE:
 												Don't wire adopted child widgets if page widget isn't wired yet (this code could be executed before the page widget is wired if all modules required by adopted children are already loaded, and the builder for this anonymous module is executed immediately).
 											*/
@@ -212,7 +212,7 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.loadHtmlIntoNode = function (_injectionParams,_htmlParams,_loaderDirectives) {
 				var
-					_this = this,
+					m = this,
 					_rootNodeId = _injectionParams.rootNodeId,
 					_callback = _getCallbackFromDirectives (_loaderDirectives),
 					_loaderDirectivesIsValidObject = typeof _loaderDirectives == 'object' && _loaderDirectives,
@@ -222,7 +222,7 @@ Uize.module ({
 								var
 									_documentBody = document.body,
 									_node = _injectionParams.node != undefined
-										? _this.getNode (_injectionParams.node)
+										? m.getNode (_injectionParams.node)
 										: (_rootNodeId ? _Uize_Node.getById (_rootNodeId + '-shell') : _null) || _documentBody
 								;
 
@@ -231,13 +231,13 @@ Uize.module ({
 									_html,
 									_injectionParams.injectMode || (_node == _documentBody ? 'inner bottom' : 'inner replace')
 								);
-	
-								// Need to break synchronous execution of the page between HTML injection
-								// and child widget adoption so the browser has time to insert any widget data
-								// into the window object
-								setTimeout(function() { _this._adoptChildWidgets (_callback) }, 0);
+
+								/* NOTE:
+									Need to break synchronous execution of the page between HTML injection and child widget adoption so the browser has time to insert any widget data into the window object
+								*/
+								setTimeout(function() { m._adoptChildWidgets (_callback) }, 0);
 							}
-							
+
 							_loaderDirectivesIsValidObject && _loaderDirectivesIsValidObject.beforeInject
 								? _loaderDirectivesIsValidObject.beforeInject(_injectHmtl, _html)
 								: _injectHmtl()
@@ -247,10 +247,10 @@ Uize.module ({
 				;
 				_injectionParams.alwaysReplace === _false && _rootNodeId && _Uize_Node.getById (_rootNodeId)
 					? _callback ()
-					: _this.loadHtml (
+					: m.loadHtml (
 						_htmlParams,
 						_loaderDirectivesIsValidObject
-							? Uize.copyInto ({},_loaderDirectives,_loadHtmlCallbackObject)
+							? Uize.copy (_loaderDirectives,_loadHtmlCallbackObject)
 							: _loadHtmlCallbackObject
 					)
 				;
@@ -404,9 +404,9 @@ Uize.module ({
 
 			_classPrototype.useDialog = function (_params) {
 				var
-					_this = this,
-					_dialogWidgetProperties = Uize.copy (_this._dialogProperties,_params.widgetProperties),
-					_dialogWidgetParent = _dialogWidgetProperties.parent || _this,
+					m = this,
+					_dialogWidgetProperties = Uize.copy (m._dialogProperties,_params.widgetProperties),
+					_dialogWidgetParent = _dialogWidgetProperties.parent || m,
 					_dialogWidgetName = _dialogWidgetProperties.name,
 					_dialogWidget = _dialogWidgetParent.children [_dialogWidgetName],
 					_component = _params.component,
@@ -442,12 +442,12 @@ Uize.module ({
 							function _handleShownOrHide(_event) {
 								var _eventName = _event.name;
 								_callHandler(_eventName, [_event]);
-								_this.fire({
+								m.fire({
 									name:'Dialog ' + _eventName,
 									dialogWidget:_event.source
 								});
 							}
-							
+
 							_dialogWidget.set ({shown:_false});
 							/*** store handlers as properties of widget, in order to be able to remove them on reuse ***/
 								/* WORKAROUND:
@@ -522,7 +522,7 @@ Uize.module ({
 						);
 					};
 					_componentProfile
-						? _this.loadHtmlIntoNode (
+						? m.loadHtmlIntoNode (
 							{
 								node:_componentProfile.node,
 								rootNodeId:_componentProfile.rootNodeId,
@@ -675,11 +675,11 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this._adoptChildWidgets ();
+				var m = this;
+				if (!m.isWired) {
+					m._adoptChildWidgets ();
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
@@ -992,11 +992,11 @@ Uize.module ({
 									EXAMPLE
 									..................................................................................
 									MySite.MyPageWidgetClass.prototype.loadHtml = function (_htmlParams,_directives) {
-										var _this = this;
+										var m = this;
 										if (typeof _directives != 'object' || !_directives)
 											_directives = {callback:_directives}
 										;
-										_this.ajax (
+										m.ajax (
 											Uize.copyInto ({service:'getcontrol'},_htmlParams),
 											{
 												cache:'cache' in _directives ? _directives.cache : 'never',
