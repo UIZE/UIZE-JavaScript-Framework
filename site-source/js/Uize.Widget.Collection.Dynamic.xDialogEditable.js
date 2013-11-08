@@ -31,8 +31,11 @@ Uize.module ({
 		'Uize.Json'
 	],
 	builder:function (_class) {
+		'use strict';
+
 		/*** Variables for Scruncher Optimization ***/
 			var
+				_true = true,
 				_false = false,
 				_Uize = Uize,
 				_classPrototype = _class.prototype

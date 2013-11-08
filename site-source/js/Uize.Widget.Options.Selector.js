@@ -49,13 +49,13 @@ Uize.module ({
 				}
 
 				function _syncValueDetails(_propertyName) {
-					var _valueDetails = _valueDetailsCache[_propertyName];
+					var
+						_propertyValue = m.get(_propertyName),
+						_valueDetails = _valueDetailsCache[_propertyValue]
+					;
 
 					if (_valueDetails === _undefined) {
-						var
-							_propertyValue = m.get(_propertyName),
-							_valueObject = Uize.findRecord (m.get('values'), {name:_propertyValue})
-						;
+						var _valueObject = Uize.findRecord (m.get('values'), {name:_propertyValue});
 
 						_addToValueDetailsCache(
 							_propertyName,
