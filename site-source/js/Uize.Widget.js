@@ -1620,7 +1620,6 @@ Uize.module ({
 			
 										NOTES
 										- See related =addChild= instance method in =Uize.Widget=
-										- See also =Uize.Widget.constructIdPrefix= static method
 							*/
 						},
 
