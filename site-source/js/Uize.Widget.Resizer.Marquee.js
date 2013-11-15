@@ -141,14 +141,14 @@ Uize.module ({
 
 			_classPrototype._updateUiRotate = function () {
 				var
-					_this = this,
-					_canRotate = !!_this._canRotate
+					m = this,
+					_canRotate = !!m._canRotate
 				;
 
-				if (_this.isWired && _canRotate) {
-					var _rotateNode = _this.getNode ('rotate');
-					_this.displayNode (_rotateNode, _canRotate);
-					_this.children.rotate.set ({node:_rotateNode});
+				if (m.isWired && _canRotate) {
+					var _rotateNode = m.getNode ('rotate');
+					m.displayNode (_rotateNode, _canRotate);
+					m.children.rotate.set ({node:_rotateNode});
 				}
 			};
 
@@ -162,7 +162,7 @@ Uize.module ({
 					_superclass.doMy (m,'updateUi');
 
 					m._updateUiHandlesPositions ();
-					_this._updateUiRotate ();
+					m._updateUiRotate ();
 				}
 			};
 
@@ -210,31 +210,28 @@ Uize.module ({
 				_canRotate:{ // if true, show the rotation button
 					name:'canRotate',
 					onChange:function () {
-						var _this = this;
+						var m = this;
 
-						if (_this._canRotate && !_this.children.rotate)
-							Uize.module ({
-								required:'Uize.Widget.Drag',
-								builder:function () {
+						if (m._canRotate && !m.children.rotate)
+							Uize.require (
+								'Uize.Widget.Drag',
+								function (_Uize_Widget_Drag) {
 									var
 										_initialRotation,
 										_centerX, _centerY, // the center of the visible marquee (ie. the dashed line + handles)
 										_initialRotationOffset // the angle created by the line segment center-button center and the line f(x) = _center.x
 									;
 
-									_this.set ({rotation:0});
+									m.set ({rotation:0});
 
-									_this.addChild (
-										'rotate',
-										Uize.Widget.Drag
-									).wire ({
+									m.addChild ('rotate', _Uize_Widget_Drag).wire ({
 										'Before Drag Start':function (_event) {
 											var
-												_buttonCoords = Uize.Node.getCoords (_this.getNode ('rotate')),
-												_centerCoords = Uize.Node.getCoords (_this.getNode (_this.get ('areaNodes') [0])) // assume that an area node always exists
+												_buttonCoords = _Uize_Node.getCoords (m.getNode ('rotate')),
+												_centerCoords = _Uize_Node.getCoords (m.getNode (m.get ('areaNodes') [0])) // assume that an area node always exists
 											;
 
-											_initialRotation = _this.get ('rotation');
+											_initialRotation = m.get ('rotation');
 											_centerX = _centerCoords.x + _centerCoords.width / 2;
 											_centerY = _centerCoords.y + _centerCoords.height / 2;
 											_initialRotationOffset = Math.atan (
@@ -249,12 +246,12 @@ Uize.module ({
 											if (_buttonCoords.y > _centerY)
 												_initialRotationOffset *= -1;
 
-											_this.set ({inDrag:_true});
-											_this.fire (_event);
+											m.set ({inDrag:_true});
+											m.fire (_event);
 										},
 										'Drag Update':function (_event) {
-											if (!_this._updatingRotationPosition) {
-												_this._updatingRotationPosition = _true;
+											if (!m._updatingRotationPosition) {
+												m._updatingRotationPosition = _true;
 
 												var
 													_mouseCoords = _event.source.get ('eventPos'),
@@ -296,26 +293,26 @@ Uize.module ({
 												if (_mouseCoords [1] > _centerY)
 													_angle *= -1;
 
-												_this.set ({
+												m.set ({
 													rotation:
 														_initialRotation +
 														_initialRotationOffset +
 														_angle * -180 / Math.PI
 												});
 
-												_this._updatingRotationPosition = _false;
+												m._updatingRotationPosition = _false;
 											}
 										},
 										'Drag Done':function (_event) {
-											_this.set ({inDrag:_false});
-											_this.fire (_event);
+											m.set ({inDrag:_false});
+											m.fire (_event);
 										}
 									});
 
-									_this._updateUiRotate ();
+									m._updateUiRotate ();
 								}
-							});
-						else _this._updateUiRotate ();
+							);
+						else m._updateUiRotate ();
 
 					}
 				},
