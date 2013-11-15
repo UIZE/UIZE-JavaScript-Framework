@@ -49,7 +49,7 @@ Uize.module ({
 				_Uize_Widget = _Uize.Widget,
 
 				/*** validation/warning variables ***/
-					//_never = 'never',
+					_never = 'never',
 					_valueChanged = 'valueChanged',
 					_validated = 'validated',
 					_finished = 'finished',
@@ -359,11 +359,11 @@ Uize.module ({
 				var _formElement;
 				
 				if (this._elements) {
-					var _elementsLookup = this._elements.children;
+					var _elementsChildren = this._elements.children;
 					
 					_formElement = _elementName == _undefined
-						? _Uize.values(_elementsLookup)
-						: _elementsLookup[_elementName]
+						? _Uize.values(_elementsChildren)
+						: _elementsChildren[_elementName]
 					;
 				}
 				

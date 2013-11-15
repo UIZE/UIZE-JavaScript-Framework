@@ -46,7 +46,7 @@ Uize.module ({
 				_Uize_Node_Event = _Uize_Node.Event,
 
 				/*** validation/warning variables ***/
-					//_never = 'never',
+					_never = 'never',
 					_tentativeValueChanged = 'tentativeValueChanged',
 					_valueChanged = 'valueChanged',
 					_validated = 'validated',
@@ -70,9 +70,7 @@ Uize.module ({
 
 						_this.wire ({
 							'Changed.busyInherited':_updateUiState,
-							'Changed.enabledInherited':_updateUiState/*,
-							Blur:function() {  _warningWidget.set({focused:_false}) },
-							Focus:function() { _warningWidget.set({focused:_true}) }*/
+							'Changed.enabledInherited':_updateUiState
 						});
 
 						_this._isInitialized = _true;
