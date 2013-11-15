@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.V2Mixin',
 	required:'Uize.Node',
-	builder:function (_superclass) {
+	builder:function () {
 		'use strict';
 
 		var
@@ -101,7 +101,7 @@ Uize.module ({
 									m.Class.v2HtmlBindings,
 									function (_bindings,_property) {
 										_wiringsForHtmlBindings ['Changed.' + _property] = function () {
-											_applyAll (m,_bindings,[m.get (_property)])
+											_applyAll (m,_bindings,[m.get (_property)]);
 										};
 									}
 								);

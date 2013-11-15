@@ -29,7 +29,7 @@
 	Introduction
 		The =Uize.Widget.Resizer= class implements resizing logic, with support for fixed aspect ratio, constraining to container, minimum dimensions, and more.
 
-		*DEVELOPERS:* `Chris van Rensburg`
+		*DEVELOPERS:* `Chris van Rensburg`, `Tim Carter`
 */
 
 Uize.module ({
@@ -187,21 +187,30 @@ Uize.module ({
 					var m = this;
 					return {left:m._left,top:m._top,width:m._width,height:m._height};
 				},
+				
+				initiateDrag:function (_domEvent) {
+					this.children.move.initiate (_domEvent)
+				},
 
 				updateUi:function () {
 					var m = this;
 					if (m.isWired) {
+						var _setRotation = _true;
 						Uize.forEach (
 							m._areaNodes,
 							function _setAreaDims (_areaNode) {
-								function _getBorderWidth (_side) {
-									return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
-								}
 								var _area = m.getNode (_areaNode);
 								if (_area) {
-									var _newAreaWidth = Math.max (
-										m._width - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Left') + _getBorderWidth ('Right')),0
-									);
+									var
+										_getBorderWidth = function(_side) {
+											return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
+										},
+										_newAreaWidth = Math.max (
+											m._width - (_ieQuirkyBoxes ? _getBorderWidth ('Left') + _getBorderWidth ('Right') : 0),0
+										),
+										_newAreaHeight = Math.max (m._height - (_ieQuirkyBoxes ? _getBorderWidth ('Top') + _getBorderWidth ('Bottom') : 0),0)
+									;
+	
 									if (_isIe)
 										_newAreaWidth == m._lastAreaWidth [_areaNode]
 											? m.displayNode ('jiggler',m._jigglerShown = !m._jigglerShown)
@@ -213,9 +222,36 @@ Uize.module ({
 											left:m._left,
 											top:m._top,
 											width:_newAreaWidth,
-											height:Math.max (m._height - (_ieQuirkyBoxes ? 0 : _getBorderWidth ('Top') + _getBorderWidth ('Bottom')),0)
+											height:_newAreaHeight
 										}
 									);
+	
+									if (Uize.isNumber (m._rotation) && _setRotation) {
+										var
+											_rotation = m._rotation,
+											_rotationString = _rotation ? 'rotate(' + Math.round (m._rotation) + 'deg)' : '',
+											_origin = _rotation ? (m._left + _newAreaWidth / 2) + 'px ' + (m._top + _newAreaHeight / 2) + 'px' : ''
+										;
+	
+										m.setNodeStyle (
+											'',
+											{
+												mozTransformOrigin:_origin,
+												webkitTransformOrigin:_origin,
+												oTransformOrigin:_origin,
+												msTransformOrigin:_origin,
+												transformOrigin:_origin,
+
+												mozTransform:_rotationString,
+												webkitTransform:_rotationString,
+												msTransform:_rotationString,
+												oTransform:_rotationString,
+												transform:_rotationString
+											}
+										);
+	
+										_setRotation = _false;
+									}
 								}
 							}
 						);
@@ -232,7 +268,7 @@ Uize.module ({
 								_pointIds,
 								_dragStartCoords,
 								_Uize_Widget_Drag = Uize.Widget.Drag,
-								_wireHandle = function (_handleName) {
+								_wireHandle = function(_handleName) {
 									_pointIds = _pointIdsMap [_handleName];
 									var _dragHandle = m.addChild (
 										_handleName,
@@ -274,46 +310,46 @@ Uize.module ({
 													_resizerInfo = m._activeHandle.resizerInfo,
 													_pointIds = _resizerInfo._pointIds,
 													_effectivePointIds = _pointIds.concat (),
-													_newCoords = _dragStartCoords.concat ()
-												;
-												function _updateAxisCoords (_axis) {
-													if (_canResizeAxis (m,_axis,_pointIds)) {
-														var
-															_pointIdForAxis = _pointIds [_axis],
-															_offset = _dragHandle.eventDeltaPos [_axis]
-														;
-														if (_pointIdForAxis == 'both') {
-															if (m._constrain)
-																_offset = Uize.constrain (
-																	_offset,
-																	_bounds [_axis] - _newCoords [_axis],
-																	_bounds [_axis + 2] - _newCoords [_axis + 2]
-																)
+													_newCoords = _dragStartCoords.concat (),
+													_updateAxisCoords = function(_axis) {
+														if (_canResizeAxis (m,_axis,_pointIds)) {
+															var
+																_pointIdForAxis = _pointIds [_axis],
+																_offset = _dragHandle.eventDeltaPos [_axis]
 															;
-															_newCoords [_axis] += _offset;
-															_newCoords [_axis + 2] += _offset;
-														} else {
-															var _coordNo = _axis + _pointIdForAxis * 2;
-															_newCoords [_coordNo] += _offset;
-															if (m._constrain)
-																_newCoords [_coordNo] = Uize.constrain (
-																	_newCoords [_coordNo],
-																	_bounds [_axis],
-																	_bounds [_axis + 2]
-																)
-															;
-															if (_aspectRatio == null && _newCoords [_axis] > _newCoords [_axis + 2]) {
-																/* NOTE:
-																	for now we don't swap the coordinates around when they cross over if an aspect ratio is set, since we haven't dealt with the weird calculation issues that arise and lead to strange behaviors where the resizer moves around
-																*/
-																var _temp = _newCoords [_axis];
-																_newCoords [_axis] = _newCoords [_axis + 2];
-																_newCoords [_axis + 2] = _temp;
-																_effectivePointIds [_axis] = 1 - _effectivePointIds [_axis];
+															if (_pointIdForAxis == 'both') {
+																if (m._constrain)
+																	_offset = Uize.constrain (
+																		_offset,
+																		_bounds [_axis] - _newCoords [_axis],
+																		_bounds [_axis + 2] - _newCoords [_axis + 2]
+																	)
+																;
+																_newCoords [_axis] += _offset;
+																_newCoords [_axis + 2] += _offset;
+															} else {
+																var _coordNo = _axis + _pointIdForAxis * 2;
+																_newCoords [_coordNo] += _offset;
+																if (m._constrain)
+																	_newCoords [_coordNo] = Uize.constrain (
+																		_newCoords [_coordNo],
+																		_bounds [_axis],
+																		_bounds [_axis + 2]
+																	)
+																;
+																if (_aspectRatio == null && _newCoords [_axis] > _newCoords [_axis + 2]) {
+																	/* NOTE:
+																		for now we don't swap the coordinates around when they cross over if an aspect ratio is set, since we haven't dealt with the weird calculation issues that arise and lead to strange behaviors where the resizer moves around
+																	*/
+																	var _temp = _newCoords [_axis];
+																	_newCoords [_axis] = _newCoords [_axis + 2];
+																	_newCoords [_axis + 2] = _temp;
+																	_effectivePointIds [_axis] = 1 - _effectivePointIds [_axis];
+																}
 															}
 														}
 													}
-												}
+												;
 												_updateAxisCoords (0);
 												_updateAxisCoords (1);
 												var
@@ -492,6 +528,10 @@ Uize.module ({
 					name:'minWidth',
 					value:10,
 					onChange:_conformDims
+				},
+				_rotation:{
+					name:'rotation',
+					onChange:_conformDimsAndUpdateUi
 				},
 				_top:{
 					name:'top',
