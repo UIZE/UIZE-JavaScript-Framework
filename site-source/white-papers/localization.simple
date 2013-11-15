@@ -528,6 +528,56 @@ Localization Guidelines
 
 		To avoid these kinds of problems, the canonical string should be regarded as the only authority, and all translations of a string should be regarded as derived / generated. A better solution in such situations would be for the developer or translators to add metadata for the canonical string that notes any language-specific considerations for translating the string.
 
+Pseudo-localization
+	In a nutshell, a mode of running an application that replaces externalized string resources with pseudo-localized strings that are derived from the source strings.
+
+	EXAMPLE - SOURCE
+	.................................
+	E-mail address: joebloe@gmail.com
+	Mobile phone: 555.123.4567
+	.................................
+
+	EXAMPLE - PSEUDO-LOCALIZED
+	........................................
+	[E-mail.. address...]: joebloe@gmail.com
+	[Mobile... phone...]: 555.123.4567
+	........................................
+
+	Issues that pseudo-localization can help expose...
+
+		- resources that should be externalized, but aren't
+		- resources that are externalized, but shouldn't be
+		- layout that breaks as a result of expansion during translation
+		- programmatically concatenated resource strings
+		- software that doesn't correctly handle non-ASCII characters
+		- layout that can't accommodate vertical expansion of characters with diacritical / accent marks
+
+	Techniques that can be employed...
+
+		- wrapping resources in boundary delimiters (like brackets)
+		- using non-ASCII, accented versions of alphabetical characters
+		- adding additional characters to simulate expansion during translation
+
+	Two Process Approaches
+
+		- support pseudo-locales in all layers of tech stack, so that code can be tested with pseudo-locales without any dependency on supporting localization processes
+		- build pseudo-localization support into the localization process, so that all layers of the tech stack can get the benefit of pseudo-localization without having to implement their own programmatic support for it (which could also be inconsistent)
+
+		Naturally, both approaches could be used in conjunction.
+
+	References
+
+		- [[http://en.wikipedia.org/wiki/Pseudolocalization]]
+		- [[http://google-opensource.blogspot.com/2011/06/pseudolocalization-to-catch-i18n-errors.html]]
+
+	Determining String Origins
+		Determining the origins for externalized resources is a nice-to-have that can help developers get to the source of resource string related issues that surface in UI...
+
+		- requires some form of tagging identifier for every resource
+		- for a system that uses a RESTful approach to string resources, each resource string could have a URI, which could be used either to identify a place in a DB or CMS where the string can be changed, or it could be mapped to a resource file in the source codebase
+		- for resource strings bound to HTML data, string could be replaced with span with title attribute, or HTML comment could be inserted that could be found in a DOM inspector
+		- for resource strings that make there way into element titles or select tag option values, a different approach would be needed
+
 ### Requirements of a Localization System
 	- formatting
 		- basic

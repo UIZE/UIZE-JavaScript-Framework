@@ -1,18 +1,5 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
-Various Deprecated Features Killed
-	Uize.Node
-		- =Uize.Node.returnFalse= and =Uize.Node.returnTrue= static methods are no longer needed since they were migrated to =Uize=
-
-	Uize.Class
-		- =MyClass.registerProperties=
-
-	Uize
-		- =Uize.globalEval=
-
-	Uize.Service
-		- =Uize.Service.declareServiceMethods=
-
 New Short Form for Namespace Modules
 	A new and more compact module declaration syntax for pure namespace modules...
 
