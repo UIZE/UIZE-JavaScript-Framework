@@ -5943,15 +5943,56 @@ Uize = (function () {
 							Uize.module
 								Lets you declare a module in the UIZE JavaScript Framework.
 
-								SYNTAX
-								......................................................................................
-								Uize.module ({
-									name:moduleNameSTR,           // omit for anonymous modules
-									superclass:superclassNameSTR, // omit for package modules, or if host is superclass
-									required:modulesSTRorARRAY,   // omit when only host and superclass are required
-									builder:builderFUNC           // omit for library modules and namespace modules
-								});
-								......................................................................................
+								DIFFERENT USAGES
+
+								`Declare a Module by Specifying a Module Definition Object`
+								..................................
+								Uize.module (moduleDefinitionOBJ);
+								..................................
+
+								`Declare a Namespace Module by Specifying Just the Namespace as a String`
+								...........................
+								Uize.module (namespaceSTR);
+								...........................
+
+								Declare a Module by Specifying a Module Definition Object
+									In the most typical use case, a module can be defined by specifying the various properties of the module using a =moduleDefinitionOBJ= object.
+
+									SYNTAX
+									..................................
+									Uize.module (moduleDefinitionOBJ);
+									..................................
+
+									moduleDefinitionOBJ
+										The value specified for the =moduleDefinitionOBJ= argument should be an object of the following form...
+
+										SYNTAX
+										......................................................................................
+										{
+											name:moduleNameSTR,           // omit for anonymous modules
+											superclass:superclassNameSTR, // omit for package modules, or if host is superclass
+											required:modulesSTRorARRAY,   // omit when only host and superclass are required
+											builder:builderFUNC           // omit for library modules and namespace modules
+										}
+										......................................................................................
+
+								Declare a Namespace Module by Specifying Just the Namespace as a String
+									In the special case of defining a namespace module, a short form allows us to specify just the namespace using a =namespaceSTR= argument in place of the regular =moduleDefinitionOBJ= argument.
+
+									SYNTAX
+									...........................
+									Uize.module (namespaceSTR);
+									...........................
+
+									INSTEAD OF...
+									........................................................
+									Uize.module ({name:'MyCompanyName.MySectionNamespace'});
+									........................................................
+
+									USE...
+									.................................................
+									Uize.module ('MyCompanyName.MySectionNamespace');
+									.................................................
 
 								For an in-depth discussion of modules, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
