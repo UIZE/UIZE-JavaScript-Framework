@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Util.Html.Entities',
-	required:'Uize.Class.Value',
 	builder:function () {
 		'use strict';
 
