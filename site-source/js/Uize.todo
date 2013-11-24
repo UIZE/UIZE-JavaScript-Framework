@@ -205,6 +205,9 @@ Uize.cycleCalls
 	}
 	........................................................
 
+Uize.forEach
+	Update this method to support objects that have defined iterators.
+
 Uize.map
 	Add support for _source being a string?
 
