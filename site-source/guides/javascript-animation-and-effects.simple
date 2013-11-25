@@ -120,8 +120,6 @@ The Engine
 
 		- `Non-time Based Fades` - Fades do not need to occur exclusively in the time domain. You can use the =Uize.Fade= class to produce color gradients, to lay out an array of DOM nodes, etc.
 
-		- other utility features, such as its =Uize.Fade.blendValues= static method that lets you interpolate between two simple or compound values, without having to first create a =Uize.Fade= instance.
-
 	Quantization
 		In order to provide safe values for code that uses fades, and in order to improve performance, interpolated values can be quantized using the highly flexible quantization feature.
 
@@ -725,7 +723,7 @@ Curves
 		To better visualize how curve functions work and how they affect motion, visit the interactive [[../examples/curve-explorer.html][Curve Explorer]] tool.
 
 		Blending Values
-			A curve function can be supplied as a parameter to the =Uize.Fade.blendValues= static method of the =Uize.Fade= class.
+			A curve function can be supplied as a parameter to the =Uize.Math.Blend.blend= static method of the =Uize.Math.Blend= class.
 
 			When not specifying a curve to this method, the interpolation used to blend between the two specified values is linear. Specifying your own curve allows you to perform non-linear blending.
 
@@ -733,7 +731,7 @@ Curves
 			...............................................................
 			var
 				bouncyCurveFunction = Uize.Curve.Rubber.easeOutBounce (4,2),
-				middleOfBounceValue = Uize.Fade.blendValues (
+				middleOfBounceValue = Uize.Math.Blend.blend (
 					0,                   // value A
 					255,                 // value B
 					.5,                  // blend amount (.5 is halfway)
@@ -981,9 +979,9 @@ Curves
 
 ### Non-time Based Fades
 	- color gradients
-	- methods like Uize.Fade.blendValues, getSeries and Uize.Fade.getSeries
-	- Uize.Fade.xSeries extension module
-	- Uize.Fx.fadeStyleAcrossNodes
+	- methods like =Uize.Math.Blend.blend=, =getSeries= and =Uize.Fade.getSeries= (from =Uize.Fade.xSeries= extension module)
+	- =Uize.Fade.xSeries= extension module
+	- =Uize.Fx.fadeStyleAcrossNodes=
 	- provide some examples
 		- C:/~uize/UIZE-JavaScript-Framework/examples/fade-css-style-across-nodes.html
 		- gradient and graph in Curve Explorer tool
