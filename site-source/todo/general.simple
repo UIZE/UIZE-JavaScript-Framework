@@ -1,5 +1,53 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
+Eliminate All Extension Modules
+	Eliminate all extension modules and replace them with either helper objects containing purely static methods or mixin modules.
+
+	Extensions as Anti-Pattern
+		Extension modules, like plugins, can be considered an anti-pattern because loading them has side effects on other loaded modules.
+
+		In that sense, they are not isolated. The side effects of loading an extension module are deliberate and are their one benefit, but this pattern causes several problems...
+
+		Interoperability Issues
+			Extension modules can cause problems of interoperability, since shared modules are affected.
+
+			The effect is much like that of setting global variables or modifying the prototypes of built-in objects. There is no guarantee that two different extension modules won't have interactions / conflicts.
+
+		Dependency Management Issues
+			Extension modules can cause problems of dependency management in two key ways...
+
+			Dependencies are Unclear from Code
+				Since an extension module affects an object or class other than itself, it can be unclear from viewing code that the code has a dependency on an extension module.
+
+				There may be a call to an instance method of an instance of a class, but that method may not be defined in the class but actually in an extension module that modifies the class.
+
+			Modules Use Stuff That is Found Lying Around
+				Since an extension module modifies a class or object that is shared and may be in use by other modules, that modified class or object may then appear to have features to the code in other modules that that code isn't aware is defined in an extension.
+
+				Code in other modules may just discover instance methods (through an IDE's code auto-complete feature, for example) that are "lying around" and start using them, without realizing that the dependency on the extension module also needs to be declared in the module's code. Then, if that module is used in a different context where the extension module hasn't been required, the module's code can fail at runtime under some specific condition where the methods that would have been added by the extension module are called.
+
+		Code Analysis Problems
+			Since extension modules affect objects or classes other than themselves, they can cause problems for code analysis because they can make modules appear to define more features than they actually do.
+
+			If a class module is loaded, then an extension module is loaded that modifies that class, and then a subclass module is loaded, if that subclass is examined for features, it will appear to define features that are not actually defined by it, but were in fact defined by the extension module that modified its base class. This can complicate the task of code analysis to perform feature discovery. Features added by extension modules are mis-attributed.
+
+	Extension Modules to Eliminate
+		The following list of extension modules should be eliminated...
+
+		- =Uize.Color.xCmyk=
+		- =Uize.Color.xHsv=
+		- =Uize.Color.xSvgColors=
+		- =Uize.Color.xUtil=
+		- =Uize.Fade.xFactory=
+		- =Uize.Fade.xSeries=
+		- =Uize.Fx.xShadows=
+		- =Uize.Widget.Bar.Slider.xSkin=
+		- =Uize.Widget.Collection.Dynamic.xDialogEditable=
+		- =Uize.Widget.Dialog.xResizable=
+		- =Uize.Widget.ImageWipe.xPresets=
+		- =Uize.Widget.Page.xDeferredLinks=
+		- =Uize.Widget.Swap.xPresets=
+
 Code Size Optimization
 	Lightweight JSON Module
 		Implement lighter weight JSON module that can be used by =Uize.Widget.V2=.
