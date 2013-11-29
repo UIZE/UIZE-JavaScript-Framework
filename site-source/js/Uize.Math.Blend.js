@@ -36,19 +36,21 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_typeObject = 'object',
+				_Uize = Uize,
 
 			/*** References for Performance Optimization ***/
-				_constrain = Uize.constrain,
-				_isFunction = Uize.isFunction,
+				_constrain = _Uize.constrain,
+				_isFunction = _Uize.isFunction,
+				_clone = _Uize.clone,
 
 			/*** References to Statics Used Internally ***/
 				_blendValues
 		;
 
-		return Uize.package ({
+		return _Uize.package ({
 			blend:_blendValues = function (_value1,_value2,_blend,_quantization,_curve,_previousValue,_valueUnchanged) {
 				if (_value1 === _value2) {
-					return _previousValue !== _undefined && _value1 === _previousValue ? _valueUnchanged : _value1;
+					return _previousValue !== _undefined && _value1 === _previousValue ? _valueUnchanged : _clone (_value1);
 				} else {
 					if (_isFunction (_curve)) {
 						_blend = _curve (_blend);
@@ -59,7 +61,7 @@ Uize.module ({
 							_blendedEqualsPrevious = _previousValue && typeof _previousValue == _typeObject,
 							_quantizationIsObject = _quantization && typeof _quantization == _typeObject,
 							_curveIsObject = _curve && typeof _curve == _typeObject,
-							_result = _blendedEqualsPrevious ? _previousValue : Uize.isArray (_value1) ? [] : {},
+							_result = _blendedEqualsPrevious ? _previousValue : _Uize.isArray (_value1) ? [] : {},
 							_propertyPreviousValue
 						;
 						for (var _propertyName in _value1) {
@@ -89,13 +91,15 @@ Uize.module ({
 								? _value2
 								: !_quantization
 									? _value1 + (_value2 - _value1) * _blend
-									: _blend > 0 && _blend < 1
-										? _constrain (
-											_value1 + Math.round ((_value2 - _value1) * _blend / _quantization) * _quantization,
-											_value1,
-											_value2
-										)
-										: _value1 + Math.round ((_value2 - _value1) * _blend / _quantization) * _quantization
+									: _blend < 0 || _blend > 1
+										? _value1 + Math.round ((_value2 - _value1) * _blend / _quantization) * _quantization
+										: _quantization < _value2 - _value1
+											? _constrain (
+												_value1 + Math.round ((_value2 - _value1) * _blend / _quantization) * _quantization,
+												_value1,
+												_value2
+											)
+											: _value1
 						;
 						return _previousValue !== _undefined && _result === _previousValue ? _valueUnchanged : _result;
 					}
