@@ -326,7 +326,7 @@ Uize.module ({
 								;
 								_currentLevel._parent.value.push (_value);
 								/*
-									if there is no non-empty running state member name, then add this child as an element of the value array for the parent. A special case which allows you to easily create array using the syntax...
+									if there is no non-empty running state member name, then add this child as an element of the value array for the parent. A special case which allows us to easily create an array using the syntax...
 
 									My Array : value 1
 												: value 2

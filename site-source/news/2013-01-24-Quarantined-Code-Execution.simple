@@ -102,7 +102,7 @@ Quarantined Code Evaluation
 Quarantined Nested Functions
 	To declare a function from within some deep local scope, but have that function be quarantined from the local scope, one can use the =Uize.quarantine= method.
 
-	The =Uize.quarantine= method allows you to essentially generate a quarantined version of the supplied function. When the quarantined function is then called, it won't have access to the same scope chain that the original function had access to - it will only have access to the global scope.
+	The =Uize.quarantine= method allows us to essentially generate a quarantined version of the supplied function. When the quarantined function is then called, it won't have access to the same scope chain that the original function had access to - it will only have access to the global scope.
 
 	SYNTAX
 	...............................................................

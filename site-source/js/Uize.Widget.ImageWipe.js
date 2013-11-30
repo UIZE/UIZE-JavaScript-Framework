@@ -170,7 +170,7 @@ Uize.module ({
 							fade
 								An instance of the =Uize.Fade= class that drives the animation for the image wipe effect.
 
-								This property allows access to the fade instance that drives the wipe animation. This allows you to modify properties of the animation, such as the =curve= and any of the other state properties supported by the =Uize.Fade= class.
+								This property allows access to the fade instance that drives the wipe animation. This allows us to modify properties of the animation, such as the =curve= and any of the other state properties supported by the =Uize.Fade= class.
 					*/
 
 				m.fade.wire (
@@ -495,7 +495,7 @@ Uize.module ({
 							firstPaneSizeX
 								A number in the range of =0= to =100=, specifying the width of the first `wipe port matrix` column as a percentage of the normal column width.
 
-								Normal column width is defined as the width of the `wipe port` divided by the number of columns (as specified by the =divisionsX= state property). If the first wipe port matrix column width is smaller or greater than the normal column width, then the difference will be distributed amongst the remaining columns to compenstate - according to a sigma series distribution. This makes it possible to bias the widths towards the first column or towards the last column.
+								Normal column width is defined as the width of the `wipe port` divided by the number of columns (as specified by the =divisionsX= state property). If the first wipe port matrix column width is smaller or greater than the normal column width, then the difference will be distributed amongst the remaining columns to compenstate - according to a sigma series distribution. This allows us to bias the widths towards the first column or towards the last column.
 
 								For example, specifying a value of =10= for the =firstPaneSizeX= state property means that the missing 90% of the normal column width for the first wipe port matrix column must be distributed across the remaining columns. In order for this distribution to look natural, the width would grow gradually from left to right. Consider the following representations...
 
@@ -535,7 +535,7 @@ Uize.module ({
 							firstPaneSizeY
 								A number in the range of =0= to =100=, specifying the height of the first `wipe port matrix` row as a percentage of the normal row height.
 
-								Normal row height is defined as the height of the `wipe port` divided by the number of rows (as specified by the =divisionsY= state property). If the first wipe port matrix row height is smaller or greater than the normal row height, then the difference will be distributed amongst the remaining rows to compenstate - according to a sigma series distribution. This makes it possible to bias the heights towards the first row or towards the last row.
+								Normal row height is defined as the height of the `wipe port` divided by the number of rows (as specified by the =divisionsY= state property). If the first wipe port matrix row height is smaller or greater than the normal row height, then the difference will be distributed amongst the remaining rows to compenstate - according to a sigma series distribution. This allows us to bias the heights towards the first row or towards the last row.
 
 								For a more in-depth explanation, and for some illustrations, consult the reference for the =firstPaneSizeX= state property, since the =firstPaneSizeY= property behaves in exactly the same way as the =firstPaneSizeX= property, excepting that it applies to the Y-axis rather than the X-axis.
 

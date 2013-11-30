@@ -20,7 +20,7 @@ Uize.set (
 );
 ..........................................
 
-This new variation, supported for both the =set= instance method and the =Uize.set= static method, allows values for an arbitrary number of state properties to be set in a single call to the =set= method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.
+This new variation, supported for both the =set= instance method and the =Uize.set= static method, allows values for an arbitrary number of state properties to be set in a single call to the =set= method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation allows us to use expressions or the values of variables for specifying the names of the properties to set.
 
 The new variations of the set method are fully document and unit tested.
 

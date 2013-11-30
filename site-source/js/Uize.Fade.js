@@ -634,6 +634,12 @@ Uize.module ({
 						- the sum of the `acceleration State Property (DEPRECATED 2009-07-10)` and `deceleration State Property (DEPRECATED 2009-07-10)` must not exceed =1=
 						- see also the `acceleration State Property (DEPRECATED 2009-07-10)`
 						- see the =curve= state property and the =Uize.Fade.celeration= static method
+
+					Uize.Fade.blendValues Static Methods (DEPRECATED 2011-11-24)
+
+						..........................................................
+						Uize.Fade.blendValues  >> BECOMES >> Uize.Math.Blend.blend
+						..........................................................
 			*/
 		);
 	}

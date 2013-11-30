@@ -158,7 +158,7 @@ Uize.module ({
 							;
 							.............................................................................
 
-							By default, the =Uize.Array.Order.reorder= method packages the reordered array elements into a new array and does not modify the source array (ie. it's non-destructive). Specifying the optional =targetARRAYorBOOL= parameter allows you to explicitly specify a target for the operation, into which the reordered elements will be packaged.
+							By default, the =Uize.Array.Order.reorder= method packages the reordered array elements into a new array and does not modify the source array (ie. it's non-destructive). Specifying the optional =targetARRAYorBOOL= parameter allows us to explicitly specify a target for the operation, into which the reordered elements will be packaged.
 
 							VARIATION 2
 							......................................................

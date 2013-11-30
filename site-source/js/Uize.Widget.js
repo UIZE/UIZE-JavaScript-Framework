@@ -1537,7 +1537,7 @@ Uize.module ({
 							/*?
 								Instance Methods
 									setInherited
-										Allows you to set values for the specified state properties on the instance in the widget's parent chain from which the properties are inherited.
+										Allows us to set values for the specified state properties on the instance in the widget's parent chain from which the properties are inherited.
 
 										SYNTAX
 										............................................

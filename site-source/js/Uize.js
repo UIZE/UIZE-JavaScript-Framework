@@ -229,7 +229,7 @@
 				Quarantined Nested Functions
 					To declare a function from within some deep local scope, but have that function be quarantined from the local scope, one can use the =Uize.quarantine= method.
 
-					The =Uize.quarantine= method allows you to essentially generate a quarantined version of the supplied function. When the quarantined function is then called, it won't have access to the same scope chain that the original function had access to - it will only have access to the global scope.
+					The =Uize.quarantine= method allows us to essentially generate a quarantined version of the supplied function. When the quarantined function is then called, it won't have access to the same scope chain that the original function had access to - it will only have access to the global scope.
 
 					SYNTAX
 					...............................................................
@@ -1833,7 +1833,7 @@ Uize = (function () {
 							);
 							.............................
 
-							By default, the =Uize.map= method maps values of the source array or object and packages the result into a new array or object. Specifying the optional =targetARRAYorOBJorBOOL= parameter allows you to explicitly specify a target for the operation, into which the mapped values will be packaged.
+							By default, the =Uize.map= method maps values of the source array or object and packages the result into a new array or object. Specifying the optional =targetARRAYorOBJorBOOL= parameter allows us to explicitly specify a target for the operation, into which the mapped values will be packaged.
 
 							Parameters
 								sourceARRAYorOBJorINT
@@ -4600,7 +4600,7 @@ Uize = (function () {
 							myNode.onclick = Uize.returnFalse;
 							..................................
 
-							If you are cancelling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
+							If we wish to cancel the default action for many nodes in a page, then using this static method allows us to share a single function - by reference - across all these nodes.
 
 							NOTES
 							- see the companion =Uize.returnTrue= static method
@@ -4628,7 +4628,7 @@ Uize = (function () {
 							myNode.onclick = Uize.returnTrue;
 							.................................
 
-							If you are enabling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
+							If we wish to enable the default action for many nodes in a page, then using this static method allows us to share a single function - by reference - across all these nodes.
 
 							NOTES
 							- see the companion =Uize.returnFalse= static method

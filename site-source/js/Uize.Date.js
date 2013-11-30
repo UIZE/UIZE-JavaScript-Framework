@@ -117,7 +117,7 @@ Uize.module ({
 							convertedTimeFLOAT = Uize.Date.convert (timeFLOAT,timeUnitSTR,convertedTimeUnitSTR);
 							....................................................................................
 
-							This methods allows you to convert from days to milliseconds, seconds to years, years to hours, hours to weeks, months to hours, or from any one of the supported time units to another.
+							This method allows us to convert from days to milliseconds, seconds to years, years to hours, hours to weeks, months to hours, or from any one of the supported time units to another.
 
 							TIME UNITS
 							The value specified for the =timeUnitSTR= and =convertedTimeUnitSTR= parameters can be any one of:  =ms=, =seconds=, =minutes=, =hours=, =days=, =weeks=, =months=, =years=.
@@ -163,7 +163,7 @@ Uize.module ({
 							dateOBJ = Uize.Date.resolve (dateSTRorNUMorOBJ,defaultDateANYTYPE);
 							...................................................................
 
-							When the optional =defaultDateANYTYPE= parameter is specified, the value of this parameter will be returned by the =Uize.Date.resolve= method when the value specified for the =dateSTRorNUMorOBJ= parameter is =''= (empty string), =null=, or =undefined=. This allows you to resolve a date with a default other than the date at the time that the =Uize.Date.resolve= method is called. Note that the =value= of the =defaultDateANYTYPE= parameter is not itself resolved to a date - its value will be returned as is. So, if you want a =Date= object instance to be the default value for the resolved date, provide the default as a =Date= object instance.
+							When the optional =defaultDateANYTYPE= parameter is specified, the value of this parameter will be returned by the =Uize.Date.resolve= method when the value specified for the =dateSTRorNUMorOBJ= parameter is =''= (empty string), =null=, or =undefined=. This allows us to resolve a date with a default other than the date at the time that the =Uize.Date.resolve= method is called. Note that the =value= of the =defaultDateANYTYPE= parameter is not itself resolved to a date - its value will be returned as is. So, if you want a =Date= object instance to be the default value for the resolved date, provide the default as a =Date= object instance.
 
 							VARIATION 2
 							...............................

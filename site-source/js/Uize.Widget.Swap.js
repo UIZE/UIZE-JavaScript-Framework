@@ -32,7 +32,7 @@
 
 			Essentially, revealing a next item involves modifying the z-index of the current item and the next item so that the next item sits on top of the current item. Then, initial seed coordinates are calculated. During the course of the swap effect, the coordinates are interpolated between the initial seed coordinates and the coordinates of the full port. As the coordinates are animated, the next item is positioned so that the coordinates represent a window for revealing a portion of the next item. Within that reveal window, certain settings of the effect determine which portion of the next item is revealed.
 
-			Additionally, the opacity of the next item can be animated over the course of the effect, so that it fades in from being completely transparent to being completely opaque by the end of the effect. Finally, a =crossfade= switch allows you to apply the effect in reverse on the current item at the same time as the next item is being revealed, with the ability to configure the overlap between the hide of the current item and the reveal of the next item.
+			Additionally, the opacity of the next item can be animated over the course of the effect, so that it fades in from being completely transparent to being completely opaque by the end of the effect. Finally, a =crossfade= switch allows us to apply the effect in reverse on the current item at the same time as the next item is being revealed, with the ability to configure the overlap between the hide of the current item and the reveal of the next item.
 
 			All of this adds up to a whole bunch of different ways that you can transition from one item to another, using just a small set of effect settings / parameters, and with code that is high performance, compact in size, and doesn't bloat the DOM.
 
@@ -89,7 +89,7 @@
 
 					- any value between =0= and =1= for =crossFadeSize= means that there will be some overlap between the hide of the current item and the reveal of the next item, where the current item will be progressively hidden at the same time as the next item is being progressively revealed.
 
-					- setting =crossFadeSize= to a negative floating point number allows you to create a pause between the current item hide and next item reveal animations, where the duration of the pause is the negative of the value of the =crossFadeSize= property. So, for example, a value of =-.5= for =crossFadeSize= will produce a pause that is half the overal duration of the swap effect, while a value of =-.25= will produce a pause that is a quarter of the effect's duration. Note that a pause between current item hide and next item reveal means that the combined duration of the current item hide and next item reveal animations must be less than the overal swap effect duration. For example, with a =crossFadeSize= value of =-.5=, the combined duration of the current item hide and next item reveal animations will necessarily be half of the effect's overal duration.
+					- setting =crossFadeSize= to a negative floating point number allows us to create a pause between the current item hide and next item reveal animations, where the duration of the pause is the negative of the value of the =crossFadeSize= property. So, for example, a value of =-.5= for =crossFadeSize= will produce a pause that is half the overal duration of the swap effect, while a value of =-.25= will produce a pause that is a quarter of the effect's duration. Note that a pause between current item hide and next item reveal means that the combined duration of the current item hide and next item reveal animations must be less than the overal swap effect duration. For example, with a =crossFadeSize= value of =-.5=, the combined duration of the current item hide and next item reveal animations will necessarily be half of the effect's overal duration.
 
 				Crossfade Alignment
 					When a value other than =1= is specified for =crossFadeSize=, then the value of the =crossFadeAlign= state property determines the alignment of the crossfade overlap within the overal swap effect duration.
@@ -212,7 +212,7 @@ Uize.module ({
 										fade
 											An instance of the =Uize.Fade= class that drives the animation for the swap effect.
 
-											This property allows access to the fade instance that drives the swap animation. This allows you to modify properties of the animation, such as =duration=, =curve=, and any of the other state properties supported by the =Uize.Fade= class.
+											This property allows access to the fade instance that drives the swap animation. This allows us to modify properties of the animation, such as =duration=, =curve=, and any of the other state properties supported by the =Uize.Fade= class.
 								*/
 							});
 

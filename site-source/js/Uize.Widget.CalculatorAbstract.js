@@ -97,7 +97,7 @@
 			The Negate Operator
 				The =negate= operator is the fail-safe way to enter negative numbers in the calculator widget.
 
-				To use it for enterting a negative number, you can first enter a positive number and then click the =negate= button to turn it negative. The =negate= operator is one of the `unary operators`, meaning that it acts on the current =entry= value without triggering `operation completion` for pending binary operations. This allows you to perform calculations like three times negative four, as =3 x 4 +/- &#61;=. In this example, the =negate= operator operates on the second operand without triggering completion of the pending multiplication. Similarly, you could perform the calculation, negative three times negative four, as =3 +/- x 4 +/- &#61;=.
+				To use it for enterting a negative number, you can first enter a positive number and then click the =negate= button to turn it negative. The =negate= operator is one of the `unary operators`, meaning that it acts on the current =entry= value without triggering `operation completion` for pending binary operations. This allows us to perform calculations like three times negative four, as =3 x 4 +/- &#61;=. In this example, the =negate= operator operates on the second operand without triggering completion of the pending multiplication. Similarly, you could perform the calculation, negative three times negative four, as =3 +/- x 4 +/- &#61;=.
 
 				Negating Zero
 					The =negate= button can be clicked even when the current =entry= value is =0=.
@@ -138,7 +138,7 @@
 		Unary Operators
 			Unlike `binary operators`, unary operators operate on only a single operand.
 
-			The way that the =Uize.Widget.CalculatorAbstract= implements unary operators, they operate on the current value of the active operand, without triggering `operation completion` for pending binary operations. This is useful, and also the way that most regular physical calculators behave. This allows you to perform calculations like three times the square root of sixteen, as =3 x 16 &radic; &#61;=. In this example, the =squareRoot= operator operates on the second operand without triggering completion of the pending multiplication. This allows you to compound the unary operation. For example, you could calculate three times the fourth root of sixteen, as =3 x 16 &radic; &radic; &#61;=. For more info, see the section `compounding unary operations`.
+			The way that the =Uize.Widget.CalculatorAbstract= implements unary operators, they operate on the current value of the active operand, without triggering `operation completion` for pending binary operations. This is useful, and also the way that most regular physical calculators behave. This allows us to perform calculations like three times the square root of sixteen, as =3 x 16 &radic; &#61;=. In this example, the =squareRoot= operator operates on the second operand without triggering completion of the pending multiplication. This allows us to compound the unary operation. For example, we could calculate three times the fourth root of sixteen, as =3 x 16 &radic; &radic; &#61;=. For more info, see the section `compounding unary operations`.
 
 			Apart from the =squareRoot= function, another example of a unary operator is the =negate= function, which inverts the sign of the current =entry= value. The =memoryRecall= function could also be considered a kind of unary operator, although it completely replaces the current =entry= value with the current value of the calculator's =memory=.
 

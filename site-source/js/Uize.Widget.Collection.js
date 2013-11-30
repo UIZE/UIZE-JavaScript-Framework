@@ -969,7 +969,7 @@ Uize.module ({
 							myInstance.selectAll (selectedBOOL,toExcludeItemWidgetOBJ);
 							...........................................................
 
-							When the optional =toExcludeItemWidgetOBJ= parameter is specified, then an object reference can be specified for a collection item widget whose selected state should not be modified by calling the =selectAll= method. This allows you to select all but or deselect all but a specific item in the collection.
+							When the optional =toExcludeItemWidgetOBJ= parameter is specified, then an object reference can be specified for a collection item widget whose selected state should not be modified by calling the =selectAll= method. This allows us to select all but or deselect all but a specific item in the collection.
 
 							NOTES
 							- see the related =selectNone= and =selectRange= instance methods
