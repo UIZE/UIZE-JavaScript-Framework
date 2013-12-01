@@ -221,6 +221,74 @@ Uize.module ({
 								}
 							},
 							{
+								title:'Test that, when the quantization value is between .5 and 1 (non-inclusive) times the difference between the two values being blended, that quantization is applied correctly',
+								test:function () {
+									var m = this;
+									function _case (_blendAmount,_expected) {
+										return m.expect (_expected,Uize.Math.Blend.blend (0,10,_blendAmount,6));
+									}
+									return (
+										_case (0,0) &&
+										_case (.29,0) &&
+										_case (.3,6) &&
+										_case (.5,6) &&
+										_case (.8999,6) &&
+										_case (.9,10) &&
+										_case (1,10)
+									);
+								}
+							},
+							{
+								title:'Test that, when the quantization value is between 1 and 2 times the difference between the two values being blended, that quantization is applied correctly',
+								test:function () {
+									var m = this;
+									function _case (_blendAmount,_expected) {
+										return m.expect (_expected,Uize.Math.Blend.blend (0,10,_blendAmount,14));
+									}
+									return (
+										_case (0,0) &&
+										_case (.69999,0) &&
+										_case (.7,10) &&
+										_case (.9999,10) &&
+										_case (1,10)
+									);
+								}
+							},
+							{
+								title:'Test that, when the quantization value is 2 or more times the difference between the two values being blended, that quantization is applied correctly',
+								test:function () {
+									var m = this;
+									function _case (_blendAmount,_expected) {
+										return m.expect (_expected,Uize.Math.Blend.blend (0,10,_blendAmount,20));
+									}
+									return (
+										_case (0,0) &&
+										_case (.3,0) &&
+										_case (.5,0) &&
+										_case (.9999,0) &&
+										_case (1,10)
+									);
+								}
+							},
+							{
+								title:'Test that a negative value for quantization behaves in the same way as a positive value',
+								test:function () {
+									var m = this;
+									function _case (_blendAmount,_expected) {
+										return m.expect (_expected,Uize.Math.Blend.blend (0,10,_blendAmount,4));
+									}
+									return (
+										_case (0,0) &&
+										_case (.1999,0) &&
+										_case (.2,4) &&
+										_case (.55999,4) &&
+										_case (.6,8) &&
+										_case (.999,8) &&
+										_case (1,10)
+									);
+								}
+							},
+							{
 								title:'Test that quantization is supported correctly when the values being blended are compound (hierarchical) objects, and that the quantization value is applied for blending values of all leaf nodes',
 								test:function () {
 									var
