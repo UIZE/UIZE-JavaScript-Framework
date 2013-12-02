@@ -203,6 +203,14 @@ Uize.module ({
 								[0,10,.03125,0],
 								.3125
 							],
+							['Test that, when the value null is specified for quantization, that there is effectively no quantization applied',
+								[0,10,.03125,null],
+								.3125
+							],
+							['Test that, when the value undefined is specified for quantization, that there is effectively no quantization applied',
+								[0,10,.03125,undefined],
+								.3125
+							],
 							{
 								title:'Test that, when the value Infinity is specified for quantization, then the first of the two values being blended will be returned for any blend amounts from 0 up to, but not including, 1',
 								test:function () {
