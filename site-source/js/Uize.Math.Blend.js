@@ -303,7 +303,7 @@ Uize.module ({
 								Beyond using quantization to guarantee integer results, the =quantizationNUMorARRAYorOBJ= parameter can be used to specify quantization in any interval. By specifying an object value for the =quantizationNUMorARRAYorOBJ= parameter, one can even specify a `compound quantization value`.
 
 							Blend Two Values, with Curve
-								Two values can be blended with a curve so that the blend can be non-linear, by first specifying the value =0= for the =quantizationNUMorARRAYorOBJ= fourth argument (to disable quantization), and then specifying the optional =quantizationNUMorARRAYorOBJ= fifth argument.
+								Two values can be blended with a curve so that the blend can be non-linear, by first specifying the value =0= for the =quantizationNUMorARRAYorOBJ= fourth argument (to disable quantization), and then specifying the optional =curveFUNCorARRAYorOBJ= fifth argument.
 
 								SYNTAX
 								................................................
@@ -321,9 +321,13 @@ Uize.module ({
 								Uize.Math.Blend.blend (0,10,.5,0,function (value) {return Math.pow (value,2)});  // returns 2.5
 								...............................................................................................
 
-								In the above example, we are creating a halfway blend between the values =0= and =10=. With a typical linear blend, we would expect the result =5= to be produced, but in this case we are specifying the curve function =function (value) {return Math.pow (value,2)}= to produce a non-linear blend. Specifically, we are blending the values =0= and =10= using a quadratic curve, which takes the blend value and raises it to the power of =2= (ie. squares it). So, for our =.5= blend we actually end up getting a curve-adjusted =.25= blend, which produces the blend result of =2.5= in this case.
+								In the above example, we are creating a halfway blend between the values =0= and =10=. With a typical linear blend, we would expect the result =5= to be produced, but in this case we are specifying the curve function =function (value) {return Math.pow (value,2)}= to produce a non-linear blend. Specifically, we are blending the values =0= and =10= using a quadratic curve, which takes the blend value and raises it to the power of =2= (ie. squares it). So, for our =.5= blend we actually end up getting a curve-adjusted =.25= blend, which produces the blend result of =2.5=.
+
+								In addition to simple curve functions, the =curveFUNCorARRAYorOBJ= parameter also allows us to specify compound curve values using curve arrays or objects. For more information, consult the reference for the =curveFUNCorARRAYorOBJ= parameter.
 
 							Blend Two Values, with Quantization and Curve
+								Two values can be blended with both quantization and a curve, by specifying values for both of the optional =quantizationNUMorARRAYorOBJ= and =curveFUNCorARRAYorOBJ= arguments.
+
 								SYNTAX
 								................................................
 								blendedNUMorARRAYorOBJ = Uize.Math.Blend.blend (
@@ -335,7 +339,15 @@ Uize.module ({
 								);
 								................................................
 
+								EXAMPLE
+								.............................................................................................
+								Uize.Math.Blend.blend (0,10,.5,1,function (value) {return Math.pow (value,2)});  // returns 3
+								.............................................................................................
+
+								In the above example, we are creating a halfway blend between the values =0= and =10=, using a quadratic curve function to make the blend non-linear, and using a quantization of =1= to ensure that an integer value is returned. With just the quadratic curve function, this statement would return the value =2.5=, but the quantization value of =1= causes the value to be rounded to the nearest value that is an integer multiple of the quantization value =1= from the first of the two values being blended (=0=, in this example). That nearest quantized value happens to be =3=.
+
 							Blend Two Values, Specifying Previous Value and Values Unchanged Indicator
+								In an advanced usage of this method, the optional =previousValueNUMorARRAYorOBJ= and =valuesUnchangedOBJ= arguments can be specified in order to have a special value returned when the blend would produce the same result as the specified previous value.
 
 								SYNTAX
 								................................................
@@ -350,6 +362,12 @@ Uize.module ({
 								);
 								................................................
 
+								This form of the method is used primarily in the =Uize.Fade= class as a means of identifying when the value being faded over time does not change from one fade update to the next, which tends to happen more often when quantization is being used and a fade has fewer quantization intervals between its start and end values than fade updates that will be performed (for example, if you're fading from =0= to =5= with quantization of =1= over a period of ten seconds. In particular, this facility can lead to significant performance optimizations when the values being faded are compound values, such as CSS style property objects.
+
+								In order to use this facility, one must keep track of the previous value for a blend and provide it to the =Uize.Math.Blend.blend= method using the =previousValueNUMorARRAYorOBJ= parameter. One should specify a value that is guaranteed to be unique for the =valuesUnchangedOBJ= parameter, so that one can compare the result returned from the method to this value. In order to avoid possible collisions with legitimate values, it is best to specify a reference to an object in the local scope - essentially, a value that is only known to the caller of the =Uize.Math.Blend.blend= method.
+
+								Just to reiterate, this is an advanced and special form of the method and it's unlikely you will ever find the need to use it. If you're still curious, the best place to see a real world usage of this form is in the code for the =Uize.Fade= module.
+
 							Parameters
 								blendFRACTION
 									.
@@ -357,56 +375,60 @@ Uize.module ({
 									The value specified for the =blendFRACTION= parameter should be a floating point number in the range of =0= to =1=,, where the =blendFRACTION= parameter should be a floating point number in the range of =0= to =1=, where  a value of =0= will result in returning the value of the =value1INTorOBJorARRAY= parameter, the value of =1= will result in returning the value of the =value2INTorOBJorARRAY= parameter, and the value =.5= will result in returning the average of =value1INTorOBJorARRAY= and =value2INTorOBJorARRAY=.
 
 								quantizationNUMorARRAYorOBJ
-									A number or array or object, allowing one to control the quantization for the interpolated values of a fade.
+									A number or array or object, allowing one to control the quantization for the blend result.
 
-									When the value =0=, =undefined=, or =null= is specified for this property, then the blended value can be a floating point number (or contain floating point numbers, if it's a compound value). This can be a problem for blending values in certain applications where an integer value is desirable, and where a floating point number may be inappropriate. In such cases, a value of =1= can be specified for the =quantization= state property, thereby directing the fade to interpolate its value in increments of one.
+									When the value =0=, =undefined=, or =null= is specified for this parameter, then the blended value can be a floating point number (or contain floating point numbers, if it's a compound value). This can be a problem for blending values in certain applications where an integer value is desirable, and where a floating point number may be inappropriate. In such cases, a value of =1= can be specified for the =quantizationNUMorARRAYorOBJ= parameter, thereby directing the =Uize.Math.Blend.blend= method to produce blend results in increments of one.
 
 									Relative to First Value
-										It's important to note that a quantization value of =2= doesn't mean that an interpolated value will always be even (it could also be odd), since quantization determines the step increments from the first of the values being blended.
+										It's important to note that a quantization value of =2= doesn't mean that a blend result will always be even (it could also be odd), since quantization determines the step increments from the first of the values being blended.
 
-										So, if a fade's start value was =0=, then a quantization of =2= would produce the interpolated values =0=, =2=, =4=, etc. (ie. even numbers). But if that same fade had started at a value of =1=, then it would produce the interpolated values =1=, =3=, =5=, etc. (ie. odd numbers).
+										So, if the first value was =0=, then a quantization of =2= would produce blend results like =0=, =2=, =4=, etc. (ie. even numbers). But if the first value was =1=, then blend results like =1=, =3=, =5=, etc. (ie. odd numbers) would be produced.
 
-										Similarly, a quantization value of =1= doesn't guarantee that an interpolated value will always be an integer. A fade with a start value of =1= and a quantization of =1= would produce the interpolated values =1=, =2=, =3=, etc. (ie. integers). However, a fade starting with =1.5= and with a quantization of =1= would produce the interpolated values =1.5=, =2.5=, =3.5=, etc. (definitely *not* integers). This is generally not an obstacle for applications that desire integer interpolated values, because in those cases the start and end values are almost certain to be integers, and a quantization value of =1= will have the desired effect under such conditions.
+										Similarly, a quantization value of =1= doesn't guarantee that a blend result will always be an integer. If the first value was =1=, then a quantization of =1= would produce blend results like =1=, =2=, =3=, etc. (ie. integers). However, if the first value was =1.5=, then a quantization of =1= would produce blend results like =1.5=, =2.5=, =3.5=, etc. (definitely *not* integers).
+
+										This is generally not an obstacle for applications that desire integer interpolated values, because in those cases both of the values being blended are almost certain to be integers, and a quantization value of =1= will have the desired effect under such conditions.
 
 									Simple Quantization
 										It is possible to specify a single quantization number that should apply to all components of a compound value (eg. a color object with red, green, and blue properties).
 
 										EXAMPLE
-										...................................................
-										var colorFade = Uize.Fade ({
-											startValue:{red:255,green:128,blue:0}, // orange
-											endValue:{red:179,green:136,blue:255}, // violet
-											quantization:1,
-											duration:2000
-										});
-										...................................................
+										..........................................
+										var blendedColor = Uize.Math.Blend.blend (
+											{red:255,green:128,blue:0},   // orange
+											{red:179,green:136,blue:255}, // violet
+											.5,
+											1
+										);
+										..........................................
 
-										In the above example, a fade instance is created for fading a color between orange and violet, over a duration of =2000= milliseconds (two seconds). The =startValue= state property is used to specify the starting color of orange, while the =endValue= property is used to specify the ending color of violet.
+										In the above example, a new blended color is being created by blending between the colors orange and violet. The values to blend are specified using an object with =red=, =green=, and =blue= properties that specify the values for each of the three channels that constitute an RGB color. This approach leverages the =Uize.Math.Blend.blend= method's ability to interpolate arbitrarily complex, compound values. Now, the value for each of the red, green, and blue channels must be an integer - there is no meaning to floating point values for these channels.
 
-										The start and end values are specified using an object with =red=, =green=, and =blue= properties that specify the values for each of the three channels that comprise an RGB color. This approach leverages the =Uize.Fade= class' ability to interpolate arbitrarily complex, compound values. Now, the value for each of the red, green, and blue channels must be an integer - there is no meaning to floating point values for these channels.
-
-										So, if =quantization= is left to its initial value of =undefined=, then RGB colors with floating point channel values would be interpolated, and this might not be appropriate for the code that handles the fade's update, or that code would have to do its own rounding. Additionally, the value of the fade's =value= state property would likely change more frequently, putting more load on update handler code. Specifying a value of =1= for the =quantization= property ensures that the values for all the channels of the color will be interpolated in steps of =1= and would, therefore, always be integers.
+										So, if quantization is not specified when calling this method, then an RGB color with floating point channel values would be produced, and this might not be appropriate for the code that is being supplied the new blended color, or that code would have to do its own rounding. Specifying a value of =1= for the =quantizationNUMorARRAYorOBJ= parameter ensures that the values for all the channels of the blended color will be interpolated in steps of =1= and would, therefore, always be integers.
 
 									Compound Quantization Value
-										It is possible to specify a compound value for the =quantization= state property, just as with the =startValue= and =endValue= properties.
+										It is possible to specify a compound value for the =quantizationNUMorARRAYorOBJ= parameter, just as with the =aNUMorARRAYorOBJ= and =bNUMorARRAYorOBJ= parameters used to specify the two values being blended.
 
-										In fact, you can specify a quantization value that matches the structure of the start and end values and that specifies granular quantization for all components of a compound value fade.
+										In fact, you can specify a quantization value that matches the structure of the values being blended and that specifies granular quantization for all components of a compound value blend.
 
 										EXAMPLE
-										...................................................
-										var colorFade = Uize.Fade ({
-											startValue:{red:255,green:128,blue:0}, // orange
-											endValue:{red:179,green:136,blue:255}, // violet
-											quantization:{
+										..........................................
+										var blendedColor = Uize.Math.Blend.blend (
+											{red:255,green:128,blue:0},   // orange
+											{red:179,green:136,blue:255}, // violet
+											.5,
+											{
 												red:5,   // medium resolution
 												green:1, // highest resolution
 												blue:10  // low resolution
-											},
-											duration:2000
-										});
-										...................................................
+											}
+										);
+										..........................................
 
-										In the above example, a value is being specified for =quantization= that matches the structure of the start and end values. This allows different quantization to be specified for the different subcomponents of the compound value that is interpolated from the compound start and end values. During the fade, the value of the green channel would change with the highest resolution (while always being an integer), while the red channel value would change with less precision (in steps of =5=) and the blue channel value would change with the least precision (steps of =10=).
+										In the above example, a value is being specified for the =quantizationNUMorARRAYorOBJ= parameter that matches the structure of the two values being blended, being an object with =red=, =green=, and =blue= properties just as with the RGB color tuple objects being blended.
+
+										This allows different quantization to be specified for the different subcomponents of the compound value that is produced from blending the two compound values. When performing blends using this compound quantization and different blend amounts, the value of the green channel would change with the highest resolution (while always being an integer), while the red channel value would change with less precision (in steps of =5=) and the blue channel value would change with the least precision (steps of =10=).
+
+										Given the above blend amount of =.5=, the statement would produce the result ={red:215,green:132,blue:130}=, whereas the same blend with a simple quantization of =1= would produce the result ={red:217,green:132,blue:128}=.
 
 									Compound Quantization Value With Omissions
 										When specifying a compound =quantization= value, it is possible to omit quantization for certain components of the structure value, and the quantization for such components will be defaulted to =0=.
@@ -462,9 +484,11 @@ Uize.module ({
 										In the above example, a fade instance is created for fading two colors, =colorA= and =colorB=, where =colorA= is faded between orange and violet, and where =colorB= is faded between pure red and pure blue. A compound value is specified for =quantization=, where the structure mostly matches the structure of the start and end values, but with the key distinction that a simple number is specified for =colorB=, rather than an object with =red=, =green=, and =blue= properties as with =colorA=. This has the effect of defaulting the quantization for all components of the =colorB= subtree (ie. =red=, =green=, and =blue=) in the interpolated compound value to =1=.
 
 									Floating Point Quantization Values
-										There's nothing to say that values for the =quantization= state property have to be integers.
+										There's nothing to say that values for the =quantizationNUMorARRAYorOBJ= parameter have to be integers.
 
-										You can just as well specify a floating point value for quantization. For example, a fade starting with =0= and with a quantization of =.5= would produce the interpolated values =0=, =.5=, =1=, =1.5=, =2=, =2.5=, etc. This could be useful in cases where a floating point interpolated value is acceptable, but where one wishes to limit the number of value changes that occur for performance reasons. In such cases, setting a quantization to anything other than =0= would provide a throttling effect that would reduce the number of value updates that would occur.
+										You can just as well specify a floating point value for quantization. For example, a blend with a first value of =0= and with a quantization of =.5= would produce the blend results like =0=, =.5=, =1=, =1.5=, =2=, =2.5=, etc.
+
+										This could be useful in cases where a floating point blend result is acceptable, but where you wish to limit the number of value changes that occur for performance reasons when blends are repeatedly performed over a period of time (such as in an animation process). In such cases, setting a quantization to anything other than =0= would provide a throttling effect that would reduce the number of value updates that would occur.
 
 										EXAMPLE
 										..............................
