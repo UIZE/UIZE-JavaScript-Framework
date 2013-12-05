@@ -211,6 +211,9 @@ Uize.module ({
 								[0,10,.03125,undefined],
 								.3125
 							],
+							/*
+								- test that quantization always rounds "up" to the nearest quantization intercal away from the first value, regardless of the whether the second number is greater than or less than the first number
+							*/
 							{
 								title:'Test that, when the value Infinity is specified for quantization, then the first of the two values being blended will be returned for any blend amounts from 0 up to, but not including, 1',
 								test:function () {
