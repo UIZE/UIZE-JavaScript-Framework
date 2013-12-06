@@ -25,10 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Resizer.Marquee',
-	required:[
-		'Uize.Node',
-		'Uize.Node.Event'
-	],
+	required:'Uize.Node',
 	builder:function  (_superclass) {
 		'use strict';
 

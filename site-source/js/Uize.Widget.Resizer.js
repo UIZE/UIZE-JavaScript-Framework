@@ -188,9 +188,7 @@ Uize.module ({
 					return {left:m._left,top:m._top,width:m._width,height:m._height};
 				},
 				
-				initiateDrag:function (_domEvent) {
-					this.children.move.initiate (_domEvent)
-				},
+				initiateDrag:function (_domEvent) { this.children.move.initiate (_domEvent) },
 
 				updateUi:function () {
 					var m = this;

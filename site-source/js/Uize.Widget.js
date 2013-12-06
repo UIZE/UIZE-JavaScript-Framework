@@ -1605,19 +1605,19 @@ Uize.module ({
 								Instance Methods
 									childId
 										Returns the ID prefix of a child widget with the specified =childNameSTR=.
-			
+
 										SYNTAX
 										..................................................
 										childIdPrefixSTR = myWidget.childId(childNameSTR);
 										..................................................
-			
+
 										EXAMPLE
 										...........................................
 										var childIdPrefix = mySlider.childId('child');
 										...........................................
-			
+
 										Assuming an =idPrefix= of ="page_slider"=, the example would return ="page_slider_child"=.
-			
+
 										NOTES
 										- See related =addChild= instance method in =Uize.Widget=
 							*/
