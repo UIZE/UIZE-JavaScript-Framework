@@ -9,12 +9,12 @@ Rationales For This Change
 	The decision to move the class mechanism into its own separete module is driven by a number of key rationales.
 
 	Get Just the Utility Belt Features
-		Moving the class mechanism out of the =Uize= base module makes it possible to get just the basic utility belt features without taking the class code along with it.
+		Moving the class mechanism out of the =Uize= base module allows us to get just the basic utility belt features without taking the class code along with it.
 
 		Some people just want a good suite of utility belt features to complement the features of JavaScript and/or other JavaScript frameworks or libraries they may be using. They may like the toolkit provided in the =Uize= base module but not wish to buy into the whole framework in a given application they're working on. Now, developers can load in just the =Uize= base module to get just the base toolkit.
 
 	Use Other Packages With Less Weight
-		Moving the class mechanism out of the =Uize= base module that defines the namespace for the UIZE JavaScript Frameework makes it possible to load in package modules without the extra weight of the class code.
+		Moving the class mechanism out of the =Uize= base module that defines the namespace for the UIZE JavaScript Frameework allows us to load in package modules without the extra weight of the class code.
 
 		Some people may wish to load in the various utility packages of the UIZE JavaScript Framework, like the data manipulation modules under the =Uize.Data= namespace, or the color manipulation modules under the =Uize.Color= namespace. In order to do so, they will at least need the =Uize= namespace and module loader mechanism that is defined in the =Uize= base module. With the class mechanism moved out of the =Uize= base module, it is now possible to use just the packages of the UIZE JavaScript Framework without loading as much code as before.
 

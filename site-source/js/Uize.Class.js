@@ -2340,7 +2340,7 @@ Uize.module ({
 										Event Object Contains newValue Property
 											When a =Changed.[propertyName]= event fires for a particular state property that has changed value, the event object that is passed as an argument to any handlers of the event will contain a =newValue= property to indicate the new value of the state property.
 
-											This makes it possible to access the new value of the state property without having to access the instance that owns the property in order to call its =get= method to get the value for the property.
+											This allows us to access the new value of the state property without having to access the instance that owns the property in order to call its =get= method to get the value for the property.
 
 											INSTEAD OF...
 											..........................................................

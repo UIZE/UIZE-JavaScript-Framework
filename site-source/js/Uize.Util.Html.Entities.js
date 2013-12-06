@@ -13,12 +13,12 @@
 	type: Package
 	importance: 2
 	codeCompleteness: 100
-	docCompleteness: 10
+	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Util.Html.Entities= package defines lookup objects that map HTML HTML entity codes to character codes, and vice versa.
+		The =Uize.Util.Html.Entities= package defines lookup objects that map HTML entity names to character codes, and vice versa.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -35,7 +35,36 @@ Uize.module ({
 
 		return Uize.package ({
 			entityNameToCharCodeLookup:_entityNameToCharCodeLookup,
+			/*?
+				Static Properties
+					Uize.Util.Html.Entities.entityNameToCharCodeLookup
+						A lookup object, that provides a mapping between HTML entity names and the entities' corresponding character codes.
+
+						EXAMPLE
+						...........................................................................
+						Uize.Util.Html.Entities.entityNameToCharCodeLookup.copy;    // returns 169
+						Uize.Util.Html.Entities.entityNameToCharCodeLookup.spades;  // returns 9824
+						...........................................................................
+
+						NOTES
+						- compare to the companion =Uize.Util.Html.Entities.charCodeToEntityNameLookup= static property
+			*/
+
 			charCodeToEntityNameLookup:Uize.reverseLookup (_entityNameToCharCodeLookup)
+			/*?
+				Static Properties
+					Uize.Util.Html.Entities.charCodeToEntityNameLookup
+						A lookup object, that provides a mapping between HTML entity character codes and the entities' corresponding names.
+
+						EXAMPLE
+						...............................................................................
+						Uize.Util.Html.Entities.charCodeToEntityNameLookup [169];   // returns 'copy'
+						Uize.Util.Html.Entities.charCodeToEntityNameLookup [9824];  // returns 'spades'
+						...............................................................................
+
+						NOTES
+						- compare to the companion =Uize.Util.Html.Entities.entityNameToCharCodeLookup= static property
+			*/
 		});
 	}
 });

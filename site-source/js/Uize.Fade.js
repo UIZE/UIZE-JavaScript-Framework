@@ -320,8 +320,10 @@ Uize.module ({
 
 									When setting a value for the =curve= property, you can provide your own hand-rolled curve function, or you can pick from the many convenient curve function generators provided in the =Uize.Curve= and =Uize.Curve.Rubber= modules. Even more complex curve functions can be generated using the versatile curve function modifiers provided in the =Uize.Curve.Mod= module.
 
-									Compound Curve Value
-										As with the =quantization= state property, a compound value can be specified for the =curve= state property.
+									Implemented in the Uize.Math.Blend Module
+										Supported for curves in the =Uize.Fade= class is based on support for curves in the =Uize.Math.Blend= module.
+
+										This module provides the underlying value blending engine that is used in fades. For an in-depth discussion of curves and such topics as compound (hierarchical) quantization objects, consult the reference for the =Uize.Math.Blend= module.
 
 									NOTES
 									- the initial value is =undefined=
@@ -443,122 +445,10 @@ Uize.module ({
 
 									When the value =0=, =undefined=, or =null= is specified for this property, then the fade's interpolated value can be a floating point number (or contain floating point numbers, if it's a compound value). This can be a problem for fading values in certain applications where an integer value is desirable, and where a floating point number may be inappropriate. In such cases, a value of =1= can be specified for the =quantization= state property, thereby directing the fade to interpolate its value in increments of one.
 
-									Relative to Start Value
-										It's important to note that a quantization value of =2= doesn't mean that an interpolated value will always be even (it could also be odd), since quantization determines the step increments from the start value of a fade.
+									Implemented in the Uize.Math.Blend Module
+										Supported for quantization in the =Uize.Fade= class is based on support for quantization in the =Uize.Math.Blend= module.
 
-										So, if a fade's start value was =0=, then a quantization of =2= would produce the interpolated values =0=, =2=, =4=, etc. (ie. even numbers). But if that same fade had started at a value of =1=, then it would produce the interpolated values =1=, =3=, =5=, etc. (ie. odd numbers).
-
-										Similarly, a quantization value of =1= doesn't guarantee that an interpolated value will always be an integer. A fade with a start value of =1= and a quantization of =1= would produce the interpolated values =1=, =2=, =3=, etc. (ie. integers). However, a fade starting with =1.5= and with a quantization of =1= would produce the interpolated values =1.5=, =2.5=, =3.5=, etc. (definitely *not* integers). This is generally not an obstacle for applications that desire integer interpolated values, because in those cases the start and end values are almost certain to be integers, and a quantization value of =1= will have the desired effect under such conditions.
-
-									Simple Quantization
-										It is possible to specify a single quantization number that should apply to all components of a compound value (eg. a color object with red, green, and blue properties).
-
-										EXAMPLE
-										...................................................
-										var colorFade = Uize.Fade ({
-											startValue:{red:255,green:128,blue:0}, // orange
-											endValue:{red:179,green:136,blue:255}, // violet
-											quantization:1,
-											duration:2000
-										});
-										...................................................
-
-										In the above example, a fade instance is created for fading a color between orange and violet, over a duration of =2000= milliseconds (two seconds). The =startValue= state property is used to specify the starting color of orange, while the =endValue= property is used to specify the ending color of violet.
-
-										The start and end values are specified using an object with =red=, =green=, and =blue= properties that specify the values for each of the three channels that comprise an RGB color. This approach leverages the =Uize.Fade= class' ability to interpolate arbitrarily complex, compound values. Now, the value for each of the red, green, and blue channels must be an integer - there is no meaning to floating point values for these channels.
-
-										So, if =quantization= is left to its initial value of =undefined=, then RGB colors with floating point channel values would be interpolated, and this might not be appropriate for the code that handles the fade's update, or that code would have to do its own rounding. Additionally, the value of the fade's =value= state property would likely change more frequently, putting more load on update handler code. Specifying a value of =1= for the =quantization= property ensures that the values for all the channels of the color will be interpolated in steps of =1= and would, therefore, always be integers.
-
-									Compound Quantization Value
-										It is possible to specify a compound value for the =quantization= state property, just as with the =startValue= and =endValue= properties.
-
-										In fact, you can specify a quantization value that matches the structure of the start and end values and that specifies granular quantization for all components of a compound value fade.
-
-										EXAMPLE
-										...................................................
-										var colorFade = Uize.Fade ({
-											startValue:{red:255,green:128,blue:0}, // orange
-											endValue:{red:179,green:136,blue:255}, // violet
-											quantization:{
-												red:5,   // medium resolution
-												green:1, // highest resolution
-												blue:10  // low resolution
-											},
-											duration:2000
-										});
-										...................................................
-
-										In the above example, a value is being specified for =quantization= that matches the structure of the start and end values. This allows different quantization to be specified for the different subcomponents of the compound value that is interpolated from the compound start and end values. During the fade, the value of the green channel would change with the highest resolution (while always being an integer), while the red channel value would change with less precision (in steps of =5=) and the blue channel value would change with the least precision (steps of =10=).
-
-									Compound Quantization Value With Omissions
-										When specifying a compound =quantization= value, it is possible to omit quantization for certain components of the structure value, and the quantization for such components will be defaulted to =0=.
-
-										EXAMPLE
-										...................................................
-										var colorFade = Uize.Fade ({
-											startValue:{
-												color:{red:255,green:128,blue:0}, // orange
-												opacity:0
-											},
-											endValue:{
-												color:{red:179,green:136,blue:255}, // violet
-												opacity:1
-											},
-											quantization:{color:1},
-											duration:2000
-										});
-										...................................................
-
-										In the above example, a fade instance is created for fading a color between orange and violet and an opacity value between =0= to =1=, over a duration of =2000= milliseconds (two seconds). A compound =quantization= value is specified. By specifying the value =1= for =color=, and not an entire subtree object with quantization values for =red=, =green=, and =blue=, the quantization of =1= applies to all three color channels. And by omitting a quantization value for =opacity=, the quantization for this component of the interpolated compound value defaults to =0= (ie. no quantization / floating point precision).
-
-										So, you see, a compound =quantization= value may have "terminations" and "omissions", both of which lead to defaulting behaviors. Omissions are essentially terminations with defaulting to =0=. So, in effect, omitting a subtree is equivalent to "terminating" the subtree by specifying the simple value =0=.
-
-									Quantization Defaulting At Nodes
-										When specifying a compound value for =quantization=, it is possible to "terminate" the tree structure at any node of the tree by specifying a number in place of a subtree object/array.
-
-										This has the effect of imposing the quantization value specified for that node on all components of the subtree when interpolating the fade value. This is a convenience that allows defaulting at different levels of a compound =quantization= value.
-
-										EXAMPLE
-										.......................................................
-										var colorFade = Uize.Fade ({
-											startValue:{
-												colorA:{red:255,green:128,blue:0},   // orange
-												colorB:{red:255,green:0,blue:0}      // pure red
-											},
-											endValue:{
-												colorA:{red:179,green:136,blue:255}, // violet
-												colorB:{red:0,green:0,blue:255}      // pure blue
-											},
-											quantization:{
-												colorA:{
-													red:5,   // medium resolution
-													green:1, // highest resolution
-													blue:10  // low resolution
-												},
-												colorB:1    // highest resolution
-											},
-											duration:2000
-										});
-										.......................................................
-
-										In the above example, a fade instance is created for fading two colors, =colorA= and =colorB=, where =colorA= is faded between orange and violet, and where =colorB= is faded between pure red and pure blue. A compound value is specified for =quantization=, where the structure mostly matches the structure of the start and end values, but with the key distinction that a simple number is specified for =colorB=, rather than an object with =red=, =green=, and =blue= properties as with =colorA=. This has the effect of defaulting the quantization for all components of the =colorB= subtree (ie. =red=, =green=, and =blue=) in the interpolated compound value to =1=.
-
-									Floating Point Quantization Values
-										There's nothing to say that values for the =quantization= state property have to be integers.
-
-										You can just as well specify a floating point value for quantization. For example, a fade starting with =0= and with a quantization of =.5= would produce the interpolated values =0=, =.5=, =1=, =1.5=, =2=, =2.5=, etc. This could be useful in cases where a floating point interpolated value is acceptable, but where one wishes to limit the number of value changes that occur for performance reasons. In such cases, setting a quantization to anything other than =0= would provide a throttling effect that would reduce the number of value updates that would occur.
-
-										EXAMPLE
-										..............................
-										var opacityFade = Uize.Fade ({
-											startValue:0,
-											endValue:1,
-											quantization:.02,
-											duration:2000
-										});
-										..............................
-
-										In the above example, a fade instance is created for fading an opacity value between =0= and =1=. Opacity is a floating point value, where =0= represents completely transparent and =1= represents completely opaque. Setting a quantization of =.02= for the fade ensures that there will be a maximum of 50 value updates (1 / .02) over the duration of the fade (there may be fewer, depending on CPU load).
+										This module provides the underlying value blending engine that is used in fades. For an in-depth discussion of quantization and such topics as compound (hierarchical) quantization objects, consult the reference for the =Uize.Math.Blend= module.
 
 									NOTES
 									- the initial value is =undefined=
@@ -634,6 +524,12 @@ Uize.module ({
 						- the sum of the `acceleration State Property (DEPRECATED 2009-07-10)` and `deceleration State Property (DEPRECATED 2009-07-10)` must not exceed =1=
 						- see also the `acceleration State Property (DEPRECATED 2009-07-10)`
 						- see the =curve= state property and the =Uize.Fade.celeration= static method
+
+					Uize.Fade.blendValues Static Methods (DEPRECATED 2011-11-24)
+
+						..........................................................
+						Uize.Fade.blendValues  >> BECOMES >> Uize.Math.Blend.blend
+						..........................................................
 			*/
 		);
 	}

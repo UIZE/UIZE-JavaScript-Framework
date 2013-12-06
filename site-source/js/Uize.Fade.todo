@@ -1,17 +1,6 @@
 This is a TO DO document for the =Uize.Fade= module.
 
 - instead of start / stop methods, just use property interface (ie. inProgress property)
-- for compound curves and quantization, a way to specify a default for all properties of an object, when an object is specified in order to specify curves or quantization for some properties
-	eg.
-		................................................................................
-		quantization:{
-			'*':1,
-			opacity:0
-		}
-		................................................................................
-
-		Without this ability, if you wanted quantization to be 0 for opacity, but 1 for all other properties, you'd be forced to explicitly specify it for all those other properties. The alternative would be to specify quantization:1, but then you can't have 0 for opacity.
-
 - ability to pause and resume a time-based fade
 - ability to specify the number of updates in the fade
 	1 = gets to end immediately

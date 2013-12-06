@@ -27,7 +27,7 @@
 
 			- *Supports Familiar Control Flow Constructs* - Unlike most async libraries, Flo supports familiar control flow constructs, with the ability to break from loop flos and return from "function" flos. Flo also supports multi-stage (a)synchronous if and switch conditional flos.
 			- *Supports Mixed Synchronous and Asynchronous Execution* - Unlike many async libraries that expect functions to be asynchronous (or even worse, force all synchronous execution to become asynchronous), Flo lets synchronous and asynchronous execution mix harmoniously, even allowing functions to dynamically be either synchronous or asynchronous, or to change between synchronous and asynchronous as an application evolves over time.
-			- *Has the Ability to Breathe* - Flo implements an innovative feature that allows you to configure a threshold for how long execution should remain synchronous before taking a "breath" by introducing an asynchronous interruption.
+			- *Has the Ability to Breathe* - Flo implements an innovative feature that allows us to configure a threshold for how long execution should remain synchronous before taking a "breath" by introducing an asynchronous interruption.
 			- *Uses Regular Old Callbacks* - Unlike many other async libraries, Flo does not use promises or deferreds - just plain old callbacks - sweet and simple.
 			- *Works on Client and Server* - Flo works just as well in NodeJS as it does in a browser, so you can safely use it in code that might be executed on either side of the client-server divide.
 			- *No Compilation Required* - You don't need to set up any code pre-compilation process on a server, or anything like that, in order to use Flo in parts of your code - just require it and use it.

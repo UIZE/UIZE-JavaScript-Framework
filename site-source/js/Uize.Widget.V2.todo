@@ -159,6 +159,71 @@ Implement New Binding Features
 		}
 		.................................................
 
+		Other Possible Approaches
+			Another approach to event bindings might be to combine DOM node and child and self event bindings, using a universal syntax.
+
+			................................
+			eventBindings:[
+				{
+					source:'menu',
+					event:'click',
+					handler:function () {
+					}
+				},
+				{
+					source:'children.sliderG',
+					event:'Changed.value',
+					handler:function () {
+					}
+				},
+				{
+					source:'~',
+					event:'Changed.value',
+					handler:function () {
+					}
+				}
+			]
+			................................
+
+			..........................
+			eventBindings:[
+				[
+					'menu',
+					'click',
+					function () {
+					}
+				],
+				[
+					'children.sliderG',
+					'Changed.value',
+					function () {
+					}
+				]
+			]
+			..........................
+
+			...................................
+			eventBindings:{
+				menu:{
+					click:function () {
+					}
+				},
+				'children.sliderG':{
+					Changed.value':function () {
+					}
+				}
+			]
+			...................................
+
+			.................................................
+			eventBindings:{
+				'menu:click':function () {
+				},
+				'children.sliderG:Changed.value':function () {
+				}
+			]
+			.................................................
+
 	Add Feature to Declare Self and Child Event Wirings
 		Provide a way to declare wirings for instance events and child widget events.
 

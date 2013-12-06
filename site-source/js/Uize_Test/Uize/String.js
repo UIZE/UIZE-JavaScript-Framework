@@ -26,7 +26,6 @@
 Uize.module ({
 	name:'Uize.Test.Uize.String',
 	required:[
-		'Uize.Class.Value',
 		'Uize.Array.Join',
 		'Uize.Str.Camel',
 		'Uize.Str.Has',

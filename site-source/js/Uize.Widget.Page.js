@@ -586,7 +586,7 @@ Uize.module ({
 
 									- The value specified for the required "name" property will be used as the child widget name for the dialog widget.
 
-									- The optional "parent" property allows you to attach the dialog widget as the child of a widget other than the page widget. If not specified (which is most of the time), the diaog widget will have the page widget as its parent.
+									- The optional "parent" property allows us to attach the dialog widget as the child of a widget other than the page widget. If not specified (which is most of the time), the dialog widget will have the page widget as its parent.
 
 									- The optional "idPrefix" property lets you explicitly specify the =idPrefix= for the dialog widget. Usually you will want to just leave it up to the =useDialog= method to construct the =idPrefix= for you, based upon the =idPrefix= of the dialog widget's parent and the name of the dialog widget (as specified in the "name" property mentioned earlier).
 

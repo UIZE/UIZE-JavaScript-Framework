@@ -505,7 +505,7 @@ Uize.module ({
 								moduleTextSTR = Uize.Build.Util.moduleAsText (moduleDefinitionOBJ);
 								...................................................................
 
-								If a string value is specified for the =builder= property of the module definition (rather than a builder function, in other words), then this value will be substituted as is for the builder in the serialized module. This makes it possible to provide the exact code for a module's builder, complete with comments and formatting that you wish to preserve in the serialized text version of the module. This can be useful in some build processes that generate modules.
+								If a string value is specified for the =builder= property of the module definition (rather than a builder function, in other words), then this value will be substituted as is for the builder in the serialized module. This allows us to provide the exact code for a module's builder, complete with comments and formatting that you wish to preserve in the serialized text version of the module. This can be useful in some build processes that generate modules.
 					*/
 				},
 

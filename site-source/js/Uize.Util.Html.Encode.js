@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Util.Html.Encode= package defines utility methods for HTML encoding and HTML decoding strings.
+		The =Uize.Util.Html.Encode= package defines utility methods for HTML encoding and HTML decoding of strings.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

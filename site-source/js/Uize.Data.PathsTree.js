@@ -25,56 +25,17 @@
 
 Uize.module ({
 	name:'Uize.Data.PathsTree',
+	required:'Uize.Data.Flatten',
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_undefined,
-				_sacredEmptyObject = {}
-			;
-
 		return Uize.package ({
 			toList:function (_tree,_delimiter) {
-				if (_delimiter == _undefined)
-					_delimiter = '.'
-				;
-				var _paths = [];
-				function _processTreeNode (_treeNode,_namespace) {
-					_namespace && _paths.push (_namespace);
-					for (var _subNodeName in _treeNode)
-						_processTreeNode (_treeNode [_subNodeName],_namespace + (_namespace && _delimiter) + _subNodeName)
-					;
-				}
-				_processTreeNode (_tree,'');
-				return _paths;
+				return Uize.keys (Uize.Data.Flatten.flatten (_tree,_delimiter,true));
 			},
 
 			fromList:function (_paths,_delimiter) {
-				if (_delimiter == _undefined)
-					_delimiter = '.'
-				;
-				var _tree = {};
-				for (var _pathNo = -1, _pathsLength = _paths.length; ++_pathNo < _pathsLength;) {
-					var
-						_path = _paths [_pathNo],
-						_treeNode = _tree
-					;
-					for (
-						var
-							_pathPartNo = -1,
-							_pathParts = _path.split (_delimiter),
-							_pathPartsLength = _pathParts.length,
-							_pathPart
-						;
-						++_pathPartNo < _pathPartsLength;
-					)
-						_treeNode =
-							_treeNode [_pathPart = _pathParts [_pathPartNo]] ||
-							(_treeNode [_pathPart] = _pathPartsLength - 1 - _pathPartNo && {})
-					;
-				}
-				return _tree;
+				return Uize.Data.Flatten.unflatten (Uize.lookup (_paths,0),_delimiter);
 			}
 		});
 	}

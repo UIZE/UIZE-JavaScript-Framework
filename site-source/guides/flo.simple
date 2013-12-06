@@ -27,7 +27,7 @@ The Design Philosophy Behind Flo
 		A Little More Overhead
 			Because asynchronous statements are wrapped in functions, there is more overhead to writing flo code than regular synchronous code.
 
-			The key point, however, is that makes it possible to apply approaches learned for synchronous coding to writing algorithms that may involve some asynchronous execution. That's not to say that there aren't cases where rethinking approaches may actually be appropriate and advantageous, particularly where it may be desirable to leverage parallel computing techniques, but that's somewhat orthogonal - asynchronous should not be conflated with parallelism, even though asynchronousness lends itself to concurrent approaches to some coding problems.
+			The key point, however, is that this allows us to apply approaches learned for synchronous coding to writing algorithms that may involve some asynchronous execution. That's not to say that there aren't cases where rethinking approaches may actually be appropriate and advantageous, particularly where it may be desirable to leverage parallel computing techniques, but that's somewhat orthogonal - asynchronous should not be conflated with parallelism, even though asynchronousness lends itself to concurrent approaches to some coding problems.
 
 	How Flo Came About
 		Flo was born out of frustration with promises, callbacks, and various async utility libraries (we won't name names).

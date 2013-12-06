@@ -35,10 +35,10 @@ Introduction
 	Every Widget Can Have Children
 		Every widget can own child widgets to support its implementation.
 
-		The widget architecture of the UIZE JavaScript Framework makes it possible to conveniently build new widgets that use other existing widgets in their implementation, in the form of child widgets. Every widget can be a parent to an unlimited number of children. The =Uize.Widget= base class implements mechanisms that provide value to the parent-child relationship.
+		The widget architecture of the UIZE JavaScript Framework allows us to conveniently build new widgets that use other existing widgets in their implementation, in the form of child widgets. Every widget can be a parent to an unlimited number of children. The =Uize.Widget= base class implements mechanisms that provide value to the parent-child relationship.
 
 	Widget Tree
-		Because every widget can have child widgets, this makes it possible to have a hierarchical tree of widgets.
+		Because every widget can have child widgets, this allows us to have a hierarchical tree of widgets.
 
 		Not to be confused with "widgetry" (which we do a lot of in the UIZE JavaScript Framework), the inherent parent-child relationship of widgets in the UIZE JavaScript Framework means that one can construct an arbitrarily complex "tree" of widgets.
 
@@ -402,7 +402,7 @@ More on Widgets
 		The Node Cache
 			The =Uize.Widget= base class implements a system for caching references to implied nodes when they are first accessed.
 
-			This caching mechanism improves performance on subsequent occasions when implied nodes that have already been cached are again accessed, and makes it possible to specify implied nodes by named without worrying about significant cost of repeated lookups in the DOM - something that can be quite slow with large or complex documents in certain browsers. While improving performance, this caching mechanism (like any caching mechanism) has some implications that should be considered when implementing more sophisticated widget classes.
+			This caching mechanism improves performance on subsequent occasions when implied nodes that have already been cached are again accessed, and allows us to specify implied nodes by named without worrying about significant cost of repeated lookups in the DOM - something that can be quite slow with large or complex documents in certain browsers. While improving performance, this caching mechanism (like any caching mechanism) has some implications that should be considered when implementing more sophisticated widget classes.
 
 			Don't Forget To Flush
 				Unlike with toilets, there are only a few rare instances where it is necessary to flush the node cache, and these typically involve more sophisticated widget implementations.
@@ -740,7 +740,7 @@ More on Child Widgets
 Widget Adoption
 	A facility exists within the =Uize.Widget.Page= class for automatic adoption of child widgets that are declared inside a page using a special declarative syntax.
 
-	This mechanism makes it possible to place the markup and the data that a JavaScript widget needs in the page in a declarative manner, without having to explicitly require the JavaScript modules that the widget might need, and without having to explicitly add the child widget in the page widget's implementation. Widgets can be declared in this way without having to source in all JavaScript modules that the widget might require ahead of the declaration block.
+	This mechanism allows us to place the markup and the data that a JavaScript widget needs in the page in a declarative manner, without having to explicitly require the JavaScript modules that the widget might need, and without having to explicitly add the child widget in the page widget's implementation. Widgets can be declared in this way without having to source in all JavaScript modules that the widget might require ahead of the declaration block.
 
 	EXAMPLE
 	.............................................................

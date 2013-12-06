@@ -405,7 +405,7 @@
 			A performance implication of using this approach is that multiple handlers will be wired for the real "click" DOM event for the node, with each one being executed when the node is clicked. So there are more handlers being wired to the "click" event, and there are more handler functions being executed each time the node is clicked. In most practical cases, this will not be any kind of issue, but it could become a performance consideration if very large numbers of DOM nodes are being wired up with many of these `click-with-modifier virtual DOM events`. In such cases, performance could be improved by using a traditional approach of wiring a single handler for the real "click" DOM event, that then uses conditional logic to test the values of =ctrlKey=, =shiftKey=, and =altKey= properties of the DOM event object in order to handle the different modifier key combinations differently.
 
 	Implementing Virtual DOM Events
-		If there's not already a virtual DOM event that's built for your exact needs, then the extensibility of the virtual DOM events system allows you to implement your own.
+		If there's not already a virtual DOM event that's built for our exact needs, then the extensibility of the virtual DOM events system allows us to implement your own.
 
 		Three Basic Steps
 			Implementing your own virtual DOM events is not terribly complicated, and can be broken down into three main steps, as follows...

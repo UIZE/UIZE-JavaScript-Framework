@@ -64,7 +64,7 @@ Introduction
 			When using the bookmarklet to launch the DELVE tool in Opera, DELVE is opened up in a new tab of the current browser window, rather than in a completely new window. This is a behavior of the browser, not the DELVE tool. If you want DELVE and the page you're inspecting with DELVE to be side by side (most likely), then you will need to click-and-drag on the DELVE tab and then "drop" it somewhere outside the browser's main window in order to have DELVE in a separate window (which you can then take to a separate monitor, if you're fortunate enough to have a dual monitor setup).
 
 		Fullscreening DELVE
-			Fullscreening the DELVE tool makes it possible to see more useful information for the page being inspected.
+			Fullscreening the DELVE tool allows us to see more useful information for the page being inspected.
 
 			Fullscreening is, of course, only a viable option if you are lucky enough to have a dual monitor setup. You won't likely want to be fullscreening DELVE if you only have a single monitor or are working on a laptop / notebook. But, if you do have a secondary monitor that you can dedicate to developer tools, then fullscreening DELVE is the way to go. Less browser chrome means more screen real estate for stuff that really matters.
 
@@ -632,7 +632,7 @@ The Right Pane
 		Value
 			The Value column of the `state properties table` displays the value for a state property, using a simple =toString= serialization.
 
-			Because the value of a state property is displayed using a =toString= serialization, the displayed value can be less than satisfactory in some cases. In such cases, `the get action` comes in handy, since it allows you to get a more complete (and useful) view of a state property's value in the `summary tab`.
+			Because the value of a state property is displayed using a =toString= serialization, the displayed value can be less than satisfactory in some cases. In such cases, `the get action` comes in handy, since it allows us to get a more complete (and useful) view of a state property's value in the `summary tab`.
 
 	Features Tab
 		The Features Tab displays the public features that can be automatically detected for a class in a sortable features table.

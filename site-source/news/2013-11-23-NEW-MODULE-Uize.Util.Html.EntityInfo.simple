@@ -1,0 +1,23 @@
+The new =Uize.Util.Html.EntityInfo= module defines a lookup object that maps HTML entity character codes to description / categorization information about the entities.
+
+The module provides the =Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup= static property, which is an object representing an entity information lookup table, where each key is an entity character code, and where each value is an array of categorization levels (from most general to most specific).
+
+USAGE
+...........................................................................................
+entityInfoARRAY = Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup [entityCharCodeINT];
+...........................................................................................
+
+EXAMPLE
+.................................................................................
+var entity8218Info = Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup [8218];
+.................................................................................
+
+In the above example, the entity info is being obtained for the entity with the character code =8218=. This entity is the low-9 single quotation mark and the entity info array that is returned by the expression will be =['Punctuation','quotation mark','single','low-9']=.
+
+To see an example of the new =Uize.Util.Html.Entities= module in use, see the [[../examples/html-entities-table.html][HTML Entities Table]] example.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-11-23 - NEW MODULE: Uize.Util.Html.EntityInfo
+....................................................................................

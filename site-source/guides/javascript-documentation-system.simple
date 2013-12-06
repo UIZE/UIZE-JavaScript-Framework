@@ -2219,7 +2219,7 @@ Comments
 			......................................
 
 		Flexible Opener and Closer Markers
-			Flexibility in the opener and closer markers makes it possible to nest different comment regions.
+			Flexibility in the opener and closer markers allows us to nest different comment regions.
 
 			When using region commenting, a region comment is terminated by the first matching closer. In order to support nesting of comment regions, it is necessary to use different opener and closer markers for the different regions.
 

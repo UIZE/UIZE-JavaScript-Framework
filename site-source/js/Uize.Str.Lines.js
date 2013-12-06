@@ -222,7 +222,8 @@ Uize.module ({
 							After the above code has executed, the value of the =indentRange= variable will be the object ={minValue:1,maxValue:3}=. The least indented non-whitespace line has one level of indentation, and the most indented non-whitespace line has three levels of indentation. What you'll notice from the above example is that the two blank lines are not considered when calculating the indent range, even though the one blank line's indent level would be =0= and the other blank line's indent level would be =4=.
 
 							VARIATION
-							..........................................................................							indentRangeOBJ = Uize.Str.Lines.getIndentRange (sourceSTR,indentCharsSTR);
+							..........................................................................
+							indentRangeOBJ = Uize.Str.Lines.getIndentRange (sourceSTR,indentCharsSTR);
 							..........................................................................
 
 							Not all multi-line strings with indentation will necessarily be indented using tab characters (although, of course, they should). Some may be indented using multiple spaces to represent a single level of indentation. It could be three spaces in a row, or four, or less, or more. The optional =indentCharsSTR= parameter lets you specify any sequence of characters that should be considered to represent a single level of indentation. Consider the following example...
