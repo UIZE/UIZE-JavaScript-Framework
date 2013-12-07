@@ -28,7 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Build.Util',
 		'Uize.Str.Lines',
-		'Uize.Str.Repeat'
+		'Uize.Str.Repeat',
+		'Uize.Services.FileSystem'
 	],
 	builder:function () {
 		'use strict';
@@ -45,11 +46,13 @@ Uize.module ({
 		return Uize.package ({
 			perform:function (_params) {
 				var
-					_searchParams = ((_params.moduleConfigs || {}) ['Uize.Build.Search']).presets [_params.preset],
+					_preset = _params.preset,
+					_searchParams = ((_params.moduleConfigs || {}) ['Uize.Build.Search']).presets [_preset],
 					_matcher = _searchParams.matcher,
 					_contextLines = Uize.toNumber (_params.contextLines,5),
 					_outputChunks = [],
-					_currentFolderPath
+					_currentFolderPath,
+					_fileSystem = Uize.Services.FileSystem.singleton ()
 				;
 				_matcher = new RegExp (
 					_matcher.source,
@@ -76,9 +79,10 @@ Uize.module ({
 							});
 						}
 						if (_matches) {
-							var _sourceFileLines = Uize.Str.Lines.split (
-								Uize.Str.Lines.switchIndentType (_sourceFileText,'\t','    ')
-							);
+							var
+								_sourceFileLines = Uize.Str.Lines.split (_sourceFileText),
+								_sourceFileLinesDeTabbed = []
+							;
 							_outputChunks.push (
 								_currentFolderPath + '/' + _sourceFileName + '\n' +
 
@@ -95,11 +99,28 @@ Uize.module ({
 												_matchEndLine = _endLineAndChar [0],
 												_startLine = Math.max (_matchStartLine - _contextLines,0),
 												_endLine = Math.min (_matchEndLine + _contextLines,_sourceFileLines.length - 1),
+												_matchStartChar = _startLineAndChar [1],
+												_matchEndChar = _endLineAndChar [1]
+											;
+											for (var _lineNo = _startLine - 1; ++_lineNo < _endLine + 1;) {
+												if (!_sourceFileLinesDeTabbed [_lineNo]) {
+													_sourceFileLinesDeTabbed [_lineNo] = 1;
+													_sourceFileLines [_lineNo] = _sourceFileLines [_lineNo].replace (/\t/g,'    ');
+												}
+											}
+											var
 												_lines = _sourceFileLines.slice (_startLine,_endLine + 1),
-												_separator = Uize.Str.Repeat.repeat (
-													'-',
-													Uize.max (Uize.map (_lines,'value.length'))
-												)
+												_maxMatchedLineLength = Uize.max (
+													Uize.map (
+														_sourceFileLines.slice (_matchStartLine,_matchEndLine + 1),
+														'value.length'
+													)
+												),
+												_maxShownLineLength = Uize.max (Uize.map (_lines,'value.length')),
+												_separator =
+													Uize.Str.Repeat.repeat ('-',_matchStartChar) +
+													Uize.Str.Repeat.repeat ('#',_matchEndChar - _matchStartChar + 1) +
+													Uize.Str.Repeat.repeat ('-',_maxShownLineLength - (_matchStartChar + _matchEndChar - _matchStartChar + 1))
 											;
 											return (
 												'LINE ' + _matchStartLine + ' (CHAR ' + _startLineAndChar [1] + ') -> LINE ' + _matchEndLine + ' (CHAR ' + _endLineAndChar [1] + ')\n' +
@@ -115,7 +136,7 @@ Uize.module ({
 																	_matchStartLine - _startLine,
 																	_matchEndLine - _startLine
 																)
-																	? '#|'
+																	? '>|'
 																	: ' |'
 															) + _line
 														); 
@@ -136,7 +157,9 @@ Uize.module ({
 					rootFolderPath:_params.rootFolderPath || _params.sourcePath,
 					logFilePath:null
 				});
-				console.log (_outputChunks.join ('\n'));
+				var _output = _outputChunks.join ('\n');
+				_fileSystem.writeFile ({path:'logs/search-' + _preset + '.log',contents:_output});
+				console.log (_output);
 			}
 		});
 	}
