@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Stretchy= class implements a widget with long and short views, and controls for toggling between them with an accompanying animation.
 
-		*DEVELOPERS:* `Jan Borgersen`, `Michael Cheng`
+		*DEVELOPERS:* `Lisa Nakano`, `Jan Borgersen`, `Michael Cheng`
 */
 
 Uize.module ({
@@ -34,7 +34,6 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_true = true,
 				_false = false,
 				_Uize_Node = Uize.Node
 			;
@@ -57,7 +56,83 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
+			_classPrototype.setState = function (_isExpanded) {
+				var _this = this;
+				_this._isExpanded = _isExpanded;
+				_this.changeState();
+			};
+
+			_classPrototype.changeState = function () {
+				var _this = this;
+				if (_this.isWired) {
+					var 
+						_shell = _this.getNode(),
+						_short = _this.getNode('short'),
+						_long = _this.getNode('long'),
+						_shortHeight = _Uize_Node.getCoords(_short).height,
+						_currentHeight = _Uize_Node.getCoords(_shell).height,
+						_longHeight = 0,
+						_showLong = function() {
+							_this.displayNode(_short,_false);
+							_this.displayNode(_long);
+							_longHeight = _longHeight || _Uize_Node.getCoords(_long).height;
+							_this.fade.start ({
+								startValue: _currentHeight,
+								endValue: _longHeight
+							});
+						},
+						_showShort = function() {
+							_longHeight = _longHeight || _Uize_Node.getCoords(_long).height;
+							if( !_shortHeight ) {
+								_this.displayNode(_short);
+								_shortHeight = _Uize_Node.getCoords(_short).height;
+								_this.displayNode(_short, _false);
+							}
+							_this.fade.start ({
+								startValue:_currentHeight,
+								endValue:_shortHeight
+							});
+						}
+					;
+					_Uize_Node.setStyle(_shell,{
+						height:_Uize_Node.getCoords(_shell).height,
+						overflow:'hidden'
+					});
+					_Uize_Node.setStyle([_short,_long],{
+						position:_this._positioning,
+						top:0,
+						left:0
+					});
+
+					if (_this._isExpanded)
+						_this.fire ({name:'Before Expand', handler:_showLong}).handled || _showLong();
+					else
+						_this.fire ({name:'Before Contract', handler:_showShort}).handled || _showShort();
+				}
+			};
+
 		/*** Public Instance Methods ***/
+			_classPrototype.updateUi = function () {
+				var _this = this;
+				if (_this.isWired) {
+
+					/*** massage heights to handle the dialog case where nothing was visible before ***/
+						var
+							_shell = _this.getNode(),
+							_short = _this.getNode('short'),
+							_long = _this.getNode('long')
+						;
+						_this.displayNode(_short, !_this._isExpanded);
+						_this.displayNode(_long, _this._isExpanded);
+						_Uize_Node.setStyle(_shell,{
+							height:_Uize_Node.getCoords(_this._isExpanded ? _long : _short).height,
+							overflow:'hidden'
+						});
+
+					_superclass.doMy (_this,'updateUi');
+				}
+			};
+
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
@@ -65,17 +140,14 @@ Uize.module ({
 						var
 							_shell = _this.getNode(),
 							_short = _this.getNode('short'),
-							_long = _this.getNode('long'),
-							_shortHeight = _Uize_Node.getCoords(_short).height,
-							_longHeight = 0;
-							_currentShownDiv = _short
+							_long = _this.getNode('long')
 						;
 						_Uize_Node.setStyle(_shell,{
 							height:_Uize_Node.getCoords(_shell).height,
 							overflow:'hidden'
 						});
 						_Uize_Node.setStyle([_short,_long],{
-							position:'absolute',
+							position:_this._positioning,
 							top:0,
 							left:0
 						});
@@ -85,48 +157,46 @@ Uize.module ({
 							'Changed.value':function (_event) {_Uize_Node.setStyle(_shell,{height:_event.newValue})},
 							Done:
 								function () {
-									if( _currentShownDiv == _short ) {
-										_this.displayNode(_long,_false);
-										_this.displayNode(_short);
-									}
+									_this.displayNode(_long, _this._isExpanded);
+									_this.displayNode(_short, !_this._isExpanded);
+									_this._isExpanded && 
+										_this.fire ('After Expand')
+									;
+									!_this._isExpanded && 
+										_this.fire ('After Contract')
+									;
 								}
 						});
 
-						var
-							_showLong = function (){
-								_this.displayNode(_short,_false);
-								_this.displayNode(_long);
-								_longHeight = _longHeight || _Uize_Node.getCoords(_long).height;
-								_currentShownDiv = _long;
-								_this.fade.start ({
-									startValue: _shortHeight,
-									endValue: _longHeight
-								});
-							},
-							_showShort = function (){
-								_currentShownDiv = _short;
-								_longHeight = _longHeight || _Uize_Node.getCoords(_long).height;
-								if( !_shortHeight ) {
-									_this.displayNode(_short);
-									_shortHeight = _Uize_Node.getCoords(_short).height;
-									_this.displayNode(_short, _false);
-								}
-								_this.fade.start ({
-									startValue:_longHeight,
-									endValue:_shortHeight
-								});
-							}
-						;
 						_this.wireNode ('expand', 'click',
-							function () {
-								_this.fire ({name:'Expand', handler:_showLong}).handled || _showLong();
+							function() {
+								_this._isExpanded = true;
+								_this.changeState();
 							}
 						);
-						_this.wireNode ('contract','click',_showShort);
+						_this.wireNode ('contract', 'click', 
+							function() {
+								_this._isExpanded = false;
+								_this.changeState();
+							}
+						);
 
 					_superclass.doMy (_this,'wireUi');
 				}
 			};
+
+		/*** State Properties ***/
+			_class.stateProperties ({
+				_positioning:{
+					name:'positioning',
+					value:'absolute'
+				},
+				_isExpanded:{
+					name:'isExpanded',
+					value:false,
+					onChange:_classPrototype.updateUi
+				}
+			});
 
 		return _class;
 	}

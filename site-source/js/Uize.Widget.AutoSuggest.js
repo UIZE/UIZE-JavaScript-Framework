@@ -105,14 +105,14 @@ Uize.module({
 					// When a suggestion is highlighted (eg hovered over), it is shown in the textbox.
 					// When no suggestions are highlighted, the original query will be shown.
 					'Changed.tentativeValue': function () {
-						m._showOnHover && _suggestionHoverHandler(m, _suggestions.get('tentativeValue'));
+						m._showOnHover && m._suggestionHoverHandler(_suggestions.get('tentativeValue'));
 					},
 
 					// When a suggestion is clicked, the value of this widget is set to the suggestion
 					// and we submit.
 					'Option Event': function (_event) {
 						if (_event.childEvent.name === 'Click') {
-							m._showOnHover || _suggestionHoverHandler(m, _suggestions.get('tentativeValue'));
+							m._showOnHover || m._suggestionHoverHandler(_suggestions.get('tentativeValue'));
 							m._canUpdateLastTypedQuery = _false;
 							m.set('focused', _true);
 							_fireSuggestionSelected(m, _event.childEvent.source);
@@ -165,7 +165,7 @@ Uize.module({
 					position: _tokens.splice(0, _index + 1).join('').length
 				};
 			}
-
+			
 			function _getNormalizedQuery (m, _tokenInfo) {
 				var _normalizedQuery = _tokenInfo && _trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ');
 				return _tokenInfo ?
@@ -275,7 +275,7 @@ Uize.module({
 								_nextSuggestion.fire('Over');
 							}
 							m._showOnMouseover ||
-									_suggestionHoverHandler(m, _suggestions.get('tentativeValue'));
+									m._suggestionHoverHandler(_suggestions.get('tentativeValue'));
 							// select a "hovered over" suggestion using enter or tab
 						} else if (
 							_suggestions.get('tentativeValue') &&
