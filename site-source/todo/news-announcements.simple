@@ -1,10 +1,30 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+NEW MODULE: Uize.Math.Blend
+	Still to do...
+
+	- finish documentation
+	- write news announcement
+
+NEW MODULE: Uize.Data.Flatten
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Math.LogicalPos
 	Still to do...
 
 	- implement fit and fill convenience methods
 	- write unit tests
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Build.Search
+	Still to do...
+
+	- finish implementation (see todo document for the module)
 	- write documentation
 	- write news announcement
 

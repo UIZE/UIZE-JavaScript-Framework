@@ -13,7 +13,7 @@ Node Level Defaults for Compound Curves and Quantization
 
 	Without this ability, if you wanted quantization to be 0 for opacity, but 1 for all other properties, you'd be forced to explicitly specify it for all those other properties. The alternative would be to specify quantization:1, but then you can't have 0 for opacity.
 
-Support Blend Amounts Outside of 0 to 1
+Fully Support Blend Amounts Outside of 0 to 1
 	Formally support specifying blend amounts outside of the range of =0= to =1=.
 
 	Currently, this is partially supported as a side effect of the implementation, but there is no specific handling for curve functions which do not support values outside of the range of =0= to =1=. For curve functions, there are two possible options...
