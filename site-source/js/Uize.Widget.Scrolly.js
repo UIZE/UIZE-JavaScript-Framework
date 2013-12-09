@@ -237,7 +237,7 @@ Uize.module ({
 								if (_shiftY) _properties._pageY = m._pageY + _shiftY * _factor;
 								m.set (_properties);
 							}
-						)
+						);
 					}
 					_addNavigationButton ('left',-1,0);
 						/*?

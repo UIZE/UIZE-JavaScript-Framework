@@ -25,66 +25,74 @@
 
 Uize.module ({
 	name:'Uize.Widget.DirectionalPad',
-	required:'Uize.Widget.Button',
+	required:[
+		'Uize.Widget.Button',
+		'Uize.Node.Classes'
+	],
 	builder:function (_superclass) {
 		'use strict';
+		
+		/*** Variables for Scruncher Optimization ***/
+			var
+				_Uize = Uize,
+				_Uize_Node_Classes = _Uize.Node.Classes
+			;
 
 		/*** Constructor ***/
 			var
-				_buttonDictionary = {
-					north:'North',
-					south:'South',
-					east:'East',
-					west:'West',
-					northeast:'Northeast',
-					northwest:'Northwest',
-					southeast:'Southeast',
-					southwest:'Southwest',
-					northEdge:'NorthEdge',
-					southEdge:'SouthEdge',
-					eastEdge:'EastEdge',
-					westEdge:'WestEdge',
-					northeastEdge:'NortheastEdge',
-					southeastEdge:'SoutheastEdge',
-					northwestEdge:'NorthwestEdge',
-					southwestEdge:'SouthwestEdge',
-					center:'Center'
-				},
-				_childrenInMini = {north:1,south:1,east:1,west:1},
+				_childrenInMini = {north:1,south:1,east:1,west:1,center:1},
 				_class = _superclass.subclass (
+					null,
 					function () {
-						var
-							_this = this
-						;
-
-						// add the four cardinal directions
-						for (var _name in _buttonDictionary)
-							_this._addChildButton (_name)
-						;
+						var _this = this;
+						if (!_this._useLinks) {
+							var
+								_Uize_Widget_Button = _Uize.Widget.Button,
+								_buttonDictionary = _this._buttonDictionary
+							;
+							_Uize.forEach(
+								_buttonDictionary,
+								function(_value, _key) {
+									_this.addChild (_key, _Uize_Widget_Button).wire (
+										'Click',
+										function (_event) {
+											_this.fire ({
+												name:'Move',
+												direction:_buttonDictionary [_key],
+												domEvent:_event.domEvent
+											});
+										}
+									);
+								}
+							);
+						}
 					}
 				),
 				_classPrototype = _class.prototype
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
-
-		/*** Public Instance Methods ***/
-
-		/*** Wiring Methods ***/
 			_classPrototype._updateUiMode = function () {
 				var
 					_this = this
 				;
-				if (_this.isWired) {
-					var
-						_children = _this.children
-					;
 
-					// this only works if we have just two modes.
-					for (var _child in _children)
-						_children [_child].displayNode ('', _this._mode == 'full' || _child in _childrenInMini )
-					;
+				if (_this.isWired) {
+					if (_this._useLinks) {
+						var _name, _buttonDictionary = _this._buttonDictionary;
+						for (_name in _buttonDictionary)
+							_this.web (_name).display(_this._mode == 'full' || _name in _childrenInMini)
+						;
+					} else {
+						var
+							_children = _this.children
+						;
+
+						// this only works if we have just two modes.
+						for (var _child in _children)
+							_children [_child].web().display(_this._mode == 'full' || _child in _childrenInMini )
+						;
+					}
 				}
 			};
 
@@ -92,27 +100,46 @@ Uize.module ({
 				var
 					_this = this,
 					_children = _this.children,
-					_enabled = _this.get ('enabled')
+					_enabled = _this.get ('enabled'),
+					_cssClassDisabledButton = _this._cssClassDisabledButton,
+					_buttonDictionary = _this._buttonDictionary,
+					_useLinks = _this._useLinks
 				;
 
 				// if enabled is an object then parse through and set the children enabled states
 				if (typeof _enabled == 'object') {
 					var
 						_default = _enabled.defaultValue === undefined || _enabled.defaultValue,
-						_children = _this.children,
 						_childName
 					;
 
-					for (_childName in _children) {
+					for (_childName in _buttonDictionary) {
 						var _childNameInEnabled = _childName in _enabled;
-						(_childNameInEnabled || _default !== undefined) && _children [_childName].set ({
-							enabled:_childNameInEnabled ? _enabled [_childName] : _default
-						});
+
+						if (_childNameInEnabled || _default !== undefined) {
+							var _childEnabled = _childNameInEnabled ? _enabled [_childName] : _default;
+
+							if (_useLinks) {
+								_Uize_Node_Classes.setState(_this.getNode (_childName), _cssClassDisabledButton, _childEnabled);
+							}
+							else
+								_children [_childName].set ({
+									enabled:_childEnabled
+								});
+						}
 					}
-				} else
-					Uize.callOn (_children,'set',[{enabled:_enabled}]);
+				} else {
+					if (_useLinks) {
+						var _buttonName;
+						for (_buttonName in _buttonDictionary) {
+							_Uize_Node_Classes.setState(_this.getNode (_buttonName), _cssClassDisabledButton, _enabled);
+						}
+					} else
+						Uize.callOn (_children,'set',[{enabled:_enabled}]);
+				}
 			};
 
+		/*** Wiring Methods ***/
 			_classPrototype.wireUi = function () {
 				var
 					_this = this
@@ -120,6 +147,27 @@ Uize.module ({
 
 				if (!_this.isWired) {
 					_this.wire ('Changed.enabled',function () { _this._updateUiEnabled () });
+
+					_this._useLinks &&
+						_Uize.forEach (
+							_this._buttonDictionary,
+							function (_direction, _name) {
+								_this.wireNode (
+									_name,
+									'click',
+									function (_event) {
+										(_this.get ('enabled') || _this.get ('enabledInherited')) &&
+											_this.fire ({
+												name:'Move',
+												direction:_direction,
+												domEvent:_event
+											})
+										;
+									}
+								);
+							}
+						)
+					;
 
 					_superclass.doMy (_this,'wireUi');
 				}
@@ -136,6 +184,29 @@ Uize.module ({
 
 		/*** State Properties ***/
 			_class.stateProperties ({
+				_buttonDictionary:{
+					name:'buttonDictionary',
+					value:{
+						north:'North',
+						south:'South',
+						east:'East',
+						west:'West',
+						northeast:'Northeast',
+						northwest:'Northwest',
+						southeast:'Southeast',
+						southwest:'Southwest',
+						northEdge:'NorthEdge',
+						southEdge:'SouthEdge',
+						eastEdge:'EastEdge',
+						westEdge:'WestEdge',
+						northeastEdge:'NortheastEdge',
+						southeastEdge:'SoutheastEdge',
+						northwestEdge:'NorthwestEdge',
+						southwestEdge:'SouthwestEdge',
+						center:'Center'
+					}
+				},
+				_cssClassDisabledButton:'cssClassDisabledButton',
 				_mode:{
 					name:'mode',
 					onChange:_classPrototype._updateUiMode,
@@ -163,7 +234,13 @@ Uize.module ({
 
 								The =enabled= property object value is a dictionary whose keys are either 'defaultValue' or the names of the =Uize.Widget.DirectionalPad= instance's child widgets. If the child widget is not mentioned in the dictionary, then its value will be set to whatever is specified by 'defaultValue'. If 'defaultValue' is undefined then the child widget's enabled state will not change.
 					*/
-				}
+				},
+				_useLinks:'useLinks'
+				/*?
+					State properties
+						useLinks
+							A boolean used by the omegastructor and wireUi methods to determine whether to use child button widgets or links for the sub-actions.
+				*/
 			});
 
 			return _class;

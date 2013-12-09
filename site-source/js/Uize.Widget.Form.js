@@ -32,7 +32,8 @@ Uize.module ({
 		'Uize.Widget.FormWarnings',
 		'Uize.Widget.Button',
 		'Uize.Node',
-		'Uize.Node.Event'
+		'Uize.Node.Event',
+		'Uize.Data'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -67,10 +68,16 @@ Uize.module ({
 					function () {
 						var
 							_this = this,
-							_committer = _this.addChild('committer', _Uize_Widget.Committer, {watchedProperties:{}}),
+							_committer = _this.addChild(
+								'committer',
+								_Uize_Widget.Committer,
+								{
+									watchedProperties:{},
+									ignoreDisabled:_true
+								}
+							),
 							_formWarnings = _this.addChild('formWarnings', _Uize_Widget.FormWarnings, {watchedElements:[]}),
-							_elements = _this.addChild('elements', _Uize_Widget.FormElements),
-							_undefined
+							_elements = _this.addChild('elements', _Uize_Widget.FormElements)
 						;
 
 						// Save private instance references
@@ -86,7 +93,7 @@ Uize.module ({
 
 									_childElement.wire({
 										'Changed.isDirtyInherited':function (_event) {
-											_event.newValue && _this.set({_isDirty:_true})
+											_event.newValue && _this.set({_isDirty:_true});
 										},
 										Ok:function () { _this._submit() },
 										'Changed.focused':function (_event) {
@@ -94,28 +101,49 @@ Uize.module ({
 											// will prepopulate fields, but it doesn't fire onChange events for
 											// each field.  So when we blur a text field, we ensure that all of the
 											// programmatic values for fields match the DOM values
-											!_event.newValue
-												&& _this._foreachElement(
+											if (!_event.newValue)
+												_this._foreachElement(
 													function (_element, _elementName, _elementIsForm) {
 														if (!_elementIsForm) {
 															var _nodeValue = _element.getNodeValue('input');
 
 															_nodeValue !== _undefined
 																&& _element.valueOf() != _nodeValue
+																&& _element.get('placeholder') != _nodeValue
 																&& _element.set({value:_nodeValue})
 															;
 														}
 													}
+												);
+											else // see note below for Changed.tentativeValue
+												_this.set({_isSubmitting:_false});
+										},
+										'Changed.tentativeValue':function() {
+											_this.set({
+												_isSubmitting:_false,
+
+												// NOTE: in order to support async validation, we could no longer set isSubmitting to false
+												// if isValid was false, which means that there was nothing setting isSubmitting to false after
+												// clicking the submit. This means that you could run into a case where you submit and invalid form,
+												// get the warnings, fix the values and the form auto-submits.
+												_tentativeValue:_Uize.copy(
+													_this._tentativeValue,
+													_Uize.pairUp(_childElement.get('name'), _childElement.get('tentativeValue'))
 												)
-											;
+											});
 										}
 									});
 
-									// if form widget is added as child of another form, then it can't be using normal
-									// submit since it's part of a bigger form
-									_childElement.isForm
-										&& _childElement.set({_useNormalSubmit:_false})
-									;
+									if (_childElement.isForm) {
+										// if form widget is added as child of another form, then it can't be using normal
+										// submit since it's part of a bigger form
+										_childElement.set({_useNormalSubmit:_false});
+										
+										_childElement.wire(
+											'Changed.isSubmitting',
+											function (_event) { _event.newValue && _this._submit() }
+										);
+									}
 
 									_formWarnings.addWatchedElements(_childElement);
 
@@ -128,7 +156,7 @@ Uize.module ({
 							);
 
 						// Wire committer
-							function _updateValue() { _this._updateValue() }
+							function _updateValue () { _this._updateValue() }
 
 							_committer.wire({
 								'Changed.committedValues':_updateValue,
@@ -154,7 +182,7 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._addChildElement = function (_elementName, _elementClass, _elementProperties) {
-				return this._elements.addChild(_elementName, _elementClass, _elementProperties)
+				return this._elements.addChild(_elementName, _elementClass, _elementProperties);
 			};
 
 			_classPrototype._foreachElement = function (_function) {
@@ -197,14 +225,6 @@ Uize.module ({
 
 				_this._foreachElement(  function (_element) { _element.restore()} );
 				_this._committer[_committerMethod]();
-			};
-
-			_classPrototype._submit = function () {
-				this.set({
-					_isDirty:_true,
-					_isFinished:_true,
-					_isSubmitting:!this._okToSubmit
-				})
 			};
 
 			_classPrototype._updateSummaryStateProperties = function () {
@@ -256,22 +276,34 @@ Uize.module ({
 
 				if (_this.isWired) {
 					if (_formWarnings) {
-						// hide any server warnings if we're showing the client-side warnings
-						_warningShown && _this.isWired
-							&& _this.displayNode('serverWarnings', _false);
-
 						_formWarnings.set({shown:_warningShown});
+
+						if (_warningShown && _this.isWired) {
+						// hide any server warnings if we're showing the client-side warnings
+							_this.displayNode('serverWarnings', _false);
+							
+							if (_this._scrollToWarnings) {
+								var _formWarningsRootNode = _formWarnings.getNode();
+								
+								_formWarningsRootNode
+									&& Uize.require(
+										'Uize.Fx.Scroll',
+										function(_Uize_Fx_Scroll) { _Uize_Fx_Scroll.scrollToNode(_formWarningsRootNode) }
+									)
+								;
+							}
+						}
 					}
 				}
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.addForm = function (_formName, _formClass, _formProperties) {
-				return this._addChildElement(_formName, _formClass || _Uize_Widget.Form, _formProperties)
+				return this._addChildElement(_formName, _formClass || _Uize_Widget.Form, _formProperties);
 			};
 
 			_classPrototype.addFormElement = function (_formElementName, _formElementClass, _formElementProperties) {
-				return this._addChildElement(_formElementName, _formElementClass || _Uize_Widget.FormElement, _formElementProperties)
+				return this._addChildElement(_formElementName, _formElementClass || _Uize_Widget.FormElement, _formElementProperties);
 			};
 
 			// NOTE: can be overidden by subclasses
@@ -281,10 +313,12 @@ Uize.module ({
 					_isEmpty = _true
 				;
 
-				for (var _elementName in _elements) {
-					if (!_elements[_elementName].get('isEmpty')) {
-						_isEmpty = _false;
-						break;
+				if (_elements) {
+					for (var _elementName in _elements) {
+						if (!_elements[_elementName].get('isEmpty')) {
+							_isEmpty = _false;
+							break;
+						}
 					}
 				}
 
@@ -321,13 +355,42 @@ Uize.module ({
 
 			_classPrototype.clear = function () { this._restore('clearAll') };
 
-			_classPrototype.getFormElement = function (_elementName) {
-				return this._elements.children[_elementName]
+			_classPrototype.getFormElement = function(_elementName) {
+				var _formElement;
+				
+				if (this._elements) {
+					var _elementsChildren = this._elements.children;
+					
+					_formElement = _elementName == _undefined
+						? _Uize.values(_elementsChildren)
+						: _elementsChildren[_elementName]
+					;
+				}
+				
+				return _formElement;
+			};
+			
+			_classPrototype.removeFormElement = function(_elementName) {
+				var
+					_this = this,
+					_formElement = _this.getFormElement(_elementName)
+				;
+				
+				if (_formElement) {
+					_formElement.removeUi();
+					_this._elements.removeChild(_formElement);
+				}
 			};
 
-			_classPrototype.reset = function () { this._restore('restoreInitial') };
+			_classPrototype.reset = _classPrototype.restore = function () { this._restore('restoreInitial') };
 
-			_classPrototype.submit = _classPrototype._submit;
+			_classPrototype.submit = _classPrototype._submit = function () {
+				this.set({
+					_isDirty:_true,
+					_isFinished:_true,
+					_isSubmitting:!this._okToSubmit
+				});
+			};
 
 			_classPrototype.updateUi = function () {
 				var _this = this;
@@ -342,7 +405,7 @@ Uize.module ({
 			};
 
 			_classPrototype.validate = _classPrototype._validate = function () {
-				this.set({_isValid:this._committer.get('allValid')})
+				this.set({_isValid:this._committer.get('allValid')});
 			};
 
 			_classPrototype.wireUi = function () {
@@ -366,7 +429,7 @@ Uize.module ({
 								_formNode,
 								'submit',
 								function (_event) {
-									Uize.Node.Event.preventDefault(_event);
+									Uize.Node.Event.abort(_event);
 									// NOTE: this will fire before any events on the form elements
 									// to sync their values
 									_this._submit();
@@ -417,52 +480,53 @@ Uize.module ({
 				},
 				_isFinished:{
 					name:'isFinished',
-					onChange:function () {
-						var _this = this;
+					onChange:[
+						function () {
+							var _this = this;
 
-						if (_this._isFinished) {
-							_this._validateWhen == _finished
-								&& _this._validate();
-							!_this._finishedAtLeastOnce && _this._isInitialized
-								&& _this.set({_finishedAtLeastOnce:_true});
-						}
-
-						_this._checkWarningShown();
-					},
+							if (_this._isFinished) {
+								_this._validateWhen == _finished
+									&& _this._validate();
+								!_this._finishedAtLeastOnce && _this._isInitialized
+									&& _this.set({_finishedAtLeastOnce:_true});
+							}
+							else
+								_this.set({_finishedAtLeastOnce:_false})
+							;
+						},
+						_classPrototype._checkWarningShown
+					],
 					value:_true
 				},
 				_isSubmitting:{
 					name:'isSubmitting',
-					onChange:function () {
-						var _this = this;
+					onChange:[
+						function () {
+							var _this = this;
 
-						_this._isSubmitting
-							&& _this._committer
-							&& _this._committer.commit()
-						;
-
-						// do we still need this??
-						_this._isValid == _false
-							&& _this.set({_isSubmitting:_false})
-						;
-
-						_this._checkWarningShown();
-						_this._updateSummaryStateProperties();
-					},
+							_this._isSubmitting
+								&& _this._committer
+								&& _this._committer.commit()
+							;
+						},
+						_classPrototype._checkWarningShown,
+						_classPrototype._updateSummaryStateProperties
+					],
 					value:_false
 				},
 				_isValid:{
 					name:'isValid',
-					onChange:function () {
-						var _this = this;
+					onChange:[
+						function () {
+							var _this = this;
 
-						// if the form is invalid then we are no longer submitting
-						_this._isValid == _false
-							&& _this.set({_isSubmitting:_false});
-
-						_this._checkWarningShown();
-						_this._updateSummaryStateProperties();
-					},
+							// if the form is invalid then we are no longer submitting
+							_this._isValid == _false
+								&& _this.set({_isSubmitting:_false});
+						},
+						_classPrototype._checkWarningShown,
+						_classPrototype._updateSummaryStateProperties
+					],
 					value:_false
 				},
 				_method:{
@@ -482,9 +546,20 @@ Uize.module ({
 					},
 					value:_false
 				},
+				_scrollToWarnings:{
+					name:'scrollToWarnings',
+					value:_true
+				},
 				_target:{
 					name:'target',
 					onChange:_classPrototype._updateFormAttributes
+				},
+				_tentativeValue:{	// readonly
+					name:'tentativeValue',
+					conformer:function(_tentativeValue) {
+						return _Uize.Data.identical(_tentativeValue, this._tentativeValue) ? this._tentativeValue : _tentativeValue;
+					},
+					value:_null
 				},
 				_useNormalSubmit:{
 					name:'useNormalSubmit',
@@ -496,27 +571,36 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
+					conformer:function(_value) {
+						return _Uize.Data.identical(_value, this._value) ? this._value : _value;
+					},
 					onChange:function () {
-						var
-							_this = this,
-							_elements = _this._elements.children,
-							_value = _this._value || {}
-						;
-
-						for (var _fieldName in _value) {
-							var _element = _elements[_fieldName];
-
-							_element	// can we assume field name and widget name are the same?
-								&& _element.set({value:_value[_fieldName]});
+						var _this = this;
+						
+						_this.set({_tentativeValue:_Uize.clone(_this._value)});
+						
+						if (_this._elements) {
+							var
+								_elements = _this._elements.children,
+								_value = _this._value || {}
+							;
+	
+							for (var _fieldName in _value) {
+								var _element = _elements[_fieldName];
+	
+								_element	// can we assume field name and widget name are the same?
+									&& _element.set({value:_value[_fieldName]});
+							}
+	
+							_this.set({
+								_isSubmitting:_false,
+								_isFinished:_false,
+								_isEmpty:_this.checkIsEmpty()
+							});
+	
+							_this._validateWhen == _valueChanged
+								&& _this._validate();
 						}
-
-						_this.set({
-							_isFinished:_false,
-							_isEmpty:_this.checkIsEmpty()
-						});
-
-						_this._validateWhen == _valueChanged
-							&& _this._validate();
 					}
 				},
 				_warningAllowed:{
@@ -526,7 +610,7 @@ Uize.module ({
 							_this = this,
 							_parentForm = _this._getParentForm(),
 							_warningAllowed = _this._warningAllowed == 'inherit'
-								? (_parentForm ? _parentForm.get('allowWarningsInherited') : _true)
+								? (_parentForm ? _parentForm.get('warningAllowedInherited') : _true)
 								: _this._warningAllowed
 						;
 
@@ -541,12 +625,14 @@ Uize.module ({
 				},
 				_warningShown:{
 					name:'warningShown',
-					onChange:function () {
-						var _this = this;
-
-						_this._foreachElement( function (_element) { _element.checkWarningShown() } );
-						_this._updateUiWarning();
-					},
+					onChange:[
+						function () {
+							var _this = this;
+	
+							_this._foreachElement( function(_element) { _element.checkWarningShown() } );
+						},
+						_classPrototype._updateUiWarning
+					],
 					value:_false
 				},
 				_warningShownWhen:{

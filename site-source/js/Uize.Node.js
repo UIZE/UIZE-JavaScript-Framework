@@ -1027,7 +1027,7 @@ Uize.module ({
 					var
 						_isInnerReplace, _isOuterReplace, _isInnerTop, _isOuterTop, _isOuterBottom, _isInnerBottom,
 						_areNodes =
-							_Uize.isArray (_htmlToInject) ||
+							_Uize.isList (_htmlToInject) ||
 							(_isNode (_htmlToInject) && (_htmlToInject = [_htmlToInject]))
 					;
 					(
@@ -1068,8 +1068,14 @@ Uize.module ({
 									} else
 										_node.innerHTML = '';
 								if (_areNodes) {
-									for (var _nodeNo = -1, _nodesLength = _htmlToInject.length; ++_nodeNo < _nodesLength;)
-										_nodesToInject.push (_htmlToInject [_nodeNo].cloneNode (_true));
+									for (var _nodeNo = -1, _nodesLength = _htmlToInject.length; ++_nodeNo < _nodesLength;) {
+										var _nodeToInject = _htmlToInject [_nodeNo];
+										if (_nodeToInject) {
+											if (_nodeToInject.parentNode)
+												_nodeToInject = _nodeToInject.cloneNode (_true);
+											_nodesToInject.push (_nodeToInject);
+										}
+									}
 								}
 								else {
 									// IE is "special" in that it has nodes that don't accept innerHTML, so the solution to parse

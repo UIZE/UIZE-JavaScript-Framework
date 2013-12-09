@@ -93,7 +93,11 @@ Uize.module ({
 				_pResizer = _privatesNamespace + 'resizer',
 				_pResizerInitialized = _privatesNamespace + 'resizerInitialized',
 				_pCreateResizerIfNecessary = _privatesNamespace + 'createResizerIfNecessary',
-				_pInitializeResizerNodesIfNecessary = _privatesNamespace + 'initializeResizerNodesIfNecessary'
+				_pInitializeResizerNodesIfNecessary = _privatesNamespace + 'initializeResizerNodesIfNecessary',
+				_true = true,
+				_false = false,
+				_Uize = Uize,
+				_Uize_Node = _Uize.Node
 			;
 
 		var _classPrototype = _class.prototype;
@@ -110,7 +114,7 @@ Uize.module ({
 							'resizer',
 							Uize.Widget.Resizer,
 							{
-								constrain:false,
+								constrain:_false,
 								minHeight:0,
 								minWidth:150
 							}
@@ -192,7 +196,7 @@ Uize.module ({
 			_classPrototype [_pInitializeResizerNodesIfNecessary] = function () {
 				var _this = this;
 				if (_this.isWired && _this.resizable && !_this [_pResizerInitialized]) {
-					_this [_pResizerInitialized] = true;
+					_this [_pResizerInitialized] = _true;
 					_this [_pResizer].set ({
 						areaNodes:[_this.getNode ()],
 						nodeMap:{
@@ -203,9 +207,75 @@ Uize.module ({
 				}
 			};
 
+			_classPrototype._updateMaximizeUi = function () {
+				var 
+					_this = this,
+					_maximize = _this.children.maximize,
+					_restore = _this.children.restore,
+					_isMaximized =_this.get('isMaximized')
+				;
+
+				_maximize && _maximize.displayNode('', !_isMaximized);
+				_restore && _restore.displayNode('', _isMaximized);
+				
+			};
+
 		/*** implement hook methods ***/
-			_classPrototype.atEndOfOmegaStructor = function () {this [_pCreateResizerIfNecessary] ()};
-			_classPrototype.afterWireUi = function () {this [_pInitializeResizerNodesIfNecessary] ()};
+			_classPrototype.atEndOfOmegaStructor = function () {
+				var _this = this;
+
+				_this.addChild('maximize', _Uize.Widget.Button).wire('Click', function() {_this.set({isMaximized:_true})});
+				_this.addChild('restore', _Uize.Widget.Button).wire('Click', function() {_this.set({isMaximized:_false})});
+
+				_this [_pCreateResizerIfNecessary] ();
+			};
+			_classPrototype.afterWireUi = function () {
+				var _this = this;
+				_this.wireNode(window, 'resize', function () {
+					//This will resize the dialog to fit the screen if it is already maximized
+					_this.get('isMaximized') && _this.updateUiDimsIfShown();
+				});
+
+				_this._updateMaximizeUi();
+
+				_this [_pInitializeResizerNodesIfNecessary] ();
+
+			};
+
+			_classPrototype.updateUiDimsIfShown = function () {
+				var 
+					_this = this,
+					_nodeToSetDimension = _this.get('nodeToSetDimension')
+				;
+				if (_this.isWired && _this.get('shown') && !_this.get('inDrag')) {
+					if (!_this.get('isMaximized')) {
+						_this.setNodeStyle(_nodeToSetDimension, { width: _this.get('width'), height: _this.get('height') });
+						//_this.setNodeStyle('', { width: _this.get('width') });
+					} else {
+						var
+							_contentDims = _Uize_Node.getDimensions(_this.getNode(_nodeToSetDimension)),
+							_rootDims = _Uize_Node.getDimensions(_this.getNode()),
+							_windowCoords = _Uize_Node.getCoords(window)
+						;
+						_this.setNodeStyle(
+							'',
+							{
+								top: window.pageYOffset,
+								left: 0,
+								height: 'auto',
+								width:'auto'
+							}
+						);
+						_this.setNodeStyle(
+							_nodeToSetDimension,
+							{
+								width: _windowCoords.width - (_rootDims.width - _contentDims.width),
+								height: _windowCoords.height - (_rootDims.height - _contentDims.height)
+							}
+						);
+					}
+				}
+			};
 
 		/*** State Properties ***/
 			_class.stateProperties ({
@@ -218,7 +288,7 @@ Uize.module ({
 						;
 						_this [_pCreateResizerIfNecessary] ();
 						_this [_pInitializeResizerNodesIfNecessary] ();
-						_resizer && _resizer.set ({enabled:_this.resizable ? 'inherit' : false});
+						_resizer && _resizer.set ({enabled:_this.resizable ? 'inherit' : _false});
 					}
 					/*?
 						State Properties
@@ -229,6 +299,23 @@ Uize.module ({
 
 								NOTES
 								- the initial value is =undefined= (equivalent to =false=)
+					*/
+				},
+				isMaximized: {
+					name: 'isMaximized',
+					onChange: [
+						'updateUiDimsIfShown',
+						_classPrototype.updateUiPositionIfShown,
+						_classPrototype._updateMaximizeUi
+					],
+					value: _false
+					/*?
+						State Properties
+							isMaximized
+								A boolean, specifying whether or not the dialog is maximized.
+
+								NOTES
+								- the initial value is =false=
 					*/
 				}
 			});

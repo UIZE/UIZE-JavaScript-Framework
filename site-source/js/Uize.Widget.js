@@ -1598,7 +1598,7 @@ Uize.module ({
 										- see also the =getProvider=, =getInherited=, and =setInherited= instance methods
 							*/
 						},
-
+						
 						childId:function (_childName) {
 							return _constructIdPrefix (this._idPrefix, this._idPrefix, _childName, this._idPrefixConstruction);
 							/*?
@@ -1620,7 +1620,6 @@ Uize.module ({
 
 										NOTES
 										- See related =addChild= instance method in =Uize.Widget=
-										- See also =Uize.Widget.constructIdPrefix= static method
 							*/
 						},
 
