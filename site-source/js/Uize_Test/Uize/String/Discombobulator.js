@@ -1,40 +1,34 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Math.LogicalCoords Package
+|    /    O /   |    MODULE : Uize.Test.Uize.String.Discombobulator Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2005-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
 
 /* Module Meta Data
-	type: Package
-	importance: 2
+	type: Test
+	importance: 1
 	codeCompleteness: 100
-	docCompleteness: 2
+	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Math.LogicalCoords= module provides methods for finding matching elements in arrays or matching properties in objects.
+		The =Uize.Test.Uize.String.Discombobulator= module defines unit tests to verify that the deprecated =Uize.String.Discombobulator= module is still supported and is a reference to the newer =Uize.Str.Discombobulator= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Math.LogicalCoords',
+	name:'Uize.Test.Uize.String.Discombobulator',
 	builder:function () {
 		'use strict';
 
-		return Uize.package ({
-			getAbsoluteCoords:function (_rectCoords,_logicalCoords,_portCoords,_sizing) {
-			},
-
-			getLogicalCoords:function (_rectCoords,_portCoords,_sizing) {
-			}
-		});
+		return Uize.Test.moduleAliasTest ('Uize.String.Discombobulator','Uize.Str.Discombobulator');
 	}
 });
 

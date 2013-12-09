@@ -51,9 +51,7 @@ Uize.module ({
 			if (typeof navigator != 'undefined') {
 				var _ieMajorVersion = _Uize_Node.ieMajorVersion;
 				_hasStickyDragIssue = _isIe && _ieMajorVersion < 9;
-				_useFixedPositioningForShield =
-					(!_isIe || _ieMajorVersion > 6) && navigator.userAgent.indexOf ('Firefox/2') < 0
-				;
+				_useFixedPositioningForShield = !_isIe || _ieMajorVersion > 6;
 			}
 
 		/*** Class Constructor ***/
@@ -336,6 +334,7 @@ Uize.module ({
 							_Uize_Node.wire (window,'resize',function () {_class.resizeShield (_dragShield)})
 						;
 					}
+
 					_this.wire ({'Changed.enabledInherited':function () {_this._updateUiCursor ()}});
 
 					_superclass.doMy (_this,'wireUi');

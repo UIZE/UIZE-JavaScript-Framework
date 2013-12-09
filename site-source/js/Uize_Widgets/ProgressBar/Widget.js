@@ -36,6 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.ProgressBar.Widget',
 	superclass:'Uize.Widget.Bar',
 	required:[
+		'Uize.Widget.V2Mixin',
 		'Uize.Widgets.ProgressBar.Html',
 		'Uize.Widgets.ProgressBar.Css',
 		'Uize.Template'
@@ -43,7 +44,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		return _superclass.subclass ({
+		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
 			stateProperties:{
 				_displayedStatusText:{
 					name:'displayedStatusText',

@@ -202,8 +202,10 @@
 					'Uize.Util'
 					'Uize.Util.Coupler'
 					'MyNamespace.MyModule1',
-					'Uize.Cuve',
-					'Uize.String',
+					'Uize.Curve',
+					'Uize.Str.Replace',
+					'Uize.Str.Split',
+					'Uize.Str.Trim'
 					'Uize.Template'
 					'MyNamespace.MyModule2',
 					'Uize.Array',

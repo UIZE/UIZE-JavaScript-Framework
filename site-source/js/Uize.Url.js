@@ -1012,7 +1012,7 @@ Uize.module ({
 								]);
 								......................................
 
-								This variation is powerful in that it allows you to write functions that can accept a single URL parameter, where that parameter's value may be a string, *or* an array containing a string path and params objects - and a single call to the =Uize.Url.resolve= method will resolve it to a string for the benefit of your functions' implementation code.
+								This variation is powerful in that it allows us to write functions that can accept a single URL parameter, where that parameter's value may be a string, *or* an array containing a string path and params objects - and a single call to the =Uize.Url.resolve= method will resolve it to a string for the benefit of your functions' implementation code.
 
 								VARIATION 3
 								......................................................................

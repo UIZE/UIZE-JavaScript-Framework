@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Tooltip.KeysValues.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Tooltip.KeysValues.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

@@ -1,0 +1,433 @@
+This is an in-progress, straw man proposal for a set of overarching principles for user interface design.
+
+Treat Mobility, Touch-ability, Device Capabilities, and Form Factors Separately
+	Effective UI needs to be developed for situations with different combinations of mobility, touch-ability, capabilities, and form factors.
+
+	It is easy to fall into the trap of conflating these four qualities. It is also helpful to not segregate UI into camps of desktop versus mobile, since there is considerable variety even within such camps and many devices that break the mold. For example, a tablet device can be a mobile device with mobile network connectivity but is not a small form factor device like a smart phone. Similarly, a tablet device may not support mobile network connectivity. Some desktop and notebook computers have touch displays and support a touch interface. Different devices have different levels of capability. Many devices may have front-facing cameras, audio input and output. Only some devices have GPS, compass, accelerometer, and other such capabilities. In the future, speech control as an input mode will be added to the list of factors to consider when designing UI.
+
+	Because of this variety of different combinations of different qualities, UI guidelines are drafted separately to address mobility, touch-ability, device capabilities, and different form factors.
+
+UI Consistency
+	The user interface for all of the company's product offerings must be kept consistent over time.
+
+	Brand Aesthetic
+		The user interface should achieve a consistent high quality user experience across all products and should strengthen the brand aesthetic of the company.
+
+	Ways to Achieve Consistency
+		UI Style Guide
+			The most fundamental way to ensure consistency of user interface across diverse product offerings, implemented using diverse technologies, and developed by diverse groups, is to develop a UI style guide that can guide UI design decisions in every project.
+
+			The UI style guide would provide the necessary dictates for the development of UI, such that if those dictates were adhered to, the resulting UI would be consistent across all product offerings and technologies.
+
+			UI Style Guide Extends General Style Guide
+
+				The UI style guide would be an extension of the general style guide for the company, which would ensure a consistent design across all materials and products including…
+
+				- packaging for physical products
+				- marketing collateral and promotional materials
+				- company stationary / letterheads
+				- digital media, such as tutorials and training videos, advertisements
+				- company swag
+				- software UI
+				- etc.
+
+		Shareable Code
+			UI consistency can be achieved as an artifact of code reuse by developing and offering standard libraries of UI widgets for different technologies as part of a UI platform to be used in developing various products for those different technologies.
+
+			In order to encourage developers to use the standard libraries, a good inducement is if using the standard libraries both meets their criteria and makes development easier upfront while also making maintenance easier over the long term. If developers shy away from using standard libraries, then it indicates a failure in the design of the standard libraries.
+
+		Standardized UI Elements
+			One can support consistency by defining standard UI elements upfront.
+
+			Definitions should be formalized for all UI elements likely to be needed at some point, including buttons, checkboxes, headings, panels, radio buttons, text inputs, drop lists, tabs, etc. In the absence of detailed definitions for all these elements that cover the different situations in which they will arise, developers will apply their own creativity to get the job done. With enough "creativity" being applied on a case-by-case basis, one will end up with a mishmash of different stylistic treatments.
+
+			A perfect example of creativity being applied is when it comes to buttons. How many different stylistic treatments of buttons does one need? How many different sizes can buttons have? How many different states can a button have? How many different colors can a button be? In the case of buttons, try to limit the set of variations and know why they need to exist and have a rules for deciding which of the standard treatments should be used in different situations.
+
+	Logo Always Visible
+		Every app on every device should allocate space in a prominent location for placement of the company's logo, so that it is persistently visible.
+
+		It is reasonable to locate the logo towards the top of the UI - left or center. A possibly exception to this rule might be company branded hardware, where the logo is on the physical device. One could still argue, however, that in such hardware devices the logo on the physical case of the device is so peripheral that it is easily filtered out by the user. If the logo is visible within the interactive portion of the device (ie. its UI / display), the brand promotion effect should be stronger. Also, if the same software runs in company branded and non-branded hardware, then conditionally displaying the logo in the UI might present problems of what to use the allocated screen real estate for when the logo is not present. Essentially, it's simpler, more consistent, and more beneficial to the company to simply always have the logo appear in the UI.
+
+	Be Consistent With Language
+		The UI should use language in a consistent way.
+
+		Be Consistent With Active vs Passive Style
+			The UI should be consistent with its use of active style (eg. "Change Settings") vs passive style (eg. "Settings").
+
+			For example, if buttons are to use a "call to action" / verb / action phrase style of language, then this style should be used consistently. There shouldn't be some buttons with labels like "Set Call Forwarding Rules" and other buttons with labels like "Music on Hold". The same principle applies to section headings. Passive language is recommended for section headings, while active language is recommended for buttons and links that perform actions when invoked. To use an example, a section that addresses call forwarding rules can be labeled "Call Forwarding Rules", while a button that may bring up UI for changing the rules can be labeled "Edit Call Forwarding Rules", "Change Call Forwarding Rules", "Set Call Forwarding Rules", etc.
+
+		Use Terms Consistently
+			Terms introduced to the user should be used consistently to reinforce their learned understanding of those terms.
+
+			For example, if a section is titled "Music On Hold", a button in that section should not be labeled "Set On Hold Music" or "Change Music While Holding". A user should not have to wonder whether "music on hold" means the same as "on hold music" means the same as "audio on hold" means the same as "music while waiting". The user is already overwhelmed enough as it is by terms they may not deal with on a daily basis, so to remove doubts from their minds about what instructions in the UI may be referring to, be religious about using exactly the same term everywhere to refer to the same thing.
+
+		Establish Standardized Words / Phrases
+			Just as it is useful to `use terms consistently`, it is also useful to established standardized words or phrases with which the user can become familiar.
+
+			One should consistently use the same word / phrase for substantially equivalent actions across all products and all parts of products. So, for example, if one is going to have a bunch of different dialogs in the app for modifying different types of settings, settle on a word like "save" for the save button. Don't use "save" in some places and "done" or "submit" or "finished" or "apply" or "set" in other places. In a link alongside settings that might bring up a dialog for editing the settings, don't use "edit" in one place and "modify" or "change" in other places. In places with links for showing more information, don't use "more..." in one place and then "more info..." or "further details..." in other places - settle on a standard phrase for such links. The same applies to "delete" vs "remove".
+
+			In general, establish a lexicon of standard phrases, just in the same way one would establish a set of standard visual designs for common controls.
+
+		Be Consistent in Tone
+			Establish a tone for the organization that can be applied consistently throughout the UI.
+
+			There should be an understanding of what the intended tone, such as playful, casual, matter of fact, professional / businesslike, etc. Without formal guidance, the tone of language will be inconsistent across different products. It's possible that a single tone may not be viable if the products or audiences are too diverse, but any variance in tone should be deliberate / by design rather than as an accidental consequence of the changing mix of personalities of different product managers, visual designers, engineers, etc. involved in different products at different times.
+
+		Create a Language Style Guide
+			The rules of language use in applications should be governed by a formalized language style guide.
+
+			Following the language style guide will help to achieve a consistent voice throughout the different applications and different parts of the applications. The language style guide can provide grammatical guidelines, a lexicon of standardized words and phrases, guidelines on tone, etc.
+
+High Performance
+	Progressive Loading & Construction
+		The cost associated with building UI for features of an application should be deferred until those features are invoked by the user.
+
+		Deferred Loading Best Suited to Web Apps
+			As it applies to compiled applications, the loading of the code and resources is hard to defer as these are typically compiled into the app and the cost of fetching those resources across the network as needed can hurt the user experience.
+
+			On the flip side, an application that is built using Web technologies and that is delivered to the user over the network will suffer a generally worse user experience if the entire app and resources needed by all its features are packaged into a single package and sent over the network. For Web apps, whether delivered to desktop, notebook, or mobile devices, resources for features should be packaged and delivered only when needed. In order to improve the performance of progressive loading, the number of HTTP requests should be reduced - ideally down to a single package - this is possible with inlining of images in CSS, and subsequent wrapping of CSS in JavaScript modules and packaging along with all other needed JavaScript modules.
+
+		Deferred Construction
+			For both native applications as well as apps built using Web technologies, UI should only be constructed for features as those features are invoked.
+
+			So, for instance, for UI that might be presented in a tabbed style of interface, UI within tabs or sections that are not yet revealed should not be built until revealed and needed. Therefore, there should not be a reliance upon connection between views - if two or more views reflect information derived from a common source / data model, it should be possible to safely change the information without having all the views already created. Views should be able to latch onto the underlying data at any time and synchronize to reflect the correct state. Once created, however, the app should `reuse UI`, even if the data source is changed.
+
+	Reuse UI
+		UI widgets, once they have been loaded, should be reused across different data.
+
+		For example, a user configuration widget once loaded for a particular user should be reused when switching to configure a different user. This can be accomplished by view synchronization when switching between different instances of the data model. Furthermore, widgets that have been loaded and then idled in the background, when no longer in view, should be re-synchronized when revived so that changes that may have occurred in the data model while they were idle are reflected correctly.
+
+Don't Date the UI
+	Don't date the UI that should be consistently adopted by all products of the company by designing it according to the latest fashion trend within the design community.
+
+	At one point, rounded corners were the in thing and pill buttons were everywhere. Reflections were the rage at one point. The glassy look for buttons was popular. Drop shadows and text shadows were cool, along with gradients. Three-dimensional pop out ribbons / banners were fashionable for a while. Flat became fashionable again. Given the refresh cycle for various products, it can take years to cycle out an established UI. In order to avoid the look of one's UI being dead on arrival, one should avoid following the flavor of the day in design trends.
+
+	The best way to keep the UI feeling relevant is to design the UI to be as functional as possible, while still feeling sufficiently polished / professional. Highly functional will always be appreciated over a highly fashionable yet dated look. While emphasizing function over form, the UI should at least feel finished rather than having an unfinished look. It can be clean / minimal while still feeling slick and polished.
+
+Touch-friendly
+	All UI should be designed to be touch-friendly.
+
+	With the proliferation of devices supporting a touch interface, it makes sense for UI to be designed generally with touch in mind. This is particularly important for UI developed for Web apps, where such apps might be brought up in touch and non-touch devices alike. While designing for a touch interface imposes some constraints on how much information can be presented in the available screen real estate, the added usability that comes from the discipline of keeping things clean and simple for touch interfaces can make up for the slight loss of usability for information display. Settling on constraining all UI to support touch-friendliness will eliminate the cost of designing layouts for touch and non-touch and will also reinforce consistency across the various product offerings.
+
+	The UI should be touch friendly, so that the Service Site can be used effectively on tablet and other large format touch devices, including notebook and desktop computers with touch displays.
+
+	Safe for Touch
+		In order to make every UI element that is interactive safe for touch, the UI should be designed according to the following criteria...
+
+		Big Enough for Touching
+			Every interactive element should be large enough to accommodate a fingertip, and ideally large enough so that some part of the element remains visible outside the fingertip to reinforce the user's belief that they are touching on the element (ie. their fingertip is within the boundaries of the element).
+
+		Sufficient Clearance
+			Every interactive element that is only large enough to accommodate a fingertip and that doesn't have additional "breathing room" should have sufficient clearance around it to eliminate the possibility of accidentally touching adjacent interactive elements.
+
+			If the element is oversized in any axis, then clearance around the element is less critical in that axis. For example, column headers in a table may have sufficient width for comfortable, unambiguous touch, but may need clearance above and below then if they are not tall enough. Buttons that appear inside rows of a data table should be given sufficient clearance if they are sized smaller than is ideal for touch in order to allow the table to show more data.
+
+		Highlight the Touched State
+			In order to provide assurance to the user, the touched state for UI components such as buttons should be visually highlighted.
+
+			On touch interfaces, the touched state can be highlighted using the same treatment as the mouse down state for non-touch interfaces. Because of the inherent imprecision of touch interfaces, users need as much feedback as possible to indicate exactly what UI action they are about to initiate by releasing their finger from the interface surface. This becomes especially valuable in cases where the UI becomes busier and there is more chance of accidentally activating adjacent / nearby controls.
+
+		Design for no Tooltips
+			The interactive elements of the UI should be designed with the mind to the fact that users on touch devices will not have the benefit of mouseover tooltips.
+
+			Therefore, interactive elements should be self explanatory. Ideally, all buttons that show icons should also show labels below or alongside the icons, so that their action is clear.
+
+			Irreversible Effects
+				Where interactive elements that have an irreversible effect (or an effect that is difficult to reverse) are appropriate…
+
+				- it should be clear from the UI (their icon and/or label and surrounding context) what they do and that they have an action that may be irreversible or may require undoing
+				- triggering the element should require the user to confirm the element's action (in a dialog, typically)
+				- all interactive elements of the surrounding UI should be `big enough for touching` and have `sufficient clearance` to avoid accidentally touching elements that have an irreversible effect. Even if the action is undoable by the user, creating a finger trap that will often trip up the user will hurt the user experience.
+
+	Small Form Factor Considerations
+		For UI that is designed for small form factor mobile devices, additional layout considerations apply.
+
+		More and more, users are accessing services through mobile devices with a small form factor, relative to screen sizes of desktop and notebook computers. At the same time, users are migrating to mobile devices with larger and larger displays, with smart phones sporting screens above 5", and all the way up to the arguably phablet size of 6". With handheld touch screen devices of that size, UI elements located at the top left and top right of the screen become practically unreachable for the thumb.
+
+		Cluster Frequently Used UI at Bottom
+			To address this trend, it is recommended that frequently accessed UI elements be clustered towards the bottom of an app's UI.
+
+			There is simply no reason to force users to endure the constant annoyance of fumbling to reach awkwardly located UI that risks them dropping their device in the process. And the fact that UI has historically been designed with menu controls at the top of an app is not a good enough reason to impose that layout paradigm to newer mobile devices. Users will quickly get used to using controls that are convenient for them to access, even if it appears unusual at first glance. They will appreciate the choice of location over the lifetime use of the application.
+
+Ambient Light Considerations
+	With the trend towards increased mobility in computing, users are accessing apps on mobile devices in a wide variety of different ambient light conditions.
+
+	Until displays become truly passive with technology like digital ink / e-ink that supports fast enough refresh rates, app UI is likely to continue being rendered on active / lit displays. Active displays can be notoriously difficult to read in high light conditions. Therefore, UI should be design to be effective even in high ambient light conditions.
+
+	High Contrast
+		UI should be designed to generally be high contrast.
+
+		Under high ambient light conditions, low contrast UI becomes very hard to read. Maintaining a high contrast also is helpful in addressing accessibility considerations for individuals with vision difficulties.
+
+	Light Background
+		UI should be designed to universally have a light background, with icons and text appearing in a dark color.
+
+		One could make the argument that all UI of the app should have dark-on-light styling - even app chrome UI that may surround a main / content area pane. There might be other ways to visually set the chrome apart from the content area that doesn't violate the principle of designing for high ambient light conditions.
+
+	Simplified Icons
+		To support legibility in high ambient light conditions, icon symbols should be simplified and employ minimal shading and color complexity.
+
+		Under high light conditions, a distinctive and recognizable outline of an icon is a better cue than color and shade detail that may become washed out and hard to notice.
+
+Legible Text
+	To support a good user experience for apps under a variety of different usage conditions, including different ambient light situations, as well as devices with different form factors, extra effort should be made to make text as legible as possible.
+
+	Graphics designers often work in ideal work conditions that are not reflective of the conditions under which modern apps are used. Designers often have large, high resolution, high quality displays and work in an office environment with well controlled lighting. With mobility in computing, users are accessing apps in more extreme conditions. A user may be using a mobile app while walking outside in broad daylight while rushing to a business meeting at some building. With a mobile device with a small form factor, being viewed outside in broad daylight, and shaking in the user's hand as they walk, more effort than normal needs to be put into making all UI in an app legible.
+
+	Avoid Small Fonts
+		Avoid using small fonts for subordinate information in the UI.
+
+		If constraints of the design are making it necessary to choose small font sizes in order to fit information in, it would be best to consider a different approach to the IA for the application, so that there is never a situation where there is information that the user cannot read under challenging conditions. Don't make users squint.
+
+	Avoid Faint Colors
+		In situations where one might consider using a fainter / less prominent color for text, resist the temptation.
+
+		Consider an example of items in a company directory list, where the primary text for an item may be a person's name while the secondary text may be details about them, such as the department that they work in. One treatment might make the primary text true black while making the secondary text smaller and a mid gray. A better treatment for legibility under a variety of different reading conditions would be to make both primary and secondary text true black, while differentiating the primary text from the secondary text by making the primary text a bit larger and bolding it.
+
+	Bold, Where Possible
+		Consider using bold styling for button labels, tab buttons, headings, etc.
+
+	Compromise Elsewhere Before Text
+		Make compromises elsewhere in the UI, if necessary, in order to ensure there is enough room to make text as large and legible as possible.
+
+		Free up space in order to make text a little larger by reducing layers of boxing around elements and containers. Minimize purely decorative elements / embellishments to buy space for legibility.
+
+Testability
+	The approach to implementing the UI should facilitate good TDD practices, encouraging the development of tests during the feature development process, including unit and functional tests.
+
+	Discrete Testability
+		The approach to implementing the UI should support discrete testability of all components of the UI, from complex widgets down to their atomic building blocks.
+
+		Furthermore, it should ideally be possible to individually test all components of the UI in isolation from their surrounding UI. This suggests that all UI elements should be well encapsulated and have clearly defined interfaces that can be mocked in order to sufficiently satisfy their needs in order for them to function and be testable in isolation from the surrounding UI.
+
+### Efficient Use of Screen Real Estate
+	Minimize Boxing
+		- minimize boxing in favor of simple divider lines where possible
+
+	Web Applications
+		- app like interface
+		- fill entire screen
+		- be elastic
+		- fixed application chrome (ie. can't scroll entire app)
+
+Scanability
+	The UI should facilitate the natural human behavior of scanning to find things.
+
+	This is particularly important for data presented in lists. UI for lists should be designed to allow the user to easily see as much useful information as possible at a glance, so that in most cases a user can scan their eye across a list to locate something. This suggests the following design requirements for lists…
+
+	List UI Should be Clean and Uncluttered
+		The UI for lists should be uncluttered, so that the user can focus on the data presented in the lists.
+
+		This suggests that borders separating rows and columns should be de-emphasized, in favor of alternating background colors.
+
+	Rows and Columns Should be Eye-trackable
+		To make it easier for the user to locate data in lists, the rows and columns should be eye-trackable so that the user has confidence in what the eye is seeing.
+
+		Alternating Background Colors
+			To make rows and columns more easily eye-trackable, alternating background colors should be used for rows and columns.
+
+			Rows can alternate between white and a light colored background, while columns can alternate between unlightened and lightened. Priority is given to eye-tracking for rows, since columns are wider than rows are high, and eye-tracking is more commonly needed across multiple columns of a row than multiple rows of a column.
+
+			A benefit of the alternating background colors approach is that it serves the added purpose of providing a separation between data in different rows and columns and obviates the need for cluttering border lines.
+
+		Persistent Column Headers
+			To make is easier to understand the correlation between column data and the column headers, columns headers should remain present / fixed at the top of lists, even as the list data is scrolled.
+
+Searchability
+	Feature Search
+		Ideally, it should be possible to search for features in the application.
+
+		Feature Search in Web UI
+			When using a `resource oriented design` for a Web application, and where each area of the application is represented by a URI and navigable to (deep linking), it becomes possible to let the user perform a natural language search for an area of the application.
+
+			For example, if the user wanted to find the area for configuring a call forwarding feature of the application, the user could type "forwarding", "call forwarding", etc. into a search bar. Among the search results would be a link to the area of the application for configuring the call forwarding feature.
+
+		Feature Search in Native UI
+			While a native application might not follow a `resource oriented design`, since the model originated in the Web sphere and doesn't apply as naturally to native apps, it should still be possible to provide some level of feature search capability.
+
+			Examples of feature search in native apps can be found in Mac OS, where search from the Help menu lets the user find features as they are exposed through options in the various menus of an application - even deeply nested menu options. Ideally, feature search in native apps would extend beyond just menu option text and would include description meta data for the features exposed through menu options. Furthermore, if an application's features were connected to a search engine, the search results for natural language searches of features could be ranked based upon click-through of users.
+
+		Conditional Reachability
+			With a feature search facility in applications, it becomes theoretically possible to search for features that might only be conditionally reachable.
+
+			For example, if the user searched for a call forwarding feature in order to configure call forwarding, but if this feature were only reachable if the user had a particular account level, the user should still see the feature in the search results, be able to link to the feature and see the feature in a disabled state with an explanation as to why it is disabled. This approach could be used to good business effect by providing upsell opportunities to the user when searching for features that would require account upgrades or additional purchases.
+
+	Data Search
+		Tabular Data Search
+			All large lists of data should be searchable with a consistent and easy-to-use yet powerful search interface.
+
+			Parametric Search
+				A search on a list of data should provide the ability to add one or more search parameters.
+
+				Each search parameter / criterion should be configurable, in a similar manner to filtering UI available within email clients for the purpose of organizing mail messages and filtering out junk mail. Among other things, this would allow users to search through tabular data sets by filtering for specific values or value ranges for specific columns.
+
+			Simple Search
+				A simple search box interface should be provided that the user can use as a first step before utilizing the more advanced `parametric search` UI.
+
+				Search terms entered into the search bar would be effectively resolved to one or more parameters in the `parametric search`. Especially if a shorthand syntax is provided for selecting, a search string entered into the simple search UI might resolve to multiple parameters in the parametric search. For example, a shorthand might be provided to let a user search for a person in a particular department (eg. "john department:sales"). Such a search might be resolved to a parametric search involving two criteria.
+
+		Complex Structured Data Search
+			In addition to the ability to search data presented in tabular form, ideally a search facility would be provided to search complex structured data.
+
+			This feature would be most comparable to the kind of system wide search that one can perform in a native operating system, where the search is able to index content stored in multiple formats and editable through multiple different applications. As the data set that an application exposes to the user becomes more complex, with different features / wizards available for manipulating data in different areas, it becomes increasingly hard to find where data is exposed.
+
+			An Example
+				To use an example, the structured configuration of an account should be searchable and search results from different areas of the configuration should be returned, with the ability to navigate to the areas where those results would be found and modifiable.
+
+				Using the example of a multi-user telephony system, it should be possible to search for a phone extension and see where that extension is in use. Such a search might bring up results such as the user for that extension, a voice directory configuration where the extension is listed, a call flow configuration where the extension is involved, etc. At a glance, then, one can see all usages of / references to a phone extension in the account.
+
+Standardize Control Heights
+	UI components that can be arranged alongside one another horizontally should support a set of standardized control heights.
+
+	It should be possible, for example, to create a layout where a row contains a toggler control alongside a text input control alongside a drop list control alongside a button, and the layout can look tidy because all of these controls can be set to use the same standard height.
+
+	Standard Heights
+		The following logical standard heights should be supported by UI controls that may need to be layout out alongside one another horizontally...
+
+		Tiny
+			The tiny size for UI components should be used very sparingly, because of the difficulty of using them with touch interfaces.
+
+			Tiny controls should only be used in situations of very limited display real estate, such as in rows of table data, and care should be taken to abide by the principle of `sufficient clearance`.
+
+		Small
+			The small size for UI components should be used for subordinate controls that are ancillary.
+
+			Examples of ancillary controls would be...
+
+			- a close button in a dialog window's title bar
+			- a drop down button that may be encapsulated within a medium sized drop down control
+			- or an action button encapsulated within a medium sized heading.
+
+		Medium
+			The medium size is the standard size that should be used for UI controls.
+
+			The exact height chosen for the medium size should strike the right balance between usability for touch and efficient use of available display real estate.
+
+		Large
+			As with the tiny size for UI components, the large size should be used sparingly.
+
+			The intent behind the large size is to allow a user interface to emphasize certain components very strongly - usually CTA type buttons (eg. "SIGN UP FOR FREE TRIAL"). The large size is to UI components as all-caps is to messaging - too many components using the large size is like yelling at the user and dilutes the impact that the large size has.
+
+	### Standardized Visual Cues
+		- navigational direction
+		- primary action
+		- positive and negative actions
+			- positive action
+				- when is something classified as positive?
+			- negative action
+				- when does something become negative?
+		- depart
+
+Disabled States
+	Visibly Disabled Yet Still Legible
+		When buttons (or other types of UI components) are disabled because they cannot be used in the current application state, this should be visually discernible.
+
+		When components are disabled, it should be clear by their appearance that they are disabled, but labels should still be legible and icons should still be sufficiently visible that the user can still make out what the feature is that is disabled.
+
+	Disable Buttons When Not Usable
+		Buttons (and other types of UI components) should generally be disabled when their actions are not valid and cannot be successfully executed.
+
+		An exception to this rule is any situation where it is more desirable to invite the user to attempt to trigger an action because dissuading might hurt conversion, and where providing a message on corrective actions the user should take might produce better conversion results than disabling a UI component for a conversion action.
+
+	Explain Reason for Disabled State
+		When a button or other widget is in a disabled state, it should be possible for the user to discover why the component is disabled.
+
+		This could be done through a warning indicator (possibly including a message) associated with the component. In the case of a button in a Web UI, there may be no visible indicator UI (besides the button appearing to be disabled), but mousing over the button may produce a tooltip providing the reason for the button being disabled. In the case of a touch interface, either a visual indicator could be provided (such as a warning icon / exclamation mark icon alongside the button), or touching the button could produce a tooltip type of message.
+
+Increase User Productivity
+	One of the primary objectives of the UX design should be to increase user productivity.
+
+	Allow Text Value Entry
+		Wherever possible, UI components that allow the user to select or modify a value should also allow the value to be entered / pasted in in a serialized text form.
+
+		The best intentions of providing a better means of selecting a value of a certain type can actually make things harder for the user in some situations. A UI should not impose a specific interface for entering a certain type of value as a means of enforcing valid entry - validation should always be enforced upon entry submission, always on the server and possibly also on the client.
+
+		To use an example to illustrate this principle, an interface shouldn't be provided for date selection that forces the user to select year, month, and date from separate drop downs while not allowing the user to simply type in a date. This consideration is even more important when considering the use case of the user wishing to copy-and-paste in values for fields such as date fields.
+
+	Allow Copy-and-Paste
+		Wherever possible, UI components that allow the user to select or modify a value of a common type should allow the value to be copied from one field and pasted into another.
+
+		For example, a more sophisticated UI can be provided to allow the user to select a date visually through a calendar type interface, but such an option in the UI should be supplemental to raw text data entry, rather than replacing it and thereby preventing the most lightweight interaction of copying a date value, phone number value, etc. from a spreadsheet application or other data source.
+
+		This principle implies that all data entry UI components should at the very least have a text input field from which a value can be copied and into which a value can be pasted.
+
+	Allow Selection and Pasting of All Text
+		Wherever possible, a user should be able to select and copy any text / messaging they see to the clipboard.
+
+		If a user encounters an error message in a dialog or other type of control, they should be able to copy that text in order to paste it into a support form, e-mail, IM, SMS, or other form of text communication to a support representative. By the nature of Web technologies, this comes virtually for free in Web applications, but it might take extra work to achieve in native applications.
+
+		The guiding principle is that if the user sees something, they should be able to easily capture and communicate what they are seeing to someone who can help them troubleshoot.
+
+	Facilitate "Drinking Bird" Behavior
+		As much as possible, to increase user productivity, the UX should facilitate "drinking bird" behavior, where the user can repeatedly perform the same type of action, with the least possible work between repititions.
+
+		Forward and Back
+			If the user is presented with a slideshow of photos with forward and back navigation buttons, those buttons should remain in the exact same position as the user navigates through the slideshow.
+
+			If the position of the buttons were to be affected by the different widths of different photos, because it looked more aesthetically pleasing to have the buttons always snugly at the edges of the photos, then this design choice would increase user work, since they would have to locate the constantly changing position of the navigation controls with each new slide. The same navigation principle would apply to navigating through different months of a year in a calendar control. Rather than the navigation buttons being wrapped snugly around the month name (which would constantly change width), the buttons should be in a fixed location.
+
+		Item Selection
+			If the user is presented with a UI to let them select multiple items before taking an action on them, a collection type interface can be provided.
+
+			In the collection type interface, it is expected that the user may want to often collect contiguous chunks of items. An example of this would be a dialog UI for a social network app that lets a user select multiple users to send friend invites to. In the collection type interface, items that are selected by the user triggering a selection control (such as a checkbox, or an add button) are immediately moved out of the list and the remaining items are shifted in position so that the selector for the next remaining item is exactly where the user had just clicked or tapped. This means that the most frictionless interaction for the user is to repeatedly "peck" at the same position, thereby increasing the user's productivity and the virality of the application.
+
+		Toggling
+			In situations where the user is presented with a toggling behavior, the toggler control should remain in the same position.
+
+			For example, if the user can click on an arrow icon to expand a collapsed section, then the icon to collapse the section again should be in the same place as the expand icon. That way, the user can easily collapse the section if they see at a glance that it doesn't contain  what they are interested in. Contrast this approach to a "more..." link that sits under a section heading which then moves down to beneath the expanded contents of the section in the form of a "less" link, in which case the user has to visually locate the collapse control and move to trigger it in its new location. And because the control was in a new location, the user had to correspond that new control with the expand control, whereas maintaining the same location relates the expand and collapse controls by their identical location.
+
+			Content inside collapsed sections is buried enough as it is without training the user to have a negative inclination towards looking inside sections because of the added cost of collapsing the sections again. This same principle applies also to value togglers. Wherever there is a control that lets a user switch between on and off / enabled and disabled states for a setting, this should be provided through a toggler control where the control can be repeatedly toggled in exactly the same position.
+
+Minimize User Annoyance
+	Common annoyances to the user should be avoided.
+
+	Avoid Shifting UI
+		A common annoyance users can encounter in progressive loading and rendering of UI is UI that shifts as elements load in.
+
+		Presenting the user with a UI that is interactive only to then pull the rug right out from under them as they are about to interact with some UI element, because the layout shifts and the element moves, is a recipe for frustrating the user and creating errors during user interaction. In cases of progressively rendered UI, space should either be allocated for not yet loaded components in areas of the UI that is likely to be immediately used, or the UI should not be interactive until the layout has settled. UI components shouldn't be moving targets.
+
+	Provide Reliable Interaction Highlights
+		Ensure that interaction highlights that are provided are reliable and not misleading.
+
+		A classic example of a misleading interaction highlight is a highlight state for a navigation bar link or tab control button in a Web app, where CSS styles the box containing the active text to have a highlight background color upon mouseover, but where only the link text is wired up by the JavaScript to have an action. This creates a confusing in-between state where the background highlight suggest to the user that the element can be clicked, but where only a sub-portion of the element is actually clickable.
+
+		There is no use to such a highlight other than to confuse the user. In such situations, it is better to make the entire box that is highlighted clickable (while also showing the pointer cursor on mouseover), thereby reinforcing that a mouseover highlight state means clickability and giving the user a larger target area for touch interfaces. The user shouldn't be left to second guess themselves upon a false click action and then to hunt for just the right spot to click on.
+
+		Just One Meaning to Interaction Highlights
+			Settle on a single meaning for interaction highlights, preferably as an indicator of clickability / touchability.
+
+			For instance, don't use interaction highlights in some parts of the UI to indicate clickability and in other parts of the UI merely to highlight the area of the UI (such as a data table row or some layout panel) that the user is engaged with (eg. mousing over), or establish a discernibly and consistently applied alternative means for calling out a currently focused / working area in the UI.
+
+	Links Should Behave Like Links
+		When navigation links are provided in Web app UI, such link components should behave as expected by the user, fully consistent with standard links in a Web document.
+
+		If the user sees what looks like and serves as a navigation link, they will expect any of a number of standard behaviors for the link, including...
+
+		- clicking the link with the shift modifier key pressed should open the link in a new window
+		- clicking the link with the control/command modifier key pressed should open the link in a new tab
+		- mousing over the link should display the link location in the window's status bar
+		- right-clicking on the link (or using the appropriate equivalent trackpad gesture) should bring up a contextual menu with the various options supported for links by the browser
+
+		It *can* occur in Web applications that navigation links can be implemented using JavaScript navigation by setting the value of window.location.href, and in such cases link elements in the UI may be implemented using HTML elements other than the standard A tag. Even if the actual UI element is an A tag, it likely will not have a meaningful value set for the href attribute, since the actual navigation is performed in the JavaScript. In such cases, elements that appear to the user to be links and that act as navigation will not have all the expected behaviors of links, resulting in a bad user experience.
+
+		In cases where it is desirable for JavaScript to control the navigation destination of link elements, true link tags should be used and the href should be set programmatically. Furthermore, in cases where the actual destination can only be known at the time of the user clicking on the link, the mousedown event for the link can be wired and the href value of the link can be set in the handler so that it is set correctly by the time that the subsequent mouseup and click events are fired.
+
+	Tab Indexes Should be Maintained Correctly
+		When forms are presented in the UI, the tab indexes for form elements should be maintained correctly so that tabbing through the form follows the logical order of the form elements.
+
+		Tab index ordering can break down as a result of form elements being dynamically populated into the UI, potentially as a result of the user making a selection in a form that results in additional choices being made available to them through additional form inputs that are added in a dynamically inserted subsection of the form. In such cases, tab indexes of all form elements may need to be recomputed and updated for all the form elements.
+
+	Truncated Text Handling
+		When text needs to be truncated in the UI because it cannot all be accommodated in the layout, the handling should be consistent in all instances.
+
+		Text that is to be truncated in the UI should be displayed with an ellipsis, with a hover tooltip behavior provided to allow the user to view the text in its entirety (within reason). The tooltip can be multi-line, as necessary, to allow all of the truncated text to be viewed.
+
+	Error Reporting
+		When errors occur during the user's execution of an action, error messages that are reported to the user should ideally contain an error code that the user can reference when contacting customer support to troubleshoot the problem.
+
+		This is especially true for cases where pretty messaging is not provided for a specific error type because the error is infrequent or deemed too obscure to warrant messaging localized for all locales. It is also a good fallback to guard against bugs in the code that selects / constructs the pretty messaging. The error code can always be relied upon as the authority.
+
+		Fallback Error Messaging
+			When fallback / catch all error messaging is provided for an error for which no pretty messaging is provided, the generic error message should be technically correct.
+
+			For example, the error messaging should not state that one of a few possible problems occurred if, in fact, none of the stated problems did occur. The error message should not serve as a catch all bucket if the messaging only lists a few of the possible problems in the bucket, making it not truly a catch all bucket, thereby misleading the user and complicating customer support. For instance, if obscure problem D occurred, the catch all messaging should not state "Your action could not be completed because [problem A], [problem B], or [problem C] occurred." The error message could, instead, state that "Your action could not be completed because [problem A], [problem B], or [problem C] occurred, or some other problem was encountered (error code: [error code for problem D])."

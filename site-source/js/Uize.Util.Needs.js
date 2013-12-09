@@ -73,7 +73,7 @@
 			It's as simple as that.
 
 			Decoupling and Insulating Needers from Providers
-				The needs system makes it possible to decouple and insulate needers from providers.
+				The needs system allows us to decouple and insulate needers from providers.
 
 				In our example above, let's pretend that the code that registers the provider and the code that registers the needer are in totally separate parts of the code, possibly even in different modules, and that the needer code knows nothing about how the need is provided - when the provider is registered, and whether the need is provided in a synchronous or asynchronous manner.
 

@@ -12,67 +12,24 @@
 /* Module Meta Data
 	type: Test
 	importance: 1
-	codeCompleteness: 4
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.String.Replace= module defines a suite of unit tests for the =Uize.String.Replace= module.
+		The =Uize.Test.Uize.String.Replace= module defines unit tests to verify that the deprecated =Uize.String.Replace= module is still supported and is a reference to the newer =Uize.Str.Replace= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
 	name:'Uize.Test.Uize.String.Replace',
+	required:'Uize.Str.Replace',
 	builder:function () {
 		'use strict';
 
-		return Uize.Test.resolve ({
-			title:'Test for Uize.String.Replace Module',
-			test:[
-				Uize.Test.requiredModulesTest ('Uize.String.Replace'),
-				Uize.Test.staticMethodsTest ([
-					['Uize.String.Replace.replaceByLookup',[
-						['',
-							[
-								'hello, the dog jumped over the foo. bar bar cat sheep, hello any wool. yes dog, yes dog, three bags there.',
-								{foo:'bar',hello:'there',dog:'cat'}
-							],
-							'there, the cat jumped over the bar. bar bar cat sheep, there any wool. yes cat, yes cat, three bags there.'
-						],
-						['',
-							[
-								'<script type="text/javascript">&amp;</script>',
-								{
-									'<':'&lt;',
-									'>':'&gt;',
-									'"':'&quot;',
-									'&':'&amp;'
-								}
-							],
-							'&lt;script type=&quot;text/javascript&quot;&gt;&amp;amp;&lt;/script&gt;'
-						],
-						['',
-							[
-								'<script type="text/javascript">cat &amp; dog</script>',
-								{
-									'<':'&lt;',
-									'>':'&gt;',
-									'"':'&quot;',
-									'&':'&amp;',
-									cat:'feline',
-									dog:'canine'
-								}
-							],
-							'&lt;script type=&quot;text/javascript&quot;&gt;feline &amp;amp; canine&lt;/script&gt;'
-						]
-					]],
-					['Uize.String.Replace.replacerByLookup',[
-					]]
-				])
-			]
-		});
+		return Uize.Test.moduleAliasTest ('Uize.String.Replace','Uize.Str.Replace');
 	}
 });
 

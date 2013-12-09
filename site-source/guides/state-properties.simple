@@ -709,7 +709,7 @@ More on Declaring State Properties
 	Conformer Function
 		When using the `the complete profile` form to declare a state property, a =conformer= function can be registered to ensure that the value for the property is always conformed to be a valid value.
 
-		Normally, whatever value is specified for a state property when calling the =set= method is the new value that gets set for that property. However, specifying the optional conformer allows you to register a function that should be executed before the state property's value actually changes, providing an opportunity to constrain or correct the value, or to abort the set so that the property's value remains unchanged.
+		Normally, whatever value is specified for a state property when calling the =set= method is the new value that gets set for that property. However, specifying the optional conformer allows us to register a function that should be executed before the state property's value actually changes, providing an opportunity to constrain or correct the value, or to abort the set so that the property's value remains unchanged.
 
 		EXAMPLE
 		.........................................................................
@@ -1045,7 +1045,7 @@ Changed Events
 		Event Object Contains newValue Property
 			When a =Changed.[propertyName]= event fires for a particular state property that has changed value, the event object that is passed as an argument to any handlers of the event will contain a =newValue= property to indicate the new value of the state property.
 
-			This makes it possible to access the new value of the state property without having to access the instance that owns the property in order to call its =get= method to get the value for the property.
+			This allows us to access the new value of the state property without having to access the instance that owns the property in order to call its =get= method to get the value for the property.
 
 			INSTEAD OF...
 			..........................................................
@@ -1108,7 +1108,7 @@ Changed Events
 The Special value State Property
 	The =Uize.Class= base class provides an implementation for the =valueOf Intrinsic Method=, that returns the value of the special =value= state property.
 
-	The =valueOf Intrinsic Method= is invoked automatically by Javascript in certain contexts in order to convert an object to a value, such as when using an object reference in an expression. If you declare the special =value= state property for your class, then you will be able to use a reference to an instance of your class in string and mathematical expressions, and your instance reference will be automatically converted to the value of the =value= state property in such expressions. This is a handy shorthand that allows you to use a reference to a class instance as a proxy for its value in expressions.
+	The =valueOf Intrinsic Method= is invoked automatically by Javascript in certain contexts in order to convert an object to a value, such as when using an object reference in an expression. If you declare the special =value= state property for your class, then you will be able to use a reference to an instance of your class in string and mathematical expressions, and your instance reference will be automatically converted to the value of the =value= state property in such expressions. This is a handy shorthand that allows us to use a reference to a class instance as a proxy for its value in expressions.
 
 	EXAMPLE
 	..........................................................

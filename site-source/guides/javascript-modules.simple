@@ -53,7 +53,7 @@ A Mechanism All Of Its Own
 	It is worth emphasizing that the module mechanism is primarily a means of declaring dependencies for modules of code, and also facilitates building of the module when dependencies are satisfied. The module mechanism is supportive of subclassing, rather than being required for subclassing. Moreover, modules can be used to declare code that is neither a subclass nor a package. The module mechanism should, therefore, be considered orthogonal to the class inheritance mechanism of the UIZE JavaScript Framework.
 
 Uize.module
-	The =Uize.module= static method allows you to declare a module in the UIZE JavaScript Framework.
+	The =Uize.module= static method allows us to declare a module in the UIZE JavaScript Framework.
 
 	Modules can be of a number of key types, as discussed in the section =Types of Modules=. In a common case, a module declaration is used to declare a subclass.
 

@@ -30,7 +30,7 @@ Uize.module ({
 	required:[
 		'Uize.Doc.Simple',
 		'Uize.Build.Util',
-		'Uize.String'
+		'Uize.Str.Has'
 	],
 	builder:function () {
 		function _todoSourceFilePath (m,_urlParts) {
@@ -42,7 +42,7 @@ Uize.module ({
 			urlMatcher:function (_urlParts) {
 				return (
 					_urlParts.fileType == 'html' &&
-					Uize.String.startsWith (_urlParts.pathname,this.params.builtPath + '/todo/modules/') &&
+					Uize.Str.Has.hasPrefix (_urlParts.pathname,this.params.builtPath + '/todo/modules/') &&
 					this.fileExists ({path:_todoSourceFilePath (this,_urlParts)})
 				);
 			},

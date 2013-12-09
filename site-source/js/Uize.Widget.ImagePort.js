@@ -27,24 +27,24 @@
 
 Uize.module ({
 	name:'Uize.Widget.ImagePort',
-	required:'Uize.Node',
+	required:[
+		'Uize.Node',
+		'Uize.Math.LogicalPos'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_undefined,
-				_Uize_Node = Uize.Node
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Node = Uize.Node,
+				_Uize_Math_LogicalPos = Uize.Math.LogicalPos,
 
-		/*** Utility Functions ***/
-			function _getAlignForAxis (_pos,_dim,_portDim,_alignPin0,_alignPin1) {
-				if (typeof _alignPin0 != 'number') _alignPin0 = parseFloat (_alignPin0) || 0;
-				if (typeof _alignPin1 != 'number') _alignPin1 = parseFloat (_alignPin1) || 1;
-				_pos = +_pos + _alignPin0 * _dim;
-				_dim *= (_alignPin1 - _alignPin0);
-				return _dim == _portDim ? .5 : _pos / (_portDim - _dim);
-			}
+			/*** General Variables ***/
+				_paramsToDefaultForGetScaledRect = [
+					'coordConverter','sizingLowerBound','sizingUpperBound','sizingValue','maxScaling','alignX','alignY'
+				],
+				_paramsToDefaultForGetSizingAndAlign = ['sizingLowerBound','sizingUpperBound']
+		;
 
 		/*** Private Instance Methods ***/
 			function _updateUiPosition (m) {
@@ -104,69 +104,11 @@ Uize.module ({
 
 			dualContextMethods:{
 				getScaledRect:function (_params) {
-					function _getDefaultedProperty (_propertyName) {
-						return _params [_propertyName] !== _undefined ? _params [_propertyName] : m.get (_propertyName);
-					}
-					var
-						m = this,
-						_portWidth = _params.portWidth,
-						_portHeight = _params.portHeight,
-						_rectWidth = _params.rectWidth,
-						_rectHeight = _params.rectHeight,
-						_coordConverter = _getDefaultedProperty ('coordConverter'),
-						_fillScaleFactorWidth = _portWidth / _rectWidth,
-						_fillScaleFactorHeight = _portHeight / _rectHeight,
-						_fitFillScaleFactors = {
-							fit:Math.min (_fillScaleFactorWidth,_fillScaleFactorHeight),
-							fill:Math.max (_fillScaleFactorWidth,_fillScaleFactorHeight)
-						},
-						_scaleFactorLowerBound = _fitFillScaleFactors [_getDefaultedProperty ('sizingLowerBound')] || 0,
-						_scaleFactorUpperBound = _fitFillScaleFactors [_getDefaultedProperty ('sizingUpperBound')] || 0,
-						_scaleFactor = Math.min (_scaleFactorLowerBound + (_scaleFactorUpperBound - _scaleFactorLowerBound) * _getDefaultedProperty ('sizingValue'),_getDefaultedProperty ('maxScaling')),
-						_scaledWidth = _rectWidth * _scaleFactor,
-						_scaledHeight = _rectHeight * _scaleFactor
-					;
-					return {
-						left:_coordConverter ((_portWidth - _scaledWidth) * _getDefaultedProperty ('alignX')),
-						top:_coordConverter ((_portHeight - _scaledHeight) * _getDefaultedProperty ('alignY')),
-						width:_coordConverter (_scaledWidth),
-						height:_coordConverter (_scaledHeight)
-					};
+					return _Uize_Math_LogicalPos.getScaledRect (_params,this.get (_paramsToDefaultForGetScaledRect));
 				},
 
 				getSizingAndAlign:function (_params) {
-					function _getScaledArea (_sizing) {
-						return _sizing == 'fit' ? _fitArea : (_sizing == 'fill' ? _fillArea : 0);
-					}
-					function _getDefaultedProperty (_propertyName) {
-						return _params [_propertyName] !== _undefined ? _params [_propertyName] : m.get (_propertyName);
-					}
-					var
-						m = this,
-						_portWidth = _params.portWidth,
-						_portHeight = _params.portHeight,
-						_rectWidth = _params.rectWidth,
-						_rectHeight = _params.rectHeight,
-						_rectArea = _rectWidth * _rectHeight,
-						_fillScaleFactorWidth = _portWidth / _rectWidth,
-						_fillScaleFactorHeight = _portHeight / _rectHeight,
-						_fitScaleFactor = Math.min (_fillScaleFactorWidth,_fillScaleFactorHeight),
-						_fillScaleFactor = Math.max (_fillScaleFactorWidth,_fillScaleFactorHeight),
-						_fitFillAreas = {
-							fit:_fitScaleFactor * _fitScaleFactor * _rectArea,
-							fill:_fillScaleFactor * _fillScaleFactor * _rectArea
-						},
-						_scaledAreaLowerBound = _fitFillAreas [_getDefaultedProperty ('sizingLowerBound')] || 0,
-						_scaledAreaUpperBound = _fitFillAreas [_getDefaultedProperty ('sizingUpperBound')] || 0
-					;
-					return {
-						sizingValue:
-							Math.sqrt (_rectArea - _scaledAreaLowerBound) /
-							Math.sqrt (_scaledAreaUpperBound - _scaledAreaLowerBound)
-						,
-						alignX:_getAlignForAxis (_params.rectX,_rectWidth,_portWidth),
-						alignY:_getAlignForAxis (_params.rectY,_rectHeight,_portHeight)
-					};
+					return _Uize_Math_LogicalPos.getSizingAndAlign (_params,this.get (_paramsToDefaultForGetSizingAndAlign));
 				}
 			},
 

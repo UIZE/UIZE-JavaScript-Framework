@@ -34,7 +34,7 @@ Uize.module ({
 				_value:'value',
 				_valueDetails:{
 					name:'valueDetails',
-					conformer:function(_valueDetails) { return _valueDetails || this._defaultValueDetails }
+					conformer:function (_valueDetails) { return _valueDetails || this._defaultValueDetails }
 				}
 			}
 		});

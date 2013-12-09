@@ -120,8 +120,6 @@ The Engine
 
 		- `Non-time Based Fades` - Fades do not need to occur exclusively in the time domain. You can use the =Uize.Fade= class to produce color gradients, to lay out an array of DOM nodes, etc.
 
-		- other utility features, such as its =Uize.Fade.blendValues= static method that lets you interpolate between two simple or compound values, without having to first create a =Uize.Fade= instance.
-
 	Quantization
 		In order to provide safe values for code that uses fades, and in order to improve performance, interpolated values can be quantized using the highly flexible quantization feature.
 
@@ -580,7 +578,7 @@ Animating CSS Style Properties
 		In the above example, we are fading the border color of the top, left, right, and bottom borders from black to white, over a period of =3000= milliseconds (3 seconds). When the fade has completed, the entire border will be white all around. However, because we're accomplishing this by fading the four discrete CSS border color properties, we get the ability to specify different curves for each using a compoung value for the =curve= fade property, whose value is an object with the same structure as the start and end values of the fade. There is an entry in the =curve= object for each of the style properties being faded. In this case, we're using the =Uize.Curve.Mod.band= curve function generator defined in the =Uize.Curve.Mod= module so that each of the borders' white "comes in" at different points in the fade. Because of the values we've used in this example, the border would fade to white in a clockwise fashion, starting from the left border.
 
 		Color Component Curves
-			The way that the =Uize.Fx.fadeStyle= method resolves color values to tuples that make their way into the compound start and end values of a style fade makes it possible to specify different `curve functions` for the different components of a color.
+			The way that the =Uize.Fx.fadeStyle= method resolves color values to tuples that make their way into the compound start and end values of a style fade allows us to specify different `curve functions` for the different components of a color.
 
 			This provides a way to achieve subtle color transitions, where your start and end colors are always simple, but the colors that are faded through in the course of a fade produce elegant effects. Consider the following example...
 
@@ -725,15 +723,15 @@ Curves
 		To better visualize how curve functions work and how they affect motion, visit the interactive [[../examples/curve-explorer.html][Curve Explorer]] tool.
 
 		Blending Values
-			A curve function can be supplied as a parameter to the =Uize.Fade.blendValues= static method of the =Uize.Fade= class.
+			A curve function can be supplied as a parameter to the =Uize.Math.Blend.blend= static method of the =Uize.Math.Blend= class.
 
-			When not specifying a curve to this method, the interpolation used to blend between the two specified values is linear. Specifying your own curve allows you to perform non-linear blending.
+			When not specifying a curve to this method, the interpolation used to blend between the two specified values is linear. Specifying our own curve allows us to perform non-linear blending.
 
 			EXAMPLE
 			...............................................................
 			var
 				bouncyCurveFunction = Uize.Curve.Rubber.easeOutBounce (4,2),
-				middleOfBounceValue = Uize.Fade.blendValues (
+				middleOfBounceValue = Uize.Math.Blend.blend (
 					0,                   // value A
 					255,                 // value B
 					.5,                  // blend amount (.5 is halfway)
@@ -766,7 +764,7 @@ Curves
 		Controlling Fades
 			A curve function can be supplied to an instance of the =Uize.Fade= class by setting the value of its =curve= state property, in order to control the characteristics of the fade's transition.
 
-			When not specifying a curve to a =Uize.Fade= instance, the fade's transition will be linear in nature. In other words, the rate of change will remain constant throughout the fade process. Specifying your own curve allows you to make the fade non-linear in order to emulate motion effects like bounce, springiness, wobble, elasticity, etc.
+			When not specifying a curve to a =Uize.Fade= instance, the fade's transition will be linear in nature. In other words, the rate of change will remain constant throughout the fade process. Specifying our own curve allows us to make the fade non-linear in order to emulate motion effects like bounce, springiness, wobble, elasticity, etc.
 
 			EXAMPLE
 			.........................................................................
@@ -960,7 +958,7 @@ Curves
 
 		Curve function modifiers operate on the curve functions they are provided in order to produce new, modified curve functions. You can consider them as operators that operate on curve functions to produce new curve functions. They could also be thought of as specialized parameterized curve function generators, where some - or all - of the parameters just happen to be curve functions. As an example, the =Uize.Curve.Mod.blend= static method blends the two specified curve functions to produce a new curve function, with blend parameters that let you specify the blend between the two curve functions.
 
-		"What does it mean to blend two functions?" you may ask. No, JavaScript doesn't support some crazy new math that allows you to add or multiply functions. Blending two curve functions is carried out by returning a new curve function that takes an input value, uses each of the two curve functions that are to be blended and obtains a remapped value from each, then blends between those two values to produce a new output value. This has the effect of blending the curves that would be produced by the two curve functions that are being blended - across their entire input value range. So, effectively, you are blending two curve functions to produce a new curve function.
+		"What does it mean to blend two functions?" you may ask. No, JavaScript doesn't support some crazy new math that allows us to add or multiply functions. Blending two curve functions is carried out by returning a new curve function that takes an input value, uses each of the two curve functions that are to be blended and obtains a remapped value from each, then blends between those two values to produce a new output value. This has the effect of blending the curves that would be produced by the two curve functions that are being blended - across their entire input value range. So, effectively, you are blending two curve functions to produce a new curve function.
 
 		EXAMPLE
 		..............................................
@@ -981,9 +979,9 @@ Curves
 
 ### Non-time Based Fades
 	- color gradients
-	- methods like Uize.Fade.blendValues, getSeries and Uize.Fade.getSeries
-	- Uize.Fade.xSeries extension module
-	- Uize.Fx.fadeStyleAcrossNodes
+	- methods like =Uize.Math.Blend.blend=, =getSeries= and =Uize.Fade.getSeries= (from =Uize.Fade.xSeries= extension module)
+	- =Uize.Fade.xSeries= extension module
+	- =Uize.Fx.fadeStyleAcrossNodes=
 	- provide some examples
 		- C:/~uize/UIZE-JavaScript-Framework/examples/fade-css-style-across-nodes.html
 		- gradient and graph in Curve Explorer tool

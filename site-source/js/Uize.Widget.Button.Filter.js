@@ -29,84 +29,115 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiLabel = function() {
-				var _this = this;
+			function _updateUiLabel () {
+				var m = this;
 
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
-						_label = _this._label,
-						_labelWithCount = _this.localize(
+						_label = m._label,
+						_labelWithCount = m.localize(
 							'filterWithCount',
 							{
 								filterLabel:_label,
-								count:_this._count
+								count:m._count
 							}
 						)
 					;
 
-					_this.set({
-						text:_this._showCount && _labelWithCount
+					m.set({
+						text:m._showCount && _labelWithCount
 							? _labelWithCount
 							: _label
 					});
 				}
-			};
+			}
 
-			_classPrototype._updateUiFeaturedState = function() {
-				var _this = this;
+			function _updateUiDisplayState () {
+				var m = this;
 
-				_this.isWired
-					&& Uize.Node.Classes.setState(
-						_this.getNode(),
-						['', _this._featuredCssClass],
-						_this._featured
-					)
-				;
-			};
+				if (m.isWired) {
+					var
+						_Uize_Node_Classes = Uize.Node.Classes,
+						_rootNode = m.getNode()
+					;
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiLabel();
-					_this._updateUiFeaturedState();
-					_superclass.doMy (_this,'updateUi');
+					_Uize_Node_Classes.setState(
+						_rootNode,
+						['', m._cssClassFeatured],
+						m._featured
+					);
+					_Uize_Node_Classes.setState(
+						_rootNode,
+						['', m._cssClassDisabled],
+						!m.get('enabledInherited')
+					);
+					_Uize_Node_Classes.setState(
+						_rootNode,
+						['', m._cssClassSelected],
+						m.get('selected')
+					);
 				}
-			};
+			}
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var
+					m = this,
+					_boundUpdateUiDisplayState = function () { _updateUiDisplayState.call(m) }
+				;
+
+				m.wire({
+					'Changed.enabledInherited':_boundUpdateUiDisplayState,
+					'Changed.selected':_boundUpdateUiDisplayState
+				});
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						_updateUiLabel.call(m);
+						_updateUiDisplayState.call(m);
+						_superclass.doMy (m,'updateUi');
+					}
+				}
+			},
+
+			stateProperties:{
 				_count:{
 					name:'count',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
+				},
+				_cssClassDisabled:{
+					name:'cssClassDisabled',
+					onChange:_updateUiDisplayState,
+					value:''
+				},
+				_cssClassFeatured:{
+					name:'cssClassFeatured',
+					onChange:_updateUiDisplayState,
+					value:''
+				},
+				_cssClassSelected:{
+					name:'cssClassSelected',
+					onChange:_updateUiDisplayState,
+					value:''
 				},
 				_featured:{
 					name:'featured',
-					onChange:_classPrototype._updateUiFeaturedState
-				},
-				_featuredCssClass:{
-					name:'featuredCssClass',
-					onChange:_classPrototype._updateUiFeaturedState,
-					value:''
+					onChange:_updateUiDisplayState
 				},
 				_label:{
 					name:'label',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
 				},
 				_showCount:{
 					name:'showCount',
-					onChange:_classPrototype._updateUiLabel
+					onChange:_updateUiLabel
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

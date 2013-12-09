@@ -186,7 +186,7 @@ Uize.module ({
 									methodNameSuffixSTR
 										A string, specifying the suffix of the method names for the four static methods that are created.
 
-										The static methods created by this method are named with the prefixes "easeIn", "easeOut", "easeInOut", and "easeMiddle". When creating easing curve function generators in a context that will have other curve function generators, the suffix allows you to distinguish between the curve function generators for different types of curves. The first letter of the specified suffix is uppercased before appending it to the method name prefixes.
+										The static methods created by this method are named with the prefixes "easeIn", "easeOut", "easeInOut", and "easeMiddle". When creating easing curve function generators in a context that will have other curve function generators, the suffix allows us to distinguish between the curve function generators for different types of curves. The first letter of the specified suffix is uppercased before appending it to the method name prefixes.
 
 										For example, with the methods =Uize.Curve.easeInSine=, =Uize.Curve.easeOutSine=, =Uize.Curve.easeInOutSine=, and =Uize.Curve.easeMiddleSine=, the value used for =methodNameSuffixSTR= would be ='Sine'= (or ='sine'=). With the methods =Uize.Curve.easeInExpo=, =Uize.Curve.easeOutExpo=, =Uize.Curve.easeInOutExpo=, and =Uize.Curve.easeMiddleExpo=, the value used for =methodNameSuffixSTR= would be ='Expo'= (or ='expo'=).
 
@@ -784,7 +784,7 @@ Uize.module ({
 								curveFUNC = Uize.Curve.line (startValue0to1FLOAT,endValue0to1FLOAT);
 								....................................................................
 
-								This method allows you to create curve functions that don't observe the `Start At 0, End At 1` rule of curve functions, so it is not always appropriate for use in controlling fades. This method is more useful for creating value ranges that can be supplied to curve function modifiers that accept value ranges for parameters. Consider the following example of using the =Uize.Curve.Mod.blend= static method...
+								This method allows us to create curve functions that don't observe the `Start At 0, End At 1` rule of curve functions, so it is not always appropriate for use in controlling fades. This method is more useful for creating value ranges that can be supplied to curve function modifiers that accept value ranges for parameters. Consider the following example of using the =Uize.Curve.Mod.blend= static method...
 
 								EXAMPLE
 								........................................................................

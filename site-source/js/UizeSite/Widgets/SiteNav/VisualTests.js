@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.SiteNav.VisualTests= class implements a set of visual tests for the =UizeSite.Widgets.SiteNav.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

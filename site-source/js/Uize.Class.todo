@@ -1,132 +1,49 @@
 This is a TO DO document for the =Uize.Class= module.
 
-Mixins
-	Add support for mix-ins.
+The bind Instance Method
+	Would provide a convenient way to bind the instance as a context to an instance method and arguments.
 
-	The mixin Feature Declaration Method
-		The =MyClass.mixin= feature declaration method allows one to specify one or more mixins that should be applied to the class.
+	INSTEAD OF...
+	...........................................
+	setTimeout (function () {m.hideMenu ()},0);
+	...........................................
 
-		EXAMPLE
-		.............................
-		_class.mixin (Uize.Web.Mixin);
-		.............................
+	USE...
+	...................................
+	setTimeout (m.bind ('hideMenu'),0);
+	...................................
 
-		Declaring Mixins During Subclassing
-			As with any of the feature declaration methods, the features can also be declared in the features object when calling the =MyClass.subclass= static method to create a new subclass.
+	IMPLEMENTATION
+	......................................................................................................
+	var _bind = Uize.nop.bind || function (_context) {
+		var
+			_args = [].slice.call (arguments,1),
+			_function = this
+		;
+		return function () {
+			return _function.apply (_context,_args.concat (Uize.copyList (arguments)));
+		};
+	};
 
-			EXAMPLE
-			....................................
-			Uize.module ({
-				name:'MyNamespace.MyWidget',
-				superclass:'Uize.Widget',
-				required:'Uize.Web.Mixin',
-				builder:function (_superclass) {
-					return _superclass.subclass ({
-						instanceMethods:{
-							// ...
-						},
-						mixin:Uize.Web.Mixin
-					});
-				}
-			});
-			....................................
+	_class.prototype.bind = function (_method) {
+		var
+			_context = this,
+			_args = arguments
+		;
+		_args = _args.length > 1 && [].slice.call (_args,1);
+		if (typeof _function == 'string')
+			_function = _context [_function]
+		;
+		return _args ? _bind.apply (_function,[_context].concat (_args)) : _bind.call (_function,_context);
+	};
+	......................................................................................................
 
-	Mixin as an Augmenter
-		In the simplest possible implementation, a mixin could be implemented in the form of a simple function that acts as an augmenter.
+	Impact
+		Would add about 336 bytes to the size of the =Uize.Class= module.
 
-		In the case of a class mixin, the mixin function would expect to receive a class as an argument and would call feature declaration methods on the class.
+		The main benefits would be a more elegant semantic for certain situations, and a tiny reduction in code size across the codebase. The savings would only balance out the added weight at large application scale, so the penalty is experienced mostly for smaller apps. Furthermore, most of the benefits would accrue to widget class modules in situations that will be avoided in future by more declarative binding logic. Finally, future versions of JavaScript will bring a =bind= method for all functions (already present in most modern browsers), and fat arrow syntax would also help in such situations.
 
-		EXAMPLE
-		.................................
-		UIze.module ({
-			name:'MyNamespace.ClassMixin',
-			builder:function () {
-				return function (_class) {
-					_class.declare ({
-						instanceMethods:{
-							// ...
-						},
-						stateProperties:{
-							// ...
-						}
-					});
-				};
-			}
-		});
-		.................................
-
-		USAGE
-		.......................................
-		Uize.module ({
-			name:'MyClass',
-			superclass:'Uize.Widget',
-			required:'MyNamespace.ClassMixin',
-			builder:function (_superclass) {
-				return _superclass.subclass ({
-					instanceMethods:{
-						// ...
-					},
-					stateProperties:{
-						// ...
-					},
-					mixin:'MyNamespace.ClassMixin'
-				});
-			}
-		});
-		.......................................
-
-	How Features are Mixed in
-		When the =MyClass.mixin= static method is called, the features of the classes that are specified are mixed into the class on which the =MyClass.mixin= method is called, in the order in which the mixin classes are specified.
-
-		Copying Static Properties
-			.
-
-		Copying State Properties
-			.
-
-		Copying Properties of the Prototype
-			.
-
-		Copying in Constructors
-			.
-
-		Similar to Subclassing
-			.
-
-	Considerations for Implementing Your Own Mixins
-		Avoid Namespace Conflicts for Privates
-			.
-
-		Be Careful With Private Static Properties
-			.
-
-		Host and Mixin Compatibility
-			A mixin will likely have an expectation of the host in which it is mixed into.
-
-			A mixin may expect to be mixed in to a specific class or subclass thereof, and may expect specific features to be present that may be used in the mixin's implementation.
-
-			Non-standalone Mixins
-				.
-
-		Avoid Order Requirements Amongst Mixins
-			.
-
-	Open Questions
-		Can Mixins be Standalone?
-			For example, if two widget classes existed that implemented some part of a UI, would it be possible to create a new subclass and then mixin those two widget classes?
-
-			An issue with mixing in standalone classes is that one can perform duplicate / redundant / wasted effort in copying in the guts of the classes to be mixed in. Ideally, if one create a new widget class and wanted to mix in the features of two other widget classes, only the modications made in those widget classes to the features inherited from the widget base class would be carried on the class into which the classes are being mixed in.
-
-			So, if widget A, widget B, and widget C all subclassed =Uize.Widget=, then mixing in widget B and widget C into widget A would only mix in the feature deltas between =Uize.Widget= and widget B and =Uize.Widget= and widget C. In order to achieve this, the mixin logic would need to trace up the inheritance chain and find the common base class for all the classes involved.
-
-			In reality, it may be more practical to require mixins to be implemented in a specific way - not as standalone classes but as class augmenters that have a specific expectation of the classes that they are to augment.
-
-		Determining Where Features are Introduced
-			With an implementation that treats a `mixin as an augmenter`, there is no way to programmatically determine that a feature that is mixed into a class actually originates from a mixin.
-
-			To a tool like the DELVE tool, feature discovery will attribute mixed in methods to the classes in the inheritance chain into which they were mixed in - not the mixin modules in which they are implemented. The only way to overcome this would be to tag the functions with the modules in which they are implemented. This would involve somehow providing the mixin module also as a reference when declaring features, but it is unclear how this reference would be passed. Additionally, tagging as can be done with function references cannot be accomplished with instance properties, static properties, or state properties.
-
-			All of this suggests that features should be declared in a more formalized manner and that classes on which features are declared should possibly maintain a registry of the features and where they were introduced and overridden.
+		In conclusion, besides being kind of neat, there's negative value in adding this feature at this time.
 
 Virtual Events
 	Similar to the system of virtual DOM events.
@@ -320,6 +237,8 @@ Handle Simple Type in Place of Constructor Properties
 Improvements to Property Mechanism
 	New Profile Features
 		type
+			Can be used by interpolation code (such as fades).
+
 			Basic types...
 
 			- string (coerce with value + '', implicit initial value is '')

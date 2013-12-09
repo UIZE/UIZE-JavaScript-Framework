@@ -29,9 +29,9 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This test page demonstrates that the <code>Uize.String.repeat</code> static method performs about the same as a typical implementation for the majority case, and performs significantly better in specific cases for which this method's implementation has been optimized.</p>
+		<p>This test page demonstrates that the <code>Uize.Str.Repeat.repeat</code> static method performs about the same as a typical implementation for the majority case, and performs significantly better in specific cases for which this method's implementation has been optimized.</p>
 
-		<p>In the test, the <code>Uize.String.repeat</code> static method is being compared to a typical implementation - <code>6000</code> iterations for each test - given various different parameter values. As you can see from the results, the UIZE implementation's optimizations have a dramatic effect for the special cases.</p>
+		<p>In the test, the <code>Uize.Str.Repeat.repeat</code> static method is being compared to a typical implementation - <code>6000</code> iterations for each test - given various different parameter values. As you can see from the results, the UIZE implementation's optimizations have a dramatic effect for the special cases.</p>
 	</div>
 
 	<!-- test results -->
@@ -51,7 +51,7 @@
 Uize.require (
 	[
 		'UizeSite.Page.Example.Test.library',
-		'Uize.String'
+		'Uize.Str.Repeat'
 	],
 	function () {
 		'use strict';
@@ -64,7 +64,7 @@ Uize.require (
 				var
 					_totalIterations = 6000,
 					_iterationNo,
-					_optimizedRepeat = Uize.String.repeat
+					_optimizedRepeat = Uize.Str.Repeat.repeat
 				;
 				function _typicalRepeat (_stringToRepeat,_repeatTimes) {
 					return new Array (_repeatTimes + 1).join (_stringToRepeat);
@@ -78,7 +78,7 @@ Uize.require (
 								;
 						},
 						function () {
-							/*** small string, many repeats - Uize.String.repeat ***/
+							/*** small string, many repeats - Uize.Str.Repeat.repeat ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
 									_optimizedRepeat ('*',1000)
 								;
@@ -90,7 +90,7 @@ Uize.require (
 								;
 						},
 						function () {
-							/*** empty string, many repeats - Uize.String.repeat ***/
+							/*** empty string, many repeats - Uize.Str.Repeat.repeat ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
 									_optimizedRepeat ('',1000)
 								;
@@ -102,7 +102,7 @@ Uize.require (
 								;
 						},
 						function () {
-							/*** small string, zero repeats - Uize.String.repeat ***/
+							/*** small string, zero repeats - Uize.Str.Repeat.repeat ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
 									_optimizedRepeat ('*',0)
 								;
@@ -114,7 +114,7 @@ Uize.require (
 								;
 						},
 						function () {
-							/*** large string, one repeat - Uize.String.repeat ***/
+							/*** large string, one repeat - Uize.Str.Repeat.repeat ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
 									_optimizedRepeat ('****************************************',1)
 								;
@@ -126,7 +126,7 @@ Uize.require (
 								;
 						},
 						function () {
-							/*** space, many repeats - Uize.String.repeat ***/
+							/*** space, many repeats - Uize.Str.Repeat.repeat ***/
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
 									_optimizedRepeat (' ',1000)
 								;
@@ -138,15 +138,15 @@ Uize.require (
 							_reportResults (
 								'<h1>Durations</h1>\n' +
 								'<p><b>small string, many repeats - typical repeat approach:</b> ' + _executionTimes [0] + 'ms</p>\n' +
-								'<p><b>small string, many repeats - Uize.String.repeat:</b> ' + _executionTimes [1] + 'ms</p>\n' +
+								'<p><b>small string, many repeats - Uize.Str.Repeat.repeat:</b> ' + _executionTimes [1] + 'ms</p>\n' +
 								'<p><b>empty string, many repeats - typical repeat approach:</b> ' + _executionTimes [2] + 'ms</p>\n' +
-								'<p><b>empty string, many repeats - Uize.String.repeat:</b> ' + _executionTimes [3] + 'ms</p>\n' +
+								'<p><b>empty string, many repeats - Uize.Str.Repeat.repeat:</b> ' + _executionTimes [3] + 'ms</p>\n' +
 								'<p><b>small string, zero repeats - typical repeat approach:</b> ' + _executionTimes [4] + 'ms</p>\n' +
-								'<p><b>small string, zero repeats - Uize.String.repeat:</b> ' + _executionTimes [5] + 'ms</p>\n' +
+								'<p><b>small string, zero repeats - Uize.Str.Repeat.repeat:</b> ' + _executionTimes [5] + 'ms</p>\n' +
 								'<p><b>large string, one repeat - typical repeat approach:</b> ' + _executionTimes [6] + 'ms</p>\n' +
-								'<p><b>large string, one repeat - Uize.String.repeat:</b> ' + _executionTimes [7] + 'ms</p>\n' +
+								'<p><b>large string, one repeat - Uize.Str.Repeat.repeat:</b> ' + _executionTimes [7] + 'ms</p>\n' +
 								'<p><b>space, many repeats - typical repeat approach:</b> ' + _executionTimes [8] + 'ms</p>\n' +
-								'<p><b>space, many repeats - Uize.String.repeat:</b> ' + _executionTimes [9] + 'ms</p>\n'
+								'<p><b>space, many repeats - Uize.Str.Repeat.repeat:</b> ' + _executionTimes [9] + 'ms</p>\n'
 							);
 					}
 				);

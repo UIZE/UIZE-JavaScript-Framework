@@ -53,22 +53,26 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiOptionSelected = function() {
+			_classPrototype._updateUiOptionSelected = function () {
 				var _this = this;
 				if (_this.isWired && _this._valueNo != _this._lastValueNo) {
-					function _setOptionSelected (_optionNo,_selected) {
+					var _setOptionSelected = function (_optionNo, _selected) {
 						_optionNo >= 0 &&
-							Uize.callOn (_this.children ['option' + _optionNo],'set',[{selected:_selected}])
+							Uize.callOn(_this.children['option' + _optionNo], 'set', [{ selected: _selected }])
 						;
-					}
+					};
 					_setOptionSelected (_this._lastValueNo,_false);
 					_setOptionSelected (_this._lastValueNo = _this._valueNo,true);
 				}
 			};
 
 			_classPrototype._updateValueNo = function () {
-				var _this = this;
-				_this.set ({_valueNo:_this.getValueNoFromValue (_this._value)});
+				var
+					_this = this,
+					_valueNo = _this.getValueNoFromValue (_this._value)
+				;
+
+				_this.set ({_valueNo:_valueNo, _tentativeValueNo:_valueNo});
 				_this._updateUiOptionSelected ();
 			};
 
@@ -79,7 +83,6 @@ Uize.module ({
 					++_valueNo < _valuesLength;
 				)
 					if (_function (_children ['option' + _valueNo],_valueNo) === _false) break;
-				;
 				/*?
 					Instance Methods
 						forAll
@@ -125,11 +128,35 @@ Uize.module ({
 							...........................................................
 							valueNoINT = myInstance.getValueNoFromValue (valueANYTYPE);
 							...........................................................
+							
+							NOTES
+							- See related =getValueObject= instance method
+				*/
+			};
+			
+			_classPrototype.getValueObject = function (_value) {
+				var
+					_this = this,
+					_valueNo = _this.getValueNoFromValue(_value === _undefined ? _this._value : _value)
+				;
+				return _valueNo > -1 ? _this._values[_valueNo] : _null;
+				/*?
+					Instance Methods
+						getValueObject
+							Returns an object, representing the data attached to the specified value in the =values= set. If the specified value is not one of the values in the =values= set, then this method returns =null=.
+
+							SYNTAX
+							...........................................................
+							valueObjOBJ = myInstance.getValueObject (valueANYTYPE);
+							...........................................................
+							
+							NOTES
+							- See related =getValueNoFromValue= instance method
 				*/
 			};
 
-			_classPrototype.getOptionProperties = function(_valueNo, _valueObject) {
-				return _null
+			_classPrototype.getOptionProperties = function (/*_valueNo, _valueObject*/) {
+				return _null;
 			};
 				/*?
 					Instance Methods
@@ -178,32 +205,33 @@ Uize.module ({
 						_optionWidgetProperties = _this._optionWidgetProperties,
 						_values = _this._values,
 						_valuesLength = _this._totalOptionChildButtons = _values.length,
-						_restoreValueTimeout, _tentativeValueTimeout
+						_restoreValueTimeout, _tentativeValueTimeout,
+						_restoreValue = function() {
+							_restoreValueTimeout = _null;
+							_this.set ({
+								_tentativeValue:_this._value,
+								_tentativeValueNo:_this._valueNo
+							});
+						},
+						_clearTentativeValueTimeouts = function() {
+							_restoreValueTimeout && clearTimeout (_restoreValueTimeout);
+							_tentativeValueTimeout && clearTimeout (_tentativeValueTimeout);
+						}
 					;
-					function _restoreValue () {
-						_restoreValueTimeout = _null;
-						_this.set ({
-							_tentativeValue:_this._value,
-							_tentativeValueNo:_this._valueNo
-						});
-					}
-					function _clearTentativeValueTimeouts () {
-						_restoreValueTimeout && clearTimeout (_restoreValueTimeout);
-						_tentativeValueTimeout && clearTimeout (_tentativeValueTimeout);
-					}
 					Uize.forEach (
 						_values,
 						function _setupOption (_valueObject,_valueNo) {
-							var _value =
-								((typeof _valueObject == 'object' && _valueObject) || (_valueObject = {name:_valueObject})).name
+							var
+								_value =
+									((typeof _valueObject == 'object' && _valueObject) || (_valueObject = {name:_valueObject})).name,
+								_setValue = function() {
+									_this.set (
+										_this._setValueOnMouseover
+											? {_value:_value}
+											: {_tentativeValue:_value,_tentativeValueNo:_valueNo}
+									);
+								}
 							;
-							function _setValue () {
-								_this.set (
-									_this._setValueOnMouseover
-										? {_value:_value}
-										: {_tentativeValue:_value,_tentativeValueNo:_valueNo}
-								);
-							}
 							_this.addChild (
 								'option' + _valueNo,
 								_optionWidgetClass,
@@ -232,7 +260,7 @@ Uize.module ({
 											;
 										} else if (_event.name == 'Out') {
 											_clearTentativeValueTimeouts ();
-											_restoreValueTimeout = setTimeout (_restoreValue,250);
+											_restoreValueTimeout = setTimeout (_restoreValue,50);
 										}
 										_this.fire ({
 											name:'Option Event',
@@ -305,7 +333,7 @@ Uize.module ({
 			_class.stateProperties ({
 				_ensureValueInValues:{
 					name:'ensureValueInValues',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 						_this.set({_value:_getValidValue.call(_this, _this._value)});
 					},
@@ -446,6 +474,7 @@ Uize.module ({
 							;
 							_this.unwireUi ();
 							_this.get ('html') != _undefined && _this.set ({built:_false});
+							_this.set({_value:_getValidValue.call(_this, _this._value)});
 							_this.insertOrWireUi ();
 						}
 					},

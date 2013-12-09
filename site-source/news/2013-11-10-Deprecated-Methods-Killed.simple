@@ -1,0 +1,20 @@
+Various methods that were deprecated in January of 2013 have now been killed.
+
+This includes the =Uize.Node.returnFalse= and =Uize.Node.returnTrue= static methods implemented in the =Uize.Node= module, the =Uize.Class.registerProperties= static method implemented in the =Uize.Class= module, the =Uize.globalEval= static method implemented in the =Uize= base module, and the =Uize.Service.declareServiceMethods= static method implemented in the =Uize.Service= module.
+
+SUMMARY
+..............................................................................
+Uize.Node.returnFalse               >> BECOMES >>  Uize.returnFalse
+Uize.Node.returnTrue                >> BECOMES >>  Uize.returnTrue
+Uize.Class.registerProperties       >> BECOMES >>  Uize.Class.stateProperties
+Uize.globalEval                     >> BECOMES >>  Uize.laxEval
+Uize.Service.declareServiceMethods  >> BECOMES >>  Uize.Service.serviceMethods
+..............................................................................
+
+Because the deprecated methods have now been killed, you should make sure to update any code that may have been using the methods by their old names to use the new names.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-11-10 - Deprecated Methods Killed
+....................................................................................

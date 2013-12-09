@@ -149,7 +149,9 @@ Uize.module ({
 							..................................................................
 
 							nameCase
-								A string, specifying the case for keys in the object that is produced from decoding the attributes string. This property is optional. By default, attribute names are left as they appear in the attributes string. This property allows you to coerce the case in order to correct for attribute strings that do not conform in your specific use case.
+								A string, specifying the case for keys in the object that is produced from decoding the attributes string.
+
+								This property is optional. By default, attribute names are left as they appear in the attributes string. This property allows us to coerce the case in order to correct for attribute strings that do not conform in our specific use case.
 
 							EXAMPLE
 							......................................................................................
@@ -266,7 +268,7 @@ Uize.module ({
 							nameCase
 								A string, specifying the case for attribute names that are generated from the keys of the attributes object.
 
-								This property is optional. By default, attribute names are identical to the keys in the attributes object. This property allows you to coerce the case in order to conform the attributes string for your specific use case.
+								This property is optional. By default, attribute names are identical to the keys in the attributes object. This property allows us to coerce the case in order to conform the attributes string for our specific use case.
 
 								EXAMPLE
 								........................

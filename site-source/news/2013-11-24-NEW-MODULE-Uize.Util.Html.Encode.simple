@@ -1,0 +1,52 @@
+The new =Uize.Util.Html.Encode= module provides utility methods for HTML encoding and HTML decoding of strings.
+
+Migrated Functionality
+	The methods of the =Uize.Util.Html.Encode= module were migrated from the =Uize.Xml= module as follows...
+
+	MIGRATED
+	........................................................................
+	Uize.Xml.toAttributeValue    >> BECOMES >>  Uize.Util.Html.Encode.encode
+	Uize.Xml.fromAttributeValue  >> BECOMES >>  Uize.Util.Html.Encode.decode
+	........................................................................
+
+	These two methods were migrated from the =Uize.Xml= module in order to make them available without also needing to load all the other code from the =Uize.Xml= module. The attribute value encoding and decoding methods in the =Uize.Xml= module are still supported for convenience and backwards compatibility - they have NOT been deprecated.
+
+Uize.Util.Html.Encode.encode
+	Returns a string, representing the HTML-encoded form of the specified string.
+
+	SYNTAX
+	.....................................................................................
+	encodedAttributeValueSTR = Uize.Util.Html.Encode.encode (unencodedAttributeValueSTR);
+	.....................................................................................
+
+	EXAMPLE
+	..................................................................................
+	encodedValue = Uize.Util.Html.Encode.encode ('solar & wind beats "fossil" fuels');
+	..................................................................................
+
+	After executing the above statement, the variable =encodedValue= would have the value ='solar &amp;amp; wind beats &amp;quot;fossil&amp;quot; fuels'=.
+
+Uize.Util.Html.Encode.decode
+	Returns a string, representing the decoded form of the specified HTML-encoded string.
+
+	SYNTAX
+	.....................................................................................
+	unencodedAttributeValueSTR = Uize.Util.Html.Encode.decode (encodedAttributeValueSTR);
+	.....................................................................................
+
+	This method supports decoding the full set of 252 character entities contained in the HTML 4 specification, as well as entities encoded using the forms =&amp;#nnnn;= and =&amp;#xhhhh;= (where =nnnn= and =hhhh= are the Unicode character code of the character in decimal and hexadecimal formats, respectively).
+
+	EXAMPLE
+	....................................................
+	unencoded = Uize.Util.Html.Encode.decode (
+		'solar &amp; wind beats &quot;fossil&quot; fuels'
+	);
+	....................................................
+
+	After executing the above statement, the variable =unencoded= would have the value ='solar &amp; wind beats "fossil" fuels'=.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-11-24 - NEW MODULE: Uize.Util.Html.Encode
+....................................................................................

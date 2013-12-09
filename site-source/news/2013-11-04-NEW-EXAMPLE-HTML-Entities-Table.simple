@@ -1,0 +1,13 @@
+The new [[../examples/html-entities-table.html][HTML Entities Table]] example presents the user with a sortable table that lists all the HTML named entities (as defined by various ISO standards).
+
+This example serves to showcase the =Uize.Util.Html.Entities= and =Uize.Util.Html.EntityInfo= modules of the UIZE JavaScript Framework, with the =Uize.Util.Html.EntityInfo= module providing the descriptions for the entities. The table is sortable by description, character code, and entity name.
+
+For convenience, the description text is segmented from most generic to most specific characteristics, allowing a sort on the description column to easily provide logical grouping and subgrouping. Also, the description for each entity is linked to Wikipedia for further information on each entity.
+
+[[../examples/html-entities-table.html][CHECK IT OUT]]
+
+....................................................................................
+<< metadata >>
+
+title: 2013-11-04 - NEW EXAMPLE: HTML Entities Table
+....................................................................................

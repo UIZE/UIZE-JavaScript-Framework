@@ -23,66 +23,49 @@
 		*DEVELOPERS:* `Tim Carter`, `Ben Ilegbodu`, `Vinson Chuong`
 */
 
-
 Uize.module ({
 	name:'Uize.Widget.FormElement.Text',
 	required:'Uize.Node',
-	builder:function(_superclass) {
+	builder:function (_superclass) {
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_supportsPlaceholder = typeof document != 'undefined'
-					&& 'placeholder' in document.createElement('input')
+					&& 'placeholder' in document.createElement('input'),
+				_undefined
 			;
 
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass(
 					null,
-					function() {
+					function () {
 						var _this = this;
 
 						_this.wire(
 							'Changed.focused',
-							function(_event) {
+							function (_event) {
 								if (_this.isWired) {
 									var
 										_focused = _event.newValue,
-										_placeholder = _this._placeholder
+										_placeholder = _this._placeholder,
+										_value = _this.valueOf()
 									;
 
 									if (_placeholder && !_supportsPlaceholder) {
-										var
-											_newText,
-											_value = _this.get('value')
-										;
+										var _newText;
 										if (_focused && _value == _placeholder)
 											_newText = '';
 										else if (!_focused && !_value)
 											_newText = _placeholder
 										;
-										_newText != undefined && _this.setNodeValue ('input', _newText);
+										_newText != _undefined && _this.setNodeValue ('input', _newText);
 									}
 
-									if (_focused) {
-										var
-											_inputNode = _this.getNode('input'),
-											_inputNodeValue = _this.getNodeValue(_inputNode),
-											_valueLength = _inputNodeValue ? _inputNodeValue.length : 0
-										;
-
-										if (_valueLength > 0) {
-											if (_inputNode.createTextRange) {
-												var _range = _inputNode.createTextRange();
-												_range.move('character', _valueLength);
-												_range.select();
-											}
-											else if (_inputNode.setSelectionRange)
-												_inputNode.setSelectionRange(_valueLength, _valueLength)
-											;
-										}
-									}
+									_focused
+										&& _value
+										&& _this.setCaretPosition(_value.length);
 								}
 							}
 						);
@@ -94,11 +77,11 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateMoreValidators = function() {
+			_classPrototype._updateMoreValidators = function () {
 				var _this = this;
 
 				_this._moreValidators = [
-					function(_value) {
+					function (_value) {
 						var
 							_valueString = _value + '',
 							_valueLength = _value != null ? _valueString.length : 0
@@ -109,57 +92,74 @@ Uize.module ({
 				];
 			};
 
-			_classPrototype._updateUiPlaceholder = function() {
+			_classPrototype._updateUiPlaceholder = function () {
 				this.isWired
 					&& _supportsPlaceholder
 					&& this.setNodeProperties('input', {placeholder:this._placeholder})
+				;
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.checkIsEmpty = function() {
-				return _superclass.doMy (this,'checkIsEmpty') || this.get('value') == this._placeholder
+			_classPrototype.checkIsEmpty = function () {
+				return _superclass.doMy (this,'checkIsEmpty') || this.valueOf() == this._placeholder;
 			};
 
 			_classPrototype.getCaretPosition = function () {
 				var
 					_this = this,
-					_input = _this.getNode ('input')
+					_caretPosition = -1
 				;
 
 				if (_this.isWired && _this.get ('focused')) {
-					if (Uize.Node.isIe) {
-						var _sel = document.selection.createRange ();
+					var _input = _this.getNode ('input');
+					if ('selectionStart' in _input)
+						_caretPosition = _input.selectionStart;
+					else if (_input.createTextRange) {
+						var _sel = _input.createTextRange ();
 						_sel.moveStart ('character', -_this.get ('tentativeValue').length);
-						return _sel.text.length;
-					} else {
-						return _input.selectionStart;
+						_caretPosition = _sel.text.length;
 					}
-				} else {
-					return -1;
+				}
+				
+				return _caretPosition;
+			};
+			
+			_classPrototype.select = function(_startPosition, _endPosition) {
+				var _this = this;
+				
+				if (_this.isWired) {
+					var
+						_input = _this.getNode ('input'),
+						_value = _this.valueOf()
+					;
+					
+					_this.set('focused', true);
+					
+					if (_value) {
+						if (_startPosition == _undefined)
+							_input.select();
+						else {
+							_endPosition = _endPosition == _undefined ? _value.length : _endPosition;
+							
+							if (_input.setSelectionRange)
+								_input.setSelectionRange (_startPosition, _endPosition);
+							else if (_input.createTextRange) {
+								var _range = _input.createTextRange ();
+								_range.collapse (true);
+								_range.moveEnd ('character', _endPosition);
+								_range.moveStart ('character', _startPosition);
+								_range.select ();
+							}
+						}
+					}
 				}
 			};
 
-			_classPrototype.setCaretPosition = function (_position) {
-				var
-					_this = this,
-					_input = _this.getNode ('input')
-				;
+			_classPrototype.setCaretPosition = function (_position) { this.select(_position, _position) };
 
-				if (_this.isWired && _this.get ('focused')) {
-					if (Uize.Node.isIe) {
-						var _range = _input.createTextRange ();
-						_range.collapse (true);
-						_range.moveEnd ('character', _position);
-						_range.moveStart ('character', _position);
-						_range.select ();
-					} else
-						_input.setSelectionRange (_position, _position);
-				}
-			};
+			_classPrototype.getMoreValidators = function () { return this._moreValidators };
 
-			_classPrototype.getMoreValidators = function() { return this._moreValidators };
-
-			_classPrototype.updateUi = function() {
+			_classPrototype.updateUi = function () {
 				if (this.isWired) {
 					this._updateUiPlaceholder();
 					_superclass.doMy (this,'updateUi');

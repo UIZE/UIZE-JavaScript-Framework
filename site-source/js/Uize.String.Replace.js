@@ -13,77 +13,19 @@
 	type: Object
 	importance: 1
 	codeCompleteness: 100
-	docCompleteness: 5
+	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.String.Replace= module provides methods for working with multi-line strings, supporting indenting, changing linebreaks, modifying lines, etc.
+		The =Uize.String.Replace= module is deprecated *(DEPRECATED 2013-10-21)* and is an alias to the =Uize.Str.Replace= module, which is effectively the same module migrated to under the =Uize.Str= namespace.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
 	name:'Uize.String.Replace',
-	builder:function () {
-		'use strict';
-
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
-
-		/*** Static Methods ***/
-			_package.replacerByLookup = function (_replacementsLookup) {
-				var
-					_regExpPipedSegments = [],
-					_singleCharReplacements = []
-				;
-				Uize.forEach (
-					Uize.keys (_replacementsLookup),
-					function (_key) {
-						if (_key)
-							(_key.length > 1 ? _regExpPipedSegments : _singleCharReplacements).push (
-								Uize.escapeRegExpLiteral (_key)
-							)
-						;
-					}
-				);
-				_singleCharReplacements.length &&
-					_regExpPipedSegments.unshift ('[' + _singleCharReplacements.join ('') + ']')
-				;
-				var _replacerRegExp = new RegExp (_regExpPipedSegments.join ('|'),'g');
-				return function (_sourceString) {
-					return (_sourceString += '') && _sourceString.replace (
-						_replacerRegExp,
-						function (_match) {return _replacementsLookup [_match]}
-					);
-				}
-				/*?
-					Static Methods
-						Uize.String.Replace.replacerByLookup
-							.
-
-							SYNTAX
-							............................................................................
-							replacerFUNC = Uize.String.Replace.replacerByLookup (replacementsLookupOBJ);
-							............................................................................
-				*/
-			};
-
-			_package.replaceByLookup = function (_sourceStr,_replacementsLookup) {
-				return _package.replacerByLookup (_replacementsLookup) (_sourceStr);
-				/*?
-					Static Methods
-						Uize.String.Replace.replaceByLookup
-							.
-
-							SYNTAX
-							..................................................................................
-							resultSTR = Uize.String.Replace.replaceByLookup (sourceSTR,replacementsLookupOBJ);
-							..................................................................................
-				*/
-			};
-
-		return _package;
-	}
+	required:'Uize.Str.Replace',
+	builder:function () {return Uize.Str.Replace}
 });
 

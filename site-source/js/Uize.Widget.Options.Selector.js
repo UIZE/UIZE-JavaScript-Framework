@@ -29,101 +29,93 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function() {
-						var
-							_this = this,
-							_valueString = 'value',
-							_tentativeValueString = 'tentativeValue',
-							_valueDetailsCache = {},
-							_undefined
-						;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var
+					m = this,
+					_valueString = 'value',
+					_tentativeValueString = 'tentativeValue',
+					_valueDetailsCache = {},
+					_undefined
+				;
 
-						// So there can be a case where the value & valueDetails are set for the options, but that
-						// info isn't in the values set.  In order to support tentativeValue & tentativeValueDetails
-						// changing but still getting back that value & valueDetails that were set (and not in the list)
-						// we need to cache the valueDetails
-						function _addToValueDetailsCache(_value, _valueDetails) {
-							if (_valueDetails != null)
-								_valueDetailsCache[_value] = _valueDetails;
-						}
-
-						function _syncValueDetails(_propertyName) {
-							var
-								_propertyValue = _this.get(_propertyName),
-								_valueDetails = _valueDetailsCache[_propertyValue]
-							;
-
-							if (_valueDetails === _undefined) {
-								var _valueObject = Uize.findRecord (_this.get('values'), {name:_propertyValue});
-
-								_addToValueDetailsCache(
-									_propertyValue,
-									_valueDetails = (_valueObject ? _valueObject.valueDetails : null)
-								);
-							}
-
-							_this.set(_propertyName + 'Details', _valueDetails);
-						}
-
-						_this.wire({
-							'Changed.tentativeValue':function() { _syncValueDetails(_tentativeValueString) },
-							'Changed.value':function() { _syncValueDetails(_valueString) },
-							'Changed.tentativeValueDetails':function() {
-								_addToValueDetailsCache(_this.get(_tentativeValueString), _this._tentativeValueDetails)
-							},
-							'Changed.valueDetails':function() {
-								_addToValueDetailsCache(_this.get(_valueString), _this._valueDetails)
-							},
-							'Changed.values':function() {
-								_valueDetailsCache = {};
-								_addToValueDetailsCache(_this.valueOf(), _this._valueDetails);
-							}
-						});
-
-						_syncValueDetails(_valueString);
-						_syncValueDetails(_tentativeValueString);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Methods ***/
-			_classPrototype.getOptionProperties = function(_valueNo, _valueObject) {
-				return Uize.copyInto(
-					_superclass.doMy (this,'getOptionProperties',[_valueNo, _valueObject]) || {},
-					{
-						value:_valueObject.name,
-						valueDetails:_valueObject.valueDetails
-					}
-				)
-			};
-
-			_classPrototype.wireUi = function() {
-				var _this = this;
-
-				if (!_this.isWired) {
-					// set the container for the options that get created
-					_this.set({container:_this.getNode('options')});
-
-					_superclass.doMy (_this,'wireUi');
+				// So there can be a case where the value & valueDetails are set for the options, but that
+				// info isn't in the values set.  In order to support tentativeValue & tentativeValueDetails
+				// changing but still getting back that value & valueDetails that were set (and not in the list)
+				// we need to cache the valueDetails
+				function _addToValueDetailsCache(_value, _valueDetails) {
+					if (_valueDetails != null)
+						_valueDetailsCache[_value] = _valueDetails;
 				}
-			};
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				function _syncValueDetails(_propertyName) {
+					var
+						_propertyValue = m.get(_propertyName),
+						_valueDetails = _valueDetailsCache[_propertyValue]
+					;
+
+					if (_valueDetails === _undefined) {
+						var _valueObject = Uize.findRecord (m.get('values'), {name:_propertyValue});
+
+						_addToValueDetailsCache(
+							_propertyName,
+							_valueDetails = (_valueObject ? _valueObject.valueDetails : null)
+						);
+					}
+
+					m.set(_propertyName + 'Details', _valueDetails);
+				}
+
+				m.wire({
+					'Changed.tentativeValue':function () { _syncValueDetails(_tentativeValueString) },
+					'Changed.value':function () { _syncValueDetails(_valueString) },
+					'Changed.tentativeValueDetails':function () {
+						_addToValueDetailsCache(m.get(_tentativeValueString), m._tentativeValueDetails);
+					},
+					'Changed.valueDetails':function () {
+						_addToValueDetailsCache(m.get(_valueString), m._valueDetails);
+					},
+					'Changed.values':function () {
+						_valueDetailsCache = {};
+						_addToValueDetailsCache(m.valueOf(), m._valueDetails);
+					}
+				});
+
+				_syncValueDetails(_valueString);
+				_syncValueDetails(_tentativeValueString);
+			},
+
+			instanceMethods:{
+				getOptionProperties:function (_valueNo, _valueObject) {
+					return Uize.copyInto(
+						_superclass.doMy (this,'getOptionProperties',[_valueNo, _valueObject]) || {},
+						{
+							value:_valueObject.name,
+							valueDetails:_valueObject.valueDetails
+						}
+					);
+				},
+
+				wireUi:function () {
+					var m = this;
+
+					if (!m.isWired) {
+						// set the container for the options that get created
+						m.set({container:m.getNode('options')});
+
+						_superclass.doMy (m,'wireUi');
+					}
+				}
+			},
+
+			stateProperties:{
 				_tentativeValueDetails:'tentativeValueDetails',
 				_valueDetails:'valueDetails'
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				optionWidgetClass:Uize.Widget.Button.ValueDisplay.Selector
-			});
-
-		return _class;
+			}
+		});
 	}
 });

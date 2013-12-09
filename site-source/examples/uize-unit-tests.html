@@ -91,7 +91,7 @@ Uize.require (
 		'Uize.Widgets.Button.Widget',
 		'Uize.Widgets.ProgressBar.Widget',
 		'Uize.Widgets.Log.Widget',
-		'Uize.String',
+		'Uize.Str.Repeat',
 		'UizeSite.ModulesTree',
 		'Uize.Data.PathsTree',
 		'Uize.Url',
@@ -212,7 +212,7 @@ Uize.require (
 					_testSuite.wire ({
 						Start:
 							function (e) {
-								_log.log (Uize.String.repeat ('...',e.source.getDepth ()) + e.source.get ('title'));
+								_log.log (Uize.Str.Repeat.repeat ('...',e.source.getDepth ()) + e.source.get ('title'));
 							},
 						Done:
 							function (e) {
@@ -222,7 +222,7 @@ Uize.require (
 								;
 								_progressBar.set ({value:++_currentTestNo});
 								_log.log (
-									Uize.String.repeat ('...',_test.getDepth () + 1) +
+									Uize.Str.Repeat.repeat ('...',_test.getDepth () + 1) +
 									(
 										_test.get ('result')
 											? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
@@ -264,12 +264,12 @@ Uize.require (
 		/*** initialize ***/
 			/*** populate test selector ***/
 				var
-					_testSelector = _page.getNode ('testSelector'),
-					_testSelectorOptions = _testSelector.options
+					_selector = _page.getNode ('testSelector'),
+					_selectorOptions = _selector.options
 				;
-				_testSelectorOptions [_testSelectorOptions.length] = new Option (_runAllModuleTests,_runAllModuleTests);
+				_selectorOptions [_selectorOptions.length] = new Option (_runAllModuleTests,_runAllModuleTests);
 				for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
-					_testSelectorOptions [_testSelectorOptions.length] = new Option (
+					_selectorOptions [_selectorOptions.length] = new Option (
 						(_testName = _testNames [_testNo]) + (_testsSubTreeLookup [_testName] ? '' : ' *'),
 						_testName
 					)

@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.String.Camel Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Str.Camel Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
@@ -18,23 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.String.Camel= module defines a suite of unit tests for the =Uize.String.Camel= module.
+		The =Uize.Test.Uize.Str.Camel= module defines a suite of unit tests for the =Uize.Str.Camel= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.String.Camel',
-	required:'Uize.Class.Value',
+	name:'Uize.Test.Uize.Str.Camel',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.String.Camel Module',
+			title:'Test for Uize.Str.Camel Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.String.Camel'),
+				Uize.Test.requiredModulesTest ('Uize.Str.Camel'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.String.Camel.to',[
+					['Uize.Str.Camel.to',[
 						['Test single lowercased word with no delimiters',
 							'hello',
 							'hello'

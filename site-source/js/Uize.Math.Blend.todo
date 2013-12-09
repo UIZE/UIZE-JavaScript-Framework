@@ -1,0 +1,46 @@
+This is a TO DO document for the =Uize.Math.Blend= module.
+
+Node Level Defaults for Compound Curves and Quantization
+	For compound curves and quantization, a way to specify a default for all properties of an object, when an object is specified in order to specify curves or quantization for some properties.
+
+	EXAMPLE
+	................................................................................
+	quantization:{
+		'*':1,
+		opacity:0
+	}
+	................................................................................
+
+	Without this ability, if you wanted quantization to be 0 for opacity, but 1 for all other properties, you'd be forced to explicitly specify it for all those other properties. The alternative would be to specify quantization:1, but then you can't have 0 for opacity.
+
+Support Blend Amounts Outside of 0 to 1
+	Formally support specifying blend amounts outside of the range of =0= to =1=.
+
+	Currently, this is partially supported as a side effect of the implementation, but there is no specific handling for curve functions which do not support values outside of the range of =0= to =1=. For curve functions, there are two possible options...
+
+	- `Linear Extension` - the curve function is not applied when the blend amount is outside of the range, effectively making the blend linear in the extended range
+	- `Looping Curve Functions` - the curve function is applied in a cyclical manner, effectively looping it to extend it  beyond the =0= to =1= range
+
+	Linear Extension
+		In order to make the blend curve linear outside of the =0= to =1= range that is supported by curve functions, one could simply take an approach like...
+
+		.................................
+		if (_blend >= 0 && _blend <= 1) {
+			_blend = _curve (_blend);
+		}
+		.................................
+
+		So, effectively, the curve function is not applied to the blend amount if the blend amount is outside of the =0= to =1= range.
+
+	Looping Curve Functions
+		In order to "loop" a curve function, one could take an approach like...
+
+		..........................................................
+		if (_blend < 0 || _blend > 1) {
+			var _blendOffset = Math.floor (_blend);
+			_blend = _blendOffset + _curve (_blend - _blendOffset);
+		} else {
+			_blend = _curve (_blend);
+		}
+		..........................................................
+

@@ -29,38 +29,15 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node
-			;
+				_Uize_Node = Uize.Node,
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
-
-						function _updateUiState () {
-							if (_this.isWired) {
-								_this._isClickable () || _this.set ({_state:''});
-								_this._updateUiState ();
-							}
-						}
-						_this.wire ({
-							'Changed.busyInherited':_updateUiState,
-							'Changed.enabledInherited':_updateUiState
-						});
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
+				_class,
 				_overButton,
 
 				/*** state precedence mechanism ***/
@@ -93,22 +70,19 @@ Uize.module ({
 						click:['over','Click'],
 						dblclick:['over','Double Click']
 					}
-			;
-
-		/*** Private Instance Properties ***/
-			_classPrototype._tooltipShown = _false;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._isClickable = function (_ignoreSelected) {
-				var _this = this;
+			function _isClickable (m,_ignoreSelected) {
 				return !!(
-					_this.get ('enabledInherited') && !_this.get ('busyInherited') &&
-					(_ignoreSelected || !_this._selected || _this._clickToDeselect || _this._allowClickWhenSelected)
+					m.get ('enabledInherited') && !m.get ('busyInherited') &&
+					(_ignoreSelected || !m._selected || m._clickToDeselect || m._allowClickWhenSelected)
 				);
-			};
+			}
 
-			_classPrototype._updateUiText = function () {
-				this._text != _undefined && this.isWired && this.setNodeInnerHtml ('text',this._text);
+			function _updateUiText () {
+				var m = this;
+				m._text != _undefined && m.isWired && m.setNodeInnerHtml ('text',m._text);
 				/*?
 					Implied Nodes
 						text Implied Node
@@ -119,23 +93,23 @@ Uize.module ({
 							NOTES
 							- this implied node is optional
 				*/
-			};
+			}
 
-			var _updateUiState = _classPrototype._updateUiState = function () {
-				var _this = this;
-				if (_this.isWired) {
+			function _updateUiState () {
+				var m = this;
+				if (m.isWired) {
 					var
-						_rootNode = _this._rootNode,
-						_enabledInherited = _this.get ('enabledInherited'),
-						_busyInherited = _this.get ('busyInherited'),
+						_rootNode = m._rootNode,
+						_enabledInherited = m.get ('enabledInherited'),
+						_busyInherited = m.get ('busyInherited'),
 						_stateCombinationNo =
 							/* grayed state  */ (!_enabledInherited ? 16 : 0) |
-							/* default state */ (!_this._state || _busyInherited ? 8 : 0) |
-							/* over state    */ (_this == _overButton ? 4 : 0) |
-							/* active state  */ (_this._state == 'down' || _this._selected ? 2 : 0) |
-							/* playing state */ (_this._playing ? 1 : 0)
+							/* default state */ (!m._state || _busyInherited ? 8 : 0) |
+							/* over state    */ (m == _overButton ? 4 : 0) |
+							/* active state  */ (m._state == 'down' || m._selected ? 2 : 0) |
+							/* playing state */ (m._playing ? 1 : 0)
 						,
-						_firstShownState = _this._statePrecedenceMap [_stateCombinationNo]
+						_firstShownState = m._statePrecedenceMap [_stateCombinationNo]
 					;
 					/*?
 						Implied Nodes
@@ -151,7 +125,7 @@ Uize.module ({
 						for (
 							var
 								_stateNo = -1,
-								_statePrecedence = _this._statePrecedence,
+								_statePrecedence = m._statePrecedence,
 								_statePrecedenceLength = _statePrecedence.length
 							;
 							++_stateNo < _statePrecedenceLength;
@@ -162,15 +136,15 @@ Uize.module ({
 								break;
 							}
 						}
-						_this._statePrecedenceMap [_stateCombinationNo] = _firstShownState;
+						m._statePrecedenceMap [_stateCombinationNo] = _firstShownState;
 					}
-					if (_this._mode == 'classes') {
+					if (m._mode == 'classes') {
 						var
 							_oldClass = _rootNode.className,
 							_newClass = ''
 						;
-						if (_this._classNamingForStates == 'disambiguated') {
-							var _buttonClass = _this._buttonClass;
+						if (m._classNamingForStates == 'disambiguated') {
+							var _buttonClass = m._buttonClass;
 							if (_buttonClass == _undefined) {
 								var _buttonClassMatches = _oldClass.match (_buttonClassMatchRegExp);
 								if (_buttonClassMatches) {
@@ -182,8 +156,8 @@ Uize.module ({
 										_buttonClass = _buttonClassMatches [_buttonClassMatches.length - 1]
 									;
 								}
-								if (_this._buttonClass = _buttonClass = _buttonClass || '')
-									_this._buttonClassReplacerRegExp =
+								if (m._buttonClass = _buttonClass = _buttonClass || '')
+									m._buttonClassReplacerRegExp =
 										_buttonClassReplacerRegExpCache [_buttonClass] ||
 										(_buttonClassReplacerRegExpCache [_buttonClass] =
 											new RegExp (_buttonClass + '(\\s+' + _buttonClass + _stateNameMatcher + ')?')
@@ -196,7 +170,7 @@ Uize.module ({
 							;
 							_newClass = _buttonClass
 								? _oldClass.replace (
-									_this._buttonClassReplacerRegExp,_buttonClass + _newClassStateQualifierSuffix
+									m._buttonClassReplacerRegExp,_buttonClass + _newClassStateQualifierSuffix
 								)
 								: _oldClass.replace (_stateNameMatcherRegExp,'') + _newClassStateQualifierSuffix
 							;
@@ -208,52 +182,54 @@ Uize.module ({
 							;
 						}
 						if (_newClass != _oldClass) _rootNode.className = _newClass;
-					} else if (_this._mode == 'frames') {
-						_this._framesNode.style.top = '-' + (_this._frameOrder._frameOrderMap [_firstShownState] * _this._framesParentNodeDims.height) + 'px';
+					} else if (m._mode == 'frames') {
+						m._framesNode.style.top = '-' + (m._frameOrder._frameOrderMap [_firstShownState] * m._framesParentNodeDims.height) + 'px';
 					}
-					if (_this._tooltip && Uize.Tooltip) {
-						var _newTooltipShown = _this._state == 'over' && _enabledInherited && !_this._selected;
-						_newTooltipShown != _this._tooltipShown &&
-							Uize.Tooltip.showTooltip (_this._tooltip,_this._tooltipShown = _newTooltipShown)
+					if (m._tooltip && Uize.Tooltip) {
+						var _newTooltipShown = m._state == 'over' && _enabledInherited && !m._selected;
+						_newTooltipShown != m._tooltipShown &&
+							Uize.Tooltip.showTooltip (m._tooltip,m._tooltipShown = _newTooltipShown)
 						;
 					}
 					/*** reflect busy state ***/
-						_this.get ('busyInherited')
+						m.get ('busyInherited')
 							? _Uize_Node.setStyle (_rootNode,{cursor:'wait'})
-							: _Uize_Node.showClickable (_rootNode,_this._isClickable ())
+							: _Uize_Node.showClickable (_rootNode,_isClickable (m))
 						;
-				}
-			};
 
-			_classPrototype._setStateAndFireEvent = function (_domEvent) {
-				var _this = this;
-				if (_this.isWired) {
+					/*** set attributes ***/
+						m.setNodeProperties (_rootNode, {disabled:!_enabledInherited});
+				}
+			}
+
+			function _setStateAndFireEvent (_domEvent) {
+				var m = this;
+				if (m.isWired) {
 					var
 						_domEventType = _domEvent.type,
-						_isClickEvent = _domEventType == 'click',
-						_isClickable = _this._isClickable (_domEventType == 'dblclick')
+						_isClickEvent = _domEventType == 'click'
 					;
 
 					/*** deferred wiring of other events (for performance) ***/
-						if (!_this._allEventsWired) {
-							_this._allEventsWired = _true;
-							var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
-							_this.wireNode (
-								_this._rootNode,
+						if (!m._allEventsWired) {
+							m._allEventsWired = _true;
+							var _boundSetStateAndFireEvent = function (_domEvent) {_setStateAndFireEvent.call (m,_domEvent)};
+							m.wireNode (
+								m._rootNode,
 								{
-									mouseout:_setStateAndFireEvent,
-									mousedown:_setStateAndFireEvent,
-									mouseup:_setStateAndFireEvent,
-									dblclick:_setStateAndFireEvent
+									mouseout:_boundSetStateAndFireEvent,
+									mousedown:_boundSetStateAndFireEvent,
+									mouseup:_boundSetStateAndFireEvent,
+									dblclick:_boundSetStateAndFireEvent
 								}
 							);
 						}
 
 					if (_isClickEvent) _domEvent.cancelBubble = _true;
-					if (_isClickable) {
+					if (_isClickable (m,_domEventType == 'dblclick')) {
 						var _eventInfo = _eventInfoMap [_domEventType];
-						_this.set ({_state:_eventInfo [0]});
-						_this.fire ({name:_eventInfo [1],domEvent:_domEvent});
+						m.set ({_state:_eventInfo [0]});
+						m.fire ({name:_eventInfo [1],domEvent:_domEvent});
 						/*?
 							Instance Events
 								Click
@@ -304,166 +280,189 @@ Uize.module ({
 									NOTES
 									- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
 						*/
-						_isClickEvent && (_this._selected ? _this._clickToDeselect : _this._clickToSelect) &&
-							_this.set ({_selected:!_this._selected})
+						_isClickEvent && (m._selected ? m._clickToDeselect : m._clickToSelect) &&
+							m.set ({_selected:!m._selected})
 						;
 					}
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				if (this.isWired) {
-					this._updateUiState ();
-					this._updateUiText ();
-				}
-			};
+		return _class = _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
 
-			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this._framesNode = _undefined;
-					var _rootNode = _this._rootNode = _this.getNode ();
-					if (_rootNode) {
-						/*** test if button is in frames mode ***/
-							/* IMPORTANT: need a better way of auto-detecting that a button is in frames mode */
-							var _childNodes = _rootNode.childNodes;
-							if (
-								_childNodes.length &&
-								(_childNodes.length > 1 || _childNodes [0].nodeType != 3) &&
-								(_this._framesNode = _this.getNode ('frames'))
-							) {
-								/* NOTE:
-									optimized to avoid extra node lookup by id for buttons that are a single node (like a link tag) decorated only with CSS images, or a single node (like a link tag) containing only a single text child node (ie. a simple text button)
-								*/
-								_this._mode = 'frames';
-								_this._framesParentNodeDims = _Uize_Node.getDimensions (_this._framesNode.parentNode);
-							}
-
-						/*** wire up event handlers ***/
-							if (_this._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
-								_rootNode.onclick = Uize.returnTrue
-							;
-							var _setStateAndFireEvent = function (_domEvent) {_this._setStateAndFireEvent (_domEvent)};
-							_this.wireNode (
-								_rootNode,
-								{
-									mouseover:_setStateAndFireEvent,
-									click:_setStateAndFireEvent
-								}
-							);
-
-						/*** initialize text value if undefined ***/
-							_this._text == _undefined
-								&& _this.set ({_text:_this.getNodeValue('text')})
-							;
-
-						_superclass.doMy (_this,'wireUi');
+				function _boundUpdateUiState () {
+					if (m.isWired) {
+						_isClickable (m) || m.set ({_state:''});
+						_updateUiState.call (m);
 					}
 				}
-			};
+				m.wire ({
+					'Changed.busyInherited':_boundUpdateUiState,
+					'Changed.enabledInherited':_boundUpdateUiState
+				});
+			},
 
-		/*** Public Static Methods ***/
-			_class.addChildButton = function (_buttonName,_clickHandler) {
-				var
-					_this = this,
-					_button
-				;
-				function _wireButtonClickEvent () {
-					_button.wire (
-						'Click',
-						function (_event) {
-							if (_clickHandler)
-								typeof _clickHandler == 'string' ? _this.fire (_clickHandler) : _clickHandler (_event)
-							;
-							_this.fire (_event);
+			instanceProperties:{
+				_tooltipShown:_false
+			},
+
+			instanceMethods:{
+				setStateAndFireEvent:_setStateAndFireEvent,
+
+				updateUi:function () {
+					if (this.isWired) {
+						_updateUiState.call (this);
+						_updateUiText.call (this);
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m._framesNode = _undefined;
+						var _rootNode = m._rootNode = m.getNode ();
+						if (_rootNode) {
+							/*** test if button is in frames mode ***/
+								/* IMPORTANT: need a better way of auto-detecting that a button is in frames mode */
+								var _childNodes = _rootNode.childNodes;
+								if (
+									_childNodes.length &&
+									(_childNodes.length > 1 || _childNodes [0].nodeType != 3) &&
+									(m._framesNode = m.getNode ('frames'))
+								) {
+									/* NOTE:
+										optimized to avoid extra node lookup by id for buttons that are a single node (like a link tag) decorated only with CSS images, or a single node (like a link tag) containing only a single text child node (ie. a simple text button)
+									*/
+									m._mode = 'frames';
+									m._framesParentNodeDims = _Uize_Node.getDimensions (m._framesNode.parentNode);
+								}
+
+							/*** wire up event handlers ***/
+								if (m._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
+									_rootNode.onclick = Uize.returnTrue
+								;
+								var _boundSetStateAndFireEvent = function (_domEvent) {_setStateAndFireEvent.call (m,_domEvent)};
+								m.wireNode (
+									_rootNode,
+									{
+										mouseover:_boundSetStateAndFireEvent,
+										click:_boundSetStateAndFireEvent
+									}
+								);
+
+							/*** initialize text value if undefined ***/
+								m._text == _undefined
+									&& m.set ({_text:m.getNodeValue('text')})
+								;
+
+							_superclass.doMy (m,'wireUi');
 						}
-					);
+					}
 				}
-				if (_this == _class) {
-					/*** being used as a static method ***/
-						_button = new _class ({idPrefix:_buttonName,name:_buttonName,_followLink:_true});
-						_wireButtonClickEvent ();
-						(window [_button.instanceId] = _button).wireUi ();
-				} else {
-					/*** being used as an instance method, stitched in on some other widget class ***/
-						_button = _this.children [_buttonName];
-						if (!_button) {
-							_button = _this.addChild (_buttonName,_class);
+			},
+
+			staticMethods:{
+				addChildButton:function (_buttonName,_clickHandler) {
+					var
+						m = this,
+						_button
+					;
+					function _wireButtonClickEvent () {
+						_button.wire (
+							'Click',
+							function (_event) {
+								if (_clickHandler)
+									typeof _clickHandler == 'string' ? m.fire (_clickHandler) : _clickHandler (_event)
+								;
+								m.fire (_event);
+							}
+						);
+					}
+					if (m == _class) {
+						/*** being used as a static method ***/
+							_button = new _class ({idPrefix:_buttonName,name:_buttonName,_followLink:_true});
 							_wireButtonClickEvent ();
-						}
+							(window [_button.instanceId] = _button).wireUi ();
+					} else {
+						/*** being used as an instance method, stitched in on some other widget class ***/
+							_button = m.children [_buttonName];
+							if (!_button) {
+								_button = m.addChild (_buttonName,_class);
+								_wireButtonClickEvent ();
+							}
+					}
+					return _button;
+					/*?
+						Static Properties
+							Uize.Widget.Button.addChildButton
+								A function, that can be "stitched in" to other widget classes as an instance method in order to ease adding of child button widgets to instances of those classes, and that is most useful in widget class that add a lot of child buttons.
+
+								SYNTAX
+								............................................................................
+								myButton = myWidgetInstance.addChildButton (buttonNameSTR,clickHandlerFUNC);
+								............................................................................
+
+								In order for the above syntax to work, the =Uize.Widget.Button.addChildButton= function would first need to be "stitched in" as an instance method of the class of which =myWidgetInstance= is an instance. This can be done with a statement such as...
+
+								STITCHING IN
+								...............................................................................
+								// stitching in as a public method
+								MyWidgetClass.prototype.addChildButton = Uize.Widget.Button.addChildButton;
+
+								// stitching in as a private method
+								MyWidgetClass.prototype._addChildButton = Uize.Widget.Button.addChildButton;
+								............................................................................
+
+								VARIATION 1
+								........................................................................
+								myButton = myWidgetInstance.addChildButton (buttonNameSTR,eventNameSTR);
+								........................................................................
+
+								When the =eventNameSTR= parameter is specified in place of the =clickHandlerFUNC= parameter, then clicking the added child button will fire an event of the name specified by the =eventNameSTR= parameter on the instance to which the child button was added, rather than executing click handler code.
+
+								VARIATION 2
+								...........................................................
+								myButton = myWidgetInstance.addChildButton (buttonNameSTR);
+								...........................................................
+
+								When only the =buttonNameSTR= parameter is specified, then no custom event will be fired and no click hander function will be executed. Instead, only the button's ='Click'= instance event will be relayed to the widget instance to which the child button was added. Any handler code for this ='Click'= event fired on the button's parent would then have to use the event object's =source= property to determine which button was clicked.
+
+								Calling Without Stitching In
+
+									SYNTAX
+									...................................................
+									myButton = Uize.Widget.Button.addChildButton.call (
+										myWidgetInstance,
+										buttonNameSTR,
+										clickHandlerFUNCorEventNameSTR
+									);
+									...................................................
+
+									VARIATION
+									...................................................................................
+									myButton = Uize.Widget.Button.addChildButton.call (myWidgetInstance,buttonNameSTR);
+									...................................................................................
+
+								Calling As a Static Method
+
+									SYNTAX
+									..................................................
+									myLinkButton = Uize.Widget.Button.addChildButton (
+										buttonNameSTR,
+										clickHandlerFUNCorEventNameSTR
+									);
+									..................................................
+
+									VARIATION
+									.................................................................
+									myLinkButton = Uize.Widget.Button.addChildButton (buttonNameSTR);
+									.................................................................
+					*/
 				}
-				return _button;
-				/*?
-					Static Properties
-						Uize.Widget.Button.addChildButton
-							A function, that can be "stitched in" to other widget classes as an instance method in order to ease adding of child button widgets to instances of those classes, and that is most useful in widget class that add a lot of child buttons.
+			},
 
-							SYNTAX
-							............................................................................
-							myButton = myWidgetInstance.addChildButton (buttonNameSTR,clickHandlerFUNC);
-							............................................................................
-
-							In order for the above syntax to work, the =Uize.Widget.Button.addChildButton= function would first need to be "stitched in" as an instance method of the class of which =myWidgetInstance= is an instance. This can be done with a statement such as...
-
-							STITCHING IN
-							...............................................................................
-							// stitching in as a public method
-							MyWidgetClass.prototype.addChildButton = Uize.Widget.Button.addChildButton;
-
-							// stitching in as a private method
-							MyWidgetClass.prototype._addChildButton = Uize.Widget.Button.addChildButton;
-							............................................................................
-
-							VARIATION 1
-							........................................................................
-							myButton = myWidgetInstance.addChildButton (buttonNameSTR,eventNameSTR);
-							........................................................................
-
-							When the =eventNameSTR= parameter is specified in place of the =clickHandlerFUNC= parameter, then clicking the added child button will fire an event of the name specified by the =eventNameSTR= parameter on the instance to which the child button was added, rather than executing click handler code.
-
-							VARIATION 2
-							...........................................................
-							myButton = myWidgetInstance.addChildButton (buttonNameSTR);
-							...........................................................
-
-							When only the =buttonNameSTR= parameter is specified, then no custom event will be fired and no click hander function will be executed. Instead, only the button's ='Click'= instance event will be relayed to the widget instance to which the child button was added. Any handler code for this ='Click'= event fired on the button's parent would then have to use the event object's =source= property to determine which button was clicked.
-
-							Calling Without Stitching In
-
-								SYNTAX
-								...................................................
-								myButton = Uize.Widget.Button.addChildButton.call (
-									myWidgetInstance,
-									buttonNameSTR,
-									clickHandlerFUNCorEventNameSTR
-								);
-								...................................................
-
-								VARIATION
-								...................................................................................
-								myButton = Uize.Widget.Button.addChildButton.call (myWidgetInstance,buttonNameSTR);
-								...................................................................................
-
-							Calling As a Static Method
-
-								SYNTAX
-								..................................................
-								myLinkButton = Uize.Widget.Button.addChildButton (
-									buttonNameSTR,
-									clickHandlerFUNCorEventNameSTR
-								);
-								..................................................
-
-								VARIATION
-								.................................................................
-								myLinkButton = Uize.Widget.Button.addChildButton (buttonNameSTR);
-								.................................................................
-				*/
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_allowClickWhenSelected:{
 					name:'allowClickWhenSelected',
 					onChange:_updateUiState
@@ -569,16 +568,16 @@ Uize.module ({
 				_state:{
 					name:'state',
 					onChange:function () {
-						var _this = this;
-						if (!_this._state) {
-							if (_overButton == _this)
+						var m = this;
+						if (!m._state) {
+							if (_overButton == m)
 								_overButton = _undefined
 							;
-						} else if (_this._state == 'over') {
-							_overButton && _overButton != _this && _overButton.set ({_state:''});
-							_overButton = _this;
+						} else if (m._state == 'over') {
+							_overButton && _overButton != m && _overButton.set ({_state:''});
+							_overButton = m;
 						}
-						_this.isWired && _this._updateUiState ();
+						m.isWired && _updateUiState.call (m);
 					},
 					value:''
 					/*?
@@ -602,16 +601,16 @@ Uize.module ({
 					name:'statePrecedence',
 					onChange:function () {
 						var
-							_this = this,
+							m = this,
 							_statePrecedenceAsJoinedStr =
-								_this._statePrecedence._asJoinedStr ||
-								(_this._statePrecedence._asJoinedStr = _this._statePrecedence.join (','))
+								m._statePrecedence._asJoinedStr ||
+								(m._statePrecedence._asJoinedStr = m._statePrecedence.join (','))
 						;
-						_this._statePrecedenceMap =
+						m._statePrecedenceMap =
 							_statePrecedenceMaps [_statePrecedenceAsJoinedStr] ||
 							(_statePrecedenceMaps [_statePrecedenceAsJoinedStr] = {})
 						;
-						_this.isWired && _this._updateUiState ();
+						m.isWired && _updateUiState.call (m);
 					},
 					value:['playing','active','grayed','over','']
 					/*?
@@ -624,7 +623,7 @@ Uize.module ({
 				},
 				_text:{
 					name:'text',
-					onChange:_classPrototype._updateUiText
+					onChange:_updateUiText
 					/*?
 						State Properties
 							text
@@ -648,9 +647,8 @@ Uize.module ({
 								- the initial value is =undefined=
 								- in order for the value of this property to be honored, the =Uize.Tooltip= module must already be loaded, but the =Uize.Widget.Button= module does not explicitly require the =Uize.Tooltip= module
 					*/
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

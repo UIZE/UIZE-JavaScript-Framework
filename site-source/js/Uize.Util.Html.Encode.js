@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Util.Html.Encode= package defines utility methods for HTML encoding and HTML decoding strings.
+		The =Uize.Util.Html.Encode= package defines utility methods for HTML encoding and HTML decoding of strings.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Util.Html.Encode',
 	required:[
-		'Uize.String.Replace',
+		'Uize.Str.Replace',
 		'Uize.Util.Html.Entities'
 	],
 	builder:function () {
@@ -35,7 +35,7 @@ Uize.module ({
 		var _entityNameToCharCodeLookup = Uize.Util.Html.Entities.entityNameToCharCodeLookup;
 
 		return Uize.package ({
-			encode:Uize.String.Replace.replacerByLookup ({
+			encode:Uize.Str.Replace.replacerByLookup ({
 				'&':'&amp;',
 				'"':'&quot;',
 				'\'':'&apos;',

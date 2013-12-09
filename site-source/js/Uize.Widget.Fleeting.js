@@ -143,7 +143,7 @@ Uize.module ({
 
 							if (m._shown)
 								m._lifeTimeout = setTimeout(
-									function() { m.set({_shown:_false}) },
+									function () { m.set({_shown:_false}) },
 									m._lifeSpan
 								)
 							;

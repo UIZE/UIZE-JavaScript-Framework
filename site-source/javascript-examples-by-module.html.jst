@@ -1,5 +1,5 @@
 <%@
-	required ('Uize.Templates.List','Uize.String');
+	required ('Uize.Templates.List','Uize.Str.Has');
 	input ({examples:'array'});
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -54,7 +54,7 @@
 		if (_keywordsStr = (_example = _examples [_exampleNo]).keywords) {
 			var _keywords = _keywordsStr.split (' ');
 			for (var _keywordNo = -1, _keywordsLength = _keywords.length, _moduleName; ++_keywordNo < _keywordsLength;) {
-				if (Uize.String.startsWith (_moduleName = _keywords [_keywordNo],'Uize')) {
+				if (Uize.Str.Has.hasPrefix (_moduleName = _keywords [_keywordNo],'Uize')) {
 					var _modulesTreeNodeItems = _treeItems;
 					for (
 						var

@@ -1456,15 +1456,17 @@ Advanced Topics
 		Utility Functions Need Not Be Inheritable
 			A good case for making a static method non-inheritable is if it is really just a utility function that happens to be stashed in a class' namespace.
 
-			Static methods that are really just utility or helper functions don't care about the context on which they are called. They just happen to be called on a class as a context because they are assigned as properties on a class. Take, for example, the =Uize.Fade.blendValues= static method of the =Uize.Fade= class. You may be calling it on the =Uize.Fade= context, but this utility function's implementation doesn't even reference the =this= keyword - it just doesn't care about the context on which it is called. You could, in fact, assign this static method to a local variable and then call it using that local variable, and it would behave in just the same way as if it were being called on the class. Consider the following example...
+			Static methods that are really just utility or helper functions don't care about the context on which they are called. They just happen to be called on a class as a context because they are assigned as properties on a class.
+
+			Take, for example, the =Uize.Fade.celeration= static method of the =Uize.Fade= class. You may be calling it on the =Uize.Fade= context, but this utility function's implementation doesn't even reference the =this= keyword - it just doesn't care about the context on which it is called. You could, in fact, assign this static method to a local variable and then call it using that local variable, and it would behave in just the same way as if it were being called on the class. Consider the following example...
 
 			EXAMPLE
-			.........................................................
-			var blendValues = Uize.Fade.blendValues;
-			alert (blendValues (50,100,.5));  // alerts the text "75"
-			.........................................................
+			..........................................................
+			var celeration = Uize.Fade.celeration;
+			alert (celeration (.5,.5) (.3));  // alerts the text ".18"
+			..........................................................
 
-			In the above example, our local variable =blendValues= is a function reference. When that local variable is used to call the function in order to blend the values =50= and =100=, everything works just fine. The =alert= statement alerts the result of blending =50= and =100= in equal amounts, which is the =75=. Because the =Uize.Fade.blendValues= static method doesn't operate on a =Uize.Fade= subclass or need a =Uize.Fade= subclass as its context when it is called, there's no compelling reason for it to be inheritable, and so it is not.
+			In the above example, our local variable =celeration= is a function reference. When that local variable is used to call the function in order to generate an acceleration/deceleration curve function, everything works just fine. The =alert= statement alerts the result of calling the generated curve function with the progress amount of =.3=, yielding the curve-adjusted blend amount of =.18=. Because the =Uize.Fade.celeration= static method doesn't operate on a =Uize.Fade= subclass or need a =Uize.Fade= subclass as its context when it is called, there's no compelling reason for it to be inheritable, and so it is not.
 
 		When Statics Should Be Inheritable
 			Whenever a static method or property is intended to be unique to its class context, and it is also desirable for that method or property to be inherited by subclasses, then it should *not* be registered as non-inheritable.
@@ -1596,7 +1598,7 @@ Advanced Topics
 		Applies for Other Uize Objects
 			`The "no new" mechanism`, that is implemented in the =Uize.noNew= static method, has been applied to various other =Uize= objects (such as the =Uize.Color= object) that are lightweight objects rather than full =Uize.Class= subclasses.
 
-			So, for example, one can create instances of the =Uize.Color= object or the =Uize.String.Builder= object without needing to use the =new= operator. Consider the following example...
+			So, for example, one can create instances of the =Uize.Color= object or the =Uize.Str.Builder= object without needing to use the =new= operator. Consider the following example...
 
 			EXAMPLE
 			.........................................

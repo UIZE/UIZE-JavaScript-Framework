@@ -33,7 +33,7 @@ Uize.module ({
 			var _class = _superclass.subclass ();
 
 		/*** Override addChild method to provide extra handling ***/
-			_class.prototype.addChild = function(_childName, _childInstanceOrClass, _elementProperties) {
+			_class.prototype.addChild = function (_childName, _childInstanceOrClass, _elementProperties) {
 				var
 					_this = this,
 					_parentForm = _this.parent,

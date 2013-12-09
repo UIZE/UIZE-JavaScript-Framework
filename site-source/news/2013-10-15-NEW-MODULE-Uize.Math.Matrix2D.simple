@@ -1,0 +1,18 @@
+The new =Uize.Math.Matrix2D= module provides support for building and applying 2-D affine transformations in a 2-dimensional plane.
+
+This new module is developed by `Petar Ivanov` and `Ben Ilegbodu` and contributed to the UIZE project by `Zazzle Inc.`. The module implements an object with the following instance methods...
+
+- =clone= - makes a copy of the 2-D matrix, returning a new 2-D matrix object
+- =multiply= - multiplies the matrix by the specified other matrix transformation
+- =rotate= - appends to the matrix a clockwise rotation, around the origin and by the specified angle
+- =scale= - applies a specified scale vector to the matrix
+- =toString= - serializes the 2-D matrix to a string
+- =translate= - applies a specified translation vector to the matrix
+- =values= - returns a 6-element array of values that represent the matrix coefficients of the matrix
+- =xForm= - applies the matrix to the specified 2-D vector
+
+....................................................................................
+<< metadata >>
+
+title: 2013-10-15 - NEW MODULE: Uize.Math.Matrix2D
+....................................................................................

@@ -33,19 +33,21 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass (
-				null,
-				function() {
-					Uize.Util.Coupler({
-						instances:[this, this.children.value],
-						properties:['valueNo', 'tentativeValueNo']
-					})
-				}
-			);
+		return _superclass.subclass ({
+			omegastructor:function () {
+				Uize.Util.Coupler({
+					instances:[this, this.children.value],
+					properties:['valueNo', 'tentativeValueNo']
+				});
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			instanceMethods:{
+				getValueObject:function (_name) {
+					return Uize.findRecord (this._values,{name:_name == undefined ? this + '' : _name});
+				}
+			},
+
+			stateProperties:{
 				_tentativeValueNo:{	// read-only
 					name:'tentativeValueNo',
 					value:-1
@@ -58,16 +60,14 @@ Uize.module ({
 					name:'values',
 					value:[]
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				pipedProperties:['values'],
 				valueDisplayWidgetClass:Uize.Widget.Button.ValueDisplay.Selector,
 				valueWidgetClass:Uize.Widget.Options.Selector
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

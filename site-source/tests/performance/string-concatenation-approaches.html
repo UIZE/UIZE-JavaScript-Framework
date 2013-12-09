@@ -51,7 +51,7 @@
 Uize.require (
 	[
 		'UizeSite.Page.Example.Test.library',
-		'Uize.String.Builder'
+		'Uize.Str.Builder'
 	],
 	function () {
 		'use strict';
@@ -102,7 +102,7 @@ Uize.require (
 						},
 						function () {
 							/*** using StringBuilder object ***/
-								var _stringBuilder = Uize.String.Builder ();
+								var _stringBuilder = Uize.Str.Builder ();
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
 									_stringBuilder.append (_stringToRepeat);
 								}

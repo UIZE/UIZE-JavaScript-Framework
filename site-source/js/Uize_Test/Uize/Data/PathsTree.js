@@ -88,7 +88,7 @@ Uize.module ({
 					]],
 					['Uize.Data.PathsTree.fromList',[
 						['Test that an empty array is decoded to an empty object',
-							[{}],
+							[[]],
 							{}
 						],
 						['Test that an array with a single element whose value does not have a delimiter is decoded correctly to an object with a single node whose key is the array element value',

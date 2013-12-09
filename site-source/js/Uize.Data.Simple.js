@@ -26,9 +26,9 @@
 Uize.module ({
 	name:'Uize.Data.Simple',
 	required:[
-		'Uize.String',
-		'Uize.String.Split',
-		'Uize.String.Lines'
+		'Uize.Str.Lines',
+		'Uize.Str.Split',
+		'Uize.Str.Trim'
 	],
 	builder:function () {
 		'use strict';
@@ -75,7 +75,7 @@ Uize.module ({
 						value:'',
 						children:[]
 					},
-					_lines = Uize.String.Lines.split (_simple),
+					_lines = Uize.Str.Lines.split (_simple),
 					_linesLength = _lines.length,
 					_linesLengthMinus1 = _linesLength - 1,
 					_lineNo,
@@ -117,7 +117,7 @@ Uize.module ({
 				}
 
 				for (_lineNo = -1; ++_lineNo < _linesLength;) {
-					if ((_line = _lines [_lineNo]) && (!_ignoreWhitespaceLines || Uize.String.trim (_line))) {
+					if ((_line = _lines [_lineNo]) && (!_ignoreWhitespaceLines || Uize.Str.Trim.trim (_line))) {
 						if (_commentBlockRegExp.test (_line)) {
 							/* support for multi-line comment blocks, as in the example...
 								#[
@@ -313,7 +313,7 @@ Uize.module ({
 										My Array: | value 1 | value 2 | value 3 | value 4 |
 
 									*/
-									_value = Uize.String.Split.split (
+									_value = Uize.Str.Split.split (
 										_value.replace (_arrayStartRegExp,'').replace (_arrayEndRegExp,''),
 										_arrayDelimiterRegExp
 									)
@@ -326,7 +326,7 @@ Uize.module ({
 								;
 								_currentLevel._parent.value.push (_value);
 								/*
-									if there is no non-empty running state member name, then add this child as an element of the value array for the parent. A special case which allows you to easily create array using the syntax...
+									if there is no non-empty running state member name, then add this child as an element of the value array for the parent. A special case which allows us to easily create an array using the syntax...
 
 									My Array : value 1
 												: value 2

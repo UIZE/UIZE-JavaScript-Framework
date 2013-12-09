@@ -27,8 +27,8 @@ Uize.module ({
 	name:'Uize.Doc.Sucker',
 	required:[
 		'Uize.Build.Scruncher',
-		'Uize.String',
-		'Uize.String.Lines',
+		'Uize.Array.Join',
+		'Uize.Str.Lines',
 		'Uize.Data.Simple',
 		'Uize.Doc.Simple',
 		'Uize.Util.Oop'
@@ -44,7 +44,8 @@ Uize.module ({
 			;
 
 		return _package = Uize.package ({
-			suckDoc:function (_javascriptSource,_module,_modulesTree,_examples) {
+			suckDoc:function (_javascriptSource,_module,_modulesTree,_examples,_pathToRoot) {
+				_pathToRoot || (_pathToRoot = '');
 				var _simpleDocChunks = [];
 				for (
 					var
@@ -57,7 +58,7 @@ Uize.module ({
 				) {
 					_docCommentRegExp.test (_comment = _comments [_commentNo]) &&
 						_simpleDocChunks.push (
-							Uize.String.Lines.normalizeIndent (_comment.replace (_docCommentRegExp,'').replace (/\*\/$/,''))
+							Uize.Str.Lines.normalizeIndent (_comment.replace (_docCommentRegExp,'').replace (/\*\/$/,''))
 						)
 					;
 				}
@@ -179,7 +180,9 @@ Uize.module ({
 													'\t\tThe following example pages are good showcases for the =' + _moduleName + '= module...\n' +
 													Uize.map (
 														_examples,
-														'"\\t\\t- [[" + value.url + "][" + value.title + "]] - " + value.description + "\\n"'
+														function (_example) {
+															return '\t\t- [[' + _pathToRoot + _example.path + '][' + _example.title + ']] - ' + _example.description + '\n';
+														}
 													).join ('')
 												)
 											: '\t\tThere are no dedicated showcase example pages for the =' + _moduleName + '= module.\n'
@@ -331,7 +334,7 @@ Uize.module ({
 									'\t\t\t' +
 									(
 										_modulesUnderNamespace.length
-											? Uize.String.hugJoin (_modulesUnderNamespace,'=' + _moduleName + '.','=',' | ')
+											? Uize.Array.Join.hugJoin (_modulesUnderNamespace,'=' + _moduleName + '.','=',' | ')
 											: 'There are no modules directly under this namespace.'
 									) + '\n' +
 									'\n'
@@ -400,7 +403,8 @@ Uize.module ({
 									_javascriptSource,
 									_extractParam ('module'),
 									_extractParam ('modulesTree'),
-									_extractParam ('examples')
+									_extractParam ('examples'),
+									_params.pathToRoot
 								),
 								sectionsToSort:[
 									/*** methods ***/

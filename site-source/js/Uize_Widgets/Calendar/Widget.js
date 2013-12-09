@@ -36,6 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.Calendar.Widget',
 	superclass:'Uize.Widget.Calendar',
 	required:[
+		'Uize.Widget.V2Mixin',
 		'Uize.Widgets.Button.Widget',
 		'Uize.Widgets.Calendar.Html',
 		'Uize.Widgets.Calendar.Css'
@@ -43,7 +44,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		return _superclass.subclass ({
+		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
 			set:{
 				dayNameLength:2,
 				html:Uize.Widgets.Calendar.Html

@@ -29,8 +29,9 @@ Uize.module ({
 		'Uize.Url',
 		'Uize.Template',
 		'Uize.Data.Simple',
-		'Uize.String',
-		'Uize.String.Lines',
+		'Uize.Str.Repeat',
+		'Uize.Str.Has',
+		'Uize.Str.Lines',
 		'Uize.Json',
 		'Uize.Array.Sort',
 		'Uize.Services.FileSystem'
@@ -92,7 +93,7 @@ Uize.module ({
 					*/
 
 				getPathToRoot:function (_path) {
-					return Uize.String.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
+					return Uize.Str.Repeat.repeat ('../',_path.length - _path.replace (/[\/\\]/g,'').length);
 					/*?
 						Static Methods
 							Uize.Build.Util.getPathToRoot
@@ -194,7 +195,7 @@ Uize.module ({
 								path:_folderToIndex,
 								pathMatcher:function (_path) {
 									var _urlParts = Uize.Url.from (_path);
-									return _urlParts.fileType == 'html' && !Uize.String.startsWith (_urlParts.file,'~');
+									return _urlParts.fileType == 'html' && !Uize.Str.Has.hasPrefix (_urlParts.file,'~');
 								}
 							}),
 							function (_path) {
@@ -411,7 +412,7 @@ Uize.module ({
 							Start:
 								function (_event) {
 									_logChunks.push (
-										Uize.String.repeat ('\t',_event.source.getDepth ()) + _event.source.get ('title')
+										Uize.Str.Repeat.repeat ('\t',_event.source.getDepth ()) + _event.source.get ('title')
 									);
 								},
 							Done:
@@ -422,7 +423,7 @@ Uize.module ({
 									;
 									/*** add to log ***/
 										_logChunks.push (
-											Uize.String.repeat ('\t',_test.getDepth () + 1) +
+											Uize.Str.Repeat.repeat ('\t',_test.getDepth () + 1) +
 											(
 												_test.get ('result')
 													? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
@@ -489,7 +490,7 @@ Uize.module ({
 						var _builderPlaceholderPos = _moduleText.indexOf (_builderPlaceholder);
 						_moduleText =
 							_moduleText.slice (0,_builderPlaceholderPos - 1) +
-							Uize.String.Lines.indent (_builder,1,'\t',false) +
+							Uize.Str.Lines.indent (_builder,1,'\t',false) +
 							_moduleText.slice (_builderPlaceholderPos + _builderPlaceholder.length + 1)
 						;
 					}
@@ -504,7 +505,7 @@ Uize.module ({
 								moduleTextSTR = Uize.Build.Util.moduleAsText (moduleDefinitionOBJ);
 								...................................................................
 
-								If a string value is specified for the =builder= property of the module definition (rather than a builder function, in other words), then this value will be substituted as is for the builder in the serialized module. This makes it possible to provide the exact code for a module's builder, complete with comments and formatting that you wish to preserve in the serialized text version of the module. This can be useful in some build processes that generate modules.
+								If a string value is specified for the =builder= property of the module definition (rather than a builder function, in other words), then this value will be substituted as is for the builder in the serialized module. This allows us to provide the exact code for a module's builder, complete with comments and formatting that you wish to preserve in the serialized text version of the module. This can be useful in some build processes that generate modules.
 					*/
 				},
 
@@ -514,7 +515,7 @@ Uize.module ({
 						builder:[
 							'function () {',
 							'	return function () {',
-							'		return ' + Uize.String.Lines.indent (Uize.Json.to (_moduleData),2,'\t',false) + ';',
+							'		return ' + Uize.Str.Lines.indent (Uize.Json.to (_moduleData),2,'\t',false) + ';',
 							'	};',
 							'}'
 						].join ('\n')

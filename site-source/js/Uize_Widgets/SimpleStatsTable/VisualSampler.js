@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.SimpleStatsTable.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.SimpleStatsTable.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

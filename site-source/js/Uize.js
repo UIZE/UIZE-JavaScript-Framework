@@ -90,6 +90,7 @@
 				Iterator Methods
 					The =Uize= module provides a number of static methods for iterating over properties of objects or elements of arrays.
 
+					- =Uize.applyAll= - calls a list of functions on a specified context, with an optional arguments list
 					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
 					- =Uize.forEach= - iterates over an array, arguments object, object, or length range, calling the specified iteration handler for each element or property
 
@@ -228,7 +229,7 @@
 				Quarantined Nested Functions
 					To declare a function from within some deep local scope, but have that function be quarantined from the local scope, one can use the =Uize.quarantine= method.
 
-					The =Uize.quarantine= method allows you to essentially generate a quarantined version of the supplied function. When the quarantined function is then called, it won't have access to the same scope chain that the original function had access to - it will only have access to the global scope.
+					The =Uize.quarantine= method allows us to essentially generate a quarantined version of the supplied function. When the quarantined function is then called, it won't have access to the same scope chain that the original function had access to - it will only have access to the global scope.
 
 					SYNTAX
 					...............................................................
@@ -444,7 +445,6 @@ Uize = (function () {
 							In the above example, the instance method =displayPropertyValue= is being defined for a hypothetical widget class. This method accepts a string parameter, being the name of a state property whose value should be displayed in the page in an implied node of the widget, and where the implied node's name is constructed from the prefix ='valueOf'= and the name of the state property with its first letter capitalized. Using this method to display the value of a =width= state property, the value of this property would be displayed in the implied node named =valueOfWidth=.
 
 							NOTES
-							- this method is implemented in the =Uize= base module rather than the =Uize.String= module because it is generally useful in many other modules and =Uize.Class= subclasses that don't otherwise want to require the entire =Uize.String= module
 							- if the first character of the source string is already capitalized, then the returned value will be the same as the source string
 							- see also the other `useful value transformers`
 				*/
@@ -1833,7 +1833,7 @@ Uize = (function () {
 							);
 							.............................
 
-							By default, the =Uize.map= method maps values of the source array or object and packages the result into a new array or object. Specifying the optional =targetARRAYorOBJorBOOL= parameter allows you to explicitly specify a target for the operation, into which the mapped values will be packaged.
+							By default, the =Uize.map= method maps values of the source array or object and packages the result into a new array or object. Specifying the optional =targetARRAYorOBJorBOOL= parameter allows us to explicitly specify a target for the operation, into which the mapped values will be packaged.
 
 							Parameters
 								sourceARRAYorOBJorINT
@@ -1974,6 +1974,65 @@ Uize = (function () {
 							NOTES
 							- compare to the =Uize.forEach= static method
 							- see also the other `basic data utilities`
+				*/
+			},
+
+			applyAll:function (_context,_functions,_arguments) {
+				_arguments || (_arguments = _sacredEmptyArray);
+				for (var _functionNo = -1, _functionsLength = _functions.length; ++_functionNo < _functionsLength;)
+					_functions [_functionNo].apply (_context,_arguments)
+				;
+				/*?
+					Static Methods
+						Uize.applyAll
+							Calls the specified list of functions on the specified context, with an optional list of arguments.
+
+							The =Uize.applyAll= method can be useful for executing a list of event handlers, queued callbacks, a chain of constructors, etc.
+
+							DIFFERENT USAGES
+
+							`Call Multiple Functions as Methods on a Context`
+							.............................................
+							Uize.applyAll (contextANYTYPE,functionsLIST);
+							.............................................
+
+							`Call Multiple Functions as Methods on a Context, with an Arguments List`
+							...........................................................
+							Uize.applyAll (contextANYTYPE,functionsLIST,argumentsLIST);
+							...........................................................
+
+							`Call Multiple Functions with an Arguments List`
+							..............................................
+							Uize.applyAll (0,functionsLIST,argumentsLIST);
+							..............................................
+
+							Call Multiple Functions as Methods on a Context
+								In the simplest usage, a list of functions can be called as methods on a context by specifying the context as the first argument and the list of functions as the second.
+
+								SYNTAX
+								.............................................
+								Uize.applyAll (contextANYTYPE,functionsLIST);
+								.............................................
+
+							Call Multiple Functions as Methods on a Context, with an Arguments List
+								In order to call a list of functions as methods on a context and with the same set of arguments for each call, the arguments list can be specified using the optional =argumentsLIST= third argument.
+
+								SYNTAX
+								...........................................................
+								Uize.applyAll (contextANYTYPE,functionsLIST,argumentsLIST);
+								...........................................................
+
+							Call Multiple Functions with an Arguments List
+								In cases where you wish to call a list of functions with the same set of arguments for each call, but where you don't wish them to be called as methods on a context, you can simply specify the value =0= for the first argument.
+
+								SYNTAX
+								..............................................
+								Uize.applyAll (0,functionsLIST,argumentsLIST);
+								..............................................
+
+							NOTES
+							- compare to the =Uize.callOn= static method
+							- see also the other `iterator methods`
 				*/
 			},
 
@@ -4541,7 +4600,7 @@ Uize = (function () {
 							myNode.onclick = Uize.returnFalse;
 							..................................
 
-							If you are cancelling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
+							If we wish to cancel the default action for many nodes in a page, then using this static method allows us to share a single function - by reference - across all these nodes.
 
 							NOTES
 							- see the companion =Uize.returnTrue= static method
@@ -4569,7 +4628,7 @@ Uize = (function () {
 							myNode.onclick = Uize.returnTrue;
 							.................................
 
-							If you are enabling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
+							If we wish to enable the default action for many nodes in a page, then using this static method allows us to share a single function - by reference - across all these nodes.
 
 							NOTES
 							- see the companion =Uize.returnFalse= static method
@@ -5736,11 +5795,20 @@ Uize = (function () {
 										_requiredLookup
 									);
 								}
-								_name &&
-									(_Function (_name + '=arguments[0]')) (
-										_module = _modulesByName [_name] = _module || function () {}
-									)
-								;
+								if (_name) {
+									_module = _modulesByName [_name] = _module || function () {};
+
+									// create a reference on the host
+									(_Function (_name + '=arguments[0]')) (_module);
+
+									// this is needed for the Uize.Class inheritance mechanism
+									var _lastPeriodPos = _name.lastIndexOf ('.');
+									if (_lastPeriodPos > -1)
+										(_package.eval (_name.slice (0,_lastPeriodPos)).nonInheritableStatics || {}) [
+											_name.slice (_lastPeriodPos + 1)
+										] = 1
+									;
+								}
 								if (_isFunction (_module)) {
 									_module.moduleName = _name;
 									_module.pathToResources = _module == _package
@@ -5875,15 +5943,56 @@ Uize = (function () {
 							Uize.module
 								Lets you declare a module in the UIZE JavaScript Framework.
 
-								SYNTAX
-								......................................................................................
-								Uize.module ({
-									name:moduleNameSTR,           // omit for anonymous modules
-									superclass:superclassNameSTR, // omit for package modules, or if host is superclass
-									required:modulesSTRorARRAY,   // omit when only host and superclass are required
-									builder:builderFUNC           // omit for library modules and namespace modules
-								});
-								......................................................................................
+								DIFFERENT USAGES
+
+								`Declare a Module by Specifying a Module Definition Object`
+								..................................
+								Uize.module (moduleDefinitionOBJ);
+								..................................
+
+								`Declare a Namespace Module by Specifying Just the Namespace as a String`
+								...........................
+								Uize.module (namespaceSTR);
+								...........................
+
+								Declare a Module by Specifying a Module Definition Object
+									In the most typical use case, a module can be defined by specifying the various properties of the module using a =moduleDefinitionOBJ= object.
+
+									SYNTAX
+									..................................
+									Uize.module (moduleDefinitionOBJ);
+									..................................
+
+									moduleDefinitionOBJ
+										The value specified for the =moduleDefinitionOBJ= argument should be an object of the following form...
+
+										SYNTAX
+										......................................................................................
+										{
+											name:moduleNameSTR,           // omit for anonymous modules
+											superclass:superclassNameSTR, // omit for package modules, or if host is superclass
+											required:modulesSTRorARRAY,   // omit when only host and superclass are required
+											builder:builderFUNC           // omit for library modules and namespace modules
+										}
+										......................................................................................
+
+								Declare a Namespace Module by Specifying Just the Namespace as a String
+									In the special case of defining a namespace module, a short form allows us to specify just the namespace using a =namespaceSTR= argument in place of the regular =moduleDefinitionOBJ= argument.
+
+									SYNTAX
+									...........................
+									Uize.module (namespaceSTR);
+									...........................
+
+									INSTEAD OF...
+									........................................................
+									Uize.module ({name:'MyCompanyName.MySectionNamespace'});
+									........................................................
+
+									USE...
+									.................................................
+									Uize.module ('MyCompanyName.MySectionNamespace');
+									.................................................
 
 								For an in-depth discussion of modules, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
@@ -6021,7 +6130,7 @@ Uize = (function () {
 	/*** Uize base module specific configuration of the module mechanism ***/
 		_package.moduleUrlTemplate = _package.getPathToLibrary ('Uize.js',_modulePathToken);
 		_package.addFolderOrgNamespaces (
-			'Uize.Build','Uize.Loc','Uize.Services','Uize.Templates','Uize.Test','Uize.Widgets'
+			_package.map (['Build','Loc','Services','Templates','Test','Widgets'],'"Uize." + value')
 		);
 		_package.module ({name:'Uize',builder:function () {return _package}});
 

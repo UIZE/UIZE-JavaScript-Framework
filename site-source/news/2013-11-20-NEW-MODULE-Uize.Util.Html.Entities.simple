@@ -1,0 +1,28 @@
+The new =Uize.Util.Html.Entities= module defines lookup objects that map HTML entity names to character codes, and vice versa.
+
+Static Properties
+	Uize.Util.Html.Entities.entityNameToCharCodeLookup
+		A lookup object, that provides a mapping between HTML entity names and the entities' corresponding character codes.
+
+		EXAMPLE
+		...........................................................................
+		Uize.Util.Html.Entities.entityNameToCharCodeLookup.copy;    // returns 169
+		Uize.Util.Html.Entities.entityNameToCharCodeLookup.spades;  // returns 9824
+		...........................................................................
+
+	Uize.Util.Html.Entities.charCodeToEntityNameLookup
+		A lookup object, that provides a mapping between HTML entity character codes and the entities' corresponding names.
+
+		EXAMPLE
+		...............................................................................
+		Uize.Util.Html.Entities.charCodeToEntityNameLookup [169];   // returns 'copy'
+		Uize.Util.Html.Entities.charCodeToEntityNameLookup [9824];  // returns 'spades'
+		...............................................................................
+
+To see an example of the new =Uize.Util.Html.Entities= module in use, see the [[../examples/html-entities-table.html][HTML Entities Table]] example.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-11-20 - NEW MODULE: Uize.Util.Html.Entities
+....................................................................................

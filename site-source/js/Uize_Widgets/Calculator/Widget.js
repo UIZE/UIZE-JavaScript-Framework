@@ -36,6 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.Calculator.Widget',
 	superclass:'Uize.Widget.CalculatorAbstract',
 	required:[
+		'Uize.Widget.V2Mixin',
 		'Uize.Widgets.Buttons.Char.Widget',
 		'Uize.Widgets.Calculator.Html',
 		'Uize.Widgets.Calculator.Css'
@@ -43,7 +44,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		return _superclass.subclass ({
+		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
 			set:{
 				html:Uize.Widgets.Calculator.Html
 			},
@@ -57,8 +58,7 @@ Uize.module ({
 
 			staticProperties:{
 				buttonWidgetClass:Uize.Widgets.Buttons.Char.Widget,
-				cssModule:Uize.Widgets.Calculator.Css,
-				enableRootNodeCssClasses:false
+				cssModule:Uize.Widgets.Calculator.Css
 			},
 
 			cssBindings:{

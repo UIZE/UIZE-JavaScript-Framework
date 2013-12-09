@@ -29,67 +29,53 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function() {
-						var _this = this;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
 
-						function _syncValueDetails() {
-							var _valueObject = _this.getValueObject();
+				function _syncValueDetails() {
+					var _valueObject = m.getValueObject();
 
-							_this.set({
-								valueDetails:_valueObject
-									? _valueObject.valueDetails
-									: null
-							});
-						}
-						_this.wire('Changed.value', _syncValueDetails);
-
-						_syncValueDetails();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			_classPrototype.getValueObject = function (_name) {
-				var _undefined;
-				return Uize.findRecord (
-					this._values,
-					{
-						name:_name == _undefined
-							? this + ''
-							: _name
-					}
-				);
-			};
-
-			_classPrototype.handleDialogSubmit = function(_valueInfo) {
-				var
-					_this = this,
-					_undefined
-				;
-
-				function _createSetObject(_propertyName) {
-					var _propertyValue = _valueInfo[_propertyName];
-					return _propertyValue !== _undefined ? Uize.pairUp(_propertyName, _propertyValue) : _undefined
+					m.set({valueDetails:_valueObject ? _valueObject.valueDetails : null});
 				}
+				m.wire({
+					'Changed.value': _syncValueDetails,
+					'Changed.values': _syncValueDetails
+				});
 
-				_this.set(
-					Uize.copyInto(
-						{},
-						_createSetObject('valueNo'),
-						_createSetObject('tentativeValueNo')
-					)
-				);
+				_syncValueDetails();
+			},
 
-				_superclass.doMy (_this,'handleDialogSubmit',[_valueInfo]);
-			};
+			instanceMethods:{
+				getValueObject:function (_name) {
+					return Uize.findRecord (this._values,{name:_name == undefined ? this + '' : _name});
+				},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				getMoreDialogEventHandlers:function () {
+					var m = this;
+
+					function _addHandler(_propertyName) {
+						return Uize.pairUp(
+							'Changed.' + _propertyName,
+							function (_event) {
+								var _dialogPropertyValue = _event.source.get(_propertyName);
+
+								_dialogPropertyValue !== undefined
+									&& m.set(_propertyName, _dialogPropertyValue)
+								;
+							}
+						);
+					}
+
+					return Uize.copyInto(
+						_superclass.doMy(m,'getMoreDialogEventHandlers') || {},
+						_addHandler('valueNo'),
+						_addHandler('tentativeValueNo')
+					);
+				}
+			},
+
+			stateProperties:{
 				_tentativeValueNo:{
 					name:'tentativeValueNo',	// read-only
 					value:-1
@@ -102,16 +88,14 @@ Uize.module ({
 					name:'values',
 					value:[]
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				pipedProperties:['values', 'valueNo', 'tentativeValueNo'],
 				selectorButtonWidgetClass:Uize.Widget.Button.ValueDisplay.Selector,
 				dialogWidgetClass:'Uize.Widget.Dialog.Picker.Palette.Selector'
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

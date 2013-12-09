@@ -44,18 +44,18 @@ Uize.module ({
 		return _superclass.subclass ({
 			staticMethods:{
 				add:function () {
-					var _this = this;
-					if (!_this.added) {
+					var m = this;
+					if (!m.added) {
 						var
 							_document = document,
 							_styleSheets = _document.styleSheets,
 							_head = _document.head || _document.getElementsByTagName ('head') [0],
-							_css = this.css,
+							_css = m.css,
 							_previousStyleSheetsLength = _styleSheets.length,
 							_styleNode = _document.createElement ('style')
 						;
 						if (Uize.isFunction (_css))
-							_css = _css.call (this,{pathToModules:Uize.pathToResources})
+							_css = _css.call (m,{pathToModules:Uize.pathToResources})
 						;
 						_styleNode.type = 'text/css';
 						_styleNode.textContent = _css;
@@ -139,7 +139,7 @@ Uize.module ({
 								}
 							}
 						}
-						_this.added = true;
+						m.added = true;
 					}
 				}
 			},

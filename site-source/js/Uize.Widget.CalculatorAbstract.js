@@ -97,7 +97,7 @@
 			The Negate Operator
 				The =negate= operator is the fail-safe way to enter negative numbers in the calculator widget.
 
-				To use it for enterting a negative number, you can first enter a positive number and then click the =negate= button to turn it negative. The =negate= operator is one of the `unary operators`, meaning that it acts on the current =entry= value without triggering `operation completion` for pending binary operations. This allows you to perform calculations like three times negative four, as =3 x 4 +/- &#61;=. In this example, the =negate= operator operates on the second operand without triggering completion of the pending multiplication. Similarly, you could perform the calculation, negative three times negative four, as =3 +/- x 4 +/- &#61;=.
+				To use it for enterting a negative number, you can first enter a positive number and then click the =negate= button to turn it negative. The =negate= operator is one of the `unary operators`, meaning that it acts on the current =entry= value without triggering `operation completion` for pending binary operations. This allows us to perform calculations like three times negative four, as =3 x 4 +/- &#61;=. In this example, the =negate= operator operates on the second operand without triggering completion of the pending multiplication. Similarly, you could perform the calculation, negative three times negative four, as =3 +/- x 4 +/- &#61;=.
 
 				Negating Zero
 					The =negate= button can be clicked even when the current =entry= value is =0=.
@@ -138,7 +138,7 @@
 		Unary Operators
 			Unlike `binary operators`, unary operators operate on only a single operand.
 
-			The way that the =Uize.Widget.CalculatorAbstract= implements unary operators, they operate on the current value of the active operand, without triggering `operation completion` for pending binary operations. This is useful, and also the way that most regular physical calculators behave. This allows you to perform calculations like three times the square root of sixteen, as =3 x 16 &radic; &#61;=. In this example, the =squareRoot= operator operates on the second operand without triggering completion of the pending multiplication. This allows you to compound the unary operation. For example, you could calculate three times the fourth root of sixteen, as =3 x 16 &radic; &radic; &#61;=. For more info, see the section `compounding unary operations`.
+			The way that the =Uize.Widget.CalculatorAbstract= implements unary operators, they operate on the current value of the active operand, without triggering `operation completion` for pending binary operations. This is useful, and also the way that most regular physical calculators behave. This allows us to perform calculations like three times the square root of sixteen, as =3 x 16 &radic; &#61;=. In this example, the =squareRoot= operator operates on the second operand without triggering completion of the pending multiplication. This allows us to compound the unary operation. For example, we could calculate three times the fourth root of sixteen, as =3 x 16 &radic; &radic; &#61;=. For more info, see the section `compounding unary operations`.
 
 			Apart from the =squareRoot= function, another example of a unary operator is the =negate= function, which inverts the sign of the current =entry= value. The =memoryRecall= function could also be considered a kind of unary operator, although it completely replaces the current =entry= value with the current value of the calculator's =memory=.
 
@@ -304,7 +304,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.CalculatorAbstract',
-	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Widget.TextInput',
 		'Uize.Node.Event'
@@ -312,15 +311,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_undefined
-			;
+				_undefined,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_binaryOperatorsMap = {divide:1,multiply:1,subtract:1,add:1},
 				_unaryOperatorsMap = {negate:1,percent:1,squareRoot:1},
 				_buttonsRequiringValidEntry =
@@ -333,14 +330,12 @@ Uize.module ({
 				_digitButtonsMap = {
 					digit0:'0', digit1:'1', digit2:'2', digit3:'3', digit4:'4', digit5:'5', digit6:'6', digit7:'7', digit8:'8', digit9:'9', point:'.'
 				},
-				_invalidEntryChars = '`~!@#$^&()_{}[]\\|:;"\'<,>?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-			;
-
-		/*** Utility Functions ***/
-			var
+				_invalidEntryChars = '`~!@#$^&()_{}[]\\|:;"\'<,>?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 				_enabledTrueProperty = {enabled:'inherit'},
 				_enabledFalseProperty = {enabled:false}
 			;
+
+		/*** Utility Functions ***/
 			function _getEnabledProperty (_enabled) {return _enabled ? _enabledTrueProperty : _enabledFalseProperty}
 
 			function _conformToNumber (_value) {return isNaN (_value) ? _undefined : +_value}
@@ -1092,8 +1087,7 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				buttonWidgetClass:null,
-				enableRootNodeCssClasses:false
+				buttonWidgetClass:null
 			}
 		});
 	}

@@ -28,77 +28,71 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_false = false,
-				_true = true
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var _this = this;
-
-						/*** add event handlers ***/
-							function _submitDialog (_result) {_this.fire ({name:'Submission Complete',result:_result})}
-							_this.wire ({
-								Ok:function () {_submitDialog (_true)},
-								Cancel:function () {_submitDialog (_false)},
-								Close:function () {_submitDialog (_false)}
-							});
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiState = function () {
-				this.isWired &&
-					this.setNodeProperties (
+			function _updateUiState (m) {
+				m.isWired &&
+					m.setNodeProperties (
 						'icon',
-						{className:'dialogIcon dialog' + Uize.capFirstChar (this._state) + 'Icon'}
+						{className:'dialogIcon dialog' + Uize.capFirstChar (m._state) + 'Icon'}
 					)
 				;
-			};
+			}
 
-			_classPrototype._updateUiMessage = function () {
-				this.isWired && this._message != null && this.setNodeInnerHtml ('message',this._message)
-			};
+			function _updateUiMessage (m) {
+				m.isWired && m._message != null && m.setNodeInnerHtml ('message',m._message);
+			}
 
-			_classPrototype._updateUiMode = function () {
-				this.isWired && this.children.cancel.showNode ('',!this._mode.indexOf ('confirm'))
-			};
+			function _updateUiMode (m) {
+				m.isWired && m.children.cancel.showNode ('',!m._mode.indexOf ('confirm'));
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				this._updateUiState ();
-				this._updateUiMessage ();
-				this._updateUiMode ();
-				_superclass.doMy (this,'updateUi');
-			};
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				/*** add event handlers ***/
+					function _handleConfirm(_event) { m.handleConfirm(_event) }
+					m.wire ({
+						Ok:_handleConfirm,
+						Cancel:_handleConfirm,
+						Close:_handleConfirm
+					});
+			},
+
+			instanceMethods:{
+				handleConfirm:function (_event) {
+					this.fire ({name:'Submission Complete',result:_event.name == 'Ok'});
+				},
+
+				updateUi:function () {
+					var m = this;
+					_updateUiState (m);
+					_updateUiMessage (m);
+					_updateUiMode (m);
+					_superclass.doMy (m,'updateUi');
+				}
+			},
+
+			stateProperties:{
 				_message:{
 					name:'message',
-					onChange:_classPrototype._updateUiMessage,
+					onChange:function () {_updateUiMessage (this)},
 					value:''
 				},
 				_mode:{
 					name:'mode',
 					onChange:function () {
-						this._mode.indexOf ('Custom') < 0 &&
-							this.set ({defaultTitle:this.localize (this._mode == 'confirm' ? 'confirm' : 'attention')})
+						var m = this;
+						m._mode.indexOf ('Custom') < 0 &&
+							m.set ({defaultTitle:m.localize (m._mode == 'confirm' ? 'confirm' : 'attention')})
 						;
-						this._updateUiMode ();
+						_updateUiMode (m);
 					},
 					value:'confirm'
 				},
 				_state:{
 					name:'state',
-					onChange:_classPrototype._updateUiState,
+					onChange:function () {_updateUiState (this)},
 					value:'info'
 					/* NOTES: states that are supported
 						- info (eg. "i" in blue circle)
@@ -108,9 +102,8 @@ Uize.module ({
 						- success (eg. green check mark, or check mark in a circle)
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

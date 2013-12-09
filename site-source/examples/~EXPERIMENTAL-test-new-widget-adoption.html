@@ -26,7 +26,7 @@
 			<div id="page-actions" class="pageActions"><a href="source-code/test-new-widget-adoption.html" class="buttonLink">SOURCE</a></div>
 		</div>
 	</h1>
-	
+
 	<!-- explanation copy -->
 
 	<div class="explanation">
@@ -50,16 +50,16 @@ window.$page_parent = {
 
 Uize.module ({
 	name:'Uize.Widget.ChildWidget',
-	builder:function(_superclass) {
+	builder:function (_superclass) {
 		var _class = _superclass.subclass(
 			null,
-			function() {
+			function () {
 				console.log('child widget: omega constructor');
 				console.log('child widget: adoption property = ' + this._adoptionProperty);
 			}
 		);
 
-		_class.prototype.wireUi = function() {
+		_class.prototype.wireUi = function () {
 			if (!this.isWired) {
 				console.log('child widget: wireUi');
 				console.log('child widget: adoption property = ' + this._adoptionProperty);
@@ -78,7 +78,7 @@ Uize.module ({
 
 Uize.module ({
 	name:'Uize.Widget.ParentWidget',
-	builder:function(_superclass) {
+	builder:function (_superclass) {
 		var _class = _superclass.subclass(
 			null,
 			function () {

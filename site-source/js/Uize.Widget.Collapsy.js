@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.Collapsy',
 	required:'Uize.Node.Classes',
-	builder:function(_superclass) {
+	builder:function (_superclass) {
 		'use strict';
 
 		/*** Variables for Scruncher Optimization ***/
@@ -42,7 +42,7 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUi = function() {
+			_classPrototype._updateUi = function () {
 				var _this = this;
 
 				if (_this.isWired) {
@@ -62,16 +62,16 @@ Uize.module ({
 			};
 
 		/*** Private Instance Methods ***/
-			_classPrototype._getMessage = function(_message) {
+			_classPrototype._getMessage = function (_message) {
 				return Uize.isFunction (_message) ? _message() : _message;
 			};
 
 		/*** Public Instance Methods ***/
-			_classPrototype.getCollapsedMessage = function() { return this._getMessage(this._collapsedMessage) };
+			_classPrototype.getCollapsedMessage = function () { return this._getMessage(this._collapsedMessage) };
 
-			_classPrototype.getExpandedMessage = function() { return this._getMessage(this._expandedMessage) };
+			_classPrototype.getExpandedMessage = function () { return this._getMessage(this._expandedMessage) };
 
-			_classPrototype.updateUi = function() {
+			_classPrototype.updateUi = function () {
 				this._updateUi();
 				_superclass.doMy (this,'updateUi');
 			};
@@ -85,8 +85,8 @@ Uize.module ({
 					_this.wireNode (
 						'',
 						{
-							mouseover:function() { _collapse(_false) },
-							mouseout:function() { _collapse(_true) }
+							mouseover:function () { _collapse(_false) },
+							mouseout:function () { _collapse(_true) }
 						}
 					);
 

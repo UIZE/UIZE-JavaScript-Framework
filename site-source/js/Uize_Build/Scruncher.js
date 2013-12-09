@@ -64,8 +64,8 @@ Uize.module ({
 	name:'Uize.Build.Scruncher',
 	required:[
 		'Uize.Xml',
-		'Uize.String',
-		'Uize.String.Split'
+		'Uize.Str.Has',
+		'Uize.Str.Split'
 	],
 	builder:function () {
 		'use strict';
@@ -178,7 +178,7 @@ Uize.module ({
 					_tokenTerminated = _false,
 					_currentBlock = '',
 					_currentLine = '',
-					_Uize_String_startsWith = Uize.String.startsWith
+					_hasPrefix = Uize.Str.Has.hasPrefix
 				;
 				/*** initialize settings ***/
 					/* IDEA:
@@ -222,7 +222,7 @@ Uize.module ({
 							_mappings = [];
 							var _mappingPairs = _settings.MAPPINGS.split (',');
 							for (var _pairNo = -1; ++_pairNo < _mappingPairs.length;) {
-								var _sourcePrefixAndTargetPrefix = Uize.String.Split.splitInTwo (_mappingPairs [_pairNo],'=');
+								var _sourcePrefixAndTargetPrefix = Uize.Str.Split.splitInTwo (_mappingPairs [_pairNo],'=');
 								_mappings [_pairNo] = new _Mapping (
 									_sourcePrefixAndTargetPrefix [0],
 									_sourcePrefixAndTargetPrefix [1]
@@ -344,7 +344,7 @@ Uize.module ({
 						if (_tokenType == _WORD) {
 							for (var _mappingNo = -1; ++_mappingNo < _mappings.length;) {
 								var _mapping = _mappings [_mappingNo];
-								if (_Uize_String_startsWith (_currentToken,_mapping._sourcePrefix + '_')) {
+								if (_hasPrefix (_currentToken,_mapping._sourcePrefix + '_')) {
 									_incidencesOfIdentifiersScrunched++;
 									var _scrunchedToken = _mapping._scrunchMap [_currentToken] || '';
 									if (!_scrunchedToken) {

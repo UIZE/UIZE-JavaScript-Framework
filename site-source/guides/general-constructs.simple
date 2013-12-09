@@ -127,8 +127,8 @@ Value Transformer
 
 			For a more in-depth discussion of curve functions, see the section `Curve Functions Are Specialized Value Transformers`.
 
-		The Uize.String.Lines.modify Method
-			The =Uize.String.Lines.modify= static method of the =Uize.String.Lines= module supports a `value transformer` for the line modifier that processes each line of a multi-line string.
+		The Uize.Str.Lines.modify Method
+			The =Uize.Str.Lines.modify= static method of the =Uize.Str.Lines= module supports a `value transformer` for the line modifier that processes each line of a multi-line string.
 
 			EXAMPLE
 			.......................................................................
@@ -136,10 +136,10 @@ Value Transformer
 				return sourceStr.length > 100 ? sourceStr.slice (0,100) : sourceStr;
 			}
 
-			Uize.String.Lines.modify (multiLineStr,limitStringLengthTo100Chars);
+			Uize.Str.Lines.modify (multiLineStr,limitStringLengthTo100Chars);
 			.......................................................................
 
-			In the above example, the =Uize.String.Lines.modify= method is using the =limitStringLengthTo100Chars= value transformer to limit the length of all lines in a multi-line string to a maximum of a hundred characters - lines that are longer than a hundred characters in length will be truncated so that the extra characters are discarded.
+			In the above example, the =Uize.Str.Lines.modify= method is using the =limitStringLengthTo100Chars= value transformer to limit the length of all lines in a multi-line string to a maximum of a hundred characters - lines that are longer than a hundred characters in length will be truncated so that the extra characters are discarded.
 
 		Using a Value Transformer in Place of a Value and Key Transformer
 			A `value transformer` can always be used in place of a `value and key transformer`.
@@ -195,7 +195,7 @@ Value Matcher
 	A value matcher can be considered to be a specialized kind of `value transformer`, where the input value is always transformed to a result of =true= or =false=.
 
 	Applications of Value Matchers
-		Value matchers can have a variety of different uses - they can be used as validators, they can be supplied to map functions (such as =Uize.String.Lines.removeMatching=), they can be used to test values generated in unit tests against expectations, etc.
+		Value matchers can have a variety of different uses - they can be used as validators, they can be supplied to map functions (such as =Uize.Str.Lines.removeMatching=), they can be used to test values generated in unit tests against expectations, etc.
 
 		Among other things, value matchers can be used to match...
 
@@ -227,7 +227,7 @@ Value Matcher
 		In the above example, the function =isOnlyWhitespace= returns a boolean value, indicating whether or not the input value is a string containing only whitespace characters (such as spaces and tabs).
 
 		Using a Value Matcher Function
-			A `value matcher function` can be supplied as a parameter to any method that supports a value matcher function, such as the =Uize.String.Lines.removeMatching= static method of the =Uize.String.Lines= module. Consider the following example...
+			A `value matcher function` can be supplied as a parameter to any method that supports a value matcher function, such as the =Uize.Str.Lines.removeMatching= static method of the =Uize.Str.Lines= module. Consider the following example...
 
 			EXAMPLE
 			........................................................................
@@ -235,12 +235,12 @@ Value Matcher
 				return /^\s*$/.test (value);
 			}
 
-			myString = Uize.String.Lines.removeMatching (myString,isOnlyWhitespace);
+			myString = Uize.Str.Lines.removeMatching (myString,isOnlyWhitespace);
 			........................................................................
 
-			The =Uize.String.Lines.removeMatching= method accepts a multi-line string (containing zero or more linebreaks) for its first parameter and a matcher function as its second. It iterates through all the lines of the specified multi-line string, calling the Value Matcher Function for each line. Depending on the boolean value that is returned by the matcher, the method will either remove or retain the line.
+			The =Uize.Str.Lines.removeMatching= method accepts a multi-line string (containing zero or more linebreaks) for its first parameter and a matcher function as its second. It iterates through all the lines of the specified multi-line string, calling the Value Matcher Function for each line. Depending on the boolean value that is returned by the matcher, the method will either remove or retain the line.
 
-			The variable =myString=, in this case, will contain only the lines of the source multi-line string that have at least one non-whitespace character - lines containing only whitespace are matched by the =isOnlyWhitespace= matcher function and are removed by the =Uize.String.Lines.removeMatching= method.
+			The variable =myString=, in this case, will contain only the lines of the source multi-line string that have at least one non-whitespace character - lines containing only whitespace are matched by the =isOnlyWhitespace= matcher function and are removed by the =Uize.Str.Lines.removeMatching= method.
 
 	### Value Matcher Expression
 		.
@@ -255,7 +255,7 @@ Value Matcher
 
 			EXAMPLE
 			...............................................................................
-			myString = Uize.String.Lines.removeMatching (myString,'/^\\s*$/.test (value)');
+			myString = Uize.Str.Lines.removeMatching (myString,'/^\\s*$/.test (value)');
 			...............................................................................
 
 	### Value Matcher Regular Expression
@@ -271,7 +271,7 @@ Value Matcher
 
 			EXAMPLE
 			...............................................................
-			myString = Uize.String.Lines.removeMatching (myString,/^\s*$/);
+			myString = Uize.Str.Lines.removeMatching (myString,/^\s*$/);
 			...............................................................
 
 	Different Types of Value Matchers
@@ -285,15 +285,15 @@ Value Matcher
 	Using Value Matchers
 		A `value matcher` can be used with any of the many methods that support a value matcher.
 
-		Methods of the Uize.String.Lines Module
-			Some of the static methods of the =Uize.String.Lines= module support a `value matcher`.
+		Methods of the Uize.Str.Lines Module
+			Some of the static methods of the =Uize.Str.Lines= module support a `value matcher`.
 
-			Uize.String.Lines.removeMatching
-				The =Uize.String.Lines.removeMatching= static method supports a value matcher to identify which lines of a multi-line string should be removed.
+			Uize.Str.Lines.removeMatching
+				The =Uize.Str.Lines.removeMatching= static method supports a value matcher to identify which lines of a multi-line string should be removed.
 
 				EXAMPLE
 				................................................
-				myString = Uize.String.Lines.removeMatching (
+				myString = Uize.Str.Lines.removeMatching (
 					myString,
 					function (value) {return /^\s*$/.test (value)
 				};
@@ -301,12 +301,12 @@ Value Matcher
 
 				In the above example, all lines that are either empty or only contain whitespace characters will be removed from the string specified by the =myString= variable, and the resulting string will be assigned back to the =myString= variable.
 
-			Uize.String.Lines.retainMatching
-				The =Uize.String.Lines.retainMatching= static method supports a value matcher to identify which lines of a multi-line string should be retained (ie. not removed).
+			Uize.Str.Lines.retainMatching
+				The =Uize.Str.Lines.retainMatching= static method supports a value matcher to identify which lines of a multi-line string should be retained (ie. not removed).
 
 				EXAMPLE
 				.............................................
-				myString = Uize.String.Lines.retainMatching (
+				myString = Uize.Str.Lines.retainMatching (
 					myString,
 					function (value) {return /\S/.test (value)
 				};

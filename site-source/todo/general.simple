@@ -1,5 +1,53 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
+Eliminate All Extension Modules
+	Eliminate all extension modules and replace them with either helper objects containing purely static methods or mixin modules.
+
+	Extensions as Anti-Pattern
+		Extension modules, like plugins, can be considered an anti-pattern because loading them has side effects on other loaded modules.
+
+		In that sense, they are not isolated. The side effects of loading an extension module are deliberate and are their one benefit, but this pattern causes several problems...
+
+		Interoperability Issues
+			Extension modules can cause problems of interoperability, since shared modules are affected.
+
+			The effect is much like that of setting global variables or modifying the prototypes of built-in objects. There is no guarantee that two different extension modules won't have interactions / conflicts.
+
+		Dependency Management Issues
+			Extension modules can cause problems of dependency management in two key ways...
+
+			Dependencies are Unclear from Code
+				Since an extension module affects an object or class other than itself, it can be unclear from viewing code that the code has a dependency on an extension module.
+
+				There may be a call to an instance method of an instance of a class, but that method may not be defined in the class but actually in an extension module that modifies the class.
+
+			Modules Use Stuff That is Found Lying Around
+				Since an extension module modifies a class or object that is shared and may be in use by other modules, that modified class or object may then appear to have features to the code in other modules that that code isn't aware is defined in an extension.
+
+				Code in other modules may just discover instance methods (through an IDE's code auto-complete feature, for example) that are "lying around" and start using them, without realizing that the dependency on the extension module also needs to be declared in the module's code. Then, if that module is used in a different context where the extension module hasn't been required, the module's code can fail at runtime under some specific condition where the methods that would have been added by the extension module are called.
+
+		Code Analysis Problems
+			Since extension modules affect objects or classes other than themselves, they can cause problems for code analysis because they can make modules appear to define more features than they actually do.
+
+			If a class module is loaded, then an extension module is loaded that modifies that class, and then a subclass module is loaded, if that subclass is examined for features, it will appear to define features that are not actually defined by it, but were in fact defined by the extension module that modified its base class. This can complicate the task of code analysis to perform feature discovery. Features added by extension modules are mis-attributed.
+
+	Extension Modules to Eliminate
+		The following list of extension modules should be eliminated...
+
+		- =Uize.Color.xCmyk=
+		- =Uize.Color.xHsv=
+		- =Uize.Color.xSvgColors=
+		- =Uize.Color.xUtil=
+		- =Uize.Fade.xFactory=
+		- =Uize.Fade.xSeries=
+		- =Uize.Fx.xShadows=
+		- =Uize.Widget.Bar.Slider.xSkin=
+		- =Uize.Widget.Collection.Dynamic.xDialogEditable=
+		- =Uize.Widget.Dialog.xResizable=
+		- =Uize.Widget.ImageWipe.xPresets=
+		- =Uize.Widget.Page.xDeferredLinks=
+		- =Uize.Widget.Swap.xPresets=
+
 Code Size Optimization
 	Lightweight JSON Module
 		Implement lighter weight JSON module that can be used by =Uize.Widget.V2=.
@@ -86,20 +134,6 @@ Code Size Optimization
 		Uize.Widget
 			Specific features to be decided.
 
-		Uize.Widget.V2
-			Expose the functionality as a mixin, so that the V2 widget capabilities can be mised into existing =Uize.Widget= subclasses, rather than having to rebase those widget classes (which then impacts all their subclasses).
-
-		Uize.String
-			Factor Out Trim Related Methods Into Uize.String.Trim
-				Move the trim related methods into a separate =Uize.String.Trim= module.
-
-				..................................................................
-				Uize.String.trim        >> BECOMES >>  Uize.String.Trim.trim
-				Uize.String.trimLeft    >> BECOMES >>  Uize.String.Trim.trimLeft
-				Uize.String.trimRight   >> BECOMES >>  Uize.String.Trim.trimRight
-				Uize.String.hasPadding  >> BECOMES >>  Uize.String.Trim.hasPadding
-				..................................................................
-
 	Improvements in Uize.Widget
 		Implement Way of Declaring UI Wirers
 			Implement a new feature for UI wirers for widgets and switch away from old =wireUi= approach.
@@ -117,7 +151,7 @@ Code Size Optimization
 
 			Current violators...
 
-			- =Uize.String=
+			- =Uize.Fx=
 			- =Uize.Data=
 			- =Uize.Date=
 
@@ -152,37 +186,6 @@ Folder Organization of JavaScript Modules
 
 			The value of the =Uize.Class.pathToResources= property is calculated for each module to take into account whether or not the module is under a namespace that uses folder organization.
 
-Widget Resource Modules
-	Dealing with Circular Dependencies
-		How does one deal with widget modules that have a dependency on modules (such as CSS and JST modules) that are under the namespace they define, so those required modules have a dependency on the namespace.
-
-		- how to deal with any module that has a dependency on a namespace that is not defined?
-		- is it ok to stub out namespaces?
-		- what is the downside of stubbing a namespace?
-		- what does one do when a namespace is not defined at the time that a module under it needs to be defined?
-		- how does one know for sure that a module under a namespace needs that module only for its namespace?
-
-		EXAMPLE
-		................................
-		Uize.Widgets.TestWidget
-		Uize.Widgets.TestWidget.Style
-		Uize.Widgets.TestWidget.Html
-		Uize.Widgets.TestWidget.Loc.JaJp
-		................................
-
-		Two Approaches
-			Deferred Assignment on Namespace
-
-				- it needs to be made clear by resourcee modules that they only need the widget module for its namespace (some way of declaring this?)
-				- widget module accesses resource modules not by dereferencing them off of its namespace, but by references passed in to the builder
-				- resource modules only define on the namespace once the namespace is defined, but building can complete sooner in order to pass reference to builder of widget
-
-		Assignment on Temporary Stub of Namespace
-
-			- it needs to be made clear by resourcee modules that they only need the widget module for its namespace (some way of declaring this?)
-			- resource modules are built and assigned on a temporary stub of the namespace they need
-			- widget module overwrites temporary stub of their namespace once they are built
-
 Eliminate Private Methods As Properties
 	In all modules in the UIZE codebase, eliminate all private instance and static methods in favor of functions that get passed the context as the first argument.
 
@@ -197,15 +200,11 @@ Possible New Namespaces
 Code to Factor Out
 	Code to factor out of widget classes into non-Web specific modules...
 
-	- =Uize.Widget.ImagePort= - pure rectangle scaling math should be factored out into a new =Uize.Math.RectScaler= module
-	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.String.Population= module (or =Uize.Template.Population=?)
+	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.Str.Population= module (or =Uize.Template.Population=?)
 	- =Uize.Widget.Tree= - model stuff for the data structure that represents a tree (=Uize.Data.Tree=?)
 
 General Drag and Drop Framework
 	Virtual dom events to mimic new HTML5 dnd events.
-
-Types for Properties
-	Can be used by interpolation code (such as fades).
 
 Iterator Interface
 	Instance Methods
@@ -264,7 +263,7 @@ Iterator Interface
 			For example, the =Uize.Fade= module supports wrapping a =Uize.Fade= value series as an iterator.
 
 			- =Uize.Data.Combinations=
-			- =Uize.String.Lines=
+			- =Uize.Str.Lines=
 			- =Uize.Color.xUtil=
 			- =Uize.Curve=
 
@@ -908,7 +907,6 @@ Function of X (fox)
 		function (min,max) {
 			return this >= min && this <= max;
 		}
-
 	)
 
 	inRange (x,0,100);
@@ -1000,7 +998,7 @@ Value Transformer Function
 			if (typeof _valueTransformer == 'function') {
 				if (!_valueTransformer.isValueTransformer)
 					_valueTransformer = _makeValueTransformer (
-						_functon,
+						_valueTransformer,
 						arguments.length > 1 && Array.prototype.slice.call (arguments,1)
 					)
 				;
@@ -1017,48 +1015,6 @@ Value Transformer Function
 			return _valueTransformer;
 		};
 		................................................................................................
-
-		...............................................................................
-		function _x () {return _makeValueTransformer (this,arguments)}
-		Uize.exify = function (_function,_wrapOriginal) {
-			var _arity = _function.arity || _function.length;
-			if (_wrapOriginal) {
-				var _originalFunction = _function;
-				_function = function () {return _originalFunction.apply (this,arguments};
-			}
-			if (_arity < 2) _function.isValueTransformer = true;
-			_function.x = _x;
-			return _function;
-		};
-		...............................................................................
-
-		...
-		// define
-		Uize.divide = Uize.exify (function (x,denominator) {return x / denominator});
-
-		// use
-		Uize.divide (10,2);
-		Uize.divide.x (2);
-
-		// define
-		Uize.round = Uize.exify (Math.round,true); // wrap original, so as not to modify native function's properties
-
-		// define
-		Uize.isType = Uize.exify (function (x,type) {return typeof x == type});
-
-		// use
-		Uize.isNumber = Uize.isType.x ('number');
-		Uize.isString = Uize.isType.x ('string');
-		...
-
-		...
-		Uize.willCall (Uize.isType,[0,'number'],0)
-		Uize.isTypeOf.x ('number')
-		...
-
-		...
-		_makeExify ('divide',function (x,value) {return x / value});
-		...
 
 Profiling Support
 	- a means for getting reports of the time that certain operations take on a page

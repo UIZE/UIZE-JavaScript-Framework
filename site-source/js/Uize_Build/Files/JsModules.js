@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Build.Files.JsModules',
 	required:[
 		'Uize.Build.Util',
-		'Uize.String',
+		'Uize.Str.Has',
 		'Uize.Url'
 	],
 	builder:function (_superclass) {
@@ -64,7 +64,7 @@ Uize.module ({
 									path:_uizeModulesPath,
 									recursive:true,
 									pathMatcher:function (_path) {
-										return _jsModuleExtensionRegExp.test (_path) && Uize.String.startsWith (_path,'Uize.');
+										return _jsModuleExtensionRegExp.test (_path) && Uize.Str.Has.hasPrefix (_path,'Uize.');
 									},
 									pathTransformer:function (_path) {
 										return _modulesFolder + '/' + _path.replace (_jsModuleExtensionRegExp,'.js');

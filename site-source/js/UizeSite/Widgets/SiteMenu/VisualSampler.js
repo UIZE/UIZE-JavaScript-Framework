@@ -20,7 +20,7 @@
 	Introduction
 		The =UizeSite.Widgets.SiteMenu.VisualSampler= class implements a visual sampler widget for the =UizeSite.Widgets.SiteMenu.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

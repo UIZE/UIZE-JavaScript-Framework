@@ -156,7 +156,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Calendar',
-	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Widget.Button',
 		'Uize.Date',
@@ -165,16 +164,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_null = null,
 				_Uize_Date = Uize.Date,
-				_dayNames = _Uize_Date.dayNames,
-				_monthNames = _Uize_Date.monthNames,
 				_formatDate = Uize.Date.Formatter.format
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _conformNullableDateValue (_value) {
@@ -224,7 +221,8 @@ Uize.module ({
 			}
 
 			function _updateUiMonthDisplay () {
-				this.isWired && this.setNodeValue ('month',_monthNames [this._month]);
+				var m = this;
+				m.isWired && m.setNodeValue ('month',m._monthNames [m._month]);
 				/*?
 					Implied Nodes
 						month Implied Node
@@ -313,7 +311,10 @@ Uize.module ({
 
 						/*** build and replace the grid HTML ***/
 							/*** build the days header ***/
-								var _dayNameLength = m._dayNameLength;
+								var
+									_dayNameLength = m._dayNameLength,
+									_dayNames = m._dayNames
+								;
 								for (var _dayNo = -1; ++_dayNo < 7;)
 									_gridStringChunks.push (
 										'<th title="' + _dayNames [_dayNo] + '">' +
@@ -339,13 +340,14 @@ Uize.module ({
 												_tipText = _formatDate (_day,'{dayName}, {dayNo}{dayNoSuffix} of {monthName}, {YYYY}')
 											;
 											_gridStringChunks.push (
-												_dayNo >= _firstEnabledDayNo && _dayNo <= _lastEnabledDayNo
+												m.getCustomDateUi(_day, _dayNo, _firstEnabledDayNo, _lastEnabledDayNo, _selected) ||
+												(_dayNo >= _firstEnabledDayNo && _dayNo <= _lastEnabledDayNo
 													? (
 														'<td' + (_selected ? ' class="' + _selectedCssClass + '"' : '') + ' title="' + _tipText + '"><a href="javascript://" id="' + _idPrefix + '-day' + _dayNo + '">' + _dayNo + '</a></td>'
 													) : (
 														'<td class="' + (_selected ? _selectedCssClass + ' ' : '') + _grayedCssClass + '" title="' + _tipText + '">' + _dayNo + '</td>'
-													),
-												'</td>'
+													)
+												)
 											);
 										} else {
 											_gridStringChunks.push ('<td>&nbsp;</td>');
@@ -491,10 +493,15 @@ Uize.module ({
 					_updateUiMonthDisplay.call (this);
 					_updateUiYearDisplay.call (this);
 					_updateUiGrid.call (this);
-				}
+				},
+				getCustomDateUi: function (_day, _dayNo, _firstEnabledDayNo, _lastEnabledDayNo, _selected) { return null }
 			},
 
 			stateProperties:{
+				_dayNames:{
+					name:'dayNames',
+					value:_Uize_Date.dayNames
+				},
 				_dayNameLength:{
 					name:'dayNameLength',
 					value:1
@@ -605,6 +612,10 @@ Uize.module ({
 								- see the companion =year= state property
 								- see the related =snapViewOnValueChange= and =value= state properties
 					*/
+				},
+				_monthNames:{
+					name:'monthNames',
+					value:_Uize_Date.monthNames
 				},
 				_snapViewOnValueChange:{
 					name:'snapViewOnValueChange',

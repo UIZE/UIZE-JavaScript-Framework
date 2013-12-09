@@ -28,7 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Node',
 		'Uize.Node.Event',
-		'Uize.Widget.Collapsy',
+		'Uize.Widget.FormElementWarning',
 		'Uize.Node.Classes'
 	],
 	builder:function (_superclass) {
@@ -40,6 +40,10 @@ Uize.module ({
 				_false = false,
 				_null = null,
 				_undefined,
+				
+				_Uize = Uize,
+				_Uize_Node = _Uize.Node,
+				_Uize_Node_Event = _Uize_Node.Event,
 
 				/*** validation/warning variables ***/
 					_never = 'never',
@@ -57,18 +61,18 @@ Uize.module ({
 					function () {
 						var
 							_this = this,
-							_warningWidget = _this.addChild('warning', Uize.Widget.Collapsy, _this._warningMessageProperties)
+							_warningWidget = _this._warningWidget = _this.addChild(
+								'warning',
+								_this._warningWidgetClass || _Uize.Widget.FormElementWarning
+							),
+							_updateUiState = function () {_this._updateUiState()}
 						;
 
-						function _updateUiState() { _this._updateUiState() }
 						_this.wire ({
 							'Changed.busyInherited':_updateUiState,
-							'Changed.enabledInherited':_updateUiState,
-							Blur:function() { _warningWidget.set({collapsed:_true}) },
-							Focus:function() { _warningWidget.set({collapsed:_false}) }
+							'Changed.enabledInherited':_updateUiState
 						});
 
-						_this._warningWidget = _warningWidget;
 						_this._isInitialized = _true;
 						_this._lastKeyDown = -1;
 					}
@@ -77,9 +81,9 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._getInputNode = function() { return this.getNode('input') };
+			_classPrototype._getInputNode = function () { return this.getNode('input') };
 
-			_classPrototype._getParentForm = function() {
+			_classPrototype._getParentForm = function () {
 				var
 					_parentElementsWidget = this.parent,
 					_parentForm
@@ -97,7 +101,7 @@ Uize.module ({
 				var _this = this;
 				if (_this.isWired) {
 					var _enabled = _this.get ('enabledInherited') && !_this.get ('busyInherited');
-					_this.setNodeProperties (_this._getInputNode(), {readOnly:!_enabled,disabled:!_enabled});
+					_this.setNodeProperties (_this._getInputNode(), {disabled:!_enabled});
 				}
 			};
 
@@ -108,13 +112,13 @@ Uize.module ({
 						_inputNode = _this._getInputNode(),
 						_value = _this._value
 					;
-					_value + '' != _this.getNodeValue (_inputNode)
-						&& _this.setNodeValue (_inputNode, _value)
+					_value != _this.getNodeValue (_inputNode)
+						&& _this.setNodeValue (_inputNode, _value === _undefined ? '' : _value)
 					;
 				}
 			};
 
-			_classPrototype._updateUiWarning = function() {
+			_classPrototype._updateUiWarning = function () {
 				var
 					_this = this,
 					_warningShown = _this._warningShown,
@@ -125,15 +129,15 @@ Uize.module ({
 					// Update warning widget
 					_this._warningWidget &&
 						_this._warningWidget.set(
-							Uize.copyInto(
+							_Uize.copyInto(
 								{shown:_warningShown},
-								_warningMessage ? {expandedMessage:_warningMessage} : _null
+								_warningMessage ? {message:_warningMessage} : _null
 							)
 						);
 
 					// visual indicators of warning state
-					Uize.Node.Classes.setState(
-						[_this._getInputNode(),_this.getNode('label')],
+					_Uize_Node.Classes.setState(
+						[_this._getInputNode(),_this.getNode('label'),_this.getNode ('shell')],
 						_this._errorClassName,
 						_warningShown
 					);
@@ -142,11 +146,11 @@ Uize.module ({
 
 		/*** Public Methods ***/
 			// NOTE: can be overidden by subclasses
-			_classPrototype.fireOkOnEnter = Uize.returnTrue;
+			_classPrototype.fireOkOnEnter = _Uize.returnTrue;
 
-			_classPrototype.checkIsEmpty = function() { return this._value == _null || this._value == '' };
+			_classPrototype.checkIsEmpty = function () { return this._value == _null || this._value === '' };
 
-			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function() {
+			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function () {
 				var
 					_this = this,
 					_warningShownWhen = _this._warningShownWhen,
@@ -177,16 +181,14 @@ Uize.module ({
 			// To be overridden as necessary by subclasses (should return an array)
 			_classPrototype.getMoreValidators = _undefined;
 
-			_classPrototype.getRootNode = function() {
-				return this.getNode() || this.getNode('input')
-			};
+			_classPrototype.getRootNode = function () { return this.getNode() || this.getNode('input') };
 
-			_classPrototype.restore = function() {
+			_classPrototype.restore = function () {
 				this.set({
 					_finishedAtLeastOnce:_false,
 					_isDirty:'inherit',
 					_value:this._initialValue
-				})
+				});
 			};
 
 			_classPrototype.updateUi = function () {
@@ -200,8 +202,12 @@ Uize.module ({
 					_superclass.doMy (_this,'updateUi');
 				}
 			};
+			
+			_classPrototype.valueConformer = function(_value) {
+				return _Uize.isFunction (this._valueConformer) ? this._valueConformer(_value) : _value;
+			};
 
-			_classPrototype.validate = _classPrototype._validate = function() {
+			_classPrototype.validate = _classPrototype._validate = function () {
 				var _this = this;
 
 				if (_this._isInitialized) {
@@ -209,7 +215,7 @@ Uize.module ({
 						_validator = _this._validator,
 						_validators =
 							(
-								Uize.isArray(_validator)
+								_Uize.isArray(_validator)
 									? _validator
 									: (_validator != _null ? [_validator] : _null)
 							),
@@ -239,29 +245,30 @@ Uize.module ({
 											else _processNextValidator();
 										},
 										_validatorToEvaluate = _validators[_validatorNo],
-										_isValid = _validatorToEvaluate instanceof RegExp
-											? _validatorToEvaluate.test (_value)
+										_validatorFunction = _validatorToEvaluate.func || (_Uize.isFunction (_validatorToEvaluate) ? _validatorToEvaluate : _null),
+										_isValid = _validatorFunction
+											? _validatorFunction.call(_this, _value, _handleIsValid)
 											: (
-												_validatorToEvaluate.func || Uize.isFunction (_validatorToEvaluate)
-													? (
-														_validatorToEvaluate.func || _validatorToEvaluate
-													).call(_this, _value, _handleIsValid)
+												_validatorToEvaluate instanceof RegExp
+													? _validatorToEvaluate.test (_value)
 													: _value == _validatorToEvaluate
 											)
 									;
 
-									_handleIsValid(_isValid, _validatorToEvaluate.msg);
+									if (_isValid != _null)	// sign that the validation is asynchronous
+										_handleIsValid(_isValid, _validatorToEvaluate.msg);
 								}
 								else _setIsValid(_true);
 							}
 						;
+
 						_processNextValidator();
 					}
-					else _setIsValid(_true)
+					else _setIsValid(_true);
 				}
 			};
 
-			_classPrototype.wireUi = function() {
+			_classPrototype.wireUi = function () {
 				var _this = this;
 
 				if (!_this.isWired) {
@@ -273,16 +280,14 @@ Uize.module ({
 							_this._elementName = _inputNode.name;
 
 						var
-							/*** Helper functions ***/
-								_fire = function (_eventName, _domEvent) { _this.fire ({name:_eventName,domEvent:_domEvent}) },
-								_fireClick = function (_event) { _fire ('Click', _event) },
-								_fireKeyUp = function (_event) { _fire ('Key Up', _event) },
-								_setValue = function (_isInitial) {
-									_this.set ({_value:_this.getNodeValue(_inputNode)});
-									!_isInitial && _this._isDirty != _true &&
-										_this.set({_isDirty:_true});
-								},
-
+							_fire = function (_eventName, _domEvent) { _this.fire ({name:_eventName,domEvent:_domEvent}) },
+							_fireClick = function (_event) { _fire ('Click', _event) },
+							_fireKeyUp = function (_event) { _fire ('Key Up', _event) },
+							_setValue = function (_isInitial) {
+								_this.set ({_value:_this.getNodeValue(_inputNode)});
+								!_isInitial && _this._isDirty != _true &&
+									_this.set({_isDirty:_true});
+							},
 							_eventsToWire = {
 								blur:function () {
 									_setValue();
@@ -296,6 +301,11 @@ Uize.module ({
 								keydown:function (_event) {
 									_this._lastKeyDown = _event.keyCode;
 									_fire ('Key Down', _event);
+
+									_Uize_Node_Event.isKeyEnter(_event)
+										&& _this._type != 'textarea'
+										&& _Uize_Node_Event.abort(_event)
+									;
 								}
 							}
 						;
@@ -307,10 +317,10 @@ Uize.module ({
 
 							case 'radio':	// operates on a group of like-named radio buttons, but one has to have the implied node id
 								_this.set ({
-									nodeMap:Uize.copyInto(
+									nodeMap:_Uize.copyInto(
 										_this.get('nodeMap') || {},
 										{
-											input:Uize.Node.find({
+											input:_Uize_Node.find({
 												tagName:'INPUT',
 												type:'radio',
 												name:_this._elementName
@@ -338,13 +348,13 @@ Uize.module ({
 									// cause a form submission, which would be bad). So now the check to see if we should fire 'Ok'
 									// checks to see if both keydown AND keyup are ENTER (since when you type kanji, you keydown on
 									// a non-enter key, do stuff, then keyup to continue).
-									if (_this._type != 'textarea' && _this._lastKeyDown == _event.keyCode && Uize.Node.Event.isKeyEnter (_event)) {
+									if (_this._type != 'textarea' && _this._lastKeyDown == _event.keyCode && _Uize_Node_Event.isKeyEnter (_event)) {
 										_setValue ();
 										_this.fireOkOnEnter()
 											&& _fire ('Ok', _event)
 										;
 									}
-									else if (Uize.Node.Event.isKeyEscape (_event)) {
+									else if (_Uize_Node_Event.isKeyEscape (_event)) {
 										_this._updateUiValue();		// replace with old (saved) value
 										_fire ('Cancel', _event);
 										_inputNode.blur();
@@ -398,28 +408,32 @@ Uize.module ({
 				},
 				_focused:{
 					name:'focused',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
-							_warningWidget = _this.children.warning
+							_warningWidget = _this.children.warning,
+							_focused = _this._focused
 						;
 
-						_warningWidget && _warningWidget.set({collapsed:!_this._focused});
+						_warningWidget && _warningWidget.set({focused:_focused});
 
 						if (_this.isWired) {
 							var _inputNode = _this._getInputNode();
 
-							try {
-							_inputNode &&
-								(Uize.Node.isNode(_inputNode) ? _inputNode : _inputNode[0])[
-									_this._focused ? 'focus' : 'blur'
-								]()
-							;
+							// If focused state property is out of sync with 'focused' state of the DOM node (via document.activeElement)
+							// then force a focus.  We don't force a blur because blurring isn't as important (an apparently it causes
+							// issues with Samsung Galaxy Tab 10.1)
+							if (_focused && _inputNode && document.activeElement != _inputNode) {
+								setTimeout(
+									function() {
+										try { (_Uize_Node.isNode(_inputNode) ? _inputNode : _inputNode[0]).focus(); }
+										catch(_ex) {}
+									}, 0
+								);
 
-								// synch up the value with the UI, in case conformer had changed a UI value to something that already matched the programmatic value
+								// sync up the value with the UI, in case conformer had changed a UI value to something that already matched the programmatic value
 								_this.setNodeValue('input', _this._value);
 							}
-							catch(_ex) {}
 						}
 					},
 					value:_false
@@ -430,7 +444,7 @@ Uize.module ({
 				},
 				_isDirty:{
 					name:'isDirty',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
 							_parentForm = _this._getParentForm(),
@@ -450,7 +464,7 @@ Uize.module ({
 				},
 				_isFinished:{
 					name:'isFinished',
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
 						if (_this._isFinished && _this._isInitialized) {
@@ -471,9 +485,10 @@ Uize.module ({
 				},
 				_tentativeValue:{	// readonly
 					name:'tentativeValue',
-					onChange:function() {
+					onChange:function () {
 						this._validateWhen == _tentativeValueChanged
 							&& this._validate()
+						;
 					},
 					value:_null
 				},
@@ -501,15 +516,15 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
-					conformer:function(_value) {
+					conformer:function (_value) {
 						var _this = this;
 
 						// conform the value to boolean if type is checkbox
 						_value = _this._type == 'checkbox' ? _value == _true : _value;
 
-						return Uize.isFunction (this._valueConformer) ? this._valueConformer(_value) : _value
+						return _this.valueConformer(_value);
 					},
-					onChange:function() {
+					onChange:function () {
 						var _this = this;
 
 						// As long as the widget is not wired & the value changes, update the initial value
@@ -536,7 +551,7 @@ Uize.module ({
 				_valueConformer:'valueConformer',
 				_warningAllowed:{
 					name:'warningAllowed',
-					onChange:function() {
+					onChange:function () {
 						var
 							_this = this,
 							_parentForm = _this._getParentForm(),
@@ -557,7 +572,7 @@ Uize.module ({
 				_warningMessage:{
 					name:'warningMessage',
 					onChange:[
-						function() {
+						function () {
 							var _this = this;
 
 							if (!_this.isWired)
@@ -565,10 +580,6 @@ Uize.module ({
 						},
 						_classPrototype._updateUiWarning
 					]
-				},
-				_warningMessageProperties:{ // for the warning
-					name:'warningMessageProperties',
-					onChange:function() {  this._warningWidget.set(this._warningMessageProperties) }
 				},
 				_warningShown:{
 					name:'warningShown',
@@ -580,6 +591,7 @@ Uize.module ({
 					onChange:_classPrototype._checkWarningShown,
 					value:_validated	// valid values: 'validated', 'finished', validatedAfterFirstFinish'
 				},
+				_warningWidgetClass:'warningWidgetClass',
 
 				/*** Private properties used for managing internal state w/ onChange functionality ***/
 					_finishedAtLeastOnce:{

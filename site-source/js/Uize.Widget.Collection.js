@@ -109,13 +109,18 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
+
+						/* NOTE:
+							Initialize the items array here (as opposed to the default value when registering the set-get property), since that default is static and gets shared between all instances which casues problems
+						*/
+						m._items = [];
 
 						/*** Private Instance Properties ***/
-							_this._itemWidgetNameUniquifier = 0;
+							m._itemWidgetNameUniquifier = 0;
 
 						/*** Private-public Instance Properties ***/
-							_this._itemWidgets = _this.itemWidgets = [];
+							m._itemWidgets = m.itemWidgets = [];
 							/*?
 								Instance Properties
 									itemWidgets
@@ -130,21 +135,21 @@ Uize.module ({
 							*/
 
 						/*** keep totalItems property up-to-date ***/
-							_this.wire (
+							m.wire (
 								'Items Changed',
 								function () {
-									_this.set ({_totalItems:_this._itemWidgets.length});
-									_this._updateTotalSelected ();
+									m.set ({_totalItems:m._itemWidgets.length});
+									m._updateTotalSelected ();
 								}
 							);
 					},
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** add the select all, select none, and remove buttons ***/
-							_this._addControlButton (
+							m._addControlButton (
 								'selectAll',
-								function () {_this.selectAll ()},
+								function () {m.selectAll ()},
 								'allSelected,totalItems,selectionMode,isEmpty: !allSelected && !isEmpty && (selectionMode != "single" || totalItems == 1)'
 								/*?
 									Child Widgets
@@ -163,9 +168,9 @@ Uize.module ({
 											- this child widget is added in the constructor
 								*/
 							);
-							_this._addControlButton (
+							m._addControlButton (
 								'selectNone',
-								function () {_this.selectAll (_false)},
+								function () {m.selectAll (_false)},
 								'someSelected'
 								/*?
 									Child Widgets
@@ -180,9 +185,9 @@ Uize.module ({
 											- this child widget is added in the constructor
 								*/
 							);
-							_this._addControlButton (
+							m._addControlButton (
 								'remove',
-								function () {_this._removeWithConfirm (_this._getSelected (),_true)},
+								function () {m._removeWithConfirm (m._getSelected (),_true)},
 								'someSelected'
 								/*?
 									Child Widgets
@@ -207,11 +212,11 @@ Uize.module ({
 				_buttonName,_clickHandler,_enabledWhen
 			) {
 				var
-					_this = this,
-					_buttonWidget = Uize.Widget.Button.addChildButton.call (_this,_buttonName,_clickHandler)
+					m = this,
+					_buttonWidget = Uize.Widget.Button.addChildButton.call (m,_buttonName,_clickHandler)
 				;
 				if (_enabledWhen)
-					_this.onChange (
+					m.onChange (
 						_enabledWhen,
 						function (_enabled) {_buttonWidget.set ({enabled:_enabled ? 'inherit' : _false})}
 					)
@@ -278,7 +283,7 @@ Uize.module ({
 			};
 
 			_classPrototype._fireItemsChangedEvent = function () {
-				this.fire ('Items Changed')
+				this.fire ('Items Changed');
 				/*?
 					Instance Events
 						Items Changed
@@ -306,9 +311,9 @@ Uize.module ({
 			};
 
 			_classPrototype._removeAllItemsUiAndWidget = function () {
-				var _this = this;
-				_this._forAll (function (_itemWidget) {_this._removeItemUiAndWidget (_itemWidget)});
-				_this._itemWidgets.length = 0;
+				var m = this;
+				m._forAll (function (_itemWidget) {m._removeItemUiAndWidget (_itemWidget)});
+				m._itemWidgets.length = 0;
 			};
 
 			_classPrototype._removeItemUiAndWidget = function (_itemWidget) {
@@ -317,86 +322,61 @@ Uize.module ({
 				this.removeChild (_itemWidget);
 			};
 
-			_classPrototype._removeWithConfirm = function (_itemWidgetsToRemove,_byUser) {
+		/*** Public Instance Methods ***/
+			_classPrototype.addChild = function(_childName, _childInstanceOrClass, _properties) {
+				/* NOTE:
+					Overriding addChild for the case that a collection item is added to the collection via widget adoption.  If this is the case, the code won't go through the normal addItemWidget and the item widget won't have the necessary events wired on it and it won't get added to the itemWidgets property
+				*/
 				var
-					_this = this,
-					_itemWidgetsToRemoveLength = _itemWidgetsToRemove.length
+					m = this,
+					_childWidget = _superclass.doMy (m,'addChild',[_childName,_childInstanceOrClass,_properties])
 				;
-				if (_itemWidgetsToRemoveLength) {
-					var _remove = function () {_this.remove (_itemWidgetsToRemove,_byUser)};
-					if (_byUser) {
-						_this.confirm ({
-							message:
-								_this.localize (
-									_itemWidgetsToRemoveLength == 1 ? 'removeItemConfirmation' : 'removeItemsConfirmation',
-									{
-										0:_itemWidgetsToRemoveLength,
-										itemsToRemove:_itemWidgetsToRemove
-									}
-									/*?
-										Localizable Strings
-											removeItemConfirmation
-												A localizable string, that will be displayed as the message in a confirmation dialog when the user chooses to remove a single item from the collection.
 
-												NOTES
-												- see the companion =removeItemsConfirmation= localizable string
-												- see the related =removeItemConfirmationTitle= and =removeItemsConfirmationTitle= localizable strings
+				if (m.isCollectionItem(_childWidget)) {
+					m.wireItemWidget (_childWidget);
+					m._itemWidgets.push (_childWidget);
 
-											removeItemsConfirmation
-												A localizable string, that will be displayed as the message in a confirmation dialog when the user chooses to remove multiple items from the collection.
-
-												NOTES
-												- see the companion =removeItemConfirmation= localizable string
-												- see the related =removeItemConfirmationTitle= and =removeItemsConfirmationTitle= localizable strings
-									*/
-								),
-							title:
-								_this.localize (
-									_itemWidgetsToRemoveLength == 1 ? 'removeItemConfirmationTitle' : 'removeItemsConfirmationTitle',
-									{
-										0:_itemWidgetsToRemoveLength,
-										itemsToRemove:_itemWidgetsToRemove
-									}
-									/*?
-										Localizable Strings
-											removeItemConfirmationTitle
-												A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove a single item from the collection.
-
-												NOTES
-												- see the companion =removeItemsConfirmationTitle= localizable string
-												- see the related =removeItemConfirmation= and =removeItemsConfirmation= localizable strings
-
-											removeItemsConfirmationTitle
-												A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove multiple items from the collection.
-
-												NOTES
-												- see the companion =removeItemConfirmationTitle= localizable string
-												- see the related =removeItemConfirmation= and =removeItemsConfirmation= localizable strings
-									*/
-								),
-							yesHandler:_remove
-						});
-					} else {
-						// silent removal that wasn't directly initiated by the user
-						_remove ();
+					// In the event that we're adding this child via adoption, the items property won't have
+					// an entry for the properties of the item widget, so add it in explicitly
+					if (m._items.length < m._itemWidgets.length) {
+						(m._items = (!m._items.length ? [] : m._items)).push(_childWidget.get('properties'));
+						m._fireItemsChangedEvent ();
 					}
 				}
+
+				return _childWidget;
 			};
 
-		/*** Public Instance Methods ***/
+
+			_classPrototype.isCollectionItem = function (_childWidget) {
+				var
+					m = this
+				;
+				// test to make sure the widget being added is actually a collection item widget
+				return (m._itemWidgetClass && _childWidget.Class.moduleName == m._itemWidgetClass.moduleName);
+				/*?
+					Instance Methods
+						isCollectionItem
+							This is a hook method, overrideable by subclasses, which checks to see if the widget being added through widget adoption is a collection item
+
+							SYNTAX
+							.....................................................................................
+							bool = myInstance.isCollectionItem (itemWidget);
+							.....................................................................................
+				*/
+			};
+
 			_classPrototype.addItemWidget = function (_widgetName,_widgetProperties) {
 				var
-					_this = this,
-					_itemWidget = _this.addChild (
+					m = this,
+					_itemWidget = m.addChild (
 						_widgetName,
-						_this._itemWidgetClass,
-						Uize.copyInto (_widgetProperties,_this.getItemWidgetProperties ())
+						m._itemWidgetClass,
+						Uize.copyInto (_widgetProperties,m.getItemWidgetProperties ())
 					)
 				;
 
-				_this.wireItemWidget (_itemWidget);
-				_this._itemWidgets.push (_itemWidget);
-				_this.isWired && _itemWidget.insertOrWireUi ();
+				m.isWired && _itemWidget.insertOrWireUi ();
 				return _itemWidget;
 				/*?
 					Instance Methods
@@ -419,19 +399,19 @@ Uize.module ({
 			};
 
 			_classPrototype.wireItemWidget = function (_itemWidget) {
-				var _this = this;
+				var m = this;
 
 				_itemWidget.wire ({
 					'Changed.selected':
 						function (_event) {
 							if (_event.newValue) {
-								_this._selectionMode == 'single' &&
-									_this.selectAll (_false,_this._lastSelectedItemWidget = _itemWidget)
+								m._selectionMode == 'single' &&
+									m.selectAll (_false,m._lastSelectedItemWidget = _itemWidget)
 									/* NOTE:
 										If this becomes selected (programmatically) and the selection mode is single, we need to deselect everything else to keep things correct.
 									*/
 								;
-								_this.fire ({name:'Item Selected',itemWidget:_itemWidget});
+								m.fire ({name:'Item Selected',itemWidget:_itemWidget});
 								/*?
 									Instance Events
 										Item Selected
@@ -439,30 +419,30 @@ Uize.module ({
 
 											When this event is fired, the event object will contain an =itemWidget= property whose value will be a reference to the item widget for the item that has become selected.
 								*/
-							} else if (_itemWidget == _this._lastSelectedItemWidget)
-								_this._lastSelectedItemWidget = _null
+							} else if (_itemWidget == m._lastSelectedItemWidget)
+								m._lastSelectedItemWidget = _null
 							;
-							_this._updateTotalSelected ();
+							m._updateTotalSelected ();
 						},
 					'Click Selected':
 						function (_event) {
 							var
 								_domEvent = _event.domEvent,
 								_shiftKey = _domEvent && _domEvent.shiftKey,
-								_ctrlKey = (!_shiftKey && _event.forceToggle) || (_domEvent && _domEvent.ctrlKey),
+								_ctrlKey = (!_shiftKey && _event.forceToggle) || (_domEvent && (_domEvent.ctrlKey || _domEvent.metaKey)),
 								_selectWithModifier = _ctrlKey || _shiftKey
 							;
 							_selectWithModifier && Uize.Node.Event.abort (_domEvent); // prevent browser spawning new window
 							if (
-								(_this._selectionMode == 'single' && !(_ctrlKey && _itemWidget.get ('selected'))) ||
+								(m._selectionMode == 'single' && !(_ctrlKey && _itemWidget.get ('selected'))) ||
 								!_selectWithModifier
 							) {
 								_itemWidget.set ({selected:_true});
-								_this.selectAll (_false,_this._lastSelectedItemWidget = _itemWidget); // unselect all others
+								m.selectAll (_false,m._lastSelectedItemWidget = _itemWidget); // unselect all others
 							} else {
 								_shiftKey
-									? _this.selectRange (_this._lastSelectedItemWidget,_itemWidget)
-									: (_this._lastSelectedItemWidget = _itemWidget).toggle ('selected')
+									? m.selectRange (m._lastSelectedItemWidget,_itemWidget)
+									: (m._lastSelectedItemWidget = _itemWidget).toggle ('selected')
 								;
 							}
 						},
@@ -470,18 +450,18 @@ Uize.module ({
 						function () {
 							var
 								_index,
-								_itemWidgets = _this._itemWidgets
+								_itemWidgets = m._itemWidgets
 							;
 							for (var widgetNo = -1; ++widgetNo < _itemWidgets.length;)
 								if (_itemWidgets[widgetNo] == _itemWidget) _index = widgetNo;
-							_this._items [_index] = Uize.clone (_itemWidget.get ('properties'));
-							_this._fireItemsChangedEvent ()
+							m._items [_index] = Uize.clone (_itemWidget.get ('properties'));
+							m._fireItemsChangedEvent ();
 						},
 					Remove:
 						function (_event) {
-							_this._removeWithConfirm (
-								_itemWidget.get ('selected') && _this._itemRemoveActsOnSelection
-									? _this._getSelected ()
+							m._removeWithConfirm (
+								_itemWidget.get ('selected') && m._itemRemoveActsOnSelection
+									? m._getSelected ()
 									: [_itemWidget],
 								_event.byUser
 							);
@@ -537,7 +517,7 @@ Uize.module ({
 
 			_classPrototype.getItemWidgetProperties = function () {
 				/* NOTE: can be overrided by subclasses in order to stitch in additional item widget properties */
-				return this._itemWidgetProperties
+				return this._itemWidgetProperties;
 				/*?
 					Instance Methods
 						getItemWidgetProperties
@@ -556,12 +536,12 @@ Uize.module ({
 			};
 
 			_classPrototype.makeItemWidgetName = function (_item) {
-				var _this = this;
+				var m = this;
 				return (
-					(_item && _this._itemPropertyForItemWidgetName && _item [_this._itemPropertyForItemWidgetName]) ||
+					(_item && m._itemPropertyForItemWidgetName && _item [m._itemPropertyForItemWidgetName]) ||
 					(
-						_this._itemWidgetNamePrefix +
-						(_this._itemWidgets.length ? ++_this._itemWidgetNameUniquifier : _this._itemWidgetNameUniquifier = 0)
+						m._itemWidgetNamePrefix +
+						(m._itemWidgets.length ? ++m._itemWidgetNameUniquifier : m._itemWidgetNameUniquifier = 0)
 					)
 				);
 				/*?
@@ -755,16 +735,14 @@ Uize.module ({
 				*/
 			};
 
-			_classPrototype.updateUi = function () {
-				this._updateUiTotalItems ()
-			};
+			_classPrototype.updateUi = function () { this._updateUiTotalItems () };
 
 			_classPrototype.remove = function (_itemWidgetsToRemove,_byUser) {
-				var _this = this;
+				var m = this;
 				function _callFinishRemove (_itemWidgetsToRemove,_byUser) {
-					_this.finishRemove (_itemWidgetsToRemove,_byUser);
+					m.finishRemove (_itemWidgetsToRemove,_byUser);
 				}
-				_this.fire ({
+				m.fire ({
 					name:'Remove',
 					itemWidgets:_itemWidgetsToRemove,
 					byUser:_byUser,
@@ -826,30 +804,96 @@ Uize.module ({
 				*/
 			};
 
+			_classPrototype.removeWithConfirm = _classPrototype._removeWithConfirm = function (_itemWidgetsToRemove,_byUser) {
+				var
+					m = this,
+					_itemWidgetsToRemoveLength = _itemWidgetsToRemove.length
+				;
+				if (_itemWidgetsToRemoveLength) {
+					var _remove = function() {m.remove (_itemWidgetsToRemove,_byUser)};
+					if (_byUser) {
+						m.confirm ({
+							message:
+								m.localize (
+									_itemWidgetsToRemoveLength == 1 ? 'removeItemConfirmation' : 'removeItemsConfirmation',
+									{
+										0:_itemWidgetsToRemoveLength,
+										itemsToRemove:_itemWidgetsToRemove
+									}
+									/*?
+										Localizable Strings
+											removeItemConfirmation
+												A localizable string, that will be displayed as the message in a confirmation dialog when the user chooses to remove a single item from the collection.
+
+												NOTES
+												- see the companion =removeItemsConfirmation= localizable string
+												- see the related =removeItemConfirmationTitle= and =removeItemsConfirmationTitle= localizable strings
+
+											removeItemsConfirmation
+												A localizable string, that will be displayed as the message in a confirmation dialog when the user chooses to remove multiple items from the collection.
+
+												NOTES
+												- see the companion =removeItemConfirmation= localizable string
+												- see the related =removeItemConfirmationTitle= and =removeItemsConfirmationTitle= localizable strings
+									*/
+								),
+							title:
+								m.localize (
+									_itemWidgetsToRemoveLength == 1 ? 'removeItemConfirmationTitle' : 'removeItemsConfirmationTitle',
+									{
+										0:_itemWidgetsToRemoveLength,
+										itemsToRemove:_itemWidgetsToRemove
+									}
+									/*?
+										Localizable Strings
+											removeItemConfirmationTitle
+												A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove a single item from the collection.
+
+												NOTES
+												- see the companion =removeItemsConfirmationTitle= localizable string
+												- see the related =removeItemConfirmation= and =removeItemsConfirmation= localizable strings
+
+											removeItemsConfirmationTitle
+												A localizable string, that will be displayed as the title of a confirmation dialog when the user chooses to remove multiple items from the collection.
+
+												NOTES
+												- see the companion =removeItemConfirmationTitle= localizable string
+												- see the related =removeItemConfirmation= and =removeItemsConfirmation= localizable strings
+									*/
+								),
+							yesHandler:_remove
+						});
+					} else {
+						// silent removal that wasn't directly initiated by the user
+						_remove ();
+					}
+				}
+			};
+
 			_classPrototype.finishRemove = function (_itemWidgetsToRemove,_byUser) {
 				var
-					_this = this,
-					_items = _this.get ('items'),
-					_itemWidgets = _this.itemWidgets,
+					m = this,
+					_items = m.get ('items'),
+					_itemWidgets = m.itemWidgets,
 					_itemWidgetsLength = _itemWidgets.length,
 					_itemWidgetsRemoved = _itemWidgetsToRemove,
 					_itemWidgetsRemovedLength = _itemWidgetsToRemove.length
 				;
 				if (_itemWidgetsRemovedLength == _itemWidgetsLength) {
-					_this._removeAllItemsUiAndWidget ();
+					m._removeAllItemsUiAndWidget ();
 					_items.length = 0;
 				} else {
 					/*** find the items(s) in the array and remove ***/
 						_itemWidgetsRemoved = [];
 						_itemWidgetsRemovedLength = 0;
 						var _itemToMakeActive = _null;
-						_this.forAll (
+						m.forAll (
 							function (_itemWidget,_itemWidgetNo) {
 								if (Uize.isIn (_itemWidgetsToRemove,_itemWidget)) {
 									_itemToMakeActive = _null;
 									_itemWidgetsRemoved.push (_itemWidget);
 									_itemWidgetsRemovedLength++;
-									_this._removeItemUiAndWidget (_itemWidget,_itemWidgetNo);
+									m._removeItemUiAndWidget (_itemWidget,_itemWidgetNo);
 								} else {
 									if (!_itemToMakeActive && !_itemWidget.get ('locked'))
 										_itemToMakeActive = _itemWidget
@@ -864,7 +908,7 @@ Uize.module ({
 						_items.length = _itemWidgets.length = _itemWidgetsLength - _itemWidgetsRemovedLength;
 				}
 				if (_itemWidgetsRemovedLength) {
-					_this.fire ({
+					m.fire ({
 						name:'Items Removed',
 						byUser:_byUser,
 						totalBeforeRemove:_itemWidgetsLength,
@@ -872,7 +916,7 @@ Uize.module ({
 						totalRemoved:_itemWidgetsRemovedLength,
 						percentRemoved:_itemWidgetsRemovedLength / _itemWidgetsLength * 100
 					});
-					_this._fireItemsChangedEvent ();
+					m._fireItemsChangedEvent ();
 				}
 				/*?
 					Instance Methods
@@ -925,7 +969,7 @@ Uize.module ({
 							myInstance.selectAll (selectedBOOL,toExcludeItemWidgetOBJ);
 							...........................................................
 
-							When the optional =toExcludeItemWidgetOBJ= parameter is specified, then an object reference can be specified for a collection item widget whose selected state should not be modified by calling the =selectAll= method. This allows you to select all but or deselect all but a specific item in the collection.
+							When the optional =toExcludeItemWidgetOBJ= parameter is specified, then an object reference can be specified for a collection item widget whose selected state should not be modified by calling the =selectAll= method. This allows us to select all but or deselect all but a specific item in the collection.
 
 							NOTES
 							- see the related =selectNone= and =selectRange= instance methods
@@ -934,10 +978,10 @@ Uize.module ({
 			};
 
 			_classPrototype.selectRange = function (_itemWidgetA,_itemWidgetB) {
-				var _this = this;
-				if (_itemWidgetA && _itemWidgetB && (_this._selectionMode == 'multi' || _itemWidgetA == _itemWidgetB)) {
+				var m = this;
+				if (_itemWidgetA && _itemWidgetB && (m._selectionMode == 'multi' || _itemWidgetA == _itemWidgetB)) {
 					var _selecting = _false;
-					_this._forAll (
+					m._forAll (
 						function (_itemWidget) {
 							var _itemOnRangeBoundary = _itemWidget == _itemWidgetA || _itemWidget == _itemWidgetB;
 							if (_itemOnRangeBoundary) _selecting = !_selecting;
@@ -966,7 +1010,7 @@ Uize.module ({
 			};
 
 			_classPrototype.selectNone = function () {
-				this.selectAll (_false)
+				this.selectAll (_false);
 				/*?
 					Instance Methods
 						selectNone
@@ -1055,18 +1099,18 @@ Uize.module ({
 					name:'items',
 					value:[],
 					onChange:function () {
-						var _this = this;
+						var m = this;
 
 						/** first remove the old items UI **/
-							_this._removeAllItemsUiAndWidget();
+							m._removeAllItemsUiAndWidget();
 
 						/*** create item widgets ***/
 							Uize.forEach (
-								_this._items,
-								function (_item) {_this.addItemWidget (_this.makeItemWidgetName (_item),{properties:_item})}
+								m._items,
+								function (_item) {m.addItemWidget (m.makeItemWidgetName (_item),{properties:_item})}
 							);
 
-						_this._fireItemsChangedEvent ();
+						m._fireItemsChangedEvent ();
 					}
 					/*?
 						State Properties
@@ -1203,7 +1247,7 @@ Uize.module ({
 				},
 				_totalItems:{
 					name:'totalItems',
-					onChange:function () {this._updateUiTotalItems ()}
+					onChange:_classPrototype._updateUiTotalItems
 					/*?
 						State Properties
 							totalItems
