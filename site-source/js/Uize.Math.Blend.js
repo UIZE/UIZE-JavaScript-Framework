@@ -431,27 +431,29 @@ Uize.module ({
 										Given the above blend amount of =.5=, the statement would produce the result ={red:215,green:132,blue:130}=, whereas the same blend with a simple quantization of =1= would produce the result ={red:217,green:132,blue:128}=.
 
 									Compound Quantization Value With Omissions
-										When specifying a compound =quantization= value, it is possible to omit quantization for certain components of the structure value, and the quantization for such components will be defaulted to =0=.
+										When specifying a compound =quantization= value, it is possible to omit quantization for certain components of the structured value, and the quantization for such components will be defaulted to =0=.
 
 										EXAMPLE
-										...................................................
-										var colorFade = Uize.Fade ({
-											startValue:{
-												color:{red:255,green:128,blue:0}, // orange
-												opacity:0
+										..................................................................
+										var blendedColorAndOpacity = Uize.Math.Blend.blend (
+											{
+												color:{red:255,green:128,blue:0},  // orange
+												opacity:0                          // completely transparent
 											},
-											endValue:{
+											{
 												color:{red:179,green:136,blue:255}, // violet
-												opacity:1
+												opacity:1                           // completely opaque
 											},
-											quantization:{color:1},
-											duration:2000
-										});
-										...................................................
+											.5,
+											{color:1}
+										);
+										..................................................................
 
-										In the above example, a fade instance is created for fading a color between orange and violet and an opacity value between =0= to =1=, over a duration of =2000= milliseconds (two seconds). A compound =quantization= value is specified. By specifying the value =1= for =color=, and not an entire subtree object with quantization values for =red=, =green=, and =blue=, the quantization of =1= applies to all three color channels. And by omitting a quantization value for =opacity=, the quantization for this component of the interpolated compound value defaults to =0= (ie. no quantization / floating point precision).
+										In the above example, a blend of two structured values containing color and opacity information is being performed. Specifically, we are creating a halfway blend between fully transparent orange and fully opaque violet. This will produce the result ={color:{red:217,green:132,blue:128},opacity:.5}=
 
-										So, you see, a compound =quantization= value may have "terminations" and "omissions", both of which lead to defaulting behaviors. Omissions are essentially terminations with defaulting to =0=. So, in effect, omitting a subtree is equivalent to "terminating" the subtree by specifying the simple value =0=.
+										We are specifying a compound =quantization= value in this example. By specifying the value =1= for =color=, and not an entire subtree object with quantization values for =red=, =green=, and =blue=, the quantization of =1= applies to all three color channels. And by omitting a quantization value for =opacity=, the quantization for this component of the interpolated compound value defaults to =0= (ie. no quantization / floating point precision).
+
+										So, a compound =quantization= value may have "terminations" and "omissions", both of which lead to defaulting behaviors. Omissions are essentially terminations with defaulting to =0=. So, in effect, omitting a subtree is equivalent to "terminating" the subtree by specifying the simple value =0=.
 
 									Compound Quantization Value With Defaulting At Nodes
 										When specifying a compound value for =quantization=, it is possible to "terminate" the tree structure at any node of the tree by specifying a number in place of a subtree object/array.
