@@ -134,7 +134,8 @@ Uize.require (
 				++_testNo < _testNamesLength;
 			)
 				(_testName = _testNames [_testNo]) != 'Performance' && // ignore the Uize.Test.Performance namespace module
-				_testName.lastIndexOf ('library') != _testName.length - 7 && // ignore .library modules
+				!/\.library$/.test (_testName) && // ignore .library modules
+				!/^TestData\.?/.test (_testName) && // ignore TestData namespace and sub-modules
 					_testNamesExcludingLibraries.push (_testName)
 			;
 			_testNames = _testNamesExcludingLibraries;
