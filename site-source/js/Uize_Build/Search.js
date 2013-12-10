@@ -43,12 +43,32 @@ Uize.module ({
 				return [_lineNo,_linesUpToChar [_lineNo].length - 1];
 			}
 
+			function _resolveMatcher (_matcher) {
+				if (Uize.isArray (_matcher)) {
+					var
+						_subMatchers = Uize.map (_matcher,_resolveMatcher),
+						_subMatchersLength = _subMatchers.length
+					;
+					return function (_value) {
+						for (var _subMatcherNo = -1; ++_subMatcherNo < _subMatchersLength;) {
+							if (!_subMatchers [_subMatcherNo] (_value))
+								return false
+							;
+						}
+						return true;
+					}
+				} else {
+					return Uize.resolveMatcher (_matcher);
+				}
+			}
+
 		return Uize.package ({
 			perform:function (_params) {
 				var
 					_preset = _params.preset,
 					_searchParams = ((_params.moduleConfigs || {}) ['Uize.Build.Search']).presets [_preset],
 					_matcher = _searchParams.matcher,
+					_pathMatcher = _searchParams.pathMatcher,
 					_contextLines = Uize.toNumber (_params.contextLines,5),
 					_outputChunks = [],
 					_currentFolderPath,
@@ -58,12 +78,13 @@ Uize.module ({
 					_matcher.source,
 					'g' + (_matcher.ignoreCase ? 'i' : '') + (_matcher.multiline ? 'm' : '')
 				);
+				_pathMatcher = _resolveMatcher (_pathMatcher);
 				Uize.Build.Util.buildFiles ({
 					targetFolderPathCreator:function (_folderPath) {
 						return _currentFolderPath = _folderPath;
 					},
 					targetFilenameCreator:function (_sourceFileName) {
-						return /\.js$/.test (_sourceFileName) ? _sourceFileName : null;
+						return _pathMatcher (_currentFolderPath + '/' + _sourceFileName) ? _sourceFileName : null;
 					},
 					fileBuilder:function (_sourceFileName,_sourceFileText) {
 						_matcher.lastIndex = 0;
@@ -85,7 +106,6 @@ Uize.module ({
 							;
 							_outputChunks.push (
 								_currentFolderPath + '/' + _sourceFileName + '\n' +
-
 								Uize.Str.Lines.indent (
 									'TOTAL MATCHES: ' + _matches.length + '\n' +
 									'\n' +
