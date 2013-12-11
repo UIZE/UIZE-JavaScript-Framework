@@ -57,7 +57,7 @@ Uize.module ({
 				;
 				var _hash = {};
 				function _processTreeNode (_treeNode,_path) {
-					if (Uize.isObject (_treeNode)) {
+					if (Uize.isPlainObject (_treeNode)) {
 						if (_inclueNonLeafNodes && _path.length)
 							_hash [_pathToKey (_path)] = _treeNode
 						;
