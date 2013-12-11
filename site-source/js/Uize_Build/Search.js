@@ -34,13 +34,21 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		var
+			_repeat = Uize.Str.Repeat.repeat
+		;
+
 		/*** Utility Functions ***/
 			function _getLineAndChar (_text,_charPos) {
 				var
 					_linesUpToChar = Uize.Str.Lines.split (_text.slice (0,_charPos + 1)),
-					_lineNo = _linesUpToChar.length - 1
+					_line = _linesUpToChar.length - 1,
+					_char = _linesUpToChar [_line].length - 1
 				;
-				return [_lineNo,_linesUpToChar [_lineNo].length - 1];
+				if (_char < 0)
+					_char = _linesUpToChar [--_line].length - 1
+				;
+				return [_line,_char];
 			}
 
 			function _resolveMatcher (_matcher) {
@@ -119,8 +127,8 @@ Uize.module ({
 												_matchEndLine = _endLineAndChar [0],
 												_startLine = Math.max (_matchStartLine - _contextLines,0),
 												_endLine = Math.min (_matchEndLine + _contextLines,_sourceFileLines.length - 1),
-												_matchStartChar = _startLineAndChar [1],
-												_matchEndChar = _endLineAndChar [1]
+												_matchStartChar = Math.max (_startLineAndChar [1],0),
+												_matchEndChar = Math.max (_endLineAndChar [1],0)
 											;
 											for (var _lineNo = _startLine - 1; ++_lineNo < _endLine + 1;) {
 												if (!_sourceFileLinesDeTabbed [_lineNo]) {
@@ -137,32 +145,39 @@ Uize.module ({
 													)
 												),
 												_maxShownLineLength = Uize.max (Uize.map (_lines,'value.length')),
+												_endLineDisplayLength = (_endLine + '').length,
 												_separator =
-													Uize.Str.Repeat.repeat ('-',_matchStartChar) +
-													Uize.Str.Repeat.repeat ('#',_matchEndChar - _matchStartChar + 1) +
-													Uize.Str.Repeat.repeat ('-',_maxShownLineLength - (_matchStartChar + _matchEndChar - _matchStartChar + 1))
+													_repeat (' ',_endLineDisplayLength + 2) + '+' +
+													_repeat ('-',_matchStartChar) +
+													_repeat ('#',_matchEndChar - _matchStartChar + 1) +
+													_repeat ('-',_maxShownLineLength - (_matchStartChar + _matchEndChar - _matchStartChar + 1)) +
+													'\n'
 											;
 											return (
 												'LINE ' + _matchStartLine + ' (CHAR ' + _startLineAndChar [1] + ') -> LINE ' + _matchEndLine + ' (CHAR ' + _endLineAndChar [1] + ')\n' +
 												'\n' +
-												'  ' + _separator + '\n' +
+												_separator +
 												Uize.map (
 													_lines,
 													function (_line,_lineNo) {
+														var _displayLineNo = _lineNo + _startLine + '';
 														return (
+															_repeat (' ',_endLineDisplayLength - _displayLineNo.length) +
+															_displayLineNo + ' ' +
 															(
 																Uize.inRange (
 																	_lineNo,
 																	_matchStartLine - _startLine,
 																	_matchEndLine - _startLine
 																)
-																	? '>|'
-																	: ' |'
-															) + _line
+																	? '>'
+																	: ' '
+															) + '|' +
+															_line
 														); 
 													}
 												).join ('\n') + '\n' +
-												'  ' + _separator + '\n'
+												_separator
 											);
 										}
 									).join ('\n'),
