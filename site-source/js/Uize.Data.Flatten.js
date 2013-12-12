@@ -70,6 +70,35 @@ Uize.module ({
 				}
 				_processTreeNode (_tree,[]);
 				return _hash;
+				/*?
+					Static Methods
+						Uize.Data.Flatten.flatten
+
+							DIFFERENT USAGES
+
+							`Flatten a Source Object, Using the Default Path-to-key Transformer`
+							.....................................................
+							flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ);
+							.....................................................
+
+							`Flatten a Source Object, Specifying a Path Delimiter String`
+							......................................................................
+							flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ,pathDelimiterSTR);
+							......................................................................
+
+							`Flatten a Source Object, Specifying a Path-to-key Transformer Function`
+							..............................................................................
+							flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ,pathToKeyTransformerFUNC);
+							..............................................................................
+
+							`Flatten a Source Object, Including Non-leaf Nodes in the Flattened Object`
+							................................................................
+							flattenedOBJ = Uize.Data.Flatten.flatten (
+								sourceOBJ,pathToKeyTransformerANYTYPE,includeNonLeafNodesBOOL
+							);
+							................................................................
+
+				*/
 			},
 
 			unflatten:function (_hash,_keyToPath) {
