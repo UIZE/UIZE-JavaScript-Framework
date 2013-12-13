@@ -56,11 +56,11 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Private Instance Properties ***/
 							(
-								_this._shieldFade = _this.shieldFade = Uize.Fade ({
+								m._shieldFade = m.shieldFade = Uize.Fade ({
 									curve:Uize.Fade.celeration (0,1),
 									duration:750
 								})
@@ -73,14 +73,14 @@ Uize.module ({
 								*/
 							).wire (
 								'Changed.value',
-								function (_event) {_this.set ({_currentShieldOpacity:_event.newValue})}
+								function (_event) {m.set ({_currentShieldOpacity:_event.newValue})}
 							);
-							_this.wire ({
+							m.wire ({
 								'Drag Start':
 									function () {
-										if (!_this._draggedSinceShown) {
-											_this._draggedSinceShown = _true;
-											_this.fire ('First Drag Since Shown');
+										if (!m._draggedSinceShown) {
+											m._draggedSinceShown = _true;
+											m.fire ('First Drag Since Shown');
 											/*?
 												Instance Events
 													First Drag Since Shown
@@ -90,18 +90,18 @@ Uize.module ({
 														- compare to the =Drag Start= instance event
 														- see the related =Drag Done= instance event
 											*/
-											_this._hideShieldOnDrag && _this.set ({_shieldShown:_false});
+											m._hideShieldOnDrag && m.set ({_shieldShown:_false});
 										}
 									},
 								'Drag Done':
 									function () {
-										var _mooringNode = _Uize_Node.getById (_this._mooringNode);
+										var _mooringNode = _Uize_Node.getById (m._mooringNode);
 										if (_mooringNode) {
 											var
 												_mooringCoords = _Uize_Node.getCoords (_mooringNode),
-												_rootNode = _this.getNode ()
+												_rootNode = m.getNode ()
 											;
-											_this.set ({
+											m.set ({
 												offsetX:
 													parseInt (_Uize_Node.getStyle (_rootNode,'left')) - _mooringCoords.left,
 												offsetY:
@@ -112,23 +112,23 @@ Uize.module ({
 							});
 					},
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** create the drag widget for the drag-to-move behavior ***/
 							var
 								_rootNode,
 								_dragStartRootNodePos = [0,0]
 							;
-							(_this._drag = _this.addChild ('drag',_Uize_Widget_Drag,{cursor:'move'}))
+							(m._drag = m.addChild ('drag',_Uize_Widget_Drag,{cursor:'move'}))
 								.wire ({
 									'Before Drag Start':
 										function () {
-											_rootNode = _this.getNode ();
+											_rootNode = m.getNode ();
 											_dragStartRootNodePos [0] = parseInt (_Uize_Node.getStyle (_rootNode,'left'));
 											_dragStartRootNodePos [1] = parseInt (_Uize_Node.getStyle (_rootNode,'top'));
 										},
-									'Changed.inDrag':function (_event) {_this.set ({_inDrag:_event.newValue})},
-									'Drag Start':_this,
+									'Changed.inDrag':function (_event) {m.set ({_inDrag:_event.newValue})},
+									'Drag Start':m,
 										/*?
 											Instance Events
 												Drag Start
@@ -140,7 +140,7 @@ Uize.module ({
 										*/
 									'Drag Update':
 										function () {
-											var _eventDeltaPos = _this._drag.eventDeltaPos;
+											var _eventDeltaPos = m._drag.eventDeltaPos;
 											_Uize_Node.setStyle (
 												_rootNode,
 												{
@@ -149,7 +149,7 @@ Uize.module ({
 												}
 											);
 										},
-									'Drag Done':_this
+									'Drag Done':m
 										/*?
 											Instance Events
 												Drag Done
@@ -169,8 +169,8 @@ Uize.module ({
 							;
 
 						/*** create buttons ***/
-							function _dismiss (_dismissalEvent) { _this._dismiss(_dismissalEvent) }
-							_this._addChildButton ('close',function () {_dismiss ('Close')});
+							function _dismiss (_dismissalEvent) { m._dismiss(_dismissalEvent) }
+							m._addChildButton ('close',function () {_dismiss ('Close')});
 								/*?
 									Child Widgets
 										close
@@ -185,7 +185,7 @@ Uize.module ({
 											NOTES
 											- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
 								*/
-							_this._addChildButton ('qualifiedOk',function () {_dismiss ('Qualified Ok')});
+							m._addChildButton ('qualifiedOk',function () {_dismiss ('Qualified Ok')});
 								/*?
 									Child Widgets
 										qualifiedOk
@@ -200,7 +200,7 @@ Uize.module ({
 											NOTES
 											- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
 								*/
-							_this._addChildButton ('ok',function () {_dismiss ('Ok')});
+							m._addChildButton ('ok',function () {_dismiss ('Ok')});
 								/*?
 									Child Widgets
 										ok
@@ -215,7 +215,7 @@ Uize.module ({
 											NOTES
 											- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
 								*/
-							_this._addChildButton ('cancel',function () {_dismiss ('Cancel')});
+							m._addChildButton ('cancel',function () {_dismiss ('Cancel')});
 								/*?
 									Child Widgets
 										cancel
@@ -232,8 +232,8 @@ Uize.module ({
 								*/
 
 						/*** initialization ***/
-							_this._syncOkAndCancelText ();
-							_this.atEndOfOmegaStructor ();
+							m._syncOkAndCancelText ();
+							m.atEndOfOmegaStructor ();
 					}
 				),
 				_classPrototype = _class.prototype
@@ -251,15 +251,15 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiShieldOpacity = function () {
-				var _this = this;
-				_this.isWired && _this._shown && _this.setNodeOpacity ('shield',_this._currentShieldOpacity);
+				var m = this;
+				m.isWired && m._shown && m.setNodeOpacity ('shield',m._currentShieldOpacity);
 			};
 
 			_classPrototype._updateUiTitle = function () {
-				var _this = this;
-				if (_this.isWired) {
-					var _defaultedTitle = _this._title || _this._defaultTitle;
-					_defaultedTitle != _undefined && _this.setNodeInnerHtml ('title',_defaultedTitle || '&nbsp;');
+				var m = this;
+				if (m.isWired) {
+					var _defaultedTitle = m._title || m._defaultTitle;
+					_defaultedTitle != _undefined && m.setNodeInnerHtml ('title',_defaultedTitle || '&nbsp;');
 						/*?
 							Implied Nodes
 								title Implied Node
@@ -276,14 +276,14 @@ Uize.module ({
 
 			var _syncOkAndCancelText = _classPrototype._syncOkAndCancelText = function () {
 				var
-					_this = this,
-					_children = _this.children
+					m = this,
+					_children = m.children
 				;
 				function _updateTextForButton (_widget,_defaultedText) {
 					_widget && _defaultedText != _undefined && _widget.set ({text:_defaultedText});
 				}
-				_updateTextForButton (_children.ok,_this._okText || _this._defaultOkText);
-				_updateTextForButton (_children.cancel,_this._cancelText || _this._defaultCancelText);
+				_updateTextForButton (_children.ok,m._okText || m._defaultOkText);
+				_updateTextForButton (_children.cancel,m._cancelText || m._defaultCancelText);
 			};
 
 		/*** Public Instance Methods ***/
@@ -292,13 +292,13 @@ Uize.module ({
 
 			_classPrototype.responsiveUpdateUiPositionAndDimensions = function () {
 				var
-					_this = this,
-					_rootNode = _this.getNode(),
-					_nodeToSetDimension = _this.getNode(_this._nodeToSetDimension)
+					m = this,
+					_rootNode = m.getNode(),
+					_nodeToSetDimension = m.getNode(m._nodeToSetDimension)
 				;
 				
 				// first clean out any max width/height from previous update
-				_this.setNodeStyle(
+				m.setNodeStyle(
 					_nodeToSetDimension,
 					{
 						maxWidth:'',
@@ -315,7 +315,7 @@ Uize.module ({
 				;
 
 				// set max width/height such that the root node will be 100% in either dimension
-				_this.setNodeStyle(
+				m.setNodeStyle(
 					_nodeToSetDimension,
 					{
 						maxWidth:_rootNodeDims.width > _windowCoords.width ? _windowCoords.width - (_rootNodeDims.width - _nodeToSetDims.width) : '',
@@ -333,7 +333,7 @@ Uize.module ({
 					_topCentered = _windowCoords.y + ((_windowCoords.height - _rootNodeDims.height) >> 1)
 				;
 				
-				_this.setNodeStyle(
+				m.setNodeStyle(
 					_rootNode,
 					{
 						left: _leftCentered > 0 ? _leftCentered : 0,
@@ -343,9 +343,9 @@ Uize.module ({
 			};
 
 			_classPrototype.updateUiPositionIfShown = function () {
-				var _this = this;
-				if (_this.isWired && _this._shown && !_this._inDrag) {
-					_Uize_Widget_Drag.resizeShield (_this.getNode ('shield'));
+				var m = this;
+				if (m.isWired && m._shown && !m._inDrag) {
+					_Uize_Widget_Drag.resizeShield (m.getNode ('shield'));
 					/*?
 						Implied Nodes
 							Root Node
@@ -362,15 +362,15 @@ Uize.module ({
 								- see also the =currentShieldOpacity=, =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties
 								- see also the =shieldFade= instance property
 					*/
-					if (_this._autoPosition) {
+					if (m._autoPosition) {
 						var
-							_rootNode = _this.getNode (),
-							_mooringNode = _Uize_Node.getById (_this._mooringNode),
-							_offsetX = _this._offsetX,
-							_offsetY = _this._offsetY
+							_rootNode = m.getNode (),
+							_mooringNode = _Uize_Node.getById (m._mooringNode),
+							_offsetX = m._offsetX,
+							_offsetY = m._offsetY
 						;
 						if (!_mooringNode || _offsetX == _undefined || _offsetY == _undefined) {
-							_this.responsiveUpdateUiPositionAndDimensions();
+							m.responsiveUpdateUiPositionAndDimensions();
 							//_Uize_Node.centerInWindow(_rootNode);
 						}
 						if (_mooringNode) {
@@ -393,48 +393,48 @@ Uize.module ({
 			};
 
 			_classPrototype.updateUiDimsIfShown = function () {
-				var _this = this;
-				_this.isWired && _this._shown && !_this._inDrag &&
-					_this.setNodeStyle (_this.getNode(_this._nodeToSetDimension),{width:_this._width,height:_this._height})
+				var m = this;
+				m.isWired && m._shown && !m._inDrag &&
+					m.setNodeStyle (m.getNode(m._nodeToSetDimension),{width:m._width,height:m._height})
 				;
 			};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
-					_this._updateUiTitle ();
+				if (m.isWired) {
+					m._updateUiTitle ();
 
-					_superclass.doMy (_this,'updateUi');
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this.wireNode (window,'resize',function () {_this.updateUiPositionIfShown ()});
-					_this._drag.set ({node:_this.getNode ('title')});
+				var m = this;
+				if (!m.isWired) {
+					m.wireNode (window,'resize',function () {m.updateUiPositionIfShown ()});
+					m._drag.set ({node:m.getNode ('title')});
 
-					_this.wireNode(
+					m.wireNode(
 						'shield',
 						'click',
-						function () { _this._dismissOnShieldClick && _this._dismiss ('Close') }
+						function () { m._dismissOnShieldClick && m._dismiss ('Close') }
 					);
 
 					/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/
 						var _initializeDefaultProperty = function (_defaultPropertyName,_widget,_impliedNodeName) {
-							if (!_this.get (_defaultPropertyName)) {
+							if (!m.get (_defaultPropertyName)) {
 								var _innerHtml = (_widget.getNode (_impliedNodeName) || _sacredEmptyObject).innerHTML;
-								_innerHtml && _this.set (_defaultPropertyName,_innerHtml);
+								_innerHtml && m.set (_defaultPropertyName,_innerHtml);
 							}
 						};
-						_initializeDefaultProperty ('defaultTitle',_this,'title');
-						_initializeDefaultProperty ('defaultOkText',_this.children.ok,'text');
-						_initializeDefaultProperty ('defaultCancelText',_this.children.cancel,'text');
+						_initializeDefaultProperty ('defaultTitle',m,'title');
+						_initializeDefaultProperty ('defaultOkText',m.children.ok,'text');
+						_initializeDefaultProperty ('defaultCancelText',m.children.cancel,'text');
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 
-					_this.afterWireUi ();
+					m.afterWireUi ();
 				}
 			};
 
@@ -715,24 +715,24 @@ Uize.module ({
 				_shieldShown:{
 					name:'shieldShown',
 					onChange:function () {
-						var _this = this;
-						if (_this.isWired && _this._shown) {
-							if (_this._shieldShown) {
-								if (_browserHasSelectShowThroughIssue && _this.getNode ('shield')) {
-									if (!_this._dismissOnShieldClick && !_this.getNode ('ie6SelectHackShield')) {
-										_this.flushNodeCache ('ie6SelectHackShield');
-										_this.injectNodeHtml (
+						var m = this;
+						if (m.isWired && m._shown) {
+							if (m._shieldShown) {
+								if (_browserHasSelectShowThroughIssue && m.getNode ('shield')) {
+									if (!m._dismissOnShieldClick && !m.getNode ('ie6SelectHackShield')) {
+										m.flushNodeCache ('ie6SelectHackShield');
+										m.injectNodeHtml (
 											'shield',
-											'<iframe src="javascript:\'\'" id="' + _this._idPrefix + '-ie6SelectHackShield" style="position:absolute; left:0; top:0; width:100%; height:100%; filter:alpha(opacity=0);" frameborder="0" scrolling="no"></iframe>',
+											'<iframe src="javascript:\'\'" id="' + m._idPrefix + '-ie6SelectHackShield" style="position:absolute; left:0; top:0; width:100%; height:100%; filter:alpha(opacity=0);" frameborder="0" scrolling="no"></iframe>',
 											'inner bottom'
 										);
 									}
 								}
-								_this._currentShieldOpacity = _undefined;
-								_this.set ({_currentShieldOpacity:_this._shieldOpacity});
+								m._currentShieldOpacity = _undefined;
+								m.set ({_currentShieldOpacity:m._shieldOpacity});
 							} else {
-								_this._shieldFade.start ({
-									startValue:_this._shieldOpacity,
+								m._shieldFade.start ({
+									startValue:m._shieldOpacity,
 									endValue:.001
 								});
 							}
@@ -754,15 +754,15 @@ Uize.module ({
 				_shown:{
 					name:'shown',
 					onChange:function () {
-						var _this = this;
-						if (_this.isWired) {
-							if (_this._shown) {
+						var m = this;
+						if (m.isWired) {
+							if (m._shown) {
 								_totalShown++;
-								_this._draggedSinceShown = _false;
-								typeof _this._okEnabledOnShow == 'boolean' &&
-									_this.children.ok.set ({enabled:_this._okEnabledOnShow ? 'inherit' : _false})
+								m._draggedSinceShown = _false;
+								typeof m._okEnabledOnShow == 'boolean' &&
+									m.children.ok.set ({enabled:m._okEnabledOnShow ? 'inherit' : _false})
 								;
-								_this.fire ('Before Show');
+								m.fire ('Before Show');
 									/*?
 										Instance Events
 											Before Show
@@ -772,29 +772,29 @@ Uize.module ({
 												- when this event is fired, the value of the =shown= state property will be =true=
 												- see also the =Before Hide=, =After Show=, and =After Hide= instance events
 									*/
-								_this.setNodeStyle ('',{position:'absolute'});
+								m.setNodeStyle ('',{position:'absolute'});
 
 								/*** guarantee dialog is on top ***/
 									var _highestZIndexSlotNo = -1;
 									for (var _zIndexSlotNo in _zIndexSlots)
 										_highestZIndexSlotNo = Math.max (_highestZIndexSlotNo,_zIndexSlotNo)
 									;
-									_zIndexSlots [_this._zIndexSlotNo = ++_highestZIndexSlotNo] = 1;
-									_this.setNodeStyle (['','shield'],{zIndex:4000 + _highestZIndexSlotNo * 10});
+									_zIndexSlots [m._zIndexSlotNo = ++_highestZIndexSlotNo] = 1;
+									m.setNodeStyle (['','shield'],{zIndex:4000 + _highestZIndexSlotNo * 10});
 
 								/*** position and display ***/
 									var _hideWithVisibilityForDimensionGetting = function (_hideWithVisibility) {
-										_this.showNode ('',!_hideWithVisibility);
-										_this.displayNode ('',_hideWithVisibility);
+										m.showNode ('',!_hideWithVisibility);
+										m.displayNode ('',_hideWithVisibility);
 									};
 									_hideWithVisibilityForDimensionGetting (_true);
-									_this.updateUiDimsIfShown ();
-									_this.updateUiPositionIfShown ();
+									m.updateUiDimsIfShown ();
+									m.updateUiPositionIfShown ();
 									_hideWithVisibilityForDimensionGetting (_false);
 							} else {
 								_totalShown--;
-								delete _zIndexSlots [_this._zIndexSlotNo];
-								_this.fire ('Before Hide');
+								delete _zIndexSlots [m._zIndexSlotNo];
+								m.fire ('Before Hide');
 									/*?
 										Instance Events
 											Before Hide
@@ -805,9 +805,9 @@ Uize.module ({
 												- see also the =Before Show=, =After Show=, and =After Hide= instance events
 									*/
 							}
-							_this.set ({_shieldShown:_this._shown});
-							_this.displayNode (['','shield'],_this._shown);
-							_this.fire (_this._shown ? 'After Show' : 'After Hide');
+							m.set ({_shieldShown:m._shown});
+							m.displayNode (['','shield'],m._shown);
+							m.fire (m._shown ? 'After Show' : 'After Hide');
 								/*?
 									Instance Events
 										After Show

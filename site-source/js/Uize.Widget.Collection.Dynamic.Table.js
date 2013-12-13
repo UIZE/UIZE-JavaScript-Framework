@@ -38,12 +38,12 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.processItemTemplate = function (_templateNode) {
-				var _this = this;
+				var m = this;
 				return function (_input) {
 					var _dummyNode = document.createElement ('DIV');
 					_dummyNode.innerHTML =
 						'<table><tbody>' +
-						_superclass.doMy (_this,'processItemTemplate',[_templateNode]) (_input) +
+						_superclass.doMy (m,'processItemTemplate',[_templateNode]) (_input) +
 						'</tbody></table>'
 					;
 					return Uize.map (_dummyNode.firstChild.firstChild.childNodes,'value');

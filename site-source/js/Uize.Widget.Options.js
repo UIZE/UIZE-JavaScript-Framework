@@ -54,26 +54,26 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiOptionSelected = function () {
-				var _this = this;
-				if (_this.isWired && _this._valueNo != _this._lastValueNo) {
+				var m = this;
+				if (m.isWired && m._valueNo != m._lastValueNo) {
 					var _setOptionSelected = function (_optionNo, _selected) {
 						_optionNo >= 0 &&
-							Uize.callOn(_this.children['option' + _optionNo], 'set', [{ selected: _selected }])
+							Uize.callOn(m.children['option' + _optionNo], 'set', [{ selected: _selected }])
 						;
 					};
-					_setOptionSelected (_this._lastValueNo,_false);
-					_setOptionSelected (_this._lastValueNo = _this._valueNo,true);
+					_setOptionSelected (m._lastValueNo,_false);
+					_setOptionSelected (m._lastValueNo = m._valueNo,true);
 				}
 			};
 
 			_classPrototype._updateValueNo = function () {
 				var
-					_this = this,
-					_valueNo = _this.getValueNoFromValue (_this._value)
+					m = this,
+					_valueNo = m.getValueNoFromValue (m._value)
 				;
 
-				_this.set ({_valueNo:_valueNo, _tentativeValueNo:_valueNo});
-				_this._updateUiOptionSelected ();
+				m.set ({_valueNo:_valueNo, _tentativeValueNo:_valueNo});
+				m._updateUiOptionSelected ();
 			};
 
 		/*** Public Instance Methods ***/
@@ -136,10 +136,10 @@ Uize.module ({
 			
 			_classPrototype.getValueObject = function (_value) {
 				var
-					_this = this,
-					_valueNo = _this.getValueNoFromValue(_value === _undefined ? _this._value : _value)
+					m = this,
+					_valueNo = m.getValueNoFromValue(_value === _undefined ? m._value : _value)
 				;
-				return _valueNo > -1 ? _this._values[_valueNo] : _null;
+				return _valueNo > -1 ? m._values[_valueNo] : _null;
 				/*?
 					Instance Methods
 						getValueObject
@@ -189,28 +189,28 @@ Uize.module ({
 				*/
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_this._updateUiOptionSelected();
-					_superclass.doMy (_this,'updateUi');
+				var m = this;
+				if (m.isWired) {
+					m._updateUiOptionSelected();
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					_this._valueNo = -1;
+				var m = this;
+				if (!m.isWired) {
+					m._valueNo = -1;
 					var
-						_optionWidgetClass = _this._optionWidgetClass || Uize.Widget.Button,
-						_optionWidgetProperties = _this._optionWidgetProperties,
-						_values = _this._values,
-						_valuesLength = _this._totalOptionChildButtons = _values.length,
+						_optionWidgetClass = m._optionWidgetClass || Uize.Widget.Button,
+						_optionWidgetProperties = m._optionWidgetProperties,
+						_values = m._values,
+						_valuesLength = m._totalOptionChildButtons = _values.length,
 						_restoreValueTimeout, _tentativeValueTimeout,
 						_restoreValue = function() {
 							_restoreValueTimeout = _null;
-							_this.set ({
-								_tentativeValue:_this._value,
-								_tentativeValueNo:_this._valueNo
+							m.set ({
+								_tentativeValue:m._value,
+								_tentativeValueNo:m._valueNo
 							});
 						},
 						_clearTentativeValueTimeouts = function() {
@@ -225,24 +225,24 @@ Uize.module ({
 								_value =
 									((typeof _valueObject == 'object' && _valueObject) || (_valueObject = {name:_valueObject})).name,
 								_setValue = function() {
-									_this.set (
-										_this._setValueOnMouseover
+									m.set (
+										m._setValueOnMouseover
 											? {_value:_value}
 											: {_tentativeValue:_value,_tentativeValueNo:_valueNo}
 									);
 								}
 							;
-							_this.addChild (
+							m.addChild (
 								'option' + _valueNo,
 								_optionWidgetClass,
-								Uize.copy (_optionWidgetProperties,_this.getOptionProperties(_valueNo, _valueObject))
+								Uize.copy (_optionWidgetProperties,m.getOptionProperties(_valueNo, _valueObject))
 							)
 								.wire (
 									'*',
 									function (_event) {
 										if (_event.name == 'Click') {
-											_this.fire ({name:'Before Value Change',value:_value,valueNo:_valueNo}).cancel ||
-												_this.set ({_value:_value})
+											m.fire ({name:'Before Value Change',value:_value,valueNo:_valueNo}).cancel ||
+												m.set ({_value:_value})
 												/*?
 													Instance Events
 														Before Value Change
@@ -251,18 +251,18 @@ Uize.module ({
 															This event offers the handler the opportunity to cancel the value change. The event contains a "value" property (which is the new value that would be set) and a "valueNo" property (which is the index of the new value that would be set). To cancel the set action, the handler can set the event object's "cancel" property to =true=. The handler can inspect the "value" and "valueNo" properties of the event to determine if the value change should be permitted.
 												*/
 											;
-											_this.fire (_event);
+											m.fire (_event);
 										} else if (_event.name == 'Over') {
 											_clearTentativeValueTimeouts ();
-											_this._tentativeRestTime
-												? (_tentativeValueTimeout = setTimeout (_setValue,_this._tentativeRestTime))
+											m._tentativeRestTime
+												? (_tentativeValueTimeout = setTimeout (_setValue,m._tentativeRestTime))
 												: _setValue ()
 											;
 										} else if (_event.name == 'Out') {
 											_clearTentativeValueTimeouts ();
 											_restoreValueTimeout = setTimeout (_restoreValue,50);
 										}
-										_this.fire ({
+										m.fire ({
 											name:'Option Event',
 											value:_value,
 											childEvent:_event
@@ -285,7 +285,7 @@ Uize.module ({
 							This is a performance optimization that relies on the fact that in many typical cases, the HTML for the option buttons will be child nodes of the root node. In such cases, iterating through and seeding the root node references for all the option buttons is more efficient than leaving it up to the button widgets to get their root node by id - especially for large options sets.
 						*/
 						if (_valuesLength) {
-							var _optionsNode = _this.getNode ();
+							var _optionsNode = m.getNode ();
 							if (_optionsNode) {
 								for (
 									var
@@ -295,8 +295,8 @@ Uize.module ({
 										_child,
 										_childNodes = _optionsNode.childNodes || [],
 										_childNodesLength = _childNodes.length,
-										_children = _this.children,
-										_idPrefix = _this.get ('idPrefix'),
+										_children = m.children,
+										_idPrefix = m.get ('idPrefix'),
 										_idPrefixLength = _idPrefix.length
 									;
 									++_childNodeNo < _childNodesLength;
@@ -312,20 +312,20 @@ Uize.module ({
 							}
 						}
 
-					_superclass.doMy (_this,'wireUi');
-					_this._updateValueNo ();
+					_superclass.doMy (m,'wireUi');
+					m._updateValueNo ();
 				}
 			};
 
 		/*** State Properties ***/
 			function _getValidValue(_value) {
 				var
-					_this = this,
+					m = this,
 					_values = this._values
 				;
 
 				return (
-					!_this._ensureValueInValues || !_values || !_values.length || _this.getValueNoFromValue(_value) > -1
+					!m._ensureValueInValues || !_values || !_values.length || m.getValueNoFromValue(_value) > -1
 						? _value
 						: (typeof _values[0] == 'object' ? _values[0].name : _values[0])
 				);
@@ -334,8 +334,8 @@ Uize.module ({
 				_ensureValueInValues:{
 					name:'ensureValueInValues',
 					onChange:function () {
-						var _this = this;
-						_this.set({_value:_getValidValue.call(_this, _this._value)});
+						var m = this;
+						m.set({_value:_getValidValue.call(m, m._value)});
 					},
 					value:_false
 					/*?
@@ -432,9 +432,9 @@ Uize.module ({
 					name:'value',
 					conformer:_getValidValue,
 					onChange:function () {
-						var _this = this;
-						_this._updateValueNo ();
-						_this.set ({_tentativeValueNo:_this._valueNo,_tentativeValue:_this._value});
+						var m = this;
+						m._updateValueNo ();
+						m.set ({_tentativeValueNo:m._valueNo,_tentativeValue:m._value});
 					},
 					value:_null
 					/*?
@@ -464,18 +464,18 @@ Uize.module ({
 				_values:{
 					name:'values',
 					onChange:function () {
-						var _this = this;
-						if (_this.isWired) {
+						var m = this;
+						if (m.isWired) {
 							for (
-								var _valueNo = -1, _totalOptionChildButtons = _this._totalOptionChildButtons || 0;
+								var _valueNo = -1, _totalOptionChildButtons = m._totalOptionChildButtons || 0;
 								++_valueNo < _totalOptionChildButtons;
 							)
-								_this.removeChild ('option' + _valueNo)
+								m.removeChild ('option' + _valueNo)
 							;
-							_this.unwireUi ();
-							_this.get ('html') != _undefined && _this.set ({built:_false});
-							_this.set({_value:_getValidValue.call(_this, _this._value)});
-							_this.insertOrWireUi ();
+							m.unwireUi ();
+							m.get ('html') != _undefined && m.set ({built:_false});
+							m.set({_value:_getValidValue.call(m, m._value)});
+							m.insertOrWireUi ();
 						}
 					},
 					value:[]

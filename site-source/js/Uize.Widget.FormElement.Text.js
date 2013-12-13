@@ -41,16 +41,16 @@ Uize.module ({
 				_class = _superclass.subclass(
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
-						_this.wire(
+						m.wire(
 							'Changed.focused',
 							function (_event) {
-								if (_this.isWired) {
+								if (m.isWired) {
 									var
 										_focused = _event.newValue,
-										_placeholder = _this._placeholder,
-										_value = _this.valueOf()
+										_placeholder = m._placeholder,
+										_value = m.valueOf()
 									;
 
 									if (_placeholder && !_supportsPlaceholder) {
@@ -60,17 +60,17 @@ Uize.module ({
 										else if (!_focused && !_value)
 											_newText = _placeholder
 										;
-										_newText != _undefined && _this.setNodeValue ('input', _newText);
+										_newText != _undefined && m.setNodeValue ('input', _newText);
 									}
 
 									_focused
 										&& _value
-										&& _this.setCaretPosition(_value.length);
+										&& m.setCaretPosition(_value.length);
 								}
 							}
 						);
 
-						_this._updateMoreValidators();
+						m._updateMoreValidators();
 					}
 				),
 				_classPrototype = _class.prototype
@@ -78,16 +78,16 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateMoreValidators = function () {
-				var _this = this;
+				var m = this;
 
-				_this._moreValidators = [
+				m._moreValidators = [
 					function (_value) {
 						var
 							_valueString = _value + '',
 							_valueLength = _value != null ? _valueString.length : 0
 						;
 
-						return _valueLength >= _this._minLength && _valueLength <= _this._maxLength;
+						return _valueLength >= m._minLength && _valueLength <= m._maxLength;
 					}
 				];
 			};
@@ -106,17 +106,17 @@ Uize.module ({
 
 			_classPrototype.getCaretPosition = function () {
 				var
-					_this = this,
+					m = this,
 					_caretPosition = -1
 				;
 
-				if (_this.isWired && _this.get ('focused')) {
-					var _input = _this.getNode ('input');
+				if (m.isWired && m.get ('focused')) {
+					var _input = m.getNode ('input');
 					if ('selectionStart' in _input)
 						_caretPosition = _input.selectionStart;
 					else if (_input.createTextRange) {
 						var _sel = _input.createTextRange ();
-						_sel.moveStart ('character', -_this.get ('tentativeValue').length);
+						_sel.moveStart ('character', -m.get ('tentativeValue').length);
 						_caretPosition = _sel.text.length;
 					}
 				}
@@ -125,15 +125,15 @@ Uize.module ({
 			};
 			
 			_classPrototype.select = function(_startPosition, _endPosition) {
-				var _this = this;
+				var m = this;
 				
-				if (_this.isWired) {
+				if (m.isWired) {
 					var
-						_input = _this.getNode ('input'),
-						_value = _this.valueOf()
+						_input = m.getNode ('input'),
+						_value = m.valueOf()
 					;
 					
-					_this.set('focused', true);
+					m.set('focused', true);
 					
 					if (_value) {
 						if (_startPosition == _undefined)
@@ -167,23 +167,23 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (!_this.isWired) {
+				if (!m.isWired) {
 					var
-						_placeholder = _this._placeholder,
-						_input = _this.getNode ('input')
+						_placeholder = m._placeholder,
+						_input = m.getNode ('input')
 					;
 
 					// Set input placeholder
 					if (_placeholder) {
 						if (_supportsPlaceholder)
-							_this.setNodeProperties (_input, {placeholder:_placeholder});
+							m.setNodeProperties (_input, {placeholder:_placeholder});
 						else
-							_this.set ('value', _placeholder);
+							m.set ('value', _placeholder);
 					}
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

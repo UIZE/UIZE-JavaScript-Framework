@@ -43,19 +43,19 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
-					var _shown = _this._shown;
+				if (m.isWired) {
+					var _shown = m._shown;
 
-					_this.setNodeStyle('', {display:_shown ? 'inline' : 'none'});
+					m.setNodeStyle('', {display:_shown ? 'inline' : 'none'});
 
 					if (_shown) {
-						_this.setNodeInnerHtml('text', _this._getMessage(_this._collapsed ? _this._collapsedMessage : _this._expandedMessage));
+						m.setNodeInnerHtml('text', m._getMessage(m._collapsed ? m._collapsedMessage : m._expandedMessage));
 						Uize.Node.Classes.setState(
-							_this.getNode(''),
-							[_this._expandedClass, _this._collapsedClass],
-							_this._collapsed
+							m.getNode(),
+							[m._expandedClass, m._collapsedClass],
+							m._collapsed
 						);
 					}
 				}
@@ -77,12 +77,12 @@ Uize.module ({
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (!_this.isWired) {
-					var _collapse = function (_collapsed) { _this.set({_collapsed:_collapsed}) };
+				if (!m.isWired) {
+					var _collapse = function (_collapsed) { m.set({_collapsed:_collapsed}) };
 
-					_this.wireNode (
+					m.wireNode (
 						'',
 						{
 							mouseover:function () { _collapse(_false) },
@@ -90,7 +90,7 @@ Uize.module ({
 						}
 					);
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

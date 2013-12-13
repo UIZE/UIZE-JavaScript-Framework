@@ -39,24 +39,24 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** initialization ***/
 							function _setIframeUrl (_url) {
-								if (_url != _this._lastSetUrl) {
-									_this._lastSetUrl = _url;
-									var _contentWindow = _this.getContentWindow ();
+								if (_url != m._lastSetUrl) {
+									m._lastSetUrl = _url;
+									var _contentWindow = m.getContentWindow ();
 									_contentWindow && _contentWindow.location
 										? _contentWindow.location.replace (_url)
-										: (_this.getNode ('content').src = _url)
+										: (m.getNode ('content').src = _url)
 									;
 								}
 							}
-							_this.wire ({
+							m.wire ({
 								'Before Show':
-									function () {_setIframeUrl (Uize.isFunction (_this._url) ? _this._url () : _this._url)},
+									function () {_setIframeUrl (Uize.isFunction (m._url) ? m._url () : m._url)},
 								'After Hide':
-									function () {_this._resetUrl && _setIframeUrl ('about:blank')}
+									function () {m._resetUrl && _setIframeUrl ('about:blank')}
 							});
 					}
 				),

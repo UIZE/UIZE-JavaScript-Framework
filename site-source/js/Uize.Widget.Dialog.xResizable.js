@@ -105,12 +105,12 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype [_pCreateResizerIfNecessary] = function () {
 				var
-					_this = this,
-					_resizer = _this [_pResizer]
+					m = this,
+					_resizer = m [_pResizer]
 				;
-				if (_this.resizable && !_resizer) {
+				if (m.resizable && !_resizer) {
 					(
-						_this [_pResizer] = _resizer = _this.addChild (
+						m [_pResizer] = _resizer = m.addChild (
 							'resizer',
 							Uize.Widget.Resizer,
 							{
@@ -149,21 +149,21 @@ Uize.module ({
 									*NOTE:* For optimization, the =resizer= child widget is only created if a dialog is made resizable by setting its =resizable= state property to =true=. Therefore, be careful to first set a dialog to be resizable before attempting to access the =resizer= child widget for modifying its state.
 						*/
 					).wire ({
-						'Changed.inDrag':function (_event) {_this.set ({inDrag:_event.newValue})},
-						'Drag Start':_this,
+						'Changed.inDrag':function (_event) {m.set ({inDrag:_event.newValue})},
+						'Drag Start':m,
 						'Drag Done':function (_event) {
-							_this.set ({
+							m.set ({
 								width:_resizer.get ('width'),
 								height:_resizer.get ('height')
 							});
-							_this.fire (_event);
+							m.fire (_event);
 						}
 					});
 
 					/*** code to resync resizer position ***/
 						var _syncResizerToDialogPosition = function () {
-							if (_this.isWired && _this.get ('shown')) {
-								var _rootNode = _this.getNode ();
+							if (m.isWired && m.get ('shown')) {
+								var _rootNode = m.getNode ();
 								if (Uize.Node.getStyle (_rootNode,'display') != 'none') {
 									var _rootNodeCoords = Uize.Node.getCoords (_rootNode);
 									_resizer.set ({
@@ -175,7 +175,7 @@ Uize.module ({
 								}
 							}
 						};
-						_this.wire ({
+						m.wire ({
 							'After Show':_syncResizerToDialogPosition,
 							'Changed.width':_syncResizerToDialogPosition,
 							'Changed.height':_syncResizerToDialogPosition,
@@ -183,9 +183,9 @@ Uize.module ({
 						});
 
 					/*** initialization ***/
-						if (_this.isWired) {
-							_this [_pInitializeResizerNodesIfNecessary] ();
-							_this.get ('shown') && // sync position, if resizer created after dialog is shown
+						if (m.isWired) {
+							m [_pInitializeResizerNodesIfNecessary] ();
+							m.get ('shown') && // sync position, if resizer created after dialog is shown
 								_syncResizerToDialogPosition ()
 							;
 							_resizer.wireUi (); // wire up, if resizer created after dialog is wired
@@ -194,11 +194,11 @@ Uize.module ({
 			};
 
 			_classPrototype [_pInitializeResizerNodesIfNecessary] = function () {
-				var _this = this;
-				if (_this.isWired && _this.resizable && !_this [_pResizerInitialized]) {
-					_this [_pResizerInitialized] = _true;
-					_this [_pResizer].set ({
-						areaNodes:[_this.getNode ()],
+				var m = this;
+				if (m.isWired && m.resizable && !m [_pResizerInitialized]) {
+					m [_pResizerInitialized] = _true;
+					m [_pResizer].set ({
+						areaNodes:[m.getNode ()],
 						nodeMap:{
 							move:null,
 							shell:document.documentElement
@@ -209,10 +209,10 @@ Uize.module ({
 
 			_classPrototype._updateMaximizeUi = function () {
 				var 
-					_this = this,
-					_maximize = _this.children.maximize,
-					_restore = _this.children.restore,
-					_isMaximized =_this.get('isMaximized')
+					m = this,
+					_maximize = m.children.maximize,
+					_restore = m.children.restore,
+					_isMaximized =m.get('isMaximized')
 				;
 
 				_maximize && _maximize.displayNode('', !_isMaximized);
@@ -222,42 +222,42 @@ Uize.module ({
 
 		/*** implement hook methods ***/
 			_classPrototype.atEndOfOmegaStructor = function () {
-				var _this = this;
+				var m = this;
 
-				_this.addChild('maximize', _Uize.Widget.Button).wire('Click', function() {_this.set({isMaximized:_true})});
-				_this.addChild('restore', _Uize.Widget.Button).wire('Click', function() {_this.set({isMaximized:_false})});
+				m.addChild('maximize', _Uize.Widget.Button).wire('Click', function() {m.set({isMaximized:_true})});
+				m.addChild('restore', _Uize.Widget.Button).wire('Click', function() {m.set({isMaximized:_false})});
 
-				_this [_pCreateResizerIfNecessary] ();
+				m [_pCreateResizerIfNecessary] ();
 			};
 			_classPrototype.afterWireUi = function () {
-				var _this = this;
-				_this.wireNode(window, 'resize', function () {
+				var m = this;
+				m.wireNode(window, 'resize', function () {
 					//This will resize the dialog to fit the screen if it is already maximized
-					_this.get('isMaximized') && _this.updateUiDimsIfShown();
+					m.get('isMaximized') && m.updateUiDimsIfShown();
 				});
 
-				_this._updateMaximizeUi();
+				m._updateMaximizeUi();
 
-				_this [_pInitializeResizerNodesIfNecessary] ();
+				m [_pInitializeResizerNodesIfNecessary] ();
 
 			};
 
 			_classPrototype.updateUiDimsIfShown = function () {
 				var 
-					_this = this,
-					_nodeToSetDimension = _this.get('nodeToSetDimension')
+					m = this,
+					_nodeToSetDimension = m.get('nodeToSetDimension')
 				;
-				if (_this.isWired && _this.get('shown') && !_this.get('inDrag')) {
-					if (!_this.get('isMaximized')) {
-						_this.setNodeStyle(_nodeToSetDimension, { width: _this.get('width'), height: _this.get('height') });
-						//_this.setNodeStyle('', { width: _this.get('width') });
+				if (m.isWired && m.get('shown') && !m.get('inDrag')) {
+					if (!m.get('isMaximized')) {
+						m.setNodeStyle(_nodeToSetDimension, { width: m.get('width'), height: m.get('height') });
+						//m.setNodeStyle('', { width: m.get('width') });
 					} else {
 						var
-							_contentDims = _Uize_Node.getDimensions(_this.getNode(_nodeToSetDimension)),
-							_rootDims = _Uize_Node.getDimensions(_this.getNode()),
+							_contentDims = _Uize_Node.getDimensions(m.getNode(_nodeToSetDimension)),
+							_rootDims = _Uize_Node.getDimensions(m.getNode()),
 							_windowCoords = _Uize_Node.getCoords(window)
 						;
-						_this.setNodeStyle(
+						m.setNodeStyle(
 							'',
 							{
 								top: window.pageYOffset,
@@ -266,7 +266,7 @@ Uize.module ({
 								width:'auto'
 							}
 						);
-						_this.setNodeStyle(
+						m.setNodeStyle(
 							_nodeToSetDimension,
 							{
 								width: _windowCoords.width - (_rootDims.width - _contentDims.width),
@@ -283,12 +283,12 @@ Uize.module ({
 					name:'resizable',
 					onChange:function () {
 						var
-							_this = this,
-							_resizer = _this [_pResizer]
+							m = this,
+							_resizer = m [_pResizer]
 						;
-						_this [_pCreateResizerIfNecessary] ();
-						_this [_pInitializeResizerNodesIfNecessary] ();
-						_resizer && _resizer.set ({enabled:_this.resizable ? 'inherit' : _false});
+						m [_pCreateResizerIfNecessary] ();
+						m [_pInitializeResizerNodesIfNecessary] ();
+						_resizer && _resizer.set ({enabled:m.resizable ? 'inherit' : _false});
 					}
 					/*?
 						State Properties

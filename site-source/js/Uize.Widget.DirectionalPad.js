@@ -44,19 +44,19 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
-						if (!_this._useLinks) {
+						var m = this;
+						if (!m._useLinks) {
 							var
 								_Uize_Widget_Button = _Uize.Widget.Button,
-								_buttonDictionary = _this._buttonDictionary
+								_buttonDictionary = m._buttonDictionary
 							;
 							_Uize.forEach(
 								_buttonDictionary,
 								function(_value, _key) {
-									_this.addChild (_key, _Uize_Widget_Button).wire (
+									m.addChild (_key, _Uize_Widget_Button).wire (
 										'Click',
 										function (_event) {
-											_this.fire ({
+											m.fire ({
 												name:'Move',
 												direction:_buttonDictionary [_key],
 												domEvent:_event.domEvent
@@ -74,23 +74,23 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiMode = function () {
 				var
-					_this = this
+					m = this
 				;
 
-				if (_this.isWired) {
-					if (_this._useLinks) {
-						var _name, _buttonDictionary = _this._buttonDictionary;
+				if (m.isWired) {
+					if (m._useLinks) {
+						var _name, _buttonDictionary = m._buttonDictionary;
 						for (_name in _buttonDictionary)
-							_this.web (_name).display(_this._mode == 'full' || _name in _childrenInMini)
+							m.web (_name).display(m._mode == 'full' || _name in _childrenInMini)
 						;
 					} else {
 						var
-							_children = _this.children
+							_children = m.children
 						;
 
 						// this only works if we have just two modes.
 						for (var _child in _children)
-							_children [_child].web().display(_this._mode == 'full' || _child in _childrenInMini )
+							_children [_child].web().display(m._mode == 'full' || _child in _childrenInMini )
 						;
 					}
 				}
@@ -98,12 +98,12 @@ Uize.module ({
 
 			_classPrototype._updateUiEnabled = function () {
 				var
-					_this = this,
-					_children = _this.children,
-					_enabled = _this.get ('enabled'),
-					_cssClassDisabledButton = _this._cssClassDisabledButton,
-					_buttonDictionary = _this._buttonDictionary,
-					_useLinks = _this._useLinks
+					m = this,
+					_children = m.children,
+					_enabled = m.get ('enabled'),
+					_cssClassDisabledButton = m._cssClassDisabledButton,
+					_buttonDictionary = m._buttonDictionary,
+					_useLinks = m._useLinks
 				;
 
 				// if enabled is an object then parse through and set the children enabled states
@@ -120,7 +120,7 @@ Uize.module ({
 							var _childEnabled = _childNameInEnabled ? _enabled [_childName] : _default;
 
 							if (_useLinks) {
-								_Uize_Node_Classes.setState(_this.getNode (_childName), _cssClassDisabledButton, _childEnabled);
+								_Uize_Node_Classes.setState(m.getNode (_childName), _cssClassDisabledButton, _childEnabled);
 							}
 							else
 								_children [_childName].set ({
@@ -132,7 +132,7 @@ Uize.module ({
 					if (_useLinks) {
 						var _buttonName;
 						for (_buttonName in _buttonDictionary) {
-							_Uize_Node_Classes.setState(_this.getNode (_buttonName), _cssClassDisabledButton, _enabled);
+							_Uize_Node_Classes.setState(m.getNode (_buttonName), _cssClassDisabledButton, _enabled);
 						}
 					} else
 						Uize.callOn (_children,'set',[{enabled:_enabled}]);
@@ -142,22 +142,22 @@ Uize.module ({
 		/*** Wiring Methods ***/
 			_classPrototype.wireUi = function () {
 				var
-					_this = this
+					m = this
 				;
 
-				if (!_this.isWired) {
-					_this.wire ('Changed.enabled',function () { _this._updateUiEnabled () });
+				if (!m.isWired) {
+					m.wire ('Changed.enabled',function () { m._updateUiEnabled () });
 
-					_this._useLinks &&
+					m._useLinks &&
 						_Uize.forEach (
-							_this._buttonDictionary,
+							m._buttonDictionary,
 							function (_direction, _name) {
-								_this.wireNode (
+								m.wireNode (
 									_name,
 									'click',
 									function (_event) {
-										(_this.get ('enabled') || _this.get ('enabledInherited')) &&
-											_this.fire ({
+										(m.get ('enabled') || m.get ('enabledInherited')) &&
+											m.fire ({
 												name:'Move',
 												direction:_direction,
 												domEvent:_event
@@ -169,16 +169,16 @@ Uize.module ({
 						)
 					;
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_superclass.doMy (_this,'updateUi');
-					_this._updateUiMode ();
-					_this._updateUiEnabled ();
+				var m = this;
+				if (m.isWired) {
+					_superclass.doMy (m,'updateUi');
+					m._updateUiMode ();
+					m._updateUiEnabled ();
 				}
 			};
 

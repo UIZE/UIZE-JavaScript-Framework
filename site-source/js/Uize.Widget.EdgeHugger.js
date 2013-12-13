@@ -50,23 +50,23 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._fadeToNewState = function (_suppressFade) {
 				var
-					_this = this,
-					_edge = _this._edge,
+					m = this,
+					_edge = m._edge,
 					_dimName = _edge == 'left' || _edge == 'right' ? 'width' : 'height',
-					_fadeProperties = Uize.copy (_this._fadeProperties,_suppressFade ? {duration:0} : null),
-					_maximized = _this._maximized,
-					_lastMaximized = _this._lastMaximized
+					_fadeProperties = Uize.copy (m._fadeProperties,_suppressFade ? {duration:0} : null),
+					_maximized = m._maximized,
+					_lastMaximized = m._lastMaximized
 				;
 				function _fadePanelNode (_maximized,_revealed) {
 					var _panelNode = _maximized ? 'maximized' : 'minimized';
-					_this.setNodeStyle (_panelNode,Uize.pairUp (_edge,-50000));
-					_this.displayNode (_panelNode,true);
+					m.setNodeStyle (_panelNode,Uize.pairUp (_edge,-50000));
+					m.displayNode (_panelNode,true);
 
 					return Uize.Fx.fadeStyle (
-						_this.getNode (_panelNode),
+						m.getNode (_panelNode),
 						Uize.pairUp (
 							_edge,
-							-_this.get (_panelNode + 'Height') || -Uize.Node.getCoords (_this.getNode (_panelNode)) [_dimName]
+							-m.get (_panelNode + 'Height') || -Uize.Node.getCoords (m.getNode (_panelNode)) [_dimName]
 						),
 						Uize.pairUp (_edge,0),
 						0,
@@ -81,13 +81,13 @@ Uize.module ({
 						.wire (
 							'Done',
 							function () {
-								_this.displayNode (_lastMaximized ? 'maximized' : 'minimized',_false);
+								m.displayNode (_lastMaximized ? 'maximized' : 'minimized',_false);
 								_fadeInNewPanelNode ();
 							}
 						)
 					: _fadeInNewPanelNode ()
 				;
-				_this._lastMaximized = _maximized;
+				m._lastMaximized = _maximized;
 				/*?
 					Implied Nodes
 						maximized Implied Node
@@ -99,48 +99,48 @@ Uize.module ({
 			};
 
 			_classPrototype._updateCookie = function () {
-				var _this = this;
-				_this._cookieName &&
-					Uize.Cookie.setCookie (_this._cookieName,_this._contentId + '|' + +_this._maximized,_this._cookiePath)
+				var m = this;
+				m._cookieName &&
+					Uize.Cookie.setCookie (m._cookieName,m._contentId + '|' + +m._maximized,m._cookiePath)
 				;
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					var _mustFade = _this._whenToFadeOnInit == 'always';
+				var m = this;
+				if (!m.isWired) {
+					var _mustFade = m._whenToFadeOnInit == 'always';
 
 					/*** read cookie, if configured to store state in cookie ***/
-						if (_this._cookieName) {
+						if (m._cookieName) {
 							var
-								_cookieValue = Uize.Cookie.getCookie (_this._cookieName),
+								_cookieValue = Uize.Cookie.getCookie (m._cookieName),
 								_cookieValueParts = _cookieValue.split ('|'),
 								_maximizedFromCookie = _cookieValueParts [1] != '0'
 							;
-							if (!_cookieValue || _cookieValueParts [0] != _this._contentId) {
+							if (!_cookieValue || _cookieValueParts [0] != m._contentId) {
 								_maximizedFromCookie = _true;
-								_mustFade = _this._whenToFadeOnInit != 'never';
+								_mustFade = m._whenToFadeOnInit != 'never';
 							}
-							_this.set ({_maximized:_maximizedFromCookie});
-							_this._updateCookie ();
+							m.set ({_maximized:_maximizedFromCookie});
+							m._updateCookie ();
 						}
 
 					/*** wire links for maximizing / minimizing ***/
-						_this.wireNode (
+						m.wireNode (
 							'maximize',
 							'click',
-							function () {_this.set ({_maximized:_true})}
+							function () {m.set ({_maximized:_true})}
 							/*?
 								Implied Nodes
 									maximize
 										.
 							*/
 						);
-						_this.wireNode (
+						m.wireNode (
 							'minimize',
 							'click',
-							function () {_this.set ({_maximized:_false})}
+							function () {m.set ({_maximized:_false})}
 							/*?
 								Implied Nodes
 									minimize
@@ -148,24 +148,24 @@ Uize.module ({
 							*/
 						);
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 
 					/*** workaround for IE6's lack of support for fixed positioning ***/
 						if (navigator.appVersion.indexOf ('MSIE 6') > -1) {
 							function _updateRootNodePositionForIe6 () {
 								var _windowCoords = Uize.Node.getCoords (window);
-								_this.setNodeStyle (
+								m.setNodeStyle (
 									'',
 									{
-										left:_windowCoords [_this._edge == 'right' ? 'right' : 'left'],
-										top:_windowCoords [_this._edge == 'bottom' ? 'bottom' : 'top']
+										left:_windowCoords [m._edge == 'right' ? 'right' : 'left'],
+										top:_windowCoords [m._edge == 'bottom' ? 'bottom' : 'top']
 									}
 								);
 							}
-							_this.globalizeNode ('');
-							_this.setNodeStyle ('',{left:'',top:'',right:'',bottom:''});
+							m.globalizeNode ('');
+							m.setNodeStyle ('',{left:'',top:'',right:'',bottom:''});
 							_updateRootNodePositionForIe6 ();
-							_this.wireNode (
+							m.wireNode (
 								window,
 								{
 									scroll:_updateRootNodePositionForIe6,
@@ -175,7 +175,7 @@ Uize.module ({
 						}
 
 					/*** reveal appropriate panel node ***/
-						_this._fadeToNewState (!_mustFade);
+						m._fadeToNewState (!_mustFade);
 				}
 			};
 
@@ -226,10 +226,10 @@ Uize.module ({
 				_maximized:{
 					name:'maximized',
 					onChange:function () {
-						var _this = this;
-						if (_this.isWired) {
-							_this._updateCookie ();
-							_this._fadeToNewState ();
+						var m = this;
+						if (m.isWired) {
+							m._updateCookie ();
+							m._fadeToNewState ();
 						}
 					},
 					value:_true
