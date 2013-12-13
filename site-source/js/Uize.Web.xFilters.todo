@@ -1,0 +1,72 @@
+This is a TO DO document for the =Uize.Web.xFilters= module.
+
+Proposed New Methods
+	children
+		Retrieves children matching selector excluding text & comments
+		
+		NOTES
+		- children([selector])
+		
+	closest
+		For each matched element, get the first element in the ancestor DOM tree that matches the selector, inclusive of the element itself
+		
+		NOTES
+		- closest(selector)
+		
+	contents
+		Retrieves children matching selector including text & comments
+		
+		NOTES
+		- contents([selector])
+		
+	find
+		All matching descendents
+		
+		NOTES
+		- find(selector)
+		- find(matchOBJ) - Uize.Node.find
+		
+	has
+		Elements that have descendents that match
+		
+		NOTES
+		- has(selector)
+		- has(matchOBJ) - Uize.Node.find
+		
+	index
+		Index of each of matched elements relative to their siblings
+		
+		NOTES
+		- index([selector])
+		
+	next
+		Retrieves following sibling nodes of the set of elements matching optional selector (optionally only looking at the immediate sibling)
+		
+		NOTES
+		- next([selector[,immediateOnlyBOOL])
+		- next(immediateOnlyBOOL) -> next(null, immediateOnlyBOOL)
+		
+	nextUntil
+		Get all following siblings of each element up to, but not including element matched by selector, optionally filtering out some siblings
+		
+		NOTES
+		- nextUntil([selector[, filter]])
+		
+	previous
+		Retrieves preceeding sibling nodes of set of elements matching optional selector (optionally only looking at the immediate sibling)
+		
+		NOTES
+		- previous([selector[,immediateOnlyBOOL])
+		- previous(immediateOnlyBOOL) -> previous(null, immediateOnlyBOOL)
+		
+	previousUntil
+		Get all preceeding siblings of each element up to, but not including element matched by selector, optionally filtering out some siblings
+		
+		NOTES
+		- previousUntil([selector[, filter]])
+		
+	siblings
+		Retrieves sibling nodes of the set of elements matching optional selector
+		
+		NOTES
+		- siblings([selector])

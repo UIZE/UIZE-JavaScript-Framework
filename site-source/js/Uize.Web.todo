@@ -1,0 +1,17 @@
+This is a TO DO document for the =Uize.Web= module.
+
+Iterator/Generator Support
+	The =Uize.Web= object is a JavaScript object masquerading as a list, supporting a =length= method as well array indexing. In order to be iterated over using native methods like =forEach=, it needs to implement the iterator/generator interface.  See: [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators]]
+	
+Additional Touch Support
+	For the method wrappers for mouse events (like =click=, =mousedown=, =mouseup=, etc.) have them also wiring the "touch" equivalents in order to prevent the 300ms delay for mouse-related events in a touch environment.
+	
+Declarative Wiring of Node Events
+	Potentially when wiring event methods (like =hover=, =mouseover=, etc.), have class names set on the nodes.
+	
+HTML String Support
+	Ability to construct a =Uize.Web= object from an HTML string.
+	
+Bug Fixes
+	- =event.stopPropagation= doesn't always work
+	- =submit= and =trigger('submit')= on a form DOM node should call =.submit()= on the form

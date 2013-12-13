@@ -1,0 +1,32 @@
+This is a TO DO document for the =Uize.Web.xEffects= module.
+
+Support CSS3 Transitions
+	If the environment supports CSS3 transitions (=Uize.Web.supportsCss('transition')=), the =animate= method sets a transition style instead of using a =Uize.Fade= object for the given set of style properties.
+	
+	CSS3 transitions cannot be used if the following =animationOptionsOBJ= properties are set...
+	- =timing= function
+	- =timing= string not supported by CSS3 (such as ='bounce'=)
+	- =step=
+	- =stepCallback= (JS only supports ='transitionend'= event)
+	
+	Other Notes
+	- Should update =Uize.Fade= to use =requestAnimationFrame= instead of setTimeout/setInterval?
+	
+requestAnimationFrame Polyfill
+	Add polyfill for =requestAnimationFrame= and =cancelAnimationFrame= for browsers that don't support and to abstract the various vendor prefixes. See: [[https://gist.github.com/paulirish/1579671]]
+	
+	Vendor prefixes for =requestAnimationFrame=:
+	- =msRequestAnimationFrame=
+	- =mozRequestAnimationFrame=
+	- =webkitRequestAnimationFrame=
+	- =oRequestAnimationFrame=
+	
+	Vender prefixes for =cancelAnimationFrame=:
+	- =msCancelAnimationFrame=
+	- =mozCancelAnimationFrame=
+	- =webkitCancelAnimationFrame=
+	- =oCancelAnimationFrame=
+	- =msCancelRequestAnimationFrame=
+	- =mozCancelRequestAnimationFrame=
+	- =webkitCancelRequestAnimationFrame=
+	- =oCancelRequestAnimationFrame=

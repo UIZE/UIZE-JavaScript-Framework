@@ -1,0 +1,56 @@
+This is a TO DO document for the proposed =Uize.Web.xAjax= module.
+
+Proposed New Methods
+	Uize.Web.ajax
+		Makes an asynchronous HTTP service (AJAX) request
+		
+		NOTES
+		- ajax() - URL is current page
+		- ajax(urlSTR[, dataOBJ[, successFUNC[, dataTypeSTR]]]) - GET by default
+		- ajax(settingsOBJ)
+		- Wraps =Uize.Comm.Ajax=
+		
+	Uize.Web.GET
+		Load data from the service using a HTTP GET asynchronous service request
+		
+		NOTES
+		- GET(urlSTR[, dataOBJ[, successFUNC[, dataTypeSTR]]]) -> ajax(urlSTR, dataOBJ, successFUNC, dataTypeSTR)
+		- May need a different name to not be confused with Uize.get
+		
+	Uize.Web.getJson
+		Load JSON-encoded ata from the server using a HTTP GET aysnchronous service request
+		
+		NOTES
+		- getJSON(urlSTR[, dataOBJ[, successFUNC]]) -> ajax(urlSTR, dataOBJ, successFUNC, 'json')
+		
+	Uize.Web.getScript
+		Load a JavaScript file from the server using a HTTP GET request, then execute it
+		
+		NOTES
+		- getScript(urlSTR[, dataOBJ[, successFUNC]]) -> ajax(urlSTR, dataOBJ, successFUNC, 'script')
+		
+	Uize.Web.POST
+		Send data to a service using a HTTP POST asynchronous service request
+		
+		NOTES
+		- get(urlSTR[, dataOBJ[, successFUNC[, dataTypeSTR]]]) -> ajax({type:'POST', url:urlSTR, data:dataOBJ, success:successFUNC, dataType:dataTypeSTR})
+		
+	load
+		Loads the resultant HTML into the matched nodes
+		
+		NOTES
+		- load(urlSTR[, dataOBJ[, successFUNC]]) -> ajax(urlSTR, dataOBJ, successFUNC, 'html')
+		
+	Uize.Web.fromParams
+		A utility method that parses a query string and returns the query parameters as an object.
+		
+		NOTES
+		- fromParams(queryParamsSTR)
+		- Wrapper for =Uize.Url.fromParams=
+		
+	Uize.Web.toParams
+		A utility method that serializes the properties of the specified object to produce a URL query params string.
+		
+		NOTES
+		- toParams(paramsOBJ)
+		- Wrapper for =Uize.Url.toParams=
