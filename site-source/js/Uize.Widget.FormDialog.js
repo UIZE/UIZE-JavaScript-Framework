@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormDialog= class serves as a thin widget to plumb the value of a =Uize.Widget.Form= widget (or subclass) as the dialog submission value.
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

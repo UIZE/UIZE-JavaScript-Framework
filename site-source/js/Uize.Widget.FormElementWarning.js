@@ -21,7 +21,7 @@
 	Introduction
 		The =Uize.Widget.FormElementWarning= widget provides functionality for displaying a warning/error message for a form element
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

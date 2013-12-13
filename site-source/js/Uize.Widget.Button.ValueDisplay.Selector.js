@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Button.ValueDisplay.Selector= widget provides the functionality for displaying an option value within an options selector
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

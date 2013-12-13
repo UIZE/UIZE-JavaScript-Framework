@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormElement.Select= class serves a wrapper class in order to provide a beter programmable interface to a <select> form element.
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

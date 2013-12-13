@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Captcha= class encapsulates the logic required to display and use a captcha.
 
-		*DEVELOPERS:* `Tim Carter`
+		*DEVELOPERS:* `Tim Carter`, original code donated by `Zazzle Inc.`
 
 		An Abstract Class
 			The =Uize.Widget.Captcha= class, like its superclass =Uize.Widget= is primarily an abstract class that provides a standardized interface for the subclasses, which contain the majority of the implementation logic. Because there is no generalized API for the different captcha implementations available (reCaptcha, EZ-Gimpy, etc.), the subclasses must do most of the work to set up the UI, validate user input, and display any messages to the user.

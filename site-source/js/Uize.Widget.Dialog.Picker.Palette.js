@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Dialog.Picker.Palette= widget is a thin base class for picker dialog widgets that act as a droplist palette.
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

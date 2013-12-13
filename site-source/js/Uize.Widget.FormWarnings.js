@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormWarnings= widget provides functionality for displaying warnings for a =Uize.Widget.Form=.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, `Tim Carter`
+		*DEVELOPERS:* `Ben Ilegbodu`, `Tim Carter`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

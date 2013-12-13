@@ -21,7 +21,7 @@
 	Introduction
 		The =Uize.Widget.Collection.Dynamic.xDialogEditable= module extends the =Uize.Widget.Collection.Dynamic= base class by adding editing capability for dynamic collections.
 
-		*DEVELOPERS:* `Lisa Nakano`
+		*DEVELOPERS:* `Lisa Nakano`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

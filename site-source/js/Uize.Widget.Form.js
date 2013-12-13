@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Form= widget provides functionality for managing form elements and handling validation
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

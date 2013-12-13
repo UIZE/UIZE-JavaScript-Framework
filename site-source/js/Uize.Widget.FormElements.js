@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormElements= class serves as a thin container widget of =Uize.Widget.FormElement= or =Uize.Widget.Form= widgets.
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

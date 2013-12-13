@@ -9,6 +9,22 @@
 |_______________|             http://www.uize.com/license.html
 */
 
+/* Module Meta Data
+	type: Extension
+	importance: 4
+	codeCompleteness: 100
+	docCompleteness: 0
+*/
+
+/*?
+	Introduction
+		The =Uize.Widget.Page.xDeferredLinks= module extends the =Uize.Widget.Page= base class by adding functionality for defer wiring links on the page. 
+
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		
+		Instead of relying on search engines or scrapers to adhere to rel="nofollow", you can include link tags in the page with dummy =href= attributes (such as ="javascript://"=), and set the =href= in the JavaScript.
+*/
+
 Uize.module ({
 	name:'Uize.Widget.Page.xDeferredLinks',
 	required:'Uize.Node',

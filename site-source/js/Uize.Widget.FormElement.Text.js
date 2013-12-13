@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormElement.Text= class is a subclass of =Uize.Widget.FormElement= to provide specific functionality for text input form elements.
 
-		*DEVELOPERS:* `Tim Carter`, `Ben Ilegbodu`, `Vinson Chuong`
+		*DEVELOPERS:* `Tim Carter`, `Ben Ilegbodu`, `Vinson Chuong`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({
