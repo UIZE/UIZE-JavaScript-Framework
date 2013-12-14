@@ -1,16 +1,15 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+NEW MODULE: Uize.Data.Flatten
+	Still to do...
+
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Math.Blend
 	Still to do...
 
 	- finish documentation
-	- write news announcement
-
-NEW MODULE: Uize.Data.Flatten
-	Still to do...
-
-	- write unit tests
-	- write documentation
 	- write news announcement
 
 NEW MODULE: Uize.Math.LogicalPos
