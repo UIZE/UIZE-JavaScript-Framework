@@ -21,6 +21,59 @@
 		The =Uize.Data.Flatten= package provides methods for flattening a hierarchical / tree structured object to a flat, key/value hash table, as well as unflattening a key/value hash table to produce a hierarchical / tree structured object.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		In a Nutshell
+			The methods of the =Uize.Data.Flatten= module make it easy to represent a hierarchical, tree structure or graph object using a single level hash / dictionary / lookup object.
+
+			When flattening a hierarchical object to a hash structure using the =Uize.Data.Flatten.flatten= method, information about the original structure of object being flattened is retained in the key names of the flattened object by using the dereferencing paths to the leaf nodes to form the key names. This has the advantage of providing a natural way to derive keys for the flattened object that don't collide for different leaf nodes, as well as retaining information necessary to reconstitute the original source object from a flattened object using the companion =Uize.Data.Flatten.unflatten= method.
+
+			EXAMPLE
+			......................................................................................
+			Uize.Data.Flatten.flatten ({
+				animals:{
+					pets:{
+						dogs:{
+							smallBreeds:['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+							largeBreeds:['Afghan','Great Dane','Irish Wolfhound','St. Bernard']
+						},
+						cats:['Persian','Siamese','Hairless']
+					},
+					wildAnimals:{
+						dogs:['Coyote','Dingo'],
+						cats:['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+						other:['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+					}
+				}
+			});
+			......................................................................................
+
+			RESULT
+			...................................................................................................
+			{
+				'animals.pets.dogs.smallBreeds':['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+				'animals.pets.dogs.largeBreeds':['Afghan','Great Dane','Irish Wolfhound','St. Bernard'],
+				'animals.pets.cats':['Persian','Siamese','Hairless'],
+				'animals.wildAnimals.dogs':['Coyote','Dingo'],
+				'animals.wildAnimals.cats':['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+				'animals.wildAnimals.other':['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+			}
+			...................................................................................................
+
+			A Real World Example
+				.
+
+			Unflattening a Flattened Object
+				.
+
+			Advanced Features
+				Including Non-leaf Nodes
+					.
+
+				Using Custom Path Delimiter Strings
+					.
+
+				Using Custom Key Serialization and Parsing
+					.
 */
 
 Uize.module ({
@@ -98,6 +151,34 @@ Uize.module ({
 							);
 							................................................................
 
+							Flatten a Source Object, Using the Default Path-to-key Transformer
+								SYNTAX
+								.....................................................
+								flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ);
+								.....................................................
+
+							Flatten a Source Object, Specifying a Path Delimiter String
+								SYNTAX
+								......................................................................
+								flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ,pathDelimiterSTR);
+								......................................................................
+
+							Flatten a Source Object, Specifying a Path-to-key Transformer Function
+								SYNTAX
+								..............................................................................
+								flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ,pathToKeyTransformerFUNC);
+								..............................................................................
+
+							Flatten a Source Object, Including Non-leaf Nodes in the Flattened Object
+								SYNTAX
+								................................................................
+								flattenedOBJ = Uize.Data.Flatten.flatten (
+									sourceOBJ,pathToKeyTransformerANYTYPE,includeNonLeafNodesBOOL
+								);
+								................................................................
+
+							NOTES
+							- compare to the companion =Uize.Data.Flatten.unflatten= static method
 				*/
 			},
 
@@ -126,6 +207,48 @@ Uize.module ({
 					;
 				}
 				return _tree;
+				/*?
+					Static Methods
+						Uize.Data.Flatten.unflatten
+
+							DIFFERENT USAGES
+
+							`Unflatten a Source Object, Using the Default Key-to-path Transformer`
+							..........................................................
+							hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ);
+							..........................................................
+
+							`Unflatten a Source Object, Specifying a Path Delimiter String`
+							...........................................................................
+							hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ,pathDelimiterSTR);
+							...........................................................................
+
+							`Unflatten a Source Object, Specifying a Key-to-path Transformer Function`
+							...................................................................................
+							hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ,keyToPathTransformerFUNC);
+							...................................................................................
+
+							Unflatten a Source Object, Using the Default Key-to-path Transformer
+								SYNTAX
+								.....................................................
+								hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ);
+								.....................................................
+
+							Unflatten a Source Object, Specifying a Path Delimiter String
+								SYNTAX
+								......................................................................
+								hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ,pathDelimiterSTR);
+								......................................................................
+
+							Unflatten a Source Object, Specifying a Key-to-path Transformer Function
+								SYNTAX
+								..............................................................................
+								hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ,keyToPathTransformerFUNC);
+								..............................................................................
+
+							NOTES
+							- compare to the companion =Uize.Data.Flatten.flatten= static method
+				*/
 			}
 		});
 	}
