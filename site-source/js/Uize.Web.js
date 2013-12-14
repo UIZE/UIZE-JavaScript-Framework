@@ -105,6 +105,7 @@ Uize.module ({
 				
 				_Uize_isString = _Uize.isString,
 				_Uize_isArray = _Uize.isArray,
+				_Uize_isList = _Uize.isList,
 				_Uize_isFunction = _Uize.isFunction,
 				_Uize_isPlainObject = _Uize.isPlainObject,
 				_Uize_isBoolean = _Uize.isBoolean,
@@ -288,11 +289,11 @@ Uize.module ({
 						_nodes = _param.element();
 						_key = _param._key;
 					}
-					else if (_Uize_isArray(_param)) { // node list, to be converted to a unique set
+					else if (_Uize_isList(_param)) { // node list, to be converted to a unique set
 						var _nodeLookup = {};
 
 						_nodes = []; // make a copy to be safe (can't use concat because may not be a native JS array)
-						
+
 						for (var _nodeNo = -1; ++_nodeNo < _param.length;) {
 							var _node = _param[_nodeNo];
 							if (_Uize_Node_isNode(_node)) {
@@ -506,12 +507,19 @@ Uize.module ({
 				if (_nodeList) {
 					var _newNodeList = [];
 					for (var _nodeNo = -1, _nodeListLength = _nodeList.length; ++_nodeNo < _nodeListLength;)
-						_newNodeList.push(_nodeList[_nodeNo])
+						_newNodeList[_nodeNo] = _nodeList[_nodeNo];
 					;
 					_nodeList = _newNodeList;
 				}
 				
 				return _nodeList || [];
+				/* NOTE: More optimal code-wise, but copyList is slower
+				var
+					_domElement = _rootNode ? _getById(_rootNode) : _document,
+					_nodeList = _domElement.querySelectorAll && _domElement.querySelectorAll(_selector)
+				;
+				return _nodeList ? _Uize.copyList(_nodeList) : [];
+				*/
 				/*?
 					Static Methods
 						Uize.Web.selectCss

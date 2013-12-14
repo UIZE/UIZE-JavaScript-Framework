@@ -92,7 +92,8 @@ Uize.module ({
 					// add existing nodes to lookup table for comparising from added nodes
 					for (; ++_nodeNo < _nodesLength;) {
 						var _node = _nodes[_nodeNo];
-						_nodesLookup[_getNodeUid(_node)] = _node;
+						if (_Uize_Node_isNode(_node))
+							_nodesLookup[_getNodeUid(_node)] = _node;
 					}
 					
 					return _nodesLookup;
@@ -109,9 +110,9 @@ Uize.module ({
 						_testFunc = function() { return this == _param };
 					else if (_object.isWeb(_param)) // if a Uize.Web object we'll just call any on the object with our node
 						_testFunc = function() { return _param.any(this) };
-					else if (_Uize.isArray(_param) && (!_param.length || _Uize_Node_isNode(_param[0]))) {
+					else if (_Uize.isList(_param)) {
 						var _nodeLookup = _getNodesLookup(_param);
-						_testFunc = function() { return !!_nodeLookup[_getNodeUid(this)] };
+						_testFunc = function() { return _getNodeUid(this) in _nodeLookup };
 					}
 
 					return _testFunc;
@@ -480,6 +481,36 @@ Uize.module ({
 								- Returns a reference to a new =Uize.Web= object
 								- Any duplicates are removed
 								- See related =ancestors= and =parent= methods
+					*/
+				};
+				
+				_objectPrototype.contents = function(_selector) {
+					var _allChildNodes = [];
+					
+					this.each(
+						function() { _allChildNodes.push.apply (_allChildNodes, _Uize.copyList(this.childNodes).splice(0, Infinity)) }
+					);
+					
+					var _newObject = _object(_allChildNodes);
+					
+					return _selector ? _newObject.filter(_selector) : _newObject;
+					/*?
+						Instance Methods
+							contents
+								Retrieves the children of each DOM node in the matched set of DOM nodes, including text and comment nodes, filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.contents();
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.contents(selector);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
 					*/
 				};
 				
