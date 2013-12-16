@@ -25,7 +25,7 @@
 		In a Nutshell
 			The methods of the =Uize.Data.Flatten= module make it easy to represent a hierarchical, tree structure or graph object using a single level hash / dictionary / lookup object.
 
-			When flattening a hierarchical object to a hash structure using the =Uize.Data.Flatten.flatten= method, information about the original structure of object being flattened is retained in the key names of the flattened object by using the dereferencing paths to the leaf nodes to form the key names. This has the advantage of providing a natural way to derive keys for the flattened object that don't collide for different leaf nodes, as well as retaining information necessary to reconstitute the original source object from a flattened object using the companion =Uize.Data.Flatten.unflatten= method.
+			When flattening a hierarchical object to a hash structure using the =Uize.Data.Flatten.flatten= method, information about the original structure of object being flattened is retained in the key names of the flattened object by using the dereferencing path to the leaf nodes to form the key names. This has the advantage of providing a natural way to derive keys for the flattened object that don't collide for different leaf nodes, as well as retaining information necessary to reconstitute the original source object from a flattened object using the companion =Uize.Data.Flatten.unflatten= method.
 
 			EXAMPLE
 			......................................................................................
@@ -47,6 +47,8 @@
 			});
 			......................................................................................
 
+			In the above example, we are flattening a hierarchical object that contains a (somewhat unscientific) classification of animals. The =Uize.Data.Flatten.flatten= method creates the resulting hash / lookup object that contains only properties for the leaf node properties of the hierarchical object, and where the key names represent the dereferencing
+
 			RESULT
 			...................................................................................................
 			{
@@ -66,14 +68,17 @@
 				.
 
 			Advanced Features
-				Including Non-leaf Nodes
-					.
-
 				Using Custom Path Delimiter Strings
 					.
 
-				Using Custom Key Serialization and Parsing
+				Using Custom Key Serialization and Parsing Functions
 					.
+
+				Including Non-leaf Nodes
+					.
+
+					The Definition of Leaf Nodes
+						.
 */
 
 Uize.module ({
@@ -126,6 +131,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Data.Flatten.flatten
+							Flattens the specified source object to produce a one-level-deep hash / lookup / dictionary object, where the key names of this hash object are generated from the path information of the corresponding properties in the source object.
 
 							DIFFERENT USAGES
 
@@ -152,30 +158,169 @@ Uize.module ({
 							................................................................
 
 							Flatten a Source Object, Using the Default Path-to-key Transformer
+								In the most basic usage, a hierarchical object can be flattened using the default "." (period) character as a path delimiter when generating key names for the flattened object.
+
 								SYNTAX
 								.....................................................
 								flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ);
 								.....................................................
 
+								EXAMPLE
+								............................
+								Uize.Data.Flatten.flatten ({
+									foo:{
+										bar:{
+											baz:{
+												qux:1,
+												hello:'world'
+											}
+										}
+									}
+								});
+								............................
+
+								RESULT
+								..............................
+								{
+									'foo.bar.baz.qux':1,
+									'foo.bar.baz.hello':'world'
+								}
+								..............................
+
+								NOTES
+								- see how to `unflatten a source object, using the default key-to-path transformer`
+
 							Flatten a Source Object, Specifying a Path Delimiter String
+								In cases where the default "." (period) character path delimiter is not suitable, a custom path delimiter string can be specified using the optional =pathDelimiterSTR= second argument.
+
 								SYNTAX
 								......................................................................
 								flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ,pathDelimiterSTR);
 								......................................................................
 
+								EXAMPLE
+								............................
+								Uize.Data.Flatten.flatten (
+									{
+										foo:{
+											bar:{
+												baz:{
+													qux:1,
+													hello:'world'
+												}
+											}
+										}
+									},
+									'/'
+								);
+								............................
+
+								RESULT
+								..............................
+								{
+									'foo/bar/baz/qux':1,
+									'foo/bar/baz/hello':'world'
+								}
+								..............................
+
+								NOTES
+								- see how to `unflatten a source object, specifying a path delimiter string`
+
 							Flatten a Source Object, Specifying a Path-to-key Transformer Function
+								In cases where a simple string path delimiter is not adequate, a custom path-to-key transformer function can be specified using the optional =pathDelimiterSTR= second argument in place of the =pathDelimiterSTR= argument.
+
 								SYNTAX
 								..............................................................................
 								flattenedOBJ = Uize.Data.Flatten.flatten (sourceOBJ,pathToKeyTransformerFUNC);
 								..............................................................................
 
+								EXAMPLE
+								........................................................
+								Uize.Data.Flatten.flatten (
+									{
+										'foo.bar':{
+											'baz.qux':1
+										}
+									},
+									function (_path) {return Uize.Json.to (_path,'mini')}
+								);
+								........................................................
+
+								In the above example, we are specifying a custom path-to-key transformer function that is using the =Uize.Json.to= method to serialize the path array to a JSON object, which produces the following output...
+
+								RESULT
+								................................
+								{
+									'[\'foo.bar\',\'baz.qux\']':1
+								}
+								................................
+
+								This is a useful approach for dealing with the possibility that property names in the unflattened source object may contain the very string delimiter that you decide to specify for the =pathDelimiterSTR= parameter. In this case, the property names contain periods, which conflicts with the default delimiter used by the =Uize.Data.Flatten.flatten= method. If we just went ahead and used the default behavior in this case, we would generate a flattened object that couldn't be converted back to the original object using the =Uize.Data.Flatten.unflatten= method, since we would have lost important path information.
+
+								Although the key names produced for the flattened object, when using a JSON serialization of the path array, are clumsier and less elegant, this is a robust approach to generating unique keys that can support any arbitrary characters in the names of properties in the source object.
+
+								NOTES
+								- see how to `unflatten a source object, specifying a key-to-path transformer function`
+
 							Flatten a Source Object, Including Non-leaf Nodes in the Flattened Object
+								In special cases, leaf nodes of the source object can be included in the flattened object by specifying the value =true= for the optional =includeNonLeafNodesBOOL= third argument.
+
 								SYNTAX
 								................................................................
 								flattenedOBJ = Uize.Data.Flatten.flatten (
 									sourceOBJ,pathToKeyTransformerANYTYPE,includeNonLeafNodesBOOL
 								);
 								................................................................
+
+								By default, the =Uize.Data.Flatten.flatten= method only includes leaf nodes in the flattened object that it produces, since the leaf nodes are all that are needed in order to reconstitute the original source object. Leaf nodes are the deepest properties in the source object and are defined as properties whose values are of any type other than plain object (see `The Definition of Leaf Nodes` for more details).
+
+								There are some special circumstances in which it is useful to include non-leaf nodes. Consider the following example...
+
+								EXAMPLE
+								............................................................................................
+								Uize.keys (
+									Uize.Data.Flatten.flatten (
+										{
+											animals:{
+												pets:{
+													dogs:{
+														smallBreeds:['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+														largeBreeds:['Afghan','Great Dane','Irish Wolfhound','St. Bernard']
+													},
+													cats:['Persian','Siamese','Hairless']
+												},
+												wildAnimals:{
+													dogs:['Coyote','Dingo'],
+													cats:['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+													other:['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+												}
+											}
+										},
+										'.',
+										true
+									)
+								);
+								............................................................................................
+
+								In the above example, we are creating an array that contains all the dereferencing paths for all nodes from a hierarchical object that contains a classification of animals.
+
+								By specifying the value =true= for the optional =includeNonLeafNodesBOOL= parameter, the =Uize.Data.Flatten.flatten= method returns an object with additional keys for the =animals=, =animals.pets=, =animals.pets.dogs=, and =animals.wildAnimals= non-leaf nodes of the source object. We then use the =Uize.keys= method to obtain an array of just the keys from the flattened object, and this gives us the full set of dereferencing paths for all nodes of the original source object, producing the following array result...
+
+								RESULT
+								...................................
+								[
+									'animals',
+									'animals.pets',
+									'animals.pets.dogs',
+									'animals.pets.dogs.smallBreeds',
+									'animals.pets.dogs.largeBreeds',
+									'animals.pets.cats',
+									'animals.wildAnimals',
+									'animals.wildAnimals.dogs',
+									'animals.wildAnimals.cats',
+									'animals.wildAnimals.other'
+								}
+								...................................
 
 							NOTES
 							- compare to the companion =Uize.Data.Flatten.unflatten= static method
@@ -229,22 +374,107 @@ Uize.module ({
 							...................................................................................
 
 							Unflatten a Source Object, Using the Default Key-to-path Transformer
+								In the most basic usage, an object that was flattened, using the "." (period) character as a path delimiter when generating key names for the flattened object, can unflattened by specifying just the flattened object using the =sourceOBJ= argument.
+
 								SYNTAX
-								.....................................................
+								..........................................................
 								hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ);
-								.....................................................
+								..........................................................
+
+								EXAMPLE
+								..............................
+								Uize.Data.Flatten.unflatten ({
+									'foo.bar.baz.qux':1,
+									'foo.bar.baz.hello':'world'
+								});
+								..............................
+
+								RESULT
+								.........................
+								{
+									foo:{
+										bar:{
+											baz:{
+												qux:1,
+												hello:'world'
+											}
+										}
+									}
+								}
+								.........................
+
+								NOTES
+								- see how to `flatten a source object, using the default path-to-key transformer`
 
 							Unflatten a Source Object, Specifying a Path Delimiter String
+								In cases where a flattened object was created using a path delimiter string other than the default "." (period) character, such a flattened object can be unflattened by specifying the custom path delimiter string using the optional =pathDelimiterSTR= second argument.
+
 								SYNTAX
-								......................................................................
+								...........................................................................
 								hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ,pathDelimiterSTR);
-								......................................................................
+								...........................................................................
+
+								EXAMPLE
+								.................................
+								Uize.Data.Flatten.unflatten (
+									{
+										'foo/bar/baz/qux':1,
+										'foo/bar/baz/hello':'world'
+									}
+									'/'
+								);
+								.................................
+
+								RESULT
+								.........................
+								{
+									foo:{
+										bar:{
+											baz:{
+												qux:1,
+												hello:'world'
+											}
+										}
+									}
+								}
+								.........................
+
+								NOTES
+								- see how to `flatten a source object, specifying a path delimiter string`
 
 							Unflatten a Source Object, Specifying a Key-to-path Transformer Function
+								In cases where a flattened object was created using a path-to-key transformer function, such a flattened object can be unflattened by specifying a key-to-path transformer function, using the optional =keyToPathTransformerFUNC= second argument, that has the reverse effect of the path-to-key transformer function used when creating the flattened object.
+
 								SYNTAX
-								..............................................................................
+								...................................................................................
 								hierarchicalOBJ = Uize.Data.Flatten.unflatten (sourceOBJ,keyToPathTransformerFUNC);
-								..............................................................................
+								...................................................................................
+
+								EXAMPLE
+								.................................................
+								Uize.Data.Flatten.unflatten (
+									{
+										'[\'foo.bar\',\'baz.qux\']':1
+									},
+									function (_key) {return Uize.Json.from (_key)}
+								);
+								.................................................
+
+								In the above example, we are unflattening an object that was flattened by specifying a custom path-to-key transformer function that JSON serialized the property paths of the source object in order to generate the keys of the flattened object. Because of this, in order to unflatten this object we need to specify a key-to-path transformer function that has the reverse effect. The function that we have specified performs a JSON parse of a key using the =Uize.Json.from= method in order to produce a path array.
+
+								The above code produces the following output...
+
+								RESULT
+								.................
+								{
+									'foo.bar':{
+										'baz.qux':1
+									}
+								}
+								.................
+
+								NOTES
+								- see how to `flatten a source object, specifying a path-to-key transformer function`
 
 							NOTES
 							- compare to the companion =Uize.Data.Flatten.flatten= static method
