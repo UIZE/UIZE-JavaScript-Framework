@@ -65,11 +65,105 @@
 				.
 
 			Unflattening a Flattened Object
-				.
+				The =Uize.Data.Flatten= module provides the =Uize.Data.Flatten.unflatten= method to allow the flattening performed by the =Uize.Data.Flatten.flatten= method to be reversed.
+
+				Using the =Uize.Data.Flatten.unflatten= method, a flattened object that was generated from a source object using the =Uize.Data.Flatten.flatten= method can be unflattened to produce an object with the contents of the original source object. Consider the following example...
+
+				EXAMPLE
+				...................................................................................................
+				Uize.Data.Flatten.unflatten ({
+					'animals.pets.dogs.smallBreeds':['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+					'animals.pets.dogs.largeBreeds':['Afghan','Great Dane','Irish Wolfhound','St. Bernard'],
+					'animals.pets.cats':['Persian','Siamese','Hairless'],
+					'animals.wildAnimals.dogs':['Coyote','Dingo'],
+					'animals.wildAnimals.cats':['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+					'animals.wildAnimals.other':['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+				});
+				...................................................................................................
+
+				In the above example, we are unflattening an object that contains a classification of animals, where the hierarchical classification information has been flattened into the key names using the =Uize.Data.Flatten.flatten= method with its default behavior of using the "." (period) character as a delimiter when generating key names from path segments. From the above statement, we get the following result...
+
+				RESULT
+				......................................................................................
+				{
+					animals:{
+						pets:{
+							dogs:{
+								smallBreeds:['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+								largeBreeds:['Afghan','Great Dane','Irish Wolfhound','St. Bernard']
+							},
+							cats:['Persian','Siamese','Hairless']
+						},
+						wildAnimals:{
+							dogs:['Coyote','Dingo'],
+							cats:['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+							other:['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+						}
+					}
+				}
+				......................................................................................
 
 			Advanced Features
+				The =Uize.Data.Flatten= module offers a few advanced features to address less common situations.
+
 				Using Custom Path Delimiter Strings
-					.
+					In cases where the default "." (period) character path delimiter is not suitable, the =Uize.Data.Flatten= module allows a custom path delimiter string to be specified when flattening and unflattening objects.
+
+					EXAMPLE
+					............................
+					Uize.Data.Flatten.flatten (
+						{
+							foo:{
+								bar:{
+									baz:{
+										qux:1,
+										hello:'world'
+									}
+								}
+							}
+						},
+						'/'
+					);
+					............................
+
+					In the above example, we are flattening the source object using the "/" (forward slash) character as a path delimiter, which produces the following result...
+
+					RESULT
+					..............................
+					{
+						'foo/bar/baz/qux':1,
+						'foo/bar/baz/hello':'world'
+					}
+					..............................
+
+					Now, because the resulting flattened object was produced using a custom path delimiter string, that same path delimiter string needs to be specified when later unflattening the flattened object, as in...
+
+					EXAMPLE
+					.................................
+					Uize.Data.Flatten.unflatten (
+						{
+							'foo/bar/baz/qux':1,
+							'foo/bar/baz/hello':'world'
+						},
+						'/'
+					);
+					.................................
+
+					RESULT
+					.........................
+					{
+						foo:{
+							bar:{
+								baz:{
+									qux:1,
+									hello:'world'
+								}
+							}
+						}
+					}
+					.........................
+
+					It's worth pointing out that if we didn't specify the custom path delimiter string that was originally used to flatten the object, the flattened object would not get unflattened correctly and would, in our example, just return an identical copy of the flattened object. The =Uize.Data.Flatten.unflatten= method would try to use the default "." (period) path delimiter string and wouldn't see any periods in the keys names and so wouldn't reconstruct the hierarchical structure of the original object.
 
 				Using Custom Key Serialization and Parsing Functions
 					.
