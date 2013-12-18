@@ -76,23 +76,26 @@ Uize.module ({
 					_preset = _params.preset,
 					_searchParams = ((_params.moduleConfigs || {}) ['Uize.Build.Search']).presets [_preset],
 					_matcher = _searchParams.matcher,
-					_pathMatcher = _searchParams.pathMatcher,
+					_pathMatcher = _resolveMatcher (_searchParams.pathMatcher),
+					_pathFilter = _resolveMatcher (_searchParams.pathFilter || Uize.returnFalse),
 					_contextLines = Uize.toNumber (_params.contextLines,5),
 					_outputChunks = [],
 					_currentFolderPath,
-					_fileSystem = Uize.Services.FileSystem.singleton ()
+					_fileSystem = Uize.Services.FileSystem.singleton (),
+					_totalFilesWithMatches = 0,
+					_totalMatches = 0
 				;
 				_matcher = new RegExp (
 					_matcher.source,
 					'g' + (_matcher.ignoreCase ? 'i' : '') + (_matcher.multiline ? 'm' : '')
 				);
-				_pathMatcher = _resolveMatcher (_pathMatcher);
 				Uize.Build.Util.buildFiles ({
 					targetFolderPathCreator:function (_folderPath) {
 						return _currentFolderPath = _folderPath;
 					},
 					targetFilenameCreator:function (_sourceFileName) {
-						return _pathMatcher (_currentFolderPath + '/' + _sourceFileName) ? _sourceFileName : null;
+						var _sourceFilePath = _currentFolderPath + '/' + _sourceFileName;
+						return _pathMatcher (_sourceFilePath) && !_pathFilter (_sourceFilePath) ? _sourceFileName : null;
 					},
 					fileBuilder:function (_sourceFileName,_sourceFileText) {
 						_matcher.lastIndex = 0;
@@ -108,6 +111,8 @@ Uize.module ({
 							});
 						}
 						if (_matches) {
+							_totalFilesWithMatches++;
+							_totalMatches += _matches.length;
 							var
 								_sourceFileLines = Uize.Str.Lines.split (_sourceFileText),
 								_sourceFileLinesDeTabbed = []
@@ -115,7 +120,7 @@ Uize.module ({
 							_outputChunks.push (
 								_currentFolderPath + '/' + _sourceFileName + '\n' +
 								Uize.Str.Lines.indent (
-									'TOTAL MATCHES: ' + _matches.length + '\n' +
+									'MATCHES IN THIS FILE: ' + _matches.length + '\n' +
 									'\n' +
 									Uize.map (
 										_matches,
@@ -192,6 +197,10 @@ Uize.module ({
 					rootFolderPath:_params.rootFolderPath || _params.sourcePath,
 					logFilePath:null
 				});
+				_outputChunks.unshift (
+					'SUMMARY: ' + _totalMatches + ' matches in ' + _totalFilesWithMatches + ' files',
+					''
+				);
 				var _output = _outputChunks.join ('\n');
 				_fileSystem.writeFile ({path:'logs/search-' + _preset + '.log',contents:_output});
 				console.log (_output);
