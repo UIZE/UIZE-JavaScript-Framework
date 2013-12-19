@@ -163,10 +163,73 @@
 					}
 					.........................
 
-					It's worth pointing out that if we didn't specify the custom path delimiter string that was originally used to flatten the object, the flattened object would not get unflattened correctly and would, in our example, just return an identical copy of the flattened object. The =Uize.Data.Flatten.unflatten= method would try to use the default "." (period) path delimiter string and wouldn't see any periods in the keys names and so wouldn't reconstruct the hierarchical structure of the original object.
+					It's worth pointing out that if we didn't specify the custom path delimiter string that was originally used to flatten the object, the flattened object would not get unflattened correctly and would, in our example, just return an identical copy of the flattened object. The =Uize.Data.Flatten.unflatten= method would try to use the default "." (period) path delimiter string and wouldn't see any periods in the key names and so wouldn't reconstruct the hierarchical structure of the original object.
 
 				Using Custom Key Serialization and Parsing Functions
-					.
+					In cases where a simple string path delimiter is not adequate, the =Uize.Data.Flatten= module allows a custom path-to-key transformer function to be specified when flattening and unflattening objects.
+
+					EXAMPLE
+					........................................................
+					Uize.Data.Flatten.flatten (
+						{
+							'foo.foo':{
+								'bar:bar':{
+									'baz|baz':{
+										'"qux"':1,
+										'\'hello\'':'world'
+									}
+								}
+							}
+						},
+						function (_path) {return Uize.Json.to (_path,'mini')}
+					);
+					........................................................
+
+					In the above example, the hierarchical object that we need to flatten contains all sorts of crazy characters in the names of properties. We can't use the default "." (period) character because there is property named "foo.foo". We can't specify a custom delimiter string of ":" or "|", nor of single or double quotes, because there are properties that contain those characters in their names. To resolve this dilemma, we instead specify a custom path-to-key transformer function that is using the =Uize.Json.to= method to serialize the path array to a JSON object, which produces the following output...
+
+					RESULT
+					....................................................................
+					{
+						'[\'foo.foo\',\'bar:bar\',\'baz|baz\',\'"qux"\']':1,
+						'[\'foo.foo\',\'bar:bar\',\'baz|baz\',\'\\\'hello\\\'\']':'world'
+					}
+					....................................................................
+
+					Using a custom path-to-key transformer function is a useful approach when you have no way of knowing or controlling the types of characters that may be contained in the names of properties in the hierarchical object you are trying to flatten.
+
+					If there's no way of knowing what character (or series of characters) you can count upon as a reliable delimiter string, then the only truly robust way to serialize the property paths in the hierarchical object to keys in the flattened object is to serialize the paths to JSON format (or some other serialization that can support any arbitrary characters). Although the key names produced for the flattened object with such an approach are clumsier and less elegant, this is a robust approach to generating unique keys for the flattened object.
+
+					To Unflatten, Specify a Parser / De-serializer
+						Whereas, when `using custom path delimiter strings` to flatten and unflatten objects one only needs to make sure to use the same delimiter string in both directions, using the function approach requires one to specify a path-to-key serializer when flattening and a key-to-path parser / de-serializer when unflattening.
+
+						So, for example, if we used a JSON serializer as the path-to-key transformer function when flattening a hierarchical object using the =Uize.Data.Flatten.flatten= method, then we would need to use a JSON parser as the key-to-path transformer function when unflattening the flattened object using the =Uize.Data.Flatten.unflatten= method.
+
+						Consider the following example...
+
+						EXAMPLE
+						.......................................................................
+						Uize.Data.Flatten.unflatten (
+							{
+								'[\'foo.foo\',\'bar:bar\',\'baz|baz\',\'"qux"\']':1,
+								'[\'foo.foo\',\'bar:bar\',\'baz|baz\',\'\\\'hello\\\'\']':'world'
+							},
+							function (_path) {return Uize.Json.from (_path)}
+						);
+						.......................................................................
+
+						RESULT
+						...............................
+						{
+							'foo.foo':{
+								'bar:bar':{
+									'baz|baz':{
+										'"qux"':1,
+										'\'hello\'':'world'
+									}
+								}
+							}
+						},
+						...............................
 
 				Including Non-leaf Nodes
 					.
