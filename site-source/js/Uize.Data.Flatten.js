@@ -61,7 +61,7 @@
 			}
 			...................................................................................................
 
-			A Real World Example
+			### A Real World Example
 				.
 
 			Unflattening a Flattened Object
@@ -231,11 +231,22 @@
 						},
 						...............................
 
-				Including Non-leaf Nodes
+				### Nodes Versus Values
 					.
 
-					The Definition of Leaf Nodes
-						.
+					Leaf Nodes
+						By default, the =Uize.Data.Flatten.flatten= method includes only leaf nodes of the hierarchical source object when producing the flattened version of that object.
+
+						This is a desirable default behavior for a couple of reasons..
+
+						+.
+						+.
+
+						Definition of Leaf Nodes
+							.
+
+						Including Non-leaf Nodes
+							.
 */
 
 Uize.module ({
