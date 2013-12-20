@@ -49,7 +49,6 @@ Uize.module ({
 	name:'Uize.Build.FolderOrganizeJsModules',
 	required:[
 		'Uize.Services.FileSystem',
-		'Uize.Build.Util',
 		'Uize.Str.Has'
 	],
 	builder:function () {
@@ -60,22 +59,26 @@ Uize.module ({
 				var
 					_modulesFolderPath = _params.sourcePath + '/' + _params.modulesFolder,
 					_fileSystem = Uize.Services.FileSystem.singleton (),
-					_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp,
-					_namespacePrefix = _params.namespace + '.'
+					_fileExtensionRegExp = /(\.[a-z]+)+$/,
+					_namespace = _params.namespace,
+					_namespacePrefix = _namespace + '.'
 				;
 				_fileSystem.getFiles ({
 					path:_modulesFolderPath,
 					pathMatcher:function (_path) {
-						return _jsModuleExtensionRegExp.test (_path) && Uize.Str.Has.hasPrefix (_path,_namespacePrefix);
+						return Uize.Str.Has.hasPrefix (_path,_namespacePrefix);
 					},
 					pathTransformer:function (_path) {
 						_fileSystem.copyFile ({
 							path:_modulesFolderPath + '/' + _path,
 							targetPath:
 								_modulesFolderPath + '/' +
-								_path.replace (_jsModuleExtensionRegExp,'').replace (/\./g,'/') +
-								_path.match (_jsModuleExtensionRegExp) [1]
-
+								_namespace + '/' +
+								_path
+									.slice (_namespace.length + 1)
+									.replace (_fileExtensionRegExp,'')
+									.replace (/[\._]/g,'/') +
+								_path.match (_fileExtensionRegExp) [1]
 						});
 						_fileSystem.deleteFile ({path:_modulesFolderPath + '/' + _path});
 					}
