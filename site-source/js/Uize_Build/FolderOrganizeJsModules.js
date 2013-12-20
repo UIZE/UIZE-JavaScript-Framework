@@ -59,7 +59,7 @@ Uize.module ({
 				var
 					_modulesFolderPath = _params.sourcePath + '/' + _params.modulesFolder,
 					_fileSystem = Uize.Services.FileSystem.singleton (),
-					_fileExtensionRegExp = /(\.[a-z]+)+$/,
+					_fileExtensionRegExp = /((?:\.[a-z]+)+)$/,
 					_namespace = _params.namespace,
 					_namespacePrefix = _namespace + '.',
 					_namespacePrefixAlreadyFolderOrganized = _namespacePrefix.replace (/\./g,'_')
