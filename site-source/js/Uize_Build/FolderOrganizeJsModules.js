@@ -61,12 +61,16 @@ Uize.module ({
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_fileExtensionRegExp = /(\.[a-z]+)+$/,
 					_namespace = _params.namespace,
-					_namespacePrefix = _namespace + '.'
+					_namespacePrefix = _namespace + '.',
+					_namespacePrefixAlreadyFolderOrganized = _namespacePrefix.replace (/\./g,'_')
 				;
 				_fileSystem.getFiles ({
 					path:_modulesFolderPath,
 					pathMatcher:function (_path) {
-						return Uize.Str.Has.hasPrefix (_path,_namespacePrefix);
+						return (
+							Uize.Str.Has.hasPrefix (_path,_namespacePrefix) ||
+							Uize.Str.Has.hasPrefix (_path,_namespacePrefixAlreadyFolderOrganized)
+						);
 					},
 					pathTransformer:function (_path) {
 						_fileSystem.copyFile ({
