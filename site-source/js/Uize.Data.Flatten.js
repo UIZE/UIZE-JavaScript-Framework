@@ -13,7 +13,7 @@
 	type: Package
 	importance: 1
 	codeCompleteness: 100
-	docCompleteness: 2
+	docCompleteness: 90
 */
 
 /*?
@@ -62,7 +62,7 @@
 			...................................................................................................
 
 			### A Real World Example
-				.
+				To illustrate the value of the =Uize.Data.Flatten= module, let's consider a real world example.
 
 			Unflattening a Flattened Object
 				The =Uize.Data.Flatten= module provides the =Uize.Data.Flatten.unflatten= method to allow the flattening performed by the =Uize.Data.Flatten.flatten= method to be reversed.
@@ -231,22 +231,70 @@
 						},
 						...............................
 
-				### Nodes Versus Values
-					.
+				Leaf Nodes
+					By default, the =Uize.Data.Flatten.flatten= method includes only the leaf nodes of the hierarchical source object when producing the flattened version of that object.
 
-					Leaf Nodes
-						By default, the =Uize.Data.Flatten.flatten= method includes only leaf nodes of the hierarchical source object when producing the flattened version of that object.
+					This is because the leaf nodes are all that are needed in order to re-constitute the original hierarchical source object from a flattened version of it, so including non-leaf nodes is redundant in this regard.
 
-						This is a desirable default behavior for a couple of reasons..
+					The Definition of Leaf Nodes
+						Technically, leaf nodes are defined as properties whose values are of any type other than plain object.
 
-						+.
-						+.
+						This means that properties with the following types of values would be considered leaf nodes...
 
-						Definition of Leaf Nodes
-							.
+						- =arrays=
+						- =functions=
+						- =regular expressions=
+						- =instances= (of any object type other than JavaScript's built-in =Object= object)
+						- =strings=
+						- =numbers= (including special number type values like =NaN=, =Infinity=, and =-Infinity=)
+						- =booleans=
+						- =undefined=
+						- =null=
 
-						Including Non-leaf Nodes
-							.
+						Particularly as it relates to object type values (such as regular expressions, function references, instances of =Uize.Class= subclasses, etc.), this means that these values will not be traversed deeper - even if they contain custom properties. Any object value that is not a plain object (ie. an instance of =Object=) will be treated as a leaf node value and not as a structure defining node.
+
+					Including Non-leaf Nodes
+						Non-leaf nodes of the source object can be included in the flattened object produced by the =Uize.Data.Flatten.flatten= method, by specifying the value =true= for the method's optional =includeNonLeafNodesBOOL= third argument.
+
+						Consider the following example...
+
+						EXAMPLE
+						...............................................................
+						Uize.Data.Flatten.flatten ({foo:{bar:{baz:{qux:1}}}},'.',true);
+						...............................................................
+
+						In the above example, if we didn't specify the value =true= for the =includeNonLeafNodesBOOL= argument, we would get the result ={'foo.bar.baz.qux':1}= since there is only this one leaf node in the source object. However, when we specify =true= for =includeNonLeafNodesBOOL=, then we get the following result...
+
+						RESULT
+						.............................
+						{
+							'foo':{bar:{baz:{qux:1}}},
+							'foo.bar':{baz:{qux:1}},
+							'foo.bar.baz':{qux:1},
+							'foo.bar.baz.qux':1
+						}
+						.............................
+
+						It should be pointed out that the various object values in the above object would contain shared references. So, for example, the value of the expression =result ['foo.bar.baz']= would be a reference to the same object as the expression =result ['foo.bar'].baz= or the expression =result.foo.bar.baz= - the ={qux:1}= object.
+
+						Now, if you use the =Uize.keys= method on the above result, you get an array with dereferencing paths for all possible nodes in the hierarchical source object, as seen in the following example...
+
+						EXAMPLE
+						.................................................................
+						Uize.keys (
+							Uize.Data.Flatten.flatten ({foo:{bar:{baz:{qux:1}}}},'.',true)
+						);
+						.................................................................
+
+						RESULT
+						....................
+						[
+							'foo',
+							'foo.bar',
+							'foo.bar.baz',
+							'foo.bar.baz.qux'
+						]
+						....................
 */
 
 Uize.module ({
@@ -431,7 +479,7 @@ Uize.module ({
 								- see how to `unflatten a source object, specifying a key-to-path transformer function`
 
 							Flatten a Source Object, Including Non-leaf Nodes in the Flattened Object
-								In special cases, leaf nodes of the source object can be included in the flattened object by specifying the value =true= for the optional =includeNonLeafNodesBOOL= third argument.
+								In special cases, non-leaf nodes of the source object can be included in the flattened object by specifying the value =true= for the optional =includeNonLeafNodesBOOL= third argument.
 
 								SYNTAX
 								................................................................
@@ -440,7 +488,7 @@ Uize.module ({
 								);
 								................................................................
 
-								By default, the =Uize.Data.Flatten.flatten= method only includes leaf nodes in the flattened object that it produces, since the leaf nodes are all that are needed in order to reconstitute the original source object. Leaf nodes are the deepest properties in the source object and are defined as properties whose values are of any type other than plain object (see `The Definition of Leaf Nodes` for more details).
+								By default, the =Uize.Data.Flatten.flatten= method only includes leaf nodes in the flattened object that it produces, since the leaf nodes are all that are needed in order to reconstitute the original source object. Leaf nodes are the deepest properties in the source object (see `The Definition of Leaf Nodes` for a more technical definition).
 
 								There are some special circumstances in which it is useful to include non-leaf nodes. Consider the following example...
 
