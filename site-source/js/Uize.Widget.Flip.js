@@ -45,55 +45,55 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.changeContent = function (_content, _direction) {
-				var _this = this;
+				var m = this;
 
-				if (_content != _this._newContent) {
-					_this._newContent = _content;
-					_this._phase = 'out';
-					_this.set ({_direction:_direction});
+				if (_content != m._newContent) {
+					m._newContent = _content;
+					m._phase = 'out';
+					m.set ({_direction:_direction});
 
-					_this.fade.start ({
+					m.fade.start ({
 						startValue: 0,
-						endValue:_this._direction == 'down' ? 0-_this._offset : _this._offset-0,
+						endValue:m._direction == 'down' ? 0-m._offset : m._offset-0,
 						curve:Uize.Fade.celeration (1,0)
 					});
 				}
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					var _contentNode = _this.getNode();
+				var m = this;
+				if (!m.isWired) {
+					var _contentNode = m.getNode();
 
-					_this.fade.wire ({
+					m.fade.wire ({
 						'Changed.value':
 							function () {
-								_this.setNodeStyle ('',{top:Math.round (_this.fade)})
+								m.setNodeStyle ('',{top:Math.round (m.fade)})
 							},
 						Done:
 							function () {
-								if( _this._phase == 'out' ) {
-									_this.setNodeInnerHtml (_contentNode,_this._newContent);
-									_this.fade.set ({
-										startValue:_this._direction == 'down' ? _this._offset-0 : 0-_this._offset,
+								if( m._phase == 'out' ) {
+									m.setNodeInnerHtml (_contentNode,m._newContent);
+									m.fade.set ({
+										startValue:m._direction == 'down' ? m._offset-0 : 0-m._offset,
 										endValue:0,
 										curve:Uize.Fade.celeration (0,1)
 									});
-									_this._phase = 'in';
-									_this.fade.start ();
-									_this.fire('Content Changed');
-								} else if( _this._phase == 'in' ) {
-									_this._phase = 'idle';
-									_this.fire('Updated');
+									m._phase = 'in';
+									m.fade.start ();
+									m.fire('Content Changed');
+								} else if( m._phase == 'in' ) {
+									m._phase = 'idle';
+									m.fire('Updated');
 								}
 							}
 					});
 
 					if (_contentNode)
-						_this._newContent = _contentNode.innerHTML
+						m._newContent = _contentNode.innerHTML
 					;
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

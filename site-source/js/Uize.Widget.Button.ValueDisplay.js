@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Button.ValueDisplay= widget provides the base functionality for button widget that wants to display details about a value.
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({

@@ -1,0 +1,23 @@
+This is a TO DO document for the =Uize.Web.xDom= module.
+
+Proposed New Methods
+	clone
+		Deep clone node(s) optionally with wired events
+		
+		NOTES
+		- clone([includeEvents])
+		- Add =Uize.Node.clone()=?
+		
+	unwrap
+		Remove parents of set of elements from DOM, leaving the set of elements in their place
+		
+		NOTES
+		- unwrap()
+		- see: [[http://benalman.com/projects/jquery-unwrap-plugin/]]
+		
+	wrap
+		Wrap an HTML structure around each element in the set of elements
+		
+		NOTES
+		- wrap(htmlSTR)
+		- wrap(htmlFUNC) -> wrap(htmFUNC(nodex, index))

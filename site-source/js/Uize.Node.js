@@ -1239,7 +1239,7 @@ Uize.module ({
 				isNode:_isNode = function (_node) {
 					return !!(
 						_node && typeof _node == _typeObject &&
-						(_node.getAttribute || _node.documentElement || _node.self == _node)
+						(_node.nodeType || _node.getAttribute || _node.documentElement || _node.self == _node)
 					);
 					/*?
 						Static Methods

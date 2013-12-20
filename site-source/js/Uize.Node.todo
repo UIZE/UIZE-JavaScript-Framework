@@ -225,4 +225,64 @@ Uize.Node.injectHtml
 	- setSize
 - Uize.Node.wire to support array for _eventName parameters (ie. change to just _event)
 
-
+Refactoring Suggestions
+	=Uize.Node= has become sort of a catch-all for any DOM-related method and as such has grown rather large. =Uize.Widget= doesn't need all of the methods of =Uize.Node=, yet it has to pull everything in. So the proposal is to create a new DOM-specific namespace and parcel out =Uize.Node= to smaller modules.
+	
+	Uize.Dom
+		A suggested name for the new DOM-specific namespace.
+		
+	Uize.Dom.Common
+		Essentially the commonly-used methods (majority of which are used by =Uize.Widget=)
+		
+		Methods:
+		- =display=
+		- =doForAll=
+		- =find=
+		- =getById=
+		- =getInerHtml= (doesn't exist, but seems like it should for parity)
+		- =getStyle=
+		- =getValue=
+		- =injectHtml=
+		- =isNode=
+		- =isOnNodeTree= (used by =Uize.Node.find= and other methods)
+		- =joinIdPrefixAndNodeId=
+		- =remove=
+		- =setClipRect= (there is a =setNodeClipRect= method in =Uize.Widget=, which is only used by 3 widgets, so may not be worthwhile to port or should exists elsewhere)
+		- =setInnerHtml=
+		- =setOpacity=
+		- =setProperties=
+		- =setStyle=
+		- =setValue=
+		- =show=
+		- =unwire=
+		- =unwireEventsByOwnerId= (used by =Uize.Node.unwire=)
+		- wire
+		
+		Static Properties:
+		- =ieMajorVersion=
+		- =isIe=
+		- =isMozilla=
+		- =isSfari=
+		
+		Methods that aren't used by =Uize.Widget=, but don't have a home:
+		- =getDocumentScrollElement=
+		- =getText=
+		- =showClickable=
+		
+	Uize.Dom.Pos
+		Essentially all of the positioning stuff
+		
+		Methods
+		- =centerInWindow=
+		- =getCoords=
+		- =getDimensions=
+		- =getEventAbsPos=
+		- =setAbsPos=
+		- =setAbsPosAdjacentTo=
+		- =setCoords=
+		
+	Uize.Math.LogicalPos
+		Added to this existing module
+		
+		Methods
+		- =doRectanglesOverlap=

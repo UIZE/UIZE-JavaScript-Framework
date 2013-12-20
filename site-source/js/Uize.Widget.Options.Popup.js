@@ -35,8 +35,8 @@ Uize.module ({
 					null,
 					function () {
 						var
-							_this = this,
-							_popupPalette = _this._popupPalette = _this.addChild (
+							m = this,
+							_popupPalette = m._popupPalette = m.addChild (
 								'popupPalette',Uize.Widget.PopupPalette,{idPrefixConstruction:'same as parent'}
 							)
 						;
@@ -44,12 +44,12 @@ Uize.module ({
 						_popupPalette.wire (
 							'Palette Shown',
 							function () {
-								if (_this.get ('valueNo') > -1) {
+								if (m.get ('valueNo') > -1) {
 									/* IMPORTANT:
 										- code can be optimized, and perhaps shouldn't always set scrollTop (depends on viewport dims?)
 										- code makes assumption about HTML nodes used in implementation of option buttons
 									*/
-									var _selectedOptionNode = _this._getSelectedOptionNode ();
+									var _selectedOptionNode = m._getSelectedOptionNode ();
 									_selectedOptionNode &&
 										_popupPalette.setNodeProperties (
 											'Palette',
@@ -63,7 +63,7 @@ Uize.module ({
 							}
 						);
 
-						_this.wire('Changed.value', function () { _this.updateUi() });
+						m.wire('Changed.value', function () { m.updateUi() });
 					}
 				),
 				_classPrototype = _class.prototype
@@ -77,14 +77,14 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				if (_this.isWired) {
-					_superclass.doMy (_this,'updateUi');
-					_this._popupPalette.updateUi ();
-					var _selector = _this._popupPalette.children.selector;
+				var m = this;
+				if (m.isWired) {
+					_superclass.doMy (m,'updateUi');
+					m._popupPalette.updateUi ();
+					var _selector = m._popupPalette.children.selector;
 					/* NOTE: need to investigate why it's not initially safe to assume that the selector widget exists -- may have something to do with a non-standard wireUi sequence for this code */
-					_selector && _selector.set ({enabled:_this.get ('values').length > 1 ? 'inherit' : false});
-					_this.setNodeInnerHtml ('label',Uize.Node.getText (_this._getSelectedOptionNode ()) || _this._emptyLabel);
+					_selector && _selector.set ({enabled:m.get ('values').length > 1 ? 'inherit' : false});
+					m.setNodeInnerHtml ('label',Uize.Node.getText (m._getSelectedOptionNode ()) || m._emptyLabel);
 				}
 			};
 

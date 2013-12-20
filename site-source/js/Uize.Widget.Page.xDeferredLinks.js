@@ -9,6 +9,22 @@
 |_______________|             http://www.uize.com/license.html
 */
 
+/* Module Meta Data
+	type: Extension
+	importance: 4
+	codeCompleteness: 100
+	docCompleteness: 0
+*/
+
+/*?
+	Introduction
+		The =Uize.Widget.Page.xDeferredLinks= module extends the =Uize.Widget.Page= base class by adding functionality for defer wiring links on the page. 
+
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		
+		Instead of relying on search engines or scrapers to adhere to rel="nofollow", you can include link tags in the page with dummy =href= attributes (such as ="javascript://"=), and set the =href= in the JavaScript.
+*/
+
 Uize.module ({
 	name:'Uize.Widget.Page.xDeferredLinks',
 	required:'Uize.Node',
@@ -17,8 +33,8 @@ Uize.module ({
 
 		_class.prototype.wireDeferredLinks = function () {
 			var
-				_this = this,
-				_links = _this.deferredLinks,
+				m = this,
+				_links = m.deferredLinks,
 				_numLinks = _links.length,
 				_linkNo = 0
 			;
@@ -31,13 +47,13 @@ Uize.module ({
 					;
 
 					if (typeof _linkInfo == 'string')
-						_this.setNodeProperties(_linkNode, {href:_linkInfo});
+						m.setNodeProperties(_linkNode, {href:_linkInfo});
 					else
-						_this.wireNode(
+						m.wireNode(
 							_linkNode,
 							'click',
 							function () {
-								_this.launchPopup(
+								m.launchPopup(
 									Uize.copyInto(
 										{
 											url:_linkInfo.href,
@@ -50,7 +66,7 @@ Uize.module ({
 						);
 				}
 
-				for (var _endNo = Math.min(_numLinks, _linkNo + _this.linkBatchSize); _linkNo < _endNo; _linkNo++)
+				for (var _endNo = Math.min(_numLinks, _linkNo + m.linkBatchSize); _linkNo < _endNo; _linkNo++)
 					_wireLink(_links[_linkNo])
 				;
 

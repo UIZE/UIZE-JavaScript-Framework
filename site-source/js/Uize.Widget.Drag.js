@@ -58,14 +58,14 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
 						/*** Public Instance Properties ***/
-							_this.eventStartPos = _this._eventStartPos = [0,0];
-							_this.eventPos = _this._eventPos = [0,0];
-							_this._eventPreviousPos = [0,0];
-							_this._eventTime = _this._eventPreviousTime = 0;
-							_this.eventDeltaPos = _this._eventDeltaPos = [0,0];
+							m.eventStartPos = m._eventStartPos = [0,0];
+							m.eventPos = m._eventPos = [0,0];
+							m._eventPreviousPos = [0,0];
+							m._eventTime = m._eventPreviousTime = 0;
+							m.eventDeltaPos = m._eventDeltaPos = [0,0];
 					}
 				),
 				_classPrototype = _class.prototype
@@ -83,15 +83,15 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiCursor = function () {
-				var _this = this;
-				if (_this.isWired) {
-					var _node = _this.getNode ();
-					_this._cursor
+				var m = this;
+				if (m.isWired) {
+					var _node = m.getNode ();
+					m._cursor
 						? _Uize_Node.setStyle (
-							_this._inDrag ? [_node,_dragShield] : _node,
-							{cursor:_this.get ('enabledInherited') ? _this._cursor : 'not-allowed'}
+							m._inDrag ? [_node,_dragShield] : _node,
+							{cursor:m.get ('enabledInherited') ? m._cursor : 'not-allowed'}
 						)
-						: _this.set ({_cursor:_Uize_Node.getStyle (_node,'cursor')})
+						: m.set ({_cursor:_Uize_Node.getStyle (_node,'cursor')})
 					;
 				}
 			};
@@ -99,36 +99,36 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.initiate = _classPrototype.mousedown = function (_event,_notRelayed) {
 				var
-					_this = this,
-					_eventStartPos = _this._eventStartPos,
-					_eventPos = _this._eventPos,
-					_eventPreviousPos = _this._eventPreviousPos
+					m = this,
+					_eventStartPos = m._eventStartPos,
+					_eventPos = m._eventPos,
+					_eventPreviousPos = m._eventPreviousPos
 				;
 
 				function _dragDone (_event) {
-					if (_this._inDrag) {
-						if (_this._fade) {
-							_this._fade.stop ();
-							_this._fade = _undefined;
+					if (m._inDrag) {
+						if (m._fade) {
+							m._fade.stop ();
+							m._fade = _undefined;
 						}
 						_dragIsDone = _true;
-						if (_this._dragRestTimeout) {
-							_this._flushDragRestTimeout ();
-							_this._fireDragRestEvent ();
+						if (m._dragRestTimeout) {
+							m._flushDragRestTimeout ();
+							m._fireDragRestEvent ();
 						}
-						_this.set ({
+						m.set ({
 							_inCancel:_false,
 							_inDrag:_false,
 							_inReleaseTravel:_false,
 							_isTouch:_false
 						});
-						_this.fire ({name:'Drag Done',domEvent:_event});
-						_this.set ({
+						m.fire ({name:'Drag Done',domEvent:_event});
+						m.set ({
 							_dragCancelled:_false,
 							_dragStarted:_false
 						});
 						if (_isTouch) {
-							_this.unwireNode (
+							m.unwireNode (
 								_notRelayed ? '' : _event.target,
 								{touchmove:null,touchend:null,touchcancel:null}
 							);
@@ -140,9 +140,9 @@ Uize.module ({
 				}
 
 				function _fadeDragMoveTo (_phasePropertyName,_endPos,_duration,_fadeProperties) {
-					_this.set (_phasePropertyName,_true);
+					m.set (_phasePropertyName,_true);
 					(
-						_this._fade = Uize.Fade.fade (
+						m._fade = Uize.Fade.fade (
 							_dragMove,
 							[_eventPos [0],_eventPos [1]],
 							_endPos,
@@ -155,7 +155,7 @@ Uize.module ({
 				}
 
 				function _endDragWithPossibleReleaseTravel (_event) {
-					if (_this._releaseTravel && Uize.Fade && Uize.Fade.fade) {
+					if (m._releaseTravel && Uize.Fade && Uize.Fade.fade) {
 						/*
 							QUESTION: do we need to have state like dragCancelled that disables user interaction during release travel phase?
 						*/
@@ -166,8 +166,8 @@ Uize.module ({
 						if (_eventDistanceX || _eventDistanceY) {
 							var
 								_eventDistance = Math.sqrt (Math.pow (_eventDistanceX,2) + Math.pow (_eventDistanceY,2)),
-								_releaseTravelProperties = _this._releaseTravel (
-									_eventDistance / ((_this._eventTime - _this._eventPreviousTime) || 1) * 1000
+								_releaseTravelProperties = m._releaseTravel (
+									_eventDistance / ((m._eventTime - m._eventPreviousTime) || 1) * 1000
 								),
 								_eventDistanceFactor = 1 + (_releaseTravelProperties.distance / _eventDistance)
 							;
@@ -187,8 +187,8 @@ Uize.module ({
 				}
 
 				function _dragMove (_eventX,_eventY) {
-					_this._eventPreviousTime = _this._eventTime;
-					_this._eventTime = Uize.now ();
+					m._eventPreviousTime = m._eventTime;
+					m._eventTime = Uize.now ();
 					_eventPreviousPos [0] = _eventPos [0];
 					_eventPreviousPos [1] = _eventPos [1];
 					var
@@ -199,29 +199,29 @@ Uize.module ({
 						_absEventDeltaPos = [Math.abs (_eventDeltaPos [0]),Math.abs (_eventDeltaPos [1])]
 					;
 					for (var _axis = -1; ++_axis < 2;)
-						_this._eventDeltaPos [_axis] =
+						m._eventDeltaPos [_axis] =
 							(
-								_this._dragAxisMode == 'both' ||
+								m._dragAxisMode == 'both' ||
 								_absEventDeltaPos [_axis] > _absEventDeltaPos [1 - _axis] ||
 								(_absEventDeltaPos [_axis] == _absEventDeltaPos [1 - _axis] && _axis == 1)
 							)
 							? _eventDeltaPos [_axis] : 0
 					;
-					_this.fire ('Drag Update');
+					m.fire ('Drag Update');
 
-					_this._flushDragRestTimeout ();
-					_this._dragRestTimeout = setTimeout (function () {_this._fireDragRestEvent ()},_this._dragRestTime);
+					m._flushDragRestTimeout ();
+					m._dragRestTimeout = setTimeout (function () {m._fireDragRestEvent ()},m._dragRestTime);
 				}
 
 				function _handleMoveEvent (_event) {
-					if (!_dragIsDone && !_this._dragCancelled) {
-						if (!_this._dragStarted) {
+					if (!_dragIsDone && !m._dragCancelled) {
+						if (!m._dragStarted) {
 							if (!_isTouch) {
 								_class.resizeShield (_dragShield);
 								_Uize_Node.display (_dragShield);
 							}
-							_this.set ({_dragStarted:_true});
-							_this.fire ({name:'Drag Start',domEvent:_event});
+							m.set ({_dragStarted:_true});
+							m.fire ({name:'Drag Start',domEvent:_event});
 						}
 						var _dragEventPos = _Uize_Node_getEventAbsPos (_event);
 						_dragMove (_dragEventPos.left,_dragEventPos.top);
@@ -229,32 +229,32 @@ Uize.module ({
 				}
 
 				function _cancelDrag (_event) {
-					_this.set ({_dragCancelled:_true});
-					if (_this._cancelFade && Uize.Fade && Uize.Fade.fade) {
-						_fadeDragMoveTo ('inCancel',_eventStartPos,500,_this._cancelFade);
+					m.set ({_dragCancelled:_true});
+					if (m._cancelFade && Uize.Fade && Uize.Fade.fade) {
+						_fadeDragMoveTo ('inCancel',_eventStartPos,500,m._cancelFade);
 					} else {
 						_dragMove (_eventStartPos [0],_eventStartPos [1]);
 						_dragDone (_event);
 					}
 				}
 
-				if (_this._inCancel || _this._inReleaseTravel)
+				if (m._inCancel || m._inReleaseTravel)
 					_dragDone (_event)
 				;
-				if (!_this._inDrag && _this.get ('enabledInherited')) {
+				if (!m._inDrag && m.get ('enabledInherited')) {
 					var _isTouch = !!_event.targetTouches;
 
-					_this.set ({_inDrag:_true,_isTouch:_isTouch});
-					_this._updateUiCursor ();
+					m.set ({_inDrag:_true,_isTouch:_isTouch});
+					m._updateUiCursor ();
 					Uize.Node.Event.abort (_event);
-					_this._dragAxisMode = _event.shiftKey ? 'one' : 'both';
+					m._dragAxisMode = _event.shiftKey ? 'one' : 'both';
 
-					_this.fire ({name:'Before Drag Start',domEvent:_event});
+					m.fire ({name:'Before Drag Start',domEvent:_event});
 
 					var _dragEventPos = _Uize_Node_getEventAbsPos (_event);
 					_eventStartPos [0] = _eventPos [0] = _eventPreviousPos [0] = _dragEventPos.left;
 					_eventStartPos [1] = _eventPos [1] = _eventPreviousPos [1] = _dragEventPos.top;
-					_this._eventTime = _this._eventPreviousTime = Uize.now ();
+					m._eventTime = m._eventPreviousTime = Uize.now ();
 
 					var
 						_dragIsDone = _false,
@@ -268,7 +268,7 @@ Uize.module ({
 						}
 					;
 					if (_isTouch) {
-						_this.wireNode (
+						m.wireNode (
 							_notRelayed ? '' : _event.target,
 							{
 								touchmove:function (_event) {
@@ -289,12 +289,12 @@ Uize.module ({
 						var _cleanupAfterMouseDrag = function (_event) {
 							Uize.copyInto (document,_oldDocumentEvents);
 							_Uize_Node.display (_dragShield,_false);
-							_this._dragCancelled || _endDragWithPossibleReleaseTravel (_event);
+							m._dragCancelled || _endDragWithPossibleReleaseTravel (_event);
 						};
 						document.onmousemove = function (_event) {
 							_event || (_event = window.event);
 							_hasStickyDragIssue && _event.button == 0
-								? _this._inDrag && _cleanupAfterMouseDrag (_event)
+								? m._inDrag && _cleanupAfterMouseDrag (_event)
 									/* NOTE:
 										when the user mouses up outside of the document area, the onmouseup event is not fired, so this is a way to catch the next mouse move inside the document where no mouse button is depressed -- can't do this in Firefox, because Firefox doesn't update the value of the button property for each onmousemove event
 									*/
@@ -307,7 +307,7 @@ Uize.module ({
 							return _false;
 						};
 						document.onkeyup = function (_event) {
-							Uize.Node.Event.isKeyEscape (_event) && _this._inDrag && _cancelDrag (_event);
+							Uize.Node.Event.isKeyEscape (_event) && m._inDrag && _cancelDrag (_event);
 						};
 					}
 				}
@@ -315,18 +315,18 @@ Uize.module ({
 			};
 
 			_classPrototype.updateUi = function () {
-				var _this = this;
-				_this.isWired && !_this.get ('enabledInherited') || _this._cursor && _this._updateUiCursor ();
+				var m = this;
+				m.isWired && !m.get ('enabledInherited') || m._cursor && m._updateUiCursor ();
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
-					var _rootNode = _this.getNode ();
+				var m = this;
+				if (!m.isWired) {
+					var _rootNode = m.getNode ();
 					if (_rootNode) {
 						_rootNode.onmousedown = Uize.returnFalse;
-						var _initiate = function (_event) {return _this.initiate (_event,_true)};
-						_this.wireNode (_rootNode,{mousedown:_initiate,touchstart:_initiate});
+						var _initiate = function (_event) {return m.initiate (_event,_true)};
+						m.wireNode (_rootNode,{mousedown:_initiate,touchstart:_initiate});
 					}
 					if (!_dragShield) {
 						_dragShield = _class.insertShield ({zIndex:50000});
@@ -335,9 +335,9 @@ Uize.module ({
 						;
 					}
 
-					_this.wire ({'Changed.enabledInherited':function () {_this._updateUiCursor ()}});
+					m.wire ({'Changed.enabledInherited':function () {m._updateUiCursor ()}});
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

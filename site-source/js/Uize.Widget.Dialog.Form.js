@@ -43,35 +43,35 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function () {
-						var _this = this;
+						var m = this;
 
-						_this._isModified = _false;
+						m._isModified = _false;
 
 						/*** add event handler ***/
 							function _handleOk(_qualifiedOk) {
-								if (!_this._theForm)
-									return _this.fire ('Submission Complete');
+								if (!m._theForm)
+									return m.fire ('Submission Complete');
 
-								var _result = _this.getResult();
+								var _result = m.getResult();
 								if (_result.isModified)
-									_this._formData = _result.formData;
+									m._formData = _result.formData;
 
 								_result.isQualifiedOk = _qualifiedOk;
-								_this.fire ({name:'Submission Complete',result:_result});
-								_this._isModified = _false;
+								m.fire ({name:'Submission Complete',result:_result});
+								m._isModified = _false;
 							}
 
-							_this.wire ({
+							m.wire ({
 								'Ok': function () { _handleOk(_false); },
 								'Qualified Ok': function () { _handleOk(_true); },
 								'Cancel': function () {
-									if (_this._theForm) {
-										_this._isModified = _this.getResult().isModified;
+									if (m._theForm) {
+										m._isModified = m.getResult().isModified;
 									}
 								},
 								'Before Show': function () {
-									_this._theForm && _this._formData && _this._isModified &&
-										_Uize_Node_Form.setValues(_this._formData)
+									m._theForm && m._formData && m._isModified &&
+										_Uize_Node_Form.setValues(m._formData)
 									;
 								}
 							});
@@ -82,23 +82,23 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if (!_this.isWired) {
+				var m = this;
+				if (!m.isWired) {
 					/*** initialization ***/
-						var _theForm = _this._theForm = _this.getNode('form');
-						if (_theForm && !_this._formData)
-							_this._formData = _Uize_Node_Form.getValues(_theForm);
+						var _theForm = m._theForm = m.getNode('form');
+						if (_theForm && !m._formData)
+							m._formData = _Uize_Node_Form.getValues(_theForm);
 
-						_superclass.doMy (_this,'wireUi');
+						_superclass.doMy (m,'wireUi');
 				}
 			};
 
 			_classPrototype.getResult = function () {
 				var
-					_this = this,
-					_formData = _Uize_Node_Form.getValues(_this._theForm)
+					m = this,
+					_formData = _Uize_Node_Form.getValues(m._theForm)
 				;
-				return {isModified:!Uize.Data.identical(_this._formData, _formData), formData:_formData};
+				return {isModified:!Uize.Data.identical(m._formData, _formData), formData:_formData};
 			};
 
 		/*** State Properties ***/

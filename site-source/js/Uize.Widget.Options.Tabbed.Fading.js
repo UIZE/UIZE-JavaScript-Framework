@@ -41,18 +41,18 @@ Uize.module ({
 				_class = _superclass.subclass (
 					function () {
 						var
-							_this = this,
-							_fade = _this._fade = _this.fade = Uize.Fade ({duration:1000})
+							m = this,
+							_fade = m._fade = m.fade = Uize.Fade ({duration:1000})
 						;
 						_fade.wire ({
 							'Changed.value':
 								function () {
 									var _progress = _fade.get ('progress');
-									_this.setNodeOpacity (_this._nodeFadingOut,1 - _progress);
-									_this.setNodeOpacity (_this._nodeFadingIn,_progress);
+									m.setNodeOpacity (m._nodeFadingOut,1 - _progress);
+									m.setNodeOpacity (m._nodeFadingIn,_progress);
 								},
 							Done:
-								function () {_this._cleanUpAfterFade ()}
+								function () {m._cleanUpAfterFade ()}
 						});
 					}
 				),
@@ -61,37 +61,37 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._cleanUpAfterFade = function () {
-				var _this = this;
-				_this.setNodeProperties (_this._nodeFadingOut,{className:_this.get ('bodyClassInactive')});
-				_this.setNodeOpacity (_this._nodeFadingOut,1);
-				_this.setNodeOpacity (_this._nodeFadingIn,1);
-				_this._nodeFadingIn = _this._nodeFadingOut = _null;
+				var m = this;
+				m.setNodeProperties (m._nodeFadingOut,{className:m.get ('bodyClassInactive')});
+				m.setNodeOpacity (m._nodeFadingOut,1);
+				m.setNodeOpacity (m._nodeFadingIn,1);
+				m._nodeFadingIn = m._nodeFadingOut = _null;
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUiTabState = function (_lastShownTabBodyNo,_currentValueNo) {
 				var
-					_this = this,
-					_fadeInProgress = _this._fade.get ('inProgress')
+					m = this,
+					_fadeInProgress = m._fade.get ('inProgress')
 				;
 				if (_currentValueNo == _lastShownTabBodyNo) {
 					_fadeInProgress ||
-						_superclass.doMy (_this,'updateUiTabState',[_lastShownTabBodyNo,_currentValueNo])
+						_superclass.doMy (m,'updateUiTabState',[_lastShownTabBodyNo,_currentValueNo])
 					;
 				} else {
 					if (_fadeInProgress) {
-						_this._fade.stop ();
-						_this._cleanUpAfterFade ();
+						m._fade.stop ();
+						m._cleanUpAfterFade ();
 					}
 					var _updateTabBodyClass = function (_valueNo) {
-						var _node = _valueNo > -1 ? _this.getTabBodyNode (_valueNo) : _null;
-						_this.setNodeProperties (_node,{className:_this.get ('bodyClassActive')});
-						_this.setNodeOpacity (_node,_valueNo == _currentValueNo ? 0 : 1);
+						var _node = _valueNo > -1 ? m.getTabBodyNode (_valueNo) : _null;
+						m.setNodeProperties (_node,{className:m.get ('bodyClassActive')});
+						m.setNodeOpacity (_node,_valueNo == _currentValueNo ? 0 : 1);
 						return _node;
 					};
-					_this._nodeFadingOut = _updateTabBodyClass (_lastShownTabBodyNo);
-					_this._nodeFadingIn = _updateTabBodyClass (_currentValueNo);
-					_this._fade.start ();
+					m._nodeFadingOut = _updateTabBodyClass (_lastShownTabBodyNo);
+					m._nodeFadingIn = _updateTabBodyClass (_currentValueNo);
+					m._fade.start ();
 				}
 			};
 

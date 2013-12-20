@@ -89,8 +89,7 @@ Uize.module ({
 					;
 
 					m.set(
-						Uize.copyInto(
-							{},
+						Uize.copy(
 							_valueDetails !== _undefined ? {valueDetails:_valueDetails} : _undefined,
 							_value !== _undefined
 								? ({

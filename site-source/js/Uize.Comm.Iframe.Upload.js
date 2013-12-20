@@ -43,8 +43,8 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.performRequest = function (_request,_callback) {
 				var
-					_this = this,
-					_iframe = Uize.Node.getById(_this.iframeId),
+					m = this,
+					_iframe = Uize.Node.getById(m.iframeId),
 					_uploadForm = _request.uploadForm,
 					_uploadFormTarget = _uploadForm.target,
 					_returnType = _request.returnType,

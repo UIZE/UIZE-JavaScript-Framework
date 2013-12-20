@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Captcha.Recaptcha= class encapsulates the logic required to display and use reCAPTCHA, a captcha implementation developed by a group of researchers at CMU (http://recaptcha.net).
 
-		*DEVELOPERS:* `Tim Carter`
+		*DEVELOPERS:* `Tim Carter`, original code donated by `Zazzle Inc.`
 
 		The =Uize.Widget.Captcha.Recaptcha= class is a thin wrapper around the Recaptcha object, a js object that is sourced in by reCAPTCHA.
 
@@ -39,9 +39,9 @@ Uize.module ({
 			_class = _superclass.subclass (
 				null,
 				function () {
-					var _this = this;
-					_this._commObject = Uize.Comm.Script ({callbackMode:'client'});
-					_this.initializeCaptcha ();
+					var m = this;
+					m._commObject = Uize.Comm.Script ({callbackMode:'client'});
+					m.initializeCaptcha ();
 				}
 			),
 			_classPrototype = _class.prototype
@@ -50,28 +50,28 @@ Uize.module ({
 		/*** Public Instance Methods ***/
 			_classPrototype.initializeCaptcha = function () {
 				var
-					_this = this
+					m = this
 				;
 				// check to see if the Recaptcha object has already been sourced in. If not, we'll have to make a script call to load it.
-				if (!(_this.recaptchaObject = window.Recaptcha) && _this._loadingUrl)
-					_this._commObject.request (
+				if (!(m.recaptchaObject = window.Recaptcha) && m._loadingUrl)
+					m._commObject.request (
 						{
-							url:[_this._loadingUrl],
+							url:[m._loadingUrl],
 							returnType:'json',
 							requestMethod:'GET',
 							callback:
 							function () {
-								(_this.recaptchaObject = window.Recaptcha) ?
-									_this.recaptchaObjectCreate () :
-										_this.callInherited ('inform') ({
+								(m.recaptchaObject = window.Recaptcha) ?
+									m.recaptchaObjectCreate () :
+										m.callInherited ('inform') ({
 											state:'error',
-											message:_this.localize('loadingError')
+											message:m.localize('loadingError')
 										})
 								;
 							}
 						}
 					);
-				else _this.recaptchaObjectCreate ();
+				else m.recaptchaObjectCreate ();
 
 				/*?
 					Instance Methods
@@ -81,8 +81,8 @@ Uize.module ({
 			};
 
 			_classPrototype.recaptchaObjectCreate = function () {
-				var _this = this;
-				_this.recaptchaObject && _this.recaptchaObject.create (_this._key, _this.get('idPrefix'), {theme:'clean'});
+				var m = this;
+				m.recaptchaObject && m.recaptchaObject.create (m._key, m.get('idPrefix'), {theme:'clean'});
 				/*?
 					Instance Methods
 						recaptchaObjectCreate
@@ -97,16 +97,16 @@ Uize.module ({
 
 			_classPrototype.validate = function ( _params ) {
 				var
-					_this = this,
+					m = this,
 					_callback = _params.callback,
-					_recaptchaObj = _this.recaptchaObject
+					_recaptchaObj = m.recaptchaObject
 				;
 
 				// assume that the validationUrl can send a response, otherwise how will the isValid property change?
-				_this._commObject.set ({callbackMode:'server'});
-				_this._commObject.request ({
+				m._commObject.set ({callbackMode:'server'});
+				m._commObject.request ({
 					url:[
-						_this._validationUrl,
+						m._validationUrl,
 						{
 							recaptcha_response_field:_recaptchaObj.get_response(),
 							recaptcha_challenge_field:_recaptchaObj.get_challenge ()
@@ -115,10 +115,10 @@ Uize.module ({
 					returnType:'json',
 					requestMethod:'GET',
 					callback:function (_response) {
-						_this.set ({isValid:_response && _response.isValid});
+						m.set ({isValid:_response && _response.isValid});
 
 						// if the response was not valid then destroy and create a new instance of the captcha
-						if (!_this.get('isValid')) _this.recaptchaObjectCreate ();
+						if (!m.get('isValid')) m.recaptchaObjectCreate ();
 
 						Uize.isFunction (_callback) && _callback ( _response );
 					}

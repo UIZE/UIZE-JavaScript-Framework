@@ -41,10 +41,10 @@ Uize.module ({
 				_class = _superclass.subclass (
 					null,
 					function () {
-						var _this = this;
+						var m = this;
 
-						_this._addChildButton('prev', function () { _this._gotoPage(_this._value - 1) } );
-						_this._addChildButton('next', function () { _this._gotoPage(_this._value + 1) } );
+						m._addChildButton('prev', function () { m._gotoPage(m._value - 1) } );
+						m._addChildButton('next', function () { m._gotoPage(m._value + 1) } );
 					}
 				),
 				_classPrototype = _class.prototype,
@@ -73,12 +73,12 @@ Uize.module ({
 
 			_classPrototype._calculatePagesStart = function () {
 				var
-					_this = this,
-					_value = _this._value,
-					_numPagesToShow = _this._numPagesToShow,
-					_maxPages = _this._calculateMaxPages(),
-					_minPagesStart = 1 + (_this._showFirstPage && _value > 1), // i.e. if we're shhowing the first page we want to start at 2
-					_maxPagesEnd = _maxPages - (_this._showLastPage && _value < _maxPages),	// i.e. if we're showing the last page we want to end at the page before
+					m = this,
+					_value = m._value,
+					_numPagesToShow = m._numPagesToShow,
+					_maxPages = m._calculateMaxPages(),
+					_minPagesStart = 1 + (m._showFirstPage && _value > 1), // i.e. if we're shhowing the first page we want to start at 2
+					_maxPagesEnd = _maxPages - (m._showLastPage && _value < _maxPages),	// i.e. if we're showing the last page we want to end at the page before
 					_deltaFromCurrentPage = Math.ceil(_numPagesToShow / 2),
 					_deltaLeft = _value - _deltaFromCurrentPage + 1,
 					_deltaRight = _value + (_numPagesToShow - _deltaFromCurrentPage)
@@ -96,37 +96,37 @@ Uize.module ({
 
 			_classPrototype._updatePages = function () {
 				var
-					_this = this,
-					_children = _this.children,
-					_value = _this._value,
-					_maxPages = _this._calculateMaxPages(),
+					m = this,
+					_children = m.children,
+					_value = m._value,
+					_maxPages = m._calculateMaxPages(),
 					_hasMultiplePages = _maxPages > 1,
-					_numResults = _this._numResults
+					_numResults = m._numResults
 				;
 
-				if (_this.isWired && _this.getNode()) {
-					_this.displayNode('displayShell', _numResults > 0);
-					_this.displayNode('paginationShell', _hasMultiplePages);
+				if (m.isWired && m.getNode()) {
+					m.displayNode('displayShell', _numResults > 0);
+					m.displayNode('paginationShell', _hasMultiplePages);
 
-					_this.setNodeInnerHtml(
+					m.setNodeInnerHtml(
 						'displayShell',
-						_this.localize(
+						m.localize(
 							'displayInfo',
 							{
-								number:_formatNumber((_value - 1) * _this._pageSize + 1),
-								toNumber:_formatNumber(Math.min(_numResults, _value * _this._pageSize)),
-								total:_this.localize('numResultsDisplay', {numResults:_formatNumber(_numResults)}) || _formatNumber(_numResults)
+								number:_formatNumber((_value - 1) * m._pageSize + 1),
+								toNumber:_formatNumber(Math.min(_numResults, _value * m._pageSize)),
+								total:m.localize('numResultsDisplay', {numResults:_formatNumber(_numResults)}) || _formatNumber(_numResults)
 							}
 						)
 					);
 					
-					_this.setNodeInnerHtml(
+					m.setNodeInnerHtml(
 						'pageDisplay',
-						_this.localize(
+						m.localize(
 							'pageDisplayInfo',
 							{
 								page:_formatNumber(_value),
-								totalPages:_formatNumber(_this.localize('numResultsDisplay', {numResults:_maxPages}) || _maxPages)
+								totalPages:_formatNumber(m.localize('numResultsDisplay', {numResults:_maxPages}) || _maxPages)
 							}
 						)
 					);
@@ -145,18 +145,18 @@ Uize.module ({
 
 						_display('prev', _value > 1);
 						_display('next', _value < _maxPages);
-						_this._setEdgeButtons && _setText('first', 1);
+						m._setEdgeButtons && _setText('first', 1);
 
 						_display('first', _value > 1);
 						_display('last', _value < _maxPages);
-						_this._setEdgeButtons && _setText('last', _maxPages);
+						m._setEdgeButtons && _setText('last', _maxPages);
 
-						var _pagesStart = _this._calculatePagesStart();
+						var _pagesStart = m._calculatePagesStart();
 
-						_this.displayNode('less', _pagesStart > (1 + _this._showFirstPage));
-						_this.displayNode('more', (_pagesStart + _this._numPagesToShow) < (_maxPages - _this._showLastPage));
+						m.displayNode('less', _pagesStart > (1 + m._showFirstPage));
+						m.displayNode('more', (_pagesStart + m._numPagesToShow) < (_maxPages - m._showLastPage));
 
-						for (var _pageNo = -1; ++_pageNo < _this._numPagesToShow;) {
+						for (var _pageNo = -1; ++_pageNo < m._numPagesToShow;) {
 							var
 								_pageName = 'page' + _pageNo,
 								_pageLinkNode = _children[_pageName].getNode(),
@@ -167,11 +167,11 @@ Uize.module ({
 							_setText(
 								_pageName,
 								_isCurrentPage
-									? _this.localize('selectedPage', {page:_pageNumber}) || _pageNumber
+									? m.localize('selectedPage', {page:_pageNumber}) || _pageNumber
 									: _pageNumber
 							);
-							_display(_pageName, _pageNumber == _value || _pageNumber <= (_maxPages - _this._showLastPage));
-							Uize.Node.Classes.setState(_pageLinkNode, _this._classSelected, _isCurrentPage);
+							_display(_pageName, _pageNumber == _value || _pageNumber <= (_maxPages - m._showLastPage));
+							Uize.Node.Classes.setState(_pageLinkNode, m._classSelected, _isCurrentPage);
 						}
 					}
 				}
@@ -179,47 +179,47 @@ Uize.module ({
 
 		/*** Public Methods ***/
 			_classPrototype.updateUi = function () {
-				var _this = this;
+				var m = this;
 
-				if (_this.isWired) {
-					_this._updatePages();
-					_superclass.doMy (_this,'updateUi');
+				if (m.isWired) {
+					m._updatePages();
+					_superclass.doMy (m,'updateUi');
 				}
 			};
 
 			_classPrototype.wireUi = function() {
-				var _this = this;
+				var m = this;
 
-				if (!_this.isWired) {
+				if (!m.isWired) {
 					/*** Determine which page links exist ***/
 						var
-							_childExists = function(_childName) { return !!Uize.Node.getById(_this.get('idPrefix') + '_' + _childName) },
+							_childExists = function(_childName) { return !!Uize.Node.getById(m.get('idPrefix') + '_' + _childName) },
 							_addPageButton = function(_pageNo) {
-								_this._addChildButton(
+								m._addChildButton(
 									'page' + _pageNo,
-									function() { _this._gotoPage(_this._calculatePagesStart() + _pageNo) }
+									function() { m._gotoPage(m._calculatePagesStart() + _pageNo) }
 								);
 							}
 						;
 
-						_this._showFirstPage = _childExists('first');
-						_this._showLastPage = _childExists('last');
+						m._showFirstPage = _childExists('first');
+						m._showLastPage = _childExists('last');
 
 						/** Calculate how many inner page linkss there are to show ***/
-							_this._numPagesToShow = -1;
-							while (_childExists('page' + ++_this._numPagesToShow));
+							m._numPagesToShow = -1;
+							while (_childExists('page' + ++m._numPagesToShow));
 
-					_this._showFirstPage
-						&& _this._addChildButton('first', function () { _this._gotoPage(1) } );
-					_this._showLastPage
-						&& _this._addChildButton('last', function () { _this._gotoPage(_this._calculateMaxPages()) } );
+					m._showFirstPage
+						&& m._addChildButton('first', function () { m._gotoPage(1) } );
+					m._showLastPage
+						&& m._addChildButton('last', function () { m._gotoPage(m._calculateMaxPages()) } );
 
 
-					for (var _pageNo = -1; ++_pageNo < _this._numPagesToShow;)
+					for (var _pageNo = -1; ++_pageNo < m._numPagesToShow;)
 						_addPageButton(_pageNo)
 					;
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 
@@ -263,12 +263,12 @@ Uize.module ({
 					},
 					onChange:[
 						function () {
-							var _this = this;
+							var m = this;
 							
-							if (_this._urlBase && _this.isWired)
+							if (m._urlBase && m.isWired)
 								location.href = Uize.Url.resolve(
-									_this._urlBase,
-									Uize.pairUp(_this._urlParam, _this._value)
+									m._urlBase,
+									Uize.pairUp(m._urlParam, m._value)
 								)
 							;
 						},

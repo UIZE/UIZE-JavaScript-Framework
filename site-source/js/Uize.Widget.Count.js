@@ -37,39 +37,39 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._createContent = function ( _number ) {
-				var _this = this;
+				var m = this;
 				return (
-					_this._numbersImagesPath
-						? '<img src="' + _this._numbersImagesPath + '/' + _number + '.' + _this._numbersFiletype + '" border="0" />'
+					m._numbersImagesPath
+						? '<img src="' + m._numbersImagesPath + '/' + _number + '.' + m._numbersFiletype + '" border="0" />'
 						: _number
 				);
 			};
 
 			_classPrototype._update = function ( _direction ) {
 				var
-					_this = this,
-					_tmpCount = _this._count,
-					_children = _this.children
+					m = this,
+					_tmpCount = m._count,
+					_children = m.children
 				;
-				for (var _digitsIndex = -1; ++_digitsIndex < _this._digits;) {
-					_children ['digit' + _digitsIndex].changeContent( _this._createContent( _tmpCount % _this._base ) , _direction );
-					_tmpCount = Math.floor(_tmpCount / _this._base);
+				for (var _digitsIndex = -1; ++_digitsIndex < m._digits;) {
+					_children ['digit' + _digitsIndex].changeContent( m._createContent( _tmpCount % m._base ) , _direction );
+					_tmpCount = Math.floor(_tmpCount / m._base);
 				}
-				_this._count || _this.fire('zero');
-				_this._count == _this._limit && _this.fire('limit');
+				m._count || m.fire('zero');
+				m._count == m._limit && m.fire('limit');
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.up = function () {
-				var _this = this;
-				_this.set ({_count:_this._count==_this._limit ? 0 : _this._count + 1});
-				_this._update('up');
+				var m = this;
+				m.set ({_count:m._count==m._limit ? 0 : m._count + 1});
+				m._update('up');
 			};
 
 			_classPrototype.down = function () {
-				var _this = this;
-				_this.set ({_count:_this._count==0 ? _this._limit : _this._count - 1});
-				_this._update('down');
+				var m = this;
+				m.set ({_count:m._count==0 ? m._limit : m._count - 1});
+				m._update('down');
 			};
 
 			_classPrototype.getCount = function () {
@@ -77,26 +77,26 @@ Uize.module ({
 			};
 
 			_classPrototype.setCount = function (_newCount) {
-				var _this = this;
-				_this.set ({_count:_newCount});
-				_this._update('up');
+				var m = this;
+				m.set ({_count:_newCount});
+				m._update('up');
 			};
 
 			_classPrototype.zero = function () {
-				var _this = this;
-				_this.set ({_count:0});
-				_this._update('down');
+				var m = this;
+				m.set ({_count:0});
+				m._update('down');
 			};
 
 			_classPrototype.wireUi = function () {
-				var _this = this;
-				if( !_this.isWired ) {
-					for (var _digitsIndex = -1; ++_digitsIndex < _this._digits;)
-						_this.addChild ('digit' + _digitsIndex,Uize.Widget.Flip)
+				var m = this;
+				if( !m.isWired ) {
+					for (var _digitsIndex = -1; ++_digitsIndex < m._digits;)
+						m.addChild ('digit' + _digitsIndex,Uize.Widget.Flip)
 					;
-					_this._limit || _this.set ({_limit:Math.pow(_this._base,_this._digits) - 1});
+					m._limit || m.set ({_limit:Math.pow(m._base,m._digits) - 1});
 
-					_superclass.doMy (_this,'wireUi');
+					_superclass.doMy (m,'wireUi');
 				}
 			};
 

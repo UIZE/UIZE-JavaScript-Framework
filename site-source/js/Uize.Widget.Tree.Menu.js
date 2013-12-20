@@ -36,22 +36,22 @@ Uize.module ({
 		return _superclass.subclass ({
 			instanceMethods:{
 				getItemClassName:function (_item,_depth) {
-					var _this = this;
+					var m = this;
 					return (
 						(_depth ? m._subMenuItemCssClass : m._menuItemCssClass) +
 						(
 							_item.expanded
-								? (' ' + (_depth ? _this._subMenuItemActiveCssClass : _this._menuItemActiveCssClass))
+								? (' ' + (_depth ? m._subMenuItemActiveCssClass : m._menuItemActiveCssClass))
 								: ''
 						) +
 						(
-							_this.Class.itemHasChildren (_item)
+							m.Class.itemHasChildren (_item)
 								? (
 									' ' +
 									(
 										_depth
-											? _this._subMenuItemChildrenIndicatorCssClass
-											: _this._menuItemChildrenIndicatorCssClass
+											? m._subMenuItemChildrenIndicatorCssClass
+											: m._menuItemChildrenIndicatorCssClass
 									)
 								)
 								: ''
@@ -77,19 +77,19 @@ Uize.module ({
 				html:{
 					process:function (input) {
 						var
-							_this = this,
+							m = this,
 							_idPrefix = input.idPrefix,
 							_htmlChunks = []
 						;
-						_this.traverseTree ({
+						m.traverseTree ({
 							itemHandler:
 								function (_item,_itemSpecifier,_depth) {
 									_htmlChunks.push (
-										_this.Class.itemIsDivider (_item)
+										m.Class.itemIsDivider (_item)
 											? (
 												'<div class="' + (_depth ? input.subMenuDividerClass : input.menuDividerClass) + '" href="javascript://">&nbsp;</div>'
 											) : (
-												'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TitleLink" class="' + _this.getItemClassName (_item,_depth) + '" href="' + (_item.link || 'javascript://') + '"' + (_item.link ? '' : ' style="cursor:default;"') + '>' + _item.title + '</a>'
+												'<a id="' + _idPrefix + '-' + _itemSpecifier + 'TitleLink" class="' + m.getItemClassName (_item,_depth) + '" href="' + (_item.link || 'javascript://') + '"' + (_item.link ? '' : ' style="cursor:default;"') + '>' + _item.title + '</a>'
 											)
 									);
 								},

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormElements= class serves as a thin container widget of =Uize.Widget.FormElement= or =Uize.Widget.Form= widgets.
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -35,10 +35,10 @@ Uize.module ({
 		/*** Override addChild method to provide extra handling ***/
 			_class.prototype.addChild = function (_childName, _childInstanceOrClass, _elementProperties) {
 				var
-					_this = this,
-					_parentForm = _this.parent,
+					m = this,
+					_parentForm = m.parent,
 					_childElement = _superclass.doMy (
-						_this,
+						m,
 						'addChild',
 						[
 							_childName,
@@ -46,7 +46,7 @@ Uize.module ({
 							Uize.copyInto(
 								{
 									value:_parentForm
-										? (_this.parent.get('value') || {})[_childName]
+										? (m.parent.get('value') || {})[_childName]
 										: null
 								},
 								_elementProperties
@@ -55,7 +55,7 @@ Uize.module ({
 					)
 				;
 
-				_this.fire({name:'Element Added', element:_childElement});
+				m.fire({name:'Element Added', element:_childElement});
 
 				return _childElement;
 			};

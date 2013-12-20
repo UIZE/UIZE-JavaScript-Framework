@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormWarnings= widget provides functionality for displaying warnings for a =Uize.Widget.Form=.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, `Tim Carter`
+		*DEVELOPERS:* `Ben Ilegbodu`, `Tim Carter`, original code donated by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -28,225 +28,225 @@ Uize.module ({
 	required:'Uize.Template',	// for the JST
 	builder:function (_superclass) {
 		'use strict';
-
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_false = false
-			;
-			
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function() {
-						this._wiringsLookup = {};
-						this._watchedElements = [];
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Private Instance Methods ***/
-			_classPrototype._removeWatchedElements = function (_elementsToRemove) {
-				var
-					_this = this,
-					_watchedElements = _this._watchedElements
-				;
+		
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_false = false,
+				_Uize = Uize,
 				
-				if (_watchedElements && _watchedElements.length) {
-					if (!_elementsToRemove)	// remove all
-						_elementsToRemove = _watchedElements;
-					
-					var _watchedElementsToRemoveLookup = {};
-					
-					// populate lookup
-					for (var _elementToRemoveNo = -1; ++_elementToRemoveNo > _elementsToRemove.length;) {
-						var _elementToRemove = _elementsToRemove[_elementToRemoveNo];
-						
-						_watchedElementsToRemoveLookup[_elementToRemove.get('idPrefix')] = _elementToRemove;
-					}
-					
-					for (var _watchedElementNo = -1; ++_watchedElementNo < _watchedElements.length;) {
-						var
-							_watchedElement = _watchedElements[_watchedElementNo],
-							_watchedElementIdPrefix = _watchedElement.get('idPrefix')
-						;
-						
-						_watchedElementsToRemoveLookup[_watchedElementIdPrefix] // want to remove, so unwire the events we wired up before
-							&& _watchedElement.unwire(
-								_this._wiringsLookup[_watchedElementIdPrefix]
-							)
-						;
-					}
-				}
-			};
-			
-			_classPrototype._updateUiCollapsed = function() {
-				var
-					_this = this,
-					_collapsed = _this._collapsed
-				;
-				
-				if (_this.isWired) {
-					_this.setNodeInnerHtml(
-						'toggleCollapsed',
-						_this.localize(_collapsed ? 'showLinkText' : 'hideLinkText')
-					);
-					_this.displayNode('warnings', !_collapsed);
-				}
-			};
-			
-			_classPrototype._updateUiWarnings = function() {
-				var _this = this;
-				
-				if (_this.isWired && _this._template) {
+			/*** Helper Functions ***/
+				_removeWatchedElements = function (_elementsToRemove) {
 					var
-						_warningElements = [],
-						_messageNo = 0
+						m = this,
+						_watchedElements = m._watchedElements
 					;
-
-					// go through all of the message nodes and unwire them
-					while (true) {
-						var
-							_messageNodeName = 'message' + _messageNo,
-							_messageNode = _this.getNode(_messageNodeName)
-						;
-
-						_this.flushNodeCache(_messageNodeName);
-
-						if (_messageNode)
-							_this.unwireNode(_messageNode, 'click');
-						else // must be at the end, so quit
-							break;
-						
-						_messageNo++;
-					}
 					
-					(function _addFormWarnings(_elements) {
-						for (var _elementNo = -1; ++_elementNo < _elements.length;) {
+					if (_watchedElements && _watchedElements.length) {
+						if (!_elementsToRemove)	// remove all
+							_elementsToRemove = _watchedElements;
+						else if (!_Uize.isArray(_elementsToRemove))
+							_elementsToRemove = [_elementsToRemove];
+						
+						var _watchedElementsToRemoveLookup = {};
+						
+						// populate lookup
+						for (var _elementToRemoveNo = -1; ++_elementToRemoveNo > _elementsToRemove.length;) {
+							var _elementToRemove = _elementsToRemove[_elementToRemoveNo];
+							
+							_watchedElementsToRemoveLookup[_elementToRemove.get('idPrefix')] = _elementToRemove;
+						}
+						
+						for (var _watchedElementNo = -1; ++_watchedElementNo < _watchedElements.length;) {
 							var
-								_element = _elements[_elementNo],
-								_elementWarningMessage = _element.get('warningMessage')
+								_watchedElement = _watchedElements[_watchedElementNo],
+								_watchedElementIdPrefix = _watchedElement.get('idPrefix')
+							;
+							
+							_watchedElementsToRemoveLookup[_watchedElementIdPrefix] // want to remove, so unwire the events we wired up before
+								&& _watchedElement.unwire(
+									m._wiringsLookup[_watchedElementIdPrefix]
+								)
+							;
+						}
+					}
+				},
+				_updateUiCollapsed = function() {
+					var
+						m = this,
+						_collapsed = m._collapsed
+					;
+					
+					if (m.isWired) {
+						m.setNodeInnerHtml(
+							'toggleCollapsed',
+							m.localize(_collapsed ? 'showLinkText' : 'hideLinkText')
+						);
+						m.displayNode('warnings', !_collapsed);
+					}
+				},
+				_updateUiWarnings = function() {
+					var m = this;
+					
+					if (m.isWired && m._template) {
+						var
+							_warningElements = [],
+							_messageNo = 0
+						;
+	
+						// go through all of the message nodes and unwire them
+						while (true) {
+							var
+								_messageNodeName = 'message' + _messageNo,
+								_messageNode = m.getNode(_messageNodeName)
 							;
 	
-							if (_element.get('isValid') == _false) {
-								if (_element.isForm)
-									_addFormWarnings(_element.getFormElement());
-								else if (_elementWarningMessage)
-									_warningElements.push(_element);
-							}
-						}
-					}) (_this._watchedElements);
-					
-					_this.setNodeInnerHtml(
-						'warnings',
-						_this._template({warningElements:_warningElements})
-					);
-
-					Uize.forEach(
-						_warningElements,
-						function (_warningElement, _elementNo) {
-							function _focus(_focused) { _warningElement.set({focused:_focused}) }
+							m.flushNodeCache(_messageNodeName);
+	
+							if (_messageNode)
+								m.unwireNode(_messageNode, 'click');
+							else // must be at the end, so quit
+								break;
 							
-							_this.wireNode(
-								'message' + _elementNo,
-								{
-									mouseover:function() { _focus(true) },
-									mouseout:function() { _focus(_false) }
-								}
-							);
+							_messageNo++;
 						}
-					);
-				}
-			};
-			
-			_classPrototype._wireWatchedElement = function (_watchedElement) {
-				var _this = this;
-
-				function _updateUiWarnings() { _this._updateUiWarnings() }
-				
-				var _wirings = {
-					'Changed.warningShown':_updateUiWarnings,
-					'Changed.warningMessage':_updateUiWarnings
-				};
-
-				// NOTE: This needs to be optimized such that we're not updating the UI over and over
-				// again even though the warning messages haven't changed.
-				_watchedElement.wire(_wirings);
-				
-				_this._wiringsLookup[_watchedElement.get('idPrefix')] = _wirings;
-			};
-
-		/*** Public Instance Methods ***/
-			_classPrototype.addWatchedElements = function (_elementsToWatch) {
-				var
-					_this = this,
-					_watchedElements = _this._watchedElements || [],
-					_elementsToWatchList = Uize.isArray(_elementsToWatch) ? _elementsToWatch : [_elementsToWatch],
-					_elementsToWatchLength = _elementsToWatchList.length,
-					_elementNo = -1
-				;
-
-				for (; ++_elementNo < _elementsToWatchLength;) {
-					var _watchedElement = _elementsToWatchList[_elementNo];
-
-					_watchedElements.push(_watchedElement);
-					_this._wireWatchedElement(_watchedElement);
-				}
-
-				_this._watchedElements = _watchedElements;
-				_this.fire('Changed.watchedElements');
-			};
+						
+						(function _addFormWarnings(_elements) {
+							for (var _elementNo = -1; ++_elementNo < _elements.length;) {
+								var
+									_element = _elements[_elementNo],
+									_elementWarningMessage = _element.get('warningMessage')
+								;
 		
-			_classPrototype.updateUi = function () {
-				var _this = this;
-
-				if (_this.isWired) {
-					_this._updateUiWarnings();
-					_this._updateUiCollapsed();
-					
-					_superclass.doMy (_this,'updateUi');
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var _this = this;
-
-				if (!_this.isWired) {
-					var _templateNode = _this.getNode('template');
-					
-					if (_templateNode)
-						_this._template = Uize.Template.compile(
-							_templateNode.innerHTML,
-							{
-								openerToken:'[%',
-								closerToken:'%]'
+								if (_element.get('isValid') == _false) {
+									if (_element.isForm)
+										_addFormWarnings(_element.getFormElement());
+									else if (_elementWarningMessage)
+										_warningElements.push(_element);
+								}
 							}
-						)
-					;
-					
-					_this.wireNode('toggleCollapsed', 'click', function() { _this.toggle('collapsed') } );
-
-					_superclass.doMy (_this,'wireUi');
+						}) (m._watchedElements);
+						
+						m.setNodeInnerHtml(
+							'warnings',
+							m._template({warningElements:_warningElements})
+						);
+	
+						_Uize.forEach(
+							_warningElements,
+							function (_warningElement, _elementNo) {
+								function _focus(_focused) { _warningElement.set({focused:_focused}) }
+								
+								m.wireNode(
+									'message' + _elementNo,
+									{
+										mouseover:function() { _focus(true) },
+										mouseout:function() { _focus(_false) }
+									}
+								);
+							}
+						);
+					}
 				}
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties({
+		;
+		
+		return _superclass.subclass({
+			alphastructor:function() {
+				this._wiringsLookup = {};
+				this._watchedElements = [];
+			},
+			
+			instanceMethods:{
+				/** Private **/	
+					_removeWatchedElements:_removeWatchedElements,
+					_updateUiCollapsed:_updateUiCollapsed,
+					_updateUiWarnings:_updateUiWarnings,
+					_wireWatchedElement:function (_watchedElement) {
+						var m = this;
+		
+						function _updateUiWarnings() { m._updateUiWarnings() }
+						
+						var _wirings = {
+							'Changed.warningShown':_updateUiWarnings,
+							'Changed.warningMessage':_updateUiWarnings
+						};
+		
+						// NOTE: This needs to be optimized such that we're not updating the UI over and over
+						// again even though the warning messages haven't changed.
+						_watchedElement.wire(_wirings);
+						
+						m._wiringsLookup[_watchedElement.get('idPrefix')] = _wirings;
+					},
+					
+				/** Public **/
+					addWatchedElements:function (_elementsToWatch) {
+						var
+							m = this,
+							_watchedElements = m._watchedElements || [],
+							_elementsToWatchList = _Uize.isArray(_elementsToWatch) ? _elementsToWatch : [_elementsToWatch],
+							_elementsToWatchLength = _elementsToWatchList.length,
+							_elementNo = -1
+						;
+		
+						for (; ++_elementNo < _elementsToWatchLength;) {
+							var _watchedElement = _elementsToWatchList[_elementNo];
+		
+							_watchedElements.push(_watchedElement);
+							m._wireWatchedElement(_watchedElement);
+						}
+		
+						m._watchedElements = _watchedElements;
+						m.fire('Changed.watchedElements');
+					},
+					removeWatchedElements:_removeWatchedElements,
+					updateUi:function () {
+						var m = this;
+		
+						if (m.isWired) {
+							m._updateUiWarnings();
+							m._updateUiCollapsed();
+							
+							_superclass.doMy (m,'updateUi');
+						}
+					},
+					wireUi:function () {
+						var m = this;
+		
+						if (!m.isWired) {
+							var _templateNode = m.getNode('template');
+							
+							if (_templateNode)
+								m._template = _Uize.Template.compile(
+									_templateNode.innerHTML,
+									{
+										openerToken:'[%',
+										closerToken:'%]'
+									}
+								)
+							;
+							
+							m.wireNode('toggleCollapsed', 'click', function() { m.toggle('collapsed') } );
+		
+							_superclass.doMy (m,'wireUi');
+						}
+					}
+			},
+			
+			stateProperties:{
 				_collapsed:{
 					name:'collapsed',
-					onChange:_classPrototype._updateUiCollapsed,
+					onChange:_updateUiCollapsed,
 					value:_false
 				},
 				_shown:{
 					name:'shown',
 					onChange:function () {
 						var
-							_this = this,
-							_shown = _this._shown === true
+							m = this,
+							_shown = m._shown === true
 						;
-						if (_this.isWired) {
-							_this.displayNode('', _shown);
-							_shown && _this._updateUiWarnings();
+						if (m.isWired) {
+							m.displayNode('', _shown);
+							_shown && m._updateUiWarnings();
 						}
 					},
 					value:_false
@@ -260,16 +260,15 @@ Uize.module ({
 						return _value;
 					},
 					onChange:function () {
-						var _this = this;
-						Uize.forEach (
-							_this._watchedElements,
-							function (_watchedElement) {_this._wireWatchedElement (_watchedElement)}
+						var m = this;
+						_Uize.forEach (
+							m._watchedElements,
+							function (_watchedElement) {m._wireWatchedElement (_watchedElement)}
 						);
-						_this._updateUiWarnings();
+						m._updateUiWarnings();
 					}
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
