@@ -72,6 +72,7 @@ Uize.module ({
 							Uize.Str.Has.hasPrefix (_path,_namespacePrefixAlreadyFolderOrganized)
 						);
 					},
+					recursive:true,
 					pathTransformer:function (_path) {
 						_fileSystem.copyFile ({
 							path:_modulesFolderPath + '/' + _path,
