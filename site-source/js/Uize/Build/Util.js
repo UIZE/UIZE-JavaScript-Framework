@@ -86,7 +86,7 @@ Uize.module ({
 
 								EXAMPLE
 								.............................................................................
-								Uize.Build.Util.moduleNameFromModulePath ('Uize_Widgets/Button/Html.js.jst');
+								Uize.Build.Util.moduleNameFromModulePath ('Uize/Widgets/Button/Html.js.jst');
 								.............................................................................
 
 								In the above example, the value ='Uize.Widgets.Button.Html'= would be returned.

@@ -31,7 +31,7 @@ Uize.module ({
 		'use strict';
 
 		/*** General Variables ***/
-			var _pathToResources = Uize.pathToResources + 'Uize_Widget_Tree_Menu/';
+			var _pathToResources = Uize.pathToResources + 'Uize/Widget/Tree/Menu/';
 
 		return _superclass.subclass ({
 			instanceMethods:{

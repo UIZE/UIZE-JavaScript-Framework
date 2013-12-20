@@ -32,7 +32,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_false = false,
-				_pathToResources = Uize.pathToResources + 'Uize_Widget_Tree_List/'
+				_pathToResources = Uize.pathToResources + 'Uize/Widget/Tree/List/'
 			;
 
 		/*** Private Instance Methods ***/

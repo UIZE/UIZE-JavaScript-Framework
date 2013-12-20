@@ -91,7 +91,7 @@ Uize.module ({
 					'<form id="CommIframe_form" style="display:none;" target="' + _iframeId + '" method="POST" accept-charset="utf-8">' +
 						'<input id="CommIframe_params" name="params" type="hidden"/>' +
 					'</form>' +
-					'<iframe id="' + _iframeId + '" name="' + _iframeId + '" width="1" height="1" src="' + Uize.pathToResources + 'Uize_Comm_Iframe/blank.html" frameborder="1" style="position:absolute; visibility:hidden;" scrolling="no"></iframe>'
+					'<iframe id="' + _iframeId + '" name="' + _iframeId + '" width="1" height="1" src="' + Uize.pathToResources + 'Uize/Comm/Iframe/blank.html" frameborder="1" style="position:absolute; visibility:hidden;" scrolling="no"></iframe>'
 				);
 			}
 

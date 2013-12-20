@@ -228,8 +228,8 @@ Uize.module ({
 							{
 								cursor:
 									m._getLowestAndNextMagPower ()._nextMagPower > m._magPower
-										? (_isIe ? 'url(' + Uize.pathToResources + 'Uize_Node/zoomin.cur)' : '-moz-zoom-in')
-										: (_isIe ? 'url(' + Uize.pathToResources + 'Uize_Node/zoomout.cur)' : '-moz-zoom-out')
+										? (_isIe ? 'url(' + Uize.pathToResources + 'Uize/Node/zoomin.cur)' : '-moz-zoom-in')
+										: (_isIe ? 'url(' + Uize.pathToResources + 'Uize/Node/zoomout.cur)' : '-moz-zoom-out')
 							}
 						);
 						*/

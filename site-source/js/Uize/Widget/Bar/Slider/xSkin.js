@@ -70,7 +70,7 @@ Uize.module ({
 							_trackDims = [_outerDims [0] - _borderThickness * 2,_outerDims [1] - _borderThickness * 2],
 							_knobDims = [_trackDims [0],_knobSize],
 							_borderHtml = '',
-							_resourcesFolderPath = _input.pathToResources + 'Uize_Widget_Bar_Slider/'
+							_resourcesFolderPath = _input.pathToResources + 'Uize/Widget/Bar/Slider/'
 						;
 						/*** Generate Border HTML ***/
 							if (_borderThickness > 0 && _input.borderTintLevel != 100) {
