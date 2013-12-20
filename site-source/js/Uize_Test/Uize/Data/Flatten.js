@@ -152,7 +152,7 @@ Uize.module ({
 									_flattened = Uize.Data.Flatten.flatten (_unflattened)
 								;
 								return (
-									!this.expectSameAs (_unflattened,_flattened) &&
+									this.expect (true,_unflattened !== _flattened) &&
 									this.expect ({foo:{bar:{baz:1,qux:2}}},_unflattened)
 								);
 							}
@@ -281,7 +281,7 @@ Uize.module ({
 									_unflattened = Uize.Data.Flatten.unflatten (_flattened)
 								;
 								return (
-									!this.expectSameAs (_flattened,_unflattened) &&
+									this.expect (true,_flattened !== _unflattened) &&
 									this.expect ({'foo.bar.baz':1,'foo.bar.qux':2},_flattened)
 								);
 							}

@@ -1,0 +1,68 @@
+This is a proposal document for a =Uize.Xml.Parser= module.
+
+This module would provide a versatile parser and serializer to support schema-agnostic parsing of XML / xHTML / HTML documents.
+
+Static Methods
+	Uize.Xml.Parser.parse
+		Parses an XML document string to produce a document object.
+
+	Uize.Xml.Parser.serialize
+		Serializes a document object to produce an XML document string.
+
+To Work Out
+	The following issues need to be worked out...
+
+	Parsing Technique
+		One of the following parsing techniques should be chosen...
+
+	- *streaming* - SAX-like, with support for streamed parsing and serialization, and parse events
+	- *forwards w/ state machine* - a forward parsing approach using a state machine approach, which could be powered by a configurable pattern engine
+	- *forwards w/ parser stack* - a forward parsing approach with a parser stack, with different flavors of parser for different of the sub-components of an XML document (tag, tag name, tag attributes, etc.)
+	- *forwards regular expression* - a forward parsing approach relying on regular expressions (probably not viable)
+
+	Using a Parser Stack Approach
+		Using a parser stack approach, the parsing jobs for parsing an XML document can be handed off to different parsers, as follows...
+
+		................................
+		Xml
+			XmlText
+			XmlTag
+				XmlTagName
+				XmlTagAttributes
+					XmlTagAttribute
+						XmlTagAttributeName
+						XmlTagAttributeValue
+			XmlCdata
+			XmlComment
+		................................
+
+		At any point in parsing a segment of text for a given parser, there will be an expected set of possible next characters. If a possible next character is an expected first character for any of the sub-parsers, then the first candidate sub-parser will be used and added to the parser stack. This could be accomplished plain through recursion, or through a single, managed stack.
+
+	Object Representation
+		JSON Representation
+			What's the best way to represent an XML document using a simple JSON object?
+			
+			POSSIBILITY
+			.....................
+			[
+				{
+					nodeType:...,
+					tagName:...,
+					attributes:[
+						{
+							name:...,
+							value:...
+						}
+					],
+					childNodes:[
+						...
+					]
+				}
+			]
+			.....................
+
+		Custom Object Representation
+			The ability to configure a map of tag names to tag classes.
+
+			With this ability, any type of XML document could be parsed and turned immediately into an object tree using classes to support different tag types. All classes should support the basic tag interface, to allow attributes to be set and queried, etc. This would imply creating a tag base class, where the basic interface / API could be inherited by all tag specific subclasses.
+
