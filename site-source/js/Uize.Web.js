@@ -278,7 +278,7 @@ Uize.module ({
 					;
 
 					if (_Uize_isString(_param)) { // selector string
-						_nodes = _object.selectCss(_param, _rootNode = _getById(_rootNode));
+						_nodes = _object.selectCss(_param, _rootNode = _select(_rootNode).nodes[0]);
 						_key = _param + (_rootNode ? '|' + _getNodeUid(_rootNode) : '');
 					}
 					else if (_Uize_Node_isNode(_param)) { // node reference
@@ -362,8 +362,8 @@ Uize.module ({
 								
 								VARIATION 1
 								.....................................
-								webOBJ = Uize.Web(selectorSTR, rootNodeBLOB);
-								.....................................
+								webOBJ = Uize.Web(selectorSTR, rootSelector);
+								.....................................          
 								
 								VARIATION 2
 								.....................................
@@ -507,7 +507,7 @@ Uize.module ({
 				if (_nodeList) {
 					var _newNodeList = [];
 					for (var _nodeNo = -1, _nodeListLength = _nodeList.length; ++_nodeNo < _nodeListLength;)
-						_newNodeList[_nodeNo] = _nodeList[_nodeNo];
+						_newNodeList[_nodeNo] = _nodeList[_nodeNo]
 					;
 					_nodeList = _newNodeList;
 				}
@@ -3320,7 +3320,7 @@ Uize.module ({
 								innerHeightINT = myWeb.innerHeight(); // one matched node
 								........................................................
 	
-								VARIATINO
+								VARIATION
 								........................................................
 								innerHeightARRAY = myWeb.innerHeight(returnAllBOOL); // multiple matched nodes
 								........................................................

@@ -59,29 +59,37 @@ Uize.module ({
 
 		/*** Utility Functions ***/
 			var
-				_getAncestors = function(_filterSelector, _fullTree, _findSelector) {
-					var _ancestors = [];
-					
-					this.each(
-						function() {
-							var _node = this;
-							while (_node = _node.parentNode) {
-								if (_findSelector && _isMatch(_node, _findSelector))
-									break;
-								
-								_node != _document
-									&& _isMatch(_node, _filterSelector)
-									&& _ancestors.push(_node)
-								;
+				_getAncestors = function(_root, _options) {
+					var
+						_filterSelector = _options._filter,
+						_targetSelector = _options._target,
+						_singleOnly = _options._singleOnly,
+						_includeSelf = _options._includeSelf,
+						
+						_node = _root,
+						_ancestors = []
+					;
 
-								if (!_fullTree)
-									break;
-							}
+					while (_node) {
+						if (_includeSelf || (_node != _root)) {
+							if (_targetSelector && _isMatch(_node, _targetSelector))
+								break;
+							
+							_node != _document
+								&& _isMatch(_node, _filterSelector)
+								&& _ancestors.push(_node)
+							;
+
+							if (_singleOnly)
+								break;
 						}
-					);
-					
-					return _object(_ancestors);
+						
+						_node = _node.parentNode;
+					}
+
+					return _ancestors;
 				},
+				_getNodeUid = _object.getNodeUid,
 				_getNodesLookup = function(_nodes) {
 					var
 						_nodesLookup = {},
@@ -117,7 +125,37 @@ Uize.module ({
 
 					return _testFunc;
 				},
-				_getNodeUid = _object.getNodeUid,
+				_getSiblings = function(_startNode, _options) {
+					var
+						_siblingProperty = _options._isPrev ?'previousSibling' : 'nextSibling',
+						_filterSelector = _options._filter,
+						_targetSelector = _options._target,
+						_includeSelf = _options._includeSelf,
+						_selfNode = _options._self || _startNode,
+						
+						_node = _startNode,
+						_siblings = []
+					;
+					
+					while (_node) {
+						// NOTE: Verify that we're looking at a DOM element and whether or not
+						// we include the self node
+						if ((_includeSelf || (_node != _selfNode)) && _node.nodeType == 1) {
+							if (_targetSelector && _isMatch(_node, _targetSelector))
+								break;
+							
+							_isMatch(_node, _filterSelector)
+								&& _siblings.push(_node);
+							
+							if (_options._singleOnly)
+								break;
+						}
+
+						_node = _node[_siblingProperty];
+					}
+					
+					return _siblings;
+				},
 				_isMatch = _object.isMatch,
 				_single = function (_nodes, _index) {
 					var
@@ -135,6 +173,19 @@ Uize.module ({
 			;
 		
 		/*** Private Instance Methods ***/
+			_objectPrototype._appendListHelper = function(_listGeneratorFunc) {
+				var _list = [];
+				
+				// NOTE: Essentially go through each of the matched DOM nodes,
+				// and add the list returned from _listGeneratorFunc to the end
+				// of our uber list. *this* in _listGeneratorFunc will be a ref to the node
+				this.each(
+					function() { _list.push.apply (_list, _listGeneratorFunc.call(this)) }
+				);
+				
+				return _object(_list);
+			};
+
 			_objectPrototype._filter = function(_selector, _mustMatch) {
 				var
 					m = this,
@@ -155,9 +206,31 @@ Uize.module ({
 				
 				return _newSet;
 			};
+
+			_objectPrototype._getAncestors = function(_options) {
+				return this._appendListHelper(function() { return _getAncestors(this, _options) });
+			};
 		
 		/*** Public Instance Methods ***/
 			/** Filtering **/
+				var
+					_makeIsOnNodeTreeMethod = function(_objectNodesAreRoot) {
+						// NOTE: the goal of this function is to add the "contains" & "contained" methods to the prototype
+						// which are basically the same, just with the root & node parameters swapped
+						_objectPrototype[_objectNodesAreRoot ? 'contains' : 'contained'] = function(_nodeParam, _returnAll) {
+							return this.handleGetAction(
+								function(_node) {
+									return _Uize_Node.isOnNodeTree(
+										_objectNodesAreRoot ? _nodeParam : _node,
+										_objectNodesAreRoot ? _node : _nodeParam
+									);
+								},
+								_returnAll
+							);
+						};
+					}
+				;
+
 				_objectPrototype.any = function(_selector) { return this._filter(_selector).length > 0 };
 					/*?
 						Instance Methods
@@ -184,6 +257,40 @@ Uize.module ({
 								anyBOOL = myWeb.any(webOBJ);
 								........................................................
 					*/
+
+				_makeIsOnNodeTreeMethod();
+					/*?
+						Instance Methods
+							contained
+								Checks the current matched set of DOM nodes and returns =true= if they are contained by the specified DOM node, =false= otherwise.
+	
+								SYNTAX
+								........................................................
+								isContainedBOOL = myWeb.contained(nodeBLOB); // one matched node
+								isContainedARRAY = myWeb.contained(nodeBLOB); // multiple matched nodes
+								........................................................
+								
+								NOTES
+								- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
+								- See also related =contains= method
+					*/
+
+				_makeIsOnNodeTreeMethod(_true);
+					/*?
+						Instance Methods
+							contains
+								Checks the current matched set of DOM nodes and returns =true= if they contain the specified DOM node, =false= otherwise.
+	
+								SYNTAX
+								........................................................
+								containsBOOL = myWeb.contains(nodeBLOB); // one matched node
+								containsARRAY = myWeb.contains(nodeBLOB); // multiple matched nodes
+								........................................................
+								
+								NOTES
+								- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
+								- See also related =contained= method
+					*/
 				
 				_objectPrototype.filter = function(_selector) { return _object(this._filter(_selector)) };
 					/*?
@@ -198,17 +305,17 @@ Uize.module ({
 								
 								VARIATION 1
 								........................................................
-								anyBOOL = myWeb.filter(testFUNC);
+								newWeb = myWeb.filter(testFUNC);
 								........................................................
 								
 								VARIATION 2
 								........................................................
-								anyBOOL = myWeb.filter(nodeOBJ);
+								newWeb = myWeb.filter(nodeOBJ);
 								........................................................
 								
 								VARIATION 3
 								........................................................
-								anyBOOL = myWeb.filter(webOBJ);
+								newWeb = myWeb.filter(webOBJ);
 								........................................................
 								
 								NOTES
@@ -225,7 +332,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							first
-								Reduce the set of matched DOM nodes to the first in the set, returning a new =Uize.Web= object containing that DOM node.
+								Reduces the set of matched DOM nodes to the first in the set, returning a new =Uize.Web= object containing that DOM node.
 	
 								SYNTAX
 								........................................................
@@ -239,23 +346,103 @@ Uize.module ({
 								
 								VARIATION 2
 								........................................................
-								anyBOOL = myWeb.first(testFUNC);
+								newWeb = myWeb.first(testFUNC);
 								........................................................
 								
 								VARIATION 3
 								........................................................
-								anyBOOL = myWeb.first(nodeOBJ);
+								newWeb = myWeb.first(nodeOBJ);
 								........................................................
 								
 								VARIATION 4
 								........................................................
-								anyBOOL = myWeb.first(webOBJ);
+								newWeb = myWeb.first(webOBJ);
 								........................................................
 								
 								NOTES
 								- Returns a reference to the a new =Uize.Web= object
 								- See companion =last= method
 								- See related =single= and =filter= methods
+					*/
+				};
+
+				_objectPrototype.has = function(_selector) { 
+					return this._appendListHelper(
+						function() { return [_object.select(_selector, this).nodes.length ? this : null] }
+					);
+					/*?
+						Instance Methods
+							has
+								Reduces the set of matched DOM nodes to those that have a descendant that matches the specified selector, test function, element or =Uize.Web= object.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.has(selectorSTR);
+								........................................................
+								
+								VARIATION 1
+								........................................................
+								newWeb = myWeb.has(testFUNC);
+								........................................................
+								
+								VARIATION 2
+								........................................................
+								newWeb = myWeb.has(nodeOBJ);
+								........................................................
+								
+								VARIATION 3
+								........................................................
+								newWeb = myWeb.has(webOBJ);
+								........................................................
+								
+								NOTES
+								- Returns a reference to the a new =Uize.Web= object
+								- See related =find= method
+					*/
+				};
+				
+				_objectPrototype.index = function(_selector) {
+					var
+						_index = -1,
+						_elementsLength = this.length,
+						_elementNo = -1
+					;
+					
+					for (; ++_elementNo < _elementsLength;) {
+						if (_isMatch(this[_elementNo], _selector)) {
+							_index = _elementNo;
+							break;
+						}
+					}
+					
+					return _index;
+					/*?
+						Instance Methods
+							index
+								Returns an integer indicating the position of the specified selector, node generator function, element or =Uize.Web= object within the set of matched DOM nodes.
+	
+								SYNTAX
+								........................................................
+								indexINT = myWeb.index(selectorSTR);
+								........................................................
+								
+								VARIATION 1
+								........................................................
+								indexINT = myWeb.index(nodeFUNC);
+								........................................................
+								
+								VARIATION 2
+								........................................................
+								indexINT = myWeb.index(nodeOBJ);
+								........................................................
+								
+								VARIATION 3
+								........................................................
+								indexINT = myWeb.index(webOBJ);
+								........................................................
+								
+								NOTES
+								- Returns =-1= if a match is not found
 					*/
 				};
 				
@@ -282,17 +469,17 @@ Uize.module ({
 								
 								VARIATION 2
 								........................................................
-								anyBOOL = myWeb.last(testFUNC);
+								newWeb = myWeb.last(testFUNC);
 								........................................................
 								
 								VARIATION 3
 								........................................................
-								anyBOOL = myWeb.last(nodeOBJ);
+								newWeb = myWeb.last(nodeOBJ);
 								........................................................
 								
 								VARIATION 4
 								........................................................
-								anyBOOL = myWeb.last(webOBJ);
+								newWeb = myWeb.last(webOBJ);
 								........................................................
 								
 								NOTES
@@ -315,17 +502,17 @@ Uize.module ({
 								
 								VARIATION 1
 								........................................................
-								anyBOOL = myWeb.not(testFUNC);
+								newWeb = myWeb.not(testFUNC);
 								........................................................
 								
 								VARIATION 2
 								........................................................
-								anyBOOL = myWeb.not(nodeOBJ);
+								newWeb = myWeb.not(nodeOBJ);
 								........................................................
 								
 								VARIATION 3
 								........................................................
-								anyBOOL = myWeb.not(webOBJ);
+								newWeb = myWeb.not(webOBJ);
 								........................................................
 								
 								NOTES
@@ -369,27 +556,19 @@ Uize.module ({
 					*/
 			
 			/** Traversing **/
-				_objectPrototype.add = function(_selector, _rootNode) {
-					var
-						_mergedNodes = this.element(),
-						_nodesLookup = _getNodesLookup(_mergedNodes),
-						_addedNodes = _object.select(_selector, _rootNode).nodes,
-						_addedNodesLength = _addedNodes.length,
-						_nodeNo = -1
-					;
-	
-					// ensure no duplicates in the nodes to add
-					for (_nodeNo = -1; ++_nodeNo < _addedNodesLength;) {
-						var _node = _addedNodes[_nodeNo];
-						if (!_nodesLookup[_getNodeUid(_node)]) // assuming added nodes has no duplicates
-							_mergedNodes.push(_node);
-					}
+				_objectPrototype.add = function(_selector, _rootSelector) {
+					var _mergedNodes = this.element();
 					
-					// NOTE: Right now we're making a clone of the underlying nodes, the addedNodes is a new array
-					// and constructing the object is making a clone of the merged nodes. How can we reduce the
-					// number of unused new arrays while keeping the node order?
-					
-					return _object(_mergedNodes); // create new object w/ merged set of nodes (which will have a new _key)
+					// add the nodes to add
+					_mergedNodes.push.apply(
+						_mergedNodes,
+						_object.select(_selector, _rootSelector).nodes // nodes we're adding
+					);
+
+					// create new object w/ merged set of nodes (which will have a new _key)
+					// NOTE: constructor strips out duplicates
+					return _object(_mergedNodes); 
+						
 					/*?
 						Instance Methods
 							add
@@ -402,7 +581,7 @@ Uize.module ({
 								
 								VARIATION 1
 								........................................................
-								myWeb = myWeb.add(selectorSTR, nodeBLOB);
+								myWeb = myWeb.add(selectorSTR, rootSelector);
 								........................................................
 								
 								VARIATION 2
@@ -431,8 +610,7 @@ Uize.module ({
 					*/
 				};
 				
-				_objectPrototype.ancestors = function(_selector) {
-					return _getAncestors.call(this, _selector, _true);
+				_objectPrototype.ancestors = function(_selector) { return this._getAncestors({_filter:_selector}) };
 					/*?
 						Instance Methods
 							ancestors
@@ -443,7 +621,7 @@ Uize.module ({
 								newWeb = myWeb.ancestors();
 								........................................................
 								
-								VARIATION 1
+								VARIATION
 								........................................................
 								newWeb = myWeb.ancestors(selector);
 								........................................................
@@ -451,12 +629,11 @@ Uize.module ({
 								NOTES
 								- Returns a reference to a new =Uize.Web= object
 								- Any duplicates are removed
-								- See related =ancestorsUntil= and =parent= methods
+								- See related =ancestorsUntil=, =closest= and =parent= methods
 					*/
-				};
 				
-				_objectPrototype.ancestorsUntil = function(_findSelector, _filterSelector) {
-					return _getAncestors.call(this, _filterSelector, _true, _findSelector);
+				_objectPrototype.ancestorsUntil = function(_targetSelector, _filterSelector) {
+					return this._getAncestors({_filter:_filterSelector, _target:_targetSelector});
 					/*?
 						Instance Methods
 							ancestors
@@ -464,15 +641,15 @@ Uize.module ({
 	
 								SYNTAX
 								........................................................
-								newWeb = myWeb.ancestorsUntil(findSelector, filterSelector);
+								newWeb = myWeb.ancestorsUntil(targetSelector, filterSelector);
 								........................................................
 								
 								VARIATION 1
 								........................................................
-								newWeb = myWeb.ancestorsUntil(findSelector);
+								newWeb = myWeb.ancestorsUntil(targetSelector);
 								........................................................
 								
-								VARIATION 1
+								VARIATION 2
 								........................................................
 								newWeb = myWeb.ancestorsUntil();
 								........................................................
@@ -484,14 +661,75 @@ Uize.module ({
 					*/
 				};
 				
-				_objectPrototype.contents = function(_selector) {
-					var _allChildNodes = [];
-					
-					this.each(
-						function() { _allChildNodes.push.apply (_allChildNodes, _Uize.copyList(this.childNodes).splice(0, Infinity)) }
+				_objectPrototype.children = function(_selector) {
+					return this._appendListHelper(
+						function() {
+							return _getSiblings(
+								this.firstChild, 
+								{
+									_filter:_selector,
+									_includeSelf:_true
+								}
+							);
+						}
 					);
-					
-					var _newObject = _object(_allChildNodes);
+					/*?
+						Instance Methods
+							children
+								Retrieves the children of each DOM node in the matched set of DOM nodes, excluding text and comment nodes, filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.children();
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.children(selector);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
+								- See related =contents= method
+					*/
+				};
+				
+				_objectPrototype.closest = function(_selector) { 
+					return this._appendListHelper(
+						function() {
+							// NOTE: Essentially this works by calling _getAncestors which goes up the ancestory tree (including self),
+							// and then returns an array of 1, which is the first match (since we pass the selector to _getAncestors)
+							// If there happen to be no matches, we'll just return an array w/ an undefined value which will get
+							// ignored by the object constructor
+							return _getAncestors(
+								this, 
+								{
+									_filter:_selector,
+									_includeSelf:_true
+								}
+							).slice(0, 1); // just get the first one
+						}
+					);
+					/*?
+						Instance Methods
+							closest
+								Retrieves the first DOM node in DOM ancestory tree (including the DOM node itself) for each DOM node in the matched set of DOM nodes that matches the specified selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.closest(selector);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a new =Uize.Web= object
+								- See related =ancestors= and =parent= methods
+					*/
+				};
+				
+				_objectPrototype.contents = function(_selector) {
+					var _newObject = this._appendListHelper(
+						function() { return _Uize.copyList(this.childNodes) }
+					);
 					
 					return _selector ? _newObject.filter(_selector) : _newObject;
 					/*?
@@ -511,6 +749,52 @@ Uize.module ({
 								
 								NOTES
 								- Returns a reference to a =Uize.Web= object
+								- See related =children= method
+					*/
+				};
+					
+				_objectPrototype.find = function(_selector) {
+					return this._appendListHelper(
+						function() {
+							return _Uize.isPlainObject(_selector)
+								? _Uize_Node.find(_Uize.copy(_selector, {root:this})) // force node as root
+								: _object.select(_selector, this).nodes
+							;
+						}
+					);
+					/*?
+						Instance Methods
+							find
+								Retrieves *all* the descendants of each of the set of matched DOM nodes, filtered by the specified selector, node generator function, element or =Uize.Web= object.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.find(selectorSTR);
+								........................................................
+								
+								VARIATION 1
+								........................................................
+								newWeb = myWeb.find(testFUNC);
+								........................................................
+								
+								VARIATION 2
+								........................................................
+								newWeb = myWeb.find(nodeOBJ);
+								........................................................
+								
+								VARIATION 3
+								........................................................
+								newWeb = myWeb.find(webOBJ);
+								........................................................
+								
+								VARIATION 4
+								........................................................
+								newWeb = myWeb.find(propertiesOBJ);
+								........................................................
+								
+								NOTES
+								- Returns a reference to the a new =Uize.Web= object
+								- See related =ancestors= and =has= methods
 					*/
 				};
 				
@@ -529,8 +813,105 @@ Uize.module ({
 								- Returns a reference to a =Uize.Web= object
 					*/
 				
-				_objectPrototype.parent = function(_selector) {
-					return _getAncestors.call(this, _selector, _false);
+				_objectPrototype.next = function(_selector) {
+					return this._appendListHelper(
+						function() {
+							return _getSiblings(
+								this, 
+								{
+									_filter:_selector,
+									_singleOnly:_true
+								}
+							);
+						}
+					);
+					/*?
+						Instance Methods
+							next
+								Retrieves the immediate sibling following each DOM node in the matched set of DOM nodes, excluding text and comment nodes, filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.next();
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.next(selector);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
+								- See related =previous=, =nextAll= and =nextUntil= methods
+					*/
+				};
+				
+				_objectPrototype.nextAll = function(_selector) {
+					return this._appendListHelper(
+						function() {
+							return _getSiblings(
+								this, 
+								{
+									_filter:_selector
+								}
+							);
+						}
+					);
+					/*?
+						Instance Methods
+							nextAll
+								Retrieves the following siblings of each DOM node in the matched set of DOM nodes, excluding text and comment nodes, filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.nextAll();
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.nextAll(selector);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
+								- See related =next= and =nextUntil= methods
+					*/
+				};
+				
+				_objectPrototype.nextUntil = function(_target, _filter) {
+					return this._appendListHelper(
+						function() {
+							return _getSiblings(
+								this, 
+								{
+									_filter:_filter,
+									_target:_target
+								}
+							);
+						}
+					);
+					/*?
+						Instance Methods
+							nextUntil
+								Retrieves the following siblings of each DOM node in the matched set of DOM nodes, excluding text and comment nodes, up to but not including the DOM node matched by the target selector and filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.nextUntil(target);
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.nextUntil(target, filter);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
+								- See related =next= and =nextAll= methods
+					*/
+				};
+				
+				_objectPrototype.parent = function(_selector) { return this._getAncestors({filter:_selector, _singleOnly:_true}) };
 					/*?
 						Instance Methods
 							parent
@@ -549,7 +930,170 @@ Uize.module ({
 								NOTES
 								- Returns a reference to a new =Uize.Web= object
 								- Any duplicates are removed
-								- See related =ancestors= and =ancestorsUntil= methods
+								- See related =ancestors=, =ancestorsUntil= and =closest= methods
+					*/
+				
+				_objectPrototype.previous = function(_selector) {
+					return this._appendListHelper(
+						function() {
+							return _getSiblings(
+								this, 
+								{
+									_isPrev:_true,
+									_filter:_selector,
+									_singleOnly:_true
+								}
+							);
+						}
+					);
+					/*?
+						Instance Methods
+							previous
+								Retrieves the immediate sibling preceeding each DOM node in the matched set of DOM nodes, excluding text and comment nodes, filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.previous();
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.previous(selector);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
+								- See related =next=, =previousAll= and =previousUntil= methods
+					*/
+				};
+				
+				_objectPrototype.previousAll = function(_selector) {
+					return this._appendListHelper(
+						function() {
+							return _getSiblings(
+								this, 
+								{
+									_isPrev:_true,
+									_filter:_selector
+								}
+							);
+						}
+					);
+					/*?
+						Instance Methods
+							previousAll
+								Retrieves the preceeding siblings of each DOM node in the matched set of DOM nodes, excluding text and comment nodes, filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.previousAll();
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.previousAll(selector);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
+								- See related =previous= and =previousUntil= methods
+					*/
+				};
+				
+				_objectPrototype.previousUntil = function(_target, _filter) {
+					return this._appendListHelper(
+						function() {
+							return _getSiblings(
+								this, 
+								{
+									_isPrev:_true,
+									_filter:_filter,
+									_target:_target
+								}
+							);
+						}
+					);
+					/*?
+						Instance Methods
+							previousUntil
+								Retrieves the preceeding siblings of each DOM node in the matched set of DOM nodes, excluding text and comment nodes, up to but not including the DOM node matched by the target selector and filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.previousUntil(target);
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.previousUntil(target, filter);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
+								- See related =previous= and =previousAll= methods
+					*/
+				};
+				
+				_objectPrototype.siblingIndex = function(_returnAll) {
+					return this.handleGetAction(
+						function(_node) {
+							return _Uize.indexIn(
+								_object(_node.parentNode).children(),
+								_node
+							);
+						},
+						_returnAll
+					);
+					/*?
+						Instance Methods
+							siblingIndex
+								Retrieves an integer indicating the position of the first DOM node within the matched set of DOM nodes relative to its sibling elements in the DOM.
+	
+								SYNTAX
+								........................................................
+								indexINT = myWeb.siblingIndex(); // one matched node
+								........................................................
+	
+								VARIATION
+								........................................................
+								indexARRAY = myWeb.siblingIndex(returnAllBOOL); // multiple matched nodes
+								........................................................
+								
+								NOTES
+								- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
+					*/
+				};
+				
+				_objectPrototype.siblings = function(_selector) {
+					return this._appendListHelper(
+						function() {
+							return _getSiblings(
+								(this.parentNode || {}).firstChild, 
+								{
+									_filter:_selector,
+									_self:this
+								}
+							);
+						}
+					);
+					/*?
+						Instance Methods
+							siblings
+								Retrieves the siblings of each DOM node in the matched set of DOM nodes, excluding text and comment nodes, filtered by the optional selector.
+	
+								SYNTAX
+								........................................................
+								newWeb = myWeb.siblings();
+								........................................................
+								
+								VARIATION
+								........................................................
+								newWeb = myWeb.siblings(selector);
+								........................................................
+								
+								NOTES
+								- Returns a reference to a =Uize.Web= object
+								- See related =nextAll= and =previousAll= methods
 					*/
 				};
 	}

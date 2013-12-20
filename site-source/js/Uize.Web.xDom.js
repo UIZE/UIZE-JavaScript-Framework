@@ -133,21 +133,6 @@ Uize.module ({
 
 							return m;
 						};
-					},
-					_makeIsOnNodeTreeMethod = function(_objectNodesAreRoot) {
-						// NOTE: the goal of this function is to add the "contains" & "contained" methods to the prototype
-						// which are basically the same, just with the root & node parameters swapped
-						_objectPrototype[_objectNodesAreRoot ? 'contains' : 'contained'] = function(_nodeParam, _returnAll) {
-							return this.handleGetAction(
-								function(_node) {
-									return _Uize_Node.isOnNodeTree(
-										_objectNodesAreRoot ? _nodeParam : _node,
-										_objectNodesAreRoot ? _node : _nodeParam
-									);
-								},
-								_returnAll
-							);
-						};
 					}
 				;
 				
@@ -261,40 +246,6 @@ Uize.module ({
 								- Returns a reference to the same =Uize.Web= object
 								- If a DOM node (or an array of DOM nodes) is specified as an argument, but is being added before a single DOM node (i.e. there is only one DOM node in the set of matched DOM nodes), that DOM node will be moved and not cloned.
 								- If a DOM node (or an array of DOM nodes) is specified as an argument, but is being added before multiple DOM nodes (i.e. there is more than one DOM node in the set of matched DOM nodes), that DOM node will be cloned before being inserted.
-					*/
-
-				_makeIsOnNodeTreeMethod();
-					/*?
-						Instance Methods
-							contained
-								Checks the current matched set of DOM nodes and returns =true= if they are contained by the specified DOM node, =false= otherwise.
-	
-								SYNTAX
-								........................................................
-								isContainedBOOL = myWeb.contained(nodeBLOB); // one matched node
-								isContainedARRAY = myWeb.contained(nodeBLOB); // multiple matched nodes
-								........................................................
-								
-								NOTES
-								- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
-								- See also related =contains= method
-					*/
-
-				_makeIsOnNodeTreeMethod(_true);
-					/*?
-						Instance Methods
-							contains
-								Checks the current matched set of DOM nodes and returns =true= if they are contain the specified DOM node, =false= otherwise.
-	
-								SYNTAX
-								........................................................
-								containsBOOL = myWeb.contains(nodeBLOB); // one matched node
-								containsARRAY = myWeb.contains(nodeBLOB); // multiple matched nodes
-								........................................................
-								
-								NOTES
-								- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
-								- See also related =contained= method
 					*/
 					
 				_makeInjectHtmlMethodFrom('insertAfter', 'after');
