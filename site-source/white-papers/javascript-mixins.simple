@@ -1,14 +1,61 @@
 Introduction
-	.
+	The UIZE JavaScript Framework provides a versatile mixin system for implementing reusable fragments of functionality that can be mixed in to different classes in a class hierarchy.
 
 	PROPOSAL
 		This document is a proposal for a feature and is written in the style of describing the feature as though it were already implemented (ie. documentation for a future feature).
 
 Mixins as Augmenter Modules
-	.
+	As implemented in the UIZE JavaScript Framework, mixins are essentially augmenter modules.
+
+	A mixin module is intended to augment other modules by adding new caoabilities or modifying their existing capabilities. An example of a mixin module would be a module that adds an =area= state property to a =Rectangle= class, where the value of the =area= state property is derived from the values of the =Rectangle= class' existing =width= and =height= state properties.
+
+	Mixins Need to be Applied
+		As augmenter modules, mixins need to be loaded and then deliberately applied to the desired modules.
+
+		This can be done in a few different ways, to suit your situation and tastes...
+
+		Declared as a Feature When Subclassing
+			.
+
+			EXAMPLE
+			................................................
+			var MyNamespace.MyClass = Uize.Class.subclass ({
+				mixin:MyNamespace.MyAwesomeMixin
+			});
+			................................................
+
+		Declared as a Feature on an Existing Class
+			.
+
+			EXAMPLE
+			.......................................................
+			var MyNamespace.MyClass = Uize.Class.subclass ();
+
+			MyNamespace.MyClass.mixin (MyNamespace.MyAwesomeMixin);
+			.......................................................
+
+		Mixed in Using the Uize.mixin Method
+			.
+
+			EXAMPLE
+			............................................................
+			var MyNamespace.MyClass = Uize.Class.subclass ();
+
+			Uize.mixin (MyNamespace.MyClass,MyNamespace.MyAwesomeMixin);
+			............................................................
+
+	Loading Mixins Doesn't Have Side Effects
+		Because `mixins need to be applied` deliberately in order for the mixin functionality to be added to other modues, simply `loading mixins doesn't have side effects`.
+
+		Mixin Modules Versus Extension Modules
+			.
+
+			This is in stark contrast to extension modules, that extend specific modules when they are loaded. Extension modules are less versatile because they are only designed to augment specific modules,
 
 	Mixins Aren't Standalones
 		.
+
+		Mixins are really reusable fragments of functionality that are intended to be used by multiple other modules in order to "mix in" capabilities that need to be available in all those other modules, but where that effect cannot be accomplished through a standard inheritance approach. The different modules may be classes from entirely different class hierarchies that do not share a common base class that can be modified)
 
 	Classes Can't be Mixins
 		.
@@ -38,40 +85,52 @@ The Uize.mixin Method
 	sourceFUNCorOBJ = Uize.mixin (FUNCorOBJ,mixinOrMixinsFUNCorOBJorARRAY);
 	.......................................................................
 
-	Process...
-
-	- if mixinOrMixins is a function, then it is called with the source as an argument
-	- if mixinOrMixins is an array, then the array is iterated over and Uize.mixin is called for each element with source as first argument and element as second argument
-	- if mixinOrMixins is an object, then...
-		- if source supports a declare method
-			- then the declare method is called on the source, with mixinOrMixins as the single argument
-			- else the mixinOrMixins object is merged into the source
-
-	IMPLEMENTATION
-	..........................................................
-	Uize.mixin = function (_source,_mixinOrMixins,_mixer) {
-		function _mixIntoSource (_mixinOrMixins) {
-			Uize.isFunction (_mixinOrMixins)
-				? _mixinOrMixins (_source)
-				: Uize.isArray (_mixinOrMixins)
-					? Uize.forEach (_mixinOrMixins,_mixIntoSource)
-					: _mixer
-						? _mixer (_source,_mixinOrMixins)
-						: Uize.mergeInto (_source,_mixinOrMixins)
-			;
+	Implementation Approach
+		PSEUDOCODE
+		.............................................................................................
+		if (not mixin has already been applied) {
+			if (mixinOrMixins is a function) {
+				call it with the source as an argument
+			} else if (mixinOrMixins is an array) {
+				for (each element of the mixinOrMixins array) {
+					call Uize.mixin with source as first argument and element as second argument
+				}
+			} else {
+				if (a mixer method is provided) {
+					call mixer method with source as first argument and mixinOrMixins as second argument
+				} else {
+					merge the mixinOrMixins object into the source
+				}
+			}
 		}
-		_mixIntoSource (_mixinOrMixins);
-		return _source;
-	};
+		.............................................................................................
 
-	function _mixer (_source,_mixin) {
-		_source.declare (_mixin);
-	}
+		IMPLEMENTATION
+		.............................................................
+		Uize.mixin = function (_source,_mixinOrMixins,_mixer) {
+			function _mixIntoSource (_mixinOrMixins) {
+				if (!Uize.isIn (_source.mixins,_mixinOrMixins))
+					Uize.isFunction (_mixinOrMixins)
+						? _mixinOrMixins (_source)
+						: Uize.isArray (_mixinOrMixins)
+							? Uize.forEach (_mixinOrMixins,_mixIntoSource)
+							: _mixer
+								? _mixer (_source,_mixinOrMixins)
+								: Uize.mergeInto (_source,_mixinOrMixins)
+				;
+			}
+			_mixIntoSource (_mixinOrMixins);
+			return _source;
+		};
 
-	Uize.Class.mixin = function (_mixinOrMixins) {
-		return Uize.mixin (this,_mixinOrMixins,_mixer);
-	};
-	..........................................................
+		function _mixer (_source,_mixin) {
+			_source.declare (_mixin);
+		}
+
+		Uize.Class.mixin = function (_mixinOrMixins) {
+			return Uize.mixin (this,_mixinOrMixins,_mixer);
+		};
+		.............................................................
 
 Class Mixins
 	.
@@ -165,7 +224,10 @@ Class Mixins
 						],
 						builder:function (_superclass) {
 							return _superclass.subclass ({
-								mixin:[MyNamespace.WidthAndHeightMixin,MyNamespace.AreaMixin]
+								mixin:[
+									MyNamespace.WidthAndHeightMixin,
+									MyNamespace.AreaMixin
+								]
 							});
 						}
 					});
@@ -179,25 +241,11 @@ Class Mixins
 				MyNamespace.Rect.mixin (MyNamespace.WidthAndHeightMixin);
 				...
 
-				Applying an Augmenter Mixin by Function Call
+				Applying a Mixin Using the MyClass.mixin Static Method
 					.
 
 					EXAMPLE
-					...................................................
-					// a width-and-height mixin, implemented as a class augmenter function
-					Uize.module ({
-						name:'MyNamespace.WidthAndHeightMixin',
-						builder:function () {
-							return function (_class) {
-								_class.stateProperties ({
-									width:{value:0},
-									height:{value:0}
-								});
-							};
-						}
-					});
-
-					// a rectangle class that uses the width-and-height mixin by function call
+					.....................................................
 					Uize.module ({
 						name:'MyNamespace.Rect',
 						superclass:'Uize.Class',
@@ -205,34 +253,35 @@ Class Mixins
 						builder:function (_superclass) {
 							var _class = _superclass.subclass ();
 							// ... ... ... ...
-							// ... ... ... ...
-							MyNamespace.WidthAndHeightMixin (_class);
-							// ... ... ... ...
-							// ... ... ... ...
-							return _class;
-						}
-					});
-					...................................................
 
-
-					SAFER
-					...................................................
-					// a rectangle class that uses the width-and-height mixin by function call
-					Uize.module ({
-						name:'MyNamespace.Rect',
-						superclass:'Uize.Class',
-						required:'MyNamespace.WidthAndHeightMixin',
-						builder:function (_superclass) {
-							var _class = _superclass.subclass ();
-							// ... ... ... ...
-							// ... ... ... ...
 							_class.mixin (MyNamespace.WidthAndHeightMixin);
-							// ... ... ... ...
+
 							// ... ... ... ...
 							return _class;
 						}
 					});
-					...................................................
+					.....................................................
+
+				Applying a Mixin Using the Uize.mixin Static Method
+					.
+
+					EXAMPLE
+					..........................................................
+					Uize.module ({
+						name:'MyNamespace.Rect',
+						superclass:'Uize.Class',
+						required:'MyNamespace.WidthAndHeightMixin',
+						builder:function (_superclass) {
+							var _class = _superclass.subclass ();
+							// ... ... ... ...
+
+							Uize.mixin (_class,MyNamespace.WidthAndHeightMixin);
+
+							// ... ... ... ...
+							return _class;
+						}
+					});
+					..........................................................
 
 	Mixin Functionality Organized Into Layers
 		.
@@ -368,7 +417,7 @@ Class Mixins
 			.
 
 			EXAMPLE
-			...
+			.........................................
 			// a rect mixin
 			Uize.module ({
 				name:'MyNamespace.RectMixin',
@@ -386,7 +435,7 @@ Class Mixins
 
 			// a cuboid mixin
 			Uize.module ({
-				name:'MyNamespace.RectMixin',
+				name:'MyNamespace.CuboidMixin',
 				required:[
 					'MyNamespace.RectMixin',
 					'MyNamespace.DepthMixin',
@@ -400,10 +449,11 @@ Class Mixins
 					];
 				}
 			});
-			...
+			.........................................
 
 Object Mixins
 	.
+
 
 Mutual Compatibility
 	.
