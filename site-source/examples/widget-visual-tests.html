@@ -122,12 +122,18 @@ Uize.require (
 			_page.wireNode ('selector','change',_handleSelection);
 
 		/*** initialize ***/
-			/*** populate selector ***/
-				Uize.map (
-					[_selectorPlaceholderText].concat (_testNames),
-					function (_testName) {return new Option (_testName,_testName)},
-					_page.getNode ('selector').options
-				);
+			/*** populate test selector ***/
+				var
+					_selector = _page.getNode ('selector'),
+					_selectorOptions = _selector.options
+				;
+				_selectorOptions [0] = new Option (_selectorPlaceholderText,_selectorPlaceholderText);
+				for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
+					_selectorOptions [_selectorOptions.length] = new Option (
+						_testName = _testNames [_testNo],
+						_testName
+					)
+				;
 
 			/*** initialize selector, using query param ***/
 				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).widgetClass);
