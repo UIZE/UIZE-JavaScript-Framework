@@ -482,6 +482,15 @@ Considerations for Implementing Mixins
 	Avoid Order Requirements Amongst Mixins
 		.
 
+Special Design Requirements
+	- loading a mixin should not have side effects
+	- a mixin should be able to aggregate one or more other mixins
+	- a mixin should be able to use and augment another mixin
+	- if two mixins require a common mixin, then applying both of them should not redundantly apply the common mixin
+	- it should be possible to determine what mixins have been applied to an object
+	- subclasses should inherit the information about applied mixins
+	- it should be possible to determine the mixin origin of a mixed in feature of a class
+
 Open Questions
 	Can Mixins be Standalone?
 		For example, if two widget classes existed that implemented some part of a UI, would it be possible to create a new subclass and then mixin those two widget classes?
