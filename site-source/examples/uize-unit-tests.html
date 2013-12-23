@@ -268,7 +268,7 @@ Uize.require (
 					_selector = _page.getNode ('testSelector'),
 					_selectorOptions = _selector.options
 				;
-				_selectorOptions [_selectorOptions.length] = new Option (_runAllModuleTests,_runAllModuleTests);
+				_selectorOptions [0] = new Option (_runAllModuleTests,_runAllModuleTests);
 				for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
 					_selectorOptions [_selectorOptions.length] = new Option (
 						(_testName = _testNames [_testNo]) + (_testsSubTreeLookup [_testName] ? '' : ' *'),

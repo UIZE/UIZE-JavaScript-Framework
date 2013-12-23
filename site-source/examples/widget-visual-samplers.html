@@ -196,7 +196,7 @@ Uize.require (
 					_selector = _page.getNode ('selector'),
 					_selectorOptions = _selector.options
 				;
-				_selectorOptions [_selectorOptions.length] = new Option (_selectorPlaceholderText,'');
+				_selectorOptions [0] = new Option (_selectorPlaceholderText,'');
 				for (
 					var
 						_visualSamplerNamespaceNo = -1,
