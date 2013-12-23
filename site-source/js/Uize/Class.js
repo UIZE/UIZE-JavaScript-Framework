@@ -344,7 +344,10 @@
 
 Uize.module ({
 	name:'Uize.Class',
-	required:'Uize.Util.Dependencies',
+	required:[
+		'Uize.Util.Dependencies',
+		'Uize.Event.Bus'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -366,6 +369,7 @@ Uize.module ({
 					_isObject = _Uize.isObject,
 					_traceDependencies = _Uize.Util.Dependencies.traceDependencies,
 					_applyAll = _Uize.applyAll,
+					_Uize_Event_Bus = Uize.Event.Bus,
 
 			/*** General Variables ***/
 				_sacredEmptyArray = [],
@@ -658,8 +662,30 @@ Uize.module ({
 				function () {},
 				/*** alphastructor ***/
 					function () {
+						var m = this;
+
+						/*** Private Instance Properties ***/
+							(m._eventBus = new _Uize_Event_Bus).wireUnwireWrapper = function (_eventName,_wireUnwire) {
+								if (_eventName.charCodeAt (0) == 67 && !_eventName.indexOf ('Changed.')) {
+									var
+										_propertyPublicName = _eventName.slice (8),
+										_propertyProfile = _getPropertyProfile (m,_propertyPublicName)
+									;
+									if (_propertyProfile && _propertyPublicName != _propertyProfile._publicName)
+										// use the canonical public name, since a pseudonym could have been specified
+										_eventName = 'Changed.' + (_propertyPublicName = _propertyProfile._publicName)
+									;
+									_wireUnwire (_eventName);
+									(m._hasChangedHandlers || (m._hasChangedHandlers = {})) [_propertyPublicName] =
+										this.hasHandlers (_eventName)
+									;
+								} else {
+									_wireUnwire (_eventName);
+								}
+							};
+
 						/*** Public Instance Properties ***/
-							this.instanceId = _Uize.getGuid ();
+							m.instanceId = _Uize.getGuid ();
 								/*?
 									Instance Properties
 										instanceId
@@ -1010,26 +1036,6 @@ Uize.module ({
 					: m.wire (_wirings = _lookup (_derivation._changedEventNames,_checkDerivedValue))
 				;
 				return _wirings;
-			}
-
-		/*** Event System Support Code ***/
-			function _abstractEventName (m,_eventName,_managementFunction) {
-				if (_eventName.charCodeAt (0) == 67 && !_eventName.indexOf ('Changed.')) {
-					var
-						_propertyPublicName = _eventName.slice (8),
-						_propertyProfile = _getPropertyProfile (m,_propertyPublicName)
-					;
-					if (_propertyProfile && _propertyPublicName != _propertyProfile._publicName)
-						// use the canonical public name, since a pseudonym could have been specified
-						_eventName = 'Changed.' + (_propertyPublicName = _propertyProfile._publicName)
-					;
-					_managementFunction (_eventName);
-					(m._hasChangedHandlers || (m._hasChangedHandlers = {})) [_propertyPublicName] =
-						m._eventHandlers && m._eventHandlers [_eventName]
-					;
-				} else {
-					_managementFunction (_eventName);
-				}
 			}
 
 		return _class.declare ({
@@ -2696,33 +2702,9 @@ Uize.module ({
 					*/
 				},
 
-				wire:function (_eventNameOrEventsMap,_handler) {
-					var m = this;
-					if (arguments.length == 2) {
-						_abstractEventName (
-							m,
-							_eventNameOrEventsMap,
-							function (_eventName) {
-								var _eventHandlers = m._eventHandlers || (m._eventHandlers = {});
-								(_eventHandlers [_eventName] || (_eventHandlers [_eventName] = [])).push (
-									{
-										_eventName:_eventName,
-										_handler:
-											_isFunction (_handler)
-												? _handler
-												: typeof _handler == _typeString
-													? _Function (_handler)
-													: function (_event) {_handler.fire (_event)},
-										_originalHandler:_handler
-									}
-								);
-							}
-						);
-					} else if (_isObject (_eventNameOrEventsMap)) {
-						for (var _eventName in _eventNameOrEventsMap)
-							m.wire (_eventName,_eventNameOrEventsMap [_eventName])
-						;
-					}
+				wire:function () {
+					var _eventBus = this._eventBus || (this._eventBus = new _Uize_Event_Bus);
+					_eventBus.wire.apply (_eventBus,arguments);
 					/*?
 						Instance Methods
 							wire
@@ -2853,59 +2835,11 @@ Uize.module ({
 				},
 
 				fire:function (_event) {
-					/*	NOTES
-						- this code is deliberately optimized for performance and not code size, since event firing is a mechanism that is heavily utilized. This will explain some patterns here that may seem slightly out of character, with seemingly redundant code or a lack of typical factoring out.
-					*/
+					var m = this;
 					if (typeof _event != 'object') _event = {name:_event};
-					var
-						m = this,
-						_eventHandlers = m._eventHandlers
-					;
-					if (_eventHandlers) {
-						var
-							_handlersForThisEvent = _eventHandlers [_event.name],
-							_handlersForAnyEvent = _eventHandlers ['*']
-						;
-						if (_handlersForThisEvent || _handlersForAnyEvent) {
-							_event.source || (_event.source = m);
-							var
-								_handlers = _handlersForAnyEvent && _handlersForThisEvent
-									? _handlersForAnyEvent.concat (_handlersForThisEvent)
-									: _handlersForAnyEvent || _handlersForThisEvent
-								,
-								_totalHandlers = _handlers.length
-							;
-							if (_totalHandlers == 1) {
-								_handlers [0]._handler (_event);
-							} else if (_totalHandlers == 2) {
-								/* NOTE:
-									Since we make a copy of the handlers array in the case of multiple handlers (in order to avoid issues where the handlers array may be modified by the handlers themselves), this optimization for two handlers catches most cases of multiple handlers in a complex application. This avoids copying an array and also the overhead of an iterator.
-								*/
-								var
-									_handler0 = _handlers [0]._handler,
-									_handler1 = _handlers [1]._handler
-								;
-								_handler0 (_event);
-								_handler1 (_event);
-							} else {
-								if (!_handlersForAnyEvent || !_handlersForThisEvent)
-									_handlers = _handlers.concat ()
-								;
-								/* NOTE:
-									When executing multiple handlers, it is necessary to make a copy of the handlers array, since it is possible that one of the handlers might execute code that affects the handlers array (eg. by using the removeHandler method).
-
-									What this means is that when an event is fired, all the handlers registered for that event at the time that it fires will be executed. Event handlers for that event that are removed by one of its handlers will still be executed, and event handlers for that event that are added by one of its handlers will not be executed.
-								*/
-								for (var _handlerNo = -1; ++_handlerNo < _totalHandlers;)
-									_handlers [_handlerNo]._handler (_event)
-								;
-							}
-						}
-					}
-					if (_event.bubble && m.parent && _isInstance (m)) {
-						_event.source || (_event.source = m);
-						m.parent.fire (_event);
-					}
+					_event.source || (_event.source = m);
+					m._eventBus && m._eventBus.fire (_event);
+					_event.bubble && m.parent && _isInstance (m) && m.parent.fire (_event);
 					return _event;
 					/*?
 						Instance Methods
@@ -2950,37 +2884,9 @@ Uize.module ({
 					*/
 				},
 
-				unwire:function (_eventNameOrEventsMap,_handler) {
-					var
-						m = this,
-						_eventHandlers = m._eventHandlers
-					;
-					if (_eventHandlers) {
-						if (_isObject (_eventNameOrEventsMap)) {
-							for (var _eventName in _eventNameOrEventsMap)
-								m.unwire (_eventName,_eventNameOrEventsMap [_eventName])
-							;
-						} else {
-							_abstractEventName (
-								m,
-								_eventNameOrEventsMap,
-								function (_eventName) {
-									var _handlersForEventName = _eventHandlers [_eventName];
-									if (_handlersForEventName) {
-										if (_handler) {
-											/* TO DO:
-												this is a candidate for factoring out as a generally useful array manipulation method: removeAllOfValue
-											*/
-											for (var _handlerNo = _handlersForEventName.length; --_handlerNo >= 0;)
-												_handlersForEventName [_handlerNo]._originalHandler == _handler && _handlersForEventName.splice (_handlerNo,1)
-											;
-										}
-										(_handler && _handlersForEventName.length) || delete _eventHandlers [_eventName];
-									}
-								}
-							);
-						}
-					}
+				unwire:function () {
+					var _eventBus = this._eventBus;
+					_eventBus && _eventBus.unwire.apply (_eventBus,arguments);
 					/*?
 						Instance Methods
 							unwire

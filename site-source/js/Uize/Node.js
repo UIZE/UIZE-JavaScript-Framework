@@ -59,7 +59,7 @@
 
 Uize.module ({
 	name:'Uize.Node',
-	required:'Uize.Class',
+	required:'Uize.Event.Bus',
 	builder:function () {
 		'use strict';
 
@@ -2616,7 +2616,7 @@ Uize.module ({
 
 				/*** wire up window events to fire events on window event vehicle ***/
 					var
-						_windowEventVehicle = _Uize.Class (),
+						_windowEventVehicle = new _Uize.Event.Bus,
 						_documentLoadedTimeout = setTimeout (function () {_windowEventVehicle.fire ('load')},15000)
 					;
 					_Uize.forEach (
