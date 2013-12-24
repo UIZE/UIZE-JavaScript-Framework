@@ -6,6 +6,18 @@ NEW MODULE: Uize.Data.Flatten
 	- write documentation
 	- write news announcement
 
+NEW MODULE: Uize.Event.Bus
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
+Shorter This Reference
+	Switched all modules over to using "m" for capturing a reference to this.
+
+	Because "_this" is scrunched to "a_a" (for example) in most modules, using simply unscrunched "m" will reduce size, especially given how pervasive "_this" is. Furthermore, typing "m." is much smoother and more natural than typing "_this.", and it will also reduce clutter / noise in the source. All in all, "m." wins at all levels. It beats "self.", "me.", "my.", "_." (which I've seen in some code), and most anything else in terms of typing friction.
+
 NEW MODULE: Uize.Math.Blend
 	Still to do...
 

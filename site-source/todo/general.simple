@@ -54,13 +54,6 @@ Code Size Optimization
 
 		It's time. There are now enough clients that support the built-in =JSON= object that it's time to create a lightweight, non-pretty print serializer and parser for JSON objects that can be used in the =Uize.Widget.V2= module and other modules where control over formatting is not needed.
 
-	Use "m" for "this"
-		Switch all modules over to using "m" for capturing a reference to this.
-
-		Because "_this" is scrunched to "a_a" (for example) in most modules, using simply unscrunched "m" will reduce size, especially given how pervasive "_this" is. Furthermore, typing "m." is much smoother and more natural than typing "_this.", and it will also reduce clutter / noise in the source. All in all, "m." wins at all levels. It beats "self.", "me.", "my.", "_." (which I've seen in some code), and most anything else in terms of typing friction.
-
-		Probably will want to wait on doing this for the modules that have changes in pending pull requests.
-
 	Improved Module Declaration Semantics
 		Module Declaration Short Form
 			Support a new short form for module declaration as an alternative to the object form.
